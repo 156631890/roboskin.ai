@@ -241,7 +241,7 @@ export default function Home() {
                 {/* Caption */}
                 <div className="mt-6 text-center">
                   <p className="text-sm text-cyan-400 font-semibold">MULTIMODAL SENSOR ARRAY ARCHITECTURE</p>
-                  <p className="text-xs text-blue-300 mt-1">10,000+ taxels • <1ms response • Self-healing substrate</p>
+                  <p className="text-xs text-blue-300 mt-1">10,000+ taxels • &lt;1ms response • Self-healing substrate</p>
                 </div>
               </div>
             </div>

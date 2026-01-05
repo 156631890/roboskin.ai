@@ -49,7 +49,7 @@ Our spiking neural network processes tactile events in real-time:
 | Force Sensitivity | 0.01N | 0.01N | 0.1N |
 | Spatial Resolution | 1mm | 1mm | 2mm |
 | Response Time | 0.5ms | 1ms | 5ms |
-| Temperature Range | -40°C to 120°C | -10°C to 50°C | -20°C to 80°C |
+| Temperature Range | -40 degreesC to 120 degreesC | -10 degreesC to 50 degreesC | -20 degreesC to 80 degreesC |
 
 ## Applications
 
@@ -113,17 +113,17 @@ When two graphene layers are separated by a sub-nanometer gap, electrons can tun
 
 Scalable fabrication process:
 1. CVD graphene growth on copper
-2. Transfer to flexible substrate
-3. Nanoporous polymer deposition
+squared. Transfer to flexible substrate
+cubed. Nanoporous polymer deposition
 4. Electrode patterning via laser ablation
 5. Encapsulation with self-healing polymer
 
 ## Cost Analysis
 
 Manufacturing cost projections:
-- Lab scale: $500/cm²
-- Pilot production: $50/cm²
-- Mass production target: $5/cm²
+- Lab scale: $500/cm^2
+- Pilot production: $50/cm^2
+- Mass production target: $5/cm^2
 
 ## Patent Portfolio
 
@@ -159,8 +159,8 @@ We demonstrate a self-healing polymer matrix capable of autonomously repairing c
 
 ### Triple-Network Design
 1. **Primary Network**: Covalent cross-linked polymer (structural integrity)
-2. **Secondary Network**: Dynamic disulfide bonds (reversible healing)
-3. **Tertiary Network**: Hydrogen-bonding motifs (initial response)
+squared. **Secondary Network**: Dynamic disulfide bonds (reversible healing)
+cubed. **Tertiary Network**: Hydrogen-bonding motifs (initial response)
 
 ### Healing Mechanism
 
@@ -179,7 +179,7 @@ We demonstrate a self-healing polymer matrix capable of autonomously repairing c
 
 ## Environmental Tolerance
 
-- Temperature: 0°C to 50°C (no degradation)
+- Temperature: 0 degreesC to 50 degreesC (no degradation)
 - Humidity: 10% to 90% RH
 - UV Exposure: No effect on healing ability
 - Chemical Resistance: Oils, solvents, mild acids/bases
@@ -236,18 +236,18 @@ Biological skin provides far more than pressure information - it senses temperat
 ## Sensor Suite
 
 ### 1. Tactile Array
-- 10,000 taxels (tactile elements) per 100cm²
+- 10,000 taxels (tactile elements) per 100cm^2
 - 0.01N force sensitivity
 - 1kHz sampling rate per taxel
 
 ### 2. Thermal Array
-- 100 thermopiles per 100cm²
-- Temperature range: -20°C to 100°C
-- Accuracy: ±0.1°C
+- 100 thermopiles per 100cm^2
+- Temperature range: -20 degreesC to 100 degreesC
+- Accuracy: ±0.1 degreesC
 - Response time: 10ms
 
 ### 3. Vibration Sensors
-- 500 accelerometers per 100cm²
+- 500 accelerometers per 100cm^2
 - Frequency range: 10Hz to 10kHz
 - Resolution: 0.001g
 
@@ -289,14 +289,14 @@ Biological skin provides far more than pressure information - it senses temperat
 
 | Modality | Biological | Our System | Previous Artificial |
 |----------|-----------|------------|-------------------|
-| Pressure | ✓ | ✓ | ✓ only |
-| Temperature | ✓ | ✓ | ✗ |
-| Vibration | ✓ | ✓ | Partial |
-| Proximity | Hair-like | ✓ | ✗ |
+| Pressure | [Y] | [Y] | [Y] only |
+| Temperature | [Y] | [Y] | [N] |
+| Vibration | [Y] | [Y] | Partial |
+| Proximity | Hair-like | [Y] | [N] |
 
 ## Power Consumption
 
-Total power: 150mW per 100cm²
+Total power: 150mW per 100cm^2
 - Tactile: 80mW
 - Thermal: 40mW
 - Vibration: 25mW
@@ -308,8 +308,8 @@ Battery life: 8 hours continuous operation (500mAh)
 
 Deployed on:
 1. **Prosthetic Hand**: Enabled hot/cold object discrimination
-2. **Industrial Gripper**: Reduced object damage by 73%
-3. **Exploration Rover**: Rock classification without vision
+squared. **Industrial Gripper**: Reduced object damage by 73%
+cubed. **Exploration Rover**: Rock classification without vision
 
 ## Open Source Release
 
@@ -336,16 +336,16 @@ For the first time, we've achieved bidirectional communication between artificia
 ## The Challenge
 
 Previous prosthetic systems provided:
-- ✓ Motor control (movement)
-- ✗ Sensory feedback (no feeling)
+- [Y] Motor control (movement)
+- [N] Sensory feedback (no feeling)
 - Result: "Phantom limb" pain, poor control
 
 ## Our Solution
 
 ### Architecture
 1. **Robotic Skin**: Captures tactile data
-2. **Neural Encoder**: Converts signals to neural code
-3. **Bidirectional Interface**: Connects to peripheral nerves
+squared. **Neural Encoder**: Converts signals to neural code
+cubed. **Bidirectional Interface**: Connects to peripheral nerves
 4. **Decoder**: Translates neural activity to sensory perception
 
 ### Key Innovation: Biomimetic Encoding
@@ -397,7 +397,7 @@ We discovered that artificial sensors must "speak the language" of nerves:
 ## Patient Feedback
 
 > "When I hold my daughter's hand, I can feel her squeeze back. It's not just movement anymore - it's connection."
-> — *Study Participant*
+> - *Study Participant*
 
 ## Next Steps
 
@@ -430,9 +430,9 @@ This research represents a new frontier in human-machine integration.`,
 
 ## The Cost Barrier
 
-Previous robotic skin systems cost \$500-1000 per cm², limiting adoption to research and military applications.
+Previous robotic skin systems cost \$500-1000 per cm^2, limiting adoption to research and military applications.
 
-Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
+Our roll-to-roll process achieves **\$5 per cm^2** - a 100x-200x cost reduction.
 
 ## Manufacturing Innovation
 
@@ -448,21 +448,21 @@ Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
 - Printing-based deposition
 - Optical alignment
 - Yield: 98%
-- Throughput: 10,000 m²/day
+- Throughput: 10,000 m^2/day
 
 ## Process Steps
 
 1. **Substrate Preparation** (Roll 1)
-   - PET release liner, 125μm thick
+   - PET release liner, 125um thick
    - Plasma treatment for adhesion
 
-2. **Bottom Electrode** (Roll 2)
+squared. **Bottom Electrode** (Roll 2)
    - Screen-printed silver nanowires
-   - Sheet resistance: 5 Ω/sq
+   - Sheet resistance: 5 Ohm/sq
 
-3. **Active Layer** (Roll 3)
+cubed. **Active Layer** (Roll 3)
    - Slot-die coated graphene composite
-   - Thickness: 10μm ±0.5μm
+   - Thickness: 10um ±0.5um
 
 4. **Top Electrode** (Roll 4)
    - Gravure-printed PEDOT:PSS
@@ -470,7 +470,7 @@ Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
 
 5. **Encapsulation** (Roll 5)
    - Laminated self-healing polymer
-   - Thickness: 50μm
+   - Thickness: 50um
 
 6. **Quality Control** (In-line)
    - Optical inspection
@@ -481,7 +481,7 @@ Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
 
 - Web width: 500mm
 - Line speed: 10 m/min
-- Production: 5 m²/hour = 120 m²/day
+- Production: 5 m^2/hour = 120 m^2/day
 - Operating cost: \$50/hour
 - Equipment cost: \$5M (ROI < 2 years)
 
@@ -494,7 +494,7 @@ Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
 
 ### Reliability Testing
 - Flex cycles: 1,000,000 with <10% degradation
-- Temperature cycling: -40°C to 120°C, 1000 cycles
+- Temperature cycling: -40 degreesC to 120 degreesC, 1000 cycles
 - Humidity: 85% RH, 1000 hours
 - Chemical exposure: ISO 22196 certified
 
@@ -502,13 +502,13 @@ Our roll-to-roll process achieves **\$5 per cm²** - a 100x-200x cost reduction.
 
 | Scale | Capital Cost | Unit Cost | Annual Production |
 |-------|-------------|-----------|-------------------|
-| Pilot (1 line) | \$5M | \$10/cm² | 30,000 m² |
-| Factory (10 lines) | \$40M | \$5/cm² | 300,000 m² |
-| Mega-factory (100 lines) | \$300M | \$2/cm² | 3,000,000 m² |
+| Pilot (1 line) | \$5M | \$10/cm^2 | 30,000 m^2 |
+| Factory (10 lines) | \$40M | \$5/cm^2 | 300,000 m^2 |
+| Mega-factory (100 lines) | \$300M | \$2/cm^2 | 3,000,000 m^2 |
 
 ## Market Impact
 
-At \$5/cm²:
+At \$5/cm^2:
 - Prosthetic hand skin: \$500 (vs \$50,000)
 - Surgical robot skin: \$2,000 (vs \$100,000)
 - Industrial gripper skin: \$300 (vs \$15,000)
@@ -575,11 +575,11 @@ When a robot touches an object from multiple angles, the perceptions should be c
 ### Architecture
 
 ```
-Tactile Input → Encoder → Latent Representation
-                         ↓
+Tactile Input -> Encoder -> Latent Representation
+                         v
                     Consistency Loss
-                         ↓
-                    Decoder → Prediction
+                         v
+                    Decoder -> Prediction
 ```
 
 ## Training Process
@@ -708,7 +708,7 @@ Active research on:
   {
     id: 'extreme-environment-2025',
     title: 'Robotic Skin for Space: Surviving and Thriving in Extreme Conditions',
-    excerpt: 'Published in npj Microgravity (June 2025): NASA-funded research demonstrates robotic skin functionality from -196°C (liquid nitrogen) to 500°C (Venus surface conditions).',
+    excerpt: 'Published in npj Microgravity (June 2025): NASA-funded research demonstrates robotic skin functionality from -196 degreesC (liquid nitrogen) to 500 degreesC (Venus surface conditions).',
     content: `# Robotic Skin for Space: Surviving and Thriving in Extreme Conditions
 
 **Published in npj Microgravity - June 2025**
@@ -722,7 +722,7 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### Cryogenic Performance
 
-**Tested at**: -196°C (liquid nitrogen)
+**Tested at**: -196 degreesC (liquid nitrogen)
 
 **Challenges**:
 - Material brittleness
@@ -741,7 +741,7 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### High-Temperature Performance
 
-**Tested up to**: 500°C (Venus surface)
+**Tested up to**: 500 degreesC (Venus surface)
 
 **Challenges**:
 - Polymer degradation
@@ -754,7 +754,7 @@ Space exploration demands materials that function in extreme environments. We've
 - Silicate encapsulation
 
 **Results**:
-- Operates 8 hours at 500°C
+- Operates 8 hours at 500 degreesC
 - Gradual performance loss: 20% after 24 hours
 - Suitable for Venus lander missions
 
@@ -762,7 +762,7 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### Hard Vacuum Testing
 
-**Environment**: 10⁻⁸ torr (space vacuum)
+**Environment**: 10^-8 torr (space vacuum)
 
 **Issues Addressed**:
 - Outgassing contamination
@@ -787,7 +787,7 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### 1. Lunar Surface Operations
 
-**Environment**: -173°C to +127°C, vacuum, abrasive dust
+**Environment**: -173 degreesC to +127 degreesC, vacuum, abrasive dust
 
 **Our Robot Skin Functions**:
 - Rock sample identification
@@ -796,7 +796,7 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### 2. Mars Exploration
 
-**Environment**: -140°C to +20°C, dust storms, low pressure
+**Environment**: -140 degreesC to +20 degreesC, dust storms, low pressure
 
 **Applications**:
 - Ice detection (thermal + tactile)
@@ -805,16 +805,16 @@ Space exploration demands materials that function in extreme environments. We've
 
 ### 3. Venus Lander
 
-**Environment**: 465°C, 92 bar pressure, acidic atmosphere
+**Environment**: 465 degreesC, 92 bar pressure, acidic atmosphere
 
 **Our System Survives**:
-- 8 hours operational at 500°C
+- 8 hours operational at 500 degreesC
 - Pressure-resistant design
 - Corrosion-resistant materials
 
 ### 4. Europa Enceladus Mission
 
-**Environment**: -200°C, high radiation, ice
+**Environment**: -200 degreesC, high radiation, ice
 
 **Proposed Use**:
 - Ice penetration sensing
@@ -867,10 +867,10 @@ Spin-off applications:
 
 | Parameter | Minimum | Maximum | Units |
 |-----------|---------|---------|-------|
-| Temperature | -196 | +500 | °C |
+| Temperature | -196 | +500 |  degreesC |
 | Pressure | Vacuum | 100 | bar |
 | Radiation | 0 | 10 | Mrad |
-| Vacuum | 10⁻⁸ | 1 | torr |
+| Vacuum | 10^-8 | 1 | torr |
 | Vibration | 0 | 50 | g |
 | Shock | 0 | 1000 | g |
 
@@ -882,7 +882,7 @@ Spin-off applications:
 ## Funding & Partners
 
 - NASA: \$12M (2023-2027)
-- ESA: €8M collaboration
+- ESA: EUR8M collaboration
 - JAXA: Joint development agreement
 
 ## Future Work
