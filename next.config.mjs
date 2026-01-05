@@ -16,9 +16,6 @@ const nextConfig = {
   // Strict mode
   reactStrictMode: true,
 
-  // Build output directory
-  distDir: 'out',
-
   // Disable TypeScript checking for build
   typescript: {
     ignoreBuildErrors: true,
