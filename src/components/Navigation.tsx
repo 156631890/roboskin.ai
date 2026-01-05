@@ -13,6 +13,9 @@ export default function Navigation() {
     { href: '/technology', label: 'Technology' },
     { href: '/applications', label: 'Applications' },
     { href: '/research', label: 'Research' },
+    { href: '/team', label: 'Team' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/careers', label: 'Careers' },
     { href: '/contact', label: 'Contact' },
   ];
 

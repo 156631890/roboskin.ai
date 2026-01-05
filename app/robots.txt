@@ -1,0 +1,16 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: FacebookExternalHit/1.1
+User-agent: Twitterbot
+Allow: /
+
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+Sitemap: https://roboskin.ai/sitemap.xml
