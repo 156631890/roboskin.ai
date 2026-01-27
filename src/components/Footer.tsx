@@ -93,12 +93,22 @@ export default function Footer() {
             </ul>
 
             {/* Contact Info */}
-            <div className="mt-8 p-4 bg-gray-800 rounded-lg">
-              <p className="text-sm text-gray-300">
-                <span className="font-semibold">Email:</span><br/>
-                <a href="mailto:contact@roboskin.ai" className="text-blue-400 hover:text-blue-300 transition-colors">
-                  contact@roboskin.ai
+            <div className="mt-8 p-4 bg-slate-800 rounded-lg border border-cyan-500/20">
+              <p className="text-sm text-gray-300 mb-2">
+                <span className="font-semibold text-white">Email:</span><br/>
+                <a href="mailto:messigoat147@gmail.com" className="text-cyan-400 hover:text-cyan-300 transition-colors break-all">
+                  messigoat147@gmail.com
                 </a>
+              </p>
+              <p className="text-sm text-gray-300 mb-2">
+                <span className="font-semibold text-white">X:</span><br/>
+                <a href="https://x.com/L89155W" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                  @L89155W
+                </a>
+              </p>
+              <p className="text-sm text-gray-300">
+                <span className="font-semibold text-white">WhatsApp/WeChat:</span><br/>
+                <span className="text-cyan-400">15755596955</span>
               </p>
             </div>
           </div>
