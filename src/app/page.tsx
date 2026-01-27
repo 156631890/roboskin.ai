@@ -249,8 +249,144 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Robot Showcase Section - NEW */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 opacity-10">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="robotgrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-cyan-400"/>
+              </pattern>
+            </defs>
+            <rect width="100" height="100" fill="url(#robotgrid)"/>
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-cyan-500/10 backdrop-blur-sm rounded-full text-sm font-semibold mb-8 border border-cyan-400/30">
+              <svg className="w-4 h-4 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Robotic Systems Integration
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Powered by <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">RoboSkin</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Next-generation robots enhanced with our advanced tactile sensing technology
+            </p>
+          </div>
+
+          {/* Robot Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Surgical Robot Assistant",
+                category: "Healthcare",
+                description: "Ultra-precise haptic feedback enables microsurgery with sub-millimeter accuracy",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=800&h=600&fit=crop",
+                stats: ["0.01N precision", "<5ms latency", "40% fewer complications"]
+              },
+              {
+                title: "Industrial Cobot Arm",
+                category: "Manufacturing",
+                description: "Safe human-robot collaboration with adaptive grip control and slip prevention",
+                image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop",
+                stats: ["Adaptive grip", "Force limiting", "100% safe"]
+              },
+              {
+                title: "Exploration Rover",
+                category: "Space & Field",
+                description: "Autonomous terrain adaptation through advanced tactile perception and surface analysis",
+                image: "https://images.unsplash.com/photo-1545949569-7b6323a1f94d?w=800&h=600&fit=crop",
+                stats: ["-196°C to 500°C", "IP67 rated", "NASA validated"]
+              },
+              {
+                title: "Prosthetic Hand",
+                category: "Medical Devices",
+                description: "Bio-integrated neural interface with sensory feedback restoration",
+                image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&h=600&fit=crop",
+                stats: ["76% pain reduction", "98% grip accuracy", "FDA designated"]
+              },
+              {
+                title: "Service Robot",
+                category: "Consumer",
+                description: "Gentle manipulation for safe interaction with humans and delicate objects",
+                image: "https://images.unsplash.com/photo-1535378437327-1e6908798842?w=800&h=600&fit=crop",
+                stats: ["Soft touch", "Object recognition", "Safe operation"]
+              },
+              {
+                title: "Research Platform",
+                category: "R&D",
+                description: "Modular development kit for academic and industrial research applications",
+                image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop",
+                stats: ["ROS/ROS2 support", "Python SDK", "Open API"]
+              }
+            ].map((robot, index) => (
+              <div key={index} className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300 shadow-2xl hover:shadow-cyan-500/20">
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 mix-blend-overlay"></div>
+                  <img
+                    src={robot.image}
+                    alt={robot.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm text-cyan-400 text-xs font-bold rounded-full border border-cyan-500/30">
+                      {robot.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">{robot.title}</h3>
+                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">{robot.description}</p>
+
+                  {/* Stats */}
+                  <div className="flex flex-wrap gap-2">
+                    {robot.stats.map((stat, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-slate-700/50 text-cyan-400 text-xs font-mono rounded border border-cyan-500/20">
+                        {stat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Glow Effect on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400/0 group-hover:border-cyan-400 rounded-tl-lg transition-all duration-300"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyan-400/0 group-hover:border-cyan-400 rounded-br-lg transition-all duration-300"></div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-16">
+            <Link
+              href="/applications"
+              className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all transform hover:scale-105 shadow-lg shadow-cyan-500/30"
+            >
+              Explore All Applications
+              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section - Enhanced */}
-      <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-800 border-t border-b border-cyan-500/20 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-b from-slate-800 to-slate-900 border-t border-b border-cyan-500/20 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-10">
           <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
