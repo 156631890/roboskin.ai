@@ -578,13 +578,13 @@ When a robot touches an object from multiple angles, the perceptions should be c
 
 ### Architecture
 
-```
+\`\`\`
 Tactile Input -> Encoder -> Latent Representation
                          v
                     Consistency Loss
                          v
                     Decoder -> Prediction
-```
+\`\`\`
 
 ## Training Process
 
