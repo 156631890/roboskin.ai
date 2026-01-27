@@ -2,6 +2,13 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getBlogPostById, blogPosts } from '@/lib/blog-data';
 
+// Generate static params for all blog posts
+export function generateStaticParams() {
+  return blogPosts.map((post) => ({
+    id: post.id,
+  }));
+}
+
 export default function BlogPostPage({ params }: { params: { id: string } }) {
   const post = getBlogPostById(params.id);
 

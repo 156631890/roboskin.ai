@@ -1,0 +1,31 @@
+
+> roboskin-website@0.1.0 build
+> next build
+
+   ▲ Next.js 15.0.3
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/3) ...
+ ✓ Generating static pages (3/3)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/2) ...
+ ✓ Exporting (2/2)
+
+Route (app)                               Size     First Load JS
+─ ○ /robots.txt                           0 B                0 B
++ First Load JS shared by all             0 B
+
+Route (pages)                             Size     First Load JS
+─ ○ /404                                  190 B          94.7 kB
++ First Load JS shared by all             94.5 kB
+  ├ chunks/framework-f8c7244a93b2ee7e.js  59.6 kB
+  ├ chunks/main-8fe3e80207b45115.js       33.2 kB
+  └ other shared chunks (total)           1.66 kB
+
+○  (Static)  prerendered as static content
+

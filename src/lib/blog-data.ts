@@ -71,7 +71,8 @@ This research was conducted in partnership with:
 Ongoing work focuses on:
 - Pain perception for safety systems
 - Emotional touch interpretation
-- Brain-machine interface integration`,
+- Brain-machine interface integration
+`,
     author: 'Dr. Sarah Chen, PhD',
     date: '2026-01-03',
     readTime: '12 min read',
@@ -136,7 +137,8 @@ Manufacturing cost projections:
 This technology enables:
 - Currency authentication (micro-print detection)
 - Structural health monitoring (crack propagation)
-- Biometric authentication (finger vein patterns)`,
+- Biometric authentication (finger vein patterns)
+`,
     author: 'Prof. Michael Rodriguez, PhD',
     date: '2025-12-20',
     readTime: '10 min read',
@@ -214,7 +216,8 @@ Crucially, the healing process does not affect:
 ## Commercialization
 
 Joint venture announced with Dow Chemical for mass production.
-Target market entry: Q3 2026`,
+Target market entry: Q3 2026
+`,
     author: 'Dr. Emily Watson, PhD',
     date: '2025-11-15',
     readTime: '8 min read',
@@ -314,7 +317,8 @@ cubed. **Exploration Rover**: Rock classification without vision
 ## Open Source Release
 
 All sensor fusion algorithms released as open source:
-https://github.com/roboskin-ai/multimodal-fusion`,
+https://github.com/roboskin-ai/multimodal-fusion
+`,
     author: 'Dr. James Liu, PhD',
     date: '2025-10-25',
     readTime: '11 min read',

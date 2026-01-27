@@ -12,7 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/team',
     '/careers',
     '/faq',
-    '/privacy'
+    '/privacy',
+    '/terms'
   ];
 
   const staticPages = routes.map((route) => ({
