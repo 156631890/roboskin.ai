@@ -1,104 +1,123 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #041021;
+  --bg-soft: #0a1a30;
+  --panel: rgba(7, 25, 45, 0.72);
+  --panel-border: rgba(117, 227, 215, 0.22);
+  --text: #eaf3ff;
+  --text-soft: #9fb2c8;
+  --primary: #0ed7c0;
+  --secondary: #5ba3ff;
+  --accent: #24e4ff;
+  --max-width: 1200px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --grid: color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(23, 109, 211, 0.28) 0, transparent 38%),
+    radial-gradient(circle at 85% 25%, rgba(14, 215, 192, 0.18) 0, transparent 34%),
+    linear-gradient(145deg, #020a18 0%, #071427 46%, #041021 100%);
+  color: var(--text);
+  font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
+  text-rendering: geometricPrecision;
+  overflow-x: hidden;
 }
 
-/* Cyberpunk Animations */
-@keyframes neon-flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow:
-      0 0 4px #fff,
-      0 0 11px #fff,
-      0 0 19px #fff,
-      0 0 40px #0fa,
-      0 0 80px #0fa,
-      0 0 90px #0fa,
-      0 0 100px #0fa,
-      0 0 150px #0fa;
-  }
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.38;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+a {
+  color: inherit;
 }
 
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+.container-shell {
+  width: min(var(--max-width), calc(100% - 2rem));
+  margin: 0 auto;
 }
 
-/* Custom Scrollbar */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  background: linear-gradient(120deg, rgba(14, 215, 192, 0.16), rgba(91, 163, 255, 0.12));
+  color: #c8f6ff;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.glass-card {
+  background: linear-gradient(160deg, rgba(15, 42, 71, 0.72), rgba(6, 22, 41, 0.9));
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 8px 32px rgba(2, 8, 17, 0.45),
+    inset 0 1px 0 rgba(188, 238, 255, 0.08);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #061425;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #22d3ee, #a855f7);
+  background: linear-gradient(180deg, #24e4ff, #2f99ff);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0891b2, #7c3aed);
+  background: linear-gradient(180deg, #0ed7c0, #5ba3ff);
 }
 
-/* Selection */
 ::selection {
-  background-color: #22d3ee;
-  color: #0f172a;
+  background-color: var(--accent);
+  color: #02101d;
 }
 
-/* Smooth Scroll */
 html {
   scroll-behavior: smooth;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: floatUp 0.7s ease-out both;
 }
 

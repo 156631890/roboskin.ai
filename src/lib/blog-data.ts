@@ -77,7 +77,7 @@ Ongoing work focuses on:
     date: '2026-01-03',
     readTime: '12 min read',
     category: 'Peer-Reviewed Research',
-    image: '/images/neuromorphic-2026.jpg'
+    image: '/generated/research-neuromorphic-2026.jpg'
   },
   {
     id: 'graphene-quantum-tunneling',
@@ -143,7 +143,7 @@ This technology enables:
     date: '2025-12-20',
     readTime: '10 min read',
     category: 'Materials Science',
-    image: '/images/quantum-tunneling.jpg'
+    image: '/generated/research-graphene-quantum-tunneling.jpg'
   },
   {
     id: 'self-healing-2025',
@@ -222,7 +222,7 @@ Target market entry: Q3 2026
     date: '2025-11-15',
     readTime: '8 min read',
     category: 'Materials Science',
-    image: '/images/self-healing-advanced.jpg'
+    image: '/generated/research-self-healing-2025.jpg'
   },
   {
     id: 'multimodal-sensing-2025',
@@ -323,7 +323,7 @@ https://github.com/roboskin-ai/multimodal-fusion
     date: '2025-10-25',
     readTime: '11 min read',
     category: 'Systems Engineering',
-    image: '/images/multimodal-sensing.jpg'
+    image: '/generated/research-multimodal-sensing-2025.jpg'
   },
   {
     id: 'bio-integration-2025',
@@ -422,7 +422,7 @@ This research represents a new frontier in human-machine integration.`,
     date: '2025-09-18',
     readTime: '15 min read',
     category: 'Medical Breakthrough',
-    image: '/images/neural-interface.jpg'
+    image: '/generated/research-bio-integration-2025.jpg'
   },
   {
     id: 'scalable-manufacturing-2025',
@@ -548,7 +548,7 @@ This manufacturing breakthrough transforms robotic skin from laboratory curiosit
     date: '2025-08-22',
     readTime: '9 min read',
     category: 'Manufacturing',
-    image: '/images/roll-to-roll.jpg'
+    image: '/generated/research-scalable-manufacturing-2025.jpg'
   },
   {
     id: 'ai-tactile-learning-2025',
@@ -707,7 +707,7 @@ Active research on:
     date: '2025-07-15',
     readTime: '13 min read',
     category: 'Artificial Intelligence',
-    image: '/images/ai-tactile-learning.jpg'
+    image: '/generated/research-ai-tactile-learning-2025.jpg'
   },
   {
     id: 'extreme-environment-2025',
@@ -901,7 +901,7 @@ Space is the final frontier - our robotic skin is ready to go.`,
     date: '2025-06-30',
     readTime: '11 min read',
     category: 'Space Technology',
-    image: '/images/space-robotic-skin.jpg'
+    image: '/generated/research-extreme-environment-2025.jpg'
   }
 ];
 
