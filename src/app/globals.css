@@ -27,7 +27,7 @@ body {
   background:
     radial-gradient(circle at 20% 0%, rgba(98, 168, 255, 0.16) 0, transparent 32%),
     radial-gradient(circle at 80% 10%, rgba(125, 211, 252, 0.1) 0, transparent 28%),
-    linear-gradient(180deg, #06080c 0%, #0a0d12 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
   color: var(--text);
   font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
   text-rendering: geometricPrecision;
@@ -72,14 +72,18 @@ a {
 
 .glass-card {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
-    rgba(16, 19, 26, 0.92);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel) 96%, var(--bg-soft) 4%),
+      color-mix(in srgb, var(--panel) 92%, black 8%)
+    ),
+    var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
   backdrop-filter: blur(14px);
   box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 24px 70px color-mix(in srgb, black 38%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
 }
 
 ::-webkit-scrollbar {
@@ -87,7 +91,7 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d1016;
+  background: var(--bg-soft);
 }
 
 ::-webkit-scrollbar-thumb {
