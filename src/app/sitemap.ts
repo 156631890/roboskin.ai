@@ -7,15 +7,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '',
+    '/products',
+    '/solutions',
     '/technology',
-    '/applications',
-    '/research',
+    '/resources',
+    '/about',
     '/contact',
-    '/team',
-    '/careers',
-    '/faq',
     '/privacy',
-    '/terms'
+    '/terms',
   ];
 
   const staticPages = routes.map((route) => ({
@@ -25,22 +24,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '' ? 1 : 0.8,
   }));
 
-  // Research blog posts
-  const researchPosts = [
-    'neuromorphic-tactile-2026',
-    'graphene-quantum-tunneling',
-    'self-healing-2025',
-    'multimodal-sensing-2025',
-    'bio-integration-2025',
-    'scalable-manufacturing-2025',
-    'ai-tactile-learning-2025',
-    'extreme-environment-2025'
-  ].map((id) => ({
-    url: `${baseUrl}/research/${id}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
-
-  return [...staticPages, ...researchPosts];
+  return staticPages;
 }

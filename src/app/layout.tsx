@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { site } from "@/content/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -15,32 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://roboskin.ai'),
+  metadataBase: new URL(site.url),
   title: {
-    default: "RoboSkin.ai - Advanced Artificial Skin Technology for Robotics",
+    default: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
     template: "%s | RoboSkin.ai"
   },
-  description: "Revolutionary bio-inspired artificial skin technology equipping robots with human-level tactile perception. Leading research in graphene sensors, neuromorphic processing, and self-healing materials.",
+  description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams, OEM programs, and research deployments.",
   keywords: [
     "robotic skin",
     "tactile sensors",
-    "artificial skin",
-    "haptic feedback",
-    "graphene sensors",
-    "neuromorphic computing",
+    "flexible tactile sensors",
+    "integration",
     "robotics",
     "prosthetics",
-    "surgical robots",
-    "industrial automation",
-    "self-healing materials",
-    "multimodal sensing",
-    "NASA technology",
-    "quantum tunneling sensors",
-    "bio-inspired robotics"
+    "humanoid robots",
+    "robotic grippers",
+    "tactile sensing"
   ],
-  authors: [{ name: "RoboSkin.ai Research Team" }],
-  creator: "RoboSkin.ai",
-  publisher: "RoboSkin.ai",
+  authors: [{ name: site.name }],
+  creator: site.name,
+  publisher: site.name,
   formatDetection: {
     email: false,
     address: false,
@@ -49,10 +45,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://roboskin.ai",
-    title: "RoboSkin.ai - Advanced Artificial Skin Technology for Robotics",
-    description: "Revolutionary bio-inspired artificial skin technology equipping robots with human-level tactile perception.",
-    siteName: "RoboSkin.ai",
+    url: site.url,
+    title: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
+    description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams.",
+    siteName: site.name,
     images: [
       {
         url: "/og-image.jpg",
@@ -64,10 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "RoboSkin.ai - Advanced Artificial Skin Technology for Robotics",
-    description: "Revolutionary bio-inspired artificial skin technology equipping robots with human-level tactile perception.",
+    title: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
+    description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams.",
     images: ["/twitter-image.jpg"],
-    creator: "@roboskin_ai"
   },
   robots: {
     index: true,
@@ -85,7 +80,7 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code"
   },
   alternates: {
-    canonical: "https://roboskin.ai"
+    canonical: site.url
   }
 };
 
@@ -95,17 +90,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#041021" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <Navigation />
         <main className="flex-grow">{children}</main>
