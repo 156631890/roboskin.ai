@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f6f4ef;
-  --bg-soft: #eeeae2;
-  --panel: #ffffff;
-  --panel-border: #d9d3c8;
-  --text: #111318;
-  --text-soft: #61656f;
-  --primary: #2e5bff;
-  --secondary: #0f766e;
-  --accent: #2e5bff;
-  --max-width: 1200px;
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --grid: color-mix(in srgb, var(--accent) 10%, transparent);
+  --bg: #06080c;
+  --bg-soft: #0d1016;
+  --panel: #11151d;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #f5f6f8;
+  --text-soft: #9aa3b2;
+  --primary: #62a8ff;
+  --secondary: #7dd3fc;
+  --accent: #62a8ff;
+  --max-width: 1440px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --grid: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 @theme inline {
@@ -25,9 +25,9 @@
 
 body {
   background:
-    radial-gradient(circle at 15% 0%, rgba(46, 91, 255, 0.08) 0, transparent 38%),
-    radial-gradient(circle at 85% 25%, rgba(15, 118, 110, 0.06) 0, transparent 34%),
-    linear-gradient(180deg, #f7f5f0 0%, #f3efe7 100%);
+    radial-gradient(circle at 20% 0%, rgba(98, 168, 255, 0.16) 0, transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(125, 211, 252, 0.1) 0, transparent 28%),
+    linear-gradient(180deg, #06080c 0%, #0a0d12 100%);
   color: var(--text);
   font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
   text-rendering: geometricPrecision;
@@ -40,11 +40,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.28;
+  opacity: 0.22;
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-size: 40px 40px;
 }
 
 a {
@@ -62,22 +62,24 @@ a {
   gap: 0.5rem;
   padding: 0.42rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-  background: linear-gradient(120deg, rgba(46, 91, 255, 0.1), rgba(15, 118, 110, 0.06));
-  color: #2446c8;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background: linear-gradient(120deg, rgba(98, 168, 255, 0.12), rgba(125, 211, 252, 0.04));
+  color: #d7e7ff;
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(16, 19, 26, 0.92);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px);
   box-shadow:
-    0 12px 30px rgba(17, 19, 24, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 24px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar {
@@ -85,21 +87,21 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #e9e4d9;
+  background: #0d1016;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #5978ff, #2e5bff);
+  background: linear-gradient(180deg, #7fb9ff, #62a8ff);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2446c8, #0f766e);
+  background: linear-gradient(180deg, #62a8ff, #7dd3fc);
 }
 
 ::selection {
   background-color: var(--accent);
-  color: #ffffff;
+  color: #06080c;
 }
 
 html {
