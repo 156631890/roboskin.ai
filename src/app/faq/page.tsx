@@ -29,7 +29,7 @@ export default function FAQPage() {
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">FAQ</span>
-          <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">Questions we actually answer publicly</h1>
+          <h1 className="mt-5 text-4xl font-bold text-[#111318] md:text-6xl">Questions we actually answer publicly</h1>
         </div>
       </section>
 
@@ -37,8 +37,8 @@ export default function FAQPage() {
         <div className="container-shell space-y-4">
           {faqs.map((faq) => (
             <details key={faq.q} className="glass-card group p-6">
-              <summary className="cursor-pointer list-none text-lg font-semibold text-white">{faq.q}</summary>
-              <p className="mt-3 text-slate-300">{faq.a}</p>
+              <summary className="cursor-pointer list-none text-lg font-semibold text-[#111318]">{faq.q}</summary>
+              <p className="mt-3 text-[#4f5560]">{faq.a}</p>
             </details>
           ))}
         </div>
@@ -47,8 +47,8 @@ export default function FAQPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="glass-card p-8 text-center">
-            <p className="text-slate-300">Need a faster answer?</p>
-            <Link href="/contact" className="mt-4 inline-flex rounded-xl bg-gradient-to-r from-cyan-300 to-blue-400 px-6 py-3 text-sm font-bold text-slate-950">
+            <p className="text-[#4f5560]">Need a faster answer?</p>
+            <Link href="/contact" className="mt-4 inline-flex rounded-xl bg-[#2e5bff] px-6 py-3 text-sm font-bold text-white">
               Contact the team
             </Link>
           </div>

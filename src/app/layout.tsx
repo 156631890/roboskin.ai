@@ -54,7 +54,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "RoboSkin.ai - Advanced Robotic Tactile Systems"
+        alt: "RoboSkin.ai tactile sensor skin for robotics"
       }
     ]
   },
@@ -97,7 +97,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#041021" />
+        <meta name="theme-color" content="#f6f4ef" />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}

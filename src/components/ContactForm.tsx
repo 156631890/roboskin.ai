@@ -97,84 +97,84 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       />
 
       <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Full name
           <input
             required
             value={form.fullName}
             onChange={(event) => updateField('fullName', event.target.value)}
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Company / Organization
           <input
             required
             value={form.company}
             onChange={(event) => updateField('company', event.target.value)}
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Work email
           <input
             required
             type="email"
             value={form.email}
             onChange={(event) => updateField('email', event.target.value)}
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Use case
           <input
             required
             value={form.useCase}
             onChange={(event) => updateField('useCase', event.target.value)}
             placeholder="Robotic gripper, humanoid hand, prosthetic..."
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Timeline
           <input
             value={form.timeline}
             onChange={(event) => updateField('timeline', event.target.value)}
             placeholder="Prototype this quarter, production next year..."
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Phone
           <input
             value={form.phone}
             onChange={(event) => updateField('phone', event.target.value)}
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
       </div>
 
-      <label className="grid gap-2 text-sm text-slate-200">
+      <label className="grid gap-2 text-sm text-[#4f5560]">
         Message
         <textarea
           required
           rows={6}
           value={form.message}
           onChange={(event) => updateField('message', event.target.value)}
-          className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+          className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
         />
       </label>
 
       <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Request type
           <select
             value={form.requestType}
             onChange={(event) => updateField('requestType', event.target.value)}
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           >
             <option value="general">General</option>
             <option value="demo">Demo</option>
@@ -182,13 +182,13 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             <option value="integration">Integration</option>
           </select>
         </label>
-        <label className="grid gap-2 text-sm text-slate-200">
+        <label className="grid gap-2 text-sm text-[#4f5560]">
           Requested asset
           <input
             value={form.requestedAsset}
             onChange={(event) => updateField('requestedAsset', event.target.value)}
             placeholder="RS-1000 Sensor Array"
-            className="rounded-xl border border-cyan-200/15 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-cyan-300/60 focus:ring-2 focus:ring-cyan-300/20"
+            className="rounded-xl border border-[#d9d3c8] bg-[#fbfaf7] px-4 py-3 text-[#111318] outline-none transition placeholder:text-[#8b9099] focus:border-[#c8d5ff] focus:ring-2 focus:ring-[#c8d5ff]/50"
           />
         </label>
       </div>
@@ -196,21 +196,21 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex rounded-xl bg-gradient-to-r from-cyan-300 to-blue-400 px-6 py-3 text-sm font-bold text-slate-950 transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex rounded-xl bg-[#2e5bff] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(46,91,255,0.18)] transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === 'submitting' ? 'Sending...' : 'Send request'}
       </button>
 
       <div className="min-h-6 text-sm">
         {feedback && (
-          <p className={status === 'error' ? 'text-rose-300' : 'text-cyan-100'}>
+          <p className={status === 'error' ? 'text-rose-600' : 'text-[#2446c8]'}>
             {feedback}
           </p>
         )}
       </div>
 
-      <p className="text-sm text-slate-300">
-        For direct inquiries: <a className="text-cyan-200" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+      <p className="text-sm text-[#4f5560]">
+        For direct inquiries: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
       </p>
     </form>
   );

@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #041021;
-  --bg-soft: #0a1a30;
-  --panel: rgba(7, 25, 45, 0.72);
-  --panel-border: rgba(117, 227, 215, 0.22);
-  --text: #eaf3ff;
-  --text-soft: #9fb2c8;
-  --primary: #0ed7c0;
-  --secondary: #5ba3ff;
-  --accent: #24e4ff;
+  --bg: #f6f4ef;
+  --bg-soft: #eeeae2;
+  --panel: #ffffff;
+  --panel-border: #d9d3c8;
+  --text: #111318;
+  --text-soft: #61656f;
+  --primary: #2e5bff;
+  --secondary: #0f766e;
+  --accent: #2e5bff;
   --max-width: 1200px;
   --radius-lg: 20px;
   --radius-md: 14px;
-  --grid: color-mix(in srgb, var(--accent) 18%, transparent);
+  --grid: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 @theme inline {
@@ -25,9 +25,9 @@
 
 body {
   background:
-    radial-gradient(circle at 15% 0%, rgba(23, 109, 211, 0.28) 0, transparent 38%),
-    radial-gradient(circle at 85% 25%, rgba(14, 215, 192, 0.18) 0, transparent 34%),
-    linear-gradient(145deg, #020a18 0%, #071427 46%, #041021 100%);
+    radial-gradient(circle at 15% 0%, rgba(46, 91, 255, 0.08) 0, transparent 38%),
+    radial-gradient(circle at 85% 25%, rgba(15, 118, 110, 0.06) 0, transparent 34%),
+    linear-gradient(180deg, #f7f5f0 0%, #f3efe7 100%);
   color: var(--text);
   font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
   text-rendering: geometricPrecision;
@@ -40,11 +40,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.38;
+  opacity: 0.28;
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: 36px 36px;
 }
 
 a {
@@ -62,22 +62,22 @@ a {
   gap: 0.5rem;
   padding: 0.42rem 0.9rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-  background: linear-gradient(120deg, rgba(14, 215, 192, 0.16), rgba(91, 163, 255, 0.12));
-  color: #c8f6ff;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: linear-gradient(120deg, rgba(46, 91, 255, 0.1), rgba(15, 118, 110, 0.06));
+  color: #2446c8;
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .glass-card {
-  background: linear-gradient(160deg, rgba(15, 42, 71, 0.72), rgba(6, 22, 41, 0.9));
+  background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
   backdrop-filter: blur(8px);
   box-shadow:
-    0 8px 32px rgba(2, 8, 17, 0.45),
-    inset 0 1px 0 rgba(188, 238, 255, 0.08);
+    0 12px 30px rgba(17, 19, 24, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 ::-webkit-scrollbar {
@@ -85,21 +85,21 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #061425;
+  background: #e9e4d9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #24e4ff, #2f99ff);
+  background: linear-gradient(180deg, #5978ff, #2e5bff);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0ed7c0, #5ba3ff);
+  background: linear-gradient(180deg, #2446c8, #0f766e);
 }
 
 ::selection {
   background-color: var(--accent);
-  color: #02101d;
+  color: #ffffff;
 }
 
 html {
