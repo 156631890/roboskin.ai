@@ -237,3 +237,30 @@ export const comparisonRows: ComparisonRow[] = [
     customProgram: 'Custom geometry, packaging, or deployment constraints',
   },
 ];
+
+export const deploymentStages: ImplementationStage[] = [
+  {
+    title: 'Evaluation',
+    summary: 'Confirm fit, interfaces, and what technical material is available for review.',
+    inputs: ['Use case and robot type', 'Target surface and geometry', 'Timeline and constraints'],
+    outputs: ['Fit check', 'Recommended starting point', 'Request routing (datasheet, demo, integration review)'],
+  },
+  {
+    title: 'Prototype',
+    summary: 'Bring up a first integration path with the lowest-friction hardware option for your stage.',
+    inputs: ['Sensor / kit selection', 'Bring-up plan', 'Interface expectations'],
+    outputs: ['Working demo baseline', 'Early data validation notes', 'Integration questions list'],
+  },
+  {
+    title: 'Pilot',
+    summary: 'Define mounting, packaging, and data workflows that match your application environment.',
+    inputs: ['Mechanical integration notes', 'Data pipeline requirements', 'Pilot success criteria'],
+    outputs: ['Pilot plan', 'Packaging constraints', 'Verified next-step requirements'],
+  },
+  {
+    title: 'Deployment',
+    summary: 'Align on form factor, constraints, and support needed for a repeatable integration.',
+    inputs: ['Custom form factor scoping', 'Deployment constraints', 'Support and validation needs'],
+    outputs: ['Integration plan', 'Custom program scope (if needed)', 'Request-only verification checklist'],
+  },
+];

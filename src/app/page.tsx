@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { homeProofPoints, homeStats, homeUseCases, productCards, site, technologyLayers } from '@/content/site';
+import { deploymentStages, homeProofPoints, homeStats, homeUseCases, productCards, site, technologyLayers } from '@/content/site';
 
 export default function Home() {
   return (
@@ -140,38 +140,13 @@ export default function Home() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                step: 'Step 1',
-                title: 'Evaluation',
-                body: 'Confirm fit, interfaces, and what technical material is available for review.',
-                bullets: ['Use case and robot type', 'Target surface and geometry', 'Timeline and constraints'],
-              },
-              {
-                step: 'Step 2',
-                title: 'Prototype',
-                body: 'Bring up a first integration path with the lowest-friction hardware option for your stage.',
-                bullets: ['Sensor / kit selection', 'Initial bring-up', 'Early data validation'],
-              },
-              {
-                step: 'Step 3',
-                title: 'Pilot',
-                body: 'Define mounting, packaging, and data workflows that match your application environment.',
-                bullets: ['Mechanical integration notes', 'Signal processing expectations', 'Pilot success criteria'],
-              },
-              {
-                step: 'Step 4',
-                title: 'Deployment',
-                body: 'Align on form factor, constraints, and support needed for a repeatable integration.',
-                bullets: ['Custom form factor scoping', 'Integration plan', 'Request-only verification'],
-              },
-            ].map((item, idx) => (
-              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
-                <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">{item.step}</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{item.body}</p>
+            {deploymentStages.map((stage, idx) => (
+              <article key={stage.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
+                <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">Step {idx + 1}</p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{stage.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{stage.summary}</p>
                 <ul className="mt-5 space-y-2 text-sm text-[#d8dce4]">
-                  {item.bullets.map((bullet) => (
+                  {stage.inputs.map((bullet) => (
                     <li key={bullet} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5">
                       {bullet}
                     </li>
