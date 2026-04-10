@@ -108,7 +108,7 @@ export default function Home() {
               <span className="eyebrow">Why RoboSkin</span>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Engineering-first, claims-disciplined</h2>
             </div>
-            <Link href="/resources" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+            <Link href="/resources" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               View resources {'->'}
             </Link>
           </div>
@@ -117,7 +117,7 @@ export default function Home() {
             {homeProofPoints.map((item, idx) => (
               <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
                 <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{item.description}</p>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.description}</p>
               </article>
             ))}
           </div>
@@ -130,11 +130,11 @@ export default function Home() {
             <div>
               <span className="eyebrow">Deployment path</span>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From evaluation to deployment</h2>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#9aa3b2]">
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-soft">
                 A typical engagement starts with a fit check and datasheet review, then moves to an integration review and pilot plan.
               </p>
             </div>
-            <Link href="/contact?requestType=integration" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               Request integration review {'->'}
             </Link>
           </div>
@@ -142,11 +142,19 @@ export default function Home() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {deploymentStages.map((stage, idx) => (
               <article key={stage.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
-                <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">Step {idx + 1}</p>
+                <p className="text-soft text-xs uppercase tracking-[0.14em]">Step {idx + 1}</p>
                 <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{stage.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{stage.summary}</p>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{stage.summary}</p>
                 <ul className="mt-5 space-y-2 text-sm text-[#d8dce4]">
                   {stage.inputs.map((bullet) => (
+                    <li key={bullet} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-xs uppercase tracking-[0.14em] text-soft">Outputs</p>
+                <ul className="mt-2 space-y-2 text-sm text-[#d8dce4]">
+                  {stage.outputs.map((bullet) => (
                     <li key={bullet} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5">
                       {bullet}
                     </li>
