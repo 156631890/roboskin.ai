@@ -86,6 +86,31 @@ a {
     inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
 }
 
+.surface-shell {
+  background: rgba(6, 8, 12, 0.82);
+  border-color: var(--panel-border);
+}
+
+.surface-shell-strong {
+  background: rgba(6, 8, 12, 0.96);
+}
+
+.surface-panel {
+  background: var(--panel);
+}
+
+.surface-panel-soft {
+  background: var(--bg-soft);
+}
+
+.text-soft {
+  color: var(--text-soft);
+}
+
+.text-accent {
+  color: var(--primary);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

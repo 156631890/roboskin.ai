@@ -3,7 +3,7 @@ import { footerNavigation, site } from '@/content/site';
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-white/8 bg-[#0a0d12]">
+    <footer className="surface-shell-strong mt-auto border-t">
       <div className="container-shell py-14">
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
@@ -16,29 +16,29 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-xl font-bold tracking-tight text-white">{site.name}</p>
-                <p className="text-[11px] tracking-[0.16em] text-[#9aa3b2]">TACTILE SYSTEMS</p>
+                <p className="text-[11px] tracking-[0.16em] text-soft">TACTILE SYSTEMS</p>
               </div>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-[#9aa3b2]">
+            <p className="max-w-sm text-sm leading-relaxed text-soft">
               Tactile sensor skin and integration support for robotics teams, OEM programs, and research deployments.
             </p>
-            <div className="mt-6 space-y-2 text-sm text-[#9aa3b2]">
+            <div className="mt-6 space-y-2 text-sm text-soft">
               <p>
-                Email: <a className="text-[#62a8ff] hover:text-[#7dd3fc]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+                Email: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
               </p>
               <p>
-                Sales: <a className="text-[#62a8ff] hover:text-[#7dd3fc]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
+                Sales: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
               </p>
             </div>
           </div>
 
           {footerNavigation.map((col) => (
             <div key={col.title}>
-              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-[#9aa3b2]">{col.title}</h3>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-soft">{col.title}</h3>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-[#9aa3b2] transition-colors hover:text-white">
+                    <Link href={link.href} className="text-sm text-soft transition-colors hover:text-white">
                       {link.label}
                     </Link>
                   </li>
@@ -48,7 +48,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-white/8 pt-6 text-xs text-[#6f7786] md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/8 pt-6 text-xs text-soft md:flex-row md:items-center md:justify-between">
           <p>Copyright {new Date().getFullYear()} {site.name}. All rights reserved.</p>
           <p>Built for robotics teams that need dependable tactile perception.</p>
         </div>

@@ -10,7 +10,7 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/8 bg-[rgba(6,8,12,0.82)] backdrop-blur-xl">
+    <nav className="surface-shell sticky top-0 z-50 border-b backdrop-blur-xl">
       <div className="container-shell">
         <div className="flex min-h-18 items-center justify-between py-3">
           <div className="flex items-center py-2">
@@ -23,7 +23,7 @@ export default function Navigation() {
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-xl font-bold tracking-tight text-white">{site.name}</span>
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-[#9aa3b2]">TACTILE SYSTEMS</span>
+                <span className="text-[10px] font-semibold tracking-[0.18em] text-soft">TACTILE SYSTEMS</span>
               </div>
             </Link>
           </div>
@@ -37,7 +37,7 @@ export default function Navigation() {
                   'rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 ' +
                   (pathname === link.href
                     ? 'bg-[rgba(98,168,255,0.14)] text-[#d7e7ff] ring-1 ring-[#62a8ff]/35'
-                    : 'text-[#aab3c2] hover:bg-white/5 hover:text-white')
+                    : 'text-soft hover:bg-white/5 hover:text-white')
                 }
               >
                 {link.label}
@@ -45,7 +45,7 @@ export default function Navigation() {
             ))}
             <Link
               href="/contact"
-              className="ml-2 rounded-xl bg-[#62a8ff] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_24px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
+              className="ml-2 rounded-xl bg-[var(--primary)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_24px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
             >
               Talk to engineering
             </Link>
@@ -54,6 +54,9 @@ export default function Navigation() {
           <div className="flex items-center py-2 md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               className="rounded-lg border border-white/8 p-2 text-white"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
@@ -65,7 +68,7 @@ export default function Navigation() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="border-t border-white/8 bg-[rgba(6,8,12,0.96)] md:hidden">
+        <div id="mobile-navigation" className="surface-shell-strong border-t md:hidden">
           <div className="container-shell space-y-1 py-4">
             {primaryNavigation.map((link) => (
               <Link
@@ -83,7 +86,7 @@ export default function Navigation() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 block rounded-lg bg-[#62a8ff] px-4 py-3 text-center text-sm font-bold text-white"
+              className="mt-2 block rounded-lg bg-[var(--primary)] px-4 py-3 text-center text-sm font-bold text-white"
             >
               Talk to engineering
             </Link>
