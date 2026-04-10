@@ -10,6 +10,14 @@ export interface BlogPost {
   image: string;
 }
 
+export type BlogSummary = {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+};
+
 export const blogPosts: BlogPost[] = [
   {
     id: 'neuromorphic-tactile-2026',
@@ -911,4 +919,14 @@ export function getBlogPostById(id: string): BlogPost | undefined {
 
 export function getBlogPostsByCategory(category: string): BlogPost[] {
   return blogPosts.filter(post => post.category === category);
+}
+
+export function getBlogSummaries(): BlogSummary[] {
+  return blogPosts.map((post) => ({
+    id: post.id,
+    title: post.title,
+    excerpt: post.excerpt,
+    category: post.category,
+    date: post.date,
+  }));
 }

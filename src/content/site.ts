@@ -1,3 +1,24 @@
+export type ContentTile = {
+  title: string;
+  description: string;
+  ctaLabel?: string;
+  href?: string;
+};
+
+export type ComparisonRow = {
+  label: string;
+  sensorArray: string;
+  developerKit: string;
+  customProgram: string;
+};
+
+export type ImplementationStage = {
+  title: string;
+  summary: string;
+  inputs: string[];
+  outputs: string[];
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -46,6 +67,25 @@ export const homeStats = [
   { value: '4', label: 'Solution areas' },
   { value: '1', label: 'Contact path' },
   { value: '0', label: 'Unsupported claims' },
+];
+
+export const homeProofPoints: ContentTile[] = [
+  {
+    title: 'Evaluation-first positioning',
+    description: 'Make it easy to decide where to start: datasheet review, a pilot kit, or a custom integration review.',
+  },
+  {
+    title: 'Engineering support path',
+    description: 'Clarify what the team needs from you and what you can expect next from RoboSkin engineering.',
+  },
+  {
+    title: 'Request-only assets, no dead downloads',
+    description: 'Route missing public materials into a request flow instead of listing unsupported downloads.',
+  },
+  {
+    title: 'Claims discipline',
+    description: 'Keep public copy grounded in verified capabilities and clearly label what must be confirmed on request.',
+  },
 ];
 
 export const homeUseCases = [
@@ -168,5 +208,32 @@ export const resourceSections = [
       { title: 'Materials overview', description: 'Summary of the tactile stack and integration approach.', availability: 'Request only' },
       { title: 'Benchmark methodology', description: 'Request the note that explains how measurements are taken.', availability: 'Request only' },
     ],
+  },
+];
+
+export const comparisonRows: ComparisonRow[] = [
+  {
+    label: 'Best starting point',
+    sensorArray: 'Research and early pilots',
+    developerKit: 'Fast prototype work',
+    customProgram: 'Specific robot geometry or environment constraints',
+  },
+  {
+    label: 'What you receive',
+    sensorArray: 'Tactile array for evaluation and integration planning',
+    developerKit: 'Hardware bundle plus onboarding and examples',
+    customProgram: 'Requirements review, form factor scoping, and an integration plan',
+  },
+  {
+    label: 'Integration effort',
+    sensorArray: 'Moderate (depends on surface and mounting)',
+    developerKit: 'Lowest (aimed at fast bring-up)',
+    customProgram: 'Program-driven (managed with engineering)',
+  },
+  {
+    label: 'Recommended if you need',
+    sensorArray: 'A credible baseline for sensing and early data',
+    developerKit: 'A short path to a working demo',
+    customProgram: 'Custom geometry, packaging, or deployment constraints',
   },
 ];
