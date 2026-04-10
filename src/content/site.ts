@@ -19,6 +19,25 @@ export type ImplementationStage = {
   outputs: string[];
 };
 
+export type ResourceItem = {
+  title: string;
+  description: string;
+  availability: string;
+  ctaLabel?: string;
+  href?: string;
+};
+
+export type ResourceSection = {
+  title: string;
+  items: ResourceItem[];
+};
+
+export type TechnologyLayer = {
+  title: string;
+  summary: string;
+  bullets?: string[];
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -165,48 +184,116 @@ export const technologyLayers = [
   {
     title: 'Sensing layer',
     summary: 'Flexible tactile elements capture contact, pressure, and interaction events.',
+    bullets: [
+      'Define the sensing layout around the robot contact surface and expected interactions.',
+      'Prioritize repeatability and mounting practicality over demo-only geometries.',
+      'Route uncertain requirements into an engineering review instead of public claims.',
+    ],
   },
   {
     title: 'Signal and processing layer',
     summary: 'Local processing turns raw sensor output into cleaner robot-ready data.',
+    bullets: [
+      'Clarify sampling, latency constraints, and where processing should live in your stack.',
+      'Document what “robot-ready” signals mean for your controller and telemetry pipeline.',
+      'Confirm interfaces and support details on request for a specific platform.',
+    ],
   },
   {
     title: 'Materials and form factor layer',
     summary: 'Mechanical design supports curved surfaces and application-driven layouts.',
+    bullets: [
+      'Map curvature, attachment methods, and packaging constraints early.',
+      'Treat durability expectations as application-specific and verified on request.',
+      'Use pilot phases to validate fit and serviceability before wider rollout.',
+    ],
   },
   {
     title: 'Integration layer',
     summary: 'The platform is organized around robotics workflows and engineering support.',
+    bullets: [
+      'Start with a scoped evaluation plan, then move to a pilot integration review.',
+      'Keep the public story narrow; expand details in private technical material.',
+      'Align on success criteria and next steps for prototype, pilot, and deployment.',
+    ],
   },
 ];
 
-export const resourceSections = [
+export const resourceSections: ResourceSection[] = [
   {
     title: 'Datasheets',
     items: [
-      { title: 'RS-1000 Sensor Array', description: 'Request the current datasheet for the sensor array.', availability: 'Request only' },
-      { title: 'Developer Kit', description: 'Ask for the latest hardware overview and integration notes.', availability: 'Request only' },
+      {
+        title: 'RS-1000 Sensor Array',
+        description: 'Request the current datasheet for the sensor array.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=datasheet',
+      },
+      {
+        title: 'Developer Kit',
+        description: 'Ask for the latest hardware overview and integration notes.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=datasheet',
+      },
     ],
   },
   {
     title: 'Integration docs',
     items: [
-      { title: 'Getting started guide', description: 'Request onboarding instructions for pilot projects.', availability: 'Request only' },
-      { title: 'ROS / ROS2 support', description: 'Confirm compatibility details with engineering.', availability: 'Verified on request' },
+      {
+        title: 'Getting started guide',
+        description: 'Request onboarding instructions for pilot projects.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=integration',
+      },
+      {
+        title: 'ROS / ROS2 support',
+        description: 'Confirm compatibility details with engineering.',
+        availability: 'Verified on request',
+        ctaLabel: 'Confirm',
+        href: '/contact?requestType=integration',
+      },
     ],
   },
   {
     title: 'SDK access',
     items: [
-      { title: 'Python SDK', description: 'Request access for evaluation and integration work.', availability: 'Request only' },
-      { title: 'C++ SDK', description: 'Ask for the current tooling and example bundles.', availability: 'Request only' },
+      {
+        title: 'Python SDK',
+        description: 'Request access for evaluation and integration work.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=integration',
+      },
+      {
+        title: 'C++ SDK',
+        description: 'Ask for the current tooling and example bundles.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=integration',
+      },
     ],
   },
   {
     title: 'Technical briefs',
     items: [
-      { title: 'Materials overview', description: 'Summary of the tactile stack and integration approach.', availability: 'Request only' },
-      { title: 'Benchmark methodology', description: 'Request the note that explains how measurements are taken.', availability: 'Request only' },
+      {
+        title: 'Materials overview',
+        description: 'Summary of the tactile stack and integration approach.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=integration',
+      },
+      {
+        title: 'Benchmark methodology',
+        description: 'Request the note that explains how measurements are taken.',
+        availability: 'Request only',
+        ctaLabel: 'Request',
+        href: '/contact?requestType=integration',
+      },
     ],
   },
 ];
