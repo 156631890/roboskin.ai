@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { homeStats, homeUseCases, productCards, site, technologyLayers } from '@/content/site';
+import { homeProofPoints, homeStats, homeUseCases, productCards, site, technologyLayers } from '@/content/site';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
               Precision tactile hardware for robots that need real touch.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#9aa3b2]">
-              High-density pressure sensing arrays, integration support, and custom form factors for research teams and OEM programs.
+              For robotics teams evaluating tactile sensing: compare the sensor array, developer kit, and custom integration program, then request the right next step.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Link
@@ -105,6 +105,88 @@ export default function Home() {
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
+              <span className="eyebrow">Why RoboSkin</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Engineering-first, claims-disciplined</h2>
+            </div>
+            <Link href="/resources" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              View resources {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {homeProofPoints.map((item, idx) => (
+              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
+                <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Deployment path</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From evaluation to deployment</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#9aa3b2]">
+                A typical engagement starts with a fit check and datasheet review, then moves to an integration review and pilot plan.
+              </p>
+            </div>
+            <Link href="/contact?requestType=integration" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              Request integration review {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                step: 'Step 1',
+                title: 'Evaluation',
+                body: 'Confirm fit, interfaces, and what technical material is available for review.',
+                bullets: ['Use case and robot type', 'Target surface and geometry', 'Timeline and constraints'],
+              },
+              {
+                step: 'Step 2',
+                title: 'Prototype',
+                body: 'Bring up a first integration path with the lowest-friction hardware option for your stage.',
+                bullets: ['Sensor / kit selection', 'Initial bring-up', 'Early data validation'],
+              },
+              {
+                step: 'Step 3',
+                title: 'Pilot',
+                body: 'Define mounting, packaging, and data workflows that match your application environment.',
+                bullets: ['Mechanical integration notes', 'Signal processing expectations', 'Pilot success criteria'],
+              },
+              {
+                step: 'Step 4',
+                title: 'Deployment',
+                body: 'Align on form factor, constraints, and support needed for a repeatable integration.',
+                bullets: ['Custom form factor scoping', 'Integration plan', 'Request-only verification'],
+              },
+            ].map((item, idx) => (
+              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
+                <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">{item.step}</p>
+                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{item.body}</p>
+                <ul className="mt-5 space-y-2 text-sm text-[#d8dce4]">
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
               <span className="eyebrow">Product strip</span>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Three offers, one contact path</h2>
             </div>
@@ -118,7 +200,7 @@ export default function Home() {
                 <p className="text-xs uppercase tracking-[0.12em] text-[#9aa3b2]">Product level</p>
                 <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{product.name}</h3>
                 <p className="mt-3 text-sm text-[#9aa3b2]">{product.summary}</p>
-                <p className="mt-4 text-sm text-[#9aa3b2]"><span className="font-semibold text-white">Best for:</span> {product.bestFor}</p>
+                <p className="mt-4 text-sm text-[#9aa3b2]"><span className="font-semibold text-white">Start here if:</span> {product.bestFor}</p>
                 <p className="mt-2 text-sm text-[#9aa3b2]"><span className="font-semibold text-white">Inputs and outputs:</span> {product.inputsOutputs}</p>
                 <ul className="mt-5 space-y-2">
                   {product.specs.map((spec) => (
@@ -139,6 +221,9 @@ export default function Home() {
                 >
                   {product.cta}
                 </Link>
+                <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">
+                  Next: request technical material or an integration review
+                </p>
               </article>
             ))}
           </div>
@@ -188,19 +273,25 @@ export default function Home() {
       <section className="pb-20 pt-8">
         <div className="container-shell">
           <div className="rounded-[28px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-12">
-            <span className="eyebrow border-white/10 bg-white/5 text-white">Need a custom sensor path?</span>
+            <span className="eyebrow border-white/10 bg-white/5 text-white">Ready for an engineering review?</span>
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
               Share your target application, form factor, and development stage
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[#9aa3b2]">
-              We will reply with the most practical next step for integration, evaluation, or a custom program.
+              We will reply with the most practical next step for evaluation, integration, or a custom program.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/contact"
                 className="rounded-xl bg-[#62a8ff] px-8 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
               >
                 Talk to engineering
+              </Link>
+              <Link
+                href="/contact?requestType=datasheet"
+                className="rounded-xl border border-white/12 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                Request datasheet
               </Link>
             </div>
             <p className="mt-4 text-sm text-[#9aa3b2]">
