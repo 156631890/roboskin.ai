@@ -10,13 +10,7 @@ export interface BlogPost {
   image: string;
 }
 
-export type BlogSummary = {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-};
+export type BlogSummary = Pick<BlogPost, 'id' | 'title' | 'excerpt' | 'category' | 'date'>;
 
 export const blogPosts: BlogPost[] = [
   {
@@ -922,11 +916,14 @@ export function getBlogPostsByCategory(category: string): BlogPost[] {
 }
 
 export function getBlogSummaries(): BlogSummary[] {
-  return blogPosts.map((post) => ({
+  return blogPosts
+    .slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map((post) => ({
     id: post.id,
     title: post.title,
     excerpt: post.excerpt,
     category: post.category,
     date: post.date,
-  }));
+    }));
 }
