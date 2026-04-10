@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { site } from '@/content/site';
+import { aboutSections, site } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Learn what RoboSkin focuses on, who it serves, and how to contact the team.',
+  description: 'Learn what RoboSkin builds, how we work with robotics teams, and how to request technical material or an integration review.',
   alternates: {
     canonical: `${site.url}/about`,
   },
@@ -16,44 +16,60 @@ export default function AboutPage() {
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">About</span>
-          <h1 className="mt-5 text-4xl font-bold text-[#111318] md:text-6xl">About RoboSkin</h1>
-          <p className="mt-5 max-w-3xl text-[#4f5560]">
-            RoboSkin focuses on tactile sensing systems for robotics applications, including flexible pressure-sensing arrays, integration tooling, and application-driven engineering support.
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+            <h1 className="text-4xl font-bold text-white md:text-6xl">What RoboSkin is, and what it is not</h1>
+            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
+              Talk to engineering {'->'}
+            </Link>
+          </div>
+          <p className="mt-5 max-w-3xl text-soft">
+            RoboSkin focuses on tactile sensing systems for robotics: hardware, integration support, and a disciplined public content model. We avoid unsupported
+            performance claims and route application-specific details into request-only technical material.
           </p>
         </div>
       </section>
 
       <section className="pb-20">
         <div className="container-shell grid gap-6 lg:grid-cols-2">
-          <article className="glass-card p-7 md:p-8">
-            <h2 className="text-2xl font-semibold text-[#111318]">What we focus on</h2>
-            <p className="mt-3 text-[#4f5560]">
-              We keep the public story narrow: tactile hardware, robotics integration, and practical support for teams building real systems.
-            </p>
-          </article>
-          <article className="glass-card p-7 md:p-8">
-            <h2 className="text-2xl font-semibold text-[#111318]">Who the site is for</h2>
-            <p className="mt-3 text-[#4f5560]">
-              Robotics engineers, OEM teams, research labs, and product owners who need a credible starting point for tactile sensing work.
-            </p>
-          </article>
+          {aboutSections.map((section) => (
+            <article key={section.title} className="glass-card p-7 md:p-8">
+              <h2 className="text-2xl font-semibold text-white md:text-3xl">{section.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{section.summary}</p>
+              <ul className="mt-6 space-y-2 text-sm text-[#d8dce4]">
+                {section.bullets.map((bullet) => (
+                  <li key={bullet} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5">
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="pb-20">
         <div className="container-shell">
-          <div className="rounded-[24px] border border-[#d9d3c8] bg-[#111318] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need a quick answer from engineering?</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[#d3d6dd]">
-              Share your application and timeline, and we will point you to the best next step.
+          <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need a practical next step?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-soft">
+              If you have a target surface and a timeline, we can recommend the right starting offer and the right material to request.
             </p>
-            <div className="mt-7 flex justify-center">
-              <Link href="/contact" className="rounded-xl bg-white px-7 py-3 text-sm font-bold text-[#111318]">
-                Contact the team
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/contact?requestType=integration"
+                className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
+              >
+                Request integration review
+              </Link>
+              <Link
+                href="/downloads"
+                className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                Request technical material
               </Link>
             </div>
-            <p className="mt-4 text-sm text-[#b9bec8]">
-              Direct inquiries: <a className="text-white underline decoration-white/40 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+            <p className="mt-4 text-sm text-soft">
+              Direct inquiries: <a className="text-accent underline decoration-white/30 underline-offset-4 hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
             </p>
           </div>
         </div>

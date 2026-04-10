@@ -1,18 +1,99 @@
 import type { Metadata } from 'next';
-import LegacyRouteStub from '@/components/LegacyRouteStub';
+import Link from 'next/link';
+import { getBlogSummaries } from '@/lib/blog-data';
+import { site } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'Research',
+  description: 'Conservative research and engineering notes. Request technical briefs for verified application-specific details.',
+  alternates: {
+    canonical: `${site.url}/research`,
+  },
   robots: { index: false, follow: false },
 };
 
 export default function ResearchPage() {
+  const summaries = getBlogSummaries();
+  const categories = summaries.reduce<Record<string, typeof summaries>>((acc, item) => {
+    (acc[item.category] ??= []).push(item);
+    return acc;
+  }, {});
+  const categoryEntries = Object.entries(categories).sort(([a], [b]) => a.localeCompare(b));
+
   return (
-    <LegacyRouteStub
-      title="Research is now treated as a compatibility page"
-      description="The previous publication-style content has been retired. Use Resources or Contact for current technical material."
-      primaryHref="/resources"
-      primaryLabel="Go to Resources"
-    />
+    <>
+      <section className="py-20 md:py-24">
+        <div className="container-shell">
+          <span className="eyebrow">Research</span>
+          <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Research notes</h1>
+            <Link href="/downloads" className="text-accent text-sm font-semibold hover:text-white">
+              Request technical material {'->'}
+            </Link>
+          </div>
+          <p className="mt-5 max-w-3xl text-soft">
+            These are public summaries only. We avoid journal, partnership, and benchmark claims on the public site. If you need verified details, request a
+            technical brief or an integration review.
+          </p>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell space-y-10">
+          {categoryEntries.map(([category, items]) => (
+            <div key={category}>
+              <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+                <h2 className="text-2xl font-semibold text-white">{category}</h2>
+                <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
+                  Request integration review {'->'}
+                </Link>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {items.map((post) => (
+                  <article key={post.id} className="glass-card p-6">
+                    <p className="text-soft text-xs uppercase tracking-[0.14em]">{post.date}</p>
+                    <h3 className="mt-3 text-xl font-semibold text-white">{post.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{post.excerpt}</p>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <Link href="/downloads" className="text-accent text-sm font-semibold hover:text-white">
+                        Request brief {'->'}
+                      </Link>
+                      <Link href="/resources" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                        View resources {'->'}
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need verified details?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-soft">
+              Tell us the robot type, target surface, and what you need to validate. We will route you to the most relevant technical material.
+            </p>
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/contact?requestType=integration"
+                className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
+              >
+                Talk to engineering
+              </Link>
+              <Link
+                href="/downloads"
+                className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                Request technical material
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

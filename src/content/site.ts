@@ -38,6 +38,37 @@ export type TechnologyLayer = {
   bullets?: string[];
 };
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+  ctaLabel?: string;
+  href?: string;
+};
+
+export type AboutSection = {
+  title: string;
+  summary: string;
+  bullets: string[];
+};
+
+export type CaseStudySummary = {
+  title: string;
+  context: string;
+  approach: string;
+  outcome: string;
+  note: string;
+  ctaLabel: string;
+  href: string;
+};
+
+export type NewsItem = {
+  date: string;
+  title: string;
+  summary: string;
+  href?: string;
+  ctaLabel?: string;
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -77,7 +108,11 @@ export const footerNavigation = [
     title: 'Company',
     links: [
       { href: '/about', label: 'About' },
+      { href: '/faq', label: 'FAQ' },
       { href: '/contact', label: 'Contact' },
+      { href: '/case-studies', label: 'Case studies' },
+      { href: '/research', label: 'Research' },
+      { href: '/news', label: 'News' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/terms', label: 'Terms' },
     ],
@@ -352,5 +387,145 @@ export const deploymentStages: ImplementationStage[] = [
     summary: 'Align on form factor, constraints, and support needed for a repeatable integration.',
     inputs: ['Custom form factor scoping', 'Deployment constraints', 'Support and validation needs'],
     outputs: ['Integration plan', 'Custom program scope (if needed)', 'Request-only verification checklist'],
+  },
+];
+
+export const aboutSections: AboutSection[] = [
+  {
+    title: 'What we build',
+    summary: 'Tactile sensing hardware and integration support for robotics teams that need credible, repeatable touch input.',
+    bullets: [
+      'Pressure-sensing arrays and application-driven form factors',
+      'Integration guidance for evaluation, pilot, and deployment stages',
+      'A narrow public story, with deeper technical detail shared on request',
+    ],
+  },
+  {
+    title: 'How we work with teams',
+    summary: 'We focus on fit, constraints, and next steps rather than broad claims.',
+    bullets: [
+      'Start with a fit check and request the right technical material',
+      'Move to an integration review once geometry and interfaces are clear',
+      'Use pilots to validate mounting, packaging, and data expectations',
+    ],
+  },
+  {
+    title: 'Claims discipline',
+    summary: 'Public copy stays conservative. Application-specific details are confirmed on request.',
+    bullets: [
+      'No invented benchmarks, customer logos, or certifications',
+      'Request-only assets are labeled and routed to a form, not fake downloads',
+      'If you need a verification plan, we will scope it with engineering',
+    ],
+  },
+  {
+    title: 'What to send us',
+    summary: 'The fastest way to get a useful answer is to provide constraints up front.',
+    bullets: [
+      'Robot platform and use case',
+      'Target surface geometry, curvature, and mounting constraints',
+      'Timeline and what success looks like for your evaluation or pilot',
+    ],
+  },
+];
+
+export const faqItems: FaqItem[] = [
+  {
+    question: 'What is the fastest way to evaluate fit?',
+    answer: 'Start with a datasheet request and include your robot type, target surface, and timeline. If geometry is non-trivial, request an integration review instead.',
+    ctaLabel: 'Request datasheet',
+    href: '/contact?requestType=datasheet',
+  },
+  {
+    question: 'How do I request an integration review?',
+    answer: 'Use the Contact form and select the integration request type. Include geometry constraints and any interface or SDK expectations.',
+    ctaLabel: 'Request integration review',
+    href: '/contact?requestType=integration',
+  },
+  {
+    question: 'Do you support ROS or ROS2?',
+    answer: 'Compatibility is confirmed on request for a specific platform and pipeline. Use the Resources or Downloads hub to request the most relevant material.',
+    ctaLabel: 'Request docs',
+    href: '/downloads',
+  },
+  {
+    question: 'Are there public downloads?',
+    answer: 'Public assets are intentionally limited. When an item is request-only, we route you to the correct request flow instead of listing dead downloads.',
+    ctaLabel: 'View downloads hub',
+    href: '/downloads',
+  },
+  {
+    question: 'What information should I include in the first message?',
+    answer: 'Robot platform, target surface geometry, environment constraints, and timeline. If you have interface requirements, include them early.',
+    ctaLabel: 'Contact',
+    href: '/contact',
+  },
+  {
+    question: 'Can you do custom form factors?',
+    answer: 'Yes, via a scoped program. Start by describing the surface geometry and deployment constraints so engineering can recommend the right path.',
+    ctaLabel: 'Compare offers',
+    href: '/comparison',
+  },
+  {
+    question: 'What does \"verified on request\" mean?',
+    answer: 'It means the claim depends on the robot, integration, or environment. We confirm details in a technical brief or integration review rather than publishing broad statements.',
+  },
+  {
+    question: 'What email should I use for direct inquiries?',
+    answer: site.contact.primaryEmail,
+  },
+];
+
+export const caseStudySummaries: CaseStudySummary[] = [
+  {
+    title: 'Robotic gripper evaluation path',
+    context: 'A manipulation team needed a fast way to assess whether tactile sensing would improve grip control and slip awareness.',
+    approach: 'We scoped the contact surface, defined an evaluation plan, and routed the team to the most practical starting offer for early integration work.',
+    outcome: 'A clear pilot path with defined integration questions and success criteria for the next stage.',
+    note: 'No public performance numbers are implied; measured results are reviewed on request.',
+    ctaLabel: 'Request integration review',
+    href: '/contact?requestType=integration',
+  },
+  {
+    title: 'Humanoid contact sensing scoping',
+    context: 'A humanoid program needed contact feedback across curved surfaces and a realistic plan for mounting and routing constraints.',
+    approach: 'We reviewed geometry and surface constraints, then defined a staged plan from evaluation to pilot, including request-only verification items.',
+    outcome: 'A scoped integration plan and a decision framework for when custom form factors are required.',
+    note: 'Application-specific feasibility is confirmed per platform and environment.',
+    ctaLabel: 'Talk to engineering',
+    href: '/contact?requestType=integration',
+  },
+  {
+    title: 'Prototype to pilot readiness checklist',
+    context: 'An OEM pilot required a repeatable integration path rather than a one-off demo.',
+    approach: 'We aligned on packaging, serviceability, data expectations, and pilot success criteria before expanding scope.',
+    outcome: 'A pilot checklist that reduces integration surprises and keeps the next step concrete.',
+    note: 'Exact specs and interfaces are validated through request-only technical material.',
+    ctaLabel: 'Request datasheet',
+    href: '/contact?requestType=datasheet',
+  },
+];
+
+export const newsItems: NewsItem[] = [
+  {
+    date: '2026-04-10',
+    title: 'Content hub expansion (Comparison, Implementation, Downloads)',
+    summary: 'We expanded the public site with decision-support pages and request hubs to reduce dead downloads and improve evaluation clarity.',
+    href: '/comparison',
+    ctaLabel: 'Compare offers',
+  },
+  {
+    date: '2026-04-09',
+    title: 'Resources updated for request-only routing',
+    summary: 'Resource listings are now routed into the correct request flows instead of listing unsupported assets.',
+    href: '/downloads',
+    ctaLabel: 'View downloads hub',
+  },
+  {
+    date: '2026-04-08',
+    title: 'Integration-first contact guidance',
+    summary: 'The Contact page emphasizes what to include for faster engineering responses and clearer next steps.',
+    href: '/contact',
+    ctaLabel: 'Contact',
   },
 ];

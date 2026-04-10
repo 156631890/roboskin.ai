@@ -16,7 +16,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'neuromorphic-tactile-2026',
     title: 'Neuromorphic Tactile Sensing: Breaking Through the 0.01N Sensitivity Barrier',
-    excerpt: 'Published in Nature Robotics (January 2026): Our latest research achieves unprecedented force sensitivity using bio-inspired neuromorphic architectures, rivaling human mechanoreceptor performance.',
+    excerpt: 'Research note: neuromorphic and event-based tactile processing concepts for improving sensitivity and latency. Request details for verified specs and measured results.',
     content: `# Neuromorphic Tactile Sensing: Breaking Through the 0.01N Sensitivity Barrier
 
 **Published in Nature Robotics - January 2026**
@@ -84,7 +84,7 @@ Ongoing work focuses on:
   {
     id: 'graphene-quantum-tunneling',
     title: 'Quantum Tunneling Effect in Graphene-Based Tactile Sensors',
-    excerpt: 'Published in Science Advances (December 2025): Harnessing quantum tunneling for ultra-sensitive pressure detection with picometer-scale displacement resolution.',
+    excerpt: 'Materials note: graphene-based sensing concepts for higher sensitivity and wider dynamic range. Request verification notes for any application-specific claims.',
     content: `# Quantum Tunneling Effect in Graphene-Based Tactile Sensors
 
 **Published in Science Advances - December 2025**
@@ -150,7 +150,7 @@ This technology enables:
   {
     id: 'self-healing-2025',
     title: 'Autonomous Self-Healing in Robotic Skin: 24-Hour Recovery Demonstration',
-    excerpt: 'Published in Advanced Materials (November 2025): Revolutionary polymer matrix achieves full recovery from severe damage within 24 hours at room temperature.',
+    excerpt: 'Materials note: self-healing polymer approaches for improving serviceability and durability in robotic skin systems. Verified details are provided on request.',
     content: `# Autonomous Self-Healing in Robotic Skin: 24-Hour Recovery Demonstration
 
 **Published in Advanced Materials - November 2025**
@@ -229,7 +229,7 @@ Target market entry: Q3 2026
   {
     id: 'multimodal-sensing-2025',
     title: 'Multimodal Tactile Perception: Fusing Touch with Thermal and Proximity Sensing',
-    excerpt: 'Published in IEEE Transactions on Robotics (October 2025): First comprehensive multimodal artificial skin system combining pressure, temperature, vibration, and proximity data.',
+    excerpt: 'Systems note: multimodal skin architectures and integration tradeoffs (pressure, temperature, vibration, proximity). Confirm supported modalities on request.',
     content: `# Multimodal Tactile Perception: Fusing Touch with Thermal and Proximity Sensing
 
 **Published in IEEE Transactions on Robotics - October 2025**
@@ -330,7 +330,7 @@ https://github.com/roboskin-ai/multimodal-fusion
   {
     id: 'bio-integration-2025',
     title: 'Direct Neural Interface: Bidirectional Communication Between Robotic Skin and Nervous System',
-    excerpt: 'Published in Nature Biomedical Engineering (September 2025): First successful demonstration of direct neural integration of artificial skin with human peripheral nerves.',
+    excerpt: 'Biomedical note: approaches and constraints for coupling tactile sensing and neural interfaces. Public copy stays cautious; request a technical brief if relevant.',
     content: `# Direct Neural Interface: Bidirectional Communication Between Robotic Skin and Nervous System
 
 **Published in Nature Biomedical Engineering - September 2025**
@@ -429,7 +429,7 @@ This research represents a new frontier in human-machine integration.`,
   {
     id: 'scalable-manufacturing-2025',
     title: 'Roll-to-Roll Manufacturing: Bringing Robotic Skin to Mass Market',
-    excerpt: 'Published in Nature Electronics (August 2025): Breakthrough in continuous manufacturing process enables production-scale robotic skin at 1/100th previous cost.',
+    excerpt: 'Manufacturing note: scaling considerations for sensor arrays and flexible substrates. Request a verified cost/modeling discussion if needed.',
     content: `# Roll-to-Roll Manufacturing: Bringing Robotic Skin to Mass Market
 
 **Published in Nature Electronics - August 2025**
@@ -555,7 +555,7 @@ This manufacturing breakthrough transforms robotic skin from laboratory curiosit
   {
     id: 'ai-tactile-learning-2025',
     title: 'Self-Supervised Learning: Robots That Learn to Touch Through Exploration',
-    excerpt: 'Published in Science Robotics (July 2025): Novel AI framework enables robots to autonomously learn tactile representations without human labeling.',
+    excerpt: 'AI note: self-supervised learning patterns for tactile perception pipelines. Avoids benchmark numbers in public copy; request methodology details if needed.',
     content: `# Self-Supervised Learning: Robots That Learn to Touch Through Exploration
 
 **Published in Science Robotics - July 2025**
@@ -714,7 +714,7 @@ Active research on:
   {
     id: 'extreme-environment-2025',
     title: 'Robotic Skin for Space: Surviving and Thriving in Extreme Conditions',
-    excerpt: 'Published in npj Microgravity (June 2025): NASA-funded research demonstrates robotic skin functionality from -196 degreesC (liquid nitrogen) to 500 degreesC (Venus surface conditions).',
+    excerpt: 'Environment note: design considerations for tactile systems in temperature- and vacuum-stressed deployments. Confirm requirements and verification plan on request.',
     content: `# Robotic Skin for Space: Surviving and Thriving in Extreme Conditions
 
 **Published in npj Microgravity - June 2025**
