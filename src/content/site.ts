@@ -180,7 +180,7 @@ export const solutionCards = [
   },
 ];
 
-export const technologyLayers = [
+export const technologyLayers: TechnologyLayer[] = [
   {
     title: 'Sensing layer',
     summary: 'Flexible tactile elements capture contact, pressure, and interaction events.',
@@ -195,7 +195,7 @@ export const technologyLayers = [
     summary: 'Local processing turns raw sensor output into cleaner robot-ready data.',
     bullets: [
       'Clarify sampling, latency constraints, and where processing should live in your stack.',
-      'Document what “robot-ready” signals mean for your controller and telemetry pipeline.',
+      'Document what "robot-ready" signals mean for your controller and telemetry pipeline.',
       'Confirm interfaces and support details on request for a specific platform.',
     ],
   },
