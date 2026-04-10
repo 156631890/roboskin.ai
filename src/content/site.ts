@@ -65,9 +65,12 @@ export const footerNavigation = [
     title: 'Platform',
     links: [
       { href: '/products', label: 'Products' },
+      { href: '/comparison', label: 'Comparison' },
       { href: '/solutions', label: 'Solutions' },
       { href: '/technology', label: 'Technology' },
       { href: '/resources', label: 'Resources' },
+      { href: '/implementation', label: 'Implementation' },
+      { href: '/downloads', label: 'Downloads' },
     ],
   },
   {
