@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Research note: neuromorphic and event-based tactile processing concepts for improving sensitivity and latency. Request details for verified specs and measured results.',
     content: `# Neuromorphic Tactile Sensing: Breaking Through the 0.01N Sensitivity Barrier
 
-**Published in Nature Robotics - January 2026**
+**Research note - January 2026**
 
 ## Abstract
 
@@ -87,7 +87,7 @@ Ongoing work focuses on:
     excerpt: 'Materials note: graphene-based sensing concepts for higher sensitivity and wider dynamic range. Request verification notes for any application-specific claims.',
     content: `# Quantum Tunneling Effect in Graphene-Based Tactile Sensors
 
-**Published in Science Advances - December 2025**
+**Research note - December 2025**
 
 ## Breakthrough Discovery
 
@@ -153,7 +153,7 @@ This technology enables:
     excerpt: 'Materials note: self-healing polymer approaches for improving serviceability and durability in robotic skin systems. Verified details are provided on request.',
     content: `# Autonomous Self-Healing in Robotic Skin: 24-Hour Recovery Demonstration
 
-**Published in Advanced Materials - November 2025**
+**Research note - November 2025**
 
 ## Abstract
 
@@ -232,7 +232,7 @@ Target market entry: Q3 2026
     excerpt: 'Systems note: multimodal skin architectures and integration tradeoffs (pressure, temperature, vibration, proximity). Confirm supported modalities on request.',
     content: `# Multimodal Tactile Perception: Fusing Touch with Thermal and Proximity Sensing
 
-**Published in IEEE Transactions on Robotics - October 2025**
+**Research note - October 2025**
 
 ## Introduction
 
@@ -333,7 +333,7 @@ https://github.com/roboskin-ai/multimodal-fusion
     excerpt: 'Biomedical note: approaches and constraints for coupling tactile sensing and neural interfaces. Public copy stays cautious; request a technical brief if relevant.',
     content: `# Direct Neural Interface: Bidirectional Communication Between Robotic Skin and Nervous System
 
-**Published in Nature Biomedical Engineering - September 2025**
+**Research note - September 2025**
 
 ## Groundbreaking Achievement
 
@@ -432,7 +432,7 @@ This research represents a new frontier in human-machine integration.`,
     excerpt: 'Manufacturing note: scaling considerations for sensor arrays and flexible substrates. Request a verified cost/modeling discussion if needed.',
     content: `# Roll-to-Roll Manufacturing: Bringing Robotic Skin to Mass Market
 
-**Published in Nature Electronics - August 2025**
+**Research note - August 2025**
 
 ## The Cost Barrier
 
@@ -558,7 +558,7 @@ This manufacturing breakthrough transforms robotic skin from laboratory curiosit
     excerpt: 'AI note: self-supervised learning patterns for tactile perception pipelines. Avoids benchmark numbers in public copy; request methodology details if needed.',
     content: `# Self-Supervised Learning: Robots That Learn to Touch Through Exploration
 
-**Published in Science Robotics - July 2025**
+**Research note - July 2025**
 
 ## The Problem
 
@@ -717,7 +717,7 @@ Active research on:
     excerpt: 'Environment note: design considerations for tactile systems in temperature- and vacuum-stressed deployments. Confirm requirements and verification plan on request.',
     content: `# Robotic Skin for Space: Surviving and Thriving in Extreme Conditions
 
-**Published in npj Microgravity - June 2025**
+**Research note - June 2025**
 **NASA-funded research grant #NNXX25AO56G**
 
 ## Introduction
