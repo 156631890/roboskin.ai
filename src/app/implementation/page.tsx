@@ -18,7 +18,7 @@ export default function ImplementationPage() {
           <span className="eyebrow">Implementation</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">From evaluation to deployment</h1>
-            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
               Talk to engineering {'->'}
             </Link>
           </div>
@@ -77,12 +77,9 @@ export default function ImplementationPage() {
               >
                 Talk to engineering
               </Link>
-              <Link
-                href="/comparison"
-                className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
-              >
-                Compare offers
-              </Link>
+                <Link href="/comparison" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                  Compare offers
+                </Link>
             </div>
           </div>
         </div>
@@ -90,4 +87,3 @@ export default function ImplementationPage() {
     </>
   );
 }
-

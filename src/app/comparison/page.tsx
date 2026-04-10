@@ -18,7 +18,7 @@ export default function ComparisonPage() {
           <span className="eyebrow">Comparison</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">Compare offer levels</h1>
-            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
               Request integration review {'->'}
             </Link>
           </div>
@@ -37,7 +37,7 @@ export default function ComparisonPage() {
               </caption>
               <thead>
                 <tr>
-                  <th className="sticky left-0 z-10 w-[220px] bg-[var(--panel)]/90 px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.14em] text-soft backdrop-blur">
+                  <th className="sticky left-0 z-10 w-[220px] bg-[rgba(6,8,12,0.9)] px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.14em] text-soft backdrop-blur">
                     Category
                   </th>
                   <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-[0.14em] text-soft">
@@ -54,7 +54,7 @@ export default function ComparisonPage() {
               <tbody>
                 {comparisonRows.map((row) => (
                   <tr key={row.label}>
-                    <th className="sticky left-0 z-10 border-t border-white/8 bg-[var(--panel)]/90 px-4 py-4 text-left text-sm font-semibold text-white backdrop-blur">
+                    <th className="sticky left-0 z-10 border-t border-white/8 bg-[rgba(6,8,12,0.9)] px-4 py-4 text-left text-sm font-semibold text-white backdrop-blur">
                       {row.label}
                     </th>
                     <td className="border-t border-white/8 px-4 py-4 text-sm leading-relaxed text-soft">{row.sensorArray}</td>
@@ -99,7 +99,7 @@ export default function ComparisonPage() {
               <p className="mt-3 text-sm leading-relaxed text-soft">
                 If you are planning an evaluation or pilot, map the stages and expected inputs before you request a program.
               </p>
-              <Link href="/implementation" className="mt-6 inline-flex text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+              <Link href="/implementation" className="mt-6 inline-flex text-accent text-sm font-semibold hover:text-white">
                 View implementation path {'->'}
               </Link>
             </article>
@@ -109,4 +109,3 @@ export default function ComparisonPage() {
     </>
   );
 }
-

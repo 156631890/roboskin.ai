@@ -18,7 +18,7 @@ export default function DownloadsPage() {
           <span className="eyebrow">Downloads</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">Request technical material</h1>
-            <Link href="/contact?requestType=datasheet" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/contact?requestType=datasheet" className="text-accent text-sm font-semibold hover:text-white">
               Request datasheet {'->'}
             </Link>
           </div>
@@ -34,7 +34,7 @@ export default function DownloadsPage() {
             <div key={section.title}>
               <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                 <h2 className="text-2xl font-semibold text-white">{section.title}</h2>
-                <Link href="/resources" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+                <Link href="/resources" className="text-accent text-sm font-semibold hover:text-white">
                   View resources index {'->'}
                 </Link>
               </div>
@@ -44,7 +44,7 @@ export default function DownloadsPage() {
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <p className="text-soft text-xs uppercase tracking-[0.14em]">{item.availability}</p>
                       {item.href ? (
-                        <Link href={item.href} className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+                        <Link href={item.href} className="text-accent text-sm font-semibold hover:text-white">
                           {item.ctaLabel ?? 'Request'} {'->'}
                         </Link>
                       ) : null}
@@ -73,10 +73,7 @@ export default function DownloadsPage() {
               >
                 Talk to engineering
               </Link>
-              <Link
-                href="/comparison"
-                className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
-              >
+              <Link href="/comparison" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                 Compare offers
               </Link>
             </div>
@@ -86,4 +83,3 @@ export default function DownloadsPage() {
     </>
   );
 }
-
