@@ -80,6 +80,7 @@ export const site = {
     privacyEmail: 'privacy@roboskin.ai',
     directEmail: 'messigoat47@gmail.com',
     whatsapp: '15755596955',
+    whatsappDial: '8615755596955',
     wechat: '15755596955',
   },
 };

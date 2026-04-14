@@ -30,7 +30,7 @@ export default function Footer() {
                 Direct: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
               </p>
               <p>
-                WhatsApp: <a className="text-accent hover:text-[#7dd3fc]" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a>
+                WhatsApp: <a className="text-accent hover:text-[#7dd3fc]" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a>
               </p>
               <p>
                 WeChat: <span className="text-white">{site.contact.wechat}</span>

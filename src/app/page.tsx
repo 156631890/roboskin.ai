@@ -249,7 +249,7 @@ export default function Home() {
             </p>
             <p className="mt-2 text-sm text-[#9aa3b2]">
               WhatsApp:{' '}
-              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">
+              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">
                 {site.contact.whatsapp}
               </a> | WeChat: <span className="text-white">{site.contact.wechat}</span>
             </p>
