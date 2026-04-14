@@ -1,104 +1,154 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #06080c;
+  --bg-soft: #0d1016;
+  --panel: #11151d;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #f5f6f8;
+  --text-soft: #9aa3b2;
+  --primary: #62a8ff;
+  --secondary: #7dd3fc;
+  --accent: #62a8ff;
+  --max-width: 1440px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --grid: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(98, 168, 255, 0.16) 0, transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(125, 211, 252, 0.1) 0, transparent 28%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  color: var(--text);
+  font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
+  text-rendering: geometricPrecision;
+  overflow-x: hidden;
 }
 
-/* Cyberpunk Animations */
-@keyframes neon-flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
-    text-shadow:
-      0 0 4px #fff,
-      0 0 11px #fff,
-      0 0 19px #fff,
-      0 0 40px #0fa,
-      0 0 80px #0fa,
-      0 0 90px #0fa,
-      0 0 100px #0fa,
-      0 0 150px #0fa;
-  }
-  20%, 24%, 55% {
-    text-shadow: none;
-  }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+a {
+  color: inherit;
 }
 
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
+.container-shell {
+  width: min(var(--max-width), calc(100% - 2rem));
+  margin: 0 auto;
 }
 
-/* Custom Scrollbar */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background: linear-gradient(120deg, rgba(98, 168, 255, 0.12), rgba(125, 211, 252, 0.04));
+  color: #d7e7ff;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.glass-card {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--panel) 96%, var(--bg-soft) 4%),
+      color-mix(in srgb, var(--panel) 92%, black 8%)
+    ),
+    var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 24px 70px color-mix(in srgb, black 38%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
+}
+
+.surface-shell {
+  background: rgba(6, 8, 12, 0.82);
+  border-color: var(--panel-border);
+}
+
+.surface-shell-strong {
+  background: rgba(6, 8, 12, 0.96);
+}
+
+.surface-panel {
+  background: var(--panel);
+}
+
+.surface-panel-soft {
+  background: var(--bg-soft);
+}
+
+.text-soft {
+  color: var(--text-soft);
+}
+
+.text-accent {
+  color: var(--primary);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: var(--bg-soft);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #22d3ee, #a855f7);
+  background: linear-gradient(180deg, #7fb9ff, #62a8ff);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0891b2, #7c3aed);
+  background: linear-gradient(180deg, #62a8ff, #7dd3fc);
 }
 
-/* Selection */
 ::selection {
-  background-color: #22d3ee;
-  color: #0f172a;
+  background-color: var(--accent);
+  color: #06080c;
 }
 
-/* Smooth Scroll */
 html {
   scroll-behavior: smooth;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: floatUp 0.7s ease-out both;
 }
 

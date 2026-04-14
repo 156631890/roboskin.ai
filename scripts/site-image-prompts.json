@@ -1,0 +1,94 @@
+[
+  {
+    "filename": "hero-lab.jpg",
+    "prompt": "Ultra realistic cinematic robotics laboratory, humanoid robotic arm with translucent artificial skin layer and glowing sensor mesh, photoreal, high detail, clean composition, teal and steel palette, no text, no watermark"
+  },
+  {
+    "filename": "product-sensor-array.jpg",
+    "prompt": "Macro product photography of flexible graphene tactile sensor array sheet, precise electronics details, premium studio lighting, photoreal, dark technical background, no text"
+  },
+  {
+    "filename": "product-processing-unit.jpg",
+    "prompt": "High-end industrial edge computing module for tactile robotics, aluminum enclosure, ports visible, dramatic studio light, photoreal, no logo, no text"
+  },
+  {
+    "filename": "product-dev-kit.jpg",
+    "prompt": "Professional robotics development kit laid out neatly on workbench, tactile sensor pads, control unit, cables, engineering blueprint style environment, photoreal, no text"
+  },
+  {
+    "filename": "tech-sensor-layer.jpg",
+    "prompt": "Cutaway visualization of robotic skin showing multi-layer tactile sensor architecture, scientific style yet photoreal, cyan highlights, dark clean background, no text"
+  },
+  {
+    "filename": "tech-neuromorphic-core.jpg",
+    "prompt": "Futuristic neuromorphic processor board with luminous signal paths representing touch data flow, photoreal industrial style, high contrast, no text"
+  },
+  {
+    "filename": "tech-self-healing.jpg",
+    "prompt": "Robotic artificial skin surface repairing tiny crack with polymer regeneration effect, scientifically plausible, photoreal macro shot, no text"
+  },
+  {
+    "filename": "contact-lab-team.jpg",
+    "prompt": "Engineering team in advanced robotics lab discussing tactile system integration near robotic arm, premium corporate photography style, photoreal, no text"
+  },
+  {
+    "filename": "team-sarah-chen.jpg",
+    "prompt": "Corporate headshot portrait of an Asian female robotics CEO in her late 30s, confident expression, modern robotics lab background, shallow depth of field, photoreal, professional lighting, no text, no logo"
+  },
+  {
+    "filename": "team-michael-rodriguez.jpg",
+    "prompt": "Corporate headshot portrait of a Latino male CTO in his 50s, slight smile, advanced neuromorphic hardware lab background, photoreal, studio quality, no text, no logo"
+  },
+  {
+    "filename": "team-emily-watson.jpg",
+    "prompt": "Corporate headshot portrait of a white female materials scientist in her 40s, intelligent and approachable expression, polymer materials lab setting, photoreal, high detail, no text, no logo"
+  },
+  {
+    "filename": "team-james-liu.jpg",
+    "prompt": "Corporate headshot portrait of an East Asian male engineering VP in his 40s, professional attire, robotics integration lab background, photoreal, cinematic but realistic lighting, no text, no logo"
+  },
+  {
+    "filename": "research-neuromorphic-2026.jpg",
+    "prompt": "Scientific visualization of neuromorphic tactile sensor array achieving ultra-fine force detection, close-up hardware details, teal and blue accents, realistic laboratory style, photoreal, no text"
+  },
+  {
+    "filename": "research-graphene-quantum-tunneling.jpg",
+    "prompt": "Macro scientific image of graphene layered tactile sensor with nanoscale gap concept, quantum tunneling inspired glow, photoreal technical aesthetic, dark clean background, no text"
+  },
+  {
+    "filename": "research-self-healing-2025.jpg",
+    "prompt": "Photoreal macro shot of robotic skin material repairing a cut seam, self-healing polymer effect, clean scientific style, subtle cyan highlights, no text"
+  },
+  {
+    "filename": "research-multimodal-sensing-2025.jpg",
+    "prompt": "Robotic hand with layered sensors representing pressure, temperature, and proximity sensing in one skin surface, realistic lab photo style, high detail, no text"
+  },
+  {
+    "filename": "research-bio-integration-2025.jpg",
+    "prompt": "Medical robotics scene showing prosthetic hand tactile interface concept with neural connection visualization, clinically clean environment, photoreal, no gore, no text"
+  },
+  {
+    "filename": "research-scalable-manufacturing-2025.jpg",
+    "prompt": "Industrial roll-to-roll manufacturing line producing flexible electronic tactile skin sheets, factory environment, photoreal, high detail machinery, no text"
+  },
+  {
+    "filename": "research-ai-tactile-learning-2025.jpg",
+    "prompt": "Robot hand exploring assorted objects on a lab table for self-supervised tactile learning, realistic robotics lab, photoreal, no text"
+  },
+  {
+    "filename": "research-extreme-environment-2025.jpg",
+    "prompt": "Space robotics arm with tactile skin operating on rocky extraterrestrial terrain under harsh environment, realistic science style, photoreal, no text"
+  },
+  {
+    "filename": "case-medtronic-surgery.jpg",
+    "prompt": "Advanced surgical robot with tactile sensing end-effector in modern operating room, realistic medical technology photography, no text, no logo"
+  },
+  {
+    "filename": "case-tesla-manufacturing.jpg",
+    "prompt": "Industrial robotic arm with tactile skin handling battery components on precision assembly line, photoreal manufacturing scene, no logo, no text"
+  },
+  {
+    "filename": "case-nasa-sample-handling.jpg",
+    "prompt": "Space exploration robotic manipulator with tactile surface collecting rock sample in Mars-like terrain, realistic mission style image, no text, no logo"
+  }
+]
