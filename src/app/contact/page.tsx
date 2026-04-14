@@ -24,6 +24,9 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 space-y-2 text-sm text-[#4f5560]">
               <p>Primary: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
+              <p>Direct: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a></p>
+              <p>WhatsApp: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
+              <p>WeChat: <span className="text-[#111318]">{site.contact.wechat}</span></p>
               <p>Sales: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a></p>
               <p>Legal: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a></p>
             </div>
@@ -69,7 +72,7 @@ export default function ContactPage() {
             </ul>
             <div className="mt-8 rounded-2xl border border-[#d9d3c8] bg-[#fbfaf7] p-5">
               <p className="text-sm text-[#4f5560]">
-                For direct inquiries: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+                For direct inquiries: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
               </p>
             </div>
           </div>

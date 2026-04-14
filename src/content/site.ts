@@ -7,6 +7,9 @@ export const site = {
     salesEmail: 'sales@roboskin.ai',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
+    directEmail: 'messigoat47@gmail.com',
+    whatsapp: '15755596955',
+    wechat: '15755596955',
   },
 };
 

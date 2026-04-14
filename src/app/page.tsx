@@ -134,7 +134,10 @@ export default function Home() {
               </Link>
             </div>
             <p className="mt-4 text-sm text-[#b9bec8]">
-              Direct inquiries: <a className="text-white underline decoration-white/40 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+              Direct inquiries: <a className="text-white underline decoration-white/40 underline-offset-4" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
+            </p>
+            <p className="mt-2 text-sm text-[#b9bec8]">
+              WhatsApp: <a className="text-white underline decoration-white/40 underline-offset-4" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a> · WeChat: <span className="text-white">{site.contact.wechat}</span>
             </p>
           </div>
         </div>

@@ -75,7 +75,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
     if (!response.ok) {
       setStatus('error');
-      setFeedback('Something went wrong. Please email us at ' + site.contact.primaryEmail + '.');
+      setFeedback('Something went wrong. Please email us at ' + site.contact.directEmail + '.');
       return;
     }
 
@@ -210,7 +210,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       </div>
 
       <p className="text-sm text-[#4f5560]">
-        For direct inquiries: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+        For direct inquiries: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
       </p>
     </form>
   );

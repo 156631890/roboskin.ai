@@ -27,6 +27,15 @@ export default function Footer() {
                 Email: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
               </p>
               <p>
+                Direct: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
+              </p>
+              <p>
+                WhatsApp: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a>
+              </p>
+              <p>
+                WeChat: <span className="text-[#111318]">{site.contact.wechat}</span>
+              </p>
+              <p>
                 Sales: <a className="text-[#2e5bff] hover:text-[#2446c8]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
               </p>
             </div>
