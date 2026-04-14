@@ -72,7 +72,7 @@ export type NewsItem = {
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
-  tagline: 'Tactile sensor skin for robotics',
+  tagline: 'Tactile AI for humanoid robot skin',
   contact: {
     primaryEmail: 'contact@roboskin.ai',
     salesEmail: 'sales@roboskin.ai',
@@ -120,70 +120,74 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: '3', label: 'Core offers' },
-  { value: '4', label: 'Solution areas' },
-  { value: '1', label: 'Contact path' },
-  { value: '0', label: 'Unsupported claims' },
+  { value: 'High-density', label: 'Spatial Resolution' },
+  { value: 'Low-latency', label: 'Latency' },
+  { value: 'Curve-ready', label: 'Stretchability' },
+  { value: 'Private brief', label: 'Deployment Fit' },
 ];
 
 export const homeProofPoints: ContentTile[] = [
   {
-    title: 'Evaluation-first positioning',
-    description: 'Make it easy to decide where to start: datasheet review, a pilot kit, or a custom integration review.',
+    title: 'Acquisition-friendly brand',
+    description: 'A short, memorable name and a high-end visual system make the domain feel like a real category asset.',
   },
   {
-    title: 'Engineering support path',
-    description: 'Clarify what the team needs from you and what you can expect next from RoboSkin engineering.',
+    title: 'Technical vocabulary',
+    description: 'Use words buyers already expect to see in tactile hardware: spatial resolution, latency, stretchability, and fit.',
   },
   {
-    title: 'Request-only assets, no dead downloads',
-    description: 'Route missing public materials into a request flow instead of listing unsupported downloads.',
+    title: 'Private technical material',
+    description: 'Keep deeper specs behind a deck or datasheet request so the public page stays elegant and disciplined.',
   },
   {
-    title: 'Claims discipline',
-    description: 'Keep public copy grounded in verified capabilities and clearly label what must be confirmed on request.',
+    title: 'Searchable category terms',
+    description: 'Tactile AI, humanoid robot skin, and e-skin are placed naturally so the site reads well and indexes well.',
   },
 ];
 
 export const homeUseCases = [
   {
-    title: 'Robotic grippers',
-    text: 'Improve object handling, slip detection, and contact awareness for industrial manipulation.',
+    title: 'Humanoid robot hands',
+    text: 'Add touch feedback to dexterous manipulation, contact response, and force-limited control.',
   },
   {
-    title: 'Humanoid contact sensing',
-    text: 'Add responsive touch feedback across hands, arms, and torso surfaces.',
+    title: 'Industrial safety skins',
+    text: 'Wrap collaborative robots in a visible contact layer that supports safer interaction.',
   },
   {
-    title: 'Prosthetics and medical devices',
-    text: 'Support safer force control and better user experience for assistive systems.',
+    title: 'Precision grasping',
+    text: 'Improve slip awareness, fragile-object handling, and grip confidence for manipulation teams.',
+  },
+  {
+    title: 'Assistive surfaces',
+    text: 'Support safer force control and better surface feedback for medical and assistive devices.',
   },
 ];
 
 export const productCards = [
   {
-    name: 'RS-1000 Sensor Array',
-    bestFor: 'Research teams and OEM pilots',
-    summary: 'Flexible tactile array for proof-of-concept integration and early validation.',
-    inputsOutputs: 'Surface integration, force events, local signal output',
-    specs: ['High-density sensing layout', 'Flexible form factors', 'Integration support available', 'Verified specs only'],
+    name: 'Tactile Sensor Module',
+    bestFor: 'Robot hand and gripper programs',
+    summary: 'Flexible tactile hardware for evaluation, demos, and pilot integration.',
+    inputsOutputs: 'Surface integration, contact events, robot-ready signals',
+    specs: ['High-density sensing layout', 'Flexible form factors', 'Private datasheet on request', 'Pilot support'],
     cta: 'Request datasheet',
   },
   {
     name: 'Developer Kit',
     bestFor: 'Engineering teams that need a fast prototype path',
-    summary: 'Hardware and documentation bundle for initial robotics integration work.',
-    inputsOutputs: 'Sample sensors, SDK access, integration guidance',
+    summary: 'Hardware, examples, and integration notes for bringing tactile sensing into a stack quickly.',
+    inputsOutputs: 'Sample sensors, examples, integration guidance',
     specs: ['Developer workflow', 'API access', 'Pilot-friendly setup', 'Request availability'],
     cta: 'Talk to engineering',
   },
   {
-    name: 'Custom Integration Program',
+    name: 'Custom Skin Program',
     bestFor: 'Programs with a specific robot, geometry, or environment',
-    summary: 'Application-driven support for custom form factors and deployment constraints.',
-    inputsOutputs: 'Requirements review, integration path, custom scoping',
+    summary: 'Application-driven support for custom form factors, mounting constraints, and deployment fit.',
+    inputsOutputs: 'Requirements review, geometry scoping, custom delivery',
     specs: ['Custom geometry', 'Program scoping', 'Engineering consultation', 'Quote on request'],
-    cta: 'Request a demo',
+    cta: 'Request a deck',
   },
 ];
 

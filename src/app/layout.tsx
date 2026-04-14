@@ -19,20 +19,20 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
-    template: "%s | RoboSkin.ai"
+    default: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
+    template: '%s | RoboSkin.ai'
   },
-  description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams, OEM programs, and research deployments.",
+  description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components with a high-end brand presence for robotics, e-skin, and private evaluation decks.',
   keywords: [
-    "robotic skin",
-    "tactile sensors",
-    "flexible tactile sensors",
-    "integration",
-    "robotics",
-    "prosthetics",
-    "humanoid robots",
-    "robotic grippers",
-    "tactile sensing"
+    'robot skin',
+    'robotic skin',
+    'tactile AI',
+    'tactile sensors',
+    'humanoid robot skin',
+    'e-skin',
+    'robotics',
+    'robotic grippers',
+    'tactile sensing'
   ],
   authors: [{ name: site.name }],
   creator: site.name,
@@ -43,26 +43,26 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: 'website',
+    locale: 'en_US',
     url: site.url,
-    title: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
-    description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams.",
+    title: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
+    description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components for robotics teams, private decks, and e-skin programs.',
     siteName: site.name,
     images: [
       {
-        url: "/og-image.jpg",
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: "RoboSkin.ai tactile sensor skin for robotics"
+        alt: 'RoboSkin.ai robot skin for the next generation of machines'
       }
     ]
   },
   twitter: {
-    card: "summary_large_image",
-    title: "RoboSkin.ai | Tactile Sensor Skin for Robotics",
-    description: "RoboSkin.ai builds tactile sensor skin and integration support for robotics teams.",
-    images: ["/twitter-image.jpg"],
+    card: 'summary_large_image',
+    title: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
+    description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components.',
+    images: ['/twitter-image.jpg'],
   },
   robots: {
     index: true,
@@ -76,8 +76,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code"
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code'
   },
   alternates: {
     canonical: site.url

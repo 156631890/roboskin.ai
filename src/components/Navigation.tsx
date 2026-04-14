@@ -23,7 +23,7 @@ export default function Navigation() {
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-xl font-bold tracking-tight text-white">{site.name}</span>
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-soft">TACTILE SYSTEMS</span>
+                <span className="text-[10px] font-semibold tracking-[0.18em] text-soft">TACTILE AI</span>
               </div>
             </Link>
           </div>
@@ -44,10 +44,10 @@ export default function Navigation() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/contact?requestType=datasheet"
               className="ml-2 rounded-xl bg-[var(--primary)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_24px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
             >
-              Talk to engineering
+              Request a deck
             </Link>
           </div>
 
@@ -84,11 +84,11 @@ export default function Navigation() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/contact?requestType=datasheet"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 block rounded-lg bg-[var(--primary)] px-4 py-3 text-center text-sm font-bold text-white"
             >
-              Talk to engineering
+              Request a deck
             </Link>
           </div>
         </div>
