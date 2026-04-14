@@ -24,6 +24,9 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 space-y-2 text-sm text-soft">
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
+              <p>Direct: <a className="text-accent hover:text-white" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a></p>
+              <p>WhatsApp: <a className="text-accent hover:text-white" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
+              <p>WeChat: <span className="text-white">{site.contact.wechat}</span></p>
               <p>Sales: <a className="text-accent hover:text-white" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a></p>
               <p>Legal: <a className="text-accent hover:text-white" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a></p>
             </div>
@@ -77,7 +80,7 @@ export default function ContactPage() {
             </div>
             <div className="mt-8 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
               <p className="text-sm text-soft">
-                For direct inquiries: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+                For direct inquiries: <a className="text-accent hover:text-white" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
               </p>
             </div>
           </div>
@@ -86,3 +89,5 @@ export default function ContactPage() {
     </>
   );
 }
+
+

@@ -243,9 +243,15 @@ export default function Home() {
             </div>
             <p className="mt-4 text-sm text-[#9aa3b2]">
               Direct inquiries:{' '}
-              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
-                {site.contact.primaryEmail}
+              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.directEmail}`}>
+                {site.contact.directEmail}
               </a>
+            </p>
+            <p className="mt-2 text-sm text-[#9aa3b2]">
+              WhatsApp:{' '}
+              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">
+                {site.contact.whatsapp}
+              </a> | WeChat: <span className="text-white">{site.contact.wechat}</span>
             </p>
           </div>
         </div>
@@ -253,3 +259,4 @@ export default function Home() {
     </>
   );
 }
+

@@ -27,6 +27,15 @@ export default function Footer() {
                 Email: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
               </p>
               <p>
+                Direct: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
+              </p>
+              <p>
+                WhatsApp: <a className="text-accent hover:text-[#7dd3fc]" href={`https://wa.me/${site.contact.whatsapp}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a>
+              </p>
+              <p>
+                WeChat: <span className="text-white">{site.contact.wechat}</span>
+              </p>
+              <p>
                 Sales: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
               </p>
             </div>
@@ -56,3 +65,4 @@ export default function Footer() {
     </footer>
   );
 }
+
