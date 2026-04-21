@@ -1,32 +1,13 @@
 import Link from 'next/link';
 import { homeProofPoints, homeStats, homeUseCases, productCards, site } from '@/content/site';
 
-const heroSignals = [
-  {
-    title: 'Spatial Resolution',
-    text: 'Dense tactile coverage designed to read contact on hands, arms, and grippers.',
-  },
-  {
-    title: 'Latency',
-    text: 'A private evaluation brief can explain the signal path without overpromising public numbers.',
-  },
-  {
-    title: 'Stretchability',
-    text: 'A flexible surface language helps the brand feel credible on curved robot geometries.',
-  },
-  {
-    title: 'Deployment Fit',
-    text: 'The public story stays narrow while the technical path remains clear for pilots and decks.',
-  },
-];
-
 export default function Home() {
   return (
     <>
       <section className="relative overflow-hidden pb-16 pt-16 md:pb-20 md:pt-20">
-        <div className="container-shell grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr]">
+        <div className="container-shell">
           <div className="reveal">
-            <span className="eyebrow">Tactile AI · Humanoid Robot Skin · e-skin</span>
+            <span className="eyebrow">Tactile AI / Humanoid Robot Skin / e-skin</span>
             <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-white md:text-7xl">
               Robot skin for the next generation of machines.
             </h1>
@@ -59,64 +40,6 @@ export default function Home() {
                   <p className="mt-1 text-sm text-[#9aa3b2]">{item.label}</p>
                 </article>
               ))}
-            </div>
-          </div>
-
-          <div className="reveal [animation-delay:0.1s]">
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(98,168,255,0.24),transparent_36%),linear-gradient(180deg,rgba(14,18,26,0.98),rgba(7,9,13,0.98))] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#62a8ff]/12 blur-3xl" />
-              <div className="absolute -bottom-24 left-8 h-56 w-56 rounded-full bg-[#7dd3fc]/10 blur-3xl" />
-
-              <div className="relative rounded-[24px] border border-white/8 bg-white/5 p-5">
-                <div className="flex items-center justify-between gap-4 border-b border-white/8 pb-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[#9aa3b2]">Flagship surface</p>
-                    <p className="mt-2 text-lg font-semibold tracking-tight text-white">Private brief for humanoid robot skin</p>
-                  </div>
-                  <span className="rounded-full border border-white/10 bg-[#0d1016] px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-[#d7e7ff]">
-                    Request only
-                  </span>
-                </div>
-
-                <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-                  <div className="overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#9aa3b2]">Surface map</p>
-                      <span className="h-2 w-2 rounded-full bg-[#62a8ff]" />
-                    </div>
-                    <div className="mt-5 grid gap-3">
-                      <div className="grid grid-cols-6 gap-2">
-                        {Array.from({ length: 24 }).map((_, index) => (
-                          <span
-                            key={index}
-                            className="h-10 rounded-xl border border-white/8 bg-[radial-gradient(circle_at_30%_30%,rgba(125,211,252,0.35),rgba(98,168,255,0.12)_35%,rgba(255,255,255,0.04)_70%)]"
-                          />
-                        ))}
-                      </div>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="rounded-2xl border border-white/8 bg-[#11151d] p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-[#9aa3b2]">Pressure zones</p>
-                          <p className="mt-2 text-sm text-white">Readable contact map for robot hands and curved surfaces.</p>
-                        </div>
-                        <div className="rounded-2xl border border-white/8 bg-[#11151d] p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-[#9aa3b2]">Signal output</p>
-                          <p className="mt-2 text-sm text-white">Cleaner robot-ready data for private evaluation decks.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    {heroSignals.map((signal, idx) => (
-                      <article key={signal.title} className="rounded-[24px] border border-white/8 bg-[#11151d] p-4" style={{ animationDelay: `${idx * 0.05}s` }}>
-                        <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">Signal {idx + 1}</p>
-                        <h2 className="mt-2 text-lg font-semibold tracking-tight text-white">{signal.title}</h2>
-                        <p className="mt-2 text-sm leading-relaxed text-[#9aa3b2]">{signal.text}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
