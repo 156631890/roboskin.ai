@@ -10,7 +10,7 @@ const exists = async (path) => {
 };
 
 test('site authority health checks pass', async () => {
-  const [sitemap, seo, layout, contactForm, site, nextConfig, caseStudies, llms] = await Promise.all([
+  const [sitemap, seo, layout, contactForm, site, nextConfig, caseStudies, llms, domainSale] = await Promise.all([
     read('src/app/sitemap.ts'),
     read('src/lib/seo.ts'),
     read('src/app/layout.tsx'),
@@ -19,6 +19,7 @@ test('site authority health checks pass', async () => {
     read('next.config.ts'),
     read('src/app/case-studies/page.tsx'),
     read('public/llms.txt'),
+    read('public/domain-sale.html'),
   ]);
 
   assert.match(sitemap, /blogPosts/);
@@ -34,6 +35,8 @@ test('site authority health checks pass', async () => {
   assert.match(caseStudies, /buildPageMetadata\('\/case-studies'\)/);
   assert.doesNotMatch(caseStudies, /robots:\s*\{\s*index:\s*false/);
   assert.match(llms, /https:\/\/roboskin\.ai\/research\/graphene-liquid-metal-3d-force-2026/);
+  assert.match(domainSale, /mailto:messigoat147@gmail\.com/);
+  assert.doesNotMatch(domainSale, /messigoat47@gmail\.com/);
   assert.match(layout, /\/site\.webmanifest/);
   assert.ok(await exists('public/og-image.svg'));
   assert.ok(await exists('public/twitter-image.svg'));
