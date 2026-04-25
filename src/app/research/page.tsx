@@ -1,16 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 import { getBlogSummaries } from '@/lib/blog-data';
-import { site } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Research',
-  description: 'Conservative research and engineering notes. Request technical briefs for verified application-specific details.',
-  alternates: {
-    canonical: `${site.url}/research`,
-  },
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = buildPageMetadata('/research');
 
 export default function ResearchPage() {
   const summaries = getBlogSummaries();
@@ -22,6 +16,7 @@ export default function ResearchPage() {
 
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/research'), buildBreadcrumbJsonLd('/research')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Research</span>
@@ -32,8 +27,8 @@ export default function ResearchPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            These are public summaries only. We avoid journal, partnership, and benchmark claims on the public site. If you need verified details, request a
-            technical brief or an integration review.
+            These public notes summarize current robot skin and tactile sensing directions using conservative, source-backed language. Application-specific
+            performance, durability, and integration claims are verified through a technical brief or engineering review.
           </p>
         </div>
       </section>
@@ -54,10 +49,20 @@ export default function ResearchPage() {
                     <p className="text-soft text-xs uppercase tracking-[0.14em]">{post.date}</p>
                     <h3 className="mt-3 text-xl font-semibold text-white">{post.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-soft">{post.excerpt}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {post.technicalFocus.slice(0, 4).map((topic) => (
+                        <span key={topic} className="rounded-full border border-white/8 bg-[#0d1016] px-3 py-1 text-xs text-[#d8dce4]">
+                          {topic}
+                        </span>
+                      ))}
+                    </div>
                     <div className="mt-5 flex flex-wrap gap-3">
-                      <Link href="/downloads" className="text-accent text-sm font-semibold hover:text-white">
-                        Request brief {'->'}
+                      <Link href={`/research/${post.id}`} className="text-accent text-sm font-semibold hover:text-white">
+                        Read brief {'->'}
                       </Link>
+                      <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                        Source {'->'}
+                      </a>
                       <Link href="/resources" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
                         View resources {'->'}
                       </Link>

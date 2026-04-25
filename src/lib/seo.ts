@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
+import type { BlogPost } from '@/lib/blog-data';
 
 export type SeoRoute = {
   path: string;
@@ -103,6 +104,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     changeFrequency: 'weekly',
     index: true,
     breadcrumbs: ['Home', 'FAQ'],
+  },
+  '/research': {
+    path: '/research',
+    title: 'Robot Skin Research Notes and Technical Briefs',
+    description:
+      'Read current RoboSkin research notes on tactile sensing, robotic skin, e-skin, ROS 2 sensor pipelines, multimodal sensing, and dexterous robot hands.',
+    priority: 0.78,
+    changeFrequency: 'weekly',
+    index: true,
+    breadcrumbs: ['Home', 'Research'],
   },
   '/about': {
     path: '/about',
@@ -334,6 +345,36 @@ export function buildFaqJsonLd(items = faqItems) {
         text: item.answer,
       },
     })),
+  };
+}
+
+export function buildArticleJsonLd(post: BlogPost) {
+  const url = canonicalUrl(`/research/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    datePublished: post.date,
+    dateModified: post.updated,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+    },
+    publisher: {
+      '@id': `${site.url}/#organization`,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+    },
+    citation: post.sourceUrl,
+    about: post.technicalFocus,
   };
 }
 

@@ -5,925 +5,360 @@ export interface BlogPost {
   content: string;
   author: string;
   date: string;
+  updated: string;
   readTime: string;
   category: string;
   image: string;
+  sourceTitle: string;
+  sourceUrl: string;
+  technicalFocus: string[];
 }
 
-export type BlogSummary = Pick<BlogPost, 'id' | 'title' | 'excerpt' | 'category' | 'date'>;
+export type BlogSummary = Pick<
+  BlogPost,
+  'id' | 'title' | 'excerpt' | 'category' | 'date' | 'updated' | 'sourceTitle' | 'sourceUrl' | 'technicalFocus'
+>;
 
 export const blogPosts: BlogPost[] = [
   {
-    id: 'neuromorphic-tactile-2026',
-    title: 'Neuromorphic Tactile Sensing: Breaking Through the 0.01N Sensitivity Barrier',
-    excerpt: 'Research note: neuromorphic and event-based tactile processing concepts for improving sensitivity and latency. Request details for verified specs and measured results.',
-    content: `# Neuromorphic Tactile Sensing: Breaking Through the 0.01N Sensitivity Barrier
+    id: 'graphene-liquid-metal-3d-force-2026',
+    title: 'Graphene and liquid metal 3D force sensing for robot fingertips',
+    excerpt:
+      'A current technology brief on miniature tactile sensors that separate normal force, shear force, slip, and texture signals for dexterous robot hands.',
+    content: `# Graphene and liquid metal 3D force sensing for robot fingertips
 
-**Research note - January 2026**
+**Updated technical brief - April 2026**
 
-## Abstract
+## What changed
 
-We present a revolutionary neuromorphic tactile sensor architecture that achieves 0.01N force sensitivity - an order of magnitude improvement over previous state-of-the-art systems. Our bio-inspired design mimics the hierarchical organization of human mechanoreceptors.
+Graphene and liquid metal composite sensors are moving robot touch from simple pressure detection toward three-dimensional force sensing. Recent Cambridge work reports a miniaturized tactile sensor architecture based on graphene, deformable metal microdroplets, nickel particles, and skin-inspired microstructures.
 
-## Key Innovations
+The important technical shift is not a single sensitivity number. The shift is the ability to separate normal pressure from tangential shear, detect early slip, and estimate surface roughness in a compact package.
 
-### 1. Hierarchical Sensor Architecture
-- FA-I (Meissner)-like rapidly adapting receptors for texture
-- FA-II (Pacinian)-like sensors for vibration
-- SA-I (Merkel)-like slow adapters for pressure
-- Thermoreceptors for temperature discrimination
+## Why this matters for robot skin
 
-### 2. Event-Based Processing
-Our spiking neural network processes tactile events in real-time:
-- Latency: <0.5ms for stimulus localization
-- Energy efficiency: 3x lower power than conventional systems
-- Bandwidth: 90% reduction in data transmission
+- Normal force tells a controller how hard the robot is pressing.
+- Shear force indicates whether an object is sliding or about to slip.
+- Texture response helps classify surfaces without relying only on vision.
+- Smaller sensors make fingertip and curved-surface integration more realistic.
 
-### 3. Self-Calibrating Arrays
-- Automatic baseline compensation
-- Temperature drift correction
-- Wear adaptation over 100,000+ cycles
+## Integration notes
 
-## Performance Benchmarks
+For practical RoboSkin-style systems, this direction points toward tactile arrays that publish vector contact data instead of only scalar pressure maps. The engineering problem becomes calibration, mechanical packaging, thermal drift control, and clean signal routing on curved surfaces.
 
-| Metric | Our System | Human Touch | Previous Best |
-|--------|-----------|-------------|---------------|
-| Force Sensitivity | 0.01N | 0.01N | 0.1N |
-| Spatial Resolution | 1mm | 1mm | 2mm |
-| Response Time | 0.5ms | 1ms | 5ms |
-| Temperature Range | -40 degreesC to 120 degreesC | -10 degreesC to 50 degreesC | -20 degreesC to 80 degreesC |
+## What remains application-specific
 
-## Applications
+Claims about exact force range, durability, and fingertip-level spatial resolution should be verified for each geometry and substrate. Public pages should describe the sensing approach, while datasheets and integration reviews should carry measured values.
 
-This breakthrough enables:
-- Microsurgery with force feedback at cellular level
-- Prosthetics with natural touch perception
-- Robotic manipulation of fragile materials (eggshells, microchips)
-- Space exploration with extreme environment tolerance
+## Source
 
-## Collaborations
-
-This research was conducted in partnership with:
-- MIT CSAIL (Computational Design & Fabrication Group)
-- Stanford Bio-X Interdisciplinary Initiative
-- Technical University of Munich Robotics Lab
-
-## Future Directions
-
-Ongoing work focuses on:
-- Pain perception for safety systems
-- Emotional touch interpretation
-- Brain-machine interface integration
+[University of Cambridge: Graphene-based artificial skin brings human-like touch closer to robots](https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots)
 `,
-    author: 'Dr. Sarah Chen, PhD',
-    date: '2026-01-03',
-    readTime: '12 min read',
-    category: 'Peer-Reviewed Research',
-    image: '/generated/research-neuromorphic-2026.jpg'
+    author: 'RoboSkin technical team',
+    date: '2026-04-25',
+    updated: '2026-04-25',
+    readTime: '5 min read',
+    category: 'Tactile Hardware',
+    image: '/generated/research-graphene-quantum-tunneling.jpg',
+    sourceTitle: 'University of Cambridge graphene-based artificial skin report',
+    sourceUrl: 'https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots',
+    technicalFocus: ['graphene and liquid metal', '3D force sensing', 'slip detection', 'robot fingertips'],
   },
   {
-    id: 'graphene-quantum-tunneling',
-    title: 'Quantum Tunneling Effect in Graphene-Based Tactile Sensors',
-    excerpt: 'Materials note: graphene-based sensing concepts for higher sensitivity and wider dynamic range. Request verification notes for any application-specific claims.',
-    content: `# Quantum Tunneling Effect in Graphene-Based Tactile Sensors
+    id: 'single-material-soft-robotic-skin-2025',
+    title: 'Single-material soft robotic skin and impedance-based multimodal touch',
+    excerpt:
+      'A 2025 update on single-material soft robotic skin using electrical impedance tomography and machine learning to identify multiple contact types.',
+    content: `# Single-material soft robotic skin and impedance-based multimodal touch
 
-**Research note - December 2025**
+**Updated technical brief - April 2026**
 
-## Breakthrough Discovery
+## What changed
 
-Our team has successfully harnessed the quantum tunneling effect in graphene-based pressure sensors, achieving picometer-scale displacement resolution.
+Single-material soft robotic skin is becoming a serious alternative to patchwork sensor layouts. Cambridge and UCL researchers described a conductive hydrogel skin in which the whole surface acts as the sensor. The system uses electrical impedance tomography and machine learning to interpret touch, heat, damage, and multi-point contact patterns.
 
-## The Science
+The most useful idea for product teams is architectural simplicity: fewer discrete sensing components can reduce wiring, assembly complexity, and failure points.
 
-### Quantum Tunneling Principle
-When two graphene layers are separated by a sub-nanometer gap, electrons can tunnel through the barrier. This tunneling current is exponentially sensitive to the gap distance.
+## Technical takeaways
 
-### Architecture
-- Vertical graphene heterostructure
-- Nanoporous dielectric spacer (0.3-0.5nm gaps)
-- Percolated electrode network
-- Flexible polymer substrate
+- The skin can be molded over complex surfaces instead of only flat patches.
+- Electrical pathways across the material carry spatial information.
+- Machine learning helps identify which signal paths matter for a task.
+- Multimodal recognition is possible, but the model and calibration are part of the sensor system.
 
-## Technical Specifications
+## Deployment implications
 
-- Displacement resolution: 50 picometers
-- Force range: 0.001N to 100N (6+ orders of magnitude)
-- Dynamic range: 120dB
-- Frequency response: DC to 10kHz
-- Hysteresis: <0.1%
+For humanoid robot hands, large-area soft skins need robust attachment, repeatable calibration, and a service plan for damaged surfaces. The material is only one layer of the product; the useful system also needs electronics, firmware, data interfaces, and repeatable test methods.
 
-## Manufacturing
+## Source
 
-Scalable fabrication process:
-1. CVD graphene growth on copper
-squared. Transfer to flexible substrate
-cubed. Nanoporous polymer deposition
-4. Electrode patterning via laser ablation
-5. Encapsulation with self-healing polymer
-
-## Cost Analysis
-
-Manufacturing cost projections:
-- Lab scale: $500/cm^2
-- Pilot production: $50/cm^2
-- Mass production target: $5/cm^2
-
-## Patent Portfolio
-
-- US Patent 11,234,567: "Quantum Tunneling Tactile Sensor"
-- EU Patent 3456789: "Graphene Pressure Transducer Array"
-- Japan Patent 2025-123456: "High-Sensitivity Displacement Sensor"
-
-## Industry Impact
-
-This technology enables:
-- Currency authentication (micro-print detection)
-- Structural health monitoring (crack propagation)
-- Biometric authentication (finger vein patterns)
+[University of Cambridge: Single-material electronic skin gives robots the human touch](https://www.cam.ac.uk/stories/robotic-skin)
 `,
-    author: 'Prof. Michael Rodriguez, PhD',
-    date: '2025-12-20',
-    readTime: '10 min read',
-    category: 'Materials Science',
-    image: '/generated/research-graphene-quantum-tunneling.jpg'
+    author: 'RoboSkin technical team',
+    date: '2026-04-24',
+    updated: '2026-04-25',
+    readTime: '5 min read',
+    category: 'Soft E-Skin',
+    image: '/generated/research-self-healing-2025.jpg',
+    sourceTitle: 'University of Cambridge single-material electronic skin report',
+    sourceUrl: 'https://www.cam.ac.uk/stories/robotic-skin',
+    technicalFocus: ['single-material soft robotic skin', 'electrical impedance tomography', 'machine learning', 'multimodal touch'],
   },
   {
-    id: 'self-healing-2025',
-    title: 'Autonomous Self-Healing in Robotic Skin: 24-Hour Recovery Demonstration',
-    excerpt: 'Materials note: self-healing polymer approaches for improving serviceability and durability in robotic skin systems. Verified details are provided on request.',
-    content: `# Autonomous Self-Healing in Robotic Skin: 24-Hour Recovery Demonstration
+    id: 'full-hand-tactile-sensing-2025',
+    title: 'Full-hand tactile sensing for adaptive dexterous grasping',
+    excerpt:
+      'A review of why high-resolution tactile coverage across robotic hands matters for adaptive grasping and real-world manipulation.',
+    content: `# Full-hand tactile sensing for adaptive dexterous grasping
 
-**Research note - November 2025**
+**Updated technical brief - April 2026**
 
-## Abstract
+## What changed
 
-We demonstrate a self-healing polymer matrix capable of autonomously repairing cuts, tears, and punctures up to 5mm deep within 24 hours at ambient conditions - a 10x improvement over prior art.
+Research published in Nature Machine Intelligence in 2025 shows why full-hand tactile sensing matters. The reported F-TAC Hand integrates high-resolution tactile sensing across much of the hand surface and uses tactile feedback for adaptive manipulation.
 
-## Materials Innovation
+The broader lesson is that tactile sensing should not be treated as a decorative add-on. For dexterous hands, contact feedback changes what the controller can do during real interactions.
 
-### Triple-Network Design
-1. **Primary Network**: Covalent cross-linked polymer (structural integrity)
-squared. **Secondary Network**: Dynamic disulfide bonds (reversible healing)
-cubed. **Tertiary Network**: Hydrogen-bonding motifs (initial response)
+## Technical takeaways
 
-### Healing Mechanism
+- Full-hand tactile coverage supports contact-aware grasp adjustment.
+- High-resolution touch is valuable when visual information is blocked or incomplete.
+- Sensor placement must preserve hand motion and mechanical compliance.
+- Calibration and data reduction are critical because raw tactile streams are high dimensional.
 
-**Stage 1 (0-1 hour)**: Hydrogen bonds re-form across damage interface
-**Stage 2 (1-6 hours)**: Disulfide exchange begins
-**Stage 3 (6-24 hours)**: Complete network reconstitution
+## Product implication
 
-## Performance Data
+RoboSkin content should emphasize staged integration: start with a fit check, confirm surface geometry, select a sensing layout, and validate the data pipeline before claiming deployment readiness.
 
-| Damage Type | Healing Time | Recovery % | Cycles Supported |
-|-------------|--------------|------------|------------------|
-| Surface Scratch | 1 hour | 100% | 50,000+ |
-| 1mm Cut | 6 hours | 100% | 10,000+ |
-| 3mm Cut | 12 hours | 100% | 1,000+ |
-| 5mm Cut | 24 hours | 95% | 100+ |
+## Source
 
-## Environmental Tolerance
-
-- Temperature: 0 degreesC to 50 degreesC (no degradation)
-- Humidity: 10% to 90% RH
-- UV Exposure: No effect on healing ability
-- Chemical Resistance: Oils, solvents, mild acids/bases
-
-## Integration with Sensors
-
-Crucially, the healing process does not affect:
-- Sensor calibration
-- Electrical conductivity
-- Tactile sensitivity
-- Optical properties
-
-## Field Testing Results
-
-12-month deployment in three environments:
-
-**Manufacturing Plant**:
-- 47 healing events
-- Zero sensor degradation
-- Maintenance cost savings: 78%
-
-**Search & Rescue Robot**:
-- 23 healing events from debris
-- Continuous operation maintained
-- Mission success rate: 99.2%
-
-**Agricultural Robot**:
-- 156 healing events
-- Exposure to pesticides, fertilizers
-- No performance degradation
-
-## Commercialization
-
-Joint venture announced with Dow Chemical for mass production.
-Target market entry: Q3 2026
+[Nature Machine Intelligence: Embedding high-resolution touch across robotic hands enables adaptive human-like grasping](https://www.nature.com/articles/s42256-025-01053-3)
 `,
-    author: 'Dr. Emily Watson, PhD',
-    date: '2025-11-15',
-    readTime: '8 min read',
-    category: 'Materials Science',
-    image: '/generated/research-self-healing-2025.jpg'
+    author: 'RoboSkin technical team',
+    date: '2026-04-23',
+    updated: '2026-04-25',
+    readTime: '6 min read',
+    category: 'Dexterous Manipulation',
+    image: '/generated/research-multimodal-sensing-2025.jpg',
+    sourceTitle: 'Nature Machine Intelligence full-hand tactile sensing paper',
+    sourceUrl: 'https://www.nature.com/articles/s42256-025-01053-3',
+    technicalFocus: ['full-hand tactile sensing', 'adaptive grasping', 'dexterous manipulation', 'high-resolution touch'],
   },
   {
-    id: 'multimodal-sensing-2025',
-    title: 'Multimodal Tactile Perception: Fusing Touch with Thermal and Proximity Sensing',
-    excerpt: 'Systems note: multimodal skin architectures and integration tradeoffs (pressure, temperature, vibration, proximity). Confirm supported modalities on request.',
-    content: `# Multimodal Tactile Perception: Fusing Touch with Thermal and Proximity Sensing
+    id: 'temperature-pressure-bimodal-2025',
+    title: 'Temperature/pressure bimodal sensing and the crosstalk problem',
+    excerpt:
+      'A practical brief on temperature/pressure bimodal tactile sensing, signal decoupling, and why crosstalk matters for robot skin.',
+    content: `# Temperature/pressure bimodal sensing and the crosstalk problem
 
-**Research note - October 2025**
+**Updated technical brief - April 2026**
 
-## Introduction
+## What changed
 
-Biological skin provides far more than pressure information - it senses temperature, vibration, slip, and even proximity. We present the first artificial skin that integrates all these modalities.
+Temperature/pressure bimodal tactile sensing is a central e-skin direction because robots often need to understand both contact force and thermal conditions. A 2025 review in Journal of Materials Chemistry C highlights the practical issue: multimodal sensing is useful only when the signals can be separated reliably.
 
-## Sensor Suite
+## Technical takeaways
 
-### 1. Tactile Array
-- 10,000 taxels (tactile elements) per 100cm^2
-- 0.01N force sensitivity
-- 1kHz sampling rate per taxel
+- Pressure and temperature can be sensed through different physical mechanisms.
+- Crosstalk occurs when one stimulus changes the signal assigned to another stimulus.
+- Decoupled outputs can make calibration and interpretation cleaner.
+- Material choice, sensor stack design, and signal processing must be designed together.
 
-### 2. Thermal Array
-- 100 thermopiles per 100cm^2
-- Temperature range: -20 degreesC to 100 degreesC
-- Accuracy: ±0.1 degreesC
-- Response time: 10ms
+## Integration notes
 
-### 3. Vibration Sensors
-- 500 accelerometers per 100cm^2
-- Frequency range: 10Hz to 10kHz
-- Resolution: 0.001g
+For robotic skin, bimodal sensing should be specified as a system behavior: what variables are measured, how they are separated, how drift is handled, and what operating range has been verified.
 
-### 4. Proximity Array
-- Capacitive sensors
-- Range: 0.1mm to 10mm
-- Resolution: 0.01mm
+## Source
 
-## Sensor Fusion Architecture
-
-### Hardware Level
-- Time-division multiplexing reduces wiring
-- On-skin preprocessing ASIC
-- Event-based data transmission
-
-### Software Level
-- Kalman filtering for noise reduction
-- Bayesian fusion for uncertainty handling
-- Deep learning for pattern recognition
-
-## Demonstrated Capabilities
-
-### Material Identification
-- 98.7% accuracy on 100 materials
-- Classification based on texture + temperature + compliance
-- Training on synthetic data, tested on physical objects
-
-### Slip Prediction
-- 99.2% prediction accuracy
-- 50ms advance warning
-- Enables preventive grip adjustment
-
-### Object Recognition
-- 95.3% accuracy on common objects
-- Works without vision (in dark/occluded)
-- Continuous learning from new objects
-
-## Benchmark Comparison
-
-| Modality | Biological | Our System | Previous Artificial |
-|----------|-----------|------------|-------------------|
-| Pressure | [Y] | [Y] | [Y] only |
-| Temperature | [Y] | [Y] | [N] |
-| Vibration | [Y] | [Y] | Partial |
-| Proximity | Hair-like | [Y] | [N] |
-
-## Power Consumption
-
-Total power: 150mW per 100cm^2
-- Tactile: 80mW
-- Thermal: 40mW
-- Vibration: 25mW
-- Proximity: 5mW
-
-Battery life: 8 hours continuous operation (500mAh)
-
-## Real-World Validation
-
-Deployed on:
-1. **Prosthetic Hand**: Enabled hot/cold object discrimination
-squared. **Industrial Gripper**: Reduced object damage by 73%
-cubed. **Exploration Rover**: Rock classification without vision
-
-## Open Source Release
-
-All sensor fusion algorithms released as open source:
-https://github.com/roboskin-ai/multimodal-fusion
+[RSC Journal of Materials Chemistry C: Biological skin inspired temperature/pressure bimodal tactile sensing](https://pubs.rsc.org/en/content/articlehtml/2025/tc/d5tc02514a)
 `,
-    author: 'Dr. James Liu, PhD',
-    date: '2025-10-25',
-    readTime: '11 min read',
-    category: 'Systems Engineering',
-    image: '/generated/research-multimodal-sensing-2025.jpg'
+    author: 'RoboSkin technical team',
+    date: '2026-04-22',
+    updated: '2026-04-25',
+    readTime: '4 min read',
+    category: 'Multimodal Sensing',
+    image: '/generated/research-multimodal-sensing-2025.jpg',
+    sourceTitle: 'RSC temperature/pressure bimodal tactile sensing review',
+    sourceUrl: 'https://pubs.rsc.org/en/content/articlehtml/2025/tc/d5tc02514a',
+    technicalFocus: ['temperature/pressure bimodal', 'signal decoupling', 'crosstalk', 'multimodal e-skin'],
   },
   {
-    id: 'bio-integration-2025',
-    title: 'Direct Neural Interface: Bidirectional Communication Between Robotic Skin and Nervous System',
-    excerpt: 'Biomedical note: approaches and constraints for coupling tactile sensing and neural interfaces. Public copy stays cautious; request a technical brief if relevant.',
-    content: `# Direct Neural Interface: Bidirectional Communication Between Robotic Skin and Nervous System
+    id: 'event-based-opto-tactile-2025',
+    title: 'Event-based tactile sensing for sparse, low-latency robot touch',
+    excerpt:
+      'A current note on event-based and neuromorphic tactile sensing, including opto-tactile skins and sparse contact event processing.',
+    content: `# Event-based tactile sensing for sparse, low-latency robot touch
 
-**Research note - September 2025**
+**Updated technical brief - April 2026**
 
-## Groundbreaking Achievement
+## What changed
 
-For the first time, we've achieved bidirectional communication between artificial robotic skin and the human nervous system, enabling natural tactile sensation in prosthetic limbs.
+Event-based tactile sensing borrows ideas from neuromorphic vision: report changes as sparse events instead of streaming full frames or dense arrays continuously. A 2025 Frontiers article on event-based opto-tactile skin summarizes why this matters for robotics: lower data rates, fast response, and efficient processing of contact changes.
 
-## The Challenge
+## Technical takeaways
 
-Previous prosthetic systems provided:
-- [Y] Motor control (movement)
-- [N] Sensory feedback (no feeling)
-- Result: "Phantom limb" pain, poor control
+- Event streams are useful for slip, vibration, and rapid contact changes.
+- Sparse encoding can reduce bandwidth compared with dense polling.
+- Opto-tactile skins can keep electronics away from the most compliant surface.
+- The software stack must translate events into controller-friendly signals.
 
-## Our Solution
+## Integration notes
 
-### Architecture
-1. **Robotic Skin**: Captures tactile data
-squared. **Neural Encoder**: Converts signals to neural code
-cubed. **Bidirectional Interface**: Connects to peripheral nerves
-4. **Decoder**: Translates neural activity to sensory perception
+Event-based touch should be evaluated against the robot task. A fast slip detector may matter more than a dense pressure map for one gripper, while a humanoid palm may require both.
 
-### Key Innovation: Biomimetic Encoding
+## Source
 
-We discovered that artificial sensors must "speak the language" of nerves:
-- Spike timing matters, not just rate
-- Population coding across multiple electrodes
-- Adaptive sensitivity based on context
-
-## Clinical Trial Results
-
-### Subject: 45-year-old male, transradial amputee
-
-**Before** (traditional prosthesis):
-- Could grip objects
-- No sensation
-- Dropped objects 40% of time
-- Constant phantom pain
-
-**After** (12-month training with our system):
-- Natural tactile sensation restored
-- 98% reduction in object drops
-- 76% reduction in phantom pain
-- "Feels like my own hand"
-
-### Sensory Capabilities Achieved
-
-- Light touch detection (0.1g force)
-- Pressure discrimination (5 levels)
-- Texture identification (85% accuracy)
-- Temperature sensing (hot/cold)
-- Vibration perception
-
-## Technical Specifications
-
-- Electrodes: 32-channel Utah array
-- Sampling rate: 20kHz per channel
-- Latency: <50ms skin to perception
-- Power: Wireless, 8-hour battery
-- Calibration: Automatic adaptation over time
-
-## Safety & Reliability
-
-- FDA Breakthrough Device Designation
-- 18-month continuous use without failure
-- Biocompatible materials (ISO 10993 certified)
-- Cybersecurity: AES-256 encryption
-
-## Patient Feedback
-
-> "When I hold my daughter's hand, I can feel her squeeze back. It's not just movement anymore - it's connection."
-> - *Study Participant*
-
-## Next Steps
-
-Oaining expansion to 20 patients
-Target: FDA approval by 2027
-Insurance coverage discussions underway
-
-## Ethical Considerations
-
-Full IRB approval and oversight:
-- Informed consent process
-- Psychological support provided
-- Exit strategy if patient withdraws
-- Data privacy protections
-
-This research represents a new frontier in human-machine integration.`,
-    author: 'Dr. Sarah Chen, PhD & Dr. James Liu, PhD',
-    date: '2025-09-18',
-    readTime: '15 min read',
-    category: 'Medical Breakthrough',
-    image: '/generated/research-bio-integration-2025.jpg'
+[Frontiers in Neuroscience: An event-based opto-tactile skin](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full)
+`,
+    author: 'RoboSkin technical team',
+    date: '2026-04-21',
+    updated: '2026-04-25',
+    readTime: '4 min read',
+    category: 'Tactile AI',
+    image: '/generated/research-neuromorphic-2026.jpg',
+    sourceTitle: 'Frontiers event-based opto-tactile skin article',
+    sourceUrl: 'https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full',
+    technicalFocus: ['event-based', 'neuromorphic tactile sensing', 'opto-tactile skin', 'low-latency touch'],
   },
   {
-    id: 'scalable-manufacturing-2025',
-    title: 'Roll-to-Roll Manufacturing: Bringing Robotic Skin to Mass Market',
-    excerpt: 'Manufacturing note: scaling considerations for sensor arrays and flexible substrates. Request a verified cost/modeling discussion if needed.',
-    content: `# Roll-to-Roll Manufacturing: Bringing Robotic Skin to Mass Market
+    id: 'self-healing-multimodal-eskin-2026',
+    title: 'Self-healing multimodal e-skin: useful direction, careful claims',
+    excerpt:
+      'A conservative update on self-healing e-skin architectures that combine tactile, pressure, thermal, and damage-related signals.',
+    content: `# Self-healing multimodal e-skin: useful direction, careful claims
 
-**Research note - August 2025**
+**Updated technical brief - April 2026**
 
-## The Cost Barrier
+## What changed
 
-Previous robotic skin systems cost \$500-1000 per cm^2, limiting adoption to research and military applications.
+Self-healing e-skin remains a strong research direction because robot skin is exposed to abrasion, cuts, repeated compression, and bending. Recent work emphasizes stacked material architectures, liquid metal layers, polymer networks, and multimodal sensing.
 
-Our roll-to-roll process achieves **\$5 per cm^2** - a 100x-200x cost reduction.
+## Technical takeaways
 
-## Manufacturing Innovation
+- Healing performance depends on damage type, temperature, humidity, and mechanical load.
+- Structural recovery and signal recovery are separate claims.
+- Multimodal sensing increases usefulness but also increases calibration complexity.
+- Public content should avoid universal recovery claims unless measured on the exact device.
 
-### Traditional Process (Batches)
-- Cleanroom fabrication
-- Photolithography per layer
-- Manual alignment
-- Yield: 60-70%
-- Throughput: 10 units/day
+## Deployment implications
 
-### Our Process (Continuous)
-- Roll-to-roll processing
-- Printing-based deposition
-- Optical alignment
-- Yield: 98%
-- Throughput: 10,000 m^2/day
+For commercial robotic skin, the useful question is not whether a sample can heal in a lab. The useful question is whether the installed surface can preserve calibration, electrical continuity, attachment, and serviceability after repeated real-world damage.
 
-## Process Steps
+## Source
 
-1. **Substrate Preparation** (Roll 1)
-   - PET release liner, 125um thick
-   - Plasma treatment for adhesion
+[Chemical Engineering Journal: A self-healing e-skin for quadruple-modal sensing](https://www.sciencedirect.com/science/article/pii/S1385894725132531)
+`,
+    author: 'RoboSkin technical team',
+    date: '2026-04-20',
+    updated: '2026-04-25',
+    readTime: '4 min read',
+    category: 'Soft E-Skin',
+    image: '/generated/research-self-healing-2025.jpg',
+    sourceTitle: 'Chemical Engineering Journal self-healing e-skin article',
+    sourceUrl: 'https://www.sciencedirect.com/science/article/pii/S1385894725132531',
+    technicalFocus: ['self-healing e-skin', 'multimodal sensing', 'damage recovery', 'soft materials'],
+  },
+  {
+    id: 'ros2-kilted-tactile-pipeline-2026',
+    title: 'ROS 2 Kilted and tactile sensor data pipelines',
+    excerpt:
+      'A robotics software update on ROS 2 Kilted, rosbag2, ros2_control, force/torque broadcasters, and filter chains for tactile data workflows.',
+    content: `# ROS 2 Kilted and tactile sensor data pipelines
 
-squared. **Bottom Electrode** (Roll 2)
-   - Screen-printed silver nanowires
-   - Sheet resistance: 5 Ohm/sq
+**Updated technical brief - April 2026**
 
-cubed. **Active Layer** (Roll 3)
-   - Slot-die coated graphene composite
-   - Thickness: 10um ±0.5um
+## What changed
 
-4. **Top Electrode** (Roll 4)
-   - Gravure-printed PEDOT:PSS
-   - Pattern: 1mm taxel pitch
+ROS 2 Kilted Kaiju is the current stable ROS 2 distribution as of April 2026, while Jazzy and Humble remain supported long-term releases. For tactile sensing teams, the important updates are not marketing features. The practical updates are around middleware support, rosbag2 workflows, action data recording, and ros2_control sensor broadcasters.
 
-5. **Encapsulation** (Roll 5)
-   - Laminated self-healing polymer
-   - Thickness: 50um
+## Technical takeaways
 
-6. **Quality Control** (In-line)
-   - Optical inspection
-   - Electrical testing
-   - Tactile response verification
+- ROS 2 Kilted adds current middleware support, including Zenoh as a Tier 1 RMW implementation.
+- rosbag2 improvements help record, replay, inspect, and compare sensor sessions.
+- ros2_control Kilted release notes include filter chains for force/torque sensor readings.
+- Force/torque data can be transformed to target frames, which matters for robot hands and grippers.
 
-## Line Specifications
+## Integration notes
 
-- Web width: 500mm
-- Line speed: 10 m/min
-- Production: 5 m^2/hour = 120 m^2/day
-- Operating cost: \$50/hour
-- Equipment cost: \$5M (ROI < 2 years)
+A tactile skin integration should define message formats, timestamps, coordinate frames, QoS settings, replay strategy, and calibration metadata. Without these, good hardware data becomes hard to debug.
 
-## Quality Metrics
+## Sources
 
-### Defect Density
-- Short circuits: <1 per 1000 taxels
-- Open circuits: <2 per 1000 taxels
-- Performance variation: ±5% across sheet
+[ROS 2 Kilted distributions](https://docs.ros.org/en/kilted/Releases.html)
 
-### Reliability Testing
-- Flex cycles: 1,000,000 with <10% degradation
-- Temperature cycling: -40 degreesC to 120 degreesC, 1000 cycles
-- Humidity: 85% RH, 1000 hours
-- Chemical exposure: ISO 22196 certified
+[ros2_control Kilted release notes](https://control.ros.org/kilted/doc/ros2_controllers/doc/release_notes.html)
+`,
+    author: 'RoboSkin technical team',
+    date: '2026-04-19',
+    updated: '2026-04-25',
+    readTime: '5 min read',
+    category: 'Robotics Software',
+    image: '/generated/research-ai-tactile-learning-2025.jpg',
+    sourceTitle: 'ROS 2 and ros2_control Kilted documentation',
+    sourceUrl: 'https://docs.ros.org/en/kilted/Releases.html',
+    technicalFocus: ['ROS 2 Kilted', 'ros2_control', 'force/torque broadcaster', 'sensor data pipeline'],
+  },
+  {
+    id: 'large-area-flexible-tactile-arrays-2025',
+    title: 'Large-area flexible tactile arrays for curved robot surfaces',
+    excerpt:
+      'A deployment-focused article on large-area tactile arrays, curved-surface coverage, adjustable resolution, slippage detection, and manufacturing tradeoffs.',
+    content: `# Large-area flexible tactile arrays for curved robot surfaces
 
-## Scaling Economics
+**Updated technical brief - April 2026**
 
-| Scale | Capital Cost | Unit Cost | Annual Production |
-|-------|-------------|-----------|-------------------|
-| Pilot (1 line) | \$5M | \$10/cm^2 | 30,000 m^2 |
-| Factory (10 lines) | \$40M | \$5/cm^2 | 300,000 m^2 |
-| Mega-factory (100 lines) | \$300M | \$2/cm^2 | 3,000,000 m^2 |
+## What changed
 
-## Market Impact
+Large-area flexible tactile arrays are becoming more relevant as robot skin moves beyond fingertip demos. Recent work on high-resolution skin-inspired flexible tactile sensors focuses on coverage, curved surfaces, slippage detection, gesture recognition, and manufacturability.
 
-At \$5/cm^2:
-- Prosthetic hand skin: \$500 (vs \$50,000)
-- Surgical robot skin: \$2,000 (vs \$100,000)
-- Industrial gripper skin: \$300 (vs \$15,000)
+## Technical takeaways
 
-Market size projection: \$2B by 2030
+- Curved-surface coverage is a core design problem, not a styling detail.
+- Adjustable electrode geometry can trade resolution, routing complexity, and cost.
+- Slip direction and velocity are useful control signals for manipulation.
+- Durability testing must include repeated loading, bending, and attachment stress.
 
-## Commercial Partners
+## Product implication
 
-Announced partnerships with:
-- **3M**: Materials science and adhesive tech
-- **Dupont**: Polymer development
-- **Flex**: Circuit manufacturing
-- **Foxconn**: Mass production expertise
+For RoboSkin content, large-area arrays should be positioned as integration programs rather than one-size-fits-all parts. Surface geometry, mounting, cabling, connector placement, and data rates determine whether the array is practical.
 
-First commercial line breaking ground Q1 2026 in Austin, Texas.
+## Source
 
-## Environmental Impact
-
-Sustainable manufacturing:
-- 90% less energy than cleanroom fab
-- Water recycling: 95%
-- Material waste: <2%
-- Solar-powered facility planned
-
-## Regulatory Status
-
-- ISO 13485 (Medical devices)
-- IATF 16949 (Automotive)
-- ISO 9001 (General quality)
-
-This manufacturing breakthrough transforms robotic skin from laboratory curiosity to commercially viable product.`,
-    author: 'Mark Thompson, MBA & Dr. Emily Watson',
-    date: '2025-08-22',
-    readTime: '9 min read',
+[ACS Applied Electronic Materials: Large-area high-resolution skin-inspired flexible tactile sensor for robotic electronic skin](https://pubs.acs.org/doi/10.1021/acsaelm.5c01200)
+`,
+    author: 'RoboSkin technical team',
+    date: '2026-04-18',
+    updated: '2026-04-25',
+    readTime: '4 min read',
     category: 'Manufacturing',
-    image: '/generated/research-scalable-manufacturing-2025.jpg'
+    image: '/generated/research-scalable-manufacturing-2025.jpg',
+    sourceTitle: 'ACS large-area flexible tactile sensor article',
+    sourceUrl: 'https://pubs.acs.org/doi/10.1021/acsaelm.5c01200',
+    technicalFocus: ['large-area tactile array', 'curved robot surfaces', 'slip detection', 'manufacturing tradeoffs'],
   },
-  {
-    id: 'ai-tactile-learning-2025',
-    title: 'Self-Supervised Learning: Robots That Learn to Touch Through Exploration',
-    excerpt: 'AI note: self-supervised learning patterns for tactile perception pipelines. Avoids benchmark numbers in public copy; request methodology details if needed.',
-    content: `# Self-Supervised Learning: Robots That Learn to Touch Through Exploration
-
-**Research note - July 2025**
-
-## The Problem
-
-Traditional tactile learning requires:
-- Millions of labeled examples
-- Human annotation (expensive, slow)
-- Task-specific training
-- Poor generalization
-
-## Our Breakthrough: Self-Supervised Tactile Learning
-
-### Core Principle
-
-Babies don't start with labeled training data - they explore the world and learn. Our AI does the same.
-
-### Methodology: Touch-Consistency Learning
-
-When a robot touches an object from multiple angles, the perceptions should be consistent. Our network learns to enforce this consistency.
-
-### Architecture
-
-\`\`\`
-Tactile Input -> Encoder -> Latent Representation
-                         v
-                    Consistency Loss
-                         v
-                    Decoder -> Prediction
-\`\`\`
-
-## Training Process
-
-### Phase 1: Random Exploration (Week 1)
-- Robot touches objects randomly
-- Collects 100,000 tactile samples
-- No labels required
-
-### Phase 2: Self-Labeling (Week 2-4)
-- Clusters similar tactile patterns
-- Assigns provisional labels
-- Refines through iteration
-
-### Phase 3: Fine-Tuning (Week 5-8)
-- Minimal human feedback (100 examples)
-- Transfer learning to target tasks
-- Performance: 95% of fully supervised
-
-## Results
-
-### Zero-Shot Generalization
-
-After training on 100 household objects:
-- Tested on 20 novel objects
-- Accuracy: 89% (vs 12% random)
-- **Never seen test objects during training**
-
-### Sample Efficiency
-
-| Method | Training Samples | Accuracy | Training Time |
-|--------|-----------------|----------|---------------|
-| Supervised (baseline) | 1,000,000 | 94.2% | 7 days |
-| Our Self-Supervised | 100,000 | 92.8% | 2 days |
-| **Improvement** | **10x fewer** | **-1.4%** | **3.5x faster** |
-
-### Task Transfer
-
-Trained on exploration, tested on:
-- **Object recognition**: 91.3% accuracy
-- **Grasp stability**: 94.7% success rate
-- **Texture classification**: 88.9% accuracy
-- **Damage detection**: 96.2% sensitivity
-
-## Real-World Deployment
-
-### Warehouse Automation
-
-**Scenario**: Robot learns to handle packages
-
-**Training**:
-- 1 week of autonomous exploration
-- 5,000 package touches
-- Zero human intervention
-
-**Result**:
-- Reduced package damage by 67%
-- Learned to detect fragile items
-- Discovered 3 new damage patterns
-
-### Home Assistant
-
-**Scenario**: Robot learns household objects
-
-**Training**:
-- 2 weeks of home exploration
-- 15,000 object interactions
-- Minimal supervision
-
-**Result**:
-- Recognized 237 distinct objects
-- Learned appropriate grip forces
-- Avoided breakage (99.1% success)
-
-## Technical Innovation
-
-### Contrastive Predictive Coding
-- Predicts future tactile state
-- Learns temporal consistency
-- Discovers natural tactile features
-
-### Memory Mechanism
-- Stores 10,000 most informative touches
-- Retrieves similar experiences
-- Enables lifelong learning
-
-### Uncertainty Estimation
-- Knows what it doesn't know
-- Requests help when uncertain
-- Improves through active learning
-
-## Comparison to Human Learning
-
-| Aspect | Human Infant | Our System | |
-|--------|--------------|------------|---|
-| Time to basic competence | 12 months | 2 weeks |
-| Objects recognized | 1,000 | 10,000 |
-| Generalization | Excellent | Very Good |
-| Energy efficiency | 20W | 150W |
-| Parallel processing | Yes | No (yet) |
-
-## Open Source Release
-
-Training framework released:
-https://github.com/roboskin-ai/self-supervised-touch
-
-Includes:
-- Pre-trained models
-- Training scripts
-- Simulation environment
-- Demo datasets
-
-## Future Directions
-
-Active research on:
-- Multi-modal self-supervision (touch + vision)
-- Collaborative learning (robot swarms)
-- Continual learning (never forget)
-- Energy-efficient neuromorphic hardware`,
-    author: 'Dr. Sarah Chen, PhD & Prof. Michael Rodriguez',
-    date: '2025-07-15',
-    readTime: '13 min read',
-    category: 'Artificial Intelligence',
-    image: '/generated/research-ai-tactile-learning-2025.jpg'
-  },
-  {
-    id: 'extreme-environment-2025',
-    title: 'Robotic Skin for Space: Surviving and Thriving in Extreme Conditions',
-    excerpt: 'Environment note: design considerations for tactile systems in temperature- and vacuum-stressed deployments. Confirm requirements and verification plan on request.',
-    content: `# Robotic Skin for Space: Surviving and Thriving in Extreme Conditions
-
-**Research note - June 2025**
-**NASA-funded research grant #NNXX25AO56G**
-
-## Introduction
-
-Space exploration demands materials that function in extreme environments. We've developed robotic skin that operates from cryogenic to Venus-surface temperatures.
-
-## Temperature Extremes
-
-### Cryogenic Performance
-
-**Tested at**: -196 degreesC (liquid nitrogen)
-
-**Challenges**:
-- Material brittleness
-- Electrical resistance changes
-- Mechanical failure
-
-**Our Solutions**:
-- Nanocomposite polymer matrix
-- Carbon nanotube reinforcement
-- Liquid metal interconnects
-
-**Results**:
-- Full functionality maintained
-- 1,000 thermal cycles with no degradation
-- Tested: Lunar night conditions, Martian polar caps
-
-### High-Temperature Performance
-
-**Tested up to**: 500 degreesC (Venus surface)
-
-**Challenges**:
-- Polymer degradation
-- Sensor drift
-- Delamination
-
-**Our Solutions**:
-- Ceramic-polymer hybrid
-- Refractory metal traces
-- Silicate encapsulation
-
-**Results**:
-- Operates 8 hours at 500 degreesC
-- Gradual performance loss: 20% after 24 hours
-- Suitable for Venus lander missions
-
-## Vacuum & Radiation
-
-### Hard Vacuum Testing
-
-**Environment**: 10^-8 torr (space vacuum)
-
-**Issues Addressed**:
-- Outgassing contamination
-- Electrostatic discharge
-- Cold welding
-
-**Performance**:
-- Outgassing: <0.1% TML (Acceptable per NASA)
-- ESD protection: Integrated grounding mesh
-- 6-month ISS test planned
-
-### Radiation Hardness
-
-**Testing**: Gamma radiation, 10 Mrad total dose
-
-**Results**:
-- Polymer cross-linking actually improves
-- Sensors maintain calibration
-- Electronics: Radiation-hardened design
-
-## Space Mission Applications
-
-### 1. Lunar Surface Operations
-
-**Environment**: -173 degreesC to +127 degreesC, vacuum, abrasive dust
-
-**Our Robot Skin Functions**:
-- Rock sample identification
-- Tool use with force feedback
-- Dust seal monitoring
-
-### 2. Mars Exploration
-
-**Environment**: -140 degreesC to +20 degreesC, dust storms, low pressure
-
-**Applications**:
-- Ice detection (thermal + tactile)
-- Rock strength assessment
-- Drill operation monitoring
-
-### 3. Venus Lander
-
-**Environment**: 465 degreesC, 92 bar pressure, acidic atmosphere
-
-**Our System Survives**:
-- 8 hours operational at 500 degreesC
-- Pressure-resistant design
-- Corrosion-resistant materials
-
-### 4. Europa Enceladus Mission
-
-**Environment**: -200 degreesC, high radiation, ice
-
-**Proposed Use**:
-- Ice penetration sensing
-- Sample collection
-- Life detection (chemical sensors)
-
-## Testing Facilities
-
-### NASA Tests Performed At
-
-- **Glenn Research Center**: Cryogenic testing
-- **Jet Propulsion Laboratory**: Radiation testing
-- **Johnson Space Center**: Vacuum chamber
-- **Ames Research Center**: Extreme temperature cycling
-
-### Independent Verification
-
-All tests validated by:
-- NASA technical standards
-- Third-party labs (MIT, Stanford)
-- Peer review (this publication)
-
-## Mission Heritage
-
-### Tech Demo Missions
-
-**2027**: Lunar Gateway (external attachment)
-- 6-month operation
-- Sample handling
-- Tool use experiments
-
-**2029**: Mars 2020 successor rover
-- Arm-mounted skin patches
-- Rock abrasion tool sensing
-- Drill monitoring
-
-**2031**: Venus Atmospheric Maneuverable Platform (VAMP)
-- Leading edge sensors
-- Temperature profiling
-- Aerodynamic control
-
-## Technology Transfer
-
-Spin-off applications:
-- **Industrial**: Extreme temperature manufacturing
-- **Energy**: Geothermal well robotics
-- **Defense**: Firefighting robots
-
-## Specifications Summary
-
-| Parameter | Minimum | Maximum | Units |
-|-----------|---------|---------|-------|
-| Temperature | -196 | +500 |  degreesC |
-| Pressure | Vacuum | 100 | bar |
-| Radiation | 0 | 10 | Mrad |
-| Vacuum | 10^-8 | 1 | torr |
-| Vibration | 0 | 50 | g |
-| Shock | 0 | 1000 | g |
-
-## NASA TRL Level
-
-**Current**: TRL 6 (Subsystem prototype demonstrated)
-**Target**: TRL 9 (Flight proven) by 2028
-
-## Funding & Partners
-
-- NASA: \$12M (2023-2027)
-- ESA: EUR8M collaboration
-- JAXA: Joint development agreement
-
-## Future Work
-
-Under development:
-- Self-healing in vacuum (new challenge)
-- Integration with spacesuit gloves
-- Haptic feedback for astronaut teleoperation
-
-Space is the final frontier - our robotic skin is ready to go.`,
-    author: 'Dr. James Liu, PhD',
-    date: '2025-06-30',
-    readTime: '11 min read',
-    category: 'Space Technology',
-    image: '/generated/research-extreme-environment-2025.jpg'
-  }
 ];
 
 export function getBlogPostById(id: string): BlogPost | undefined {
-  return blogPosts.find(post => post.id === id);
+  return blogPosts.find((post) => post.id === id);
 }
 
 export function getBlogPostsByCategory(category: string): BlogPost[] {
-  return blogPosts.filter(post => post.category === category);
+  return blogPosts.filter((post) => post.category === category);
 }
 
 export function getBlogSummaries(): BlogSummary[] {
   return blogPosts
     .slice()
-    .sort((a, b) => b.date.localeCompare(a.date))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map((post) => ({
-    id: post.id,
-    title: post.title,
-    excerpt: post.excerpt,
-    category: post.category,
-    date: post.date,
+      id: post.id,
+      title: post.title,
+      excerpt: post.excerpt,
+      category: post.category,
+      date: post.date,
+      updated: post.updated,
+      sourceTitle: post.sourceTitle,
+      sourceUrl: post.sourceUrl,
+      technicalFocus: post.technicalFocus,
     }));
 }
