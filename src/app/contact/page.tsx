@@ -15,10 +15,10 @@ export default function ContactPage() {
       <section className="py-20 md:py-24">
         <div className="container-shell grid items-center gap-9 md:grid-cols-[1fr_0.95fr]">
           <div>
-            <span className="eyebrow">Contact</span>
-            <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">Talk to the RoboSkin team</h1>
+            <span className="eyebrow">Domain inquiry</span>
+            <h1 className="mt-5 text-4xl font-bold text-[var(--text)] md:text-6xl">Inquire about RoboSkin.ai</h1>
             <p className="mt-5 max-w-xl text-soft">
-              Tell us your use case, target form factor, and timeline. We&apos;ll help you find the right sensor or integration path.
+              Use this page for domain acquisition, partnership, content collaboration, or research notes related to robot skin and tactile AI.
             </p>
             <div className="mt-8 space-y-2 text-sm text-soft">
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
@@ -32,9 +32,9 @@ export default function ContactPage() {
             <div className="flex h-full items-center justify-center rounded-[16px] border border-white/8 bg-[#0d1016] p-6">
               <div className="max-w-sm text-center">
                 <p className="text-soft text-sm uppercase tracking-[0.16em]">Next step</p>
-                <h2 className="mt-3 text-2xl font-semibold text-white">Request a demo, datasheet, or integration review</h2>
+                <h2 className="mt-3 text-2xl font-semibold text-[var(--text)]">Domain acquisition is the primary path</h2>
                 <p className="mt-3 text-sm leading-relaxed text-soft">
-                  Use the form to route your request to engineering or sales. We will respond within 2 business days.
+                  Serious buyers should include intended use, timeline, and a budget or broker signal so the inquiry can be evaluated quickly.
                 </p>
               </div>
             </div>

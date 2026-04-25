@@ -9,71 +9,57 @@ type ContactFormState = {
   fullName: string;
   company: string;
   email: string;
-  robotPlatform: string;
-  targetSurface: string;
-  useCase: string;
-  interfaceNeeds: string;
-  message: string;
-  timeline: string;
   phone: string;
   requestType: string;
-  requestedAsset: string;
+  budgetSignal: string;
+  intendedUse: string;
   website: string;
+  message: string;
   consent: boolean;
 };
 
-const initialState = (requestType = 'general', requestedAsset = ''): ContactFormState => ({
+const initialState = (requestType = 'domain'): ContactFormState => ({
   fullName: '',
   company: '',
   email: '',
-  robotPlatform: '',
-  targetSurface: '',
-  useCase: '',
-  interfaceNeeds: '',
-  message: '',
-  timeline: '',
   phone: '',
   requestType,
-  requestedAsset,
+  budgetSignal: '',
+  intendedUse: '',
   website: '',
+  message: '',
   consent: false,
 });
 
 type ContactFormProps = {
   requestType?: string;
-  requestedAsset?: string;
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
 
 function buildMailtoHref(form: ContactFormState) {
-  const subject = `RoboSkin ${form.requestType} request from ${form.company || form.fullName}`;
+  const subject = `RoboSkin.ai ${form.requestType} inquiry from ${form.company || form.fullName}`;
   const body = [
     `Full name: ${form.fullName}`,
     `Company / organization: ${form.company}`,
     `Work email: ${form.email}`,
     `Phone: ${form.phone || 'Not provided'}`,
     `Request type: ${form.requestType}`,
-    `Requested asset: ${form.requestedAsset || 'Not specified'}`,
-    `Robot platform: ${form.robotPlatform}`,
-    `Target surface: ${form.targetSurface}`,
-    `Use case: ${form.useCase}`,
-    `Interface needs: ${form.interfaceNeeds || 'Not specified'}`,
-    `Timeline: ${form.timeline || 'Not specified'}`,
+    `Budget / seriousness signal: ${form.budgetSignal || 'Not provided'}`,
+    `Intended use: ${form.intendedUse || 'Not provided'}`,
     '',
     'Message:',
     form.message,
   ].join('\n');
 
-  return `mailto:${site.contact.primaryEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${site.contact.ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export default function ContactForm({ requestType, requestedAsset }: ContactFormProps) {
+export default function ContactForm({ requestType }: ContactFormProps) {
   const searchParams = useSearchParams();
-  const effectiveRequestType = requestType ?? searchParams.get('requestType') ?? 'general';
-  const effectiveRequestedAsset = requestedAsset ?? searchParams.get('requestedAsset') ?? '';
+  const effectiveRequestType = requestType ?? searchParams.get('requestType') ?? 'domain';
 
-  const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType, effectiveRequestedAsset));
+  const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
 
@@ -82,8 +68,8 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
   }
 
   useEffect(() => {
-    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
-  }, [effectiveRequestType, effectiveRequestedAsset]);
+    setForm(initialState(effectiveRequestType));
+  }, [effectiveRequestType]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -106,7 +92,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
     if (!contactFormEndpoint) {
       window.location.href = buildMailtoHref(form);
       setStatus('success');
-      setFeedback(`Your email client should open a prepared message to ${site.contact.primaryEmail}.`);
+      setFeedback(`Your email client should open a prepared message to ${site.contact.ownerEmail}.`);
       return;
     }
 
@@ -126,7 +112,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
     setStatus('success');
     setFeedback('Thanks. We received your request and will reply within 2 business days.');
-    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
+    setForm(initialState(effectiveRequestType));
   }
 
   return (
@@ -170,55 +156,25 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Robot platform
-          <input
-            required
-            value={form.robotPlatform}
-            onChange={(event) => updateField('robotPlatform', event.target.value)}
-            placeholder="Humanoid hand, gripper, cobot arm..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Target surface
-          <input
-            required
-            value={form.targetSurface}
-            onChange={(event) => updateField('targetSurface', event.target.value)}
-            placeholder="Fingertips, palm, curved shell, gripper pads..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Use case
-          <input
-            required
-            value={form.useCase}
-            onChange={(event) => updateField('useCase', event.target.value)}
-            placeholder="Robotic gripper, humanoid hand, prosthetic..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm text-soft">
-          Interface / SDK needs
+          Intended use
           <input
-            value={form.interfaceNeeds}
-            onChange={(event) => updateField('interfaceNeeds', event.target.value)}
-            placeholder="ROS 2, Python, C++, logging, replay..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            value={form.intendedUse}
+            onChange={(event) => updateField('intendedUse', event.target.value)}
+            placeholder="Startup brand, product line, lab project, media property..."
+            className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
         <label className="grid gap-2 text-sm text-soft">
-          Timeline
+          Budget / seriousness signal
           <input
-            value={form.timeline}
-            onChange={(event) => updateField('timeline', event.target.value)}
-            placeholder="Prototype this quarter, production next year..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            value={form.budgetSignal}
+            onChange={(event) => updateField('budgetSignal', event.target.value)}
+            placeholder="Acquisition budget, broker, timeline, or partnership scope"
+            className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
       </div>
@@ -253,20 +209,11 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             onChange={(event) => updateField('requestType', event.target.value)}
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           >
-            <option value="general">General</option>
-            <option value="demo">Demo</option>
-            <option value="datasheet">Datasheet</option>
-            <option value="integration">Integration</option>
+            <option value="domain">Domain acquisition</option>
+            <option value="partnership">Partnership or content collaboration</option>
+            <option value="research">Research / information request</option>
+            <option value="other">Other</option>
           </select>
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Requested asset
-          <input
-            value={form.requestedAsset}
-            onChange={(event) => updateField('requestedAsset', event.target.value)}
-            placeholder="RS-1000 Sensor Array"
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
         </label>
       </div>
 
@@ -300,7 +247,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       </div>
 
       <p className="text-sm text-soft">
-        For direct inquiries: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
+        For direct inquiries: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.ownerEmail}`}>{site.contact.ownerEmail}</a>
       </p>
     </form>
   );
