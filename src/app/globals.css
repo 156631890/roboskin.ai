@@ -119,11 +119,13 @@ main [class*="bg-[#0b0d12]"].text-white,
 main [class*="bg-[#0d1016]"].text-white,
 main [class*="bg-[#11151d]"].text-white,
 main [class*="bg-[rgba(6,8,12"].text-white,
+main [class*="linear-gradient(180deg,rgba(14,18,26"].text-white,
 main [class*="bg-[#111318]"] .text-white,
 main [class*="bg-[#0b0d12]"] .text-white,
 main [class*="bg-[#0d1016]"] .text-white,
 main [class*="bg-[#11151d]"] .text-white,
-main [class*="bg-[rgba(6,8,12"] .text-white {
+main [class*="bg-[rgba(6,8,12"] .text-white,
+main [class*="linear-gradient(180deg,rgba(14,18,26"] .text-white {
   color: #fffdf8;
 }
 
@@ -131,7 +133,8 @@ main [class*="bg-[#111318]"] .text-soft,
 main [class*="bg-[#0b0d12]"] .text-soft,
 main [class*="bg-[#0d1016]"] .text-soft,
 main [class*="bg-[#11151d]"] .text-soft,
-main [class*="bg-[rgba(6,8,12"] .text-soft {
+main [class*="bg-[rgba(6,8,12"] .text-soft,
+main [class*="linear-gradient(180deg,rgba(14,18,26"] .text-soft {
   color: #d8dce4;
 }
 
