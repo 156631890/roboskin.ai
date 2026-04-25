@@ -27,9 +27,11 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(sitemap, /lastModified: new Date\('2026-04-25'\)/);
   assert.match(sitemap, /seoRoutes/);
   assert.doesNotMatch(robots, /\/_next\//);
-  assert.match(home, /Robot skin FAQ/);
-  assert.match(home, /href="\/faq"|href=\{`\/faq/);
-  assert.match(home, /href="\/downloads"|href=\{`\/downloads/);
+  assert.match(home, /Domain availability/i);
+  assert.match(home, /href="\/contact\?requestType=domain"|href=\{`\/contact\?requestType=domain/);
+  assert.match(home, /href="\/research"|href=\{`\/research/);
+  assert.match(seo, /premium robot skin domain/i);
+  assert.doesNotMatch(seo, /builds tactile AI|components for robotics teams|developer kit/i);
   assert.match(faq, /buildFaqJsonLd/);
   assert.doesNotMatch(faq, /robots:\s*\{\s*index:\s*false/);
 });

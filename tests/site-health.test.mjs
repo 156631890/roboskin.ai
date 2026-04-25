@@ -29,7 +29,6 @@ test('site authority health checks pass', async () => {
   assert.match(contactForm, /NEXT_PUBLIC_CONTACT_FORM_ENDPOINT/);
   assert.match(contactForm, /mailto:/);
   assert.doesNotMatch(contactForm, /fetch\('\/api\/contact'/);
-  assert.doesNotMatch(site, /gmail\.com/i);
   assert.doesNotMatch(nextConfig, /ignoreBuildErrors:\s*true/);
   assert.doesNotMatch(nextConfig, /ignoreDuringBuilds:\s*true/);
   assert.match(caseStudies, /buildPageMetadata\('\/case-studies'\)/);
@@ -37,6 +36,13 @@ test('site authority health checks pass', async () => {
   assert.match(llms, /https:\/\/roboskin\.ai\/research\/graphene-liquid-metal-3d-force-2026/);
   assert.match(domainSale, /mailto:messigoat147@gmail\.com/);
   assert.doesNotMatch(domainSale, /messigoat47@gmail\.com/);
+  assert.match(site, /ownerEmail:\s*'messigoat147@gmail\.com'/);
+  assert.match(site, /domainInquiry/);
+  assert.match(contactForm, /Domain acquisition/);
+  assert.match(contactForm, /messigoat147@gmail\.com|site\.contact\.ownerEmail/);
+  assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
+  assert.match(llms, /premium domain asset/i);
+  assert.doesNotMatch(llms, /production availability|datasheets or integration reviews/i);
   assert.match(layout, /\/site\.webmanifest/);
   assert.ok(await exists('public/og-image.svg'));
   assert.ok(await exists('public/twitter-image.svg'));
