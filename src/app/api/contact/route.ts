@@ -4,21 +4,23 @@ type ContactPayload = {
   fullName?: string;
   company?: string;
   email?: string;
-  useCase?: string;
+  intendedUse?: string;
+  budgetSignal?: string;
   message?: string;
-  timeline?: string;
   phone?: string;
   requestType?: string;
-  requestedAsset?: string;
   website?: string;
 };
+
+const requestTypes = new Set(['domain', 'partnership', 'research', 'other']);
 
 function isValidPayload(payload: ContactPayload) {
   return Boolean(
     payload.fullName?.trim() &&
       payload.company?.trim() &&
       payload.email?.trim() &&
-      payload.useCase?.trim() &&
+      payload.requestType &&
+      requestTypes.has(payload.requestType) &&
       payload.message?.trim(),
   );
 }

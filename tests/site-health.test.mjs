@@ -10,11 +10,12 @@ const exists = async (path) => {
 };
 
 test('site authority health checks pass', async () => {
-  const [sitemap, seo, layout, contactForm, site, nextConfig, caseStudies, llms, domainSale] = await Promise.all([
+  const [sitemap, seo, layout, contactForm, contactRoute, site, nextConfig, caseStudies, llms, domainSale] = await Promise.all([
     read('src/app/sitemap.ts'),
     read('src/lib/seo.ts'),
     read('src/app/layout.tsx'),
     read('src/components/ContactForm.tsx'),
+    read('src/app/api/contact/route.ts'),
     read('src/content/site.ts'),
     read('next.config.ts'),
     read('src/app/case-studies/page.tsx'),
@@ -41,6 +42,14 @@ test('site authority health checks pass', async () => {
   assert.match(contactForm, /Domain acquisition/);
   assert.match(contactForm, /messigoat147@gmail\.com|site\.contact\.ownerEmail/);
   assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
+  assert.match(contactForm, /normalizeRequestType/);
+  assert.match(contactForm, /datasheet[\s\S]*research/);
+  assert.match(contactForm, /integration[\s\S]*partnership/);
+  assert.match(contactForm, /demo[\s\S]*partnership/);
+  assert.doesNotMatch(contactForm, /searchParams\.get\('requestType'\)\s*\?\?\s*'general'/);
+  assert.match(contactRoute, /intendedUse/);
+  assert.match(contactRoute, /budgetSignal/);
+  assert.doesNotMatch(contactRoute, /payload\.useCase\?\.trim\(\)/);
   assert.match(llms, /robot skin information hub|robot skin knowledge hub/i);
   assert.match(llms, /premium domain asset/i);
   assert.doesNotMatch(llms, /production availability|datasheets or integration reviews/i);

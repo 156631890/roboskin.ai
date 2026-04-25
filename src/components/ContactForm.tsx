@@ -5,12 +5,14 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { site } from '@/content/site';
 
+type RequestType = 'domain' | 'partnership' | 'research' | 'other';
+
 type ContactFormState = {
   fullName: string;
   company: string;
   email: string;
   phone: string;
-  requestType: string;
+  requestType: RequestType;
   budgetSignal: string;
   intendedUse: string;
   website: string;
@@ -18,7 +20,7 @@ type ContactFormState = {
   consent: boolean;
 };
 
-const initialState = (requestType = 'domain'): ContactFormState => ({
+const initialState = (requestType: RequestType = 'domain'): ContactFormState => ({
   fullName: '',
   company: '',
   email: '',
@@ -36,6 +38,29 @@ type ContactFormProps = {
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+
+function normalizeRequestType(value: string | null | undefined, fallback: RequestType = 'domain'): RequestType {
+  if (!value) {
+    return fallback;
+  }
+
+  switch (value) {
+    case 'domain':
+    case 'partnership':
+    case 'research':
+    case 'other':
+      return value;
+    case 'datasheet':
+      return 'research';
+    case 'integration':
+    case 'demo':
+      return 'partnership';
+    case 'general':
+      return 'domain';
+    default:
+      return 'other';
+  }
+}
 
 function buildMailtoHref(form: ContactFormState) {
   const subject = `RoboSkin.ai ${form.requestType} inquiry from ${form.company || form.fullName}`;
@@ -57,7 +82,7 @@ function buildMailtoHref(form: ContactFormState) {
 
 export default function ContactForm({ requestType }: ContactFormProps) {
   const searchParams = useSearchParams();
-  const effectiveRequestType = requestType ?? searchParams.get('requestType') ?? 'domain';
+  const effectiveRequestType = normalizeRequestType(requestType ?? searchParams.get('requestType'));
 
   const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -206,7 +231,7 @@ export default function ContactForm({ requestType }: ContactFormProps) {
           Request type
           <select
             value={form.requestType}
-            onChange={(event) => updateField('requestType', event.target.value)}
+            onChange={(event) => updateField('requestType', normalizeRequestType(event.target.value))}
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           >
             <option value="domain">Domain acquisition</option>
