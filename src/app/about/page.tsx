@@ -14,14 +14,14 @@ export default function AboutPage() {
         <div className="container-shell">
           <span className="eyebrow">About</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">What RoboSkin is, and what it is not</h1>
-            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
-              Talk to engineering {'->'}
+            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">What RoboSkin.ai is, and what it is not</h1>
+            <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-white">
+              Inquire about RoboSkin.ai {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin focuses on tactile sensing systems for robotics: hardware, integration support, and a disciplined public content model. We avoid unsupported
-            performance claims and route application-specific details into request-only technical material.
+            RoboSkin.ai is an information asset for the robot skin and tactile AI category. It is not currently presented as an operating hardware vendor. The
+            domain is available for serious acquisition or partnership inquiry.
           </p>
         </div>
       </section>
@@ -49,20 +49,20 @@ export default function AboutPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need a practical next step?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              If you have a target surface and a timeline, we can recommend the right starting offer and the right material to request.
+              If you are evaluating RoboSkin.ai as a domain asset, partnership route, or research resource, send the relevant context.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=domain"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Request integration review
+                Domain inquiry
               </Link>
               <Link
-                href="/downloads"
+                href="/research"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                Request technical material
+                Explore research resources
               </Link>
             </div>
             <p className="mt-4 text-sm text-soft">

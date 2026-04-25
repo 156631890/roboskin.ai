@@ -34,7 +34,7 @@ export default function GlossaryPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Practical definitions for robotics teams evaluating tactile AI, e-skin, multimodal sensors, ROS 2 tactile pipelines, and integration readiness.
+            Practical definitions for readers evaluating tactile AI, e-skin, multimodal sensors, ROS 2 tactile pipelines, and robot skin category language.
           </p>
         </div>
       </section>
@@ -63,16 +63,16 @@ export default function GlossaryPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need terms mapped to your robot?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need terms mapped to a use case?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Share the robot platform, target surface, and data pipeline. We will route you to the right technical brief or integration review.
+              Share a research question, source suggestion, or domain use case so the inquiry can be routed clearly.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <Link href="/contact?requestType=integration" className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
-                Request integration review
+              <Link href="/contact?requestType=research" className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
+                Send a domain or research inquiry
               </Link>
-              <Link href="/downloads" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                Request technical material
+              <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                Explore research resources
               </Link>
             </div>
           </div>

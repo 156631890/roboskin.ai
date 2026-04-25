@@ -110,7 +110,7 @@ export const site = {
   contact: {
     primaryEmail: 'contact@roboskin.ai',
     ownerEmail: 'messigoat147@gmail.com',
-    salesEmail: 'sales@roboskin.ai',
+    inquiryEmail: 'contact@roboskin.ai',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
     whatsapp: '15755596955',
@@ -238,7 +238,7 @@ export const productCards = [
     inputsOutputs: 'Editorial positioning, category pages, partnership inquiry',
     specs: ['Short memorable name', 'Strong topical relevance', 'Research and glossary fit', 'Clear domain inquiry path'],
     evaluation: ['Content strategy fit', 'Partnership model', 'Research and glossary depth', 'Category ownership goals'],
-    verificationNote: 'Best used when the goal is authoritative category context rather than product sales copy.',
+    verificationNote: 'Best used when the goal is authoritative category context rather than vendor copy.',
     cta: 'Discuss collaboration',
   },
 ];
@@ -698,9 +698,9 @@ export const newsItems: NewsItem[] = [
   {
     date: '2026-04-10',
     title: 'Content hub expansion (Comparison, Implementation, Downloads)',
-    summary: 'We expanded the public site with decision-support pages and request hubs to reduce dead downloads and improve evaluation clarity.',
+    summary: 'We expanded the public site with domain use-case, category-roadmap, and learning-resource pages.',
     href: '/comparison',
-    ctaLabel: 'Compare offers',
+    ctaLabel: 'Compare domain use cases',
   },
   {
     date: '2026-04-09',

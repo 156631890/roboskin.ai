@@ -20,7 +20,7 @@ export default function FAQPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Public copy stays conservative. If a detail depends on robot platform, geometry, or environment, we confirm it via request-only technical material.
+            Public copy stays conservative. If a detail depends on robot platform, geometry, or environment, treat it as source-specific rather than a RoboSkin.ai product claim.
           </p>
         </div>
       </section>
@@ -46,28 +46,28 @@ export default function FAQPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need a faster answer?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need a clearer route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send your robot type, target surface geometry, and timeline. We will route you to the right next step.
+              Choose research, glossary, or domain inquiry depending on whether you need learning context or acquisition discussion.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=domain"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Talk to engineering
+                Domain inquiry
               </Link>
               <Link
-                href="/downloads"
+                href="/research"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                Request technical material
+                Explore research resources
               </Link>
               <Link
                 href="/products"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                View robot skin products
+                View domain use cases
               </Link>
             </div>
           </div>

@@ -14,7 +14,7 @@ export default function ProductsPage() {
         <div className="container-shell">
           <span className="eyebrow">Domain use cases</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">How RoboSkin.ai can be used</h1>
+            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">How RoboSkin.ai can be used</h1>
             <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               Inquire about the domain {'->'}
             </Link>

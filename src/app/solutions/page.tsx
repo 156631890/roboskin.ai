@@ -14,13 +14,13 @@ export default function SolutionsPage() {
         <div className="container-shell">
           <span className="eyebrow">Solutions</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Built around customer problems, not hype</h1>
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin application contexts</h1>
             <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-              Compare offers {'->'}
+              Compare domain use cases {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Each solution path is structured for decision-making: problem, impact, and the recommended product path for evaluation and integration.
+            Each path frames a robot skin topic for research, education, or category positioning without claiming product availability.
           </p>
         </div>
       </section>
@@ -34,27 +34,27 @@ export default function SolutionsPage() {
               <div className="mt-4 space-y-3 text-sm text-soft">
                 <p><span className="font-semibold text-white">Problem:</span> {solution.problem}</p>
                 <p><span className="font-semibold text-white">Impact:</span> {solution.why}</p>
-                <p><span className="font-semibold text-white">Recommended path:</span> {solution.path}</p>
+                <p><span className="font-semibold text-white">Suggested route:</span> {solution.path}</p>
                 <p><span className="font-semibold text-white">Note:</span> {solution.note}</p>
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/contact?requestType=integration"
+                  href="/contact?requestType=domain"
                   className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
                 >
-                  Talk to engineering
+                  Inquire about RoboSkin.ai
                 </Link>
                 <Link
                   href="/comparison"
                   className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
                 >
-                  Compare offers
+                  Compare domain use cases
                 </Link>
                 <Link
                   href="/technology"
                   className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
                 >
-                  Review technology
+                  Review technology context
                 </Link>
               </div>
             </article>
@@ -65,24 +65,24 @@ export default function SolutionsPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need help selecting a solution path?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need help choosing a category route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send the robot type, target surface, and timeline, and we will recommend the right starting point.
+              Send your intended use for RoboSkin.ai, whether domain acquisition, partnership, research, or content.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=domain"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Talk to engineering
+                Inquire about RoboSkin.ai
               </Link>
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/products" className="text-accent font-semibold hover:text-white">
-                View tactile sensor products {'->'}
+                View domain use cases {'->'}
               </Link>
               <Link href="/implementation" className="text-accent font-semibold hover:text-white">
-                See pilot path {'->'}
+                See category roadmap {'->'}
               </Link>
             </div>
           </div>

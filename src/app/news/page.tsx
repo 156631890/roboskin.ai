@@ -24,7 +24,7 @@ export default function NewsPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            We keep public announcements conservative. If you need a technical update for a specific platform, request an engineering review.
+            We keep public announcements conservative and avoid implying active hardware availability, support, or procurement routes.
           </p>
         </div>
       </section>
@@ -51,22 +51,22 @@ export default function NewsPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need a current technical update?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Need current site context?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Tell us your robot type, target surface, and timeline. We will route you to the right material or engineer.
+              Send a domain, partnership, or research inquiry if you need context beyond the public pages.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=domain"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Talk to engineering
+                Inquire about RoboSkin.ai
               </Link>
               <Link
-                href="/downloads"
+                href="/research"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                Request technical material
+                Explore research resources
               </Link>
             </div>
           </div>

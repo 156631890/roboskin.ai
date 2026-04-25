@@ -197,11 +197,11 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
               </div>
               <div className="glass-card p-5">
                 <p className="text-soft text-xs uppercase tracking-[0.14em]">Next step</p>
-                <Link href="/contact?requestType=integration" className="mt-3 block text-sm font-semibold text-accent hover:text-white">
-                  Request integration review {'->'}
+                <Link href="/contact?requestType=research" className="mt-3 block text-sm font-semibold text-accent hover:text-white">
+                  Send a domain or research inquiry {'->'}
                 </Link>
-                <Link href="/downloads" className="mt-3 block text-sm font-semibold text-white hover:text-[#d7e7ff]">
-                  Request technical material {'->'}
+                <Link href="/resources" className="mt-3 block text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                  Explore research resources {'->'}
                 </Link>
               </div>
             </aside>

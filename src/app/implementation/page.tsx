@@ -12,15 +12,15 @@ export default function ImplementationPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/implementation'), buildBreadcrumbJsonLd('/implementation')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Implementation</span>
+          <span className="eyebrow">Category roadmap</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">From evaluation to deployment</h1>
-            <Link href="/contact?requestType=integration" className="text-accent text-sm font-semibold hover:text-white">
-              Talk to engineering {'->'}
+            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">How the robot skin category can develop</h1>
+            <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-white">
+              Inquire about RoboSkin.ai {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            This is an engineering-first outline of what a typical engagement looks like. Use it to scope inputs, expected outputs, and the next request.
+            This page outlines how teams, labs, and content owners can think about robot skin concepts from research awareness to branded category ownership.
           </p>
         </div>
       </section>
@@ -63,19 +63,19 @@ export default function ImplementationPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to scope an evaluation or pilot?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to discuss category ownership?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send the robot type, target surface, and timeline. We will recommend the right starting point and the right material to request.
+              Send the intended use, organization context, and domain or research goal so the inquiry can be routed clearly.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=domain"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Talk to engineering
+                Inquire about RoboSkin.ai
               </Link>
                 <Link href="/comparison" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                  Compare offers
+                  Compare domain use cases
                 </Link>
             </div>
           </div>

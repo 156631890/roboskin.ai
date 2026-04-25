@@ -13,9 +13,9 @@ export default function TechnologyPage() {
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Technology</span>
-          <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">How RoboSkin works</h1>
+          <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">Robot skin technology context</h1>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin combines flexible sensing layers, signal processing, form-factor design, and integration tooling for tactile robotics programs.
+            This page explains robot skin concepts, tactile sensing layers, signal flow, and validation questions without presenting RoboSkin.ai as an active product vendor.
           </p>
         </div>
       </section>
@@ -46,7 +46,7 @@ export default function TechnologyPage() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="eyebrow">Data flow</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From contact surface to robot-ready signals</h2>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From contact surface to robot-ready signal concepts</h2>
             </div>
             <Link href="/research/ros2-kilted-tactile-pipeline-2026" className="text-accent text-sm font-semibold hover:text-white">
               Read ROS 2 pipeline brief {'->'}
@@ -70,7 +70,7 @@ export default function TechnologyPage() {
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
             <p className="text-soft text-xs uppercase tracking-[0.14em]">Fit criteria</p>
-            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">What must be validated before a pilot</h2>
+            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">What must be validated before making claims</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {fitCriteria.map((item) => (
                 <article key={item.title} className="rounded-2xl border border-white/8 bg-[#0d1016] p-5">
@@ -86,24 +86,24 @@ export default function TechnologyPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-5xl">Need an architecture review for your robot platform?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-5xl">Need source-backed robot skin context?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Request an engineering review for sensing layout, constraints, and an integration path that matches your robot surface and workflow.
+              Use the research and glossary routes for terminology, or send a domain inquiry if RoboSkin.ai fits your project.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
-                href="/contact?requestType=integration"
+                href="/research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Request technical consultation
+                Explore research resources
               </Link>
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/products" className="text-accent font-semibold hover:text-white">
-                View robot skin products {'->'}
+                View domain use cases {'->'}
               </Link>
               <Link href="/resources" className="text-accent font-semibold hover:text-white">
-                Request technical briefs {'->'}
+                View learning resources {'->'}
               </Link>
               <Link href="/faq" className="text-accent font-semibold hover:text-white">
                 Read tactile AI FAQ {'->'}
