@@ -12,16 +12,16 @@ export default function ProductsPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/products'), buildBreadcrumbJsonLd('/products'), buildCategoryGuideJsonLd()])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Products</span>
+          <span className="eyebrow">Domain use cases</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">A focused product line for tactile robotics</h1>
-            <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-              Compare offer levels {'->'}
+            <h1 className="text-4xl font-bold text-white md:text-6xl">How RoboSkin.ai can be used</h1>
+            <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+              Inquire about the domain {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            The public lineup stays intentionally narrow: a sensor array, a developer kit, and a custom integration program. Choose the starting point based on
-            your geometry constraints and development stage.
+            RoboSkin.ai can support a robotics startup brand, tactile AI product line, research initiative, media property, or category landing page. This page
+            explains possible uses without claiming active hardware availability.
           </p>
         </div>
       </section>
@@ -32,7 +32,7 @@ export default function ProductsPage() {
             <article key={product.name} className="glass-card p-7 md:p-8">
               <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
                 <div>
-                  <p className="text-soft text-xs uppercase tracking-[0.14em]">Verified offering</p>
+                  <p className="text-soft text-xs uppercase tracking-[0.14em]">Domain use case</p>
                   <h2 className="mt-2 text-2xl font-semibold text-white md:text-3xl">{product.name}</h2>
                   <p className="mt-3 text-soft">{product.summary}</p>
                   <p className="mt-4 text-sm text-soft"><span className="font-semibold text-white">Start here if:</span> {product.bestFor}</p>
@@ -40,17 +40,17 @@ export default function ProductsPage() {
                   <div className="mt-6 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
                     <p className="text-xs uppercase tracking-[0.14em] text-soft">Decision note</p>
                     <p className="mt-2 text-sm leading-relaxed text-soft">
-                      If you are unsure, compare offer levels first, then request the most relevant technical material or an integration review.
+                      If you are unsure, review the research and glossary routes first, then use the domain inquiry path for acquisition or partnership context.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-3">
-                      <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-                        Compare offers {'->'}
+                      <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+                        Inquire about the domain {'->'}
                       </Link>
-                      <Link href="/implementation" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
-                        See implementation path {'->'}
+                      <Link href="/research" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                        Explore research {'->'}
                       </Link>
-                      <Link href="/contact?requestType=integration" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
-                        Request integration review {'->'}
+                      <Link href="/glossary" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                        Read the glossary {'->'}
                       </Link>
                     </div>
                   </div>
@@ -75,14 +75,14 @@ export default function ProductsPage() {
                     <p className="mt-4 text-sm leading-relaxed text-soft">{product.verificationNote}</p>
                   </div>
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <Link href="/contact?requestType=datasheet" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
-                      Request datasheet
+                    <Link href="/contact?requestType=domain" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
+                      Inquire about the domain
                     </Link>
-                    <Link href="/contact?requestType=integration" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                      Talk to engineering
+                    <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                      Explore research
                     </Link>
-                    <Link href="/resources" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                      View resources
+                    <Link href="/applications" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                      View applications
                     </Link>
                   </div>
                 </div>
