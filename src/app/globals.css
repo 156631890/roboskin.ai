@@ -112,7 +112,6 @@ main textarea.text-white {
 }
 
 main [class*="bg-[var(--primary)]"].text-white,
-main [class*="bg-[#62a8ff]"].text-white,
 main [class*="bg-[#1f4fd8]"].text-white,
 main [class*="bg-[#111318]"].text-white,
 main [class*="bg-[#0b0d12]"].text-white,
@@ -127,6 +126,10 @@ main [class*="bg-[#11151d]"] .text-white,
 main [class*="bg-[rgba(6,8,12"] .text-white,
 main [class*="linear-gradient(180deg,rgba(14,18,26"] .text-white {
   color: #fffdf8;
+}
+
+main [class*="bg-[#62a8ff]"].text-white {
+  color: #08111f;
 }
 
 main [class*="bg-[#111318]"] .text-soft,
