@@ -41,6 +41,7 @@ test('site authority health checks pass', async () => {
   assert.match(contactForm, /Domain acquisition/);
   assert.match(contactForm, /messigoat147@gmail\.com|site\.contact\.ownerEmail/);
   assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
+  assert.match(llms, /robot skin information hub|robot skin knowledge hub/i);
   assert.match(llms, /premium domain asset/i);
   assert.doesNotMatch(llms, /production availability|datasheets or integration reviews/i);
   assert.match(layout, /\/site\.webmanifest/);
