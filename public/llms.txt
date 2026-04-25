@@ -12,6 +12,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, terminolog
 
 - https://roboskin.ai/products
 - https://roboskin.ai/solutions
+- https://roboskin.ai/applications
 - https://roboskin.ai/technology
 - https://roboskin.ai/resources
 - https://roboskin.ai/downloads
@@ -21,6 +22,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, terminolog
 - https://roboskin.ai/glossary
 - https://roboskin.ai/case-studies
 - https://roboskin.ai/faq
+- https://roboskin.ai/about
 - https://roboskin.ai/contact
 
 ## Research Briefs

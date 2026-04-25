@@ -45,6 +45,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Solutions'],
   },
+  '/applications': {
+    path: '/applications',
+    title: 'Robot Skin Applications and Tactile AI Category Uses',
+    description:
+      'Explore educational robot skin application areas including humanoid robot skin, tactile AI, e-skin, assistive devices, research media, and category ownership.',
+    priority: 0.82,
+    changeFrequency: 'weekly',
+    index: true,
+    breadcrumbs: ['Home', 'Applications'],
+  },
   '/technology': {
     path: '/technology',
     title: 'Tactile AI Technology for Flexible Robot Skin',
