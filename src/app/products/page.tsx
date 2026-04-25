@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { productCards, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { productCards } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata, buildProductListJsonLd } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Products',
-  description: 'Explore the RoboSkin product lineup for tactile robotics integration.',
-  alternates: {
-    canonical: `${site.url}/products`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/products');
 
 export default function ProductsPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/products'), buildBreadcrumbJsonLd('/products'), buildProductListJsonLd()])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Products</span>
@@ -49,6 +46,9 @@ export default function ProductsPage() {
                       <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
                         Compare offers {'->'}
                       </Link>
+                      <Link href="/implementation" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                        See implementation path {'->'}
+                      </Link>
                       <Link href="/contact?requestType=integration" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
                         Request integration review {'->'}
                       </Link>
@@ -69,6 +69,9 @@ export default function ProductsPage() {
                     </Link>
                     <Link href="/contact?requestType=integration" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                       Talk to engineering
+                    </Link>
+                    <Link href="/resources" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                      View resources
                     </Link>
                   </div>
                 </div>

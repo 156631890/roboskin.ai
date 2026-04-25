@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { comparisonRows, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { comparisonRows } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Comparison',
-  description: 'Compare RoboSkin offer levels and pick the right starting point for evaluation and integration.',
-  alternates: {
-    canonical: `${site.url}/comparison`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/comparison');
 
 export default function ComparisonPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/comparison'), buildBreadcrumbJsonLd('/comparison')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Comparison</span>

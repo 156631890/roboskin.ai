@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { resourceSections, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { resourceSections } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Resources',
-  description: 'Request RoboSkin datasheets, integration notes, SDK access, and technical briefs.',
-  alternates: {
-    canonical: `${site.url}/resources`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/resources');
 
 export default function ResourcesPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/resources'), buildBreadcrumbJsonLd('/resources')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Resources</span>
@@ -51,6 +48,36 @@ export default function ResourcesPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
+            <p className="text-soft text-xs uppercase tracking-[0.14em]">Trusted external references</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">Reference points for robotics teams</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-soft">
+              RoboSkin keeps external links narrow and useful. These resources help teams align terminology and integration expectations before requesting private material.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a
+                href="https://schema.org/Product"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                schema.org Product markup
+              </a>
+              <a
+                href="https://docs.ros.org/"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                ROS documentation
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

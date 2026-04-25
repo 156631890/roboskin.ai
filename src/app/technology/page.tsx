@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { site, technologyLayers } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { technologyLayers } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Technology',
-  description: 'Understand how RoboSkin structures tactile sensing, signal processing, form factors, and integration support.',
-  alternates: {
-    canonical: `${site.url}/technology`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/technology');
 
 export default function TechnologyPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/technology'), buildBreadcrumbJsonLd('/technology')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Technology</span>
@@ -57,6 +54,17 @@ export default function TechnologyPage() {
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
                 Request technical consultation
+              </Link>
+            </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+              <Link href="/products" className="text-accent font-semibold hover:text-white">
+                View robot skin products {'->'}
+              </Link>
+              <Link href="/resources" className="text-accent font-semibold hover:text-white">
+                Request technical briefs {'->'}
+              </Link>
+              <Link href="/faq" className="text-accent font-semibold hover:text-white">
+                Read tactile AI FAQ {'->'}
               </Link>
             </div>
           </div>

@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { resourceSections, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { resourceSections } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Downloads',
-  description: 'Request RoboSkin datasheets, integration docs, SDK access, and technical briefs.',
-  alternates: {
-    canonical: `${site.url}/downloads`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/downloads');
 
 export default function DownloadsPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/downloads'), buildBreadcrumbJsonLd('/downloads')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Downloads</span>

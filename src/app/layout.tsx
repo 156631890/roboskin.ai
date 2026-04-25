@@ -3,7 +3,15 @@ import { Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
+import {
+  buildGraphJsonLd,
+  buildOrganizationJsonLd,
+  buildPageMetadata,
+  buildWebsiteJsonLd,
+  pageSeo,
+} from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -16,25 +24,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const homeMetadata = buildPageMetadata('/');
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  ...homeMetadata,
   title: {
-    default: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
-    template: '%s | RoboSkin.ai'
+    default: `${pageSeo['/'].title} | ${site.name}`,
+    template: `%s | ${site.name}`,
   },
-  description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components with a high-end brand presence for robotics, e-skin, and private evaluation decks.',
-  keywords: [
-    'robot skin',
-    'robotic skin',
-    'tactile AI',
-    'tactile sensors',
-    'humanoid robot skin',
-    'e-skin',
-    'robotics',
-    'robotic grippers',
-    'tactile sensing'
-  ],
   authors: [{ name: site.name }],
+  category: 'Tactile AI',
   creator: site.name,
   publisher: site.name,
   formatDetection: {
@@ -42,46 +42,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: site.url,
-    title: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
-    description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components for robotics teams, private decks, and e-skin programs.',
-    siteName: site.name,
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'RoboSkin.ai robot skin for the next generation of machines'
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'RoboSkin.ai | Robot Skin for the Next Generation of Machines',
-    description: 'RoboSkin.ai builds tactile AI and humanoid robot skin components.',
-    images: ['/twitter-image.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code'
-  },
-  alternates: {
-    canonical: site.url
-  }
 };
 
 export default function RootLayout({
@@ -102,6 +62,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
+        <JsonLd data={buildGraphJsonLd([buildOrganizationJsonLd(), buildWebsiteJsonLd()])} />
         <Navigation />
         <main className="flex-grow">{children}</main>
         <Footer />

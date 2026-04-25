@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { deploymentStages, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { deploymentStages } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Implementation',
-  description: 'Understand the typical path from evaluation to pilot to deployment for RoboSkin integrations.',
-  alternates: {
-    canonical: `${site.url}/implementation`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/implementation');
 
 export default function ImplementationPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/implementation'), buildBreadcrumbJsonLd('/implementation')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Implementation</span>

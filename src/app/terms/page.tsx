@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Terms',
-  description: 'Terms of use for the RoboSkin website and request flows.',
-  alternates: {
-    canonical: `${site.url}/terms`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/terms');
 
 export default function TermsPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/terms'), buildBreadcrumbJsonLd('/terms')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Terms</span>

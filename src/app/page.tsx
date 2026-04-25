@@ -1,5 +1,8 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import JsonLd from '@/components/JsonLd';
 import { homeProofPoints, homeStats, homeUseCases, productCards, site } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 const heroSignals = [
   {
@@ -20,13 +23,40 @@ const heroSignals = [
   },
 ];
 
+const homeRobotSkinFaq = [
+  {
+    question: 'What is robot skin?',
+    answer:
+      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, and interaction events on hands, grippers, arms, or curved body surfaces.',
+    href: '/faq',
+    ctaLabel: 'Read the robot skin FAQ',
+  },
+  {
+    question: 'Where does tactile AI help first?',
+    answer:
+      'Tactile AI is most useful where robots need contact feedback: humanoid robot hands, industrial grippers, precision grasping, assistive devices, and pilot integrations.',
+    href: '/solutions',
+    ctaLabel: 'Explore tactile sensing solutions',
+  },
+  {
+    question: 'What should teams request before an evaluation?',
+    answer:
+      'Teams should request the datasheet, integration notes, and the most relevant technical brief for their robot type, geometry, timeline, and interface expectations.',
+    href: '/downloads',
+    ctaLabel: 'Request technical material',
+  },
+];
+
+export const metadata: Metadata = buildPageMetadata('/');
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq)])} />
       <section className="relative overflow-hidden pb-16 pt-16 md:pb-20 md:pt-20">
         <div className="container-shell grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr]">
           <div className="reveal">
-            <span className="eyebrow">Tactile AI · Humanoid Robot Skin · e-skin</span>
+            <span className="eyebrow">Tactile AI | Humanoid Robot Skin | e-skin</span>
             <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-white md:text-7xl">
               Robot skin for the next generation of machines.
             </h1>
@@ -213,6 +243,41 @@ export default function Home() {
                 </Link>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Robot skin FAQ</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Short answers for robotics teams</h2>
+            </div>
+            <Link href="/faq" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              Read full FAQ {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {homeRobotSkinFaq.map((item, idx) => (
+              <article key={item.question} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
+                <h3 className="text-xl font-semibold tracking-tight text-white">{item.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.answer}</p>
+                <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+                  {item.ctaLabel} {'->'}
+                </Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <Link href="/products" className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5 text-sm font-semibold text-white transition-colors hover:bg-white/5">
+              Compare robot skin products and tactile sensor modules {'->'}
+            </Link>
+            <Link href="/downloads" className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5 text-sm font-semibold text-white transition-colors hover:bg-white/5">
+              Request RoboSkin datasheets and technical material {'->'}
+            </Link>
           </div>
         </div>
       </section>

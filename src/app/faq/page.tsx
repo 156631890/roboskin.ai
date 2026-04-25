@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { faqItems, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { faqItems } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'FAQ',
-  description: 'Practical answers about evaluation, integration reviews, and request-only technical material.',
-  alternates: {
-    canonical: `${site.url}/faq`,
-  },
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = buildPageMetadata('/faq');
 
 export default function FAQPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/faq'), buildBreadcrumbJsonLd('/faq'), buildFaqJsonLd(faqItems)])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">FAQ</span>
@@ -66,6 +62,12 @@ export default function FAQPage() {
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
                 Request technical material
+              </Link>
+              <Link
+                href="/products"
+                className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                View robot skin products
               </Link>
             </div>
           </div>

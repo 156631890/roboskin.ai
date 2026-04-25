@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { site, solutionCards } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { solutionCards } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Solutions',
-  description: 'Explore RoboSkin solutions for robotic grippers, humanoids, prosthetics, and research teams.',
-  alternates: {
-    canonical: `${site.url}/solutions`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/solutions');
 
 export default function SolutionsPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/solutions'), buildBreadcrumbJsonLd('/solutions')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Solutions</span>
@@ -53,6 +50,12 @@ export default function SolutionsPage() {
                 >
                   Compare offers
                 </Link>
+                <Link
+                  href="/technology"
+                  className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+                >
+                  Review technology
+                </Link>
               </div>
             </article>
           ))}
@@ -72,6 +75,14 @@ export default function SolutionsPage() {
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
                 Talk to engineering
+              </Link>
+            </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+              <Link href="/products" className="text-accent font-semibold hover:text-white">
+                View tactile sensor products {'->'}
+              </Link>
+              <Link href="/implementation" className="text-accent font-semibold hover:text-white">
+                See pilot path {'->'}
               </Link>
             </div>
           </div>

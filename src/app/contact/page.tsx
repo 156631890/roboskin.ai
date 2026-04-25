@@ -1,19 +1,16 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
+import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Talk to the RoboSkin team about demos, datasheets, and integration support.',
-  alternates: {
-    canonical: `${site.url}/contact`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/contact');
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/contact'), buildBreadcrumbJsonLd('/contact')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell grid items-center gap-9 md:grid-cols-[1fr_0.95fr]">
           <div>

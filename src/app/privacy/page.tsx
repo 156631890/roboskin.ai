@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
+import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Privacy',
-  description: 'How RoboSkin handles contact form submissions and site usage data.',
-  alternates: {
-    canonical: `${site.url}/privacy`,
-  },
-};
+export const metadata: Metadata = buildPageMetadata('/privacy');
 
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/privacy'), buildBreadcrumbJsonLd('/privacy')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Privacy</span>
