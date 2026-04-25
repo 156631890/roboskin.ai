@@ -17,9 +17,9 @@ const updatedAt = '2026-04-25';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin and Tactile AI for Humanoid Robots',
+    title: 'RoboSkin.ai: Robot Skin, Tactile AI, and Premium Domain Asset',
     description:
-      'RoboSkin.ai builds tactile AI, humanoid robot skin, e-skin, and tactile sensing components for robot hands, grippers, pilots, and integration teams.',
+      'RoboSkin.ai is a robot skin and tactile AI information hub built around a premium robot skin domain available for acquisition or partnership inquiry.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -27,9 +27,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/products': {
     path: '/products',
-    title: 'Robot Skin Products and Tactile Sensor Modules',
+    title: 'Robot Skin Category Guides and Tactile AI Domain Uses',
     description:
-      'Explore RoboSkin tactile sensor modules, developer kits, and custom robot skin programs for robotic grippers, humanoid robots, and e-skin pilots.',
+      'Explore educational category guides for robot skin, tactile AI, e-skin terminology, and possible domain uses for robotics and AI audiences.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -39,7 +39,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/solutions',
     title: 'Tactile Sensing Solutions for Robot Hands and Grippers',
     description:
-      'Explore RoboSkin solution paths for robotic grippers, humanoid robot skin, prosthetics, medical robotics, and research teams evaluating tactile AI.',
+      'Explore educational context for robotic grippers, humanoid robot skin, prosthetics, medical robotics, and research teams studying tactile AI.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -49,7 +49,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/technology',
     title: 'Tactile AI Technology for Flexible Robot Skin',
     description:
-      'Understand RoboSkin sensing layers, signal processing, form-factor design, and integration support for flexible tactile robot skin systems.',
+      'Understand robot skin sensing layers, signal processing concepts, form-factor design, and tactile AI terminology for flexible robotic skin systems.',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -57,9 +57,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/resources': {
     path: '/resources',
-    title: 'Robot Skin Datasheets, SDKs, and Technical Briefs',
+    title: 'Robot Skin Resources and Tactile AI Research Guides',
     description:
-      'Request RoboSkin datasheets, integration notes, SDK access, ROS compatibility details, and technical briefs for tactile sensing evaluations.',
+      'Browse robot skin resources, tactile AI research guides, terminology routes, and context about the RoboSkin.ai domain asset.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -67,9 +67,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/downloads': {
     path: '/downloads',
-    title: 'Request RoboSkin Downloads and Technical Material',
+    title: 'Robot Skin Information Resources and References',
     description:
-      'Request RoboSkin datasheets, developer kit notes, integration docs, SDK access, and benchmark methodology for robot skin evaluation.',
+      'Find public information routes, research references, and educational robot skin resources without implied product downloads or hardware availability.',
     priority: 0.75,
     changeFrequency: 'weekly',
     index: true,
@@ -77,9 +77,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/comparison': {
     path: '/comparison',
-    title: 'Compare RoboSkin Sensor Array, Developer Kit, and Custom Program',
+    title: 'Compare Robot Skin Category Concepts and Domain Uses',
     description:
-      'Compare RoboSkin offer levels and choose the right starting point for tactile sensor evaluation, robot skin integration, or custom form factors.',
+      'Compare robot skin category concepts, tactile sensing terminology, and possible RoboSkin.ai domain use cases for robotics and AI content.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -87,9 +87,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/implementation': {
     path: '/implementation',
-    title: 'Robot Skin Evaluation, Pilot, and Deployment Path',
+    title: 'Robot Skin Evaluation Concepts and Research Paths',
     description:
-      'Understand the RoboSkin path from tactile sensing evaluation to prototype, pilot, and deployment for robot hands and curved surfaces.',
+      'Understand educational evaluation concepts for tactile sensing, robot hands, curved surfaces, and research discovery without integration-support claims.',
     priority: 0.75,
     changeFrequency: 'weekly',
     index: true,
@@ -99,7 +99,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/faq',
     title: 'Robot Skin FAQ: Tactile AI, e-skin, and Integration Questions',
     description:
-      'Practical answers about robot skin, tactile AI, e-skin, datasheets, ROS compatibility, integration reviews, and request-only technical material.',
+      'Practical answers about robot skin, tactile AI, e-skin, research terminology, domain inquiries, and conservative source guidance.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -139,7 +139,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/about',
     title: 'About RoboSkin.ai',
     description:
-      'Learn what RoboSkin builds, how the team works with robotics companies, and how to request technical material or an integration review.',
+      'Learn about RoboSkin.ai as a robot skin information hub and premium exact-match .ai domain asset for tactile AI audiences.',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -147,10 +147,10 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/contact': {
     path: '/contact',
-    title: 'Contact RoboSkin for Datasheets and Integration Support',
+    title: 'RoboSkin.ai Domain Inquiry and Contact',
     description:
-      'Talk to the RoboSkin team about tactile sensor demos, humanoid robot skin datasheets, developer kits, and integration support.',
-    priority: 0.8,
+      'Contact the owner of RoboSkin.ai about domain acquisition, partnership, content collaboration, or robot skin research information.',
+    priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
     breadcrumbs: ['Home', 'Contact'],
@@ -188,7 +188,7 @@ const keywords = [
   'robotic grippers',
   'tactile sensing',
   'robot hands',
-  'developer kit',
+  'robot skin information hub',
 ];
 
 export function canonicalUrl(path: string) {
@@ -255,17 +255,17 @@ export function buildOrganizationJsonLd() {
     name: site.name,
     url: site.url,
     email: site.contact.primaryEmail,
-    description: 'Tactile AI and robot skin components for robotics teams evaluating humanoid robot skin, e-skin, and tactile sensing.',
+    description: 'Robot skin and tactile AI information hub built around the premium domain RoboSkin.ai.',
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        contactType: 'sales',
-        email: site.contact.salesEmail,
+        contactType: 'domain acquisition inquiry',
+        email: site.contact.ownerEmail,
         availableLanguage: ['en'],
       },
       {
         '@type': 'ContactPoint',
-        contactType: 'technical support',
+        contactType: 'content and research inquiry',
         email: site.contact.primaryEmail,
         availableLanguage: ['en'],
       },
@@ -328,24 +328,19 @@ export function buildBreadcrumbJsonLd(path: keyof typeof pageSeo | string) {
   };
 }
 
-export function buildProductListJsonLd() {
+export function buildCategoryGuideJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    '@id': `${site.url}/products#product-list`,
-    name: 'RoboSkin tactile sensing products',
-    itemListElement: productCards.map((product, index) => ({
+    '@id': `${site.url}/products#category-guides`,
+    name: 'Robot skin category and domain use guides',
+    itemListElement: productCards.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       item: {
-        '@type': 'Product',
-        name: product.name,
-        description: product.summary,
-        category: 'Tactile sensing and robot skin hardware',
-        brand: {
-          '@type': 'Brand',
-          name: site.name,
-        },
+        '@type': 'CreativeWork',
+        name: item.name,
+        description: item.summary,
         url: `${site.url}/products`,
       },
     })),

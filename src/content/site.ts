@@ -105,9 +105,11 @@ export type GlossaryTerm = {
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
-  tagline: 'Tactile AI for humanoid robot skin',
+  tagline: 'Robot skin and tactile AI information hub',
+  description: 'A robot skin and tactile AI information asset built around the premium robot skin domain RoboSkin.ai.',
   contact: {
     primaryEmail: 'contact@roboskin.ai',
+    ownerEmail: 'messigoat147@gmail.com',
     salesEmail: 'sales@roboskin.ai',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
@@ -115,16 +117,23 @@ export const site = {
     whatsappDial: '8615755596955',
     wechat: '15755596955',
   },
+  domainInquiry: {
+    label: 'RoboSkin.ai domain inquiry',
+    headline: 'RoboSkin.ai is available for acquisition or partnership inquiry.',
+    summary: 'An exact-match .ai name for robot skin, tactile AI, humanoid robotics, e-skin research, and tactile sensing media.',
+    href: '/contact?requestType=domain',
+    ctaLabel: 'Inquire about RoboSkin.ai',
+  },
 };
 
 export const primaryNavigation = [
   { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products' },
-  { href: '/solutions', label: 'Solutions' },
+  { href: '/research', label: 'Research' },
+  { href: '/glossary', label: 'Glossary' },
+  { href: '/applications', label: 'Applications' },
   { href: '/technology', label: 'Technology' },
   { href: '/resources', label: 'Resources' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ];
 
 export const footerNavigation = [
@@ -451,22 +460,22 @@ export const resourceSections: ResourceSection[] = [
 
 export const contactPaths: ContactPath[] = [
   {
-    title: 'Datasheet or deck request',
-    summary: 'Use this path when you need the current hardware overview, evaluation packet, or private product deck.',
-    href: '/contact?requestType=datasheet',
-    ctaLabel: 'Request datasheet',
+    title: 'Domain acquisition',
+    summary: 'Use this path if you want to buy RoboSkin.ai, discuss a serious offer, or evaluate the domain as a robotics or AI brand asset.',
+    href: '/contact?requestType=domain',
+    ctaLabel: 'Inquire about the domain',
   },
   {
-    title: 'Integration review',
-    summary: 'Use this path when geometry, mounting, ROS 2, SDK, or data pipeline requirements affect the recommendation.',
-    href: '/contact?requestType=integration',
-    ctaLabel: 'Request review',
+    title: 'Partnership or content collaboration',
+    summary: 'Use this path for content, research, media, or partnership ideas around robot skin and tactile AI.',
+    href: '/contact?requestType=partnership',
+    ctaLabel: 'Discuss collaboration',
   },
   {
-    title: 'Demo discussion',
-    summary: 'Use this path when you are preparing a robotics demo, lab evaluation, or pilot milestone.',
-    href: '/contact?requestType=demo',
-    ctaLabel: 'Request demo',
+    title: 'Research or information request',
+    summary: 'Use this path if you found the site through research and want to suggest sources, corrections, or useful additions.',
+    href: '/contact?requestType=research',
+    ctaLabel: 'Send a research note',
   },
 ];
 

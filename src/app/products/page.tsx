@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { productCards } from '@/content/site';
-import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata, buildProductListJsonLd } from '@/lib/seo';
+import { buildBreadcrumbJsonLd, buildCategoryGuideJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/products');
 
 export default function ProductsPage() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/products'), buildBreadcrumbJsonLd('/products'), buildProductListJsonLd()])} />
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/products'), buildBreadcrumbJsonLd('/products'), buildCategoryGuideJsonLd()])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Products</span>
