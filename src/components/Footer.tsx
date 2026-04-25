@@ -20,14 +20,14 @@ export default function Footer() {
               </div>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-soft">
-              Tactile AI and robot skin components for robotics teams, private evaluation decks, and acquisition-minded brand positioning.
+              Tactile AI and robot skin components for robotics teams evaluating touch feedback, curved-surface integration, and pilot readiness.
             </p>
             <div className="mt-6 space-y-2 text-sm text-soft">
               <p>
                 Email: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
               </p>
               <p>
-                Direct: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
+                Sales: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
               </p>
               <p>
                 WhatsApp: <a className="text-accent hover:text-[#7dd3fc]" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a>
@@ -36,7 +36,7 @@ export default function Footer() {
                 WeChat: <span className="text-white">{site.contact.wechat}</span>
               </p>
               <p>
-                Sales: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a>
+                Privacy: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.privacyEmail}`}>{site.contact.privacyEmail}</a>
               </p>
             </div>
           </div>

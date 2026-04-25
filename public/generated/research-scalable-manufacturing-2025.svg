@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Large area flexible tactile arrays">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <g transform="translate(150 180)">
+    <rect x="0" y="80" width="900" height="160" rx="36" fill="#101722" stroke="#2a3d55" stroke-width="3"/>
+    <circle cx="110" cy="160" r="62" fill="#0b0d12" stroke="#62a8ff" stroke-width="5"/>
+    <circle cx="790" cy="160" r="62" fill="#0b0d12" stroke="#62a8ff" stroke-width="5"/>
+    <path d="M170 160h560" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+    <path d="M220 115h460M220 205h460" stroke="#62a8ff" stroke-width="2" opacity=".4"/>
+  </g>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Large-area flexible tactile arrays</text>
+</svg>

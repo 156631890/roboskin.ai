@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Self healing robotic skin">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <rect x="140" y="170" width="920" height="250" rx="90" fill="#101722" stroke="#2a3d55"/>
+  <path d="M320 300c90-80 170 80 260 0s170-80 260 0" fill="none" stroke="#62a8ff" stroke-width="10" stroke-linecap="round"/>
+  <path d="M520 185l55 220M670 185l-55 220" stroke="#7dd3fc" stroke-width="4" opacity=".55"/>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Self-healing e-skin, careful claims</text>
+</svg>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { homeProofPoints, homeStats, homeUseCases, productCards, site } from '@/content/site';
+import { evaluationPoints, glossaryTerms, homeProofPoints, homeStats, homeUseCases, productCards, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 const heroSignals = [
@@ -251,6 +251,39 @@ export default function Home() {
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
+              <span className="eyebrow">Evaluation evidence</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">What serious buyers can verify next</h2>
+            </div>
+            <Link href="/implementation" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              See implementation path {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {evaluationPoints.map((item) => (
+              <article key={item.title} className="glass-card p-7">
+                <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>
+                <ul className="mt-5 space-y-2">
+                  {item.checkpoints.map((checkpoint) => (
+                    <li key={checkpoint} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5 text-sm text-[#d8dce4]">
+                      {checkpoint}
+                    </li>
+                  ))}
+                </ul>
+                <Link href={item.href} className="mt-6 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+                  {item.ctaLabel} {'->'}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
               <span className="eyebrow">Robot skin FAQ</span>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Short answers for robotics teams</h2>
             </div>
@@ -282,6 +315,32 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Glossary cluster</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Terms that help AI and buyers classify the site</h2>
+            </div>
+            <Link href="/glossary" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              Open glossary {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {glossaryTerms.slice(0, 4).map((item) => (
+              <article key={item.term} className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5">
+                <h3 className="text-lg font-semibold text-white">{item.term}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-soft">{item.definition}</p>
+                <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+                  Related page {'->'}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="pb-20 pt-8">
         <div className="container-shell">
           <div className="rounded-[28px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-12">
@@ -308,8 +367,8 @@ export default function Home() {
             </div>
             <p className="mt-4 text-sm text-[#9aa3b2]">
               Direct inquiries:{' '}
-              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.directEmail}`}>
-                {site.contact.directEmail}
+              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
+                {site.contact.primaryEmail}
               </a>
             </p>
             <p className="mt-2 text-sm text-[#9aa3b2]">

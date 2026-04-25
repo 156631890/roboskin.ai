@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Multimodal tactile sensing">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <g transform="translate(260 140)">
+    <rect width="680" height="360" rx="46" fill="#0b0d12" stroke="#263244"/>
+    <circle cx="180" cy="180" r="72" fill="#1f6feb" opacity=".5"/>
+    <circle cx="340" cy="180" r="72" fill="#62a8ff" opacity=".42"/>
+    <circle cx="500" cy="180" r="72" fill="#7dd3fc" opacity=".34"/>
+    <path d="M120 285h440" stroke="#d7e7ff" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+  </g>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Pressure, temperature, and contact signals</text>
+</svg>

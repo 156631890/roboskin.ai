@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { technologyLayers } from '@/content/site';
+import { fitCriteria, sensorDataFlow, technologyLayers } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/technology');
@@ -38,6 +38,48 @@ export default function TechnologyPage() {
               ) : null}
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Data flow</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From contact surface to robot-ready signals</h2>
+            </div>
+            <Link href="/research/ros2-kilted-tactile-pipeline-2026" className="text-accent text-sm font-semibold hover:text-white">
+              Read ROS 2 pipeline brief {'->'}
+            </Link>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {sensorDataFlow.map((step, index) => (
+              <article key={step.title} className="glass-card p-6">
+                <p className="text-soft text-xs uppercase tracking-[0.14em]">Step {index + 1}</p>
+                <h3 className="mt-2 text-xl font-semibold text-white">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{step.summary}</p>
+                <p className="mt-4 rounded-xl border border-white/8 bg-[#0d1016] px-4 py-3 text-sm text-[#d8dce4]">{step.output}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
+            <p className="text-soft text-xs uppercase tracking-[0.14em]">Fit criteria</p>
+            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">What must be validated before a pilot</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {fitCriteria.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-white/8 bg-[#0d1016] p-5">
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

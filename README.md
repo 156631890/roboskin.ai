@@ -30,24 +30,32 @@ npm run build
 - `/solutions`
 - `/technology`
 - `/resources`
+- `/downloads`
+- `/comparison`
+- `/implementation`
+- `/research`
+- `/research/[id]`
+- `/glossary`
+- `/case-studies`
+- `/faq`
 - `/about`
 - `/contact`
 - `/privacy`
 - `/terms`
 
-Legacy routes such as `/applications`, `/research`, `/case-studies`, `/partners`, `/team`, `/news`, and `/careers` remain as compatibility pages and are excluded from the main navigation.
+Legacy routes such as `/applications`, `/partners`, `/team`, `/news`, and `/careers` remain as compatibility pages and are excluded from the main navigation.
 
 ## Contact form
 
-The contact flow uses a static page plus a serverless route at `/api/contact`.
+The contact flow is static-hosting safe. If `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` is configured at build time, the browser posts submissions to that endpoint. If it is not configured, the form opens a prepared email to `contact@roboskin.ai`.
 
 Environment variable:
 
 ```bash
-CONTACT_WEBHOOK_URL=
+NEXT_PUBLIC_CONTACT_FORM_ENDPOINT=
 ```
 
-If `CONTACT_WEBHOOK_URL` is set, submissions are forwarded to that endpoint.
+The repository still includes `/api/contact` for server-capable deployments, but the exported static site does not rely on it.
 
 ## Image generation
 
@@ -77,3 +85,4 @@ GEMINI_OFFLINE_MODE=1 npm run generate:images
 - Shared site copy and contact details live in `src/content/site.ts`.
 - Navigation and footer read from the same source of truth.
 - Public pages are designed to avoid personal contact handles and unsupported claims.
+- `public/llms.txt`, `sitemap.xml`, and the glossary are maintained as crawl and AI-answering aids.

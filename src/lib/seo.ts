@@ -115,6 +115,26 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Research'],
   },
+  '/glossary': {
+    path: '/glossary',
+    title: 'Robot Skin Glossary: Tactile AI, E-Skin, and Sensor Terms',
+    description:
+      'A practical glossary for robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 tactile pipelines, and integration reviews.',
+    priority: 0.72,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Glossary'],
+  },
+  '/case-studies': {
+    path: '/case-studies',
+    title: 'Robot Skin Case Studies and Evaluation Paths',
+    description:
+      'Anonymous, conservative case-study summaries for robotic gripper evaluation, humanoid contact sensing, and prototype-to-pilot tactile sensing readiness.',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Case studies'],
+  },
   '/about': {
     path: '/about',
     title: 'About RoboSkin.ai',
@@ -195,7 +215,7 @@ export function buildPageMetadata(path: keyof typeof pageSeo | string): Metadata
       siteName: site.name,
       images: [
         {
-          url: '/og-image.jpg',
+          url: '/og-image.svg',
           width: 1200,
           height: 630,
           alt: `${site.name} robot skin and tactile AI`,
@@ -206,7 +226,7 @@ export function buildPageMetadata(path: keyof typeof pageSeo | string): Metadata
       card: 'summary_large_image',
       title: `${route.title} | ${site.name}`,
       description: route.description,
-      images: ['/twitter-image.jpg'],
+      images: ['/twitter-image.svg'],
     },
     robots: route.index
       ? {

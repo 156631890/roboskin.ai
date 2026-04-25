@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { caseStudySummaries, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { caseStudySummaries } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Case Studies',
-  description: 'Application-focused summaries that explain scoping, evaluation paths, and integration planning for tactile sensing.',
-  alternates: {
-    canonical: `${site.url}/case-studies`,
-  },
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = buildPageMetadata('/case-studies');
 
 export default function CaseStudiesPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/case-studies'), buildBreadcrumbJsonLd('/case-studies')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Case studies</span>

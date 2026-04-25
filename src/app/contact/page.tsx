@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
-import { site } from '@/content/site';
+import { contactPaths, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/contact');
@@ -21,10 +22,9 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 space-y-2 text-sm text-soft">
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
-              <p>Direct: <a className="text-accent hover:text-white" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a></p>
+              <p>Sales: <a className="text-accent hover:text-white" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a></p>
               <p>WhatsApp: <a className="text-accent hover:text-white" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
               <p>WeChat: <span className="text-white">{site.contact.wechat}</span></p>
-              <p>Sales: <a className="text-accent hover:text-white" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a></p>
               <p>Legal: <a className="text-accent hover:text-white" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a></p>
             </div>
           </div>
@@ -43,6 +43,19 @@ export default function ContactPage() {
       </section>
 
       <section className="pb-20">
+        <div className="container-shell mb-10">
+          <div className="grid gap-5 md:grid-cols-3">
+            {contactPaths.map((path) => (
+              <article key={path.title} className="glass-card p-6">
+                <h2 className="text-xl font-semibold text-white">{path.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{path.summary}</p>
+                <Link href={path.href} className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+                  {path.ctaLabel} {'->'}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
         <div className="container-shell grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Suspense
             fallback={
@@ -64,8 +77,9 @@ export default function ContactPage() {
             <ul className="mt-5 space-y-3 text-sm text-soft">
               <li>Application or robot platform</li>
               <li>Target geometry and form factor</li>
+              <li>Surface area, curvature, and attachment constraints</li>
+              <li>Expected software interface, SDK, or ROS 2 needs</li>
               <li>Integration timeline</li>
-              <li>Any interface or SDK requirements</li>
             </ul>
             <div className="mt-8 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
               <p className="text-soft text-xs uppercase tracking-[0.14em]">What happens next</p>
@@ -77,7 +91,7 @@ export default function ContactPage() {
             </div>
             <div className="mt-8 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
               <p className="text-sm text-soft">
-                For direct inquiries: <a className="text-accent hover:text-white" href={`mailto:${site.contact.directEmail}`}>{site.contact.directEmail}</a>
+                For direct inquiries: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a>
               </p>
             </div>
           </div>

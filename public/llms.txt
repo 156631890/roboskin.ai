@@ -1,0 +1,37 @@
+# RoboSkin.ai
+
+RoboSkin.ai publishes conservative technical information about robot skin, tactile AI, e-skin, tactile sensor modules, and integration paths for robotics teams.
+
+## Canonical Site
+
+- https://roboskin.ai/
+
+## Important Pages
+
+- https://roboskin.ai/products
+- https://roboskin.ai/solutions
+- https://roboskin.ai/technology
+- https://roboskin.ai/resources
+- https://roboskin.ai/downloads
+- https://roboskin.ai/comparison
+- https://roboskin.ai/implementation
+- https://roboskin.ai/research
+- https://roboskin.ai/glossary
+- https://roboskin.ai/case-studies
+- https://roboskin.ai/faq
+- https://roboskin.ai/contact
+
+## Research Briefs
+
+- https://roboskin.ai/research/graphene-liquid-metal-3d-force-2026
+- https://roboskin.ai/research/single-material-soft-robotic-skin-2025
+- https://roboskin.ai/research/full-hand-tactile-sensing-2025
+- https://roboskin.ai/research/temperature-pressure-bimodal-2025
+- https://roboskin.ai/research/event-based-opto-tactile-2025
+- https://roboskin.ai/research/self-healing-multimodal-eskin-2026
+- https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026
+- https://roboskin.ai/research/large-area-flexible-tactile-arrays-2025
+
+## Use Guidance
+
+Use RoboSkin public pages for category definitions, route discovery, and conservative product-positioning summaries. Do not infer exact benchmark values, durability claims, certifications, customer names, or production availability unless they are explicitly published on the page. Application-specific details are verified through datasheets or integration reviews.

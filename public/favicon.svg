@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="RoboSkin icon">
+  <rect width="64" height="64" rx="16" fill="#06080c"/>
+  <path d="M14 37c7-15 29-15 36 0" fill="none" stroke="#62a8ff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M19 39h26v8H19z" fill="#111827" stroke="#7dd3fc" stroke-width="2"/>
+  <circle cx="24" cy="29" r="3" fill="#7dd3fc"/>
+  <circle cx="32" cy="25" r="3" fill="#62a8ff"/>
+  <circle cx="40" cy="29" r="3" fill="#7dd3fc"/>
+  <path d="M22 45h20" stroke="#d7e7ff" stroke-width="2" stroke-linecap="round"/>
+</svg>

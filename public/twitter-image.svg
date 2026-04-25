@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="RoboSkin social image">
+  <rect width="1200" height="630" fill="#06080c"/>
+  <circle cx="965" cy="150" r="220" fill="#1f6feb" opacity=".18"/>
+  <circle cx="900" cy="385" r="180" fill="#7dd3fc" opacity=".12"/>
+  <path d="M90 438c160-80 300-80 420 0s250 80 390 0" fill="none" stroke="#62a8ff" stroke-width="4" opacity=".5"/>
+  <text x="90" y="165" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="28" letter-spacing="6">ROBOT SKIN</text>
+  <text x="90" y="260" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">Tactile AI for</text>
+  <text x="90" y="345" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">robotics teams</text>
+  <text x="90" y="515" fill="#d7e7ff" font-family="Arial, sans-serif" font-size="30">RoboSkin.ai</text>
+</svg>

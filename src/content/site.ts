@@ -69,6 +69,39 @@ export type NewsItem = {
   ctaLabel?: string;
 };
 
+export type EvaluationPoint = {
+  title: string;
+  summary: string;
+  checkpoints: string[];
+  href: string;
+  ctaLabel: string;
+};
+
+export type DataFlowStep = {
+  title: string;
+  summary: string;
+  output: string;
+};
+
+export type FitCriterion = {
+  title: string;
+  description: string;
+};
+
+export type ContactPath = {
+  title: string;
+  summary: string;
+  href: string;
+  ctaLabel: string;
+};
+
+export type GlossaryTerm = {
+  term: string;
+  definition: string;
+  related: string[];
+  href: string;
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -78,7 +111,6 @@ export const site = {
     salesEmail: 'sales@roboskin.ai',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
-    directEmail: 'messigoat47@gmail.com',
     whatsapp: '15755596955',
     whatsappDial: '8615755596955',
     wechat: '15755596955',
@@ -116,6 +148,7 @@ export const footerNavigation = [
       { href: '/contact', label: 'Contact' },
       { href: '/case-studies', label: 'Case studies' },
       { href: '/research', label: 'Research' },
+      { href: '/glossary', label: 'Glossary' },
       { href: '/news', label: 'News' },
       { href: '/privacy', label: 'Privacy' },
       { href: '/terms', label: 'Terms' },
@@ -132,20 +165,20 @@ export const homeStats = [
 
 export const homeProofPoints: ContentTile[] = [
   {
-    title: 'Acquisition-friendly brand',
-    description: 'A short, memorable name and a high-end visual system make the domain feel like a real category asset.',
+    title: 'Evaluation-first positioning',
+    description: 'The site explains how teams should evaluate surface geometry, signal outputs, interfaces, and pilot readiness before making claims.',
   },
   {
-    title: 'Technical vocabulary',
-    description: 'Use words buyers already expect to see in tactile hardware: spatial resolution, latency, stretchability, and fit.',
+    title: 'Technical vocabulary buyers recognize',
+    description: 'Robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 pipelines, and sensor fusion are used in practical context.',
   },
   {
-    title: 'Private technical material',
-    description: 'Keep deeper specs behind a deck or datasheet request so the public page stays elegant and disciplined.',
+    title: 'Verified-on-request discipline',
+    description: 'Durability, operating range, latency, and resolution claims are routed to datasheets or integration reviews instead of broad public promises.',
   },
   {
-    title: 'Searchable category terms',
-    description: 'Tactile AI, humanoid robot skin, and e-skin are placed naturally so the site reads well and indexes well.',
+    title: 'Searchable content clusters',
+    description: 'Product, solution, research, glossary, comparison, and implementation pages now reinforce each other with natural internal links.',
   },
 ];
 
@@ -175,6 +208,8 @@ export const productCards = [
     summary: 'Flexible tactile hardware for evaluation, demos, and pilot integration.',
     inputsOutputs: 'Surface integration, contact events, robot-ready signals',
     specs: ['High-density sensing layout', 'Flexible form factors', 'Private datasheet on request', 'Pilot support'],
+    evaluation: ['Target surface size and curvature', 'Pressure and shear signal expectations', 'Mounting and cable-routing constraints', 'Calibration and replay plan'],
+    verificationNote: 'Best used when a team needs a real tactile baseline before choosing a custom skin geometry.',
     cta: 'Request datasheet',
   },
   {
@@ -183,6 +218,8 @@ export const productCards = [
     summary: 'Hardware, examples, and integration notes for bringing tactile sensing into a stack quickly.',
     inputsOutputs: 'Sample sensors, examples, integration guidance',
     specs: ['Developer workflow', 'API access', 'Pilot-friendly setup', 'Request availability'],
+    evaluation: ['Bring-up time', 'Example data flow', 'SDK and ROS 2 expectations', 'Bench-test repeatability'],
+    verificationNote: 'Best used when software and controls teams need fast tactile data for early experiments.',
     cta: 'Talk to engineering',
   },
   {
@@ -191,7 +228,33 @@ export const productCards = [
     summary: 'Application-driven support for custom form factors, mounting constraints, and deployment fit.',
     inputsOutputs: 'Requirements review, geometry scoping, custom delivery',
     specs: ['Custom geometry', 'Program scoping', 'Engineering consultation', 'Quote on request'],
+    evaluation: ['Robot geometry review', 'Attachment and serviceability plan', 'Environmental constraints', 'Pilot success criteria'],
+    verificationNote: 'Best used when the robot surface, packaging, or operating environment makes an off-the-shelf array insufficient.',
     cta: 'Request a deck',
+  },
+];
+
+export const evaluationPoints: EvaluationPoint[] = [
+  {
+    title: 'Evaluation packet',
+    summary: 'A concise package for teams comparing tactile sensor options before prototype or pilot work.',
+    checkpoints: ['Datasheet request', 'Surface geometry fit check', 'Signal and interface review', 'Pilot success criteria'],
+    href: '/downloads',
+    ctaLabel: 'Request technical material',
+  },
+  {
+    title: 'Integration review',
+    summary: 'A practical review for teams with curved surfaces, robot hands, grippers, or custom mounting constraints.',
+    checkpoints: ['Robot platform', 'Target surface and curvature', 'Data pipeline expectations', 'Timeline and deployment stage'],
+    href: '/contact?requestType=integration',
+    ctaLabel: 'Talk to engineering',
+  },
+  {
+    title: 'Evidence policy',
+    summary: 'Public pages stay conservative while measurable details are confirmed in request-only material.',
+    checkpoints: ['No invented benchmarks', 'No unsupported customer claims', 'Measured details on request', 'Application-specific validation'],
+    href: '/faq',
+    ctaLabel: 'Read the FAQ',
   },
 ];
 
@@ -262,6 +325,48 @@ export const technologyLayers: TechnologyLayer[] = [
       'Keep the public story narrow; expand details in private technical material.',
       'Align on success criteria and next steps for prototype, pilot, and deployment.',
     ],
+  },
+];
+
+export const sensorDataFlow: DataFlowStep[] = [
+  {
+    title: 'Contact surface',
+    summary: 'Flexible tactile elements sit on the robot hand, gripper, arm, or curved body surface.',
+    output: 'Local pressure, shear, slip, temperature, or contact-event signals depending on configuration.',
+  },
+  {
+    title: 'Signal conditioning',
+    summary: 'Electronics and firmware clean raw readings, align timestamps, and preserve calibration metadata.',
+    output: 'Robot-ready tactile frames, event streams, or reduced contact features.',
+  },
+  {
+    title: 'Robot middleware',
+    summary: 'The integration layer maps tactile data into the team pipeline, including ROS 2, replay, logging, and controller interfaces when applicable.',
+    output: 'Documented topics, coordinate frames, QoS expectations, and debug workflow.',
+  },
+  {
+    title: 'Controller or analytics loop',
+    summary: 'The robot stack uses tactile features for grip confidence, slip response, contact-aware motion, or evaluation analytics.',
+    output: 'Task-specific success criteria for prototype, pilot, or deployment review.',
+  },
+];
+
+export const fitCriteria: FitCriterion[] = [
+  {
+    title: 'Geometry fit',
+    description: 'Target surface area, curvature, attachment method, cable routing, and serviceability determine the starting product path.',
+  },
+  {
+    title: 'Signal fit',
+    description: 'Teams should define whether they need pressure maps, shear, slip events, temperature, force/torque context, or lower-bandwidth contact events.',
+  },
+  {
+    title: 'Software fit',
+    description: 'Useful integrations define message formats, timestamps, coordinate frames, logging, replay, and calibration handling before pilot work.',
+  },
+  {
+    title: 'Validation fit',
+    description: 'Durability, latency, sensitivity, drift, and environmental claims should be measured against the exact robot and use case.',
   },
 ];
 
@@ -341,6 +446,27 @@ export const resourceSections: ResourceSection[] = [
         href: '/contact?requestType=integration',
       },
     ],
+  },
+];
+
+export const contactPaths: ContactPath[] = [
+  {
+    title: 'Datasheet or deck request',
+    summary: 'Use this path when you need the current hardware overview, evaluation packet, or private product deck.',
+    href: '/contact?requestType=datasheet',
+    ctaLabel: 'Request datasheet',
+  },
+  {
+    title: 'Integration review',
+    summary: 'Use this path when geometry, mounting, ROS 2, SDK, or data pipeline requirements affect the recommendation.',
+    href: '/contact?requestType=integration',
+    ctaLabel: 'Request review',
+  },
+  {
+    title: 'Demo discussion',
+    summary: 'Use this path when you are preparing a robotics demo, lab evaluation, or pilot milestone.',
+    href: '/contact?requestType=demo',
+    ctaLabel: 'Request demo',
   },
 ];
 
@@ -481,6 +607,51 @@ export const faqItems: FaqItem[] = [
   {
     question: 'What email should I use for direct inquiries?',
     answer: site.contact.primaryEmail,
+  },
+];
+
+export const glossaryTerms: GlossaryTerm[] = [
+  {
+    term: 'Robot skin',
+    definition: 'A tactile sensing surface that helps a robot detect contact, pressure, shear, slip, or interaction events across hands, grippers, arms, or curved body surfaces.',
+    related: ['tactile sensing', 'e-skin', 'humanoid robot skin'],
+    href: '/technology',
+  },
+  {
+    term: 'Tactile AI',
+    definition: 'Software and sensing workflows that turn touch data into useful robot signals for grasping, contact response, manipulation, or evaluation analytics.',
+    related: ['sensor fusion', 'robot learning', 'slip detection'],
+    href: '/research',
+  },
+  {
+    term: 'E-skin',
+    definition: 'Electronic skin: a flexible or soft sensor layer designed to measure contact-related signals on non-flat surfaces.',
+    related: ['flexible tactile sensor', 'soft robotic skin', 'multimodal sensing'],
+    href: '/research/single-material-soft-robotic-skin-2025',
+  },
+  {
+    term: 'Slip detection',
+    definition: 'Detection of object movement relative to a robot finger or gripper, often using shear, vibration, texture, or event-based tactile signals.',
+    related: ['dexterous manipulation', 'grip control', 'event-based sensing'],
+    href: '/research/graphene-liquid-metal-3d-force-2026',
+  },
+  {
+    term: 'Multimodal tactile sensing',
+    definition: 'A sensor approach that captures more than one stimulus type, such as pressure and temperature, while managing crosstalk and calibration.',
+    related: ['temperature/pressure sensing', 'crosstalk', 'signal decoupling'],
+    href: '/research/temperature-pressure-bimodal-2025',
+  },
+  {
+    term: 'ROS 2 tactile pipeline',
+    definition: 'A robotics software path for recording, replaying, transforming, and consuming tactile sensor data with consistent timestamps, frames, and middleware settings.',
+    related: ['ROS 2 Kilted', 'rosbag2', 'ros2_control'],
+    href: '/research/ros2-kilted-tactile-pipeline-2026',
+  },
+  {
+    term: 'Integration review',
+    definition: 'A scoped technical discussion that maps robot geometry, interfaces, environment, timeline, and validation goals before selecting a sensor path.',
+    related: ['evaluation', 'pilot', 'custom form factor'],
+    href: '/implementation',
   },
 ];
 

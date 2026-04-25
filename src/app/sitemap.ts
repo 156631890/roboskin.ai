@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { blogPosts } from '@/lib/blog-data';
 import { canonicalUrl, seoRoutes } from '@/lib/seo';
 
 export const dynamic = 'force-static';
@@ -13,5 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: route.priority,
     }));
 
-  return staticPages;
+  const articlePages = blogPosts.map((post) => ({
+    url: canonicalUrl(`/research/${post.id}`),
+    lastModified: new Date(post.updated),
+    changeFrequency: 'monthly' as const,
+    priority: 0.72,
+  }));
+
+  return [...staticPages, ...articlePages];
 }

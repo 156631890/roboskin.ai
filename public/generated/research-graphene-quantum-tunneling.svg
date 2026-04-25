@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Graphene liquid metal tactile sensing">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <circle cx="930" cy="150" r="230" fill="#1f6feb" opacity=".16"/>
+  <path d="M120 470c210-110 330-110 520 0s310 90 440-40" fill="none" stroke="#62a8ff" stroke-width="5" opacity=".55"/>
+  <g transform="translate(210 145)" fill="none" stroke="#7dd3fc" stroke-width="3" opacity=".8">
+    <path d="M0 180h120l60-105 60 210 60-105h150"/>
+    <path d="M0 230h120l60-105 60 210 60-105h150"/>
+    <path d="M0 280h120l60-105 60 210 60-105h150"/>
+  </g>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">3D force sensing for robot fingertips</text>
+</svg>

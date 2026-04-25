@@ -63,6 +63,17 @@ export default function ProductsPage() {
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-6 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
+                    <p className="text-xs uppercase tracking-[0.14em] text-soft">Evaluation criteria</p>
+                    <ul className="mt-4 space-y-2">
+                      {product.evaluation.map((item) => (
+                        <li key={item} className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5 text-sm text-[#d8dce4]">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-4 text-sm leading-relaxed text-soft">{product.verificationNote}</p>
+                  </div>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link href="/contact?requestType=datasheet" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
                       Request datasheet

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="ROS 2 tactile pipeline">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <g transform="translate(150 210)" fill="#0b0d12" stroke="#2a3d55" stroke-width="3">
+    <rect width="190" height="110" rx="24"/>
+    <rect x="250" width="190" height="110" rx="24"/>
+    <rect x="500" width="190" height="110" rx="24"/>
+    <rect x="750" width="190" height="110" rx="24"/>
+  </g>
+  <path d="M345 265h55M595 265h55M845 265h55" stroke="#62a8ff" stroke-width="6" stroke-linecap="round"/>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">ROS 2 tactile data pipelines</text>
+</svg>

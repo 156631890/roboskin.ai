@@ -7,9 +7,9 @@ import { blogPosts, getBlogPostById } from '@/lib/blog-data';
 import { buildArticleJsonLd, buildGraphJsonLd, canonicalUrl } from '@/lib/seo';
 
 type ResearchArticlePageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export const dynamicParams = false;
@@ -20,8 +20,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: ResearchArticlePageProps): Metadata {
-  const post = getBlogPostById(params.id);
+export async function generateMetadata({ params }: ResearchArticlePageProps): Promise<Metadata> {
+  const { id } = await params;
+  const post = getBlogPostById(id);
 
   if (!post) {
     return {
@@ -151,8 +152,9 @@ function ArticleBody({ content }: { content: string }) {
   return <div className="mt-8">{elements}</div>;
 }
 
-export default function ResearchArticlePage({ params }: ResearchArticlePageProps) {
-  const post = getBlogPostById(params.id);
+export default async function ResearchArticlePage({ params }: ResearchArticlePageProps) {
+  const { id } = await params;
+  const post = getBlogPostById(id);
 
   if (!post) {
     notFound();

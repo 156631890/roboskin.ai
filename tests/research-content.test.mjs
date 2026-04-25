@@ -31,7 +31,9 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(researchPage, /href=\{`\/research\/\$\{post\.id\}`\}/);
 
   assert.match(articlePage, /generateStaticParams/);
-  assert.match(articlePage, /generateMetadata/);
+  assert.match(articlePage, /params:\s*Promise<\{\s*id:\s*string;\s*\}>/);
+  assert.match(articlePage, /export async function generateMetadata/);
+  assert.match(articlePage, /export default async function ResearchArticlePage/);
   assert.match(articlePage, /buildArticleJsonLd/);
   assert.match(articlePage, /getBlogPostById/);
 

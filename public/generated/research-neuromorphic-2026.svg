@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Event based tactile sensing">
+  <rect width="1200" height="675" fill="#06080c"/>
+  <g stroke="#62a8ff" stroke-width="3" fill="none" opacity=".75">
+    <path d="M160 350h150l40-95 50 190 55-130h140l45-85 60 170h220"/>
+    <path d="M160 420h120l35-70 40 135 45-95h120l45-60 55 125h250" opacity=".45"/>
+  </g>
+  <g fill="#7dd3fc">
+    <circle cx="350" cy="255" r="8"/>
+    <circle cx="455" cy="315" r="8"/>
+    <circle cx="640" cy="230" r="8"/>
+    <circle cx="700" cy="400" r="8"/>
+  </g>
+  <text x="88" y="112" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">RESEARCH BRIEF</text>
+  <text x="88" y="570" fill="#ffffff" font-family="Arial, sans-serif" font-size="48" font-weight="700">Event-based tactile sensing</text>
+</svg>
