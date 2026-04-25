@@ -138,11 +138,19 @@ main [class*="linear-gradient(180deg,rgba(14,18,26"] .text-soft {
   color: #d8dce4;
 }
 
-.glass-card [class*="text-[#d8dce4]"],
-[class*="bg-[#0b0d12]"] [class*="text-[#d8dce4]"],
-[class*="bg-[#0d1016]"] [class*="text-[#d8dce4]"],
-[class*="bg-[#11151d]"] [class*="text-[#d8dce4]"] {
+.glass-card [class*="text-[#d8dce4]"] {
   color: var(--text-soft);
+}
+
+main [class*="bg-[#0b0d12]"][class*="text-[#d8dce4]"],
+main [class*="bg-[#0d1016]"][class*="text-[#d8dce4]"],
+main [class*="bg-[#11151d]"][class*="text-[#d8dce4]"],
+main [class*="linear-gradient(180deg,rgba(14,18,26"][class*="text-[#d8dce4]"],
+main [class*="bg-[#0b0d12]"] [class*="text-[#d8dce4]"],
+main [class*="bg-[#0d1016]"] [class*="text-[#d8dce4]"],
+main [class*="bg-[#11151d]"] [class*="text-[#d8dce4]"],
+main [class*="linear-gradient(180deg,rgba(14,18,26"] [class*="text-[#d8dce4]"] {
+  color: #d8dce4;
 }
 
 ::-webkit-scrollbar {
