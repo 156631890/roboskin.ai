@@ -121,13 +121,23 @@ export default function ContactForm({ requestType }: ContactFormProps) {
       return;
     }
 
-    const response = await fetch(contactFormEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form),
-    });
+    let response: Response;
+
+    try {
+      response = await fetch(contactFormEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+    } catch (error) {
+      void error;
+      window.location.href = buildMailtoHref(form);
+      setStatus('success');
+      setFeedback(`Your email client should open a prepared message to ${site.contact.ownerEmail}.`);
+      return;
+    }
 
     if (!response.ok) {
       setStatus('error');

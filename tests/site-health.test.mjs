@@ -10,7 +10,7 @@ const exists = async (path) => {
 };
 
 test('site authority health checks pass', async () => {
-  const [sitemap, seo, layout, contactForm, contactRoute, site, nextConfig, caseStudies, llms, domainSale] = await Promise.all([
+  const [sitemap, seo, layout, contactForm, contactRoute, site, nextConfig, caseStudies, llms, domainSale, blogData] = await Promise.all([
     read('src/app/sitemap.ts'),
     read('src/lib/seo.ts'),
     read('src/app/layout.tsx'),
@@ -21,6 +21,7 @@ test('site authority health checks pass', async () => {
     read('src/app/case-studies/page.tsx'),
     read('public/llms.txt'),
     read('public/domain-sale.html'),
+    read('src/lib/blog-data.ts'),
   ]);
 
   assert.match(sitemap, /blogPosts/);
@@ -29,6 +30,9 @@ test('site authority health checks pass', async () => {
   assert.match(seo, /'\/case-studies'/);
   assert.match(contactForm, /NEXT_PUBLIC_CONTACT_FORM_ENDPOINT/);
   assert.match(contactForm, /mailto:/);
+  assert.match(contactForm, /try\s*\{/);
+  assert.match(contactForm, /catch\s*\(/);
+  assert.match(contactForm, /window\.location\.href\s*=\s*buildMailtoHref\(form\)/);
   assert.doesNotMatch(contactForm, /fetch\('\/api\/contact'/);
   assert.doesNotMatch(nextConfig, /ignoreBuildErrors:\s*true/);
   assert.doesNotMatch(nextConfig, /ignoreDuringBuilds:\s*true/);
@@ -53,6 +57,9 @@ test('site authority health checks pass', async () => {
   assert.match(llms, /robot skin information hub|robot skin knowledge hub/i);
   assert.match(llms, /premium domain asset/i);
   assert.doesNotMatch(llms, /production availability|datasheets or integration reviews/i);
+  assert.doesNotMatch(blogData, /RoboSkin-style systems/);
+  assert.doesNotMatch(blogData, /datasheets and integration reviews/);
+  assert.doesNotMatch(blogData, /Product implication/);
   assert.match(layout, /\/site\.webmanifest/);
   assert.ok(await exists('public/og-image.svg'));
   assert.ok(await exists('public/twitter-image.svg'));

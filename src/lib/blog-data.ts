@@ -44,11 +44,11 @@ The important technical shift is not a single sensitivity number. The shift is t
 
 ## Integration notes
 
-For practical RoboSkin-style systems, this direction points toward tactile arrays that publish vector contact data instead of only scalar pressure maps. The engineering problem becomes calibration, mechanical packaging, thermal drift control, and clean signal routing on curved surfaces.
+For tactile sensing category coverage, this direction points toward arrays that publish vector contact data instead of only scalar pressure maps. The engineering problem becomes calibration, mechanical packaging, thermal drift control, and clean signal routing on curved surfaces.
 
 ## What remains application-specific
 
-Claims about exact force range, durability, and fingertip-level spatial resolution should be verified for each geometry and substrate. Public pages should describe the sensing approach, while datasheets and integration reviews should carry measured values.
+Claims about exact force range, durability, and fingertip-level spatial resolution should be verified for each geometry and substrate. Public pages should describe the sensing approach, while source notes and measurement summaries should carry measured values.
 
 ## Source
 
@@ -126,9 +126,9 @@ The broader lesson is that tactile sensing should not be treated as a decorative
 - Sensor placement must preserve hand motion and mechanical compliance.
 - Calibration and data reduction are critical because raw tactile streams are high dimensional.
 
-## Product implication
+## Information context
 
-RoboSkin content should emphasize staged integration: start with a fit check, confirm surface geometry, select a sensing layout, and validate the data pipeline before claiming deployment readiness.
+RoboSkin.ai research coverage should emphasize staged evaluation: start with a fit check, confirm surface geometry, select a sensing layout, and validate the data pipeline before claiming deployment readiness.
 
 ## Source
 
@@ -318,9 +318,9 @@ Large-area flexible tactile arrays are becoming more relevant as robot skin move
 - Slip direction and velocity are useful control signals for manipulation.
 - Durability testing must include repeated loading, bending, and attachment stress.
 
-## Product implication
+## Information context
 
-For RoboSkin content, large-area arrays should be positioned as integration programs rather than one-size-fits-all parts. Surface geometry, mounting, cabling, connector placement, and data rates determine whether the array is practical.
+For category coverage, large-area arrays should be positioned as integration programs rather than one-size-fits-all parts. Surface geometry, mounting, cabling, connector placement, and data rates determine whether the array is practical.
 
 ## Source
 
