@@ -22,7 +22,7 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 space-y-2 text-sm text-soft">
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
-              <p>Sales: <a className="text-accent hover:text-white" href={`mailto:${site.contact.salesEmail}`}>{site.contact.salesEmail}</a></p>
+              <p>Owner: <a className="text-accent hover:text-white" href={`mailto:${site.contact.ownerEmail}`}>{site.contact.ownerEmail}</a></p>
               <p>WhatsApp: <a className="text-accent hover:text-white" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
               <p>WeChat: <span className="text-white">{site.contact.wechat}</span></p>
               <p>Legal: <a className="text-accent hover:text-white" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a></p>
@@ -75,18 +75,18 @@ export default function ContactPage() {
           <div className="glass-card p-6 md:p-8">
             <h2 className="text-2xl font-semibold text-white">What to include</h2>
             <ul className="mt-5 space-y-3 text-sm text-soft">
-              <li>Application or robot platform</li>
-              <li>Target geometry and form factor</li>
-              <li>Surface area, curvature, and attachment constraints</li>
-              <li>Expected software interface, SDK, or ROS 2 needs</li>
-              <li>Integration timeline</li>
+              <li>Intended use for RoboSkin.ai</li>
+              <li>Buyer, broker, company, or project context</li>
+              <li>Budget range or seriousness signal if this is an acquisition inquiry</li>
+              <li>Timeline for acquisition, partnership, or content collaboration</li>
+              <li>Research correction or source suggestion if this is an information request</li>
             </ul>
             <div className="mt-8 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
               <p className="text-soft text-xs uppercase tracking-[0.14em]">What happens next</p>
               <ul className="mt-4 space-y-2 text-sm text-[#d8dce4]">
-                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">We confirm the request type (datasheet, demo, or integration review).</li>
-                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">If details depend on geometry or environment, we route you to a request-only brief.</li>
-                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">We reply with a concrete next step and the minimum information we still need.</li>
+                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">We identify whether the message is domain acquisition, partnership, research, or other.</li>
+                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">Serious domain inquiries are reviewed for buyer fit, timeline, and credibility.</li>
+                <li className="rounded-lg border border-white/8 bg-[#0b0d12] px-4 py-2.5">Research and content notes are considered for future site updates.</li>
               </ul>
             </div>
             <div className="mt-8 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
