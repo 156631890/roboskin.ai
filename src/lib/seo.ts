@@ -97,7 +97,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/implementation': {
     path: '/implementation',
-    title: 'Robot Skin Evaluation Concepts and Research Paths',
+    title: 'Robot Skin Category Roadmap and Research Paths',
     description:
       'Understand educational evaluation concepts for tactile sensing, robot hands, curved surfaces, and research discovery without integration-support claims.',
     priority: 0.75,

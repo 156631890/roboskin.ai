@@ -322,7 +322,7 @@ export const technologyLayers: TechnologyLayer[] = [
     summary: 'Mechanical design supports curved surfaces and application-driven layouts.',
     bullets: [
       'Map curvature, attachment methods, and packaging constraints early.',
-      'Treat durability expectations as application-specific and verified on request.',
+      'Treat durability expectations as application-specific and supported by explicit source context.',
       'Use source-backed validation context before research, brand, or category planning.',
     ],
   },
