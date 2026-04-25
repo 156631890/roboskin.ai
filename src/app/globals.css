@@ -104,13 +104,35 @@ a {
   color: var(--primary);
 }
 
-.glass-card .text-white:not([class*="bg-"]),
-.surface-shell .text-white:not([class*="bg-"]),
-.surface-shell-strong .text-white:not([class*="bg-"]),
-[class*="bg-[#0b0d12]"] .text-white:not([class*="bg-"]),
-[class*="bg-[#0d1016]"] .text-white:not([class*="bg-"]),
-[class*="bg-[#11151d]"] .text-white:not([class*="bg-"]) {
+main .text-white,
+main input.text-white,
+main select.text-white,
+main textarea.text-white {
   color: var(--text);
+}
+
+main [class*="bg-[var(--primary)]"].text-white,
+main [class*="bg-[#62a8ff]"].text-white,
+main [class*="bg-[#1f4fd8]"].text-white,
+main [class*="bg-[#111318]"].text-white,
+main [class*="bg-[#0b0d12]"].text-white,
+main [class*="bg-[#0d1016]"].text-white,
+main [class*="bg-[#11151d]"].text-white,
+main [class*="bg-[rgba(6,8,12"].text-white,
+main [class*="bg-[#111318]"] .text-white,
+main [class*="bg-[#0b0d12]"] .text-white,
+main [class*="bg-[#0d1016]"] .text-white,
+main [class*="bg-[#11151d]"] .text-white,
+main [class*="bg-[rgba(6,8,12"] .text-white {
+  color: #fffdf8;
+}
+
+main [class*="bg-[#111318]"] .text-soft,
+main [class*="bg-[#0b0d12]"] .text-soft,
+main [class*="bg-[#0d1016]"] .text-soft,
+main [class*="bg-[#11151d]"] .text-soft,
+main [class*="bg-[rgba(6,8,12"] .text-soft {
+  color: #d8dce4;
 }
 
 .glass-card [class*="text-[#d8dce4]"],
