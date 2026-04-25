@@ -29,7 +29,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Services</h2>
               <p className="mt-3 text-[#4f5560]">
-                Public pages describe robot skin category context, learning resources, and the RoboSkin.ai domain inquiry flow. Any commercial engagement is subject to a separate written agreement.
+                Public pages describe robot skin category context, learning resources, and the RoboSkin.ai domain inquiry path. Any commercial engagement is subject to a separate written agreement.
               </p>
             </div>
             <div>

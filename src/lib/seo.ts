@@ -177,7 +177,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/terms': {
     path: '/terms',
     title: 'Terms of Service',
-    description: 'Terms of use for the RoboSkin website and request flows.',
+    description: 'Terms of use for the RoboSkin website and domain and research inquiries.',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
