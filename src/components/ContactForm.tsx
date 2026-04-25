@@ -226,7 +226,7 @@ export default function ContactForm({ requestType }: ContactFormProps) {
           className="mt-1 h-4 w-4 rounded border-white/20 bg-[var(--bg-soft)]"
         />
         <span>
-          RoboSkin may contact me about this request and use the details above to route it to sales or engineering.
+          RoboSkin may contact me about this domain inquiry, collaboration, or research request and use the details above to route the message appropriately.
         </span>
       </label>
 
