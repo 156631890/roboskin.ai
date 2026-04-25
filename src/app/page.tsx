@@ -1,25 +1,25 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { evaluationPoints, glossaryTerms, homeProofPoints, homeStats, homeUseCases, productCards, site } from '@/content/site';
+import { glossaryTerms, homeProofPoints, homeUseCases, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-const heroSignals = [
+const domainValuePoints = [
   {
-    title: 'Spatial Resolution',
-    text: 'Dense tactile coverage designed to read contact on hands, arms, and grippers.',
+    title: 'Exact category language',
+    text: 'Robot skin is a natural phrase for tactile surfaces on humanoids, grippers, prosthetics, and soft robotic systems.',
   },
   {
-    title: 'Latency',
-    text: 'A private evaluation brief can explain the signal path without overpromising public numbers.',
+    title: '.ai extension fit',
+    text: 'The domain connects robotics language with AI search, tactile intelligence, and machine perception.',
   },
   {
-    title: 'Stretchability',
-    text: 'A flexible surface language helps the brand feel credible on curved robot geometries.',
+    title: 'Content-backed asset',
+    text: 'Research notes, glossary terms, FAQ pages, and internal links give the name more context than a parked page.',
   },
   {
-    title: 'Deployment Fit',
-    text: 'The public story stays narrow while the technical path remains clear for pilots and decks.',
+    title: 'Flexible buyer use cases',
+    text: 'The name can support a startup brand, product line, lab initiative, media property, or acquisition strategy.',
   },
 ];
 
@@ -27,23 +27,23 @@ const homeRobotSkinFaq = [
   {
     question: 'What is robot skin?',
     answer:
-      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, and interaction events on hands, grippers, arms, or curved body surfaces.',
+      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, or interaction events across robot hands, grippers, arms, and curved body surfaces.',
     href: '/faq',
     ctaLabel: 'Read the robot skin FAQ',
   },
   {
-    question: 'Where does tactile AI help first?',
+    question: 'How does tactile AI relate to robot skin?',
     answer:
-      'Tactile AI is most useful where robots need contact feedback: humanoid robot hands, industrial grippers, precision grasping, assistive devices, and pilot integrations.',
-    href: '/solutions',
-    ctaLabel: 'Explore tactile sensing solutions',
+      'Tactile AI describes the perception layer that interprets contact data from robot skin, e-skin, force sensors, and multimodal sensing systems.',
+    href: '/faq',
+    ctaLabel: 'Explore tactile AI answers',
   },
   {
-    question: 'What should teams request before an evaluation?',
+    question: 'Why is RoboSkin.ai a category domain?',
     answer:
-      'Teams should request the datasheet, integration notes, and the most relevant technical brief for their robot type, geometry, timeline, and interface expectations.',
-    href: '/downloads',
-    ctaLabel: 'Request technical material',
+      'RoboSkin.ai pairs a concise robot skin phrase with a .ai extension suited to tactile intelligence, humanoid robotics, research media, and domain acquisition interest.',
+    href: '/contact?requestType=domain',
+    ctaLabel: 'Inquire about the domain',
   },
 ];
 
@@ -53,121 +53,78 @@ export default function Home() {
   return (
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq)])} />
+
       <section className="relative overflow-hidden pb-16 pt-16 md:pb-20 md:pt-20">
-        <div className="container-shell grid items-center gap-12 lg:grid-cols-[1.06fr_0.94fr]">
+        <div className="pointer-events-none absolute left-[-12rem] top-0 h-80 w-80 rounded-full bg-[#f6d48d]/35 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-[-10rem] right-[-8rem] h-96 w-96 rounded-full bg-[#b7d7c7]/35 blur-3xl" />
+        <div className="container-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
           <div className="reveal">
-            <span className="eyebrow">Tactile AI | Humanoid Robot Skin | e-skin</span>
-            <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-white md:text-7xl">
-              Robot skin for the next generation of machines.
+            <span className="eyebrow">Robot skin knowledge hub | Premium .ai domain</span>
+            <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-[var(--text)] md:text-7xl">
+              RoboSkin.ai maps the language of robot skin and tactile AI.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#9aa3b2]">
-              RoboSkin is positioned as a high-end Tactile AI brand for humanoid robot skin and e-skin components, with a public page built to feel like an
-              acquisition-ready hardware asset.
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-soft">
+              Explore the emerging category of robot skin, e-skin, tactile sensing, and humanoid robotics while evaluating RoboSkin.ai as a premium exact-match
+              domain asset.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <Link
-                href="/contact?requestType=datasheet"
-                className="rounded-xl bg-[#62a8ff] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
-              >
-                Request a deck
+              <Link href="/research" className="rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(31,79,216,0.18)]">
+                Explore robot skin research
               </Link>
-              <Link
-                href="/contact"
-                className="rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
-              >
-                Contact
+              <Link href="/glossary" className="rounded-xl border border-[var(--panel-border)] bg-white/60 px-6 py-3 text-sm font-semibold text-[var(--text)]">
+                Browse glossary
               </Link>
-              <Link href="#signals" className="rounded-xl border border-transparent px-2 py-3 text-sm font-semibold text-[#d7e7ff] hover:text-white">
-                View technical signals
+              <Link href="/contact?requestType=domain" className="rounded-xl px-2 py-3 text-sm font-semibold text-[var(--primary)]">
+                Domain inquiry
               </Link>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {homeStats.map((item, idx) => (
-                <article key={item.label} className="glass-card reveal p-5" style={{ animationDelay: `${idx * 0.05}s` }}>
-                  <p className="text-3xl font-bold tracking-tight text-white">{item.value}</p>
-                  <p className="mt-1 text-sm text-[#9aa3b2]">{item.label}</p>
-                </article>
-              ))}
             </div>
           </div>
 
-          <div className="reveal [animation-delay:0.1s]">
-            <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(98,168,255,0.24),transparent_36%),linear-gradient(180deg,rgba(14,18,26,0.98),rgba(7,9,13,0.98))] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#62a8ff]/12 blur-3xl" />
-              <div className="absolute -bottom-24 left-8 h-56 w-56 rounded-full bg-[#7dd3fc]/10 blur-3xl" />
+          <aside className="glass-card p-6 md:p-8">
+            <p className="text-xs uppercase tracking-[0.16em] text-[#8a4b00]">Domain availability</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text)]">RoboSkin.ai is available</h2>
+            <p className="mt-4 text-sm leading-relaxed text-soft">
+              A concise .ai name for robot skin, tactile AI, e-skin research, humanoid robotics, and contact-aware machine interfaces.
+            </p>
+            <Link href={site.domainInquiry.href} className="mt-6 inline-flex rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white">
+              Inquire about RoboSkin.ai
+            </Link>
+          </aside>
+        </div>
+      </section>
 
-              <div className="relative rounded-[24px] border border-white/8 bg-white/5 p-5">
-                <div className="flex items-center justify-between gap-4 border-b border-white/8 pb-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[#9aa3b2]">Flagship surface</p>
-                    <p className="mt-2 text-lg font-semibold tracking-tight text-white">Private brief for humanoid robot skin</p>
-                  </div>
-                  <span className="rounded-full border border-white/10 bg-[#0d1016] px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-[#d7e7ff]">
-                    Request only
-                  </span>
-                </div>
-
-                <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-                  <div className="overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5">
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#9aa3b2]">Surface map</p>
-                      <span className="h-2 w-2 rounded-full bg-[#62a8ff]" />
-                    </div>
-                    <div className="mt-5 grid gap-3">
-                      <div className="grid grid-cols-6 gap-2">
-                        {Array.from({ length: 24 }).map((_, index) => (
-                          <span
-                            key={index}
-                            className="h-10 rounded-xl border border-white/8 bg-[radial-gradient(circle_at_30%_30%,rgba(125,211,252,0.35),rgba(98,168,255,0.12)_35%,rgba(255,255,255,0.04)_70%)]"
-                          />
-                        ))}
-                      </div>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="rounded-2xl border border-white/8 bg-[#11151d] p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-[#9aa3b2]">Pressure zones</p>
-                          <p className="mt-2 text-sm text-white">Readable contact map for robot hands and curved surfaces.</p>
-                        </div>
-                        <div className="rounded-2xl border border-white/8 bg-[#11151d] p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-[#9aa3b2]">Signal output</p>
-                          <p className="mt-2 text-sm text-white">Cleaner robot-ready data for private evaluation decks.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3">
-                    {heroSignals.map((signal, idx) => (
-                      <article key={signal.title} className="rounded-[24px] border border-white/8 bg-[#11151d] p-4" style={{ animationDelay: `${idx * 0.05}s` }}>
-                        <p className="text-xs uppercase tracking-[0.14em] text-[#9aa3b2]">Signal {idx + 1}</p>
-                        <h2 className="mt-2 text-lg font-semibold tracking-tight text-white">{signal.title}</h2>
-                        <p className="mt-2 text-sm leading-relaxed text-[#9aa3b2]">{signal.text}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 max-w-3xl">
+            <span className="eyebrow">Domain value</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Why RoboSkin.ai works as a category asset</h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {domainValuePoints.map((item, idx) => (
+              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
+                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section id="signals" className="py-14 md:py-20">
+      <section className="py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="eyebrow">Technical signals</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Why the category is still open</h2>
+              <span className="eyebrow">Research notes</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Signals that define the robot skin category</h2>
             </div>
-            <p className="max-w-2xl text-sm leading-relaxed text-[#9aa3b2]">
-              The page should read like a premium hardware brand, not a generic product brochure. The copy stays narrow and the vocabulary stays technical.
-            </p>
+            <Link href="/research" className="text-sm font-semibold text-[var(--primary)]">
+              Read research notes {'->'}
+            </Link>
           </div>
-
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {homeProofPoints.map((item, idx) => (
               <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
+                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-soft">{item.description}</p>
               </article>
             ))}
@@ -179,138 +136,20 @@ export default function Home() {
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="eyebrow">Where it fits</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">The robot surfaces that benefit first</h2>
+              <span className="eyebrow">Robot skin applications</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Where tactile surfaces become useful first</h2>
             </div>
-            <Link href="/products" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-              View product paths {'->'}
+            <Link href="/applications" className="text-sm font-semibold text-[var(--primary)]">
+              Explore applications {'->'}
             </Link>
           </div>
-
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {homeUseCases.map((item, idx) => (
               <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#9aa3b2]">{item.text}</p>
+                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.text}</p>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Offer strip</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Three offers, one contact path</h2>
-            </div>
-            <Link href="/comparison" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-              Compare offer levels {'->'}
-            </Link>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-3">
-            {productCards.map((product, idx) => (
-              <article key={product.name} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <p className="text-xs uppercase tracking-[0.12em] text-[#9aa3b2]">Product level</p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">{product.name}</h3>
-                <p className="mt-3 text-sm text-[#9aa3b2]">{product.summary}</p>
-                <p className="mt-4 text-sm text-[#9aa3b2]">
-                  <span className="font-semibold text-white">Start here if:</span> {product.bestFor}
-                </p>
-                <p className="mt-2 text-sm text-[#9aa3b2]">
-                  <span className="font-semibold text-white">Inputs and outputs:</span> {product.inputsOutputs}
-                </p>
-                <ul className="mt-5 space-y-2">
-                  {product.specs.map((spec) => (
-                    <li key={spec} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-3 text-sm text-[#d8dce4]">
-                      {spec}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={
-                    product.cta === 'Request datasheet'
-                      ? '/contact?requestType=datasheet'
-                      : product.cta === 'Talk to engineering'
-                        ? '/contact?requestType=integration'
-                        : '/contact?requestType=datasheet'
-                  }
-                  className="mt-6 inline-flex rounded-xl bg-[#62a8ff] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
-                >
-                  {product.cta}
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Evaluation evidence</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">What serious buyers can verify next</h2>
-            </div>
-            <Link href="/implementation" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-              See implementation path {'->'}
-            </Link>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-3">
-            {evaluationPoints.map((item) => (
-              <article key={item.title} className="glass-card p-7">
-                <h3 className="text-xl font-semibold tracking-tight text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>
-                <ul className="mt-5 space-y-2">
-                  {item.checkpoints.map((checkpoint) => (
-                    <li key={checkpoint} className="rounded-lg border border-white/8 bg-[#0d1016] px-4 py-2.5 text-sm text-[#d8dce4]">
-                      {checkpoint}
-                    </li>
-                  ))}
-                </ul>
-                <Link href={item.href} className="mt-6 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-                  {item.ctaLabel} {'->'}
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Robot skin FAQ</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Short answers for robotics teams</h2>
-            </div>
-            <Link href="/faq" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-              Read full FAQ {'->'}
-            </Link>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-3">
-            {homeRobotSkinFaq.map((item, idx) => (
-              <article key={item.question} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-white">{item.question}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.answer}</p>
-                <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-                  {item.ctaLabel} {'->'}
-                </Link>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <Link href="/products" className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5 text-sm font-semibold text-white transition-colors hover:bg-white/5">
-              Compare robot skin products and tactile sensor modules {'->'}
-            </Link>
-            <Link href="/downloads" className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5 text-sm font-semibold text-white transition-colors hover:bg-white/5">
-              Request RoboSkin datasheets and technical material {'->'}
-            </Link>
           </div>
         </div>
       </section>
@@ -320,20 +159,44 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="eyebrow">Glossary cluster</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Terms that help AI and buyers classify the site</h2>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Terms that organize tactile AI search intent</h2>
             </div>
-            <Link href="/glossary" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+            <Link href="/glossary" className="text-sm font-semibold text-[var(--primary)]">
               Open glossary {'->'}
             </Link>
           </div>
-
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {glossaryTerms.slice(0, 4).map((item) => (
-              <article key={item.term} className="rounded-2xl border border-white/8 bg-[#0b0d12] p-5">
-                <h3 className="text-lg font-semibold text-white">{item.term}</h3>
+              <article key={item.term} className="glass-card p-6">
+                <h3 className="text-lg font-semibold text-[var(--text)]">{item.term}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-soft">{item.definition}</p>
-                <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
-                  Related page {'->'}
+                <Link href="/glossary" className="mt-4 inline-flex text-sm font-semibold text-[var(--primary)]">
+                  Related glossary term {'->'}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">FAQ</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Short answers for readers and domain evaluators</h2>
+            </div>
+            <Link href="/faq" className="text-sm font-semibold text-[var(--primary)]">
+              Read full FAQ {'->'}
+            </Link>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {homeRobotSkinFaq.map((item, idx) => (
+              <article key={item.question} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
+                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.question}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.answer}</p>
+                <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[var(--primary)]">
+                  {item.ctaLabel} {'->'}
                 </Link>
               </article>
             ))}
@@ -343,39 +206,27 @@ export default function Home() {
 
       <section className="pb-20 pt-8">
         <div className="container-shell">
-          <div className="rounded-[28px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-12">
-            <span className="eyebrow border-white/10 bg-white/5 text-white">Ready for a deck?</span>
-            <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
-              Share your target application, form factor, and development stage
+          <div className="glass-card overflow-hidden p-8 text-center md:p-12">
+            <span className="eyebrow">Final domain inquiry CTA</span>
+            <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">
+              Evaluate RoboSkin.ai as a premium domain for robot skin and tactile AI.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[#9aa3b2]">
-              We will reply with the most practical next step for evaluation, a private deck, or a custom program review.
+            <p className="mx-auto mt-4 max-w-2xl text-soft">
+              The domain can anchor a research hub, startup brand, product line, lab initiative, or acquisition strategy in a category that is still forming.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/contact?requestType=datasheet"
-                className="rounded-xl bg-[#62a8ff] px-8 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
-              >
-                Request a deck
+              <Link href="/contact?requestType=domain" className="rounded-xl bg-[var(--primary)] px-8 py-3 text-sm font-bold text-white">
+                Inquire about RoboSkin.ai
               </Link>
-              <Link
-                href="/contact"
-                className="rounded-xl border border-white/12 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
-              >
-                Contact
+              <Link href="/research" className="rounded-xl border border-[var(--panel-border)] bg-white/60 px-8 py-3 text-sm font-semibold text-[var(--text)]">
+                Explore research notes
               </Link>
             </div>
-            <p className="mt-4 text-sm text-[#9aa3b2]">
+            <p className="mt-5 text-sm text-soft">
               Direct inquiries:{' '}
-              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
+              <a className="text-[var(--primary)] underline decoration-[var(--panel-border)] underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
                 {site.contact.primaryEmail}
               </a>
-            </p>
-            <p className="mt-2 text-sm text-[#9aa3b2]">
-              WhatsApp:{' '}
-              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">
-                {site.contact.whatsapp}
-              </a> | WeChat: <span className="text-white">{site.contact.wechat}</span>
             </p>
           </div>
         </div>
@@ -383,4 +234,3 @@ export default function Home() {
     </>
   );
 }
-
