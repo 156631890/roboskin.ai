@@ -175,7 +175,7 @@ export const homeStats = [
 export const homeProofPoints: ContentTile[] = [
   {
     title: 'Evaluation-first positioning',
-    description: 'The site explains how teams should evaluate surface geometry, signal outputs, interfaces, and pilot readiness before making claims.',
+    description: 'The site explains surface geometry, signal-output concepts, interfaces, and source context so readers can avoid unsupported claims.',
   },
   {
     title: 'Technical vocabulary buyers recognize',
@@ -314,7 +314,7 @@ export const technologyLayers: TechnologyLayer[] = [
     bullets: [
       'Clarify sampling, latency constraints, and where processing should live in your stack.',
       'Document what "robot-ready" signals mean for your controller and telemetry pipeline.',
-      'Confirm interfaces and support details on request for a specific platform.',
+      'Use source-backed information context when describing platform-specific interfaces.',
     ],
   },
   {
@@ -323,7 +323,7 @@ export const technologyLayers: TechnologyLayer[] = [
     bullets: [
       'Map curvature, attachment methods, and packaging constraints early.',
       'Treat durability expectations as application-specific and verified on request.',
-      'Use pilot phases to validate fit and serviceability before wider rollout.',
+      'Use source-backed validation context before research, brand, or category planning.',
     ],
   },
   {
@@ -356,14 +356,14 @@ export const sensorDataFlow: DataFlowStep[] = [
   {
     title: 'Controller or analytics loop',
     summary: 'The robot stack uses tactile features for grip confidence, slip response, contact-aware motion, or evaluation analytics.',
-    output: 'Task-specific success criteria for prototype, pilot, or deployment review.',
+    output: 'Task-specific criteria for research interpretation, category framing, or source review.',
   },
 ];
 
 export const fitCriteria: FitCriterion[] = [
   {
     title: 'Geometry fit',
-    description: 'Target surface area, curvature, attachment method, cable routing, and serviceability determine the starting product path.',
+    description: 'Target surface area, curvature, attachment method, cable routing, and serviceability shape the relevant category or content route.',
   },
   {
     title: 'Signal fit',
@@ -371,7 +371,7 @@ export const fitCriteria: FitCriterion[] = [
   },
   {
     title: 'Software fit',
-    description: 'Useful integrations define message formats, timestamps, coordinate frames, logging, replay, and calibration handling before pilot work.',
+    description: 'Useful research context defines message formats, timestamps, coordinate frames, logging, replay, and calibration handling before planning claims.',
   },
   {
     title: 'Validation fit',

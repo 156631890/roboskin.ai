@@ -129,7 +129,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/glossary',
     title: 'Robot Skin Glossary: Tactile AI, E-Skin, and Sensor Terms',
     description:
-      'A practical glossary for robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 tactile pipelines, and integration reviews.',
+      'A practical glossary for robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 tactile pipelines, and source-backed terminology.',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,
@@ -137,9 +137,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/case-studies': {
     path: '/case-studies',
-    title: 'Robot Skin Case Studies and Evaluation Paths',
+    title: 'Robot Skin Case Studies and Context Paths',
     description:
-      'Anonymous, conservative case-study summaries for robotic gripper evaluation, humanoid contact sensing, and prototype-to-pilot tactile sensing readiness.',
+      'Anonymous, conservative summaries of robot skin application contexts for grippers, humanoid contact sensing, research interpretation, and category planning.',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
