@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { resourceSections } from '@/content/site';
+import { FeaturedAssetCovers } from '@/components/IndustryVisuals';
+import { featuredIndustryAssets, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/resources');
@@ -22,6 +23,21 @@ export default function ResourcesPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Use this hub to request the State of Tactile AI brief, Humanoid Tactile Stack Map, manifesto copy, datasheets, integration notes, and technical materials.
           </p>
+        </div>
+      </section>
+
+      <section className="pb-14">
+        <div className="container-shell">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Asset library</span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">High-value briefs and maps</h2>
+            </div>
+            <Link href="/contact?requestType=brief" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+              Route a brief request {'->'}
+            </Link>
+          </div>
+          <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
         </div>
       </section>
 

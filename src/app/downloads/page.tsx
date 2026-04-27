@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { resourceSections } from '@/content/site';
+import { FeaturedAssetCovers } from '@/components/IndustryVisuals';
+import { featuredIndustryAssets, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/downloads');
@@ -22,6 +23,21 @@ export default function DownloadsPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Request the current RoboSkin.ai Brief, State of Tactile AI notes, stack maps, datasheets, integration notes, SDK access, or benchmark methodology through the path that matches your intent.
           </p>
+        </div>
+      </section>
+
+      <section className="pb-14">
+        <div className="container-shell">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Report covers</span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Start with the asset that matches your intent</h2>
+            </div>
+            <Link href="/contact?requestType=brief" className="text-accent text-sm font-semibold hover:text-white">
+              Request a brief {'->'}
+            </Link>
+          </div>
+          <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
         </div>
       </section>
 

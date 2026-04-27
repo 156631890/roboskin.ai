@@ -110,6 +110,17 @@ export type DecisionGuideQuestion = {
   href: string;
 };
 
+export type FeaturedIndustryAsset = {
+  kicker: string;
+  title: string;
+  summary: string;
+  href: string;
+  ctaLabel: string;
+  code: string;
+  accent: 'blue' | 'teal' | 'amber' | 'rose';
+  includes: string[];
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -339,6 +350,49 @@ export const manifesto = {
   title: 'The Tactile AI Manifesto',
   summary: 'AI can see. AI can speak. AI can reason. But to work safely in the physical world, AI must learn to feel.',
 };
+
+export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
+  {
+    kicker: 'Annual brief',
+    title: 'State of Tactile AI 2026',
+    summary: 'A report-style entry point for robot hands, e-skin, flexible sensors, tactile data, and physical AI applications.',
+    href: '/contact?requestType=brief&requestedAsset=State%20of%20Tactile%20AI%202026',
+    ctaLabel: 'Request brief',
+    code: 'REPORT-01',
+    accent: 'blue',
+    includes: ['Market themes', 'Research signals', 'Company categories', 'Buyer questions'],
+  },
+  {
+    kicker: 'Stack map',
+    title: 'Humanoid Tactile Stack Map',
+    summary: 'A supply-chain map across sensors, materials, edge AI, datasets, grippers, prosthetics, simulation, and safety skins.',
+    href: '/contact?requestType=brief&requestedAsset=Humanoid%20Tactile%20Stack%20Map',
+    ctaLabel: 'Request map',
+    code: 'MAP-07',
+    accent: 'teal',
+    includes: ['Stack layers', 'Supplier categories', 'Partner paths', 'Evaluation triggers'],
+  },
+  {
+    kicker: 'Category narrative',
+    title: 'The Tactile AI Manifesto',
+    summary: 'A concise narrative for why embodied AI needs touch before it can work safely in contact-rich physical environments.',
+    href: '/contact?requestType=brief&requestedAsset=Tactile%20AI%20Manifesto',
+    ctaLabel: 'Request manifesto',
+    code: 'MANIFESTO',
+    accent: 'amber',
+    includes: ['Core thesis', 'Messaging notes', 'Category language', 'Launch angle'],
+  },
+  {
+    kicker: 'Directory concept',
+    title: 'RoboSkin Index',
+    summary: 'A light product direction for comparing tactile sensor kits, benchmark methods, and robot skin evaluation paths.',
+    href: '/contact?requestType=partnership&requestedAsset=RoboSkin%20Index',
+    ctaLabel: 'Discuss index',
+    code: 'INDEX-04',
+    accent: 'rose',
+    includes: ['Evaluation criteria', 'Kit directory', 'Benchmark prompts', 'Sponsor fit'],
+  },
+];
 
 export const productCards = [
   {

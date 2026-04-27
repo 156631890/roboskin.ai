@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { ConversionPathPanel, FeaturedAssetCovers, TactileStackVisual } from '@/components/IndustryVisuals';
 import {
   contentRoadmapTopics,
+  featuredIndustryAssets,
   homeProofPoints,
   homeStats,
   homeUseCases,
@@ -88,25 +90,7 @@ export default function Home() {
           </div>
 
           <div className="reveal [animation-delay:0.1s]">
-            <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,21,29,0.98),rgba(8,10,14,0.98))] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.42)]">
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/8 pb-5">
-                <div>
-                  <p className="text-xs uppercase text-[#9aa3b2]">Global category map</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-white">The Tactile AI Stack</h2>
-                </div>
-                <span className="rounded-full border border-white/10 bg-[#0d1016] px-3 py-1 text-[11px] uppercase text-[#d7e7ff]">
-                  Physical AI layer
-                </span>
-              </div>
-              <div className="mt-5 space-y-3">
-                {tactileAiStack.map((layer, idx) => (
-                  <div key={layer.title} className="grid gap-3 rounded-2xl border border-white/8 bg-[#0d1016] p-4 sm:grid-cols-[120px_1fr]">
-                    <p className="text-sm font-semibold text-white">{idx + 1}. {layer.title}</p>
-                    <p className="text-sm leading-relaxed text-soft">{layer.summary}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TactileStackVisual layers={tactileAiStack} />
           </div>
         </div>
       </section>
@@ -128,6 +112,21 @@ export default function Home() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Featured Industry Assets</span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Reports, maps, and directories buyers can recognize</h2>
+            </div>
+            <Link href="/resources" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              Open asset library {'->'}
+            </Link>
+          </div>
+          <FeaturedAssetCovers assets={featuredIndustryAssets} />
         </div>
       </section>
 
@@ -232,7 +231,7 @@ export default function Home() {
           <div className="grid gap-5 lg:grid-cols-2">
             {tactileIndustryDirections.map((item, idx) => (
               <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.04}s` }}>
-                    <p className="text-xs font-semibold uppercase text-soft">Direction {idx + 1}</p>
+                <p className="text-xs font-semibold uppercase text-soft">Direction {idx + 1}</p>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-soft">{item.description}</p>
                 {item.href ? (
@@ -312,19 +311,8 @@ export default function Home() {
             <p className="mx-auto mt-4 max-w-2xl text-[#9aa3b2]">
               Request the RoboSkin.ai Brief, discuss sponsorship or partnership, or open a strategic domain acquisition conversation.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief"
-                className="rounded-xl bg-[#62a8ff] px-8 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
-              >
-                Request the RoboSkin.ai Brief
-              </Link>
-              <Link
-                href="/contact?requestType=acquisition"
-                className="rounded-xl border border-white/12 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
-              >
-                Strategic Acquisition Inquiry
-              </Link>
+            <div className="mt-8 text-left">
+              <ConversionPathPanel />
             </div>
             <p className="mt-4 text-sm text-[#9aa3b2]">
               Direct inquiries:{' '}
