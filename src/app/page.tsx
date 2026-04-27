@@ -11,15 +11,15 @@ const heroSignals = [
   },
   {
     title: 'Latency',
-    text: 'A private evaluation brief can explain the signal path without overpromising public numbers.',
+    text: 'Review sampling, processing, and controller expectations against your robot stack.',
   },
   {
     title: 'Stretchability',
-    text: 'A flexible surface language helps the brand feel credible on curved robot geometries.',
+    text: 'Plan sensing layouts around curved shells, fingertips, palms, and gripper pads.',
   },
   {
     title: 'Deployment Fit',
-    text: 'The public story stays narrow while the technical path remains clear for pilots and decks.',
+    text: 'Move from datasheet review to integration scoping with clear pilot criteria.',
   },
 ];
 
@@ -61,24 +61,23 @@ export default function Home() {
               Robot skin for the next generation of machines.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-[#9aa3b2]">
-              RoboSkin is positioned as a high-end Tactile AI brand for humanoid robot skin and e-skin components, with a public page built to feel like an
-              acquisition-ready hardware asset.
+              Engineered tactile sensing for robot hands, grippers, and curved surfaces. Start with a datasheet, share geometry constraints, and map a practical evaluation path before pilot work.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 href="/contact?requestType=datasheet"
                 className="rounded-xl bg-[#62a8ff] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
               >
-                Request a deck
+                Request datasheet
               </Link>
               <Link
                 href="/contact"
                 className="rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                Contact
+                Discuss integration
               </Link>
               <Link href="#signals" className="rounded-xl border border-transparent px-2 py-3 text-sm font-semibold text-[#d7e7ff] hover:text-white">
-                View technical signals
+                View tactile stack
               </Link>
             </div>
 
@@ -100,18 +99,18 @@ export default function Home() {
               <div className="relative rounded-[24px] border border-white/8 bg-white/5 p-5">
                 <div className="flex items-center justify-between gap-4 border-b border-white/8 pb-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[#9aa3b2]">Flagship surface</p>
-                    <p className="mt-2 text-lg font-semibold tracking-tight text-white">Private brief for humanoid robot skin</p>
+                    <p className="text-xs uppercase tracking-[0.18em] text-[#9aa3b2]">Layered tactile system</p>
+                    <p className="mt-2 text-lg font-semibold tracking-tight text-white">Sensor layer to robot-ready signals</p>
                   </div>
                   <span className="rounded-full border border-white/10 bg-[#0d1016] px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-[#d7e7ff]">
-                    Request only
+                    Evaluation path
                   </span>
                 </div>
 
                 <div className="mt-5 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
                   <div className="overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-5">
                     <div className="flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#9aa3b2]">Surface map</p>
+                      <p className="text-xs uppercase tracking-[0.16em] text-[#9aa3b2]">Layered tactile system</p>
                       <span className="h-2 w-2 rounded-full bg-[#62a8ff]" />
                     </div>
                     <div className="mt-5 grid gap-3">
@@ -130,7 +129,7 @@ export default function Home() {
                         </div>
                         <div className="rounded-2xl border border-white/8 bg-[#11151d] p-3">
                           <p className="text-[11px] uppercase tracking-[0.14em] text-[#9aa3b2]">Signal output</p>
-                          <p className="mt-2 text-sm text-white">Cleaner robot-ready data for private evaluation decks.</p>
+                          <p className="mt-2 text-sm text-white">Cleaner robot-ready data for integration review.</p>
                         </div>
                       </div>
                     </div>
@@ -157,10 +156,10 @@ export default function Home() {
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="eyebrow">Technical signals</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Why the category is still open</h2>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">What engineering teams can evaluate first</h2>
             </div>
             <p className="max-w-2xl text-sm leading-relaxed text-[#9aa3b2]">
-              The page should read like a premium hardware brand, not a generic product brochure. The copy stays narrow and the vocabulary stays technical.
+              Use the site to compare fit, request the right material, and decide whether your next step is a datasheet, developer kit discussion, or custom integration review.
             </p>
           </div>
 
@@ -235,7 +234,7 @@ export default function Home() {
                       ? '/contact?requestType=datasheet'
                       : product.cta === 'Talk to engineering'
                         ? '/contact?requestType=integration'
-                        : '/contact?requestType=datasheet'
+                        : '/contact?requestType=integration'
                   }
                   className="mt-6 inline-flex rounded-xl bg-[#62a8ff] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
                 >
@@ -344,25 +343,25 @@ export default function Home() {
       <section className="pb-20 pt-8">
         <div className="container-shell">
           <div className="rounded-[28px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-12">
-            <span className="eyebrow border-white/10 bg-white/5 text-white">Ready for a deck?</span>
+            <span className="eyebrow border-white/10 bg-white/5 text-white">Ready for evaluation?</span>
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold tracking-tight text-white md:text-5xl">
               Share your target application, form factor, and development stage
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[#9aa3b2]">
-              We will reply with the most practical next step for evaluation, a private deck, or a custom program review.
+              We will reply with the most practical next step for a datasheet review, integration discussion, or custom program review.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/contact?requestType=datasheet"
                 className="rounded-xl bg-[#62a8ff] px-8 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
               >
-                Request a deck
+                Request datasheet
               </Link>
               <Link
                 href="/contact"
                 className="rounded-xl border border-white/12 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                Contact
+                Discuss integration
               </Link>
             </div>
             <p className="mt-4 text-sm text-[#9aa3b2]">

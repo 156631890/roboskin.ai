@@ -14,7 +14,8 @@ test('homepage copy reflects the high-end robot skin positioning', async () => {
   ]);
 
   assert.match(home, /Robot skin for the next generation of machines/);
-  assert.match(home, /Request a deck/);
+  assert.match(home, /Request datasheet/);
+  assert.match(home, /Discuss integration/);
   assert.match(home, /Spatial Resolution/);
   assert.match(home, /Humanoid Robot Skin/);
   assert.match(layout, /Tactile AI/i);

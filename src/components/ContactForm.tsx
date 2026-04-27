@@ -46,20 +46,24 @@ type ContactFormProps = {
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
 
+function displayValue(value: string) {
+  return value.trim() || 'Not provided';
+}
+
 function buildMailtoHref(form: ContactFormState) {
   const subject = `RoboSkin ${form.requestType} request from ${form.company || form.fullName}`;
   const body = [
     `Full name: ${form.fullName}`,
     `Company / organization: ${form.company}`,
     `Work email: ${form.email}`,
-    `Phone: ${form.phone || 'Not provided'}`,
+    `Phone: ${displayValue(form.phone)}`,
     `Request type: ${form.requestType}`,
-    `Requested asset: ${form.requestedAsset || 'Not specified'}`,
-    `Robot platform: ${form.robotPlatform}`,
-    `Target surface: ${form.targetSurface}`,
-    `Use case: ${form.useCase}`,
-    `Interface needs: ${form.interfaceNeeds || 'Not specified'}`,
-    `Timeline: ${form.timeline || 'Not specified'}`,
+    `Requested asset: ${displayValue(form.requestedAsset)}`,
+    `Robot platform: ${displayValue(form.robotPlatform)}`,
+    `Target surface: ${displayValue(form.targetSurface)}`,
+    `Use case: ${displayValue(form.useCase)}`,
+    `Interface needs: ${displayValue(form.interfaceNeeds)}`,
+    `Timeline: ${displayValue(form.timeline)}`,
     '',
     'Message:',
     form.message,
@@ -110,23 +114,28 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       return;
     }
 
-    const response = await fetch(contactFormEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form),
-    });
+    try {
+      const response = await fetch(contactFormEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
 
-    if (!response.ok) {
+      if (!response.ok) {
+        setStatus('error');
+        setFeedback('Something went wrong. Please email us at ' + site.contact.primaryEmail + '.');
+        return;
+      }
+
+      setStatus('success');
+      setFeedback('Thanks. We received your request and will reply within 2 business days.');
+      setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
+    } catch {
       setStatus('error');
-      setFeedback('Something went wrong. Please email us at ' + site.contact.primaryEmail + '.');
-      return;
+      setFeedback('The form could not connect. Please email us at ' + site.contact.primaryEmail + '.');
     }
-
-    setStatus('success');
-    setFeedback('Thanks. We received your request and will reply within 2 business days.');
-    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
   }
 
   return (
@@ -140,6 +149,14 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
         value={form.website}
         onChange={(event) => updateField('website', event.target.value)}
       />
+
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">Start with the essentials</p>
+        <h2 className="mt-2 text-2xl font-semibold text-white">Request the right next step</h2>
+        <p className="mt-2 text-sm leading-relaxed text-soft">
+          A short request is enough to begin. Add project details only when they help route the message to engineering.
+        </p>
+      </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm text-soft">
@@ -171,82 +188,6 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           />
         </label>
         <label className="grid gap-2 text-sm text-soft">
-          Robot platform
-          <input
-            required
-            value={form.robotPlatform}
-            onChange={(event) => updateField('robotPlatform', event.target.value)}
-            placeholder="Humanoid hand, gripper, cobot arm..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Target surface
-          <input
-            required
-            value={form.targetSurface}
-            onChange={(event) => updateField('targetSurface', event.target.value)}
-            placeholder="Fingertips, palm, curved shell, gripper pads..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Use case
-          <input
-            required
-            value={form.useCase}
-            onChange={(event) => updateField('useCase', event.target.value)}
-            placeholder="Robotic gripper, humanoid hand, prosthetic..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-soft">
-          Interface / SDK needs
-          <input
-            value={form.interfaceNeeds}
-            onChange={(event) => updateField('interfaceNeeds', event.target.value)}
-            placeholder="ROS 2, Python, C++, logging, replay..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Timeline
-          <input
-            value={form.timeline}
-            onChange={(event) => updateField('timeline', event.target.value)}
-            placeholder="Prototype this quarter, production next year..."
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-soft">
-          Phone
-          <input
-            value={form.phone}
-            onChange={(event) => updateField('phone', event.target.value)}
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
-      </div>
-
-      <label className="grid gap-2 text-sm text-soft">
-        Message
-        <textarea
-          required
-          rows={6}
-          value={form.message}
-          onChange={(event) => updateField('message', event.target.value)}
-          className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-        />
-      </label>
-
-      <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-soft">
           Request type
           <select
             value={form.requestType}
@@ -259,16 +200,87 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             <option value="integration">Integration</option>
           </select>
         </label>
-        <label className="grid gap-2 text-sm text-soft">
-          Requested asset
-          <input
-            value={form.requestedAsset}
-            onChange={(event) => updateField('requestedAsset', event.target.value)}
-            placeholder="RS-1000 Sensor Array"
-            className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
-          />
-        </label>
       </div>
+
+      <label className="grid gap-2 text-sm text-soft">
+        Message
+        <textarea
+          required
+          rows={5}
+          value={form.message}
+          onChange={(event) => updateField('message', event.target.value)}
+          placeholder="Tell us what you want to evaluate or request."
+          className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+        />
+      </label>
+
+      <details className="rounded-2xl border border-white/8 bg-[#0d1016] p-4">
+        <summary className="cursor-pointer text-sm font-semibold text-white">Project details <span className="font-normal text-soft">(optional)</span></summary>
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <label className="grid gap-2 text-sm text-soft">
+            Requested asset
+            <input
+              value={form.requestedAsset}
+              onChange={(event) => updateField('requestedAsset', event.target.value)}
+              placeholder="RS-1000 Sensor Array, Developer Kit..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft">
+            Phone
+            <input
+              value={form.phone}
+              onChange={(event) => updateField('phone', event.target.value)}
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft">
+            Robot platform
+            <input
+              value={form.robotPlatform}
+              onChange={(event) => updateField('robotPlatform', event.target.value)}
+              placeholder="Humanoid hand, gripper, cobot arm..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft">
+            Target surface
+            <input
+              value={form.targetSurface}
+              onChange={(event) => updateField('targetSurface', event.target.value)}
+              placeholder="Fingertips, palm, curved shell, gripper pads..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft">
+            Use case
+            <input
+              value={form.useCase}
+              onChange={(event) => updateField('useCase', event.target.value)}
+              placeholder="Robotic gripper, humanoid hand, prosthetic..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft">
+            Interface / SDK needs
+            <input
+              value={form.interfaceNeeds}
+              onChange={(event) => updateField('interfaceNeeds', event.target.value)}
+              placeholder="ROS 2, Python, C++, logging, replay..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+          <label className="grid gap-2 text-sm text-soft md:col-span-2">
+            Timeline
+            <input
+              value={form.timeline}
+              onChange={(event) => updateField('timeline', event.target.value)}
+              placeholder="Prototype this quarter, production next year..."
+              className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+            />
+          </label>
+        </div>
+      </details>
 
       <label className="flex items-start gap-3 rounded-2xl border border-white/8 bg-[#0d1016] p-4 text-sm leading-relaxed text-soft">
         <input
@@ -305,4 +317,3 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
     </form>
   );
 }
-

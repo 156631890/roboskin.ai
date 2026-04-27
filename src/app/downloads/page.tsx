@@ -20,7 +20,7 @@ export default function DownloadsPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Public materials are intentionally limited. When an asset is request-only, we route you to the correct form instead of listing dead downloads.
+            Request the current datasheets, integration notes, SDK access, or benchmark methodology through the path that matches your evaluation stage.
           </p>
         </div>
       </section>
@@ -48,6 +48,12 @@ export default function DownloadsPage() {
                     </div>
                     <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
                     <p className="mt-2 text-sm text-soft">{item.description}</p>
+                    <div className="mt-4 rounded-2xl border border-white/8 bg-[#0d1016] p-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">What you receive</p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#d8dce4]">
+                        A routed request for the current material, plus a follow-up path matched to your robot platform, surface, and evaluation stage.
+                      </p>
+                    </div>
                   </article>
                 ))}
               </div>

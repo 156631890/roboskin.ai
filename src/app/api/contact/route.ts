@@ -4,7 +4,10 @@ type ContactPayload = {
   fullName?: string;
   company?: string;
   email?: string;
+  robotPlatform?: string;
+  targetSurface?: string;
   useCase?: string;
+  interfaceNeeds?: string;
   message?: string;
   timeline?: string;
   phone?: string;
@@ -18,7 +21,6 @@ function isValidPayload(payload: ContactPayload) {
     payload.fullName?.trim() &&
       payload.company?.trim() &&
       payload.email?.trim() &&
-      payload.useCase?.trim() &&
       payload.message?.trim(),
   );
 }

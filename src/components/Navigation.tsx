@@ -47,7 +47,7 @@ export default function Navigation() {
               href="/contact?requestType=datasheet"
               className="ml-2 rounded-xl bg-[var(--primary)] px-4 py-2 text-sm font-bold text-white shadow-[0_10px_24px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
             >
-              Request a deck
+              Request datasheet
             </Link>
           </div>
 
@@ -88,7 +88,7 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 block rounded-lg bg-[var(--primary)] px-4 py-3 text-center text-sm font-bold text-white"
             >
-              Request a deck
+              Request datasheet
             </Link>
           </div>
         </div>

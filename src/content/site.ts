@@ -25,6 +25,7 @@ export type ResourceItem = {
   availability: string;
   ctaLabel?: string;
   href?: string;
+  includes?: string[];
 };
 
 export type ResourceSection = {
@@ -99,6 +100,13 @@ export type GlossaryTerm = {
   term: string;
   definition: string;
   related: string[];
+  href: string;
+};
+
+export type DecisionGuideQuestion = {
+  prompt: string;
+  signal: string;
+  recommendation: string;
   href: string;
 };
 
@@ -230,10 +238,30 @@ export const productCards = [
     specs: ['Custom geometry', 'Program scoping', 'Engineering consultation', 'Quote on request'],
     evaluation: ['Robot geometry review', 'Attachment and serviceability plan', 'Environmental constraints', 'Pilot success criteria'],
     verificationNote: 'Best used when the robot surface, packaging, or operating environment makes an off-the-shelf array insufficient.',
-    cta: 'Request a deck',
+    cta: 'Request custom review',
   },
 ];
 
+export const decisionGuideQuestions: DecisionGuideQuestion[] = [
+  {
+    prompt: 'You need a baseline tactile surface for bench tests or an early pilot.',
+    signal: 'Surface geometry is known and you want sensor data quickly.',
+    recommendation: 'Start with the Tactile Sensor Module and request the current datasheet.',
+    href: '/contact?requestType=datasheet',
+  },
+  {
+    prompt: 'Your controls or software team needs examples, SDK notes, or ROS 2 discussion.',
+    signal: 'Bring-up speed and integration documentation matter more than custom geometry.',
+    recommendation: 'Start with the Developer Kit and ask for integration notes.',
+    href: '/contact?requestType=integration',
+  },
+  {
+    prompt: 'Your robot has curved surfaces, packaging constraints, or deployment conditions.',
+    signal: 'Mounting, cable routing, serviceability, or validation will drive the design.',
+    recommendation: 'Start with a Custom Skin Program review.',
+    href: '/contact?requestType=integration',
+  },
+];
 export const evaluationPoints: EvaluationPoint[] = [
   {
     title: 'Evaluation packet',
@@ -251,8 +279,8 @@ export const evaluationPoints: EvaluationPoint[] = [
   },
   {
     title: 'Evidence policy',
-    summary: 'Public pages stay conservative while measurable details are confirmed in request-only material.',
-    checkpoints: ['No invented benchmarks', 'No unsupported customer claims', 'Measured details on request', 'Application-specific validation'],
+    summary: 'Public pages describe what can be evaluated, while measurable details are confirmed in request-only material.',
+    checkpoints: ['Measured benchmarks only', 'Verified customer claims only', 'Measured details on request', 'Application-specific validation'],
     href: '/faq',
     ctaLabel: 'Read the FAQ',
   },
@@ -322,7 +350,7 @@ export const technologyLayers: TechnologyLayer[] = [
     summary: 'The platform is organized around robotics workflows and engineering support.',
     bullets: [
       'Start with a scoped evaluation plan, then move to a pilot integration review.',
-      'Keep the public story narrow; expand details in private technical material.',
+      'Keep public details practical; expand platform-specific details in technical material.',
       'Align on success criteria and next steps for prototype, pilot, and deployment.',
     ],
   },
@@ -531,7 +559,7 @@ export const aboutSections: AboutSection[] = [
     bullets: [
       'Pressure-sensing arrays and application-driven form factors',
       'Integration guidance for evaluation, pilot, and deployment stages',
-      'A narrow public story, with deeper technical detail shared on request',
+      'Practical public guidance, with deeper technical detail shared on request',
     ],
   },
   {
@@ -547,7 +575,7 @@ export const aboutSections: AboutSection[] = [
     title: 'Claims discipline',
     summary: 'Public copy stays conservative. Application-specific details are confirmed on request.',
     bullets: [
-      'No invented benchmarks, customer logos, or certifications',
+      'Measured benchmarks, customer logos, and certifications only when verified',
       'Request-only assets are labeled and routed to a form, not fake downloads',
       'If you need a verification plan, we will scope it with engineering',
     ],
@@ -584,7 +612,7 @@ export const faqItems: FaqItem[] = [
   },
   {
     question: 'Are there public downloads?',
-    answer: 'Public assets are intentionally limited. When an item is request-only, we route you to the correct request flow instead of listing dead downloads.',
+    answer: 'Public assets are intentionally limited. Request-only items route to a form so the team can send the right material for your platform and use case.',
     ctaLabel: 'View downloads hub',
     href: '/downloads',
   },
@@ -689,7 +717,7 @@ export const newsItems: NewsItem[] = [
   {
     date: '2026-04-10',
     title: 'Content hub expansion (Comparison, Implementation, Downloads)',
-    summary: 'We expanded the public site with decision-support pages and request hubs to reduce dead downloads and improve evaluation clarity.',
+    summary: 'We expanded the public site with decision-support pages and request hubs that make evaluation paths clearer.',
     href: '/comparison',
     ctaLabel: 'Compare offers',
   },

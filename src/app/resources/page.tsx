@@ -20,7 +20,7 @@ export default function ResourcesPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Only publicly supported resources are shown here. Missing assets are converted to request flows instead of dead downloads.
+            Use this hub to request datasheets, integration notes, SDK access, and technical briefs through the path that matches your evaluation need.
           </p>
         </div>
       </section>

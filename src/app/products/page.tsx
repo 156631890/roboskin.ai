@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { productCards } from '@/content/site';
+import { decisionGuideQuestions, productCards } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata, buildProductListJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/products');
@@ -26,6 +26,35 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      <section className="pb-14">
+        <div className="container-shell">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Decision guide</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">Find your starting point</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-relaxed text-soft">
+              Choose the path that matches your surface geometry, software needs, and development stage. If the answer is unclear, start with an integration review.
+            </p>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-3">
+            {decisionGuideQuestions.map((item) => (
+              <article key={item.prompt} className="glass-card p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">If this sounds like you</p>
+                <h3 className="mt-3 text-xl font-semibold text-white">{item.prompt}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.signal}</p>
+                <div className="mt-5 rounded-2xl border border-white/8 bg-[#0d1016] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">Recommended next step</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#d8dce4]">{item.recommendation}</p>
+                  <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-accent hover:text-white">
+                    Start here {'->'}
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="pb-20">
         <div className="container-shell space-y-6">
           {productCards.map((product) => (
