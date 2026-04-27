@@ -13,11 +13,15 @@ test('homepage copy reflects the high-end robot skin positioning', async () => {
     readFile(sitePath, 'utf8'),
   ]);
 
-  assert.match(home, /Robot skin for the next generation of machines/);
-  assert.match(home, /Request datasheet/);
-  assert.match(home, /Discuss integration/);
-  assert.match(home, /Spatial Resolution/);
+  assert.match(home, /When AI gets a body, it needs skin/);
+  assert.match(home, /Explore Tactile AI/);
+  assert.match(home, /Request the RoboSkin\.ai Brief/);
+  assert.match(home, /Strategic Acquisition Inquiry/);
+  assert.match(home, /The Tactile AI Stack/);
+  assert.match(home, /Research Map/);
+  assert.match(home, /Market Signals/);
   assert.match(home, /Humanoid Robot Skin/);
   assert.match(layout, /Tactile AI/i);
   assert.match(site, /Tactile AI/i);
+  assert.match(site, /State of Tactile AI/i);
 });

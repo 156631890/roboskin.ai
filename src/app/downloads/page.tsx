@@ -14,13 +14,13 @@ export default function DownloadsPage() {
         <div className="container-shell">
           <span className="eyebrow">Downloads</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Request technical material</h1>
-            <Link href="/contact?requestType=datasheet" className="text-accent text-sm font-semibold hover:text-white">
-              Request datasheet {'->'}
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Request briefs and technical material</h1>
+            <Link href="/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief" className="text-accent text-sm font-semibold hover:text-white">
+              Request RoboSkin.ai Brief {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Request the current datasheets, integration notes, SDK access, or benchmark methodology through the path that matches your evaluation stage.
+            Request the current RoboSkin.ai Brief, State of Tactile AI notes, stack maps, datasheets, integration notes, SDK access, or benchmark methodology through the path that matches your intent.
           </p>
         </div>
       </section>
@@ -51,7 +51,7 @@ export default function DownloadsPage() {
                     <div className="mt-4 rounded-2xl border border-white/8 bg-[#0d1016] p-4">
                       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">What you receive</p>
                       <p className="mt-2 text-sm leading-relaxed text-[#d8dce4]">
-                        A routed request for the current material, plus a follow-up path matched to your robot platform, surface, and evaluation stage.
+                        A routed request for the current material, plus a follow-up path matched to your research goal, robot platform, partnership interest, or evaluation stage.
                       </p>
                     </div>
                   </article>
@@ -67,17 +67,17 @@ export default function DownloadsPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Not sure what to request?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Tell us your robot type, target surface, and timeline. We will route you to the most relevant material or engineer.
+              Tell us whether you need a market brief, stack map, datasheet, integration note, sponsorship discussion, or strategic conversation.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=integration"
+                href="/contact?requestType=brief"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Talk to engineering
+                Request brief
               </Link>
-              <Link href="/comparison" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                Compare offers
+              <Link href="/contact?requestType=partnership" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                Discuss partnership
               </Link>
             </div>
           </div>

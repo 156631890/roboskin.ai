@@ -113,7 +113,7 @@ export type DecisionGuideQuestion = {
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
-  tagline: 'Tactile AI for humanoid robot skin',
+  tagline: 'Robot skin, tactile AI, e-skin, and contact-aware robotics',
   contact: {
     primaryEmail: 'contact@roboskin.ai',
     salesEmail: 'sales@roboskin.ai',
@@ -127,11 +127,10 @@ export const site = {
 
 export const primaryNavigation = [
   { href: '/', label: 'Home' },
-  { href: '/products', label: 'Products' },
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/technology', label: 'Technology' },
+  { href: '/research', label: 'Research' },
   { href: '/resources', label: 'Resources' },
-  { href: '/about', label: 'About' },
+  { href: '/products', label: 'Products' },
+  { href: '/technology', label: 'Technology' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -165,49 +164,181 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: 'High-density', label: 'Spatial Resolution' },
-  { value: 'Low-latency', label: 'Latency' },
-  { value: 'Curve-ready', label: 'Stretchability' },
-  { value: 'Private brief', label: 'Deployment Fit' },
+  { value: 'Portal', label: 'Robot skin and tactile AI research map' },
+  { value: 'Brief', label: 'State of Tactile AI request path' },
+  { value: 'Map', label: 'Humanoid tactile stack and supplier categories' },
+  { value: 'Index', label: 'Evaluation kit and benchmark directory concept' },
 ];
 
 export const homeProofPoints: ContentTile[] = [
   {
-    title: 'Evaluation-first positioning',
-    description: 'The site explains how teams should evaluate surface geometry, signal outputs, interfaces, and pilot readiness before making claims.',
+    title: 'Category-defining narrative',
+    description: 'RoboSkin.ai frames robot skin and tactile AI as a required layer for physical AI systems that need contact awareness.',
   },
   {
-    title: 'Technical vocabulary buyers recognize',
-    description: 'Robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 pipelines, and sensor fusion are used in practical context.',
+    title: 'Searchable industry vocabulary',
+    description: 'Robot skin, robotic skin, tactile AI, electronic skin, e-skin, tactile sensing, slip detection, and humanoid robot skin are organized in practical context.',
   },
   {
-    title: 'Verified-on-request discipline',
-    description: 'Durability, operating range, latency, and resolution claims are routed to datasheets or integration reviews instead of broad public promises.',
+    title: 'Research and buyer utility',
+    description: 'The site can grow into a reference hub for papers, labs, companies, products, datasets, patents, and procurement questions.',
   },
   {
-    title: 'Searchable content clusters',
-    description: 'Product, solution, research, glossary, comparison, and implementation pages now reinforce each other with natural internal links.',
+    title: 'Strategic asset packaging',
+    description: 'Brief requests, partner inquiries, sponsorship paths, and strategic acquisition inquiries are routed through one clear conversion system.',
   },
 ];
 
 export const homeUseCases = [
   {
     title: 'Humanoid robot hands',
-    text: 'Add touch feedback to dexterous manipulation, contact response, and force-limited control.',
+    text: 'Touch feedback for dexterous manipulation, grasp confidence, and contact-aware control.',
   },
   {
-    title: 'Industrial safety skins',
-    text: 'Wrap collaborative robots in a visible contact layer that supports safer interaction.',
+    title: 'Prosthetics and assistive robotics',
+    text: 'Surface feedback for force awareness, safer interaction, and human-device interfaces.',
   },
   {
-    title: 'Precision grasping',
-    text: 'Improve slip awareness, fragile-object handling, and grip confidence for manipulation teams.',
+    title: 'Warehouse picking',
+    text: 'Tactile signals for slip detection, fragile-object handling, and gripper evaluation.',
   },
   {
-    title: 'Assistive surfaces',
-    text: 'Support safer force control and better surface feedback for medical and assistive devices.',
+    title: 'Collaborative and medical robots',
+    text: 'Contact-aware robot surfaces for safer proximity, manipulation, and procedure support.',
   },
 ];
+
+export const tactileIndustryDirections: ContentTile[] = [
+  {
+    title: 'Robot skin industry portal',
+    description: 'A global robot skin / tactile AI reference site covering research, companies, sensor technologies, use cases, and procurement guides.',
+    href: '/research',
+    ctaLabel: 'Explore research',
+  },
+  {
+    title: 'Tactile AI industry report',
+    description: 'An annual State of Tactile AI brief for robot hands, flexible sensors, e-skin, tactile datasets, and embodied AI applications.',
+    href: '/contact?requestType=brief&requestedAsset=State%20of%20Tactile%20AI',
+    ctaLabel: 'Request brief',
+  },
+  {
+    title: 'Humanoid supply chain map',
+    description: 'A Humanoid Tactile Stack Map across sensors, flexible materials, controllers, edge AI, datasets, simulation, grippers, prosthetics, and safety skins.',
+    href: '/resources',
+    ctaLabel: 'View map path',
+  },
+  {
+    title: 'Tactile data and benchmark entry',
+    description: 'A future-facing entry point for tactile datasets, benchmark methods, evaluation protocols, and robot touch data infrastructure.',
+    href: '/downloads',
+    ctaLabel: 'Request benchmark notes',
+  },
+  {
+    title: 'B2B lead platform',
+    description: 'A routing layer for robotics OEMs, gripper makers, warehouse automation teams, prosthetics companies, medical robotics groups, and flexible electronics suppliers.',
+    href: '/contact?requestType=partnership',
+    ctaLabel: 'Discuss partnership',
+  },
+  {
+    title: 'Brand asset or domain sale',
+    description: 'A stronger acquisition package built around the domain, industry content, email interest, and inquiry history instead of a bare domain listing.',
+    href: '/contact?requestType=acquisition',
+    ctaLabel: 'Strategic inquiry',
+  },
+  {
+    title: 'Light product layer',
+    description: 'A RoboSkin Index or Evaluation Kit Directory that helps enterprise teams shortlist tactile sensing approaches before vendor conversations.',
+    href: '/products',
+    ctaLabel: 'See evaluation paths',
+  },
+];
+
+export const tactileAiStack: TechnologyLayer[] = [
+  {
+    title: 'Skin materials',
+    summary: 'Flexible, soft, stretchable, or conformal surfaces that define where contact can be measured.',
+  },
+  {
+    title: 'Tactile sensors',
+    summary: 'Capacitive, piezoresistive, optical, magnetic, liquid metal, or multimodal sensor arrays for robot touch.',
+  },
+  {
+    title: 'Signal processing',
+    summary: 'Filtering, calibration, timestamping, and feature extraction that turn raw contact into usable streams.',
+  },
+  {
+    title: 'Edge AI',
+    summary: 'Local models and embedded processing for slip events, contact classification, and lower-latency response.',
+  },
+  {
+    title: 'Robot control',
+    summary: 'Middleware, controllers, and policies that use touch for grasping, safety, manipulation, and evaluation.',
+  },
+  {
+    title: 'Safety reflex',
+    summary: 'Contact-aware responses that help physical AI systems behave more safely around people and objects.',
+  },
+  {
+    title: 'Tactile data feedback',
+    summary: 'Logs, datasets, benchmarks, and replay loops that make robot touch measurable and improvable over time.',
+  },
+];
+
+export const researchMapAreas: ContentTile[] = [
+  {
+    title: 'Papers and labs',
+    description: 'Track tactile perception robotics, soft tactile sensors, multimodal e-skin, neuromorphic touch, and robot hand research.',
+  },
+  {
+    title: 'Companies and products',
+    description: 'Map tactile sensor arrays, robot hand sensors, gripper sensors, flexible electronics, prosthetics interfaces, and safety skin vendors.',
+  },
+  {
+    title: 'Datasets and benchmarks',
+    description: 'Follow tactile datasets, evaluation protocols, slip detection benchmarks, and multimodal manipulation tasks.',
+  },
+  {
+    title: 'Patents and market signals',
+    description: 'Watch filings, partnerships, hiring, production roadmaps, and humanoid robotics programs that point to tactile stack demand.',
+  },
+];
+
+export const marketSignals: ContentTile[] = [
+  {
+    title: 'Humanoid programs need hands',
+    description: 'Dexterous manipulation creates demand for tactile feedback beyond vision and force-torque sensing.',
+  },
+  {
+    title: 'Automation needs safer contact',
+    description: 'Grippers, cobots, and warehouse systems need better signals for slip, collision, proximity, and fragile handling.',
+  },
+  {
+    title: 'Embodied AI needs new data',
+    description: 'Tactile datasets and benchmark protocols will matter as physical AI moves from perception to contact-rich work.',
+  },
+  {
+    title: 'Flexible electronics are maturing',
+    description: 'Materials, sensor arrays, and embedded processing are moving tactile sensing closer to deployable robot surfaces.',
+  },
+];
+
+export const contentRoadmapTopics = [
+  'What is robot skin?',
+  'What is tactile AI?',
+  'Why humanoid robots need touch',
+  'Robot skin vs electronic skin',
+  'Tactile sensors for robot hands',
+  'Slip detection in robotic manipulation',
+  'The tactile AI stack',
+  'How robot skin improves human-robot safety',
+  'Best research labs working on robotic skin',
+  'The future of e-skin in humanoid robotics',
+];
+
+export const manifesto = {
+  title: 'The Tactile AI Manifesto',
+  summary: 'AI can see. AI can speak. AI can reason. But to work safely in the physical world, AI must learn to feel.',
+};
 
 export const productCards = [
   {
@@ -400,6 +531,43 @@ export const fitCriteria: FitCriterion[] = [
 
 export const resourceSections: ResourceSection[] = [
   {
+    title: 'Industry briefs',
+    items: [
+      {
+        title: 'State of Tactile AI',
+        description: 'Request the RoboSkin.ai brief on robot hands, flexible sensors, e-skin, tactile datasets, and physical AI applications.',
+        availability: 'Brief request',
+        ctaLabel: 'Request brief',
+        href: '/contact?requestType=brief&requestedAsset=State%20of%20Tactile%20AI',
+        includes: ['Market map', 'Research themes', 'Company categories', 'Buyer questions'],
+      },
+      {
+        title: 'Humanoid Tactile Stack Map',
+        description: 'Request the map of sensors, materials, edge AI, controllers, datasets, simulation, grippers, prosthetics, and safety skins.',
+        availability: 'Map request',
+        ctaLabel: 'Request map',
+        href: '/contact?requestType=brief&requestedAsset=Humanoid%20Tactile%20Stack%20Map',
+        includes: ['Stack layers', 'Supplier categories', 'Integration questions', 'Evaluation paths'],
+      },
+      {
+        title: 'The Tactile AI Manifesto',
+        description: 'A category narrative explaining why physical AI needs robot skin, tactile sensing, and contact-aware robotics.',
+        availability: 'Public concept',
+        ctaLabel: 'Request copy',
+        href: '/contact?requestType=brief&requestedAsset=Tactile%20AI%20Manifesto',
+        includes: ['Category framing', 'Core thesis', 'Messaging notes', 'Partner narrative'],
+      },
+      {
+        title: 'RoboSkin Index concept',
+        description: 'A future directory concept for evaluating tactile sensor kits, benchmark methods, and contact-rich robotics use cases.',
+        availability: 'Concept request',
+        ctaLabel: 'Discuss directory',
+        href: '/contact?requestType=partnership&requestedAsset=RoboSkin%20Index',
+        includes: ['Evaluation criteria', 'Directory structure', 'Sponsorship path', 'Partner fit'],
+      },
+    ],
+  },
+  {
     title: 'Datasheets',
     items: [
       {
@@ -479,22 +647,22 @@ export const resourceSections: ResourceSection[] = [
 
 export const contactPaths: ContactPath[] = [
   {
-    title: 'Datasheet or deck request',
-    summary: 'Use this path when you need the current hardware overview, evaluation packet, or private product deck.',
-    href: '/contact?requestType=datasheet',
-    ctaLabel: 'Request datasheet',
+    title: 'RoboSkin.ai Brief request',
+    summary: 'Use this path for the State of Tactile AI brief, Humanoid Tactile Stack Map, manifesto copy, or research summary.',
+    href: '/contact?requestType=brief',
+    ctaLabel: 'Request brief',
   },
   {
-    title: 'Integration review',
-    summary: 'Use this path when geometry, mounting, ROS 2, SDK, or data pipeline requirements affect the recommendation.',
-    href: '/contact?requestType=integration',
-    ctaLabel: 'Request review',
+    title: 'Partnership or sponsorship',
+    summary: 'Use this path for research collaboration, sponsored reports, directory listings, data benchmark work, or ecosystem partnerships.',
+    href: '/contact?requestType=partnership',
+    ctaLabel: 'Discuss partnership',
   },
   {
-    title: 'Demo discussion',
-    summary: 'Use this path when you are preparing a robotics demo, lab evaluation, or pilot milestone.',
-    href: '/contact?requestType=demo',
-    ctaLabel: 'Request demo',
+    title: 'Strategic acquisition inquiry',
+    summary: 'Use this path for domain acquisition, brand licensing, strategic buyer conversations, or packaging the site as an industry asset.',
+    href: '/contact?requestType=acquisition',
+    ctaLabel: 'Strategic inquiry',
   },
 ];
 

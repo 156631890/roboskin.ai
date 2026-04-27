@@ -14,8 +14,8 @@ test('public pages use buyer-facing copy instead of internal positioning notes',
   const combined = `${home}\n${site}`;
 
   assert.doesNotMatch(combined, /acquisition-ready|The page should|public story|dead downloads|No invented benchmarks/i);
-  assert.match(home, /Engineered tactile sensing for robot hands, grippers, and curved surfaces/i);
-  assert.match(home, /Layered tactile system/i);
+  assert.match(home, /RoboSkin\.ai maps robot skin, tactile AI, e-skin/i);
+  assert.match(home, /The Tactile AI Stack/i);
 });
 
 test('privacy and terms pages use readable dark-theme text colors', async () => {

@@ -17,9 +17,9 @@ const updatedAt = '2026-04-25';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin and Tactile AI for Humanoid Robots',
+    title: 'Robot Skin, Tactile AI, and E-Skin Industry Map',
     description:
-      'RoboSkin.ai builds tactile AI, humanoid robot skin, e-skin, and tactile sensing components for robot hands, grippers, pilots, and integration teams.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, and contact-aware robotics for physical AI systems.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -57,9 +57,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/resources': {
     path: '/resources',
-    title: 'Robot Skin Datasheets, SDKs, and Technical Briefs',
+    title: 'Tactile AI Briefs, Robot Skin Resources, and Stack Maps',
     description:
-      'Request RoboSkin datasheets, integration notes, SDK access, ROS compatibility details, and technical briefs for tactile sensing evaluations.',
+      'Request the State of Tactile AI brief, Humanoid Tactile Stack Map, RoboSkin Index concept, datasheets, and robot skin technical resources.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -147,9 +147,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/contact': {
     path: '/contact',
-    title: 'Contact RoboSkin for Datasheets and Integration Support',
+    title: 'Contact RoboSkin for Briefs, Partnerships, and Strategic Inquiries',
     description:
-      'Talk to the RoboSkin team about tactile sensor demos, humanoid robot skin datasheets, developer kits, and integration support.',
+      'Request the RoboSkin.ai Brief, discuss sponsorship, partnership, research collaboration, product evaluation, or strategic acquisition inquiries.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -183,11 +183,17 @@ const keywords = [
   'tactile AI',
   'tactile sensors',
   'humanoid robot skin',
+  'robotic skin',
   'e-skin',
+  'electronic skin',
   'robotics',
   'robotic grippers',
   'tactile sensing',
   'robot hands',
+  'robot hand tactile sensor',
+  'flexible tactile sensor',
+  'slip detection robot hand',
+  'physical AI tactile feedback',
   'developer kit',
 ];
 
@@ -255,7 +261,7 @@ export function buildOrganizationJsonLd() {
     name: site.name,
     url: site.url,
     email: site.contact.primaryEmail,
-    description: 'Tactile AI and robot skin components for robotics teams evaluating humanoid robot skin, e-skin, and tactile sensing.',
+    description: 'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics for researchers, buyers, partners, and strategic acquirers.',
     contactPoint: [
       {
         '@type': 'ContactPoint',

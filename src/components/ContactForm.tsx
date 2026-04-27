@@ -152,9 +152,9 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-soft">Start with the essentials</p>
-        <h2 className="mt-2 text-2xl font-semibold text-white">Request the right next step</h2>
+        <h2 className="mt-2 text-2xl font-semibold text-white">Route your RoboSkin.ai inquiry</h2>
         <p className="mt-2 text-sm leading-relaxed text-soft">
-          A short request is enough to begin. Add project details only when they help route the message to engineering.
+          A short request is enough to begin. Add project details only when they help route a brief, partnership, or strategic conversation.
         </p>
       </div>
 
@@ -195,6 +195,9 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           >
             <option value="general">General</option>
+            <option value="brief">Brief / report request</option>
+            <option value="partnership">Partnership / sponsorship</option>
+            <option value="acquisition">Strategic acquisition</option>
             <option value="demo">Demo</option>
             <option value="datasheet">Datasheet</option>
             <option value="integration">Integration</option>
@@ -209,7 +212,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           rows={5}
           value={form.message}
           onChange={(event) => updateField('message', event.target.value)}
-          placeholder="Tell us what you want to evaluate or request."
+          placeholder="Tell us whether you want the brief, a partnership discussion, sponsorship, research collaboration, or a strategic acquisition conversation."
           className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
         />
       </label>
@@ -222,7 +225,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             <input
               value={form.requestedAsset}
               onChange={(event) => updateField('requestedAsset', event.target.value)}
-              placeholder="RS-1000 Sensor Array, Developer Kit..."
+              placeholder="State of Tactile AI, Humanoid Tactile Stack Map, RoboSkin Index..."
               className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
             />
           </label>
@@ -257,7 +260,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             <input
               value={form.useCase}
               onChange={(event) => updateField('useCase', event.target.value)}
-              placeholder="Robotic gripper, humanoid hand, prosthetic..."
+              placeholder="Industry report, robot hand, tactile dataset, strategic acquisition..."
               className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition placeholder:text-[#6f7786] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
             />
           </label>
@@ -291,7 +294,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           className="mt-1 h-4 w-4 rounded border-white/20 bg-[var(--bg-soft)]"
         />
         <span>
-          RoboSkin may contact me about this request and use the details above to route it to sales or engineering.
+          RoboSkin may contact me about this request and use the details above to route it to the right research, partnership, or strategic contact.
         </span>
       </label>
 
