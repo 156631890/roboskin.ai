@@ -30,6 +30,14 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /Robot skin FAQ/);
   assert.match(home, /href="\/faq"|href=\{`\/faq/);
   assert.match(home, /href="\/downloads"|href=\{`\/downloads/);
+  assert.match(home, /Robot skin direct answers/);
+  assert.match(home, /href="\/glossary"|href=\{`\/glossary/);
+  assert.match(home, /href="\/resources"|href=\{`\/resources/);
+  assert.match(home, /href="\/technology"|href=\{`\/technology/);
+  assert.match(home, /href="\/research"|href=\{`\/research/);
+  assert.match(home, /href="\/contact\?requestType=brief/);
+  assert.match(home, /What is e-skin\?/);
+  assert.match(home, /How is tactile sensing different from vision/);
   assert.match(faq, /buildFaqJsonLd/);
   assert.doesNotMatch(faq, /robots:\s*\{\s*index:\s*false/);
 });
