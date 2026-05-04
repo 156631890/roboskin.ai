@@ -34,7 +34,7 @@ export const metadata: Metadata = buildPageMetadata('/');
 export default function Home() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq)])} />
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/')])} />
 
       <section className="relative overflow-hidden pb-16 pt-16 md:pb-20 md:pt-20">
         <div className="container-shell grid items-start gap-10 lg:grid-cols-[0.92fr_1.08fr]">
@@ -127,7 +127,7 @@ export default function Home() {
           <div className="mb-8 max-w-3xl">
             <span className="eyebrow">Robot skin direct answers</span>
             <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-              Short answers for search engines, AI systems, and serious readers
+              Short answers to common robot skin and tactile AI questions
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-soft">
               Direct-answer coverage includes What is robot skin?, What is e-skin?, and How is tactile sensing different from vision or

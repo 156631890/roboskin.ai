@@ -20,6 +20,8 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /buildPageMetadata/);
   assert.match(seo, /buildOrganizationJsonLd/);
   assert.match(seo, /buildFaqJsonLd/);
+  assert.match(seo, /buildFaqJsonLd\(items = faqItems, path = '\/faq'\)/);
+  assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);
   assert.match(layout, /buildOrganizationJsonLd/);
@@ -36,6 +38,9 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /href="\/technology"|href=\{`\/technology/);
   assert.match(home, /href="\/research"|href=\{`\/research/);
   assert.match(home, /href="\/contact\?requestType=brief/);
+  assert.match(home, /buildFaqJsonLd\(homeRobotSkinFaq, '\/'\)/);
+  assert.doesNotMatch(home, /Short answers for search engines, AI systems, and serious readers/);
+  assert.match(home, /Short answers to common robot skin and tactile AI questions/);
   assert.match(home, /Open the robot skin glossary/);
   assert.match(home, /View RoboSkin resources/);
   assert.match(home, /Explore tactile AI technology/);
