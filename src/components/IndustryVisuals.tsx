@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type {
+  AuthorityHeroVisual,
   AuthorityLinkGroup,
   DirectAnswerBlock,
   FeaturedIndustryAsset,
@@ -26,6 +28,7 @@ type DirectAnswerSectionProps = {
 
 type TactileStackMapProps = {
   layers: TechnologyLayer[];
+  heroVisual: AuthorityHeroVisual;
 };
 
 type ResearchBriefIndexProps = {
@@ -92,6 +95,12 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
             <h3 className="mt-2 text-xl font-semibold text-white">{item.question}</h3>
           </div>
           <div>
+            {item.image && item.imageAlt ? (
+              <div className="relative mb-4 aspect-[16/7] overflow-hidden rounded-lg border border-white/8 bg-[#06080c]">
+                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,11,16,0.12),rgba(8,11,16,0.46))]" />
+              </div>
+            ) : null}
             <p className="text-base leading-relaxed text-[#d8dce4]">{item.answer}</p>
             <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
               {item.ctaLabel} {'->'}
@@ -103,11 +112,22 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
   );
 }
 
-export function TactileStackMap({ layers }: TactileStackMapProps) {
+export function TactileStackMap({ layers, heroVisual }: TactileStackMapProps) {
   return (
     <figure className="rounded-lg border border-white/10 bg-[#080b10] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] overflow-hidden p-0">
       <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="border-b border-white/8 bg-[#080b10] p-6 lg:border-b-0 lg:border-r">
+          <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-lg border border-white/8 bg-[#06080c]">
+            <Image
+              src={heroVisual.image}
+              alt={heroVisual.imageAlt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 42vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(98,168,255,0.08),transparent_42%),linear-gradient(180deg,rgba(6,8,12,0),rgba(6,8,12,0.42))]" />
+          </div>
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-soft">Tactile AI stack map</p>
           <h3 className="mt-3 text-3xl font-semibold leading-tight text-white">Input -&gt; processing -&gt; action -&gt; feedback</h3>
           <p className="mt-4 text-sm leading-relaxed text-soft">
@@ -234,9 +254,12 @@ export function ResearchBriefIndex({ entries }: ResearchBriefIndexProps) {
         <Link
           key={entry.href}
           href={entry.href}
-          className="grid gap-3 border-b border-white/8 p-5 transition-colors last:border-b-0 hover:bg-white/[0.035] md:grid-cols-[160px_1fr]"
+          className="group grid gap-3 border-b border-white/8 p-5 transition-colors last:border-b-0 hover:bg-white/[0.035] md:grid-cols-[140px_168px_1fr]"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">{entry.label}</span>
+          <span className="relative block aspect-[16/9] overflow-hidden rounded-lg border border-white/8 bg-[#06080c]">
+            <Image src={entry.image} alt={entry.imageAlt} fill sizes="168px" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          </span>
           <span>
             <span className="block text-lg font-semibold text-white">{entry.title}</span>
             <span className="mt-1 block text-sm leading-relaxed text-soft">{entry.summary}</span>
@@ -254,20 +277,22 @@ export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCo
         const accent = accentStyles[asset.accent];
         return (
           <article key={asset.title} className={`rounded-lg border ${accent.border} bg-[#0b0d12] p-5`}>
-            <div className={`rounded-lg border ${accent.border} ${accent.bg} p-4`}>
-              <div className="flex items-start justify-between gap-4">
+            <div className={`relative overflow-hidden rounded-lg border ${accent.border} ${accent.bg} p-4`}>
+              <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 768px) 42vw, 100vw" className="object-cover opacity-75" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,10,15,0.12),rgba(7,10,15,0.86))]" />
+              <div className="relative flex items-start justify-between gap-4">
                 <span className={`rounded-md border ${accent.border} bg-[#070a0f]/70 px-2.5 py-1 text-[11px] font-semibold uppercase ${accent.text}`}>
                   {asset.kicker}
                 </span>
                 <span className="font-mono text-[11px] text-soft">{asset.code}</span>
               </div>
-              <div className="mt-8 space-y-2">
+              <div className="relative mt-24 space-y-2">
                 <span className={`block h-1.5 w-20 rounded-full ${accent.bar}`} />
                 <span className="block h-1.5 w-28 rounded-full bg-white/18" />
                 <span className="block h-1.5 w-16 rounded-full bg-white/12" />
               </div>
-              <h3 className="mt-7 text-2xl font-semibold leading-tight text-white">{asset.title}</h3>
-              <p className="mt-3 text-xs uppercase text-soft">RoboSkin.ai industry asset</p>
+              <h3 className="relative mt-7 text-2xl font-semibold leading-tight text-white">{asset.title}</h3>
+              <p className="relative mt-3 text-xs uppercase text-soft">RoboSkin.ai industry asset</p>
             </div>
 
             <p className="mt-4 text-sm leading-relaxed text-soft">{asset.summary}</p>

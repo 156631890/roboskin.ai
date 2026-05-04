@@ -112,6 +112,8 @@ export type FeaturedIndustryAsset = {
   code: string;
   accent: 'blue' | 'teal' | 'amber' | 'rose';
   includes: string[];
+  image: string;
+  imageAlt: string;
 };
 
 export type AuthorityLinkGroup = {
@@ -129,6 +131,8 @@ export type DirectAnswerBlock = {
   answer: string;
   href: string;
   ctaLabel: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type ResearchResourceEntry = {
@@ -136,6 +140,13 @@ export type ResearchResourceEntry = {
   summary: string;
   href: string;
   label: string;
+  image: string;
+  imageAlt: string;
+};
+
+export type AuthorityHeroVisual = {
+  image: string;
+  imageAlt: string;
 };
 
 export const site = {
@@ -246,6 +257,12 @@ export const homeUseCases = [
   },
 ];
 
+export const authorityHeroVisual: AuthorityHeroVisual = {
+  image: '/generated/authority/authority-hero-tactile-stack.webp',
+  imageAlt:
+    'Humanoid robot hand with translucent tactile sensor skin and blue signal paths representing a tactile AI stack.',
+};
+
 export const authorityLinkGroups: AuthorityLinkGroup[] = [
   {
     title: 'Learn the category',
@@ -340,6 +357,8 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
       'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces. It gives physical AI systems a contact layer that vision alone cannot provide.',
     href: '/glossary',
     ctaLabel: 'Open the robot skin glossary',
+    image: '/generated/authority/robot-skin-definition.webp',
+    imageAlt: 'Flexible robotic skin sheet with glowing tactile sensor nodes detecting a contact point.',
   },
   {
     question: 'What is tactile AI?',
@@ -347,6 +366,8 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
       'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior. It can support grasp confidence, slip response, contact-aware motion, safety reflexes, and evaluation analytics for physical AI systems.',
     href: '/research',
     ctaLabel: 'Browse tactile AI research',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    imageAlt: 'Robot hand tactile signals flowing through edge AI and controller modules in a feedback loop.',
   },
   {
     question: 'What is e-skin?',
@@ -436,6 +457,8 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     code: 'REPORT-01',
     accent: 'blue',
     includes: ['Market themes', 'Research signals', 'Company categories', 'Buyer questions'],
+    image: '/generated/authority/state-of-tactile-ai-cover.webp',
+    imageAlt: 'Dark technical report cover background with robot hand, tactile sensor sheet, and blue data streams.',
   },
   {
     kicker: 'Stack map',
@@ -446,6 +469,8 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     code: 'MAP-07',
     accent: 'teal',
     includes: ['Stack layers', 'Supplier categories', 'Partner paths', 'Evaluation triggers'],
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    imageAlt: 'Layered humanoid tactile stack modules connected by cyan signal paths.',
   },
   {
     kicker: 'Category narrative',
@@ -456,6 +481,8 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     code: 'MANIFESTO',
     accent: 'amber',
     includes: ['Core thesis', 'Messaging notes', 'Category language', 'Launch angle'],
+    image: '/generated/authority/state-of-tactile-ai-cover.webp',
+    imageAlt: 'Robot skin and tactile AI industry landscape rendered as a premium dark technical cover image.',
   },
   {
     kicker: 'Directory concept',
@@ -466,6 +493,8 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     code: 'INDEX-04',
     accent: 'rose',
     includes: ['Evaluation criteria', 'Kit directory', 'Benchmark prompts', 'Sponsor fit'],
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'Tactile sensor kit evaluation bench with robot fingertip, sensor tiles, and abstract benchmark grid.',
   },
 ];
 
@@ -475,24 +504,40 @@ export const researchResourceIndex: ResearchResourceEntry[] = [
     summary: 'A technical brief on normal force, shear force, slip, and texture sensing for robot fingertips.',
     href: '/research/graphene-liquid-metal-3d-force-2026',
     label: 'Research brief',
+    image: '/generated/authority/research-graphene-liquid-metal.webp',
+    imageAlt: 'Macro robotic fingertip tactile sensor with graphene-like layers and liquid metal microchannels.',
   },
   {
     title: 'Single-material soft robotic skin',
     summary: 'A current note on soft e-skin architectures using impedance and machine learning for multimodal touch.',
     href: '/research/single-material-soft-robotic-skin-2025',
     label: 'E-skin brief',
+    image: '/generated/authority/research-soft-robotic-skin.webp',
+    imageAlt: 'Soft robotic skin sheet bending over a curved robot surface with teal tactile sensing highlights.',
+  },
+  {
+    title: 'ROS 2 tactile pipeline context',
+    summary: 'A source-backed route for recording, replaying, transforming, and consuming tactile sensor streams.',
+    href: '/research/ros2-kilted-tactile-pipeline-2026',
+    label: 'Pipeline brief',
+    image: '/generated/authority/research-ros2-tactile-pipeline.webp',
+    imageAlt: 'Robot hand tactile sensor connected to compact compute modules and blue middleware data lanes.',
   },
   {
     title: 'Humanoid tactile stack map',
     summary: 'A request path for mapping sensors, materials, middleware, edge AI, datasets, and evaluation triggers.',
     href: '/resources',
     label: 'Resource path',
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    imageAlt: 'Humanoid tactile stack modules connected across sensor, edge AI, and feedback layers.',
   },
   {
     title: 'RoboSkin technical downloads',
     summary: 'Request datasheets, integration notes, benchmark methods, and SDK material for evaluation.',
     href: '/downloads',
     label: 'Request path',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'Organized tactile sensor evaluation kit with robot fingertip and benchmark objects.',
   },
 ];
 

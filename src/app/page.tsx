@@ -10,6 +10,7 @@ import {
   TactileStackMap,
 } from '@/components/IndustryVisuals';
 import {
+  authorityHeroVisual,
   authorityLinkGroups,
   directAnswerBlocks,
   featuredIndustryAssets,
@@ -88,7 +89,7 @@ export default function Home() {
           </div>
 
           <div className="reveal [animation-delay:0.1s]">
-            <TactileStackMap layers={tactileAiStack} />
+            <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
           </div>
         </div>
       </section>
