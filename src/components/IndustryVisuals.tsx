@@ -1,5 +1,11 @@
 import Link from 'next/link';
-import type { FeaturedIndustryAsset, TechnologyLayer } from '@/content/site';
+import type {
+  AuthorityLinkGroup,
+  DirectAnswerBlock,
+  FeaturedIndustryAsset,
+  ResearchResourceEntry,
+  TechnologyLayer,
+} from '@/content/site';
 
 type TactileStackVisualProps = {
   layers: TechnologyLayer[];
@@ -8,6 +14,22 @@ type TactileStackVisualProps = {
 type FeaturedAssetCoversProps = {
   assets: FeaturedIndustryAsset[];
   compact?: boolean;
+};
+
+type AuthorityIndexProps = {
+  groups: AuthorityLinkGroup[];
+};
+
+type DirectAnswerSectionProps = {
+  answers: DirectAnswerBlock[];
+};
+
+type TactileStackMapProps = {
+  layers: TechnologyLayer[];
+};
+
+type ResearchBriefIndexProps = {
+  entries: ResearchResourceEntry[];
 };
 
 const accentStyles: Record<FeaturedIndustryAsset['accent'], { border: string; bg: string; text: string; bar: string }> = {
@@ -36,6 +58,100 @@ const accentStyles: Record<FeaturedIndustryAsset['accent'], { border: string; bg
     bar: 'bg-[#fb7185]',
   },
 };
+
+export function AuthorityIndex({ groups }: AuthorityIndexProps) {
+  return (
+    <div className="grid gap-4 lg:grid-cols-4">
+      {groups.map((group) => (
+        <section key={group.title} className="authority-panel p-5">
+          <h3 className="text-lg font-semibold text-white">{group.title}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-soft">{group.summary}</p>
+          <ul className="mt-5 space-y-3">
+            {group.links.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="group block rounded-lg border border-white/8 bg-[#080b10] p-3 transition-colors hover:border-[#62a8ff]/35 hover:bg-[#0d1420]">
+                  <span className="block text-sm font-semibold text-[#d7e7ff] group-hover:text-white">{link.label}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-soft">{link.description}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
+  return (
+    <div className="divide-y divide-white/8 rounded-lg border border-white/10 bg-[#080b10]">
+      {answers.map((item) => (
+        <article key={item.question} className="grid gap-4 p-5 md:grid-cols-[0.42fr_1fr] md:p-6">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-soft">Direct answer</p>
+            <h3 className="mt-2 text-xl font-semibold text-white">{item.question}</h3>
+          </div>
+          <div>
+            <p className="text-base leading-relaxed text-[#d8dce4]">{item.answer}</p>
+            <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              {item.ctaLabel} {'->'}
+            </Link>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+export function TactileStackMap({ layers }: TactileStackMapProps) {
+  return (
+    <figure
+      role="img"
+      aria-label="Tactile AI stack map showing contact input, signal processing, robot control, safety response, and tactile data feedback."
+      className="authority-panel overflow-hidden p-0"
+    >
+      <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="border-b border-white/8 bg-[#080b10] p-6 lg:border-b-0 lg:border-r">
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-soft">Tactile AI stack map</p>
+          <h3 className="mt-3 text-3xl font-semibold leading-tight text-white">Input -&gt; processing -&gt; action -&gt; feedback</h3>
+          <p className="mt-4 text-sm leading-relaxed text-soft">
+            Robot skin is useful when contact signals move through a complete stack: surface design, sensors,
+            signal conditioning, robot middleware, controller behavior, safety response, and evaluation data.
+          </p>
+          <div className="mt-6 grid grid-cols-5 gap-2">
+            {Array.from({ length: 35 }).map((_, index) => {
+              const active = [6, 7, 12, 13, 18, 24, 25].includes(index);
+              return (
+                <span
+                  key={index}
+                  className={
+                    'aspect-square rounded border ' +
+                    (active
+                      ? 'border-[#5eead4]/50 bg-[#5eead4]/25 shadow-[0_0_18px_rgba(94,234,212,0.18)]'
+                      : 'border-white/8 bg-white/[0.045]')
+                  }
+                />
+              );
+            })}
+          </div>
+        </div>
+        <ol className="divide-y divide-white/8">
+          {layers.map((layer, index) => (
+            <li key={layer.title} className="grid grid-cols-[44px_1fr] gap-4 p-4 md:p-5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <div>
+                <h4 className="text-base font-semibold text-white">{layer.title}</h4>
+                <p className="mt-1 text-sm leading-relaxed text-soft">{layer.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </figure>
+  );
+}
 
 export function TactileStackVisual({ layers }: TactileStackVisualProps) {
   return (
@@ -112,6 +228,26 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
         </div>
       </div>
     </figure>
+  );
+}
+
+export function ResearchBriefIndex({ entries }: ResearchBriefIndexProps) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-[#080b10]">
+      {entries.map((entry) => (
+        <Link
+          key={entry.href}
+          href={entry.href}
+          className="grid gap-3 border-b border-white/8 p-5 transition-colors last:border-b-0 hover:bg-white/[0.035] md:grid-cols-[160px_1fr]"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">{entry.label}</span>
+          <span>
+            <span className="block text-lg font-semibold text-white">{entry.title}</span>
+            <span className="mt-1 block text-sm leading-relaxed text-soft">{entry.summary}</span>
+          </span>
+        </Link>
+      ))}
+    </div>
   );
 }
 
