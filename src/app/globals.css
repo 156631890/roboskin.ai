@@ -40,7 +40,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.22;
+  opacity: 0.14;
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
@@ -54,6 +54,26 @@ a {
 .container-shell {
   width: min(var(--max-width), calc(100% - 2rem));
   margin: 0 auto;
+}
+
+.authority-band {
+  background: linear-gradient(180deg, rgba(8, 11, 16, 0.64), rgba(6, 8, 12, 0.18));
+  border-block: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.authority-panel {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, rgba(13, 16, 22, 0.92), rgba(8, 11, 16, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.section-label {
+  color: #7dd3fc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .eyebrow {

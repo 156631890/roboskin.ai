@@ -121,6 +121,30 @@ export type FeaturedIndustryAsset = {
   includes: string[];
 };
 
+export type AuthorityLinkGroup = {
+  title: string;
+  summary: string;
+  links: {
+    label: string;
+    href: string;
+    description: string;
+  }[];
+};
+
+export type DirectAnswerBlock = {
+  question: string;
+  answer: string;
+  href: string;
+  ctaLabel: string;
+};
+
+export type ResearchResourceEntry = {
+  title: string;
+  summary: string;
+  href: string;
+  label: string;
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -216,6 +240,78 @@ export const homeUseCases = [
   {
     title: 'Collaborative and medical robots',
     text: 'Contact-aware robot surfaces for safer proximity, manipulation, and procedure support.',
+  },
+];
+
+export const authorityLinkGroups: AuthorityLinkGroup[] = [
+  {
+    title: 'Learn the category',
+    summary: 'Definitions and technical explainers for robot skin, tactile AI, e-skin, and tactile sensing terms.',
+    links: [
+      { label: 'Open the robot skin glossary', href: '/glossary', description: 'Concise definitions for robot skin, tactile AI, e-skin, slip detection, and ROS 2 tactile pipelines.' },
+      { label: 'Read the robot skin FAQ', href: '/faq', description: 'Short answers about evaluation, integration, public downloads, and request-only material.' },
+      { label: 'Explore tactile AI technology', href: '/technology', description: 'A system view of sensing layers, signal processing, middleware, and validation fit.' },
+    ],
+  },
+  {
+    title: 'Track the field',
+    summary: 'Research notes and industry assets for teams following the tactile AI stack.',
+    links: [
+      { label: 'Browse robot skin research', href: '/research', description: 'Technical briefs about tactile sensors, soft robotic skin, multimodal sensing, and robot hands.' },
+      { label: 'View RoboSkin resources', href: '/resources', description: 'Briefs, stack maps, and category assets for serious robotics readers.' },
+      { label: 'Review conservative case studies', href: '/case-studies', description: 'Anonymous evaluation paths without unsupported customer or performance claims.' },
+    ],
+  },
+  {
+    title: 'Evaluate paths',
+    summary: 'Routes for teams comparing tactile sensor modules, developer kits, or custom skin programs.',
+    links: [
+      { label: 'Compare RoboSkin paths', href: '/comparison', description: 'Choose between sensor arrays, developer kits, and custom form-factor programs.' },
+      { label: 'Plan implementation', href: '/implementation', description: 'Understand the evaluation, prototype, pilot, and deployment route.' },
+      { label: 'Request technical downloads', href: '/downloads', description: 'Request datasheets, integration notes, benchmark methods, and SDK material.' },
+    ],
+  },
+  {
+    title: 'Discuss value',
+    summary: 'Contact paths for brief requests, partnerships, sponsorship, and strategic conversations.',
+    links: [
+      { label: 'Request the RoboSkin.ai Brief', href: '/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief', description: 'Ask for the industry brief, stack map, or manifesto.' },
+      { label: 'Discuss partnership or sponsorship', href: '/contact?requestType=partnership', description: 'Open a conversation about research, reports, directories, or category partnerships.' },
+      { label: 'Strategic acquisition conversation', href: '/contact?requestType=acquisition', description: 'Use this path for domain acquisition, licensing, or strategic buyer inquiries.' },
+    ],
+  },
+];
+
+export const directAnswerBlocks: DirectAnswerBlock[] = [
+  {
+    question: 'What is robot skin?',
+    answer: 'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces. It gives physical AI systems a contact layer that vision alone cannot provide.',
+    href: '/glossary',
+    ctaLabel: 'Open the robot skin glossary',
+  },
+  {
+    question: 'What is tactile AI?',
+    answer: 'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior. It can support grasp confidence, slip response, contact-aware motion, safety reflexes, and evaluation analytics for physical AI systems.',
+    href: '/research',
+    ctaLabel: 'Browse tactile AI research',
+  },
+  {
+    question: 'What is e-skin?',
+    answer: 'E-skin, or electronic skin, is a flexible or soft sensor layer designed to measure contact-related signals on non-flat surfaces. In robotics, e-skin can cover fingertips, palms, gripper pads, prosthetics, arms, or safety surfaces.',
+    href: '/research/single-material-soft-robotic-skin-2025',
+    ctaLabel: 'Read the e-skin brief',
+  },
+  {
+    question: 'Why do humanoid robot hands need touch?',
+    answer: 'Humanoid robot hands need touch because dexterous manipulation depends on contact timing, pressure, shear, slip, and object stability. Vision can guide a hand toward an object, but tactile sensing helps the robot understand what happens during contact.',
+    href: '/solutions',
+    ctaLabel: 'View robot hand applications',
+  },
+  {
+    question: 'How is tactile sensing different from vision or force-torque sensing?',
+    answer: 'Vision observes a scene from outside contact, while tactile sensing measures what happens at the contact surface. Force-torque sensors can measure aggregate loads, but robot skin can expose distributed contact patterns across fingertips, grippers, or curved surfaces.',
+    href: '/technology',
+    ctaLabel: 'Explore tactile AI technology',
   },
 ];
 
@@ -391,6 +487,33 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     code: 'INDEX-04',
     accent: 'rose',
     includes: ['Evaluation criteria', 'Kit directory', 'Benchmark prompts', 'Sponsor fit'],
+  },
+];
+
+export const researchResourceIndex: ResearchResourceEntry[] = [
+  {
+    title: 'Graphene and liquid metal 3D force sensing',
+    summary: 'A technical brief on normal force, shear force, slip, and texture sensing for robot fingertips.',
+    href: '/research/graphene-liquid-metal-3d-force-2026',
+    label: 'Research brief',
+  },
+  {
+    title: 'Single-material soft robotic skin',
+    summary: 'A current note on soft e-skin architectures using impedance and machine learning for multimodal touch.',
+    href: '/research/single-material-soft-robotic-skin-2025',
+    label: 'E-skin brief',
+  },
+  {
+    title: 'Humanoid tactile stack map',
+    summary: 'A request path for mapping sensors, materials, middleware, edge AI, datasets, and evaluation triggers.',
+    href: '/resources',
+    label: 'Resource path',
+  },
+  {
+    title: 'RoboSkin technical downloads',
+    summary: 'Request datasheets, integration notes, benchmark methods, and SDK material for evaluation.',
+    href: '/downloads',
+    label: 'Request path',
   },
 ];
 

@@ -358,11 +358,11 @@ export function buildProductListJsonLd() {
   };
 }
 
-export function buildFaqJsonLd(items = faqItems) {
+export function buildFaqJsonLd(items = faqItems, path = '/faq') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${site.url}/faq#faq`,
+    '@id': `${canonicalUrl(path)}#faq`,
     mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,

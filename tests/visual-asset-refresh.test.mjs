@@ -15,16 +15,22 @@ test('industry asset pages use reusable visual components for stack, reports, an
   ]);
 
   assert.match(visuals, /export function TactileStackVisual/);
+  assert.match(visuals, /export function TactileStackMap/);
+  assert.match(visuals, /export function AuthorityIndex/);
+  assert.match(visuals, /export function DirectAnswerSection/);
   assert.match(visuals, /export function FeaturedAssetCovers/);
   assert.match(visuals, /export function ConversionPathPanel/);
-  assert.match(visuals, /role="img"/);
+  assert.match(visuals, /aria-hidden="true"/);
 
   assert.match(site, /featuredIndustryAssets/);
   assert.match(site, /State of Tactile AI 2026/);
   assert.match(site, /Humanoid Tactile Stack Map/);
   assert.match(site, /RoboSkin Index/);
 
-  assert.match(home, /TactileStackVisual/);
+  assert.match(home, /TactileStackMap/);
+  assert.match(home, /AuthorityIndex/);
+  assert.match(home, /DirectAnswerSection/);
+  assert.match(home, /ResearchBriefIndex/);
   assert.match(home, /FeaturedAssetCovers/);
   assert.match(home, /ConversionPathPanel/);
   assert.match(resources, /FeaturedAssetCovers/);

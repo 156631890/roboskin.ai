@@ -15,14 +15,16 @@ test('site presents RoboSkin.ai as a tactile AI industry asset with clear conver
     read('src/app/resources/page.tsx'),
   ]);
 
-  assert.match(home, /robot skin \/ tactile AI/i);
-  assert.match(home, /Humanoid Tactile Stack Map/);
-  assert.match(home, /domain acquisition/i);
+  assert.match(home, /Robot skin and tactile AI authority portal/i);
+  assert.match(home, /Strategic acquisition conversation/i);
   assert.match(home, /sponsorship/i);
-  assert.match(site, /tactileIndustryDirections/);
-  assert.match(site, /tactileAiStack/);
-  assert.match(site, /contentRoadmapTopics/);
-  assert.match(site, /The Tactile AI Manifesto/);
+  assert.match(home, /ConversionPathPanel/);
+  assert.match(site, /authorityLinkGroups/);
+  assert.match(site, /directAnswerBlocks/);
+  assert.match(site, /researchResourceIndex/);
+  assert.match(site, /Humanoid Tactile Stack Map/);
+  assert.match(site, /domain acquisition/i);
+  assert.match(site, /sponsorship/i);
   assert.match(navigation, /Request Brief/);
   assert.match(contactForm, /Brief \/ report request/);
   assert.match(contactForm, /Strategic acquisition/);
