@@ -63,7 +63,7 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
   return (
     <div className="grid gap-4 lg:grid-cols-4">
       {groups.map((group) => (
-        <section key={group.title} className="authority-panel p-5">
+        <section key={group.title} className="rounded-lg border border-white/10 bg-[#080b10] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]">
           <h3 className="text-lg font-semibold text-white">{group.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-soft">{group.summary}</p>
           <ul className="mt-5 space-y-3">
@@ -105,11 +105,7 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
 
 export function TactileStackMap({ layers }: TactileStackMapProps) {
   return (
-    <figure
-      role="img"
-      aria-label="Tactile AI stack map showing contact input, signal processing, robot control, safety response, and tactile data feedback."
-      className="authority-panel overflow-hidden p-0"
-    >
+    <figure className="rounded-lg border border-white/10 bg-[#080b10] shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] overflow-hidden p-0">
       <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="border-b border-white/8 bg-[#080b10] p-6 lg:border-b-0 lg:border-r">
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-soft">Tactile AI stack map</p>
@@ -118,7 +114,7 @@ export function TactileStackMap({ layers }: TactileStackMapProps) {
             Robot skin is useful when contact signals move through a complete stack: surface design, sensors,
             signal conditioning, robot middleware, controller behavior, safety response, and evaluation data.
           </p>
-          <div className="mt-6 grid grid-cols-5 gap-2">
+          <div aria-hidden="true" className="mt-6 grid grid-cols-5 gap-2">
             {Array.from({ length: 35 }).map((_, index) => {
               const active = [6, 7, 12, 13, 18, 24, 25].includes(index);
               return (
