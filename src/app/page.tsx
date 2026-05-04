@@ -1,203 +1,207 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { glossaryTerms, homeProofPoints, homeUseCases, site } from '@/content/site';
+import {
+  AuthorityIndex,
+  ConversionPathPanel,
+  DirectAnswerSection,
+  FeaturedAssetCovers,
+  ResearchBriefIndex,
+  TactileStackMap,
+} from '@/components/IndustryVisuals';
+import {
+  authorityLinkGroups,
+  directAnswerBlocks,
+  featuredIndustryAssets,
+  homeStats,
+  manifesto,
+  marketSignals,
+  researchResourceIndex,
+  site,
+  tactileAiStack,
+} from '@/content/site';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-const domainValuePoints = [
-  {
-    title: 'Exact category language',
-    text: 'Robot skin is a natural phrase for tactile surfaces on humanoids, grippers, prosthetics, and soft robotic systems.',
-  },
-  {
-    title: '.ai extension fit',
-    text: 'The domain connects robotics language with AI search, tactile intelligence, and machine perception.',
-  },
-  {
-    title: 'Content-backed asset',
-    text: 'Research notes, glossary terms, FAQ pages, and internal links give the name more context than a parked page.',
-  },
-  {
-    title: 'Flexible buyer use cases',
-    text: 'The name can support a startup brand, product line, lab initiative, media property, or acquisition strategy.',
-  },
-];
-
-const homeRobotSkinFaq = [
-  {
-    question: 'What is robot skin?',
-    answer:
-      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, or interaction events across robot hands, grippers, arms, and curved body surfaces.',
-    href: '/faq',
-    ctaLabel: 'Read the robot skin FAQ',
-  },
-  {
-    question: 'How does tactile AI relate to robot skin?',
-    answer:
-      'Tactile AI describes the perception layer that interprets contact data from robot skin, e-skin, force sensors, and multimodal sensing systems.',
-    href: '/faq',
-    ctaLabel: 'Explore tactile AI answers',
-  },
-  {
-    question: 'Why is RoboSkin.ai a category domain?',
-    answer:
-      'RoboSkin.ai pairs a concise robot skin phrase with a .ai extension suited to tactile intelligence, humanoid robotics, research media, and domain acquisition interest.',
-    href: '/contact?requestType=domain',
-    ctaLabel: 'Inquire about the domain',
-  },
-];
+const homeRobotSkinFaq = directAnswerBlocks.slice(0, 3).map((item) => ({
+  question: item.question,
+  answer: item.answer,
+  href: item.href,
+  ctaLabel: item.ctaLabel,
+}));
 
 export const metadata: Metadata = buildPageMetadata('/');
 
 export default function Home() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq)])} />
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/')])} />
 
       <section className="relative overflow-hidden pb-16 pt-16 md:pb-20 md:pt-20">
-        <div className="pointer-events-none absolute left-[-12rem] top-0 h-80 w-80 rounded-full bg-[#f6d48d]/35 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-[-10rem] right-[-8rem] h-96 w-96 rounded-full bg-[#b7d7c7]/35 blur-3xl" />
-        <div className="container-shell relative grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="container-shell grid items-start gap-10 lg:grid-cols-[0.92fr_1.08fr]">
           <div className="reveal">
-            <span className="eyebrow">Robot skin knowledge hub | Premium .ai domain</span>
-            <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[0.92] tracking-[-0.06em] text-[var(--text)] md:text-7xl">
-              RoboSkin.ai maps the language of robot skin and tactile AI.
+            <span className="eyebrow">Authority portal | Humanoid robot skin | Tactile AI stack map</span>
+            <h1 className="mt-6 max-w-4xl text-5xl font-bold leading-[0.96] text-white md:text-7xl">
+              Robot skin and tactile AI authority portal
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-soft">
-              Explore the emerging category of robot skin, e-skin, tactile sensing, and humanoid robotics while evaluating RoboSkin.ai as a premium exact-match
-              domain asset.
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8dce4]">
+              RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for researchers, operators,
+              builders, and strategic readers tracking physical AI touch.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link href="/research" className="rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(31,79,216,0.18)]">
-                Explore robot skin research
+
+            <div className="mt-7 rounded-lg border border-white/10 bg-[#080b10] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">What is robot skin?</p>
+              <p className="mt-3 text-base leading-relaxed text-[#d8dce4]">
+                In practical robotics, robot skin helps robots detect contact, pressure, shear, slip, and interaction events across
+                hands, grippers, arms, or curved body surfaces.
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/research"
+                className="rounded-lg bg-[#62a8ff] px-5 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.02]"
+              >
+                Browse robot skin research
               </Link>
-              <Link href="/glossary" className="rounded-xl border border-[var(--panel-border)] bg-white/60 px-6 py-3 text-sm font-semibold text-[var(--text)]">
-                Browse glossary
+              <Link
+                href="/glossary"
+                className="rounded-lg border border-white/12 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
+              >
+                Open the robot skin glossary
               </Link>
-              <Link href="/contact?requestType=domain" className="rounded-xl px-2 py-3 text-sm font-semibold text-[var(--primary)]">
-                Domain inquiry
+              <Link
+                href="/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief"
+                className="rounded-lg border border-[#62a8ff]/35 bg-[#62a8ff]/10 px-5 py-3 text-sm font-semibold text-[#d7e7ff] transition-colors hover:bg-[#62a8ff]/14"
+              >
+                Request the RoboSkin.ai Brief
               </Link>
+            </div>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              {homeStats.map((item, idx) => (
+                <article key={item.label} className="glass-card reveal p-5" style={{ animationDelay: `${idx * 0.05}s` }}>
+                  <p className="text-2xl font-bold text-white">{item.value}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-soft">{item.label}</p>
+                </article>
+              ))}
             </div>
           </div>
 
-          <aside className="glass-card p-6 md:p-8">
-            <p className="text-xs uppercase tracking-[0.16em] text-[#8a4b00]">Domain availability</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--text)]">RoboSkin.ai is available</h2>
-            <p className="mt-4 text-sm leading-relaxed text-soft">
-              A concise .ai name for robot skin, tactile AI, e-skin research, humanoid robotics, and contact-aware machine interfaces.
-            </p>
-            <Link href={site.domainInquiry.href} className="mt-6 inline-flex rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white">
-              Inquire about RoboSkin.ai
-            </Link>
-          </aside>
+          <div className="reveal [animation-delay:0.1s]">
+            <TactileStackMap layers={tactileAiStack} />
+          </div>
         </div>
       </section>
 
       <section className="py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 max-w-3xl">
-            <span className="eyebrow">Domain value</span>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Why RoboSkin.ai works as a category asset</h2>
+            <span className="eyebrow">Authority index</span>
+            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Find the right robot skin route</h2>
+            <p className="mt-4 text-sm leading-relaxed text-soft">
+              Use this authority index to move from definitions to research, technology evaluation, downloads, resources, and inquiry paths.
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {domainValuePoints.map((item, idx) => (
-              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.text}</p>
-              </article>
-            ))}
+
+          <div className="mb-8 flex flex-wrap gap-3">
+            <Link href="/faq" className="rounded-lg border border-white/10 bg-[#080b10] px-4 py-2 text-sm font-semibold text-white hover:bg-white/[0.055]">
+              Robot skin FAQ
+            </Link>
+            <Link href="/resources" className="rounded-lg border border-white/10 bg-[#080b10] px-4 py-2 text-sm font-semibold text-white hover:bg-white/[0.055]">
+              View RoboSkin resources
+            </Link>
+            <Link href="/technology" className="rounded-lg border border-white/10 bg-[#080b10] px-4 py-2 text-sm font-semibold text-white hover:bg-white/[0.055]">
+              Explore tactile AI technology
+            </Link>
+            <Link href="/downloads" className="rounded-lg border border-white/10 bg-[#080b10] px-4 py-2 text-sm font-semibold text-white hover:bg-white/[0.055]">
+              Request technical downloads
+            </Link>
           </div>
+
+          <AuthorityIndex groups={authorityLinkGroups} />
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell">
+          <div className="mb-8 max-w-3xl">
+            <span className="eyebrow">Robot skin direct answers</span>
+            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+              Short answers to common robot skin and tactile AI questions
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-soft">
+              Direct-answer coverage includes What is robot skin?, What is e-skin?, and How is tactile sensing different from vision or
+              force-torque sensing?
+            </p>
+          </div>
+
+          <DirectAnswerSection answers={directAnswerBlocks} />
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20">
+        <div className="container-shell grid gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div>
+            <span className="eyebrow">Research and resource index</span>
+            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Track the tactile AI stack with source-like entries</h2>
+            <p className="mt-4 text-sm leading-relaxed text-soft">
+              Research briefs and resource entries organize the robot skin category around tactile sensors, e-skin architectures, stack
+              maps, buyer questions, and public request paths.
+            </p>
+
+            <div className="mt-6 rounded-lg border border-white/10 bg-[#080b10] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">{manifesto.title}</p>
+              <p className="mt-3 text-lg leading-relaxed text-white">{manifesto.summary}</p>
+              <Link
+                href="/contact?requestType=brief&requestedAsset=Tactile%20AI%20Manifesto"
+                className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white"
+              >
+                Request the Tactile AI Manifesto {'->'}
+              </Link>
+            </div>
+          </div>
+
+          <ResearchBriefIndex entries={researchResourceIndex} />
         </div>
       </section>
 
       <section className="py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Research notes</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Signals that define the robot skin category</h2>
+            <div className="max-w-3xl">
+              <span className="eyebrow">Industry assets</span>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+                Reports, maps, and directories for the robot skin category
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-soft">
+                Use these industry assets to package category research, stack maps, directories, and strategic request paths.
+              </p>
             </div>
-            <Link href="/research" className="text-sm font-semibold text-[var(--primary)]">
-              Read research notes {'->'}
+            <Link href="/resources" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
+              View resources {'->'}
             </Link>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {homeProofPoints.map((item, idx) => (
-              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.06}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.description}</p>
-              </article>
-            ))}
-          </div>
+
+          <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
         </div>
       </section>
 
       <section className="py-14 md:py-20">
         <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Robot skin applications</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Where tactile surfaces become useful first</h2>
-            </div>
-            <Link href="/applications" className="text-sm font-semibold text-[var(--primary)]">
-              Explore applications {'->'}
-            </Link>
+          <div className="mb-8 max-w-3xl">
+            <span className="eyebrow">Market signals</span>
+            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Why humanoid robot skin is becoming a category</h2>
+            <p className="mt-4 text-sm leading-relaxed text-soft">
+              The public site stays conservative while tracking signals that make robot skin, tactile AI, and distributed touch relevant
+              to humanoid robotics.
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {homeUseCases.map((item, idx) => (
-              <article key={item.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="py-14 md:py-20">
-        <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">Glossary cluster</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Terms that organize tactile AI search intent</h2>
-            </div>
-            <Link href="/glossary" className="text-sm font-semibold text-[var(--primary)]">
-              Open glossary {'->'}
-            </Link>
-          </div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {glossaryTerms.slice(0, 4).map((item) => (
-              <article key={item.term} className="glass-card p-6">
-                <h3 className="text-lg font-semibold text-[var(--text)]">{item.term}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-soft">{item.definition}</p>
-                <Link href="/glossary" className="mt-4 inline-flex text-sm font-semibold text-[var(--primary)]">
-                  Related glossary term {'->'}
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14 md:py-20">
-        <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow">FAQ</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">Short answers for readers and domain evaluators</h2>
-            </div>
-            <Link href="/faq" className="text-sm font-semibold text-[var(--primary)]">
-              Read full FAQ {'->'}
-            </Link>
-          </div>
-          <div className="grid gap-5 lg:grid-cols-3">
-            {homeRobotSkinFaq.map((item, idx) => (
-              <article key={item.question} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.08}s` }}>
-                <h3 className="text-xl font-semibold tracking-tight text-[var(--text)]">{item.question}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{item.answer}</p>
-                <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[var(--primary)]">
-                  {item.ctaLabel} {'->'}
-                </Link>
+            {marketSignals.map((signal, idx) => (
+              <article key={signal.title} className="glass-card reveal p-7" style={{ animationDelay: `${idx * 0.05}s` }}>
+                <h3 className="text-xl font-semibold text-white">{signal.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{signal.description}</p>
               </article>
             ))}
           </div>
@@ -206,25 +210,23 @@ export default function Home() {
 
       <section className="pb-20 pt-8">
         <div className="container-shell">
-          <div className="glass-card overflow-hidden p-8 text-center md:p-12">
-            <span className="eyebrow">Final domain inquiry CTA</span>
-            <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold tracking-tight text-[var(--text)] md:text-5xl">
-              Evaluate RoboSkin.ai as a premium domain for robot skin and tactile AI.
+          <div className="rounded-lg border border-white/10 bg-[#080b10] p-8 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] md:p-12">
+            <span className="eyebrow border-white/10 bg-white/5 text-white">Brief, partnership, or strategic inquiry</span>
+            <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
+              Build the category around robot skin, tactile AI, and physical AI touch
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-soft">
-              The domain can anchor a research hub, startup brand, product line, lab initiative, or acquisition strategy in a category that is still forming.
+            <p className="mx-auto mt-4 max-w-2xl text-[#d8dce4]">
+              Request the RoboSkin.ai Brief, discuss sponsorship or partnership, or open a strategic acquisition conversation.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contact?requestType=domain" className="rounded-xl bg-[var(--primary)] px-8 py-3 text-sm font-bold text-white">
-                Inquire about RoboSkin.ai
-              </Link>
-              <Link href="/research" className="rounded-xl border border-[var(--panel-border)] bg-white/60 px-8 py-3 text-sm font-semibold text-[var(--text)]">
-                Explore research notes
-              </Link>
+            <Link href="/contact?requestType=acquisition" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+              Strategic acquisition conversation {'->'}
+            </Link>
+            <div className="mt-8 text-left">
+              <ConversionPathPanel />
             </div>
-            <p className="mt-5 text-sm text-soft">
+            <p className="mt-6 text-sm text-soft">
               Direct inquiries:{' '}
-              <a className="text-[var(--primary)] underline decoration-[var(--panel-border)] underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
+              <a className="text-[#62a8ff] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
                 {site.contact.primaryEmail}
               </a>
             </p>

@@ -17,9 +17,9 @@ const updatedAt = '2026-04-25';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'RoboSkin.ai: Robot Skin, Tactile AI, and Premium Domain Asset',
+    title: 'Robot Skin, Tactile AI, and E-Skin Authority Portal',
     description:
-      'RoboSkin.ai is a robot skin and tactile AI information hub built around a premium robot skin domain available for acquisition or partnership inquiry.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, and contact-aware robotics for physical AI systems.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -193,12 +193,18 @@ const keywords = [
   'tactile AI',
   'tactile sensors',
   'humanoid robot skin',
+  'robotic skin',
   'e-skin',
+  'electronic skin',
   'robotics',
   'robotic grippers',
   'tactile sensing',
   'robot hands',
   'robot skin information hub',
+  'robot hand tactile sensor',
+  'flexible tactile sensor',
+  'slip detection robot hand',
+  'physical AI tactile feedback',
 ];
 
 export function canonicalUrl(path: string) {
@@ -265,7 +271,8 @@ export function buildOrganizationJsonLd() {
     name: site.name,
     url: site.url,
     email: site.contact.primaryEmail,
-    description: 'Robot skin and tactile AI information hub built around the premium domain RoboSkin.ai.',
+    description:
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics for researchers, builders, partners, and strategic acquirers.',
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -357,11 +364,11 @@ export function buildCategoryGuideJsonLd() {
   };
 }
 
-export function buildFaqJsonLd(items = faqItems) {
+export function buildFaqJsonLd(items = faqItems, path = '/faq') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${site.url}/faq#faq`,
+    '@id': `${canonicalUrl(path)}#faq`,
     mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,

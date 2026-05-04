@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { site } from '@/content/site';
 
-type RequestType = 'domain' | 'partnership' | 'research' | 'other';
+type RequestType = 'domain' | 'brief' | 'partnership' | 'acquisition' | 'research' | 'other';
 
 type ContactFormState = {
   fullName: string;
@@ -13,6 +13,7 @@ type ContactFormState = {
   email: string;
   phone: string;
   requestType: RequestType;
+  requestedAsset: string;
   budgetSignal: string;
   intendedUse: string;
   website: string;
@@ -20,12 +21,13 @@ type ContactFormState = {
   consent: boolean;
 };
 
-const initialState = (requestType: RequestType = 'domain'): ContactFormState => ({
+const initialState = (requestType: RequestType = 'domain', requestedAsset = ''): ContactFormState => ({
   fullName: '',
   company: '',
   email: '',
   phone: '',
   requestType,
+  requestedAsset,
   budgetSignal: '',
   intendedUse: '',
   website: '',
@@ -35,6 +37,7 @@ const initialState = (requestType: RequestType = 'domain'): ContactFormState => 
 
 type ContactFormProps = {
   requestType?: string;
+  requestedAsset?: string;
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
@@ -46,7 +49,9 @@ function normalizeRequestType(value: string | null | undefined, fallback: Reques
 
   switch (value) {
     case 'domain':
+    case 'brief':
     case 'partnership':
+    case 'acquisition':
     case 'research':
     case 'other':
       return value;
@@ -62,6 +67,10 @@ function normalizeRequestType(value: string | null | undefined, fallback: Reques
   }
 }
 
+function displayValue(value: string) {
+  return value.trim() || 'Not provided';
+}
+
 function buildMailtoHref(form: ContactFormState) {
   const subject = `RoboSkin.ai ${form.requestType} inquiry from ${form.company || form.fullName}`;
   const body = [
@@ -70,6 +79,7 @@ function buildMailtoHref(form: ContactFormState) {
     `Work email: ${form.email}`,
     `Phone: ${form.phone || 'Not provided'}`,
     `Request type: ${form.requestType}`,
+    `Requested asset: ${displayValue(form.requestedAsset)}`,
     `Budget / seriousness signal: ${form.budgetSignal || 'Not provided'}`,
     `Intended use: ${form.intendedUse || 'Not provided'}`,
     '',
@@ -80,11 +90,12 @@ function buildMailtoHref(form: ContactFormState) {
   return `mailto:${site.contact.ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-export default function ContactForm({ requestType }: ContactFormProps) {
+export default function ContactForm({ requestType, requestedAsset }: ContactFormProps) {
   const searchParams = useSearchParams();
   const effectiveRequestType = normalizeRequestType(requestType ?? searchParams.get('requestType'));
+  const effectiveRequestedAsset = requestedAsset ?? searchParams.get('requestedAsset') ?? '';
 
-  const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType));
+  const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType, effectiveRequestedAsset));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
 
@@ -93,8 +104,8 @@ export default function ContactForm({ requestType }: ContactFormProps) {
   }
 
   useEffect(() => {
-    setForm(initialState(effectiveRequestType));
-  }, [effectiveRequestType]);
+    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
+  }, [effectiveRequestType, effectiveRequestedAsset]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -147,7 +158,7 @@ export default function ContactForm({ requestType }: ContactFormProps) {
 
     setStatus('success');
     setFeedback('Thanks. We received your request and will reply within 2 business days.');
-    setForm(initialState(effectiveRequestType));
+    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
   }
 
   return (
@@ -194,6 +205,15 @@ export default function ContactForm({ requestType }: ContactFormProps) {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
+        <label className="grid gap-2 text-sm text-soft">
+          Requested asset
+          <input
+            value={form.requestedAsset}
+            onChange={(event) => updateField('requestedAsset', event.target.value)}
+            placeholder="RoboSkin.ai Brief, State of Tactile AI, stack map..."
+            className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
+          />
+        </label>
         <label className="grid gap-2 text-sm text-soft">
           Intended use
           <input
@@ -245,7 +265,9 @@ export default function ContactForm({ requestType }: ContactFormProps) {
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           >
             <option value="domain">Domain acquisition</option>
+            <option value="brief">Brief / report request</option>
             <option value="partnership">Partnership or content collaboration</option>
+            <option value="acquisition">Strategic acquisition</option>
             <option value="research">Research / information request</option>
             <option value="other">Other</option>
           </select>
@@ -261,7 +283,7 @@ export default function ContactForm({ requestType }: ContactFormProps) {
           className="mt-1 h-4 w-4 rounded border-white/20 bg-[var(--bg-soft)]"
         />
         <span>
-          RoboSkin may contact me about this domain inquiry, collaboration, or research request and use the details above to route the message appropriately.
+          RoboSkin may contact me about this domain inquiry, brief request, collaboration, or research request and use the details above to route the message appropriately.
         </span>
       </label>
 

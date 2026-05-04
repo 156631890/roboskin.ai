@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   authors: [{ name: site.name }],
-  category: 'Robot skin and tactile AI information',
+  category: 'Tactile AI',
   creator: site.name,
   publisher: site.name,
   formatDetection: {
@@ -55,7 +55,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#f6f1e8" />
+        <meta name="theme-color" content="#06080c" />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
