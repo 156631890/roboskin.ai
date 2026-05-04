@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { resourceSections } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { pageVisuals, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/downloads');
@@ -22,6 +23,7 @@ export default function DownloadsPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Public materials are organized as learning routes: research notes, glossary definitions, FAQ guidance, and domain inquiry context.
           </p>
+          <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
         </div>
       </section>
 

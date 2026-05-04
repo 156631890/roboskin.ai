@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { deploymentStages } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { deploymentStages, pageVisuals } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/implementation');
@@ -22,6 +23,7 @@ export default function ImplementationPage() {
           <p className="mt-5 max-w-3xl text-soft">
             This page outlines how teams, labs, and content owners can think about robot skin concepts from research awareness to branded category ownership.
           </p>
+          <PageHeroVisual visual={pageVisuals.implementation} className="mt-10" priority />
         </div>
       </section>
 

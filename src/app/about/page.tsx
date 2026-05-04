@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { aboutSections, site } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { aboutSections, pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/about');
@@ -23,6 +24,7 @@ export default function AboutPage() {
             RoboSkin.ai is an information asset for the robot skin and tactile AI category. It is not currently presented as an operating hardware vendor. The
             domain is available for serious acquisition or partnership inquiry.
           </p>
+          <PageHeroVisual visual={pageVisuals.about} className="mt-10" priority />
         </div>
       </section>
 

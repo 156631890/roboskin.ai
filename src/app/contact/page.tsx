@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
-import { contactPaths, site } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { contactPaths, pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/contact');
@@ -28,17 +29,7 @@ export default function ContactPage() {
               <p>Legal: <a className="text-accent hover:text-white" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a></p>
             </div>
           </div>
-          <div className="glass-card min-h-72 rounded-[20px] border border-white/8 p-6">
-            <div className="flex h-full items-center justify-center rounded-[16px] border border-white/8 bg-[#0d1016] p-6">
-              <div className="max-w-sm text-center">
-                <p className="text-soft text-sm uppercase tracking-[0.16em]">Next step</p>
-                <h2 className="mt-3 text-2xl font-semibold text-[var(--text)]">Domain acquisition is the primary path</h2>
-                <p className="mt-3 text-sm leading-relaxed text-soft">
-                  Serious buyers should include intended use, timeline, and a budget or broker signal so the inquiry can be evaluated quickly.
-                </p>
-              </div>
-            </div>
-          </div>
+          <PageHeroVisual visual={pageVisuals.contact} className="self-center" priority />
         </div>
       </section>
 

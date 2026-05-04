@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { productCards } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { pageVisuals, productCards } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildCategoryGuideJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/products');
@@ -23,6 +24,7 @@ export default function ProductsPage() {
             RoboSkin.ai can support a robotics startup brand, tactile AI product line, research initiative, media property, or category landing page. This page
             explains possible uses without claiming active hardware availability.
           </p>
+          <PageHeroVisual visual={pageVisuals.products} className="mt-10" priority />
         </div>
       </section>
 

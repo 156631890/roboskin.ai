@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { caseStudySummaries } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { caseStudySummaries, pageVisuals } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/case-studies');
@@ -22,6 +23,7 @@ export default function CaseStudiesPage() {
           <p className="mt-5 max-w-3xl text-soft">
             These are conservative summaries of common robot skin contexts. They do not imply active customer work, hardware availability, or performance numbers.
           </p>
+          <PageHeroVisual visual={pageVisuals.caseStudies} className="mt-10" priority />
         </div>
       </section>
 

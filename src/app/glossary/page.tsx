@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { glossaryTerms, site } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { glossaryTerms, pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/glossary');
@@ -36,6 +37,7 @@ export default function GlossaryPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Practical definitions for readers evaluating tactile AI, e-skin, multimodal sensors, ROS 2 tactile pipelines, and robot skin category language.
           </p>
+          <PageHeroVisual visual={pageVisuals.answers} className="mt-10" priority />
         </div>
       </section>
 

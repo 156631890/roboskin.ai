@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { comparisonRows } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { comparisonRows, pageVisuals } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/comparison');
@@ -22,6 +23,7 @@ export default function ComparisonPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Use this page to compare how RoboSkin.ai could support a startup brand, research initiative, or media property without implying active hardware availability.
           </p>
+          <PageHeroVisual visual={pageVisuals.comparison} className="mt-10" priority />
         </div>
       </section>
 

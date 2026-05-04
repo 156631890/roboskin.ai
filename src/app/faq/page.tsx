@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { faqItems } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { faqItems, pageVisuals } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/faq');
@@ -22,6 +23,7 @@ export default function FAQPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Public copy stays conservative. If a detail depends on robot platform, geometry, or environment, treat it as source-specific rather than a RoboSkin.ai product claim.
           </p>
+          <PageHeroVisual visual={pageVisuals.answers} className="mt-10" priority />
         </div>
       </section>
 

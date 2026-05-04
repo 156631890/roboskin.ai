@@ -149,6 +149,12 @@ export type AuthorityHeroVisual = {
   imageAlt: string;
 };
 
+export type PageVisual = {
+  image: string;
+  imageAlt: string;
+  caption: string;
+};
+
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
@@ -262,6 +268,69 @@ export const authorityHeroVisual: AuthorityHeroVisual = {
   imageAlt:
     'Humanoid robot hand with translucent tactile sensor skin and blue signal paths representing a tactile AI stack.',
 };
+
+export const pageVisuals = {
+  products: {
+    image: '/generated/pages/domain-use-visual.webp',
+    imageAlt:
+      'Technical workbench showing RoboSkin.ai domain use cases connected to robot skin, tactile AI, and research context.',
+    caption: 'Domain use-case visual for RoboSkin.ai brand, research, and category routes.',
+  },
+  applications: {
+    image: '/generated/pages/application-contexts.webp',
+    imageAlt:
+      'Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals.',
+    caption: 'Application-context visual for robot skin, e-skin, and tactile AI use cases.',
+  },
+  technology: {
+    image: '/generated/pages/technology-signal-flow.webp',
+    imageAlt:
+      'Layered tactile sensor surface sending signals through processing boards and robot-ready data views.',
+    caption: 'Technology visual showing tactile sensing layers and signal flow.',
+  },
+  resources: {
+    image: '/generated/pages/resources-library.webp',
+    imageAlt:
+      'Organized robot skin learning library with technical cards, tactile sensor samples, and research screens.',
+    caption: 'Resource-library visual for public learning routes and technical references.',
+  },
+  comparison: {
+    image: '/generated/pages/comparison-matrix.webp',
+    imageAlt:
+      'Dark technical comparison matrix with robot skin routes, tactile sensor modules, and evaluation indicators.',
+    caption: 'Comparison visual for evaluating RoboSkin.ai domain use cases.',
+  },
+  implementation: {
+    image: '/generated/pages/category-roadmap.webp',
+    imageAlt:
+      'Roadmap-style robotics bench showing tactile sensing stages from category orientation to inquiry path.',
+    caption: 'Category-roadmap visual for robot skin implementation and positioning stages.',
+  },
+  caseStudies: {
+    image: '/generated/pages/case-contexts.webp',
+    imageAlt:
+      'Three application-context panels showing robotic gripper, humanoid hand, and tactile sensor evaluation scenes.',
+    caption: 'Case-context visual for conservative robot skin application summaries.',
+  },
+  about: {
+    image: '/generated/pages/about-contact-inquiry.webp',
+    imageAlt:
+      'RoboSkin inquiry desk with robot hand, tactile skin sample, and organized technical contact materials.',
+    caption: 'About-page visual for RoboSkin.ai as a conservative information and domain asset.',
+  },
+  contact: {
+    image: '/generated/pages/about-contact-inquiry.webp',
+    imageAlt:
+      'Domain inquiry workstation with robot hand, tactile sensor sample, and contact cards.',
+    caption: 'Contact-page visual for domain acquisition, partnership, and research inquiries.',
+  },
+  answers: {
+    image: '/generated/pages/glossary-faq-answers.webp',
+    imageAlt:
+      'Robot skin sample surrounded by concise tactile AI concept icons and answer-path nodes.',
+    caption: 'Answer-page visual for glossary and FAQ routes.',
+  },
+} satisfies Record<string, PageVisual>;
 
 export const authorityLinkGroups: AuthorityLinkGroup[] = [
   {

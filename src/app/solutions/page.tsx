@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { solutionCards } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { pageVisuals, solutionCards } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/solutions');
@@ -22,6 +23,7 @@ export default function SolutionsPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Each path frames a robot skin topic for research, education, or category positioning without claiming product availability.
           </p>
+          <PageHeroVisual visual={pageVisuals.applications} className="mt-10" priority />
         </div>
       </section>
 

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { resourceSections } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { pageVisuals, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/resources');
@@ -22,6 +23,7 @@ export default function ResourcesPage() {
           <p className="mt-5 max-w-3xl text-soft">
             Use these public routes to learn robot skin terminology, review source-backed research notes, and understand RoboSkin.ai domain context.
           </p>
+          <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
         </div>
       </section>
 

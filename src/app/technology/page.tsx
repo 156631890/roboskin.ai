@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { fitCriteria, sensorDataFlow, technologyLayers } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { fitCriteria, pageVisuals, sensorDataFlow, technologyLayers } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/technology');
@@ -17,6 +18,7 @@ export default function TechnologyPage() {
           <p className="mt-5 max-w-3xl text-soft">
             This page explains robot skin concepts, tactile sensing layers, signal flow, and validation questions without presenting RoboSkin.ai as an active product vendor.
           </p>
+          <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
         </div>
       </section>
 

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { site } from '@/content/site';
+import PageHeroVisual from '@/components/PageHeroVisual';
+import { pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/applications');
@@ -48,6 +49,7 @@ export default function ApplicationsPage() {
               </Link>
             </div>
           </div>
+          <PageHeroVisual visual={pageVisuals.applications} className="mt-10" priority />
         </div>
       </section>
 
