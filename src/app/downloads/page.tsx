@@ -21,7 +21,7 @@ export default function DownloadsPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Public materials are organized as learning routes: research notes, glossary definitions, FAQ guidance, and domain inquiry context.
+            Public materials are organized as learning routes: research notes, glossary definitions, FAQ guidance, and research inquiry context.
           </p>
           <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
         </div>
@@ -63,7 +63,7 @@ export default function DownloadsPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Choose a learning route</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Use public research and glossary routes first, or send a serious domain inquiry if RoboSkin.ai fits your project.
+              Use public research and glossary routes first, or send a source suggestion if a page needs better support.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
@@ -75,8 +75,8 @@ export default function DownloadsPage() {
               <Link href="/glossary" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                 Read the glossary
               </Link>
-              <Link href="/contact?requestType=domain" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                Domain inquiry
+              <Link href="/contact?requestType=research" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                Research inquiry
               </Link>
             </div>
           </div>

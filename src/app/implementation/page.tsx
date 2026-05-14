@@ -16,8 +16,8 @@ export default function ImplementationPage() {
           <span className="eyebrow">Category roadmap</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">How the robot skin category can develop</h1>
-            <Link href="/contact?requestType=domain" className="text-accent text-sm font-semibold hover:text-white">
-              Inquire about RoboSkin.ai {'->'}
+            <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-white">
+              Send a research note {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
@@ -67,17 +67,17 @@ export default function ImplementationPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to discuss category ownership?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send the intended use, organization context, and domain or research goal so the inquiry can be routed clearly.
+              Send the intended use, organization context, and research goal so the inquiry can be routed clearly.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=domain"
+                href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Inquire about RoboSkin.ai
+                Send a research note
               </Link>
                 <Link href="/comparison" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                  Compare domain use cases
+                  Compare guide routes
                 </Link>
             </div>
           </div>

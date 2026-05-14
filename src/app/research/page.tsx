@@ -40,7 +40,7 @@ export default function ResearchPage() {
               <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                 <h2 className="text-2xl font-semibold text-white">{category}</h2>
                 <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-white">
-                  Send a domain or research inquiry {'->'}
+                  Send a research inquiry {'->'}
                 </Link>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
@@ -80,14 +80,14 @@ export default function ResearchPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need more context?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Share a source, correction, or domain-related use case so the site can stay accurate and clearly framed.
+              Share a source or correction so the site can stay accurate and clearly framed.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
                 href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Send a domain or research inquiry
+                Send a research inquiry
               </Link>
               <Link
                 href="/glossary"

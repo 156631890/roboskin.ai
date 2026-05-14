@@ -50,14 +50,14 @@ export default function FAQPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need a clearer route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Choose research, glossary, or domain inquiry depending on whether you need learning context or acquisition discussion.
+              Choose research, glossary, or contact depending on whether you need learning context, a correction, or a source suggestion.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=domain"
+                href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Domain inquiry
+                Research inquiry
               </Link>
               <Link
                 href="/research"
@@ -69,7 +69,7 @@ export default function FAQPage() {
                 href="/products"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                View domain use cases
+                View guide routes
               </Link>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { site } from '@/content/site';
 
-type RequestType = 'domain' | 'brief' | 'partnership' | 'acquisition' | 'research' | 'other';
+type RequestType = 'partnership' | 'research' | 'correction' | 'other';
 
 type ContactFormState = {
   fullName: string;
@@ -21,7 +21,7 @@ type ContactFormState = {
   consent: boolean;
 };
 
-const initialState = (requestType: RequestType = 'domain', requestedAsset = ''): ContactFormState => ({
+const initialState = (requestType: RequestType = 'research', requestedAsset = ''): ContactFormState => ({
   fullName: '',
   company: '',
   email: '',
@@ -42,17 +42,15 @@ type ContactFormProps = {
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
 
-function normalizeRequestType(value: string | null | undefined, fallback: RequestType = 'domain'): RequestType {
+function normalizeRequestType(value: string | null | undefined, fallback: RequestType = 'research'): RequestType {
   if (!value) {
     return fallback;
   }
 
   switch (value) {
-    case 'domain':
-    case 'brief':
     case 'partnership':
-    case 'acquisition':
     case 'research':
+    case 'correction':
     case 'other':
       return value;
     case 'datasheet':
@@ -61,7 +59,7 @@ function normalizeRequestType(value: string | null | undefined, fallback: Reques
     case 'demo':
       return 'partnership';
     case 'general':
-      return 'domain';
+      return 'research';
     default:
       return 'other';
   }
@@ -72,7 +70,7 @@ function displayValue(value: string) {
 }
 
 function buildMailtoHref(form: ContactFormState) {
-  const subject = `RoboSkin.ai ${form.requestType} inquiry from ${form.company || form.fullName}`;
+  const subject = `RoboSkin.ai ${form.requestType} note from ${form.company || form.fullName}`;
   const body = [
     `Full name: ${form.fullName}`,
     `Company / organization: ${form.company}`,
@@ -80,7 +78,7 @@ function buildMailtoHref(form: ContactFormState) {
     `Phone: ${form.phone || 'Not provided'}`,
     `Request type: ${form.requestType}`,
     `Requested asset: ${displayValue(form.requestedAsset)}`,
-    `Budget / seriousness signal: ${form.budgetSignal || 'Not provided'}`,
+    `Source / context: ${form.budgetSignal || 'Not provided'}`,
     `Intended use: ${form.intendedUse || 'Not provided'}`,
     '',
     'Message:',
@@ -210,7 +208,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           <input
             value={form.requestedAsset}
             onChange={(event) => updateField('requestedAsset', event.target.value)}
-            placeholder="RoboSkin.ai Brief, State of Tactile AI, stack map..."
+            placeholder="Article, source, correction, or topic..."
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
@@ -219,16 +217,16 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           <input
             value={form.intendedUse}
             onChange={(event) => updateField('intendedUse', event.target.value)}
-            placeholder="Startup brand, product line, lab project, media property..."
+            placeholder="Lab project, article, research note, or page topic..."
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
         <label className="grid gap-2 text-sm text-soft">
-          Budget / seriousness signal
+          Source / context
           <input
             value={form.budgetSignal}
             onChange={(event) => updateField('budgetSignal', event.target.value)}
-            placeholder="Acquisition budget, broker, timeline, or partnership scope"
+            placeholder="Source URL, correction context, timeline, or partnership scope"
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--panel)] px-4 py-3 text-[var(--text)] outline-none transition placeholder:text-[#8b8378] focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </label>
@@ -264,11 +262,9 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
             onChange={(event) => updateField('requestType', normalizeRequestType(event.target.value))}
             className="rounded-xl border border-[var(--panel-border)] bg-[var(--bg-soft)] px-4 py-3 text-white outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/20"
           >
-            <option value="domain">Domain acquisition</option>
-            <option value="brief">Brief / report request</option>
-            <option value="partnership">Partnership or content collaboration</option>
-            <option value="acquisition">Strategic acquisition</option>
             <option value="research">Research / information request</option>
+            <option value="correction">Correction or source suggestion</option>
+            <option value="partnership">Editorial collaboration</option>
             <option value="other">Other</option>
           </select>
         </label>
@@ -283,7 +279,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           className="mt-1 h-4 w-4 rounded border-white/20 bg-[var(--bg-soft)]"
         />
         <span>
-          RoboSkin may contact me about this domain inquiry, brief request, collaboration, or research request and use the details above to route the message appropriately.
+          RoboSkin may contact me about this research note, correction, collaboration, or general request and use the details above to route the message appropriately.
         </span>
       </label>
 

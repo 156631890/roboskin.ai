@@ -46,7 +46,7 @@ export default function Home() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#d8dce4]">
               RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for researchers, operators,
-              builders, and strategic readers tracking physical AI touch.
+              builders, and readers tracking physical AI touch.
             </p>
 
             <div className="mt-7 rounded-lg border border-white/10 bg-[#080b10] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]">
@@ -71,10 +71,10 @@ export default function Home() {
                 Open the robot skin glossary
               </Link>
               <Link
-                href="/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief"
+                href="/contact?requestType=research"
                 className="rounded-lg border border-[#62a8ff]/35 bg-[#62a8ff]/10 px-5 py-3 text-sm font-semibold text-[#d7e7ff] transition-colors hover:bg-[#62a8ff]/14"
               >
-                Request the RoboSkin.ai Brief
+                Suggest a Source
               </Link>
             </div>
 
@@ -100,7 +100,7 @@ export default function Home() {
             <span className="eyebrow">Authority index</span>
             <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Find the right robot skin route</h2>
             <p className="mt-4 text-sm leading-relaxed text-soft">
-              Use this authority index to move from definitions to research, technology evaluation, downloads, resources, and inquiry paths.
+              Use this authority index to move from definitions to research, technology evaluation, references, resources, and inquiry paths.
             </p>
           </div>
 
@@ -115,7 +115,7 @@ export default function Home() {
               Explore tactile AI technology
             </Link>
             <Link href="/downloads" className="rounded-lg border border-white/10 bg-[#080b10] px-4 py-2 text-sm font-semibold text-white hover:bg-white/[0.055]">
-              Request technical downloads
+              View public references
             </Link>
           </div>
 
@@ -146,18 +146,18 @@ export default function Home() {
             <span className="eyebrow">Research and resource index</span>
             <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">Track the tactile AI stack with source-like entries</h2>
             <p className="mt-4 text-sm leading-relaxed text-soft">
-              Research briefs and resource entries organize the robot skin category around tactile sensors, e-skin architectures, stack
-              maps, buyer questions, and public request paths.
+              Research notes and resource entries organize the robot skin category around tactile sensors, e-skin architectures, stack
+              maps, reader questions, and public reference paths.
             </p>
 
             <div className="mt-6 rounded-lg border border-white/10 bg-[#080b10] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7dd3fc]">{manifesto.title}</p>
               <p className="mt-3 text-lg leading-relaxed text-white">{manifesto.summary}</p>
               <Link
-                href="/contact?requestType=brief&requestedAsset=Tactile%20AI%20Manifesto"
+                href="/applications"
                 className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white"
               >
-                Request the Tactile AI Manifesto {'->'}
+                Read the application context {'->'}
               </Link>
             </div>
           </div>
@@ -170,12 +170,12 @@ export default function Home() {
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-3xl">
-              <span className="eyebrow">Industry assets</span>
+              <span className="eyebrow">Public guide assets</span>
               <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-                Reports, maps, and directories for the robot skin category
+                Guides, maps, and references for the robot skin category
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-soft">
-                Use these industry assets to package category research, stack maps, directories, and strategic request paths.
+                Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
               </p>
             </div>
             <Link href="/resources" className="text-sm font-semibold text-[#62a8ff] hover:text-[#7dd3fc]">
@@ -212,15 +212,15 @@ export default function Home() {
       <section className="pb-20 pt-8">
         <div className="container-shell">
           <div className="rounded-lg border border-white/10 bg-[#080b10] p-8 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] md:p-12">
-            <span className="eyebrow border-white/10 bg-white/5 text-white">Brief, partnership, or strategic inquiry</span>
+            <span className="eyebrow border-white/10 bg-white/5 text-white">Research, glossary, or correction path</span>
             <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
               Build the category around robot skin, tactile AI, and physical AI touch
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[#d8dce4]">
-              Request the RoboSkin.ai Brief, discuss sponsorship or partnership, or open a strategic acquisition conversation.
+              Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
             </p>
-            <Link href="/contact?requestType=acquisition" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
-              Strategic acquisition conversation {'->'}
+            <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+              Send a research note {'->'}
             </Link>
             <div className="mt-8 text-left">
               <ConversionPathPanel />

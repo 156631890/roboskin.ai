@@ -20,11 +20,11 @@ export default function Footer() {
               </div>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-soft">
-              Robot skin and tactile AI information hub. The RoboSkin.ai domain is available for serious acquisition or partnership inquiry.
+              Robot skin and tactile AI information hub with source-backed research notes, glossary definitions, and conservative application context.
             </p>
             <div className="mt-6 space-y-2 text-sm text-soft">
               <p>
-                Domain inquiry:{' '}
+                Research notes:{' '}
                 <Link className="text-accent hover:text-[#0f766e]" href={site.domainInquiry.href}>
                   {site.domainInquiry.ctaLabel}
                 </Link>
@@ -62,7 +62,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-[var(--panel-border)] pt-6 text-xs text-soft md:flex-row md:items-center md:justify-between">
           <p>Copyright {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <p>Built as a robotics information asset and premium domain inquiry path.</p>
+          <p>Built as a robotics information resource with conservative claim standards.</p>
         </div>
       </div>
     </footer>

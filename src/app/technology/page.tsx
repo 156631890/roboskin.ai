@@ -90,7 +90,7 @@ export default function TechnologyPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-5xl">Need source-backed robot skin context?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Use the research and glossary routes for terminology, or send a domain inquiry if RoboSkin.ai fits your project.
+              Use the research and glossary routes for terminology, or send a research inquiry if RoboSkin.ai fits your project.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
@@ -102,7 +102,7 @@ export default function TechnologyPage() {
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/products" className="text-accent font-semibold hover:text-white">
-                View domain use cases {'->'}
+                View guide routes {'->'}
               </Link>
               <Link href="/resources" className="text-accent font-semibold hover:text-white">
                 View learning resources {'->'}

@@ -27,9 +27,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/products': {
     path: '/products',
-    title: 'Robot Skin Category Guides and Tactile AI Domain Uses',
+    title: 'Robot Skin Category Guides and Tactile AI Learning Routes',
     description:
-      'Explore educational category guides for robot skin, tactile AI, e-skin terminology, and possible domain uses for robotics and AI audiences.',
+      'Explore educational category guides for robot skin, tactile AI, e-skin terminology, and possible guide routes for robotics and AI audiences.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -69,7 +69,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/resources',
     title: 'Robot Skin Resources and Tactile AI Research Guides',
     description:
-      'Browse robot skin resources, tactile AI research guides, terminology routes, and context about the RoboSkin.ai domain asset.',
+      'Browse robot skin resources, tactile AI research guides, terminology routes, and context about the RoboSkin.ai information resource.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -87,9 +87,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/comparison': {
     path: '/comparison',
-    title: 'Compare Robot Skin Category Concepts and Domain Uses',
+    title: 'Compare Robot Skin Category Concepts and Learning Routes',
     description:
-      'Compare robot skin category concepts, tactile sensing terminology, and possible RoboSkin.ai domain use cases for robotics and AI content.',
+      'Compare robot skin category concepts, tactile sensing terminology, and possible RoboSkin.ai guide routes for robotics and AI content.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -109,7 +109,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/faq',
     title: 'Robot Skin FAQ: Tactile AI, e-skin, and Integration Questions',
     description:
-      'Practical answers about robot skin, tactile AI, e-skin, research terminology, domain inquiries, and conservative source guidance.',
+      'Practical answers about robot skin, tactile AI, e-skin, research terminology, research inquiries, and conservative source guidance.',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -149,7 +149,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/about',
     title: 'About RoboSkin.ai',
     description:
-      'Learn about RoboSkin.ai as a robot skin information hub and premium exact-match .ai domain asset for tactile AI audiences.',
+      'Learn about RoboSkin.ai as a robot skin information hub and public robot skin information resource for tactile AI audiences.',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -157,9 +157,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/contact': {
     path: '/contact',
-    title: 'RoboSkin.ai Domain Inquiry and Contact',
+    title: 'RoboSkin.ai Research Contact',
     description:
-      'Contact the owner of RoboSkin.ai about domain acquisition, partnership, content collaboration, or robot skin research information.',
+      'Contact RoboSkin.ai about source suggestions, corrections, editorial collaboration, or robot skin research information.',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -177,7 +177,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/terms': {
     path: '/terms',
     title: 'Terms of Service',
-    description: 'Terms of use for the RoboSkin website and domain and research inquiries.',
+    description: 'Terms of use for the RoboSkin website and research inquiries.',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -272,11 +272,11 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     email: site.contact.primaryEmail,
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics for researchers, builders, partners, and strategic acquirers.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics for researchers, builders, partners, and research readers.',
     contactPoint: [
       {
         '@type': 'ContactPoint',
-        contactType: 'domain acquisition inquiry',
+        contactType: 'research inquiry',
         email: site.contact.ownerEmail,
         availableLanguage: ['en'],
       },
@@ -350,7 +350,7 @@ export function buildCategoryGuideJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${site.url}/products#category-guides`,
-    name: 'Robot skin category and domain use guides',
+    name: 'Robot skin category and guide route guides',
     itemListElement: productCards.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,

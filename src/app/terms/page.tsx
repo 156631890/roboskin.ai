@@ -23,13 +23,13 @@ export default function TermsPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Website use</h2>
               <p className="mt-3 text-[#4f5560]">
-                This site is provided for robot skin category information, contact requests, and domain or research inquiries. You agree not to misuse the site or submit false information.
+                This site is provided for robot skin category information, contact requests, and research inquiries. You agree not to misuse the site or submit false information.
               </p>
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Services</h2>
               <p className="mt-3 text-[#4f5560]">
-                Public pages describe robot skin category context, learning resources, and the RoboSkin.ai domain inquiry path. Any commercial engagement is subject to a separate written agreement.
+                Public pages describe robot skin category context, learning resources, and the RoboSkin.ai research inquiry path. Any commercial engagement is subject to a separate written agreement.
               </p>
             </div>
             <div>

@@ -21,7 +21,7 @@ export default function ResourcesPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Use these public routes to learn robot skin terminology, review source-backed research notes, and understand RoboSkin.ai domain context.
+            Use these public routes to learn robot skin terminology, review source-backed research notes, and understand RoboSkin.ai source context.
           </p>
           <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
         </div>
@@ -88,7 +88,7 @@ export default function ResourcesPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Choose a learning route</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Start with source-backed research, terminology, or a domain inquiry depending on what you need to understand.
+              Start with source-backed research, terminology, or a research inquiry depending on what you need to understand.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link href="/research" className="rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
@@ -97,8 +97,8 @@ export default function ResourcesPage() {
               <Link href="/glossary" className="rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                 Read the glossary
               </Link>
-              <Link href="/contact?requestType=domain" className="rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
-                Domain inquiry
+              <Link href="/contact?requestType=research" className="rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
+                Research inquiry
               </Link>
             </div>
           </div>

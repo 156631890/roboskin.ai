@@ -12,7 +12,7 @@ type ContactPayload = {
   website?: string;
 };
 
-const requestTypes = new Set(['domain', 'partnership', 'research', 'other']);
+const requestTypes = new Set(['partnership', 'research', 'correction', 'other']);
 
 function isValidPayload(payload: ContactPayload) {
   return Boolean(

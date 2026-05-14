@@ -53,14 +53,14 @@ export default function NewsPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need current site context?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send a domain, partnership, or research inquiry if you need context beyond the public pages.
+              Send a correction, partnership, or research inquiry if you need context beyond the public pages.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=domain"
+                href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Inquire about RoboSkin.ai
+                Send a research note
               </Link>
               <Link
                 href="/research"

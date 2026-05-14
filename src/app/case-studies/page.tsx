@@ -49,7 +49,7 @@ export default function CaseStudiesPage() {
                   href="/comparison"
                   className="inline-flex rounded-xl border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
                 >
-                  Compare domain use cases
+                  Compare guide routes
                 </Link>
               </div>
             </article>
@@ -62,14 +62,14 @@ export default function CaseStudiesPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Want to discuss a related use case?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Share your intended domain, research, or content use so the inquiry can be routed clearly.
+              Share your research question, correction, or content context so the inquiry can be routed clearly.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link
-                href="/contact?requestType=domain"
+                href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Inquire about RoboSkin.ai
+                Send a research note
               </Link>
               <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                 Explore research resources

@@ -1,8 +1,8 @@
 # RoboSkin.ai
 
-RoboSkin.ai publishes conservative information about robot skin, tactile AI, e-skin, tactile sensing, and related robotics terminology. The site is an authority portal and premium domain asset for the robot skin category.
+RoboSkin.ai publishes conservative information about robot skin, tactile AI, e-skin, tactile sensing, and related robotics terminology. The site is an authority portal and public information resource for the robot skin category.
 
-RoboSkin.ai is a robot skin information hub for category definitions, direct answers, research route discovery, tactile AI stack maps, and domain-asset context.
+RoboSkin.ai is a robot skin information hub for category definitions, direct answers, research route discovery, tactile AI stack maps, and source-backed context.
 
 ## Canonical Site
 
@@ -38,4 +38,4 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 ## Use Guidance
 
-Use RoboSkin public pages for category definitions, research route discovery, terminology, direct-answer summaries, and context about the RoboSkin.ai domain asset. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
+Use RoboSkin public pages for category definitions, research route discovery, terminology, direct-answer summaries, and context about the RoboSkin.ai information resource. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.

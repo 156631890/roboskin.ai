@@ -17,7 +17,7 @@ export default function SolutionsPage() {
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin application contexts</h1>
             <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-              Compare domain use cases {'->'}
+              Compare guide routes {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
@@ -41,16 +41,16 @@ export default function SolutionsPage() {
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/contact?requestType=domain"
+                  href="/contact?requestType=research"
                   className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
                 >
-                  Inquire about RoboSkin.ai
+                  Send a research note
                 </Link>
                 <Link
                   href="/comparison"
                   className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
                 >
-                  Compare domain use cases
+                  Compare guide routes
                 </Link>
                 <Link
                   href="/technology"
@@ -69,19 +69,19 @@ export default function SolutionsPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need help choosing a category route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send your intended use for RoboSkin.ai, whether domain acquisition, partnership, research, or content.
+              Send your intended use for RoboSkin.ai, whether research inquiry, partnership, research, or content.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
-                href="/contact?requestType=domain"
+                href="/contact?requestType=research"
                 className="rounded-xl bg-[var(--primary)] px-7 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
               >
-                Inquire about RoboSkin.ai
+                Send a research note
               </Link>
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/products" className="text-accent font-semibold hover:text-white">
-                View domain use cases {'->'}
+                View guide routes {'->'}
               </Link>
               <Link href="/implementation" className="text-accent font-semibold hover:text-white">
                 See category roadmap {'->'}

@@ -79,8 +79,8 @@ export default function ApplicationsPage() {
               <Link href="/glossary" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
                 Read the glossary
               </Link>
-              <Link href="/contact?requestType=domain" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white">
-                Inquire about RoboSkin.ai
+              <Link href="/contact?requestType=research" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white">
+                Send a research note
               </Link>
             </div>
           </div>

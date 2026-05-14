@@ -317,28 +317,28 @@ export function ConversionPathPanel() {
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_0.92fr_0.92fr]">
       <Link
-        href="/contact?requestType=brief&requestedAsset=RoboSkin.ai%20Brief"
+        href="/research"
         className="rounded-lg border border-[#62a8ff]/45 bg-[#62a8ff]/14 p-6 text-white transition-colors hover:bg-[#62a8ff]/18"
       >
         <p className="text-xs font-semibold uppercase text-[#d7e7ff]">Primary path</p>
-        <h3 className="mt-3 text-2xl font-semibold">Request the RoboSkin.ai Brief</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#d7e7ff]">Best for readers who want the industry report, stack map, manifesto, or research summary.</p>
+        <h3 className="mt-3 text-2xl font-semibold">Read the research notes</h3>
+        <p className="mt-3 text-sm leading-relaxed text-[#d7e7ff]">Best for readers who want source-backed context on robot skin, tactile AI, and e-skin.</p>
       </Link>
       <Link
         href="/contact?requestType=partnership"
         className="rounded-lg border border-white/10 bg-[#0b0d12] p-6 text-white transition-colors hover:bg-white/[0.055]"
       >
         <p className="text-xs font-semibold uppercase text-soft">Partner path</p>
-        <h3 className="mt-3 text-xl font-semibold">Partnership or sponsorship</h3>
-        <p className="mt-3 text-sm leading-relaxed text-soft">Use for reports, directory listings, research collaboration, or ecosystem introductions.</p>
+        <h3 className="mt-3 text-xl font-semibold">Editorial collaboration</h3>
+        <p className="mt-3 text-sm leading-relaxed text-soft">Use for research collaboration, source suggestions, or educational content ideas.</p>
       </Link>
       <Link
-        href="/contact?requestType=acquisition"
+        href="/contact?requestType=correction"
         className="rounded-lg border border-[#fbbf24]/35 bg-[#fbbf24]/10 p-6 text-white transition-colors hover:bg-[#fbbf24]/14"
       >
-        <p className="text-xs font-semibold uppercase text-[#fde68a]">Strategic path</p>
-        <h3 className="mt-3 text-xl font-semibold">Strategic acquisition inquiry</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#fde68a]">Use for domain acquisition, brand licensing, or strategic buyer conversations.</p>
+        <p className="text-xs font-semibold uppercase text-[#fde68a]">Correction path</p>
+        <h3 className="mt-3 text-xl font-semibold">Suggest a correction</h3>
+        <p className="mt-3 text-sm leading-relaxed text-[#fde68a]">Use for unsupported claims, outdated references, or better public sources.</p>
       </Link>
     </div>
   );
