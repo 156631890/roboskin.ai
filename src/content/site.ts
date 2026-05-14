@@ -274,7 +274,7 @@ export const pageVisuals = {
     image: '/generated/pages/domain-use-visual.webp',
     imageAlt:
       'Technical workbench showing RoboSkin.ai guide routes connected to robot skin, tactile AI, and research context.',
-    caption: 'Domain use-case visual for RoboSkin.ai brand, research, and category routes.',
+    caption: 'Guide-route visual for RoboSkin.ai research and category routes.',
   },
   applications: {
     image: '/generated/pages/application-contexts.webp',

@@ -31,8 +31,8 @@ test('homepage copy reflects the authority portal positioning', async () => {
   assert.match(home, /Robot skin and tactile AI authority portal/);
   assert.match(home, /What is robot skin\?/);
   assert.match(home, /Open the robot skin glossary/);
-  assert.match(home, /Request the RoboSkin\.ai Brief/);
-  assert.match(home, /Strategic acquisition conversation/);
+  assert.match(home, /Suggest a Source/);
+  assert.match(home, /Send a research note/);
   assert.match(home, /Robot skin direct answers/);
   assert.match(home, /Research and resource index/);
   assert.match(home, /Tactile AI stack map/);

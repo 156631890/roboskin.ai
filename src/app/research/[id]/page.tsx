@@ -85,6 +85,7 @@ function ArticleBody({ content }: { content: string }) {
   const lines = content.split('\n');
   const elements: ReactNode[] = [];
   let listItems: string[] = [];
+  let tableRows: string[][] = [];
 
   const flushList = () => {
     if (!listItems.length) {
@@ -103,20 +104,69 @@ function ArticleBody({ content }: { content: string }) {
     listItems = [];
   };
 
+  const flushTable = () => {
+    if (!tableRows.length) {
+      return;
+    }
+
+    const [header, ...bodyRows] = tableRows;
+    const rows = bodyRows.filter((row) => !row.every((cell) => /^:?-{3,}:?$/.test(cell.trim())));
+
+    if (header?.length && rows.length) {
+      elements.push(
+        <div key={`table-${elements.length}`} className="mt-6 overflow-x-auto rounded-lg border border-white/8">
+          <table className="w-full min-w-[620px] border-collapse text-left text-sm">
+            <thead className="bg-[#0d1016] text-white">
+              <tr>
+                {header.map((cell) => (
+                  <th key={cell} className="border-b border-white/8 px-4 py-3 font-semibold">
+                    {renderInline(cell.trim())}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/8">
+              {rows.map((row, rowIndex) => (
+                <tr key={`${row.join('-')}-${rowIndex}`}>
+                  {row.map((cell, cellIndex) => (
+                    <td key={`${cell}-${cellIndex}`} className="px-4 py-3 text-soft">
+                      {renderInline(cell.trim())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      );
+    }
+
+    tableRows = [];
+  };
+
   lines.forEach((line, index) => {
     const trimmed = line.trim();
 
     if (!trimmed) {
       flushList();
+      flushTable();
       return;
     }
 
     if (trimmed.startsWith('- ')) {
+      flushTable();
       listItems.push(trimmed.slice(2));
       return;
     }
 
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      flushList();
+      tableRows.push(trimmed.split('|').slice(1, -1).map((cell) => cell.trim()));
+      return;
+    }
+
     flushList();
+    flushTable();
 
     if (trimmed.startsWith('# ')) {
       return;
@@ -148,6 +198,7 @@ function ArticleBody({ content }: { content: string }) {
   });
 
   flushList();
+  flushTable();
 
   return <div className="mt-8">{elements}</div>;
 }
@@ -189,6 +240,12 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             </div>
 
             <aside className="space-y-4">
+              <div className="glass-card p-5">
+                <p className="text-soft text-xs uppercase tracking-[0.14em]">Editorial review</p>
+                <p className="mt-3 text-sm leading-relaxed text-soft">
+                  Written by {post.author}. This note summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, or measured performance by RoboSkin.ai.
+                </p>
+              </div>
               <div className="glass-card p-5">
                 <p className="text-soft text-xs uppercase tracking-[0.14em]">Source</p>
                 <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 block text-sm font-semibold leading-relaxed text-accent hover:text-white">

@@ -24,8 +24,16 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s42256-025-01053-3/);
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/stories\/robotic-skin/);
   assert.match(blogData, /https:\/\/docs\.ros\.org\/en\/kilted\/Releases\.html/);
+  assert.match(blogData, /Updated technical brief - May 2026/);
+  assert.match(blogData, /Evaluation checklist/);
+  assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);
+  assert.match(blogData, /What not to infer/);
+  assert.match(blogData, /RoboSkin technical editor/);
+  assert.match(articlePage, /flushTable/);
+  assert.match(articlePage, /Editorial review/);
 
   assert.doesNotMatch(blogData, /MIT CSAIL|Stanford Bio-X|NASA-funded|US Patent|EU Patent|Japan Patent|Dow Chemical/);
+  assert.doesNotMatch(blogData, /Strategic acquisition|domain is available|Request Brief|messigoat/);
   assert.doesNotMatch(researchPage, /robots:\s*\{\s*index:\s*false/);
   assert.match(researchPage, /buildPageMetadata\('\/research'\)/);
   assert.match(researchPage, /href=\{`\/research\/\$\{post\.id\}`\}/);

@@ -10,7 +10,7 @@ const exists = async (path) => {
 };
 
 test('site authority health checks pass', async () => {
-  const [sitemap, seo, layout, contactForm, contactRoute, site, nextConfig, caseStudies, llms, domainSale, blogData] = await Promise.all([
+  const [sitemap, seo, layout, contactForm, contactRoute, site, nextConfig, caseStudies, llms, blogData] = await Promise.all([
     read('src/app/sitemap.ts'),
     read('src/lib/seo.ts'),
     read('src/app/layout.tsx'),
@@ -20,7 +20,6 @@ test('site authority health checks pass', async () => {
     read('next.config.ts'),
     read('src/app/case-studies/page.tsx'),
     read('public/llms.txt'),
-    read('public/domain-sale.html'),
     read('src/lib/blog-data.ts'),
   ]);
 
@@ -39,12 +38,10 @@ test('site authority health checks pass', async () => {
   assert.match(caseStudies, /buildPageMetadata\('\/case-studies'\)/);
   assert.doesNotMatch(caseStudies, /robots:\s*\{\s*index:\s*false/);
   assert.match(llms, /https:\/\/roboskin\.ai\/research\/graphene-liquid-metal-3d-force-2026/);
-  assert.match(domainSale, /mailto:messigoat147@gmail\.com/);
-  assert.doesNotMatch(domainSale, /messigoat47@gmail\.com/);
-  assert.match(site, /ownerEmail:\s*'messigoat147@gmail\.com'/);
+  assert.match(site, /ownerEmail:\s*'contact@roboskin\.ai'/);
   assert.match(site, /domainInquiry/);
-  assert.match(contactForm, /Domain acquisition/);
-  assert.match(contactForm, /messigoat147@gmail\.com|site\.contact\.ownerEmail/);
+  assert.doesNotMatch(contactForm, /Domain acquisition|Strategic acquisition|Request Brief/);
+  assert.match(contactForm, /site\.contact\.ownerEmail/);
   assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
   assert.match(contactForm, /normalizeRequestType/);
   assert.match(contactForm, /datasheet[\s\S]*research/);
@@ -55,11 +52,14 @@ test('site authority health checks pass', async () => {
   assert.match(contactRoute, /budgetSignal/);
   assert.doesNotMatch(contactRoute, /payload\.useCase\?\.trim\(\)/);
   assert.match(llms, /robot skin information hub|robot skin knowledge hub/i);
-  assert.match(llms, /premium domain asset/i);
+  assert.doesNotMatch(llms, /premium domain asset|domain acquisition|for sale/i);
   assert.doesNotMatch(llms, /production availability|datasheets or integration reviews/i);
+  assert.doesNotMatch(blogData, /RoboSkin-style systems|MIT CSAIL|Stanford Bio-X|NASA-funded|US Patent|EU Patent|Japan Patent|Dow Chemical/);
   assert.doesNotMatch(blogData, /RoboSkin-style systems/);
   assert.doesNotMatch(blogData, /datasheets and integration reviews/);
   assert.doesNotMatch(blogData, /Product implication/);
+  assert.match(blogData, /Updated technical brief - May 2026/);
+  assert.match(blogData, /Editorial review|Source boundary|Evaluation checklist|What not to infer/);
   assert.match(layout, /\/site\.webmanifest/);
   assert.ok(await exists('public/og-image.svg'));
   assert.ok(await exists('public/twitter-image.svg'));

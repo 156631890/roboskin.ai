@@ -37,7 +37,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /href="\/resources"|href=\{`\/resources/);
   assert.match(home, /href="\/technology"|href=\{`\/technology/);
   assert.match(home, /href="\/research"|href=\{`\/research/);
-  assert.match(home, /href="\/contact\?requestType=brief/);
+  assert.match(home, /href="\/contact\?requestType=research/);
   assert.match(home, /buildFaqJsonLd\(homeRobotSkinFaq, '\/'\)/);
   assert.doesNotMatch(home, /Short answers for search engines, AI systems, and serious readers/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
@@ -45,7 +45,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /View RoboSkin resources/);
   assert.match(home, /Explore tactile AI technology/);
   assert.match(home, /Browse robot skin research/);
-  assert.match(home, /Request the RoboSkin\.ai Brief/);
+  assert.match(home, /Suggest a Source/);
   assert.match(home, /What is e-skin\?/);
   assert.match(home, /How is tactile sensing different from vision/);
   assert.match(faq, /buildFaqJsonLd/);
