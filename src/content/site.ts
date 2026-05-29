@@ -149,6 +149,17 @@ export type AuthorityHeroVisual = {
   imageAlt: string;
 };
 
+export type HomeBrandAssets = {
+  brandBoard: {
+    image: string;
+    imageAlt: string;
+  };
+  hero: {
+    image: string;
+    imageAlt: string;
+  };
+};
+
 export type PageVisual = {
   image: string;
   imageAlt: string;
@@ -267,6 +278,19 @@ export const authorityHeroVisual: AuthorityHeroVisual = {
   image: '/generated/authority/authority-hero-tactile-stack.webp',
   imageAlt:
     'Humanoid robot hand with translucent tactile sensor skin and blue signal paths representing a tactile AI stack.',
+};
+
+export const homeBrandAssets: HomeBrandAssets = {
+  brandBoard: {
+    image: '/generated/brand/roboskin-brand-board.webp',
+    imageAlt:
+      'RoboSkin.ai brand system board showing a tactile grid logo, cold blue signal palette, typography, report cover, and robotic skin imagery.',
+  },
+  hero: {
+    image: '/generated/brand/roboskin-hero-tactile-lab.webp',
+    imageAlt:
+      'Humanoid robotic hand and forearm covered with flexible tactile robot skin, blue sensor nodes, and signal paths in a dark robotics laboratory.',
+  },
 };
 
 export const pageVisuals = {

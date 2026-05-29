@@ -45,7 +45,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /View RoboSkin resources/);
   assert.match(home, /Explore tactile AI technology/);
   assert.match(home, /Browse robot skin research/);
-  assert.match(home, /Suggest a Source/);
+  assert.match(home, /Submit a Source/);
   assert.match(home, /What is e-skin\?/);
   assert.match(home, /How is tactile sensing different from vision/);
   assert.match(faq, /buildFaqJsonLd/);
