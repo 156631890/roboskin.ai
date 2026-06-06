@@ -39,29 +39,18 @@ export default function Home() {
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/')])} />
 
-      <section className="relative overflow-hidden pb-16 pt-8 md:pb-20 md:pt-8">
-        <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,229,255,0.65),transparent)]" />
+      <section className="relative overflow-hidden pb-16 pt-8 md:pb-20 md:pt-10">
         <div className="container-shell">
-          <div className="grid min-h-[calc(100dvh-96px)] items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="grid min-h-[calc(100dvh-96px)] items-center gap-8 lg:grid-cols-[0.72fr_1.28fr]">
             <div className="hero-copy reveal relative z-10 min-w-0">
-              <p className="text-sm font-semibold text-[#00e5ff]">Robot touch needs a surface intelligence layer</p>
-              <h1 aria-label="Robot skin and tactile AI authority portal" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
-                <span className="block">Robot skin</span>
-                <span className="block">and tactile AI</span>
-                <span className="block">authority portal</span>
+              <p className="section-label">Robot touch needs a surface intelligence layer</p>
+              <h1 className="mt-5 text-5xl font-bold leading-[0.92] text-white text-balance md:text-7xl md:leading-[0.9] xl:text-[5.4rem]">
+                Robot skin for physical AI touch
               </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[#c8d1de]">
-                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for researchers, operators,
-                builders, and readers tracking physical AI touch.
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
+                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for people tracking
+                contact-aware robotics.
               </p>
-
-              <div className="mt-8 max-w-xl border-l border-[#00e5ff]/55 pl-5">
-                <p className="text-sm font-semibold text-white">What is robot skin?</p>
-                <p className="mt-2 text-base leading-relaxed text-[#9da8b8]">
-                  In practical robotics, robot skin helps robots detect contact, pressure, shear, slip, and interaction events across
-                  hands, grippers, arms, or curved body surfaces.
-                </p>
-              </div>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link href="/research" className="btn-primary w-full sm:w-auto">
@@ -71,7 +60,7 @@ export default function Home() {
                   Open the robot skin glossary
                 </Link>
                 <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
-                  Submit a Source
+                  Submit a source
                 </Link>
               </div>
             </div>
@@ -83,7 +72,7 @@ export default function Home() {
                   alt={homeBrandAssets.hero.imageAlt}
                   fill
                   priority
-                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  sizes="(min-width: 1024px) 64vw, 100vw"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,4,8,0.08),rgba(2,4,8,0.04)_46%,rgba(2,4,8,0.46))]" />
@@ -100,11 +89,11 @@ export default function Home() {
             </div>
           </div>
 
-          <dl className="signal-panel mt-8 grid gap-px overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {homeStats.map((item, idx) => (
-              <div key={item.label} className="reveal bg-[#03060a]/72 p-5" style={{ animationDelay: `${idx * 0.05}s` }}>
+          <dl className="instrument-strip reveal mt-8 grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
+            {homeStats.map((item) => (
+              <div key={item.label} className="bg-[#050910]/88 p-5">
                 <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[#8e98a8]">{item.label}</dd>
+                <dd className="mt-1 text-sm leading-relaxed text-[#97a4b5]">{item.label}</dd>
               </div>
             ))}
           </dl>
@@ -127,17 +116,17 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mb-8 flex flex-wrap gap-3">
-            <Link href="/faq" className="btn-secondary">
+          <div className="mb-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-white/10 py-3 text-sm">
+            <Link href="/faq" className="font-semibold text-[#c8d1de] hover:text-white">
               Robot skin FAQ
             </Link>
-            <Link href="/resources" className="btn-secondary">
+            <Link href="/resources" className="font-semibold text-[#c8d1de] hover:text-white">
               View RoboSkin resources
             </Link>
-            <Link href="/technology" className="btn-secondary">
+            <Link href="/technology" className="font-semibold text-[#c8d1de] hover:text-white">
               Explore tactile AI technology
             </Link>
-            <Link href="/downloads" className="btn-secondary">
+            <Link href="/downloads" className="font-semibold text-[#c8d1de] hover:text-white">
               View public references
             </Link>
           </div>
@@ -148,7 +137,7 @@ export default function Home() {
 
       <section className="py-14 md:py-20">
         <div className="container-shell">
-          <div className="mb-8 max-w-4xl">
+          <div className="mb-8 max-w-3xl">
             <span className="eyebrow">Robot skin direct answers</span>
             <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
               Short answers to common robot skin and tactile AI questions
@@ -191,17 +180,15 @@ export default function Home() {
 
       <section className="py-14 md:py-20">
         <div className="container-shell">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div className="max-w-3xl">
-              <span className="eyebrow">Public guide assets</span>
-              <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
-                Guides, maps, and references for the robot skin category
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-[#8e98a8]">
-                Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
-              </p>
-            </div>
-            <Link href="/resources" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+          <div className="mb-8 max-w-2xl">
+            <span className="eyebrow">Public guide assets</span>
+            <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+              Guides, maps, and references for the robot skin category
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-[#8e98a8]">
+              Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
+            </p>
+            <Link href="/resources" className="mt-4 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
               View resources {'->'}
             </Link>
           </div>
@@ -234,18 +221,20 @@ export default function Home() {
 
       <section className="pb-20 pt-8">
         <div className="container-shell">
-          <div className="signal-panel p-8 text-center md:p-12">
-            <span className="eyebrow border-white/10 bg-white/5 text-white">Research, glossary, or correction path</span>
-            <h2 className="mx-auto mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
-              Build the category around robot skin, tactile AI, and physical AI touch
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[#c8d1de]">
-              Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
-            </p>
-            <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
-              Contribute research context {'->'}
-            </Link>
-            <div className="mt-8 text-left">
+          <div className="signal-panel p-8 md:p-12">
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+              <div>
+                <span className="eyebrow">Research, glossary, or correction path</span>
+                <h2 className="mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
+                  Build the category around robot skin, tactile AI, and physical AI touch
+                </h2>
+                <p className="mt-4 max-w-2xl text-[#c8d1de]">
+                  Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
+                </p>
+                <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                  Contribute research context {'->'}
+                </Link>
+              </div>
               <ConversionPathPanel />
             </div>
             <p className="mt-6 text-sm text-[#8e98a8]">
