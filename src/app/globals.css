@@ -9,7 +9,7 @@
   --text: #f4f8fb;
   --text-soft: #97a4b5;
   --text-muted: #667386;
-  --primary: #dff8ff;
+  --primary: #0072e3;
   --secondary: #00c8ff;
   --accent: #00c8ff;
   --max-width: 1440px;
@@ -204,10 +204,10 @@ a {
 }
 
 .btn-primary {
-  border: 1px solid rgba(223, 248, 255, 0.72);
-  background: linear-gradient(180deg, #f4fbff 0%, var(--primary) 54%, #9feeff 100%);
-  color: #02111a;
-  box-shadow: 0 14px 34px rgba(0, 200, 255, 0.14);
+  border: 1px solid rgba(0, 200, 255, 0.48);
+  background: linear-gradient(180deg, #0072e3 0%, var(--primary) 54%, #005fbf 100%);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(0, 120, 239, 0.22);
 }
 
 .btn-secondary {
@@ -229,8 +229,8 @@ a {
 }
 
 .btn-primary:hover {
-  border-color: #ffffff;
-  box-shadow: 0 16px 38px rgba(0, 200, 255, 0.18);
+  border-color: #00c8ff;
+  box-shadow: 0 16px 38px rgba(0, 120, 239, 0.28);
 }
 
 .btn-secondary:hover {
@@ -298,6 +298,7 @@ html {
   *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
+    animation-delay: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
