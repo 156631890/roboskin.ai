@@ -41,8 +41,8 @@ export default function Home() {
 
       <section className="relative overflow-hidden pb-16 pt-8 md:pb-20 md:pt-10">
         <div className="container-shell">
-          <div className="grid min-h-[calc(100dvh-96px)] items-center gap-8 lg:grid-cols-[0.72fr_1.28fr]">
-            <div className="hero-copy reveal relative z-10 min-w-0">
+          <div className="grid items-start gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+            <div className="hero-copy reveal relative z-10 min-w-0 lg:order-1">
               <p className="section-label">Robot touch needs a surface intelligence layer</p>
               <h1 className="mt-5 text-5xl font-bold leading-[0.92] text-white text-balance md:text-7xl md:leading-[0.9] xl:text-[5.4rem]">
                 Robot skin for physical AI touch
@@ -65,7 +65,16 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="reveal relative min-w-0 [animation-delay:0.1s]">
+            <dl className="reveal order-2 grid grid-cols-2 gap-px overflow-hidden lg:order-3 lg:col-span-2 lg:grid-cols-4">
+              {homeStats.map((item) => (
+                <div key={item.label} className="bg-[#050910]/88 p-4 md:p-5">
+                  <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
+                  <dd className="mt-1 text-xs leading-relaxed text-[#97a4b5] md:text-sm">{item.label}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="reveal order-3 relative min-w-0 [animation-delay:0.1s] lg:order-2">
               <figure className="hero-visual-frame">
                 <Image
                   src={homeBrandAssets.hero.image}
@@ -88,15 +97,6 @@ export default function Home() {
               </figure>
             </div>
           </div>
-
-          <dl className="reveal mt-8 grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
-            {homeStats.map((item) => (
-              <div key={item.label} className="bg-[#050910]/88 p-5">
-                <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[#97a4b5]">{item.label}</dd>
-              </div>
-            ))}
-          </dl>
 
           <div className="mt-10">
             <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
