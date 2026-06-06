@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[#070b11] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)]" aria-hidden="true">
+              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[var(--bg-soft)] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)]" aria-hidden="true">
                 {Array.from({ length: 16 }).map((_, index) => {
                   const active = [2, 6, 9, 10, 13, 14].includes(index);
-                  return <span key={index} className={(active ? 'bg-[#00e5ff]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
+                  return <span key={index} className={(active ? 'bg-[var(--secondary)]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
                 })}
               </div>
               <div>
