@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { seoTopicPages } from '@/content/seo-topic-pages';
 import { blogPosts } from '@/lib/blog-data';
 import { canonicalUrl, seoRoutes } from '@/lib/seo';
 
@@ -21,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.72,
   }));
 
-  return [...staticPages, ...articlePages];
+  const topicPages = seoTopicPages.map((page) => ({
+    url: canonicalUrl(page.path),
+    lastModified: new Date(page.updated),
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
+
+  return [...staticPages, ...articlePages, ...topicPages];
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
+import { seoTopicPages } from '@/content/seo-topic-pages';
 import { pageVisuals, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
@@ -50,6 +51,30 @@ export default function ResourcesPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Topic cluster</p>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Robot skin search routes</h2>
+            </div>
+            <Link href="/robot-skin" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+              Start at robot skin {'->'}
+            </Link>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {seoTopicPages.map((page) => (
+              <Link key={page.path} href={page.path} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
+                <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">{page.kicker}</span>
+                <h3 className="mt-3 text-xl font-semibold text-white">{page.h1}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{page.description}</p>
+                <span className="mt-4 block text-xs uppercase tracking-[0.12em] text-[#8e98a8]">{page.relatedLinks.length} linked routes</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
