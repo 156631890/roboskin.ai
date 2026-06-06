@@ -34,10 +34,10 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 className={
-                  'rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 ' +
+                  'border-b px-3 py-2 text-sm font-semibold transition-colors duration-200 ' +
                   (pathname === link.href
-                    ? 'bg-[rgba(0,229,255,0.1)] text-[#dff8ff] ring-1 ring-[#00e5ff]/30'
-                    : 'text-[#8e98a8] hover:bg-white/5 hover:text-white')
+                    ? 'border-[#00c8ff] text-[#f4f8fb]'
+                    : 'border-transparent text-[#97a4b5] hover:border-white/18 hover:text-white')
                 }
               >
                 {link.label}
@@ -59,9 +59,10 @@ export default function Navigation() {
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               className="rounded-lg border border-white/10 bg-white/[0.04] p-2 text-white"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                {mobileMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
-              </svg>
+              <span aria-hidden="true" className="grid gap-1.5">
+                <span className={mobileMenuOpen ? 'h-px w-6 rotate-45 bg-current transition-transform' : 'h-px w-6 bg-current transition-transform'} />
+                <span className={mobileMenuOpen ? 'h-px w-6 -translate-y-[7px] -rotate-45 bg-current transition-transform' : 'h-px w-6 bg-current transition-transform'} />
+              </span>
             </button>
           </div>
         </div>
