@@ -89,7 +89,7 @@ export default function Home() {
             </div>
           </div>
 
-          <dl className="instrument-strip reveal mt-8 grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="reveal mt-8 grid gap-px overflow-hidden sm:grid-cols-2 lg:grid-cols-4">
             {homeStats.map((item) => (
               <div key={item.label} className="bg-[#050910]/88 p-5">
                 <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
@@ -222,7 +222,7 @@ export default function Home() {
       <section className="pb-20 pt-8">
         <div className="container-shell">
           <div className="signal-panel p-8 md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div className="grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-start">
               <div>
                 <span className="eyebrow">Research, glossary, or correction path</span>
                 <h2 className="mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
