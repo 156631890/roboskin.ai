@@ -64,6 +64,9 @@ export default function ResearchPage() {
               <Link href="#research-notes" className="btn-primary w-full sm:w-auto">
                 Open source-backed briefs
               </Link>
+              <Link href="/research/robot-skin-papers" className="btn-secondary w-full sm:w-auto">
+                Browse robot skin papers
+              </Link>
               <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
                 Map the terminology
               </Link>

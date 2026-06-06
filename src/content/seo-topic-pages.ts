@@ -618,6 +618,424 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    path: '/applications/robot-gripper-tactile-sensor',
+    title: 'Robot Gripper Tactile Sensor Guide for Contact-Aware Grasping',
+    description:
+      'Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.',
+    h1: 'Robot gripper tactile sensor guide',
+    kicker: 'Commercial intent',
+    intent: 'Buyer and evaluator page for robot gripper tactile sensor, tactile gripper, gripper slip detection, and contact-aware grasping queries.',
+    updated: '2026-06-06',
+    priority: 0.79,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'applications',
+    keywords: ['robot gripper tactile sensor', 'tactile gripper sensor', 'gripper slip detection', 'robot gripper touch sensor', 'contact-aware gripper'],
+    quickAnswer: [
+      'A robot gripper tactile sensor measures contact at the gripping surface so a robot can detect object seating, force patterns, slip, and unstable grasps.',
+      'The best gripper sensor depends on the task: delicate handling may need fast slip signals, while broad industrial handling may need durable contact maps and simple replacement.',
+      'Evaluation should cover mounting geometry, cable routing, protective layers, calibration drift, signal latency, and whether the controller actually changes behavior from tactile data.',
+    ],
+    sections: [
+      {
+        heading: 'What tactile sensing changes for grippers',
+        body: [
+          'A gripper can close around an object without knowing whether the object is seated, slipping, tilted, or being squeezed too hard. Tactile sensing adds local contact feedback at the surface where grasp failure begins.',
+          'This is especially useful when cameras are blocked by fingers, jaws, or the object itself. The tactile signal can reveal contact transitions before the object visibly moves.',
+        ],
+        bullets: [
+          'Contact confirmation before lift or transfer',
+          'Slip detection before a drop',
+          'Pressure maps for soft, fragile, or irregular objects',
+          'Replayable tactile logs for failed grasps',
+        ],
+      },
+      {
+        heading: 'Gripper evaluation checklist',
+        body: [
+          'A commercial gripper page should not only list sensitivity. It should ask how the sensor survives real gripping: abrasion, replacement, cleaning, cable flex, protective skins, and jaw geometry.',
+          'Teams should also check software. A sensor that produces a nice plot but cannot publish timestamped robot-ready data is not enough for production evaluation.',
+        ],
+      },
+      {
+        heading: 'Where this page fits the cluster',
+        body: [
+          'This page captures application and purchase-intent searches. It links back to robot skin for the category definition, tactile AI for data use, and slip detection for a narrower manipulation problem.',
+          'That keeps the site from making one generic robot skin page carry every commercial query.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Do grippers need tactile sensors if they already have force control?',
+        answer:
+          'Force control helps with aggregate load. Tactile sensors can add local contact location, pressure distribution, slip, and surface interaction signals that force control alone may not capture.',
+      },
+      {
+        question: 'What is the first gripper tactile feature to validate?',
+        answer:
+          'Validate contact and slip signals on the actual gripper geometry, with the protective layer and object set that matter for the task.',
+      },
+      {
+        question: 'Is a tactile gripper the same as a robot hand tactile sensor?',
+        answer:
+          'They overlap, but a gripper page should focus on jaw pads, end effectors, replacement, industrial handling, and grasp reliability rather than full-hand dexterity.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Robot skin', href: '/robot-skin', description: 'The broader tactile surface category.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'How gripper touch data becomes decisions.' },
+      { label: 'Slip detection robot hand', href: '/guides/slip-detection-robot-hand', description: 'A narrower slip-focused guide.' },
+      { label: 'Flexible tactile sensor array', href: '/guides/flexible-tactile-sensor-array', description: 'Array tradeoffs for contact maps.' },
+    ],
+    sources: [
+      {
+        label: 'CMU tactile information review for robotic manipulation',
+        href: 'https://publications.ri.cmu.edu/a-review-of-tactile-information-perception-and-action-through-touch',
+      },
+      {
+        label: 'ACS large-area flexible tactile sensor article',
+        href: 'https://pubs.acs.org/doi/10.1021/acsaelm.5c01200',
+      },
+    ],
+    paperBriefIds: ['large-area-flexible-tactile-arrays-2025', 'graphene-liquid-metal-3d-force-2026'],
+  },
+  {
+    path: '/guides/tactile-sensor-for-robots',
+    title: 'Tactile Sensor for Robots: Selection and Evaluation Guide',
+    description:
+      'A tactile sensor for robots can measure pressure, force, slip, strain, or contact maps. Learn how to compare tactile sensors for robot hands, grippers, and robot skin.',
+    h1: 'Tactile sensor for robots',
+    kicker: 'Commercial intent',
+    intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
+    updated: '2026-06-06',
+    priority: 0.8,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: ['tactile sensor for robots', 'robot tactile sensor', 'tactile sensing robotics', 'robot pressure sensor', 'tactile sensor selection'],
+    quickAnswer: [
+      'A tactile sensor for robots measures physical contact so the robot can understand touch at the surface, not only through vision or joint motion.',
+      'Useful comparison criteria include signal type, coverage, resolution, latency, calibration, durability, robot software interface, and task-level benefit.',
+      'The best sensor is task-specific: a fingertip, gripper pad, soft skin, and full-body contact surface do not need the same architecture.',
+    ],
+    sections: [
+      {
+        heading: 'Start with the task, not the sensor type',
+        body: [
+          'A robot tactile sensor can be capacitive, resistive, optical, magnetic, piezoelectric, fluidic, impedance-based, or hybrid. The architecture matters, but the first question is what the robot must do with touch.',
+          'Pick the measurable outcome: safer contact, grasp stability, slip response, material handling, tactile logging, or research benchmarking.',
+        ],
+        bullets: [
+          'Manipulation tasks need contact timing, force patterns, and slip cues',
+          'Human-robot interaction surfaces need broad, robust contact events',
+          'Research platforms need logged, calibrated, reproducible data',
+          'Soft robots need flexible mounting and drift-aware interpretation',
+        ],
+      },
+      {
+        heading: 'Comparison dimensions',
+        body: [
+          'Sensor pages often over-focus on sensitivity. For robots, sensitivity is only one dimension. A robot program also needs geometry, replacement, data rate, synchronization, calibration, and controller integration.',
+          'A lower-resolution sensor with stable timing and robust packaging can be more useful than a fragile high-resolution sample that cannot survive mounting.',
+        ],
+      },
+      {
+        heading: 'How to connect this to robot skin',
+        body: [
+          'Robot skin may use one tactile sensor type or combine many. The site should explain tactile sensors as building blocks while keeping robot skin as the surface-level system.',
+          'That separation lets this page target evaluation searches while the robot skin page keeps the category definition clean.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between a tactile sensor and robot skin?',
+        answer:
+          'A tactile sensor is the sensing element or array. Robot skin is the integrated surface system that includes mounting, electronics, data handling, and robot use.',
+      },
+      {
+        question: 'Which tactile sensor is best for robots?',
+        answer:
+          'There is no universal best sensor. The correct choice depends on task, geometry, signal needs, durability, data rate, and software integration.',
+      },
+      {
+        question: 'Should a tactile sensor page include research citations?',
+        answer:
+          'Yes. Source-backed pages should cite public papers or documentation, then separate reported source claims from RoboSkin.ai interpretation.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Robot skin', href: '/robot-skin', description: 'The integrated surface system.' },
+      { label: 'Flexible tactile sensor array', href: '/guides/flexible-tactile-sensor-array', description: 'Array-level sensing tradeoffs.' },
+      { label: 'Robot gripper tactile sensor', href: '/applications/robot-gripper-tactile-sensor', description: 'Gripper-specific evaluation.' },
+      { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Source-backed research routes.' },
+    ],
+    sources: [
+      {
+        label: 'CMU tactile information review for robotic manipulation',
+        href: 'https://publications.ri.cmu.edu/a-review-of-tactile-information-perception-and-action-through-touch',
+      },
+      {
+        label: 'Nature Machine Intelligence full-hand tactile sensing paper',
+        href: 'https://www.nature.com/articles/s42256-025-01053-3',
+      },
+    ],
+    paperBriefIds: ['full-hand-tactile-sensing-2025', 'large-area-flexible-tactile-arrays-2025'],
+  },
+  {
+    path: '/guides/robot-touch-sensor',
+    title: 'Robot Touch Sensor Guide: From Contact Events to Tactile AI',
+    description:
+      'Robot touch sensors detect contact events, pressure, force, slip, and tactile patterns. Learn when a touch sensor becomes useful robot skin or tactile AI input.',
+    h1: 'Robot touch sensor guide',
+    kicker: 'Commercial intent',
+    intent: 'Evaluation page for robot touch sensor, robot touch sensing, robot pressure sensor, and contact sensor robotics searches.',
+    updated: '2026-06-06',
+    priority: 0.77,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'answers',
+    keywords: ['robot touch sensor', 'robot touch sensing', 'robot pressure sensor', 'contact sensor robotics', 'robot tactile feedback'],
+    quickAnswer: [
+      'A robot touch sensor detects contact at or near the robot surface. It may report a simple event, a pressure value, a force vector, or a spatial tactile pattern.',
+      'Touch sensing becomes more valuable when the signal is timestamped, mapped to robot geometry, and used for safety, manipulation, evaluation, or learning.',
+      'Robot skin is the broader surface-level integration of touch sensors, packaging, electronics, data handling, and robot behavior.',
+    ],
+    sections: [
+      {
+        heading: 'Simple contact versus tactile sensing',
+        body: [
+          'A simple touch sensor can answer whether contact happened. A tactile sensor can answer more: where contact happened, how force is distributed, whether slip is beginning, or how contact changes over time.',
+          'Both can be useful. The problem is when a page treats all touch sensors as if they support the same robot behavior.',
+        ],
+        bullets: [
+          'Contact event sensors for safety and state transitions',
+          'Pressure sensors for load and grip feedback',
+          'Tactile arrays for contact maps',
+          'Slip-sensitive systems for manipulation feedback',
+        ],
+      },
+      {
+        heading: 'What to ask before implementation',
+        body: [
+          'Teams should define what the controller or evaluator will do with the signal. If the signal only appears on a dashboard, it may not improve the robot.',
+          'A useful touch sensor plan includes timing, frame mapping, calibration, logging, data storage, and a fallback behavior when readings are noisy.',
+        ],
+      },
+      {
+        heading: 'Why this page exists',
+        body: [
+          'Robot touch sensor is a broad commercial search phrase. It needs a page that guides buyers and researchers toward the right narrower route: grippers, hands, tactile arrays, robot skin, or ROS 2 tactile sensing.',
+          'That makes the page a routing asset instead of a duplicate of the robot skin definition page.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is a robot touch sensor always tactile AI?',
+        answer:
+          'No. It becomes part of tactile AI when touch data is processed and used for robot decisions, evaluation, or learning.',
+      },
+      {
+        question: 'Can a simple contact sensor be enough?',
+        answer:
+          'Yes, for binary contact events or safety triggers. More complex manipulation usually needs richer tactile signals.',
+      },
+      {
+        question: 'Where should I go after this page?',
+        answer:
+          'Use robot skin for the integrated surface concept, tactile sensor for robots for selection criteria, and ROS 2 tactile sensing for data pipelines.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Selection criteria for robot tactile sensors.' },
+      { label: 'Robot skin', href: '/robot-skin', description: 'The broader surface system.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for robot learning.' },
+      { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Data and replay workflow for touch signals.' },
+    ],
+    sources: [
+      {
+        label: 'CMU tactile information review for robotic manipulation',
+        href: 'https://publications.ri.cmu.edu/a-review-of-tactile-information-perception-and-action-through-touch',
+      },
+      {
+        label: 'ROS 2 Kilted documentation',
+        href: 'https://docs.ros.org/en/kilted/Releases.html',
+      },
+    ],
+  },
+  {
+    path: '/guides/slip-detection-robot-hand',
+    title: 'Slip Detection for Robot Hands and Tactile Grippers',
+    description:
+      'Slip detection helps robot hands and grippers react before an object drops. Learn the tactile signals, validation questions, and robot-control constraints.',
+    h1: 'Slip detection for robot hands',
+    kicker: 'Commercial intent',
+    intent: 'Manipulation page for slip detection robot hand, gripper slip detection, tactile slip sensing, and grasp stability searches.',
+    updated: '2026-06-06',
+    priority: 0.78,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'applications',
+    keywords: ['slip detection robot hand', 'gripper slip detection', 'tactile slip sensing', 'robot grasp stability', 'robot hand slip sensor'],
+    quickAnswer: [
+      'Slip detection uses tactile, force, vibration, optical, or multimodal signals to identify object motion at the contact surface before the grasp fails.',
+      'For robot hands and grippers, slip detection only matters if the controller can react quickly enough to adjust grip, pose, or task state.',
+      'A credible slip page should separate sensing demonstrations from closed-loop robot behavior under realistic grasp conditions.',
+    ],
+    sections: [
+      {
+        heading: 'What slip detection measures',
+        body: [
+          'Slip can appear as changing shear force, vibration, contact movement across a tactile array, optical pattern shift, or a learned event classification. The sensor type is less important than whether the signal predicts grasp failure early enough.',
+          'The robot also needs context. A sliding object may require more normal force, a different finger pose, or a safe release depending on object fragility and task constraints.',
+        ],
+        bullets: [
+          'Early slip onset before a visible drop',
+          'Direction and speed of contact movement when available',
+          'Confidence signal for controller decisions',
+          'Replay logs that show whether reaction timing was fast enough',
+        ],
+      },
+      {
+        heading: 'Validation questions',
+        body: [
+          'Bench slip detection is not enough. A useful robot page should ask whether slip was detected during real manipulation, with the same skin, object set, and gripper geometry.',
+          'Latency matters. A perfect classifier that fires too late will not save the grasp.',
+        ],
+      },
+      {
+        heading: 'How this supports commercial SEO',
+        body: [
+          'Slip detection is a narrower intent than robot skin. It attracts readers who already understand the manipulation problem and may be evaluating tactile sensing systems.',
+          'That makes it a stronger page for commercial discovery than a generic synonym page.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can slip detection work without tactile arrays?',
+        answer:
+          'Yes. Slip can be detected with force, vibration, optical, or event-based signals. Arrays are useful when contact movement across the surface matters.',
+      },
+      {
+        question: 'What is the biggest slip-detection failure mode?',
+        answer:
+          'Late or poorly synchronized detection. The signal must arrive early enough and be connected to a controller response.',
+      },
+      {
+        question: 'Should slip detection be tested on the final gripper?',
+        answer:
+          'Yes. Mounting, protective layers, object materials, and jaw geometry can all change slip signals.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-level tactile sensing context.' },
+      { label: 'Robot gripper tactile sensor', href: '/applications/robot-gripper-tactile-sensor', description: 'Gripper-level contact sensing context.' },
+      { label: 'Graphene 3D force brief', href: '/research/graphene-liquid-metal-3d-force-2026', description: 'Source-backed multi-axis force and slip research.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'How slip signals become behavior.' },
+    ],
+    sources: [
+      {
+        label: 'NIST tactile slip detection for industrial robot grasping',
+        href: 'https://www.nist.gov/publications/slip-detection-analysis-and-calibration-univariate-tactile-signals',
+      },
+      {
+        label: 'University of Cambridge graphene-based artificial skin report',
+        href: 'https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots',
+      },
+    ],
+    paperBriefIds: ['graphene-liquid-metal-3d-force-2026', 'full-hand-tactile-sensing-2025'],
+  },
+  {
+    path: '/guides/ros2-tactile-sensing',
+    title: 'ROS 2 Tactile Sensing Pipeline Guide for Robot Skin Data',
+    description:
+      'ROS 2 tactile sensing needs timestamped messages, frame mapping, rosbag replay, and controller interfaces. Learn how robot skin data becomes usable.',
+    h1: 'ROS 2 tactile sensing pipeline',
+    kicker: 'Commercial intent',
+    intent: 'Software integration page for ROS 2 tactile sensing, robot skin ROS 2, tactile data pipeline, and rosbag tactile replay searches.',
+    updated: '2026-06-06',
+    priority: 0.76,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'resources',
+    keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data', 'robot tactile middleware'],
+    quickAnswer: [
+      'ROS 2 tactile sensing is the software workflow that publishes, synchronizes, records, replays, and consumes robot touch data.',
+      'A serious tactile pipeline should define message format, timestamps, frame IDs, calibration metadata, raw-data logging, and controller-facing outputs.',
+      'Without replayable data and clear coordinate mapping, robot skin becomes difficult to debug and weak as evidence for tactile AI claims.',
+    ],
+    sections: [
+      {
+        heading: 'Minimum tactile data contract',
+        body: [
+          'A robot skin signal should not be treated as a screenshot or isolated plot. It needs a data contract: what was measured, when it was measured, where it happened on the robot, and how another engineer can replay the event.',
+          'ROS 2 gives robotics teams the vocabulary for topics, timestamps, frames, rosbag logs, controllers, and replayable experiments.',
+        ],
+        bullets: [
+          'Message schema for pressure maps, force vectors, events, or features',
+          'Timestamps aligned with robot state and other sensors',
+          'Frame IDs that map tactile readings to robot geometry',
+          'rosbag or equivalent logs for failed and successful grasps',
+        ],
+      },
+      {
+        heading: 'What to log',
+        body: [
+          'Teams should log raw tactile data when possible, not only classifications. A slip label is useful, but raw data helps explain false positives and compare controller timing.',
+          'A useful log also includes joint state, command outputs, calibration context, and object/task metadata.',
+        ],
+      },
+      {
+        heading: 'Why this matters for SEO and credibility',
+        body: [
+          'Most robot skin pages talk about materials. A ROS 2 tactile sensing page proves that RoboSkin.ai understands the software layer that turns skin into robot-ready evidence.',
+          'It also captures a concrete integration query from robotics teams rather than another broad synonym.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Does ROS 2 provide a standard robot skin message?',
+        answer:
+          'Not as a universal robot skin standard. Teams still need to define message schemas for their tactile output and document how each signal maps to the robot.',
+      },
+      {
+        question: 'Why is rosbag replay important for tactile sensing?',
+        answer:
+          'Tactile events happen quickly. Replay lets engineers inspect contact signals, joint states, controller actions, and failures after the run.',
+      },
+      {
+        question: 'Should tactile classifiers publish confidence values?',
+        answer:
+          'Yes. Confidence and raw-data traceability help engineers debug false events and decide how a controller should react.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for physical AI workflows.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that uses robot touch signals.' },
+      { label: 'ROS 2 pipeline brief', href: '/research/ros2-kilted-tactile-pipeline-2026', description: 'Source-backed ROS 2 tactile pipeline article.' },
+      { label: 'Technology context', href: '/technology', description: 'Existing site-level technology overview.' },
+    ],
+    sources: [
+      {
+        label: 'ROS 2 documentation',
+        href: 'https://docs.ros.org/',
+      },
+      {
+        label: 'ROS 2 rosbag tutorial',
+        href: 'https://docs.ros.org/en/rolling/Tutorials/Advanced/Recording-A-Bag-From-Your-Own-Node-CPP.html',
+      },
+      {
+        label: 'ros2_control documentation',
+        href: 'https://control.ros.org/',
+      },
+    ],
+    paperBriefIds: ['ros2-kilted-tactile-pipeline-2026'],
+  },
+  {
     path: '/guides/robot-skin-vs-e-skin',
     title: 'Robot Skin vs E-Skin: What Is the Difference?',
     description:
@@ -770,6 +1188,30 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         label: 'University of Cambridge single-material electronic skin report',
         href: 'https://www.cam.ac.uk/stories/robotic-skin',
+      },
+      {
+        label: 'Nature Machine Intelligence full-hand tactile sensing paper',
+        href: 'https://www.nature.com/articles/s42256-025-01053-3',
+      },
+      {
+        label: 'RSC temperature/pressure bimodal tactile sensing review',
+        href: 'https://pubs.rsc.org/en/content/articlehtml/2025/tc/d5tc02514a',
+      },
+      {
+        label: 'Frontiers event-based opto-tactile skin article',
+        href: 'https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full',
+      },
+      {
+        label: 'Chemical Engineering Journal self-healing e-skin article',
+        href: 'https://www.sciencedirect.com/science/article/pii/S1385894725132531',
+      },
+      {
+        label: 'ROS 2 documentation',
+        href: 'https://docs.ros.org/',
+      },
+      {
+        label: 'ACS large-area flexible tactile sensor article',
+        href: 'https://pubs.acs.org/doi/10.1021/acsaelm.5c01200',
       },
     ],
     paperBriefIds: [

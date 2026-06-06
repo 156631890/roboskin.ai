@@ -26,6 +26,29 @@ const applicationAreas = [
   },
 ];
 
+const applicationTopicLinks = [
+  {
+    title: 'Humanoid robot skin',
+    href: '/applications/humanoid-robot-skin',
+    summary: 'Hands, arms, and body surfaces where contact awareness matters.',
+  },
+  {
+    title: 'Robot hand tactile sensor',
+    href: '/applications/robot-hand-tactile-sensor',
+    summary: 'Fingertip, palm, full-hand, slip, and grasp-stability sensing.',
+  },
+  {
+    title: 'Soft robotic skin',
+    href: '/applications/soft-robotic-skin',
+    summary: 'Flexible tactile surfaces for curved and deformable robots.',
+  },
+  {
+    title: 'Robot gripper tactile sensor',
+    href: '/applications/robot-gripper-tactile-sensor',
+    summary: 'Contact-aware jaw pads, slip signals, replacement, and gripper evaluation.',
+  },
+];
+
 export default function ApplicationsPage() {
   return (
     <>
@@ -66,6 +89,23 @@ export default function ApplicationsPage() {
 
       <section className="pb-20">
         <div className="container-shell">
+          <div className="mb-5">
+            <span className="eyebrow">Application routes</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">Focused application pages</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {applicationTopicLinks.map((item) => (
+              <Link key={item.href} href={item.href} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
+                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
           <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-7 md:p-8">
             <span className="eyebrow">Explore the category</span>
             <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Follow the research and terminology routes</h2>
@@ -75,6 +115,9 @@ export default function ApplicationsPage() {
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
                 Explore robot skin research
+              </Link>
+              <Link href="/research/robot-skin-papers" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
+                Browse robot skin papers
               </Link>
               <Link href="/glossary" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
                 Read the glossary

@@ -39,6 +39,24 @@ const glossaryFamilies = [
   },
 ];
 
+const coreTopicRoutes = [
+  {
+    label: 'Robot skin',
+    href: '/robot-skin',
+    description: 'The core category definition for tactile robot surfaces.',
+  },
+  {
+    label: 'E-skin',
+    href: '/e-skin',
+    description: 'Electronic skin and flexible sensor context for robotics.',
+  },
+  {
+    label: 'Tactile AI',
+    href: '/tactile-ai',
+    description: 'How touch data becomes robot behavior and evaluation.',
+  },
+];
+
 export default function GlossaryPage() {
   return (
     <>
@@ -98,6 +116,23 @@ export default function GlossaryPage() {
               <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{family.text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-14 md:pb-20">
+        <div className="container-shell">
+          <div className="mb-5">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Core topic routes</p>
+            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Start with the main definitions</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {coreTopicRoutes.map((route) => (
+              <Link key={route.href} href={route.href} className="signal-panel block p-6 transition-colors hover:bg-white/[0.04]">
+                <h3 className="text-xl font-semibold text-white">{route.label}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{route.description}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
