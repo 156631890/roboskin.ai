@@ -39,12 +39,12 @@ export default function Home() {
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/')])} />
 
-      <section className="relative overflow-hidden pb-16 pt-8 md:pb-20 md:pt-8">
+      <section className="relative overflow-hidden pb-10 pt-5 md:pb-12 md:pt-6">
         <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,229,255,0.65),transparent)]" />
         <div className="container-shell">
-          <div className="grid min-h-[calc(100dvh-96px)] items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="grid min-h-[calc(100dvh-82px)] items-center gap-7 lg:grid-cols-[0.74fr_1.26fr]">
             <div className="hero-copy reveal relative z-10 min-w-0">
-              <p className="text-sm font-semibold text-[#00e5ff]">Robot touch needs a surface intelligence layer</p>
+              <p className="quiet-label">Robot touch needs a surface intelligence layer</p>
               <h1 aria-label="Robot skin and tactile AI authority portal" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
                 <span className="block">Robot skin</span>
                 <span className="block">and tactile AI</span>
@@ -55,7 +55,7 @@ export default function Home() {
                 builders, and readers tracking physical AI touch.
               </p>
 
-              <div className="mt-8 max-w-xl border-l border-[#00e5ff]/55 pl-5">
+              <div className="hero-answer mt-7 max-w-xl">
                 <p className="text-sm font-semibold text-white">What is robot skin?</p>
                 <p className="mt-2 text-base leading-relaxed text-[#9da8b8]">
                   In practical robotics, robot skin helps robots detect contact, pressure, shear, slip, and interaction events across
@@ -69,9 +69,6 @@ export default function Home() {
                 </Link>
                 <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
                   Open the robot skin glossary
-                </Link>
-                <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
-                  Submit a Source
                 </Link>
               </div>
             </div>
@@ -87,7 +84,7 @@ export default function Home() {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,4,8,0.08),rgba(2,4,8,0.04)_46%,rgba(2,4,8,0.46))]" />
-                <figcaption className="absolute bottom-5 left-5 right-5 grid gap-3 rounded-md border border-white/10 bg-[#03060a]/80 p-4 backdrop-blur md:grid-cols-[1fr_auto] md:items-end">
+                <figcaption className="absolute bottom-4 left-4 right-4 grid gap-3 rounded-md border border-white/8 bg-[#03060a]/70 p-4 backdrop-blur-md md:grid-cols-[1fr_auto] md:items-end">
                   <span>
                     <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[#00e5ff]">Tactile AI stack map</span>
                     <span className="mt-2 block max-w-md text-sm leading-relaxed text-[#dbeafe]">
