@@ -34,10 +34,10 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 className={
-                  'rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 ' +
+                  'rounded-lg px-3.5 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408] ' +
                   (pathname === link.href
-                    ? 'bg-[rgba(0,229,255,0.1)] text-[#dff8ff] ring-1 ring-[#00e5ff]/30'
-                    : 'text-[#8e98a8] hover:bg-white/5 hover:text-white')
+                    ? 'bg-[#00e5ff]/8 text-[#effbff] ring-1 ring-[#00e5ff]/20'
+                    : 'text-[#9aa6b8] hover:bg-white/[0.045] hover:text-white')
                 }
               >
                 {link.label}
@@ -45,7 +45,7 @@ export default function Navigation() {
             ))}
             <Link
               href="/contact?requestType=research"
-              className="ml-2 rounded-xl border border-[#00e5ff]/45 bg-[#00e5ff] px-4 py-2 text-sm font-bold text-[#001018] shadow-[0_14px_28px_rgba(0,229,255,0.18)] transition-transform hover:-translate-y-0.5"
+              className="ml-2 rounded-lg border border-[#00e5ff]/45 bg-[#00d5ff] px-4 py-2 text-sm font-bold text-[#001018] shadow-[0_12px_28px_rgba(0,168,255,0.18)] outline-none transition-transform hover:-translate-y-0.5 active:translate-y-px focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
             >
               Suggest Source
             </Link>
@@ -57,7 +57,7 @@ export default function Navigation() {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="rounded-lg border border-white/10 bg-white/[0.04] p-2 text-white"
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-2 text-white outline-none transition-colors hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                 {mobileMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
