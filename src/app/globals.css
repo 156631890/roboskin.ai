@@ -2,18 +2,18 @@
 
 :root {
   --bg: #020408;
-  --bg-soft: #070b11;
-  --panel: #0c1118;
-  --panel-border: rgba(209, 231, 255, 0.1);
+  --bg-soft: #060a10;
+  --panel: #0a0f16;
+  --panel-border: rgba(209, 231, 255, 0.095);
   --text: #f7fbff;
-  --text-soft: #8e98a8;
-  --primary: #008dff;
+  --text-soft: #93a0b2;
+  --primary: #00a8ff;
   --secondary: #00e5ff;
-  --accent: #00a3ff;
+  --accent: #00c8ff;
   --max-width: 1440px;
-  --radius-lg: 18px;
-  --radius-md: 12px;
-  --grid: color-mix(in srgb, var(--secondary) 10%, transparent);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --grid: color-mix(in srgb, var(--secondary) 7%, transparent);
 }
 
 @theme inline {
@@ -46,11 +46,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0.13;
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    linear-gradient(115deg, transparent 0 48%, rgba(0, 229, 255, 0.18) 49%, transparent 50% 100%);
+    linear-gradient(115deg, transparent 0 48%, rgba(0, 229, 255, 0.1) 49%, transparent 50% 100%);
   background-size: 44px 44px, 44px 44px, 620px 620px;
   mask-image: linear-gradient(180deg, black, transparent 88%);
 }
@@ -61,12 +61,18 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.055;
+  opacity: 0.035;
   background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
 }
 
 a {
   color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--secondary) 82%, white 18%);
+  outline-offset: 3px;
 }
 
 .container-shell {
@@ -121,7 +127,7 @@ a {
   border-radius: var(--radius-lg);
   backdrop-filter: blur(18px);
   box-shadow:
-    0 24px 80px color-mix(in srgb, #001528 44%, transparent),
+    0 24px 80px color-mix(in srgb, #001528 33%, transparent),
     inset 0 1px 0 color-mix(in srgb, white 5%, transparent);
 }
 
@@ -184,6 +190,7 @@ a {
   padding: 0.78rem 1.05rem;
   font-size: 0.9rem;
   font-weight: 700;
+  white-space: nowrap;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -193,9 +200,9 @@ a {
 
 .btn-primary {
   border: 1px solid rgba(0, 229, 255, 0.5);
-  background: linear-gradient(135deg, #008dff, #00c8ff);
+  background: linear-gradient(135deg, #00a8ff, #00d5ff);
   color: #00101a;
-  box-shadow: 0 16px 40px rgba(0, 141, 255, 0.24);
+  box-shadow: 0 14px 32px rgba(0, 168, 255, 0.2);
 }
 
 .btn-secondary {
@@ -226,13 +233,33 @@ a {
   border: 1px solid rgba(209, 231, 255, 0.1);
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px),
     linear-gradient(180deg, rgba(12, 17, 24, 0.96), rgba(3, 6, 10, 0.98));
   background-size: 34px 34px, 34px 34px, auto;
   box-shadow:
-    0 22px 80px rgba(0, 11, 28, 0.38),
+    0 22px 80px rgba(0, 11, 28, 0.285),
     inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.section-copy {
+  max-width: 42rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.quiet-label {
+  color: var(--secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+}
+
+.hero-answer {
+  border-left: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent);
+  padding-left: 1.1rem;
 }
 
 .text-balance {
