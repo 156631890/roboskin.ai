@@ -376,6 +376,11 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         href: '/technology',
         description: 'A system view of sensing layers, signal processing, middleware, and validation fit.',
       },
+      {
+        label: 'Understand RoboSkin Physics AI',
+        href: '/physics-ai',
+        description: 'A concise definition of Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
+      },
     ],
   },
   {
@@ -461,6 +466,13 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
     ctaLabel: 'Browse tactile AI research',
     image: '/generated/authority/tactile-ai-loop.webp',
     imageAlt: 'Robot hand tactile signals flowing through edge AI and controller modules in a feedback loop.',
+  },
+  {
+    question: 'What is RoboSkin Physics AI?',
+    answer:
+      'RoboSkin Physics AI means physical-world AI that needs robot skin, tactile AI, and contact feedback. RoboSkin.ai uses the term to connect touch, pressure, slip, and contact-aware robotics.',
+    href: '/physics-ai',
+    ctaLabel: 'Read the Physics AI explainer',
   },
   {
     question: 'What is e-skin?',
@@ -854,7 +866,7 @@ export const resourceSections: ResourceSection[] = [
       },
       {
         title: 'Physics AI',
-        description: 'Understand Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile sensing, and contact feedback.',
+        description: 'Understand RoboSkin Physics AI as physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
         availability: 'Public explainer',
         ctaLabel: 'Read',
         href: '/physics-ai',
@@ -1009,6 +1021,13 @@ export const faqItems: FaqItem[] = [
     answer: 'Start with the applications page, then use the research index and glossary to understand robot skin, tactile AI, e-skin, and related terminology.',
     ctaLabel: 'Explore research',
     href: '/research',
+  },
+  {
+    question: 'What does Physics AI mean in the RoboSkin context?',
+    answer:
+      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI.',
+    ctaLabel: 'Read the Physics AI explainer',
+    href: '/physics-ai',
   },
   {
     question: 'How do I ask about RoboSkin.ai?',

@@ -25,6 +25,13 @@ const researchRouteCards = [
     title: 'Terms connect across pages',
     text: 'Research briefs link back to glossary language, tactile AI routes, and application context.',
   },
+  {
+    label: 'Physics AI route',
+    title: 'Tactile research supports physical-world AI',
+    text: 'Use the Physics AI explainer to connect robot skin research, tactile sensing, and contact feedback without turning source notes into product claims.',
+    href: '/physics-ai',
+    ctaLabel: 'Open Physics AI route',
+  },
 ];
 
 export default function ResearchPage() {
@@ -94,6 +101,11 @@ export default function ResearchPage() {
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">{card.label}</p>
               <h2 className="mt-3 text-xl font-semibold text-white">{card.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{card.text}</p>
+              {'href' in card ? (
+                <Link href={card.href} className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                  {card.ctaLabel} {'->'}
+                </Link>
+              ) : null}
             </article>
           ))}
         </div>

@@ -26,6 +26,25 @@ const applicationAreas = [
   },
 ];
 
+const physicsAiUseCases = [
+  {
+    title: 'Humanoid hands',
+    summary: 'Physics AI needs touch when robot hands must understand contact timing, grip confidence, and object stability.',
+  },
+  {
+    title: 'Robotic grippers',
+    summary: 'Robot skin can help grippers reason about pressure, slip, and fragile handling during physical-world tasks.',
+  },
+  {
+    title: 'Assistive and medical robotics',
+    summary: 'Tactile sensing gives physical-world AI systems more context for safer force awareness and human-centered interaction.',
+  },
+  {
+    title: 'Contact-aware safety surfaces',
+    summary: 'Distributed robot skin can help safety surfaces detect contact events that vision or remote sensing may miss.',
+  },
+];
+
 export default function ApplicationsPage() {
   return (
     <>
@@ -61,6 +80,28 @@ export default function ApplicationsPage() {
               <p className="mt-3 text-sm leading-relaxed text-soft">{area.summary}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow">Physics AI use cases</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Where RoboSkin Physics AI becomes useful</h2>
+            </div>
+            <Link href="/physics-ai" className="text-sm font-semibold text-accent hover:text-white">
+              Understand RoboSkin Physics AI {'->'}
+            </Link>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {physicsAiUseCases.map((item) => (
+              <article key={item.title} className="glass-card p-6">
+                <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
