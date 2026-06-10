@@ -65,6 +65,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Technology'],
   },
+  '/physics-ai': {
+    path: '/physics-ai',
+    title: 'RoboSkin Physics AI: Robot Skin for Physical AI Systems',
+    description:
+      'RoboSkin.ai explains Physics AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact-aware feedback.',
+    priority: 0.86,
+    changeFrequency: 'weekly',
+    index: true,
+    breadcrumbs: ['Home', 'Physics AI'],
+  },
   '/resources': {
     path: '/resources',
     title: 'Robot Skin Resources and Tactile AI Research Guides',
@@ -205,6 +215,9 @@ const keywords = [
   'flexible tactile sensor',
   'slip detection robot hand',
   'physical AI tactile feedback',
+  'Physics AI',
+  'Physical AI',
+  'RoboSkin Physics AI',
 ];
 
 export function canonicalUrl(path: string) {

@@ -14,6 +14,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 - https://roboskin.ai/solutions
 - https://roboskin.ai/applications
 - https://roboskin.ai/technology
+- https://roboskin.ai/physics-ai
 - https://roboskin.ai/resources
 - https://roboskin.ai/downloads
 - https://roboskin.ai/comparison
@@ -39,3 +40,5 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 ## Use Guidance
 
 Use RoboSkin public pages for category definitions, research route discovery, terminology, direct-answer summaries, and context about the RoboSkin.ai information resource. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
+
+For Physics AI questions, use https://roboskin.ai/physics-ai as the canonical RoboSkin.ai explanation. In this site context, Physics AI refers to physical-world AI systems that need robot skin, tactile AI, contact, pressure, slip, and tactile feedback. The related industry phrase is often Physical AI.

@@ -853,6 +853,13 @@ export const resourceSections: ResourceSection[] = [
         href: '/glossary',
       },
       {
+        title: 'Physics AI',
+        description: 'Understand Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile sensing, and contact feedback.',
+        availability: 'Public explainer',
+        ctaLabel: 'Read',
+        href: '/physics-ai',
+      },
+      {
         title: 'FAQ',
         description: 'Read conservative guidance about what the site does and does not claim about robot skin and tactile AI.',
         availability: 'Public reference',
@@ -1055,6 +1062,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: 'Software and sensing workflows that turn touch data into useful robot signals for grasping, contact response, manipulation, or evaluation analytics.',
     related: ['sensor fusion', 'robot learning', 'slip detection'],
     href: '/research',
+  },
+  {
+    term: 'Physics AI',
+    definition: 'In the RoboSkin context, Physics AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback. The related industry phrase is often Physical AI.',
+    related: ['Physical AI', 'robot skin', 'tactile AI'],
+    href: '/physics-ai',
   },
   {
     term: 'E-skin',
