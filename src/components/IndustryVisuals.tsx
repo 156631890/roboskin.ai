@@ -64,7 +64,7 @@ const accentStyles: Record<FeaturedIndustryAsset['accent'], { border: string; bg
 
 export function AuthorityIndex({ groups }: AuthorityIndexProps) {
   return (
-    <div className="grid gap-4 lg:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {groups.map((group) => (
         <section key={group.title} className="signal-panel p-5">
           <h3 className="text-lg font-semibold text-white">{group.title}</h3>
@@ -72,8 +72,8 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
           <ul className="mt-5 divide-y divide-white/8 border-y border-white/8">
             {group.links.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="group block py-3 transition-colors">
-                  <span className="block text-sm font-semibold text-[#dff8ff] group-hover:text-white">{link.label}</span>
+                <Link href={link.href} className="group block py-3.5 transition-colors">
+                  <span className="block text-sm font-semibold text-[#e7f7ff] group-hover:text-white">{link.label}</span>
                   <span className="mt-1 block text-xs leading-relaxed text-[#8e98a8] group-hover:text-[#b8c4d4]">{link.description}</span>
                 </Link>
               </li>
@@ -90,9 +90,8 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
     <div className="signal-panel divide-y divide-white/8">
       {answers.map((item) => (
         <article key={item.question} className="grid gap-5 p-5 md:grid-cols-[0.38fr_1fr] md:p-7">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#00e5ff]">Direct answer</p>
-            <h3 className="mt-2 text-xl font-semibold text-white">{item.question}</h3>
+          <div className="md:pt-1">
+            <h3 className="text-xl font-semibold text-white">{item.question}</h3>
           </div>
           <div>
             {item.image && item.imageAlt ? (
