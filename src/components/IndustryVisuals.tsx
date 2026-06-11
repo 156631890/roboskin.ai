@@ -37,28 +37,28 @@ type ResearchBriefIndexProps = {
 
 const accentStyles: Record<FeaturedIndustryAsset['accent'], { border: string; bg: string; text: string; bar: string }> = {
   blue: {
-    border: 'border-[#62a8ff]/45',
-    bg: 'bg-[#62a8ff]/12',
-    text: 'text-[#d7e7ff]',
-    bar: 'bg-[#62a8ff]',
+    border: 'border-[#8fb0c2]/25',
+    bg: 'bg-[#00c8ff]/8',
+    text: 'text-[#b8eefe]',
+    bar: 'bg-[#00c8ff]',
   },
   teal: {
-    border: 'border-[#5eead4]/40',
-    bg: 'bg-[#5eead4]/10',
-    text: 'text-[#ccfbf1]',
-    bar: 'bg-[#5eead4]',
+    border: 'border-[#8fb0c2]/25',
+    bg: 'bg-[#00c8ff]/8',
+    text: 'text-[#b8eefe]',
+    bar: 'bg-[#00c8ff]',
   },
   amber: {
-    border: 'border-[#fbbf24]/40',
-    bg: 'bg-[#fbbf24]/10',
-    text: 'text-[#fde68a]',
-    bar: 'bg-[#fbbf24]',
+    border: 'border-[#8fb0c2]/25',
+    bg: 'bg-[#00c8ff]/8',
+    text: 'text-[#b8eefe]',
+    bar: 'bg-[#00c8ff]',
   },
   rose: {
-    border: 'border-[#fb7185]/40',
-    bg: 'bg-[#fb7185]/10',
-    text: 'text-[#fecdd3]',
-    bar: 'bg-[#fb7185]',
+    border: 'border-[#8fb0c2]/25',
+    bg: 'bg-[#00c8ff]/8',
+    text: 'text-[#b8eefe]',
+    bar: 'bg-[#00c8ff]',
   },
 };
 
@@ -66,15 +66,15 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {groups.map((group) => (
-        <section key={group.title} className="signal-panel p-5">
+        <section key={group.title} className="rounded-lg border border-white/10 bg-[#05080d]/90 p-5">
           <h3 className="text-lg font-semibold text-white">{group.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-[#8e98a8]">{group.summary}</p>
-          <ul className="mt-5 divide-y divide-white/8 border-y border-white/8">
+          <ul className="mt-5">
             {group.links.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="group block py-3.5 transition-colors">
-                  <span className="block text-sm font-semibold text-[#e7f7ff] group-hover:text-white">{link.label}</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-[#8e98a8] group-hover:text-[#b8c4d4]">{link.description}</span>
+              <li key={link.href} className="border-t border-white/8">
+                <Link href={link.href} className="-mx-3 block px-3 py-3 transition-colors hover:bg-white/[0.035]">
+                  <span className="block text-sm font-semibold text-[#dff8ff]">{link.label}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-[#8e98a8]">{link.description}</span>
                 </Link>
               </li>
             ))}
@@ -87,21 +87,23 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
 
 export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
   return (
-    <div className="signal-panel divide-y divide-white/8">
-      {answers.map((item) => (
-        <article key={item.question} className="grid gap-5 p-5 md:grid-cols-[0.38fr_1fr] md:p-7">
-          <div className="md:pt-1">
-            <h3 className="text-xl font-semibold text-white">{item.question}</h3>
-          </div>
+    <div className="signal-panel overflow-hidden">
+      {answers.map((item, index) => (
+        <article
+          key={item.question}
+          className="grid gap-5 border-b border-white/8 p-5 last:border-b-0 md:grid-cols-[96px_0.48fr_1fr] md:p-7"
+        >
+          <span className="font-mono text-sm font-semibold text-[#00c8ff]">{String(index + 1).padStart(2, '0')}</span>
+          <h3 className="text-xl font-semibold text-white">{item.question}</h3>
           <div>
             {item.image && item.imageAlt ? (
-              <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
-                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 1024px) 56vw, (min-width: 768px) 58vw, 100vw" className="object-cover" />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,4,8,0.05),rgba(2,4,8,0.52))]" />
+              <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-[var(--radius-md)] border border-white/10 bg-[#02050a]">
+                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,5,10,0.03),rgba(2,5,10,0.56))]" />
               </div>
             ) : null}
             <p className="text-base leading-relaxed text-[#c8d1de]">{item.answer}</p>
-            <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+            <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#b8eefe] transition-colors hover:text-white">
               {item.ctaLabel} {'->'}
             </Link>
           </div>
@@ -274,7 +276,7 @@ export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCo
       {assets.map((asset) => {
         const accent = accentStyles[asset.accent];
         return (
-          <article key={asset.title} className={`rounded-lg border ${accent.border} bg-[#05080d] p-5 shadow-[0_18px_60px_rgba(0,11,28,0.28)]`}>
+          <article key={asset.title} className={`rounded-lg border ${accent.border} bg-[#05080d] p-5 shadow-[0_18px_60px_rgba(0,11,28,0.2)]`}>
             <div className={`relative overflow-hidden rounded-md border ${accent.border} ${accent.bg} p-4`}>
               <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 1280px) 24vw, (min-width: 768px) 45vw, 100vw" className="object-cover opacity-75" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0.08),rgba(2,4,8,0.9))]" />
@@ -301,7 +303,7 @@ export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCo
                 </li>
               ))}
             </ul>
-            <Link href={asset.href} className={`mt-5 inline-flex text-sm font-semibold ${accent.text} hover:text-white`}>
+            <Link href={asset.href} className={`mt-5 inline-flex text-sm font-semibold ${accent.text} transition-colors hover:text-white`}>
               {asset.ctaLabel} {'->'}
             </Link>
           </article>
@@ -316,7 +318,7 @@ export function ConversionPathPanel() {
     <div className="grid gap-4 lg:grid-cols-[1fr_0.92fr_0.92fr]">
       <Link
         href="/research"
-        className="rounded-lg border border-[#00e5ff]/45 bg-[#00e5ff]/10 p-6 text-white transition-colors hover:bg-[#00e5ff]/14"
+        className="rounded-lg border border-[#00c8ff]/45 bg-[#00c8ff]/10 p-6 text-white transition-colors hover:bg-[#00c8ff]/14"
       >
         <p className="text-xs font-semibold uppercase text-[#dff8ff]">Primary path</p>
         <h3 className="mt-3 text-2xl font-semibold">Read the research notes</h3>
@@ -332,11 +334,11 @@ export function ConversionPathPanel() {
       </Link>
       <Link
         href="/contact?requestType=correction"
-        className="rounded-lg border border-[#fbbf24]/35 bg-[#fbbf24]/10 p-6 text-white transition-colors hover:bg-[#fbbf24]/14"
+        className="rounded-lg border border-white/10 bg-[#05080d] p-6 text-white transition-colors hover:bg-white/[0.055]"
       >
-        <p className="text-xs font-semibold uppercase text-[#fde68a]">Correction path</p>
+        <p className="text-xs font-semibold uppercase text-[#8e98a8]">Correction path</p>
         <h3 className="mt-3 text-xl font-semibold">Suggest a correction</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#fde68a]">Use for unsupported claims, outdated references, or better public sources.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">Use for unsupported claims, outdated references, or better public sources.</p>
       </Link>
     </div>
   );

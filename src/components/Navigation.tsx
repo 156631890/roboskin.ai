@@ -15,10 +15,10 @@ export default function Navigation() {
         <div className="flex min-h-18 items-center justify-between py-3">
           <div className="flex items-center py-2">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[#070b11] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)] transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
+              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[var(--bg-soft)] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)] transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
                 {Array.from({ length: 16 }).map((_, index) => {
                   const active = [2, 6, 9, 10, 13, 14].includes(index);
-                  return <span key={index} className={(active ? 'bg-[#00e5ff]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
+                  return <span key={index} className={(active ? 'bg-[var(--secondary)]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
                 })}
               </div>
               <div className="flex flex-col leading-tight">
@@ -59,9 +59,10 @@ export default function Navigation() {
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
               className="rounded-lg border border-white/10 bg-white/[0.04] p-2 text-white outline-none transition-colors hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
             >
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                {mobileMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
-              </svg>
+              <span aria-hidden="true" className="relative block h-6 w-6">
+                <span className={mobileMenuOpen ? 'absolute left-0 top-1/2 h-px w-6 -translate-y-1/2 rotate-45 bg-current transition-transform' : 'absolute left-0 top-[7px] h-px w-6 bg-current transition-transform'} />
+                <span className={mobileMenuOpen ? 'absolute left-0 top-1/2 h-px w-6 -translate-y-1/2 -rotate-45 bg-current transition-transform' : 'absolute left-0 top-[15px] h-px w-6 bg-current transition-transform'} />
+              </span>
             </button>
           </div>
         </div>

@@ -7,6 +7,24 @@ import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMeta
 
 export const metadata: Metadata = buildPageMetadata('/technology');
 
+const technologyTopicLinks = [
+  {
+    label: 'Tactile AI',
+    href: '/tactile-ai',
+    description: 'How touch signals become robot behavior, evaluation, and physical AI feedback.',
+  },
+  {
+    label: 'Flexible tactile sensor array',
+    href: '/guides/flexible-tactile-sensor-array',
+    description: 'Array-level tradeoffs for contact maps, resolution, data rate, and calibration.',
+  },
+  {
+    label: 'ROS 2 tactile sensing',
+    href: '/guides/ros2-tactile-sensing',
+    description: 'Middleware, timestamping, rosbag replay, and robot-ready tactile data contracts.',
+  },
+];
+
 export default function TechnologyPage() {
   return (
     <>
@@ -66,6 +84,23 @@ export default function TechnologyPage() {
                 <p className="mt-3 text-sm leading-relaxed text-soft">{step.summary}</p>
                 <p className="mt-4 rounded-xl border border-white/8 bg-[#0d1016] px-4 py-3 text-sm text-[#d8dce4]">{step.output}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
+          <div className="mb-5">
+            <span className="eyebrow">Topic routes</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">Technology pages that support this stack</h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {technologyTopicLinks.map((item) => (
+              <Link key={item.href} href={item.href} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
+                <h3 className="text-xl font-semibold text-white">{item.label}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{item.description}</p>
+              </Link>
             ))}
           </div>
         </div>

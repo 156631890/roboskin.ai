@@ -6,7 +6,7 @@ const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
 test('SEO and GEO source files expose metadata, schema, sitemap, and internal links', async () => {
-  const [seo, jsonLd, layout, sitemap, robots, home, faq, physicsAi, industryVisuals, globals, llms] = await Promise.all([
+  const [seo, jsonLd, layout, sitemap, robots, home, faq, physicsAi, industryVisuals, globals, llms, seoTopicArticle] = await Promise.all([
     read('src/lib/seo.ts'),
     read('src/components/JsonLd.tsx'),
     read('src/app/layout.tsx'),
@@ -18,6 +18,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
     read('src/components/IndustryVisuals.tsx'),
     read('src/app/globals.css'),
     read('public/llms.txt'),
+    read('src/components/SeoTopicArticle.tsx'),
   ]);
 
   assert.match(seo, /pageSeo/);
@@ -61,6 +62,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(globals, /\.deferred-section/);
   assert.match(home, /className="deferred-section py-14 md:py-20"/);
   assert.match(home, /className="deferred-section pb-20 pt-8"/);
+  assert.ok((seoTopicArticle.match(/deferred-section/g) ?? []).length >= 4);
   assert.doesNotMatch(industryVisuals, /src=\{heroVisual\.image\}[\s\S]{0,180}priority/);
 
   assert.match(seo, /buildPhysicsAiDefinedTermJsonLd/);

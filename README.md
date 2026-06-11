@@ -45,6 +45,14 @@ npm run build
 
 Legacy routes such as `/applications`, `/partners`, `/team`, `/news`, and `/careers` remain as compatibility pages and are excluded from the main navigation.
 
+## Live research and SEO routes
+
+- [Robot skin definition](https://roboskin.ai/robot-skin)
+- [Tactile AI guide](https://roboskin.ai/tactile-ai)
+- [E-skin in robotics](https://roboskin.ai/e-skin)
+- [Robot skin papers and research routes](https://roboskin.ai/research/robot-skin-papers)
+- [Robot skin learning resources](https://roboskin.ai/resources)
+
 ## Contact form
 
 The contact flow is static-hosting safe. If `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` is configured at build time, the browser posts submissions to that endpoint. If it is not configured, the form opens a prepared email to `contact@roboskin.ai`.

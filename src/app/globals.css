@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #020408;
-  --bg-soft: #060a10;
-  --panel: #0a0f16;
-  --panel-border: rgba(209, 231, 255, 0.095);
-  --text: #f7fbff;
-  --text-soft: #93a0b2;
-  --primary: #00a8ff;
-  --secondary: #00e5ff;
+  --bg: #02050a;
+  --bg-soft: #070b12;
+  --panel: #0b1018;
+  --panel-strong: #101722;
+  --panel-border: rgba(199, 220, 244, 0.12);
+  --text: #f4f8fb;
+  --text-soft: #97a4b5;
+  --text-muted: #667386;
+  --primary: #0072e3;
+  --secondary: #00c8ff;
   --accent: #00c8ff;
   --max-width: 1440px;
   --radius-lg: 16px;
   --radius-md: 10px;
-  --grid: color-mix(in srgb, var(--secondary) 7%, transparent);
+  --grid: color-mix(in srgb, var(--secondary) 8%, transparent);
 }
 
 @theme inline {
@@ -31,9 +33,9 @@
 
 body {
   background:
-    linear-gradient(120deg, rgba(0, 229, 255, 0.08), transparent 32%),
-    linear-gradient(240deg, rgba(0, 141, 255, 0.09), transparent 34%),
-    linear-gradient(180deg, var(--bg) 0%, #060910 46%, var(--bg-soft) 100%);
+    radial-gradient(circle at 74% 8%, rgba(0, 200, 255, 0.12), transparent 30rem),
+    radial-gradient(circle at 0% 22%, rgba(125, 146, 170, 0.08), transparent 34rem),
+    linear-gradient(180deg, #02050a 0%, #050910 44%, #070b12 100%);
   color: var(--text);
   font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
   text-rendering: geometricPrecision;
@@ -46,11 +48,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.13;
+  opacity: 0.16;
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    linear-gradient(115deg, transparent 0 48%, rgba(0, 229, 255, 0.1) 49%, transparent 50% 100%);
+    linear-gradient(115deg, transparent 0 48%, rgba(199, 220, 244, 0.08) 49%, transparent 50% 100%);
   background-size: 44px 44px, 44px 44px, 620px 620px;
   mask-image: linear-gradient(180deg, black, transparent 88%);
 }
@@ -61,7 +63,7 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
 }
 
@@ -71,7 +73,7 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--secondary) 82%, white 18%);
+  outline: 2px solid var(--secondary);
   outline-offset: 3px;
 }
 
@@ -82,22 +84,22 @@ button:focus-visible {
 }
 
 .authority-band {
-  background: linear-gradient(180deg, rgba(8, 13, 20, 0.72), rgba(2, 4, 8, 0.18));
-  border-block: 1px solid rgba(209, 231, 255, 0.07);
+  background: linear-gradient(180deg, rgba(7, 11, 18, 0.76), rgba(2, 5, 10, 0.18));
+  border-block: 1px solid rgba(199, 220, 244, 0.08);
 }
 
 .authority-panel {
-  border: 1px solid rgba(209, 231, 255, 0.1);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, rgba(12, 17, 24, 0.94), rgba(3, 6, 10, 0.98));
+  background: linear-gradient(180deg, rgba(16, 23, 34, 0.9), rgba(7, 11, 18, 0.98));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .section-label {
-  color: #00e5ff;
+  color: var(--secondary);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -105,43 +107,47 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.42rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--secondary) 28%, transparent);
-  background: linear-gradient(120deg, rgba(0, 229, 255, 0.1), rgba(0, 141, 255, 0.035));
-  color: #dff8ff;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
+  color: #b8eefe;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: var(--secondary);
 }
 
 .glass-card {
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--panel) 94%, #142131 6%),
-      color-mix(in srgb, var(--panel) 86%, black 14%)
+      rgba(16, 23, 34, 0.92),
+      rgba(7, 11, 18, 0.98)
     ),
     var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
   box-shadow:
-    0 24px 80px color-mix(in srgb, #001528 33%, transparent),
-    inset 0 1px 0 color-mix(in srgb, white 5%, transparent);
+    0 20px 70px rgba(0, 10, 24, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 .surface-shell {
-  background: rgba(6, 8, 12, 0.82);
+  background: rgba(7, 11, 18, 0.82);
   border-color: var(--panel-border);
 }
 
 .surface-shell-strong {
-  background: rgba(6, 8, 12, 0.96);
+  background: rgba(11, 16, 24, 0.96);
 }
 
 .surface-panel {
-  background: var(--panel);
+  background: var(--panel-strong);
 }
 
 .surface-panel-soft {
@@ -153,7 +159,7 @@ button:focus-visible {
 }
 
 .text-accent {
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .section-copy {
@@ -191,12 +197,12 @@ button:focus-visible {
   position: relative;
   min-height: min(620px, 68dvh);
   overflow: hidden;
-  border: 1px solid rgba(209, 231, 255, 0.12);
-  border-radius: 18px;
-  background: #03060a;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #050910, #02050a);
   box-shadow:
-    0 34px 110px rgba(0, 11, 28, 0.62),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 90px rgba(0, 10, 24, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.055);
 }
 
 @media (max-width: 767px) {
@@ -217,7 +223,7 @@ button:focus-visible {
   min-height: 46px;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 0.78rem 1.05rem;
   font-size: 0.9rem;
   font-weight: 700;
@@ -225,33 +231,49 @@ button:focus-visible {
   transition:
     transform 180ms ease,
     border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease;
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .btn-primary {
-  border: 1px solid rgba(0, 229, 255, 0.5);
-  background: linear-gradient(135deg, #00a8ff, #00d5ff);
-  color: #001018;
-  box-shadow: 0 14px 32px rgba(0, 168, 255, 0.2);
+  border: 1px solid rgba(0, 200, 255, 0.48);
+  background: linear-gradient(180deg, #0072e3 0%, var(--primary) 54%, #005fbf 100%);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgba(0, 120, 239, 0.22);
 }
 
 .btn-secondary {
-  border: 1px solid rgba(209, 231, 255, 0.16);
-  background: rgba(255, 255, 255, 0.06);
-  color: #f7fbff;
+  border: 1px solid var(--panel-border);
+  background: rgba(11, 16, 24, 0.86);
+  color: var(--text);
 }
 
 .btn-tertiary {
-  border: 1px solid rgba(0, 229, 255, 0.26);
-  background: rgba(0, 229, 255, 0.055);
-  color: #b7f4ff;
+  border: 1px solid rgba(0, 200, 255, 0.28);
+  background: rgba(0, 200, 255, 0.055);
+  color: #b8eefe;
 }
 
 .btn-primary:hover,
 .btn-secondary:hover,
 .btn-tertiary:hover {
   transform: translateY(-1px);
+}
+
+.btn-primary:hover {
+  border-color: #00c8ff;
+  box-shadow: 0 16px 38px rgba(0, 120, 239, 0.28);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(199, 220, 244, 0.24);
+  background: rgba(16, 23, 34, 0.94);
+}
+
+.btn-tertiary:hover {
+  border-color: rgba(0, 200, 255, 0.44);
+  background: rgba(0, 200, 255, 0.08);
 }
 
 .btn-primary:active,
@@ -261,15 +283,15 @@ button:focus-visible {
 }
 
 .signal-panel {
-  border: 1px solid rgba(209, 231, 255, 0.1);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(12, 17, 24, 0.96), rgba(3, 6, 10, 0.98));
-  background-size: 34px 34px, 34px 34px, auto;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(11, 16, 24, 0.96), rgba(3, 7, 12, 0.98));
+  background-size: 42px 42px, 42px 42px, auto;
   box-shadow:
-    0 22px 80px rgba(0, 11, 28, 0.285),
+    0 24px 80px rgba(0, 10, 24, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
@@ -286,12 +308,12 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00e5ff, #008dff);
+  background: linear-gradient(180deg, #7defff, #00c8ff);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #7cf4ff, #00a3ff);
+  background: linear-gradient(180deg, #dff8ff, #00c8ff);
 }
 
 ::selection {
@@ -301,6 +323,18 @@ button:focus-visible {
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes floatUp {

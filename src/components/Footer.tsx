@@ -8,11 +8,11 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--panel-border)] bg-[linear-gradient(145deg,rgba(255,255,255,0.92),rgba(238,230,216,0.62))] text-[var(--primary)] shadow-[0_10px_24px_rgba(54,46,35,0.12)]">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0-4a2 2 0 100-4 2 2 0 000 4z" />
-                </svg>
+              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[var(--bg-soft)] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)]" aria-hidden="true">
+                {Array.from({ length: 16 }).map((_, index) => {
+                  const active = [2, 6, 9, 10, 13, 14].includes(index);
+                  return <span key={index} className={(active ? 'bg-[var(--secondary)]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
+                })}
               </div>
               <div>
                 <p className="text-xl font-bold tracking-tight text-[var(--text)]">{site.name}</p>

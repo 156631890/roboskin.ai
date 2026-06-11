@@ -50,9 +50,9 @@ export default function Home() {
                 <span className="block">and tactile AI</span>
                 <span className="block">authority portal</span>
               </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-[#c8d1de]">
-                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for researchers, operators,
-                builders, and readers tracking physical AI touch.
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
+                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for people tracking
+                contact-aware robotics.
               </p>
 
               <div className="hero-answer mt-7 max-w-xl">
@@ -70,17 +70,29 @@ export default function Home() {
                 <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
                   Open the robot skin glossary
                 </Link>
+                <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
+                  Submit a source
+                </Link>
               </div>
             </div>
 
-            <div className="reveal relative min-w-0 [animation-delay:0.1s]">
+            <dl className="reveal order-2 grid grid-cols-2 gap-px overflow-hidden lg:order-3 lg:col-span-2 lg:grid-cols-4">
+              {homeStats.map((item) => (
+                <div key={item.label} className="bg-[#050910]/88 p-4 md:p-5">
+                  <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
+                  <dd className="mt-1 text-xs leading-relaxed text-[#97a4b5] md:text-sm">{item.label}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="reveal order-3 relative min-w-0 [animation-delay:0.1s] lg:order-2">
               <figure className="hero-visual-frame">
                 <Image
                   src={homeBrandAssets.hero.image}
                   alt={homeBrandAssets.hero.imageAlt}
                   fill
                   priority
-                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  sizes="(min-width: 1024px) 64vw, 100vw"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,4,8,0.08),rgba(2,4,8,0.04)_46%,rgba(2,4,8,0.46))]" />
@@ -97,15 +109,6 @@ export default function Home() {
             </div>
           </div>
 
-          <dl className="signal-panel mt-8 grid gap-px overflow-hidden p-0 sm:grid-cols-2 lg:grid-cols-4">
-            {homeStats.map((item, idx) => (
-              <div key={item.label} className="reveal bg-[#03060a]/72 p-5" style={{ animationDelay: `${idx * 0.05}s` }}>
-                <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-[#8e98a8]">{item.label}</dd>
-              </div>
-            ))}
-          </dl>
-
           <div className="mt-10">
             <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
           </div>
@@ -121,14 +124,14 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mb-8 flex flex-wrap gap-3">
-            <Link href="/faq" className="btn-secondary">
+          <div className="mb-8 flex flex-wrap gap-x-5 gap-y-2 border-y border-white/10 py-3 text-sm">
+            <Link href="/faq" className="font-semibold text-[#c8d1de] hover:text-white">
               Robot skin FAQ
             </Link>
-            <Link href="/resources" className="btn-secondary">
+            <Link href="/resources" className="font-semibold text-[#c8d1de] hover:text-white">
               View RoboSkin resources
             </Link>
-            <Link href="/technology" className="btn-secondary">
+            <Link href="/technology" className="font-semibold text-[#c8d1de] hover:text-white">
               Explore tactile AI technology
             </Link>
             <Link href="/applications" className="btn-secondary">
@@ -226,22 +229,20 @@ export default function Home() {
 
       <section className="deferred-section pb-20 pt-8">
         <div className="container-shell">
-          <div className="signal-panel p-8 text-center md:p-12">
-            <h2 className="mx-auto max-w-3xl text-3xl font-bold text-white md:text-5xl">
-              Build the category around robot skin, tactile AI, and physical AI touch
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[#c8d1de]">
-              Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
-            </p>
-            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/contact?requestType=research" className="btn-primary w-full sm:w-auto">
-                Submit a source
-              </Link>
-              <Link href="/research" className="btn-secondary w-full sm:w-auto">
-                Read research notes
-              </Link>
-            </div>
-            <div className="mt-8 text-left">
+          <div className="signal-panel p-8 md:p-12">
+            <div className="grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-start">
+              <div>
+                <span className="eyebrow">Research, glossary, or correction path</span>
+                <h2 className="mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
+                  Build the category around robot skin, tactile AI, and physical AI touch
+                </h2>
+                <p className="mt-4 max-w-2xl text-[#c8d1de]">
+                  Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
+                </p>
+                <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                  Contribute research context {'->'}
+                </Link>
+              </div>
               <ConversionPathPanel />
             </div>
             <p className="mt-6 text-sm text-[#8e98a8]">

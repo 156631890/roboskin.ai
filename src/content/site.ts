@@ -367,6 +367,11 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'Concise definitions for robot skin, tactile AI, e-skin, slip detection, and ROS 2 tactile pipelines.',
       },
       {
+        label: 'Start with what robot skin means',
+        href: '/robot-skin',
+        description: 'A focused definition page for robot skin, robotic skin, tactile surfaces, and contact-aware robotics.',
+      },
+      {
         label: 'Read the robot skin FAQ',
         href: '/faq',
         description: 'Short answers about evaluation, integration, public references, and claim limits.',
@@ -381,6 +386,11 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         href: '/physics-ai',
         description: 'A concise definition of Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
       },
+      {
+        label: 'Map physical AI touch data',
+        href: '/guides/physical-ai-touch-data',
+        description: 'A guide to contact data for grasping, safety, evaluation, and robot learning workflows.',
+      },
     ],
   },
   {
@@ -391,6 +401,11 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         label: 'Browse robot hand tactile sensor research',
         href: '/research',
         description: 'Technical briefs about tactile sensors, soft robotic skin, multimodal sensing, and robot hands.',
+      },
+      {
+        label: 'Open robot skin paper routes',
+        href: '/research/robot-skin-papers',
+        description: 'A source-backed research index for robot skin papers, tactile AI papers, and e-skin research routes.',
       },
       {
         label: 'View RoboSkin resources',
@@ -414,9 +429,24 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'Choose between sensor arrays, developer kits, and custom form-factor programs.',
       },
       {
+        label: 'Compare robot skin and e-skin',
+        href: '/guides/robot-skin-vs-e-skin',
+        description: 'Clarify where robot skin, e-skin, electronic skin, and tactile AI overlap.',
+      },
+      {
         label: 'Plan implementation',
         href: '/implementation',
         description: 'Understand the evaluation, prototype, pilot, and deployment route.',
+      },
+      {
+        label: 'Review humanoid robot skin',
+        href: '/applications/humanoid-robot-skin',
+        description: 'A targeted application page for humanoid robot hands, arms, contact sensing, and tactile feedback.',
+      },
+      {
+        label: 'Review robot hand tactile sensors',
+        href: '/applications/robot-hand-tactile-sensor',
+        description: 'A hand-level page for fingertip, palm, full-hand, slip, and grasp-stability sensing.',
       },
       {
         label: 'View public references',
