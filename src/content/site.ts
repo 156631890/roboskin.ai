@@ -377,7 +377,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A system view of sensing layers, signal processing, middleware, and validation fit.',
       },
       {
-        label: 'Understand RoboSkin Physics AI',
+        label: 'Read the Physics AI and Physical AI explainer',
         href: '/physics-ai',
         description: 'A concise definition of Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
       },
@@ -388,7 +388,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
     summary: 'Research notes and industry assets for teams following the tactile AI stack.',
     links: [
       {
-        label: 'Browse robot skin research',
+        label: 'Browse robot hand tactile sensor research',
         href: '/research',
         description: 'Technical briefs about tactile sensors, soft robotic skin, multimodal sensing, and robot hands.',
       },
@@ -485,8 +485,8 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
     question: 'Why do humanoid robot hands need touch?',
     answer:
       'Humanoid robot hands need touch because dexterous manipulation depends on contact timing, pressure, shear, slip, and object stability. Vision can guide a hand toward an object, but tactile sensing helps the robot understand what happens during contact.',
-    href: '/solutions',
-    ctaLabel: 'View robot hand applications',
+    href: '/applications',
+    ctaLabel: 'View humanoid robot skin applications',
   },
   {
     question: 'How is tactile sensing different from vision or force-torque sensing?',

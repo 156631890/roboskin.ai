@@ -27,9 +27,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/products': {
     path: '/products',
-    title: 'Robot Skin Category Guides and Tactile AI Learning Routes',
+    title: 'Robot Skin Category Guides for Tactile AI Learning',
     description:
-      'Explore educational category guides for robot skin, tactile AI, e-skin terminology, and possible guide routes for robotics and AI audiences.',
+      'Explore robot skin category guides, tactile AI learning routes, e-skin terminology, and source-backed paths for robotics readers.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -37,9 +37,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/solutions': {
     path: '/solutions',
-    title: 'Tactile Sensing Solutions for Robot Hands and Grippers',
+    title: 'Robotic Gripper and Robot Hand Tactile Sensing Contexts',
     description:
-      'Explore educational context for robotic grippers, humanoid robot skin, prosthetics, medical robotics, and research teams studying tactile AI.',
+      'Explore educational context for robotic grippers, robot hand tactile sensing, prosthetics, medical robotics, and tactile AI research teams.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -47,9 +47,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/applications': {
     path: '/applications',
-    title: 'Robot Skin Applications and Tactile AI Category Uses',
+    title: 'Humanoid Robot Skin and Contact-Aware Robotics',
     description:
-      'Explore educational robot skin application areas including humanoid robot skin, tactile AI, e-skin, assistive devices, research media, and category ownership.',
+      'Explore humanoid robot skin, contact-aware robotics, tactile AI, e-skin, assistive devices, research media, and category ownership.',
     priority: 0.82,
     changeFrequency: 'weekly',
     index: true,
@@ -57,9 +57,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/technology': {
     path: '/technology',
-    title: 'Tactile AI Technology for Flexible Robot Skin',
+    title: 'Tactile AI and Flexible Tactile Sensor Technology',
     description:
-      'Understand robot skin sensing layers, signal processing concepts, form-factor design, and tactile AI terminology for flexible robotic skin systems.',
+      'Understand tactile AI, tactile sensing, flexible tactile sensor layers, signal processing, form-factor design, and robot-ready touch signals.',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -127,9 +127,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/research': {
     path: '/research',
-    title: 'Robot Skin Research Notes and Technical Briefs',
+    title: 'Robot Hand Tactile Sensor and Slip Detection Research',
     description:
-      'Read current RoboSkin research notes on tactile sensing, robotic skin, e-skin, ROS 2 sensor pipelines, multimodal sensing, and dexterous robot hands.',
+      'Read robot hand tactile sensor research, slip detection robot hand briefs, e-skin notes, multimodal sensing, and ROS 2 tactile pipelines.',
     priority: 0.78,
     changeFrequency: 'weekly',
     index: true,
@@ -137,9 +137,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/glossary': {
     path: '/glossary',
-    title: 'Robot Skin Glossary: Tactile AI, E-Skin, and Sensor Terms',
+    title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',
     description:
-      'A practical glossary for robot skin, tactile AI, e-skin, slip detection, multimodal sensing, ROS 2 tactile pipelines, and source-backed terminology.',
+      'A practical e-skin and electronic skin glossary for robot skin, tactile AI, tactile sensing, slip detection, and source-backed terminology.',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,

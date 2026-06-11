@@ -15,13 +15,16 @@ export default function SolutionsPage() {
         <div className="container-shell">
           <span className="eyebrow">Solutions</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin application contexts</h1>
+            <h1 className="text-4xl font-bold text-white md:text-6xl">
+              Robotic gripper and robot hand tactile sensing contexts
+            </h1>
             <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               Compare guide routes {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Each path frames a robot skin topic for research, education, or category positioning without claiming product availability.
+            Each path frames a robotic gripper, robot hand tactile sensing, prosthetics, or robot skin topic for research,
+            education, or category positioning without claiming product availability.
           </p>
           <PageHeroVisual visual={pageVisuals.applications} className="mt-10" priority />
         </div>

@@ -54,10 +54,13 @@ export default function ApplicationsPage() {
           <span className="eyebrow">Applications</span>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">Robot skin applications and category use cases</h1>
+              <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
+                Humanoid robot skin and contact-aware robotics applications
+              </h1>
               <p className="mt-5 max-w-3xl text-soft">
-                RoboSkin.ai frames where robot skin, tactile AI, and e-skin terminology appears across robotics research, assistive devices, media, and category
-                ownership. The page is educational and does not imply product availability.
+                RoboSkin.ai frames where humanoid robot skin, contact-aware robotics, tactile AI, and e-skin terminology
+                appears across robotics research, assistive devices, media, and category ownership. The page is educational
+                and does not imply product availability.
               </p>
             </div>
             <div className="glass-card p-6">
@@ -115,7 +118,7 @@ export default function ApplicationsPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
-                Explore robot skin research
+                Explore contact-aware robotics research
               </Link>
               <Link href="/glossary" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/8">
                 Read the glossary

@@ -14,9 +14,12 @@ export default function TechnologyPage() {
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Technology</span>
-          <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">Robot skin technology context</h1>
+          <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">
+            Tactile AI and flexible tactile sensor technology
+          </h1>
           <p className="mt-5 max-w-3xl text-soft">
-            This page explains robot skin concepts, tactile sensing layers, signal flow, and validation questions without presenting RoboSkin.ai as an active product vendor.
+            This page explains tactile AI, tactile sensing layers, flexible tactile sensor concepts, signal flow, and
+            validation questions without presenting RoboSkin.ai as an active product vendor.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
         </div>
@@ -51,7 +54,7 @@ export default function TechnologyPage() {
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">From contact surface to robot-ready signal concepts</h2>
             </div>
             <Link href="/research/ros2-kilted-tactile-pipeline-2026" className="text-accent text-sm font-semibold hover:text-white">
-              Read ROS 2 pipeline brief {'->'}
+              Read robot hand tactile sensor research {'->'}
             </Link>
           </div>
 
@@ -82,7 +85,7 @@ export default function TechnologyPage() {
                   shear, slip, and timing signals that vision alone cannot measure during interaction.
                 </p>
                 <Link href="/physics-ai" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
-                  Open the Physics AI route {'->'}
+                  Open the Physics AI tactile contact layer {'->'}
                 </Link>
               </div>
             </div>

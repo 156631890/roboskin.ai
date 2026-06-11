@@ -30,7 +30,7 @@ const researchRouteCards = [
     title: 'Tactile research supports physical-world AI',
     text: 'Use the Physics AI explainer to connect robot skin research, tactile sensing, and contact feedback without turning source notes into product claims.',
     href: '/physics-ai',
-    ctaLabel: 'Open Physics AI route',
+    ctaLabel: 'Open Physics AI contact-feedback route',
   },
 ];
 
@@ -58,10 +58,12 @@ export default function ResearchPage() {
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_1.02fr] lg:items-center">
           <div>
             <span className="eyebrow">Research</span>
-            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">Research notes</h1>
+            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">
+              Robot hand tactile sensor research and slip detection briefs
+            </h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">
-              A source-backed signal board for robot skin, tactile AI, e-skin, multimodal sensing, ROS 2 tactile pipelines,
-              and contact-aware robot hands.
+              A source-backed signal board for robot hand tactile sensor research, slip detection robot hand questions,
+              robot skin, tactile AI, e-skin, multimodal sensing, ROS 2 tactile pipelines, and contact-aware robot hands.
             </p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">
               Public notes use conservative language. Application-specific performance, durability, and integration claims still need
@@ -69,10 +71,10 @@ export default function ResearchPage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#research-notes" className="btn-primary w-full sm:w-auto">
-                Open source-backed briefs
+                Open robot hand tactile sensor briefs
               </Link>
               <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
-                Map the terminology
+                Map tactile sensing terminology
               </Link>
               <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
                 Submit a Source
@@ -146,7 +148,7 @@ export default function ResearchPage() {
                       </div>
                       <div className="mt-5 flex flex-wrap gap-4">
                         <Link href={`/research/${post.id}`} className="text-sm font-semibold text-[#00e5ff] hover:text-white">
-                          Read brief {'->'}
+                          Read robot skin research brief {'->'}
                         </Link>
                         <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-sm font-semibold text-white hover:text-[#b7f4ff]">
                           Source {'->'}

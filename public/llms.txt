@@ -41,6 +41,18 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 Use RoboSkin public pages for category definitions, research route discovery, terminology, direct-answer summaries, and context about the RoboSkin.ai information resource. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
 
+## Keyword Routes
+
+- RoboSkin / RoboSkin.ai: https://roboskin.ai/
+- Robot skin / robotic skin: https://roboskin.ai/
+- Robot skin category guides / tactile AI learning routes: https://roboskin.ai/products
+- Robotic grippers / robot hand tactile sensing: https://roboskin.ai/solutions
+- Humanoid robot skin / contact-aware robotics: https://roboskin.ai/applications
+- Tactile AI / flexible tactile sensor: https://roboskin.ai/technology
+- Physics AI / Physical AI / 物理 AI / 物理人工智能: https://roboskin.ai/physics-ai
+- Robot hand tactile sensor / slip detection robot hand: https://roboskin.ai/research
+- E-skin / electronic skin / tactile AI terms: https://roboskin.ai/glossary
+
 ## Canonical Answers
 
 ### What is RoboSkin.ai?

@@ -15,13 +15,16 @@ export default function ProductsPage() {
         <div className="container-shell">
           <span className="eyebrow">Guide routes</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">How RoboSkin.ai is organized</h1>
+            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">
+              Robot skin category guides for tactile AI learning
+            </h1>
             <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               Suggest a source {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin.ai organizes robot skin fundamentals, source-backed research notes, glossary terms, and application explainers without claiming active hardware availability.
+            RoboSkin.ai organizes robot skin category guides, tactile AI learning routes, source-backed research notes,
+            glossary terms, and application explainers without claiming active hardware availability.
           </p>
           <PageHeroVisual visual={pageVisuals.products} className="mt-10" priority />
         </div>

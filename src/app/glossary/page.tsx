@@ -47,10 +47,12 @@ export default function GlossaryPage() {
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_1.02fr] lg:items-center">
           <div>
             <span className="eyebrow">Glossary</span>
-            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">Robot skin glossary</h1>
+            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">
+              E-skin and robot skin glossary
+            </h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">
-              A terminology matrix for robot skin, tactile AI, e-skin, multimodal sensors, ROS 2 tactile pipelines,
-              and source-backed category language.
+              A terminology matrix for robot skin, tactile AI, e-skin, electronic skin, multimodal sensors, ROS 2 tactile
+              pipelines, and source-backed category language.
             </p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">
               Definitions are written for practical reading: what the term means, which signals it touches, and where to go next for
@@ -61,7 +63,7 @@ export default function GlossaryPage() {
                 Open term matrix
               </Link>
               <Link href="/research" className="btn-secondary w-full sm:w-auto">
-                Read research briefs
+                Read e-skin and tactile sensing briefs
               </Link>
               <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
                 Submit a Source

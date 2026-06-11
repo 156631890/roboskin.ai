@@ -90,3 +90,47 @@ test('RoboSkin keeps Physics AI canonical without introducing a physical-ai rout
   assert.ok(!appRoutes.includes('physical-ai'));
   assert.doesNotMatch(`${seo}\n${site}\n${llms}`, /href=["']\/physical-ai|src\/app\/physical-ai/);
 });
+
+test('RoboSkin maps each search keyword cluster to one canonical page and descriptive internal anchors', async () => {
+  const [seo, home, content, products, solutions, applications, technology, research, glossary, llms] =
+    await Promise.all([
+      read('src/lib/seo.ts'),
+      read('src/app/page.tsx'),
+      read('src/content/site.ts'),
+      read('src/app/products/page.tsx'),
+      read('src/app/solutions/page.tsx'),
+      read('src/app/applications/page.tsx'),
+      read('src/app/technology/page.tsx'),
+      read('src/app/research/page.tsx'),
+      read('src/app/glossary/page.tsx'),
+      read('public/llms.txt'),
+    ]);
+
+  assert.match(seo, /title: 'Robot Skin Category Guides for Tactile AI Learning'/);
+  assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Contexts'/);
+  assert.match(seo, /title: 'Humanoid Robot Skin and Contact-Aware Robotics'/);
+  assert.match(seo, /title: 'Tactile AI and Flexible Tactile Sensor Technology'/);
+  assert.match(seo, /title: 'Robot Hand Tactile Sensor and Slip Detection Research'/);
+  assert.match(seo, /title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms'/);
+
+  assert.match(home, /Explore humanoid robot skin applications/);
+  assert.match(content, /Read the Physics AI and Physical AI explainer/);
+  assert.match(content, /Browse robot hand tactile sensor research/);
+  assert.match(content, /View humanoid robot skin applications/);
+
+  assert.match(products, /Robot skin category guides for tactile AI learning/);
+  assert.match(solutions, /Robotic gripper and robot hand tactile sensing contexts/);
+  assert.match(applications, /Humanoid robot skin and contact-aware robotics applications/);
+  assert.match(technology, /Tactile AI and flexible tactile sensor technology/);
+  assert.match(technology, /Read robot hand tactile sensor research/);
+  assert.match(research, /Robot hand tactile sensor research and slip detection briefs/);
+  assert.match(research, /slip detection robot hand/);
+  assert.match(glossary, /E-skin and robot skin glossary/);
+  assert.match(glossary, /electronic skin/);
+
+  assert.match(llms, /## Keyword Routes/);
+  assert.match(llms, /Robot skin \/ robotic skin: https:\/\/roboskin\.ai\//);
+  assert.match(llms, /Tactile AI \/ flexible tactile sensor: https:\/\/roboskin\.ai\/technology/);
+  assert.match(llms, /Robot hand tactile sensor \/ slip detection robot hand: https:\/\/roboskin\.ai\/research/);
+  assert.match(llms, /Humanoid robot skin \/ contact-aware robotics: https:\/\/roboskin\.ai\/applications/);
+});

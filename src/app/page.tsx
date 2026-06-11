@@ -131,6 +131,9 @@ export default function Home() {
             <Link href="/technology" className="btn-secondary">
               Explore tactile AI technology
             </Link>
+            <Link href="/applications" className="btn-secondary">
+              Explore humanoid robot skin applications
+            </Link>
             <Link href="/downloads" className="btn-secondary">
               View public references
             </Link>
