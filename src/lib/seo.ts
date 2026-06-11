@@ -393,6 +393,44 @@ export function buildFaqJsonLd(items = faqItems, path = '/faq') {
   };
 }
 
+export function buildPhysicsAiDefinedTermJsonLd() {
+  const url = canonicalUrl('/physics-ai');
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTerm',
+    '@id': `${url}#defined-term`,
+    name: 'Physics AI',
+    alternateName: 'Physical AI',
+    url,
+    description:
+      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI.',
+    inDefinedTermSet: {
+      '@type': 'DefinedTermSet',
+      name: 'RoboSkin robot skin and tactile AI terminology',
+      url: canonicalUrl('/glossary'),
+    },
+    subjectOf: {
+      '@id': `${url}#webpage`,
+    },
+    isPartOf: {
+      '@id': `${site.url}/#website`,
+    },
+    keywords: [
+      'Physics AI',
+      'Physical AI',
+      'robot skin',
+      'tactile AI',
+      'tactile sensing',
+      'e-skin',
+      'contact feedback',
+      'pressure',
+      'slip',
+      'physical-world AI',
+    ],
+  };
+}
+
 export function buildArticleJsonLd(post: BlogPost) {
   const url = canonicalUrl(`/research/${post.id}`);
 

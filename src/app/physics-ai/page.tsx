@@ -9,6 +9,7 @@ import {
   buildGraphJsonLd,
   buildPageJsonLd,
   buildPageMetadata,
+  buildPhysicsAiDefinedTermJsonLd,
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/physics-ai');
@@ -69,6 +70,7 @@ export default function PhysicsAiPage() {
           buildPageJsonLd('/physics-ai'),
           buildBreadcrumbJsonLd('/physics-ai'),
           buildFaqJsonLd(physicsAiFaqItems, '/physics-ai'),
+          buildPhysicsAiDefinedTermJsonLd(),
         ])}
       />
 
