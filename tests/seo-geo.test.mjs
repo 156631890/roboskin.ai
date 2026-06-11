@@ -28,6 +28,8 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);
+  assert.match(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8231924120348302/);
+  assert.match(layout, /crossOrigin="anonymous"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
   assert.match(sitemap, /lastModified: new Date\('2026-04-25'\)/);
