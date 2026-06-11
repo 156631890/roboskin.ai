@@ -28,8 +28,8 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);
-  assert.match(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8231924120348302/);
-  assert.match(layout, /crossOrigin="anonymous"/);
+  assert.doesNotMatch(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/);
+  assert.doesNotMatch(layout, /ca-pub-8231924120348302/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
   assert.match(sitemap, /lastModified: new Date\('2026-04-25'\)/);
@@ -135,4 +135,13 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(llms, /Tactile AI \/ flexible tactile sensor: https:\/\/roboskin\.ai\/technology/);
   assert.match(llms, /Robot hand tactile sensor \/ slip detection robot hand: https:\/\/roboskin\.ai\/research/);
   assert.match(llms, /Humanoid robot skin \/ contact-aware robotics: https:\/\/roboskin\.ai\/applications/);
+});
+
+test('RoboSkin uses the Gmail address for direct public inquiries', async () => {
+  const site = await read('src/content/site.ts');
+
+  assert.match(site, /primaryEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /ownerEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /inquiryEmail: 'messigoat147@gmail\.com'/);
+  assert.doesNotMatch(site, /contact@roboskin\.ai/);
 });

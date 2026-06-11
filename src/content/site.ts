@@ -172,9 +172,9 @@ export const site = {
   tagline: 'Robot skin and tactile AI information hub',
   description: 'A public information hub for robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics.',
   contact: {
-    primaryEmail: 'contact@roboskin.ai',
-    ownerEmail: 'contact@roboskin.ai',
-    inquiryEmail: 'contact@roboskin.ai',
+    primaryEmail: 'messigoat147@gmail.com',
+    ownerEmail: 'messigoat147@gmail.com',
+    inquiryEmail: 'messigoat147@gmail.com',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
     whatsapp: '15755596955',
