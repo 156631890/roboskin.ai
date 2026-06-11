@@ -164,6 +164,17 @@ button:focus-visible {
   text-wrap: pretty;
 }
 
+.deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
+}
+
+@media (max-width: 767px) {
+  .deferred-section {
+    contain-intrinsic-size: auto 980px;
+  }
+}
+
 .quiet-label {
   color: var(--secondary);
   font-size: 0.82rem;

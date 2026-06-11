@@ -96,7 +96,7 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
           <div>
             {item.image && item.imageAlt ? (
               <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
-                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
+                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 1024px) 56vw, (min-width: 768px) 58vw, 100vw" className="object-cover" />
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,4,8,0.05),rgba(2,4,8,0.52))]" />
               </div>
             ) : null}
@@ -121,8 +121,7 @@ export function TactileStackMap({ layers, heroVisual }: TactileStackMapProps) {
               src={heroVisual.image}
               alt={heroVisual.imageAlt}
               fill
-              priority
-              sizes="(min-width: 1024px) 42vw, 100vw"
+              sizes="(min-width: 1024px) 38vw, (min-width: 768px) 50vw, 100vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0),rgba(2,4,8,0.46))]" />
@@ -277,7 +276,7 @@ export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCo
         return (
           <article key={asset.title} className={`rounded-lg border ${accent.border} bg-[#05080d] p-5 shadow-[0_18px_60px_rgba(0,11,28,0.28)]`}>
             <div className={`relative overflow-hidden rounded-md border ${accent.border} ${accent.bg} p-4`}>
-              <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 768px) 42vw, 100vw" className="object-cover opacity-75" />
+              <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 1280px) 24vw, (min-width: 768px) 45vw, 100vw" className="object-cover opacity-75" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0.08),rgba(2,4,8,0.9))]" />
               <div className="relative flex items-start justify-between gap-4">
                 <span className={`rounded-md border ${accent.border} bg-[#070a0f]/70 px-2.5 py-1 text-[11px] font-semibold uppercase ${accent.text}`}>

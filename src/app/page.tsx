@@ -112,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="deferred-section py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 max-w-4xl">
             <h2 className="text-3xl font-bold text-white md:text-5xl">Find the right robot skin route</h2>
@@ -140,7 +140,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="deferred-section py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 max-w-4xl">
             <h2 className="text-3xl font-bold text-white md:text-5xl">
@@ -155,7 +155,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="deferred-section py-14 md:py-20">
         <div className="container-shell grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
           <div className="lg:pt-4">
             <h2 className="text-3xl font-bold text-white md:text-5xl">Track the tactile AI stack with source-like entries</h2>
@@ -180,7 +180,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="deferred-section py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-3xl">
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      <section className="deferred-section py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 max-w-3xl">
             <h2 className="text-3xl font-bold text-white md:text-5xl">Why humanoid robot skin is becoming a category</h2>
@@ -221,7 +221,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="pb-20 pt-8">
+      <section className="deferred-section pb-20 pt-8">
         <div className="container-shell">
           <div className="signal-panel p-8 text-center md:p-12">
             <h2 className="mx-auto max-w-3xl text-3xl font-bold text-white md:text-5xl">
