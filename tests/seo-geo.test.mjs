@@ -62,12 +62,19 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(industryVisuals, /src=\{heroVisual\.image\}[\s\S]{0,180}priority/);
 
   assert.match(seo, /buildPhysicsAiDefinedTermJsonLd/);
+  assert.match(seo, /'\/physics-ai': \{[\s\S]*RoboSkin\.ai explains Physics AI, Physical AI, and 物理 AI/);
+  assert.match(seo, /const keywords = \[[\s\S]*'RoboSkin Physics AI',\s*'物理 AI',\s*'物理人工智能',\s*\]/);
+  assert.match(seo, /alternateName:\s*\[[\s\S]*'Physical AI'[\s\S]*'物理 AI'[\s\S]*'物理人工智能'[\s\S]*\]/);
   assert.match(physicsAi, /buildPhysicsAiDefinedTermJsonLd\(\)/);
   assert.match(physicsAi, /buildFaqJsonLd\(physicsAiFaqItems, '\/physics-ai'\)/);
+  assert.match(physicsAi, /Direct answer[\s\S]{0,700}物理 AI[\s\S]{0,120}物理人工智能/);
+  assert.match(physicsAi, /Is Physics AI the same as Physical AI or 物理 AI\?/);
+  assert.match(physicsAi, /物理人工智能/);
   assert.match(llms, /## Canonical Answers/);
   assert.match(llms, /What is Physics AI in the RoboSkin context\?/);
   assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(llms, /The related industry phrase is often Physical AI/);
+  assert.match(llms, /物理 AI|物理人工智能/);
 });
 
 test('RoboSkin keeps Physics AI canonical without introducing a physical-ai route', async () => {

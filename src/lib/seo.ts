@@ -69,7 +69,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/physics-ai',
     title: 'RoboSkin Physics AI: Robot Skin for Physical AI Systems',
     description:
-      'RoboSkin.ai explains Physics AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact-aware feedback.',
+      'RoboSkin.ai explains Physics AI, Physical AI, and 物理 AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact feedback.',
     priority: 0.86,
     changeFrequency: 'weekly',
     index: true,
@@ -218,6 +218,8 @@ const keywords = [
   'Physics AI',
   'Physical AI',
   'RoboSkin Physics AI',
+  '物理 AI',
+  '物理人工智能',
 ];
 
 export function canonicalUrl(path: string) {
@@ -401,10 +403,10 @@ export function buildPhysicsAiDefinedTermJsonLd() {
     '@type': 'DefinedTerm',
     '@id': `${url}#defined-term`,
     name: 'Physics AI',
-    alternateName: 'Physical AI',
+    alternateName: ['Physical AI', '物理 AI', '物理人工智能'],
     url,
     description:
-      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI.',
+      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI, and Chinese-language searches may use 物理 AI or 物理人工智能.',
     inDefinedTermSet: {
       '@type': 'DefinedTermSet',
       name: 'RoboSkin robot skin and tactile AI terminology',
@@ -419,6 +421,8 @@ export function buildPhysicsAiDefinedTermJsonLd() {
     keywords: [
       'Physics AI',
       'Physical AI',
+      '物理 AI',
+      '物理人工智能',
       'robot skin',
       'tactile AI',
       'tactile sensing',

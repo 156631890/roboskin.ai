@@ -21,9 +21,9 @@ const physicsAiFaqItems = [
       'In the RoboSkin context, Physics AI means physical-world AI systems that need touch, contact, pressure, slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand physical interaction.',
   },
   {
-    question: 'Is Physics AI the same as Physical AI?',
+    question: 'Is Physics AI the same as Physical AI or 物理 AI?',
     answer:
-      'Physical AI is the more common robotics phrase. Physics AI is often used by readers looking for AI that operates in the physical world, so RoboSkin.ai explains the term through robot skin, tactile AI, and contact-aware robotics.',
+      'Physical AI is the more common robotics phrase. Physics AI is often used by readers looking for AI that operates in the physical world. Chinese-language searches may use 物理 AI or 物理人工智能 for the same physical-world AI direction, so RoboSkin.ai explains the term through robot skin, tactile AI, and contact-aware robotics.',
   },
   {
     question: 'How does RoboSkin relate to Physics AI?',
@@ -54,6 +54,8 @@ const stackCards = [
 
 const relatedTerms = [
   'Physical AI',
+  '物理 AI',
+  '物理人工智能',
   'tactile AI',
   'robot skin',
   'e-skin',
@@ -107,7 +109,8 @@ export default function PhysicsAiPage() {
               <p className="mt-3 text-base leading-relaxed text-[#c8d1de]">
                 In the RoboSkin context, Physics AI means physical-world AI systems that need touch, contact, pressure,
                 slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand
-                physical interaction.
+                physical interaction. Physical AI is the common industry phrase, while Chinese searches may use 物理 AI
+                or 物理人工智能.
               </p>
             </div>
           </div>
@@ -139,7 +142,8 @@ export default function PhysicsAiPage() {
             <p className="mt-4 text-sm leading-relaxed text-soft">
               Physical AI is the more common phrase for AI systems that act in the physical world. Some readers search for
               Physics AI when they mean the same robotics direction: AI connected to contact, movement, surfaces, and real
-              objects. RoboSkin.ai keeps the term anchored to robot skin and tactile sensing.
+              objects. Chinese-language searches may phrase this as 物理 AI or 物理人工智能. RoboSkin.ai keeps the term
+              anchored to robot skin and tactile sensing.
             </p>
           </article>
 
