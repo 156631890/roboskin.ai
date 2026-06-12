@@ -43,8 +43,20 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(articlePage, /export async function generateMetadata/);
   assert.match(articlePage, /export default async function ResearchArticlePage/);
   assert.match(articlePage, /buildArticleJsonLd/);
+  assert.match(articlePage, /buildResearchArticlePageJsonLd/);
+  assert.match(articlePage, /buildResearchArticleBreadcrumbJsonLd/);
+  assert.match(
+    articlePage,
+    /buildGraphJsonLd\(\[[\s\S]*buildResearchArticlePageJsonLd\(post\)[\s\S]*buildResearchArticleBreadcrumbJsonLd\(post\)[\s\S]*buildArticleJsonLd\(post\)/,
+  );
   assert.match(articlePage, /getBlogPostById/);
 
   assert.match(seo, /'\/research'/);
   assert.match(seo, /buildArticleJsonLd/);
+  assert.match(seo, /export function buildResearchArticlePageJsonLd\(post: BlogPost\)/);
+  assert.match(seo, /'@type': 'WebPage'[\s\S]*mainEntity:\s*\{\s*'@id': `\$\{url\}#article`/);
+  assert.match(seo, /export function buildResearchArticleBreadcrumbJsonLd\(post: BlogPost\)/);
+  assert.match(seo, /'@id': `\$\{url\}#breadcrumb`/);
+  assert.match(seo, /name: 'Research'/);
+  assert.match(seo, /item: canonicalUrl\('\/research'\)/);
 });

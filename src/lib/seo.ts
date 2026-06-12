@@ -359,6 +359,65 @@ export function buildBreadcrumbJsonLd(path: keyof typeof pageSeo | string) {
   };
 }
 
+export function buildResearchArticlePageJsonLd(post: BlogPost) {
+  const url = canonicalUrl(`/research/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: post.title,
+    description: post.excerpt,
+    isPartOf: {
+      '@id': `${site.url}/#website`,
+    },
+    breadcrumb: {
+      '@id': `${url}#breadcrumb`,
+    },
+    mainEntity: {
+      '@id': `${url}#article`,
+    },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${site.url}${post.image}`,
+    },
+    datePublished: post.date,
+    dateModified: post.updated,
+    inLanguage: 'en',
+  };
+}
+
+export function buildResearchArticleBreadcrumbJsonLd(post: BlogPost) {
+  const url = canonicalUrl(`/research/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: canonicalUrl('/'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Research',
+        item: canonicalUrl('/research'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: url,
+      },
+    ],
+  };
+}
+
 export function buildCategoryGuideJsonLd() {
   return {
     '@context': 'https://schema.org',

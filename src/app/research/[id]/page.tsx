@@ -4,7 +4,13 @@ import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import JsonLd from '@/components/JsonLd';
 import { blogPosts, getBlogPostById } from '@/lib/blog-data';
-import { buildArticleJsonLd, buildGraphJsonLd, canonicalUrl } from '@/lib/seo';
+import {
+  buildArticleJsonLd,
+  buildGraphJsonLd,
+  buildResearchArticleBreadcrumbJsonLd,
+  buildResearchArticlePageJsonLd,
+  canonicalUrl,
+} from '@/lib/seo';
 
 type ResearchArticlePageProps = {
   params: Promise<{
@@ -213,7 +219,13 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
 
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildArticleJsonLd(post)])} />
+      <JsonLd
+        data={buildGraphJsonLd([
+          buildResearchArticlePageJsonLd(post),
+          buildResearchArticleBreadcrumbJsonLd(post),
+          buildArticleJsonLd(post),
+        ])}
+      />
       <article className="py-20 md:py-24">
         <div className="container-shell">
           <Link href="/research" className="text-accent text-sm font-semibold hover:text-white">
