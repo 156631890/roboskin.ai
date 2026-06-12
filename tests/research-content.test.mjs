@@ -41,6 +41,13 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(articlePage, /generateStaticParams/);
   assert.match(articlePage, /params:\s*Promise<\{\s*id:\s*string;\s*\}>/);
   assert.match(articlePage, /export async function generateMetadata/);
+  assert.match(articlePage, /authors:\s*\[\{\s*name: post\.author\s*\}\]/);
+  assert.match(articlePage, /category: post\.category/);
+  assert.match(articlePage, /keywords: post\.technicalFocus/);
+  assert.match(articlePage, /publishedTime: post\.date/);
+  assert.match(articlePage, /modifiedTime: post\.updated/);
+  assert.match(articlePage, /section: post\.category/);
+  assert.match(articlePage, /tags: post\.technicalFocus/);
   assert.match(articlePage, /export default async function ResearchArticlePage/);
   assert.match(articlePage, /buildArticleJsonLd/);
   assert.match(articlePage, /buildResearchArticlePageJsonLd/);

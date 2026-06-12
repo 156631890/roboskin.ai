@@ -41,6 +41,9 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
   return {
     title: post.title,
     description: post.excerpt,
+    authors: [{ name: post.author }],
+    category: post.category,
+    keywords: post.technicalFocus,
     alternates: {
       canonical: url,
     },
@@ -51,6 +54,11 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       type: 'article',
       siteName: 'RoboSkin.ai',
       images: [post.image],
+      publishedTime: post.date,
+      modifiedTime: post.updated,
+      authors: [post.author],
+      section: post.category,
+      tags: post.technicalFocus,
     },
     twitter: {
       card: 'summary_large_image',
