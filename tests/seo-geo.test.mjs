@@ -91,6 +91,10 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(physicsAi, /Direct answer[\s\S]{0,700}Physical AI/);
   assert.doesNotMatch(physicsAi, /What is Physics AI|Physics AI FAQ|RoboSkin Physics AI|物理 AI|物理人工智能|鐗╃悊/);
   assert.match(llms, /## Canonical Answers/);
+  assert.match(llms, /^> RoboSkin\.ai publishes conservative information/m);
+  assert.match(llms, /- \[RoboSkin homepage\]\(https:\/\/roboskin\.ai\/\):/);
+  assert.match(llms, /- \[Physical AI canonical answer\]\(https:\/\/roboskin\.ai\/physics-ai\):/);
+  assert.match(llms, /- \[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/\):/);
   assert.match(llms, /What is Physical AI in the RoboSkin context\?/);
   assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(llms, /For Physical AI questions/);
@@ -158,10 +162,10 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(visibleKeywordSurfaces, /Physical AI touch data/);
 
   assert.match(llms, /## Keyword Routes/);
-  assert.match(llms, /Robot skin \/ robotic skin: https:\/\/roboskin\.ai\//);
-  assert.match(llms, /Tactile AI \/ flexible tactile sensor: https:\/\/roboskin\.ai\/technology/);
-  assert.match(llms, /Robot hand tactile sensor \/ slip detection robot hand: https:\/\/roboskin\.ai\/research/);
-  assert.match(llms, /Humanoid robot skin \/ contact-aware robotics: https:\/\/roboskin\.ai\/applications/);
+  assert.match(llms, /\[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/\)/);
+  assert.match(llms, /\[Tactile AI and flexible tactile sensor\]\(https:\/\/roboskin\.ai\/technology\)/);
+  assert.match(llms, /\[Robot hand tactile sensor and slip detection robot hand\]\(https:\/\/roboskin\.ai\/research\)/);
+  assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });
 
 test('RoboSkin uses the Gmail address for direct public inquiries', async () => {
