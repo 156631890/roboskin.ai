@@ -12,7 +12,7 @@ export type SeoRoute = {
   breadcrumbs: string[];
 };
 
-const updatedAt = '2026-04-25';
+const updatedAt = '2026-06-12';
 
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {

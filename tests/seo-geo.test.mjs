@@ -35,7 +35,11 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
-  assert.match(sitemap, /lastModified: new Date\('2026-04-25'\)/);
+  assert.match(seo, /const updatedAt = '2026-06-12'/);
+  assert.match(seo, /export const sitemapLastModified = updatedAt/);
+  assert.match(sitemap, /sitemapLastModified/);
+  assert.match(sitemap, /lastModified: new Date\(sitemapLastModified\)/);
+  assert.doesNotMatch(sitemap, /2026-04-25/);
   assert.match(sitemap, /seoRoutes/);
   assert.doesNotMatch(robots, /\/_next\//);
 

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { seoTopicPages } from '@/content/seo-topic-pages';
 import { blogPosts } from '@/lib/blog-data';
-import { canonicalUrl, seoRoutes } from '@/lib/seo';
+import { canonicalUrl, seoRoutes, sitemapLastModified } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((route) => route.index)
     .map((route) => ({
       url: canonicalUrl(route.path),
-      lastModified: new Date('2026-04-25'),
+      lastModified: new Date(sitemapLastModified),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     }));
