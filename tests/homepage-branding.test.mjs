@@ -34,19 +34,27 @@ test('homepage copy reflects the authority portal positioning', async () => {
     readFile(visualsPath, 'utf8'),
   ]);
 
-  assert.match(home, /Robot skin and tactile AI authority portal/);
+  assert.match(home, /Robot skin, tactile AI, and Physical AI authority portal/);
+  assert.match(home, /Physical AI authority portal/);
+  assert.match(home, /Physical AI\s+context/);
+  assert.doesNotMatch(home, /Physical AI \/ 物理 AI/);
+  assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);
+  assert.match(home, /href="\/physics-ai"/);
   assert.match(home, /What is robot skin\?/);
   assert.match(home, /Open the robot skin glossary/);
-  assert.match(home, /Submit a Source/);
+  assert.match(home, /Submit a source/);
   assert.match(home, /Contribute research context/);
-  assert.match(home, /Robot skin direct answers/);
-  assert.match(home, /Research and resource index/);
+  assert.match(home, /Short answers to common robot skin and tactile AI questions/);
+  assert.match(home, /Track the tactile AI stack with source-like entries/);
   assert.match(home, /Tactile AI stack map/);
   assert.match(home, /Humanoid robot skin/);
   assert.match(home, /homeBrandAssets/);
   assert.match(home, /homeBrandAssets\.hero\.image/);
   assert.match(site, /authorityLinkGroups/);
   assert.match(site, /directAnswerBlocks/);
+  assert.match(site, /What is RoboSkin Physical AI\?/);
+  assert.match(site, /Read the Physical AI explainer/);
+  assert.doesNotMatch(site, /What is RoboSkin Physics AI \/ 物理 AI/);
   assert.match(site, /researchResourceIndex/);
   assert.match(site, /homeBrandAssets/);
   assert.match(visuals, /AuthorityIndex/);
@@ -63,7 +71,7 @@ test('research and glossary pages extend the brand content system', async () => 
   ]);
 
   assert.match(research, /source-backed signal board/);
-  assert.match(research, /Open source-backed briefs/);
+  assert.match(research, /Open robot hand tactile sensor briefs/);
   assert.match(research, /Research lane/);
   assert.match(research, /Submit source context/);
   assert.match(glossary, /terminology matrix/);

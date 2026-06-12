@@ -17,9 +17,9 @@ const updatedAt = '2026-04-25';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin, Tactile AI, and E-Skin Authority Portal',
+    title: 'Robot Skin, Tactile AI, and Physical AI Authority Portal',
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, and contact-aware robotics for physical AI systems.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, and contact-aware robotics for Physical AI systems.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -67,13 +67,13 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/physics-ai': {
     path: '/physics-ai',
-    title: 'RoboSkin Physics AI: Robot Skin for Physical AI Systems',
+    title: 'RoboSkin Physical AI: Robot Skin and Tactile AI',
     description:
-      'RoboSkin.ai explains Physics AI, Physical AI, and 物理 AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact feedback.',
+      'RoboSkin.ai explains Physical AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact feedback.',
     priority: 0.86,
     changeFrequency: 'weekly',
     index: true,
-    breadcrumbs: ['Home', 'Physics AI'],
+    breadcrumbs: ['Home', 'Physical AI'],
   },
   '/resources': {
     path: '/resources',
@@ -214,12 +214,11 @@ const keywords = [
   'robot hand tactile sensor',
   'flexible tactile sensor',
   'slip detection robot hand',
-  'physical AI tactile feedback',
-  'Physics AI',
+  'Physical AI tactile feedback',
   'Physical AI',
-  'RoboSkin Physics AI',
-  '物理 AI',
-  '物理人工智能',
+  'RoboSkin Physical AI',
+  'Physical AI touch data',
+  'Physics AI',
 ];
 
 export function canonicalUrl(path: string) {
@@ -287,7 +286,7 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     email: site.contact.primaryEmail,
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics for researchers, builders, partners, and research readers.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, contact-aware robotics, and Physical AI context for researchers, builders, partners, and research readers.',
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -395,18 +394,18 @@ export function buildFaqJsonLd(items = faqItems, path = '/faq') {
   };
 }
 
-export function buildPhysicsAiDefinedTermJsonLd() {
+export function buildPhysicalAiDefinedTermJsonLd() {
   const url = canonicalUrl('/physics-ai');
 
   return {
     '@context': 'https://schema.org',
     '@type': 'DefinedTerm',
     '@id': `${url}#defined-term`,
-    name: 'Physics AI',
-    alternateName: ['Physical AI', '物理 AI', '物理人工智能'],
+    name: 'Physical AI',
+    alternateName: ['Physics AI', 'physical-world AI', 'embodied AI'],
     url,
     description:
-      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI, and Chinese-language searches may use 物理 AI or 物理人工智能.',
+      'In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
     inDefinedTermSet: {
       '@type': 'DefinedTermSet',
       name: 'RoboSkin robot skin and tactile AI terminology',
@@ -419,10 +418,10 @@ export function buildPhysicsAiDefinedTermJsonLd() {
       '@id': `${site.url}/#website`,
     },
     keywords: [
-      'Physics AI',
       'Physical AI',
-      '物理 AI',
-      '物理人工智能',
+      'RoboSkin Physical AI',
+      'Physical AI tactile feedback',
+      'Physics AI',
       'robot skin',
       'tactile AI',
       'tactile sensing',

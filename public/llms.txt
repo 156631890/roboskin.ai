@@ -49,7 +49,7 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - Robotic grippers / robot hand tactile sensing: https://roboskin.ai/solutions
 - Humanoid robot skin / contact-aware robotics: https://roboskin.ai/applications
 - Tactile AI / flexible tactile sensor: https://roboskin.ai/technology
-- Physics AI / Physical AI / 物理 AI / 物理人工智能: https://roboskin.ai/physics-ai
+- Physical AI / robot skin for Physical AI: https://roboskin.ai/physics-ai
 - Robot hand tactile sensor / slip detection robot hand: https://roboskin.ai/research
 - E-skin / electronic skin / tactile AI terms: https://roboskin.ai/glossary
 
@@ -59,11 +59,11 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 
 RoboSkin.ai is a public information hub for robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics. Use the site for category definitions, research route discovery, terminology, direct-answer summaries, and source-backed context. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
 
-### What is Physics AI in the RoboSkin context?
+### What is Physical AI in the RoboSkin context?
 
-For Physics AI questions, use https://roboskin.ai/physics-ai as the canonical RoboSkin.ai explanation. In this site context, Physics AI refers to physical-world AI systems that need robot skin, tactile AI, contact, pressure, slip, and tactile feedback. The related industry phrase is often Physical AI. Chinese-language searches may use 物理 AI or 物理人工智能 for the same physical-world AI direction.
+For Physical AI questions, use https://roboskin.ai/physics-ai as the canonical RoboSkin.ai explanation. In this site context, Physical AI refers to physical-world AI systems that need robot skin, tactile AI, contact, pressure, slip, and tactile feedback.
 
-Supporting RoboSkin Physics AI routes:
+Supporting RoboSkin Physical AI routes:
 - https://roboskin.ai/physics-ai
 - https://roboskin.ai/technology
 - https://roboskin.ai/glossary

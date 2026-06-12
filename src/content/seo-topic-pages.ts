@@ -77,7 +77,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Where robot skin is most searched',
         body: [
-          'Search interest usually clusters around humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and physical AI. These are related but not identical questions.',
+          'Search interest usually clusters around humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and Physical AI. These are related but not identical questions.',
           'RoboSkin.ai separates those intents into definition, application, technology, comparison, and research pages so one page does not try to rank for every possible phrase.',
         ],
       },
@@ -112,19 +112,19 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/tactile-ai',
     title: 'Tactile AI: Touch Data for Physical AI and Robots',
     description:
-      'Tactile AI turns robot touch signals into useful behavior. Learn the tactile AI stack for robot skin, slip detection, contact-aware control, and physical AI.',
-    h1: 'Tactile AI: touch data for physical AI',
+      'Tactile AI turns robot touch signals into useful behavior. Learn the tactile AI stack for robot skin, slip detection, contact-aware control, and Physical AI.',
+    h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
-    intent: 'Definition and system map for tactile AI, touch data, physical AI tactile feedback, and robot control queries.',
+    intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
     updated: '2026-06-06',
     priority: 0.86,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
-    keywords: ['tactile AI', 'physical AI tactile feedback', 'robot touch data', 'contact-aware robotics', 'slip detection robot hand'],
+    keywords: ['tactile AI', 'Physical AI tactile feedback', 'robot touch data', 'contact-aware robotics', 'slip detection robot hand'],
     quickAnswer: [
       'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior.',
-      'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for physical AI systems.',
+      'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for Physical AI systems.',
       'The phrase is broader than a single tactile sensor. It describes the full stack from contact surface to model, controller, benchmark, and feedback loop.',
     ],
     sections: [
@@ -262,7 +262,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Humanoid robot skin helps robot hands and body surfaces detect contact. Learn use cases, tactile signals, evaluation questions, and related research routes.',
     h1: 'Humanoid robot skin',
     kicker: 'Application intent',
-    intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and physical AI touch queries.',
+    intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
     updated: '2026-06-06',
     priority: 0.82,
     changeFrequency: 'weekly',
@@ -271,7 +271,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['humanoid robot skin', 'robot hand tactile sensor', 'humanoid tactile sensing', 'robot body contact sensing', 'dexterous robot hands'],
     quickAnswer: [
       'Humanoid robot skin is tactile sensing applied to hands, palms, arms, or other humanoid robot surfaces where contact awareness matters.',
-      'The strongest use cases are dexterous manipulation, grasp stability, handovers, safety contact, and research evaluation for physical AI.',
+      'The strongest use cases are dexterous manipulation, grasp stability, handovers, safety contact, and research evaluation for Physical AI.',
       'A humanoid skin system must handle curved geometry, moving joints, cable routing, calibration, and synchronization with robot state.',
     ],
     sections: [
@@ -324,7 +324,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot skin', href: '/robot-skin', description: 'Core definition for the surface layer.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How humanoid touch data becomes behavior.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-specific sensing for grasp stability and slip.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'How contact logs support physical AI workflows.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'How contact logs support Physical AI workflows.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'Source-backed full-hand research analysis.' },
       { label: 'Applications overview', href: '/applications', description: 'Existing application route for category use cases.' },
     ],
@@ -552,13 +552,13 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Physical AI touch data helps robots understand contact after vision is occluded. Learn how tactile signals support grasping, safety, evaluation, and robot learning.',
     h1: 'Physical AI touch data',
     kicker: 'Technology guide',
-    intent: 'Technology guide for physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
+    intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
     updated: '2026-06-06',
     priority: 0.77,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'answers',
-    keywords: ['physical AI touch data', 'robot touch data', 'tactile feedback for robots', 'contact-aware AI', 'tactile data for robot learning'],
+    keywords: ['Physical AI touch data', 'robot touch data', 'tactile feedback for robots', 'contact-aware AI', 'tactile data for robot learning'],
     quickAnswer: [
       'Physical AI touch data is contact information collected from robot surfaces during real interaction with objects, people, tools, or environments.',
       'It complements vision because the robot often needs feedback at the exact surface where contact happens, especially when the hand blocks the camera.',
@@ -569,7 +569,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Why vision is not enough',
         body: [
           'Vision can help a robot identify an object and plan an approach. Once the robot touches the object, the hand, gripper, or tool may occlude the most important part of the scene.',
-          'Touch data gives physical AI a local signal after contact. It can reveal slip, seating, deformation, force patterns, contact timing, and unexpected interaction events.',
+          'Touch data gives Physical AI a local signal after contact. It can reveal slip, seating, deformation, force patterns, contact timing, and unexpected interaction events.',
         ],
         bullets: [
           'Grasp stability when cameras are blocked',
@@ -582,20 +582,20 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'What makes touch data useful',
         body: [
           'Raw tactile signals are not automatically useful. They need consistent timing, calibration, coordinate mapping, metadata, and interfaces that robot software can consume.',
-          'The best physical AI touch-data pages should focus on the data lifecycle: capture, condition, align, store, interpret, act, and evaluate.',
+          'The best Physical AI touch-data pages should focus on the data lifecycle: capture, condition, align, store, interpret, act, and evaluate.',
         ],
       },
       {
         heading: 'Where robot skin fits',
         body: [
-          'Robot skin is one way to collect touch data at the surface. A tactile sensor array, soft skin, fingertip pad, or full-hand skin can all produce contact signals for a physical AI stack.',
-          'This page should connect broad physical AI language to concrete robot skin implementation details, giving RoboSkin.ai a bridge between trending AI searches and its robotics-specific expertise.',
+          'Robot skin is one way to collect touch data at the surface. A tactile sensor array, soft skin, fingertip pad, or full-hand skin can all produce contact signals for a Physical AI stack.',
+          'This page should connect broad Physical AI language to concrete robot skin implementation details, giving RoboSkin.ai a bridge between trending AI searches and its robotics-specific expertise.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Is physical AI touch data only for training models?',
+        question: 'Is Physical AI touch data only for training models?',
         answer:
           'No. It can be used for real-time control, safety events, grasp evaluation, debugging, benchmarking, and model training.',
       },
@@ -607,7 +607,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Why add this page instead of another robot skin synonym page?',
         answer:
-          'Because it captures a different search intent: people asking why touch data matters for physical AI, not just what robot skin means.',
+          'Because it captures a different search intent: people asking why touch data matters for Physical AI, not just what robot skin means.',
       },
     ],
     relatedLinks: [
@@ -1014,7 +1014,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for physical AI workflows.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for Physical AI workflows.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that uses robot touch signals.' },
       { label: 'ROS 2 pipeline brief', href: '/research/ros2-kilted-tactile-pipeline-2026', description: 'Source-backed ROS 2 tactile pipeline article.' },
       { label: 'Technology context', href: '/technology', description: 'Existing site-level technology overview.' },

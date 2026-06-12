@@ -26,10 +26,10 @@ const applicationAreas = [
   },
 ];
 
-const physicsAiUseCases = [
+const physicalAiUseCases = [
   {
     title: 'Humanoid hands',
-    summary: 'Physics AI needs touch when robot hands must understand contact timing, grip confidence, and object stability.',
+    summary: 'Physical AI needs touch when robot hands must understand contact timing, grip confidence, and object stability.',
   },
   {
     title: 'Robotic grippers',
@@ -113,15 +113,15 @@ export default function ApplicationsPage() {
         <div className="container-shell">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="eyebrow">Physics AI use cases</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Where RoboSkin Physics AI becomes useful</h2>
+              <span className="eyebrow">Physical AI use cases</span>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Where RoboSkin Physical AI becomes useful</h2>
             </div>
             <Link href="/physics-ai" className="text-sm font-semibold text-accent hover:text-white">
-              Understand RoboSkin Physics AI {'->'}
+              Understand RoboSkin Physical AI {'->'}
             </Link>
           </div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {physicsAiUseCases.map((item) => (
+            {physicalAiUseCases.map((item) => (
               <article key={item.title} className="glass-card p-6">
                 <h3 className="text-lg font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>

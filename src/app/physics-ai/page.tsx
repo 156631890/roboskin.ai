@@ -9,24 +9,24 @@ import {
   buildGraphJsonLd,
   buildPageJsonLd,
   buildPageMetadata,
-  buildPhysicsAiDefinedTermJsonLd,
+  buildPhysicalAiDefinedTermJsonLd,
 } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/physics-ai');
 
 const physicsAiFaqItems = [
   {
-    question: 'What is Physics AI?',
+    question: 'What is Physical AI?',
     answer:
-      'In the RoboSkin context, Physics AI means physical-world AI systems that need touch, contact, pressure, slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand physical interaction.',
+      'In the RoboSkin context, Physical AI means physical-world AI systems that need touch, contact, pressure, slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand physical interaction.',
   },
   {
-    question: 'Is Physics AI the same as Physical AI or 物理 AI?',
+    question: 'How does RoboSkin.ai define Physical AI?',
     answer:
-      'Physical AI is the more common robotics phrase. Physics AI is often used by readers looking for AI that operates in the physical world. Chinese-language searches may use 物理 AI or 物理人工智能 for the same physical-world AI direction, so RoboSkin.ai explains the term through robot skin, tactile AI, and contact-aware robotics.',
+      'RoboSkin.ai defines Physical AI through robot skin, tactile AI, and contact-aware robotics: AI that must understand real physical interaction, not only images, language, or simulation.',
   },
   {
-    question: 'How does RoboSkin relate to Physics AI?',
+    question: 'How does RoboSkin relate to Physical AI?',
     answer:
       'RoboSkin.ai maps how robot skin, tactile sensing, e-skin, and tactile AI can support physical-world AI systems that need contact feedback beyond vision.',
   },
@@ -54,8 +54,6 @@ const stackCards = [
 
 const relatedTerms = [
   'Physical AI',
-  '物理 AI',
-  '物理人工智能',
   'tactile AI',
   'robot skin',
   'e-skin',
@@ -72,22 +70,22 @@ export default function PhysicsAiPage() {
           buildPageJsonLd('/physics-ai'),
           buildBreadcrumbJsonLd('/physics-ai'),
           buildFaqJsonLd(physicsAiFaqItems, '/physics-ai'),
-          buildPhysicsAiDefinedTermJsonLd(),
+          buildPhysicalAiDefinedTermJsonLd(),
         ])}
       />
 
       <section className="py-14 md:py-20">
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_1.02fr] lg:items-center">
           <div>
-            <span className="eyebrow">Physics AI</span>
-            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">RoboSkin and Physics AI</h1>
+            <span className="eyebrow">Physical AI</span>
+            <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">RoboSkin and Physical AI</h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">
-              RoboSkin.ai explains Physics AI through robot skin, tactile AI, and physical-world systems that need touch,
+              RoboSkin.ai explains Physical AI through robot skin, tactile AI, and physical-world systems that need touch,
               contact, pressure, slip, and tactile feedback.
             </p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">
-              The related industry phrase is often Physical AI. This page uses Physics AI in the RoboSkin context: AI that
-              must understand real physical interaction, not only images, language, or simulation.
+              This page uses Physical AI in the RoboSkin context: AI that must understand real physical interaction, not
+              only images, language, or simulation.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/technology" className="btn-primary w-full sm:w-auto">
@@ -107,10 +105,9 @@ export default function PhysicsAiPage() {
             <div className="signal-panel p-5">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Direct answer</p>
               <p className="mt-3 text-base leading-relaxed text-[#c8d1de]">
-                In the RoboSkin context, Physics AI means physical-world AI systems that need touch, contact, pressure,
+                In the RoboSkin context, Physical AI means physical-world AI systems that need touch, contact, pressure,
                 slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand
-                physical interaction. Physical AI is the common industry phrase, while Chinese searches may use 物理 AI
-                or 物理人工智能.
+                physical interaction.
               </p>
             </div>
           </div>
@@ -121,7 +118,7 @@ export default function PhysicsAiPage() {
         <div className="container-shell">
           <div className="mb-6">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">RoboSkin context</p>
-            <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">Why robot skin matters for Physics AI</h2>
+            <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">Why robot skin matters for Physical AI</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {stackCards.map((card) => (
@@ -138,12 +135,11 @@ export default function PhysicsAiPage() {
         <div className="container-shell grid gap-6 lg:grid-cols-2">
           <article className="glass-card p-7 md:p-8">
             <p className="text-soft text-xs uppercase tracking-[0.14em]">Term clarity</p>
-            <h2 className="mt-2 text-2xl font-semibold text-white">Physics AI vs Physical AI</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-white">Physical AI and real-world contact</h2>
             <p className="mt-4 text-sm leading-relaxed text-soft">
-              Physical AI is the more common phrase for AI systems that act in the physical world. Some readers search for
-              Physics AI when they mean the same robotics direction: AI connected to contact, movement, surfaces, and real
-              objects. Chinese-language searches may phrase this as 物理 AI or 物理人工智能. RoboSkin.ai keeps the term
-              anchored to robot skin and tactile sensing.
+              Physical AI is AI connected to contact, movement, surfaces, and real objects. RoboSkin.ai keeps the term
+              anchored to robot skin and tactile sensing because touch data is one of the clearest differences between
+              physical-world robotics and screen-only AI.
             </p>
           </article>
 
@@ -163,7 +159,7 @@ export default function PhysicsAiPage() {
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
             <p className="text-soft text-xs uppercase tracking-[0.14em]">Related concepts</p>
-            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Terms connected to RoboSkin Physics AI</h2>
+            <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Terms connected to RoboSkin Physical AI</h2>
             <div className="mt-6 flex flex-wrap gap-2">
               {relatedTerms.map((term) => (
                 <span key={term} className="rounded-md border border-white/8 bg-[#020408] px-3 py-1 text-xs text-[#c8d1de]">
@@ -180,7 +176,7 @@ export default function PhysicsAiPage() {
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <div>
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">GEO answers</p>
-              <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Physics AI FAQ</h2>
+              <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Physical AI FAQ</h2>
             </div>
             <Link href="/technology" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
               Technology route {'->'}

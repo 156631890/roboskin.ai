@@ -26,11 +26,11 @@ const researchRouteCards = [
     text: 'Research briefs link back to glossary language, tactile AI routes, and application context.',
   },
   {
-    label: 'Physics AI route',
+    label: 'Physical AI route',
     title: 'Tactile research supports physical-world AI',
-    text: 'Use the Physics AI explainer to connect robot skin research, tactile sensing, and contact feedback without turning source notes into product claims.',
+    text: 'Use the Physical AI explainer to connect robot skin research, tactile sensing, and contact feedback without turning source notes into product claims.',
     href: '/physics-ai',
-    ctaLabel: 'Open Physics AI contact-feedback route',
+    ctaLabel: 'Open Physical AI contact-feedback route',
   },
 ];
 

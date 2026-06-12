@@ -42,24 +42,25 @@ export default function Home() {
       <section className="relative overflow-hidden pb-10 pt-5 md:pb-12 md:pt-6">
         <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,229,255,0.65),transparent)]" />
         <div className="container-shell">
-          <div className="grid min-h-[calc(100dvh-82px)] items-center gap-7 lg:grid-cols-[0.74fr_1.26fr]">
-            <div className="hero-copy reveal relative z-10 min-w-0">
+          <div className="grid gap-7 md:min-h-[calc(100svh-82px)] md:items-center lg:grid-cols-[0.74fr_1.26fr]">
+            <div className="hero-copy relative z-10 min-w-0">
               <p className="quiet-label">Robot touch needs a surface intelligence layer</p>
-              <h1 aria-label="Robot skin and tactile AI authority portal" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
+              <h1 aria-label="Robot skin, tactile AI, and Physical AI authority portal" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
                 <span className="block">Robot skin</span>
-                <span className="block">and tactile AI</span>
-                <span className="block">authority portal</span>
+                <span className="block">tactile AI</span>
+                <span className="block">Physical AI authority portal</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
-                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, and humanoid robot skin for people tracking
-                contact-aware robotics.
+                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, humanoid robot skin, and Physical AI
+                context for people tracking contact-aware robotics.
               </p>
 
               <div className="hero-answer mt-7 max-w-xl">
                 <p className="text-sm font-semibold text-white">What is robot skin?</p>
                 <p className="mt-2 text-base leading-relaxed text-[#9da8b8]">
                   In practical robotics, robot skin helps robots detect contact, pressure, shear, slip, and interaction events across
-                  hands, grippers, arms, or curved body surfaces.
+                  hands, grippers, arms, or curved body surfaces. For Physical AI, it is the contact layer that vision alone cannot
+                  provide.
                 </p>
               </div>
 
@@ -70,13 +71,16 @@ export default function Home() {
                 <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
                   Open the robot skin glossary
                 </Link>
+                <Link href="/physics-ai" className="btn-secondary w-full sm:w-auto">
+                  Read Physical AI
+                </Link>
                 <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
                   Submit a source
                 </Link>
               </div>
             </div>
 
-            <dl className="reveal order-2 grid grid-cols-2 gap-px overflow-hidden lg:order-3 lg:col-span-2 lg:grid-cols-4">
+            <dl className="order-2 grid grid-cols-2 gap-px overflow-hidden lg:order-3 lg:col-span-2 lg:grid-cols-4">
               {homeStats.map((item) => (
                 <div key={item.label} className="bg-[#050910]/88 p-4 md:p-5">
                   <dt className="font-mono text-sm font-semibold text-[#edf7ff]">{item.value}</dt>
@@ -85,7 +89,7 @@ export default function Home() {
               ))}
             </dl>
 
-            <div className="reveal order-3 relative min-w-0 [animation-delay:0.1s] lg:order-2">
+            <div className="order-3 relative min-w-0 lg:order-2">
               <figure className="hero-visual-frame">
                 <Image
                   src={homeBrandAssets.hero.image}
@@ -109,7 +113,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="deferred-section mt-10">
             <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
           </div>
         </div>
@@ -234,7 +238,7 @@ export default function Home() {
               <div>
                 <span className="eyebrow">Research, glossary, or correction path</span>
                 <h2 className="mt-5 max-w-3xl text-3xl font-bold text-white md:text-5xl">
-                  Build the category around robot skin, tactile AI, and physical AI touch
+                  Build the category around robot skin, tactile AI, and Physical AI touch
                 </h2>
                 <p className="mt-4 max-w-2xl text-[#c8d1de]">
                   Start with the public research notes, suggest a source, or send a correction when a claim needs better support.

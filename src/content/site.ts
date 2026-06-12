@@ -382,12 +382,12 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A system view of sensing layers, signal processing, middleware, and validation fit.',
       },
       {
-        label: 'Read the Physics AI and Physical AI explainer',
+        label: 'Read the Physical AI explainer',
         href: '/physics-ai',
-        description: 'A concise definition of Physics AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
+        description: 'A concise definition of Physical AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
       },
       {
-        label: 'Map physical AI touch data',
+        label: 'Map Physical AI touch data',
         href: '/guides/physical-ai-touch-data',
         description: 'A guide to contact data for grasping, safety, evaluation, and robot learning workflows.',
       },
@@ -482,7 +482,7 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
   {
     question: 'What is robot skin?',
     answer:
-      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces. It gives physical AI systems a contact layer that vision alone cannot provide.',
+      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces. It gives Physical AI systems a contact layer that vision alone cannot provide.',
     href: '/glossary',
     ctaLabel: 'Open the robot skin glossary',
     image: '/generated/authority/robot-skin-definition.webp',
@@ -491,18 +491,18 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
   {
     question: 'What is tactile AI?',
     answer:
-      'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior. It can support grasp confidence, slip response, contact-aware motion, safety reflexes, and evaluation analytics for physical AI systems.',
+      'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior. It can support grasp confidence, slip response, contact-aware motion, safety reflexes, and evaluation analytics for Physical AI systems.',
     href: '/research',
     ctaLabel: 'Browse tactile AI research',
     image: '/generated/authority/tactile-ai-loop.webp',
     imageAlt: 'Robot hand tactile signals flowing through edge AI and controller modules in a feedback loop.',
   },
   {
-    question: 'What is RoboSkin Physics AI?',
+    question: 'What is RoboSkin Physical AI?',
     answer:
-      'RoboSkin Physics AI means physical-world AI that needs robot skin, tactile AI, and contact feedback. RoboSkin.ai uses the term to connect touch, pressure, slip, and contact-aware robotics.',
+      'RoboSkin Physical AI means physical-world AI that needs robot skin, tactile AI, and contact feedback. RoboSkin.ai uses the term to connect touch, pressure, slip, and contact-aware robotics.',
     href: '/physics-ai',
-    ctaLabel: 'Read the Physics AI explainer',
+    ctaLabel: 'Read the Physical AI explainer',
   },
   {
     question: 'What is e-skin?',
@@ -550,7 +550,7 @@ export const tactileAiStack: TechnologyLayer[] = [
   },
   {
     title: 'Safety reflex',
-    summary: 'Contact-aware responses that help physical AI systems behave more safely around people and objects.',
+    summary: 'Contact-aware responses that help Physical AI systems behave more safely around people and objects.',
   },
   {
     title: 'Tactile data feedback',
@@ -569,7 +569,7 @@ export const marketSignals: ContentTile[] = [
   },
   {
     title: 'Embodied AI needs new data',
-    description: 'Tactile datasets and benchmark protocols will matter as physical AI moves from perception to contact-rich work.',
+    description: 'Tactile datasets and benchmark protocols will matter as Physical AI moves from perception to contact-rich work.',
   },
   {
     title: 'Flexible electronics are maturing',
@@ -586,7 +586,7 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
   {
     kicker: 'Guide',
     title: 'Tactile AI field overview',
-    summary: 'A public entry point for robot hands, e-skin, flexible sensors, tactile data, and physical AI applications.',
+    summary: 'A public entry point for robot hands, e-skin, flexible sensors, tactile data, and Physical AI applications.',
     href: '/resources',
     ctaLabel: 'View guide',
     code: 'GUIDE-01',
@@ -895,8 +895,8 @@ export const resourceSections: ResourceSection[] = [
         href: '/glossary',
       },
       {
-        title: 'Physics AI',
-        description: 'Understand RoboSkin Physics AI as physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
+        title: 'Physical AI',
+        description: 'Understand RoboSkin Physical AI as physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
         availability: 'Public explainer',
         ctaLabel: 'Read',
         href: '/physics-ai',
@@ -1053,10 +1053,10 @@ export const faqItems: FaqItem[] = [
     href: '/research',
   },
   {
-    question: 'What does Physics AI mean in the RoboSkin context?',
+    question: 'What does Physical AI mean in the RoboSkin context?',
     answer:
-      'In the RoboSkin context, Physics AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing. The related industry phrase is often Physical AI.',
-    ctaLabel: 'Read the Physics AI explainer',
+      'In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
+    ctaLabel: 'Read the Physical AI explainer',
     href: '/physics-ai',
   },
   {
@@ -1113,9 +1113,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     href: '/research',
   },
   {
-    term: 'Physics AI',
-    definition: 'In the RoboSkin context, Physics AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback. The related industry phrase is often Physical AI.',
-    related: ['Physical AI', 'robot skin', 'tactile AI'],
+    term: 'Physical AI',
+    definition: 'In the RoboSkin context, Physical AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback.',
+    related: ['robot skin', 'tactile AI', 'contact-aware robotics'],
     href: '/physics-ai',
   },
   {

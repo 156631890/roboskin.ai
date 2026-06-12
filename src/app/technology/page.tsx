@@ -11,7 +11,7 @@ const technologyTopicLinks = [
   {
     label: 'Tactile AI',
     href: '/tactile-ai',
-    description: 'How touch signals become robot behavior, evaluation, and physical AI feedback.',
+    description: 'How touch signals become robot behavior, evaluation, and Physical AI feedback.',
   },
   {
     label: 'Flexible tactile sensor array',
@@ -111,16 +111,16 @@ export default function TechnologyPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
             <div className="grid gap-6 lg:grid-cols-[0.72fr_1fr] lg:items-center">
               <div>
-                <p className="text-soft text-xs uppercase tracking-[0.14em]">Physics AI contact layer</p>
-                <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Robot skin as the tactile input for physical-world AI</h2>
+                <p className="text-soft text-xs uppercase tracking-[0.14em]">Physical AI contact layer</p>
+                <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Robot skin as the tactile input for Physical AI</h2>
               </div>
               <div>
                 <p className="text-sm leading-relaxed text-soft">
-                  For physical-world AI systems, robot skin is the contact layer. It helps expose touch, pressure,
+                  For Physical AI systems, robot skin is the contact layer. It helps expose touch, pressure,
                   shear, slip, and timing signals that vision alone cannot measure during interaction.
                 </p>
                 <Link href="/physics-ai" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
-                  Open the Physics AI tactile contact layer {'->'}
+                  Open the Physical AI tactile contact layer {'->'}
                 </Link>
               </div>
             </div>
