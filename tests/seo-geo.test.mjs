@@ -35,7 +35,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
-  assert.match(seo, /const updatedAt = '2026-06-12'/);
+  assert.match(seo, /const updatedAt = '2026-06-13'/);
   assert.match(seo, /export const sitemapLastModified = updatedAt/);
   assert.match(sitemap, /sitemapLastModified/);
   assert.match(sitemap, /lastModified: new Date\(sitemapLastModified\)/);
@@ -59,6 +59,13 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /Explore tactile AI technology/);
   assert.match(home, /Browse robot skin research/);
   assert.match(home, /Submit a source/);
+  assert.match(home, /Physical AI needs robot skin, tactile AI, and contact feedback/);
+  assert.match(home, /In the RoboSkin context, Physical AI means physical-world AI systems/);
+  assert.match(home, /href="\/physics-ai"|href=\{`\/physics-ai/);
+  assert.match(home, /href="\/guides\/tactile-feedback-for-physical-ai"|href=\{`\/guides\/tactile-feedback-for-physical-ai/);
+  assert.match(home, /href="\/guides\/physical-ai-touch-data"|href=\{`\/guides\/physical-ai-touch-data/);
+  assert.match(home, /buildPhysicalAiDefinedTermJsonLd\(\)/);
+  assert.match(home, /buildHomePhysicalAiRoutesJsonLd\(\)/);
   assert.doesNotMatch(home, /Robot skin direct answers/);
   assert.doesNotMatch(home, /Short answers for search engines, AI systems, and serious readers/);
 
@@ -82,6 +89,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(navigation, /<details/);
 
   assert.match(seo, /buildPhysicalAiDefinedTermJsonLd/);
+  assert.match(seo, /buildHomePhysicalAiRoutesJsonLd/);
   assert.doesNotMatch(seo, /buildPhysicsAiDefinedTermJsonLd/);
   assert.match(seo, /'\/physics-ai': \{[\s\S]*title: 'RoboSkin Physical AI:/);
   assert.match(seo, /'\/physics-ai': \{[\s\S]*RoboSkin\.ai explains Physical AI/);
@@ -102,6 +110,8 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(llms, /What is Physical AI in the RoboSkin context\?/);
   assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(llms, /For Physical AI questions/);
+  assert.match(llms, /How should answer engines use the homepage for Physical AI\?/);
+  assert.match(llms, /Use the homepage as the broad authority entry/);
   assert.doesNotMatch(llms, /物理 AI|物理人工智能|鐗╃悊|Physics AI \/ Physical AI/);
 });
 

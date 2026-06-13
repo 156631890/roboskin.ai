@@ -16,6 +16,7 @@ import {
   directAnswerBlocks,
   featuredIndustryAssets,
   homeBrandAssets,
+  homePhysicalAiSignals,
   homeStats,
   manifesto,
   marketSignals,
@@ -23,7 +24,15 @@ import {
   site,
   tactileAiStack,
 } from '@/content/site';
-import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
+import {
+  buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
+  buildGraphJsonLd,
+  buildHomePhysicalAiRoutesJsonLd,
+  buildPageJsonLd,
+  buildPageMetadata,
+  buildPhysicalAiDefinedTermJsonLd,
+} from '@/lib/seo';
 
 const homeRobotSkinFaq = directAnswerBlocks.slice(0, 3).map((item) => ({
   question: item.question,
@@ -37,7 +46,15 @@ export const metadata: Metadata = buildPageMetadata('/');
 export default function Home() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/')])} />
+      <JsonLd
+        data={buildGraphJsonLd([
+          buildPageJsonLd('/'),
+          buildBreadcrumbJsonLd('/'),
+          buildFaqJsonLd(homeRobotSkinFaq, '/'),
+          buildPhysicalAiDefinedTermJsonLd(),
+          buildHomePhysicalAiRoutesJsonLd(),
+        ])}
+      />
 
       <section className="relative overflow-hidden pb-10 pt-5 md:pb-12 md:pt-6">
         <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,229,255,0.65),transparent)]" />
@@ -162,6 +179,49 @@ export default function Home() {
           </div>
 
           <DirectAnswerSection answers={directAnswerBlocks} />
+        </div>
+      </section>
+
+      <section className="deferred-section py-14 md:py-20" aria-labelledby="home-physical-ai-heading">
+        <div className="container-shell grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+          <div>
+            <span className="eyebrow">Physical AI answer route</span>
+            <h2 id="home-physical-ai-heading" className="mt-5 text-3xl font-bold text-white md:text-5xl">
+              Physical AI needs robot skin, tactile AI, and contact feedback
+            </h2>
+            <p className="section-copy mt-4">
+              In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI,
+              contact feedback, pressure, slip, and tactile sensing. The homepage is the broad authority entry; the
+              Physical AI page is the canonical definition route.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href="/physics-ai" className="btn-primary w-full sm:w-auto">
+                Read Physical AI
+              </Link>
+              <Link href="/guides/tactile-feedback-for-physical-ai" className="btn-secondary w-full sm:w-auto">
+                Map tactile feedback
+              </Link>
+              <Link href="/guides/physical-ai-touch-data" className="btn-secondary w-full sm:w-auto">
+                Trace touch data
+              </Link>
+            </div>
+          </div>
+
+          <div className="signal-panel divide-y divide-white/8 overflow-hidden">
+            {homePhysicalAiSignals.map((signal) => (
+              <article key={signal.title} className="grid gap-3 p-5 md:grid-cols-[0.34fr_1fr] md:p-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{signal.title}</h3>
+                  {signal.href && signal.ctaLabel ? (
+                    <Link href={signal.href} className="mt-3 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                      {signal.ctaLabel} {'->'}
+                    </Link>
+                  ) : null}
+                </div>
+                <p className="text-sm leading-relaxed text-[#8e98a8]">{signal.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

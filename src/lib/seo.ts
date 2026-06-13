@@ -12,14 +12,14 @@ export type SeoRoute = {
   breadcrumbs: string[];
 };
 
-const updatedAt = '2026-06-12';
+const updatedAt = '2026-06-13';
 
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
     title: 'Robot Skin, Tactile AI, and Physical AI Authority Portal',
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, and contact-aware robotics for Physical AI systems.',
+      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, Physical AI tactile feedback, and contact-aware robotics.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -225,9 +225,11 @@ const keywords = [
   'flexible tactile sensor',
   'slip detection robot hand',
   'Physical AI tactile feedback',
+  'Physical AI contact feedback',
   'Physical AI',
   'RoboSkin Physical AI',
   'Physical AI touch data',
+  'robot skin for Physical AI',
   'Physics AI',
 ];
 
@@ -500,6 +502,56 @@ export function buildPhysicalAiDefinedTermJsonLd() {
       'slip',
       'physical-world AI',
     ],
+  };
+}
+
+export function buildHomePhysicalAiRoutesJsonLd() {
+  const homeUrl = canonicalUrl('/');
+  const routes = [
+    {
+      name: 'Physical AI canonical answer',
+      url: canonicalUrl('/physics-ai'),
+      description: pageSeo['/physics-ai'].description,
+    },
+    {
+      name: 'Tactile feedback for Physical AI',
+      url: canonicalUrl('/guides/tactile-feedback-for-physical-ai'),
+      description: 'Guide route for Physical AI tactile feedback, contact feedback, and robot skin sensing loops.',
+    },
+    {
+      name: 'Physical AI touch data',
+      url: canonicalUrl('/guides/physical-ai-touch-data'),
+      description: 'Guide route for contact data, tactile logs, and touch signals used by Physical AI systems.',
+    },
+    {
+      name: 'Robot skin for Physical AI',
+      url: canonicalUrl('/robot-skin'),
+      description: 'Definition route for robot skin as a tactile sensing surface and contact layer.',
+    },
+    {
+      name: 'Tactile AI',
+      url: canonicalUrl('/tactile-ai'),
+      description: 'Definition route for turning robot touch signals into useful behavior and evaluation data.',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${homeUrl}#physical-ai-route-map`,
+    name: 'Physical AI route map on RoboSkin.ai',
+    description:
+      'Homepage route map connecting Physical AI, robot skin, tactile AI, contact feedback, touch data, and source-backed research paths.',
+    itemListElement: routes.map((route, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'WebPage',
+        name: route.name,
+        url: route.url,
+        description: route.description,
+      },
+    })),
   };
 }
 

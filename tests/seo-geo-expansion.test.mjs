@@ -71,4 +71,6 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(webmasterChecklist, /AI Overviews|AI Mode/);
   assert.match(webmasterChecklist, /https:\/\/roboskin\.ai\/sitemap\.xml/);
   assert.match(webmasterChecklist, /https:\/\/roboskin\.ai\/llms\.txt/);
+  assert.match(webmasterChecklist, /homepage includes the visible Physical AI route section/);
+  assert.match(webmasterChecklist, /Physical AI route map on RoboSkin\.ai/);
 });

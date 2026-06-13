@@ -528,6 +528,30 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
   },
 ];
 
+export const homePhysicalAiSignals: ContentTile[] = [
+  {
+    title: 'Robot skin is the contact layer',
+    description:
+      'Physical AI systems need local contact evidence when hands, grippers, tools, or body surfaces touch the world. Robot skin gives that evidence a surface layer.',
+    href: '/robot-skin',
+    ctaLabel: 'Read robot skin',
+  },
+  {
+    title: 'Tactile AI turns touch into behavior',
+    description:
+      'Tactile AI connects pressure, shear, slip, calibration, timestamps, and controller-facing features so touch can support action, evaluation, or learning.',
+    href: '/tactile-ai',
+    ctaLabel: 'Open tactile AI',
+  },
+  {
+    title: 'Contact feedback makes the route measurable',
+    description:
+      'The strongest Physical AI route links visible definitions to tactile feedback, touch data, source-backed research, and conservative claim boundaries.',
+    href: '/guides/tactile-feedback-for-physical-ai',
+    ctaLabel: 'Map feedback',
+  },
+];
+
 export const tactileAiStack: TechnologyLayer[] = [
   {
     title: 'Skin materials',
