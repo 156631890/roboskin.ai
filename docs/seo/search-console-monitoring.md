@@ -6,6 +6,8 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 
 | URL | Submitted in sitemap | Indexed | Last checked | Action |
 | --- | --- | --- | --- | --- |
+| https://roboskin.ai | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/physics-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/robot-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/tactile-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/e-skin | Yes |  |  | Inspect URL, then request indexing if available |
@@ -14,6 +16,7 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 | https://roboskin.ai/applications/soft-robotic-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/flexible-tactile-sensor-array | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/physical-ai-touch-data | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/guides/tactile-feedback-for-physical-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/robot-skin-vs-e-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/robot-skin-papers | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | Yes |  |  | Inspect URL, then request indexing if available |
@@ -27,9 +30,15 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 | URL | Query | Impressions | Clicks | CTR | Avg position | Date range | Note |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
 | https://roboskin.ai/robot-skin | robot skin |  |  |  |  | Last 28 days | Core definition query |
+| https://roboskin.ai/physics-ai | physical ai robot skin |  |  |  |  | Last 28 days | Physical AI canonical cluster query |
+| https://roboskin.ai/guides/tactile-feedback-for-physical-ai | physical ai tactile feedback |  |  |  |  | Last 28 days | Contact-feedback guide query |
+| https://roboskin.ai/robot-skin | robot skin for physical ai |  |  |  |  | Last 28 days | Robot skin as Physical AI contact layer |
 | https://roboskin.ai/tactile-ai | tactile AI |  |  |  |  | Last 28 days | Core concept query |
+| https://roboskin.ai/tactile-ai | tactile ai robot skin |  |  |  |  | Last 28 days | Tactile AI and robot skin workflow query |
 | https://roboskin.ai/e-skin | e-skin robotics |  |  |  |  | Last 28 days | Electronic skin query |
 | https://roboskin.ai/applications/robot-hand-tactile-sensor | robot hand tactile sensor |  |  |  |  | Last 28 days | Hand application query |
+| https://roboskin.ai/guides/physical-ai-touch-data | robot touch data |  |  |  |  | Last 28 days | Touch-data pipeline query |
+| https://roboskin.ai/applications/humanoid-robot-skin | humanoid robot skin tactile sensor |  |  |  |  | Last 28 days | Humanoid tactile-sensing application query |
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | robot gripper tactile sensor |  |  |  |  | Last 28 days | Commercial application query |
 | https://roboskin.ai/guides/slip-detection-robot-hand | slip detection robot hand |  |  |  |  | Last 28 days | Manipulation-intent query |
 | https://roboskin.ai/guides/ros2-tactile-sensing | ROS 2 tactile sensing |  |  |  |  | Last 28 days | Software integration query |

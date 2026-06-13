@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
-import { site } from '@/content/site';
+import { pageVisuals, site } from '@/content/site';
 import { canonicalUrl } from '@/lib/seo';
 
 export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
@@ -51,7 +51,15 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
 
 export function buildSeoTopicGraph(page: SeoTopicPage) {
   const url = canonicalUrl(page.path);
+  const visual = pageVisuals[page.visualKey];
   const breadcrumbNames = ['Home', ...page.path.split('/').filter(Boolean).map((part) => part.replaceAll('-', ' '))];
+  const imageNode = {
+    '@type': 'ImageObject',
+    url: canonicalUrl(visual.image),
+    contentUrl: canonicalUrl(visual.image),
+    caption: visual.caption,
+    description: visual.imageAlt,
+  };
 
   const webPageNode = {
     '@context': 'https://schema.org',
@@ -61,11 +69,18 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
     name: page.title,
     headline: page.h1,
     description: page.description,
+    image: imageNode,
     inLanguage: 'en',
     isPartOf: {
       '@id': `${site.url}/#website`,
     },
     publisher: {
+      '@id': `${site.url}/#organization`,
+    },
+    author: {
+      '@id': `${site.url}/#organization`,
+    },
+    reviewedBy: {
       '@id': `${site.url}/#organization`,
     },
     breadcrumb: {
@@ -85,6 +100,12 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
           }
         : {}),
     about: page.keywords,
+    mentions: page.relatedLinks.map((link) => ({
+      '@type': 'WebPage',
+      name: link.label,
+      url: canonicalUrl(link.href),
+      description: link.description,
+    })),
     dateModified: page.updated,
   };
 
@@ -122,6 +143,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         headline: page.h1,
         name: page.title,
         description: page.description,
+        image: imageNode,
         url,
         datePublished: page.updated,
         dateModified: page.updated,
@@ -129,10 +151,22 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         publisher: {
           '@id': `${site.url}/#organization`,
         },
+        author: {
+          '@id': `${site.url}/#organization`,
+        },
+        reviewedBy: {
+          '@id': `${site.url}/#organization`,
+        },
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
         },
         about: page.keywords,
+        mentions: page.relatedLinks.map((link) => ({
+          '@type': 'WebPage',
+          name: link.label,
+          url: canonicalUrl(link.href),
+          description: link.description,
+        })),
         citation: page.sources?.map((source) => source.href),
       }
     : undefined;

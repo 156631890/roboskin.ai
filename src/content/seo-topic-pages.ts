@@ -75,6 +75,19 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        heading: 'Robot skin sensor taxonomy',
+        body: [
+          'A practical robot skin taxonomy should classify a surface by modality, coverage, geometry, durability, and data interface before comparing sensitivity claims. Those dimensions tell readers whether a sensor belongs on a fingertip, palm, gripper pad, arm cover, soft robot, or full humanoid surface.',
+          'The taxonomy also separates materials research from robot integration. A flexible e-skin sample, optical tactile pad, pressure matrix, or multimodal skin can all be relevant, but the useful category depends on how the signal survives mounting and reaches robot software.',
+        ],
+        bullets: [
+          'Modality: pressure, shear, slip, strain, vibration, temperature, proximity, or multimodal contact',
+          'Coverage: fingertip, full hand, gripper pad, arm surface, soft body, or large-area tactile skin',
+          'Geometry and durability: flat sample, curved surface, jointed segment, replaceable layer, or wear-prone cover',
+          'Data interface: analog readout, calibrated map, timestamped stream, middleware topic, or controller feature',
+        ],
+      },
+      {
         heading: 'Where robot skin is most searched',
         body: [
           'Search interest usually clusters around humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and Physical AI. These are related but not identical questions.',
@@ -101,6 +114,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become useful robot behavior.' },
+      { label: 'Physical AI', href: '/physics-ai', description: 'Why Physical AI needs robot skin, tactile AI, and contact feedback.' },
       { label: 'E-skin', href: '/e-skin', description: 'How electronic skin overlaps with robot skin.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'How robot skin applies to dexterous hands and grasping.' },
       { label: 'Soft robotic skin', href: '/applications/soft-robotic-skin', description: 'Flexible robot skin for soft and curved surfaces.' },
@@ -176,6 +190,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     relatedLinks: [
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
       { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why contact data matters after vision is occluded.' },
+      { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'How tactile feedback loops support Physical AI systems.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'A hand-level tactile AI application.' },
       { label: 'Humanoid robot skin', href: '/applications/humanoid-robot-skin', description: 'Where tactile AI appears in humanoid hands and surfaces.' },
       { label: 'Technology context', href: '/technology', description: 'Existing stack explanation for tactile sensing layers.' },
@@ -590,6 +605,19 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Robot skin is one way to collect touch data at the surface. A tactile sensor array, soft skin, fingertip pad, or full-hand skin can all produce contact signals for a Physical AI stack.',
           'This page should connect broad Physical AI language to concrete robot skin implementation details, giving RoboSkin.ai a bridge between trending AI searches and its robotics-specific expertise.',
+        ],
+      },
+      {
+        heading: 'Touch data pipeline for embodied AI',
+        body: [
+          'A touch data pipeline for embodied AI should preserve each contact event, timestamp, body frame, calibrated value, and robot action so the signal can be replayed, compared, and used outside the original demo. Without that path, a tactile sensor produces measurements but not durable Physical AI evidence.',
+          'The pipeline begins at the contact surface, moves through electronics and calibration, aligns with robot state, stores metadata, and then feeds control, evaluation, or learning. Each stage should be visible enough that another team can understand what was measured and what was inferred.',
+        ],
+        bullets: [
+          'Capture: contact event, timestamp, body frame, calibrated value, and robot action',
+          'Align: synchronize tactile data with joint state, vision, commands, and task phase',
+          'Store: retain calibration metadata, sensor location, units, sampling rate, and failure notes',
+          'Use: expose features for grasp control, safety checks, replay diagnostics, or learning systems',
         ],
       },
     ],
@@ -1350,6 +1378,19 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'The key test is whether tactile feedback changes a robot outcome. A contact classifier is useful, but a stronger demonstration shows grip adjustment, safer contact, better replay diagnostics, or improved manipulation under occlusion.',
           'Claims should stay narrow unless a public source supports broader deployment readiness, benchmark values, or product availability.',
+        ],
+      },
+      {
+        heading: 'Physical AI tactile feedback evaluation metrics',
+        body: [
+          'Evaluation should measure latency, synchronization, drift, repeatability, and task outcome instead of only showing a clean contact map. Physical AI needs feedback that arrives in time, stays aligned with robot state, and changes a real action or evaluation result.',
+          'Useful metrics also distinguish sensor quality from system quality. A high-resolution array is not enough if the signal drifts after mounting, loses timing, or cannot be mapped back to the robot body and task.',
+        ],
+        bullets: [
+          'Latency: time from surface contact to controller-usable feature',
+          'Synchronization: alignment with joint state, vision frames, commands, and tactile logs',
+          'Drift and repeatability: stability after mounting, repeated loading, and surface wear',
+          'Task outcome: grasp stability, slip recovery, safety response, replay diagnosis, or evaluation gain',
         ],
       },
     ],

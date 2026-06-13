@@ -46,6 +46,11 @@ const coreTopicRoutes = [
     description: 'The core category definition for tactile robot surfaces.',
   },
   {
+    label: 'Physical AI',
+    href: '/physics-ai',
+    description: 'The canonical RoboSkin route for physical-world AI that needs touch and contact feedback.',
+  },
+  {
     label: 'E-skin',
     href: '/e-skin',
     description: 'Electronic skin and flexible sensor context for robotics.',

@@ -32,6 +32,13 @@ const researchRouteCards = [
     href: '/physics-ai',
     ctaLabel: 'Open Physical AI contact-feedback route',
   },
+  {
+    label: 'Touch data route',
+    title: 'Contact logs make research reusable',
+    text: 'Use the touch-data guide to connect tactile papers to contact events, timestamps, body frames, calibrated values, and robot actions.',
+    href: '/guides/physical-ai-touch-data',
+    ctaLabel: 'Trace Physical AI touch data',
+  },
 ];
 
 export default function ResearchPage() {
