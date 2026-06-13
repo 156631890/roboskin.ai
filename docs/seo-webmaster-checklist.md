@@ -4,6 +4,7 @@ Use this checklist after each production deployment. It covers crawl discovery, 
 
 ## Submit and Monitor
 
+- Search Console property: prefer the `roboskin.ai` Domain property. Do not submit the apex sitemap inside a `https://www.roboskin.ai/` URL-prefix property.
 - Google Search Console: submit `https://roboskin.ai/sitemap.xml`.
 - Bing Webmaster Tools: submit `https://roboskin.ai/sitemap.xml`.
 - Confirm `https://roboskin.ai/robots.txt` exposes the sitemap.

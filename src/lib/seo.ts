@@ -234,7 +234,7 @@ const keywords = [
 ];
 
 export function canonicalUrl(path: string) {
-  return `${site.url}${path === '/' ? '' : path}`;
+  return `${site.url}${path === '/' ? '/' : path}`;
 }
 
 export function buildPageMetadata(path: keyof typeof pageSeo | string): Metadata {

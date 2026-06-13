@@ -19,6 +19,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
     indexingSubmissionLog,
     keywordQueryMatrix,
     searchConsoleMonitoring,
+    vercelConfig,
     research,
     glossary,
     robotSkinVsTactileSensorRoute,
@@ -36,6 +37,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
     read('docs/seo/indexing-submission-log.md'),
     read('docs/seo/keyword-query-matrix.md'),
     read('docs/seo/search-console-monitoring.md'),
+    read('vercel.json'),
     read('src/app/research/page.tsx'),
     read('src/app/glossary/page.tsx'),
     read('src/app/guides/robot-skin-vs-tactile-sensor/page.tsx'),
@@ -97,11 +99,14 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(webmasterChecklist, /Rich Results Test/);
   assert.match(webmasterChecklist, /AI Overviews|AI Mode/);
   assert.match(webmasterChecklist, /https:\/\/roboskin\.ai\/sitemap\.xml/);
+  assert.match(webmasterChecklist, /Domain property/);
+  assert.match(webmasterChecklist, /Do not submit the apex sitemap inside a `https:\/\/www\.roboskin\.ai\/` URL-prefix property/);
   assert.match(webmasterChecklist, /https:\/\/roboskin\.ai\/llms\.txt/);
   assert.match(webmasterChecklist, /homepage includes the visible Physical AI route section/);
   assert.match(webmasterChecklist, /Physical AI route map on RoboSkin\.ai/);
 
   assert.match(indexingSubmissionLog, /Production deployment verification/);
+  assert.match(indexingSubmissionLog, /Search Console property boundary/);
   assert.match(indexingSubmissionLog, /Google URL Inspection queue/);
   assert.match(indexingSubmissionLog, /Bing Webmaster Tools queue/);
   assert.match(indexingSubmissionLog, /IndexNow readiness/);
@@ -119,6 +124,12 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/robot-skin/);
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/tactile-ai/);
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/guides\/physical-ai-touch-data/);
+
+  assert.match(seo, /return `\$\{site\.url\}\$\{path === '\/' \? '\/' : path\}`/);
+  assert.match(vercelConfig, /"type": "host"/);
+  assert.match(vercelConfig, /"value": "www\.roboskin\.ai"/);
+  assert.match(vercelConfig, /"destination": "https:\/\/roboskin\.ai\/:path\*"/);
+  assert.match(vercelConfig, /"permanent": true/);
 
   assert.match(searchConsoleMonitoring, /physical ai robot skin/i);
   assert.match(searchConsoleMonitoring, /physical ai tactile feedback/i);

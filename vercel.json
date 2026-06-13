@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.roboskin.ai"
+        }
+      ],
+      "destination": "https://roboskin.ai/:path*",
+      "permanent": true
+    }
+  ]
+}

@@ -6,6 +6,10 @@ Use this log after each production deployment. It separates verified production 
 
 Verified on 2026-06-13 after pushing `main` to GitHub.
 
+## Search Console property boundary
+
+Use the `roboskin.ai` Domain property when submitting `https://roboskin.ai/sitemap.xml`. If using a URL-prefix property, submit the sitemap only inside the matching host property. Do not submit the apex sitemap inside a `https://www.roboskin.ai/` URL-prefix property.
+
 | Check | URL | Status | Evidence |
 | --- | --- | --- | --- |
 | Homepage Physical AI section | `https://roboskin.ai/` | Verified | HTML includes `Physical AI needs robot skin, tactile AI, and contact feedback` |
