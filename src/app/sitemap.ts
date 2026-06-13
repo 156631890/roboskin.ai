@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { seoTopicPages } from '@/content/seo-topic-pages';
+import { pageVisuals } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
 import { canonicalUrl, seoRoutes, sitemapLastModified } from '@/lib/seo';
 
@@ -27,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(page.updated),
     changeFrequency: page.changeFrequency,
     priority: page.priority,
+    images: [canonicalUrl(pageVisuals[page.visualKey].image)],
   }));
 
   return [...staticPages, ...articlePages, ...topicPages];

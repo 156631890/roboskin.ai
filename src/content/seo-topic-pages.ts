@@ -1220,6 +1220,176 @@ export const seoTopicPages: SeoTopicPage[] = [
       'full-hand-tactile-sensing-2025',
     ],
   },
+  {
+    path: '/guides/robot-skin-vs-tactile-sensor',
+    title: 'Robot Skin vs Tactile Sensor: System and Component Difference',
+    description:
+      'Compare robot skin and tactile sensor terms. Learn when a robot needs a tactile sensor, when it needs robot skin, and how tactile AI connects the system.',
+    h1: 'Robot skin vs tactile sensor',
+    kicker: 'Comparison guide',
+    intent: 'Comparison page for robot skin vs tactile sensor, robot tactile sensor, tactile sensing surface, and robot skin system searches.',
+    updated: '2026-06-13',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+    schemaType: 'WebPage',
+    visualKey: 'answers',
+    keywords: ['robot skin vs tactile sensor', 'robot tactile sensor', 'tactile sensing surface', 'robot skin system', 'tactile sensor comparison'],
+    quickAnswer: [
+      'A tactile sensor is a component or array that measures contact signals such as pressure, force, shear, slip, strain, or temperature.',
+      'Robot skin is the larger robot-facing system: a tactile surface, mounting layer, electronics, calibration, data pipeline, and control or evaluation workflow.',
+      'A robot may use tactile sensors without having full robot skin. Robot skin usually includes tactile sensors but also adds coverage, packaging, software, and robot integration constraints.',
+    ],
+    sections: [
+      {
+        heading: 'Component versus system',
+        body: [
+          'A tactile sensor can be a fingertip pad, force cell, pressure matrix, optical tactile unit, flexible array, or multimodal sensing element. It answers what is measured at a contact point or surface.',
+          'Robot skin answers a broader robotics question: how a robot surface senses contact across geometry, survives use, routes data, preserves calibration, and gives the robot a usable signal.',
+        ],
+        bullets: [
+          'Use tactile sensor when evaluating the sensing component or output',
+          'Use robot skin when evaluating coverage, mounting, durability, and robot integration',
+          'Use tactile AI when the touch data changes behavior, classification, or evaluation',
+          'Use e-skin when the focus is flexible electronic skin materials',
+        ],
+      },
+      {
+        heading: 'Why the distinction matters',
+        body: [
+          'Search pages that treat robot skin and tactile sensors as exact synonyms become thin quickly. The stronger comparison is practical: a good tactile sensor can still fail as robot skin if it cannot be mounted, calibrated, protected, serviced, or synchronized with robot state.',
+          'Likewise, a broad robot skin concept still depends on concrete sensor choices. The system needs enough signal quality, spatial coverage, data rate, and reliability for the task.',
+        ],
+      },
+      {
+        heading: 'How to evaluate claims',
+        body: [
+          'Ask whether the source demonstrates a component, a surface, or a robot behavior. A benchtop tactile sensor test is valuable, but it is not the same as a robot hand using robot skin to adjust grip during manipulation.',
+          'A useful comparison should identify what was measured, how the sensor was mounted, whether data was logged, and whether the tactile signal changed a real robot decision.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is robot skin just many tactile sensors?',
+        answer:
+          'Not only. Arrays of tactile sensors can be part of robot skin, but robot skin also includes packaging, coverage, calibration, data handling, replacement strategy, and robot-facing interpretation.',
+      },
+      {
+        question: 'Which term is better for search?',
+        answer:
+          'Use tactile sensor for component selection and measurement questions. Use robot skin for full-surface robot integration, humanoid hands, grippers, and Physical AI contact feedback.',
+      },
+      {
+        question: 'Can one page cover both terms?',
+        answer:
+          'Yes, when the page explains the distinction. Separate thin pages for every wording variant are weaker than one comparison page with clear related routes.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Robot skin', href: '/robot-skin', description: 'System-level definition and category overview.' },
+      { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Component selection and evaluation criteria.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch data becomes useful robot behavior.' },
+      { label: 'Robot skin vs e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'Adjacent terminology comparison.' },
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-level application context.' },
+      { label: 'Research routes', href: '/research/robot-skin-papers', description: 'Source-backed research paths.' },
+    ],
+    sources: [
+      {
+        label: 'University of Cambridge graphene-based artificial skin report',
+        href: 'https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots',
+      },
+      {
+        label: 'Nature Machine Intelligence full-hand tactile sensing paper',
+        href: 'https://www.nature.com/articles/s42256-025-01053-3',
+      },
+    ],
+    paperBriefIds: ['graphene-liquid-metal-3d-force-2026', 'full-hand-tactile-sensing-2025'],
+  },
+  {
+    path: '/guides/tactile-feedback-for-physical-ai',
+    title: 'Tactile Feedback for Physical AI Robots',
+    description:
+      'Tactile feedback for Physical AI gives robots contact data after vision is blocked. Learn signals, feedback loops, evaluation questions, and robot skin routes.',
+    h1: 'Tactile feedback for Physical AI',
+    kicker: 'Physical AI guide',
+    intent: 'Technology guide for tactile feedback for Physical AI, robot touch feedback, Physical AI tactile sensing, and contact feedback searches.',
+    updated: '2026-06-13',
+    priority: 0.82,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: ['tactile feedback for Physical AI', 'Physical AI tactile sensing', 'robot touch feedback', 'contact feedback robots', 'robot skin feedback loop'],
+    quickAnswer: [
+      'Tactile feedback for Physical AI is the contact signal loop that helps a robot understand what happens after it touches the world.',
+      'The loop may include robot skin, fingertip sensors, force or pressure maps, slip events, timestamps, calibration metadata, and controller-facing features.',
+      'Useful tactile feedback is not only sensing. It must arrive early enough, map to the robot body, and support grasping, safety, evaluation, or learning.',
+    ],
+    sections: [
+      {
+        heading: 'Why Physical AI needs contact feedback',
+        body: [
+          'Physical AI systems act in the real world, where vision can be blocked by a hand, object, tool, or body surface. Contact feedback gives the robot local evidence at the interaction surface.',
+          'Robot skin and tactile sensors can reveal contact location, pressure, shear, slip, and other signals that help the robot decide whether a grasp is stable, unsafe, or changing.',
+        ],
+        bullets: [
+          'Contact location and force patterns after visual occlusion',
+          'Early slip events before an object visibly falls',
+          'Safety contact and unexpected interaction signals',
+          'Replayable tactile logs for evaluation and learning',
+        ],
+      },
+      {
+        heading: 'The feedback loop',
+        body: [
+          'A tactile feedback loop starts when the surface measures contact. Electronics and software timestamp the signal, map it to the robot, extract useful features, and expose those features to a controller, model, or evaluator.',
+          'If any layer is missing, the robot may record touch but fail to use it. That is why Physical AI pages should discuss data contracts, latency, calibration, and task-level validation.',
+        ],
+      },
+      {
+        heading: 'What to verify',
+        body: [
+          'The key test is whether tactile feedback changes a robot outcome. A contact classifier is useful, but a stronger demonstration shows grip adjustment, safer contact, better replay diagnostics, or improved manipulation under occlusion.',
+          'Claims should stay narrow unless a public source supports broader deployment readiness, benchmark values, or product availability.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is tactile feedback for Physical AI the same as robot skin?',
+        answer:
+          'No. Robot skin can provide tactile feedback, but tactile feedback also includes the data path, timing, interpretation, and controller or evaluation loop.',
+      },
+      {
+        question: 'Why is vision not enough for Physical AI?',
+        answer:
+          'Vision often loses direct information after contact because the robot hand or object blocks the camera. Tactile feedback measures the interaction where it happens.',
+      },
+      {
+        question: 'What page should this connect to?',
+        answer:
+          'Start with the Physical AI explainer, then read robot skin, tactile AI, ROS 2 tactile sensing, and robot hand tactile sensor routes.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Physical AI explainer', href: '/physics-ai', description: 'Canonical RoboSkin.ai Physical AI route.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Adjacent guide focused on touch data handling.' },
+      { label: 'Robot skin', href: '/robot-skin', description: 'Surface-level contact sensing route.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become behavior.' },
+      { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Software pipeline and replay context.' },
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-level tactile feedback application.' },
+    ],
+    sources: [
+      {
+        label: 'University of Cambridge graphene-based artificial skin report',
+        href: 'https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots',
+      },
+      {
+        label: 'ROS 2 documentation',
+        href: 'https://docs.ros.org/',
+      },
+    ],
+    paperBriefIds: ['graphene-liquid-metal-3d-force-2026', 'ros2-kilted-tactile-pipeline-2026'],
+  },
 ];
 
 export function getSeoTopicPage(path: string) {

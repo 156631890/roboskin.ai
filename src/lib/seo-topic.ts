@@ -52,31 +52,15 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
 export function buildSeoTopicGraph(page: SeoTopicPage) {
   const url = canonicalUrl(page.path);
   const breadcrumbNames = ['Home', ...page.path.split('/').filter(Boolean).map((part) => part.replaceAll('-', ' '))];
-  const mainEntity =
-    page.schemaType === 'DefinedTerm'
-      ? {
-          '@type': 'DefinedTerm',
-          name: page.h1,
-          description: page.quickAnswer.join(' '),
-          url,
-          inDefinedTermSet: {
-            '@type': 'DefinedTermSet',
-            name: 'RoboSkin.ai robot skin glossary',
-            url: canonicalUrl('/glossary'),
-          },
-        }
-      : undefined;
 
-  const pageNode = {
+  const webPageNode = {
     '@context': 'https://schema.org',
-    '@type': page.schemaType,
+    '@type': 'WebPage',
     '@id': `${url}#webpage`,
     url,
     name: page.title,
     headline: page.h1,
     description: page.description,
-    datePublished: page.updated,
-    dateModified: page.updated,
     inLanguage: 'en',
     isPartOf: {
       '@id': `${site.url}/#website`,
@@ -84,14 +68,30 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
     publisher: {
       '@id': `${site.url}/#organization`,
     },
-    mainEntity,
+    breadcrumb: {
+      '@id': `${url}#breadcrumb`,
+    },
+    ...(page.schemaType === 'DefinedTerm'
+      ? {
+          mainEntity: {
+            '@id': `${url}#defined-term`,
+          },
+        }
+      : page.schemaType === 'TechArticle'
+        ? {
+            mainEntity: {
+              '@id': `${url}#article`,
+            },
+          }
+        : {}),
     about: page.keywords,
-    citation: page.sources?.map((source) => source.href),
+    dateModified: page.updated,
   };
 
   const breadcrumbNode = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
     itemListElement: breadcrumbNames.map((name, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -114,8 +114,55 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
     })),
   };
 
+  const articleNode = page.schemaType === 'TechArticle'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        '@id': `${url}#article`,
+        headline: page.h1,
+        name: page.title,
+        description: page.description,
+        url,
+        datePublished: page.updated,
+        dateModified: page.updated,
+        inLanguage: 'en',
+        publisher: {
+          '@id': `${site.url}/#organization`,
+        },
+        mainEntityOfPage: {
+          '@id': `${url}#webpage`,
+        },
+        about: page.keywords,
+        citation: page.sources?.map((source) => source.href),
+      }
+    : undefined;
+
+  const definedTermNode = page.schemaType === 'DefinedTerm'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'DefinedTerm',
+        '@id': `${url}#defined-term`,
+        name: page.h1,
+        description: page.quickAnswer.join(' '),
+        url,
+        inDefinedTermSet: {
+          '@type': 'DefinedTermSet',
+          name: 'RoboSkin.ai robot skin glossary',
+          url: canonicalUrl('/glossary'),
+        },
+        mainEntityOfPage: {
+          '@id': `${url}#webpage`,
+        },
+        isPartOf: {
+          '@id': `${site.url}/#website`,
+        },
+        keywords: page.keywords,
+      }
+    : undefined;
+  const entityNodes = [articleNode, definedTermNode].filter(Boolean);
+
   return {
     '@context': 'https://schema.org',
-    '@graph': [pageNode, breadcrumbNode, faqNode],
+    '@graph': [webPageNode, breadcrumbNode, faqNode, ...entityNodes],
   };
 }

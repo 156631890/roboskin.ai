@@ -221,6 +221,7 @@ export const footerNavigation = [
       { href: '/contact', label: 'Contact' },
       { href: '/case-studies', label: 'Case studies' },
       { href: '/research', label: 'Research' },
+      { href: '/editorial-policy', label: 'Editorial policy' },
       { href: '/glossary', label: 'Glossary' },
       { href: '/news', label: 'News' },
       { href: '/privacy', label: 'Privacy' },

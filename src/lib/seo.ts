@@ -165,6 +165,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'About'],
   },
+  '/editorial-policy': {
+    path: '/editorial-policy',
+    title: 'RoboSkin Editorial Policy and Source Standards',
+    description:
+      'Read RoboSkin.ai editorial standards for source-backed robot skin, tactile AI, e-skin, Physical AI, and research-route coverage.',
+    priority: 0.68,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Editorial policy'],
+  },
   '/contact': {
     path: '/contact',
     title: 'RoboSkin.ai Research Contact',

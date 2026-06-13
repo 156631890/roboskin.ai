@@ -24,6 +24,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 - [Robot skin case studies](https://roboskin.ai/case-studies): Conservative application context paths without unsupported customer claims.
 - [Robot skin FAQ](https://roboskin.ai/faq): Direct answers about robot skin, tactile AI, e-skin, source guidance, and claim limits.
 - [About RoboSkin.ai](https://roboskin.ai/about): Site purpose and conservative publication posture.
+- [Editorial policy and source standards](https://roboskin.ai/editorial-policy): Source boundaries, conservative claim rules, and RoboSkin.ai editorial standards.
 - [RoboSkin.ai contact](https://roboskin.ai/contact): Source suggestions, corrections, and editorial collaboration.
 
 ## Research Briefs
@@ -50,7 +51,9 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Humanoid robot skin and contact-aware robotics](https://roboskin.ai/applications): Application-intent keyword cluster.
 - [Tactile AI and flexible tactile sensor](https://roboskin.ai/technology): Technology-intent keyword cluster.
 - [Physical AI and robot skin for Physical AI](https://roboskin.ai/physics-ai): Physical AI keyword cluster.
+- [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Physical AI contact-feedback keyword cluster.
 - [Robot hand tactile sensor and slip detection robot hand](https://roboskin.ai/research): Research-intent keyword cluster.
+- [Robot skin vs tactile sensor](https://roboskin.ai/guides/robot-skin-vs-tactile-sensor): Comparison-intent keyword cluster.
 - [E-skin, electronic skin, and tactile AI terms](https://roboskin.ai/glossary): Terminology keyword cluster.
 
 ## Canonical Answers
