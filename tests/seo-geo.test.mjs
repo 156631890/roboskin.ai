@@ -70,12 +70,16 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /className="deferred-section pb-20 pt-8"/);
   assert.match(home, /className="deferred-section mt-10"/);
   assert.doesNotMatch(home, /hero-copy reveal|className="[^"]*\breveal\b/);
-  assert.doesNotMatch(globals, /@keyframes floatUp|\.reveal/);
-  assert.match(globals, /body::before,\s*body::after\s*\{[\s\S]*display: none;/);
+  assert.match(globals, /@keyframes floatUp/);
+  assert.match(globals, /\.reveal\s*\{/);
+  assert.match(globals, /body::before\s*\{[\s\S]*background-image:/);
+  assert.match(globals, /body::after\s*\{[\s\S]*repeating-linear-gradient/);
   assert.ok((seoTopicArticle.match(/deferred-section/g) ?? []).length >= 4);
   assert.doesNotMatch(industryVisuals, /src=\{heroVisual\.image\}[\s\S]{0,180}priority/);
-  assert.doesNotMatch(navigation, /'use client'|usePathname|useState/);
-  assert.match(navigation, /<details/);
+  assert.match(navigation, /'use client'/);
+  assert.match(navigation, /usePathname/);
+  assert.match(navigation, /useState/);
+  assert.doesNotMatch(navigation, /<details/);
 
   assert.match(seo, /buildPhysicalAiDefinedTermJsonLd/);
   assert.doesNotMatch(seo, /buildPhysicsAiDefinedTermJsonLd/);
