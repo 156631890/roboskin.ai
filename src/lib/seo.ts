@@ -12,7 +12,7 @@ export type SeoRoute = {
   breadcrumbs: string[];
 };
 
-const updatedAt = '2026-06-13';
+const updatedAt = '2026-06-16';
 
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
@@ -174,6 +174,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     changeFrequency: 'monthly',
     index: true,
     breadcrumbs: ['Home', 'Editorial policy'],
+  },
+  '/news': {
+    path: '/news',
+    title: 'RoboSkin News and Site Updates',
+    description:
+      'Follow RoboSkin.ai site updates, research-route changes, Physical AI coverage, robot skin resources, and tactile AI content improvements.',
+    priority: 0.62,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'News'],
   },
   '/contact': {
     path: '/contact',

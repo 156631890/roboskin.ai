@@ -1,19 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { newsItems, site } from '@/content/site';
+import JsonLd from '@/components/JsonLd';
+import { newsItems } from '@/content/site';
+import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'News',
-  description: 'Site and content updates for the RoboSkin public evaluation journey.',
-  alternates: {
-    canonical: `${site.url}/news`,
-  },
-  robots: { index: false, follow: false },
-};
+export const metadata: Metadata = buildPageMetadata('/news');
 
 export default function NewsPage() {
   return (
     <>
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/news'), buildBreadcrumbJsonLd('/news')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">News</span>

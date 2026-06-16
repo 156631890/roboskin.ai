@@ -6,7 +6,7 @@ const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
 test('SEO and GEO source files expose metadata, schema, sitemap, and internal links', async () => {
-  const [seo, jsonLd, layout, sitemap, robots, home, faq, physicsAi, industryVisuals, navigation, globals, llms, seoTopicArticle] = await Promise.all([
+  const [seo, jsonLd, layout, sitemap, robots, home, faq, news, physicsAi, industryVisuals, navigation, globals, llms, seoTopicArticle] = await Promise.all([
     read('src/lib/seo.ts'),
     read('src/components/JsonLd.tsx'),
     read('src/app/layout.tsx'),
@@ -14,6 +14,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
     read('src/app/robots.ts'),
     read('src/app/page.tsx'),
     read('src/app/faq/page.tsx'),
+    read('src/app/news/page.tsx'),
     read('src/app/physics-ai/page.tsx'),
     read('src/components/IndustryVisuals.tsx'),
     read('src/components/Navigation.tsx'),
@@ -35,12 +36,18 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
-  assert.match(seo, /const updatedAt = '2026-06-13'/);
+  assert.match(seo, /const updatedAt = '2026-06-16'/);
   assert.match(seo, /export const sitemapLastModified = updatedAt/);
   assert.match(sitemap, /sitemapLastModified/);
   assert.match(sitemap, /lastModified: new Date\(sitemapLastModified\)/);
   assert.doesNotMatch(sitemap, /2026-04-25/);
   assert.match(sitemap, /seoRoutes/);
+  assert.match(seo, /'\/news': \{/);
+  assert.match(seo, /title: 'RoboSkin News and Site Updates'/);
+  assert.match(news, /buildPageMetadata\('\/news'\)/);
+  assert.match(news, /buildPageJsonLd\('\/news'\)/);
+  assert.match(news, /buildBreadcrumbJsonLd\('\/news'\)/);
+  assert.doesNotMatch(news, /robots:\s*\{\s*index:\s*false|follow:\s*false/);
   assert.doesNotMatch(robots, /\/_next\//);
 
   assert.match(home, /Find the right robot skin route/);
