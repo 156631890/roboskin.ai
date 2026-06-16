@@ -81,8 +81,10 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopics, /path: '\/guides\/tactile-feedback-for-physical-ai'[\s\S]*Physical AI tactile feedback evaluation metrics/);
   assert.match(seoTopics, /path: '\/robot-skin'[\s\S]*Robot skin sensor taxonomy/);
   assert.match(seoTopics, /path: '\/robot-skin'[\s\S]*href: '\/physics-ai'/);
+  assert.match(seoTopics, /path: '\/robot-skin'[\s\S]*href: '\/guides\/robot-skin-vs-tactile-sensor'/);
   assert.match(seoTopics, /path: '\/tactile-ai'[\s\S]*href: '\/guides\/tactile-feedback-for-physical-ai'/);
   assert.match(seoTopics, /path: '\/guides\/physical-ai-touch-data'[\s\S]*Touch data pipeline for embodied AI/);
+  assert.match(seoTopics, /path: '\/guides\/physical-ai-touch-data'[\s\S]*href: '\/guides\/tactile-feedback-for-physical-ai'/);
   assert.match(seoTopics, /latency, synchronization, drift, repeatability, and task outcome/);
   assert.match(seoTopics, /modality, coverage, geometry, durability, and data interface/);
   assert.match(seoTopics, /contact event, timestamp, body frame, calibrated value, and robot action/);
