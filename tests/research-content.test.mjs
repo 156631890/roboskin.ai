@@ -27,6 +27,14 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /slip-actuated bionic tactile sensing/i);
   assert.match(blogData, /energy constrained touch encoding/i);
   assert.match(blogData, /wet slippage detection/i);
+  assert.match(blogData, /Tactile Robotics outlook/i);
+  assert.match(blogData, /Humanoid visual-tactile-action dataset/i);
+  assert.match(blogData, /FreeTacMan/i);
+  assert.match(blogData, /eFlesh/i);
+  assert.match(blogData, /open-source magnetic tactile calibration/i);
+  assert.match(blogData, /Dream-Tac/i);
+  assert.match(blogData, /MiTaS/i);
+  assert.match(blogData, /Sparsh-X/i);
 
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/research\/news\/graphene-based-artificial-skin/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s42256-025-01053-3/);
@@ -40,6 +48,14 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-025-61843-6/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-026-68858-7/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41598-026-41096-z/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2508\.11261v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2510\.25725v2/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.01941v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.09994v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/abs\/2405\.18582/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.08737v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.06281v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.14754v1/);
   assert.match(blogData, /Updated technical brief - May 2026/);
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);

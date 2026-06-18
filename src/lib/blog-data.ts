@@ -21,6 +21,495 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'sparsh-x-multisensory-touch-representations-2025',
+    title: 'Sparsh-X and multisensory touch representations for robot manipulation',
+    excerpt:
+      'A source-backed note on Sparsh-X, Digit 360 multisensory touch, self-supervised tactile representation learning, and why robot skin data should not be reduced to images.',
+    content: `# Sparsh-X and multisensory touch representations for robot manipulation
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Most robot skin pages treat tactile data as a pressure map or a camera-like tactile image. The Sparsh-X paper is useful because it frames touch as a multisensory signal family: image, audio, motion, and pressure. That matters for robot skin because a real contact event can include deformation, vibration, impact, sliding, pressure change, and motion history.
+
+The source describes Sparsh-X as a self-supervised representation system trained on contact-rich interactions collected with the Digit 360 sensor. For RoboSkin.ai, the value is not the model name. The value is a clearer way to discuss tactile AI: touch representations should preserve complementary contact signals instead of flattening everything into one channel.
+
+## Core idea
+
+Sparsh-X fuses several tactile modalities into a shared representation. That gives downstream policies a richer contact embedding than a single tactile image can provide. In robot skin terms, the system points toward skin data pipelines where pressure, vibration, motion, and visual tactile deformation are synchronized before they are used for control.
+
+| Tactile modality | What it may capture | Robot value |
+| --- | --- | --- |
+| Tactile image | Local deformation and contact geometry | Contact shape and pose clues |
+| Audio or vibration | Fast events and impacts | Slip, tapping, and texture cues |
+| Motion | Sensor movement during interaction | Contact dynamics |
+| Pressure | Load and contact intensity | Grip adjustment and force context |
+
+## Engineering implications
+
+Multisensory representation learning changes the content standard for tactile AI pages. It is not enough to say a robot uses touch. A useful page should say what signals are produced, how they are synchronized, whether the model sees raw data or features, and what task the representation improves.
+
+This is also relevant for robot skin hardware. A skin that exposes only a low-rate pressure number may be easier to integrate, but it may lose high-frequency contact information that could help with slip or impact. A richer sensor creates a harder data problem, but it can support stronger manipulation policies.
+
+## Evaluation checklist
+
+- Check which tactile modalities are actually recorded and synchronized.
+- Ask whether the representation is trained with labels or self-supervision.
+- Review whether downstream tasks use real robot manipulation, not only offline classification.
+- Separate physical-property prediction from policy success.
+- Ask whether the representation transfers across objects, actions, and sensor placements.
+- Compare performance against single-modality tactile baselines.
+
+## What not to infer
+
+This source does not mean every robot skin should use Digit 360 or a transformer backbone. It also does not prove multisensory touch solves all manipulation tasks. The result depends on sensor availability, data volume, temporal alignment, policy design, and task distribution.
+
+For RoboSkin.ai, the editorial lesson is that tactile AI should be described as representation design plus sensor design. Robot skin data is not automatically useful until a model can convert it into task-relevant state.
+
+## Source
+
+[arXiv: Tactile Beyond Pixels: Multisensory Touch Representations for Robot Manipulation](https://arxiv.org/html/2506.14754v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Tactile AI',
+    image: '/generated/research-ai-tactile-learning-2025.svg',
+    sourceTitle: 'Sparsh-X multisensory touch representations preprint',
+    sourceUrl: 'https://arxiv.org/html/2506.14754v1',
+    technicalFocus: ['Sparsh-X', 'multisensory touch', 'Digit 360', 'self-supervised tactile representation'],
+  },
+  {
+    id: 'mitas-multi-resolution-tactile-imitation-learning-2026',
+    title: 'MiTaS and multi-resolution tactile imitation learning',
+    excerpt:
+      'A technical note on MiTaS, heterogeneous tactile sensors, GelSight and event-based touch fusion, and why tactile frequency matters for contact-rich imitation learning.',
+    content: `# MiTaS and multi-resolution tactile imitation learning
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Robot touch is not one sampling rate. A frame-based tactile sensor can capture geometry, while an event-based tactile sensor can capture fast contact changes. The MiTaS paper is useful because it focuses on combining tactile sensors that operate at different temporal resolutions.
+
+The source describes Multi-Resolution Tactile Sensing, or MiTaS, as a framework that fuses RGB, GelSight Mini, and event-based Evetac signals for contact-rich manipulation. For RoboSkin.ai, this is useful because it turns "tactile sensor" into a sharper question: what kind of touch signal is needed at each phase of the task?
+
+## Core idea
+
+MiTaS separates spatial detail from fast temporal detail. A GelSight-style sensor can show local deformation and contact shape. An event-based tactile sensor can react to rapid impact, slip, or vibration. A manipulation policy may need both, especially for tasks where the object moves quickly or the contact state changes before a conventional frame updates.
+
+| Sensor stream | Strength | Risk if missing |
+| --- | --- | --- |
+| RGB vision | Global object and scene context | Contact remains hidden |
+| GelSight-style touch | Local geometry and deformation | Fast slip can be missed |
+| Event-based touch | High-frequency contact changes | Shape detail may be sparse |
+| Fused representation | Task-level contact state | Calibration and synchronization burden |
+
+## Engineering implications
+
+Multi-resolution tactile learning is important for robot skin roadmaps because full-body or full-hand skins may combine sensor families. A fingertip may use high-resolution imaging touch, while a palm or gripper side uses lower-resolution pressure or event sensing. Treating those signals as equivalent hides the integration problem.
+
+The key engineering question becomes synchronization. If one signal is high rate and another is low rate, the policy needs a coherent time base. Without that, the robot may react to stale contact data or align a slip event with the wrong hand pose.
+
+## Evaluation checklist
+
+- Identify the sampling rate and latency of each tactile stream.
+- Ask which task phases need geometry and which need fast event response.
+- Check whether sensor fusion is trained end-to-end or through fixed features.
+- Review whether ablations show the value of each tactile modality.
+- Ask how missing sensors are handled at inference time.
+- Verify whether the policy can replay and inspect failed contact events.
+
+## What not to infer
+
+This source does not prove every robot needs multiple tactile sensors on every finger. Extra sensors add cost, wiring, calibration, and data complexity. The practical lesson is narrower: tactile sensing frequency and modality should match the contact dynamics of the task.
+
+For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactile sensing, event-based tactile sensing, and multi-resolution tactile fusion.
+
+## Source
+
+[arXiv: Multi-Resolution Tactile Imitation Learning for Contact-Rich Robotic Manipulation](https://arxiv.org/html/2606.06281v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Tactile AI',
+    image: '/generated/research-neuromorphic-2026.svg',
+    sourceTitle: 'MiTaS multi-resolution tactile imitation learning preprint',
+    sourceUrl: 'https://arxiv.org/html/2606.06281v1',
+    technicalFocus: ['MiTaS', 'multi-resolution tactile sensing', 'event-based touch', 'GelSight'],
+  },
+  {
+    id: 'dream-tac-tactile-world-action-model-2026',
+    title: 'Dream-Tac and tactile world models for contact-rich manipulation',
+    excerpt:
+      'A source-backed brief on Dream-Tac, tactile world-action modeling, predictive contact dynamics, and why robot skin data needs future-state reasoning.',
+    content: `# Dream-Tac and tactile world models for contact-rich manipulation
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Many tactile policies react to what the sensor reports now. Contact-rich manipulation often needs more than reaction. The robot needs to predict how contact will evolve after an action: whether the object will slip, rotate, jam, release, or settle into a stable grasp.
+
+The Dream-Tac preprint is useful because it integrates tactile sensing into a world-action model. The source explicitly models future visual and tactile observations conditioned on robot actions. For RoboSkin.ai, this points toward a stronger tactile AI standard: robot skin should support prediction, not only detection.
+
+## Core idea
+
+A tactile world model links action, visual state, tactile state, and future contact dynamics. Instead of treating tactile feedback as an isolated signal, it becomes part of a model that estimates what will happen next. That is important for insertion, regrasping, manipulation under occlusion, and tasks where contact changes faster than vision can resolve.
+
+| Model input | Why it matters | Evaluation question |
+| --- | --- | --- |
+| Visual state | Object pose and scene context | Does vision lose contact after grasping? |
+| Tactile observation | Local force, contact, or deformation | Does it predict hidden state? |
+| Robot action | What the policy intends to do | Does the model predict action effects? |
+| Future tactile state | Expected contact evolution | Can it warn about slip or jam? |
+
+## Engineering implications
+
+This source matters because it moves robot skin content away from sensor specs alone. A sensor can be sensitive and still weak if the policy cannot use it predictively. A tactile world model asks whether robot skin data can support action-conditioned reasoning.
+
+The practical challenge is data. World models require consistent trajectories, synchronized streams, and enough diverse contact examples to avoid learning only a narrow lab distribution. That ties Dream-Tac back to data collection systems and tactile datasets.
+
+## Evaluation checklist
+
+- Check whether the model predicts future tactile observations, future actions, or both.
+- Ask what tactile sensor type and sampling rate were used.
+- Review whether tasks include hidden contact dynamics such as slip, insertion, or jamming.
+- Separate simulation performance from real robot transfer.
+- Ask whether prediction errors are interpretable during failure.
+- Compare against reactive tactile policies and vision-only policies.
+
+## What not to infer
+
+This source does not mean tactile world models are ready for arbitrary robot hands. It also does not mean more tactile data automatically produces better prediction. World models can fail when the sensor changes, the task distribution shifts, or contacts become too different from training data.
+
+For RoboSkin.ai, the editorial lesson is that tactile AI should include prediction and replay. Robot skin data becomes more valuable when it helps a robot anticipate contact outcomes before failure.
+
+## Source
+
+[arXiv: Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation](https://arxiv.org/html/2606.08737v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Tactile AI',
+    image: '/generated/research-ai-tactile-learning-2025.svg',
+    sourceTitle: 'Dream-Tac tactile world action model preprint',
+    sourceUrl: 'https://arxiv.org/html/2606.08737v1',
+    technicalFocus: ['Dream-Tac', 'tactile world model', 'contact-rich manipulation', 'predictive tactile control'],
+  },
+  {
+    id: 'open-source-magnetic-tactile-calibration-2024',
+    title: 'Open-source magnetic tactile calibration for gripper-agnostic touch',
+    excerpt:
+      'A practical research note on open-source magnetic tactile calibration, three-axis force sensing, in-situ calibration, and why low-cost sensors still need repeatable setup.',
+    content: `# Open-source magnetic tactile calibration for gripper-agnostic touch
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Magnetic tactile sensors are attractive because they can provide multi-axis force information with relatively affordable components. The hard part is often calibration. A sensor that performs well after careful manual calibration may be less useful when installed on a different gripper or replaced in the field.
+
+The open-source magnetic tactile sensor paper is useful because it focuses on automatic, in-situ, gripper-agnostic calibration. For RoboSkin.ai, this is exactly the kind of deployment detail that separates a sensor demo from a usable robot skin route.
+
+## Core idea
+
+Magnetic tactile sensing typically tracks the movement of magnets through magnetic field measurements. From that movement, the system estimates forces or deformation. Calibration maps raw magnetic readings to meaningful force outputs. If the sensor can calibrate automatically after being mounted, it reduces setup friction.
+
+| Calibration issue | Why it matters | What to verify |
+| --- | --- | --- |
+| Manual data collection | Slow and operator-dependent | Repeatability across users |
+| Mounting geometry | Sensor behavior changes after installation | In-situ calibration |
+| Three-axis force | More useful than scalar pressure | Ground-truth force validation |
+| Open-source hardware | Easier reproduction | Fabrication tolerance and documentation |
+
+## Engineering implications
+
+Open-source magnetic tactile calibration matters for robot skin because low-cost sensors are only useful if they can be reproduced and maintained. A cheap sensor that takes hours to calibrate is not cheap at system level. The better question is total setup cost: fabrication, mounting, calibration, validation, and replacement.
+
+This topic also connects to robot hand experiments. Grippers vary widely in jaw geometry, material, compliance, and payload. A gripper-agnostic calibration method is valuable because it lets teams test tactile feedback without redesigning calibration for every embodiment.
+
+## Evaluation checklist
+
+- Check whether calibration happens after the sensor is mounted on the gripper.
+- Ask what ground-truth force device was used.
+- Review normal and shear force accuracy separately.
+- Test repeatability after sensor removal and replacement.
+- Inspect whether fabrication files and calibration code are actually available.
+- Compare calibration time against manual procedures.
+
+## What not to infer
+
+This source does not mean magnetic tactile sensors are universally better than capacitive, optical, resistive, or piezoelectric designs. Magnetic sensing has its own limits around interference, magnet placement, deformation range, and packaging.
+
+For RoboSkin.ai, the editorial lesson is that calibration belongs on the page. A tactile sensor route without calibration details is incomplete.
+
+## Source
+
+[arXiv: Automatic Calibration for an Open-source Magnetic Tactile Sensor](https://arxiv.org/abs/2405.18582)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Magnetic Tactile Sensing',
+    image: '/generated/research-scalable-manufacturing-2025.svg',
+    sourceTitle: 'Open-source magnetic tactile calibration preprint',
+    sourceUrl: 'https://arxiv.org/abs/2405.18582',
+    technicalFocus: ['open-source magnetic tactile calibration', 'three-axis force sensing', 'in-situ calibration', 'robot grippers'],
+  },
+  {
+    id: 'eflesh-customizable-magnetic-touch-sensing-2025',
+    title: 'eFlesh and customizable magnetic touch sensing for robot grippers',
+    excerpt:
+      'A source-backed note on eFlesh, cut-cell microstructures, 3D-printable magnetic tactile sensors, low-cost fabrication, and robot gripper deployment tradeoffs.',
+    content: `# eFlesh and customizable magnetic touch sensing for robot grippers
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Robot skin adoption is slowed by cost, fabrication difficulty, and poor fit to real gripper geometry. A sensor that is accurate but hard to manufacture or customize may not spread beyond a lab. The eFlesh preprint is useful because it focuses on highly customizable magnetic touch sensing using cut-cell microstructures and accessible fabrication.
+
+The source frames eFlesh as a low-cost tactile sensor that can be fabricated with common 3D printing tools and off-the-shelf magnets. For RoboSkin.ai, the useful point is not that every team should print sensors. The useful point is that fabrication workflow is part of tactile sensor evaluation.
+
+## Core idea
+
+eFlesh uses printed microstructures and embedded magnetic elements so that contact deformation can be sensed magnetically. The cut-cell geometry allows customization to different shapes. That matters for grippers because contact surfaces are rarely identical. A sensor pad for a parallel gripper, soft jaw, curved finger, or fingertip needs different geometry.
+
+| Design factor | Why it matters | What to verify |
+| --- | --- | --- |
+| Custom geometry | Fits different grippers and surfaces | CAD-to-sensor workflow |
+| Magnetic sensing | Can estimate deformation and force | Calibration and interference |
+| Low-cost materials | Reduces entry barrier | Reproducibility across printers |
+| Cut-cell structure | Tunes compliance and response | Durability under repeated grasps |
+
+## Engineering implications
+
+Customizable tactile sensing is valuable when a robot team needs a sensor for a specific end effector. Off-the-shelf flat sensors often do not match the robot. A fabrication route that adapts to geometry can reduce integration friction, but it shifts responsibility to calibration, mechanical repeatability, and documentation.
+
+The strongest use of this source is as a manufacturing lens. If a tactile sensor can be printed quickly, the next question is whether two printed sensors behave similarly enough for a policy to transfer. Low cost is useful only if the data remains reliable.
+
+## Evaluation checklist
+
+- Check what printer, material, magnets, and magnetometer hardware are required.
+- Ask whether the sensor works on the target gripper geometry.
+- Review contact localization, force estimation, and slip detection separately.
+- Test multiple printed copies to see fabrication variation.
+- Look for open-source design files, code, and calibration procedures.
+- Evaluate abrasion, compression fatigue, and magnet stability over time.
+
+## What not to infer
+
+This source does not mean 3D-printed tactile sensors are ready for every industrial or humanoid hand. Printed materials, magnets, and electronics may change behavior under heat, wear, contamination, and high load.
+
+For RoboSkin.ai, eFlesh supports a practical rule: tactile sensor pages should discuss how the sensor is made, replaced, and calibrated, not only how it performs in one demo.
+
+## Source
+
+[arXiv: eFlesh: Highly customizable Magnetic Touch Sensing using Cut-Cell Microstructures](https://arxiv.org/html/2506.09994v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Magnetic Tactile Sensing',
+    image: '/generated/research-scalable-manufacturing-2025.svg',
+    sourceTitle: 'eFlesh magnetic touch sensing preprint',
+    sourceUrl: 'https://arxiv.org/html/2506.09994v1',
+    technicalFocus: ['eFlesh', 'magnetic tactile sensing', '3D-printable sensors', 'robot grippers'],
+  },
+  {
+    id: 'freetacman-robot-free-visuotactile-data-collection-2025',
+    title: 'FreeTacMan and robot-free visuo-tactile data collection',
+    excerpt:
+      'A source-backed brief on FreeTacMan, robot-free visuo-tactile data collection, human demonstrations, tactile datasets, and scaling contact-rich manipulation data.',
+    content: `# FreeTacMan and robot-free visuo-tactile data collection
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Tactile AI needs data. Collecting robot tactile data is slow because the sensor is often tied to a specific robot, gripper, controller, and task setup. The FreeTacMan preprint is useful because it explores robot-free data collection using a human-centric visuo-tactile device.
+
+The source describes a wearable or handheld data collection approach with visuo-tactile grippers and optical tracking. It aims to capture human interaction, tactile feedback, and motion information for contact-rich manipulation. For RoboSkin.ai, this matters because data collection is one of the bottlenecks between tactile sensor hardware and useful robot policies.
+
+## Core idea
+
+FreeTacMan separates tactile data collection from a fixed robot embodiment. Instead of requiring a robot arm for every demonstration, a human operator can collect visuo-tactile examples through a portable device. That can make task coverage broader and faster, but it also raises transfer questions.
+
+| Data issue | Why it matters | FreeTacMan angle |
+| --- | --- | --- |
+| Robot collection cost | Robot time is slow and expensive | Human-centric collection |
+| Tactile feedback | Demonstrator needs to feel contact | Real-time tactile interface |
+| Pose tracking | Tactile data needs motion context | Optical tracking |
+| Embodiment gap | Human device differs from robot | Policy transfer validation |
+
+## Engineering implications
+
+Robot skin content often focuses on sensors, but datasets are equally important. A sensor without data can only support demos. A dataset without a transfer path may not improve real manipulation. FreeTacMan is useful because it makes the data pipeline visible: sensor, operator, tracking, synchronization, task, and robot deployment.
+
+The hard question is embodiment. A human-held gripper does not move exactly like the robot that will execute the policy. The collected tactile data must be mapped into robot-action space. That mapping is where many tactile learning systems become fragile.
+
+## Evaluation checklist
+
+- Check which tactile sensor is used and whether it matches the deployment robot.
+- Ask how visual, tactile, and pose streams are synchronized.
+- Review the number and diversity of contact-rich tasks.
+- Separate data collection speed from downstream robot performance.
+- Ask how human demonstrations are converted into robot actions.
+- Look for public dataset or code availability before assuming reproducibility.
+
+## What not to infer
+
+This source does not mean robot-free collection removes the need for robot trials. It can reduce data collection friction, but final policies still need validation on the target robot, gripper, objects, and environment.
+
+For RoboSkin.ai, the editorial lesson is that tactile AI pages should explain where data comes from. Robot skin becomes useful when sensing, data collection, policy learning, and deployment are connected.
+
+## Source
+
+[arXiv: FreeTacMan: Robot-free Visuo-Tactile Data Collection System for Contact-rich Manipulation](https://arxiv.org/html/2506.01941v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Tactile Data',
+    image: '/generated/research-ai-tactile-learning-2025.svg',
+    sourceTitle: 'FreeTacMan robot-free visuo-tactile data collection preprint',
+    sourceUrl: 'https://arxiv.org/html/2506.01941v1',
+    technicalFocus: ['FreeTacMan', 'visuo-tactile data collection', 'human demonstrations', 'contact-rich manipulation'],
+  },
+  {
+    id: 'humanoid-visual-tactile-action-dataset-2025',
+    title: 'Humanoid visual-tactile-action dataset for contact-rich manipulation',
+    excerpt:
+      'A research note on humanoid visual-tactile-action datasets, contact-rich manipulation, multimodal robot data, and why humanoid tactile learning needs synchronized action context.',
+    content: `# Humanoid visual-tactile-action dataset for contact-rich manipulation
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Humanoid robots make tactile learning harder because contact can happen across hands, fingers, palms, tools, and body surfaces. A dataset that records only images or only tactile frames misses the action context that created the contact. The humanoid visual-tactile-action dataset preprint is useful because it frames contact-rich manipulation as multimodal data: vision, touch, and action.
+
+For RoboSkin.ai, this source helps connect robot skin with humanoid learning. Humanoid robot skin is not just a material surface. It is part of a data system that must connect perception to control.
+
+## Core idea
+
+A visual-tactile-action dataset pairs what the robot sees, what it feels, and what it does. That pairing matters because the same tactile reading can mean different things depending on the action. A rising pressure signal during insertion, grasping, or sliding may imply different controller responses.
+
+| Data stream | What it contributes | Failure if missing |
+| --- | --- | --- |
+| Vision | Scene, object, and pose context | Contact has no external reference |
+| Tactile signal | Local contact state | Hidden interactions remain invisible |
+| Action | Robot motion and intent | Touch cannot be interpreted causally |
+| Time alignment | Event order | Policy learns stale or wrong contact |
+
+## Engineering implications
+
+Humanoid tactile datasets should be judged by synchronization and task diversity. A dataset with many frames but weak action alignment may be less useful than a smaller dataset with precise timing and clear contact events. Contact-rich manipulation depends on event order.
+
+This source also highlights why robot skin pages need dataset language. A skin that covers a humanoid hand is only a starting point. The site should ask how data is recorded, aligned, labeled, replayed, and converted into policy training.
+
+## Evaluation checklist
+
+- Check which tactile hardware and humanoid platform were used.
+- Ask whether actions, tactile data, and images are timestamped together.
+- Review task diversity and object diversity.
+- Separate dataset size from data quality.
+- Ask whether the dataset includes failures, recovery, and edge cases.
+- Look for public access, license, and benchmark tasks.
+
+## What not to infer
+
+This source does not mean one dataset solves humanoid tactile learning. Humanoid embodiments vary widely, and policies trained on one sensor layout may not transfer to another hand. The useful lesson is that tactile data needs action context.
+
+For RoboSkin.ai, the editorial takeaway is direct: humanoid robot skin content should connect sensing coverage to synchronized visual-tactile-action data.
+
+## Source
+
+[arXiv: A Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation](https://arxiv.org/html/2510.25725v2)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Tactile Data',
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    sourceTitle: 'Humanoid visual-tactile-action dataset preprint',
+    sourceUrl: 'https://arxiv.org/html/2510.25725v2',
+    technicalFocus: ['Humanoid visual-tactile-action dataset', 'contact-rich manipulation', 'humanoid robot skin', 'multimodal robot data'],
+  },
+  {
+    id: 'tactile-robotics-outlook-research-landscape-2025',
+    title: 'Tactile Robotics outlook for robot skin research priorities',
+    excerpt:
+      'A source-backed research landscape note on Tactile Robotics outlook, sensor types, distributed tactile sensing, simulation, benchmarking, and data interpretation.',
+    content: `# Tactile Robotics outlook for robot skin research priorities
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Individual robot skin papers can be narrow: one sensor, one material, one hand, one task. The Tactile Robotics outlook article is useful because it steps back and maps the field. It discusses tactile sensor types, distributed tactile sensing, simulation tools, benchmarking, and tactile data interpretation as part of a wider robotics research landscape.
+
+For RoboSkin.ai, this source is useful as a category map. It helps keep the site from becoming a pile of unrelated papers. Robot skin content needs a structure that connects hardware, data, control, benchmarking, and applications.
+
+## Core idea
+
+Tactile robotics is not only sensor fabrication. It includes how touch is sensed, simulated, interpreted, benchmarked, and used for robot behavior. That matches the direction of RoboSkin.ai: robot skin should be treated as a stack, not a single layer.
+
+| Research layer | What it covers | RoboSkin.ai use |
+| --- | --- | --- |
+| Sensor types | Materials, readout, modality | Categorize hardware routes |
+| Distributed sensing | Skin over hands or bodies | Evaluate coverage and wiring |
+| Simulation | Synthetic contact data | Discuss sim-to-real limits |
+| Benchmarking | Comparable tasks and metrics | Avoid isolated demo claims |
+| Data interpretation | Turning signals into state | Connect tactile AI to action |
+
+## Engineering implications
+
+A field outlook is not a deployment guide, but it is useful for building a content taxonomy. If a note only describes sensitivity, it belongs in hardware. If it describes a dataset, it belongs in tactile data. If it describes a policy, it belongs in tactile AI. If it describes body coverage, it belongs in distributed robot skin.
+
+This matters for SEO as well as technical quality. Search engines and readers need topic boundaries. A strong site should make those boundaries explicit through internal links, categories, and comparison pages.
+
+## Evaluation checklist
+
+- Use the outlook to identify which layer each new paper belongs to.
+- Separate tactile sensor research from tactile robotics behavior.
+- Ask whether a source contributes hardware, data, simulation, benchmarking, or control.
+- Look for benchmarkable claims instead of one-off demonstrations.
+- Track gaps: calibration, durability, large-area wiring, and policy transfer.
+- Use review papers as maps, not as proof of deployment readiness.
+
+## What not to infer
+
+This source should not be treated as evidence that any single robot skin technology is commercially ready. It is a landscape paper. Its value is organizing the field and identifying research directions.
+
+For RoboSkin.ai, the editorial lesson is to keep every research note attached to a layer in the tactile robotics stack. That makes the site more useful than a generic blog archive.
+
+## Source
+
+[arXiv: Tactile Robotics: An Outlook](https://arxiv.org/html/2508.11261v1)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Field Map',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    sourceTitle: 'Tactile Robotics outlook preprint',
+    sourceUrl: 'https://arxiv.org/html/2508.11261v1',
+    technicalFocus: ['Tactile Robotics outlook', 'distributed tactile sensing', 'tactile benchmarking', 'robot skin research map'],
+  },
+  {
     id: 'wet-slippage-bionic-fingertip-eskin-2026',
     title: 'Wet slippage detection for bionic fingertip e-skin',
     excerpt:
