@@ -22,6 +22,11 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /transferable force sensing/i);
   assert.match(blogData, /DexSkin/i);
   assert.match(blogData, /fluid-based robot skin/i);
+  assert.match(blogData, /optical\/electronic artificial skin/i);
+  assert.match(blogData, /origami capacitive robotic e-skin/i);
+  assert.match(blogData, /slip-actuated bionic tactile sensing/i);
+  assert.match(blogData, /energy constrained touch encoding/i);
+  assert.match(blogData, /wet slippage detection/i);
 
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/research\/news\/graphene-based-artificial-skin/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s42256-025-01053-3/);
@@ -30,6 +35,11 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2509\.18830v1/);
   assert.match(blogData, /https:\/\/link\.springer\.com\/article\/10\.1186\/s40648-025-00326-1/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41528-025-00431-6/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41528-026-00563-3/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-025-61843-6/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-026-68858-7/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41598-026-41096-z/);
   assert.match(blogData, /Updated technical brief - May 2026/);
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);

@@ -21,6 +21,311 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'wet-slippage-bionic-fingertip-eskin-2026',
+    title: 'Wet slippage detection for bionic fingertip e-skin',
+    excerpt:
+      'A source-backed note on AI-integrated bionic fingertip e-skin, wet slippage detection, fingerprint microtextures, and why dry-surface slip claims are not enough.',
+    content: `# Wet slippage detection for bionic fingertip e-skin
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Many robot gripper and e-skin papers demonstrate slip detection on dry surfaces. That is useful, but it is not enough for real manipulation. Objects can be wet, oily, dusty, textured, or low friction. A sensor that detects slip only under clean dry conditions may fail in kitchens, warehouses, medical handling, agriculture, or outdoor service robots.
+
+The Scientific Reports article on AI-integrated bionic fingertip e-skin is useful because it targets wet slippage detection. The source describes a micropatterned structure inspired by human fingerprints and reports slip detection under water- or oil-coated surface conditions. For RoboSkin.ai, the key value is the shift from generic slip detection to surface-condition-aware slip detection.
+
+## Core idea
+
+The research frames slip as a dynamic surface interaction, not just a threshold on force. The sensor uses a patterned outer layer to interact with microtextures and capture high-speed signal changes during sliding. That matters because wet slip can look different from dry slip: friction drops, vibration patterns change, and the object may move before a simple force threshold warns the controller.
+
+| Slip condition | Why it is harder | What to verify |
+| --- | --- | --- |
+| Dry surface | Baseline case for many sensors | Normal and shear response |
+| Water-coated surface | Lubrication changes friction | Early sliding signal |
+| Oil-coated surface | Low-friction film can hide contact changes | High-speed slip response |
+| Microtextured object | Fine texture affects vibration | Signal bandwidth and noise |
+
+## Engineering implications
+
+Wet slippage detection is especially relevant for robot hands that touch food, packaging, glass, tools, medical objects, or outdoor surfaces. A robot can have good force control and still lose an object if the tactile system cannot recognize the change from static contact to sliding contact. The system also needs a controller that reacts quickly enough to adjust grip before the object escapes.
+
+For content strategy, this topic deserves its own route because "slip detection" is too broad. A page that only says a sensor detects slip may hide the most important deployment question: slip under what surface condition?
+
+## Evaluation checklist
+
+- Check whether slip was tested on dry, wet, oily, and low-friction surfaces.
+- Ask whether the sensor reports early slip or only visible sliding after movement begins.
+- Review the sampling rate and signal bandwidth for microvibration detection.
+- Separate texture recognition from slip control.
+- Ask whether the sensor was mounted on a robotic finger or only tested as a film.
+- Look for controller-loop experiments, not only offline classification.
+
+## What not to infer
+
+This source does not mean every fingerprint-inspired e-skin can handle all wet environments. It also does not prove cleaning resistance, long-term abrasion resistance, or readiness for food, medical, or industrial certification. Wet slip sensing still depends on surface chemistry, sensor packaging, contact force, controller timing, and contamination.
+
+For RoboSkin.ai, the useful editorial rule is simple: slip detection claims should state the surface condition. Dry-surface slip detection, wet-surface slip detection, and oil-film slip detection are not interchangeable.
+
+## Source
+
+[Scientific Reports: AI-integrated bionic fingertip E-Skin for precision slippage detection in wet environments](https://www.nature.com/articles/s41598-026-41096-z)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Slip Detection',
+    image: '/generated/research-multimodal-sensing-2025.svg',
+    sourceTitle: 'Scientific Reports wet slippage bionic fingertip e-skin article',
+    sourceUrl: 'https://www.nature.com/articles/s41598-026-41096-z',
+    technicalFocus: ['wet slippage detection', 'bionic fingertip e-skin', 'fingerprint microtexture', 'robotic hands'],
+  },
+  {
+    id: 'spiking-touch-encoding-large-area-eskin-2026',
+    title: 'Energy constrained touch encoding for large-area e-skin',
+    excerpt:
+      'A technical brief on bioinspired spiking architecture, large-area soft e-skin, low-power tactile localization, and neuromorphic touch processing.',
+    content: `# Energy constrained touch encoding for large-area e-skin
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Large-area robot skin creates a data problem. More surface coverage means more signals, more wiring, more sampling, and more computation. If every contact point needs dense high-rate processing, the tactile system becomes difficult to scale on mobile robots, humanoids, prosthetics, or assistive devices.
+
+The Nature Communications article on bioinspired spiking architecture is useful because it connects e-skin hardware with energy constrained touch encoding. The source describes a Fiber Bragg Grating-based e-skin combined with a spiking neural network that mimics early somatosensory processing. For RoboSkin.ai, the important idea is not just neuromorphic branding. It is the need to process tactile signals under energy, wiring, and latency constraints.
+
+## Core idea
+
+Spiking systems process information through events rather than dense continuous frames. That can be attractive for robot skin because many tactile surfaces are quiet most of the time, then suddenly produce local contact events. Event-like processing may help focus computation where contact changes happen.
+
+| Scaling pressure | Why it appears | What spiking touch processing can test |
+| --- | --- | --- |
+| Large coverage | More sensing locations | Distributed event encoding |
+| Power limits | Mobile robots cannot spend unlimited compute on touch | Low-power processing |
+| Latency | Contact response must be fast | Event-driven localization |
+| Multitouch | More than one area may be active | Parallel tactile processing |
+
+## Engineering implications
+
+The strongest lesson is architectural. Robot skin should not be evaluated only as a sensor material. It also needs a signal-processing plan. A large skin surface that requires heavy centralized processing may work in the lab and fail on a mobile platform. Energy constrained touch encoding asks whether tactile intelligence can move closer to the surface.
+
+This matters for Physical AI because tactile feedback becomes useful only when it can influence action. A delayed contact map is less valuable than a lower-power contact event that arrives quickly enough to change grip, stop motion, or log an interaction.
+
+## Evaluation checklist
+
+- Check whether power consumption is measured at the sensor, processor, or whole system level.
+- Ask whether the system handles multitouch and dynamic contact, not only a single static touch.
+- Review localization accuracy under constrained sensor resolution.
+- Compare event-like processing against dense frame processing.
+- Ask whether the neuromorphic chip result is a real hardware implementation or only simulation.
+- Look for latency and wiring analysis before assuming scalability.
+
+## What not to infer
+
+This source does not mean every robot skin should use spiking neural networks. It also does not prove that neuromorphic processing is always better than conventional embedded inference. The right architecture depends on surface area, sensing modality, latency target, available power, and controller requirements.
+
+For RoboSkin.ai, this note supports a narrower claim: large-area e-skin pages should include compute and energy constraints. A tactile sensor is not scalable if the readout and processing architecture cannot scale with it.
+
+## Source
+
+[Nature Communications: Bioinspired spiking architecture enables energy constrained touch encoding](https://www.nature.com/articles/s41467-026-68858-7)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Neuromorphic Touch',
+    image: '/generated/research-neuromorphic-2026.svg',
+    sourceTitle: 'Nature Communications bioinspired spiking touch encoding article',
+    sourceUrl: 'https://www.nature.com/articles/s41467-026-68858-7',
+    technicalFocus: ['energy constrained touch encoding', 'spiking neural network', 'large-area e-skin', 'neuromorphic tactile sensing'],
+  },
+  {
+    id: 'origami-capacitive-robotic-eskin-2026',
+    title: 'Origami capacitive robotic e-skin for large-area tactile sensing',
+    excerpt:
+      'A source-backed brief on origami capacitive robotic e-skin, large-area coverage, super-resolution tactile localization, shear sensing, and proximity detection.',
+    content: `# Origami capacitive robotic e-skin for large-area tactile sensing
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Large-area tactile skin has a basic contradiction. Robots need broad coverage, but conventional dense sensor arrays increase wiring, readout complexity, and calibration burden. The npj Flexible Electronics article on origami capacitive robotic e-skin is useful because it treats structure as part of the sensing strategy.
+
+The source describes a bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities. It reports a large-area skin using an origami-with-scale structure, capacitive sensing, shear-force sensing, proximity sensing, and machine-learning-assisted localization. For RoboSkin.ai, the useful theme is how mechanical structure can reduce the gap between broad coverage and detailed contact information.
+
+## Core idea
+
+Origami structures can transmit deformation across a surface. That means local contact can influence a larger mechanical pattern, allowing a sensing system to infer contact location and force from fewer or differently arranged signals than a simple dense grid might require. This is why the source is relevant to large-area robot skin, not only wearable electronics.
+
+| Design element | Robot skin value | What to verify |
+| --- | --- | --- |
+| Origami structure | Deformation can propagate across a large surface | Stability under repeated folding |
+| Capacitive readout | Detects deformation and proximity effects | Crosstalk and environmental sensitivity |
+| Shear-force sensing | Adds tangential contact context | Calibration across curved surfaces |
+| Machine learning | Improves localization from indirect signals | Generalization outside training conditions |
+
+## Engineering implications
+
+Super-resolution tactile sensing sounds attractive, but the engineering question is specific: does the inferred contact map remain reliable after mounting, bending, aging, and environmental change? A model that performs well on a controlled sheet may need retraining when placed on a robot arm, gripper, or torso panel.
+
+The proximity layer is also important. Robot skin can be more than a contact sensor if it warns about approaching conductive objects. For human-robot interaction, that creates a route from tactile skin to collision-aware surfaces. But proximity sensing has its own limits around material type, humidity, grounding, and nearby electronics.
+
+## Evaluation checklist
+
+- Check the actual tested skin area and compare it with the target robot surface.
+- Ask whether super-resolution is validated on unseen contact locations and load patterns.
+- Separate normal force, shear force, and proximity sensing performance.
+- Review whether multi-point touch works for adjacent and non-adjacent contacts.
+- Look for durability tests under repeated folding, bending, and mounting strain.
+- Ask how much training data the machine-learning model needs.
+
+## What not to infer
+
+This source does not mean origami capacitive e-skin is ready for every humanoid surface. It supports a promising architecture for large-area multimodal sensing, but deployment still depends on packaging, calibration, wiring, environmental robustness, and controller integration.
+
+For RoboSkin.ai, the editorial lesson is that large-area skin should be discussed as structure plus sensing plus inference. A surface can be mechanically clever and still need careful validation before it becomes robot-ready.
+
+## Source
+
+[npj Flexible Electronics: A bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities](https://www.nature.com/articles/s41528-026-00563-3)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Large-Area E-Skin',
+    image: '/generated/research-scalable-manufacturing-2025.svg',
+    sourceTitle: 'npj Flexible Electronics origami capacitive robotic e-skin article',
+    sourceUrl: 'https://www.nature.com/articles/s41528-026-00563-3',
+    technicalFocus: ['origami capacitive robotic e-skin', 'large-area tactile sensing', 'super-resolution localization', 'proximity sensing'],
+  },
+  {
+    id: 'slip-actuated-etextile-tactile-sensing-2025',
+    title: 'Slip-actuated bionic tactile sensing with E-textile',
+    excerpt:
+      'A source-backed note on slip-actuated bionic tactile sensing, dynamic DC generator E-textile, robotic fingers, and real-time grasp monitoring.',
+    content: `# Slip-actuated bionic tactile sensing with E-textile
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Slip detection is central to dexterous manipulation. A robot can touch an object, apply force, and still fail if it cannot detect the moment contact begins to slide. The Nature Communications article on slip-actuated bionic tactile sensing is useful because it treats slip as a distinct dynamic event and pairs it with a normal force sensing route.
+
+The source describes a slip-actuated bionic tactile sensing system using a dynamic direct-current generator integrated into stretchable electronic textile. It is designed to work with robotic fingers and support fast slip and grasp monitoring. For RoboSkin.ai, this source strengthens the distinction between static pressure sensing and dynamic slip-aware touch.
+
+## Core idea
+
+Human touch uses different receptor behaviors for slowly changing pressure and fast changing events. A robot skin system can follow a similar principle by separating normal force monitoring from fast slip event detection. That is useful because the controller needs both: how hard the robot is pressing and whether the object is starting to move.
+
+| Signal type | Robot question | Why it matters |
+| --- | --- | --- |
+| Normal force | How hard is the finger pressing? | Prevents weak grip or crushing |
+| Slip event | Is the object starting to slide? | Enables fast corrective grip |
+| Multidirectional force | Which way is contact changing? | Helps adjust pose and force |
+| Textile integration | Can the sensor conform to a finger? | Supports skin-like placement |
+
+## Engineering implications
+
+Dynamic slip sensing is not just another feature label. It changes the controller problem. A robot may not need to wait until a camera sees object motion. It can use tactile signals to increase grip, reposition contact, or pause motion. That is one reason slip detection should have its own content cluster rather than being buried inside general tactile sensing pages.
+
+The E-textile angle also matters because robot skin is a surface. Stretchable textile-like integration may help fit curved fingers or soft gripper forms, but it raises questions about durability, washing, abrasion, electrical stability, and attachment.
+
+## Evaluation checklist
+
+- Ask whether slip is detected before visible object displacement.
+- Separate normal force measurement from dynamic slip signal generation.
+- Check whether tests include different directions, speeds, and surface textures.
+- Review whether the sensor is integrated into robotic fingers or only tested on a bench.
+- Ask how the controller uses slip events in a feedback loop.
+- Look for durability evidence under stretching, repeated contact, and abrasion.
+
+## What not to infer
+
+This source does not mean every E-textile tactile sensor is ready for robot hands. It also does not prove all slipping objects can be controlled. Slip behavior depends on surface material, contact geometry, contamination, robot speed, and controller timing.
+
+For RoboSkin.ai, the editorial lesson is that slip detection pages should explain timing. A useful slip sensor is not only accurate; it must produce a signal early enough for the robot to act.
+
+## Source
+
+[Nature Communications: Slip-actuated bionic tactile sensing system with dynamic DC generator integrated E-textile for dexterous robotic manipulation](https://www.nature.com/articles/s41467-025-61843-6)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Slip Detection',
+    image: '/generated/research-multimodal-sensing-2025.svg',
+    sourceTitle: 'Nature Communications slip-actuated bionic tactile sensing article',
+    sourceUrl: 'https://www.nature.com/articles/s41467-025-61843-6',
+    technicalFocus: ['slip-actuated bionic tactile sensing', 'E-textile', 'dynamic slip detection', 'robotic fingers'],
+  },
+  {
+    id: 'optical-electronic-artificial-skin-molecular-sensing-2025',
+    title: 'Optical/electronic artificial skin for molecular sensing',
+    excerpt:
+      'A research note on optical/electronic artificial skin, CNT haptic layers, near-infrared molecular sensing, force-temperature sensing, and robotic perception beyond touch.',
+    content: `# Optical/electronic artificial skin for molecular sensing
+
+**Updated technical brief - June 2026**
+
+## Why this source matters
+
+Robot skin is usually discussed as a pressure, strain, force, or slip layer. The npj Flexible Electronics article on optical/electronic artificial skin expands the category by adding chemical molecular sensing. That makes it useful for a research map because it shows where e-skin can move beyond physical contact signals.
+
+The source describes optical/electronic artificial skin that combines a carbon nanotube-based haptic electronic skin with optical fibers. The system is reported to sense force and temperature while collecting near-infrared optical signals from molecules. Demonstrations include medical-oriented sensing and fruit harvesting/grading scenarios. For RoboSkin.ai, the key lesson is multimodal perception discipline: physical and chemical sensing should be separated, then evaluated together.
+
+## Core idea
+
+The design combines electronic haptic sensing and optical spectroscopy. The electronic layer handles force and temperature context, while the optical path provides molecular information. In robot terms, that means the skin is not only detecting that contact happened; it may also help infer something about what was touched.
+
+| Modality | What it can indicate | What to verify |
+| --- | --- | --- |
+| Force | Contact load and firmness context | Calibration and range |
+| Temperature | Thermal interaction | Response time and drift |
+| Near-infrared signal | Molecular or material cues | Specificity and environmental robustness |
+| Robot integration | Whether sensing survives handling tasks | Packaging and task validation |
+
+## Engineering implications
+
+Chemical-aware robot skin is appealing for agriculture, medical robotics, food handling, and inspection tasks. But it also raises the bar for evidence. A pressure sensor can often be validated with mechanical loads. Molecular sensing requires controlled samples, spectral interpretation, calibration, and interference analysis. A robot in the field may face changing light, surface moisture, temperature, contamination, and geometry.
+
+This is why the content should not collapse everything into "multimodal e-skin." Force-temperature sensing and molecular sensing are different signal families. They require different validation methods and different failure analysis.
+
+## Evaluation checklist
+
+- Check which physical signals and molecular signals are measured separately.
+- Ask whether the optical signal is robust under surface moisture, lighting, and contact variation.
+- Review whether the robot demonstration uses sensing for action or only post-hoc classification.
+- Separate medical or agriculture proof-of-concept from general robot skin readiness.
+- Look for calibration methods for both haptic and optical channels.
+- Ask whether the optical fibers affect flexibility, durability, or mounting.
+
+## What not to infer
+
+This source does not mean robot skin can generally diagnose medical conditions or grade fruit in arbitrary real-world settings. Those are source-specific demonstrations and require careful application boundaries. It also does not mean every artificial skin needs chemical sensing.
+
+For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be unpacked by modality. If a source claims force, temperature, and molecular sensing, each channel needs its own evidence and its own limitations.
+
+## Source
+
+[npj Flexible Electronics: An optical/electronic artificial skin extends the robotic sense to molecular sensing](https://www.nature.com/articles/s41528-025-00431-6)
+`,
+    author: 'RoboSkin technical editor',
+    date: '2026-06-18',
+    updated: '2026-06-18',
+    readTime: '5 min read',
+    category: 'Multimodal E-Skin',
+    image: '/generated/research-multimodal-sensing-2025.svg',
+    sourceTitle: 'npj Flexible Electronics optical/electronic artificial skin article',
+    sourceUrl: 'https://www.nature.com/articles/s41528-025-00431-6',
+    technicalFocus: ['optical/electronic artificial skin', 'molecular sensing', 'near-infrared sensing', 'multimodal e-skin'],
+  },
+  {
     id: 'genforce-transferable-force-sensing-2026',
     title: 'GenForce and transferable force sensing across tactile sensors',
     excerpt:
