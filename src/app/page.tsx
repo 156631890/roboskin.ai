@@ -61,15 +61,15 @@ export default function Home() {
         <div className="container-shell">
           <div className="grid gap-7 md:min-h-[calc(100svh-82px)] md:items-center lg:grid-cols-[0.74fr_1.26fr]">
             <div className="hero-copy relative z-10 min-w-0">
-              <p className="quiet-label">Robot touch needs a surface intelligence layer</p>
-              <h1 aria-label="Robot skin, tactile AI, and Physical AI authority portal" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
+              <p className="quiet-label">Source-backed tactile sensing map</p>
+              <h1 aria-label="Robot skin, tactile AI, and Physical AI research map" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
                 <span className="block">Robot skin</span>
                 <span className="block">tactile AI</span>
-                <span className="block">Physical AI authority portal</span>
+                <span className="block">Physical AI research map</span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
-                RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensors, humanoid robot skin, and Physical AI
-                context for people tracking contact-aware robotics.
+                RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensors, humanoid robot skin, and Physical AI
+                context for engineers, researchers, and category analysts following contact-aware robotics.
               </p>
 
               <div className="hero-answer mt-7 max-w-xl">
@@ -92,7 +92,7 @@ export default function Home() {
                   Read Physical AI
                 </Link>
                 <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
-                  Submit a source
+                  Submit source
                 </Link>
               </div>
             </div>
@@ -139,9 +139,9 @@ export default function Home() {
       <section className="deferred-section py-14 md:py-20">
         <div className="container-shell">
           <div className="mb-8 max-w-4xl">
-            <h2 className="text-3xl font-bold text-white md:text-5xl">Find the right robot skin route</h2>
+            <h2 className="text-3xl font-bold text-white md:text-5xl">Find the right robot skin research route</h2>
             <p className="section-copy mt-4">
-              Use this authority index to move from definitions to research, technology evaluation, references, resources, and inquiry paths.
+              Use this research map to move from definitions to papers, technology evaluation, references, library pages, and source-submission paths.
             </p>
           </div>
 
@@ -150,16 +150,16 @@ export default function Home() {
               Robot skin FAQ
             </Link>
             <Link href="/resources" className="font-semibold text-[#c8d1de] hover:text-white">
-              View RoboSkin resources
+              View RoboSkin library
             </Link>
             <Link href="/technology" className="font-semibold text-[#c8d1de] hover:text-white">
               Explore tactile AI technology
             </Link>
             <Link href="/applications" className="btn-secondary">
-              Explore humanoid robot skin applications
+              Explore humanoid robot skin use cases
             </Link>
             <Link href="/downloads" className="btn-secondary">
-              View public references
+              Open reference library
             </Link>
           </div>
 
@@ -191,7 +191,7 @@ export default function Home() {
             </h2>
             <p className="section-copy mt-4">
               In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI,
-              contact feedback, pressure, slip, and tactile sensing. The homepage is the broad authority entry; the
+              contact feedback, pressure, slip, and tactile sensing. The homepage is the broad research map; the
               Physical AI page is the canonical definition route.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -262,7 +262,7 @@ export default function Home() {
               </p>
             </div>
             <Link href="/resources" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
-              View resources {'->'}
+              View library {'->'}
             </Link>
           </div>
 
@@ -304,7 +304,7 @@ export default function Home() {
                   Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
                 </p>
                 <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
-                  Contribute research context {'->'}
+                  Submit research context {'->'}
                 </Link>
               </div>
               <ConversionPathPanel />

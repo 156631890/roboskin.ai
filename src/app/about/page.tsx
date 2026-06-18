@@ -24,6 +24,10 @@ export default function AboutPage() {
             RoboSkin.ai is an information resource for the robot skin and tactile AI category. It is not presented as an operating hardware vendor,
             product catalog, or procurement channel.
           </p>
+          <p className="mt-4 max-w-3xl text-soft">
+            RoboSkin.ai is independent. The name should not be read as an affiliation claim with similarly named robot skin products,
+            companies, labs, or research projects unless a page explicitly supports that relationship.
+          </p>
           <PageHeroVisual visual={pageVisuals.about} className="mt-10" priority />
         </div>
       </section>

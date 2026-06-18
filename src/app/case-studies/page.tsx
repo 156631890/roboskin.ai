@@ -13,15 +13,15 @@ export default function CaseStudiesPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/case-studies'), buildBreadcrumbJsonLd('/case-studies')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Case studies</span>
+          <span className="eyebrow">Context notes</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">Application-context summaries</h1>
             <Link href="/solutions" className="text-accent text-sm font-semibold hover:text-white">
-              View solutions {'->'}
+              View use cases {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            These are conservative summaries of common robot skin contexts. They do not imply active customer work, hardware availability, or performance numbers.
+            These are source-bound summaries of common robot skin contexts. They do not imply active customer work, hardware availability, or performance numbers.
           </p>
           <PageHeroVisual visual={pageVisuals.caseStudies} className="mt-10" priority />
         </div>

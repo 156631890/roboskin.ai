@@ -1,6 +1,6 @@
-# RoboSkin Website
+# RoboSkin.ai
 
-RoboSkin.ai is a Next.js App Router site for tactile sensing in robotics. The current structure focuses on credible product, solution, and contact paths instead of unsupported marketing claims.
+RoboSkin.ai is a Next.js App Router site for robot skin, tactile AI, e-skin, tactile sensing, and Physical AI research context. The current structure presents the site as a source-backed research map, not a hardware vendor, product catalog, or procurement channel.
 
 ## Stack
 
@@ -26,17 +26,17 @@ npm run build
 ## Public routes
 
 - `/` Home
-- `/products`
-- `/solutions`
+- `/products` Guides route
+- `/solutions` Use-case route
 - `/technology`
 - `/resources`
-- `/downloads`
+- `/downloads` Reference library route
 - `/comparison`
-- `/implementation`
+- `/implementation` Research roadmap route
 - `/research`
 - `/research/[id]`
 - `/glossary`
-- `/case-studies`
+- `/case-studies` Context notes route
 - `/faq`
 - `/about`
 - `/contact`
@@ -92,5 +92,5 @@ GEMINI_OFFLINE_MODE=1 npm run generate:images
 
 - Shared site copy and contact details live in `src/content/site.ts`.
 - Navigation and footer read from the same source of truth.
-- Public pages are designed to avoid personal contact handles and unsupported claims.
+- Public pages are designed to avoid personal contact handles, product-vendor language, and unsupported claims.
 - `public/llms.txt`, `sitemap.xml`, and the glossary are maintained as crawl and AI-answering aids.

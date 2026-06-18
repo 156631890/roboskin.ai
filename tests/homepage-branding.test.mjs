@@ -26,7 +26,7 @@ const authorityVisualAssets = [
   'public/generated/authority/research-ros2-tactile-pipeline.webp',
 ];
 
-test('homepage copy reflects the authority portal positioning', async () => {
+test('homepage copy reflects the research map positioning', async () => {
   const [home, layout, site, visuals] = await Promise.all([
     readFile(homePath, 'utf8'),
     readFile(layoutPath, 'utf8'),
@@ -34,16 +34,16 @@ test('homepage copy reflects the authority portal positioning', async () => {
     readFile(visualsPath, 'utf8'),
   ]);
 
-  assert.match(home, /Robot skin, tactile AI, and Physical AI authority portal/);
-  assert.match(home, /Physical AI authority portal/);
+  assert.match(home, /Robot skin, tactile AI, and Physical AI research map/);
+  assert.match(home, /Physical AI research map/);
   assert.match(home, /Physical AI\s+context/);
   assert.doesNotMatch(home, /Physical AI \/ 物理 AI/);
   assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);
   assert.match(home, /href="\/physics-ai"/);
   assert.match(home, /What is robot skin\?/);
   assert.match(home, /Open the robot skin glossary/);
-  assert.match(home, /Submit a source/);
-  assert.match(home, /Contribute research context/);
+  assert.match(home, /Submit source/);
+  assert.match(home, /Submit research context/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
   assert.match(home, /Track the tactile AI stack with source-like entries/);
   assert.match(home, /Tactile AI stack map/);
@@ -95,7 +95,7 @@ test('homepage brand visual assets exist and are wired into the hero', async () 
 
   assert.match(site, /hero:\s*\{/);
   assert.match(site, /brandBoard:\s*\{/);
-  assert.match(home, /Robot touch needs a surface intelligence layer/);
+  assert.match(home, /Source-backed tactile sensing map/);
 });
 
 test('homepage authority visual assets are generated and wired into components', async () => {

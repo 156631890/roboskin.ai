@@ -13,7 +13,7 @@ export default function DownloadsPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/downloads'), buildBreadcrumbJsonLd('/downloads')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Downloads</span>
+          <span className="eyebrow">Reference library</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">Robot skin learning resources</h1>
             <Link href="/research" className="text-accent text-sm font-semibold hover:text-white">

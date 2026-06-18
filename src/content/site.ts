@@ -172,9 +172,9 @@ export const site = {
   tagline: 'Robot skin and tactile AI information hub',
   description: 'A public information hub for robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics.',
   contact: {
-    primaryEmail: 'messigoat147@gmail.com',
-    ownerEmail: 'messigoat147@gmail.com',
-    inquiryEmail: 'messigoat147@gmail.com',
+    primaryEmail: 'contact@roboskin.ai',
+    ownerEmail: 'contact@roboskin.ai',
+    inquiryEmail: 'contact@roboskin.ai',
     legalEmail: 'legal@roboskin.ai',
     privacyEmail: 'privacy@roboskin.ai',
     whatsapp: '15755596955',
@@ -194,23 +194,23 @@ export const primaryNavigation = [
   { href: '/', label: 'Home' },
   { href: '/research', label: 'Research' },
   { href: '/glossary', label: 'Glossary' },
-  { href: '/applications', label: 'Applications' },
+  { href: '/applications', label: 'Use Cases' },
   { href: '/technology', label: 'Technology' },
-  { href: '/resources', label: 'Resources' },
+  { href: '/resources', label: 'Library' },
   { href: '/about', label: 'About' },
 ];
 
 export const footerNavigation = [
   {
-    title: 'Platform',
+    title: 'Research map',
     links: [
       { href: '/products', label: 'Guides' },
       { href: '/comparison', label: 'Comparison' },
-      { href: '/solutions', label: 'Solutions' },
+      { href: '/solutions', label: 'Use cases' },
       { href: '/technology', label: 'Technology' },
-      { href: '/resources', label: 'Resources' },
-      { href: '/implementation', label: 'Implementation' },
-      { href: '/downloads', label: 'Downloads' },
+      { href: '/resources', label: 'Library' },
+      { href: '/implementation', label: 'Roadmap' },
+      { href: '/downloads', label: 'References' },
     ],
   },
   {
@@ -219,7 +219,7 @@ export const footerNavigation = [
       { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
       { href: '/contact', label: 'Contact' },
-      { href: '/case-studies', label: 'Case studies' },
+      { href: '/case-studies', label: 'Context notes' },
       { href: '/research', label: 'Research' },
       { href: '/editorial-policy', label: 'Editorial policy' },
       { href: '/glossary', label: 'Glossary' },
@@ -231,7 +231,7 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: 'Portal', label: 'Robot skin and tactile AI research map' },
+  { value: 'Map', label: 'Robot skin and tactile AI research routes' },
   { value: 'Guides', label: 'Plain-language explainers for tactile sensing concepts' },
   { value: 'Sources', label: 'Research notes with public references' },
   { value: 'Glossary', label: 'Definitions for robot skin and tactile AI terms' },
@@ -252,7 +252,7 @@ export const homeProofPoints: ContentTile[] = [
   },
   {
     title: 'Searchable content clusters',
-    description: 'Product, solution, research, glossary, comparison, and implementation pages now reinforce each other with natural internal links.',
+    description: 'Guide, use-case, research, glossary, comparison, and roadmap pages reinforce each other with natural internal links.',
   },
 ];
 
@@ -409,14 +409,14 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A source-backed research index for robot skin papers, tactile AI papers, and e-skin research routes.',
       },
       {
-        label: 'View RoboSkin resources',
+        label: 'View RoboSkin library',
         href: '/resources',
-        description: 'Briefs, stack maps, and category assets for serious robotics readers.',
+        description: 'Briefs, stack maps, and reference paths for serious robotics readers.',
       },
       {
-        label: 'Review conservative case studies',
+        label: 'Review context notes',
         href: '/case-studies',
-        description: 'Anonymous evaluation paths without unsupported customer or performance claims.',
+        description: 'Application-context summaries without unsupported customer or performance claims.',
       },
     ],
   },
@@ -435,9 +435,9 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'Clarify where robot skin, e-skin, electronic skin, and tactile AI overlap.',
       },
       {
-        label: 'Plan implementation',
+        label: 'Follow the category roadmap',
         href: '/implementation',
-        description: 'Understand the evaluation, prototype, pilot, and deployment route.',
+        description: 'Understand the source-backed path from orientation to research mapping and content improvement.',
       },
       {
         label: 'Review humanoid robot skin',
@@ -450,9 +450,9 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A hand-level page for fingertip, palm, full-hand, slip, and grasp-stability sensing.',
       },
       {
-        label: 'View public references',
+        label: 'Open the reference library',
         href: '/downloads',
-        description: 'Request datasheets, integration notes, benchmark methods, and SDK material.',
+        description: 'Use public research notes, glossary routes, and educational references for evaluation context.',
       },
     ],
   },
@@ -461,7 +461,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
     summary: 'Contact paths for source corrections, research suggestions, and editorial collaboration.',
     links: [
       {
-        label: 'Suggest a source',
+        label: 'Submit source',
         href: '/contact?requestType=research',
         description: 'Send a public paper, correction, or useful reference for future updates.',
       },
@@ -729,7 +729,7 @@ export const productCards = [
     inputsOutputs: 'Application context, category pages, research suggestions',
     specs: ['Strong topical relevance', 'Research and glossary fit', 'Practical examples', 'Clear correction path'],
     evaluation: ['Content usefulness', 'Research depth', 'Glossary coverage', 'Claim discipline'],
-    verificationNote: 'Best used when the goal is authoritative category context rather than vendor copy.',
+    verificationNote: 'Best used when the goal is source-backed category context rather than vendor copy.',
     cta: 'Discuss collaboration',
   },
 ];
@@ -928,7 +928,7 @@ export const resourceSections: ResourceSection[] = [
       },
       {
         title: 'FAQ',
-        description: 'Read conservative guidance about what the site does and does not claim about robot skin and tactile AI.',
+        description: 'Read guidance about how to interpret public robot skin and tactile AI source boundaries.',
         availability: 'Public reference',
         ctaLabel: 'Read',
         href: '/faq',
@@ -1019,7 +1019,7 @@ export const deploymentStages: ImplementationStage[] = [
   },
   {
     title: 'Category page',
-    summary: 'Shape a concise educational page around the topic without implying product availability or operating-company claims.',
+    summary: 'Shape a concise educational page around the topic with visible sources and clear boundaries.',
     inputs: ['Page purpose', 'Audience need', 'Internal links'],
     outputs: ['Page outline', 'Conservative claim checklist', 'Contact route if relevant'],
   },
@@ -1034,7 +1034,7 @@ export const deploymentStages: ImplementationStage[] = [
 export const aboutSections: AboutSection[] = [
   {
     title: 'What this site publishes',
-    summary: 'RoboSkin.ai publishes conservative robot skin and tactile AI information for readers who need clear category context.',
+    summary: 'RoboSkin.ai publishes source-backed robot skin and tactile AI context for readers who need a research map, not vendor copy.',
     bullets: [
       'Robot skin, tactile AI, e-skin, and tactile sensing terminology',
       'Research routes, glossary definitions, and category context',
@@ -1043,7 +1043,7 @@ export const aboutSections: AboutSection[] = [
   },
   {
     title: 'How readers should use it',
-    summary: 'Use the site for definitions, research discovery, and category framing rather than product availability claims.',
+    summary: 'Use the site for definitions, research discovery, category framing, and source trails.',
     bullets: [
       'Start with applications, research, and glossary routes',
       'Check whether a claim is supported by public source context',
@@ -1052,11 +1052,20 @@ export const aboutSections: AboutSection[] = [
   },
   {
     title: 'Claims discipline',
-    summary: 'Public copy stays conservative and avoids unsupported operating-company claims.',
+    summary: 'The site keeps claims narrow and separates public source evidence from RoboSkin.ai editorial interpretation.',
     bullets: [
       'No invented benchmarks, customer logos, or certifications',
       'No implied product availability, customer support, or procurement route',
       'If a detail is uncertain, it belongs in source-backed context or not on the page',
+    ],
+  },
+  {
+    title: 'Independence note',
+    summary: 'RoboSkin.ai is an independent information resource. Its name should not be read as an affiliation claim with similarly named products, companies, labs, or research projects.',
+    bullets: [
+      'External citations are references, not endorsements',
+      'Similar project names need source-level attribution',
+      'Brand, product, or affiliation claims require explicit public support',
     ],
   },
   {
@@ -1110,7 +1119,7 @@ export const faqItems: FaqItem[] = [
   },
   {
     question: 'Does RoboSkin.ai claim active product availability?',
-    answer: 'No. RoboSkin.ai is positioned as an information hub, not as a public catalog of available robot skin products.',
+    answer: 'No. RoboSkin.ai is positioned as a research and category information map, not as a public catalog of available robot skin products.',
     ctaLabel: 'View guide routes',
     href: '/products',
   },
@@ -1199,7 +1208,7 @@ export const caseStudySummaries: CaseStudySummary[] = [
     context: 'A reader needed to separate useful tactile AI terminology from unsupported marketing claims.',
     approach: 'We summarized audience fit, category relevance, source context, and possible content routes.',
     outcome: 'A clearer research path for source-backed category-content planning.',
-    note: 'The checklist describes information routes, not a product roadmap.',
+    note: 'The checklist describes information routes, not a commercial product roadmap.',
     ctaLabel: 'Send a research note',
     href: '/contact?requestType=research',
   },
@@ -1208,8 +1217,8 @@ export const caseStudySummaries: CaseStudySummary[] = [
 export const newsItems: NewsItem[] = [
   {
     date: '2026-04-10',
-    title: 'Content hub expansion (Comparison, Implementation, Downloads)',
-    summary: 'We expanded the public site with guide-route, category-roadmap, and learning-resource pages.',
+    title: 'Research map expansion',
+    summary: 'We expanded the public site with guide-route, category-roadmap, and reference-library pages.',
     href: '/comparison',
     ctaLabel: 'Compare guide routes',
   },

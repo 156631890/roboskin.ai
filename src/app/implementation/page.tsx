@@ -13,7 +13,7 @@ export default function ImplementationPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/implementation'), buildBreadcrumbJsonLd('/implementation')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Category roadmap</span>
+          <span className="eyebrow">Research roadmap</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">How the robot skin category can develop</h1>
             <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-white">
@@ -21,7 +21,7 @@ export default function ImplementationPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            This page outlines how teams, labs, and content owners can think about robot skin concepts from research awareness to branded category ownership.
+            This page outlines how teams, labs, and content owners can move from robot skin awareness to source-backed research mapping.
           </p>
           <PageHeroVisual visual={pageVisuals.implementation} className="mt-10" priority />
         </div>
@@ -65,7 +65,7 @@ export default function ImplementationPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to discuss category ownership?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to improve the research map?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
               Send the intended use, organization context, and research goal so the inquiry can be routed clearly.
             </p>

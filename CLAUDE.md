@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**RoboSkin Website** - A modern Next.js application for RoboSkin.ai, a company developing advanced artificial skin technology for robotics.
+**RoboSkin.ai Website** - A modern Next.js application for RoboSkin.ai, a source-backed information resource for robot skin, tactile AI, e-skin, tactile sensing, and Physical AI context. The public site is not positioned as a hardware vendor, product catalog, or procurement channel.
 
 **Tech Stack:**
 - Next.js 16.1.1 with React 19.2.3

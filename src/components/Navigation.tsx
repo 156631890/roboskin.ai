@@ -47,7 +47,7 @@ export default function Navigation() {
               href="/contact?requestType=research"
               className="ml-2 rounded-lg border border-[#00e5ff]/45 bg-[#00d5ff] px-4 py-2 text-sm font-bold text-[#001018] shadow-[0_12px_28px_rgba(0,168,255,0.18)] outline-none transition-transform hover:-translate-y-0.5 active:translate-y-px focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
             >
-              Suggest Source
+              Submit Source
             </Link>
           </div>
 
@@ -89,7 +89,7 @@ export default function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 block rounded-lg bg-[#00e5ff] px-4 py-3 text-center text-sm font-bold text-[#001018]"
             >
-              Suggest Source
+              Submit Source
             </Link>
           </div>
         </div>

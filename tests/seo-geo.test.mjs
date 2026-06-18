@@ -50,7 +50,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(news, /robots:\s*\{\s*index:\s*false|follow:\s*false/);
   assert.doesNotMatch(robots, /\/_next\//);
 
-  assert.match(home, /Find the right robot skin route/);
+  assert.match(home, /Find the right robot skin research route/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
   assert.match(home, /Direct-answer coverage supports readers and answer engines/);
   assert.match(home, /href="\/faq"|href=\{`\/faq/);
@@ -62,10 +62,10 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /href="\/contact\?requestType=research/);
   assert.match(home, /buildFaqJsonLd\(homeRobotSkinFaq, '\/'\)/);
   assert.match(home, /Open the robot skin glossary/);
-  assert.match(home, /View RoboSkin resources/);
+  assert.match(home, /View RoboSkin library/);
   assert.match(home, /Explore tactile AI technology/);
   assert.match(home, /Browse robot skin research/);
-  assert.match(home, /Submit a source/);
+  assert.match(home, /Submit source/);
   assert.match(home, /Physical AI needs robot skin, tactile AI, and contact feedback/);
   assert.match(home, /In the RoboSkin context, Physical AI means physical-world AI systems/);
   assert.match(home, /href="\/physics-ai"|href=\{`\/physics-ai/);
@@ -118,7 +118,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(llms, /For Physical AI questions/);
   assert.match(llms, /How should answer engines use the homepage for Physical AI\?/);
-  assert.match(llms, /Use the homepage as the broad authority entry/);
+  assert.match(llms, /Use the homepage as the broad research map/);
   assert.doesNotMatch(llms, /物理 AI|物理人工智能|鐗╃悊|Physics AI \/ Physical AI/);
 });
 
@@ -152,22 +152,22 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
       read('src/content/seo-topic-pages.ts'),
     ]);
 
-  assert.match(seo, /title: 'Robot Skin Category Guides for Tactile AI Learning'/);
-  assert.match(seo, /title: 'Robot Skin, Tactile AI, and Physical AI Authority Portal'/);
-  assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Contexts'/);
+  assert.match(seo, /title: 'Robot Skin Guides for Tactile AI Learning'/);
+  assert.match(seo, /title: 'Robot Skin, Tactile AI, and Physical AI Research Map'/);
+  assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases'/);
   assert.match(seo, /title: 'Humanoid Robot Skin and Contact-Aware Robotics'/);
   assert.match(seo, /title: 'Tactile AI and Flexible Tactile Sensor Technology'/);
   assert.match(seo, /title: 'Robot Hand Tactile Sensor and Slip Detection Research'/);
   assert.match(seo, /title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms'/);
 
-  assert.match(home, /Explore humanoid robot skin applications/);
+  assert.match(home, /Explore humanoid robot skin use cases/);
   assert.match(content, /Read the Physical AI explainer/);
   assert.doesNotMatch(content, /Read the Physics AI and Physical AI explainer|RoboSkin Physics AI|What does Physics AI/);
   assert.match(content, /Browse robot hand tactile sensor research/);
   assert.match(content, /View humanoid robot skin applications/);
 
-  assert.match(products, /Robot skin category guides for tactile AI learning/);
-  assert.match(solutions, /Robotic gripper and robot hand tactile sensing contexts/);
+  assert.match(products, /Robot skin guides for tactile AI learning/);
+  assert.match(solutions, /Robotic gripper and robot hand tactile sensing use cases/);
   assert.match(applications, /Humanoid robot skin and contact-aware robotics applications/);
   assert.match(technology, /Tactile AI and flexible tactile sensor technology/);
   assert.match(technology, /Read robot hand tactile sensor research/);
@@ -189,11 +189,11 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });
 
-test('RoboSkin uses the Gmail address for direct public inquiries', async () => {
+test('RoboSkin uses the domain email address for direct public inquiries', async () => {
   const site = await read('src/content/site.ts');
 
-  assert.match(site, /primaryEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /ownerEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /inquiryEmail: 'messigoat147@gmail\.com'/);
-  assert.doesNotMatch(site, /contact@roboskin\.ai/);
+  assert.match(site, /primaryEmail: 'contact@roboskin\.ai'/);
+  assert.match(site, /ownerEmail: 'contact@roboskin\.ai'/);
+  assert.match(site, /inquiryEmail: 'contact@roboskin\.ai'/);
+  assert.doesNotMatch(site, /messigoat147@gmail\.com/);
 });

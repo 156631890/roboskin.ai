@@ -17,9 +17,9 @@ const updatedAt = '2026-06-16';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin, Tactile AI, and Physical AI Authority Portal',
+    title: 'Robot Skin, Tactile AI, and Physical AI Research Map',
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, Physical AI tactile feedback, and contact-aware robotics.',
+      'RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, Physical AI tactile feedback, and contact-aware robotics.',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -27,23 +27,23 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/products': {
     path: '/products',
-    title: 'Robot Skin Category Guides for Tactile AI Learning',
+    title: 'Robot Skin Guides for Tactile AI Learning',
     description:
       'Explore robot skin category guides, tactile AI learning routes, e-skin terminology, and source-backed paths for robotics readers.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
-    breadcrumbs: ['Home', 'Products'],
+    breadcrumbs: ['Home', 'Guides'],
   },
   '/solutions': {
     path: '/solutions',
-    title: 'Robotic Gripper and Robot Hand Tactile Sensing Contexts',
+    title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases',
     description:
       'Explore educational context for robotic grippers, robot hand tactile sensing, prosthetics, medical robotics, and tactile AI research teams.',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
-    breadcrumbs: ['Home', 'Solutions'],
+    breadcrumbs: ['Home', 'Use cases'],
   },
   '/applications': {
     path: '/applications',
@@ -93,7 +93,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     priority: 0.75,
     changeFrequency: 'weekly',
     index: true,
-    breadcrumbs: ['Home', 'Downloads'],
+    breadcrumbs: ['Home', 'References'],
   },
   '/comparison': {
     path: '/comparison',
@@ -113,7 +113,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     priority: 0.75,
     changeFrequency: 'weekly',
     index: true,
-    breadcrumbs: ['Home', 'Implementation'],
+    breadcrumbs: ['Home', 'Roadmap'],
   },
   '/faq': {
     path: '/faq',
@@ -147,13 +147,13 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/case-studies': {
     path: '/case-studies',
-    title: 'Robot Skin Case Studies and Context Paths',
+    title: 'Robot Skin Context Notes and Application Paths',
     description:
       'Anonymous, conservative summaries of robot skin application contexts for grippers, humanoid contact sensing, research interpretation, and category planning.',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
-    breadcrumbs: ['Home', 'Case studies'],
+    breadcrumbs: ['Home', 'Context notes'],
   },
   '/about': {
     path: '/about',
@@ -308,7 +308,7 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     email: site.contact.primaryEmail,
     description:
-      'RoboSkin.ai maps robot skin, tactile AI, e-skin, tactile sensing, contact-aware robotics, and Physical AI context for researchers, builders, partners, and research readers.',
+      'RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensing, contact-aware robotics, and Physical AI context for researchers, engineers, category analysts, and research readers.',
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -445,7 +445,7 @@ export function buildCategoryGuideJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${site.url}/products#category-guides`,
-    name: 'Robot skin category and guide route guides',
+    name: 'Robot skin and tactile AI guide routes',
     itemListElement: productCards.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -551,7 +551,7 @@ export function buildHomePhysicalAiRoutesJsonLd() {
     '@id': `${homeUrl}#physical-ai-route-map`,
     name: 'Physical AI route map on RoboSkin.ai',
     description:
-      'Homepage route map connecting Physical AI, robot skin, tactile AI, contact feedback, touch data, and source-backed research paths.',
+      'Homepage research map connecting Physical AI, robot skin, tactile AI, contact feedback, touch data, and source-backed research paths.',
     itemListElement: routes.map((route, index) => ({
       '@type': 'ListItem',
       position: index + 1,

@@ -13,10 +13,10 @@ export default function SolutionsPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/solutions'), buildBreadcrumbJsonLd('/solutions')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Solutions</span>
+          <span className="eyebrow">Use cases</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">
-              Robotic gripper and robot hand tactile sensing contexts
+              Robotic gripper and robot hand tactile sensing use cases
             </h1>
             <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
               Compare guide routes {'->'}
@@ -34,7 +34,7 @@ export default function SolutionsPage() {
         <div className="container-shell grid gap-6 lg:grid-cols-2">
           {solutionCards.map((solution) => (
             <article key={solution.title} className="glass-card p-7 md:p-8">
-              <p className="text-soft text-xs uppercase tracking-[0.14em]">Solution</p>
+              <p className="text-soft text-xs uppercase tracking-[0.14em]">Use case</p>
               <h2 className="mt-2 text-2xl font-semibold text-white">{solution.title}</h2>
               <div className="mt-4 space-y-3 text-sm text-soft">
                 <p><span className="font-semibold text-white">Problem:</span> {solution.problem}</p>
@@ -72,7 +72,7 @@ export default function SolutionsPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need help choosing a category route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send your intended use for RoboSkin.ai, whether research inquiry, partnership, research, or content.
+              Send your intended use for RoboSkin.ai, whether research inquiry, editorial collaboration, or content planning.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
@@ -84,10 +84,10 @@ export default function SolutionsPage() {
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/products" className="text-accent font-semibold hover:text-white">
-                View guide routes {'->'}
+                View guides {'->'}
               </Link>
               <Link href="/implementation" className="text-accent font-semibold hover:text-white">
-                See category roadmap {'->'}
+                See research roadmap {'->'}
               </Link>
             </div>
           </div>

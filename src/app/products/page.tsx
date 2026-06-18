@@ -16,14 +16,14 @@ export default function ProductsPage() {
           <span className="eyebrow">Guide routes</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">
-              Robot skin category guides for tactile AI learning
+              Robot skin guides for tactile AI learning
             </h1>
             <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-              Suggest a source {'->'}
+              Submit source {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin.ai organizes robot skin category guides, tactile AI learning routes, source-backed research notes,
+            RoboSkin.ai organizes robot skin guides, tactile AI learning routes, source-backed research notes,
             glossary terms, and application explainers without claiming active hardware availability.
           </p>
           <PageHeroVisual visual={pageVisuals.products} className="mt-10" priority />
@@ -48,7 +48,7 @@ export default function ProductsPage() {
                     </p>
                     <div className="mt-4 flex flex-wrap gap-3">
                       <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
-                        Suggest a source {'->'}
+                        Submit source {'->'}
                       </Link>
                       <Link href="/research" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
                         Explore research {'->'}
@@ -80,7 +80,7 @@ export default function ProductsPage() {
                   </div>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link href="/contact?requestType=research" className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]">
-                      Suggest a source
+                      Submit source
                     </Link>
                     <Link href="/research" className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8">
                       Explore research

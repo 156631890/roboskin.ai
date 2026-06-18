@@ -19,11 +19,17 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /temperature\/pressure bimodal/i);
   assert.match(blogData, /event-based/i);
   assert.match(blogData, /ROS 2 Kilted/i);
+  assert.match(blogData, /transferable force sensing/i);
+  assert.match(blogData, /DexSkin/i);
+  assert.match(blogData, /fluid-based robot skin/i);
 
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/research\/news\/graphene-based-artificial-skin/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s42256-025-01053-3/);
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/stories\/robotic-skin/);
   assert.match(blogData, /https:\/\/docs\.ros\.org\/en\/kilted\/Releases\.html/);
+  assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2509\.18830v1/);
+  assert.match(blogData, /https:\/\/link\.springer\.com\/article\/10\.1186\/s40648-025-00326-1/);
   assert.match(blogData, /Updated technical brief - May 2026/);
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);
