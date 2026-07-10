@@ -27,7 +27,9 @@ for (const absoluteUrl of protectedUrls) {
 
   const html = await readFile(outputFile, 'utf8');
   const expectedPath = redirects[pathname] ?? pathname;
-  const expectedCanonical = new URL(expectedPath, 'https://roboskin.ai').href;
+  const expectedCanonical = expectedPath === '/'
+    ? 'https://roboskin.ai'
+    : new URL(expectedPath, 'https://roboskin.ai').href;
   const canonicalMatch = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)
     ?? html.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["']canonical["']/i);
   if (!canonicalMatch || canonicalMatch[1] !== expectedCanonical) {
