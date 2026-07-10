@@ -30,6 +30,9 @@ test('the first research index edition is normalized and source-backed', async (
   ]) assert.match(index, new RegExp(`${field}:`));
   assert.match(index, /getBlogPostById/);
   assert.doesNotMatch(index, /content:/);
+  assert.match(index, /Digit 360 multisensory tactile representation model/);
+  assert.match(index, /Framework spanning GelSight, TacTip, and uSkin sensors/);
+  assert.doesNotMatch(index, /Cross-sensor tactile learning model|Transferable camera-based force estimation|Vision-based tactile sensor/);
 });
 
 test('the research index is indexable, filterable, and visible before interaction', async () => {
@@ -48,7 +51,11 @@ test('the research index is indexable, filterable, and visible before interactio
   assert.match(page, /researchIndexEntries/);
   assert.match(explorer, /useState/);
   assert.match(explorer, /filteredEntries\.map/);
+  assert.match(explorer, /'Applications'/);
+  assert.match(explorer, /entry\.applications\.join\(', '\)/);
+  assert.match(explorer, /colSpan=\{8\}/);
   assert.match(seo, /buildResearchIndexJsonLd/);
+  assert.match(seo, /const updatedAt = '2026-07-10'/);
   assert.match(seo, /'\/research-index':/);
   assert.match(site, /href: '\/research-index'/);
   assert.match(sitemap, /seoRoutes/);

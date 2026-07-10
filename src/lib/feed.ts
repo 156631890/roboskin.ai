@@ -17,7 +17,7 @@ export function buildRssFeed(): string {
 
   const itemXml = items.map((item) => {
     const url = canonicalUrl(item.path);
-    return `<item><title>${xmlEscape(item.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><description>${xmlEscape(item.excerpt)}</description><pubDate>${new Date(item.updated).toUTCString()}</pubDate></item>`;
+    return `<item><title>${xmlEscape(item.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><description>${xmlEscape(item.excerpt)}</description><pubDate>${new Date(item.date).toUTCString()}</pubDate></item>`;
   }).join('');
 
   return `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>RoboSkin.ai Research and News</title><link>${canonicalUrl('/')}</link><description>Source-backed robot skin, tactile AI, and electronic skin research.</description><language>en</language>${itemXml}</channel></rss>`;

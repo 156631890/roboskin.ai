@@ -62,8 +62,10 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopic, /'@type': 'WebPage'/);
   assert.match(seoTopic, /const articleNode = page\.schemaType === 'TechArticle'/);
   assert.match(seoTopic, /mainEntityOfPage:\s*\{\s*'@id': `\$\{url\}#webpage`/);
-  assert.match(seoTopic, /author:\s*\{\s*'@id': `\$\{site\.url\}\/#organization`/);
-  assert.match(seoTopic, /reviewedBy:\s*\{\s*'@id': `\$\{site\.url\}\/#organization`/);
+  assert.match(seoTopic, /const editorialTeamId = `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team`/);
+  assert.match(seoTopic, /author:\s*\{\s*'@id': editorialTeamId/);
+  assert.match(seoTopic, /reviewedBy:\s*\{\s*'@id': editorialTeamId/);
+  assert.match(seoTopic, /publisher:\s*\{\s*'@id': `\$\{site\.url\}\/#organization`/);
   assert.match(seoTopic, /mentions: page\.relatedLinks\.map/);
   assert.match(seoTopic, /const visual = pageVisuals\[page\.visualKey\]/);
   assert.match(seoTopic, /'@type': 'ImageObject'/);

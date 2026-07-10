@@ -3,7 +3,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
-import { pageVisuals } from '@/content/site';
+import { pageVisuals, site } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
 import { buildSeoTopicGraph } from '@/lib/seo-topic';
 
@@ -28,6 +28,11 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">{page.intent}</p>
+              {page.schemaType === 'TechArticle' ? (
+                <p className="mt-4 text-sm text-[#8e98a8]">
+                  Published {page.updated} | Updated {page.updated} by {site.editorial.name}
+                </p>
+              ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link href="#quick-answer" className="btn-primary w-full sm:w-auto">
                   Read the short answer

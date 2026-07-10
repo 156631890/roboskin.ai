@@ -2,6 +2,9 @@
   "name": "roboskin-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +17,7 @@
     "generate:images": "node scripts/generate-site-images.mjs"
   },
   "dependencies": {
-    "next": "^15.1.6",
+    "next": "^15.5.20",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -24,7 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.1.6",
+    "eslint-config-next": "^15.5.20",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

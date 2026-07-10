@@ -36,7 +36,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
-  assert.match(seo, /const updatedAt = '2026-06-16'/);
+  assert.match(seo, /const updatedAt = '2026-07-10'/);
   assert.match(seo, /export const sitemapLastModified = updatedAt/);
   assert.match(sitemap, /sitemapLastModified/);
   assert.match(sitemap, /lastModified: new Date\(sitemapLastModified\)/);

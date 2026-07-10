@@ -10,6 +10,7 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
     title: page.title,
     description: page.description,
     keywords: page.keywords,
+    authors: [{ name: site.editorial.name, url: canonicalUrl(site.editorial.path) }],
     alternates: {
       canonical: url,
     },
@@ -51,6 +52,7 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
 
 export function buildSeoTopicGraph(page: SeoTopicPage) {
   const url = canonicalUrl(page.path);
+  const editorialTeamId = `${canonicalUrl(site.editorial.path)}#editorial-team`;
   const visual = pageVisuals[page.visualKey];
   const breadcrumbNames = ['Home', ...page.path.split('/').filter(Boolean).map((part) => part.replaceAll('-', ' '))];
   const imageNode = {
@@ -78,10 +80,10 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
       '@id': `${site.url}/#organization`,
     },
     author: {
-      '@id': `${site.url}/#organization`,
+      '@id': editorialTeamId,
     },
     reviewedBy: {
-      '@id': `${site.url}/#organization`,
+      '@id': editorialTeamId,
     },
     breadcrumb: {
       '@id': `${url}#breadcrumb`,
@@ -152,10 +154,10 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
           '@id': `${site.url}/#organization`,
         },
         author: {
-          '@id': `${site.url}/#organization`,
+          '@id': editorialTeamId,
         },
         reviewedBy: {
-          '@id': `${site.url}/#organization`,
+          '@id': editorialTeamId,
         },
         mainEntityOfPage: {
           '@id': `${url}#webpage`,

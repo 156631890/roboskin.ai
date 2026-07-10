@@ -161,9 +161,14 @@ test('the export verifier checks protected URLs, canonicals, and generated outpu
   const verifier = await read('scripts/verify-export.mjs');
   assert.match(verifier, /protected-urls\.json/);
   assert.match(verifier, /protected-redirects\.json/);
-  assert.match(verifier, /canonicalMatch/);
+  assert.match(verifier, /canonicalFromHtml/);
   assert.match(verifier, /expectedCanonical/);
   assert.match(verifier, /research-index\.csv/);
   assert.match(verifier, /research-index\.json/);
   assert.match(verifier, /feed\.xml/);
+  assert.match(verifier, /deployment\.json/);
+  assert.match(verifier, /expectedSitemapUrls/);
+  assert.match(verifier, /csvIds/);
+  assert.match(verifier, /rssLinks/);
+  assert.match(verifier, /JSON\.parse/);
 });

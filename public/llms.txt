@@ -64,6 +64,7 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Physical AI contact-feedback keyword cluster.
 - [Robot hand tactile sensor and slip detection robot hand](https://roboskin.ai/research): Research-intent keyword cluster.
 - [RoboSkin Tactile Research Index](https://roboskin.ai/research-index): Source-backed tactile sensing records organized by sensing principle, modality, output, evidence, and limitations.
+- [RoboSkin.ai Research and News RSS](https://roboskin.ai/feed.xml): Canonical feed for source-backed robot skin, tactile AI, and electronic skin updates.
 - [Robot skin vs tactile sensor](https://roboskin.ai/guides/robot-skin-vs-tactile-sensor): Comparison-intent keyword cluster.
 - [E-skin, electronic skin, and tactile AI terms](https://roboskin.ai/glossary): Terminology keyword cluster.
 

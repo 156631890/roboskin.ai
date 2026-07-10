@@ -79,6 +79,18 @@ test('research article schema uses technical article signals for robot skin auth
   assert.match(seo, /mainEntityOfPage/);
 });
 
+test('research and news pages expose both published and modified dates', async () => {
+  const [researchPage, newsPage] = await Promise.all([
+    read('src/app/research/[id]/page.tsx'),
+    read('src/app/news/[id]/page.tsx'),
+  ]);
+
+  for (const page of [researchPage, newsPage]) {
+    assert.match(page, /Published \{post\.date\}/);
+    assert.match(page, /Updated \{post\.updated\}/);
+  }
+});
+
 test('GSC-visible research pages use search-intent titles and snippets', async () => {
   const blogData = await read('src/lib/blog-data.ts');
 
@@ -101,7 +113,7 @@ test('GSC-visible research pages use search-intent titles and snippets', async (
     ],
     [
       "title: 'Sparsh-X multisensory touch representations for tactile AI'",
-      "Sparsh-X learns multisensory touch representations across tactile sensors, helping tactile AI reuse robot skin data beyond one hardware format and task.",
+      "Sparsh-X fuses image, audio, motion, and pressure from Digit 360, showing how multisensory touch can improve tactile AI for robot manipulation.",
     ],
     [
       "title: 'FreeTacMan robot-free visuo-tactile data collection for tactile AI'",
@@ -211,6 +223,22 @@ test('GSC priority articles include answer-first sections and crawlable internal
   assert.match(articleBody, /href\.startsWith\('\/'\)/);
   assert.match(articleBody, /target=\{isExternal \? '_blank' : undefined\}/);
   assert.match(articleBody, /rel=\{isExternal \? 'noreferrer' : undefined\}/);
+});
+
+test('priority research schema images match each article subject', async () => {
+  const blogData = await read('src/lib/blog-data.ts');
+  const expectedImages = [
+    '/generated/authority/state-of-tactile-ai-cover.webp',
+    '/generated/authority/tactile-ai-loop.webp',
+    '/generated/authority/authority-hero-tactile-stack.webp',
+    '/generated/authority/roboskin-index-cover.webp',
+    '/generated/authority/research-soft-robotic-skin.webp',
+    '/generated/authority/research-ros2-tactile-pipeline.webp',
+  ];
+
+  for (const image of expectedImages) {
+    assert.match(blogData, new RegExp(image.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
 });
 
 test('each audited priority article has explicit evidence boundaries and bounded internal links', async () => {

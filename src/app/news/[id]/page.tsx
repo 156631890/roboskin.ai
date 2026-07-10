@@ -93,7 +93,9 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           </Link>
 
           <div className="mt-8 max-w-4xl">
-            <p className="text-soft text-xs uppercase tracking-[0.14em]">{post.category} | Updated {post.updated}</p>
+            <p className="text-soft text-xs uppercase tracking-[0.14em]">
+              {post.category} | Published {post.date} | Updated {post.updated}
+            </p>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-white md:text-6xl">{post.title}</h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">{post.excerpt}</p>
           </div>

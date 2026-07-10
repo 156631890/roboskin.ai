@@ -42,7 +42,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-06-06',
+    updated: '2026-07-10',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',

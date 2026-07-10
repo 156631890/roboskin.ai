@@ -174,7 +174,7 @@ export const site = {
   editorial: {
     name: 'RoboSkin.ai Editorial Team',
     path: '/editorial-policy',
-    logo: '/favicon.svg',
+    logo: '/apple-touch-icon.svg',
   },
   contact: {
     primaryEmail: 'contact@roboskin.ai',

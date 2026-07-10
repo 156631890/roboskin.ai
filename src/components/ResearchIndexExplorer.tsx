@@ -85,10 +85,10 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
       </p>
 
       <div className="signal-panel mt-4 overflow-x-auto p-0">
-        <table className="w-full min-w-[1180px] border-collapse text-left">
+        <table className="w-full min-w-[1320px] border-collapse text-left">
           <thead className="bg-white/[0.03] text-xs uppercase text-[#8e98a8]">
             <tr>
-              {['Research item', 'Year', 'Sensor principle', 'Modalities', 'Form factor', 'Data output', 'Evidence'].map((label) => (
+              {['Research item', 'Year', 'Sensor principle', 'Modalities', 'Form factor', 'Data output', 'Applications', 'Evidence'].map((label) => (
                 <th key={label} className="border-b border-white/10 px-4 py-3 font-semibold">{label}</th>
               ))}
             </tr>
@@ -111,12 +111,13 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
                 <td className="border-b border-white/8 px-4 py-5">{entry.modalities.join(', ')}</td>
                 <td className="border-b border-white/8 px-4 py-5">{entry.formFactor}</td>
                 <td className="border-b border-white/8 px-4 py-5">{entry.dataOutput}</td>
+                <td className="border-b border-white/8 px-4 py-5">{entry.applications.join(', ')}</td>
                 <td className="border-b border-white/8 px-4 py-5 capitalize">{entry.evidence}</td>
               </tr>
             ))}
             {filteredEntries.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-sm text-[#8e98a8]">
+                <td colSpan={8} className="px-4 py-8 text-center text-sm text-[#8e98a8]">
                   No records match these filters.
                 </td>
               </tr>

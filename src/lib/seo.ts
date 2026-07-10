@@ -14,7 +14,7 @@ export type SeoRoute = {
   breadcrumbs: string[];
 };
 
-const updatedAt = '2026-06-16';
+const updatedAt = '2026-07-10';
 
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
@@ -324,6 +324,8 @@ export function buildOrganizationJsonLd() {
       '@type': 'ImageObject',
       '@id': `${site.url}/#logo`,
       url: canonicalUrl(site.editorial.logo),
+      width: 180,
+      height: 180,
     },
     contactPoint: [
       {
@@ -721,7 +723,7 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         name: 'RoboSkin Tactile Research Index',
         description: 'A source-backed index of robot skin, tactile sensing, tactile AI, and integration research reviewed by RoboSkin.ai.',
         url: pageUrl,
-        creator: { '@id': `${site.url}/#organization` },
+        creator: { '@id': `${canonicalUrl(site.editorial.path)}#editorial-team` },
         dateModified: '2026-07-10',
         inLanguage: 'en',
         isAccessibleForFree: true,
