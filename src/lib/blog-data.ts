@@ -71,7 +71,7 @@ For RoboSkin.ai, the editorial lesson is that tactile AI should be described as 
 
 [arXiv: Tactile Beyond Pixels: Multisensory Touch Representations for Robot Manipulation](https://arxiv.org/html/2506.14754v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -132,7 +132,7 @@ For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactil
 
 [arXiv: Multi-Resolution Tactile Imitation Learning for Contact-Rich Robotic Manipulation](https://arxiv.org/html/2606.06281v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -193,7 +193,7 @@ For RoboSkin.ai, the editorial lesson is that tactile AI should include predicti
 
 [arXiv: Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation](https://arxiv.org/html/2606.08737v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -254,7 +254,7 @@ For RoboSkin.ai, the editorial lesson is that calibration belongs on the page. A
 
 [arXiv: Automatic Calibration for an Open-source Magnetic Tactile Sensor](https://arxiv.org/abs/2405.18582)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -315,7 +315,7 @@ For RoboSkin.ai, eFlesh supports a practical rule: tactile sensor pages should d
 
 [arXiv: eFlesh: Highly customizable Magnetic Touch Sensing using Cut-Cell Microstructures](https://arxiv.org/html/2506.09994v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -376,7 +376,7 @@ For RoboSkin.ai, the editorial lesson is that tactile AI pages should explain wh
 
 [arXiv: FreeTacMan: Robot-free Visuo-Tactile Data Collection System for Contact-rich Manipulation](https://arxiv.org/html/2506.01941v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -437,7 +437,7 @@ For RoboSkin.ai, the editorial takeaway is direct: humanoid robot skin content s
 
 [arXiv: A Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation](https://arxiv.org/html/2510.25725v2)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -499,7 +499,7 @@ For RoboSkin.ai, the editorial lesson is to keep every research note attached to
 
 [arXiv: Tactile Robotics: An Outlook](https://arxiv.org/html/2508.11261v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -560,7 +560,7 @@ For RoboSkin.ai, the useful editorial rule is simple: slip detection claims shou
 
 [Scientific Reports: AI-integrated bionic fingertip E-Skin for precision slippage detection in wet environments](https://www.nature.com/articles/s41598-026-41096-z)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -621,7 +621,7 @@ For RoboSkin.ai, this note supports a narrower claim: large-area e-skin pages sh
 
 [Nature Communications: Bioinspired spiking architecture enables energy constrained touch encoding](https://www.nature.com/articles/s41467-026-68858-7)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -682,7 +682,7 @@ For RoboSkin.ai, the editorial lesson is that large-area skin should be discusse
 
 [npj Flexible Electronics: A bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities](https://www.nature.com/articles/s41528-026-00563-3)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -743,7 +743,7 @@ For RoboSkin.ai, the editorial lesson is that slip detection pages should explai
 
 [Nature Communications: Slip-actuated bionic tactile sensing system with dynamic DC generator integrated E-textile for dexterous robotic manipulation](https://www.nature.com/articles/s41467-025-61843-6)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -804,7 +804,7 @@ For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be 
 
 [npj Flexible Electronics: An optical/electronic artificial skin extends the robotic sense to molecular sensing](https://www.nature.com/articles/s41528-025-00431-6)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -876,7 +876,7 @@ For RoboSkin.ai, the editorial lesson is narrower and useful: robot skin pages s
 
 [Nature Communications: Training tactile sensors to learn force sensing from each other](https://www.nature.com/articles/s41467-026-68753-1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -950,7 +950,7 @@ For RoboSkin.ai, the useful lesson is specific: high-coverage robot skin should 
 
 [arXiv: DexSkin: High-Coverage Conformable Robotic Skin for Learning Contact-Rich Manipulation](https://arxiv.org/html/2509.18830v1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-17',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -1022,7 +1022,7 @@ For RoboSkin.ai, the useful lesson is that robot skin can be an interaction surf
 
 [ROBOMECH Journal: Fluid-based robot skin for contact detection and thermal stimulation](https://link.springer.com/article/10.1186/s40648-025-00326-1)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-16',
     updated: '2026-06-18',
     readTime: '5 min read',
@@ -1095,7 +1095,7 @@ This article summarizes the public Cambridge report and adds RoboSkin.ai editori
 
 [University of Cambridge: Graphene-based artificial skin brings human-like touch closer to robots](https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-25',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1169,7 +1169,7 @@ For RoboSkin.ai, the useful lesson is that robot skin should be discussed as a s
 
 [University of Cambridge: Single-material electronic skin gives robots the human touch](https://www.cam.ac.uk/stories/robotic-skin)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-24',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1244,7 +1244,7 @@ For RoboSkin.ai, the source supports a conservative editorial point: robot hands
 
 [Nature Machine Intelligence: Embedding high-resolution touch across robotic hands enables adaptive human-like grasping](https://www.nature.com/articles/s42256-025-01053-3)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-23',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1324,7 +1324,7 @@ For RoboSkin.ai, this article supports a stronger content standard. A page about
 
 [RSC Journal of Materials Chemistry C: Biological skin inspired temperature/pressure bimodal tactile sensing](https://pubs.rsc.org/en/content/articlehtml/2025/tc/d5tc02514a)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-22',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1402,7 +1402,7 @@ For RoboSkin.ai, the useful editorial point is that tactile AI should include da
 
 [Frontiers in Neuroscience: An event-based opto-tactile skin](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-21',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1484,7 +1484,7 @@ For RoboSkin.ai, this article sets a policy for language: use "self-healing" onl
 
 [Chemical Engineering Journal: A self-healing e-skin for quadruple-modal sensing](https://www.sciencedirect.com/science/article/pii/S1385894725132531)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-20',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1572,7 +1572,7 @@ For RoboSkin.ai, the editorial point is clear: serious robot skin content should
 
 [ros2_control Kilted release notes](https://control.ros.org/kilted/doc/ros2_controllers/doc/release_notes.html)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-19',
     updated: '2026-05-14',
     readTime: '5 min read',
@@ -1659,7 +1659,7 @@ For RoboSkin.ai, this article raises the content standard for "large-area robot 
 
 [ACS Applied Electronic Materials: Large-area high-resolution skin-inspired flexible tactile sensor for robotic electronic skin](https://pubs.acs.org/doi/10.1021/acsaelm.5c01200)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-18',
     updated: '2026-05-14',
     readTime: '5 min read',

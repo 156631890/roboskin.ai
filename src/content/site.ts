@@ -171,6 +171,11 @@ export const site = {
   url: 'https://roboskin.ai',
   tagline: 'Robot skin and tactile AI information hub',
   description: 'A public information hub for robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics.',
+  editorial: {
+    name: 'RoboSkin.ai Editorial Team',
+    path: '/editorial-policy',
+    logo: '/favicon.svg',
+  },
   contact: {
     primaryEmail: 'contact@roboskin.ai',
     ownerEmail: 'contact@roboskin.ai',

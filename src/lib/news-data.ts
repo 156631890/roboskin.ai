@@ -223,7 +223,7 @@ This article summarizes public research and Meta FAIR announcements. RoboSkin.ai
 - [Nature Machine Intelligence: Embedding high-resolution touch across robotic hands](https://www.nature.com/articles/s42256-025-01053-3)
 - [Meta FAIR: Advancing embodied AI through touch perception](https://ai.meta.com/blog/fair-robotics-open-source/)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
     updated: '2026-06-27',
     readTime: '4 min read',
@@ -299,7 +299,7 @@ This article summarizes public IFR data and adds RoboSkin.ai editorial context f
 
 - [IFR: World Robotics 2025 industrial robots report](https://ifr.org/ifr-press-releases/news/global-robot-demand-in-factories-doubles-over-10-years)
 `,
-    author: 'RoboSkin technical editor',
+    author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
     updated: '2026-06-22',
     readTime: '4 min read',

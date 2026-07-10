@@ -90,6 +90,26 @@ export default function EditorialPolicyPage() {
               </div>
             </div>
           </section>
+
+          <section className="deferred-section mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="signal-panel p-6 md:p-8">
+              <p className="eyebrow">Research review method</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white">How the RoboSkin.ai Editorial Team reviews sources</h2>
+              <p className="mt-4 text-sm leading-relaxed text-soft">
+                The RoboSkin.ai Editorial Team starts with the cited paper, institutional release, standards documentation, or project documentation. Reviews separate source-reported findings from RoboSkin.ai analysis, retain the public source link, identify evidence limits, and update the modified date when a material interpretation changes.
+              </p>
+            </div>
+            <div className="signal-panel p-6 md:p-8">
+              <p className="eyebrow">Corrections and material revisions</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white">Corrections remain visible and traceable</h2>
+              <p className="mt-4 text-sm leading-relaxed text-soft">
+                Readers can submit a correction through the research contact route. Material factual changes receive a revised modified date and a short revision note in the affected article. Typographic changes do not receive a claim-level revision note.
+              </p>
+              <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+                Submit a correction {'->'}
+              </Link>
+            </div>
+          </section>
         </div>
       </article>
     </>

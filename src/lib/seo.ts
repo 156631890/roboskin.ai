@@ -308,8 +308,12 @@ export function buildOrganizationJsonLd() {
     name: site.name,
     url: site.url,
     email: site.contact.primaryEmail,
-    description:
-      'RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensing, contact-aware robotics, and Physical AI context for researchers, engineers, category analysts, and research readers.',
+    description: site.description,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${site.url}/#logo`,
+      url: canonicalUrl(site.editorial.logo),
+    },
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -625,6 +629,15 @@ export function buildHomePhysicalAiRoutesJsonLd() {
   };
 }
 
+function buildEditorialTeamJsonLd(authorName: string) {
+  return {
+    '@type': 'Organization',
+    '@id': `${canonicalUrl(site.editorial.path)}#editorial-team`,
+    name: authorName,
+    url: canonicalUrl(site.editorial.path),
+  };
+}
+
 export function buildArticleJsonLd(post: BlogPost) {
   const url = canonicalUrl(`/research/${post.id}`);
 
@@ -638,11 +651,10 @@ export function buildArticleJsonLd(post: BlogPost) {
     datePublished: post.date,
     dateModified: post.updated,
     inLanguage: 'en',
-    author: {
-      '@type': 'Organization',
-      name: site.name,
-      url: site.url,
-    },
+    isAccessibleForFree: true,
+    articleSection: post.category,
+    keywords: post.technicalFocus,
+    author: buildEditorialTeamJsonLd(post.author),
     publisher: {
       '@id': `${site.url}/#organization`,
     },
@@ -672,11 +684,7 @@ export function buildNewsArticleJsonLd(post: NewsPost) {
     isAccessibleForFree: true,
     articleSection: post.category,
     keywords: post.technicalFocus,
-    author: {
-      '@type': 'Organization',
-      name: post.author,
-      url: site.url,
-    },
+    author: buildEditorialTeamJsonLd(post.author),
     publisher: {
       '@id': `${site.url}/#organization`,
     },
