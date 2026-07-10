@@ -30,8 +30,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
+
       - name: Build with Next.js
         run: npm run build
+
+      - name: Verify static export
+        run: npm run verify:export
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

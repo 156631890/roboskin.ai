@@ -49,3 +49,26 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(submit, /https:\/\/roboskin\.ai/);
   assert.match(submit, /30 \* 60 \* 1000/);
 });
+
+test('deployment and measurement are gated and reproducible', async () => {
+  const [workflow, monitoring, outreach, gitignore] = await Promise.all([
+    read('.github/workflows/deploy.yml'),
+    read('docs/seo/search-console-monitoring.md'),
+    read('docs/seo/research-index-outreach.md'),
+    read('.gitignore'),
+  ]);
+
+  assert.match(workflow, /run: npm test/);
+  assert.match(workflow, /run: npm run lint/);
+  assert.match(workflow, /run: npm run verify:export/);
+  assert.equal(workflow.match(/run: npm run build/g)?.length, 1);
+  for (const day of ['Day 0', 'Day 7', 'Day 28', 'Day 90']) {
+    assert.match(monitoring, new RegExp(day));
+  }
+  assert.match(monitoring, /5,240/);
+  assert.match(monitoring, /48/);
+  assert.match(monitoring, /0\.9%/);
+  assert.match(outreach, /three legitimate referring domains/i);
+  assert.match(outreach, /No paid links, automated posting, or fabricated endorsements/);
+  assert.match(gitignore, /\.artifacts\//);
+});

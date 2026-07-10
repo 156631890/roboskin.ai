@@ -2,6 +2,27 @@
 
 Use this table weekly after the sitemap is submitted. Do not rewrite titles, add pages, or chase keywords until a row has at least one week of Search Console evidence.
 
+## Day 0 baseline - 2026-07-10
+
+| Window | Impressions | Clicks | CTR | Average position |
+| --- | ---: | ---: | ---: | ---: |
+| Rolling 28 days through 2026-07-07 | 5,240 | 48 | 0.9% | 8.9 |
+| Previous three months | 5,610 | 60 | 1.1% | 8.9 |
+
+External links reported by GSC: 0.
+
+## Day 7
+
+Verify the deployed commit, protected URLs, sitemap discovery, apex canonical selection, priority-page recrawl state, and the recorded IndexNow response.
+
+## Day 28
+
+Compare CTR, clicks, impressions, and position only for priority pages recrawled after deployment. Do not rewrite a title a second time before a complete crawl cycle.
+
+## Day 90
+
+Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5% CTR, at least three legitimate referring domains, and no active configuration-driven `www`/apex split.
+
 ## Indexed status
 
 | URL | Submitted in sitemap | Indexed | Last checked | Action |
@@ -19,6 +40,7 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 | https://roboskin.ai/guides/tactile-feedback-for-physical-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/robot-skin-vs-e-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/robot-skin-papers | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research-index | Yes |  |  | Inspect URL, validate Dataset markup, then request indexing if available |
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/tactile-sensor-for-robots | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/robot-touch-sensor | Yes |  |  | Inspect URL, then request indexing if available |
