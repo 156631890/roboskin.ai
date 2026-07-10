@@ -191,7 +191,7 @@ if (base.origin === canonicalOrigin) {
     });
     if (![301, 308].includes(response.status)) throw new Error(`www${pathname} returned ${response.status} instead of a permanent redirect`);
     const actualLocation = response.headers.get('location');
-    if (actualLocation !== canonicalFor(pathname)) throw new Error(`www${pathname} redirects to ${actualLocation ?? 'missing location'}`);
+    if (actualLocation !== new URL(pathname, canonicalOrigin).href) throw new Error(`www${pathname} redirects to ${actualLocation ?? 'missing location'}`);
   }
 }
 
