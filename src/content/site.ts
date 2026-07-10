@@ -210,6 +210,7 @@ export const footerNavigation = [
   {
     title: 'Research map',
     links: [
+      { href: '/research-index', label: 'Research Index' },
       { href: '/products', label: 'Guides' },
       { href: '/comparison', label: 'Comparison' },
       { href: '/solutions', label: 'Use cases' },

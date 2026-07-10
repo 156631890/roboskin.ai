@@ -31,3 +31,26 @@ test('the first research index edition is normalized and source-backed', async (
   assert.match(index, /getBlogPostById/);
   assert.doesNotMatch(index, /content:/);
 });
+
+test('the research index is indexable, filterable, and visible before interaction', async () => {
+  const [page, explorer, seo, site, sitemap, llms] = await Promise.all([
+    read('src/app/research-index/page.tsx'),
+    read('src/components/ResearchIndexExplorer.tsx'),
+    read('src/lib/seo.ts'),
+    read('src/content/site.ts'),
+    read('src/app/sitemap.ts'),
+    read('public/llms.txt'),
+  ]);
+
+  assert.match(page, /RoboSkin Tactile Research Index/);
+  assert.match(page, /Methodology/);
+  assert.match(page, /Limitations/);
+  assert.match(page, /researchIndexEntries/);
+  assert.match(explorer, /useState/);
+  assert.match(explorer, /filteredEntries\.map/);
+  assert.match(seo, /buildResearchIndexJsonLd/);
+  assert.match(seo, /'\/research-index':/);
+  assert.match(site, /href: '\/research-index'/);
+  assert.match(sitemap, /seoRoutes/);
+  assert.match(llms, /https:\/\/roboskin\.ai\/research-index/);
+});

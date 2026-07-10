@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
+import type { ResearchIndexEntry } from '@/lib/research-index';
 
 export type SeoRoute = {
   path: string;
@@ -135,6 +136,16 @@ export const pageSeo: Record<string, SeoRoute> = {
     changeFrequency: 'weekly',
     index: true,
     breadcrumbs: ['Home', 'Research'],
+  },
+  '/research-index': {
+    path: '/research-index',
+    title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
+    description:
+      'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
+    priority: 0.82,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Research Index'],
   },
   '/glossary': {
     path: '/glossary',
@@ -695,6 +706,42 @@ export function buildNewsArticleJsonLd(post: NewsPost) {
     },
     citation: post.sources.map((source) => source.url),
     about: post.technicalFocus,
+  };
+}
+
+export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
+  const pageUrl = canonicalUrl('/research-index');
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Dataset',
+        '@id': `${pageUrl}#dataset`,
+        name: 'RoboSkin Tactile Research Index',
+        description: 'A source-backed index of robot skin, tactile sensing, tactile AI, and integration research reviewed by RoboSkin.ai.',
+        url: pageUrl,
+        creator: { '@id': `${site.url}/#organization` },
+        dateModified: '2026-07-10',
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+        distribution: [
+          { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: canonicalUrl('/research-index.csv') },
+          { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: canonicalUrl('/research-index.json') },
+        ],
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#items`,
+        numberOfItems: entries.length,
+        itemListElement: entries.map((entry, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: entry.url,
+          name: entry.title,
+        })),
+      },
+    ],
   };
 }
 
