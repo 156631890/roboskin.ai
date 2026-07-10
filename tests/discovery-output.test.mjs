@@ -31,3 +31,21 @@ test('RSS is generated from research and news with apex URLs', async () => {
   assert.match(feed, /<rss version="2\.0">/);
   assert.match(route, /application\/rss\+xml/);
 });
+
+test('IndexNow requires a recent successful production verification report', async () => {
+  const [configure, verify, submit] = await Promise.all([
+    read('scripts/configure-indexnow.mjs'),
+    read('scripts/verify-production.mjs'),
+    read('scripts/submit-indexnow.mjs'),
+  ]);
+
+  assert.match(configure, /randomBytes\(16\)/);
+  assert.match(configure, /indexnow-key\.txt/);
+  assert.match(verify, /protected-urls\.json/);
+  assert.match(verify, /www\.roboskin\.ai/);
+  assert.match(verify, /production-verification\.json/);
+  assert.match(submit, /api\.indexnow\.org\/indexnow/);
+  assert.match(submit, /report\.ok/);
+  assert.match(submit, /https:\/\/roboskin\.ai/);
+  assert.match(submit, /30 \* 60 \* 1000/);
+});
