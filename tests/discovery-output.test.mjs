@@ -88,6 +88,14 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(workflow, /actions\/upload-artifact@v4/);
   assert.match(workflow, /node-version: "22"/);
   assert.match(vercel, /"deploymentEnabled": false/);
+  const vercelConfig = JSON.parse(vercel);
+  assert.ok(vercelConfig.headers?.some((rule) =>
+    rule.source === '/feed.xml' &&
+    rule.headers?.some((header) =>
+      header.key.toLowerCase() === 'content-type' &&
+      header.value === 'application/rss+xml; charset=utf-8'
+    )
+  ));
   assert.match(packageJson, /"node": "22\.x"/);
   for (const day of ['Day 0', 'Day 7', 'Day 28', 'Day 90']) {
     assert.match(monitoring, new RegExp(day));
