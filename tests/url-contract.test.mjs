@@ -110,10 +110,7 @@ test('NewsArticle JSON-LD uses the visible byline and a separate site publisher'
     'export function buildGraphJsonLd',
   );
 
-  assert.match(
-    newsArticle,
-    /author:\s*\{\s*'@type': 'Organization',\s*name: post\.author,\s*url: site\.url,\s*\}/,
-  );
+  assert.match(newsArticle, /author: buildEditorialTeamJsonLd\(post\.author\)/);
   assert.doesNotMatch(newsArticle, /author:\s*\{[^}]*name: site\.name/);
   assert.match(
     newsArticle,

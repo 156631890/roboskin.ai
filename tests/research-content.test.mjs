@@ -6,10 +6,11 @@ const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
 test('research content is current, conservative, source-backed, and crawlable', async () => {
-  const [blogData, researchPage, articlePage, seo] = await Promise.all([
+  const [blogData, researchPage, articlePage, articleBody, seo] = await Promise.all([
     read('src/lib/blog-data.ts'),
     read('src/app/research/page.tsx'),
     read('src/app/research/[id]/page.tsx'),
+    read('src/components/ArticleBody.tsx'),
     read('src/lib/seo.ts'),
   ]);
 
@@ -60,8 +61,10 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);
   assert.match(blogData, /What not to infer/);
-  assert.match(blogData, /RoboSkin technical editor/);
-  assert.match(articlePage, /flushTable/);
+  assert.match(blogData, /RoboSkin\.ai Editorial Team/);
+  assert.doesNotMatch(blogData, /RoboSkin technical editor/);
+  assert.match(articleBody, /flushTable/);
+  assert.match(articlePage, /ArticleBody/);
   assert.match(articlePage, /Editorial review/);
 
   assert.doesNotMatch(blogData, /MIT CSAIL|Stanford Bio-X|NASA-funded|US Patent|EU Patent|Japan Patent|Dow Chemical/);
@@ -98,4 +101,27 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(seo, /'@id': `\$\{url\}#breadcrumb`/);
   assert.match(seo, /name: 'Research'/);
   assert.match(seo, /item: canonicalUrl\('\/research'\)/);
+});
+
+test('the audited GSC priority pages own one query-aligned treatment', async () => {
+  const [seo, blog, research, seoTopics] = await Promise.all([
+    read('src/lib/seo.ts'),
+    read('src/lib/blog-data.ts'),
+    read('src/app/research/page.tsx'),
+    read('src/content/seo-topic-pages.ts'),
+  ]);
+
+  const prioritySignals = [
+    'Dream-Tac: A Unified Tactile World Action Model',
+    'Single-material soft robotic skin',
+    'FreeTacMan robot-free visuo-tactile data collection',
+    'Sparsh-X multisensory touch representations',
+    'GenForce transferable force sensing',
+  ];
+
+  for (const signal of prioritySignals) assert.match(blog, new RegExp(signal));
+  assert.match(seo, /Robot Skin, Tactile AI, and Physical AI Research Map/);
+  assert.match(seoTopics, /Robot Skin Papers and Tactile Sensing Research Index/);
+  assert.match(research, /Browse the tactile research index/);
+  assert.match(seoTopics, /Open the structured research index/);
 });

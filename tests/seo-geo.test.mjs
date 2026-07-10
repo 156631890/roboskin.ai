@@ -157,7 +157,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases'/);
   assert.match(seo, /title: 'Humanoid Robot Skin and Contact-Aware Robotics'/);
   assert.match(seo, /title: 'Tactile AI and Flexible Tactile Sensor Technology'/);
-  assert.match(seo, /title: 'Robot Hand Tactile Sensor and Slip Detection Research'/);
+  assert.match(seo, /title: 'Robot Skin, Tactile AI, and Physical AI Research Map'/);
   assert.match(seo, /title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms'/);
 
   assert.match(home, /Explore humanoid robot skin use cases/);

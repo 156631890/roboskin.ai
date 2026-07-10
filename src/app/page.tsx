@@ -65,7 +65,9 @@ export default function Home() {
               <h1 aria-label="Robot skin, tactile AI, and Physical AI research map" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
                 <span className="block">Robot skin</span>
                 <span className="block">tactile AI</span>
-                <span className="block">Physical AI research map</span>
+                <span className="block">
+                  Physical AI <span className="block sm:inline">research map</span>
+                </span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
                 RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensors, humanoid robot skin, and Physical AI

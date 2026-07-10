@@ -22,20 +22,22 @@ export type BlogSummary = Pick<
 export const blogPosts: BlogPost[] = [
   {
     id: 'sparsh-x-multisensory-touch-representations-2025',
-    title: 'Sparsh-X and multisensory touch representations for robot manipulation',
+    title: 'Sparsh-X multisensory touch representations for tactile AI',
     excerpt:
-      'A source-backed note on Sparsh-X, Digit 360 multisensory touch, self-supervised tactile representation learning, and why robot skin data should not be reduced to images.',
-    content: `# Sparsh-X and multisensory touch representations for robot manipulation
+      'Sparsh-X learns multisensory touch representations across tactile sensors, helping tactile AI reuse robot skin data beyond one hardware format and task.',
+    content: `# Sparsh-X multisensory touch representations for tactile AI
 
 **Updated technical brief - June 2026**
 
-## Why this source matters
+Sparsh-X is a self-supervised tactile representation system for contact-rich robot manipulation. It combines touch signals beyond a single tactile image, addressing how tactile AI can retain deformation, vibration, motion, and pressure cues in one reusable representation. For robot skin, the result matters because useful contact data must transfer into perception and control tasks instead of remaining sensor-specific output.
+
+## Source findings
 
 Most robot skin pages treat tactile data as a pressure map or a camera-like tactile image. The Sparsh-X paper is useful because it frames touch as a multisensory signal family: image, audio, motion, and pressure. That matters for robot skin because a real contact event can include deformation, vibration, impact, sliding, pressure change, and motion history.
 
 The source describes Sparsh-X as a self-supervised representation system trained on contact-rich interactions collected with the Digit 360 sensor. For RoboSkin.ai, the value is not the model name. The value is a clearer way to discuss tactile AI: touch representations should preserve complementary contact signals instead of flattening everything into one channel.
 
-## Core idea
+## RoboSkin analysis
 
 Sparsh-X fuses several tactile modalities into a shared representation. That gives downstream policies a richer contact embedding than a single tactile image can provide. In robot skin terms, the system points toward skin data pipelines where pressure, vibration, motion, and visual tactile deformation are synchronized before they are used for control.
 
@@ -52,6 +54,8 @@ Multisensory representation learning changes the content standard for tactile AI
 
 This is also relevant for robot skin hardware. A skin that exposes only a low-rate pressure number may be easier to integrate, but it may lose high-frequency contact information that could help with slip or impact. A richer sensor creates a harder data problem, but it can support stronger manipulation policies.
 
+Readers can compare the representation problem with [FreeTacMan data collection](/research/freetacman-robot-free-visuotactile-data-collection-2025) and the synchronization problem with the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026).
+
 ## Evaluation checklist
 
 - Check which tactile modalities are actually recorded and synchronized.
@@ -61,7 +65,7 @@ This is also relevant for robot skin hardware. A skin that exposes only a low-ra
 - Ask whether the representation transfers across objects, actions, and sensor placements.
 - Compare performance against single-modality tactile baselines.
 
-## What not to infer
+## What this does not prove yet
 
 This source does not mean every robot skin should use Digit 360 or a transformer backbone. It also does not prove multisensory touch solves all manipulation tasks. The result depends on sensor availability, data volume, temporal alignment, policy design, and task distribution.
 
@@ -83,10 +87,10 @@ For RoboSkin.ai, the editorial lesson is that tactile AI should be described as 
   },
   {
     id: 'mitas-multi-resolution-tactile-imitation-learning-2026',
-    title: 'MiTaS and multi-resolution tactile imitation learning',
+    title: 'MiTaS multi-resolution tactile imitation learning for robot hands',
     excerpt:
-      'A technical note on MiTaS, heterogeneous tactile sensors, GelSight and event-based touch fusion, and why tactile frequency matters for contact-rich imitation learning.',
-    content: `# MiTaS and multi-resolution tactile imitation learning
+      'A technical note on MiTaS, heterogeneous tactile sensors, GelSight and event-based touch fusion, and why tactile frequency matters for robot hand learning.',
+    content: `# MiTaS multi-resolution tactile imitation learning for robot hands
 
 **Updated technical brief - June 2026**
 
@@ -144,20 +148,22 @@ For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactil
   },
   {
     id: 'dream-tac-tactile-world-action-model-2026',
-    title: 'Dream-Tac and tactile world models for contact-rich manipulation',
+    title: 'Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation',
     excerpt:
-      'A source-backed brief on Dream-Tac, tactile world-action modeling, predictive contact dynamics, and why robot skin data needs future-state reasoning.',
-    content: `# Dream-Tac and tactile world models for contact-rich manipulation
+      'Dream-Tac models action-conditioned tactile futures for contact-rich robot manipulation, showing why robot skin data needs prediction, not only reaction.',
+    content: `# Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation
 
 **Updated technical brief - June 2026**
 
-## Why this source matters
+Dream-Tac is a unified tactile world action model for contact-rich robot manipulation. It predicts future visual and tactile observations conditioned on robot actions, addressing the gap between sensing current contact and anticipating what happens next. For robot skin and tactile AI, that matters because predictive contact data can inform regrasping, insertion, slip response, and failure analysis.
+
+## Source findings
 
 Many tactile policies react to what the sensor reports now. Contact-rich manipulation often needs more than reaction. The robot needs to predict how contact will evolve after an action: whether the object will slip, rotate, jam, release, or settle into a stable grasp.
 
 The Dream-Tac preprint is useful because it integrates tactile sensing into a world-action model. The source explicitly models future visual and tactile observations conditioned on robot actions. For RoboSkin.ai, this points toward a stronger tactile AI standard: robot skin should support prediction, not only detection.
 
-## Core idea
+## RoboSkin analysis
 
 A tactile world model links action, visual state, tactile state, and future contact dynamics. Instead of treating tactile feedback as an isolated signal, it becomes part of a model that estimates what will happen next. That is important for insertion, regrasping, manipulation under occlusion, and tasks where contact changes faster than vision can resolve.
 
@@ -173,6 +179,26 @@ A tactile world model links action, visual state, tactile state, and future cont
 This source matters because it moves robot skin content away from sensor specs alone. A sensor can be sensitive and still weak if the policy cannot use it predictively. A tactile world model asks whether robot skin data can support action-conditioned reasoning.
 
 The practical challenge is data. World models require consistent trajectories, synchronized streams, and enough diverse contact examples to avoid learning only a narrow lab distribution. That ties Dream-Tac back to data collection systems and tactile datasets.
+
+## What this means for robot skin
+
+For robot skin, Dream-Tac changes the question from "can the surface detect contact?" to "can the robot predict what contact will do next?" A useful tactile skin does not only publish pressure, deformation, or slip hints. It should produce data that can be aligned with actions, replayed after failure, and used by models that estimate future contact outcomes.
+
+This makes Dream-Tac a bridge between sensor pages and software pages. Readers should compare it with [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration transfer and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replayable data handling.
+
+## What this does not prove yet
+
+Dream-Tac does not prove that one tactile world model will generalize across every robot hand, gripper, sensor material, and manipulation task. It also does not remove the need for careful sensor calibration, synchronized data, and real-world failure analysis. The model can only learn useful contact dynamics when the training data covers the contacts that matter.
+
+## Where this fits next
+
+The next route is a stack question: tactile sensing captures contact, a ROS 2-style pipeline records and replays it, calibration-transfer work keeps force labels usable across sensors, and world-action models try to predict what will happen after the next robot action. That stack is the practical path from robot skin data to Physical AI behavior.
+
+## Search intent FAQ
+
+- Is Dream-Tac a robot skin sensor? No. It is a tactile world-action model; the robot skin relevance is how tactile observations can support action-conditioned prediction.
+- Why does this matter for Physical AI? Physical AI systems need to act under contact uncertainty, and tactile world models give them a way to reason beyond the current reading.
+- What should readers open next? Start with [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for data replay and [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration transfer.
 
 ## Evaluation checklist
 
@@ -195,7 +221,7 @@ For RoboSkin.ai, the editorial lesson is that tactile AI should include predicti
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
+    updated: '2026-06-27',
     readTime: '5 min read',
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',
@@ -327,20 +353,22 @@ For RoboSkin.ai, eFlesh supports a practical rule: tactile sensor pages should d
   },
   {
     id: 'freetacman-robot-free-visuotactile-data-collection-2025',
-    title: 'FreeTacMan and robot-free visuo-tactile data collection',
+    title: 'FreeTacMan robot-free visuo-tactile data collection for tactile AI',
     excerpt:
-      'A source-backed brief on FreeTacMan, robot-free visuo-tactile data collection, human demonstrations, tactile datasets, and scaling contact-rich manipulation data.',
-    content: `# FreeTacMan and robot-free visuo-tactile data collection
+      'A research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.',
+    content: `# FreeTacMan robot-free visuo-tactile data collection for tactile AI
 
 **Updated technical brief - June 2026**
 
-## Why this source matters
+FreeTacMan is a robot-free visuo-tactile data collection system for contact-rich manipulation. It addresses the cost and limited task coverage of collecting every tactile demonstration with a fixed robot arm. For robot skin and tactile AI, the system matters because broader human-guided contact data can accelerate learning, while still leaving embodiment transfer and target-robot validation as explicit engineering constraints.
+
+## Source findings
 
 Tactile AI needs data. Collecting robot tactile data is slow because the sensor is often tied to a specific robot, gripper, controller, and task setup. The FreeTacMan preprint is useful because it explores robot-free data collection using a human-centric visuo-tactile device.
 
 The source describes a wearable or handheld data collection approach with visuo-tactile grippers and optical tracking. It aims to capture human interaction, tactile feedback, and motion information for contact-rich manipulation. For RoboSkin.ai, this matters because data collection is one of the bottlenecks between tactile sensor hardware and useful robot policies.
 
-## Core idea
+## RoboSkin analysis
 
 FreeTacMan separates tactile data collection from a fixed robot embodiment. Instead of requiring a robot arm for every demonstration, a human operator can collect visuo-tactile examples through a portable device. That can make task coverage broader and faster, but it also raises transfer questions.
 
@@ -357,6 +385,8 @@ Robot skin content often focuses on sensors, but datasets are equally important.
 
 The hard question is embodiment. A human-held gripper does not move exactly like the robot that will execute the policy. The collected tactile data must be mapped into robot-action space. That mapping is where many tactile learning systems become fragile.
 
+The data can support models such as the [Dream-Tac tactile world action model](/research/dream-tac-tactile-world-action-model-2026), while a [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) gives teams a route for synchronized logging and replay.
+
 ## Evaluation checklist
 
 - Check which tactile sensor is used and whether it matches the deployment robot.
@@ -366,7 +396,7 @@ The hard question is embodiment. A human-held gripper does not move exactly like
 - Ask how human demonstrations are converted into robot actions.
 - Look for public dataset or code availability before assuming reproducibility.
 
-## What not to infer
+## What this does not prove yet
 
 This source does not mean robot-free collection removes the need for robot trials. It can reduce data collection friction, but final policies still need validation on the target robot, gripper, objects, and environment.
 
@@ -816,20 +846,22 @@ For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be 
   },
   {
     id: 'genforce-transferable-force-sensing-2026',
-    title: 'GenForce and transferable force sensing across tactile sensors',
+    title: 'GenForce transferable force sensing for robot skin and tactile sensors',
     excerpt:
-      'A source-backed brief on GenForce, cross-sensor tactile representation, force prediction transfer, and why calibration reuse matters for robot skin deployment.',
-    content: `# GenForce and transferable force sensing across tactile sensors
+      'GenForce explores transferable force sensing across tactile sensors, reducing repeated calibration work for robot skin replacements and hardware changes.',
+    content: `# GenForce transferable force sensing for robot skin and tactile sensors
 
 **Updated technical brief - June 2026**
 
-## Why this source matters
+GenForce is a framework for transferring force-sensing knowledge across tactile sensors. It addresses repeated calibration and force-label collection when sensor instances, geometries, or sensing principles change. For robot skin, that matters because hands and distributed surfaces contain many patches that wear, drift, or require replacement, turning calibration reuse into a deployment and maintenance problem rather than a one-time benchmark.
+
+## Source findings
 
 Robot skin systems do not fail only because a sensor is not sensitive enough. They also fail because each sensor instance often needs its own calibration data, force labels, and model training. That problem becomes expensive when a robot hand uses many tactile sensors across fingertips, palms, grippers, or replaceable skin modules.
 
 The Nature Communications article on GenForce is useful because it frames tactile sensing as a transfer problem. The authors describe a framework intended to let force prediction models trained with one tactile sensor transfer to other tactile sensors, including sensors with different sensing principles and physical configurations. For a robot skin research map, the important signal is not just model accuracy. The important signal is the possibility of reducing repeated calibration work across many tactile surfaces.
 
-## Core idea
+## RoboSkin analysis
 
 GenForce treats tactile sensor outputs through a shared marker-style representation. The source paper describes a route where tactile signals from calibrated sensors can be transformed toward uncalibrated sensors, then used for force prediction. That matters because robot skin is rarely one perfect sensor. It is usually a collection of sensor patches, batches, repairs, replacements, and geometries.
 
@@ -840,11 +872,31 @@ GenForce treats tactile sensor outputs through a shared marker-style representat
 | Mixed tactile modalities | Hands may combine optical, magnetic, and electronic sensors | A shared representation layer |
 | Force prediction | Controllers need calibrated values, not just raw patterns | Transferable force estimation |
 
-## Why this changes the robot skin discussion
+## Engineering implications
 
 Most public robot skin coverage focuses on the material: hydrogel, graphene, elastomer, liquid metal, textile, or flexible circuit. That misses the software burden. A tactile sensor that looks promising in one lab setup may become hard to use when the robot has many copies of it. Every fingertip can drift. Every pad can wear. Every replacement can shift the signal baseline.
 
 Transferable force sensing is a practical response to that maintenance problem. It asks whether tactile experience can be reused instead of recollected from scratch. For Physical AI and contact-rich manipulation, that is a stronger story than simply saying robots need touch. Robots need touch that can be calibrated, transferred, replayed, and trusted across hardware changes.
+
+## What this means for robot skin
+
+For robot skin, GenForce is a reminder that sensing surfaces are maintained, replaced, and recalibrated. A hand with many tactile patches cannot depend on one-off calibration forever. Transferable force sensing gives readers a concrete way to think about sensor-to-sensor variation, replacement skins, and learned tactile representations.
+
+This page should connect to [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) because predictive control depends on reliable tactile values, and to the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) because calibration metadata needs to travel with recorded touch data.
+
+## What this does not prove yet
+
+GenForce does not prove that any tactile sensor can learn from any other tactile sensor without constraints. Transfer depends on representation quality, sensor similarity, task distribution, ground-truth force data, and what happens after wear or replacement. A strong robot skin claim still needs application-specific validation.
+
+## Where this fits next
+
+The next route is operational: record raw and calibrated tactile data, preserve calibration metadata, test transfer after sensor replacement, and compare policy performance before and after transfer. That makes GenForce part of a maintenance and learning workflow, not only a model benchmark.
+
+## Search intent FAQ
+
+- What is transferable force sensing? It is the attempt to reuse force-sensing knowledge across tactile sensors instead of rebuilding every calibration from zero.
+- Why does it matter for robot skin? Robot skin often means many sensors on one robot, so calibration cost and replacement behavior become system-level problems.
+- What should readers open next? Use [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replay and metadata, then [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) for predictive tactile AI context.
 
 ## How to evaluate the claim
 
@@ -878,7 +930,7 @@ For RoboSkin.ai, the editorial lesson is narrower and useful: robot skin pages s
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
+    updated: '2026-06-27',
     readTime: '5 min read',
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',
@@ -1107,20 +1159,22 @@ This article summarizes the public Cambridge report and adds RoboSkin.ai editori
   },
   {
     id: 'single-material-soft-robotic-skin-2025',
-    title: 'Single-material soft robotic skin and impedance-based multimodal touch',
+    title: 'Single-material soft robotic skin for multimodal e-skin sensing',
     excerpt:
-      'A practical review of single-material soft robotic skin, electrical impedance tomography, and why whole-surface sensing changes robot skin design.',
-    content: `# Single-material soft robotic skin and impedance-based multimodal touch
+      'Single-material soft robotic skin connects e-skin, pressure, strain, temperature, damage sensing, and robot-ready tactile coverage across curved surfaces.',
+    content: `# Single-material soft robotic skin for multimodal e-skin sensing
 
 **Updated technical brief - May 2026**
 
-## Why this source matters
+This single-material soft robotic skin is a conductive hydrogel sensing field shaped around a hand. It addresses the complexity of stacking separate pressure, temperature, and damage sensors by interpreting multiple contact effects through one material. For robot skin and e-skin engineering, the work matters because broad curved-surface coverage becomes easier to fabricate, while calibration and signal interpretation become central system requirements.
+
+## Source findings
 
 Many electronic skin designs are assembled from many discrete sensor types: pressure sensors in one layer, temperature sensors in another layer, wiring between them, and a soft outer material around the stack. That approach can work, but it increases manufacturing complexity and creates more failure points. The Cambridge and UCL single-material robotic skin report is useful because it explores a different architecture: one conductive soft material where the whole surface contributes to sensing.
 
 The public Cambridge story describes a flexible, conductive, gelatine-based hydrogel skin formed into a hand-like shape. It reports that the material can process multiple physical inputs, including different forms of touch, heat, cutting or stabbing damage, and multiple contact points. The system uses electrical impedance tomography and machine learning to interpret changes across many electrical pathways.
 
-## Core idea
+## RoboSkin analysis
 
 The core idea is distributed sensing. Instead of placing individual sensors at selected points, the material itself becomes the sensing field. Electrodes around the boundary collect signals from pathways through the material. When the material is pressed, heated, cut, or touched in multiple places, the electrical response changes. A model can then learn which changes correspond to which types of contact.
 
@@ -1132,7 +1186,7 @@ This is attractive for robot skin because robots rarely touch the world with per
 | Single-material skin | Whole surface can contribute to sensing | Requires stronger calibration and interpretation models |
 | Hybrid soft stack | Can combine specialized layers | Crosstalk and mechanical reliability become harder |
 
-## Why impedance-based touch is different
+## Engineering implications
 
 Electrical impedance tomography is not a simple one-sensor-one-reading approach. It reconstructs information from signal changes across a conductive body. That makes it powerful, but it also means the sensing system includes the material, electrode layout, data collection method, and model. The skin is not only a sheet. It is a measurement system.
 
@@ -1159,6 +1213,26 @@ Single-material skin is most compelling where coverage matters more than extreme
 
 This is not a weakness. It is a category distinction. Different robot skin architectures serve different tasks. Whole-surface soft sensing helps when the robot needs broad awareness across a curved body. Miniature force sensors help when the robot needs precise local force control.
 
+## What this means for robot skin
+
+Single-material soft robotic skin is useful because it treats the surface as a sensing field, not a set of isolated taxels. For robot skin readers, the important distinction is mechanical coverage versus interpretability. A continuous soft material may fit curved hands, palms, grippers, or prosthetic covers more naturally, but it shifts more work into electrode layout, calibration, and machine-learning interpretation.
+
+That is why this page should be read beside the [robot skin vs e-skin guide](/guides/robot-skin-vs-e-skin). The material story explains what can be shaped onto a robot; the system story explains how the robot receives reliable data.
+
+## What this does not prove yet
+
+The source does not prove that a single-material architecture is best for every robot hand or industrial surface. It does not answer every durability, cleaning, attachment, repair, drift, or real-time control question. It shows a research route for broad soft sensing, not a universal product specification.
+
+## Where this fits next
+
+The next technical step is integration. A whole-surface skin still needs message schemas, timestamps, calibration metadata, and replay logs. Readers evaluating this architecture should pair it with the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) and with [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) when they think about replacement, drift, and cross-sensor learning.
+
+## Search intent FAQ
+
+- Is single-material soft robotic skin the same as e-skin? It is one e-skin architecture: a soft conductive material used as a distributed sensing field rather than a stack of many discrete sensors.
+- Why does this matter for robot skin? Robot skin must fit real robot geometry, and single-material sensing may simplify coverage while increasing interpretation and calibration demands.
+- What is the main evaluation question? Ask whether the skin can keep useful, repeatable signals after shaping, use, damage, and replacement.
+
 ## What not to infer
 
 The Cambridge and UCL source does not mean single-material skins are ready for all humanoid robots, prosthetics, or industrial systems. Public reporting describes a research direction and reported experiments, not a universal product specification. Durability, cleaning, attachment, long-term drift, repair, and regulatory requirements remain application-specific.
@@ -1171,7 +1245,7 @@ For RoboSkin.ai, the useful lesson is that robot skin should be discussed as a s
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-24',
-    updated: '2026-05-14',
+    updated: '2026-06-27',
     readTime: '5 min read',
     category: 'Soft E-Skin',
     image: '/generated/research-self-healing-2025.svg',
@@ -1496,10 +1570,10 @@ For RoboSkin.ai, this article sets a policy for language: use "self-healing" onl
   },
   {
     id: 'ros2-kilted-tactile-pipeline-2026',
-    title: 'ROS 2 Kilted and tactile sensor data pipelines',
+    title: 'ROS 2 tactile sensor pipeline for robot skin data replay',
     excerpt:
-      'A robotics software guide to ROS 2 Kilted, tactile data messages, rosbag workflows, force-torque context, and replayable sensor evaluation.',
-    content: `# ROS 2 Kilted and tactile sensor data pipelines
+      'A robotics software guide to ROS 2 tactile data messages, rosbag workflows, force-torque context, and replayable robot skin evaluation.',
+    content: `# ROS 2 tactile sensor pipeline for robot skin data replay
 
 **Updated technical brief - May 2026**
 
@@ -1560,6 +1634,26 @@ Tactile sensing is hard to debug live. A grasp may fail in half a second. A robo
 
 This is especially important for AdSense-quality content because it turns a vague claim into a practical workflow. "Robot skin improves grasping" is a weak statement. "A tactile pipeline should record contact signals, joint state, frame transforms, and controller outputs so teams can replay failed grasps" is more useful and more original.
 
+## What this means for robot skin
+
+For robot skin, ROS 2 is not the sensor. It is the route that makes sensor evidence reusable. A tactile surface can report pressure, force, deformation, slip, or learned classes, but those signals need timestamps, frames, units, calibration metadata, and replayable logs before they can support debugging or robot learning.
+
+This makes the ROS 2 tactile sensor pipeline the internal bridge between hardware and AI pages. Readers should connect it to [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) for prediction and [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration-transfer context.
+
+## What this does not prove yet
+
+Using ROS 2 does not prove that a robot skin system is integrated, low-latency, calibrated, or safe for a task. Middleware can move messages, but it cannot define the right tactile schema, fix noisy sensors, or decide how a controller should react to contact. Those decisions still need engineering evidence.
+
+## Where this fits next
+
+The next step is a data contract: define the tactile message, preserve raw and processed data, record robot state beside touch state, and keep enough metadata to replay failed manipulation. That contract supports [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) pages and source-backed research notes instead of isolated sensor claims.
+
+## Search intent FAQ
+
+- What is a ROS 2 tactile sensor pipeline? It is a software route for publishing, recording, replaying, and consuming tactile data with useful timing and frame context.
+- Why does robot skin need replay? Contact failures happen quickly, and replay lets engineers compare touch signals with joint state, camera state, and controller decisions after the event.
+- Does ROS 2 make tactile AI automatic? No. It gives teams a shared data path; models and controllers still need task-specific validation.
+
 ## What not to infer
 
 ROS 2 support does not mean a robot skin product is ready, compatible, or easy to integrate. Middleware is only one part of the system. The sensor still needs electrical integration, calibration, mechanical mounting, data validation, and task-specific control logic.
@@ -1574,7 +1668,7 @@ For RoboSkin.ai, the editorial point is clear: serious robot skin content should
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-19',
-    updated: '2026-05-14',
+    updated: '2026-06-27',
     readTime: '5 min read',
     category: 'Robotics Software',
     image: '/generated/research-ai-tactile-learning-2025.svg',

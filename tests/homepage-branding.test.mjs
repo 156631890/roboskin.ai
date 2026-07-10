@@ -36,6 +36,7 @@ test('homepage copy reflects the research map positioning', async () => {
 
   assert.match(home, /Robot skin, tactile AI, and Physical AI research map/);
   assert.match(home, /Physical AI research map/);
+  assert.match(home, /<span className="block sm:inline">research map<\/span>/);
   assert.match(home, /Physical AI\s+context/);
   assert.doesNotMatch(home, /Physical AI \/ 物理 AI/);
   assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);

@@ -1141,10 +1141,10 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/research/robot-skin-papers',
-    title: 'Robot Skin Papers and Research Routes',
+    title: 'Robot Skin Papers and Tactile Sensing Research Index',
     description:
       'Browse source-backed robot skin papers and research routes for tactile sensing, e-skin, soft robotic skin, robot hands, and tactile AI.',
-    h1: 'Robot skin papers and research routes',
+    h1: 'Robot skin papers and tactile sensing research index',
     kicker: 'Research intent',
     intent: 'Research index for robot skin papers, tactile AI papers, e-skin research, and source-backed technical briefs.',
     updated: '2026-06-06',
@@ -1205,6 +1205,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Open the structured research index', href: '/research-index', description: 'Compare normalized sensing principles, modalities, evidence levels, and limitations.' },
       { label: 'Research index', href: '/research', description: 'Existing source-backed technical briefs.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Core definition and category page.' },
       { label: 'E-skin', href: '/e-skin', description: 'Electronic skin and soft sensor context.' },

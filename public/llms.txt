@@ -30,13 +30,23 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 ## Research Briefs
 
 - [Graphene liquid-metal 3D force sensing](https://roboskin.ai/research/graphene-liquid-metal-3d-force-2026): Research brief for tactile force and slip-relevant sensing.
-- [Single-material soft robotic skin](https://roboskin.ai/research/single-material-soft-robotic-skin-2025): Source-backed soft robotic skin brief.
+- [Single-material soft robotic skin for multimodal e-skin sensing](https://roboskin.ai/research/single-material-soft-robotic-skin-2025): Source-backed soft robotic skin, e-skin, pressure, strain, and temperature sensing brief.
 - [Full-hand tactile sensing](https://roboskin.ai/research/full-hand-tactile-sensing-2025): Research route for full-hand robot tactile sensing.
 - [Temperature-pressure bimodal tactile sensing](https://roboskin.ai/research/temperature-pressure-bimodal-2025): Multimodal e-skin and tactile sensing context.
 - [Event-based opto-tactile sensing](https://roboskin.ai/research/event-based-opto-tactile-2025): Event-based tactile sensing research route.
 - [Self-healing multimodal e-skin](https://roboskin.ai/research/self-healing-multimodal-eskin-2026): Self-healing and multimodal tactile materials context.
-- [ROS 2 tactile pipeline](https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026): ROS 2, tactile data, and robot middleware research context.
+- [ROS 2 tactile sensor pipeline for robot skin data replay](https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026): ROS 2 tactile messages, rosbag workflows, and replayable robot skin evaluation.
+- [Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation](https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026): Research brief on predictive tactile world models for contact-rich robot manipulation.
+- [GenForce transferable force sensing for robot skin and tactile sensors](https://roboskin.ai/research/genforce-transferable-force-sensing-2026): Research brief on cross-sensor force prediction and calibration limits.
+- [Sparsh-X multisensory touch representations for tactile AI](https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025): Research brief on multisensory tactile representations and robot skin data.
+- [FreeTacMan robot-free visuo-tactile data collection for tactile AI](https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025): Research brief on robot-free tactile AI datasets and contact diversity.
+- [MiTaS multi-resolution tactile imitation learning for robot hands](https://roboskin.ai/research/mitas-multi-resolution-tactile-imitation-learning-2026): Research brief on heterogeneous tactile sensors and robot hand learning.
 - [Large-area flexible tactile arrays](https://roboskin.ai/research/large-area-flexible-tactile-arrays-2025): Large-area flexible tactile sensor array context.
+
+## News Briefs
+
+- [Full-hand tactile sensing moves robot hands beyond vision-only control](https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control): News brief connecting F-TAC Hand, Meta Sparsh, Digit 360, robot hands, tactile AI, and robot skin.
+- [Global robot installations passed 542,000 units](https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch): News brief connecting IFR industrial robot deployment data to Physical AI, contact feedback, and robot skin.
 
 ## Use Guidance
 

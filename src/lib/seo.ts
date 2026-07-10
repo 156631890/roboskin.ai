@@ -128,7 +128,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/research': {
     path: '/research',
-    title: 'Robot Hand Tactile Sensor and Slip Detection Research',
+    title: 'Robot Skin, Tactile AI, and Physical AI Research Map',
     description:
       'Read robot hand tactile sensor research, slip detection robot hand briefs, e-skin notes, multimodal sensing, and ROS 2 tactile pipelines.',
     priority: 0.78,
@@ -643,11 +643,12 @@ export function buildArticleJsonLd(post: BlogPost) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'TechArticle',
     '@id': `${url}#article`,
     headline: post.title,
     description: post.excerpt,
     url,
+    image: `${site.url}${post.image}`,
     datePublished: post.date,
     dateModified: post.updated,
     inLanguage: 'en',

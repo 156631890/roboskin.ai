@@ -24,6 +24,15 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 | https://roboskin.ai/guides/robot-touch-sensor | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/slip-detection-robot-hand | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/ros2-tactile-sensing | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/single-material-soft-robotic-skin-2025 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/genforce-transferable-force-sensing-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/research/mitas-multi-resolution-tactile-imitation-learning-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 
 ## Query performance
 
@@ -42,6 +51,20 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | robot gripper tactile sensor |  |  |  |  | Last 28 days | Commercial application query |
 | https://roboskin.ai/guides/slip-detection-robot-hand | slip detection robot hand |  |  |  |  | Last 28 days | Manipulation-intent query |
 | https://roboskin.ai/guides/ros2-tactile-sensing | ROS 2 tactile sensing |  |  |  |  | Last 28 days | Software integration query |
+
+## GSC high-impression low-click pages
+
+| URL | Primary query cluster | Current action | Recheck window | Success signal |
+| --- | --- | --- | --- | --- |
+| https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026 | Dream-Tac tactile world action model, robot skin, Physical AI | Title and snippet rewritten around predictive robot skin value | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/research/single-material-soft-robotic-skin-2025 | single-material soft robotic skin, multimodal e-skin | Title and snippet rewritten around e-skin sensing | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control | full-hand tactile sensing, robot hands, tactile AI | News detail route and NewsArticle schema added | 7-14 days after deployment | Maintains impressions and increases clicks |
+| https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026 | ROS 2 tactile sensor pipeline, robot skin data replay | Title and snippet rewritten around replayable robot skin data | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/research/genforce-transferable-force-sensing-2026 | GenForce transferable force sensing, tactile sensors | Title and snippet rewritten around robot skin force transfer | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch | global robot installations 542000, Physical AI touch | News detail route and NewsArticle schema added | 7-14 days after deployment | Maintains impressions and increases clicks |
+| https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025 | Sparsh-X, multisensory touch, tactile AI | Title and snippet rewritten around tactile AI representation learning | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | FreeTacMan, robot-free visuo-tactile data, tactile AI | Title and snippet rewritten around tactile AI datasets | 7-14 days after deployment | CTR above 1 percent or first click appears |
+| https://roboskin.ai/research/mitas-multi-resolution-tactile-imitation-learning-2026 | MiTaS, multi-resolution tactile imitation learning, robot hands | Title and snippet rewritten around robot hand learning | 7-14 days after deployment | CTR above 1 percent or first click appears |
 
 ## CTR triage
 
