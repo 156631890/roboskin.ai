@@ -142,3 +142,31 @@ test('the production snapshot rejects non-apex loc entries instead of filtering 
     globalThis.fetch = originalFetch;
   }
 });
+
+test('www root and deep paths have explicit permanent redirects', async () => {
+  const vercel = JSON.parse(await read('vercel.json'));
+  const redirects = vercel.redirects;
+
+  assert.ok(redirects.some((rule) =>
+    rule.source === '/' &&
+    rule.destination === 'https://roboskin.ai' &&
+    rule.permanent === true &&
+    rule.has?.some((condition) => condition.type === 'host' && condition.value === 'www.roboskin.ai')
+  ));
+  assert.ok(redirects.some((rule) =>
+    rule.source === '/:path*' &&
+    rule.destination === 'https://roboskin.ai/:path*' &&
+    rule.permanent === true
+  ));
+});
+
+test('the export verifier checks protected URLs, canonicals, and generated outputs', async () => {
+  const verifier = await read('scripts/verify-export.mjs');
+  assert.match(verifier, /protected-urls\.json/);
+  assert.match(verifier, /protected-redirects\.json/);
+  assert.match(verifier, /canonicalMatch/);
+  assert.match(verifier, /expectedCanonical/);
+  assert.match(verifier, /research-index\.csv/);
+  assert.match(verifier, /research-index\.json/);
+  assert.match(verifier, /feed\.xml/);
+});
