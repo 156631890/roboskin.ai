@@ -11,6 +11,21 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 
 External links reported by GSC: 0.
 
+## Production rollout - 2026-07-10
+
+| Item | Record |
+| --- | --- |
+| Deployed source commit | `5cf019c7e61cec51a8ee01aa122d44aa1401059a` |
+| GitHub quality gate | Run `29083902563` passed tests, lint, build, export verification, and artifact upload |
+| Vercel production deployment | `dpl_H5jgSUL7u1KzPC1NJwH2oHDpatUQ` at `https://roboskin-bi8xj41dm-stevens-projects-08c9c5b0.vercel.app` |
+| Production alias | `https://roboskin.ai` |
+| Production verification | Passed at `2026-07-10T09:46:56.191Z`: 65 protected URLs, exact sitemap, seven research records, 28 RSS items, apex canonicals, and permanent `www` redirects |
+| Verified sitemap SHA-256 | `391a2380605bdc569e51f6c2d047950435ab35803f09b2fce5d09f39c1c9b395` |
+| IndexNow | 15 changed URLs accepted with HTTP `202` at `2026-07-10T09:47Z` |
+| Google Search Console | Pending. The authenticated browser was blocked by enterprise network policy, so no GSC sitemap refresh or URL indexing request was claimed in this session. |
+
+Manual GSC follow-up: submit or refresh `https://roboskin.ai/sitemap.xml`, inspect the apex `/research-index` URL and the seven priority pages, request indexing only when the live apex canonical is shown, and replace the pending record above with the actual submission time and inspection states.
+
 ## Day 7
 
 Verify the deployed commit, protected URLs, sitemap discovery, apex canonical selection, priority-page recrawl state, and the recorded IndexNow response.
