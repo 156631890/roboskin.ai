@@ -137,3 +137,31 @@ const supplements: ResearchIndexSupplement[] = [
 ];
 
 export const researchIndexEntries = supplements.map(toEntry);
+
+const csvColumns: (keyof ResearchIndexEntry)[] = [
+  'id',
+  'title',
+  'url',
+  'year',
+  'publisher',
+  'sourceTitle',
+  'sourceUrl',
+  'sensorPrinciple',
+  'modalities',
+  'formFactor',
+  'dataOutput',
+  'applications',
+  'evidence',
+  'limitations',
+  'reviewedAt',
+];
+
+function csvCell(value: string | number | string[]): string {
+  const text = Array.isArray(value) ? value.join('; ') : String(value);
+  return `"${text.replaceAll('"', '""')}"`;
+}
+
+export function serializeResearchIndexCsv(entries = researchIndexEntries): string {
+  const rows = entries.map((entry) => csvColumns.map((column) => csvCell(entry[column])).join(','));
+  return `${csvColumns.join(',')}\n${rows.join('\n')}\n`;
+}
