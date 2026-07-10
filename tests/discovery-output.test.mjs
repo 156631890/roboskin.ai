@@ -70,6 +70,32 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(deploymentRoute, /GITHUB_SHA/);
 });
 
+test('deployment identity ignores empty platform commit variables', async () => {
+  const previous = {
+    vercel: process.env.VERCEL_GIT_COMMIT_SHA,
+    github: process.env.GITHUB_SHA,
+    explicit: process.env.COMMIT_SHA,
+  };
+
+  process.env.VERCEL_GIT_COMMIT_SHA = '';
+  process.env.GITHUB_SHA = '';
+  process.env.COMMIT_SHA = 'expected-commit';
+
+  try {
+    const { GET } = await import('../src/app/deployment.json/route.ts');
+    assert.deepEqual(await (await GET()).json(), { commitSha: 'expected-commit' });
+  } finally {
+    for (const [name, value] of [
+      ['VERCEL_GIT_COMMIT_SHA', previous.vercel],
+      ['GITHUB_SHA', previous.github],
+      ['COMMIT_SHA', previous.explicit],
+    ]) {
+      if (value === undefined) delete process.env[name];
+      else process.env[name] = value;
+    }
+  }
+});
+
 test('deployment and measurement are gated and reproducible', async () => {
   const [workflow, vercel, packageJson, monitoring, outreach, gitignore] = await Promise.all([
     read('.github/workflows/deploy.yml'),

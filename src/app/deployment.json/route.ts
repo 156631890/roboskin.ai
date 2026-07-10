@@ -1,9 +1,11 @@
 export const dynamic = 'force-static';
 
 export function GET() {
-  const commitSha = process.env.VERCEL_GIT_COMMIT_SHA
-    ?? process.env.GITHUB_SHA
-    ?? process.env.COMMIT_SHA
+  const commitSha = [
+    process.env.VERCEL_GIT_COMMIT_SHA,
+    process.env.GITHUB_SHA,
+    process.env.COMMIT_SHA,
+  ].find((value) => value?.trim())?.trim()
     ?? 'local';
 
   return new Response(JSON.stringify({ commitSha }), {
