@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { newsItems } from '@/content/site';
+import { getNewsSummaries } from '@/lib/news-data';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/news');
 
 export default function NewsPage() {
+  const newsItems = getNewsSummaries();
+
   return (
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/news'), buildBreadcrumbJsonLd('/news')])} />
@@ -28,17 +30,24 @@ export default function NewsPage() {
       <section className="pb-20">
         <div className="container-shell space-y-4">
           {newsItems.map((item) => (
-            <article key={`${item.date}-${item.title}`} className="glass-card p-7 md:p-8">
+            <article key={item.id} className="glass-card p-7 md:p-8">
               <div className="flex flex-wrap items-start justify-between gap-3">
-                <p className="text-soft text-xs uppercase tracking-[0.14em]">{item.date}</p>
-                {item.href ? (
-                  <Link href={item.href} className="text-accent text-sm font-semibold hover:text-white">
-                    {item.ctaLabel ?? 'Open'} {'->'}
-                  </Link>
-                ) : null}
+                <p className="text-soft text-xs uppercase tracking-[0.14em]">
+                  {item.category} | Updated {item.updated} | {item.readTime}
+                </p>
+                <Link href={`/news/${item.id}`} className="text-accent text-sm font-semibold hover:text-white">
+                  Read news brief {'->'}
+                </Link>
               </div>
               <h2 className="mt-3 text-2xl font-semibold text-white md:text-3xl">{item.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-soft">{item.summary}</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{item.excerpt}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.technicalFocus.map((topic) => (
+                  <span key={topic} className="rounded-full border border-white/8 bg-[#0d1016] px-3 py-1 text-xs text-[#d8dce4]">
+                    {topic}
+                  </span>
+                ))}
+              </div>
             </article>
           ))}
         </div>

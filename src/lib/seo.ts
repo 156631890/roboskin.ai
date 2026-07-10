@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
+import type { NewsPost } from '@/lib/news-data';
 
 export type SeoRoute = {
   path: string;
@@ -440,6 +441,65 @@ export function buildResearchArticleBreadcrumbJsonLd(post: BlogPost) {
   };
 }
 
+export function buildNewsArticlePageJsonLd(post: NewsPost) {
+  const url = canonicalUrl(`/news/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: post.title,
+    description: post.excerpt,
+    isPartOf: {
+      '@id': `${site.url}/#website`,
+    },
+    breadcrumb: {
+      '@id': `${url}#breadcrumb`,
+    },
+    mainEntity: {
+      '@id': `${url}#article`,
+    },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${site.url}${post.image}`,
+    },
+    datePublished: post.date,
+    dateModified: post.updated,
+    inLanguage: 'en',
+  };
+}
+
+export function buildNewsArticleBreadcrumbJsonLd(post: NewsPost) {
+  const url = canonicalUrl(`/news/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: canonicalUrl('/'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'News',
+        item: canonicalUrl('/news'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: url,
+      },
+    ],
+  };
+}
+
 export function buildCategoryGuideJsonLd() {
   return {
     '@context': 'https://schema.org',
@@ -591,6 +651,40 @@ export function buildArticleJsonLd(post: BlogPost) {
       '@id': `${url}#webpage`,
     },
     citation: post.sourceUrl,
+    about: post.technicalFocus,
+  };
+}
+
+export function buildNewsArticleJsonLd(post: NewsPost) {
+  const url = canonicalUrl(`/news/${post.id}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    '@id': `${url}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    image: `${site.url}${post.image}`,
+    datePublished: post.date,
+    dateModified: post.updated,
+    inLanguage: 'en',
+    isAccessibleForFree: true,
+    articleSection: post.category,
+    keywords: post.technicalFocus,
+    author: {
+      '@type': 'Organization',
+      name: post.author,
+      url: site.url,
+    },
+    publisher: {
+      '@id': `${site.url}/#organization`,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+    },
+    citation: post.sources.map((source) => source.url),
     about: post.technicalFocus,
   };
 }
