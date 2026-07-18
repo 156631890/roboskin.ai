@@ -411,7 +411,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'Technical briefs about tactile sensors, soft robotic skin, multimodal sensing, and robot hands.',
       },
       {
-        label: 'Read GSC-visible tactile AI briefs',
+        label: 'Read full-hand tactile sensing analysis',
         href: '/news/full-hand-tactile-sensing-robot-hands-vision-control',
         description: 'A news brief on full-hand tactile sensing, robot hand control, and why vision-only manipulation needs contact feedback.',
       },
@@ -423,22 +423,22 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       {
         label: 'Open Dream-Tac world-action model notes',
         href: '/research/dream-tac-tactile-world-action-model-2026',
-        description: 'A high-impression research route for tactile world models, robot skin data, and Physical AI contact prediction.',
+        description: 'A research brief on tactile world models, robot skin data, and Physical AI contact prediction.',
       },
       {
         label: 'Review single-material soft robotic skin',
         href: '/research/single-material-soft-robotic-skin-2025',
-        description: 'A high-impression e-skin route for multimodal sensing, soft robotic skin, pressure, strain, and temperature.',
+        description: 'An e-skin research brief on multimodal sensing, soft robotic skin, pressure, strain, and temperature.',
       },
       {
         label: 'Use the ROS 2 tactile sensor pipeline',
         href: '/research/ros2-kilted-tactile-pipeline-2026',
-        description: 'A high-impression robotics software route for tactile messages, rosbag replay, and robot skin data evaluation.',
+        description: 'A robotics software guide to tactile messages, rosbag replay, and robot skin data evaluation.',
       },
       {
         label: 'Read GenForce transferable force sensing',
         href: '/research/genforce-transferable-force-sensing-2026',
-        description: 'A high-impression route for transferable force sensing, tactile sensor calibration, and simulation-to-real limits.',
+        description: 'A research brief on transferable force sensing, tactile sensor calibration, and simulation-to-real limits.',
       },
       {
         label: 'Open robot skin paper routes',

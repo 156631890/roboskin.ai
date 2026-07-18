@@ -88,10 +88,10 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
-        heading: 'Where robot skin is most searched',
+        heading: 'Where robot skin is used',
         body: [
-          'Search interest usually clusters around humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and Physical AI. These are related but not identical questions.',
-          'RoboSkin.ai separates those intents into definition, application, technology, comparison, and research pages so one page does not try to rank for every possible phrase.',
+          'Robot skin appears across humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and Physical AI. These areas overlap, but they raise different engineering questions.',
+          'RoboSkin.ai separates definitions, applications, technologies, comparisons, and research so readers can move directly to the level of detail they need.',
         ],
       },
     ],
@@ -235,7 +235,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'E-skin versus robot skin',
         body: [
           'E-skin is a material and sensing category. Robot skin is the robot-facing application of that category. A lab e-skin sample may be impressive without being ready for a robot hand or arm.',
-          'A robot skin page should ask how the e-skin is mounted, how the signal is read, what data rate is available, how drift is handled, and what robot behavior uses the data.',
+          'When evaluating e-skin for a robot, ask how it is mounted, how the signal is read, what data rate is available, how drift is handled, and what robot behavior uses the data.',
         ],
       },
       {
@@ -277,7 +277,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Humanoid robot skin helps robot hands and body surfaces detect contact. Learn use cases, tactile signals, evaluation questions, and related research routes.',
     h1: 'Humanoid robot skin',
-    kicker: 'Application intent',
+    kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
     updated: '2026-06-06',
     priority: 0.82,
@@ -331,7 +331,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Fingertip sensing can support pinch tasks. Full-hand coverage can capture palm, side, and multi-contact patterns that appear in power grasps and handovers.',
       },
       {
-        question: 'Which RoboSkin page should this link to?',
+        question: 'What should I read next?',
         answer:
           'Start with robot skin for the definition, tactile AI for the stack, and robot skin papers for source-backed research routes.',
       },
@@ -351,7 +351,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.',
     h1: 'Robot hand tactile sensor guide',
-    kicker: 'Application intent',
+    kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
     updated: '2026-06-06',
     priority: 0.81,
@@ -362,13 +362,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'A robot hand tactile sensor measures contact at the hand surface so the robot can understand pressure, slip, grasp stability, and local interaction events.',
       'Fingertip sensors are useful for pinch and precision tasks, while palm and full-hand skin help with power grasps, handovers, and multi-contact manipulation.',
-      'The strongest robot hand pages should discuss mounting, wiring, calibration, latency, signal interpretation, and whether tactile data improves a real manipulation task.',
+      'A strong robot hand evaluation covers mounting, wiring, calibration, latency, signal interpretation, and whether tactile data improves a real manipulation task.',
     ],
     sections: [
       {
         heading: 'Where tactile sensing belongs on a robot hand',
         body: [
-          'Robot hand sensing can live on fingertips, pads, palm surfaces, side surfaces, or a full-hand skin. The right layout depends on the manipulation problem rather than the keyword.',
+          'Robot hand sensing can live on fingertips, pads, palm surfaces, side surfaces, or a full-hand skin. The right layout depends on the manipulation problem rather than the label.',
           'Precision grasping may need dense fingertip data. Power grasping and handovers often need palm and side contact because the object touches more than the fingertips.',
         ],
         bullets: [
@@ -389,7 +389,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Integration questions before buying or building',
         body: [
           'The hard engineering is often outside the sensing material. Cable routing, readout electronics, finger geometry, calibration, drift, cleaning, and replacement can decide whether the sensor survives on a robot hand.',
-          'For SEO and buyer education, this page should link readers from broad robot skin definitions into practical hand-level constraints. That keeps the site useful instead of repeating the same definition under a new phrase.',
+          'This guide connects the broad robot skin category to practical hand-level constraints so teams can move from definition to integration and evaluation.',
         ],
       },
     ],
@@ -423,7 +423,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Soft robotic skin uses flexible sensing surfaces for curved robots, grippers, prosthetics, and soft machines. Learn how it differs from generic e-skin.',
     h1: 'Soft robotic skin',
-    kicker: 'Application intent',
+    kicker: 'Application guide',
     intent: 'Application page for soft robotic skin, flexible robot skin, soft gripper tactile sensing, and soft robotics e-skin queries.',
     updated: '2026-06-06',
     priority: 0.79,
@@ -441,7 +441,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Why soft surfaces change the problem',
         body: [
           'Soft robots and curved end effectors do not give engineers a flat, rigid mounting plane. A tactile layer may need to bend, stretch, compress, or wrap around geometry without losing signal quality.',
-          'That is why soft robotic skin pages should discuss mechanics and packaging, not only sensor sensitivity. A skin that works as a flat sample can fail when mounted on a moving soft gripper.',
+          'Soft robotic skin evaluation therefore needs mechanics and packaging, not only sensor sensitivity. A skin that works as a flat sample can fail when mounted on a moving soft gripper.',
         ],
         bullets: [
           'Conformal contact on curved or deformable surfaces',
@@ -454,14 +454,14 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Soft robotic skin versus e-skin',
         body: [
           'E-skin is the broader electronic skin category. Soft robotic skin is the robot-facing version of that idea when the robot body or end effector is flexible.',
-          'A useful soft robotic skin article should connect material properties to robot tasks: gripping delicate objects, measuring deformation, detecting contact, or improving human-robot interaction.',
+          'A useful soft robotic skin analysis connects material properties to robot tasks: gripping delicate objects, measuring deformation, detecting contact, or improving human-robot interaction.',
         ],
       },
       {
         heading: 'How to avoid overclaiming',
         body: [
-          'Soft robotic skin research can be visually impressive, but search pages should keep boundaries clear. A material demo does not automatically prove full robot readiness.',
-          'RoboSkin.ai should frame soft skin around evidence: what was tested, what surface was used, what signal was measured, and what remains unproven for robot deployment.',
+          'Soft robotic skin research can be visually impressive, but the evidence boundary must stay clear. A material demo does not automatically prove full robot readiness.',
+          'RoboSkin.ai frames soft skin around what was tested, what surface was used, what signal was measured, and what remains unproven for robot deployment.',
         ],
       },
     ],
@@ -549,9 +549,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'No. Flexible can mean bendable or conformal. Stretchable means the sensor can elongate. These properties have different mechanical and calibration consequences.',
       },
       {
-        question: 'What is the SEO role of this page?',
+        question: 'How does a tactile array fit into a robot skin system?',
         answer:
-          'It captures technology-specific searches and links them back to robot skin, e-skin, soft robotic skin, and tactile AI without duplicating those broader pages.',
+          'A tactile array provides spatial contact measurements. Robot skin adds the mounting, coverage, protection, calibration, data handling, and robot-level use around that sensing layer.',
       },
     ],
     relatedLinks: [
@@ -598,14 +598,14 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'What makes touch data useful',
         body: [
           'Raw tactile signals are not automatically useful. They need consistent timing, calibration, coordinate mapping, metadata, and interfaces that robot software can consume.',
-          'The best Physical AI touch-data pages should focus on the data lifecycle: capture, condition, align, store, interpret, act, and evaluate.',
+          'A useful Physical AI touch-data workflow covers the full lifecycle: capture, condition, align, store, interpret, act, and evaluate.',
         ],
       },
       {
         heading: 'Where robot skin fits',
         body: [
           'Robot skin is one way to collect touch data at the surface. A tactile sensor array, soft skin, fingertip pad, or full-hand skin can all produce contact signals for a Physical AI stack.',
-          'This page should connect broad Physical AI language to concrete robot skin implementation details, giving RoboSkin.ai a bridge between trending AI searches and its robotics-specific expertise.',
+          'The practical connection is the data path from contact event and calibration through timestamps, robot state, control, and task-level evaluation.',
         ],
       },
       {
@@ -634,9 +634,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Touch data is the input. Tactile AI is the workflow that processes and uses that input for robot decisions, evaluation, or learning.',
       },
       {
-        question: 'Why add this page instead of another robot skin synonym page?',
+        question: 'Why treat Physical AI touch data separately from robot skin?',
         answer:
-          'Because it captures a different search intent: people asking why touch data matters for Physical AI, not just what robot skin means.',
+          'Robot skin describes the sensing surface. Physical AI touch data also includes timing, calibration, alignment, storage, interpretation, and how the signal changes a robot action or evaluation.',
       },
     ],
     relatedLinks: [
@@ -653,7 +653,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.',
     h1: 'Robot gripper tactile sensor guide',
-    kicker: 'Commercial intent',
+    kicker: 'Evaluation guide',
     intent: 'Buyer and evaluator page for robot gripper tactile sensor, tactile gripper, gripper slip detection, and contact-aware grasping queries.',
     updated: '2026-06-06',
     priority: 0.79,
@@ -683,15 +683,15 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Gripper evaluation checklist',
         body: [
-          'A commercial gripper page should not only list sensitivity. It should ask how the sensor survives real gripping: abrasion, replacement, cleaning, cable flex, protective skins, and jaw geometry.',
+          'A gripper evaluation should not only list sensitivity. It must ask how the sensor survives real gripping: abrasion, replacement, cleaning, cable flex, protective skins, and jaw geometry.',
           'Teams should also check software. A sensor that produces a nice plot but cannot publish timestamped robot-ready data is not enough for production evaluation.',
         ],
       },
       {
-        heading: 'Where this page fits the cluster',
+        heading: 'How gripper sensing connects to the wider system',
         body: [
-          'This page captures application and purchase-intent searches. It links back to robot skin for the category definition, tactile AI for data use, and slip detection for a narrower manipulation problem.',
-          'That keeps the site from making one generic robot skin page carry every commercial query.',
+          'Robot skin defines the surface system, tactile AI explains how contact data is used, and slip detection covers one narrower manipulation problem.',
+          'Together these views let teams evaluate the sensing layer, the data path, and the task outcome without collapsing them into one generic category.',
         ],
       },
     ],
@@ -709,7 +709,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Is a tactile gripper the same as a robot hand tactile sensor?',
         answer:
-          'They overlap, but a gripper page should focus on jaw pads, end effectors, replacement, industrial handling, and grasp reliability rather than full-hand dexterity.',
+          'They overlap, but gripper evaluation focuses on jaw pads, end effectors, replacement, industrial handling, and grasp reliability rather than full-hand dexterity.',
       },
     ],
     relatedLinks: [
@@ -736,7 +736,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'A tactile sensor for robots can measure pressure, force, slip, strain, or contact maps. Learn how to compare tactile sensors for robot hands, grippers, and robot skin.',
     h1: 'Tactile sensor for robots',
-    kicker: 'Commercial intent',
+    kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
     updated: '2026-06-06',
     priority: 0.8,
@@ -773,8 +773,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'How to connect this to robot skin',
         body: [
-          'Robot skin may use one tactile sensor type or combine many. The site should explain tactile sensors as building blocks while keeping robot skin as the surface-level system.',
-          'That separation lets this page target evaluation searches while the robot skin page keeps the category definition clean.',
+          'Robot skin may use one tactile sensor type or combine many. Tactile sensors are the building blocks; robot skin is the surface-level system around them.',
+          'Keeping those levels separate makes component selection and full-surface integration easier to evaluate.',
         ],
       },
     ],
@@ -792,7 +792,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Should a tactile sensor page include research citations?',
         answer:
-          'Yes. Source-backed pages should cite public papers or documentation, then separate reported source claims from RoboSkin.ai interpretation.',
+          'Yes. Cite public papers or documentation, then separate reported source claims from RoboSkin.ai interpretation.',
       },
     ],
     relatedLinks: [
@@ -819,7 +819,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Robot touch sensors detect contact events, pressure, force, slip, and tactile patterns. Learn when a touch sensor becomes useful robot skin or tactile AI input.',
     h1: 'Robot touch sensor guide',
-    kicker: 'Commercial intent',
+    kicker: 'Evaluation guide',
     intent: 'Evaluation page for robot touch sensor, robot touch sensing, robot pressure sensor, and contact sensor robotics searches.',
     updated: '2026-06-06',
     priority: 0.77,
@@ -854,10 +854,10 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
-        heading: 'Why this page exists',
+        heading: 'How to choose the right sensing route',
         body: [
-          'Robot touch sensor is a broad commercial search phrase. It needs a page that guides buyers and researchers toward the right narrower route: grippers, hands, tactile arrays, robot skin, or ROS 2 tactile sensing.',
-          'That makes the page a routing asset instead of a duplicate of the robot skin definition page.',
+          'The right route depends on the system boundary: gripper pads, full hands, tactile arrays, integrated robot skin, or a ROS 2 data pipeline.',
+          'Choose the narrowest route that matches the component, surface, software layer, or robot task being evaluated.',
         ],
       },
     ],
@@ -873,7 +873,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Yes, for binary contact events or safety triggers. More complex manipulation usually needs richer tactile signals.',
       },
       {
-        question: 'Where should I go after this page?',
+        question: 'What should I evaluate next?',
         answer:
           'Use robot skin for the integrated surface concept, tactile sensor for robots for selection criteria, and ROS 2 tactile sensing for data pipelines.',
       },
@@ -901,7 +901,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Slip detection helps robot hands and grippers react before an object drops. Learn the tactile signals, validation questions, and robot-control constraints.',
     h1: 'Slip detection for robot hands',
-    kicker: 'Commercial intent',
+    kicker: 'Evaluation guide',
     intent: 'Manipulation page for slip detection robot hand, gripper slip detection, tactile slip sensing, and grasp stability searches.',
     updated: '2026-06-06',
     priority: 0.78,
@@ -912,7 +912,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'Slip detection uses tactile, force, vibration, optical, or multimodal signals to identify object motion at the contact surface before the grasp fails.',
       'For robot hands and grippers, slip detection only matters if the controller can react quickly enough to adjust grip, pose, or task state.',
-      'A credible slip page should separate sensing demonstrations from closed-loop robot behavior under realistic grasp conditions.',
+      'Credible slip evaluation separates sensing demonstrations from closed-loop robot behavior under realistic grasp conditions.',
     ],
     sections: [
       {
@@ -931,15 +931,15 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Validation questions',
         body: [
-          'Bench slip detection is not enough. A useful robot page should ask whether slip was detected during real manipulation, with the same skin, object set, and gripper geometry.',
+          'Bench slip detection is not enough. Ask whether slip was detected during real manipulation, with the same skin, object set, and gripper geometry.',
           'Latency matters. A perfect classifier that fires too late will not save the grasp.',
         ],
       },
       {
-        heading: 'How this supports commercial SEO',
+        heading: 'Where slip detection fits',
         body: [
-          'Slip detection is a narrower intent than robot skin. It attracts readers who already understand the manipulation problem and may be evaluating tactile sensing systems.',
-          'That makes it a stronger page for commercial discovery than a generic synonym page.',
+          'Slip detection is a specific manipulation problem within the broader robot skin and tactile sensing stack.',
+          'It is most useful when teams can connect the contact signal to reaction latency, controller behavior, and grasp outcomes.',
         ],
       },
     ],
@@ -984,7 +984,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'ROS 2 tactile sensing needs timestamped messages, frame mapping, rosbag replay, and controller interfaces. Learn how robot skin data becomes usable.',
     h1: 'ROS 2 tactile sensing pipeline',
-    kicker: 'Commercial intent',
+    kicker: 'Integration guide',
     intent: 'Software integration page for ROS 2 tactile sensing, robot skin ROS 2, tactile data pipeline, and rosbag tactile replay searches.',
     updated: '2026-06-06',
     priority: 0.76,
@@ -1019,10 +1019,10 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
-        heading: 'Why this matters for SEO and credibility',
+        heading: 'Why software integration matters',
         body: [
           'Most robot skin pages talk about materials. A ROS 2 tactile sensing page proves that RoboSkin.ai understands the software layer that turns skin into robot-ready evidence.',
-          'It also captures a concrete integration query from robotics teams rather than another broad synonym.',
+          'That layer makes timing, replay, calibration metadata, and controller-facing interfaces explicit enough to reproduce and evaluate.',
         ],
       },
     ],
@@ -1102,14 +1102,14 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Where the terms overlap',
         body: [
           'The overlap is large. A soft e-skin wrapped around a robot fingertip is also robot skin. A flexible tactile array on a gripper pad may be described as electronic skin, tactile sensor array, or robot skin depending on the article.',
-          'For search and content structure, the best solution is not to create duplicate pages for every synonym. It is to give each phrase a clear role and link them together.',
+          'The clearest explanation does not treat every synonym as a separate concept. It gives each term a practical role and connects the overlapping layers.',
         ],
       },
       {
-        heading: 'How RoboSkin.ai separates the intents',
+        heading: 'How RoboSkin.ai separates the terms',
         body: [
           'The robot skin page answers the core robotics definition. The e-skin page explains electronic skin. This comparison page resolves the overlap. Research briefs then show source-backed examples.',
-          'That structure lets one strong page rank for a cluster of terms while avoiding thin pages that only swap wording.',
+          'That structure gives readers one complete comparison instead of several thin explanations that only swap terminology.',
         ],
       },
     ],
@@ -1145,7 +1145,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Browse source-backed robot skin papers and research routes for tactile sensing, e-skin, soft robotic skin, robot hands, and tactile AI.',
     h1: 'Robot skin papers and tactile sensing research index',
-    kicker: 'Research intent',
+    kicker: 'Research guide',
     intent: 'Research index for robot skin papers, tactile AI papers, e-skin research, and source-backed technical briefs.',
     updated: '2026-06-06',
     priority: 0.78,
@@ -1173,17 +1173,17 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
-        heading: 'Research lanes to build next',
+        heading: 'Research lanes to explore',
         body: [
-          'The next useful expansion is not a pile of generic blog posts. RoboSkin.ai should build durable research lanes: materials and e-skin, robot hand tactile sensing, tactile AI software, datasets and benchmarks, and application-specific evaluation.',
-          'Each lane can support a cluster of keywords while still giving readers a clear reason to stay on the page.',
+          'Useful research lanes include materials and e-skin, robot hand tactile sensing, tactile AI software, datasets and benchmarks, and application-specific evaluation.',
+          'Each lane gives readers a distinct path through materials, sensing, integration, and robot-learning evidence.',
         ],
       },
       {
         heading: 'Why source boundaries matter',
         body: [
-          'Research pages should keep public source claims separate from RoboSkin.ai editorial analysis. That protects credibility and avoids implying product availability, customer use, benchmark values, or certification claims that are not published.',
-          'This is also better for search quality. Pages with visible source boundaries, concrete evaluation questions, and internal links are more defensible than generic summaries.',
+          'This index keeps public source claims separate from RoboSkin.ai editorial analysis. That protects credibility and avoids implying product availability, customer use, benchmark values, or certification claims that are not published.',
+          'Visible source boundaries and concrete evaluation questions also make the analysis easier to verify and cite than a generic summary.',
         ],
       },
     ],
@@ -1191,7 +1191,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Is this a complete database of robot skin papers?',
         answer:
-          'No. It is an initial research route. The page should expand as more source-backed briefs are added and organized by material, sensor type, software stack, and application.',
+          'No. It is an initial research route that can incorporate new source-backed briefs organized by material, sensor type, software stack, and application.',
       },
       {
         question: 'What papers should be added first?',
@@ -1199,9 +1199,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Prioritize papers that explain full-hand tactile sensing, soft e-skin materials, large-area tactile arrays, ROS 2 or robot middleware pipelines, and tactile datasets.',
       },
       {
-        question: 'How does this help SEO?',
+        question: 'Why use a research index?',
         answer:
-          'A research index can rank for paper and source queries, but more importantly it gives outside sites a useful page to cite instead of linking only to the homepage.',
+          'A research index gives readers one source-backed route for comparing papers, sensing methods, evidence levels, and implementation limits.',
       },
     ],
     relatedLinks: [
@@ -1287,7 +1287,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Why the distinction matters',
         body: [
-          'Search pages that treat robot skin and tactile sensors as exact synonyms become thin quickly. The stronger comparison is practical: a good tactile sensor can still fail as robot skin if it cannot be mounted, calibrated, protected, serviced, or synchronized with robot state.',
+          'Treating robot skin and tactile sensors as exact synonyms hides important system boundaries. A good tactile sensor can still fail as robot skin if it cannot be mounted, calibrated, protected, serviced, or synchronized with robot state.',
           'Likewise, a broad robot skin concept still depends on concrete sensor choices. The system needs enough signal quality, spatial coverage, data rate, and reliability for the task.',
         ],
       },
@@ -1306,7 +1306,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Not only. Arrays of tactile sensors can be part of robot skin, but robot skin also includes packaging, coverage, calibration, data handling, replacement strategy, and robot-facing interpretation.',
       },
       {
-        question: 'Which term is better for search?',
+        question: 'Which term should I use?',
         answer:
           'Use tactile sensor for component selection and measurement questions. Use robot skin for full-surface robot integration, humanoid hands, grippers, and Physical AI contact feedback.',
       },
@@ -1373,7 +1373,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'The feedback loop',
         body: [
           'A tactile feedback loop starts when the surface measures contact. Electronics and software timestamp the signal, map it to the robot, extract useful features, and expose those features to a controller, model, or evaluator.',
-          'If any layer is missing, the robot may record touch but fail to use it. That is why Physical AI pages should discuss data contracts, latency, calibration, and task-level validation.',
+          'If any layer is missing, the robot may record touch but fail to use it. Physical AI evaluation therefore needs data contracts, latency, calibration, and task-level validation.',
         ],
       },
       {
@@ -1409,7 +1409,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Vision often loses direct information after contact because the robot hand or object blocks the camera. Tactile feedback measures the interaction where it happens.',
       },
       {
-        question: 'What page should this connect to?',
+        question: 'What should I read next?',
         answer:
           'Start with the Physical AI explainer, then read robot skin, tactile AI, ROS 2 tactile sensing, and robot hand tactile sensor routes.',
       },

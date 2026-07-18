@@ -89,6 +89,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(globals, /body::before\s*\{[\s\S]*background-image:/);
   assert.match(globals, /body::after\s*\{[\s\S]*repeating-linear-gradient/);
   assert.ok((seoTopicArticle.match(/deferred-section/g) ?? []).length >= 4);
+  assert.doesNotMatch(seoTopicArticle, /page\.intent|Answer the search intent first/);
   assert.doesNotMatch(industryVisuals, /src=\{heroVisual\.image\}[\s\S]{0,180}priority/);
   assert.match(navigation, /'use client'/);
   assert.match(navigation, /usePathname/);
@@ -180,6 +181,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
 
   const visibleKeywordSurfaces = [home, content, applications, technology, research, seoTopics, llms].join('\n');
   assert.doesNotMatch(visibleKeywordSurfaces, /\bphysical AI\b|RoboSkin Physics AI|Open Physics AI|Use the Physics AI|Physics AI route/);
+  assert.doesNotMatch(seoTopics, /What is the SEO role|How does this help SEO|commercial SEO|rank for a cluster|purchase-intent searches/);
   assert.match(visibleKeywordSurfaces, /Physical AI touch data/);
 
   assert.match(llms, /## Keyword Routes/);

@@ -27,7 +27,6 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
               <p className="section-label">{page.kicker}</p>
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">{page.intent}</p>
               {page.schemaType === 'TechArticle' ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   Published {page.updated} | Updated {page.updated} by {site.editorial.name}
@@ -70,7 +69,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
           <div className="container-shell grid gap-6 lg:grid-cols-[0.34fr_1fr]">
             <div>
               <p className="eyebrow">Short answer</p>
-              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Answer the search intent first</h2>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">What you need to know</h2>
             </div>
             <div className="signal-panel p-6 md:p-8">
               <ol className="space-y-4">

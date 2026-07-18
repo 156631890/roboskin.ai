@@ -180,7 +180,8 @@ test('homepage authority routes promote news and GSC-visible article pages', asy
     assert.match(siteContent, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
 
-  assert.match(siteContent, /GSC-visible tactile AI briefs/);
+  assert.match(siteContent, /Read full-hand tactile sensing analysis/);
+  assert.doesNotMatch(siteContent, /GSC-visible|high-impression/);
   assert.match(homePage, /<AuthorityIndex groups=\{authorityLinkGroups\} \/>/);
 });
 
@@ -195,7 +196,7 @@ test('GSC priority articles include answer-first sections and crawlable internal
     'What this means for robot skin',
     'What this does not prove yet',
     'Where this fits next',
-    'Search intent FAQ',
+    'Practical questions',
     '[ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026)',
     '[Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026)',
     '[GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026)',
@@ -206,7 +207,7 @@ test('GSC priority articles include answer-first sections and crawlable internal
     'What this means for robot hands',
     'What this does not prove yet',
     'Where this fits next',
-    'Search intent FAQ',
+    'Practical questions',
     '[Dream-Tac tactile world model](/research/dream-tac-tactile-world-action-model-2026)',
     '[ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026)',
     '[robot hand tactile sensor route](/applications/robot-hand-tactile-sensor)',
@@ -220,6 +221,7 @@ test('GSC priority articles include answer-first sections and crawlable internal
     assert.match(newsData, new RegExp(signal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
 
+  assert.doesNotMatch(`${blogData}\n${newsData}`, /Search intent FAQ|This matters for SEO|editorial lesson/);
   assert.match(articleBody, /href\.startsWith\('\/'\)/);
   assert.match(articleBody, /target=\{isExternal \? '_blank' : undefined\}/);
   assert.match(articleBody, /rel=\{isExternal \? 'noreferrer' : undefined\}/);
