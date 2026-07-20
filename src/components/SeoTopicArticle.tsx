@@ -109,6 +109,38 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
                       ))}
                     </ul>
                   ) : null}
+                  {section.table ? (
+                    <div className="mt-6 overflow-x-auto rounded-md border border-white/10 bg-[#020408]">
+                      <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                        <thead className="border-b border-white/10 bg-white/[0.03]">
+                          <tr>
+                            {section.table.headers.map((header) => (
+                              <th key={header} scope="col" className="px-4 py-3 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#b8eefe]">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {section.table.rows.map((row, rowIndex) => (
+                            <tr key={`${section.heading}-${row[0]}`} className="border-b border-white/8 last:border-b-0">
+                              {row.map((cell, cellIndex) =>
+                                cellIndex === 0 ? (
+                                  <th key={`${rowIndex}-${cellIndex}`} scope="row" className="px-4 py-4 align-top font-semibold leading-relaxed text-white">
+                                    {cell}
+                                  </th>
+                                ) : (
+                                  <td key={`${rowIndex}-${cellIndex}`} className="px-4 py-4 align-top leading-relaxed text-[#c8d1de]">
+                                    {cell}
+                                  </td>
+                                ),
+                              )}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : null}
                 </section>
               ))}
             </div>

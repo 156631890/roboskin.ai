@@ -16,6 +16,10 @@ export type SeoTopicPage = {
     heading: string;
     body: string[];
     bullets?: string[];
+    table?: {
+      headers: string[];
+      rows: string[][];
+    };
   }[];
   faqs: {
     question: string;
@@ -1433,6 +1437,356 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     paperBriefIds: ['graphene-liquid-metal-3d-force-2026', 'ros2-kilted-tactile-pipeline-2026'],
+  },
+  {
+    path: '/guides/tactile-sensor-benchmark-robot-manipulation',
+    title: 'Tactile Sensor Benchmark for Robot Manipulation',
+    description:
+      'Compare visual, acoustic, magnetic, and resistive tactile sensors by manipulation task, signal, integration constraint, and evidence boundary.',
+    h1: 'Tactile sensor benchmark for robot manipulation',
+    kicker: 'Sensor comparison guide',
+    intent: 'Comparison guide for tactile sensor benchmark, robot manipulation tactile sensor comparison, and robot touch sensor evaluation searches.',
+    updated: '2026-07-20',
+    priority: 0.84,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'applications',
+    keywords: ['tactile sensor benchmark', 'robot manipulation tactile sensor', 'tactile sensor comparison', 'robot touch sensor benchmark', 'visual tactile sensor'],
+    quickAnswer: [
+      'There is no universal best tactile sensor for robot manipulation. The useful choice depends on the contact event, task geometry, latency, coverage, and controller input the robot needs.',
+      'The 2026 TacO preprint compares visual, acoustic, magnetic, and resistive sensing across unknown-mass pick-and-place, object reorientation, and plug insertion. Its central result is task dependence, not one modality winning every task.',
+      'A defensible benchmark starts with the robot task, keeps mounting and control conditions visible, and measures whether tactile input changes manipulation outcomes under repeatable disturbances.',
+    ],
+    sections: [
+      {
+        heading: 'What a tactile benchmark should answer',
+        body: [
+          'A sensor specification sheet describes the component. A manipulation benchmark should show whether the resulting signal helps a robot complete a contact-rich task. That requires the sensor, mounting, calibration, data rate, controller, object set, and failure conditions to be reported together.',
+          'TacO is useful because it compares four tactile modalities within three manipulation tasks. The paper reports that usefulness varies with task requirements and properties such as spatial resolution, shear sensing, and surface friction. That finding argues for task-first selection instead of a single leaderboard.',
+        ],
+        bullets: [
+          'Define the contact event the robot must detect or regulate',
+          'Separate sensor output quality from controller quality',
+          'Keep object, mounting, surface, and disturbance conditions comparable',
+          'Report task success and failure modes, not only clean sensor maps',
+        ],
+      },
+      {
+        heading: 'Four tactile sensing modalities at a glance',
+        body: [
+          'The table describes engineering tendencies, not TacO winners. Products and research prototypes within the same modality can differ greatly in spatial resolution, bandwidth, force range, shear sensitivity, footprint, and durability.',
+        ],
+        table: {
+          headers: ['Modality', 'Primary signal route', 'Potential advantage', 'Constraint to test', 'Task-fit question'],
+          rows: [
+            ['Visual', 'A camera observes deformation, markers, or surface appearance inside the sensor.', 'Dense spatial contact geometry and deformation images.', 'Optical stack size, illumination stability, surface wear, frame rate, and compute.', 'Does the task need local contact shape or a dense pressure proxy?'],
+            ['Acoustic', 'A microphone or vibration path records contact-generated sound.', 'Transient contact, vibration, impact, and texture cues at high temporal resolution.', 'Ambient noise, structural coupling, repeatable mounting, and signal interpretation.', 'Does the decision depend on fast slip, impact, or texture events?'],
+            ['Magnetic', 'Magnetometers measure field changes caused by deformation of an embedded magnetic structure.', 'Compact multi-axis deformation or force-sensitive measurements.', 'Calibration, magnetic interference, temperature effects, and unit-to-unit variation.', 'Does the controller need directional force or shear information in a compact package?'],
+            ['Resistive', 'Resistance changes under pressure or deformation across a sensing element or array.', 'Direct contact or pressure response in thin, potentially conformable layouts.', 'Hysteresis, drift, crosstalk, wiring density, and repeated-load behavior.', 'Is broad pressure coverage more important than dense contact geometry?'],
+          ],
+        },
+      },
+      {
+        heading: 'Benchmark by manipulation task',
+        body: [
+          'TacO uses three tasks that stress different parts of the tactile pipeline. A team can reuse this structure even when its hardware, robot hand, or object set differs. The important step is to connect each task to a measurable tactile contribution.',
+        ],
+        table: {
+          headers: ['Task', 'Contact problem', 'What to measure', 'Failure question'],
+          rows: [
+            ['Pick-and-place with unknown mass', 'The robot must establish and maintain a grasp without knowing object mass in advance.', 'Task success, grip adjustment, slip events, excess force, and response latency.', 'Did tactile input prevent slip or crushing when visual appearance did not reveal load?'],
+            ['Object reorientation', 'Contacts move across the hand while object pose changes.', 'Pose completion, contact continuity, shear or slip response, and recovery attempts.', 'Could the system distinguish intended rolling or sliding from loss of control?'],
+            ['Plug insertion', 'Small pose errors create contact forces that must guide alignment.', 'Insertion success, peak force, completion time, jamming, and corrective actions.', 'Did tactile input reveal useful alignment error before the controller jammed the plug?'],
+          ],
+        },
+      },
+      {
+        heading: 'A minimum evaluation protocol',
+        body: [
+          'Run a vision-only or no-tactile baseline beside each tactile condition. Repeat trials across objects, starting poses, surface conditions, and disturbances that matter to deployment. Preserve raw tactile streams, calibrated values, robot state, commands, and outcomes so failures can be replayed.',
+          'A fair modality comparison also exposes non-sensor differences. If one system uses a larger model, a faster controller, different fingertips, or extra object-specific tuning, the result is a system comparison rather than isolated sensor evidence.',
+        ],
+        bullets: [
+          'Task success rate with uncertainty or trial counts',
+          'Contact-to-feature and feature-to-action latency',
+          'Calibration drift before and after repeated loading',
+          'Performance on held-out objects, poses, and surface conditions',
+          'Mounting, replacement, cleaning, wiring, and compute burden',
+          'Replayable failures linked to tactile and robot-state logs',
+        ],
+      },
+      {
+        heading: 'Claim boundary',
+        body: [
+          'TacO is a 2026 preprint. Its comparison is evidence for the reported sensors, tasks, robot setup, and protocol; it does not establish a permanent ranking for every visual, acoustic, magnetic, or resistive tactile sensor.',
+          'Use the paper as a benchmark design reference and verify code, data, hardware details, and later peer-reviewed revisions before treating a result as procurement evidence. A production decision also needs durability, replacement, environmental, and integration testing that a manipulation benchmark may not cover.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Which tactile sensor modality is best for robot manipulation?',
+        answer:
+          'No modality is best for every task. Choose from the contact signal and task outcome required, then compare candidate sensors under the same mounting, controller, objects, and disturbances.',
+      },
+      {
+        question: 'Can sensor resolution predict manipulation success?',
+        answer:
+          'Not by itself. Spatial resolution can matter, but latency, shear sensitivity, friction, force range, calibration, coverage, and controller design can change the result.',
+      },
+      {
+        question: 'What is the most important tactile benchmark baseline?',
+        answer:
+          'Use the same manipulation system without tactile input or with the tactile pathway disabled. This shows whether touch changes the task outcome instead of merely producing an attractive signal visualization.',
+      },
+      {
+        question: 'Is TacO a final industry standard?',
+        answer:
+          'No. It is a 2026 preprint and a useful task-based comparison framework. It should not be treated as a certification standard or universal modality ranking.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare dataset scope, splits, signals, and transfer limits.' },
+      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare representation, world-model, and policy roles.' },
+      { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Component selection and integration criteria.' },
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand coverage, contact, and manipulation context.' },
+      { label: 'Slip detection for robot hands', href: '/guides/slip-detection-robot-hand', description: 'Evaluate slip signals and closed-loop response.' },
+      { label: 'Research index', href: '/research-index', description: 'Filter source-backed records by modality and evidence.' },
+    ],
+    sources: [
+      { label: 'TacO tactile sensor benchmark preprint', href: 'https://arxiv.org/abs/2605.21976' },
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+    ],
+    paperBriefIds: ['open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025', 'event-based-opto-tactile-2025'],
+  },
+  {
+    path: '/guides/tactile-datasets-robot-learning',
+    title: 'Tactile Datasets for Robot Learning: 2026 Directory',
+    description:
+      'Compare tactile datasets for robot learning by signals, collection unit, split design, task fit, access evidence, and transfer limits.',
+    h1: 'Tactile datasets for robot learning',
+    kicker: '2026 dataset directory',
+    intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
+    updated: '2026-07-20',
+    priority: 0.85,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'resources',
+    keywords: ['tactile datasets', 'tactile dataset robot learning', 'visuo-tactile dataset', 'robot touch dataset', 'tactile manipulation dataset'],
+    quickAnswer: [
+      'A useful tactile dataset is defined by more than frame count. Check the physical collection event, sensor and robot state alignment, object and task diversity, split unit, access terms, and downstream evaluation.',
+      'Contact sequences matter because adjacent tactile frames from the same press or trajectory are strongly related. Random frame splits can leak near-duplicate contact evidence into both training and test sets.',
+      'Choose the dataset that matches the intended learning problem: material understanding, whole-hand contact, imitation learning, multisensory representation learning, or target-robot control.',
+    ],
+    sections: [
+      {
+        heading: 'How to read this directory',
+        body: [
+          'The entries below are research resources with different goals; they are not interchangeable rows in one leaderboard. Some emphasize tactile-language and material understanding, others whole-hand contact, data collection, humanoid action alignment, or multisensory representation learning.',
+          'Before use, open the primary source and project page. Verify the actual downloadable files, license, sensor hardware, collection protocol, annotations, train-test splits, and version. A paper saying that a resource is open does not replace checking the current repository terms.',
+        ],
+      },
+      {
+        heading: 'Tactile dataset and resource comparison',
+        body: [
+          'This comparison records the main research unit and the limit a user should preserve. Counts are included only where the primary source states them clearly.',
+        ],
+        table: {
+          headers: ['Resource', 'Signals and scale', 'Best-fit question', 'Evaluation unit', 'Evidence boundary'],
+          rows: [
+            ['RCT', '29,279 tactile frames from 122 industrial reference materials in 7 categories, collected with 3 DIGIT sensors; paired touch, image, language, and force context.', 'Material understanding and tactile-language retrieval.', 'Keep full press or contact sequences together; test held-out materials where possible.', 'A 2026 preprint. Reported performance is specific to its sensors, materials, models, and splits.'],
+            ['TactiDex', 'Whole-hand tactile observations aligned with multi-granularity kinematic and object states for single-hand and bimanual tasks.', 'Contact-rich dexterity and transfer across manipulation settings.', 'Use the standardized task and transfer protocol described by the source.', 'A 2026 preprint and project resource; inspect the released tasks, files, and license before reuse.'],
+            ['FreeTacMan', 'Paired visuo-tactile observations and interaction trajectories collected with a portable, human-operated workflow.', 'Scaling contact-rich demonstrations without occupying a robot arm for every collection session.', 'Split by task, object, trajectory, and operator conditions that match the transfer claim.', 'A 2025 preprint; human-device data still needs validation on the target robot embodiment.'],
+            ['Humanoid visual-tactile-action dataset', 'Synchronized vision, tactile observations, and action context for humanoid contact-rich manipulation.', 'Learning policies that need touch aligned with the action that produced it.', 'Keep synchronized trajectory segments and embodiment conditions intact.', 'A preprint; transfer depends on robot geometry, sensor placement, action space, and task distribution.'],
+            ['Sparsh-X research resource', 'Digit 360 tactile images, audio, motion, and pressure used for self-supervised multisensory touch representations.', 'Learning reusable tactile features across physical-property and manipulation tasks.', 'Evaluate downstream tasks and held-out conditions, not only pretraining loss.', 'A 2025 preprint tied to a multisensory sensor stack; cross-sensor transfer still requires evidence.'],
+          ],
+        },
+      },
+      {
+        heading: 'Why contact-sequence splits matter',
+        body: [
+          'RCT reports 29,279 frames but also preserves full contact sequences. Frames from one press are correlated, so a random frame-level split can place nearly the same physical event in training and test data. The paper reports that removing contact-sequence overlap reduces tactile-to-text Recall@1 by 17.7 percentage points.',
+          'The broader rule is to split at the level of the claim. For unseen-material performance, hold out materials. For unseen-object manipulation, hold out objects. For transfer across robots or sensors, hold out the target hardware. A large test set is not independent if the same contact event, object instance, or trajectory appears on both sides.',
+        ],
+        bullets: [
+          'Record the physical unit: press, grasp, trajectory, object, task, operator, robot, and sensor',
+          'Group correlated frames before creating train, validation, and test sets',
+          'Publish split manifests or deterministic split code',
+          'Report results for the hardest held-out condition relevant to the claim',
+        ],
+      },
+      {
+        heading: 'Dataset selection checklist',
+        body: [
+          'Start from the deployment mismatch you need to measure. A material dataset may be rich enough for tactile-language learning but unsuitable for action-conditioned robot control. A whole-hand trajectory dataset may support dexterity research but still mismatch a fingertip sensor, gripper geometry, or action space.',
+        ],
+        bullets: [
+          'Access: files, repository status, license, citation, version, and checksum',
+          'Hardware: sensor model, serial variation, placement, sampling rate, calibration, and units',
+          'Alignment: timestamps for touch, vision, force, pose, joint state, and actions',
+          'Coverage: objects, materials, tasks, contact types, operators, robots, and disturbances',
+          'Splits: sequence, object, material, task, sensor, or embodiment independence',
+          'Outcome: retrieval, classification, prediction, imitation, or real-robot task success',
+        ],
+      },
+      {
+        heading: 'What dataset size does not prove',
+        body: [
+          'Frame count does not establish diversity, independent evaluation, target-robot transfer, or production readiness. Ten thousand adjacent frames from a small set of presses can contain less independent evidence than a smaller collection spread across objects, sensors, and trajectories.',
+          'Use this directory to locate sources, then document the exact dataset version and split used in your experiment. Do not compare headline metrics across resources unless the sensor inputs, tasks, models, and evaluation protocols are genuinely aligned.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the best tactile dataset for robot learning?',
+        answer:
+          'There is no universal best dataset. Match the resource to the learning goal, sensor signals, robot embodiment, task, and evaluation split required by the deployment claim.',
+      },
+      {
+        question: 'Why are random frame splits risky for tactile data?',
+        answer:
+          'Adjacent frames from the same press, grasp, or trajectory can be near duplicates. If they appear in both training and test sets, the metric can overstate generalization.',
+      },
+      {
+        question: 'Does open source mean unrestricted commercial use?',
+        answer:
+          'No. Open access to a paper, project page, code, or files does not define commercial rights. Check the license for the exact dataset version and every bundled asset.',
+      },
+      {
+        question: 'Should tactile datasets include robot actions?',
+        answer:
+          'They should when the goal is policy learning, action-conditioned prediction, or replay of manipulation. Material recognition or representation learning may use different labels and collection units.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'See how tactile resources support representations, prediction, and control.' },
+      { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Connect data quality to task-level sensor evidence.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Map contact events, timestamps, robot state, and actions.' },
+      { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Build replayable tactile logs and aligned robot data.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the sensing-to-behavior stack.' },
+      { label: 'Research index', href: '/research-index', description: 'Browse source-backed tactile research records.' },
+    ],
+    sources: [
+      { label: 'RCT dataset preprint', href: 'https://arxiv.org/abs/2606.31694' },
+      { label: 'RCT dataset project page', href: 'https://faerber-lab.github.io/RCT/' },
+      { label: 'TactiDex dataset preprint', href: 'https://arxiv.org/abs/2607.09190' },
+      { label: 'TactiDex project page', href: 'https://tactidex.github.io/' },
+      { label: 'FreeTacMan preprint', href: 'https://arxiv.org/html/2506.01941v1' },
+      { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
+      { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
+    ],
+    paperBriefIds: ['freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025', 'sparsh-x-multisensory-touch-representations-2025'],
+  },
+  {
+    path: '/guides/tactile-foundation-models',
+    title: 'Tactile Foundation Models for Robotics Compared',
+    description:
+      'Compare tactile foundation models and related robot-learning systems by representation, prediction, policy role, evidence, and transfer limits.',
+    h1: 'Tactile foundation models for robotics compared',
+    kicker: 'Tactile AI model guide',
+    intent: 'Comparison guide for tactile foundation models, tactile AI models, tactile world models, and robot touch representation searches.',
+    updated: '2026-07-20',
+    priority: 0.86,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: ['tactile foundation models', 'tactile AI model', 'tactile world model', 'robot touch representation', 'tactile robot learning'],
+    quickAnswer: [
+      'Tactile foundation model is not one fixed architecture. Current systems may learn reusable touch representations, predict future tactile observations, combine vision-language planning with tactile control, or adapt heterogeneous sensor streams for imitation learning.',
+      'Sparsh-X, Dream-Tac, TouchWorld, and MiTaS address different layers of the tactile AI stack. Their metrics are not a direct leaderboard because the sensors, tasks, training data, baselines, and outputs differ.',
+      'Evaluate a model by the role touch plays, the transfer claim it tests, the robot task it changes, and the latency and hardware assumptions required at deployment.',
+    ],
+    sections: [
+      {
+        heading: 'Four different jobs for tactile learning',
+        body: [
+          'A reusable representation compresses raw tactile signals into features for later tasks. A world model predicts how touch may change after an action. A policy converts observations and goals into robot actions. A residual tactile controller makes fast local corrections around a slower plan.',
+          'These roles can be combined, but they should not be confused. A model that improves material classification has not automatically demonstrated dexterous control. A policy with high task success has not automatically shown broad transfer across tactile sensors.',
+        ],
+      },
+      {
+        heading: 'Model and system comparison',
+        body: [
+          'The table compares architectural role and evidence boundary. It does not rank unlike systems by one score. MiTaS is included as a related tactile learning system, not labeled here as a general-purpose foundation model.',
+        ],
+        table: {
+          headers: ['System', 'Primary level', 'Role of tactile data', 'Reported evaluation focus', 'Evidence boundary'],
+          rows: [
+            ['Sparsh-X', 'Self-supervised multisensory representation', 'Fuses Digit 360 image, audio, motion, and pressure into reusable touch features.', 'Physical-property inference and contact-rich manipulation tasks.', '2025 preprint; sensor stack and cross-hardware transfer assumptions must be checked.'],
+            ['Dream-Tac', 'Tactile world-action model', 'Predicts future visual and tactile observations conditioned on robot actions.', 'Contact-rich manipulation where anticipating tactile futures can support action selection.', '2026 preprint; reported tasks and hardware do not establish universal world-model transfer.'],
+            ['TouchWorld', 'Hierarchical planning and tactile control system', 'Combines vision-language planning, tactile world-model prediction, goal-conditioned action, and high-frequency tactile residual correction.', 'Six dexterous manipulation tasks in clean and perturbed conditions.', '2026 preprint; reported success rates are specific to its tasks, sensors, data, and baselines.'],
+            ['MiTaS', 'Multi-resolution tactile imitation learning', 'Aligns vision-based and event-based tactile streams with different spatial and temporal properties.', 'Robot-hand imitation learning with heterogeneous tactile inputs.', '2026 preprint and related learning system; it does not by itself establish a general tactile foundation model.'],
+          ],
+        },
+      },
+      {
+        heading: 'How to compare tactile models fairly',
+        body: [
+          'First match the output. Representation quality should be tested on held-out downstream tasks and conditions. World-model quality needs prediction metrics plus evidence that prediction improves action. Policy quality needs real-robot task outcomes, disturbances, baselines, and trial counts.',
+          'Then expose the hardware contract. Note every tactile modality, sensor model, placement, sampling rate, calibration path, preprocessing step, and synchronization assumption. A model that accepts tactile images from one fingertip does not automatically accept whole-hand force arrays or acoustic touch streams.',
+        ],
+        bullets: [
+          'Transfer across objects, tasks, sensors, placements, robots, and environments',
+          'Ablation showing what tactile input adds beyond vision and proprioception',
+          'Pretraining data composition and train-test independence',
+          'Online latency, update rate, compute, and controller interface',
+          'Recovery under slip, occlusion, contact uncertainty, and external disturbance',
+          'Availability and license for model weights, code, data, and evaluation tasks',
+        ],
+      },
+      {
+        heading: 'Where TouchWorld fits',
+        body: [
+          'TouchWorld reports a hierarchical system with slower semantic planning and faster tactile correction. The preprint reports 65.0% success in clean conditions and 53.7% under perturbations across six tasks, with improvements of 15.7 and 18.5 percentage points over its strongest reported baseline.',
+          'Those numbers are useful within the paper protocol, not as a general score for all tactile foundation models. The architectural lesson is more portable: semantic task reasoning and high-frequency contact correction operate on different time scales and may need separate pathways.',
+        ],
+      },
+      {
+        heading: 'What foundation does not guarantee',
+        body: [
+          'The word foundation does not guarantee sensor independence, zero-shot robot transfer, safe contact, low latency, public weights, or production readiness. Each of those needs separate evidence. A large pretraining corpus can still contain split leakage or narrow sensor coverage.',
+          'For deployment, treat the model as one layer in a tactile system. The surface, calibration, synchronization, robot state, control loop, failure logging, and task benchmark still determine whether learned touch changes behavior reliably.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a tactile foundation model?',
+        answer:
+          'It generally refers to a model trained on broad tactile data so its representations or learned dynamics can support multiple downstream touch tasks. The term is used inconsistently, so always inspect the exact transfer experiments.',
+      },
+      {
+        question: 'Is a tactile world model the same as a tactile foundation model?',
+        answer:
+          'No. A tactile world model predicts future tactile observations or contact dynamics. It may be pretrained broadly, but world modeling describes its predictive role, not the breadth of its transfer evidence.',
+      },
+      {
+        question: 'Can one tactile model work with every sensor?',
+        answer:
+          'Not without evidence. Tactile sensors expose different images, forces, events, audio, pressure arrays, rates, and calibration assumptions. Cross-sensor transfer must be designed and tested explicitly.',
+      },
+      {
+        question: 'Should model comparisons use task success or offline metrics?',
+        answer:
+          'Use both when possible. Offline metrics diagnose representation or prediction quality; real-robot task success shows whether the tactile pathway changes manipulation under execution noise.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and access evidence.' },
+      { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Evaluate the hardware and task layer beneath learned models.' },
+      { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'Read the source-bounded summary of the 2026 preprint.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'Map sensors, data, models, control, and validation.' },
+      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Define replayable contact data for embodied systems.' },
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Connect models to fingertip, palm, and whole-hand sensing.' },
+    ],
+    sources: [
+      { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
+      { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/html/2606.08737v1' },
+      { label: 'TouchWorld tactile foundation model preprint', href: 'https://arxiv.org/abs/2607.07287' },
+      { label: 'MiTaS multi-resolution tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
+    ],
+    paperBriefIds: ['sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'mitas-multi-resolution-tactile-imitation-learning-2026'],
   },
 ];
 

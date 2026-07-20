@@ -61,6 +61,9 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/guides/robot-touch-sensor | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/slip-detection-robot-hand | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/ros2-tactile-sensing | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/guides/tactile-datasets-robot-learning | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/guides/tactile-foundation-models | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026 | Yes |  |  | Inspect URL, then request indexing if available |
@@ -92,6 +95,9 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | robot gripper tactile sensor |  |  |  |  | Last 28 days | Commercial application query |
 | https://roboskin.ai/guides/slip-detection-robot-hand | slip detection robot hand |  |  |  |  | Last 28 days | Manipulation-intent query |
 | https://roboskin.ai/guides/ros2-tactile-sensing | ROS 2 tactile sensing |  |  |  |  | Last 28 days | Software integration query |
+| https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation | tactile sensor benchmark |  |  |  |  | Last 28 days | Manipulation benchmark query |
+| https://roboskin.ai/guides/tactile-datasets-robot-learning | tactile datasets robot learning |  |  |  |  | Last 28 days | Dataset-directory query |
+| https://roboskin.ai/guides/tactile-foundation-models | tactile foundation models |  |  |  |  | Last 28 days | Model-comparison query |
 
 ## GSC high-impression low-click pages
 

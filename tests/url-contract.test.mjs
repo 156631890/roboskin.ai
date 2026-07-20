@@ -28,12 +28,23 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 65);
+  assert.equal(protectedUrls.length, 72);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/service-robots-200000-units-logistics-tactile-ai'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/electronic-skin-research-robot-skin-systems-problem'));
+  for (const path of [
+    '/guides/tactile-sensor-benchmark-robot-manipulation',
+    '/guides/tactile-datasets-robot-learning',
+    '/guides/tactile-foundation-models',
+    '/news/underwater-self-healing-electronic-skin-nus-2026',
+    '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
+    '/news/color-changing-mechanochromic-tactile-sensor-2026',
+    '/news/single-pixel-tactile-skin-compressive-sampling-2026',
+  ]) {
+    assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
+  }
   assert.deepEqual(redirects, {});
 });
 

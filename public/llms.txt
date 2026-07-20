@@ -20,6 +20,9 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 - [Robot skin comparison](https://roboskin.ai/comparison): Comparison route for robot skin category concepts and learning paths.
 - [Robot skin research roadmap](https://roboskin.ai/implementation): Roadmap context for research mapping and source-backed category framing.
 - [Robot hand tactile sensor research](https://roboskin.ai/research): Source-backed research route for robot hand tactile sensors, slip detection, e-skin, and tactile AI.
+- [Tactile sensor benchmark for robot manipulation](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-first comparison of visual, acoustic, magnetic, and resistive tactile sensors.
+- [Tactile datasets for robot learning](https://roboskin.ai/guides/tactile-datasets-robot-learning): Directory of tactile research resources, contact-sequence splits, task fit, and transfer limits.
+- [Tactile foundation models for robotics](https://roboskin.ai/guides/tactile-foundation-models): Comparison of tactile representations, world models, hierarchical systems, and related learning pipelines.
 - [Robot skin glossary](https://roboskin.ai/glossary): Definitions for robot skin, tactile AI, e-skin, slip detection, and related terms.
 - [Robot skin context notes](https://roboskin.ai/case-studies): Application context paths without unsupported customer claims.
 - [Robot skin FAQ](https://roboskin.ai/faq): Direct answers about robot skin, tactile AI, e-skin, source guidance, and claim limits.
@@ -67,6 +70,9 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Physical AI and robot skin for Physical AI](https://roboskin.ai/physics-ai): Physical AI keyword cluster.
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Physical AI contact-feedback keyword cluster.
 - [Robot hand tactile sensor and slip detection robot hand](https://roboskin.ai/research): Research-intent keyword cluster.
+- [Tactile sensor benchmark and robot manipulation sensor comparison](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-based tactile sensor comparison cluster.
+- [Tactile datasets and robot touch data](https://roboskin.ai/guides/tactile-datasets-robot-learning): Tactile dataset and robot-learning resource cluster.
+- [Tactile foundation models and tactile world models](https://roboskin.ai/guides/tactile-foundation-models): Tactile AI model-comparison cluster.
 - [RoboSkin Tactile Research Index](https://roboskin.ai/research-index): Source-backed tactile sensing records organized by sensing principle, modality, output, evidence, and limitations.
 - [RoboSkin.ai Research and News RSS](https://roboskin.ai/feed.xml): Canonical feed for source-backed robot skin, tactile AI, and electronic skin updates.
 - [Robot skin vs tactile sensor](https://roboskin.ai/guides/robot-skin-vs-tactile-sensor): Comparison-intent keyword cluster.

@@ -406,6 +406,21 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
     summary: 'Research notes and industry assets for teams following the tactile AI stack.',
     links: [
       {
+        label: 'Compare tactile sensors by manipulation task',
+        href: '/guides/tactile-sensor-benchmark-robot-manipulation',
+        description: 'A task-first benchmark guide for visual, acoustic, magnetic, and resistive tactile sensing.',
+      },
+      {
+        label: 'Browse tactile datasets for robot learning',
+        href: '/guides/tactile-datasets-robot-learning',
+        description: 'A 2026 directory covering contact sequences, split leakage, signals, tasks, and transfer limits.',
+      },
+      {
+        label: 'Compare tactile foundation models',
+        href: '/guides/tactile-foundation-models',
+        description: 'A source-bounded comparison of representations, world models, policies, and tactile control systems.',
+      },
+      {
         label: 'Read the underwater self-healing e-skin brief',
         href: '/news/underwater-self-healing-electronic-skin-nus-2026',
         description: 'NUS research combining touch sensing, damage detection, and self-repair for underwater electronic skin.',

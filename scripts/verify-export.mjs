@@ -138,7 +138,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 28 || rssLinks.length !== 29 || rssGuids.length !== 28) failures.push('/feed.xml: expected 28 complete items');
+  if (rssItems.length !== 32 || rssLinks.length !== 33 || rssGuids.length !== 32) failures.push('/feed.xml: expected 32 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 }
 
@@ -146,4 +146,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 28 RSS items`);
+console.log(`Verified ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 32 RSS items`);

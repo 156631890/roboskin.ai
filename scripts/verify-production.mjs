@@ -175,7 +175,7 @@ const rssLinks = [...rss.matchAll(/<link>([^<]+)<\/link>/g)].map((match) => matc
 const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
 const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
 if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) throw new Error('RSS has an invalid envelope');
-if (rssItems.length !== 28 || rssLinks.length !== 29 || rssGuids.length !== 28) throw new Error('RSS does not contain 28 complete items');
+if (rssItems.length !== 32 || rssLinks.length !== 33 || rssGuids.length !== 32) throw new Error('RSS does not contain 32 complete items');
 if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) throw new Error('RSS contains a non-apex URL');
 
 if (deployment.commitSha !== expectedCommitSha) {
@@ -218,4 +218,4 @@ const report = {
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 28 RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 32 RSS items`);
