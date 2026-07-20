@@ -406,6 +406,16 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
     summary: 'Research notes and industry assets for teams following the tactile AI stack.',
     links: [
       {
+        label: 'Read the underwater self-healing e-skin brief',
+        href: '/news/underwater-self-healing-electronic-skin-nus-2026',
+        description: 'NUS research combining touch sensing, damage detection, and self-repair for underwater electronic skin.',
+      },
+      {
+        label: 'Track the TouchWorld tactile foundation model',
+        href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
+        description: 'A news brief on tactile prediction, fast contact correction, and dexterous robot manipulation.',
+      },
+      {
         label: 'Browse robot hand tactile sensor research',
         href: '/research',
         description: 'Technical briefs about tactile sensors, soft robotic skin, multimodal sensing, and robot hands.',

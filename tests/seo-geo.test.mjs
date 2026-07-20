@@ -43,7 +43,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(sitemap, /2026-04-25/);
   assert.match(sitemap, /seoRoutes/);
   assert.match(seo, /'\/news': \{/);
-  assert.match(seo, /title: 'RoboSkin News and Site Updates'/);
+  assert.match(seo, /title: 'Robot Skin, Tactile AI and Physical AI News'/);
   assert.match(news, /buildPageMetadata\('\/news'\)/);
   assert.match(news, /buildPageJsonLd\('\/news'\)/);
   assert.match(news, /buildBreadcrumbJsonLd\('\/news'\)/);

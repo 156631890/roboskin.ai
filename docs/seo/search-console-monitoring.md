@@ -61,6 +61,10 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/guides/robot-touch-sensor | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/slip-detection-robot-hand | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/ros2-tactile-sensing | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026 | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/news/single-pixel-tactile-skin-compressive-sampling-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026 | Yes |  |  | Inspect URL, then request indexing if available |

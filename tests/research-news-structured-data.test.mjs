@@ -30,6 +30,10 @@ test('news detail pages are crawlable source-backed article pages with structure
   assert.match(newsData, /export const newsPosts: NewsPost\[\]/);
   assert.match(newsData, /full-hand-tactile-sensing-robot-hands-vision-control/);
   assert.match(newsData, /global-robot-installations-542000-physical-ai-touch/);
+  assert.match(newsData, /underwater-self-healing-electronic-skin-nus-2026/);
+  assert.match(newsData, /touchworld-tactile-foundation-model-dexterous-manipulation-2026/);
+  assert.match(newsData, /color-changing-mechanochromic-tactile-sensor-2026/);
+  assert.match(newsData, /single-pixel-tactile-skin-compressive-sampling-2026/);
   assert.match(newsData, /sourceTitle/);
   assert.match(newsData, /sourceUrl/);
   assert.match(newsData, /technicalFocus/);
@@ -138,6 +142,10 @@ test('answer-engine and monitoring files expose updated GSC-visible research and
   ]);
 
   const expectedRoutes = [
+    'https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026',
+    'https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
+    'https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026',
+    'https://roboskin.ai/news/single-pixel-tactile-skin-compressive-sampling-2026',
     'https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control',
     'https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch',
     'https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026',
@@ -166,6 +174,8 @@ test('homepage authority routes promote news and GSC-visible article pages', asy
   ]);
 
   const priorityInternalRoutes = [
+    '/news/underwater-self-healing-electronic-skin-nus-2026',
+    '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     '/news/full-hand-tactile-sensing-robot-hands-vision-control',
     '/news/global-robot-installations-542000-physical-ai-touch',
     '/research/dream-tac-tactile-world-action-model-2026',

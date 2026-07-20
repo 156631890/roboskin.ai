@@ -27,6 +27,267 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'underwater-self-healing-electronic-skin-nus-2026',
+    title: 'Underwater self-healing electronic skin combines touch, damage detection, and repair',
+    excerpt:
+      'NUS researchers combined self-powered touch sensing, damage detection, and underwater self-repair in one electronic skin system for soft robotics and marine machines.',
+    content: `# Underwater self-healing electronic skin combines touch, damage detection, and repair
+
+**News brief - July 2026**
+
+The National University of Singapore reported a self-healing magnetoelectric sensory system that can sense touch and proximity, detect damage, and recover after damage in both air and water. The research targets a practical weakness in electronic skin: a soft sensor may perform well when new but lose value quickly if a puncture, cut, or harsh environment disables it.
+
+## What the researchers reported
+
+The system combines a damage-sensing layer with an electromagnetic sensing layer. Both use a stretchable, self-healing elastomer with liquid-metal conductors. The NUS team demonstrated the technology in a smart diving glove and in a robotic hand that grasped objects under water while monitoring damage.
+
+The university reports that the material reached up to 92% elastic recovery. Under mild heating, it reached about 82% healing efficiency in air after seven days and nearly 100% under water after ten days. After needle punctures, the sensor recovered its original electrical performance within seconds; larger cuts required contact pressure and a longer healing period.
+
+## Why this matters for robot skin
+
+Robot skin is exposed by design. It sits on hands, grippers, arms, soft bodies, and contact surfaces where abrasion, cuts, moisture, and repeated deformation are normal operating conditions. That makes recovery behavior as important as initial sensitivity.
+
+The research also connects three functions that are often evaluated separately: sensing the environment, detecting damage to the sensor itself, and restoring useful operation. For field robots, this could reduce the gap between a laboratory material sample and a maintainable sensing surface.
+
+## What this does not prove yet
+
+The work does not establish commercial readiness, indefinite underwater service, or suitability for every marine robot. The reported healing conditions and time scales also differ by damage type. Readers should separate rapid electrical recovery after a puncture from longer material healing after a severe cut.
+
+## Where this fits next
+
+Compare this result with the [single-material soft robotic skin research brief](/research/single-material-soft-robotic-skin-2025), which examines multimodal sensing and damage awareness across a flexible surface. The broader [e-skin guide](/e-skin) explains how electronic skin relates to robot skin, tactile sensing, and Physical AI.
+
+## Practical questions
+
+- Why is underwater healing notable? Water can interfere with bonding and electronics, while underwater robots cannot always be recovered immediately for repair.
+- Is self-healing the same as maintenance-free? No. Packaging, connectors, calibration, biofouling, and repeated damage still need evaluation.
+- What should robot teams measure? Healing time, recovered signal quality, calibration drift, mechanical integrity, and performance after repeated damage cycles.
+
+## Source boundary
+
+This brief summarizes the NUS report and the associated Advanced Materials paper. Performance values belong to the cited study. RoboSkin.ai adds editorial context and is not affiliated with the researchers.
+
+## Sources
+
+- [NUS: Electronic skin that senses and self-heals under water](https://cde.nus.edu.sg/news/electronic-skin-that-senses-and-self-heals-under-water/)
+- [Advanced Materials: A Self-Healing Magnetoelectric Sensor with Pain Sensing for Underwater Soft Electronics](https://doi.org/10.1002/adma.202523052)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-07-20',
+    updated: '2026-07-20',
+    readTime: '4 min read',
+    category: 'Electronic skin',
+    image: '/generated/research-self-healing-2025.svg',
+    sourceTitle: 'NUS underwater self-healing electronic skin report',
+    sourceUrl: 'https://cde.nus.edu.sg/news/electronic-skin-that-senses-and-self-heals-under-water/',
+    sources: [
+      {
+        title: 'NUS: Electronic skin that senses and self-heals under water',
+        url: 'https://cde.nus.edu.sg/news/electronic-skin-that-senses-and-self-heals-under-water/',
+      },
+      {
+        title: 'Advanced Materials: Self-healing magnetoelectric sensor paper',
+        url: 'https://doi.org/10.1002/adma.202523052',
+      },
+    ],
+    technicalFocus: ['self-healing electronic skin', 'underwater robotics', 'damage sensing', 'soft robotics'],
+  },
+  {
+    id: 'touchworld-tactile-foundation-model-dexterous-manipulation-2026',
+    title: 'TouchWorld separates tactile prediction from fast contact correction in robot manipulation',
+    excerpt:
+      'The TouchWorld preprint proposes a hierarchical tactile foundation model that combines contact prediction with fast feedback for dexterous, contact-rich robot tasks.',
+    content: `# TouchWorld separates tactile prediction from fast contact correction in robot manipulation
+
+**News brief - July 2026**
+
+TouchWorld is a July 2026 preprint that treats touch as both a prediction target and a fast feedback signal for dexterous robot manipulation. Its central idea is that high-level task reasoning and low-level contact correction should not be forced into one control loop running at one speed.
+
+## What the preprint proposes
+
+The system uses a hierarchy with vision-language subtask planning, tactile world-model prediction, visuo-tactile action generation, and a tactile-conditioned refinement policy. The high-level layer predicts executable subtasks and tactile subgoals. The lower-level policy uses recent tactile and proprioceptive feedback to correct local errors such as slip, misalignment, unstable grasping, or force mismatch.
+
+Across six long-horizon, contact-rich manipulation tasks, the authors report 65.0% average success in the clean setting and 53.7% under human perturbations. Those results were 15.7 and 18.5 percentage points above the strongest baseline reported in the paper.
+
+## Why this matters for tactile AI
+
+Vision and language can describe a task and guide a hand toward an object, but they do not directly reveal hidden contact states. Once a plug meets a socket, a cup begins to slip, or a soft object deforms, the controller needs evidence from the physical interaction itself.
+
+TouchWorld is useful as a systems idea because it assigns different jobs to different layers. A slower planner handles semantics and task phases, while a faster tactile pathway handles local contact errors. This is closer to how a practical robot stack may need to divide reasoning and response.
+
+## What this does not prove yet
+
+TouchWorld is a preprint, not a peer-reviewed final publication. Its reported success rates are specific to the paper's task suite, sensors, training data, baselines, and evaluation protocol. They should not be treated as a general benchmark for all robot hands or tactile foundation models.
+
+## Where this fits next
+
+The [Dream-Tac tactile world model brief](/research/dream-tac-tactile-world-action-model-2026) provides related context on predicting tactile futures. The [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
+
+## Practical questions
+
+- Why split planning and tactile correction? Semantic reasoning and contact response operate at different time scales and use different evidence.
+- Does a tactile foundation model replace robot control? No. It still depends on sensors, calibration, proprioception, action interfaces, and task-specific validation.
+- What should readers watch next? Independent reproduction, cross-sensor transfer, unseen-object performance, latency, and robustness outside the six reported tasks.
+
+## Source boundary
+
+This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The results have not been independently validated by RoboSkin.ai and should be interpreted within the authors' reported setup.
+
+## Source
+
+- [arXiv: TouchWorld - A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation](https://arxiv.org/abs/2607.07287)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-07-20',
+    updated: '2026-07-20',
+    readTime: '4 min read',
+    category: 'Tactile AI',
+    image: '/generated/research-ai-tactile-learning-2025.svg',
+    sourceTitle: 'TouchWorld tactile foundation model preprint',
+    sourceUrl: 'https://arxiv.org/abs/2607.07287',
+    sources: [
+      {
+        title: 'arXiv: TouchWorld tactile foundation model preprint',
+        url: 'https://arxiv.org/abs/2607.07287',
+      },
+    ],
+    technicalFocus: ['TouchWorld', 'tactile foundation model', 'dexterous manipulation', 'contact-rich robotics'],
+  },
+  {
+    id: 'color-changing-mechanochromic-tactile-sensor-2026',
+    title: 'Color-changing tactile sensor turns robot contact into real-time pressure maps',
+    excerpt:
+      'A Queen Mary-led mechanochromic sensor converts contact, strain, and pressure into visible color fields that a standard camera can observe in real time.',
+    content: `# Color-changing tactile sensor turns robot contact into real-time pressure maps
+
+**News brief - July 2026**
+
+Researchers led by Queen Mary University of London reported a tactile sensor that converts mechanical interaction directly into changing structural colors. A camera observes those color fields as contact, strain, and pressure maps, making the material itself part of the tactile encoding process.
+
+## What the researchers reported
+
+When pressure is applied to the soft sensing surface, the material produces spatially varying color patterns. The university report states that a standard low-cost USB camera can capture the signal in real time. The approach is designed to reduce dependence on dense electronic taxel arrays and heavy reconstruction pipelines.
+
+The work uses mechanochromic materials: deformation changes their optical response, so mechanical cues become visible information. The researchers position the method for precision grippers, prosthetics, and surgical systems where small pressure changes matter.
+
+## Why this matters for robot skin
+
+Vision-based tactile sensors are already important in robotics, but many systems reconstruct contact geometry from internal images using significant calibration and computation. Encoding pressure into the optical signal could simplify part of that path.
+
+The broader lesson is that tactile sensing does not have to begin with one electrical channel per sensing point. Materials can perform part of the encoding before software receives the data. That may create new trade-offs among spatial resolution, latency, camera bandwidth, lighting control, durability, and manufacturability.
+
+## What this does not prove yet
+
+The report does not establish that the sensor is ready for industrial deployment or that it outperforms every existing vision-based tactile sensor. Real robot use would still need evidence on repeatability, calibration drift, hysteresis, surface wear, contamination, camera placement, and performance across curved or large areas.
+
+## Where this fits next
+
+The [tactile sensing technology map](/technology) explains how a sensing surface connects to signal processing and robot control. The [robot gripper tactile sensor guide](/applications/robot-gripper-tactile-sensor) frames pressure mapping as one part of grasp stability, slip response, and integration.
+
+## Practical questions
+
+- What is mechanochromic sensing? It uses a material whose visible optical response changes under mechanical deformation.
+- Why use a camera? A camera can capture a spatial field without routing a separate electrical channel from every sensing point.
+- What should be compared next? Spatial resolution, response time, reconstruction cost, lighting sensitivity, durability, and calibration over repeated contact.
+
+## Source boundary
+
+This brief summarizes the Queen Mary University report and linked Science Advances work. RoboSkin.ai did not test the sensor and does not claim product availability or comparative performance.
+
+## Sources
+
+- [Queen Mary University of London: Robots can now see touch through a color-changing tactile sensor](https://www.qmul.ac.uk/news/latest-news/2026/science-and-engineering/se/robots-can-now-see-touch-thanks-to-a-new-colour-changing-tactile-sensor.html)
+- [Science Advances paper DOI](https://doi.org/10.1126/sciadv.aee5236)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-07-20',
+    updated: '2026-07-20',
+    readTime: '4 min read',
+    category: 'Tactile sensors',
+    image: '/generated/pages/technology-signal-flow.webp',
+    sourceTitle: 'Queen Mary color-changing tactile sensor report',
+    sourceUrl: 'https://www.qmul.ac.uk/news/latest-news/2026/science-and-engineering/se/robots-can-now-see-touch-thanks-to-a-new-colour-changing-tactile-sensor.html',
+    sources: [
+      {
+        title: 'Queen Mary University of London: Color-changing tactile sensor',
+        url: 'https://www.qmul.ac.uk/news/latest-news/2026/science-and-engineering/se/robots-can-now-see-touch-thanks-to-a-new-colour-changing-tactile-sensor.html',
+      },
+      {
+        title: 'Science Advances paper DOI',
+        url: 'https://doi.org/10.1126/sciadv.aee5236',
+      },
+    ],
+    technicalFocus: ['mechanochromic sensor', 'optical tactile sensing', 'pressure mapping', 'robot grippers'],
+  },
+  {
+    id: 'single-pixel-tactile-skin-compressive-sampling-2026',
+    title: 'Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch',
+    excerpt:
+      'A flexible 10 x 10 tactile array uses compressive sampling and one summed output channel to reduce wiring and readout demands for responsive robot skin.',
+    content: `# Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch
+
+**News brief - July 2026**
+
+A Communications Engineering paper presents Single-Pixel Tactile Skin, a flexible tactile array that applies compressive sampling in hardware. Instead of reading every sensing element independently, the array combines programmable weighted signals into one output channel and reconstructs tactile images from repeated global measurements.
+
+## What the paper reported
+
+The prototype uses a flexible, daisy-chainable 10 x 10 array. Each sensing element applies a programmable analog weight, and the pixel currents are summed into a single channel. Sparse-recovery methods then reconstruct the contact image.
+
+In the reported experiments, the system achieved at least 98% object-classification accuracy with 20 measurements, corresponding to an effective 3,500 frames per second. It also captured an 8 millisecond projectile impact in 23 reconstructed frames. The authors describe progressive reconstruction: a robot can localize contact from fewer measurements and refine the image as more data arrives.
+
+## Why this matters for robot skin
+
+Large-area tactile skin creates a scaling problem. More sensing points usually mean more wires, more readout channels, more bandwidth, and more failure points. A body-scale sensor cannot be evaluated only by sensitivity at one pixel; the data path must also remain practical as coverage grows.
+
+Compressive sampling changes the trade-off. Rather than demanding a complete raster scan before acting, the system can use a coarse early estimate and improve it over time. That is relevant to robots that need a fast contact location first and detailed contact shape second.
+
+## What this does not prove yet
+
+The publisher labels the current article as an unedited early version. The reported classification and impact results are specific to the prototype and experimental setup. They do not yet prove performance on full robot bodies, in cluttered environments, or after long-term mechanical wear.
+
+The architecture also introduces reconstruction assumptions and distributed electronics at each sensing element. Wiring is reduced, not eliminated, and teams would still need to evaluate power, synchronization, fault isolation, calibration, and latency in a complete robot.
+
+## Where this fits next
+
+The [robot skin definition guide](/robot-skin) explains why body coverage changes the sensing problem. The [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026) adds the software side: timestamps, message structure, recording, and replay after tactile data leaves the surface.
+
+## Practical questions
+
+- What is the single pixel? It refers to the shared output used to reconstruct the array, not a skin with only one physical sensing location.
+- Why use compressive sampling? It can recover useful spatial information from fewer global measurements than a complete point-by-point scan.
+- What should be tested next? Larger arrays, multiple simultaneous contacts, damaged pixels, long-term drift, controller latency, and robot-scale integration.
+
+## Source boundary
+
+This brief summarizes the published paper and adds RoboSkin.ai systems context. All quantitative results belong to the cited study and have not been independently reproduced by RoboSkin.ai.
+
+## Sources
+
+- [Communications Engineering: Single-Pixel Tactile Skin via compressive sampling](https://www.nature.com/articles/s44172-026-00697-2)
+- [arXiv preprint: Single-Pixel Tactile Skin via Compressive Sampling](https://arxiv.org/abs/2511.16898)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-07-20',
+    updated: '2026-07-20',
+    readTime: '5 min read',
+    category: 'Robot skin systems',
+    image: '/generated/research-scalable-manufacturing-2025.svg',
+    sourceTitle: 'Communications Engineering single-pixel tactile skin paper',
+    sourceUrl: 'https://www.nature.com/articles/s44172-026-00697-2',
+    sources: [
+      {
+        title: 'Communications Engineering: Single-Pixel Tactile Skin via compressive sampling',
+        url: 'https://www.nature.com/articles/s44172-026-00697-2',
+      },
+      {
+        title: 'arXiv: Single-Pixel Tactile Skin preprint',
+        url: 'https://arxiv.org/abs/2511.16898',
+      },
+    ],
+    technicalFocus: ['single-pixel tactile skin', 'compressive sampling', 'large-area robot skin', 'tactile bandwidth'],
+  },
+  {
     id: 'service-robots-200000-units-logistics-tactile-ai',
     title: 'Service robot sales reached almost 200,000 units: logistics makes tactile AI practical',
     excerpt:

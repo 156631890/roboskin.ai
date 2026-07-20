@@ -189,11 +189,11 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/news': {
     path: '/news',
-    title: 'RoboSkin News and Site Updates',
+    title: 'Robot Skin, Tactile AI and Physical AI News',
     description:
-      'Follow RoboSkin.ai site updates, research-route changes, Physical AI coverage, robot skin resources, and tactile AI content improvements.',
-    priority: 0.62,
-    changeFrequency: 'monthly',
+      'Follow source-backed news on robot skin, tactile AI, electronic skin, tactile sensors, dexterous manipulation, and touch for Physical AI.',
+    priority: 0.72,
+    changeFrequency: 'weekly',
     index: true,
     breadcrumbs: ['Home', 'News'],
   },

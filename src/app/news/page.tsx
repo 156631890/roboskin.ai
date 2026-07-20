@@ -16,13 +16,13 @@ export default function NewsPage() {
         <div className="container-shell">
           <span className="eyebrow">News</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Updates</h1>
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot Skin and Tactile AI News</h1>
             <Link href="/contact" className="text-accent text-sm font-semibold hover:text-white">
               Contact {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            We keep public announcements conservative and avoid implying active hardware availability, support, or procurement routes.
+            Follow source-backed developments in robot skin, tactile AI, electronic skin, tactile sensors, and Physical AI. Each brief separates reported findings from RoboSkin.ai analysis.
           </p>
         </div>
       </section>

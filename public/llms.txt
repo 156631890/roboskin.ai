@@ -45,6 +45,10 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 ## News Briefs
 
+- [Underwater self-healing electronic skin combines touch, damage detection, and repair](https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026): NUS research on self-powered touch sensing, underwater damage detection, and self-repair for soft electronic skin.
+- [TouchWorld separates tactile prediction from fast contact correction](https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026): Preprint brief on a hierarchical tactile foundation model for contact-rich dexterous manipulation.
+- [Color-changing tactile sensor creates real-time pressure maps](https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026): Queen Mary-led research on mechanochromic materials and camera-readable tactile signals.
+- [Single-pixel tactile skin targets the wiring bottleneck](https://roboskin.ai/news/single-pixel-tactile-skin-compressive-sampling-2026): Communications Engineering paper on compressive sampling for large-area, high-speed tactile arrays.
 - [Full-hand tactile sensing moves robot hands beyond vision-only control](https://roboskin.ai/news/full-hand-tactile-sensing-robot-hands-vision-control): News brief connecting F-TAC Hand, Meta Sparsh, Digit 360, robot hands, tactile AI, and robot skin.
 - [Global robot installations passed 542,000 units](https://roboskin.ai/news/global-robot-installations-542000-physical-ai-touch): News brief connecting IFR industrial robot deployment data to Physical AI, contact feedback, and robot skin.
 
