@@ -1,96 +1,49 @@
 # RoboSkin.ai
 
-RoboSkin.ai is a Next.js App Router site for robot skin, tactile AI, e-skin, tactile sensing, and Physical AI research context. The current structure presents the site as a source-backed research map, not a hardware vendor, product catalog, or procurement channel.
+**A source-backed map of robot skin, tactile AI, and the technologies giving Physical AI a sense of touch.**
 
-## Stack
+[RoboSkin.ai](https://roboskin.ai) is an independent information platform for understanding how robots perceive and respond to physical contact. It brings together the language, research, applications, and emerging ideas shaping robot skin, electronic skin, tactile sensing, and contact-aware intelligence.
 
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS 4
+The goal is simple: make a fast-moving and fragmented field easier to understand without turning research claims into marketing claims.
 
-## Development
+## Our Position
 
-```bash
-npm install
-npm run dev
-```
+AI can see, hear, and reason, but machines operating in the physical world also need to understand touch. Pressure, force, slip, texture, and contact are essential signals for robots that handle objects, work alongside people, or interact with unpredictable environments.
 
-## Build and checks
+RoboSkin.ai maps this emerging category. It connects foundational concepts with research directions, application contexts, and source trails so readers can see how the field fits together and where the evidence comes from.
 
-```bash
-npm run lint
-npm run build
-```
+RoboSkin.ai is not a hardware vendor, product catalog, or procurement channel. It is an independent knowledge resource designed to support informed exploration of the category.
 
-## Public routes
+## Who It Is For
 
-- `/` Home
-- `/products` Guides route
-- `/solutions` Use-case route
-- `/technology`
-- `/resources`
-- `/downloads` Reference library route
-- `/comparison`
-- `/implementation` Research roadmap route
-- `/research`
-- `/research/[id]`
-- `/glossary`
-- `/case-studies` Context notes route
-- `/faq`
-- `/about`
-- `/contact`
-- `/privacy`
-- `/terms`
+- Engineers and researchers exploring tactile sensing and contact-aware robotics
+- Founders and product teams evaluating opportunities in Physical AI
+- Investors and analysts tracking the evolution of embodied intelligence
+- Educators, writers, and curious readers looking for clear category context
 
-Legacy routes such as `/applications`, `/partners`, `/team`, `/news`, and `/careers` remain as compatibility pages and are excluded from the main navigation.
+## What You Will Find
 
-## Live research and SEO routes
+- Clear introductions to robot skin, tactile AI, e-skin, and Physical AI
+- Research maps and source-backed notes across the field
+- Application context for humanoid robots, robotic hands, grippers, and collaborative systems
+- Guides for comparing concepts, sensing approaches, and evaluation questions
+- A glossary that connects specialized terms to the broader category
 
-- [Robot skin definition](https://roboskin.ai/robot-skin)
-- [Tactile AI guide](https://roboskin.ai/tactile-ai)
-- [E-skin in robotics](https://roboskin.ai/e-skin)
-- [Robot skin papers and research routes](https://roboskin.ai/research/robot-skin-papers)
-- [Robot skin learning resources](https://roboskin.ai/resources)
+## Editorial Approach
 
-## Contact form
+RoboSkin.ai separates public evidence from editorial interpretation. Claims are kept narrow, sources are made visible, and uncertain details are not presented as established facts. External references are included for context, not as endorsements.
 
-The contact flow is static-hosting safe. If `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` is configured at build time, the browser posts submissions to that endpoint. If it is not configured, the form opens a prepared email to `contact@roboskin.ai`.
+The platform is independent and is not affiliated with similarly named products, companies, laboratories, or research projects unless a page explicitly states and supports that relationship.
 
-Environment variable:
+## Explore RoboSkin.ai
 
-```bash
-NEXT_PUBLIC_CONTACT_FORM_ENDPOINT=
-```
+- [Start with robot skin](https://roboskin.ai/robot-skin)
+- [Understand tactile AI](https://roboskin.ai/tactile-ai)
+- [Explore e-skin in robotics](https://roboskin.ai/e-skin)
+- [Browse research and papers](https://roboskin.ai/research/robot-skin-papers)
+- [View the learning resources](https://roboskin.ai/resources)
+- [Suggest a source or correction](https://roboskin.ai/contact?requestType=research)
 
-The repository still includes `/api/contact` for server-capable deployments, but the exported static site does not rely on it.
+---
 
-## Image generation
-
-The site includes an image generation utility for rebuilding public assets.
-
-```bash
-npm run generate:images
-```
-
-Required environment variables:
-
-```bash
-GEMINI_API_KEY=
-GEMINI_IMAGE_MODEL=gemini-2.0-flash-exp-image-generation
-```
-
-Generated assets are written to `public/generated/`.
-
-If Gemini is unavailable, the script supports offline fallback:
-
-```bash
-GEMINI_OFFLINE_MODE=1 npm run generate:images
-```
-
-## Notes
-
-- Shared site copy and contact details live in `src/content/site.ts`.
-- Navigation and footer read from the same source of truth.
-- Public pages are designed to avoid personal contact handles, product-vendor language, and unsupported claims.
-- `public/llms.txt`, `sitemap.xml`, and the glossary are maintained as crawl and AI-answering aids.
+**RoboSkin.ai: mapping the sense of touch for Physical AI.**
