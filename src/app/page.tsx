@@ -84,14 +84,14 @@ export default function Home() {
               </div>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link href="/research" className="btn-primary w-full sm:w-auto">
-                  Browse robot skin research
+                <Link href="/research-index" className="btn-primary w-full sm:w-auto">
+                  Compare research evidence
+                </Link>
+                <Link href="/research" className="btn-secondary w-full sm:w-auto">
+                  Browse research briefs
                 </Link>
                 <Link href="/glossary" className="btn-secondary w-full sm:w-auto">
-                  Open the robot skin glossary
-                </Link>
-                <Link href="/physics-ai" className="btn-secondary w-full sm:w-auto">
-                  Read Physical AI
+                  Open the glossary
                 </Link>
                 <Link href="/contact?requestType=research" className="btn-tertiary w-full sm:w-auto">
                   Submit source
@@ -154,14 +154,17 @@ export default function Home() {
             <Link href="/resources" className="font-semibold text-[#c8d1de] hover:text-white">
               View RoboSkin library
             </Link>
+            <Link href="/research-index" className="font-semibold text-[#c8d1de] hover:text-white">
+              Compare the research index
+            </Link>
             <Link href="/technology" className="font-semibold text-[#c8d1de] hover:text-white">
               Explore tactile AI technology
             </Link>
             <Link href="/applications" className="btn-secondary">
               Explore humanoid robot skin use cases
             </Link>
-            <Link href="/downloads" className="btn-secondary">
-              Open reference library
+            <Link href="/guides/tactile-sensor-benchmark-robot-manipulation" className="btn-secondary">
+              Compare tactile sensors
             </Link>
           </div>
 

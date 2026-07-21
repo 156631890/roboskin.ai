@@ -74,7 +74,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopic, /const definedTermNode = page\.schemaType === 'DefinedTerm'/);
   assert.match(seoTopic, /mainEntity:\s*\{\s*'@id': `\$\{url\}#defined-term`/);
   assert.match(seoTopic, /'@id': `\$\{url\}#breadcrumb`/);
-  assert.match(seoTopic, /'@graph': \[webPageNode, breadcrumbNode, faqNode, \.\.\.entityNodes\]/);
+  assert.match(seoTopic, /'@graph': \[webPageNode, breadcrumbNode, faqNode, \.\.\.entityNodes, buildEditorialTeamJsonLd\(\)\]/);
 
   assert.match(seoTopics, /path: '\/guides\/robot-skin-vs-tactile-sensor'/);
   assert.match(seoTopics, /robot skin vs tactile sensor/);

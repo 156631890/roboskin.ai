@@ -1,7 +1,7 @@
 {
   "name": "RoboSkin.ai",
   "short_name": "RoboSkin",
-  "description": "Tactile AI and robot skin components for robotics teams.",
+  "description": "Independent research and information resource for robot skin, tactile AI, e-skin, and Physical AI.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#06080c",

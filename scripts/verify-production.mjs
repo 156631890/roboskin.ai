@@ -13,6 +13,9 @@ await rm(reportFile, { force: true });
 const protectedUrls = JSON.parse(
   await readFile(new URL('../config/protected-urls.json', import.meta.url), 'utf8'),
 );
+const noindexUrls = JSON.parse(
+  await readFile(new URL('../config/noindex-urls.json', import.meta.url), 'utf8'),
+);
 const protectedRedirects = JSON.parse(
   await readFile(new URL('../config/protected-redirects.json', import.meta.url), 'utf8'),
 );
@@ -71,12 +74,15 @@ function parseCsv(csv) {
   });
 }
 
-function validateHtml(html, pathname, expectedPath = pathname) {
+function validateHtml(html, pathname, expectedPath = pathname, indexable = true) {
   const canonical = canonicalFromHtml(html);
   if (canonical !== canonicalFor(expectedPath)) throw new Error(`${pathname} canonical is ${canonical ?? 'missing'}`);
   if ((html.match(/<h1\b/gi) ?? []).length !== 1) throw new Error(`${pathname} does not contain exactly one H1`);
   if ((html.match(/<title>/gi) ?? []).length !== 1) throw new Error(`${pathname} does not contain exactly one title`);
-  if (!/<meta name="robots" content="index, follow"/i.test(html)) throw new Error(`${pathname} is missing indexable robots metadata`);
+  const robotsPattern = indexable
+    ? /<meta name="robots" content="index, follow"/i
+    : /<meta name="robots" content="noindex, follow"/i;
+  if (!robotsPattern.test(html)) throw new Error(`${pathname} has invalid robots metadata`);
   const jsonLd = parseJsonLd(html, pathname);
   if (/www\.roboskin\.ai|https:\/\/[^"'<]*\.vercel\.app/i.test(`${canonical}${JSON.stringify(jsonLd)}`)) {
     throw new Error(`${pathname} leaks a non-apex host in canonical or JSON-LD`);
@@ -155,7 +161,7 @@ const indexJsonLd = validateHtml(indexHtml, '/research-index');
 if (!JSON.stringify(indexJsonLd).includes('"@type":"Dataset"') || !JSON.stringify(indexJsonLd).includes('"@type":"ItemList"')) {
   throw new Error('/research-index is missing Dataset or ItemList JSON-LD');
 }
-if (indexData.count !== 7 || indexData.entries?.length !== 7) throw new Error('Research index JSON does not contain seven records');
+if (indexData.count !== 17 || indexData.entries?.length !== 17) throw new Error('Research index JSON does not contain 17 records');
 
 const csvRows = parseCsv(csv);
 const csvIds = csvRows.map((row) => row.id);
@@ -195,9 +201,18 @@ if (base.origin === canonicalOrigin) {
   }
 }
 
+for (const absoluteUrl of noindexUrls) {
+  const pathname = new URL(absoluteUrl).pathname;
+  const response = await fetchOk(pathname);
+  const contentType = response.headers.get('content-type') ?? '';
+  if (!contentType.includes('text/html')) throw new Error(`${pathname} did not return HTML`);
+  validateHtml(await response.text(), pathname, pathname, false);
+}
+
 const verifiedPaths = [
   ...new Set([
     ...protectedUrls.map((url) => new URL(url).pathname),
+    ...noindexUrls.map((url) => new URL(url).pathname),
     '/research-index',
     '/research-index.csv',
     '/research-index.json',
@@ -213,9 +228,10 @@ const report = {
   sitemapSha256,
   verifiedPaths,
   protectedUrlCount: protectedUrls.length,
+  noindexUrlCount: noindexUrls.length,
   researchIndexCount: indexData.entries.length,
 };
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 32 RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 17 data records, and 32 RSS items`);

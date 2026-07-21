@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 72);
+  assert.equal(protectedUrls.length, 68);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -46,6 +46,21 @@ test('the audited production URL inventory is protected', async () => {
     assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
   }
   assert.deepEqual(redirects, {});
+});
+
+test('duplicate and positioning-mismatched legacy pages stay out of the index contract', async () => {
+  const [seo, protectedUrls, noindexUrls] = await Promise.all([
+    read('src/lib/seo.ts'),
+    read('config/protected-urls.json').then(JSON.parse),
+    read('config/noindex-urls.json').then(JSON.parse),
+  ]);
+
+  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation']) {
+    assert.match(seo, new RegExp(`'${pathname}': \\{[\\s\\S]*?index: false`));
+    assert.ok(!protectedUrls.includes(`https://roboskin.ai${pathname}`));
+    assert.ok(noindexUrls.includes(`https://roboskin.ai${pathname}`));
+  }
+  assert.equal(noindexUrls.length, 4);
 });
 
 test('the two production-only news routes remain in local content and sitemap generation', async () => {

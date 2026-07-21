@@ -46,5 +46,6 @@ test('technical topic pages use the visible institutional editorial identity', a
   assert.match(topicSeo, /const editorialTeamId = `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team`/);
   assert.match(topicSeo, /author: \{\s*'@id': editorialTeamId/);
   assert.match(topicArticle, /site\.editorial\.name/);
-  assert.match(topicArticle, /Published \{page\.updated\} \| Updated \{page\.updated\}/);
+  assert.match(topicArticle, /page\.published/);
+  assert.match(topicArticle, /Updated \{page\.updated\}/);
 });

@@ -5,6 +5,7 @@ const canonicalOrigin = 'https://roboskin.ai';
 const root = process.cwd();
 const out = path.join(root, 'out');
 const protectedUrls = JSON.parse(await readFile(path.join(root, 'config/protected-urls.json'), 'utf8'));
+const noindexUrls = JSON.parse(await readFile(path.join(root, 'config/noindex-urls.json'), 'utf8'));
 const redirects = JSON.parse(await readFile(path.join(root, 'config/protected-redirects.json'), 'utf8'));
 
 const exists = async (file) => access(file).then(() => true, () => false);
@@ -88,6 +89,24 @@ for (const absoluteUrl of protectedUrls) {
   }
 }
 
+for (const absoluteUrl of noindexUrls) {
+  const { pathname } = new URL(absoluteUrl);
+  const candidates = candidatesFor(pathname);
+  const outputFile = (await Promise.all(candidates.map(async (file) => [file, await exists(file)])))
+    .find(([, present]) => present)?.[0];
+
+  if (!outputFile) {
+    failures.push(`${pathname}: missing noindex export`);
+    continue;
+  }
+
+  const html = await readFile(outputFile, 'utf8');
+  if (canonicalFromHtml(html) !== canonicalFor(pathname)) failures.push(`${pathname}: invalid noindex canonical`);
+  if ((html.match(/<h1\b/gi) ?? []).length !== 1) failures.push(`${pathname}: expected one H1`);
+  if ((html.match(/<title>/gi) ?? []).length !== 1) failures.push(`${pathname}: expected one title`);
+  if (!/<meta name="robots" content="noindex, follow"/i.test(html)) failures.push(`${pathname}: missing noindex, follow metadata`);
+}
+
 for (const file of ['sitemap.xml', 'research-index.csv', 'research-index.json', 'feed.xml', 'deployment.json']) {
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
@@ -115,7 +134,7 @@ if (failures.length === 0) {
   const csvRows = parseCsv(csv);
   const csvIds = csvRows.map((row) => row.id);
   const jsonIds = indexData.entries?.map((entry) => entry.id) ?? [];
-  if (indexData.count !== 7 || jsonIds.length !== 7) failures.push('/research-index.json: expected seven records');
+  if (indexData.count !== 17 || jsonIds.length !== 17) failures.push('/research-index.json: expected 17 records');
   if (JSON.stringify(csvIds) !== JSON.stringify(jsonIds)) failures.push('/research-index.csv: IDs differ from JSON');
   for (const [index, entry] of (indexData.entries ?? []).entries()) {
     for (const [column, value] of Object.entries(entry)) {
@@ -146,4 +165,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} protected URLs, exact sitemap, seven data records, and 32 RSS items`);
+console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 17 data records, and 32 RSS items`);

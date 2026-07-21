@@ -39,7 +39,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /const updatedAt = '2026-07-10'/);
   assert.match(seo, /export const sitemapLastModified = updatedAt/);
   assert.match(sitemap, /sitemapLastModified/);
-  assert.match(sitemap, /lastModified: new Date\(sitemapLastModified\)/);
+  assert.match(sitemap, /lastModified: new Date\(route\.updated \?\? sitemapLastModified\)/);
   assert.doesNotMatch(sitemap, /2026-04-25/);
   assert.match(sitemap, /seoRoutes/);
   assert.match(seo, /'\/news': \{/);
@@ -54,17 +54,18 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
   assert.match(home, /Direct-answer coverage supports readers and answer engines/);
   assert.match(home, /href="\/faq"|href=\{`\/faq/);
-  assert.match(home, /href="\/downloads"|href=\{`\/downloads/);
+  assert.match(home, /href="\/research-index"|href=\{`\/research-index/);
   assert.match(home, /href="\/glossary"|href=\{`\/glossary/);
   assert.match(home, /href="\/resources"|href=\{`\/resources/);
   assert.match(home, /href="\/technology"|href=\{`\/technology/);
   assert.match(home, /href="\/research"|href=\{`\/research/);
   assert.match(home, /href="\/contact\?requestType=research/);
   assert.match(home, /buildFaqJsonLd\(homeRobotSkinFaq, '\/'\)/);
-  assert.match(home, /Open the robot skin glossary/);
+  assert.match(home, /Open the glossary/);
   assert.match(home, /View RoboSkin library/);
   assert.match(home, /Explore tactile AI technology/);
-  assert.match(home, /Browse robot skin research/);
+  assert.match(home, /Compare research evidence/);
+  assert.match(home, /Browse research briefs/);
   assert.match(home, /Submit source/);
   assert.match(home, /Physical AI needs robot skin, tactile AI, and contact feedback/);
   assert.match(home, /In the RoboSkin context, Physical AI means physical-world AI systems/);
@@ -114,7 +115,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(llms, /^> RoboSkin\.ai publishes conservative information/m);
   assert.match(llms, /- \[RoboSkin homepage\]\(https:\/\/roboskin\.ai\/\):/);
   assert.match(llms, /- \[Physical AI canonical answer\]\(https:\/\/roboskin\.ai\/physics-ai\):/);
-  assert.match(llms, /- \[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/\):/);
+  assert.match(llms, /- \[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/robot-skin\):/);
   assert.match(llms, /What is Physical AI in the RoboSkin context\?/);
   assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(llms, /For Physical AI questions/);
@@ -154,7 +155,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
     ]);
 
   assert.match(seo, /title: 'Robot Skin Guides for Tactile AI Learning'/);
-  assert.match(seo, /title: 'Robot Skin, Tactile AI, and Physical AI Research Map'/);
+  assert.match(seo, /title: 'Robot Skin and Tactile Sensing Research'/);
   assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases'/);
   assert.match(seo, /title: 'Humanoid Robot Skin and Contact-Aware Robotics'/);
   assert.match(seo, /title: 'Tactile AI and Flexible Tactile Sensor Technology'/);
@@ -185,9 +186,10 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(visibleKeywordSurfaces, /Physical AI touch data/);
 
   assert.match(llms, /## Keyword Routes/);
-  assert.match(llms, /\[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/\)/);
-  assert.match(llms, /\[Tactile AI and flexible tactile sensor\]\(https:\/\/roboskin\.ai\/technology\)/);
-  assert.match(llms, /\[Robot hand tactile sensor and slip detection robot hand\]\(https:\/\/roboskin\.ai\/research\)/);
+  assert.match(llms, /\[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/robot-skin\)/);
+  assert.match(llms, /\[Tactile AI\]\(https:\/\/roboskin\.ai\/tactile-ai\)/);
+  assert.match(llms, /\[Robot hand tactile sensor\]\(https:\/\/roboskin\.ai\/applications\/robot-hand-tactile-sensor\)/);
+  assert.match(llms, /\[Slip detection for robot hands\]\(https:\/\/roboskin\.ai\/guides\/slip-detection-robot-hand\)/);
   assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });
 

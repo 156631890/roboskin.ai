@@ -8,6 +8,7 @@ export type SeoRoute = {
   path: string;
   title: string;
   description: string;
+  updated?: string;
   priority: number;
   changeFrequency: 'weekly' | 'monthly';
   index: boolean;
@@ -22,6 +23,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI, and Physical AI Research Map',
     description:
       'RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, Physical AI tactile feedback, and contact-aware robotics.',
+    updated: '2026-07-21',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -94,7 +96,7 @@ export const pageSeo: Record<string, SeoRoute> = {
       'Find public information routes, research references, and educational robot skin resources without implied product downloads or hardware availability.',
     priority: 0.75,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'References'],
   },
   '/comparison': {
@@ -104,7 +106,7 @@ export const pageSeo: Record<string, SeoRoute> = {
       'Compare robot skin category concepts, tactile sensing terminology, and possible RoboSkin.ai guide routes for robotics and AI content.',
     priority: 0.8,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Comparison'],
   },
   '/implementation': {
@@ -114,7 +116,7 @@ export const pageSeo: Record<string, SeoRoute> = {
       'Understand educational evaluation concepts for tactile sensing, robot hands, curved surfaces, and research discovery without integration-support claims.',
     priority: 0.75,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Roadmap'],
   },
   '/faq': {
@@ -129,7 +131,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/research': {
     path: '/research',
-    title: 'Robot Skin, Tactile AI, and Physical AI Research Map',
+    title: 'Robot Skin and Tactile Sensing Research',
     description:
       'Read robot hand tactile sensor research, slip detection robot hand briefs, e-skin notes, multimodal sensing, and ROS 2 tactile pipelines.',
     priority: 0.78,
@@ -142,6 +144,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
     description:
       'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
+    updated: '2026-07-21',
     priority: 0.82,
     changeFrequency: 'monthly',
     index: true,
@@ -164,7 +167,7 @@ export const pageSeo: Record<string, SeoRoute> = {
       'Anonymous, conservative summaries of robot skin application contexts for grippers, humanoid contact sensing, research interpretation, and category planning.',
     priority: 0.7,
     changeFrequency: 'monthly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Context notes'],
   },
   '/about': {
@@ -306,7 +309,7 @@ export function buildPageMetadata(path: keyof typeof pageSeo | string): Metadata
         }
       : {
           index: false,
-          follow: false,
+          follow: true,
         },
   };
 }
@@ -374,7 +377,7 @@ export function buildPageJsonLd(path: keyof typeof pageSeo | string) {
     about: {
       '@id': `${site.url}/#organization`,
     },
-    dateModified: updatedAt,
+    dateModified: route.updated ?? updatedAt,
     inLanguage: 'en',
   };
 }
@@ -642,7 +645,7 @@ export function buildHomePhysicalAiRoutesJsonLd() {
   };
 }
 
-function buildEditorialTeamJsonLd(authorName: string) {
+export function buildEditorialTeamJsonLd(authorName = site.editorial.name) {
   return {
     '@type': 'Organization',
     '@id': `${canonicalUrl(site.editorial.path)}#editorial-team`,
@@ -724,7 +727,7 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         description: 'A source-backed index of robot skin, tactile sensing, tactile AI, and integration research reviewed by RoboSkin.ai.',
         url: pageUrl,
         creator: { '@id': `${canonicalUrl(site.editorial.path)}#editorial-team` },
-        dateModified: '2026-07-10',
+        dateModified: pageSeo['/research-index'].updated ?? updatedAt,
         inLanguage: 'en',
         isAccessibleForFree: true,
         distribution: [
@@ -743,6 +746,7 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
           name: entry.title,
         })),
       },
+      buildEditorialTeamJsonLd(),
     ],
   };
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
-import { canonicalUrl } from '@/lib/seo';
+import { buildEditorialTeamJsonLd, canonicalUrl } from '@/lib/seo';
 
 export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
   const url = canonicalUrl(page.path);
+  const visual = pageVisuals[page.visualKey];
 
   return {
     title: page.title,
@@ -23,9 +24,9 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
       siteName: site.name,
       images: [
         {
-          url: '/og-image.svg',
-          width: 1200,
-          height: 630,
+          url: visual.image,
+          width: 1600,
+          height: 900,
           alt: `${page.title} - ${site.name}`,
         },
       ],
@@ -34,7 +35,7 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
       card: 'summary_large_image',
       title: `${page.title} | ${site.name}`,
       description: page.description,
-      images: ['/twitter-image.svg'],
+      images: [visual.image],
     },
     robots: {
       index: true,
@@ -54,7 +55,8 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
   const url = canonicalUrl(page.path);
   const editorialTeamId = `${canonicalUrl(site.editorial.path)}#editorial-team`;
   const visual = pageVisuals[page.visualKey];
-  const breadcrumbNames = ['Home', ...page.path.split('/').filter(Boolean).map((part) => part.replaceAll('-', ' '))];
+  const pathParts = page.path.split('/').filter(Boolean);
+  const breadcrumbNames = ['Home', ...pathParts.map((part) => part.replaceAll('-', ' '))];
   const imageNode = {
     '@type': 'ImageObject',
     url: canonicalUrl(visual.image),
@@ -119,7 +121,13 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
       '@type': 'ListItem',
       position: index + 1,
       name,
-      item: index === 0 ? canonicalUrl('/') : index === breadcrumbNames.length - 1 ? url : canonicalUrl(`/${page.path.split('/').filter(Boolean).slice(0, index).join('/')}`),
+      item: index === 0
+        ? canonicalUrl('/')
+        : index === breadcrumbNames.length - 1
+          ? url
+          : pathParts[0] === 'guides' && index === 1
+            ? canonicalUrl('/resources')
+            : canonicalUrl(`/${pathParts.slice(0, index).join('/')}`),
     })),
   };
 
@@ -147,7 +155,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         description: page.description,
         image: imageNode,
         url,
-        datePublished: page.updated,
+        ...(page.published ? { datePublished: page.published } : {}),
         dateModified: page.updated,
         inLanguage: 'en',
         publisher: {
@@ -199,6 +207,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
 
   return {
     '@context': 'https://schema.org',
-    '@graph': [webPageNode, breadcrumbNode, faqNode, ...entityNodes],
+    '@graph': [webPageNode, breadcrumbNode, faqNode, ...entityNodes, buildEditorialTeamJsonLd()],
   };
 }

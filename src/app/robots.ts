@@ -10,10 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/private/', '/domain-sale.html'],
       },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-      },
     ],
     sitemap: 'https://roboskin.ai/sitemap.xml',
   };

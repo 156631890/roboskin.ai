@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((route) => route.index)
     .map((route) => ({
       url: canonicalUrl(route.path),
-      lastModified: new Date(sitemapLastModified),
+      lastModified: new Date(route.updated ?? sitemapLastModified),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     }));
@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.updated),
     changeFrequency: 'monthly' as const,
     priority: 0.72,
+    images: [canonicalUrl(post.image)],
   }));
 
   const newsPages = newsPosts.map((post) => ({
@@ -29,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.updated),
     changeFrequency: 'monthly' as const,
     priority: 0.68,
+    images: [canonicalUrl(post.image)],
   }));
 
   const topicPages = seoTopicPages.map((page) => ({

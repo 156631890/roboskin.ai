@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ResearchIndexExplorer from '@/components/ResearchIndexExplorer';
-import { researchIndexEntries } from '@/lib/research-index';
+import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
 import {
   buildBreadcrumbJsonLd,
   buildGraphJsonLd,
@@ -61,7 +61,7 @@ export default function ResearchIndexPage() {
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">evidence classes</dd>
             </div>
             <div className="border-l-2 border-[#77e0a1] pl-4">
-              <dt className="font-mono text-2xl font-semibold text-white">2026-07-10</dt>
+              <dt className="font-mono text-2xl font-semibold text-white">{researchIndexUpdatedAt}</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">edition reviewed</dd>
             </div>
           </dl>

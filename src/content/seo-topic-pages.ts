@@ -5,6 +5,7 @@ export type SeoTopicPage = {
   h1: string;
   kicker: string;
   intent: string;
+  published?: string;
   updated: string;
   priority: number;
   changeFrequency: 'weekly' | 'monthly';
@@ -46,7 +47,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-07-10',
+    updated: '2026-07-21',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -126,6 +127,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot skin vs e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'A comparison page for overlapping terms.' },
       { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Research routes and source-backed briefs.' },
     ],
+    sources: [
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
+      { label: 'Nature Communications GenForce article', href: 'https://www.nature.com/articles/s41467-026-68753-1' },
+    ],
   },
   {
     path: '/tactile-ai',
@@ -135,12 +141,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.86,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
-    keywords: ['tactile AI', 'Physical AI tactile feedback', 'robot touch data', 'contact-aware robotics', 'slip detection robot hand'],
+    keywords: ['tactile AI', 'Physical AI tactile feedback', 'tactile representation learning', 'contact-aware robotics', 'tactile robot control'],
     quickAnswer: [
       'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior.',
       'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for Physical AI systems.',
@@ -199,7 +205,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'A hand-level tactile AI application.' },
       { label: 'Humanoid robot skin', href: '/applications/humanoid-robot-skin', description: 'Where tactile AI appears in humanoid hands and surfaces.' },
       { label: 'Technology context', href: '/technology', description: 'Existing stack explanation for tactile sensing layers.' },
+      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and transfer limits.' },
+      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
+    ],
+    sources: [
+      { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
+      { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/html/2606.08737v1' },
+      { label: 'MiTaS tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
     ],
   },
   {
@@ -210,12 +223,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'answers',
-    keywords: ['e-skin', 'electronic skin robotics', 'soft robotic skin', 'flexible tactile sensor', 'robotic electronic skin'],
+    keywords: ['e-skin', 'electronic skin robotics', 'conformable electronic skin', 'flexible tactile sensor', 'robotic electronic skin'],
     quickAnswer: [
       'E-skin, or electronic skin, is a flexible or soft sensor layer designed to measure contact-related signals on non-flat surfaces.',
       'In robotics, e-skin can cover fingertips, palms, gripper pads, prosthetics, arms, or safety surfaces.',
@@ -274,6 +287,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Single-material soft skin brief', href: '/research/single-material-soft-robotic-skin-2025', description: 'Source-backed soft robotic skin research note.' },
       { label: 'Glossary', href: '/glossary', description: 'Definitions for robot skin, tactile AI, and e-skin terms.' },
     ],
+    sources: [
+      { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
+      { label: 'npj Flexible Electronics origami e-skin article', href: 'https://www.nature.com/articles/s41528-026-00563-3' },
+      { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
+    ],
   },
   {
     path: '/applications/humanoid-robot-skin',
@@ -283,12 +301,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Humanoid robot skin',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.82,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['humanoid robot skin', 'robot hand tactile sensor', 'humanoid tactile sensing', 'robot body contact sensing', 'dexterous robot hands'],
+    keywords: ['humanoid robot skin', 'distributed humanoid touch', 'humanoid tactile sensing', 'robot body contact sensing', 'dexterous robot hands'],
     quickAnswer: [
       'Humanoid robot skin is tactile sensing applied to hands, palms, arms, or other humanoid robot surfaces where contact awareness matters.',
       'The strongest use cases are dexterous manipulation, grasp stability, handovers, safety contact, and research evaluation for Physical AI.',
@@ -348,6 +366,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'Source-backed full-hand research analysis.' },
       { label: 'Applications overview', href: '/applications', description: 'Existing application route for category use cases.' },
     ],
+    sources: [
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
+      { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
+    ],
   },
   {
     path: '/applications/robot-hand-tactile-sensor',
@@ -357,7 +380,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Robot hand tactile sensor guide',
     kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.81,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -418,7 +441,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Humanoid robot skin', href: '/applications/humanoid-robot-skin', description: 'How hand sensing fits broader humanoid surfaces.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How hand touch data becomes behavior.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'A source-backed research route for full-hand sensing.' },
+      { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Compare sensor evidence by manipulation task.' },
+      { label: 'Slip detection guide', href: '/guides/slip-detection-robot-hand', description: 'Evaluate slip signals and closed-loop grip response.' },
       { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Research routes for tactile sensing and e-skin.' },
+    ],
+    sources: [
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'DexSkin conformable robotic skin preprint', href: 'https://arxiv.org/html/2509.18830v1' },
+      { label: 'Scientific Reports wet-slippage fingertip e-skin article', href: 'https://www.nature.com/articles/s41598-026-41096-z' },
     ],
   },
   {
@@ -429,7 +459,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Soft robotic skin',
     kicker: 'Application guide',
     intent: 'Application page for soft robotic skin, flexible robot skin, soft gripper tactile sensing, and soft robotics e-skin queries.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.79,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -492,6 +522,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Single-material soft skin brief', href: '/research/single-material-soft-robotic-skin-2025', description: 'A source-backed soft robotic skin research note.' },
       { label: 'Robot skin vs e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'Terminology boundaries for overlapping phrases.' },
     ],
+    sources: [
+      { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
+      { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
+      { label: 'npj Flexible Electronics origami e-skin article', href: 'https://www.nature.com/articles/s41528-026-00563-3' },
+    ],
   },
   {
     path: '/guides/flexible-tactile-sensor-array',
@@ -501,7 +536,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Flexible tactile sensor array guide',
     kicker: 'Technology guide',
     intent: 'Technology guide for flexible tactile sensor array, tactile sensor matrix, robot skin array, and e-skin sensor array searches.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -564,6 +599,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How array data becomes robot behavior.' },
       { label: 'Graphene 3D force brief', href: '/research/graphene-liquid-metal-3d-force-2026', description: 'A source-backed tactile sensing research note.' },
     ],
+    sources: [
+      { label: 'ACS large-area flexible tactile array article', href: 'https://pubs.acs.org/doi/10.1021/acsaelm.5c01200' },
+      { label: 'npj Flexible Electronics origami e-skin article', href: 'https://www.nature.com/articles/s41528-026-00563-3' },
+      { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
+    ],
   },
   {
     path: '/guides/physical-ai-touch-data',
@@ -573,7 +613,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Physical AI touch data',
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.77,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -648,7 +688,13 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'The contact-feedback loop that turns touch data into robot action.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'A concrete hand-level source of touch data.' },
+      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Compare robot touch datasets, splits, task fit, and transfer limits.' },
       { label: 'Technology context', href: '/technology', description: 'Existing RoboSkin.ai technology overview.' },
+    ],
+    sources: [
+      { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
+      { label: 'FreeTacMan visuo-tactile data collection preprint', href: 'https://arxiv.org/html/2506.01941v1' },
+      { label: 'ROS 2 Kilted documentation', href: 'https://docs.ros.org/en/kilted/Releases.html' },
     ],
   },
   {
@@ -664,7 +710,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['robot gripper tactile sensor', 'tactile gripper sensor', 'gripper slip detection', 'robot gripper touch sensor', 'contact-aware gripper'],
+    keywords: ['robot gripper tactile sensor', 'tactile gripper sensor', 'gripper contact sensing', 'robot gripper touch sensor', 'contact-aware gripper'],
     quickAnswer: [
       'A robot gripper tactile sensor measures contact at the gripping surface so a robot can detect object seating, force patterns, slip, and unstable grasps.',
       'The best gripper sensor depends on the task: delicate handling may need fast slip signals, while broad industrial handling may need durable contact maps and simple replacement.',
@@ -738,16 +784,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/guides/tactile-sensor-for-robots',
     title: 'Tactile Sensor for Robots: Selection and Evaluation Guide',
     description:
-      'A tactile sensor for robots can measure pressure, force, slip, strain, or contact maps. Learn how to compare tactile sensors for robot hands, grippers, and robot skin.',
+      'A tactile sensor for robots measures pressure, force, slip, strain, or contact maps. Compare sensors for robot hands, grippers, and robot skin.',
     h1: 'Tactile sensor for robots',
     kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
-    updated: '2026-06-06',
+    updated: '2026-07-21',
     priority: 0.8,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['tactile sensor for robots', 'robot tactile sensor', 'tactile sensing robotics', 'robot pressure sensor', 'tactile sensor selection'],
+    keywords: ['tactile sensor for robots', 'robot tactile sensor', 'tactile sensing robotics', 'robot sensor evaluation', 'tactile sensor selection'],
     quickAnswer: [
       'A tactile sensor for robots measures physical contact so the robot can understand touch at the surface, not only through vision or joint motion.',
       'Useful comparison criteria include signal type, coverage, resolution, latency, calibration, durability, robot software interface, and task-level benefit.',
@@ -803,6 +849,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot skin', href: '/robot-skin', description: 'The integrated surface system.' },
       { label: 'Flexible tactile sensor array', href: '/guides/flexible-tactile-sensor-array', description: 'Array-level sensing tradeoffs.' },
       { label: 'Robot gripper tactile sensor', href: '/applications/robot-gripper-tactile-sensor', description: 'Gripper-specific evaluation.' },
+      { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Compare tactile sensing evidence by robot manipulation task.' },
       { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Source-backed research routes.' },
     ],
     sources: [
@@ -1268,7 +1315,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     changeFrequency: 'monthly',
     schemaType: 'WebPage',
     visualKey: 'answers',
-    keywords: ['robot skin vs tactile sensor', 'robot tactile sensor', 'tactile sensing surface', 'robot skin system', 'tactile sensor comparison'],
+    keywords: ['robot skin vs tactile sensor', 'tactile sensor component', 'sensor versus system', 'robot skin system', 'robot skin integration'],
     quickAnswer: [
       'A tactile sensor is a component or array that measures contact signals such as pressure, force, shear, slip, strain, or temperature.',
       'Robot skin is the larger robot-facing system: a tactile surface, mounting layer, electronics, calibration, data pipeline, and control or evaluation workflow.',
@@ -1446,6 +1493,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile sensor benchmark for robot manipulation',
     kicker: 'Sensor comparison guide',
     intent: 'Comparison guide for tactile sensor benchmark, robot manipulation tactile sensor comparison, and robot touch sensor evaluation searches.',
+    published: '2026-07-20',
     updated: '2026-07-20',
     priority: 0.84,
     changeFrequency: 'weekly',
@@ -1567,6 +1615,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile datasets for robot learning',
     kicker: '2026 dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
+    published: '2026-07-20',
     updated: '2026-07-20',
     priority: 0.85,
     changeFrequency: 'weekly',
@@ -1686,6 +1735,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile foundation models for robotics compared',
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, tactile AI models, tactile world models, and robot touch representation searches.',
+    published: '2026-07-20',
     updated: '2026-07-20',
     priority: 0.86,
     changeFrequency: 'weekly',

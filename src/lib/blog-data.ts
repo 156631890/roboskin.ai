@@ -1,6 +1,8 @@
 export interface BlogPost {
   id: string;
   title: string;
+  seoTitle?: string;
+  seoDescription?: string;
   excerpt: string;
   content: string;
   author: string;
@@ -149,6 +151,7 @@ For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactil
   {
     id: 'dream-tac-tactile-world-action-model-2026',
     title: 'Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation',
+    seoTitle: 'Dream-Tac Tactile World Model for Robot Manipulation',
     excerpt:
       'Dream-Tac models action-conditioned tactile futures for contact-rich robot manipulation, showing why robot skin data needs prediction, not only reaction.',
     content: `# Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation
@@ -232,6 +235,8 @@ Tactile AI benefits from prediction and replay. Robot skin data becomes more val
   {
     id: 'open-source-magnetic-tactile-calibration-2024',
     title: 'Open-source magnetic tactile calibration for gripper-agnostic touch',
+    seoTitle: 'Open-Source Magnetic Tactile Calibration for Robot Grippers',
+    seoDescription: 'Open-source magnetic tactile calibration for three-axis force sensing, in-situ setup, and repeatable low-cost robot touch.',
     excerpt:
       'A practical research note on open-source magnetic tactile calibration, three-axis force sensing, in-situ calibration, and why low-cost sensors still need repeatable setup.',
     content: `# Open-source magnetic tactile calibration for gripper-agnostic touch
@@ -354,6 +359,7 @@ eFlesh supports a practical engineering rule: evaluate how the sensor is made, r
   {
     id: 'freetacman-robot-free-visuotactile-data-collection-2025',
     title: 'FreeTacMan robot-free visuo-tactile data collection for tactile AI',
+    seoTitle: 'FreeTacMan Visuo-Tactile Data Collection for Tactile AI',
     excerpt:
       'A research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.',
     content: `# FreeTacMan robot-free visuo-tactile data collection for tactile AI
@@ -419,6 +425,8 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
   {
     id: 'humanoid-visual-tactile-action-dataset-2025',
     title: 'Humanoid visual-tactile-action dataset for contact-rich manipulation',
+    seoTitle: 'Humanoid Visuo-Tactile Dataset for Robot Manipulation',
+    seoDescription: 'A source-backed look at humanoid visual-tactile-action datasets, synchronized robot data, and contact-rich manipulation learning.',
     excerpt:
       'A research note on humanoid visual-tactile-action datasets, contact-rich manipulation, multimodal robot data, and why humanoid tactile learning needs synchronized action context.',
     content: `# Humanoid visual-tactile-action dataset for contact-rich manipulation
@@ -786,6 +794,7 @@ Slip detection evaluation must explain timing. A useful slip sensor is not only 
   {
     id: 'optical-electronic-artificial-skin-molecular-sensing-2025',
     title: 'Optical/electronic artificial skin for molecular sensing',
+    seoDescription: 'Optical/electronic artificial skin combines haptics, force-temperature sensing, and near-infrared molecular perception for robotics.',
     excerpt:
       'A research note on optical/electronic artificial skin, CNT haptic layers, near-infrared molecular sensing, force-temperature sensing, and robotic perception beyond touch.',
     content: `# Optical/electronic artificial skin for molecular sensing
@@ -847,6 +856,7 @@ For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be 
   {
     id: 'genforce-transferable-force-sensing-2026',
     title: 'GenForce transferable force sensing for robot skin and tactile sensors',
+    seoTitle: 'GenForce Force Sensing for Robot Skin and Tactile Sensors',
     excerpt:
       'GenForce explores transferable force sensing across tactile sensors, reducing repeated calibration work for robot skin replacements and hardware changes.',
     content: `# GenForce transferable force sensing for robot skin and tactile sensors
@@ -941,6 +951,7 @@ Calibration transfer is critical to robot skin evaluation. A serious tactile AI 
   {
     id: 'dexskin-high-coverage-conformable-robotic-skin-2025',
     title: 'DexSkin and high-coverage conformable robotic skin for manipulation',
+    seoTitle: 'DexSkin Conformable Robot Skin for Dexterous Manipulation',
     excerpt:
       'A practical research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer, and contact-rich manipulation learning.',
     content: `# DexSkin and high-coverage conformable robotic skin for manipulation

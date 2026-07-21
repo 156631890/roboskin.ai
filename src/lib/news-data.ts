@@ -6,6 +6,8 @@ export interface NewsSource {
 export interface NewsPost {
   id: string;
   title: string;
+  seoTitle?: string;
+  seoDescription?: string;
   excerpt: string;
   content: string;
   author: string;
@@ -29,6 +31,8 @@ export const newsPosts: NewsPost[] = [
   {
     id: 'underwater-self-healing-electronic-skin-nus-2026',
     title: 'Underwater self-healing electronic skin combines touch, damage detection, and repair',
+    seoTitle: 'Underwater Self-Healing Electronic Skin for Soft Robots',
+    seoDescription: 'NUS researchers combine touch sensing, damage detection, and underwater self-repair in an electronic skin for soft robots and marine machines.',
     excerpt:
       'NUS researchers combined self-powered touch sensing, damage detection, and underwater self-repair in one electronic skin system for soft robotics and marine machines.',
     content: `# Underwater self-healing electronic skin combines touch, damage detection, and repair
@@ -95,6 +99,7 @@ This brief summarizes the NUS report and the associated Advanced Materials paper
   {
     id: 'touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     title: 'TouchWorld separates tactile prediction from fast contact correction in robot manipulation',
+    seoTitle: 'TouchWorld Tactile Foundation Model for Robot Manipulation',
     excerpt:
       'The TouchWorld preprint proposes a hierarchical tactile foundation model that combines contact prediction with fast feedback for dexterous, contact-rich robot tasks.',
     content: `# TouchWorld separates tactile prediction from fast contact correction in robot manipulation
@@ -156,6 +161,7 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
   {
     id: 'color-changing-mechanochromic-tactile-sensor-2026',
     title: 'Color-changing tactile sensor turns robot contact into real-time pressure maps',
+    seoTitle: 'Color-Changing Tactile Sensor Maps Robot Contact Pressure',
     excerpt:
       'A Queen Mary-led mechanochromic sensor converts contact, strain, and pressure into visible color fields that a standard camera can observe in real time.',
     content: `# Color-changing tactile sensor turns robot contact into real-time pressure maps
@@ -222,6 +228,7 @@ This brief summarizes the Queen Mary University report and linked Science Advanc
   {
     id: 'single-pixel-tactile-skin-compressive-sampling-2026',
     title: 'Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch',
+    seoTitle: 'Single-Pixel Tactile Skin Reduces Robot Sensor Wiring',
     excerpt:
       'A flexible 10 x 10 tactile array uses compressive sampling and one summed output channel to reduce wiring and readout demands for responsive robot skin.',
     content: `# Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch
@@ -290,6 +297,8 @@ This brief summarizes the published paper and adds RoboSkin.ai systems context. 
   {
     id: 'service-robots-200000-units-logistics-tactile-ai',
     title: 'Service robot sales reached almost 200,000 units: logistics makes tactile AI practical',
+    seoTitle: 'Service Robot Sales Near 200,000: Why Tactile AI Matters',
+    seoDescription: 'IFR reports nearly 200,000 professional service robot sales in 2024. Amazon Vulcan shows why tactile control matters in logistics.',
     excerpt:
       'IFR sample data shows professional service robot sales reached almost 200,000 units in 2024, while Amazon Vulcan shows why contact sensing and tactile control matter in logistics.',
     content: `# Service robot sales reached almost 200,000 units: logistics makes tactile AI practical
@@ -349,6 +358,7 @@ The sales total does not show that every service robot uses tactile sensing. Vul
   {
     id: 'electronic-skin-research-robot-skin-systems-problem',
     title: 'Electronic skin research is becoming a robot skin systems problem',
+    seoDescription: 'A Cambridge-UCL study shows why large-area e-skin depends on sensing, wiring, calibration, damage tolerance, and control integration.',
     excerpt:
       'A joint Cambridge-UCL study shows that large-area e-skin progress depends on sensing, wiring, calibration, damage tolerance, and control integration working together.',
     content: `# Electronic skin research is becoming a robot skin systems problem
@@ -408,6 +418,7 @@ This study does not establish immediate commercial readiness or one best archite
   {
     id: 'full-hand-tactile-sensing-robot-hands-vision-control',
     title: 'Full-hand tactile sensing moves robot hands beyond vision-only control',
+    seoTitle: 'Full-Hand Tactile Sensing for Vision-Free Robot Control',
     excerpt:
       'New research in full-hand tactile sensing shows why dexterous robot hands need distributed touch, not just cameras and joint feedback.',
     content: `# Full-hand tactile sensing moves robot hands beyond vision-only control
@@ -507,6 +518,7 @@ This article summarizes public research and Meta FAIR announcements. RoboSkin.ai
   {
     id: 'global-robot-installations-542000-physical-ai-touch',
     title: 'Global robot installations passed 542,000 units: why Physical AI needs touch',
+    seoTitle: 'Global Robot Installations Pass 542,000: Why Touch Matters',
     excerpt:
       'IFR data shows 542,000 industrial robots were installed in 2024. For Physical AI, the next bottleneck is contact, tactile sensing, and robot skin.',
     content: `# Global robot installations passed 542,000 units: why Physical AI needs touch

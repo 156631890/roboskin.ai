@@ -1,11 +1,11 @@
-import { researchIndexEntries } from '@/lib/research-index';
+import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
 
 export const dynamic = 'force-static';
 
 export function GET() {
   return new Response(JSON.stringify({
     name: 'RoboSkin Tactile Research Index',
-    updated: '2026-07-10',
+    updated: researchIndexUpdatedAt,
     count: researchIndexEntries.length,
     entries: researchIndexEntries,
   }), {

@@ -13,10 +13,12 @@ test('CSV and JSON routes serialize the shared research index', async () => {
   ]);
 
   assert.match(index, /serializeResearchIndexCsv/);
+  assert.match(index, /researchIndexUpdatedAt = '2026-07-21'/);
   assert.match(csvRoute, /text\/csv/);
   assert.match(csvRoute, /researchIndexEntries/);
   assert.match(jsonRoute, /application\/json/);
   assert.match(jsonRoute, /researchIndexEntries/);
+  assert.match(jsonRoute, /updated: researchIndexUpdatedAt/);
 });
 
 test('RSS is generated from research and news with apex URLs', async () => {
@@ -49,6 +51,7 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(configure, /randomBytes\(16\)/);
   assert.match(configure, /indexnow-key\.txt/);
   assert.match(verify, /protected-urls\.json/);
+  assert.match(verify, /noindex-urls\.json/);
   assert.match(verify, /www\.roboskin\.ai/);
   assert.match(verify, /production-verification\.json/);
   assert.match(verify, /new URL\(response\.url\)\.origin/);
@@ -114,7 +117,7 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.doesNotMatch(workflow, /deploy-pages|upload-pages-artifact/);
   assert.match(workflow, /actions\/upload-artifact@v4/);
   assert.match(workflow, /node-version: "22"/);
-  assert.match(vercel, /"deploymentEnabled": false/);
+  assert.match(vercel, /"deploymentEnabled": true/);
   const vercelConfig = JSON.parse(vercel);
   assert.ok(vercelConfig.headers?.some((rule) =>
     rule.source === '/feed.xml' &&

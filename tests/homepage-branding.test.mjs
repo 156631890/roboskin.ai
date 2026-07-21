@@ -42,7 +42,8 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);
   assert.match(home, /href="\/physics-ai"/);
   assert.match(home, /What is robot skin\?/);
-  assert.match(home, /Open the robot skin glossary/);
+  assert.match(home, /Open the glossary/);
+  assert.match(home, /Compare research evidence/);
   assert.match(home, /Submit source/);
   assert.match(home, /Submit research context/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);

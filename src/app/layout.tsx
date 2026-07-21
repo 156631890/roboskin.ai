@@ -29,10 +29,7 @@ const homeMetadata = buildPageMetadata('/');
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   ...homeMetadata,
-  title: {
-    default: `${pageSeo['/'].title} | ${site.name}`,
-    template: `%s | ${site.name}`,
-  },
+  title: pageSeo['/'].title,
   authors: [{ name: site.name }],
   category: 'Tactile AI',
   creator: site.name,

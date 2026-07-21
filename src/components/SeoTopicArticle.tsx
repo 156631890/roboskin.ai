@@ -13,6 +13,13 @@ type SeoTopicArticleProps = {
 
 export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
+  const pathParts = page.path.split('/').filter(Boolean);
+  const parentCrumb = pathParts.length > 1
+    ? {
+        href: pathParts[0] === 'guides' ? '/resources' : `/${pathParts[0]}`,
+        label: pathParts[0] === 'guides' ? 'Guides' : pathParts[0].replaceAll('-', ' '),
+      }
+    : undefined;
   const paperBriefs = page.paperBriefIds
     ? blogPosts.filter((post) => page.paperBriefIds?.includes(post.id))
     : [];
@@ -24,12 +31,24 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
         <section className="py-14 md:py-20">
           <div className="container-shell grid gap-10 lg:grid-cols-[0.74fr_1.06fr] lg:items-center">
             <div>
+              <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-2 text-xs text-[#8e98a8]">
+                <Link href="/" className="hover:text-white">Home</Link>
+                {parentCrumb ? (
+                  <>
+                    <span aria-hidden="true">/</span>
+                    <Link href={parentCrumb.href} className="capitalize hover:text-white">{parentCrumb.label}</Link>
+                  </>
+                ) : null}
+                <span aria-hidden="true">/</span>
+                <span aria-current="page" className="text-[#c8d1de]">{page.h1}</span>
+              </nav>
               <p className="section-label">{page.kicker}</p>
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
               {page.schemaType === 'TechArticle' ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
-                  Published {page.updated} | Updated {page.updated} by {site.editorial.name}
+                  {page.published ? <>Published {page.published} | </> : null}
+                  Updated {page.updated} by {site.editorial.name}
                 </p>
               ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
