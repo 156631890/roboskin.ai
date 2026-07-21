@@ -198,3 +198,10 @@ test('the export verifier checks protected URLs, canonicals, and generated outpu
   assert.match(verifier, /rssLinks/);
   assert.match(verifier, /JSON\.parse/);
 });
+
+test('production verification accepts an honest updated-only editorial date', async () => {
+  const verifier = await read('scripts/verify-production.mjs');
+
+  assert.match(verifier, /!html\.includes\('Published '\) && !html\.includes\('Updated '\)/);
+  assert.doesNotMatch(verifier, /!html\.includes\('Published '\) \|\| !html\.includes\('Updated '\)/);
+});

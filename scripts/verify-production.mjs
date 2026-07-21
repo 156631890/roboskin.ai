@@ -89,7 +89,7 @@ function validateHtml(html, pathname, expectedPath = pathname, indexable = true)
   }
   if (/^\/(research|news)\//.test(pathname)) {
     if (!html.includes('RoboSkin.ai Editorial Team')) throw new Error(`${pathname} is missing the visible editorial author`);
-    if (!html.includes('Published ') || !html.includes('Updated ')) throw new Error(`${pathname} is missing visible published or updated dates`);
+    if (!html.includes('Published ') && !html.includes('Updated ')) throw new Error(`${pathname} is missing a visible published or updated date`);
   }
   return jsonLd;
 }
