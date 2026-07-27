@@ -107,7 +107,7 @@ for (const absoluteUrl of noindexUrls) {
   if (!/<meta name="robots" content="noindex, follow"/i.test(html)) failures.push(`${pathname}: missing noindex, follow metadata`);
 }
 
-for (const file of ['sitemap.xml', 'research-index.csv', 'research-index.json', 'feed.xml', 'deployment.json']) {
+for (const file of ['sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'feed.xml', 'deployment.json']) {
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
 
@@ -159,6 +159,11 @@ if (failures.length === 0) {
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
   if (rssItems.length !== 32 || rssLinks.length !== 33 || rssGuids.length !== 32) failures.push('/feed.xml: expected 32 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
+
+  const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');
+  if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) failures.push('/news-sitemap.xml: invalid XML envelope');
+  if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) failures.push('/news-sitemap.xml: missing news namespace');
+  if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) failures.push('/news-sitemap.xml: non-apex URL found');
 }
 
 if (failures.length > 0) {

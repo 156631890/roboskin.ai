@@ -11,6 +11,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/private/', '/domain-sale.html'],
       },
     ],
-    sitemap: 'https://roboskin.ai/sitemap.xml',
+    sitemap: [
+      'https://roboskin.ai/sitemap.xml',
+      'https://roboskin.ai/news-sitemap.xml',
+    ],
   };
 }

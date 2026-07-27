@@ -134,11 +134,12 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, rssResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
   fetchOk('/feed.xml'),
+  fetchOk('/news-sitemap.xml'),
   fetchOk('/deployment.json'),
   fetchOk('/indexnow-key.txt'),
 ]);
@@ -146,13 +147,15 @@ if (!(indexResponse.headers.get('content-type') ?? '').includes('text/html')) th
 if (!(csvResponse.headers.get('content-type') ?? '').includes('text/csv')) throw new Error('/research-index.csv has an invalid content type');
 if (!(jsonResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/research-index.json has an invalid content type');
 if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+xml')) throw new Error('/feed.xml has an invalid content type');
+if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, rss, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
   rssResponse.text(),
+  newsSitemapResponse.text(),
   deploymentResponse.json(),
   keyResponse.text(),
 ]);
@@ -183,6 +186,9 @@ const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).o
 if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) throw new Error('RSS has an invalid envelope');
 if (rssItems.length !== 32 || rssLinks.length !== 33 || rssGuids.length !== 32) throw new Error('RSS does not contain 32 complete items');
 if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) throw new Error('RSS contains a non-apex URL');
+if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) throw new Error('News sitemap has an invalid envelope');
+if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) throw new Error('News sitemap is missing the Google News namespace');
+if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) throw new Error('News sitemap contains a non-apex URL');
 
 if (deployment.commitSha !== expectedCommitSha) {
   throw new Error(`Deployment commit ${deployment.commitSha ?? 'missing'} does not match expected ${expectedCommitSha}`);
@@ -217,6 +223,7 @@ const verifiedPaths = [
     '/research-index.csv',
     '/research-index.json',
     '/feed.xml',
+    '/news-sitemap.xml',
   ]),
 ];
 const sitemapSha256 = createHash('sha256').update(sitemapXml).digest('hex');

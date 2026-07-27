@@ -40,6 +40,27 @@ test('RSS is generated from research and news with apex URLs', async () => {
   assert.match(llms, /https:\/\/roboskin\.ai\/feed\.xml/);
 });
 
+test('Google News sitemap includes only recent news and apex URLs', async () => {
+  const [route, robots, vercel, layout, packageJson] = await Promise.all([
+    read('src/app/news-sitemap.xml/route.ts'),
+    read('src/app/robots.ts'),
+    read('vercel.json'),
+    read('src/app/layout.tsx'),
+    read('package.json'),
+  ]);
+
+  assert.match(route, /newsPosts/);
+  assert.match(route, /2 \* 24 \* 60 \* 60 \* 1000/);
+  assert.match(route, /xmlns:news="http:\/\/www\.google\.com\/schemas\/sitemap-news\/0\.9"/);
+  assert.match(route, /canonicalUrl\(`\/news\/\$\{post\.id\}`\)/);
+  assert.match(route, /application\/xml/);
+  assert.match(robots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
+  assert.match(vercel, /"source": "\/news-sitemap\.xml"/);
+  assert.match(layout, /@vercel\/analytics\/next/);
+  assert.match(layout, /<Analytics \/>/);
+  assert.match(packageJson, /"@vercel\/analytics"/);
+});
+
 test('IndexNow requires a recent successful production verification report', async () => {
   const [configure, verify, submit, deploymentRoute] = await Promise.all([
     read('scripts/configure-indexnow.mjs'),
@@ -133,7 +154,10 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(monitoring, /5,240/);
   assert.match(monitoring, /48/);
   assert.match(monitoring, /0\.9%/);
+  assert.match(monitoring, /7,974/);
+  assert.match(monitoring, /2026-08-04/);
   assert.match(outreach, /three legitimate referring domains/i);
+  assert.match(outreach, /17-record research index/i);
   assert.match(outreach, /No paid links, automated posting, or fabricated endorsements/);
   assert.match(gitignore, /\.artifacts\//);
 });

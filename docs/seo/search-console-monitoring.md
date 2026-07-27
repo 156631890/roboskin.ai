@@ -11,6 +11,42 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 
 External links reported by GSC: 0.
 
+## Current snapshot - 2026-07-27
+
+Search Console data was current through 2026-07-24.
+
+| Window | Impressions | Clicks | CTR | Average position |
+| --- | ---: | ---: | ---: | ---: |
+| Rolling 28 days | 7,974 | 85 | 1.1% | 8.6 |
+| Rolling three months | 9,974 | 127 | 1.3% | 8.6 |
+
+Operational state:
+
+- External links reported by GSC: 0.
+- `https://roboskin.ai/sitemap.xml` was successful, last read on 2026-07-23, with 69 discovered pages.
+- The index coverage report was last updated on 2026-07-10 and showed 64 indexed pages and 22 excluded URLs, so it is not current enough for a release decision.
+- Core Web Vitals had insufficient field data on both mobile and desktop.
+- Vercel Web Analytics was not enabled, so the repository now includes the client integration but dashboard activation remains a manual account action.
+
+High-impression pages in the rolling 28-day window:
+
+| URL | Impressions | Clicks | CTR | Decision |
+| --- | ---: | ---: | ---: | --- |
+| https://roboskin.ai/research | 747 | 0 | 0% | Preserve the 2026-07-21 treatment through a full 14-day window. |
+| https://roboskin.ai/research/single-material-soft-robotic-skin-2025 | 598 | 4 | 0.67% | Measure the 2026-07-10 treatment before another snippet change. |
+| https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026 | 533 | 0 | 0% | Preserve the 2026-07-21 treatment through a full 14-day window. |
+| https://roboskin.ai/tactile-ai | 493 | 3 | 0.61% | Preserve the 2026-07-21 content and source update. |
+| https://roboskin.ai/robot-skin | 490 | 9 | 1.84% | Use as the control; do not rewrite. |
+| https://roboskin.ai/research/robot-skin-papers | 268 | 0 | 0% | Recheck intent separation after 2026-08-04. |
+| https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | 241 | 0 | 0% | Preserve the 2026-07-21 treatment through a full 14-day window. |
+
+CTR experiment gate:
+
+- Do not perform another title, H1, or meta-description treatment on the rows above before 2026-08-04.
+- On or after 2026-08-04, export page-plus-query data for 2026-07-22 through the latest complete date.
+- Change a page only when it still has at least 20 post-treatment impressions and CTR below 1 percent.
+- Keep `/research` as the latest analyzed-briefs hub and `/research/robot-skin-papers` as the bibliography and paper-navigation route.
+
 ## Production rollout - 2026-07-10
 
 | Item | Record |
