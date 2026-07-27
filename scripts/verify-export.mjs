@@ -157,7 +157,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 32 || rssLinks.length !== 33 || rssGuids.length !== 32) failures.push('/feed.xml: expected 32 complete items');
+  if (rssItems.length !== 33 || rssLinks.length !== 34 || rssGuids.length !== 33) failures.push('/feed.xml: expected 33 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 
   const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');
@@ -170,4 +170,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 17 data records, and 32 RSS items`);
+console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 17 data records, and 33 RSS items`);

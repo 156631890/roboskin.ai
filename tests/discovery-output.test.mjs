@@ -56,8 +56,9 @@ test('Google News sitemap includes only recent news and apex URLs', async () => 
   assert.match(route, /xmlns:news="http:\/\/www\.google\.com\/schemas\/sitemap-news\/0\.9"/);
   assert.match(route, /canonicalUrl\(`\/news\/\$\{post\.id\}`\)/);
   assert.match(route, /application\/xml/);
-  assert.match(robots, /getRecentNewsPosts\(\)\.length > 0/);
-  assert.match(robots, /hasRecentNews \? \['https:\/\/roboskin\.ai\/news-sitemap\.xml'\] : \[\]/);
+  assert.match(route, /recentPosts\.length === 0 && newsPosts\[0\]/);
+  assert.match(route, /fallbackEntry/);
+  assert.match(robots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
   assert.match(vercel, /"source": "\/news-sitemap\.xml"/);
   assert.match(layout, /@vercel\/analytics\/next/);
   assert.match(layout, /<Analytics \/>/);

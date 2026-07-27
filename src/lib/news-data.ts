@@ -29,6 +29,86 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'self-powered-textile-artificial-skin-three-channel-robot-control-2026',
+    title: 'Self-powered textile artificial skin uses three channels for touch and robot control',
+    seoTitle: 'Three-Channel Textile Artificial Skin Controls a Robot Arm',
+    seoDescription:
+      'A Nano Energy paper reports a textile artificial skin that locates touch, measures pressure, and controls a robot arm with three signal channels.',
+    excerpt:
+      'A Nano Energy paper reports a textile artificial skin that locates touch, measures pressure, and controls a robot arm with a three-channel architecture.',
+    content: `# Self-powered textile artificial skin uses three channels for touch and robot control
+
+**News brief - July 2026**
+
+A paper available online in Nano Energy on July 22 reports a textile-based artificial skin designed to reduce two practical burdens in wearable tactile interfaces: the number of signal channels and dependence on an external power source for touch localization. The research team combines triboelectric and resistive sensing in a fabric structure, then demonstrates the interface in robot-arm control and marine-debris classification.
+
+## What the researchers reported
+
+The textile artificial skin uses an S-shaped, series-connected triboelectric array above a resistive sensing layer. When a user touches the textile, voltage ratios measured at two terminal resistors identify the touch position. A third resistive channel measures contact pressure.
+
+This division gives the system three signal channels for both spatial addressing and pressure sensing. The triboelectric layer generates its localization signal from mechanical interaction, while the carbon-nanotube and silicone resistive layer provides the pressure measurement.
+
+The paper also describes a nylon textile structure intended to remain flexible and resist environmental interference. Deep-learning analysis was used to distinguish six types of debris in the reported marine-collection scenario, with a 94.5% success rate in that experiment.
+
+## From touch input to robot-arm commands
+
+The artificial skin was worn as a human-robot interface rather than installed as full-body robot skin. Touch position mapped to three-axis motion and rotational commands for a robot arm. Pressure magnitude controlled how long a command was executed.
+
+That distinction matters. The work demonstrates a soft, wearable controller that converts touch and pressure into robot actions. It does not demonstrate a robot whose entire surface is covered by the textile or a robot that autonomously interprets distributed contact over its body.
+
+## Why this matters for artificial skin
+
+Large tactile arrays often face a wiring problem: increasing the number of sensing locations can increase channel count, connectors, acquisition hardware, and failure points. The three-channel architecture is therefore interesting as a readout strategy, not only as a new material.
+
+The research also connects sensing to an application loop. Position and pressure are not presented as isolated bench signals; they become commands for a robotic system. For wearable teleoperation, field robotics, and other human-robot interfaces, that system-level connection may be as important as peak sensor sensitivity.
+
+## What this does not prove yet
+
+The paper was listed as an in-press journal pre-proof when this brief was prepared. The 94.5% result belongs to the authors' six-class debris experiment and should not be read as open-world recognition performance.
+
+The term self-powered applies to the triboelectric sensing and addressing mechanism. It does not mean the robot arm, computing hardware, communications, or complete control system operates without external energy. The public report also does not establish long-term saltwater durability, field maintenance intervals, calibration stability, or performance after repeated damage.
+
+## Where this fits next
+
+The [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array) explains the trade-offs among taxel count, wiring, scan rate, calibration, and coverage. The [electronic skin overview](/e-skin) places textile and triboelectric approaches within the broader e-skin category. For deployment questions, compare the interface with the [robot hand tactile sensor guide](/applications/robot-hand-tactile-sensor) and the normalized records in the [RoboSkin Tactile Research Index](/research-index).
+
+## Practical questions
+
+- Why are three channels notable? They carry touch-location and pressure information without assigning one independent readout channel to every sensing position.
+- Is the whole interface self-powered? No. The paper's self-powered claim concerns the triboelectric sensing mechanism, not every part of the robot-control stack.
+- Is this full-body robot skin? No. The reported demonstration is a wearable textile human-robot interface.
+- What should be tested next? Long-duration environmental exposure, calibration drift, latency, repeatability, scaling to more locations, and performance outside the six reported debris classes.
+
+## Source boundary
+
+This brief summarizes the publisher's abstract, highlights, and article metadata and adds RoboSkin.ai analysis. The reported architecture and results belong to the cited study. The cover image is an editorial illustration, not a photograph or figure from the experiment. RoboSkin.ai is not affiliated with the authors or publisher.
+
+## Source
+
+- [Nano Energy: A Self-powered Minimal-Channel Addressable Textile-Based Artificial Skin for Wearable Human-Robot Interfaces](https://doi.org/10.1016/j.nanoen.2026.112233)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-07-27',
+    updated: '2026-07-27',
+    readTime: '5 min read',
+    category: 'Electronic skin',
+    image: '/generated/authority/news-textile-artificial-skin-2026.webp',
+    sourceTitle: 'Nano Energy textile-based artificial skin paper',
+    sourceUrl: 'https://doi.org/10.1016/j.nanoen.2026.112233',
+    sources: [
+      {
+        title: 'Nano Energy: Self-powered minimal-channel textile artificial skin',
+        url: 'https://doi.org/10.1016/j.nanoen.2026.112233',
+      },
+    ],
+    technicalFocus: [
+      'textile artificial skin',
+      'self-powered tactile sensing',
+      'minimal-channel addressing',
+      'wearable human-robot interface',
+    ],
+  },
+  {
     id: 'underwater-self-healing-electronic-skin-nus-2026',
     title: 'Underwater self-healing electronic skin combines touch, damage detection, and repair',
     seoTitle: 'Underwater Self-Healing Electronic Skin for Soft Robots',

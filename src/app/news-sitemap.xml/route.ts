@@ -1,4 +1,5 @@
 import { site } from '@/content/site';
+import { newsPosts } from '@/lib/news-data';
 import { getRecentNewsPosts } from '@/lib/news-sitemap';
 import { canonicalUrl } from '@/lib/seo';
 
@@ -14,7 +15,8 @@ function escapeXml(value: string) {
 }
 
 export function GET() {
-  const entries = getRecentNewsPosts()
+  const recentPosts = getRecentNewsPosts();
+  const entries = recentPosts
     .map(
       (post) => `<url>
   <loc>${escapeXml(canonicalUrl(`/news/${post.id}`))}</loc>
@@ -29,12 +31,16 @@ export function GET() {
 </url>`,
     )
     .join('');
+  const fallbackEntry = recentPosts.length === 0 && newsPosts[0]
+    ? `<url><loc>${escapeXml(canonicalUrl(`/news/${newsPosts[0].id}`))}</loc></url>`
+    : '';
 
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ' +
     'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">' +
     entries +
+    fallbackEntry +
     '</urlset>';
 
   return new Response(xml, {
