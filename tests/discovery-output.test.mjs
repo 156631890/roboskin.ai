@@ -41,7 +41,8 @@ test('RSS is generated from research and news with apex URLs', async () => {
 });
 
 test('Google News sitemap includes only recent news and apex URLs', async () => {
-  const [route, robots, vercel, layout, packageJson] = await Promise.all([
+  const [helper, route, robots, vercel, layout, packageJson] = await Promise.all([
+    read('src/lib/news-sitemap.ts'),
     read('src/app/news-sitemap.xml/route.ts'),
     read('src/app/robots.ts'),
     read('vercel.json'),
@@ -49,12 +50,14 @@ test('Google News sitemap includes only recent news and apex URLs', async () => 
     read('package.json'),
   ]);
 
-  assert.match(route, /newsPosts/);
-  assert.match(route, /2 \* 24 \* 60 \* 60 \* 1000/);
+  assert.match(helper, /newsPosts/);
+  assert.match(helper, /2 \* 24 \* 60 \* 60 \* 1000/);
+  assert.match(route, /getRecentNewsPosts/);
   assert.match(route, /xmlns:news="http:\/\/www\.google\.com\/schemas\/sitemap-news\/0\.9"/);
   assert.match(route, /canonicalUrl\(`\/news\/\$\{post\.id\}`\)/);
   assert.match(route, /application\/xml/);
-  assert.match(robots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
+  assert.match(robots, /getRecentNewsPosts\(\)\.length > 0/);
+  assert.match(robots, /hasRecentNews \? \['https:\/\/roboskin\.ai\/news-sitemap\.xml'\] : \[\]/);
   assert.match(vercel, /"source": "\/news-sitemap\.xml"/);
   assert.match(layout, /@vercel\/analytics\/next/);
   assert.match(layout, /<Analytics \/>/);

@@ -1,10 +1,8 @@
-import { newsPosts } from '@/lib/news-data';
 import { site } from '@/content/site';
+import { getRecentNewsPosts } from '@/lib/news-sitemap';
 import { canonicalUrl } from '@/lib/seo';
 
 export const dynamic = 'force-static';
-
-const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
 
 function escapeXml(value: string) {
   return value
@@ -16,9 +14,7 @@ function escapeXml(value: string) {
 }
 
 export function GET() {
-  const cutoff = Date.now() - twoDaysInMilliseconds;
-  const entries = newsPosts
-    .filter((post) => new Date(`${post.date}T00:00:00Z`).getTime() >= cutoff)
+  const entries = getRecentNewsPosts()
     .map(
       (post) => `<url>
   <loc>${escapeXml(canonicalUrl(`/news/${post.id}`))}</loc>

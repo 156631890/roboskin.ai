@@ -1,8 +1,11 @@
 import { MetadataRoute } from 'next';
+import { getRecentNewsPosts } from '@/lib/news-sitemap';
 
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
+  const hasRecentNews = getRecentNewsPosts().length > 0;
+
   return {
     rules: [
       {
@@ -13,7 +16,7 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       'https://roboskin.ai/sitemap.xml',
-      'https://roboskin.ai/news-sitemap.xml',
+      ...(hasRecentNews ? ['https://roboskin.ai/news-sitemap.xml'] : []),
     ],
   };
 }

@@ -24,6 +24,7 @@ Operational state:
 
 - External links reported by GSC: 0.
 - `https://roboskin.ai/sitemap.xml` was successful, last read on 2026-07-23, with 69 discovered pages.
+- `https://roboskin.ai/news-sitemap.xml` was tested in Search Console on 2026-07-27 and removed from the submitted list after the empty feed was correctly reported as missing a required `url`. The site exposes this sitemap in `robots.txt` only when at least one article is within the two-day Google News window; submit it on the next news publication day.
 - The index coverage report was last updated on 2026-07-10 and showed 64 indexed pages and 22 excluded URLs, so it is not current enough for a release decision.
 - Core Web Vitals had insufficient field data on both mobile and desktop.
 - Vercel Web Analytics was not enabled, so the repository now includes the client integration but dashboard activation remains a manual account action.
