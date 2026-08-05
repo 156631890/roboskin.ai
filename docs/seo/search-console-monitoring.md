@@ -48,6 +48,21 @@ CTR experiment gate:
 - Change a page only when it still has at least 20 post-treatment impressions and CTR below 1 percent.
 - Keep `/research` as the latest analyzed-briefs hub and `/research/robot-skin-papers` as the bibliography and paper-navigation route.
 
+## Production rollout - 2026-08-05
+
+| Item | Record |
+| --- | --- |
+| Deployed source commit | `4f0422d87962660d94789ad277f23c22af6443f5` |
+| Vercel production deployment | `dpl_He57vYNhVcyjSK3cspDA2UsnTwTU` at `https://roboskin-2p4iaripe-stevens-projects-08c9c5b0.vercel.app` |
+| Production alias | `https://roboskin.ai` |
+| Production verification | Passed at `2026-08-05T08:28:04.884Z`: 70 protected URLs, four noindex URLs, exact 71-URL sitemap, 18 research records, 34 RSS items, apex canonicals, and permanent `www` redirects |
+| Verified sitemap SHA-256 | `7de80951b76e19b88c65490d2571b2ea845f1a6acf67da406f236565634f2626` |
+| IndexNow | 10 changed URLs accepted with HTTP `200`; recorded at `2026-08-05T08:40Z` |
+| Google Search Console | `https://roboskin.ai/sitemap.xml` resubmitted successfully and 71 pages discovered; the new HT-Bench brief was not previously indexed and its indexing request was accepted on 2026-08-05 |
+| Earned-link outreach | Awesome-Touch maintainer-requested PR [#41](https://github.com/linchangyi1/Awesome-Touch/pull/41) is open and mergeable; the DOI is the primary link and the RoboSkin.ai brief is secondary with affiliation disclosed |
+
+Measurement baseline: the 2026-07-22 through 2026-08-02 Search Console export contained 57 clicks, 4,246 impressions, 1.3% CTR, and average position 7.9. Review the new page and changed cluster after 7, 28, and 90 days; do not interpret submission acceptance as indexing or ranking.
+
 ## Production rollout - 2026-07-10
 
 | Item | Record |
@@ -111,7 +126,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/research/single-material-soft-robotic-skin-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/ros2-kilted-tactile-pipeline-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/genforce-transferable-force-sensing-2026 | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026 | Yes |  |  | Inspect URL, then request indexing after deployment |
+| https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026 | Yes | No at inspection | 2026-08-05 | Indexing requested successfully; monitor recrawl and coverage |
 | https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/mitas-multi-resolution-tactile-imitation-learning-2026 | Yes |  |  | Inspect URL, then request indexing if available |

@@ -4,7 +4,7 @@ Use this log after each production deployment. It separates verified production 
 
 ## Production deployment verification
 
-Verified on 2026-06-13 after pushing `main` to GitHub.
+Verified on 2026-08-05 after pushing commit `4f0422d87962660d94789ad277f23c22af6443f5` to `main`. The apex production verifier passed at `2026-08-05T08:28:04.884Z` with 70 protected URLs, four noindex URLs, an exact 71-URL sitemap, 18 research records, and 34 RSS items.
 
 ## Search Console property boundary
 
@@ -26,13 +26,14 @@ Request indexing in Google Search Console after the production checks above pass
 
 | Priority | URL | Reason | Result | Checked |
 | ---: | --- | --- | --- | --- |
+| 0 | `https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026` | New source-backed HT-Bench research brief. | URL was not previously indexed; Search Console accepted the indexing request. | 2026-08-05 |
 | 1 | `https://roboskin.ai/` | Homepage now exposes Physical AI, robot skin, tactile AI, and contact feedback route signals. | Pending manual URL Inspection |  |
 | 2 | `https://roboskin.ai/physics-ai` | Canonical Physical AI definition route. | Pending manual URL Inspection |  |
 | 3 | `https://roboskin.ai/guides/tactile-feedback-for-physical-ai` | Primary guide for Physical AI contact-feedback intent. | Pending manual URL Inspection |  |
 | 4 | `https://roboskin.ai/guides/physical-ai-touch-data` | Primary guide for Physical AI touch-data intent. | Pending manual URL Inspection |  |
 | 5 | `https://roboskin.ai/robot-skin` | Robot skin definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
 | 6 | `https://roboskin.ai/tactile-ai` | Tactile AI definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
-| 7 | `https://roboskin.ai/sitemap.xml` | Sitemap discovery for the full cluster. | Pending sitemap resubmission |  |
+| 7 | `https://roboskin.ai/sitemap.xml` | Sitemap discovery for the full cluster. | Resubmitted successfully; Search Console reported 71 discovered pages. | 2026-08-05 |
 
 ## Bing Webmaster Tools queue
 
@@ -48,12 +49,12 @@ Submit or refresh these in Bing Webmaster Tools after Google URL Inspection is q
 
 ## IndexNow readiness
 
-IndexNow is not active until a key file is hosted at the site root and the key is available to the deployment process.
+IndexNow is active and remains gated by a fresh, successful production-verification report.
 
 | Requirement | Status | Next action |
 | --- | --- | --- |
-| Public key file at `https://roboskin.ai/{key}.txt` | Not configured | Generate an IndexNow key and add the key file to `public/` |
-| Submission endpoint command | Not configured | Add a script only after the key file is published |
-| URL batch | Ready | Use the Google URL Inspection queue above as the first IndexNow batch |
+| Public key file at `https://roboskin.ai/{key}.txt` | Configured and production-verified | Keep the committed key stable |
+| Submission endpoint command | Configured and verification-gated | Run only after a fresh apex verification report |
+| URL batch | 10 changed URLs accepted with HTTP `200` on 2026-08-05 | Monitor discovery; acceptance does not guarantee indexing |
 
 Do not mark IndexNow submissions complete unless the endpoint returns a success status for the submitted URL batch.
