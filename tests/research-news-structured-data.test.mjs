@@ -142,6 +142,7 @@ test('answer-engine and monitoring files expose updated GSC-visible research and
   ]);
 
   const expectedRoutes = [
+    'https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026',
     'https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026',
     'https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     'https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026',
@@ -174,6 +175,7 @@ test('homepage authority routes promote news and GSC-visible article pages', asy
   ]);
 
   const priorityInternalRoutes = [
+    '/research/ht-bench-full-hand-tactile-representations-2026',
     '/news/underwater-self-healing-electronic-skin-nus-2026',
     '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     '/news/full-hand-tactile-sensing-robot-hands-vision-control',

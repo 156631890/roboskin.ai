@@ -31,6 +31,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 ## Research Briefs
 
+- [HT-Bench full-hand tactile benchmark for robot manipulation](https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026): Research brief on 10M RGB frames, 7.8M full-hand tactile frames, representation learning, and transfer limits across 226 tasks.
 - [Graphene liquid-metal 3D force sensing](https://roboskin.ai/research/graphene-liquid-metal-3d-force-2026): Research brief for tactile force and slip-relevant sensing.
 - [Single-material soft robotic skin for multimodal e-skin sensing](https://roboskin.ai/research/single-material-soft-robotic-skin-2025): Source-backed soft robotic skin, e-skin, pressure, strain, and temperature sensing brief.
 - [Full-hand tactile sensing](https://roboskin.ai/research/full-hand-tactile-sensing-2025): Research route for full-hand robot tactile sensing.

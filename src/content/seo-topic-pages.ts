@@ -301,7 +301,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Humanoid robot skin',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
-    updated: '2026-07-21',
+    updated: '2026-08-05',
     priority: 0.82,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -334,6 +334,19 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        heading: 'Whole-arm tactile sensing extends coverage beyond the hand',
+        body: [
+          'A July 2026 Nature Sensors article reports EmArm, a robotic arm that combines large-area soft tactile skins, proprioception, and a closed-loop perception-action framework. The authors report submillimetre tactile localization, real-time feature extraction, touch-based intention recognition, contact-rich manipulation, and tactile-driven trajectory replanning under visual occlusion and environmental disturbances.',
+          'The useful systems lesson is that body-scale robot skin needs a registered sensorimotor loop. Contact location must map to the arm geometry, synchronize with joint state, and reach a controller quickly enough to change motion. The paper demonstrates one integrated route; it does not establish the same accuracy, durability, or safety performance for every humanoid surface or deployment environment.',
+        ],
+        bullets: [
+          'Register skin coordinates to links, joints, and robot frames',
+          'Measure localization and control latency under realistic disturbances',
+          'Test contact-aware replanning when vision is occluded',
+          'Separate source-reported system results from broader humanoid safety claims',
+        ],
+      },
+      {
         heading: 'How to evaluate a humanoid robot skin claim',
         body: [
           'The right question is not whether the skin detects touch in isolation. The useful question is whether it improves a humanoid task under realistic constraints.',
@@ -363,14 +376,17 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How humanoid touch data becomes behavior.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-specific sensing for grasp stability and slip.' },
       { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'How contact logs support Physical AI workflows.' },
+      { label: 'HT-Bench full-hand tactile benchmark', href: '/research/ht-bench-full-hand-tactile-representations-2026', description: 'Evaluate learned full-hand touch representations with egocentric vision.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'Source-backed full-hand research analysis.' },
       { label: 'Applications overview', href: '/applications', description: 'Existing application route for category use cases.' },
     ],
     sources: [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'Nature Sensors EmArm whole-arm tactile sensing article', href: 'https://www.nature.com/articles/s44460-026-00097-1' },
       { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
       { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
     ],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
     path: '/applications/robot-hand-tactile-sensor',
@@ -1494,7 +1510,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Sensor comparison guide',
     intent: 'Comparison guide for tactile sensor benchmark, robot manipulation tactile sensor comparison, and robot touch sensor evaluation searches.',
     published: '2026-07-20',
-    updated: '2026-07-20',
+    updated: '2026-08-05',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1518,6 +1534,20 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Keep object, mounting, surface, and disturbance conditions comparable',
           'Report task success and failure modes, not only clean sensor maps',
         ],
+      },
+      {
+        heading: 'Separate sensor selection from representation learning',
+        body: [
+          'TacO and HT-Bench use the word benchmark at different layers. TacO compares how four tactile sensor modalities affect manipulation-policy performance across three tasks. HT-Bench evaluates learned full-hand tactile representations with egocentric vision across contact-geometry, cross-modal, temporal, and unseen-task tests.',
+          'These sources should not be collapsed into one leaderboard. A sensor can produce a useful signal while a weak representation fails to preserve it, and a strong representation can still depend on a sensing layout that is impractical for another robot hand.',
+        ],
+        table: {
+          headers: ['Benchmark layer', 'Primary source', 'What it evaluates', 'Do not infer'],
+          rows: [
+            ['Sensor and policy selection', 'TacO', 'Visual, acoustic, magnetic, and resistive tactile sensing across pick-and-place, reorientation, and insertion.', 'One modality is universally best for every task or sensor implementation.'],
+            ['Learned full-hand representation', 'HT-Bench', '10M RGB frames and 7.8M tactile frames across 226 tasks, evaluated through retrieval, inpainting, synthesis, and prediction.', 'The reported encoder or sensing layout transfers to every robot hand and contact distribution.'],
+          ],
+        },
       },
       {
         heading: 'Four tactile sensing modalities at a glance',
@@ -1594,6 +1624,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'HT-Bench research brief', href: '/research/ht-bench-full-hand-tactile-representations-2026', description: 'Review the full-hand tactile representation benchmark and its transfer limits.' },
       { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare dataset scope, splits, signals, and transfer limits.' },
       { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare representation, world-model, and policy roles.' },
       { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Component selection and integration criteria.' },
@@ -1603,9 +1634,10 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sources: [
       { label: 'TacO tactile sensor benchmark preprint', href: 'https://arxiv.org/abs/2605.21976' },
+      { label: 'HT-Bench full-hand tactile representation benchmark preprint', href: 'https://arxiv.org/abs/2606.19161' },
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
     ],
-    paperBriefIds: ['open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025', 'event-based-opto-tactile-2025'],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025'],
   },
   {
     path: '/guides/tactile-datasets-robot-learning',
@@ -1616,7 +1648,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: '2026 dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-07-20',
+    updated: '2026-08-05',
     priority: 0.85,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1643,6 +1675,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Resource', 'Signals and scale', 'Best-fit question', 'Evaluation unit', 'Evidence boundary'],
           rows: [
+            ['HT-Bench', '10M egocentric RGB frames and 7.8M full-hand tactile frames collected across 226 tasks.', 'Full-hand tactile representation learning, cross-modal alignment, and unseen-task evaluation.', 'Split by task and trajectory; test held-out tasks, objects, sensor units, or embodiments for the claimed transfer.', 'A 2026 preprint. Scale does not make temporally adjacent frames independent, and reported results are specific to the benchmark setup.'],
             ['RCT', '29,279 tactile frames from 122 industrial reference materials in 7 categories, collected with 3 DIGIT sensors; paired touch, image, language, and force context.', 'Material understanding and tactile-language retrieval.', 'Keep full press or contact sequences together; test held-out materials where possible.', 'A 2026 preprint. Reported performance is specific to its sensors, materials, models, and splits.'],
             ['TactiDex', 'Whole-hand tactile observations aligned with multi-granularity kinematic and object states for single-hand and bimanual tasks.', 'Contact-rich dexterity and transfer across manipulation settings.', 'Use the standardized task and transfer protocol described by the source.', 'A 2026 preprint and project resource; inspect the released tasks, files, and license before reuse.'],
             ['FreeTacMan', 'Paired visuo-tactile observations and interaction trajectories collected with a portable, human-operated workflow.', 'Scaling contact-rich demonstrations without occupying a robot arm for every collection session.', 'Split by task, object, trajectory, and operator conditions that match the transfer claim.', 'A 2025 preprint; human-device data still needs validation on the target robot embodiment.'],
@@ -1717,6 +1750,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research index', href: '/research-index', description: 'Browse source-backed tactile research records.' },
     ],
     sources: [
+      { label: 'HT-Bench full-hand tactile benchmark preprint', href: 'https://arxiv.org/abs/2606.19161' },
       { label: 'RCT dataset preprint', href: 'https://arxiv.org/abs/2606.31694' },
       { label: 'RCT dataset project page', href: 'https://faerber-lab.github.io/RCT/' },
       { label: 'TactiDex dataset preprint', href: 'https://arxiv.org/abs/2607.09190' },
@@ -1725,7 +1759,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
       { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
     ],
-    paperBriefIds: ['freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025', 'sparsh-x-multisensory-touch-representations-2025'],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
     path: '/guides/tactile-foundation-models',

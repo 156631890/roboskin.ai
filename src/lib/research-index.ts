@@ -3,7 +3,7 @@ import { canonicalUrl } from '@/lib/seo';
 
 export type EvidenceLevel = 'peer-reviewed' | 'preprint' | 'institutional' | 'documentation';
 
-export const researchIndexUpdatedAt = '2026-07-21';
+export const researchIndexUpdatedAt = '2026-08-05';
 
 export interface ResearchIndexEntry {
   id: string;
@@ -45,6 +45,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 }
 
 const supplements: ResearchIndexSupplement[] = [
+  {
+    id: 'ht-bench-full-hand-tactile-representations-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Egocentric vision and full-hand tactile representation learning',
+    modalities: ['egocentric RGB vision', 'full-hand tactile frames'],
+    formFactor: 'Dexterous full-hand tactile benchmark spanning 226 tasks',
+    dataOutput: '10M RGB frames and 7.8M tactile frames with representation-learning benchmark tasks',
+    applications: ['tactile representation learning', 'dexterous manipulation', 'cross-modal prediction'],
+    evidence: 'preprint',
+    limitations: 'Preprint evidence tied to the reported hands, sensing layout, data collection, model baselines, and task splits; transfer to other embodiments requires independent validation.',
+    reviewedAt: '2026-08-05',
+  },
   {
     id: 'dream-tac-tactile-world-action-model-2026',
     year: 2026,

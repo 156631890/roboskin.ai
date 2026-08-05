@@ -411,6 +411,11 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A task-first benchmark guide for visual, acoustic, magnetic, and resistive tactile sensing.',
       },
       {
+        label: 'Review the HT-Bench full-hand tactile benchmark',
+        href: '/research/ht-bench-full-hand-tactile-representations-2026',
+        description: 'A source-backed brief on full-hand tactile representations, egocentric vision, and unseen-task evaluation.',
+      },
+      {
         label: 'Browse tactile datasets for robot learning',
         href: '/guides/tactile-datasets-robot-learning',
         description: 'A 2026 directory covering contact sequences, split leakage, signals, tasks, and transfer limits.',

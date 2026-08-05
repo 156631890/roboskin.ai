@@ -134,7 +134,7 @@ if (failures.length === 0) {
   const csvRows = parseCsv(csv);
   const csvIds = csvRows.map((row) => row.id);
   const jsonIds = indexData.entries?.map((entry) => entry.id) ?? [];
-  if (indexData.count !== 17 || jsonIds.length !== 17) failures.push('/research-index.json: expected 17 records');
+  if (indexData.count !== 18 || jsonIds.length !== 18) failures.push('/research-index.json: expected 18 records');
   if (JSON.stringify(csvIds) !== JSON.stringify(jsonIds)) failures.push('/research-index.csv: IDs differ from JSON');
   for (const [index, entry] of (indexData.entries ?? []).entries()) {
     for (const [column, value] of Object.entries(entry)) {
@@ -157,7 +157,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 33 || rssLinks.length !== 34 || rssGuids.length !== 33) failures.push('/feed.xml: expected 33 complete items');
+  if (rssItems.length !== 34 || rssLinks.length !== 35 || rssGuids.length !== 34) failures.push('/feed.xml: expected 34 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 
   const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');
@@ -170,4 +170,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 17 data records, and 33 RSS items`);
+console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 18 data records, and 34 RSS items`);

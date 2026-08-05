@@ -8,6 +8,7 @@ const read = (path) => readFile(new URL(path, root), 'utf8');
 test('the research index edition is normalized and source-backed', async () => {
   const index = await read('src/lib/research-index.ts');
   const ids = [
+    'ht-bench-full-hand-tactile-representations-2026',
     'dream-tac-tactile-world-action-model-2026',
     'single-material-soft-robotic-skin-2025',
     'freetacman-robot-free-visuotactile-data-collection-2025',
@@ -27,7 +28,7 @@ test('the research index edition is normalized and source-backed', async () => {
     'large-area-flexible-tactile-arrays-2025',
   ];
 
-  assert.equal(ids.length, 17);
+  assert.equal(ids.length, 18);
 
   for (const id of ids) assert.match(index, new RegExp(`'${id}'`));
   for (const field of [
@@ -44,6 +45,7 @@ test('the research index edition is normalized and source-backed', async () => {
   assert.doesNotMatch(index, /content:/);
   assert.match(index, /Digit 360 multisensory tactile representation model/);
   assert.match(index, /Framework spanning GelSight, TacTip, and uSkin sensors/);
+  assert.match(index, /10M RGB frames and 7\.8M tactile frames/);
   assert.match(index, /id: 'event-based-opto-tactile-2025'[\s\S]*?year: 2026/);
   assert.doesNotMatch(index, /Cross-sensor tactile learning model|Transferable camera-based force estimation|Vision-based tactile sensor/);
 });

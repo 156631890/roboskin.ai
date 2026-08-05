@@ -36,11 +36,13 @@ test('tactile benchmark, dataset, and foundation-model guides form an indexable 
   assert.match(modelsRoute, /getSeoTopicPage\('\/guides\/tactile-foundation-models'\)/);
 
   assert.match(topics, /TacO tactile sensor benchmark preprint/);
+  assert.match(topics, /HT-Bench full-hand tactile representation benchmark preprint/);
+  assert.match(topics, /10M egocentric RGB frames and 7\.8M full-hand tactile frames/);
   assert.match(topics, /visual, acoustic, magnetic, and resistive/);
   assert.match(topics, /29,279 tactile frames/);
   assert.match(topics, /contact-sequence overlap reduces tactile-to-text Recall@1 by 17\.7 percentage points/);
   assert.match(topics, /Sparsh-X[\s\S]*Dream-Tac[\s\S]*TouchWorld[\s\S]*MiTaS/);
-  assert.match(topics, /paperBriefIds: \['freetacman-robot-free-visuotactile-data-collection-2025'/);
+  assert.match(topics, /paperBriefIds: \['ht-bench-full-hand-tactile-representations-2026'/);
 
   assert.match(topics, /table\?: \{/);
   assert.match(article, /overflow-x-auto/);
