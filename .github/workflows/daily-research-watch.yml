@@ -1,0 +1,41 @@
+name: Daily robotics research watch
+
+on:
+  schedule:
+    # 09:17 Asia/Shanghai. The off-hour minute reduces GitHub scheduler congestion.
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-robotics-research-watch
+  cancel-in-progress: true
+
+jobs:
+  research-watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build source-backed candidate report
+        run: node scripts/daily-research-watch.mjs
+
+      - name: Upload review queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roboskin-daily-research-watch-${{ github.run_id }}
+          path: |
+            .artifacts/daily-research-watch.md
+            .artifacts/daily-research-watch.json
+          if-no-files-found: error
+          retention-days: 30

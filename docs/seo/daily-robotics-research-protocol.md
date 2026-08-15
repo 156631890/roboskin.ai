@@ -2,7 +2,8 @@
 
 ## Schedule and purpose
 
-- Run every day at 09:00 Asia/Shanghai.
+- Run automatically every day at 09:17 Asia/Shanghai through `.github/workflows/daily-research-watch.yml`.
+- Run manually with `npm run research:watch` when an immediate review is needed.
 - Produce a source-linked research brief for editorial review.
 - Do not auto-publish or deploy a page solely because a term is trending.
 - Promote a finding to the website only when it has a primary source, a distinct search intent, and a clear RoboSkin tactile/contact angle.
@@ -27,6 +28,8 @@
 4. Reputable secondary reporting only as discovery context; trace every technical claim back to a primary source before recommending publication.
 
 ## Daily output
+
+The automated run writes `.artifacts/daily-research-watch.md` and `.artifacts/daily-research-watch.json`, adds the report to the GitHub Actions job summary, and uploads both files as a 30-day workflow artifact. It does not commit candidate data or publish pages.
 
 Each run must report:
 
