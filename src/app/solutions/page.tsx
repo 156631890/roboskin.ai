@@ -18,7 +18,7 @@ export default function SolutionsPage() {
             <h1 className="text-4xl font-bold text-white md:text-6xl">
               Robotic gripper and robot hand tactile sensing use cases
             </h1>
-            <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Compare guide routes {'->'}
             </Link>
           </div>

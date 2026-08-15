@@ -19,9 +19,9 @@ export default function PageHeroVisual({ visual, className = '', priority = fals
           fill
           priority={priority}
           sizes="(min-width: 1024px) 54vw, 100vw"
-          className="object-cover"
+          className="object-cover grayscale saturate-[0.35] contrast-[1.04]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0.02),rgba(2,4,8,0.62))]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,15,0.02),rgba(17,17,15,0.62)),linear-gradient(90deg,rgba(255,107,61,0.08),transparent_48%)]" />
       </div>
       <figcaption className="sr-only">{visual.caption}</figcaption>
     </figure>

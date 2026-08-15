@@ -154,7 +154,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
                 <Link href="/contact?requestType=research" className="mt-3 block text-sm font-semibold text-accent hover:text-white">
                   Send a research inquiry {'->'}
                 </Link>
-                <Link href="/resources" className="mt-3 block text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                <Link href="/resources" className="mt-3 block text-sm font-semibold text-white hover:text-[#eadfd3]">
                   Explore research resources {'->'}
                 </Link>
               </div>

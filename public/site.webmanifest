@@ -4,8 +4,8 @@
   "description": "Independent research and information resource for robot skin, tactile AI, e-skin, and Physical AI.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#06080c",
-  "theme_color": "#06080c",
+  "background_color": "#11110f",
+  "theme_color": "#11110f",
   "icons": [
     {
       "src": "/favicon.svg",

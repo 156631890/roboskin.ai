@@ -52,7 +52,7 @@ export default function ResearchIndexPage() {
         </div>
         <div className="container-shell">
           <dl className="mt-9 grid gap-3 sm:grid-cols-3">
-            <div className="border-l-2 border-[#00e5ff] pl-4">
+            <div className="border-l-2 border-[#ff6b3d] pl-4">
               <dt className="font-mono text-2xl font-semibold text-white">{researchIndexEntries.length}</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">reviewed records</dd>
             </div>
@@ -89,7 +89,7 @@ export default function ResearchIndexPage() {
             <p className="mt-4 text-sm leading-relaxed text-[#c8d1de]">
               Inclusion does not imply affiliation, endorsement, commercial availability, or equivalent performance across sensors and tasks. Evidence labels describe the cited public source type, not a universal quality score. Review the original source and application conditions before making an engineering decision.
             </p>
-            <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+            <Link href="/contact?requestType=research" className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
               Submit a correction {'->'}
             </Link>
           </div>

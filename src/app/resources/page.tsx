@@ -17,7 +17,7 @@ export default function ResourcesPage() {
           <span className="eyebrow">Resources</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">Robot skin learning resources</h1>
-            <Link href="/research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Explore research resources {'->'}
             </Link>
           </div>
@@ -39,7 +39,7 @@ export default function ResourcesPage() {
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <p className="text-soft text-xs uppercase tracking-[0.14em]">{item.availability}</p>
                       {item.href ? (
-                        <Link href={item.href} className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+                        <Link href={item.href} className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
                           {item.ctaLabel ?? 'Request'} {'->'}
                         </Link>
                       ) : null}
@@ -61,14 +61,14 @@ export default function ResourcesPage() {
               <p className="eyebrow">Topic cluster</p>
               <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Robot skin search routes</h2>
             </div>
-            <Link href="/robot-skin" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/robot-skin" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Start at robot skin {'->'}
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {seoTopicPages.map((page) => (
               <Link key={page.path} href={page.path} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
-                <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">{page.kicker}</span>
+                <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{page.kicker}</span>
                 <h3 className="mt-3 text-xl font-semibold text-white">{page.h1}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-soft">{page.description}</p>
                 <span className="mt-4 block text-xs uppercase tracking-[0.12em] text-[#8e98a8]">{page.relatedLinks.length} linked routes</span>

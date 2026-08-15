@@ -158,7 +158,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                 <Link href="/contact?requestType=research" className="mt-3 block text-sm font-semibold text-accent hover:text-white">
                   Send a research note {'->'}
                 </Link>
-                <Link href="/research" className="mt-3 block text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                <Link href="/research" className="mt-3 block text-sm font-semibold text-white hover:text-[#eadfd3]">
                   Explore research briefs {'->'}
                 </Link>
               </div>

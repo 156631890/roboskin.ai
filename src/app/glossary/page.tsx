@@ -118,7 +118,7 @@ export default function GlossaryPage() {
         <div className="container-shell grid gap-4 md:grid-cols-3">
           {glossaryFamilies.map((family) => (
             <article key={family.title} className="signal-panel p-6">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">{family.label}</p>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{family.label}</p>
               <h2 className="mt-3 text-xl font-semibold text-white">{family.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{family.text}</p>
             </article>
@@ -129,7 +129,7 @@ export default function GlossaryPage() {
       <section className="pb-14 md:pb-20">
         <div className="container-shell">
           <div className="mb-5">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Core topic routes</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Core topic routes</p>
             <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Start with the main definitions</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -147,10 +147,10 @@ export default function GlossaryPage() {
         <div className="container-shell">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Term route matrix</p>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Term route matrix</p>
               <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Definitions with next-step context</h2>
             </div>
-            <Link href="/research" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+            <Link href="/research" className="text-sm font-semibold text-[#ff6b3d] hover:text-white">
               Research index {'->'}
             </Link>
           </div>
@@ -175,7 +175,7 @@ export default function GlossaryPage() {
                       </span>
                     ))}
                   </div>
-                  <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                  <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
                     Follow related route {'->'}
                   </Link>
                 </div>

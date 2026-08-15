@@ -328,9 +328,9 @@ export const homeUseCases = [
 ];
 
 export const authorityHeroVisual: AuthorityHeroVisual = {
-  image: '/generated/authority/authority-hero-tactile-stack.webp',
+  image: '/generated/brand/roboskin-tactile-material-study-v2.webp',
   imageAlt:
-    'Humanoid robot hand with translucent tactile sensor skin and blue signal paths representing a tactile AI stack.',
+    'Robotic fingertip pressing a flexible tactile sensor sheet with a copper micro-grid on a precision research fixture.',
 };
 
 export const homeBrandAssets: HomeBrandAssets = {
@@ -340,9 +340,9 @@ export const homeBrandAssets: HomeBrandAssets = {
       'RoboSkin.ai brand system board showing a tactile grid logo, cold blue signal palette, typography, report cover, and robotic skin imagery.',
   },
   hero: {
-    image: '/generated/brand/roboskin-hero-tactile-lab.webp',
+    image: '/generated/brand/roboskin-hero-editorial-v2.webp',
     imageAlt:
-      'Humanoid robotic hand and forearm covered with flexible tactile robot skin, blue sensor nodes, and signal paths in a dark robotics laboratory.',
+      'Graphite humanoid robotic hand with flexible tactile skin approaching a sculptural ceramic surface in a warm industrial studio.',
   },
 };
 

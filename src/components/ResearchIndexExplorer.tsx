@@ -97,10 +97,10 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
             {filteredEntries.map((entry) => (
               <tr key={entry.id} className="align-top text-sm text-[#c8d1de]">
                 <td className="w-[300px] border-b border-white/8 px-4 py-5">
-                  <a href={entry.url} className="font-semibold leading-snug text-white hover:text-[#00e5ff]">
+                  <a href={entry.url} className="font-semibold leading-snug text-white hover:text-[#ff6b3d]">
                     {entry.title}
                   </a>
-                  <a href={entry.sourceUrl} target="_blank" rel="noreferrer" className="mt-2 block text-xs text-[#00e5ff] hover:text-white">
+                  <a href={entry.sourceUrl} target="_blank" rel="noreferrer" className="mt-2 block text-xs text-[#ff6b3d] hover:text-white">
                     {entry.publisher}: {entry.sourceTitle}
                   </a>
                   <p className="mt-3 text-xs leading-relaxed text-[#8e98a8]">{entry.limitations}</p>

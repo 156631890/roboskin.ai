@@ -12,10 +12,10 @@ const researchPath = new URL('../src/app/research/page.tsx', import.meta.url);
 const glossaryPath = new URL('../src/app/glossary/page.tsx', import.meta.url);
 const brandVisualAssets = [
   'public/generated/brand/roboskin-brand-board.webp',
-  'public/generated/brand/roboskin-hero-tactile-lab.webp',
+  'public/generated/brand/roboskin-hero-editorial-v2.webp',
+  'public/generated/brand/roboskin-tactile-material-study-v2.webp',
 ];
 const authorityVisualAssets = [
-  'public/generated/authority/authority-hero-tactile-stack.webp',
   'public/generated/authority/robot-skin-definition.webp',
   'public/generated/authority/tactile-ai-loop.webp',
   'public/generated/authority/state-of-tactile-ai-cover.webp',

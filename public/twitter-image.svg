@@ -1,10 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="RoboSkin social image">
-  <rect width="1200" height="630" fill="#06080c"/>
-  <circle cx="965" cy="150" r="220" fill="#1f6feb" opacity=".18"/>
-  <circle cx="900" cy="385" r="180" fill="#7dd3fc" opacity=".12"/>
-  <path d="M90 438c160-80 300-80 420 0s250 80 390 0" fill="none" stroke="#62a8ff" stroke-width="4" opacity=".5"/>
-  <text x="90" y="165" fill="#7dd3fc" font-family="Arial, sans-serif" font-size="28" letter-spacing="6">ROBOT SKIN</text>
-  <text x="90" y="260" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">Tactile AI for</text>
-  <text x="90" y="345" fill="#ffffff" font-family="Arial, sans-serif" font-size="72" font-weight="700">robotics teams</text>
-  <text x="90" y="515" fill="#d7e7ff" font-family="Arial, sans-serif" font-size="30">RoboSkin.ai</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="RoboSkin robot skin and tactile AI research">
+  <rect width="1200" height="630" fill="#eee9dd"/>
+  <path d="M0 0h1200v18H0z" fill="#ff6b3d"/>
+  <path d="M740 18h460v612H740z" fill="#171714"/>
+  <g transform="translate(815 135)">
+    <g fill="#2a2925" stroke="#817a70" stroke-width="2">
+      <rect width="76" height="76"/><rect x="104" width="76" height="76"/><rect x="208" width="76" height="76"/>
+      <rect y="104" width="76" height="76"/><rect x="104" y="104" width="76" height="76"/><rect x="208" y="104" width="76" height="76"/>
+      <rect y="208" width="76" height="76"/><rect x="104" y="208" width="76" height="76"/><rect x="208" y="208" width="76" height="76"/>
+    </g>
+    <g fill="#ff6b3d" stroke="#ff6b3d">
+      <rect x="104" width="76" height="76"/><rect x="104" y="104" width="76" height="76"/><rect x="104" y="208" width="76" height="76"/>
+    </g>
+  </g>
+  <text x="78" y="98" fill="#bd4324" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">INDEPENDENT ROBOTICS RESEARCH</text>
+  <text x="78" y="207" fill="#171714" font-family="Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-4">Robot skin +</text>
+  <text x="78" y="290" fill="#171714" font-family="Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="-4">tactile AI</text>
+  <text x="78" y="372" fill="#5d5952" font-family="Arial, sans-serif" font-size="30">Evidence for Physical AI and humanoid robots.</text>
+  <path d="M78 448h560" stroke="#171714" stroke-opacity=".25"/>
+  <text x="78" y="496" fill="#171714" font-family="Arial, sans-serif" font-size="29" font-weight="700">RoboSkin<tspan fill="#bd4324">.ai</tspan></text>
+  <text x="78" y="545" fill="#777168" font-family="Arial, sans-serif" font-size="18" letter-spacing="2">SOURCES / LIMITS / COMPARISON</text>
 </svg>

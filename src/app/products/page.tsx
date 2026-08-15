@@ -18,7 +18,7 @@ export default function ProductsPage() {
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">
               Robot skin guides for tactile AI learning
             </h1>
-            <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+            <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Submit source {'->'}
             </Link>
           </div>
@@ -47,13 +47,13 @@ export default function ProductsPage() {
                       If you are unsure, review the research and glossary routes first, then send a source suggestion or correction if a page needs improvement.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-3">
-                      <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#7dd3fc]">
+                      <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
                         Submit source {'->'}
                       </Link>
-                      <Link href="/research" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                      <Link href="/research" className="text-sm font-semibold text-white hover:text-[#eadfd3]">
                         Explore research {'->'}
                       </Link>
-                      <Link href="/glossary" className="text-sm font-semibold text-white hover:text-[#d7e7ff]">
+                      <Link href="/glossary" className="text-sm font-semibold text-white hover:text-[#eadfd3]">
                         Read the glossary {'->'}
                       </Link>
                     </div>

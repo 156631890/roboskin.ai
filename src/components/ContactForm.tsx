@@ -293,14 +293,14 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
       <div className="min-h-6 text-sm" role={status === 'error' ? 'alert' : 'status'} aria-live="polite">
         {feedback && (
-          <p className={status === 'error' ? 'text-rose-400' : 'text-[#7dd3fc]'}>
+          <p className={status === 'error' ? 'text-rose-400' : 'text-[#ff9b73]'}>
             {feedback}
           </p>
         )}
       </div>
 
       <p className="text-sm text-soft">
-        For direct inquiries: <a className="text-accent hover:text-[#7dd3fc]" href={`mailto:${site.contact.ownerEmail}`}>{site.contact.ownerEmail}</a>
+        For direct inquiries: <a className="text-accent hover:text-[#ff9b73]" href={`mailto:${site.contact.ownerEmail}`}>{site.contact.ownerEmail}</a>
       </p>
     </form>
   );

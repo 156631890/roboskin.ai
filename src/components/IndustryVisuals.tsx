@@ -35,46 +35,19 @@ type ResearchBriefIndexProps = {
   entries: ResearchResourceEntry[];
 };
 
-const accentStyles: Record<FeaturedIndustryAsset['accent'], { border: string; bg: string; text: string; bar: string }> = {
-  blue: {
-    border: 'border-[#8fb0c2]/25',
-    bg: 'bg-[#00c8ff]/8',
-    text: 'text-[#b8eefe]',
-    bar: 'bg-[#00c8ff]',
-  },
-  teal: {
-    border: 'border-[#8fb0c2]/25',
-    bg: 'bg-[#00c8ff]/8',
-    text: 'text-[#b8eefe]',
-    bar: 'bg-[#00c8ff]',
-  },
-  amber: {
-    border: 'border-[#8fb0c2]/25',
-    bg: 'bg-[#00c8ff]/8',
-    text: 'text-[#b8eefe]',
-    bar: 'bg-[#00c8ff]',
-  },
-  rose: {
-    border: 'border-[#8fb0c2]/25',
-    bg: 'bg-[#00c8ff]/8',
-    text: 'text-[#b8eefe]',
-    bar: 'bg-[#00c8ff]',
-  },
-};
-
 export function AuthorityIndex({ groups }: AuthorityIndexProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="authority-index-grid">
       {groups.map((group) => (
-        <section key={group.title} className="rounded-lg border border-white/10 bg-[#05080d]/90 p-5">
-          <h3 className="text-lg font-semibold text-white">{group.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-[#8e98a8]">{group.summary}</p>
-          <ul className="mt-5">
+        <section key={group.title} className="authority-index-group">
+          <h3>{group.title}</h3>
+          <p>{group.summary}</p>
+          <ul>
             {group.links.map((link) => (
-              <li key={link.href} className="border-t border-white/8">
-                <Link href={link.href} className="-mx-3 block px-3 py-3 transition-colors hover:bg-white/[0.035]">
-                  <span className="block text-sm font-semibold text-[#dff8ff]">{link.label}</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-[#8e98a8]">{link.description}</span>
+              <li key={link.href}>
+                <Link href={link.href}>
+                  <strong>{link.label}</strong>
+                  <small>{link.description}</small>
                 </Link>
               </li>
             ))}
@@ -87,24 +60,24 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
 
 export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
   return (
-    <div className="signal-panel overflow-hidden">
+    <div className="border-y border-white/15">
       {answers.map((item, index) => (
         <article
           key={item.question}
-          className="grid gap-5 border-b border-white/8 p-5 last:border-b-0 md:grid-cols-[96px_0.48fr_1fr] md:p-7"
+          className="group grid gap-5 border-b border-white/15 py-7 last:border-b-0 md:grid-cols-[72px_0.48fr_1fr] md:py-9"
         >
-          <span className="font-mono text-sm font-semibold text-[#00c8ff]">{String(index + 1).padStart(2, '0')}</span>
-          <h3 className="text-xl font-semibold text-white">{item.question}</h3>
+          <span className="font-mono text-xs font-semibold text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
+          <h3 className="max-w-sm text-xl font-semibold text-white md:text-2xl">{item.question}</h3>
           <div>
             {item.image && item.imageAlt ? (
-              <div className="relative mb-5 aspect-[16/7] overflow-hidden rounded-[var(--radius-md)] border border-white/10 bg-[#02050a]">
-                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,5,10,0.03),rgba(2,5,10,0.56))]" />
+              <div className="relative mb-5 aspect-[16/7] overflow-hidden border border-white/10 bg-[#11110f]">
+                <Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,17,15,0.05),rgba(17,17,15,0.54))]" />
               </div>
             ) : null}
-            <p className="text-base leading-relaxed text-[#c8d1de]">{item.answer}</p>
-            <Link href={item.href} className="mt-4 inline-flex text-sm font-semibold text-[#b8eefe] transition-colors hover:text-white">
-              {item.ctaLabel} {'->'}
+            <p className="max-w-2xl text-base leading-relaxed text-[#c8c1b5]">{item.answer}</p>
+            <Link href={item.href} className="mt-5 inline-flex border-b border-white/30 pb-1 text-sm font-semibold text-[#f3efe5] transition-colors hover:border-[#ff6b3d] hover:text-[#ff6b3d]">
+              {item.ctaLabel} →
             </Link>
           </div>
         </article>
@@ -116,21 +89,24 @@ export function DirectAnswerSection({ answers }: DirectAnswerSectionProps) {
 export function TactileStackMap({ layers, heroVisual }: TactileStackMapProps) {
   return (
     <figure className="signal-panel overflow-hidden p-0">
-      <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="border-b border-white/8 bg-[#03060a]/80 p-6 lg:border-b-0 lg:border-r">
-          <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
+      <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="border-b border-white/12 bg-[#171714] p-5 lg:border-b-0 lg:border-r lg:p-7">
+          <div className="relative mb-7 aspect-[16/10] overflow-hidden border border-white/10 bg-[#11110f]">
             <Image
               src={heroVisual.image}
               alt={heroVisual.imageAlt}
               fill
               sizes="(min-width: 1024px) 38vw, (min-width: 768px) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover saturate-[0.82]"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0),rgba(2,4,8,0.46))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,15,0),rgba(17,17,15,0.44))]" />
+            <span className="absolute bottom-3 left-3 bg-[#eee9dd] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[#171714]">
+              Contact study / 2026
+            </span>
           </div>
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#00e5ff]">Tactile AI stack map</p>
-          <h3 className="mt-3 text-3xl font-semibold leading-tight text-white">Input -&gt; processing -&gt; action -&gt; feedback</h3>
-          <p className="mt-4 text-sm leading-relaxed text-[#8e98a8]">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#ff6b3d]">Tactile AI stack map</p>
+          <h3 className="mt-3 text-3xl font-semibold leading-tight text-white">Input → processing → action → feedback</h3>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#aaa398]">
             Robot skin is useful when contact signals move through a complete stack: surface design, sensors,
             signal conditioning, robot middleware, controller behavior, safety response, and evaluation data.
           </p>
@@ -143,23 +119,23 @@ export function TactileStackMap({ layers, heroVisual }: TactileStackMapProps) {
                   className={
                     'aspect-square rounded border ' +
                     (active
-                      ? 'border-[#5eead4]/50 bg-[#5eead4]/25 shadow-[0_0_18px_rgba(94,234,212,0.18)]'
-                      : 'border-white/8 bg-white/[0.045]')
+                      ? 'border-[#ff6b3d]/70 bg-[#ff6b3d]/55'
+                      : 'border-white/10 bg-white/[0.035]')
                   }
                 />
               );
             })}
           </div>
         </div>
-        <ol className="divide-y divide-white/8">
+        <ol className="divide-y divide-white/12">
           {layers.map((layer, index) => (
-            <li key={layer.title} className="grid grid-cols-[44px_1fr] gap-4 p-4 transition-colors hover:bg-white/[0.025] md:p-5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md border border-[#00e5ff]/20 bg-[#00e5ff]/8 font-mono text-sm font-bold text-[#dff8ff]">
-                {index + 1}
+            <li key={layer.title} className="group grid grid-cols-[44px_1fr] gap-4 p-4 transition-colors hover:bg-white/[0.03] md:p-5">
+              <span className="flex h-9 w-9 items-center justify-center border border-white/15 font-mono text-xs font-semibold text-[#ff6b3d] transition-colors group-hover:border-[#ff6b3d]">
+                {String(index + 1).padStart(2, '0')}
               </span>
               <div>
                 <h4 className="text-base font-semibold text-white">{layer.title}</h4>
-                <p className="mt-1 text-sm leading-relaxed text-[#8e98a8]">{layer.summary}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[#8f8a81]">{layer.summary}</p>
               </div>
             </li>
           ))}
@@ -184,7 +160,7 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
               <p className="text-xs uppercase text-[#9aa3b2]">Robot skin field</p>
               <h2 className="mt-2 text-2xl font-semibold text-white">Contact layer</h2>
             </div>
-            <span className="rounded-md border border-[#5eead4]/30 bg-[#5eead4]/10 px-3 py-1 text-xs font-semibold text-[#ccfbf1]">live map</span>
+            <span className="rounded-md border border-[#ff8a5b]/30 bg-[#ff8a5b]/10 px-3 py-1 text-xs font-semibold text-[#ffd5c5]">live map</span>
           </div>
 
           <div className="mt-6 grid grid-cols-6 gap-2">
@@ -196,7 +172,7 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
                   className={
                     'aspect-square rounded-md border ' +
                     (active
-                      ? 'border-[#5eead4]/50 bg-[#5eead4]/25 shadow-[0_0_22px_rgba(94,234,212,0.2)]'
+                      ? 'border-[#ff8a5b]/50 bg-[#ff8a5b]/25 shadow-[0_0_22px_rgba(255,107,61,0.16)]'
                       : 'border-white/8 bg-white/[0.045]')
                   }
                 />
@@ -210,7 +186,7 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
                 <span className="text-xs uppercase text-[#9aa3b2]">{signal}</span>
                 <span className="h-2 rounded-full bg-white/8">
                   <span
-                    className="block h-2 rounded-full bg-[#62a8ff]"
+                    className="block h-2 rounded-full bg-[#ff7a4d]"
                     style={{ width: `${index === 0 ? 82 : index === 1 ? 64 : index === 2 ? 76 : 52}%` }}
                   />
                 </span>
@@ -225,7 +201,7 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
               <p className="text-xs uppercase text-[#9aa3b2]">The Tactile AI Stack</p>
               <h2 className="mt-2 text-2xl font-semibold text-white">Signal to intelligence</h2>
             </div>
-            <span className="rounded-md border border-[#62a8ff]/35 bg-[#62a8ff]/12 px-3 py-1 text-xs font-semibold text-[#d7e7ff]">7 layers</span>
+            <span className="rounded-md border border-[#ff7a4d]/35 bg-[#ff7a4d]/12 px-3 py-1 text-xs font-semibold text-[#eadfd3]">7 layers</span>
           </div>
 
           <div className="mt-5 space-y-2">
@@ -249,20 +225,21 @@ export function TactileStackVisual({ layers }: TactileStackVisualProps) {
 
 export function ResearchBriefIndex({ entries }: ResearchBriefIndexProps) {
   return (
-    <div className="signal-panel overflow-hidden">
-      {entries.map((entry) => (
+    <div className="border-y border-white/15">
+      {entries.map((entry, index) => (
         <Link
           key={entry.href}
           href={entry.href}
-          className="group grid gap-4 border-b border-white/8 p-5 transition-colors last:border-b-0 hover:bg-white/[0.035] md:grid-cols-[140px_176px_1fr]"
+          className="group grid gap-4 border-b border-white/15 py-5 transition-colors last:border-b-0 hover:bg-white/[0.025] md:grid-cols-[48px_150px_1fr]"
         >
-          <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#00e5ff]">{entry.label}</span>
-          <span className="relative block aspect-[16/9] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
-            <Image src={entry.image} alt={entry.imageAlt} fill sizes="168px" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+          <span className="font-mono text-[10px] text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
+          <span className="relative block aspect-[16/9] overflow-hidden border border-white/10 bg-[#11110f]">
+            <Image src={entry.image} alt={entry.imageAlt} fill sizes="150px" className="object-cover grayscale transition duration-500 group-hover:scale-[1.03] group-hover:grayscale-0" />
           </span>
           <span>
-            <span className="block text-lg font-semibold text-white">{entry.title}</span>
-            <span className="mt-1 block text-sm leading-relaxed text-[#8e98a8]">{entry.summary}</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.1em] text-[#7e7a72]">{entry.label}</span>
+            <span className="mt-1 block text-lg font-semibold text-white transition-colors group-hover:text-[#ff6b3d]">{entry.title}</span>
+            <span className="mt-2 block text-sm leading-relaxed text-[#8f8a81]">{entry.summary}</span>
           </span>
         </Link>
       ))}
@@ -272,39 +249,38 @@ export function ResearchBriefIndex({ entries }: ResearchBriefIndexProps) {
 
 export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCoversProps) {
   return (
-    <div className={compact ? 'grid gap-4 md:grid-cols-2' : 'grid gap-5 md:grid-cols-2 xl:grid-cols-4'}>
+    <div className={compact ? 'grid border-y border-[#171714]/25 md:grid-cols-2' : 'grid border-y border-[#171714]/25 md:grid-cols-2 xl:grid-cols-4'}>
       {assets.map((asset) => {
-        const accent = accentStyles[asset.accent];
         return (
-          <article key={asset.title} className={`rounded-lg border ${accent.border} bg-[#05080d] p-5 shadow-[0_18px_60px_rgba(0,11,28,0.2)]`}>
-            <div className={`relative overflow-hidden rounded-md border ${accent.border} ${accent.bg} p-4`}>
-              <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 1280px) 24vw, (min-width: 768px) 45vw, 100vw" className="object-cover opacity-75" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,4,8,0.08),rgba(2,4,8,0.9))]" />
+          <article key={asset.title} className="border-b border-[#171714]/25 p-5 first:pl-0 md:border-b-0 md:border-r md:last:border-r-0 md:odd:pl-0 md:even:pr-0">
+            <div className="relative overflow-hidden border border-[#171714]/20 bg-[#d7d0c3] p-4">
+              <Image src={asset.image} alt={asset.imageAlt} fill sizes="(min-width: 1280px) 24vw, (min-width: 768px) 45vw, 100vw" className="object-cover grayscale opacity-85 transition duration-500 hover:grayscale-0" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,23,20,0.02),rgba(23,23,20,0.82))]" />
               <div className="relative flex items-start justify-between gap-4">
-                <span className={`rounded-md border ${accent.border} bg-[#070a0f]/70 px-2.5 py-1 text-[11px] font-semibold uppercase ${accent.text}`}>
+                <span className="border border-white/30 bg-[#171714]/70 px-2.5 py-1 text-[10px] font-semibold uppercase text-[#f3efe5]">
                   {asset.kicker}
                 </span>
-                <span className="font-mono text-[11px] text-[#8e98a8]">{asset.code}</span>
+                <span className="font-mono text-[10px] text-[#c8c1b5]">{asset.code}</span>
               </div>
               <div className="relative mt-24 space-y-2">
-                <span className={`block h-1.5 w-20 rounded-full ${accent.bar}`} />
-                <span className="block h-1.5 w-28 rounded-full bg-white/18" />
-                <span className="block h-1.5 w-16 rounded-full bg-white/12" />
+                <span className="block h-1 w-20 bg-[#ff6b3d]" />
+                <span className="block h-1 w-28 bg-white/25" />
+                <span className="block h-1 w-16 bg-white/15" />
               </div>
               <h3 className="relative mt-7 text-2xl font-semibold leading-tight text-white">{asset.title}</h3>
-              <p className="relative mt-3 text-xs uppercase text-[#8e98a8]">RoboSkin.ai industry asset</p>
+              <p className="relative mt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-[#c8c1b5]">RoboSkin.ai research asset</p>
             </div>
 
-            <p className="mt-4 text-sm leading-relaxed text-[#8e98a8]">{asset.summary}</p>
+            <p className="mt-5 text-sm leading-relaxed text-[#625e57]">{asset.summary}</p>
             <ul className="mt-4 grid gap-2">
               {asset.includes.slice(0, compact ? 3 : 4).map((item) => (
-                <li key={item} className="rounded-md border border-white/8 bg-[#020408] px-3 py-2 text-xs text-[#c8d1de]">
+                <li key={item} className="border-t border-[#171714]/20 py-2 text-xs text-[#625e57]">
                   {item}
                 </li>
               ))}
             </ul>
-            <Link href={asset.href} className={`mt-5 inline-flex text-sm font-semibold ${accent.text} transition-colors hover:text-white`}>
-              {asset.ctaLabel} {'->'}
+            <Link href={asset.href} className="mt-5 inline-flex border-b border-[#171714]/30 pb-1 text-sm font-semibold text-[#171714] transition-colors hover:border-[#bd4324] hover:text-[#bd4324]">
+              {asset.ctaLabel} →
             </Link>
           </article>
         );
@@ -315,30 +291,30 @@ export function FeaturedAssetCovers({ assets, compact = false }: FeaturedAssetCo
 
 export function ConversionPathPanel() {
   return (
-    <div className="grid gap-4 lg:grid-cols-[1fr_0.92fr_0.92fr]">
+    <div className="grid border-y border-white/15 lg:grid-cols-[1fr_0.92fr_0.92fr]">
       <Link
         href="/research"
-        className="rounded-lg border border-[#00c8ff]/45 bg-[#00c8ff]/10 p-6 text-white transition-colors hover:bg-[#00c8ff]/14"
+        className="border-b border-white/15 bg-[#ff6b3d] p-6 text-[#171714] transition-colors hover:bg-[#f3efe5] lg:border-b-0 lg:border-r"
       >
-        <p className="text-xs font-semibold uppercase text-[#dff8ff]">Primary path</p>
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em]">Primary path</p>
         <h3 className="mt-3 text-2xl font-semibold">Read the research notes</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#b7f4ff]">Best for readers who want source-backed context on robot skin, tactile AI, and e-skin.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[#3c2a24]">Best for readers who want source-backed context on robot skin, tactile AI, and e-skin.</p>
       </Link>
       <Link
         href="/contact?requestType=partnership"
-        className="rounded-lg border border-white/10 bg-[#05080d] p-6 text-white transition-colors hover:bg-white/[0.055]"
+        className="border-b border-white/15 p-6 text-white transition-colors hover:bg-white/[0.04] lg:border-b-0 lg:border-r"
       >
-        <p className="text-xs font-semibold uppercase text-[#8e98a8]">Partner path</p>
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#7e7a72]">Partner path</p>
         <h3 className="mt-3 text-xl font-semibold">Editorial collaboration</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">Use for research collaboration, source suggestions, or educational content ideas.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[#8f8a81]">Use for research collaboration, source suggestions, or educational content ideas.</p>
       </Link>
       <Link
         href="/contact?requestType=correction"
-        className="rounded-lg border border-white/10 bg-[#05080d] p-6 text-white transition-colors hover:bg-white/[0.055]"
+        className="p-6 text-white transition-colors hover:bg-white/[0.04]"
       >
-        <p className="text-xs font-semibold uppercase text-[#8e98a8]">Correction path</p>
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#7e7a72]">Correction path</p>
         <h3 className="mt-3 text-xl font-semibold">Suggest a correction</h3>
-        <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">Use for unsupported claims, outdated references, or better public sources.</p>
+        <p className="mt-3 text-sm leading-relaxed text-[#8f8a81]">Use for unsupported claims, outdated references, or better public sources.</p>
       </Link>
     </div>
   );

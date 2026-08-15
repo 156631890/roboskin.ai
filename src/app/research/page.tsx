@@ -113,11 +113,11 @@ export default function ResearchPage() {
         <div className="container-shell grid gap-4 md:grid-cols-3">
           {researchRouteCards.map((card) => (
             <article key={card.title} className="signal-panel p-6">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">{card.label}</p>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{card.label}</p>
               <h2 className="mt-3 text-xl font-semibold text-white">{card.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{card.text}</p>
               {'href' in card ? (
-                <Link href={card.href} className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                <Link href={card.href} className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
                   {card.ctaLabel} {'->'}
                 </Link>
               ) : null}
@@ -132,10 +132,10 @@ export default function ResearchPage() {
             <section key={category} className="scroll-mt-24">
               <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                 <div>
-                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Research lane</p>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Research lane</p>
                   <h2 className="mt-2 text-2xl font-semibold text-white">{category}</h2>
                 </div>
-                <Link href="/contact?requestType=research" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+                <Link href="/contact?requestType=research" className="text-sm font-semibold text-[#ff6b3d] hover:text-white">
                   Submit source context {'->'}
                 </Link>
               </div>
@@ -160,13 +160,13 @@ export default function ResearchPage() {
                         ))}
                       </div>
                       <div className="mt-5 flex flex-wrap gap-4">
-                        <Link href={`/research/${post.id}`} className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+                        <Link href={`/research/${post.id}`} className="text-sm font-semibold text-[#ff6b3d] hover:text-white">
                           Read robot skin research brief {'->'}
                         </Link>
-                        <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-sm font-semibold text-white hover:text-[#b7f4ff]">
+                        <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-sm font-semibold text-white hover:text-[#f7c4af]">
                           Source {'->'}
                         </a>
-                        <Link href="/resources" className="text-sm font-semibold text-white hover:text-[#b7f4ff]">
+                        <Link href="/resources" className="text-sm font-semibold text-white hover:text-[#f7c4af]">
                           Resource route {'->'}
                         </Link>
                       </div>

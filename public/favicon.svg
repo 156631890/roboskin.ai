@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="RoboSkin icon">
-  <rect width="64" height="64" rx="16" fill="#06080c"/>
-  <path d="M14 37c7-15 29-15 36 0" fill="none" stroke="#62a8ff" stroke-width="4" stroke-linecap="round"/>
-  <path d="M19 39h26v8H19z" fill="#111827" stroke="#7dd3fc" stroke-width="2"/>
-  <circle cx="24" cy="29" r="3" fill="#7dd3fc"/>
-  <circle cx="32" cy="25" r="3" fill="#62a8ff"/>
-  <circle cx="40" cy="29" r="3" fill="#7dd3fc"/>
-  <path d="M22 45h20" stroke="#d7e7ff" stroke-width="2" stroke-linecap="round"/>
+  <rect width="64" height="64" rx="12" fill="#11110f"/>
+  <g transform="translate(14 14)">
+    <g fill="#2a2925" stroke="#686259" stroke-width="1">
+      <rect width="9" height="9"/><rect x="13" width="9" height="9"/><rect x="26" width="9" height="9"/>
+      <rect y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/><rect x="26" y="13" width="9" height="9"/>
+      <rect y="26" width="9" height="9"/><rect x="13" y="26" width="9" height="9"/><rect x="26" y="26" width="9" height="9"/>
+    </g>
+    <g fill="#ff6b3d" stroke="#ff6b3d">
+      <rect x="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/><rect x="13" y="26" width="9" height="9"/>
+    </g>
+  </g>
 </svg>

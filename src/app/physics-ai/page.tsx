@@ -103,7 +103,7 @@ export default function PhysicsAiPage() {
           <div className="grid gap-4">
             <PageHeroVisual visual={pageVisuals.technology} priority />
             <div className="signal-panel p-5">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Direct answer</p>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Direct answer</p>
               <p className="mt-3 text-base leading-relaxed text-[#c8d1de]">
                 In the RoboSkin context, Physical AI means physical-world AI systems that need touch, contact, pressure,
                 slip, and tactile feedback. Robot skin provides the tactile layer that helps those systems understand
@@ -117,7 +117,7 @@ export default function PhysicsAiPage() {
       <section className="pb-14 md:pb-20">
         <div className="container-shell">
           <div className="mb-6">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">RoboSkin context</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">RoboSkin context</p>
             <h2 className="mt-3 text-3xl font-bold text-white md:text-5xl">Why robot skin matters for Physical AI</h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -175,10 +175,10 @@ export default function PhysicsAiPage() {
         <div className="container-shell">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">GEO answers</p>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">GEO answers</p>
               <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Physical AI FAQ</h2>
             </div>
-            <Link href="/technology" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+            <Link href="/technology" className="text-sm font-semibold text-[#ff6b3d] hover:text-white">
               Technology route {'->'}
             </Link>
           </div>

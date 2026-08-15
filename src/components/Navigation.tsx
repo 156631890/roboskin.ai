@@ -3,97 +3,103 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { primaryNavigation, site } from '@/content/site';
+import { primaryNavigation } from '@/content/site';
+
+const desktopNavigation = primaryNavigation.filter(({ href }) => href !== '/' && href !== '/glossary');
+
+function BrandMark() {
+  return (
+    <span className="brand-mark" aria-hidden="true">
+      {Array.from({ length: 9 }).map((_, index) => (
+        <span key={index} data-active={[1, 4, 7].includes(index) ? 'true' : undefined} />
+      ))}
+    </span>
+  );
+}
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#020408]/86 backdrop-blur-xl">
+    <nav className="site-nav" aria-label="Primary navigation">
       <div className="container-shell">
-        <div className="flex min-h-18 items-center justify-between py-3">
-          <div className="flex items-center py-2">
-            <Link href="/" className="group flex items-center gap-3">
-              <div className="grid h-10 w-10 grid-cols-4 gap-0.5 rounded-xl border border-white/10 bg-[var(--bg-soft)] p-2 shadow-[0_16px_34px_rgba(0,12,28,0.42)] transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
-                {Array.from({ length: 16 }).map((_, index) => {
-                  const active = [2, 6, 9, 10, 13, 14].includes(index);
-                  return <span key={index} className={(active ? 'bg-[var(--secondary)]' : 'bg-[#d1e7ff]/35') + ' rounded-[2px]'} />;
-                })}
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-xl font-bold text-white">{site.name}</span>
-                <span className="text-[10px] font-semibold tracking-[0.18em] text-[#7f8b9d]">TACTILE AI</span>
-              </div>
-            </Link>
+        <div className="site-nav-inner">
+          <Link href="/" className="site-logo" aria-label="RoboSkin.ai home">
+            <BrandMark />
+            <span className="site-wordmark">
+              RoboSkin<span>.ai</span>
+            </span>
+          </Link>
+
+          <div className="site-nav-links">
+            {desktopNavigation.map((link) => {
+              const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(`${link.href}/`));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="site-nav-link"
+                  data-active={active ? 'true' : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="hidden items-center gap-1 md:flex">
-            {primaryNavigation.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={
-                  'rounded-lg px-3.5 py-2 text-sm font-semibold outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408] ' +
-                  (pathname === link.href
-                    ? 'bg-[#00e5ff]/8 text-[#effbff] ring-1 ring-[#00e5ff]/20'
-                    : 'text-[#9aa6b8] hover:bg-white/[0.045] hover:text-white')
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href="/contact?requestType=research"
-              className="ml-2 rounded-lg border border-[#00e5ff]/45 bg-[#00d5ff] px-4 py-2 text-sm font-bold text-[#001018] shadow-[0_12px_28px_rgba(0,168,255,0.18)] outline-none transition-transform hover:-translate-y-0.5 active:translate-y-px focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
-            >
-              Submit Source
+          <div className="site-nav-actions">
+            <Link href="/contact?requestType=research" className="site-nav-cta">
+              Submit source <span aria-hidden="true">↗</span>
             </Link>
-          </div>
-
-          <div className="flex items-center py-2 md:hidden">
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+              onClick={() => setMobileMenuOpen((open) => !open)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="rounded-lg border border-white/10 bg-white/[0.04] p-2 text-white outline-none transition-colors hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-[#00e5ff]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020408]"
+              className="site-menu-button"
             >
-              <span aria-hidden="true" className="relative block h-6 w-6">
-                <span className={mobileMenuOpen ? 'absolute left-0 top-1/2 h-px w-6 -translate-y-1/2 rotate-45 bg-current transition-transform' : 'absolute left-0 top-[7px] h-px w-6 bg-current transition-transform'} />
-                <span className={mobileMenuOpen ? 'absolute left-0 top-1/2 h-px w-6 -translate-y-1/2 -rotate-45 bg-current transition-transform' : 'absolute left-0 top-[15px] h-px w-6 bg-current transition-transform'} />
+              <span aria-hidden="true" className="site-menu-icon" data-open={mobileMenuOpen ? 'true' : undefined}>
+                <span />
+                <span />
               </span>
             </button>
           </div>
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <div id="mobile-navigation" className="border-t border-white/10 bg-[#020408] md:hidden">
-          <div className="container-shell space-y-1 py-4">
-            {primaryNavigation.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={
-                  'block rounded-lg px-4 py-3 text-sm font-semibold ' +
-                  (pathname === link.href ? 'bg-[rgba(0,229,255,0.1)] text-[#dff8ff]' : 'text-[#aab3c2] hover:bg-white/5')
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
+      {mobileMenuOpen ? (
+        <div id="mobile-navigation" className="site-mobile-menu">
+          <div className="container-shell">
+            <p className="site-mobile-label">Explore RoboSkin.ai</p>
+            <div className="site-mobile-links">
+              {primaryNavigation.map((link, index) => {
+                const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(`${link.href}/`));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="site-mobile-link"
+                    data-active={active ? 'true' : undefined}
+                  >
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
             <Link
               href="/contact?requestType=research"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 block rounded-lg bg-[#00e5ff] px-4 py-3 text-center text-sm font-bold text-[#001018]"
+              className="site-mobile-cta"
             >
-              Submit Source
+              Contribute a research source <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </div>
-      )}
+      ) : null}
     </nav>
   );
 }

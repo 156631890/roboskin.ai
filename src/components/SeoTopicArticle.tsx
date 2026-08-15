@@ -94,7 +94,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
               <ol className="space-y-4">
                 {page.quickAnswer.map((answer, index) => (
                   <li key={answer} className="grid gap-4 border-b border-white/8 pb-4 last:border-b-0 last:pb-0 md:grid-cols-[44px_1fr]">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-md border border-[#00e5ff]/20 bg-[#00e5ff]/8 font-mono text-sm font-bold text-[#dff8ff]">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-md border border-[#ff6b3d]/20 bg-[#ff6b3d]/8 font-mono text-sm font-bold text-[#f7f3e8]">
                       {index + 1}
                     </span>
                     <p className="text-base leading-relaxed text-[#c8d1de]">{answer}</p>
@@ -110,7 +110,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
             <div className="space-y-5">
               {page.sections.map((section, index) => (
                 <section key={section.heading} className="glass-card p-6 md:p-8">
-                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Topic {String(index + 1).padStart(2, '0')}</p>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Topic {String(index + 1).padStart(2, '0')}</p>
                   <h2 className="mt-3 text-2xl font-semibold text-white md:text-3xl">{section.heading}</h2>
                   <div className="mt-4 space-y-4">
                     {section.body.map((paragraph) => (
@@ -134,7 +134,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
                         <thead className="border-b border-white/10 bg-white/[0.03]">
                           <tr>
                             {section.table.headers.map((header) => (
-                              <th key={header} scope="col" className="px-4 py-3 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#b8eefe]">
+                              <th key={header} scope="col" className="px-4 py-3 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#ffd5c5]">
                                 {header}
                               </th>
                             ))}
@@ -166,7 +166,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
 
             <aside className="space-y-4">
               <div className="signal-panel p-5">
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Related routes</p>
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Related routes</p>
                 <div className="mt-4 space-y-3">
                   {page.relatedLinks.map((link) => (
                     <Link key={link.href} href={link.href} className="block rounded-md border border-white/8 bg-[#020408] p-4 transition-colors hover:bg-white/[0.04]">
@@ -179,10 +179,10 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
 
               {page.sources?.length ? (
                 <div className="signal-panel p-5">
-                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#00e5ff]">Source paths</p>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Source paths</p>
                   <div className="mt-4 space-y-3">
                     {page.sources.map((source) => (
-                      <a key={source.href} href={source.href} target="_blank" rel="noreferrer" className="block text-sm font-semibold leading-relaxed text-[#b8eefe] hover:text-white">
+                      <a key={source.href} href={source.href} target="_blank" rel="noreferrer" className="block text-sm font-semibold leading-relaxed text-[#ffd5c5] hover:text-white">
                         {source.label} {'->'}
                       </a>
                     ))}
@@ -227,7 +227,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
             <div className="signal-panel overflow-hidden p-0">
               {page.faqs.map((faq, index) => (
                 <section key={faq.question} className="grid gap-5 border-b border-white/8 p-5 last:border-b-0 md:grid-cols-[80px_0.42fr_1fr] md:p-7">
-                  <span className="font-mono text-sm font-semibold text-[#00c8ff]">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="font-mono text-sm font-semibold text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
                   <h3 className="text-xl font-semibold text-white">{faq.question}</h3>
                   <p className="text-sm leading-relaxed text-[#c8d1de]">{faq.answer}</p>
                 </section>
