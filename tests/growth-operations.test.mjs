@@ -23,6 +23,7 @@ test('conversion analytics cover the agreed growth actions without user-entered 
   assert.doesNotMatch(tracker, /email|fullName|company/i);
   assert.match(contact, /Contact Form Success/);
   assert.match(newsletter, /Newsletter Success/);
+  assert.match(newsletter, /Newsletter WhatsApp Open/);
   assert.match(index, /Research Index Filter/);
 });
 
@@ -39,5 +40,6 @@ test('the August research-news release and five-target outreach batch are comple
   assert.match(news, /https:\/\/arxiv\.org\/abs\/2605\.28468/);
   assert.match(llms, /eit-pneumatic-hybrid-robot-skin-force-map-2026/);
   assert.equal((outreach.match(/^## 0[1-5] —/gm) ?? []).length, 5);
-  assert.match(outreach, /Gmail connection requires reauthentication/);
+  assert.match(outreach, /Five outreach messages sent individually on 2026-08-16/);
+  assert.equal((outreach.match(/Status: Sent 2026-08-16/g) ?? []).length, 5);
 });

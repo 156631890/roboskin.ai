@@ -24,6 +24,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-2xl font-semibold text-[#111318]">Information we collect</h2>
               <p className="mt-3 text-[#4f5560]">
                 We collect the data you submit through the contact or newsletter forms, including name, company, email, use case, timeline, phone number, requested asset, and message where those fields apply.
+                When no direct form endpoint is configured, the site opens WhatsApp with a prepared message; information is transferred only if the visitor continues and sends it there.
                 When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
               </p>
             </div>

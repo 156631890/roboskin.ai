@@ -7,6 +7,17 @@ import { site } from '@/content/site';
 
 const newsletterEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
 
+function buildWhatsAppSubscriptionHref(email: string) {
+  const message = [
+    'RoboSkin.ai Weekly Robotics Research Brief request',
+    '',
+    `Subscriber email: ${email}`,
+    'Please add this address to the research brief list.',
+  ].join('\n');
+
+  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(message)}`;
+}
+
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -19,11 +30,10 @@ export default function NewsletterSignup() {
     track('Newsletter Submit', { placement: 'footer' });
 
     if (!newsletterEndpoint) {
-      const subject = 'Subscribe to the RoboSkin Weekly Robotics Research Brief';
-      const body = `Please subscribe ${email} to the weekly RoboSkin.ai research brief.`;
-      window.location.href = `mailto:${site.contact.ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = buildWhatsAppSubscriptionHref(email);
       setStatus('success');
-      setFeedback('Your email app should open a prepared subscription request.');
+      setFeedback('WhatsApp should open a prepared subscription request. Review it there before sending.');
+      track('Newsletter WhatsApp Open', { placement: 'footer' });
       return;
     }
 
@@ -53,8 +63,10 @@ export default function NewsletterSignup() {
       setFeedback('Subscription request received.');
       track('Newsletter Success', { placement: 'footer' });
     } catch {
-      setStatus('error');
-      setFeedback(`Subscription failed. Email ${site.contact.primaryEmail}.`);
+      window.location.href = buildWhatsAppSubscriptionHref(email);
+      setStatus('success');
+      setFeedback('WhatsApp should open a prepared subscription request. Review it there before sending.');
+      track('Newsletter WhatsApp Open', { placement: 'footer' });
     }
   }
 
@@ -78,7 +90,7 @@ export default function NewsletterSignup() {
         </button>
       </div>
       <span id="newsletter-feedback" role={status === 'error' ? 'alert' : 'status'}>
-        {feedback || 'No spam. Unsubscribe by email at any time.'}
+        {feedback || 'No spam. Unsubscribe by email or message at any time.'}
       </span>
     </form>
   );

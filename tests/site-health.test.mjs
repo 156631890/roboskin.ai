@@ -28,10 +28,11 @@ test('site authority health checks pass', async () => {
   assert.match(seo, /'\/glossary'/);
   assert.match(seo, /'\/case-studies'/);
   assert.match(contactForm, /NEXT_PUBLIC_CONTACT_FORM_ENDPOINT/);
-  assert.match(contactForm, /mailto:/);
+  assert.match(contactForm, /buildWhatsAppHref/);
   assert.match(contactForm, /try\s*\{/);
   assert.match(contactForm, /catch\s*\(/);
-  assert.match(contactForm, /window\.location\.href\s*=\s*buildMailtoHref\(form\)/);
+  assert.match(contactForm, /window\.location\.href\s*=\s*buildWhatsAppHref\(form\)/);
+  assert.match(contactForm, /site\.contact\.whatsappDial/);
   assert.doesNotMatch(contactForm, /fetch\('\/api\/contact'/);
   assert.doesNotMatch(nextConfig, /ignoreBuildErrors:\s*true/);
   assert.doesNotMatch(nextConfig, /ignoreDuringBuilds:\s*true/);
@@ -42,7 +43,6 @@ test('site authority health checks pass', async () => {
   assert.doesNotMatch(site, /messigoat147@gmail\.com/);
   assert.match(site, /domainInquiry/);
   assert.doesNotMatch(contactForm, /Domain acquisition|Strategic acquisition|Request Brief/);
-  assert.match(contactForm, /site\.contact\.ownerEmail/);
   assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
   assert.match(contactForm, /normalizeRequestType/);
   assert.match(contactForm, /datasheet[\s\S]*research/);

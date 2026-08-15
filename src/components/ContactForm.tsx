@@ -70,9 +70,10 @@ function displayValue(value: string) {
   return value.trim() || 'Not provided';
 }
 
-function buildMailtoHref(form: ContactFormState) {
-  const subject = `RoboSkin.ai ${form.requestType} note from ${form.company || form.fullName}`;
-  const body = [
+function buildWhatsAppHref(form: ContactFormState) {
+  const message = [
+    `RoboSkin.ai ${form.requestType} note`,
+    '',
     `Full name: ${form.fullName}`,
     `Company / organization: ${form.company}`,
     `Work email: ${form.email}`,
@@ -86,7 +87,7 @@ function buildMailtoHref(form: ContactFormState) {
     form.message,
   ].join('\n');
 
-  return `mailto:${site.contact.ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(message)}`;
 }
 
 export default function ContactForm({ requestType, requestedAsset }: ContactFormProps) {
@@ -100,6 +101,13 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
   function updateField<K extends keyof ContactFormState>(field: K, value: ContactFormState[K]) {
     setForm((current) => ({ ...current, [field]: value }));
+  }
+
+  function openWhatsAppFallback() {
+    window.location.href = buildWhatsAppHref(form);
+    setStatus('success');
+    setFeedback('WhatsApp should open a prepared research note. Review it there before sending.');
+    track('Contact WhatsApp Open', { request_type: form.requestType });
   }
 
   useEffect(() => {
@@ -126,10 +134,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
     track('Contact Form Submit', { request_type: form.requestType });
 
     if (!contactFormEndpoint) {
-      window.location.href = buildMailtoHref(form);
-      setStatus('success');
-      setFeedback(`Your email client should open a prepared message to ${site.contact.ownerEmail}.`);
-      track('Contact Mailto Open', { request_type: form.requestType });
+      openWhatsAppFallback();
       return;
     }
 
@@ -145,15 +150,12 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       });
     } catch (error) {
       void error;
-      window.location.href = buildMailtoHref(form);
-      setStatus('success');
-      setFeedback(`Your email client should open a prepared message to ${site.contact.ownerEmail}.`);
+      openWhatsAppFallback();
       return;
     }
 
     if (!response.ok) {
-      setStatus('error');
-      setFeedback('Something went wrong. Please email us at ' + site.contact.primaryEmail + '.');
+      openWhatsAppFallback();
       return;
     }
 
@@ -304,7 +306,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       </div>
 
       <p className="text-sm text-soft">
-        For direct inquiries: <a className="text-accent hover:text-[#ff9b73]" href={`mailto:${site.contact.ownerEmail}`}>{site.contact.ownerEmail}</a>
+        Direct route: <a className="text-accent hover:text-[#ff9b73]" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">WhatsApp {site.contact.whatsapp}</a>
       </p>
     </form>
   );
