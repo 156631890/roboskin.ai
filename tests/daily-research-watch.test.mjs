@@ -36,7 +36,9 @@ test('daily research report keeps candidates out of the publishing path', async 
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /permissions:\s*\n\s*contents: read/);
   assert.match(workflow, /daily-research-watch\.mjs/);
-  assert.match(workflow, /upload-artifact@v4/);
+  assert.match(workflow, /actions\/checkout@v7/);
+  assert.match(workflow, /actions\/setup-node@v7/);
+  assert.match(workflow, /upload-artifact@v7/);
   assert.doesNotMatch(workflow, /git push|contents: write|issues: write/);
   assert.match(report, /candidate queue — nothing in this report is automatically published/);
   assert.match(report, /never publish this queue verbatim/);
