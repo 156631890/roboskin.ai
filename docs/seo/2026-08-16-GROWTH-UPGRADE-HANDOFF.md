@@ -46,6 +46,8 @@ node scripts/verify-production.mjs https://roboskin.ai
 
 Mobile and desktop browser QA covered the homepage, news index, the new research-news article, contact, and priority guide pages. The checked pages have one H1, no horizontal overflow, labeled form controls, named buttons, image alternative text, and a skip-to-content link.
 
+The Quality gate and daily-research workflows use `actions/checkout`, `actions/setup-node`, and `actions/upload-artifact` v7 so current GitHub-hosted runners no longer emit the Node.js 20 action-runtime deprecation warning.
+
 ## Mail and Newsletter status
 
 Public DNS inspection on 2026-08-16 found no MX, SPF, DMARC, or DKIM records for `roboskin.ai`, so the owner approved `messigoat147@gmail.com` for public contact, legal, privacy, form-delivery, and Newsletter management. The site no longer presents the inactive domain mailboxes as live direct-contact routes.
