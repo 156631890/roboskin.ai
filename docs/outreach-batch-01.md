@@ -3,7 +3,7 @@
 Prepared: 2026-08-16
 Owner: RoboSkin.ai Editorial Team
 Reply address: contact@roboskin.ai
-Status: Ready for Gmail drafts; Gmail connection requires reauthentication.
+Status: Five Gmail drafts created on 2026-08-16; not sent. The Gmail connection requires reauthentication, so the existing browser session was used for draft creation only.
 
 ## Campaign asset
 
@@ -19,7 +19,7 @@ The campaign offers a useful editorial source. It does not ask for a paid link, 
 - Recipient: editors@robohub.org
 - Verified route: https://robohub.org/contribute/
 - Fit: Robohub explicitly accepts robotics news tips and article pitches of 100 words or less.
-- Status: Ready for draft
+- Status: Draft created 2026-08-16; not sent
 - Subject: News tip: hybrid robot skin pairs EIT maps with pneumatic force sensing
 
 Body:
@@ -40,7 +40,7 @@ contact@roboskin.ai
 - Recipient: news@roboticstomorrow.com
 - Verified route: https://www.roboticstomorrow.com/contact.php
 - Fit: The site lists this address for editorial submissions and publishes robotics news.
-- Status: Ready for draft
+- Status: Draft created 2026-08-16; not sent
 - Subject: Robotics research brief: 3D-printed hybrid skin for humanoid force maps
 
 Body:
@@ -63,7 +63,7 @@ contact@roboskin.ai
 - Recipient: moitzman@wtwhmedia.com
 - Verified route: https://www.therobotreport.com/author/moitzman/
 - Fit: Mike Oitzman is listed as a senior editor and covers robotics systems and industry engineering.
-- Status: Ready for draft
+- Status: Draft created 2026-08-16; not sent
 - Subject: Source tip for humanoid robotics: hybrid whole-body tactile skin
 
 Body:
@@ -89,7 +89,7 @@ contact@roboskin.ai
 - Recipient: markallinson@roboticsandautomationnews.com
 - Verified route: https://roboticsandautomationnews.com/about/contact/
 - Fit: Mark Allinson is listed as an editor; the outlet covers humanoids, automation, and robotics engineering.
-- Status: Ready for draft
+- Status: Draft created 2026-08-16; not sent
 - Subject: Editorial source: why Physical AI needs force maps, not only contact flags
 
 Body:
@@ -112,7 +112,7 @@ contact@roboskin.ai
 - Recipient: articles@bthmgmt.com
 - Verified route: https://www.manufacturingtomorrow.com/associates.php
 - Fit: The outlet explicitly invites articles, case studies, and interviews by email.
-- Status: Ready for draft
+- Status: Draft created 2026-08-16; not sent
 - Subject: Contributed article proposal: the engineering stack behind tactile Physical AI
 
 Body:
@@ -135,8 +135,8 @@ contact@roboskin.ai
 
 ## Send sequence
 
-1. Reauthenticate the connected Gmail account.
-2. Create five individual drafts with the exact recipients above.
+1. Five individual drafts were created in the existing `messigoat147@gmail.com` browser session.
+2. Add and verify `contact@roboskin.ai` as the Gmail sender identity before sending; it is not currently configured as a send-as alias.
 3. Review the sender identity and signature before sending.
 4. Send on separate days or in two small waves; do not bulk-send.
 5. Record sent date, response, link earned, and next follow-up in this file.
