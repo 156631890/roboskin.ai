@@ -27,7 +27,7 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
   return (
     <>
       <JsonLd data={buildSeoTopicGraph(page)} />
-      <article>
+      <article className="seo-topic-article">
         <section className="py-14 md:py-20">
           <div className="container-shell grid gap-10 lg:grid-cols-[0.74fr_1.06fr] lg:items-center">
             <div>

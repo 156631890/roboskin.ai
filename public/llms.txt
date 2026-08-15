@@ -50,6 +50,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 ## News Briefs
 
+- [Hybrid EIT–pneumatic robot skin for force-map reconstruction](https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026): 2026 preprint brief on large-area humanoid robot skin, EIT localization, pneumatic force calibration, reported sensitivity variation, and evidence limits.
 - [Self-powered textile artificial skin uses three channels for touch and robot control](https://roboskin.ai/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026): Nano Energy paper on minimal-channel touch localization, pressure sensing, and wearable robot-arm control.
 - [Underwater self-healing electronic skin combines touch, damage detection, and repair](https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026): NUS research on self-powered touch sensing, underwater damage detection, and self-repair for soft electronic skin.
 - [TouchWorld separates tactile prediction from fast contact correction](https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026): Preprint brief on a hierarchical tactile foundation model for contact-rich dexterous manipulation.

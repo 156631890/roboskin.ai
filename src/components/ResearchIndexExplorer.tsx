@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { track } from '@vercel/analytics';
 import type { ResearchIndexEntry } from '@/lib/research-index';
 
 type ResearchIndexExplorerProps = {
@@ -37,6 +38,14 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
     setModality('all');
     setEvidence('all');
     setYear('all');
+    track('Research Index Filter', { filter: 'reset', value: 'all' });
+  };
+
+  const updateFilter = (filter: 'modality' | 'evidence' | 'year', value: string) => {
+    track('Research Index Filter', { filter, value });
+    if (filter === 'modality') setModality(value);
+    if (filter === 'evidence') setEvidence(value);
+    if (filter === 'year') setYear(value);
   };
 
   return (
@@ -46,8 +55,8 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
           Modality
           <select
             value={modality}
-            onChange={(event) => setModality(event.target.value)}
-            className="min-h-11 rounded-md border border-white/15 bg-[#080b10] px-3 text-sm text-white"
+            onChange={(event) => updateFilter('modality', event.target.value)}
+            className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
           >
             <option value="all">All modalities</option>
             {modalities.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -57,8 +66,8 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
           Evidence
           <select
             value={evidence}
-            onChange={(event) => setEvidence(event.target.value)}
-            className="min-h-11 rounded-md border border-white/15 bg-[#080b10] px-3 text-sm text-white"
+            onChange={(event) => updateFilter('evidence', event.target.value)}
+            className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
           >
             <option value="all">All evidence levels</option>
             {evidenceLevels.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -68,8 +77,8 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
           Year
           <select
             value={year}
-            onChange={(event) => setYear(event.target.value)}
-            className="min-h-11 rounded-md border border-white/15 bg-[#080b10] px-3 text-sm text-white"
+            onChange={(event) => updateFilter('year', event.target.value)}
+            className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
           >
             <option value="all">All years</option>
             {years.map((value) => <option key={value} value={value}>{value}</option>)}

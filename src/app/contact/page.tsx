@@ -13,15 +13,15 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/contact'), buildBreadcrumbJsonLd('/contact')])} />
-      <section className="py-20 md:py-24">
-        <div className="container-shell grid items-center gap-9 md:grid-cols-[1fr_0.95fr]">
+      <section className="contact-masthead">
+        <div className="container-shell contact-masthead-grid">
           <div>
             <span className="eyebrow">Contact</span>
-            <h1 className="mt-5 text-4xl font-bold text-[var(--text)] md:text-6xl">Send a research note</h1>
-            <p className="mt-5 max-w-xl text-soft">
+            <h1>Send a research note</h1>
+            <p>
               Use this page for source suggestions, corrections, editorial collaboration, or research notes related to robot skin and tactile AI.
             </p>
-            <div className="mt-8 space-y-2 text-sm text-soft">
+            <div className="contact-direct">
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
               <p>WhatsApp: <a className="text-accent hover:text-white" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
               <p>WeChat: <span className="text-white">{site.contact.wechat}</span></p>
@@ -32,21 +32,22 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="pb-20">
+      <section className="pb-20 md:pb-28">
         <div className="container-shell mb-10">
-          <div className="grid gap-5 md:grid-cols-3">
-            {contactPaths.map((path) => (
-              <article key={path.title} className="glass-card p-6">
-                <h2 className="text-xl font-semibold text-white">{path.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{path.summary}</p>
-                <Link href={path.href} className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+          <div className="contact-route-index">
+            {contactPaths.map((path, index) => (
+              <article key={path.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h2>{path.title}</h2>
+                <p>{path.summary}</p>
+                <Link href={path.href}>
                   {path.ctaLabel} {'->'}
                 </Link>
               </article>
             ))}
           </div>
         </div>
-        <div className="container-shell grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="container-shell contact-workspace">
           <Suspense
             fallback={
               <div className="glass-card min-h-[620px] p-8">
@@ -62,7 +63,7 @@ export default function ContactPage() {
           >
             <ContactForm />
           </Suspense>
-          <div className="glass-card p-6 md:p-8">
+          <div className="contact-guidance">
             <h2 className="text-2xl font-semibold text-white">What to include</h2>
             <ul className="mt-5 space-y-3 text-sm text-soft">
               <li>Research topic, source URL, or page that needs correction</li>

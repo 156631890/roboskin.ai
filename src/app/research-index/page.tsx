@@ -56,11 +56,11 @@ export default function ResearchIndexPage() {
               <dt className="font-mono text-2xl font-semibold text-white">{researchIndexEntries.length}</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">reviewed records</dd>
             </div>
-            <div className="border-l-2 border-[#ffcf5a] pl-4">
+            <div className="border-l-2 border-[#ff6b3d] pl-4">
               <dt className="font-mono text-2xl font-semibold text-white">4</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">evidence classes</dd>
             </div>
-            <div className="border-l-2 border-[#77e0a1] pl-4">
+            <div className="border-l-2 border-[#ff6b3d] pl-4">
               <dt className="font-mono text-2xl font-semibold text-white">{researchIndexUpdatedAt}</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">edition reviewed</dd>
             </div>

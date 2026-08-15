@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { footerNavigation, site } from '@/content/site';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 export default function Footer() {
   return (
@@ -46,6 +47,8 @@ export default function Footer() {
             </div>
           ))}
         </div>
+
+        <NewsletterSignup />
 
         <div className="site-footer-base">
           <p>© {new Date().getFullYear()} {site.name}</p>

@@ -3,6 +3,7 @@
 import type { FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { track } from '@vercel/analytics';
 import { site } from '@/content/site';
 
 type RequestType = 'partnership' | 'research' | 'correction' | 'other';
@@ -122,11 +123,13 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
     setStatus('submitting');
     setFeedback('');
+    track('Contact Form Submit', { request_type: form.requestType });
 
     if (!contactFormEndpoint) {
       window.location.href = buildMailtoHref(form);
       setStatus('success');
       setFeedback(`Your email client should open a prepared message to ${site.contact.ownerEmail}.`);
+      track('Contact Mailto Open', { request_type: form.requestType });
       return;
     }
 
@@ -156,11 +159,12 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
     setStatus('success');
     setFeedback('Thanks. We received your request and will reply within 2 business days.');
+    track('Contact Form Success', { request_type: form.requestType });
     setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
   }
 
   return (
-    <form className="glass-card space-y-5 p-6 md:p-8" onSubmit={handleSubmit}>
+    <form className="contact-form" onSubmit={handleSubmit}>
       <input
         className="hidden"
         tabIndex={-1}
@@ -270,7 +274,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
         </label>
       </div>
 
-      <label className="flex items-start gap-3 rounded-2xl border border-white/8 bg-[#0d1016] p-4 text-sm leading-relaxed text-soft">
+      <label className="contact-consent">
         <input
           required
           type="checkbox"
@@ -286,7 +290,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex rounded-xl bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)] transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
+        className="btn-primary"
       >
         {status === 'submitting' ? 'Sending...' : 'Send request'}
       </button>

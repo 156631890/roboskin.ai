@@ -29,6 +29,91 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'eit-pneumatic-hybrid-robot-skin-force-map-2026',
+    title: 'Hybrid robot skin combines EIT location maps with pneumatic force sensing',
+    seoTitle: 'Hybrid EIT–Pneumatic Robot Skin Reconstructs Force Maps',
+    seoDescription:
+      'A 2026 preprint combines electrical impedance tomography and pneumatic sensing in a 3D-printed robot skin, reducing reported sensitivity non-uniformity.',
+    excerpt:
+      'A 2026 preprint combines electrical impedance tomography with pneumatic sensing to improve force reconstruction across a large-area humanoid robot skin.',
+    content: `# Hybrid robot skin combines EIT location maps with pneumatic force sensing
+
+**Research news brief — August 2026**
+
+A May 2026 preprint proposes a hybrid robotic skin that combines electrical impedance tomography (EIT) with pneumatic pressure sensing. EIT supplies spatial information about where contact changes the conductive surface; four sealed pneumatic pads supply a more stable estimate of net force. The authors use the two signals together to correct a known weakness of large-area EIT skin: sensitivity can vary with contact location.
+
+## What the researchers built
+
+The prototype uses a rigid base, four soft air-tight pads, a continuous piezoresistive layer, and 32 boundary electrodes. Its parts were produced through 3D printing and spray coating. The reported chest-mounted version measures 280 × 280 mm and reconstructs EIT images at 100 Hz using a precomputed matrix.
+
+The processing path is deliberately modest. A Tikhonov-regularized inverse reconstruction produces the spatial EIT map. Each pneumatic pad is calibrated against ground-truth force. The pad signal then rescales the reconstructed conductivity image so the final map retains location cues while using the pneumatic estimate for force magnitude.
+
+## Reported result
+
+In load-cell indentation experiments, the paper reports that the coefficient of variation for sensitivity non-uniformity fell from 0.31 for the EIT-only baseline to 0.14 for the hybrid method. That is a reduction in variation within the authors' test protocol, not a universal accuracy claim.
+
+| Reported item | Value | Why it matters |
+| --- | --- | --- |
+| Humanoid chest skin area | 280 × 280 mm | Demonstrates a body-scale patch rather than a fingertip-only sensor. |
+| EIT electrodes | 32 | Boundary measurements reconstruct contact over a continuous surface. |
+| Pneumatic pads | 4 | Each pad contributes an independent net-force estimate. |
+| EIT reconstruction rate | 100 Hz | Shows the reported visualization pipeline can run in real time. |
+| Sensitivity variation | 0.31 → 0.14 coefficient of variation | The hybrid calibration reduced location-dependent non-uniformity in the reported indentation test. |
+
+## Why the two modalities complement each other
+
+EIT can infer where conductivity changed across a flexible surface, but inverse reconstruction is sensitive to nonlinearity, fabrication variation, and the gap between simulation and the physical skin. Pneumatic sensing is mechanically simple and sensitive to total load, but one air chamber cannot determine where inside that chamber contact occurred.
+
+The hybrid design assigns each modality the job it handles better. EIT preserves spatial structure. Air pressure anchors the force estimate. For whole-body robot skin, that division may be more practical than expecting one sensing mechanism to deliver coverage, localization, force accuracy, compliance, and simple fabrication by itself.
+
+## Multi-contact evidence
+
+The authors also pressed two locations sequentially on the same pneumatic pad. The pressure signal followed the sum of the contacts, while the EIT image retained spatial cues. This supports a limited conclusion: the pad can continue estimating aggregate load during more than one contact. It does not mean the pneumatic channel alone separates the force applied at each individual point.
+
+## What this does not prove yet
+
+This is a preprint, not an independently replicated product benchmark. The paper identifies lower sensitivity near overlap regions between pads; because the current fusion relies heavily on the pneumatic estimate, errors there can bias reconstruction. The humanoid demonstration shows sensing and logging, but it does not evaluate a closed-loop safety controller, long-duration abrasion, cleaning, field repair, temperature drift, or production lifetime.
+
+The 100 Hz value describes the reported EIT reconstruction pipeline. It should not be read as a complete end-to-end reflex latency, which would also include acquisition, transport, filtering, decision logic, and robot actuation.
+
+## Where this fits in Physical AI
+
+Physical AI needs contact data that can survive large surfaces, curved geometry, wiring limits, and real-time control. This paper is useful because it treats robot skin as a sensor-fusion system instead of a single material sample. The next evaluation step is to connect the force map to measurable robot behavior: contact-aware motion, collision response, stable physical interaction, or recovery after unexpected touch.
+
+For comparison, use the [humanoid robot skin guide](/applications/humanoid-robot-skin), the [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array), and the normalized [RoboSkin Tactile Research Index](/research-index).
+
+## Practical questions
+
+- Does EIT measure force directly? Not by itself. It reconstructs conductivity changes, and the mapping to physical force requires calibration or a learned model.
+- Why add air pressure? The pneumatic pad provides a stable net-force cue that can correct location-dependent EIT magnitude errors.
+- Can one pneumatic pad locate two contacts? No. Spatial separation comes from the EIT reconstruction; the pad mainly estimates their aggregate load.
+- Is the skin ready for commercial humanoids? The preprint demonstrates a promising prototype, not production durability or a certified safety function.
+
+## Source boundary
+
+This article summarizes an arXiv preprint and adds RoboSkin.ai analysis for robot skin, tactile sensing, humanoid robotics, and Physical AI readers. All measured values belong to the authors' reported setup. The cover image is an editorial illustration, not a paper figure. RoboSkin.ai is not affiliated with the authors.
+
+## Source
+
+- [arXiv: EIT-Pneumatic Hybrid Robotic Skin for Practical and Accurate Force Map Reconstruction](https://arxiv.org/abs/2605.28468)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-16',
+    updated: '2026-08-16',
+    readTime: '6 min read',
+    category: 'Robot skin research',
+    image: '/generated/brand/roboskin-tactile-material-study-v2.webp',
+    sourceTitle: 'EIT-Pneumatic Hybrid Robotic Skin for Practical and Accurate Force Map Reconstruction',
+    sourceUrl: 'https://arxiv.org/abs/2605.28468',
+    sources: [
+      {
+        title: 'arXiv: EIT-Pneumatic Hybrid Robotic Skin for Practical and Accurate Force Map Reconstruction',
+        url: 'https://arxiv.org/abs/2605.28468',
+      },
+    ],
+    technicalFocus: ['hybrid robot skin', 'electrical impedance tomography', 'pneumatic tactile sensing', 'humanoid robot skin'],
+  },
+  {
     id: 'self-powered-textile-artificial-skin-three-channel-robot-control-2026',
     title: 'Self-powered textile artificial skin uses three channels for touch and robot control',
     seoTitle: 'Three-Channel Textile Artificial Skin Controls a Robot Arm',

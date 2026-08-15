@@ -98,29 +98,24 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           buildNewsArticleJsonLd(post),
         ])}
       />
-      <article className="py-20 md:py-24">
+      <article className="article-page">
         <div className="container-shell">
-          <Link href="/news" className="text-accent text-sm font-semibold hover:text-white">
+          <Link href="/news" className="article-backlink">
             {'<-'} Back to news
           </Link>
 
-          <div className="mt-8 max-w-4xl">
-            <p className="text-soft text-xs uppercase tracking-[0.14em]">
+          <header className="article-masthead">
+            <p className="article-meta">
               {post.category} | Published {post.date} | Updated {post.updated}
             </p>
-            <h1 className="mt-5 text-4xl font-bold tracking-tight text-white md:text-6xl">{post.title}</h1>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">{post.excerpt}</p>
-          </div>
+            <h1>{post.title}</h1>
+            <p className="article-deck">{post.excerpt}</p>
+            <div className="article-topics">
+              {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
+            </div>
+          </header>
 
-          <div className="mt-8 flex flex-wrap gap-2">
-            {post.technicalFocus.map((topic) => (
-              <span key={topic} className="rounded-full border border-white/8 bg-[#0d1016] px-3 py-1 text-xs text-[#d8dce4]">
-                {topic}
-              </span>
-            ))}
-          </div>
-
-          <figure className="relative mt-8 aspect-video overflow-hidden rounded-md border border-white/10 bg-[#020408]">
+          <figure className="article-cover">
             <Image
               src={post.image}
               alt={`Illustration for ${post.title}`}
@@ -131,21 +126,21 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             />
           </figure>
 
-          <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
-            <div className="glass-card p-7 md:p-9">
+          <div className="article-grid">
+            <div className="article-reading-surface">
               <ArticleBody content={post.content} />
             </div>
 
-            <aside className="space-y-4">
-              <div className="glass-card p-5">
-                <p className="text-soft text-xs uppercase tracking-[0.14em]">Editorial review</p>
-                <p className="mt-3 text-sm leading-relaxed text-soft">
+            <aside className="article-rail">
+              <div className="article-rail-block">
+                <p>Editorial review</p>
+                <div>
                   Written by {post.author}. This brief summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, affiliation, or measured performance by RoboSkin.ai.
-                </p>
+                </div>
               </div>
-              <div className="glass-card p-5">
-                <p className="text-soft text-xs uppercase tracking-[0.14em]">Sources</p>
-                <div className="mt-3 space-y-3">
+              <div className="article-rail-block">
+                <p>Sources</p>
+                <div>
                   {post.sources.map((source) => (
                     <a key={source.url} href={source.url} target="_blank" rel="noreferrer" className="block text-sm font-semibold leading-relaxed text-accent hover:text-white">
                       {source.title}
@@ -153,24 +148,24 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                   ))}
                 </div>
               </div>
-              <div className="glass-card p-5">
-                <p className="text-soft text-xs uppercase tracking-[0.14em]">Next step</p>
-                <Link href="/contact?requestType=research" className="mt-3 block text-sm font-semibold text-accent hover:text-white">
+              <div className="article-rail-block">
+                <p>Next step</p>
+                <Link href="/contact?requestType=research">
                   Send a research note {'->'}
                 </Link>
-                <Link href="/research" className="mt-3 block text-sm font-semibold text-white hover:text-[#eadfd3]">
+                <Link href="/research">
                   Explore research briefs {'->'}
                 </Link>
               </div>
             </aside>
           </div>
 
-          <section className="mt-14" aria-labelledby="related-news-heading">
+          <section className="article-related" aria-labelledby="related-news-heading">
             <p className="eyebrow">Continue the topic</p>
             <h2 id="related-news-heading" className="mt-4 text-3xl font-bold text-white">Related robot skin news</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div>
               {relatedPosts.map((related) => (
-                <Link key={related.id} href={`/news/${related.id}`} className="glass-card overflow-hidden transition-colors hover:bg-white/[0.04]">
+                <Link key={related.id} href={`/news/${related.id}`} className="article-related-card">
                   <span className="relative block aspect-video border-b border-white/8 bg-[#020408]">
                     <Image src={related.image} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
                   </span>

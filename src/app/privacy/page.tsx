@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Information we collect</h2>
               <p className="mt-3 text-[#4f5560]">
-                We collect the data you submit through the contact form, including name, company, email, use case, timeline, phone number, requested asset, and message.
+                We collect the data you submit through the contact or newsletter forms, including name, company, email, use case, timeline, phone number, requested asset, and message where those fields apply.
                 When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
               </p>
             </div>

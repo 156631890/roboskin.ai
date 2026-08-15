@@ -23,7 +23,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin & Tactile AI for Physical AI and Humanoid Robots',
     description:
       'Source-backed robotics research on robot skin, tactile sensors, humanoid robots, robot hands, Physical AI, embodied AI, manipulation, and world models.',
-    updated: '2026-08-15',
+    updated: '2026-08-16',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,

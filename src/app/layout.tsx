@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
 import {
@@ -65,6 +66,7 @@ export default function RootLayout({
         <Navigation />
         <main id="main-content" className="flex-grow">{children}</main>
         <Footer />
+        <AnalyticsTracker />
         <Analytics />
       </body>
     </html>
