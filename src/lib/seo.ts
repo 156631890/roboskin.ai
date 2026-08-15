@@ -144,7 +144,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
     description:
       'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
-    updated: '2026-07-21',
+    updated: '2026-08-15',
     priority: 0.82,
     changeFrequency: 'monthly',
     index: true,

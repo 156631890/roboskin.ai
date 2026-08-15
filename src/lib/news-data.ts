@@ -206,7 +206,7 @@ TouchWorld is a preprint, not a peer-reviewed final publication. Its reported su
 
 ## Where this fits next
 
-The [Dream-Tac tactile world model brief](/research/dream-tac-tactile-world-action-model-2026) provides related context on predicting tactile futures. The [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
+The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares TouchWorld with Dream-Tac, ViTacWorld, FeelWorld, and VT-WM. The [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
 
 ## Practical questions
 
@@ -224,7 +224,7 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-07-20',
+    updated: '2026-08-15',
     readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',

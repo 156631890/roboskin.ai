@@ -207,6 +207,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Technology context', href: '/technology', description: 'Existing stack explanation for tactile sensing layers.' },
       { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and transfer limits.' },
       { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
+      { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction and robot planning evidence.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
@@ -1743,6 +1744,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'See how tactile resources support representations, prediction, and control.' },
+      { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'See how aligned trajectories support prediction, rollouts, and planning.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Connect data quality to task-level sensor evidence.' },
       { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Map contact events, timestamps, robot state, and actions.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Build replayable tactile logs and aligned robot data.' },
@@ -1768,14 +1770,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Compare tactile foundation models and related robot-learning systems by representation, prediction, policy role, evidence, and transfer limits.',
     h1: 'Tactile foundation models for robotics compared',
     kicker: 'Tactile AI model guide',
-    intent: 'Comparison guide for tactile foundation models, tactile AI models, tactile world models, and robot touch representation searches.',
+    intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: '2026-07-20',
+    updated: '2026-08-15',
     priority: 0.86,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['tactile foundation models', 'tactile AI model', 'tactile world model', 'robot touch representation', 'tactile robot learning'],
+    keywords: ['tactile foundation models', 'tactile AI model', 'tactile representation model', 'robot touch representation', 'tactile robot learning'],
     quickAnswer: [
       'Tactile foundation model is not one fixed architecture. Current systems may learn reusable touch representations, predict future tactile observations, combine vision-language planning with tactile control, or adapt heterogeneous sensor streams for imitation learning.',
       'Sparsh-X, Dream-Tac, TouchWorld, and MiTaS address different layers of the tactile AI stack. Their metrics are not a direct leaderboard because the sensors, tasks, training data, baselines, and outputs differ.',
@@ -1857,6 +1859,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction, planning, and rollout evidence.' },
       { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and access evidence.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Evaluate the hardware and task layer beneath learned models.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'Read the source-bounded summary of the 2026 preprint.' },
@@ -1871,6 +1874,133 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'MiTaS multi-resolution tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
     ],
     paperBriefIds: ['sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'mitas-multi-resolution-tactile-imitation-learning-2026'],
+  },
+  {
+    path: '/guides/visuo-tactile-world-models-robot-manipulation',
+    title: 'Visuo-Tactile World Models for Robot Manipulation',
+    description:
+      'Compare 2026 visuo-tactile world models by predicted contact state, planning role, robot evidence, source-reported results, and transfer limits.',
+    h1: 'Visuo-tactile world models for robot manipulation',
+    kicker: '2026 world-model guide',
+    intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
+    published: '2026-08-15',
+    updated: '2026-08-15',
+    priority: 0.87,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: ['visuo-tactile world models', 'tactile world model', 'robot world model', 'world model robot manipulation', 'contact-rich manipulation'],
+    quickAnswer: [
+      'A visuo-tactile world model predicts how visual and tactile state may change after a robot action. Touch grounds the imagined future in contact that cameras may miss, including contact onset, force-related state, slip, and hidden object motion.',
+      'The useful test is not whether a generated rollout looks plausible. Evaluation should show physical consistency, tactile prediction, planning or policy improvement, real-robot outcomes, and transfer beyond the training objects, sensors, tasks, or embodiment.',
+      'VT-WM, Dream-Tac, TouchWorld, ViTacWorld, and FeelWorld solve different parts of the problem. Their source-reported metrics are not a common leaderboard because their targets, tasks, baselines, horizons, sensors, and control roles differ.',
+    ],
+    sections: [
+      {
+        heading: 'What is a visuo-tactile world model?',
+        body: [
+          'A robot world model estimates a future state conditioned on the current observation and a candidate action. A visuo-tactile world model adds measured or predicted touch to that future. Depending on the system, the tactile target may be an image, a learned latent, contact state, force-related information, slip, or a tactile subgoal used by a policy.',
+          'This matters most after contact begins. The hand can occlude the object, an insertion can look visually aligned while mechanically jammed, and a grasp can appear stable while beginning to slip. Touch does not make the prediction automatically correct, but it exposes physical interaction evidence that a visual-only model may not observe.',
+        ],
+      },
+      {
+        heading: '2026 visuo-tactile world model comparison',
+        body: [
+          'The rows below preserve the role and evidence boundary of each source. Relative improvements are included only when the arXiv abstract states them, and every number remains tied to the authors’ protocol.',
+        ],
+        table: {
+          headers: ['System', 'World-model role', 'Source-reported evidence', 'What it does not establish'],
+          rows: [
+            ['VT-WM', 'Learns multi-task visual and tactile contact dynamics for imagination and planning.', 'The preprint reports 33% better object permanence, 29% better compliance with motion laws, and up to 35% higher zero-shot real-robot success.', 'The relative gains are tied to the reported tasks and baselines; they do not establish universal sensor or embodiment transfer.'],
+            ['Dream-Tac', 'Jointly models robot actions, future visual observations, and tactile dynamics with contact-gated fusion.', 'Across six tasks, the preprint reports 31.7% average action-accuracy improvement, up to 2.9x faster training, and 1.8x faster inference.', 'The relative gains are tied to the reported tasks and baselines; faster inference does not by itself prove safe control or hardware transfer.'],
+            ['TouchWorld', 'Combines predicted tactile subgoals with visuo-tactile action generation and fast tactile residual correction.', 'Across six tasks, the preprint reports 65.0% clean success and 53.7% under perturbations, 15.7 and 18.5 percentage points above its strongest reported baseline.', 'It is a hierarchical predictive-and-reactive system, not a common-score comparison with the other rows.'],
+            ['ViTacWorld', 'Generates aligned visual-tactile-action rollouts for data augmentation and action-conditioned policy evaluation.', 'The preprint reports physically meaningful rollouts, downstream policy improvement, and policy evaluation using public real data plus simulation.', 'Its abstract does not provide one universal gain; simulation-to-real behavior and policy-evaluation accuracy remain setup-specific.'],
+            ['FeelWorld', 'Predicts contact state, a force-related 3D tactile latent, slip, and visual futures for contact-aware planning.', 'The preprint reports 10-step LPIPS from 0.084 to 0.058, 61% lower LPIPS than the visual baseline after 80 steps, and 81.7% average zero-shot planning success.', 'LPIPS is not a direct force or safety metric, and the three reported task setups do not prove broad robot transfer.'],
+          ],
+        },
+      },
+      {
+        heading: 'How predicted touch enters robot planning',
+        body: [
+          'A candidate action can be rolled through the model to produce an imagined visual and tactile sequence. A planner can then score that sequence for contact creation, stability, slip, task progress, or failure risk. ViTacWorld adds another use: generating rollouts to augment tactile policy data and evaluating candidate policies under controlled action sequences.',
+          'Prediction and feedback have different jobs. TouchWorld explicitly separates slower semantic and predictive planning from high-frequency tactile residual correction. That division is important because an imagined contact future can guide an action, while measured touch still has to correct errors when the real object, friction, alignment, or force differs from the model.',
+        ],
+        bullets: [
+          'Observe: synchronize vision, tactile data, robot state, and the action that caused contact',
+          'Predict: generate future visual, contact, tactile, or slip state for candidate actions',
+          'Score: define task progress and contact-risk costs that can be checked in the predicted rollout',
+          'Act: execute only the selected action or short action chunk',
+          'Correct: use fresh tactile feedback when real contact diverges from the prediction',
+          'Log: preserve prediction error, measured touch, robot state, and outcome for later evaluation',
+        ],
+      },
+      {
+        heading: 'A minimum evaluation protocol',
+        body: [
+          'World-model evaluation needs both offline and embodied evidence. Image similarity can diagnose visual rollout quality, but contact prediction needs its own labels or measurements. Planning claims need repeated real-robot trials, comparable baselines, trial counts, held-out conditions, and failures that can be replayed.',
+          'Split sequential tactile data by complete trajectory, object, task, sensor, or embodiment according to the transfer claim. Random frame splits can place nearly identical moments from one contact event on both sides of evaluation and make prediction look more general than it is.',
+        ],
+        bullets: [
+          'Visual-only, tactile-reactive, and no-world-model baselines',
+          'Contact onset, tactile-state, slip, and visual prediction reported separately',
+          'Short- and long-horizon rollout error with uncertainty',
+          'Real-robot success, failure mode, disturbance, and trial count',
+          'Held-out objects, surfaces, tasks, sensors, and robot embodiments',
+          'Online latency, planning budget, tactile update rate, and correction-loop rate',
+        ],
+      },
+      {
+        heading: 'Claim boundary for the 2026 evidence',
+        body: [
+          'All five systems in this comparison are 2026 arXiv preprints as reviewed on August 15, 2026. Their reported results are useful research evidence, but they are not independent validation, certification, production benchmarks, or proof that one model is best across robots.',
+          'Do not compare isolated percentages across rows. Each paper uses different prediction targets, horizons, tasks, policies, sensors, baselines, and success definitions. Open the primary source, confirm the current version and released assets, then reproduce the relevant task and hardware contract before making an engineering decision.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a visuo-tactile world model?',
+        answer:
+          'It is an action-conditioned model that predicts future visual and tactile state. The tactile output may represent contact, force-related state, slip, a tactile image, a learned latent, or a policy subgoal.',
+      },
+      {
+        question: 'Why add touch to a robot world model?',
+        answer:
+          'Touch exposes contact dynamics that cameras may miss under occlusion or ambiguous alignment. It can help a model represent whether contact begins, remains stable, slips, jams, or changes after an action.',
+      },
+      {
+        question: 'Is a tactile world model the same as a tactile foundation model?',
+        answer:
+          'No. World model describes an action-conditioned predictive role. Foundation model implies broad pretraining and transfer across downstream tasks. A system can be one, both, or neither depending on its actual training and evidence.',
+      },
+      {
+        question: 'Which metric should compare visuo-tactile world models?',
+        answer:
+          'There is no single sufficient metric. Use modality-specific prediction error, physical consistency, planning or policy improvement, real-robot task outcomes, latency, and held-out transfer under the same protocol.',
+      },
+      {
+        question: 'Are 2026 visuo-tactile world models production ready?',
+        answer:
+          'The sources reviewed here are preprints. Production readiness still needs independent reproduction plus evidence for latency, calibration drift, durability, failure recovery, sensor replacement, and the target robot environment.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'FeelWorld research brief', href: '/research/feelworld-visuo-tactile-world-model-2026', description: 'Review hierarchical contact, tactile-state, slip, and planning evidence.' },
+      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare representations, policies, world-model roles, and transfer claims.' },
+      { label: 'Dream-Tac research brief', href: '/research/dream-tac-tactile-world-action-model-2026', description: 'Read the action-conditioned tactile-future analysis.' },
+      { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'See how predictive planning and fast tactile correction are separated.' },
+      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Evaluate trajectories, sequence splits, signals, and transfer limits.' },
+      { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Connect model inputs to fingertip, palm, and whole-hand sensing.' },
+      { label: 'Research index', href: '/research-index', description: 'Browse structured source, evidence, modality, and limitation records.' },
+    ],
+    sources: [
+      { label: 'Visuo-Tactile World Models preprint', href: 'https://arxiv.org/abs/2602.06001' },
+      { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/abs/2606.08737' },
+      { label: 'TouchWorld predictive-and-reactive tactile model preprint', href: 'https://arxiv.org/abs/2607.07287' },
+      { label: 'ViTacWorld scalable visuo-tactile world model preprint', href: 'https://arxiv.org/abs/2607.22530' },
+      { label: 'FeelWorld hierarchical contact prediction preprint', href: 'https://arxiv.org/abs/2607.24267' },
+    ],
+    paperBriefIds: ['feelworld-visuo-tactile-world-model-2026', 'dream-tac-tactile-world-action-model-2026'],
   },
 ];
 

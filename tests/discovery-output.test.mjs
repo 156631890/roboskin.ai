@@ -13,7 +13,7 @@ test('CSV and JSON routes serialize the shared research index', async () => {
   ]);
 
   assert.match(index, /serializeResearchIndexCsv/);
-  assert.match(index, /researchIndexUpdatedAt = '2026-08-05'/);
+  assert.match(index, /researchIndexUpdatedAt = '2026-08-15'/);
   assert.match(csvRoute, /text\/csv/);
   assert.match(csvRoute, /researchIndexEntries/);
   assert.match(jsonRoute, /application\/json/);
@@ -161,7 +161,7 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(monitoring, /7,974/);
   assert.match(monitoring, /2026-08-04/);
   assert.match(outreach, /three legitimate referring domains/i);
-  assert.match(outreach, /17-record research index/i);
+  assert.match(outreach, /19-record research index/i);
   assert.match(outreach, /No paid links, automated posting, or fabricated endorsements/);
   assert.match(gitignore, /\.artifacts\//);
 });

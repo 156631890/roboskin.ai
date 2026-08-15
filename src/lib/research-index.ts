@@ -3,7 +3,7 @@ import { canonicalUrl } from '@/lib/seo';
 
 export type EvidenceLevel = 'peer-reviewed' | 'preprint' | 'institutional' | 'documentation';
 
-export const researchIndexUpdatedAt = '2026-08-05';
+export const researchIndexUpdatedAt = '2026-08-15';
 
 export interface ResearchIndexEntry {
   id: string;
@@ -45,6 +45,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 }
 
 const supplements: ResearchIndexSupplement[] = [
+  {
+    id: 'feelworld-visuo-tactile-world-model-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Action-conditioned hierarchical visual-tactile world modeling',
+    modalities: ['visual latent', 'contact state', 'force-related 3D tactile latent', 'slip state', 'robot action'],
+    formFactor: 'Contact-aware world model evaluated on chip grasping, fruit grasping, and USB insertion',
+    dataOutput: 'Predicted visual futures, contact state, tactile latent, and slip state for contact-aware planning',
+    applications: ['contact prediction', 'zero-shot robot planning', 'contact-rich manipulation'],
+    evidence: 'preprint',
+    limitations: 'Preprint evidence tied to three reported task setups, sensors, robot system, baselines, and planning protocol; LPIPS is not a direct force, slip, safety, or transfer metric.',
+    reviewedAt: '2026-08-15',
+  },
   {
     id: 'ht-bench-full-hand-tactile-representations-2026',
     year: 2026,

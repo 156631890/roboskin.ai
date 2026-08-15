@@ -23,6 +23,76 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'feelworld-visuo-tactile-world-model-2026',
+    title: 'FeelWorld predicts contact, tactile force states, and slip for robot planning',
+    seoTitle: 'FeelWorld Visuo-Tactile World Model for Robot Planning',
+    seoDescription:
+      'FeelWorld predicts visual futures, contact, a force-related 3D tactile latent, and slip for robot planning. Review the reported results and limits.',
+    excerpt:
+      'FeelWorld adds explicit contact, force-related tactile, and slip prediction to a visual world model for contact-rich robot planning.',
+    content: `# FeelWorld predicts contact, tactile force states, and slip for robot planning
+
+**Updated technical brief - August 2026**
+
+FeelWorld is a July 2026 preprint that adds explicit contact, force-related tactile, and slip states to an action-conditioned visual world model. It reports stronger long-horizon visual prediction and 81.7% average zero-shot planning success on three contact-rich tasks. For tactile AI, the important idea is not the headline score: predicted touch becomes part of planning rather than a passive observation.
+
+## Source findings
+
+The authors organize tactile prediction into three levels: whether contact exists, a three-dimensional tactile latent that encodes force-related information, and whether slip occurs. A shared latent dynamics model predicts these states together with future visual latents.
+
+FeelWorld also uses contact-gated asymmetric attention. Before contact, the model preserves a visual-only pathway so irrelevant tactile signals do not degrade prediction. During contact, it enables joint visual-tactile dynamics prediction. The predicted contact and slip states then feed contact-aware cross-entropy-method planning.
+
+On chip grasping, fruit grasping, and USB insertion, the preprint reports that 10-step LPIPS falls from 0.084 to 0.058. After an 80-step autoregressive rollout, it reports LPIPS 61% below the visual baseline and 81.7% average zero-shot planning success. These are author-reported preprint results, not independent validation.
+
+## RoboSkin analysis
+
+FeelWorld makes a useful distinction between three questions that a robot can ask about future contact. Contact state asks whether interaction has started. The tactile latent represents richer force-related information. Slip state asks whether the grasp is losing stability. Keeping these targets explicit can make a world model easier to inspect than one opaque future embedding.
+
+| Predicted state | Planning question | Robot-skin requirement | Evidence boundary |
+| --- | --- | --- | --- |
+| Contact | Will the action create or break contact? | Reliable contact onset and synchronized robot action | A binary contact label does not describe force or stability. |
+| 3D tactile latent | How may force-related touch change? | Calibrated tactile observations aligned with visual and robot state | A learned latent is not automatically a physical force measurement. |
+| Slip | Is the contact becoming unstable? | Dynamic tactile evidence with sufficient rate and sensitivity | Predicted slip still needs a controller that can respond in time. |
+| Visual latent | What scene change is expected? | Camera observations aligned with the same action sequence | Visual similarity does not guarantee physically correct contact. |
+
+The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares FeelWorld with VT-WM, Dream-Tac, TouchWorld, and ViTacWorld without treating unlike metrics as a leaderboard. The [Dream-Tac brief](/research/dream-tac-tactile-world-action-model-2026) provides a narrower route into action-conditioned tactile-future prediction.
+
+## Engineering implications
+
+World-model quality depends on the data contract beneath it. Visual frames, tactile samples, robot state, and actions need a coherent clock. Contact and slip labels need definitions that survive changes in object, gripper, sensor placement, and surface condition. The [tactile dataset directory](/guides/tactile-datasets-robot-learning) explains why trajectory-level splits matter for this kind of sequential data.
+
+Prediction also does not replace reaction. A planner can choose among imagined action sequences, but the deployed robot still needs measured touch and a fast feedback loop when the real contact diverges from the forecast. The [robot hand tactile sensor guide](/applications/robot-hand-tactile-sensor) maps that requirement to fingertip, palm, and whole-hand coverage.
+
+## What this does not prove yet
+
+FeelWorld is an arXiv preprint evaluated on the authors' chip-grasping, fruit-grasping, and USB-insertion setups. The reported LPIPS and planning results do not establish transfer across every robot, tactile sensor, object distribution, or contact regime. LPIPS measures perceptual similarity in predicted imagery; it is not by itself proof of correct force, friction, slip, or safe contact.
+
+The paper also does not establish production latency, hardware durability, calibration stability, or failure recovery outside its protocol. Independent reproduction and evaluation on held-out embodiments remain necessary before treating the approach as general-purpose Physical AI infrastructure.
+
+## Evaluation checklist
+
+- Separate contact, tactile-state, slip, and visual-prediction metrics.
+- Report the tactile sensor, calibration, sampling rate, placement, and synchronization path.
+- Preserve complete trajectories when creating training and test splits.
+- Compare against visual-only, reactive-tactile, and no-tactile baselines.
+- Test planning under unseen objects, surfaces, contact sequences, and disturbances.
+- Measure whether prediction improves real robot outcomes, not only offline reconstruction.
+
+## Source
+
+[arXiv: FeelWorld - Visuo-Tactile World Model for Hierarchical Contact Prediction and Planning](https://arxiv.org/abs/2607.24267)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-15',
+    updated: '2026-08-15',
+    readTime: '6 min read',
+    category: 'Tactile AI',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'FeelWorld visuo-tactile world model preprint',
+    sourceUrl: 'https://arxiv.org/abs/2607.24267',
+    technicalFocus: ['FeelWorld', 'visuo-tactile world model', 'contact-rich manipulation', 'tactile world model', 'robot planning'],
+  },
+  {
     id: 'ht-bench-full-hand-tactile-representations-2026',
     title: 'HT-Bench full-hand tactile benchmark for robot manipulation',
     seoTitle: 'HT-Bench Full-Hand Tactile Benchmark for Robot Learning',
@@ -240,6 +310,8 @@ Many tactile policies react to what the sensor reports now. Contact-rich manipul
 
 The Dream-Tac preprint is useful because it integrates tactile sensing into a world-action model. The source explicitly models future visual and tactile observations conditioned on robot actions. For RoboSkin.ai, this points toward a stronger tactile AI standard: robot skin should support prediction, not only detection.
 
+The paper adds contact-gated visuo-tactile fusion and contact-aware attention. Its abstract reports up to 2.9x faster training, 1.8x faster inference, and a 31.7% average action-accuracy improvement across six contact-rich manipulation tasks. These are source-reported preprint results tied to the authors' model, tasks, acceleration design, and baselines.
+
 ## RoboSkin analysis
 
 A tactile world model links action, visual state, tactile state, and future contact dynamics. Instead of treating tactile feedback as an isolated signal, it becomes part of a model that estimates what will happen next. That is important for insertion, regrasping, manipulation under occlusion, and tasks where contact changes faster than vision can resolve.
@@ -261,7 +333,7 @@ The practical challenge is data. World models require consistent trajectories, s
 
 For robot skin, Dream-Tac changes the question from "can the surface detect contact?" to "can the robot predict what contact will do next?" A useful tactile skin does not only publish pressure, deformation, or slip hints. It should produce data that can be aligned with actions, replayed after failure, and used by models that estimate future contact outcomes.
 
-This makes Dream-Tac a bridge between sensor pages and software pages. Readers should compare it with [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration transfer and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replayable data handling.
+This makes Dream-Tac a bridge between sensor pages and software pages. Readers should compare it with the [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) for the broader 2026 model landscape and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replayable data handling.
 
 ## What this does not prove yet
 
@@ -298,7 +370,7 @@ Tactile AI benefits from prediction and replay. Robot skin data becomes more val
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-27',
+    updated: '2026-08-15',
     readTime: '5 min read',
     category: 'Tactile AI',
     image: '/generated/authority/tactile-ai-loop.webp',

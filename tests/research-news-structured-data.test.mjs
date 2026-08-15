@@ -100,6 +100,10 @@ test('GSC-visible research pages use search-intent titles and snippets', async (
 
   const expectedSignals = [
     [
+      "title: 'FeelWorld predicts contact, tactile force states, and slip for robot planning'",
+      "FeelWorld adds explicit contact, force-related tactile, and slip prediction to a visual world model for contact-rich robot planning.",
+    ],
+    [
       "title: 'Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation'",
       "Dream-Tac models action-conditioned tactile futures for contact-rich robot manipulation, showing why robot skin data needs prediction, not only reaction.",
     ],
@@ -142,6 +146,7 @@ test('answer-engine and monitoring files expose updated GSC-visible research and
   ]);
 
   const expectedRoutes = [
+    'https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026',
     'https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026',
     'https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026',
     'https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
@@ -175,6 +180,8 @@ test('homepage authority routes promote news and GSC-visible article pages', asy
   ]);
 
   const priorityInternalRoutes = [
+    '/guides/visuo-tactile-world-models-robot-manipulation',
+    '/research/feelworld-visuo-tactile-world-model-2026',
     '/research/ht-bench-full-hand-tactile-representations-2026',
     '/news/underwater-self-healing-electronic-skin-nus-2026',
     '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
@@ -258,6 +265,7 @@ test('priority research schema images match each article subject', async () => {
 test('each audited priority article has explicit evidence boundaries and bounded internal links', async () => {
   const blogData = await read('src/lib/blog-data.ts');
   const priorityIds = [
+    'feelworld-visuo-tactile-world-model-2026',
     'dream-tac-tactile-world-action-model-2026',
     'single-material-soft-robotic-skin-2025',
     'freetacman-robot-free-visuotactile-data-collection-2025',

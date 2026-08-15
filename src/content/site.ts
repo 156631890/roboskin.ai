@@ -426,6 +426,16 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
         description: 'A source-bounded comparison of representations, world models, policies, and tactile control systems.',
       },
       {
+        label: 'Compare visuo-tactile world models',
+        href: '/guides/visuo-tactile-world-models-robot-manipulation',
+        description: 'A 2026 comparison of contact prediction, action-conditioned rollouts, planning evidence, and transfer limits.',
+      },
+      {
+        label: 'Read the FeelWorld planning brief',
+        href: '/research/feelworld-visuo-tactile-world-model-2026',
+        description: 'A source-backed brief on contact, force-related tactile state, slip prediction, and robot planning.',
+      },
+      {
         label: 'Read the underwater self-healing e-skin brief',
         href: '/news/underwater-self-healing-electronic-skin-nus-2026',
         description: 'NUS research combining touch sensing, damage detection, and self-repair for underwater electronic skin.',

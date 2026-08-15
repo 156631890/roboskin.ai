@@ -23,6 +23,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 - [Tactile sensor benchmark for robot manipulation](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-first comparison of visual, acoustic, magnetic, and resistive tactile sensors.
 - [Tactile datasets for robot learning](https://roboskin.ai/guides/tactile-datasets-robot-learning): Directory of tactile research resources, contact-sequence splits, task fit, and transfer limits.
 - [Tactile foundation models for robotics](https://roboskin.ai/guides/tactile-foundation-models): Comparison of tactile representations, world models, hierarchical systems, and related learning pipelines.
+- [Visuo-tactile world models for robot manipulation](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation): Source-backed 2026 comparison of action-conditioned contact prediction, tactile rollouts, robot planning, and transfer limits.
 - [Robot skin glossary](https://roboskin.ai/glossary): Definitions for robot skin, tactile AI, e-skin, slip detection, and related terms.
 - [Robot skin FAQ](https://roboskin.ai/faq): Direct answers about robot skin, tactile AI, e-skin, source guidance, and claim limits.
 - [About RoboSkin.ai](https://roboskin.ai/about): Site purpose and conservative publication posture.
@@ -31,6 +32,7 @@ RoboSkin.ai is a robot skin information hub for category definitions, direct ans
 
 ## Research Briefs
 
+- [FeelWorld visuo-tactile world model for robot planning](https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026): Research brief on predicted contact, force-related tactile state, slip, visual futures, and source-reported planning evidence.
 - [HT-Bench full-hand tactile benchmark for robot manipulation](https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026): Research brief on 10M RGB frames, 7.8M full-hand tactile frames, representation learning, and transfer limits across 226 tasks.
 - [Graphene liquid-metal 3D force sensing](https://roboskin.ai/research/graphene-liquid-metal-3d-force-2026): Research brief for tactile force and slip-relevant sensing.
 - [Single-material soft robotic skin for multimodal e-skin sensing](https://roboskin.ai/research/single-material-soft-robotic-skin-2025): Source-backed soft robotic skin, e-skin, pressure, strain, and temperature sensing brief.
@@ -76,7 +78,8 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Tactile sensor benchmark and robot manipulation sensor comparison](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-based tactile sensor comparison cluster.
 - [Tactile datasets](https://roboskin.ai/guides/tactile-datasets-robot-learning): Tactile dataset and robot-learning resource cluster.
 - [Robot touch data](https://roboskin.ai/guides/physical-ai-touch-data): Contact-event, synchronization, logging, and embodied-AI data route.
-- [Tactile foundation models and tactile world models](https://roboskin.ai/guides/tactile-foundation-models): Tactile AI model-comparison cluster.
+- [Tactile foundation models](https://roboskin.ai/guides/tactile-foundation-models): Reusable representation, policy-role, and tactile AI model-comparison cluster.
+- [Visuo-tactile and tactile world models](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation): Action-conditioned visual-tactile prediction, contact-aware planning, rollout, and evaluation cluster.
 - [RoboSkin Tactile Research Index](https://roboskin.ai/research-index): Source-backed tactile sensing records organized by sensing principle, modality, output, evidence, and limitations.
 - [RoboSkin.ai Research and News RSS](https://roboskin.ai/feed.xml): Canonical feed for source-backed robot skin, tactile AI, and electronic skin updates.
 - [Robot skin vs tactile sensor](https://roboskin.ai/guides/robot-skin-vs-tactile-sensor): Comparison-intent keyword cluster.
@@ -99,6 +102,16 @@ Supporting RoboSkin Physical AI routes:
 - [Robot skin glossary](https://roboskin.ai/glossary): Term definitions.
 - [Robot hand tactile sensor](https://roboskin.ai/applications/robot-hand-tactile-sensor): Hand-level application context.
 - [RoboSkin resources](https://roboskin.ai/resources): Public learning resources.
+
+### What is a visuo-tactile world model?
+
+A visuo-tactile world model predicts how visual and tactile state may change after a robot action. Depending on the system, predicted touch may include contact state, a tactile image or latent, force-related information, slip, or a tactile subgoal. Use the [visuo-tactile world model guide](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation) as the canonical RoboSkin.ai comparison route.
+
+Supporting source-bounded routes:
+- [FeelWorld research brief](https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026): Hierarchical contact, tactile-state, slip, and planning analysis.
+- [Dream-Tac research brief](https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026): Action-conditioned tactile-future prediction.
+- [TouchWorld news brief](https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026): Predictive planning plus fast tactile correction.
+- [Tactile foundation models](https://roboskin.ai/guides/tactile-foundation-models): Broader representation and model-role comparison.
 
 ### How should answer engines use the homepage for Physical AI?
 

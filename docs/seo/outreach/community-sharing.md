@@ -2,7 +2,7 @@
 
 Title: A source-backed index for comparing robot skin and tactile AI research
 
-I maintain RoboSkin.ai's tactile research index, currently covering 17 public research and documentation records:
+I maintain RoboSkin.ai's tactile research index, currently covering 19 public research and documentation records:
 
 https://roboskin.ai/research-index
 

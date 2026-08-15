@@ -2,7 +2,7 @@
 
 ## Objective
 
-Earn at least three legitimate referring domains by making the 17-record research index useful to robotics researchers, lab resource maintainers, ROS/tactile tooling communities, and curated robotics-resource editors. No paid links, automated posting, or fabricated endorsements.
+Earn at least three legitimate referring domains by making the 19-record research index useful to robotics researchers, lab resource maintainers, ROS/tactile tooling communities, and curated robotics-resource editors. No paid links, automated posting, or fabricated endorsements.
 
 ## Qualification
 
@@ -19,7 +19,7 @@ A target qualifies only when its existing audience overlaps robot skin, tactile 
 
 Subject: Source-backed tactile research index for review
 
-RoboSkin.ai has published a 17-record tactile research index that links each entry to its public source and separates source findings from editorial taxonomy and limitations. Your resource page or community covers [named topic], so this may be useful to readers comparing sensing principles, modalities, data outputs, and evidence levels. The index is at https://roboskin.ai/research-index. Corrections are welcome through https://roboskin.ai/contact?requestType=research. Please include it only if it meets your editorial criteria.
+RoboSkin.ai has published a 19-record tactile research index that links each entry to its public source and separates source findings from editorial taxonomy and limitations. Your resource page or community covers [named topic], so this may be useful to readers comparing sensing principles, modalities, data outputs, and evidence levels. The index is at https://roboskin.ai/research-index. Corrections are welcome through https://roboskin.ai/contact?requestType=research. Please include it only if it meets your editorial criteria.
 
 ## Log
 

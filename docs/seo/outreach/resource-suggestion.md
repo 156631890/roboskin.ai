@@ -4,7 +4,7 @@ Subject: Source-backed tactile research index for [resource name]
 
 Hello [maintainer],
 
-Your [page or repository] covers [specific overlapping topic]. RoboSkin.ai maintains a public 17-record tactile research index that compares sensing principles, modalities, form factors, data outputs, evidence levels, and explicit limitations:
+Your [page or repository] covers [specific overlapping topic]. RoboSkin.ai maintains a public 19-record tactile research index that compares sensing principles, modalities, form factors, data outputs, evidence levels, and explicit limitations:
 
 https://roboskin.ai/research-index
 
