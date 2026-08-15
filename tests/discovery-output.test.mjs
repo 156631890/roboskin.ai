@@ -140,7 +140,9 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(workflow, /run: npm run verify:export/);
   assert.equal(workflow.match(/run: npm run build/g)?.length, 1);
   assert.doesNotMatch(workflow, /deploy-pages|upload-pages-artifact/);
-  assert.match(workflow, /actions\/upload-artifact@v4/);
+  assert.match(workflow, /actions\/checkout@v7/);
+  assert.match(workflow, /actions\/setup-node@v7/);
+  assert.match(workflow, /actions\/upload-artifact@v7/);
   assert.match(workflow, /node-version: "22"/);
   assert.match(vercel, /"deploymentEnabled": true/);
   const vercelConfig = JSON.parse(vercel);
