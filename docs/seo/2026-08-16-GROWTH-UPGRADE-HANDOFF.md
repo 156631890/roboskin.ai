@@ -18,7 +18,8 @@
 ## P1 — Newsletter, content, SEO, and GEO
 
 - The footer contains a sitewide Weekly Robotics Research Brief request form.
-- Without a configured form backend, contact and Newsletter submissions open a prefilled WhatsApp message to the existing public contact number. Browser QA confirmed both generated URLs and no test message was sent.
+- Contact submissions use a dedicated FormSubmit JSON endpoint in Vercel and are delivered to `messigoat147@gmail.com`; activation and a post-activation delivery test were both verified in Gmail on 2026-08-16. WhatsApp remains the failure fallback.
+- Newsletter code now uses its own `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` and a provider-native POST form designed for Buttondown double opt-in. Until the owner finishes Buttondown username/password registration and the endpoint is configured, Newsletter requests continue to use the WhatsApp fallback.
 - The August 2026 EIT-pneumatic robot-skin brief is source-backed, included in the homepage/news index, sitemap, Google News sitemap, RSS, and `public/llms.txt`.
 - Large-term routing is preserved: `robotics` -> `/research`, `Physical AI` -> `/physics-ai`, `humanoid robot` -> `/applications/humanoid-robot-skin`, `robot skin` -> `/robot-skin`, and `tactile sensor` -> `/guides/tactile-sensor-for-robots`.
 - Daily research monitoring is implemented by `.github/workflows/daily-research-watch.yml` and `scripts/daily-research-watch.mjs`. It runs at 09:17 Asia/Shanghai, queries arXiv and Google Trends RSS, produces a review-only artifact, and never auto-publishes candidate text.
@@ -45,16 +46,14 @@ node scripts/verify-production.mjs https://roboskin.ai
 
 Mobile and desktop browser QA covered the homepage, news index, the new research-news article, contact, and priority guide pages. The checked pages have one H1, no horizontal overflow, labeled form controls, named buttons, image alternative text, and a skip-to-content link.
 
-## Known infrastructure gap
+## Mail and Newsletter status
 
-Public DNS inspection on 2026-08-16 found no MX, SPF, DMARC, or DKIM records for `roboskin.ai`, and the current Gmail inbox had no messages addressed to `contact@roboskin.ai`. `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` is also not configured, and the static production site does not expose `/api/contact`.
+Public DNS inspection on 2026-08-16 found no MX, SPF, DMARC, or DKIM records for `roboskin.ai`, so the owner approved `messigoat147@gmail.com` for public contact, legal, privacy, form-delivery, and Newsletter management. The site no longer presents the inactive domain mailboxes as live direct-contact routes.
 
-The WhatsApp fallback prevents immediate inquiry loss, but it is not a replacement for mail infrastructure or a subscriber database. The next owner-approved infrastructure task is:
+The contact path is operational: FormSubmit is active, the obscured AJAX endpoint is stored as a sensitive Vercel environment variable for Production and Preview, and a post-activation message reached the approved Gmail inbox. The remaining Newsletter task is:
 
-1. Choose Google Workspace, Cloudflare Email Routing plus a sending provider, or another domain-mail provider.
-2. Configure MX, SPF, DKIM, and DMARC.
-3. Verify `contact@roboskin.ai`, `legal@roboskin.ai`, and `privacy@roboskin.ai` can receive mail.
-4. Configure a consent-aware form/Newsletter endpoint and set `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` in Vercel.
-5. Submit test messages, verify delivery and unsubscribe handling, then update the privacy copy if the processor changes.
+1. Complete the open Buttondown registration page by choosing the `roboskin` username and entering an owner-controlled password.
+2. Set `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` in Vercel to the newsletter's embedded-subscribe endpoint.
+3. Submit one owner-controlled test address, confirm the double-opt-in message, verify subscriber status, and verify the unsubscribe/portal route.
 
-Do not silently point public domain addresses at a personal mailbox or create an external provider account without owner approval.
+Do not claim Newsletter completion until the end-to-end confirmation and unsubscribe test passes.

@@ -193,11 +193,12 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });
 
-test('RoboSkin uses the domain email address for direct public inquiries', async () => {
+test('RoboSkin uses the owner-approved Gmail address for direct public inquiries', async () => {
   const site = await read('src/content/site.ts');
 
-  assert.match(site, /primaryEmail: 'contact@roboskin\.ai'/);
-  assert.match(site, /ownerEmail: 'contact@roboskin\.ai'/);
-  assert.match(site, /inquiryEmail: 'contact@roboskin\.ai'/);
-  assert.doesNotMatch(site, /messigoat147@gmail\.com/);
+  assert.match(site, /primaryEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /ownerEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /inquiryEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /legalEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /privacyEmail: 'messigoat147@gmail\.com'/);
 });

@@ -144,6 +144,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       response = await fetch(contactFormEndpoint, {
         method: 'POST',
         headers: {
+          Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(form),

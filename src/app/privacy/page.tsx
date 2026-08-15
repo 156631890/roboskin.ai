@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
         <div className="container-shell">
           <span className="eyebrow">Privacy</span>
           <h1 className="mt-5 text-4xl font-bold text-[#111318] md:text-6xl">Privacy Policy</h1>
-          <p className="mt-5 max-w-3xl text-[#4f5560]">Last updated: July 27, 2026</p>
+          <p className="mt-5 max-w-3xl text-[#4f5560]">Last updated: August 16, 2026</p>
         </div>
       </section>
 
@@ -24,6 +24,7 @@ export default function PrivacyPolicyPage() {
               <h2 className="text-2xl font-semibold text-[#111318]">Information we collect</h2>
               <p className="mt-3 text-[#4f5560]">
                 We collect the data you submit through the contact or newsletter forms, including name, company, email, use case, timeline, phone number, requested asset, and message where those fields apply.
+                Contact-form submissions are processed by FormSubmit and delivered to the site management inbox. FormSubmit may retain submitted form data for up to 30 days for delivery and recovery.
                 When no direct form endpoint is configured, the site opens WhatsApp with a prepared message; information is transferred only if the visitor continues and sends it there.
                 When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
               </p>
@@ -37,7 +38,13 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Sharing</h2>
               <p className="mt-3 text-[#4f5560]">
-                We do not sell personal information. We may share request data with service providers or route it to a configured webhook when the form is submitted.
+                We do not sell personal information. Contact requests are processed by FormSubmit and delivered through Gmail. Newsletter subscriptions, once enabled, are processed by the named email-list provider shown during confirmation so that it can store subscription status, deliver the brief, and honor unsubscribe requests.
+              </p>
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold text-[#111318]">Choices and deletion</h2>
+              <p className="mt-3 text-[#4f5560]">
+                You may ask us to delete a contact submission by using the address below. Newsletter readers can decline the confirmation email or use the unsubscribe link in any delivered brief.
               </p>
             </div>
             <div>

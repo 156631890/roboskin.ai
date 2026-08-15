@@ -22,7 +22,10 @@ test('conversion analytics cover the agreed growth actions without user-entered 
   assert.match(tracker, /Research Data Open/);
   assert.doesNotMatch(tracker, /email|fullName|company/i);
   assert.match(contact, /Contact Form Success/);
-  assert.match(newsletter, /Newsletter Success/);
+  assert.match(newsletter, /NEXT_PUBLIC_NEWSLETTER_ENDPOINT/);
+  assert.match(newsletter, /Newsletter Provider Handoff/);
+  assert.match(newsletter, /name="email"/);
+  assert.match(newsletter, /name="embed"/);
   assert.match(newsletter, /Newsletter WhatsApp Open/);
   assert.match(index, /Research Index Filter/);
 });

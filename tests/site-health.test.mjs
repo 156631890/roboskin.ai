@@ -28,6 +28,7 @@ test('site authority health checks pass', async () => {
   assert.match(seo, /'\/glossary'/);
   assert.match(seo, /'\/case-studies'/);
   assert.match(contactForm, /NEXT_PUBLIC_CONTACT_FORM_ENDPOINT/);
+  assert.match(contactForm, /Accept: 'application\/json'/);
   assert.match(contactForm, /buildWhatsAppHref/);
   assert.match(contactForm, /try\s*\{/);
   assert.match(contactForm, /catch\s*\(/);
@@ -39,8 +40,7 @@ test('site authority health checks pass', async () => {
   assert.match(caseStudies, /buildPageMetadata\('\/case-studies'\)/);
   assert.doesNotMatch(caseStudies, /robots:\s*\{\s*index:\s*false/);
   assert.match(llms, /https:\/\/roboskin\.ai\/research\/graphene-liquid-metal-3d-force-2026/);
-  assert.match(site, /ownerEmail:\s*'contact@roboskin\.ai'/);
-  assert.doesNotMatch(site, /messigoat147@gmail\.com/);
+  assert.match(site, /ownerEmail:\s*'messigoat147@gmail\.com'/);
   assert.match(site, /domainInquiry/);
   assert.doesNotMatch(contactForm, /Domain acquisition|Strategic acquisition|Request Brief/);
   assert.doesNotMatch(contactForm, /Robot platform|required[\s\S]*targetSurface/);
