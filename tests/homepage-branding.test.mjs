@@ -34,10 +34,10 @@ test('homepage copy reflects the research map positioning', async () => {
     readFile(visualsPath, 'utf8'),
   ]);
 
-  assert.match(home, /Robot skin, tactile AI, and Physical AI research map/);
-  assert.match(home, /Physical AI research map/);
-  assert.match(home, /<span className="block sm:inline">research map<\/span>/);
-  assert.match(home, /Physical AI\s+context/);
+  assert.match(home, /Robot skin and tactile AI for Physical AI and humanoid robots/);
+  assert.match(home, /for Physical AI/);
+  assert.match(home, /<span className="block sm:inline">and humanoid robots<\/span>/);
+  assert.match(home, /source-backed robotics research across robot skin, tactile sensors, robot hands/);
   assert.doesNotMatch(home, /Physical AI \/ 物理 AI/);
   assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);
   assert.match(home, /href="\/physics-ai"/);
@@ -50,6 +50,11 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.match(home, /Track the tactile AI stack with source-like entries/);
   assert.match(home, /Tactile AI stack map/);
   assert.match(home, /Humanoid robot skin/);
+  assert.match(home, /Robotics research pulse/);
+  assert.match(home, /Track humanoid robots, Physical AI, embodied AI, and robot manipulation/);
+  assert.match(home, /homeBroadResearchLanes/);
+  assert.match(home, /homeResearchWatch/);
+  assert.match(home, /Newest robotics research briefs/);
   assert.match(home, /homeBrandAssets/);
   assert.match(home, /homeBrandAssets\.hero\.image/);
   assert.match(site, /authorityLinkGroups/);
@@ -97,7 +102,7 @@ test('homepage brand visual assets exist and are wired into the hero', async () 
 
   assert.match(site, /hero:\s*\{/);
   assert.match(site, /brandBoard:\s*\{/);
-  assert.match(home, /Source-backed tactile sensing map/);
+  assert.match(home, /Source-backed robotics research map/);
 });
 
 test('homepage authority visual assets are generated and wired into components', async () => {

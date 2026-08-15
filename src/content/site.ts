@@ -169,8 +169,9 @@ export type PageVisual = {
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
-  tagline: 'Robot skin and tactile AI information hub',
-  description: 'A public information hub for robot skin, tactile AI, e-skin, tactile sensing, and contact-aware robotics.',
+  tagline: 'Robot skin, humanoid robotics, tactile AI, and Physical AI research hub',
+  description:
+    'A public research hub for robot skin, tactile AI, humanoid robots, Physical AI, robot manipulation, e-skin, and contact-aware robotics.',
   editorial: {
     name: 'RoboSkin.ai Editorial Team',
     path: '/editorial-policy',
@@ -238,11 +239,55 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: 'Map', label: 'Robot skin and tactile AI research routes' },
-  { value: 'Guides', label: 'Plain-language explainers for tactile sensing concepts' },
-  { value: 'Sources', label: 'Research notes with public references' },
-  { value: 'Glossary', label: 'Definitions for robot skin and tactile AI terms' },
+  { value: '19', label: 'Structured tactile and robot-learning research records' },
+  { value: '35', label: 'Source-backed research and robotics news briefs' },
+  { value: '5', label: 'Visuo-tactile world-model papers compared' },
+  { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
+
+export const homeBroadResearchLanes: ContentTile[] = [
+  {
+    title: 'Humanoid robots and robot hands',
+    description:
+      'Track tactile coverage, dexterous hands, grasp stability, slip, and contact feedback for humanoid robot manipulation.',
+    href: '/applications/humanoid-robot-skin',
+    ctaLabel: 'Explore humanoid robot skin',
+  },
+  {
+    title: 'Physical AI and embodied AI',
+    description:
+      'Connect physical-world AI to robot skin, tactile sensing, contact data, and measurable feedback beyond vision.',
+    href: '/physics-ai',
+    ctaLabel: 'Open the Physical AI route',
+  },
+  {
+    title: 'Robot manipulation and tactile sensors',
+    description:
+      'Compare visual, acoustic, magnetic, and resistive tactile sensing by contact-rich manipulation task and evidence boundary.',
+    href: '/guides/tactile-sensor-benchmark-robot-manipulation',
+    ctaLabel: 'Compare manipulation sensors',
+  },
+  {
+    title: 'VLA and visuo-tactile world models',
+    description:
+      'Follow action-conditioned contact prediction, world-action models, planning evidence, and the role of touch in robot policies.',
+    href: '/guides/visuo-tactile-world-models-robot-manipulation',
+    ctaLabel: 'Compare world models',
+  },
+];
+
+export const homeResearchWatch = {
+  eyebrow: 'August 2026 preprint watch',
+  title: 'PhyAI tests one inference runtime for VLA and world-action robot policies',
+  summary:
+    'PhyAI unifies model evaluation, cloud rollout, edge serving, and onboard deployment for Physical AI policies. The authors report 1.40x to 4.65x speedups over matched official implementation paths, while noting that comparisons are not fully precision-matched and specialized runtimes remain faster in some configurations.',
+  relevance:
+    'For RoboSkin readers, the open question is how real-time tactile sensing, contact events, and robot-control deadlines fit the same end-to-end inference path.',
+  sourceLabel: 'Primary source: PhyAI on arXiv',
+  sourceUrl: 'https://arxiv.org/abs/2608.03682',
+  sourceDate: '2026-08-04',
+  reviewedAt: '2026-08-15',
+};
 
 export const homeProofPoints: ContentTile[] = [
   {

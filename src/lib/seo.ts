@@ -20,10 +20,10 @@ const updatedAt = '2026-07-10';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin, Tactile AI, and Physical AI Research Map',
+    title: 'Robot Skin & Tactile AI for Physical AI and Humanoid Robots',
     description:
-      'RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensing, humanoid robot skin, Physical AI tactile feedback, and contact-aware robotics.',
-    updated: '2026-07-21',
+      'Source-backed robotics research on robot skin, tactile sensors, humanoid robots, robot hands, Physical AI, embodied AI, manipulation, and world models.',
+    updated: '2026-08-15',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -623,15 +623,30 @@ export function buildHomePhysicalAiRoutesJsonLd() {
       url: canonicalUrl('/tactile-ai'),
       description: 'Definition route for turning robot touch signals into useful behavior and evaluation data.',
     },
+    {
+      name: 'Humanoid robot skin',
+      url: canonicalUrl('/applications/humanoid-robot-skin'),
+      description: 'Application route for humanoid robots, dexterous hands, tactile coverage, slip, and contact feedback.',
+    },
+    {
+      name: 'Tactile sensors for robot manipulation',
+      url: canonicalUrl('/guides/tactile-sensor-benchmark-robot-manipulation'),
+      description: 'Task-first comparison route for tactile sensors used in contact-rich robot manipulation.',
+    },
+    {
+      name: 'Visuo-tactile world models',
+      url: canonicalUrl('/guides/visuo-tactile-world-models-robot-manipulation'),
+      description: 'Research route for VLA context, world-action models, contact prediction, and robot planning evidence.',
+    },
   ];
 
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     '@id': `${homeUrl}#physical-ai-route-map`,
-    name: 'Physical AI route map on RoboSkin.ai',
+    name: 'Physical AI and humanoid robotics route map on RoboSkin.ai',
     description:
-      'Homepage research map connecting Physical AI, robot skin, tactile AI, contact feedback, touch data, and source-backed research paths.',
+      'Homepage research map connecting Physical AI, embodied AI, humanoid robots, robot manipulation, robot skin, tactile AI, contact feedback, and world models.',
     itemListElement: routes.map((route, index) => ({
       '@type': 'ListItem',
       position: index + 1,

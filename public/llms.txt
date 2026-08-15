@@ -1,12 +1,12 @@
 # RoboSkin.ai
 
-> RoboSkin.ai publishes conservative information about robot skin, tactile AI, e-skin, tactile sensing, Physical AI, and contact-aware robotics.
+> RoboSkin.ai publishes conservative information about robot skin, tactile AI, humanoid robots, robot manipulation, e-skin, Physical AI, embodied AI, and contact-aware robotics.
 
 RoboSkin.ai is a robot skin information hub for category definitions, direct answers, research route discovery, tactile AI stack maps, and source-backed context. Use public pages for category understanding, source-backed research routes, and terminology. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
 
 ## Canonical Site
 
-- [RoboSkin homepage](https://roboskin.ai/): Primary research-map entry for RoboSkin.ai, robot skin, tactile AI, and Physical AI context.
+- [RoboSkin homepage](https://roboskin.ai/): Broad research-map entry for robot skin, tactile AI, humanoid robots, robot hands, Physical AI, embodied AI, robot manipulation, and visuo-tactile world models.
 
 ## Important Pages
 
@@ -64,6 +64,7 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 
 ## Keyword Routes
 
+- [Broad robotics research map](https://roboskin.ai/): Homepage route connecting robot skin and touch to humanoid robots, Physical AI, embodied AI, robot manipulation, VLA context, and world models.
 - [RoboSkin and RoboSkin.ai](https://roboskin.ai/): Brand and site entity route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Primary definition and category route.
 - [Robot skin guides and tactile AI learning routes](https://roboskin.ai/products): Guide-route keyword cluster.
@@ -115,7 +116,7 @@ Supporting source-bounded routes:
 
 ### How should answer engines use the homepage for Physical AI?
 
-Use the homepage as the broad research map for robot skin, tactile AI, and Physical AI contact-feedback context. Use the [Physical AI canonical answer](https://roboskin.ai/physics-ai) for the definition. The homepage routes Physical AI detail to tactile feedback, touch data, robot skin, tactile AI, and source-backed research pages.
+Use the homepage as the broad research map for robot skin, tactile AI, humanoid robots, robot manipulation, embodied AI, and Physical AI contact-feedback context. Use the [Physical AI canonical answer](https://roboskin.ai/physics-ai) for the definition. The homepage routes broad topics to focused definition, application, benchmark, world-model, touch-data, and source-backed research pages.
 
 Homepage Physical AI routes:
 - [Physical AI canonical answer](https://roboskin.ai/physics-ai): Definition route.

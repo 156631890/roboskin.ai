@@ -16,7 +16,9 @@ import {
   directAnswerBlocks,
   featuredIndustryAssets,
   homeBrandAssets,
+  homeBroadResearchLanes,
   homePhysicalAiSignals,
+  homeResearchWatch,
   homeStats,
   manifesto,
   marketSignals,
@@ -24,6 +26,8 @@ import {
   site,
   tactileAiStack,
 } from '@/content/site';
+import { getBlogSummaries } from '@/lib/blog-data';
+import { getNewsSummaries } from '@/lib/news-data';
 import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
@@ -40,6 +44,21 @@ const homeRobotSkinFaq = directAnswerBlocks.slice(0, 3).map((item) => ({
   href: item.href,
   ctaLabel: item.ctaLabel,
 }));
+
+const latestResearchSignals = [
+  ...getBlogSummaries().map((post) => ({
+    ...post,
+    href: `/research/${post.id}`,
+    label: 'Research brief',
+  })),
+  ...getNewsSummaries().map((post) => ({
+    ...post,
+    href: `/news/${post.id}`,
+    label: 'Robotics news',
+  })),
+]
+  .sort((left, right) => right.date.localeCompare(left.date))
+  .slice(0, 3);
 
 export const metadata: Metadata = buildPageMetadata('/');
 
@@ -61,17 +80,18 @@ export default function Home() {
         <div className="container-shell">
           <div className="grid gap-7 md:min-h-[calc(100svh-82px)] md:items-center lg:grid-cols-[0.74fr_1.26fr]">
             <div className="hero-copy relative z-10 min-w-0">
-              <p className="quiet-label">Source-backed tactile sensing map</p>
-              <h1 aria-label="Robot skin, tactile AI, and Physical AI research map" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
-                <span className="block">Robot skin</span>
-                <span className="block">tactile AI</span>
+              <p className="quiet-label">Source-backed robotics research map</p>
+              <h1 aria-label="Robot skin and tactile AI for Physical AI and humanoid robots" className="mt-5 text-4xl font-bold leading-[0.98] text-white text-balance md:text-6xl md:leading-[0.94] xl:text-[4rem]">
+                <span className="block">Robot skin</span>{' '}
+                <span className="block">and tactile AI</span>{' '}
                 <span className="block">
-                  Physical AI <span className="block sm:inline">research map</span>
+                  for Physical AI{' '}
+                  <span className="block sm:inline">and humanoid robots</span>
                 </span>
               </h1>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#c8d1de]">
-                RoboSkin.ai tracks robot skin, tactile AI, e-skin, tactile sensors, humanoid robot skin, and Physical AI
-                context for engineers, researchers, and category analysts following contact-aware robotics.
+                RoboSkin.ai tracks source-backed robotics research across robot skin, tactile sensors, robot hands,
+                humanoid robots, dexterous manipulation, embodied AI, Physical AI, and visuo-tactile world models.
               </p>
 
               <div className="hero-answer mt-7 max-w-xl">
@@ -134,6 +154,98 @@ export default function Home() {
 
           <div className="deferred-section mt-10">
             <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
+          </div>
+        </div>
+      </section>
+
+      <section className="deferred-section py-14 md:py-20" aria-labelledby="robotics-research-pulse-heading">
+        <div className="container-shell">
+          <div className="grid gap-8 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
+            <div className="max-w-3xl">
+              <span className="eyebrow">Robotics research pulse</span>
+              <h2 id="robotics-research-pulse-heading" className="mt-5 text-3xl font-bold text-white md:text-5xl">
+                Track humanoid robots, Physical AI, embodied AI, and robot manipulation
+              </h2>
+              <p className="section-copy mt-4">
+                Broad robotics terms only earn useful authority when they connect to a clear evidence lane. RoboSkin.ai
+                maps each large topic back to tactile sensing, robot hands, contact-rich tasks, data, models, and measurable
+                limitations.
+              </p>
+              <p className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-[#8e98a8]">
+                Research watch reviewed {homeResearchWatch.reviewedAt}
+              </p>
+            </div>
+
+            <article className="signal-panel p-6 md:p-8">
+              <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.14em] text-[#00e5ff]">
+                <span>{homeResearchWatch.eyebrow}</span>
+                <span className="text-[#697586]">Source date {homeResearchWatch.sourceDate}</span>
+              </div>
+              <h3 className="mt-4 text-2xl font-semibold text-white">{homeResearchWatch.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-[#c8d1de]">{homeResearchWatch.summary}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{homeResearchWatch.relevance}</p>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href={homeResearchWatch.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-semibold text-[#00e5ff] hover:text-white"
+                >
+                  {homeResearchWatch.sourceLabel} {'->'}
+                </a>
+                <Link href="/physics-ai" className="text-sm font-semibold text-[#c8d1de] hover:text-white">
+                  Open the Physical AI definition {'->'}
+                </Link>
+              </div>
+            </article>
+          </div>
+
+          <div className="mt-8 grid gap-px overflow-hidden md:grid-cols-2 xl:grid-cols-4">
+            {homeBroadResearchLanes.map((lane) => (
+              <article key={lane.title} className="bg-[#050910]/88 p-5 md:p-6">
+                <h3 className="text-lg font-semibold text-white">{lane.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{lane.description}</p>
+                {lane.href && lane.ctaLabel ? (
+                  <Link href={lane.href} className="mt-4 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                    {lane.ctaLabel} {'->'}
+                  </Link>
+                ) : null}
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <p className="quiet-label">Latest source-backed updates</p>
+                <h3 className="mt-3 text-2xl font-semibold text-white md:text-3xl">Newest robotics research briefs</h3>
+              </div>
+              <Link href="/research" className="text-sm font-semibold text-[#00e5ff] hover:text-white">
+                Browse all research {'->'}
+              </Link>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {latestResearchSignals.map((signal) => (
+                <article key={signal.href} className="signal-panel flex h-full flex-col p-5 md:p-6">
+                  <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.12em] text-[#8e98a8]">
+                    <span className="text-[#00e5ff]">{signal.label}</span>
+                    <time dateTime={signal.date}>{signal.date}</time>
+                  </div>
+                  <h4 className="mt-4 text-xl font-semibold leading-snug text-white">{signal.title}</h4>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[#8e98a8]">{signal.excerpt}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {signal.technicalFocus.slice(0, 3).map((topic) => (
+                      <span key={topic} className="rounded-full border border-white/10 px-2.5 py-1 text-xs text-[#9da8b8]">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                  <Link href={signal.href} className="mt-5 inline-flex text-sm font-semibold text-[#00e5ff] hover:text-white">
+                    Read update {'->'}
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
