@@ -21,7 +21,7 @@ function buildWhatsAppSubscriptionHref(email: string) {
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState('No spam. Confirm by email, then unsubscribe in one click at any time.');
+  const [feedback, setFeedback] = useState('Confirm by email. Unsubscribe at any time.');
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     track('Newsletter Submit', {

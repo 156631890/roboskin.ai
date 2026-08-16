@@ -34,18 +34,20 @@ export default function Footer() {
             </div>
           </div>
 
-          {footerNavigation.map((column) => (
-            <div key={column.title} className="site-footer-column">
-              <h3>{column.title}</h3>
-              <ul>
-                {column.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <nav className="site-footer-navigation" aria-label="Footer navigation">
+            {footerNavigation.map((column) => (
+              <div key={column.title} className="site-footer-column">
+                <h3>{column.title}</h3>
+                <ul>
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
 
         <NewsletterSignup />
@@ -56,7 +58,6 @@ export default function Footer() {
           <div>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
-            <Link href="/editorial-policy">Editorial policy</Link>
           </div>
         </div>
       </div>
