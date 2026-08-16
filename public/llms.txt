@@ -31,6 +31,8 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [About RoboSkin.ai](https://roboskin.ai/about): Site purpose and conservative publication posture.
 - [Editorial policy and source standards](https://roboskin.ai/editorial-policy): Source boundaries, conservative claim rules, and RoboSkin.ai editorial standards.
 - [RoboSkin.ai contact](https://roboskin.ai/contact): Source suggestions, corrections, and editorial collaboration.
+- [RoboSkin research services](https://roboskin.ai/research-services): Fixed-scope commercial research for tactile sensors, datasets, models, labs, companies, and robot platforms.
+- [Free tactile AI and robot skin sample report](https://roboskin.ai/reports/tactile-ai-robot-skin-landscape-2026): Source-backed example of the taxonomy, comparison tables, evidence labels, and primary-source register used in RoboSkin research work.
 
 ## Research Briefs
 

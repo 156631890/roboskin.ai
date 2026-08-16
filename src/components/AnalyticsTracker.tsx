@@ -77,6 +77,16 @@ export default function AnalyticsTracker() {
         return;
       }
 
+      if (url.pathname.startsWith('/reports/') && url.pathname.endsWith('.pdf')) {
+        track('Sample Report Download', properties);
+        return;
+      }
+
+      if (url.pathname === '/research-services') {
+        track('Research Services Open', properties);
+        return;
+      }
+
       if (url.origin !== window.location.origin && !url.protocol.startsWith('mailto')) {
         track('Source Open', { ...properties, source_domain: url.hostname });
         return;

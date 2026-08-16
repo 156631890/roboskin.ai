@@ -236,6 +236,8 @@ export const footerNavigation = [
     title: 'Company',
     links: [
       { href: '/about', label: 'About' },
+      { href: '/research-services', label: 'Research services' },
+      { href: '/reports/tactile-ai-robot-skin-landscape-2026', label: 'Free sample report' },
       { href: '/faq', label: 'FAQ' },
       { href: '/contact', label: 'Contact' },
       { href: '/datasets', label: 'Datasets' },

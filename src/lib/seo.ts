@@ -211,6 +211,28 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Contact'],
   },
+  '/research-services': {
+    path: '/research-services',
+    title: 'Tactile AI and Robot Skin Research Services',
+    description:
+      'Commission a fixed-scope RoboSkin Research Sprint for source-backed tactile sensors, datasets, robot hands, humanoid touch, companies, and model intelligence.',
+    updated: '2026-08-17',
+    priority: 0.86,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Research Services'],
+  },
+  '/reports/tactile-ai-robot-skin-landscape-2026': {
+    path: '/reports/tactile-ai-robot-skin-landscape-2026',
+    title: 'Tactile AI and Robot Skin Landscape Report 2026',
+    description:
+      'Download a free source-backed sample report on tactile AI, robot skin, tactile robotics datasets, research signals, and evaluation questions.',
+    updated: '2026-08-17',
+    priority: 0.75,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Sample Report'],
+  },
   '/privacy': {
     path: '/privacy',
     title: 'Privacy Policy',
