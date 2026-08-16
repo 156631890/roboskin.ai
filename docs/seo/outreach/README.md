@@ -25,3 +25,9 @@ A target is ready only when:
 ## Counting results
 
 Count a referring domain only after a crawlable editorial link is live. Social posts, email replies, nofollow profile links, GitHub links owned by RoboSkin.ai, and links created by RoboSkin.ai do not satisfy the three-domain target.
+
+## Verified result snapshot
+
+- As of 2026-08-17, one editorial link is live: the maintainer-approved Awesome-Touch entry merged in [PR #41](https://github.com/linchangyi1/Awesome-Touch/pull/41).
+- The target is therefore `1 / 3` verified editorial referring domains.
+- Form submissions, sent emails, open issues, and unmerged pull requests remain outreach activity only. Do not count them as backlinks until the destination page links to RoboSkin.ai and the link is crawlable.
