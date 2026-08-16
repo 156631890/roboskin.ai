@@ -21,7 +21,7 @@
 - Contact submissions use a dedicated FormSubmit JSON endpoint in Vercel and are delivered to `messigoat147@gmail.com`; activation and a post-activation delivery test were both verified in Gmail on 2026-08-16. WhatsApp remains the failure fallback.
 - Newsletter code now uses its own `NEXT_PUBLIC_NEWSLETTER_ENDPOINT` and a provider-native POST form designed for Buttondown double opt-in. Until the owner finishes Buttondown username/password registration and the endpoint is configured, Newsletter requests continue to use the WhatsApp fallback.
 - The August 2026 EIT-pneumatic robot-skin brief is source-backed, included in the homepage/news index, sitemap, Google News sitemap, RSS, and `public/llms.txt`.
-- Large-term routing is preserved: `robotics` -> `/research`, `Physical AI` -> `/physics-ai`, `humanoid robot` -> `/applications/humanoid-robot-skin`, `robot skin` -> `/robot-skin`, and `tactile sensor` -> `/guides/tactile-sensor-for-robots`.
+- Large-term routing is preserved: `robotics` -> `/research`, broad `Physical AI` -> `/physics-ai`, tactile `Physical AI` -> `/physical-ai-touch`, `humanoid robot skin` -> `/humanoid-robot-skin`, `robot skin` -> `/robot-skin`, and `tactile sensor` -> `/guides/tactile-sensor-for-robots`.
 - Daily research monitoring is implemented by `.github/workflows/daily-research-watch.yml` and `scripts/daily-research-watch.mjs`. It runs at 09:17 Asia/Shanghai, queries arXiv and Google Trends RSS, produces a review-only artifact, and never auto-publishes candidate text.
 
 ## P2 — outreach and AI citation

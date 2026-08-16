@@ -71,7 +71,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /In the RoboSkin context, Physical AI means physical-world AI systems/);
   assert.match(home, /href="\/physics-ai"|href=\{`\/physics-ai/);
   assert.match(home, /href="\/guides\/tactile-feedback-for-physical-ai"|href=\{`\/guides\/tactile-feedback-for-physical-ai/);
-  assert.match(home, /href="\/guides\/physical-ai-touch-data"|href=\{`\/guides\/physical-ai-touch-data/);
+  assert.match(home, /href="\/physical-ai-touch"|href=\{`\/physical-ai-touch/);
   assert.match(home, /buildPhysicalAiDefinedTermJsonLd\(\)/);
   assert.match(home, /buildHomePhysicalAiRoutesJsonLd\(\)/);
   assert.doesNotMatch(home, /Robot skin direct answers/);

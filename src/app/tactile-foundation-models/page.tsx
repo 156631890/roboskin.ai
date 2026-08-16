@@ -4,7 +4,7 @@ import SeoTopicArticle from '@/components/SeoTopicArticle';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
 
-const page = getSeoTopicPage('/guides/tactile-foundation-models');
+const page = getSeoTopicPage('/tactile-foundation-models');
 
 export function generateMetadata(): Metadata {
   if (!page) return { title: 'Tactile foundation models topic not found' };

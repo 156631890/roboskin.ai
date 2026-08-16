@@ -4,22 +4,14 @@ import SeoTopicArticle from '@/components/SeoTopicArticle';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
 
-const page = getSeoTopicPage('/guides/physical-ai-touch-data');
+const page = getSeoTopicPage('/physical-ai-touch');
 
 export function generateMetadata(): Metadata {
-  if (!page) {
-    return {
-      title: 'Physical AI touch data topic not found',
-    };
-  }
-
+  if (!page) return { title: 'Physical AI and touch topic not found' };
   return buildSeoTopicMetadata(page);
 }
 
-export default function PhysicalAiTouchDataPage() {
-  if (!page) {
-    notFound();
-  }
-
+export default function PhysicalAiTouchPage() {
+  if (!page) notFound();
   return <SeoTopicArticle page={page} />;
 }

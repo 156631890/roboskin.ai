@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 73);
+  assert.equal(protectedUrls.length, 77);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -40,6 +40,10 @@ test('the audited production URL inventory is protected', async () => {
     '/guides/tactile-datasets-robot-learning',
     '/guides/tactile-foundation-models',
     '/guides/visuo-tactile-world-models-robot-manipulation',
+    '/datasets',
+    '/humanoid-robot-skin',
+    '/physical-ai-touch',
+    '/tactile-foundation-models',
     '/research/feelworld-visuo-tactile-world-model-2026',
     '/news/underwater-self-healing-electronic-skin-nus-2026',
     '/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026',
@@ -49,7 +53,12 @@ test('the audited production URL inventory is protected', async () => {
   ]) {
     assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
   }
-  assert.deepEqual(redirects, {});
+  assert.deepEqual(redirects, {
+    '/applications/humanoid-robot-skin': '/humanoid-robot-skin',
+    '/guides/tactile-datasets-robot-learning': '/datasets',
+    '/guides/tactile-foundation-models': '/tactile-foundation-models',
+    '/guides/physical-ai-touch-data': '/physical-ai-touch',
+  });
 });
 
 test('duplicate and positioning-mismatched legacy pages stay out of the index contract', async () => {

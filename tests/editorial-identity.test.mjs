@@ -24,6 +24,11 @@ test('visible content uses one institutional editorial team', async () => {
 
 test('article authors and the publisher resolve to factual organization nodes', async () => {
   const seo = await read('src/lib/seo.ts');
+  const organizationStart = seo.indexOf('export function buildOrganizationJsonLd');
+  const organizationEnd = seo.indexOf('\nexport function ', organizationStart + 1);
+  const editorialStart = seo.indexOf('export function buildEditorialTeamJsonLd');
+  const editorialEnd = seo.indexOf('\nexport function ', editorialStart + 1);
+  const editorialIdentitySeo = `${seo.slice(organizationStart, organizationEnd)}\n${seo.slice(editorialStart, editorialEnd)}`;
 
   assert.match(seo, /#editorial-team/);
   assert.match(seo, /buildEditorialTeamJsonLd\(post\.author\)/);
@@ -33,7 +38,7 @@ test('article authors and the publisher resolve to factual organization nodes', 
   assert.match(seo, /creator: \{ '@id': `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team` \}/);
   assert.match(seo, /width: 180/);
   assert.match(seo, /height: 180/);
-  assert.doesNotMatch(seo, /sameAs:/);
+  assert.doesNotMatch(editorialIdentitySeo, /sameAs:/);
 });
 
 test('technical topic pages use the visible institutional editorial identity', async () => {

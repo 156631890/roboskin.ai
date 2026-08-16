@@ -12,7 +12,7 @@ New canonical routes:
 - https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation
 - https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026
 
-The existing https://roboskin.ai/guides/tactile-foundation-models route keeps ownership of foundation-model and reusable-representation intent. The new guide owns action-conditioned visual-tactile prediction, contact and slip state, rollout generation, planning, and world-model evaluation intent.
+The foundation-model and reusable-representation intent now belongs to https://roboskin.ai/tactile-foundation-models; the former `/guides/tactile-foundation-models` URL permanently redirects there. The world-model guide owns action-conditioned visual-tactile prediction, contact and slip state, rollout generation, planning, and world-model evaluation intent.
 
 ## Baseline
 

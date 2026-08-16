@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
@@ -9,9 +10,10 @@ import { buildSeoTopicGraph } from '@/lib/seo-topic';
 
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
+  children?: ReactNode;
 };
 
-export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
+export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
@@ -192,6 +194,8 @@ export default function SeoTopicArticle({ page }: SeoTopicArticleProps) {
             </aside>
           </div>
         </section>
+
+        {children}
 
         {paperBriefs.length ? (
           <section className="deferred-section pb-14 md:pb-20">

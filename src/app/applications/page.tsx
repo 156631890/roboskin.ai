@@ -48,7 +48,7 @@ const physicalAiUseCases = [
 const applicationTopicLinks = [
   {
     title: 'Humanoid robot skin',
-    href: '/applications/humanoid-robot-skin',
+    href: '/humanoid-robot-skin',
     summary: 'Hands, arms, and body surfaces where contact awareness matters.',
   },
   {

@@ -12,6 +12,7 @@ import {
   buildResearchArticlePageJsonLd,
   canonicalUrl,
 } from '@/lib/seo';
+import { getResearchTopicLinks } from '@/lib/topic-graph';
 
 type ResearchArticlePageProps = {
   params: Promise<{
@@ -88,6 +89,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
     .map((item) => item.post);
+  const topicLinks = getResearchTopicLinks(post);
 
   return (
     <>
@@ -113,6 +115,15 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             <div className="article-topics">
               {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
+            <nav aria-label="Research topic path" className="mt-6 flex flex-wrap items-center gap-2 text-xs">
+              <span className="font-mono uppercase tracking-[0.12em] text-[#8e98a8]">Research topic path</span>
+              {topicLinks.map((link, index) => (
+                <span key={link.href} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? '/' : '→'}</span>
+                  <Link href={link.href} className="font-semibold text-[#ffd5c5] hover:text-white">{link.label}</Link>
+                </span>
+              ))}
+            </nav>
           </header>
 
           <figure className="article-cover">

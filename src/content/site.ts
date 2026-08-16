@@ -169,9 +169,9 @@ export type PageVisual = {
 export const site = {
   name: 'RoboSkin.ai',
   url: 'https://roboskin.ai',
-  tagline: 'Robot skin, humanoid robotics, tactile AI, and Physical AI research hub',
+  tagline: 'Robot Skin, Tactile AI & Physical AI Intelligence',
   description:
-    'A public research hub for robot skin, tactile AI, humanoid robots, Physical AI, robot manipulation, e-skin, and contact-aware robotics.',
+    'An independent research and intelligence platform mapping robot skin, tactile sensing, tactile AI, robot manipulation, humanoid touch, and Physical AI.',
   editorial: {
     name: 'RoboSkin.ai Editorial Team',
     path: '/editorial-policy',
@@ -209,6 +209,17 @@ export const primaryNavigation = [
 
 export const footerNavigation = [
   {
+    title: 'Core topics',
+    links: [
+      { href: '/robot-skin', label: 'Robot Skin' },
+      { href: '/tactile-ai', label: 'Tactile AI' },
+      { href: '/humanoid-robot-skin', label: 'Humanoid Robot Skin' },
+      { href: '/physical-ai-touch', label: 'Physical AI + Touch' },
+      { href: '/tactile-foundation-models', label: 'Foundation Models' },
+      { href: '/datasets', label: 'Tactile Datasets' },
+    ],
+  },
+  {
     title: 'Research map',
     links: [
       { href: '/research-index', label: 'Research Index' },
@@ -227,7 +238,7 @@ export const footerNavigation = [
       { href: '/about', label: 'About' },
       { href: '/faq', label: 'FAQ' },
       { href: '/contact', label: 'Contact' },
-      { href: '/guides/tactile-datasets-robot-learning', label: 'Datasets' },
+      { href: '/datasets', label: 'Datasets' },
       { href: '/research', label: 'Research' },
       { href: '/editorial-policy', label: 'Editorial policy' },
       { href: '/glossary', label: 'Glossary' },
@@ -245,12 +256,51 @@ export const homeStats = [
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
 
+export const homeKnowledgeMap: ContentTile[] = [
+  {
+    title: 'Robot Skin',
+    description: 'Technologies, sensing principles, surface architectures, e-skin relationships, and research routes.',
+    href: '/robot-skin',
+    ctaLabel: 'Map the sensing surface',
+  },
+  {
+    title: 'Tactile AI',
+    description: 'The complete path from calibrated touch data to representations, models, robot control, and evidence.',
+    href: '/tactile-ai',
+    ctaLabel: 'Explore tactile intelligence',
+  },
+  {
+    title: 'Humanoid Robot Skin',
+    description: 'Full-hand, whole-arm, and whole-body tactile sensing for manipulation, interaction, and contact awareness.',
+    href: '/humanoid-robot-skin',
+    ctaLabel: 'Open the humanoid stack',
+  },
+  {
+    title: 'Tactile Models',
+    description: 'Representation learning, tactile foundation models, visuo-tactile world models, policies, and transfer limits.',
+    href: '/tactile-foundation-models',
+    ctaLabel: 'Compare emerging models',
+  },
+  {
+    title: 'Datasets & Benchmarks',
+    description: 'A filterable, source-reviewed database of tactile robotics data, sensors, robots, tasks, formats, and licenses.',
+    href: '/datasets',
+    ctaLabel: 'Filter tactile datasets',
+  },
+  {
+    title: 'Physical AI + Touch',
+    description: 'How vision, language, proprioception, and touch combine in embodied perception, planning, and control.',
+    href: '/physical-ai-touch',
+    ctaLabel: 'Connect touch to Physical AI',
+  },
+];
+
 export const homeBroadResearchLanes: ContentTile[] = [
   {
     title: 'Humanoid robots and robot hands',
     description:
       'Track tactile coverage, dexterous hands, grasp stability, slip, and contact feedback for humanoid robot manipulation.',
-    href: '/applications/humanoid-robot-skin',
+    href: '/humanoid-robot-skin',
     ctaLabel: 'Explore humanoid robot skin',
   },
   {
@@ -441,7 +491,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       },
       {
         label: 'Map Physical AI touch data',
-        href: '/guides/physical-ai-touch-data',
+        href: '/physical-ai-touch',
         description: 'A guide to contact data for grasping, safety, evaluation, and robot learning workflows.',
       },
     ],
@@ -462,12 +512,12 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       },
       {
         label: 'Browse tactile datasets for robot learning',
-        href: '/guides/tactile-datasets-robot-learning',
+        href: '/datasets',
         description: 'A 2026 directory covering contact sequences, split leakage, signals, tasks, and transfer limits.',
       },
       {
         label: 'Compare tactile foundation models',
-        href: '/guides/tactile-foundation-models',
+        href: '/tactile-foundation-models',
         description: 'A source-bounded comparison of representations, world models, policies, and tactile control systems.',
       },
       {
@@ -563,7 +613,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       },
       {
         label: 'Review humanoid robot skin',
-        href: '/applications/humanoid-robot-skin',
+        href: '/humanoid-robot-skin',
         description: 'A targeted application page for humanoid robot hands, arms, contact sensing, and tactile feedback.',
       },
       {
@@ -573,7 +623,7 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       },
       {
         label: 'Open the tactile dataset directory',
-        href: '/guides/tactile-datasets-robot-learning',
+        href: '/datasets',
         description: 'Compare public touch-data resources, splits, task fit, and transfer limits.',
       },
     ],

@@ -7,8 +7,8 @@ const read = (path) => readFile(new URL(path, root), 'utf8');
 
 const paths = {
   benchmark: '/guides/tactile-sensor-benchmark-robot-manipulation',
-  datasets: '/guides/tactile-datasets-robot-learning',
-  models: '/guides/tactile-foundation-models',
+  datasets: '/datasets',
+  models: '/tactile-foundation-models',
   worldModels: '/guides/visuo-tactile-world-models-robot-manipulation',
 };
 
@@ -21,8 +21,8 @@ test('tactile benchmark, dataset, foundation-model, and world-model guides form 
     read('public/llms.txt'),
     read('docs/seo/keyword-query-matrix.md'),
     read('src/app/guides/tactile-sensor-benchmark-robot-manipulation/page.tsx'),
-    read('src/app/guides/tactile-datasets-robot-learning/page.tsx'),
-    read('src/app/guides/tactile-foundation-models/page.tsx'),
+    read('src/app/datasets/page.tsx'),
+    read('src/app/tactile-foundation-models/page.tsx'),
     read('src/app/guides/visuo-tactile-world-models-robot-manipulation/page.tsx'),
   ]);
 
@@ -34,8 +34,8 @@ test('tactile benchmark, dataset, foundation-model, and world-model guides form 
   }
 
   assert.match(benchmarkRoute, /getSeoTopicPage\('\/guides\/tactile-sensor-benchmark-robot-manipulation'\)/);
-  assert.match(datasetsRoute, /getSeoTopicPage\('\/guides\/tactile-datasets-robot-learning'\)/);
-  assert.match(modelsRoute, /getSeoTopicPage\('\/guides\/tactile-foundation-models'\)/);
+  assert.match(datasetsRoute, /getSeoTopicPage\('\/datasets'\)/);
+  assert.match(modelsRoute, /getSeoTopicPage\('\/tactile-foundation-models'\)/);
   assert.match(worldModelsRoute, /getSeoTopicPage\('\/guides\/visuo-tactile-world-models-robot-manipulation'\)/);
 
   assert.match(topics, /TacO tactile sensor benchmark preprint/);

@@ -25,6 +25,26 @@
   ],
   "redirects": [
     {
+      "source": "/applications/humanoid-robot-skin",
+      "destination": "https://roboskin.ai/humanoid-robot-skin",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tactile-foundation-models",
+      "destination": "https://roboskin.ai/tactile-foundation-models",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tactile-datasets-robot-learning",
+      "destination": "https://roboskin.ai/datasets",
+      "permanent": true
+    },
+    {
+      "source": "/guides/physical-ai-touch-data",
+      "destination": "https://roboskin.ai/physical-ai-touch",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {

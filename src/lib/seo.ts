@@ -3,6 +3,7 @@ import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
 import type { ResearchIndexEntry } from '@/lib/research-index';
+import type { TactileDatasetEntry } from '@/lib/tactile-datasets';
 
 export type SeoRoute = {
   path: string;
@@ -610,7 +611,7 @@ export function buildHomePhysicalAiRoutesJsonLd() {
     },
     {
       name: 'Physical AI touch data',
-      url: canonicalUrl('/guides/physical-ai-touch-data'),
+      url: canonicalUrl('/physical-ai-touch'),
       description: 'Guide route for contact data, tactile logs, and touch signals used by Physical AI systems.',
     },
     {
@@ -624,8 +625,18 @@ export function buildHomePhysicalAiRoutesJsonLd() {
       description: 'Definition route for turning robot touch signals into useful behavior and evaluation data.',
     },
     {
+      name: 'Tactile robotics datasets',
+      url: canonicalUrl('/datasets'),
+      description: 'Filter tactile datasets by sensor, robot, task, modality, and year with source-reviewed access and license fields.',
+    },
+    {
+      name: 'Tactile foundation models',
+      url: canonicalUrl('/tactile-foundation-models'),
+      description: 'Compare tactile representations, world models, policies, and transfer evidence.',
+    },
+    {
       name: 'Humanoid robot skin',
-      url: canonicalUrl('/applications/humanoid-robot-skin'),
+      url: canonicalUrl('/humanoid-robot-skin'),
       description: 'Application route for humanoid robots, dexterous hands, tactile coverage, slip, and contact feedback.',
     },
     {
@@ -762,6 +773,54 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         })),
       },
       buildEditorialTeamJsonLd(),
+    ],
+  };
+}
+
+export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
+  const pageUrl = canonicalUrl('/datasets');
+  const datasetNodes = entries.map((entry) => ({
+    '@type': 'Dataset',
+    '@id': `${pageUrl}#dataset-${entry.id}`,
+    name: entry.name,
+    description: `${entry.sampleCount}. Tasks: ${entry.tasks.join(', ')}. ${entry.availability}`,
+    url: entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl,
+    creator: entry.institution.map((name) => ({ '@type': 'Organization', name })),
+    dateModified: entry.sourceReviewed,
+    measurementTechnique: entry.sensor,
+    variableMeasured: entry.modalities,
+    keywords: entry.tasks,
+    citation: entry.paperUrl,
+    conditionsOfAccess: entry.availability,
+    ...(entry.licenseUrl ? { license: entry.licenseUrl } : {}),
+    ...(entry.datasetUrl ? { isAccessibleForFree: true } : {}),
+    includedInDataCatalog: {
+      '@id': `${pageUrl}#catalog`,
+    },
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'DataCatalog',
+        '@id': `${pageUrl}#catalog`,
+        name: 'RoboSkin.ai Tactile Robotics Dataset Directory',
+        description: 'A source-reviewed directory of tactile and visuo-tactile datasets for robot learning, manipulation, and representation research.',
+        url: pageUrl,
+        dataset: datasetNodes.map((entry) => ({ '@id': entry['@id'] })),
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${pageUrl}#dataset-list`,
+        numberOfItems: entries.length,
+        itemListElement: datasetNodes.map((entry, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: { '@id': entry['@id'] },
+        })),
+      },
+      ...datasetNodes,
     ],
   };
 }

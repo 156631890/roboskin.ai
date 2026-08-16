@@ -59,7 +59,7 @@ The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-m
 
 ## Engineering implications
 
-World-model quality depends on the data contract beneath it. Visual frames, tactile samples, robot state, and actions need a coherent clock. Contact and slip labels need definitions that survive changes in object, gripper, sensor placement, and surface condition. The [tactile dataset directory](/guides/tactile-datasets-robot-learning) explains why trajectory-level splits matter for this kind of sequential data.
+World-model quality depends on the data contract beneath it. Visual frames, tactile samples, robot state, and actions need a coherent clock. Contact and slip labels need definitions that survive changes in object, gripper, sensor placement, and surface condition. The [tactile dataset directory](/datasets) explains why trajectory-level splits matter for this kind of sequential data.
 
 Prediction also does not replace reaction. A planner can choose among imagined action sequences, but the deployed robot still needs measured touch and a fast feedback loop when the real contact diverges from the forecast. The [robot hand tactile sensor guide](/applications/robot-hand-tactile-sensor) maps that requirement to fingertip, palm, and whole-hand coverage.
 
@@ -129,13 +129,13 @@ HT-Bench evaluates the representation layer, not whether one tactile sensor is u
 
 The scale of HT-Bench makes data organization as important as model architecture. Millions of adjacent frames can still be highly correlated, so teams need task-level and trajectory-level splits that prevent similar contact sequences from appearing in both training and evaluation. Sensor identity, hand geometry, calibration, and task boundaries must stay visible in the metadata.
 
-The benchmark also reinforces why full-hand tactile sensing is different from a fingertip demonstration. Palm and finger contacts create a distributed observation whose geometry depends on the hand pose, object pose, and contact sequence. The [tactile dataset directory](/guides/tactile-datasets-robot-learning) explains how to preserve those collection units, while the [tactile sensor benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation) separates representation evidence from hardware-selection evidence.
+The benchmark also reinforces why full-hand tactile sensing is different from a fingertip demonstration. Palm and finger contacts create a distributed observation whose geometry depends on the hand pose, object pose, and contact sequence. The [tactile dataset directory](/datasets) explains how to preserve those collection units, while the [tactile sensor benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation) separates representation evidence from hardware-selection evidence.
 
 ## What this means for humanoid and dexterous hands
 
 Egocentric vision and full-hand touch are complementary. Vision supplies object and scene context, while tactile sensing records contact hidden by the hand itself. A representation benchmark should test both alignment and independence: touch should agree with visible context when appropriate but still carry useful information when vision is occluded.
 
-For teams evaluating humanoid hands, HT-Bench provides a research checklist rather than a procurement score. Compare it with the [humanoid robot skin guide](/applications/humanoid-robot-skin) to map benchmark tasks onto coverage, routing, synchronization, replacement, and robot-control constraints.
+For teams evaluating humanoid hands, HT-Bench provides a research checklist rather than a procurement score. Compare it with the [humanoid robot skin guide](/humanoid-robot-skin) to map benchmark tasks onto coverage, routing, synchronization, replacement, and robot-control constraints.
 
 ## What this does not prove yet
 

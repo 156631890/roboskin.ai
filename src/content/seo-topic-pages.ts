@@ -41,7 +41,7 @@ export type SeoTopicPage = {
 export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/robot-skin',
-    title: 'What Is Robot Skin? Tactile AI Surface Guide',
+    title: 'Robot Skin: Technologies, Sensors & Research',
     description:
       'Robot skin is a tactile sensing surface for robots. Learn how robot skin relates to tactile AI, e-skin, humanoid hands, grippers, and contact-aware robotics.',
     h1: 'What is robot skin?',
@@ -135,18 +135,18 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-ai',
-    title: 'Tactile AI: Touch Data for Physical AI and Robots',
+    title: 'Tactile AI: Models, Datasets & Robotics Research',
     description:
-      'Tactile AI turns robot touch signals into useful behavior. Learn the tactile AI stack for robot skin, slip detection, contact-aware control, and Physical AI.',
+      'Tactile AI turns robot touch signals into perception, learned representations, and action. Explore models, datasets, benchmarks, robot platforms, and Physical AI research.',
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-07-21',
-    priority: 0.86,
+    updated: '2026-08-16',
+    priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
-    keywords: ['tactile AI', 'Physical AI tactile feedback', 'tactile representation learning', 'contact-aware robotics', 'tactile robot control'],
+    keywords: ['tactile AI', 'tactile intelligence', 'tactile perception', 'tactile learning', 'touch intelligence', 'tactile representation learning', 'multimodal tactile AI', 'robot tactile sensing'],
     quickAnswer: [
       'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior.',
       'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for Physical AI systems.',
@@ -180,6 +180,72 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Useful validation includes sensor drift, response time, synchronization with joint state, robustness after mounting, and whether the tactile signal improves a real robot behavior.',
         ],
       },
+      {
+        heading: 'Tactile sensing and tactile AI are different layers',
+        body: [
+          'Tactile sensing is the measurement layer. Tactile AI is the larger perception-and-action system that turns those measurements into a representation, prediction, decision, or controller input. Keeping the boundary clear prevents a sensitive sensor demo from being described as an intelligent robot system without task evidence.',
+        ],
+        table: {
+          headers: ['Layer', 'Primary job', 'Typical output', 'Evidence question'],
+          rows: [
+            ['Robot skin or tactile sensor', 'Measure physical contact at a surface.', 'Pressure map, force vector, slip event, vibration, temperature, or tactile image.', 'What is directly measured, at what rate, geometry, calibration, and repeatability?'],
+            ['Signal and representation', 'Condition, synchronize, map, and encode raw touch.', 'Calibrated frames, events, tokens, contact graphs, or learned embeddings.', 'Does the representation preserve the contact information required by the task?'],
+            ['Tactile model', 'Infer properties, predict contact futures, or select actions.', 'Class, latent state, future tactile observation, subgoal, or policy action.', 'Does it transfer across held-out objects, tasks, sensors, or robot embodiments?'],
+            ['Robot control and evaluation', 'Use touch to change behavior or verify an outcome.', 'Grip correction, trajectory change, recovery event, task result, or replayable log.', 'What improves over vision-only or no-touch baselines on the real robot?'],
+          ],
+        },
+      },
+      {
+        heading: 'How tactile data becomes robot action',
+        body: [
+          'The operational chain is contact → sensing → calibrated and timestamped data → tactile representation → model inference → controller or policy → robot action → measured outcome. Each transition has a contract: units, coordinate frame, sampling rate, latency, uncertainty, and failure behavior.',
+          'A robust system keeps measured values separate from inferred values. For example, a pressure array may measure taxel response while a model estimates slip risk; the controller then decides whether to increase grip, regrasp, slow the motion, or stop. Logging all three levels makes the result auditable.',
+        ],
+        bullets: [
+          'Synchronize touch with vision, proprioception, commands, and task phase',
+          'Register fingertips, palms, arms, or skin patches to robot coordinates',
+          'Expose uncertainty and latency, not only a clean contact visualization',
+          'Measure whether the tactile pathway changes manipulation or safety behavior',
+        ],
+      },
+      {
+        heading: 'Relationship with VLA models, world models, and Physical AI',
+        body: [
+          'A vision-language-action model can provide semantic task context and propose actions, while tactile feedback supplies local physical evidence after contact. A tactile or visuo-tactile world model instead predicts how contact state may evolve under a candidate action. These roles can be combined, but a VLA label does not prove high-frequency touch control and a plausible world-model rollout does not prove safe execution.',
+          'Physical AI is the broader embodied system: vision observes the scene, language represents goals and knowledge, proprioception describes the robot body, and touch grounds the interaction at the contact surface. Tactile AI is the part of that system responsible for interpreting and using touch.',
+        ],
+      },
+      {
+        heading: 'Current tactile AI research landscape',
+        body: [
+          'The systems below solve different parts of the stack and should not be collapsed into one leaderboard. The source status and hardware contract matter as much as a reported metric.',
+        ],
+        table: {
+          headers: ['Research asset', 'Tactile AI role', 'Primary evidence', 'Boundary'],
+          rows: [
+            ['Sparsh-X', 'Self-supervised multisensory touch representation across image, audio, motion, and pressure.', 'Approximately 1M Digit 360 interactions plus physical-property and manipulation evaluations.', 'A 2025 preprint tied to its sensor, data, downstream tasks, and baselines.'],
+            ['HT-Bench / HandTouch', 'Full-hand tactile representation benchmark and vector-quantized visuo-tactile encoder.', '10M RGB frames, 7.8M tactile frames, 226 tasks, and four evaluation tracks.', 'A 2026 preprint; it does not claim a universal benchmark across every sensor or embodiment.'],
+            ['TouchWorld', 'Predictive tactile subgoals plus fast reactive tactile correction around higher-level planning.', 'Six source-reported dexterous manipulation tasks in clean and perturbed settings.', 'A 2026 preprint; reported success remains protocol-specific.'],
+            ['Dream-Tac and FeelWorld', 'Action-conditioned prediction of future tactile or contact state for planning.', 'Source-reported contact-rich manipulation and planning experiments.', 'Prediction quality and task success are not universal hardware-transfer evidence.'],
+            ['EmArm', 'Whole-arm skin, proprioception, perception, and contact-aware control in one sensorimotor loop.', 'Peer-reviewed whole-arm localization, intent, manipulation, and replanning demonstrations.', 'One integrated platform does not establish identical performance on all humanoid surfaces.'],
+          ],
+        },
+      },
+      {
+        heading: 'Research entities, datasets, benchmarks, and robot platforms',
+        body: [
+          'RoboSkin.ai tracks entities through their public research assets instead of presenting a vendor ranking. This keeps company, laboratory, sensor, and robot relationships traceable to primary sources.',
+        ],
+        table: {
+          headers: ['Institution or group', 'Public asset', 'Sensor or robot context', 'Why it belongs in the map'],
+          rows: [
+            ['FAIR at Meta, University of Washington, and Carnegie Mellon University', 'Sparsh-X', 'Digit 360; insertion and in-hand rotation research', 'Multisensory representation learning and downstream manipulation.'],
+            ['TU Dresden, ScaDS.AI, and LASR Lab', 'RCT dataset and benchmark', 'Three DIGIT sensors on a robot collection rig', 'Contact-sequence and held-out-material evaluation.'],
+            ['ShanghaiTech University and InstAdapt', 'TactiDex', 'Whole-hand tactile glove; bimanual Franka Inspire deployment', 'Human-to-robot tactile skill transfer and benchmark structure.'],
+            ['OpenDriveLab research consortium', 'FreeTacMan', 'Wearable collection hardware; Piper and Franka interfaces', 'Scalable visuo-tactile demonstrations and policy-learning data.'],
+          ],
+        },
+      },
     ],
     faqs: [
       {
@@ -200,21 +266,29 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why contact data matters after vision is occluded.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why contact data matters after vision is occluded.' },
       { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'How tactile feedback loops support Physical AI systems.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'A hand-level tactile AI application.' },
-      { label: 'Humanoid robot skin', href: '/applications/humanoid-robot-skin', description: 'Where tactile AI appears in humanoid hands and surfaces.' },
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Where tactile AI appears in humanoid hands and surfaces.' },
       { label: 'Technology context', href: '/technology', description: 'Existing stack explanation for tactile sensing layers.' },
-      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and transfer limits.' },
-      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Compare training resources, splits, signals, and transfer limits.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction and robot planning evidence.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
       { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
+      { label: 'HT-Bench full-hand tactile representation benchmark', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'TouchWorld predictive and reactive tactile foundation model', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/html/2606.08737v1' },
       { label: 'MiTaS tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
+      { label: 'Nature Sensors EmArm whole-arm tactile sensing article', href: 'https://www.nature.com/articles/s44460-026-00097-1' },
+      { label: 'RCT official dataset and benchmark project', href: 'https://faerber-lab.github.io/RCT/' },
+      { label: 'TactiDex official project page', href: 'https://tactidex.github.io/' },
+      { label: 'FreeTacMan official project page', href: 'https://opendrivelab.com/FreeTacMan' },
+      { label: 'Tactile Robotics: An Outlook', href: 'https://arxiv.org/abs/2508.11261' },
     ],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },
   {
     path: '/e-skin',
@@ -295,19 +369,19 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
-    path: '/applications/humanoid-robot-skin',
-    title: 'Humanoid Robot Skin for Hands, Arms, and Contact-Aware Robots',
+    path: '/humanoid-robot-skin',
+    title: 'Humanoid Robot Skin & Whole-Body Tactile Sensing',
     description:
-      'Humanoid robot skin helps robot hands and body surfaces detect contact. Learn use cases, tactile signals, evaluation questions, and related research routes.',
-    h1: 'Humanoid robot skin',
+      'Humanoid robot skin brings tactile sensing to hands, arms, and body surfaces. Map the whole-body tactile stack, safety boundaries, sensors, datasets, and research.',
+    h1: 'Humanoid robot skin and whole-body tactile sensing',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
-    updated: '2026-08-05',
-    priority: 0.82,
+    updated: '2026-08-16',
+    priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['humanoid robot skin', 'distributed humanoid touch', 'humanoid tactile sensing', 'robot body contact sensing', 'dexterous robot hands'],
+    keywords: ['humanoid robot skin', 'humanoid tactile sensing', 'humanoid tactile sensors', 'whole-body tactile sensing', 'whole body tactile sensing', 'robot safety skin', 'distributed humanoid touch', 'dexterous robot hands'],
     quickAnswer: [
       'Humanoid robot skin is tactile sensing applied to hands, palms, arms, or other humanoid robot surfaces where contact awareness matters.',
       'The strongest use cases are dexterous manipulation, grasp stability, handovers, safety contact, and research evaluation for Physical AI.',
@@ -335,6 +409,25 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        heading: 'The complete humanoid tactile stack',
+        body: [
+          'A humanoid tactile system is a chain, not a sheet of sensing material. Contact must survive mechanical coupling, sensor readout, signal conditioning, representation learning, and control before it can improve safety or manipulation.',
+        ],
+        table: {
+          headers: ['Stage', 'System responsibility', 'Failure to test'],
+          rows: [
+            ['Physical contact', 'Define the object, body zone, direction, duration, and disturbance.', 'Bench presses may not represent sliding, impact, multi-contact, or human interaction.'],
+            ['Robot skin', 'Conform to fingers, palms, arms, joints, or body panels while remaining serviceable.', 'Flat-sample performance may collapse after wrapping, stretching, wear, or replacement.'],
+            ['Tactile sensor', 'Measure pressure, force, shear, slip, vibration, temperature, proximity, or contact geometry.', 'A modality name does not establish range, resolution, repeatability, or crosstalk.'],
+            ['Signal processing', 'Calibrate, filter, timestamp, compress, and diagnose sensor state.', 'Drift or timing error can look like contact change.'],
+            ['Tactile representation', 'Map distributed signals into robot coordinates, graphs, images, events, or learned features.', 'A model can learn sensor layout artifacts instead of transferable contact.'],
+            ['AI model', 'Infer contact state, predict outcomes, or propose actions.', 'Offline accuracy may not improve real-robot behavior.'],
+            ['Robot control', 'Change grip, motion, compliance, recovery, or stop behavior.', 'Latency can make an otherwise accurate signal unusable.'],
+            ['Safety or manipulation outcome', 'Measure the intended task result under repeated and disturbed trials.', 'A research demonstrator is not automatically a certified safety system.'],
+          ],
+        },
+      },
+      {
         heading: 'Whole-arm tactile sensing extends coverage beyond the hand',
         body: [
           'A July 2026 Nature Sensors article reports EmArm, a robotic arm that combines large-area soft tactile skins, proprioception, and a closed-loop perception-action framework. The authors report submillimetre tactile localization, real-time feature extraction, touch-based intention recognition, contact-rich manipulation, and tactile-driven trajectory replanning under visual occlusion and environmental disturbances.',
@@ -352,6 +445,20 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'The right question is not whether the skin detects touch in isolation. The useful question is whether it improves a humanoid task under realistic constraints.',
           'Evaluation should include grasp changes, handovers, occluded contact, repeated loading, surface wear, and synchronization with joint state or vision.',
+        ],
+      },
+      {
+        heading: 'Coverage should follow contact risk and task value',
+        body: [
+          'Whole-body tactile sensing does not require identical taxel density everywhere. Fingertips and palms may need high spatial and temporal detail for manipulation; forearms and upper arms may prioritize distributed collision localization; torso or shell panels may use lower-resolution contact events. Coverage, wiring, bandwidth, compute, replacement, and control value must be designed together.',
+          'The evidence base is still heterogeneous. Full-hand systems, modular full-body e-skin, and whole-arm skin each answer different questions, so the site keeps them as related entity types rather than implying one standard humanoid skin architecture.',
+        ],
+      },
+      {
+        heading: 'Robot safety skin is a claim boundary, not a material label',
+        body: [
+          'A skin can contribute contact information to a safety strategy, but safety depends on the complete sensing, diagnostics, controller, stopping behavior, mechanical system, operating mode, and validation process. A paper showing contact localization or trajectory replanning should not be rewritten as a certification claim.',
+          'For research comparison, report contact type, body coverage, latency, fault handling, repeated trials, disturbance conditions, and the exact robot response. For deployment, separate research evidence from any application-specific safety assessment.',
         ],
       },
     ],
@@ -376,7 +483,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot skin', href: '/robot-skin', description: 'Core definition for the surface layer.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How humanoid touch data becomes behavior.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-specific sensing for grasp stability and slip.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'How contact logs support Physical AI workflows.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'How contact logs support Physical AI workflows.' },
+      { label: 'Tactile robotics datasets', href: '/datasets', description: 'Compare full-hand and humanoid visual-tactile-action resources.' },
       { label: 'HT-Bench full-hand tactile benchmark', href: '/research/ht-bench-full-hand-tactile-representations-2026', description: 'Evaluate learned full-hand touch representations with egocentric vision.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'Source-backed full-hand research analysis.' },
       { label: 'Applications overview', href: '/applications', description: 'Existing application route for category use cases.' },
@@ -455,7 +563,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
-      { label: 'Humanoid robot skin', href: '/applications/humanoid-robot-skin', description: 'How hand sensing fits broader humanoid surfaces.' },
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'How hand sensing fits broader humanoid surfaces.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How hand touch data becomes behavior.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'A source-backed research route for full-hand sensing.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Compare sensor evidence by manipulation task.' },
@@ -623,19 +731,19 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
-    path: '/guides/physical-ai-touch-data',
-    title: 'Physical AI Touch Data: Why Robots Need Tactile Signals',
+    path: '/physical-ai-touch',
+    title: 'Physical AI & Touch: Tactile Sensing for Embodied Systems',
     description:
-      'Physical AI touch data helps robots understand contact after vision is occluded. Learn how tactile signals support grasping, safety, evaluation, and robot learning.',
-    h1: 'Physical AI touch data',
+      'Touch grounds Physical AI in real contact. Learn how tactile sensing combines with vision, language, proprioception, world models, robot learning, and control.',
+    h1: 'Physical AI and touch',
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: '2026-07-21',
-    priority: 0.77,
+    updated: '2026-08-16',
+    priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'answers',
-    keywords: ['Physical AI touch data', 'robot touch data', 'tactile feedback for robots', 'contact-aware AI', 'tactile data for robot learning'],
+    keywords: ['Physical AI tactile sensing', 'Physical AI touch', 'tactile Physical AI', 'embodied tactile intelligence', 'Physical AI touch data', 'robot touch data', 'multimodal Physical AI'],
     quickAnswer: [
       'Physical AI touch data is contact information collected from robot surfaces during real interaction with objects, people, tools, or environments.',
       'It complements vision because the robot often needs feedback at the exact surface where contact happens, especially when the hand blocks the camera.',
@@ -682,6 +790,40 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Use: expose features for grasp control, safety checks, replay diagnostics, or learning systems',
         ],
       },
+      {
+        heading: 'The multimodal perception stack for Physical AI',
+        body: [
+          'Physical AI combines complementary channels rather than treating one sensor as sufficient. Vision describes visible geometry and motion, language encodes goals and semantic context, proprioception reports the robot body, and touch measures the contact that results when an action meets the world.',
+        ],
+        table: {
+          headers: ['Channel', 'Best evidence', 'Typical blind spot', 'Role after fusion'],
+          rows: [
+            ['Vision', 'Scene, object, pose, motion, and free-space geometry.', 'Occlusion and hidden contact state.', 'Approach planning, object context, and visible outcome.'],
+            ['Language', 'Task goals, instructions, concepts, and prior knowledge.', 'It does not directly measure the current physical interaction.', 'Semantic planning, task decomposition, and explanation.'],
+            ['Proprioception', 'Joint state, robot pose, velocity, and internal body configuration.', 'It may not localize or characterize surface contact.', 'Embodiment state, control, and coordinate alignment.'],
+            ['Touch', 'Local pressure, force, shear, slip, vibration, temperature, deformation, or contact geometry.', 'It is local, hardware-specific, and calibration-dependent.', 'Contact grounding, correction, recovery, and task verification.'],
+          ],
+        },
+      },
+      {
+        heading: 'Touch in VLA models and world models',
+        body: [
+          'A VLA policy can connect visual observations and language goals to robot actions, but touch may require a faster feedback pathway than semantic planning. TouchWorld, for example, separates higher-level planning and tactile subgoal prediction from high-frequency tactile residual correction. That architecture is one research result, not a universal prescription.',
+          'Visuo-tactile world models predict possible visual and contact futures under candidate actions. Their value must be tested twice: whether the predicted tactile state is physically informative, and whether using that prediction improves planning or control on the real robot. Offline image similarity alone is not a Physical AI benchmark.',
+        ],
+      },
+      {
+        heading: 'Minimum evidence for embodied tactile intelligence',
+        body: [
+          'A credible Physical AI touch claim should identify the measured signals, robot and sensor, data alignment, model role, control rate, baseline, task outcome, and transfer boundary. The most useful ablation compares vision-only, touch-only where meaningful, fused input, and no-feedback or reactive baselines under the same task protocol.',
+        ],
+        bullets: [
+          'Held-out objects, surfaces, tasks, sensors, or embodiments matched to the transfer claim',
+          'Latency from contact to controller-usable feature and robot response',
+          'Failures under occlusion, slip, misalignment, force mismatch, and external disturbance',
+          'Replayable logs that preserve observation, action, prediction, measured touch, and outcome',
+        ],
+      },
     ],
     faqs: [
       {
@@ -705,13 +847,17 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'The contact-feedback loop that turns touch data into robot action.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'A concrete hand-level source of touch data.' },
-      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Compare robot touch datasets, splits, task fit, and transfer limits.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Compare robot touch datasets, splits, task fit, and transfer limits.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Track representations, world models, policies, and transfer claims.' },
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Map touch across hands, arms, and humanoid surfaces.' },
       { label: 'Technology context', href: '/technology', description: 'Existing RoboSkin.ai technology overview.' },
     ],
     sources: [
       { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
       { label: 'FreeTacMan visuo-tactile data collection preprint', href: 'https://arxiv.org/html/2506.01941v1' },
       { label: 'ROS 2 Kilted documentation', href: 'https://docs.ros.org/en/kilted/Releases.html' },
+      { label: 'TouchWorld tactile foundation model preprint', href: 'https://arxiv.org/abs/2607.07287' },
+      { label: 'FeelWorld visuo-tactile world model preprint', href: 'https://arxiv.org/abs/2607.24267' },
     ],
   },
   {
@@ -949,7 +1095,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     relatedLinks: [
       { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Selection criteria for robot tactile sensors.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The broader surface system.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for robot learning.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why touch data matters for robot learning.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Data and replay workflow for touch signals.' },
     ],
     sources: [
@@ -1112,7 +1258,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Why touch data matters for Physical AI workflows.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why touch data matters for Physical AI workflows.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that uses robot touch signals.' },
       { label: 'ROS 2 pipeline brief', href: '/research/ros2-kilted-tactile-pipeline-2026', description: 'Source-backed ROS 2 tactile pipeline article.' },
       { label: 'Technology context', href: '/technology', description: 'Existing site-level technology overview.' },
@@ -1484,7 +1630,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Physical AI explainer', href: '/physics-ai', description: 'Canonical RoboSkin.ai Physical AI route.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Adjacent guide focused on touch data handling.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'The pillar page for touch data in Physical AI.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Surface-level contact sensing route.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become behavior.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Software pipeline and replay context.' },
@@ -1626,8 +1772,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'HT-Bench research brief', href: '/research/ht-bench-full-hand-tactile-representations-2026', description: 'Review the full-hand tactile representation benchmark and its transfer limits.' },
-      { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare dataset scope, splits, signals, and transfer limits.' },
-      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare representation, world-model, and policy roles.' },
+      { label: 'Tactile datasets for robot learning', href: '/datasets', description: 'Compare dataset scope, splits, signals, and transfer limits.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare representation, world-model, and policy roles.' },
       { label: 'Tactile sensor for robots', href: '/guides/tactile-sensor-for-robots', description: 'Component selection and integration criteria.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand coverage, contact, and manipulation context.' },
       { label: 'Slip detection for robot hands', href: '/guides/slip-detection-robot-hand', description: 'Evaluate slip signals and closed-loop response.' },
@@ -1641,20 +1787,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025'],
   },
   {
-    path: '/guides/tactile-datasets-robot-learning',
-    title: 'Tactile Datasets for Robot Learning: 2026 Directory',
+    path: '/datasets',
+    title: 'Tactile Robotics Datasets for Robot Learning',
     description:
       'Compare tactile datasets for robot learning by signals, collection unit, split design, task fit, access evidence, and transfer limits.',
     h1: 'Tactile datasets for robot learning',
     kicker: '2026 dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-08-05',
-    priority: 0.85,
+    updated: '2026-08-16',
+    priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'resources',
-    keywords: ['tactile datasets', 'tactile dataset robot learning', 'visuo-tactile dataset', 'robot touch dataset', 'tactile manipulation dataset'],
+    keywords: ['tactile dataset robotics', 'robot tactile dataset', 'visuo-tactile dataset', 'tactile manipulation dataset', 'tactile datasets for robot learning', 'tactile benchmark robotics'],
     quickAnswer: [
       'A useful tactile dataset is defined by more than frame count. Check the physical collection event, sensor and robot state alignment, object and task diversity, split unit, access terms, and downstream evaluation.',
       'Contact sequences matter because adjacent tactile frames from the same press or trajectory are strongly related. Random frame splits can leak near-duplicate contact evidence into both training and test sets.',
@@ -1743,10 +1889,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
-      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'See how tactile resources support representations, prediction, and control.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'See how tactile resources support representations, prediction, and control.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'See how aligned trajectories support prediction, rollouts, and planning.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Connect data quality to task-level sensor evidence.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Map contact events, timestamps, robot state, and actions.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Map contact events, timestamps, robot state, and actions.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Build replayable tactile logs and aligned robot data.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the sensing-to-behavior stack.' },
       { label: 'Research index', href: '/research-index', description: 'Browse source-backed tactile research records.' },
@@ -1764,20 +1910,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
-    path: '/guides/tactile-foundation-models',
-    title: 'Tactile Foundation Models for Robotics Compared',
+    path: '/tactile-foundation-models',
+    title: 'Tactile Foundation Models for Robotics',
     description:
       'Compare tactile foundation models and related robot-learning systems by representation, prediction, policy role, evidence, and transfer limits.',
     h1: 'Tactile foundation models for robotics compared',
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: '2026-08-15',
-    priority: 0.86,
+    updated: '2026-08-16',
+    priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['tactile foundation models', 'tactile AI model', 'tactile representation model', 'robot touch representation', 'tactile robot learning'],
+    keywords: ['tactile foundation model', 'tactile AI model', 'multimodal tactile model', 'visuo-tactile model', 'tactile representation learning', 'robot touch representation'],
     quickAnswer: [
       'Tactile foundation model is not one fixed architecture. Current systems may learn reusable touch representations, predict future tactile observations, combine vision-language planning with tactile control, or adapt heterogeneous sensor streams for imitation learning.',
       'Sparsh-X, Dream-Tac, TouchWorld, and MiTaS address different layers of the tactile AI stack. Their metrics are not a direct leaderboard because the sensors, tasks, training data, baselines, and outputs differ.',
@@ -1860,11 +2006,11 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction, planning, and rollout evidence.' },
-      { label: 'Tactile datasets for robot learning', href: '/guides/tactile-datasets-robot-learning', description: 'Compare training resources, splits, signals, and access evidence.' },
+      { label: 'Tactile datasets for robot learning', href: '/datasets', description: 'Compare training resources, splits, signals, and access evidence.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Evaluate the hardware and task layer beneath learned models.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'Read the source-bounded summary of the 2026 preprint.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Map sensors, data, models, control, and validation.' },
-      { label: 'Physical AI touch data', href: '/guides/physical-ai-touch-data', description: 'Define replayable contact data for embodied systems.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Define replayable contact data for embodied systems.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Connect models to fingertip, palm, and whole-hand sensing.' },
     ],
     sources: [
@@ -1986,10 +2132,10 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'FeelWorld research brief', href: '/research/feelworld-visuo-tactile-world-model-2026', description: 'Review hierarchical contact, tactile-state, slip, and planning evidence.' },
-      { label: 'Tactile foundation models', href: '/guides/tactile-foundation-models', description: 'Compare representations, policies, world-model roles, and transfer claims.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare representations, policies, world-model roles, and transfer claims.' },
       { label: 'Dream-Tac research brief', href: '/research/dream-tac-tactile-world-action-model-2026', description: 'Read the action-conditioned tactile-future analysis.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'See how predictive planning and fast tactile correction are separated.' },
-      { label: 'Tactile datasets', href: '/guides/tactile-datasets-robot-learning', description: 'Evaluate trajectories, sequence splits, signals, and transfer limits.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Evaluate trajectories, sequence splits, signals, and transfer limits.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Connect model inputs to fingertip, palm, and whole-hand sensing.' },
       { label: 'Research index', href: '/research-index', description: 'Browse structured source, evidence, modality, and limitation records.' },
     ],

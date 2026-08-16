@@ -85,14 +85,14 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopics, /path: '\/robot-skin'[\s\S]*href: '\/physics-ai'/);
   assert.match(seoTopics, /path: '\/robot-skin'[\s\S]*href: '\/guides\/robot-skin-vs-tactile-sensor'/);
   assert.match(seoTopics, /path: '\/tactile-ai'[\s\S]*href: '\/guides\/tactile-feedback-for-physical-ai'/);
-  assert.match(seoTopics, /path: '\/guides\/physical-ai-touch-data'[\s\S]*Touch data pipeline for embodied AI/);
-  assert.match(seoTopics, /path: '\/guides\/physical-ai-touch-data'[\s\S]*href: '\/guides\/tactile-feedback-for-physical-ai'/);
+  assert.match(seoTopics, /path: '\/physical-ai-touch'[\s\S]*Touch data pipeline for embodied AI/);
+  assert.match(seoTopics, /path: '\/physical-ai-touch'[\s\S]*href: '\/guides\/tactile-feedback-for-physical-ai'/);
   assert.match(seoTopics, /latency, synchronization, drift, repeatability, and task outcome/);
   assert.match(seoTopics, /modality, coverage, geometry, durability, and data interface/);
   assert.match(seoTopics, /contact event, timestamp, body frame, calibrated value, and robot action/);
   assert.match(robotSkinVsTactileSensorRoute, /getSeoTopicPage\('\/guides\/robot-skin-vs-tactile-sensor'\)/);
   assert.match(tactileFeedbackPhysicalAiRoute, /getSeoTopicPage\('\/guides\/tactile-feedback-for-physical-ai'\)/);
-  assert.match(research, /href: '\/guides\/physical-ai-touch-data'|href="\/guides\/physical-ai-touch-data"/);
+  assert.match(research, /href: '\/physical-ai-touch'|href="\/physical-ai-touch"/);
   assert.match(glossary, /href: '\/physics-ai'|href="\/physics-ai"/);
 
   assert.match(sitemap, /pageVisuals/);
@@ -116,7 +116,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(indexingSubmissionLog, /IndexNow readiness/);
   assert.match(indexingSubmissionLog, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(indexingSubmissionLog, /https:\/\/roboskin\.ai\/guides\/tactile-feedback-for-physical-ai/);
-  assert.match(indexingSubmissionLog, /https:\/\/roboskin\.ai\/guides\/physical-ai-touch-data/);
+  assert.match(indexingSubmissionLog, /https:\/\/roboskin\.ai\/physical-ai-touch/);
 
   assert.match(keywordQueryMatrix, /physical ai robot skin/i);
   assert.match(keywordQueryMatrix, /physical ai tactile feedback/i);
@@ -127,7 +127,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/physics-ai/);
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/robot-skin/);
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/tactile-ai/);
-  assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/guides\/physical-ai-touch-data/);
+  assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/physical-ai-touch/);
 
   assert.match(seo, /return `\$\{site\.url\}\$\{path === '\/' \? '\/' : path\}`/);
   assert.match(vercelConfig, /"type": "host"/);

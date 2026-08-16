@@ -99,11 +99,11 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/robot-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/tactile-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/e-skin | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/applications/humanoid-robot-skin | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/humanoid-robot-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/applications/robot-hand-tactile-sensor | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/applications/soft-robotic-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/flexible-tactile-sensor-array | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/guides/physical-ai-touch-data | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/physical-ai-touch | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/tactile-feedback-for-physical-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/robot-skin-vs-e-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/robot-skin-papers | Yes |  |  | Inspect URL, then request indexing if available |
@@ -114,8 +114,8 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/guides/slip-detection-robot-hand | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/ros2-tactile-sensing | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/guides/tactile-datasets-robot-learning | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/guides/tactile-foundation-models | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/datasets | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/tactile-foundation-models | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation | Yes |  |  | Inspect URL after deployment, then request indexing if available |
 | https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | Yes |  |  | Inspect URL, then request indexing if available |
@@ -145,14 +145,14 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/tactile-ai | tactile ai robot skin |  |  |  |  | Last 28 days | Tactile AI and robot skin workflow query |
 | https://roboskin.ai/e-skin | e-skin robotics |  |  |  |  | Last 28 days | Electronic skin query |
 | https://roboskin.ai/applications/robot-hand-tactile-sensor | robot hand tactile sensor |  |  |  |  | Last 28 days | Hand application query |
-| https://roboskin.ai/guides/physical-ai-touch-data | robot touch data |  |  |  |  | Last 28 days | Touch-data pipeline query |
-| https://roboskin.ai/applications/humanoid-robot-skin | humanoid robot skin tactile sensor |  |  |  |  | Last 28 days | Humanoid tactile-sensing application query |
+| https://roboskin.ai/physical-ai-touch | robot touch data |  |  |  |  | Last 28 days | Touch-data pipeline query |
+| https://roboskin.ai/humanoid-robot-skin | humanoid robot skin tactile sensor |  |  |  |  | Last 28 days | Humanoid tactile-sensing application query |
 | https://roboskin.ai/applications/robot-gripper-tactile-sensor | robot gripper tactile sensor |  |  |  |  | Last 28 days | Commercial application query |
 | https://roboskin.ai/guides/slip-detection-robot-hand | slip detection robot hand |  |  |  |  | Last 28 days | Manipulation-intent query |
 | https://roboskin.ai/guides/ros2-tactile-sensing | ROS 2 tactile sensing |  |  |  |  | Last 28 days | Software integration query |
 | https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation | tactile sensor benchmark |  |  |  |  | Last 28 days | Manipulation benchmark query |
-| https://roboskin.ai/guides/tactile-datasets-robot-learning | tactile datasets robot learning |  |  |  |  | Last 28 days | Dataset-directory query |
-| https://roboskin.ai/guides/tactile-foundation-models | tactile foundation models |  |  |  |  | Last 28 days | Model-comparison query |
+| https://roboskin.ai/datasets | tactile datasets robot learning |  |  |  |  | Last 28 days | Dataset-directory query |
+| https://roboskin.ai/tactile-foundation-models | tactile foundation models |  |  |  |  | Last 28 days | Model-comparison query |
 | https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation | visuo-tactile world models |  |  |  |  | Last 28 days | Action-conditioned world-model comparison query |
 | https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026 | FeelWorld tactile world model |  |  |  |  | Last 28 days | Latest-paper entity query |
 

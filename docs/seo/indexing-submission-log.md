@@ -18,7 +18,7 @@ Use the `roboskin.ai` Domain property when submitting `https://roboskin.ai/sitem
 | Robots sitemap directive | `https://roboskin.ai/robots.txt` | Verified | File includes `Sitemap: https://roboskin.ai/sitemap.xml` |
 | Sitemap Physical AI route | `https://roboskin.ai/sitemap.xml` | Verified | Sitemap includes `https://roboskin.ai/physics-ai` |
 | Sitemap tactile feedback guide | `https://roboskin.ai/sitemap.xml` | Verified | Sitemap includes `https://roboskin.ai/guides/tactile-feedback-for-physical-ai` |
-| Sitemap touch data guide | `https://roboskin.ai/sitemap.xml` | Verified | Sitemap includes `https://roboskin.ai/guides/physical-ai-touch-data` |
+| Sitemap touch data pillar | `https://roboskin.ai/sitemap.xml` | Pending post-deploy verification | Sitemap should include `https://roboskin.ai/physical-ai-touch` and exclude the redirected legacy guide URL. |
 
 ## Google URL Inspection queue
 
@@ -30,7 +30,7 @@ Request indexing in Google Search Console after the production checks above pass
 | 1 | `https://roboskin.ai/` | Homepage now exposes Physical AI, robot skin, tactile AI, and contact feedback route signals. | Pending manual URL Inspection |  |
 | 2 | `https://roboskin.ai/physics-ai` | Canonical Physical AI definition route. | Pending manual URL Inspection |  |
 | 3 | `https://roboskin.ai/guides/tactile-feedback-for-physical-ai` | Primary guide for Physical AI contact-feedback intent. | Pending manual URL Inspection |  |
-| 4 | `https://roboskin.ai/guides/physical-ai-touch-data` | Primary guide for Physical AI touch-data intent. | Pending manual URL Inspection |  |
+| 4 | `https://roboskin.ai/physical-ai-touch` | Primary pillar for Physical AI tactile-sensing and touch intent. | Pending manual URL Inspection |  |
 | 5 | `https://roboskin.ai/robot-skin` | Robot skin definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
 | 6 | `https://roboskin.ai/tactile-ai` | Tactile AI definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
 | 7 | `https://roboskin.ai/sitemap.xml` | Sitemap discovery for the full cluster. | Resubmitted successfully; Search Console reported 71 discovered pages. | 2026-08-05 |
@@ -45,7 +45,7 @@ Submit or refresh these in Bing Webmaster Tools after Google URL Inspection is q
 | 2 | `https://roboskin.ai/` | Submit URL. | Pending manual submission |  |
 | 3 | `https://roboskin.ai/physics-ai` | Submit URL. | Pending manual submission |  |
 | 4 | `https://roboskin.ai/guides/tactile-feedback-for-physical-ai` | Submit URL. | Pending manual submission |  |
-| 5 | `https://roboskin.ai/guides/physical-ai-touch-data` | Submit URL. | Pending manual submission |  |
+| 5 | `https://roboskin.ai/physical-ai-touch` | Submit URL. | Pending manual submission |  |
 
 ## IndexNow readiness
 

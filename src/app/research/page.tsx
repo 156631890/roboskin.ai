@@ -36,7 +36,7 @@ const researchRouteCards = [
     label: 'Touch data route',
     title: 'Contact logs make research reusable',
     text: 'Use the touch-data guide to connect tactile papers to contact events, timestamps, body frames, calibrated values, and robot actions.',
-    href: '/guides/physical-ai-touch-data',
+    href: '/physical-ai-touch',
     ctaLabel: 'Trace Physical AI touch data',
   },
 ];

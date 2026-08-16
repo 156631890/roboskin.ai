@@ -17,6 +17,7 @@ import {
   featuredIndustryAssets,
   homeBrandAssets,
   homeBroadResearchLanes,
+  homeKnowledgeMap,
   homePhysicalAiSignals,
   homeResearchWatch,
   homeStats,
@@ -128,6 +129,30 @@ export default function Home() {
                 <dt>{item.value}</dt>
                 <dd>{item.label}</dd>
               </dl>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="deferred-section border-y border-white/10 py-14 md:py-20" aria-labelledby="core-knowledge-map-heading">
+        <div className="container-shell">
+          <div className="mb-9 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+            <div>
+              <p className="brand-section-number">Field map / Core authority</p>
+              <h2 id="core-knowledge-map-heading" className="brand-section-title mt-5">Robot Skin → Tactile AI → Physical AI</h2>
+            </div>
+            <p className="section-copy lg:pt-10">
+              RoboSkin.ai maps the technologies, research, datasets, sensors, robot platforms, and AI models that power touch intelligence in robots. Start with a pillar, then follow its papers, datasets, benchmarks, and related entities.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {homeKnowledgeMap.map((item, index) => (
+              <article key={item.title} className="glass-card p-6">
+                <span className="font-mono text-xs font-semibold text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#c8d1de]">{item.description}</p>
+                {item.href && item.ctaLabel ? <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#ffd5c5] hover:text-white">{item.ctaLabel} →</Link> : null}
+              </article>
             ))}
           </div>
         </div>
@@ -281,7 +306,7 @@ export default function Home() {
                 <div className="mt-6 flex flex-wrap gap-4">
                   <Link href="/physics-ai" className="editorial-link">Read Physical AI →</Link>
                   <Link href="/guides/tactile-feedback-for-physical-ai" className="editorial-link">Map tactile feedback →</Link>
-                  <Link href="/guides/physical-ai-touch-data" className="editorial-link">Trace touch data →</Link>
+                  <Link href="/physical-ai-touch" className="editorial-link">Trace touch data →</Link>
                 </div>
               </div>
               <div className="border-t border-[#171714]/25">
