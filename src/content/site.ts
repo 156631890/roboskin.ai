@@ -240,7 +240,7 @@ export const footerNavigation = [
 
 export const homeStats = [
   { value: '19', label: 'Structured tactile and robot-learning research records' },
-  { value: '35', label: 'Source-backed research and robotics news briefs' },
+  { value: '37', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
@@ -316,16 +316,16 @@ export const homeBroadResearchLanes: ContentTile[] = [
 ];
 
 export const homeResearchWatch = {
-  eyebrow: 'August 2026 preprint watch',
-  title: 'PhyAI tests one inference runtime for VLA and world-action robot policies',
+  eyebrow: 'August 2026 robot skin watch',
+  title: 'Twisted-yarn textile skin exposes a pressure–proximity tradeoff',
   summary:
-    'PhyAI unifies model evaluation, cloud rollout, edge serving, and onboard deployment for Physical AI policies. The authors report 1.40x to 4.65x speedups over matched official implementation paths, while noting that comparisons are not fully precision-matched and specialized runtimes remain faster in some configurations.',
+    'A new preprint compares one-, two-, and four-layer textile capacitive sensors. Four layers produced the highest reported pressure sensitivity and mechanical strength, while proximity range fell from 60 mm for one layer to 40 mm for four layers.',
   relevance:
-    'For RoboSkin readers, the open question is how real-time tactile sensing, contact events, and robot-control deadlines fit the same end-to-end inference path.',
-  sourceLabel: 'Primary source: PhyAI on arXiv',
-  sourceUrl: 'https://arxiv.org/abs/2608.03682',
-  sourceDate: '2026-08-04',
-  reviewedAt: '2026-08-15',
+    'The result matters because robot-skin architecture must be selected for the task: stronger post-contact pressure response and longer pre-contact detection do not automatically come from the same geometry.',
+  sourceLabel: 'Primary source: twisted-yarn robot skin on arXiv',
+  sourceUrl: 'https://arxiv.org/abs/2608.14406',
+  sourceDate: '2026-08-14',
+  reviewedAt: '2026-08-18',
 };
 
 export const homeProofPoints: ContentTile[] = [

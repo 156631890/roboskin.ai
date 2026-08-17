@@ -47,7 +47,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-07-21',
+    updated: '2026-08-18',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -99,6 +99,13 @@ export const seoTopicPages: SeoTopicPage[] = [
           'RoboSkin.ai separates definitions, applications, technologies, comparisons, and research so readers can move directly to the level of detail they need.',
         ],
       },
+      {
+        heading: 'Latest evidence: textile architecture changes the sensing tradeoff',
+        body: [
+          'An August 2026 preprint comparing one-, two-, and four-layer twisted-yarn capacitive sensors shows why robot skin must be specified as a system. Increasing yarn-layer overlap improved the reported pressure sensitivity and tensile behavior, but proximity range decreased from 60 mm for one layer to 40 mm for four layers.',
+          'The result is not evidence for one universally superior geometry. It separates two task requirements: early approach detection before contact and stronger measurement after contact. The source is a small 4 × 4 research prototype, so whole-body scaling, abrasion, manufacturing yield, and field lifetime remain open questions.',
+        ],
+      },
     ],
     faqs: [
       {
@@ -126,11 +133,13 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Soft robotic skin', href: '/applications/soft-robotic-skin', description: 'Flexible robot skin for soft and curved surfaces.' },
       { label: 'Robot skin vs e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'A comparison page for overlapping terms.' },
       { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Research routes and source-backed briefs.' },
+      { label: 'Twisted-yarn textile robot skin', href: '/news/twisted-yarn-textile-capacitive-robot-skin-2026', description: 'August 2026 pressure, proximity, durability, and robot-integration evidence.' },
     ],
     sources: [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
       { label: 'Nature Communications GenForce article', href: 'https://www.nature.com/articles/s41467-026-68753-1' },
+      { label: 'Twisted-yarn textile capacitive robotic-skin preprint', href: 'https://arxiv.org/abs/2608.14406' },
     ],
   },
   {

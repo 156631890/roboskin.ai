@@ -34,6 +34,8 @@ test('news detail pages are crawlable source-backed article pages with structure
   assert.match(newsData, /touchworld-tactile-foundation-model-dexterous-manipulation-2026/);
   assert.match(newsData, /color-changing-mechanochromic-tactile-sensor-2026/);
   assert.match(newsData, /single-pixel-tactile-skin-compressive-sampling-2026/);
+  assert.match(newsData, /twisted-yarn-textile-capacitive-robot-skin-2026/);
+  assert.match(newsData, /https:\/\/arxiv\.org\/abs\/2608\.14406/);
   assert.match(newsData, /sourceTitle/);
   assert.match(newsData, /sourceUrl/);
   assert.match(newsData, /technicalFocus/);

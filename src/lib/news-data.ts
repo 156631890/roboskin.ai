@@ -29,6 +29,102 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'twisted-yarn-textile-capacitive-robot-skin-2026',
+    title: 'Twisted-yarn robot skin gains pressure sensitivity but loses proximity range',
+    seoTitle: 'Twisted-Yarn Robot Skin: Pressure vs Proximity',
+    seoDescription:
+      'A 2026 preprint tests layered textile capacitive robot skin, exposing a tradeoff between pressure sensitivity and proximity sensing range.',
+    excerpt:
+      'A new textile capacitive robot-skin study shows that adding twisted-yarn layers improves pressure sensitivity and strength while shortening proximity range.',
+    content: `# Twisted-yarn robot skin gains pressure sensitivity but loses proximity range
+
+**Research news brief — August 18, 2026**
+
+A preprint submitted on August 14 tests how yarn architecture changes the behavior of textile capacitive sensors for robotic skin. The researchers built one-, two-, and four-layer structures from silver-coated yarns insulated with polydimethylsiloxane (PDMS), then compared pressure, proximity, mechanical, cyclic, thermal, and robot-integration behavior.
+
+The most useful result is a design tradeoff. More twisted-yarn layers increased electrode overlap, pressure sensitivity, tensile strength, and elongation. The same change reduced the reported proximity range. A robot-skin designer therefore cannot assume that the architecture with the strongest contact signal is also the best non-contact sensor.
+
+## What the researchers changed
+
+The study holds the basic material system constant and changes the number of twisted yarn layers. The reported effective electrode-overlap area grows from 0.25 mm² in the one-layer structure to 1.0 mm² with two layers and 4.0 mm² with four layers. That makes the four-layer overlap 16 times the one-layer value.
+
+The paper evaluates applied stress from 0.4 to 3.9 MPa using the localized yarn-contact area. This normalization matters: those values should not be compared directly with pressure ranges calculated from a much larger indenter or skin-patch area.
+
+| Reported item | One layer | Two layers | Four layers |
+| --- | ---: | ---: | ---: |
+| Effective overlap area | 0.25 mm² | 1.0 mm² | 4.0 mm² |
+| Proximity range | 60 mm | 50 mm | 40 mm |
+| Elongation at break | 37.5% | 62.5% | 85.0% |
+| Maximum tensile load | 23.3 N | 42.7 N | 89.7 N |
+
+## Pressure sensitivity and response
+
+The four-layer configuration produced the highest reported pressure sensitivity: 0.1331 MPa⁻¹ at a 100 kHz excitation frequency. The authors attribute the improvement to the larger effective overlap area and stronger field interaction created by the layered twist.
+
+The sensor's step-load rise and recovery times were both about 0.9 seconds. The paper also shows reproducible response to periodic excitation up to 5 Hz, but that should not be interpreted as full settling within every 200-millisecond cycle. Detecting a repeated modulation and completing a step response are different tests.
+
+The four-layer device was cycled 15,000 times without the paper reporting substantial degradation. Tests from 25 to 90 °C produced no clear systematic drift in the reported setup. These are useful laboratory results, but they do not establish abrasion resistance, washability, connector lifetime, or long-duration performance on a moving robot.
+
+## Why proximity moves in the opposite direction
+
+In proximity mode, the human body acts as the approaching conductive object. The one-layer sensor detected approach at up to 60 mm, compared with 50 mm for two layers and 40 mm for four layers.
+
+The paper relates the shorter range to the more compact field distribution in thicker layered structures. The result gives robot-skin teams a concrete selection question: is the surface intended to detect an approaching person before contact, or to resolve pressure more strongly after contact? The answer may favor a different yarn architecture—or a hybrid surface—rather than one universal stack.
+
+## From one sensor to a robot-skin matrix
+
+The researchers assembled a 4 × 4 textile matrix with an active area of about 30 × 30 mm² and roughly 10 mm spacing between sensing points. They mounted the system on a Franka Emika Panda arm for three demonstrations:
+
+- mapping touch across the textile array;
+- triggering an evasive robot motion when proximity crossed a threshold; and
+- distinguishing a rigid gear contact from a human hand using threshold-based safety logic.
+
+The paper reports about 403 milliseconds of end-to-end reaction latency in the prototype. That value includes the demonstrated sensing and control path; it is not a universal response time for textile robot skin. The demonstrations use threshold rules rather than a learned tactile model, so this work belongs primarily to the robot-skin and signal-to-control layers—not yet to tactile foundation models.
+
+## What this adds to the tactile intelligence stack
+
+The study is valuable because it connects yarn geometry to two different sensing modes and then carries the design into a robot experiment. It makes the chain visible: textile architecture changes capacitance, capacitance produces pressure or proximity signals, and threshold logic turns those signals into robot behavior.
+
+For the broader system context, start with the [robot skin definition](/robot-skin), compare the [humanoid robot skin stack](/humanoid-robot-skin), and see how measured touch becomes inference and action in the [tactile AI guide](/tactile-ai). The [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array) explains scaling, wiring, calibration, and coverage tradeoffs.
+
+## Evidence limits
+
+This is an arXiv v1 preprint submitted to IEEE Transactions on Instrumentation and Measurement, not a final peer-reviewed journal article. The evidence comes from one research prototype and a small 4 × 4 matrix. The robot demonstrations show threshold-based behaviors, not learned generalization, certified safety, or whole-body humanoid deployment.
+
+The study also does not establish manufacturing yield across large textile surfaces, repeatable performance over complex curvature, resistance to abrasion and contamination, or transfer across users and environmental conditions. Those questions remain necessary before treating the design as a deployable safety skin.
+
+## Practical questions
+
+- Does adding yarn layers improve every sensing mode? No. It improved the reported pressure sensitivity and mechanical strength but reduced proximity range.
+- Is 5 Hz the same as a 200 ms response time? No. The paper reports detectable periodic response up to 5 Hz, while step rise and recovery were each about 0.9 seconds.
+- Does the robot demo use tactile AI? It uses contact and proximity signals in a robot-control loop, but the demonstrated decision logic is threshold-based rather than a learned model.
+- Is this full-body humanoid skin? No. It is a 4 × 4 textile prototype mounted on a Panda robot arm.
+
+## Source boundary
+
+This brief summarizes the authors' arXiv preprint and adds RoboSkin.ai analysis. All measurements belong to the reported experimental setup. The cover image is an editorial illustration, not a paper figure. RoboSkin.ai is not affiliated with the authors, their institutions, arXiv, or IEEE.
+
+## Source
+
+- [arXiv: Effect of Twisted-Yarn Architecture on Pressure and Proximity Sensing Characteristics of Textile Capacitive Sensors for Robotic Skin](https://arxiv.org/abs/2608.14406)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-18',
+    updated: '2026-08-18',
+    readTime: '7 min read',
+    category: 'Robot skin research',
+    image: '/generated/authority/news-textile-artificial-skin-2026.webp',
+    sourceTitle: 'Effect of Twisted-Yarn Architecture on Pressure and Proximity Sensing Characteristics of Textile Capacitive Sensors for Robotic Skin',
+    sourceUrl: 'https://arxiv.org/abs/2608.14406',
+    sources: [
+      {
+        title: 'arXiv: Twisted-yarn textile capacitive sensors for robotic skin',
+        url: 'https://arxiv.org/abs/2608.14406',
+      },
+    ],
+    technicalFocus: ['robot skin', 'textile capacitive sensor', 'pressure sensing', 'proximity sensing'],
+  },
+  {
     id: 'eit-pneumatic-hybrid-robot-skin-force-map-2026',
     title: 'Hybrid robot skin combines EIT location maps with pneumatic force sensing',
     seoTitle: 'Hybrid EIT–Pneumatic Robot Skin Reconstructs Force Maps',

@@ -54,6 +54,7 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## News Briefs
 
+- [Twisted-yarn robot skin gains pressure sensitivity but loses proximity range](https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026): August 2026 preprint brief comparing layered textile capacitive sensors, proximity range, pressure sensitivity, durability, and Panda robot-arm integration.
 - [Hybrid EIT–pneumatic robot skin for force-map reconstruction](https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026): 2026 preprint brief on large-area humanoid robot skin, EIT localization, pneumatic force calibration, reported sensitivity variation, and evidence limits.
 - [Self-powered textile artificial skin uses three channels for touch and robot control](https://roboskin.ai/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026): Nano Energy paper on minimal-channel touch localization, pressure sensing, and wearable robot-arm control.
 - [Underwater self-healing electronic skin combines touch, damage detection, and repair](https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026): NUS research on self-powered touch sensing, underwater damage detection, and self-repair for soft electronic skin.
