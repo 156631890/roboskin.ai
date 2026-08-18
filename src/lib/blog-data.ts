@@ -23,6 +23,111 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'tac4loco-plantar-tactile-humanoid-locomotion-2026',
+    title: 'Tac4Loco uses plantar pressure to adapt humanoid locomotion',
+    seoTitle: 'Tac4Loco Plantar Tactile Sensing for Humanoid Locomotion',
+    seoDescription:
+      'Tac4Loco feeds 60-point plantar pressure arrays into a Unitree G1 locomotion policy. Review its tactile representation, results, and evidence limits.',
+    excerpt:
+      'Tac4Loco turns bilateral plantar pressure maps into post-contact feedback for Unitree G1 locomotion on slopes, partial support, foam, and gravel.',
+    content: `# Tac4Loco uses plantar pressure to adapt humanoid locomotion
+
+**Updated technical brief - August 2026**
+
+Tac4Loco is an August 2026 preprint that feeds bilateral plantar pressure maps into a Unitree G1 locomotion policy. It maps simulated and physical foot-contact signals into shared ordinal levels, then learns spatial and temporal support features. The reported experiments cover slopes, partial support, foam, and gravel. The evidence remains specific to one preprint, robot platform, sensor layout, and evaluation protocol.
+
+## Source findings
+
+The paper treats foot contact as a distributed tactile observation rather than a binary contact flag or one summed force value. Each foot uses a 60-element force-sensitive-resistor insole digitized by a 12-bit ADC at 50 Hz. The hardware pads have a reported full scale of 2,000 g per element.
+
+Absolute force is not used as the policy interface. The authors fit an ADC-to-load map, then quantize simulated and physical readings into the same 31 ordinal levels. Loads from 0 to 1,000 g use 50 g steps; loads above 1,000 g and up to 2,000 g use 100 g steps. This preserves relative load topology while reducing sensitivity to element-specific response curves.
+
+The bilateral pressure maps feed two representation branches. A spatial branch uses a shared CNN tokenizer and state-conditioned attention to select relevant regions under the current motion state. A temporal branch compresses pressure and proprioceptive history into eight packets and models touchdown and load-transfer changes. Those features join proprioception and contact-conditioned terrain-orientation cues in an asymmetric actor-critic policy.
+
+| Layer | Reported implementation | Evidence question |
+| --- | --- | --- |
+| Physical sensing | 60 FSR elements per foot, 12-bit ADC, 50 Hz | Does the ordinal mapping remain stable across replacement insoles and longer wear? |
+| Shared representation | 31 load levels from simulated contact forces and calibrated hardware readings | How much physically useful force information is lost during quantization? |
+| Spatial encoding | Bilateral pressure grids, CNN tokens, state-conditioned attention | Does the policy use support topology rather than sensor-layout artifacts? |
+| Temporal encoding | Eight pressure-proprioception packets | Is the history long enough for delayed deformation or rapid impacts? |
+| Control | 29 residual joint-position targets at 50 Hz; low-level PD loops at 200 Hz | How do sensing, inference, and actuator latency combine during a recovery? |
+
+## Reported simulation evidence
+
+Training and simulation evaluation use MJLab with a Unitree G1 model. Each simulated foot has 60 spherical contact geometries aligned to the physical taxel locations. None of the compared policies receives visual perception, which keeps the experiment focused on plantar feedback and proprioception.
+
+The paper compares Tac4Loco with an official open-source Unitree proprioceptive locomotion baseline trained under the same reward configuration. The strongest reported survival differences occur on random support-height terrain and slopes.
+
+| Simulation terrain | Proprioception-only survival | Tac4Loco survival | Important boundary |
+| --- | ---: | ---: | --- |
+| Random support height | 71.7% | 96.5% | Pooled simulation episodes under the authors' terrain and command protocol. |
+| Slopes | 22.0% | 77.9% | Yaw-velocity error was worse for Tac4Loco on this terrain despite higher survival. |
+| V-shaped trench | 100.0% | 100.0% | Equal survival; Tac4Loco mainly improved linear and yaw tracking in the reported table. |
+| Flat ground | 100.0% | 100.0% | The difference is tracking quality, not survival. |
+
+Tac4Loco also reduced the reported drift angle on flat, gently undulating, and random support-height terrain. The ablations attribute different roles to the two components: the terrain-orientation feature helps with continuous slopes, while the pressure encoder contributes more under localized, asymmetric, and changing support.
+
+## Real-robot evidence on Unitree G1
+
+The physical deployment uses bilateral pressure insoles and runs both the locomotion controller and pressure measurements at 50 Hz. Training includes pressure gain changes, hysteresis, timing distortion, noise, and temporary dropouts; deployment uses calibrated physical measurements without those synthetic perturbations.
+
+| Physical configuration | Proprioception-only completion | Tac4Loco completion |
+| --- | ---: | ---: |
+| 9° ramp edge | 7/10 | 10/10 |
+| Lateral 9° ascent | 1/10 | 8/10 |
+| 15° ascent to 9° descent | 0/10 | 10/10 |
+| 9° V-trench | Not evaluated | 10/10 |
+| Flat ground to foam | 0/10 | 7/10 |
+| Ramp to foam | 4/10 | 10/10 |
+
+The paper defines physical completion more strictly than simulation survival: the robot must traverse the prescribed terrain without falling. The proprioception-only baseline was not tested on the physical V-trench because it did not sustain forward progress on that terrain during curriculum training.
+
+Foam and gravel were absent from simulation training and are therefore described as zero-shot physical deployments. Only the foam transitions receive completion counts in the main comparison table. The gravel-road result is a qualitative demonstration, so it should not be converted into a numerical generalization claim.
+
+## RoboSkin analysis
+
+Tac4Loco expands the humanoid tactile stack beyond hands, palms, and protective body surfaces. The foot is also robot skin: it measures the support that actually exists after touchdown, including partial, asymmetric, compliant, or shifting contact that proprioception only observes indirectly.
+
+The architecture also clarifies the difference between exteroception and tactile feedback. Vision or a terrain map can anticipate a foothold before contact. Plantar pressure verifies what happened after the foot landed. Tac4Loco evaluates the post-contact pathway without vision; the authors identify future visual integration as the next step rather than claiming pressure replaces terrain preview.
+
+The broader [humanoid robot skin guide](/humanoid-robot-skin) maps this result into body coverage and control. The [tactile AI guide](/tactile-ai) explains how sensor data becomes a learned representation and policy input. For multimodal system design, compare the post-contact signal with the vision, proprioception, and touch roles in [Physical AI and touch](/physical-ai-touch).
+
+## Engineering implications
+
+Plantar tactile sensing needs a deployment contract. The sensor layout must align between simulation and hardware; readings need timing and calibration rules; damaged or replaced insoles need a stable representation; and the policy must expose what happens when measurements drop out. Ordinal encoding is one answer to element heterogeneity, but it trades calibrated magnitude for relative support structure.
+
+The real tests also show why metrics must stay separate. Survival, traversal completion, velocity tracking, drift angle, and qualitative terrain demonstrations answer different questions. A robot can remain upright while drifting away from the commanded direction, or complete a terrain without providing a calibrated estimate of ground reaction force.
+
+## What this does not prove yet
+
+Tac4Loco is an arXiv v1 preprint, not an independently replicated or peer-reviewed deployment result. The physical comparisons generally use ten trials per configuration on one Unitree G1 with one bilateral insole design. They do not establish transfer to other humanoids, foot geometries, sensor technologies, payloads, speeds, or long-duration field conditions.
+
+The paper states that code and experiment configurations will be released, but the paper did not link a dedicated Tac4Loco repository when this brief was reviewed. The experiments do not report long-term insole wear, replacement calibration, contamination, temperature effects, or failure after repeated impacts. The term zero-shot is limited to the paper's unseen foam and gravel conditions and does not mean arbitrary-terrain generalization.
+
+## Evaluation checklist
+
+- Report the taxel layout, sampling rate, ADC resolution, calibration, and replacement procedure.
+- Keep absolute force measurements separate from ordinal load levels used by the policy.
+- Compare survival, completion, tracking error, drift, and recovery as distinct outcomes.
+- Test sensor dropout, element failure, insole wear, and delayed or stale pressure frames.
+- Evaluate new robots, foot geometries, terrain materials, speeds, commands, and payloads.
+- Combine terrain anticipation with post-contact plantar feedback instead of treating them as substitutes.
+
+## Source
+
+[arXiv: Tac4Loco - Learning Spatiotemporal Plantar Pressure Representations for Humanoid Locomotion](https://arxiv.org/abs/2608.15766)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-18',
+    updated: '2026-08-18',
+    readTime: '8 min read',
+    category: 'Humanoid tactile sensing',
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    sourceTitle: 'Tac4Loco plantar pressure humanoid locomotion preprint',
+    sourceUrl: 'https://arxiv.org/abs/2608.15766',
+    technicalFocus: ['Tac4Loco', 'plantar pressure sensing', 'humanoid locomotion', 'Unitree G1', 'tactile AI'],
+  },
+  {
     id: 'feelworld-visuo-tactile-world-model-2026',
     title: 'FeelWorld predicts contact, tactile force states, and slip for robot planning',
     seoTitle: 'FeelWorld Visuo-Tactile World Model for Robot Planning',

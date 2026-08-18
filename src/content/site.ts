@@ -240,7 +240,7 @@ export const footerNavigation = [
 
 export const homeStats = [
   { value: '19', label: 'Structured tactile and robot-learning research records' },
-  { value: '37', label: 'Source-backed research and robotics news briefs' },
+  { value: '38', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
@@ -316,15 +316,15 @@ export const homeBroadResearchLanes: ContentTile[] = [
 ];
 
 export const homeResearchWatch = {
-  eyebrow: 'August 2026 robot skin watch',
-  title: 'Twisted-yarn textile skin exposes a pressure–proximity tradeoff',
+  eyebrow: 'August 2026 humanoid tactile watch',
+  title: 'Tac4Loco turns plantar pressure into post-contact locomotion feedback',
   summary:
-    'A new preprint compares one-, two-, and four-layer textile capacitive sensors. Four layers produced the highest reported pressure sensitivity and mechanical strength, while proximity range fell from 60 mm for one layer to 40 mm for four layers.',
+    'A new preprint equips a Unitree G1 with 60-element pressure insoles on each foot and feeds spatial and temporal load patterns into a locomotion policy. In the reported physical comparisons, Tac4Loco completed a ramp-to-foam transition in 10 of 10 trials versus 4 of 10 for the proprioception-only baseline.',
   relevance:
-    'The result matters because robot-skin architecture must be selected for the task: stronger post-contact pressure response and longer pre-contact detection do not automatically come from the same geometry.',
-  sourceLabel: 'Primary source: twisted-yarn robot skin on arXiv',
-  sourceUrl: 'https://arxiv.org/abs/2608.14406',
-  sourceDate: '2026-08-14',
+    'The result expands humanoid robot skin beyond hands and arms: foot pressure verifies partial, asymmetric, or compliant support after touchdown, while vision remains the complementary pre-contact channel.',
+  sourceLabel: 'Primary source: Tac4Loco on arXiv',
+  sourceUrl: 'https://arxiv.org/abs/2608.15766',
+  sourceDate: '2026-08-16',
   reviewedAt: '2026-08-18',
 };
 

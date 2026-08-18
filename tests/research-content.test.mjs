@@ -36,6 +36,7 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /Dream-Tac/i);
   assert.match(blogData, /MiTaS/i);
   assert.match(blogData, /Sparsh-X/i);
+  assert.match(blogData, /Tac4Loco uses plantar pressure to adapt humanoid locomotion/i);
 
   assert.match(blogData, /https:\/\/www\.cam\.ac\.uk\/research\/news\/graphene-based-artificial-skin/);
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s42256-025-01053-3/);
@@ -57,6 +58,7 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.08737v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.06281v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.14754v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/abs\/2608\.15766/);
   assert.match(blogData, /Updated technical brief - May 2026/);
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);

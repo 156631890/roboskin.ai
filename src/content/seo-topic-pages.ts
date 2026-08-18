@@ -150,7 +150,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-08-16',
+    updated: '2026-08-18',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -180,6 +180,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Humanoid robots and dexterous hands operate in contact-rich settings. Vision can guide the robot toward an object, but a hand often blocks the camera once grasping begins.',
           'Touch data can reveal whether an object is seated correctly, sliding, deforming, or being squeezed too hard. That information matters for household tasks, warehouse handling, prosthetics, assistive devices, and research platforms.',
+          'Touch is not limited to the hand. Plantar pressure arrays can expose the support realized beneath a humanoid foot after touchdown, giving a locomotion policy spatial evidence about partial, asymmetric, compliant, or shifting contact.',
         ],
       },
       {
@@ -236,6 +237,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['HT-Bench / HandTouch', 'Full-hand tactile representation benchmark and vector-quantized visuo-tactile encoder.', '10M RGB frames, 7.8M tactile frames, 226 tasks, and four evaluation tracks.', 'A 2026 preprint; it does not claim a universal benchmark across every sensor or embodiment.'],
             ['TouchWorld', 'Predictive tactile subgoals plus fast reactive tactile correction around higher-level planning.', 'Six source-reported dexterous manipulation tasks in clean and perturbed settings.', 'A 2026 preprint; reported success remains protocol-specific.'],
             ['Dream-Tac and FeelWorld', 'Action-conditioned prediction of future tactile or contact state for planning.', 'Source-reported contact-rich manipulation and planning experiments.', 'Prediction quality and task success are not universal hardware-transfer evidence.'],
+            ['Tac4Loco', 'Spatiotemporal plantar pressure representation for post-contact humanoid locomotion feedback.', 'Unitree G1 simulation and physical comparisons across rigid, inclined, partial, compliant, and granular support.', 'A 2026 preprint on one robot and bilateral FSR insole layout; the gravel result is qualitative.'],
             ['EmArm', 'Whole-arm skin, proprioception, perception, and contact-aware control in one sensorimotor loop.', 'Peer-reviewed whole-arm localization, intent, manipulation, and replanning demonstrations.', 'One integrated platform does not establish identical performance on all humanoid surfaces.'],
           ],
         },
@@ -252,6 +254,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['TU Dresden, ScaDS.AI, and LASR Lab', 'RCT dataset and benchmark', 'Three DIGIT sensors on a robot collection rig', 'Contact-sequence and held-out-material evaluation.'],
             ['ShanghaiTech University and InstAdapt', 'TactiDex', 'Whole-hand tactile glove; bimanual Franka Inspire deployment', 'Human-to-robot tactile skill transfer and benchmark structure.'],
             ['OpenDriveLab research consortium', 'FreeTacMan', 'Wearable collection hardware; Piper and Franka interfaces', 'Scalable visuo-tactile demonstrations and policy-learning data.'],
+            ['HKUST (Guangzhou), University of Hong Kong, and Nanyang Technological University', 'Tac4Loco', 'Unitree G1 with 60-element FSR insole per foot', 'Post-contact support topology and temporal load transfer for humanoid locomotion.'],
           ],
         },
       },
@@ -283,6 +286,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile datasets', href: '/datasets', description: 'Compare training resources, splits, signals, and transfer limits.' },
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction and robot planning evidence.' },
+      { label: 'Tac4Loco plantar tactile locomotion', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'How bilateral foot-pressure maps become post-contact humanoid control evidence.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
@@ -295,9 +299,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'RCT official dataset and benchmark project', href: 'https://faerber-lab.github.io/RCT/' },
       { label: 'TactiDex official project page', href: 'https://tactidex.github.io/' },
       { label: 'FreeTacMan official project page', href: 'https://opendrivelab.com/FreeTacMan' },
+      { label: 'Tac4Loco plantar pressure humanoid locomotion preprint', href: 'https://arxiv.org/abs/2608.15766' },
       { label: 'Tactile Robotics: An Outlook', href: 'https://arxiv.org/abs/2508.11261' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
+    paperBriefIds: ['tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },
   {
     path: '/e-skin',
@@ -385,15 +390,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Humanoid robot skin and whole-body tactile sensing',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
-    updated: '2026-08-16',
+    updated: '2026-08-18',
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['humanoid robot skin', 'humanoid tactile sensing', 'humanoid tactile sensors', 'whole-body tactile sensing', 'whole body tactile sensing', 'robot safety skin', 'distributed humanoid touch', 'dexterous robot hands'],
+    keywords: ['humanoid robot skin', 'humanoid tactile sensing', 'humanoid tactile sensors', 'whole-body tactile sensing', 'whole body tactile sensing', 'robot safety skin', 'distributed humanoid touch', 'dexterous robot hands', 'plantar tactile sensing', 'humanoid foot pressure sensor'],
     quickAnswer: [
-      'Humanoid robot skin is tactile sensing applied to hands, palms, arms, or other humanoid robot surfaces where contact awareness matters.',
-      'The strongest use cases are dexterous manipulation, grasp stability, handovers, safety contact, and research evaluation for Physical AI.',
+      'Humanoid robot skin is tactile sensing applied to hands, palms, arms, feet, or other humanoid robot surfaces where contact awareness matters.',
+      'The strongest use cases include dexterous manipulation, grasp stability, handovers, safety contact, plantar support, and research evaluation for Physical AI.',
       'A humanoid skin system must handle curved geometry, moving joints, cable routing, calibration, and synchronization with robot state.',
     ],
     sections: [
@@ -450,6 +455,19 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        heading: 'Plantar tactile sensing verifies support after touchdown',
+        body: [
+          'Tac4Loco extends humanoid tactile sensing to the feet. The August 2026 preprint maps 60 FSR measurements per foot into shared ordinal pressure levels, learns spatial and temporal support features, and supplies those features to a Unitree G1 locomotion policy at 50 Hz.',
+          'The reported physical comparisons include ramp edges, lateral ascent, slope transitions, a V-shaped trench, foam, and gravel. This is post-contact evidence: the insoles reveal the support realized after touchdown. They do not preview terrain, replace vision, or establish arbitrary-terrain generalization. The results remain tied to one preprint, robot, sensor layout, and small physical trial sets.',
+        ],
+        bullets: [
+          'Map foot-pressure topology instead of collapsing contact into one total force value',
+          'Synchronize bilateral pressure, proprioception, policy inference, and low-level motor control',
+          'Test partial support, asymmetry, compliance, transitions, and sensor dropout separately',
+          'Keep completion, survival, tracking, drift, and qualitative terrain evidence as distinct metrics',
+        ],
+      },
+      {
         heading: 'How to evaluate a humanoid robot skin claim',
         body: [
           'The right question is not whether the skin detects touch in isolation. The useful question is whether it improves a humanoid task under realistic constraints.',
@@ -495,6 +513,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'How contact logs support Physical AI workflows.' },
       { label: 'Tactile robotics datasets', href: '/datasets', description: 'Compare full-hand and humanoid visual-tactile-action resources.' },
       { label: 'HT-Bench full-hand tactile benchmark', href: '/research/ht-bench-full-hand-tactile-representations-2026', description: 'Evaluate learned full-hand touch representations with egocentric vision.' },
+      { label: 'Tac4Loco plantar tactile locomotion', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'Unitree G1 foot-pressure feedback for support adaptation after touchdown.' },
       { label: 'Full-hand tactile sensing brief', href: '/research/full-hand-tactile-sensing-2025', description: 'Source-backed full-hand research analysis.' },
       { label: 'Applications overview', href: '/applications', description: 'Existing application route for category use cases.' },
     ],
@@ -502,9 +521,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'Nature Sensors EmArm whole-arm tactile sensing article', href: 'https://www.nature.com/articles/s44460-026-00097-1' },
       { label: 'Humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/html/2510.25725v2' },
+      { label: 'Tac4Loco plantar pressure humanoid locomotion preprint', href: 'https://arxiv.org/abs/2608.15766' },
       { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 'humanoid-visual-tactile-action-dataset-2025'],
+    paperBriefIds: ['tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
     path: '/applications/robot-hand-tactile-sensor',

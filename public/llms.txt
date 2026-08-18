@@ -36,6 +36,7 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## Research Briefs
 
+- [Tac4Loco plantar tactile sensing for humanoid locomotion](https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026): Source-bounded analysis of 60-element pressure insoles per foot, spatiotemporal support representations, Unitree G1 simulation and physical evidence, and zero-shot limits.
 - [FeelWorld visuo-tactile world model for robot planning](https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026): Research brief on predicted contact, force-related tactile state, slip, visual futures, and source-reported planning evidence.
 - [HT-Bench full-hand tactile benchmark for robot manipulation](https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026): Research brief on 10M RGB frames, 7.8M full-hand tactile frames, representation learning, and transfer limits across 226 tasks.
 - [Graphene liquid-metal 3D force sensing](https://roboskin.ai/research/graphene-liquid-metal-3d-force-2026): Research brief for tactile force and slip-relevant sensing.

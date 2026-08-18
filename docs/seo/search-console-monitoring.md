@@ -129,6 +129,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/research/genforce-transferable-force-sensing-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026 | Yes |  |  | Inspect URL after deployment, then request indexing if available |
 | https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026 | Yes | No at inspection | 2026-08-05 | Indexing requested successfully; monitor recrawl and coverage |
+| https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | Yes |  |  | Inspect after deployment; monitor plantar tactile sensing and humanoid locomotion queries |
 | https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/mitas-multi-resolution-tactile-imitation-learning-2026 | Yes |  |  | Inspect URL, then request indexing if available |
@@ -155,6 +156,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/tactile-foundation-models | tactile foundation models |  |  |  |  | Last 28 days | Model-comparison query |
 | https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation | visuo-tactile world models |  |  |  |  | Last 28 days | Action-conditioned world-model comparison query |
 | https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026 | FeelWorld tactile world model |  |  |  |  | Last 28 days | Latest-paper entity query |
+| https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | Tac4Loco, plantar tactile sensing, humanoid locomotion |  |  |  |  | Last 28 days | Foot-pressure tactile AI and humanoid locomotion entity query |
 
 ## GSC high-impression low-click pages
 

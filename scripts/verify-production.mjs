@@ -184,7 +184,7 @@ const rssLinks = [...rss.matchAll(/<link>([^<]+)<\/link>/g)].map((match) => matc
 const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
 const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
 if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) throw new Error('RSS has an invalid envelope');
-if (rssItems.length !== 37 || rssLinks.length !== 38 || rssGuids.length !== 37) throw new Error('RSS does not contain 37 complete items');
+if (rssItems.length !== 38 || rssLinks.length !== 39 || rssGuids.length !== 38) throw new Error('RSS does not contain 38 complete items');
 if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) throw new Error('RSS contains a non-apex URL');
 if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) throw new Error('News sitemap has an invalid envelope');
 if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) throw new Error('News sitemap is missing the Google News namespace');
@@ -241,4 +241,4 @@ const report = {
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 19 data records, and 37 RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 19 data records, and 38 RSS items`);

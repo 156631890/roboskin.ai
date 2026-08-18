@@ -102,6 +102,10 @@ test('GSC-visible research pages use search-intent titles and snippets', async (
 
   const expectedSignals = [
     [
+      "title: 'Tac4Loco uses plantar pressure to adapt humanoid locomotion'",
+      "Tac4Loco turns bilateral plantar pressure maps into post-contact feedback for Unitree G1 locomotion on slopes, partial support, foam, and gravel.",
+    ],
+    [
       "title: 'FeelWorld predicts contact, tactile force states, and slip for robot planning'",
       "FeelWorld adds explicit contact, force-related tactile, and slip prediction to a visual world model for contact-rich robot planning.",
     ],
@@ -150,6 +154,7 @@ test('answer-engine and monitoring files expose updated GSC-visible research and
   const expectedRoutes = [
     'https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026',
     'https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026',
+    'https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026',
     'https://roboskin.ai/news/underwater-self-healing-electronic-skin-nus-2026',
     'https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     'https://roboskin.ai/news/color-changing-mechanochromic-tactile-sensor-2026',
@@ -257,6 +262,7 @@ test('priority research schema images match each article subject', async () => {
     '/generated/authority/roboskin-index-cover.webp',
     '/generated/authority/research-soft-robotic-skin.webp',
     '/generated/authority/research-ros2-tactile-pipeline.webp',
+    '/generated/authority/humanoid-stack-map-cover.webp',
   ];
 
   for (const image of expectedImages) {
@@ -267,6 +273,7 @@ test('priority research schema images match each article subject', async () => {
 test('each audited priority article has explicit evidence boundaries and bounded internal links', async () => {
   const blogData = await read('src/lib/blog-data.ts');
   const priorityIds = [
+    'tac4loco-plantar-tactile-humanoid-locomotion-2026',
     'feelworld-visuo-tactile-world-model-2026',
     'dream-tac-tactile-world-action-model-2026',
     'single-material-soft-robotic-skin-2025',
