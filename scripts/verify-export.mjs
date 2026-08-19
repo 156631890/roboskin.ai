@@ -107,7 +107,7 @@ for (const absoluteUrl of noindexUrls) {
   if (!/<meta name="robots" content="noindex, follow"/i.test(html)) failures.push(`${pathname}: missing noindex, follow metadata`);
 }
 
-for (const file of ['sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'feed.xml', 'deployment.json']) {
+for (const file of ['sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'feed.xml', 'deployment.json', 'llms-full.txt']) {
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
 
@@ -164,10 +164,20 @@ if (failures.length === 0) {
   if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) failures.push('/news-sitemap.xml: invalid XML envelope');
   if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) failures.push('/news-sitemap.xml: missing news namespace');
   if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) failures.push('/news-sitemap.xml: non-apex URL found');
+
+  const llmsFull = await readFile(path.join(out, 'llms-full.txt'), 'utf8');
+  const requiredLlmsRoutes = ['/robot-skin', '/tactile-ai', '/physical-ai-touch', '/datasets', '/benchmarks', '/sensors', '/research-index'];
+  if (!llmsFull.startsWith('# RoboSkin.ai Full Knowledge')) failures.push('/llms-full.txt: invalid title');
+  if (llmsFull.length < 20000) failures.push('/llms-full.txt: generated knowledge snapshot is unexpectedly small');
+  if (requiredLlmsRoutes.some((route) => !llmsFull.includes(canonicalFor(route)))) failures.push('/llms-full.txt: missing canonical knowledge routes');
+  if (!llmsFull.includes('- Dataset records: 12') || !llmsFull.includes('- Benchmark records: 9') || !llmsFull.includes('- Sensor records: 13')) {
+    failures.push('/llms-full.txt: structured directory counts are incomplete');
+  }
+  if (/www\.roboskin\.ai|\.vercel\.app/.test(llmsFull)) failures.push('/llms-full.txt: non-apex URL found');
 }
 
 if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 19 data records, and 38 RSS items`);
+console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, full LLM knowledge, 19 data records, and 38 RSS items`);

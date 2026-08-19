@@ -8,6 +8,13 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 - [RoboSkin homepage](https://roboskin.ai/): Broad research-map entry for robot skin, tactile AI, humanoid robots, robot hands, Physical AI, embodied AI, robot manipulation, and visuo-tactile world models.
 
+## Machine-Readable Knowledge
+
+- [RoboSkin.ai full knowledge file](https://roboskin.ai/llms-full.txt): Expanded generated snapshot containing canonical topic content, glossary definitions, dataset records, benchmark protocols, sensor evidence, research-index records, research briefs, news briefs, and primary-source links.
+- [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
+- [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
+- [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.
+
 ## Important Pages
 
 - [Robot skin definition](https://roboskin.ai/robot-skin): Canonical definition for robot skin, robotic skin, and tactile sensing surfaces.

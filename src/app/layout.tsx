@@ -59,6 +59,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="alternate" type="application/rss+xml" title="RoboSkin.ai Research and News" href="/feed.xml" />
+        <link rel="describedby" type="text/markdown" href="/llms.txt" />
         <meta name="theme-color" content="#11110f" />
       </head>
       <body
