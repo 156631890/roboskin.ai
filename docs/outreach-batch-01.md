@@ -89,7 +89,9 @@ contact@roboskin.ai
 - Recipient: markallinson@roboticsandautomationnews.com
 - Verified route: https://roboticsandautomationnews.com/about/contact/
 - Fit: Mark Allinson is listed as an editor; the outlet covers humanoids, automation, and robotics engineering.
-- Status: Sent 2026-08-16 from `messigoat147@gmail.com`
+- Status: Published 2026-08-19; verified editorial link to `https://roboskin.ai/`
+- Result: https://roboticsandautomationnews.com/2026/08/19/researchers-combine-eit-and-pneumatic-sensing-for-humanoid-robot-skin/104274/
+- Link audit: Body copy links the natural anchor `RoboSkin` to the homepage with `rel="noopener"`; no `nofollow`, `sponsored`, or `ugc` attribute was present when checked on 2026-08-19.
 - Subject: Editorial source: why Physical AI needs force maps, not only contact flags
 
 Body:
@@ -140,3 +142,4 @@ contact@roboskin.ai
 3. No recipients were combined and no bulk-send feature was used.
 4. Record each response and earned link in this file.
 5. Follow up once between 2026-08-25 and 2026-08-28 only when the target has not replied.
+6. Robotics & Automation News published the pitched story on 2026-08-19. Do not send the scheduled follow-up; a single thank-you and optional deep-link correction request may be sent instead.
