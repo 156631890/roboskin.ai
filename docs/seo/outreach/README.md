@@ -28,6 +28,8 @@ Count a referring domain only after a crawlable editorial link is live. Social p
 
 ## Verified result snapshot
 
-- As of 2026-08-17, one editorial link is live: the maintainer-approved Awesome-Touch entry merged in [PR #41](https://github.com/linchangyi1/Awesome-Touch/pull/41).
-- The target is therefore `1 / 3` verified editorial referring domains.
+- As of 2026-08-19, two editorial links are live: the maintainer-approved Awesome-Touch entry merged in [PR #41](https://github.com/linchangyi1/Awesome-Touch/pull/41), and the [Robotics & Automation News article](https://roboticsandautomationnews.com/2026/08/19/researchers-combine-eit-and-pneumatic-sensing-for-humanoid-robot-skin/104274/) linking naturally to RoboSkin.ai.
+- The target is therefore `2 / 3` verified editorial referring domains.
+- Awesome Robot Learning maintainer Ray Yao approved a dedicated tactile / visuo-tactile section; [PR #6](https://github.com/RayYoh/Awesome-Robot-Learning/pull/6) is open with the RoboSkin dataset directory as its first entry. Do not count it until merged.
+- RoboticsTomorrow confirmed that it is preparing the submitted hybrid robot-skin article. Do not count it until a crawlable link is live.
 - Form submissions, sent emails, open issues, and unmerged pull requests remain outreach activity only. Do not count them as backlinks until the destination page links to RoboSkin.ai and the link is crawlable.

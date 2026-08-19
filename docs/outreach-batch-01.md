@@ -41,6 +41,7 @@ contact@roboskin.ai
 - Verified route: https://www.roboticstomorrow.com/contact.php
 - Fit: The site lists this address for editorial submissions and publishes robotics news.
 - Status: Sent 2026-08-16 from `messigoat147@gmail.com`
+- Response: Brandon Hetherington confirmed on 2026-08-16 that RoboticsTomorrow would prepare the article and send the live link. Await publication; do not count a backlink until the resulting page is crawlable and links to RoboSkin.ai.
 - Subject: Robotics research brief: 3D-printed hybrid skin for humanoid force maps
 
 Body:
@@ -143,3 +144,4 @@ contact@roboskin.ai
 4. Record each response and earned link in this file.
 5. Follow up once between 2026-08-25 and 2026-08-28 only when the target has not replied.
 6. Robotics & Automation News published the pitched story on 2026-08-19. Do not send the scheduled follow-up; a single thank-you and optional deep-link correction request may be sent instead.
+7. RoboticsTomorrow confirmed that it is preparing the submitted article. Wait for the promised publication link rather than sending a follow-up.

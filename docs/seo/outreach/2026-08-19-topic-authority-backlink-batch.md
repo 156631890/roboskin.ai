@@ -63,8 +63,22 @@ This batch prioritizes curated robotics resources and editorial coverage. A subm
   - https://roboskin.ai/research-index
 - Offer: A new 1,000–1,400 word vendor-neutral article or a shorter research briefing, not a RoboSkin.ai republication.
 
+Delivery correction: the address returned an Office 365 recipient-unknown nondelivery report. The address is closed and will not be retried.
+
+### 6. Awesome Robot Learning — maintainer-approved tactile section
+
+- Topics: Tactile AI, robot learning, visuo-tactile datasets
+- Target: `RayYoh/Awesome-Robot-Learning`
+- Result: https://github.com/RayYoh/Awesome-Robot-Learning/pull/6
+- Status: Open; awaiting maintainer review
+- Suggested page: https://roboskin.ai/datasets
+- Placement: New `Tactile / Visuo-Tactile Resources` section, added to the README overview
+- Permission: Maintainer Ray Yao confirmed by email that the resource is in scope and invited the dedicated section with the RoboSkin directory as its first entry.
+- Disclosure: The PR states that the contributor maintains RoboSkin.ai and requests no paid or reciprocal placement.
+
 ## Follow-up rule
 
 - Check the three GitHub targets on 2026-09-02. Do not comment before that date unless a maintainer replies.
+- Check Awesome Robot Learning PR #6 on 2026-09-02. The maintainer has already received the PR link by email; do not send another message before then unless he replies.
 - Check the two editorial inbox threads on 2026-09-02. Send at most one short follow-up when there is no reply.
 - Count an earned backlink only after a merged resource entry or a published editorial page is verified.
