@@ -2578,8 +2578,6 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
-
-  {
     path: '/visuo-tactile',
     title: 'Visuo-Tactile Robotics: Perception, Data and Manipulation',
     description:
