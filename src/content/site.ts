@@ -289,8 +289,8 @@ export const homeBroadResearchLanes: ContentTile[] = [
     title: 'Humanoid robots and robot hands',
     description:
       'Track tactile coverage, dexterous hands, grasp stability, slip, and contact feedback for humanoid robot manipulation.',
-    href: '/humanoid-robot-skin',
-    ctaLabel: 'Explore humanoid robot skin',
+    href: '/humanoid-robots',
+    ctaLabel: 'Explore humanoid robots',
   },
   {
     title: 'Physical AI and embodied AI',
@@ -303,15 +303,15 @@ export const homeBroadResearchLanes: ContentTile[] = [
     title: 'Robot manipulation and tactile sensors',
     description:
       'Compare visual, acoustic, magnetic, and resistive tactile sensing by contact-rich manipulation task and evidence boundary.',
-    href: '/guides/tactile-sensor-benchmark-robot-manipulation',
-    ctaLabel: 'Compare manipulation sensors',
+    href: '/robot-manipulation',
+    ctaLabel: 'Map robot manipulation',
   },
   {
     title: 'VLA and visuo-tactile world models',
     description:
       'Follow action-conditioned contact prediction, world-action models, planning evidence, and the role of touch in robot policies.',
-    href: '/guides/visuo-tactile-world-models-robot-manipulation',
-    ctaLabel: 'Compare world models',
+    href: '/robot-vla-models',
+    ctaLabel: 'Map robot VLA models',
   },
 ];
 
@@ -1312,6 +1312,30 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: 'In the RoboSkin context, Physical AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback.',
     related: ['robot skin', 'tactile AI', 'contact-aware robotics'],
     href: '/physics-ai',
+  },
+  {
+    term: 'Humanoid robot',
+    definition: 'A physical robot whose body plan or capabilities are designed around human-scale environments, often combining mobility, arms, hands or grippers, perception, control, and safety systems.',
+    related: ['humanoid robotics', 'whole-body control', 'Physical AI'],
+    href: '/humanoid-robots',
+  },
+  {
+    term: 'Vision-language-action model',
+    definition: 'A robot model that uses visual observations and language instructions to produce or condition physical actions; implementations differ in action representation, embodiment, data, and control interface.',
+    related: ['VLA', 'robot foundation model', 'embodied reasoning'],
+    href: '/robot-vla-models',
+  },
+  {
+    term: 'Robot foundation model',
+    definition: 'A broadly trained model intended for reuse or adaptation across multiple robot tasks, environments, or embodiments, with the claimed breadth requiring direct transfer evidence.',
+    related: ['vision-language-action model', 'robot learning', 'multi-embodiment model'],
+    href: '/robot-vla-models',
+  },
+  {
+    term: 'Robot manipulation',
+    definition: 'The use of a robot arm, hand, gripper, tool, or whole body to intentionally change an object or environment through physical action.',
+    related: ['robot grasping', 'dexterous manipulation', 'contact-rich manipulation'],
+    href: '/robot-manipulation',
   },
   {
     term: 'E-skin',

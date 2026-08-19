@@ -664,6 +664,21 @@ export function buildHomePhysicalAiRoutesJsonLd() {
       description: 'Application route for humanoid robots, dexterous hands, tactile coverage, slip, and contact feedback.',
     },
     {
+      name: 'Humanoid robots',
+      url: canonicalUrl('/humanoid-robots'),
+      description: 'Broad research route for humanoid embodiment, whole-body control, robot hands, manipulation, safety, and touch.',
+    },
+    {
+      name: 'Robot VLA models',
+      url: canonicalUrl('/robot-vla-models'),
+      description: 'Definition and comparison route for vision-language-action models, robot foundation models, embodied reasoning, and tactile VLA systems.',
+    },
+    {
+      name: 'Robot manipulation',
+      url: canonicalUrl('/robot-manipulation'),
+      description: 'Broad task route for grasping, dexterous manipulation, insertion, robot learning, control, and tactile feedback.',
+    },
+    {
       name: 'Tactile sensors for robot manipulation',
       url: canonicalUrl('/guides/tactile-sensor-benchmark-robot-manipulation'),
       description: 'Task-first comparison route for tactile sensors used in contact-rich robot manipulation.',

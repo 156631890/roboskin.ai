@@ -19,6 +19,9 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 - [Robot skin definition](https://roboskin.ai/robot-skin): Canonical definition for robot skin, robotic skin, and tactile sensing surfaces.
 - [Tactile AI definition](https://roboskin.ai/tactile-ai): Canonical explanation of the sensing, data, model, and control stack for robot touch.
+- [Humanoid robots](https://roboskin.ai/humanoid-robots): Broad research map for humanoid embodiment, whole-body control, hands, manipulation, safety, and tactile sensing.
+- [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action models, robot foundation models, embodied reasoning, world models, and tactile VLA systems.
+- [Robot manipulation](https://roboskin.ai/robot-manipulation): Broad task map for grasping, insertion, dexterity, robot learning, control, and tactile feedback.
 - [Humanoid robot skin](https://roboskin.ai/humanoid-robot-skin): Canonical whole-hand, whole-arm, and whole-body tactile sensing stack for humanoid robotics.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Canonical explanation of how vision, language, proprioception, and tactile sensing combine in embodied systems.
 - [E-skin in robotics](https://roboskin.ai/e-skin): Canonical definition for e-skin and electronic skin in robotics.
@@ -83,6 +86,9 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 ## Keyword Routes
 
 - [Broad robotics research map](https://roboskin.ai/): Homepage route connecting robot skin and touch to humanoid robots, Physical AI, embodied AI, robot manipulation, VLA context, and world models.
+- [Humanoid robots](https://roboskin.ai/humanoid-robots): Humanoid robotics, whole-body control, robot hands, safety, Physical AI, and tactile-sensing parent cluster.
+- [Robot VLA models](https://roboskin.ai/robot-vla-models): Vision-language-action, robot foundation model, embodied reasoning, and tactile VLA parent cluster.
+- [Robot manipulation](https://roboskin.ai/robot-manipulation): Robotic manipulation, dexterous manipulation, grasping, insertion, learning, control, and touch parent cluster.
 - [RoboSkin and RoboSkin.ai](https://roboskin.ai/): Brand and site entity route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Primary definition and category route.
 - [Robot skin guides and tactile AI learning routes](https://roboskin.ai/products): Guide-route keyword cluster.

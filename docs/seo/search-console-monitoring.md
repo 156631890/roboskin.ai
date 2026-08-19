@@ -138,6 +138,9 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 
 | URL | Query | Impressions | Clicks | CTR | Avg position | Date range | Note |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+| https://roboskin.ai/humanoid-robots | humanoid robots, humanoid robotics |  |  |  |  | Last 28 days | Broad humanoid parent; tactile intent stays on `/humanoid-robot-skin` |
+| https://roboskin.ai/robot-vla-models | robot VLA models, vision-language-action models |  |  |  |  | Last 28 days | Broad model parent; tactile foundation and world-model children retain narrow intent |
+| https://roboskin.ai/robot-manipulation | robot manipulation, robotic manipulation, dexterous manipulation |  |  |  |  | Last 28 days | Broad task parent; contact-to-action intent stays on `/tactile-manipulation` |
 | https://roboskin.ai/robot-skin | robot skin |  |  |  |  | Last 28 days | Core definition query |
 | https://roboskin.ai/physics-ai | physical ai robot skin |  |  |  |  | Last 28 days | Physical AI canonical cluster query |
 | https://roboskin.ai/guides/tactile-feedback-for-physical-ai | physical ai tactile feedback |  |  |  |  | Last 28 days | Contact-feedback guide query |

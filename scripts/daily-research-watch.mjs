@@ -12,6 +12,9 @@ const TREND_GEOGRAPHIES = ['US', 'GB', 'DE', 'CA'];
 const execFileAsync = promisify(execFile);
 
 const topicMatchers = [
+  ['robot manipulation', /\b(?:robot(?:ic)? manipulation|dexterous manipulation|contact-rich manipulation)\b/i],
+  ['robot VLA', /\b(?:vision-language-action|vision language action|vla)\b/i],
+  ['robot foundation model', /\brobot(?:ics)? foundation model\b/i],
   ['robotics', /\brobot(?:s|ics|ic)?\b/i],
   ['humanoid robot', /\bhumanoid(?: robot| robotics)?\b/i],
   ['robot skin', /\brobot(?:ic)? skin\b/i],
@@ -36,6 +39,8 @@ const arxivQuery = [
   'all:"tactile sensing" AND all:robot',
   'all:"physical AI"',
   'all:"humanoid robot"',
+  'all:"robot manipulation"',
+  '(all:"vision-language-action" OR all:"vision language action") AND (all:robot OR all:robotics)',
   'all:"visuo-tactile"',
   'all:"tactile world model"',
 ].map((term) => `(${term})`).join(' OR ');
@@ -171,9 +176,11 @@ function truncate(value, length = 520) {
 
 function routePaper(paper) {
   if (paper.topics.includes('robot skin') || paper.topics.includes('electronic skin')) return '/robot-skin';
+  if (paper.topics.includes('humanoid robot')) return '/humanoid-robots';
+  if (paper.topics.includes('robot VLA') || paper.topics.includes('robot foundation model')) return '/robot-vla-models';
+  if (paper.topics.includes('robot manipulation')) return '/robot-manipulation';
   if (paper.topics.includes('tactile sensing') || paper.topics.includes('sensors')) return '/tactile-ai';
   if (paper.topics.includes('physical AI')) return '/physics-ai';
-  if (paper.topics.includes('humanoid robot')) return '/applications/humanoid-robot-skin';
   return '/research';
 }
 
@@ -240,11 +247,13 @@ ${trendRows}
 | --- | --- | --- |
 | robotics | /research | Broad discovery term; route visitors into source-backed research rather than a thin generic page. |
 | Physical AI | /physics-ai | Own the definition and connect physical intelligence to touch, control, and evidence. |
-| humanoid robot | /applications/humanoid-robot-skin | Connect the broad embodiment term to whole-body touch and safety evidence. |
+| humanoid robot | /humanoid-robots | Connect the broad embodiment term to Physical AI, whole-body touch, hands, and safety evidence. |
+| robot manipulation | /robot-manipulation | Track learning, grasping, dexterity, contact-rich control, and tactile feedback. |
+| robot VLA | /robot-vla-models | Track vision-language-action models, robot foundation models, data, and evaluation. |
 | robot skin | /robot-skin | Preserve the site's core topical authority and commercial-intent entry point. |
 | tactile sensor | /guides/tactile-sensor-for-robots | Capture component-level intent and route readers into benchmarks and the research index. |
 
-- [Robotics / humanoid robot / robot hand / Physical AI / tactile sensor](https://trends.google.com/trends/explore?q=robotics,humanoid%20robot,robot%20hand,Physical%20AI,tactile%20sensor&hl=en)
+- [Robotics / humanoid robot / robot manipulation / Physical AI / vision-language-action](https://trends.google.com/trends/explore?q=robotics,humanoid%20robot,robot%20manipulation,Physical%20AI,vision-language-action&hl=en)
 - [Robot skin / electronic skin / tactile sensor / Physical AI / humanoid robot](https://trends.google.com/trends/explore?date=today%205-y&q=robot%20skin,electronic%20skin,tactile%20sensor,physical%20AI,humanoid%20robot)
 
 ## Editorial next action
