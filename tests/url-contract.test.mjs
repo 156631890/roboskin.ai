@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 86);
+  assert.equal(protectedUrls.length, 89);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -48,6 +48,9 @@ test('the audited production URL inventory is protected', async () => {
     '/tactile-manipulation',
     '/visuo-tactile',
     '/humanoid-robot-skin',
+    '/humanoid-robots',
+    '/robot-vla-models',
+    '/robot-manipulation',
     '/physical-ai-touch',
     '/tactile-foundation-models',
     '/research-services',

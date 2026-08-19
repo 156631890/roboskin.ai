@@ -508,6 +508,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place robot skin inside the full humanoid perception, control, manipulation, and safety stack.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Core definition for the surface layer.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How humanoid touch data becomes behavior.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'Hand-specific sensing for grasp stability and slip.' },
@@ -2050,6 +2051,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Place tactile models inside the broader vision-language-action and robot foundation-model landscape.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction, planning, and rollout evidence.' },
       { label: 'Tactile datasets for robot learning', href: '/datasets', description: 'Compare training resources, splits, signals, and access evidence.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Evaluate the hardware and task layer beneath learned models.' },
@@ -2176,6 +2178,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Connect world-model prediction to the broader robot policy and embodied-reasoning stack.' },
       { label: 'FeelWorld research brief', href: '/research/feelworld-visuo-tactile-world-model-2026', description: 'Review hierarchical contact, tactile-state, slip, and planning evidence.' },
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare representations, policies, world-model roles, and transfer claims.' },
       { label: 'Dream-Tac research brief', href: '/research/dream-tac-tactile-world-action-model-2026', description: 'Read the action-conditioned tactile-future analysis.' },
@@ -2463,6 +2466,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Is tactile manipulation the same as haptics?', answer: 'They overlap but are not identical. Tactile manipulation focuses on sensing and controlling robot-object contact; haptics can also include rendering force or touch back to a human operator.' },
     ],
     relatedLinks: [
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Start with the broad grasping, insertion, dexterity, learning, and evaluation map.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the full sensing, representation, model, and action stack.' },
       { label: 'Visuo-tactile robotics', href: '/visuo-tactile', description: 'Combine external vision with local contact evidence.' },
       { label: 'Tactile sensors', href: '/sensors', description: 'Compare the physical inputs used by manipulation systems.' },
@@ -2674,6 +2678,327 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Sparsh project and TacBench', href: 'https://sparsh-ssl.github.io/' },
     ],
     paperBriefIds: ['freetacman-robot-free-visuotactile-data-collection-2025', 'feelworld-visuo-tactile-world-model-2026'],
+  },
+  {
+    path: '/humanoid-robots',
+    title: 'Humanoid Robots: Physical AI, Hands & Tactile Sensing',
+    description:
+      'Understand humanoid robots through perception, robot learning, whole-body control, dexterous hands, safety, tactile sensing, and Physical AI evidence.',
+    h1: 'Humanoid robots: intelligence, manipulation and touch',
+    kicker: 'High-interest robotics pillar',
+    intent: 'Broad definition and research map for humanoid robots, humanoid robotics, general-purpose robots, robot hands, whole-body control, and Physical AI.',
+    published: '2026-08-20',
+    updated: '2026-08-20',
+    priority: 0.96,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'applications',
+    keywords: ['humanoid robots', 'humanoid robotics', 'Physical AI robots', 'general-purpose robots', 'humanoid robot hands', 'humanoid robot manipulation', 'whole-body control', 'humanoid tactile sensing'],
+    quickAnswer: [
+      'A humanoid robot is a physical robot whose body plan or capabilities are designed around human-scale environments, often including a torso, arms, hands or grippers, and legs or another mobile base.',
+      'The humanoid robotics stack combines perception, embodied reasoning, planning, whole-body control, manipulation, hardware, data, simulation, and safety. A human-like shape does not by itself make a robot autonomous or general purpose.',
+      'Touch matters when a humanoid must grasp, insert, hand over, balance on uncertain support, or detect contact with a person or object. Robot skin and tactile sensors provide contact evidence that vision and proprioception may not expose directly.',
+    ],
+    sections: [
+      {
+        heading: 'What makes a robot humanoid',
+        body: [
+          'Humanoid usually describes embodiment rather than intelligence. A system may resemble a person in body layout while still executing narrow, pre-programmed, teleoperated, or carefully staged tasks. Useful comparisons must separate body form, mobility, manipulation, autonomy, and evidence.',
+          'Human-centered environments motivate the form factor: doors, shelves, tools, stairs, workstations, and handover spaces were designed around human reach and motion. That creates opportunities for shared infrastructure but also difficult requirements for balance, dexterity, reliability, energy use, and safe contact.',
+        ],
+      },
+      {
+        heading: 'The humanoid robotics stack',
+        body: [
+          'A humanoid is a system of coupled layers. Progress in one layer does not prove readiness in the others, so research and product claims should identify the complete tested stack.',
+        ],
+        table: {
+          headers: ['Layer', 'Primary job', 'Questions to verify', 'Touch connection'],
+          rows: [
+            ['Perception', 'Estimate people, objects, geometry, motion, and contact context', 'Which sensors, conditions, latency, and failure cases were tested?', 'Touch adds local pressure, shear, slip, and contact events'],
+            ['Reasoning and planning', 'Translate goals into feasible task and motion sequences', 'Is planning online, scripted, or assisted by a human?', 'Contact state can confirm whether a planned step physically succeeded'],
+            ['Whole-body control', 'Coordinate balance, locomotion, reach, and manipulation', 'Which body, terrain, speed, load, and disturbances were evaluated?', 'Foot and body contact can expose support and collision state'],
+            ['Hands and end effectors', 'Grasp, insert, reorient, operate tools, and hand over objects', 'Is the result gripper-level, multi-finger, bimanual, or full-body?', 'Fingertip and palm sensing supports grasp and slip feedback'],
+            ['Safety and evaluation', 'Limit hazardous behavior and measure repeatability', 'Are stops, recovery, human proximity, force, and failure rates reported?', 'Distributed contact sensing can contribute to a layered safety system'],
+          ],
+        },
+      },
+      {
+        heading: 'High-interest research lanes',
+        body: [
+          'Current humanoid coverage spans foundation models, vision-language-action policies, embodied reasoning, whole-body control, dexterous manipulation, simulation, synthetic data, teleoperation, and safety. These labels describe different engineering roles and should not be collapsed into one ranking.',
+        ],
+        bullets: [
+          'Whole-body locomotion and loco-manipulation across uneven or constrained spaces',
+          'Dexterous and bimanual manipulation with hands, grippers, tools, and deformable objects',
+          'Robot learning from demonstrations, human video, simulation, and multi-robot datasets',
+          'Vision-language-action models and embodied reasoning for instruction-conditioned behavior',
+          'Safety, reliability, cycle time, recovery, maintainability, and human-robot interaction',
+        ],
+      },
+      {
+        heading: 'Why touch is a strategic gap',
+        body: [
+          'Vision is valuable before contact and proprioception measures the robot’s internal configuration, but neither directly measures every event at a covered fingertip, palm, foot, arm, or body surface. Contact can be occluded, compliant, distributed, or too local to infer reliably from an external camera.',
+          'The tactile route is not touch instead of vision. It is synchronized vision, language, proprioception, force or torque, and surface touch, followed by an action or safety response whose value is tested against a matched baseline.',
+        ],
+      },
+      {
+        heading: 'How to evaluate humanoid claims',
+        body: [
+          'A useful humanoid result identifies the embodiment, task, environment, autonomy level, sensing inputs, control frequency, number of trials, baseline, intervention policy, and failure modes. A demonstration video can establish that an event occurred; it does not establish generality, reliability, or deployment readiness.',
+        ],
+        bullets: [
+          'Separate tabletop manipulation, mobile manipulation, and whole-body humanoid control',
+          'Record whether the system was autonomous, teleoperated, reset by a person, or selected from multiple trials',
+          'Report task success with speed, force, damage, recovery, and out-of-distribution conditions where relevant',
+          'Treat company demonstrations, preprints, peer-reviewed papers, benchmarks, and deployments as different evidence levels',
+        ],
+      },
+      {
+        heading: '2026 field signals and evidence boundaries',
+        body: [
+          'The International Federation of Robotics lists AI and autonomy among its 2026 industry trends and discusses humanoid reliability and efficiency as conditions for industrial competition. NVIDIA’s official humanoid materials emphasize data, simulation, foundation models, onboard compute, dexterous hands, and deployment workflows. Google DeepMind’s Gemini Robotics 2 announcement describes VLA, embodied reasoning, whole-body control, and manipulation across multiple embodiments.',
+          'These are important field signals, not proof that all humanoids share the same capabilities. RoboSkin.ai uses them to map the stack, then routes touch-specific claims to source-backed robot-skin, hand, dataset, benchmark, and manipulation pages.',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is a humanoid robot?', answer: 'A humanoid robot uses a human-related body plan or capability set to operate in human-scale environments. The term describes embodiment and does not automatically mean the robot is autonomous or general purpose.' },
+      { question: 'Why do humanoid robots need tactile sensing?', answer: 'Touch can expose contact, pressure, shear, slip, seating, support, and collision events at hands, feet, arms, and body surfaces when vision or proprioception is incomplete.' },
+      { question: 'Are humanoid robots the same as Physical AI?', answer: 'No. Humanoids are one embodiment of Physical AI. Physical AI also includes other robots and autonomous machines that perceive, reason, and act in the physical world.' },
+      { question: 'What should a humanoid robot benchmark report?', answer: 'It should identify the robot, task, environment, autonomy level, inputs, baseline, trials, success criteria, interventions, and failure modes. Hardware and software versions also matter.' },
+    ],
+    relatedLinks: [
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Map whole-hand, arm, foot, and body tactile sensing.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Follow grasping, insertion, dexterity, and contact-rich tasks.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand vision-language-action models and where touch fits.' },
+      { label: 'Physical AI', href: '/physics-ai', description: 'Connect humanoid embodiment to physical-world perception and action.' },
+      { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Compare fingertip, finger, palm, and full-hand sensing roles.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Find robot, sensor, task, modality, format, and license records.' },
+      { label: 'Humanoid locomotion touch brief', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'Review source-bounded plantar tactile evidence.' },
+    ],
+    sources: [
+      { label: 'International Federation of Robotics 2026 trends', href: 'https://ifr.org/ifr-press-releases/news/top-5-global-robotics-trends-2026' },
+      { label: 'International Federation of Robotics humanoid position paper', href: 'https://ifr.org/ifr-press-releases/news/humanoid-robots-vision-and-reality-paper-published-by-ifr' },
+      { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
+      { label: 'NVIDIA humanoid robots technical overview', href: 'https://www.nvidia.com/en-us/use-cases/humanoid-robots/' },
+      { label: 'NVIDIA Isaac GR00T reference humanoid announcement', href: 'https://nvidianews.nvidia.com/news/nvidia-open-humanoid-robot-reference-design' },
+    ],
+    paperBriefIds: ['tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'humanoid-visual-tactile-action-dataset-2025'],
+  },
+  {
+    path: '/robot-vla-models',
+    title: 'Robot VLA Models: Vision-Language-Action for Robotics',
+    description:
+      'Learn how robot vision-language-action models connect instructions and observations to actions, and where touch, world models, data, and evaluation fit.',
+    h1: 'Robot VLA models: from vision and language to action',
+    kicker: 'High-interest robot learning pillar',
+    intent: 'Definition and comparison guide for robot VLA models, vision-language-action models, robot foundation models, embodied reasoning, and multimodal robot policies.',
+    published: '2026-08-20',
+    updated: '2026-08-20',
+    priority: 0.95,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'technology',
+    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'robot foundation model', 'embodied AI model', 'generalist robot policy', 'multimodal robot learning', 'tactile VLA'],
+    quickAnswer: [
+      'A robot vision-language-action model, usually shortened to VLA, uses visual observations and language instructions to produce or condition robot actions. Implementations differ in action representation, training data, embodiment coverage, control rate, and whether a separate planner or controller is required.',
+      'A VLA is not automatically a world model or an embodied reasoning system. A world model predicts future state; embodied reasoning can decompose and monitor tasks; a VLA maps observations and instructions toward physical action.',
+      'Touch can extend a VLA during contact-rich manipulation by adding pressure, shear, slip, deformation, or contact-state evidence. The useful test is whether tactile input changes closed-loop outcomes under matched conditions.',
+    ],
+    sections: [
+      {
+        heading: 'What enters and leaves a robot VLA',
+        body: [
+          'The common high-level description is vision plus language to action, but real systems also use robot state, action history, camera geometry, embodiment identifiers, depth, force, tactile signals, or a high-level plan. The output may be joint commands, end-effector motion, action chunks, discrete tokens, trajectories, or inputs to another controller.',
+          'Because the interface differs, model names and parameter counts do not create a fair performance ranking. Readers need the task, robot, data, action space, inference setting, and evaluation protocol.',
+        ],
+      },
+      {
+        heading: 'VLA, VLM, world model and embodied reasoning',
+        body: [
+          'These model categories can be connected inside one system, but they answer different questions. Keeping the roles separate makes research comparisons more useful.',
+        ],
+        table: {
+          headers: ['Model role', 'Core question', 'Typical output', 'Touch opportunity'],
+          rows: [
+            ['Vision-language model', 'What is in the scene and what does the instruction mean?', 'Text, labels, plans, spatial or semantic representations', 'Describe contact context or interpret tactile-language pairs'],
+            ['Vision-language-action model', 'What should the robot do next?', 'Robot action, action token, trajectory, or action chunk', 'Use live touch to refine contact-rich actions'],
+            ['World or world-action model', 'What state may follow this action?', 'Predicted visual, tactile, latent, reward, or contact future', 'Predict slip, force-related state, or future tactile observations'],
+            ['Embodied reasoning system', 'How should a long task be decomposed, monitored, and recovered?', 'Subgoals, tool calls, constraints, or task status', 'Use contact as evidence that a physical step succeeded or failed'],
+          ],
+        },
+      },
+      {
+        heading: 'Data and embodiment determine the model boundary',
+        body: [
+          'Robot data is heterogeneous: cameras, calibration, joint layouts, control spaces, grippers, hands, task labels, demonstration quality, and reset policies differ across platforms. A multi-embodiment model must represent those differences rather than assume that all actions share the same meaning.',
+          'Dataset size alone does not establish coverage. Evaluate which robots, tasks, environments, failure cases, sensor streams, and licenses are present, and whether test splits prevent leakage from repeated trajectories or objects.',
+        ],
+      },
+      {
+        heading: 'Where tactile sensing fits',
+        body: [
+          'Most VLA descriptions start with images and instructions. Contact-rich tasks create a second timescale: visual planning may operate relatively slowly while slip, force, or local deformation can require faster feedback. A tactile pathway can enter the main policy, a specialized contact controller, a predicted future, or a high-frequency correction layer.',
+          'T-Rex and ReTouch are 2026 preprints that investigate tactile-reactive or tactile-predictive VLA designs for dexterous manipulation. Their source-reported results belong to their own robots, datasets, tasks, baselines, and evaluation settings; they are not universal VLA rankings.',
+        ],
+      },
+      {
+        heading: 'How to evaluate a robot VLA',
+        body: [
+          'A robust evaluation should identify the training resources, robot embodiment, task family, visual conditions, action interface, control rate, inference hardware, intervention rules, and real-robot trial protocol. Generalization should name what changed: object, scene, instruction, robot, sensor, task, or dynamics.',
+        ],
+        bullets: [
+          'Compare against matched policy and no-language or no-touch ablations where the claim requires them',
+          'Report task completion, speed, recovery, safety constraints, and physical side effects rather than only offline loss',
+          'Separate simulation, replay, benchmark, staged demonstration, and repeated real-robot evidence',
+          'Check whether the model, code, weights, data, and evaluation procedure are actually accessible',
+        ],
+      },
+      {
+        heading: 'Current model ecosystem',
+        body: [
+          'Google DeepMind describes Gemini Robotics 2 as a VLA for whole-body and dexterous robot control, paired with a separate embodied reasoning model. NVIDIA publishes Isaac GR00T as a family of open foundation models for generalized humanoid reasoning and skills. Hugging Face LeRobot exposes multiple policy families, datasets, evaluation environments, and 2026 integrations for VLAs and world-model policies.',
+          'RoboSkin.ai does not treat those official descriptions as proof of equivalent capability. This page is the broad model map; tactile foundation-model, world-model, dataset, benchmark, and manipulation pages hold the narrower evidence comparisons.',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is a robot VLA model?', answer: 'A robot vision-language-action model uses visual observations and language instructions to produce or condition robot actions. Architectures and action interfaces vary, so the term does not specify one model design.' },
+      { question: 'Is a VLA the same as a robot foundation model?', answer: 'Not always. A VLA may be trained as a broad reusable foundation model or for a narrower robot and task set. Foundation-model claims require evidence for transfer, adaptation, or reuse.' },
+      { question: 'Do robot VLA models use touch?', answer: 'Some do, but many are vision-language-action systems without live tactile input. Touch may be fused into the policy, used by a fast correction layer, or predicted by a world model.' },
+      { question: 'How should VLA models be compared?', answer: 'Compare them only after aligning robot embodiment, tasks, inputs, action space, data, baselines, control rate, and real-robot evaluation. Unlike settings should not be collapsed into a leaderboard.' },
+    ],
+    relatedLinks: [
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, predictive models, and policy roles.' },
+      { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Review action-conditioned contact prediction and planning evidence.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect model outputs to grasping, insertion, dexterity, and recovery.' },
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place VLA models inside the full humanoid hardware and control stack.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Audit robot, sensor, task, signal, format, and access coverage.' },
+      { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Separate shared evaluation protocols from dataset access.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Map multimodal inputs, contact logs, models, and action loops.' },
+    ],
+    sources: [
+      { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
+      { label: 'Google DeepMind Gemini Robotics model overview', href: 'https://deepmind.google/models/gemini-robotics/' },
+      { label: 'NVIDIA Isaac GR00T developer overview', href: 'https://developer.nvidia.com/isaac/gr00t' },
+      { label: 'Hugging Face LeRobot v0.6 release', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'Physical Intelligence pi0 technical report', href: 'https://www.physicalintelligence.company/download/pi0.pdf' },
+      { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
+      { label: 'ReTouch contact-rich manipulation preprint', href: 'https://arxiv.org/abs/2608.01824' },
+    ],
+    paperBriefIds: ['dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026', 'sparsh-x-multisensory-touch-representations-2025'],
+  },
+  {
+    path: '/robot-manipulation',
+    title: 'Robot Manipulation: Learning, Grasping, Touch & Dexterity',
+    description:
+      'Explore robot manipulation across grasping, dexterous hands, insertion, robot learning, VLA policies, force control, tactile feedback, and evaluation.',
+    h1: 'Robot manipulation: learning, control and tactile feedback',
+    kicker: 'High-interest robotics task pillar',
+    intent: 'Broad pillar for robot manipulation, robotic manipulation, dexterous manipulation, robot grasping, contact-rich tasks, manipulation learning, and tactile feedback.',
+    published: '2026-08-20',
+    updated: '2026-08-20',
+    priority: 0.95,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'applications',
+    keywords: ['robot manipulation', 'robotic manipulation', 'dexterous manipulation', 'robot grasping', 'contact-rich manipulation', 'robot hand control', 'force control robotics', 'manipulation learning'],
+    quickAnswer: [
+      'Robot manipulation is the process of using a robot arm, hand, gripper, or whole body to change the state of an object or environment through actions such as grasping, moving, inserting, turning, folding, or tool use.',
+      'A manipulation system combines perception, state estimation, planning or policy learning, robot control, end-effector hardware, data, and evaluation. Contact-rich tasks also need evidence about force, slip, deformation, seating, and recovery.',
+      'Tactile sensing is valuable after contact begins or vision becomes occluded. It can support grasp stabilization, insertion correction, deformable-object handling, dexterity, and failure recovery when the controller can act on the signal in time.',
+    ],
+    sections: [
+      {
+        heading: 'The robot manipulation stack',
+        body: [
+          'Manipulation begins before contact with scene understanding and motion planning, then becomes a contact and control problem as the hand or gripper reaches the object. A complete system needs a defined observation, action, end effector, controller or policy, task objective, and evaluation protocol.',
+        ],
+        bullets: [
+          'Perception: objects, geometry, materials, people, obstacles, and contact context',
+          'Planning or policy: task sequence, grasp, trajectory, action chunk, or recovery choice',
+          'Control: position, velocity, impedance, force, torque, or learned closed-loop command',
+          'End effector: parallel gripper, suction, multi-finger hand, soft gripper, or tool',
+          'Feedback: vision, proprioception, force or torque, tactile arrays, and task outcome',
+        ],
+      },
+      {
+        heading: 'Manipulation task families',
+        body: [
+          'A model that succeeds at pick-and-place has not automatically solved insertion, deformable objects, tool use, or multi-finger dexterity. Task families create different sensing, control, and evaluation requirements.',
+        ],
+        table: {
+          headers: ['Task family', 'Physical challenge', 'Useful feedback', 'Evidence to report'],
+          rows: [
+            ['Pick, place, and regrasp', 'Pose error, grasp stability, occlusion, and object variation', 'Vision, proprioception, slip, pressure distribution', 'Objects, poses, trials, drops, speed, and recovery'],
+            ['Insertion and assembly', 'Jamming, tight tolerance, seating, and hidden contact', 'Force, torque, contact direction, tactile state', 'Tolerance, clearance, forces, failures, and completion criteria'],
+            ['Dexterous in-hand manipulation', 'Many contacts, underactuation, rolling, sliding, and reorientation', 'Full-hand touch, joint state, local slip and shear', 'Hand, objects, contact coverage, success, and intervention'],
+            ['Deformable-object handling', 'State is high-dimensional and changes under contact', 'Vision, distributed touch, force, and action history', 'Material range, initial states, damage, generalization, and repeatability'],
+            ['Tool use and long-horizon tasks', 'Sequencing, constraints, changing contact modes, and recovery', 'Language, vision, contact confirmation, and task progress', 'Autonomy, subtask success, resets, time, and failure taxonomy'],
+          ],
+        },
+      },
+      {
+        heading: 'Hands, grippers and whole-body manipulation',
+        body: [
+          'A two-finger gripper can be reliable and easier to control for many industrial tasks. Multi-finger hands add contact options and human-tool compatibility but also increase sensing, calibration, action-space, control, and maintenance complexity. Whole-body manipulation adds balance, mobility, reach, and environmental contacts.',
+          'Compare systems by the task and embodiment they actually test, not by assuming that more degrees of freedom always produce better manipulation.',
+        ],
+      },
+      {
+        heading: 'Learning, VLA policies and world models',
+        body: [
+          'Modern manipulation research includes imitation learning, reinforcement learning, diffusion or flow-based policies, vision-language-action models, and predictive world or world-action models. These methods can share data and components while serving different roles.',
+          'Language can specify a task, vision can establish scene context, proprioception can expose robot configuration, and touch can ground the policy in physical contact. A world model may predict what follows an action, while a controller still needs to execute and correct the motion.',
+        ],
+      },
+      {
+        heading: 'When tactile feedback changes the task',
+        body: [
+          'Tactile feedback is most defensible when the experiment isolates what changes after adding touch. A matched vision-only or no-touch baseline, synchronized inputs, latency reporting, disturbance tests, and closed-loop outcomes help show whether the contact pathway is doing useful work.',
+          'T-Rex investigates tactile-reactive VLA manipulation, while ReTouch investigates online-refined tactile prediction for contact-rich dexterity. Both are 2026 preprints with source-specific robots, datasets, baselines, and tasks. Their reported results should not be transferred to other systems without new evidence.',
+        ],
+      },
+      {
+        heading: 'How to compare manipulation results',
+        body: [
+          'A credible comparison aligns the task, robot, end effector, observations, training data, action budget, controller rate, objects, environment, and evaluation procedure. It also states whether failures were retried, demonstrations were selected, or a person intervened.',
+        ],
+        bullets: [
+          'Use task success together with time, force, drops, damage, recovery, and safety constraints',
+          'Separate perception metrics from real-robot task outcomes',
+          'Group train and test splits by trajectory, object, scene, sensor, or embodiment when leakage is possible',
+          'Treat a staged demonstration, benchmark score, preprint result, and production deployment as different evidence levels',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is robot manipulation?', answer: 'Robot manipulation is the use of an arm, hand, gripper, tool, or whole body to intentionally change an object or environment through physical action.' },
+      { question: 'What is dexterous manipulation?', answer: 'Dexterous manipulation uses coordinated contacts and motion to perform tasks such as reorientation, multi-finger control, tool use, or handling objects with tight physical constraints.' },
+      { question: 'Why is tactile sensing useful for robot manipulation?', answer: 'Touch exposes local contact, pressure, shear, slip, deformation, seating, and hidden motion after contact begins, especially when the hand or object occludes vision.' },
+      { question: 'How should robot manipulation systems be evaluated?', answer: 'Align the robot, end effector, task, inputs, data, controller, objects, trials, success criteria, interventions, and failure reporting before comparing results.' },
+    ],
+    relatedLinks: [
+      { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Follow the contact-to-action loop in detail.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand instruction-conditioned robot policies and model roles.' },
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Connect manipulation to hands, whole-body control, and Physical AI.' },
+      { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Map fingertip, finger, palm, and full-hand sensing.' },
+      { label: 'Slip detection', href: '/guides/slip-detection-robot-hand', description: 'Trace slip evidence into grasp correction and recovery.' },
+      { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Compare sensors by task and evidence boundary.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Find aligned observations, actions, robots, sensors, and licenses.' },
+      { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review shared tasks, splits, metrics, baselines, and protocols.' },
+    ],
+    sources: [
+      { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
+      { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
+      { label: 'ReTouch contact-rich manipulation preprint', href: 'https://arxiv.org/abs/2608.01824' },
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'ManiSkill-ViTac challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
+      { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
+    ],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
   },
 ];
 

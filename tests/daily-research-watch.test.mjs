@@ -43,4 +43,7 @@ test('daily research report keeps candidates out of the publishing path', async 
   assert.match(report, /candidate queue — nothing in this report is automatically published/);
   assert.match(report, /never publish this queue verbatim/);
   assert.match(report, /Robot Skin for Humanoid Tactile Sensing/);
+  assert.match(report, /\| humanoid robot \| \/humanoid-robots \|/);
+  assert.match(report, /\| robot manipulation \| \/robot-manipulation \|/);
+  assert.match(report, /\| robot VLA \| \/robot-vla-models \|/);
 });

@@ -29,6 +29,18 @@ These are the agreed authority targets. Each cluster has one canonical owner; su
 | 3 | tactile foundation model | `https://roboskin.ai/tactile-foundation-models` | `https://roboskin.ai/tactile-ai` | Model scope, representations, transfer, and evidence limits. |
 | 3 | Physical AI tactile sensing | `https://roboskin.ai/physical-ai-touch` | `https://roboskin.ai/physics-ai` | Touch as a perception and feedback channel for Physical AI. |
 
+## High-interest robotics parent clusters
+
+These broader routes capture higher-volume robotics interest without changing RoboSkin.ai into a generic robotics publication. Each parent must route readers and crawlers toward the tactile child pages that provide the site's distinctive evidence.
+
+| Query cluster | Canonical owner | Supporting routes | Scope boundary |
+| --- | --- | --- | --- |
+| humanoid robots / humanoid robotics | `https://roboskin.ai/humanoid-robots` | `https://roboskin.ai/humanoid-robot-skin`, `https://roboskin.ai/physics-ai`, `https://roboskin.ai/applications/robot-hand-tactile-sensor` | The parent owns the broad embodiment and research map. `/humanoid-robot-skin` remains canonical for skin, touch, and whole-body tactile sensing. |
+| robot VLA models / vision-language-action models | `https://roboskin.ai/robot-vla-models` | `https://roboskin.ai/tactile-foundation-models`, `https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation`, `https://roboskin.ai/physical-ai-touch` | The parent owns the VLA definition and model-role map. Existing pages retain tactile-model and world-model comparison intent. |
+| robot manipulation / robotic manipulation | `https://roboskin.ai/robot-manipulation` | `https://roboskin.ai/tactile-manipulation`, `https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation`, `https://roboskin.ai/applications/robot-hand-tactile-sensor` | The parent owns broad task families and system evaluation. `/tactile-manipulation` retains the contact-to-action technical loop. |
+
+Do not create separate synonym pages for `humanoid robotics`, `robotic manipulation`, `VLA robotics`, or `robot foundation model` until Search Console proves a materially different intent.
+
 ## Priority query clusters
 
 | Query cluster | Primary URL | Supporting URLs | Search intent | Measurement rule |
