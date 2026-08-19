@@ -1343,6 +1343,102 @@ export const glossaryTerms: GlossaryTerm[] = [
     related: ['applications', 'research routes', 'source context'],
     href: '/applications',
   },
+  {
+    term: 'Tactile sensing',
+    definition: 'The measurement of physical contact through signals such as pressure, normal and shear force, slip, vibration, temperature, deformation, or tactile images.',
+    related: ['tactile sensor', 'robot skin', 'contact sensing'],
+    href: '/guides/tactile-sensor-for-robots',
+  },
+  {
+    term: 'Tactile sensor',
+    definition: 'A device that converts contact at a robot surface into electrical, optical, magnetic, acoustic, or other measurable observations.',
+    related: ['taxel', 'force sensing', 'vision-based tactile sensor'],
+    href: '/sensors',
+  },
+  {
+    term: 'Taxel',
+    definition: 'A spatially indexed tactile sensing element in an array. Unlike a pixel, its physical quantity, response area, crosstalk, and calibration depend on the sensor design.',
+    related: ['tactile array', 'spatial resolution', 'crosstalk'],
+    href: '/sensors',
+  },
+  {
+    term: 'Tactile manipulation',
+    definition: 'Robot manipulation that uses measured contact to estimate physical state and update grip, pose, trajectory, force, or recovery actions.',
+    related: ['contact-rich manipulation', 'slip detection', 'robot control'],
+    href: '/tactile-manipulation',
+  },
+  {
+    term: 'Contact-rich manipulation',
+    definition: 'A manipulation setting in which sustained or repeated physical contact is central to task success, as in insertion, surface following, folding, or in-hand reorientation.',
+    related: ['tactile manipulation', 'force control', 'dexterous manipulation'],
+    href: '/tactile-manipulation',
+  },
+  {
+    term: 'Visuo-tactile perception',
+    definition: 'Joint processing of visual and tactile observations to estimate material, contact, pose, stability, or other physical state.',
+    related: ['sensor fusion', 'multimodal learning', 'touch-vision alignment'],
+    href: '/visuo-tactile',
+  },
+  {
+    term: 'Visuo-tactile manipulation',
+    definition: 'Robot manipulation in which both visual context and measured touch influence actions such as approach, grasp stabilization, insertion correction, or recovery.',
+    related: ['tactile manipulation', 'vision-touch fusion', 'robot policy'],
+    href: '/visuo-tactile',
+  },
+  {
+    term: 'Tactile representation learning',
+    definition: 'Learning compact features from tactile observations for downstream perception, prediction, retrieval, or robot-control tasks.',
+    related: ['tactile encoder', 'self-supervised learning', 'multimodal alignment'],
+    href: '/tactile-foundation-models',
+  },
+  {
+    term: 'Tactile foundation model',
+    definition: 'A broadly pretrained tactile or multimodal model intended to transfer across multiple downstream tasks, sensors, objects, or embodiments, with the claimed breadth requiring direct evidence.',
+    related: ['tactile representation', 'transfer learning', 'multimodal model'],
+    href: '/tactile-foundation-models',
+  },
+  {
+    term: 'Tactile world model',
+    definition: 'An action-conditioned model that predicts future tactile state, contact, force-related signals, slip, images, or learned touch representations.',
+    related: ['world model', 'tactile prediction', 'robot planning'],
+    href: '/guides/visuo-tactile-world-models-robot-manipulation',
+  },
+  {
+    term: 'Tactile dataset',
+    definition: 'A versioned collection of tactile observations and metadata, potentially aligned with vision, language, force, robot state, actions, objects, or tasks.',
+    related: ['contact sequence', 'data split', 'robot learning'],
+    href: '/datasets',
+  },
+  {
+    term: 'Tactile benchmark',
+    definition: 'A reproducible evaluation contract that defines tactile inputs, tasks, data splits, metrics, baselines, hardware conditions, and version.',
+    related: ['evaluation protocol', 'task success', 'generalization'],
+    href: '/benchmarks',
+  },
+  {
+    term: 'Whole-body tactile sensing',
+    definition: 'Distributed contact sensing across large robot surfaces such as hands, arms, torso, or other body regions rather than a single fingertip or gripper pad.',
+    related: ['humanoid robot skin', 'safety skin', 'distributed sensing'],
+    href: '/humanoid-robot-skin',
+  },
+  {
+    term: 'Soft tactile sensor',
+    definition: 'A tactile sensor with a compliant or flexible interface that can conform to contact geometry while measuring deformation or related physical signals.',
+    related: ['e-skin', 'compliant sensing', 'flexible sensor'],
+    href: '/applications/soft-robotic-skin',
+  },
+  {
+    term: 'Shear force',
+    definition: 'Force acting tangentially along a contact surface; in robotic grasping it can provide evidence about load, sliding, and incipient slip.',
+    related: ['normal force', 'slip detection', 'grasp stability'],
+    href: '/guides/slip-detection-robot-hand',
+  },
+  {
+    term: 'Contact sequence',
+    definition: 'The ordered tactile observations from one physical press, grasp, or continuous contact event. Keeping sequences intact helps prevent near-duplicate train-test leakage.',
+    related: ['tactile dataset', 'data leakage', 'held-out evaluation'],
+    href: '/datasets',
+  },
 ];
 
 export const caseStudySummaries: CaseStudySummary[] = [

@@ -61,6 +61,13 @@ const latestResearchSignals = [
   .sort((left, right) => right.date.localeCompare(left.date))
   .slice(0, 3);
 
+const researchDatabases = [
+  { label: 'Datasets', detail: '12 source-reviewed records', href: '/datasets' },
+  { label: 'Benchmarks', detail: '9 evaluation suites', href: '/benchmarks' },
+  { label: 'Sensors', detail: '13 sensor systems', href: '/sensors' },
+  { label: 'Research index', detail: 'Papers and evidence limits', href: '/research-index' },
+];
+
 export const metadata: Metadata = buildPageMetadata('/');
 
 export default function Home() {
@@ -153,6 +160,17 @@ export default function Home() {
                 <p className="mt-3 text-sm leading-relaxed text-[#c8d1de]">{item.description}</p>
                 {item.href && item.ctaLabel ? <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#ffd5c5] hover:text-white">{item.ctaLabel} →</Link> : null}
               </article>
+            ))}
+          </div>
+          <div className="mt-5 grid border border-white/10 md:grid-cols-2 xl:grid-cols-4" aria-label="RoboSkin research databases">
+            {researchDatabases.map((item) => (
+              <Link key={item.href} href={item.href} className="group flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 last:border-b-0 md:border-r md:even:border-r-0 xl:border-b-0 xl:even:border-r xl:last:border-r-0">
+                <span>
+                  <span className="block text-sm font-semibold text-white">{item.label}</span>
+                  <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-[#8e98a8]">{item.detail}</span>
+                </span>
+                <span className="text-[#ff6b3d] transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+              </Link>
             ))}
           </div>
         </div>

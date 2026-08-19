@@ -24,6 +24,10 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Robot hand tactile sensor research](https://roboskin.ai/research): Source-backed research route for robot hand tactile sensors, slip detection, e-skin, and tactile AI.
 - [Tactile sensor benchmark for robot manipulation](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-first comparison of visual, acoustic, magnetic, and resistive tactile sensors.
 - [Tactile robotics datasets](https://roboskin.ai/datasets): Filterable directory of tactile resources by sensor, robot, task, modality, year, access, and license evidence.
+- [Tactile robotics benchmarks](https://roboskin.ai/benchmarks): Filterable directory of perception, representation, cross-sensor, multimodal, and manipulation evaluation protocols.
+- [Tactile sensors for robots](https://roboskin.ai/sensors): Source-reviewed comparison of sensor principles, signals, form factors, integration paths, access, and evidence boundaries.
+- [Tactile manipulation](https://roboskin.ai/tactile-manipulation): Canonical guide to turning contact, pressure, shear, and slip into closed-loop robot actions.
+- [Visuo-tactile robotics](https://roboskin.ai/visuo-tactile): Canonical guide to vision-touch alignment, perception, representation learning, policy use, and manipulation.
 - [Tactile foundation models for robotics](https://roboskin.ai/tactile-foundation-models): Comparison of tactile representations, world models, hierarchical systems, and related learning pipelines.
 - [Visuo-tactile world models for robot manipulation](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation): Source-backed 2026 comparison of action-conditioned contact prediction, tactile rollouts, robot planning, and transfer limits.
 - [Robot skin glossary](https://roboskin.ai/glossary): Definitions for robot skin, tactile AI, e-skin, slip detection, and related terms.
@@ -85,6 +89,10 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Slip detection for robot hands](https://roboskin.ai/guides/slip-detection-robot-hand): Slip-sensing and closed-loop response route.
 - [Tactile sensor benchmark and robot manipulation sensor comparison](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-based tactile sensor comparison cluster.
 - [Tactile datasets](https://roboskin.ai/datasets): Tactile dataset and robot-learning resource cluster.
+- [Tactile benchmarks](https://roboskin.ai/benchmarks): Shared evaluation tasks, split protocols, metrics, baselines, and evidence-boundary cluster.
+- [Tactile sensors for robots](https://roboskin.ai/sensors): Optical, magnetic, distributed, and multimodal robot tactile sensor cluster.
+- [Tactile manipulation](https://roboskin.ai/tactile-manipulation): Contact-rich control, grasp stabilization, insertion, dexterity, and recovery cluster.
+- [Visuo-tactile robotics](https://roboskin.ai/visuo-tactile): Vision-touch fusion, alignment, representation, policy, and manipulation cluster.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Contact-event, synchronization, logging, world-model, and embodied-AI route.
 - [Tactile foundation models](https://roboskin.ai/tactile-foundation-models): Reusable representation, policy-role, and tactile AI model-comparison cluster.
 - [Visuo-tactile and tactile world models](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation): Action-conditioned visual-tactile prediction, contact-aware planning, rollout, and evaluation cluster.

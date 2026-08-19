@@ -23,6 +23,10 @@ export default function TactileDatasetExplorer({ entries }: TactileDatasetExplor
   const tasks = useMemo(() => unique(entries.flatMap((entry) => entry.tasks)), [entries]);
   const modalities = useMemo(() => unique(entries.flatMap((entry) => entry.modalities)), [entries]);
   const years = useMemo(() => unique(entries.map((entry) => String(entry.year))).reverse(), [entries]);
+  const latestReview = entries.reduce(
+    (latest, entry) => entry.sourceReviewed > latest ? entry.sourceReviewed : latest,
+    '',
+  );
 
   const filteredEntries = entries.filter((entry) =>
     (sensor === 'All sensors' || entry.sensor.includes(sensor))
@@ -60,7 +64,7 @@ export default function TactileDatasetExplorer({ entries }: TactileDatasetExplor
             </p>
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#8e98a8] lg:text-right">
-            Source review: 2026-08-16 / {entries.length} records
+            Source review: {latestReview} / {entries.length} records
           </p>
         </div>
 

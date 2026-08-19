@@ -3,7 +3,9 @@ import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
 import type { ResearchIndexEntry } from '@/lib/research-index';
+import type { TactileBenchmarkEntry } from '@/lib/tactile-benchmarks';
 import type { TactileDatasetEntry } from '@/lib/tactile-datasets';
+import type { TactileSensorEntry } from '@/lib/tactile-sensors';
 
 export type SeoRoute = {
   path: string;
@@ -844,6 +846,69 @@ export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
       },
       ...datasetNodes,
     ],
+  };
+}
+
+export function buildTactileBenchmarksJsonLd(entries: TactileBenchmarkEntry[]) {
+  const pageUrl = canonicalUrl('/benchmarks');
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#benchmark-list`,
+    name: 'RoboSkin.ai Tactile Robotics Benchmark Directory',
+    description: 'A source-reviewed directory of tactile perception, representation, and manipulation benchmarks.',
+    url: pageUrl,
+    numberOfItems: entries.length,
+    itemListElement: entries.map((entry, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'CreativeWork',
+        '@id': `${pageUrl}#benchmark-${entry.id}`,
+        name: entry.name,
+        description: `${entry.benchmarkType}. ${entry.protocol} Evidence boundary: ${entry.limitation}`,
+        url: entry.projectUrl ?? entry.paperUrl,
+        datePublished: String(entry.year),
+        dateModified: entry.sourceReviewed,
+        creator: entry.institutions.map((name) => ({ '@type': 'Organization', name })),
+        keywords: [...entry.tasks, ...entry.modalities],
+        citation: entry.paperUrl,
+        isAccessibleForFree: true,
+      },
+    })),
+  };
+}
+
+export function buildTactileSensorsJsonLd(entries: TactileSensorEntry[]) {
+  const pageUrl = canonicalUrl('/sensors');
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${pageUrl}#sensor-list`,
+    name: 'RoboSkin.ai Tactile Sensor Directory',
+    description: 'A source-reviewed comparison of tactile sensors used in robot hands, grippers, skins, and manipulation research.',
+    url: pageUrl,
+    numberOfItems: entries.length,
+    itemListElement: entries.map((entry, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Thing',
+        '@id': `${pageUrl}#sensor-${entry.id}`,
+        name: entry.name,
+        description: `${entry.principle}; ${entry.formFactor}. ${entry.evidenceBoundary}`,
+        url: entry.projectUrl ?? entry.sourceUrl,
+        sameAs: [entry.sourceUrl, entry.projectUrl, entry.codeUrl].filter(Boolean),
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Sensing principle', value: entry.principle },
+          { '@type': 'PropertyValue', name: 'Form factor', value: entry.formFactor },
+          { '@type': 'PropertyValue', name: 'Reported signals', value: entry.signals.join(', ') },
+          { '@type': 'PropertyValue', name: 'Reported rate', value: entry.reportedRate },
+        ],
+      },
+    })),
   };
 }
 

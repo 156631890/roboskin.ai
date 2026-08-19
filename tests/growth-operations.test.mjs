@@ -44,5 +44,7 @@ test('the August research-news release and five-target outreach batch are comple
   assert.match(llms, /eit-pneumatic-hybrid-robot-skin-force-map-2026/);
   assert.equal((outreach.match(/^## 0[1-5] —/gm) ?? []).length, 5);
   assert.match(outreach, /Five outreach messages sent individually on 2026-08-16/);
-  assert.equal((outreach.match(/Status: Sent 2026-08-16/g) ?? []).length, 5);
+  assert.equal((outreach.match(/^- Status: /gm) ?? []).length, 5);
+  assert.equal((outreach.match(/Status: Sent 2026-08-16/g) ?? []).length, 4);
+  assert.match(outreach, /Status: Published 2026-08-19/);
 });

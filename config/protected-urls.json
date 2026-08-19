@@ -6,6 +6,7 @@
   "https://roboskin.ai/applications/robot-gripper-tactile-sensor",
   "https://roboskin.ai/applications/robot-hand-tactile-sensor",
   "https://roboskin.ai/applications/soft-robotic-skin",
+  "https://roboskin.ai/benchmarks",
   "https://roboskin.ai/contact",
   "https://roboskin.ai/datasets",
   "https://roboskin.ai/e-skin",
@@ -75,9 +76,12 @@
   "https://roboskin.ai/research/wet-slippage-bionic-fingertip-eskin-2026",
   "https://roboskin.ai/resources",
   "https://roboskin.ai/robot-skin",
+  "https://roboskin.ai/sensors",
   "https://roboskin.ai/solutions",
   "https://roboskin.ai/tactile-ai",
   "https://roboskin.ai/tactile-foundation-models",
+  "https://roboskin.ai/tactile-manipulation",
   "https://roboskin.ai/technology",
-  "https://roboskin.ai/terms"
+  "https://roboskin.ai/terms",
+  "https://roboskin.ai/visuo-tactile"
 ]
