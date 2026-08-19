@@ -24,7 +24,7 @@ Every target must be rechecked before sending. Source pages are discovery routes
 | R16 | Cited research team | Event-based opto-tactile authors | https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full | Verify event-based latency and evidence boundary | needs contact verification |
 | R17 | Cited research team | Large-area flexible tactile-array authors | https://pubs.acs.org/doi/10.1021/acsaelm.5c01200 | Verify array coverage and curved-surface classification | needs contact verification |
 | C01 | Curated resource | Awesome-Touch | https://github.com/linchangyi1/Awesome-Touch | Suggest the new textile e-skin paper and its source-linked explainer for the non-vision-based section | linked |
-| C02 | Curated resource | AwesomeTactile | https://github.com/Tom-Ren/AwesomeTactile | Suggest the evidence-and-limitations index if contribution rules permit | ready |
+| C02 | Curated resource | AwesomeTactile | https://github.com/Tom-Ren/AwesomeTactile | Suggest the evidence-and-limitations index if contribution rules permit | contacted |
 | C03 | Dataset resource | Awesome Robotics Datasets | https://github.com/mint-lab/awesome-robotics-datasets | Suggest tactile dataset routes only if repository scope accepts them | needs contact verification |
 | C04 | Technical community | Open Robotics Discourse | https://discourse.ros.org/ | Share the ROS 2 tactile pipeline or index only in a relevant active thread | needs contact verification |
 | C05 | Robotics publication | Robohub contribution desk | https://robohub.org/contribute/ | Send a sub-100-word news tip about the new textile e-skin paper and source-linked brief | contacted |
@@ -36,3 +36,4 @@ Every target must be rechecked before sending. Source pages are discovery routes
 | C11 | Curated robotics resource | Open Source Robotics / Growbotics | https://robotics.growbotics.ai/suggest | Suggest the open-source RoboSkin.ai research map and source-reviewed tactile dataset directory for Research, Curated Lists, or Datasets | contacted |
 | C12 | Curated resource | Awesome Touch (2025-2026 tactile VLA and world models) | https://github.com/sun254667/awesome-touch | Suggest the seven-entry source-reviewed tactile dataset directory as an optional cross-dataset comparison resource | contacted |
 | C13 | Curated resource | Awesome Robot Learning | https://github.com/RayYoh/Awesome-Robot-Learning | Ask whether the tactile robotics dataset directory fits Related Awesome Lists before opening a one-line PR | contacted |
+| C14 | Curated resource | Awesome-Dexterous-Manipulation | https://github.com/chang-xinhai/Awesome-Dexterous-Manipulation | Suggest the structured tactile research index under Surveys & Reviews | contacted |
