@@ -224,7 +224,7 @@ def build_story(style):
     story = [
         p("THEME V - TACTILE SENSING IN ROBOT LEARNING AND MANIPULATION", "kicker"),
         p("When Is Touch Necessary? A Capability-First Evidence Standard for Tactile Robot Manipulation", "title"),
-        p("Yang Tao - RoboSkin.ai, independent research intelligence platform - messigoat147@gmail.com", "author"),
+        p("Steven Yang - RoboSkin.ai, independent research intelligence platform - messigoat147@gmail.com", "author"),
         p(
             "<b>Abstract -</b> Tactile manipulation is often evaluated from the sensor outward: resolution, sensitivity, data scale, and downstream task scores. This Perspective argues for the reverse direction. Evaluation should begin with a contact failure that vision or proprioception cannot reliably resolve, then trace the evidence chain from tactile stream and calibration through representation, policy response, and capability change. Recent datasets and models show both the promise and the weakness of current practice: large multimodal corpora can support representation learning, while contact-sequence leakage, sensor-specific splits, and task-specific world-model metrics can overstate generalization. We propose a compact reporting protocol centered on sensory necessity, causal ablation, split integrity, cross-sensor transfer, recovery, and deployment constraints. The goal is not a universal tactile leaderboard; it is comparable evidence for when touch changes what a robot can do.",
             "abstract",
@@ -439,7 +439,7 @@ def build_pdf():
         topMargin=MARGIN_TOP,
         bottomMargin=MARGIN_BOTTOM,
         title="When Is Touch Necessary? A Capability-First Evidence Standard for Tactile Robot Manipulation",
-        author="Yang Tao, RoboSkin.ai",
+        author="Steven Yang, RoboSkin.ai",
         subject="IROS 2026 Touch-to-Action Workshop mini-review and perspective",
     )
     document.addPageTemplates(

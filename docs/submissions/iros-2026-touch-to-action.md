@@ -43,10 +43,10 @@ The PDF contains:
 
 The OpenReview page is not logged in within the available browser session. Before uploading, confirm:
 
-1. the exact Romanized author name currently shown as `Yang Tao`;
-2. the affiliation wording currently shown as `RoboSkin.ai, independent research intelligence platform`;
-3. the corresponding email `messigoat147@gmail.com`;
-4. the OpenReview profile and any required coauthor or conflict fields;
-5. whether the workshop requires a venue template not visible on the public call page.
+1. the author name is confirmed as `Steven Yang` on 2026-08-19;
+2. confirm the affiliation wording currently shown as `RoboSkin.ai, independent research intelligence platform`;
+3. confirm the corresponding email `messigoat147@gmail.com`;
+4. confirm the OpenReview profile and any required coauthor or conflict fields;
+5. confirm whether the workshop requires a venue template not visible on the public call page.
 
 Do not submit until the author identity and OpenReview profile are confirmed. Do not invent an academic affiliation, ORCID, coauthor, funding source, or institutional relationship.
