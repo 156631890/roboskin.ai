@@ -143,5 +143,5 @@ contact@roboskin.ai
 3. No recipients were combined and no bulk-send feature was used.
 4. Record each response and earned link in this file.
 5. Follow up once between 2026-08-25 and 2026-08-28 only when the target has not replied.
-6. Robotics & Automation News published the pitched story on 2026-08-19. Do not send the scheduled follow-up; a single thank-you and optional deep-link correction request may be sent instead.
+6. Robotics & Automation News published the pitched story on 2026-08-19. A thank-you and request to change the existing RoboSkin homepage anchor to the exact research brief was sent the same day under the Steven Yang signature. Do not send another message unless the editor replies.
 7. RoboticsTomorrow confirmed that it is preparing the submitted article. Wait for the promised publication link rather than sending a follow-up.
