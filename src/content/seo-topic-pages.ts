@@ -133,6 +133,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Soft robotic skin', href: '/applications/soft-robotic-skin', description: 'Flexible robot skin for soft and curved surfaces.' },
       { label: 'Robot skin vs e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'A comparison page for overlapping terms.' },
       { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Research routes and source-backed briefs.' },
+      { label: 'EU FP7 ROBOSKIN project', href: '/research/eu-roboskin-project', description: 'Historical project identity, funding record, partners, and source boundaries.' },
       { label: 'Twisted-yarn textile robot skin', href: '/news/twisted-yarn-textile-capacitive-robot-skin-2026', description: 'August 2026 pressure, proximity, durability, and robot-integration evidence.' },
     ],
     sources: [
@@ -1451,6 +1452,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Open the structured research index', href: '/research-index', description: 'Compare normalized sensing principles, modalities, evidence levels, and limitations.' },
       { label: 'Research index', href: '/research', description: 'Existing source-backed technical briefs.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Core definition and category page.' },
+      { label: 'EU FP7 ROBOSKIN project', href: '/research/eu-roboskin-project', description: 'Separate the historical research consortium from the independent RoboSkin.ai platform.' },
       { label: 'E-skin', href: '/e-skin', description: 'Electronic skin and soft sensor context.' },
       { label: 'Submit a source', href: '/contact?requestType=research', description: 'Suggest a paper or correction.' },
     ],
@@ -2477,6 +2479,103 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TactiDex preprint', href: 'https://arxiv.org/abs/2607.09190' },
     ],
     paperBriefIds: ['freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
+  },
+  {
+    path: '/research/eu-roboskin-project',
+    title: 'EU ROBOSKIN Project (2009-2012): History and Research',
+    description:
+      'A source-backed record of the EU FP7 ROBOSKIN project, its robot-skin research scope, funding, partners, 2013 Springer paper, and relationship to RoboSkin.ai.',
+    h1: 'The EU FP7 ROBOSKIN project: history, scope and sources',
+    kicker: 'Historical research project',
+    intent: 'Entity and disambiguation page for the ROBOSKIN project, EU robot skin research, FP7-231500, and the 2013 ROBOSKIN conference paper.',
+    published: '2026-08-20',
+    updated: '2026-08-20',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: ['ROBOSKIN project', 'EU ROBOSKIN project', 'FP7-231500', 'robot skin research project', 'large-area tactile skin', 'The ROBOSKIN Project Challenges and Results'],
+    quickAnswer: [
+      'ROBOSKIN was a European Union FP7 research project on skin-based technologies and robot capabilities. CORDIS records grant agreement 231500, a project period from 1 May 2009 to 30 April 2012, and coordination by the University of Genoa.',
+      'The project investigated tactile feedback from robotic skin covering large areas of a robot body. A 2013 Springer conference chapter documented its challenges and reported results.',
+      'The former EU ROBOSKIN consortium and the current RoboSkin.ai website are separate entities. RoboSkin.ai did not participate in the FP7 project and does not claim endorsement by its authors, partners, Springer Nature, or the European Commission.',
+    ],
+    sections: [
+      {
+        heading: 'Verified project record',
+        body: [
+          'The European Commission CORDIS record is the controlling source for the grant identity, programme, dates, coordinator, participants, and funding. It lists ROBOSKIN under the FP7 information and communication technologies programme and the cognitive systems, interaction, and robotics topic.',
+          'The project is closed. Historical university profiles and publication databases can preserve useful context, but their dates or programme labels may differ; this page therefore uses CORDIS for the formal grant record.',
+        ],
+        table: {
+          headers: ['Field', 'Verified record', 'Source boundary'],
+          rows: [
+            ['Grant agreement', '231500', 'European Commission CORDIS'],
+            ['Project period', '1 May 2009 to 30 April 2012', 'European Commission CORDIS'],
+            ['Programme', 'FP7-ICT; cognitive systems, interaction, and robotics', 'European Commission CORDIS'],
+            ['Coordinator', 'Universita degli Studi di Genova, Italy', 'European Commission CORDIS'],
+            ['Total cost', 'EUR 4,668,535', 'CORDIS reporting record'],
+            ['EU contribution', 'EUR 3,557,139', 'CORDIS reporting record'],
+          ],
+        },
+      },
+      {
+        heading: 'What the project set out to investigate',
+        body: [
+          'The Springer chapter describes the project goal as developing and demonstrating robot capabilities based on tactile feedback from robotic skin covering large areas of the robot body. The research problem was not just a sensitive material sample: it included the availability of embedded tactile technology at a scale suitable for robot experiments.',
+          'The stated application direction included robots operating more effectively and safely in unconstrained environments and interacting or cooperating with people and other robots. Those are historical project objectives, not claims that every capability reached commercial deployment.',
+        ],
+      },
+      {
+        heading: 'Institutions recorded by CORDIS',
+        body: [
+          'CORDIS names the University of Genoa as coordinator and records participation by EPFL, the University of Cagliari, the Italian Institute of Technology, the University of Hertfordshire, the University of Wales Newport, and TechOnYou Srl.',
+          'The 2013 conference chapter lists authors spanning several of those institutions. Author order and institutional participation should be taken from the original publication and CORDIS records rather than inferred from later web pages.',
+        ],
+      },
+      {
+        heading: 'The 2013 conference paper',
+        body: [
+          'The chapter “The ROBOSKIN Project: Challenges and Results” appears in the ROMANSY 19 proceedings, volume 544 of the CISM International Centre for Mechanical Sciences series, on pages 351-358. Springer records DOI 10.1007/978-3-7091-1379-0_43 and publication in 2013.',
+          'The chapter is a primary project-era source. RoboSkin.ai links to the publisher record and a university research profile so readers can verify the title, author list, abstract, venue, pagination, and DOI.',
+        ],
+      },
+      {
+        heading: 'What this historical record does not prove',
+        body: [
+          'A project objective or prototype-era result does not automatically establish present-day product availability, body-scale deployment, durability, safety certification, dataset access, or performance on modern tactile-learning benchmarks.',
+          'For current technical decisions, use the historical project to understand the development of large-area tactile skin, then verify modern sensors, datasets, benchmarks, and closed-loop robot evidence separately.',
+        ],
+        bullets: [
+          'Do not treat an old project goal as a current commercial specification',
+          'Do not infer affiliation between RoboSkin.ai and the former consortium',
+          'Do not transfer a result across robots, sensor generations, or tasks without new evidence',
+          'Cite the Springer DOI for the paper and CORDIS grant 231500 for the formal project record',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'Is RoboSkin.ai the website of the EU ROBOSKIN project?', answer: 'No. RoboSkin.ai is an independent research and intelligence platform. It did not participate in the former FP7 consortium and does not claim endorsement by the project partners.' },
+      { question: 'When did the EU ROBOSKIN project run?', answer: 'CORDIS records a start date of 1 May 2009 and an end date of 30 April 2012.' },
+      { question: 'Who coordinated the ROBOSKIN project?', answer: 'The European Commission CORDIS record names Universita degli Studi di Genova in Italy as coordinator.' },
+      { question: 'What did the ROBOSKIN project research?', answer: 'It investigated skin-based tactile technologies and robot capabilities supported by tactile feedback across large areas of a robot body.' },
+      { question: 'Where is the main project paper?', answer: 'Springer Nature Link hosts the 2013 conference chapter under DOI 10.1007/978-3-7091-1379-0_43.' },
+    ],
+    relatedLinks: [
+      { label: 'Robot skin', href: '/robot-skin', description: 'Read the current system-level definition and technology map.' },
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Connect historical large-area skin research to present humanoid tactile stacks.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow touch signals from sensing into representations, models, and robot actions.' },
+      { label: 'Robot skin papers', href: '/research/robot-skin-papers', description: 'Browse source-backed paper routes and evidence limits.' },
+      { label: 'Tactile research index', href: '/research-index', description: 'Compare modern sensing principles, modalities, form factors, and limitations.' },
+      { label: 'Editorial policy', href: '/editorial-policy', description: 'Review source hierarchy, correction, and evidence-boundary rules.' },
+    ],
+    sources: [
+      { label: 'European Commission CORDIS project record for grant 231500', href: 'https://cordis.europa.eu/project/id/231500' },
+      { label: 'European Commission CORDIS reporting record', href: 'https://cordis.europa.eu/project/id/231500/reporting' },
+      { label: 'Springer chapter: The ROBOSKIN Project: Challenges and Results', href: 'https://link.springer.com/chapter/10.1007/978-3-7091-1379-0_43' },
+      { label: 'University of Hertfordshire publication record', href: 'https://researchprofiles.herts.ac.uk/en/publications/the-roboskin-project-challenges-and-results/' },
+      { label: 'University of Hertfordshire historical project record', href: 'https://researchprofiles.herts.ac.uk/en/projects/roboskin/' },
+    ],
   },
   {
     path: '/visuo-tactile',

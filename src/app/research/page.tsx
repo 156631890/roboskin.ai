@@ -39,6 +39,13 @@ const researchRouteCards = [
     href: '/physical-ai-touch',
     ctaLabel: 'Trace Physical AI touch data',
   },
+  {
+    label: 'Project history',
+    title: 'Separate the EU ROBOSKIN project from RoboSkin.ai',
+    text: 'Use the source-backed FP7 project record for grant dates, funding, partners, the 2013 Springer chapter, and a clear no-affiliation boundary.',
+    href: '/research/eu-roboskin-project',
+    ctaLabel: 'Open the EU ROBOSKIN project record',
+  },
 ];
 
 export default function ResearchPage() {
@@ -201,3 +208,4 @@ export default function ResearchPage() {
     </>
   );
 }
+
