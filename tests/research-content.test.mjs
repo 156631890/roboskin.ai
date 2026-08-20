@@ -122,7 +122,7 @@ test('the audited GSC priority pages own one query-aligned treatment', async () 
   ];
 
   for (const signal of prioritySignals) assert.match(blog, new RegExp(signal));
-  assert.match(seo, /Robot Skin & Tactile AI for Physical AI and Humanoid Robots/);
+  assert.match(seo, /Robot Skin, Tactile AI & Robotics Research/);
   assert.match(seoTopics, /Robot Skin Papers and Tactile Sensing Research Index/);
   assert.match(research, /Browse the tactile research index/);
   assert.match(seoTopics, /Open the structured research index/);

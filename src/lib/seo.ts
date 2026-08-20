@@ -23,10 +23,10 @@ const updatedAt = '2026-07-10';
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
-    title: 'Robot Skin & Tactile AI for Physical AI and Humanoid Robots',
+    title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
-      'Source-backed robotics research on robot skin, tactile sensors, humanoid robots, robot hands, Physical AI, embodied AI, manipulation, and world models.',
-    updated: '2026-08-16',
+      'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
+    updated: '2026-08-20',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -672,6 +672,11 @@ export function buildHomePhysicalAiRoutesJsonLd() {
       name: 'Robot VLA models',
       url: canonicalUrl('/robot-vla-models'),
       description: 'Definition and comparison route for vision-language-action models, robot foundation models, embodied reasoning, and tactile VLA systems.',
+    },
+    {
+      name: 'Robot learning',
+      url: canonicalUrl('/robot-learning'),
+      description: 'Definition and research route for imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, and tactile feedback.',
     },
     {
       name: 'Robot manipulation',

@@ -11,6 +11,29 @@ Use this table weekly after the sitemap is submitted. Do not rewrite titles, add
 
 External links reported by GSC: 0.
 
+## Current snapshot - 2026-08-20
+
+Google Search Console performance for the latest complete rolling three-month view:
+
+| Window | Impressions | Clicks | CTR | Average position |
+| --- | ---: | ---: | ---: | ---: |
+| Rolling three months | 20,311 | 215 | 1.1% | 8.5 |
+
+Interpretation: visibility is already near the first page on average, but click-through rate is the main constraint. This release improves small-text readability and the homepage snippet, adds one source-backed robot-learning parent route, and avoids adding multiple thin pages.
+
+| Query | Clicks | Impressions | Current routing decision |
+| --- | ---: | ---: | --- |
+| roboskin | 43 | 421 | Keep the homepage as the brand entity route. |
+| robot skin | 15 | 448 | Keep `/robot-skin` as the canonical definition. |
+| robotic skin | 5 | 101 | Consolidate into `/robot-skin`; do not create a synonym page. |
+| tactile AI | 4 | 154 | Keep `/tactile-ai` as the canonical definition. |
+| touchworld | 4 | 49 | Preserve the existing source-backed TouchWorld brief. |
+
+New route measurement:
+
+- Monitor `/robot-learning` for robot learning, imitation learning robotics, reinforcement learning robots, robot learning datasets, and sim-to-real queries after deployment and crawl.
+- Do not split these into separate pages before at least 28 days of query evidence.
+
 ## Current snapshot - 2026-07-27
 
 Search Console data was current through 2026-07-24.
@@ -139,6 +162,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | URL | Query | Impressions | Clicks | CTR | Avg position | Date range | Note |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
 | https://roboskin.ai/humanoid-robots | humanoid robots, humanoid robotics |  |  |  |  | Last 28 days | Broad humanoid parent; tactile intent stays on `/humanoid-robot-skin` |
+| https://roboskin.ai/robot-learning | robot learning, imitation learning robotics, reinforcement learning robots |  |  |  |  | Last 28 days | Broad learning parent; tactile datasets and models retain narrow intent |
 | https://roboskin.ai/robot-vla-models | robot VLA models, vision-language-action models |  |  |  |  | Last 28 days | Broad model parent; tactile foundation and world-model children retain narrow intent |
 | https://roboskin.ai/robot-manipulation | robot manipulation, robotic manipulation, dexterous manipulation |  |  |  |  | Last 28 days | Broad task parent; contact-to-action intent stays on `/tactile-manipulation` |
 | https://roboskin.ai/robot-skin | robot skin |  |  |  |  | Last 28 days | Core definition query |

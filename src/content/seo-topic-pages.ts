@@ -2872,6 +2872,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, predictive models, and policy roles.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Connect VLA policies to demonstrations, datasets, training paradigms, and evaluation.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Review action-conditioned contact prediction and planning evidence.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect model outputs to grasping, insertion, dexterity, and recovery.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place VLA models inside the full humanoid hardware and control stack.' },
@@ -2982,6 +2983,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Follow the contact-to-action loop in detail.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Compare demonstrations, reinforcement, datasets, simulation, and tactile learning.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand instruction-conditioned robot policies and model roles.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Connect manipulation to hands, whole-body control, and Physical AI.' },
       { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Map fingertip, finger, palm, and full-hand sensing.' },
@@ -2997,6 +2999,134 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'ManiSkill-ViTac challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
+    ],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
+  },
+  {
+    path: '/robot-learning',
+    title: 'Robot Learning: Models, Datasets & Real-World Robotics',
+    description:
+      'Learn how robots learn from demonstrations, reinforcement, datasets, simulation, and touch, with source-backed guidance for real-world evaluation.',
+    h1: 'Robot learning: data, models and real-world evaluation',
+    kicker: 'High-interest robotics pillar',
+    intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real, robot foundation models, and tactile learning.',
+    published: '2026-08-20',
+    updated: '2026-08-20',
+    priority: 0.94,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'resources',
+    keywords: ['robot learning', 'robotics machine learning', 'imitation learning robotics', 'reinforcement learning robots', 'robot learning datasets', 'sim-to-real robotics', 'robot foundation models', 'tactile robot learning', 'LeRobot', 'embodied AI'],
+    quickAnswer: [
+      'Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources.',
+      'A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability.',
+      'Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.',
+    ],
+    sections: [
+      {
+        heading: 'The robot-learning loop',
+        body: [
+          'Robot learning connects observations to actions through a training objective and an evaluation protocol. Observations may include cameras, depth, language, proprioception, force, torque, or tactile signals. Actions may be joint commands, end-effector motion, gripper state, trajectories, or action chunks.',
+          'The loop is only as reliable as its data and evaluation. Demonstration quality, timing, calibration, resets, interventions, failed attempts, and hardware changes can all alter what the learned policy actually represents.',
+        ],
+        bullets: [
+          'Collect synchronized observations, robot state, actions, task context, and failure metadata',
+          'Train a policy, representation, reward model, dynamics model, or reusable foundation model',
+          'Evaluate on held-out tasks, objects, scenes, robots, sensors, or physical conditions',
+          'Measure real-robot success, speed, recovery, force, damage, and intervention instead of only offline loss',
+        ],
+      },
+      {
+        heading: 'Major learning paradigms',
+        body: [
+          'Robot-learning labels describe different supervision and optimization choices. Many practical systems combine several of them, so comparisons should identify the exact training and deployment role.',
+        ],
+        table: {
+          headers: ['Approach', 'Learning signal', 'Typical strength', 'Evidence boundary'],
+          rows: [
+            ['Imitation learning', 'Expert or teleoperated demonstrations', 'Directly learns behaviors represented in the demonstrations', 'Sensitive to demonstration coverage and distribution shift'],
+            ['Reinforcement learning', 'Reward from interaction or simulation', 'Can optimize behavior through trial and feedback', 'Reward design, safety, sample cost, and sim-to-real transfer must be reported'],
+            ['Offline robot learning', 'Previously collected trajectories', 'Reuses data without new online exploration during training', 'Cannot assume the logged data covers every useful action or failure'],
+            ['Self-supervised representation learning', 'Structure inside unlabeled or weakly labeled observations', 'Can create reusable visual, tactile, or multimodal features', 'Representation scores do not automatically prove closed-loop task value'],
+            ['Vision-language-action policy', 'Robot trajectories paired with images and instructions', 'Connects task language and observations to actions', 'Embodiment, action interface, data mix, and real-robot evaluation determine scope'],
+          ],
+        },
+      },
+      {
+        heading: 'Data is part of the robot system',
+        body: [
+          'Open X-Embodiment, DROID, and the LeRobot ecosystem illustrate different routes toward reusable robot data: cross-embodiment aggregation, a large real-world manipulation dataset, and a standardized open data and tooling ecosystem. They are complementary examples, not interchangeable benchmarks.',
+          'A dataset record should expose the robot, sensor streams, control interface, task labels, trajectory unit, timing, calibration, collection policy, train-test split, access path, and license. Without those fields, scale is difficult to interpret and reuse is harder to audit.',
+        ],
+      },
+      {
+        heading: 'Simulation and sim-to-real transfer',
+        body: [
+          'Simulation can generate experience, perturbations, labels, and repeatable evaluation without exposing hardware to every trial. Transfer to a physical robot still depends on geometry, dynamics, contact, sensing, latency, control, and observation differences between the simulator and the deployed system.',
+          'Report what was randomized, adapted, calibrated, or fine-tuned, and separate simulation success from repeated physical trials. A simulator benchmark can test a method under controlled conditions; it does not by itself establish real-world reliability.',
+        ],
+      },
+      {
+        heading: 'Tactile robot learning',
+        body: [
+          'Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.',
+          'ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.',
+        ],
+        bullets: [
+          'Synchronize touch with camera frames, pose, joint state, action, and contact events',
+          'Compare against matched no-touch or shuffled-touch baselines where tactile value is claimed',
+          'Test occlusion, slip, insertion, deformable objects, or disturbances that make contact information relevant',
+          'Report sensor calibration, wear, drift, replacement, and latency when they can affect the learned behavior',
+        ],
+      },
+      {
+        heading: 'How to evaluate robot-learning claims',
+        body: [
+          'Evaluation should make the claimed generalization axis explicit. A new object, background, instruction, robot, sensor, task, or dynamics setting tests a different kind of transfer. Combining them into one broad label hides the actual boundary.',
+        ],
+        table: {
+          headers: ['Question', 'What to record', 'Why it matters'],
+          rows: [
+            ['What was learned?', 'Policy, representation, reward, dynamics, plan, or controller role', 'Prevents different model roles from being ranked as if they were identical'],
+            ['What data was used?', 'Robots, tasks, trajectories, modalities, failures, licenses, and splits', 'Defines the experience available to the model'],
+            ['What changed at test time?', 'Object, scene, instruction, embodiment, sensor, task, or physics', 'Names the actual generalization claim'],
+            ['How physical was the evidence?', 'Replay, simulation, staged demo, repeated real-robot trials, or deployment', 'Separates offline performance from physical reliability'],
+            ['What happened when it failed?', 'Retries, resets, intervention, damage, safety stops, and recovery', 'Exposes operational cost and robustness'],
+          ],
+        },
+      },
+      {
+        heading: 'Open tooling and the 2026 ecosystem',
+        body: [
+          'Hugging Face describes LeRobot as an open robotics ecosystem for models, datasets, and tools. Its official v0.6.0 release expands policy evaluation and model-development workflows. These releases are useful infrastructure signals; any capability claim still needs the named policy, dataset, robot, task, and evaluation result.',
+          'Google DeepMind’s Gemini Robotics materials represent another branch of the field: models intended to connect multimodal understanding and robot action. RoboSkin.ai keeps those broad model developments connected to the narrower question of when tactile evidence improves contact-rich behavior.',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is robot learning?', answer: 'Robot learning uses data or experience to train robot perception, prediction, or action instead of specifying every behavior as a fixed rule.' },
+      { question: 'What is the difference between imitation learning and reinforcement learning for robots?', answer: 'Imitation learning learns from demonstrated behavior. Reinforcement learning improves behavior using a reward signal from interaction or simulation. Systems can combine both.' },
+      { question: 'What makes a robot-learning dataset useful?', answer: 'It should identify the robot, observations, actions, task context, timing, calibration, trajectory unit, collection policy, splits, access path, and license.' },
+      { question: 'Why does robot learning need tactile data?', answer: 'It needs tactile data when physical success depends on pressure, shear, slip, seating, deformation, or contact transitions that other sensors do not measure directly.' },
+      { question: 'How should sim-to-real results be judged?', answer: 'State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.' },
+    ],
+    relatedLinks: [
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the path from touch signals to robot perception and action.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Filter source-reviewed resources by robot, sensor, task, modality, and license.' },
+      { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review tasks, protocols, metrics, baselines, and evidence boundaries.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Separate reusable tactile representations, predictive models, and policies.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Connect learned robot behavior to multimodal physical-world feedback.' },
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Map learning, control, hands, locomotion, safety, and tactile sensing.' },
+    ],
+    sources: [
+      { label: 'Hugging Face LeRobot v0.6.0', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'Hugging Face LeRobot documentation', href: 'https://huggingface.co/docs/lerobot/index' },
+      { label: 'Open X-Embodiment', href: 'https://arxiv.org/abs/2310.08864' },
+      { label: 'DROID robot manipulation dataset', href: 'https://arxiv.org/abs/2403.12945' },
+      { label: 'Google DeepMind Gemini Robotics', href: 'https://deepmind.google/models/gemini-robotics/' },
+      { label: 'ManiSkill-ViTac', href: 'https://arxiv.org/abs/2411.12503' },
     ],
     paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
   },

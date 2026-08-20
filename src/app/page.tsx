@@ -167,7 +167,7 @@ export default function Home() {
               <Link key={item.href} href={item.href} className="group flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 last:border-b-0 md:border-r md:even:border-r-0 xl:border-b-0 xl:even:border-r xl:last:border-r-0">
                 <span>
                   <span className="block text-sm font-semibold text-white">{item.label}</span>
-                  <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-[#8e98a8]">{item.detail}</span>
+                  <span className="mt-1 block font-mono text-[13px] uppercase tracking-[0.08em] text-[#a39d92]">{item.detail}</span>
                 </span>
                 <span className="text-[#ff6b3d] transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </Link>
@@ -190,7 +190,7 @@ export default function Home() {
                   maps each large topic back to tactile sensing, robot hands, contact-rich tasks, data, models, and measurable
                   limitations.
                 </p>
-                <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.1em] text-[#777168]">
+                <p className="mt-5 font-mono text-[13px] uppercase tracking-[0.1em] text-[#5e5951]">
                   Research watch reviewed {homeResearchWatch.reviewedAt}
                 </p>
               </div>
@@ -330,16 +330,16 @@ export default function Home() {
               <div className="border-t border-[#171714]/25">
                 {homePhysicalAiSignals.map((signal, index) => (
                   <article key={signal.title} className="grid gap-3 border-b border-[#171714]/25 py-5 md:grid-cols-[44px_0.48fr_1fr]">
-                    <span className="font-mono text-xs text-[#777168]">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="font-mono text-xs text-[#5e5951]">{String(index + 1).padStart(2, '0')}</span>
                     <div>
                       <h3 className="text-lg font-semibold">{signal.title}</h3>
                       {signal.href && signal.ctaLabel ? (
-                        <Link href={signal.href} className="mt-3 inline-flex text-sm font-semibold text-[#bd4324]">
+                        <Link href={signal.href} className="mt-3 inline-flex text-sm font-semibold text-[#9f351d]">
                           {signal.ctaLabel} →
                         </Link>
                       ) : null}
                     </div>
-                    <p className="text-sm leading-relaxed text-[#625e57]">{signal.description}</p>
+                    <p className="text-sm leading-relaxed text-[#514c45]">{signal.description}</p>
                   </article>
                 ))}
               </div>

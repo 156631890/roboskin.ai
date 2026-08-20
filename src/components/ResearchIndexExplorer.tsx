@@ -49,7 +49,7 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
   };
 
   return (
-    <div>
+    <div className="research-data-explorer">
       <div className="grid gap-4 border-y border-white/10 py-5 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
         <label className="grid gap-2 text-sm font-semibold text-white">
           Modality

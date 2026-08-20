@@ -293,11 +293,11 @@ export const homeBroadResearchLanes: ContentTile[] = [
     ctaLabel: 'Explore humanoid robots',
   },
   {
-    title: 'Physical AI and embodied AI',
+    title: 'Robot learning, Physical AI, and embodied AI',
     description:
-      'Connect physical-world AI to robot skin, tactile sensing, contact data, and measurable feedback beyond vision.',
-    href: '/physics-ai',
-    ctaLabel: 'Open the Physical AI route',
+      'Map demonstrations, reinforcement learning, robot datasets, sim-to-real transfer, and tactile feedback into physical-world behavior.',
+    href: '/robot-learning',
+    ctaLabel: 'Map robot learning',
   },
   {
     title: 'Robot manipulation and tactile sensors',
@@ -1312,6 +1312,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: 'In the RoboSkin context, Physical AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback.',
     related: ['robot skin', 'tactile AI', 'contact-aware robotics'],
     href: '/physics-ai',
+  },
+  {
+    term: 'Robot learning',
+    definition: 'The use of data or experience to train robot perception, prediction, or action through demonstrations, rewards, self-supervision, simulation, or multimodal feedback.',
+    related: ['imitation learning', 'reinforcement learning', 'robot datasets'],
+    href: '/robot-learning',
   },
   {
     term: 'Humanoid robot',

@@ -44,7 +44,7 @@ export default function TactileBenchmarkExplorer({ entries }: TactileBenchmarkEx
   ];
 
   return (
-    <section className="deferred-section pb-14 md:pb-20" aria-labelledby="benchmark-explorer-heading">
+    <section className="research-data-explorer deferred-section pb-14 md:pb-20" aria-labelledby="benchmark-explorer-heading">
       <div className="container-shell">
         <p className="eyebrow">Structured benchmark explorer</p>
         <div className="mt-4 grid gap-5 lg:grid-cols-[0.7fr_1fr] lg:items-end">
