@@ -50,6 +50,34 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section id="editorial-lead" className="pb-20 scroll-mt-28">
+        <div className="container-shell">
+          <div className="grid gap-8 rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 md:p-10 lg:grid-cols-[0.34fr_1fr]">
+            <div>
+              <p className="eyebrow">Editorial leadership</p>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">{site.editorial.lead.name}</h2>
+              <p className="mt-3 font-mono text-sm uppercase tracking-[0.12em] text-accent">{site.editorial.lead.role}</p>
+            </div>
+            <div>
+              <p className="text-sm leading-relaxed text-soft">
+                Steven Yang leads RoboSkin.ai&apos;s topic selection, source-boundary review, corrections process, and publication standards. The role is editorial: public research claims are traced to cited papers, institutional pages, standards documentation, or official project sources rather than presented as personal laboratory findings.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-soft">
+                Research and news briefs retain the institutional RoboSkin.ai Editorial Team byline when they represent the site&apos;s shared research workflow. That byline does not imply authorship of the cited scientific work or affiliation with the referenced laboratory, company, or project.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/editorial-policy" className="btn-secondary">
+                  Read the editorial policy
+                </Link>
+                <Link href="/contact?requestType=research" className="btn-tertiary">
+                  Submit a correction
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">

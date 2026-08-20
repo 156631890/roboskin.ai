@@ -5,19 +5,25 @@ import test from 'node:test';
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
-test('visible content uses one institutional editorial team', async () => {
-  const [site, blog, news, policy] = await Promise.all([
+test('visible content uses one institutional editorial team with a named editorial lead', async () => {
+  const [site, blog, news, policy, about] = await Promise.all([
     read('src/content/site.ts'),
     read('src/lib/blog-data.ts'),
     read('src/lib/news-data.ts'),
     read('src/app/editorial-policy/page.tsx'),
+    read('src/app/about/page.tsx'),
   ]);
 
   assert.match(site, /name: 'RoboSkin\.ai Editorial Team'/);
   assert.match(site, /path: '\/editorial-policy'/);
   assert.match(site, /logo: '\/apple-touch-icon\.svg'/);
+  assert.match(site, /name: 'Steven Yang'/);
+  assert.match(site, /role: 'Founder & Editor'/);
   assert.doesNotMatch(`${blog}\n${news}`, /RoboSkin technical editor/);
   assert.match(policy, /RoboSkin\.ai Editorial Team/);
+  assert.match(policy, /site\.editorial\.lead\.name/);
+  assert.match(about, /Editorial leadership/);
+  assert.match(about, /site\.editorial\.lead\.name/);
   assert.match(policy, /Corrections and material revisions/);
   assert.match(policy, /Research review method/);
 });
@@ -38,6 +44,9 @@ test('article authors and the publisher resolve to factual organization nodes', 
   assert.match(seo, /creator: \{ '@id': `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team` \}/);
   assert.match(seo, /width: 180/);
   assert.match(seo, /height: 180/);
+  assert.match(seo, /export function buildEditorialLeadJsonLd/);
+  assert.match(seo, /'@type': 'Person'/);
+  assert.match(seo, /#steven-yang/);
   assert.doesNotMatch(editorialIdentitySeo, /sameAs:/);
 });
 

@@ -31,8 +31,8 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);
-  assert.doesNotMatch(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/);
-  assert.doesNotMatch(layout, /ca-pub-8231924120348302/);
+  assert.match(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8231924120348302/);
+  assert.match(layout, /name="google-adsense-account" content="ca-pub-8231924120348302"/);
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);

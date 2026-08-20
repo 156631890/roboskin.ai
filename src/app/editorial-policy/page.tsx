@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/editorial-policy');
@@ -94,9 +95,9 @@ export default function EditorialPolicyPage() {
           <section className="deferred-section mt-10 grid gap-6 lg:grid-cols-2">
             <div className="signal-panel p-6 md:p-8">
               <p className="eyebrow">Research review method</p>
-              <h2 className="mt-4 text-2xl font-semibold text-white">How the RoboSkin.ai Editorial Team reviews sources</h2>
+              <h2 className="mt-4 text-2xl font-semibold text-white">How {site.editorial.lead.name} and the editorial team review sources</h2>
               <p className="mt-4 text-sm leading-relaxed text-soft">
-                The RoboSkin.ai Editorial Team starts with the cited paper, institutional release, standards documentation, or project documentation. Reviews separate source-reported findings from RoboSkin.ai analysis, retain the public source link, identify evidence limits, and update the modified date when a material interpretation changes.
+                {site.editorial.lead.name}, {site.editorial.lead.role}, is responsible for topic selection, source-boundary review, corrections, and publication standards. The RoboSkin.ai Editorial Team starts with the cited paper, institutional release, standards documentation, or project documentation. Reviews separate source-reported findings from RoboSkin.ai analysis, retain the public source link, identify evidence limits, and update the modified date when a material interpretation changes.
               </p>
             </div>
             <div className="signal-panel p-6 md:p-8">

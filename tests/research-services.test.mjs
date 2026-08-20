@@ -48,6 +48,10 @@ test('commercial inquiries use the configured delivery endpoint with complete fo
   assert.match(tracker, /Research Services Open/);
   assert.match(privacy, /commercial inquiry/);
   assert.match(privacy, /NDA preference/);
+  assert.match(privacy, /Google advertising and cookies/);
+  assert.match(privacy, /Google Ads Settings/);
+  assert.match(privacy, /optout\.aboutads\.info/);
+  assert.match(privacy, /certified consent-management messages/);
 });
 
 test('the free sample report is crawlable, downloadable, source-bounded, and large enough to be substantive', async () => {

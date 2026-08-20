@@ -9,6 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
 import {
   buildGraphJsonLd,
+  buildEditorialLeadJsonLd,
   buildOrganizationJsonLd,
   buildPageMetadata,
   buildWebsiteJsonLd,
@@ -60,12 +61,18 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="alternate" type="application/rss+xml" title="RoboSkin.ai Research and News" href="/feed.xml" />
         <link rel="describedby" type="text/markdown" href="/llms.txt" />
+        <meta name="google-adsense-account" content="ca-pub-8231924120348302" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8231924120348302"
+          crossOrigin="anonymous"
+        />
         <meta name="theme-color" content="#11110f" />
       </head>
       <body
         className={`${manrope.variable} ${ibmPlexMono.variable} antialiased flex flex-col min-h-screen`}
       >
-        <JsonLd data={buildGraphJsonLd([buildOrganizationJsonLd(), buildWebsiteJsonLd()])} />
+        <JsonLd data={buildGraphJsonLd([buildOrganizationJsonLd(), buildEditorialLeadJsonLd(), buildWebsiteJsonLd()])} />
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Navigation />
         <main id="main-content" className="flex-grow">{children}</main>

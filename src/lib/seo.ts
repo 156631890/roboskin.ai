@@ -239,6 +239,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/privacy',
     title: 'Privacy Policy',
     description: 'How RoboSkin handles contact form submissions and site usage data.',
+    updated: '2026-08-21',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -348,6 +349,9 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     email: site.contact.primaryEmail,
     description: site.description,
+    founder: {
+      '@id': `${canonicalUrl('/about')}#steven-yang`,
+    },
     logo: {
       '@type': 'ImageObject',
       '@id': `${site.url}/#logo`,
@@ -369,6 +373,20 @@ export function buildOrganizationJsonLd() {
         availableLanguage: ['en'],
       },
     ],
+  };
+}
+
+export function buildEditorialLeadJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${canonicalUrl('/about')}#steven-yang`,
+    name: site.editorial.lead.name,
+    jobTitle: site.editorial.lead.role,
+    url: canonicalUrl(site.editorial.lead.path),
+    worksFor: {
+      '@id': `${site.url}/#organization`,
+    },
   };
 }
 
@@ -448,50 +466,7 @@ export function buildResearchArticlePageJsonLd(post: BlogPost) {
     },
     primaryImageOfPage: {
       '@type': 'ImageObject',
-      url: `${site.url}${post.image}`,
-    },
-    datePublished: post.date,
-    dateModified: post.updated,
-    inLanguage: 'en',
-  };
-}
-
-export function buildResearchArticleBreadcrumbJsonLd(post: BlogPost) {
-  const url = canonicalUrl(`/research/${post.id}`);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    '@id': `${url}#breadcrumb`,
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: canonicalUrl('/'),
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Research',
-        item: canonicalUrl('/research'),
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: post.title,
-        item: url,
-      },
-    ],
-  };
-}
-
-export function buildNewsArticlePageJsonLd(post: NewsPost) {
-  const url = canonicalUrl(`/news/${post.id}`);
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
+      url: `${site.ﬂnÌ¢Gß≤⁄Óù∆≠y“Page',
     '@id': `${url}#webpage`,
     url,
     name: post.title,
