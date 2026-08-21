@@ -5,11 +5,14 @@ import test from 'node:test';
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
-test('research organizations keep the eleven new identities separate and source bounded', async () => {
+test('research organizations keep normalized university and lab identities separate and source bounded', async () => {
   const source = await read('src/lib/research-organizations.ts');
   const entries = source.match(/researchOrganizationEntries:[\s\S]*?= \[([\s\S]*?)\n\];\n\ntype ModelRelationPolicy/)?.[1] ?? '';
 
   for (const id of [
+    'peking-university',
+    'northwestern-university',
+    'northwestern-center-for-robotics-and-biosystems',
     'shanghaitech-university',
     'tsinghua-university',
     'tu-dresden',
@@ -25,7 +28,10 @@ test('research organizations keep the eleven new identities separate and source 
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.ok([...entries.matchAll(/\n\s+id: '/g)].length >= 23);
+  assert.ok([...entries.matchAll(/\n\s+id: '/g)].length >= 26);
+  assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
+  assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
+  assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);
   assert.match(entries, /id: 'lasr-lab',[\s\S]*?kind: 'research lab',[\s\S]*?officialUrl: 'https:\/\/lasr\.org\/'/);
   assert.match(entries, /id: 'mmint-lab',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/www\.mmintlab\.com\/people\/nima-fazeli\//);
   assert.match(entries, /id: 'bristol-robotics-laboratory',[\s\S]*?kind: 'research lab',[\s\S]*?joint research partnership of UWE Bristol and the University of Bristol/);
@@ -54,6 +60,9 @@ test('source affiliation batches preserve labels, primary sources, and conservat
   const source = await read('src/lib/research-entity-relations.ts');
 
   for (const id of [
+    'prism-contact-rich-industrial-skill-dataset-2026',
+    'prism-industrial-skill',
+    'missing-touch-spatial-tactile-feedback-teleoperation-2026',
     'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
     'softvtbench',
     'ht-bench-full-hand-tactile-representations-2026',
@@ -70,6 +79,9 @@ test('source affiliation batches preserve labels, primary sources, and conservat
   }
 
   for (const id of [
+    'peking-university',
+    'northwestern-university',
+    'northwestern-center-for-robotics-and-biosystems',
     'beihang-university',
     'tsinghua-university',
     'carnegie-mellon-university',
@@ -104,7 +116,7 @@ test('partOf edges keep only directly supported lab relationships', async () => 
   assert.doesNotMatch(partOf, /bristol-robotics-laboratory|university-of-bristol/);
 });
 
-test('dataset usage edges distinguish sensor use from simulation-only embodiment', async () => {
+test('dataset usage edges distinguish sensor use, physical embodiments, and simulation-only embodiments', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
   const usage = source.match(/researchDatasetUsageRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchPaperSensorRelations/)?.[1] ?? '';
 
@@ -120,18 +132,20 @@ test('dataset usage edges distinguish sensor use from simulation-only embodiment
   }
 
   assert.equal([...usage.matchAll(/relation: 'usesSensor'/g)].length, 4);
-  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 1);
+  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 2);
+  assert.match(usage, /fromId: 'prism-industrial-skill',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?two physical Franka Emika Panda arms/);
   assert.match(usage, /fromId: 'softvtbench',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?simulation-only embodiment relation/);
   assert.match(usage, /does not use a physical GelSight Mini/);
 });
 
-test('paper sensor edges are limited to the two GenForce sensors supported by the primary paper', async () => {
+test('paper sensor edges preserve the two GenForce sensors and the Missing Touch GelSight Mini setup', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
   const relations = source.match(/researchPaperSensorRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchSemanticRelations/)?.[1] ?? '';
 
-  assert.equal([...relations.matchAll(/relation: 'usesSensor'/g)].length, 2);
+  assert.equal([...relations.matchAll(/relation: 'usesSensor'/g)].length, 3);
+  assert.match(relations, /fromId: 'missing-touch-spatial-tactile-feedback-teleoperation-2026'[\s\S]*?toId: 'gelsight-mini'/);
   assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
   assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'uskin'/);
   assert.match(relations, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/);
-  assert.doesNotMatch(relations, /gelsight-mini|digit-360/);
+  assert.doesNotMatch(relations, /digit-360/);
 });

@@ -32,6 +32,10 @@ import {
 } from '@/content/site';
 import { getBlogSummaries } from '@/lib/blog-data';
 import { getNewsSummaries } from '@/lib/news-data';
+import { researchIndexEntries } from '@/lib/research-index';
+import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
+import { tactileDatasetEntries } from '@/lib/tactile-datasets';
+import { tactileSensorEntries } from '@/lib/tactile-sensors';
 import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
@@ -65,10 +69,10 @@ const latestResearchSignals = [
   .slice(0, 3);
 
 const researchDatabases = [
-  { label: 'Datasets', detail: '12 source-reviewed records', href: '/datasets' },
-  { label: 'Benchmarks', detail: '9 evaluation suites', href: '/benchmarks' },
-  { label: 'Sensors', detail: '13 sensor systems', href: '/sensors' },
-  { label: 'Research index', detail: 'Papers and evidence limits', href: '/research-index' },
+  { label: 'Datasets', detail: `${tactileDatasetEntries.length} source-reviewed records`, href: '/datasets' },
+  { label: 'Benchmarks', detail: `${tactileBenchmarkEntries.length} evaluation suites`, href: '/benchmarks' },
+  { label: 'Sensors', detail: `${tactileSensorEntries.length} sensor systems`, href: '/sensors' },
+  { label: 'Research index', detail: `${researchIndexEntries.length} papers and technical records`, href: '/research-index' },
 ];
 
 export const metadata: Metadata = buildPageMetadata('/');

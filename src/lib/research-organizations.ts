@@ -37,6 +37,43 @@ export type RobotAiOrganizationRelation = {
 
 export const researchOrganizationEntries: ResearchOrganizationEntry[] = [
   {
+    id: 'peking-university',
+    name: 'Peking University',
+    aliases: ['PKU'],
+    kind: 'university',
+    officialUrl: 'https://english.pku.edu.cn/',
+    identitySources: [
+      { label: 'Peking University official about page', url: 'https://english.pku.edu.cn/about.html' },
+      { label: 'Peking University School of Intelligence Science and Technology profile', url: 'https://sai.pku.edu.cn/znxyenglish/About/Dean_s_Message.htm' },
+    ],
+    evidenceBoundary: 'The university identity and its School of Intelligence Science and Technology are verified from official PKU pages. A source-listed research affiliation does not establish university-wide ownership, funding, endorsement, or participation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'northwestern-university',
+    name: 'Northwestern University',
+    aliases: ['Northwestern'],
+    kind: 'university',
+    officialUrl: 'https://www.northwestern.edu/',
+    identitySources: [
+      { label: 'Northwestern University official about page', url: 'https://www.northwestern.edu/about/' },
+    ],
+    evidenceBoundary: 'The official university identity is separate from any paper author affiliation. A source-listed relationship does not establish university-wide ownership, funding, endorsement, or participation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'northwestern-center-for-robotics-and-biosystems',
+    name: 'Center for Robotics and Biosystems',
+    aliases: ['Northwestern Center for Robotics and Biosystems', 'CRB'],
+    kind: 'research lab',
+    officialUrl: 'https://robotics.northwestern.edu/',
+    identitySources: [
+      { label: 'Northwestern Center for Robotics and Biosystems official site', url: 'https://robotics.northwestern.edu/' },
+    ],
+    evidenceBoundary: 'Modeled as Northwestern University’s named interdisciplinary robotics center from its official site, not as a separate company or legal entity. A paper affiliation does not imply center-wide participation, ownership, or endorsement.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'google-deepmind',
     name: 'Google DeepMind',
     aliases: [],

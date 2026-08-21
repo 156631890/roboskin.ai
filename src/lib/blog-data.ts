@@ -13,6 +13,7 @@ export interface BlogPost {
   image: string;
   sourceTitle: string;
   sourceUrl: string;
+  citationUrls?: string[];
   technicalFocus: string[];
 }
 
@@ -22,6 +23,229 @@ export type BlogSummary = Pick<
 >;
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: 'prism-contact-rich-industrial-skill-dataset-2026',
+    title: 'PRISM maps 5,000+ contact-rich industrial robot trajectories',
+    seoTitle: 'PRISM Contact-Rich Industrial Robotics Dataset',
+    seoDescription:
+      'PRISM reports 5,000+ robot trajectories across 25+ industrial tasks. Review its tactile subset, multimodal rates, robots, access, and license limits.',
+    excerpt:
+      'PRISM reports 5,000+ robot trajectories across 25+ industrial tasks, but tactile observations cover only a subset and the announced dataset download is not yet available.',
+    content: `# PRISM maps 5,000+ contact-rich industrial robot trajectories
+
+**Evidence review - August 2026**
+
+PRISM is an August 18, 2026 arXiv preprint and announced multimodal dataset for contact-rich industrial manipulation. The authors report more than 5,000 robot trajectories, an equal number of paired human demonstrations, more than 45 hours of data, and more than 25 tasks across Franka, Realman, and LEJU platforms.
+
+The most important qualification is easy to lose in a headline: tactile sensing is included for only a subset of episodes. The approximately 27 million images reported by the paper combine visual and visuotactile streams; they are not 27 million tactile images. PRISM is therefore a broad industrial robot-learning dataset with a tactile subset, not a uniformly tactile dataset.
+
+## Source snapshot
+
+| Field | Source-reported state | RoboSkin interpretation |
+| --- | --- | --- |
+| Scale | 5,000+ robot trajectories and 5,000 paired human demonstrations over 45+ hours | A large announced collection; the public files are not yet available for an independent count or integrity audit. |
+| Tasks | 25+ industrial manipulation tasks | Coverage includes insertion, packaging, installation, plug/unplug, and conveyor sorting; task balance and final file inventory require the release. |
+| Images | Approximately 27 million across vision and visuotactile streams | Do not rewrite this as 27 million tactile frames. |
+| Tactile coverage | Visuotactile observations when available and a tactile-equipped subset | Tactile data does not cover every trajectory or hardware configuration. |
+| Access | The paper says open-sourced; the official project page marks the ModelScope dataset as “soon” | As of August 22, 2026, no official dataset download or dataset-file license was available from the linked project or repository. |
+
+## Seven hardware configurations
+
+PRISM combines three robot families, three gripper categories, and three teleoperation interfaces. The paper lists these seven configurations.
+
+| Configuration | Robot | End effector | Teleoperation |
+| --- | --- | --- | --- |
+| 1 | Franka | 3D-printed gripper | Tracker |
+| 2 | Franka | Visuotactile gripper | Tracker |
+| 3 | Franka | Visuotactile dexterous hand | Tracker |
+| 4 | Franka | 3D-printed gripper | Exoskeleton |
+| 5 | Realman | 3D-printed gripper | Exoskeleton |
+| 6 | Realman | 3D-printed gripper | VR |
+| 7 | LEJU | Robotiq-85 | VR |
+
+The tracker platform uses two Franka Emika Panda arms. The exoskeleton platform uses two Realman RM75-6F arms on a torso with three waist degrees of freedom. The VR platform uses a LEJU upper-body humanoid. These are collection configurations, not evidence that one policy transfers reliably across all three robot families.
+
+Use the [Franka Emika Panda robot record](/robots#robot-franka-emika-panda) for the normalized platform identity. The PRISM paper does not name a commercial tactile-sensor product, so RoboSkin does not invent a sensor relationship for its visuotactile gripper or dexterous hand.
+
+## Modalities and native rates
+
+The paper keeps original timestamps because the modalities run at different native rates.
+
+| Modality | Source-reported size | Native rate |
+| --- | ---: | ---: |
+| RGB image | 540 × 960 × 3 | 15 Hz |
+| Depth image | 540 × 960 | 15 Hz |
+| Visuotactile image | 256 × 256 | 30 Hz |
+| Robot joint angle and torque | 6 or 7 values | 15 Hz |
+| End-effector Cartesian pose | 6 or 7 values | 15 Hz |
+| Gripper width | 1 value | 15 Hz |
+| Six-degree-of-freedom force/torque | 6 values | 100 Hz |
+
+Processed episodes share a common schema containing robot state and action, wrench data when available, multi-view RGB-D, visuotactile imagery when available, calibration parameters, timestamps, platform and task identifiers, outcome labels, and volunteer ratings. The source says experiments convert the data to LeRobot v3.0 format; that experimental conversion should not be treated as proof that the unreleased public package already contains every field in a finalized LeRobot archive.
+
+## Collection and evaluation boundary
+
+Eight volunteers collected demonstrations after standardized training, then participated in filtering, annotation, and scoring. The collection also includes intentional perturbation episodes. That adds operator and interaction variation, but it does not by itself establish balanced coverage or leakage-free train and test partitions.
+
+The paper evaluates ACT, Diffusion Policy, and π0 on a bimanual Realman platform for electronic plug/unplug, caliper packaging, and conveyor sorting. It compares 100- and 200-demonstration settings and uses 20 evaluation episodes per configuration. The authors explicitly report that performance remains far from satisfactory, especially for dynamic manipulation and precise force-aware operations.
+
+These experiments are a first-party evaluation of selected PRISM tasks. They are not an independent leaderboard, a universal industrial-robot benchmark, or proof that more demonstrations will improve every task and policy at the same rate.
+
+## Availability and license audit
+
+There is a material difference between the paper abstract and the current release surface. The abstract says the dataset is open-sourced at the project page. The official page currently displays a disabled ModelScope dataset button labeled “soon,” while the linked GitHub repository contains the project website, assets, and README but no dataset files, release package, or dataset license.
+
+RoboSkin therefore records PRISM as **announced, download pending** as of August 22, 2026. The license attached to an article or source-code repository must not be assumed to license unreleased dataset files. Availability should change only after an official host exposes files, a version, and reuse terms.
+
+## Why PRISM matters for tactile AI
+
+PRISM connects the [robotics dataset](/robotics-datasets) problem to the [tactile AI](/tactile-ai) stack. Vision supplies scene and geometry information, proprioception records robot state, force/torque measures interaction load, and the tactile subset exposes local contact evolution. Its multi-rate timestamps and calibration graph are as important as the headline trajectory count because contact-rich learning depends on aligning these signals without hiding latency or missing modalities.
+
+For [robot teleoperation](/robot-teleoperation), the three interfaces create a useful research question: how do exoskeleton, tracker, and VR demonstrations differ in precision, smoothness, contact stability, and corrective behavior? The paper motivates that comparison, but the unreleased files prevent an independent answer today.
+
+## Release verification checklist
+
+- Confirm the official download host, version, checksum, and dataset-file license.
+- Count complete robot trajectories, paired human demonstrations, failed episodes, and per-task coverage from the released manifests.
+- Identify exactly which episodes contain tactile imagery, force/torque, depth, and each calibration record.
+- Preserve original timestamps and document any resampling or interpolation used for policy training.
+- Split complete tasks, episodes, operators, objects, and hardware configurations before extracting overlapping windows.
+- Keep results by robot, gripper, teleoperation interface, task, and modality instead of reporting one undifferentiated score.
+- Reproduce the ACT, Diffusion Policy, and π0 experiments before comparing PRISM with unrelated datasets.
+
+## Related RoboSkin resources
+
+- [Tactile robotics datasets](/datasets)
+- [Robotics datasets](/robotics-datasets)
+- [Robot teleoperation](/robot-teleoperation)
+- [Robot learning](/robot-learning)
+- [Robot manipulation](/robot-manipulation)
+- [Tactile AI](/tactile-ai)
+
+## Primary sources
+
+- [arXiv: PRISM - Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing](https://arxiv.org/abs/2608.17962)
+- [Official PRISM project page](https://tengbo-yu.github.io/PRISM/)
+- [Official PRISM GitHub repository](https://github.com/Tengbo-Yu/PRISM)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '8 min read',
+    category: 'Tactile datasets',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    sourceTitle: 'PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing',
+    sourceUrl: 'https://arxiv.org/abs/2608.17962',
+    citationUrls: [
+      'https://arxiv.org/abs/2608.17962',
+      'https://arxiv.org/html/2608.17962v1',
+      'https://tengbo-yu.github.io/PRISM/',
+      'https://github.com/Tengbo-Yu/PRISM',
+    ],
+    technicalFocus: ['PRISM dataset', 'robotics dataset', 'contact-rich manipulation', 'robot teleoperation', 'tactile sensing', 'industrial robotics'],
+  },
+  {
+    id: 'missing-touch-spatial-tactile-feedback-teleoperation-2026',
+    title: 'The Missing Touch tests spatial tactile feedback in robot teleoperation',
+    seoTitle: 'Spatial Tactile Feedback for Robot Teleoperation',
+    seoDescription:
+      'The Missing Touch tests GelSight-to-fingertip feedback in two teleoperation tasks. Review the 29-79% DTW claim, participant study, and autonomy limits.',
+    excerpt:
+      'A GelSight Mini and 32-DoF fingertip display made two teleoperation tasks more natural and consistent, but no autonomous robot policy was trained or evaluated.',
+    content: `# The Missing Touch tests spatial tactile feedback in robot teleoperation
+
+**Evidence review - August 2026**
+
+The Missing Touch is an August 19, 2026 arXiv preprint from Northwestern University's Center for Robotics and Biosystems. It asks whether transmitting the spatial pattern of robot-fingertip contact to a human operator can make teleoperated motion more like direct human manipulation.
+
+The study uses a two-degree-of-freedom bilateral leader-follower device, a GelSight Mini as the robot finger, and a 32-degree-of-freedom cutaneous display under the operator's fingertip. Across a button task and a peg-rolling task, the source reports that more localized feedback produced more natural and consistent trajectories. It did **not** train or evaluate an autonomous policy.
+
+## From robot contact to human fingertip
+
+| Layer | Study implementation | Evidence boundary |
+| --- | --- | --- |
+| Robot-side touch | GelSight Mini vision-based tactile sensor | The study uses contact images, not a generally calibrated force field for arbitrary tasks. |
+| Contact mapping | Reference-frame subtraction, smoothing, thresholding, and a 32-pixel activation map | A task-specific binary inflation mapping; it is not a learned universal tactile representation. |
+| Human-side display | 32 independently inflatable elastic domes at 3 mm center-to-center pitch | Fluid Reality provided the displays; that acknowledgment does not make the company an author or owner of the study. |
+| Kinesthetic channel | Bilateral position-position force feedback | Kinesthetic feedback remained active in every cutaneous-feedback condition. |
+| Motion measurement | Two-dimensional end-effector trajectories recorded at 50 Hz | The apparatus has two degrees of freedom and does not represent a multifinger dexterous hand. |
+
+The four cutaneous conditions are Off, 1D, 2D, and Full. Off provides no cutaneous display output. In 1D, all 32 domes inflate together when contact is detected. In 2D, the upper or lower half inflates according to contact location. Full activates only the display locations mapped from the GelSight image.
+
+Use the [GelSight Mini sensor record](/sensors#sensor-gelsight-mini) for the commercial sensor identity and specifications. The paper's result belongs to its custom mapping, display, apparatus, and tasks; it is not a general GelSight Mini performance benchmark.
+
+## Two participant studies
+
+| Task | Participants | Teleoperated trials | Direct baseline | Main task demand |
+| --- | ---: | ---: | --- | --- |
+| Button discrimination | 12 | 48 per participant, 12 per feedback condition | 12 direct-manipulation trials per participant | Press one of two buttons 1 cm apart without vision. |
+| Peg rolling | 10, in a separate participant group | 48 per participant, 12 per feedback condition | 6 direct-manipulation repetitions per participant | Roll a peg to a hard stop and back while managing strokes, loopbacks, and slips. |
+
+Participants were blindfolded for the direct baseline and could not see the robot workspace during teleoperation. The direct finger trajectories supplied a participant-specific reference. The authors then used two-dimensional dynamic time warping, or DTW, to measure how far each teleoperated trajectory deviated from the corresponding direct-manipulation trajectories.
+
+## What the 29-79% result means
+
+The abstract reports a 29-79% reduction in deviation between teleoperated and natural trajectories when distributed contact information is reproduced. That range is tied to the study's DTW comparisons across two tasks and feedback conditions. It is not a 29-79% improvement in robot dexterity, policy success, industrial throughput, or autonomous manipulation.
+
+In the button task, every cutaneous condition reduced DTW distance relative to Off, while Full was more natural than 1D. Full was not significantly more natural than 2D after the reported correction, and completion-time differences between Full and 1D or 2D were also not significant after correction. The paper notes that coarse feedback can make very small features easier to perceive.
+
+In peg rolling, Full produced lower DTW distance than 1D and 2D, longer strokes, fewer strokes, fewer roll-offs, and faster completion under the authors' protocol. The difference between Off and 1D was not significant for DTW distance or completion time, which the authors relate to redundancy between uniform cutaneous feedback and kinesthetic force cues.
+
+The sharper conclusion is task-dependent: spatial resolution helps most when the task needs localized contact information that kinesthetic feedback does not already provide and when the display can represent the relevant feature at a useful scale.
+
+## Implication for learning from demonstration
+
+The study also finds that Full feedback produces more concentrated state-space occupancy and lower within- and between-operator trajectory variability. This is directly relevant to [robot teleoperation](/robot-teleoperation), where operator corrections, overshoots, and inconsistent contact can enter the training data.
+
+However, the paper connects these properties to prior evidence about data quality; it does not train ACT, Diffusion Policy, a VLA, or another autonomous policy on the collected trials. The safe claim is that spatial tactile feedback changed demonstration trajectories in ways that may support learning. The unsafe claim is that it was proven to improve autonomous policy success.
+
+The [robot learning](/robot-learning) hub explains the additional steps required: release a dataset, define splits, train matched policies, evaluate held-out tasks, and measure whether the demonstration change survives model and deployment variation. [Physical AI + touch](/physical-ai-touch) places the same human-operator evidence inside the wider touch-to-action loop without turning an implication into an autonomous result.
+
+## Limitations that should travel with the result
+
+- DTW is one trajectory-similarity measure and does not capture every property of long-horizon or articulated manipulation.
+- The custom leader-follower apparatus has two degrees of freedom.
+- Evidence comes from two tasks and two small participant groups, not high-degree-of-freedom multifinger teleoperation.
+- Kinesthetic force feedback was always present, so the experiment compares cutaneous resolution on top of that channel.
+- Full resolution was not uniformly superior for every speed or naturalness comparison.
+- The study did not release or evaluate an autonomous-policy training benchmark.
+- Generalization to surgical systems, hazardous environments, robot hands, and complex dexterous tasks requires new experiments.
+
+## Evaluation checklist
+
+- Keep cutaneous and kinesthetic feedback conditions explicit.
+- Report participant groups, practice trials, direct baselines, and all four feedback resolutions.
+- Separate task completion time, DTW naturalness, task-specific errors, and trajectory variability.
+- Test whether display pitch and mapping resolution match the physical feature size.
+- Add high-degree-of-freedom, multifinger, visual, and longer-horizon tasks before making dexterity claims.
+- Train matched autonomous policies only after creating leakage-resistant trajectory splits.
+- Report whether any learning gain persists across operators, sensors, robots, and tasks.
+
+## Related RoboSkin resources
+
+- [Robot teleoperation](/robot-teleoperation)
+- [Robot learning](/robot-learning)
+- [Tactile AI](/tactile-ai)
+- [Physical AI + touch](/physical-ai-touch)
+- [Robot manipulation](/robot-manipulation)
+- [GelSight Mini sensor record](/sensors#sensor-gelsight-mini)
+
+## Primary sources
+
+- [arXiv: The Missing Touch - Spatially Distributed Tactile Feedback Brings Teleoperation Closer to Human Dexterity](https://arxiv.org/abs/2608.19372)
+- [Full arXiv HTML with methods and supplementary tables](https://arxiv.org/html/2608.19372v1)
+- [Northwestern University Center for Robotics and Biosystems](https://robotics.northwestern.edu/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '8 min read',
+    category: 'Robot teleoperation',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'The Missing Touch: Spatially Distributed Tactile Feedback Brings Teleoperation Closer to Human Dexterity',
+    sourceUrl: 'https://arxiv.org/abs/2608.19372',
+    technicalFocus: ['robot teleoperation', 'spatial tactile feedback', 'tactile sensing', 'GelSight Mini', 'learning from demonstration', 'Physical AI touch'],
+  },
   {
     id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
     title: 'SoftVTBench separates deformable-task completion from contact quality',

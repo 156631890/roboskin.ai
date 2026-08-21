@@ -2145,7 +2145,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Compare tactile datasets for robot learning by signals, collection unit, split design, task fit, access evidence, and transfer limits.',
     h1: 'Tactile datasets for robot learning',
-    kicker: '13-record dataset directory',
+    kicker: '14-record dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
     updated: '2026-08-22',
@@ -2175,6 +2175,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Resource', 'Signals and scale', 'Best-fit question', 'Evaluation unit', 'Evidence boundary'],
           rows: [
+            ['PRISM', '5,000+ robot trajectories, 5,000 paired human demonstrations, 45+ hours, and approximately 27M images across visual and visuotactile streams; tactile sensing covers an unspecified subset.', 'Industrial contact-rich manipulation across multiple robots, grippers, and teleoperation interfaces.', 'Split by complete episode, task, operator, hardware configuration, object, and modality availability.', 'The paper says open-sourced, but the official project still marks the dataset “soon”; no public data files or dataset-file license were verified on 2026-08-22.'],
             ['HT-Bench', '10M egocentric RGB frames and 7.8M full-hand tactile frames collected across 226 tasks.', 'Full-hand tactile representation learning, cross-modal alignment, and unseen-task evaluation.', 'Split by task and trajectory; test held-out tasks, objects, sensor units, or embodiments for the claimed transfer.', 'A 2026 preprint. Scale does not make temporally adjacent frames independent, and reported results are specific to the benchmark setup.'],
             ['RCT', '29,279 tactile frames from 122 industrial reference materials in 7 categories, collected with 3 DIGIT sensors; paired touch, image, language, and force context.', 'Material understanding and tactile-language retrieval.', 'Keep full press or contact sequences together; test held-out materials where possible.', 'A 2026 preprint. Reported performance is specific to its sensors, materials, models, and splits.'],
             ['TactiDex', 'Whole-hand tactile observations aligned with multi-granularity kinematic and object states for single-hand and bimanual tasks.', 'Contact-rich dexterity and transfer across manipulation settings.', 'Use the standardized task and transfer protocol described by the source.', 'A 2026 preprint and project resource; inspect the released tasks, files, and license before reuse.'],
@@ -2260,6 +2261,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research index', href: '/research-index', description: 'Browse source-backed tactile research records.' },
     ],
     sources: [
+      { label: 'PRISM industrial skill dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
+      { label: 'PRISM official project page', href: 'https://tengbo-yu.github.io/PRISM/' },
       { label: 'HT-Bench full-hand tactile benchmark preprint', href: 'https://arxiv.org/abs/2606.19161' },
       { label: 'RCT dataset preprint', href: 'https://arxiv.org/abs/2606.31694' },
       { label: 'RCT dataset project page', href: 'https://faerber-lab.github.io/RCT/' },
@@ -2274,7 +2277,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TacVerse preprint', href: 'https://arxiv.org/abs/2606.25877' },
       { label: 'VTDexManip project page', href: 'https://lqts.github.io/VTDexManip/' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
+    paperBriefIds: ['prism-contact-rich-industrial-skill-dataset-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
     path: '/tactile-foundation-models',
@@ -2712,7 +2715,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: '2026-08-19',
+    updated: '2026-08-22',
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2773,6 +2776,13 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        heading: 'Tactile feedback to a human operator',
+        body: [
+          'Tactile information can also close a human-in-the-loop control path. The Missing Touch study maps GelSight Mini contact images to a 32-DoF fingertip display and reports more natural, consistent motion in two 2-DoF teleoperation tasks. It measures operator trajectories, not an autonomous tactile policy, and it does not establish the same effect for multifinger robot hands or complex dexterous manipulation.',
+          'This distinction matters: feedback rendered to a human can improve how demonstrations are collected, while autonomous tactile manipulation still requires a trained model or controller and closed-loop robot evaluation.',
+        ],
+      },
+      {
         heading: 'Open research problems',
         body: [
           'Tactile manipulation still faces hardware diversity, limited shared datasets, inconsistent evaluation, calibration drift, contact-sequence leakage, and weak transfer across sensors and embodiments. Whole-hand and humanoid systems also add bandwidth, wiring, coverage, and safety constraints.',
@@ -2797,13 +2807,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Slip detection', href: '/guides/slip-detection-robot-hand', description: 'Trace slip signals into grasp recovery.' },
     ],
     sources: [
+      { label: 'The Missing Touch spatial tactile feedback preprint', href: 'https://arxiv.org/abs/2608.19372' },
       { label: 'Sparsh and TacBench paper', href: 'https://arxiv.org/abs/2410.24090' },
       { label: 'ManiSkill-ViTac 2025 challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
       { label: 'VTDexManip project', href: 'https://lqts.github.io/VTDexManip/' },
       { label: 'TactiDex preprint', href: 'https://arxiv.org/abs/2607.09190' },
     ],
-    paperBriefIds: ['freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
+    paperBriefIds: ['missing-touch-spatial-tactile-feedback-teleoperation-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
   },
   {
     path: '/research/eu-roboskin-project',
@@ -3226,7 +3237,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics task pillar',
     intent: 'Broad pillar for robot manipulation, robotic manipulation, dexterous manipulation, robot grasping, contact-rich tasks, manipulation learning, and tactile feedback.',
     published: '2026-08-20',
-    updated: '2026-08-20',
+    updated: '2026-08-22',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -3255,6 +3266,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Manipulation task families',
         body: [
           'A model that succeeds at pick-and-place has not automatically solved insertion, deformable objects, tool use, or multi-finger dexterity. Task families create different sensing, control, and evaluation requirements.',
+          'PRISM reports 5,000+ trajectories across 25+ industrial tasks and multiple robot and teleoperation configurations, including insertion, packaging, installation, and conveyor sorting. Tactile observations cover only an unspecified subset, and the official dataset download remained pending when reviewed, so the paper is evidence of the announced collection design rather than an independently audited open benchmark.',
         ],
         table: {
           headers: ['Task family', 'Physical challenge', 'Useful feedback', 'Evidence to report'],
@@ -3320,6 +3332,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review shared tasks, splits, metrics, baselines, and protocols.' },
     ],
     sources: [
+      { label: 'PRISM contact-rich industrial manipulation dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
       { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
       { label: 'ReTouch contact-rich manipulation preprint', href: 'https://arxiv.org/abs/2608.01824' },
@@ -3327,7 +3340,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'ManiSkill-ViTac challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'hitac-wam-hierarchical-tactile-world-action-model-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
+    paperBriefIds: ['prism-contact-rich-industrial-skill-dataset-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'hitac-wam-hierarchical-tactile-world-action-model-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
   },
   {
     path: '/robot-learning',
@@ -3715,7 +3728,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
     published: '2026-08-21',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3763,6 +3776,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Resource', 'Scope', 'Primary-source signal', 'Boundary to verify'],
           rows: [
+            ['PRISM', 'Contact-rich industrial manipulation across Franka, Realman, and a source-literal LEJU upper-body humanoid setup', 'The 2026 preprint reports 5,000+ robot trajectories, paired human demonstrations, 45+ hours, and three teleoperation interfaces', 'Tactile signals cover only a subset, and the official dataset control remained marked “soon” on 2026-08-22'],
             ['Open X-Embodiment', 'Aggregated multi-embodiment robot learning data', 'Research paper describes cross-institution robot data and generalist-policy experiments', 'Individual source datasets, embodiments, action mappings, and licenses differ'],
             ['DROID', 'Large real-world robot manipulation dataset', 'Paper documents diverse manipulation collection across settings and tasks', 'Read the current project and dataset records for exact access, version, schema, and license'],
             ['LeRobot datasets', 'Open tooling and standardized dataset format for robot episodes', 'Official documentation and Dataset v3 materials describe storage and loading conventions', 'Quality and rights remain dataset-specific; format compatibility is not capability evidence'],
@@ -3826,6 +3840,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research index', href: '/research-index', description: 'Browse source-reviewed papers, briefs, tables, and machine-readable exports.' },
     ],
     sources: [
+      { label: 'PRISM industrial skill dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
+      { label: 'PRISM official project page', href: 'https://tengbo-yu.github.io/PRISM/' },
       { label: 'Open X-Embodiment paper', href: 'https://arxiv.org/abs/2310.08864' },
       { label: 'DROID robot manipulation dataset paper', href: 'https://arxiv.org/abs/2403.12945' },
       { label: 'Hugging Face LeRobot Dataset v3', href: 'https://huggingface.co/blog/lerobot-datasets-v3' },
@@ -3833,7 +3849,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'RoboTacDex humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/abs/2606.31836' },
       { label: 'HRDexDB multi-hand grasp database preprint', href: 'https://arxiv.org/abs/2604.14944' },
     ],
-    paperBriefIds: ['robotacdex-humanoid-visual-tactile-action-dataset-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'ht-bench-full-hand-tactile-representations-2026'],
+    paperBriefIds: ['prism-contact-rich-industrial-skill-dataset-2026', 'robotacdex-humanoid-visual-tactile-action-dataset-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'ht-bench-full-hand-tactile-representations-2026'],
   },
   {
     path: '/robot-world-models',
@@ -3967,7 +3983,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4028,6 +4044,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Touch can be recorded as robot-side training data, returned to the operator as haptic feedback, or both. Robot-side tactile data can label contact onset, slip, pressure distribution, or grasp state. Haptic feedback can help a person adjust motion, but the master device, scaling, delay, and feedback modality shape what the operator feels.',
           'For imitation learning, synchronize tactile observations with the action that preceded the contact and the corrective action that followed it. A contact stream without robot state, timestamps, or action context is much harder to use for closed-loop policy learning.',
+          'The Missing Touch study maps GelSight Mini contact images to a 32-DoF cutaneous display and reports more natural and consistent trajectories in two 2-DoF tasks. It did not train an autonomous policy, so its learning relevance is a demonstration-quality implication rather than a measured policy-success gain. PRISM provides a separate collection perspective by combining exoskeleton, tracker, and VR interfaces across industrial tasks, while limiting tactile sensing to an unspecified subset of episodes.',
         ],
       },
       {
@@ -4062,9 +4079,13 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks.' },
       { label: 'Robot hands', href: '/robot-hands', description: 'Map end-effector interfaces, sensing, and dexterous action spaces.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Find touch-specific data resources and sensor metadata.' },
+      { label: 'The Missing Touch research brief', href: '/research/missing-touch-spatial-tactile-feedback-teleoperation-2026', description: 'Review spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary.' },
+      { label: 'PRISM research brief', href: '/research/prism-contact-rich-industrial-skill-dataset-2026', description: 'Review the industrial collection design, tactile subset, and pending release status.' },
       { label: 'FreeTacMan research brief', href: '/research/freetacman-robot-free-visuotactile-data-collection-2025', description: 'Review wearable robot-free visuo-tactile collection evidence.' },
     ],
     sources: [
+      { label: 'The Missing Touch spatial tactile feedback preprint', href: 'https://arxiv.org/abs/2608.19372' },
+      { label: 'PRISM industrial skill dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
       { label: 'Hugging Face Grabette data-collection article', href: 'https://huggingface.co/blog/grabette' },
       { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
@@ -4072,7 +4093,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Open X-Embodiment paper', href: 'https://arxiv.org/abs/2310.08864' },
       { label: 'Hugging Face LeRobot Dataset v3', href: 'https://huggingface.co/blog/lerobot-datasets-v3' },
     ],
-    paperBriefIds: ['robotacdex-humanoid-visual-tactile-action-dataset-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
+    paperBriefIds: ['missing-touch-spatial-tactile-feedback-teleoperation-2026', 'prism-contact-rich-industrial-skill-dataset-2026', 'robotacdex-humanoid-visual-tactile-action-dataset-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
 ];
 

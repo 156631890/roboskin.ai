@@ -50,9 +50,9 @@ test('RSS and production status reflect the current generated artifacts', async 
     read('scripts/verify-production.mjs'),
   ]);
 
-  assert.match(exportVerifier, /rssItems\.length !== 47[\s\S]*?rssLinks\.length !== 48[\s\S]*?rssGuids\.length !== 47/);
-  assert.match(productionVerifier, /rssItems\.length !== 47[\s\S]*?rssLinks\.length !== 48[\s\S]*?rssGuids\.length !== 47/);
+  assert.match(exportVerifier, /rssItems\.length !== 49[\s\S]*?rssLinks\.length !== 50[\s\S]*?rssGuids\.length !== 49/);
+  assert.match(productionVerifier, /rssItems\.length !== 49[\s\S]*?rssLinks\.length !== 50[\s\S]*?rssGuids\.length !== 49/);
   assert.match(productionVerifier, /\$\{indexData\.entries\.length\} research records/);
   assert.match(productionVerifier, /\$\{rssItems\.length\} RSS items/);
-  assert.doesNotMatch(productionVerifier, /23 research records|46 RSS items/);
+  assert.doesNotMatch(productionVerifier, /23 research records|46 RSS items|47 RSS items/);
 });

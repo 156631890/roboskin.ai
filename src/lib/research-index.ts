@@ -46,6 +46,32 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 
 const supplements: ResearchIndexSupplement[] = [
   {
+    id: 'prism-contact-rich-industrial-skill-dataset-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Synchronized multi-view RGB-D, high-rate force/torque, robot state, and subset-only visuotactile sensing across industrial teleoperation platforms',
+    modalities: ['multi-view RGB', 'depth', 'visuotactile image when available', '6DoF force/torque when available', 'robot joint angle and torque', 'end-effector pose', 'gripper state', 'human control signal', 'calibration and timestamps'],
+    formFactor: 'Contact-rich industrial data collection across dual Franka Emika Panda, bimanual Realman RM75-6F, and LEJU upper-body humanoid platforms',
+    dataOutput: '5,000+ robot trajectories paired with 5,000 human demonstrations, 45+ hours, and approximately 27M images across visual and visuotactile streams',
+    applications: ['industrial robot learning', 'contact-rich manipulation', 'multimodal policy evaluation', 'teleoperation data analysis'],
+    evidence: 'preprint',
+    limitations: 'The tactile stream covers only an unspecified subset of episodes, and the approximately 27M images combine visual and visuotactile streams. Although the abstract says the dataset is open-sourced, the official project still labels the dataset “soon” and the GitHub repository exposes no dataset files, release, or dataset-file license as of 2026-08-22. Author-reported policy experiments remain tied to selected Realman tasks and are not an independent benchmark.',
+    reviewedAt: '2026-08-22',
+  },
+  {
+    id: 'missing-touch-spatial-tactile-feedback-teleoperation-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'GelSight Mini contact images mapped to a 32-DoF spatially programmable cutaneous fingertip display with bilateral kinesthetic force feedback',
+    modalities: ['vision-based tactile image', 'binary spatial cutaneous feedback pattern', 'kinesthetic force feedback', '2D end-effector trajectory', 'participant questionnaire'],
+    formFactor: 'Custom 2-DoF leader-follower telemanipulator evaluated with button discrimination and peg rolling',
+    dataOutput: '50 Hz trajectories, DTW similarity to direct manipulation, task-specific errors, completion time, variability, and perceived workload',
+    applications: ['robot teleoperation', 'haptic feedback', 'learning-from-demonstration data collection', 'contact-rich manipulation'],
+    evidence: 'preprint',
+    limitations: 'The abstract’s 29–79% reduction refers to deviation between teleoperated and natural trajectories under study-specific DTW comparisons, not autonomous-policy success or a universal dexterity gain. Evidence comes from a 2-DoF device, two tasks, 12 button-task participants and a separate 10-person peg-rolling group; Full feedback was not superior in every corrected comparison, and no autonomous policy was trained or evaluated.',
+    reviewedAt: '2026-08-22',
+  },
+  {
     id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
     year: 2026,
     publisher: 'arXiv',

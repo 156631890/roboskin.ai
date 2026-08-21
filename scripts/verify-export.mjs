@@ -493,7 +493,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 47 || rssLinks.length !== 48 || rssGuids.length !== 47) failures.push('/feed.xml: expected 47 complete items');
+  if (rssItems.length !== 49 || rssLinks.length !== 50 || rssGuids.length !== 49) failures.push('/feed.xml: expected 49 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 
   const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');

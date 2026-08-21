@@ -237,6 +237,29 @@ const rctAffiliations: AffiliationTarget[] = [
 ];
 
 const sourceAffiliationBatches: SourceAffiliationBatch[] = [
+  ...(['paper', 'dataset'] as const).map((fromType) => ({
+    fromType,
+    fromId: fromType === 'paper'
+      ? 'prism-contact-rich-industrial-skill-dataset-2026'
+      : 'prism-industrial-skill',
+    organizations: [
+      { organizationId: 'peking-university', sourceLabels: ['State Key Laboratory of General Artificial Intelligence, School of Intelligence Science and Technology, Peking University'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2608.17962'],
+    evidenceBoundary: 'The PRISM paper lists the State Key Laboratory and School of Intelligence Science and Technology at Peking University as one author affiliation. These links record that source-listed affiliation only; they do not establish university ownership, funding, endorsement, exclusive project control, or a complete contributor-organization roster.',
+    sourceReviewed: '2026-08-22',
+  })),
+  {
+    fromType: 'paper',
+    fromId: 'missing-touch-spatial-tactile-feedback-teleoperation-2026',
+    organizations: [
+      { organizationId: 'northwestern-center-for-robotics-and-biosystems', sourceLabels: ['Center for Robotics and Biosystems, Northwestern University, Evanston, IL'] },
+      { organizationId: 'northwestern-university', sourceLabels: ['Center for Robotics and Biosystems, Northwestern University, Evanston, IL'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2608.19372'],
+    evidenceBoundary: 'The Missing Touch source uses a compound Center for Robotics and Biosystems and Northwestern University author affiliation. The two normalized links preserve that wording without making the center a university alias or implying institutional ownership, funding, endorsement, or participation beyond the listed authors.',
+    sourceReviewed: '2026-08-22',
+  },
   ...(['paper', 'dataset', 'benchmark'] as const).map((fromType) => ({
     fromType,
     fromId: fromType === 'paper'
@@ -351,6 +374,17 @@ export const researchOrganizationPartOfRelations: OrganizationPartOfRelation[] =
 
 export const researchDatasetUsageRelations: DatasetUsageRelation[] = [
   {
+    relation: 'usesRobot',
+    fromType: 'dataset',
+    fromId: 'prism-industrial-skill',
+    toType: 'robot',
+    toId: 'franka-emika-panda',
+    evidenceUrls: ['https://arxiv.org/abs/2608.17962'],
+    sourceLabels: ['two Franka Emika Panda arms'],
+    evidenceBoundary: 'The PRISM tracker-based collection platform uses two physical Franka Emika Panda arms. This relation covers that named platform only; it does not imply that every PRISM episode uses Franka, that tactile data covers every Franka trajectory, or that policies transfer across PRISM’s Realman and LEJU configurations.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     relation: 'usesSensor',
     fromType: 'dataset',
     fromId: 'rct',
@@ -411,6 +445,17 @@ export const researchPaperSensorRelations: UsesSensorRelation[] = [
   {
     relation: 'usesSensor',
     fromType: 'paper',
+    fromId: 'missing-touch-spatial-tactile-feedback-teleoperation-2026',
+    toType: 'sensor',
+    toId: 'gelsight-mini',
+    evidenceUrls: ['https://arxiv.org/abs/2608.19372'],
+    sourceLabels: ['GelSight Mini'],
+    evidenceBoundary: 'The study used a physical GelSight Mini as the robot-side “finger” in a custom 2-DoF bilateral teleoperation system. The relation does not transfer the paper’s task results to other GelSight Mini integrations, establish generic force or slip accuracy, or imply that the study code, calibration, or trajectory data were released.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'usesSensor',
+    fromType: 'paper',
     fromId: 'genforce-transferable-force-sensing-2026',
     toType: 'sensor',
     toId: 'tactip',
@@ -433,6 +478,17 @@ export const researchPaperSensorRelations: UsesSensorRelation[] = [
 ];
 
 export const researchSemanticRelations: ResearchSemanticRelation[] = [
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'prism-contact-rich-industrial-skill-dataset-2026',
+    toType: 'dataset',
+    toId: 'prism-industrial-skill',
+    evidenceUrls: ['https://arxiv.org/abs/2608.17962'],
+    sourceLabels: ['PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing'],
+    evidenceBoundary: 'The paper introduces the named PRISM dataset, but tactile sensing covers only an unspecified subset of episodes and the reported approximately 27 million images combine visual and visuotactile streams. The abstract says open-sourced while the official project currently marks the dataset as “soon”; this relation identifies the research artifact and does not promise downloadable files, an open dataset license, or independent benchmark results.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     relation: 'introduces',
     fromType: 'paper',

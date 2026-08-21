@@ -832,7 +832,7 @@ export function buildArticleJsonLd(post: BlogPost) {
       '@type': 'WebPage',
       '@id': `${url}#webpage`,
     },
-    citation: post.sourceUrl,
+    citation: post.citationUrls ?? post.sourceUrl,
     about: post.technicalFocus,
   };
 }
@@ -912,13 +912,19 @@ export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
     name: entry.name,
     description: `${entry.sampleCount}. Tasks: ${entry.tasks.join(', ')}. ${entry.availability}`,
     url: entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl,
-    creator: entry.institution.map((name) => ({ '@type': 'Organization', name })),
     dateModified: entry.sourceReviewed,
     measurementTechnique: entry.sensor,
     variableMeasured: entry.modalities,
     keywords: entry.tasks,
     citation: entry.paperUrl,
     conditionsOfAccess: entry.availability,
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: 'Source-listed institutions',
+        value: entry.institution.join('; '),
+      },
+    ],
     ...(entry.licenseUrl ? { license: entry.licenseUrl } : {}),
     ...(entry.datasetUrl ? { isAccessibleForFree: true } : {}),
     includedInDataCatalog: {

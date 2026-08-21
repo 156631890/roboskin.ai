@@ -22,6 +22,25 @@ export type TactileDatasetEntry = {
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
   {
+    id: 'prism-industrial-skill',
+    name: 'PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing',
+    institution: ['State Key Laboratory of General Artificial Intelligence, School of Intelligence Science and Technology, Peking University', 'Delta Intelligence', 'PKU-Wuhan Institute for Artificial Intelligence', 'Hubei Humanoid Robot Innovation Center Co., Ltd.', 'China Academy of Information and Communications Technology'],
+    year: 2026,
+    robot: ['Dual Franka Emika Panda tracker platform', 'Bimanual Realman RM75-6F exoskeleton platform', 'LEJU upper-body humanoid VR platform'],
+    sensor: ['Multi-view RGB-D cameras', '6DoF force/torque sensing', 'Unnamed visuotactile gripper and visuotactile dexterous hand on a subset of Franka episodes'],
+    modalities: ['Multi-view RGB', 'Depth', 'Visuotactile image when available', '6DoF force/torque when available', 'Robot joint angle and torque', 'End-effector Cartesian pose', 'Gripper state', 'Calibration and timestamps', 'Human control signal'],
+    sampleCount: '5,000+ robot trajectories paired with 5,000 human demonstrations; 45+ hours; 25+ industrial tasks; approximately 27M images across visual and visuotactile streams. The paper does not disclose the number or share of tactile-equipped episodes.',
+    tasks: ['Electronic component plug and unplug', 'Caliper packaging', 'Conveyor sorting', 'NIST Assembly Task Board operations', 'Industrial installation and assembly', 'Long-horizon compositional procedures'],
+    objectCategories: 'Industrial components, assembly hardware, packaging items, conveyor-sorted materials, and task-board objects; the source does not provide one complete released object inventory.',
+    dataFormat: 'The paper describes timestamped episode files in a common cross-platform schema and reports conversion to LeRobot v3.0 for its experiments. The unreleased public package and final file inventory could not be inspected.',
+    license: 'Dataset-file license not published on the reviewed project page or GitHub repository; the article license does not license unreleased data files',
+    paperUrl: 'https://arxiv.org/abs/2608.17962',
+    projectUrl: 'https://tengbo-yu.github.io/PRISM/',
+    githubUrl: 'https://github.com/Tengbo-Yu/PRISM',
+    availability: 'The arXiv abstract says the dataset is open-sourced at the project page, but as of 2026-08-22 the official Dataset button is disabled and labeled “soon”; the GitHub repository contains website and paper assets but no dataset files, releases, or dataset license. Record PRISM as announced, download pending.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'softvtbench',
     name: 'SoftVTBench',
     institution: ['Tuojing Intelligence', 'Tsinghua University', "King's College London", 'Southeast University', 'Stevens Institute of Technology', 'Hong Kong University of Science and Technology (Guangzhou)', 'University of Manchester', 'Simple AI', 'Imperial College London', 'Carnegie Mellon University', 'Zhejiang University', 'Beihang University', 'University of Hong Kong'],

@@ -16,30 +16,32 @@ const arrayBody = (source, exportName) => {
   return match[1];
 };
 
-test('the first knowledge graph v2 batch is exactly thirteen reviewed relations', () => {
+test('the reviewed semantic and paper-sensor inventory retains the first batch and adds PRISM and Missing Touch', () => {
   const paperSensorBody = arrayBody(relationSource, 'researchPaperSensorRelations');
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
-  assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 2);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 11);
+  assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 12);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    13,
+    15,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'uskin'/);
-  assert.doesNotMatch(paperSensorBody, /gelsight-mini|digit-?360/);
+  assert.match(paperSensorBody, /fromId: 'missing-touch-spatial-tactile-feedback-teleoperation-2026'[\s\S]*?toId: 'gelsight-mini'/);
+  assert.doesNotMatch(paperSensorBody, /digit-?360/);
   assert.match(paperSensorBody, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/g);
 
-  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 8);
+  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 9);
   assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 1);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
   assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 0);
 
   for (const pattern of [
+    /relation: 'introduces'[\s\S]*?fromId: 'prism-contact-rich-industrial-skill-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'prism-industrial-skill'/,
     /relation: 'introduces'[\s\S]*?fromId: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'softvtbench'/,
     /relation: 'introduces'[\s\S]*?fromId: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026'[\s\S]*?toType: 'benchmark'[\s\S]*?toId: 'softvtbench'/,
     /relation: 'describesDataset'[\s\S]*?fromId: 'ht-bench-full-hand-tactile-representations-2026'[\s\S]*?toId: 'ht-bench'/,
@@ -86,11 +88,11 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      researchRelationEdges: 57,
-      researchProvenanceEdges: 46,
-      researchSemanticEdges: 11,
-      paperSensorUsageEdges: 2,
-      introducesEdges: 8,
+      researchRelationEdges: 64,
+      researchProvenanceEdges: 52,
+      researchSemanticEdges: 12,
+      paperSensorUsageEdges: 3,
+      introducesEdges: 9,
       describesDatasetEdges: 2,
       usesDatasetEdges: 0,
       trainedOnEdges: 0,

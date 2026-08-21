@@ -81,7 +81,7 @@ test('research article schema uses technical article signals for robot skin auth
   assert.match(seo, /isAccessibleForFree: true/);
   assert.match(seo, /articleSection: post\.category/);
   assert.match(seo, /keywords: post\.technicalFocus/);
-  assert.match(seo, /citation: post\.sourceUrl/);
+  assert.match(seo, /citation: post\.citationUrls \?\? post\.sourceUrl/);
   assert.match(seo, /mainEntityOfPage/);
 });
 
