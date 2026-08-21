@@ -36,10 +36,9 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
-  assert.match(seo, /const updatedAt = '2026-07-10'/);
-  assert.match(seo, /export const sitemapLastModified = updatedAt/);
-  assert.match(sitemap, /sitemapLastModified/);
-  assert.match(sitemap, /lastModified: new Date\(route\.updated \?\? sitemapLastModified\)/);
+  assert.match(seo, /updated: string;/);
+  assert.doesNotMatch(seo, /updated\?:|const updatedAt|sitemapLastModified/);
+  assert.match(sitemap, /lastModified: new Date\(route\.updated\)/);
   assert.doesNotMatch(sitemap, /2026-04-25/);
   assert.match(sitemap, /seoRoutes/);
   assert.match(seo, /'\/news': \{/);
@@ -207,4 +206,30 @@ test('RoboSkin uses the owner-approved Gmail address for direct public inquiries
   assert.match(site, /inquiryEmail: 'messigoat147@gmail\.com'/);
   assert.match(site, /legalEmail: 'messigoat147@gmail\.com'/);
   assert.match(site, /privacyEmail: 'messigoat147@gmail\.com'/);
+});
+
+test('static SEO routes own explicit lastmod dates shared by sitemap and WebPage JSON-LD', async () => {
+  const [seo, sitemap, verifier] = await Promise.all([
+    read('src/lib/seo.ts'),
+    read('src/app/sitemap.ts'),
+    read('scripts/verify-export.mjs'),
+  ]);
+  const routeSection = seo.match(/export const pageSeo: Record<string, SeoRoute> = \{([\s\S]*?)\n\};/)?.[1] ?? '';
+  const routeBlocks = [...routeSection.matchAll(/^  '([^']+)': \{([\s\S]*?)^  \},$/gm)];
+  const declaredPaths = [...routeSection.matchAll(/^    path: /gm)];
+
+  assert.ok(routeBlocks.length > 0);
+  assert.equal(routeBlocks.length, declaredPaths.length);
+  for (const [, route, body] of routeBlocks) {
+    const updated = body.match(/^    updated: '(\d{4}-\d{2}-\d{2})',$/m)?.[1];
+    assert.ok(updated, `${route} must own an explicit ISO updated date`);
+    assert.equal(new Date(`${updated}T00:00:00Z`).toISOString().slice(0, 10), updated);
+  }
+
+  assert.match(seo, /dateModified: route\.updated/);
+  assert.match(seo, /dateModified: pageSeo\['\/research-index'\]\.updated/);
+  assert.match(sitemap, /lastModified: new Date\(route\.updated\)/);
+  assert.doesNotMatch(`${seo}\n${sitemap}`, /route\.updated \?\?|sitemapLastModified|const updatedAt/);
+  assert.match(verifier, /pageNode\.dateModified !== lastModifiedDate/);
+  assert.match(verifier, /lastmod differs from WebPage dateModified/);
 });

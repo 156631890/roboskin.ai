@@ -86,7 +86,7 @@ test('robot platform relationships are part of the graph, LLM outputs, and deplo
     read('scripts/verify-production.mjs'),
   ]);
 
-  assert.match(graph, /knowledgeGraphVersion = '1\.3\.0'/);
+  assert.match(graph, /knowledgeGraphVersion = '2\.0\.0'/);
   assert.match(graph, /type: 'robot'/);
   assert.match(graph, /robotAiRobotRelations/);
   assert.match(graph, /must connect a model to a robot/);

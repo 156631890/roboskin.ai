@@ -183,7 +183,11 @@ if (failures.length === 0) {
   const deployment = JSON.parse(await readFile(path.join(out, 'deployment.json'), 'utf8'));
   if (typeof deployment.commitSha !== 'string' || deployment.commitSha.length === 0) failures.push('/deployment.json: missing commit identity');
   const sitemapXml = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
-  const sitemapLocs = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].trim());
+  const sitemapEntries = [...sitemapXml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => ({
+    url: match[1].match(/<loc>([^<]+)<\/loc>/)?.[1].trim(),
+    lastModified: match[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1].trim(),
+  }));
+  const sitemapLocs = sitemapEntries.map((entry) => entry.url).filter(Boolean);
   const sitemapUrls = new Set(sitemapLocs);
   verifiedSitemapUrlCount = sitemapUrls.size;
   const expectedSitemapUrls = new Set([
@@ -198,6 +202,39 @@ if (failures.length === 0) {
   if (missingSitemapUrls.length) failures.push(`/sitemap.xml: missing URLs ${missingSitemapUrls.join(', ')}`);
   if (invalidSitemapUrls.length) failures.push(`/sitemap.xml: non-apex URLs ${invalidSitemapUrls.join(', ')}`);
   if (sitemapUrls.has(canonicalFor('/knowledge-graph.json'))) failures.push('/sitemap.xml: knowledge graph JSON must not be listed as an HTML page');
+
+  for (const entry of sitemapEntries) {
+    if (!entry.url || !entry.lastModified) {
+      failures.push('/sitemap.xml: every URL must include loc and lastmod');
+      continue;
+    }
+
+    const lastModifiedDate = entry.lastModified.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
+    if (!lastModifiedDate || Number.isNaN(Date.parse(`${lastModifiedDate}T00:00:00Z`))) {
+      failures.push(`/sitemap.xml: invalid lastmod for ${entry.url}`);
+      continue;
+    }
+
+    const { pathname } = new URL(entry.url);
+    const outputFile = (await Promise.all(candidatesFor(pathname).map(async (file) => [file, await exists(file)])))
+      .find(([, present]) => present)?.[0];
+    if (!outputFile) {
+      failures.push(`/sitemap.xml: missing HTML export for ${entry.url}`);
+      continue;
+    }
+
+    const html = await readFile(outputFile, 'utf8');
+    const canonical = canonicalFromHtml(html);
+    const pageIds = new Set([`${entry.url}#webpage`, canonical ? `${canonical}#webpage` : null].filter(Boolean));
+    const jsonLdNodes = parseJsonLd(html, `${pathname} sitemap lastmod`, failures)
+      .flatMap((item) => Array.isArray(item?.['@graph']) ? item['@graph'] : [item]);
+    const pageNode = jsonLdNodes.find((node) => node?.['@type'] === 'WebPage' && pageIds.has(node['@id']));
+    if (!pageNode) {
+      failures.push(`/sitemap.xml: ${entry.url} is missing its canonical WebPage JSON-LD node`);
+    } else if (pageNode.dateModified !== lastModifiedDate) {
+      failures.push(`/sitemap.xml: ${entry.url} lastmod differs from WebPage dateModified`);
+    }
+  }
 
   const indexData = JSON.parse(await readFile(path.join(out, 'research-index.json'), 'utf8'));
   const csv = await readFile(path.join(out, 'research-index.csv'), 'utf8');
@@ -225,10 +262,14 @@ if (failures.length === 0) {
   const graphEdgeKeys = new Set();
   const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
   const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
-  const researchRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+  const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+  const researchSemanticRelations = ['introduces', 'describesDataset', 'usesDataset', 'trainedOn', 'evaluatedBy'];
+  const researchRelations = [...researchProvenanceRelations, ...researchSemanticRelations];
   const evidenceBackedRelations = new Set([...organizationRelations, ...robotRelations, ...researchRelations]);
   const sourceLabelRelations = new Set([...organizationRelations, ...researchRelations]);
   const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', ...evidenceBackedRelations]);
+  const relationVocabulary = graph.relationVocabulary ?? [];
+  const relationVocabularyByName = new Map(relationVocabulary.map((entry) => [entry.relation, entry]));
   if (graph.version !== knowledgeGraphContract.version) failures.push(`/knowledge-graph.json: expected graph version ${knowledgeGraphContract.version}`);
   for (const [name, expected] of Object.entries(knowledgeGraphContract.counts)) {
     if (graph.counts?.[name] !== expected) failures.push(`/knowledge-graph.json: expected ${name}=${expected}`);
@@ -247,6 +288,13 @@ if (failures.length === 0) {
   }
   if (new Set(graphSourceUrls).size !== graphSourceUrls.length) failures.push('/knowledge-graph.json: duplicate source URL');
   if (graphNodeIds.size !== graphEntityIds.length + graphSourceIds.length) failures.push('/knowledge-graph.json: global node IDs collide');
+  if (relationVocabularyByName.size !== researchRelations.length
+    || researchRelations.some((relation) => !relationVocabularyByName.has(relation))) failures.push('/knowledge-graph.json: incomplete or duplicate research relation vocabulary');
+  for (const definition of relationVocabulary) {
+    if (!Array.isArray(definition.fromTypes) || definition.fromTypes.length === 0
+      || !Array.isArray(definition.toTypes) || definition.toTypes.length === 0
+      || typeof definition.definition !== 'string' || definition.definition.trim().length < 40) failures.push(`/knowledge-graph.json: invalid relation vocabulary entry ${definition.relation}`);
+  }
   for (const entity of graph.entities ?? []) {
     if (!entity.id.startsWith(`${entity.type}:`)) failures.push(`/knowledge-graph.json: invalid entity prefix ${entity.id}`);
     if (!/^20\d{2}-\d{2}-\d{2}$/.test(entity.reviewedAt)) failures.push(`/knowledge-graph.json: invalid review date for ${entity.id}`);
@@ -276,9 +324,23 @@ if (failures.length === 0) {
     if (edge.relation === 'partOf'
       && (fromEntity?.type !== 'organization' || toEntity?.type !== 'organization' || edge.from === edge.to)) failures.push(`/knowledge-graph.json: invalid partOf endpoints (${edgeKey})`);
     if (edge.relation === 'usesSensor'
-      && (fromEntity?.type !== 'dataset' || toEntity?.type !== 'sensor')) failures.push(`/knowledge-graph.json: invalid usesSensor endpoints (${edgeKey})`);
+      && (!['paper', 'dataset'].includes(fromEntity?.type) || toEntity?.type !== 'sensor')) failures.push(`/knowledge-graph.json: invalid usesSensor endpoints (${edgeKey})`);
     if (edge.relation === 'usesRobot'
       && (fromEntity?.type !== 'dataset' || toEntity?.type !== 'robot')) failures.push(`/knowledge-graph.json: invalid usesRobot endpoints (${edgeKey})`);
+    if (edge.relation === 'introduces'
+      && (fromEntity?.type !== 'paper' || !['model', 'dataset', 'benchmark'].includes(toEntity?.type))) failures.push(`/knowledge-graph.json: invalid introduces endpoints (${edgeKey})`);
+    if (edge.relation === 'describesDataset'
+      && (fromEntity?.type !== 'paper' || toEntity?.type !== 'dataset')) failures.push(`/knowledge-graph.json: invalid describesDataset endpoints (${edgeKey})`);
+    if (edge.relation === 'usesDataset'
+      && (fromEntity?.type !== 'model' || toEntity?.type !== 'dataset')) failures.push(`/knowledge-graph.json: invalid usesDataset endpoints (${edgeKey})`);
+    if (edge.relation === 'trainedOn'
+      && (fromEntity?.type !== 'model' || toEntity?.type !== 'dataset')) failures.push(`/knowledge-graph.json: invalid trainedOn endpoints (${edgeKey})`);
+    if (edge.relation === 'evaluatedBy'
+      && (fromEntity?.type !== 'model' || toEntity?.type !== 'benchmark')) failures.push(`/knowledge-graph.json: invalid evaluatedBy endpoints (${edgeKey})`);
+    if (researchRelations.includes(edge.relation)) {
+      const definition = relationVocabularyByName.get(edge.relation);
+      if (!definition || !definition.fromTypes.includes(fromEntity?.type) || !definition.toTypes.includes(toEntity?.type)) failures.push(`/knowledge-graph.json: relation violates declared endpoints (${edgeKey})`);
+    }
 
     if (evidenceBackedRelations.has(edge.relation)) {
       if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) failures.push(`/knowledge-graph.json: evidence-backed relation lacks evidence (${edgeKey})`);
@@ -318,20 +380,31 @@ if (failures.length === 0) {
     ['partOf', 'organizationHierarchyEdges'],
     ['usesSensor', 'usesSensorEdges'],
     ['usesRobot', 'usesRobotEdges'],
+    ['introduces', 'introducesEdges'],
+    ['describesDataset', 'describesDatasetEdges'],
+    ['usesDataset', 'usesDatasetEdges'],
+    ['trainedOn', 'trainedOnEdges'],
+    ['evaluatedBy', 'evaluatedByEdges'],
   ]) {
     if (graphEdges.filter((edge) => edge.relation === relation).length !== graph.counts?.[countField]) failures.push(`/knowledge-graph.json: ${countField} is inconsistent`);
   }
   if (graphEdges.filter((edge) => organizationRelations.includes(edge.relation)).length !== graph.counts?.organizationRelationEdges) failures.push('/knowledge-graph.json: organizationRelationEdges is inconsistent');
   if (graphEdges.filter((edge) => robotRelations.includes(edge.relation)).length !== graph.counts?.robotRelationEdges) failures.push('/knowledge-graph.json: robotRelationEdges is inconsistent');
-  const researchProvenanceEdges = graphEdges.filter((edge) => researchRelations.includes(edge.relation)).length;
-  const datasetUsageEdges = graphEdges.filter((edge) => ['usesSensor', 'usesRobot'].includes(edge.relation)).length;
+  const researchRelationEdges = graphEdges.filter((edge) => researchRelations.includes(edge.relation)).length;
+  const researchProvenanceEdges = graphEdges.filter((edge) => researchProvenanceRelations.includes(edge.relation)).length;
+  const researchSemanticEdges = graphEdges.filter((edge) => researchSemanticRelations.includes(edge.relation)).length;
+  const datasetUsageEdges = graphEdges.filter((edge) => edge.from.startsWith('dataset:') && ['usesSensor', 'usesRobot'].includes(edge.relation)).length;
+  const paperSensorUsageEdges = graphEdges.filter((edge) => edge.from.startsWith('paper:') && edge.relation === 'usesSensor').length;
+  if (researchRelationEdges !== graph.counts?.researchRelationEdges) failures.push('/knowledge-graph.json: researchRelationEdges is inconsistent');
   if (researchProvenanceEdges !== graph.counts?.researchProvenanceEdges) failures.push('/knowledge-graph.json: researchProvenanceEdges is inconsistent');
+  if (researchSemanticEdges !== graph.counts?.researchSemanticEdges) failures.push('/knowledge-graph.json: researchSemanticEdges is inconsistent');
   if (datasetUsageEdges !== graph.counts?.datasetUsageEdges) failures.push('/knowledge-graph.json: datasetUsageEdges is inconsistent');
+  if (paperSensorUsageEdges !== graph.counts?.paperSensorUsageEdges) failures.push('/knowledge-graph.json: paperSensorUsageEdges is inconsistent');
   const classifiedEdgeCount = graph.counts?.supportedByEdges
     + graph.counts?.benchmarkedByEdges
     + graph.counts?.organizationRelationEdges
     + graph.counts?.robotRelationEdges
-    + graph.counts?.researchProvenanceEdges;
+    + graph.counts?.researchRelationEdges;
   if (classifiedEdgeCount !== graph.counts?.edges) failures.push('/knowledge-graph.json: edge class totals are inconsistent');
   for (const entity of graph.entities ?? []) {
     for (const sourceId of entity.primarySourceIds ?? []) {
@@ -443,6 +516,14 @@ if (failures.length === 0) {
     ['Source-listed research affiliations', graph.counts?.sourceAffiliationEdges],
     ['Verified organization hierarchy relations', graph.counts?.organizationHierarchyEdges],
     ['Verified dataset sensor or robot relations', graph.counts?.datasetUsageEdges],
+    ['Verified paper-sensor relations', graph.counts?.paperSensorUsageEdges],
+    ['Evidence-backed research entity relations', graph.counts?.researchRelationEdges],
+    ['Research semantic relations', graph.counts?.researchSemanticEdges],
+    ['introduces relations', graph.counts?.introducesEdges],
+    ['describesDataset relations', graph.counts?.describesDatasetEdges],
+    ['usesDataset relations', graph.counts?.usesDatasetEdges],
+    ['trainedOn relations', graph.counts?.trainedOnEdges],
+    ['evaluatedBy relations', graph.counts?.evaluatedByEdges],
     ['Verified robot-platform records', graph.counts?.robots],
     ['Verified model-robot relations', graph.counts?.robotRelationEdges],
     ['Structured research records', graph.counts?.researchIndex],

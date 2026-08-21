@@ -3,7 +3,7 @@ import { seoTopicPages } from '@/content/seo-topic-pages';
 import { pageVisuals } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
-import { canonicalUrl, seoRoutes, sitemapLastModified } from '@/lib/seo';
+import { canonicalUrl, seoRoutes } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((route) => route.index)
     .map((route) => ({
       url: canonicalUrl(route.path),
-      lastModified: new Date(route.updated ?? sitemapLastModified),
+      lastModified: new Date(route.updated),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     }));

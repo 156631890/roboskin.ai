@@ -52,7 +52,7 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/www\.nature\.com\/articles\/s41598-026-41096-z/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2508\.11261v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2510\.25725v2/);
-  assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.01941v1/);
+  assert.match(blogData, /https:\/\/arxiv\.org\/abs\/2506\.01941/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.09994v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/abs\/2405\.18582/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.08737v1/);

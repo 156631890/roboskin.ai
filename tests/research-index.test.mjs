@@ -78,7 +78,7 @@ test('the research index is indexable, filterable, and visible before interactio
   assert.match(explorer, /entry\.applications\.join\(', '\)/);
   assert.match(explorer, /colSpan=\{8\}/);
   assert.match(seo, /buildResearchIndexJsonLd/);
-  assert.match(seo, /const updatedAt = '2026-07-10'/);
+  assert.match(seo, /dateModified: pageSeo\['\/research-index'\]\.updated/);
   assert.match(seo, /'\/research-index':/);
   assert.match(site, /href: '\/research-index'/);
   assert.match(sitemap, /seoRoutes/);

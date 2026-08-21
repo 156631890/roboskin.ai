@@ -11,14 +11,12 @@ export type SeoRoute = {
   path: string;
   title: string;
   description: string;
-  updated?: string;
+  updated: string;
   priority: number;
   changeFrequency: 'weekly' | 'monthly';
   index: boolean;
   breadcrumbs: string[];
 };
-
-const updatedAt = '2026-07-10';
 
 export const pageSeo: Record<string, SeoRoute> = {
   '/': {
@@ -26,7 +24,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
       'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-08-20',
+    updated: '2026-08-22',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -37,6 +35,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Guides for Tactile AI Learning',
     description:
       'Explore robot skin category guides, tactile AI learning routes, e-skin terminology, and source-backed paths for robotics readers.',
+    updated: '2026-08-15',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -47,6 +46,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases',
     description:
       'Explore educational context for robotic grippers, robot hand tactile sensing, prosthetics, medical robotics, and tactile AI research teams.',
+    updated: '2026-08-15',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -57,6 +57,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Humanoid Robot Skin and Contact-Aware Robotics',
     description:
       'Explore humanoid robot skin, contact-aware robotics, tactile AI, e-skin, assistive devices, research media, and category ownership.',
+    updated: '2026-08-22',
     priority: 0.82,
     changeFrequency: 'weekly',
     index: true,
@@ -67,6 +68,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Tactile AI and Flexible Tactile Sensor Technology',
     description:
       'Understand tactile AI, tactile sensing, flexible tactile sensor layers, signal processing, form-factor design, and robot-ready touch signals.',
+    updated: '2026-08-22',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -77,7 +79,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Physical AI: Models, Robots & Real-World Action',
     description:
       'Physical AI connects multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback. Map the full system and its tactile contact layer.',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     priority: 0.92,
     changeFrequency: 'weekly',
     index: true,
@@ -88,6 +90,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Resources and Tactile AI Research Guides',
     description:
       'Browse robot skin resources, tactile AI research guides, terminology routes, and context about the RoboSkin.ai information resource.',
+    updated: '2026-08-15',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -98,6 +101,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Information Resources and References',
     description:
       'Find public information routes, research references, and educational robot skin resources without implied product downloads or hardware availability.',
+    updated: '2026-06-18',
     priority: 0.75,
     changeFrequency: 'weekly',
     index: false,
@@ -108,6 +112,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Compare Robot Skin Category Concepts and Learning Routes',
     description:
       'Compare robot skin category concepts, tactile sensing terminology, and possible RoboSkin.ai guide routes for robotics and AI content.',
+    updated: '2026-05-14',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: false,
@@ -118,6 +123,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Category Roadmap and Research Paths',
     description:
       'Understand educational evaluation concepts for tactile sensing, robot hands, curved surfaces, and research discovery without integration-support claims.',
+    updated: '2026-06-18',
     priority: 0.75,
     changeFrequency: 'weekly',
     index: false,
@@ -128,6 +134,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin FAQ: Tactile AI, e-skin, and Integration Questions',
     description:
       'Practical answers about robot skin, tactile AI, e-skin, research terminology, research inquiries, and conservative source guidance.',
+    updated: '2026-05-14',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -138,6 +145,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin and Tactile Sensing Research',
     description:
       'Read robot hand tactile sensor research, slip detection robot hand briefs, e-skin notes, multimodal sensing, and ROS 2 tactile pipelines.',
+    updated: '2026-08-22',
     priority: 0.78,
     changeFrequency: 'weekly',
     index: true,
@@ -181,6 +189,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',
     description:
       'A practical e-skin and electronic skin glossary for robot skin, tactile AI, tactile sensing, slip detection, and source-backed terminology.',
+    updated: '2026-08-22',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,
@@ -191,6 +200,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Context Notes and Application Paths',
     description:
       'Anonymous, conservative summaries of robot skin application contexts for grippers, humanoid contact sensing, research interpretation, and category planning.',
+    updated: '2026-06-18',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: false,
@@ -201,6 +211,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'About RoboSkin.ai',
     description:
       'Learn about RoboSkin.ai as a robot skin information hub and public robot skin information resource for tactile AI audiences.',
+    updated: '2026-08-20',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -211,6 +222,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin Editorial Policy and Source Standards',
     description:
       'Read RoboSkin.ai editorial standards for source-backed robot skin, tactile AI, e-skin, Physical AI, and research-route coverage.',
+    updated: '2026-08-20',
     priority: 0.68,
     changeFrequency: 'monthly',
     index: true,
@@ -221,6 +233,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI and Physical AI News',
     description:
       'Follow source-backed news on robot skin, tactile AI, electronic skin, tactile sensors, dexterous manipulation, and touch for Physical AI.',
+    updated: '2026-08-16',
     priority: 0.72,
     changeFrequency: 'weekly',
     index: true,
@@ -231,6 +244,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin.ai Research Contact',
     description:
       'Contact RoboSkin.ai about source suggestions, corrections, editorial collaboration, or robot skin research information.',
+    updated: '2026-08-16',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -262,7 +276,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/privacy',
     title: 'Privacy Policy',
     description: 'How RoboSkin handles contact form submissions and site usage data.',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -272,6 +286,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/terms',
     title: 'Terms of Service',
     description: 'Terms of use for the RoboSkin website and research inquiries.',
+    updated: '2026-05-14',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -444,7 +459,7 @@ export function buildPageJsonLd(path: keyof typeof pageSeo | string) {
     about: {
       '@id': `${site.url}/#organization`,
     },
-    dateModified: route.updated ?? updatedAt,
+    dateModified: route.updated,
     inLanguage: 'en',
   };
 }
@@ -865,7 +880,7 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         description: 'A source-backed index of robot skin, tactile sensing, tactile AI, and integration research reviewed by RoboSkin.ai.',
         url: pageUrl,
         creator: { '@id': `${canonicalUrl(site.editorial.path)}#editorial-team` },
-        dateModified: pageSeo['/research-index'].updated ?? updatedAt,
+        dateModified: pageSeo['/research-index'].updated,
         inLanguage: 'en',
         isAccessibleForFree: true,
         distribution: [
@@ -1006,5 +1021,3 @@ export function buildGraphJsonLd(items: unknown[]) {
     '@graph': items,
   };
 }
-
-export const sitemapLastModified = updatedAt;

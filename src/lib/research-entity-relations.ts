@@ -1,20 +1,101 @@
 import { researchIndexEntries } from '@/lib/research-index';
+import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { researchOrganizationEntries } from '@/lib/research-organizations';
 import { researchRobotEntries } from '@/lib/research-robots';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
 
-export const researchEntityRelationTypes = [
+export const researchProvenanceRelationTypes = [
   'sourceAffiliation',
   'partOf',
   'usesSensor',
   'usesRobot',
 ] as const;
 
+export const researchSemanticRelationTypes = [
+  'introduces',
+  'describesDataset',
+  'usesDataset',
+  'trainedOn',
+  'evaluatedBy',
+] as const;
+
+export const researchEntityRelationTypes = [
+  ...researchProvenanceRelationTypes,
+  ...researchSemanticRelationTypes,
+] as const;
+
 export type ResearchEntityRelationType = (typeof researchEntityRelationTypes)[number];
+export type ResearchProvenanceRelationType = (typeof researchProvenanceRelationTypes)[number];
+export type ResearchSemanticRelationType = (typeof researchSemanticRelationTypes)[number];
 export type SourceAffiliationEntityType = 'paper' | 'dataset' | 'benchmark' | 'sensor';
 export type DatasetUsageRelationType = 'usesSensor' | 'usesRobot';
+export type ResearchRelationEntityType = 'paper' | 'dataset' | 'benchmark' | 'sensor' | 'model' | 'organization' | 'robot';
+
+export type ResearchEntityRelationDefinition = {
+  relation: ResearchEntityRelationType;
+  fromTypes: ResearchRelationEntityType[];
+  toTypes: ResearchRelationEntityType[];
+  definition: string;
+};
+
+export const researchEntityRelationVocabulary: ResearchEntityRelationDefinition[] = [
+  {
+    relation: 'sourceAffiliation',
+    fromTypes: ['paper', 'dataset', 'benchmark', 'sensor'],
+    toTypes: ['organization'],
+    definition: 'The reviewed primary source explicitly lists the target organization as an author or contributor affiliation for the source entity.',
+  },
+  {
+    relation: 'partOf',
+    fromTypes: ['organization'],
+    toTypes: ['organization'],
+    definition: 'An official organization source explicitly places the source organization inside the target organization.',
+  },
+  {
+    relation: 'usesSensor',
+    fromTypes: ['paper', 'dataset'],
+    toTypes: ['sensor'],
+    definition: 'The reviewed source explicitly names the target sensor in the paper experiment or dataset collection setup; simulation remains labeled in the evidence boundary.',
+  },
+  {
+    relation: 'usesRobot',
+    fromTypes: ['dataset'],
+    toTypes: ['robot'],
+    definition: 'The reviewed dataset source explicitly names the target robot or normalized embodiment in its collection setup.',
+  },
+  {
+    relation: 'introduces',
+    fromTypes: ['paper'],
+    toTypes: ['model', 'dataset', 'benchmark'],
+    definition: 'The paper explicitly presents the target model, dataset, or benchmark as a contribution of that work.',
+  },
+  {
+    relation: 'describesDataset',
+    fromTypes: ['paper'],
+    toTypes: ['dataset'],
+    definition: 'The paper explicitly describes the target data resource, while the reviewed evidence is not strong enough to claim a separately released or independently licensed dataset contribution.',
+  },
+  {
+    relation: 'usesDataset',
+    fromTypes: ['model'],
+    toTypes: ['dataset'],
+    definition: 'The reviewed model source explicitly uses the target dataset for training, validation, or evaluation without narrowing that use to training alone.',
+  },
+  {
+    relation: 'trainedOn',
+    fromTypes: ['model'],
+    toTypes: ['dataset'],
+    definition: 'The model primary source explicitly identifies the target dataset as part of its training mixture; this does not imply exclusive training or dataset ownership.',
+  },
+  {
+    relation: 'evaluatedBy',
+    fromTypes: ['model'],
+    toTypes: ['benchmark'],
+    definition: 'The model primary source explicitly reports evaluation through the target benchmark or benchmark suite.',
+  },
+];
 
 type EvidenceFields = {
   evidenceUrls: string[];
@@ -39,18 +120,76 @@ export type OrganizationPartOfRelation = EvidenceFields & {
   toId: string;
 };
 
-export type DatasetUsageRelation = EvidenceFields & {
-  relation: DatasetUsageRelationType;
-  fromType: 'dataset';
+export type UsesSensorRelation = EvidenceFields & {
+  relation: 'usesSensor';
+  fromType: 'paper' | 'dataset';
   fromId: string;
-  toType: 'sensor' | 'robot';
+  toType: 'sensor';
   toId: string;
 };
+
+export type UsesRobotRelation = EvidenceFields & {
+  relation: 'usesRobot';
+  fromType: 'dataset';
+  fromId: string;
+  toType: 'robot';
+  toId: string;
+};
+
+export type DatasetUsageRelation = UsesSensorRelation | UsesRobotRelation;
+
+export type IntroducesRelation = EvidenceFields & {
+  relation: 'introduces';
+  fromType: 'paper';
+  fromId: string;
+  toType: 'model' | 'dataset' | 'benchmark';
+  toId: string;
+};
+
+export type UsesDatasetRelation = EvidenceFields & {
+  relation: 'usesDataset';
+  fromType: 'model';
+  fromId: string;
+  toType: 'dataset';
+  toId: string;
+};
+
+export type DescribesDatasetRelation = EvidenceFields & {
+  relation: 'describesDataset';
+  fromType: 'paper';
+  fromId: string;
+  toType: 'dataset';
+  toId: string;
+};
+
+export type TrainedOnRelation = EvidenceFields & {
+  relation: 'trainedOn';
+  fromType: 'model';
+  fromId: string;
+  toType: 'dataset';
+  toId: string;
+};
+
+export type EvaluatedByRelation = EvidenceFields & {
+  relation: 'evaluatedBy';
+  fromType: 'model';
+  fromId: string;
+  toType: 'benchmark';
+  toId: string;
+};
+
+export type ResearchSemanticRelation =
+  | IntroducesRelation
+  | DescribesDatasetRelation
+  | UsesDatasetRelation
+  | TrainedOnRelation
+  | EvaluatedByRelation;
 
 export type ResearchEntityRelation =
   | SourceAffiliationRelation
   | OrganizationPartOfRelation
-  | DatasetUsageRelation;
+  | DatasetUsageRelation
+  | ResearchSemanticRelation;
 
 type AffiliationTarget = {
   organizationId: string;
@@ -268,10 +407,165 @@ export const researchDatasetUsageRelations: DatasetUsageRelation[] = [
   },
 ];
 
-export const researchEntityRelations: ResearchEntityRelation[] = [
+export const researchPaperSensorRelations: UsesSensorRelation[] = [
+  {
+    relation: 'usesSensor',
+    fromType: 'paper',
+    fromId: 'genforce-transferable-force-sensing-2026',
+    toType: 'sensor',
+    toId: 'tactip',
+    evidenceUrls: ['https://www.nature.com/articles/s41467-026-68753-1'],
+    sourceLabels: ['TacTip'],
+    evidenceBoundary: 'The GenForce study evaluates its transfer framework with a study-specific TacTip configuration. TacTip is a sensor family whose geometry, camera, skin, markers, and calibration vary by version, so this edge does not establish equivalent performance, compatibility, or calibration transfer for every TacTip implementation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'usesSensor',
+    fromType: 'paper',
+    fromId: 'genforce-transferable-force-sensing-2026',
+    toType: 'sensor',
+    toId: 'uskin',
+    evidenceUrls: ['https://www.nature.com/articles/s41467-026-68753-1'],
+    sourceLabels: ['uSkin'],
+    evidenceBoundary: 'The GenForce study uses specific uSkin array configurations in its heterogeneous transfer and manipulation experiments. The relation does not extend the reported accuracy to every uSkin model, taxel layout, mounting geometry, magnetic environment, material, calibration, or commercial deployment.',
+    sourceReviewed: '2026-08-22',
+  },
+];
+
+export const researchSemanticRelations: ResearchSemanticRelation[] = [
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
+    toType: 'dataset',
+    toId: 'softvtbench',
+    evidenceUrls: ['https://arxiv.org/abs/2608.18701'],
+    sourceLabels: ['SoftVTBench deformation-aware visuo-tactile dataset'],
+    evidenceBoundary: 'The paper introduces the named SoftVTBench dataset, but all robot, tactile, object, and FEM signals in this resource are simulated. The latest paper and current Hugging Face card describe 4,000 demonstrations, while an older official GitHub README still lists 1,628; the relation is stable, but dataset scale must be tied to a reviewed release revision and does not establish physical-sensor or simulation-to-real performance.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
+    toType: 'benchmark',
+    toId: 'softvtbench',
+    evidenceUrls: ['https://arxiv.org/abs/2608.18701'],
+    sourceLabels: ['SoftVTBench deformation-aware visuo-tactile benchmark'],
+    evidenceBoundary: 'The paper establishes the SoftVTBench closed-loop benchmark and its Deformation-aware Success Rate using object-specific FEM calibration. The benchmark is simulation-only, and DSR is an author-defined research metric rather than a universal damage measure, industry standard, safety certification, or physical-robot validation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'describesDataset',
+    fromType: 'paper',
+    fromId: 'ht-bench-full-hand-tactile-representations-2026',
+    toType: 'dataset',
+    toId: 'ht-bench',
+    evidenceUrls: ['https://arxiv.org/abs/2606.19161'],
+    sourceLabels: ['HT-Bench full-hand tactile dataset'],
+    evidenceBoundary: 'The paper explicitly describes the synchronized data underlying HT-Bench as a dataset and defines its splits, but HT-Bench is primarily presented as a constructed benchmark combining existing open-source data with newly collected sequences. No separate public dataset download, file release, or dataset license was verified, so this edge must not imply an independently released HT-Bench data product.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'ht-bench-full-hand-tactile-representations-2026',
+    toType: 'benchmark',
+    toId: 'ht-bench',
+    evidenceUrls: ['https://arxiv.org/abs/2606.19161'],
+    sourceLabels: ['HT-Bench full-hand tactile representation benchmark'],
+    evidenceBoundary: 'The paper introduces HT-Bench as a four-track representation-learning benchmark for paired egocentric vision and full-hand tactile data. The authors explicitly state that it is not a universal benchmark across tactile sensors or embodiments, and its reported tasks evaluate representations rather than downstream closed-loop robot manipulation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'tactidex-tactile-guided-dexterous-benchmark-2026',
+    toType: 'dataset',
+    toId: 'tactidex',
+    evidenceUrls: ['https://arxiv.org/abs/2607.09190'],
+    sourceLabels: ['TactiDex synchronized human hand-object interaction data'],
+    evidenceBoundary: 'The paper introduces the TactiDex tactile-rich hand-object interaction dataset and documents synchronized tactile, kinematic, and object-state signals. No separate public dataset download URL or dataset-file license was verified, so the relation records the described research artifact and does not promise public access or unrestricted reuse.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'tactidex-tactile-guided-dexterous-benchmark-2026',
+    toType: 'benchmark',
+    toId: 'tactidex',
+    evidenceUrls: ['https://arxiv.org/abs/2607.09190'],
+    sourceLabels: ['TactiDex tactile-guided dexterous manipulation benchmark'],
+    evidenceBoundary: 'The preprint introduces TactiDex and its contact-aware evaluation protocol for the authors’ human-capture and robot-deployment setup. Its human-likeness, contact fidelity, force alignment, and physical-realism conclusions are protocol-specific and do not establish a universal dexterity benchmark or cross-hardware standard.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'freetacman-robot-free-visuotactile-data-collection-2025',
+    toType: 'dataset',
+    toId: 'freetacman',
+    evidenceUrls: ['https://arxiv.org/abs/2506.01941'],
+    sourceLabels: ['FreeTacMan robot-free visuo-tactile data collection'],
+    evidenceBoundary: 'This relation relies on the current arXiv v4 and associated official release, which describe and open-source the large-scale FreeTacMan dataset. The original v1 stated that a large-scale dataset had not yet been released, so counts, files, and license claims must remain tied to the reviewed current version.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'describesDataset',
+    fromType: 'paper',
+    fromId: 'sparsh-x-multisensory-touch-representations-2025',
+    toType: 'dataset',
+    toId: 'sparsh-x',
+    evidenceUrls: ['https://arxiv.org/html/2506.14754v1'],
+    sourceLabels: ['Sparsh-X multisensory touch resource'],
+    evidenceBoundary: 'The paper documents the approximately one-million-interaction Digit 360 training and benchmarking resource represented by RoboSkin’s normalized dataset:sparsh-x entity. In the primary source, Sparsh-X is principally the model or backbone name, not a clearly named standalone dataset product, and no dedicated public dataset URL, file format, or dataset license was verified.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'humanoid-visual-tactile-action-dataset-2025',
+    toType: 'dataset',
+    toId: 'humanoid-vta',
+    evidenceUrls: ['https://arxiv.org/html/2510.25725v2'],
+    sourceLabels: ['humanoid visual-tactile-action dataset'],
+    evidenceBoundary: 'The paper introduces a 101.9K-sample visual-tactile-action dataset collected with one unnamed humanoid setup, two soft-object categories, four pressure conditions, and three operators. No official data download, code repository, project page, or dataset-file license was verified; the arXiv article license must not be treated as a license for unpublished dataset files.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'dream-tac-tactile-world-action-model-2026',
+    toType: 'model',
+    toId: 'dream-tac',
+    evidenceUrls: ['https://arxiv.org/html/2606.08737v1'],
+    sourceLabels: ['Dream-Tac unified tactile world action model'],
+    evidenceBoundary: 'The preprint introduces the named Dream-Tac model architecture. This relation identifies the research model only; the reported task accuracy and efficiency remain author-reported results from the paper’s six-task setup and do not establish peer-reviewed performance, arbitrary tactile-sensor transfer, production readiness, or general robot compatibility.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'evaluatedBy',
+    fromType: 'model',
+    fromId: 'sparsh',
+    toType: 'benchmark',
+    toId: 'tacbench',
+    evidenceUrls: ['https://arxiv.org/abs/2410.24090', 'https://sparsh-ssl.github.io/'],
+    sourceLabels: ['Sparsh evaluated through six TacBench tasks'],
+    evidenceBoundary: 'The source evaluates the Sparsh model family on the six-task TacBench suite. TacBench combines heterogeneous sensors, tasks, metrics, and labeled-data budgets, so the paper’s reported average improvement is an author-defined aggregation rather than one universal score; the relation does not prove equivalent performance for every Sparsh variant, downstream fork, tactile sensor, robot skin, or manipulation system.',
+    sourceReviewed: '2026-08-22',
+  },
+];
+
+export const researchProvenanceRelations: ResearchEntityRelation[] = [
   ...researchSourceAffiliationRelations,
   ...researchOrganizationPartOfRelations,
   ...researchDatasetUsageRelations,
+  ...researchPaperSensorRelations,
+];
+
+export const researchEntityRelations: ResearchEntityRelation[] = [
+  ...researchProvenanceRelations,
+  ...researchSemanticRelations,
 ];
 
 const validDate = /^20\d{2}-\d{2}-\d{2}$/;
@@ -282,13 +576,8 @@ const paperById = new Map(researchIndexEntries
 const datasetById = new Map(tactileDatasetEntries.map((entry) => [entry.id, entry]));
 const benchmarkById = new Map(tactileBenchmarkEntries.map((entry) => [entry.id, entry]));
 const sensorById = new Map(tactileSensorEntries.map((entry) => [entry.id, entry]));
+const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
 const robotById = new Map(researchRobotEntries.map((entry) => [entry.id, entry]));
-const deferredConcurrentSources = new Set([
-  'paper:softvtbench-deformation-aware-visuo-tactile-dataset-2026',
-  'dataset:softvtbench',
-  'benchmark:softvtbench',
-]);
-
 function primarySourceUrls(fromType: ResearchEntityRelation['fromType'], fromId: string) {
   switch (fromType) {
     case 'paper': {
@@ -320,11 +609,35 @@ function primarySourceUrls(fromType: ResearchEntityRelation['fromType'], fromId:
         entry.codeUrl,
       ].filter((url): url is string => Boolean(url))) : undefined;
     }
+    case 'model': {
+      const entry = modelById.get(fromId);
+      return entry ? new Set(entry.primarySources.map((source) => source.url)) : undefined;
+    }
     case 'organization': {
       const entry = organizationById.get(fromId);
       return entry ? new Set(entry.identitySources.map((source) => source.url)) : undefined;
     }
   }
+}
+
+function researchEntityExists(type: ResearchRelationEntityType, id: string) {
+  switch (type) {
+    case 'paper': return paperById.has(id);
+    case 'dataset': return datasetById.has(id);
+    case 'benchmark': return benchmarkById.has(id);
+    case 'sensor': return sensorById.has(id);
+    case 'model': return modelById.has(id);
+    case 'organization': return organizationById.has(id);
+    case 'robot': return robotById.has(id);
+  }
+}
+
+const relationVocabularyTypes = researchEntityRelationVocabulary.map((entry) => entry.relation);
+if (
+  new Set(relationVocabularyTypes).size !== researchEntityRelationTypes.length
+  || researchEntityRelationTypes.some((relation) => !relationVocabularyTypes.includes(relation))
+) {
+  throw new Error('Research-entity relation vocabulary does not exactly cover the supported relation enum.');
 }
 
 const relationKeys = new Set<string>();
@@ -357,17 +670,41 @@ for (const relation of researchEntityRelations) {
       throw new Error(`Organization partOf relation ${key} references a missing organization.`);
     }
   } else if (relation.relation === 'usesSensor') {
-    if (!sensorById.has(relation.toId)) {
-      throw new Error(`Dataset usesSensor relation ${key} references a missing sensor.`);
+    if (!['paper', 'dataset'].includes(relation.fromType) || !sensorById.has(relation.toId)) {
+      throw new Error(`usesSensor relation ${key} references a missing or unsupported endpoint.`);
     }
-  } else if (!robotById.has(relation.toId)) {
-    throw new Error(`Dataset usesRobot relation ${key} references a missing robot.`);
+  } else if (relation.relation === 'usesRobot') {
+    if (!robotById.has(relation.toId)) {
+      throw new Error(`Dataset usesRobot relation ${key} references a missing robot.`);
+    }
+  } else if (relation.relation === 'introduces') {
+    if (!['model', 'dataset', 'benchmark'].includes(relation.toType) || !researchEntityExists(relation.toType, relation.toId)) {
+      throw new Error(`Paper introduces relation ${key} references a missing or unsupported target entity.`);
+    }
+  } else if (relation.relation === 'describesDataset') {
+    if (!datasetById.has(relation.toId)) {
+      throw new Error(`Paper describesDataset relation ${key} references a missing dataset.`);
+    }
+  } else if (relation.relation === 'usesDataset') {
+    if (!modelById.has(relation.fromId) || !datasetById.has(relation.toId)) {
+      throw new Error(`Research usesDataset relation ${key} references a missing or unsupported endpoint.`);
+    }
+  } else if (relation.relation === 'trainedOn') {
+    if (!modelById.has(relation.fromId) || !datasetById.has(relation.toId)) {
+      throw new Error(`Model trainedOn relation ${key} references a missing model or dataset.`);
+    }
+  } else if (!modelById.has(relation.fromId) || !benchmarkById.has(relation.toId)) {
+    throw new Error(`Model evaluatedBy relation ${key} references a missing model or benchmark.`);
+  }
+
+  const vocabulary = researchEntityRelationVocabulary.find((entry) => entry.relation === relation.relation);
+  if (!vocabulary?.fromTypes.includes(relation.fromType) || !vocabulary.toTypes.includes(relation.toType)) {
+    throw new Error(`Research-entity relation ${key} violates its declared endpoint vocabulary.`);
   }
 
   const sourceKey = `${relation.fromType}:${relation.fromId}`;
   const availablePrimarySources = primarySourceUrls(relation.fromType, relation.fromId);
   if (!availablePrimarySources) {
-    if (deferredConcurrentSources.has(sourceKey)) continue;
     throw new Error(`Research-entity relation ${key} references a missing source entity.`);
   }
   for (const evidenceUrl of relation.evidenceUrls) {

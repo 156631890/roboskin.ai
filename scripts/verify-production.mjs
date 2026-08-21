@@ -236,11 +236,22 @@ for (const source of graphSources) {
 
 const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
 const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
-const researchRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+const researchSemanticRelations = ['introduces', 'describesDataset', 'usesDataset', 'trainedOn', 'evaluatedBy'];
+const researchRelations = [...researchProvenanceRelations, ...researchSemanticRelations];
 const evidenceBackedRelations = new Set([...organizationRelations, ...robotRelations, ...researchRelations]);
 const sourceLabelRelations = new Set([...organizationRelations, ...researchRelations]);
 const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', ...evidenceBackedRelations]);
 const graphRelationCounts = new Map([...allowedGraphRelations].map((relation) => [relation, 0]));
+const relationVocabulary = graph.relationVocabulary ?? [];
+const relationVocabularyByName = new Map(relationVocabulary.map((entry) => [entry.relation, entry]));
+if (relationVocabularyByName.size !== researchRelations.length
+  || researchRelations.some((relation) => !relationVocabularyByName.has(relation))) throw new Error('Knowledge graph has an incomplete or duplicate research relation vocabulary');
+for (const definition of relationVocabulary) {
+  if (!Array.isArray(definition.fromTypes) || definition.fromTypes.length === 0
+    || !Array.isArray(definition.toTypes) || definition.toTypes.length === 0
+    || typeof definition.definition !== 'string' || definition.definition.trim().length < 40) throw new Error(`Knowledge graph has an invalid relation vocabulary entry ${definition.relation}`);
+}
 for (const edge of graphEdges) {
   const edgeKey = `${edge.from}|${edge.relation}|${edge.to}`;
   if (graphEdgeKeys.has(edgeKey)) throw new Error(`Knowledge graph repeats edge ${edgeKey}`);
@@ -259,9 +270,23 @@ for (const edge of graphEdges) {
   } else if (edge.relation === 'partOf') {
     if (fromEntity?.type !== 'organization' || toEntity?.type !== 'organization' || edge.from === edge.to) throw new Error(`Invalid partOf edge ${edgeKey}`);
   } else if (edge.relation === 'usesSensor') {
-    if (fromEntity?.type !== 'dataset' || toEntity?.type !== 'sensor') throw new Error(`Invalid usesSensor edge ${edgeKey}`);
+    if (!['paper', 'dataset'].includes(fromEntity?.type) || toEntity?.type !== 'sensor') throw new Error(`Invalid usesSensor edge ${edgeKey}`);
   } else if (edge.relation === 'usesRobot') {
     if (fromEntity?.type !== 'dataset' || toEntity?.type !== 'robot') throw new Error(`Invalid usesRobot edge ${edgeKey}`);
+  } else if (edge.relation === 'introduces') {
+    if (fromEntity?.type !== 'paper' || !['model', 'dataset', 'benchmark'].includes(toEntity?.type)) throw new Error(`Invalid introduces edge ${edgeKey}`);
+  } else if (edge.relation === 'describesDataset') {
+    if (fromEntity?.type !== 'paper' || toEntity?.type !== 'dataset') throw new Error(`Invalid describesDataset edge ${edgeKey}`);
+  } else if (edge.relation === 'usesDataset') {
+    if (fromEntity?.type !== 'model' || toEntity?.type !== 'dataset') throw new Error(`Invalid usesDataset edge ${edgeKey}`);
+  } else if (edge.relation === 'trainedOn') {
+    if (fromEntity?.type !== 'model' || toEntity?.type !== 'dataset') throw new Error(`Invalid trainedOn edge ${edgeKey}`);
+  } else if (edge.relation === 'evaluatedBy') {
+    if (fromEntity?.type !== 'model' || toEntity?.type !== 'benchmark') throw new Error(`Invalid evaluatedBy edge ${edgeKey}`);
+  }
+  if (researchRelations.includes(edge.relation)) {
+    const definition = relationVocabularyByName.get(edge.relation);
+    if (!definition || !definition.fromTypes.includes(fromEntity?.type) || !definition.toTypes.includes(toEntity?.type)) throw new Error(`Research relation violates declared endpoints: ${edgeKey}`);
   }
 
   if (evidenceBackedRelations.has(edge.relation)) {
@@ -302,6 +327,11 @@ const expectedRelationCounts = {
   partOf: graph.counts.organizationHierarchyEdges,
   usesSensor: graph.counts.usesSensorEdges,
   usesRobot: graph.counts.usesRobotEdges,
+  introduces: graph.counts.introducesEdges,
+  describesDataset: graph.counts.describesDatasetEdges,
+  usesDataset: graph.counts.usesDatasetEdges,
+  trainedOn: graph.counts.trainedOnEdges,
+  evaluatedBy: graph.counts.evaluatedByEdges,
 };
 for (const [relation, expected] of Object.entries(expectedRelationCounts)) {
   if (graphRelationCounts.get(relation) !== expected) throw new Error(`Knowledge graph edge count for ${relation} is inconsistent`);
@@ -316,20 +346,34 @@ const actualRobotRelationEdges = robotRelations
 if (actualRobotRelationEdges !== graph.counts.robotRelationEdges) {
   throw new Error('Knowledge graph robot relation edge count is inconsistent');
 }
-const actualResearchProvenanceEdges = researchRelations
+const actualResearchRelationEdges = researchRelations
+  .reduce((total, relation) => total + graphRelationCounts.get(relation), 0);
+if (actualResearchRelationEdges !== graph.counts.researchRelationEdges) {
+  throw new Error('Knowledge graph research relation edge count is inconsistent');
+}
+const actualResearchProvenanceEdges = researchProvenanceRelations
   .reduce((total, relation) => total + graphRelationCounts.get(relation), 0);
 if (actualResearchProvenanceEdges !== graph.counts.researchProvenanceEdges) {
   throw new Error('Knowledge graph research provenance edge count is inconsistent');
 }
-const actualDatasetUsageEdges = graphRelationCounts.get('usesSensor') + graphRelationCounts.get('usesRobot');
+const actualResearchSemanticEdges = researchSemanticRelations
+  .reduce((total, relation) => total + graphRelationCounts.get(relation), 0);
+if (actualResearchSemanticEdges !== graph.counts.researchSemanticEdges) {
+  throw new Error('Knowledge graph research semantic edge count is inconsistent');
+}
+const actualDatasetUsageEdges = graphEdges.filter((edge) => edge.from.startsWith('dataset:') && ['usesSensor', 'usesRobot'].includes(edge.relation)).length;
 if (actualDatasetUsageEdges !== graph.counts.datasetUsageEdges) {
   throw new Error('Knowledge graph dataset usage edge count is inconsistent');
+}
+const actualPaperSensorUsageEdges = graphEdges.filter((edge) => edge.from.startsWith('paper:') && edge.relation === 'usesSensor').length;
+if (actualPaperSensorUsageEdges !== graph.counts.paperSensorUsageEdges) {
+  throw new Error('Knowledge graph paper sensor usage edge count is inconsistent');
 }
 const classifiedEdgeCount = graph.counts.supportedByEdges
   + graph.counts.benchmarkedByEdges
   + graph.counts.organizationRelationEdges
   + graph.counts.robotRelationEdges
-  + graph.counts.researchProvenanceEdges;
+  + graph.counts.researchRelationEdges;
 if (classifiedEdgeCount !== graph.counts.edges) throw new Error('Knowledge graph edge class totals are inconsistent');
 
 for (const entity of graphEntities) {
@@ -430,6 +474,14 @@ const llmsFullCountChecks = [
   ['Source-listed research affiliations', graph.counts.sourceAffiliationEdges],
   ['Verified organization hierarchy relations', graph.counts.organizationHierarchyEdges],
   ['Verified dataset sensor or robot relations', graph.counts.datasetUsageEdges],
+  ['Verified paper-sensor relations', graph.counts.paperSensorUsageEdges],
+  ['Evidence-backed research entity relations', graph.counts.researchRelationEdges],
+  ['Research semantic relations', graph.counts.researchSemanticEdges],
+  ['introduces relations', graph.counts.introducesEdges],
+  ['describesDataset relations', graph.counts.describesDatasetEdges],
+  ['usesDataset relations', graph.counts.usesDatasetEdges],
+  ['trainedOn relations', graph.counts.trainedOnEdges],
+  ['evaluatedBy relations', graph.counts.evaluatedByEdges],
   ['Verified robot-platform records', graph.counts.robots],
   ['Verified model-robot relations', graph.counts.robotRelationEdges],
   ['Structured research records', graph.counts.researchIndex],

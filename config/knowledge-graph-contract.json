@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "2.0.0",
   "counts": {
     "knowledgeEntities": 104,
     "researchEntities": 81,
@@ -12,8 +12,8 @@
     "models": 10,
     "organizations": 23,
     "robots": 11,
-    "sourceDocuments": 145,
-    "edges": 268,
+    "sourceDocuments": 144,
+    "edges": 281,
     "supportedByEdges": 176,
     "benchmarkedByEdges": 6,
     "organizationRelationEdges": 20,
@@ -24,11 +24,19 @@
     "evaluatedOnEdges": 15,
     "trainedAcrossEdges": 5,
     "demonstratedOnEdges": 2,
-    "researchProvenanceEdges": 44,
+    "researchRelationEdges": 57,
+    "researchProvenanceEdges": 46,
+    "researchSemanticEdges": 11,
     "sourceAffiliationEdges": 37,
     "organizationHierarchyEdges": 2,
     "datasetUsageEdges": 5,
-    "usesSensorEdges": 4,
-    "usesRobotEdges": 1
+    "paperSensorUsageEdges": 2,
+    "usesSensorEdges": 6,
+    "usesRobotEdges": 1,
+    "introducesEdges": 8,
+    "describesDatasetEdges": 2,
+    "usesDatasetEdges": 0,
+    "trainedOnEdges": 0,
+    "evaluatedByEdges": 1
   }
 }

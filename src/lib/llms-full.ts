@@ -6,7 +6,11 @@ import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-ind
 import {
   researchDatasetUsageRelations,
   researchEntityRelations,
+  researchEntityRelationVocabulary,
   researchOrganizationPartOfRelations,
+  researchPaperSensorRelations,
+  researchProvenanceRelations,
+  researchSemanticRelations,
   researchSourceAffiliationRelations,
   type ResearchEntityRelation,
 } from '@/lib/research-entity-relations';
@@ -72,6 +76,10 @@ function researchRelationEntity(
       const entry = tactileSensorEntries.find((candidate) => candidate.id === id);
       return entry ? { name: entry.name, url: canonicalUrl(`/sensors#sensor-${entry.id}`) } : undefined;
     }
+    case 'model': {
+      const entry = robotAiModelEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/robot-foundation-models#model-${entry.id}`) } : undefined;
+    }
     case 'organization': {
       const entry = researchOrganizationEntries.find((candidate) => candidate.id === id);
       return entry ? { name: entry.name, url: canonicalUrl(`/organizations#organization-${entry.id}`) } : undefined;
@@ -108,6 +116,15 @@ export function buildLlmsFullText() {
     `- Source-listed research affiliations: ${researchSourceAffiliationRelations.length}`,
     `- Verified organization hierarchy relations: ${researchOrganizationPartOfRelations.length}`,
     `- Verified dataset sensor or robot relations: ${researchDatasetUsageRelations.length}`,
+    `- Verified paper-sensor relations: ${researchPaperSensorRelations.length}`,
+    `- Evidence-backed research entity relations: ${researchEntityRelations.length}`,
+    `- Research provenance relations: ${researchProvenanceRelations.length}`,
+    `- Research semantic relations: ${researchSemanticRelations.length}`,
+    `- introduces relations: ${researchSemanticRelations.filter((entry) => entry.relation === 'introduces').length}`,
+    `- describesDataset relations: ${researchSemanticRelations.filter((entry) => entry.relation === 'describesDataset').length}`,
+    `- usesDataset relations: ${researchSemanticRelations.filter((entry) => entry.relation === 'usesDataset').length}`,
+    `- trainedOn relations: ${researchSemanticRelations.filter((entry) => entry.relation === 'trainedOn').length}`,
+    `- evaluatedBy relations: ${researchSemanticRelations.filter((entry) => entry.relation === 'evaluatedBy').length}`,
     `- Verified robot-platform records: ${researchRobotEntries.length}`,
     `- Verified model-robot relations: ${robotAiRobotRelations.length}`,
     `- Structured research records: ${researchIndexEntries.length}`,
@@ -121,7 +138,8 @@ export function buildLlmsFullText() {
     '- Prefer the primary source URL attached to each technical record. Use the RoboSkin.ai canonical page for the site’s analysis, taxonomy, and comparison context.',
     '- Do not infer product availability, certifications, customers, benchmark values, or company claims unless the relevant public page states them explicitly.',
     '- A source-listed organization affiliation does not establish model ownership, funding, endorsement, current employment, or affiliation with RoboSkin.ai. Preserve the developed, co-developed, and contributor relationship labels.',
-    '- Research provenance relations are intentionally narrow. sourceAffiliation preserves paper wording, partOf requires direct organization evidence, usesSensor records a named collection setup, and usesRobot may represent simulation only when its boundary says so.',
+    '- Research provenance relations are intentionally narrow. sourceAffiliation preserves paper wording, partOf requires direct organization evidence, usesSensor records a named paper experiment or dataset collection setup, and usesRobot may represent simulation only when its boundary says so.',
+    '- Knowledge-graph v2 relation labels are not interchangeable. introduces requires a paper-presented contribution; describesDataset is deliberately weaker; usesDataset requires explicit model use; trainedOn requires explicit training-mixture evidence; evaluatedBy requires an explicit model-to-benchmark evaluation. A zero edge count means no current relation passed the evidence gate, not that the relationship is impossible.',
     '- A robot-platform relation has a narrow meaning: evaluatedOn requires explicit experiments, trainedAcross requires explicit training-mixture evidence, and demonstratedOn records a source-backed demonstration without upgrading it to a quantitative evaluation.',
     '- Do not infer an exact robot product from a family label. Training coverage does not prove deployment compatibility, a fine-tuned policy is not a zero-shot base-model result, and a simulation score is not a real-robot score.',
     '- No blanket content-reuse license is granted by this file. Verify the original source license and the RoboSkin.ai site terms before reuse.',
@@ -325,9 +343,19 @@ export function buildLlmsFullText() {
   }
 
   lines.push(
-    '## Evidence-Backed Research Provenance Relations',
+    '## Knowledge Graph v2 Relationship Vocabulary',
     '',
-    'These relations connect existing records without upgrading affiliation into ownership or simulation into hardware evidence. Each edge retains source wording, relationship evidence, a review date, and an editorial boundary.',
+    'The vocabulary is serialized in knowledge-graph.json even when a relation currently has zero verified edges. Allowed endpoint types are strict; the site does not infer missing edges from similar names, dates, organizations, or prose fields.',
+    '',
+    '| Relation | Allowed source types | Allowed target types | Verified edges | Definition |',
+    '| --- | --- | --- | ---: | --- |',
+    ...researchEntityRelationVocabulary.map((definition) => (
+      `| ${definition.relation} | ${definition.fromTypes.join(', ')} | ${definition.toTypes.join(', ')} | ${researchEntityRelations.filter((relation) => relation.relation === definition.relation).length} | ${compact(definition.definition)} |`
+    )),
+    '',
+    '## Evidence-Backed Research Entity Relations',
+    '',
+    'These provenance and semantic relations connect existing records without upgrading affiliation into ownership, description into release, dataset use into training, or simulation into hardware evidence. Each edge retains source wording, relationship evidence, a review date, and an editorial boundary.',
     '',
   );
   for (const relation of researchEntityRelations) {

@@ -1044,7 +1044,7 @@ eFlesh supports a practical engineering rule: evaluate how the sensor is made, r
       'A research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.',
     content: `# FreeTacMan robot-free visuo-tactile data collection for tactile AI
 
-**Updated technical brief - June 2026**
+**Updated technical brief - August 2026**
 
 FreeTacMan is a robot-free visuo-tactile data collection system for contact-rich manipulation. It addresses the cost and limited task coverage of collecting every tactile demonstration with a fixed robot arm. For robot skin and tactile AI, the system matters because broader human-guided contact data can accelerate learning, while still leaving embodiment transfer and target-robot validation as explicit engineering constraints.
 
@@ -1090,16 +1090,16 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
 
 ## Source
 
-[arXiv: FreeTacMan: Robot-free Visuo-Tactile Data Collection System for Contact-rich Manipulation](https://arxiv.org/html/2506.01941v1)
+[arXiv: FreeTacMan: Robot-free Visuo-Tactile Data Collection System for Contact-rich Manipulation](https://arxiv.org/abs/2506.01941)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
+    updated: '2026-08-22',
     readTime: '5 min read',
     category: 'Tactile Data',
     image: '/generated/authority/authority-hero-tactile-stack.webp',
     sourceTitle: 'FreeTacMan robot-free visuo-tactile data collection preprint',
-    sourceUrl: 'https://arxiv.org/html/2506.01941v1',
+    sourceUrl: 'https://arxiv.org/abs/2506.01941',
     technicalFocus: ['FreeTacMan', 'visuo-tactile data collection', 'human demonstrations', 'contact-rich manipulation'],
   },
   {

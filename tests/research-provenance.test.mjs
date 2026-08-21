@@ -34,14 +34,17 @@ test('research organizations keep the eleven new identities separate and source 
   assert.doesNotMatch(entries, /id: 'bristol-robotics-laboratory',[\s\S]*?aliases: \[[^\]]*University of Bristol[^\]]*\]/);
 });
 
-test('research provenance exposes only the four strict evidence-backed relation types', async () => {
+test('research relations separate strict provenance from the v2 semantic vocabulary', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
 
-  assert.match(source, /researchEntityRelationTypes = \[[\s\S]*?'sourceAffiliation'[\s\S]*?'partOf'[\s\S]*?'usesSensor'[\s\S]*?'usesRobot'[\s\S]*?\] as const/);
+  assert.match(source, /researchProvenanceRelationTypes = \[[\s\S]*?'sourceAffiliation'[\s\S]*?'partOf'[\s\S]*?'usesSensor'[\s\S]*?'usesRobot'[\s\S]*?\] as const/);
+  assert.match(source, /researchSemanticRelationTypes = \[[\s\S]*?'introduces'[\s\S]*?'describesDataset'[\s\S]*?'usesDataset'[\s\S]*?'trainedOn'[\s\S]*?'evaluatedBy'[\s\S]*?\] as const/);
+  assert.match(source, /researchEntityRelationVocabulary: ResearchEntityRelationDefinition\[\]/);
   assert.match(source, /type EvidenceFields = \{[\s\S]*?evidenceUrls: string\[\][\s\S]*?sourceLabels: string\[\][\s\S]*?evidenceBoundary: string[\s\S]*?sourceReviewed: string/);
   assert.match(source, /fromType: SourceAffiliationEntityType[\s\S]*?toType: 'organization'/);
   assert.match(source, /fromType: 'organization'[\s\S]*?toType: 'organization'/);
-  assert.match(source, /fromType: 'dataset'[\s\S]*?toType: 'sensor' \| 'robot'/);
+  assert.match(source, /relation: 'usesSensor'[\s\S]*?fromType: 'paper' \| 'dataset'[\s\S]*?toType: 'sensor'/);
+  assert.match(source, /relation: 'usesDataset'[\s\S]*?fromType: 'model'[\s\S]*?toType: 'dataset'/);
   assert.match(source, /Duplicate research-entity relation/);
   assert.match(source, /availablePrimarySources\.has\(evidenceUrl\)/);
   assert.match(source, /is not a primary source for/);
@@ -87,7 +90,7 @@ test('source affiliation batches preserve labels, primary sources, and conservat
   assert.match(source, /currently normalized subset of the SoftVTBench paper/);
   assert.match(source, /larger author-affiliation list/);
   assert.match(source, /not a complete organization roster/);
-  assert.match(source, /deferredConcurrentSources = new Set\([\s\S]*?'paper:softvtbench-deformation-aware-visuo-tactile-dataset-2026'[\s\S]*?'dataset:softvtbench'[\s\S]*?'benchmark:softvtbench'/);
+  assert.doesNotMatch(source, /deferredConcurrentSources|if \(deferredConcurrentSources\.has\(sourceKey\)\) continue/);
   assert.doesNotMatch(source, /https:\/\/arxiv\.org\/abs\/2607\.04234/);
 });
 
@@ -103,7 +106,7 @@ test('partOf edges keep only directly supported lab relationships', async () => 
 
 test('dataset usage edges distinguish sensor use from simulation-only embodiment', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
-  const usage = source.match(/researchDatasetUsageRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchEntityRelations/)?.[1] ?? '';
+  const usage = source.match(/researchDatasetUsageRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchPaperSensorRelations/)?.[1] ?? '';
 
   for (const pair of [
     ["fromId: 'rct'", "toId: 'digit'"],
@@ -120,4 +123,15 @@ test('dataset usage edges distinguish sensor use from simulation-only embodiment
   assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 1);
   assert.match(usage, /fromId: 'softvtbench',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?simulation-only embodiment relation/);
   assert.match(usage, /does not use a physical GelSight Mini/);
+});
+
+test('paper sensor edges are limited to the two GenForce sensors supported by the primary paper', async () => {
+  const source = await read('src/lib/research-entity-relations.ts');
+  const relations = source.match(/researchPaperSensorRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchSemanticRelations/)?.[1] ?? '';
+
+  assert.equal([...relations.matchAll(/relation: 'usesSensor'/g)].length, 2);
+  assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
+  assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'uskin'/);
+  assert.match(relations, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/);
+  assert.doesNotMatch(relations, /gelsight-mini|digit-360/);
 });
