@@ -11,7 +11,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
     read('src/components/JsonLd.tsx'),
     read('src/app/layout.tsx'),
     read('src/app/sitemap.ts'),
-    read('src/app/robots.ts'),
+    read('public/crawler-robots.txt'),
     read('src/app/page.tsx'),
     read('src/app/faq/page.tsx'),
     read('src/app/news/page.tsx'),
@@ -48,7 +48,10 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(news, /buildPageJsonLd\('\/news'\)/);
   assert.match(news, /buildBreadcrumbJsonLd\('\/news'\)/);
   assert.doesNotMatch(news, /robots:\s*\{\s*index:\s*false|follow:\s*false/);
-  assert.doesNotMatch(robots, /\/_next\//);
+  assert.match(robots, /^User-agent: \*/);
+  assert.match(robots, /Sitemap: https:\/\/roboskin\.ai\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/roboskin\.ai\/news-sitemap\.xml/);
+  assert.doesNotMatch(robots, /\/_next\/|\$Sreact\.fragment/);
 
   assert.match(home, /Find the right robot skin research route/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);

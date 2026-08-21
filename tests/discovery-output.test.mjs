@@ -41,10 +41,10 @@ test('RSS is generated from research and news with apex URLs', async () => {
 });
 
 test('Google News sitemap includes only recent news and apex URLs', async () => {
-  const [helper, route, robots, vercel, layout, packageJson] = await Promise.all([
+  const [helper, route, crawlerRobots, vercel, layout, packageJson] = await Promise.all([
     read('src/lib/news-sitemap.ts'),
     read('src/app/news-sitemap.xml/route.ts'),
-    read('src/app/robots.ts'),
+    read('public/crawler-robots.txt'),
     read('vercel.json'),
     read('src/app/layout.tsx'),
     read('package.json'),
@@ -58,11 +58,36 @@ test('Google News sitemap includes only recent news and apex URLs', async () => 
   assert.match(route, /application\/xml/);
   assert.match(route, /recentPosts\.length === 0 && newsPosts\[0\]/);
   assert.match(route, /fallbackEntry/);
-  assert.match(robots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
+  assert.match(crawlerRobots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
   assert.match(vercel, /"source": "\/news-sitemap\.xml"/);
   assert.match(layout, /@vercel\/analytics\/next/);
   assert.match(layout, /<Analytics \/>/);
   assert.match(packageJson, /"@vercel\/analytics"/);
+});
+
+test('crawler robots policy overrides the conflicting static RSC path without breaking /robots navigation', async () => {
+  const [crawlerRobots, vercel, exportVerifier, productionVerifier] = await Promise.all([
+    read('public/crawler-robots.txt'),
+    read('vercel.json'),
+    read('scripts/verify-export.mjs'),
+    read('scripts/verify-production.mjs'),
+  ]);
+  const vercelConfig = JSON.parse(vercel);
+  const route = vercelConfig.routes?.find((candidate) => candidate.src === '/robots\\.txt');
+
+  assert.match(crawlerRobots, /^User-agent: \*/);
+  assert.match(crawlerRobots, /^Allow: \/$/m);
+  assert.match(crawlerRobots, /Sitemap: https:\/\/roboskin\.ai\/sitemap\.xml/);
+  assert.match(crawlerRobots, /Sitemap: https:\/\/roboskin\.ai\/news-sitemap\.xml/);
+  assert.doesNotMatch(crawlerRobots, /\$Sreact\.fragment|\/_next\//);
+  assert.equal(route?.dest, '/crawler-robots.txt');
+  assert.ok(route?.missing?.some((condition) =>
+    condition.type === 'header' && condition.key.toLowerCase() === 'rsc'
+  ));
+  assert.equal(route?.headers?.['Content-Type'], 'text/plain; charset=utf-8');
+  assert.match(exportVerifier, /crawler-robots\.txt/);
+  assert.match(productionVerifier, /fetchOk\('\/robots\.txt'\)/);
+  assert.match(productionVerifier, /crawlerRobots\.includes\('\$Sreact\.fragment'\)/);
 });
 
 test('IndexNow requires a recent successful production verification report', async () => {

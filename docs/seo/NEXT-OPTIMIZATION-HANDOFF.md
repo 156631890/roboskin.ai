@@ -397,7 +397,7 @@ If the user wants inquiries rather than only traffic:
 | Research data | `src/lib/research-data.ts`, `src/lib/research-index-data.ts` |
 | Main sitemap | `src/app/sitemap.ts` |
 | News sitemap | `src/app/news-sitemap.xml/route.ts` |
-| Robots | `src/app/robots.ts` |
+| Crawler robots policy | `public/crawler-robots.txt` + the non-RSC `/robots.txt` route in `vercel.json` |
 | Analytics integration | `src/app/layout.tsx`, `package.json` |
 | Protected URL contract | `config/protected-urls.json` |
 | Noindex contract | `config/noindex-urls.json` |

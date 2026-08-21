@@ -137,7 +137,7 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
@@ -146,6 +146,7 @@ const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, ll
   fetchOk('/llms-full.txt'),
   fetchOk('/organizations'),
   fetchOk('/robots'),
+  fetchOk('/robots.txt'),
   fetchOk('/feed.xml'),
   fetchOk('/news-sitemap.xml'),
   fetchOk('/deployment.json'),
@@ -159,11 +160,12 @@ if (!(llmsResponse.headers.get('content-type') ?? '').includes('text/plain')) th
 if (!(llmsFullResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms-full.txt has an invalid content type');
 if (!(organizationsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/organizations did not return HTML');
 if (!(robotsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robots did not return HTML');
+if (!(crawlerRobotsResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/robots.txt has an invalid content type');
 if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+xml')) throw new Error('/feed.xml has an invalid content type');
 if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
@@ -172,11 +174,20 @@ const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robo
   llmsFullResponse.text(),
   organizationsResponse.text(),
   robotsResponse.text(),
+  crawlerRobotsResponse.text(),
   rssResponse.text(),
   newsSitemapResponse.text(),
   deploymentResponse.json(),
   keyResponse.text(),
 ]);
+if (!/^User-agent:\s*\*/i.test(crawlerRobots)
+  || !/^Allow:\s*\/$/im.test(crawlerRobots)
+  || !crawlerRobots.includes('Sitemap: https://roboskin.ai/sitemap.xml')
+  || !crawlerRobots.includes('Sitemap: https://roboskin.ai/news-sitemap.xml')
+  || crawlerRobots.includes('$Sreact.fragment')
+  || crawlerRobots.length > 2048) {
+  throw new Error('/robots.txt is not a valid crawler policy');
+}
 if (deployedIndexNowKey.trim() !== expectedIndexNowKey) throw new Error('Deployed IndexNow key does not match the committed key');
 const indexJsonLd = validateHtml(indexHtml, '/research-index');
 if (!JSON.stringify(indexJsonLd).includes('"@type":"Dataset"') || !JSON.stringify(indexJsonLd).includes('"@type":"ItemList"')) {

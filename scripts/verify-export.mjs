@@ -9,6 +9,7 @@ const protectedUrls = JSON.parse(await readFile(path.join(root, 'config/protecte
 const noindexUrls = JSON.parse(await readFile(path.join(root, 'config/noindex-urls.json'), 'utf8'));
 const redirects = JSON.parse(await readFile(path.join(root, 'config/protected-redirects.json'), 'utf8'));
 const knowledgeGraphContract = JSON.parse(await readFile(path.join(root, 'config/knowledge-graph-contract.json'), 'utf8'));
+const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
 let verifiedGraphEntityCount;
 let verifiedResearchIndexCount;
 let verifiedRssItemCount;
@@ -123,11 +124,28 @@ for (const absoluteUrl of noindexUrls) {
   if (!/<meta name="robots" content="noindex, follow"/i.test(html)) failures.push(`${pathname}: missing noindex, follow metadata`);
 }
 
-for (const file of ['sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'knowledge-graph.json', 'feed.xml', 'deployment.json', 'llms.txt', 'llms-full.txt']) {
+for (const file of ['crawler-robots.txt', 'sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'knowledge-graph.json', 'feed.xml', 'deployment.json', 'llms.txt', 'llms-full.txt']) {
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
 
+const crawlerRobotsRoute = vercelConfig.routes?.find((route) => route.src === '/robots\\.txt');
+if (crawlerRobotsRoute?.dest !== '/crawler-robots.txt'
+  || !crawlerRobotsRoute.missing?.some((condition) => condition.type === 'header' && condition.key.toLowerCase() === 'rsc')
+  || crawlerRobotsRoute.headers?.['Content-Type'] !== 'text/plain; charset=utf-8') {
+  failures.push('/robots.txt: missing the non-RSC Vercel route to the crawler policy');
+}
+
 if (failures.length === 0) {
+  const crawlerRobots = await readFile(path.join(out, 'crawler-robots.txt'), 'utf8');
+  if (!/^User-agent:\s*\*/i.test(crawlerRobots)
+    || !/^Allow:\s*\/$/im.test(crawlerRobots)
+    || !crawlerRobots.includes('Sitemap: https://roboskin.ai/sitemap.xml')
+    || !crawlerRobots.includes('Sitemap: https://roboskin.ai/news-sitemap.xml')
+    || crawlerRobots.includes('$Sreact.fragment')
+    || crawlerRobots.length > 2048) {
+    failures.push('/crawler-robots.txt: invalid crawler policy');
+  }
+
   const newsletterEndpoint = parseNewsletterEndpoint(process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT)?.endpoint ?? null;
   const htmlFiles = await listHtmlFiles(out);
   for (const file of htmlFiles) {
