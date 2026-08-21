@@ -134,7 +134,7 @@ if (failures.length === 0) {
   const csvRows = parseCsv(csv);
   const csvIds = csvRows.map((row) => row.id);
   const jsonIds = indexData.entries?.map((entry) => entry.id) ?? [];
-  if (indexData.count !== 19 || jsonIds.length !== 19) failures.push('/research-index.json: expected 19 records');
+  if (indexData.count !== 23 || jsonIds.length !== 23) failures.push('/research-index.json: expected 23 records');
   if (JSON.stringify(csvIds) !== JSON.stringify(jsonIds)) failures.push('/research-index.csv: IDs differ from JSON');
   for (const [index, entry] of (indexData.entries ?? []).entries()) {
     for (const [column, value] of Object.entries(entry)) {
@@ -157,7 +157,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 38 || rssLinks.length !== 39 || rssGuids.length !== 38) failures.push('/feed.xml: expected 38 complete items');
+  if (rssItems.length !== 46 || rssLinks.length !== 47 || rssGuids.length !== 46) failures.push('/feed.xml: expected 46 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 
   const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');
@@ -166,7 +166,7 @@ if (failures.length === 0) {
   if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) failures.push('/news-sitemap.xml: non-apex URL found');
 
   const llmsFull = await readFile(path.join(out, 'llms-full.txt'), 'utf8');
-  const requiredLlmsRoutes = ['/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-manipulation', '/datasets', '/benchmarks', '/sensors', '/research-index'];
+  const requiredLlmsRoutes = ['/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-manipulation', '/robot-hands', '/robot-safety', '/robotics-datasets', '/robot-world-models', '/robot-teleoperation', '/datasets', '/benchmarks', '/sensors', '/research-index'];
   if (!llmsFull.startsWith('# RoboSkin.ai Full Knowledge')) failures.push('/llms-full.txt: invalid title');
   if (llmsFull.length < 20000) failures.push('/llms-full.txt: generated knowledge snapshot is unexpectedly small');
   if (requiredLlmsRoutes.some((route) => !llmsFull.includes(canonicalFor(route)))) failures.push('/llms-full.txt: missing canonical knowledge routes');
@@ -180,4 +180,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, full LLM knowledge, 19 data records, and 38 RSS items`);
+console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, full LLM knowledge, 23 data records, and 46 RSS items`);

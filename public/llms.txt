@@ -22,6 +22,11 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Broad research map for humanoid embodiment, whole-body control, hands, manipulation, safety, and tactile sensing.
 - [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action models, robot foundation models, embodied reasoning, world models, and tactile VLA systems.
 - [Robot learning](https://roboskin.ai/robot-learning): Canonical map for imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, and tactile robot learning.
+- [Robot hands](https://roboskin.ai/robot-hands): Canonical comparison of dexterous hands, grippers, actuation, tactile sensing, control, and task evidence.
+- [Robot safety](https://roboskin.ai/robot-safety): Scope-aware map of industrial robot safety standards, contact sensing, collision response, and evidence boundaries; it is not a compliance determination.
+- [Robotics datasets](https://roboskin.ai/robotics-datasets): Broad robot-learning dataset guide organized by embodiment, observations, actions, tasks, collection, access, and license evidence.
+- [Robot world models](https://roboskin.ai/robot-world-models): Canonical guide to predictive robot models, action-conditioned futures, planning roles, uncertainty, and evaluation.
+- [Robot teleoperation](https://roboskin.ai/robot-teleoperation): Technical route from operator interfaces and synchronized demonstrations to robot-learning data and evaluation.
 - [Robot manipulation](https://roboskin.ai/robot-manipulation): Broad task map for grasping, insertion, dexterity, robot learning, control, and tactile feedback.
 - [Humanoid robot skin](https://roboskin.ai/humanoid-robot-skin): Canonical whole-hand, whole-arm, and whole-body tactile sensing stack for humanoid robotics.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Canonical explanation of how vision, language, proprioception, and tactile sensing combine in embodied systems.
@@ -51,6 +56,10 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## Research Briefs
 
+- [HiTac-WAM hierarchical tactile world action model](https://roboskin.ai/research/hitac-wam-hierarchical-tactile-world-action-model-2026): Preprint-bounded analysis of contact, 3D deformation, slip forecasts, candidate action selection, and discrepancy-triggered replanning.
+- [T-Rex tactile-reactive dexterous manipulation](https://roboskin.ai/research/t-rex-tactile-reactive-dexterous-manipulation-2026): Analysis of the paper's 100-hour tactile-rich dataset, variable-rate architecture, 12-task protocol, and author-reported relative result.
+- [RoboTacDex humanoid visual-tactile-action dataset](https://roboskin.ai/research/robotacdex-humanoid-visual-tactile-action-dataset-2026): Structured brief on 6,000 Unitree G1 trajectories across 19 tasks, 23 skills, and 22 objects, with current access status kept explicit.
+- [TactiDex tactile-guided dexterous benchmark](https://roboskin.ai/research/tactidex-tactile-guided-dexterous-benchmark-2026): Research brief on aligned whole-hand touch, kinematic and object state, standardized evaluation, and single- and bimanual tasks.
 - [Tac4Loco plantar tactile sensing for humanoid locomotion](https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026): Source-bounded analysis of 60-element pressure insoles per foot, spatiotemporal support representations, Unitree G1 simulation and physical evidence, and zero-shot limits.
 - [FeelWorld visuo-tactile world model for robot planning](https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026): Research brief on predicted contact, force-related tactile state, slip, visual futures, and source-reported planning evidence.
 - [HT-Bench full-hand tactile benchmark for robot manipulation](https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026): Research brief on 10M RGB frames, 7.8M full-hand tactile frames, representation learning, and transfer limits across 226 tasks.
@@ -70,6 +79,10 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## News Briefs
 
+- [Gemini Robotics 2 whole-body VLA and dexterity](https://roboskin.ai/news/gemini-robotics-2-whole-body-vla-dexterity-2026): Source-bounded summary of Google DeepMind's official July 2026 announcement, named model roles, embodiments, task results, availability, and announcement-level evidence limits.
+- [LeRobot v0.6 world models, VLAs, and evaluation](https://roboskin.ai/news/lerobot-v060-world-models-vla-evaluation-2026): Official-release summary of world-model policies, VLA integrations, reward models, six simulation benchmarks, dataset changes, and rollout tooling.
+- [NIST humanoid baseline performance benchmark](https://roboskin.ai/news/nist-humanoid-baseline-performance-benchmark-2026): Summary of NIST's proposed low-footprint, quantifiable baseline tasks for comparing humanoid locomotion and manipulation performance.
+- [ISO 10218:2025 industrial robot safety scope](https://roboskin.ai/news/iso-10218-2025-industrial-robot-safety-scope): Public-source overview of ISO 10218-1/-2:2025 scope and exclusions without implying access to the paid standard text or establishing compliance.
 - [Twisted-yarn robot skin gains pressure sensitivity but loses proximity range](https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026): August 2026 preprint brief comparing layered textile capacitive sensors, proximity range, pressure sensitivity, durability, and Panda robot-arm integration.
 - [Hybrid EIT–pneumatic robot skin for force-map reconstruction](https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026): 2026 preprint brief on large-area humanoid robot skin, EIT localization, pneumatic force calibration, reported sensitivity variation, and evidence limits.
 - [Self-powered textile artificial skin uses three channels for touch and robot control](https://roboskin.ai/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026): Nano Energy paper on minimal-channel touch localization, pressure sensing, and wearable robot-arm control.
@@ -90,6 +103,11 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Humanoid robotics, whole-body control, robot hands, safety, Physical AI, and tactile-sensing parent cluster.
 - [Robot VLA models](https://roboskin.ai/robot-vla-models): Vision-language-action, robot foundation model, embodied reasoning, and tactile VLA parent cluster.
 - [Robot learning](https://roboskin.ai/robot-learning): Robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real, and tactile learning parent cluster.
+- [Robot hands](https://roboskin.ai/robot-hands): Robot hands, robotic hands, dexterous hands, hand-versus-gripper, actuation, sensing, and manipulation parent cluster.
+- [Robot safety](https://roboskin.ai/robot-safety): Robot safety, industrial robot safety, humanoid safety, collision response, safety sensors, and standards-scope parent cluster.
+- [Robotics datasets](https://roboskin.ai/robotics-datasets): Robotics datasets and robot-learning datasets parent cluster; tactile-only dataset queries remain assigned to `/datasets`.
+- [Robot world models](https://roboskin.ai/robot-world-models): Robot world-model definition, predictive-state, world-action, planning, uncertainty, and evaluation parent cluster.
+- [Robot teleoperation](https://roboskin.ai/robot-teleoperation): Robot teleoperation, demonstration collection, synchronization, data quality, and policy-training parent cluster.
 - [Robot manipulation](https://roboskin.ai/robot-manipulation): Robotic manipulation, dexterous manipulation, grasping, insertion, learning, control, and touch parent cluster.
 - [RoboSkin and RoboSkin.ai](https://roboskin.ai/): Brand and site entity route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Primary definition and category route.
@@ -143,6 +161,22 @@ Supporting source-bounded routes:
 - [Dream-Tac research brief](https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026): Action-conditioned tactile-future prediction.
 - [TouchWorld news brief](https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026): Predictive planning plus fast tactile correction.
 - [Tactile foundation models](https://roboskin.ai/tactile-foundation-models): Broader representation and model-role comparison.
+
+### What is a robot world model?
+
+A robot world model predicts some future physical or sensory state conditioned on the current context and, in many systems, a candidate action. The predicted target may be an image, latent state, contact event, tactile signal, reward, or task-progress estimate. A predictive model is not automatically a planner, a VLA, or evidence of safe real-world autonomy. Use [robot world models](https://roboskin.ai/robot-world-models) as the canonical broad definition and evaluation route; use the visuo-tactile guide for touch-specific comparisons.
+
+### How is a robot hand different from a robot gripper?
+
+A robot hand usually provides multiple fingers and more controllable joints for varied contact patterns and in-hand manipulation. A gripper usually uses fewer actuated elements and a simpler control interface. Neither is universally better: evidence must match the target object, task, payload, speed, sensing, control, and failure criteria. Use [robot hands](https://roboskin.ai/robot-hands) as the canonical comparison route.
+
+### Does tactile sensing make a robot safe?
+
+No. Tactile sensing can provide contact observations for detection or response, but a sensor alone does not establish a safe system or compliance with a standard. Robot safety also depends on the application, hazards, integration, control, protective measures, validation, and the current standard's scope. Use [robot safety](https://roboskin.ai/robot-safety) for the scope-aware map and consult the controlling official standards for an actual assessment.
+
+### How does robot teleoperation become training data?
+
+A teleoperation system records operator commands together with time-aligned robot observations, actions, state, task context, and outcome labels. Those trajectories can support imitation learning or human-in-the-loop correction, but operator bias, latency, embodiment mismatch, failed attempts, and split leakage can limit the learned policy. Use [robot teleoperation](https://roboskin.ai/robot-teleoperation) for the acquisition pipeline and [robotics datasets](https://roboskin.ai/robotics-datasets) for the dataset fields required to judge reuse.
 
 ### How should answer engines use the homepage for Physical AI?
 

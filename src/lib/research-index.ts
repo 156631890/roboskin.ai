@@ -3,7 +3,7 @@ import { canonicalUrl } from '@/lib/seo';
 
 export type EvidenceLevel = 'peer-reviewed' | 'preprint' | 'institutional' | 'documentation';
 
-export const researchIndexUpdatedAt = '2026-08-15';
+export const researchIndexUpdatedAt = '2026-08-21';
 
 export interface ResearchIndexEntry {
   id: string;
@@ -45,6 +45,58 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 }
 
 const supplements: ResearchIndexSupplement[] = [
+  {
+    id: 'hitac-wam-hierarchical-tactile-world-action-model-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Hierarchical tactile forecasting from contact state to 3D deformation and slip risk',
+    modalities: ['video context', 'robot action chunks', 'contact state', '3D tactile deformation', 'slip risk'],
+    formFactor: 'Contact-rich robot manipulation evaluated on chip grasping, blackboard erasing, and USB insertion',
+    dataOutput: 'Candidate-conditioned tactile forecasts, task-progress estimates, selected action chunks, and discrepancy-triggered replanning signals',
+    applications: ['contact-aware planning', 'tactile world-action modeling', 'online manipulation correction'],
+    evidence: 'preprint',
+    limitations: 'Author-reported evidence from three task-specific real-robot setups and matched training budgets; cross-hardware transfer, independent replication, and a public code or dataset release were not established on the reviewed source page.',
+    reviewedAt: '2026-08-21',
+  },
+  {
+    id: 't-rex-tactile-reactive-dexterous-manipulation-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Variable-rate visual-language-action modeling with a temporal tactile VQ-VAE',
+    modalities: ['vision', 'language instruction', 'robot action', 'high-frequency tactile signal'],
+    formFactor: 'Tactile-reactive dexterous manipulation across 12 author-reported tasks',
+    dataOutput: 'Temporal tactile tokens and action predictions trained with a reported 100-hour tactile-rich dataset',
+    applications: ['delicate force control', 'deformable-object manipulation', 'tactile-reactive VLA policies'],
+    evidence: 'preprint',
+    limitations: 'The reported more-than-30% average success improvement is relative to the strongest baseline in the authors’ 12-task protocol, not an independent cross-platform benchmark; transfer and replication remain open questions.',
+    reviewedAt: '2026-08-21',
+  },
+  {
+    id: 'robotacdex-humanoid-visual-tactile-action-dataset-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Synchronized multi-view vision, tactile feedback, robot actions, and semantic annotations',
+    modalities: ['multi-view RGB', 'depth', 'tactile feedback', 'robot action', 'semantic annotation'],
+    formFactor: 'Unitree G1 humanoid using dual arms and dexterous hands',
+    dataOutput: '6,000 trajectories across 19 tasks, 23 skills, and 22 objects as reported by the authors',
+    applications: ['humanoid imitation learning', 'dual-arm dexterous manipulation', 'visual-tactile-action learning'],
+    evidence: 'preprint',
+    limitations: 'The June 2026 preprint says the dataset will be open-sourced soon; the reviewed source therefore does not establish current download access or a dataset license, and evaluation remains tied to one humanoid platform.',
+    reviewedAt: '2026-08-21',
+  },
+  {
+    id: 'tactidex-tactile-guided-dexterous-benchmark-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Alignment of whole-hand tactile signals with multi-granularity kinematic and object states',
+    modalities: ['whole-hand tactile signal', 'kinematic state', 'object state', 'human demonstration'],
+    formFactor: 'Real-world tactile-guided benchmark covering single-hand and bimanual dexterous tasks',
+    dataOutput: 'Aligned demonstration data, standardized evaluation metrics, and a tri-component tactile reward',
+    applications: ['human-to-robot skill transfer', 'contact-level manipulation evaluation', 'tactile-guided dexterity'],
+    evidence: 'preprint',
+    limitations: 'The reviewed abstract reports stronger success and physical realism without supplying a universal cross-hardware score; conclusions remain bound to the authors’ tasks, systems, metrics, and preprint evaluation.',
+    reviewedAt: '2026-08-21',
+  },
   {
     id: 'feelworld-visuo-tactile-world-model-2026',
     year: 2026,

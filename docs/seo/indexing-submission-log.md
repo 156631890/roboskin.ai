@@ -19,7 +19,7 @@ Use the `roboskin.ai` Domain property when submitting `https://roboskin.ai/sitem
 | Sitemap Physical AI route | `https://roboskin.ai/sitemap.xml` | Verified | Sitemap includes `https://roboskin.ai/physics-ai` |
 | Sitemap tactile feedback guide | `https://roboskin.ai/sitemap.xml` | Verified | Sitemap includes `https://roboskin.ai/guides/tactile-feedback-for-physical-ai` |
 | Sitemap touch data pillar | `https://roboskin.ai/sitemap.xml` | Pending post-deploy verification | Sitemap should include `https://roboskin.ai/physical-ai-touch` and exclude the redirected legacy guide URL. |
-| Sitemap high-interest robotics parents | `https://roboskin.ai/sitemap.xml` | Pending post-deploy verification | Sitemap should include `/humanoid-robots`, `/robot-learning`, `/robot-vla-models`, and `/robot-manipulation`. |
+| Sitemap high-interest robotics parents | `https://roboskin.ai/sitemap.xml` | Pending post-deploy verification | Sitemap should include `/humanoid-robots`, `/robot-learning`, `/robot-vla-models`, `/robot-manipulation`, `/robot-hands`, `/robot-safety`, `/robotics-datasets`, `/robot-world-models`, and `/robot-teleoperation`. |
 
 ## Google URL Inspection queue
 
@@ -39,6 +39,15 @@ Request indexing in Google Search Console after the production checks above pass
 | 9 | `https://roboskin.ai/robot-skin` | Robot skin definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
 | 10 | `https://roboskin.ai/tactile-ai` | Tactile AI definition route now supports the Physical AI cluster. | Pending manual URL Inspection |  |
 | 11 | `https://roboskin.ai/sitemap.xml` | Sitemap discovery for the full cluster. | Resubmitted successfully for the previous deployment; resubmit after the new production verification. | 2026-08-05 |
+| 12 | `https://roboskin.ai/robot-hands` | New end-effector comparison parent connecting hands, grippers, tactile sensing, and manipulation. | Pending deployment and URL Inspection |  |
+| 13 | `https://roboskin.ai/robot-world-models` | New predictive-model parent with VLA and visuo-tactile child routes. | Pending deployment and URL Inspection |  |
+| 14 | `https://roboskin.ai/robotics-datasets` | New broad dataset-evaluation parent; tactile-only data remains on `/datasets`. | Pending deployment and URL Inspection |  |
+| 15 | `https://roboskin.ai/robot-safety` | New scope-aware standards and safety-system map. | Pending deployment and URL Inspection |  |
+| 16 | `https://roboskin.ai/robot-teleoperation` | New demonstration-acquisition and robot-learning data parent. | Pending deployment and URL Inspection |  |
+| 17 | `https://roboskin.ai/research/hitac-wam-hierarchical-tactile-world-action-model-2026` | Current preprint entity page for hierarchical tactile forecasts and replanning. | Pending deployment and URL Inspection |  |
+| 18 | `https://roboskin.ai/research/t-rex-tactile-reactive-dexterous-manipulation-2026` | Source-bounded entity page for tactile-reactive VLA manipulation. | Pending deployment and URL Inspection |  |
+| 19 | `https://roboskin.ai/research/robotacdex-humanoid-visual-tactile-action-dataset-2026` | Dataset entity page with access status kept explicit. | Pending deployment and URL Inspection |  |
+| 20 | `https://roboskin.ai/research/tactidex-tactile-guided-dexterous-benchmark-2026` | Benchmark entity page for tactile-guided dexterity. | Pending deployment and URL Inspection |  |
 
 ## Bing Webmaster Tools queue
 

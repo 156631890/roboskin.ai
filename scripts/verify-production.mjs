@@ -164,7 +164,7 @@ const indexJsonLd = validateHtml(indexHtml, '/research-index');
 if (!JSON.stringify(indexJsonLd).includes('"@type":"Dataset"') || !JSON.stringify(indexJsonLd).includes('"@type":"ItemList"')) {
   throw new Error('/research-index is missing Dataset or ItemList JSON-LD');
 }
-if (indexData.count !== 19 || indexData.entries?.length !== 19) throw new Error('Research index JSON does not contain 19 records');
+if (indexData.count !== 23 || indexData.entries?.length !== 23) throw new Error('Research index JSON does not contain 23 records');
 
 const csvRows = parseCsv(csv);
 const csvIds = csvRows.map((row) => row.id);
@@ -184,7 +184,7 @@ const rssLinks = [...rss.matchAll(/<link>([^<]+)<\/link>/g)].map((match) => matc
 const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
 const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
 if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) throw new Error('RSS has an invalid envelope');
-if (rssItems.length !== 38 || rssLinks.length !== 39 || rssGuids.length !== 38) throw new Error('RSS does not contain 38 complete items');
+if (rssItems.length !== 46 || rssLinks.length !== 47 || rssGuids.length !== 46) throw new Error('RSS does not contain 46 complete items');
 if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) throw new Error('RSS contains a non-apex URL');
 if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) throw new Error('News sitemap has an invalid envelope');
 if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) throw new Error('News sitemap is missing the Google News namespace');
@@ -241,4 +241,4 @@ const report = {
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 19 data records, and 38 RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, 23 data records, and 46 RSS items`);

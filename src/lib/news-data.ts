@@ -29,6 +29,405 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'gemini-robotics-2-whole-body-vla-dexterity-2026',
+    title: 'Gemini Robotics 2 extends VLA control from whole-body motion to dexterous hands',
+    seoTitle: 'Gemini Robotics 2: Whole-Body VLA and Dexterity',
+    seoDescription:
+      'An evidence-bounded review of Google DeepMind’s Gemini Robotics 2 VLA, ER 2 reasoning model, On-Device 2 model, official task results, access, and tactile gap.',
+    excerpt:
+      'Google DeepMind’s Gemini Robotics 2 model family connects whole-body humanoid control, dexterous manipulation, embodied reasoning, and on-device adaptation—but its public results are provider-reported, not independent benchmarks.',
+    content: `# Gemini Robotics 2 extends VLA control from whole-body motion to dexterous hands
+
+**Official model update review — source published July 30, 2026**
+
+Google DeepMind introduced Gemini Robotics 2 as a family of models for robot control and embodied reasoning. The release separates three functions that are often collapsed into one “robot foundation model” label: a vision-language-action model that outputs robot actions, an embodied-reasoning model that plans and monitors longer tasks, and a smaller VLA intended to run locally on robot hardware.
+
+The important shift is scope. DeepMind reports control across full humanoid bodies, multi-finger hands, parallel grippers, and multiple robots. That does not mean the system has solved general-purpose dexterity. The company’s own task chart shows wide variation, particularly for multi-finger tasks, and the public sources do not establish tactile sensing as an input modality.
+
+## What is Gemini Robotics 2?
+
+Gemini Robotics 2 is Google DeepMind’s July 2026 vision-language-action model for turning visual and language inputs into motor actions on humanoid and bi-arm robots. It is presented alongside Gemini Robotics ER 2 for high-level embodied reasoning and Gemini Robotics On-Device 2 for local manipulation inference.
+
+| Model | Publicly described role | Distribution stated by DeepMind |
+| --- | --- | --- |
+| Gemini Robotics 2 | VLA for whole-body humanoid and bi-arm control, including hands and grippers | Available to early-access partners |
+| Gemini Robotics ER 2 | Vision-language model for planning, communication, progress tracking, tool orchestration, and multi-robot coordination | Available through Google AI Studio and Gemini API; enterprise channel in private preview |
+| Gemini Robotics On-Device 2 | Local VLA for general-purpose bi-arm manipulation and adaptation to new embodiments | Available only to selected trusted testers |
+
+These access states matter. The release is not equivalent to a downloadable, reproducible open model package. Researchers can inspect the announcement, model cards, and safety report, but general access to the VLA and On-Device 2 weights or training data is not described.
+
+## What the official task chart reports
+
+DeepMind says one Gemini Robotics 2 checkpoint controlled three embodiments: an Apptronik Apollo 2 with Inspire hands, an Apollo 2 with SharpaWave hands, and a Franka Duo with a Robotiq gripper. The values below are transcribed from the company’s release chart and belong only to those reported task settings.
+
+| Embodiment and task | Officially reported success rate |
+| --- | ---: |
+| Apollo 2 + Inspire hands: pick up from table | 68.4% |
+| Apollo 2 + Inspire hands: pick up from floor | 45.7% |
+| Apollo 2 + Inspire hands: pick up from shelf | 76.3% |
+| Apollo 2 + SharpaWave hand: screw bulb | 36% |
+| Apollo 2 + SharpaWave hand: unscrew bulb | 92% |
+| Apollo 2 + SharpaWave hand: tie trash bag | 44% |
+| Apollo 2 + SharpaWave hand: dustpan | 32% |
+| Apollo 2 + SharpaWave hand: ziplock | 40% |
+| Franka Duo + Robotiq gripper: general pick and place | 74.2% |
+| Franka Duo + Robotiq gripper: diverse tool kitting | 78.9% |
+| Franka Duo + Robotiq gripper: precise insertion | 89.6% |
+
+These figures are useful because they show the difficulty gradient inside “dexterity.” They are not an independent leaderboard. The public announcement does not provide enough information to compare the percentages directly with a different lab’s policy, robot, object set, reset procedure, or success definition. DeepMind itself notes that multi-finger manipulation remains challenging.
+
+## Whole-body control and embodied reasoning are different layers
+
+The VLA maps observations and instructions to actions. ER 2 is presented as a higher-level agent that can break a longer goal into steps, communicate with humans, monitor progress, and coordinate tools or other robots. In the release architecture, the reasoning model can call the VLA rather than replacing the controller.
+
+That division is relevant to [robot VLA models](/robot-vla-models) and [Physical AI](/physical-ai-touch): long-horizon planning does not remove the need for fast state estimation and low-level control. A robot still needs embodiment-specific balance, collision handling, force control, and hardware safety below the language-reasoning layer.
+
+## What the on-device model adds
+
+DeepMind describes On-Device 2 as taking text, images, and numerical proprioception and returning numerical robot actions. The company reports adaptation to new bi-arm embodiments with a few hours of data, typically fewer than 200 examples in its experiments. Its model card also states two important limitations: weaker generalization outside the training distribution and difficulty controlling high-degree-of-freedom robots.
+
+Local inference may reduce dependence on network connectivity and latency, but “on-device” is not itself a latency guarantee. The public model card does not publish a universal end-to-end control frequency across supported robot hardware.
+
+## The tactile question: dexterous is not the same as tactile
+
+The release demonstrates hands and grippers, but the public announcement and On-Device 2 model card describe vision, language, and proprioception—not tactile arrays or robot-skin signals—as model inputs. RoboSkin.ai therefore does not classify this release as a tactile foundation model.
+
+That boundary is strategically useful. Multi-finger tasks such as tying, sealing, and tool handling are exactly where contact state, shear, slip, and distributed force can matter. The release establishes a strong vision-to-action reference point; it does not show whether touch improves the reported tasks. A future comparison should document the sensor stack and test the same policy with and without tactile input.
+
+For the contact layer, compare the [robot hands guide](/robot-hands), [tactile AI architecture](/tactile-ai), and [robot manipulation overview](/robot-manipulation).
+
+## Safety evidence is also layered
+
+DeepMind’s separate safety report evaluates agentic safety and uncertainty handling, including when an embodied-reasoning agent should refuse, ask for help, or call a safety tool. The report explicitly says it does not evaluate the certified functional-safety architecture, redundancy, or real-time guarantees needed for a compliant physical deployment.
+
+That is the correct system boundary. Semantic safety can decide that a request is unsafe. Hardware and control safety must still make the robot stop predictably when a hazardous condition occurs. See the [robot safety map](/robot-safety) for the distinction between AI behavior, protective sensing, control functions, integration, and validation.
+
+## Evidence boundary
+
+This article analyzes Google DeepMind’s own release post, model cards, and safety report. The success rates are provider-reported results, not independent replications, and should not be transferred to other robots or task protocols. RoboSkin.ai did not test the models. No public source reviewed here establishes tactile input, model-weight access for the VLA, general commercial availability, or certified deployment safety.
+
+## Sources
+
+- [Google DeepMind: Gemini Robotics 2 brings whole body intelligence to robots](https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/)
+- [Google DeepMind: Gemini Robotics ER 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-er-2/)
+- [Google DeepMind: Gemini Robotics On-Device 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/)
+- [Google DeepMind: Gemini Robotics 2 safety evaluations](https://storage.googleapis.com/deepmind-media/gemini-robotics/Gemini-Robotics-2-Safety.pdf)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '8 min read',
+    category: 'Robot VLA models',
+    image: '/generated/pages/technology-signal-flow.webp',
+    sourceTitle: 'Gemini Robotics 2 brings whole body intelligence to robots',
+    sourceUrl: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/',
+    sources: [
+      {
+        title: 'Google DeepMind: Gemini Robotics 2 release',
+        url: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/',
+      },
+      {
+        title: 'Google DeepMind: Gemini Robotics ER 2 model card',
+        url: 'https://deepmind.google/models/model-cards/gemini-robotics-er-2/',
+      },
+      {
+        title: 'Google DeepMind: Gemini Robotics On-Device 2 model card',
+        url: 'https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/',
+      },
+      {
+        title: 'Google DeepMind: Gemini Robotics 2 safety evaluations',
+        url: 'https://storage.googleapis.com/deepmind-media/gemini-robotics/Gemini-Robotics-2-Safety.pdf',
+      },
+    ],
+    technicalFocus: ['Gemini Robotics 2', 'vision-language-action model', 'humanoid robots', 'dexterous manipulation'],
+  },
+  {
+    id: 'lerobot-v060-world-models-vla-evaluation-2026',
+    title: 'LeRobot v0.6 connects world models, VLAs, evaluation, and corrective data collection',
+    seoTitle: 'LeRobot v0.6: World Models, VLAs and Evaluation',
+    seoDescription:
+      'Hugging Face LeRobot v0.6 adds world-model policies, five VLA integrations, reward models, six simulation benchmarks, richer datasets, and DAgger corrections.',
+    excerpt:
+      'LeRobot v0.6 turns more of the robot-learning loop into shared infrastructure: world-model policies, VLAs, reward models, datasets, simulation evaluation, deployment, and corrective demonstrations.',
+    content: `# LeRobot v0.6 connects world models, VLAs, evaluation, and corrective data collection
+
+**Open-source robotics release review — source published July 7, 2026**
+
+Hugging Face released LeRobot v0.6.0 with a wider goal than adding another policy. The update connects model training, rollout, failure capture, human correction, dataset enrichment, reward estimation, and simulation evaluation inside one open-source robotics stack.
+
+For robot learning, that integration may be more consequential than any individual model name. A vision-language-action policy becomes useful only when teams can record compatible observations and actions, evaluate the policy under controlled variation, preserve failures, and turn corrections into the next training set.
+
+## What changed in LeRobot v0.6?
+
+LeRobot v0.6 is the July 2026 release of Hugging Face’s open robotics framework. It adds three world-model policy integrations, five VLA integrations, a unified reward-model API, six simulation benchmark integrations, richer dataset support, and a dedicated rollout command with human correction strategies.
+
+| Layer | Additions named in the official release | Role in the loop |
+| --- | --- | --- |
+| World-model policies | VLA-JEPA, LingBot-VA, FastWAM | Learn or use predicted future representations during policy training or design |
+| VLA integrations | GR00T N1.7, MolmoAct2, EO-1, Multitask DiT, EVO1 | Convert visual and language context into robot actions |
+| Reward models | Existing HIL-SERL and SARM plus Robometer and TOPReward | Estimate task progress or success from trajectories |
+| Simulation benchmarks | LIBERO-plus, RoboTwin 2.0, RoboCasa365, RoboCerebra, RoboMME, VLABench | Test robustness, bimanual manipulation, household tasks, long horizons, memory, and reasoning |
+| Dataset tooling | Depth, timestamped language annotations, configurable video encoding, parallel decoding | Record and load richer training observations |
+| Deployment | lerobot-rollout strategies, including DAgger-style correction | Run policies and save failures or human interventions as data |
+
+The word “integration” is important. LeRobot provides common interfaces and workflows around projects developed by multiple organizations. The release itself is not evidence that every model outperforms every previous policy.
+
+## Three different uses of a robot world model
+
+The release groups VLA-JEPA, LingBot-VA, and FastWAM under world-model policies, but they do not use prediction in the same way.
+
+- VLA-JEPA predicts future representations during training, while the world-model component is removed at inference.
+- LingBot-VA predicts video and actions autoregressively and can save predicted video for comparison with the actual rollout.
+- FastWAM combines video-generation and action experts during training but skips explicit future generation at inference.
+
+This distinction prevents a common SEO shortcut: “world model” is not one fixed architecture. For a useful comparison, record what the model predicts, whether prediction runs at test time, how actions condition the prediction, and whether the imagined state is evaluated against actual robot outcomes. The [robot world models guide](/robot-world-models) organizes those questions.
+
+## Six simulation benchmark integrations
+
+The new environments target different failure modes rather than one universal score. The official release describes LIBERO-plus as robustness testing under perturbations, RoboTwin 2.0 as bimanual manipulation, RoboCasa365 as kitchen-task coverage, RoboCerebra as long-horizon subgoal execution, RoboMME as memory testing, and VLABench as knowledge and reasoning for manipulation.
+
+All six run through the lerobot-eval interface and have their own environment dependencies. A common CLI reduces integration friction; it does not make their tasks, observations, success criteria, or scores directly interchangeable. Benchmark reports should still identify the environment version, policy checkpoint, number of episodes, random seeds, and evaluation hardware.
+
+## From deployment failure to training data
+
+The dedicated lerobot-rollout command separates policy deployment from ordinary dataset recording. Its strategies include continuous recording, saving selected recent windows, episodic rollouts, and a DAgger-style mode in which an operator can interrupt a failed action, take control through a leader device, record the correction, and return control to the policy.
+
+Intervention frames are tagged in the resulting dataset. That creates a concrete [robot teleoperation](/robot-teleoperation) path:
+
+Robot policy rollout → observed failure → human correction → labeled intervention frames → fine-tuning → another rollout.
+
+The quality of the correction still depends on timing, operator skill, sensor calibration, action alignment, and whether the corrected states cover the failures the deployed policy will actually encounter.
+
+## Dataset changes and the tactile-data gap
+
+The release adds end-to-end depth recording, timestamped language annotations, configurable video encoding, and faster multi-camera decoding. The language schema can carry subtasks, plans, corrections, speech, and visual question-answer pairs rather than one sentence for an entire episode.
+
+Those improvements matter to [robotics datasets](/robotics-datasets), but the official release does not announce a standard tactile modality for LeRobot datasets. A tactile extension would still need to define sensor identity, taxel geometry, coordinate frames, calibration, units, sampling rate, timestamps, compression, missing samples, and alignment with cameras, proprioception, and actions. Adding an array without those fields produces bytes, not reusable tactile evidence.
+
+## What the release does not prove
+
+LeRobot v0.6 makes many models and benchmarks easier to run through common interfaces. It does not provide one independent comparison showing which VLA, world model, or reward model is best across real robots. The release’s speed claims and benchmark descriptions come from the project announcement and should be validated in each team’s environment.
+
+Simulation success also does not establish real-world robustness. Camera calibration, latency, motor dynamics, contact, object variation, and safety behavior can change the outcome after deployment.
+
+## Evidence boundary
+
+This article summarizes Hugging Face’s official LeRobot v0.6.0 announcement and linked project repository. Model, dataset-loading, and benchmark claims are release-author claims unless a separate paper is named. RoboSkin.ai did not independently reproduce the six environments, speed measurements, model results, or hardware workflows. Availability may differ by model license, checkpoint, simulator dependency, and compute requirement.
+
+## Sources
+
+- [Hugging Face: LeRobot v0.6.0 — Imagine, Evaluate, Improve](https://huggingface.co/blog/lerobot-release-v060)
+- [GitHub: huggingface/lerobot](https://github.com/huggingface/lerobot)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '7 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'LeRobot v0.6.0: Imagine, Evaluate, Improve',
+    sourceUrl: 'https://huggingface.co/blog/lerobot-release-v060',
+    sources: [
+      {
+        title: 'Hugging Face: LeRobot v0.6.0 release',
+        url: 'https://huggingface.co/blog/lerobot-release-v060',
+      },
+      {
+        title: 'GitHub: huggingface/lerobot',
+        url: 'https://github.com/huggingface/lerobot',
+      },
+    ],
+    technicalFocus: ['LeRobot', 'robot world models', 'vision-language-action models', 'robot learning benchmarks'],
+  },
+  {
+    id: 'nist-humanoid-baseline-performance-benchmark-2026',
+    title: 'NIST proposes a baseline benchmark for comparable humanoid robot capabilities',
+    seoTitle: 'NIST Humanoid Robot Baseline Benchmark Explained',
+    seoDescription:
+      'NIST’s 2026 proposal maps low-footprint locomotion, manipulation, loco-manipulation, whole-body control, and reasoning tasks for comparable humanoid evaluation.',
+    excerpt:
+      'NIST is developing a low-footprint baseline of measurable locomotion, manipulation, whole-body, and reasoning tasks—but the public page is a proposal, not a published humanoid leaderboard.',
+    content: `# NIST proposes a baseline benchmark for comparable humanoid robot capabilities
+
+**Official benchmark-project review — NIST page created April 20 and updated May 15, 2026**
+
+The U.S. National Institute of Standards and Technology is developing a Humanoid Robot Baseline Performance Benchmark: a proposed set of low-footprint locomotion and manipulation tasks intended to make minimum physical capabilities more comparable across humanoid robots.
+
+The most important word is “proposed.” NIST’s public project page describes the purpose, task dimensions, collaboration process, and planned apparatus distribution. It does not publish a completed standard, a final protocol, or ranked results for named humanoid platforms.
+
+## What is the NIST humanoid benchmark proposal?
+
+It is a NIST project to develop common, quantifiable tasks for assessing baseline humanoid mobility, manipulation, loco-manipulation, whole-body control, and limited reasoning. The design draws mainly from earlier standardized NIST test methods and is being developed with industry and research-community input.
+
+NIST says the benchmark is intended to represent capabilities expected of commercially available humanoids across potential industrial, home, healthcare, and other applications. That application language describes the proposed performance task set; it does not make this page a safety certification or product-approval program.
+
+## Capability areas on the public outline
+
+| Capability area | What the NIST outline is intended to exercise | Evidence a useful result should preserve |
+| --- | --- | --- |
+| Mobility | Domain-agnostic basic humanoid locomotion | Course geometry, completion state, time, contacts, falls, assistance |
+| Manipulation and dexterity | Basic object interaction and hand or end-effector capability | Object specification, grasp state, errors, resets, success definition |
+| Loco-manipulation | Coordinated movement and manipulation in one task | Base and arm motion, balance events, task sequence, recovery behavior |
+| Whole-body control | Operation in confined-space manipulation tasks | Clearance, body contacts, collision policy, pose constraints |
+| Minimal reasoning | Task and scene understanding plus basic decisions | Instruction, scene variation, allowed interventions, failure taxonomy |
+
+The right-hand column is RoboSkin.ai’s recommended reporting layer, not a claim that NIST has finalized those exact fields. It shows why a benchmark needs more than a success percentage if researchers want results that can be reproduced or compared.
+
+## Why “low footprint” matters
+
+Humanoid testing can become expensive when it requires a custom building, large course, or one-off instrumentation. NIST proposes a compact apparatus and says it plans to publish designs and 3D models for physical or virtual use. A limited number of apparatuses are planned for distribution to participating U.S. manufacturers and regional facilities.
+
+If the apparatus and protocol become repeatable, smaller footprints could make baseline testing easier to reproduce across sites. Repeatability will still depend on versioned geometry, materials, setup, scoring, robot configuration, and disclosure of operator intervention.
+
+## What the project can and cannot compare
+
+A common task can compare observable capability more cleanly than a company demo made for one robot. It does not automatically explain why one robot succeeds. Two systems may differ in mechanical design, perception, teleoperation, autonomy, control rate, training data, or allowed resets.
+
+For that reason, a useful [humanoid robots](/humanoid-robots) record should separate at least four things:
+
+- the robot platform and end effector;
+- the benchmark apparatus and protocol version;
+- the autonomy and human-intervention conditions; and
+- the metric, trial count, and failure categories.
+
+Without those boundaries, a visually impressive run can be mistaken for a comparable benchmark result.
+
+## Where tactile sensing fits—and where it is not required
+
+The public NIST outline is capability-oriented and does not require one named sensing modality. It does not say that humanoids must use robot skin or tactile arrays to pass the proposed tasks.
+
+Touch may still be relevant to manipulation, balance recovery, confined-space contact, and whole-body awareness. A [robot hand](/robot-hands) can use tactile sensing to estimate contact distribution or slip; a body surface can detect unintended contact; force-torque sensing can measure aggregate loads. But benchmark evidence should report which sensors were actually active rather than infer touch from successful motion.
+
+That distinction supports a future research question: under the same protocol, does tactile feedback change success, contact errors, recovery, or damage rates? The benchmark proposal supplies a possible task structure, not the answer.
+
+## Safety benchmark versus performance benchmark
+
+The project is framed around baseline performance. Performance evaluation and safety conformity are not interchangeable. A humanoid can complete a manipulation task yet still need a separate risk assessment, protective functions, operating limits, and validation for its intended environment.
+
+Use the [robot safety overview](/robot-safety) to keep capability metrics, functional safety, AI behavior, and application-specific compliance separate.
+
+## Current status and evidence boundary
+
+As of the NIST page update dated May 15, 2026, the apparatus was under development with participation being sought from manufacturers, researchers, and test facilities. NIST said designs and 3D models would be published and results would be collected under agreed data-sharing arrangements, with aggregate results intended to characterize the state of the art.
+
+This article does not claim those planned artifacts or aggregate results are already available. It summarizes an official project page, not a final standard, peer-reviewed benchmark paper, or completed ranking. RoboSkin.ai has not participated in the protocol design or tested a humanoid on the apparatus.
+
+## Source
+
+- [NIST: Humanoid Robot Baseline Performance Benchmark](https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '6 min read',
+    category: 'Robotics benchmarks',
+    image: '/generated/pages/comparison-matrix.webp',
+    sourceTitle: 'Humanoid Robot Baseline Performance Benchmark',
+    sourceUrl: 'https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark',
+    sources: [
+      {
+        title: 'NIST: Humanoid Robot Baseline Performance Benchmark',
+        url: 'https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark',
+      },
+    ],
+    technicalFocus: ['humanoid robot benchmark', 'loco-manipulation', 'whole-body control', 'robot evaluation'],
+  },
+  {
+    id: 'iso-10218-2025-industrial-robot-safety-scope',
+    title: 'ISO 10218:2025 separates industrial robot design from application integration',
+    seoTitle: 'ISO 10218:2025 Industrial Robot Safety Scope',
+    seoDescription:
+      'A public-source guide to ISO 10218-1 and ISO 10218-2:2025, their industrial scope, exclusions, and what robot skin can—and cannot—prove about safety.',
+    excerpt:
+      'ISO 10218-1:2025 addresses the industrial robot before system integration, while Part 2 addresses applications and robot cells; neither makes a sensor alone a certified safety system.',
+    content: `# ISO 10218:2025 separates industrial robot design from application integration
+
+**Public standard-scope guide — ISO 10218-1:2025 published February 5, 2025**
+
+ISO 10218 is a two-part international industrial-robot safety standard. Part 1 addresses the industrial robot as partly completed machinery before integration. Part 2 addresses industrial robot applications and robot cells after the robot is integrated into a working system.
+
+That separation is the first thing a Robot Skin or Physical AI team should understand. A sensor can contribute contact information, but robot safety is evaluated at multiple levels: robot design, protective functions, system integration, the application, operating environment, foreseeable misuse, and validation.
+
+## What does ISO 10218:2025 cover?
+
+| Standard | Publicly described scope | Primary audience |
+| --- | --- | --- |
+| ISO 10218-1:2025 | Safety requirements for industrial robots as machines before application integration | Industrial robot manufacturers and robot safety engineers |
+| ISO 10218-2:2025 | Safety requirements for industrial robot applications and robot cells | System integrators, application designers, and operators responsible for the complete cell |
+
+Both parts are listed by ISO as 2025 publications. The ISO page identifies Part 1 as Edition 3 and gives its publication date as February 2025.
+
+## Industrial scope is not every kind of robot
+
+The public ISO scope for Part 1 excludes several categories, including medical and healthcare robots, service robots accessible to the public, consumer products, airborne or space robots, and systems that lift or transport people. It also excludes several special operating environments and application hazards.
+
+This means “ISO 10218 compliant” should not be used as a generic label for every humanoid, home robot, prosthetic, or public-facing service robot. A robot’s intended use and access conditions determine which standards and regulations are relevant. ISO’s robotics overview separately lists ISO 13482 for personal-care robots and ISO/TS 15066 for collaborative robots, among other standards.
+
+## Why Part 1 and Part 2 must stay separate
+
+Part 1 can address the robot manufacturer’s design and information obligations, but a robot is rarely the whole production system. The integrator may add an end effector, workpiece, fixture, conveyor, process tool, mobile base, software, or shared workspace. Those additions create application hazards that cannot be validated from the robot specification alone.
+
+The practical evidence chain is therefore:
+
+Robot design → integration design → application hazards → protective measures → validation → operating information.
+
+Skipping the integration layer is especially risky for Physical AI systems, because learned behaviors may interact with tools, objects, and people in ways that were not visible in a component demonstration.
+
+## Robot skin and collision sensing: useful, but not proof by itself
+
+[Robot skin](/robot-skin) can detect distributed contact or proximity. A tactile surface may support collision detection, contact-aware motion, or protective stopping. Those functions can be valuable inputs to a safety architecture.
+
+However, a pressure map does not establish that the complete safety function is compliant. Teams still need to define and validate the signal path, diagnostic coverage, fault response, stopping behavior, timing, force or energy limits where applicable, environmental limits, maintenance, and integration with other protective measures.
+
+The public ISO product page does not provide a basis for RoboSkin.ai to state exact clause requirements, force thresholds, separation distances, or required performance levels. Those details must be checked in the licensed standard and the standards or regulations applicable to the actual installation.
+
+## Collaborative robots are an application, not a magic product class
+
+A robot marketed as “collaborative” is not automatically safe for every close-proximity task. Collaboration depends on the application, tooling, workpiece, speed, force, workspace, possible contacts, and implemented protective measures. Sharp tools or hazardous processes can create risk even when the arm includes collision detection.
+
+For AI-controlled robots, semantic safeguards add another layer but do not replace functional safety. An AI agent can refuse a dangerous instruction or request human help; the physical system still needs predictable protective behavior when sensing, communications, software, or actuation fails. The [robot safety map](/robot-safety) separates these layers.
+
+## Which public sources should teams use?
+
+Start with the official ISO pages to identify the edition, scope, status, and related standards. Use national standards bodies or recognized industry associations to locate adopted versions and training. For a real installation, obtain the applicable standard text and complete a documented risk assessment with qualified safety and integration personnel.
+
+Avoid relying on a blog post—including this one—for compliance decisions. A search summary can explain the map; it cannot replace controlled engineering documentation.
+
+## Evidence boundary
+
+This article is based on ISO’s public product page and public robotics-sector overview. RoboSkin.ai did not access or reproduce the paid full text of ISO 10218-1:2025 or ISO 10218-2:2025. It does not give legal advice, certify a robot, or claim that robot skin satisfies any clause. The A3 article below is included as secondary industry context; ISO remains the primary source for the standard’s identity and public scope.
+
+## Sources
+
+- [ISO: ISO 10218-1:2025 — Safety requirements for industrial robots](https://www.iso.org/standard/73933.html)
+- [ISO: Robotics standards overview](https://www.iso.org/cms/live/live/en/sites/isoorg/home/sectors/engineering/robotics.html)
+- [Association for Advancing Automation: updated ISO 10218 overview](https://www.automate.org/robotics/news/updated-iso-10218-major-advancements-in-industrial-robot-safety-standards-now-available)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '6 min read',
+    category: 'Robot safety',
+    image: '/generated/pages/application-contexts.webp',
+    sourceTitle: 'ISO 10218-1:2025 — Robotics — Safety requirements — Part 1: Industrial robots',
+    sourceUrl: 'https://www.iso.org/standard/73933.html',
+    sources: [
+      {
+        title: 'ISO: ISO 10218-1:2025',
+        url: 'https://www.iso.org/standard/73933.html',
+      },
+      {
+        title: 'ISO: Robotics standards overview',
+        url: 'https://www.iso.org/cms/live/live/en/sites/isoorg/home/sectors/engineering/robotics.html',
+      },
+      {
+        title: 'A3: updated ISO 10218 overview',
+        url: 'https://www.automate.org/robotics/news/updated-iso-10218-major-advancements-in-industrial-robot-safety-standards-now-available',
+      },
+    ],
+    technicalFocus: ['ISO 10218:2025', 'industrial robot safety', 'robot integration', 'robot skin safety'],
+  },
+  {
     id: 'twisted-yarn-textile-capacitive-robot-skin-2026',
     title: 'Twisted-yarn robot skin gains pressure sensitivity but loses proximity range',
     seoTitle: 'Twisted-Yarn Robot Skin: Pressure vs Proximity',

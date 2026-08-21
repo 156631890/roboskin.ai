@@ -697,6 +697,31 @@ export function buildHomePhysicalAiRoutesJsonLd() {
       description: 'Definition and research route for imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, and tactile feedback.',
     },
     {
+      name: 'Robot hands',
+      url: canonicalUrl('/robot-hands'),
+      description: 'Comparison route for dexterous robot hands, grippers, actuation, tactile sensing, and manipulation evidence.',
+    },
+    {
+      name: 'Robot safety',
+      url: canonicalUrl('/robot-safety'),
+      description: 'Scope-aware route for industrial robot safety standards, contact sensing, collision response, and evidence boundaries.',
+    },
+    {
+      name: 'Robotics datasets',
+      url: canonicalUrl('/robotics-datasets'),
+      description: 'Broad robot-learning dataset route organized by embodiment, observations, actions, tasks, access, and license evidence.',
+    },
+    {
+      name: 'Robot world models',
+      url: canonicalUrl('/robot-world-models'),
+      description: 'Research route distinguishing predictive robot world models, world-action models, VLA systems, and tactile prediction.',
+    },
+    {
+      name: 'Robot teleoperation',
+      url: canonicalUrl('/robot-teleoperation'),
+      description: 'Technical route from operator interfaces and synchronized demonstrations to robot-learning data and evaluation.',
+    },
+    {
       name: 'Robot manipulation',
       url: canonicalUrl('/robot-manipulation'),
       description: 'Broad task route for grasping, dexterous manipulation, insertion, robot learning, control, and tactile feedback.',

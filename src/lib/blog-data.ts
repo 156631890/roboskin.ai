@@ -23,6 +23,312 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'hitac-wam-hierarchical-tactile-world-action-model-2026',
+    title: 'HiTac-WAM forecasts contact, deformation, and slip before robot action',
+    seoTitle: 'HiTac-WAM Hierarchical Tactile World Action Model',
+    seoDescription:
+      'HiTac-WAM predicts contact, 3D deformation, and slip for candidate robot actions. Review its three-task results, architecture, and evidence limits.',
+    excerpt:
+      'HiTac-WAM ranks candidate robot actions with hierarchical tactile forecasts, then checks predicted touch against measured touch during execution.',
+    content: `# HiTac-WAM forecasts contact, deformation, and slip before robot action
+
+**Evidence review - August 2026**
+
+HiTac-WAM is an August 20, 2026 arXiv preprint about predicting the tactile consequences of an action before a robot executes it. The model forecasts contact state, a three-dimensional deformation field, and slip risk for each candidate action chunk. It then keeps the selected forecast as an execution-time reference so persistent disagreement with measured touch can trigger corrective replanning.
+
+The paper reports 61.1% mean real-robot success when hierarchical tactile forecasts are used for candidate selection and 72.2% for the full system with online forecast verification. These are author-reported results from three tasks on one fixed experimental platform, not independent validation of a general-purpose tactile world model.
+
+## What the model predicts
+
+HiTac-WAM does not treat future touch as one undifferentiated image or latent vector. Its forecast follows a directed physical hierarchy.
+
+| Forecast stage | Question it answers | Dependency in the paper | Control role |
+| --- | --- | --- | --- |
+| Contact state | Will the selected action establish or release contact? | First stage of the hierarchy | Reject candidates with the wrong contact pattern. |
+| 3D deformation | How may the tactile interface deform under contact? | Conditioned on contact | Rank actions by the expected contact geometry. |
+| Slip risk | Is the resulting contact likely to become unstable? | Conditioned on contact and deformation | Penalize candidates associated with predicted slip. |
+| Online discrepancy | Does measured touch match the retained forecast? | Evaluated during execution | Abort the remaining action prefix and replan after persistent deviation. |
+
+A directed attention mask lets tactile queries use the video-action context for each candidate, while preventing video and action queries from attending back to the tactile tokens. The purpose is to augment candidate evaluation without changing the pretrained visual action generator through the tactile branch.
+
+## Reported experimental evidence
+
+The real-robot evaluation covers chip grasping, blackboard erasing, and USB insertion. All experiments use an IMETA-Y1 robot, bilateral DM-Tac W2 tactile sensors, and three synchronized RGB views. The paper reports 200 complete episodes for each task, partitioned before temporal-window extraction into 160 training, 20 validation, and 20 test episodes. The tactile prediction modules are trained separately for each task.
+
+| System setting | Mean success across three tasks | Evidence boundary |
+| --- | ---: | --- |
+| Single-candidate execution | 31.1% | Baseline reported by the authors under the same task protocol. |
+| HiTac-WAM selection | 61.1% | Forecast-guided selection without the full online verification loop. |
+| Full HiTac-WAM | 72.2% | Selection plus execution-time forecast verification and corrective replanning. |
+
+Each method is evaluated in 30 trials per task. The source also reports a mean contact F1 of 0.921. Under matched training budgets, the directed hierarchy reduces 3D displacement L2 error by 17.6% relative to a deformation-only predictor and improves slip AUPRC by 60.4% relative to a slip-only predictor. These comparisons are bound to the paper's data, baselines, definitions, and hardware.
+
+## Why this matters for tactile AI
+
+The paper links two roles for robot touch that are often studied separately. Forecasting supports prospective action selection: the robot can compare likely contact outcomes before acting. Verification supports reactive control: the robot can compare the retained prediction with the tactile state that actually occurs.
+
+That loop fits the broader [tactile AI stack](/tactile-ai): sensing produces measured contact, a learned model represents and predicts tactile state, planning selects an action, and closed-loop control checks whether reality matches the forecast. It also connects to [tactile manipulation](/tactile-manipulation), where contact timing, deformation, and slip have different operational meanings.
+
+For the broad distinction between prediction, policy, planning, and control, start with [robot world models](/robot-world-models). For a comparison with other approaches that predict touch alongside video and action, use the [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation). The [tactile foundation model guide](/tactile-foundation-models) explains why a task-specific predictor should not automatically be described as a foundation model.
+
+## What this does not prove yet
+
+HiTac-WAM is an arXiv v1 preprint. Its prediction modules are trained separately for each of the three tasks, and all main experiments use the same IMETA-Y1 robot and bilateral DM-Tac W2 sensor configuration. The source does not establish transfer to new robots, tactile hardware, task families, object distributions, or longer autonomous deployments.
+
+The reported percentages are not an external leaderboard. They come from the authors' protocol and include task-specific thresholds calibrated on successful validation episodes. The arXiv record and paper did not provide an official code or dataset link when this brief was reviewed on August 21, 2026, so reproducibility artifacts and reuse terms remain unconfirmed.
+
+## Evaluation checklist
+
+- Keep contact, deformation, slip, action selection, and recovery metrics separate.
+- Report whether tactile predictors and verification thresholds are shared or task-specific.
+- Preserve episode-level train, validation, and test splits before extracting overlapping windows.
+- Test new objects, tasks, embodiments, sensors, contact materials, and action horizons.
+- Measure false corrections and missed failures, not only successful recoveries.
+- Confirm code, data, sensor calibration, and license availability from an official release before reuse.
+
+## Primary source
+
+[arXiv: HiTac-WAM - A Hierarchical Tactile World Action Model for Contact-Rich Robot Manipulation](https://arxiv.org/abs/2608.19574)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '7 min read',
+    category: 'Tactile world models',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'HiTac-WAM hierarchical tactile world action model preprint',
+    sourceUrl: 'https://arxiv.org/abs/2608.19574',
+    technicalFocus: ['HiTac-WAM', 'tactile world action model', 'contact prediction', 'slip prediction', 'robot manipulation'],
+  },
+  {
+    id: 't-rex-tactile-reactive-dexterous-manipulation-2026',
+    title: 'T-Rex adds high-rate tactile reaction to dexterous robot policies',
+    seoTitle: 'T-Rex Tactile-Reactive Dexterous Manipulation',
+    seoDescription:
+      'T-Rex combines a 100-hour tactile-rich dataset, temporal tactile encoding, and variable-rate policy architecture across 12 manipulation tasks.',
+    excerpt:
+      'T-Rex combines a 100-hour tactile-rich dataset with temporal tactile encoding and a variable-rate architecture for contact-sensitive manipulation.',
+    content: `# T-Rex adds high-rate tactile reaction to dexterous robot policies
+
+**Evidence review - August 2026**
+
+T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies react dynamically to tactile signals. The authors introduce a 100-hour tactile-rich dataset, a temporal tactile VQ-VAE encoder, and a variable-rate Mixture-of-Transformers architecture. They evaluate the system on 12 manipulation tasks that require delicate force control or deformable-object manipulation.
+
+The paper reports an average success rate more than 30% higher than its strongest baseline. That is a relative result inside the authors' evaluation, not a universal gain for tactile sensing or an independently reproduced benchmark.
+
+## The problem T-Rex addresses
+
+Many vision-language-action models process observations and produce action chunks at one policy rate. Touch can change faster than vision-language reasoning: incipient slip, local deformation, or a sudden contact transition may require an update before the next slow action cycle.
+
+T-Rex treats this as both a data and architecture problem.
+
+| Component | Source-reported role | Evidence question |
+| --- | --- | --- |
+| 100-hour tactile-rich dataset | Supplies diverse tactile-action trajectories built around elementary motor primitives | How balanced are tasks, objects, contacts, successes, and failures? |
+| Temporal tactile VQ-VAE | Encodes changing touch instead of only a static tactile frame | Which short-timescale events remain visible after compression? |
+| Variable-rate Mixture-of-Transformers | Lets tactile-reactive processing coexist with slower VLA capabilities | What are the measured sensing-to-action latency and compute cost? |
+| Twelve-task evaluation | Tests force-sensitive and deformable-object manipulation | How far does performance transfer beyond the paper's task and hardware distribution? |
+
+The main conceptual contribution is temporal separation. A policy can retain slower semantic or visual reasoning while giving the tactile pathway a rate suited to contact dynamics. That does not mean every taxel should run through a large model at raw sensor rate; the source proposes a learned temporal representation and variable-rate processing strategy.
+
+## Reported evidence
+
+The abstract states that the system is evaluated on 12 manipulation tasks and achieves more than 30% higher average success than the strongest baseline. The claim is tied to the paper's task suite, baselines, dataset, policy implementation, and success definitions.
+
+The correct interpretation is therefore narrow: within that reported setup, the combination of tactile-rich data and tactile-reactive architecture outperformed the compared methods on average. It does not prove a 30-percentage-point improvement, and it does not establish the same gain for other robots, sensors, policies, or task distributions.
+
+## Why this matters for robot hands
+
+Dexterous hands create distributed, changing contact over fingertips, finger links, and sometimes the palm. A static tactile cue may say that contact exists, while a temporal signal can expose whether load is rising, migrating, oscillating, or disappearing. T-Rex therefore sits between the broad [robot hands](/robot-hands) architecture layer, the focused [robot hand tactile sensing](/applications/robot-hand-tactile-sensor) route, and the learned control layer described in [tactile manipulation](/tactile-manipulation).
+
+The project is also relevant to [robot VLA models](/robot-vla-models). It illustrates a design question for multimodal action models: how should a relatively slow language-conditioned policy interact with a faster contact feedback loop? The [tactile AI guide](/tactile-ai) provides the broader sensing-to-action context.
+
+## Dataset and benchmark implications
+
+One hundred recorded hours is a collection-duration statement, not a complete measure of data diversity or effective sample size. Adjacent tactile frames are correlated, repeated motor primitives may dominate the distribution, and an hour of data can vary greatly in contact density and task coverage.
+
+The [tactile robotics dataset directory](/datasets) explains the metadata needed to evaluate reuse: robot, sensor, sampling rate, synchronization, task, object, trajectory count, failures, splits, format, and license. The [tactile benchmark hub](/benchmarks) separates dataset scale from evidence about generalization and closed-loop success.
+
+## What this does not prove yet
+
+T-Rex is an arXiv preprint, not an independently replicated result. The reported 100 hours, 12 tasks, and over-30% relative average-success improvement come from the authors. They do not establish universal superiority over every VLA, dexterous policy, or tactile encoder.
+
+The result also does not isolate one causal factor by itself. Dataset collection, temporal encoding, variable-rate architecture, training choices, and evaluation design contribute to the complete system. Deployment decisions still need sensor calibration, synchronization, end-to-end latency, compute, durability, and failure-recovery evidence.
+
+## Evaluation checklist
+
+- Distinguish a relative success-rate improvement from percentage-point improvement.
+- Report task-level outcomes instead of only one average across 12 tasks.
+- Document tactile sampling, timestamping, compression, and policy update rates.
+- Split complete trajectories or sessions before extracting temporal training windows.
+- Compare static-touch, temporal-touch, vision-only, and matched-compute baselines.
+- Test unseen objects, materials, deformable states, contact failures, and new robot hands.
+
+## Primary source
+
+[arXiv: T-Rex - Tactile-Reactive Dexterous Manipulation](https://arxiv.org/abs/2606.17055)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '7 min read',
+    category: 'Tactile manipulation',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    sourceTitle: 'T-Rex tactile-reactive dexterous manipulation preprint',
+    sourceUrl: 'https://arxiv.org/abs/2606.17055',
+    technicalFocus: ['T-Rex', 'tactile-reactive manipulation', 'dexterous manipulation', 'VLA', 'temporal tactile encoding'],
+  },
+  {
+    id: 'robotacdex-humanoid-visual-tactile-action-dataset-2026',
+    title: 'RoboTacDex maps a 6,000-trajectory humanoid visual-tactile dataset',
+    seoTitle: 'RoboTacDex Humanoid Visual-Tactile-Action Dataset',
+    seoDescription:
+      'RoboTacDex reports 6,000 Unitree G1 trajectories across 19 tasks, 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.',
+    excerpt:
+      'RoboTacDex reports 6,000 Unitree G1 trajectories across 19 tasks, 23 skills, and 22 objects, but public dataset access remains pending.',
+    content: `# RoboTacDex maps a 6,000-trajectory humanoid visual-tactile dataset
+
+**Evidence review - August 2026**
+
+RoboTacDex is a June 30, 2026 arXiv preprint describing a multimodal dataset for dexterous humanoid manipulation. The source reports 6,000 trajectories collected with a Unitree G1, covering 19 tasks, 23 skills, and interactions with 22 objects. Records include multi-view RGB, depth, tactile feedback, and semantic annotations.
+
+The abstract says the dataset will be open-sourced soon. That is an announced intention, not evidence that files, a license, or a stable download endpoint are currently available.
+
+## Reported dataset structure
+
+| Field | Source-reported value | What still needs verification for reuse |
+| --- | --- | --- |
+| Robot | Unitree G1 humanoid | Exact hardware configuration, hands, firmware, and control interface |
+| Scale | 6,000 trajectories | Duration distribution, successful and failed trajectories, and split policy |
+| Coverage | 19 tasks and 23 skills | Task definitions, repetition balance, and held-out combinations |
+| Objects | 22 objects | Object identities, properties, and train-test separation |
+| Modalities | Multi-view RGB, depth, tactile feedback, semantic annotations | Sensor models, rates, calibration, timestamp schema, and file format |
+| Access | Authors state it will be open-sourced soon | Official repository, downloadable files, version, checksum, and license |
+
+The paper describes tasks that require dual arms and dexterous hands, with the aim of representing human-like operational logic and real-world manipulation complexity. The authors also report an improved multi-camera synchronization system intended to provide millisecond-level alignment across modalities. That synchronization claim belongs to the source and still requires implementation details and released timestamps for independent audit.
+
+## What the evaluation shows
+
+The abstract says three representative imitation-learning models are evaluated on the dataset. It reports successful trials and moderate generalization across a suite of tasks, but the abstract does not provide one standardized benchmark score that can be safely compared with unrelated datasets.
+
+RoboSkin therefore does not convert those statements into a leaderboard. A useful dataset assessment needs per-task criteria, exact train and test partitions, repeated trials, comparable policy budgets, and a record of which trajectories were available to each method.
+
+## Why this matters for humanoid tactile learning
+
+Humanoid manipulation data is not only an image-action pair. Dual-arm coordination, dexterous hand state, body configuration, tactile contact, object state, and language or semantic labels must share a coherent trajectory and clock. RoboTacDex is relevant because its declared schema spans several of these layers on one humanoid platform.
+
+The [humanoid robot skin guide](/humanoid-robot-skin) places hand touch inside the larger body-sensing and control stack. Use [robotics datasets](/robotics-datasets) for the broad embodiment-observation-action data contract and the [tactile dataset directory](/datasets) for touch-specific records. [Robot teleoperation](/robot-teleoperation) explains how operator demonstrations become synchronized trajectories. For the policy layer, compare [robot learning](/robot-learning) and [robot VLA models](/robot-vla-models).
+
+## Availability is part of the evidence
+
+A paper can describe a dataset before the dataset is released. Until an official package is accessible, a potential user cannot confirm file structure, missing frames, calibration metadata, licensing, or whether all 6,000 trajectories are included.
+
+The practical listing state for RoboTacDex is therefore announced, not verified downloadable. RoboSkin should update that state only after checking an official project or repository, recording the access date, and confirming the actual license rather than inferring one from the paper or arXiv page.
+
+## What this does not prove yet
+
+RoboTacDex is an arXiv v1 preprint and its headline scale is specific to one Unitree G1 collection. The dataset description does not establish transfer to other humanoids, robot hands, sensors, objects, environments, or control stacks. Six thousand trajectories do not by themselves guarantee balanced coverage, causal diversity, or leakage-free evaluation.
+
+The phrase millisecond synchronization is an author claim about the collection system, not an independent measurement by RoboSkin. The paper's statement that the dataset will be open-sourced soon must not be rewritten as currently open, freely licensed, or ready to download.
+
+## Release verification checklist
+
+- Locate the official repository or dataset host and record the access date.
+- Confirm the license from the released package, not a third-party index.
+- Check that robot, hand, sensor, calibration, and timestamp metadata are present.
+- Verify trajectory counts, task labels, failures, splits, and missing-frame handling.
+- Preserve full trajectories when building train, validation, and test partitions.
+- Report model results by task and split without comparing incompatible protocols.
+
+## Primary source
+
+[arXiv: RoboTacDex - A Dexterous Visual-Tactile-Action Dataset for Humanoid Manipulation](https://arxiv.org/abs/2606.31836)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '7 min read',
+    category: 'Tactile datasets',
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    sourceTitle: 'RoboTacDex humanoid visual-tactile-action dataset preprint',
+    sourceUrl: 'https://arxiv.org/abs/2606.31836',
+    technicalFocus: ['RoboTacDex', 'Unitree G1', 'humanoid dataset', 'visual-tactile-action data', 'dexterous manipulation'],
+  },
+  {
+    id: 'tactidex-tactile-guided-dexterous-benchmark-2026',
+    title: 'TactiDex benchmarks contact-level human-to-robot dexterity',
+    seoTitle: 'TactiDex Tactile-Guided Dexterous Manipulation Benchmark',
+    seoDescription:
+      'TactiDex aligns whole-hand touch with hand, wrist, and object states, then uses tactile guidance for single- and bimanual dexterous transfer.',
+    excerpt:
+      'TactiDex aligns whole-hand tactile signals with kinematic and object states to evaluate physically grounded human-to-robot dexterous transfer.',
+    content: `# TactiDex benchmarks contact-level human-to-robot dexterity
+
+**Evidence review - August 2026**
+
+TactiDex is a July 2026 arXiv preprint that frames human-to-robot dexterous transfer as a contact problem, not only a kinematic imitation problem. The benchmark aligns whole-hand tactile signals with hand kinematics, wrist pose, and object state. The paper also introduces TactiSkill, a tactile-guided transfer framework evaluated on single-hand and bimanual tasks.
+
+The source reports better manipulation success and physical realism than its compared methods, but the abstract does not provide a standardized numerical result suitable for comparison with other benchmarks. This brief therefore preserves the qualitative claim and avoids inventing a cross-paper leaderboard.
+
+## What the benchmark aligns
+
+Kinematic imitation can reproduce joint motion while missing the physical interaction that made a human demonstration work. A hand can follow a visually plausible pose yet hover above the object, press too hard, or distribute load across the wrong fingers. TactiDex adds synchronized contact information to the transfer target.
+
+| Data layer | Role in the benchmark | Evaluation question |
+| --- | --- | --- |
+| Whole-hand tactile signals | Describes distributed contact and pressure over the hand | Does the robot establish a similar contact pattern rather than only a similar pose? |
+| Hand kinematics | Describes articulated hand motion at multiple levels | Is geometric motion preserved under a different robot hand morphology? |
+| Wrist pose | Connects local hand motion to global manipulation | Does the transferred action reach and orient around the object correctly? |
+| Object state | Measures the interaction outcome | Did the object move or remain stable as the task requires? |
+| Task descriptions and evaluation metrics | Organize comparisons across interactions | Are success and physical realism defined consistently? |
+
+The useful distinction is between motion similarity and contact-level similarity. Neither replaces the other. A transfer can be kinematically accurate but physically implausible, or establish contact while failing the intended object motion.
+
+## TactiSkill's tactile supervision
+
+TactiSkill uses a three-component tactile reward. Tactile guidance encourages the policy to form contact. Human-like alignment encourages the force or pressure distribution to follow the demonstration. Contact constraints penalize physically undesirable contact conditions. The components are combined with a kinematic imitation policy and a learned residual policy in the paper's framework.
+
+This is structured supervision rather than simply appending a tactile vector to the policy observation. Touch specifies properties of a desired interaction and helps evaluate whether the retargeted robot motion is physically plausible.
+
+## Why this matters for robot learning
+
+TactiDex connects human hand-object interaction data with robot policy learning. That creates several conversion problems: human and robot hands have different morphology, tactile layouts have different spatial support, sensor readings need calibration, and simulated contact variables may not match measured pressure directly.
+
+The [robot hands guide](/robot-hands) separates hand architecture from task evidence. The [tactile manipulation guide](/tactile-manipulation) explains how contact, force regulation, and slip fit closed-loop control. The [robot learning hub](/robot-learning) places demonstration data inside imitation and reinforcement learning workflows. For dataset comparison, use [robotics datasets](/robotics-datasets) for the broad data contract and the [tactile robotics dataset directory](/datasets) for touch-specific sensor, robot, task, modality, split, and license fields.
+
+TactiDex also has relevance to [whole-body and humanoid tactile sensing](/humanoid-robot-skin), but its evidence is centered on hand-object interaction. It should not be cited as proof of full-body tactile intelligence.
+
+## What this does not prove yet
+
+TactiDex is an arXiv v1 preprint. The reported superiority comes from the authors' experiments, definitions, simulation and deployment choices, and selected tasks. It is not independent confirmation that tactile-guided transfer will outperform kinematic transfer for every robot hand, sensor layout, object, or manipulation regime.
+
+The work also does not show that a human tactile map transfers directly to any robot. Morphological retargeting, sensor-to-simulation calibration, contact modeling, reward weights, and hardware deployment all affect the result. Single-hand and bimanual experiments demonstrate coverage within the paper; they do not establish open-world generalization.
+
+## Evaluation checklist
+
+- Report kinematic accuracy, contact quality, task completion, and object outcome separately.
+- Document human and robot tactile layouts, calibration, rates, and synchronization.
+- Explain how human contact distributions are mapped across robot morphologies.
+- Preserve sequence-level splits and disclose repeated subjects, objects, and tasks.
+- Compare kinematic-only and tactile-guided methods under matched training budgets.
+- Test unseen objects, hands, contacts, and bimanual coordination patterns.
+
+## Primary sources
+
+- [arXiv: TactiDex - A Real-World Tactile-Guided Benchmark for Human-Like Dexterous Manipulation](https://arxiv.org/abs/2607.09190)
+- [Official TactiDex project page](https://tactidex.github.io/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-21',
+    updated: '2026-08-21',
+    readTime: '7 min read',
+    category: 'Tactile benchmarks',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    sourceTitle: 'TactiDex tactile-guided dexterous manipulation benchmark preprint',
+    sourceUrl: 'https://arxiv.org/abs/2607.09190',
+    technicalFocus: ['TactiDex', 'TactiSkill', 'tactile benchmark', 'human-to-robot transfer', 'dexterous manipulation'],
+  },
+  {
     id: 'tac4loco-plantar-tactile-humanoid-locomotion-2026',
     title: 'Tac4Loco uses plantar pressure to adapt humanoid locomotion',
     seoTitle: 'Tac4Loco Plantar Tactile Sensing for Humanoid Locomotion',

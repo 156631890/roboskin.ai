@@ -3000,7 +3000,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'ManiSkill-ViTac challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'hitac-wam-hierarchical-tactile-world-action-model-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
   },
   {
     path: '/robot-learning',
@@ -3128,7 +3128,616 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Google DeepMind Gemini Robotics', href: 'https://deepmind.google/models/gemini-robotics/' },
       { label: 'ManiSkill-ViTac', href: 'https://arxiv.org/abs/2411.12503' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'robotacdex-humanoid-visual-tactile-action-dataset-2026'],
+  },
+  {
+    path: '/robot-hands',
+    title: 'Robot Hands: Dexterity, Sensors & Comparison Guide',
+    description:
+      'Compare robot hands and grippers by actuation, sensing, control, task fit, and evidence. Learn how tactile robot hands support dexterous manipulation.',
+    h1: 'Robot hands: dexterity, sensing and evidence',
+    kicker: 'Robotics hardware pillar',
+    intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.94,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'technology',
+    keywords: ['robot hands', 'robotic hands', 'humanoid robot hands', 'dexterous robot hand', 'tactile robot hand', 'robot hand sensors', 'five-finger robot hand', 'robot hand comparison', 'robot gripper vs robot hand', 'dexterous manipulation'],
+    quickAnswer: [
+      'A robot hand is an end effector with fingers or multiple articulated contacts designed to grasp, reorient, manipulate, or use objects. The term covers simple adaptive hands as well as highly actuated anthropomorphic systems.',
+      'A multi-finger hand can create more contact configurations than a two-finger gripper, but it also increases mechanical, sensing, calibration, control, data, and maintenance complexity. More joints do not guarantee better task performance.',
+      'Tactile sensors on fingertips, fingers, and palms can expose contact location, pressure, shear, slip, and grasp state after vision becomes occluded. Their value should be tested through closed-loop task outcomes, not sensitivity claims alone.',
+    ],
+    sections: [
+      {
+        heading: 'Robot hand, adaptive hand, or gripper?',
+        body: [
+          'End-effectors should be selected for the work they must perform. A parallel gripper can be reliable for repetitive pick-and-place, while a multi-finger hand can support more grasp shapes, in-hand motion, and tools designed for people. Adaptive or underactuated hands sit between these categories by allowing several joints to conform with fewer independently controlled actuators.',
+          'The words hand, gripper, dexterous, and anthropomorphic do not establish capability by themselves. A defensible comparison names the joints and actuators, sensing, payload and object range, control interface, cycle time, durability, task protocol, and failure behavior actually tested.',
+        ],
+        table: {
+          headers: ['End-effector class', 'Typical advantage', 'Typical engineering cost', 'Where touch can help'],
+          rows: [
+            ['Parallel or two-finger gripper', 'Simple action space and repeatable opposing contact for suitable objects', 'Limited grasp geometry and in-hand reconfiguration', 'Detect first contact, seating, slip, and grip imbalance'],
+            ['Adaptive or underactuated hand', 'Passive or coupled conformance around varied shapes', 'Internal joint state and contact distribution may be harder to infer', 'Reveal which fingers contacted and how load is distributed'],
+            ['Fully or highly actuated multi-finger hand', 'More controllable contacts for reorientation and human-tool compatibility', 'Larger action space, calibration burden, data demand, and maintenance surface', 'Support contact-rich policies, slip response, and grasp-state estimation'],
+            ['Soft hand or soft gripper', 'Compliance can reduce geometric precision requirements and peak contact', 'Material behavior, wear, hysteresis, and precise state estimation can be difficult', 'Measure distributed deformation and contact across compliant surfaces'],
+          ],
+        },
+      },
+      {
+        heading: 'The robot-hand technology stack',
+        body: [
+          'A robot hand is a coupled mechatronic and software system. Mechanical design sets reachable contact configurations; actuation and transmission determine controllability; sensors expose joint and contact state; the controller turns those signals into coordinated motion; and the policy or planner selects actions for a task.',
+        ],
+        bullets: [
+          'Mechanics: finger count, joint layout, thumb opposition, compliance, workspace, and replaceable contact surfaces',
+          'Actuation: electric, tendon-driven, pneumatic, hydraulic, direct-drive, geared, or underactuated mechanisms',
+          'State sensing: encoders, current, force or torque, fingertip touch, finger and palm arrays, and external vision',
+          'Control: position, impedance, force, synergy, trajectory, policy, or layered high- and low-frequency control',
+          'Integration: wrist interface, power, communication, calibration, robot middleware, logging, and safety behavior',
+        ],
+      },
+      {
+        heading: 'How to compare robot hands without a misleading leaderboard',
+        body: [
+          'Degrees of freedom and actuator count describe architecture, not universal dexterity. Payload, fingertip force, speed, repeatability, tactile coverage, compliance, environmental tolerance, power, mass, maintenance, software access, and task evidence all matter. Values from different test methods should not be placed in one ranked table without aligning definitions and conditions.',
+          'For procurement or research selection, record whether each specification is a manufacturer statement, a calibrated measurement, a peer-reviewed result, an independent benchmark, or an observation from a demonstration. Unknown fields should stay unknown rather than being inferred from a product image or marketing name.',
+        ],
+        table: {
+          headers: ['Comparison field', 'What to record', 'Evidence check'],
+          rows: [
+            ['Kinematics and actuation', 'Controllable joints, coupled joints, actuators, workspace, and control modes', 'Use current manuals, interface documentation, or a named experimental setup'],
+            ['Physical operating range', 'Mass, dimensions, payload, force, speed, environmental and duty constraints', 'Keep units and test conditions; do not mix peak and continuous values'],
+            ['Sensing', 'Joint state, force or torque, tactile modality, coverage, rate, calibration, and replaceability', 'Separate built-in sensing from optional or research-added sensors'],
+            ['Software and data', 'API, middleware, command interface, logs, simulator, examples, and license', 'Verify the exact hardware and software version'],
+            ['Task evidence', 'Objects, trials, success criteria, speed, interventions, failures, and baseline', 'Treat official demos, preprints, peer review, and independent tests as different evidence levels'],
+          ],
+        },
+      },
+      {
+        heading: 'Tactile sensing across fingertips, fingers, and palms',
+        body: [
+          'A fingertip sensor can resolve local contact for insertion, slip response, or texture-related tasks. Finger and palm sensing can expose load paths and contacts that a fingertip-only layout misses. Whole-hand systems increase coverage but create routing, calibration, durability, bandwidth, and representation challenges.',
+          'The Nature Machine Intelligence full-hand tactile sensing work and the HT-Bench/HandTouch preprint are useful research examples, but they answer different questions. The first demonstrates an integrated full-hand sensing approach; the second proposes data and evaluation tracks for learned full-hand representations. Neither source proves that one sensor or representation is best for every hand and task.',
+        ],
+      },
+      {
+        heading: 'Robot hands in humanoid and dexterous manipulation research',
+        body: [
+          'Google DeepMind’s Gemini Robotics 2 announcement reports experiments across whole-body Apollo hardware, a multi-finger Sharpa hand, and a Franka Duo gripper setup. Those are official developer-reported evaluations, not an independent cross-hand benchmark. They show why embodiment and end-effector must remain attached to every task result.',
+          'TactiDex, HRDexDB, and related preprints investigate tactile skill transfer or reusable hand data. Their datasets, robots, sensors, object sets, and protocols differ, so reported results should remain source-bounded rather than being converted into a universal hand ranking.',
+        ],
+        table: {
+          headers: ['Research asset', 'Hand or sensing role', 'What it can support', 'Boundary'],
+          rows: [
+            ['HT-Bench / HandTouch', 'Full-hand tactile data and learned representation evaluation', 'Cross-task tactile representation research', '2026 preprint with named sensors, tasks, splits, and evaluation tracks'],
+            ['TactiDex', 'Aligned human tactile and kinematic state for tactile-guided dexterous transfer', 'Single- and bimanual skill-transfer research', '2026 preprint; results belong to its capture and robot deployment setup'],
+            ['HRDexDB', 'Human and multiple robot-hand grasp records with tactile, visual, and kinematic data', 'Cross-hand grasp and contact research', '2026 preprint; scale and coverage do not by themselves prove policy transfer'],
+            ['Gemini Robotics 2', 'Official manipulation evaluation across different end effectors and embodiments', 'VLA and whole-body system research context', 'Developer-reported task results, not a neutral robot-hand benchmark'],
+          ],
+        },
+      },
+      {
+        heading: 'Evidence checklist for a tactile robot hand',
+        body: [
+          'A useful tactile-hand evaluation starts with a task that genuinely depends on contact: occluded grasping, slip, insertion, reorientation, deformable objects, handover, or disturbance recovery. It then aligns the hand, objects, sensors, controller, trial count, success definition, and no-touch baseline.',
+        ],
+        bullets: [
+          'Report tactile placement, modality, rate, calibration, latency, wear, and missing-contact regions',
+          'Synchronize touch with joint state, camera frames, action commands, and task events',
+          'Compare matched touch and no-touch conditions when claiming a tactile benefit',
+          'Record drops, excessive force, damage, retries, human intervention, and recovery as well as task success',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is a robot hand?', answer: 'A robot hand is an end effector with fingers or multiple articulated contacts used to grasp, reorient, manipulate, or operate objects. Designs range from adaptive hands to highly actuated anthropomorphic systems.' },
+      { question: 'Is a robot hand better than a robot gripper?', answer: 'Not universally. A gripper may be simpler and more repeatable for constrained tasks. A multi-finger hand can offer more contact configurations and tool compatibility but increases control, sensing, data, and maintenance complexity.' },
+      { question: 'Why do robot hands need tactile sensors?', answer: 'Tactile sensors can expose local contact, pressure distribution, shear, slip, and seating after the fingers occlude the object or external cameras cannot see the contact state.' },
+      { question: 'How should robot hands be compared?', answer: 'Align kinematics, actuation, physical limits, sensing, software, task, objects, trials, success criteria, interventions, failures, and evidence level. Do not rank hands by degrees of freedom alone.' },
+    ],
+    relatedLinks: [
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place hands inside whole-body Physical AI systems.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect end-effectors to grasping, insertion, reorientation, and tool use.' },
+      { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Compare fingertip, finger, palm, and full-hand sensing roles.' },
+      { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Follow the closed-loop path from contact to corrective action.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand instruction-conditioned policies and embodiment boundaries.' },
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Find broader manipulation, teleoperation, and multi-embodiment data resources.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Use the dedicated touch-data directory.' },
+    ],
+    sources: [
+      { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
+      { label: 'HT-Bench full-hand tactile representation preprint', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'TactiDex tactile-guided dexterous benchmark preprint', href: 'https://arxiv.org/abs/2607.09190' },
+      { label: 'HRDexDB multi-hand grasp database preprint', href: 'https://arxiv.org/abs/2604.14944' },
+      { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
+    ],
+    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
+  },
+  {
+    path: '/robot-safety',
+    title: 'Robot Safety: Standards, Sensors & Evidence',
+    description:
+      'Understand industrial and humanoid robot safety, ISO 10218 scope, risk reduction, collision and contact sensing, validation, and robot-skin evidence boundaries.',
+    h1: 'Robot safety: standards, sensing and validation',
+    kicker: 'Robotics assurance pillar',
+    intent: 'Technical orientation for robot safety, humanoid robot safety, industrial robot safety, collaborative robot safety, collision detection, safety sensors, and robot skin safety searches.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.93,
+    changeFrequency: 'monthly',
+    schemaType: 'TechArticle',
+    visualKey: 'applications',
+    keywords: ['robot safety', 'humanoid robot safety', 'industrial robot safety', 'collaborative robot safety', 'robot collision detection', 'robot safety sensors', 'robot skin safety', 'ISO 10218 2025', 'human robot contact safety'],
+    quickAnswer: [
+      'Robot safety is a system-level discipline covering hazard identification, risk assessment, inherently safer design, protective measures, validated controls, integration, operating procedures, maintenance, and incident response. No single sensor makes a robot safe.',
+      'ISO 10218-1:2025 addresses industrial robots, while ISO 10218-2:2025 addresses industrial robot applications and robot cells. Their scope should not be applied automatically to every service, medical, public-space, or research humanoid system.',
+      'Robot skin and tactile sensors can contribute contact or collision information, but their safety role depends on coverage, detection threshold, latency, diagnostics, failure behavior, control integration, validation, and the applicable regulatory and standards context.',
+    ],
+    sections: [
+      {
+        heading: 'Safety is a layered system, not a sensor feature',
+        body: [
+          'A complete robot-safety argument starts with the intended use and foreseeable misuse, identifies hazards throughout the lifecycle, estimates risk, applies risk-reduction measures, and verifies that the resulting system behaves as required. Mechanical limits, motion planning, control architecture, protective equipment, sensing, human procedures, and maintenance can all contribute.',
+          'Terms such as collaborative, compliant, soft, force-limited, autonomous, or covered in robot skin are not safety certifications. They describe possible design properties whose effect must be evaluated in the final application and environment.',
+        ],
+        table: {
+          headers: ['Layer', 'Role', 'Evidence to retain'],
+          rows: [
+            ['Intended use and hazard analysis', 'Define people, tasks, environment, lifecycle, misuse, and hazardous events', 'Assumptions, hazard log, risk assessment method, and unresolved risks'],
+            ['Inherently safer design', 'Reduce hazard through geometry, mass, energy, speed, force, access, or mechanical constraints', 'Design requirements, calculations, drawings, and test records'],
+            ['Protective and control measures', 'Limit or stop hazardous behavior and detect relevant conditions', 'Architecture, performance requirements, diagnostics, latency, fault tests, and validation'],
+            ['Information and operations', 'Set training, procedures, inspection, maintenance, and residual-risk communication', 'Manuals, training records, checklists, change control, and incident records'],
+          ],
+        },
+      },
+      {
+        heading: 'What ISO 10218:2025 covers',
+        body: [
+          'The public ISO record describes ISO 10218-1:2025 as safety requirements for industrial robots and ISO 10218-2:2025 as the companion standard for industrial robot applications and robot cells. The ISO robotics overview also lists ISO/TS 15066:2016 for collaborative industrial robot applications.',
+          'Scope matters. The public ISO 10218-1 page lists exclusions, including service and medical applications. A humanoid used in a factory cell may intersect industrial-robot requirements differently from a service humanoid in a home, hospital, or public space. Determine the applicable edition, jurisdiction, product category, integrator responsibilities, and conformity route with qualified safety and legal professionals.',
+          'This page is a technical research map, not legal advice, a risk assessment, or a certification decision. The full paid standards and applicable local rules—not this summary—control formal compliance work.',
+        ],
+      },
+      {
+        heading: 'Industrial, collaborative, and humanoid safety are not interchangeable',
+        body: [
+          'Industrial robot safety often assumes a defined application, cell, tooling, workpiece, integration, and operating mode. Collaborative applications require evaluation of how people and the robot share a workspace. A mobile or humanoid platform can add locomotion, balance, batteries, whole-body contact, changing environments, general-purpose tools, learned behavior, and human proximity.',
+          'Those added capabilities broaden the hazard and validation surface. A humanoid benchmark can help make performance measurable, but performance benchmarking is not the same as demonstrating safety compliance.',
+        ],
+        table: {
+          headers: ['Context', 'Typical system boundary', 'Additional questions'],
+          rows: [
+            ['Industrial robot application', 'Robot, end effector, workpiece, cell, safeguards, and operating procedures', 'Who integrated the cell, which modes exist, and how are changes validated?'],
+            ['Collaborative industrial application', 'Shared or sequential workspace with specified collaborative operations', 'Which hazards, contact cases, speeds, forces, separation functions, and foreseeable misuse were assessed?'],
+            ['Mobile or humanoid robot', 'Whole mobile body, manipulation, environment, software, people, and changing tasks', 'How are falls, balance loss, body contact, tool use, learned behavior, communications, and recovery handled?'],
+          ],
+        },
+      },
+      {
+        heading: 'Where collision, force, and robot-skin sensing fit',
+        body: [
+          'External perception can monitor people and obstacles before contact. Joint torque, motor current, force-torque sensors, proximity sensors, bumpers, and surface tactile arrays can expose different parts of a collision or contact event. Their coverage and failure modes differ, so they may complement one another.',
+          'Robot skin is particularly relevant to distributed surface contact that a wrist sensor may not localize. But a research tactile array should not be described as a safety-rated protective device unless its claimed function, architecture, diagnostics, fault response, and validation satisfy the applicable requirements.',
+        ],
+        bullets: [
+          'Map blind spots, joints, seams, tools, carried objects, hands, feet, and replaceable covers',
+          'Measure detection threshold, spatial coverage, response time, end-to-end stopping response, drift, wear, and fault behavior',
+          'Test expected contact as well as sensor disconnection, saturation, partial damage, timing faults, and communication loss',
+          'Validate the complete sensing-to-control chain in the final robot application',
+        ],
+      },
+      {
+        heading: 'Evidence and benchmark boundaries',
+        body: [
+          'NIST’s Humanoid Robot Baseline Performance Benchmark project proposes low-footprint locomotion and manipulation tasks with quantifiable performance metrics and common comparison. It can improve measurement discipline and adoption readiness, but NIST does not present that project page as a safety certification scheme.',
+          'Research papers can establish sensor behavior or robot performance under named conditions. Manufacturer material can document intended features. A conformity assessment, application risk assessment, and validated safety function answer different questions. RoboSkin.ai labels these evidence levels instead of combining them into one safety claim.',
+        ],
+      },
+      {
+        heading: 'Robot-safety validation checklist',
+        body: [
+          'Validation should trace each safety-related requirement to a method, acceptance criterion, result, and retained record. Software, model, payload, tooling, speed, environment, sensor, network, and operating-mode changes may invalidate earlier assumptions and need controlled review.',
+        ],
+        bullets: [
+          'Name the applicable standard, edition, clause-owned requirement, local rule, and responsible party',
+          'Trace hazards to design measures, protective measures, residual risks, and verification evidence',
+          'Test normal operation, foreseeable misuse, faults, recovery, maintenance, and degraded sensing',
+          'Retain versioned configurations, calibration, test equipment, raw logs, failures, interventions, and approvals',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What does robot safety include?', answer: 'Robot safety includes intended-use definition, hazard analysis, risk assessment, inherently safer design, protective measures, validated controls, integration, procedures, maintenance, and incident response.' },
+      { question: 'Does ISO 10218:2025 cover every humanoid robot?', answer: 'No. ISO 10218-1:2025 covers industrial robots and ISO 10218-2:2025 covers industrial robot applications and cells. The applicable requirements for a humanoid depend on its use, product category, jurisdiction, integration, and other standards or regulations.' },
+      { question: 'Can robot skin make a humanoid safe?', answer: 'Robot skin can contribute contact information, but no single sensor makes a humanoid safe. Its role depends on coverage, latency, diagnostics, failure response, control integration, validation, and the rest of the risk-reduction system.' },
+      { question: 'Is a humanoid performance benchmark a safety certification?', answer: 'No. A performance benchmark can make locomotion or manipulation results comparable. Safety certification and application risk assessment address different requirements and evidence.' },
+    ],
+    relatedLinks: [
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Map embodiment, control, manipulation, sensing, and evidence.' },
+      { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Review whole-body tactile coverage and safety-layer boundaries.' },
+      { label: 'Robot skin', href: '/robot-skin', description: 'Understand distributed tactile surfaces and system integration.' },
+      { label: 'Robot hands', href: '/robot-hands', description: 'Connect end-effector sensing to contact-rich tasks and safe handling.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Place contact evidence inside multimodal embodied systems.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Review contact tasks, failure modes, and outcome reporting.' },
+      { label: 'ISO 10218:2025 scope brief', href: '/news/iso-10218-2025-industrial-robot-safety-scope', description: 'Read the public-source scope summary and compliance boundary.' },
+      { label: 'NIST humanoid benchmark brief', href: '/news/nist-humanoid-baseline-performance-benchmark-2026', description: 'Separate a performance-benchmark proposal from a safety determination.' },
+    ],
+    sources: [
+      { label: 'ISO 10218-1:2025 public standard record', href: 'https://www.iso.org/standard/73933.html' },
+      { label: 'ISO robotics standards overview', href: 'https://www.iso.org/cms/live/live/en/sites/isoorg/home/sectors/engineering/robotics.html' },
+      { label: 'NIST Humanoid Robot Baseline Performance Benchmark', href: 'https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark' },
+      { label: 'NIST Robotics program', href: 'https://www.nist.gov/el/robotics' },
+      { label: 'NIST humanoid performance standards video', href: 'https://www.nist.gov/video/how-performance-standards-can-pave-way-humanoid-adoption' },
+    ],
+  },
+  {
+    path: '/robotics-datasets',
+    title: 'Robotics Datasets for Robot Learning & Manipulation',
+    description:
+      'Compare robotics datasets by robot, task, modality, action space, timing, access, and license. Find robot learning, manipulation, teleoperation, VLA, and humanoid data.',
+    h1: 'Robotics datasets: data for robot learning and evaluation',
+    kicker: 'Robot data pillar',
+    intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.95,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'resources',
+    keywords: ['robotics datasets', 'robot learning datasets', 'robot manipulation datasets', 'LeRobot datasets', 'VLA training data', 'robot teleoperation dataset', 'humanoid robot dataset', 'robot demonstration data', 'multi-embodiment robot data'],
+    quickAnswer: [
+      'A robotics dataset is a structured collection of robot observations, states, actions, task context, outcomes, or environment records used to train, evaluate, or reproduce robotic systems.',
+      'Useful dataset scale is not only the number of frames or trajectories. Robot embodiment, action interface, task diversity, failures, calibration, timing, train-test splits, access, and license determine what can be learned or compared.',
+      'This page covers broad robot learning, manipulation, teleoperation, VLA, and humanoid data. RoboSkin.ai’s /datasets directory remains the specialized hub for tactile and visuo-tactile robotics datasets.',
+    ],
+    sections: [
+      {
+        heading: 'Robotics datasets and tactile datasets serve different scopes',
+        body: [
+          'Broad robotics datasets may contain cameras, depth, proprioception, actions, language, rewards, demonstrations, or simulator state without any surface touch. A tactile dataset requires measured tactile data or a clearly defined contact-related modality and should document the sensor and synchronization contract.',
+          'RoboSkin.ai therefore keeps two canonical hubs. This page maps the broad robot-data ecosystem; /datasets provides tactile-specific records and filters. Cross-modal resources can appear in both only when each page adds distinct fields and explanation rather than duplicate copy.',
+        ],
+        table: {
+          headers: ['Hub', 'Primary scope', 'Minimum useful fields', 'Use it when'],
+          rows: [
+            ['Robotics datasets', 'Robot learning, manipulation, teleoperation, VLA, humanoid, simulation, and evaluation data', 'Robot, task, observations, actions, collection policy, trajectories, splits, access, license', 'Comparing broad training or evaluation resources'],
+            ['Tactile robotics datasets', 'Touch, pressure, force-related, tactile image, slip, contact, and visuo-tactile data', 'Sensor, placement, calibration, rate, synchronization, robot, task, actions, splits, license', 'A claim depends on measured touch or contact state'],
+          ],
+        },
+      },
+      {
+        heading: 'The fields every robot dataset record should expose',
+        body: [
+          'A dataset should be understandable before download and reproducible after it. Counts need a unit—episodes, trajectories, frames, steps, hours, tasks, or robots—and those units are not interchangeable. Access and license should be checked against the current repository or dataset card rather than inferred from the paper abstract.',
+        ],
+        bullets: [
+          'Identity: dataset name, institution, version, release date, paper, repository, dataset URL, and maintainers',
+          'Embodiment: robot, hand or gripper, kinematics, controller, action space, and hardware version',
+          'Observations: cameras, depth, language, proprioception, force, touch, audio, events, calibration, and units',
+          'Collection: teleoperation or policy, operator instructions, task definitions, resets, failures, interventions, and quality control',
+          'Structure: episode unit, counts, timing, synchronization, file format, schema, train-test splits, and checksums',
+          'Governance: access status, license, usage restrictions, privacy, safety, known gaps, and update history',
+        ],
+      },
+      {
+        heading: 'Source-backed dataset ecosystem map',
+        body: [
+          'The resources below illustrate different dataset strategies. The descriptions are based on their primary papers or official project materials; they are not a single leaderboard.',
+        ],
+        table: {
+          headers: ['Resource', 'Scope', 'Primary-source signal', 'Boundary to verify'],
+          rows: [
+            ['Open X-Embodiment', 'Aggregated multi-embodiment robot learning data', 'Research paper describes cross-institution robot data and generalist-policy experiments', 'Individual source datasets, embodiments, action mappings, and licenses differ'],
+            ['DROID', 'Large real-world robot manipulation dataset', 'Paper documents diverse manipulation collection across settings and tasks', 'Read the current project and dataset records for exact access, version, schema, and license'],
+            ['LeRobot datasets', 'Open tooling and standardized dataset format for robot episodes', 'Official documentation and Dataset v3 materials describe storage and loading conventions', 'Quality and rights remain dataset-specific; format compatibility is not capability evidence'],
+            ['RoboTacDex', 'Humanoid visual-tactile-action data on Unitree G1', 'The 2026 preprint reports 6,000 trajectories, 19 tasks, 23 skills, and 22 objects', 'The abstract says open sourcing is forthcoming; verify present access and license before claiming availability'],
+            ['HRDexDB', 'Human and multi-robot-hand grasp data', 'The 2026 preprint reports 1,400 grasps across 100 objects with tactile, visual, and kinematic records', 'Scale, hand coverage, data quality, splits, and downstream transfer remain protocol-specific'],
+          ],
+        },
+      },
+      {
+        heading: 'Teleoperation, demonstrations, corrections, and autonomous rollouts',
+        body: [
+          'Teleoperation can capture action demonstrations and recovery behavior, but the dataset also contains the operator interface, latency, viewpoint, embodiment constraints, and skill distribution. Autonomous rollouts can add policy-generated successes and failures, while human corrections can target states the current policy handles poorly.',
+          'Hugging Face’s LeRobot v0.6 announcement describes rollout tooling and a DAgger-style human-correction workflow. That is an official software capability description, not evidence that every resulting dataset is high quality or that a trained policy will generalize to a new robot.',
+        ],
+      },
+      {
+        heading: 'Training data and benchmark data should not leak into each other',
+        body: [
+          'A dataset can support pretraining, fine-tuning, offline evaluation, simulation, or a shared benchmark. The split must match the claim. Random frame splits can leak nearly identical moments from one trajectory into train and test sets; repeated objects or scenes can also inflate an apparent generalization result.',
+        ],
+        table: {
+          headers: ['Claim', 'Useful held-out unit', 'What to disclose'],
+          rows: [
+            ['New visual conditions', 'Scene, camera, lighting, or background', 'Which conditions changed and whether geometry or tasks repeated'],
+            ['New objects', 'Object identity or category', 'Seen categories, object instances, poses, and physical properties'],
+            ['New tasks', 'Task or skill composition', 'Instruction templates, subtasks, rewards, and overlap with training demonstrations'],
+            ['New embodiments', 'Robot, hand, gripper, sensor, or action interface', 'Retargeting, calibration, adaptation, and embodiment identifiers'],
+            ['Tactile transfer', 'Sensor, mounting, material, object, and contact regime', 'Touch preprocessing, rate, synchronization, drift, and no-touch baseline'],
+          ],
+        },
+      },
+      {
+        heading: 'How RoboSkin.ai will maintain dataset records',
+        body: [
+          'Dataset pages should separate paper claims, repository facts, and editorial normalization. A paper may announce intended release; only the live project or repository can confirm current access. A license field should be copied from a current authoritative source, with version and retrieval date where possible.',
+          'Records should retain unknown values, version changes, and source links. This prevents missing metadata from being silently converted into facts and makes the directory more useful for both search engines and AI retrieval systems.',
+        ],
+        bullets: [
+          'One stable entity page per dataset, linked to topics, papers, sensors, robots, tasks, and benchmarks',
+          'Filterable normalized fields backed by visible primary-source citations',
+          'Clear labels for available, announced, restricted, archived, or unknown access',
+          'Change history for schema, URLs, license, checksums, and source status',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'What is a robotics dataset?', answer: 'It is a structured collection of robot observations, states, actions, task context, outcomes, or environment records used for training, evaluation, or reproducibility.' },
+      { question: 'What makes a robot learning dataset useful?', answer: 'It should document the robot, observations, action space, tasks, timing, calibration, collection policy, failures, episode unit, splits, access, license, and known limitations.' },
+      { question: 'Is the number of frames enough to compare robotics datasets?', answer: 'No. Frames, steps, trajectories, episodes, hours, tasks, objects, and robots measure different things. Diversity, quality, synchronization, failures, splits, and rights also determine usefulness.' },
+      { question: 'Where are tactile robotics datasets on RoboSkin.ai?', answer: 'Use /datasets for the specialized tactile and visuo-tactile directory. This /robotics-datasets page covers the broader robot-learning, manipulation, teleoperation, VLA, and humanoid ecosystem.' },
+      { question: 'Can an announced dataset be described as open?', answer: 'Only after a current authoritative source provides access and a license. A paper saying that data will be released is not proof that it is presently downloadable or reusable.' },
+    ],
+    relatedLinks: [
+      { label: 'Tactile robotics datasets', href: '/datasets', description: 'Browse the dedicated touch-data hub and its normalized fields.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Connect data to training methods, evaluation, and sim-to-real evidence.' },
+      { label: 'Robot teleoperation', href: '/robot-teleoperation', description: 'Follow the path from operator demonstrations to policy training data.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand how multimodal robot data conditions action models.' },
+      { label: 'Robot hands', href: '/robot-hands', description: 'Map hand embodiments, sensing, and dexterous data needs.' },
+      { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Separate training resources from shared evaluation protocols.' },
+      { label: 'Research index', href: '/research-index', description: 'Browse source-reviewed papers, briefs, tables, and machine-readable exports.' },
+    ],
+    sources: [
+      { label: 'Open X-Embodiment paper', href: 'https://arxiv.org/abs/2310.08864' },
+      { label: 'DROID robot manipulation dataset paper', href: 'https://arxiv.org/abs/2403.12945' },
+      { label: 'Hugging Face LeRobot Dataset v3', href: 'https://huggingface.co/blog/lerobot-datasets-v3' },
+      { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'RoboTacDex humanoid visual-tactile-action dataset preprint', href: 'https://arxiv.org/abs/2606.31836' },
+      { label: 'HRDexDB multi-hand grasp database preprint', href: 'https://arxiv.org/abs/2604.14944' },
+    ],
+    paperBriefIds: ['robotacdex-humanoid-visual-tactile-action-dataset-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'ht-bench-full-hand-tactile-representations-2026'],
+  },
+  {
+    path: '/robot-world-models',
+    title: 'Robot World Models: Prediction, Planning & Control',
+    description:
+      'Learn how robot world models predict future states for planning and control, how they differ from VLA and foundation models, and where tactile prediction fits.',
+    h1: 'Robot world models: prediction for physical action',
+    kicker: 'Robot learning model pillar',
+    intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.94,
+    changeFrequency: 'weekly',
+    schemaType: 'DefinedTerm',
+    visualKey: 'technology',
+    keywords: ['robot world models', 'world models for robotics', 'robot world model', 'world action model', 'predictive robot model', 'learned robot dynamics', 'world model robot manipulation', 'tactile world model', 'Physical AI world model'],
+    quickAnswer: [
+      'A robot world model predicts how an environment, robot state, observation, reward, or contact state may change after an action. The prediction can be in pixels, tactile observations, explicit state, or a learned latent representation.',
+      'A world model is not automatically a robot policy, VLA, foundation model, or planner. Those components can share a backbone or be combined, but prediction, action selection, language grounding, and reusable pretraining are different roles.',
+      'The decisive evidence is not whether a rollout looks plausible. It is whether prediction supports better planning, control, data efficiency, recovery, or task outcomes under a named robot, task, horizon, baseline, and real-world protocol.',
+    ],
+    sections: [
+      {
+        heading: 'What a robot world model predicts',
+        body: [
+          'A world model represents a transition: given a current state or observation and a candidate action, what may happen next? Some systems predict one step; others roll forward over a horizon. Some generate camera or tactile observations, while others predict compact latent state, object pose, contact, reward, or terminal conditions.',
+          'The target determines the evaluation. Pixel similarity may be useful for visual prediction but may miss contact geometry or task-critical errors. A latent model may plan effectively without reconstructing every image detail, but its internal state needs task-level validation.',
+        ],
+        table: {
+          headers: ['Prediction space', 'Typical output', 'Useful evaluation', 'Important limitation'],
+          rows: [
+            ['Observation-space model', 'Future RGB, depth, tactile image, audio, or multimodal frame', 'Prediction metrics plus task use', 'Plausible images can hide physically wrong state'],
+            ['State-space model', 'Pose, velocity, contact, force-related state, slip, or task variables', 'Calibrated state error and downstream control', 'Requires measured or estimated state labels'],
+            ['Latent world model', 'Compact learned future representation', 'Planning value, probes, ablations, and closed-loop outcome', 'Latent quality cannot be judged from visualization alone'],
+            ['Reward or value model', 'Predicted success, progress, preference, or return', 'Ranking quality and policy outcomes', 'Can exploit narrow labels or miss unmodeled hazards'],
+          ],
+        },
+      },
+      {
+        heading: 'World model, VLA, foundation model, and policy',
+        body: [
+          'These labels describe different functions even when one system performs several of them. A VLA maps vision and language toward robot actions. A policy selects an action. A world model predicts consequences. A planner searches or selects among possibilities. A foundation-model claim concerns breadth and transfer from pretraining, not a particular prediction target.',
+        ],
+        table: {
+          headers: ['Component', 'Primary question', 'Typical output', 'Required evidence'],
+          rows: [
+            ['World model', 'What may follow this action?', 'Predicted state, observation, latent, reward, or contact future', 'Forecast quality and downstream planning or control value'],
+            ['Robot policy or VLA', 'What action should the robot execute?', 'Command, token, trajectory, or action chunk', 'Closed-loop task outcomes and generalization boundary'],
+            ['Planner or embodied reasoner', 'Which sequence or subgoal should be attempted?', 'Action candidates, subgoals, constraints, or task status', 'Search quality, feasibility, execution, monitoring, and recovery'],
+            ['Foundation model', 'What reusable knowledge transfers across settings?', 'Representation, prediction, action, or multiple interfaces', 'Breadth of data, held-out transfer, adaptation cost, and accessible artifacts'],
+          ],
+        },
+      },
+      {
+        heading: 'How world models enter robot control',
+        body: [
+          'A controller can use a world model to score candidate actions, plan a trajectory, estimate whether a goal is reachable, synthesize training experience, provide an auxiliary learning objective, or detect a mismatch between predicted and measured state. The model may run online or only during training.',
+          'Long rollouts compound errors, while short horizons may miss delayed consequences. Replanning from new measurements can reduce accumulation, but latency and model uncertainty still matter. Real robots also expose contacts, wear, delays, and disturbances that may be underrepresented in training data.',
+        ],
+        bullets: [
+          'State the prediction horizon, observation history, action conditioning, and replanning frequency',
+          'Expose whether the model is used during training, planning, online control, or only visualization',
+          'Compare against a policy without the world-model pathway and against appropriate planning baselines',
+          'Measure physical task value, compute and latency, failure detection, and behavior under distribution shift',
+        ],
+      },
+      {
+        heading: 'The 2026 open model ecosystem signal',
+        body: [
+          'Hugging Face’s official LeRobot v0.6 release describes integrations for world-model policies including VLA-JEPA, LingBot-VA, and FastWAM, together with evaluation tooling. This is evidence that open robotics infrastructure is adding world-model workflows; it is not evidence that the named models are directly comparable or solve every real-world task.',
+          'Each model still needs its own primary paper, code or weights, dataset, robot, action space, benchmark, and real-robot evaluation. Ecosystem support can improve reproducibility without replacing capability evidence.',
+        ],
+      },
+      {
+        heading: 'Tactile and visuo-tactile world models',
+        body: [
+          'Touch becomes valuable after contact begins, when cameras may be occluded and small physical changes can decide success. A tactile world model may predict a future tactile image, contact state, slip, force-related variable, or tactile subgoal conditioned on action. A visuo-tactile model predicts or fuses both visual and tactile futures.',
+          'Dream-Tac, TouchWorld, ViTacWorld, FeelWorld, and HiTac-WAM are specialized 2026 preprints with different targets, horizons, sensors, robots, control roles, and baselines. They should not be compressed into a single score. RoboSkin.ai’s dedicated visuo-tactile guide holds the source-level comparison.',
+        ],
+      },
+      {
+        heading: 'World-model evidence checklist',
+        body: [
+          'A useful result identifies the training data, observation and action interfaces, target representation, horizon, uncertainty, compute, robot, task, baseline, and real-world trial protocol. It also reports what happens when prediction is wrong.',
+        ],
+        table: {
+          headers: ['Evidence question', 'What to report', 'Why it matters'],
+          rows: [
+            ['Does it predict?', 'Target, horizon, metric, calibration, held-out split, and qualitative failures', 'Shows what future state the model actually captures'],
+            ['Does planning use it?', 'Candidate generation, objective, constraints, replanning, and compute budget', 'Separates a predictive visualization from an operational planner'],
+            ['Does it improve the robot?', 'Matched baseline, tasks, trials, success, speed, force, recovery, and interventions', 'Connects prediction to physical utility'],
+            ['Does it transfer?', 'New objects, scenes, tasks, robots, sensors, and adaptation method', 'Defines rather than implies generalization'],
+            ['Is it reproducible?', 'Paper, code, weights, data, configuration, seeds, logs, and hardware', 'Allows independent inspection of the result'],
+          ],
+        },
+      },
+    ],
+    faqs: [
+      { question: 'What is a robot world model?', answer: 'It is a model that predicts how robot state, environment state, observations, rewards, or contact may change after an action.' },
+      { question: 'Is a robot world model the same as a VLA?', answer: 'No. A VLA maps visual and language context toward actions. A world model predicts consequences. One system can include both roles, but the labels are not interchangeable.' },
+      { question: 'How are robot world models evaluated?', answer: 'Evaluate the prediction target and horizon, then test whether the model improves planning, control, data efficiency, recovery, or task outcomes under matched physical conditions.' },
+      { question: 'What is a tactile world model?', answer: 'It predicts future tactile observations or contact-related state conditioned on action, sometimes together with visual state, so planning or control can reason about physical contact.' },
+      { question: 'Does a plausible generated video prove a useful world model?', answer: 'No. Visual plausibility can hide physically wrong geometry, contact, timing, or action consequences. Downstream planning and repeated real-robot evidence are required for stronger claims.' },
+    ],
+    relatedLinks: [
+      { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare contact-aware predictive models at the primary-source level.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Separate consequence prediction from instruction-conditioned action.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Place world models inside the broader data and training loop.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect predictions to grasping, insertion, dexterity, and recovery.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Separate reusable pretraining claims from predictive model roles.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'Map sensing, representation, prediction, policy, and control.' },
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review the data contracts behind predictive robot models.' },
+    ],
+    sources: [
+      { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/abs/2606.08737' },
+      { label: 'TouchWorld tactile world model preprint', href: 'https://arxiv.org/abs/2607.07287' },
+      { label: 'ViTacWorld visuo-tactile world model preprint', href: 'https://arxiv.org/abs/2607.22530' },
+      { label: 'FeelWorld hierarchical contact prediction preprint', href: 'https://arxiv.org/abs/2607.24267' },
+      { label: 'HiTac-WAM hierarchical tactile world-action model preprint', href: 'https://arxiv.org/abs/2608.19574' },
+    ],
+    paperBriefIds: ['hitac-wam-hierarchical-tactile-world-action-model-2026', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
+  },
+  {
+    path: '/robot-teleoperation',
+    title: 'Robot Teleoperation: Demonstrations, Data & Learning',
+    description:
+      'Learn how robot teleoperation captures demonstrations for robot learning and VLA training, including interfaces, synchronization, quality control, limits, and evaluation.',
+    h1: 'Robot teleoperation: from human demonstration to robot data',
+    kicker: 'Robot data collection pillar',
+    intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.92,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'applications',
+    keywords: ['robot teleoperation', 'humanoid robot teleoperation', 'robot demonstration data', 'teleoperation robotics', 'imitation learning data collection', 'VLA training data', 'robot data collection', 'robot retargeting', 'robot learning demonstrations'],
+    quickAnswer: [
+      'Robot teleoperation is remote or mediated human control of a robot through interfaces such as joysticks, teach pendants, motion capture, wearable devices, cameras, handheld end effectors, or bilateral systems. Teleoperated behavior is not autonomous behavior.',
+      'For robot learning, teleoperation can generate aligned observations and actions, but useful data also requires calibration, timing, task definitions, resets, failures, operator context, quality control, schema, access, and license.',
+      'Demonstrations do not become a capable policy automatically. Training must account for action representation, embodiment, coverage, compounding errors, evaluation splits, interventions, and repeated real-robot testing.',
+    ],
+    sections: [
+      {
+        heading: 'What robot teleoperation controls',
+        body: [
+          'Teleoperation can command a mobile base, arm pose, joint motion, gripper, dexterous hand, whole humanoid body, or a high-level subtask. The operator may watch direct video, stereo or depth views, a digital twin, or the physical robot. Some systems provide haptic or force feedback; others are one-way.',
+          'The interface changes the data. A low-dimensional joystick, handheld gripper, motion-capture rig, exoskeleton, and bilateral master device encode different human intent and produce different action distributions. Dataset records should preserve that acquisition contract.',
+        ],
+        table: {
+          headers: ['Interface family', 'Typical command', 'Strength', 'Data limitation to record'],
+          rows: [
+            ['Joystick or gamepad', 'Base, end-effector, gripper, or mode commands', 'Portable and familiar', 'Low-dimensional mapping and operator-specific mode switches'],
+            ['Teach pendant or kinesthetic teaching', 'Waypoints, joint motion, or physically guided pose', 'Direct connection to industrial workflows or robot geometry', 'May be slow, robot-specific, or unsuitable for free whole-body motion'],
+            ['Motion capture or wearable interface', 'Human pose, hand pose, or joint targets retargeted to the robot', 'Can capture natural coordinated motion', 'Human-robot morphology, occlusion, calibration, and retargeting errors'],
+            ['Bilateral or haptic master', 'Position or force-related commands with feedback', 'Can expose contact to the operator', 'Cost, stability, latency, scaling, and master-slave mismatch'],
+            ['Handheld data-collection device', 'End-effector pose and gripper state without the full robot', 'Can lower collection friction and move data capture away from a robot cell', 'Requires reliable calibration and later embodiment mapping'],
+          ],
+        },
+      },
+      {
+        heading: 'The demonstration-to-policy pipeline',
+        body: [
+          'A teleoperation recording is a source trajectory, not a finished learning asset. The complete pipeline aligns sensors and commands, segments tasks, records outcomes and failure context, validates the episode, converts it to a stable schema, splits it without leakage, trains a model, and tests the model in closed loop.',
+        ],
+        bullets: [
+          'Specify task, object, environment, operator instruction, success criteria, and reset policy',
+          'Calibrate and synchronize cameras, depth, proprioception, hand state, force or touch, commands, and timestamps',
+          'Record latency, packet loss, control modes, interventions, discarded episodes, failures, and operator identity or experience when relevant',
+          'Normalize episodes and action spaces while preserving raw data, units, coordinate frames, and provenance',
+          'Train and evaluate with splits that isolate the claimed objects, scenes, tasks, operators, or embodiments',
+        ],
+      },
+      {
+        heading: 'Teleoperation data is not autonomous capability',
+        body: [
+          'A teleoperated demonstration proves that a person and interface could make the robot perform the task under those conditions. It does not prove that a learned policy can perceive the same state, recover from error, or act safely without the operator.',
+          'A policy trained by imitation can encounter states absent from expert demonstrations because small prediction errors compound during execution. Corrective demonstrations, interactive data collection, recovery examples, and policy rollouts can target this gap, but they still require an explicit intervention policy and fair evaluation.',
+        ],
+      },
+      {
+        heading: 'Current open data-collection signals',
+        body: [
+          'The official Hugging Face Grabette article describes a handheld gripper-and-camera device that records data in the standard LeRobot dataset format. It is an example of collecting manipulation demonstrations without keeping a full robot in the loop during every recording. The transfer value still depends on calibration, task coverage, observation and action mapping, and later robot evaluation.',
+          'The LeRobot v0.6 release describes rollout tools and DAgger-style human corrections. FreeTacMan investigates wearable, robot-free visuo-tactile data collection. DROID and Open X-Embodiment represent broader real-robot and multi-embodiment data strategies. These resources solve different parts of the pipeline and should not be treated as identical teleoperation systems.',
+        ],
+      },
+      {
+        heading: 'Touch and force feedback in teleoperation',
+        body: [
+          'Touch can be recorded as robot-side training data, returned to the operator as haptic feedback, or both. Robot-side tactile data can label contact onset, slip, pressure distribution, or grasp state. Haptic feedback can help a person adjust motion, but the master device, scaling, delay, and feedback modality shape what the operator feels.',
+          'For imitation learning, synchronize tactile observations with the action that preceded the contact and the corrective action that followed it. A contact stream without robot state, timestamps, or action context is much harder to use for closed-loop policy learning.',
+        ],
+      },
+      {
+        heading: 'Quality and evaluation checklist',
+        body: [
+          'Data quality is a measured property, not a consequence of collection volume. Before training, inspect timing, calibration, missing streams, task labels, duplicated episodes, operator shortcuts, failures, and inconsistent resets. Before a capability claim, test the learned policy on the physical robot under a protocol that distinguishes autonomous success from human correction.',
+        ],
+        table: {
+          headers: ['Stage', 'What to verify', 'Failure if omitted'],
+          rows: [
+            ['Capture', 'Calibration, clocks, latency, commands, observations, raw units, and failure flags', 'The trajectory can look complete while actions and observations are misaligned'],
+            ['Curation', 'Episode boundaries, outcomes, duplicates, exclusions, class balance, and operator distribution', 'The model learns shortcuts or the dataset overstates coverage'],
+            ['Training', 'Action representation, normalization, history, embodiment mapping, and intervention handling', 'The learned interface differs from the deployed robot'],
+            ['Evaluation', 'Autonomy, objects, scenes, trials, resets, interventions, recovery, force, damage, and time', 'A staged or corrected run is reported as autonomous capability'],
+            ['Release', 'Schema, version, documentation, access, license, checksums, and known limitations', 'Other teams cannot audit or legally reuse the data'],
+          ],
+        },
+      },
+    ],
+    faqs: [
+      { question: 'What is robot teleoperation?', answer: 'Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master.' },
+      { question: 'Is a teleoperated robot autonomous?', answer: 'No. Teleoperation shows human-controlled behavior. Autonomous capability requires the robot policy to perceive and act without the operator under a defined evaluation protocol.' },
+      { question: 'How does teleoperation create robot-learning data?', answer: 'It records synchronized observations, robot state, human commands, actions, task context, and outcomes. Those episodes are calibrated, quality-checked, normalized, split, and used to train and evaluate a policy.' },
+      { question: 'What limits learning from teleoperation?', answer: 'Limits include interface bias, latency, morphology mismatch, narrow task coverage, inconsistent operators, missing failures, action retargeting, compounding policy errors, and evaluation leakage.' },
+      { question: 'Why record tactile data during teleoperation?', answer: 'Touch can expose contact onset, pressure, shear, slip, seating, and corrective behavior that cameras may miss, but it must be synchronized with robot state and actions to support learning.' },
+    ],
+    relatedLinks: [
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review broad robot-data fields, splits, access, and license.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Connect demonstrations to imitation, correction, evaluation, and transfer.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand how images, language, state, and actions enter generalist policies.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks.' },
+      { label: 'Robot hands', href: '/robot-hands', description: 'Map end-effector interfaces, sensing, and dexterous action spaces.' },
+      { label: 'Tactile datasets', href: '/datasets', description: 'Find touch-specific data resources and sensor metadata.' },
+      { label: 'FreeTacMan research brief', href: '/research/freetacman-robot-free-visuotactile-data-collection-2025', description: 'Review wearable robot-free visuo-tactile collection evidence.' },
+    ],
+    sources: [
+      { label: 'Hugging Face Grabette data-collection article', href: 'https://huggingface.co/blog/grabette' },
+      { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
+      { label: 'DROID robot manipulation dataset paper', href: 'https://arxiv.org/abs/2403.12945' },
+      { label: 'Open X-Embodiment paper', href: 'https://arxiv.org/abs/2310.08864' },
+      { label: 'Hugging Face LeRobot Dataset v3', href: 'https://huggingface.co/blog/lerobot-datasets-v3' },
+    ],
+    paperBriefIds: ['robotacdex-humanoid-visual-tactile-action-dataset-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
 ];
 

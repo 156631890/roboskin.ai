@@ -244,8 +244,8 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: '19', label: 'Structured tactile and robot-learning research records' },
-  { value: '38', label: 'Source-backed research and robotics news briefs' },
+  { value: '23', label: 'Structured tactile and robot-learning research records' },
+  { value: '46', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
@@ -317,6 +317,45 @@ export const homeBroadResearchLanes: ContentTile[] = [
       'Follow action-conditioned contact prediction, world-action models, planning evidence, and the role of touch in robot policies.',
     href: '/robot-vla-models',
     ctaLabel: 'Map robot VLA models',
+  },
+];
+
+export const homeRoboticsIntelligence: ContentTile[] = [
+  {
+    title: 'Robot hands',
+    description: 'Compare dexterous hands, grippers, actuation, sensing, and manipulation evidence.',
+    href: '/robot-hands',
+    ctaLabel: 'Open topic',
+  },
+  {
+    title: 'Robot safety',
+    description: 'Map industrial safety standards, contact sensing, collision response, and scope limits.',
+    href: '/robot-safety',
+    ctaLabel: 'Open topic',
+  },
+  {
+    title: 'Robotics datasets',
+    description: 'Evaluate robot-learning data by embodiment, observations, actions, tasks, access, and license.',
+    href: '/robotics-datasets',
+    ctaLabel: 'Open topic',
+  },
+  {
+    title: 'Robot world models',
+    description: 'Separate predictive models, world-action policies, VLA systems, and tactile prediction roles.',
+    href: '/robot-world-models',
+    ctaLabel: 'Open topic',
+  },
+  {
+    title: 'Robot teleoperation',
+    description: 'Trace demonstrations from operator interface and synchronization to policy training and evaluation.',
+    href: '/robot-teleoperation',
+    ctaLabel: 'Open topic',
+  },
+  {
+    title: 'Robot learning',
+    description: 'Connect demonstrations, reinforcement, simulation, datasets, VLA policies, and tactile feedback.',
+    href: '/robot-learning',
+    ctaLabel: 'Open topic',
   },
 ];
 

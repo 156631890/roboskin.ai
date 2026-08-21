@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 90);
+  assert.equal(protectedUrls.length, 103);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -52,6 +52,11 @@ test('the audited production URL inventory is protected', async () => {
     '/humanoid-robots',
     '/robot-vla-models',
     '/robot-manipulation',
+    '/robot-hands',
+    '/robot-safety',
+    '/robotics-datasets',
+    '/robot-world-models',
+    '/robot-teleoperation',
     '/physical-ai-touch',
     '/tactile-foundation-models',
     '/research-services',
@@ -63,6 +68,14 @@ test('the audited production URL inventory is protected', async () => {
     '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     '/news/color-changing-mechanochromic-tactile-sensor-2026',
     '/news/single-pixel-tactile-skin-compressive-sampling-2026',
+    '/news/gemini-robotics-2-whole-body-vla-dexterity-2026',
+    '/news/lerobot-v060-world-models-vla-evaluation-2026',
+    '/news/nist-humanoid-baseline-performance-benchmark-2026',
+    '/news/iso-10218-2025-industrial-robot-safety-scope',
+    '/research/hitac-wam-hierarchical-tactile-world-action-model-2026',
+    '/research/t-rex-tactile-reactive-dexterous-manipulation-2026',
+    '/research/robotacdex-humanoid-visual-tactile-action-dataset-2026',
+    '/research/tactidex-tactile-guided-dexterous-benchmark-2026',
   ]) {
     assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
   }

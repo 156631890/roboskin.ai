@@ -34,6 +34,12 @@ New route measurement:
 - Monitor `/robot-learning` for robot learning, imitation learning robotics, reinforcement learning robots, robot learning datasets, and sim-to-real queries after deployment and crawl.
 - Do not split these into separate pages before at least 28 days of query evidence.
 
+## Implementation batch - 2026-08-21
+
+Five substantial parent routes were added for distinct intents that were previously handled only as sections: robot hands, robot safety, broad robotics datasets, robot world models, and robot teleoperation. Each routes back into the existing Robot Skin → Tactile AI → Physical AI graph. Four official-source news briefs and four arXiv-bounded research briefs were added as entity-level evidence, not as synonym landing pages.
+
+No Google Trends rank or trend score was used for this batch because a current numerical comparison was not successfully verified. The expansion is based on the documented information architecture, current GSC baseline above, official 2026 robotics releases, standards pages, and primary papers. Record the first crawl and query evidence below before changing titles or creating narrower children.
+
 ## Current snapshot - 2026-07-27
 
 Search Console data was current through 2026-07-24.
@@ -165,6 +171,11 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/robot-learning | robot learning, imitation learning robotics, reinforcement learning robots |  |  |  |  | Last 28 days | Broad learning parent; tactile datasets and models retain narrow intent |
 | https://roboskin.ai/robot-vla-models | robot VLA models, vision-language-action models |  |  |  |  | Last 28 days | Broad model parent; tactile foundation and world-model children retain narrow intent |
 | https://roboskin.ai/robot-manipulation | robot manipulation, robotic manipulation, dexterous manipulation |  |  |  |  | Last 28 days | Broad task parent; contact-to-action intent stays on `/tactile-manipulation` |
+| https://roboskin.ai/robot-hands | robot hands, robotic hands, dexterous robot hand, robot gripper vs robot hand |  |  |  |  | Last 28 days | End-effector comparison parent; tactile-sensor intent stays on the hand application route |
+| https://roboskin.ai/robot-safety | robot safety, industrial robot safety, humanoid robot safety |  |  |  |  | Last 28 days | Scope-aware standards and system map; do not imply certification or compliance |
+| https://roboskin.ai/robotics-datasets | robotics datasets, robot learning datasets, robot manipulation datasets |  |  |  |  | Last 28 days | Broad dataset parent; tactile-only discovery remains on `/datasets` |
+| https://roboskin.ai/robot-world-models | robot world models, world models for robotics, world-action models |  |  |  |  | Last 28 days | Broad predictive-model owner; visuo-tactile paper comparison remains on the existing guide |
+| https://roboskin.ai/robot-teleoperation | robot teleoperation, robot demonstration data, teleoperation dataset |  |  |  |  | Last 28 days | Demonstration-acquisition parent; learned autonomy requires separate evidence |
 | https://roboskin.ai/robot-skin | robot skin |  |  |  |  | Last 28 days | Core definition query |
 | https://roboskin.ai/physics-ai | physical ai robot skin |  |  |  |  | Last 28 days | Physical AI canonical cluster query |
 | https://roboskin.ai/guides/tactile-feedback-for-physical-ai | physical ai tactile feedback |  |  |  |  | Last 28 days | Contact-feedback guide query |

@@ -20,6 +20,7 @@ import {
   homeKnowledgeMap,
   homePhysicalAiSignals,
   homeResearchWatch,
+  homeRoboticsIntelligence,
   homeStats,
   manifesto,
   marketSignals,
@@ -224,6 +225,25 @@ export default function Home() {
                 </article>
               ))}
             </div>
+
+            <nav className="mt-8 border border-[#171714]/20" aria-label="Robotics intelligence topics">
+              <div className="grid md:grid-cols-2 xl:grid-cols-3">
+                {homeRoboticsIntelligence.map((topic, index) => (
+                  <Link
+                    key={topic.href}
+                    href={topic.href ?? '/research'}
+                    className="group grid gap-3 border-b border-[#171714]/20 p-5 transition-colors hover:bg-[#171714]/[0.04] md:border-r md:even:border-r-0 xl:[&:nth-child(2n)]:border-r xl:[&:nth-child(3n)]:border-r-0 xl:[&:nth-last-child(-n+3)]:border-b-0"
+                  >
+                    <span className="font-mono text-xs font-semibold text-[#9f351d]">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="text-lg font-semibold text-[#171714]">{topic.title}</span>
+                    <span className="text-sm leading-relaxed text-[#514c45]">{topic.description}</span>
+                    <span className="text-sm font-semibold text-[#9f351d] transition-transform group-hover:translate-x-1">
+                      {topic.ctaLabel} →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </nav>
 
             <div className="mt-14 md:mt-20">
               <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
