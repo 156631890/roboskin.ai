@@ -210,13 +210,11 @@ export const site = {
 
 export const primaryNavigation = [
   { href: '/', label: 'Home' },
+  { href: '/robot-skin', label: 'Robot Skin' },
+  { href: '/tactile-ai', label: 'Tactile AI' },
+  { href: '/physical-ai', label: 'Physical AI' },
+  { href: '/robot-foundation-models', label: 'Models & Data' },
   { href: '/research', label: 'Research' },
-  { href: '/ai-robotics', label: 'AI & Robotics' },
-  { href: '/news', label: 'News' },
-  { href: '/glossary', label: 'Glossary' },
-  { href: '/applications', label: 'Use Cases' },
-  { href: '/technology', label: 'Technology' },
-  { href: '/resources', label: 'Library' },
   { href: '/about', label: 'About' },
 ];
 

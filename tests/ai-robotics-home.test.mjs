@@ -12,8 +12,7 @@ test('homepage gives AI and robotics one compact closed-loop authority route', a
     read('src/components/AiRobotClosedLoop.tsx'),
     read('src/app/globals.css'),
   ]);
-
-  assert.match(site, /href: '\/ai-robotics', label: 'AI & Robotics'/);
+  assert.match(site, /stage: '01 \/ Observe'[\s\S]*href: '\/ai-robotics'/);
   assert.match(site, /homeAiRobotLoop/);
   assert.match(site, /Touch closes the loop/);
   assert.match(home, /How AI becomes robot action/);

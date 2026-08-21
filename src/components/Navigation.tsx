@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { primaryNavigation } from '@/content/site';
 
-const desktopNavigation = primaryNavigation.filter(({ href }) => href !== '/' && href !== '/glossary');
+const desktopNavigation = primaryNavigation.filter(({ href }) => href !== '/' && href !== '/about');
 
 function BrandMark() {
   return (
@@ -20,6 +20,27 @@ function BrandMark() {
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMobileMenuOpen(false);
+      menuButtonRef.current?.focus();
+    };
+    const closeAboveMobileBreakpoint = () => {
+      if (window.innerWidth > 1100) setMobileMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    window.addEventListener('resize', closeAboveMobileBreakpoint);
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape);
+      window.removeEventListener('resize', closeAboveMobileBreakpoint);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <nav className="site-nav" aria-label="Primary navigation">
@@ -41,6 +62,7 @@ export default function Navigation() {
                   href={link.href}
                   className="site-nav-link"
                   data-active={active ? 'true' : undefined}
+                  aria-current={active ? 'page' : undefined}
                 >
                   {link.label}
                 </Link>
@@ -53,6 +75,7 @@ export default function Navigation() {
               Submit source <span aria-hidden="true">↗</span>
             </Link>
             <button
+              ref={menuButtonRef}
               type="button"
               onClick={() => setMobileMenuOpen((open) => !open)}
               aria-expanded={mobileMenuOpen}
@@ -83,6 +106,7 @@ export default function Navigation() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="site-mobile-link"
                     data-active={active ? 'true' : undefined}
+                    aria-current={active ? 'page' : undefined}
                   >
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     {link.label}

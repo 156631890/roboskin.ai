@@ -380,6 +380,9 @@ select:focus-visible {
 .site-menu-icon[data-open="true"] span:last-child { top: 7px; transform: rotate(-45deg); }
 
 .site-mobile-menu {
+  max-height: calc(100dvh - 66px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border-top: 1px solid var(--panel-border);
   background: var(--bg);
   padding-block: 1.4rem 2rem;
@@ -2490,6 +2493,10 @@ select:focus-visible {
 
 .reveal {
   animation: floatUp 0.7s var(--ease-brand) both;
+}
+
+@media (min-width: 1101px) {
+  .site-mobile-menu { display: none; }
 }
 
 @media (max-width: 1100px) {
