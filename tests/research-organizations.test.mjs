@@ -5,7 +5,7 @@ import test from 'node:test';
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
-test('organization records normalize the twelve verified identities without placeholders', async () => {
+test('organization records preserve the original twelve identities and extend the verified directory', async () => {
   const source = await read('src/lib/research-organizations.ts');
 
   for (const id of [
@@ -58,18 +58,36 @@ test('organization directory is server-rendered, evidence bounded, and schema co
   ]);
 
   assert.doesNotMatch(page, /^'use client';/);
-  assert.match(page, /Robot AI research organizations, labs, and companies/);
+  assert.match(page, /Tactile AI and robotics research organizations/);
+  assert.match(page, /Coverage is intentionally partial/);
   assert.match(page, /does not establish ownership, funding, endorsement, current employment/);
   assert.match(page, /id=\{`organization-\$\{organization\.id\}`\}/);
+  assert.match(page, /researchSourceAffiliationRelations/);
+  assert.match(page, /researchOrganizationPartOfRelations/);
+  assert.match(page, /connected research assets/);
+  assert.match(page, /Source-reviewed research assets/);
+  assert.match(page, /Source wording:/);
+  assert.match(page, /Affiliation source/);
+  assert.match(page, /Part of/);
   assert.match(page, /Relationship source/);
   assert.match(page, /This is a source map, not a ranking/);
+  for (const route of ['/research', '/datasets', '/benchmarks', '/sensors', '/robots']) {
+    assert.match(page, new RegExp(`\\['${route.replace('/', '\\/')}'`));
+  }
 
   assert.match(schema, /'@type': 'ItemList'/);
   assert.match(schema, /'CollegeOrUniversity'/);
   assert.match(schema, /'Organization'/);
+  assert.match(schema, /'@type': 'CreativeWork'/);
   assert.match(schema, /sameAs: \[organization\.officialUrl\]/);
+  assert.match(schema, /parentOrganization:/);
+  assert.match(schema, /researchOrganizationPartOfRelations/);
   assert.match(schema, /contributor:/);
-  assert.doesNotMatch(schema, /funder|sponsor|parentOrganization|AggregateRating|Review/);
+  assert.match(schema, /citation: \[\.\.\.new Set\(relations\.flatMap/);
+  assert.doesNotMatch(schema, /researchSourceAffiliationRelations|buildAffiliationAssetNode|affiliationAssetNodes/);
+  assert.doesNotMatch(schema, /sourceAffiliation[\s\S]*?\bcontributor:/);
+  assert.doesNotMatch(schema, /\b(?:owner|funder|sponsor)\s*:/);
+  assert.doesNotMatch(schema, /identitySources[\s\S]*?sameAs|AggregateRating|Review/);
 
   assert.match(seo, /'\/organizations': \{[\s\S]*?index: true/);
   assert.match(protectedUrls, /https:\/\/roboskin\.ai\/organizations/);

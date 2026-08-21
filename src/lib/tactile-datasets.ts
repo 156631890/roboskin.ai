@@ -22,6 +22,27 @@ export type TactileDatasetEntry = {
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
   {
+    id: 'softvtbench',
+    name: 'SoftVTBench',
+    institution: ['Tuojing Intelligence', 'Tsinghua University', "King's College London", 'Southeast University', 'Stevens Institute of Technology', 'Hong Kong University of Science and Technology (Guangzhou)', 'University of Manchester', 'Simple AI', 'Imperial College London', 'Carnegie Mellon University', 'Zhejiang University', 'Beihang University', 'University of Hong Kong'],
+    year: 2026,
+    robot: ['Simulated Franka arm with Panda parallel-jaw gripper in Isaac Sim and Isaac Lab'],
+    sensor: ['Simulated bilateral GelSight Mini profiles rendered through TacEx, Taxim, and FOTS'],
+    modalities: ['Multi-view RGB', 'Dual-finger tactile RGB', 'Tactile marker motion', 'Proprioception', 'Language', 'Continuous and binary gripper actions', 'Evaluator-only FEM state'],
+    sampleCount: 'Latest paper: 4,000 expert demonstrations across 40 tasks and more than 50 assets. Hugging Face dataset-card revision fd2793a documents four subsets with 10 tasks and 100 successful demonstrations each, or 4,000 demonstrations total. The GitHub README last changed 2026-07-22 still lists an earlier 1,628-demonstration, 33-asset state, so the first-party release documents are not synchronized.',
+    tasks: ['Deformable-object grasp and placement', 'Rigid-twin matched control tasks', 'Object-variation generalization', 'Spatial-variation generalization', 'Vision-only and visuo-tactile policy comparison'],
+    objectCategories: 'Ten volumetric deformable manipulated-object designs and matched rigid twins; the latest paper reports more than 50 assets across the complete benchmark inventory.',
+    dataFormat: 'HDF5 trajectories with synchronized policy observations, robot actions, simulator state, and evaluator fields, plus third-person, wrist, and bilateral tactile MP4 videos documented by the current dataset card.',
+    license: 'Apache-2.0 as shown on the current Hugging Face dataset card; upstream simulator, robot, tactile-runtime, and third-party asset terms may differ',
+    licenseUrl: 'https://www.apache.org/licenses/LICENSE-2.0',
+    paperUrl: 'https://arxiv.org/abs/2608.18701',
+    projectUrl: 'https://softvtbench.github.io/',
+    githubUrl: 'https://github.com/TuojingAI/SoftVTBench',
+    datasetUrl: 'https://huggingface.co/datasets/Arthur12137/SoftVTBench',
+    availability: 'The official repository links public code and the Hugging Face dataset mirror. The Hugging Face card reviewed on 2026-08-22 documents 4,000 hosted demonstrations, while the older GitHub README still lists 1,628 demonstrations and 33 assets. Pin the exact dataset revision because the first-party release documents currently disagree.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'ht-bench',
     name: 'HT-Bench',
     institution: ['Beihang University', 'Rimbot', 'ShanghaiTech University', 'Tsinghua University', 'Chinese Academy of Sciences', 'BUPT'],

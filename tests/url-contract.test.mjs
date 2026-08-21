@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 108);
+  assert.equal(protectedUrls.length, 109);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -37,6 +37,7 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/eu-roboskin-project'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/robot-learning'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/ai-robotics'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/physical-ai'));
@@ -214,9 +215,12 @@ test('the production snapshot preserves redirect sources instead of shrinking th
   const snapshot = await read('scripts/snapshot-production-urls.mjs');
 
   assert.match(snapshot, /protected-redirects\.json/);
+  assert.match(snapshot, /existingProtectedUrls/);
   assert.match(snapshot, /Object\.keys\(protectedRedirects\)/);
   assert.match(snapshot, /pathname !== '\/research-index'/);
-  assert.match(snapshot, /completeProtectedUrls\.length !== 108/);
+  assert.match(snapshot, /missingContractUrls/);
+  assert.match(snapshot, /Production snapshot would remove protected URLs/);
+  assert.doesNotMatch(snapshot, /Expected (?:the audited )?\d+ (?:production sitemap|protected) URLs/);
   assert.doesNotMatch(snapshot, /protected-redirects\.json'[\s\S]*?flag: 'wx'/);
 });
 

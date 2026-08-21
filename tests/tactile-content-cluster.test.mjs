@@ -61,3 +61,43 @@ test('tactile benchmark, dataset, foundation-model, and world-model guides form 
   assert.match(sitemap, /const topicPages = seoTopicPages\.map/);
   assert.match(sitemap, /images: \[canonicalUrl\(pageVisuals\[page\.visualKey\]\.image\)\]/);
 });
+
+test('SoftVTBench has source-aligned dataset and benchmark records without physical-hardware claims', async () => {
+  const [datasets, benchmarks] = await Promise.all([
+    read('src/lib/tactile-datasets.ts'),
+    read('src/lib/tactile-benchmarks.ts'),
+  ]);
+
+  const datasetStart = datasets.indexOf("id: 'softvtbench'");
+  const datasetEnd = datasets.indexOf("id: 'ht-bench'", datasetStart);
+  const benchmarkStart = benchmarks.indexOf("id: 'softvtbench'");
+  const benchmarkEnd = benchmarks.indexOf("id: 'ht-bench'", benchmarkStart);
+  assert.ok(datasetStart >= 0 && datasetEnd > datasetStart);
+  assert.ok(benchmarkStart >= 0 && benchmarkEnd > benchmarkStart);
+
+  const dataset = datasets.slice(datasetStart, datasetEnd);
+  const benchmark = benchmarks.slice(benchmarkStart, benchmarkEnd);
+
+  assert.match(dataset, /Latest paper: 4,000 expert demonstrations across 40 tasks and more than 50 assets/);
+  assert.match(dataset, /Hugging Face dataset-card revision fd2793a/);
+  assert.match(dataset, /4,000 demonstrations total/);
+  assert.match(dataset, /1,628 demonstrations and 33 assets/);
+  assert.match(dataset, /first-party release documents are not synchronized/);
+  assert.doesNotMatch(dataset, /current public release[^.]*1,628/i);
+  assert.match(dataset, /Apache-2\.0 as shown on the current Hugging Face dataset card/);
+  assert.match(dataset, /Simulated Franka arm with Panda parallel-jaw gripper/);
+  assert.match(dataset, /Simulated bilateral GelSight Mini profiles/);
+  assert.match(benchmark, /Deformation-aware Success Rate \(DSR\)/);
+  assert.match(benchmark, /DSR is defined by this paper and is not an industry standard/);
+  assert.match(benchmark, /first-party release documents disagree/);
+
+  for (const source of [
+    'https://arxiv.org/abs/2608.18701',
+    'https://softvtbench.github.io/',
+    'https://github.com/TuojingAI/SoftVTBench',
+  ]) {
+    assert.match(dataset, new RegExp(source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.match(benchmark, new RegExp(source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  assert.match(dataset, /https:\/\/huggingface\.co\/datasets\/Arthur12137\/SoftVTBench/);
+});

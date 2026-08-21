@@ -46,6 +46,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 
 const supplements: ResearchIndexSupplement[] = [
   {
+    id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Simulated dual-finger GelSight Mini RGB and marker-motion rendering with evaluator-only FEM deformation state',
+    modalities: ['simulated multi-view RGB', 'simulated tactile RGB', 'simulated tactile marker motion', 'proprioception', 'language', 'robot actions', 'evaluator-only FEM state'],
+    formFactor: 'Isaac Sim and Isaac Lab deformable-object manipulation with a simulated Franka arm, Panda gripper, and bilateral GelSight Mini profiles',
+    dataOutput: 'Expert demonstration trajectories plus Task Success Rate, Deformation-aware Success Rate, and normalized deformation traces',
+    applications: ['deformable-object manipulation', 'visuo-tactile policy learning', 'interaction-quality evaluation'],
+    evidence: 'preprint',
+    limitations: 'The paper and Hugging Face dataset-card revision fd2793a describe 4,000 demonstrations, while the older GitHub README still lists 1,628 demonstrations and 33 assets; the first-party release documents are not synchronized. All data and evaluation are simulated, no SoftVTBench-specific sim-to-real validation is reported, and DSR is a paper-defined metric rather than an industry standard.',
+    reviewedAt: '2026-08-22',
+  },
+  {
     id: 'hitac-wam-hierarchical-tactile-world-action-model-2026',
     year: 2026,
     publisher: 'arXiv',

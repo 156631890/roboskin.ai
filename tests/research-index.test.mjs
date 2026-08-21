@@ -8,6 +8,7 @@ const read = (path) => readFile(new URL(path, root), 'utf8');
 test('the research index edition is normalized and source-backed', async () => {
   const index = await read('src/lib/research-index.ts');
   const ids = [
+    'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
     'feelworld-visuo-tactile-world-model-2026',
     'ht-bench-full-hand-tactile-representations-2026',
     'dream-tac-tactile-world-action-model-2026',
@@ -29,7 +30,7 @@ test('the research index edition is normalized and source-backed', async () => {
     'large-area-flexible-tactile-arrays-2025',
   ];
 
-  assert.equal(ids.length, 19);
+  assert.equal(ids.length, 20);
 
   for (const id of ids) assert.match(index, new RegExp(`'${id}'`));
   for (const field of [
@@ -53,6 +54,7 @@ test('the research index edition is normalized and source-backed', async () => {
   assert.match(index, /id: 'single-material-soft-robotic-skin-2025'[\s\S]*?publisher: 'Science Robotics'[\s\S]*?evidence: 'peer-reviewed'/);
   assert.match(index, /863,040 electrode configurations yielding 1,726,080 amplitude-and-phase information channels/);
   assert.match(index, /33 kHz maximum applies to one electrode configuration[\s\S]*?0\.02 Hz/);
+  assert.match(index, /id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026'[\s\S]*?All data and evaluation are simulated[\s\S]*?DSR is a paper-defined metric rather than an industry standard/);
   assert.doesNotMatch(index, /Cross-sensor tactile learning model|Transferable camera-based force estimation|Vision-based tactile sensor/);
 });
 

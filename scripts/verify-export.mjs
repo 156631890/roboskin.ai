@@ -12,6 +12,7 @@ const knowledgeGraphContract = JSON.parse(await readFile(path.join(root, 'config
 let verifiedGraphEntityCount;
 let verifiedResearchIndexCount;
 let verifiedRssItemCount;
+let verifiedSitemapUrlCount;
 
 const exists = async (file) => access(file).then(() => true, () => false);
 const candidatesFor = (pathname) => {
@@ -166,6 +167,7 @@ if (failures.length === 0) {
   const sitemapXml = await readFile(path.join(out, 'sitemap.xml'), 'utf8');
   const sitemapLocs = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1].trim());
   const sitemapUrls = new Set(sitemapLocs);
+  verifiedSitemapUrlCount = sitemapUrls.size;
   const expectedSitemapUrls = new Set([
     ...protectedUrls.filter((url) => !redirects[new URL(url).pathname]),
     canonicalFor('/research-index'),
@@ -185,7 +187,7 @@ if (failures.length === 0) {
   const csvIds = csvRows.map((row) => row.id);
   const jsonIds = indexData.entries?.map((entry) => entry.id) ?? [];
   verifiedResearchIndexCount = jsonIds.length;
-  if (indexData.count !== 23 || jsonIds.length !== 23) failures.push('/research-index.json: expected 23 records');
+  if (indexData.count !== jsonIds.length) failures.push('/research-index.json: count differs from entries');
   if (JSON.stringify(csvIds) !== JSON.stringify(jsonIds)) failures.push('/research-index.csv: IDs differ from JSON');
   for (const [index, entry] of (indexData.entries ?? []).entries()) {
     for (const [column, value] of Object.entries(entry)) {
@@ -205,13 +207,19 @@ if (failures.length === 0) {
   const graphEdgeKeys = new Set();
   const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
   const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
-  const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', ...organizationRelations, ...robotRelations]);
+  const researchRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+  const evidenceBackedRelations = new Set([...organizationRelations, ...robotRelations, ...researchRelations]);
+  const sourceLabelRelations = new Set([...organizationRelations, ...researchRelations]);
+  const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', ...evidenceBackedRelations]);
   if (graph.version !== knowledgeGraphContract.version) failures.push(`/knowledge-graph.json: expected graph version ${knowledgeGraphContract.version}`);
   for (const [name, expected] of Object.entries(knowledgeGraphContract.counts)) {
     if (graph.counts?.[name] !== expected) failures.push(`/knowledge-graph.json: expected ${name}=${expected}`);
   }
   if (graph.counts?.researchIndex !== graph.counts?.papers + graph.counts?.documentation) {
     failures.push('/knowledge-graph.json: research-index count must separate papers and documentation');
+  }
+  if (indexData.count !== graph.counts?.researchIndex || jsonIds.length !== graph.counts?.researchIndex) {
+    failures.push('/research-index.json: count differs from the knowledge graph');
   }
   if (graphEntityIds.length !== graph.counts?.knowledgeEntities || graphEntityById.size !== graphEntityIds.length) {
     failures.push('/knowledge-graph.json: entity IDs or count are inconsistent');
@@ -239,32 +247,43 @@ if (failures.length === 0) {
     if (!graphNodeIds.has(edge.from) || !graphNodeIds.has(edge.to)) failures.push(`/knowledge-graph.json: missing edge endpoint ${edgeKey}`);
     if (edge.relation === 'supportedBy' && !graphSourceIds.includes(edge.to)) failures.push(`/knowledge-graph.json: supportedBy must end at a source (${edgeKey})`);
     if (edge.relation === 'benchmarkedBy' && !edge.to.startsWith('benchmark:')) failures.push(`/knowledge-graph.json: benchmarkedBy must end at a benchmark (${edgeKey})`);
-    if (organizationRelations.includes(edge.relation)) {
-      const fromEntity = graphEntityById.get(edge.from);
-      const toEntity = graphEntityById.get(edge.to);
-      if (fromEntity?.type !== 'model' || toEntity?.type !== 'organization') failures.push(`/knowledge-graph.json: invalid organization relation endpoints (${edgeKey})`);
-      if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) failures.push(`/knowledge-graph.json: organization relation lacks evidence (${edgeKey})`);
-      if (new Set(edge.evidenceSourceIds ?? []).size !== (edge.evidenceSourceIds ?? []).length) failures.push(`/knowledge-graph.json: organization relation repeats evidence (${edgeKey})`);
+    const fromEntity = graphEntityById.get(edge.from);
+    const toEntity = graphEntityById.get(edge.to);
+    if (organizationRelations.includes(edge.relation)
+      && (fromEntity?.type !== 'model' || toEntity?.type !== 'organization')) failures.push(`/knowledge-graph.json: invalid organization relation endpoints (${edgeKey})`);
+    if (robotRelations.includes(edge.relation)
+      && (fromEntity?.type !== 'model' || toEntity?.type !== 'robot')) failures.push(`/knowledge-graph.json: invalid robot relation endpoints (${edgeKey})`);
+    if (edge.relation === 'sourceAffiliation'
+      && (!['paper', 'dataset', 'benchmark', 'sensor'].includes(fromEntity?.type) || toEntity?.type !== 'organization')) failures.push(`/knowledge-graph.json: invalid sourceAffiliation endpoints (${edgeKey})`);
+    if (edge.relation === 'partOf'
+      && (fromEntity?.type !== 'organization' || toEntity?.type !== 'organization' || edge.from === edge.to)) failures.push(`/knowledge-graph.json: invalid partOf endpoints (${edgeKey})`);
+    if (edge.relation === 'usesSensor'
+      && (fromEntity?.type !== 'dataset' || toEntity?.type !== 'sensor')) failures.push(`/knowledge-graph.json: invalid usesSensor endpoints (${edgeKey})`);
+    if (edge.relation === 'usesRobot'
+      && (fromEntity?.type !== 'dataset' || toEntity?.type !== 'robot')) failures.push(`/knowledge-graph.json: invalid usesRobot endpoints (${edgeKey})`);
+
+    if (evidenceBackedRelations.has(edge.relation)) {
+      if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) failures.push(`/knowledge-graph.json: evidence-backed relation lacks evidence (${edgeKey})`);
+      if (new Set(edge.evidenceSourceIds ?? []).size !== (edge.evidenceSourceIds ?? []).length) failures.push(`/knowledge-graph.json: evidence-backed relation repeats evidence (${edgeKey})`);
+      if (typeof edge.evidenceBoundary !== 'string' || edge.evidenceBoundary.trim().length === 0) failures.push(`/knowledge-graph.json: evidence-backed relation lacks an evidence boundary (${edgeKey})`);
       for (const sourceId of edge.evidenceSourceIds ?? []) {
-        if (!graphSourceIds.includes(sourceId)) failures.push(`/knowledge-graph.json: organization relation references missing evidence (${edgeKey})`);
-        if (!fromEntity?.primarySourceIds?.includes(sourceId)) failures.push(`/knowledge-graph.json: relationship evidence is not attached to its model (${edgeKey})`);
+        if (!graphSourceIds.includes(sourceId)) failures.push(`/knowledge-graph.json: relation references missing evidence (${edgeKey})`);
+        if (!fromEntity?.primarySourceIds?.includes(sourceId)) failures.push(`/knowledge-graph.json: relationship evidence is not attached to its source entity (${edgeKey})`);
       }
-    } else if (robotRelations.includes(edge.relation)) {
-      const fromEntity = graphEntityById.get(edge.from);
-      const toEntity = graphEntityById.get(edge.to);
-      if (fromEntity?.type !== 'model' || toEntity?.type !== 'robot') failures.push(`/knowledge-graph.json: invalid robot relation endpoints (${edgeKey})`);
-      if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) failures.push(`/knowledge-graph.json: robot relation lacks evidence (${edgeKey})`);
-      if (new Set(edge.evidenceSourceIds ?? []).size !== (edge.evidenceSourceIds ?? []).length) failures.push(`/knowledge-graph.json: robot relation repeats evidence (${edgeKey})`);
-      if (!Array.isArray(edge.sourceEmbodimentLabels) || edge.sourceEmbodimentLabels.length === 0) failures.push(`/knowledge-graph.json: robot relation lacks source embodiment labels (${edgeKey})`);
-      if (edge.sourceEmbodimentLabels?.some((label) => typeof label !== 'string' || label.trim().length === 0)) failures.push(`/knowledge-graph.json: robot relation has an invalid source embodiment label (${edgeKey})`);
-      if (typeof edge.evidenceBoundary !== 'string' || edge.evidenceBoundary.trim().length === 0) failures.push(`/knowledge-graph.json: robot relation lacks an evidence boundary (${edgeKey})`);
-      for (const sourceId of edge.evidenceSourceIds ?? []) {
-        if (!graphSourceIds.includes(sourceId)) failures.push(`/knowledge-graph.json: robot relation references missing evidence (${edgeKey})`);
-        if (!fromEntity?.primarySourceIds?.includes(sourceId)) failures.push(`/knowledge-graph.json: robot relationship evidence is not attached to its model (${edgeKey})`);
-      }
-    } else {
-      if (edge.evidenceSourceIds !== undefined) failures.push(`/knowledge-graph.json: non-evidence-backed relation carries evidence (${edgeKey})`);
-      if (edge.sourceEmbodimentLabels !== undefined || edge.evidenceBoundary !== undefined) failures.push(`/knowledge-graph.json: non-robot relation carries robot embodiment qualifiers (${edgeKey})`);
+    } else if (edge.evidenceSourceIds !== undefined || edge.evidenceBoundary !== undefined) {
+      failures.push(`/knowledge-graph.json: non-evidence-backed relation carries evidence qualifiers (${edgeKey})`);
+    }
+    if (sourceLabelRelations.has(edge.relation)) {
+      if (!Array.isArray(edge.sourceLabels) || edge.sourceLabels.length === 0
+        || edge.sourceLabels.some((label) => typeof label !== 'string' || label.trim().length === 0)) failures.push(`/knowledge-graph.json: relation lacks valid source labels (${edgeKey})`);
+    } else if (edge.sourceLabels !== undefined) {
+      failures.push(`/knowledge-graph.json: relation carries unsupported source labels (${edgeKey})`);
+    }
+    if (robotRelations.includes(edge.relation)) {
+      if (!Array.isArray(edge.sourceEmbodimentLabels) || edge.sourceEmbodimentLabels.length === 0
+        || edge.sourceEmbodimentLabels.some((label) => typeof label !== 'string' || label.trim().length === 0)) failures.push(`/knowledge-graph.json: robot relation lacks valid source embodiment labels (${edgeKey})`);
+    } else if (edge.sourceEmbodimentLabels !== undefined) {
+      failures.push(`/knowledge-graph.json: non-robot relation carries robot embodiment labels (${edgeKey})`);
     }
   }
   if (graphEdges.length !== graph.counts?.edges || graphEdgeKeys.size !== graphEdges.length) failures.push('/knowledge-graph.json: edge count is inconsistent');
@@ -277,11 +296,25 @@ if (failures.length === 0) {
     ['evaluatedOn', 'evaluatedOnEdges'],
     ['trainedAcross', 'trainedAcrossEdges'],
     ['demonstratedOn', 'demonstratedOnEdges'],
+    ['sourceAffiliation', 'sourceAffiliationEdges'],
+    ['partOf', 'organizationHierarchyEdges'],
+    ['usesSensor', 'usesSensorEdges'],
+    ['usesRobot', 'usesRobotEdges'],
   ]) {
     if (graphEdges.filter((edge) => edge.relation === relation).length !== graph.counts?.[countField]) failures.push(`/knowledge-graph.json: ${countField} is inconsistent`);
   }
   if (graphEdges.filter((edge) => organizationRelations.includes(edge.relation)).length !== graph.counts?.organizationRelationEdges) failures.push('/knowledge-graph.json: organizationRelationEdges is inconsistent');
   if (graphEdges.filter((edge) => robotRelations.includes(edge.relation)).length !== graph.counts?.robotRelationEdges) failures.push('/knowledge-graph.json: robotRelationEdges is inconsistent');
+  const researchProvenanceEdges = graphEdges.filter((edge) => researchRelations.includes(edge.relation)).length;
+  const datasetUsageEdges = graphEdges.filter((edge) => ['usesSensor', 'usesRobot'].includes(edge.relation)).length;
+  if (researchProvenanceEdges !== graph.counts?.researchProvenanceEdges) failures.push('/knowledge-graph.json: researchProvenanceEdges is inconsistent');
+  if (datasetUsageEdges !== graph.counts?.datasetUsageEdges) failures.push('/knowledge-graph.json: datasetUsageEdges is inconsistent');
+  const classifiedEdgeCount = graph.counts?.supportedByEdges
+    + graph.counts?.benchmarkedByEdges
+    + graph.counts?.organizationRelationEdges
+    + graph.counts?.robotRelationEdges
+    + graph.counts?.researchProvenanceEdges;
+  if (classifiedEdgeCount !== graph.counts?.edges) failures.push('/knowledge-graph.json: edge class totals are inconsistent');
   for (const entity of graph.entities ?? []) {
     for (const sourceId of entity.primarySourceIds ?? []) {
       if (!graphEdgeKeys.has(`${entity.id}|supportedBy|${sourceId}`)) failures.push(`/knowledge-graph.json: missing supportedBy edge for ${entity.id}`);
@@ -369,7 +402,7 @@ if (failures.length === 0) {
   const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
   const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
   if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) failures.push('/feed.xml: invalid RSS envelope');
-  if (rssItems.length !== 46 || rssLinks.length !== 47 || rssGuids.length !== 46) failures.push('/feed.xml: expected 46 complete items');
+  if (rssItems.length !== 47 || rssLinks.length !== 48 || rssGuids.length !== 47) failures.push('/feed.xml: expected 47 complete items');
   if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) failures.push('/feed.xml: non-apex URL found');
 
   const newsSitemap = await readFile(path.join(out, 'news-sitemap.xml'), 'utf8');
@@ -382,7 +415,21 @@ if (failures.length === 0) {
   if (!llmsFull.startsWith('# RoboSkin.ai Full Knowledge')) failures.push('/llms-full.txt: invalid title');
   if (llmsFull.length < 20000) failures.push('/llms-full.txt: generated knowledge snapshot is unexpectedly small');
   if (requiredLlmsRoutes.some((route) => !llmsFull.includes(canonicalFor(route)))) failures.push('/llms-full.txt: missing canonical knowledge routes');
-  if (!llmsFull.includes('- Dataset records: 12') || !llmsFull.includes('- Benchmark records: 9') || !llmsFull.includes('- Sensor records: 13') || !llmsFull.includes('- Robot AI model records: 10') || !llmsFull.includes(`- Verified robot-platform records: ${graph.counts?.robots}`) || !llmsFull.includes(`- Verified model-robot relations: ${graph.counts?.robotRelationEdges}`) || !llmsFull.includes('- Verified organization records: 12') || !llmsFull.includes('- Verified model-organization relations: 20')) {
+  const llmsCountChecks = [
+    ['Dataset records', graph.counts?.datasets],
+    ['Benchmark records', graph.counts?.benchmarks],
+    ['Sensor records', graph.counts?.sensors],
+    ['Robot AI model records', graph.counts?.models],
+    ['Verified organization records', graph.counts?.organizations],
+    ['Verified model-organization relations', graph.counts?.organizationRelationEdges],
+    ['Source-listed research affiliations', graph.counts?.sourceAffiliationEdges],
+    ['Verified organization hierarchy relations', graph.counts?.organizationHierarchyEdges],
+    ['Verified dataset sensor or robot relations', graph.counts?.datasetUsageEdges],
+    ['Verified robot-platform records', graph.counts?.robots],
+    ['Verified model-robot relations', graph.counts?.robotRelationEdges],
+    ['Structured research records', graph.counts?.researchIndex],
+  ];
+  if (llmsCountChecks.some(([label, count]) => !llmsFull.includes(`- ${label}: ${count}`))) {
     failures.push('/llms-full.txt: structured directory counts are incomplete');
   }
   if (!llmsFull.includes(canonicalFor('/knowledge-graph.json'))) failures.push('/llms-full.txt: missing knowledge graph discovery URL');
@@ -393,4 +440,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, ${verifiedGraphEntityCount} graph entities, full LLM knowledge, ${verifiedResearchIndexCount} research-index records, and ${verifiedRssItemCount} RSS items`);
+console.log(`Verified ${verifiedSitemapUrlCount} sitemap URLs, ${protectedUrls.length} protected URL contract entries including ${Object.keys(redirects).length} redirect sources, ${noindexUrls.length} noindex URLs, ${verifiedGraphEntityCount} graph entities, full LLM knowledge, ${verifiedResearchIndexCount} research-index records, and ${verifiedRssItemCount} RSS items`);

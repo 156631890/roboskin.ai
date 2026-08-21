@@ -1,31 +1,50 @@
-import { canonicalUrl } from '@/lib/seo';
+import { researchOrganizationPartOfRelations } from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import {
   researchOrganizationEntries,
   robotAiOrganizationRelations,
   type ResearchOrganizationEntry,
 } from '@/lib/research-organizations';
+import { canonicalUrl } from '@/lib/seo';
 
 export function organizationCanonicalId(organization: Pick<ResearchOrganizationEntry, 'id'>) {
   return `${canonicalUrl('/organizations')}#organization-${organization.id}`;
+}
+
+function organizationReference(organizationId: string) {
+  const organization = researchOrganizationEntries.find((entry) => entry.id === organizationId);
+  if (!organization) throw new Error(`Organization schema references missing organization ${organizationId}.`);
+
+  return {
+    '@id': organizationCanonicalId(organization),
+  };
 }
 
 export function buildResearchOrganizationDirectoryJsonLd() {
   const directoryUrl = canonicalUrl('/organizations');
   const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
 
-  const organizationNodes = researchOrganizationEntries.map((organization) => ({
-    '@type': organization.kind === 'university' ? 'CollegeOrUniversity' : 'Organization',
-    '@id': organizationCanonicalId(organization),
-    identifier: organization.id,
-    name: organization.name,
-    ...(organization.aliases.length > 0 ? { alternateName: organization.aliases } : {}),
-    url: organization.officialUrl,
-    sameAs: [organization.officialUrl],
-    mainEntityOfPage: {
-      '@id': `${directoryUrl}#webpage`,
-    },
-  }));
+  const organizationNodes = researchOrganizationEntries.map((organization) => {
+    const parentOrganizationIds = researchOrganizationPartOfRelations
+      .filter((relation) => relation.fromId === organization.id)
+      .map((relation) => relation.toId);
+
+    return {
+      '@type': organization.kind === 'university' ? 'CollegeOrUniversity' : 'Organization',
+      '@id': organizationCanonicalId(organization),
+      identifier: organization.id,
+      name: organization.name,
+      ...(organization.aliases.length > 0 ? { alternateName: organization.aliases } : {}),
+      url: organization.officialUrl,
+      sameAs: [organization.officialUrl],
+      ...(parentOrganizationIds.length > 0 ? {
+        parentOrganization: parentOrganizationIds.map(organizationReference),
+      } : {}),
+      mainEntityOfPage: {
+        '@id': `${directoryUrl}#webpage`,
+      },
+    };
+  });
 
   const connectedModelIds = [...new Set(robotAiOrganizationRelations.map((relation) => relation.modelId))];
   const modelNodes = connectedModelIds.map((modelId) => {
@@ -35,12 +54,10 @@ export function buildResearchOrganizationDirectoryJsonLd() {
     const relations = robotAiOrganizationRelations.filter((relation) => relation.modelId === modelId);
     const creatorOrganizations = relations
       .filter((relation) => relation.relation !== 'contributedBy')
-      .map((relation) => researchOrganizationEntries.find((entry) => entry.id === relation.organizationId))
-      .filter((entry): entry is ResearchOrganizationEntry => Boolean(entry));
+      .map((relation) => organizationReference(relation.organizationId));
     const contributorOrganizations = relations
       .filter((relation) => relation.relation === 'contributedBy')
-      .map((relation) => researchOrganizationEntries.find((entry) => entry.id === relation.organizationId))
-      .filter((entry): entry is ResearchOrganizationEntry => Boolean(entry));
+      .map((relation) => organizationReference(relation.organizationId));
 
     return {
       '@type': 'CreativeWork',
@@ -48,16 +65,8 @@ export function buildResearchOrganizationDirectoryJsonLd() {
       identifier: model.id,
       name: model.name,
       url: model.projectUrl,
-      ...(creatorOrganizations.length > 0 ? {
-        creator: creatorOrganizations.map((organization) => ({
-          '@id': organizationCanonicalId(organization),
-        })),
-      } : {}),
-      ...(contributorOrganizations.length > 0 ? {
-        contributor: contributorOrganizations.map((organization) => ({
-          '@id': organizationCanonicalId(organization),
-        })),
-      } : {}),
+      ...(creatorOrganizations.length > 0 ? { creator: creatorOrganizations } : {}),
+      ...(contributorOrganizations.length > 0 ? { contributor: contributorOrganizations } : {}),
       citation: [...new Set(relations.flatMap((relation) => relation.evidenceUrls))],
     };
   });
@@ -68,9 +77,9 @@ export function buildResearchOrganizationDirectoryJsonLd() {
       {
         '@type': 'ItemList',
         '@id': `${directoryUrl}#organization-directory`,
-        name: 'RoboSkin.ai Robot AI Research Organization Directory',
+        name: 'RoboSkin.ai Robotics Research Organization Directory',
         description:
-          'A source-reviewed directory of universities, research labs, and companies explicitly connected to robot AI models by primary papers, official project pages, or provider releases.',
+          'A partial, source-reviewed provenance directory connecting official organization identities to papers, datasets, benchmarks, sensors, and robot AI models without inferring ownership or endorsement.',
         url: directoryUrl,
         numberOfItems: researchOrganizationEntries.length,
         itemListOrder: 'https://schema.org/ItemListUnordered',

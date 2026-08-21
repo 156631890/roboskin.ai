@@ -148,7 +148,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
     description:
       'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
-    updated: '2026-08-15',
+    updated: '2026-08-22',
     priority: 0.82,
     changeFrequency: 'monthly',
     index: true,
@@ -156,9 +156,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/organizations': {
     path: '/organizations',
-    title: 'Robot AI Research Organizations and Labs',
+    title: 'Tactile AI & Robotics Research Organizations',
     description:
-      'Browse source-verified universities, research labs, and companies connected to robot AI models, with official pages, model links, and evidence boundaries.',
+      'Browse source-verified universities, labs, and companies connected to tactile papers, datasets, benchmarks, sensors, and robot AI models with evidence boundaries.',
     updated: '2026-08-22',
     priority: 0.78,
     changeFrequency: 'monthly',

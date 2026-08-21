@@ -23,6 +23,10 @@ test('llms-full generator uses the shared knowledge sources', () => {
     'robotAiModelEntries',
     'researchOrganizationEntries',
     'robotAiOrganizationRelations',
+    'researchEntityRelations',
+    'researchSourceAffiliationRelations',
+    'researchOrganizationPartOfRelations',
+    'researchDatasetUsageRelations',
     'researchRobotEntries',
     'robotAiRobotRelations',
     'researchIndexEntries',
@@ -41,6 +45,10 @@ test('llms-full generator uses the shared knowledge sources', () => {
   assert.match(generatorSource, /Verified robot-platform records/);
   assert.match(generatorSource, /Verified model-robot relations/);
   assert.match(generatorSource, /## Verified Robot Platforms and Embodiments/);
+  assert.match(generatorSource, /## Evidence-Backed Research Provenance Relations/);
+  assert.match(generatorSource, /Source-listed research affiliations/);
+  assert.match(generatorSource, /Verified organization hierarchy relations/);
+  assert.match(generatorSource, /Verified dataset sensor or robot relations/);
   assert.match(generatorSource, /evaluatedOn requires explicit experiments/);
   assert.match(generatorSource, /trainedAcross requires explicit training-mixture evidence/);
   assert.match(generatorSource, /demonstratedOn records a source-backed demonstration/);
@@ -53,11 +61,12 @@ test('curated llms file and homepage head expose machine-readable discovery', ()
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/llms-full\.txt/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/research-index\.json/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/knowledge-graph\.json/);
-  assert.match(llmsSource, /90 source-reviewed knowledge entities/);
-  assert.match(llmsSource, /22 papers, 1 documentation record, 12 datasets, 9 benchmarks, 13 sensors, 10 robot AI models, 12 verified organizations, and 11 normalized robot-platform records/);
-  assert.match(llmsSource, /125 deduplicated primary and official source records/);
+  assert.match(llmsSource, /104 source-reviewed knowledge entities/);
+  assert.match(llmsSource, /23 papers, 1 documentation record, 13 datasets, 10 benchmarks, 13 sensors, 10 robot AI models, 23 verified organizations, and 11 normalized robot-platform records/);
+  assert.match(llmsSource, /145 deduplicated primary and official source records/);
   assert.match(llmsSource, /20 evidence-backed model-organization relations/);
   assert.match(llmsSource, /22 evidence-backed model-robot relations/);
+  assert.match(llmsSource, /44 research-provenance relations/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/organizations/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/robots/);
   assert.match(llmsSource, /863,040 EIT electrode configurations from 1,726,080 amplitude-and-phase channels/);

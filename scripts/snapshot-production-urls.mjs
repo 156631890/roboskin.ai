@@ -13,9 +13,8 @@ const xml = await response.text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map((match) => match[1].trim());
 
-if (urls.length !== 104) {
-  throw new Error(`Expected the audited 104 production sitemap URLs, received ${urls.length}`);
-}
+if (urls.length === 0) throw new Error('Production sitemap did not contain any URLs');
+if (new Set(urls).size !== urls.length) throw new Error('Production sitemap contains duplicate URLs');
 
 for (const url of urls) {
   let origin;
@@ -36,6 +35,9 @@ urls.sort();
 const protectedRedirects = JSON.parse(
   await readFile(new URL('../config/protected-redirects.json', import.meta.url), 'utf8'),
 );
+const existingProtectedUrls = JSON.parse(
+  await readFile(new URL('../config/protected-urls.json', import.meta.url), 'utf8'),
+);
 const protectedUrls = new Set(
   urls.filter((url) => new URL(url).pathname !== '/research-index'),
 );
@@ -44,8 +46,9 @@ for (const redirectSource of Object.keys(protectedRedirects)) {
 }
 const completeProtectedUrls = [...protectedUrls].sort();
 
-if (completeProtectedUrls.length !== 108) {
-  throw new Error(`Expected 108 protected URLs after preserving redirects, received ${completeProtectedUrls.length}`);
+const missingContractUrls = existingProtectedUrls.filter((url) => !protectedUrls.has(url));
+if (missingContractUrls.length > 0) {
+  throw new Error(`Production snapshot would remove protected URLs: ${missingContractUrls.join(', ')}`);
 }
 
 await mkdir(new URL('../config/', import.meta.url), { recursive: true });
@@ -55,4 +58,4 @@ await writeFile(
   'utf8',
 );
 
-console.log(`Protected ${completeProtectedUrls.length} production and redirect URLs from ${sitemapUrl}`);
+console.log(`Protected ${completeProtectedUrls.length} production and redirect URLs from ${urls.length} sitemap entries at ${sitemapUrl}`);

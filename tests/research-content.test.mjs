@@ -146,3 +146,46 @@ test('the Cambridge single-material skin brief preserves the paper configuration
   assert.match(brief, /does not establish calibrated force magnitude/);
   assert.doesNotMatch(brief, /\bpressure\b/i);
 });
+
+test('the SoftVTBench brief separates paper scale, conflicting release documentation, simulation, and metric scope', async () => {
+  const blog = await read('src/lib/blog-data.ts');
+  const id = 'softvtbench-deformation-aware-visuo-tactile-dataset-2026';
+  const start = blog.indexOf(`id: '${id}'`);
+  const end = blog.indexOf("id: 'hitac-wam-hierarchical-tactile-world-action-model-2026'", start);
+  assert.ok(start >= 0 && end > start);
+  const brief = blog.slice(start, end);
+
+  for (const signal of [
+    '4,000 expert demonstrations across 40 tasks and more than 50 assets',
+    'Hugging Face dataset card, revision fd2793a',
+    '4,000 demonstrations total',
+    '1,628 demonstrations and 33 assets',
+    '500 Object-Soft, 500 Spatial-Soft, 421 Object-Rigid, and 207 Spatial-Rigid demonstrations',
+    'do not present it as the current download count',
+    'RoboSkin did not independently download and hash every hosted file',
+    'Every trajectory is generated in Isaac Sim and Isaac Lab',
+    'not a dataset collected with a physical Franka robot or physical GelSight sensors',
+    'DSR is a paper-defined benchmark metric, not an industry standard',
+    'does not claim validated sim-to-real transfer',
+    'https://arxiv.org/abs/2608.18701',
+    'https://softvtbench.github.io/',
+    'https://github.com/TuojingAI/SoftVTBench',
+    'https://huggingface.co/datasets/Arthur12137/SoftVTBench',
+    'fd2793a19310b5ba4ac6518f9a17ff43d56f6651',
+    '58056111f01e05bf1a4ae1dee75db4e3d9e7c5be',
+  ]) {
+    assert.match(brief, new RegExp(signal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+  }
+
+  for (const route of [
+    '/datasets',
+    '/benchmarks',
+    '/sensors#sensor-gelsight-mini',
+    '/robots#robot-franka-emika-panda',
+    '/tactile-foundation-models',
+    '/visuo-tactile',
+  ]) {
+    assert.match(brief, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  assert.doesNotMatch(brief, /current public release (?:contains|documents|lists) 1,628/i);
+});

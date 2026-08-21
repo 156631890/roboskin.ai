@@ -3,6 +3,13 @@ import { seoTopicPages } from '@/content/seo-topic-pages';
 import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
+import {
+  researchDatasetUsageRelations,
+  researchEntityRelations,
+  researchOrganizationPartOfRelations,
+  researchSourceAffiliationRelations,
+  type ResearchEntityRelation,
+} from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { researchOrganizationEntries, robotAiOrganizationRelations } from '@/lib/research-organizations';
 import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robots';
@@ -38,9 +45,42 @@ function latestReviewedDate() {
     ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
     ...researchOrganizationEntries.map((entry) => entry.sourceReviewed),
     ...robotAiOrganizationRelations.map((entry) => entry.sourceReviewed),
+    ...researchEntityRelations.map((entry) => entry.sourceReviewed),
     ...researchRobotEntries.map((entry) => entry.sourceReviewed),
     ...robotAiRobotRelations.map((entry) => entry.sourceReviewed),
   ].sort().at(-1) ?? researchIndexUpdatedAt;
+}
+
+function researchRelationEntity(
+  type: ResearchEntityRelation['fromType'] | ResearchEntityRelation['toType'],
+  id: string,
+) {
+  switch (type) {
+    case 'paper': {
+      const entry = researchIndexEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.sourceTitle, url: entry.url } : undefined;
+    }
+    case 'dataset': {
+      const entry = tactileDatasetEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/datasets#dataset-${entry.id}`) } : undefined;
+    }
+    case 'benchmark': {
+      const entry = tactileBenchmarkEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/benchmarks#benchmark-${entry.id}`) } : undefined;
+    }
+    case 'sensor': {
+      const entry = tactileSensorEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/sensors#sensor-${entry.id}`) } : undefined;
+    }
+    case 'organization': {
+      const entry = researchOrganizationEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/organizations#organization-${entry.id}`) } : undefined;
+    }
+    case 'robot': {
+      const entry = researchRobotEntries.find((candidate) => candidate.id === id);
+      return entry ? { name: entry.name, url: canonicalUrl(`/robots#robot-${entry.id}`) } : undefined;
+    }
+  }
 }
 
 export function buildLlmsFullText() {
@@ -65,6 +105,9 @@ export function buildLlmsFullText() {
     `- Robot AI model records: ${robotAiModelEntries.length}`,
     `- Verified organization records: ${researchOrganizationEntries.length}`,
     `- Verified model-organization relations: ${robotAiOrganizationRelations.length}`,
+    `- Source-listed research affiliations: ${researchSourceAffiliationRelations.length}`,
+    `- Verified organization hierarchy relations: ${researchOrganizationPartOfRelations.length}`,
+    `- Verified dataset sensor or robot relations: ${researchDatasetUsageRelations.length}`,
     `- Verified robot-platform records: ${researchRobotEntries.length}`,
     `- Verified model-robot relations: ${robotAiRobotRelations.length}`,
     `- Structured research records: ${researchIndexEntries.length}`,
@@ -78,6 +121,7 @@ export function buildLlmsFullText() {
     '- Prefer the primary source URL attached to each technical record. Use the RoboSkin.ai canonical page for the site’s analysis, taxonomy, and comparison context.',
     '- Do not infer product availability, certifications, customers, benchmark values, or company claims unless the relevant public page states them explicitly.',
     '- A source-listed organization affiliation does not establish model ownership, funding, endorsement, current employment, or affiliation with RoboSkin.ai. Preserve the developed, co-developed, and contributor relationship labels.',
+    '- Research provenance relations are intentionally narrow. sourceAffiliation preserves paper wording, partOf requires direct organization evidence, usesSensor records a named collection setup, and usesRobot may represent simulation only when its boundary says so.',
     '- A robot-platform relation has a narrow meaning: evaluatedOn requires explicit experiments, trainedAcross requires explicit training-mixture evidence, and demonstratedOn records a source-backed demonstration without upgrading it to a quantitative evaluation.',
     '- Do not infer an exact robot product from a family label. Training coverage does not prove deployment compatibility, a fine-tuned policy is not a zero-shot base-model result, and a simulation score is not a real-robot score.',
     '- No blanket content-reuse license is granted by this file. Verify the original source license and the RoboSkin.ai site terms before reuse.',
@@ -278,6 +322,32 @@ export function buildLlmsFullText() {
       );
     }
     lines.push(`- Source reviewed: ${robot.sourceReviewed}`, '');
+  }
+
+  lines.push(
+    '## Evidence-Backed Research Provenance Relations',
+    '',
+    'These relations connect existing records without upgrading affiliation into ownership or simulation into hardware evidence. Each edge retains source wording, relationship evidence, a review date, and an editorial boundary.',
+    '',
+  );
+  for (const relation of researchEntityRelations) {
+    const from = researchRelationEntity(relation.fromType, relation.fromId);
+    const to = researchRelationEntity(relation.toType, relation.toId);
+    if (!from || !to) {
+      throw new Error(`LLM provenance relation references a missing entity: ${relation.fromType}:${relation.fromId} -> ${relation.toType}:${relation.toId}.`);
+    }
+    lines.push(
+      `### ${from.name} -> ${to.name}`,
+      '',
+      `- Relation: ${relation.relation}`,
+      `- Source entity: ${markdownLink(from.name, from.url)}`,
+      `- Target entity: ${markdownLink(to.name, to.url)}`,
+      `- Source wording: ${list(relation.sourceLabels)}`,
+      `- Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
+      `- Evidence boundary: ${compact(relation.evidenceBoundary)}`,
+      `- Source reviewed: ${relation.sourceReviewed}`,
+      '',
+    );
   }
 
   lines.push(

@@ -23,6 +23,119 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
+    title: 'SoftVTBench separates deformable-task completion from contact quality',
+    seoTitle: 'SoftVTBench Visuo-Tactile Dataset and Deformation Benchmark',
+    seoDescription:
+      'SoftVTBench reports 4,000 simulated demonstrations across 40 tasks. Review its DSR metric, simulated Franka and GelSight scope, and conflicting release documentation.',
+    excerpt:
+      'SoftVTBench pairs simulated visual and tactile observations with evaluator-only FEM state; its Hugging Face card and GitHub README currently disagree about the hosted release scale.',
+    content: `# SoftVTBench separates deformable-task completion from contact quality
+
+**Evidence review - August 2026**
+
+SoftVTBench is an August 19, 2026 arXiv preprint, dataset, and closed-loop benchmark for deformable-object manipulation. The paper asks a narrower question than whether a robot reaches a goal: did the policy complete the task without exceeding an object-specific deformation tolerance?
+
+The latest paper reports 4,000 expert demonstrations across 40 tasks and more than 50 assets. Every trajectory is generated in Isaac Sim and Isaac Lab. The Franka Panda arm, GelSight Mini tactile observations, deformable objects, cameras, contact dynamics, and evaluator states are simulated; this is not a dataset collected with a physical Franka robot or physical GelSight sensors.
+
+## Paper scale and official release documentation
+
+The latest paper and the current Hugging Face dataset card both describe 4,000 demonstrations. However, the linked GitHub README still describes an earlier 1,628-demonstration state. These first-party documents are out of sync, so the source revision must travel with any release-scale claim.
+
+| First-party source | Scale it currently describes | Safe interpretation |
+| --- | --- | --- |
+| Latest arXiv paper, 2608.18701 | 4,000 demonstrations, 40 tasks, more than 50 assets | Full scale reported by the authors in the latest paper. |
+| Hugging Face dataset card, revision fd2793a | Four subsets, each with 10 tasks and 100 successful demonstrations: 4,000 demonstrations total | Current hosted-data documentation reviewed on August 22; RoboSkin did not independently download and hash every hosted file. |
+| GitHub README, last changed July 22 | 1,628 demonstrations and 33 assets, split into 500 Object-Soft, 500 Spatial-Soft, 421 Object-Rigid, and 207 Spatial-Rigid demonstrations | An older release description that conflicts with the later Hugging Face card and latest paper; do not present it as the current download count. |
+
+The later Hugging Face card is the basis for the currently documented hosted scale, while the GitHub discrepancy remains unresolved. Researchers should pin the hosted revision and inspect its manifests, file inventory, and per-component terms before training or comparing results.
+
+## What each simulated episode contains
+
+SoftVTBench records policy-visible observations at 20 Hz and keeps a separate physical state for evaluation.
+
+| Data layer | Recorded signal | Visibility in the benchmark |
+| --- | --- | --- |
+| Vision | Third-person and wrist RGB | Available to the policy according to the selected input condition. |
+| Simulated touch | Bilateral GelSight Mini-style tactile RGB and marker motion | Available to visuo-tactile policies. |
+| Robot state | Proprioception and end-effector state | Available to the policy. |
+| Instruction and control | Language plus continuous and binary gripper-action encodings | Used for task conditioning and matched control ablations. |
+| Deformation evidence | Finite-element-method state and normalized deformation trace | Hidden from the policy and read only by the evaluator. |
+
+The simulator configuration uses a Franka arm with a Panda parallel-jaw gripper. GelSight Mini observations are rendered through the TacEx pipeline using Taxim-style optical rendering and FOTS marker motion. The paper explicitly states that it does not compare SoftVTBench outputs with a physical GelSight sensor and does not claim validated sim-to-real transfer for its assets or rendering parameters.
+
+Use the [GelSight Mini sensor record](/sensors#sensor-gelsight-mini) and [Franka Emika Panda robot record](/robots#robot-franka-emika-panda) as hardware references, not as evidence that those physical devices collected this dataset.
+
+## What Deformation-aware Success Rate measures
+
+The paper defines two connected outcomes:
+
+- Task Success Rate records whether a rollout completes the instructed task.
+- Deformation-aware Success Rate, or DSR, also requires peak normalized deformation to remain within a fixed object-specific tolerance.
+
+Before policy training, scripted probing establishes the tolerance for each deformable object. The evaluator then reads policy-hidden FEM state during a rollout. A trajectory receives DSR credit only if it completes the task and stays inside that calibrated deformation zone.
+
+DSR is a paper-defined benchmark metric, not an industry standard, robot-safety certification, physical damage threshold, or universal definition of gentle handling. Its meaning depends on SoftVTBench's simulated objects, FEM model, calibration procedure, percentile choice, and success predicates.
+
+## What the reported results show
+
+The paper evaluates Diffusion Policy, π0.5, and FastWAM with paired vision-only and visuo-tactile inputs. Across all 12 in-distribution deformable-object configurations, some task-completing rollouts exceeded the deformation tolerance. The authors report that these hidden violations represented 0.7% to 24% of successful rollouts, depending on the configuration.
+
+Under the paper's distribution-shift protocol, visuo-tactile variants achieved higher task success in all six policy-suite comparisons and higher DSR in five of six. In-distribution tactile effects were mixed. The authors therefore do not claim that adding touch automatically improves every policy; their results show that sensing, control granularity, policy family, and distribution shift interact.
+
+These are author-reported simulated results. They are not an independent leaderboard and should not be transferred to real deformable objects without new calibration, physical sensing, and closed-loop hardware experiments.
+
+## Why SoftVTBench matters for tactile AI
+
+Many manipulation datasets expose observations and actions but judge only the terminal outcome. SoftVTBench adds evaluator-only physical state so a rollout can reach the target and still fail an interaction-quality criterion. That separation is useful for the [tactile robotics dataset directory](/datasets) and [tactile benchmark database](/benchmarks): dataset scale, task completion, contact quality, and real-world transfer are different evidence layers.
+
+It also provides a focused test for [visuo-tactile learning](/visuo-tactile). Vision observes scene layout and object identity, simulated touch exposes local contact evolution, and hidden FEM state evaluates deformation without leaking that state to the policy. The [tactile foundation model guide](/tactile-foundation-models) explains why evaluations across three policy families do not turn SoftVTBench itself into a foundation model.
+
+## Availability and license boundary
+
+The official GitHub repository provides training and closed-loop evaluation code and links the externally hosted dataset. The linked Hugging Face card currently labels the dataset Apache-2.0. The repository also warns that dataset components, simulator assets, upstream Franka and GelSight runtime assets, and third-party dependencies may carry different terms.
+
+Treat Apache-2.0 as the label shown on the current SoftVTBench dataset card, not as a blanket relicensing of every upstream asset or dependency. Record the exact dataset revision and preserve per-file notices before redistribution.
+
+## Evaluation checklist
+
+- Report the exact paper and hosted-data revisions, and disclose the conflicting GitHub release description.
+- State that the robot, tactile sensors, objects, contacts, and FEM ground truth are simulated.
+- Keep Task Success Rate, DSR, peak deformation, and drop outcomes separate.
+- Document the object-specific calibration and percentile used to set deformation tolerances.
+- Compare vision-only and visuo-tactile policies under matched gripper-control encodings.
+- Split complete tasks and assets before extracting overlapping temporal windows.
+- Test physical sensors, real objects, material shift, calibration drift, and sim-to-real transfer before making deployment claims.
+
+## Related RoboSkin resources
+
+- [Tactile robotics datasets](/datasets)
+- [Tactile robotics benchmarks](/benchmarks)
+- [GelSight Mini sensor record](/sensors#sensor-gelsight-mini)
+- [Franka Emika Panda robot record](/robots#robot-franka-emika-panda)
+- [Tactile foundation models](/tactile-foundation-models)
+- [Visuo-tactile robotics](/visuo-tactile)
+
+## Primary sources
+
+- [arXiv: SoftVTBench - A Deformation-Aware Visuo-Tactile Dataset and Benchmark for Deformable-Object Manipulation](https://arxiv.org/abs/2608.18701)
+- [Official SoftVTBench project page](https://softvtbench.github.io/)
+- [Official SoftVTBench GitHub repository](https://github.com/TuojingAI/SoftVTBench)
+- [SoftVTBench dataset card linked by the official repository](https://huggingface.co/datasets/Arthur12137/SoftVTBench)
+- [Pinned Hugging Face dataset-card revision fd2793a](https://huggingface.co/datasets/Arthur12137/SoftVTBench/blob/fd2793a19310b5ba4ac6518f9a17ff43d56f6651/README.md)
+- [GitHub README commit retaining the earlier release description](https://github.com/TuojingAI/SoftVTBench/commit/58056111f01e05bf1a4ae1dee75db4e3d9e7c5be)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '8 min read',
+    category: 'Tactile benchmarks',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'SoftVTBench deformation-aware visuo-tactile dataset and benchmark preprint',
+    sourceUrl: 'https://arxiv.org/abs/2608.18701',
+    technicalFocus: ['SoftVTBench', 'visuo-tactile dataset', 'deformable-object manipulation', 'tactile benchmark', 'deformation-aware evaluation'],
+  },
+  {
     id: 'hitac-wam-hierarchical-tactile-world-action-model-2026',
     title: 'HiTac-WAM forecasts contact, deformation, and slip before robot action',
     seoTitle: 'HiTac-WAM Hierarchical Tactile World Action Model',

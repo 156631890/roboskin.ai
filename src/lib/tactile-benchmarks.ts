@@ -20,6 +20,25 @@ export type TactileBenchmarkEntry = {
 
 export const tactileBenchmarkEntries: TactileBenchmarkEntry[] = [
   {
+    id: 'softvtbench',
+    name: 'SoftVTBench',
+    year: 2026,
+    benchmarkType: 'Simulated deformation-aware visuo-tactile manipulation benchmark',
+    institutions: ['Tuojing Intelligence', 'Tsinghua University', "King's College London", 'Southeast University', 'Stevens Institute of Technology', 'Hong Kong University of Science and Technology (Guangzhou)', 'University of Manchester', 'Simple AI', 'Imperial College London', 'Carnegie Mellon University', 'Zhejiang University', 'Beihang University', 'University of Hong Kong'],
+    tasks: ['Object-Soft manipulation', 'Spatial-Soft manipulation', 'Object-Rigid matched control', 'Spatial-Rigid matched control', 'In-distribution evaluation', 'Out-of-distribution evaluation'],
+    modalities: ['Simulated multi-view RGB', 'Simulated bilateral tactile RGB', 'Simulated marker motion', 'Proprioception', 'Language', 'Robot actions', 'Evaluator-only FEM deformation state'],
+    sensors: ['Simulated GelSight Mini profiles through TacEx, Taxim, and FOTS'],
+    robots: ['Simulated Franka arm with Panda parallel-jaw gripper'],
+    metrics: ['Task Success Rate (TSR)', 'Deformation-aware Success Rate (DSR)', 'Peak normalized deformation', 'TSR-DSR gap'],
+    protocol: 'Uses policy-independent, object-specific probing to fix deformation tolerances before training; DSR credits a rollout only when it completes the task and remains within the calibrated FEM deformation tolerance.',
+    access: 'The official project and GitHub repository link public training and evaluation code plus a Hugging Face dataset mirror. Hugging Face dataset-card revision fd2793a documents 4,000 hosted demonstrations, but the older GitHub README still lists 1,628 demonstrations and 33 assets; users should pin a revision because the first-party release documents disagree.',
+    limitation: 'All robot, tactile, object, and FEM signals are simulated; no SoftVTBench-specific physical-sensor or sim-to-real validation is reported. DSR is defined by this paper and is not an industry standard, safety certification, or universal damage metric.',
+    paperUrl: 'https://arxiv.org/abs/2608.18701',
+    projectUrl: 'https://softvtbench.github.io/',
+    codeUrl: 'https://github.com/TuojingAI/SoftVTBench',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'ht-bench',
     name: 'HT-Bench',
     year: 2026,
