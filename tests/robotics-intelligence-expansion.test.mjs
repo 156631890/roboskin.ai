@@ -82,6 +82,14 @@ test('new paper entities remain primary-source bounded and enter the structured 
   assert.match(posts, /will be open-sourced soon/i);
   assert.match(posts, /preprint/i);
   assert.match(index, /does not establish current download access or a dataset license/);
+  assert.match(posts, /\| EgoScale \| 35% \|/);
+  assert.match(posts, /\| T-Rex \| 65% \|/);
+  assert.match(posts, /\+30 percentage points/);
+  assert.match(posts, /16 rollouts per task/);
+  assert.match(posts, /https:\/\/tactile-reactive-dexterous\.github\.io\//);
+  assert.doesNotMatch(posts, /https:\/\/tactile-rex\.github\.io\//);
+  assert.doesNotMatch(posts, /does not prove a 30-percentage-point improvement/);
+  assert.match(index, /absolute gap of 30 percentage points across 12 tasks with 16 rollouts per task/);
 });
 
 test('official updates distinguish provider reports, proposals, and standards scope', async () => {

@@ -13,7 +13,7 @@ test('CSV and JSON routes serialize the shared research index', async () => {
   ]);
 
   assert.match(index, /serializeResearchIndexCsv/);
-  assert.match(index, /researchIndexUpdatedAt = '2026-08-21'/);
+  assert.match(index, /researchIndexUpdatedAt = '2026-08-22'/);
   assert.match(csvRoute, /text\/csv/);
   assert.match(csvRoute, /researchIndexEntries/);
   assert.match(jsonRoute, /application\/json/);

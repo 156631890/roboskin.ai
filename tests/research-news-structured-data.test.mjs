@@ -115,7 +115,7 @@ test('GSC-visible research pages use search-intent titles and snippets', async (
     ],
     [
       "title: 'Single-material soft robotic skin for multimodal e-skin sensing'",
-      "Single-material soft robotic skin connects e-skin, pressure, strain, temperature, damage sensing, and robot-ready tactile coverage across curved surfaces.",
+      "A peer-reviewed single-material robotic skin uses wrist-mounted EIT electrodes and data-driven channel selection to interpret touch, strain, heat, damage, environment, and proprioception across a soft hand.",
     ],
     [
       "title: 'ROS 2 tactile sensor pipeline for robot skin data replay'",
@@ -143,6 +143,44 @@ test('GSC-visible research pages use search-intent titles and snippets', async (
     assert.match(blogData, new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
     assert.match(blogData, new RegExp(excerpt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
+});
+
+test('the GIST humanoid visual-tactile-action brief preserves the v2 source boundaries', async () => {
+  const [blogData, researchIndex, llms] = await Promise.all([
+    read('src/lib/blog-data.ts'),
+    read('src/lib/research-index.ts'),
+    read('public/llms.txt'),
+  ]);
+
+  const id = 'humanoid-visual-tactile-action-dataset-2025';
+  const start = blogData.indexOf(`id: '${id}'`);
+  assert.notEqual(start, -1);
+  const next = blogData.indexOf("    id: '", start + id.length + 10);
+  const record = blogData.slice(start, next === -1 ? blogData.length : next);
+
+  for (const signal of [
+    '101.9K visual-tactile-action samples',
+    'three experimenters',
+    '1,062 tactile sensing units per hand, 2,124 total',
+    'Head-mounted camera at 848 × 480',
+    'Intel RealSense D435 positioned about 1 m',
+    'Piezoresistive tactile carpet',
+    'approximately 77-80 episodes',
+    '20-30 seconds',
+    'ACT-Dense and ACT-Sparse',
+    '42-location sparse representation',
+    'does not identify the humanoid robot model',
+    'CC BY 4.0 notice on arXiv applies to the article',
+  ]) {
+    assert.match(record, new RegExp(signal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+  }
+
+  assert.match(record, /Towel Strong[\s\S]*Towel Weak[\s\S]*Sponge Strong[\s\S]*Sponge Weak/);
+  assert.match(record, /no official dataset download, code repository, dedicated project page, or dataset license/i);
+  assert.doesNotMatch(record, /Unitree G1|RoboTacDex|2606\.31836/);
+
+  assert.match(researchIndex, /id: 'humanoid-visual-tactile-action-dataset-2025'[\s\S]*101\.9K visual-tactile-action samples[\s\S]*reviewedAt: '2026-08-22'/);
+  assert.match(llms, /research\/humanoid-visual-tactile-action-dataset-2025/);
 });
 
 test('answer-engine and monitoring files expose updated GSC-visible research and news routes', async () => {

@@ -34,5 +34,10 @@ test('llms-full generator uses the shared knowledge sources', () => {
 test('curated llms file and homepage head expose machine-readable discovery', () => {
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/llms-full\.txt/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/research-index\.json/);
+  assert.match(llmsSource, /863,040 EIT electrode configurations from 1,726,080 amplitude-and-phase channels/);
+  assert.doesNotMatch(
+    llmsSource,
+    /single-material-soft-robotic-skin-2025\):[^\n]*\bpressure\b/i,
+  );
   assert.match(layoutSource, /rel="describedby" type="text\/markdown" href="\/llms\.txt"/);
 });

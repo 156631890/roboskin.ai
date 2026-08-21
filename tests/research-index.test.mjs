@@ -50,6 +50,9 @@ test('the research index edition is normalized and source-backed', async () => {
   assert.match(index, /force-related 3D tactile latent/);
   assert.match(index, /LPIPS is not a direct force, slip, safety, or transfer metric/);
   assert.match(index, /id: 'event-based-opto-tactile-2025'[\s\S]*?year: 2026/);
+  assert.match(index, /id: 'single-material-soft-robotic-skin-2025'[\s\S]*?publisher: 'Science Robotics'[\s\S]*?evidence: 'peer-reviewed'/);
+  assert.match(index, /863,040 electrode configurations yielding 1,726,080 amplitude-and-phase information channels/);
+  assert.match(index, /33 kHz maximum applies to one electrode configuration[\s\S]*?0\.02 Hz/);
   assert.doesNotMatch(index, /Cross-sensor tactile learning model|Transferable camera-based force estimation|Vision-based tactile sensor/);
 });
 

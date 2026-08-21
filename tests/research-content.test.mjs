@@ -127,3 +127,22 @@ test('the audited GSC priority pages own one query-aligned treatment', async () 
   assert.match(research, /Browse the tactile research index/);
   assert.match(seoTopics, /Open the structured research index/);
 });
+
+test('the Cambridge single-material skin brief preserves the paper configuration, channel, and rate boundaries', async () => {
+  const blog = await read('src/lib/blog-data.ts');
+  const start = blog.indexOf("id: 'single-material-soft-robotic-skin-2025'");
+  const end = blog.indexOf("id: 'full-hand-tactile-sensing-2025'", start);
+  assert.ok(start >= 0 && end > start);
+  const brief = blog.slice(start, end);
+
+  assert.match(brief, /https:\/\/doi\.org\/10\.1126\/scirobotics\.adq2303/);
+  assert.match(brief, /https:\/\/www\.repository\.cam\.ac\.uk\/items\/c0f9486d-ef1a-42c8-bd8a-27ca9e2a9828/);
+  assert.match(brief, /at least six active stimulus types/);
+  assert.match(brief, /Electrode configurations \| 863,040/);
+  assert.match(brief, /Amplitude-and-phase information channels \| 1,726,080/);
+  assert.match(brief, /all 1,726,080 information channels is reported at a 0\.02 Hz frame rate/);
+  assert.match(brief, /33 kHz applies when monitoring one electrode configuration/);
+  assert.match(brief, /improve durability and conduct further real-world robotic-task tests/);
+  assert.match(brief, /does not establish calibrated force magnitude/);
+  assert.doesNotMatch(brief, /\bpressure\b/i);
+});

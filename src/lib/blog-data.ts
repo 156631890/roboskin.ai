@@ -105,16 +105,16 @@ The reported percentages are not an external leaderboard. They come from the aut
     title: 'T-Rex adds high-rate tactile reaction to dexterous robot policies',
     seoTitle: 'T-Rex Tactile-Reactive Dexterous Manipulation',
     seoDescription:
-      'T-Rex combines a 100-hour tactile-rich dataset, temporal tactile encoding, and variable-rate policy architecture across 12 manipulation tasks.',
+      "T-Rex reports 65% average success versus EgoScale's 35% across 12 tasks and 16 rollouts per task. Review the preprint evidence and limits.",
     excerpt:
-      'T-Rex combines a 100-hour tactile-rich dataset with temporal tactile encoding and a variable-rate architecture for contact-sensitive manipulation.',
+      'T-Rex reports a 30-percentage-point average success gap over EgoScale in its 12-task protocol, alongside a 100-hour tactile-rich dataset.',
     content: `# T-Rex adds high-rate tactile reaction to dexterous robot policies
 
 **Evidence review - August 2026**
 
 T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies react dynamically to tactile signals. The authors introduce a 100-hour tactile-rich dataset, a temporal tactile VQ-VAE encoder, and a variable-rate Mixture-of-Transformers architecture. They evaluate the system on 12 manipulation tasks that require delicate force control or deformable-object manipulation.
 
-The paper reports an average success rate more than 30% higher than its strongest baseline. That is a relative result inside the authors' evaluation, not a universal gain for tactile sensing or an independently reproduced benchmark.
+The paper's Table 1 reports 65% average success for T-Rex and 35% for EgoScale, the strongest listed baseline. That is an absolute gap of 30 percentage points in the authors' 12-task protocol. Each task is evaluated with 16 rollouts. The figures are not independent validation or evidence of the same gain on other robot systems.
 
 ## The problem T-Rex addresses
 
@@ -133,9 +133,18 @@ The main conceptual contribution is temporal separation. A policy can retain slo
 
 ## Reported evidence
 
-The abstract states that the system is evaluated on 12 manipulation tasks and achieves more than 30% higher average success than the strongest baseline. The claim is tied to the paper's task suite, baselines, dataset, policy implementation, and success definitions.
+The abstract describes performance as more than 30% higher than the strongest baseline. The paper's original table and official project page resolve the unit: T-Rex averages 65%, while EgoScale averages 35%, yielding a 30-percentage-point absolute difference.
 
-The correct interpretation is therefore narrow: within that reported setup, the combination of tactile-rich data and tactile-reactive architecture outperformed the compared methods on average. It does not prove a 30-percentage-point improvement, and it does not establish the same gain for other robots, sensors, policies, or task distributions.
+| Reported item | Value | Evidence boundary |
+| --- | ---: | --- |
+| EgoScale | 35% | Strongest listed baseline in the authors' Table 1. |
+| T-Rex | 65% | Macro-average reported by the authors across the same 12 tasks. |
+| Absolute gap | +30 percentage points | Arithmetic difference between 65% and 35%; the official project page labels it an absolute success-rate gap. |
+| Evaluation count | 16 rollouts per task | The paper states that object positions and rotations are randomized across trials. |
+
+All real-world experiments use one fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave dexterous hands. The system observes a ZED head camera, two monocular wrist cameras, per-finger tactile force vectors, and deformation maps. The paper states that all compared methods use the same robot setup, action space, and evaluation protocol. Multi-stage tasks use progress-based rubrics, and results are averaged across trials and then tasks.
+
+The correct interpretation remains narrow: within that author-run setup, the complete T-Rex system achieved a 30-percentage-point higher macro-average than EgoScale. The table does not establish the same gain for other robots, sensors, policies, datasets, or task distributions.
 
 ## Why this matters for robot hands
 
@@ -151,26 +160,27 @@ The [tactile robotics dataset directory](/datasets) explains the metadata needed
 
 ## What this does not prove yet
 
-T-Rex is an arXiv preprint, not an independently replicated result. The reported 100 hours, 12 tasks, and over-30% relative average-success improvement come from the authors. They do not establish universal superiority over every VLA, dexterous policy, or tactile encoder.
+T-Rex is an arXiv preprint, not an independently replicated result. The reported 100 hours, 12 tasks, 65% T-Rex average, 35% EgoScale average, and 30-percentage-point gap all come from the authors. The evidence is tied to one Dexmate Vega-1 and Sharpa Wave hardware configuration and does not establish universal superiority over every VLA, dexterous policy, or tactile encoder.
 
 The result also does not isolate one causal factor by itself. Dataset collection, temporal encoding, variable-rate architecture, training choices, and evaluation design contribute to the complete system. Deployment decisions still need sensor calibration, synchronization, end-to-end latency, compute, durability, and failure-recovery evidence.
 
 ## Evaluation checklist
 
-- Distinguish a relative success-rate improvement from percentage-point improvement.
+- Report the 65% and 35% averages, the +30-percentage-point gap, and 16 rollouts per task together.
 - Report task-level outcomes instead of only one average across 12 tasks.
 - Document tactile sampling, timestamping, compression, and policy update rates.
 - Split complete trajectories or sessions before extracting temporal training windows.
 - Compare static-touch, temporal-touch, vision-only, and matched-compute baselines.
 - Test unseen objects, materials, deformable states, contact failures, and new robot hands.
 
-## Primary source
+## Primary sources
 
-[arXiv: T-Rex - Tactile-Reactive Dexterous Manipulation](https://arxiv.org/abs/2606.17055)
+- [arXiv: T-Rex - Tactile-Reactive Dexterous Manipulation](https://arxiv.org/abs/2606.17055)
+- [Official T-Rex project page](https://tactile-reactive-dexterous.github.io/)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     readTime: '7 min read',
     category: 'Tactile manipulation',
     image: '/generated/authority/roboskin-index-cover.webp',
@@ -981,66 +991,101 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
   },
   {
     id: 'humanoid-visual-tactile-action-dataset-2025',
-    title: 'Humanoid visual-tactile-action dataset for contact-rich manipulation',
-    seoTitle: 'Humanoid Visuo-Tactile Dataset for Robot Manipulation',
-    seoDescription: 'A source-backed look at humanoid visual-tactile-action datasets, synchronized robot data, and contact-rich manipulation learning.',
+    title: 'GIST humanoid visual-tactile-action dataset maps 101.9K soft-object samples',
+    seoTitle: 'GIST Humanoid Visual-Tactile-Action Dataset: 101.9K Samples',
+    seoDescription:
+      'GIST reports 101.9K samples across four towel and sponge pressure conditions, 2,124 hand tactile units, dual camera views, and ACT baselines.',
     excerpt:
-      'A research note on humanoid visual-tactile-action datasets, contact-rich manipulation, multimodal robot data, and why humanoid tactile learning needs synchronized action context.',
-    content: `# Humanoid visual-tactile-action dataset for contact-rich manipulation
+      'The GIST preprint reports 101.9K visual-tactile-action samples for towel and sponge manipulation, with dense hand touch, two camera views, and explicit access limits.',
+    content: `# GIST humanoid visual-tactile-action dataset maps 101.9K soft-object samples
 
-**Updated technical brief - June 2026**
+**Updated technical brief - August 2026**
 
-## Why this source matters
+The GIST v2 preprint reports 101.9K visual-tactile-action samples collected by three experimenters across four towel and sponge pressure conditions. Its two Inspire RH56-DFX hands provide 2,124 tactile sensing units in total. The source is useful as a documented soft-object collection and ACT baseline study, but it is not currently a verified downloadable dataset or cross-humanoid benchmark.
 
-Humanoid robots make tactile learning harder because contact can happen across hands, fingers, palms, tools, and body surfaces. A dataset that records only images or only tactile frames misses the action context that created the contact. The humanoid visual-tactile-action dataset preprint is useful because it frames contact-rich manipulation as multimodal data: vision, touch, and action.
+## Source findings
 
-For RoboSkin.ai, this source helps connect robot skin with humanoid learning. Humanoid robot skin is not just a material surface. It is part of a data system that must connect perception to control.
+The paper pairs arm and finger joint positions, egocentric and third-person vision, dense hand pressure signals, and robot actions. The authors normalize the hand-tactile readings from the raw 0-4095 range to 0-1 before analysis. The paper describes a humanoid teleoperation setup but does not identify the humanoid robot model, so no specific platform should be inferred from the collection workflow.
 
-## Core idea
-
-A visual-tactile-action dataset pairs what the robot sees, what it feels, and what it does. That pairing matters because the same tactile reading can mean different things depending on the action. A rising pressure signal during insertion, grasping, or sliding may imply different controller responses.
-
-| Data stream | What it contributes | Failure if missing |
+| Collection layer | What arXiv v2 reports | Evidence boundary |
 | --- | --- | --- |
-| Vision | Scene, object, and pose context | Contact has no external reference |
-| Tactile signal | Local contact state | Hidden interactions remain invisible |
-| Action | Robot motion and intent | Touch cannot be interpreted causally |
-| Time alignment | Event order | Policy learns stale or wrong contact |
+| Scale | 101.9K samples | The paper uses both “frames of motion data” and “samples”; it does not provide a public file manifest. |
+| Operators | Three experimenters followed the collection protocol | This is limited operator diversity, not population-scale coverage. |
+| Robot hands | Two Inspire RH56-DFX dexterous hands | The humanoid robot model is not named. |
+| Hand touch | 1,062 tactile sensing units per hand, 2,124 total, distributed over fingers and palms | Sensor calibration, unit-to-unit drift, and replacement procedures are not reported. |
+| Egocentric view | Head-mounted camera at 848 × 480 | The paper does not state the head-camera model or frame rate. |
+| Third-person view | Intel RealSense D435 positioned about 1 m to the robot's left | One fixed external viewpoint does not establish multi-environment coverage. |
+| External pressure | Piezoresistive tactile carpet producing real-time pressure heatmaps | The carpet supports pressure feedback during collection and should not be confused with the 2,124 hand tactile units. |
+
+## Four soft-object pressure conditions
+
+The main collection covers two deformable objects under strong and weak handling instructions. Each condition contains approximately 77-80 episodes, and each episode lasts 20-30 seconds. The tactile-carpet heatmap gave the experimenter real-time pressure feedback, but the paper does not define a calibrated numerical threshold separating “strong” from “weak.”
+
+| Condition | Object | Pressure instruction | Reported episode coverage |
+| --- | --- | --- | --- |
+| Towel Strong | Towel | Strong | Approximately 77-80 episodes, 20-30 seconds each |
+| Towel Weak | Towel | Weak | Approximately 77-80 episodes, 20-30 seconds each |
+| Sponge Strong | Sponge | Strong | Approximately 77-80 episodes, 20-30 seconds each |
+| Sponge Weak | Sponge | Weak | Approximately 77-80 episodes, 20-30 seconds each |
+
+The paper also describes rigid-object observations for comparison, but its defined four-task dataset and policy experiments focus on towel and sponge manipulation. That distinction matters: rigid-object comparison figures do not expand the reported task benchmark beyond the two soft-object categories.
+
+## ACT dense versus sparse baseline
+
+The authors convert the full 2,124-unit hand signal into a 42-location sparse representation, an approximately 98% reduction, and train Action Chunking Transformer baselines called ACT-Dense and ACT-Sparse. Both use the same four conditions. The paper reports an 80/20 train/evaluation split, 100K training steps, evaluation every 20K steps, three seeds, and Mean Absolute Error over predicted versus ground-truth actions.
+
+| Baseline | Tactile input | What the paper reports | What not to infer |
+| --- | ---: | --- | --- |
+| ACT-Dense | 2,124 hand tactile units represented as spatial maps | Training loss declined, while dense signals exposed high dimensionality and noise that made optimization harder. | More taxels did not automatically produce a large downstream policy gain. |
+| ACT-Sparse | 42 selected locations | Training and test curves were broadly similar to ACT-Dense, with a relatively small test-loss gap overall. | Sparse touch was not established as universally sufficient for contact-rich manipulation. |
+
+The paper's t-SNE analysis separates the four pressure conditions more clearly with dense than sparse signals. That is representation evidence, not proof of a correspondingly large improvement in real-world task success. The real-world section shows representative successful trials but does not publish a success-rate table for comparing ACT-Dense and ACT-Sparse.
+
+## RoboSkin analysis
+
+This work is most valuable as a concrete data-contract example for humanoid touch: hand coverage, two visual viewpoints, proprioception, action, operator protocol, and pressure context all need to be interpreted together. It also exposes an important tactile AI problem: collecting dense touch is easier than learning a robust control advantage from it.
+
+The [tactile robotics dataset directory](/datasets) places this collection alongside datasets with different embodiments and availability states. The [humanoid robot skin guide](/humanoid-robot-skin) maps its hand coverage into the wider body-level tactile stack. The [tactile AI pillar](/tactile-ai) explains why sensing density, representation learning, and closed-loop policy evidence must be evaluated separately.
 
 ## Engineering implications
 
-Humanoid tactile datasets should be judged by synchronization and task diversity. A dataset with many frames but weak action alignment may be less useful than a smaller dataset with precise timing and clear contact events. Contact-rich manipulation depends on event order.
+A usable visual-tactile-action dataset needs more than a large sample count. Teams need exact timestamps, stream rates, calibration records, trajectory boundaries, sensor-layout metadata, train/test split rules, and robot-action semantics. These details determine whether a model learns contact dynamics or correlations tied to one operator, sensor unit, view, or episode.
 
-This source also highlights why full-hand coverage is only a starting point. Evaluation must show how data is recorded, aligned, labeled, replayed, and converted into policy training.
+The dense-versus-sparse comparison also argues for measuring both representation quality and downstream control. Clearer clustering can show that dense signals preserve pressure-condition structure, while policy loss reveals whether the learning system can exploit it. Those are different questions and should remain separate.
+
+## Availability and licensing
+
+As of 2026-08-22, no official dataset download, code repository, dedicated project page, or dataset license could be verified from the paper or its arXiv record. The CC BY 4.0 notice on arXiv applies to the article. It does not by itself grant a license to unpublished dataset files, code, images, or other research artifacts.
 
 ## Evaluation checklist
 
-- Check which tactile hardware and humanoid platform were used.
-- Ask whether actions, tactile data, and images are timestamped together.
-- Review task diversity and object diversity.
-- Separate dataset size from data quality.
-- Ask whether the dataset includes failures, recovery, and edge cases.
-- Look for public access, license, and benchmark tasks.
+- Preserve episode-level splits instead of randomly mixing adjacent samples across training and evaluation.
+- Report camera and tactile sampling rates, timestamps, clock alignment, and dropped-frame handling.
+- Publish the robot model, action schema, hand calibration, tactile layout, and replacement procedure.
+- Define strong and weak pressure conditions with repeatable physical measurements.
+- Compare dense and sparse touch using downstream success, failure, and recovery metrics in addition to MAE.
+- Test new objects, operators, hands, viewpoints, and humanoid embodiments before making transfer claims.
+- Verify a dataset-specific download URL and license before describing the collection as open data.
 
-## What not to infer
+## What this does not prove yet
 
-This source does not mean one dataset solves humanoid tactile learning. Humanoid embodiments vary widely, and policies trained on one sensor layout may not transfer to another hand. The useful lesson is that tactile data needs action context.
+This is one arXiv preprint on two soft objects, four pressure conditions, three experimenters, one unnamed humanoid embodiment, and one dual-hand tactile layout. It does not establish transfer to other humanoids, robot hands, sensor technologies, objects, environments, or pressure definitions. The 101.9K samples are temporally related observations, not 101.9K independent tasks or trajectories.
 
-For RoboSkin.ai, the editorial takeaway is direct: humanoid robot skin content should connect sensing coverage to synchronized visual-tactile-action data.
+The ACT study also does not show that dense touch always outperforms a 42-location sparse representation. The authors report relatively small test-loss differences and identify high dimensionality, noise, and optimization as open challenges. Independent reproduction is still needed.
 
-## Source
+## Primary source and access check
 
-[arXiv: A Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation](https://arxiv.org/html/2510.25725v2)
+[arXiv v2: A Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation](https://arxiv.org/html/2510.25725v2)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-08-22',
+    readTime: '8 min read',
     category: 'Tactile Data',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
-    sourceTitle: 'Humanoid visual-tactile-action dataset preprint',
+    sourceTitle: 'GIST humanoid visual-tactile-action dataset preprint, arXiv v2',
     sourceUrl: 'https://arxiv.org/html/2510.25725v2',
-    technicalFocus: ['Humanoid visual-tactile-action dataset', 'contact-rich manipulation', 'humanoid robot skin', 'multimodal robot data'],
+    technicalFocus: ['GIST', 'humanoid visual-tactile-action dataset', 'Inspire RH56-DFX', 'soft-object manipulation', 'dense tactile sensing'],
   },
   {
     id: 'tactile-robotics-outlook-research-landscape-2025',
@@ -1729,97 +1774,92 @@ This article summarizes the public Cambridge report and adds RoboSkin.ai editori
     id: 'single-material-soft-robotic-skin-2025',
     title: 'Single-material soft robotic skin for multimodal e-skin sensing',
     excerpt:
-      'Single-material soft robotic skin connects e-skin, pressure, strain, temperature, damage sensing, and robot-ready tactile coverage across curved surfaces.',
+      'A peer-reviewed single-material robotic skin uses wrist-mounted EIT electrodes and data-driven channel selection to interpret touch, strain, heat, damage, environment, and proprioception across a soft hand.',
     content: `# Single-material soft robotic skin for multimodal e-skin sensing
 
-**Updated technical brief - May 2026**
+**Updated technical brief - August 2026**
 
-This single-material soft robotic skin is a conductive hydrogel sensing field shaped around a hand. It addresses the complexity of stacking separate pressure, temperature, and damage sensors by interpreting multiple contact effects through one material. For robot skin and e-skin engineering, the work matters because broad curved-surface coverage becomes easier to fabricate, while calibration and signal interpretation become central system requirements.
+The 2025 Science Robotics paper by David Hardman, Thomas George Thuruthel, and Fumiya Iida reports a single-layer sensory skin made from a conductive gelatine-based hydrogel. The team cast the material as a full-size hollow hand, routed 32 electrodes around its wrist, and used high-density electrical impedance tomography (EIT) plus data-driven information selection to interpret interactions across the continuous surface.
 
 ## Source findings
 
-Many electronic skin designs are assembled from many discrete sensor types: pressure sensors in one layer, temperature sensors in another layer, wiring between them, and a soft outer material around the stack. That approach can work, but it increases manufacturing complexity and creates more failure points. The Cambridge and UCL single-material robotic skin report is useful because it explores a different architecture: one conductive soft material where the whole surface contributes to sensing.
+The work demonstrates a research architecture for multimodal soft sensing. It does not establish calibrated force magnitude, production durability, or deployment on a working humanoid. The University of Cambridge report identifies improved durability and further testing on real-world robotic tasks as future work.
 
-The public Cambridge story describes a flexible, conductive, gelatine-based hydrogel skin formed into a hand-like shape. It reports that the material can process multiple physical inputs, including different forms of touch, heat, cutting or stabbing damage, and multiple contact points. The system uses electrical impedance tomography and machine learning to interpret changes across many electrical pathways.
+### What “single-material” means
+
+“Single-material” describes the soft sensing membrane, not the complete measurement system. The hand still requires electrodes, EIT electronics, multiplexing, data collection, and computational interpretation. Its advantage is that the continuous hydrogel surface can respond to several kinds of interaction without embedding a separate rigid sensing unit for each modality.
+
+The paper investigates at least six active stimulus types, including an insulated probe press, single- and multi-location human touch, conductive touch, damage, and localized heating or melting. It also demonstrates environmental temperature and humidity prediction and a proprioceptive response when the fingers are actuated.
+
+These are distinct experimental signals. They should not be collapsed into a claim that the prototype measures a universal physical quantity with calibrated accuracy across arbitrary loads, objects, or robot geometries.
+
+### Electrode configurations are not information channels
+
+The paper reports two related numbers that must remain separate:
+
+| Reported quantity | Value | Meaning |
+| --- | ---: | --- |
+| Physical electrodes | 32 | Electrodes arranged around the wrist of the hydrogel hand. |
+| Electrode configurations | 863,040 | Ordered four-electrode excitation and measurement configurations available to the EIT system. |
+| Amplitude-and-phase information channels | 1,726,080 | Each configuration yields an RMS amplitude channel and a phase-shift channel. |
+
+The 1,726,080 figure is therefore not a count of electrodes, taxels, independent physical sensors, or simultaneously updated contact points. It is twice the configuration count because amplitude and phase are evaluated separately.
+
+### The scan-rate boundary
+
+The highest and lowest rates in the paper describe different acquisition loads:
+
+- Monitoring all 1,726,080 information channels is reported at a 0.02 Hz frame rate.
+- The stated maximum of 33 kHz applies when monitoring one electrode configuration, which produces two information channels.
+
+The paper's information-structuring method selects smaller, setup-specific subsets to trade information coverage against update rate. It would be inaccurate to describe 33 kHz as the full-hand update rate for all available channels.
+
+### What the data-driven layer does
+
+EIT measurements across a continuous conductive body are highly redundant and coupled. Rather than treating every available channel as equally useful, the authors rank and select channels that contain information for a target task. The reported demonstrations include light-touch localization over the hand, environmental temperature and humidity prediction, and finger-actuation proprioception.
+
+This approach moves part of the sensor design problem into experiment design and computation. Electrode placement, excitation configuration, selected channels, environmental drift, training data, and model assumptions all affect the output. Recasting the same material on a different geometry would require new validation rather than inheriting the hand's reported behavior automatically.
 
 ## RoboSkin analysis
 
-The core idea is distributed sensing. Instead of placing individual sensors at selected points, the material itself becomes the sensing field. Electrodes around the boundary collect signals from pathways through the material. When the material is pressed, heated, cut, or touched in multiple places, the electrical response changes. A model can then learn which changes correspond to which types of contact.
-
-This is attractive for robot skin because robots rarely touch the world with perfectly flat, isolated patches. Hands, palms, arms, prosthetics, grippers, and soft end effectors have curves, seams, edges, and moving joints. A sensor that can be shaped over complex geometry is easier to imagine as a skin than a rigid board with a soft cover.
-
-| Architecture | Strength | Main risk |
-| --- | --- | --- |
-| Discrete embedded sensors | Easier to reason about individual channels | More wiring, seams, and assembly complexity |
-| Single-material skin | Whole surface can contribute to sensing | Requires stronger calibration and interpretation models |
-| Hybrid soft stack | Can combine specialized layers | Crosstalk and mechanical reliability become harder |
+A continuous hydrogel field may simplify soft coverage over complex geometry, but it shifts responsibility into electrode routing, calibration, channel selection, timing, and data interpretation. A conventional taxel array exposes discrete sensing locations. This EIT architecture exposes a distributed electrical field whose useful signals must be learned or reconstructed.
 
 ## Engineering implications
 
-Electrical impedance tomography is not a simple one-sensor-one-reading approach. It reconstructs information from signal changes across a conductive body. That makes it powerful, but it also means the sensing system includes the material, electrode layout, data collection method, and model. The skin is not only a sheet. It is a measurement system.
-
-For robotics teams, this changes evaluation. A team should not ask only whether the material is soft or sensitive. It should ask how many electrodes are needed, where they sit, how fast measurements can be taken, how the model is trained, how drift is handled, and what happens after damage or replacement.
-
-## Reader value
-
-This source is especially useful for comparing whole-surface sensing with taxel-array thinking. A taxel array gives engineers a familiar grid. A single-material impedance skin gives them a field that must be interpreted. That difference affects the entire engineering plan: experiment design, data labels, model training, field calibration, and debugging.
-
-For a content site, the original contribution is the comparison, not repeating the press release. A reader should leave with a practical distinction: single-material skin may simplify mechanical coverage, but it moves more responsibility into electrode design and signal interpretation. That is a real tradeoff, and it is the kind of tradeoff that distinguishes a useful technical page from generic "robot touch" copy.
-
-## Practical evaluation questions
-
-- Can the skin be molded around the target robot geometry without losing signal quality?
-- How many electrodes are needed for the surface area and task?
-- Does the model classify contact types only in a lab setup, or after repeated use?
-- How does the material respond after stretching, bending, heating, or surface damage?
-- Can calibration be repeated by a non-expert technician?
-- Does the system output raw impedance data, classified events, contact maps, or robot-ready messages?
-
-## Where this helps most
-
-Single-material skin is most compelling where coverage matters more than extremely precise local force measurement. A humanoid palm, prosthetic cover, soft gripper pad, or assistive contact surface may benefit from broad detection of touch, heat, and damage. A fingertip requiring high-resolution 3D force vectors may still need a more specialized sensor design.
-
-This is not a weakness. It is a category distinction. Different robot skin architectures serve different tasks. Whole-surface soft sensing helps when the robot needs broad awareness across a curved body. Miniature force sensors help when the robot needs precise local force control.
-
-## What this means for robot skin
-
-Single-material soft robotic skin is useful because it treats the surface as a sensing field, not a set of isolated taxels. For robot skin readers, the important distinction is mechanical coverage versus interpretability. A continuous soft material may fit curved hands, palms, grippers, or prosthetic covers more naturally, but it shifts more work into electrode layout, calibration, and machine-learning interpretation.
-
-Read this beside the [robot skin vs e-skin guide](/guides/robot-skin-vs-e-skin). The material story explains what can be shaped onto a robot; the system story explains how the robot receives reliable data.
+For system design, the key question is not how many raw channels exist. It is how many task-relevant signals can be acquired at the required control rate, with known calibration and repeatability. The [robot skin vs e-skin guide](/guides/robot-skin-vs-e-skin) explains the terminology; the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) covers timestamps, metadata, and replay once signals leave the sensing hardware.
 
 ## What this does not prove yet
 
-The source does not prove that a single-material architecture is best for every robot hand or industrial surface. It does not answer every durability, cleaning, attachment, repair, drift, or real-time control question. It shows a research route for broad soft sensing, not a universal product specification.
+This is a peer-reviewed experimental study, but it is not a commercial specification or a universal benchmark for robot skin. The evidence comes from the reported hydrogel samples, electronics, channel-selection procedures, and hand geometry. The study does not establish long-duration abrasion resistance, cleaning tolerance, attachment to a moving robot, replacement calibration, production yield, or closed-loop task performance on a deployed humanoid.
 
-## Where this fits next
-
-The next technical step is integration. A whole-surface skin still needs message schemas, timestamps, calibration metadata, and replay logs. Readers evaluating this architecture should pair it with the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) and with [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) when they think about replacement, drift, and cross-sensor learning.
+The Cambridge research story explicitly says the team hopes to improve durability and conduct further real-world robotic-task tests. Those remain future-work boundaries, not demonstrated deployment claims.
 
 ## Practical questions
 
-- Is single-material soft robotic skin the same as e-skin? It is one e-skin architecture: a soft conductive material used as a distributed sensing field rather than a stack of many discrete sensors.
-- Why does this matter for robot skin? Robot skin must fit real robot geometry, and single-material sensing may simplify coverage while increasing interpretation and calibration demands.
-- What is the main evaluation question? Ask whether the skin can keep useful, repeatable signals after shaping, use, damage, and replacement.
+- Does 1,726,080 mean physical sensors? No. It is the count of amplitude and phase channels derived from 863,040 four-electrode configurations.
+- Does the complete hand update at 33 kHz? No. That maximum applies to one configuration; scanning all available channels is reported at 0.02 Hz.
+- Does the paper establish calibrated force measurement? No. It demonstrates data-driven interpretation of touch or press interactions, strain-related proprioception, environment, damage, and local heating in the reported setup.
+- Is the skin ready for a humanoid robot? The paper demonstrates a full-size soft hand-shaped sensing surface, not whole-body integration or real-world humanoid-task validation.
 
-## What not to infer
+## Source boundary
 
-The Cambridge and UCL source does not mean single-material skins are ready for all humanoid robots, prosthetics, or industrial systems. Public reporting describes a research direction and reported experiments, not a universal product specification. Durability, cleaning, attachment, long-term drift, repair, and regulatory requirements remain application-specific.
+This review uses the peer-reviewed Science Robotics article, the author-accepted manuscript in the University of Cambridge repository, and the official University of Cambridge research story. Numerical values belong to the authors' reported hardware and protocols. RoboSkin.ai did not reproduce the experiments and is not affiliated with the authors, Cambridge, UCL, or Science Robotics.
 
-For RoboSkin.ai, the useful lesson is that robot skin should be discussed as a system architecture. The material, electrode layout, model, calibration process, and robot interface all matter. A thin article that says "robots can feel" is not enough. A useful article should explain what is measured, how the signal is interpreted, and what still needs validation.
+## Primary and official sources
 
-## Source
-
-[University of Cambridge: Single-material electronic skin gives robots the human touch](https://www.cam.ac.uk/stories/robotic-skin)
+- [Science Robotics: Multimodal information structuring with single-layer soft skins and high-density electrical impedance tomography](https://doi.org/10.1126/scirobotics.adq2303)
+- [University of Cambridge Repository: author-accepted manuscript](https://www.repository.cam.ac.uk/items/c0f9486d-ef1a-42c8-bd8a-27ca9e2a9828)
+- [University of Cambridge: Single-material electronic skin gives robots the human touch](https://www.cam.ac.uk/stories/robotic-skin)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-24',
-    updated: '2026-06-27',
-    readTime: '5 min read',
+    updated: '2026-08-22',
+    readTime: '7 min read',
     category: 'Soft E-Skin',
     image: '/generated/authority/research-soft-robotic-skin.webp',
-    sourceTitle: 'University of Cambridge single-material electronic skin report',
-    sourceUrl: 'https://www.cam.ac.uk/stories/robotic-skin',
-    technicalFocus: ['single-material soft robotic skin', 'electrical impedance tomography', 'machine learning', 'multimodal touch'],
+    sourceTitle: 'Science Robotics peer-reviewed single-layer soft sensory skin article',
+    sourceUrl: 'https://doi.org/10.1126/scirobotics.adq2303',
+    technicalFocus: ['single-material soft robotic skin', 'electrical impedance tomography', 'multimodal touch', 'proprioception'],
   },
   {
     id: 'full-hand-tactile-sensing-2025',

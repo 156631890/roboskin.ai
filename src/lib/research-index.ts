@@ -3,7 +3,7 @@ import { canonicalUrl } from '@/lib/seo';
 
 export type EvidenceLevel = 'peer-reviewed' | 'preprint' | 'institutional' | 'documentation';
 
-export const researchIndexUpdatedAt = '2026-08-21';
+export const researchIndexUpdatedAt = '2026-08-22';
 
 export interface ResearchIndexEntry {
   id: string;
@@ -68,8 +68,8 @@ const supplements: ResearchIndexSupplement[] = [
     dataOutput: 'Temporal tactile tokens and action predictions trained with a reported 100-hour tactile-rich dataset',
     applications: ['delicate force control', 'deformable-object manipulation', 'tactile-reactive VLA policies'],
     evidence: 'preprint',
-    limitations: 'The reported more-than-30% average success improvement is relative to the strongest baseline in the authors’ 12-task protocol, not an independent cross-platform benchmark; transfer and replication remain open questions.',
-    reviewedAt: '2026-08-21',
+    limitations: 'The authors report 65% average success for T-Rex versus 35% for EgoScale, an absolute gap of 30 percentage points across 12 tasks with 16 rollouts per task; the result is tied to one Dexmate Vega-1 and Sharpa Wave setup and is not an independent cross-platform benchmark.',
+    reviewedAt: '2026-08-22',
   },
   {
     id: 'robotacdex-humanoid-visual-tactile-action-dataset-2026',
@@ -139,15 +139,15 @@ const supplements: ResearchIndexSupplement[] = [
   {
     id: 'single-material-soft-robotic-skin-2025',
     year: 2025,
-    publisher: 'University of Cambridge',
-    sensorPrinciple: 'Single-material conductive soft skin',
-    modalities: ['pressure', 'temperature', 'damage location'],
-    formFactor: 'Large-area conformable robotic skin',
-    dataOutput: 'Electrical measurements interpreted across the skin surface',
+    publisher: 'Science Robotics',
+    sensorPrinciple: 'Single-layer conductive hydrogel with high-density electrical impedance tomography',
+    modalities: ['touch and insulated presses', 'strain and proprioception', 'damage', 'local heating', 'temperature and humidity'],
+    formFactor: 'Full-size hollow hydrogel hand with 32 wrist electrodes',
+    dataOutput: 'Up to 863,040 electrode configurations yielding 1,726,080 amplitude-and-phase information channels',
     applications: ['robot body sensing', 'multimodal e-skin'],
-    evidence: 'institutional',
-    limitations: 'Institutional summary of research; application durability and production-scale integration are not established by the public story alone.',
-    reviewedAt: '2026-07-10',
+    evidence: 'peer-reviewed',
+    limitations: 'The 33 kHz maximum applies to one electrode configuration, while all 1,726,080 channels are reported at 0.02 Hz; durability, production integration, and real-world robotic-task testing remain open.',
+    reviewedAt: '2026-08-22',
   },
   {
     id: 'freetacman-robot-free-visuotactile-data-collection-2025',
@@ -217,15 +217,15 @@ const supplements: ResearchIndexSupplement[] = [
   {
     id: 'humanoid-visual-tactile-action-dataset-2025',
     year: 2025,
-    publisher: 'arXiv',
+    publisher: 'GIST arXiv preprint',
     sensorPrinciple: 'Dense humanoid-hand tactile sensing synchronized with vision, proprioception, and actions',
-    modalities: ['egocentric vision', 'third-person vision', 'dense tactile pressure', 'arm and finger proprioception', 'robot actions'],
-    formFactor: 'Teleoperated humanoid with two Inspire RH56-DFX dexterous hands and 1,062 tactile sensors per hand',
-    dataOutput: '101.9K synchronized visual, 2,124-channel tactile, proprioceptive, and action samples',
+    modalities: ['848 × 480 egocentric vision', 'RealSense D435 third-person vision', 'dense hand tactile pressure', 'piezoresistive carpet pressure', 'arm and finger proprioception', 'robot actions'],
+    formFactor: 'Unnamed teleoperated humanoid with two Inspire RH56-DFX hands and 1,062 tactile sensing units per hand',
+    dataOutput: '101.9K visual-tactile-action samples with 2,124 total hand tactile values',
     applications: ['soft-object manipulation learning', 'visual-tactile-action policy training', 'dense tactile representation research'],
     evidence: 'preprint',
-    limitations: 'Collected on one humanoid embodiment, two soft objects, four strong- or weak-pressure tasks, and three operators; dense signals remained noisy and harder to optimize.',
-    reviewedAt: '2026-07-21',
+    limitations: 'One unnamed humanoid embodiment, two soft objects, four pressure conditions, and three operators; as of 2026-08-22 no official dataset download, code, project page, or dataset license was verified, and the arXiv CC BY license covers the article rather than unpublished data files.',
+    reviewedAt: '2026-08-22',
   },
   {
     id: 'wet-slippage-bionic-fingertip-eskin-2026',
