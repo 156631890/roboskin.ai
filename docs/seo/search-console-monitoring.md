@@ -29,6 +29,10 @@ Interpretation: visibility is already near the first page on average, but click-
 | tactile AI | 4 | 154 | Keep `/tactile-ai` as the canonical definition. |
 | touchworld | 4 | 49 | Preserve the existing source-backed TouchWorld brief. |
 
+### Official 120-click milestone — received 2026-08-19
+
+An authenticated Google Search Console transactional email reported that `roboskin.ai` reached **120 Google Search clicks in the preceding 28 days**, with the achievement dated 2026-08-17. This is a valid bounded milestone from Google, but the email does not provide impressions, CTR, average position, query rows, page rows, or the exact inclusive reporting dates. Do not combine it with another window to calculate growth rates or fill the missing columns. Use a full Search Console export for the next comparative snapshot.
+
 New route measurement:
 
 - Monitor `/robot-learning` for robot learning, imitation learning robotics, reinforcement learning robots, robot learning datasets, and sim-to-real queries after deployment and crawl.
