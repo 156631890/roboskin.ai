@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 const sitemapUrl = 'https://roboskin.ai/sitemap.xml';
 const response = await fetch(sitemapUrl, {
@@ -13,8 +13,8 @@ const xml = await response.text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map((match) => match[1].trim());
 
-if (urls.length !== 65) {
-  throw new Error(`Expected the audited 65 production URLs, received ${urls.length}`);
+if (urls.length !== 103) {
+  throw new Error(`Expected the audited 103 production sitemap URLs, received ${urls.length}`);
 }
 
 for (const url of urls) {
@@ -33,18 +33,26 @@ for (const url of urls) {
 
 urls.sort();
 
+const protectedRedirects = JSON.parse(
+  await readFile(new URL('../config/protected-redirects.json', import.meta.url), 'utf8'),
+);
+const protectedUrls = new Set(
+  urls.filter((url) => new URL(url).pathname !== '/research-index'),
+);
+for (const redirectSource of Object.keys(protectedRedirects)) {
+  protectedUrls.add(new URL(redirectSource, 'https://roboskin.ai').href);
+}
+const completeProtectedUrls = [...protectedUrls].sort();
+
+if (completeProtectedUrls.length !== 107) {
+  throw new Error(`Expected 107 protected URLs after preserving redirects, received ${completeProtectedUrls.length}`);
+}
+
 await mkdir(new URL('../config/', import.meta.url), { recursive: true });
 await writeFile(
   new URL('../config/protected-urls.json', import.meta.url),
-  `${JSON.stringify(urls, null, 2)}\n`,
+  `${JSON.stringify(completeProtectedUrls, null, 2)}\n`,
   'utf8',
 );
-await writeFile(
-  new URL('../config/protected-redirects.json', import.meta.url),
-  '{}\n',
-  { encoding: 'utf8', flag: 'wx' },
-).catch((error) => {
-  if (error.code !== 'EEXIST') throw error;
-});
 
-console.log(`Protected ${urls.length} production URLs from ${sitemapUrl}`);
+console.log(`Protected ${completeProtectedUrls.length} production and redirect URLs from ${sitemapUrl}`);

@@ -21,9 +21,11 @@ const researchRouteCards = [
     text: 'Performance, durability, and integration language is framed as evidence to verify.',
   },
   {
-    label: 'Category memory',
-    title: 'Terms connect across pages',
-    text: 'Research briefs link back to glossary language, tactile AI routes, and application context.',
+    label: 'Organization map',
+    title: 'Models connect to verified institutions',
+    text: 'Trace source-listed universities, research labs, and companies to the robot AI models and primary evidence that support each relationship.',
+    href: '/organizations',
+    ctaLabel: 'Browse research organizations',
   },
   {
     label: 'Physical AI route',

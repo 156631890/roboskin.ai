@@ -188,5 +188,7 @@ test('model explorer keeps complete rows in initial markup and exposes accessibl
   assert.match(component, /entry\.realRobotEvaluation/);
   assert.match(component, /entry\.evidenceLimitations/);
   assert.match(component, /entry\.primarySources\.map/);
+  assert.match(component, /organizations#organization-/);
+  assert.match(component, /organizationByAlias/);
   assert.doesNotMatch(component, /ssr\s*:\s*false|next\/dynamic/);
 });

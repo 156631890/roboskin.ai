@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import {
   filterRobotAiModels,
@@ -10,6 +11,11 @@ import {
 
 type RobotAiModelExplorerProps = {
   entries: RobotAiModelEntry[];
+  organizations: {
+    id: string;
+    name: string;
+    aliases: string[];
+  }[];
 };
 
 function unique<T extends string>(values: T[]) {
@@ -20,7 +26,7 @@ function sentenceCase(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-export default function RobotAiModelExplorer({ entries }: RobotAiModelExplorerProps) {
+export default function RobotAiModelExplorer({ entries, organizations }: RobotAiModelExplorerProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<RobotAiModelCategory | 'all'>('all');
   const [tactileInput, setTactileInput] = useState<TactileInputStatus | 'all'>('all');
@@ -44,6 +50,10 @@ export default function RobotAiModelExplorer({ entries }: RobotAiModelExplorerPr
     tactileInput,
     year,
   });
+  const organizationByAlias = useMemo(() => new Map(
+    organizations.flatMap((organization) => [organization.name, ...organization.aliases]
+      .map((alias) => [alias, organization] as const)),
+  ), [organizations]);
 
   function resetFilters() {
     setQuery('');
@@ -156,7 +166,28 @@ export default function RobotAiModelExplorer({ entries }: RobotAiModelExplorerPr
                 <tr id={`model-${entry.id}`} key={entry.id} className="scroll-mt-24 block overflow-hidden rounded-md border border-white/10 align-top text-[#c8d1de] md:table-row md:rounded-none md:border-0">
                   <th scope="row" className="block w-full border-b border-white/10 bg-white/[0.03] px-4 py-5 text-left md:table-cell md:w-[230px] md:bg-transparent">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
-                    <span className="mt-3 block text-xs leading-relaxed text-[#aeb8c7]">{entry.organization}</span>
+                    {entry.creatorOrganizations.length > 0 ? (
+                      <span className="mt-3 block text-xs leading-relaxed text-[#aeb8c7]">
+                        {entry.creatorOrganizations.map((alias, index) => {
+                          const organization = organizationByAlias.get(alias);
+                          return (
+                            <span key={alias}>
+                              {index > 0 ? ', ' : null}
+                              {organization ? (
+                                <Link
+                                  href={`/organizations#organization-${organization.id}`}
+                                  className="underline decoration-white/25 underline-offset-4 hover:text-white"
+                                >
+                                  {organization.name}
+                                </Link>
+                              ) : alias}
+                            </span>
+                          );
+                        })}
+                      </span>
+                    ) : (
+                      <span className="mt-3 block text-xs leading-relaxed text-[#aeb8c7]">{entry.organization}</span>
+                    )}
                     <span className="mt-2 block font-mono text-[11px] uppercase text-[#aeb8c7]">Reviewed {entry.sourceReviewed}</span>
                   </th>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[185px]">

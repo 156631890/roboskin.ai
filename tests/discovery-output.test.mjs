@@ -87,6 +87,16 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(verify, /JSON\.parse/);
   assert.match(verify, /commitSha/);
   assert.match(verify, /sitemapSha256/);
+  assert.match(verify, /knowledge-graph-contract\.json/);
+  assert.match(verify, /knowledgeGraphContract\.version/);
+  assert.match(verify, /knowledgeGraphContract\.counts/);
+  assert.match(verify, /evidenceSourceIds/);
+  assert.match(verify, /organization-directory/);
+  assert.match(verify, /\/knowledge-graph\.json/);
+  assert.match(verify, /\/organizations/);
+  assert.match(verify, /\/llms\.txt/);
+  assert.match(verify, /\/llms-full\.txt/);
+  assert.doesNotMatch(verify, /const expectedGraphCounts/);
   assert.match(verify, /actualLocation !== new URL\(pathname, canonicalOrigin\)\.href/);
   assert.match(submit, /api\.indexnow\.org\/indexnow/);
   assert.match(submit, /report\.ok/);

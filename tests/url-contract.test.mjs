@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 106);
+  assert.equal(protectedUrls.length, 107);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -40,6 +40,7 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/robot-learning'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/ai-robotics'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/physical-ai'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/organizations'));
   for (const path of [
     '/guides/tactile-sensor-benchmark-robot-manipulation',
     '/guides/tactile-datasets-robot-learning',
@@ -187,7 +188,7 @@ test('NewsArticle JSON-LD uses the visible byline and a separate site publisher'
 });
 
 test('the production snapshot rejects non-apex loc entries instead of filtering them out', async () => {
-  const urls = Array.from({ length: 64 }, (_, index) => `https://roboskin.ai/test-${index}`);
+  const urls = Array.from({ length: 102 }, (_, index) => `https://roboskin.ai/test-${index}`);
   urls.push('https://www.roboskin.ai/unexpected');
   const xml = `<urlset>${urls.map((url) => `<url><loc>${url}</loc></url>`).join('')}</urlset>`;
   const originalFetch = globalThis.fetch;
@@ -206,6 +207,16 @@ test('the production snapshot rejects non-apex loc entries instead of filtering 
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('the production snapshot preserves redirect sources instead of shrinking the URL contract', async () => {
+  const snapshot = await read('scripts/snapshot-production-urls.mjs');
+
+  assert.match(snapshot, /protected-redirects\.json/);
+  assert.match(snapshot, /Object\.keys\(protectedRedirects\)/);
+  assert.match(snapshot, /pathname !== '\/research-index'/);
+  assert.match(snapshot, /completeProtectedUrls\.length !== 107/);
+  assert.doesNotMatch(snapshot, /protected-redirects\.json'[\s\S]*?flag: 'wx'/);
 });
 
 test('www root and deep paths have explicit permanent redirects', async () => {

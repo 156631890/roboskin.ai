@@ -154,6 +154,17 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Research Index'],
   },
+  '/organizations': {
+    path: '/organizations',
+    title: 'Robot AI Research Organizations and Labs',
+    description:
+      'Browse source-verified universities, research labs, and companies connected to robot AI models, with official pages, model links, and evidence boundaries.',
+    updated: '2026-08-22',
+    priority: 0.78,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Organizations'],
+  },
   '/glossary': {
     path: '/glossary',
     title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',

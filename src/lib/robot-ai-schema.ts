@@ -1,33 +1,58 @@
 import { canonicalUrl } from '@/lib/seo';
 import type { RobotAiModelEntry } from '@/lib/robot-ai-models';
+import {
+  getResearchOrganizationByAlias,
+  robotAiOrganizationRelations,
+} from '@/lib/research-organizations';
+
+const organizationDirectoryUrl = canonicalUrl('/organizations');
+
+function organizationReference(alias: string) {
+  const organization = getResearchOrganizationByAlias(alias);
+  if (!organization) throw new Error(`Robot AI schema cannot resolve organization ${alias}.`);
+
+  return {
+    '@id': `${organizationDirectoryUrl}#organization-${organization.id}`,
+  };
+}
 
 export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
   const directoryUrl = canonicalUrl('/robot-foundation-models');
-  const modelNodes = entries.map((entry) => ({
-    '@type': 'CreativeWork',
-    '@id': `${directoryUrl}#model-${entry.id}`,
-    identifier: entry.id,
-    name: entry.name,
-    url: entry.projectUrl,
-    datePublished: entry.releaseDate,
-    genre: entry.category,
-    ...(entry.creatorOrganizations.length > 0 ? {
-      creator: entry.creatorOrganizations.map((name) => ({
-        '@type': 'Organization',
-        name,
-      })),
-    } : {}),
-    description: entry.trainingDataSummary,
-    abstract: entry.evidenceLimitations,
-    keywords: [entry.category, ...entry.inputModalities, ...entry.embodiments],
-    citation: entry.primarySources.map((source) => source.url),
-    isPartOf: {
-      '@id': `${directoryUrl}#model-directory`,
-    },
-    mainEntityOfPage: {
-      '@id': `${directoryUrl}#webpage`,
-    },
-  }));
+  const modelNodes = entries.map((entry) => {
+    const relations = robotAiOrganizationRelations.filter((relation) => relation.modelId === entry.id);
+    const creatorAliases = relations
+      .filter((relation) => relation.relation !== 'contributedBy')
+      .map((relation) => relation.sourceOrganizationLabel);
+    const contributorAliases = relations
+      .filter((relation) => relation.relation === 'contributedBy')
+      .map((relation) => relation.sourceOrganizationLabel);
+
+    return {
+      '@type': 'CreativeWork',
+      '@id': `${directoryUrl}#model-${entry.id}`,
+      identifier: entry.id,
+      name: entry.name,
+      url: entry.projectUrl,
+      datePublished: entry.releaseDate,
+      genre: entry.category,
+      ...(creatorAliases.length > 0 ? {
+        creator: creatorAliases.map(organizationReference),
+      } : {}),
+      ...(contributorAliases.length > 0 ? {
+        contributor: contributorAliases.map(organizationReference),
+      } : {}),
+      description: entry.trainingDataSummary,
+      abstract: entry.evidenceLimitations,
+      keywords: [entry.category, ...entry.inputModalities, ...entry.embodiments],
+      citation: entry.primarySources.map((source) => source.url),
+      isPartOf: {
+        '@id': `${directoryUrl}#model-directory`,
+      },
+      mainEntityOfPage: {
+        '@id': `${directoryUrl}#webpage`,
+      },
+    };
+  });
 
   return {
     '@context': 'https://schema.org',

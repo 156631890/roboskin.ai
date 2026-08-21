@@ -340,6 +340,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place foundation models inside the full perception, reasoning, policy, control, and feedback loop.' },
+      { label: 'Robot AI research organizations', href: '/organizations', description: 'Trace verified developers and source-listed contributor affiliations to official identity and model evidence.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
       { label: 'Robot world models', href: '/robot-world-models', description: 'Separate future prediction from action selection and control.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Trace demonstrations, reinforcement, correction, transfer, and deployment.' },

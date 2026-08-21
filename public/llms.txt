@@ -10,8 +10,8 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## Machine-Readable Knowledge
 
-- [RoboSkin.ai full knowledge file](https://roboskin.ai/llms-full.txt): Expanded generated snapshot containing canonical topic content, glossary definitions, dataset records, benchmark protocols, sensor evidence, robot AI model records, research-index records, research briefs, news briefs, and primary-source links.
-- [RoboSkin.ai knowledge graph JSON](https://roboskin.ai/knowledge-graph.json): Deterministic machine-readable graph containing 67 source-reviewed research entities: 22 papers, 1 documentation record, 12 datasets, 9 benchmarks, 13 sensors, and 10 robot AI models. The current graph keeps 103 deduplicated primary and official source records separate from those research entities.
+- [RoboSkin.ai full knowledge file](https://roboskin.ai/llms-full.txt): Expanded generated snapshot containing canonical topic content, glossary definitions, dataset records, benchmark protocols, sensor evidence, robot AI model records, verified organization records, model-organization evidence, research-index records, research briefs, news briefs, and primary-source links.
+- [RoboSkin.ai knowledge graph JSON](https://roboskin.ai/knowledge-graph.json): Deterministic machine-readable graph containing 79 source-reviewed knowledge entities: 22 papers, 1 documentation record, 12 datasets, 9 benchmarks, 13 sensors, 10 robot AI models, and 12 verified organizations. It keeps 115 deduplicated primary and official source records separate from the entities and includes 20 evidence-backed model-organization relations.
 - [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
 - [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
 - [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.
@@ -24,6 +24,7 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Broad research map for humanoid embodiment, whole-body control, hands, manipulation, safety, and tactile sensing.
 - [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action inputs, action interfaces, embodiments, evaluation, and tactile VLA systems.
 - [Robot foundation models](https://roboskin.ai/robot-foundation-models): Source-reviewed model-role guide and directory covering VLMs, embodied reasoning, VLA policies, world models, tactile models, access, and evidence limits.
+- [Robot AI research organizations](https://roboskin.ai/organizations): Source-reviewed universities, research labs, and companies connected to robot AI models through official provider statements, primary papers, or project affiliations, with explicit evidence boundaries.
 - [Robot learning](https://roboskin.ai/robot-learning): Canonical map for imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, and tactile robot learning.
 - [Robot hands](https://roboskin.ai/robot-hands): Canonical comparison of dexterous hands, grippers, actuation, tactile sensing, control, and task evidence.
 - [Robot safety](https://roboskin.ai/robot-safety): Scope-aware map of industrial robot safety standards, contact sensing, collision response, and evidence boundaries; it is not a compliance determination.

@@ -1,12 +1,18 @@
 import { createHash } from 'node:crypto';
 import { site } from '@/content/site';
-import { researchIndexEntries } from '@/lib/research-index';
+import { researchIndexEntries, type EvidenceLevel } from '@/lib/research-index';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import {
+  organizationModelRelationTypes,
+  researchOrganizationEntries,
+  robotAiOrganizationRelations,
+  type OrganizationModelRelationType,
+} from '@/lib/research-organizations';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
 
-export const knowledgeGraphVersion = '1.0.0';
+export const knowledgeGraphVersion = '1.1.0';
 
 export type KnowledgeEntityType =
   | 'paper'
@@ -14,7 +20,8 @@ export type KnowledgeEntityType =
   | 'dataset'
   | 'benchmark'
   | 'sensor'
-  | 'model';
+  | 'model'
+  | 'organization';
 
 export type KnowledgeSourceKind =
   | 'primary'
@@ -25,7 +32,8 @@ export type KnowledgeSourceKind =
   | 'code'
   | 'license'
   | 'model card'
-  | 'official release';
+  | 'official release'
+  | 'organization';
 
 export type KnowledgeEntity = {
   id: `${KnowledgeEntityType}:${string}`;
@@ -48,15 +56,17 @@ export type KnowledgeSource = {
 
 export type KnowledgeEdge = {
   from: KnowledgeEntity['id'];
-  relation: 'supportedBy' | 'benchmarkedBy';
+  relation: 'supportedBy' | 'benchmarkedBy' | OrganizationModelRelationType;
   to: KnowledgeEntity['id'] | KnowledgeSource['id'];
   reviewedAt: string;
+  evidenceSourceIds?: KnowledgeSource['id'][];
 };
 
 export type KnowledgeGraph = {
   version: string;
   updated: string;
   counts: {
+    knowledgeEntities: number;
     researchEntities: number;
     researchIndex: number;
     papers: number;
@@ -65,10 +75,15 @@ export type KnowledgeGraph = {
     benchmarks: number;
     sensors: number;
     models: number;
+    organizations: number;
     sourceDocuments: number;
     edges: number;
     supportedByEdges: number;
     benchmarkedByEdges: number;
+    organizationRelationEdges: number;
+    developedByEdges: number;
+    coDevelopedByEdges: number;
+    contributedByEdges: number;
   };
   entities: KnowledgeEntity[];
   sources: KnowledgeSource[];
@@ -116,6 +131,18 @@ function compareText(left: string, right: string) {
   return left < right ? -1 : left > right ? 1 : 0;
 }
 
+function researchEntityType(evidence: EvidenceLevel): 'paper' | 'documentation' {
+  switch (evidence) {
+    case 'peer-reviewed':
+    case 'preprint':
+      return 'paper';
+    case 'documentation':
+      return 'documentation';
+    case 'institutional':
+      throw new Error('Institutional research-index evidence needs an explicit knowledge-graph entity type.');
+  }
+}
+
 export function buildKnowledgeGraph(): KnowledgeGraph {
   const sourceByUrl = new Map<string, MutableSource>();
 
@@ -149,7 +176,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
   }
 
   const researchEntities: KnowledgeEntity[] = researchIndexEntries.map((entry) => {
-    const type = entry.evidence === 'documentation' ? 'documentation' : 'paper';
+    const type = researchEntityType(entry.evidence);
     const kind: KnowledgeSourceKind = type === 'documentation' ? 'documentation' : 'paper';
 
     return {
@@ -285,12 +312,33 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     },
   }));
 
+  const organizationEntities: KnowledgeEntity[] = researchOrganizationEntries.map((entry) => ({
+    id: `organization:${entry.id}`,
+    type: 'organization',
+    name: entry.name,
+    canonicalUrl: canonicalUrl(`/organizations#organization-${entry.id}`),
+    reviewedAt: entry.sourceReviewed,
+    primarySourceIds: registerSources(entry.identitySources.map((source) => ({
+      url: source.url,
+      label: source.label,
+      kind: 'organization',
+      reviewedAt: entry.sourceReviewed,
+    }))),
+    attributes: {
+      aliases: entry.aliases,
+      organizationKind: entry.kind,
+      officialUrl: entry.officialUrl,
+      evidenceBoundary: entry.evidenceBoundary,
+    },
+  }));
+
   const entities = [
     ...researchEntities,
     ...datasetEntities,
     ...benchmarkEntities,
     ...sensorEntities,
     ...modelEntities,
+    ...organizationEntities,
   ].sort((left, right) => compareText(left.id, right.id));
 
   const sources: KnowledgeSource[] = [...sourceByUrl.values()]
@@ -324,6 +372,18 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     });
   }
 
+  for (const relation of robotAiOrganizationRelations) {
+    edges.push({
+      from: `model:${relation.modelId}`,
+      relation: relation.relation,
+      to: `organization:${relation.organizationId}`,
+      reviewedAt: relation.sourceReviewed,
+      evidenceSourceIds: relation.evidenceUrls
+        .map((url) => sourceId(normalizeSourceUrl(url)))
+        .sort(),
+    });
+  }
+
   edges.sort((left, right) => (
     compareText(left.from, right.from)
     || compareText(left.relation, right.relation)
@@ -334,11 +394,18 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
   const documentation = researchEntities.filter((entry) => entry.type === 'documentation').length;
   const supportedByEdges = edges.filter((edge) => edge.relation === 'supportedBy').length;
   const benchmarkedByEdges = edges.filter((edge) => edge.relation === 'benchmarkedBy').length;
+  const organizationRelationEdges = edges.filter((edge) => (
+    organizationModelRelationTypes.includes(edge.relation as OrganizationModelRelationType)
+  )).length;
+  const developedByEdges = edges.filter((edge) => edge.relation === 'developedBy').length;
+  const coDevelopedByEdges = edges.filter((edge) => edge.relation === 'coDevelopedBy').length;
+  const contributedByEdges = edges.filter((edge) => edge.relation === 'contributedBy').length;
   const graph: KnowledgeGraph = {
     version: knowledgeGraphVersion,
     updated: latestDate(entities.map((entry) => entry.reviewedAt)),
     counts: {
-      researchEntities: entities.length,
+      knowledgeEntities: entities.length,
+      researchEntities: entities.length - organizationEntities.length,
       researchIndex: researchEntities.length,
       papers,
       documentation,
@@ -346,10 +413,15 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       benchmarks: benchmarkEntities.length,
       sensors: sensorEntities.length,
       models: modelEntities.length,
+      organizations: organizationEntities.length,
       sourceDocuments: sources.length,
       edges: edges.length,
       supportedByEdges,
       benchmarkedByEdges,
+      organizationRelationEdges,
+      developedByEdges,
+      coDevelopedByEdges,
+      contributedByEdges,
     },
     entities,
     sources,
@@ -373,8 +445,15 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     'benchmark',
     'sensor',
     'model',
+    'organization',
+  ]);
+  const allowedRelations = new Set<KnowledgeEdge['relation']>([
+    'supportedBy',
+    'benchmarkedBy',
+    ...organizationModelRelationTypes,
   ]);
   const entityIds = new Set(graph.entities.map((entry) => entry.id));
+  const entityById = new Map(graph.entities.map((entry) => [entry.id, entry]));
   const sourceIds = new Set(graph.sources.map((entry) => entry.id));
   const allIds = new Set([...entityIds, ...sourceIds]);
   const sourceUrls = new Set(graph.sources.map((entry) => entry.url));
@@ -415,11 +494,40 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     if (!entityIds.has(edge.from)) errors.push(`Edge starts at missing entity ${edge.from}.`);
     if (!allIds.has(edge.to)) errors.push(`Edge ends at missing node ${edge.to}.`);
     if (!validDate.test(edge.reviewedAt)) errors.push(`Edge ${key} has an invalid reviewedAt date.`);
+    if (!allowedRelations.has(edge.relation)) errors.push(`Edge ${key} uses an unsupported relation.`);
     if (edge.relation === 'supportedBy' && !sourceIds.has(edge.to as KnowledgeSource['id'])) {
       errors.push(`supportedBy edge ${key} must end at a source.`);
     }
     if (edge.relation === 'benchmarkedBy' && !edge.to.startsWith('benchmark:')) {
       errors.push(`benchmarkedBy edge ${key} must end at a benchmark.`);
+    }
+
+    const organizationRelation = organizationModelRelationTypes.includes(
+      edge.relation as OrganizationModelRelationType,
+    );
+    if (organizationRelation) {
+      const fromEntity = entityById.get(edge.from);
+      const toEntity = entityById.get(edge.to as KnowledgeEntity['id']);
+      if (fromEntity?.type !== 'model' || toEntity?.type !== 'organization') {
+        errors.push(`Organization edge ${key} must connect a model to an organization.`);
+      }
+      if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) {
+        errors.push(`Organization edge ${key} has no relationship evidence.`);
+      } else {
+        if (new Set(edge.evidenceSourceIds).size !== edge.evidenceSourceIds.length) {
+          errors.push(`Organization edge ${key} repeats relationship evidence.`);
+        }
+        for (const evidenceSourceId of edge.evidenceSourceIds) {
+          if (!sourceIds.has(evidenceSourceId)) {
+            errors.push(`Organization edge ${key} references missing evidence ${evidenceSourceId}.`);
+          }
+          if (!fromEntity?.primarySourceIds.includes(evidenceSourceId)) {
+            errors.push(`Organization edge ${key} uses evidence not attached to its model: ${evidenceSourceId}.`);
+          }
+        }
+      }
+    } else if (edge.evidenceSourceIds !== undefined) {
+      errors.push(`Non-organization edge ${key} must not carry relationship evidence.`);
     }
   }
 
@@ -431,7 +539,13 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     }
   }
 
-  if (graph.counts.researchEntities !== graph.entities.length) errors.push('researchEntities count is inconsistent.');
+  for (const relation of robotAiOrganizationRelations) {
+    const key = `model:${relation.modelId}|${relation.relation}|organization:${relation.organizationId}`;
+    if (!edgeKeys.has(key)) errors.push(`Missing verified organization relation ${key}.`);
+  }
+
+  if (graph.counts.knowledgeEntities !== graph.entities.length) errors.push('knowledgeEntities count is inconsistent.');
+  if (graph.counts.researchEntities !== graph.entities.filter((entity) => entity.type !== 'organization').length) errors.push('researchEntities count is inconsistent.');
   if (graph.counts.researchIndex !== graph.counts.papers + graph.counts.documentation) errors.push('researchIndex count is inconsistent.');
   for (const [type, count] of [
     ['paper', graph.counts.papers],
@@ -440,6 +554,7 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     ['benchmark', graph.counts.benchmarks],
     ['sensor', graph.counts.sensors],
     ['model', graph.counts.models],
+    ['organization', graph.counts.organizations],
   ] as const) {
     if (graph.entities.filter((entity) => entity.type === type).length !== count) {
       errors.push(`${type} count is inconsistent.`);
@@ -449,6 +564,11 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
   if (graph.counts.edges !== graph.edges.length) errors.push('Edge count is inconsistent.');
   if (graph.counts.supportedByEdges !== graph.edges.filter((edge) => edge.relation === 'supportedBy').length) errors.push('supportedBy edge count is inconsistent.');
   if (graph.counts.benchmarkedByEdges !== graph.edges.filter((edge) => edge.relation === 'benchmarkedBy').length) errors.push('benchmarkedBy edge count is inconsistent.');
+  if (graph.counts.organizationRelationEdges !== graph.edges.filter((edge) => organizationModelRelationTypes.includes(edge.relation as OrganizationModelRelationType)).length) errors.push('organization relation edge count is inconsistent.');
+  if (graph.counts.developedByEdges !== graph.edges.filter((edge) => edge.relation === 'developedBy').length) errors.push('developedBy edge count is inconsistent.');
+  if (graph.counts.coDevelopedByEdges !== graph.edges.filter((edge) => edge.relation === 'coDevelopedBy').length) errors.push('coDevelopedBy edge count is inconsistent.');
+  if (graph.counts.contributedByEdges !== graph.edges.filter((edge) => edge.relation === 'contributedBy').length) errors.push('contributedBy edge count is inconsistent.');
+  if (graph.counts.organizationRelationEdges !== graph.counts.developedByEdges + graph.counts.coDevelopedByEdges + graph.counts.contributedByEdges) errors.push('organization relation subtotal is inconsistent.');
 
   return errors;
 }

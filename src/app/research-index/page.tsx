@@ -82,6 +82,9 @@ export default function ResearchIndexPage() {
             <p className="mt-4 text-sm leading-relaxed text-[#c8d1de]">
               Titles, source labels, and source URLs come from the cited research records. Sensor principle, modality, form factor, output, application, evidence, and limitation fields are conservative editorial normalization by the RoboSkin.ai Editorial Team. The source remains authoritative for its own claims.
             </p>
+            <Link href="/organizations" className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
+              Trace normalized research organizations {'->'}
+            </Link>
           </div>
           <div>
             <p className="eyebrow">Limitations</p>

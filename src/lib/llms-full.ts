@@ -4,6 +4,7 @@ import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { researchOrganizationEntries, robotAiOrganizationRelations } from '@/lib/research-organizations';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
@@ -34,6 +35,8 @@ function latestReviewedDate() {
     ...tactileBenchmarkEntries.map((entry) => entry.sourceReviewed),
     ...tactileSensorEntries.map((entry) => entry.sourceReviewed),
     ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
+    ...researchOrganizationEntries.map((entry) => entry.sourceReviewed),
+    ...robotAiOrganizationRelations.map((entry) => entry.sourceReviewed),
   ].sort().at(-1) ?? researchIndexUpdatedAt;
 }
 
@@ -57,6 +60,8 @@ export function buildLlmsFullText() {
     `- Benchmark records: ${tactileBenchmarkEntries.length}`,
     `- Sensor records: ${tactileSensorEntries.length}`,
     `- Robot AI model records: ${robotAiModelEntries.length}`,
+    `- Verified organization records: ${researchOrganizationEntries.length}`,
+    `- Verified model-organization relations: ${robotAiOrganizationRelations.length}`,
     `- Structured research records: ${researchIndexEntries.length}`,
     `- Research briefs: ${blogPosts.length}`,
     `- News briefs: ${newsPosts.length}`,
@@ -67,6 +72,7 @@ export function buildLlmsFullText() {
     '- Preserve evidence boundaries. A paper-reported result is not automatically a cross-sensor benchmark, a commercial product specification, or proof of deployment readiness.',
     '- Prefer the primary source URL attached to each technical record. Use the RoboSkin.ai canonical page for the site’s analysis, taxonomy, and comparison context.',
     '- Do not infer product availability, certifications, customers, benchmark values, or company claims unless the relevant public page states them explicitly.',
+    '- A source-listed organization affiliation does not establish model ownership, funding, endorsement, current employment, or affiliation with RoboSkin.ai. Preserve the developed, co-developed, and contributor relationship labels.',
     '- No blanket content-reuse license is granted by this file. Verify the original source license and the RoboSkin.ai site terms before reuse.',
     `- Suggested attribution for site analysis: ${site.editorial.name}, “Page title,” RoboSkin.ai, canonical page URL, accessed on the reader’s actual access date.`,
     '',
@@ -228,6 +234,42 @@ export function buildLlmsFullText() {
     lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
   }
 
+  lines.push(
+    '## Verified Robot AI Research Organizations',
+    '',
+    `Directory: ${canonicalUrl('/organizations')}`,
+    '',
+    'These records normalize organization identities while preserving the relationship strength supported by each model source. An official organization page proves identity; a separate paper, project page, or provider release supports the model relationship.',
+    '',
+  );
+  for (const organization of researchOrganizationEntries) {
+    const relations = robotAiOrganizationRelations.filter(
+      (relation) => relation.organizationId === organization.id,
+    );
+    lines.push(
+      `### ${organization.name}`,
+      '',
+      `- Record ID: ${organization.id}`,
+      `- Organization type: ${organization.kind}`,
+      `- Source aliases: ${list(organization.aliases) || 'No additional aliases in the current directory'}`,
+      `- Official URL: ${organization.officialUrl}`,
+      `- Canonical RoboSkin.ai entity: ${canonicalUrl(`/organizations#organization-${organization.id}`)}`,
+      `- Identity sources: ${organization.identitySources.map((source) => markdownLink(source.label, source.url)).join('; ')}`,
+      `- Evidence boundary: ${compact(organization.evidenceBoundary)}`,
+      '- Connected robot AI models:',
+    );
+    for (const relation of relations) {
+      const model = robotAiModelEntries.find((entry) => entry.id === relation.modelId);
+      if (!model) throw new Error(`LLM organization record references missing model ${relation.modelId}.`);
+      lines.push(
+        `  - ${markdownLink(model.name, canonicalUrl(`/robot-foundation-models#model-${model.id}`))}: ${relation.relation}`,
+        `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
+        `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
+      );
+    }
+    lines.push(`- Source reviewed: ${organization.sourceReviewed}`, '');
+  }
+
   lines.push('## Robot AI Models', '', `Directory: ${canonicalUrl('/robot-foundation-models')}`, '');
   for (const entry of robotAiModelEntries) {
     lines.push(
@@ -235,7 +277,7 @@ export function buildLlmsFullText() {
       '',
       `- Record ID: ${entry.id}`,
       `- Organization label: ${compact(entry.organization)}`,
-      `- Creator organizations: ${list(entry.creatorOrganizations) || 'Not published as verified organization entities'}`,
+      `- Source-listed organizations: ${list(entry.creatorOrganizations) || 'No verified organization entity is published for this record'}`,
       `- Release date: ${entry.releaseDate}`,
       `- Model role: ${entry.category}`,
       `- Input modalities: ${list(entry.inputModalities)}`,
