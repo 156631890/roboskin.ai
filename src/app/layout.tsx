@@ -38,7 +38,6 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   authors: [{ name: site.name }],
-  category: 'Tactile AI',
   creator: site.name,
   publisher: site.name,
   formatDetection: {

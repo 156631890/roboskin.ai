@@ -5,6 +5,13 @@ export type ContentTile = {
   href?: string;
 };
 
+export type AiRobotLoopStage = {
+  stage: string;
+  title: string;
+  description: string;
+  href: string;
+};
+
 export type ComparisonRow = {
   label: string;
   sensorArray: string;
@@ -204,6 +211,7 @@ export const site = {
 export const primaryNavigation = [
   { href: '/', label: 'Home' },
   { href: '/research', label: 'Research' },
+  { href: '/ai-robotics', label: 'AI & Robotics' },
   { href: '/news', label: 'News' },
   { href: '/glossary', label: 'Glossary' },
   { href: '/applications', label: 'Use Cases' },
@@ -248,6 +256,51 @@ export const homeStats = [
   { value: '46', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
+];
+
+export const homeAiRobotLoop: AiRobotLoopStage[] = [
+  {
+    stage: '01 / Observe',
+    title: 'Goals + multimodal input',
+    description: 'Language defines the task while vision, robot state, and touch describe the current physical situation.',
+    href: '/ai-robotics',
+  },
+  {
+    stage: '02 / Interpret',
+    title: 'Perception',
+    description: 'Models turn images, joint state, force, and contact signals into representations the robot can use.',
+    href: '/technology',
+  },
+  {
+    stage: '03 / Decide',
+    title: 'Embodied reasoning',
+    description: 'A reasoning layer estimates state, plans task steps, and decides which capability should act next.',
+    href: '/physical-ai',
+  },
+  {
+    stage: '04 / Act',
+    title: 'Policy or VLA',
+    description: 'An action model converts observations and instructions into trajectories, poses, or motor commands.',
+    href: '/robot-vla-models',
+  },
+  {
+    stage: '05 / Execute',
+    title: 'Robot control',
+    description: 'Controllers and actuators turn a proposed action into timed movement on a specific robot body.',
+    href: '/robot-manipulation',
+  },
+  {
+    stage: '06 / Contact',
+    title: 'Physical outcome',
+    description: 'Hands, grippers, feet, or body surfaces meet real objects, people, tools, and changing environments.',
+    href: '/robot-skin',
+  },
+  {
+    stage: '07 / Correct',
+    title: 'Touch closes the loop',
+    description: 'Tactile AI detects contact, slip, force, and deformation so control or learning can respond to what actually happened.',
+    href: '/tactile-ai',
+  },
 ];
 
 export const homeKnowledgeMap: ContentTile[] = [
@@ -352,9 +405,9 @@ export const homeRoboticsIntelligence: ContentTile[] = [
     ctaLabel: 'Open topic',
   },
   {
-    title: 'Robot learning',
-    description: 'Connect demonstrations, reinforcement, simulation, datasets, VLA policies, and tactile feedback.',
-    href: '/robot-learning',
+    title: 'Robot AI models',
+    description: 'Compare VLMs, VLA policies, world models, embodied reasoning, tactile input, access, and evidence.',
+    href: '/robot-foundation-models',
     ctaLabel: 'Open topic',
   },
 ];
@@ -519,8 +572,8 @@ export const authorityLinkGroups: AuthorityLinkGroup[] = [
       },
       {
         label: 'Read the Physical AI explainer',
-        href: '/physics-ai',
-        description: 'A concise definition of Physical AI in the RoboSkin context: physical-world AI systems that need robot skin, tactile AI, and contact feedback.',
+        href: '/physical-ai',
+        description: 'A broad map of multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback.',
       },
       {
         label: 'Map Physical AI touch data',
@@ -704,10 +757,10 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
     imageAlt: 'Robot hand tactile signals flowing through edge AI and controller modules in a feedback loop.',
   },
   {
-    question: 'What is RoboSkin Physical AI?',
+    question: 'What is Physical AI?',
     answer:
-      'RoboSkin Physical AI means physical-world AI that needs robot skin, tactile AI, and contact feedback. RoboSkin.ai uses the term to connect touch, pressure, slip, and contact-aware robotics.',
-    href: '/physics-ai',
+      'Physical AI is a broad term for AI systems that perceive, reason, and act through physical machines. A complete system connects sensors and models to robot policies, control, actuation, safety, and measured feedback.',
+    href: '/physical-ai',
     ctaLabel: 'Read the Physical AI explainer',
   },
   {
@@ -1126,10 +1179,10 @@ export const resourceSections: ResourceSection[] = [
       },
       {
         title: 'Physical AI',
-        description: 'Understand RoboSkin Physical AI as physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
+        description: 'Understand Physical AI as a full physical perception, reasoning, policy, control, embodiment, safety, and feedback system.',
         availability: 'Public explainer',
         ctaLabel: 'Read',
-        href: '/physics-ai',
+        href: '/physical-ai',
       },
       {
         title: 'FAQ',
@@ -1294,9 +1347,9 @@ export const faqItems: FaqItem[] = [
   {
     question: 'What does Physical AI mean in the RoboSkin context?',
     answer:
-      'In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
+      'Physical AI is used here as a broad term for AI systems that perceive, reason, and act through physical machines. Touch is one feedback channel within that larger system.',
     ctaLabel: 'Read the Physical AI explainer',
-    href: '/physics-ai',
+    href: '/physical-ai',
   },
   {
     question: 'How do I ask about RoboSkin.ai?',
@@ -1353,9 +1406,9 @@ export const glossaryTerms: GlossaryTerm[] = [
   },
   {
     term: 'Physical AI',
-    definition: 'In the RoboSkin context, Physical AI means physical-world AI systems that need touch, pressure, slip, and tactile feedback.',
-    related: ['robot skin', 'tactile AI', 'contact-aware robotics'],
-    href: '/physics-ai',
+    definition: 'A broad term for AI systems that perceive, reason, and act through physical machines using sensors, models, policies, control, actuation, safety, and measured feedback.',
+    related: ['AI and robotics', 'embodied AI', 'robot learning', 'tactile AI'],
+    href: '/physical-ai',
   },
   {
     term: 'Robot learning',

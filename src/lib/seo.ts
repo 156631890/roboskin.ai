@@ -72,12 +72,13 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Technology'],
   },
-  '/physics-ai': {
-    path: '/physics-ai',
-    title: 'RoboSkin Physical AI: Robot Skin and Tactile AI',
+  '/physical-ai': {
+    path: '/physical-ai',
+    title: 'Physical AI: Models, Robots & Real-World Action',
     description:
-      'RoboSkin.ai explains Physical AI as physical-world AI that needs robot skin, tactile AI, touch, pressure, slip, and contact feedback.',
-    priority: 0.86,
+      'Physical AI connects multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback. Map the full system and its tactile contact layer.',
+    updated: '2026-08-21',
+    priority: 0.92,
     changeFrequency: 'weekly',
     index: true,
     breadcrumbs: ['Home', 'Physical AI'],
@@ -281,7 +282,8 @@ const keywords = [
   'RoboSkin Physical AI',
   'Physical AI touch data',
   'robot skin for Physical AI',
-  'Physics AI',
+  'AI in robotics',
+  'robot AI',
 ];
 
 export function canonicalUrl(path: string) {
@@ -599,17 +601,17 @@ export function buildFaqJsonLd(items = faqItems, path = '/faq') {
 }
 
 export function buildPhysicalAiDefinedTermJsonLd() {
-  const url = canonicalUrl('/physics-ai');
+  const url = canonicalUrl('/physical-ai');
 
   return {
     '@context': 'https://schema.org',
     '@type': 'DefinedTerm',
     '@id': `${url}#defined-term`,
     name: 'Physical AI',
-    alternateName: ['Physics AI', 'physical-world AI', 'embodied AI'],
+    alternateName: ['physical-world artificial intelligence'],
     url,
     description:
-      'In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI, contact feedback, pressure, slip, and tactile sensing.',
+      'A broad term for AI systems that perceive, reason, and act through physical machines using sensors, models, policies, control, actuation, safety, and measured feedback.',
     inDefinedTermSet: {
       '@type': 'DefinedTermSet',
       name: 'RoboSkin robot skin and tactile AI terminology',
@@ -623,16 +625,12 @@ export function buildPhysicalAiDefinedTermJsonLd() {
     },
     keywords: [
       'Physical AI',
-      'RoboSkin Physical AI',
-      'Physical AI tactile feedback',
-      'Physics AI',
-      'robot skin',
-      'tactile AI',
-      'tactile sensing',
-      'e-skin',
-      'contact feedback',
-      'pressure',
-      'slip',
+      'AI in robotics',
+      'robot AI',
+      'embodied AI',
+      'robot learning',
+      'robot policy',
+      'robot control',
       'physical-world AI',
     ],
   };
@@ -643,8 +641,8 @@ export function buildHomePhysicalAiRoutesJsonLd() {
   const routes = [
     {
       name: 'Physical AI canonical answer',
-      url: canonicalUrl('/physics-ai'),
-      description: pageSeo['/physics-ai'].description,
+      url: canonicalUrl('/physical-ai'),
+      description: pageSeo['/physical-ai'].description,
     },
     {
       name: 'Tactile feedback for Physical AI',
@@ -689,7 +687,12 @@ export function buildHomePhysicalAiRoutesJsonLd() {
     {
       name: 'Robot VLA models',
       url: canonicalUrl('/robot-vla-models'),
-      description: 'Definition and comparison route for vision-language-action models, robot foundation models, embodied reasoning, and tactile VLA systems.',
+      description: 'Definition and comparison route for vision-language-action policies, robot action interfaces, embodied-reasoning boundaries, and tactile VLA systems.',
+    },
+    {
+      name: 'Robot foundation models',
+      url: canonicalUrl('/robot-foundation-models'),
+      description: 'Source-reviewed model directory for model roles, training data, embodiments, access, tactile input, and evidence limitations.',
     },
     {
       name: 'Robot learning',

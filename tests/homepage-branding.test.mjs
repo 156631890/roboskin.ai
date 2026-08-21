@@ -40,7 +40,7 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.match(home, /source-backed robotics research across robot skin, tactile sensors, robot hands/);
   assert.doesNotMatch(home, /Physical AI \/ 物理 AI/);
   assert.doesNotMatch(home, /Read Physical AI \/ 物理 AI/);
-  assert.match(home, /href="\/physics-ai"/);
+  assert.match(home, /href="\/physical-ai"/);
   assert.match(home, /What is robot skin\?/);
   assert.match(home, /Open the glossary/);
   assert.match(home, /Compare research evidence/);
@@ -59,7 +59,7 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.match(home, /homeBrandAssets\.hero\.image/);
   assert.match(site, /authorityLinkGroups/);
   assert.match(site, /directAnswerBlocks/);
-  assert.match(site, /What is RoboSkin Physical AI\?/);
+  assert.match(site, /What is Physical AI\?/);
   assert.match(site, /Read the Physical AI explainer/);
   assert.doesNotMatch(site, /What is RoboSkin Physics AI \/ 物理 AI/);
   assert.match(site, /researchResourceIndex/);
@@ -67,7 +67,7 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.match(visuals, /AuthorityIndex/);
   assert.match(visuals, /DirectAnswerSection/);
   assert.match(visuals, /TactileStackMap/);
-  assert.match(layout, /Tactile AI/i);
+  assert.doesNotMatch(layout, /category:\s*['"]Tactile AI['"]/);
 });
 
 test('research and glossary pages extend the brand content system', async () => {

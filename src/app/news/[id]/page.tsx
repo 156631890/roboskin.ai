@@ -12,6 +12,7 @@ import {
   buildNewsArticlePageJsonLd,
   canonicalUrl,
 } from '@/lib/seo';
+import { getResearchTopicLinks } from '@/lib/topic-graph';
 
 type NewsArticlePageProps = {
   params: Promise<{
@@ -78,16 +79,33 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
     notFound();
   }
 
+  const topicLinks = getResearchTopicLinks(post);
+  const topicHrefs = new Set(topicLinks.map((link) => link.href));
+  const postFocus = new Set(post.technicalFocus.map((topic) => topic.toLowerCase()));
   const relatedPosts = newsPosts
     .filter((candidate) => candidate.id !== post.id)
     .map((candidate) => ({
       post: candidate,
-      score: candidate.technicalFocus.filter((topic) => post.technicalFocus.includes(topic)).length
+      score: getResearchTopicLinks(candidate).filter((link) => topicHrefs.has(link.href)).length * 3
+        + candidate.technicalFocus.filter((topic) => postFocus.has(topic.toLowerCase())).length
         + (candidate.category === post.category ? 2 : 0),
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
     .map((item) => item.post);
+  const hasTactileTopic = topicLinks.some((link) => [
+    '/tactile-ai',
+    '/datasets',
+    '/benchmarks',
+    '/sensors',
+    '/robot-skin',
+    '/tactile-foundation-models',
+    '/humanoid-robot-skin',
+    '/tactile-manipulation',
+    '/visuo-tactile',
+    '/physical-ai-touch',
+  ].includes(link.href));
+  const relatedNewsHeading = hasTactileTopic ? 'Related tactile robotics news' : 'Related robotics news';
 
   return (
     <>
@@ -113,6 +131,17 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             <div className="article-topics">
               {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
+            {topicLinks.length > 0 && (
+              <nav aria-label="Related topic links" className="mt-6 flex flex-wrap items-center gap-2 text-xs">
+                <span className="font-mono uppercase tracking-[0.12em] text-[#8e98a8]">Related topic links</span>
+                {topicLinks.map((link, index) => (
+                  <span key={link.href} className="flex items-center gap-2">
+                    <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? '/' : '→'}</span>
+                    <Link href={link.href} className="font-semibold text-[#ffd5c5] hover:text-white">{link.label}</Link>
+                  </span>
+                ))}
+              </nav>
+            )}
           </header>
 
           <figure className="article-cover">
@@ -162,7 +191,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <section className="article-related" aria-labelledby="related-news-heading">
             <p className="eyebrow">Continue the topic</p>
-            <h2 id="related-news-heading" className="mt-4 text-3xl font-bold text-white">Related robot skin news</h2>
+            <h2 id="related-news-heading" className="mt-4 text-3xl font-bold text-white">{relatedNewsHeading}</h2>
             <div>
               {relatedPosts.map((related) => (
                 <Link key={related.id} href={`/news/${related.id}`} className="article-related-card">

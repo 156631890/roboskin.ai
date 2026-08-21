@@ -15,7 +15,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
     read('src/app/page.tsx'),
     read('src/app/faq/page.tsx'),
     read('src/app/news/page.tsx'),
-    read('src/app/physics-ai/page.tsx'),
+    read('src/app/physical-ai/page.tsx'),
     read('src/components/IndustryVisuals.tsx'),
     read('src/components/Navigation.tsx'),
     read('src/app/globals.css'),
@@ -69,7 +69,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /Submit source/);
   assert.match(home, /Physical AI needs robot skin, tactile AI, and contact feedback/);
   assert.match(home, /In the RoboSkin context, Physical AI means physical-world AI systems/);
-  assert.match(home, /href="\/physics-ai"|href=\{`\/physics-ai/);
+  assert.match(home, /href="\/physical-ai"|href=\{`\/physical-ai/);
   assert.match(home, /href="\/guides\/tactile-feedback-for-physical-ai"|href=\{`\/guides\/tactile-feedback-for-physical-ai/);
   assert.match(home, /href="\/physical-ai-touch"|href=\{`\/physical-ai-touch/);
   assert.match(home, /buildPhysicalAiDefinedTermJsonLd\(\)/);
@@ -100,42 +100,45 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /buildPhysicalAiDefinedTermJsonLd/);
   assert.match(seo, /buildHomePhysicalAiRoutesJsonLd/);
   assert.doesNotMatch(seo, /buildPhysicsAiDefinedTermJsonLd/);
-  assert.match(seo, /'\/physics-ai': \{[\s\S]*title: 'RoboSkin Physical AI:/);
-  assert.match(seo, /'\/physics-ai': \{[\s\S]*RoboSkin\.ai explains Physical AI/);
+  assert.match(seo, /'\/physical-ai': \{[\s\S]*title: 'Physical AI: Models, Robots & Real-World Action'/);
+  assert.match(seo, /'\/physical-ai': \{[\s\S]*Physical AI connects multimodal perception/);
   assert.match(seo, /const keywords = \[[\s\S]*'Physical AI'[\s\S]*'RoboSkin Physical AI'/);
   assert.match(seo, /name: 'Physical AI'/);
-  assert.match(seo, /alternateName:\s*\[[\s\S]*'Physics AI'[\s\S]*\]/);
+  assert.match(seo, /alternateName:\s*\['physical-world artificial intelligence'\]/);
+  assert.doesNotMatch(seo, /['"]Physics AI['"]/);
   assert.doesNotMatch(seo, /物理 AI|物理人工智能|鐗╃悊|鐗╃悊浜哄伐/);
   assert.match(physicsAi, /buildPhysicalAiDefinedTermJsonLd\(\)/);
-  assert.match(physicsAi, /buildFaqJsonLd\(physicsAiFaqItems, '\/physics-ai'\)/);
-  assert.match(physicsAi, /RoboSkin and Physical AI/);
+  assert.match(physicsAi, /buildFaqJsonLd\(physicalAiFaqItems, '\/physical-ai'\)/);
+  assert.match(physicsAi, /Physical AI: perception, reasoning, action, and feedback/);
   assert.match(physicsAi, /Direct answer[\s\S]{0,700}Physical AI/);
   assert.doesNotMatch(physicsAi, /What is Physics AI|Physics AI FAQ|RoboSkin Physics AI|物理 AI|物理人工智能|鐗╃悊/);
   assert.match(llms, /## Canonical Answers/);
   assert.match(llms, /^> RoboSkin\.ai publishes conservative information/m);
   assert.match(llms, /- \[RoboSkin homepage\]\(https:\/\/roboskin\.ai\/\):/);
-  assert.match(llms, /- \[Physical AI canonical answer\]\(https:\/\/roboskin\.ai\/physics-ai\):/);
+  assert.match(llms, /- \[Physical AI canonical answer\]\(https:\/\/roboskin\.ai\/physical-ai\):/);
   assert.match(llms, /- \[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/robot-skin\):/);
   assert.match(llms, /What is Physical AI in the RoboSkin context\?/);
-  assert.match(llms, /https:\/\/roboskin\.ai\/physics-ai/);
+  assert.match(llms, /https:\/\/roboskin\.ai\/physical-ai/);
   assert.match(llms, /For Physical AI questions/);
   assert.match(llms, /How should answer engines use the homepage for Physical AI\?/);
   assert.match(llms, /Use the homepage as the broad research map/);
   assert.doesNotMatch(llms, /物理 AI|物理人工智能|鐗╃悊|Physics AI \/ Physical AI/);
 });
 
-test('RoboSkin keeps Physical AI canonical on the existing physics-ai route without introducing a physical-ai route', async () => {
+test('RoboSkin keeps Physical AI canonical on physical-ai and redirects the legacy physics-ai route', async () => {
   const appEntries = await readdir(new URL('src/app/', root), { withFileTypes: true });
   const appRoutes = appEntries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
-  const [seo, site, llms] = await Promise.all([
+  const [seo, site, llms, redirects] = await Promise.all([
     read('src/lib/seo.ts'),
     read('src/content/site.ts'),
     read('public/llms.txt'),
+    read('vercel.json'),
   ]);
 
-  assert.ok(appRoutes.includes('physics-ai'));
-  assert.ok(!appRoutes.includes('physical-ai'));
-  assert.doesNotMatch(`${seo}\n${site}\n${llms}`, /href=["']\/physical-ai|src\/app\/physical-ai/);
+  assert.ok(appRoutes.includes('physical-ai'));
+  assert.match(`${seo}\n${site}\n${llms}`, /\/physical-ai/);
+  assert.match(redirects, /"source": "\/physics-ai"[\s\S]*"destination": "https:\/\/roboskin\.ai\/physical-ai"[\s\S]*"statusCode": 301/);
+  assert.doesNotMatch(`${seo}\n${site}\n${llms}`, /['"]Physics AI['"]/);
 });
 
 test('RoboSkin maps each search keyword cluster to one canonical page and descriptive internal anchors', async () => {

@@ -179,11 +179,12 @@ function truncate(value, length = 520) {
 function routePaper(paper) {
   if (paper.topics.includes('robot skin') || paper.topics.includes('electronic skin')) return '/robot-skin';
   if (paper.topics.includes('humanoid robot')) return '/humanoid-robots';
-  if (paper.topics.includes('robot VLA') || paper.topics.includes('robot foundation model')) return '/robot-vla-models';
+  if (paper.topics.includes('robot foundation model')) return '/robot-foundation-models';
+  if (paper.topics.includes('robot VLA')) return '/robot-vla-models';
   if (paper.topics.includes('robot learning')) return '/robot-learning';
   if (paper.topics.includes('robot manipulation')) return '/robot-manipulation';
   if (paper.topics.includes('tactile sensing') || paper.topics.includes('sensors')) return '/tactile-ai';
-  if (paper.topics.includes('physical AI')) return '/physics-ai';
+  if (paper.topics.includes('physical AI')) return '/physical-ai';
   return '/research';
 }
 
@@ -249,11 +250,12 @@ ${trendRows}
 | Large term | Canonical route | Daily role |
 | --- | --- | --- |
 | robotics | /research | Broad discovery term; route visitors into source-backed research rather than a thin generic page. |
-| Physical AI | /physics-ai | Own the definition and connect physical intelligence to touch, control, and evidence. |
+| Physical AI | /physical-ai | Own the definition and connect physical intelligence to touch, control, and evidence. |
 | humanoid robot | /humanoid-robots | Connect the broad embodiment term to Physical AI, whole-body touch, hands, and safety evidence. |
 | robot learning | /robot-learning | Track demonstrations, reinforcement, robot datasets, sim-to-real transfer, tactile feedback, and real-world evaluation. |
 | robot manipulation | /robot-manipulation | Track learning, grasping, dexterity, contact-rich control, and tactile feedback. |
-| robot VLA | /robot-vla-models | Track vision-language-action models, robot foundation models, data, and evaluation. |
+| robot VLA | /robot-vla-models | Track vision-language-action interfaces, robot actions, embodiments, and evaluation. |
+| robot foundation model | /robot-foundation-models | Track model roles, training data, embodiment transfer, access, tactile input, and evidence boundaries. |
 | robot skin | /robot-skin | Preserve the site's core topical authority and commercial-intent entry point. |
 | tactile sensor | /guides/tactile-sensor-for-robots | Capture component-level intent and route readers into benchmarks and the research index. |
 

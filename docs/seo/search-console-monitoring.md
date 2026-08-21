@@ -124,7 +124,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | URL | Submitted in sitemap | Indexed | Last checked | Action |
 | --- | --- | --- | --- | --- |
 | https://roboskin.ai | Yes |  |  | Inspect URL, then request indexing if available |
-| https://roboskin.ai/physics-ai | Yes |  |  | Inspect URL, then request indexing if available |
+| https://roboskin.ai/physical-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/robot-skin | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/tactile-ai | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/e-skin | Yes |  |  | Inspect URL, then request indexing if available |
@@ -170,6 +170,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/humanoid-robots | humanoid robots, humanoid robotics |  |  |  |  | Last 28 days | Broad humanoid parent; tactile intent stays on `/humanoid-robot-skin` |
 | https://roboskin.ai/robot-learning | robot learning, imitation learning robotics, reinforcement learning robots |  |  |  |  | Last 28 days | Broad learning parent; tactile datasets and models retain narrow intent |
 | https://roboskin.ai/robot-vla-models | robot VLA models, vision-language-action models |  |  |  |  | Last 28 days | Broad model parent; tactile foundation and world-model children retain narrow intent |
+| https://roboskin.ai/robot-foundation-models | robot foundation models, generalist robot models, multi-embodiment models |  |  |  |  | Last 28 days | Source-reviewed model-role and access directory; VLA, world-model, and tactile pages retain narrow intent |
 | https://roboskin.ai/robot-manipulation | robot manipulation, robotic manipulation, dexterous manipulation |  |  |  |  | Last 28 days | Broad task parent; contact-to-action intent stays on `/tactile-manipulation` |
 | https://roboskin.ai/robot-hands | robot hands, robotic hands, dexterous robot hand, robot gripper vs robot hand |  |  |  |  | Last 28 days | End-effector comparison parent; tactile-sensor intent stays on the hand application route |
 | https://roboskin.ai/robot-safety | robot safety, industrial robot safety, humanoid robot safety |  |  |  |  | Last 28 days | Scope-aware standards and system map; do not imply certification or compliance |
@@ -177,7 +178,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/robot-world-models | robot world models, world models for robotics, world-action models |  |  |  |  | Last 28 days | Broad predictive-model owner; visuo-tactile paper comparison remains on the existing guide |
 | https://roboskin.ai/robot-teleoperation | robot teleoperation, robot demonstration data, teleoperation dataset |  |  |  |  | Last 28 days | Demonstration-acquisition parent; learned autonomy requires separate evidence |
 | https://roboskin.ai/robot-skin | robot skin |  |  |  |  | Last 28 days | Core definition query |
-| https://roboskin.ai/physics-ai | physical ai robot skin |  |  |  |  | Last 28 days | Physical AI canonical cluster query |
+| https://roboskin.ai/physical-ai | physical ai robot skin |  |  |  |  | Last 28 days | Physical AI canonical cluster query |
 | https://roboskin.ai/guides/tactile-feedback-for-physical-ai | physical ai tactile feedback |  |  |  |  | Last 28 days | Contact-feedback guide query |
 | https://roboskin.ai/robot-skin | robot skin for physical ai |  |  |  |  | Last 28 days | Robot skin as Physical AI contact layer |
 | https://roboskin.ai/tactile-ai | tactile AI |  |  |  |  | Last 28 days | Core concept query |

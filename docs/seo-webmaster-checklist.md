@@ -9,10 +9,10 @@ Use this checklist after each production deployment. It covers crawl discovery, 
 - Bing Webmaster Tools: submit `https://roboskin.ai/sitemap.xml`.
 - Confirm `https://roboskin.ai/robots.txt` exposes the sitemap.
 - Confirm `https://roboskin.ai/llms.txt` is reachable and includes canonical answer routes.
-- Confirm the homepage includes the visible Physical AI route section and links to `/physics-ai`, `/guides/tactile-feedback-for-physical-ai`, and `/physical-ai-touch`.
+- Confirm the homepage includes the visible Physical AI route section and links to `/physical-ai`, `/guides/tactile-feedback-for-physical-ai`, and `/physical-ai-touch`.
 - Inspect these URLs after deployment:
   - `https://roboskin.ai/`
-  - `https://roboskin.ai/physics-ai`
+  - `https://roboskin.ai/physical-ai`
   - `https://roboskin.ai/robot-skin`
   - `https://roboskin.ai/tactile-ai`
   - `https://roboskin.ai/guides/tactile-feedback-for-physical-ai`

@@ -1,4 +1,5 @@
 {
+  "/physics-ai": "/physical-ai",
   "/applications/humanoid-robot-skin": "/humanoid-robot-skin",
   "/guides/tactile-datasets-robot-learning": "/datasets",
   "/guides/tactile-foundation-models": "/tactile-foundation-models",

@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 103);
+  assert.equal(protectedUrls.length, 106);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -38,6 +38,8 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/eu-roboskin-project'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/robot-learning'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/ai-robotics'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/physical-ai'));
   for (const path of [
     '/guides/tactile-sensor-benchmark-robot-manipulation',
     '/guides/tactile-datasets-robot-learning',
@@ -80,6 +82,7 @@ test('the audited production URL inventory is protected', async () => {
     assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
   }
   assert.deepEqual(redirects, {
+    '/physics-ai': '/physical-ai',
     '/applications/humanoid-robot-skin': '/humanoid-robot-skin',
     '/guides/tactile-datasets-robot-learning': '/datasets',
     '/guides/tactile-foundation-models': '/tactile-foundation-models',

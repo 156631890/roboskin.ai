@@ -40,6 +40,322 @@ export type SeoTopicPage = {
 
 export const seoTopicPages: SeoTopicPage[] = [
   {
+    path: '/ai-robotics',
+    title: 'AI and Robotics: Models, Learning & Physical Action',
+    description:
+      'AI provides perception, reasoning, prediction, and learned policies; robotics provides sensors, control, actuators, safety, and a physical body. Map the closed loop from instruction to action and touch feedback.',
+    h1: 'How artificial intelligence works in robots',
+    kicker: 'AI and robotics hub',
+    intent: 'Answer-first guide to AI in robotics, robot AI, embodied AI, VLMs, VLA models, world models, robot policies, control, and tactile feedback.',
+    updated: '2026-08-21',
+    priority: 0.94,
+    changeFrequency: 'weekly',
+    schemaType: 'WebPage',
+    visualKey: 'technology',
+    keywords: [
+      'AI and robotics',
+      'AI in robotics',
+      'artificial intelligence and robotics',
+      'robot AI',
+      'embodied AI',
+      'Physical AI',
+      'robot learning',
+      'robot VLA',
+      'robot world model',
+      'robot policy',
+      'tactile AI',
+    ],
+    quickAnswer: [
+      'Artificial intelligence and robotics are related but different. AI supplies methods for perception, prediction, learning, reasoning, and action selection; robotics supplies sensors, embodiment, actuators, control, integration, and physical safety.',
+      'They form a closed loop when a robot observes its environment, an AI model or engineered policy selects an action, controllers execute it through the robot body, and new sensor feedback reports what actually happened.',
+      'Touch closes the contact-specific part of that loop. Robot skin and tactile sensors measure physical interaction, while tactile AI interprets those signals so a policy or controller can respond.',
+    ],
+    sections: [
+      {
+        heading: 'AI and robotics are not the same thing',
+        body: [
+          'AI is a family of computational methods. Robotics is the engineering of machines that sense and act in the physical world. An AI system can operate entirely in software, and a robot can execute fixed, model-based, or manually programmed behavior without a learned AI model.',
+          'The useful overlap is an embodied system in which perception and decision methods are connected to a specific robot, action interface, controller, operating environment, and evaluation protocol. Calling a system an AI robot does not by itself identify any of those contracts.',
+        ],
+        table: {
+          headers: ['Question', 'AI layer', 'Robotics layer', 'Evidence boundary'],
+          rows: [
+            ['What is observed?', 'Represents images, language, audio, robot state, or touch.', 'Sensors capture signals with hardware-specific rates, calibration, geometry, and failure modes.', 'A supported input modality does not prove that the robot uses it effectively.'],
+            ['What should happen next?', 'A model, planner, or learned policy proposes a state, subgoal, or action.', 'The robot exposes an action space constrained by its body, tools, workspace, and task.', 'A plausible plan is not evidence of successful physical execution.'],
+            ['How is motion produced?', 'The policy may output waypoints, poses, action chunks, or lower-level commands.', 'Controllers, actuators, estimation, and safety functions turn commands into motion.', 'A model output should not be described as torque-level control unless that interface is actually documented.'],
+            ['How is success known?', 'Models may classify outcomes, estimate value, or update a policy.', 'Measurements, task criteria, interventions, force, damage, and timing establish the result.', 'Provider demos and author-reported trials remain bounded to their stated protocol.'],
+          ],
+        },
+      },
+      {
+        heading: 'The closed loop from instruction to physical feedback',
+        body: [
+          'A robot AI system is best understood as a loop rather than a single model: goal or instruction → multimodal observation → representation and state estimation → reasoning or planning → policy action → robot control → physical motion and contact → new observation.',
+          'Different systems combine or omit stages. Some policies map observations directly to actions; others use semantic subgoals, explicit planners, predictive models, or separate fast controllers. RoboSkin.ai records the implemented interfaces rather than treating one architecture as universal.',
+        ],
+        bullets: [
+          'Goals can come from language, a task specification, a human operator, or a programmed state machine.',
+          'Observations can include vision, depth, audio, proprioception, force, torque, and tactile sensing.',
+          'Policies select actions; low-level controllers track commands and respond at the robot and actuator level.',
+          'Physical outcomes must return as measured feedback if the system is to detect error, contact, slip, or success.',
+        ],
+      },
+      {
+        heading: 'VLM, embodied reasoning, VLA, world model, policy, and control',
+        body: [
+          'These labels describe different jobs and should not be collapsed into one capability claim. Google DeepMind, for example, publicly distinguishes an embodied-reasoning model from a vision-language-action model in its Gemini Robotics architecture; other research systems use different boundaries.',
+        ],
+        table: {
+          headers: ['Component', 'Primary job', 'Typical output', 'What the label does not prove'],
+          rows: [
+            ['Vision-language model (VLM)', 'Connect visual observations with language and semantic knowledge.', 'Text, labels, answers, scene descriptions, or representations.', 'That its output is grounded in a robot action space or can control hardware.'],
+            ['Embodied reasoning (ER)', 'Reason about spatial state, affordances, task steps, or plans for an embodied agent.', 'Plan, subgoal, pose, code, tool call, or structured instruction.', 'That the proposed result can be executed safely or robustly by a specific robot.'],
+            ['Vision-language-action model (VLA)', 'Map observations and instructions into robot actions or action chunks.', 'Discrete or continuous commands in a documented action representation.', 'Cross-robot transfer, high-frequency contact response, or general physical intelligence.'],
+            ['World model', 'Predict future observations, states, contact, rewards, or outcomes under candidate actions.', 'A rollout, latent future, video, tactile state, or predicted transition.', 'That prediction alone selects or executes a successful action.'],
+            ['Robot policy', 'Choose an action from the current observation, state, history, or goal.', 'Joint, pose, gripper, torque, or higher-level command.', 'That the policy is learned; classical and hybrid policies are also possible.'],
+            ['Robot control', 'Estimate and regulate motion, force, balance, and actuator behavior.', 'Tracked trajectories, forces, torques, motor commands, or protective responses.', 'That a high-level AI model replaces control, integration, or safety engineering.'],
+          ],
+        },
+      },
+      {
+        heading: 'Where robot learning and data fit',
+        body: [
+          'Robot learning uses data or interaction to improve a representation, predictor, reward model, policy, or controller. Demonstrations can come from teleoperation, scripted collection, existing datasets, simulation, autonomous rollouts, or corrections after failure.',
+          'A larger dataset does not automatically imply broader capability. Evidence should identify embodiments, sensors, action spaces, tasks, environments, human interventions, splits, access terms, and whether evaluation occurred on a physical robot.',
+        ],
+        bullets: [
+          'Use the robotics dataset route for broad demonstration, observation, action, access, and license fields.',
+          'Use the robot teleoperation route to trace how human control becomes synchronized training data.',
+          'Use the robot learning route for imitation, reinforcement, correction, transfer, and deployment evidence.',
+          'Use the benchmark routes to keep dataset scale separate from evaluated robot performance.',
+        ],
+      },
+      {
+        heading: 'How touch closes the physical contact loop',
+        body: [
+          'Vision can describe a scene and guide an approach, but cameras may not directly measure local pressure, shear, slip, deformation, or hidden contact after a hand or tool reaches an object. Tactile sensing supplies that local measurement channel.',
+          'Robot skin is the physical sensing surface. Tactile AI is the representation, inference, and action workflow that uses touch data. Depending on the system, touch can enter a multimodal policy, a predictive world model, a task evaluator, or a faster reactive correction loop. None of those roles should be inferred unless the source documents it.',
+        ],
+        table: {
+          headers: ['Touch layer', 'Role in robot AI', 'Minimum evidence'],
+          rows: [
+            ['Robot skin or tactile sensor', 'Measures contact at a fingertip, palm, gripper, foot, arm, or body surface.', 'Sensor, modality, geometry, calibration, sampling, mounting, and repeatability.'],
+            ['Tactile representation', 'Converts raw taxels, force, vibration, pressure, or tactile images into model-ready features.', 'Training data, held-out protocol, sensor dependence, and task-relevant information.'],
+            ['Tactile policy or world model', 'Uses touch to select an action or predict contact evolution.', 'Action interface, comparison baseline, real-robot protocol, latency, and failure cases.'],
+            ['Contact-aware control', 'Changes grip, motion, force, recovery, or stop behavior from measured contact.', 'End-to-end response time and a measured behavioral difference under the same conditions.'],
+          ],
+        },
+      },
+      {
+        heading: 'Physical AI and embodied AI in this map',
+        body: [
+          'Physical AI is used here as a broad industry term for AI systems that perceive, reason, and act through physical machines. Embodied AI is a broader research framing that can include physical robots as well as simulated or virtual embodied agents. Robotics remains the engineering discipline that supplies the machine and its physical interfaces.',
+          'These terms overlap, but there is no single model architecture implied by either label. The Physical AI page covers the broad system boundary; Physical AI and touch is the child route for tactile sensing and contact feedback.',
+        ],
+      },
+      {
+        heading: 'How to evaluate an AI robot claim',
+        body: [
+          'Start with the robot and task rather than the model name. Record what the system observed, what the model produced, what controller executed, what human help remained, and how outcomes were measured. Then test the scope of any generalization claim.',
+        ],
+        bullets: [
+          'Identify the robot embodiment, end effector, sensors, compute path, and action representation.',
+          'Separate training environments and objects from held-out evaluation conditions.',
+          'Report trials, resets, interventions, failures, recovery, task time, force, and damage where relevant.',
+          'Distinguish a project demonstration, provider-reported evaluation, preprint result, peer-reviewed result, and independent reproduction.',
+          'Do not treat a VLM benchmark, simulated rollout, or generated video as real-robot task success.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between AI and robotics?',
+        answer:
+          'AI provides computational methods for perception, learning, prediction, reasoning, and action selection. Robotics engineers physical machines with sensors, actuators, controllers, integration, and safety. They overlap when AI methods are connected to a robot observation-and-action loop.',
+      },
+      {
+        question: 'Do all robots use artificial intelligence?',
+        answer:
+          'No. Robots can use fixed logic, state machines, classical planning, feedback control, teleoperation, learned models, or hybrids. The presence of sensors and automation does not by itself prove that a robot uses AI.',
+      },
+      {
+        question: 'Is a VLM the same as a robot VLA model?',
+        answer:
+          'No. A VLM connects vision and language, while a VLA model adds an action output tied to a documented robot action representation. A VLM can support reasoning or planning without directly controlling a robot.',
+      },
+      {
+        question: 'Why does robot AI need tactile feedback?',
+        answer:
+          'Touch can measure local physical interaction that vision and language do not directly observe, including contact, pressure, shear, slip, and deformation. Its value depends on whether the signal is calibrated, synchronized, and used by evaluation, a model, a policy, or a controller.',
+      },
+      {
+        question: 'Does a world model control a robot?',
+        answer:
+          'Not necessarily. A world model predicts possible future states or observations. A planner or policy may use that prediction to choose an action, while a controller executes commands on the robot.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'Physical AI', href: '/physical-ai', description: 'The broad physical perception, reasoning, action, and feedback system.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'How demonstrations, interaction, correction, and evaluation shape robot behavior.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Separate vision-language, reasoning, action policy, and embodiment evidence.' },
+      { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare model roles, training data, embodiments, access, tactile input, and evidence boundaries.' },
+      { label: 'Robot world models', href: '/robot-world-models', description: 'How predictive models differ from policies and controllers.' },
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Compare broad observation, action, embodiment, task, access, and license fields.' },
+      { label: 'Robot teleoperation', href: '/robot-teleoperation', description: 'Trace human demonstrations into robot-learning data.' },
+      { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Map grasping, insertion, tool use, policies, and contact-rich evaluation.' },
+      { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Connect embodiment, whole-body control, hands, safety, and sensing.' },
+      { label: 'Robot hands', href: '/robot-hands', description: 'Compare end effectors, actuation, sensing, and dexterous task evidence.' },
+      { label: 'Robot safety', href: '/robot-safety', description: 'Keep learned behavior separate from system integration and safety validation.' },
+      { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become representations, predictions, and robot responses.' },
+      { label: 'Robot skin', href: '/robot-skin', description: 'The distributed physical surface for measuring contact.' },
+      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'The tactile-sensing child route for Physical AI.' },
+      { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'How touch contributes to contact-rich robot tasks.' },
+      { label: 'Visuo-tactile systems', href: '/visuo-tactile', description: 'How vision and touch complement one another before and after contact.' },
+    ],
+    sources: [
+      { label: 'Google DeepMind Gemini Robotics architecture', href: 'https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/' },
+      { label: 'Google DeepMind RT-2 paper', href: 'https://arxiv.org/abs/2307.15818' },
+      { label: 'Open X-Embodiment paper', href: 'https://arxiv.org/abs/2310.08864' },
+      { label: 'NVIDIA GR00T N1 paper', href: 'https://arxiv.org/abs/2503.14734' },
+      { label: 'Hugging Face LeRobot v0.6 release', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'T-Rex tactile-reactive dexterous manipulation paper', href: 'https://arxiv.org/abs/2606.17055' },
+    ],
+  },
+  {
+    path: '/robot-foundation-models',
+    title: 'Robot Foundation Models: Data, Transfer & Evaluation',
+    description:
+      'Compare robot foundation models, VLMs, VLA policies, embodied-reasoning systems, world models, and tactile models by data, embodiment, access, and real-robot evidence.',
+    h1: 'Robot foundation models and the robot AI model stack',
+    kicker: 'Source-reviewed model directory',
+    intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
+    published: '2026-08-21',
+    updated: '2026-08-21',
+    priority: 0.9,
+    changeFrequency: 'weekly',
+    schemaType: 'TechArticle',
+    visualKey: 'technology',
+    keywords: [
+      'robot foundation models',
+      'foundation model robotics',
+      'robot AI models',
+      'generalist robot model',
+      'multi-embodiment robot model',
+      'robot VLA model',
+      'embodied AI model',
+      'robot world model',
+      'tactile foundation model',
+    ],
+    quickAnswer: [
+      'A robot foundation model is a broadly pretrained model intended to be adapted or reused across multiple robot tasks, environments, or embodiments. The label is an architectural and training claim, not proof of general-purpose robot capability.',
+      'Robot AI systems contain different model roles. A VLM or embodied-reasoning model may interpret and plan, a VLA or policy may produce actions, and a world model may predict consequences. These roles can be combined but should not be treated as synonyms.',
+      'Compare models by their inputs, action interface, training mixture, robot embodiments, access terms, real-robot evaluation, and evidence limitations. RoboSkin.ai also records whether tactile input is documented, absent, or unclear.',
+    ],
+    sections: [
+      {
+        heading: 'What qualifies as a robot foundation model?',
+        body: [
+          'The term usually describes a model pretrained on sufficiently broad data to support adaptation across more than one narrowly fixed task. Breadth can come from multiple tasks, robot bodies, environments, sensor streams, language supervision, web data, simulation, or combinations of those sources.',
+          'There is no single universally accepted threshold for the label. A provider may call a model foundational while releasing limited training details or evaluation scope. RoboSkin.ai therefore records the claimed role separately from the evidence that readers can inspect.',
+        ],
+        bullets: [
+          'Identify the base architecture and whether the released artifact is a VLM, VLA, policy, world model, representation, or orchestration model.',
+          'Record how many embodiments and action spaces appear in training and evaluation without assuming that training diversity guarantees transfer.',
+          'Separate an open paper, open code, downloadable weights, reusable data, API access, and private preview; they are different availability states.',
+          'Keep provider-reported evaluations and independent reproductions distinct.',
+        ],
+      },
+      {
+        heading: 'Model roles in the robot AI stack',
+        body: [
+          'Robot foundation-model discussions often collapse several components into one list. A useful comparison starts by identifying what each artifact consumes and what it actually produces.',
+        ],
+        table: {
+          headers: ['Model role', 'Typical inputs', 'Typical output', 'Key evaluation question'],
+          rows: [
+            ['Vision-language model', 'Images, video, text, and sometimes robot state.', 'Text, semantic representation, answer, or high-level decision.', 'Does the result remain grounded in the robot, scene, and task rather than only a language benchmark?'],
+            ['Embodied-reasoning model', 'Multimodal observations, instructions, history, and tools.', 'Plan, subgoal, state estimate, code, or tool call.', 'Can a documented downstream policy and controller execute the proposal and detect failure?'],
+            ['Vision-language-action model', 'Images or video, language, robot state, and action history.', 'Discrete or continuous robot actions or action chunks.', 'Which action space, robot bodies, task splits, interventions, and real-robot trials were tested?'],
+            ['Robot policy', 'Observation, state, history, and goal.', 'Action for the robot or controller.', 'Is it generalist, task-specific, learned, classical, or a hybrid, and what transfer is demonstrated?'],
+            ['World model', 'State or observation plus a candidate action or context.', 'Predicted future state, observation, reward, contact, or trajectory.', 'Does using the prediction improve planning or policy performance on a physical robot?'],
+            ['Tactile model', 'Taxels, force, vibration, tactile images, or synchronized visual-touch data.', 'Contact representation, property estimate, prediction, or corrective action.', 'Does it transfer across sensors, tasks, objects, and robot bodies under a controlled protocol?'],
+          ],
+        },
+      },
+      {
+        heading: 'Data, embodiment, and transfer are separate claims',
+        body: [
+          'Robot models learn from heterogeneous mixtures that can include web vision-language data, human video, teleoperated demonstrations, autonomous rollouts, simulation, synthetic trajectories, robot state, and tactile data. Each source contributes different information and different biases.',
+          'Multi-embodiment training means that more than one robot body appears in the data. It does not automatically prove zero-shot control on an unseen robot. A transfer claim should state what was frozen, fine-tuned, adapted, remapped, or collected on the target platform.',
+        ],
+        bullets: [
+          'Training data: source, scale, licensing, curation, task coverage, and robot distribution.',
+          'Observation contract: cameras, language, proprioception, touch, history length, and calibration.',
+          'Action contract: joints, end-effector poses, action chunks, torques, gripper state, or tool calls.',
+          'Transfer contract: target robot, adaptation examples, fine-tuning method, and held-out conditions.',
+          'Evaluation contract: trials, resets, intervention policy, success criteria, failures, timing, and damage.',
+        ],
+      },
+      {
+        heading: 'How to read the RoboSkin.ai model directory',
+        body: [
+          'The directory below is a source-reviewed comparison, not a leaderboard. It intentionally includes different model roles so readers can see where a model sits in the AI-to-robot loop, but it does not rank unlike tasks or reuse provider scores as a universal benchmark.',
+          'Unknown facts remain unknown. When weights, licenses, training mixtures, sensor inputs, or independent tests cannot be verified, the record states that boundary instead of inferring it from a product announcement or demonstration video.',
+        ],
+      },
+      {
+        heading: 'Where touch fits in robot foundation models',
+        body: [
+          'Most broadly discussed robot models are organized around vision, language, and robot state. Touch can enter as an additional observation, a learned tactile representation, a predicted contact state, a reward or success signal, or a faster corrective policy after physical contact begins.',
+          'A model should only be marked as tactile when its documented input or architecture actually uses touch, force, pressure, contact, or a tactile representation. Mounting a tactile sensor on the same robot is not enough if the model does not consume that signal.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is a robot foundation model?',
+        answer:
+          'It is a broadly pretrained model intended for reuse or adaptation across multiple robot tasks, environments, or embodiments. The term does not by itself prove generalization, safe deployment, or access to weights and training data.',
+      },
+      {
+        question: 'Are all robot foundation models VLA models?',
+        answer:
+          'No. A robot foundation-model ecosystem can include VLMs, embodied-reasoning models, VLA policies, world models, reward models, and tactile representations. A VLA specifically produces robot actions from multimodal context.',
+      },
+      {
+        question: 'What makes a robot model generalist?',
+        answer:
+          'Generalist is a claim about breadth across tasks, objects, environments, instructions, or robot embodiments. It should be evaluated against explicit held-out conditions rather than inferred from model size or dataset scale.',
+      },
+      {
+        question: 'Does open source mean a robot model is fully reproducible?',
+        answer:
+          'No. Code, weights, datasets, hardware, licenses, calibration, action mappings, and evaluation protocols can have different access states. Reproduction requires enough of the complete system, not only a public repository.',
+      },
+      {
+        question: 'How does tactile input change a robot AI model?',
+        answer:
+          'Tactile input can add local contact evidence such as pressure, force, slip, vibration, or deformation. It may support representation learning, contact prediction, policy correction, or evaluation, but each use must be verified from the model interface and experiment.',
+      },
+    ],
+    relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place foundation models inside the full perception, reasoning, policy, control, and feedback loop.' },
+      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
+      { label: 'Robot world models', href: '/robot-world-models', description: 'Separate future prediction from action selection and control.' },
+      { label: 'Robot learning', href: '/robot-learning', description: 'Trace demonstrations, reinforcement, correction, transfer, and deployment.' },
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Compare broad robot observations, actions, embodiments, access, and license evidence.' },
+      { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Review touch representations, world models, policies, and transfer evidence.' },
+      { label: 'Physical AI', href: '/physical-ai', description: 'Connect models to embodiment, control, safety, and physical feedback.' },
+    ],
+    sources: [
+      { label: 'Open X-Embodiment and RT-X paper', href: 'https://arxiv.org/abs/2310.08864' },
+      { label: 'OpenVLA paper', href: 'https://arxiv.org/abs/2406.09246' },
+      { label: 'Octo paper', href: 'https://arxiv.org/abs/2405.12213' },
+      { label: 'NVIDIA Isaac GR00T N1 paper', href: 'https://arxiv.org/abs/2503.14734' },
+      { label: 'Sparsh tactile representation paper', href: 'https://arxiv.org/abs/2410.24090' },
+    ],
+  },
+  {
     path: '/robot-skin',
     title: 'Robot Skin: Technologies, Sensors & Research',
     description:
@@ -126,7 +442,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become useful robot behavior.' },
-      { label: 'Physical AI', href: '/physics-ai', description: 'Why Physical AI needs robot skin, tactile AI, and contact feedback.' },
+      { label: 'Physical AI', href: '/physical-ai', description: 'Place robot skin inside the broader physical perception, action, and feedback system.' },
       { label: 'E-skin', href: '/e-skin', description: 'How electronic skin overlaps with robot skin.' },
       { label: 'Robot skin vs tactile sensor', href: '/guides/robot-skin-vs-tactile-sensor', description: 'Clarify the system-versus-component distinction.' },
       { label: 'Robot hand tactile sensor', href: '/applications/robot-hand-tactile-sensor', description: 'How robot skin applies to dexterous hands and grasping.' },
@@ -874,6 +1190,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Physical AI', href: '/physical-ai', description: 'The broad parent route for physical perception, reasoning, policy, control, and feedback.' },
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Map how AI models connect to robot embodiment, action, and measured outcomes.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that turns touch data into behavior.' },
       { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'The contact-feedback loop that turns touch data into robot action.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
@@ -1661,7 +1979,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
-      { label: 'Physical AI explainer', href: '/physics-ai', description: 'Canonical RoboSkin.ai Physical AI route.' },
+      { label: 'Physical AI explainer', href: '/physical-ai', description: 'Canonical RoboSkin.ai Physical AI route.' },
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'The pillar page for touch data in Physical AI.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Surface-level contact sensing route.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'How touch signals become behavior.' },
@@ -2770,10 +3088,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'What should a humanoid robot benchmark report?', answer: 'It should identify the robot, task, environment, autonomy level, inputs, baseline, trials, success criteria, interventions, and failure modes. Hardware and software versions also matter.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place humanoid embodiment inside the full AI perception, policy, control, and feedback loop.' },
       { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Map whole-hand, arm, foot, and body tactile sensing.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Follow grasping, insertion, dexterity, and contact-rich tasks.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand vision-language-action models and where touch fits.' },
-      { label: 'Physical AI', href: '/physics-ai', description: 'Connect humanoid embodiment to physical-world perception and action.' },
+      { label: 'Physical AI', href: '/physical-ai', description: 'Connect humanoid embodiment to physical-world perception and action.' },
       { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Compare fingertip, finger, palm, and full-hand sensing roles.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Find robot, sensor, task, modality, format, and license records.' },
       { label: 'Humanoid locomotion touch brief', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'Review source-bounded plantar tactile evidence.' },
@@ -2794,14 +3113,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Learn how robot vision-language-action models connect instructions and observations to actions, and where touch, world models, data, and evaluation fit.',
     h1: 'Robot VLA models: from vision and language to action',
     kicker: 'High-interest robot learning pillar',
-    intent: 'Definition and comparison guide for robot VLA models, vision-language-action models, robot foundation models, embodied reasoning, and multimodal robot policies.',
+    intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
     updated: '2026-08-20',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'technology',
-    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'robot foundation model', 'embodied AI model', 'generalist robot policy', 'multimodal robot learning', 'tactile VLA'],
+    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA'],
     quickAnswer: [
       'A robot vision-language-action model, usually shortened to VLA, uses visual observations and language instructions to produce or condition robot actions. Implementations differ in action representation, training data, embodiment coverage, control rate, and whether a separate planner or controller is required.',
       'A VLA is not automatically a world model or an embodied reasoning system. A world model predicts future state; embodied reasoning can decompose and monitor tasks; a VLA maps observations and instructions toward physical action.',
@@ -2860,7 +3179,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Current model ecosystem',
         body: [
           'Google DeepMind describes Gemini Robotics 2 as a VLA for whole-body and dexterous robot control, paired with a separate embodied reasoning model. NVIDIA publishes Isaac GR00T as a family of open foundation models for generalized humanoid reasoning and skills. Hugging Face LeRobot exposes multiple policy families, datasets, evaluation environments, and 2026 integrations for VLAs and world-model policies.',
-          'RoboSkin.ai does not treat those official descriptions as proof of equivalent capability. This page is the broad model map; tactile foundation-model, world-model, dataset, benchmark, and manipulation pages hold the narrower evidence comparisons.',
+          'RoboSkin.ai does not treat those official descriptions as proof of equivalent capability. This page owns the VLA and action-policy role; the robot foundation-model directory owns broad pretraining, transfer, access, and evidence comparisons, while tactile foundation-model, world-model, dataset, benchmark, and manipulation pages hold narrower technical evidence.',
         ],
       },
     ],
@@ -2871,6 +3190,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How should VLA models be compared?', answer: 'Compare them only after aligning robot embodiment, tasks, inputs, action space, data, baselines, control rate, and real-robot evaluation. Unlike settings should not be collapsed into a leaderboard.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place VLA policies inside the full perception, reasoning, control, action, and feedback loop.' },
+      { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare broader model roles, training data, embodiment transfer, access, and evidence.' },
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, predictive models, and policy roles.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Connect VLA policies to demonstrations, datasets, training paradigms, and evaluation.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Review action-conditioned contact prediction and planning evidence.' },
@@ -2982,6 +3303,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How should robot manipulation systems be evaluated?', answer: 'Align the robot, end effector, task, inputs, data, controller, objects, trials, success criteria, interventions, and failure reporting before comparing results.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place manipulation inside the full perception, planning, policy, control, and feedback loop.' },
       { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Follow the contact-to-action loop in detail.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Compare demonstrations, reinforcement, datasets, simulation, and tactile learning.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand instruction-conditioned robot policies and model roles.' },
@@ -3009,14 +3331,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Learn how robots learn from demonstrations, reinforcement, datasets, simulation, and touch, with source-backed guidance for real-world evaluation.',
     h1: 'Robot learning: data, models and real-world evaluation',
     kicker: 'High-interest robotics pillar',
-    intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real, robot foundation models, and tactile learning.',
+    intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
     updated: '2026-08-20',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
-    keywords: ['robot learning', 'robotics machine learning', 'imitation learning robotics', 'reinforcement learning robots', 'robot learning datasets', 'sim-to-real robotics', 'robot foundation models', 'tactile robot learning', 'LeRobot', 'embodied AI'],
+    keywords: ['robot learning', 'robotics machine learning', 'imitation learning robotics', 'reinforcement learning robots', 'robot learning datasets', 'sim-to-real robotics', 'robot policy learning', 'tactile robot learning', 'LeRobot'],
     quickAnswer: [
       'Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources.',
       'A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability.',
@@ -3111,6 +3433,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How should sim-to-real results be judged?', answer: 'State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place learning methods inside the complete model, robot, action, and feedback system.' },
+      { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare reusable model roles, data, embodiment transfer, access, and evidence.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the path from touch signals to robot perception and action.' },
@@ -3240,6 +3564,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How should robot hands be compared?', answer: 'Align kinematics, actuation, physical limits, sensing, software, task, objects, trials, success criteria, interventions, failures, and evidence level. Do not rank hands by degrees of freedom alone.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Connect hand embodiment and sensing to robot policies, control, and physical outcomes.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place hands inside whole-body Physical AI systems.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect end-effectors to grasping, insertion, reorientation, and tool use.' },
       { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Compare fingertip, finger, palm, and full-hand sensing roles.' },
@@ -3357,6 +3682,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Is a humanoid performance benchmark a safety certification?', answer: 'No. A performance benchmark can make locomotion or manipulation results comparable. Safety certification and application risk assessment address different requirements and evidence.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place model behavior, low-level control, physical safeguards, and feedback in one system map.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Map embodiment, control, manipulation, sensing, and evidence.' },
       { label: 'Humanoid robot skin', href: '/humanoid-robot-skin', description: 'Review whole-body tactile coverage and safety-layer boundaries.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'Understand distributed tactile surfaces and system integration.' },
@@ -3484,6 +3810,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Can an announced dataset be described as open?', answer: 'Only after a current authoritative source provides access and a license. A paper saying that data will be released is not proof that it is presently downloadable or reusable.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Connect training data to AI models, robot policies, evaluation, and real-world feedback.' },
       { label: 'Tactile robotics datasets', href: '/datasets', description: 'Browse the dedicated touch-data hub and its normalized fields.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Connect data to training methods, evaluation, and sim-to-real evidence.' },
       { label: 'Robot teleoperation', href: '/robot-teleoperation', description: 'Follow the path from operator demonstrations to policy training data.' },
@@ -3606,6 +3933,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Does a plausible generated video prove a useful world model?', answer: 'No. Visual plausibility can hide physically wrong geometry, contact, timing, or action consequences. Downstream planning and repeated real-robot evidence are required for stronger claims.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Place consequence prediction inside the complete perception, policy, control, and feedback loop.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare contact-aware predictive models at the primary-source level.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Separate consequence prediction from instruction-conditioned action.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Place world models inside the broader data and training loop.' },
@@ -3721,6 +4049,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Why record tactile data during teleoperation?', answer: 'Touch can expose contact onset, pressure, shear, slip, seating, and corrective behavior that cameras may miss, but it must be synchronized with robot state and actions to support learning.' },
     ],
     relatedLinks: [
+      { label: 'AI and robotics', href: '/ai-robotics', description: 'Connect human demonstrations to robot data, policy learning, deployment, and feedback.' },
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review broad robot-data fields, splits, access, and license.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Connect demonstrations to imitation, correction, evaluation, and transfer.' },
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand how images, language, state, and actions enter generalist policies.' },

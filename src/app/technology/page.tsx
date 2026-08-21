@@ -119,7 +119,7 @@ export default function TechnologyPage() {
                   For Physical AI systems, robot skin is the contact layer. It helps expose touch, pressure,
                   shear, slip, and timing signals that vision alone cannot measure during interaction.
                 </p>
-                <Link href="/physics-ai" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
+                <Link href="/physical-ai" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
                   Open the Physical AI tactile contact layer {'->'}
                 </Link>
               </div>

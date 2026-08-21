@@ -166,7 +166,7 @@ if (failures.length === 0) {
   if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) failures.push('/news-sitemap.xml: non-apex URL found');
 
   const llmsFull = await readFile(path.join(out, 'llms-full.txt'), 'utf8');
-  const requiredLlmsRoutes = ['/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-manipulation', '/robot-hands', '/robot-safety', '/robotics-datasets', '/robot-world-models', '/robot-teleoperation', '/datasets', '/benchmarks', '/sensors', '/research-index'];
+  const requiredLlmsRoutes = ['/ai-robotics', '/physical-ai', '/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-foundation-models', '/robot-manipulation', '/robot-hands', '/robot-safety', '/robotics-datasets', '/robot-world-models', '/robot-teleoperation', '/datasets', '/benchmarks', '/sensors', '/research-index'];
   if (!llmsFull.startsWith('# RoboSkin.ai Full Knowledge')) failures.push('/llms-full.txt: invalid title');
   if (llmsFull.length < 20000) failures.push('/llms-full.txt: generated knowledge snapshot is unexpectedly small');
   if (requiredLlmsRoutes.some((route) => !llmsFull.includes(canonicalFor(route)))) failures.push('/llms-full.txt: missing canonical knowledge routes');

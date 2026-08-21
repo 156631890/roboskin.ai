@@ -25,6 +25,11 @@
   ],
   "redirects": [
     {
+      "source": "/physics-ai",
+      "destination": "https://roboskin.ai/physical-ai",
+      "statusCode": 301
+    },
+    {
       "source": "/applications/humanoid-robot-skin",
       "destination": "https://roboskin.ai/humanoid-robot-skin",
       "permanent": true

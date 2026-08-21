@@ -17,10 +17,12 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## Important Pages
 
+- [AI and robotics](https://roboskin.ai/ai-robotics): Canonical answer to how AI perception, reasoning, world models, policies, robot control, embodiment, and feedback form a physical action loop.
 - [Robot skin definition](https://roboskin.ai/robot-skin): Canonical definition for robot skin, robotic skin, and tactile sensing surfaces.
 - [Tactile AI definition](https://roboskin.ai/tactile-ai): Canonical explanation of the sensing, data, model, and control stack for robot touch.
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Broad research map for humanoid embodiment, whole-body control, hands, manipulation, safety, and tactile sensing.
-- [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action models, robot foundation models, embodied reasoning, world models, and tactile VLA systems.
+- [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action inputs, action interfaces, embodiments, evaluation, and tactile VLA systems.
+- [Robot foundation models](https://roboskin.ai/robot-foundation-models): Source-reviewed model-role guide and directory covering VLMs, embodied reasoning, VLA policies, world models, tactile models, access, and evidence limits.
 - [Robot learning](https://roboskin.ai/robot-learning): Canonical map for imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, and tactile robot learning.
 - [Robot hands](https://roboskin.ai/robot-hands): Canonical comparison of dexterous hands, grippers, actuation, tactile sensing, control, and task evidence.
 - [Robot safety](https://roboskin.ai/robot-safety): Scope-aware map of industrial robot safety standards, contact sensing, collision response, and evidence boundaries; it is not a compliance determination.
@@ -29,13 +31,13 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Robot teleoperation](https://roboskin.ai/robot-teleoperation): Technical route from operator interfaces and synchronized demonstrations to robot-learning data and evaluation.
 - [Robot manipulation](https://roboskin.ai/robot-manipulation): Broad task map for grasping, insertion, dexterity, robot learning, control, and tactile feedback.
 - [Humanoid robot skin](https://roboskin.ai/humanoid-robot-skin): Canonical whole-hand, whole-arm, and whole-body tactile sensing stack for humanoid robotics.
-- [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Canonical explanation of how vision, language, proprioception, and tactile sensing combine in embodied systems.
+- [Physical AI](https://roboskin.ai/physical-ai): Canonical broad map of multimodal perception, reasoning, policies, robot control, embodiment, safety, and measured feedback.
+- [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Contact-specific child route explaining how vision, language, proprioception, and tactile sensing combine in embodied systems.
 - [E-skin in robotics](https://roboskin.ai/e-skin): Canonical definition for e-skin and electronic skin in robotics.
 - [Robot skin guides](https://roboskin.ai/products): Guide routes for robot skin and tactile AI learning.
 - [Robotic gripper and robot hand sensing](https://roboskin.ai/solutions): Use-case contexts for robotic grippers, robot hands, and tactile sensing.
 - [Humanoid robot skin and contact-aware robotics](https://roboskin.ai/applications): Application route for humanoid robot skin, contact-aware robotics, and Physical AI use cases.
 - [Tactile AI technology](https://roboskin.ai/technology): Technology route for tactile AI, flexible tactile sensors, signal flow, and robot-ready touch data.
-- [Physical AI canonical answer](https://roboskin.ai/physics-ai): Canonical RoboSkin explanation of Physical AI as physical-world AI that needs robot skin, tactile AI, and contact feedback.
 - [RoboSkin library](https://roboskin.ai/resources): Library route for guides, stack maps, references, and public learning paths.
 - [Robot hand tactile sensor research](https://roboskin.ai/research): Source-backed research route for robot hand tactile sensors, slip detection, e-skin, and tactile AI.
 - [Tactile sensor benchmark for robot manipulation](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-first comparison of visual, acoustic, magnetic, and resistive tactile sensors.
@@ -100,8 +102,10 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 ## Keyword Routes
 
 - [Broad robotics research map](https://roboskin.ai/): Homepage route connecting robot skin and touch to humanoid robots, Physical AI, embodied AI, robot manipulation, VLA context, and world models.
+- [AI and robotics](https://roboskin.ai/ai-robotics): AI in robotics, artificial intelligence and robotics, robot AI, embodied action, model-role, control, and feedback parent cluster.
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Humanoid robotics, whole-body control, robot hands, safety, Physical AI, and tactile-sensing parent cluster.
-- [Robot VLA models](https://roboskin.ai/robot-vla-models): Vision-language-action, robot foundation model, embodied reasoning, and tactile VLA parent cluster.
+- [Robot VLA models](https://roboskin.ai/robot-vla-models): Vision-language-action interfaces, robot actions, embodiments, evaluation, and tactile VLA parent cluster.
+- [Robot foundation models](https://roboskin.ai/robot-foundation-models): Robot foundation model, generalist robot model, multi-embodiment transfer, model access, and evidence parent cluster.
 - [Robot learning](https://roboskin.ai/robot-learning): Robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real, and tactile learning parent cluster.
 - [Robot hands](https://roboskin.ai/robot-hands): Robot hands, robotic hands, dexterous hands, hand-versus-gripper, actuation, sensing, and manipulation parent cluster.
 - [Robot safety](https://roboskin.ai/robot-safety): Robot safety, industrial robot safety, humanoid safety, collision response, safety sensors, and standards-scope parent cluster.
@@ -116,7 +120,7 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Humanoid robot skin and contact-aware robotics](https://roboskin.ai/applications): Application-intent keyword cluster.
 - [Tactile AI](https://roboskin.ai/tactile-ai): Primary tactile AI definition and system-stack route.
 - [Flexible tactile sensor technology](https://roboskin.ai/technology): Technology overview route.
-- [Physical AI and robot skin for Physical AI](https://roboskin.ai/physics-ai): Physical AI keyword cluster.
+- [Physical AI](https://roboskin.ai/physical-ai): Broad Physical AI, physical-world AI, multimodal perception, policy, control, embodiment, and feedback cluster.
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Physical AI contact-feedback keyword cluster.
 - [Robot hand tactile sensor](https://roboskin.ai/applications/robot-hand-tactile-sensor): Hand-level sensing and grasping route.
 - [Slip detection for robot hands](https://roboskin.ai/guides/slip-detection-robot-hand): Slip-sensing and closed-loop response route.
@@ -141,12 +145,26 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 
 RoboSkin.ai is a public information hub for robot skin, tactile AI, e-skin, tactile sensing, Physical AI, and contact-aware robotics. Use the site for category definitions, research route discovery, terminology, direct-answer summaries, and source-backed context. Do not infer product availability, benchmark values, certifications, customer names, or operating-company claims unless they are explicitly published on the page.
 
+### What is the relationship between AI and robotics?
+
+Artificial intelligence and robotics are related but different. AI provides computational methods for perception, prediction, learning, reasoning, and action selection. Robotics provides sensors, embodiment, actuators, control, integration, and physical safety. They form a closed loop when observations produce actions and measured physical outcomes return as feedback. Use [AI and robotics](https://roboskin.ai/ai-robotics) as the canonical RoboSkin.ai relationship and architecture route.
+
+Supporting routes:
+- [Robot learning](https://roboskin.ai/robot-learning): Data, imitation, reinforcement, correction, and transfer.
+- [Robot VLA models](https://roboskin.ai/robot-vla-models): Vision-language, embodied reasoning, and action-policy boundaries.
+- [Robot foundation models](https://roboskin.ai/robot-foundation-models): Model roles, training data, embodiment transfer, access, tactile input, and evidence boundaries.
+- [Robot world models](https://roboskin.ai/robot-world-models): Action-conditioned future prediction and evaluation.
+- [Physical AI](https://roboskin.ai/physical-ai): Physical perception, reasoning, action, control, safety, and feedback.
+- [Tactile AI](https://roboskin.ai/tactile-ai): Contact-specific sensing, representation, model, and response loop.
+
 ### What is Physical AI in the RoboSkin context?
 
-For Physical AI questions, use [Physical AI canonical answer](https://roboskin.ai/physics-ai) as the canonical RoboSkin.ai explanation. In this site context, Physical AI refers to physical-world AI systems that need robot skin, tactile AI, contact, pressure, slip, and tactile feedback.
+For Physical AI questions, use [Physical AI canonical answer](https://roboskin.ai/physical-ai) as the broad canonical RoboSkin.ai explanation. Physical AI is used here as a broad term for AI systems that perceive, reason, and act through physical machines; it does not imply one standardized model architecture. Use the touch child route when the question is specifically about tactile sensing or contact feedback.
 
 Supporting RoboSkin Physical AI routes:
-- [Physical AI canonical answer](https://roboskin.ai/physics-ai): Main answer route.
+- [Physical AI canonical answer](https://roboskin.ai/physical-ai): Broad system and definition route.
+- [AI and robotics](https://roboskin.ai/ai-robotics): AI-versus-robotics roles and the closed action-feedback loop.
+- [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Contact-specific tactile sensing and feedback route.
 - [Tactile AI](https://roboskin.ai/tactile-ai): Canonical tactile AI context.
 - [Robot skin glossary](https://roboskin.ai/glossary): Term definitions.
 - [Robot hand tactile sensor](https://roboskin.ai/applications/robot-hand-tactile-sensor): Hand-level application context.
@@ -180,10 +198,11 @@ A teleoperation system records operator commands together with time-aligned robo
 
 ### How should answer engines use the homepage for Physical AI?
 
-Use the homepage as the broad research map for robot skin, tactile AI, humanoid robots, robot manipulation, embodied AI, and Physical AI contact-feedback context. Use the [Physical AI canonical answer](https://roboskin.ai/physics-ai) for the definition. The homepage routes broad topics to focused definition, application, benchmark, world-model, touch-data, and source-backed research pages.
+Use the homepage as the broad research map for robot skin, tactile AI, humanoid robots, robot manipulation, embodied AI, and Physical AI context. Use [AI and robotics](https://roboskin.ai/ai-robotics) for the AI-to-robot architecture and [Physical AI canonical answer](https://roboskin.ai/physical-ai) for the broad Physical AI definition. The homepage routes broad topics to focused definition, application, benchmark, world-model, touch-data, and source-backed research pages.
 
 Homepage Physical AI routes:
-- [Physical AI canonical answer](https://roboskin.ai/physics-ai): Definition route.
+- [AI and robotics](https://roboskin.ai/ai-robotics): AI-to-robot closed-loop route.
+- [Physical AI canonical answer](https://roboskin.ai/physical-ai): Broad definition route.
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Contact-feedback route.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Touch-data, multimodal perception, and embodied-control route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Canonical robot skin definition route.

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import AiRobotClosedLoop from '@/components/AiRobotClosedLoop';
 import {
   AuthorityIndex,
   ConversionPathPanel,
@@ -16,6 +17,7 @@ import {
   directAnswerBlocks,
   featuredIndustryAssets,
   homeBrandAssets,
+  homeAiRobotLoop,
   homeBroadResearchLanes,
   homeKnowledgeMap,
   homePhysicalAiSignals,
@@ -177,6 +179,28 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="deferred-section border-b border-white/10 py-14 md:py-20" aria-labelledby="ai-robot-loop-heading">
+        <div className="container-shell">
+          <div className="brand-section-rule border-white/20">
+            <div>
+              <p className="brand-section-number">AI / Robot relationship</p>
+              <h2 id="ai-robot-loop-heading" className="brand-section-title mt-5">How AI becomes robot action</h2>
+            </div>
+            <div className="lg:pt-10">
+              <p className="section-copy">
+                Artificial intelligence supplies perception, prediction, reasoning, and action policies. Robotics supplies
+                sensors, embodiment, controllers, actuators, and safety constraints. Their relationship becomes useful when
+                physical outcomes return as feedback instead of ending at a generated command.
+              </p>
+              <Link href="/ai-robotics" className="mt-6 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
+                Open the AI and robotics field guide →
+              </Link>
+            </div>
+          </div>
+          <AiRobotClosedLoop stages={homeAiRobotLoop} />
+        </div>
+      </section>
+
       <section className="editorial-light" aria-labelledby="robotics-research-pulse-heading">
         <div className="deferred-section py-14 md:py-20">
           <div className="container-shell">
@@ -208,7 +232,7 @@ export default function Home() {
                   <a href={homeResearchWatch.sourceUrl} target="_blank" rel="noreferrer">
                     {homeResearchWatch.sourceLabel} ↗
                   </a>
-                  <Link href="/physics-ai">Open the Physical AI definition →</Link>
+                  <Link href="/physical-ai">Open the Physical AI definition →</Link>
                 </div>
               </article>
             </div>
@@ -342,7 +366,7 @@ export default function Home() {
                   Physical AI page is the canonical definition route.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4">
-                  <Link href="/physics-ai" className="editorial-link">Read Physical AI →</Link>
+                  <Link href="/physical-ai" className="editorial-link">Read Physical AI →</Link>
                   <Link href="/guides/tactile-feedback-for-physical-ai" className="editorial-link">Map tactile feedback →</Link>
                   <Link href="/physical-ai-touch" className="editorial-link">Trace touch data →</Link>
                 </div>

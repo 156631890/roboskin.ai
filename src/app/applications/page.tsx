@@ -116,7 +116,7 @@ export default function ApplicationsPage() {
               <span className="eyebrow">Physical AI use cases</span>
               <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Where RoboSkin Physical AI becomes useful</h2>
             </div>
-            <Link href="/physics-ai" className="text-sm font-semibold text-accent hover:text-white">
+            <Link href="/physical-ai" className="text-sm font-semibold text-accent hover:text-white">
               Understand RoboSkin Physical AI {'->'}
             </Link>
           </div>

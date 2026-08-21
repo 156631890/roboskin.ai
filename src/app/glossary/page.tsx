@@ -47,7 +47,7 @@ const coreTopicRoutes = [
   },
   {
     label: 'Physical AI',
-    href: '/physics-ai',
+    href: '/physical-ai',
     description: 'The canonical RoboSkin route for physical-world AI that needs touch and contact feedback.',
   },
   {

@@ -9,7 +9,7 @@ Status: Five outreach messages sent individually on 2026-08-16 from `messigoat14
 
 - New research news: https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026
 - Research index: https://roboskin.ai/research-index
-- Physical AI definition: https://roboskin.ai/physics-ai
+- Physical AI definition: https://roboskin.ai/physical-ai
 - Humanoid robot skin guide: https://roboskin.ai/applications/humanoid-robot-skin
 
 The campaign offers a useful editorial source. It does not ask for a paid link, reciprocal link, or unqualified endorsement.
@@ -102,7 +102,7 @@ Hello Mark,
 RoboSkin.ai has prepared a research brief that may fit your humanoid and Physical AI coverage. A 2026 preprint combines electrical impedance tomography with pneumatic force sensing in a large-area robot skin. The useful systems angle is the division of labor: EIT preserves contact location while the pneumatic chamber anchors force magnitude.
 
 Brief: https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026
-Physical AI context: https://roboskin.ai/physics-ai
+Physical AI context: https://roboskin.ai/physical-ai
 
 The article includes the reported 280 × 280 mm area, 100 Hz reconstruction, 32 electrodes, four pads, and the paper's stated overlap-region limitation. We can prepare an original non-promotional contribution on the complete path from contact surface to robot control if useful.
 
