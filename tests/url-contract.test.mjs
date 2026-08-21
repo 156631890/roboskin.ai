@@ -233,6 +233,7 @@ test('the export verifier checks protected URLs, canonicals, and generated outpu
   assert.match(verifier, /expectedCanonical/);
   assert.match(verifier, /research-index\.csv/);
   assert.match(verifier, /research-index\.json/);
+  assert.match(verifier, /knowledge-graph\.json/);
   assert.match(verifier, /feed\.xml/);
   assert.match(verifier, /deployment\.json/);
   assert.match(verifier, /expectedSitemapUrls/);

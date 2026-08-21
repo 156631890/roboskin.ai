@@ -91,7 +91,7 @@ export default function TactileBenchmarkExplorer({ entries }: TactileBenchmarkEx
             </thead>
             <tbody>
               {filteredEntries.map((entry) => (
-                <tr key={entry.id} className="align-top text-[#c8d1de]">
+                <tr id={`benchmark-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[220px] border-b border-white/8 px-4 py-5">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
                     <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.institutions.join('; ')}</span>

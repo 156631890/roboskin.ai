@@ -100,7 +100,7 @@ export default function TactileDatasetExplorer({ entries }: TactileDatasetExplor
             </thead>
             <tbody>
               {filteredEntries.map((entry) => (
-                <tr key={entry.id} className="align-top text-[#c8d1de]">
+                <tr id={`dataset-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[240px] border-b border-white/8 px-4 py-5">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
                     <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.availability}</span>

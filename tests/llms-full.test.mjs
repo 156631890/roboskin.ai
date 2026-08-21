@@ -20,6 +20,7 @@ test('llms-full generator uses the shared knowledge sources', () => {
     'tactileDatasetEntries',
     'tactileBenchmarkEntries',
     'tactileSensorEntries',
+    'robotAiModelEntries',
     'researchIndexEntries',
     'blogPosts',
     'newsPosts',
@@ -29,11 +30,17 @@ test('llms-full generator uses the shared knowledge sources', () => {
   assert.match(generatorSource, /Interpretation and Citation Rules/);
   assert.match(generatorSource, /Evidence boundary/);
   assert.match(generatorSource, /Primary source/);
+  assert.match(generatorSource, /Robot AI model records/);
+  assert.match(generatorSource, /## Robot AI Models/);
+  assert.match(generatorSource, /knowledge-graph\.json/);
 });
 
 test('curated llms file and homepage head expose machine-readable discovery', () => {
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/llms-full\.txt/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/research-index\.json/);
+  assert.match(llmsSource, /https:\/\/roboskin\.ai\/knowledge-graph\.json/);
+  assert.match(llmsSource, /22 papers, 1 documentation record, 12 datasets, 9 benchmarks, 13 sensors, and 10 robot AI models/);
+  assert.match(llmsSource, /103 deduplicated primary and official source records/);
   assert.match(llmsSource, /863,040 EIT electrode configurations from 1,726,080 amplitude-and-phase channels/);
   assert.doesNotMatch(
     llmsSource,

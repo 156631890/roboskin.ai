@@ -3,6 +3,7 @@ import { seoTopicPages } from '@/content/seo-topic-pages';
 import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
+import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
@@ -32,6 +33,7 @@ function latestReviewedDate() {
     ...tactileDatasetEntries.map((entry) => entry.sourceReviewed),
     ...tactileBenchmarkEntries.map((entry) => entry.sourceReviewed),
     ...tactileSensorEntries.map((entry) => entry.sourceReviewed),
+    ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
   ].sort().at(-1) ?? researchIndexUpdatedAt;
 }
 
@@ -54,6 +56,7 @@ export function buildLlmsFullText() {
     `- Dataset records: ${tactileDatasetEntries.length}`,
     `- Benchmark records: ${tactileBenchmarkEntries.length}`,
     `- Sensor records: ${tactileSensorEntries.length}`,
+    `- Robot AI model records: ${robotAiModelEntries.length}`,
     `- Structured research records: ${researchIndexEntries.length}`,
     `- Research briefs: ${blogPosts.length}`,
     `- News briefs: ${newsPosts.length}`,
@@ -81,6 +84,7 @@ export function buildLlmsFullText() {
     '',
     `- Curated LLM guide: ${canonicalUrl('/llms.txt')}`,
     `- Full LLM knowledge file: ${canonicalUrl('/llms-full.txt')}`,
+    `- Knowledge graph JSON: ${canonicalUrl('/knowledge-graph.json')}`,
     `- Research index JSON: ${canonicalUrl('/research-index.json')}`,
     `- Research index CSV: ${canonicalUrl('/research-index.csv')}`,
     `- Research and news RSS: ${canonicalUrl('/feed.xml')}`,
@@ -222,6 +226,36 @@ export function buildLlmsFullText() {
     appendOptionalLink(lines, 'Project URL', entry.projectUrl);
     appendOptionalLink(lines, 'Code URL', entry.codeUrl);
     lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
+  }
+
+  lines.push('## Robot AI Models', '', `Directory: ${canonicalUrl('/robot-foundation-models')}`, '');
+  for (const entry of robotAiModelEntries) {
+    lines.push(
+      `### ${entry.name}`,
+      '',
+      `- Record ID: ${entry.id}`,
+      `- Organization label: ${compact(entry.organization)}`,
+      `- Creator organizations: ${list(entry.creatorOrganizations) || 'Not published as verified organization entities'}`,
+      `- Release date: ${entry.releaseDate}`,
+      `- Model role: ${entry.category}`,
+      `- Input modalities: ${list(entry.inputModalities)}`,
+      `- Output: ${compact(entry.outputType)}`,
+      `- Embodiments: ${list(entry.embodiments)}`,
+      `- Training-data evidence: ${compact(entry.trainingDataSummary)}`,
+      `- Real-robot evaluation: ${compact(entry.realRobotEvaluation)}`,
+      `- Availability: ${compact(entry.availability)}`,
+      `- License evidence: ${compact(entry.license)}`,
+      `- Tactile input: ${entry.tactileInput}`,
+      `- Evidence limitation: ${compact(entry.evidenceLimitations)}`,
+      `- Project URL: ${entry.projectUrl}`,
+    );
+    appendOptionalLink(lines, 'Paper URL', entry.paperUrl ?? undefined);
+    lines.push(
+      '- Primary and official sources:',
+      ...entry.primarySources.map((source) => `  - ${markdownLink(source.label, source.url)} (${source.type})`),
+      `- Source reviewed: ${entry.sourceReviewed}`,
+      '',
+    );
   }
 
   lines.push('## Structured Research Index', '', `Directory: ${canonicalUrl('/research-index')}`, `Index reviewed: ${researchIndexUpdatedAt}`, '');

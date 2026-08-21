@@ -153,7 +153,7 @@ export default function RobotAiModelExplorer({ entries }: RobotAiModelExplorerPr
             </thead>
             <tbody className="grid gap-4 p-3 md:table-row-group md:p-0">
               {filteredEntries.map((entry) => (
-                <tr key={entry.id} className="block overflow-hidden rounded-md border border-white/10 align-top text-[#c8d1de] md:table-row md:rounded-none md:border-0">
+                <tr id={`model-${entry.id}`} key={entry.id} className="scroll-mt-24 block overflow-hidden rounded-md border border-white/10 align-top text-[#c8d1de] md:table-row md:rounded-none md:border-0">
                   <th scope="row" className="block w-full border-b border-white/10 bg-white/[0.03] px-4 py-5 text-left md:table-cell md:w-[230px] md:bg-transparent">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
                     <span className="mt-3 block text-xs leading-relaxed text-[#aeb8c7]">{entry.organization}</span>

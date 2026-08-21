@@ -10,7 +10,8 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 
 ## Machine-Readable Knowledge
 
-- [RoboSkin.ai full knowledge file](https://roboskin.ai/llms-full.txt): Expanded generated snapshot containing canonical topic content, glossary definitions, dataset records, benchmark protocols, sensor evidence, research-index records, research briefs, news briefs, and primary-source links.
+- [RoboSkin.ai full knowledge file](https://roboskin.ai/llms-full.txt): Expanded generated snapshot containing canonical topic content, glossary definitions, dataset records, benchmark protocols, sensor evidence, robot AI model records, research-index records, research briefs, news briefs, and primary-source links.
+- [RoboSkin.ai knowledge graph JSON](https://roboskin.ai/knowledge-graph.json): Deterministic machine-readable graph containing 67 source-reviewed research entities: 22 papers, 1 documentation record, 12 datasets, 9 benchmarks, 13 sensors, and 10 robot AI models. The current graph keeps 103 deduplicated primary and official source records separate from those research entities.
 - [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
 - [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
 - [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.

@@ -1,56 +1,54 @@
 'use client';
 
 import { track } from '@vercel/analytics';
-import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { site } from '@/content/site';
+import { parseNewsletterEndpoint } from '@/lib/newsletter-config.mjs';
 
-const newsletterEndpoint = process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT;
+type NewsletterConfig = NonNullable<ReturnType<typeof parseNewsletterEndpoint>>;
 
-function buildWhatsAppSubscriptionHref(email: string) {
-  const message = [
-    'RoboSkin.ai Weekly Robotics Research Brief request',
-    '',
-    `Subscriber email: ${email}`,
-    'Please add this address to the research brief list.',
-  ].join('\n');
+const newsletterConfig = parseNewsletterEndpoint(process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT);
 
-  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(message)}`;
+function NewsletterUnavailable() {
+  return (
+    <section className="newsletter-form newsletter-form-unavailable" aria-labelledby="newsletter-unavailable-title">
+      <h2 id="newsletter-unavailable-title" className="newsletter-form-title">Newsletter is not open yet</h2>
+      <p>We are preparing the research brief. No email address is collected here while signup is unavailable.</p>
+      <div className="newsletter-form-links">
+        <a href="/feed.xml" type="application/rss+xml">
+          Follow research updates via RSS <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <span role="status">Use the RSS feed for current research and news updates.</span>
+    </section>
+  );
 }
 
-export default function NewsletterSignup() {
-  const [email, setEmail] = useState('');
+function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
   const [submitting, setSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState('Confirm by email. Unsubscribe at any time.');
+  const [feedback, setFeedback] = useState('No subscription is counted on this page alone.');
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    track('Newsletter Submit', {
+  function handleSubmit() {
+    track('Newsletter Subscribe Attempt', {
       placement: 'footer',
-      destination: newsletterEndpoint ? 'buttondown' : 'whatsapp',
+      destination: 'provider',
     });
-
-    if (!newsletterEndpoint) {
-      event.preventDefault();
-      window.location.href = buildWhatsAppSubscriptionHref(email);
-      setFeedback('WhatsApp should open a prepared subscription request. Review it there before sending.');
-      track('Newsletter WhatsApp Open', { placement: 'footer' });
-      return;
-    }
-
     setSubmitting(true);
-    setFeedback('Opening the secure email-confirmation step…');
-    track('Newsletter Provider Handoff', { placement: 'footer', provider: 'buttondown' });
+    setFeedback(`Opening signup at ${config.providerHost}…`);
+    track('Newsletter Provider Handoff', { placement: 'footer', provider_domain: config.providerHost });
   }
 
   return (
     <form
       className="newsletter-form"
-      action={newsletterEndpoint || undefined}
-      method={newsletterEndpoint ? 'post' : undefined}
+      action={config.endpoint}
+      method="post"
       onSubmit={handleSubmit}
     >
       <label htmlFor="newsletter-email">Weekly Robotics Research Brief</label>
-      <p>One concise email: new tactile research, evidence boundaries, and the pages worth reading.</p>
+      <p>
+        One concise email with new tactile research and evidence boundaries. Signup is processed by {config.providerHost};
+        follow the provider&apos;s next step to complete signup. This page does not mark an address as subscribed.
+      </p>
       <div>
         <input
           id="newsletter-email"
@@ -58,12 +56,10 @@ export default function NewsletterSignup() {
           type="email"
           required
           autoComplete="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
           placeholder="Work email"
           aria-describedby="newsletter-feedback"
         />
-        {newsletterEndpoint && <input type="hidden" name="embed" value="1" />}
+        <input type="hidden" name="embed" value="1" />
         <button type="submit" disabled={submitting}>
           {submitting ? 'Opening…' : 'Subscribe'}
         </button>
@@ -73,4 +69,9 @@ export default function NewsletterSignup() {
       </span>
     </form>
   );
+}
+
+export default function NewsletterSignup() {
+  if (!newsletterConfig) return <NewsletterUnavailable />;
+  return <NewsletterProviderForm config={newsletterConfig} />;
 }

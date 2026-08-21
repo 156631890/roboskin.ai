@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
         <div className="container-shell">
           <span className="eyebrow">Privacy</span>
           <h1 className="mt-5 text-4xl font-bold text-[#111318] md:text-6xl">Privacy Policy</h1>
-          <p className="mt-5 max-w-3xl text-[#4f5560]">Last updated: August 21, 2026</p>
+          <p className="mt-5 max-w-3xl text-[#4f5560]">Last updated: August 22, 2026</p>
         </div>
       </section>
 
@@ -23,9 +23,9 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Information we collect</h2>
               <p className="mt-3 text-[#4f5560]">
-                We collect the data you submit through the contact, commercial inquiry, or newsletter forms, including name, company, role, email, use case, platform, timeline, budget range, NDA preference, phone number, requested asset, and message where those fields apply.
+                We collect the data you submit through the contact or commercial inquiry forms, including name, company, role, email, use case, platform, timeline, budget range, NDA preference, phone number, requested asset, and message where those fields apply.
                 Contact-form submissions are processed by FormSubmit and delivered to the site management inbox. FormSubmit may retain submitted form data for up to 30 days for delivery and recovery.
-                When no direct form endpoint is configured, the site opens WhatsApp with a prepared message; information is transferred only if the visitor continues and sends it there.
+                When the Newsletter panel shows its unavailable state, it does not render an email field or collect an email address. If a signup form is displayed, it identifies the external email-list provider before submission and sends the address directly to that provider.
                 When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
               </p>
             </div>
@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Sharing</h2>
               <p className="mt-3 text-[#4f5560]">
-                We do not sell personal information. Contact requests are processed by FormSubmit and delivered through Gmail. Newsletter subscriptions, once enabled, are processed by the named email-list provider shown during confirmation so that it can store subscription status, deliver the brief, and honor unsubscribe requests.
+                We do not sell personal information. Contact requests are processed by FormSubmit and delivered through Gmail. When Newsletter signup is available, the interface names the external email-list provider before an address is submitted. That provider processes the signup and any later email-list controls under its own privacy terms. RoboSkin.ai does not treat a form handoff as proof of subscription.
               </p>
             </div>
             <div>
@@ -59,7 +59,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Choices and deletion</h2>
               <p className="mt-3 text-[#4f5560]">
-                You may ask us to delete a contact submission by using the address below. Newsletter readers can decline the confirmation email or use the unsubscribe link in any delivered brief.
+                You may ask us to delete a contact submission by using the address below. If Newsletter signup is available, use the controls supplied by the named email-list provider or contact us for help. When the panel shows its unavailable state, no newsletter email address is collected on the site.
               </p>
             </div>
             <div>
