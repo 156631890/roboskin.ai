@@ -5,6 +5,7 @@ import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { researchOrganizationEntries, robotAiOrganizationRelations } from '@/lib/research-organizations';
+import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robots';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
@@ -37,6 +38,8 @@ function latestReviewedDate() {
     ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
     ...researchOrganizationEntries.map((entry) => entry.sourceReviewed),
     ...robotAiOrganizationRelations.map((entry) => entry.sourceReviewed),
+    ...researchRobotEntries.map((entry) => entry.sourceReviewed),
+    ...robotAiRobotRelations.map((entry) => entry.sourceReviewed),
   ].sort().at(-1) ?? researchIndexUpdatedAt;
 }
 
@@ -62,6 +65,8 @@ export function buildLlmsFullText() {
     `- Robot AI model records: ${robotAiModelEntries.length}`,
     `- Verified organization records: ${researchOrganizationEntries.length}`,
     `- Verified model-organization relations: ${robotAiOrganizationRelations.length}`,
+    `- Verified robot-platform records: ${researchRobotEntries.length}`,
+    `- Verified model-robot relations: ${robotAiRobotRelations.length}`,
     `- Structured research records: ${researchIndexEntries.length}`,
     `- Research briefs: ${blogPosts.length}`,
     `- News briefs: ${newsPosts.length}`,
@@ -73,6 +78,8 @@ export function buildLlmsFullText() {
     '- Prefer the primary source URL attached to each technical record. Use the RoboSkin.ai canonical page for the site’s analysis, taxonomy, and comparison context.',
     '- Do not infer product availability, certifications, customers, benchmark values, or company claims unless the relevant public page states them explicitly.',
     '- A source-listed organization affiliation does not establish model ownership, funding, endorsement, current employment, or affiliation with RoboSkin.ai. Preserve the developed, co-developed, and contributor relationship labels.',
+    '- A robot-platform relation has a narrow meaning: evaluatedOn requires explicit experiments, trainedAcross requires explicit training-mixture evidence, and demonstratedOn records a source-backed demonstration without upgrading it to a quantitative evaluation.',
+    '- Do not infer an exact robot product from a family label. Training coverage does not prove deployment compatibility, a fine-tuned policy is not a zero-shot base-model result, and a simulation score is not a real-robot score.',
     '- No blanket content-reuse license is granted by this file. Verify the original source license and the RoboSkin.ai site terms before reuse.',
     `- Suggested attribution for site analysis: ${site.editorial.name}, “Page title,” RoboSkin.ai, canonical page URL, accessed on the reader’s actual access date.`,
     '',
@@ -235,6 +242,45 @@ export function buildLlmsFullText() {
   }
 
   lines.push(
+    '## Verified Robot Platforms and Embodiments',
+    '',
+    `Directory: ${canonicalUrl('/robots')}`,
+    '',
+    'These records separate robot identity from model relationship evidence. Exact products, family-level labels, unnamed research platforms, and mixed real/simulation setups remain distinct. The relation labels evaluatedOn, trainedAcross, and demonstratedOn are not interchangeable.',
+    '',
+  );
+  for (const robot of researchRobotEntries) {
+    const relations = robotAiRobotRelations.filter((relation) => relation.robotId === robot.id);
+    lines.push(
+      `### ${robot.name}`,
+      '',
+      `- Record ID: ${robot.id}`,
+      `- Entity type: ${robot.kind}`,
+      `- Manufacturer: ${robot.manufacturer ?? 'Not established for this normalized record by the reviewed sources'}`,
+      `- Source aliases: ${list(robot.aliases) || 'No additional aliases in the current directory'}`,
+      `- Canonical RoboSkin.ai entity: ${canonicalUrl(`/robots#robot-${robot.id}`)}`,
+      `- Description: ${compact(robot.description)}`,
+    );
+    appendOptionalLink(lines, 'Official URL', robot.officialUrl ?? undefined);
+    lines.push(
+      `- Identity sources: ${robot.identitySources.map((source) => markdownLink(source.label, source.url)).join('; ')}`,
+      `- Evidence boundary: ${compact(robot.evidenceBoundary)}`,
+      '- Connected robot AI models:',
+    );
+    for (const relation of relations) {
+      const model = robotAiModelEntries.find((entry) => entry.id === relation.modelId);
+      if (!model) throw new Error(`LLM robot record references missing model ${relation.modelId}.`);
+      lines.push(
+        `  - ${markdownLink(model.name, canonicalUrl(`/robot-foundation-models#model-${model.id}`))}: ${relation.relation}`,
+        `    - Source embodiment wording: ${list(relation.sourceEmbodimentLabels)}`,
+        `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
+        `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
+      );
+    }
+    lines.push(`- Source reviewed: ${robot.sourceReviewed}`, '');
+  }
+
+  lines.push(
     '## Verified Robot AI Research Organizations',
     '',
     `Directory: ${canonicalUrl('/organizations')}`,
@@ -272,6 +318,7 @@ export function buildLlmsFullText() {
 
   lines.push('## Robot AI Models', '', `Directory: ${canonicalUrl('/robot-foundation-models')}`, '');
   for (const entry of robotAiModelEntries) {
+    const verifiedRobotRelations = robotAiRobotRelations.filter((relation) => relation.modelId === entry.id);
     lines.push(
       `### ${entry.name}`,
       '',
@@ -295,9 +342,20 @@ export function buildLlmsFullText() {
     lines.push(
       '- Primary and official sources:',
       ...entry.primarySources.map((source) => `  - ${markdownLink(source.label, source.url)} (${source.type})`),
-      `- Source reviewed: ${entry.sourceReviewed}`,
-      '',
     );
+    if (verifiedRobotRelations.length > 0) {
+      lines.push('- Verified robot-platform relationships:');
+      for (const relation of verifiedRobotRelations) {
+        const robot = researchRobotEntries.find((candidate) => candidate.id === relation.robotId);
+        if (!robot) throw new Error(`LLM model record references missing robot ${relation.robotId}.`);
+        lines.push(
+          `  - ${relation.relation}: ${markdownLink(robot.name, canonicalUrl(`/robots#robot-${robot.id}`))}`,
+          `    - Evidence: ${relation.evidenceUrls.join('; ')}`,
+          `    - Boundary: ${compact(relation.evidenceBoundary)}`,
+        );
+      }
+    }
+    lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
   }
 
   lines.push('## Structured Research Index', '', `Directory: ${canonicalUrl('/research-index')}`, `Index reviewed: ${researchIndexUpdatedAt}`, '');

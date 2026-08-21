@@ -92,8 +92,14 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(verify, /knowledgeGraphContract\.counts/);
   assert.match(verify, /evidenceSourceIds/);
   assert.match(verify, /organization-directory/);
+  assert.match(verify, /robot-directory/);
+  assert.match(verify, /robotRelationEdges/);
+  assert.match(verify, /evaluatedOnEdges/);
+  assert.match(verify, /trainedAcrossEdges/);
+  assert.match(verify, /demonstratedOnEdges/);
   assert.match(verify, /\/knowledge-graph\.json/);
   assert.match(verify, /\/organizations/);
+  assert.match(verify, /\/robots/);
   assert.match(verify, /\/llms\.txt/);
   assert.match(verify, /\/llms-full\.txt/);
   assert.doesNotMatch(verify, /const expectedGraphCounts/);

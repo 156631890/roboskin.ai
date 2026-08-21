@@ -263,6 +263,7 @@ export default function PhysicalAiPage() {
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Continue the map</p>
                 <div className="mt-4 space-y-3">
                   {[
+                    ['/robots', 'Robot platforms and embodiments'],
                     ['/robot-learning', 'Robot learning'],
                     ['/robot-vla-models', 'Robot VLA models'],
                     ['/robot-world-models', 'Robot world models'],

@@ -16,6 +16,8 @@ test('knowledge graph is built from the existing reviewed collections with hones
     'robotAiModelEntries',
     'researchOrganizationEntries',
     'robotAiOrganizationRelations',
+    'researchRobotEntries',
+    'robotAiRobotRelations',
   ]) {
     assert.match(graph, new RegExp(`\\b${source}\\b`));
   }
@@ -31,14 +33,19 @@ test('knowledge graph is built from the existing reviewed collections with hones
   assert.match(graph, /relation: 'supportedBy'/);
   assert.match(graph, /relation: 'benchmarkedBy'/);
   assert.match(graph, /organizationModelRelationTypes/);
+  assert.match(graph, /robotModelRelationTypes/);
   assert.match(graph, /evidenceSourceIds/);
+  assert.match(graph, /sourceEmbodimentLabels/);
+  assert.match(graph, /evidenceBoundary/);
   assert.match(graph, /must connect a model to an organization/);
+  assert.match(graph, /must connect a model to a robot/);
   assert.match(graph, /uses an unsupported relation/);
   assert.match(graph, /validateKnowledgeGraph/);
   assert.match(graph, /Source URLs must be deduplicated/);
   assert.match(graph, /Edge starts at missing entity/);
   assert.match(graph, /placeholderEntityName/);
   assert.match(graph, /type:\s*'organization'/);
+  assert.match(graph, /type:\s*'robot'/);
 });
 
 test('knowledge graph JSON is a protected deterministic static output outside the HTML sitemap', async () => {
@@ -62,20 +69,37 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.equal(typeof contract.version, 'string');
   assert.ok(contract.version.length > 0);
   assert.ok(Object.values(contract.counts).every((count) => Number.isInteger(count) && count > 0));
+  assert.equal(contract.version, '1.2.0');
+  assert.equal(contract.counts.robots, 11);
+  assert.equal(contract.counts.robotRelationEdges, 22);
+  assert.equal(contract.counts.evaluatedOnEdges, 15);
+  assert.equal(contract.counts.trainedAcrossEdges, 5);
+  assert.equal(contract.counts.demonstratedOnEdges, 2);
   assert.equal(contract.counts.knowledgeEntities, contract.counts.researchEntities + contract.counts.organizations);
+  assert.equal(
+    contract.counts.researchEntities,
+    contract.counts.researchIndex
+      + contract.counts.datasets
+      + contract.counts.benchmarks
+      + contract.counts.sensors
+      + contract.counts.models
+      + contract.counts.robots,
+  );
   assert.equal(contract.counts.researchIndex, contract.counts.papers + contract.counts.documentation);
-  assert.equal(contract.counts.edges, contract.counts.supportedByEdges + contract.counts.benchmarkedByEdges + contract.counts.organizationRelationEdges);
+  assert.equal(contract.counts.edges, contract.counts.supportedByEdges + contract.counts.benchmarkedByEdges + contract.counts.organizationRelationEdges + contract.counts.robotRelationEdges);
   assert.equal(contract.counts.organizationRelationEdges, contract.counts.developedByEdges + contract.counts.coDevelopedByEdges + contract.counts.contributedByEdges);
+  assert.equal(contract.counts.robotRelationEdges, contract.counts.evaluatedOnEdges + contract.counts.trainedAcrossEdges + contract.counts.demonstratedOnEdges);
   assert.doesNotMatch(sitemap, /knowledge-graph\.json/);
 });
 
 test('directory rows expose stable fragment targets without creating thin entity pages', async () => {
-  const [datasets, benchmarks, sensors, models, organizations] = await Promise.all([
+  const [datasets, benchmarks, sensors, models, organizations, robots] = await Promise.all([
     read('src/components/TactileDatasetExplorer.tsx'),
     read('src/components/TactileBenchmarkExplorer.tsx'),
     read('src/components/TactileSensorExplorer.tsx'),
     read('src/components/RobotAiModelExplorer.tsx'),
     read('src/app/organizations/page.tsx'),
+    read('src/app/robots/page.tsx'),
   ]);
 
   assert.match(datasets, /id=\{`dataset-\$\{entry\.id\}`\}/);
@@ -83,4 +107,5 @@ test('directory rows expose stable fragment targets without creating thin entity
   assert.match(sensors, /id=\{`sensor-\$\{entry\.id\}`\}/);
   assert.match(models, /id=\{`model-\$\{entry\.id\}`\}/);
   assert.match(organizations, /id=\{`organization-\$\{organization\.id\}`\}/);
+  assert.match(robots, /id=\{`robot-\$\{robot\.id\}`\}/);
 });

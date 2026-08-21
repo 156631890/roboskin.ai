@@ -16,6 +16,15 @@ type RobotAiModelExplorerProps = {
     name: string;
     aliases: string[];
   }[];
+  robots: {
+    id: string;
+    name: string;
+  }[];
+  robotRelations: {
+    modelId: string;
+    robotId: string;
+    relation: 'evaluatedOn' | 'trainedAcross' | 'demonstratedOn';
+  }[];
 };
 
 function unique<T extends string>(values: T[]) {
@@ -26,7 +35,18 @@ function sentenceCase(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-export default function RobotAiModelExplorer({ entries, organizations }: RobotAiModelExplorerProps) {
+const robotRelationLabels = {
+  evaluatedOn: 'evaluated on',
+  trainedAcross: 'included in training',
+  demonstratedOn: 'demonstrated on',
+} as const;
+
+export default function RobotAiModelExplorer({
+  entries,
+  organizations,
+  robots,
+  robotRelations,
+}: RobotAiModelExplorerProps) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<RobotAiModelCategory | 'all'>('all');
   const [tactileInput, setTactileInput] = useState<TactileInputStatus | 'all'>('all');
@@ -54,6 +74,9 @@ export default function RobotAiModelExplorer({ entries, organizations }: RobotAi
     organizations.flatMap((organization) => [organization.name, ...organization.aliases]
       .map((alias) => [alias, organization] as const)),
   ), [organizations]);
+  const robotById = useMemo(() => new Map(
+    robots.map((robot) => [robot.id, robot] as const),
+  ), [robots]);
 
   function resetFilters() {
     setQuery('');
@@ -74,7 +97,7 @@ export default function RobotAiModelExplorer({ entries, organizations }: RobotAi
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#c8d1de]">
               Model labels describe different roles: a VLM interprets multimodal context, a VLA or policy produces actions,
               an embodied-reasoning model plans, and a world model predicts consequences. Every row keeps real-robot evidence,
-              access terms, tactile input, and source limitations attached to the model instead of treating unlike results as a leaderboard.
+              access terms, tactile input, verified robot-platform links, and source limitations attached to the model instead of treating unlike results as a leaderboard.
             </p>
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#aeb8c7] lg:text-right">
@@ -206,6 +229,31 @@ export default function RobotAiModelExplorer({ entries, organizations }: RobotAi
                     {entry.trainingDataSummary}
                     <br />
                     <strong className="mt-3 inline-block text-white">Embodiments:</strong> {entry.embodiments.join('; ')}
+                    {robotRelations.some((relation) => relation.modelId === entry.id) ? (
+                      <div className="mt-4 border-t border-white/10 pt-3">
+                        <strong className="text-white">Verified platform relationships:</strong>
+                        <ul className="mt-2 space-y-1.5 text-xs">
+                          {robotRelations
+                            .filter((relation) => relation.modelId === entry.id)
+                            .map((relation) => {
+                              const robot = robotById.get(relation.robotId);
+                              if (!robot) return null;
+
+                              return (
+                                <li key={`${relation.relation}-${relation.robotId}`}>
+                                  <span className="text-[#aeb8c7]">{robotRelationLabels[relation.relation]} </span>
+                                  <Link
+                                    href={`/robots#robot-${robot.id}`}
+                                    className="font-semibold text-[#ffd5c5] underline decoration-white/25 underline-offset-4 hover:text-white"
+                                  >
+                                    {robot.name}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                        </ul>
+                      </div>
+                    ) : null}
                   </td>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[270px]">
                     <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Real-robot evidence</span>

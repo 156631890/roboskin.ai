@@ -237,6 +237,7 @@ export default function OrganizationsPage() {
             <div className="mt-5 grid gap-3">
               {[
                 ['/robot-foundation-models', 'Compare robot AI models'],
+                ['/robots', 'Browse verified robot platforms'],
                 ['/research-index', 'Open the research index'],
                 ['/datasets', 'Browse tactile datasets'],
                 ['/research', 'Read research briefs'],

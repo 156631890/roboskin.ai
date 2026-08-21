@@ -15,10 +15,15 @@ test('robot AI model directory exposes source-bounded entity schema', async () =
   assert.match(schema, /citation: entry\.primarySources\.map/);
   assert.match(schema, /abstract: entry\.evidenceLimitations/);
   assert.match(schema, /robotAiOrganizationRelations\.filter/);
+  assert.match(schema, /robotAiRobotRelations/);
+  assert.match(schema, /verifiedRobotIds/);
   assert.match(schema, /creatorAliases\.map\(organizationReference\)/);
   assert.match(schema, /contributorAliases\.map\(organizationReference\)/);
   assert.match(schema, /canonicalUrl\('\/organizations'\)/);
   assert.match(schema, /#organization-\$\{organization\.id\}/);
+  assert.match(schema, /canonicalUrl\('\/robots'\)/);
+  assert.match(schema, /mentions: verifiedRobotIds\.map/);
+  assert.match(schema, /#robot-\$\{robotId\}/);
   assert.doesNotMatch(schema, /dateModified:\s*entry\.sourceReviewed/);
   assert.doesNotMatch(schema, /name:\s*entry\.organization/);
   assert.doesNotMatch(schema, /'@type': 'Organization',\s*name/);

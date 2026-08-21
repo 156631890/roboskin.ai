@@ -1,8 +1,8 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "counts": {
-    "knowledgeEntities": 79,
-    "researchEntities": 67,
+    "knowledgeEntities": 90,
+    "researchEntities": 78,
     "researchIndex": 23,
     "papers": 22,
     "documentation": 1,
@@ -11,13 +11,18 @@
     "sensors": 13,
     "models": 10,
     "organizations": 12,
-    "sourceDocuments": 115,
-    "edges": 162,
-    "supportedByEdges": 137,
+    "robots": 11,
+    "sourceDocuments": 125,
+    "edges": 199,
+    "supportedByEdges": 152,
     "benchmarkedByEdges": 5,
     "organizationRelationEdges": 20,
     "developedByEdges": 5,
     "coDevelopedByEdges": 2,
-    "contributedByEdges": 13
+    "contributedByEdges": 13,
+    "robotRelationEdges": 22,
+    "evaluatedOnEdges": 15,
+    "trainedAcrossEdges": 5,
+    "demonstratedOnEdges": 2
   }
 }

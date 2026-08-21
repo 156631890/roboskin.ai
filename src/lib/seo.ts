@@ -165,6 +165,17 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Organizations'],
   },
+  '/robots': {
+    path: '/robots',
+    title: 'Robot Platforms for Physical AI Models and Research',
+    description:
+      'Compare source-verified humanoids, robot arms, mobile manipulators, and research setups used to train, evaluate, or demonstrate robot AI models.',
+    updated: '2026-08-22',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Robots'],
+  },
   '/glossary': {
     path: '/glossary',
     title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',

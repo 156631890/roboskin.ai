@@ -4,8 +4,10 @@ import {
   getResearchOrganizationByAlias,
   robotAiOrganizationRelations,
 } from '@/lib/research-organizations';
+import { robotAiRobotRelations } from '@/lib/research-robots';
 
 const organizationDirectoryUrl = canonicalUrl('/organizations');
+const robotDirectoryUrl = canonicalUrl('/robots');
 
 function organizationReference(alias: string) {
   const organization = getResearchOrganizationByAlias(alias);
@@ -26,6 +28,9 @@ export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
     const contributorAliases = relations
       .filter((relation) => relation.relation === 'contributedBy')
       .map((relation) => relation.sourceOrganizationLabel);
+    const verifiedRobotIds = [...new Set(robotAiRobotRelations
+      .filter((relation) => relation.modelId === entry.id)
+      .map((relation) => relation.robotId))];
 
     return {
       '@type': 'CreativeWork',
@@ -45,6 +50,11 @@ export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
       abstract: entry.evidenceLimitations,
       keywords: [entry.category, ...entry.inputModalities, ...entry.embodiments],
       citation: entry.primarySources.map((source) => source.url),
+      ...(verifiedRobotIds.length > 0 ? {
+        mentions: verifiedRobotIds.map((robotId) => ({
+          '@id': `${robotDirectoryUrl}#robot-${robotId}`,
+        })),
+      } : {}),
       isPartOf: {
         '@id': `${directoryUrl}#model-directory`,
       },

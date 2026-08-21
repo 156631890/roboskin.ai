@@ -15,7 +15,9 @@ test('robot foundation model pillar owns the model intent and renders the databa
 
   assert.match(route, /getSeoTopicPage\('\/robot-foundation-models'\)/);
   assert.match(route, /buildRobotAiModelDirectoryJsonLd\(robotAiModelEntries\)/);
-  assert.match(route, /<RobotAiModelExplorer entries=\{robotAiModelEntries\}/);
+  assert.match(route, /<RobotAiModelExplorer[\s\S]*?entries=\{robotAiModelEntries\}/);
+  assert.match(route, /robots=\{researchRobotEntries\}/);
+  assert.match(route, /robotRelations=\{robotAiRobotRelations\}/);
   assert.match(topics, /path: '\/robot-foundation-models'/);
   assert.match(topics, /Robot Foundation Models: Data, Transfer & Evaluation/);
   assert.match(topics, /Unknown facts remain unknown/);

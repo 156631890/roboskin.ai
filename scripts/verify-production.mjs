@@ -137,7 +137,7 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
@@ -145,6 +145,7 @@ const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, ll
   fetchOk('/llms.txt'),
   fetchOk('/llms-full.txt'),
   fetchOk('/organizations'),
+  fetchOk('/robots'),
   fetchOk('/feed.xml'),
   fetchOk('/news-sitemap.xml'),
   fetchOk('/deployment.json'),
@@ -157,11 +158,12 @@ if (!(graphResponse.headers.get('content-type') ?? '').includes('application/jso
 if (!(llmsResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms.txt has an invalid content type');
 if (!(llmsFullResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms-full.txt has an invalid content type');
 if (!(organizationsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/organizations did not return HTML');
+if (!(robotsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robots did not return HTML');
 if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+xml')) throw new Error('/feed.xml has an invalid content type');
 if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
@@ -169,6 +171,7 @@ const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, rss,
   llmsResponse.text(),
   llmsFullResponse.text(),
   organizationsResponse.text(),
+  robotsResponse.text(),
   rssResponse.text(),
   newsSitemapResponse.text(),
   deploymentResponse.json(),
@@ -217,7 +220,9 @@ for (const source of graphSources) {
   graphSourceUrls.add(sourceUrl.href);
 }
 
-const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', 'developedBy', 'coDevelopedBy', 'contributedBy']);
+const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
+const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
+const allowedGraphRelations = new Set(['supportedBy', 'benchmarkedBy', ...organizationRelations, ...robotRelations]);
 const graphRelationCounts = new Map([...allowedGraphRelations].map((relation) => [relation, 0]));
 for (const edge of graphEdges) {
   const edgeKey = `${edge.from}|${edge.relation}|${edge.to}`;
@@ -233,7 +238,7 @@ for (const edge of graphEdges) {
       if (!graphSourceIds.has(sourceId)) throw new Error(`Knowledge graph edge references missing evidence ${sourceId}: ${edgeKey}`);
     }
   }
-  if (['developedBy', 'coDevelopedBy', 'contributedBy'].includes(edge.relation)) {
+  if (organizationRelations.includes(edge.relation)) {
     const model = graphEntityById.get(edge.from);
     const organization = graphEntityById.get(edge.to);
     if (model?.type !== 'model' || organization?.type !== 'organization') throw new Error(`Invalid model-organization edge ${edgeKey}`);
@@ -241,8 +246,20 @@ for (const edge of graphEdges) {
     for (const sourceId of edge.evidenceSourceIds) {
       if (!model.primarySourceIds?.includes(sourceId)) throw new Error(`Model-organization edge has evidence not attached to its model: ${edgeKey}`);
     }
-  } else if (edge.evidenceSourceIds !== undefined) {
-    throw new Error(`Knowledge graph non-organization edge carries relationship evidence: ${edgeKey}`);
+  } else if (robotRelations.includes(edge.relation)) {
+    const model = graphEntityById.get(edge.from);
+    const robot = graphEntityById.get(edge.to);
+    if (model?.type !== 'model' || robot?.type !== 'robot') throw new Error(`Invalid model-robot edge ${edgeKey}`);
+    if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) throw new Error(`Model-robot edge lacks evidence: ${edgeKey}`);
+    if (!Array.isArray(edge.sourceEmbodimentLabels) || edge.sourceEmbodimentLabels.length === 0) throw new Error(`Model-robot edge lacks source embodiment labels: ${edgeKey}`);
+    if (edge.sourceEmbodimentLabels.some((label) => typeof label !== 'string' || label.trim().length === 0)) throw new Error(`Model-robot edge has an invalid source embodiment label: ${edgeKey}`);
+    if (typeof edge.evidenceBoundary !== 'string' || edge.evidenceBoundary.trim().length === 0) throw new Error(`Model-robot edge lacks an evidence boundary: ${edgeKey}`);
+    for (const sourceId of edge.evidenceSourceIds) {
+      if (!model.primarySourceIds?.includes(sourceId)) throw new Error(`Model-robot edge has evidence not attached to its model: ${edgeKey}`);
+    }
+  } else {
+    if (edge.evidenceSourceIds !== undefined) throw new Error(`Knowledge graph non-evidence-backed edge carries relationship evidence: ${edgeKey}`);
+    if (edge.sourceEmbodimentLabels !== undefined || edge.evidenceBoundary !== undefined) throw new Error(`Knowledge graph non-robot edge carries robot embodiment qualifiers: ${edgeKey}`);
   }
 }
 
@@ -252,14 +269,22 @@ const expectedRelationCounts = {
   developedBy: graph.counts.developedByEdges,
   coDevelopedBy: graph.counts.coDevelopedByEdges,
   contributedBy: graph.counts.contributedByEdges,
+  evaluatedOn: graph.counts.evaluatedOnEdges,
+  trainedAcross: graph.counts.trainedAcrossEdges,
+  demonstratedOn: graph.counts.demonstratedOnEdges,
 };
 for (const [relation, expected] of Object.entries(expectedRelationCounts)) {
   if (graphRelationCounts.get(relation) !== expected) throw new Error(`Knowledge graph edge count for ${relation} is inconsistent`);
 }
-const actualOrganizationRelationEdges = ['developedBy', 'coDevelopedBy', 'contributedBy']
+const actualOrganizationRelationEdges = organizationRelations
   .reduce((total, relation) => total + graphRelationCounts.get(relation), 0);
 if (actualOrganizationRelationEdges !== graph.counts.organizationRelationEdges) {
   throw new Error('Knowledge graph organization relation edge count is inconsistent');
+}
+const actualRobotRelationEdges = robotRelations
+  .reduce((total, relation) => total + graphRelationCounts.get(relation), 0);
+if (actualRobotRelationEdges !== graph.counts.robotRelationEdges) {
+  throw new Error('Knowledge graph robot relation edge count is inconsistent');
 }
 
 for (const entity of graphEntities) {
@@ -315,8 +340,42 @@ for (const organization of graphOrganizations) {
   const fragment = new URL(organization.canonicalUrl).hash.slice(1);
   if (!fragment || !organizationsHtml.includes(`id="${fragment}"`)) throw new Error(`/organizations is missing ${organization.id}`);
 }
-if (!llms.includes(`${graph.counts.knowledgeEntities} source-reviewed knowledge entities`) || !llms.includes(`${graph.counts.sourceDocuments} deduplicated primary and official source records`) || !llms.includes(canonicalFor('/organizations'))) throw new Error('/llms.txt does not match the deployed organization graph');
-if (!llmsFull.includes(`- Verified organization records: ${graph.counts.organizations}`) || !llmsFull.includes(`- Verified model-organization relations: ${graph.counts.organizationRelationEdges}`) || !llmsFull.includes(canonicalFor('/organizations'))) throw new Error('/llms-full.txt is missing deployed organization knowledge');
+const robotsJsonLd = validateHtml(robotsHtml, '/robots');
+const robotSchemaNodes = robotsJsonLd.flatMap((block) => block['@graph'] ?? [block]);
+const robotDirectoryId = `${canonicalFor('/robots')}#robot-directory`;
+const robotDirectories = robotSchemaNodes.filter((node) => node['@id'] === robotDirectoryId);
+if (robotDirectories.length !== 1) throw new Error('/robots must contain exactly one robot ItemList JSON-LD node');
+const [robotDirectory] = robotDirectories;
+if (robotDirectory?.['@type'] !== 'ItemList') throw new Error('/robots is missing the exact robot ItemList JSON-LD node');
+if (!Array.isArray(robotDirectory.itemListElement) || robotDirectory.numberOfItems !== graph.counts.robots || robotDirectory.itemListElement.length !== graph.counts.robots) {
+  throw new Error('/robots ItemList count is inconsistent');
+}
+const graphRobots = graphEntities.filter((entry) => entry.type === 'robot');
+if (graphRobots.length !== graph.counts.robots) throw new Error('Knowledge graph robot entity count is inconsistent');
+const expectedRobotSchemaIds = new Set(graphRobots.map((robot) => robot.canonicalUrl));
+const listedRobotSchemaIds = robotDirectory.itemListElement.map((entry) => entry.item?.['@id']);
+if (listedRobotSchemaIds.some((id) => !id) || new Set(listedRobotSchemaIds).size !== graph.counts.robots) {
+  throw new Error('/robots ItemList contains missing or duplicate robot IDs');
+}
+const actualRobotSchemaIds = robotSchemaNodes
+  .filter((node) => node['@type'] === 'Thing'
+    && typeof node['@id'] === 'string'
+    && node['@id'].startsWith(`${canonicalFor('/robots')}#robot-`))
+  .map((node) => node['@id']);
+if (actualRobotSchemaIds.length !== graph.counts.robots || new Set(actualRobotSchemaIds).size !== graph.counts.robots) {
+  throw new Error('/robots does not contain exactly one schema node per graph robot');
+}
+for (const robotId of expectedRobotSchemaIds) {
+  if (!listedRobotSchemaIds.includes(robotId) || !actualRobotSchemaIds.includes(robotId)) {
+    throw new Error(`/robots JSON-LD is missing ${robotId}`);
+  }
+}
+for (const robot of graphRobots) {
+  const fragment = new URL(robot.canonicalUrl).hash.slice(1);
+  if (!fragment || !robotsHtml.includes(`id="${fragment}"`)) throw new Error(`/robots is missing ${robot.id}`);
+}
+if (!llms.includes(`${graph.counts.knowledgeEntities} source-reviewed knowledge entities`) || !llms.includes(`${graph.counts.sourceDocuments} deduplicated primary and official source records`) || !llms.includes(canonicalFor('/organizations')) || !llms.includes(canonicalFor('/robots'))) throw new Error('/llms.txt does not match the deployed knowledge graph');
+if (!llmsFull.includes(`- Verified organization records: ${graph.counts.organizations}`) || !llmsFull.includes(`- Verified model-organization relations: ${graph.counts.organizationRelationEdges}`) || !llmsFull.includes(`- Verified robot-platform records: ${graph.counts.robots}`) || !llmsFull.includes(`- Verified model-robot relations: ${graph.counts.robotRelationEdges}`) || !llmsFull.includes(canonicalFor('/organizations')) || !llmsFull.includes(canonicalFor('/robots'))) throw new Error('/llms-full.txt is missing deployed entity knowledge');
 
 const csvRows = parseCsv(csv);
 const csvIds = csvRows.map((row) => row.id);
@@ -395,8 +454,10 @@ const report = {
   knowledgeEntityCount: graph.counts.knowledgeEntities,
   organizationCount: graph.counts.organizations,
   organizationRelationCount: graph.counts.organizationRelationEdges,
+  robotCount: graph.counts.robots,
+  robotRelationCount: graph.counts.robotRelationEdges,
 };
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, ${graph.counts.knowledgeEntities} graph entities, ${graph.counts.organizations} organizations, 23 research records, and 46 RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${protectedUrls.length} indexable URLs, ${noindexUrls.length} noindex URLs, exact sitemap, ${graph.counts.knowledgeEntities} graph entities, ${graph.counts.organizations} organizations, ${graph.counts.robots} robot platforms, 23 research records, and 46 RSS items`);

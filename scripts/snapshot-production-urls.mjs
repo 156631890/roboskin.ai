@@ -13,8 +13,8 @@ const xml = await response.text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map((match) => match[1].trim());
 
-if (urls.length !== 103) {
-  throw new Error(`Expected the audited 103 production sitemap URLs, received ${urls.length}`);
+if (urls.length !== 104) {
+  throw new Error(`Expected the audited 104 production sitemap URLs, received ${urls.length}`);
 }
 
 for (const url of urls) {
@@ -44,8 +44,8 @@ for (const redirectSource of Object.keys(protectedRedirects)) {
 }
 const completeProtectedUrls = [...protectedUrls].sort();
 
-if (completeProtectedUrls.length !== 107) {
-  throw new Error(`Expected 107 protected URLs after preserving redirects, received ${completeProtectedUrls.length}`);
+if (completeProtectedUrls.length !== 108) {
+  throw new Error(`Expected 108 protected URLs after preserving redirects, received ${completeProtectedUrls.length}`);
 }
 
 await mkdir(new URL('../config/', import.meta.url), { recursive: true });

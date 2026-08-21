@@ -8,11 +8,17 @@ import {
   robotAiOrganizationRelations,
   type OrganizationModelRelationType,
 } from '@/lib/research-organizations';
+import {
+  researchRobotEntries,
+  robotAiRobotRelations,
+  robotModelRelationTypes,
+  type RobotModelRelationType,
+} from '@/lib/research-robots';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
 
-export const knowledgeGraphVersion = '1.1.0';
+export const knowledgeGraphVersion = '1.2.0';
 
 export type KnowledgeEntityType =
   | 'paper'
@@ -21,7 +27,8 @@ export type KnowledgeEntityType =
   | 'benchmark'
   | 'sensor'
   | 'model'
-  | 'organization';
+  | 'organization'
+  | 'robot';
 
 export type KnowledgeSourceKind =
   | 'primary'
@@ -33,7 +40,8 @@ export type KnowledgeSourceKind =
   | 'license'
   | 'model card'
   | 'official release'
-  | 'organization';
+  | 'organization'
+  | 'robot';
 
 export type KnowledgeEntity = {
   id: `${KnowledgeEntityType}:${string}`;
@@ -56,10 +64,12 @@ export type KnowledgeSource = {
 
 export type KnowledgeEdge = {
   from: KnowledgeEntity['id'];
-  relation: 'supportedBy' | 'benchmarkedBy' | OrganizationModelRelationType;
+  relation: 'supportedBy' | 'benchmarkedBy' | OrganizationModelRelationType | RobotModelRelationType;
   to: KnowledgeEntity['id'] | KnowledgeSource['id'];
   reviewedAt: string;
   evidenceSourceIds?: KnowledgeSource['id'][];
+  sourceEmbodimentLabels?: string[];
+  evidenceBoundary?: string;
 };
 
 export type KnowledgeGraph = {
@@ -76,6 +86,7 @@ export type KnowledgeGraph = {
     sensors: number;
     models: number;
     organizations: number;
+    robots: number;
     sourceDocuments: number;
     edges: number;
     supportedByEdges: number;
@@ -84,6 +95,10 @@ export type KnowledgeGraph = {
     developedByEdges: number;
     coDevelopedByEdges: number;
     contributedByEdges: number;
+    robotRelationEdges: number;
+    evaluatedOnEdges: number;
+    trainedAcrossEdges: number;
+    demonstratedOnEdges: number;
   };
   entities: KnowledgeEntity[];
   sources: KnowledgeSource[];
@@ -332,6 +347,28 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     },
   }));
 
+  const robotEntities: KnowledgeEntity[] = researchRobotEntries.map((entry) => ({
+    id: `robot:${entry.id}`,
+    type: 'robot',
+    name: entry.name,
+    canonicalUrl: canonicalUrl(`/robots#robot-${entry.id}`),
+    reviewedAt: entry.sourceReviewed,
+    primarySourceIds: registerSources(entry.identitySources.map((source) => ({
+      url: source.url,
+      label: source.label,
+      kind: 'robot',
+      reviewedAt: entry.sourceReviewed,
+    }))),
+    attributes: {
+      aliases: entry.aliases,
+      robotKind: entry.kind,
+      manufacturer: entry.manufacturer,
+      officialUrl: entry.officialUrl,
+      description: entry.description,
+      evidenceBoundary: entry.evidenceBoundary,
+    },
+  }));
+
   const entities = [
     ...researchEntities,
     ...datasetEntities,
@@ -339,6 +376,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     ...sensorEntities,
     ...modelEntities,
     ...organizationEntities,
+    ...robotEntities,
   ].sort((left, right) => compareText(left.id, right.id));
 
   const sources: KnowledgeSource[] = [...sourceByUrl.values()]
@@ -384,6 +422,20 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     });
   }
 
+  for (const relation of robotAiRobotRelations) {
+    edges.push({
+      from: `model:${relation.modelId}`,
+      relation: relation.relation,
+      to: `robot:${relation.robotId}`,
+      reviewedAt: relation.sourceReviewed,
+      evidenceSourceIds: relation.evidenceUrls
+        .map((url) => sourceId(normalizeSourceUrl(url)))
+        .sort(),
+      sourceEmbodimentLabels: [...relation.sourceEmbodimentLabels],
+      evidenceBoundary: relation.evidenceBoundary,
+    });
+  }
+
   edges.sort((left, right) => (
     compareText(left.from, right.from)
     || compareText(left.relation, right.relation)
@@ -400,6 +452,12 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
   const developedByEdges = edges.filter((edge) => edge.relation === 'developedBy').length;
   const coDevelopedByEdges = edges.filter((edge) => edge.relation === 'coDevelopedBy').length;
   const contributedByEdges = edges.filter((edge) => edge.relation === 'contributedBy').length;
+  const robotRelationEdges = edges.filter((edge) => (
+    robotModelRelationTypes.includes(edge.relation as RobotModelRelationType)
+  )).length;
+  const evaluatedOnEdges = edges.filter((edge) => edge.relation === 'evaluatedOn').length;
+  const trainedAcrossEdges = edges.filter((edge) => edge.relation === 'trainedAcross').length;
+  const demonstratedOnEdges = edges.filter((edge) => edge.relation === 'demonstratedOn').length;
   const graph: KnowledgeGraph = {
     version: knowledgeGraphVersion,
     updated: latestDate(entities.map((entry) => entry.reviewedAt)),
@@ -414,6 +472,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       sensors: sensorEntities.length,
       models: modelEntities.length,
       organizations: organizationEntities.length,
+      robots: robotEntities.length,
       sourceDocuments: sources.length,
       edges: edges.length,
       supportedByEdges,
@@ -422,6 +481,10 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       developedByEdges,
       coDevelopedByEdges,
       contributedByEdges,
+      robotRelationEdges,
+      evaluatedOnEdges,
+      trainedAcrossEdges,
+      demonstratedOnEdges,
     },
     entities,
     sources,
@@ -446,11 +509,13 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     'sensor',
     'model',
     'organization',
+    'robot',
   ]);
   const allowedRelations = new Set<KnowledgeEdge['relation']>([
     'supportedBy',
     'benchmarkedBy',
     ...organizationModelRelationTypes,
+    ...robotModelRelationTypes,
   ]);
   const entityIds = new Set(graph.entities.map((entry) => entry.id));
   const entityById = new Map(graph.entities.map((entry) => [entry.id, entry]));
@@ -505,29 +570,52 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     const organizationRelation = organizationModelRelationTypes.includes(
       edge.relation as OrganizationModelRelationType,
     );
+    const robotRelation = robotModelRelationTypes.includes(
+      edge.relation as RobotModelRelationType,
+    );
+    const fromEntity = entityById.get(edge.from);
+    const toEntity = entityById.get(edge.to as KnowledgeEntity['id']);
     if (organizationRelation) {
-      const fromEntity = entityById.get(edge.from);
-      const toEntity = entityById.get(edge.to as KnowledgeEntity['id']);
       if (fromEntity?.type !== 'model' || toEntity?.type !== 'organization') {
         errors.push(`Organization edge ${key} must connect a model to an organization.`);
       }
+    }
+    if (robotRelation && (fromEntity?.type !== 'model' || toEntity?.type !== 'robot')) {
+      errors.push(`Robot edge ${key} must connect a model to a robot.`);
+    }
+
+    if (organizationRelation || robotRelation) {
+      const relationKind = organizationRelation ? 'Organization' : 'Robot';
       if (!Array.isArray(edge.evidenceSourceIds) || edge.evidenceSourceIds.length === 0) {
-        errors.push(`Organization edge ${key} has no relationship evidence.`);
+        errors.push(`${relationKind} edge ${key} has no relationship evidence.`);
       } else {
         if (new Set(edge.evidenceSourceIds).size !== edge.evidenceSourceIds.length) {
-          errors.push(`Organization edge ${key} repeats relationship evidence.`);
+          errors.push(`${relationKind} edge ${key} repeats relationship evidence.`);
         }
         for (const evidenceSourceId of edge.evidenceSourceIds) {
           if (!sourceIds.has(evidenceSourceId)) {
-            errors.push(`Organization edge ${key} references missing evidence ${evidenceSourceId}.`);
+            errors.push(`${relationKind} edge ${key} references missing evidence ${evidenceSourceId}.`);
           }
           if (!fromEntity?.primarySourceIds.includes(evidenceSourceId)) {
-            errors.push(`Organization edge ${key} uses evidence not attached to its model: ${evidenceSourceId}.`);
+            errors.push(`${relationKind} edge ${key} uses evidence not attached to its model: ${evidenceSourceId}.`);
           }
         }
       }
     } else if (edge.evidenceSourceIds !== undefined) {
-      errors.push(`Non-organization edge ${key} must not carry relationship evidence.`);
+      errors.push(`Non-evidence-backed edge ${key} must not carry relationship evidence.`);
+    }
+
+    if (robotRelation) {
+      if (!Array.isArray(edge.sourceEmbodimentLabels) || edge.sourceEmbodimentLabels.length === 0) {
+        errors.push(`Robot edge ${key} has no source embodiment labels.`);
+      } else if (edge.sourceEmbodimentLabels.some((label) => typeof label !== 'string' || label.trim().length === 0)) {
+        errors.push(`Robot edge ${key} has an invalid source embodiment label.`);
+      }
+      if (typeof edge.evidenceBoundary !== 'string' || edge.evidenceBoundary.trim().length === 0) {
+        errors.push(`Robot edge ${key} has no evidence boundary.`);
+      }
+    } else if (edge.sourceEmbodimentLabels !== undefined || edge.evidenceBoundary !== undefined) {
+      errors.push(`Non-robot edge ${key} must not carry robot embodiment qualifiers.`);
     }
   }
 
@@ -543,6 +631,24 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     const key = `model:${relation.modelId}|${relation.relation}|organization:${relation.organizationId}`;
     if (!edgeKeys.has(key)) errors.push(`Missing verified organization relation ${key}.`);
   }
+  for (const relation of robotAiRobotRelations) {
+    const key = `model:${relation.modelId}|${relation.relation}|robot:${relation.robotId}`;
+    const edge = graph.edges.find((candidate) => (
+      candidate.from === `model:${relation.modelId}`
+      && candidate.relation === relation.relation
+      && candidate.to === `robot:${relation.robotId}`
+    ));
+    if (!edgeKeys.has(key) || !edge) {
+      errors.push(`Missing verified robot relation ${key}.`);
+      continue;
+    }
+    if (JSON.stringify(edge.sourceEmbodimentLabels) !== JSON.stringify(relation.sourceEmbodimentLabels)) {
+      errors.push(`Robot relation ${key} lost its source embodiment labels.`);
+    }
+    if (edge.evidenceBoundary !== relation.evidenceBoundary) {
+      errors.push(`Robot relation ${key} lost its evidence boundary.`);
+    }
+  }
 
   if (graph.counts.knowledgeEntities !== graph.entities.length) errors.push('knowledgeEntities count is inconsistent.');
   if (graph.counts.researchEntities !== graph.entities.filter((entity) => entity.type !== 'organization').length) errors.push('researchEntities count is inconsistent.');
@@ -555,6 +661,7 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
     ['sensor', graph.counts.sensors],
     ['model', graph.counts.models],
     ['organization', graph.counts.organizations],
+    ['robot', graph.counts.robots],
   ] as const) {
     if (graph.entities.filter((entity) => entity.type === type).length !== count) {
       errors.push(`${type} count is inconsistent.`);
@@ -569,6 +676,11 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
   if (graph.counts.coDevelopedByEdges !== graph.edges.filter((edge) => edge.relation === 'coDevelopedBy').length) errors.push('coDevelopedBy edge count is inconsistent.');
   if (graph.counts.contributedByEdges !== graph.edges.filter((edge) => edge.relation === 'contributedBy').length) errors.push('contributedBy edge count is inconsistent.');
   if (graph.counts.organizationRelationEdges !== graph.counts.developedByEdges + graph.counts.coDevelopedByEdges + graph.counts.contributedByEdges) errors.push('organization relation subtotal is inconsistent.');
+  if (graph.counts.robotRelationEdges !== graph.edges.filter((edge) => robotModelRelationTypes.includes(edge.relation as RobotModelRelationType)).length) errors.push('robot relation edge count is inconsistent.');
+  if (graph.counts.evaluatedOnEdges !== graph.edges.filter((edge) => edge.relation === 'evaluatedOn').length) errors.push('evaluatedOn edge count is inconsistent.');
+  if (graph.counts.trainedAcrossEdges !== graph.edges.filter((edge) => edge.relation === 'trainedAcross').length) errors.push('trainedAcross edge count is inconsistent.');
+  if (graph.counts.demonstratedOnEdges !== graph.edges.filter((edge) => edge.relation === 'demonstratedOn').length) errors.push('demonstratedOn edge count is inconsistent.');
+  if (graph.counts.robotRelationEdges !== graph.counts.evaluatedOnEdges + graph.counts.trainedAcrossEdges + graph.counts.demonstratedOnEdges) errors.push('robot relation subtotal is inconsistent.');
 
   return errors;
 }

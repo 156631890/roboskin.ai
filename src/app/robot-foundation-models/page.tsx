@@ -7,6 +7,7 @@ import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { buildRobotAiModelDirectoryJsonLd } from '@/lib/robot-ai-schema';
 import { researchOrganizationEntries } from '@/lib/research-organizations';
+import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robots';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
 
 const page = getSeoTopicPage('/robot-foundation-models');
@@ -23,7 +24,12 @@ export default function RobotFoundationModelsPage() {
     <>
       <JsonLd data={buildRobotAiModelDirectoryJsonLd(robotAiModelEntries)} />
       <SeoTopicArticle page={page}>
-        <RobotAiModelExplorer entries={robotAiModelEntries} organizations={researchOrganizationEntries} />
+        <RobotAiModelExplorer
+          entries={robotAiModelEntries}
+          organizations={researchOrganizationEntries}
+          robots={researchRobotEntries}
+          robotRelations={robotAiRobotRelations}
+        />
       </SeoTopicArticle>
     </>
   );
