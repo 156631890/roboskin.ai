@@ -611,7 +611,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sources: [
       { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
-      { label: 'HT-Bench full-hand tactile representation benchmark', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'HT-Bench full-hand tactile representation benchmark', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'TouchWorld predictive and reactive tactile foundation model', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/html/2606.08737v1' },
       { label: 'MiTaS tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
@@ -2134,7 +2134,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sources: [
       { label: 'TacO tactile sensor benchmark preprint', href: 'https://arxiv.org/abs/2605.21976' },
-      { label: 'HT-Bench full-hand tactile representation benchmark preprint', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'HT-Bench full-hand tactile representation benchmark preprint', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
     ],
     paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025'],
@@ -2263,7 +2263,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     sources: [
       { label: 'PRISM industrial skill dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
       { label: 'PRISM official project page', href: 'https://tengbo-yu.github.io/PRISM/' },
-      { label: 'HT-Bench full-hand tactile benchmark preprint', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'HT-Bench full-hand tactile benchmark preprint', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'RCT dataset preprint', href: 'https://arxiv.org/abs/2606.31694' },
       { label: 'RCT dataset project page', href: 'https://faerber-lab.github.io/RCT/' },
       { label: 'TactiDex dataset preprint', href: 'https://arxiv.org/abs/2607.09190' },
@@ -2605,7 +2605,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research index', href: '/research-index', description: 'Browse source-backed research records and limitations.' },
     ],
     sources: [
-      { label: 'HT-Bench preprint', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'HT-Bench preprint', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'Sparsh and TacBench project', href: 'https://sparsh-ssl.github.io/' },
       { label: 'ObjectFolder benchmark project', href: 'https://objectfolder.stanford.edu/' },
       { label: 'RCT dataset and benchmark project', href: 'https://faerber-lab.github.io/RCT/' },
@@ -3594,7 +3594,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sources: [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
-      { label: 'HT-Bench full-hand tactile representation preprint', href: 'https://arxiv.org/abs/2606.19161' },
+      { label: 'HT-Bench full-hand tactile representation preprint', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'TactiDex tactile-guided dexterous benchmark preprint', href: 'https://arxiv.org/abs/2607.09190' },
       { label: 'HRDexDB multi-hand grasp database preprint', href: 'https://arxiv.org/abs/2604.14944' },
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },

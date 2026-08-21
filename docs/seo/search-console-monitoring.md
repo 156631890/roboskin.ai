@@ -33,6 +33,10 @@ Interpretation: visibility is already near the first page on average, but click-
 
 An authenticated Google Search Console transactional email reported that `roboskin.ai` reached **120 Google Search clicks in the preceding 28 days**, with the achievement dated 2026-08-17. This is a valid bounded milestone from Google, but the email does not provide impressions, CTR, average position, query rows, page rows, or the exact inclusive reporting dates. Do not combine it with another window to calculate growth rates or fill the missing columns. Use a full Search Console export for the next comparative snapshot.
 
+### Redirect exclusion notice — received 2026-08-16, audited 2026-08-22
+
+Search Console reported a new `Page with redirect` exclusion reason but the transactional email did not expose the affected URL list. The production audit found five intentional legacy redirect sources plus permanent `www`-to-apex normalization. All five legacy sources are absent from the 107-URL sitemap, and the production verifier confirmed their destination contract at commit `e3824e7c6cd65d176bb81ae6e6f8a01ea801c0cb`. No redirect should be removed solely to make an exclusion report disappear. Inspect the affected examples in Search Console when browser access is available; change code only if Google lists a canonical URL or a sitemap URL that should return `200` directly.
+
 New route measurement:
 
 - Monitor `/robot-learning` for robot learning, imitation learning robotics, reinforcement learning robots, robot learning datasets, and sim-to-real queries after deployment and crawl.

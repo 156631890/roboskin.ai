@@ -276,8 +276,8 @@ const sourceAffiliationBatches: SourceAffiliationBatch[] = [
       ? 'ht-bench-full-hand-tactile-representations-2026'
       : 'ht-bench',
     organizations: htBenchAffiliations,
-    evidenceUrls: ['https://arxiv.org/abs/2606.19161'],
-    evidenceBoundary: 'The HT-Bench source lists authors under these affiliations. This records only source-listed contributor affiliations; it does not establish institutional ownership, funding, endorsement, or participation by each organization as a whole.',
+    evidenceUrls: ['https://arxiv.org/abs/2606.19161v2'],
+    evidenceBoundary: 'The HT-Bench v2 preprint lists authors under these affiliations. This records only source-listed contributor affiliations; it does not establish institutional ownership, funding, endorsement, or participation by each organization as a whole.',
     sourceReviewed: '2026-08-22',
   })),
   ...(['paper', 'dataset', 'benchmark'] as const).map((fromType) => ({
@@ -517,9 +517,9 @@ export const researchSemanticRelations: ResearchSemanticRelation[] = [
     fromId: 'ht-bench-full-hand-tactile-representations-2026',
     toType: 'dataset',
     toId: 'ht-bench',
-    evidenceUrls: ['https://arxiv.org/abs/2606.19161'],
+    evidenceUrls: ['https://arxiv.org/abs/2606.19161v2'],
     sourceLabels: ['HT-Bench full-hand tactile dataset'],
-    evidenceBoundary: 'The paper explicitly describes the synchronized data underlying HT-Bench as a dataset and defines its splits, but HT-Bench is primarily presented as a constructed benchmark combining existing open-source data with newly collected sequences. No separate public dataset download, file release, or dataset license was verified, so this edge must not imply an independently released HT-Bench data product.',
+    evidenceBoundary: 'The v2 preprint explicitly describes the synchronized data underlying HT-Bench and defines its splits, but HT-Bench is primarily a constructed benchmark combining existing open-source data with newly collected sequences. The authors say they will release data, protocols, weights, and scripts; no separate downloadable package, file release, or artifact license was verified on 2026-08-22, so this edge must not imply an already released HT-Bench data product.',
     sourceReviewed: '2026-08-22',
   },
   {
@@ -528,9 +528,9 @@ export const researchSemanticRelations: ResearchSemanticRelation[] = [
     fromId: 'ht-bench-full-hand-tactile-representations-2026',
     toType: 'benchmark',
     toId: 'ht-bench',
-    evidenceUrls: ['https://arxiv.org/abs/2606.19161'],
+    evidenceUrls: ['https://arxiv.org/abs/2606.19161v2'],
     sourceLabels: ['HT-Bench full-hand tactile representation benchmark'],
-    evidenceBoundary: 'The paper introduces HT-Bench as a four-track representation-learning benchmark for paired egocentric vision and full-hand tactile data. The authors explicitly state that it is not a universal benchmark across tactile sensors or embodiments, and its reported tasks evaluate representations rather than downstream closed-loop robot manipulation.',
+    evidenceBoundary: 'The v2 preprint introduces HT-Bench as a four-track representation-learning benchmark for one reported egocentric/full-hand tactile sensing pipeline, then adds four downstream real-robot tasks with 15 trials per method and task. It does not cover fingertip optical tactile sensors, force/torque sensors, skin-like taxel arrays, or non-hand embodiments. The 68.3% HandTouch mean versus the strongest baseline mean of 50.0% is source-reported without confidence intervals or significance testing and must not be generalized into a universal cross-sensor or cross-robot claim.',
     sourceReviewed: '2026-08-22',
   },
   {

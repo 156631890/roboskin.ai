@@ -855,14 +855,14 @@ The paper also does not establish production latency, hardware durability, calib
     title: 'HT-Bench full-hand tactile benchmark for robot manipulation',
     seoTitle: 'HT-Bench Full-Hand Tactile Benchmark for Robot Learning',
     seoDescription:
-      'HT-Bench pairs 10M RGB frames with 7.8M full-hand tactile frames across 226 tasks to evaluate contact geometry, cross-modal alignment, and task transfer.',
+      'HT-Bench v2 pairs 10M RGB frames with 7.8M full-hand tactile frames across 226 tasks, with four 15-trial robot evaluations and explicit transfer limits.',
     excerpt:
-      'HT-Bench pairs egocentric vision with millions of full-hand tactile frames to evaluate contact geometry, cross-modal alignment, and transfer to unseen robot tasks.',
+      'HT-Bench v2 pairs egocentric vision with millions of full-hand tactile frames, corrects the vision-to-tactile metric split, and adds four real-robot evaluations.',
     content: `# HT-Bench full-hand tactile benchmark for robot manipulation
 
-**Updated technical brief - August 2026**
+**Updated technical brief - August 22, 2026 (arXiv v2)**
 
-HT-Bench is a preprint benchmark for learning and evaluating dexterous full-hand tactile representations alongside egocentric vision. It reports 10 million RGB frames and 7.8 million tactile frames collected across 226 tasks. For robot skin, its value is a concrete evaluation structure: test contact geometry, cross-modal alignment, and transfer instead of treating tactile frame count as proof of useful robot learning.
+HT-Bench is an arXiv preprint benchmark for learning and evaluating dexterous full-hand tactile representations alongside egocentric vision. Version 2, submitted on August 20, 2026, reports 10 million RGB frames and 7.8 million tactile frames collected across 226 tasks. For robot skin, its value is a concrete evaluation structure: test contact geometry, cross-modal alignment, and bounded downstream transfer instead of treating tactile frame count as proof of useful robot learning.
 
 ## Source findings
 
@@ -870,7 +870,9 @@ The HT-Bench paper starts from a real benchmarking problem: tactile sensors, dat
 
 The source describes four benchmark tasks: fine-grained tactile similarity retrieval, masked tactile inpainting, vision-to-tactile synthesis, and multimodal tactile frame prediction. Together they test whether a representation preserves contact structure, aligns touch with vision, and generalizes beyond the tasks used for training.
 
-The paper also introduces HandTouch, a vector-quantized vision-tactile encoder. In the reported experiments, HandTouch improves Recall@5 for fine-grained tactile retrieval from 74.65% to 85.23%, reduces masked-inpainting RMSE from 0.022 to 0.010, and increases out-of-distribution cIoU for vision-to-tactile synthesis from 0.628 to 0.705. These are source-reported benchmark results, not independent validation.
+The paper also introduces HandTouch, a vector-quantized vision-tactile encoder. In Table 2, HandTouch improves Recall@5 for fine-grained tactile retrieval from the strongest ViT baseline's 74.65% to 85.23%. For vision-to-tactile synthesis, the standard-test full-map cIoU is 0.628 for the ViT baseline and 0.689 for HandTouch; on the task-level OOD split, the corresponding values are 0.446 and 0.457. The standard-test and OOD columns must not be conflated.
+
+For masked tactile inpainting on the standard test split, Table 2 reports HandTouch full-map RMSE of 0.009 and full-map cIoU of 0.912, compared with 0.022 and 0.762 for the ViT baseline. Section 5.1 instead states 0.010 and 0.911 for HandTouch, a small internal inconsistency in the preprint. This brief uses the Table 2 values as the primary quantitative record and preserves the discrepancy rather than silently mixing the two statements.
 
 ## RoboSkin analysis
 
@@ -882,6 +884,19 @@ HT-Bench evaluates the representation layer, not whether one tactile sensor is u
 | Masked tactile inpainting | Spatial contact structure | Can missing parts of a tactile observation be reconstructed from context? | Reconstruction quality depends on the sensing layout and training distribution. |
 | Vision-to-tactile synthesis | Cross-modal alignment | Can egocentric vision constrain likely contact patterns? | Predicted touch is not a substitute for measured contact during deployment. |
 | Multimodal frame prediction | Temporal and cross-modal dynamics | Does the model preserve how visual and tactile state change together? | Frame prediction does not by itself establish safe robot control. |
+
+## v2 real-world downstream evaluation
+
+Version 2 adds four contact-rich real-robot tasks: board cleaning, pear picking, water pouring, and sand shoveling. The paper reports 15 trials per method for each task.
+
+| Method | Board cleaning | Pear picking | Water pouring | Sand shoveling | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ResNet-Scratch | 20.0% | 53.3% | 13.3% | 20.0% | 26.7% |
+| ResNet-Trained | 46.7% | 73.3% | 33.3% | 46.7% | 50.0% |
+| ViT | 40.0% | 73.3% | 33.3% | 33.3% | 45.0% |
+| HandTouch | 66.7% | 86.7% | 53.3% | 66.7% | 68.3% |
+
+Across these four tasks, the author-reported HandTouch mean is 68.3%, versus 50.0% for the strongest baseline by mean, ResNet-Trained: a difference of 18.3 percentage points. The paper does not report confidence intervals or a statistical-significance test for this downstream table. These 15-trial, task-specific results support evaluation within the reported setup; they do not establish universal performance or generalization across other hands, tactile systems, objects, controllers, or operating conditions.
 
 ## Engineering implications
 
@@ -897,9 +912,11 @@ For teams evaluating humanoid hands, HT-Bench provides a research checklist rath
 
 ## What this does not prove yet
 
-HT-Bench is an arXiv preprint. It does not establish a universal tactile representation for every hand, skin, sensor, or manipulation task. Its reported improvements are tied to the paper's data, baselines, model, task definitions, and evaluation protocol. Independent reproduction and transfer to other embodiments remain necessary.
+HT-Bench remains an arXiv preprint centered on one reported egocentric/full-hand tactile sensing pipeline. The authors explicitly list fingertip optical tactile sensors, force/torque sensors, skin-like taxel arrays, and non-hand embodiments as sensing or embodiment categories the benchmark does not yet cover. It therefore does not establish a universal tactile representation for every hand, skin, sensor, or manipulation task. Its reported improvements are tied to the paper's data, baselines, model, task definitions, and evaluation protocol. Independent reproduction and transfer to other systems remain necessary.
 
 The scale figures also should not be interpreted as independent sample counts. RGB and tactile frames from the same task trajectory share temporal and physical context. Evaluation quality therefore depends on how tasks, trajectories, objects, hands, and sensors are separated across splits.
+
+Version 2 says the authors will release the data, evaluation protocols, pretrained weights, and training/testing scripts. As of the August 22 review, the arXiv record did not provide a dedicated downloadable package or official repository for those artifacts. The paper's CC BY 4.0 article license should not be read as a verified license for unreleased dataset or model files.
 
 ## Evaluation checklist
 
@@ -912,16 +929,18 @@ The scale figures also should not be interpreted as independent sample counts. R
 
 ## Source
 
-[arXiv: HT-Bench: Benchmarking and Learning Dexterous Full-Hand Tactile Representations with Egocentric Vision](https://arxiv.org/abs/2606.19161)
+[arXiv v2 abstract: HT-Bench: Benchmarking and Learning Dexterous Full-Hand Tactile Representations with Egocentric Vision](https://arxiv.org/abs/2606.19161v2)
+
+[arXiv v2 HTML, including Tables 2 and 4](https://arxiv.org/html/2606.19161v2)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-05',
-    updated: '2026-08-05',
-    readTime: '6 min read',
+    updated: '2026-08-22',
+    readTime: '8 min read',
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
-    sourceTitle: 'HT-Bench full-hand tactile representation benchmark preprint',
-    sourceUrl: 'https://arxiv.org/abs/2606.19161',
+    sourceTitle: 'HT-Bench full-hand tactile representation benchmark preprint v2',
+    sourceUrl: 'https://arxiv.org/abs/2606.19161v2',
     technicalFocus: ['HT-Bench', 'full-hand tactile sensing', 'egocentric vision', 'tactile representation learning'],
   },
   {
