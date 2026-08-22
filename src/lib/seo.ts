@@ -5,6 +5,7 @@ import type { NewsPost } from '@/lib/news-data';
 import type { ResearchIndexEntry } from '@/lib/research-index';
 import type { TactileBenchmarkEntry } from '@/lib/tactile-benchmarks';
 import type { TactileDatasetEntry } from '@/lib/tactile-datasets';
+import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 import type { TactileSensorEntry } from '@/lib/tactile-sensors';
 
 export type SeoRoute = {
@@ -904,8 +905,13 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
   };
 }
 
-export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
-  const pageUrl = canonicalUrl('/datasets');
+function buildDatasetCatalogJsonLd(
+  entries: RoboticsDatasetEntry[],
+  pathname: '/datasets' | '/robotics-datasets',
+  catalogName: string,
+  catalogDescription: string,
+) {
+  const pageUrl = canonicalUrl(pathname);
   const datasetNodes = entries.map((entry) => ({
     '@type': 'Dataset',
     '@id': `${pageUrl}#dataset-${entry.id}`,
@@ -938,8 +944,8 @@ export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
       {
         '@type': 'DataCatalog',
         '@id': `${pageUrl}#catalog`,
-        name: 'RoboSkin.ai Tactile Robotics Dataset Directory',
-        description: 'A source-reviewed directory of tactile and visuo-tactile datasets for robot learning, manipulation, and representation research.',
+        name: catalogName,
+        description: catalogDescription,
         url: pageUrl,
         dataset: datasetNodes.map((entry) => ({ '@id': entry['@id'] })),
       },
@@ -956,6 +962,24 @@ export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
       ...datasetNodes,
     ],
   };
+}
+
+export function buildTactileDatasetsJsonLd(entries: TactileDatasetEntry[]) {
+  return buildDatasetCatalogJsonLd(
+    entries,
+    '/datasets',
+    'RoboSkin.ai Tactile Robotics Dataset Directory',
+    'A source-reviewed directory of tactile and visuo-tactile datasets for robot learning, manipulation, and representation research.',
+  );
+}
+
+export function buildRoboticsDatasetsJsonLd(entries: RoboticsDatasetEntry[]) {
+  return buildDatasetCatalogJsonLd(
+    entries,
+    '/robotics-datasets',
+    'RoboSkin.ai General Robotics Dataset Directory',
+    'A source-reviewed directory of cross-embodiment and manipulation datasets for robot learning, foundation policies, and Physical AI research.',
+  );
 }
 
 export function buildTactileBenchmarksJsonLd(entries: TactileBenchmarkEntry[]) {

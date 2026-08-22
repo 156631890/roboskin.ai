@@ -16,16 +16,16 @@ const arrayBody = (source, exportName) => {
   return match[1];
 };
 
-test('the reviewed semantic and paper-sensor inventory retains the first batch and adds PRISM and Missing Touch', () => {
+test('the reviewed semantic inventory adds bounded model-dataset training and Tac4Loco relations', () => {
   const paperSensorBody = arrayBody(relationSource, 'researchPaperSensorRelations');
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
   assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 12);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 21);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    15,
+    24,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
@@ -34,11 +34,11 @@ test('the reviewed semantic and paper-sensor inventory retains the first batch a
   assert.doesNotMatch(paperSensorBody, /digit-?360/);
   assert.match(paperSensorBody, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/g);
 
-  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 9);
+  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 10);
   assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 1);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
-  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 0);
+  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 8);
 
   for (const pattern of [
     /relation: 'introduces'[\s\S]*?fromId: 'prism-contact-rich-industrial-skill-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'prism-industrial-skill'/,
@@ -53,11 +53,16 @@ test('the reviewed semantic and paper-sensor inventory retains the first batch a
     /relation: 'introduces'[\s\S]*?fromId: 'humanoid-visual-tactile-action-dataset-2025'[\s\S]*?toId: 'humanoid-vta'/,
     /relation: 'introduces'[\s\S]*?fromId: 'dream-tac-tactile-world-action-model-2026'[\s\S]*?toId: 'dream-tac'/,
     /relation: 'evaluatedBy'[\s\S]*?fromId: 'sparsh'[\s\S]*?toId: 'tacbench'/,
+    /relation: 'introduces'[\s\S]*?fromId: 'tac4loco-plantar-tactile-humanoid-locomotion-2026'[\s\S]*?toId: 'tac4loco'/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 'openvla-7b'[\s\S]*?toId: 'open-x-embodiment'/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 'openvla-7b'[\s\S]*?toId: 'droid'[\s\S]*?final third of training/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 'octo'[\s\S]*?toId: 'bridgedata-v2'[\s\S]*?combined Bridge bucket/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 'pi0'[\s\S]*?toId: 'open-x-embodiment'[\s\S]*?9\.1%/,
   ]) {
     assert.match(semanticBody, pattern);
   }
 
-  assert.doesNotMatch(semanticBody, /relation: 'usesDataset'|relation: 'trainedOn'|toId: 'franka-emika-panda'|toId: 'gelsight-mini'/);
+  assert.doesNotMatch(semanticBody, /relation: 'usesDataset'|toId: 'franka-emika-panda'|toId: 'gelsight-mini'/);
   assert.match(semanticBody, /original v1 stated that a large-scale dataset had not yet been released/);
 });
 
@@ -88,14 +93,14 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      researchRelationEdges: 64,
-      researchProvenanceEdges: 52,
-      researchSemanticEdges: 12,
+      researchRelationEdges: 75,
+      researchProvenanceEdges: 54,
+      researchSemanticEdges: 21,
       paperSensorUsageEdges: 3,
-      introducesEdges: 9,
+      introducesEdges: 10,
       describesDatasetEdges: 2,
       usesDatasetEdges: 0,
-      trainedOnEdges: 0,
+      trainedOnEdges: 8,
       evaluatedByEdges: 1,
     },
   );

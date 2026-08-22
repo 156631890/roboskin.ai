@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { site } from '@/content/site';
 import { researchIndexEntries, type EvidenceLevel } from '@/lib/research-index';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { roboticsDatasetEntries } from '@/lib/robotics-datasets';
 import {
   researchDatasetUsageRelations,
   researchEntityRelations,
@@ -257,11 +258,16 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     };
   });
 
-  const datasetEntities: KnowledgeEntity[] = tactileDatasetEntries.map((entry) => ({
+  const datasetRecords = [
+    ...tactileDatasetEntries.map((entry) => ({ entry, pathname: '/datasets' as const })),
+    ...roboticsDatasetEntries.map((entry) => ({ entry, pathname: '/robotics-datasets' as const })),
+  ];
+
+  const datasetEntities: KnowledgeEntity[] = datasetRecords.map(({ entry, pathname }) => ({
     id: `dataset:${entry.id}`,
     type: 'dataset',
     name: entry.name,
-    canonicalUrl: canonicalUrl(`/datasets#dataset-${entry.id}`),
+    canonicalUrl: canonicalUrl(`${pathname}#dataset-${entry.id}`),
     reviewedAt: entry.sourceReviewed,
     primarySourceIds: registerSources([
       { url: entry.paperUrl, label: `${entry.name} paper`, kind: 'paper', reviewedAt: entry.sourceReviewed },

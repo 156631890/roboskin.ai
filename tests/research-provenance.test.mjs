@@ -132,7 +132,9 @@ test('dataset usage edges distinguish sensor use, physical embodiments, and simu
   }
 
   assert.equal([...usage.matchAll(/relation: 'usesSensor'/g)].length, 4);
-  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 2);
+  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 4);
+  assert.match(usage, /fromId: 'droid',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?complete collection platform also includes the named Robotiq gripper/);
+  assert.match(usage, /fromId: 'bridgedata-v2',[\s\S]*?toId: 'trossen-widowx-250-6dof'[\s\S]*?does not imply that every trajectory contains every optional camera/);
   assert.match(usage, /fromId: 'prism-industrial-skill',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?two physical Franka Emika Panda arms/);
   assert.match(usage, /fromId: 'softvtbench',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?simulation-only embodiment relation/);
   assert.match(usage, /does not use a physical GelSight Mini/);

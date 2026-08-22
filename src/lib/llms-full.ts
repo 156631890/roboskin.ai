@@ -15,6 +15,7 @@ import {
   type ResearchEntityRelation,
 } from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { roboticsDatasetEntries } from '@/lib/robotics-datasets';
 import { researchOrganizationEntries, robotAiOrganizationRelations } from '@/lib/research-organizations';
 import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robots';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
@@ -43,6 +44,7 @@ function latestReviewedDate() {
     ...seoTopicPages.map((page) => page.updated),
     ...blogPosts.flatMap((post) => [post.date, post.updated]),
     ...newsPosts.flatMap((post) => [post.date, post.updated]),
+    ...roboticsDatasetEntries.map((entry) => entry.sourceReviewed),
     ...tactileDatasetEntries.map((entry) => entry.sourceReviewed),
     ...tactileBenchmarkEntries.map((entry) => entry.sourceReviewed),
     ...tactileSensorEntries.map((entry) => entry.sourceReviewed),
@@ -65,8 +67,10 @@ function researchRelationEntity(
       return entry ? { name: entry.sourceTitle, url: entry.url } : undefined;
     }
     case 'dataset': {
-      const entry = tactileDatasetEntries.find((candidate) => candidate.id === id);
-      return entry ? { name: entry.name, url: canonicalUrl(`/datasets#dataset-${entry.id}`) } : undefined;
+      const tactileEntry = tactileDatasetEntries.find((candidate) => candidate.id === id);
+      if (tactileEntry) return { name: tactileEntry.name, url: canonicalUrl(`/datasets#dataset-${tactileEntry.id}`) };
+      const roboticsEntry = roboticsDatasetEntries.find((candidate) => candidate.id === id);
+      return roboticsEntry ? { name: roboticsEntry.name, url: canonicalUrl(`/robotics-datasets#dataset-${roboticsEntry.id}`) } : undefined;
     }
     case 'benchmark': {
       const entry = tactileBenchmarkEntries.find((candidate) => candidate.id === id);
@@ -107,7 +111,7 @@ export function buildLlmsFullText() {
     `- Latest included content review: ${latestReviewedDate()}`,
     `- Topic pages: ${seoTopicPages.length}`,
     `- Glossary terms: ${glossaryTerms.length}`,
-    `- Dataset records: ${tactileDatasetEntries.length}`,
+    `- Dataset records: ${tactileDatasetEntries.length + roboticsDatasetEntries.length}`,
     `- Benchmark records: ${tactileBenchmarkEntries.length}`,
     `- Sensor records: ${tactileSensorEntries.length}`,
     `- Robot AI model records: ${robotAiModelEntries.length}`,
@@ -242,6 +246,32 @@ export function buildLlmsFullText() {
       `- Release year: ${entry.year}`,
       `- Robot or embodiment: ${list(entry.robot)}`,
       `- Sensor: ${list(entry.sensor)}`,
+      `- Modalities: ${list(entry.modalities)}`,
+      `- Reported scale: ${compact(entry.sampleCount)}`,
+      `- Tasks: ${list(entry.tasks)}`,
+      `- Object categories: ${compact(entry.objectCategories)}`,
+      `- Data format: ${compact(entry.dataFormat)}`,
+      `- License evidence: ${compact(entry.license)}`,
+      `- Availability: ${compact(entry.availability)}`,
+      `- Paper: ${entry.paperUrl}`,
+    );
+    appendOptionalLink(lines, 'License URL', entry.licenseUrl);
+    appendOptionalLink(lines, 'Project URL', entry.projectUrl);
+    appendOptionalLink(lines, 'GitHub URL', entry.githubUrl);
+    appendOptionalLink(lines, 'Dataset URL', entry.datasetUrl);
+    lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
+  }
+
+  lines.push('## General Robot Learning Datasets', '', `Directory: ${canonicalUrl('/robotics-datasets')}`, '');
+  for (const entry of roboticsDatasetEntries) {
+    lines.push(
+      `### ${entry.name}`,
+      '',
+      `- Record ID: ${entry.id}`,
+      `- Institution or collaboration: ${list(entry.institution)}`,
+      `- Release year: ${entry.year}`,
+      `- Robot or embodiment: ${list(entry.robot)}`,
+      `- Sensors and collection interface: ${list(entry.sensor)}`,
       `- Modalities: ${list(entry.modalities)}`,
       `- Reported scale: ${compact(entry.sampleCount)}`,
       `- Tasks: ${list(entry.tasks)}`,

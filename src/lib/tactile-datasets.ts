@@ -1,24 +1,6 @@
-export type TactileDatasetEntry = {
-  id: string;
-  name: string;
-  institution: string[];
-  year: number;
-  robot: string[];
-  sensor: string[];
-  modalities: string[];
-  sampleCount: string;
-  tasks: string[];
-  objectCategories: string;
-  dataFormat: string;
-  license: string;
-  licenseUrl?: string;
-  paperUrl: string;
-  projectUrl?: string;
-  githubUrl?: string;
-  datasetUrl?: string;
-  availability: string;
-  sourceReviewed: string;
-};
+import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
+
+export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
   {

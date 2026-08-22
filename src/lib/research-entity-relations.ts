@@ -1,5 +1,6 @@
 import { researchIndexEntries } from '@/lib/research-index';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { roboticsDatasetEntries } from '@/lib/robotics-datasets';
 import { researchOrganizationEntries } from '@/lib/research-organizations';
 import { researchRobotEntries } from '@/lib/research-robots';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
@@ -376,6 +377,28 @@ export const researchDatasetUsageRelations: DatasetUsageRelation[] = [
   {
     relation: 'usesRobot',
     fromType: 'dataset',
+    fromId: 'droid',
+    toType: 'robot',
+    toId: 'franka-emika-panda',
+    evidenceUrls: ['https://arxiv.org/abs/2403.12945v2'],
+    sourceLabels: ['Franka Emika Panda 7-DoF arm with Robotiq 2F-85 gripper'],
+    evidenceBoundary: 'DROID was collected on standardized physical platforms built around a Franka Emika Panda arm. The robot entity represents the arm only; the complete collection platform also includes the named Robotiq gripper, three ZED stereo cameras, control stack, portable desk, and Quest 2 teleoperation interface.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'usesRobot',
+    fromType: 'dataset',
+    fromId: 'bridgedata-v2',
+    toType: 'robot',
+    toId: 'trossen-widowx-250-6dof',
+    evidenceUrls: ['https://arxiv.org/abs/2308.12952v3'],
+    sourceLabels: ['WidowX 250 6DOF robot arm'],
+    evidenceBoundary: 'BridgeData V2 uses a physical WidowX 250 6DOF arm for the reported collection. This relation does not imply that every trajectory contains every optional camera or depth stream, that other WidowX variants are equivalent, or that policies trained on BridgeData V2 transfer without target-system evaluation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'usesRobot',
+    fromType: 'dataset',
     fromId: 'prism-industrial-skill',
     toType: 'robot',
     toId: 'franka-emika-panda',
@@ -478,6 +501,105 @@ export const researchPaperSensorRelations: UsesSensorRelation[] = [
 ];
 
 export const researchSemanticRelations: ResearchSemanticRelation[] = [
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'openvla-7b',
+    toType: 'dataset',
+    toId: 'open-x-embodiment',
+    evidenceUrls: ['https://arxiv.org/abs/2406.09246'],
+    sourceLabels: ['970k robot manipulation trajectories from the Open X-Embodiment dataset'],
+    evidenceBoundary: 'The OpenVLA paper identifies its 970,000-trajectory training corpus as an Open X-Embodiment mixture. That model-specific snapshot differs from the aggregation’s own current headline count and does not imply that every Open X constituent dataset, modality, embodiment, or later revision has equal training weight.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'openvla-7b',
+    toType: 'dataset',
+    toId: 'bridgedata-v2',
+    evidenceUrls: ['https://arxiv.org/abs/2406.09246'],
+    sourceLabels: ['Bridge training bucket citing Bridge V1 and BridgeData V2'],
+    evidenceBoundary: 'OpenVLA’s appendix assigns 13.3% to a combined Bridge bucket that cites both Bridge V1 and BridgeData V2. This edge records explicit inclusion of BridgeData V2 but does not assign the full 13.3% to V2 alone or equate the later 17-task physical evaluation suite with a fixed dataset benchmark.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'openvla-7b',
+    toType: 'dataset',
+    toId: 'droid',
+    evidenceUrls: ['https://arxiv.org/abs/2406.09246'],
+    sourceLabels: ['DROID at 10.0% before removal during the final third of training'],
+    evidenceBoundary: 'DROID appears at 10% in the published OpenVLA mixture and is explicitly removed for the final third of training. This edge therefore records partial-stage training use, not a constant 10% contribution throughout training; the separate 70-demonstration Franka-DROID adaptation is not the full DROID corpus.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'octo',
+    toType: 'dataset',
+    toId: 'open-x-embodiment',
+    evidenceUrls: ['https://arxiv.org/abs/2405.12213'],
+    sourceLabels: ['800k trajectories from 25 Open X-Embodiment datasets'],
+    evidenceBoundary: 'Octo’s pretraining uses 800,000 trajectories from a 25-dataset Open X-Embodiment subset. This is a model-specific snapshot, not the complete evolving aggregation, and it does not establish uniform weighting, sensor coverage, or performance across all source embodiments.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'octo',
+    toType: 'dataset',
+    toId: 'bridgedata-v2',
+    evidenceUrls: ['https://arxiv.org/abs/2405.12213'],
+    sourceLabels: ['Bridge training bucket citing Bridge Data and BridgeData V2'],
+    evidenceBoundary: 'Octo’s appendix assigns 17% to a combined Bridge bucket that cites Bridge V1 and BridgeData V2. This proves BridgeData V2 is represented but does not disclose a V2-only weight or allow the full 17% to be attributed to V2.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'pi0',
+    toType: 'dataset',
+    toId: 'open-x-embodiment',
+    evidenceUrls: ['https://www.pi.website/download/pi0.pdf'],
+    sourceLabels: ['OXE Magic Soup subset within the 9.1% open-source pretraining mixture'],
+    evidenceBoundary: 'The detailed π0 training-mixture section identifies an Open X-Embodiment subset, not necessarily the entire aggregation. Open X-Embodiment, BridgeData V2, and DROID together receive 9.1% of the mixture, but the report does not disclose their individual weights; another 903 million steps come from proprietary data.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'pi0',
+    toType: 'dataset',
+    toId: 'bridgedata-v2',
+    evidenceUrls: ['https://www.pi.website/download/pi0.pdf'],
+    sourceLabels: ['BridgeData V2 within the 9.1% open-source pretraining mixture'],
+    evidenceBoundary: 'The π0 report explicitly names BridgeData V2 as one of three open-source pretraining sources whose combined mixture weight is 9.1%. It does not disclose a BridgeData V2-only weight, and later task-specific post-training data must not be merged into this base-pretraining relation.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 'pi0',
+    toType: 'dataset',
+    toId: 'droid',
+    evidenceUrls: ['https://www.pi.website/download/pi0.pdf'],
+    sourceLabels: ['DROID within the 9.1% open-source pretraining mixture'],
+    evidenceBoundary: 'The π0 report explicitly names DROID as one of three open-source pretraining sources whose combined mixture weight is 9.1%. It does not disclose a DROID-only weight, and later OpenPI DROID recipes or checkpoints do not retroactively redefine the original π0 training mixture.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'tac4loco-plantar-tactile-humanoid-locomotion-2026',
+    toType: 'model',
+    toId: 'tac4loco',
+    evidenceUrls: ['https://arxiv.org/abs/2608.15766'],
+    sourceLabels: ['Tac4Loco tactile-perceptive humanoid locomotion framework'],
+    evidenceBoundary: 'The preprint introduces Tac4Loco as a named learned locomotion framework. The relation does not turn source-reported simulation or physical results into an independent benchmark, and it preserves the distinction between simulation training and deployment on one physical Unitree G1 with research-team pressure insoles.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     relation: 'introduces',
     fromType: 'paper',
@@ -629,7 +751,9 @@ const organizationById = new Map(researchOrganizationEntries.map((entry) => [ent
 const paperById = new Map(researchIndexEntries
   .filter((entry) => entry.evidence !== 'documentation')
   .map((entry) => [entry.id, entry]));
-const datasetById = new Map(tactileDatasetEntries.map((entry) => [entry.id, entry]));
+const datasetById = new Map(
+  [...tactileDatasetEntries, ...roboticsDatasetEntries].map((entry) => [entry.id, entry]),
+);
 const benchmarkById = new Map(tactileBenchmarkEntries.map((entry) => [entry.id, entry]));
 const sensorById = new Map(tactileSensorEntries.map((entry) => [entry.id, entry]));
 const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));

@@ -15,6 +15,7 @@ const trustedPrimarySourceHosts = new Set([
   'github.com',
   'octo-models.github.io',
   'openvla.github.io',
+  'phanes-lab.github.io',
   'research.google',
   'research.nvidia.com',
   'sparsh-ssl.github.io',
@@ -85,7 +86,11 @@ test('robot AI model records are unique, typed, dated, and evidence bounded', ()
       );
     }
 
-    assert.ok(entry.primarySources.length >= 2, `${entry.name} needs at least two primary or official sources`);
+    const minimumSourceCount = entry.projectUrl === entry.paperUrl ? 1 : 2;
+    assert.ok(
+      entry.primarySources.length >= minimumSourceCount,
+      `${entry.name} needs enough distinct primary or official sources for its available artifacts`,
+    );
     assert.equal(
       new Set(entry.primarySources.map((source) => source.url)).size,
       entry.primarySources.length,
@@ -133,11 +138,11 @@ test('robot AI model records are unique, typed, dated, and evidence bounded', ()
 test('robot AI model filtering preserves exact role, tactile, year, and text semantics', () => {
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { category: 'tactile model' }).map((entry) => entry.id),
-    ['sparsh'],
+    ['touchworld', 'sparsh'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { tactileInput: 'yes' }).map((entry) => entry.id).sort(),
-    ['dream-tac', 'sparsh'],
+    ['dream-tac', 'sparsh', 'tac4loco', 'touchworld'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'franka duo' }).map((entry) => entry.id),

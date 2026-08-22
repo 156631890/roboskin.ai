@@ -10,15 +10,18 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   const entryBlock = source.match(/researchRobotEntries:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const robotAiRobotRelations/)?.[1] ?? '';
   const relationBlock = source.match(/robotAiRobotRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nconst validDate/)?.[1] ?? '';
 
-  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 11);
-  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 22);
+  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 14);
+  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 27);
   for (const id of [
     'apptronik-apollo-2',
     'franka-duo',
     'fourier-gr-1',
     '1x-humanoid-family',
     'franka-emika-panda',
+    'unitree-g1',
+    'universal-robots-ur5',
     'universal-robots-ur5e',
+    'aloha-bimanual-teleoperation-setup',
     'trossen-viperx-family',
     'trossen-widowx-250-6dof',
     'google-rt-mobile-manipulator',
@@ -37,6 +40,12 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   assert.match(source, /does not resolve the GR00T N1 demonstration to NEO, EVE, NEO Beta, NEO Gamma/);
   assert.match(source, /does not disclose an exact ViperX product code/);
   assert.match(source, /UR5 and UR5e are not treated as interchangeable/);
+  assert.match(source, /This entity remains separate from the existing e-Series UR5e entity/);
+  assert.match(source, /simulation training and a physical G1 for plantar-pressure locomotion evaluation/);
+  assert.match(source, /ALOHA is a complete research workcell rather than an alias for one ViperX arm/);
+  assert.match(relationBlock, /modelId: 'octo',[\s\S]*?robotId: 'universal-robots-ur5',[\s\S]*?relation: 'trainedAcross'/);
+  assert.match(relationBlock, /modelId: 'octo',[\s\S]*?robotId: 'aloha-bimanual-teleoperation-setup',[\s\S]*?relation: 'evaluatedOn'/);
+  assert.match(relationBlock, /modelId: 'tac4loco',[\s\S]*?robotId: 'unitree-g1',[\s\S]*?relation: 'trainedAcross'/);
   assert.match(relationBlock, /modelId: 'isaac-gr00t-n1',[\s\S]*?robotId: 'fourier-gr-1',[\s\S]*?relation: 'trainedAcross'/);
   assert.match(relationBlock, /pretraining uses the authors’ GR-1 humanoid data/);
   assert.doesNotMatch(entryBlock, /aliases:\s*\[[^\]]*'ViperX-300'/);

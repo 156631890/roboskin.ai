@@ -10,6 +10,7 @@ test('knowledge graph is built from the existing reviewed collections with hones
 
   for (const source of [
     'researchIndexEntries',
+    'roboticsDatasetEntries',
     'tactileDatasetEntries',
     'tactileBenchmarkEntries',
     'tactileSensorEntries',
@@ -87,10 +88,10 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.ok(contract.version.length > 0);
   assert.ok(Object.values(contract.counts).every((count) => Number.isInteger(count) && count >= 0));
   assert.equal(contract.version, '2.0.0');
-  assert.equal(contract.counts.robots, 11);
-  assert.equal(contract.counts.robotRelationEdges, 22);
-  assert.equal(contract.counts.evaluatedOnEdges, 15);
-  assert.equal(contract.counts.trainedAcrossEdges, 5);
+  assert.equal(contract.counts.robots, 14);
+  assert.equal(contract.counts.robotRelationEdges, 27);
+  assert.equal(contract.counts.evaluatedOnEdges, 18);
+  assert.equal(contract.counts.trainedAcrossEdges, 7);
   assert.equal(contract.counts.demonstratedOnEdges, 2);
   assert.equal(contract.counts.knowledgeEntities, contract.counts.researchEntities + contract.counts.organizations);
   assert.equal(
@@ -103,13 +104,13 @@ test('knowledge graph JSON is a protected deterministic static output outside th
       + contract.counts.robots,
   );
   assert.equal(contract.counts.researchIndex, contract.counts.papers + contract.counts.documentation);
-  assert.equal(contract.counts.researchRelationEdges, 64);
-  assert.equal(contract.counts.researchProvenanceEdges, 52);
-  assert.equal(contract.counts.researchSemanticEdges, 12);
-  assert.equal(contract.counts.introducesEdges, 9);
+  assert.equal(contract.counts.researchRelationEdges, 75);
+  assert.equal(contract.counts.researchProvenanceEdges, 54);
+  assert.equal(contract.counts.researchSemanticEdges, 21);
+  assert.equal(contract.counts.introducesEdges, 10);
   assert.equal(contract.counts.describesDatasetEdges, 2);
   assert.equal(contract.counts.usesDatasetEdges, 0);
-  assert.equal(contract.counts.trainedOnEdges, 0);
+  assert.equal(contract.counts.trainedOnEdges, 8);
   assert.equal(contract.counts.evaluatedByEdges, 1);
   assert.equal(contract.counts.edges, contract.counts.supportedByEdges + contract.counts.benchmarkedByEdges + contract.counts.organizationRelationEdges + contract.counts.robotRelationEdges + contract.counts.researchRelationEdges);
   assert.equal(contract.counts.organizationRelationEdges, contract.counts.developedByEdges + contract.counts.coDevelopedByEdges + contract.counts.contributedByEdges);

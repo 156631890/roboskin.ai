@@ -1,17 +1,25 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { TactileDatasetEntry } from '@/lib/tactile-datasets';
+import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 
 type TactileDatasetExplorerProps = {
-  entries: TactileDatasetEntry[];
+  entries: RoboticsDatasetEntry[];
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
 };
 
 function unique(values: string[]) {
   return [...new Set(values)].sort((left, right) => left.localeCompare(right));
 }
 
-export default function TactileDatasetExplorer({ entries }: TactileDatasetExplorerProps) {
+export default function TactileDatasetExplorer({
+  entries,
+  eyebrow = 'Structured dataset explorer',
+  heading = 'Filter tactile robotics datasets',
+  description = 'Every row separates reported facts from unavailable fields. “Not stated” means the reviewed primary source did not provide enough evidence to fill that field.',
+}: TactileDatasetExplorerProps) {
   const [sensor, setSensor] = useState('All sensors');
   const [robot, setRobot] = useState('All robots');
   const [task, setTask] = useState('All tasks');
@@ -55,12 +63,12 @@ export default function TactileDatasetExplorer({ entries }: TactileDatasetExplor
   return (
     <section className="research-data-explorer deferred-section pb-14 md:pb-20" aria-labelledby="dataset-explorer-heading">
       <div className="container-shell">
-        <p className="eyebrow">Structured dataset explorer</p>
+        <p className="eyebrow">{eyebrow}</p>
         <div className="mt-4 grid gap-5 lg:grid-cols-[0.7fr_1fr] lg:items-end">
           <div>
-            <h2 id="dataset-explorer-heading" className="text-3xl font-bold text-white md:text-4xl">Filter tactile robotics datasets</h2>
+            <h2 id="dataset-explorer-heading" className="text-3xl font-bold text-white md:text-4xl">{heading}</h2>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#c8d1de]">
-              Every row separates reported facts from unavailable fields. “Not stated” means the reviewed primary source did not provide enough evidence to fill that field.
+              {description}
             </p>
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#8e98a8] lg:text-right">
