@@ -262,7 +262,7 @@ if (failures.length === 0) {
   const graphEdgeKeys = new Set();
   const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
   const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
-  const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+  const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'manufacturedBy', 'usesSensor', 'usesRobot'];
   const researchSemanticRelations = ['introduces', 'describesDataset', 'usesDataset', 'trainedOn', 'evaluatedBy'];
   const researchRelations = [...researchProvenanceRelations, ...researchSemanticRelations];
   const evidenceBackedRelations = new Set([...organizationRelations, ...robotRelations, ...researchRelations]);
@@ -323,6 +323,8 @@ if (failures.length === 0) {
       && (!['paper', 'dataset', 'benchmark', 'sensor'].includes(fromEntity?.type) || toEntity?.type !== 'organization')) failures.push(`/knowledge-graph.json: invalid sourceAffiliation endpoints (${edgeKey})`);
     if (edge.relation === 'partOf'
       && (fromEntity?.type !== 'organization' || toEntity?.type !== 'organization' || edge.from === edge.to)) failures.push(`/knowledge-graph.json: invalid partOf endpoints (${edgeKey})`);
+    if (edge.relation === 'manufacturedBy'
+      && (!['sensor', 'robot'].includes(fromEntity?.type) || toEntity?.type !== 'organization')) failures.push(`/knowledge-graph.json: invalid manufacturedBy endpoints (${edgeKey})`);
     if (edge.relation === 'usesSensor'
       && (!['paper', 'dataset'].includes(fromEntity?.type) || toEntity?.type !== 'sensor')) failures.push(`/knowledge-graph.json: invalid usesSensor endpoints (${edgeKey})`);
     if (edge.relation === 'usesRobot'
@@ -378,6 +380,7 @@ if (failures.length === 0) {
     ['demonstratedOn', 'demonstratedOnEdges'],
     ['sourceAffiliation', 'sourceAffiliationEdges'],
     ['partOf', 'organizationHierarchyEdges'],
+    ['manufacturedBy', 'manufacturedByEdges'],
     ['usesSensor', 'usesSensorEdges'],
     ['usesRobot', 'usesRobotEdges'],
     ['introduces', 'introducesEdges'],
@@ -515,6 +518,7 @@ if (failures.length === 0) {
     ['Verified model-organization relations', graph.counts?.organizationRelationEdges],
     ['Source-listed research affiliations', graph.counts?.sourceAffiliationEdges],
     ['Verified organization hierarchy relations', graph.counts?.organizationHierarchyEdges],
+    ['Verified hardware manufacturer or provider relations', graph.counts?.manufacturedByEdges],
     ['Verified dataset sensor or robot relations', graph.counts?.datasetUsageEdges],
     ['Verified paper-sensor relations', graph.counts?.paperSensorUsageEdges],
     ['Evidence-backed research entity relations', graph.counts?.researchRelationEdges],

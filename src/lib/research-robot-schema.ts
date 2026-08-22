@@ -1,4 +1,5 @@
 import { buildPageJsonLd, canonicalUrl } from '@/lib/seo';
+import { researchManufacturingRelations } from '@/lib/research-entity-relations';
 import {
   researchRobotEntries,
   type ResearchRobotEntry,
@@ -11,23 +12,34 @@ export function robotCanonicalId(robot: Pick<ResearchRobotEntry, 'id'>) {
 export function buildResearchRobotDirectoryJsonLd() {
   const directoryUrl = canonicalUrl('/robots');
 
-  const robotNodes = researchRobotEntries.map((robot) => ({
-    '@type': 'Thing',
-    '@id': robotCanonicalId(robot),
-    identifier: robot.id,
-    name: robot.name,
-    ...(robot.aliases.length > 0 ? { alternateName: robot.aliases } : {}),
-    category: robot.kind,
-    description: robot.description,
-    url: robotCanonicalId(robot),
-    ...(robot.schemaSameAsUrl ? { sameAs: [robot.schemaSameAsUrl] } : {}),
-    isPartOf: {
-      '@id': `${directoryUrl}#robot-directory`,
-    },
-    mainEntityOfPage: {
-      '@id': `${directoryUrl}#webpage`,
-    },
-  }));
+  const robotNodes = researchRobotEntries.map((robot) => {
+    const manufacturerRelation = researchManufacturingRelations.find(
+      (relation) => relation.fromType === 'robot' && relation.fromId === robot.id,
+    );
+
+    return {
+      '@type': 'Thing',
+      '@id': robotCanonicalId(robot),
+      identifier: robot.id,
+      name: robot.name,
+      ...(robot.aliases.length > 0 ? { alternateName: robot.aliases } : {}),
+      category: robot.kind,
+      description: robot.description,
+      url: robotCanonicalId(robot),
+      ...(robot.schemaSameAsUrl ? { sameAs: [robot.schemaSameAsUrl] } : {}),
+      ...(manufacturerRelation ? {
+        manufacturer: {
+          '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerRelation.toId}`,
+        },
+      } : {}),
+      isPartOf: {
+        '@id': `${directoryUrl}#robot-directory`,
+      },
+      mainEntityOfPage: {
+        '@id': `${directoryUrl}#webpage`,
+      },
+    };
+  });
 
   return {
     '@context': 'https://schema.org',

@@ -127,10 +127,10 @@ export const researchRobotEntries: ResearchRobotEntry[] = [
     aliases: ['Panda', 'Franka Panda', 'Franka Emika Robot (Panda)'],
     kind: 'robot arm',
     manufacturer: 'Franka Robotics',
-    officialUrl: 'https://support.franka.de/docs/index.html',
+    officialUrl: 'https://franka.de/documents',
     schemaSameAsUrl: null,
     identitySources: [
-      { label: 'Franka Control Interface documentation', url: 'https://support.franka.de/docs/index.html' },
+      { label: 'Franka official end-of-life notice for the Franka Emika Robot', url: 'https://download.franka.de/End-of-Life-Franka-Emika-Robot_EN.pdf' },
     ],
     description: 'The older Franka research robot commonly called Panda. Exact experimental configurations can add cameras, grippers, tactile sensors, tables, or mobile fixtures.',
     evidenceBoundary: 'Franka documentation identifies the older Franka Robotics Robot as FER or Panda. This entity must not be conflated with Franka Research 3, a generic Franka arm, Franka Duo, or every DROID installation.',

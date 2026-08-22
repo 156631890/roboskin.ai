@@ -10,6 +10,7 @@ import { tactileSensorEntries } from '@/lib/tactile-sensors';
 export const researchProvenanceRelationTypes = [
   'sourceAffiliation',
   'partOf',
+  'manufacturedBy',
   'usesSensor',
   'usesRobot',
 ] as const;
@@ -53,6 +54,12 @@ export const researchEntityRelationVocabulary: ResearchEntityRelationDefinition[
     fromTypes: ['organization'],
     toTypes: ['organization'],
     definition: 'An official organization source explicitly places the source organization inside the target organization.',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromTypes: ['sensor', 'robot'],
+    toTypes: ['organization'],
+    definition: 'An official product, documentation, or provider source explicitly attributes the named hardware product or normalized platform family to the target organization; it does not establish performance, availability, certification, or ownership of third-party components.',
   },
   {
     relation: 'usesSensor',
@@ -116,6 +123,14 @@ export type SourceAffiliationRelation = EvidenceFields & {
 export type OrganizationPartOfRelation = EvidenceFields & {
   relation: 'partOf';
   fromType: 'organization';
+  fromId: string;
+  toType: 'organization';
+  toId: string;
+};
+
+export type ManufacturedByRelation = EvidenceFields & {
+  relation: 'manufacturedBy';
+  fromType: 'sensor' | 'robot';
   fromId: string;
   toType: 'organization';
   toId: string;
@@ -189,6 +204,7 @@ export type ResearchSemanticRelation =
 export type ResearchEntityRelation =
   | SourceAffiliationRelation
   | OrganizationPartOfRelation
+  | ManufacturedByRelation
   | DatasetUsageRelation
   | ResearchSemanticRelation;
 
@@ -334,6 +350,17 @@ const sourceAffiliationBatches: SourceAffiliationBatch[] = [
   },
   {
     fromType: 'sensor',
+    fromId: 'anyskin',
+    organizations: [
+      { organizationId: 'new-york-university', sourceLabels: ['New York University'] },
+      { organizationId: 'columbia-university', sourceLabels: ['Columbia University'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2409.08276'],
+    evidenceBoundary: 'The AnySkin paper lists New York University and Columbia University among its author affiliations. These two links are a currently normalized subset of the wider affiliation list and record contributor affiliation only; they do not establish institutional ownership, funding, endorsement, manufacturing, or exclusive development of AnySkin.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    fromType: 'sensor',
     fromId: 'gelslim-4',
     organizations: [
       { organizationId: 'university-of-michigan', sourceLabels: ['University of Michigan MMint Lab'] },
@@ -354,10 +381,175 @@ const sourceAffiliationBatches: SourceAffiliationBatch[] = [
     evidenceBoundary: 'The TacTip source uses the combined Bristol Robotics Laboratory and University of Bristol affiliation. These links record that source context without making the lab a university alias or implying exclusive ownership, funding, or endorsement.',
     sourceReviewed: '2026-08-22',
   },
+  {
+    fromType: 'sensor',
+    fromId: 'insight',
+    organizations: [
+      { organizationId: 'max-planck-institute-for-intelligent-systems', sourceLabels: ['Max Planck Institute for Intelligent Systems'] },
+    ],
+    evidenceUrls: ['https://www.nature.com/articles/s42256-021-00439-3'],
+    evidenceBoundary: 'The Insight paper lists the Max Planck Institute for Intelligent Systems in its author affiliations. This relation preserves source-listed affiliation only and does not establish institutional ownership, endorsement, commercialization, or performance beyond the reviewed paper.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    fromType: 'sensor',
+    fromId: 'allsight',
+    organizations: [
+      { organizationId: 'ben-gurion-university-of-the-negev', sourceLabels: ['Ben-Gurion University of the Negev'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2307.02928'],
+    evidenceBoundary: 'The AllSight paper lists Ben-Gurion University of the Negev as an author affiliation. This records contributor affiliation only and does not establish university ownership, endorsement, commercial availability, or performance outside the paper protocol.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    fromType: 'sensor',
+    fromId: '9dtact',
+    organizations: [
+      { organizationId: 'shanghai-qi-zhi-institute', sourceLabels: ['Shanghai Qi Zhi Institute'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2308.14277'],
+    evidenceBoundary: 'The 9DTact paper lists Shanghai Qi Zhi Institute among its author affiliations. This is one normalized link from a wider affiliation list and records contributor affiliation only; it does not establish institutional ownership, endorsement, or exclusive development of the sensor.',
+    sourceReviewed: '2026-08-22',
+  },
 ];
 
 export const researchSourceAffiliationRelations: SourceAffiliationRelation[] =
   sourceAffiliationBatches.flatMap(expandSourceAffiliations);
+
+export const researchManufacturingRelations: ManufacturedByRelation[] = [
+  {
+    relation: 'manufacturedBy',
+    fromType: 'sensor',
+    fromId: 'gelsight-mini',
+    toType: 'organization',
+    toId: 'gelsight',
+    evidenceUrls: ['https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GelSight_Datasheet_GSMini.pdf'],
+    sourceLabels: ['GelSight Mini', 'GelSight'],
+    evidenceBoundary: 'The official GelSight Mini datasheet identifies the named product and GelSight as its provider. This relation does not independently verify task performance, current stock, pricing, force accuracy, safety certification, or compatibility with every robot integration.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'sensor',
+    fromId: 'biotac',
+    toType: 'organization',
+    toId: 'syntouch',
+    evidenceUrls: ['https://www.sec.gov/Archives/edgar/data/1728560/000172856021000002/SynTouchFormC-AR-2021-04-30.pdf'],
+    sourceLabels: ['BioTac', 'SynTouch'],
+    evidenceBoundary: 'The company-filed 2021 SEC annual report identifies SynTouch, Inc. and describes BioTac tactile sensors among its products. This historical attribution does not transfer specifications across revisions or establish current availability, pricing, support, calibrated force accuracy, or compatibility with every robot hand.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'sensor',
+    fromId: 'uskin',
+    toType: 'organization',
+    toId: 'xela-robotics',
+    evidenceUrls: ['https://xelarobotics.com/wp-content/uploads/2025/12/XELA-Robotics-Product-Catalog-2025-EN.pdf'],
+    sourceLabels: ['uSkin sensor family', 'XELA Robotics'],
+    evidenceBoundary: 'The official XELA Robotics catalog attributes the uSkin product family to XELA Robotics. This relation does not apply one module\'s taxel count, range, rate, dimensions, availability, or integration support to every uSkin configuration.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'apptronik-apollo-2',
+    toType: 'organization',
+    toId: 'apptronik',
+    evidenceUrls: ['https://apptronik.com/apollo/apollo-2'],
+    sourceLabels: ['Apptronik Apollo 2', 'Apptronik'],
+    evidenceBoundary: 'The official Apollo 2 page identifies Apptronik as the provider of the named platform. This relation does not verify every configuration, hand option, customer deployment, task result, safety claim, price, delivery date, or commercial availability.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'unitree-g1',
+    toType: 'organization',
+    toId: 'unitree-robotics',
+    evidenceUrls: ['https://www.unitree.com/g1/'],
+    sourceLabels: ['Unitree G1', 'Unitree Robotics'],
+    evidenceBoundary: 'The official G1 page attributes the G1 platform to Unitree. This relation does not make configuration-dependent specifications universal or imply that third-party tactile hardware, research results, certifications, pricing, or availability apply to every G1 variant.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'fourier-gr-1',
+    toType: 'organization',
+    toId: 'fourier-intelligence',
+    evidenceUrls: ['https://www.fftai.com/products-gr1'],
+    sourceLabels: ['Fourier GR-1', 'Fourier Intelligence'],
+    evidenceBoundary: 'The official GR-1 product page attributes the GR-1 platform to Fourier Intelligence. This relation does not verify third-party model results, exact research hand configurations, deployment scale, pricing, certifications, or availability in every market.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: '1x-humanoid-family',
+    toType: 'organization',
+    toId: '1x',
+    evidenceUrls: ['https://www.1x.tech/about'],
+    sourceLabels: ['1X humanoid platform family', '1X'],
+    evidenceBoundary: 'The official 1X history page establishes that 1X develops named humanoid platforms. This family-level relation deliberately does not resolve an unspecified research embodiment to NEO, EVE, a revision, customer deployment, commercial configuration, or performance result.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'franka-emika-panda',
+    toType: 'organization',
+    toId: 'franka-robotics',
+    evidenceUrls: ['https://download.franka.de/End-of-Life-Franka-Emika-Robot_EN.pdf'],
+    sourceLabels: ['Franka Emika Panda', 'Franka Robotics'],
+    evidenceBoundary: 'Official Franka documentation identifies the older research robot as the Franka Emika Robot or Panda. This relation does not conflate Panda with Franka Research 3 or verify third-party accessories, experiment results, pricing, support status, or present availability.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'universal-robots-ur5e',
+    toType: 'organization',
+    toId: 'universal-robots',
+    evidenceUrls: ['https://www.universal-robots.com/manuals/latest/en/datasheets/ur5e/'],
+    sourceLabels: ['Universal Robots UR5e', 'Universal Robots'],
+    evidenceBoundary: 'The official UR5e datasheet attributes the UR5e platform to Universal Robots. This relation does not transfer UR5e specifications to legacy UR5 systems or independently verify third-party model performance, end-effectors, certifications, price, or availability.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'universal-robots-ur5',
+    toType: 'organization',
+    toId: 'universal-robots',
+    evidenceUrls: ['https://www.universal-robots.com/media/1828033/ur5_tech_spec_web_en.pdf'],
+    sourceLabels: ['Universal Robots UR5', 'Universal Robots'],
+    evidenceBoundary: 'The official legacy UR5 technical specification attributes the UR5 platform to Universal Robots. This relation does not make UR5 and UR5e interchangeable or verify a controller revision, third-party accessories, research results, support status, price, or current availability.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'trossen-viperx-family',
+    toType: 'organization',
+    toId: 'trossen-robotics',
+    evidenceUrls: ['https://docs.trossenrobotics.com/interbotix_xsarms_docs/'],
+    sourceLabels: ['Trossen ViperX arm family', 'Trossen Robotics'],
+    evidenceBoundary: 'Official Interbotix X-Series documentation published by Trossen Robotics covers the ViperX arm family. This family-level relation does not resolve an unspecified experiment to one product code or verify third-party configurations, task results, pricing, support, or availability.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'manufacturedBy',
+    fromType: 'robot',
+    fromId: 'trossen-widowx-250-6dof',
+    toType: 'organization',
+    toId: 'trossen-robotics',
+    evidenceUrls: ['https://docs.trossenrobotics.com/interbotix_xsarms_docs/specifications/wx250s.html'],
+    sourceLabels: ['Trossen WidowX-250 6DOF', 'Trossen Robotics'],
+    evidenceBoundary: 'Official Trossen Robotics documentation identifies the WidowX-250 6DOF platform. This relation does not imply equivalence with other WidowX variants or verify third-party cameras, grippers, dataset results, model transfer, price, support, or availability.',
+    sourceReviewed: '2026-08-22',
+  },
+];
 
 export const researchOrganizationPartOfRelations: OrganizationPartOfRelation[] = [
   {
@@ -781,6 +973,7 @@ export const researchSemanticRelations: ResearchSemanticRelation[] = [
 export const researchProvenanceRelations: ResearchEntityRelation[] = [
   ...researchSourceAffiliationRelations,
   ...researchOrganizationPartOfRelations,
+  ...researchManufacturingRelations,
   ...researchDatasetUsageRelations,
   ...researchPaperSensorRelations,
 ];
@@ -831,6 +1024,7 @@ function primarySourceUrls(fromType: ResearchEntityRelation['fromType'], fromId:
         entry.sourceUrl,
         entry.projectUrl,
         entry.codeUrl,
+        entry.manufacturerEvidenceUrl,
       ].filter((url): url is string => Boolean(url))) : undefined;
     }
     case 'model': {
@@ -839,6 +1033,10 @@ function primarySourceUrls(fromType: ResearchEntityRelation['fromType'], fromId:
     }
     case 'organization': {
       const entry = organizationById.get(fromId);
+      return entry ? new Set(entry.identitySources.map((source) => source.url)) : undefined;
+    }
+    case 'robot': {
+      const entry = robotById.get(fromId);
       return entry ? new Set(entry.identitySources.map((source) => source.url)) : undefined;
     }
   }
@@ -892,6 +1090,10 @@ for (const relation of researchEntityRelations) {
   } else if (relation.relation === 'partOf') {
     if (!organizationById.has(relation.fromId) || !organizationById.has(relation.toId)) {
       throw new Error(`Organization partOf relation ${key} references a missing organization.`);
+    }
+  } else if (relation.relation === 'manufacturedBy') {
+    if (!['sensor', 'robot'].includes(relation.fromType) || !organizationById.has(relation.toId)) {
+      throw new Error(`manufacturedBy relation ${key} references a missing or unsupported endpoint.`);
     }
   } else if (relation.relation === 'usesSensor') {
     if (!['paper', 'dataset'].includes(relation.fromType) || !sensorById.has(relation.toId)) {

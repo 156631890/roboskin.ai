@@ -1013,7 +1013,10 @@ export function buildTactileBenchmarksJsonLd(entries: TactileBenchmarkEntry[]) {
   };
 }
 
-export function buildTactileSensorsJsonLd(entries: TactileSensorEntry[]) {
+export function buildTactileSensorsJsonLd(
+  entries: TactileSensorEntry[],
+  manufacturerOrganizationIds: Record<string, string> = {},
+) {
   const pageUrl = canonicalUrl('/sensors');
 
   return {
@@ -1034,6 +1037,12 @@ export function buildTactileSensorsJsonLd(entries: TactileSensorEntry[]) {
         description: `${entry.principle}; ${entry.formFactor}. ${entry.evidenceBoundary}`,
         url: entry.projectUrl ?? entry.sourceUrl,
         sameAs: [entry.sourceUrl, entry.projectUrl, entry.codeUrl].filter(Boolean),
+        ...(entry.manufacturerEvidenceUrl ? { citation: [entry.manufacturerEvidenceUrl] } : {}),
+        ...(manufacturerOrganizationIds[entry.id] ? {
+          manufacturer: {
+            '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerOrganizationIds[entry.id]}`,
+          },
+        } : {}),
         additionalProperty: [
           { '@type': 'PropertyValue', name: 'Sensing principle', value: entry.principle },
           { '@type': 'PropertyValue', name: 'Form factor', value: entry.formFactor },

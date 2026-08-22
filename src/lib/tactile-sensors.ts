@@ -12,6 +12,7 @@ export type TactileSensorEntry = {
   sourceUrl: string;
   projectUrl?: string;
   codeUrl?: string;
+  manufacturerEvidenceUrl?: string;
   sourceReviewed: string;
 };
 
@@ -130,13 +131,13 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
     principle: 'Fluid-filled biomimetic multimodal sensing',
     formFactor: 'Human-fingertip-shaped sensor',
     signals: ['Force-related electrode impedance', 'Fluid pressure', 'Vibration', 'Temperature / heat flow'],
-    reportedRate: 'Modality-dependent; review the current product manual',
-    integration: 'Official integration systems are documented for several robot hands and arms.',
-    access: 'Commercial sensor and evaluation systems with manuals and software.',
-    evidenceBoundary: 'The curved compliant device provides multiple raw modalities; explicit force vectors require calibration or learned interpretation.',
-    sourceUrl: 'https://www.syntouchllc.com/Products/BioTac/',
-    projectUrl: 'https://www.syntouchllc.com/Products/BioTac/',
-    sourceReviewed: '2026-08-19',
+    reportedRate: 'No single cross-modality rate is used in this directory; BioTac signal channels and hardware revisions must be checked separately.',
+    integration: 'The reviewed peer-reviewed source describes the biomimetic multimodal sensor; current hand integrations, software support, and connectors require separate verification.',
+    access: 'Historically commercial hardware; current sales, support, and availability were not verified in this review.',
+    evidenceBoundary: 'The curved compliant device provides multiple raw modalities, while explicit force vectors require calibration or learned interpretation. BioTac and BioTac SP revisions must not be conflated, and the former product domain is not treated as current evidence.',
+    sourceUrl: 'https://doi.org/10.7210/jrsj.30.496',
+    manufacturerEvidenceUrl: 'https://www.sec.gov/Archives/edgar/data/1728560/000172856021000002/SynTouchFormC-AR-2021-04-30.pdf',
+    sourceReviewed: '2026-08-22',
   },
   {
     id: 'uskin',

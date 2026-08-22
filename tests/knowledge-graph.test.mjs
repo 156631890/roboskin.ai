@@ -23,6 +23,7 @@ test('knowledge graph is built from the existing reviewed collections with hones
     'researchPaperSensorRelations',
     'researchSourceAffiliationRelations',
     'researchOrganizationPartOfRelations',
+    'researchManufacturingRelations',
     'researchDatasetUsageRelations',
     'researchRobotEntries',
     'robotAiRobotRelations',
@@ -50,6 +51,7 @@ test('knowledge graph is built from the existing reviewed collections with hones
   assert.match(graph, /must connect a model to a robot/);
   assert.match(graph, /must connect a paper, dataset, benchmark, or sensor to an organization/);
   assert.match(graph, /must connect two different organizations/);
+  assert.match(graph, /must connect a sensor or robot to an organization/);
   assert.match(graph, /must connect a paper or dataset to a sensor/);
   assert.match(graph, /must connect a dataset to a robot/);
   assert.match(graph, /must connect a paper to a model, dataset, or benchmark/);
@@ -87,7 +89,12 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.equal(typeof contract.version, 'string');
   assert.ok(contract.version.length > 0);
   assert.ok(Object.values(contract.counts).every((count) => Number.isInteger(count) && count >= 0));
-  assert.equal(contract.version, '2.0.0');
+  assert.equal(contract.version, '2.1.0');
+  assert.equal(contract.counts.knowledgeEntities, 139);
+  assert.equal(contract.counts.organizations, 41);
+  assert.equal(contract.counts.sourceDocuments, 191);
+  assert.equal(contract.counts.edges, 391);
+  assert.equal(contract.counts.supportedByEdges, 235);
   assert.equal(contract.counts.robots, 16);
   assert.equal(contract.counts.robotRelationEdges, 31);
   assert.equal(contract.counts.evaluatedOnEdges, 20);
@@ -104,9 +111,11 @@ test('knowledge graph JSON is a protected deterministic static output outside th
       + contract.counts.robots,
   );
   assert.equal(contract.counts.researchIndex, contract.counts.papers + contract.counts.documentation);
-  assert.equal(contract.counts.researchRelationEdges, 80);
-  assert.equal(contract.counts.researchProvenanceEdges, 57);
+  assert.equal(contract.counts.researchRelationEdges, 97);
+  assert.equal(contract.counts.researchProvenanceEdges, 74);
   assert.equal(contract.counts.researchSemanticEdges, 23);
+  assert.equal(contract.counts.sourceAffiliationEdges, 48);
+  assert.equal(contract.counts.manufacturedByEdges, 12);
   assert.equal(contract.counts.introducesEdges, 12);
   assert.equal(contract.counts.describesDatasetEdges, 2);
   assert.equal(contract.counts.usesDatasetEdges, 0);
@@ -115,7 +124,7 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.equal(contract.counts.edges, contract.counts.supportedByEdges + contract.counts.benchmarkedByEdges + contract.counts.organizationRelationEdges + contract.counts.robotRelationEdges + contract.counts.researchRelationEdges);
   assert.equal(contract.counts.organizationRelationEdges, contract.counts.developedByEdges + contract.counts.coDevelopedByEdges + contract.counts.contributedByEdges);
   assert.equal(contract.counts.robotRelationEdges, contract.counts.evaluatedOnEdges + contract.counts.trainedAcrossEdges + contract.counts.demonstratedOnEdges);
-  assert.equal(contract.counts.researchProvenanceEdges, contract.counts.sourceAffiliationEdges + contract.counts.organizationHierarchyEdges + contract.counts.datasetUsageEdges + contract.counts.paperSensorUsageEdges);
+  assert.equal(contract.counts.researchProvenanceEdges, contract.counts.sourceAffiliationEdges + contract.counts.organizationHierarchyEdges + contract.counts.manufacturedByEdges + contract.counts.datasetUsageEdges + contract.counts.paperSensorUsageEdges);
   assert.equal(contract.counts.researchSemanticEdges, contract.counts.introducesEdges + contract.counts.describesDatasetEdges + contract.counts.usesDatasetEdges + contract.counts.trainedOnEdges + contract.counts.evaluatedByEdges);
   assert.equal(contract.counts.researchRelationEdges, contract.counts.researchProvenanceEdges + contract.counts.researchSemanticEdges);
   assert.doesNotMatch(sitemap, /knowledge-graph\.json/);

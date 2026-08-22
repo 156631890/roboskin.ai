@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { researchManufacturingRelations } from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import {
   buildResearchRobotDirectoryJsonLd,
@@ -12,6 +13,7 @@ import {
   robotAiRobotRelations,
   type RobotModelRelationType,
 } from '@/lib/research-robots';
+import { researchOrganizationEntries } from '@/lib/research-organizations';
 import {
   buildBreadcrumbJsonLd,
   buildGraphJsonLd,
@@ -38,6 +40,9 @@ const kindLabels = {
 export default function RobotsPage() {
   const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
   const connectedModelCount = new Set(robotAiRobotRelations.map((relation) => relation.modelId)).size;
+  const robotManufacturingRelations = researchManufacturingRelations.filter(
+    (relation) => relation.fromType === 'robot',
+  );
   const usedKinds = researchRobotKinds.filter((kind) => (
     researchRobotEntries.some((entry) => entry.kind === kind)
   ));
@@ -45,7 +50,7 @@ export default function RobotsPage() {
     { value: researchRobotEntries.length, label: 'verified platform entities' },
     { value: usedKinds.length, label: 'platform and setup types' },
     { value: connectedModelCount, label: 'connected robot AI models' },
-    { value: robotAiRobotRelations.length, label: 'evidence-backed relations' },
+    { value: robotAiRobotRelations.length + robotManufacturingRelations.length, label: 'evidence-backed relations' },
   ];
 
   return (
@@ -144,6 +149,12 @@ export default function RobotsPage() {
               <div className="grid gap-5 lg:grid-cols-2">
                 {robots.map((robot) => {
                   const relations = robotAiRobotRelations.filter((relation) => relation.robotId === robot.id);
+                  const manufacturingRelation = robotManufacturingRelations.find(
+                    (relation) => relation.fromId === robot.id,
+                  );
+                  const manufacturerOrganization = manufacturingRelation
+                    ? researchOrganizationEntries.find((entry) => entry.id === manufacturingRelation.toId)
+                    : undefined;
 
                   return (
                     <article
@@ -155,8 +166,18 @@ export default function RobotsPage() {
                         <div>
                           <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#ff6b3d]">{robot.kind}</p>
                           <h3 className="mt-2 text-2xl font-semibold text-white">{robot.name}</h3>
-                          {robot.manufacturer ? (
-                            <p className="mt-2 text-sm text-[var(--text-soft)]">Manufacturer: {robot.manufacturer}</p>
+                          {manufacturerOrganization ? (
+                            <p className="mt-2 text-sm text-[var(--text-soft)]">
+                              Manufacturer / provider:{' '}
+                              <Link
+                                href={`/organizations#organization-${manufacturerOrganization.id}`}
+                                className="font-semibold text-white underline decoration-white/20 underline-offset-4 hover:text-[#ff6b3d]"
+                              >
+                                {manufacturerOrganization.name}
+                              </Link>
+                            </p>
+                          ) : robot.manufacturer ? (
+                            <p className="mt-2 text-sm text-[var(--text-soft)]">Manufacturer label: {robot.manufacturer}</p>
                           ) : (
                             <p className="mt-2 text-sm text-[var(--text-muted)]">Manufacturer, configuration owner, or commercial model not established</p>
                           )}

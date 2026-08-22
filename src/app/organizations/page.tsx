@@ -3,8 +3,10 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { researchIndexEntries } from '@/lib/research-index';
 import {
+  researchManufacturingRelations,
   researchOrganizationPartOfRelations,
   researchSourceAffiliationRelations,
+  type ManufacturedByRelation,
   type SourceAffiliationRelation,
 } from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
@@ -24,6 +26,7 @@ import {
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
+import { researchRobotEntries } from '@/lib/research-robots';
 
 export const metadata: Metadata = buildPageMetadata('/organizations');
 
@@ -71,6 +74,18 @@ function connectedAsset(relation: SourceAffiliationRelation) {
   }
 }
 
+function manufacturedAsset(relation: ManufacturedByRelation) {
+  if (relation.fromType === 'sensor') {
+    const entry = tactileSensorEntries.find((item) => item.id === relation.fromId);
+    if (!entry) throw new Error(`Organization page references missing manufactured sensor ${relation.fromId}.`);
+    return { name: entry.name, href: `/sensors#sensor-${entry.id}`, type: 'Sensor' };
+  }
+
+  const entry = researchRobotEntries.find((item) => item.id === relation.fromId);
+  if (!entry) throw new Error(`Organization page references missing manufactured robot ${relation.fromId}.`);
+  return { name: entry.name, href: `/robots#robot-${entry.id}`, type: 'Robot platform' };
+}
+
 export default function OrganizationsPage() {
   const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
   const organizationById = new Map(researchOrganizationEntries.map((entry) => [entry.id, entry]));
@@ -79,9 +94,13 @@ export default function OrganizationsPage() {
     ...researchSourceAffiliationRelations.map(
       (relation) => `${relation.fromType}:${relation.fromId}`,
     ),
+    ...researchManufacturingRelations.map(
+      (relation) => `${relation.fromType}:${relation.fromId}`,
+    ),
   ]).size;
   const evidenceBackedRelationCount = robotAiOrganizationRelations.length
     + researchSourceAffiliationRelations.length
+    + researchManufacturingRelations.length
     + researchOrganizationPartOfRelations.length;
   const stats = [
     { value: researchOrganizationEntries.length, label: 'verified organizations' },
@@ -185,13 +204,16 @@ export default function OrganizationsPage() {
                   const sourceAffiliations = researchSourceAffiliationRelations.filter(
                     (relation) => relation.toId === organization.id,
                   );
+                  const manufacturingRelations = researchManufacturingRelations.filter(
+                    (relation) => relation.toId === organization.id,
+                  );
                   const parentRelations = researchOrganizationPartOfRelations.filter(
                     (relation) => relation.fromId === organization.id,
                   );
                   const childRelations = researchOrganizationPartOfRelations.filter(
                     (relation) => relation.toId === organization.id,
                   );
-                  const connectionCount = modelRelations.length + sourceAffiliations.length;
+                  const connectionCount = modelRelations.length + sourceAffiliations.length + manufacturingRelations.length;
 
                   return (
                     <article
@@ -279,6 +301,61 @@ export default function OrganizationsPage() {
                                     </a>
                                   </div>
                                   <p className="mt-1 text-xs leading-relaxed text-[var(--text-muted)]">
+                                    {relation.evidenceBoundary}
+                                  </p>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      {manufacturingRelations.length > 0 ? (
+                        <div className="mt-6 border-t border-white/10 pt-5">
+                          <div className="flex items-baseline justify-between gap-4">
+                            <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-white">
+                              Official hardware attribution
+                            </h4>
+                            <span className="font-mono text-xs tabular-nums text-[var(--text-muted)]">
+                              {manufacturingRelations.length}
+                            </span>
+                          </div>
+                          <ul className="mt-2 divide-y divide-white/10">
+                            {manufacturingRelations.map((relation) => {
+                              const asset = manufacturedAsset(relation);
+                              return (
+                                <li key={`${relation.fromType}-${relation.fromId}`} className="py-5">
+                                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                                    <span className="border-l-2 border-[#ff6b3d] pl-2 font-mono text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">
+                                      {asset.type}
+                                    </span>
+                                    <Link
+                                      href={asset.href}
+                                      className="font-semibold text-white underline decoration-white/20 underline-offset-4 hover:text-[#ff6b3d]"
+                                    >
+                                      {asset.name}
+                                    </Link>
+                                    <span className="rounded-md border border-white/10 bg-black/20 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-[var(--text-soft)]">
+                                      Manufacturer / provider source
+                                    </span>
+                                  </div>
+                                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-soft)]">
+                                    Source wording: {relation.sourceLabels.join('; ')}
+                                  </p>
+                                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+                                    {relation.evidenceUrls.map((url, index) => (
+                                      <a
+                                        key={url}
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-semibold text-[#ff6b3d] hover:text-white"
+                                      >
+                                        Product source {index + 1}
+                                      </a>
+                                    ))}
+                                  </div>
+                                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
                                     {relation.evidenceBoundary}
                                   </p>
                                 </li>
@@ -393,7 +470,7 @@ export default function OrganizationsPage() {
 
                       {connectionCount === 0 ? (
                         <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-relaxed text-[var(--text-muted)]">
-                          Identity verified; no paper, dataset, benchmark, sensor, or model relation is published in the current partial coverage.
+                          Identity verified; no paper, dataset, benchmark, sensor, robot, or model relation is published in the current partial coverage.
                         </p>
                       ) : null}
 
@@ -432,7 +509,7 @@ export default function OrganizationsPage() {
               Coverage is limited to the organizations and research assets normalized from the current reviewed sources. It is not a complete field census. Absence does not mean an organization is inactive in robotics, and inclusion does not imply that RoboSkin.ai ranks, recommends, represents, or is affiliated with it.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
-              Relationship wording follows the strongest supported claim. Source affiliation remains provenance, not ownership; laboratory structure uses only directly supported “part of” evidence; model relationships preserve their developed, co-developed, or contributor boundary.
+              Relationship wording follows the strongest supported claim. Source affiliation remains provenance, not ownership; laboratory structure uses only directly supported “part of” evidence; manufacturer/provider attribution requires an official hardware source; model relationships preserve their developed, co-developed, or contributor boundary.
             </p>
           </article>
 

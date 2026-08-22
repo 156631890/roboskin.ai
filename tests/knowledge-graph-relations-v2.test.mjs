@@ -75,18 +75,27 @@ test('relation vocabulary constrains every v2 endpoint pair', () => {
   assert.match(relationSource, /relation: 'trainedOn'[\s\S]*?fromTypes: \['model'\][\s\S]*?toTypes: \['dataset'\]/);
   assert.match(relationSource, /relation: 'evaluatedBy'[\s\S]*?fromTypes: \['model'\][\s\S]*?toTypes: \['benchmark'\]/);
   assert.match(relationSource, /relation: 'usesSensor'[\s\S]*?fromTypes: \['paper', 'dataset'\][\s\S]*?toTypes: \['sensor'\]/);
+  assert.match(relationSource, /relation: 'manufacturedBy'[\s\S]*?fromTypes: \['sensor', 'robot'\][\s\S]*?toTypes: \['organization'\]/);
+  assert.match(relationSource, /type ManufacturedByRelation =[\s\S]*?fromType: 'sensor' \| 'robot'[\s\S]*?toType: 'organization'/);
   assert.match(relationSource, /type UsesDatasetRelation =[\s\S]*?fromType: 'model'[\s\S]*?toType: 'dataset'/);
   assert.match(relationSource, /Research-entity relation .* references a missing source entity/);
   assert.match(relationSource, /references a missing or unsupported target entity|references a missing model or (?:dataset|benchmark)/);
 });
 
 test('graph contract and GEO export expose relation counts and evidence boundaries', () => {
-  assert.equal(contract.version, '2.0.0');
+  assert.equal(contract.version, '2.1.0');
   assert.deepEqual(
     {
+      knowledgeEntities: contract.counts.knowledgeEntities,
+      organizations: contract.counts.organizations,
+      sourceDocuments: contract.counts.sourceDocuments,
+      edges: contract.counts.edges,
+      supportedByEdges: contract.counts.supportedByEdges,
       researchRelationEdges: contract.counts.researchRelationEdges,
       researchProvenanceEdges: contract.counts.researchProvenanceEdges,
       researchSemanticEdges: contract.counts.researchSemanticEdges,
+      sourceAffiliationEdges: contract.counts.sourceAffiliationEdges,
+      manufacturedByEdges: contract.counts.manufacturedByEdges,
       paperSensorUsageEdges: contract.counts.paperSensorUsageEdges,
       introducesEdges: contract.counts.introducesEdges,
       describesDatasetEdges: contract.counts.describesDatasetEdges,
@@ -95,9 +104,16 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      researchRelationEdges: 80,
-      researchProvenanceEdges: 57,
+      knowledgeEntities: 139,
+      organizations: 41,
+      sourceDocuments: 191,
+      edges: 391,
+      supportedByEdges: 235,
+      researchRelationEdges: 97,
+      researchProvenanceEdges: 74,
       researchSemanticEdges: 23,
+      sourceAffiliationEdges: 48,
+      manufacturedByEdges: 12,
       paperSensorUsageEdges: 3,
       introducesEdges: 12,
       describesDatasetEdges: 2,

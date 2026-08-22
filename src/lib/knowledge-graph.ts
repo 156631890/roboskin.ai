@@ -8,6 +8,7 @@ import {
   researchEntityRelations,
   researchEntityRelationVocabulary,
   researchEntityRelationTypes,
+  researchManufacturingRelations,
   researchOrganizationPartOfRelations,
   researchPaperSensorRelations,
   researchProvenanceRelations,
@@ -34,7 +35,7 @@ import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
 
-export const knowledgeGraphVersion = '2.0.0';
+export const knowledgeGraphVersion = '2.1.0';
 
 export type KnowledgeEntityType =
   | 'paper'
@@ -126,6 +127,7 @@ export type KnowledgeGraph = {
     researchSemanticEdges: number;
     sourceAffiliationEdges: number;
     organizationHierarchyEdges: number;
+    manufacturedByEdges: number;
     datasetUsageEdges: number;
     paperSensorUsageEdges: number;
     usesSensorEdges: number;
@@ -327,6 +329,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       { url: entry.sourceUrl, label: `${entry.name} primary source`, kind: 'primary', reviewedAt: entry.sourceReviewed },
       ...(entry.projectUrl ? [{ url: entry.projectUrl, label: `${entry.name} project`, kind: 'project' as const, reviewedAt: entry.sourceReviewed }] : []),
       ...(entry.codeUrl ? [{ url: entry.codeUrl, label: `${entry.name} code`, kind: 'code' as const, reviewedAt: entry.sourceReviewed }] : []),
+      ...(entry.manufacturerEvidenceUrl ? [{ url: entry.manufacturerEvidenceUrl, label: `${entry.name} manufacturer evidence`, kind: 'organization' as const, reviewedAt: entry.sourceReviewed }] : []),
     ]),
     attributes: {
       organizationLabel: entry.organization,
@@ -527,6 +530,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
   )).length;
   const sourceAffiliationEdges = edges.filter((edge) => edge.relation === 'sourceAffiliation').length;
   const organizationHierarchyEdges = edges.filter((edge) => edge.relation === 'partOf').length;
+  const manufacturedByEdges = edges.filter((edge) => edge.relation === 'manufacturedBy').length;
   const usesSensorEdges = edges.filter((edge) => edge.relation === 'usesSensor').length;
   const usesRobotEdges = edges.filter((edge) => edge.relation === 'usesRobot').length;
   const datasetUsageEdges = edges.filter((edge) => (
@@ -572,6 +576,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       researchSemanticEdges,
       sourceAffiliationEdges,
       organizationHierarchyEdges,
+      manufacturedByEdges,
       datasetUsageEdges,
       paperSensorUsageEdges,
       usesSensorEdges,
@@ -715,6 +720,12 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
       || fromEntity.id === toEntity.id
     )) {
       errors.push(`Organization hierarchy edge ${key} must connect two different organizations.`);
+    }
+    if (edge.relation === 'manufacturedBy' && (
+      !['sensor', 'robot'].includes(fromEntity?.type ?? '')
+      || toEntity?.type !== 'organization'
+    )) {
+      errors.push(`Manufacturing edge ${key} must connect a sensor or robot to an organization.`);
     }
     if (edge.relation === 'usesSensor' && (!['paper', 'dataset'].includes(fromEntity?.type ?? '') || toEntity?.type !== 'sensor')) {
       errors.push(`Sensor-use edge ${key} must connect a paper or dataset to a sensor.`);
@@ -910,6 +921,7 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
   if (graph.counts.researchSemanticEdges !== graph.edges.filter((edge) => researchSemanticRelationTypes.includes(edge.relation as (typeof researchSemanticRelationTypes)[number])).length) errors.push('research semantic edge count is inconsistent.');
   if (graph.counts.sourceAffiliationEdges !== graph.edges.filter((edge) => edge.relation === 'sourceAffiliation').length) errors.push('sourceAffiliation edge count is inconsistent.');
   if (graph.counts.organizationHierarchyEdges !== graph.edges.filter((edge) => edge.relation === 'partOf').length) errors.push('organization hierarchy edge count is inconsistent.');
+  if (graph.counts.manufacturedByEdges !== graph.edges.filter((edge) => edge.relation === 'manufacturedBy').length) errors.push('manufacturedBy edge count is inconsistent.');
   if (graph.counts.usesSensorEdges !== graph.edges.filter((edge) => edge.relation === 'usesSensor').length) errors.push('usesSensor edge count is inconsistent.');
   if (graph.counts.usesRobotEdges !== graph.edges.filter((edge) => edge.relation === 'usesRobot').length) errors.push('usesRobot edge count is inconsistent.');
   if (graph.counts.datasetUsageEdges !== graph.edges.filter((edge) => edge.from.startsWith('dataset:') && (edge.relation === 'usesSensor' || edge.relation === 'usesRobot')).length) errors.push('dataset usage relation subtotal is inconsistent.');
@@ -921,12 +933,13 @@ export function validateKnowledgeGraph(graph: KnowledgeGraph) {
   if (graph.counts.evaluatedByEdges !== graph.edges.filter((edge) => edge.relation === 'evaluatedBy').length) errors.push('evaluatedBy edge count is inconsistent.');
   if (graph.counts.sourceAffiliationEdges !== researchSourceAffiliationRelations.length) errors.push('source affiliation relation inventory is incomplete.');
   if (graph.counts.organizationHierarchyEdges !== researchOrganizationPartOfRelations.length) errors.push('organization hierarchy relation inventory is incomplete.');
+  if (graph.counts.manufacturedByEdges !== researchManufacturingRelations.length) errors.push('manufacturing relation inventory is incomplete.');
   if (graph.counts.datasetUsageEdges !== researchDatasetUsageRelations.length) errors.push('dataset usage relation inventory is incomplete.');
   if (graph.counts.paperSensorUsageEdges !== researchPaperSensorRelations.length) errors.push('paper sensor usage relation inventory is incomplete.');
   if (graph.counts.researchProvenanceEdges !== researchProvenanceRelations.length) errors.push('research provenance relation inventory is incomplete.');
   if (graph.counts.researchSemanticEdges !== researchSemanticRelations.length) errors.push('research semantic relation inventory is incomplete.');
   if (graph.counts.researchRelationEdges !== researchEntityRelations.length) errors.push('research relation inventory is incomplete.');
-  if (graph.counts.researchProvenanceEdges !== graph.counts.sourceAffiliationEdges + graph.counts.organizationHierarchyEdges + graph.counts.datasetUsageEdges + graph.counts.paperSensorUsageEdges) errors.push('research provenance relation subtotal is inconsistent.');
+  if (graph.counts.researchProvenanceEdges !== graph.counts.sourceAffiliationEdges + graph.counts.organizationHierarchyEdges + graph.counts.manufacturedByEdges + graph.counts.datasetUsageEdges + graph.counts.paperSensorUsageEdges) errors.push('research provenance relation subtotal is inconsistent.');
   if (graph.counts.researchSemanticEdges !== graph.counts.introducesEdges + graph.counts.describesDatasetEdges + graph.counts.usesDatasetEdges + graph.counts.trainedOnEdges + graph.counts.evaluatedByEdges) errors.push('research semantic relation subtotal is inconsistent.');
   if (graph.counts.researchRelationEdges !== graph.counts.researchProvenanceEdges + graph.counts.researchSemanticEdges) errors.push('research relation subtotal is inconsistent.');
 

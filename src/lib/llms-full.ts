@@ -7,6 +7,7 @@ import {
   researchDatasetUsageRelations,
   researchEntityRelations,
   researchEntityRelationVocabulary,
+  researchManufacturingRelations,
   researchOrganizationPartOfRelations,
   researchPaperSensorRelations,
   researchProvenanceRelations,
@@ -119,6 +120,7 @@ export function buildLlmsFullText() {
     `- Verified model-organization relations: ${robotAiOrganizationRelations.length}`,
     `- Source-listed research affiliations: ${researchSourceAffiliationRelations.length}`,
     `- Verified organization hierarchy relations: ${researchOrganizationPartOfRelations.length}`,
+    `- Verified hardware manufacturer or provider relations: ${researchManufacturingRelations.length}`,
     `- Verified dataset sensor or robot relations: ${researchDatasetUsageRelations.length}`,
     `- Verified paper-sensor relations: ${researchPaperSensorRelations.length}`,
     `- Evidence-backed research entity relations: ${researchEntityRelations.length}`,
@@ -142,7 +144,7 @@ export function buildLlmsFullText() {
     '- Prefer the primary source URL attached to each technical record. Use the RoboSkin.ai canonical page for the site’s analysis, taxonomy, and comparison context.',
     '- Do not infer product availability, certifications, customers, benchmark values, or company claims unless the relevant public page states them explicitly.',
     '- A source-listed organization affiliation does not establish model ownership, funding, endorsement, current employment, or affiliation with RoboSkin.ai. Preserve the developed, co-developed, and contributor relationship labels.',
-    '- Research provenance relations are intentionally narrow. sourceAffiliation preserves paper wording, partOf requires direct organization evidence, usesSensor records a named paper experiment or dataset collection setup, and usesRobot may represent simulation only when its boundary says so.',
+    '- Research provenance relations are intentionally narrow. sourceAffiliation preserves paper wording, partOf requires direct organization evidence, manufacturedBy requires an official hardware or provider source, usesSensor records a named paper experiment or dataset collection setup, and usesRobot may represent simulation only when its boundary says so.',
     '- Knowledge-graph v2 relation labels are not interchangeable. introduces requires a paper-presented contribution; describesDataset is deliberately weaker; usesDataset requires explicit model use; trainedOn requires explicit training-mixture evidence; evaluatedBy requires an explicit model-to-benchmark evaluation. A zero edge count means no current relation passed the evidence gate, not that the relationship is impossible.',
     '- A robot-platform relation has a narrow meaning: evaluatedOn requires explicit experiments, trainedAcross requires explicit training-mixture evidence, and demonstratedOn records a source-backed demonstration without upgrading it to a quantitative evaluation.',
     '- Do not infer an exact robot product from a family label. Training coverage does not prove deployment compatibility, a fine-tuned policy is not a zero-shot base-model result, and a simulation score is not a real-robot score.',
@@ -314,6 +316,12 @@ export function buildLlmsFullText() {
 
   lines.push('## Tactile Sensors', '', `Directory: ${canonicalUrl('/sensors')}`, '');
   for (const entry of tactileSensorEntries) {
+    const manufacturerRelation = researchManufacturingRelations.find(
+      (relation) => relation.fromType === 'sensor' && relation.fromId === entry.id,
+    );
+    const manufacturer = manufacturerRelation
+      ? researchOrganizationEntries.find((organization) => organization.id === manufacturerRelation.toId)
+      : undefined;
     lines.push(
       `### ${entry.name}`,
       '',
@@ -328,8 +336,16 @@ export function buildLlmsFullText() {
       `- Evidence boundary: ${compact(entry.evidenceBoundary)}`,
       `- Primary source: ${entry.sourceUrl}`,
     );
+    if (manufacturerRelation && manufacturer) {
+      lines.push(
+        `- Verified manufacturer or provider: ${markdownLink(manufacturer.name, canonicalUrl(`/organizations#organization-${manufacturer.id}`))}`,
+        `- Manufacturer evidence: ${manufacturerRelation.evidenceUrls.join('; ')}`,
+        `- Manufacturer relationship boundary: ${compact(manufacturerRelation.evidenceBoundary)}`,
+      );
+    }
     appendOptionalLink(lines, 'Project URL', entry.projectUrl);
     appendOptionalLink(lines, 'Code URL', entry.codeUrl);
+    appendOptionalLink(lines, 'Additional manufacturer evidence URL', entry.manufacturerEvidenceUrl);
     lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
   }
 
@@ -343,6 +359,12 @@ export function buildLlmsFullText() {
   );
   for (const robot of researchRobotEntries) {
     const relations = robotAiRobotRelations.filter((relation) => relation.robotId === robot.id);
+    const manufacturerRelation = researchManufacturingRelations.find(
+      (relation) => relation.fromType === 'robot' && relation.fromId === robot.id,
+    );
+    const manufacturer = manufacturerRelation
+      ? researchOrganizationEntries.find((organization) => organization.id === manufacturerRelation.toId)
+      : undefined;
     lines.push(
       `### ${robot.name}`,
       '',
@@ -353,6 +375,13 @@ export function buildLlmsFullText() {
       `- Canonical RoboSkin.ai entity: ${canonicalUrl(`/robots#robot-${robot.id}`)}`,
       `- Description: ${compact(robot.description)}`,
     );
+    if (manufacturerRelation && manufacturer) {
+      lines.push(
+        `- Verified manufacturer or provider entity: ${markdownLink(manufacturer.name, canonicalUrl(`/organizations#organization-${manufacturer.id}`))}`,
+        `- Manufacturer evidence: ${manufacturerRelation.evidenceUrls.join('; ')}`,
+        `- Manufacturer relationship boundary: ${compact(manufacturerRelation.evidenceBoundary)}`,
+      );
+    }
     appendOptionalLink(lines, 'Official URL', robot.officialUrl ?? undefined);
     lines.push(
       `- Identity sources: ${robot.identitySources.map((source) => markdownLink(source.label, source.url)).join('; ')}`,
@@ -420,6 +449,9 @@ export function buildLlmsFullText() {
     const relations = robotAiOrganizationRelations.filter(
       (relation) => relation.organizationId === organization.id,
     );
+    const manufacturingRelations = researchManufacturingRelations.filter(
+      (relation) => relation.toId === organization.id,
+    );
     lines.push(
       `### ${organization.name}`,
       '',
@@ -440,6 +472,18 @@ export function buildLlmsFullText() {
         `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
         `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
       );
+    }
+    if (manufacturingRelations.length > 0) {
+      lines.push('- Connected hardware manufacturer or provider relations:');
+      for (const relation of manufacturingRelations) {
+        const hardware = researchRelationEntity(relation.fromType, relation.fromId);
+        if (!hardware) throw new Error(`LLM organization record references missing hardware ${relation.fromType}:${relation.fromId}.`);
+        lines.push(
+          `  - ${markdownLink(hardware.name, hardware.url)}: manufacturedBy`,
+          `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
+          `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
+        );
+      }
     }
     lines.push(`- Source reviewed: ${organization.sourceReviewed}`, '');
   }

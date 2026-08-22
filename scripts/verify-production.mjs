@@ -236,7 +236,7 @@ for (const source of graphSources) {
 
 const organizationRelations = ['developedBy', 'coDevelopedBy', 'contributedBy'];
 const robotRelations = ['evaluatedOn', 'trainedAcross', 'demonstratedOn'];
-const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'];
+const researchProvenanceRelations = ['sourceAffiliation', 'partOf', 'manufacturedBy', 'usesSensor', 'usesRobot'];
 const researchSemanticRelations = ['introduces', 'describesDataset', 'usesDataset', 'trainedOn', 'evaluatedBy'];
 const researchRelations = [...researchProvenanceRelations, ...researchSemanticRelations];
 const evidenceBackedRelations = new Set([...organizationRelations, ...robotRelations, ...researchRelations]);
@@ -269,6 +269,8 @@ for (const edge of graphEdges) {
     if (!['paper', 'dataset', 'benchmark', 'sensor'].includes(fromEntity?.type) || toEntity?.type !== 'organization') throw new Error(`Invalid sourceAffiliation edge ${edgeKey}`);
   } else if (edge.relation === 'partOf') {
     if (fromEntity?.type !== 'organization' || toEntity?.type !== 'organization' || edge.from === edge.to) throw new Error(`Invalid partOf edge ${edgeKey}`);
+  } else if (edge.relation === 'manufacturedBy') {
+    if (!['sensor', 'robot'].includes(fromEntity?.type) || toEntity?.type !== 'organization') throw new Error(`Invalid manufacturedBy edge ${edgeKey}`);
   } else if (edge.relation === 'usesSensor') {
     if (!['paper', 'dataset'].includes(fromEntity?.type) || toEntity?.type !== 'sensor') throw new Error(`Invalid usesSensor edge ${edgeKey}`);
   } else if (edge.relation === 'usesRobot') {
@@ -325,6 +327,7 @@ const expectedRelationCounts = {
   demonstratedOn: graph.counts.demonstratedOnEdges,
   sourceAffiliation: graph.counts.sourceAffiliationEdges,
   partOf: graph.counts.organizationHierarchyEdges,
+  manufacturedBy: graph.counts.manufacturedByEdges,
   usesSensor: graph.counts.usesSensorEdges,
   usesRobot: graph.counts.usesRobotEdges,
   introduces: graph.counts.introducesEdges,
@@ -473,6 +476,7 @@ const llmsFullCountChecks = [
   ['Verified model-organization relations', graph.counts.organizationRelationEdges],
   ['Source-listed research affiliations', graph.counts.sourceAffiliationEdges],
   ['Verified organization hierarchy relations', graph.counts.organizationHierarchyEdges],
+  ['Verified hardware manufacturer or provider relations', graph.counts.manufacturedByEdges],
   ['Verified dataset sensor or robot relations', graph.counts.datasetUsageEdges],
   ['Verified paper-sensor relations', graph.counts.paperSensorUsageEdges],
   ['Evidence-backed research entity relations', graph.counts.researchRelationEdges],

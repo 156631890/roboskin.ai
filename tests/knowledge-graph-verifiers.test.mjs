@@ -12,7 +12,7 @@ test('export and production verifiers enforce knowledge graph v2 evidence relati
   ]);
 
   for (const verifier of verifiers) {
-    assert.match(verifier, /researchProvenanceRelations = \['sourceAffiliation', 'partOf', 'usesSensor', 'usesRobot'\]/);
+    assert.match(verifier, /researchProvenanceRelations = \['sourceAffiliation', 'partOf', 'manufacturedBy', 'usesSensor', 'usesRobot'\]/);
     assert.match(verifier, /researchSemanticRelations = \['introduces', 'describesDataset', 'usesDataset', 'trainedOn', 'evaluatedBy'\]/);
     assert.match(verifier, /relationVocabulary/);
     assert.match(verifier, /evidenceBackedRelations/);
@@ -26,6 +26,7 @@ test('export and production verifiers enforce knowledge graph v2 evidence relati
       'researchSemanticEdges',
       'sourceAffiliationEdges',
       'organizationHierarchyEdges',
+      'manufacturedByEdges',
       'datasetUsageEdges',
       'paperSensorUsageEdges',
       'usesSensorEdges',
@@ -40,6 +41,8 @@ test('export and production verifiers enforce knowledge graph v2 evidence relati
     }
     assert.match(verifier, /\+ graph\.counts\?*\.researchRelationEdges/);
     assert.match(verifier, /graph\.counts\?*\.researchIndex/);
+    assert.match(verifier, /Verified hardware manufacturer or provider relations/);
+    assert.match(verifier, /invalid manufacturedBy endpoints|Invalid manufacturedBy edge/);
     assert.doesNotMatch(verifier, /Dataset records: 12|Benchmark records: 9|organization records: 12/);
   }
 });

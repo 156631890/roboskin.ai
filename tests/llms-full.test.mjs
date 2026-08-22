@@ -31,6 +31,7 @@ test('llms-full generator uses the shared knowledge sources', () => {
     'researchPaperSensorRelations',
     'researchSourceAffiliationRelations',
     'researchOrganizationPartOfRelations',
+    'researchManufacturingRelations',
     'researchDatasetUsageRelations',
     'researchRobotEntries',
     'robotAiRobotRelations',
@@ -54,6 +55,7 @@ test('llms-full generator uses the shared knowledge sources', () => {
   assert.match(generatorSource, /## Evidence-Backed Research Entity Relations/);
   assert.match(generatorSource, /Source-listed research affiliations/);
   assert.match(generatorSource, /Verified organization hierarchy relations/);
+  assert.match(generatorSource, /Verified hardware manufacturer or provider relations/);
   assert.match(generatorSource, /Verified dataset sensor or robot relations/);
   assert.match(generatorSource, /Verified paper-sensor relations/);
   assert.match(generatorSource, /Research semantic relations/);
@@ -74,12 +76,12 @@ test('curated llms file and homepage head expose machine-readable discovery', ()
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/llms-full\.txt/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/research-index\.json/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/knowledge-graph\.json/);
-  assert.match(llmsSource, /124 source-reviewed knowledge entities/);
-  assert.match(llmsSource, /27 papers, 1 documentation record, 18 datasets, 10 benchmarks, 13 sensors, 13 robot AI models, 26 verified organizations, and 16 normalized robot-platform records/);
-  assert.match(llmsSource, /172 deduplicated primary and official source records/);
+  assert.match(llmsSource, /139 source-reviewed knowledge entities/);
+  assert.match(llmsSource, /27 papers, 1 documentation record, 18 datasets, 10 benchmarks, 13 sensors, 13 robot AI models, 41 verified organizations, and 16 normalized robot-platform records/);
+  assert.match(llmsSource, /191 deduplicated primary and official source records/);
   assert.match(llmsSource, /22 model-organization relations/);
   assert.match(llmsSource, /31 model-robot relations/);
-  assert.match(llmsSource, /57 research-provenance relations, and 23 semantic entity relations/);
+  assert.match(llmsSource, /74 research-provenance relations, and 23 semantic entity relations/);
   assert.match(llmsSource, /research\/adept-visuo-tactile-dexterity-rl-2026/);
   assert.match(llmsSource, /research\/prism-contact-rich-industrial-skill-dataset-2026/);
   assert.match(llmsSource, /research\/missing-touch-spatial-tactile-feedback-teleoperation-2026/);

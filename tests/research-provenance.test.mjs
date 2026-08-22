@@ -28,7 +28,7 @@ test('research organizations keep normalized university and lab identities separ
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.ok([...entries.matchAll(/\n\s+id: '/g)].length >= 26);
+  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 41);
   assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
   assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
   assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);
@@ -43,12 +43,13 @@ test('research organizations keep normalized university and lab identities separ
 test('research relations separate strict provenance from the v2 semantic vocabulary', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
 
-  assert.match(source, /researchProvenanceRelationTypes = \[[\s\S]*?'sourceAffiliation'[\s\S]*?'partOf'[\s\S]*?'usesSensor'[\s\S]*?'usesRobot'[\s\S]*?\] as const/);
+  assert.match(source, /researchProvenanceRelationTypes = \[[\s\S]*?'sourceAffiliation'[\s\S]*?'partOf'[\s\S]*?'manufacturedBy'[\s\S]*?'usesSensor'[\s\S]*?'usesRobot'[\s\S]*?\] as const/);
   assert.match(source, /researchSemanticRelationTypes = \[[\s\S]*?'introduces'[\s\S]*?'describesDataset'[\s\S]*?'usesDataset'[\s\S]*?'trainedOn'[\s\S]*?'evaluatedBy'[\s\S]*?\] as const/);
   assert.match(source, /researchEntityRelationVocabulary: ResearchEntityRelationDefinition\[\]/);
   assert.match(source, /type EvidenceFields = \{[\s\S]*?evidenceUrls: string\[\][\s\S]*?sourceLabels: string\[\][\s\S]*?evidenceBoundary: string[\s\S]*?sourceReviewed: string/);
   assert.match(source, /fromType: SourceAffiliationEntityType[\s\S]*?toType: 'organization'/);
   assert.match(source, /fromType: 'organization'[\s\S]*?toType: 'organization'/);
+  assert.match(source, /relation: 'manufacturedBy'[\s\S]*?fromType: 'sensor' \| 'robot'[\s\S]*?toType: 'organization'/);
   assert.match(source, /relation: 'usesSensor'[\s\S]*?fromType: 'paper' \| 'dataset'[\s\S]*?toType: 'sensor'/);
   assert.match(source, /relation: 'usesDataset'[\s\S]*?fromType: 'model'[\s\S]*?toType: 'dataset'/);
   assert.match(source, /Duplicate research-entity relation/);

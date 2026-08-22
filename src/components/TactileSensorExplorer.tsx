@@ -5,13 +5,14 @@ import type { TactileSensorEntry } from '@/lib/tactile-sensors';
 
 type TactileSensorExplorerProps = {
   entries: TactileSensorEntry[];
+  organizationLinks?: Record<string, string>;
 };
 
 function unique(values: string[]) {
   return [...new Set(values)].sort((left, right) => left.localeCompare(right));
 }
 
-export default function TactileSensorExplorer({ entries }: TactileSensorExplorerProps) {
+export default function TactileSensorExplorer({ entries, organizationLinks = {} }: TactileSensorExplorerProps) {
   const [principle, setPrinciple] = useState('All sensing principles');
   const [signal, setSignal] = useState('All signals');
   const [formFactor, setFormFactor] = useState('All form factors');
@@ -89,7 +90,16 @@ export default function TactileSensorExplorer({ entries }: TactileSensorExplorer
                 <tr id={`sensor-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[220px] border-b border-white/8 px-4 py-5">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
-                    <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.organization}</span>
+                    {organizationLinks[entry.id] ? (
+                      <a
+                        href={organizationLinks[entry.id]}
+                        className="mt-3 block text-xs font-semibold leading-relaxed text-[#ffd5c5] hover:text-white"
+                      >
+                        {entry.organization}
+                      </a>
+                    ) : (
+                      <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.organization}</span>
+                    )}
                     <span className="mt-2 block font-mono text-[11px] uppercase text-[#8e98a8]">Reviewed {entry.sourceReviewed}</span>
                   </th>
                   <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.principle}<br /><strong className="mt-3 inline-block text-white">Form:</strong> {entry.formFactor}</td>
@@ -102,6 +112,7 @@ export default function TactileSensorExplorer({ entries }: TactileSensorExplorer
                       <a href={entry.sourceUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Primary source ↗</a>
                       {entry.projectUrl ? <a href={entry.projectUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Project ↗</a> : null}
                       {entry.codeUrl ? <a href={entry.codeUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Code ↗</a> : null}
+                      {entry.manufacturerEvidenceUrl ? <a href={entry.manufacturerEvidenceUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Manufacturer evidence ↗</a> : null}
                     </div>
                   </td>
                 </tr>

@@ -78,6 +78,8 @@ test('robot directory is indexable, structured, and internally connected without
   assert.match(schema, /'@type': 'Thing'/);
   assert.match(schema, /numberOfItems: researchRobotEntries\.length/);
   assert.match(schema, /robot\.schemaSameAsUrl \? \{ sameAs: \[robot\.schemaSameAsUrl\] \}/);
+  assert.match(schema, /researchManufacturingRelations\.find/);
+  assert.match(schema, /manufacturer:[\s\S]*?'@id': `\$\{canonicalUrl\('\/organizations'\)\}#organization-\$\{manufacturerRelation\.toId\}`/);
   assert.match(schema, /buildResearchRobotWebPageJsonLd/);
   assert.match(schema, /mainEntity:[\s\S]*?robot-directory/);
   assert.doesNotMatch(schema, /robot\.officialUrl \? \{ sameAs/);
@@ -99,7 +101,7 @@ test('robot platform relationships are part of the graph, LLM outputs, and deplo
     read('scripts/verify-production.mjs'),
   ]);
 
-  assert.match(graph, /knowledgeGraphVersion = '2\.0\.0'/);
+  assert.match(graph, /knowledgeGraphVersion = '2\.1\.0'/);
   assert.match(graph, /type: 'robot'/);
   assert.match(graph, /robotAiRobotRelations/);
   assert.match(graph, /must connect a model to a robot/);
