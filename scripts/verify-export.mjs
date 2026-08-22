@@ -476,6 +476,25 @@ if (failures.length === 0) {
     if (!fragment || !robotHtml.includes(`id="${fragment}"`)) failures.push(`/robots: missing canonical anchor for ${robot.id}`);
     if (!robotHtml.includes(robot.name) || !robotHtml.includes(String(robot.attributes?.evidenceBoundary))) failures.push(`/robots: incomplete visible record for ${robot.id}`);
   }
+  const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
+  const worldModelHtml = await readFile(path.join(out, 'robot-world-models.html'), 'utf8');
+  const worldModelJsonLd = parseJsonLd(worldModelHtml, '/robot-world-models', failures);
+  const worldModelJsonLdNodes = worldModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
+  const worldModelList = worldModelJsonLdNodes.find((node) => node?.['@id'] === canonicalFor('/robot-world-models#world-model-evidence'));
+  const worldModelSchemaIds = worldModelJsonLdNodes
+    .filter((node) => node?.['@type'] === 'CreativeWork' && worldModelIds.some((id) => node?.['@id'] === canonicalFor(`/robot-world-models#world-model-${id}`)))
+    .map((node) => node['@id']);
+  if (worldModelList?.['@type'] !== 'ItemList'
+    || worldModelList?.numberOfItems !== worldModelIds.length
+    || worldModelSchemaIds.length !== worldModelIds.length
+    || new Set(worldModelSchemaIds).size !== worldModelIds.length) {
+    failures.push('/robot-world-models: evidence ItemList count or identity is invalid');
+  }
+  for (const id of worldModelIds) {
+    const canonicalId = canonicalFor(`/robot-world-models#world-model-${id}`);
+    if (!worldModelHtml.includes(`id="world-model-${id}"`)) failures.push(`/robot-world-models: missing visible anchor for ${id}`);
+    if (!worldModelSchemaIds.includes(canonicalId)) failures.push(`/robot-world-models: missing schema record for ${id}`);
+  }
   const llmsCurated = await readFile(path.join(out, 'llms.txt'), 'utf8');
   if (!llmsCurated.includes(canonicalFor('/knowledge-graph.json'))) failures.push('/llms.txt: missing knowledge graph discovery URL');
   if (!llmsCurated.includes(`${graph.counts?.knowledgeEntities} source-reviewed knowledge entities`)) failures.push('/llms.txt: knowledge-entity count differs from the graph');
@@ -514,6 +533,7 @@ if (failures.length === 0) {
     ['Benchmark records', graph.counts?.benchmarks],
     ['Sensor records', graph.counts?.sensors],
     ['Robot AI model records', graph.counts?.models],
+    ['Robot world-model evidence records', worldModelIds.length],
     ['Verified organization records', graph.counts?.organizations],
     ['Verified model-organization relations', graph.counts?.organizationRelationEdges],
     ['Source-listed research affiliations', graph.counts?.sourceAffiliationEdges],
@@ -536,6 +556,7 @@ if (failures.length === 0) {
     failures.push('/llms-full.txt: structured directory counts are incomplete');
   }
   if (!llmsFull.includes(canonicalFor('/knowledge-graph.json'))) failures.push('/llms-full.txt: missing knowledge graph discovery URL');
+  if (!llmsFull.includes('## Robot World Model Evidence') || !llmsFull.includes('GitHub Coming Soon')) failures.push('/llms-full.txt: missing world-model evidence boundaries');
   if (/www\.roboskin\.ai|\.vercel\.app/.test(llmsFull)) failures.push('/llms-full.txt: non-apex URL found');
 }
 

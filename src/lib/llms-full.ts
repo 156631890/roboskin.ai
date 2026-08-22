@@ -16,6 +16,7 @@ import {
   type ResearchEntityRelation,
 } from '@/lib/research-entity-relations';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { robotWorldModelEvidenceEntries } from '@/lib/robot-world-models';
 import { roboticsDatasetEntries } from '@/lib/robotics-datasets';
 import { researchOrganizationEntries, robotAiOrganizationRelations } from '@/lib/research-organizations';
 import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robots';
@@ -50,6 +51,7 @@ function latestReviewedDate() {
     ...tactileBenchmarkEntries.map((entry) => entry.sourceReviewed),
     ...tactileSensorEntries.map((entry) => entry.sourceReviewed),
     ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
+    ...robotWorldModelEvidenceEntries.map((entry) => entry.sourceReviewed),
     ...researchOrganizationEntries.map((entry) => entry.sourceReviewed),
     ...robotAiOrganizationRelations.map((entry) => entry.sourceReviewed),
     ...researchEntityRelations.map((entry) => entry.sourceReviewed),
@@ -116,6 +118,7 @@ export function buildLlmsFullText() {
     `- Benchmark records: ${tactileBenchmarkEntries.length}`,
     `- Sensor records: ${tactileSensorEntries.length}`,
     `- Robot AI model records: ${robotAiModelEntries.length}`,
+    `- Robot world-model evidence records: ${robotWorldModelEvidenceEntries.length}`,
     `- Verified organization records: ${researchOrganizationEntries.length}`,
     `- Verified model-organization relations: ${robotAiOrganizationRelations.length}`,
     `- Source-listed research affiliations: ${researchSourceAffiliationRelations.length}`,
@@ -486,6 +489,42 @@ export function buildLlmsFullText() {
       }
     }
     lines.push(`- Source reviewed: ${organization.sourceReviewed}`, '');
+  }
+
+  lines.push(
+    '## Robot World Model Evidence',
+    '',
+    `Directory: ${canonicalUrl('/robot-world-models')}`,
+    '',
+    'These records distinguish candidate-conditioned prediction, joint action-and-future generation, and subtask-conditioned tactile goals. Results from different robots, tasks, metrics, and trial protocols are not a common leaderboard.',
+    '',
+  );
+  for (const entry of robotWorldModelEvidenceEntries) {
+    lines.push(
+      `### ${entry.name}`,
+      '',
+      `- Record ID: ${entry.id}`,
+      `- Canonical evidence record: ${canonicalUrl(`/robot-world-models#world-model-${entry.id}`)}`,
+      `- Preprint release date: ${entry.releaseDate}`,
+      `- Prediction target: ${compact(entry.predictionTarget)}`,
+      `- Action-conditioning class: ${entry.actionConditioning.kind}`,
+      `- Action-conditioning boundary: ${compact(entry.actionConditioning.description)}`,
+      `- Operational role: ${compact(entry.operationalRole)}`,
+      `- Robot, sensor, and task boundary: ${compact(entry.robotSensorTaskBoundary)}`,
+      `- Real-robot evidence: ${compact(entry.realRobotEvidence)}`,
+      `- Paper availability: ${compact(entry.artifacts.paper)}`,
+      `- Code availability: ${compact(entry.artifacts.code)}`,
+      `- Model-weight availability: ${compact(entry.artifacts.weights)}`,
+      `- Data availability: ${compact(entry.artifacts.data)}`,
+      `- Artifact license evidence: ${compact(entry.artifacts.license)}`,
+      `- Evidence status: ${compact(entry.evidenceStatus)}`,
+      `- Evidence limitation: ${compact(entry.limitations)}`,
+      `- Internal analysis: ${canonicalUrl(entry.internalEvidencePath)}`,
+      '- Primary and official sources:',
+      ...entry.primarySources.map((source) => `  - ${markdownLink(source.label, source.url)} (${source.type})`),
+      `- Source reviewed: ${entry.sourceReviewed}`,
+      '',
+    );
   }
 
   lines.push('## Robot AI Models', '', `Directory: ${canonicalUrl('/robot-foundation-models')}`, '');

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { buildReport, parseArxivFeed, parseGoogleTrendsFeed } from '../scripts/daily-research-watch.mjs';
+import { buildArxivUrls, buildReport, parseArxivFeed, parseGoogleTrendsFeed } from '../scripts/daily-research-watch.mjs';
 
 const arxivFixture = `<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom"><entry><id>http://arxiv.org/abs/2608.12345v1</id><updated>2026-08-15T10:00:00Z</updated><published>2026-08-15T10:00:00Z</published><title>Robot Skin for Humanoid Tactile Sensing</title><summary>A tactile sensor array for physical AI contact.</summary><author><name>Alex Example</name></author><category term="cs.RO" /></entry></feed>`;
 const trendsFixture = `<?xml version="1.0"?><rss xmlns:ht="https://trends.google.com/trending/rss"><channel><item><title>humanoid robot</title><ht:approx_traffic>20K+</ht:approx_traffic><pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate><link>https://trends.google.com/trending?geo=US</link><ht:news_item><ht:news_item_title>New humanoid robot demonstration</ht:news_item_title><ht:news_item_url>https://example.com/source</ht:news_item_url><ht:news_item_source>Example</ht:news_item_source></ht:news_item></item><item><title>football score</title><ht:approx_traffic>1M+</ht:approx_traffic><pubDate>Sat, 15 Aug 2026 00:00:00 GMT</pubDate><link>https://trends.google.com/trending?geo=US</link></item></channel></rss>`;
@@ -18,6 +18,65 @@ test('daily research watch parses source-backed arXiv and relevant Google Trends
   assert.equal(trends.length, 1);
   assert.equal(trends[0].title, 'humanoid robot');
   assert.equal(trends[0].newsItems[0].url, 'https://example.com/source');
+});
+
+test('daily research watch splits the arXiv query into bounded batches', () => {
+  const urls = buildArxivUrls();
+
+  assert.equal(urls.length, 4);
+  for (const url of urls) {
+    assert.equal(url.origin, 'https://export.arxiv.org');
+    assert.equal(url.searchParams.get('max_results'), '12');
+    assert.ok(url.searchParams.get('search_query').length <= 200);
+  }
+});
+
+test('daily research report never presents an arXiv source failure as zero papers', () => {
+  const report = buildReport({
+    generatedAt: '2026-08-22T01:17:00.000Z',
+    papers: [],
+    trends: [],
+    sourceHealth: {
+      arxiv: {
+        ok: false,
+        partial: false,
+        status: 0,
+        error: 'batch 1: request timed out; curl fallback failed (exit 28)',
+        transport: 'none',
+        completedBatches: 0,
+        totalBatches: 4,
+      },
+      trends: [],
+    },
+  });
+
+  assert.match(report, /arXiv API: FAILED — candidate count unavailable/);
+  assert.match(report, /candidate count is unknown, not zero/);
+  assert.doesNotMatch(report, /No paper candidates returned/);
+});
+
+test('daily research report labels partial arXiv results as incomplete', () => {
+  const report = buildReport({
+    generatedAt: '2026-08-22T01:17:00.000Z',
+    papers: [],
+    trends: [],
+    sourceHealth: {
+      arxiv: {
+        ok: false,
+        partial: true,
+        status: 0,
+        error: 'batch 4: connection aborted',
+        transport: 'fetch',
+        completedBatches: 3,
+        totalBatches: 4,
+      },
+      trends: [],
+    },
+  });
+
+  assert.match(report, /arXiv API: PARTIAL — 3\/4 query batches succeeded/);
+  assert.match(report, /result set is incomplete, not zero/);
+  assert.doesNotMatch(report, /No paper candidates returned/);
 });
 
 test('daily research report keeps candidates out of the publishing path', async () => {

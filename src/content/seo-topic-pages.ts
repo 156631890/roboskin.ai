@@ -2521,7 +2521,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Dream-Tac research brief', href: '/research/dream-tac-tactile-world-action-model-2026', description: 'Read the action-conditioned tactile-future analysis.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'See how predictive planning and fast tactile correction are separated.' },
       { label: 'TouchWorld model record', href: '/robot-foundation-models#model-touchworld', description: 'Inspect the structured model evidence separately from the comparison guide.' },
-      { label: 'Robot world models', href: '/robot-world-models', description: 'Use the broad canonical guide for prediction, planning, policy, and control roles.' },
+      { label: 'Robot world model evidence table', href: '/robot-world-models#world-model-evidence', description: 'Compare prediction targets, conditioning roles, real-robot protocols, artifacts, and evidence boundaries.' },
       { label: 'EgoTouch dataset record', href: '/datasets#dataset-egotouch', description: 'Inspect the human tactile resource used for TouchWorld world-model pretraining.' },
       { label: 'TouchWorld evaluation protocol', href: '/benchmarks#benchmark-touchworld-real-robot', description: 'Review the six-task clean and perturbation protocol without treating it as an independent leaderboard.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Evaluate trajectories, sequence splits, signals, and transfer limits.' },
@@ -3958,7 +3958,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Tactile and visuo-tactile world models',
         body: [
           'Touch becomes valuable after contact begins, when cameras may be occluded and small physical changes can decide success. A tactile world model may predict a future tactile image, contact state, slip, force-related variable, or tactile subgoal conditioned on action. A visuo-tactile model predicts or fuses both visual and tactile futures.',
-          'Dream-Tac, TouchWorld, ViTacWorld, FeelWorld, and HiTac-WAM are specialized 2026 preprints with different targets, horizons, sensors, robots, control roles, and baselines. They should not be compressed into a single score. RoboSkin.ai’s dedicated visuo-tactile guide holds the source-level comparison.',
+          'Dream-Tac, TouchWorld, ViTacWorld, FeelWorld, and HiTac-WAM are specialized 2026 preprints with different targets, horizons, sensors, robots, control roles, and baselines. They should not be compressed into a single score. The source-bounded evidence table below preserves action-conditioning class, real-robot protocol, artifact availability, and limitations for each record.',
           'TouchWorld provides a concrete evidence chain: its tactile world-model component is pretrained on EgoTouch, then fine-tuned on robot demonstrations, and evaluated under an author-defined six-task real-robot protocol. The training dataset, model, and evaluation protocol remain separate structured entities.',
         ],
       },

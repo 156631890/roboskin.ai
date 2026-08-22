@@ -9,6 +9,9 @@ const ARXIV_ENDPOINT = 'https://export.arxiv.org/api/query';
 const GOOGLE_TRENDS_ENDPOINT = 'https://trends.google.com/trending/rss';
 const USER_AGENT = 'RoboSkin.ai Research Watch/1.0 (+https://roboskin.ai/editorial-policy)';
 const TREND_GEOGRAPHIES = ['US', 'GB', 'DE', 'CA'];
+const ARXIV_QUERY_BATCH_SIZE = 3;
+const ARXIV_BATCH_MAX_RESULTS = 12;
+const ARXIV_BATCH_DELAY_MS = 3_000;
 const execFileAsync = promisify(execFile);
 
 const topicMatchers = [
@@ -33,7 +36,7 @@ const topicMatchers = [
   ['OpenAI', /\bopenai\b/i],
 ];
 
-const arxivQuery = [
+const arxivQueryTerms = [
   'all:"robot skin"',
   'all:"electronic skin" AND (all:robot OR all:robotic)',
   'all:"tactile sensor" AND (all:robot OR all:manipulation)',
@@ -45,7 +48,25 @@ const arxivQuery = [
   '(all:"vision-language-action" OR all:"vision language action") AND (all:robot OR all:robotics)',
   'all:"visuo-tactile"',
   'all:"tactile world model"',
-].map((term) => `(${term})`).join(' OR ');
+].map((term) => `(${term})`);
+
+export function buildArxivUrls() {
+  const urls = [];
+
+  for (let index = 0; index < arxivQueryTerms.length; index += ARXIV_QUERY_BATCH_SIZE) {
+    const url = new URL(ARXIV_ENDPOINT);
+    url.search = new URLSearchParams({
+      search_query: arxivQueryTerms.slice(index, index + ARXIV_QUERY_BATCH_SIZE).join(' OR '),
+      start: '0',
+      max_results: String(ARXIV_BATCH_MAX_RESULTS),
+      sortBy: 'submittedDate',
+      sortOrder: 'descending',
+    }).toString();
+    urls.push(url);
+  }
+
+  return urls;
+}
 
 function decodeXml(value = '') {
   return value
@@ -201,7 +222,11 @@ export function buildReport({ generatedAt, papers, trends, sourceHealth }) {
   const dateKey = shanghaiDateKey(new Date(generatedAt));
   const paperRows = papers.length > 0
     ? papers.slice(0, 10).map((paper) => `| ${paper.published.slice(0, 10)} | [${escapeTable(paper.title)}](${paper.sourceUrl}) | ${escapeTable(paper.topics.join(', ') || 'query match')} | Review for ${routePaper(paper)} | ${paper.relevanceScore} |`).join('\n')
-    : '| — | No paper candidates returned | — | — | — |';
+    : sourceHealth.arxiv.ok
+      ? '| — | No paper candidates returned by a complete arXiv response | — | — | — |'
+      : sourceHealth.arxiv.partial
+        ? '| — | arXiv response was partial; candidate count is incomplete | — | Review source health before editorial use | — |'
+        : '| — | arXiv source failed; candidate count is unavailable | — | Retry the source before editorial use | — |';
   const trendRows = trends.length > 0
     ? trends.map((trend) => `| ${trend.geo} | [${escapeTable(trend.title)}](${trend.exploreUrl}) | ${escapeTable(trend.traffic || 'not reported')} | ${escapeTable(trend.topics.join(', '))} |`).join('\n')
     : '| — | No robotics-related daily trend crossed the filter | — | No relevance inflation |';
@@ -219,6 +244,17 @@ export function buildReport({ generatedAt, papers, trends, sourceHealth }) {
     `- Abstract excerpt: ${truncate(paper.summary)}`,
   ].join('\n')).join('\n\n');
 
+  const arxivHealth = sourceHealth.arxiv.ok
+    ? `OK via ${sourceHealth.arxiv.transport || 'fetch'} (${papers.length} parsed candidates from ${sourceHealth.arxiv.totalBatches ?? 1} complete batch${(sourceHealth.arxiv.totalBatches ?? 1) === 1 ? '' : 'es'})`
+    : sourceHealth.arxiv.partial
+      ? `PARTIAL — ${sourceHealth.arxiv.completedBatches ?? 0}/${sourceHealth.arxiv.totalBatches ?? '?'} query batches succeeded; ${papers.length} candidates were parsed from incomplete results; ${sourceHealth.arxiv.error}`
+      : `FAILED — candidate count unavailable; ${sourceHealth.arxiv.error}`;
+  const paperDetailsFallback = sourceHealth.arxiv.ok
+    ? 'No paper detail is available for this complete run.'
+    : sourceHealth.arxiv.partial
+      ? 'No paper detail is available from the successful batches; the arXiv result set is incomplete, not zero.'
+      : 'No paper detail is available because the arXiv source failed; the candidate count is unknown, not zero.';
+
   return `# RoboSkin.ai Daily Research Watch — ${dateKey}
 
 Generated: ${generatedAt}
@@ -226,7 +262,7 @@ Editorial status: **candidate queue — nothing in this report is automatically 
 
 ## Source health
 
-- arXiv API: ${sourceHealth.arxiv.ok ? `OK via ${sourceHealth.arxiv.transport || 'fetch'} (${papers.length} parsed candidates)` : `FAILED — ${sourceHealth.arxiv.error}`}
+- arXiv API: ${arxivHealth}
 ${sourceHealth.trends.map((source) => `- Google Trends ${source.geo}: ${source.ok ? `OK via ${source.transport || 'fetch'}` : `FAILED — ${source.error}`}`).join('\n')}
 
 ## Priority paper candidates
@@ -235,7 +271,7 @@ ${sourceHealth.trends.map((source) => `- Google Trends ${source.geo}: ${source.o
 | --- | --- | --- | --- | ---: |
 ${paperRows}
 
-${paperDetails || 'No paper detail is available for this run.'}
+${paperDetails || paperDetailsFallback}
 
 ## Google Trends daily signals
 
@@ -274,16 +310,14 @@ ${trendRows}
 }
 
 export async function runResearchWatch({ outputPath = '.artifacts/daily-research-watch.md', now = new Date() } = {}) {
-  const arxivUrl = new URL(ARXIV_ENDPOINT);
-  arxivUrl.search = new URLSearchParams({
-    search_query: arxivQuery,
-    start: '0',
-    max_results: '30',
-    sortBy: 'submittedDate',
-    sortOrder: 'descending',
-  }).toString();
+  const arxivUrls = buildArxivUrls();
+  const arxivResponses = [];
 
-  const arxivResponse = await fetchText(arxivUrl);
+  for (const [index, arxivUrl] of arxivUrls.entries()) {
+    arxivResponses.push(await fetchText(arxivUrl));
+    if (index < arxivUrls.length - 1) await delay(ARXIV_BATCH_DELAY_MS);
+  }
+
   const trendResponses = [];
 
   for (const geo of TREND_GEOGRAPHIES) {
@@ -291,14 +325,30 @@ export async function runResearchWatch({ outputPath = '.artifacts/daily-research
     await delay(350);
   }
 
-  const papers = arxivResponse.ok
-    ? parseArxivFeed(arxivResponse.text).sort((a, b) => b.relevanceScore - a.relevanceScore || b.published.localeCompare(a.published))
-    : [];
+  const papersById = new Map(arxivResponses
+    .filter((response) => response.ok)
+    .flatMap((response) => parseArxivFeed(response.text))
+    .map((paper) => [paper.id, paper]));
+  const papers = [...papersById.values()]
+    .sort((a, b) => b.relevanceScore - a.relevanceScore || b.published.localeCompare(a.published))
+    .slice(0, 30);
   const trends = trendResponses.flatMap((response, index) => response.ok
     ? parseGoogleTrendsFeed(response.text, TREND_GEOGRAPHIES[index])
     : []);
+  const failedArxivBatches = arxivResponses
+    .map((response, index) => ({ response, index }))
+    .filter(({ response }) => !response.ok);
+  const completedArxivBatches = arxivResponses.length - failedArxivBatches.length;
   const sourceHealth = {
-    arxiv: { ok: arxivResponse.ok, status: arxivResponse.status, error: arxivResponse.error, transport: arxivResponse.transport },
+    arxiv: {
+      ok: failedArxivBatches.length === 0,
+      partial: completedArxivBatches > 0 && failedArxivBatches.length > 0,
+      status: failedArxivBatches.length === 0 ? 200 : 0,
+      error: failedArxivBatches.map(({ response, index }) => `batch ${index + 1}: ${response.error}`).join(' | '),
+      transport: [...new Set(arxivResponses.filter((response) => response.ok).map((response) => response.transport))].join('+') || 'none',
+      completedBatches: completedArxivBatches,
+      totalBatches: arxivResponses.length,
+    },
     trends: trendResponses.map((response, index) => ({
       geo: TREND_GEOGRAPHIES[index],
       ok: response.ok,
@@ -321,9 +371,15 @@ export async function runResearchWatch({ outputPath = '.artifacts/daily-research
     await appendFile(process.env.GITHUB_STEP_SUMMARY, report, 'utf8');
   }
 
-  console.log(`Research watch wrote ${papers.length} paper candidates and ${trends.length} trend matches to ${outputPath}`);
+  if (sourceHealth.arxiv.ok) {
+    console.log(`Research watch wrote ${papers.length} paper candidates and ${trends.length} trend matches to ${outputPath}`);
+  } else if (sourceHealth.arxiv.partial) {
+    console.warn(`Research watch arXiv result is partial (${completedArxivBatches}/${arxivResponses.length} batches); wrote ${papers.length} incomplete paper candidates and ${trends.length} trend matches to ${outputPath}`);
+  } else {
+    console.error(`Research watch arXiv source failed; paper candidate count is unavailable. Wrote ${trends.length} trend matches to ${outputPath}`);
+  }
 
-  if (!arxivResponse.ok && trendResponses.every((response) => !response.ok)) {
+  if (!sourceHealth.arxiv.ok) {
     process.exitCode = 1;
   }
 

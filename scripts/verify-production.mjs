@@ -137,7 +137,7 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
@@ -146,6 +146,7 @@ const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, ll
   fetchOk('/llms-full.txt'),
   fetchOk('/organizations'),
   fetchOk('/robots'),
+  fetchOk('/robot-world-models'),
   fetchOk('/robots.txt'),
   fetchOk('/feed.xml'),
   fetchOk('/news-sitemap.xml'),
@@ -160,12 +161,13 @@ if (!(llmsResponse.headers.get('content-type') ?? '').includes('text/plain')) th
 if (!(llmsFullResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms-full.txt has an invalid content type');
 if (!(organizationsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/organizations did not return HTML');
 if (!(robotsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robots did not return HTML');
+if (!(worldModelsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robot-world-models did not return HTML');
 if (!(crawlerRobotsResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/robots.txt has an invalid content type');
 if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+xml')) throw new Error('/feed.xml has an invalid content type');
 if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, worldModelsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
@@ -174,6 +176,7 @@ const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robo
   llmsFullResponse.text(),
   organizationsResponse.text(),
   robotsResponse.text(),
+  worldModelsResponse.text(),
   crawlerRobotsResponse.text(),
   rssResponse.text(),
   newsSitemapResponse.text(),
@@ -466,12 +469,30 @@ for (const robot of graphRobots) {
   const fragment = new URL(robot.canonicalUrl).hash.slice(1);
   if (!fragment || !robotsHtml.includes(`id="${fragment}"`)) throw new Error(`/robots is missing ${robot.id}`);
 }
+const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
+const worldModelJsonLd = validateHtml(worldModelsHtml, '/robot-world-models');
+const worldModelJsonLdNodes = worldModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
+const worldModelList = worldModelJsonLdNodes.find((node) => node?.['@id'] === canonicalFor('/robot-world-models#world-model-evidence'));
+const worldModelSchemaIds = worldModelJsonLdNodes
+  .filter((node) => node?.['@type'] === 'CreativeWork' && worldModelIds.some((id) => node?.['@id'] === canonicalFor(`/robot-world-models#world-model-${id}`)))
+  .map((node) => node['@id']);
+if (worldModelList?.['@type'] !== 'ItemList'
+  || worldModelList?.numberOfItems !== worldModelIds.length
+  || worldModelSchemaIds.length !== worldModelIds.length
+  || new Set(worldModelSchemaIds).size !== worldModelIds.length) {
+  throw new Error('/robot-world-models evidence ItemList count or identity is invalid');
+}
+for (const id of worldModelIds) {
+  if (!worldModelsHtml.includes(`id="world-model-${id}"`)) throw new Error(`/robot-world-models is missing ${id}`);
+  if (!worldModelSchemaIds.includes(canonicalFor(`/robot-world-models#world-model-${id}`))) throw new Error(`/robot-world-models JSON-LD is missing ${id}`);
+}
 if (!llms.includes(`${graph.counts.knowledgeEntities} source-reviewed knowledge entities`) || !llms.includes(`${graph.counts.sourceDocuments} deduplicated primary and official source records`) || !llms.includes(canonicalFor('/organizations')) || !llms.includes(canonicalFor('/robots'))) throw new Error('/llms.txt does not match the deployed knowledge graph');
 const llmsFullCountChecks = [
   ['Dataset records', graph.counts.datasets],
   ['Benchmark records', graph.counts.benchmarks],
   ['Sensor records', graph.counts.sensors],
   ['Robot AI model records', graph.counts.models],
+  ['Robot world-model evidence records', worldModelIds.length],
   ['Verified organization records', graph.counts.organizations],
   ['Verified model-organization relations', graph.counts.organizationRelationEdges],
   ['Source-listed research affiliations', graph.counts.sourceAffiliationEdges],
@@ -490,7 +511,11 @@ const llmsFullCountChecks = [
   ['Verified model-robot relations', graph.counts.robotRelationEdges],
   ['Structured research records', graph.counts.researchIndex],
 ];
-if (llmsFullCountChecks.some(([label, count]) => !llmsFull.includes(`- ${label}: ${count}`)) || !llmsFull.includes(canonicalFor('/organizations')) || !llmsFull.includes(canonicalFor('/robots'))) throw new Error('/llms-full.txt is missing deployed entity knowledge');
+if (llmsFullCountChecks.some(([label, count]) => !llmsFull.includes(`- ${label}: ${count}`))
+  || !llmsFull.includes(canonicalFor('/organizations'))
+  || !llmsFull.includes(canonicalFor('/robots'))
+  || !llmsFull.includes('## Robot World Model Evidence')
+  || !llmsFull.includes('GitHub Coming Soon')) throw new Error('/llms-full.txt is missing deployed entity knowledge');
 
 const csvRows = parseCsv(csv);
 const csvIds = csvRows.map((row) => row.id);
