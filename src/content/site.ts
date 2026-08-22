@@ -179,6 +179,7 @@ export const site = {
   tagline: 'Robot Skin, Tactile AI & Physical AI Intelligence',
   description:
     'An independent research and intelligence platform mapping robot skin, tactile sensing, tactile AI, robot manipulation, humanoid touch, and Physical AI.',
+  verifiedProfiles: ['https://github.com/roboskin-ai'],
   editorial: {
     name: 'RoboSkin.ai Editorial Team',
     path: '/editorial-policy',

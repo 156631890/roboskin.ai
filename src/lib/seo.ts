@@ -387,6 +387,7 @@ export function buildOrganizationJsonLd() {
     '@id': `${site.url}/#organization`,
     name: site.name,
     url: site.url,
+    sameAs: site.verifiedProfiles,
     email: site.contact.primaryEmail,
     description: site.description,
     disambiguatingDescription:

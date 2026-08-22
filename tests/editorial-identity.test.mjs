@@ -34,7 +34,8 @@ test('article authors and the publisher resolve to factual organization nodes', 
   const organizationEnd = seo.indexOf('\nexport function ', organizationStart + 1);
   const editorialStart = seo.indexOf('export function buildEditorialTeamJsonLd');
   const editorialEnd = seo.indexOf('\nexport function ', editorialStart + 1);
-  const editorialIdentitySeo = `${seo.slice(organizationStart, organizationEnd)}\n${seo.slice(editorialStart, editorialEnd)}`;
+  const organizationIdentitySeo = seo.slice(organizationStart, organizationEnd);
+  const editorialIdentitySeo = seo.slice(editorialStart, editorialEnd);
 
   assert.match(seo, /#editorial-team/);
   assert.match(seo, /buildEditorialTeamJsonLd\(post\.author\)/);
@@ -47,6 +48,7 @@ test('article authors and the publisher resolve to factual organization nodes', 
   assert.match(seo, /export function buildEditorialLeadJsonLd/);
   assert.match(seo, /'@type': 'Person'/);
   assert.match(seo, /#steven-yang/);
+  assert.match(organizationIdentitySeo, /sameAs: site\.verifiedProfiles/);
   assert.doesNotMatch(editorialIdentitySeo, /sameAs:/);
 });
 
