@@ -40,11 +40,17 @@ test('research organizations keep normalized university and lab identities separ
     'nanjing-university',
     'daimon-robotics',
     'national-university-of-singapore',
+    'the-university-of-hong-kong',
+    'nanyang-technological-university',
+    'the-hong-kong-polytechnic-university',
+    'south-china-university-of-technology',
+    'kth-royal-institute-of-technology',
+    'kings-college-london',
   ]) {
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 57);
+  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 63);
   assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
   assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
   assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);

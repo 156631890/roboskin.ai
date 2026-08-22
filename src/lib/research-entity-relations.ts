@@ -256,6 +256,23 @@ const rctAffiliations: AffiliationTarget[] = [
 const sourceAffiliationBatches: SourceAffiliationBatch[] = [
   {
     fromType: 'paper',
+    fromId: 'vision-based-tactile-intelligence-robotics-survey-2026',
+    organizations: [
+      { organizationId: 'great-bay-university', sourceLabels: ['Great Bay University'] },
+      { organizationId: 'tsinghua-university', sourceLabels: ['Tsinghua University'] },
+      { organizationId: 'the-university-of-hong-kong', sourceLabels: ['The University of Hong Kong'] },
+      { organizationId: 'nanyang-technological-university', sourceLabels: ['Nanyang Technological University'] },
+      { organizationId: 'the-hong-kong-polytechnic-university', sourceLabels: ['The Hong Kong Polytechnic University'] },
+      { organizationId: 'south-china-university-of-technology', sourceLabels: ['South China University of Technology'] },
+      { organizationId: 'kth-royal-institute-of-technology', sourceLabels: ['KTH Royal Institute of Technology'] },
+      { organizationId: 'kings-college-london', sourceLabels: ['King’s College London'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/html/2608.15490v1'],
+    evidenceBoundary: 'The versioned arXiv HTML header lists these eight institutions as the review authors’ affiliations without exposing an author-by-author mapping. These relations preserve only the source-listed affiliation set; they do not establish institutional ownership, funding, endorsement, equal contribution, or responsibility for every claim in the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    fromType: 'paper',
     fromId: 'adept-visuo-tactile-dexterity-rl-2026',
     organizations: [
       { organizationId: 'nvidia', sourceLabels: ['NVIDIA'] },

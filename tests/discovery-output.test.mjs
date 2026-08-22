@@ -31,6 +31,7 @@ test('RSS is generated from research and news with apex URLs', async () => {
 
   assert.match(feed, /blogPosts/);
   assert.match(feed, /newsPosts/);
+  assert.match(feed, /\.slice\(0, 50\)/);
   assert.match(feed, /canonicalUrl/);
   assert.match(feed, /new Date\(item\.date\)\.toUTCString\(\)/);
   assert.doesNotMatch(feed, /new Date\(item\.updated\)\.toUTCString\(\)/);

@@ -729,6 +729,78 @@ export const researchOrganizationEntries: ResearchOrganizationEntry[] = [
     evidenceBoundary: 'The official site establishes the university identity. VLA-Touch author affiliations support contributor association only, not institution-wide ownership, funding, endorsement, completeness of the release, or licensing of hosted data and checkpoints.',
     sourceReviewed: '2026-08-22',
   },
+  {
+    id: 'the-university-of-hong-kong',
+    name: 'The University of Hong Kong',
+    aliases: ['HKU'],
+    kind: 'university',
+    officialUrl: 'https://www.hku.hk/',
+    identitySources: [
+      { label: 'The University of Hong Kong official site', url: 'https://www.hku.hk/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'nanyang-technological-university',
+    name: 'Nanyang Technological University',
+    aliases: ['NTU Singapore'],
+    kind: 'university',
+    officialUrl: 'https://www.ntu.edu.sg/',
+    identitySources: [
+      { label: 'Nanyang Technological University official site', url: 'https://www.ntu.edu.sg/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'the-hong-kong-polytechnic-university',
+    name: 'The Hong Kong Polytechnic University',
+    aliases: ['PolyU'],
+    kind: 'university',
+    officialUrl: 'https://www.polyu.edu.hk/',
+    identitySources: [
+      { label: 'The Hong Kong Polytechnic University official site', url: 'https://www.polyu.edu.hk/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'south-china-university-of-technology',
+    name: 'South China University of Technology',
+    aliases: ['SCUT'],
+    kind: 'university',
+    officialUrl: 'https://www.scut.edu.cn/en/main.htm',
+    identitySources: [
+      { label: 'South China University of Technology official English site', url: 'https://www.scut.edu.cn/en/main.htm' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'kth-royal-institute-of-technology',
+    name: 'KTH Royal Institute of Technology',
+    aliases: ['KTH'],
+    kind: 'university',
+    officialUrl: 'https://www.kth.se/en',
+    identitySources: [
+      { label: 'KTH Royal Institute of Technology official site', url: 'https://www.kth.se/en' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'kings-college-london',
+    name: "King's College London",
+    aliases: ['KCL'],
+    kind: 'university',
+    officialUrl: 'https://www.kcl.ac.uk/',
+    identitySources: [
+      { label: "King's College London official site", url: 'https://www.kcl.ac.uk/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The vision-based tactile intelligence review lists this institution among its author affiliations; that records source affiliation only, not university-wide ownership, funding, endorsement, or responsibility for the review.',
+    sourceReviewed: '2026-08-22',
+  },
 ];
 
 type ModelRelationPolicy = {

@@ -46,6 +46,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 
 const supplements: ResearchIndexSupplement[] = [
   {
+    id: 'vision-based-tactile-intelligence-robotics-survey-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Review taxonomy of camera-based tactile sensing that converts compliant-interface deformation into optical images for geometric, force-related, temporal, and learned inference',
+    modalities: ['tactile image', 'direct contact geometry', 'model-mediated force-related cues', 'temporal contact and slip information', 'vision-touch-language-action alignment'],
+    formFactor: 'Survey spanning fingertip, manipulator-integrated, miniature, all-around, and large-area vision-based tactile sensor designs',
+    dataOutput: 'Source-organized map from contact deformation and optical readout through tactile representations, multimodal learning, simulation, datasets, and manipulation policies',
+    applications: ['vision-based tactile sensing', 'contact-rich manipulation', 'tactile representation learning', 'tactile foundation models', 'robot skin research mapping'],
+    evidence: 'preprint',
+    limitations: 'This August 16, 2026 arXiv v1 source is a review rather than an original controlled benchmark, sensor release, dataset, or model artifact. Its taxonomy synthesizes prior literature and is not an industry standard; individual performance, availability, license, and scale claims still require the cited primary sources. No dedicated official project, code, or dataset link was displayed on the reviewed arXiv record on 2026-08-22.',
+    reviewedAt: '2026-08-22',
+  },
+  {
     id: 'adept-visuo-tactile-dexterity-rl-2026',
     year: 2026,
     publisher: 'arXiv',

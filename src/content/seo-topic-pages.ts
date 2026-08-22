@@ -609,6 +609,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction and robot planning evidence.' },
       { label: 'Tac4Loco plantar tactile locomotion', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'How bilateral foot-pressure maps become post-contact humanoid control evidence.' },
       { label: 'ADEPT visuo-tactile dexterity', href: '/research/adept-visuo-tactile-dexterity-rl-2026', description: 'A source-bounded matched touch-versus-vision insertion result on one Flexiv-Sharpa setup.' },
+      { label: 'Vision-based tactile intelligence review', href: '/research/vision-based-tactile-intelligence-robotics-survey-2026', description: 'Map optical sensor hardware, tactile representations, learning, simulation, datasets, and robot-action boundaries.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
@@ -623,9 +624,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'FreeTacMan official project page', href: 'https://opendrivelab.com/FreeTacMan' },
       { label: 'Tac4Loco plantar pressure humanoid locomotion preprint', href: 'https://arxiv.org/abs/2608.15766' },
       { label: 'ADEPT visuo-tactile dexterity preprint', href: 'https://arxiv.org/abs/2608.19182' },
+      { label: 'Vision-Based Tactile Intelligence for Robotics review preprint', href: 'https://arxiv.org/html/2608.15490v1' },
       { label: 'Tactile Robotics: An Outlook', href: 'https://arxiv.org/abs/2508.11261' },
     ],
-    paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
+    paperBriefIds: ['vision-based-tactile-intelligence-robotics-survey-2026', 'adept-visuo-tactile-dexterity-rl-2026', 'tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },
   {
     path: '/e-skin',
@@ -2644,7 +2646,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-08-19',
+    updated: '2026-08-22',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2716,6 +2718,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review shared evaluation suites and evidence boundaries.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Trace sensor data through logging, replay, and robot middleware.' },
       { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'See how contact signals affect robot actions.' },
+      { label: 'Vision-based tactile intelligence review', href: '/research/vision-based-tactile-intelligence-robotics-survey-2026', description: 'Compare four optical readout families and three levels of tactile information without treating inferred force as a direct measurement.' },
     ],
     sources: [
       { label: 'DIGIT paper', href: 'https://arxiv.org/abs/2005.14679' },
@@ -2724,8 +2727,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'GelSlim 4.0 paper', href: 'https://arxiv.org/abs/2409.19770' },
       { label: 'TacTip review', href: 'https://arxiv.org/abs/2105.14455' },
       { label: 'Insight paper', href: 'https://www.nature.com/articles/s42256-021-00439-3' },
+      { label: 'Vision-Based Tactile Intelligence for Robotics review preprint', href: 'https://arxiv.org/html/2608.15490v1' },
     ],
-    paperBriefIds: ['open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025'],
+    paperBriefIds: ['vision-based-tactile-intelligence-robotics-survey-2026', 'open-source-magnetic-tactile-calibration-2024', 'full-hand-tactile-sensing-2025'],
   },
   {
     path: '/tactile-manipulation',

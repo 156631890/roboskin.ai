@@ -24,6 +24,154 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'vision-based-tactile-intelligence-robotics-survey-2026',
+    title: 'Vision-based tactile intelligence connects sensor optics to robot action',
+    seoTitle: 'Vision-Based Tactile Sensors for Robotics: 2026 Survey Map',
+    seoDescription:
+      'A source-backed map of vision-based tactile sensors: four hardware components, four optical readouts, three information levels, tactile AI, and open gaps.',
+    excerpt:
+      'A 2026 review maps vision-based tactile sensing as one integrated stack: deformable contact hardware, optical readout, tactile representations, learning, simulation, datasets, and robot action.',
+    content: `# Vision-based tactile intelligence connects sensor optics to robot action
+
+**Evidence review - August 22, 2026**
+
+Vision-based tactile sensing converts contact-induced deformation of a soft interface into images that algorithms can interpret. A new August 2026 review argues that the field should be evaluated as an integrated sensing-and-learning stack, not as a camera specification or a sensor list in isolation.
+
+The review is useful to [tactile AI](/tactile-ai) because it connects physical contact, sensor hardware, image formation, learned representations, simulation, datasets, manipulation policies, and emerging touch-language-action systems. It is an arXiv v1 preprint and a survey, not an original sensor benchmark or a new foundation-model release.
+
+## Short answer: what is a vision-based tactile sensor?
+
+A vision-based tactile sensor, or VBTS, places an image sensor behind or around a deformable contact interface. Contact changes the interface geometry or appearance; illumination and optics expose that change to a camera; software then estimates contact-related quantities from the resulting tactile image.
+
+The reviewed source describes four typical hardware components and four sequential processing stages.
+
+| Layer | Source-organized element | Role in the tactile pipeline |
+| --- | --- | --- |
+| Hardware 1 | Deformable elastomer | Makes physical contact and may contain a reflective coating, markers, or fluorescent layers. |
+| Hardware 2 | Illumination | Creates controlled optical cues, often with arranged LEDs. |
+| Hardware 3 | Imaging optics | Shapes and focuses the optical response. |
+| Hardware 4 | One or more image sensors | Captures tactile images for downstream inference. |
+| Stage 1 | Contact-induced deformation | Converts external contact into a change in the compliant interface. |
+| Stage 2 | Optical response | Encodes deformation as marker motion, reflected intensity, shading, or disparity. |
+| Stage 3 | Tactile image acquisition | Records the optical response as image data. |
+| Stage 4 | Contact inference | Estimates geometry, force-related cues, slip, contact state, or material properties. |
+
+This decomposition is important for comparing [tactile sensors for robots](/tactile-sensors). Two sensors can both output images while differing in elastomer mechanics, illumination, optical path, calibration, camera placement, rate, and the physical quantities their models can support.
+
+## Four optical readout families
+
+The review's first comparison table groups representative optical readout and reconstruction methods into four families.
+
+| Readout family | Primary cue | Typical value | Evidence boundary |
+| --- | --- | --- | --- |
+| Marker tracking | Motion of dots, pins, grids, or other visual features | Interpretable deformation, shear, and slip cues | Resolution and reliability depend on marker density and tracking quality. |
+| Photometric stereo | Intensity changes under controlled multidirectional illumination | Fine surface-normal, height, texture, and geometry recovery | Illumination design and calibration are part of the measurement system. |
+| Stereo vision reconstruction | Disparity between multiple views | Metric 3D geometry through triangulation | Adds cameras, calibration, packaging complexity, and possible resolution tradeoffs. |
+| Shading-based reconstruction | Appearance and shading variation | Can accommodate non-ideal illumination and curved surfaces | Inference is more ambiguous and more dependent on the optical or learned model. |
+
+The paper places TacTip under marker tracking and GelSight and DIGIT under photometric stereo as representative examples. This is a survey taxonomy, not a claim that every revision of those sensor families uses an identical optical stack. RoboSkin keeps the individual [sensor records](/sensors) and their primary sources separate.
+
+## Three information levels: observed is not the same as inferred
+
+The review organizes the information encoded in tactile images into three levels. This is one of its most useful evidence boundaries.
+
+| Information level | Examples | What must remain explicit |
+| --- | --- | --- |
+| Direct geometric information | Contact location and area, local orientation, deformation geometry, fine texture | Some geometry may be recovered from a single frame, but resolution still depends on the physical and optical design. |
+| Indirect force-related information | Normal and shear force, distributed force fields, torque, compliance cues | These quantities depend on material properties, sensor geometry, calibration, contact models, or learned mappings. An image is not automatically a calibrated force map. |
+| Sequential information | Contact transitions, incipient slip, sustained sliding, changing manipulation state | Dynamic evidence depends on frame rate, latency, history length, and temporal alignment with robot state and action. |
+
+This distinction prevents a common error in robot-skin comparisons: treating every output named in a paper as a directly measured quantity. Force and slip can be model-mediated estimates, and their validity is tied to the source's calibration and test protocol.
+
+## From tactile images to tactile AI
+
+The survey's learning hierarchy moves from representations to physical inference and then to robot behavior:
+
+1. image-based, geometry-oriented, implicit, generative, or event-based tactile representations;
+2. force, deformation, contact, and slip inference;
+3. geometry, pose tracking, and 3D reconstruction;
+4. material, texture, object, and physical-property inference;
+5. fusion with vision, proprioception, language, or audio;
+6. grasping, regrasping, insertion, imitation learning, and dexterous manipulation;
+7. general tactile representations, multimodal alignment, and tactile-language-action policies.
+
+That progression explains the difference between tactile sensing and tactile AI. A sensor produces contact-dependent signals. Tactile AI learns representations or decisions from those signals and may fuse them with the rest of the robot state. A successful tactile model therefore depends on both what the hardware makes observable and how data, calibration, time synchronization, learning objectives, and control are organized.
+
+For [Physical AI and touch](/physical-ai-touch), the key relationship is:
+
+**physical contact -> deformable interface -> optical signal -> tactile image -> representation -> multimodal model -> robot action or feedback**
+
+The chain is only as strong as its weakest evidence boundary. A model trained on one fingertip, illumination design, object set, and task protocol is not automatically sensor-independent or ready for [humanoid robot skin](/humanoid-robot-skin).
+
+## Simulation, datasets, and cross-sensor scaling
+
+The review treats simulation and datasets as the scaling layer for tactile intelligence. Real tactile data can be costly, sensor-specific, and difficult to annotate for geometry, force, material, or task outcome. The survey lists representative resources including TACTO, Taxim, Tactile Gym 2.0, DiffTactile, Touch and Go, Touch100K, TVL, VTDexManip, TacBench, and ManiFeel.
+
+The list is a literature map, not a statement that these resources share one license, schema, sensor, or evaluation protocol. Each resource still needs an independent release audit. RoboSkin's [tactile dataset directory](/datasets) and [benchmark directory](/benchmarks) therefore preserve source, access, modality, hardware, scale, license, and limitation fields separately.
+
+The paper identifies another hard problem: simulated and real tactile images vary with elastomer mechanics, friction, illumination, optics, noise, and fabrication. Domain randomization, image translation, physics simulation, small real calibration sets, and cross-sensor translation are research approaches; none removes the need to validate performance on the actual target sensor and robot.
+
+## Open gaps that matter for robot skin and Physical AI
+
+The survey highlights seven future directions. They align closely with the gaps RoboSkin tracks across the touch-intelligence stack.
+
+| Open direction | Why it remains difficult |
+| --- | --- |
+| Robot-hand-compatible design | Finger volume, grasp workspace, wiring, durability, sensitivity, spatial resolution, and optical quality compete with one another. |
+| Large-area robotic tactile skin | Tiling, bandwidth, compute, optical packaging, and mechanical integration become harder beyond local fingertips. |
+| Tactile foundation models and VTLA policies | Touch is local, temporal, contact-dependent, and sensor-specific; it must be aligned with language, robot state, and action. |
+| Sim-to-real transfer | Soft mechanics, friction, lighting, optics, and fabrication variation all shift the tactile domain. |
+| Multimodal tactile intelligence | Vision, touch, proprioception, language, and actions are heterogeneous and asynchronous. |
+| Tactile feedback | Human demonstrators may need contact feedback to produce natural, high-quality contact-rich demonstrations. |
+| Egocentric tactile data collection | Wearable sensing must be synchronized with vision, motion, task phase, outcome, and a different robot embodiment. |
+
+The large-area point is especially important for [robot skin](/robot-skin). The source describes whole-body vision-based tactile coverage as an open challenge and notes that electronic skins have progressed further in large-area coverage. A fingertip VBTS and a distributed electronic skin solve overlapping but not identical integration problems.
+
+## What this review does not establish
+
+- It is arXiv v1, submitted on August 16, 2026; RoboSkin did not verify peer-reviewed acceptance.
+- It is a review, so its tables organize prior literature rather than report one controlled cross-sensor experiment.
+- It does not introduce a new public dataset, benchmark protocol, model checkpoint, or sensor product.
+- A sensor appearing in a taxonomy does not establish commercial availability, current specifications, reproducibility, or superiority.
+- Model and dataset scales cited inside the review must still be checked against their own primary sources and release revisions.
+- The taxonomy is the authors' synthesis, not an industry standard or proof that all relevant systems are included.
+- The arXiv record displayed no dedicated official code, project, or dataset link when reviewed on August 22, 2026.
+
+The HTML header lists Great Bay University, Tsinghua University, The University of Hong Kong, Nanyang Technological University, The Hong Kong Polytechnic University, South China University of Technology, KTH Royal Institute of Technology, and King's College London. RoboSkin records these only as source-listed affiliations. That does not establish institutional ownership, funding, endorsement, or responsibility for every statement in the review.
+
+## Related RoboSkin resources
+
+- [Tactile AI](/tactile-ai)
+- [Vision-tactile manipulation](/visuo-tactile)
+- [Tactile foundation models](/tactile-foundation-models)
+- [Robot skin](/robot-skin)
+- [Tactile sensors](/sensors)
+- [Robot hands](/robot-hands)
+- [Tactile datasets](/datasets)
+- [Tactile benchmarks](/benchmarks)
+- [Physical AI and touch](/physical-ai-touch)
+
+## Primary sources
+
+- [arXiv abstract: Vision-Based Tactile Intelligence for Robotics](https://arxiv.org/abs/2608.15490)
+- [Versioned arXiv HTML: Vision-Based Tactile Intelligence for Robotics v1](https://arxiv.org/html/2608.15490v1)
+- [arXiv-issued DOI record](https://doi.org/10.48550/arXiv.2608.15490)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '10 min read',
+    category: 'Tactile AI',
+    image: '/generated/authority/state-of-tactile-ai-cover.webp',
+    sourceTitle: 'Vision-Based Tactile Intelligence for Robotics: Sensing, Learning, and Embodied Manipulation',
+    sourceUrl: 'https://arxiv.org/html/2608.15490v1',
+    citationUrls: [
+      'https://arxiv.org/abs/2608.15490',
+      'https://doi.org/10.48550/arXiv.2608.15490',
+    ],
+    technicalFocus: ['vision-based tactile sensors', 'tactile AI', 'optical tactile sensing', 'tactile foundation models', 'contact-rich manipulation'],
+  },
+  {
     id: 'adept-visuo-tactile-dexterity-rl-2026',
     title: 'ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertion',
     seoTitle: 'ADEPT Visuo-Tactile Dexterous RL for Robot Manipulation',

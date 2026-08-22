@@ -13,7 +13,9 @@ export function buildRssFeed(): string {
   const items = [
     ...blogPosts.map((post) => ({ ...post, path: `/research/${post.id}` })),
     ...newsPosts.map((post) => ({ ...post, path: `/news/${post.id}` })),
-  ].sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime());
+  ]
+    .sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
+    .slice(0, 50);
 
   const itemXml = items.map((item) => {
     const url = canonicalUrl(item.path);
