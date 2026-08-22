@@ -772,6 +772,10 @@ TouchWorld is a July 2026 preprint that treats touch as both a prediction target
 
 The system uses a hierarchy with vision-language subtask planning, tactile world-model prediction, visuo-tactile action generation, and a tactile-conditioned refinement policy. The high-level layer predicts executable subtasks and tactile subgoals. The lower-level policy uses recent tactile and proprioceptive feedback to correct local errors such as slip, misalignment, unstable grasping, or force mismatch.
 
+The predictive component is first pretrained on [EgoTouch](/datasets#dataset-egotouch), a human bimanual dataset with synchronized egocentric and wrist video, hand pose, and wearable pressure maps, before robot-specific fine-tuning. The [TouchWorld model record](/robot-foundation-models#model-touchworld) connects that training claim to its exact primary-source boundary; it does not imply that every module is trained on EgoTouch or that the hosted dataset upload is complete.
+
+The paper also defines a [six-task real-robot evaluation protocol](/benchmarks#benchmark-touchworld-real-robot) with clean and human-perturbation settings. It reports 200 teleoperated training trajectories and 100 evaluation rollouts per task. This is an author-defined, single-platform protocol rather than an independent cross-model leaderboard.
+
 Across six long-horizon, contact-rich manipulation tasks, the authors report 65.0% average success in the clean setting and 53.7% under human perturbations. Those results were 15.7 and 18.5 percentage points above the strongest baseline reported in the paper.
 
 ## Why this matters for tactile AI
@@ -786,7 +790,7 @@ TouchWorld is a preprint, not a peer-reviewed final publication. Its reported su
 
 ## Where this fits next
 
-The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares TouchWorld with Dream-Tac, ViTacWorld, FeelWorld, and VT-WM. The [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
+The [robot world models pillar](/robot-world-models) explains the broader prediction-and-control role. The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares TouchWorld with Dream-Tac, ViTacWorld, FeelWorld, and VT-WM, while the [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
 
 ## Practical questions
 
@@ -801,11 +805,15 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
 ## Source
 
 - [arXiv: TouchWorld - A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation](https://arxiv.org/abs/2607.07287)
+- [TouchWorld official project page](https://phanes-lab.github.io/TouchWorld-website/)
+- [arXiv: TouchAnything and the EgoTouch dataset](https://arxiv.org/abs/2605.13083)
+- [TouchAnything official repository and EgoTouch release notes](https://github.com/Jianyi2004/TouchAnything)
+- [EgoTouch official Hugging Face repository](https://huggingface.co/datasets/zhouzhoujy/EgoTouch)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-08-15',
-    readTime: '4 min read',
+    updated: '2026-08-22',
+    readTime: '5 min read',
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',
     sourceTitle: 'TouchWorld tactile foundation model preprint',
@@ -815,8 +823,24 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
         title: 'arXiv: TouchWorld tactile foundation model preprint',
         url: 'https://arxiv.org/abs/2607.07287',
       },
+      {
+        title: 'TouchWorld official project page',
+        url: 'https://phanes-lab.github.io/TouchWorld-website/',
+      },
+      {
+        title: 'arXiv: TouchAnything and the EgoTouch dataset',
+        url: 'https://arxiv.org/abs/2605.13083',
+      },
+      {
+        title: 'TouchAnything official repository',
+        url: 'https://github.com/Jianyi2004/TouchAnything',
+      },
+      {
+        title: 'EgoTouch official Hugging Face repository',
+        url: 'https://huggingface.co/datasets/zhouzhoujy/EgoTouch',
+      },
     ],
-    technicalFocus: ['TouchWorld', 'tactile foundation model', 'dexterous manipulation', 'contact-rich robotics'],
+    technicalFocus: ['TouchWorld', 'tactile foundation model', 'EgoTouch', 'tactile world model', 'dexterous manipulation', 'contact-rich robotics'],
   },
   {
     id: 'color-changing-mechanochromic-tactile-sensor-2026',

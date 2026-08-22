@@ -20,6 +20,24 @@ export type TactileBenchmarkEntry = {
 
 export const tactileBenchmarkEntries: TactileBenchmarkEntry[] = [
   {
+    id: 'touchworld-real-robot',
+    name: 'TouchWorld Real-Robot Evaluation Protocol',
+    year: 2026,
+    benchmarkType: 'Author-defined real-robot manipulation evaluation protocol',
+    institutions: ['Harbin Institute of Technology, Shenzhen', 'PHANES AI'],
+    tasks: ['Water Flower', 'Tabletop Clearing', 'Cup Insertion', 'Power Plug Insertion', 'Pot Wiping', 'Tissue Pulling'],
+    modalities: ['Multi-view RGB', 'Proprioceptive state', 'Left and right tactile pressure observations', 'Natural-language task instruction', 'Robot actions'],
+    sensors: ['JQ-Industries tactile glove mounted on Wuji dexterous hands'],
+    robots: ['One unnamed humanoid platform with Wuji dexterous hands'],
+    metrics: ['Per-task manipulation success rate in a clean setting', 'Per-task manipulation success rate under human perturbation', 'Six-task average success rate'],
+    protocol: 'The v2 preprint defines six contact-rich tasks, collects 200 teleoperated training trajectories per task, and conducts 100 real-robot evaluation rollouts per task. Each task is evaluated in clean and human-perturbation settings; the paper does not state that this is an independent shared leaderboard.',
+    access: 'The preprint and official project page are public. No standalone benchmark package, evaluation scripts, fixed test-set release, or benchmark artifact license was verified on 2026-08-22.',
+    limitation: 'This is an author-defined evaluation on one unnamed humanoid, one Wuji-hand and tactile-glove configuration, six tasks, and source-specific baselines. The reported 65.0% clean and 53.7% perturbed averages are author-reported TouchWorld results, not independent validation or a universal cross-model benchmark.',
+    paperUrl: 'https://arxiv.org/abs/2607.07287',
+    projectUrl: 'https://phanes-lab.github.io/TouchWorld-website/',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'softvtbench',
     name: 'SoftVTBench',
     year: 2026,

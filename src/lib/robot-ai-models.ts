@@ -391,7 +391,7 @@ export const robotAiModelEntries: RobotAiModelEntry[] = [
     outputType: 'Executable subtasks, predicted visual-tactile subgoals, nominal robot-action chunks, and high-frequency residual action corrections',
     embodiments: ['Unnamed humanoid platform with Wuji dexterous hands and a JQ-Industries tactile glove'],
     trainingDataSummary: 'The preprint reports 128,866 subtask-planner supervision records, tactile-world-model pretraining on EgoTouch, and fine-tuning on 10 hours or about 1.08 million frames of robot demonstrations. Each of the six evaluated tasks uses 200 teleoperated training trajectories; no reusable TouchWorld dataset release was verified.',
-    realRobotEvaluation: 'The authors report 100 real-robot rollouts per task in both clean and human-perturbation settings across six contact-rich tasks, with average success of 65.0% and 53.7%, respectively.',
+    realRobotEvaluation: 'The authors report 100 real-robot evaluation rollouts per task across clean and human-perturbation settings for six contact-rich tasks, with average success of 65.0% and 53.7%, respectively.',
     availability: 'The paper and official project page are public. Public model weights, training code, dataset files, and an artifact license were not verified in the reviewed sources.',
     license: 'No public license for model weights, code, or robot demonstration files was verified; the arXiv article license does not establish reusable artifact terms.',
     paperUrl: 'https://arxiv.org/abs/2607.07287',

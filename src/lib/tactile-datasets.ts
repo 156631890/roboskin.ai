@@ -4,6 +4,25 @@ export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
   {
+    id: 'egotouch',
+    name: 'EgoTouch',
+    institution: ['Harbin Institute of Technology, Shenzhen', 'Meituan Academy of Robotics', 'Tsinghua Shenzhen International Graduate School, Tsinghua University'],
+    year: 2026,
+    robot: ['Human-wearable bimanual collection; no robot platform is used in the EgoTouch capture pipeline'],
+    sensor: ['Head-mounted wide-angle camera', 'Dual wrist cameras', 'Bimanual pressure-sensing gloves with dense palm pressure maps', 'Bimanual 3D hand-pose capture'],
+    modalities: ['Head-mounted egocentric RGB', 'Dual wrist-mounted RGB', 'Bimanual 3D hand pose with 42 joints', 'Continuous bilateral tactile pressure maps', 'Camera and wrist poses', 'Frame timestamps'],
+    sampleCount: '208 manipulation tasks across 1,891 episodes in indoor and outdoor environments. The official repository reports approximately 2 million frames and more than 1,000 objects; those repository statistics are author-reported and the repository still warns that the dataset upload may be incomplete.',
+    tasks: ['Bimanual hand-object manipulation', 'Egocentric vision-to-touch prediction', 'Contact prediction under visual occlusion', 'Multi-view tactile estimation'],
+    objectCategories: 'More than 1,000 objects across home, office, outdoor, retail, and workbench scenes are reported by the official repository; a complete reviewed object taxonomy was not verified.',
+    dataFormat: 'The official repository documents variable-length 30 FPS HDF5 episodes containing three 640 x 480 RGB views, bimanual hand-pose arrays, bilateral pressure grids, camera poses, masks when available, metadata, and timestamps. The Hugging Face repository also exposes scene folders and split.json.',
+    license: 'A separate dataset-file license was not verified. The official GitHub repository is MIT licensed, but that project-code license is not generalized here to the hosted EgoTouch data files.',
+    paperUrl: 'https://arxiv.org/abs/2605.13083',
+    githubUrl: 'https://github.com/Jianyi2004/TouchAnything',
+    datasetUrl: 'https://huggingface.co/datasets/zhouzhoujy/EgoTouch',
+    availability: 'The official Hugging Face repository exposes scene folders and split metadata. The official GitHub repository says the upload is in progress and currently accessible files may be incomplete, so completeness and the exact version must be checked before reuse.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'prism-industrial-skill',
     name: 'PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing',
     institution: ['State Key Laboratory of General Artificial Intelligence, School of Intelligence Science and Technology, Peking University', 'Delta Intelligence', 'PKU-Wuhan Institute for Artificial Intelligence', 'Hubei Humanoid Robot Innovation Center Co., Ltd.', 'China Academy of Information and Communications Technology'],

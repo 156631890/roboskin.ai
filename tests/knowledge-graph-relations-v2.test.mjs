@@ -21,11 +21,11 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
   assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 23);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 25);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    26,
+    28,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
@@ -36,9 +36,9 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
 
   assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 12);
   assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
-  assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 1);
+  assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
-  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 8);
+  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 9);
 
   for (const pattern of [
     /relation: 'introduces'[\s\S]*?fromId: 'prism-contact-rich-industrial-skill-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'prism-industrial-skill'/,
@@ -104,22 +104,22 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      knowledgeEntities: 139,
+      knowledgeEntities: 141,
       organizations: 41,
-      sourceDocuments: 191,
-      edges: 391,
-      supportedByEdges: 235,
-      researchRelationEdges: 97,
+      sourceDocuments: 194,
+      edges: 398,
+      supportedByEdges: 240,
+      researchRelationEdges: 99,
       researchProvenanceEdges: 74,
-      researchSemanticEdges: 23,
+      researchSemanticEdges: 25,
       sourceAffiliationEdges: 48,
       manufacturedByEdges: 12,
       paperSensorUsageEdges: 3,
       introducesEdges: 12,
       describesDatasetEdges: 2,
       usesDatasetEdges: 0,
-      trainedOnEdges: 8,
-      evaluatedByEdges: 1,
+      trainedOnEdges: 9,
+      evaluatedByEdges: 2,
     },
   );
 
