@@ -486,14 +486,26 @@ if (failures.length === 0) {
     ? vlaModelList.itemListElement.map((entry) => entry.item?.['@id'])
     : [];
   const expectedVlaModelIds = new Set(graphVlaModels.map((entity) => entity.canonicalUrl));
-  if (vlaModelIds.length !== 6
-    || !vlaModelIds.includes('t-rex')
+  const expectedTactileVlaIds = ['vitar', 'retouch', 'tau-touch-augmented-vla', 'unitacvla', 't-rex', 'vla-touch'];
+  if (vlaModelIds.length !== 11
+    || expectedTactileVlaIds.some((id) => !vlaModelIds.includes(id))
     || vlaModelList?.['@type'] !== 'ItemList'
     || vlaModelList?.numberOfItems !== vlaModelIds.length
     || listedVlaModelIds.length !== vlaModelIds.length
     || new Set(listedVlaModelIds).size !== vlaModelIds.length
     || [...expectedVlaModelIds].some((id) => !listedVlaModelIds.includes(id))) {
     failures.push('/robot-vla-models: VLA ItemList count or canonical entity references are invalid');
+  }
+  const tactileVlaList = vlaModelJsonLdNodes.find((node) => node?.['@id'] === canonicalFor('/robot-vla-models#tactile-vla-integration-index'));
+  const listedTactileVlaIds = Array.isArray(tactileVlaList?.itemListElement)
+    ? tactileVlaList.itemListElement.map((entry) => entry.item?.['@id'])
+    : [];
+  if (tactileVlaList?.['@type'] !== 'ItemList'
+    || tactileVlaList?.numberOfItems !== expectedTactileVlaIds.length
+    || listedTactileVlaIds.length !== expectedTactileVlaIds.length
+    || new Set(listedTactileVlaIds).size !== expectedTactileVlaIds.length
+    || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+    failures.push('/robot-vla-models: tactile VLA mechanism ItemList is invalid');
   }
   if (vlaModelJsonLdNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
     failures.push('/robot-vla-models: duplicates CreativeWork ownership from the model directory');
@@ -502,6 +514,14 @@ if (failures.length === 0) {
     if (!vlaModelHtml.includes(`id="vla-model-${id}"`)) failures.push(`/robot-vla-models: missing visible anchor for ${id}`);
     if (!vlaModelHtml.includes(canonicalFor(`/robot-foundation-models#model-${id}`))) failures.push(`/robot-vla-models: missing canonical model reference for ${id}`);
     if (!vlaModelHtml.includes(`href="/robot-foundation-models#model-${id}"`)) failures.push(`/robot-vla-models: missing visible canonical-model link for ${id}`);
+  }
+  for (const id of expectedTactileVlaIds) {
+    if (!vlaModelHtml.includes(`data-tactile-vla-record="${id}"`)) failures.push(`/robot-vla-models: missing tactile mechanism row for ${id}`);
+  }
+  if (!vlaModelHtml.includes('cross-paper rank scores')
+    || !vlaModelHtml.includes('not a full-completion rate')
+    || !vlaModelHtml.includes('does not print an aggregate mean')) {
+    failures.push('/robot-vla-models: tactile metric boundaries are missing');
   }
   const trexVlaRow = vlaModelHtml.match(/data-vla-model-record="t-rex"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? '';
   if (!trexVlaRow.includes('5,464 episodes')

@@ -27,11 +27,24 @@ test('research organizations keep normalized university and lab identities separ
     'panasonic',
     'sapienza-university-of-rome',
     'italai-labs',
+    'beijing-institute-of-technology',
+    'university-of-science-and-technology-of-china',
+    'iflytek',
+    'the-chinese-university-of-hong-kong',
+    'beijing-jiaotong-university',
+    'beijing-institute-for-general-artificial-intelligence',
+    'harbin-institute-of-technology',
+    'great-bay-university',
+    'shanghai-jiao-tong-university',
+    'fudan-university',
+    'nanjing-university',
+    'daimon-robotics',
+    'national-university-of-singapore',
   ]) {
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 44);
+  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 57);
   assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
   assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
   assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);

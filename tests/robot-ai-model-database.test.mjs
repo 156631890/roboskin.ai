@@ -15,6 +15,9 @@ const trustedPrimarySourceHosts = new Set([
   'deepmind.google',
   'github.com',
   'huggingface.co',
+  'icr-lab.github.io',
+  'cocacola-lab.github.io',
+  'jxbi1010.github.io',
   'octo-models.github.io',
   'openvla.github.io',
   'phanes-lab.github.io',
@@ -27,7 +30,7 @@ const trustedPrimarySourceHosts = new Set([
 
 test('robot AI model records are unique, typed, dated, and evidence bounded', () => {
   assert.ok(robotAiModelEntries.length >= 8, 'database must start with at least eight verified models');
-  assert.ok(robotAiModelEntries.length <= 14, 'directory should remain curated rather than bulk generated');
+  assert.ok(robotAiModelEntries.length <= 20, 'directory should remain curated rather than bulk generated');
 
   const ids = robotAiModelEntries.map((entry) => entry.id);
   assert.equal(new Set(ids).size, ids.length, 'model IDs must be unique');
@@ -145,7 +148,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { tactileInput: 'yes' }).map((entry) => entry.id).sort(),
-    ['adept', 'dream-tac', 'sparsh', 't-rex', 'tac4loco', 'touchworld'],
+    ['adept', 'dream-tac', 'retouch', 'sparsh', 't-rex', 'tac4loco', 'tau-touch-augmented-vla', 'touchworld', 'unitacvla', 'vitar', 'vla-touch'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'franka duo' }).map((entry) => entry.id),
@@ -157,11 +160,11 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'MIT' }).map((entry) => entry.id).sort(),
-    ['octo', 'openvla-7b', 't-rex'],
+    ['octo', 'openvla-7b', 't-rex', 'vla-touch'],
     'evidence search must include license text',
   );
   assert.deepEqual(
-    filterRobotAiModels(robotAiModelEntries, { query: 'π0' }).map((entry) => entry.id),
+    filterRobotAiModels(robotAiModelEntries, { query: 'π0 (Pi Zero)' }).map((entry) => entry.id),
     ['pi0'],
     'short Unicode model names must remain directly searchable',
   );

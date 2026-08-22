@@ -483,14 +483,28 @@ const listedVlaModelIds = Array.isArray(vlaModelDirectory?.itemListElement)
   ? vlaModelDirectory.itemListElement.map((entry) => entry.item?.['@id'])
   : [];
 const expectedVlaModelIds = new Set(graphVlaModels.map((entry) => entry.canonicalUrl));
-if (vlaModelIds.length !== 6
-  || !vlaModelIds.includes('t-rex')
+const expectedTactileVlaIds = ['vitar', 'retouch', 'tau-touch-augmented-vla', 'unitacvla', 't-rex', 'vla-touch'];
+if (vlaModelIds.length !== 11
+  || expectedTactileVlaIds.some((id) => !vlaModelIds.includes(id))
   || vlaModelDirectory?.['@type'] !== 'ItemList'
   || vlaModelDirectory?.numberOfItems !== vlaModelIds.length
   || listedVlaModelIds.length !== vlaModelIds.length
   || new Set(listedVlaModelIds).size !== vlaModelIds.length
   || [...expectedVlaModelIds].some((id) => !listedVlaModelIds.includes(id))) {
   throw new Error('/robot-vla-models ItemList count or canonical entity references are invalid');
+}
+const tactileVlaDirectories = vlaModelSchemaNodes.filter((node) => node?.['@id'] === canonicalFor('/robot-vla-models#tactile-vla-integration-index'));
+if (tactileVlaDirectories.length !== 1) throw new Error('/robot-vla-models must contain exactly one tactile VLA mechanism ItemList');
+const [tactileVlaDirectory] = tactileVlaDirectories;
+const listedTactileVlaIds = Array.isArray(tactileVlaDirectory?.itemListElement)
+  ? tactileVlaDirectory.itemListElement.map((entry) => entry.item?.['@id'])
+  : [];
+if (tactileVlaDirectory?.['@type'] !== 'ItemList'
+  || tactileVlaDirectory?.numberOfItems !== expectedTactileVlaIds.length
+  || listedTactileVlaIds.length !== expectedTactileVlaIds.length
+  || new Set(listedTactileVlaIds).size !== expectedTactileVlaIds.length
+  || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+  throw new Error('/robot-vla-models tactile VLA mechanism ItemList is invalid');
 }
 if (vlaModelSchemaNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
   throw new Error('/robot-vla-models duplicates CreativeWork ownership from the model directory');
@@ -503,6 +517,14 @@ for (const id of vlaModelIds) {
   if (!vlaModelsHtml.includes(`href="/robot-foundation-models#model-${id}"`)) {
     throw new Error(`/robot-vla-models is missing the visible canonical-model link for ${id}`);
   }
+}
+for (const id of expectedTactileVlaIds) {
+  if (!vlaModelsHtml.includes(`data-tactile-vla-record="${id}"`)) throw new Error(`/robot-vla-models is missing tactile mechanism row ${id}`);
+}
+if (!vlaModelsHtml.includes('cross-paper rank scores')
+  || !vlaModelsHtml.includes('not a full-completion rate')
+  || !vlaModelsHtml.includes('does not print an aggregate mean')) {
+  throw new Error('/robot-vla-models is missing tactile metric boundaries');
 }
 const trexVlaRow = vlaModelsHtml.match(/data-vla-model-record="t-rex"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? '';
 if (!trexVlaRow.includes('5,464 episodes')

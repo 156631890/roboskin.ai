@@ -3196,7 +3196,8 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Where tactile sensing fits',
         body: [
           'Most VLA descriptions start with images and instructions. Contact-rich tasks create a second timescale: visual planning may operate relatively slowly while slip, force, or local deformation can require faster feedback. A tactile pathway can enter the main policy, a specialized contact controller, a predicted future, or a high-frequency correction layer.',
-          'T-Rex and ReTouch are 2026 preprints that investigate tactile-reactive or tactile-predictive VLA designs for dexterous manipulation. Their source-reported results belong to their own robots, datasets, tasks, baselines, and evaluation settings; they are not universal VLA rankings.',
+          'The reviewed tactile systems now expose six materially different integration paths. T-Rex adds multi-rate tactile refinement; ReTouch recursively refreshes predicted touch and the remaining action suffix; τ uses future visual change to supervise tactile representations during training; UniTacVLA combines semantic touch reasoning, future-touch prediction, and residual correction; ViTaR restricts touch to bounded residual modulation around a frozen VLA; and VLA-Touch separates tactile-assisted planning from action interpolation.',
+          'Their source-reported results belong to different robots, datasets, trial units, scoring rules, baselines, and artifact states. The mechanism map below preserves those boundaries and deliberately publishes no cross-paper rank score.',
         ],
       },
       {
@@ -3214,7 +3215,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Current model ecosystem',
         body: [
-          'The source-reviewed index below currently separates Gemini Robotics 2, RT-2, OpenVLA 7B, π0, Isaac GR00T N1, and T-Rex. The first five document vision-language-action interfaces without live tactile input in the reviewed releases; T-Rex is the first indexed VLA with verified high-frequency tactile input, public checkpoints, code, and a public dataset subset.',
+          'The source-reviewed index below separates eleven VLA records. Gemini Robotics 2, RT-2, OpenVLA 7B, π0, and Isaac GR00T N1 do not document live tactile input in the reviewed releases. T-Rex, ViTaR, ReTouch, τ, UniTacVLA, and VLA-Touch do, but only T-Rex currently exposes a comparatively complete combination of public checkpoints, model code, inference code, and a downloadable tactile dataset subset.',
+          'Artifact labels are literal rather than promotional: ReTouch is paper-only; ViTaR and τ say code is coming; UniTacVLA remains a project-page placeholder; VLA-Touch exposes partial code, data, and controller checkpoints but still marks its modified RDT inference implementation for future release. A paper, repository shell, dataset, controller checkpoint, and complete reproducible policy are not treated as equivalent.',
           'RoboSkin.ai does not treat those official descriptions as proof of equivalent capability. This page owns the VLA and action-policy role; the robot foundation-model directory owns broad pretraining, transfer, access, and evidence comparisons, while tactile foundation-model, world-model, dataset, benchmark, and manipulation pages hold narrower technical evidence.',
         ],
       },
@@ -3254,6 +3256,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'T-Rex official repository', href: 'https://github.com/ZhuoyangLiu2005/T-Rex' },
       { label: 'T-Rex public dataset subset', href: 'https://huggingface.co/datasets/zekaiwang/trex_dataset' },
       { label: 'ReTouch contact-rich manipulation preprint', href: 'https://arxiv.org/abs/2608.01824' },
+      { label: 'ViTaR bounded tactile residual adaptation preprint', href: 'https://arxiv.org/abs/2608.15816' },
+      { label: 'τ touch-augmented VLA preprint', href: 'https://arxiv.org/abs/2607.24485' },
+      { label: 'UniTacVLA tactile understanding and prediction preprint', href: 'https://arxiv.org/abs/2606.31723' },
+      { label: 'VLA-Touch official repository', href: 'https://github.com/jxbi1010/VLA-Touch' },
     ],
     paperBriefIds: ['t-rex-tactile-reactive-dexterous-manipulation-2026', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },

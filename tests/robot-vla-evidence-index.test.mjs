@@ -3,26 +3,68 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import { robotAiModelEntries } from '../src/lib/robot-ai-models.ts';
+import { tactileVlaEvidenceEntries } from '../src/lib/tactile-vla-evidence.ts';
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
-test('the curated VLA index includes one source-bounded tactile VLA without turning unlike models into a leaderboard', async () => {
+test('the curated VLA index separates six source-bounded tactile mechanisms without turning unlike models into a leaderboard', async () => {
   const vlaEntries = robotAiModelEntries.filter((entry) => entry.category === 'VLA');
   assert.deepEqual(
     vlaEntries.map((entry) => entry.id),
-    ['gemini-robotics-2', 'rt-2', 'openvla-7b', 'pi0', 'isaac-gr00t-n1', 't-rex'],
+    [
+      'gemini-robotics-2',
+      'rt-2',
+      'openvla-7b',
+      'pi0',
+      'isaac-gr00t-n1',
+      't-rex',
+      'vitar',
+      'retouch',
+      'tau-touch-augmented-vla',
+      'unitacvla',
+      'vla-touch',
+    ],
   );
 
   const tactileVlas = vlaEntries.filter((entry) => entry.tactileInput === 'yes');
-  assert.deepEqual(tactileVlas.map((entry) => entry.id), ['t-rex']);
+  assert.deepEqual(
+    tactileVlas.map((entry) => entry.id),
+    ['t-rex', 'vitar', 'retouch', 'tau-touch-augmented-vla', 'unitacvla', 'vla-touch'],
+  );
 
-  const trex = tactileVlas[0];
+  const trex = tactileVlas.find((entry) => entry.id === 't-rex');
+  assert.ok(trex);
   assert.match(trex.trainingDataSummary, /full 100-hour[\s\S]*5,464 episodes[\s\S]*approximately 50 hours/);
   assert.match(trex.evidenceLimitations, /not the complete 100-hour corpus/);
   assert.match(trex.availability, /pretrained and midtrained checkpoints/);
   assert.ok(trex.primarySources.some((source) => source.url === 'https://github.com/ZhuoyangLiu2005/T-Rex'));
   assert.ok(trex.primarySources.some((source) => source.url === 'https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6'));
+
+  assert.deepEqual(
+    tactileVlaEvidenceEntries.map((entry) => entry.modelId),
+    ['vitar', 'retouch', 'tau-touch-augmented-vla', 'unitacvla', 't-rex', 'vla-touch'],
+  );
+  assert.equal(new Set(tactileVlaEvidenceEntries.map((entry) => entry.integrationRole)).size, 6);
+  for (const evidence of tactileVlaEvidenceEntries) {
+    const model = tactileVlas.find((entry) => entry.id === evidence.modelId);
+    assert.ok(model, `${evidence.modelId} must reference a tactile VLA model`);
+    const modelSourceUrls = new Set(model.primarySources.map((source) => source.url));
+    assert.ok(
+      evidence.sourceUrls.every((url) => modelSourceUrls.has(url)),
+      `${evidence.modelId} mechanism sources must be registered on the canonical model`,
+    );
+  }
+  const retouch = tactileVlaEvidenceEntries.find((entry) => entry.modelId === 'retouch');
+  const tau = tactileVlaEvidenceEntries.find((entry) => entry.modelId === 'tau-touch-augmented-vla');
+  const unitac = tactileVlaEvidenceEntries.find((entry) => entry.modelId === 'unitacvla');
+  const vlaTouch = tactileVlaEvidenceEntries.find((entry) => entry.modelId === 'vla-touch');
+  assert.match(retouch?.metricDefinition ?? '', /normalized task score[\s\S]*not a full-completion rate/);
+  assert.match(retouch?.touchPath ?? '', /current tactile frame plus the preceding nine frames[\s\S]*ten-frame input window/);
+  assert.doesNotMatch(retouch?.touchPath ?? '', /ten-frame history/i);
+  assert.match(tau?.metricDefinition ?? '', /fixed variant[\s\S]*71\.25%/);
+  assert.match(unitac?.metricDefinition ?? '', /does not print an aggregate mean/);
+  assert.match(vlaTouch?.metricDefinition ?? '', /9\/20 Cup[\s\S]*12\/20 Wipe[\s\S]*7\/20 Peel/);
 });
 
 test('T-Rex model, public dataset subset, research platform, paper brief, and graph relations retain one evidence boundary', async () => {
@@ -59,16 +101,21 @@ test('the VLA page is a server-rendered topical index that references canonical 
   ]);
 
   assert.match(route, /robotAiModelEntries\.filter\(\(entry\) => entry\.category === 'VLA'\)/);
-  assert.match(route, /buildVlaModelIndexJsonLd\(vlaModelEntries\)/);
-  assert.match(route, /<VlaModelIndex entries=\{vlaModelEntries\}/);
+  assert.match(route, /buildVlaModelIndexJsonLd\(vlaModelEntries, tactileVlaEvidenceEntries\)/);
+  assert.match(route, /<VlaModelIndex entries=\{vlaModelEntries\} tactileEvidence=\{tactileVlaEvidenceEntries\}/);
   assert.doesNotMatch(component, /^'use client';/);
   assert.match(component, /id=\{`vla-model-\$\{entry\.id\}`\}/);
   assert.match(component, /data-vla-model-record=\{entry\.id\}/);
+  assert.match(component, /data-tactile-vla-record=\{evidence\.modelId\}/);
+  assert.match(component, /id="tactile-vla-integration-index"/);
+  assert.match(component, /cross-paper rank scores/);
   assert.match(component, /\/robot-foundation-models#model-\$\{entry\.id\}/);
   assert.match(component, /Training \/ data:[\s\S]*?entry\.trainingDataSummary/);
   assert.match(component, /entry\.primarySources\.map/);
   assert.match(schema, /'@type': 'ItemList'/);
   assert.match(schema, /#vla-model-index/);
+  assert.match(schema, /#tactile-vla-integration-index/);
+  assert.match(schema, /#tactile-vla-\$\{entry\.modelId\}/);
   assert.match(schema, /#model-\$\{entry\.id\}/);
   assert.match(schema, /name: 'Vision-language-action model'/);
   assert.doesNotMatch(schema, /CreativeWork/);

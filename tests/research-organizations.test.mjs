@@ -21,6 +21,19 @@ test('organization records preserve the original twelve identities and extend th
     'nvidia',
     'meta-fundamental-ai-research',
     'university-of-washington',
+    'beijing-institute-of-technology',
+    'university-of-science-and-technology-of-china',
+    'iflytek',
+    'the-chinese-university-of-hong-kong',
+    'beijing-jiaotong-university',
+    'beijing-institute-for-general-artificial-intelligence',
+    'harbin-institute-of-technology',
+    'great-bay-university',
+    'shanghai-jiao-tong-university',
+    'fudan-university',
+    'nanjing-university',
+    'daimon-robotics',
+    'national-university-of-singapore',
   ]) {
     assert.match(source, new RegExp(`id: '${id}'`));
   }
@@ -46,6 +59,11 @@ test('model-organization relations preserve evidence strength and primary-source
   assert.match(source, /modelId: 'octo'[\s\S]*?relation: 'contributedBy'/);
   assert.match(source, /modelId: 'palm-e'[\s\S]*?relation: 'coDevelopedBy'/);
   assert.match(source, /modelId: 'isaac-gr00t-n1'[\s\S]*?relation: 'developedBy'/);
+  assert.match(source, /modelId: 'vitar'[\s\S]*?relation: 'contributedBy'/);
+  assert.match(source, /modelId: 'retouch'[\s\S]*?relation: 'contributedBy'/);
+  assert.match(source, /modelId: 'tau-touch-augmented-vla'[\s\S]*?relation: 'contributedBy'/);
+  assert.match(source, /modelId: 'unitacvla'[\s\S]*?relation: 'contributedBy'/);
+  assert.match(source, /modelId: 'vla-touch'[\s\S]*?relation: 'contributedBy'/);
   assert.doesNotMatch(source, /modelId: 'dream-tac'/);
 });
 

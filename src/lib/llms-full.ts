@@ -23,6 +23,7 @@ import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robo
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
+import { tactileVlaEvidenceEntries } from '@/lib/tactile-vla-evidence';
 
 const canonicalUrl = (pathname: string) => new URL(pathname, site.url).href;
 const compact = (value: string) => value.replace(/\s+/g, ' ').trim();
@@ -52,6 +53,7 @@ function latestReviewedDate() {
     ...tactileSensorEntries.map((entry) => entry.sourceReviewed),
     ...robotAiModelEntries.map((entry) => entry.sourceReviewed),
     ...robotWorldModelEvidenceEntries.map((entry) => entry.sourceReviewed),
+    ...tactileVlaEvidenceEntries.map((entry) => entry.sourceReviewed),
     ...researchOrganizationEntries.map((entry) => entry.sourceReviewed),
     ...robotAiOrganizationRelations.map((entry) => entry.sourceReviewed),
     ...researchEntityRelations.map((entry) => entry.sourceReviewed),
@@ -544,6 +546,33 @@ export function buildLlmsFullText() {
       `  - Action output: ${compact(entry.outputType)}`,
       `  - Tactile input: ${entry.tactileInput}`,
       `  - Primary sources: ${entry.primarySources.map((source) => source.url).join('; ')}`,
+    );
+  }
+  lines.push('');
+
+  lines.push(
+    '### Tactile VLA Integration Evidence Map',
+    '',
+    `Mechanism map: ${canonicalUrl('/robot-vla-models#tactile-vla-integration-index')}`,
+    '',
+    'These records preserve source-specific mechanisms, evaluation units, metric definitions, and artifact boundaries. They are not a cross-paper leaderboard.',
+    '',
+  );
+  for (const evidence of tactileVlaEvidenceEntries) {
+    const model = robotAiModelEntries.find((entry) => entry.id === evidence.modelId);
+    if (!model) throw new Error(`LLM tactile VLA evidence references missing model ${evidence.modelId}.`);
+    lines.push(
+      `- ${model.name}`,
+      `  - Mechanism row: ${canonicalUrl(`/robot-vla-models#tactile-vla-${model.id}`)}`,
+      `  - Integration role: ${evidence.integrationRole}`,
+      `  - Touch pathway: ${compact(evidence.touchPath)}`,
+      `  - Action pathway: ${compact(evidence.actionPath)}`,
+      `  - Evaluation unit: ${compact(evidence.evaluationBoundary)}`,
+      `  - Metric definition: ${compact(evidence.metricDefinition)}`,
+      `  - Artifact boundary: ${compact(evidence.artifactBoundary)}`,
+      `  - Evidence limitation: ${compact(evidence.evidenceBoundary)}`,
+      `  - Primary sources: ${evidence.sourceUrls.join('; ')}`,
+      `  - Source reviewed: ${evidence.sourceReviewed}`,
     );
   }
   lines.push('');

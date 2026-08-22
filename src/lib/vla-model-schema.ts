@@ -1,7 +1,11 @@
 import { canonicalUrl } from '@/lib/seo';
 import type { RobotAiModelEntry } from '@/lib/robot-ai-models';
+import type { TactileVlaEvidenceEntry } from '@/lib/tactile-vla-evidence';
 
-export function buildVlaModelIndexJsonLd(entries: RobotAiModelEntry[]) {
+export function buildVlaModelIndexJsonLd(
+  entries: RobotAiModelEntry[],
+  tactileEvidence: TactileVlaEvidenceEntry[],
+) {
   if (entries.some((entry) => entry.category !== 'VLA')) {
     throw new Error('The VLA model index can only reference VLA records.');
   }
@@ -27,10 +31,29 @@ export function buildVlaModelIndexJsonLd(entries: RobotAiModelEntry[]) {
     })),
   };
 
+  const tactileIntegrationList = {
+    '@type': 'ItemList',
+    '@id': `${directoryUrl}#tactile-vla-integration-index`,
+    name: 'RoboSkin.ai Tactile VLA Integration Evidence Map',
+    description: 'A source-reviewed map of how tactile observations enter VLA planning, representation learning, future-state prediction, action generation, and feedback correction, without ranking unlike evaluation protocols.',
+    url: `${directoryUrl}#tactile-vla-integration-index`,
+    numberOfItems: tactileEvidence.length,
+    itemListOrder: 'https://schema.org/ItemListUnordered',
+    itemListElement: tactileEvidence.map((entry, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${directoryUrl}#tactile-vla-${entry.modelId}`,
+      item: {
+        '@id': `${modelDirectoryUrl}#model-${entry.modelId}`,
+      },
+    })),
+  };
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
       itemList,
+      tactileIntegrationList,
       {
         '@type': 'DefinedTerm',
         '@id': `${directoryUrl}#defined-term`,
