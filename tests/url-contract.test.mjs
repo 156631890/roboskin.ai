@@ -230,18 +230,18 @@ test('the production snapshot preserves redirect sources instead of shrinking th
 
 test('www root and deep paths have explicit permanent redirects', async () => {
   const vercel = JSON.parse(await read('vercel.json'));
-  const redirects = vercel.redirects;
+  const redirects = vercel.routes;
 
   assert.ok(redirects.some((rule) =>
-    rule.source === '/' &&
-    rule.destination === 'https://roboskin.ai' &&
-    rule.permanent === true &&
+    rule.src === '^/$' &&
+    rule.headers?.Location === 'https://roboskin.ai' &&
+    rule.status === 308 &&
     rule.has?.some((condition) => condition.type === 'host' && condition.value === 'www.roboskin.ai')
   ));
   assert.ok(redirects.some((rule) =>
-    rule.source === '/:path*' &&
-    rule.destination === 'https://roboskin.ai/:path*' &&
-    rule.permanent === true
+    rule.src === '^/(.*)$' &&
+    rule.headers?.Location === 'https://roboskin.ai/$1' &&
+    rule.status === 308
   ));
 });
 

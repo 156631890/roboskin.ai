@@ -60,7 +60,11 @@ test('Google News sitemap includes only recent news and apex URLs', async () => 
   assert.match(route, /recentPosts\.length === 0 && newsPosts\[0\]/);
   assert.match(route, /fallbackEntry/);
   assert.match(crawlerRobots, /https:\/\/roboskin\.ai\/news-sitemap\.xml/);
-  assert.match(vercel, /"source": "\/news-sitemap\.xml"/);
+  const vercelConfig = JSON.parse(vercel);
+  assert.ok(vercelConfig.routes?.some((rule) =>
+    rule.src === '/news-sitemap\\.xml' &&
+    rule.headers?.['Content-Type'] === 'application/xml; charset=utf-8'
+  ));
   assert.match(layout, /@vercel\/analytics\/next/);
   assert.match(layout, /<Analytics \/>/);
   assert.match(packageJson, /"@vercel\/analytics"/);
@@ -188,12 +192,9 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(workflow, /node-version: "22"/);
   assert.match(vercel, /"deploymentEnabled": true/);
   const vercelConfig = JSON.parse(vercel);
-  assert.ok(vercelConfig.headers?.some((rule) =>
-    rule.source === '/feed.xml' &&
-    rule.headers?.some((header) =>
-      header.key.toLowerCase() === 'content-type' &&
-      header.value === 'application/rss+xml; charset=utf-8'
-    )
+  assert.ok(vercelConfig.routes?.some((rule) =>
+    rule.src === '/feed\\.xml' &&
+    rule.headers?.['Content-Type'] === 'application/rss+xml; charset=utf-8'
   ));
   assert.match(packageJson, /"node": "22\.x"/);
   for (const day of ['Day 0', 'Day 7', 'Day 28', 'Day 90']) {

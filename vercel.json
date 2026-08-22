@@ -3,27 +3,124 @@
   "git": {
     "deploymentEnabled": true
   },
-  "headers": [
+  "buildCommand": "npm run build",
+  "routes": [
     {
-      "source": "/feed.xml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/rss+xml; charset=utf-8"
-        }
-      ]
+      "src": "/physics-ai",
+      "status": 301,
+      "headers": {
+        "Location": "https://roboskin.ai/physical-ai"
+      }
     },
     {
-      "source": "/news-sitemap.xml",
-      "headers": [
+      "src": "/applications/humanoid-robot-skin",
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/humanoid-robot-skin"
+      }
+    },
+    {
+      "src": "/guides/tactile-foundation-models",
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/tactile-foundation-models"
+      }
+    },
+    {
+      "src": "/guides/tactile-datasets-robot-learning",
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/datasets"
+      }
+    },
+    {
+      "src": "/guides/physical-ai-touch-data",
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/physical-ai-touch"
+      }
+    },
+    {
+      "src": "^/$",
+      "has": [
         {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
+          "type": "host",
+          "value": "www.roboskin.ai"
         }
-      ]
-    }
-  ],
-  "routes": [
+      ],
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai"
+      }
+    },
+    {
+      "src": "^/(.*)$",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.roboskin.ai"
+        }
+      ],
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/$1"
+      }
+    },
+    {
+      "src": "/feed\\.xml",
+      "headers": {
+        "Content-Type": "application/rss+xml; charset=utf-8"
+      },
+      "continue": true
+    },
+    {
+      "src": "/news-sitemap\\.xml",
+      "headers": {
+        "Content-Type": "application/xml; charset=utf-8"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/(?:$|(?!_next/|_vercel/|api/|_agent-markdown/)(?!.*\\.[^/]+$).*)$",
+      "headers": {
+        "Vary": "Accept, Accept-Encoding"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/$",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "^\\s*text/markdown(?:\\s*;\\s*q=(?:1(?:\\.0+)?|0?\\.(?:\\d*[1-9]\\d*)))?(?:\\s*,.*)?$"
+        }
+      ],
+      "dest": "/_agent-markdown/index.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept, Accept-Encoding",
+        "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
+      "src": "^/((?!_next/|_vercel/|api/|_agent-markdown/)(?!.*\\.[^/]+$).+?)/?$",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "^\\s*text/markdown(?:\\s*;\\s*q=(?:1(?:\\.0+)?|0?\\.(?:\\d*[1-9]\\d*)))?(?:\\s*,.*)?$"
+        }
+      ],
+      "dest": "/_agent-markdown/$1.md",
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept, Accept-Encoding",
+        "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
     {
       "src": "/robots\\.txt",
       "dest": "/crawler-robots.txt",
@@ -37,55 +134,6 @@
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "public, max-age=3600"
       }
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/physics-ai",
-      "destination": "https://roboskin.ai/physical-ai",
-      "statusCode": 301
-    },
-    {
-      "source": "/applications/humanoid-robot-skin",
-      "destination": "https://roboskin.ai/humanoid-robot-skin",
-      "permanent": true
-    },
-    {
-      "source": "/guides/tactile-foundation-models",
-      "destination": "https://roboskin.ai/tactile-foundation-models",
-      "permanent": true
-    },
-    {
-      "source": "/guides/tactile-datasets-robot-learning",
-      "destination": "https://roboskin.ai/datasets",
-      "permanent": true
-    },
-    {
-      "source": "/guides/physical-ai-touch-data",
-      "destination": "https://roboskin.ai/physical-ai-touch",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.roboskin.ai"
-        }
-      ],
-      "destination": "https://roboskin.ai",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.roboskin.ai"
-        }
-      ],
-      "destination": "https://roboskin.ai/:path*",
-      "permanent": true
     }
   ]
 }

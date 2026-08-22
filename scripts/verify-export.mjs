@@ -128,6 +128,30 @@ for (const file of ['crawler-robots.txt', 'sitemap.xml', 'news-sitemap.xml', 're
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
 
+for (const [pathname, relativeMarkdown] of [
+  ['/', 'index.md'],
+  ['/robot-skin', 'robot-skin.md'],
+  ['/tactile-ai', 'tactile-ai.md'],
+  ['/physical-ai', 'physical-ai.md'],
+  ['/research-index', 'research-index.md'],
+  ['/404', '404.md'],
+]) {
+  const markdownPath = path.join(out, '_agent-markdown', relativeMarkdown);
+  if (!(await exists(markdownPath))) {
+    failures.push(`${pathname}: missing agent Markdown representation`);
+    continue;
+  }
+  const markdown = await readFile(markdownPath, 'utf8');
+  if (pathname === '/404') {
+    if (!markdown.startsWith('Status: 404 Not Found') || !markdown.includes('/sitemap.xml') || !markdown.includes('/llms.txt')) {
+      failures.push('/404: incomplete agent recovery Markdown');
+    }
+  } else if (!markdown.startsWith(`Canonical URL: ${canonicalFor(pathname)}`) || !/^#\s+\S/m.test(markdown)) {
+    failures.push(`${pathname}: invalid agent Markdown identity or heading`);
+  }
+  if (/<script\b|__next_f|self\.__next_f/i.test(markdown)) failures.push(`${pathname}: agent Markdown leaks framework payloads`);
+}
+
 const crawlerRobotsRoute = vercelConfig.routes?.find((route) => route.src === '/robots\\.txt');
 if (crawlerRobotsRoute?.dest !== '/crawler-robots.txt'
   || !crawlerRobotsRoute.missing?.some((condition) => condition.type === 'header' && condition.key.toLowerCase() === 'rsc')

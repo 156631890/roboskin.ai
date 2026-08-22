@@ -139,7 +139,7 @@ test('RoboSkin keeps Physical AI canonical on physical-ai and redirects the lega
 
   assert.ok(appRoutes.includes('physical-ai'));
   assert.match(`${seo}\n${site}\n${llms}`, /\/physical-ai/);
-  assert.match(redirects, /"source": "\/physics-ai"[\s\S]*"destination": "https:\/\/roboskin\.ai\/physical-ai"[\s\S]*"statusCode": 301/);
+  assert.match(redirects, /"src": "\/physics-ai"[\s\S]*"status": 301[\s\S]*"Location": "https:\/\/roboskin\.ai\/physical-ai"/);
   assert.doesNotMatch(`${seo}\n${site}\n${llms}`, /['"]Physics AI['"]/);
 });
 

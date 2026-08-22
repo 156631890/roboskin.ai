@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/generate-agent-markdown.mjs",
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/*.test.mjs",
@@ -15,6 +16,7 @@
     "research:watch": "node scripts/daily-research-watch.mjs",
     "indexnow:configure": "node scripts/configure-indexnow.mjs",
     "indexnow:submit": "node scripts/submit-indexnow.mjs",
+    "generate:agent-markdown": "node scripts/generate-agent-markdown.mjs",
     "generate:images": "node scripts/generate-site-images.mjs"
   },
   "dependencies": {
@@ -31,6 +33,8 @@
     "eslint": "^9",
     "eslint-config-next": "^15.5.20",
     "tailwindcss": "^4",
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2",
     "typescript": "^5"
   }
 }

@@ -96,12 +96,11 @@ test('Physical AI has one broad canonical URL and a separate touch child route',
   assert.match(llms, /\[Physical AI canonical answer\]\(https:\/\/roboskin\.ai\/physical-ai\)/);
   assert.match(llms, /\[Physical AI and touch\]\(https:\/\/roboskin\.ai\/physical-ai-touch\): Contact-specific/);
 
-  const redirects = JSON.parse(vercel).redirects;
+  const redirects = JSON.parse(vercel).routes;
   assert.ok(redirects.some((entry) =>
-    entry.source === '/physics-ai' &&
-    entry.destination === 'https://roboskin.ai/physical-ai' &&
-    entry.statusCode === 301 &&
-    !('permanent' in entry)
+    entry.src === '/physics-ai' &&
+    entry.headers?.Location === 'https://roboskin.ai/physical-ai' &&
+    entry.status === 301
   ));
   assert.deepEqual(JSON.parse(protectedRedirects)['/physics-ai'], '/physical-ai');
   assert.ok(JSON.parse(protectedUrls).includes('https://roboskin.ai/physical-ai'));

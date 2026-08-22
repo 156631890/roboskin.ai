@@ -130,10 +130,15 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(keywordQueryMatrix, /https:\/\/roboskin\.ai\/physical-ai-touch/);
 
   assert.match(seo, /return `\$\{site\.url\}\$\{path === '\/' \? '\/' : path\}`/);
-  assert.match(vercelConfig, /"type": "host"/);
-  assert.match(vercelConfig, /"value": "www\.roboskin\.ai"/);
-  assert.match(vercelConfig, /"destination": "https:\/\/roboskin\.ai\/:path\*"/);
-  assert.match(vercelConfig, /"permanent": true/);
+  const parsedVercelConfig = JSON.parse(vercelConfig);
+  assert.ok(parsedVercelConfig.routes?.some((rule) =>
+    rule.src === '^/(.*)$' &&
+    rule.has?.some((condition) =>
+      condition.type === 'host' && condition.value === 'www.roboskin.ai'
+    ) &&
+    rule.status === 308 &&
+    rule.headers?.Location === 'https://roboskin.ai/$1'
+  ));
 
   assert.match(searchConsoleMonitoring, /physical ai robot skin/i);
   assert.match(searchConsoleMonitoring, /physical ai tactile feedback/i);

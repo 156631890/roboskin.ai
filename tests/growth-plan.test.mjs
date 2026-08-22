@@ -51,7 +51,9 @@ test('the five priority pillars have canonical static routes and legacy redirect
   }
 
   assert.equal(routeFiles.length, priorityRoutes.length);
-  const redirectMap = Object.fromEntries(JSON.parse(redirects).redirects.map((entry) => [entry.source, entry.destination]));
+  const redirectMap = Object.fromEntries(JSON.parse(redirects).routes
+    .filter((entry) => entry.status && entry.headers?.Location)
+    .map((entry) => [entry.src, entry.headers.Location]));
   assert.equal(redirectMap['/guides/tactile-foundation-models'], 'https://roboskin.ai/tactile-foundation-models');
   assert.equal(redirectMap['/guides/tactile-datasets-robot-learning'], 'https://roboskin.ai/datasets');
   assert.match(protectedRedirects, /"\/applications\/humanoid-robot-skin": "\/humanoid-robot-skin"/);

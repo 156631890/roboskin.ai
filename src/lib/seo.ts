@@ -389,6 +389,23 @@ export function buildOrganizationJsonLd() {
     url: site.url,
     email: site.contact.primaryEmail,
     description: site.description,
+    disambiguatingDescription:
+      'RoboSkin.ai is an independent robot-skin, tactile-AI, and Physical-AI research intelligence platform. It is not affiliated with the former EU FP7 ROBOSKIN consortium or similarly named products unless a cited page states otherwise.',
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'domain',
+      value: 'roboskin.ai',
+      url: site.url,
+    },
+    publishingPrinciples: canonicalUrl('/editorial-policy'),
+    knowsAbout: [
+      'Robot skin',
+      'Tactile AI',
+      'Tactile sensing',
+      'Humanoid robotics',
+      'Robot manipulation',
+      'Physical AI',
+    ],
     founder: {
       '@id': `${canonicalUrl('/about')}#steven-yang`,
     },
