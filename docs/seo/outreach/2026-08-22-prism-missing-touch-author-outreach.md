@@ -3,9 +3,9 @@
 ## State
 
 - Both evidence-bounded RoboSkin records are live from production commit `c89183c760037f32b16bb7d7d4fee16c04b94e81`.
-- Two Gmail drafts were created and rechecked under the `DRAFT` label on 2026-08-22.
-- Neither message has been sent. No `contacted` row has been added to `outreach-log.csv`, no follow-up date is active, and neither draft counts as a backlink.
-- If the drafts are approved and sent on 2026-08-22, the one permitted follow-up date is 2026-09-08, ten business days later. Recalculate that date if they are sent later.
+- Both messages were sent individually from the authenticated RoboSkin contact account under the Steven Yang signature on 2026-08-22 and were confirmed in Gmail Sent Mail.
+- `R21` and `R22` are recorded in `outreach-log.csv` as awaiting response. The one permitted follow-up date is 2026-09-08.
+- Neither sent message counts as a backlink. Count a result only after a crawlable third-party page publishes an editorial RoboSkin link.
 
 ## R21 — PRISM
 
@@ -27,7 +27,7 @@
 - The arXiv abstract describes the dataset as open-sourced, while the [official project page](https://tengbo-yu.github.io/PRISM/) still labels its Dataset control `soon`. The [official GitHub repository](https://github.com/Tengbo-Yu/PRISM) exposed no dataset files or dataset-file license when checked on 2026-08-22.
 - RoboSkin records the release as announced and download pending until an official host exposes the files and reuse terms.
 
-### Saved Gmail draft
+### Sent Gmail message
 
 Subject: `PRISM dataset record — factual review and release-status clarification`
 
@@ -54,7 +54,7 @@ The message links the live record, lists the four boundaries above, asks for cor
 - The abstract's 29–79% range concerns study-specific dynamic-time-warping comparisons of deviation between teleoperated and natural trajectories.
 - The paper did not train or evaluate an autonomous policy. The range must not be presented as an autonomous-policy, robot-dexterity, throughput, or universal manipulation gain.
 
-### Saved Gmail draft
+### Sent Gmail message
 
 Subject: `The Missing Touch technical record — factual review invitation`
 
@@ -70,12 +70,12 @@ The message links the live record, asks the authors to check the hardware, parti
 
 If the PRISM authors confirm the analysis and welcome a resource entry, offer a minimal one-line pull request to the official project-page repository. Do not open an unsolicited link-only pull request or try to bypass the repository's restricted Issue route. A Peking University research-news placement should be proposed by the authors through their institutional channel rather than pitched to an unrelated feedback mailbox.
 
-## Send and logging gate
+## Send and logging record
 
-Before sending either draft:
+Completed on 2026-08-22:
 
-1. Open the saved Gmail draft and manually review the exact recipients, subject, facts, links, and signature.
-2. Send each message individually; do not merge the two teams into a bulk campaign.
-3. Confirm the message appears in Gmail Sent Mail.
-4. Only then append `R21` or `R22` to `outreach-log.csv` with status `awaiting response` and the actual send date.
-5. Follow up once after ten business days only if there is no response. A reply, sent message, or draft remains outreach activity; count a result only after a third-party page publishes a crawlable editorial link.
+1. Reviewed the exact recipients, subjects, research facts, links, evidence boundaries, and Steven Yang signature.
+2. Sent each message individually rather than combining the two research teams.
+3. Confirmed both messages under the Gmail `SENT` label and confirmed that neither matching draft remained.
+4. Added `R21` and `R22` to `outreach-log.csv` with status `awaiting response` and follow-up date 2026-09-08.
+5. Follow up once on or after 2026-09-08 only if there is no response. A reply or sent message remains outreach activity; count a result only after a third-party page publishes a crawlable editorial link.

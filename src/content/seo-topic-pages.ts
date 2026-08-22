@@ -2145,7 +2145,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     description:
       'Compare tactile datasets for robot learning by signals, collection unit, split design, task fit, access evidence, and transfer limits.',
     h1: 'Tactile datasets for robot learning',
-    kicker: '14-record dataset directory',
+    kicker: '15-record dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
     updated: '2026-08-22',

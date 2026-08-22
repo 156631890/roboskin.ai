@@ -81,7 +81,7 @@ test('new paper entities remain primary-source bounded and enter the structured 
 
   assert.match(posts, /will be open-sourced soon/i);
   assert.match(posts, /preprint/i);
-  assert.match(index, /does not establish current download access or a dataset license/);
+  assert.match(index, /no official package, repository, public file format, or dataset license was verified/);
   assert.match(posts, /\| EgoScale \| 35% \|/);
   assert.match(posts, /\| T-Rex \| 65% \|/);
   assert.match(posts, /\+30 percentage points/);

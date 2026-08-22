@@ -527,17 +527,17 @@ The result also does not isolate one causal factor by itself. Dataset collection
   },
   {
     id: 'robotacdex-humanoid-visual-tactile-action-dataset-2026',
-    title: 'RoboTacDex maps a 6,000-trajectory humanoid visual-tactile dataset',
+    title: 'RoboTacDex maps 6,000+ humanoid visual-tactile trajectories',
     seoTitle: 'RoboTacDex Humanoid Visual-Tactile-Action Dataset',
     seoDescription:
-      'RoboTacDex reports 6,000 Unitree G1 trajectories across 19 tasks, 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.',
+      'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.',
     excerpt:
-      'RoboTacDex reports 6,000 Unitree G1 trajectories across 19 tasks, 23 skills, and 22 objects, but public dataset access remains pending.',
-    content: `# RoboTacDex maps a 6,000-trajectory humanoid visual-tactile dataset
+      'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects, but public dataset access remains pending.',
+    content: `# RoboTacDex maps 6,000+ humanoid visual-tactile trajectories
 
-**Evidence review - August 2026**
+**Evidence review - August 22, 2026**
 
-RoboTacDex is a June 30, 2026 arXiv preprint describing a multimodal dataset for dexterous humanoid manipulation. The source reports 6,000 trajectories collected with a Unitree G1, covering 19 tasks, 23 skills, and interactions with 22 objects. Records include multi-view RGB, depth, tactile feedback, and semantic annotations.
+RoboTacDex is a June 30, 2026 arXiv v1 preprint describing a multimodal dataset for dexterous humanoid manipulation. The source reports more than 6,000 physical Unitree G1 trajectories totaling approximately 25 hours, covering 19 tasks, an author-reported 23 skills, and 22 objects. Records include four-view RGB and depth, bilateral tactile feedback, robot states and actions, and semantic annotations.
 
 The abstract says the dataset will be open-sourced soon. That is an announced intention, not evidence that files, a license, or a stable download endpoint are currently available.
 
@@ -545,18 +545,31 @@ The abstract says the dataset will be open-sourced soon. That is an announced in
 
 | Field | Source-reported value | What still needs verification for reuse |
 | --- | --- | --- |
-| Robot | Unitree G1 humanoid | Exact hardware configuration, hands, firmware, and control interface |
-| Scale | 6,000 trajectories | Duration distribution, successful and failed trajectories, and split policy |
-| Coverage | 19 tasks and 23 skills | Task definitions, repetition balance, and held-out combinations |
+| Robot | Unitree G1 with fixed waist and lower body, dual arms totaling 14 DoF, and two BrainCo Revo2 Tactile hands totaling 12 hand DoF as counted by the paper | Firmware, calibration files, and exact control interface in the future public package |
+| Scale | More than 6,000 trajectories; approximately 25 hours | Successful and failed trajectory inventory, per-task balance, and split policy |
+| Coverage | 19 tasks and an author-reported 23 skills; Figure 4 exposes 22 discernible atomic-skill labels | Reconcile the paper's internal skill-count discrepancy, then inspect task definitions, repetition balance, and held-out combinations |
 | Objects | 22 objects | Object identities, properties, and train-test separation |
-| Modalities | Multi-view RGB, depth, tactile feedback, semantic annotations | Sensor models, rates, calibration, timestamp schema, and file format |
+| Cameras | Four 640 x 480 RGB-D views: head, two wrists, and third person; the paper names the head and third-person cameras as RealSense D435i | Wrist-camera model, intrinsics, extrinsics, and calibration package |
+| Touch | Fingertip normal force, tangential force and direction, plus self-capacitance proximity from both BrainCo hands | Sensor calibration, range, resolution, drift, and missing-value policy |
+| State and action | Arm and finger joint states and actions | Exact field names, units, coordinate frames, and limits |
+| Timing | Trajectories recorded at 30 Hz; hand tactile and joint-state messages published over DDS at 100 Hz and recorded locally at 30 Hz | Released timestamps, dropped-frame records, and independently auditable synchronization error |
 | Access | Authors state it will be open-sourced soon | Official repository, downloadable files, version, checksum, and license |
 
-The paper describes tasks that require dual arms and dexterous hands, with the aim of representing human-like operational logic and real-world manipulation complexity. The authors also report an improved multi-camera synchronization system intended to provide millisecond-level alignment across modalities. That synchronization claim belongs to the source and still requires implementation details and released timestamps for independent audit.
+The paper describes tasks that require dual arms and dexterous hands, with the aim of representing human-like operational logic and real-world manipulation complexity. The authors report hardware synchronization between the head and third-person RealSense D435i cameras plus software synchronization to the wrist cameras. Their millisecond-level synchronization statement remains source-reported until the timestamps and implementation are released for independent audit.
 
 ## What the evaluation shows
 
-The abstract says three representative imitation-learning models are evaluated on the dataset. It reports successful trials and moderate generalization across a suite of tasks, but the abstract does not provide one standardized benchmark score that can be safely compared with unrelated datasets.
+The paper evaluates ACT, Diffusion Policy, and GR00T N1.5 on four tasks, using the head image and joint state as the baseline observation and 10 physical trials for each method-task pair. These are author-reported outcomes on one setup, not independently reproduced scores.
+
+| Task | ACT | Diffusion Policy | GR00T N1.5 |
+| --- | ---: | ---: | ---: |
+| Pick and place a pear | 0/10 | 3/10 | 9/10 |
+| Turn a page | 6/10 | 5/10 | 6/10 |
+| Insert a book into a document bag | 4/10 | 3/10 | 4/10 |
+| Unscrew a bottle cap | 3/10 | 2/10 | 6/10 |
+| Paper-reported average | 3/10 | 3/10 | 6/10 |
+
+The tactile ablation is particularly important to interpret correctly. On the bottle-unscrewing task, the paper says adding tactile input did not improve the success rate; it changed the distribution of failure modes. That is evidence that tactile signals affected behavior in this protocol, not proof of a universal performance gain.
 
 RoboSkin therefore does not convert those statements into a leaderboard. A useful dataset assessment needs per-task criteria, exact train and test partitions, repeated trials, comparable policy budgets, and a record of which trajectories were available to each method.
 
@@ -574,7 +587,7 @@ The practical listing state for RoboTacDex is therefore announced, not verified 
 
 ## What this does not prove yet
 
-RoboTacDex is an arXiv v1 preprint and its headline scale is specific to one Unitree G1 collection. The dataset description does not establish transfer to other humanoids, robot hands, sensors, objects, environments, or control stacks. Six thousand trajectories do not by themselves guarantee balanced coverage, causal diversity, or leakage-free evaluation.
+RoboTacDex is an arXiv v1 preprint and its headline scale is specific to one fixed-lower-body Unitree G1 configuration. The dataset description does not establish transfer to whole-body locomotion, other humanoids, robot hands, sensors, objects, environments, or control stacks. More than 6,000 trajectories do not by themselves guarantee balanced coverage, causal diversity, or leakage-free evaluation.
 
 The phrase millisecond synchronization is an author claim about the collection system, not an independent measurement by RoboSkin. The paper's statement that the dataset will be open-sourced soon must not be rewritten as currently open, freely licensed, or ready to download.
 
@@ -593,8 +606,8 @@ The phrase millisecond synchronization is an author claim about the collection s
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '7 min read',
+    updated: '2026-08-22',
+    readTime: '9 min read',
     category: 'Tactile datasets',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
     sourceTitle: 'RoboTacDex humanoid visual-tactile-action dataset preprint',

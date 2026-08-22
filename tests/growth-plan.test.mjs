@@ -66,7 +66,7 @@ test('the tactile dataset hub is structured, filterable, source-bounded, and mac
     read('src/lib/seo.ts'),
   ]);
 
-  for (const id of ['ht-bench', 'rct', 'tactidex', 'freetacman', 'humanoid-vta', 'sparsh-x']) {
+  for (const id of ['robotacdex', 'ht-bench', 'rct', 'tactidex', 'freetacman', 'humanoid-vta', 'sparsh-x']) {
     assert.match(data, new RegExp(`id: '${id}'`));
   }
   for (const field of ['institution', 'robot', 'sensor', 'modalities', 'sampleCount', 'tasks', 'objectCategories', 'dataFormat', 'license', 'paperUrl', 'sourceReviewed']) {
