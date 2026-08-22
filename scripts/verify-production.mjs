@@ -506,7 +506,7 @@ const rssLinks = [...rss.matchAll(/<link>([^<]+)<\/link>/g)].map((match) => matc
 const rssGuids = [...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g)].map((match) => match[1]);
 const invalidRssUrls = [...rssLinks, ...rssGuids].filter((url) => new URL(url).origin !== canonicalOrigin);
 if (!rss.startsWith('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">') || !rss.endsWith('</rss>')) throw new Error('RSS has an invalid envelope');
-if (rssItems.length !== 49 || rssLinks.length !== 50 || rssGuids.length !== 49) throw new Error('RSS does not contain 49 complete items');
+if (rssItems.length !== 50 || rssLinks.length !== 51 || rssGuids.length !== 50) throw new Error('RSS does not contain 50 complete items');
 if (invalidRssUrls.length || /www\.roboskin\.ai|\.vercel\.app/.test(rss)) throw new Error('RSS contains a non-apex URL');
 if (!newsSitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?><urlset')) throw new Error('News sitemap has an invalid envelope');
 if (!newsSitemap.includes('xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"')) throw new Error('News sitemap is missing the Google News namespace');

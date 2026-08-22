@@ -439,6 +439,16 @@ const modelRelationPolicies: ModelRelationPolicy[] = [
     sourceReviewed: '2026-08-22',
   },
   {
+    modelId: 'adept',
+    relation: 'contributedBy',
+    evidenceUrls: [
+      'https://arxiv.org/abs/2608.19182',
+      'https://adept-dexterity.github.io/',
+    ],
+    evidenceBoundary: 'The primary paper and official project page list authors with NVIDIA and University of Michigan affiliations. This supports source-listed contributor relationships, not institutional ownership, funding, endorsement, exclusive development, or participation by either organization as a whole.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     modelId: 'sparsh',
     relation: 'contributedBy',
     evidenceUrls: [

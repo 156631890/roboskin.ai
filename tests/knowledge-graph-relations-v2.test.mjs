@@ -21,11 +21,11 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
   assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 22);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 23);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    25,
+    26,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
@@ -34,7 +34,7 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   assert.doesNotMatch(paperSensorBody, /digit-?360/);
   assert.match(paperSensorBody, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/g);
 
-  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 11);
+  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 12);
   assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 1);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
@@ -55,6 +55,7 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
     /relation: 'introduces'[\s\S]*?fromId: 'dream-tac-tactile-world-action-model-2026'[\s\S]*?toId: 'dream-tac'/,
     /relation: 'evaluatedBy'[\s\S]*?fromId: 'sparsh'[\s\S]*?toId: 'tacbench'/,
     /relation: 'introduces'[\s\S]*?fromId: 'tac4loco-plantar-tactile-humanoid-locomotion-2026'[\s\S]*?toId: 'tac4loco'/,
+    /relation: 'introduces'[\s\S]*?fromId: 'adept-visuo-tactile-dexterity-rl-2026'[\s\S]*?toId: 'adept'/,
     /relation: 'trainedOn'[\s\S]*?fromId: 'openvla-7b'[\s\S]*?toId: 'open-x-embodiment'/,
     /relation: 'trainedOn'[\s\S]*?fromId: 'openvla-7b'[\s\S]*?toId: 'droid'[\s\S]*?final third of training/,
     /relation: 'trainedOn'[\s\S]*?fromId: 'octo'[\s\S]*?toId: 'bridgedata-v2'[\s\S]*?combined Bridge bucket/,
@@ -94,11 +95,11 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      researchRelationEdges: 77,
-      researchProvenanceEdges: 55,
-      researchSemanticEdges: 22,
+      researchRelationEdges: 80,
+      researchProvenanceEdges: 57,
+      researchSemanticEdges: 23,
       paperSensorUsageEdges: 3,
-      introducesEdges: 11,
+      introducesEdges: 12,
       describesDatasetEdges: 2,
       usesDatasetEdges: 0,
       trainedOnEdges: 8,

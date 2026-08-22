@@ -46,6 +46,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 
 const supplements: ResearchIndexSupplement[] = [
   {
+    id: 'adept-visuo-tactile-dexterity-rl-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Per-finger TacMap encoding of vision-based fingertip penetration depth, thresholded contact, and fingertip position for the Flexiv-Sharpa student only',
+    modalities: ['two RGB camera views', 'robot proprioception', 'five fingertip TacMap representations on Flexiv-Sharpa', 'five fingertip positions on Flexiv-Sharpa', 'joint-space robot action'],
+    formFactor: 'Separate fixed-workbench KUKA iiwa7 plus Allegro Hand and Flexiv Rizon plus Sharpa-hand research configurations',
+    dataOutput: 'Embodiment-specific reinforcement-learning policies mediated by a full joint-configuration-space geometric fabric',
+    applications: ['dexterous insertion', 'long-horizon manipulation', 'visuo-tactile robot learning', 'zero-shot sim-to-real policy transfer'],
+    evidence: 'preprint',
+    limitations: 'The matched tactile comparison is restricted to one Flexiv-Sharpa square-and-round insertion condition with ten physical trials per modality: 3/10 final success for vision-only and 8/10 for visuo-tactile. Each task and embodiment is trained independently; KUKA experiments are vision-only; both systems are fixed workbenches; and no public training code, weights, checkpoint, dataset, or artifact license was verified on 2026-08-22.',
+    reviewedAt: '2026-08-22',
+  },
+  {
     id: 'prism-contact-rich-industrial-skill-dataset-2026',
     year: 2026,
     publisher: 'arXiv',

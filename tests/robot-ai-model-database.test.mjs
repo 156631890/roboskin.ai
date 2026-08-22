@@ -11,6 +11,7 @@ import {
 
 const trustedPrimarySourceHosts = new Set([
   'arxiv.org',
+  'adept-dexterity.github.io',
   'deepmind.google',
   'github.com',
   'octo-models.github.io',
@@ -24,7 +25,7 @@ const trustedPrimarySourceHosts = new Set([
 
 test('robot AI model records are unique, typed, dated, and evidence bounded', () => {
   assert.ok(robotAiModelEntries.length >= 8, 'database must start with at least eight verified models');
-  assert.ok(robotAiModelEntries.length <= 12, 'initial directory should remain curated rather than bulk generated');
+  assert.ok(robotAiModelEntries.length <= 13, 'directory should remain curated rather than bulk generated');
 
   const ids = robotAiModelEntries.map((entry) => entry.id);
   assert.equal(new Set(ids).size, ids.length, 'model IDs must be unique');
@@ -142,7 +143,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { tactileInput: 'yes' }).map((entry) => entry.id).sort(),
-    ['dream-tac', 'sparsh', 'tac4loco', 'touchworld'],
+    ['adept', 'dream-tac', 'sparsh', 'tac4loco', 'touchworld'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'franka duo' }).map((entry) => entry.id),

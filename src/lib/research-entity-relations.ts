@@ -238,6 +238,17 @@ const rctAffiliations: AffiliationTarget[] = [
 ];
 
 const sourceAffiliationBatches: SourceAffiliationBatch[] = [
+  {
+    fromType: 'paper',
+    fromId: 'adept-visuo-tactile-dexterity-rl-2026',
+    organizations: [
+      { organizationId: 'nvidia', sourceLabels: ['NVIDIA'] },
+      { organizationId: 'university-of-michigan', sourceLabels: ['Michigan Robotics, University of Michigan'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2608.19182'],
+    evidenceBoundary: 'The ADEPT paper and official project page map the listed authors to NVIDIA and Michigan Robotics at the University of Michigan. These relations preserve source-listed affiliations only; they do not establish institutional ownership, funding, endorsement, exclusive development, or an MMint Lab project relationship.',
+    sourceReviewed: '2026-08-22',
+  },
   ...(['paper', 'dataset'] as const).map((fromType) => ({
     fromType,
     fromId: fromType === 'paper'
@@ -609,6 +620,17 @@ export const researchSemanticRelations: ResearchSemanticRelation[] = [
     evidenceUrls: ['https://arxiv.org/abs/2608.15766'],
     sourceLabels: ['Tac4Loco tactile-perceptive humanoid locomotion framework'],
     evidenceBoundary: 'The preprint introduces Tac4Loco as a named learned locomotion framework. The relation does not turn source-reported simulation or physical results into an independent benchmark, and it preserves the distinction between simulation training and deployment on one physical Unitree G1 with research-team pressure insoles.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 'adept-visuo-tactile-dexterity-rl-2026',
+    toType: 'model',
+    toId: 'adept',
+    evidenceUrls: ['https://arxiv.org/abs/2608.19182'],
+    sourceLabels: ['ADEPT: Accelerating Dexterity via Pre-Training and Post-Training using Reinforcement Learning'],
+    evidenceBoundary: 'The preprint introduces ADEPT as an embodiment-specific reinforcement-learning framework and policy recipe. It is not a foundation model or VLA, each downstream task and embodiment is trained independently, and the relation does not imply public code, model weights, a released dataset, cross-robot transfer, or independently validated performance.',
     sourceReviewed: '2026-08-22',
   },
   {

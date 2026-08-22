@@ -24,6 +24,106 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'adept-visuo-tactile-dexterity-rl-2026',
+    title: 'ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertion',
+    seoTitle: 'ADEPT Visuo-Tactile Dexterous RL for Robot Manipulation',
+    seoDescription:
+      'ADEPT reports 3/10 vision-only versus 8/10 visuo-tactile final success on one Flexiv-Sharpa insertion condition. Review the method, robots, and limits.',
+    excerpt:
+      'ADEPT reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched Flexiv-Sharpa insertion condition, with ten physical trials per condition.',
+    content: `# ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertion
+
+**Evidence review - August 22, 2026**
+
+ADEPT is an August 19, 2026 arXiv v1 preprint describing reinforcement-learning methods for long-horizon dexterous manipulation. The system combines generic object-reposing pretraining, downstream task training, actor distillation, critic warm-up, conservative policy optimization, and a geometric fabric that mediates policy actions before they reach the robot.
+
+The source lists Jayjun Lee, Jessica Yin, Asif Rana, Nicholas Blauch, Sam Mady, Mohak Bhardwaj, Nima Fazeli, Nathan Ratliff, Karl Van Wyk, and Ankur Handa as authors, with NVIDIA and Michigan Robotics at the University of Michigan as the displayed affiliations. Those affiliations identify contributors; they do not establish institution-wide ownership or endorsement.
+
+The most relevant tactile result is narrow but useful. On one fixed-workbench Flexiv Rizon plus Sharpa-hand condition using the paper's square-and-round Functional Manipulation Benchmark objects, the source reports final-stage success of **3/10 for a vision-only student and 8/10 for a visuo-tactile student**. Both conditions used the same six-stage task and ten physical trials. This is a five-trial absolute difference in the authors' protocol, not a universal 50-percentage-point improvement claim.
+
+## Two robot configurations, not one transferable checkpoint
+
+ADEPT is evaluated on two distinct arm-hand systems. Each embodiment and downstream task is trained independently; the paper does not present one checkpoint that transfers across the two hands.
+
+| Research configuration | Degrees of freedom reported by the source | Student observations | Tactile status |
+| --- | ---: | --- | --- |
+| KUKA iiwa7 + Allegro Hand | 7 arm + 16 hand = 23 DoF | Two calibrated Intel RealSense RGB cameras and proprioception | Vision-only in the reported physical experiments |
+| Flexiv Rizon + Sharpa hand | 7 arm + 22 hand = 29 DoF | Two RGB cameras, proprioception, five fingertip positions, and five per-finger TacMap representations | Five fingertip vision-based tactile sensors |
+
+Both systems are fixed to workbenches. The paper does not identify the exact RealSense camera model, the commercial revision of the Sharpa hand, or the product name of the fingertip tactile sensors. RoboSkin therefore records these as source-specific research configurations rather than inferring a hardware SKU.
+
+## What the ten-trial physical table shows
+
+The source reports cumulative stage completion. A trial counted at a later stage must first have completed the earlier stages. The six columns below follow the paper's order: reach, grasp, lift, reorient, align, and insert.
+
+| Physical condition | Reach | Grasp | Lift | Reorient | Align | Insert |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| KUKA-Allegro, vision, FMB star | 10/10 | 9/10 | 8/10 | 8/10 | 7/10 | 5/10 |
+| KUKA-Allegro, vision, FMB square/round | 10/10 | 8/10 | 6/10 | 4/10 | 3/10 | 3/10 |
+| Flexiv-Sharpa, vision, FMB square/round | 10/10 | 7/10 | 5/10 | 3/10 | 3/10 | 3/10 |
+| Flexiv-Sharpa, visuo-tactile, FMB square/round | 10/10 | 10/10 | 10/10 | 9/10 | 8/10 | 8/10 |
+| KUKA-Allegro, vision, dish placement | 10/10 | 10/10 | 8/10 | 7/10 | 6/10 | 6/10 |
+
+The matched tactile comparison is only the third and fourth rows. It supports the claim that touch changed outcomes in this one Flexiv-Sharpa condition. It does not isolate tactile sensing across the KUKA configuration, other objects, another hand, a mobile robot, or a humanoid.
+
+## How ADEPT turns touch into a policy input
+
+The Flexiv-Sharpa student does not consume a generic tactile token. The paper constructs a TacMap for each fingertip from the vision-based tactile sensor's penetration-depth estimate, thresholds it into a contact map, encodes each finger with a convolutional network, and conditions the representation with the fingertip position. The resulting tactile features are fused with visual and proprioceptive observations.
+
+That distinction matters for [tactile AI](/tactile-ai). The sensor, representation, fusion method, policy rate, and controller are separate layers. A result from five vision-based fingertips does not establish that the same policy will accept force arrays, electronic skin, acoustic touch, or a different optical sensor without retraining and calibration.
+
+## Pretraining, post-training, and sim-to-real
+
+ADEPT first trains generic object reposing over 16 primitive shapes in simulation. For the reported KUKA accounting, the source describes 8 billion environment steps of pretraining plus 3 billion downstream steps. Its post-training recipe uses behavior-cloning actor distillation, a frozen-actor critic warm-up, and conservative PPO updates. A full joint-configuration-space geometric fabric maps policy intent into robot motion.
+
+The paper calls the physical deployment zero-shot sim-to-real because the student policies are transferred to the real systems without real-world fine-tuning. It does **not** mean zero-shot transfer to a new task, hand, sensor, or embodiment. Every downstream task and embodiment has its own training process.
+
+## Speed claim and comparison boundary
+
+The source reports physical ADEPT trials completing in roughly 5–10 seconds and compares them with a 20–70 second FMB parallel-jaw pipeline, describing a 2x–14x speed range. The comparison involves different hands, pipelines, and experimental configurations. It is evidence about the paper's protocol, not a general claim that ADEPT is 2x–14x faster than robot manipulation systems or people.
+
+## Availability audit
+
+The paper and official project page are public. The project page's Code control says **Coming soon**. As reviewed on August 22, 2026, the associated website repository contains the project site and media assets but no verified training implementation, model weights, checkpoint release, demonstration dataset, artifact license, or reusable data package.
+
+The arXiv article is distributed under CC BY 4.0. That article license does not license future ADEPT code, weights, robot data, or third-party hardware assets.
+
+## What this result does not establish
+
+- ADEPT is a preprint and the physical results have not been independently replicated.
+- Each condition contains ten physical trials; the paper does not report a significance test for the 3/10 versus 8/10 tactile comparison.
+- The tactile ablation covers one Flexiv-Sharpa square-and-round insertion condition only.
+- Both robots are fixed workbench systems; mobile and humanoid operation are outside the reported scope.
+- The KUKA branch is vision-only, and the paper does not establish cross-hand or cross-sensor tactile transfer.
+- Occluded orientation estimation and small, rounded Allegro fingertip contacts remain source-reported failure factors.
+- The work does not provide a formal robot-safety validation or a production reliability study.
+
+## Related RoboSkin resources
+
+- [Robot learning](/robot-learning)
+- [Robot manipulation](/robot-manipulation)
+- [Robot hands](/robot-hands)
+- [Tactile AI](/tactile-ai)
+- [Robot policy and model directory](/robot-foundation-models#model-adept)
+- [Verified robot configurations](/robots#robot-flexiv-rizon-sharpa-configuration)
+
+## Primary sources
+
+- [arXiv: ADEPT - Accelerating Dexterity via Pre-Training and Post-Training using Reinforcement Learning](https://arxiv.org/abs/2608.19182)
+- [Official ADEPT project page](https://adept-dexterity.github.io/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '8 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'ADEPT reinforcement-learning preprint',
+    sourceUrl: 'https://arxiv.org/abs/2608.19182',
+    citationUrls: ['https://adept-dexterity.github.io/'],
+    technicalFocus: ['ADEPT', 'reinforcement learning', 'dexterous manipulation', 'visuo-tactile policy', 'sim-to-real'],
+  },
+  {
     id: 'prism-contact-rich-industrial-skill-dataset-2026',
     title: 'PRISM maps 5,000+ contact-rich industrial robot trajectories',
     seoTitle: 'PRISM Contact-Rich Industrial Robotics Dataset',

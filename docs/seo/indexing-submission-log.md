@@ -49,6 +49,7 @@ Request indexing in Google Search Console after the production checks above pass
 | 18 | `https://roboskin.ai/research/t-rex-tactile-reactive-dexterous-manipulation-2026` | Source-bounded entity page for tactile-reactive VLA manipulation. | Pending deployment and URL Inspection |  |
 | 19 | `https://roboskin.ai/research/robotacdex-humanoid-visual-tactile-action-dataset-2026` | Dataset entity page with access status kept explicit. | Pending deployment and URL Inspection |  |
 | 20 | `https://roboskin.ai/research/tactidex-tactile-guided-dexterous-benchmark-2026` | Benchmark entity page for tactile-guided dexterity. | Pending deployment and URL Inspection |  |
+| 21 | `https://roboskin.ai/research/adept-visuo-tactile-dexterity-rl-2026` | New source-bounded ADEPT paper, policy, embodiment, and matched tactile-ablation entity. | Pending deployment and URL Inspection |  |
 
 ## Bing Webmaster Tools queue
 

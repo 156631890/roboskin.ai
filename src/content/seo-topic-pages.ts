@@ -470,7 +470,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-08-18',
+    updated: '2026-08-22',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -556,6 +556,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Sparsh-X', 'Self-supervised multisensory touch representation across image, audio, motion, and pressure.', 'Approximately 1M Digit 360 interactions plus physical-property and manipulation evaluations.', 'A 2025 preprint tied to its sensor, data, downstream tasks, and baselines.'],
             ['HT-Bench / HandTouch', 'Full-hand tactile representation benchmark and vector-quantized visuo-tactile encoder.', '10M RGB frames, 7.8M tactile frames, 226 tasks, and four evaluation tracks.', 'A 2026 preprint; it does not claim a universal benchmark across every sensor or embodiment.'],
             ['TouchWorld', 'Predictive tactile subgoals plus fast reactive tactile correction around higher-level planning.', 'Six source-reported dexterous manipulation tasks in clean and perturbed settings.', 'A 2026 preprint; reported success remains protocol-specific.'],
+            ['ADEPT', 'Fingertip TacMap representations fused into an embodiment-specific reinforcement-learning policy.', 'One matched Flexiv-Sharpa insertion condition reports 3/10 vision-only versus 8/10 visuo-tactile final success.', 'A 2026 preprint with ten trials per modality in this single tactile ablation; KUKA experiments are vision-only.'],
             ['Dream-Tac and FeelWorld', 'Action-conditioned prediction of future tactile or contact state for planning.', 'Source-reported contact-rich manipulation and planning experiments.', 'Prediction quality and task success are not universal hardware-transfer evidence.'],
             ['Tac4Loco', 'Spatiotemporal plantar pressure representation for post-contact humanoid locomotion feedback.', 'Unitree G1 simulation and physical comparisons across rigid, inclined, partial, compliant, and granular support.', 'A 2026 preprint on one robot and bilateral FSR insole layout; the gravel result is qualitative.'],
             ['EmArm', 'Whole-arm skin, proprioception, perception, and contact-aware control in one sensorimotor loop.', 'Peer-reviewed whole-arm localization, intent, manipulation, and replanning demonstrations.', 'One integrated platform does not establish identical performance on all humanoid surfaces.'],
@@ -607,6 +608,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, prediction, and control roles.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Compare action-conditioned contact prediction and robot planning evidence.' },
       { label: 'Tac4Loco plantar tactile locomotion', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'How bilateral foot-pressure maps become post-contact humanoid control evidence.' },
+      { label: 'ADEPT visuo-tactile dexterity', href: '/research/adept-visuo-tactile-dexterity-rl-2026', description: 'A source-bounded matched touch-versus-vision insertion result on one Flexiv-Sharpa setup.' },
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
@@ -620,9 +622,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TactiDex official project page', href: 'https://tactidex.github.io/' },
       { label: 'FreeTacMan official project page', href: 'https://opendrivelab.com/FreeTacMan' },
       { label: 'Tac4Loco plantar pressure humanoid locomotion preprint', href: 'https://arxiv.org/abs/2608.15766' },
+      { label: 'ADEPT visuo-tactile dexterity preprint', href: 'https://arxiv.org/abs/2608.19182' },
       { label: 'Tactile Robotics: An Outlook', href: 'https://arxiv.org/abs/2508.11261' },
     ],
-    paperBriefIds: ['tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
+    paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'tac4loco-plantar-tactile-humanoid-locomotion-2026', 'ht-bench-full-hand-tactile-representations-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },
   {
     path: '/e-skin',
@@ -3298,6 +3301,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Tactile feedback is most defensible when the experiment isolates what changes after adding touch. A matched vision-only or no-touch baseline, synchronized inputs, latency reporting, disturbance tests, and closed-loop outcomes help show whether the contact pathway is doing useful work.',
           'T-Rex investigates tactile-reactive VLA manipulation, while ReTouch investigates online-refined tactile prediction for contact-rich dexterity. Both are 2026 preprints with source-specific robots, datasets, baselines, and tasks. Their reported results should not be transferred to other systems without new evidence.',
+          'ADEPT provides a narrower matched example: one Flexiv-Sharpa square-and-round insertion condition reports 3/10 final success with vision only and 8/10 with visuo-tactile input, using ten physical trials per modality. That comparison is tied to one fixed-workbench hand, tactile representation, task, and training recipe; it is not a universal tactile-manipulation gain.',
         ],
       },
       {
@@ -3339,8 +3343,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'ManiSkill-ViTac challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
       { label: 'FreeTacMan project', href: 'https://opendrivelab.com/FreeTacMan' },
+      { label: 'ADEPT visuo-tactile dexterous reinforcement-learning preprint', href: 'https://arxiv.org/abs/2608.19182' },
     ],
-    paperBriefIds: ['prism-contact-rich-industrial-skill-dataset-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'hitac-wam-hierarchical-tactile-world-action-model-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
+    paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'prism-contact-rich-industrial-skill-dataset-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'hitac-wam-hierarchical-tactile-world-action-model-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
   },
   {
     path: '/robot-learning',
@@ -3404,6 +3409,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Simulation can generate experience, perturbations, labels, and repeatable evaluation without exposing hardware to every trial. Transfer to a physical robot still depends on geometry, dynamics, contact, sensing, latency, control, and observation differences between the simulator and the deployed system.',
           'Report what was randomized, adapted, calibrated, or fine-tuned, and separate simulation success from repeated physical trials. A simulator benchmark can test a method under controlled conditions; it does not by itself establish real-world reliability.',
+          'ADEPT is a current source-bounded example: it pretrains generic object reposing in simulation, then trains each embodiment and downstream task independently before transferring student policies to two physical workbench systems without real-world fine-tuning. Its use of “zero-shot sim-to-real” does not mean zero-shot transfer to a new hand, sensor, task, or robot.',
         ],
       },
       {
@@ -3411,6 +3417,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.',
           'ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.',
+          'In ADEPT, the tactile pathway is limited to five vision-based fingertips on one Flexiv-Sharpa student. The paper reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched insertion condition with ten trials per modality. This is useful causal evidence inside that condition, not proof of cross-sensor or cross-hand transfer.',
         ],
         bullets: [
           'Synchronize touch with camera frames, pose, joint state, action, and contact events',
@@ -3462,6 +3469,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Separate reusable tactile representations, predictive models, and policies.' },
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Connect learned robot behavior to multimodal physical-world feedback.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Map learning, control, hands, locomotion, safety, and tactile sensing.' },
+      { label: 'ADEPT visuo-tactile dexterity', href: '/research/adept-visuo-tactile-dexterity-rl-2026', description: 'Review an embodiment-specific RL and sim-to-real result with a matched tactile ablation.' },
     ],
     sources: [
       { label: 'Hugging Face LeRobot v0.6.0', href: 'https://huggingface.co/blog/lerobot-release-v060' },
@@ -3470,8 +3478,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'DROID robot manipulation dataset', href: 'https://arxiv.org/abs/2403.12945' },
       { label: 'Google DeepMind Gemini Robotics', href: 'https://deepmind.google/models/gemini-robotics/' },
       { label: 'ManiSkill-ViTac', href: 'https://arxiv.org/abs/2411.12503' },
+      { label: 'ADEPT reinforcement-learning preprint', href: 'https://arxiv.org/abs/2608.19182' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'robotacdex-humanoid-visual-tactile-action-dataset-2026'],
+    paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'robotacdex-humanoid-visual-tactile-action-dataset-2026'],
   },
   {
     path: '/robot-hands',
@@ -3482,7 +3491,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robotics hardware pillar',
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-08-21',
+    updated: '2026-08-22',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -3552,6 +3561,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Google DeepMind’s Gemini Robotics 2 announcement reports experiments across whole-body Apollo hardware, a multi-finger Sharpa hand, and a Franka Duo gripper setup. Those are official developer-reported evaluations, not an independent cross-hand benchmark. They show why embodiment and end-effector must remain attached to every task result.',
           'TactiDex, HRDexDB, and related preprints investigate tactile skill transfer or reusable hand data. Their datasets, robots, sensors, object sets, and protocols differ, so reported results should remain source-bounded rather than being converted into a universal hand ranking.',
+          'ADEPT compares two different arm-hand workbenches but does not train one cross-hand checkpoint. Its KUKA-Allegro student is vision-only; the five-fingertip tactile pathway and 3/10-versus-8/10 matched result belong only to the Flexiv-Sharpa square-and-round insertion condition.',
         ],
         table: {
           headers: ['Research asset', 'Hand or sensing role', 'What it can support', 'Boundary'],
@@ -3560,6 +3570,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['TactiDex', 'Aligned human tactile and kinematic state for tactile-guided dexterous transfer', 'Single- and bimanual skill-transfer research', '2026 preprint; results belong to its capture and robot deployment setup'],
             ['HRDexDB', 'Human and multiple robot-hand grasp records with tactile, visual, and kinematic data', 'Cross-hand grasp and contact research', '2026 preprint; scale and coverage do not by themselves prove policy transfer'],
             ['Gemini Robotics 2', 'Official manipulation evaluation across different end effectors and embodiments', 'VLA and whole-body system research context', 'Developer-reported task results, not a neutral robot-hand benchmark'],
+            ['ADEPT', 'Embodiment-specific RL on KUKA-Allegro and Flexiv-Sharpa workbenches', 'Matched vision-only and visuo-tactile evidence on one Flexiv-Sharpa insertion condition', 'Ten trials per modality; not a cross-hand checkpoint, foundation model, or hand leaderboard'],
           ],
         },
       },
@@ -3591,6 +3602,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Understand instruction-conditioned policies and embodiment boundaries.' },
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Find broader manipulation, teleoperation, and multi-embodiment data resources.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Use the dedicated touch-data directory.' },
+      { label: 'ADEPT visuo-tactile dexterity', href: '/research/adept-visuo-tactile-dexterity-rl-2026', description: 'Inspect the exact arm-hand configurations, tactile ablation, and transfer boundary.' },
     ],
     sources: [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
@@ -3598,8 +3610,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TactiDex tactile-guided dexterous benchmark preprint', href: 'https://arxiv.org/abs/2607.09190' },
       { label: 'HRDexDB multi-hand grasp database preprint', href: 'https://arxiv.org/abs/2604.14944' },
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
+      { label: 'ADEPT dexterous reinforcement-learning preprint', href: 'https://arxiv.org/abs/2608.19182' },
     ],
-    paperBriefIds: ['ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
+    paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
   },
   {
     path: '/robot-safety',
