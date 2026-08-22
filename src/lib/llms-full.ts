@@ -527,6 +527,27 @@ export function buildLlmsFullText() {
     );
   }
 
+  const vlaModelEntries = robotAiModelEntries.filter((entry) => entry.category === 'VLA');
+  lines.push(
+    '## Robot VLA Evidence Index',
+    '',
+    `Topical index: ${canonicalUrl('/robot-vla-models#vla-model-index')}`,
+    '',
+    'This index owns the vision-language-action comparison intent. Canonical model entities and complete evidence records remain in the Robot AI Model Directory; the topical index references those entities instead of creating duplicates.',
+    '',
+  );
+  for (const entry of vlaModelEntries) {
+    lines.push(
+      `- ${entry.name}`,
+      `  - Topical row: ${canonicalUrl(`/robot-vla-models#vla-model-${entry.id}`)}`,
+      `  - Canonical model entity: ${canonicalUrl(`/robot-foundation-models#model-${entry.id}`)}`,
+      `  - Action output: ${compact(entry.outputType)}`,
+      `  - Tactile input: ${entry.tactileInput}`,
+      `  - Primary sources: ${entry.primarySources.map((source) => source.url).join('; ')}`,
+    );
+  }
+  lines.push('');
+
   lines.push('## Robot AI Models', '', `Directory: ${canonicalUrl('/robot-foundation-models')}`, '');
   for (const entry of robotAiModelEntries) {
     const verifiedRobotRelations = robotAiRobotRelations.filter((relation) => relation.modelId === entry.id);

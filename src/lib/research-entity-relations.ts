@@ -268,6 +268,23 @@ const sourceAffiliationBatches: SourceAffiliationBatch[] = [
   ...(['paper', 'dataset'] as const).map((fromType) => ({
     fromType,
     fromId: fromType === 'paper'
+      ? 't-rex-tactile-reactive-dexterous-manipulation-2026'
+      : 't-rex',
+    organizations: [
+      { organizationId: 'university-of-california-berkeley', sourceLabels: ['UC Berkeley'] },
+      { organizationId: 'nvidia', sourceLabels: ['NVIDIA'] },
+      { organizationId: 'stanford-university', sourceLabels: ['Stanford University'] },
+      { organizationId: 'panasonic', sourceLabels: ['Panasonic'] },
+      { organizationId: 'sapienza-university-of-rome', sourceLabels: ['Sapienza University of Rome'] },
+      { organizationId: 'italai-labs', sourceLabels: ['ItalAI'] },
+    ],
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    evidenceBoundary: 'The T-Rex paper lists authors under these six affiliations. These links preserve source-listed contributor affiliations only; they do not establish institutional ownership, funding, endorsement, exclusive development, legal employment for every author, or a complete statement of artifact rights.',
+    sourceReviewed: '2026-08-22',
+  })),
+  ...(['paper', 'dataset'] as const).map((fromType) => ({
+    fromType,
+    fromId: fromType === 'paper'
       ? 'prism-contact-rich-industrial-skill-dataset-2026'
       : 'prism-industrial-skill',
     organizations: [
@@ -676,6 +693,17 @@ export const researchDatasetUsageRelations: DatasetUsageRelation[] = [
     evidenceBoundary: 'SoftVTBench uses a Franka arm with a Panda parallel-jaw gripper inside Isaac Sim. This is a simulation-only embodiment relation, not a physical-robot evaluation, hardware compatibility claim, or sim-to-real validation.',
     sourceReviewed: '2026-08-22',
   },
+  {
+    relation: 'usesRobot',
+    fromType: 'dataset',
+    fromId: 't-rex',
+    toType: 'robot',
+    toId: 'dexmate-vega-1-sharpa-wave-configuration',
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    sourceLabels: ['fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave dexterous hands'],
+    evidenceBoundary: 'The full T-Rex collection and the currently released approximately 50-hour subset use this source-specific bimanual platform. The relation does not make the public subset complete, establish compatibility with other Vega or Sharpa revisions, or transfer the data to another robot, hand, tactile sensor, or camera layout.',
+    sourceReviewed: '2026-08-22',
+  },
 ];
 
 export const researchPaperSensorRelations: UsesSensorRelation[] = [
@@ -715,6 +743,39 @@ export const researchPaperSensorRelations: UsesSensorRelation[] = [
 ];
 
 export const researchSemanticRelations: ResearchSemanticRelation[] = [
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026',
+    toType: 'model',
+    toId: 't-rex',
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    sourceLabels: ['T-Rex variable-rate tactile-reactive vision-language-action model'],
+    evidenceBoundary: 'The preprint introduces the named T-Rex architecture and reports results on one fixed-base bimanual platform. This relation does not establish peer review, independent reproduction, general VLA superiority, safety validation, or transfer to another robot, hand, sensor, or task distribution.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'introduces',
+    fromType: 'paper',
+    fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026',
+    toType: 'dataset',
+    toId: 't-rex',
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    sourceLabels: ['T-Rex 100-hour tactile-reactive collection with an approximately 50-hour public subset'],
+    evidenceBoundary: 'The paper introduces the 100-hour collection and the official release now exposes an approximately 50-hour subset. The relation does not imply that all 100 hours, all 7,700-plus trajectories, every training split, or every source artifact is publicly downloadable or independently audited.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    relation: 'trainedOn',
+    fromType: 'model',
+    fromId: 't-rex',
+    toType: 'dataset',
+    toId: 't-rex',
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    sourceLabels: ['tactile-reactive midtraining on the reported 100-hour T-Rex collection'],
+    evidenceBoundary: 'The T-Rex paper reports midtraining on the complete 100-hour collection. RoboSkin’s dataset entity explicitly distinguishes that reported training corpus from the currently public approximately 50-hour subset, so this edge must not be read as proof that the released files reproduce the full midtraining mixture.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     relation: 'trainedOn',
     fromType: 'model',

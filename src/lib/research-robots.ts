@@ -294,6 +294,22 @@ export const researchRobotEntries: ResearchRobotEntry[] = [
     evidenceBoundary: 'The paper does not disclose the exact Sharpa hand revision, RGB camera models, or fingertip tactile-sensor product. This record must not be relabeled SharpaWave or treated as evidence for another Sharpa, Flexiv, optical-tactile, mobile, or humanoid configuration.',
     sourceReviewed: '2026-08-22',
   },
+  {
+    id: 'dexmate-vega-1-sharpa-wave-configuration',
+    name: 'Dexmate Vega-1 + dual Sharpa Wave T-Rex configuration',
+    aliases: ['T-Rex bimanual dexterous platform', 'Bimanual Dexmate Vega-1 with two Sharpa Wave hands'],
+    kind: 'research configuration',
+    manufacturer: null,
+    officialUrl: null,
+    schemaSameAsUrl: null,
+    identitySources: [
+      { label: 'T-Rex primary paper', url: 'https://arxiv.org/abs/2606.17055' },
+      { label: 'T-Rex official repository', url: 'https://github.com/ZhuoyangLiu2005/T-Rex' },
+    ],
+    description: 'The fixed-base bimanual research configuration used to collect the T-Rex tactile-reactive dataset and evaluate its VLA policy, combining a Dexmate Vega-1 with two 22-DoF Sharpa Wave hands and ten fingertip tactile sensors.',
+    evidenceBoundary: 'This is a source-specific multi-vendor research integration, not a single product or compatibility claim. The sources do not establish equivalent behavior for another Vega-1 revision, Sharpa hand, tactile sensor, camera layout, mobile base, humanoid body, or independent implementation.',
+    sourceReviewed: '2026-08-22',
+  },
 ];
 
 export const robotAiRobotRelations: RobotAiRobotRelation[] = [
@@ -514,6 +530,24 @@ export const robotAiRobotRelations: RobotAiRobotRelation[] = [
     sourceEmbodimentLabels: ['1X humanoid'],
     evidenceUrls: ['https://research.nvidia.com/publication/2025-03_nvidia-isaac-gr00t-n1-open-foundation-model-humanoid-robots'],
     evidenceBoundary: 'NVIDIA’s official research page says GR00T N1 demonstrates language-conditioned bimanual household manipulation on 1X humanoids. The exact 1X model and a model-specific quantitative protocol are not disclosed in the reviewed source.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    modelId: 't-rex',
+    robotId: 'dexmate-vega-1-sharpa-wave-configuration',
+    relation: 'trainedAcross',
+    sourceEmbodimentLabels: ['Fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave hands'],
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    evidenceBoundary: 'The T-Rex paper reports tactile-reactive midtraining on data collected with this fixed-base bimanual configuration. The edge does not imply training across multiple robot platforms, release of the complete 100-hour corpus, or transfer to another hand, sensor, or embodiment.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    modelId: 't-rex',
+    robotId: 'dexmate-vega-1-sharpa-wave-configuration',
+    relation: 'evaluatedOn',
+    sourceEmbodimentLabels: ['Fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave hands'],
+    evidenceUrls: ['https://arxiv.org/abs/2606.17055'],
+    evidenceBoundary: 'The authors evaluate T-Rex on 12 contact-rich tasks with 16 randomized rollouts per task on this one research configuration. The source-reported 65% macro-average does not establish independent replication, cross-platform performance, or reliability outside the documented task and scoring protocol.',
     sourceReviewed: '2026-08-22',
   },
   {

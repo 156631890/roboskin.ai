@@ -3154,7 +3154,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     updated: '2026-08-22',
     priority: 0.95,
     changeFrequency: 'weekly',
-    schemaType: 'DefinedTerm',
+    schemaType: 'TechArticle',
     visualKey: 'technology',
     keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA'],
     quickAnswer: [
@@ -3214,7 +3214,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Current model ecosystem',
         body: [
-          'Google DeepMind describes Gemini Robotics 2 as a VLA for whole-body and dexterous robot control, paired with a separate embodied reasoning model. NVIDIA publishes Isaac GR00T as a family of open foundation models for generalized humanoid reasoning and skills. Hugging Face LeRobot exposes multiple policy families, datasets, evaluation environments, and 2026 integrations for VLAs and world-model policies.',
+          'The source-reviewed index below currently separates Gemini Robotics 2, RT-2, OpenVLA 7B, π0, Isaac GR00T N1, and T-Rex. The first five document vision-language-action interfaces without live tactile input in the reviewed releases; T-Rex is the first indexed VLA with verified high-frequency tactile input, public checkpoints, code, and a public dataset subset.',
           'RoboSkin.ai does not treat those official descriptions as proof of equivalent capability. This page owns the VLA and action-policy role; the robot foundation-model directory owns broad pretraining, transfer, access, and evidence comparisons, while tactile foundation-model, world-model, dataset, benchmark, and manipulation pages hold narrower technical evidence.',
         ],
       },
@@ -3227,10 +3227,14 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     relatedLinks: [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place VLA policies inside the full perception, reasoning, control, action, and feedback loop.' },
+      { label: 'Physical AI', href: '/physical-ai', description: 'Place VLA action generation inside an embodied sensing, control, safety, and feedback system.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Audit the hardware and setup behind each training, zero-shot, fine-tuned, or demonstration claim.' },
+      { label: 'Robot AI research organizations', href: '/organizations', description: 'Trace verified developer and contributor relationships to normalized research organizations.' },
       { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare broader model roles, training data, embodiment transfer, access, and evidence.' },
+      { label: 'Robot world models', href: '/robot-world-models', description: 'Separate future prediction and action-conditioned rollouts from action selection.' },
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare touch representations, predictive models, and policy roles.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Connect VLA policies to demonstrations, datasets, training paradigms, and evaluation.' },
+      { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Compare broad robot observation, action, embodiment, access, and license records.' },
       { label: 'Visuo-tactile world models', href: '/guides/visuo-tactile-world-models-robot-manipulation', description: 'Review action-conditioned contact prediction and planning evidence.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect model outputs to grasping, insertion, dexterity, and recovery.' },
       { label: 'Humanoid robots', href: '/humanoid-robots', description: 'Place VLA models inside the full humanoid hardware and control stack.' },
@@ -3244,10 +3248,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'NVIDIA Isaac GR00T developer overview', href: 'https://developer.nvidia.com/isaac/gr00t' },
       { label: 'Hugging Face LeRobot v0.6 release', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'Physical Intelligence pi0 technical report', href: 'https://www.physicalintelligence.company/download/pi0.pdf' },
+      { label: 'RT-2 vision-language-action paper', href: 'https://arxiv.org/abs/2307.15818' },
+      { label: 'OpenVLA paper', href: 'https://arxiv.org/abs/2406.09246' },
       { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
+      { label: 'T-Rex official repository', href: 'https://github.com/ZhuoyangLiu2005/T-Rex' },
+      { label: 'T-Rex public dataset subset', href: 'https://huggingface.co/datasets/zekaiwang/trex_dataset' },
       { label: 'ReTouch contact-rich manipulation preprint', href: 'https://arxiv.org/abs/2608.01824' },
     ],
-    paperBriefIds: ['dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026', 'sparsh-x-multisensory-touch-representations-2025'],
+    paperBriefIds: ['t-rex-tactile-reactive-dexterous-manipulation-2026', 'dream-tac-tactile-world-action-model-2026', 'feelworld-visuo-tactile-world-model-2026'],
   },
   {
     path: '/robot-manipulation',

@@ -476,6 +476,40 @@ if (failures.length === 0) {
     if (!fragment || !robotHtml.includes(`id="${fragment}"`)) failures.push(`/robots: missing canonical anchor for ${robot.id}`);
     if (!robotHtml.includes(robot.name) || !robotHtml.includes(String(robot.attributes?.evidenceBoundary))) failures.push(`/robots: incomplete visible record for ${robot.id}`);
   }
+  const graphVlaModels = (graph.entities ?? []).filter((entity) => entity.type === 'model' && entity.attributes?.category === 'VLA');
+  const vlaModelIds = graphVlaModels.map((entity) => entity.id.replace(/^model:/, ''));
+  const vlaModelHtml = await readFile(path.join(out, 'robot-vla-models.html'), 'utf8');
+  const vlaModelJsonLd = parseJsonLd(vlaModelHtml, '/robot-vla-models', failures);
+  const vlaModelJsonLdNodes = vlaModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
+  const vlaModelList = vlaModelJsonLdNodes.find((node) => node?.['@id'] === canonicalFor('/robot-vla-models#vla-model-index'));
+  const listedVlaModelIds = Array.isArray(vlaModelList?.itemListElement)
+    ? vlaModelList.itemListElement.map((entry) => entry.item?.['@id'])
+    : [];
+  const expectedVlaModelIds = new Set(graphVlaModels.map((entity) => entity.canonicalUrl));
+  if (vlaModelIds.length !== 6
+    || !vlaModelIds.includes('t-rex')
+    || vlaModelList?.['@type'] !== 'ItemList'
+    || vlaModelList?.numberOfItems !== vlaModelIds.length
+    || listedVlaModelIds.length !== vlaModelIds.length
+    || new Set(listedVlaModelIds).size !== vlaModelIds.length
+    || [...expectedVlaModelIds].some((id) => !listedVlaModelIds.includes(id))) {
+    failures.push('/robot-vla-models: VLA ItemList count or canonical entity references are invalid');
+  }
+  if (vlaModelJsonLdNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
+    failures.push('/robot-vla-models: duplicates CreativeWork ownership from the model directory');
+  }
+  for (const id of vlaModelIds) {
+    if (!vlaModelHtml.includes(`id="vla-model-${id}"`)) failures.push(`/robot-vla-models: missing visible anchor for ${id}`);
+    if (!vlaModelHtml.includes(canonicalFor(`/robot-foundation-models#model-${id}`))) failures.push(`/robot-vla-models: missing canonical model reference for ${id}`);
+    if (!vlaModelHtml.includes(`href="/robot-foundation-models#model-${id}"`)) failures.push(`/robot-vla-models: missing visible canonical-model link for ${id}`);
+  }
+  const trexVlaRow = vlaModelHtml.match(/data-vla-model-record="t-rex"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? '';
+  if (!trexVlaRow.includes('5,464 episodes')
+    || !trexVlaRow.includes('5,473,459 frames')
+    || !trexVlaRow.includes('approximately 50 hours')
+    || !trexVlaRow.includes('complete 100-hour')) {
+    failures.push('/robot-vla-models: T-Rex public-subset evidence boundary is missing');
+  }
   const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
   const worldModelHtml = await readFile(path.join(out, 'robot-world-models.html'), 'utf8');
   const worldModelJsonLd = parseJsonLd(worldModelHtml, '/robot-world-models', failures);
@@ -557,6 +591,10 @@ if (failures.length === 0) {
   }
   if (!llmsFull.includes(canonicalFor('/knowledge-graph.json'))) failures.push('/llms-full.txt: missing knowledge graph discovery URL');
   if (!llmsFull.includes('## Robot World Model Evidence') || !llmsFull.includes('GitHub Coming Soon')) failures.push('/llms-full.txt: missing world-model evidence boundaries');
+  if (!llmsFull.includes('## Robot VLA Evidence Index')
+    || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+    failures.push('/llms-full.txt: missing VLA evidence index or canonical model references');
+  }
   if (/www\.roboskin\.ai|\.vercel\.app/.test(llmsFull)) failures.push('/llms-full.txt: non-apex URL found');
 }
 

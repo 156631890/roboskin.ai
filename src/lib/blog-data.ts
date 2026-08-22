@@ -542,14 +542,14 @@ The reported percentages are not an external leaderboard. They come from the aut
     title: 'T-Rex adds high-rate tactile reaction to dexterous robot policies',
     seoTitle: 'T-Rex Tactile-Reactive Dexterous Manipulation',
     seoDescription:
-      "T-Rex reports 65% average success versus EgoScale's 35% across 12 tasks and 16 rollouts per task. Review the preprint evidence and limits.",
+      "T-Rex reports 65% average success versus EgoScale's 35%, while its official release now provides code, checkpoints, and an approximately 50-hour dataset subset.",
     excerpt:
-      'T-Rex reports a 30-percentage-point average success gap over EgoScale in its 12-task protocol, alongside a 100-hour tactile-rich dataset.',
+      'T-Rex reports a 100-hour collection and a 30-point gap over EgoScale; its official release now provides code, checkpoints, and an approximately 50-hour public subset.',
     content: `# T-Rex adds high-rate tactile reaction to dexterous robot policies
 
 **Evidence review - August 2026**
 
-T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies react dynamically to tactile signals. The authors introduce a 100-hour tactile-rich dataset, a temporal tactile VQ-VAE encoder, and a variable-rate Mixture-of-Transformers architecture. They evaluate the system on 12 manipulation tasks that require delicate force control or deformable-object manipulation.
+T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies react dynamically to tactile signals. The authors report a 100-hour tactile-rich collection, a temporal tactile VQ-VAE encoder, and a variable-rate Mixture-of-Transformers architecture. The official dataset card now exposes 5,464 episodes and 5,473,459 frames at 30 FPS, approximately 50 hours; that public subset is not the complete 100-hour corpus used in the reported training recipe. The authors evaluate the system on 12 manipulation tasks that require delicate force control or deformable-object manipulation.
 
 The paper's Table 1 reports 65% average success for T-Rex and 35% for EgoScale, the strongest listed baseline. That is an absolute gap of 30 percentage points in the authors' 12-task protocol. Each task is evaluated with 16 rollouts. The figures are not independent validation or evidence of the same gain on other robot systems.
 
@@ -561,12 +561,21 @@ T-Rex treats this as both a data and architecture problem.
 
 | Component | Source-reported role | Evidence question |
 | --- | --- | --- |
-| 100-hour tactile-rich dataset | Supplies diverse tactile-action trajectories built around elementary motor primitives | How balanced are tasks, objects, contacts, successes, and failures? |
+| Reported 100-hour tactile-rich collection | Supplies tactile-action trajectories built around 22 reported motor primitives and more than 200 objects | Which portions, tasks, and splits are represented in the public subset? |
+| Approximately 50-hour public subset | Exposes 5,464 episodes and 5,473,459 frames at 30 FPS in LeRobot v3.0 through the official release | Can the published subset reproduce only post-training or also the full reported midtraining recipe? |
 | Temporal tactile VQ-VAE | Encodes changing touch instead of only a static tactile frame | Which short-timescale events remain visible after compression? |
 | Variable-rate Mixture-of-Transformers | Lets tactile-reactive processing coexist with slower VLA capabilities | What are the measured sensing-to-action latency and compute cost? |
 | Twelve-task evaluation | Tests force-sensitive and deformable-object manipulation | How far does performance transfer beyond the paper's task and hardware distribution? |
 
 The main conceptual contribution is temporal separation. A policy can retain slower semantic or visual reasoning while giving the tactile pathway a rate suited to contact dynamics. That does not mean every taxel should run through a large model at raw sensor rate; the source proposes a learned temporal representation and variable-rate processing strategy.
+
+## Artifact availability verified on August 22, 2026
+
+The artifact status changed after the original RoboSkin review. The [official T-Rex repository](https://github.com/ZhuoyangLiu2005/T-Rex) now provides post-training and inference code on its main branch, a separate full-pipeline branch for pretraining and midtraining code, hardware and teleoperation utilities, and dataset inspection tools. The maintainers also publish pretrained and midtrained checkpoints on Hugging Face.
+
+The [public T-Rex dataset](https://huggingface.co/datasets/zekaiwang/trex_dataset) is labeled MIT and its card currently specifies 5,464 episodes, 5,473,459 frames at 30 FPS (approximately 50 hours), 5,370 language-annotated trajectories, 22 motor primitives, and 207 objects in LeRobot v3.0. Its signals include head and bilateral wrist video, robot state and actions, ten fingertip tactile streams, deformation maps, and estimated 6D wrenches. The repository explicitly distinguishes this release from the complete 100-hour collection, so RoboSkin records both values instead of replacing one with the other.
+
+Use the [normalized T-Rex dataset record](/datasets#dataset-t-rex), [T-Rex model record](/robot-foundation-models#model-t-rex), and [verified robot configuration](/robots#robot-dexmate-vega-1-sharpa-wave-configuration) to inspect the release, license, embodiment, and evidence boundaries separately.
 
 ## Reported evidence
 
@@ -591,7 +600,7 @@ The project is also relevant to [robot VLA models](/robot-vla-models). It illust
 
 ## Dataset and benchmark implications
 
-One hundred recorded hours is a collection-duration statement, not a complete measure of data diversity or effective sample size. Adjacent tactile frames are correlated, repeated motor primitives may dominate the distribution, and an hour of data can vary greatly in contact density and task coverage.
+One hundred recorded hours is a collection-duration statement, not a complete measure of data diversity or effective sample size. Adjacent tactile frames are correlated, repeated motor primitives may dominate the distribution, and an hour of data can vary greatly in contact density and task coverage. Reproducibility claims must also distinguish the reported full collection from the approximately 50-hour subset currently available for download.
 
 The [tactile robotics dataset directory](/datasets) explains the metadata needed to evaluate reuse: robot, sensor, sampling rate, synchronization, task, object, trajectory count, failures, splits, format, and license. The [tactile benchmark hub](/benchmarks) separates dataset scale from evidence about generalization and closed-loop success.
 
@@ -614,15 +623,25 @@ The result also does not isolate one causal factor by itself. Dataset collection
 
 - [arXiv: T-Rex - Tactile-Reactive Dexterous Manipulation](https://arxiv.org/abs/2606.17055)
 - [Official T-Rex project page](https://tactile-reactive-dexterous.github.io/)
+- [Official T-Rex repository](https://github.com/ZhuoyangLiu2005/T-Rex)
+- [Public T-Rex dataset subset](https://huggingface.co/datasets/zekaiwang/trex_dataset)
+- [T-Rex midtraining checkpoint](https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
     updated: '2026-08-22',
-    readTime: '7 min read',
+    readTime: '8 min read',
     category: 'Tactile manipulation',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'T-Rex tactile-reactive dexterous manipulation preprint',
     sourceUrl: 'https://arxiv.org/abs/2606.17055',
+    citationUrls: [
+      'https://arxiv.org/abs/2606.17055',
+      'https://tactile-reactive-dexterous.github.io/',
+      'https://github.com/ZhuoyangLiu2005/T-Rex',
+      'https://huggingface.co/datasets/zekaiwang/trex_dataset',
+      'https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6',
+    ],
     technicalFocus: ['T-Rex', 'tactile-reactive manipulation', 'dexterous manipulation', 'VLA', 'temporal tactile encoding'],
   },
   {

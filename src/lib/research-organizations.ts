@@ -537,6 +537,42 @@ export const researchOrganizationEntries: ResearchOrganizationEntry[] = [
     evidenceBoundary: 'The official institute page establishes the research-organization identity. A source-listed affiliation does not establish institute-wide ownership, funding, endorsement, or participation.',
     sourceReviewed: '2026-08-22',
   },
+  {
+    id: 'panasonic',
+    name: 'Panasonic',
+    aliases: ['Panasonic Group', 'Panasonic Holdings Corporation'],
+    kind: 'company',
+    officialUrl: 'https://holdings.panasonic/global/',
+    identitySources: [
+      { label: 'Panasonic Holdings official corporate profile', url: 'https://holdings.panasonic/global/corporate/about.html' },
+    ],
+    evidenceBoundary: 'The official corporate page establishes the Panasonic Holdings identity. The T-Rex paper lists “Panasonic” as an author affiliation but does not identify a specific business unit, legal employer, funding relationship, project ownership, or company-wide endorsement.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'sapienza-university-of-rome',
+    name: 'Sapienza University of Rome',
+    aliases: ['La Sapienza University', 'Sapienza Università di Roma'],
+    kind: 'university',
+    officialUrl: 'https://www.uniroma1.it/en',
+    identitySources: [
+      { label: 'Sapienza University of Rome official about page', url: 'https://www.uniroma1.it/en/pagina/about-us' },
+    ],
+    evidenceBoundary: 'The official university page establishes the Sapienza University of Rome identity. A source-listed author affiliation does not establish university-wide ownership, funding, endorsement, exclusive development, or participation beyond the listed authors.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'italai-labs',
+    name: 'ItalAI Labs',
+    aliases: ['ItalAI'],
+    kind: 'research lab',
+    officialUrl: 'https://italailabs.com/',
+    identitySources: [
+      { label: 'ItalAI Labs official site', url: 'https://italailabs.com/' },
+    ],
+    evidenceBoundary: 'The official site establishes the ItalAI Labs public identity. The T-Rex paper’s author affiliation does not establish that ItalAI Labs independently owns, funded, endorsed, or solely developed T-Rex or its released artifacts.',
+    sourceReviewed: '2026-08-22',
+  },
 ];
 
 type ModelRelationPolicy = {
@@ -630,6 +666,16 @@ const modelRelationPolicies: ModelRelationPolicy[] = [
       'https://adept-dexterity.github.io/',
     ],
     evidenceBoundary: 'The primary paper and official project page list authors with NVIDIA and University of Michigan affiliations. This supports source-listed contributor relationships, not institutional ownership, funding, endorsement, exclusive development, or participation by either organization as a whole.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    modelId: 't-rex',
+    relation: 'contributedBy',
+    evidenceUrls: [
+      'https://arxiv.org/abs/2606.17055',
+      'https://github.com/ZhuoyangLiu2005/T-Rex',
+    ],
+    evidenceBoundary: 'The paper and official repository list authors under the connected affiliations. This records source-listed contributor relationships only; it does not establish institutional ownership, funding, endorsement, exclusive development, or participation by each organization as a whole.',
     sourceReviewed: '2026-08-22',
   },
   {

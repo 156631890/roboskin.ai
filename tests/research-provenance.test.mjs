@@ -24,17 +24,23 @@ test('research organizations keep normalized university and lab identities separ
     'mmint-lab',
     'university-of-bristol',
     'bristol-robotics-laboratory',
+    'panasonic',
+    'sapienza-university-of-rome',
+    'italai-labs',
   ]) {
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 41);
+  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 44);
   assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
   assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
   assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);
   assert.match(entries, /id: 'lasr-lab',[\s\S]*?kind: 'research lab',[\s\S]*?officialUrl: 'https:\/\/lasr\.org\/'/);
   assert.match(entries, /id: 'mmint-lab',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/www\.mmintlab\.com\/people\/nima-fazeli\//);
   assert.match(entries, /id: 'bristol-robotics-laboratory',[\s\S]*?kind: 'research lab',[\s\S]*?joint research partnership of UWE Bristol and the University of Bristol/);
+  assert.match(entries, /id: 'panasonic',[\s\S]*?kind: 'company',[\s\S]*?holdings\.panasonic\/global\/corporate\/about\.html/);
+  assert.match(entries, /id: 'sapienza-university-of-rome',[\s\S]*?kind: 'university',[\s\S]*?uniroma1\.it\/en\/pagina\/about-us/);
+  assert.match(entries, /id: 'italai-labs',[\s\S]*?kind: 'research lab',[\s\S]*?italailabs\.com/);
   assert.doesNotMatch(entries, /id: 'lasr-lab',[\s\S]*?aliases: \[[^\]]*TU Dresden[^\]]*\]/);
   assert.doesNotMatch(entries, /id: 'mmint-lab',[\s\S]*?aliases: \[[^\]]*University of Michigan[^\]]*\]/);
   assert.doesNotMatch(entries, /id: 'bristol-robotics-laboratory',[\s\S]*?aliases: \[[^\]]*University of Bristol[^\]]*\]/);
@@ -133,12 +139,13 @@ test('dataset usage edges distinguish sensor use, physical embodiments, and simu
   }
 
   assert.equal([...usage.matchAll(/relation: 'usesSensor'/g)].length, 4);
-  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 5);
+  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 6);
   assert.match(usage, /fromId: 'droid',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?complete collection platform also includes the named Robotiq gripper/);
   assert.match(usage, /fromId: 'bridgedata-v2',[\s\S]*?toId: 'trossen-widowx-250-6dof'[\s\S]*?does not imply that every trajectory contains every optional camera/);
   assert.match(usage, /fromId: 'prism-industrial-skill',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?two physical Franka Emika Panda arms/);
   assert.match(usage, /fromId: 'robotacdex',[\s\S]*?toId: 'unitree-g1'[\s\S]*?one physical Unitree G1[\s\S]*?does not imply whole-body locomotion data/);
   assert.match(usage, /fromId: 'softvtbench',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?simulation-only embodiment relation/);
+  assert.match(usage, /fromId: 't-rex',[\s\S]*?toId: 'dexmate-vega-1-sharpa-wave-configuration'[\s\S]*?public subset complete/);
   assert.match(usage, /does not use a physical GelSight Mini/);
 });
 

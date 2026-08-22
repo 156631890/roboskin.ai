@@ -87,8 +87,8 @@ test('the fifteen normalized organizations have primary identity evidence and a 
   );
 
   assert.equal(newOrganizationSources.size, 15);
-  assert.equal(contract.counts.organizations, 41);
-  assert.equal(contract.counts.knowledgeEntities, 141);
+  assert.equal(contract.counts.organizations, 44);
+  assert.equal(contract.counts.knowledgeEntities, 147);
 
   for (const [id, requiredIdentityUrl] of newOrganizationSources) {
     const block = organizationBlock(organizations, id);
@@ -138,7 +138,7 @@ test('the five new source affiliations remain exact, primary-source bounded link
     .filter((organizationId) => targetIds.has(organizationId));
 
   assert.equal(actualTargets.length, 5);
-  assert.equal(contract.counts.sourceAffiliationEdges, 48);
+  assert.equal(contract.counts.sourceAffiliationEdges, 60);
   for (const [sensorId, organizationId] of expectedNewAffiliations) {
     assert.match(
       relations,

@@ -137,7 +137,7 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, vlaModelsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
@@ -146,6 +146,7 @@ const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, ll
   fetchOk('/llms-full.txt'),
   fetchOk('/organizations'),
   fetchOk('/robots'),
+  fetchOk('/robot-vla-models'),
   fetchOk('/robot-world-models'),
   fetchOk('/robots.txt'),
   fetchOk('/feed.xml'),
@@ -161,13 +162,14 @@ if (!(llmsResponse.headers.get('content-type') ?? '').includes('text/plain')) th
 if (!(llmsFullResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms-full.txt has an invalid content type');
 if (!(organizationsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/organizations did not return HTML');
 if (!(robotsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robots did not return HTML');
+if (!(vlaModelsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robot-vla-models did not return HTML');
 if (!(worldModelsResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/robot-world-models did not return HTML');
 if (!(crawlerRobotsResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/robots.txt has an invalid content type');
 if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+xml')) throw new Error('/feed.xml has an invalid content type');
 if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, worldModelsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, vlaModelsHtml, worldModelsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
@@ -176,6 +178,7 @@ const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robo
   llmsFullResponse.text(),
   organizationsResponse.text(),
   robotsResponse.text(),
+  vlaModelsResponse.text(),
   worldModelsResponse.text(),
   crawlerRobotsResponse.text(),
   rssResponse.text(),
@@ -469,6 +472,45 @@ for (const robot of graphRobots) {
   const fragment = new URL(robot.canonicalUrl).hash.slice(1);
   if (!fragment || !robotsHtml.includes(`id="${fragment}"`)) throw new Error(`/robots is missing ${robot.id}`);
 }
+const graphVlaModels = graphEntities.filter((entry) => entry.type === 'model' && entry.attributes?.category === 'VLA');
+const vlaModelIds = graphVlaModels.map((entry) => entry.id.replace(/^model:/, ''));
+const vlaModelsJsonLd = validateHtml(vlaModelsHtml, '/robot-vla-models');
+const vlaModelSchemaNodes = vlaModelsJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
+const vlaModelDirectories = vlaModelSchemaNodes.filter((node) => node?.['@id'] === canonicalFor('/robot-vla-models#vla-model-index'));
+if (vlaModelDirectories.length !== 1) throw new Error('/robot-vla-models must contain exactly one VLA ItemList');
+const [vlaModelDirectory] = vlaModelDirectories;
+const listedVlaModelIds = Array.isArray(vlaModelDirectory?.itemListElement)
+  ? vlaModelDirectory.itemListElement.map((entry) => entry.item?.['@id'])
+  : [];
+const expectedVlaModelIds = new Set(graphVlaModels.map((entry) => entry.canonicalUrl));
+if (vlaModelIds.length !== 6
+  || !vlaModelIds.includes('t-rex')
+  || vlaModelDirectory?.['@type'] !== 'ItemList'
+  || vlaModelDirectory?.numberOfItems !== vlaModelIds.length
+  || listedVlaModelIds.length !== vlaModelIds.length
+  || new Set(listedVlaModelIds).size !== vlaModelIds.length
+  || [...expectedVlaModelIds].some((id) => !listedVlaModelIds.includes(id))) {
+  throw new Error('/robot-vla-models ItemList count or canonical entity references are invalid');
+}
+if (vlaModelSchemaNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
+  throw new Error('/robot-vla-models duplicates CreativeWork ownership from the model directory');
+}
+for (const id of vlaModelIds) {
+  if (!vlaModelsHtml.includes(`id="vla-model-${id}"`)) throw new Error(`/robot-vla-models is missing ${id}`);
+  if (!vlaModelsHtml.includes(canonicalFor(`/robot-foundation-models#model-${id}`))) {
+    throw new Error(`/robot-vla-models is missing the canonical model entity for ${id}`);
+  }
+  if (!vlaModelsHtml.includes(`href="/robot-foundation-models#model-${id}"`)) {
+    throw new Error(`/robot-vla-models is missing the visible canonical-model link for ${id}`);
+  }
+}
+const trexVlaRow = vlaModelsHtml.match(/data-vla-model-record="t-rex"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? '';
+if (!trexVlaRow.includes('5,464 episodes')
+  || !trexVlaRow.includes('5,473,459 frames')
+  || !trexVlaRow.includes('approximately 50 hours')
+  || !trexVlaRow.includes('complete 100-hour')) {
+  throw new Error('/robot-vla-models is missing the T-Rex public-subset evidence boundary');
+}
 const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
 const worldModelJsonLd = validateHtml(worldModelsHtml, '/robot-world-models');
 const worldModelJsonLdNodes = worldModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
@@ -514,6 +556,8 @@ const llmsFullCountChecks = [
 if (llmsFullCountChecks.some(([label, count]) => !llmsFull.includes(`- ${label}: ${count}`))
   || !llmsFull.includes(canonicalFor('/organizations'))
   || !llmsFull.includes(canonicalFor('/robots'))
+  || !llmsFull.includes('## Robot VLA Evidence Index')
+  || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))
   || !llmsFull.includes('## Robot World Model Evidence')
   || !llmsFull.includes('GitHub Coming Soon')) throw new Error('/llms-full.txt is missing deployed entity knowledge');
 

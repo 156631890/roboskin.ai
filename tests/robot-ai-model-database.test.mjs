@@ -14,18 +14,20 @@ const trustedPrimarySourceHosts = new Set([
   'adept-dexterity.github.io',
   'deepmind.google',
   'github.com',
+  'huggingface.co',
   'octo-models.github.io',
   'openvla.github.io',
   'phanes-lab.github.io',
   'research.google',
   'research.nvidia.com',
   'sparsh-ssl.github.io',
+  'tactile-reactive-dexterous.github.io',
   'www.pi.website',
 ]);
 
 test('robot AI model records are unique, typed, dated, and evidence bounded', () => {
   assert.ok(robotAiModelEntries.length >= 8, 'database must start with at least eight verified models');
-  assert.ok(robotAiModelEntries.length <= 13, 'directory should remain curated rather than bulk generated');
+  assert.ok(robotAiModelEntries.length <= 14, 'directory should remain curated rather than bulk generated');
 
   const ids = robotAiModelEntries.map((entry) => entry.id);
   assert.equal(new Set(ids).size, ids.length, 'model IDs must be unique');
@@ -143,7 +145,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { tactileInput: 'yes' }).map((entry) => entry.id).sort(),
-    ['adept', 'dream-tac', 'sparsh', 'tac4loco', 'touchworld'],
+    ['adept', 'dream-tac', 'sparsh', 't-rex', 'tac4loco', 'touchworld'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'franka duo' }).map((entry) => entry.id),
@@ -155,7 +157,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'MIT' }).map((entry) => entry.id).sort(),
-    ['octo', 'openvla-7b'],
+    ['octo', 'openvla-7b', 't-rex'],
     'evidence search must include license text',
   );
   assert.deepEqual(
@@ -165,7 +167,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'model card' }).map((entry) => entry.id),
-    ['gemini-robotics-er-2'],
+    ['gemini-robotics-er-2', 't-rex'],
     'evidence search must include primary-source labels and types',
   );
   assert.equal(

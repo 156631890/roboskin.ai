@@ -363,9 +363,9 @@ export const homeBroadResearchLanes: ContentTile[] = [
     ctaLabel: 'Map robot manipulation',
   },
   {
-    title: 'VLA and visuo-tactile world models',
+    title: 'Robot VLA models and action policies',
     description:
-      'Follow action-conditioned contact prediction, world-action models, planning evidence, and the role of touch in robot policies.',
+      'Compare vision-language-action interfaces, embodiments, action outputs, real-robot evidence, artifact access, and tactile input.',
     href: '/robot-vla-models',
     ctaLabel: 'Map robot VLA models',
   },
@@ -1430,7 +1430,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     term: 'Robot foundation model',
     definition: 'A broadly trained model intended for reuse or adaptation across multiple robot tasks, environments, or embodiments, with the claimed breadth requiring direct transfer evidence.',
     related: ['vision-language-action model', 'robot learning', 'multi-embodiment model'],
-    href: '/robot-vla-models',
+    href: '/robot-foundation-models',
   },
   {
     term: 'Robot manipulation',

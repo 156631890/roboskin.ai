@@ -130,10 +130,10 @@ const supplements: ResearchIndexSupplement[] = [
     sensorPrinciple: 'Variable-rate visual-language-action modeling with a temporal tactile VQ-VAE',
     modalities: ['vision', 'language instruction', 'robot action', 'high-frequency tactile signal'],
     formFactor: 'Tactile-reactive dexterous manipulation across 12 author-reported tasks',
-    dataOutput: 'Temporal tactile tokens and action predictions trained with a reported 100-hour tactile-rich dataset',
+    dataOutput: 'Temporal tactile tokens and action predictions trained with a reported 100-hour collection; the official dataset card now exposes 5,464 episodes and 5,473,459 frames at 30 FPS, approximately 50 hours, in a LeRobot v3.0 subset',
     applications: ['delicate force control', 'deformable-object manipulation', 'tactile-reactive VLA policies'],
     evidence: 'preprint',
-    limitations: 'The authors report 65% average success for T-Rex versus 35% for EgoScale, an absolute gap of 30 percentage points across 12 tasks with 16 rollouts per task; the result is tied to one Dexmate Vega-1 and Sharpa Wave setup and is not an independent cross-platform benchmark.',
+    limitations: 'The authors report 65% average success for T-Rex versus 35% for EgoScale, an absolute gap of 30 percentage points across 12 tasks with 16 rollouts per task. The result is tied to one Dexmate Vega-1 and Sharpa Wave setup, and the approximately 50-hour public subset is not the complete reported 100-hour training corpus; neither result is an independent cross-platform benchmark.',
     reviewedAt: '2026-08-22',
   },
   {

@@ -4,6 +4,27 @@ export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
   {
+    id: 't-rex',
+    name: 'T-Rex Tactile-Reactive Dexterous Manipulation Dataset',
+    institution: ['UC Berkeley', 'NVIDIA', 'Stanford University', 'Panasonic', 'Sapienza University of Rome', 'ItalAI'],
+    year: 2026,
+    robot: ['Fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave dexterous hands'],
+    sensor: ['ZED X Mini head camera', 'Two ZED X One S wrist cameras', 'Ten fingertip image-based tactile sensors, five per hand'],
+    modalities: ['Head RGB video', 'Bilateral wrist RGB video', 'Robot state', 'Current and target joint positions', 'Raw fingertip grayscale tactile video', 'Estimated tactile deformation maps', 'Estimated 6D fingertip wrenches', 'Frame and episode metadata'],
+    sampleCount: 'The paper and official repository report a complete 100-hour collection with 7,700-plus trajectories, 22 motor primitives, and more than 200 objects. The public Hugging Face card specifies 5,464 episodes, 5,473,459 frames at 30 FPS (approximately 50 hours), 5,370 language-annotated trajectories, 22 motor primitives, and 207 objects. The public subset must not be described as the complete 100-hour corpus.',
+    tasks: ['Bimanual tactile-reactive motor primitives', 'Dexterous manipulation', 'Force-sensitive contact', 'Deformable-object interaction', 'Vision-language-action midtraining'],
+    objectCategories: 'The current public dataset card reports 207 unique canonical objects and publishes composition metadata, but RoboSkin did not independently audit every object label or collapse them into an inferred category taxonomy.',
+    dataFormat: 'LeRobotDataset v3.0 with head and bilateral wrist videos, robot state, current and target joint positions, ten fingertip tactile streams, deformation maps, 6D wrenches, and episode metadata. The official repository provides selective download, inspection, and 3D replay examples.',
+    license: 'MIT according to the current Hugging Face dataset card. Repository code is also MIT, but upstream robot assets, dependencies, and any files outside the public package retain their own terms.',
+    licenseUrl: 'https://opensource.org/license/mit',
+    paperUrl: 'https://arxiv.org/abs/2606.17055',
+    projectUrl: 'https://tactile-reactive-dexterous.github.io/',
+    githubUrl: 'https://github.com/ZhuoyangLiu2005/T-Rex',
+    datasetUrl: 'https://huggingface.co/datasets/zekaiwang/trex_dataset',
+    availability: 'The 5,464-episode, approximately 50-hour LeRobot v3.0 subset is publicly browsable and downloadable on Hugging Face. The official repository provides a dataset quickstart and states that the full 100-hour pretraining and midtraining corpus is not part of the current release.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'egotouch',
     name: 'EgoTouch',
     institution: ['Harbin Institute of Technology, Shenzhen', 'Meituan Academy of Robotics', 'Tsinghua Shenzhen International Graduate School, Tsinghua University'],

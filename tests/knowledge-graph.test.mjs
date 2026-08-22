@@ -90,15 +90,15 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.ok(contract.version.length > 0);
   assert.ok(Object.values(contract.counts).every((count) => Number.isInteger(count) && count >= 0));
   assert.equal(contract.version, '2.1.0');
-  assert.equal(contract.counts.knowledgeEntities, 141);
-  assert.equal(contract.counts.organizations, 41);
-  assert.equal(contract.counts.sourceDocuments, 194);
-  assert.equal(contract.counts.edges, 398);
-  assert.equal(contract.counts.supportedByEdges, 240);
-  assert.equal(contract.counts.robots, 16);
-  assert.equal(contract.counts.robotRelationEdges, 31);
-  assert.equal(contract.counts.evaluatedOnEdges, 20);
-  assert.equal(contract.counts.trainedAcrossEdges, 9);
+  assert.equal(contract.counts.knowledgeEntities, 147);
+  assert.equal(contract.counts.organizations, 44);
+  assert.equal(contract.counts.sourceDocuments, 201);
+  assert.equal(contract.counts.edges, 436);
+  assert.equal(contract.counts.supportedByEdges, 254);
+  assert.equal(contract.counts.robots, 17);
+  assert.equal(contract.counts.robotRelationEdges, 33);
+  assert.equal(contract.counts.evaluatedOnEdges, 21);
+  assert.equal(contract.counts.trainedAcrossEdges, 10);
   assert.equal(contract.counts.demonstratedOnEdges, 2);
   assert.equal(contract.counts.knowledgeEntities, contract.counts.researchEntities + contract.counts.organizations);
   assert.equal(
@@ -111,15 +111,15 @@ test('knowledge graph JSON is a protected deterministic static output outside th
       + contract.counts.robots,
   );
   assert.equal(contract.counts.researchIndex, contract.counts.papers + contract.counts.documentation);
-  assert.equal(contract.counts.researchRelationEdges, 99);
-  assert.equal(contract.counts.researchProvenanceEdges, 74);
-  assert.equal(contract.counts.researchSemanticEdges, 25);
-  assert.equal(contract.counts.sourceAffiliationEdges, 48);
+  assert.equal(contract.counts.researchRelationEdges, 115);
+  assert.equal(contract.counts.researchProvenanceEdges, 87);
+  assert.equal(contract.counts.researchSemanticEdges, 28);
+  assert.equal(contract.counts.sourceAffiliationEdges, 60);
   assert.equal(contract.counts.manufacturedByEdges, 12);
-  assert.equal(contract.counts.introducesEdges, 12);
+  assert.equal(contract.counts.introducesEdges, 14);
   assert.equal(contract.counts.describesDatasetEdges, 2);
   assert.equal(contract.counts.usesDatasetEdges, 0);
-  assert.equal(contract.counts.trainedOnEdges, 9);
+  assert.equal(contract.counts.trainedOnEdges, 10);
   assert.equal(contract.counts.evaluatedByEdges, 2);
   assert.equal(contract.counts.edges, contract.counts.supportedByEdges + contract.counts.benchmarkedByEdges + contract.counts.organizationRelationEdges + contract.counts.robotRelationEdges + contract.counts.researchRelationEdges);
   assert.equal(contract.counts.organizationRelationEdges, contract.counts.developedByEdges + contract.counts.coDevelopedByEdges + contract.counts.contributedByEdges);

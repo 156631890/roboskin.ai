@@ -21,11 +21,11 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
   assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 25);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 28);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    28,
+    31,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
@@ -34,11 +34,11 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   assert.doesNotMatch(paperSensorBody, /digit-?360/);
   assert.match(paperSensorBody, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/g);
 
-  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 12);
+  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 14);
   assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 2);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
-  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 9);
+  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 10);
 
   for (const pattern of [
     /relation: 'introduces'[\s\S]*?fromId: 'prism-contact-rich-industrial-skill-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'prism-industrial-skill'/,
@@ -53,6 +53,9 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
     /relation: 'introduces'[\s\S]*?fromId: 'humanoid-visual-tactile-action-dataset-2025'[\s\S]*?toId: 'humanoid-vta'/,
     /relation: 'introduces'[\s\S]*?fromId: 'robotacdex-humanoid-visual-tactile-action-dataset-2026'[\s\S]*?toId: 'robotacdex'[\s\S]*?does not promise current file access/,
     /relation: 'introduces'[\s\S]*?fromId: 'dream-tac-tactile-world-action-model-2026'[\s\S]*?toId: 'dream-tac'/,
+    /relation: 'introduces'[\s\S]*?fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026'[\s\S]*?toType: 'model'[\s\S]*?toId: 't-rex'/,
+    /relation: 'introduces'[\s\S]*?fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 't-rex'/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 't-rex'[\s\S]*?toId: 't-rex'[\s\S]*?approximately 50-hour subset/,
     /relation: 'evaluatedBy'[\s\S]*?fromId: 'sparsh'[\s\S]*?toId: 'tacbench'/,
     /relation: 'introduces'[\s\S]*?fromId: 'tac4loco-plantar-tactile-humanoid-locomotion-2026'[\s\S]*?toId: 'tac4loco'/,
     /relation: 'introduces'[\s\S]*?fromId: 'adept-visuo-tactile-dexterity-rl-2026'[\s\S]*?toId: 'adept'/,
@@ -104,21 +107,21 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      knowledgeEntities: 141,
-      organizations: 41,
-      sourceDocuments: 194,
-      edges: 398,
-      supportedByEdges: 240,
-      researchRelationEdges: 99,
-      researchProvenanceEdges: 74,
-      researchSemanticEdges: 25,
-      sourceAffiliationEdges: 48,
+      knowledgeEntities: 147,
+      organizations: 44,
+      sourceDocuments: 201,
+      edges: 436,
+      supportedByEdges: 254,
+      researchRelationEdges: 115,
+      researchProvenanceEdges: 87,
+      researchSemanticEdges: 28,
+      sourceAffiliationEdges: 60,
       manufacturedByEdges: 12,
       paperSensorUsageEdges: 3,
-      introducesEdges: 12,
+      introducesEdges: 14,
       describesDatasetEdges: 2,
       usesDatasetEdges: 0,
-      trainedOnEdges: 9,
+      trainedOnEdges: 10,
       evaluatedByEdges: 2,
     },
   );

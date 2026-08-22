@@ -10,8 +10,8 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   const entryBlock = source.match(/researchRobotEntries:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const robotAiRobotRelations/)?.[1] ?? '';
   const relationBlock = source.match(/robotAiRobotRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nconst validDate/)?.[1] ?? '';
 
-  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 16);
-  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 31);
+  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 17);
+  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 33);
   for (const id of [
     'apptronik-apollo-2',
     'franka-duo',
@@ -29,6 +29,7 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
     'language-table-setup',
     'kuka-iiwa7-allegro-configuration',
     'flexiv-rizon-sharpa-configuration',
+    'dexmate-vega-1-sharpa-wave-configuration',
   ]) {
     assert.match(entryBlock, new RegExp(`id: '${id}'`));
   }
@@ -51,6 +52,8 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   assert.match(relationBlock, /modelId: 'adept',[\s\S]*?robotId: 'kuka-iiwa7-allegro-configuration',[\s\S]*?relation: 'trainedAcross'/);
   assert.match(relationBlock, /modelId: 'adept',[\s\S]*?robotId: 'flexiv-rizon-sharpa-configuration',[\s\S]*?relation: 'evaluatedOn'/);
   assert.match(relationBlock, /modelId: 'isaac-gr00t-n1',[\s\S]*?robotId: 'fourier-gr-1',[\s\S]*?relation: 'trainedAcross'/);
+  assert.match(relationBlock, /modelId: 't-rex',[\s\S]*?robotId: 'dexmate-vega-1-sharpa-wave-configuration',[\s\S]*?relation: 'trainedAcross'/);
+  assert.match(relationBlock, /modelId: 't-rex',[\s\S]*?robotId: 'dexmate-vega-1-sharpa-wave-configuration',[\s\S]*?relation: 'evaluatedOn'/);
   assert.match(relationBlock, /pretraining uses the authors’ GR-1 humanoid data/);
   assert.doesNotMatch(entryBlock, /aliases:\s*\[[^\]]*'ViperX-300'/);
   assert.doesNotMatch(entryBlock, /aliases:\s*\[[^\]]*'NEO'/);
