@@ -15,10 +15,31 @@ export type TactileBenchmarkEntry = {
   paperUrl: string;
   projectUrl?: string;
   codeUrl?: string;
+  researchUrl?: string;
   sourceReviewed: string;
 };
 
 export const tactileBenchmarkEntries: TactileBenchmarkEntry[] = [
+  {
+    id: 'univtac-benchmark',
+    name: 'UniVTAC Benchmark',
+    year: 2026,
+    benchmarkType: 'Simulation-based visuo-tactile manipulation benchmark',
+    institutions: ['ScaleLab, Shanghai Jiao Tong University', 'D-Robotics', 'ViTai Robotics', 'The University of Hong Kong', 'Nanjing University', 'Shenzhen University', 'Wuhan University', 'Fudan University', 'Tsinghua University'],
+    tasks: ['Lift Bottle', 'Pull-out Key', 'Lift Can', 'Put Bottle in Shelf', 'Insert Hole', 'Insert HDMI', 'Insert Tube', 'Grasp Classify'],
+    modalities: ['Head RGB', 'Wrist RGB', 'Robot state and action', 'Bilateral simulated tactile RGB', 'Marker motion', 'Gelpad depth', 'Tactile-sensor pose'],
+    sensors: ['Bilateral simulated GelSight Mini sensors in the released collection and evaluation pipeline'],
+    robots: ['Simulated Franka Panda with a parallel-jaw gripper'],
+    metrics: ['Binary task success rate over evaluation rollouts', 'Per-task success rate', 'Eight-task macro-average success rate'],
+    protocol: 'The paper trains every policy on 50 automatically collected full trajectories per task, or 400 trajectories across eight tasks, and evaluates each method on 100 test rollouts per task. Table I reports eight-task averages of 30.9% for vision-only ACT, 40.5% for VITaL, and 48.0% for ACT with the UniVTAC Encoder; 30.9% to 48.0% is an increase of 17.1 percentage points.',
+    access: 'The paper, project page, Apache-2.0 repository, collection and evaluation code, and a separately MIT-labeled Hugging Face package of 800 HDF5 episodes are public. The current repository collection and evaluation workflow supports simulated GelSight Mini; ViTai GF225 and Xense WS are listed as planned additions.',
+    limitation: 'This is an author-defined simulation benchmark, not an independent leaderboard or physical-robot safety test. The public 800 episodes are not the paper’s 400 policy-training trajectories or its evaluation rollouts. Hosted checkpoint logs reviewed separately do not reproduce the exact Table I averages, so the paper and hosted logs must not be presented as identical runs.',
+    paperUrl: 'https://arxiv.org/abs/2602.10093',
+    projectUrl: 'https://univtac.github.io/',
+    codeUrl: 'https://github.com/univtac/UniVTAC',
+    researchUrl: '/research/univtac-platform-encoder-benchmark-2026',
+    sourceReviewed: '2026-08-22',
+  },
   {
     id: 'touchworld-real-robot',
     name: 'TouchWorld Real-Robot Evaluation Protocol',

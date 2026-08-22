@@ -35,13 +35,14 @@ test('model-dataset and dataset-robot edges retain primary-source boundaries', a
   const semanticRelations = relations.match(
     /export const researchSemanticRelations[^=]*= \[([\s\S]*?)\n\];/,
   )?.[1] ?? '';
-  assert.equal((semanticRelations.match(/relation: 'trainedOn'/g) ?? []).length, 10);
+  assert.equal((semanticRelations.match(/relation: 'trainedOn'/g) ?? []).length, 11);
   assert.match(relations, /fromId: 'openvla-7b'[\s\S]*?toId: 'droid'[\s\S]*?removed for the final third/);
   assert.match(relations, /fromId: 'octo'[\s\S]*?toId: 'bridgedata-v2'[\s\S]*?does not disclose a V2-only weight/);
   assert.match(relations, /fromId: 'pi0'[\s\S]*?toId: 'droid'[\s\S]*?combined mixture weight is 9\.1%/);
   assert.match(relations, /fromId: 'droid'[\s\S]*?toId: 'franka-emika-panda'/);
   assert.match(relations, /fromId: 'bridgedata-v2'[\s\S]*?toId: 'trossen-widowx-250-6dof'/);
   assert.match(relations, /fromId: 't-rex'[\s\S]*?toId: 't-rex'[\s\S]*?approximately 50-hour subset/);
+  assert.match(relations, /fromId: 'univtac-encoder'[\s\S]*?toId: 'univtac-encoder-pretraining-corpus'[\s\S]*?205,826-sample simulated corpus/);
   assert.doesNotMatch(
     semanticRelations,
     /fromId: 'octo',\n\s+toType: 'dataset',\n\s+toId: 'droid'/,

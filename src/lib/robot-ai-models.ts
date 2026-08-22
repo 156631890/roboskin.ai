@@ -35,6 +35,7 @@ export type RobotAiModelEntry = {
   license: string;
   paperUrl: string | null;
   projectUrl: string;
+  researchUrl?: string;
   tactileInput: TactileInputStatus;
   evidenceLimitations: string;
   primarySources: RobotAiPrimarySource[];
@@ -42,6 +43,47 @@ export type RobotAiModelEntry = {
 };
 
 export const robotAiModelEntries: RobotAiModelEntry[] = [
+  {
+    id: 'univtac-encoder',
+    name: 'UniVTAC Encoder',
+    organization: 'ScaleLab, D-Robotics, ViTai Robotics, The University of Hong Kong, Nanjing University, Shenzhen University, Wuhan University, Fudan University, and Tsinghua University',
+    creatorOrganizations: ['ScaleLab', 'D-Robotics', 'ViTai Robotics', 'The University of Hong Kong', 'Nanjing University', 'Shenzhen University', 'Wuhan University', 'Fudan University', 'Tsinghua University'],
+    releaseDate: '2026-02-10',
+    category: 'tactile model',
+    inputModalities: ['Marker-based tactile RGB observation'],
+    outputType: 'A 512-dimensional tactile-centric representation from a ResNet-18 encoder; reconstruction, marker, depth, and 7D pose heads are used only for pretraining and discarded at deployment',
+    embodiments: [
+      'Simulated Franka Panda with a parallel-jaw gripper and bilateral simulated GelSight Mini observations',
+      'Tianji Marvin 7-DoF arm with a parallel gripper, wrist RGB camera, and bilateral ViTai GF225 sensors',
+    ],
+    trainingDataSummary: 'The encoder is pretrained only on 205,826 simulation-synthesized interaction samples spanning 14 geometric primitives and supervised through marked and marker-free tactile-image reconstruction, gelpad-depth and projected-marker prediction, and 7D relative object-pose regression. This corpus is not the public 800-episode benchmark package, the paper’s 400 policy-training trajectories, or its 450 physical demonstrations.',
+    realRobotEvaluation: 'The frozen encoder is integrated into policies evaluated by the authors on three physical tasks using one Tianji Marvin configuration. The paper reports 20 rollouts per method-task: Insert Tube improves from 55% with vision only to 85%, Insert USB from 15% to 25%, and Bottle Upright from 60% to 95%, for averages of 43.3% and 68.3%, a 25 percentage-point difference.',
+    availability: 'The paper, project page, Apache-2.0 platform and policy repository, public 800-episode benchmark package, and a hosted encoder checkpoint are public. The current repository collection and evaluation workflow supports simulated GelSight Mini; ViTai GF225 and Xense WS support is listed as planned.',
+    license: 'The official GitHub repository root LICENSE is Apache-2.0. The Hugging Face benchmark dataset card separately displays MIT. No separate model-weight license was verified for the hosted encoder checkpoint, so neither repository nor dataset terms are generalized to that checkpoint.',
+    paperUrl: 'https://arxiv.org/abs/2602.10093',
+    projectUrl: 'https://univtac.github.io/',
+    researchUrl: '/research/univtac-platform-encoder-benchmark-2026',
+    tactileInput: 'yes',
+    evidenceLimitations: 'UniVTAC Encoder is a 512-dimensional ResNet-18 tactile representation encoder, not a VLA, language model, robot foundation model, or complete control policy. The 48.0% simulated and 68.3% physical averages are author-reported under different protocols and must not be combined. Public checkpoint logs reviewed separately differ from Table I averages, and the evidence does not establish independent reproduction, cross-robot transfer, universal sensor support, production safety, or equivalence with the distinct UniTacVLA model.',
+    primarySources: [
+      {
+        label: 'UniVTAC preprint',
+        url: 'https://arxiv.org/abs/2602.10093',
+        type: 'paper',
+      },
+      {
+        label: 'UniVTAC official project',
+        url: 'https://univtac.github.io/',
+        type: 'project',
+      },
+      {
+        label: 'UniVTAC official repository',
+        url: 'https://github.com/univtac/UniVTAC',
+        type: 'code',
+      },
+    ],
+    sourceReviewed: '2026-08-22',
+  },
   {
     id: 'gemini-robotics-2',
     name: 'Gemini Robotics 2',

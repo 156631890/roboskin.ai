@@ -16,6 +16,7 @@ export type RoboticsDatasetEntry = {
   projectUrl?: string;
   githubUrl?: string;
   datasetUrl?: string;
+  researchUrl?: string;
   availability: string;
   sourceReviewed: string;
 };

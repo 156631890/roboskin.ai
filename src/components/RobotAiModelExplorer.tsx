@@ -274,6 +274,14 @@ export default function RobotAiModelExplorer({
                     <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Evidence boundary / sources</span>
                     {entry.evidenceLimitations}
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+                      {entry.researchUrl ? (
+                        <Link
+                          href={entry.researchUrl}
+                          className="font-semibold text-white underline decoration-white/25 underline-offset-4 hover:text-[#ffd5c5]"
+                        >
+                          RoboSkin evidence review
+                        </Link>
+                      ) : null}
                       {entry.primarySources.map((source) => (
                         <a
                           key={source.url}

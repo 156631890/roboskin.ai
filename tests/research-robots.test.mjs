@@ -10,9 +10,11 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   const entryBlock = source.match(/researchRobotEntries:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const robotAiRobotRelations/)?.[1] ?? '';
   const relationBlock = source.match(/robotAiRobotRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nconst validDate/)?.[1] ?? '';
 
-  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 22);
-  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 42);
+  assert.equal([...entryBlock.matchAll(/\n\s+id: '/g)].length, 24);
+  assert.equal([...relationBlock.matchAll(/\n\s+modelId: '/g)].length, 44);
   for (const id of [
+    'franka-panda-univtac-gelsight-mini-simulation-configuration',
+    'tianji-marvin-univtac-gf225-configuration',
     'apptronik-apollo-2',
     'franka-duo',
     'fourier-gr-1',
@@ -64,6 +66,8 @@ test('robot platform records preserve exact, family, and undisclosed hardware bo
   assert.match(relationBlock, /modelId: 'tau-touch-augmented-vla',[\s\S]*?robotId: 'franka-research-3-dm-tac-ws-tau-configuration',[\s\S]*?relation: 'evaluatedOn'/);
   assert.match(relationBlock, /modelId: 'unitacvla',[\s\S]*?robotId: 'realman-rm75b-dm-tac-w-unitacvla-configuration',[\s\S]*?relation: 'evaluatedOn'/);
   assert.match(relationBlock, /modelId: 'vla-touch',[\s\S]*?robotId: 'franka-panda-robotiq-gelsight-vla-touch-configuration',[\s\S]*?relation: 'evaluatedOn'/);
+  assert.match(relationBlock, /modelId: 'univtac-encoder',[\s\S]*?robotId: 'franka-panda-univtac-gelsight-mini-simulation-configuration',[\s\S]*?relation: 'evaluatedOn'/);
+  assert.match(relationBlock, /modelId: 'univtac-encoder',[\s\S]*?robotId: 'tianji-marvin-univtac-gf225-configuration',[\s\S]*?relation: 'evaluatedOn'/);
   assert.match(relationBlock, /pretraining uses the authors’ GR-1 humanoid data/);
   assert.doesNotMatch(entryBlock, /aliases:\s*\[[^\]]*'ViperX-300'/);
   assert.doesNotMatch(entryBlock, /aliases:\s*\[[^\]]*'NEO'/);

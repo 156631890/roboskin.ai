@@ -30,6 +30,7 @@ export type ResearchRobotEntry = {
     label: string;
     url: string;
   }[];
+  researchUrl?: string;
   description: string;
   evidenceBoundary: string;
   sourceReviewed: string;
@@ -46,6 +47,42 @@ export type RobotAiRobotRelation = {
 };
 
 export const researchRobotEntries: ResearchRobotEntry[] = [
+  {
+    id: 'franka-panda-univtac-gelsight-mini-simulation-configuration',
+    name: 'Franka Panda UniVTAC GelSight Mini simulation configuration',
+    aliases: ['UniVTAC simulated Panda platform', 'UniVTAC Panda–GelSight Mini configuration'],
+    kind: 'research configuration',
+    manufacturer: null,
+    officialUrl: null,
+    schemaSameAsUrl: null,
+    identitySources: [
+      { label: 'UniVTAC primary paper', url: 'https://arxiv.org/abs/2602.10093' },
+      { label: 'UniVTAC official repository', url: 'https://github.com/univtac/UniVTAC' },
+    ],
+    researchUrl: '/research/univtac-platform-encoder-benchmark-2026',
+    description: 'The released UniVTAC benchmark configuration combining a simulated Franka Panda and parallel-jaw gripper with bilateral simulated GelSight Mini observations, head and wrist RGB, and robot-state and action channels.',
+    evidenceBoundary: 'This is a simulation-only, paper-specific configuration rather than a stock Franka or GelSight product bundle. The current public collection and evaluation pipeline supports simulated GelSight Mini; ViTai GF225 and Xense WS are listed as planned. Simulation outcomes do not establish physical Panda compatibility, safety, sensor fidelity, or sim-to-real performance.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'tianji-marvin-univtac-gf225-configuration',
+    name: 'Tianji Marvin UniVTAC GF225 configuration',
+    aliases: ['UniVTAC physical Marvin platform', 'Tianji Marvin with bilateral ViTai GF225'],
+    kind: 'research configuration',
+    manufacturer: null,
+    officialUrl: null,
+    schemaSameAsUrl: null,
+    identitySources: [
+      { label: 'UniVTAC primary paper', url: 'https://arxiv.org/abs/2602.10093' },
+      { label: 'UniVTAC official project', url: 'https://univtac.github.io/' },
+      { label: 'Tianji Marvin Series official product page', url: 'https://en.tianjizn.com/products/marvin-series/' },
+      { label: 'ViTai VT-GF225 official product page', url: 'https://vitai.site/product/vt-gf225' },
+    ],
+    researchUrl: '/research/univtac-platform-encoder-benchmark-2026',
+    description: 'The physical UniVTAC evaluation configuration comprising one 7-DoF Tianji Marvin arm, a parallel gripper, one wrist RGB camera, and two ViTai GF225 tactile sensors sampled at 30 Hz.',
+    evidenceBoundary: 'This is a paper-specific multi-vendor integration, so manufacturer remains unset for the combined configuration. The paper does not disclose the exact Marvin SKU or gripper model, and evidence is limited to three physical tasks, 20 rollouts per method-task, and human-observed binary success. Current product-family specifications must not be transferred to the undisclosed paper SKU.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     id: 'apptronik-apollo-2',
     name: 'Apptronik Apollo 2',
@@ -391,6 +428,24 @@ export const researchRobotEntries: ResearchRobotEntry[] = [
 ];
 
 export const robotAiRobotRelations: RobotAiRobotRelation[] = [
+  {
+    modelId: 'univtac-encoder',
+    robotId: 'franka-panda-univtac-gelsight-mini-simulation-configuration',
+    relation: 'evaluatedOn',
+    sourceEmbodimentLabels: ['Simulated Franka Panda with a parallel-jaw gripper and bilateral simulated GelSight Mini observations'],
+    evidenceUrls: ['https://arxiv.org/abs/2602.10093'],
+    evidenceBoundary: 'The encoder is integrated into ACT and evaluated on eight simulated UniVTAC tasks using 100 rollouts per method-task. The author-reported 48.0% average applies to this simulated protocol and does not establish physical Panda performance, independent reproduction, or universal sensor support.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    modelId: 'univtac-encoder',
+    robotId: 'tianji-marvin-univtac-gf225-configuration',
+    relation: 'evaluatedOn',
+    sourceEmbodimentLabels: ['Tianji Marvin 7-DoF arm with a parallel gripper, wrist RGB camera, and bilateral ViTai GF225 sensors'],
+    evidenceUrls: ['https://arxiv.org/abs/2602.10093'],
+    evidenceBoundary: 'The paper reports 20 physical rollouts per method-task for Insert Tube, Insert USB, and Bottle Upright on this configuration, with human-observed binary success. The 68.3% tactile-policy average is author-reported and does not establish cross-robot transfer, independent replication, or production reliability.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     modelId: 'gemini-robotics-2',
     robotId: 'apptronik-apollo-2',

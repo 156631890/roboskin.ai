@@ -20,12 +20,12 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   const paperSensorBody = arrayBody(relationSource, 'researchPaperSensorRelations');
   const semanticBody = arrayBody(relationSource, 'researchSemanticRelations');
 
-  assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 3);
-  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 28);
+  assert.equal((paperSensorBody.match(/\n\s*\{/g) ?? []).length, 5);
+  assert.equal((semanticBody.match(/\n\s*\{/g) ?? []).length, 35);
   assert.equal(
     (paperSensorBody.match(/\n\s*\{/g) ?? []).length
       + (semanticBody.match(/\n\s*\{/g) ?? []).length,
-    31,
+    40,
   );
 
   assert.match(paperSensorBody, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
@@ -34,11 +34,11 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
   assert.doesNotMatch(paperSensorBody, /digit-?360/);
   assert.match(paperSensorBody, /https:\/\/www\.nature\.com\/articles\/s41467-026-68753-1/g);
 
-  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 14);
-  assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 2);
-  assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 2);
+  assert.equal((semanticBody.match(/relation: 'introduces'/g) ?? []).length, 16);
+  assert.equal((semanticBody.match(/relation: 'describesDataset'/g) ?? []).length, 4);
+  assert.equal((semanticBody.match(/relation: 'evaluatedBy'/g) ?? []).length, 4);
   assert.equal((semanticBody.match(/relation: 'usesDataset'/g) ?? []).length, 0);
-  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 10);
+  assert.equal((semanticBody.match(/relation: 'trainedOn'/g) ?? []).length, 11);
 
   for (const pattern of [
     /relation: 'introduces'[\s\S]*?fromId: 'prism-contact-rich-industrial-skill-dataset-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 'prism-industrial-skill'/,
@@ -56,6 +56,13 @@ test('the reviewed semantic inventory adds bounded model-dataset training and Ta
     /relation: 'introduces'[\s\S]*?fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026'[\s\S]*?toType: 'model'[\s\S]*?toId: 't-rex'/,
     /relation: 'introduces'[\s\S]*?fromId: 't-rex-tactile-reactive-dexterous-manipulation-2026'[\s\S]*?toType: 'dataset'[\s\S]*?toId: 't-rex'/,
     /relation: 'trainedOn'[\s\S]*?fromId: 't-rex'[\s\S]*?toId: 't-rex'[\s\S]*?approximately 50-hour subset/,
+    /relation: 'introduces'[\s\S]*?fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toType: 'model'[\s\S]*?toId: 'univtac-encoder'/,
+    /relation: 'introduces'[\s\S]*?fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toType: 'benchmark'[\s\S]*?toId: 'univtac-benchmark'/,
+    /relation: 'describesDataset'[\s\S]*?fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toId: 'univtac-encoder-pretraining-corpus'/,
+    /relation: 'describesDataset'[\s\S]*?fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toId: 'univtac-benchmark-dataset'/,
+    /relation: 'trainedOn'[\s\S]*?fromId: 'univtac-encoder'[\s\S]*?toId: 'univtac-encoder-pretraining-corpus'/,
+    /relation: 'evaluatedBy'[\s\S]*?fromId: 'univtac-encoder'[\s\S]*?toId: 'univtac-benchmark'/,
+    /relation: 'evaluatedBy'[\s\S]*?fromId: 'vitar'[\s\S]*?toId: 'univtac-benchmark'[\s\S]*?seven-task subset/,
     /relation: 'evaluatedBy'[\s\S]*?fromId: 'sparsh'[\s\S]*?toId: 'tacbench'/,
     /relation: 'introduces'[\s\S]*?fromId: 'tac4loco-plantar-tactile-humanoid-locomotion-2026'[\s\S]*?toId: 'tac4loco'/,
     /relation: 'introduces'[\s\S]*?fromId: 'adept-visuo-tactile-dexterity-rl-2026'[\s\S]*?toId: 'adept'/,
@@ -107,22 +114,22 @@ test('graph contract and GEO export expose relation counts and evidence boundari
       evaluatedByEdges: contract.counts.evaluatedByEdges,
     },
     {
-      knowledgeEntities: 177,
-      organizations: 63,
-      sourceDocuments: 232,
-      edges: 505,
-      supportedByEdges: 293,
-      researchRelationEdges: 123,
-      researchProvenanceEdges: 95,
-      researchSemanticEdges: 28,
-      sourceAffiliationEdges: 68,
-      manufacturedByEdges: 12,
-      paperSensorUsageEdges: 3,
-      introducesEdges: 14,
-      describesDatasetEdges: 2,
+      knowledgeEntities: 191,
+      organizations: 69,
+      sourceDocuments: 245,
+      edges: 569,
+      supportedByEdges: 324,
+      researchRelationEdges: 145,
+      researchProvenanceEdges: 110,
+      researchSemanticEdges: 35,
+      sourceAffiliationEdges: 77,
+      manufacturedByEdges: 13,
+      paperSensorUsageEdges: 5,
+      introducesEdges: 16,
+      describesDatasetEdges: 4,
       usesDatasetEdges: 0,
-      trainedOnEdges: 10,
-      evaluatedByEdges: 2,
+      trainedOnEdges: 11,
+      evaluatedByEdges: 4,
     },
   );
 

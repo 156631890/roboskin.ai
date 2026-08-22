@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 
@@ -121,6 +122,7 @@ export default function TactileDatasetExplorer({
                   <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.dataFormat}<br /><strong className="mt-3 inline-block text-white">License:</strong> {entry.license}</td>
                   <td className="w-[180px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">
+                      {entry.researchUrl ? <Link href={entry.researchUrl} className="font-semibold text-white hover:text-[#ffd5c5]">RoboSkin evidence review</Link> : null}
                       <a href={entry.paperUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Paper ↗</a>
                       {entry.projectUrl ? <a href={entry.projectUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Project ↗</a> : null}
                       {entry.datasetUrl ? <a href={entry.datasetUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Dataset ↗</a> : null}

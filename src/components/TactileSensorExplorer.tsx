@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { TactileSensorEntry } from '@/lib/tactile-sensors';
 
@@ -109,6 +110,7 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {} 
                   <td className="w-[260px] border-b border-white/8 px-4 py-5">{entry.evidenceBoundary}</td>
                   <td className="w-[170px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">
+                      {entry.researchUrl ? <Link href={entry.researchUrl} className="font-semibold text-white hover:text-[#ffd5c5]">RoboSkin evidence review</Link> : null}
                       <a href={entry.sourceUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Primary source ↗</a>
                       {entry.projectUrl ? <a href={entry.projectUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Project ↗</a> : null}
                       {entry.codeUrl ? <a href={entry.codeUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Code ↗</a> : null}

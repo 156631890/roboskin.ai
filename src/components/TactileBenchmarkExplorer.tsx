@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { TactileBenchmarkEntry } from '@/lib/tactile-benchmarks';
 
@@ -108,6 +109,7 @@ export default function TactileBenchmarkExplorer({ entries }: TactileBenchmarkEx
                   <td className="w-[270px] border-b border-white/8 px-4 py-5">{entry.access}<br /><strong className="mt-3 inline-block text-white">Boundary:</strong> {entry.limitation}</td>
                   <td className="w-[170px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">
+                      {entry.researchUrl ? <Link href={entry.researchUrl} className="font-semibold text-white hover:text-[#ffd5c5]">RoboSkin evidence review</Link> : null}
                       <a href={entry.paperUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Paper ↗</a>
                       {entry.projectUrl ? <a href={entry.projectUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Project ↗</a> : null}
                       {entry.codeUrl ? <a href={entry.codeUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Code ↗</a> : null}

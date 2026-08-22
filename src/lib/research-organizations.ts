@@ -37,6 +37,79 @@ export type RobotAiOrganizationRelation = {
 
 export const researchOrganizationEntries: ResearchOrganizationEntry[] = [
   {
+    id: 'scalelab',
+    name: 'ScaleLab',
+    aliases: ['Scale Lab', 'Spatial Cognition and Robotic Automative Learning Laboratory'],
+    kind: 'research lab',
+    officialUrl: 'https://scalelab-sjtu.github.io/',
+    identitySources: [
+      { label: 'ScaleLab official site', url: 'https://scalelab-sjtu.github.io/' },
+    ],
+    evidenceBoundary: 'The official laboratory site identifies ScaleLab as a Shanghai Jiao Tong University laboratory. The UniVTAC paper’s author affiliation records source-listed contributor association, not laboratory-wide ownership, funding, endorsement, or responsibility for every released artifact.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'd-robotics',
+    name: 'D-Robotics',
+    aliases: [],
+    kind: 'company',
+    officialUrl: 'https://en.d-robotics.cc/',
+    identitySources: [
+      { label: 'D-Robotics official site', url: 'https://en.d-robotics.cc/' },
+    ],
+    evidenceBoundary: 'The official site establishes the D-Robotics company identity. The UniVTAC author affiliation supports contributor association only; it does not establish company-wide ownership, funding, endorsement, exclusive development, product integration, or responsibility for every artifact.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'vitai-robotics',
+    name: 'ViTai Robotics',
+    aliases: ['Vitai Robotics', 'ViTai'],
+    kind: 'company',
+    officialUrl: 'https://vitai.site/about',
+    identitySources: [
+      { label: 'ViTai Robotics official about page', url: 'https://vitai.site/about' },
+    ],
+    evidenceBoundary: 'The official page establishes the ViTai Robotics company identity. The UniVTAC author affiliation and GF225 use do not establish company-wide ownership of UniVTAC, independent validation, compatibility beyond the reported setup, or that all SDK capabilities were used.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'shenzhen-university',
+    name: 'Shenzhen University',
+    aliases: ['SZU'],
+    kind: 'university',
+    officialUrl: 'https://en.szu.edu.cn/',
+    identitySources: [
+      { label: 'Shenzhen University official English site', url: 'https://en.szu.edu.cn/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The UniVTAC paper lists source author affiliations; that records contributor association only, not university-wide ownership, funding, endorsement, or responsibility for the platform and artifacts.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'wuhan-university',
+    name: 'Wuhan University',
+    aliases: ['WHU'],
+    kind: 'university',
+    officialUrl: 'https://en.whu.edu.cn/',
+    identitySources: [
+      { label: 'Wuhan University official English site', url: 'https://en.whu.edu.cn/' },
+    ],
+    evidenceBoundary: 'The official site establishes the university identity. The UniVTAC paper lists a source author affiliation; that records contributor association only, not university-wide ownership, funding, endorsement, or responsibility for the reported results.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
+    id: 'tianji',
+    name: 'Tianji Robotics',
+    aliases: ['TianJi', 'TJ Robotics'],
+    kind: 'company',
+    officialUrl: 'https://en.tianjizn.com/',
+    identitySources: [
+      { label: 'Tianji Robotics official site', url: 'https://en.tianjizn.com/' },
+      { label: 'Tianji Marvin Series official product page', url: 'https://en.tianjizn.com/products/marvin-series/' },
+    ],
+    evidenceBoundary: 'The official site establishes the Tianji Robotics brand and Marvin arm family. The UniVTAC paper does not disclose the exact Marvin SKU used, and the paper-specific multi-vendor configuration must not inherit specifications or claims from every current Marvin product.',
+    sourceReviewed: '2026-08-22',
+  },
+  {
     id: 'peking-university',
     name: 'Peking University',
     aliases: ['PKU'],
@@ -812,6 +885,13 @@ type ModelRelationPolicy = {
 };
 
 const modelRelationPolicies: ModelRelationPolicy[] = [
+  {
+    modelId: 'univtac-encoder',
+    relation: 'contributedBy',
+    evidenceUrls: ['https://arxiv.org/abs/2602.10093'],
+    evidenceBoundary: 'The primary paper lists the nine connected affiliations. This records source-listed contributor association only, not institutional ownership, funding, endorsement, exclusive development, or responsibility for every code, dataset, or checkpoint artifact.',
+    sourceReviewed: '2026-08-22',
+  },
   {
     modelId: 'gemini-robotics-2',
     relation: 'developedBy',

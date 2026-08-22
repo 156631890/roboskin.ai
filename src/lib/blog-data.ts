@@ -24,6 +24,209 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'univtac-platform-encoder-benchmark-2026',
+    title: 'UniVTAC separates tactile simulation, representation learning, and policy evaluation',
+    seoTitle: 'UniVTAC: Tactile Dataset, Encoder & Benchmark Evidence',
+    seoDescription:
+      'Source-backed UniVTAC audit: 205,826 pretraining samples, an eight-task benchmark, 800 public HDF5 episodes, sim-to-real results, and release limits.',
+    excerpt:
+      'UniVTAC combines a tactile simulation platform, a 512-dimensional ResNet-18 representation encoder, and an eight-task benchmark—but its four data and evaluation pools must not be treated as one dataset.',
+    content: `# UniVTAC separates tactile simulation, representation learning, and policy evaluation
+
+**Evidence review - August 22, 2026**
+
+UniVTAC is a February 2026 arXiv v1 preprint and public research project for simulation-based visuo-tactile data generation, tactile representation learning, and contact-rich manipulation evaluation. Its most useful contribution is not one headline score. It is a connected stack spanning a simulator, a synthetic encoder-pretraining corpus, a tactile representation encoder, an eight-task benchmark, public benchmark episodes, and a smaller physical sim-to-real study.
+
+Those assets have different units and purposes. The **205,826 synthetic contact samples**, **400 paper-reported policy-training trajectories**, **800 currently hosted HDF5 episodes**, and **450 physical demonstrations** are not interchangeable counts. RoboSkin keeps them separate so [tactile datasets](/datasets), [tactile benchmarks](/benchmarks), learned models, and evaluated robot behavior do not collapse into one claim.
+
+The paper lists ScaleLab at Shanghai Jiao Tong University, D-Robotics, ViTai Robotics, The University of Hong Kong, Nanjing University, Shenzhen University, Wuhan University, Fudan University, and Tsinghua University as its nine affiliations. These identify the authors' source-listed affiliations; they do not by themselves establish institutional ownership, endorsement, or responsibility for every project claim.
+
+## Short answer: what is UniVTAC?
+
+UniVTAC has three named parts:
+
+| Part | What it is | What it is not |
+| --- | --- | --- |
+| UniVTAC Platform | A simulation framework for generating contact-rich visuo-tactile data and manipulation tasks. | It is not evidence that every listed physical sensor is fully supported by the current public repository. |
+| UniVTAC Encoder | A 512-dimensional ResNet-18 tactile representation encoder pretrained with shape, contact, and pose supervision. | It is not a vision-language-action policy, a world model, or a demonstrated general-purpose tactile foundation model. |
+| UniVTAC Benchmark | Eight simulated manipulation tasks with policy-training and rollout protocols in the paper. | It is not the same object as either the encoder-pretraining corpus or the public 800-episode download. |
+
+This distinction places UniVTAC in the middle of the [Robot Skin → Tactile AI → Physical AI](/physical-ai-touch) chain. A tactile sensor exposes local contact. The encoder turns tactile images into a model-ready representation. A task policy combines that representation with robot observations and actions. Physical trials then test whether the learned touch pathway changes behavior on a real robot.
+
+## Four data and evaluation pools that must remain separate
+
+The paper and public repositories expose four materially different collections.
+
+| Collection | Verified scale | Purpose | Access boundary |
+| --- | ---: | --- | --- |
+| Encoder-pretraining corpus | 205,826 simulation samples from 14 shapes, approximately 14,000 interaction frames per shape | Train the UniVTAC Encoder on shape, contact deformation, marker motion, and relative pose supervision | The paper defines the corpus; RoboSkin did not verify a standalone public download for this exact 205,826-sample collection. |
+| Paper policy-training data | 50 full trajectories for each of eight tasks, 400 total | Train the task-specific policies compared in the paper's simulated benchmark | This is a protocol count, not the encoder-pretraining sample count and not the hosted 800-episode release. |
+| Public Hugging Face benchmark data | 800 HDF5 episodes at pinned revision \`172331dbbce95bc04c3e59b22f32dc72ba5561ae\`; 763 marked successful and 37 non-successful; approximately 125.43 GB | Public task-episode release for the eight-task simulation configuration | The files remain hosted and downloadable, but the hosted dataset viewer currently fails to generate with a schema CastError. The data use a simulated Franka Panda configuration with bilateral GelSight Mini observations. |
+| Physical demonstrations | 150 demonstrations for each of three tasks, 450 total | Train separate real-world task policies for the sim-to-real experiment | The paper describes this collection, but RoboSkin did not verify it as part of the public benchmark download. |
+
+The simulation evaluation adds another unit: **100 rollouts per method-task pair**. The physical evaluation uses **20 rollouts per method-task pair**. Evaluation rollouts measure outcomes; they should not be added to training trajectories or described as more dataset episodes.
+
+## What the 205,826-sample corpus contains
+
+The platform generates contact interactions with 14 geometric shapes. For each simulated contact sample, the source describes five supervision groups:
+
+- tactile images with markers, \`I_marked\`;
+- marker-free tactile images, \`I_pure\`;
+- gelpad depth maps;
+- projected marker coordinates; and
+- a seven-dimensional relative object pose consisting of translation and quaternion orientation.
+
+The paper reports randomized approach depth and small rotations so the corpus contains light-to-deep indentation, deformation, and shear-related marker displacement. These are simulation-privileged training signals. Their availability during encoder pretraining does not mean a physical sensor directly outputs every field during deployment.
+
+That boundary matters for [vision-based tactile sensing](/research/vision-based-tactile-intelligence-robotics-survey-2026). Tactile images are observations; depth, pose, deformation, force-related cues, or slip risk can be simulator-provided or model-mediated quantities. They should not be presented as identical measurements.
+
+## The UniVTAC Encoder is a representation model, not a VLA
+
+The shared encoder uses a ResNet-18 backbone and produces a 512-dimensional tactile feature. During pretraining, separate heads supervise three related capabilities:
+
+1. **Shape:** reconstruct marked and marker-free tactile images.
+2. **Contact:** reconstruct surface depth and projected marker positions.
+3. **Pose:** regress the object's seven-dimensional pose relative to the gelpad frame.
+
+The paper says the decoder heads are discarded for deployment and the retained encoder supplies tactile features to downstream policies. That makes UniVTAC Encoder a pretrained tactile representation component. It does not accept language and emit robot actions as a [VLA model](/robot-vla-models) would, and it does not predict future world state as a [robot world model](/robot-world-models) would.
+
+RoboSkin also does not classify it as a tactile foundation model merely because it is pretrained. A foundation-model claim needs explicit evidence about reuse and transfer across tasks, sensors, embodiments, or data domains. UniVTAC reports downstream tasks and one physical configuration, but the evidence remains tied to the paper's encoder, sensors, policies, and protocols. See [tactile foundation models](/tactile-foundation-models) for the broader comparison standard.
+
+## Eight benchmark tasks and the paper protocol
+
+The benchmark covers three source-organized capability groups:
+
+| Group | Tasks |
+| --- | --- |
+| Pose reasoning | Lift Bottle; Lift Can; Put Bottle in Shelf |
+| Shape perception | Grasp Classify |
+| Contact-rich interaction | Insert Hole; Insert Tube; Insert HDMI; Pull-out Key |
+
+In the paper's simulated policy experiment, each task has 50 full training trajectories. Each method-task pair is evaluated with 100 rollouts. The three rows in Table I use different tactile pathways: ACT without tactile input, VITaL, and ACT with the UniVTAC Encoder.
+
+| Paper Table I method | Eight-task average success rate |
+| --- | ---: |
+| ACT, vision only | 30.9% |
+| VITaL | 40.5% |
+| ACT + UniVTAC Encoder | 48.0% |
+
+The change from 30.9% to 48.0% is **17.1 percentage points**. It is not a 17.1% relative gain, model accuracy, or a universal tactile-policy score. The eight task columns also vary substantially, which is why the average should not replace the task-level table in the primary source.
+
+## Physical sim-to-real evidence
+
+The physical experiment uses a Tianji Marvin 7-DoF arm, a parallel gripper, a wrist RGB camera, and two ViTai GF225 tactile sensors sampled at 30 Hz. The paper describes Meta Quest-based teleoperation for collecting 150 demonstrations per task across Insert Tube, Insert USB, and Bottle Upright.
+
+Each task and observation condition is trained separately. The authors then evaluate 20 rollouts per method-task pair under matching initial conditions and use human-observed task success.
+
+| Physical task | Vision only | Vision + UniVTAC Encoder | Absolute change |
+| --- | ---: | ---: | ---: |
+| Insert Tube | 55% | 85% | +30 percentage points |
+| Insert USB | 15% | 25% | +10 percentage points |
+| Bottle Upright | 60% | 95% | +35 percentage points |
+| Average | 43.3% | 68.3% | +25 percentage points |
+
+These results are meaningful evidence that the synthetic-pretrained tactile representation changed success inside three physical task protocols. They do not establish a 25-point gain on other robots, sensors, objects, task distributions, or uncontrolled deployments. Human-observed success and 20-rollout samples should remain visible when the result is cited.
+
+## Public release audit: simulator, data, checkpoint, and licenses
+
+The public release requires four separate checks.
+
+| Asset | Current evidence | Boundary |
+| --- | --- | --- |
+| GitHub repository | Root \`LICENSE\` is Apache-2.0 | The README also says MIT, creating a visible license inconsistency. The root license file is the stronger repository-level signal, but maintainers should clarify the mismatch. |
+| Hugging Face dataset | Dataset card labels the hosted data MIT | That card applies to the dataset repository; it does not automatically relicense code, paper content, or third-party sensor assets. |
+| Hosted encoder checkpoint | A checkpoint is present with evaluation logs | RoboSkin did not find a separate weight-license statement, so the legal terms for the weights should not be inferred from the dataset card. |
+| Sensor support | Project materials describe GelSight Mini, ViTai GF225, and Xense WS | The current public collection and evaluation workflow supports the simulated GelSight Mini path; the repository marks GF225 and Xense configuration work as planned or TODO. |
+
+The hosted checkpoint logs also do **not** reproduce the paper's Table I values exactly. The public UniVTAC checkpoint logs average 43.5, compared with 48.0 in the paper; the hosted vision baseline logs average 32.375, compared with 30.9 in the paper. The artifacts may still be useful, but these mismatches mean RoboSkin will not describe the public checkpoints as a reproduction of Table I without a reconciled protocol and result report.
+
+The public 800-episode dataset uses the simulated GelSight Mini plus Franka Panda configuration. The physical study uses ViTai GF225 plus a Tianji Marvin arm. Mixing those hardware identities would hide the central sim-to-real boundary.
+
+## What UniVTAC contributes to tactile AI
+
+UniVTAC connects three bottlenecks that are often discussed separately:
+
+- scalable simulation data for tactile representation learning;
+- a normalized task suite for testing whether touch changes policy behavior; and
+- a physical experiment that probes transfer from synthetic tactile pretraining.
+
+For [robot learning](/robot-learning), the project is a good example of why the unit of analysis matters. Encoder samples train a representation; trajectories train policies; rollouts evaluate policies; physical demonstrations adapt the system to a specific hardware setup. Counting all of them as “tactile data” without those roles would produce a larger but less meaningful number.
+
+For [robot skin](/robot-skin), it shows how a fingertip tactile surface becomes useful only after sensor simulation or calibration, representation learning, synchronization with robot observations, policy integration, and task evaluation. For [Physical AI](/physical-ai), it demonstrates a contact-specific feedback path, not a complete general-purpose physical intelligence system.
+
+## What this paper and release do not establish
+
+- The source is arXiv v1, submitted February 10, 2026; RoboSkin did not verify peer-reviewed acceptance.
+- UniVTAC Encoder is not a VLA, a language-conditioned policy, or a demonstrated universal tactile foundation model.
+- The 205,826-sample pretraining corpus is not the same as the 800 public HDF5 episodes.
+- The 400 simulated policy-training trajectories are not the same as the 450 physical demonstrations.
+- The physical 25-point average change is tied to three tasks, one research configuration, and 20 rollouts per method-task pair.
+- The currently public simulator path does not establish complete working support for all three sensor types advertised by the project.
+- The paper result and hosted checkpoint logs differ; an artifact download alone is not evidence of exact reproduction.
+- Dataset, code, checkpoint, paper, and physical sensor software licensing must be audited independently.
+
+## FAQ
+
+### Is UniVTAC a tactile foundation model?
+
+RoboSkin classifies UniVTAC Encoder as a pretrained tactile representation encoder. The paper demonstrates reuse in its downstream policies and one sim-to-real setup, but it does not establish the breadth of cross-sensor, cross-robot, or open-task transfer needed to treat it as a general tactile foundation model.
+
+### Is the public UniVTAC dataset 205,826 samples or 800 episodes?
+
+Both numbers describe different assets. The paper's encoder-pretraining corpus has 205,826 simulated contact samples. The pinned Hugging Face benchmark release contains 800 HDF5 task episodes. Neither number is the paper's 400 policy-training trajectories or 450 physical demonstrations.
+
+### What is the UniVTAC Benchmark?
+
+It is an eight-task simulated visuo-tactile manipulation suite covering pose reasoning, shape perception, and contact-rich interaction. The paper trains task policies with 50 trajectories per task and evaluates 100 rollouts per method-task pair.
+
+### Does the public checkpoint reproduce the paper's 48.0 average?
+
+Not in the hosted logs reviewed by RoboSkin. Those logs report a 43.5 UniVTAC average and 32.375 vision baseline, while the paper reports 48.0 and 30.9. The difference needs a protocol or artifact explanation before a reproduction claim is justified.
+
+### Which robot and tactile sensor are used in the physical study?
+
+The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile sensors and a wrist RGB camera. That physical configuration is different from the simulated Franka Panda and GelSight Mini configuration in the public 800-episode release.
+
+## Related RoboSkin records
+
+- [UniVTAC pretraining corpus](/datasets#dataset-univtac-encoder-pretraining-corpus)
+- [UniVTAC public benchmark data](/datasets#dataset-univtac-benchmark-dataset)
+- [UniVTAC Benchmark](/benchmarks#benchmark-univtac-benchmark)
+- [UniVTAC Encoder model record](/robot-foundation-models#model-univtac-encoder)
+- [ViTai GF225 sensor record](/sensors#sensor-vitai-gf225)
+- [Simulated Franka Panda and GelSight Mini configuration](/robots#robot-franka-panda-univtac-gelsight-mini-simulation-configuration)
+- [Physical Tianji Marvin and GF225 configuration](/robots#robot-tianji-marvin-univtac-gf225-configuration)
+- [Tactile AI](/tactile-ai)
+- [Tactile manipulation](/tactile-manipulation)
+- [Physical AI and touch](/physical-ai-touch)
+
+## Primary sources
+
+- [Versioned arXiv HTML: UniVTAC v1](https://arxiv.org/html/2602.10093v1)
+- [arXiv abstract record](https://arxiv.org/abs/2602.10093)
+- [arXiv-issued DOI](https://doi.org/10.48550/arXiv.2602.10093)
+- [Official UniVTAC project page](https://univtac.github.io/)
+- [Official UniVTAC GitHub repository](https://github.com/univtac/UniVTAC)
+- [Official UniVTAC Hugging Face dataset](https://huggingface.co/datasets/byml/UniVTAC)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-08-22',
+    updated: '2026-08-22',
+    readTime: '14 min read',
+    category: 'Tactile AI',
+    image: '/generated/authority/state-of-tactile-ai-cover.webp',
+    sourceTitle: 'UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking',
+    sourceUrl: 'https://arxiv.org/abs/2602.10093',
+    citationUrls: [
+      'https://arxiv.org/abs/2602.10093',
+      'https://doi.org/10.48550/arXiv.2602.10093',
+      'https://univtac.github.io/',
+      'https://github.com/univtac/UniVTAC',
+      'https://huggingface.co/datasets/byml/UniVTAC',
+    ],
+    technicalFocus: ['UniVTAC', 'visuo-tactile simulation', 'tactile representation learning', 'tactile robotics benchmark', 'sim-to-real manipulation'],
+  },
+  {
     id: 'vision-based-tactile-intelligence-robotics-survey-2026',
     title: 'Vision-based tactile intelligence connects sensor optics to robot action',
     seoTitle: 'Vision-Based Tactile Sensors for Robotics: 2026 Survey Map',

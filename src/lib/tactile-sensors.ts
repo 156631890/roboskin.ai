@@ -13,10 +13,28 @@ export type TactileSensorEntry = {
   projectUrl?: string;
   codeUrl?: string;
   manufacturerEvidenceUrl?: string;
+  researchUrl?: string;
   sourceReviewed: string;
 };
 
 export const tactileSensorEntries: TactileSensorEntry[] = [
+  {
+    id: 'vitai-gf225',
+    name: 'ViTai VT-GF225',
+    organization: 'ViTai Robotics',
+    principle: 'Marker-based vision tactile sensing with a compliant gel interface',
+    formFactor: '25 × 25 mm sensing area in a 32 × 32 × 60 mm housing',
+    signals: ['Marker-based tactile image', 'Normal-force estimate', 'Tangential-force estimate', 'Slip-related tactile information'],
+    reportedRate: '30 Hz for the standard version according to the reviewed manufacturer page',
+    integration: 'USB 2.0 sensor documented for robot grippers and dexterous-manipulation systems; UniVTAC uses two GF225 sensors on its physical Tianji Marvin setup.',
+    access: 'Commercial hardware with public product and SDK documentation. No repository-wide license was verified for the ViTai SDK, so it is not described as open-source software.',
+    evidenceBoundary: 'Manufacturer-reported standard specifications include 240 × 240 tactile information points, approximately 100 μm spatial resolution, 30 N maximum normal and tangential force, 0.01 N minimum identifiable force, IP54, and a −25 °C to 80 °C operating range. The UniVTAC paper documents marker-based RGB use at 30 Hz and does not establish that every advertised SDK output or product specification was used or independently validated.',
+    sourceUrl: 'https://vitai.site/product/vt-gf225',
+    projectUrl: 'https://docs.vitai.site/en/',
+    manufacturerEvidenceUrl: 'https://vitai.site/about',
+    researchUrl: '/research/univtac-platform-encoder-benchmark-2026',
+    sourceReviewed: '2026-08-22',
+  },
   {
     id: 'digit',
     name: 'DIGIT',

@@ -46,6 +46,19 @@ function toEntry(supplement: ResearchIndexSupplement): ResearchIndexEntry {
 
 const supplements: ResearchIndexSupplement[] = [
   {
+    id: 'univtac-platform-encoder-benchmark-2026',
+    year: 2026,
+    publisher: 'arXiv',
+    sensorPrinciple: 'Simulation-generated marker-based visuo-tactile observations encoded by a 512-dimensional ResNet-18 representation model with shape, contact-deformation, marker-position, and relative-pose supervision',
+    modalities: ['simulated marked tactile RGB', 'simulated marker-free tactile RGB', 'simulation depth', 'projected marker coordinates', 'relative object pose', 'robot vision and state', 'physical ViTai GF225 tactile RGB at 30 Hz'],
+    formFactor: 'Simulated bilateral GelSight Mini on a Franka Panda benchmark configuration plus a separate physical Tianji Marvin arm with bilateral ViTai GF225 sensors',
+    dataOutput: '205,826 encoder-pretraining samples; an eight-task benchmark; a pinned public 800-episode HDF5 release; 512-dimensional tactile features; and protocol-bounded simulated and physical policy success rates',
+    applications: ['visuo-tactile simulation', 'tactile representation learning', 'contact-rich robot manipulation', 'tactile benchmark evaluation', 'sim-to-real manipulation'],
+    evidence: 'preprint',
+    limitations: 'UniVTAC is a February 10, 2026 arXiv v1 preprint. Its 205,826 encoder samples, 400 paper policy-training trajectories, public 800-episode benchmark release, 450 physical demonstrations, and evaluation rollouts are different units. Paper Table I reports 30.9% for vision-only ACT and 48.0% with the UniVTAC Encoder, a 17.1-percentage-point change; hosted checkpoint logs instead average 32.375 and 43.5 and should not be described as reproducing that table. The public workflow currently supports simulated GelSight Mini collection and evaluation, while GF225 and Xense paths remain marked planned or TODO. Repository, dataset, and checkpoint licensing also require separate treatment.',
+    reviewedAt: '2026-08-22',
+  },
+  {
     id: 'vision-based-tactile-intelligence-robotics-survey-2026',
     year: 2026,
     publisher: 'arXiv',

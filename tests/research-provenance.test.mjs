@@ -50,7 +50,7 @@ test('research organizations keep normalized university and lab identities separ
     assert.match(entries, new RegExp(`id: '${id}'`));
   }
 
-  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 63);
+  assert.equal([...entries.matchAll(/\n\s+id: '/g)].length, 69);
   assert.match(entries, /id: 'peking-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/english\.pku\.edu\.cn\/about\.html/);
   assert.match(entries, /id: 'northwestern-university',[\s\S]*?kind: 'university',[\s\S]*?https:\/\/www\.northwestern\.edu\/about\//);
   assert.match(entries, /id: 'northwestern-center-for-robotics-and-biosystems',[\s\S]*?kind: 'research lab',[\s\S]*?https:\/\/robotics\.northwestern\.edu\//);
@@ -136,7 +136,8 @@ test('partOf edges keep only directly supported lab relationships', async () => 
   const source = await read('src/lib/research-entity-relations.ts');
   const partOf = source.match(/researchOrganizationPartOfRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchDatasetUsageRelations/)?.[1] ?? '';
 
-  assert.equal([...partOf.matchAll(/relation: 'partOf'/g)].length, 2);
+  assert.equal([...partOf.matchAll(/relation: 'partOf'/g)].length, 3);
+  assert.match(partOf, /fromId: 'scalelab',[\s\S]*?toId: 'shanghai-jiao-tong-university'[\s\S]*?https:\/\/scalelab-sjtu\.github\.io\//);
   assert.match(partOf, /fromId: 'lasr-lab',[\s\S]*?toId: 'tu-dresden'/);
   assert.match(partOf, /fromId: 'mmint-lab',[\s\S]*?toId: 'university-of-michigan'[\s\S]*?https:\/\/www\.mmintlab\.com\/people\/nima-fazeli\//);
   assert.doesNotMatch(partOf, /bristol-robotics-laboratory|university-of-bristol/);
@@ -147,6 +148,7 @@ test('dataset usage edges distinguish sensor use, physical embodiments, and simu
   const usage = source.match(/researchDatasetUsageRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchPaperSensorRelations/)?.[1] ?? '';
 
   for (const pair of [
+    ["fromId: 'univtac-benchmark-dataset'", "toId: 'gelsight-mini'"],
     ["fromId: 'rct'", "toId: 'digit'"],
     ["fromId: 'sparsh-x'", "toId: 'digit-360'"],
     ["fromId: 'tvl'", "toId: 'digit'"],
@@ -157,8 +159,9 @@ test('dataset usage edges distinguish sensor use, physical embodiments, and simu
     assert.match(usage.slice(start), new RegExp(pair[1]));
   }
 
-  assert.equal([...usage.matchAll(/relation: 'usesSensor'/g)].length, 4);
-  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 6);
+  assert.equal([...usage.matchAll(/relation: 'usesSensor'/g)].length, 5);
+  assert.equal([...usage.matchAll(/relation: 'usesRobot'/g)].length, 7);
+  assert.match(usage, /fromId: 'univtac-benchmark-dataset'[\s\S]*?toId: 'franka-panda-univtac-gelsight-mini-simulation-configuration'[\s\S]*?simulation embodiment/);
   assert.match(usage, /fromId: 'droid',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?complete collection platform also includes the named Robotiq gripper/);
   assert.match(usage, /fromId: 'bridgedata-v2',[\s\S]*?toId: 'trossen-widowx-250-6dof'[\s\S]*?does not imply that every trajectory contains every optional camera/);
   assert.match(usage, /fromId: 'prism-industrial-skill',[\s\S]*?toId: 'franka-emika-panda'[\s\S]*?two physical Franka Emika Panda arms/);
@@ -168,11 +171,13 @@ test('dataset usage edges distinguish sensor use, physical embodiments, and simu
   assert.match(usage, /does not use a physical GelSight Mini/);
 });
 
-test('paper sensor edges preserve the two GenForce sensors and the Missing Touch GelSight Mini setup', async () => {
+test('paper sensor edges preserve UniVTAC, GenForce, and Missing Touch sensor use', async () => {
   const source = await read('src/lib/research-entity-relations.ts');
   const relations = source.match(/researchPaperSensorRelations:[\s\S]*?= \[([\s\S]*?)\n\];\n\nexport const researchSemanticRelations/)?.[1] ?? '';
 
-  assert.equal([...relations.matchAll(/relation: 'usesSensor'/g)].length, 3);
+  assert.equal([...relations.matchAll(/relation: 'usesSensor'/g)].length, 5);
+  assert.match(relations, /fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toId: 'gelsight-mini'[\s\S]*?simulated sensor configuration/);
+  assert.match(relations, /fromId: 'univtac-platform-encoder-benchmark-2026'[\s\S]*?toId: 'vitai-gf225'[\s\S]*?30 Hz/);
   assert.match(relations, /fromId: 'missing-touch-spatial-tactile-feedback-teleoperation-2026'[\s\S]*?toId: 'gelsight-mini'/);
   assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'tactip'/);
   assert.match(relations, /fromId: 'genforce-transferable-force-sensing-2026'[\s\S]*?toId: 'uskin'/);

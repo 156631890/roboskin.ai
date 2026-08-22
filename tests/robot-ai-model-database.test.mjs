@@ -25,6 +25,7 @@ const trustedPrimarySourceHosts = new Set([
   'research.nvidia.com',
   'sparsh-ssl.github.io',
   'tactile-reactive-dexterous.github.io',
+  'univtac.github.io',
   'www.pi.website',
 ]);
 
@@ -144,11 +145,11 @@ test('robot AI model records are unique, typed, dated, and evidence bounded', ()
 test('robot AI model filtering preserves exact role, tactile, year, and text semantics', () => {
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { category: 'tactile model' }).map((entry) => entry.id),
-    ['touchworld', 'sparsh'],
+    ['univtac-encoder', 'touchworld', 'sparsh'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { tactileInput: 'yes' }).map((entry) => entry.id).sort(),
-    ['adept', 'dream-tac', 'retouch', 'sparsh', 't-rex', 'tac4loco', 'tau-touch-augmented-vla', 'touchworld', 'unitacvla', 'vitar', 'vla-touch'],
+    ['adept', 'dream-tac', 'retouch', 'sparsh', 't-rex', 'tac4loco', 'tau-touch-augmented-vla', 'touchworld', 'unitacvla', 'univtac-encoder', 'vitar', 'vla-touch'],
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'franka duo' }).map((entry) => entry.id),
@@ -160,7 +161,7 @@ test('robot AI model filtering preserves exact role, tactile, year, and text sem
   );
   assert.deepEqual(
     filterRobotAiModels(robotAiModelEntries, { query: 'MIT' }).map((entry) => entry.id).sort(),
-    ['octo', 'openvla-7b', 't-rex', 'vla-touch'],
+    ['octo', 'openvla-7b', 't-rex', 'univtac-encoder', 'vla-touch'],
     'evidence search must include license text',
   );
   assert.deepEqual(

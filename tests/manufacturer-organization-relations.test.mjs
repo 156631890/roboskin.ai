@@ -24,6 +24,7 @@ const newOrganizationSources = new Map([
 ]);
 
 const expectedManufacturingPairs = [
+  ['sensor', 'vitai-gf225', 'vitai-robotics'],
   ['sensor', 'gelsight-mini', 'gelsight'],
   ['sensor', 'biotac', 'syntouch'],
   ['sensor', 'uskin', 'xela-robotics'],
@@ -87,8 +88,8 @@ test('the fifteen normalized organizations have primary identity evidence and a 
   );
 
   assert.equal(newOrganizationSources.size, 15);
-  assert.equal(contract.counts.organizations, 63);
-  assert.equal(contract.counts.knowledgeEntities, 177);
+  assert.equal(contract.counts.organizations, 69);
+  assert.equal(contract.counts.knowledgeEntities, 191);
 
   for (const [id, requiredIdentityUrl] of newOrganizationSources) {
     const block = organizationBlock(organizations, id);
@@ -105,7 +106,7 @@ test('the fifteen normalized organizations have primary identity evidence and a 
   }
 });
 
-test('manufacturedBy is an exact twelve-edge sensor-or-robot to organization inventory', async () => {
+test('manufacturedBy is an exact thirteen-edge sensor-or-robot to organization inventory', async () => {
   const [relations, contractSource] = await Promise.all([
     read('src/lib/research-entity-relations.ts'),
     read('config/knowledge-graph-contract.json'),
@@ -114,8 +115,8 @@ test('manufacturedBy is an exact twelve-edge sensor-or-robot to organization inv
   const records = manufacturingRecords(relations);
 
   assert.deepEqual(records, expectedManufacturingPairs);
-  assert.equal(records.length, 12);
-  assert.equal(contract.counts.manufacturedByEdges, 12);
+  assert.equal(records.length, 13);
+  assert.equal(contract.counts.manufacturedByEdges, 13);
   assert.match(
     relations,
     /relation: 'manufacturedBy',\n\s+fromTypes: \['sensor', 'robot'\],\n\s+toTypes: \['organization'\]/,
@@ -138,7 +139,7 @@ test('the five new source affiliations remain exact, primary-source bounded link
     .filter((organizationId) => targetIds.has(organizationId));
 
   assert.equal(actualTargets.length, 5);
-  assert.equal(contract.counts.sourceAffiliationEdges, 68);
+  assert.equal(contract.counts.sourceAffiliationEdges, 77);
   for (const [sensorId, organizationId] of expectedNewAffiliations) {
     assert.match(
       relations,

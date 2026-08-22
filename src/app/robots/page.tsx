@@ -256,6 +256,11 @@ export default function RobotsPage() {
                       <div className="mt-6 border-t border-white/10 pt-5 text-sm leading-relaxed text-[var(--text-muted)]">
                         <p>{robot.evidenceBoundary}</p>
                         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                          {robot.researchUrl ? (
+                            <Link href={robot.researchUrl} className="font-semibold text-white hover:text-[#ff6b3d]">
+                              RoboSkin evidence review
+                            </Link>
+                          ) : null}
                           {robot.identitySources.map((source) => (
                             <a
                               key={source.url}
