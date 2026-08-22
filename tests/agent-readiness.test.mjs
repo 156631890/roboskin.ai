@@ -51,9 +51,13 @@ test('Vercel negotiates Markdown without changing the browser HTML route', async
 
   assert.equal(vercel.buildCommand, 'npm run build');
   assert.equal(packageJson.scripts.postbuild, 'node scripts/generate-agent-markdown.mjs');
-  assert.equal(markdownRoutes.length, 2);
+  assert.equal(markdownRoutes.length, 3);
   assert.ok(markdownRoutes.some((route) => route.dest === '/_agent-markdown/index.md'));
   assert.ok(markdownRoutes.some((route) => route.dest === '/_agent-markdown/$1.md'));
+  const errorHandleIndex = vercel.routes.findIndex((route) => route.handle === 'error');
+  const markdown404Index = vercel.routes.findIndex((route) =>
+    route.dest === '/_agent-markdown/404.md' && route.status === 404);
+  assert.ok(errorHandleIndex >= 0 && markdown404Index > errorHandleIndex);
   for (const route of markdownRoutes) {
     assert.equal(route.headers.Vary, 'Accept, Accept-Encoding');
     assert.ok(route.has[0].value.includes('text/markdown'));

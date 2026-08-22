@@ -134,6 +134,27 @@
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "public, max-age=3600"
       }
+    },
+    {
+      "handle": "error"
+    },
+    {
+      "src": "^/.*$",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "^\\s*text/markdown(?:\\s*;\\s*q=(?:1(?:\\.0+)?|0?\\.(?:\\d*[1-9]\\d*)))?(?:\\s*,.*)?$"
+        }
+      ],
+      "dest": "/_agent-markdown/404.md",
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Vary": "Accept, Accept-Encoding",
+        "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+        "X-Content-Type-Options": "nosniff"
+      }
     }
   ]
 }
