@@ -133,7 +133,8 @@ test('IndexNow requires a recent successful production verification report', asy
   assert.match(verify, /\/llms\.txt/);
   assert.match(verify, /\/llms-full\.txt/);
   assert.doesNotMatch(verify, /const expectedGraphCounts/);
-  assert.match(verify, /actualLocation !== new URL\(pathname, canonicalOrigin\)\.href/);
+  assert.match(verify, /const normalizedLocation = actualLocation \? new URL\(actualLocation\)\.href : null/);
+  assert.match(verify, /normalizedLocation !== new URL\(pathname, canonicalOrigin\)\.href/);
   assert.match(submit, /api\.indexnow\.org\/indexnow/);
   assert.match(submit, /report\.ok/);
   assert.match(submit, /report\.commitSha/);
