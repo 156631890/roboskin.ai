@@ -83,7 +83,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(faq, /robots:\s*\{\s*index:\s*false/);
 
   assert.match(globals, /\.deferred-section/);
-  assert.match(home, /className="deferred-section py-14 md:py-20"/);
+  assert.match(home, /className="deferred-section py-12 md:py-16"/);
   assert.match(home, /className="deferred-section pb-20 pt-8"/);
   assert.match(home, /className="deferred-section mt-10"/);
   assert.doesNotMatch(home, /hero-copy reveal|className="[^"]*\breveal\b/);

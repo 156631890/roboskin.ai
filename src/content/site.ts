@@ -251,8 +251,8 @@ export const footerNavigation = [
 ];
 
 export const homeStats = [
-  { value: '25', label: 'Structured tactile and robot-learning paper records' },
-  { value: '49', label: 'Source-backed research and robotics news briefs' },
+  { value: '30', label: 'Structured tactile and robot-learning paper records' },
+  { value: '52', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
@@ -890,16 +890,16 @@ export const featuredIndustryAssets: FeaturedIndustryAsset[] = [
     imageAlt: 'Layered humanoid tactile stack modules connected by cyan signal paths.',
   },
   {
-    kicker: 'Category note',
-    title: 'Why tactile AI matters',
-    summary: 'A concise explanation of why embodied AI needs touch for contact-rich physical environments.',
-    href: '/applications',
-    ctaLabel: 'Read note',
-    code: 'NOTE-03',
+    kicker: 'Open-source kit',
+    title: 'ROS 2 tactile starter kit',
+    summary: 'A hardware-neutral message contract, synthetic publisher, contract monitor, rosbag2 QoS, and calibration metadata example.',
+    href: '/guides/ros2-tactile-sensing',
+    ctaLabel: 'Open the implementation guide',
+    code: 'ROS2-01',
     accent: 'amber',
-    includes: ['Core idea', 'Terminology', 'Category language', 'Application context'],
-    image: '/generated/authority/state-of-tactile-ai-cover.webp',
-    imageAlt: 'Robot skin and tactile AI industry landscape rendered as a dark technical cover image.',
+    includes: ['TactileArray contract', 'Synthetic demo', 'rosbag2 QoS', 'Apache-2.0'],
+    image: '/generated/authority/research-ros2-tactile-pipeline.webp',
+    imageAlt: 'Robot hand tactile sensor connected to compute modules and ROS 2 middleware data lanes.',
   },
   {
     kicker: 'Reference',

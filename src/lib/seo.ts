@@ -3,6 +3,7 @@ import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
 import type { ResearchIndexEntry } from '@/lib/research-index';
+import { researchIndexRelease } from '@/lib/research-index-release';
 import type { TactileBenchmarkEntry } from '@/lib/tactile-benchmarks';
 import type { TactileDatasetEntry } from '@/lib/tactile-datasets';
 import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
@@ -900,6 +901,10 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         url: pageUrl,
         creator: { '@id': `${canonicalUrl(site.editorial.path)}#editorial-team` },
         dateModified: pageSeo['/research-index'].updated,
+        version: researchIndexRelease.version,
+        license: researchIndexRelease.licenseUrl,
+        sameAs: [researchIndexRelease.repositoryUrl, researchIndexRelease.releaseUrl],
+        citation: researchIndexRelease.releaseUrl,
         inLanguage: 'en',
         isAccessibleForFree: true,
         distribution: [

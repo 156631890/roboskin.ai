@@ -246,7 +246,9 @@ test('homepage authority routes promote news and GSC-visible article pages', asy
 
   assert.match(siteContent, /Read full-hand tactile sensing analysis/);
   assert.doesNotMatch(siteContent, /GSC-visible|high-impression/);
-  assert.match(homePage, /<AuthorityIndex groups=\{authorityLinkGroups\} \/>/);
+  assert.match(homePage, /const homeAuthorityLinkGroups = authorityLinkGroups\.map/);
+  assert.match(homePage, /links: group\.links\.slice\(0, group\.title === 'Track the field' \? 5 : 4\)/);
+  assert.match(homePage, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} \/>/);
 });
 
 test('GSC priority articles include answer-first sections and crawlable internal links', async () => {

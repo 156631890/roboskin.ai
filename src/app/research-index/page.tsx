@@ -4,6 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ResearchIndexExplorer from '@/components/ResearchIndexExplorer';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
+import { researchIndexRelease } from '@/lib/research-index-release';
 import {
   buildBreadcrumbJsonLd,
   buildGraphJsonLd,
@@ -36,6 +37,9 @@ export default function ResearchIndexPage() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="/research-index.csv" className="btn-primary">Open CSV data</Link>
               <Link href="/research-index.json" className="btn-secondary">Open JSON data</Link>
+              <a href={researchIndexRelease.repositoryUrl} target="_blank" rel="noreferrer" className="btn-tertiary">
+                Open GitHub repository ↗
+              </a>
               <Link href="/research" className="btn-tertiary">Browse research briefs</Link>
             </div>
           </div>
@@ -65,6 +69,54 @@ export default function ResearchIndexPage() {
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">edition reviewed</dd>
             </div>
           </dl>
+        </div>
+      </section>
+
+      <section className="border-y border-white/8 bg-white/[0.018] py-10 md:py-14" aria-labelledby="research-index-citation-heading">
+        <div className="container-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+          <article>
+            <p className="eyebrow">Versioned public release</p>
+            <h2 className="mt-4 text-3xl font-bold text-white">A stable research asset, not a changing article list</h2>
+            <dl className="mt-7 grid gap-4 border-y border-white/10 py-5 sm:grid-cols-3 lg:grid-cols-1">
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#8e98a8]">Version</dt>
+                <dd className="mt-1 font-mono text-sm font-semibold text-white">{researchIndexRelease.version}</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#8e98a8]">Data license</dt>
+                <dd className="mt-1 text-sm font-semibold text-white">{researchIndexRelease.licenseShortName}</dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#8e98a8]">Records</dt>
+                <dd className="mt-1 font-mono text-sm font-semibold text-white">{researchIndexEntries.length}</dd>
+              </div>
+            </dl>
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
+              <a href={researchIndexRelease.releaseUrl} target="_blank" rel="noreferrer" className="text-[#ff6b3d] hover:text-white">
+                Open versioned release ↗
+              </a>
+              <a href={researchIndexRelease.licenseUrl} target="_blank" rel="noreferrer" className="text-[#ff6b3d] hover:text-white">
+                Read the data license ↗
+              </a>
+            </div>
+          </article>
+
+          <article>
+            <p className="eyebrow">Citation</p>
+            <h2 id="research-index-citation-heading" className="mt-4 text-3xl font-bold text-white">Cite the index with its reviewed version</h2>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#c8d1de]">
+              Cite the version you actually reviewed. The GitHub release preserves matching CSV and JSON files while this page remains the canonical human-readable route.
+            </p>
+            <blockquote className="mt-6 border-l-2 border-[#ff6b3d] bg-[#11110f] px-5 py-4 text-sm leading-relaxed text-[#f3efe5]">
+              {researchIndexRelease.citation}
+            </blockquote>
+            <details className="mt-4 border border-white/10 bg-[#080a0e] p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-white">BibTeX-compatible entry</summary>
+              <code className="mt-4 block overflow-x-auto whitespace-pre-wrap font-mono text-xs leading-relaxed text-[#aeb8c7]">
+                {researchIndexRelease.bibtex}
+              </code>
+            </details>
+          </article>
         </div>
       </section>
 

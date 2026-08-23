@@ -8,7 +8,6 @@ import {
   ConversionPathPanel,
   DirectAnswerSection,
   FeaturedAssetCovers,
-  ResearchBriefIndex,
   TactileStackMap,
 } from '@/components/IndustryVisuals';
 import {
@@ -25,8 +24,6 @@ import {
   homeRoboticsIntelligence,
   homeStats,
   manifesto,
-  marketSignals,
-  researchResourceIndex,
   site,
   tactileAiStack,
 } from '@/content/site';
@@ -51,6 +48,11 @@ const homeRobotSkinFaq = directAnswerBlocks.slice(0, 3).map((item) => ({
   answer: item.answer,
   href: item.href,
   ctaLabel: item.ctaLabel,
+}));
+
+const homeAuthorityLinkGroups = authorityLinkGroups.map((group) => ({
+  ...group,
+  links: group.links.slice(0, group.title === 'Track the field' ? 5 : 4),
 }));
 
 const latestResearchSignals = [
@@ -119,8 +121,6 @@ export default function Home() {
               <div className="hero-stage-actions">
                 <Link href="/research-index" className="btn-primary">Compare research evidence</Link>
                 <Link href="/research" className="hero-text-link">Browse research briefs</Link>
-                <Link href="/glossary" className="hero-text-link">Open the glossary</Link>
-                <Link href="/contact?requestType=research" className="hero-text-link">Submit source</Link>
               </div>
             </div>
             <p className="hero-stage-caption">
@@ -148,7 +148,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="deferred-section border-y border-white/10 py-14 md:py-20" aria-labelledby="core-knowledge-map-heading">
+      <section className="deferred-section border-y border-white/10 py-12 md:py-16" aria-labelledby="core-knowledge-map-heading">
         <div className="container-shell">
           <div className="mb-9 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
@@ -183,7 +183,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="deferred-section border-b border-white/10 py-14 md:py-20" aria-labelledby="ai-robot-loop-heading">
+      <section className="deferred-section border-b border-white/10 py-12 md:py-16" aria-labelledby="ai-robot-loop-heading">
         <div className="container-shell">
           <div className="brand-section-rule border-white/20">
             <div>
@@ -206,7 +206,7 @@ export default function Home() {
       </section>
 
       <section className="editorial-light" aria-labelledby="robotics-research-pulse-heading">
-        <div className="deferred-section py-14 md:py-20">
+        <div className="deferred-section py-12 md:py-16">
           <div className="container-shell">
             <div className="brand-section-rule">
               <div>
@@ -254,23 +254,14 @@ export default function Home() {
               ))}
             </div>
 
-            <nav className="mt-8 border border-[#171714]/20" aria-label="Robotics intelligence topics">
-              <div className="grid md:grid-cols-2 xl:grid-cols-3">
-                {homeRoboticsIntelligence.map((topic, index) => (
-                  <Link
-                    key={topic.href}
-                    href={topic.href ?? '/research'}
-                    className="group grid gap-3 border-b border-[#171714]/20 p-5 transition-colors hover:bg-[#171714]/[0.04] md:border-r md:even:border-r-0 xl:[&:nth-child(2n)]:border-r xl:[&:nth-child(3n)]:border-r-0 xl:[&:nth-last-child(-n+3)]:border-b-0"
-                  >
-                    <span className="font-mono text-xs font-semibold text-[#9f351d]">{String(index + 1).padStart(2, '0')}</span>
-                    <span className="text-lg font-semibold text-[#171714]">{topic.title}</span>
-                    <span className="text-sm leading-relaxed text-[#514c45]">{topic.description}</span>
-                    <span className="text-sm font-semibold text-[#9f351d] transition-transform group-hover:translate-x-1">
-                      {topic.ctaLabel} →
-                    </span>
-                  </Link>
-                ))}
-              </div>
+            <nav className="home-topic-rail" aria-label="Robotics intelligence topics">
+              {homeRoboticsIntelligence.map((topic, index) => (
+                <Link key={topic.href} href={topic.href ?? '/research'}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{topic.title}</strong>
+                  <small aria-hidden="true">→</small>
+                </Link>
+              ))}
             </nav>
 
             <div className="mt-14 md:mt-20">
@@ -302,7 +293,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="deferred-section py-14 md:py-20">
+      <section className="deferred-section py-12 md:py-16">
         <div className="container-shell">
           <div className="brand-section-rule border-white/20">
             <div>
@@ -331,7 +322,7 @@ export default function Home() {
       </section>
 
       <section className="editorial-light">
-        <div className="deferred-section py-14 md:py-20">
+        <div className="deferred-section py-12 md:py-16">
           <div className="container-shell">
             <div className="mb-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
               <div>
@@ -356,7 +347,7 @@ export default function Home() {
               </div>
             </div>
 
-            <AuthorityIndex groups={authorityLinkGroups} />
+            <AuthorityIndex groups={homeAuthorityLinkGroups} />
 
             <div className="mt-16 grid gap-8 border-t border-[#171714]/25 pt-8 lg:grid-cols-[0.78fr_1.22fr]">
               <div>
@@ -396,7 +387,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="deferred-section py-14 md:py-20">
+      <section className="deferred-section py-12 md:py-16">
         <div className="container-shell">
           <div className="mb-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
             <div>
@@ -407,32 +398,18 @@ export default function Home() {
               Direct-answer coverage supports readers and answer engines without turning source boundaries into product claims.
             </p>
           </div>
-          <DirectAnswerSection answers={directAnswerBlocks} />
-        </div>
-      </section>
-
-      <section className="deferred-section py-14 md:py-20 border-y border-white/10">
-        <div className="container-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-          <div>
-            <p className="brand-section-number">05 / Source library</p>
-            <h2 className="mt-5 text-3xl font-semibold md:text-5xl">Research signals, organized for comparison</h2>
-            <p className="section-copy mt-5">
-              Every brief keeps its technical focus, date, source path, and limitation visible so readers can compare evidence
-              without treating a single paper as market proof.
-            </p>
-          </div>
-          <ResearchBriefIndex entries={researchResourceIndex} />
+          <DirectAnswerSection answers={homeRobotSkinFaq} />
         </div>
       </section>
 
       <section className="editorial-light">
-        <div className="deferred-section py-14 md:py-20">
+        <div className="deferred-section py-12 md:py-16">
           <div className="container-shell">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
-                <p className="brand-section-number">06 / Field guides</p>
+                <p className="brand-section-number">05 / Field guides</p>
                 <h2 className="mt-5 max-w-4xl text-3xl font-semibold md:text-5xl">
-                  Guides, maps, and references for the robot skin category
+                  Open tools, maps, and references for the robot skin category
                 </h2>
                 <p className="section-copy mt-5">
                   Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
@@ -441,28 +418,6 @@ export default function Home() {
               <Link href="/resources" className="editorial-link">View library →</Link>
             </div>
             <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
-          </div>
-        </div>
-      </section>
-
-      <section className="deferred-section py-14 md:py-20">
-        <div className="container-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-          <div>
-            <p className="brand-section-number">07 / Category signals</p>
-            <h2 className="mt-5 text-3xl font-semibold md:text-5xl">Why humanoid robot skin is becoming a category</h2>
-            <p className="section-copy mt-5">
-              The public site stays conservative while tracking signals that make robot skin, tactile AI, and distributed touch
-              relevant to humanoid robotics.
-            </p>
-          </div>
-          <div className="border-t border-white/15">
-            {marketSignals.map((signal, index) => (
-              <article key={signal.title} className="grid gap-4 border-b border-white/15 py-6 md:grid-cols-[44px_0.45fr_1fr]">
-                <span className="font-mono text-xs text-[#7e7a72]">{String(index + 1).padStart(2, '0')}</span>
-                <h3 className="text-lg font-semibold">{signal.title}</h3>
-                <p className="text-sm leading-relaxed text-[#b9b3a7]">{signal.description}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -491,6 +446,13 @@ export default function Home() {
                 {site.contact.primaryEmail}
               </a>
             </p>
+            <nav aria-label="Research utilities" className="mt-6 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6 text-sm">
+              <Link href="/glossary" className="text-[#b9b3a7] hover:text-white">Open the glossary</Link>
+              <Link href="/resources" className="text-[#b9b3a7] hover:text-white">View RoboSkin library</Link>
+              <Link href="/technology" className="text-[#b9b3a7] hover:text-white">Explore tactile AI technology</Link>
+              <Link href="/research" className="text-[#b9b3a7] hover:text-white">Browse research briefs</Link>
+              <Link href="/contact?requestType=research" className="text-[#ff6b3d] hover:text-white">Submit source</Link>
+            </nav>
           </div>
         </div>
       </section>

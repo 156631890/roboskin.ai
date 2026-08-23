@@ -15,6 +15,8 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
 - [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
 - [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.
+- [RoboSkin Tactile Research Index repository](https://github.com/roboskin-ai/tactile-research-index): Versioned CC BY 4.0 CSV and JSON releases with citation and contribution metadata.
+- [RoboSkin ROS 2 Tactile Starter Kit](https://github.com/roboskin-ai/ros2-tactile-starter-kit): Experimental Apache-2.0 tactile-array message, deterministic synthetic publisher, contract monitor, rosbag2 QoS, and calibration metadata examples; it is not an official ROS standard or sensor benchmark.
 
 ## Important Pages
 

@@ -20,6 +20,7 @@ export default function AiRobotClosedLoop({ stages }: AiRobotClosedLoopProps) {
           </li>
         ))}
       </ol>
+      <p className="ai-robot-swipe-note" aria-hidden="true">Swipe to follow all seven stages →</p>
       <div className="ai-robot-feedback-rail">
         <span>Feedback path</span>
         <p>

@@ -1563,7 +1563,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'ROS 2 tactile sensing pipeline',
     kicker: 'Integration guide',
     intent: 'Software integration page for ROS 2 tactile sensing, robot skin ROS 2, tactile data pipeline, and rosbag tactile replay searches.',
-    updated: '2026-06-06',
+    updated: '2026-08-23',
     priority: 0.76,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1602,6 +1602,19 @@ export const seoTopicPages: SeoTopicPage[] = [
           'That layer makes timing, replay, calibration metadata, and controller-facing interfaces explicit enough to reproduce and evaluate.',
         ],
       },
+      {
+        heading: 'Open-source reference implementation',
+        body: [
+          'The RoboSkin ROS 2 Tactile Starter Kit publishes an experimental, hardware-neutral TactileArray message, a deterministic synthetic publisher, a contract monitor, rosbag2 QoS configuration, and calibration metadata examples.',
+          'It is a reference implementation rather than an official ROS standard, sensor driver, benchmark, or compatibility claim. Real deployments must validate timing, geometry, calibration, QoS, and controller behavior on their own hardware.',
+        ],
+        bullets: [
+          'Explicit channel-major array layout and validity mask',
+          'Measurement timestamp, frame ID, sensor ID, channels, and units',
+          'Synthetic publisher and contract monitor for integration checks',
+          'Versioned Apache-2.0 code with conservative evidence boundaries',
+        ],
+      },
     ],
     faqs: [
       {
@@ -1624,16 +1637,17 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why touch data matters for Physical AI workflows.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that uses robot touch signals.' },
       { label: 'ROS 2 pipeline brief', href: '/research/ros2-kilted-tactile-pipeline-2026', description: 'Source-backed ROS 2 tactile pipeline article.' },
+      { label: 'RoboSkin ROS 2 starter kit', href: 'https://github.com/roboskin-ai/ros2-tactile-starter-kit', description: 'Experimental message, publisher, monitor, rosbag2 QoS, and calibration metadata examples.' },
       { label: 'Technology context', href: '/technology', description: 'Existing site-level technology overview.' },
     ],
     sources: [
       {
-        label: 'ROS 2 documentation',
-        href: 'https://docs.ros.org/',
+        label: 'ROS 2 Lyrical tutorials',
+        href: 'https://docs.ros.org/en/lyrical/Tutorials.html',
       },
       {
-        label: 'ROS 2 rosbag tutorial',
-        href: 'https://docs.ros.org/en/rolling/Tutorials/Advanced/Recording-A-Bag-From-Your-Own-Node-CPP.html',
+        label: 'ROS 2 Lyrical rosbag2 QoS override guide',
+        href: 'https://docs.ros.org/en/ros2_documentation/lyrical/How-To-Guides/Overriding-QoS-Policies-For-Recording-And-Playback.html',
       },
       {
         label: 'ros2_control documentation',
