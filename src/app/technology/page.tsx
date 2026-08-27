@@ -15,7 +15,7 @@ const technologyTopicLinks = [
   },
   {
     label: 'Flexible tactile sensor array',
-    href: '/guides/flexible-tactile-sensor-array',
+    href: '/sensors',
     description: 'Array-level tradeoffs for contact maps, resolution, data rate, and calibration.',
   },
   {
@@ -161,10 +161,10 @@ export default function TechnologyPage() {
               </Link>
             </div>
             <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
-              <Link href="/products" className="text-accent font-semibold hover:text-white">
+              <Link href="/robot-skin" className="text-accent font-semibold hover:text-white">
                 View guide routes {'->'}
               </Link>
-              <Link href="/resources" className="text-accent font-semibold hover:text-white">
+              <Link href="/research-index" className="text-accent font-semibold hover:text-white">
                 View learning resources {'->'}
               </Link>
               <Link href="/faq" className="text-accent font-semibold hover:text-white">

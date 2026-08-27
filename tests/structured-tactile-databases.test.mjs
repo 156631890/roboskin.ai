@@ -62,7 +62,7 @@ test('structured tactile databases and pillars are crawlable, source-bounded, an
   assert.match(seo, /buildTactileBenchmarksJsonLd/);
   assert.match(seo, /buildTactileSensorsJsonLd/);
   assert.match(seo, /'@type': 'ItemList'/);
-  assert.match(sitemap, /seoTopicPages\.map/);
+  assert.match(sitemap, /seoTopicPages[\s\S]*?\.filter\(\(page\) => page\.index !== false\)[\s\S]*?\.map/);
 
   assert.match(homepage, /const researchDatabases =/);
   assert.match(homepage, /href: '\/benchmarks'/);

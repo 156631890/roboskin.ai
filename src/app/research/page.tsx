@@ -175,7 +175,7 @@ export default function ResearchPage() {
                         <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="text-sm font-semibold text-white hover:text-[#f7c4af]">
                           Source {'->'}
                         </a>
-                        <Link href="/resources" className="text-sm font-semibold text-white hover:text-[#f7c4af]">
+                        <Link href="/research-index" className="text-sm font-semibold text-white hover:text-[#f7c4af]">
                           Resource route {'->'}
                         </Link>
                       </div>

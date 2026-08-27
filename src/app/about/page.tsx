@@ -63,9 +63,12 @@ export default function AboutPage() {
                 Steven Yang leads RoboSkin.ai&apos;s topic selection, source-boundary review, corrections process, and publication standards. The role is editorial: public research claims are traced to cited papers, institutional pages, standards documentation, or official project sources rather than presented as personal laboratory findings.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-soft">
-                Research and news briefs retain the institutional RoboSkin.ai Editorial Team byline when they represent the site&apos;s shared research workflow. That byline does not imply authorship of the cited scientific work or affiliation with the referenced laboratory, company, or project.
+                Research and news briefs link to Steven Yang as the accountable editor. The byline identifies publication responsibility; it does not imply authorship of the cited scientific work, laboratory affiliation, or independent reproduction of reported experiments.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
+                <Link href={site.editorial.lead.path} className="btn-primary">
+                  View the author profile
+                </Link>
                 <Link href="/editorial-policy" className="btn-secondary">
                   Read the editorial policy
                 </Link>

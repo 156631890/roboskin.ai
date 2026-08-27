@@ -6,7 +6,7 @@ import PageHeroVisual from '@/components/PageHeroVisual';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
-import { buildSeoTopicGraph } from '@/lib/seo-topic';
+import { buildSeoTopicGraph, resolveSeoTopicHref } from '@/lib/seo-topic';
 
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
@@ -18,8 +18,8 @@ export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
     ? {
-        href: pathParts[0] === 'guides' ? '/resources' : `/${pathParts[0]}`,
-        label: pathParts[0] === 'guides' ? 'Guides' : pathParts[0].replaceAll('-', ' '),
+        href: pathParts[0] === 'guides' ? '/research' : `/${pathParts[0]}`,
+        label: pathParts[0] === 'guides' ? 'Research' : pathParts[0].replaceAll('-', ' '),
       }
     : undefined;
   const paperBriefs = page.paperBriefIds
@@ -50,7 +50,10 @@ export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps
               {page.schemaType === 'TechArticle' ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   {page.published ? <>Published {page.published} | </> : null}
-                  Updated {page.updated} by {site.editorial.name}
+                  Updated {page.updated} by{' '}
+                  <Link href={site.editorial.lead.path} rel="author" className="font-semibold text-[#ffd5c5] hover:text-white">
+                    {site.editorial.lead.name}
+                  </Link>
                 </p>
               ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -171,7 +174,7 @@ export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Related routes</p>
                 <div className="mt-4 space-y-3">
                   {page.relatedLinks.map((link) => (
-                    <Link key={link.href} href={link.href} className="block rounded-md border border-white/8 bg-[#020408] p-4 transition-colors hover:bg-white/[0.04]">
+                    <Link key={link.href} href={resolveSeoTopicHref(link.href)} className="block rounded-md border border-white/8 bg-[#020408] p-4 transition-colors hover:bg-white/[0.04]">
                       <span className="block text-sm font-semibold text-white">{link.label}</span>
                       <span className="mt-1 block text-xs leading-relaxed text-[#8e98a8]">{link.description}</span>
                     </Link>

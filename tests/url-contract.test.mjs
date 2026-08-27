@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 114);
+  assert.equal(protectedUrls.length, 105);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -68,8 +68,7 @@ test('the audited production URL inventory is protected', async () => {
     '/robot-teleoperation',
     '/physical-ai-touch',
     '/tactile-foundation-models',
-    '/research-services',
-    '/reports/tactile-ai-robot-skin-landscape-2026',
+    '/reports/tactile-robotics-data-transparency-audit-2026',
     '/research/feelworld-visuo-tactile-world-model-2026',
     '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026',
     '/news/underwater-self-healing-electronic-skin-nus-2026',
@@ -97,19 +96,45 @@ test('the audited production URL inventory is protected', async () => {
   });
 });
 
-test('duplicate and positioning-mismatched legacy pages stay out of the index contract', async () => {
-  const [seo, protectedUrls, noindexUrls] = await Promise.all([
+test('duplicate, commercial-shell, and positioning-mismatched pages stay out of the index contract', async () => {
+  const [seo, topics, protectedUrls, noindexUrls] = await Promise.all([
     read('src/lib/seo.ts'),
+    read('src/content/seo-topic-pages.ts'),
     read('config/protected-urls.json').then(JSON.parse),
     read('config/noindex-urls.json').then(JSON.parse),
   ]);
 
-  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation']) {
+  for (const pathname of [
+    '/case-studies',
+    '/comparison',
+    '/downloads',
+    '/implementation',
+    '/products',
+    '/research-services',
+    '/resources',
+    '/solutions',
+  ]) {
     assert.match(seo, new RegExp(`'${pathname}': \\{[\\s\\S]*?index: false`));
     assert.ok(!protectedUrls.includes(`https://roboskin.ai${pathname}`));
     assert.ok(noindexUrls.includes(`https://roboskin.ai${pathname}`));
   }
-  assert.equal(noindexUrls.length, 4);
+  for (const pathname of [
+    '/applications/robot-gripper-tactile-sensor',
+    '/applications/robot-hand-tactile-sensor',
+    '/applications/soft-robotic-skin',
+    '/guides/flexible-tactile-sensor-array',
+    '/guides/robot-touch-sensor',
+    '/guides/tactile-sensor-for-robots',
+  ]) {
+    assert.match(topics, new RegExp(`path: '${pathname}',[\\s\\S]*?index: false`));
+    assert.ok(!protectedUrls.includes(`https://roboskin.ai${pathname}`));
+    assert.ok(noindexUrls.includes(`https://roboskin.ai${pathname}`));
+  }
+  const oldSampleReport = '/reports/tactile-ai-robot-skin-landscape-2026';
+  assert.match(seo, new RegExp(`'${oldSampleReport}': \\{[\\s\\S]*?index: false`));
+  assert.ok(!protectedUrls.includes(`https://roboskin.ai${oldSampleReport}`));
+  assert.ok(noindexUrls.includes(`https://roboskin.ai${oldSampleReport}`));
+  assert.equal(noindexUrls.length, 15);
 });
 
 test('the two production-only news routes remain in local content and sitemap generation', async () => {
@@ -185,7 +210,8 @@ test('NewsArticle JSON-LD uses the visible byline and a separate site publisher'
     'export function buildGraphJsonLd',
   );
 
-  assert.match(newsArticle, /author: buildEditorialTeamJsonLd\(post\.author\)/);
+  assert.match(newsArticle, /author: \{ '@id': editorialLeadId \}/);
+  assert.match(newsArticle, /reviewedBy: \{ '@id': editorialLeadId \}/);
   assert.doesNotMatch(newsArticle, /author:\s*\{[^}]*name: site\.name/);
   assert.match(
     newsArticle,

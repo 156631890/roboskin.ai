@@ -293,7 +293,7 @@ ${trendRows}
 | robot VLA | /robot-vla-models | Track vision-language-action interfaces, robot actions, embodiments, and evaluation. |
 | robot foundation model | /robot-foundation-models | Track model roles, training data, embodiment transfer, access, tactile input, and evidence boundaries. |
 | robot skin | /robot-skin | Preserve the site's core topical authority and commercial-intent entry point. |
-| tactile sensor | /guides/tactile-sensor-for-robots | Capture component-level intent and route readers into benchmarks and the research index. |
+| tactile sensor | /sensors | Capture component-level intent and route readers into benchmarks and the research index. |
 
 - [Robotics / humanoid robot / robot manipulation / Physical AI / vision-language-action](https://trends.google.com/trends/explore?q=robotics,humanoid%20robot,robot%20manipulation,Physical%20AI,vision-language-action&hl=en)
 - [Robot learning / imitation learning / reinforcement learning robotics / sim-to-real / robot datasets](https://trends.google.com/trends/explore?q=robot%20learning,imitation%20learning,reinforcement%20learning%20robotics,sim-to-real,robot%20datasets&hl=en)

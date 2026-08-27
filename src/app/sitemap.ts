@@ -33,13 +33,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     images: [canonicalUrl(post.image)],
   }));
 
-  const topicPages = seoTopicPages.map((page) => ({
-    url: canonicalUrl(page.path),
-    lastModified: new Date(page.updated),
-    changeFrequency: page.changeFrequency,
-    priority: page.priority,
-    images: [canonicalUrl(pageVisuals[page.visualKey].image)],
-  }));
+  const topicPages = seoTopicPages
+    .filter((page) => page.index !== false)
+    .map((page) => ({
+      url: canonicalUrl(page.path),
+      lastModified: new Date(page.updated),
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+      images: [canonicalUrl(pageVisuals[page.visualKey].image)],
+    }));
 
   return [...staticPages, ...articlePages, ...newsPages, ...topicPages];
 }

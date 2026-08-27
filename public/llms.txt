@@ -14,6 +14,9 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [RoboSkin.ai knowledge graph JSON](https://roboskin.ai/knowledge-graph.json): Deterministic machine-readable graph containing 191 source-reviewed knowledge entities: 29 papers, 1 documentation record, 22 datasets, 12 benchmarks, 14 sensors, 20 robot AI models, 69 verified organizations, and 24 normalized robot-platform records. It keeps 245 deduplicated primary and official source records separate from the entities and exposes a strict relationship vocabulary. Current evidence-backed edges include 50 model-organization relations, 44 model-robot relations, 110 research-provenance relations, and 35 semantic entity relations. Provenance includes 13 official-source-bounded sensor-or-robot manufacturer/provider relations; the graph also retains 11 narrowly bounded model-to-dataset training relations. Every edge keeps its evidence URL, source wording, review date, and evidence boundary.
 - [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
 - [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
+- [Tactile robotics dataset transparency audit](https://roboskin.ai/reports/tactile-robotics-data-transparency-audit-2026): Reproducible record-level audit of data URLs, direct license links, code, sampling-rate, synchronization, and split disclosure.
+- [Tactile dataset transparency audit JSON](https://roboskin.ai/reports/tactile-robotics-data-transparency-audit-2026.json): Structured summary, method, limitations, and record-level audit results.
+- [Tactile dataset transparency audit CSV](https://roboskin.ai/reports/tactile-robotics-data-transparency-audit-2026.csv): Tabular export generated from the same audit records.
 - [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.
 - [RoboSkin Tactile Research Index repository](https://github.com/roboskin-ai/tactile-research-index): Versioned CC BY 4.0 CSV and JSON releases with citation and contribution metadata.
 - [RoboSkin ROS 2 Tactile Starter Kit](https://github.com/roboskin-ai/ros2-tactile-starter-kit): Experimental Apache-2.0 tactile-array message, deterministic synthetic publisher, contract monitor, rosbag2 QoS, and calibration metadata examples; it is not an official ROS standard or sensor benchmark.
@@ -39,11 +42,8 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Physical AI](https://roboskin.ai/physical-ai): Canonical broad map of multimodal perception, reasoning, policies, robot control, embodiment, safety, and measured feedback.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Contact-specific child route explaining how vision, language, proprioception, and tactile sensing combine in embodied systems.
 - [E-skin in robotics](https://roboskin.ai/e-skin): Canonical definition for e-skin and electronic skin in robotics.
-- [Robot skin guides](https://roboskin.ai/products): Guide routes for robot skin and tactile AI learning.
-- [Robotic gripper and robot hand sensing](https://roboskin.ai/solutions): Use-case contexts for robotic grippers, robot hands, and tactile sensing.
 - [Humanoid robot skin and contact-aware robotics](https://roboskin.ai/applications): Application route for humanoid robot skin, contact-aware robotics, and Physical AI use cases.
 - [Tactile AI technology](https://roboskin.ai/technology): Technology route for tactile AI, flexible tactile sensors, signal flow, and robot-ready touch data.
-- [RoboSkin library](https://roboskin.ai/resources): Library route for guides, stack maps, references, and public learning paths.
 - [Robot hand tactile sensor research](https://roboskin.ai/research): Source-backed research route for robot hand tactile sensors, slip detection, e-skin, and tactile AI.
 - [Tactile sensor benchmark for robot manipulation](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-first comparison of visual, acoustic, magnetic, and resistive tactile sensors.
 - [Tactile robotics datasets](https://roboskin.ai/datasets): Filterable directory of tactile resources by sensor, robot, task, modality, year, access, and license evidence.
@@ -60,8 +60,6 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [About RoboSkin.ai](https://roboskin.ai/about): Site purpose and conservative publication posture.
 - [Editorial policy and source standards](https://roboskin.ai/editorial-policy): Source boundaries, conservative claim rules, and RoboSkin.ai editorial standards.
 - [RoboSkin.ai contact](https://roboskin.ai/contact): Source suggestions, corrections, and editorial collaboration.
-- [RoboSkin research services](https://roboskin.ai/research-services): Fixed-scope commercial research for tactile sensors, datasets, models, labs, companies, and robot platforms.
-- [Free tactile AI and robot skin sample report](https://roboskin.ai/reports/tactile-ai-robot-skin-landscape-2026): Source-backed example of the taxonomy, comparison tables, evidence labels, and primary-source register used in RoboSkin research work.
 
 ## Research Briefs
 
@@ -130,14 +128,11 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Robot manipulation](https://roboskin.ai/robot-manipulation): Robotic manipulation, dexterous manipulation, grasping, insertion, learning, control, and touch parent cluster.
 - [RoboSkin and RoboSkin.ai](https://roboskin.ai/): Brand and site entity route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Primary definition and category route.
-- [Robot skin guides and tactile AI learning routes](https://roboskin.ai/products): Guide-route keyword cluster.
-- [Robotic grippers and robot hand tactile sensing](https://roboskin.ai/solutions): Use-case keyword cluster.
 - [Humanoid robot skin and contact-aware robotics](https://roboskin.ai/applications): Application-intent keyword cluster.
 - [Tactile AI](https://roboskin.ai/tactile-ai): Primary tactile AI definition and system-stack route.
 - [Flexible tactile sensor technology](https://roboskin.ai/technology): Technology overview route.
 - [Physical AI](https://roboskin.ai/physical-ai): Broad Physical AI, physical-world AI, multimodal perception, policy, control, embodiment, and feedback cluster.
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Physical AI contact-feedback keyword cluster.
-- [Robot hand tactile sensor](https://roboskin.ai/applications/robot-hand-tactile-sensor): Hand-level sensing and grasping route.
 - [Slip detection for robot hands](https://roboskin.ai/guides/slip-detection-robot-hand): Slip-sensing and closed-loop response route.
 - [Tactile sensor benchmark and robot manipulation sensor comparison](https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation): Task-based tactile sensor comparison cluster.
 - [Tactile datasets](https://roboskin.ai/datasets): Tactile dataset and robot-learning resource cluster.
@@ -182,8 +177,8 @@ Supporting RoboSkin Physical AI routes:
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Contact-specific tactile sensing and feedback route.
 - [Tactile AI](https://roboskin.ai/tactile-ai): Canonical tactile AI context.
 - [Robot skin glossary](https://roboskin.ai/glossary): Term definitions.
-- [Robot hand tactile sensor](https://roboskin.ai/applications/robot-hand-tactile-sensor): Hand-level application context.
-- [RoboSkin resources](https://roboskin.ai/resources): Public learning resources.
+- [Robot hands](https://roboskin.ai/robot-hands): Hand-level sensing, actuation, grasping, and dexterous-manipulation context.
+- [RoboSkin Tactile Research Index](https://roboskin.ai/research-index): Versioned public research data and evidence taxonomy.
 
 ### What is a visuo-tactile world model?
 

@@ -945,7 +945,7 @@ The correct interpretation remains narrow: within that author-run setup, the com
 
 ## Why this matters for robot hands
 
-Dexterous hands create distributed, changing contact over fingertips, finger links, and sometimes the palm. A static tactile cue may say that contact exists, while a temporal signal can expose whether load is rising, migrating, oscillating, or disappearing. T-Rex therefore sits between the broad [robot hands](/robot-hands) architecture layer, the focused [robot hand tactile sensing](/applications/robot-hand-tactile-sensor) route, and the learned control layer described in [tactile manipulation](/tactile-manipulation).
+Dexterous hands create distributed, changing contact over fingertips, finger links, and sometimes the palm. A static tactile cue may say that contact exists, while a temporal signal can expose whether load is rising, migrating, oscillating, or disappearing. T-Rex therefore sits between the broad [robot hands](/robot-hands) architecture layer and the learned control layer described in [tactile manipulation](/tactile-manipulation).
 
 The project is also relevant to [robot VLA models](/robot-vla-models). It illustrates a design question for multimodal action models: how should a relatively slow language-conditioned policy interact with a faster contact feedback loop? The [tactile AI guide](/tactile-ai) provides the broader sensing-to-action context.
 
@@ -1302,7 +1302,7 @@ The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-m
 
 World-model quality depends on the data contract beneath it. Visual frames, tactile samples, robot state, and actions need a coherent clock. Contact and slip labels need definitions that survive changes in object, gripper, sensor placement, and surface condition. The [tactile dataset directory](/datasets) explains why trajectory-level splits matter for this kind of sequential data.
 
-Prediction also does not replace reaction. A planner can choose among imagined action sequences, but the deployed robot still needs measured touch and a fast feedback loop when the real contact diverges from the forecast. The [robot hand tactile sensor guide](/applications/robot-hand-tactile-sensor) maps that requirement to fingertip, palm, and whole-hand coverage.
+Prediction also does not replace reaction. A planner can choose among imagined action sequences, but the deployed robot still needs measured touch and a fast feedback loop when the real contact diverges from the forecast. The [robot hands guide](/robot-hands) maps that requirement to fingertip, palm, and whole-hand coverage.
 
 ## What this does not prove yet
 
@@ -3093,7 +3093,7 @@ Using ROS 2 does not prove that a robot skin system is integrated, low-latency, 
 
 ## Where this fits next
 
-The next step is a data contract: define the tactile message, preserve raw and processed data, record robot state beside touch state, and keep enough metadata to replay failed manipulation. That contract supports [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) pages and source-backed research notes instead of isolated sensor claims.
+The next step is a data contract: define the tactile message, preserve raw and processed data, record robot state beside touch state, and keep enough metadata to replay failed manipulation. That contract supports the [robot hands](/robot-hands) evidence map and source-backed research notes instead of isolated sensor claims.
 
 ## Practical questions
 

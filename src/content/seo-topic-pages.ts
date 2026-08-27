@@ -1,5 +1,6 @@
 export type SeoTopicPage = {
   path: string;
+  index?: boolean;
   title: string;
   description: string;
   h1: string;
@@ -858,6 +859,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/applications/robot-hand-tactile-sensor',
+    index: false,
     title: 'Robot Hand Tactile Sensor Guide for Dexterous Grasping',
     description:
       'Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.',
@@ -937,6 +939,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/applications/soft-robotic-skin',
+    index: false,
     title: 'Soft Robotic Skin for Flexible Contact Sensing',
     description:
       'Soft robotic skin uses flexible sensing surfaces for curved robots, grippers, prosthetics, and soft machines. Learn how it differs from generic e-skin.',
@@ -1014,6 +1017,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/flexible-tactile-sensor-array',
+    index: false,
     title: 'Flexible Tactile Sensor Array Guide for Robot Skin',
     description:
       'Flexible tactile sensor arrays measure contact across curved robot surfaces. Learn how arrays relate to robot skin, e-skin, calibration, and tactile AI.',
@@ -1225,6 +1229,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/applications/robot-gripper-tactile-sensor',
+    index: false,
     title: 'Robot Gripper Tactile Sensor Guide for Contact-Aware Grasping',
     description:
       'Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.',
@@ -1308,6 +1313,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-sensor-for-robots',
+    index: false,
     title: 'Tactile Sensor for Robots: Selection and Evaluation Guide',
     description:
       'A tactile sensor for robots measures pressure, force, slip, strain, or contact maps. Compare sensors for robot hands, grippers, and robot skin.',
@@ -1392,6 +1398,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/robot-touch-sensor',
+    index: false,
     title: 'Robot Touch Sensor Guide: From Contact Events to Tactile AI',
     description:
       'Robot touch sensors detect contact events, pressure, force, slip, and tactile patterns. Learn when a touch sensor becomes useful robot skin or tactile AI input.',

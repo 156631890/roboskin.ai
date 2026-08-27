@@ -62,7 +62,7 @@ test('AI and robotics is an answer-first crawlable hub with explicit model and c
     assert.match(topics, new RegExp(source.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   }
 
-  assert.match(sitemap, /const topicPages = seoTopicPages\.map/);
+  assert.match(sitemap, /seoTopicPages[\s\S]*?\.filter\(\(page\) => page\.index !== false\)[\s\S]*?\.map/);
   assert.match(verifier, /'\/ai-robotics'/);
   assert.match(llms, /What is the relationship between AI and robotics\?/);
   assert.match(llms, /Use \[AI and robotics\]\(https:\/\/roboskin\.ai\/ai-robotics\) as the canonical RoboSkin\.ai relationship and architecture route/);

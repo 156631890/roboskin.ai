@@ -40,7 +40,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     updated: '2026-08-15',
     priority: 0.9,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Guides'],
   },
   '/solutions': {
@@ -51,7 +51,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     updated: '2026-08-15',
     priority: 0.9,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Use cases'],
   },
   '/applications': {
@@ -95,7 +95,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     updated: '2026-08-15',
     priority: 0.8,
     changeFrequency: 'weekly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Resources'],
   },
   '/downloads': {
@@ -260,7 +260,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     updated: '2026-08-17',
     priority: 0.86,
     changeFrequency: 'monthly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Research Services'],
   },
   '/reports/tactile-ai-robot-skin-landscape-2026': {
@@ -271,8 +271,30 @@ export const pageSeo: Record<string, SeoRoute> = {
     updated: '2026-08-17',
     priority: 0.75,
     changeFrequency: 'monthly',
-    index: true,
+    index: false,
     breadcrumbs: ['Home', 'Sample Report'],
+  },
+  '/reports/tactile-robotics-data-transparency-audit-2026': {
+    path: '/reports/tactile-robotics-data-transparency-audit-2026',
+    title: 'Tactile Robotics Dataset Transparency Audit 2026',
+    description:
+      'A reproducible record-level audit of dataset URLs, license links, code, sampling-rate, synchronization, and data-split disclosure across RoboSkin.ai tactile robotics dataset records.',
+    updated: '2026-08-27',
+    priority: 0.84,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Reports', 'Tactile Robotics Dataset Transparency Audit'],
+  },
+  '/authors/steven-yang': {
+    path: '/authors/steven-yang',
+    title: 'Steven Yang, Founder and Editor of RoboSkin.ai',
+    description:
+      'Meet Steven Yang, founder and editor of RoboSkin.ai, and review the source, authorship, AI-assistance, correction, and publication standards used across the site.',
+    updated: '2026-08-27',
+    priority: 0.7,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Authors', 'Steven Yang'],
   },
   '/privacy': {
     path: '/privacy',
@@ -297,6 +319,8 @@ export const pageSeo: Record<string, SeoRoute> = {
 };
 
 export const seoRoutes = Object.values(pageSeo);
+
+const editorialLeadId = `${canonicalUrl(site.editorial.lead.path)}#person`;
 
 const keywords = [
   'robot skin',
@@ -408,9 +432,7 @@ export function buildOrganizationJsonLd() {
       'Robot manipulation',
       'Physical AI',
     ],
-    founder: {
-      '@id': `${canonicalUrl('/about')}#steven-yang`,
-    },
+    founder: { '@id': editorialLeadId },
     logo: {
       '@type': 'ImageObject',
       '@id': `${site.url}/#logo`,
@@ -439,7 +461,7 @@ export function buildEditorialLeadJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': `${canonicalUrl('/about')}#steven-yang`,
+    '@id': editorialLeadId,
     name: site.editorial.lead.name,
     jobTitle: site.editorial.lead.role,
     url: canonicalUrl(site.editorial.lead.path),
@@ -844,7 +866,9 @@ export function buildArticleJsonLd(post: BlogPost) {
     isAccessibleForFree: true,
     articleSection: post.category,
     keywords: post.technicalFocus,
-    author: buildEditorialTeamJsonLd(post.author),
+    author: { '@id': editorialLeadId },
+    reviewedBy: { '@id': editorialLeadId },
+    accountablePerson: { '@id': editorialLeadId },
     publisher: {
       '@id': `${site.url}/#organization`,
     },
@@ -874,7 +898,9 @@ export function buildNewsArticleJsonLd(post: NewsPost) {
     isAccessibleForFree: true,
     articleSection: post.category,
     keywords: post.technicalFocus,
-    author: buildEditorialTeamJsonLd(post.author),
+    author: { '@id': editorialLeadId },
+    reviewedBy: { '@id': editorialLeadId },
+    accountablePerson: { '@id': editorialLeadId },
     publisher: {
       '@id': `${site.url}/#organization`,
     },
@@ -899,7 +925,7 @@ export function buildResearchIndexJsonLd(entries: ResearchIndexEntry[]) {
         name: 'RoboSkin Tactile Research Index',
         description: 'A source-backed index of robot skin, tactile sensing, tactile AI, and integration research reviewed by RoboSkin.ai.',
         url: pageUrl,
-        creator: { '@id': `${canonicalUrl(site.editorial.path)}#editorial-team` },
+        creator: { '@id': editorialLeadId },
         dateModified: pageSeo['/research-index'].updated,
         version: researchIndexRelease.version,
         license: researchIndexRelease.licenseUrl,

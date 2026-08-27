@@ -336,7 +336,7 @@ export default function Home() {
                 </p>
                 <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
                   <Link href="/faq" className="editorial-link">Robot skin FAQ</Link>
-                  <Link href="/resources" className="editorial-link">View RoboSkin library</Link>
+                  <Link href="/datasets" className="editorial-link">Browse tactile datasets</Link>
                   <Link href="/research-index" className="editorial-link">Compare the research index</Link>
                   <Link href="/technology" className="editorial-link">Explore tactile AI technology</Link>
                   <Link href="/applications" className="editorial-link">Explore humanoid robot skin use cases</Link>
@@ -415,7 +415,7 @@ export default function Home() {
                   Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
                 </p>
               </div>
-              <Link href="/resources" className="editorial-link">View library →</Link>
+              <Link href="/research-index" className="editorial-link">View research index →</Link>
             </div>
             <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
           </div>
@@ -448,7 +448,7 @@ export default function Home() {
             </p>
             <nav aria-label="Research utilities" className="mt-6 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6 text-sm">
               <Link href="/glossary" className="text-[#b9b3a7] hover:text-white">Open the glossary</Link>
-              <Link href="/resources" className="text-[#b9b3a7] hover:text-white">View RoboSkin library</Link>
+              <Link href="/research-index" className="text-[#b9b3a7] hover:text-white">View RoboSkin research index</Link>
               <Link href="/technology" className="text-[#b9b3a7] hover:text-white">Explore tactile AI technology</Link>
               <Link href="/research" className="text-[#b9b3a7] hover:text-white">Browse research briefs</Link>
               <Link href="/contact?requestType=research" className="text-[#ff6b3d] hover:text-white">Submit source</Link>

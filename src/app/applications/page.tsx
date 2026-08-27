@@ -53,17 +53,17 @@ const applicationTopicLinks = [
   },
   {
     title: 'Robot hand tactile sensor',
-    href: '/applications/robot-hand-tactile-sensor',
+    href: '/robot-hands',
     summary: 'Fingertip, palm, full-hand, slip, and grasp-stability sensing.',
   },
   {
     title: 'Soft robotic skin',
-    href: '/applications/soft-robotic-skin',
+    href: '/robot-skin',
     summary: 'Flexible tactile surfaces for curved and deformable robots.',
   },
   {
     title: 'Robot gripper tactile sensor',
-    href: '/applications/robot-gripper-tactile-sensor',
+    href: '/robot-hands',
     summary: 'Contact-aware jaw pads, slip signals, replacement, and gripper evaluation.',
   },
 ];
