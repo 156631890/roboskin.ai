@@ -6,6 +6,7 @@ const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
 function recordById(source, id) {
+  source = source.replaceAll('\r\n', '\n');
   const start = source.indexOf(`id: '${id}'`);
   assert.notEqual(start, -1, `missing record ${id}`);
   const next = source.indexOf("\n  {\n    id: '", start + id.length + 10);
