@@ -1,20 +1,7 @@
 import type { Metadata } from 'next';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
-import { buildEditorialLeadJsonLd, canonicalUrl } from '@/lib/seo';
-
-const consolidatedTopicOwners: Record<string, string> = {
-  '/applications/robot-gripper-tactile-sensor': '/robot-hands',
-  '/applications/robot-hand-tactile-sensor': '/robot-hands',
-  '/applications/soft-robotic-skin': '/robot-skin',
-  '/guides/flexible-tactile-sensor-array': '/sensors',
-  '/guides/robot-touch-sensor': '/tactile-ai',
-  '/guides/tactile-sensor-for-robots': '/sensors',
-};
-
-export function resolveSeoTopicHref(href: string) {
-  return consolidatedTopicOwners[href] ?? href;
-}
+import { buildEditorialTeamJsonLd, canonicalUrl } from '@/lib/seo';
 
 export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
   const url = canonicalUrl(page.path);
@@ -24,7 +11,7 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
     title: page.title,
     description: page.description,
     keywords: page.keywords,
-    authors: [{ name: site.editorial.lead.name, url: canonicalUrl(site.editorial.lead.path) }],
+    authors: [{ name: site.editorial.name, url: canonicalUrl(site.editorial.path) }],
     alternates: {
       canonical: url,
     },
@@ -51,10 +38,10 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
       images: [visual.image],
     },
     robots: {
-      index: page.index !== false,
+      index: true,
       follow: true,
       googleBot: {
-        index: page.index !== false,
+        index: true,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -66,7 +53,7 @@ export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
 
 export function buildSeoTopicGraph(page: SeoTopicPage) {
   const url = canonicalUrl(page.path);
-  const editorialLeadId = `${canonicalUrl(site.editorial.lead.path)}#person`;
+  const editorialTeamId = `${canonicalUrl(site.editorial.path)}#editorial-team`;
   const visual = pageVisuals[page.visualKey];
   const pathParts = page.path.split('/').filter(Boolean);
   const breadcrumbNames = ['Home', ...pathParts.map((part) => part.replaceAll('-', ' '))];
@@ -95,10 +82,10 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
       '@id': `${site.url}/#organization`,
     },
     author: {
-      '@id': editorialLeadId,
+      '@id': editorialTeamId,
     },
     reviewedBy: {
-      '@id': editorialLeadId,
+      '@id': editorialTeamId,
     },
     breadcrumb: {
       '@id': `${url}#breadcrumb`,
@@ -120,7 +107,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
     mentions: page.relatedLinks.map((link) => ({
       '@type': 'WebPage',
       name: link.label,
-      url: canonicalUrl(resolveSeoTopicHref(link.href)),
+      url: canonicalUrl(link.href),
       description: link.description,
     })),
     dateModified: page.updated,
@@ -175,10 +162,10 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
           '@id': `${site.url}/#organization`,
         },
         author: {
-          '@id': editorialLeadId,
+          '@id': editorialTeamId,
         },
         reviewedBy: {
-          '@id': editorialLeadId,
+          '@id': editorialTeamId,
         },
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
@@ -187,7 +174,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         mentions: page.relatedLinks.map((link) => ({
           '@type': 'WebPage',
           name: link.label,
-          url: canonicalUrl(resolveSeoTopicHref(link.href)),
+          url: canonicalUrl(link.href),
           description: link.description,
         })),
         citation: page.sources?.map((source) => source.href),
@@ -220,6 +207,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
 
   return {
     '@context': 'https://schema.org',
-    '@graph': [webPageNode, breadcrumbNode, faqNode, ...entityNodes, buildEditorialLeadJsonLd()],
+    '@graph': [webPageNode, breadcrumbNode, faqNode, ...entityNodes, buildEditorialTeamJsonLd()],
   };
 }

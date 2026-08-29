@@ -276,7 +276,7 @@ test('GSC priority articles include answer-first sections and crawlable internal
     'Practical questions',
     '[Dream-Tac tactile world model](/research/dream-tac-tactile-world-action-model-2026)',
     '[ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026)',
-    '[robot hands guide](/robot-hands)',
+    '[robot hand tactile sensor route](/applications/robot-hand-tactile-sensor)',
   ];
 
   for (const signal of priorityResearchSignals) {

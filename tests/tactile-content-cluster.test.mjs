@@ -58,7 +58,7 @@ test('tactile benchmark, dataset, foundation-model, and world-model guides form 
   assert.match(article, /section\.table\.headers/);
   assert.match(article, /section\.table\.rows/);
 
-  assert.match(sitemap, /seoTopicPages[\s\S]*?\.filter\(\(page\) => page\.index !== false\)[\s\S]*?\.map/);
+  assert.match(sitemap, /const topicPages = seoTopicPages\.map/);
   assert.match(sitemap, /images: \[canonicalUrl\(pageVisuals\[page\.visualKey\]\.image\)\]/);
 });
 

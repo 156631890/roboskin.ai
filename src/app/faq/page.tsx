@@ -66,7 +66,7 @@ export default function FAQPage() {
                 Explore research resources
               </Link>
               <Link
-                href="/robot-skin"
+                href="/products"
                 className="rounded-xl border border-white/12 bg-white/5 px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
                 View guide routes

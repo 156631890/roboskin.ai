@@ -484,7 +484,7 @@ The paper reports about 403 milliseconds of end-to-end reaction latency in the p
 
 The study is valuable because it connects yarn geometry to two different sensing modes and then carries the design into a robot experiment. It makes the chain visible: textile architecture changes capacitance, capacitance produces pressure or proximity signals, and threshold logic turns those signals into robot behavior.
 
-For the broader system context, start with the [robot skin definition](/robot-skin), compare the [humanoid robot skin stack](/humanoid-robot-skin), and see how measured touch becomes inference and action in the [tactile AI guide](/tactile-ai). The [tactile sensor directory](/sensors) explains sensing principles, form factors, integration, and evidence boundaries.
+For the broader system context, start with the [robot skin definition](/robot-skin), compare the [humanoid robot skin stack](/humanoid-robot-skin), and see how measured touch becomes inference and action in the [tactile AI guide](/tactile-ai). The [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array) explains scaling, wiring, calibration, and coverage tradeoffs.
 
 ## Evidence limits
 
@@ -575,7 +575,7 @@ The 100 Hz value describes the reported EIT reconstruction pipeline. It should n
 
 Physical AI needs contact data that can survive large surfaces, curved geometry, wiring limits, and real-time control. This paper is useful because it treats robot skin as a sensor-fusion system instead of a single material sample. The next evaluation step is to connect the force map to measurable robot behavior: contact-aware motion, collision response, stable physical interaction, or recovery after unexpected touch.
 
-For comparison, use the [humanoid robot skin guide](/humanoid-robot-skin), the [tactile sensor directory](/sensors), and the normalized [RoboSkin Tactile Research Index](/research-index).
+For comparison, use the [humanoid robot skin guide](/humanoid-robot-skin), the [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array), and the normalized [RoboSkin Tactile Research Index](/research-index).
 
 ## Practical questions
 
@@ -650,7 +650,7 @@ The term self-powered applies to the triboelectric sensing and addressing mechan
 
 ## Where this fits next
 
-The [tactile sensor directory](/sensors) compares taxel count, wiring, scan rate, calibration, coverage, and evidence boundaries. The [electronic skin overview](/e-skin) places textile and triboelectric approaches within the broader e-skin category. For deployment questions, connect the interface to the [robot hands guide](/robot-hands) and the normalized records in the [RoboSkin Tactile Research Index](/research-index).
+The [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array) explains the trade-offs among taxel count, wiring, scan rate, calibration, and coverage. The [electronic skin overview](/e-skin) places textile and triboelectric approaches within the broader e-skin category. For deployment questions, compare the interface with the [robot hand tactile sensor guide](/applications/robot-hand-tactile-sensor) and the normalized records in the [RoboSkin Tactile Research Index](/research-index).
 
 ## Practical questions
 
@@ -790,7 +790,7 @@ TouchWorld is a preprint, not a peer-reviewed final publication. Its reported su
 
 ## Where this fits next
 
-The [robot world models pillar](/robot-world-models) explains the broader prediction-and-control role. The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares TouchWorld with Dream-Tac, ViTacWorld, FeelWorld, and VT-WM, while the [robot hands route](/robot-hands) explains the sensing coverage and integration questions behind contact-rich manipulation.
+The [robot world models pillar](/robot-world-models) explains the broader prediction-and-control role. The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) compares TouchWorld with Dream-Tac, ViTacWorld, FeelWorld, and VT-WM, while the [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) explains the sensing coverage and integration questions behind contact-rich manipulation.
 
 ## Practical questions
 
@@ -872,7 +872,7 @@ The report does not establish that the sensor is ready for industrial deployment
 
 ## Where this fits next
 
-The [tactile sensing technology map](/technology) explains how a sensing surface connects to signal processing and robot control. The [robot hands guide](/robot-hands) frames gripper pressure mapping as one part of grasp stability, slip response, and integration.
+The [tactile sensing technology map](/technology) explains how a sensing surface connects to signal processing and robot control. The [robot gripper tactile sensor guide](/applications/robot-gripper-tactile-sensor) frames pressure mapping as one part of grasp stability, slip response, and integration.
 
 ## Practical questions
 
@@ -1148,7 +1148,7 @@ For robot skin, this stack includes the elastomer or sensing surface, sensor pla
 
 Full-hand tactile sensing matters because dexterous manipulation uses more than fingertip contact. A robot hand may stabilize an object through the palm, side of a finger, thumb opposition, or a contact patch that shifts during motion. High-resolution touch is useful only when that distributed data changes control behavior.
 
-For readers, the next useful route is the [robot hands guide](/robot-hands). That page frames fingertip, palm, full-hand, slip, and grasp-stability sensing as one evaluation problem instead of separate hardware facts.
+For readers, the next useful route is the [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor). That page frames fingertip, palm, full-hand, slip, and grasp-stability sensing as one evaluation problem instead of separate hardware facts.
 
 ## What this does not prove yet
 

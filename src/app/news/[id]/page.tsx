@@ -3,9 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
-import ArticleAccountability from '@/components/ArticleAccountability';
 import JsonLd from '@/components/JsonLd';
-import { site } from '@/content/site';
 import { getNewsPostById, newsPosts } from '@/lib/news-data';
 import {
   buildGraphJsonLd,
@@ -45,7 +43,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.excerpt,
-    authors: [{ name: site.editorial.lead.name, url: site.editorial.lead.path }],
+    authors: [{ name: post.author }],
     category: post.category,
     keywords: post.technicalFocus,
     alternates: {
@@ -60,7 +58,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       images: [post.image],
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: [site.editorial.lead.name],
+      authors: [post.author],
       section: post.category,
       tags: post.technicalFocus,
     },
@@ -126,8 +124,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <header className="article-masthead">
             <p className="article-meta">
-              {post.category} | Published {post.date} | Updated {post.updated} | By{' '}
-              <Link href={site.editorial.lead.path} rel="author">{site.editorial.lead.name}</Link>
+              {post.category} | Published {post.date} | Updated {post.updated}
             </p>
             <h1>{post.title}</h1>
             <p className="article-deck">{post.excerpt}</p>
@@ -160,11 +157,6 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <div className="article-grid">
             <div className="article-reading-surface">
-              <ArticleAccountability
-                contentType="news"
-                sourceCount={post.sources.length}
-                topics={post.technicalFocus}
-              />
               <ArticleBody content={post.content} />
             </div>
 
@@ -172,7 +164,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
               <div className="article-rail-block">
                 <p>Editorial review</p>
                 <div>
-                  Reviewed by <Link href={site.editorial.lead.path} rel="author">{site.editorial.lead.name}</Link>. Source claims remain attributed to the cited researchers, institutions, or companies.
+                  Written by {post.author}. This brief summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, affiliation, or measured performance by RoboSkin.ai.
                 </div>
               </div>
               <div className="article-rail-block">

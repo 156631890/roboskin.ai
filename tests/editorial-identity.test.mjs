@@ -5,7 +5,7 @@ import test from 'node:test';
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
 
-test('visible content uses a named accountable editor with an institutional publisher', async () => {
+test('visible content uses one institutional editorial team with a named editorial lead', async () => {
   const [site, blog, news, policy, about] = await Promise.all([
     read('src/content/site.ts'),
     read('src/lib/blog-data.ts'),
@@ -19,7 +19,6 @@ test('visible content uses a named accountable editor with an institutional publ
   assert.match(site, /logo: '\/apple-touch-icon\.svg'/);
   assert.match(site, /name: 'Steven Yang'/);
   assert.match(site, /role: 'Founder & Editor'/);
-  assert.match(site, /path: '\/authors\/steven-yang'/);
   assert.doesNotMatch(`${blog}\n${news}`, /RoboSkin technical editor/);
   assert.match(policy, /RoboSkin\.ai Editorial Team/);
   assert.match(policy, /site\.editorial\.lead\.name/);
@@ -27,44 +26,42 @@ test('visible content uses a named accountable editor with an institutional publ
   assert.match(about, /site\.editorial\.lead\.name/);
   assert.match(policy, /Corrections and material revisions/);
   assert.match(policy, /Research review method/);
-  assert.match(policy, /AI-assisted workflow disclosure/);
 });
 
-test('article authors resolve to a factual person while the publisher remains the organization', async () => {
+test('article authors and the publisher resolve to factual organization nodes', async () => {
   const seo = await read('src/lib/seo.ts');
   const organizationStart = seo.indexOf('export function buildOrganizationJsonLd');
   const organizationEnd = seo.indexOf('\nexport function ', organizationStart + 1);
-  const editorialStart = seo.indexOf('export function buildEditorialLeadJsonLd');
+  const editorialStart = seo.indexOf('export function buildEditorialTeamJsonLd');
   const editorialEnd = seo.indexOf('\nexport function ', editorialStart + 1);
   const organizationIdentitySeo = seo.slice(organizationStart, organizationEnd);
   const editorialIdentitySeo = seo.slice(editorialStart, editorialEnd);
 
   assert.match(seo, /#editorial-team/);
-  assert.match(seo, /author: \{ '@id': editorialLeadId \}/);
-  assert.match(seo, /reviewedBy: \{ '@id': editorialLeadId \}/);
+  assert.match(seo, /buildEditorialTeamJsonLd\(post\.author\)/);
   assert.match(seo, /#organization/);
   assert.match(seo, /'@type': 'ImageObject'/);
   assert.match(seo, /site\.editorial\.logo/);
-  assert.match(seo, /creator: \{ '@id': editorialLeadId \}/);
+  assert.match(seo, /creator: \{ '@id': `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team` \}/);
   assert.match(seo, /width: 180/);
   assert.match(seo, /height: 180/);
   assert.match(seo, /export function buildEditorialLeadJsonLd/);
   assert.match(seo, /'@type': 'Person'/);
-  assert.match(seo, /#person/);
+  assert.match(seo, /#steven-yang/);
   assert.match(organizationIdentitySeo, /sameAs: site\.verifiedProfiles/);
   assert.doesNotMatch(editorialIdentitySeo, /sameAs:/);
 });
 
-test('technical topic pages use the visible accountable editor identity', async () => {
+test('technical topic pages use the visible institutional editorial identity', async () => {
   const [topicSeo, topicArticle] = await Promise.all([
     read('src/lib/seo-topic.ts'),
     read('src/components/SeoTopicArticle.tsx'),
   ]);
 
-  assert.match(topicSeo, /authors: \[\{ name: site\.editorial\.lead\.name/);
-  assert.match(topicSeo, /const editorialLeadId = `\$\{canonicalUrl\(site\.editorial\.lead\.path\)\}#person`/);
-  assert.match(topicSeo, /author: \{\s*'@id': editorialLeadId/);
-  assert.match(topicArticle, /site\.editorial\.lead\.name/);
+  assert.match(topicSeo, /authors: \[\{ name: site\.editorial\.name/);
+  assert.match(topicSeo, /const editorialTeamId = `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team`/);
+  assert.match(topicSeo, /author: \{\s*'@id': editorialTeamId/);
+  assert.match(topicArticle, /site\.editorial\.name/);
   assert.match(topicArticle, /page\.published/);
   assert.match(topicArticle, /Updated \{page\.updated\}/);
 });

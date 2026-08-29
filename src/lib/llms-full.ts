@@ -23,21 +23,12 @@ import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robo
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
-import {
-  tactileDataAuditPath,
-  tactileDataAuditPublished,
-  tactileDataAuditSummary,
-} from '@/lib/tactile-data-transparency-audit';
 import { tactileVlaEvidenceEntries } from '@/lib/tactile-vla-evidence';
 
 const canonicalUrl = (pathname: string) => new URL(pathname, site.url).href;
 const compact = (value: string) => value.replace(/\s+/g, ' ').trim();
 const list = (values: string[]) => values.map(compact).join('; ');
 const markdownLink = (label: string, href: string) => `[${compact(label)}](${href})`;
-const indexableSeoTopicPages = seoTopicPages.filter((page) => page.index !== false);
-const noindexSeoTopicPaths = new Set(
-  seoTopicPages.filter((page) => page.index === false).map((page) => page.path),
-);
 
 function appendOptionalLink(lines: string[], label: string, href?: string) {
   if (href) lines.push(`- ${label}: ${href}`);
@@ -121,10 +112,9 @@ export function buildLlmsFullText() {
     '',
     `- Canonical site: ${site.url}`,
     `- Site descriptor: ${site.tagline}`,
-    `- Accountable editor: ${site.editorial.lead.name} (${site.editorial.lead.role})`,
-    `- Author profile: ${canonicalUrl(site.editorial.lead.path)}`,
+    `- Editorial publisher: ${site.editorial.name}`,
     `- Latest included content review: ${latestReviewedDate()}`,
-    `- Indexable topic pages: ${indexableSeoTopicPages.length}`,
+    `- Topic pages: ${seoTopicPages.length}`,
     `- Glossary terms: ${glossaryTerms.length}`,
     `- Dataset records: ${tactileDatasetEntries.length + roboticsDatasetEntries.length}`,
     `- Benchmark records: ${tactileBenchmarkEntries.length}`,
@@ -164,7 +154,7 @@ export function buildLlmsFullText() {
     '- A robot-platform relation has a narrow meaning: evaluatedOn requires explicit experiments, trainedAcross requires explicit training-mixture evidence, and demonstratedOn records a source-backed demonstration without upgrading it to a quantitative evaluation.',
     '- Do not infer an exact robot product from a family label. Training coverage does not prove deployment compatibility, a fine-tuned policy is not a zero-shot base-model result, and a simulation score is not a real-robot score.',
     '- No blanket content-reuse license is granted by this file. Verify the original source license and the RoboSkin.ai site terms before reuse.',
-    `- Suggested attribution for site analysis: ${site.editorial.lead.name}, “Page title,” RoboSkin.ai, canonical page URL, accessed on the reader’s actual access date.`,
+    `- Suggested attribution for site analysis: ${site.editorial.name}, “Page title,” RoboSkin.ai, canonical page URL, accessed on the reader’s actual access date.`,
     '',
     '## Core Semantic Map',
     '',
@@ -183,34 +173,14 @@ export function buildLlmsFullText() {
     `- Knowledge graph JSON: ${canonicalUrl('/knowledge-graph.json')}`,
     `- Research index JSON: ${canonicalUrl('/research-index.json')}`,
     `- Research index CSV: ${canonicalUrl('/research-index.csv')}`,
-    `- Tactile dataset transparency audit: ${canonicalUrl(tactileDataAuditPath)}`,
-    `- Tactile dataset transparency audit JSON: ${canonicalUrl(`${tactileDataAuditPath}.json`)}`,
-    `- Tactile dataset transparency audit CSV: ${canonicalUrl(`${tactileDataAuditPath}.csv`)}`,
     `- Research and news RSS: ${canonicalUrl('/feed.xml')}`,
     `- XML sitemap: ${canonicalUrl('/sitemap.xml')}`,
     '',
-  ];
-
-  lines.push(
-    '## Original Data Transparency Audit',
-    '',
-    `- Canonical report: ${canonicalUrl(tactileDataAuditPath)}`,
-    `- Published: ${tactileDataAuditPublished}`,
-    `- Records audited: ${tactileDataAuditSummary.totalRecords}`,
-    `- Records with a dedicated dataset URL: ${tactileDataAuditSummary.recordsWithDatasetUrl}`,
-    `- Records with a direct license URL: ${tactileDataAuditSummary.recordsWithLicenseUrl}`,
-    `- Records with a public code repository: ${tactileDataAuditSummary.recordsWithCodeRepository}`,
-    `- Records mentioning an explicit numeric sampling rate: ${tactileDataAuditSummary.recordsMentioningSamplingRate}`,
-    `- Records mentioning synchronization or timestamps: ${tactileDataAuditSummary.recordsMentioningSynchronization}`,
-    `- Records mentioning a training, validation, test, or split signal: ${tactileDataAuditSummary.recordsMentioningDataSplit}`,
-    '',
-    'These are deterministic disclosure checks over the current RoboSkin.ai tactile dataset records. A URL or keyword presence is not a dataset-quality score, and the audit does not claim that every hosted file was downloaded or independently reproduced.',
-    '',
     '## Canonical Topic Pages',
     '',
-  );
+  ];
 
-  for (const page of indexableSeoTopicPages) {
+  for (const page of seoTopicPages) {
     lines.push(
       `### ${page.title}`,
       '',
@@ -250,12 +220,11 @@ export function buildLlmsFullText() {
       lines.push('#### Primary and official sources', '', ...page.sources.map((source) => `- ${markdownLink(source.label, source.href)}`), '');
     }
 
-    const indexableRelatedLinks = page.relatedLinks.filter((link) => !noindexSeoTopicPaths.has(link.href));
-    if (indexableRelatedLinks.length) {
+    if (page.relatedLinks.length) {
       lines.push(
         '#### Related RoboSkin.ai pages',
         '',
-        ...indexableRelatedLinks.map((link) => `- ${markdownLink(link.label, canonicalUrl(link.href))}: ${compact(link.description)}`),
+        ...page.relatedLinks.map((link) => `- ${markdownLink(link.label, canonicalUrl(link.href))}: ${compact(link.description)}`),
         '',
       );
     }
@@ -681,7 +650,7 @@ export function buildLlmsFullText() {
       `- Canonical URL: ${canonicalUrl(`/research/${post.id}`)}`,
       `- Published: ${post.date}`,
       `- Updated: ${post.updated}`,
-      `- Accountable editor: ${site.editorial.lead.name}`,
+      `- Author: ${compact(post.author)}`,
       `- Category: ${compact(post.category)}`,
       `- Technical focus: ${list(post.technicalFocus)}`,
       `- Primary source: ${markdownLink(post.sourceTitle, post.sourceUrl)}`,
@@ -699,7 +668,7 @@ export function buildLlmsFullText() {
       `- Canonical URL: ${canonicalUrl(`/news/${post.id}`)}`,
       `- Published: ${post.date}`,
       `- Updated: ${post.updated}`,
-      `- Accountable editor: ${site.editorial.lead.name}`,
+      `- Author: ${compact(post.author)}`,
       `- Category: ${compact(post.category)}`,
       `- Technical focus: ${list(post.technicalFocus)}`,
       `- Primary source: ${markdownLink(post.sourceTitle, post.sourceUrl)}`,

@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const read = (path) => readFile(path, 'utf8');
 
-test('the Research Sprint remains accessible but noindexed during AdSense quality review', async () => {
+test('the Research Sprint has an indexable sales page with explicit scope and evidence boundaries', async () => {
   const [page, seo, site, llms] = await Promise.all([
     read('src/app/research-services/page.tsx'),
     read('src/lib/seo.ts'),
@@ -19,9 +19,10 @@ test('the Research Sprint remains accessible but noindexed during AdSense qualit
   assert.match(page, /Sponsored inclusion cannot purchase a conclusion/);
   assert.match(page, /Physical sensor testing or vendor qualification/);
   assert.match(page, /CommercialInquiryForm/);
-  assert.match(seo, /'\/research-services': \{[\s\S]*?index: false,[\s\S]*?breadcrumbs: \['Home', 'Research Services'\]/);
-  assert.doesNotMatch(site, /href: '\/research-services'/);
-  assert.doesNotMatch(llms, /https:\/\/roboskin\.ai\/research-services/);
+  assert.match(seo, /'\/research-services'/);
+  assert.match(seo, /index: true/);
+  assert.match(site, /href: '\/research-services'/);
+  assert.match(llms, /RoboSkin research services/);
 });
 
 test('commercial inquiries use the configured delivery endpoint with complete form states and safe analytics', async () => {
@@ -53,7 +54,7 @@ test('commercial inquiries use the configured delivery endpoint with complete fo
   assert.match(privacy, /certified consent-management messages/);
 });
 
-test('the free sample report remains accessible but exits discovery during the AdSense quality review', async () => {
+test('the free sample report is crawlable, downloadable, source-bounded, and large enough to be substantive', async () => {
   const [page, seo, llms, pdf, pdfStats] = await Promise.all([
     read('src/app/reports/tactile-ai-robot-skin-landscape-2026/page.tsx'),
     read('src/lib/seo.ts'),
@@ -67,8 +68,8 @@ test('the free sample report remains accessible but exits discovery during the A
   assert.match(page, /tactileDatasets\.length/);
   assert.match(page, /invented market sizing/);
   assert.match(page, /roboskin-tactile-ai-robot-skin-sample-report-2026\.pdf/);
-  assert.match(seo, /'\/reports\/tactile-ai-robot-skin-landscape-2026': \{[\s\S]*?index: false/);
-  assert.doesNotMatch(llms, /https:\/\/roboskin\.ai\/reports\/tactile-ai-robot-skin-landscape-2026/);
+  assert.match(seo, /'\/reports\/tactile-ai-robot-skin-landscape-2026'/);
+  assert.match(llms, /Free tactile AI and robot skin sample report/);
   assert.equal(pdf.subarray(0, 4).toString('ascii'), '%PDF');
   assert.ok(pdfStats.size > 500_000);
 });

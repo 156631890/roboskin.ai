@@ -62,9 +62,9 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopic, /'@type': 'WebPage'/);
   assert.match(seoTopic, /const articleNode = page\.schemaType === 'TechArticle'/);
   assert.match(seoTopic, /mainEntityOfPage:\s*\{\s*'@id': `\$\{url\}#webpage`/);
-  assert.match(seoTopic, /const editorialLeadId = `\$\{canonicalUrl\(site\.editorial\.lead\.path\)\}#person`/);
-  assert.match(seoTopic, /author:\s*\{\s*'@id': editorialLeadId/);
-  assert.match(seoTopic, /reviewedBy:\s*\{\s*'@id': editorialLeadId/);
+  assert.match(seoTopic, /const editorialTeamId = `\$\{canonicalUrl\(site\.editorial\.path\)\}#editorial-team`/);
+  assert.match(seoTopic, /author:\s*\{\s*'@id': editorialTeamId/);
+  assert.match(seoTopic, /reviewedBy:\s*\{\s*'@id': editorialTeamId/);
   assert.match(seoTopic, /publisher:\s*\{\s*'@id': `\$\{site\.url\}\/#organization`/);
   assert.match(seoTopic, /mentions: page\.relatedLinks\.map/);
   assert.match(seoTopic, /const visual = pageVisuals\[page\.visualKey\]/);
@@ -74,7 +74,7 @@ test('RoboSkin expands authority, topic graph, keyword coverage, image discovery
   assert.match(seoTopic, /const definedTermNode = page\.schemaType === 'DefinedTerm'/);
   assert.match(seoTopic, /mainEntity:\s*\{\s*'@id': `\$\{url\}#defined-term`/);
   assert.match(seoTopic, /'@id': `\$\{url\}#breadcrumb`/);
-  assert.match(seoTopic, /'@graph': \[webPageNode, breadcrumbNode, faqNode, \.\.\.entityNodes, buildEditorialLeadJsonLd\(\)\]/);
+  assert.match(seoTopic, /'@graph': \[webPageNode, breadcrumbNode, faqNode, \.\.\.entityNodes, buildEditorialTeamJsonLd\(\)\]/);
 
   assert.match(seoTopics, /path: '\/guides\/robot-skin-vs-tactile-sensor'/);
   assert.match(seoTopics, /robot skin vs tactile sensor/);

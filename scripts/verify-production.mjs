@@ -91,7 +91,7 @@ function validateHtml(html, pathname, expectedPath = pathname, indexable = true)
     throw new Error(`${pathname} leaks a non-apex host in canonical or JSON-LD`);
   }
   if (/^\/(research|news)\//.test(pathname)) {
-    if (!html.includes('Steven Yang')) throw new Error(`${pathname} is missing the visible accountable author`);
+    if (!html.includes('RoboSkin.ai Editorial Team')) throw new Error(`${pathname} is missing the visible editorial author`);
     if (!html.includes('Published ') && !html.includes('Updated ')) throw new Error(`${pathname} is missing a visible published or updated date`);
   }
   return jsonLd;
@@ -137,12 +137,10 @@ for (const absoluteUrl of protectedUrls) {
   validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
 }
 
-const [indexResponse, csvResponse, jsonResponse, auditCsvResponse, auditJsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, vlaModelsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
+const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, vlaModelsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([
   fetchOk('/research-index'),
   fetchOk('/research-index.csv'),
   fetchOk('/research-index.json'),
-  fetchOk('/reports/tactile-robotics-data-transparency-audit-2026.csv'),
-  fetchOk('/reports/tactile-robotics-data-transparency-audit-2026.json'),
   fetchOk('/knowledge-graph.json'),
   fetchOk('/llms.txt'),
   fetchOk('/llms-full.txt'),
@@ -159,8 +157,6 @@ const [indexResponse, csvResponse, jsonResponse, auditCsvResponse, auditJsonResp
 if (!(indexResponse.headers.get('content-type') ?? '').includes('text/html')) throw new Error('/research-index did not return HTML');
 if (!(csvResponse.headers.get('content-type') ?? '').includes('text/csv')) throw new Error('/research-index.csv has an invalid content type');
 if (!(jsonResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/research-index.json has an invalid content type');
-if (!(auditCsvResponse.headers.get('content-type') ?? '').includes('text/csv')) throw new Error('/reports/tactile-robotics-data-transparency-audit-2026.csv has an invalid content type');
-if (!(auditJsonResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/reports/tactile-robotics-data-transparency-audit-2026.json has an invalid content type');
 if (!(graphResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/knowledge-graph.json has an invalid content type');
 if (!(llmsResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms.txt has an invalid content type');
 if (!(llmsFullResponse.headers.get('content-type') ?? '').includes('text/plain')) throw new Error('/llms-full.txt has an invalid content type');
@@ -173,12 +169,10 @@ if (!(rssResponse.headers.get('content-type') ?? '').includes('application/rss+x
 if (!(newsSitemapResponse.headers.get('content-type') ?? '').includes('xml')) throw new Error('/news-sitemap.xml has an invalid content type');
 if (!(deploymentResponse.headers.get('content-type') ?? '').includes('application/json')) throw new Error('/deployment.json has an invalid content type');
 
-const [indexHtml, csv, indexData, auditCsv, auditData, graph, llms, llmsFull, organizationsHtml, robotsHtml, vlaModelsHtml, worldModelsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
+const [indexHtml, csv, indexData, graph, llms, llmsFull, organizationsHtml, robotsHtml, vlaModelsHtml, worldModelsHtml, crawlerRobots, rss, newsSitemap, deployment, deployedIndexNowKey] = await Promise.all([
   indexResponse.text(),
   csvResponse.text(),
   jsonResponse.json(),
-  auditCsvResponse.text(),
-  auditJsonResponse.json(),
   graphResponse.json(),
   llmsResponse.text(),
   llmsFullResponse.text(),
@@ -206,24 +200,6 @@ if (!JSON.stringify(indexJsonLd).includes('"@type":"Dataset"') || !JSON.stringif
   throw new Error('/research-index is missing Dataset or ItemList JSON-LD');
 }
 if (indexData.count !== indexData.entries?.length) throw new Error('Research index JSON count differs from its entries');
-if (auditData.count !== auditData.entries?.length) throw new Error('Tactile data audit JSON count differs from its entries');
-const auditCsvRows = parseCsv(auditCsv);
-if (JSON.stringify(auditCsvRows.map((row) => row.id)) !== JSON.stringify(auditData.entries.map((row) => row.id))) {
-  throw new Error('Tactile data audit CSV IDs differ from JSON');
-}
-const auditSummaryFields = {
-  recordsWithDatasetUrl: 'hasDatasetUrl',
-  recordsWithLicenseUrl: 'hasLicenseUrl',
-  recordsWithCodeRepository: 'hasCodeRepository',
-  recordsMentioningSamplingRate: 'mentionsSamplingRate',
-  recordsMentioningSynchronization: 'mentionsSynchronization',
-  recordsMentioningDataSplit: 'mentionsDataSplit',
-};
-if (auditData.summary?.totalRecords !== auditData.entries.length) throw new Error('Tactile data audit totalRecords differs from entries');
-for (const [summaryField, rowField] of Object.entries(auditSummaryFields)) {
-  const expected = auditData.entries.filter((row) => row[rowField] === true).length;
-  if (auditData.summary?.[summaryField] !== expected) throw new Error(`Tactile data audit ${summaryField} is not reproducible`);
-}
 
 if (graph.version !== knowledgeGraphContract.version) throw new Error(`Knowledge graph version is ${graph.version ?? 'missing'}`);
 for (const [name, expected] of Object.entries(knowledgeGraphContract.counts)) {
@@ -664,8 +640,6 @@ const verifiedPaths = [
     '/research-index',
     '/research-index.csv',
     '/research-index.json',
-    '/reports/tactile-robotics-data-transparency-audit-2026.csv',
-    '/reports/tactile-robotics-data-transparency-audit-2026.json',
     '/knowledge-graph.json',
     '/llms.txt',
     '/llms-full.txt',
@@ -685,7 +659,6 @@ const report = {
   protectedUrlCount: protectedUrls.length,
   noindexUrlCount: noindexUrls.length,
   researchIndexCount: indexData.entries.length,
-  tactileDataAuditCount: auditData.entries.length,
   knowledgeEntityCount: graph.counts.knowledgeEntities,
   organizationCount: graph.counts.organizations,
   organizationRelationCount: graph.counts.organizationRelationEdges,
@@ -695,4 +668,4 @@ const report = {
 
 await mkdir(new URL('../.artifacts/', import.meta.url), { recursive: true });
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
-console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${sitemapUrls.size} sitemap URLs, ${protectedUrls.length} protected URL contract entries including ${Object.keys(protectedRedirects).length} redirect sources, ${noindexUrls.length} noindex URLs, ${graph.counts.knowledgeEntities} graph entities, ${graph.counts.organizations} organizations, ${graph.counts.robots} robot platforms, ${indexData.entries.length} research records, ${auditData.entries.length} tactile-audit records, and ${rssItems.length} RSS items`);
+console.log(`Verified ${base.origin} at ${deployment.commitSha}: ${sitemapUrls.size} sitemap URLs, ${protectedUrls.length} protected URL contract entries including ${Object.keys(protectedRedirects).length} redirect sources, ${noindexUrls.length} noindex URLs, ${graph.counts.knowledgeEntities} graph entities, ${graph.counts.organizations} organizations, ${graph.counts.robots} robot platforms, ${indexData.entries.length} research records, and ${rssItems.length} RSS items`);

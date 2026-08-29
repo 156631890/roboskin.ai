@@ -101,16 +101,6 @@ export default function EditorialPolicyPage() {
               </p>
             </div>
             <div className="signal-panel p-6 md:p-8">
-              <p className="eyebrow">AI-assisted workflow disclosure</p>
-              <h2 className="mt-4 text-2xl font-semibold text-white">AI output is not accepted as evidence</h2>
-              <p className="mt-4 text-sm leading-relaxed text-soft">
-                RoboSkin.ai may use AI-assisted workflows for source organization and drafting. AI-generated statements are not treated as primary or secondary sources. Factual claims, dates, metrics, authors, licenses, and URLs must remain traceable to the public sources listed on the page. Publication responsibility and corrections remain assigned to the named editor.
-              </p>
-              <Link href={site.editorial.lead.path} className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
-                View {site.editorial.lead.name}&apos;s author profile {'->'}
-              </Link>
-            </div>
-            <div className="signal-panel p-6 md:p-8">
               <p className="eyebrow">Corrections and material revisions</p>
               <h2 className="mt-4 text-2xl font-semibold text-white">Corrections remain visible and traceable</h2>
               <p className="mt-4 text-sm leading-relaxed text-soft">

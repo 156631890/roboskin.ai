@@ -58,13 +58,13 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(home, /href="\/faq"|href=\{`\/faq/);
   assert.match(home, /href="\/research-index"|href=\{`\/research-index/);
   assert.match(home, /href="\/glossary"|href=\{`\/glossary/);
-  assert.doesNotMatch(home, /href="\/resources"|href=\{`\/resources/);
+  assert.match(home, /href="\/resources"|href=\{`\/resources/);
   assert.match(home, /href="\/technology"|href=\{`\/technology/);
   assert.match(home, /href="\/research"|href=\{`\/research/);
   assert.match(home, /href="\/contact\?requestType=research/);
   assert.match(home, /buildFaqJsonLd\(homeRobotSkinFaq, '\/'\)/);
   assert.match(home, /Open the glossary/);
-  assert.match(home, /View RoboSkin research index/);
+  assert.match(home, /View RoboSkin library/);
   assert.match(home, /Explore tactile AI technology/);
   assert.match(home, /Compare research evidence/);
   assert.match(home, /Browse research briefs/);
@@ -193,7 +193,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(llms, /## Keyword Routes/);
   assert.match(llms, /\[Robot skin and robotic skin\]\(https:\/\/roboskin\.ai\/robot-skin\)/);
   assert.match(llms, /\[Tactile AI\]\(https:\/\/roboskin\.ai\/tactile-ai\)/);
-  assert.match(llms, /\[Robot hands\]\(https:\/\/roboskin\.ai\/robot-hands\)/);
+  assert.match(llms, /\[Robot hand tactile sensor\]\(https:\/\/roboskin\.ai\/applications\/robot-hand-tactile-sensor\)/);
   assert.match(llms, /\[Slip detection for robot hands\]\(https:\/\/roboskin\.ai\/guides\/slip-detection-robot-hand\)/);
   assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });

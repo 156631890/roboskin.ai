@@ -12,7 +12,6 @@ const knowledgeGraphContract = JSON.parse(await readFile(path.join(root, 'config
 const vercelConfig = JSON.parse(await readFile(path.join(root, 'vercel.json'), 'utf8'));
 let verifiedGraphEntityCount;
 let verifiedResearchIndexCount;
-let verifiedTactileAuditCount;
 let verifiedRssItemCount;
 let verifiedSitemapUrlCount;
 
@@ -125,20 +124,7 @@ for (const absoluteUrl of noindexUrls) {
   if (!/<meta name="robots" content="noindex, follow"/i.test(html)) failures.push(`${pathname}: missing noindex, follow metadata`);
 }
 
-for (const file of [
-  'crawler-robots.txt',
-  'sitemap.xml',
-  'news-sitemap.xml',
-  'research-index.csv',
-  'research-index.json',
-  'reports/tactile-robotics-data-transparency-audit-2026.csv',
-  'reports/tactile-robotics-data-transparency-audit-2026.json',
-  'knowledge-graph.json',
-  'feed.xml',
-  'deployment.json',
-  'llms.txt',
-  'llms-full.txt',
-]) {
+for (const file of ['crawler-robots.txt', 'sitemap.xml', 'news-sitemap.xml', 'research-index.csv', 'research-index.json', 'knowledge-graph.json', 'feed.xml', 'deployment.json', 'llms.txt', 'llms-full.txt']) {
   if (!(await exists(path.join(out, file)))) failures.push(`/${file}: missing generated output`);
 }
 
@@ -286,49 +272,6 @@ if (failures.length === 0) {
     for (const [column, value] of Object.entries(entry)) {
       const expected = Array.isArray(value) ? value.join('; ') : String(value);
       if (csvRows[index]?.[column] !== expected) failures.push(`/research-index.csv: ${entry.id}.${column} differs from JSON`);
-    }
-  }
-
-  const tactileAuditJson = JSON.parse(await readFile(
-    path.join(out, 'reports', 'tactile-robotics-data-transparency-audit-2026.json'),
-    'utf8',
-  ));
-  const tactileAuditCsv = await readFile(
-    path.join(out, 'reports', 'tactile-robotics-data-transparency-audit-2026.csv'),
-    'utf8',
-  );
-  const tactileAuditCsvRows = parseCsv(tactileAuditCsv);
-  const tactileAuditRows = tactileAuditJson.entries ?? [];
-  verifiedTactileAuditCount = tactileAuditRows.length;
-  if (tactileAuditJson.count !== tactileAuditRows.length) failures.push('/reports/tactile-robotics-data-transparency-audit-2026.json: count differs from entries');
-  if (JSON.stringify(tactileAuditCsvRows.map((row) => row.id)) !== JSON.stringify(tactileAuditRows.map((row) => row.id))) {
-    failures.push('/reports/tactile-robotics-data-transparency-audit-2026.csv: IDs differ from JSON');
-  }
-  const tactileAuditChecks = {
-    recordsWithDatasetUrl: 'hasDatasetUrl',
-    recordsWithLicenseUrl: 'hasLicenseUrl',
-    recordsWithCodeRepository: 'hasCodeRepository',
-    recordsMentioningSamplingRate: 'mentionsSamplingRate',
-    recordsMentioningSynchronization: 'mentionsSynchronization',
-    recordsMentioningDataSplit: 'mentionsDataSplit',
-  };
-  if (tactileAuditJson.summary?.totalRecords !== tactileAuditRows.length) {
-    failures.push('/reports/tactile-robotics-data-transparency-audit-2026.json: totalRecords differs from entries');
-  }
-  for (const [summaryField, rowField] of Object.entries(tactileAuditChecks)) {
-    const expected = tactileAuditRows.filter((row) => row[rowField] === true).length;
-    if (tactileAuditJson.summary?.[summaryField] !== expected) {
-      failures.push(`/reports/tactile-robotics-data-transparency-audit-2026.json: ${summaryField} is not reproducible`);
-    }
-  }
-  for (const [index, row] of tactileAuditRows.entries()) {
-    if (!row.paperUrl?.startsWith('https://') || !/^20\d{2}-\d{2}-\d{2}$/.test(row.sourceReviewed)) {
-      failures.push(`/reports/tactile-robotics-data-transparency-audit-2026.json: invalid source evidence for ${row.id}`);
-    }
-    for (const field of Object.values(tactileAuditChecks)) {
-      if (typeof row[field] !== 'boolean' || tactileAuditCsvRows[index]?.[field] !== String(row[field])) {
-        failures.push(`/reports/tactile-robotics-data-transparency-audit-2026.csv: ${row.id}.${field} differs from JSON`);
-      }
     }
   }
 
@@ -659,7 +602,7 @@ if (failures.length === 0) {
   if (/www\.roboskin\.ai|\.vercel\.app/.test(newsSitemap)) failures.push('/news-sitemap.xml: non-apex URL found');
 
   const llmsFull = await readFile(path.join(out, 'llms-full.txt'), 'utf8');
-  const requiredLlmsRoutes = ['/ai-robotics', '/physical-ai', '/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-foundation-models', '/robots', '/organizations', '/robot-manipulation', '/robot-hands', '/robot-safety', '/robotics-datasets', '/robot-world-models', '/robot-teleoperation', '/datasets', '/benchmarks', '/sensors', '/research-index', '/reports/tactile-robotics-data-transparency-audit-2026'];
+  const requiredLlmsRoutes = ['/ai-robotics', '/physical-ai', '/robot-skin', '/tactile-ai', '/physical-ai-touch', '/humanoid-robots', '/robot-learning', '/robot-vla-models', '/robot-foundation-models', '/robots', '/organizations', '/robot-manipulation', '/robot-hands', '/robot-safety', '/robotics-datasets', '/robot-world-models', '/robot-teleoperation', '/datasets', '/benchmarks', '/sensors', '/research-index'];
   if (!llmsFull.startsWith('# RoboSkin.ai Full Knowledge')) failures.push('/llms-full.txt: invalid title');
   if (llmsFull.length < 20000) failures.push('/llms-full.txt: generated knowledge snapshot is unexpectedly small');
   if (requiredLlmsRoutes.some((route) => !llmsFull.includes(canonicalFor(route)))) failures.push('/llms-full.txt: missing canonical knowledge routes');
@@ -703,4 +646,4 @@ if (failures.length > 0) {
   throw new Error(`Export verification failed:\n${failures.join('\n')}`);
 }
 
-console.log(`Verified ${verifiedSitemapUrlCount} sitemap URLs, ${protectedUrls.length} protected URL contract entries including ${Object.keys(redirects).length} redirect sources, ${noindexUrls.length} noindex URLs, ${verifiedGraphEntityCount} graph entities, full LLM knowledge, ${verifiedResearchIndexCount} research-index records, ${verifiedTactileAuditCount} tactile-audit records, and ${verifiedRssItemCount} RSS items`);
+console.log(`Verified ${verifiedSitemapUrlCount} sitemap URLs, ${protectedUrls.length} protected URL contract entries including ${Object.keys(redirects).length} redirect sources, ${noindexUrls.length} noindex URLs, ${verifiedGraphEntityCount} graph entities, full LLM knowledge, ${verifiedResearchIndexCount} research-index records, and ${verifiedRssItemCount} RSS items`);
