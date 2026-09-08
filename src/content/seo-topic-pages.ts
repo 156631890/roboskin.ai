@@ -226,7 +226,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-foundation-models',
     title: 'Robot Foundation Models: Data, Transfer & Evaluation',
     description:
-      'Compare robot foundation models, VLMs, VLA policies, embodied-reasoning systems, world models, and tactile models by data, embodiment, access, and real-robot evidence.',
+      'Compare OpenVLA, Octo, RT-2 and other robot AI models by training data, robot compatibility, code and weight access, tactile input, and evaluation evidence.',
     h1: 'Robot foundation models and the robot AI model stack',
     kicker: 'Source-reviewed model directory',
     intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
@@ -2166,11 +2166,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    title: 'Tactile Robotics Datasets for Robot Learning',
+    title: 'Tactile Datasets: Sensors, Tasks, Downloads & Licenses',
     description:
-      'Compare tactile datasets for robot learning by signals, collection unit, split design, task fit, access evidence, and transfer limits.',
+      'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
     h1: 'Tactile datasets for robot learning',
-    kicker: '16-record dataset directory',
+    kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
     updated: '2026-08-22',
@@ -2182,7 +2182,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'A useful tactile dataset is defined by more than frame count. Check the physical collection event, sensor and robot state alignment, object and task diversity, split unit, access terms, and downstream evaluation.',
       'Contact sequences matter because adjacent tactile frames from the same press or trajectory are strongly related. Random frame splits can leak near-duplicate contact evidence into both training and test sets.',
-      'Choose the dataset that matches the intended learning problem: material understanding, whole-hand contact, imitation learning, multisensory representation learning, or target-robot control.',
+      'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
       {
@@ -2432,9 +2432,9 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/visuo-tactile-world-models-robot-manipulation',
-    title: 'Visuo-Tactile World Models for Robot Manipulation',
+    title: 'Visuo-Tactile World Models: Compare 5 Systems',
     description:
-      'Compare 2026 visuo-tactile world models by predicted contact state, planning role, robot evidence, source-reported results, and transfer limits.',
+      'Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: what each predicts, how it guides robot actions, reported results and limits, with primary sources.',
     h1: 'Visuo-tactile world models for robot manipulation',
     kicker: '2026 world-model guide',
     intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
