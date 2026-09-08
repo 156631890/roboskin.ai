@@ -2,7 +2,7 @@
 
 import { track } from '@vercel/analytics';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const referralSources: Array<[string, string]> = [
   ['google.', 'Google'],
@@ -19,8 +19,12 @@ function cleanLabel(value: string) {
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
+  const landingRecorded = useRef(false);
 
   useEffect(() => {
+    if (landingRecorded.current) return;
+    landingRecorded.current = true;
+
     const referrer = document.referrer.toLowerCase();
     const referral = referralSources.find(([domain]) => referrer.includes(domain));
 
