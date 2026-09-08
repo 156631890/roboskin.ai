@@ -11,9 +11,10 @@ import { buildSeoTopicGraph } from '@/lib/seo-topic';
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
   children?: ReactNode;
+  leadContent?: ReactNode;
 };
 
-export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps) {
+export default function SeoTopicArticle({ page, children, leadContent }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
@@ -54,8 +55,8 @@ export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps
                 </p>
               ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link href="#quick-answer" className="btn-primary w-full sm:w-auto">
-                  Read the short answer
+                <Link href={leadContent ? '#dataset-explorer' : '#quick-answer'} className="btn-primary w-full sm:w-auto">
+                  {leadContent ? 'Find and compare datasets' : 'Read the short answer'}
                 </Link>
                 <Link href="/research" className="btn-secondary w-full sm:w-auto">
                   Browse research
@@ -85,6 +86,8 @@ export default function SeoTopicArticle({ page, children }: SeoTopicArticleProps
             </div>
           </div>
         </section>
+
+        {leadContent}
 
         <section id="quick-answer" className="deferred-section pb-14 md:pb-20">
           <div className="container-shell grid gap-6 lg:grid-cols-[0.34fr_1fr]">

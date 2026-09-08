@@ -58,6 +58,16 @@ export default function AnalyticsTracker() {
       const label = cleanLabel(anchor.textContent ?? '');
       const properties = { from: pathname, target: url.pathname, label };
 
+      if (url.pathname === '/resources/tactile-dataset-selection-checklist.csv') {
+        track('Dataset Checklist Download', properties);
+        return;
+      }
+
+      if (url.pathname === '/feed.xml') {
+        track('RSS Feed Open', properties);
+        return;
+      }
+
       if (url.hostname === 'wa.me') {
         track('WhatsApp Intent', properties);
         return;

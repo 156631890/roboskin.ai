@@ -20,9 +20,14 @@ export default function TactileDatasetsPage() {
   return (
     <>
       <JsonLd data={buildTactileDatasetsJsonLd(tactileDatasetEntries)} />
-      <SeoTopicArticle page={page}>
-        <TactileDatasetExplorer entries={tactileDatasetEntries} />
-      </SeoTopicArticle>
+      <SeoTopicArticle page={page} leadContent={
+        <TactileDatasetExplorer entries={tactileDatasetEntries} useCases={[
+          { label: 'Materials & representations', ids: ['rct', 'tvl', 'touch-and-go', 'objectfolder-real', 'objectfolder-2', 'tacverse', 'univtac-encoder-pretraining-corpus'] },
+          { label: 'Robot manipulation', ids: ['t-rex', 'robotacdex', 'prism-industrial-skill', 'softvtbench', 'univtac-benchmark-dataset'] },
+          { label: 'Full-hand touch', ids: ['ht-bench', 'humanoid-vta', 'tactidex'] },
+          { label: 'Human demonstrations', ids: ['egotouch', 'freetacman', 'vtdexmanip', 'touch-and-go', 'tactidex'] },
+        ]} />
+      } />
     </>
   );
 }

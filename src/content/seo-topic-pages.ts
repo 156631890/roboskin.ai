@@ -2173,7 +2173,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-08-22',
+    updated: '2026-09-08',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2190,6 +2190,20 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'The entries below are research resources with different goals; they are not interchangeable rows in one leaderboard. Some emphasize tactile-language and material understanding, others whole-hand contact, data collection, humanoid action alignment, or multisensory representation learning.',
           'Before use, open the primary source and project page. Verify the actual downloadable files, license, sensor hardware, collection protocol, annotations, train-test splits, and version. A paper saying that a resource is open does not replace checking the current repository terms.',
+        ],
+      },
+      {
+        heading: 'From a dataset shortlist to a loading plan',
+        body: [
+          'Start with the task and collection setup. Human demonstrations can support perception or representation learning without providing an executable robot action contract. Simulated touch can support controlled experiments without establishing calibration or transfer to a physical sensor.',
+          'Select up to three records in the explorer, then export the comparison. The CSV preserves the recorded availability, license, source-review date, primary paper, and official links. It is a snapshot of directory notes, not a redistribution of the underlying datasets or a grant of reuse rights.',
+          'Use the downloadable selection checklist to document sensor compatibility, action semantics, synchronization, splits, current file access, reuse terms, and a minimum loading run. Write down what you actually downloaded and decoded. Leave unresolved fields explicit instead of treating a project announcement as a ready-to-train release.',
+        ],
+        bullets: [
+          'Define the required observations, labels, actions, and target robot before choosing a resource.',
+          'Inspect one complete sequence: units, timestamps, coordinate frames, missing values, and action meaning.',
+          'Check the official host and dataset-file terms separately from the paper and code licenses.',
+          'Record the version and review date; use the directory citation for these notes and cite the original authors for their research.',
         ],
       },
       {
@@ -3803,7 +3817,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-09-08',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
