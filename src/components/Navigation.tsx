@@ -21,6 +21,7 @@ export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navigationRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -33,20 +34,25 @@ export default function Navigation() {
     const closeAboveMobileBreakpoint = () => {
       if (window.innerWidth > 1100) setMobileMenuOpen(false);
     };
+    const closeOutsideNavigation = (event: PointerEvent) => {
+      if (!navigationRef.current?.contains(event.target as Node)) setMobileMenuOpen(false);
+    };
 
     window.addEventListener('keydown', closeOnEscape);
     window.addEventListener('resize', closeAboveMobileBreakpoint);
+    document.addEventListener('pointerdown', closeOutsideNavigation);
     return () => {
       window.removeEventListener('keydown', closeOnEscape);
       window.removeEventListener('resize', closeAboveMobileBreakpoint);
+      document.removeEventListener('pointerdown', closeOutsideNavigation);
     };
   }, [mobileMenuOpen]);
 
   return (
-    <nav className="site-nav" aria-label="Primary navigation">
+    <nav ref={navigationRef} className="site-nav" aria-label="Primary navigation">
       <div className="container-shell">
         <div className="site-nav-inner">
-          <Link href="/" className="site-logo" aria-label="RoboSkin.ai home">
+          <Link href="/" className="site-logo" aria-label="RoboSkin.ai home" onClick={() => setMobileMenuOpen(false)}>
             <BrandMark />
             <span className="site-wordmark">
               RoboSkin<span>.ai</span>
@@ -71,6 +77,19 @@ export default function Navigation() {
           </div>
 
           <div className="site-nav-actions">
+            <Link
+              href="/research-index#research-explorer"
+              className="site-nav-search"
+              aria-label="Search research index"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-current={pathname === '/research-index' ? 'page' : undefined}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="m16 16 4.5 4.5" />
+              </svg>
+              <span>Research index</span>
+            </Link>
             <Link href="/contact?requestType=research" className="site-nav-cta">
               Submit source <span aria-hidden="true">↗</span>
             </Link>

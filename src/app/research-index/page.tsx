@@ -35,7 +35,8 @@ export default function ResearchIndexPage() {
               The RoboSkin Tactile Research Index compares public robot-skin and tactile-AI work by sensing principle, measured modalities, form factor, data output, application direction, evidence level, and explicit limitations. Every record links to its public source and a RoboSkin.ai research brief so readers can verify context before using the taxonomy.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/research-index.csv" className="btn-primary">Open CSV data</Link>
+              <a href="#research-explorer" className="btn-primary">Explore records <span aria-hidden="true"> ↓</span></a>
+              <Link href="/research-index.csv" className="btn-secondary">Open CSV data</Link>
               <Link href="/research-index.json" className="btn-secondary">Open JSON data</Link>
               <a href={researchIndexRelease.repositoryUrl} target="_blank" rel="noreferrer" className="btn-tertiary">
                 Open GitHub repository ↗
@@ -61,7 +62,7 @@ export default function ResearchIndexPage() {
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">reviewed records</dd>
             </div>
             <div className="border-l-2 border-[#ff6b3d] pl-4">
-              <dt className="font-mono text-2xl font-semibold text-white">4</dt>
+              <dt className="font-mono text-2xl font-semibold text-white">{new Set(researchIndexEntries.map((entry) => entry.evidence)).size}</dt>
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">evidence classes</dd>
             </div>
             <div className="border-l-2 border-[#ff6b3d] pl-4">
@@ -69,6 +70,12 @@ export default function ResearchIndexPage() {
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">edition reviewed</dd>
             </div>
           </dl>
+        </div>
+      </section>
+
+      <section className="pb-16 md:pb-20" aria-label="Search the research index">
+        <div className="container-shell">
+          <ResearchIndexExplorer entries={researchIndexEntries} />
         </div>
       </section>
 
@@ -120,11 +127,7 @@ export default function ResearchIndexPage() {
         </div>
       </section>
 
-      <section className="pb-16 md:pb-20">
-        <div className="container-shell">
-          <ResearchIndexExplorer entries={researchIndexEntries} />
-        </div>
-      </section>
+
 
       <section className="border-y border-white/8 py-14 md:py-20">
         <div className="container-shell grid gap-10 lg:grid-cols-2">

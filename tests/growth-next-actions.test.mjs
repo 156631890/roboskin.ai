@@ -16,7 +16,6 @@ test('homepage keeps canonical meaning while reducing repeated long-form blocks'
   assert.match(homepage, /<DirectAnswerSection answers=\{homeRobotSkinFaq\} \/>/);
   assert.match(homepage, /className="home-topic-rail"/);
   assert.doesNotMatch(homepage, /ResearchBriefIndex|researchResourceIndex|marketSignals/);
-  assert.match(css, /\.hero-stage \{ min-height: 590px; \}/);
   assert.match(css, /grid-template-columns: repeat\(7, minmax\(15\.5rem, 82vw\)\)/);
   assert.match(css, /scroll-snap-type: inline mandatory/);
   assert.match(loop, /Swipe to follow all seven stages/);

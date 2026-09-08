@@ -105,21 +105,21 @@ export default function Home() {
               alt={homeBrandAssets.hero.imageAlt}
               fill
               priority
-              sizes="(min-width: 1480px) 1480px, 100vw"
+              sizes="(max-width: 767px) 100vw, (min-width: 1480px) 650px, 45vw"
               className="hero-stage-image"
             />
             <div className="hero-stage-copy">
               <p className="hero-stage-label">Independent robotics intelligence</p>
               <h1 aria-label="Robot skin and tactile AI for Physical AI and humanoid robots">
                 <span className="block">Robot skin <span className="hero-emphasis">and tactile AI</span></span>
-                <span className="block">for Physical AI <span className="block sm:inline">and humanoid robots</span></span>
+                <span className="hero-context">for Physical AI <span className="block sm:inline">and humanoid robots</span></span>
               </h1>
               <p className="hero-stage-summary">
                 RoboSkin.ai tracks source-backed robotics research across robot skin, tactile sensors, robot hands,
-                humanoid robots, dexterous manipulation, embodied AI, Physical AI, and visuo-tactile world models.
+                and Physical AI. Find the papers, compare the evidence, and follow the sources.
               </p>
               <div className="hero-stage-actions">
-                <Link href="/research-index" className="btn-primary">Compare research evidence</Link>
+                <Link href="/research-index#research-explorer" className="btn-primary">Compare research evidence <span aria-hidden="true">↗</span></Link>
                 <Link href="/research" className="hero-text-link">Browse research briefs</Link>
               </div>
             </div>
@@ -128,6 +128,24 @@ export default function Home() {
               <span>Surface / signal / inference / action — original RoboSkin.ai visual study</span>
             </p>
           </div>
+
+          <nav className="home-start-paths" aria-label="Choose a research starting point">
+            <Link href="/robot-skin">
+              <span className="home-path-number" aria-hidden="true">01</span>
+              <span><small>New to the field?</small><strong>Understand robot skin</strong></span>
+              <span aria-hidden="true">↗</span>
+            </Link>
+            <Link href="/research-index#research-explorer">
+              <span className="home-path-number" aria-hidden="true">02</span>
+              <span><small>Evaluating the evidence?</small><strong>Search the research index</strong></span>
+              <span aria-hidden="true">↗</span>
+            </Link>
+            <a href="#latest-research">
+              <span className="home-path-number" aria-hidden="true">03</span>
+              <span><small>Keeping up with robotics?</small><strong>Read the latest updates</strong></span>
+              <span aria-hidden="true">↓</span>
+            </a>
+          </nav>
 
           <div className="hero-data-band">
             <article className="hero-answer">
@@ -159,13 +177,15 @@ export default function Home() {
               RoboSkin.ai maps the technologies, research, datasets, sensors, robot platforms, and AI models that power touch intelligence in robots. Start with a pillar, then follow its papers, datasets, benchmarks, and related entities.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="home-knowledge-grid">
             {homeKnowledgeMap.map((item, index) => (
-              <article key={item.title} className="glass-card p-6">
-                <span className="font-mono text-xs font-semibold text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
-                <h3 className="mt-4 text-xl font-semibold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#c8d1de]">{item.description}</p>
-                {item.href && item.ctaLabel ? <Link href={item.href} className="mt-5 inline-flex text-sm font-semibold text-[#ffd5c5] hover:text-white">{item.ctaLabel} →</Link> : null}
+              <article key={item.title} className="home-knowledge-item">
+                <span className="home-knowledge-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  {item.href && item.ctaLabel ? <Link href={item.href}>{item.ctaLabel} <span aria-hidden="true">↗</span></Link> : null}
+                </div>
               </article>
             ))}
           </div>
@@ -264,7 +284,7 @@ export default function Home() {
               ))}
             </nav>
 
-            <div className="mt-14 md:mt-20">
+            <div id="latest-research" className="mt-14 md:mt-20">
               <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
                 <div>
                   <p className="quiet-label">Latest source-backed updates</p>

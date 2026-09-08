@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import type { ResearchIndexEntry } from '@/lib/research-index';
 
@@ -9,6 +9,8 @@ type ResearchIndexExplorerProps = {
 };
 
 export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorerProps) {
+  const [query, setQuery] = useState('');
+  const searchRef = useRef<HTMLInputElement>(null);
   const [modality, setModality] = useState('all');
   const [evidence, setEvidence] = useState('all');
   const [year, setYear] = useState('all');
@@ -26,18 +28,26 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
     [entries],
   );
 
+  const searchTerms = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  const filtersActive = query.length > 0 || modality !== 'all' || evidence !== 'all' || year !== 'all';
   const filteredEntries = entries.filter((entry) => {
+    const searchableText = [entry.title, entry.sourceTitle, entry.publisher, entry.sensorPrinciple,
+      ...entry.modalities, entry.formFactor, entry.dataOutput, ...entry.applications, entry.evidence, String(entry.year)]
+      .join(' ').toLocaleLowerCase();
+    const matchesQuery = searchTerms.every((term) => searchableText.includes(term));
     const matchesModality = modality === 'all' || entry.modalities.includes(modality);
     const matchesEvidence = evidence === 'all' || entry.evidence === evidence;
     const matchesYear = year === 'all' || String(entry.year) === year;
 
-    return matchesModality && matchesEvidence && matchesYear;
+    return matchesQuery && matchesModality && matchesEvidence && matchesYear;
   });
 
   const resetFilters = () => {
+    setQuery('');
     setModality('all');
     setEvidence('all');
     setYear('all');
+    searchRef.current?.focus();
     track('Research Index Filter', { filter: 'reset', value: 'all' });
   };
 
@@ -49,11 +59,32 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
   };
 
   return (
-    <div className="research-data-explorer">
-      <div className="grid gap-4 border-y border-white/10 py-5 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
+    <div id="research-explorer" className="research-data-explorer">
+      <div className="research-explorer-heading">
+        <div>
+          <p className="quiet-label">Find the evidence</p>
+          <h2>Explore the research</h2>
+        </div>
+        <p>Search a topic, sensor, or paper. Narrow the results by source type and year.</p>
+      </div>
+      <div className="research-search">
+        <label htmlFor="research-query">Search research records</label>
+        <div className="research-search-field">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" />
+          </svg>
+          <input ref={searchRef} id="research-query" type="search" value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search papers, sensors, topics…"
+            aria-controls="research-results" autoComplete="off" />
+          {query ? <button type="button" onClick={() => { setQuery(''); searchRef.current?.focus(); }}>Clear search</button> : null}
+        </div>
+      </div>
+      <div className="research-filters grid gap-4 border-b border-white/10 py-5 md:grid-cols-[1fr_1fr_1fr_auto] md:items-end">
         <label className="grid gap-2 text-sm font-semibold text-white">
           Modality
           <select
+            aria-label="Modality"
             value={modality}
             onChange={(event) => updateFilter('modality', event.target.value)}
             className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
@@ -65,17 +96,19 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
         <label className="grid gap-2 text-sm font-semibold text-white">
           Evidence
           <select
+            aria-label="Evidence"
             value={evidence}
             onChange={(event) => updateFilter('evidence', event.target.value)}
             className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
           >
-            <option value="all">All evidence levels</option>
+            <option value="all">All evidence</option>
             {evidenceLevels.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
         </label>
         <label className="grid gap-2 text-sm font-semibold text-white">
           Year
           <select
+            aria-label="Year"
             value={year}
             onChange={(event) => updateFilter('year', event.target.value)}
             className="min-h-11 rounded-sm border border-white/15 bg-[var(--bg-soft)] px-3 text-sm text-white"
@@ -84,50 +117,57 @@ export default function ResearchIndexExplorer({ entries }: ResearchIndexExplorer
             {years.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
         </label>
-        <button type="button" onClick={resetFilters} className="btn-secondary min-h-11">
+        <button type="button" onClick={resetFilters} disabled={!filtersActive} className="btn-secondary min-h-11">
           Reset filters
         </button>
       </div>
 
-      <p className="mt-5 font-mono text-xs uppercase text-[#8e98a8]" aria-live="polite">
-        Showing {filteredEntries.length} of {entries.length} records
-      </p>
+      <div className="research-results-summary">
+        <p role="status" aria-live="polite" aria-atomic="true">Showing <strong>{filteredEntries.length}</strong> of {entries.length} records</p>
+        <span>Every record links to its original source</span>
+      </div>
 
-      <div className="signal-panel mt-4 overflow-x-auto p-0">
-        <table className="w-full min-w-[1320px] border-collapse text-left">
+      <div id="research-results" className="research-results-region" role="region" aria-label="Research results" tabIndex={0}>
+        <table className="research-results-table w-full border-collapse text-left" role="table">
+          <caption className="sr-only">Tactile research records with source links, technical details, and evidence limitations</caption>
           <thead className="bg-white/[0.03] text-xs uppercase text-[#8e98a8]">
             <tr>
               {['Research item', 'Year', 'Sensor principle', 'Modalities', 'Form factor', 'Data output', 'Applications', 'Evidence'].map((label) => (
-                <th key={label} className="border-b border-white/10 px-4 py-3 font-semibold">{label}</th>
+                <th key={label} scope="col" className="border-b border-white/10 px-4 py-3 font-semibold">{label}</th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody role="rowgroup">
             {filteredEntries.map((entry) => (
-              <tr key={entry.id} className="align-top text-sm text-[#c8d1de]">
-                <td className="w-[300px] border-b border-white/8 px-4 py-5">
+              <tr key={entry.id} role="row" className="align-top text-sm text-[#c8d1de]">
+                <td role="cell" className="research-record-title border-b border-white/8 px-4 py-5">
                   <a href={entry.url} className="font-semibold leading-snug text-white hover:text-[#ff6b3d]">
                     {entry.title}
                   </a>
                   <a href={entry.sourceUrl} target="_blank" rel="noreferrer" className="mt-2 block text-xs text-[#ff6b3d] hover:text-white">
                     {entry.publisher}: {entry.sourceTitle}
                   </a>
-                  <p className="mt-3 text-xs leading-relaxed text-[#8e98a8]">{entry.limitations}</p>
+                  <details className="research-record-notes">
+                    <summary>Evidence notes &amp; limitations</summary>
+                    <p>{entry.limitations}</p>
+                  </details>
                   <p className="mt-2 font-mono text-[11px] uppercase text-[#8e98a8]">Reviewed {entry.reviewedAt}</p>
                 </td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.year}</td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.sensorPrinciple}</td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.modalities.join(', ')}</td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.formFactor}</td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.dataOutput}</td>
-                <td className="border-b border-white/8 px-4 py-5">{entry.applications.join(', ')}</td>
-                <td className="border-b border-white/8 px-4 py-5 capitalize">{entry.evidence}</td>
+                <td role="cell" data-label="Year" className="border-b border-white/8 px-4 py-5">{entry.year}</td>
+                <td role="cell" data-label="Sensor principle" className="border-b border-white/8 px-4 py-5">{entry.sensorPrinciple}</td>
+                <td role="cell" data-label="Modalities" className="border-b border-white/8 px-4 py-5">{entry.modalities.join(', ')}</td>
+                <td role="cell" data-label="Form factor" className="border-b border-white/8 px-4 py-5">{entry.formFactor}</td>
+                <td role="cell" data-label="Data output" className="border-b border-white/8 px-4 py-5">{entry.dataOutput}</td>
+                <td role="cell" data-label="Applications" className="border-b border-white/8 px-4 py-5">{entry.applications.join(', ')}</td>
+                <td role="cell" data-label="Evidence" className="border-b border-white/8 px-4 py-5 capitalize"><span className="research-evidence-label">{entry.evidence}</span></td>
               </tr>
             ))}
             {filteredEntries.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-4 py-8 text-center text-sm text-[#8e98a8]">
-                  No records match these filters.
+                <td colSpan={8} className="research-empty-state">
+                  <h3>No records match your search</h3>
+                  <p>Try a broader term, or reset the filters to see all {entries.length} records.</p>
+                  <button type="button" className="btn-secondary" onClick={resetFilters}>Reset search and filters</button>
                 </td>
               </tr>
             ) : null}
