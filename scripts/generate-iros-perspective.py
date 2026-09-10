@@ -241,7 +241,7 @@ def build_story(style):
             "Recent evidence makes this concrete. HT-Bench pairs 10M RGB frames with 7.8M full-hand tactile frames across 226 tasks and evaluates contact geometry, cross-modal alignment, and unseen-task transfer [2]. RCT instead exposes a split-integrity problem: when contact-sequence overlap is removed, tactile-to-text Recall@1 falls by 17.7 percentage points; under held-out materials it reports 25.1 +/- 6.1% Recall@1 [3]. These results are not contradictory. They show that data scale and evaluation independence answer different questions.",
         ),
         p(
-            "The same distinction applies to models. Sparsh-X combines image, audio, motion, and pressure from about one million interactions [5]. Dream-Tac and FeelWorld predict tactile futures for contact-rich planning [6], [7]. Their reported gains are useful within the authors' tasks and baselines, but model accuracy or perceptual similarity alone does not establish robust recovery, cross-sensor transfer, or safe deployment.",
+            "The same distinction applies to models. Sparsh-X combines image, audio, motion, and pressure from about one million interactions [5]. Dream-Tac and HiTac-WAM predict tactile futures for contact-rich planning [6], [7]. HiTac-WAM also retains a selected forecast for online verification, reporting 72.2% mean success versus 61.1% without verification across three real-robot tasks; fixed hardware and task-specific models bound the claim. Model accuracy or perceptual similarity alone does not establish robust recovery, cross-sensor transfer, or safe deployment.",
         ),
         p("2. A Five-Link Evidence Chain", "heading"),
         p(
@@ -320,7 +320,7 @@ def build_story(style):
             p("[4] L. Wu et al., 'FreeTacMan: Robot-free Visuo-Tactile Data Collection System for Contact-rich Manipulation,' arXiv:2506.01941, rev. 2026.", "ref"),
             p("[5] C. Higuera et al., 'Tactile Beyond Pixels: Multisensory Touch Representations for Robot Manipulation,' arXiv:2506.14754, 2025.", "ref"),
             p("[6] Y. Lou et al., 'Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation,' arXiv:2606.08737, 2026.", "ref"),
-            p("[7] W. Ma et al., 'FeelWorld: Visuo-Tactile World Model for Hierarchical Contact Prediction and Planning,' arXiv:2607.24267, 2026.", "ref"),
+            p("[7] C. Xue et al., 'HiTac-WAM: A Hierarchical Tactile World Action Model for Contact-Rich Robot Manipulation,' arXiv:2608.19574, 2026.", "ref"),
             p("[8] Z. Chen et al., 'Training tactile sensors to learn force sensing from each other,' Nature Communications, vol. 17, art. 2101, 2026.", "ref"),
         ]
     )
