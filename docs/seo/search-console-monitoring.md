@@ -85,6 +85,26 @@ CTR experiment gate:
 - Change a page only when it still has at least 20 post-treatment impressions and CTR below 1 percent.
 - Keep `/research` as the latest analyzed-briefs hub and `/research/robot-skin-papers` as the bibliography and paper-navigation route.
 
+## Production rollout - 2026-08-22
+
+| Item | Record |
+| --- | --- |
+| Deployed source commit | `522a182d5ba924c785f3bad41957aa310f8e59b3` |
+| GitHub quality gate | Run `32575652689` completed successfully |
+| Vercel production deployment | `dpl_BmUbEXrXQr9PzcYFtiUMxYXijtNj` reached Ready state |
+| Production alias | `https://roboskin.ai` |
+| Production verification | Passed at `2026-08-22T13:29:27.879Z`: 114 protected URLs, four noindex URLs, exact 110-URL sitemap, 30 research records, 191 knowledge-graph entities, 69 organizations, and 24 robots |
+| Verified sitemap SHA-256 | `dd842129e560f8253e8c1cd46059b0de3764e57157fa31ae74629e4fef04c7d0` |
+| IndexNow | 15 changed URLs accepted with HTTP `200` during the release follow-up; this records discovery notification acceptance, not indexing |
+| Google Search Console sitemap | `https://roboskin.ai/sitemap.xml` submitted and last read on 2026-08-22 with status `Success` and 104 discovered pages; `news-sitemap.xml` remained successful with one discovered page |
+| Google URL Inspection | `/research/univtac-platform-encoder-benchmark-2026` was not indexed at inspection. The indexing request was accepted on 2026-08-22 and added to Google's priority crawl queue; it is not yet recorded as indexed. |
+
+Measurement dates for this release:
+
+- 2026-08-29: check the UniVTAC page's first crawl, canonical selection, indexed state, impressions, clicks, and query rows. Do not repeat the indexing request simply to change queue priority.
+- 2026-09-19: compare the same page and the changed topic cluster over a complete 28-day window before changing titles or adding narrower child pages.
+- 2026-11-20: evaluate the 90-day traffic and referring-domain targets using matched Search Console windows.
+
 ## Production rollout - 2026-08-05
 
 | Item | Record |
@@ -166,6 +186,7 @@ Evaluate the approved rolling-28-day target: 15,000 impressions, 150 clicks, 1.5
 | https://roboskin.ai/research/genforce-transferable-force-sensing-2026 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026 | Yes |  |  | Inspect URL after deployment, then request indexing if available |
 | https://roboskin.ai/research/ht-bench-full-hand-tactile-representations-2026 | Yes | No at inspection | 2026-08-05 | Indexing requested successfully; monitor recrawl and coverage |
+| https://roboskin.ai/research/univtac-platform-encoder-benchmark-2026 | Yes | No at inspection | 2026-08-22 | Indexing request accepted and added to the priority crawl queue; recheck on 2026-08-29 and 2026-09-19 |
 | https://roboskin.ai/research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | Yes |  |  | Inspect after deployment; monitor plantar tactile sensing and humanoid locomotion queries |
 | https://roboskin.ai/research/sparsh-x-multisensory-touch-representations-2025 | Yes |  |  | Inspect URL, then request indexing if available |
 | https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025 | Yes |  |  | Inspect URL, then request indexing if available |

@@ -4,7 +4,7 @@
 
 User asked to execute the proposed growth work. This batch implements the priority
 combination: a reusable dataset-selection resource, an original technical article,
-and a qualified new editorial application prepared for review.
+and a qualified new editorial application submitted after explicit user review.
 
 Checkout: `C:/Users/Administrator/roboskin.ai`, branch
 `codex/ai-robotics-semantic-hub-20260821`, starting commit
@@ -80,13 +80,19 @@ overviews or critical, evidence-based AI perspectives. Its linked author-interes
 form was read and is open. Historical audience numbers on that page were not used
 as current reach estimates.
 
-Prepared locally, not published or submitted:
+Prepared locally, with the application subsequently submitted on September 8:
 
 - `output/growth-tool-2026-09-08/robot-data-compatibility-article.md`: original
   documentation-based article, “Robot data compatibility is a contract, not a
   modality label”, with a decision table and four verified primary sources.
 - `output/growth-tool-2026-09-08/gradient-submission.md`: every form field filled
   in for review, disclosing the independent RoboSkin affiliation and AI assistance.
+  All six reviewed fields were submitted once after the user's explicit “yes”.
+  The Google Form confirmed “您的回复已记录。” (Your response has been recorded).
+  Evidence: `output/growth-tool-2026-09-08/gradient-confirmation-2026-09-08.md`.
+  Original application, confirmation and unpublished manuscript were privately
+  archived on September 10; see [archive receipt](2026-09-10-evidence-archive.md).
+  The full manuscript remains local and unpublished; no attachment was requested.
 
 All four article references returned HTTP 200 and their relevant documentation
 was read: Datasheets for Datasets, the official Touch and Go project, robomimic
@@ -102,9 +108,9 @@ KDnuggets' homepage did not expose a verified submission route in this check.
 Neither secondary target is represented as ready or contacted.
 
 Prior authorization to send the two Weekly Robotics / IEEE follow-ups was fulfilled
-in the preceding action. It does not authorize this new form submission. Only ask
-for approval after the exact Gradient application and article are ready to review.
-No new external message or community post was sent in this batch.
+in the preceding action. The user separately approved the prepared Gradient
+application with “yes”; submission is logged as M08. Await an editorial reply.
+This confirmation is not article acceptance, publication or a newly earned backlink.
 
 ## Verification and next step
 

@@ -101,10 +101,19 @@ Two personalized, one-time follow-ups were saved as unsent Gmail replies:
 - C27 IEEE RAS Robot Learning TC: a ready-to-edit, one-line resource description
   and the canonical dataset URL; preserves disclosure and evidence limitations.
 
-Exact bodies and draft identifiers are in the local
-`output/seo-2026-09-08/outreach-drafts.md`. No email, GitHub comment or community
-post was sent in this batch. Sending these two messages requires explicit user
-authorization. Drafts and open PRs do not count as earned links.
+Exact bodies and historical draft identifiers are in the local
+`output/seo-2026-09-08/outreach-drafts.md`. Following explicit user authorization
+on September 8, both original threads were rechecked with no intervening replies
+and the two drafts were sent once. Gmail SENT status was independently verified:
+M07 message `1a07ea71685079b0`, C27 message `1a07ea71fefaf681`.
+The outreach log records both final follow-ups; await responses and do not send
+another unsolicited follow-up. No GitHub comment or community post was sent.
+Sent outreach and open PRs do not count as earned links.
+
+The two Gmail threads were re-read on 2026-09-10: each still contains the original
+message and one SENT follow-up, with no incoming reply in the thread. The exact
+draft bodies are preserved in the private archive described in the
+[archive receipt](2026-09-10-evidence-archive.md).
 
 ## Validation and next measurement
 
