@@ -184,7 +184,7 @@ if (failures.length === 0) {
         continue;
       }
       if (providerForm) failures.push(`${label}: renders a Newsletter form without a valid HTTPS endpoint`);
-      if (!unavailable.includes('Newsletter is not open yet') || !unavailable.includes('/feed.xml')) {
+      if (!unavailable.includes('Newsletter is not open yet') || !unavailable.includes('/rss')) {
         failures.push(`${label}: closed Newsletter state is missing its status or RSS route`);
       }
       if (/<form\b|<input\b|\baction=|\bmethod=|Confirm by email|Unsubscribe at any time/i.test(unavailable)) {

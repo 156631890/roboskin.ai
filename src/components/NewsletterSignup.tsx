@@ -14,7 +14,7 @@ function NewsletterUnavailable() {
       <h2 id="newsletter-unavailable-title" className="newsletter-form-title">Newsletter is not open yet</h2>
       <p>We are preparing the research brief. No email address is collected here while signup is unavailable.</p>
       <div className="newsletter-form-links">
-        <a href="/feed.xml" type="application/rss+xml">
+        <a href="/rss">
           Follow research updates via RSS <span aria-hidden="true">↗</span>
         </a>
       </div>

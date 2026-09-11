@@ -97,19 +97,19 @@ test('the audited production URL inventory is protected', async () => {
   });
 });
 
-test('duplicate and positioning-mismatched legacy pages stay out of the index contract', async () => {
+test('utility and excluded legacy pages stay out of the index contract', async () => {
   const [seo, protectedUrls, noindexUrls] = await Promise.all([
     read('src/lib/seo.ts'),
     read('config/protected-urls.json').then(JSON.parse),
     read('config/noindex-urls.json').then(JSON.parse),
   ]);
 
-  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation']) {
+  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation', '/rss']) {
     assert.match(seo, new RegExp(`'${pathname}': \\{[\\s\\S]*?index: false`));
     assert.ok(!protectedUrls.includes(`https://roboskin.ai${pathname}`));
     assert.ok(noindexUrls.includes(`https://roboskin.ai${pathname}`));
   }
-  assert.equal(noindexUrls.length, 4);
+  assert.equal(noindexUrls.length, 5);
 });
 
 test('the two production-only news routes remain in local content and sitemap generation', async () => {

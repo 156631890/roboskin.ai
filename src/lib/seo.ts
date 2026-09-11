@@ -230,6 +230,17 @@ export const pageSeo: Record<string, SeoRoute> = {
     index: true,
     breadcrumbs: ['Home', 'Editorial policy'],
   },
+  '/rss': {
+    path: '/rss',
+    title: 'Follow Robot Skin and Tactile AI Updates via RSS',
+    description:
+      'Subscribe to RoboSkin.ai research and news in your RSS reader. Copy the feed address and browse the latest robot skin and tactile AI updates.',
+    updated: '2026-09-11',
+    priority: 0.3,
+    changeFrequency: 'weekly',
+    index: false,
+    breadcrumbs: ['Home', 'RSS'],
+  },
   '/news': {
     path: '/news',
     title: 'Robot Skin, Tactile AI and Physical AI News',

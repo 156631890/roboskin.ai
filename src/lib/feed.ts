@@ -9,15 +9,17 @@ const xmlEscape = (value: string) => value
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&apos;');
 
-export function buildRssFeed(): string {
-  const items = [
+export function getRssItems() {
+  return [
     ...blogPosts.map((post) => ({ ...post, path: `/research/${post.id}` })),
     ...newsPosts.map((post) => ({ ...post, path: `/news/${post.id}` })),
   ]
     .sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
     .slice(0, 50);
+}
 
-  const itemXml = items.map((item) => {
+export function buildRssFeed(): string {
+  const itemXml = getRssItems().map((item) => {
     const url = canonicalUrl(item.path);
     return `<item><title>${xmlEscape(item.title)}</title><link>${url}</link><guid isPermaLink="true">${url}</guid><description>${xmlEscape(item.excerpt)}</description><pubDate>${new Date(item.date).toUTCString()}</pubDate></item>`;
   }).join('');

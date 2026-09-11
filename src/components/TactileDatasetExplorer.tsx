@@ -264,7 +264,7 @@ export default function TactileDatasetExplorer({
           </table>
         </div>
         <div className="mt-6 flex flex-wrap gap-5 text-sm text-[#ffd5c5]">
-          <a href="/feed.xml" className="underline">Follow research updates via RSS</a>
+          <a href="/rss" className="underline">Follow research updates via RSS</a>
           <Link href="/contact?requestType=research" className="underline">Suggest a source or correction</Link>
         </div>
       </div>

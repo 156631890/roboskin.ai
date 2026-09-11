@@ -32,7 +32,7 @@ test('conversion analytics cover the agreed growth actions without user-entered 
   assert.match(newsletter, /action=\{config\.endpoint\}/);
   assert.match(newsletter, /method="post"/);
   assert.match(newsletter, /Newsletter is not open yet/);
-  assert.match(newsletter, /href="\/feed\.xml"/);
+  assert.match(newsletter, /href="\/rss"/);
   assert.match(newsletter, /if \(!newsletterConfig\) return <NewsletterUnavailable \/>/);
   assert.doesNotMatch(newsletter, /Newsletter Submit|Newsletter WhatsApp Open|wa\.me|window\.location\.href|encodeURIComponent/);
   assert.match(privacy, /When the Newsletter panel shows its unavailable state/);
