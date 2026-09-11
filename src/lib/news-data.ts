@@ -29,6 +29,165 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'fibtac-pneumatic-fiber-gripper-tactile-sensing-2026',
+    title: 'FibTac combines pneumatic gripping and tactile sensing',
+    seoTitle: 'FibTac: Pneumatic Tactile Gripper and Lab Results',
+    seoDescription:
+      'Review Purdue’s FibTac gripper: fiber-based tactile sensing, liquid and underwater classification results, experiment sizes, payload, and public evaluation assets.',
+    excerpt:
+      'Purdue researchers use the same fiber array to grasp objects and sense contact. The peer-reviewed study reports air and water experiments, with separate protocols for objects, liquids, and granular media.',
+    content: `# FibTac combines pneumatic gripping and tactile sensing
+
+**Research news — paper published August 31, 2026; reviewed September 11, 2026**
+
+FibTac is a pneumatic gripper that uses carbon fibers both to manipulate objects and to sense their interaction with the environment. Researchers at Purdue University describe the system in a peer-reviewed paper published in npj Robotics on August 31, 2026. Its useful distinction is the shared mechanical structure: the fibers do the grasping, while an internal camera reads their movement as tactile information. [Read the paper](https://www.nature.com/articles/s44182-026-00112-0).
+
+The laboratory results cover chess-piece identification, liquid classification, granular-material classification, underwater object recognition, and water-flow estimation. These are separate experiments with different training sets and conditions. A single accuracy number would obscure what the gripper has actually demonstrated.
+
+## How a fiber gripper senses touch
+
+Carbon fibers are embedded in silicone inside a waterproof housing. Pneumatic pressure changes the fiber array’s configuration to grasp or release an object. The camera observes fiber-tip motion, which also changes when an object or surrounding medium resists that movement. Learned models use these image sequences for classification or regression.
+
+This combines actuation and sensing in a compact contact structure. It also makes the signal depend on how the robot moves: liquid tests use active grasp–release cycles, whereas the granular tests move the gripper vertically with passive fibers. The sensing protocol is part of the measurement, not just a detail of the demonstration.
+
+The authors report a payload up to 186 g and more than 3,000 actuation cycles without observable damage under their tested conditions. These establish a laboratory operating range; they do not establish an industrial lifetime or a payload rating across arbitrary objects. The [paper’s results and methods](https://www.nature.com/articles/s44182-026-00112-0#Sec2) describe the tested hardware and procedures.
+
+## What the classification results measure
+
+The following values are author-reported results from the paper. Clips, held-out samples, and online manipulation trials are kept separate because they are different evaluation units.
+
+| Experiment | Classes and data protocol | Reported result | Interpretation |
+| --- | --- | --- | --- |
+| Chess-piece recognition | Six piece types; 105 clips per class, with 20% reserved for validation; a separate online manipulation evaluation uses 20 trials in total | 100% in the 20 online trials | A small online cohort, not 100% accuracy across arbitrary grasped objects |
+| Liquid classification | Water, honey, syrup, dish liquid, oil, and an empty reference; 220 training and 20 test clips per class | Approximately 97.5% classification accuracy | Six classes include the empty reference; this is not six different liquids |
+| Granular-material classification | Flour, beans, rice, oats, and sugar; 200 clips per class with 10% for validation, plus 20 test samples per class | Approximately 90% classification accuracy | Passive fibers sense resistance during robot-driven vertical movement |
+| Underwater object classification | Four objects; 110 clips per object, including 10 validation and 10 test clips per object | 100% classification accuracy | A controlled four-object underwater experiment |
+
+The chess experiment’s 20 online trials should not be substituted for the larger clip-based training and validation collection. Likewise, the underwater result does not imply that the gripper can identify unseen marine objects. These distinctions matter when comparing FibTac with other [robotic gripper tactile sensors](/applications/robot-gripper-tactile-sensor).
+
+## Why motion and medium matter
+
+For liquids, the gripper alternates grasp and release every second, collecting the resistance pattern over two cycles. For granular media, the robot moves vertically with a 4 cm amplitude and a 1.4-second period without pneumatic actuation. These motions actively expose material-dependent signals to the fiber array.
+
+The flow experiment adds a different task: regression against measured water-flow conditions. The collection uses seven angles from 0° to 90° in 15° increments, 20 flow levels, and 12 clips per condition, allocated as nine training, one validation, and two test clips. The reference flow-meter values are volumetric flow in L/min; they should not be described as water velocity in m/s. See the [flow-sensing methods](https://www.nature.com/articles/s44182-026-00112-0).
+
+For an engineering reader, this makes FibTac a candidate for studying coupled grasping and active tactile perception in wet or compliant environments. A comparison should match motion, fluid or material, camera settings, object set, and train/test separation before attributing a result solely to the sensor design.
+
+## What can be inspected or reproduced today?
+
+The authors’ [FibTac repository](https://github.com/xvvzhang/FibTac) provides evaluation notebooks for five tasks and links external data and checkpoints. At the reviewed revision, the repository describes validation/test assets rather than a complete training-data release. RoboSkin reviewed the repository and its instructions but did not download the external data or rerun the models.
+
+The paper and repository point to different Google Drive folders. Both are source-provided links; their contents and equivalence were not independently verified in this review. A reproducer should first confirm that the selected notebook, checkpoint, and evaluation split belong together. The reviewed GitHub root did not contain a license file, so the paper’s open-access status should not be treated as a software or data license.
+
+## Limits to carry into a comparison
+
+The paper discusses practical constraints, including camera-cable fragility, the tradeoff between gripping strength and fine sensing, and generalization to unseen objects or environments. Those constraints are consequential for a combined actuator and sensor: changing stiffness or fiber geometry may improve one function while changing the other.
+
+RoboSkin did not conduct these laboratory experiments. The article synthesizes the authors’ paper and public repository, and the cover is an illustration. For alternative contact structures, see [soft robotic skin](/applications/soft-robotic-skin) and the [tactile sensor benchmark guide](/benchmarks). For a different approach that reconstructs contact geometry from sparse electrical measurements, compare [TacPrint’s controlled grasping results](/research/tacprint-wearable-tactile-contact-reproduction-2026).
+
+## Sources
+
+- [Athar et al.: FibTac, npj Robotics, August 31, 2026](https://www.nature.com/articles/s44182-026-00112-0)
+- [Purdue MARS Lab research listing](https://www.purduemars.com/research)
+- [FibTac evaluation repository, reviewed revision](https://github.com/xvvzhang/FibTac/tree/3f2d29848c1d0eeddd89605259a19d1188241bb0)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-11',
+    updated: '2026-09-11',
+    readTime: '6 min read',
+    category: 'Tactile grippers',
+    image: '/generated/authority/research-soft-robotic-skin.webp',
+    sourceTitle: 'FibTac: a fiber-based pneumatic gripper with embodied tactile sensing',
+    sourceUrl: 'https://www.nature.com/articles/s44182-026-00112-0',
+    sources: [
+      { title: 'FibTac peer-reviewed paper', url: 'https://www.nature.com/articles/s44182-026-00112-0' },
+      { title: 'Purdue MARS Lab', url: 'https://www.purduemars.com/research' },
+      { title: 'FibTac evaluation repository', url: 'https://github.com/xvvzhang/FibTac/tree/3f2d29848c1d0eeddd89605259a19d1188241bb0' },
+    ],
+    technicalFocus: ['pneumatic gripper', 'vision-based tactile sensing', 'underwater sensing', 'soft robotic skin'],
+  },
+  {
+    id: 'twins-aist-body-surface-tactile-demonstrations-2026',
+    title: 'TWINS captures touch beyond the robot hand',
+    seoTitle: 'AIST TWINS: Body-Surface Touch and Robot Demonstrations',
+    seoDescription:
+      'AIST’s TWINS uses 219 tactile cells to collect contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware, and learning-code limits.',
+    excerpt:
+      'AIST’s wearable dual-arm system records pressure and proximity on the hands, arms, and chest. Its public hardware release makes the embodiment inspectable, while policy evidence remains qualitative.',
+    content: `# TWINS captures touch beyond the robot hand
+
+**Research news — preprint submitted August 3, 2026; release status reviewed September 11, 2026**
+
+TWINS is a wearable demonstration system designed to capture manipulation that uses the arms and chest as well as the hands. A team at Japan’s National Institute of Advanced Industrial Science and Technology, AIST, pairs a human-operated wearable with a robot that shares its joint configuration and dimensions. Tactile cells record pressure and proximity across both systems’ contact surfaces. The [August 3 preprint](https://arxiv.org/abs/2608.01733) reports a small demonstration-learning study, not a peer-reviewed success-rate benchmark.
+
+There is a concrete release update to accompany the paper: the [official project page](https://mmurooka.github.io/twins-project-page/) now links a hardware repository with robot descriptions and assembly resources. The project’s learning-code link still says “Coming soon” as of September 11. Those are different levels of access and should be evaluated separately.
+
+## Why capture contact on the forearms and chest?
+
+Holding a basket against the torso or receiving a ball with both arms uses contact away from the fingertips. A hand-only demonstration interface can capture joint motion while missing where the load touches the body. TWINS instead tries to preserve both the demonstrated geometry and the body-surface contact signals.
+
+The wearable is supported by a chair. It is a dual-arm demonstration apparatus, not a freely walking full-body suit. Each arm has seven degrees of freedom, and the learning state includes 16 joint values when the two grippers are included. This makes it relevant to [body-surface robot skin](/humanoid-robot-skin), but the study does not demonstrate transfer to arbitrary walking humanoids.
+
+## The sensor and collection budget
+
+The paper describes Intouch Robotics e-Skin pressure and proximity sensing. Its sensor placement and recording protocol are explicit enough to distinguish physical cells from signal channels. [System design and experiments](https://arxiv.org/html/2608.01733v1).
+
+| Quantity | Paper-reported configuration | What it means |
+| --- | --- | --- |
+| Cells on each arm | 15 at the gripper, 45 on the inner forearm, 18 on the upper arm | 78 cells per arm |
+| Chest coverage | 63 cells | The two arms and chest total 219 cells |
+| Tactile learning input | 438 values | Two measurements per cell: pressure and proximity |
+| Recording frequency | 10 Hz | The stated data-acquisition rate |
+| Demonstrations | 10 for each of four tasks, 40 in total | Collected by one operator, with an assistant presenting and removing objects |
+| Collection time | Under 30 minutes for a set of 10 demonstrations | Not a claim that all 40 demonstrations took under 30 minutes |
+
+The four tasks are Towel Hanging, Basket Holding, Ball Placing, and Adaptive Holding. The authors train Diffusion Policy using joint angles and tactile observations, with a state history of two steps and an action-prediction horizon of eight. This is a specific imitation-learning setup; it is not evidence of broad task generalization from 40 examples.
+
+## What the experiments show—and what they do not measure
+
+The paper reports qualitative execution of the four learned tasks. Its quantitative tracking measurement is a mean absolute error of 0.94° over the 14 arm joints, with a 95th-percentile error of 3.43°. The authors attribute much of the remaining error to approximately 0.4–0.6 seconds of tracking delay. These are joint-tracking measurements, not task-success percentages. [Evaluation section](https://arxiv.org/html/2608.01733v1#S4.SS4).
+
+The observed policies change motion with body-surface contact events, supporting the feasibility of collecting and using this kind of demonstration. However, the paper does not provide a quantified task-success denominator or a matched tactile-disabled baseline. It therefore cannot establish a numerical improvement caused by touch, nor a reliable deployment success rate.
+
+The authors also describe occasional object drops and the use of sponge padding to improve compliance. A robot that reproduces a demonstrated joint trajectory still needs suitable physical compliance and control when object size, contact location, or load changes. The paper should not be read as a validation of torque-controlled holding across those variations.
+
+## Hardware is available; the learning release is incomplete
+
+The [TWINS-Hardware repository](https://github.com/isri-aist/TWINS-Hardware) contains robot-description resources and links assembly instructions, a parts list, and 3D models. Its root license is CERN-OHL-W-2.0 at the reviewed revision. The repository was checked at commit fe9b8090edd8601798dbc618e1d9a9711a8c9697.
+
+That is useful for understanding the mechanical embodiment. It does not establish that the experiment’s training implementation, checkpoints, or 40 demonstrations have been released. The official project page still labels the learning code as forthcoming. RoboSkin reviewed those listings but did not build the hardware, download all linked fabrication resources, or reproduce a policy.
+
+For a lab considering a similar collection system, the first questions are practical: can the human demonstrate with the same reachable contact geometry, do pressure and proximity remain calibrated after mounting, and does the robot have enough compliance to tolerate imperfect replay? A follow-up evaluation should count attempted and successful trials, report object changes, and compare identical policies with and without the tactile input.
+
+## Where TWINS fits in tactile robot learning
+
+TWINS addresses demonstration capture over a large contact surface. [TacPrint](/research/tacprint-wearable-tactile-contact-reproduction-2026) addresses a related problem at the fingertip: transferring local contact geometry from a human demonstration to a robot. The two projects differ in sensor technology, embodiment, and evaluation protocol, so their reported measurements should not be ranked as if they were one benchmark.
+
+For the surrounding architecture, see [robot teleoperation](/robot-teleoperation), [robot learning](/robot-learning), and [robot hands](/robot-hands). The evidence here is author-reported and preliminary; the contribution is a concrete interface for contact-rich demonstrations and an inspectable hardware release.
+
+## Sources
+
+- [Kitamura et al.: TWINS preprint, August 3, 2026](https://arxiv.org/abs/2608.01733)
+- [TWINS full paper and experimental protocol](https://arxiv.org/html/2608.01733v1)
+- [AIST authors’ TWINS project page](https://mmurooka.github.io/twins-project-page/)
+- [TWINS-Hardware at the reviewed revision](https://github.com/isri-aist/TWINS-Hardware/tree/fe9b8090edd8601798dbc618e1d9a9711a8c9697)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-11',
+    updated: '2026-09-11',
+    readTime: '6 min read',
+    category: 'Tactile robot learning',
+    image: '/generated/authority/humanoid-stack-map-cover.webp',
+    sourceTitle: 'TWINS: A Tactile Wearable Isomorphic Arm Networked System for Contact-Rich Manipulation Learning',
+    sourceUrl: 'https://arxiv.org/abs/2608.01733',
+    sources: [
+      { title: 'TWINS preprint', url: 'https://arxiv.org/abs/2608.01733' },
+      { title: 'Official TWINS project', url: 'https://mmurooka.github.io/twins-project-page/' },
+      { title: 'TWINS hardware release', url: 'https://github.com/isri-aist/TWINS-Hardware/tree/fe9b8090edd8601798dbc618e1d9a9711a8c9697' },
+    ],
+    technicalFocus: ['body-surface tactile sensing', 'robot demonstrations', 'imitation learning', 'robot teleoperation'],
+  },
+  {
     id: 'gemini-robotics-2-whole-body-vla-dexterity-2026',
     title: 'Gemini Robotics 2 extends VLA control from whole-body motion to dexterous hands',
     seoTitle: 'Gemini Robotics 2: Whole-Body VLA and Dexterity',

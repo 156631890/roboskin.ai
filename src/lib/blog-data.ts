@@ -24,6 +24,214 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'tacprint-wearable-tactile-contact-reproduction-2026',
+    title: 'TacPrint reconstructs contact from 24 tactile cells',
+    seoTitle: 'TacPrint: Wearable Touch, Depth Reconstruction & Grasp Data',
+    seoDescription:
+      'Examine TacPrint’s 24-taxel sensor, physical indentation errors, and 40-trial grasp comparison: dense-depth feedback reaches 87.5% versus 67.5% for raw taxels.',
+    excerpt:
+      'A wearable capacitive fingertip sensor predicts a dense contact map for human-to-robot replay. We separate simulation labels, physical measurements, and closed-loop grasping results.',
+    content: `# TacPrint reconstructs contact from 24 tactile cells
+
+**Evidence review — July 31, 2026 preprint; analyzed September 11, 2026**
+
+TacPrint is a wearable fingertip tactile sensor that converts 24 capacitive taxel readings into a predicted 35 × 26 depth map. Researchers led by the Institute of Automation, Chinese Academy of Sciences, use the reconstructed contact geometry to adjust human-to-robot replay and robot grasping. The [July 31 preprint](https://arxiv.org/abs/2607.29231) reports both controlled physical measurements and manipulation experiments.
+
+The strongest comparison is a 40-trial grasping study: dense-depth feedback succeeds in 35 trials, compared with 27 using raw-taxel feedback and 15 using contact detection alone. That is useful evidence for this setup. It does not mean the sensor has 910 physical sensing cells, that its entire predicted depth surface has been physically validated, or that it provides a fast reflex controller.
+
+## From sparse capacitance to a dense contact map
+
+The sensor measures deformation through 24 capacitive cells. A learned reconstruction model maps their signals to a 35 × 26 spatial prediction. Dense output provides an estimated contact region and indentation pattern, while the actual electrical observations remain sparse.
+
+The reconstruction relies on simulation-generated depth labels. A predicted map can interpolate useful geometry, but a larger output grid does not independently create more physical measurements. The paper therefore evaluates several different questions: agreement with simulated depth labels, agreement at controlled physical reference positions, and whether the representation changes a robot’s behavior. [Full paper and methods](https://arxiv.org/html/2607.29231v1).
+
+This distinction is relevant when choosing a [tactile sensor for a robot hand](/applications/robot-hand-tactile-sensor): physical sensing density, reconstruction resolution, calibration error, and task success describe different parts of the system.
+
+## Keep simulation and physical errors separate
+
+The following values are reported in the paper’s reconstruction and indentation experiments. The ± values are standard deviations, not confidence intervals.
+
+| Evaluation | Reported error or score | Scope |
+| --- | --- | --- |
+| Contact-region reconstruction against simulation labels | RMSE 0.223 ± 0.161 mm | Agreement with the simulated depth reference |
+| Contact centroid against simulation labels | 1.213 ± 2.379 pixels | A pixel-space localization measurement |
+| Contact-region overlap against simulation labels | IoU 0.829 ± 0.169 | Overlap with the simulated contact region |
+| Physical center-depth measurement | MAE 0.085 ± 0.057 mm across 40 trials | Predicted depth at a guide-calibrated contact center |
+| Primary physical contact-position measurement | 0.250 ± 0.208 mm across 37 trials | Excludes three reference regions truncated by the sensing boundary |
+| Physical contact-position measurement including boundary cases | 0.285 ± 0.240 mm across all 40 trials | Includes the three boundary-truncated reference regions |
+
+The three excluded trials remain in the center-depth measurement. The exclusion applies only to the primary contact-position statistic and is determined from the reference contact regions. Reporting both position results makes that choice visible instead of presenting the smaller error without its denominator.
+
+The physical experiment validates center depth and contact position under controlled indentation. It does not provide full-field physical ground truth for every pixel of the deforming gel. That remains a limit on how literally the reconstructed surface should be interpreted.
+
+## The 40-trial grasping comparison
+
+In Experiment 3, an RM65-B arm with a Tesollo DG-2F-M gripper and two TacPrint sensors grasps an orange model. Each strategy is tested at eight lateral positions, five times per position: 40 trials per strategy. Four positions form the edge-contact subset, giving 20 trials per strategy in that subset. Success means lifting the object 50 mm and holding it for five seconds. [Experiment 3 and Figure 11](https://arxiv.org/html/2607.29231v1).
+
+| Feedback strategy | All positions | Edge-contact subset |
+| --- | --- | --- |
+| Contact detection only | 15/40 successful, 37.5% | 4/20 successful, 20% |
+| Raw capacitive taxels | 27/40 successful, 67.5% | 9/20 successful, 45% |
+| Reconstructed dense depth | 35/40 successful, 87.5% | 17/20 successful, 85% |
+
+Dense-depth feedback improves the reported success rate over raw-taxel feedback by 20 percentage points overall and 40 percentage points at the edge positions. These are absolute differences between success rates, not relative percentage gains. The edge trials are a subset of the 40, so they must not be added as another independent 20-trial experiment.
+
+The result supports the authors’ argument that a reconstructed contact region helps when a sparse taxel centroid is biased toward the interior of the sensing surface. Its scope is the tested model object, gripper, positions, and adjustment procedure; it does not establish the same improvement across object categories or robot hands.
+
+## Better success did not mean fewer corrections or faster control
+
+Among successful trials, the raw-taxel strategy required 1.07 ± 1.36 lateral adjustments on average; the dense-depth strategy required 2.14 ± 1.24. The improved success therefore came with more average corrections in this reported comparison, rather than a reduction in every measure of effort.
+
+The protocol averages tactile estimates over a five-second window and does not cap the number of adjustments. Separately, the nine-frame centered input at 30 Hz introduces approximately 0.13 seconds of latency. Those choices make this a deliberate contact-adjustment experiment, not a benchmark for rapid slip recovery. A deployment comparison should report end-to-end task time as well as success.
+
+## Human-to-robot contact reproduction is a separate experiment
+
+The paper also studies demonstration replay on an RM65-B with a LinkerHand O20. Tactile-guided compensation adjusts the fingertip commands derived from a human demonstration. It reports aggregate grasping success of 91.67% and wiping success of 90%, versus 0% for direct replay in those settings.
+
+Those percentages belong to a different hand and protocol from the 40-trial comparison above. The reviewed text does not clearly establish their trial denominators, so they should not be combined with the orange-model counts. The compensation also uses empirical finger gains; this is not a demonstrated improvement to a general-purpose vision-language-action model.
+
+For a broader contact area, [AIST’s TWINS demonstration system](/news/twins-aist-body-surface-tactile-demonstrations-2026) captures pressure and proximity on the arms and chest. TacPrint instead targets local fingertip geometry. Together they show why demonstration transfer depends on contact representation and embodiment, not just matching joint trajectories.
+
+## Access and reproduction boundary
+
+TacPrint is an arXiv preprint. The reviewed paper and record did not provide an official downloadable code or dataset release. RoboSkin reviewed the paper and checked its quantitative comparisons; we did not build the sensor, obtain the raw trials, or reproduce the experiments. No independent replication is claimed.
+
+A useful follow-up should retain all boundary contacts, separate simulated and physical ground truth, repeat the strategies on multiple objects, and report both time and failed adjustment sequences. For representation transfer between sensor designs, compare the [TacVerse dataset audit](/research/tacverse-cross-sensor-tactile-dataset-2026). For the policy context, see [tactile AI](/tactile-ai) and [tactile manipulation](/tactile-manipulation).
+
+## Sources
+
+- [Liu et al.: TacPrint preprint, July 31, 2026](https://arxiv.org/abs/2607.29231)
+- [TacPrint v1 full text, reconstruction measurements, and grasping protocol](https://arxiv.org/html/2607.29231v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-11',
+    updated: '2026-09-11',
+    readTime: '7 min read',
+    category: 'Tactile manipulation',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'TacPrint: A Wearable Fingertip Tactile Sensor for Human-to-Robot Contact Reproduction',
+    sourceUrl: 'https://arxiv.org/abs/2607.29231',
+    citationUrls: ['https://arxiv.org/abs/2607.29231', 'https://arxiv.org/html/2607.29231v1'],
+    technicalFocus: ['capacitive tactile sensing', 'contact reconstruction', 'robot hands', 'human-to-robot demonstrations'],
+  },
+  {
+    id: 'tacverse-cross-sensor-tactile-dataset-2026',
+    title: 'TacVerse tests whether touch transfers between sensors',
+    seoTitle: 'TacVerse Dataset: 106,800 Images, Transfer Results & Access',
+    seoDescription:
+      'Audit TacVerse’s seven tactile sensors, 106,800 reported images, cross-sensor benchmark results, trial splits, official code, and gated Hugging Face dataset.',
+    excerpt:
+      'TacVerse compares shape, grating, and force perception across tactile sensors. Its public code and gated dataset are now identifiable, but transfer quality depends strongly on the task.',
+    content: `# TacVerse tests whether touch transfers between sensors
+
+**Dataset and benchmark review — June 24, 2026 preprint; access checked September 11, 2026**
+
+TacVerse is a dataset and benchmark for comparing vision-based tactile perception across seven sensor designs. Its authors, affiliated with Imperial College London, Queen Mary University of London, and King’s College London, report 106,800 images across shape classification, grating classification, and force regression. The [June 24 preprint](https://arxiv.org/abs/2606.25877) asks whether a model trained on one tactile sensor remains useful on another.
+
+The answer depends on the task. In the paper’s transfer study, a shape classifier trained on GelSightMarker reaches 98.1% accuracy on GelSightNoMarker. A grating classifier using the same source–target sensor pair reaches only 24.8%. Sensor similarity alone does not establish transferable performance across perception tasks.
+
+The official [code repository](https://github.com/LannWei/Tactile_Database), [project page](https://lannwei.github.io/Tactile_Database/), and [Hugging Face dataset listing](https://huggingface.co/datasets/Lan-2025/Tactile) were verified on September 11. The dataset is publicly listed but gated. RoboSkin did not download or independently recount the images.
+
+## What the reported 106,800 images contain
+
+The sensor counts below come from the paper, not from an independent file inventory. GelSightNoMarker and GelSightMarker refer to GelSight Mini configurations without and with markers. [Dataset description](https://arxiv.org/html/2606.25877v1).
+
+| Sensor | Paper-reported images |
+| --- | ---: |
+| GelSightNoMarker | 16,917 |
+| GelSightMarker | 15,487 |
+| MagicGripper | 16,892 |
+| MagicTac | 12,496 |
+| TacTip | 11,000 |
+| ViTac | 11,000 |
+| ViTacTip | 23,008 |
+| Total | 106,800 |
+
+The same collection is organized by task into 30,094 shape-classification images, 40,509 grating-classification images, and 36,197 force-regression images. These also sum to 106,800; they are a second breakdown of the collection, not additional images. The shape task has nine classes and the grating task has 30.
+
+This is a controlled tactile-perception resource. It is not a dataset of 106,800 robot demonstrations or successful manipulation episodes. See the [tactile dataset catalogue](/datasets#dataset-tacverse) for its place among image, sequence, and robot-interaction datasets.
+
+## Three protocols answer different questions
+
+| Protocol | What is trained and evaluated | Main boundary |
+| --- | --- | --- |
+| Within-sensor learning | Train and test on separate partitions from the same sensor | Measures performance inside a sensor domain |
+| Zero-shot cross-sensor transfer | Train on one source sensor and test on a different sensor without target-task training | Measures sensor shift; shape uses a seven-by-seven comparison, while grating and force use fixed source sensors |
+| Few-shot adaptation | Add 0.5%, 1%, 2.5%, 5%, or 10% of the target sensor’s training data | Reported for force regression; target validation labels are also used, so this is not zero-shot transfer |
+
+For grating classification the fixed source is GelSightMarker. For force regression it is GelSightNoMarker. The scope differs from the exhaustive shape-transfer matrix; the paper does not report a complete seven-by-seven transfer study for every task.
+
+The authors describe keeping complete contacts, trials, or trajectories together and dividing them chronologically into 60% training, 20% validation, and 20% testing. Few-shot examples come from the target training partition, with validation and test partitions unchanged. [Experimental setup](https://arxiv.org/html/2606.25877v1).
+
+## Transfer results: the task changes the answer
+
+The following accuracies are transcribed from Tables 2 and 3. All rows use GelSightMarker as the source sensor; each task has its own trained classifier.
+
+| Task | Evaluation sensor | Protocol | Accuracy |
+| --- | --- | --- | ---: |
+| Shape classification | GelSightMarker | Within-sensor | 95.5% |
+| Shape classification | GelSightNoMarker | Zero-shot cross-sensor | 98.1% |
+| Grating classification | GelSightMarker | Within-sensor | 90.3% |
+| Grating classification | GelSightNoMarker | Zero-shot cross-sensor | 24.8% |
+| Grating classification | MagicGripper | Zero-shot cross-sensor | 5.4% |
+| Grating classification | ViTacTip | Zero-shot cross-sensor | 4.1% |
+
+The shape result is a counterexample to a blanket claim that every sensor change lowers accuracy. It also does not prove that the target sensor is inherently better: the within-sensor and cross-sensor rows use different test data. The grating result shows how poorly that favorable transfer can carry over to finer spatial distinctions.
+
+The representation study needs the same care. Table 5 reports useful masked-autoencoder pretraining results in several settings, but it does not show universal improvement. For GelSightMarker shape classification, ViT with ImageNet initialization reports 95.8%, while ViT with MAE pretraining reports 84.8%. These are separate representation-study results and should not be substituted for Table 2’s transfer-study baseline.
+
+## Public code, gated data, and separate licenses
+
+At the reviewed repository revision, the official code contains shape, grating, force, and pretraining components. The Hugging Face listing exposes task archives named Shape_Classification.zip, Grating_Classification.zip, and Force_Regression.zip, alongside other assets.
+
+| Asset | Verified on September 11, 2026 | Limit of this review |
+| --- | --- | --- |
+| Official code | Repository and source files inspected at commit abe33c1e896d9529f0798cc75e36a63da9753e79 | Not executed; no root license file identified at that revision |
+| Dataset listing | Public metadata reports automatic gating and CC BY 4.0; revision 0bc27afe0d8f6c878b79e1eb0825255541ccaceb | File listing verified; gated content not downloaded or independently counted |
+| Paper | Public arXiv v1 preprint | Paper license and peer-review status are separate from code and dataset access |
+
+An anonymous attempt to read the dataset’s raw README returned HTTP 401. A public listing therefore should not be described as unrestricted anonymous download access. The CC BY 4.0 statement comes from dataset-card metadata; it should not be extended to the code repository, and any asset-specific terms still need review before reuse.
+
+## A split detail to check before reproducing the benchmark
+
+The reviewed code’s ordered-split helper sorts unique sample_id values and assigns the default 60/20/20 partitions. The shape pipeline groups by sensor and label, while the force pipeline groups by sensor. That source inspection confirms how identifiers are partitioned; it does not by itself verify that each identifier maps to a complete physical contact trial.
+
+Because the raw dataset was not downloaded, RoboSkin could not audit that identifier-to-trial mapping against the paper’s stated no-trial-overlap protocol. A reproducer should resolve it before claiming independent confirmation of trial isolation. This is an unverified mapping, not evidence that the published split leaks data.
+
+For a lab selecting data, the next checks are concrete: obtain permitted access, pin the archive and code versions, inspect the sample identifiers, preserve whole interactions across partitions, and report both source and target sensor results. Keep the target-label budget visible when comparing few-shot adaptation with zero-shot transfer.
+
+## What TacVerse can support
+
+TacVerse is useful for testing how tactile appearance, marker patterns, and sensor mechanics affect learned perception. It offers controlled tasks and named transfer protocols that are more informative than a single pooled accuracy. Its results remain author-reported preprint evidence and do not establish cross-sensor closed-loop manipulation success.
+
+For comparisons, use the [benchmark record](/benchmarks#benchmark-tacverse), [tactile foundation model guide](/tactile-foundation-models), and [vision-based tactile sensing survey](/research/vision-based-tactile-intelligence-robotics-survey-2026). For a physical manipulation experiment that compares raw measurements with a learned contact representation, see [TacPrint’s grasping study](/research/tacprint-wearable-tactile-contact-reproduction-2026).
+
+## Sources
+
+- [Wei et al.: TacVerse preprint, June 24, 2026](https://arxiv.org/abs/2606.25877)
+- [TacVerse v1 full text and benchmark tables](https://arxiv.org/html/2606.25877v1)
+- [Official TacVerse project](https://lannwei.github.io/Tactile_Database/)
+- [Official code at the reviewed revision](https://github.com/LannWei/Tactile_Database/tree/abe33c1e896d9529f0798cc75e36a63da9753e79)
+- [Official Hugging Face dataset listing](https://huggingface.co/datasets/Lan-2025/Tactile)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-11',
+    updated: '2026-09-11',
+    readTime: '8 min read',
+    category: 'Tactile datasets',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    sourceTitle: 'TacVerse: A Multi-Sensor Dataset and Benchmark for Cross-Sensor Vision-Based Tactile Perception',
+    sourceUrl: 'https://arxiv.org/abs/2606.25877',
+    citationUrls: [
+      'https://arxiv.org/abs/2606.25877',
+      'https://arxiv.org/html/2606.25877v1',
+      'https://lannwei.github.io/Tactile_Database/',
+      'https://github.com/LannWei/Tactile_Database/tree/abe33c1e896d9529f0798cc75e36a63da9753e79',
+      'https://huggingface.co/datasets/Lan-2025/Tactile',
+    ],
+    technicalFocus: ['cross-sensor tactile transfer', 'tactile datasets', 'vision-based tactile sensing', 'benchmark splits'],
+  },
+  {
     id: 'univtac-platform-encoder-benchmark-2026',
     title: 'UniVTAC separates tactile simulation, representation learning, and policy evaluation',
     seoTitle: 'UniVTAC: Tactile Dataset, Encoder & Benchmark Evidence',
