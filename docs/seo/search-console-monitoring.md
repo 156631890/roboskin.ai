@@ -1,6 +1,6 @@
 # RoboSkin.ai Search Console Monitoring Table
 
-Use this table weekly after the sitemap is submitted. Do not rewrite titles, add pages, or chase keywords until a row has at least one week of Search Console evidence.
+Use this table weekly after the sitemap is submitted. The current decision workflow and September 12 priority queue are in [Search-led content decisions](search-led-content-loop.md); individual baselines and observation windows are in `growth-batches/`. Preserve post-change observation windows, distinguish indexed status from submission receipts, and do not infer a winner from a few clicks. Historical snapshots below retain their original dates.
 
 ## Day 0 baseline - 2026-07-10
 

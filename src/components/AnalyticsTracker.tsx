@@ -64,12 +64,17 @@ export default function AnalyticsTracker() {
       const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
 
       if (url.origin === window.location.origin && url.pathname === '/experiment-results.csv') {
-        track('Evidence CSV Download', { ...properties, batch: evidenceBatch });
+        track('Evidence CSV Download', { ...properties, batch: evidenceBatch, source_batch: properties.batch });
+        return;
+      }
+
+      if (url.origin === window.location.origin && url.pathname === '/benchmarks' && url.hash === '#experiment-evidence') {
+        track('Evidence Module Open', { ...properties, batch: evidenceBatch, source_batch: properties.batch });
         return;
       }
 
       if (url.origin === window.location.origin && /^\/sensors\/[^/]+$/.test(url.pathname)) {
-        track('Sensor Guide Open', { ...properties, batch: evidenceBatch });
+        track('Sensor Guide Open', { ...properties, batch: evidenceBatch, source_batch: properties.batch });
         return;
       }
 

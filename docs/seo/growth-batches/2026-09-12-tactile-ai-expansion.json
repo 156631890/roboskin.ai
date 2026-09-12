@@ -1,0 +1,45 @@
+{
+  "batch": "2026-09-12-tactile-ai-expansion",
+  "changeDate": "2026-09-12",
+  "paths": ["/tactile-ai"],
+  "baseline": {
+    "source": "GSC Web CSV export; sc-domain:roboskin.ai; all countries and devices",
+    "start": "2026-08-13",
+    "end": "2026-09-09",
+    "impressions": 1196,
+    "clicks": 14,
+    "ctrPercent": 1.17,
+    "averagePosition": 7.36,
+    "sourceArchive": ".artifacts/sensor-evidence-2026-09-12/downloads/roboskin.ai-Performance-on-Search-2026-09-12.zip",
+    "summary": ".artifacts/search-led-growth-2026-09-12/gsc-summary.json"
+  },
+  "hypothesis": "A practical first-experiment workflow helps existing tactile AI readers move from a definition into relevant sensor acquisition, data selection and evaluation evidence.",
+  "changes": [
+    "Added a first-experiment section with four starting points and validation steps.",
+    "Added early related-route entries for DIGIT, GelSight Mini, ReSkin and experimental evidence.",
+    "Retained the existing search title, description, H1 and canonical URL.",
+    "Added a distinct route cohort and source_batch on evidence and sensor handoff events.",
+    "Fixed the shared topic article grid minimum width after mobile QA reproduced clipped prose beside wide tables."
+  ],
+  "metrics": {
+    "searchImpressions": null,
+    "searchClicks": null,
+    "sensorGuideHandoffs": null,
+    "evidenceModuleHandoffs": null,
+    "evidenceCsvPrepared": null,
+    "confirmedSubscribers": null,
+    "status": "post-change observation pending"
+  },
+  "attribution": {
+    "cohort": "Referral Landing and Reading Depth use batch 2026-09-12-tactile-ai-expansion on this page.",
+    "handoffs": "Sensor Guide Open and Evidence Module Open preserve from=/tactile-ai and source_batch; their destination batch remains the evidence/sensor cohort.",
+    "boundary": "A handoff does not prove a later export or subscription. No visitor-level conversion attribution is inferred.",
+    "concurrentChange": "Inbound links to the September 12 sensor/evidence cohort are added by this expansion. The shared SeoTopicArticle mobile width fix also applies to other topic pages; their search titles and descriptions remain unchanged in this release."
+  },
+  "observationWindows": [
+    { "label": "first 7 full days", "start": "2026-09-13", "end": "2026-09-19", "status": "planned" },
+    { "label": "first 28 full days", "start": "2026-09-13", "end": "2026-10-10", "status": "planned" }
+  ],
+  "decisionGuide": "../search-led-content-loop.md",
+  "verificationReceipt": ".artifacts/search-led-growth-2026-09-12/release-receipt.json"
+}

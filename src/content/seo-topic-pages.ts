@@ -473,7 +473,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-08-22',
+    updated: '2026-09-12',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -485,6 +485,29 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The phrase is broader than a single tactile sensor. It describes the full stack from contact surface to model, controller, benchmark, and feedback loop.',
     ],
     sections: [
+      {
+        heading: 'Start a tactile AI experiment with a measurable question',
+        body: [
+          'Choose one output before choosing a model: a contact classification, an estimated physical quantity, a predicted tactile observation, or a robot action. Specify how an independent reference or a repeated task will tell you whether that output is useful. A good first experiment can be small, provided its measurement and success criterion are explicit.',
+          'For a hardware experiment, the DIGIT, GelSight Mini, and ReSkin guides document three different acquisition paths. For an experiment with existing data, the tactile dataset directory exposes the sensor, task, access, and split information to check before training. Use the experimental evidence module to see how a result changes meaning when its sample, comparator, or protocol changes.',
+        ],
+        table: {
+          headers: ['Starting point', 'Direct observation', 'First validation task'],
+          rows: [
+            ['DIGIT optical fingertip', 'RGB frames from the documented Python interface.', 'Record the actual stream mode and unloaded gel appearance; validate any inferred depth or force against a separate reference.'],
+            ['GelSight Mini optical sensor', 'Camera images; example software adds 3D reconstruction.', 'Preserve preprocessing, model and scale settings; check reconstruction on reference shapes and recheck after changing the gel.'],
+            ['ReSkin magnetic skin', 'Magnetic channels and temperature readings from the magnetometers.', 'Keep skin placement and unloaded readings with the data; validate the calibration on the contacts and replacement skins you plan to use.'],
+            ['An existing tactile dataset', 'The released observations and annotations, as described by its source.', 'Confirm downloadable files and reuse terms, then define a held-out split whose unit matches the transfer claim.'],
+          ],
+        },
+        bullets: [
+          'Keep raw measurements, calibrated quantities, model predictions, and controller actions distinguishable in the log.',
+          'Record sensor identity, calibration state, timestamps, coordinate frame, robot state, action and task outcome.',
+          'For a transfer claim, hold out the relevant objects, sessions, sensors or embodiments; random neighboring frames may share the same contact event.',
+          'For a tactile-versus-vision comparison, keep the robot, tasks, controller budget and success criterion matched.',
+          'Report the number of independent trials and failures with the metric. Count a subset once, and keep prediction error separate from task success.',
+        ],
+      },
       {
         heading: 'The tactile AI stack',
         body: [
@@ -599,10 +622,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'What is the best first page to read after this?',
         answer:
-          'Read the robot skin overview for the surface layer, then the robot hand tactile sensor and robot skin papers pages for application and research context.',
+          'For hardware acquisition, start with the DIGIT, GelSight Mini or ReSkin sensor guide. For model training, use the tactile dataset directory to check access and splits. For evaluation, inspect the experimental evidence module and its sources before comparing scores.',
       },
     ],
     relatedLinks: [
+      { label: 'DIGIT acquisition guide', href: '/sensors/digit', description: 'Start from documented RGB capture, stream settings and calibration requirements.' },
+      { label: 'GelSight Mini research workflow', href: '/sensors/gelsight-mini', description: 'Separate camera capture, 3D reconstruction and device calibration.' },
+      { label: 'ReSkin magnetic sensing guide', href: '/sensors/reskin', description: 'Inspect magnetic channels, replaceable skin and calibration boundaries.' },
+      { label: 'Experimental evidence and CSV', href: '/benchmarks#experiment-evidence', description: 'Compare reported results with their setup, samples, sources and limitations attached.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The surface layer that collects contact signals.' },
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why contact data matters after vision is occluded.' },
       { label: 'Tactile feedback for Physical AI', href: '/guides/tactile-feedback-for-physical-ai', description: 'How tactile feedback loops support Physical AI systems.' },
@@ -619,6 +646,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
+      { label: 'DIGIT official project and acquisition resources', href: 'https://digit.ml/digit.html' },
+      { label: 'GelSight official robotics examples and reconstruction workflow', href: 'https://github.com/gelsightinc/gsrobotics/tree/321d6a22da64529138ff10237335038fd8c5189f' },
+      { label: 'ReSkin official project and calibration research', href: 'https://reskin.dev/' },
       { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
       { label: 'HT-Bench full-hand tactile representation benchmark', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'TouchWorld predictive and reactive tactile foundation model', href: 'https://arxiv.org/abs/2607.07287' },

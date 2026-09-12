@@ -7,6 +7,7 @@
 - Produce a source-linked research brief for editorial review.
 - Do not auto-publish or deploy a page solely because a term is trending.
 - Promote a finding to the website only when it has a primary source, a distinct search intent, and a clear RoboSkin tactile/contact angle.
+- Apply the user's [search-led content loop](search-led-content-loop.md) before choosing publication work. Prioritize verified updates to topics with useful traffic; diagnose weak stages and preserve active observation windows. Consult the latest batch records rather than treating a historical winner list as permanent.
 
 ## Monitored topic set
 

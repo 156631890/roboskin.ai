@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildExperimentCsv, experimentEvidence } from '../src/lib/experiment-evidence.mjs';
-import { evidenceBatch, growthBatchForPath } from '../src/lib/growth-batches.mjs';
+import { evidenceBatch, growthBatchForPath, tactileAiGrowthBatch } from '../src/lib/growth-batches.mjs';
 
 const parseRecord = (line) => [...line.matchAll(/"((?:[^"]|"")*)"(?:,|$)/g)]
   .map((match) => match[1].replaceAll('""', '"'));
@@ -43,6 +43,7 @@ test('an empty export contains headers only and export text cannot start a sprea
 });
 
 test('batch attribution includes only the released route cohort', () => {
+  assert.equal(growthBatchForPath('/tactile-ai'), tactileAiGrowthBatch);
   for (const path of ['/benchmarks', '/sensors', '/sensors/digit', '/sensors/gelsight-mini', '/sensors/reskin']) {
     assert.equal(growthBatchForPath(path), evidenceBatch);
   }
