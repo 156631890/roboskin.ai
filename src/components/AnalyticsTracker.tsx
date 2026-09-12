@@ -3,6 +3,7 @@
 import { track } from '@vercel/analytics';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { evidenceBatch, growthBatchForPath } from '@/lib/growth-batches.mjs';
 
 const referralSources: Array<[string, string]> = [
   ['google.', 'Google'],
@@ -29,7 +30,7 @@ export default function AnalyticsTracker() {
     const referral = referralSources.find(([domain]) => referrer.includes(domain));
 
     if (referral) {
-      track('Referral Landing', { source: referral[1], path: pathname });
+      track('Referral Landing', { source: referral[1], path: pathname, batch: growthBatchForPath(pathname) });
     }
   }, [pathname]);
 
@@ -44,7 +45,7 @@ export default function AnalyticsTracker() {
       [25, 50, 75].forEach((threshold) => {
         if (depth >= threshold && !seen.has(threshold)) {
           seen.add(threshold);
-          track('Reading Depth', { depth: threshold, path: pathname });
+          track('Reading Depth', { depth: threshold, path: pathname, batch: growthBatchForPath(pathname) });
         }
       });
     }
@@ -60,7 +61,17 @@ export default function AnalyticsTracker() {
 
       const url = new URL(anchor.href, window.location.href);
       const label = cleanLabel(anchor.textContent ?? '');
-      const properties = { from: pathname, target: url.pathname, label };
+      const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
+
+      if (url.origin === window.location.origin && url.pathname === '/experiment-results.csv') {
+        track('Evidence CSV Download', { ...properties, batch: evidenceBatch });
+        return;
+      }
+
+      if (url.origin === window.location.origin && /^\/sensors\/[^/]+$/.test(url.pathname)) {
+        track('Sensor Guide Open', { ...properties, batch: evidenceBatch });
+        return;
+      }
 
       if (url.pathname === '/resources/tactile-dataset-selection-checklist.csv') {
         track('Dataset Checklist Download', properties);

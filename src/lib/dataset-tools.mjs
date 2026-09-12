@@ -8,7 +8,7 @@ export function matchesDatasetQuery(entry, query) {
 }
 
 /** @param {string | number | string[]} value */
-function csvCell(value) {
+export function csvCell(value) {
   let text = Array.isArray(value) ? value.join('; ') : String(value ?? '');
   // Keep source text from being interpreted as a spreadsheet formula.
   if (/^\s*[=+@-]/.test(text)) text = `'${text}`;

@@ -23,6 +23,7 @@ import { researchRobotEntries, robotAiRobotRelations } from '@/lib/research-robo
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
+import { experimentEvidence } from '@/lib/experiment-evidence.mjs';
 import { tactileVlaEvidenceEntries } from '@/lib/tactile-vla-evidence';
 
 const canonicalUrl = (pathname: string) => new URL(pathname, site.url).href;
@@ -317,6 +318,31 @@ export function buildLlmsFullText() {
     appendOptionalLink(lines, 'Project URL', entry.projectUrl);
     appendOptionalLink(lines, 'Code URL', entry.codeUrl);
     lines.push(`- Source reviewed: ${entry.sourceReviewed}`, '');
+  }
+
+  lines.push(
+    '## Reported Experimental Results', '',
+    `Evidence module: ${canonicalUrl('/benchmarks#experiment-evidence')}`,
+    `CSV with sources and limitations: ${canonicalUrl('/experiment-results.csv')}`, '',
+    'These are author-reported results extracted from the cited versions. RoboSkin.ai has not independently reproduced the experiments. Different protocols and test sets do not form a common leaderboard.', '',
+  );
+  for (const entry of experimentEvidence) {
+    lines.push(
+      `### ${entry.study}: ${entry.task} (${entry.id})`, '',
+      `- Record: ${canonicalUrl(`/benchmarks#result-${entry.id}`)}`,
+      `- Version: ${entry.version}`,
+      `- Setup: ${entry.setup}`,
+      `- Metric: ${entry.metric}`,
+      `- Result: ${entry.result}`,
+      `- Comparator: ${entry.comparator}`,
+      `- Sample: ${entry.sample}`,
+      `- Interpretation: ${entry.interpretation}`,
+      `- Limitation: ${entry.limitation}`,
+      `- Artifact access: ${entry.access}`,
+      `- Primary source: ${entry.sourceUrl} (${entry.sourceLocation})`,
+      `- Evidence review: ${canonicalUrl(entry.reviewUrl)}`,
+      `- Source reviewed: ${entry.reviewed}`, '',
+    );
   }
 
   lines.push('## Tactile Sensors', '', `Directory: ${canonicalUrl('/sensors')}`, '');

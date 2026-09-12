@@ -7,13 +7,14 @@ import type { TactileSensorEntry } from '@/lib/tactile-sensors';
 type TactileSensorExplorerProps = {
   entries: TactileSensorEntry[];
   organizationLinks?: Record<string, string>;
+  detailLinks?: Record<string, string>;
 };
 
 function unique(values: string[]) {
   return [...new Set(values)].sort((left, right) => left.localeCompare(right));
 }
 
-export default function TactileSensorExplorer({ entries, organizationLinks = {} }: TactileSensorExplorerProps) {
+export default function TactileSensorExplorer({ entries, organizationLinks = {}, detailLinks = {} }: TactileSensorExplorerProps) {
   const [principle, setPrinciple] = useState('All sensing principles');
   const [signal, setSignal] = useState('All signals');
   const [formFactor, setFormFactor] = useState('All form factors');
@@ -21,6 +22,7 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {} 
   const principles = useMemo(() => unique(entries.map((entry) => entry.principle)), [entries]);
   const signals = useMemo(() => unique(entries.flatMap((entry) => entry.signals)), [entries]);
   const formFactors = useMemo(() => unique(entries.map((entry) => entry.formFactor)), [entries]);
+  const latestReview = entries.reduce((latest, entry) => entry.sourceReviewed > latest ? entry.sourceReviewed : latest, '');
 
   const filteredEntries = entries.filter((entry) =>
     (principle === 'All sensing principles' || entry.principle === principle)
@@ -52,7 +54,7 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {} 
             </p>
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#8e98a8] lg:text-right">
-            Source review: 2026-08-19 / {entries.length} records
+            Latest source review: {latestReview} / {entries.length} records
           </p>
         </div>
 
@@ -91,6 +93,11 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {} 
                 <tr id={`sensor-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[220px] border-b border-white/8 px-4 py-5">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
+                    {detailLinks[entry.id] ? (
+                      <Link href={detailLinks[entry.id]} className="mt-2 block text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">
+                        Read sensor guide
+                      </Link>
+                    ) : null}
                     {organizationLinks[entry.id] ? (
                       <a
                         href={organizationLinks[entry.id]}

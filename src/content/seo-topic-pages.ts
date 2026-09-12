@@ -1,3 +1,5 @@
+import { sensorDetailPages } from '@/content/sensor-detail-pages';
+
 export type SeoTopicPage = {
   path: string;
   title: string;
@@ -39,6 +41,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  ...sensorDetailPages,
   {
     path: '/ai-robotics',
     title: 'AI and Robotics: Models, Learning & Physical Action',
@@ -2586,7 +2589,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Structured benchmark directory',
     intent: 'Research directory for tactile benchmark robotics, tactile sensing benchmarks, robot manipulation evaluation, and visuo-tactile benchmark searches.',
     published: '2026-08-19',
-    updated: '2026-09-11',
+    updated: '2026-09-12',
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2683,7 +2686,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-08-22',
+    updated: '2026-09-12',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',

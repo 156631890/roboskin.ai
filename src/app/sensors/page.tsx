@@ -4,6 +4,7 @@ import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
 import TactileSensorExplorer from '@/components/TactileSensorExplorer';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
+import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { researchManufacturingRelations } from '@/lib/research-entity-relations';
 import { buildTactileSensorsJsonLd } from '@/lib/seo';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
@@ -29,6 +30,7 @@ export default function TactileSensorsPage() {
       `/organizations#organization-${organizationId}`,
     ]),
   );
+  const detailLinks = Object.fromEntries(sensorDetailPages.map((item) => [item.path.split('/').at(-1)!, item.path]));
 
   return (
     <>
@@ -37,6 +39,7 @@ export default function TactileSensorsPage() {
         <TactileSensorExplorer
           entries={tactileSensorEntries}
           organizationLinks={manufacturerOrganizationLinks}
+          detailLinks={detailLinks}
         />
       </SeoTopicArticle>
     </>

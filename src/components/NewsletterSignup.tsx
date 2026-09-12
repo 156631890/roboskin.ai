@@ -2,7 +2,9 @@
 
 import { track } from '@vercel/analytics';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { parseNewsletterEndpoint } from '@/lib/newsletter-config.mjs';
+import { growthBatchForPath, newsletterBatch } from '@/lib/growth-batches.mjs';
 
 type NewsletterConfig = NonNullable<ReturnType<typeof parseNewsletterEndpoint>>;
 
@@ -24,6 +26,7 @@ function NewsletterUnavailable() {
 }
 
 function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
+  const pathname = usePathname();
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState('No subscription is counted on this page alone.');
 
@@ -31,10 +34,13 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
     track('Newsletter Subscribe Attempt', {
       placement: 'footer',
       destination: 'provider',
+      path: pathname,
+      batch: newsletterBatch,
+      source_batch: growthBatchForPath(pathname),
     });
     setSubmitting(true);
     setFeedback(`Opening signup at ${config.providerHost}…`);
-    track('Newsletter Provider Handoff', { placement: 'footer', provider_domain: config.providerHost });
+    track('Newsletter Provider Handoff', { placement: 'footer', provider_domain: config.providerHost, path: pathname, batch: newsletterBatch, source_batch: growthBatchForPath(pathname) });
   }
 
   return (

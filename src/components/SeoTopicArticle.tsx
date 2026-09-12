@@ -12,9 +12,11 @@ type SeoTopicArticleProps = {
   page: SeoTopicPage;
   children?: ReactNode;
   leadContent?: ReactNode;
+  leadHref?: string;
+  leadLabel?: string;
 };
 
-export default function SeoTopicArticle({ page, children, leadContent }: SeoTopicArticleProps) {
+export default function SeoTopicArticle({ page, children, leadContent, leadHref, leadLabel }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
@@ -55,8 +57,8 @@ export default function SeoTopicArticle({ page, children, leadContent }: SeoTopi
                 </p>
               ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link href={leadContent ? '#dataset-explorer' : '#quick-answer'} className="btn-primary w-full sm:w-auto">
-                  {leadContent ? 'Find and compare datasets' : 'Read the short answer'}
+                <Link href={leadHref ?? (leadContent ? '#dataset-explorer' : '#quick-answer')} className="btn-primary w-full sm:w-auto">
+                  {leadLabel ?? (leadContent ? 'Find and compare datasets' : 'Read the short answer')}
                 </Link>
                 <Link href="/research" className="btn-secondary w-full sm:w-auto">
                   Browse research

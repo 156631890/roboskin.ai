@@ -15,6 +15,7 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [RoboSkin.ai research index JSON](https://roboskin.ai/research-index.json): Structured research records for software and answer-engine retrieval.
 - [RoboSkin.ai research index CSV](https://roboskin.ai/research-index.csv): Tabular export of the same structured research index.
 - [RoboSkin.ai research and news RSS](https://roboskin.ai/feed.xml): Latest source-backed research and news updates.
+- [Experimental evidence CSV](https://roboskin.ai/experiment-results.csv): Six author-reported result records with protocols, samples, comparisons, access limits, and primary-source locations. These are extracted evidence records, not independent RoboSkin experiments or underlying research datasets.
 - [RoboSkin Tactile Research Index repository](https://github.com/roboskin-ai/tactile-research-index): Versioned CC BY 4.0 CSV and JSON releases with citation and contribution metadata.
 - [RoboSkin ROS 2 Tactile Starter Kit](https://github.com/roboskin-ai/ros2-tactile-starter-kit): Experimental Apache-2.0 tactile-array message, deterministic synthetic publisher, contract monitor, rosbag2 QoS, and calibration metadata examples; it is not an official ROS standard or sensor benchmark.
 
@@ -51,6 +52,10 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Tactile robotics benchmarks](https://roboskin.ai/benchmarks): Filterable directory of perception, representation, cross-sensor, multimodal, and manipulation evaluation protocols.
 - [TouchWorld real-robot evaluation protocol](https://roboskin.ai/benchmarks#benchmark-touchworld-real-robot): Author-defined six-task, single-platform protocol kept separate from independent or universal benchmark claims.
 - [Tactile sensors for robots](https://roboskin.ai/sensors): Source-reviewed comparison of sensor principles, signals, form factors, integration paths, access, and evidence boundaries.
+- [DIGIT sensor guide](https://roboskin.ai/sensors/digit): Original hardware specifications, documented Python stream defaults, calibration needs, archived repositories, and CC BY-NC reuse terms.
+- [GelSight Mini sensor guide](https://roboskin.ai/sensors/gelsight-mini): Manufacturer specifications, image and reconstruction settings, replaceable gel, software access, and experimental boundaries.
+- [ReSkin sensor guide](https://roboskin.ai/sensors/reskin): Magnetic elastomer, five-magnetometer signal path, sampling, Python collection, and cross-skin calibration evidence.
+- [Experimental evidence module](https://roboskin.ai/benchmarks#experiment-evidence): Filter and export reported results with matched-protocol and sample-boundary guidance.
 - [Tactile manipulation](https://roboskin.ai/tactile-manipulation): Canonical guide to turning contact, pressure, shear, and slip into closed-loop robot actions.
 - [Visuo-tactile robotics](https://roboskin.ai/visuo-tactile): Canonical guide to vision-touch alignment, perception, representation learning, policy use, and manipulation.
 - [Tactile foundation models for robotics](https://roboskin.ai/tactile-foundation-models): Comparison of tactile representations, world models, hierarchical systems, and related learning pipelines.

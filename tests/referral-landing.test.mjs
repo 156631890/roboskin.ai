@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
+import * as growthBatches from '../src/lib/growth-batches.mjs';
 
 const source = readFileSync('src/components/AnalyticsTracker.tsx', 'utf8');
 const compiled = ts.transpileModule(source, {
@@ -24,6 +25,7 @@ function mountTracker(referrer) {
     require(name) {
       if (name === '@vercel/analytics') return { track: (event, properties) => events.push({ event, ...properties }) };
       if (name === 'next/navigation') return { usePathname: () => pathname };
+      if (name === '@/lib/growth-batches.mjs') return growthBatches;
       if (name === 'react') return {
         useRef(value) { return refs[refIndex++] ??= { current: value }; },
         useEffect(effect) { effects.push(effect); },
@@ -52,7 +54,7 @@ test('a search referral is attributed only to the initial document landing', () 
   tracker.render('/datasets');
   tracker.render('/research-index');
   tracker.render('/contact');
-  assert.deepEqual(tracker.events, [{ event: 'Referral Landing', source: 'Google', path: '/datasets' }]);
+  assert.deepEqual(tracker.events, [{ event: 'Referral Landing', source: 'Google', path: '/datasets', batch: 'existing-site' }]);
 });
 
 test('direct visits remain unattributed through internal navigation', () => {
