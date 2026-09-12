@@ -1,0 +1,24 @@
+{
+  "batch": "2026-09-12-newsletter",
+  "preparedAt": "2026-09-12",
+  "releaseStatus": "provider-human-review-required",
+  "releasedAt": null,
+  "provider": "Buttondown",
+  "placement": "site footer",
+  "configurationVariable": "NEXT_PUBLIC_NEWSLETTER_ENDPOINT",
+  "providerEndpointVerified": false,
+  "confirmationEmailVerified": false,
+  "providerConfirmedStateVerified": false,
+  "unsubscribeVerified": false,
+  "metrics": {
+    "signupAttempts": null,
+    "providerHandoffs": null,
+    "pendingSubscribers": null,
+    "confirmedSubscribers": null,
+    "unsubscribed": null,
+    "testSubscribersExcluded": null
+  },
+  "sourceAttribution": "Site events carry path and source_batch; confirmed subscriptions require provider evidence and cannot be inferred from handoffs.",
+  "blockingStep": "Owner must complete the Buttondown account-review form. The provider explicitly requires personally written identity information. Account approval and confirmation/unsubscribe verification remain outstanding.",
+  "checkpointRule": "Create D+7 and D+28 observations relative to the actual newsletter activation date. No activation or future counts are assumed."
+}

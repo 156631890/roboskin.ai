@@ -1,0 +1,162 @@
+{
+  "batch": "2026-09-12-evidence-sensors",
+  "preparedAt": "2026-09-12",
+  "releaseStatus": "published-verified",
+  "releasedAt": "2026-09-12T02:12:28Z",
+  "releaseCommit": "a6b21607ee70885a429dcb4ab596f549e0b89fa3",
+  "newPaths": [
+    "/sensors/digit",
+    "/sensors/gelsight-mini",
+    "/sensors/reskin"
+  ],
+  "updatedPaths": [
+    "/benchmarks",
+    "/sensors"
+  ],
+  "baseline": {
+    "source": "Google Search Console CSV export, sc-domain:roboskin.ai, Web, all countries and devices",
+    "exportedAt": "2026-09-12",
+    "start": "2026-08-13",
+    "end": "2026-09-09",
+    "rawEvidence": ".artifacts/sensor-evidence-2026-09-12/downloads/roboskin.ai-Performance-on-Search-2026-09-12.zip",
+    "wholeSiteContext": {
+      "impressions": 24640,
+      "clicks": 170
+    },
+    "pages": [
+      {
+        "path": "/sensors",
+        "impressions": 869,
+        "clicks": 3,
+        "ctrPercent": 0.35,
+        "averagePosition": 12.08
+      },
+      {
+        "path": "/benchmarks",
+        "impressions": 840,
+        "clicks": 3,
+        "ctrPercent": 0.36,
+        "averagePosition": 6.78
+      },
+      {
+        "path": "/sensors/digit",
+        "impressions": null,
+        "clicks": null,
+        "status": "not-published-at-baseline"
+      },
+      {
+        "path": "/sensors/gelsight-mini",
+        "impressions": null,
+        "clicks": null,
+        "status": "not-published-at-baseline"
+      },
+      {
+        "path": "/sensors/reskin",
+        "impressions": null,
+        "clicks": null,
+        "status": "not-published-at-baseline"
+      }
+    ]
+  },
+  "indexing": {
+    "checkedAt": "2026-09-12",
+    "indexedNewUrls": 0,
+    "googleRequestsAccepted": [
+      "/sensors/digit",
+      "/sensors/gelsight-mini",
+      "/sensors/reskin"
+    ],
+    "indexNowStatus": {
+      "status": 200,
+      "acceptedPaths": [
+        "/sensors/digit",
+        "/sensors/gelsight-mini",
+        "/sensors/reskin",
+        "/benchmarks",
+        "/sensors"
+      ],
+      "date": "2026-09-12"
+    },
+    "note": "Submission acceptance and actual indexing are separate observations. Check each new canonical URL.",
+    "initialUrlInspections": [
+      {
+        "path": "/sensors/digit",
+        "status": "Not indexed: URL unknown to Google",
+        "lastCrawl": null,
+        "selectedCanonical": null
+      },
+      {
+        "path": "/sensors/gelsight-mini",
+        "status": "Not indexed: URL unknown to Google",
+        "lastCrawl": null,
+        "selectedCanonical": null
+      },
+      {
+        "path": "/sensors/reskin",
+        "status": "Not indexed: URL unknown to Google",
+        "lastCrawl": null,
+        "selectedCanonical": null
+      }
+    ],
+    "googleRequestEvidence": {
+      "/sensors/digit": ".artifacts/sensor-evidence-2026-09-12/gsc-digit-status.txt",
+      "/sensors/gelsight-mini": ".artifacts/sensor-evidence-2026-09-12/gsc-gelsight-mini-status.txt",
+      "/sensors/reskin": ".artifacts/sensor-evidence-2026-09-12/gsc-reskin-status.txt"
+    },
+    "sitemap": {
+      "url": "https://roboskin.ai/sitemap.xml",
+      "submittedAt": "2026-09-12",
+      "lastRead": "2026-09-12",
+      "status": "Success",
+      "discoveredPages": 117,
+      "evidence": ".artifacts/sensor-evidence-2026-09-12/gsc-sitemap-status.txt"
+    }
+  },
+  "conversionBaseline": {
+    "evidenceCsvPrepared": null,
+    "staticCsvDownloadIntent": null,
+    "confirmedSubscribers": null,
+    "status": "instrumentation-live; no post-release aggregate collected; newsletter-provider-not-enabled"
+  },
+  "checkpoints": [
+    {
+      "name": "D+7",
+      "dueDate": "2026-09-19",
+      "status": "planned-not-measured"
+    },
+    {
+      "name": "D+28",
+      "dueDate": "2026-10-10",
+      "status": "planned-not-measured"
+    }
+  ],
+  "measurementGuide": "../sensor-evidence-release-2026-09-12.md",
+  "deploymentId": "dpl_3v4aoxvbuaqfq64LgR73UXiNUgF9",
+  "verification": {
+    "testsPassed": 170,
+    "lint": "passed",
+    "build": "passed",
+    "staticExport": "passed",
+    "production": "passed",
+    "productionEvidence": ".artifacts/sensor-evidence-2026-09-12/production-content.json",
+    "liveCsv": {
+      "status": 200,
+      "records": 6,
+      "columns": 17,
+      "matchesLocalBytes": true
+    },
+    "qualityGate": "https://github.com/156631890/roboskin.ai/actions/runs/34666942975",
+    "liveBrowser": "All three guide H1s and evidence filter/export preparation verified. Four controlled production page visits can appear in analytics; custom verification events were intercepted locally."
+  },
+  "analyticsContext": {
+    "source": "Vercel Web Analytics UI",
+    "selection": "Last 7 Days",
+    "chartDates": "Sep 5 through Sep 12, 2026; includes current partial day",
+    "timezone": "not verified",
+    "visitors": 220,
+    "pageViews": 323,
+    "bounceRatePercent": 81,
+    "note": "Whole-site context only. Includes known verification traffic (127.0.0.1 referrer); not an organic or cohort conversion baseline. No new-event aggregate inferred as zero.",
+    "evidence": ".artifacts/sensor-evidence-2026-09-12/vercel-analytics-baseline.txt"
+  }
+}
