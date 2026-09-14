@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { RobotAiModelEntry } from '@/lib/robot-ai-models';
 import type { TactileVlaEvidenceEntry } from '@/lib/tactile-vla-evidence';
+import styles from './VlaModelIndex.module.css';
 
 type VlaModelIndexProps = {
   entries: RobotAiModelEntry[];
@@ -20,7 +21,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
   });
 
   return (
-    <section id="vla-model-index" className="deferred-section pb-14 md:pb-20">
+    <section id="vla-model-index" className="scroll-mt-28 pb-14 md:pb-20">
       <div className="container-shell">
         <div className="grid gap-6 lg:grid-cols-[0.48fr_1fr] lg:items-end">
           <div>
@@ -30,9 +31,9 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-[#c8d1de]">
-            This server-rendered index includes only records whose central model role is VLA. It does not rank unlike systems.
-            Each row preserves the reported input and action interface, real-robot boundary, artifact status, and direct primary
-            sources, while the full canonical entity remains in the Robot AI Model Directory.
+            Compare each model&apos;s inputs, actions, tested robots, code and weight access, and tactile feedback.
+            Results belong to the robots and tasks in each source; they are not a shared benchmark.
+            Follow the source links to check a release or open the full evidence record for more context.
           </p>
         </div>
 
@@ -52,7 +53,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
         </dl>
 
         <div className="mt-6 overflow-x-auto rounded-md border border-white/10 bg-[#020408]" tabIndex={0}>
-          <table className="w-full min-w-[1540px] border-collapse text-left text-sm">
+          <table className={`${styles.comparison} w-full min-w-[1540px] border-collapse text-left text-sm`}>
             <caption className="sr-only">
               Source-reviewed robot vision-language-action models compared by release, interface, embodiment, real-robot evidence,
               training evidence, artifact access, tactile input, and primary sources.
@@ -87,18 +88,18 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                       Full evidence record
                     </Link>
                   </th>
-                  <td className="w-[275px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                  <td data-label="Inputs / action output" className="w-[275px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                     <strong className="text-white">Inputs:</strong> {entry.inputModalities.join('; ')}
                     <br />
                     <strong className="mt-3 inline-block text-white">Output:</strong> {entry.outputType}
                   </td>
-                  <td className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                  <td data-label="Verified embodiments" className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                     <ul className="space-y-2">
                       {entry.embodiments.map((embodiment) => <li key={embodiment}>{embodiment}</li>)}
                     </ul>
                   </td>
-                  <td className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">{entry.realRobotEvaluation}</td>
-                  <td className="w-[250px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                  <td data-label="Real-robot evidence" className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">{entry.realRobotEvaluation}</td>
+                  <td data-label="Training / access / touch" className="w-[250px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                     <strong className="text-white">Training / data:</strong> {entry.trainingDataSummary}
                     <br />
                     <strong className="mt-3 inline-block text-white">Access:</strong> {entry.availability}
@@ -110,7 +111,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                       {sentenceCase(entry.tactileInput)}
                     </span>
                   </td>
-                  <td className="w-[335px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                  <td data-label="Evidence boundary / sources" className="w-[335px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                     {entry.evidenceLimitations}
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                       {entry.primarySources.map((source) => (
@@ -166,7 +167,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
           </div>
 
           <div className="mt-6 overflow-x-auto rounded-md border border-white/10 bg-[#020408]" tabIndex={0}>
-            <table className="w-full min-w-[1600px] border-collapse text-left text-sm">
+            <table className={`${styles.comparison} w-full min-w-[1600px] border-collapse text-left text-sm`}>
               <caption className="sr-only">
                 Source-reviewed tactile VLA mechanisms compared by touch pathway, action pathway, evaluation unit, metric
                 definition, artifact status, and evidence boundary.
@@ -197,18 +198,18 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                         href={`/robot-foundation-models#model-${model.id}`}
                         className="mt-4 block font-semibold text-[#ffd5c5] underline decoration-white/25 underline-offset-4 hover:text-white"
                       >
-                        Canonical model record
+                        Full model evidence
                       </Link>
                     </th>
-                    <td className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.touchPath}</td>
-                    <td className="w-[275px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.actionPath}</td>
-                    <td className="w-[290px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                    <td data-label="Where touch enters" className="w-[260px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.touchPath}</td>
+                    <td data-label="Action and control path" className="w-[275px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.actionPath}</td>
+                    <td data-label="Evaluation / metric unit" className="w-[290px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                       <strong className="text-white">Evaluation unit:</strong> {evidence.evaluationBoundary}
                       <br />
                       <strong className="mt-3 inline-block text-white">Metric:</strong> {evidence.metricDefinition}
                     </td>
-                    <td className="w-[250px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.artifactBoundary}</td>
-                    <td className="w-[305px] px-4 py-5 leading-relaxed text-[#c8d1de]">
+                    <td data-label="Artifact boundary" className="w-[250px] px-4 py-5 leading-relaxed text-[#c8d1de]">{evidence.artifactBoundary}</td>
+                    <td data-label="Evidence boundary / sources" className="w-[305px] px-4 py-5 leading-relaxed text-[#c8d1de]">
                       {evidence.evidenceBoundary}
                       <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                         {evidence.sourceUrls.map((url, index) => (

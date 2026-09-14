@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
 import VlaModelIndex from '@/components/VlaModelIndex';
+import VlaQuickStart from '@/components/VlaQuickStart';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
@@ -22,7 +23,12 @@ export default function RobotVlaModelsPage() {
   return (
     <>
       <JsonLd data={buildVlaModelIndexJsonLd(vlaModelEntries, tactileVlaEvidenceEntries)} />
-      <SeoTopicArticle page={page}>
+      <SeoTopicArticle
+        page={page}
+        leadContent={<VlaQuickStart entries={vlaModelEntries} />}
+        leadHref="#vla-start"
+        leadLabel="Explore VLA models and code"
+      >
         <VlaModelIndex entries={vlaModelEntries} tactileEvidence={tactileVlaEvidenceEntries} />
       </SeoTopicArticle>
     </>
