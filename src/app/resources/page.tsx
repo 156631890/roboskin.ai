@@ -104,6 +104,18 @@ export default function ResourcesPage() {
                 ROS documentation
               </a>
             </div>
+            <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
+              For motor-drive and industrial power electronics component information, see{' '}
+              <a
+                href="https://www.shysemi.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-accent font-semibold hover:text-[#ff9b73]"
+              >
+                SHYSEMI power semiconductors
+              </a>
+              {' '}(IPM, IGBT and SiC).
+            </p>
           </div>
         </div>
       </section>
