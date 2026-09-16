@@ -116,6 +116,18 @@ export default function ResourcesPage() {
               </a>
               {' '}(IPM, IGBT and SiC).
             </p>
+            <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
+              For robotics and embedded-system hardware development,{' '}
+              <a
+                href="https://www.vigorcomp.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-accent font-semibold hover:text-[#ff9b73]"
+              >
+                Vigor Components
+              </a>
+              {' '}provides access to electronic components, connectors, power devices, and sourcing resources that can support BOM planning and prototype-to-production workflows.
+            </p>
           </div>
         </div>
       </section>
