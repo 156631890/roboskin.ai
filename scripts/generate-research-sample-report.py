@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Iterable
 
@@ -43,135 +44,10 @@ SOFT_GRAY = colors.HexColor("#E8E2D6")
 WHITE = colors.white
 
 
-DATASETS = [
-    {
-        "name": "HT-Bench",
-        "year": "2026",
-        "sensor": "Full-hand tactile array",
-        "scale": "10M RGB frames; 7.8M tactile frames; 226 tasks",
-        "access": "Paper verified; no dedicated download verified",
-        "license": "Not stated on reviewed paper page",
-        "source": "https://arxiv.org/abs/2606.19161",
-    },
-    {
-        "name": "RCT: Robotic Contact Tactile",
-        "year": "2026",
-        "sensor": "3 DIGIT sensors",
-        "scale": "29,279 frames; 1,832 sequences; 122 materials",
-        "access": "Public dataset, splits, and evaluation code",
-        "license": "CC BY 4.0 data; Apache-2.0 code",
-        "source": "https://arxiv.org/abs/2606.31694",
-    },
-    {
-        "name": "TactiDex",
-        "year": "2026",
-        "sensor": "Whole-hand tactile glove",
-        "scale": "Scale not stated on reviewed project page",
-        "access": "Project documented; download not verified",
-        "license": "Not stated on reviewed project page",
-        "source": "https://arxiv.org/abs/2607.09190",
-    },
-    {
-        "name": "FreeTacMan",
-        "year": "2025",
-        "sensor": "Modular LED visuo-tactile sensor",
-        "scale": ">3M image pairs; >10K trajectories; 50 tasks",
-        "access": "Public dataset, code, and hardware guide",
-        "license": "MIT",
-        "source": "https://arxiv.org/abs/2506.01941",
-    },
-    {
-        "name": "Humanoid Visual-Tactile-Action",
-        "year": "2025",
-        "sensor": "1,062 tactile sensors per hand",
-        "scale": "101.9K synchronized samples; 4 soft-object tasks",
-        "access": "Paper verified; public download not verified",
-        "license": "Access terms not stated",
-        "source": "https://arxiv.org/abs/2510.25725",
-    },
-    {
-        "name": "Sparsh-X multisensory resource",
-        "year": "2025",
-        "sensor": "Digit 360",
-        "scale": "Approximately 1M unlabeled interactions",
-        "access": "Training resource described; download not verified",
-        "license": "Not stated on reviewed paper page",
-        "source": "https://arxiv.org/abs/2506.14754",
-    },
-]
-
-
-SIGNALS = [
-    {
-        "topic": "Full-hand benchmark scale",
-        "work": "HT-Bench",
-        "evidence": "Preprint",
-        "signal": "Large synchronized RGB and tactile corpus across 226 tasks.",
-        "limit": "Embodiment and transfer claims require independent validation.",
-        "source": "https://arxiv.org/abs/2606.19161",
-    },
-    {
-        "topic": "Action-conditioned touch",
-        "work": "FeelWorld",
-        "evidence": "Preprint",
-        "signal": "Predicts visual futures, contact, tactile latent state, and slip for planning.",
-        "limit": "Evidence is tied to reported tasks, sensors, and planning protocol.",
-        "source": "https://arxiv.org/abs/2607.24267",
-    },
-    {
-        "topic": "Tactile world-action model",
-        "work": "Dream-Tac",
-        "evidence": "Preprint",
-        "signal": "Uses action-conditioned tactile prediction for contact-rich manipulation.",
-        "limit": "Cross-sensor and cross-task transfer remains an evaluation question.",
-        "source": "https://arxiv.org/abs/2606.08737",
-    },
-    {
-        "topic": "Multisensory representation",
-        "work": "Sparsh-X",
-        "evidence": "Preprint",
-        "signal": "Combines tactile image, audio, motion, and pressure from Digit 360.",
-        "limit": "Downstream results depend on sensor coverage and task protocol.",
-        "source": "https://arxiv.org/abs/2506.14754",
-    },
-    {
-        "topic": "Cross-sensor force",
-        "work": "GenForce",
-        "evidence": "Peer-reviewed",
-        "signal": "Maps shared marker representations across GelSight, TacTip, and uSkin.",
-        "limit": "Equivalent performance is not established for every geometry or environment.",
-        "source": "https://www.nature.com/articles/s41467-026-68753-1",
-    },
-    {
-        "topic": "Full-hand tactile coverage",
-        "work": "Nature Machine Intelligence study",
-        "evidence": "Peer-reviewed",
-        "signal": "Uses 17 vision-based tactile sensors across 70% of a custom hand's palmar surface.",
-        "limit": "Results come from one hand and one task family; coverage is not whole-body.",
-        "source": "https://www.nature.com/articles/s42256-025-01053-3",
-    },
-]
-
-
-REFERENCES = [
-    ("HT-Bench paper", "https://arxiv.org/abs/2606.19161"),
-    ("RCT paper", "https://arxiv.org/abs/2606.31694"),
-    ("RCT project", "https://faerber-lab.github.io/RCT/"),
-    ("RCT code", "https://github.com/faerber-lab/RCT"),
-    ("RCT dataset", "https://figshare.com/s/a5ed417ba6602ccad0f6"),
-    ("TactiDex paper", "https://arxiv.org/abs/2607.09190"),
-    ("TactiDex project", "https://tactidex.github.io/"),
-    ("FreeTacMan paper", "https://arxiv.org/abs/2506.01941"),
-    ("FreeTacMan project", "https://opendrivelab.com/FreeTacMan"),
-    ("FreeTacMan code", "https://github.com/OpenDriveLab/FreeTacMan"),
-    ("FreeTacMan dataset", "https://huggingface.co/datasets/OpenDriveLab/FreeTacMan"),
-    ("Humanoid Visual-Tactile-Action paper", "https://arxiv.org/abs/2510.25725"),
-    ("Sparsh-X paper", "https://arxiv.org/abs/2506.14754"),
-    ("FeelWorld paper", "https://arxiv.org/abs/2607.24267"),
-    ("Dream-Tac paper", "https://arxiv.org/abs/2606.08737"),
-    ("GenForce paper", "https://www.nature.com/articles/s41467-026-68753-1"),
-    ("Full-hand tactile sensing paper", "https://www.nature.com/articles/s42256-025-01053-3"),
-]
+SAMPLE = json.loads((ROOT / "src" / "content" / "sample-report-2026.json").read_text(encoding="utf-8"))
+DATASETS = SAMPLE["datasets"]
+SIGNALS = SAMPLE["signals"]
+REFERENCES = SAMPLE["references"]
 
 
 def make_styles():
@@ -728,7 +604,8 @@ def main():
     PUBLIC_COPY.parent.mkdir(parents=True, exist_ok=True)
     doc = ReportDocTemplate(str(OUTPUT))
     doc.build(build_story())
-    PUBLIC_COPY.write_bytes(OUTPUT.read_bytes())
+    if not PUBLIC_COPY.exists():
+        PUBLIC_COPY.write_bytes(OUTPUT.read_bytes())
     print(OUTPUT)
     print(PUBLIC_COPY)
 

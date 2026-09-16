@@ -1239,10 +1239,10 @@ export const contactPaths: ContactPath[] = [
     ctaLabel: 'Discuss collaboration',
   },
   {
-    title: 'Research or information request',
-    summary: 'Use this path if you found the site through research and want to suggest sources, corrections, or useful additions.',
-    href: '/contact?requestType=research',
-    ctaLabel: 'Send a research note',
+    title: 'Paid research inquiry',
+    summary: 'Request public-source analysis for one decision. Review the Research Sprint scope, fees and evidence boundaries before sending project details.',
+    href: '/research-services#inquiry',
+    ctaLabel: 'Discuss a Research Sprint',
   },
 ];
 
@@ -1316,7 +1316,7 @@ export const aboutSections: AboutSection[] = [
     bullets: [
       'Start with applications, research, and glossary routes',
       'Check whether a claim is supported by public source context',
-      'Use contact paths only for corrections, collaboration, or research-note inquiries',
+      'Use Contact for corrections and sources, or Research Services for a paid evidence review',
     ],
   },
   {

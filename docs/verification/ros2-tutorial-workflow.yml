@@ -1,0 +1,54 @@
+name: ROS 2 tutorial runtime
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-ros2-tutorial.yml'
+      - 'scripts/verify-ros2-runtime.py'
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-record-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: osrf/ros:lyrical-desktop
+    env:
+      ROS_DOMAIN_ID: '87'
+      ROS_AUTOMATIC_DISCOVERY_RANGE: LOCALHOST
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Build the pinned starter kit
+        shell: bash
+        run: |
+          set -eo pipefail
+          mkdir -p .artifacts/ros2-runtime /tmp/roboskin_ws/src
+          cat /etc/os-release | tee .artifacts/ros2-runtime/os-release.txt
+          apt-get update
+          apt-get install -y git
+          git clone https://github.com/roboskin-ai/ros2-tactile-starter-kit.git /tmp/roboskin_ws/src/ros2-tactile-starter-kit
+          git -C /tmp/roboskin_ws/src/ros2-tactile-starter-kit checkout 7bf81d2575e3ef4b62034f4771daf948033b4d76
+          source /opt/ros/lyrical/setup.bash
+          rosdep update
+          rosdep install --from-paths /tmp/roboskin_ws/src --ignore-src -r -y
+          cd /tmp/roboskin_ws
+          colcon build --symlink-install --event-handlers console_direct+
+      - name: Verify synthetic messages, recording and isolated replay
+        shell: bash
+        run: |
+          set -eo pipefail
+          source /opt/ros/lyrical/setup.bash
+          source /tmp/roboskin_ws/install/setup.bash
+          ros2 interface show roboskin_tactile_msgs/msg/TactileArray > .artifacts/ros2-runtime/interface.txt
+          python scripts/verify-ros2-runtime.py --workspace /tmp/roboskin_ws --output .artifacts/ros2-runtime
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ros2-synthetic-runtime
+          path: .artifacts/ros2-runtime
+          retention-days: 30

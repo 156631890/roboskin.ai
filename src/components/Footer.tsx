@@ -50,7 +50,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <NewsletterSignup />
+        <div id="newsletter" className="scroll-mt-24"><NewsletterSignup /></div>
 
         <div className="site-footer-base">
           <p>© {new Date().getFullYear()} {site.name}</p>

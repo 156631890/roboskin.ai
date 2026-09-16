@@ -15,7 +15,7 @@
 .tutorial-verification { background: rgba(255,255,255,.025); border: 1px solid var(--panel-border); padding: 1.25rem; font-size: .9rem; line-height: 1.75; }
 .tutorial-verification strong { color: var(--secondary); }
 .tutorial-verification p { margin-top: .6rem; color: var(--text-soft); }
-.tutorial-section { min-width: 0; padding-top: 3rem; margin-top: 1rem; border-top: 1px solid var(--panel-border); scroll-margin-top: 1rem; }
+.tutorial-section { min-width: 0; padding-top: 3rem; margin-top: 1rem; border-top: 1px solid var(--panel-border); scroll-margin-top: 6rem; }
 .tutorial-section h2 { font-size: clamp(1.6rem, 2.7vw, 2.1rem); line-height: 1.25; margin-bottom: 1.3rem; }
 .tutorial-section h3 { font-size: 1.1rem; line-height: 1.5; font-weight: 650; }
 .tutorial-section p, .tutorial-section li { font-size: 1rem; line-height: 1.85; color: var(--text-soft); overflow-wrap: anywhere; }

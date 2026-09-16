@@ -2,8 +2,10 @@
 
 import { track } from '@vercel/analytics';
 import type { FormEvent } from 'react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { site } from '@/content/site';
+import AntiSpamChallenge from '@/components/AntiSpamChallenge';
+import { parseContactEndpoint, submitInquiry } from '@/lib/form-delivery.mjs';
 
 type InquiryState = {
   fullName: string;
@@ -36,6 +38,7 @@ const emptyInquiry: InquiryState = {
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+const onlineDeliveryAvailable = Boolean(parseContactEndpoint(contactFormEndpoint));
 
 function buildMailtoHref(form: InquiryState) {
   const body = [
@@ -60,79 +63,38 @@ export default function CommercialInquiryForm() {
   const [form, setForm] = useState<InquiryState>(emptyInquiry);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
+  const inFlight = useRef(false);
+  const [challengeToken, setChallengeToken] = useState('');
+  const [challengeKey, setChallengeKey] = useState(0);
 
   function updateField<K extends keyof InquiryState>(field: K, value: InquiryState[K]) {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function openEmailFallback() {
-    window.location.href = buildMailtoHref(form);
-    setStatus('success');
-    setFeedback('Your email app should open with the inquiry prepared. Review it there before sending.');
-    track('Research Services Email Fallback', { project_type: form.projectType });
-  }
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (form.website) {
-      setStatus('success');
-      setFeedback('Thanks. We received your inquiry and will reply within 2 business days.');
-      return;
-    }
-
-    if (!form.consent) {
-      setStatus('error');
-      setFeedback('Please confirm that RoboSkin.ai may contact you about this inquiry.');
-      return;
-    }
-
+    if (inFlight.current) return;
+    inFlight.current = true;
     setStatus('submitting');
     setFeedback('');
-    track('Research Services Form Submit', {
-      project_type: form.projectType,
-      timeline: form.timeline,
-      budget: form.budget,
-    });
-
-    if (!contactFormEndpoint) {
-      openEmailFallback();
-      return;
-    }
-
+    track('Research Services Form Submit', { project_type: form.projectType });
     try {
-      const response = await fetch(contactFormEndpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...form,
-          requestType: 'commercial-research',
-          formName: 'RoboSkin Research Services',
-          _subject: 'New RoboSkin Research Sprint inquiry',
-        }),
-      });
-
-      if (!response.ok) {
-        openEmailFallback();
+      const result = await submitInquiry(contactFormEndpoint, { ...form, challengeToken, requestType: 'commercial-research', formName: 'RoboSkin Research Services', _subject: 'New RoboSkin Research Sprint inquiry' });
+      if (!result.ok) {
+        setStatus('error');
+        setFeedback(result.error ?? 'Delivery could not be confirmed. Please use a direct contact link.');
         return;
       }
-    } catch (error) {
-      void error;
-      openEmailFallback();
-      return;
-    }
-
-    setStatus('success');
-    setFeedback('Thanks. We received your inquiry and will reply within 2 business days with fit and scope.');
-    track('Research Services Form Success', { project_type: form.projectType });
-    setForm(emptyInquiry);
+      setStatus('success');
+      setFeedback('The delivery service accepted your inquiry. We aim to reply within two business days; this acknowledgement does not confirm inbox delivery.');
+      track('Research Services Form Success', { project_type: form.projectType });
+      setForm(emptyInquiry);
+    } finally { inFlight.current = false; setChallengeToken(''); setChallengeKey(key => key + 1); }
   }
 
   return (
     <form className="commercial-inquiry-form" onSubmit={handleSubmit}>
+      {!onlineDeliveryAvailable && <p className="text-sm text-soft" role="note">Online sending is unavailable. Prepare your inquiry below, then use the email link to review and send it yourself. Filling in this form does not send a message.</p>}
       <input
         className="hidden"
         tabIndex={-1}
@@ -154,7 +116,7 @@ export default function CommercialInquiryForm() {
         </label>
         <label>
           Work email
-          <input required type="email" autoComplete="email" value={form.email} onChange={(event) => updateField('email', event.target.value)} />
+          <input maxLength={254} required type="email" autoComplete="email" value={form.email} onChange={(event) => updateField('email', event.target.value)} />
         </label>
         <label>
           Role
@@ -214,13 +176,15 @@ export default function CommercialInquiryForm() {
         <span>RoboSkin.ai may use these details to assess fit, prepare scope, and contact me about this inquiry.</span>
       </label>
 
-      <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
+      {contactFormEndpoint === '/api/contact' ? <AntiSpamChallenge key={challengeKey} action="contact" onToken={setChallengeToken} /> : null}
+      <button type="submit" className="btn-primary" disabled={!onlineDeliveryAvailable || status === 'submitting'}>
         {status === 'submitting' ? 'Sending...' : 'Request scope and availability'}
       </button>
 
       <div className="commercial-form-feedback" role={status === 'error' ? 'alert' : 'status'} aria-live="polite">
         {feedback ? <p data-error={status === 'error' ? 'true' : undefined}>{feedback}</p> : null}
       </div>
+      <p className="text-sm text-soft"><a className="underline" href={buildMailtoHref(form)}>Prepare this inquiry in your email app</a>. Review and send it there; opening the app does not send it.</p>
     </form>
   );
 }

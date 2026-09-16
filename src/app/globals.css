@@ -217,6 +217,12 @@ select:focus-visible {
   contain-intrinsic-size: auto 760px;
 }
 
+/* Citable directory anchors need the actual height of preceding sections. */
+.citation-directory .deferred-section {
+  content-visibility: visible;
+  contain-intrinsic-size: none;
+}
+
 /* Navigation */
 .site-nav {
   position: sticky;
@@ -2913,3 +2919,15 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Open resource conversion: compact, readable, no content gate. */
+.research-resource-actions { display:grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap:2rem; border:1px solid var(--panel-border); border-left:3px solid var(--primary); background:var(--bg-soft); padding:clamp(1.25rem,3vw,2rem); margin:2rem 0; }
+.research-resource-actions h2 { font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.25; margin:.7rem 0; color:var(--text); }
+.research-resource-actions p { color:var(--text-soft,#aeb8c7); font-size:.9rem; line-height:1.7; }
+.research-resource-links { display:grid; align-content:center; gap:.6rem; }
+.research-resource-links a { padding:.65rem 0; color:#ffd5c5; text-decoration:underline; text-underline-offset:4px; font-size:.9rem; }
+.form-availability { padding:1rem; border:1px solid var(--panel-border); color:var(--text); line-height:1.6; }
+.newsletter-form .newsletter-consent { display:flex; align-items:center; flex-wrap:wrap; gap:.5rem; font-size:.8rem; }
+.newsletter-form .newsletter-consent input { width:1rem; min-height:1rem; flex:0 0 1rem; }
+.services-hero-copy .services-positioning { font-size:.88rem; line-height:1.65; }
+@media (max-width:700px) { .research-resource-actions { grid-template-columns:1fr; gap:1rem; } }

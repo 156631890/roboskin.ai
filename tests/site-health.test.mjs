@@ -28,11 +28,13 @@ test('site authority health checks pass', async () => {
   assert.match(seo, /'\/glossary'/);
   assert.match(seo, /'\/case-studies'/);
   assert.match(contactForm, /NEXT_PUBLIC_CONTACT_FORM_ENDPOINT/);
-  assert.match(contactForm, /Accept: 'application\/json'/);
+  const delivery = await read('src/lib/form-delivery.mjs');
+  assert.match(delivery, /Accept: 'application\/json'/);
   assert.match(contactForm, /buildWhatsAppHref/);
   assert.match(contactForm, /try\s*\{/);
-  assert.match(contactForm, /catch\s*\(/);
-  assert.match(contactForm, /window\.location\.href\s*=\s*buildWhatsAppHref\(form\)/);
+  assert.match(contactForm, /submitInquiry/);
+  assert.match(contactForm, /href=\{buildWhatsAppHref\(form\)\}/);
+  assert.doesNotMatch(contactForm, /window\.location\.href/);
   assert.match(contactForm, /site\.contact\.whatsappDial/);
   assert.doesNotMatch(contactForm, /fetch\('\/api\/contact'/);
   assert.doesNotMatch(nextConfig, /ignoreBuildErrors:\s*true/);

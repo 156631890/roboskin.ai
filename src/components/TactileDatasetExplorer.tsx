@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
-import { buildDatasetCitation, buildDatasetCsv, matchesDatasetQuery } from '@/lib/dataset-tools.mjs';
+import { buildDatasetCitation, buildDatasetCsv, buildOriginalDatasetReference, matchesDatasetQuery } from '@/lib/dataset-tools.mjs';
+import { accessLabels, getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 
 type TactileDatasetExplorerProps = {
@@ -91,13 +92,13 @@ export default function TactileDatasetExplorer({
     track('Dataset CSV Requested', { path: pathname, scope, record_count: rows.length });
   }
 
-  async function copyCitation(entry: RoboticsDatasetEntry) {
-    const text = buildDatasetCitation(entry, pathname);
+  async function copyCitation(entry: RoboticsDatasetEntry, original = false) {
+    const text = original ? buildOriginalDatasetReference(entry) : buildDatasetCitation(entry, pathname);
     try {
       await navigator.clipboard.writeText(text);
       setCopyFallback('');
-      setFeedback(`Directory citation copied for ${entry.name}.`);
-      track('Dataset Citation Copy', { path: pathname, dataset: entry.id });
+      setFeedback(`${original ? 'Original-source reference' : 'Directory citation'} copied for ${entry.name}.`);
+      track('Dataset Citation Copy', { path: pathname, dataset: entry.id, citation_type: original ? 'original-source' : 'directory' });
     } catch {
       setCopyFallback(text);
       setFeedback('Clipboard access is unavailable. Select and copy the citation below.');
@@ -128,6 +129,8 @@ export default function TactileDatasetExplorer({
           </p>
         </div>
 
+        {pathname === '/datasets' ? <div className="mt-5 flex flex-wrap gap-5 text-sm underline"><a href="#availability-analysis">Read the availability analysis</a><a href="#dataset-changelog">What changed in this directory</a><a href="/datasets.json">Open full audit JSON</a></div> : null}
+        {pathname === '/datasets' ? <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c8d1de]" aria-label="Follow or discuss dataset research"><a className="underline" href="#newsletter">Weekly brief / signup status</a><a className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Free sample report</a><a className="underline" href="/research-services?source=datasets#inquiry">Discuss a dataset research question</a></p> : null}
         <div className="signal-panel mt-7 grid gap-5 p-5 md:grid-cols-[1fr_auto] md:items-end">
           <label className="grid gap-2 text-sm font-semibold text-white">
             Search datasets
@@ -203,7 +206,8 @@ export default function TactileDatasetExplorer({
                     <div><dt className="font-semibold text-white">Collection setup</dt><dd>{entry.robot.join('; ')} / {entry.sensor.join('; ')}</dd></div>
                     <div><dt className="font-semibold text-white">Signals and tasks</dt><dd>{entry.modalities.join('; ')}. {entry.tasks.join('; ')}</dd></div>
                     <div><dt className="font-semibold text-white">Access</dt><dd>{entry.availability}</dd></div>
-                    <div><dt className="font-semibold text-white">License</dt><dd>{entry.license}</dd></div>
+                    <div><dt className="font-semibold text-white">Dataset-file license</dt><dd>{getDatasetEvidence(entry).dataLicense}</dd></div>
+                    <div><dt className="font-semibold text-white">Train / test split</dt><dd>{getDatasetEvidence(entry).splitDetails}</dd></div>
                   </dl>
                   <p className="mt-4 text-xs text-[#8e98a8]">Source reviewed {entry.sourceReviewed}</p>
                   <div className="mt-4 flex flex-wrap gap-4">
@@ -227,7 +231,7 @@ export default function TactileDatasetExplorer({
               </tr>
             </thead>
             <tbody>
-              {filteredEntries.map((entry) => (
+              {filteredEntries.map((entry) => { const evidence = getDatasetEvidence(entry); return (
                 <tr id={`dataset-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[240px] border-b border-white/8 px-4 py-5">
                     <a href={`${pathname}#dataset-${entry.id}`} className="block text-base font-semibold text-white hover:text-[#ffd5c5]">{entry.name}</a>
@@ -238,16 +242,25 @@ export default function TactileDatasetExplorer({
                         className="h-4 w-4 accent-[#ff6b3d]" /> Compare
                     </label>
                     <button type="button" onClick={() => copyCitation(entry)} className="mt-3 text-xs font-normal text-[#ffd5c5] underline" aria-label={`Copy citation for ${entry.name}`}>Copy directory citation</button>
+                    <button type="button" onClick={() => copyCitation(entry, true)} className="mt-3 block text-xs font-normal text-[#ffd5c5] underline" aria-label={`Copy original source for ${entry.name}`}>Copy original-source reference</button>
+                    <span className="mt-3 block text-xs font-normal">Use the authors’ citation instructions on the primary paper or project page.</span>
+                    <span className="mt-3 block text-xs font-semibold">{accessLabels[evidence.access]}</span>
+                    <span className="mt-2 block text-xs font-normal">Access checked {evidence.accessCheckedAt}</span>
                     <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.availability}</span>
                     <span className="mt-2 block font-mono text-[11px] uppercase text-[#8e98a8]">Reviewed {entry.sourceReviewed}</span>
                   </th>
                   <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.institution.join('; ')}<br /><span className="mt-2 block font-mono text-xs text-white">{entry.year}</span></td>
                   <td className="w-[230px] border-b border-white/8 px-4 py-5"><strong className="text-white">Robot:</strong> {entry.robot.join('; ')}<br /><strong className="mt-3 inline-block text-white">Sensor:</strong> {entry.sensor.join('; ')}</td>
-                  <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.modalities.join('; ')}<br /><strong className="mt-3 inline-block text-white">Scale:</strong> {entry.sampleCount}</td>
+                  <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.modalities.join('; ')}<br /><strong className="mt-3 inline-block text-white">Reported / previously documented scale:</strong> {entry.sampleCount}
+                    <p className="mt-3"><strong className="text-white">Public-file audit:</strong> {evidence.publicFileScale}</p>
+                    <p className="mt-3"><strong className="text-white">Independent check:</strong> {evidence.verificationScope}</p></td>
                   <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.tasks.join('; ')}<br /><strong className="mt-3 inline-block text-white">Objects:</strong> {entry.objectCategories}</td>
-                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.dataFormat}<br /><strong className="mt-3 inline-block text-white">License:</strong> {entry.license}</td>
+                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.dataFormat}<br /><strong className="mt-3 inline-block text-white">Dataset-file license:</strong> {evidence.dataLicense}
+                    <p className="mt-3"><strong className="text-white">Code / source terms:</strong> {entry.license}</p>
+                    <p className="mt-3"><strong className="text-white">Train / test split:</strong> {evidence.splitDetails}</p></td>
                   <td className="w-[180px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">
+                      {evidence.sources.map((url: string) => <a key={url} href={url} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Access evidence ↗</a>)}
                       {entry.researchUrl ? <Link href={entry.researchUrl} className="font-semibold text-white hover:text-[#ffd5c5]">RoboSkin evidence review</Link> : null}
                       <a href={entry.paperUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Paper ↗</a>
                       {entry.projectUrl ? <a href={entry.projectUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#ffd5c5] hover:text-white">Project ↗</a> : null}
@@ -256,7 +269,7 @@ export default function TactileDatasetExplorer({
                     </div>
                   </td>
                 </tr>
-              ))}
+              ); })}
               {filteredEntries.length === 0 ? (
                 <tr><td colSpan={7} className="px-4 py-8 text-center text-sm text-[#8e98a8]">No datasets match these filters. <button type="button" onClick={resetFilters} className="ml-2 text-white underline">Clear filters and search again</button></td></tr>
               ) : null}

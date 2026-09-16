@@ -1,6 +1,6 @@
 import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { parseNewsletterEndpoint } from '../src/lib/newsletter-config.mjs';
+import { getNewsletterConfig } from '../src/lib/newsletter-config.mjs';
 
 const canonicalOrigin = 'https://roboskin.ai';
 const root = process.cwd();
@@ -170,7 +170,7 @@ if (failures.length === 0) {
     failures.push('/crawler-robots.txt: invalid crawler policy');
   }
 
-  const newsletterEndpoint = parseNewsletterEndpoint(process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT)?.endpoint ?? null;
+  const newsletterEndpoint = getNewsletterConfig(process.env.NEXT_PUBLIC_NEWSLETTER_ENDPOINT, process.env.NEXT_PUBLIC_NEWSLETTER_VERIFIED_ON, process.env.NEXT_PUBLIC_NEWSLETTER_UNSUBSCRIBE_URL)?.endpoint ?? null;
   const htmlFiles = await listHtmlFiles(out);
   for (const file of htmlFiles) {
     const html = await readFile(file, 'utf8');

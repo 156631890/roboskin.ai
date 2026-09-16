@@ -1,10 +1,12 @@
 'use client';
 
 import type { FormEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { track } from '@vercel/analytics';
 import { site } from '@/content/site';
+import AntiSpamChallenge from '@/components/AntiSpamChallenge';
+import { parseContactEndpoint, submitInquiry } from '@/lib/form-delivery.mjs';
 
 type RequestType = 'partnership' | 'research' | 'correction' | 'other';
 
@@ -42,6 +44,7 @@ type ContactFormProps = {
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+const onlineDeliveryAvailable = Boolean(parseContactEndpoint(contactFormEndpoint));
 
 function normalizeRequestType(value: string | null | undefined, fallback: RequestType = 'research'): RequestType {
   if (!value) {
@@ -70,8 +73,8 @@ function displayValue(value: string) {
   return value.trim() || 'Not provided';
 }
 
-function buildWhatsAppHref(form: ContactFormState) {
-  const message = [
+function buildMessage(form: ContactFormState) {
+  return [
     `RoboSkin.ai ${form.requestType} note`,
     '',
     `Full name: ${form.fullName}`,
@@ -87,7 +90,10 @@ function buildWhatsAppHref(form: ContactFormState) {
     form.message,
   ].join('\n');
 
-  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(message)}`;
+}
+
+function buildWhatsAppHref(form: ContactFormState) {
+  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(buildMessage(form))}`;
 }
 
 export default function ContactForm({ requestType, requestedAsset }: ContactFormProps) {
@@ -98,16 +104,12 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
   const [form, setForm] = useState<ContactFormState>(initialState(effectiveRequestType, effectiveRequestedAsset));
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
+  const inFlight = useRef(false);
+  const [challengeToken, setChallengeToken] = useState('');
+  const [challengeKey, setChallengeKey] = useState(0);
 
   function updateField<K extends keyof ContactFormState>(field: K, value: ContactFormState[K]) {
     setForm((current) => ({ ...current, [field]: value }));
-  }
-
-  function openWhatsAppFallback() {
-    window.location.href = buildWhatsAppHref(form);
-    setStatus('success');
-    setFeedback('WhatsApp should open a prepared research note. Review it there before sending.');
-    track('Contact WhatsApp Open', { request_type: form.requestType });
   }
 
   useEffect(() => {
@@ -116,58 +118,28 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (form.website) {
-      setStatus('success');
-      setFeedback('Thanks. We received your request and will reply within 2 business days.');
-      return;
-    }
-
-    if (!form.consent) {
-      setStatus('error');
-      setFeedback('Please confirm that RoboSkin may contact you about this request.');
-      return;
-    }
-
+    if (inFlight.current) return;
+    inFlight.current = true;
     setStatus('submitting');
     setFeedback('');
     track('Contact Form Submit', { request_type: form.requestType });
-
-    if (!contactFormEndpoint) {
-      openWhatsAppFallback();
-      return;
-    }
-
-    let response: Response;
-
     try {
-      response = await fetch(contactFormEndpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
-    } catch (error) {
-      void error;
-      openWhatsAppFallback();
-      return;
-    }
-
-    if (!response.ok) {
-      openWhatsAppFallback();
-      return;
-    }
-
-    setStatus('success');
-    setFeedback('Thanks. We received your request and will reply within 2 business days.');
-    track('Contact Form Success', { request_type: form.requestType });
-    setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
+      const result = await submitInquiry(contactFormEndpoint, { ...form, challengeToken });
+      if (!result.ok) {
+        setStatus('error');
+        setFeedback(result.error ?? 'Delivery could not be confirmed. Please use a direct contact link.');
+        return;
+      }
+      setStatus('success');
+      setFeedback('The delivery service accepted your inquiry. We aim to reply within two business days; this acknowledgement does not confirm inbox delivery.');
+      track('Contact Form Success', { request_type: form.requestType });
+      setForm(initialState(effectiveRequestType, effectiveRequestedAsset));
+    } finally { inFlight.current = false; setChallengeToken(''); setChallengeKey(key => key + 1); }
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      {!onlineDeliveryAvailable && <p className="text-sm text-soft" role="note">Online sending is unavailable. You can prepare your note below, then review and send it using the email or WhatsApp link. Filling in this form does not send a message.</p>}
       <input
         className="hidden"
         tabIndex={-1}
@@ -201,6 +173,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
           Work email
           <input
             required
+            maxLength={254}
             type="email"
             value={form.email}
             onChange={(event) => updateField('email', event.target.value)}
@@ -290,9 +263,10 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
         </span>
       </label>
 
+      {contactFormEndpoint === '/api/contact' ? <AntiSpamChallenge key={challengeKey} action="contact" onToken={setChallengeToken} /> : null}
       <button
         type="submit"
-        disabled={status === 'submitting'}
+        disabled={!onlineDeliveryAvailable || status === 'submitting'}
         className="btn-primary"
       >
         {status === 'submitting' ? 'Sending...' : 'Send request'}
@@ -307,7 +281,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       </div>
 
       <p className="text-sm text-soft">
-        Direct route: <a className="text-accent hover:text-[#ff9b73]" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">WhatsApp {site.contact.whatsapp}</a>
+        Review your prepared note in <a className="text-accent hover:text-[#ff9b73]" href={`mailto:${site.contact.inquiryEmail}?subject=${encodeURIComponent('RoboSkin research inquiry')}&body=${encodeURIComponent(buildMessage(form))}`}>your email app</a> or <a className="text-accent hover:text-[#ff9b73]" href={buildWhatsAppHref(form)} target="_blank" rel="noreferrer">WhatsApp {site.contact.whatsapp}</a>. You choose when to send it there.
       </p>
     </form>
   );

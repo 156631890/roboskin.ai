@@ -6,6 +6,8 @@ export const dynamic = 'force-static';
 export function GET() {
   return new Response(JSON.stringify({
     name: 'RoboSkin Tactile Research Index',
+    scope: 'Current directory; use the preserved release files for a fixed citation.',
+    snapshot: researchIndexRelease.jsonPath,
     updated: researchIndexUpdatedAt,
     version: researchIndexRelease.version,
     license: researchIndexRelease.licenseUrl,

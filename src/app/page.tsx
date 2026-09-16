@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import ResearchResourceActions from '@/components/ResearchResourceActions';
 import AiRobotClosedLoop from '@/components/AiRobotClosedLoop';
 import {
   AuthorityIndex,
@@ -121,6 +122,7 @@ export default function Home() {
               <div className="hero-stage-actions">
                 <Link href="/research-index#research-explorer" className="btn-primary">Compare research evidence <span aria-hidden="true">↗</span></Link>
                 <Link href="/research" className="hero-text-link">Browse research briefs</Link>
+                <Link href="/research-services" className="hero-text-link">Paid research services</Link>
               </div>
             </div>
             <p className="hero-stage-caption">
@@ -483,6 +485,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div className="container-shell pb-14"><ResearchResourceActions context="home" /></div>
     </>
   );
 }

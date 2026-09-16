@@ -18,7 +18,7 @@ export const lerobotTutorial: ProgrammingPage = {
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
   published: checked, updated: checked, priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['lerobot dataset format', 'lerobot dataset v3', 'robot dataset validation'],
-  verification: 'Sources checked on September 16, 2026. The downloadable numeric checker was run with CPython 3.13.3 and PyArrow 23.0.1 on Windows x64, including valid and broken fixtures and 16 behavior tests. No robot, video decoding, LeRobot loader, policy training or complete official compatibility test was run.',
+  verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility.',
   quickAnswer: ['LeRobot dataset v3.0 separates storage files from episodes: multiple episodes can share Parquet and MP4 shards, while metadata identifies each episode and its offsets. A filename is not an episode boundary.', 'Start by checking what each observation and action means, then check shapes, timestamps and episode coverage. Passing a numeric check does not establish that a policy can use the data.'],
   sections: [
     { id: 'version', heading: 'Which version does this guide describe?', body: [
@@ -91,10 +91,25 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
       'observation.tactile and observation.tactile_valid are RoboSkin example field designs. They are not a universal LeRobot tactile schema, and a policy does not gain tactile support merely because these columns exist. A policy adapter must deliberately consume the representation, validity mask, timing and normalization; its training and evaluation must include that modality.',
       'Our earlier CSV exercise uses separate time, unit and validity fields. It is an independent synthetic exercise with normalized values and its own schema, not a direct export of this arbitrary-unit fixture. To convert real logs, first segment episodes, choose a reference time axis, preserve capture/receive clock provenance, align observations to actions and document exclusions. ROS messages and bags provide transport and recording; they do not define the learning dataset or calibrate its values.',
     ], links: [python, ros, { label: 'Check calibration before interpreting tactile values', href: '/guides/tactile-sensor-calibration' }, { label: 'Check VLA model input and data requirements', href: '/robot-vla-models' }] },
+    { id: 'official-loader', heading: 'Optional: run the official numeric writer and loader', body: [
+      'This second exercise uses LeRobot 0.6.1 to create, finalize and reload a local dataset in format v3.0. It generates its own complete numeric example; the limited PyArrow fixtures above are not presented as official-loader-ready exports. No Hub account, upload, GPU or robot is required. The script disables Hub access.',
+      'On Windows x64 with CPython 3.13.3 and uv 0.9.28, we checked 2 episodes, 8 frames, metadata totals, episode/frame/global indices, per-episode timestamps and the exact state, action and tactile arrays. Before the valid write, the official writer rejected a missing action and a wrong-shaped state vector. A second clean environment produced the same report using the supplied dependency lock.',
+      'This optional environment is substantially larger than the PyArrow-only checker: it installs the official package and CPU PyTorch dependencies. Tested versions are LeRobot 0.6.1, PyTorch 2.11.0+cpu, datasets 4.8.5, PyArrow 25.0.1 and NumPy 2.2.6. Video encoding/decoding, task-policy compatibility and training remain untested. The custom observation.tactile vector contains four synthetic normalized arbitrary values, with no implied policy support or physical unit.',
+    ], links: [
+      { label: 'Download the official-loader exercise, generated data and report (ZIP)', href: '/tutorials/lerobot-loader/lerobot-official-loader.zip', download: true },
+      { label: 'Read the complete loader verification script', href: '/tutorials/lerobot-loader/verify_loader.py', download: true },
+      { label: 'Inspect the actual loader verification report', href: '/tutorials/lerobot-loader/outputs/verification.json', download: true },
+      { label: 'Read dependencies, field meanings and licenses', href: '/tutorials/lerobot-loader/README.md', download: true },
+      { label: 'Official uv installation instructions', href: 'https://docs.astral.sh/uv/getting-started/installation/' },
+      { label: 'LeRobot 0.6.1 package and dependency metadata', href: 'https://pypi.org/project/lerobot/0.6.1/' },
+    ], code: [
+      { label: 'Windows PowerShell — from the extracted official-loader folder, with uv installed', language: 'powershell', value: 'uv venv .venv --python 3.13\nuv pip install --python .\\.venv\\Scripts\\python.exe --torch-backend cpu -r requirements-windows-py313.lock.txt\n.\\.venv\\Scripts\\python.exe verify_loader.py --output results' },
+      { label: 'Actual official-loader result', language: 'text', value: 'PASS: LeRobot 0.6.1 wrote and loaded 8 numeric frames in 2 episodes (v3.0).' },
+    ] },
     { id: 'troubleshooting', heading: 'Resolve common validation failures', body: [
       'A missing field usually means the export mapping or shard selection is wrong. Compare the actual Parquet columns with info.json; do not add fabricated zero vectors to make a check pass. A timestamp failure may be an episode segmentation error, a duplicated row or a mismatch between declared FPS and the export grid. Preserve the raw log while correcting the export.',
       'Boundary failures require comparing inclusive starts and exclusive ends with the actual global row indices. Do not treat each shard as one episode. Dimension failures require checking the feature definition and controller mapping before padding or truncating vectors.',
-      'An unreadable Parquet file can be an incomplete download or a writer that was not closed. The official v3 guide calls for dataset.finalize() before upload to flush buffered metadata and close writers. That is official workflow guidance, not an API exercised by this PyArrow project.',
+      'An unreadable Parquet file can be an incomplete download or a writer that was not closed. The official v3 guide calls for dataset.finalize() before upload to flush buffered metadata and close writers. The optional official-loader exercise above runs finalize(); the lightweight PyArrow checker does not use that API.',
     ] },
   ],
   faqs: [

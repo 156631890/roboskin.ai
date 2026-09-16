@@ -1,0 +1,93 @@
+{
+  "status": "pass",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "lerobot": "0.6.1",
+    "torch": "2.11.0+cpu",
+    "datasets": "4.8.5",
+    "pyarrow": "25.0.1",
+    "numpy": "2.2.6"
+  },
+  "format": "v3.0",
+  "frames": 8,
+  "episodes": 2,
+  "rejected_inputs": [
+    {
+      "case": "missing_action",
+      "exception": "ValueError",
+      "message": "Feature mismatch in `frame` dictionary:\nMissing features: {'action'}\n"
+    },
+    {
+      "case": "wrong_state_shape",
+      "exception": "ValueError",
+      "message": "The feature 'observation.state' of shape '(3,)' does not have the expected shape '(2,)'.\n"
+    }
+  ],
+  "checked": [
+    "official writer finalization",
+    "official local loader",
+    "numeric values and shapes",
+    "episode and frame indices",
+    "10 Hz synthetic timestamps",
+    "info metadata totals"
+  ],
+  "tactile_field": "Example custom float32 vector of 4 normalized arbitrary values; no policy support implied.",
+  "excluded": [
+    "video encoding/decoding",
+    "policy training",
+    "real robot data",
+    "force calibration",
+    "complete format compatibility certification"
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "episode_index": 0,
+      "frame_index": 0,
+      "timestamp_s": 0.0
+    },
+    {
+      "index": 1,
+      "episode_index": 0,
+      "frame_index": 1,
+      "timestamp_s": 0.10000000149011612
+    },
+    {
+      "index": 2,
+      "episode_index": 0,
+      "frame_index": 2,
+      "timestamp_s": 0.20000000298023224
+    },
+    {
+      "index": 3,
+      "episode_index": 0,
+      "frame_index": 3,
+      "timestamp_s": 0.30000001192092896
+    },
+    {
+      "index": 4,
+      "episode_index": 1,
+      "frame_index": 0,
+      "timestamp_s": 0.0
+    },
+    {
+      "index": 5,
+      "episode_index": 1,
+      "frame_index": 1,
+      "timestamp_s": 0.10000000149011612
+    },
+    {
+      "index": 6,
+      "episode_index": 1,
+      "frame_index": 2,
+      "timestamp_s": 0.20000000298023224
+    },
+    {
+      "index": 7,
+      "episode_index": 1,
+      "frame_index": 3,
+      "timestamp_s": 0.30000001192092896
+    }
+  ]
+}
