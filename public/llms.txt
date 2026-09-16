@@ -226,3 +226,14 @@ Homepage Physical AI routes:
 - [Tactile feedback for Physical AI](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Contact-feedback route.
 - [Physical AI and touch](https://roboskin.ai/physical-ai-touch): Touch-data, multimodal perception, and embodied-control route.
 - [Robot skin and robotic skin](https://roboskin.ai/robot-skin): Canonical robot skin definition route.
+
+## Programming and tutorials
+
+- [Robotics programming learning path](https://roboskin.ai/robotics-programming): Python, ROS 2, sensor feedback and projects without hardware.
+- [Python tactile data exercise](https://roboskin.ai/guides/python-tactile-data-processing): synthetic CSV, validity checks, actual plots and teaching contact events; code Apache-2.0, data CC0-1.0.
+- [ROS 2 tactile sensing walkthrough](https://roboskin.ai/guides/ros2-tactile-sensing): source-pinned Lyrical instructions; upstream build/interface evidence, local runtime unverified.
+
+## Robot data and calibration tutorials
+
+- [LeRobot Dataset Format Explained](https://roboskin.ai/guides/lerobot-dataset-format): v3 metadata, episodes and a verified synthetic numeric checker; not a complete compatibility validator.
+- [Tactile Sensor Calibration](https://roboskin.ai/guides/tactile-sensor-calibration): source-based DIGIT and GelSight Mini workflows and a blank calibration record; no RoboSkin hardware experiment.

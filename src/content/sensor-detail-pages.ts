@@ -9,7 +9,7 @@ export const sensorDetailPages: SeoTopicPage[] = [
     kicker: 'Sensor evidence / Vision-based fingertip',
     intent: 'Help robotics researchers evaluate the original DIGIT hardware and start with its documented Python interface.',
     published: '2026-09-12',
-    updated: '2026-09-12',
+    updated: '2026-09-16',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -65,6 +65,22 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'Choose using mounting geometry, signal requirements, calibration effort, component access, and maintainable software. A camera pixel count cannot be compared directly with a magnetic channel count as a universal measure of tactile quality. The linked sensor guides preserve these distinctions.',
         ],
       },
+      {
+        "heading": "Prepare a calibration record before interpreting contact",
+        "body": [
+          "The calibration workflow separates no-contact image baselines, reference geometry for depth reconstruction and independently measured force targets. Use the blank record to retain units, repeats, environmental conditions and invalid samples. The workflow is source-based; no new hardware measurements are claimed."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          }
+        ]
+      },
     ],
     faqs: [
       { question: 'Does DIGIT run at 30 or 60 FPS?', answer: 'The original paper reports 60 FPS at 640 × 480. The official Python README initializes a 640 × 480 stream at 30 FPS. Check the supported formats on the actual unit and explicitly record the mode used.' },
@@ -95,7 +111,7 @@ export const sensorDetailPages: SeoTopicPage[] = [
     kicker: 'Sensor evidence / Commercial optical touch',
     intent: 'Help researchers distinguish GelSight Mini manufacturer specifications from software reconstruction settings and experimental claims.',
     published: '2026-09-12',
-    updated: '2026-09-12',
+    updated: '2026-09-16',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -152,6 +168,22 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'Hardware is commercially offered by GelSight; use the manufacturer for current price, stock, and support. The reviewed gsrobotics repository is public and carries a GPL-3.0 license. That repository license does not automatically cover separately linked datasets or every third-party model.',
           'Before committing to a robot integration, check the mounting envelope and cable path, establish a repeatable capture configuration, validate the metric you need, and test the effect of gel replacement. Keep the official datasheet and a pinned software revision with the resulting experiment record.',
         ],
+      },
+      {
+        "heading": "Prepare a calibration record before interpreting contact",
+        "body": [
+          "The calibration workflow separates no-contact image baselines, reference geometry for depth reconstruction and independently measured force targets. Use the blank record to retain units, repeats, environmental conditions and invalid samples. The workflow is source-based; no new hardware measurements are claimed."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          }
+        ]
       },
     ],
     faqs: [

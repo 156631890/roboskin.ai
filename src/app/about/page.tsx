@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import { researchPositioning } from '@/components/ResearchResourceActions';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import { aboutSections, pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
@@ -21,14 +22,14 @@ export default function AboutPage() {
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin.ai is an information resource for the robot skin and tactile AI category. It is not presented as an operating hardware vendor,
-            product catalog, or procurement channel.
+            {researchPositioning} RoboSkin.ai is not an operating hardware vendor, product catalog, or procurement channel.
           </p>
           <p className="mt-4 max-w-3xl text-soft">
             RoboSkin.ai is independent. The name should not be read as an affiliation claim with similarly named robot skin products,
             companies, labs, or research projects unless a page explicitly supports that relationship.
           </p>
           <PageHeroVisual visual={pageVisuals.about} className="mt-10" priority />
+          <p className="mt-6 max-w-3xl text-soft">Paid work organizes public sources for a specific decision. It does not buy editorial inclusion or imply laboratory affiliation, physical testing, vendor qualification or device compatibility. <Link href="/research-services" className="text-accent underline">See scope and deliverables</Link>.</p>
         </div>
       </section>
 

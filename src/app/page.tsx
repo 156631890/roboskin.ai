@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import ResearchResourceActions from '@/components/ResearchResourceActions';
 import AiRobotClosedLoop from '@/components/AiRobotClosedLoop';
 import {
   AuthorityIndex,
@@ -121,6 +122,7 @@ export default function Home() {
               <div className="hero-stage-actions">
                 <Link href="/research-index#research-explorer" className="btn-primary">Compare research evidence <span aria-hidden="true">↗</span></Link>
                 <Link href="/research" className="hero-text-link">Browse research briefs</Link>
+                <Link href="/research-services" className="hero-text-link">Paid research services</Link>
               </div>
             </div>
             <p className="hero-stage-caption">
@@ -283,6 +285,13 @@ export default function Home() {
                 </Link>
               ))}
             </nav>
+
+            <aside className="mt-10 border-l-2 border-[#ff6b3d] bg-white/[0.025] p-6" aria-label="Programming tutorials">
+              <p className="quiet-label">Build with touch data</p>
+              <h3 className="mt-3 text-2xl font-semibold">Start programming with sensor feedback</h3>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--light-muted)]">No robot required for the Python exercise: inspect synthetic tactile CSV data, generate plots and trace contact events. Then explore the ROS 2 message and replay walkthrough.</p>
+              <Link href="/robotics-programming" className="mt-4 inline-block text-sm font-semibold text-[#ff6b3d] underline underline-offset-4">Explore the programming learning path →</Link>
+            </aside>
 
             <div id="latest-research" className="mt-14 md:mt-20">
               <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
@@ -476,6 +485,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <div className="container-shell pb-14"><ResearchResourceActions context="home" /></div>
     </>
   );
 }

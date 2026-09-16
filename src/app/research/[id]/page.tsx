@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
 import JsonLd from '@/components/JsonLd';
+import ResearchResourceActions from '@/components/ResearchResourceActions';
 import { blogPosts, getBlogPostById } from '@/lib/blog-data';
 import {
   buildArticleJsonLd,
@@ -13,6 +14,7 @@ import {
   canonicalUrl,
 } from '@/lib/seo';
 import { getResearchTopicLinks } from '@/lib/topic-graph';
+import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 
 type ResearchArticlePageProps = {
   params: Promise<{
@@ -90,6 +92,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
     .slice(0, 3)
     .map((item) => item.post);
   const topicLinks = getResearchTopicLinks(post);
+  const relatedDatasets = tactileDatasetEntries.filter((entry) => entry.researchUrl === `/research/${post.id}` || entry.paperUrl === post.sourceUrl);
 
   return (
     <>
@@ -140,6 +143,12 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
           <div className="article-grid">
             <div className="article-reading-surface">
               <ArticleBody content={post.content} />
+              {relatedDatasets.length > 0 && <section className="mt-8 border-t border-white/10 pt-6" aria-labelledby="article-dataset-evidence">
+                <h2 id="article-dataset-evidence">Check the data behind this research</h2>
+                <p>Compare the reported collection with the publicly listed files, dataset license, split documentation and dated access evidence.</p>
+                <ul>{relatedDatasets.map((entry) => <li key={entry.id}><Link href={`/datasets#dataset-${entry.id}`}>{entry.name}</Link></li>)}</ul>
+                <p><Link href="/datasets#availability-analysis">Read the directory’s public availability and reproduction analysis</Link>.</p>
+              </section>}
             </div>
 
             <aside className="article-rail">
@@ -186,6 +195,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
           </section>
         </div>
       </article>
+      <div className="container-shell pb-12"><ResearchResourceActions /></div>
     </>
   );
 }

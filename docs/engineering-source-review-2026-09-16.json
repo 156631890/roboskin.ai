@@ -1,0 +1,246 @@
+{
+  "checked_on": "2026-09-16",
+  "scope": "Documentary review, not hardware or external software runtime validation",
+  "sources": [
+    {
+      "name": "lerobot-doc",
+      "url": "https://huggingface.co/docs/lerobot/lerobot-dataset-v3",
+      "status": "read",
+      "bytes": 183790,
+      "sha256": "6171f589c133440aff9256e6689111e8b7c1a5be6b420f5125b96d35911e43f5",
+      "checked": "2026-09-16T02:29:03.357261+00:00"
+    },
+    {
+      "name": "calibration-paper",
+      "url": "https://arxiv.org/abs/2511.03078",
+      "status": "read",
+      "bytes": 42632,
+      "sha256": "cf8a4ce844e33019831bc06312120824aaf263a4b1a0f755f56d482cc756219e",
+      "checked": "2026-09-16T02:29:02.677874+00:00"
+    },
+    {
+      "name": "calibration-full",
+      "url": "https://arxiv.org/html/2511.03078v1",
+      "status": "read",
+      "bytes": 120538,
+      "sha256": "7255f603c22c81efbbdb8d9bb1159b3c8e5789f63da9596ad877d38565f8e71a",
+      "checked": "2026-09-16T02:29:02.693198+00:00"
+    },
+    {
+      "name": "umi",
+      "url": "https://umi-gripper.github.io/",
+      "status": "read",
+      "bytes": 34874,
+      "sha256": "108010d8e70d6ef11ec59b05b118f91f1a86996be19938151cffb18d61de5315",
+      "checked": "2026-09-16T02:29:02.698368+00:00"
+    },
+    {
+      "name": "gello",
+      "url": "https://arxiv.org/abs/2309.13037",
+      "status": "read",
+      "bytes": 42451,
+      "sha256": "0994b875dd9b39ac803c3b164acdf72969db7a625392200415aa34ddb21f3ae3",
+      "checked": "2026-09-16T02:29:02.671697+00:00"
+    },
+    {
+      "name": "digit",
+      "url": "https://digit.ml/digit.html",
+      "status": "read",
+      "bytes": 34971,
+      "sha256": "547e89290b62a0a5886ab2bb78ba4c8ab7b3ce7a53243995cd8f66c2b54f43c7",
+      "checked": "2026-09-16T02:29:03.802754+00:00"
+    },
+    {
+      "name": "mini",
+      "url": "https://www.gelsightmini.com/",
+      "status": "read",
+      "bytes": 12464,
+      "sha256": "8139c733f6f07bb52e887699289da2911b1a720e9f45c100df05c48c164745a4",
+      "checked": "2026-09-16T02:29:05.303955+00:00"
+    },
+    {
+      "name": "lerobot-repo",
+      "url": "https://api.github.com/repos/huggingface/lerobot/commits/main",
+      "status": "read",
+      "bytes": 96679,
+      "sha256": "5d4a989a567130f668825444760ecc86727f8af67e74da297fe645c67ab7c64f",
+      "checked": "2026-09-16T02:29:03.361451+00:00"
+    },
+    {
+      "name": "digit-repo",
+      "url": "https://api.github.com/repos/facebookresearch/digit-interface/commits/main",
+      "status": "read",
+      "bytes": 5923,
+      "sha256": "6776a03f1bb200b323c815c78873442b5d37d3d1949013768e891c0954de08b5",
+      "checked": "2026-09-16T02:29:03.398399+00:00"
+    },
+    {
+      "name": "mini-repo",
+      "url": "https://api.github.com/repos/gelsightinc/gsrobotics/commits/main",
+      "status": "read",
+      "bytes": 6169,
+      "sha256": "10fb5f51076d2d329d04fb130c7a91fd6867e4d0f29254b08df72a8e1e9deae5",
+      "checked": "2026-09-16T02:29:03.414585+00:00"
+    },
+    {
+      "name": "tacex-repo",
+      "url": "https://api.github.com/repos/DH-Ng/TacEx/commits/main",
+      "status": "read",
+      "bytes": 784506,
+      "sha256": "f4f0fecb60b3823f69fa799b65e1d467b579ed9fbaf2cecaadae6d1751b25ec6",
+      "checked": "2026-09-16T02:29:07.082250+00:00"
+    },
+    {
+      "name": "openvla",
+      "url": "https://raw.githubusercontent.com/openvla/openvla/main/README.md",
+      "status": "read",
+      "bytes": 38458,
+      "sha256": "ba8e9a2884e38a8000dafc98af4116512e37b0e143dad2f940100482bfd6b75c",
+      "checked": "2026-09-16T02:29:04.011450+00:00"
+    },
+    {
+      "name": "openpi",
+      "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/README.md",
+      "status": "read",
+      "bytes": 23254,
+      "sha256": "567fc57766bd736664f50126cab8145af4071ca16cc5e238f2b11e369169c3b5",
+      "checked": "2026-09-16T02:29:04.036798+00:00"
+    },
+    {
+      "name": "groot",
+      "url": "https://raw.githubusercontent.com/NVIDIA/Isaac-GR00T/main/README.md",
+      "status": "read",
+      "bytes": 34759,
+      "sha256": "62f6c55a356be039287416f97e03a3b5541052d038a3daec208ea9ff8045a067",
+      "checked": "2026-09-16T02:29:04.055664+00:00"
+    },
+    {
+      "name": "lerobot-readme",
+      "url": "https://raw.githubusercontent.com/huggingface/lerobot/89236ea0f4f81a81ca566081e20dd1ff5f823cbe/README.md",
+      "status": "read",
+      "bytes": 13143,
+      "sha256": "ba1a9487ce72d9018743997285a1ae29ba1f26c5656c2d97b038bc094b5ef9b2",
+      "checked": "2026-09-16T02:29:42.400433+00:00"
+    },
+    {
+      "name": "lerobot-tree",
+      "url": "https://api.github.com/repos/huggingface/lerobot/git/trees/89236ea0f4f81a81ca566081e20dd1ff5f823cbe?recursive=1",
+      "status": "read",
+      "bytes": 316436,
+      "sha256": "89905b990ae6c86cd8c2ab0ee383d0048e4c7e828ad72b24b1bc12ea3f4f1d9c",
+      "checked": "2026-09-16T02:29:42.401676+00:00"
+    },
+    {
+      "name": "lerobot-utils.py",
+      "url": "https://raw.githubusercontent.com/huggingface/lerobot/89236ea0f4f81a81ca566081e20dd1ff5f823cbe/src/lerobot/datasets/utils.py",
+      "status": "read",
+      "bytes": 20748,
+      "sha256": "b73f43e417d03d3d841ff3f1d1886961691ffe92155a51d7270fb75bed2ab409",
+      "checked": "2026-09-16T02:29:42.371113+00:00"
+    },
+    {
+      "name": "lerobot-lerobot_dataset.py",
+      "url": "https://raw.githubusercontent.com/huggingface/lerobot/89236ea0f4f81a81ca566081e20dd1ff5f823cbe/src/lerobot/datasets/lerobot_dataset.py",
+      "status": "read",
+      "bytes": 45053,
+      "sha256": "3bae0364eaaf83c282aa293776e3f91232ae0cf8f4bd2aa5b716f9b4268795b3",
+      "checked": "2026-09-16T02:29:42.364934+00:00"
+    },
+    {
+      "name": "digit-readme",
+      "url": "https://raw.githubusercontent.com/facebookresearch/digit-interface/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9/README.md",
+      "status": "read",
+      "bytes": 3660,
+      "sha256": "480040718b22f2a54e4c351dedfe986847d4f21ae79fbc8ccb76be23d60862f0",
+      "checked": "2026-09-16T02:29:42.321224+00:00"
+    },
+    {
+      "name": "digit-tree",
+      "url": "https://api.github.com/repos/facebookresearch/digit-interface/git/trees/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9?recursive=1",
+      "status": "read",
+      "bytes": 6317,
+      "sha256": "1040b051fd9b308b7e8e6a967c5230d410298e412da8851fefca314c0f763bdc",
+      "checked": "2026-09-16T02:29:42.909099+00:00"
+    },
+    {
+      "name": "mini-readme",
+      "url": "https://raw.githubusercontent.com/gelsightinc/gsrobotics/321d6a22da64529138ff10237335038fd8c5189f/README.md",
+      "status": "read",
+      "bytes": 25935,
+      "sha256": "53bdb9a6aca4761f9dd00055518aca7d018113c8ec0dd1f46573cd5bf34b0560",
+      "checked": "2026-09-16T02:29:42.966627+00:00"
+    },
+    {
+      "name": "mini-tree",
+      "url": "https://api.github.com/repos/gelsightinc/gsrobotics/git/trees/321d6a22da64529138ff10237335038fd8c5189f?recursive=1",
+      "status": "read",
+      "bytes": 13478,
+      "sha256": "c64b861f26e08f0386c117731889046ccb851ddcb690dc0d2c711606beef030c",
+      "checked": "2026-09-16T02:29:43.119983+00:00"
+    },
+    {
+      "name": "tacex-readme",
+      "url": "https://raw.githubusercontent.com/DH-Ng/TacEx/adceed41afb7cb48f9ec1f66a662fb8e5a06627f/README.md",
+      "status": "read",
+      "bytes": 4116,
+      "sha256": "c46e141734f436f949e119cb5b995a1a09baf2d9a19814a3a40f28e3616eeb87",
+      "checked": "2026-09-16T02:29:43.081257+00:00"
+    },
+    {
+      "name": "tacex-tree",
+      "url": "https://api.github.com/repos/DH-Ng/TacEx/git/trees/adceed41afb7cb48f9ec1f66a662fb8e5a06627f?recursive=1",
+      "status": "read",
+      "bytes": 152398,
+      "sha256": "318f33baf57f7ae488595f2f4ce31af7198bf8adf7395a04efd52d166c07ad56",
+      "checked": "2026-09-16T02:29:43.171049+00:00"
+    },
+    {
+      "name": "lerobot-metadata",
+      "url": "https://raw.githubusercontent.com/huggingface/lerobot/89236ea0f4f81a81ca566081e20dd1ff5f823cbe/src/lerobot/datasets/dataset_metadata.py",
+      "status": "read",
+      "bytes": 36098,
+      "sha256": "6f521ae70b89874027cbd0029b62da14f77958f551ded643b996b9a7db2b66df",
+      "checked": "2026-09-16T02:30:32.463013+00:00"
+    },
+    {
+      "name": "lerobot-writer",
+      "url": "https://raw.githubusercontent.com/huggingface/lerobot/89236ea0f4f81a81ca566081e20dd1ff5f823cbe/src/lerobot/datasets/dataset_writer.py",
+      "status": "read",
+      "bytes": 30498,
+      "sha256": "319f4efb53e892ceeb439aae6d25209d14564e3dc91134c7cc2c6c0b5e71ebc5",
+      "checked": "2026-09-16T02:30:32.486120+00:00"
+    },
+    {
+      "name": "tacex-install",
+      "url": "https://raw.githubusercontent.com/DH-Ng/TacEx/adceed41afb7cb48f9ec1f66a662fb8e5a06627f/docs/source/installation/Local-Installation.md",
+      "status": "read",
+      "bytes": 4989,
+      "sha256": "69695422e0fc159c91c8cdd829b82de93d5e6e1f942787ecda16b385e9af74cb",
+      "checked": "2026-09-16T02:30:32.393769+00:00"
+    },
+    {
+      "name": "gello-code",
+      "url": "https://raw.githubusercontent.com/wuphilipp/gello_software/main/README.md",
+      "status": "read",
+      "bytes": 13817,
+      "sha256": "7aeba50fb5bc60e2323db7dce05336cf01df509dfd339c33af9b2008212d7b33",
+      "checked": "2026-09-16T02:30:32.406676+00:00"
+    },
+    {
+      "name": "gello-full",
+      "url": "https://arxiv.org/html/2309.13037v2",
+      "status": "read",
+      "bytes": 108763,
+      "sha256": "e8ad5b858b86a71b0c7d62175214af8aa535068a42bb986184808875cbebff43",
+      "checked": "2026-09-16T02:30:32.428655+00:00"
+    },
+    {
+      "name": "3dcal",
+      "url": "https://rohankotanu.github.io/3DCal/",
+      "status": "read",
+      "bytes": 64425,
+      "sha256": "4d1a2af77f783c43854ad06383620fe38ab104dfc6347a8e93c436253db7d2bd",
+      "checked": "2026-09-16T02:30:33.073280+00:00"
+    }
+  ]
+}

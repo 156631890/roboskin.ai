@@ -1,0 +1,8 @@
+{
+  "scope": "numeric-v3-subset; not an official LeRobot compatibility validator",
+  "ok": true,
+  "frames": 8,
+  "episodes": 2,
+  "unknown_tactile_values": 1,
+  "errors": []
+}

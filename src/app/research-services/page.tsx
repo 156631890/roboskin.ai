@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import CommercialInquiryForm from '@/components/CommercialInquiryForm';
 import JsonLd from '@/components/JsonLd';
+import { researchPositioning } from '@/components/ResearchResourceActions';
 import { site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
@@ -33,6 +34,7 @@ export default function ResearchServicesPage() {
             <span className="eyebrow">Research services</span>
             <h1>Tactile intelligence, decision ready.</h1>
             <p>A source-backed robot skin and tactile AI brief, delivered in five business days for one defined decision.</p>
+            <p className="services-positioning">{researchPositioning}</p>
             <div className="services-hero-actions">
               <a href="#inquiry" className="btn-primary">Start a Research Sprint</a>
               <Link href="/reports/tactile-ai-robot-skin-landscape-2026" className="services-text-link">Download the free sample {'->'}</Link>

@@ -31,7 +31,7 @@ export default function ResourcesPage() {
       <section className="pb-20">
         <div className="container-shell space-y-8">
           {resourceSections.map((section) => (
-            <div key={section.title}>
+            <div key={section.title} id={section.title === 'Programming & Tutorials' ? 'programming-tutorials' : undefined}>
               <h2 className="mb-4 text-2xl font-semibold text-white">{section.title}</h2>
               <div className="grid gap-4 md:grid-cols-2">
                 {section.items.map((item) => (
@@ -66,7 +66,7 @@ export default function ResourcesPage() {
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            {seoTopicPages.map((page) => (
+            {seoTopicPages.filter(page => !['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing'].includes(page.path)).map((page) => (
               <Link key={page.path} href={page.path} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
                 <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{page.kicker}</span>
                 <h3 className="mt-3 text-xl font-semibold text-white">{page.h1}</h3>

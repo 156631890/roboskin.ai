@@ -1,0 +1,32 @@
+{
+  "checked_on": "2026-09-16",
+  "python": "3.13.3",
+  "system": "Windows",
+  "machine": "AMD64",
+  "pyarrow": "23.0.1",
+  "scope": "Original synthetic numeric snapshot; no complete LeRobot loader, video, training or hardware validation.",
+  "checks": [
+    {
+      "command": "python -B -m unittest -v test_validator",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_backward_timestamp (test_validator.ValidationTests.test_backward_timestamp) ... ok\ntest_cadence (test_validator.ValidationTests.test_cadence) ... ok\ntest_counts (test_validator.ValidationTests.test_counts) ... ok\ntest_duplicate_timestamp (test_validator.ValidationTests.test_duplicate_timestamp) ... ok\ntest_invalid_tolerance (test_validator.ValidationTests.test_invalid_tolerance) ... ok\ntest_missing_column (test_validator.ValidationTests.test_missing_column) ... ok\ntest_missing_required_metadata (test_validator.ValidationTests.test_missing_required_metadata) ... ok\ntest_missing_valid_measurement (test_validator.ValidationTests.test_missing_valid_measurement) ... ok\ntest_nan_is_not_valid (test_validator.ValidationTests.test_nan_is_not_valid) ... ok\ntest_overlap (test_validator.ValidationTests.test_overlap) ... ok\ntest_uncovered_rows (test_validator.ValidationTests.test_uncovered_rows) ... ok\ntest_unreadable_input (test_validator.ValidationTests.test_unreadable_input) ... ok\ntest_unsupported_video (test_validator.ValidationTests.test_unsupported_video) ... ok\ntest_valid_and_episode_clock_reset (test_validator.ValidationTests.test_valid_and_episode_clock_reset) ... ok\ntest_wrong_dimensions (test_validator.ValidationTests.test_wrong_dimensions) ... ok\ntest_wrong_shard_reference (test_validator.ValidationTests.test_wrong_shard_reference) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.323s\n\nOK\n"
+    },
+    {
+      "command": "python -B check_dataset.py fixtures/valid --report outputs/valid-report.json",
+      "exit_code": 0,
+      "stdout": "PASS (numeric subset): 8 frames, 2 episodes, 0 errors, 1 unknown tactile values\n",
+      "stderr": ""
+    },
+    {
+      "command": "python -B check_dataset.py fixtures/invalid --report outputs/invalid-report.json",
+      "exit_code": 1,
+      "stdout": "FAIL (numeric subset): 8 frames, 2 episodes, 17 errors, 1 unknown tactile values\n- fields: data/chunk-000/file-000.parquet missing action\n- dimension: row 0 action does not match [2]\n- dimension: row 1 observation.state does not match [3]\n- dimension: row 1 action does not match [2]\n- dimension: row 2 action does not match [2]\n- dimension: row 3 action does not match [2]\n- dimension: row 4 action does not match [2]\n- dimension: row 5 action does not match [2]\n- dimension: row 6 action does not match [2]\n- dimension: row 7 action does not match [2]\n- boundary: episode 0 has a gap, overlap, count or index error\n- time: episode 0 timestamp is not strictly increasing at frame 2\n- cadence: episode 0 frame 2 differs from frame_index/fps\n- boundary: row 4 episode/frame index disagrees with metadata\n- time: episode 0 timestamp is not strictly increasing at frame 4\n- cadence: episode 0 frame 4 differs from frame_index/fps\n- boundary: episode 1 has a gap, overlap, count or index error\n",
+      "stderr": ""
+    }
+  ],
+  "output_sha256": {
+    "invalid-report.json": "d0612b9a2bc0916ed5ec3df8a1ccc0fe277022b4e2be8c544f5a22c17df09e01",
+    "valid-report.json": "00df40c776465d55ed61849a5e1a478f0dfb29f2dbb16f98bb6e05dd0ffdb5bc"
+  }
+}

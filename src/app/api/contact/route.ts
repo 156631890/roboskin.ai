@@ -1,62 +1,6 @@
-import { NextResponse } from 'next/server';
+import { createFormHandlers } from '@/lib/form-handlers.mjs';
 
-type ContactPayload = {
-  fullName?: string;
-  company?: string;
-  email?: string;
-  intendedUse?: string;
-  budgetSignal?: string;
-  message?: string;
-  phone?: string;
-  requestType?: string;
-  website?: string;
-};
-
-const requestTypes = new Set(['partnership', 'research', 'correction', 'other']);
-
-function isValidPayload(payload: ContactPayload) {
-  return Boolean(
-    payload.fullName?.trim() &&
-      payload.company?.trim() &&
-      payload.email?.trim() &&
-      payload.requestType &&
-      requestTypes.has(payload.requestType) &&
-      payload.message?.trim(),
-  );
-}
-
-export async function POST(request: Request) {
-  let payload: ContactPayload;
-
-  try {
-    payload = (await request.json()) as ContactPayload;
-  } catch {
-    return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
-  }
-
-  if (payload.website) {
-    return NextResponse.json({ ok: true });
-  }
-
-  if (!isValidPayload(payload)) {
-    return NextResponse.json({ ok: false, error: 'Missing required fields' }, { status: 400 });
-  }
-
-  const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
-
-  if (webhookUrl) {
-    const forwardResponse = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!forwardResponse.ok) {
-      return NextResponse.json({ ok: false, error: 'Upstream request failed' }, { status: 502 });
-    }
-  }
-
-  return NextResponse.json({ ok: true });
-}
+// Includes intendedUse / budgetSignal and the complete commercial-research payload.
+// Static exports keep the explicit draft fallback; this route requires a server runtime.
+export const runtime = 'nodejs';
+export const POST = createFormHandlers().contact;

@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "unit": "normalized",
+  "threshold": 0.6,
+  "max_gap_ms": 150.0,
+  "frames": 12,
+  "events": 3,
+  "unknown_frames": 3,
+  "contact_frames": 5,
+  "quality_counts": {
+    "usable": 45,
+    "invalid_flag": 1,
+    "missing_taxel": 1,
+    "missing_value": 1
+  }
+}

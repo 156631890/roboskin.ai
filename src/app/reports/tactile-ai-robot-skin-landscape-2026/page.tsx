@@ -2,18 +2,20 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import sampleReport from '@/content/sample-report-2026.json';
 import { tactileDatasetEntries as tactileDatasets } from '@/lib/tactile-datasets';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata, canonicalUrl } from '@/lib/seo';
 
 const reportPath = '/reports/tactile-ai-robot-skin-landscape-2026';
 const pdfPath = '/reports/roboskin-tactile-ai-robot-skin-sample-report-2026.pdf';
+const previewDatasets = tactileDatasets.slice(0, 4);
 
 export const metadata: Metadata = buildPageMetadata(reportPath);
 
 const reportSections = [
   'Tactile intelligence stack and evaluation taxonomy',
-  'Six public tactile robotics datasets with access evidence',
-  'Six representative research signals and evidence limits',
+  `${sampleReport.datasets.length} dataset records as described in the fixed sample edition`,
+  `${sampleReport.signals.length} representative research signals and evidence limits`,
   'Sensor, dataset, and model evaluation checklist',
   'Primary-source register with direct URLs',
 ];
@@ -25,8 +27,8 @@ export default function TactileAiRobotSkinSampleReportPage() {
     '@id': `${canonicalUrl(reportPath)}#report`,
     name: 'Tactile AI and Robot Skin Landscape: Sample Report 2026',
     description: 'A free source-backed sample report covering the tactile intelligence stack, public datasets, research signals, and evaluation questions.',
-    datePublished: '2026-08-17',
-    dateModified: '2026-08-17',
+    datePublished: sampleReport.edition,
+    dateModified: sampleReport.edition,
     inLanguage: 'en',
     isAccessibleForFree: true,
     encodingFormat: 'application/pdf',
@@ -88,11 +90,11 @@ export default function TactileAiRobotSkinSampleReportPage() {
             </ol>
           </div>
           <aside>
-            <p className="section-label">Evidence snapshot</p>
+            <p className="section-label">Fixed PDF edition: {sampleReport.edition}</p>
             <dl>
-              <div><dt>Datasets reviewed</dt><dd>{tactileDatasets.length}</dd></div>
-              <div><dt>Research signals</dt><dd>6</dd></div>
-              <div><dt>Primary URLs</dt><dd>17</dd></div>
+              <div><dt>Dataset records in this PDF</dt><dd>{sampleReport.datasets.length}</dd></div>
+              <div><dt>Research signals in this PDF</dt><dd>{sampleReport.signals.length}</dd></div>
+              <div><dt>Source URLs in this PDF</dt><dd>{new Set(sampleReport.references.map(([, url]) => url)).size}</dd></div>
               <div><dt>Price</dt><dd>Free</dd></div>
             </dl>
             <a href={pdfPath} download className="report-download-link">Download sample PDF {'->'}</a>
@@ -103,11 +105,12 @@ export default function TactileAiRobotSkinSampleReportPage() {
       <section className="report-dataset-preview" aria-labelledby="dataset-preview-heading">
         <div className="container-shell">
           <div className="report-preview-heading">
-            <h2 id="dataset-preview-heading">Dataset coverage preview</h2>
+            <h2 id="dataset-preview-heading">Live directory preview — {previewDatasets.length} shown of {tactileDatasets.length} records</h2>
             <Link href="/datasets">Open the live dataset explorer {'->'}</Link>
           </div>
+          <p className="mb-5 text-soft">The records below come from the live directory and may differ from the {sampleReport.datasets.length}-record PDF sample. The historical PDF is preserved unchanged; consult current directory entries for updated access and license evidence.</p>
           <div className="report-dataset-list">
-            {tactileDatasets.slice(0, 4).map((dataset) => (
+            {previewDatasets.map((dataset) => (
               <article key={dataset.id}>
                 <div>
                   <span>{dataset.year}</span>

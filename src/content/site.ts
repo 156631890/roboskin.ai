@@ -216,6 +216,7 @@ export const primaryNavigation = [
   { href: '/physical-ai', label: 'Physical AI' },
   { href: '/robot-foundation-models', label: 'Models & Data' },
   { href: '/research', label: 'Research' },
+  { href: '/resources', label: 'Resources' },
   { href: '/about', label: 'About' },
 ];
 
@@ -1129,6 +1130,17 @@ export const fitCriteria: FitCriterion[] = [
 
 export const resourceSections: ResourceSection[] = [
   {
+    title: 'Programming & Tutorials',
+    items: [
+      {"title": "LeRobot episodes, timestamps and validation", "description": "Understand v3 storage and run a bounded numeric checker on valid and broken synthetic Parquet fixtures.", "availability": "Runnable project · Python verified", "ctaLabel": "Inspect the dataset format", "href": "/guides/lerobot-dataset-format"},
+      {"title": "DIGIT and GelSight Mini calibration", "description": "Separate image, depth and force targets and download a blank calibration record with units, repeats and references.", "availability": "Source-based workflow · no hardware experiment", "ctaLabel": "Prepare a calibration workflow", "href": "/guides/tactile-sensor-calibration"},
+
+      { title: 'Robotics programming: from code to feedback', description: 'Choose Python and ROS 2 tools, learn without hardware, and connect sensor data to robot learning.', availability: 'Learning path', ctaLabel: 'Explore the programming path', href: '/robotics-programming' },
+      { title: 'Process tactile data with Python', description: 'Download a complete synthetic CSV exercise with quality checks, generated plots and contact-event exports.', availability: 'Runnable project · Python verified', ctaLabel: 'Run the Python exercise', href: '/guides/python-tactile-data-processing' },
+      { title: 'ROS 2 tactile messages and replay', description: 'Build the starter kit, inspect its message contract and follow the recording workflow. Local ROS runtime checks remain pending.', availability: 'Source-checked walkthrough · runtime pending', ctaLabel: 'Read the ROS 2 walkthrough', href: '/guides/ros2-tactile-sensing' },
+    ],
+  },
+  {
     title: 'Category guides',
     items: [
       {
@@ -1227,10 +1239,10 @@ export const contactPaths: ContactPath[] = [
     ctaLabel: 'Discuss collaboration',
   },
   {
-    title: 'Research or information request',
-    summary: 'Use this path if you found the site through research and want to suggest sources, corrections, or useful additions.',
-    href: '/contact?requestType=research',
-    ctaLabel: 'Send a research note',
+    title: 'Paid research inquiry',
+    summary: 'Request public-source analysis for one decision. Review the Research Sprint scope, fees and evidence boundaries before sending project details.',
+    href: '/research-services#inquiry',
+    ctaLabel: 'Discuss a Research Sprint',
   },
 ];
 
@@ -1304,7 +1316,7 @@ export const aboutSections: AboutSection[] = [
     bullets: [
       'Start with applications, research, and glossary routes',
       'Check whether a claim is supported by public source context',
-      'Use contact paths only for corrections, collaboration, or research-note inquiries',
+      'Use Contact for corrections and sources, or Research Services for a paid evidence review',
     ],
   },
   {

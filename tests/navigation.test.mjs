@@ -25,6 +25,7 @@ test('primary navigation expresses the RoboSkin authority chain without generic 
     { href: '/physical-ai', label: 'Physical AI' },
     { href: '/robot-foundation-models', label: 'Models & Data' },
     { href: '/research', label: 'Research' },
+    { href: '/resources', label: 'Resources' },
     { href: '/about', label: 'About' },
   ]);
   assert.match(navigation, /href !== '\/' && href !== '\/about'/);

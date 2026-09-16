@@ -6,6 +6,7 @@ const evidencePaths = new Set(['/benchmarks', '/sensors', '/sensors/digit', '/se
 
 /** @param {string} pathname */
 export function growthBatchForPath(pathname) {
+  if (['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing', '/guides/lerobot-dataset-format', '/guides/tactile-sensor-calibration'].includes(pathname)) return 'programming-2026-09-16';
   if (pathname === '/tactile-ai') return tactileAiGrowthBatch;
   return evidencePaths.has(pathname) ? evidenceBatch : 'existing-site';
 }

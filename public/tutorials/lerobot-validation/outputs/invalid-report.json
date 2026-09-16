@@ -1,0 +1,26 @@
+{
+  "scope": "numeric-v3-subset; not an official LeRobot compatibility validator",
+  "ok": false,
+  "frames": 8,
+  "episodes": 2,
+  "unknown_tactile_values": 1,
+  "errors": [
+    "fields: data/chunk-000/file-000.parquet missing action",
+    "dimension: row 0 action does not match [2]",
+    "dimension: row 1 observation.state does not match [3]",
+    "dimension: row 1 action does not match [2]",
+    "dimension: row 2 action does not match [2]",
+    "dimension: row 3 action does not match [2]",
+    "dimension: row 4 action does not match [2]",
+    "dimension: row 5 action does not match [2]",
+    "dimension: row 6 action does not match [2]",
+    "dimension: row 7 action does not match [2]",
+    "boundary: episode 0 has a gap, overlap, count or index error",
+    "time: episode 0 timestamp is not strictly increasing at frame 2",
+    "cadence: episode 0 frame 2 differs from frame_index/fps",
+    "boundary: row 4 episode/frame index disagrees with metadata",
+    "time: episode 0 timestamp is not strictly increasing at frame 4",
+    "cadence: episode 0 frame 4 differs from frame_index/fps",
+    "boundary: episode 1 has a gap, overlap, count or index error"
+  ]
+}

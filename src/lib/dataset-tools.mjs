@@ -1,4 +1,5 @@
 /** @typedef {import('./robotics-datasets').RoboticsDatasetEntry} Dataset */
+import { datasetAudit, getDatasetEvidence } from './dataset-evidence.mjs';
 
 /** @param {Dataset} entry @param {string} query */
 export function matchesDatasetQuery(entry, query) {
@@ -20,13 +21,21 @@ export function buildDatasetCsv(entries, pathname) {
   const fields = ['id', 'name', 'institution', 'year', 'robot', 'sensor', 'modalities',
     'sampleCount', 'tasks', 'objectCategories', 'dataFormat', 'license', 'licenseUrl',
     'availability', 'sourceReviewed', 'paperUrl', 'projectUrl', 'datasetUrl', 'githubUrl'];
+  const evidenceFields = ['access', 'accessCheckedAt', 'publicFileScale', 'verificationScope', 'dataLicense', 'licenseStatus', 'splitStatus', 'splitDetails', 'revision'];
   const rows = entries.map((entry) => [...fields.map((field) => entry[field] ?? ''),
+    ...evidenceFields.map(field => getDatasetEvidence(entry)[field] ?? ''),
     `https://roboskin.ai${pathname}#dataset-${entry.id}`]);
-  return '\uFEFF' + [[...fields, 'directoryRecordUrl'], ...rows]
+  return '\uFEFF' + [[...fields, ...evidenceFields, 'directoryRecordUrl'], ...rows]
     .map((row) => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }
 
 /** @param {Dataset} entry @param {string} pathname */
 export function buildDatasetCitation(entry, pathname) {
-  return `RoboSkin.ai Editorial Team. ${entry.name} — directory record. Source reviewed ${entry.sourceReviewed}. https://roboskin.ai${pathname}#dataset-${entry.id}\nOriginal research: ${entry.paperUrl}\nThis cites the directory record; cite the original authors and follow the dataset's own reuse terms when using their work.`;
+  const edition = pathname === '/datasets' ? ` Directory audit ${datasetAudit.version}; access checked ${getDatasetEvidence(entry).accessCheckedAt}.` : '';
+  return `RoboSkin.ai Editorial Team. ${entry.name} — directory record. Source reviewed ${entry.sourceReviewed}.${edition} https://roboskin.ai${pathname}#dataset-${entry.id}\nOriginal research: ${entry.paperUrl}\nThis cites the directory record; cite the original authors and follow the dataset's own reuse terms when using their work.`;
+}
+
+/** A source reference, not a fabricated author list or author-approved BibTeX. */
+export function buildOriginalDatasetReference(entry) {
+  return `${entry.name} (${entry.year}). Original dataset: ${entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl}\nPrimary paper and authoritative author citation: ${entry.paperUrl}\nUse the original authors' citation instructions for research use. This source reference does not attribute their dataset to RoboSkin.ai.`;
 }

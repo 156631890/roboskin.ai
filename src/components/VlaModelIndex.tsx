@@ -7,9 +7,7 @@ type VlaModelIndexProps = {
   tactileEvidence: TactileVlaEvidenceEntry[];
 };
 
-function sentenceCase(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
+const tactileInputLabels = { yes: 'Documented', no: 'Not documented', unclear: 'Unconfirmed' } as const;
 
 export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelIndexProps) {
   const tactileModels = entries.filter((entry) => entry.tactileInput === 'yes').length;
@@ -107,7 +105,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                     <br />
                     <strong className="mt-3 inline-block text-white">Tactile input:</strong>{' '}
                     <span className="rounded-full border border-white/15 px-2 py-1 font-mono text-xs uppercase text-white">
-                      {sentenceCase(entry.tactileInput)}
+                      {tactileInputLabels[entry.tactileInput]}
                     </span>
                   </td>
                   <td className="w-[335px] px-4 py-5 leading-relaxed text-[#c8d1de]">

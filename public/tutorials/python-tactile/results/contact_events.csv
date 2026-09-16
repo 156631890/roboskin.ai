@@ -1,0 +1,4 @@
+event_id,first_contact_ns,last_contact_ns,peak_value,left_censored,end_reason,right_censored,boundary_timestamp_ns,observed_span_ms
+1,200000000,300000000,0.85,False,unknown_frame,True,400000000,100.0
+2,500000000,500000000,0.8,True,unknown_frame,True,600000000,0.0
+3,900000000,1000000000,0.9,True,release_observed,False,1100000000,100.0

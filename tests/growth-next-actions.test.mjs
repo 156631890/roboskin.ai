@@ -48,7 +48,7 @@ test('research index exposes a versioned, licensed, citable GitHub release', asy
 
 test('ROS 2 starter kit is connected to the implementation guide and agent-readable map', async () => {
   const [topics, site, llms] = await Promise.all([
-    read('src/content/seo-topic-pages.ts'),
+    read('src/content/programming-pages.ts'),
     read('src/content/site.ts'),
     read('public/llms.txt'),
   ]);

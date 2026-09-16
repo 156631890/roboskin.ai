@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
+import ResearchResourceActions from '@/components/ResearchResourceActions';
 import ResearchIndexExplorer from '@/components/ResearchIndexExplorer';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
 import { researchIndexRelease } from '@/lib/research-index-release';
@@ -70,6 +71,7 @@ export default function ResearchIndexPage() {
               <dd className="mt-1 text-xs uppercase text-[#8e98a8]">edition reviewed</dd>
             </div>
           </dl>
+          <p className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c8d1de]"><a className="underline" href="#newsletter">Weekly brief / signup status</a><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Free sample report</Link><Link className="underline" href="/research-services?source=research-index#inquiry">Discuss a research question</Link></p>
         </div>
       </section>
 
@@ -83,7 +85,8 @@ export default function ResearchIndexPage() {
         <div className="container-shell grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
           <article>
             <p className="eyebrow">Versioned public release</p>
-            <h2 className="mt-4 text-3xl font-bold text-white">A stable research asset, not a changing article list</h2>
+            <h2 className="mt-4 text-3xl font-bold text-white">Live directory and preserved release</h2>
+            <p className="mt-4 text-sm text-soft">The explorer and root CSV/JSON show the current structured index. The dated release is a fixed snapshot. Counts below describe that snapshot; a live page is not a new release merely because its layout changes.</p>
             <dl className="mt-7 grid gap-4 border-y border-white/10 py-5 sm:grid-cols-3 lg:grid-cols-1">
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#8e98a8]">Version</dt>
@@ -95,7 +98,7 @@ export default function ResearchIndexPage() {
               </div>
               <div>
                 <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-[#8e98a8]">Records</dt>
-                <dd className="mt-1 font-mono text-sm font-semibold text-white">{researchIndexEntries.length}</dd>
+                <dd className="mt-1 font-mono text-sm font-semibold text-white">{researchIndexRelease.recordCount}</dd>
               </div>
             </dl>
             <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
@@ -109,6 +112,8 @@ export default function ResearchIndexPage() {
           </article>
 
           <article>
+            <div className="mt-5 flex flex-wrap gap-4 text-sm underline"><a href={researchIndexRelease.jsonPath}>Preserved JSON</a><a href={researchIndexRelease.csvPath}>Preserved CSV</a><a href="/datasets#availability-analysis">Dataset availability analysis</a></div>
+            <p className="mt-5 text-sm text-soft">Change log: 2026-09-13 — clarified live and fixed-release scope; the structured records still match the published release, so no new index version was created.</p>
             <p className="eyebrow">Citation</p>
             <h2 id="research-index-citation-heading" className="mt-4 text-3xl font-bold text-white">Cite the index with its reviewed version</h2>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#c8d1de]">
@@ -153,6 +158,7 @@ export default function ResearchIndexPage() {
           </div>
         </div>
       </section>
+      <div className="container-shell pb-12"><ResearchResourceActions /></div>
     </>
   );
 }

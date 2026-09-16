@@ -21,6 +21,24 @@ function cleanLabel(value: string) {
 export default function AnalyticsTracker() {
   const pathname = usePathname();
   const landingRecorded = useRef(false);
+  const tutorialRecorded = useRef('');
+
+  useEffect(() => {
+    // Preserve first-landing events while the existing Analytics component hydrates.
+    // This is the Vercel SDK queue; Analytics still owns script loading and delivery.
+    window.va ??= (event, properties) => {
+      window.vaq ??= [];
+      window.vaq.push([event, properties]);
+    };
+  }, []);
+
+  useEffect(() => {
+    const tutorials = ['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing', '/guides/lerobot-dataset-format', '/guides/tactile-sensor-calibration'];
+    if (tutorials.includes(pathname) && tutorialRecorded.current !== pathname) {
+      track('Tutorial Visit', { path: pathname, batch: 'programming-2026-09-16' });
+    }
+    tutorialRecorded.current = pathname;
+  }, [pathname]);
 
   useEffect(() => {
     if (landingRecorded.current) return;
@@ -62,6 +80,16 @@ export default function AnalyticsTracker() {
       const url = new URL(anchor.href, window.location.href);
       const label = cleanLabel(anchor.textContent ?? '');
       const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
+
+      if (url.origin === window.location.origin && ['/tutorials/python-tactile/', '/tutorials/lerobot-validation/', '/tutorials/tactile-calibration/'].some(prefix => url.pathname.startsWith(prefix))) {
+        track('Tutorial Example Download', { ...properties, batch: 'programming-2026-09-16' });
+        return;
+      }
+
+      if (url.origin === window.location.origin && ['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing', '/guides/lerobot-dataset-format', '/guides/tactile-sensor-calibration'].includes(url.pathname) && url.pathname !== pathname) {
+        track('Tutorial Open', { ...properties, batch: 'programming-2026-09-16' });
+        return;
+      }
 
       if (url.origin === window.location.origin && url.pathname === '/experiment-results.csv') {
         track('Evidence CSV Download', { ...properties, batch: evidenceBatch, source_batch: properties.batch });
