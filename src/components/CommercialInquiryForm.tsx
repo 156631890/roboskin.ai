@@ -5,7 +5,7 @@ import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
 import { site } from '@/content/site';
 import AntiSpamChallenge from '@/components/AntiSpamChallenge';
-import { submitInquiry } from '@/lib/form-delivery.mjs';
+import { parseContactEndpoint, submitInquiry } from '@/lib/form-delivery.mjs';
 
 type InquiryState = {
   fullName: string;
@@ -38,6 +38,7 @@ const emptyInquiry: InquiryState = {
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+const onlineDeliveryAvailable = Boolean(parseContactEndpoint(contactFormEndpoint));
 
 function buildMailtoHref(form: InquiryState) {
   const body = [
@@ -93,6 +94,7 @@ export default function CommercialInquiryForm() {
 
   return (
     <form className="commercial-inquiry-form" onSubmit={handleSubmit}>
+      {!onlineDeliveryAvailable && <p className="text-sm text-soft" role="note">Online sending is unavailable. Prepare your inquiry below, then use the email link to review and send it yourself. Filling in this form does not send a message.</p>}
       <input
         className="hidden"
         tabIndex={-1}
@@ -175,14 +177,14 @@ export default function CommercialInquiryForm() {
       </label>
 
       {contactFormEndpoint === '/api/contact' ? <AntiSpamChallenge key={challengeKey} action="contact" onToken={setChallengeToken} /> : null}
-      <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
+      <button type="submit" className="btn-primary" disabled={!onlineDeliveryAvailable || status === 'submitting'}>
         {status === 'submitting' ? 'Sending...' : 'Request scope and availability'}
       </button>
 
       <div className="commercial-form-feedback" role={status === 'error' ? 'alert' : 'status'} aria-live="polite">
         {feedback ? <p data-error={status === 'error' ? 'true' : undefined}>{feedback}</p> : null}
       </div>
-      <p className="text-sm text-soft">If online delivery fails, <a className="underline" href={buildMailtoHref(form)}>prepare this inquiry in your email app</a>. Review and send it there; opening the app does not send it.</p>
+      <p className="text-sm text-soft"><a className="underline" href={buildMailtoHref(form)}>Prepare this inquiry in your email app</a>. Review and send it there; opening the app does not send it.</p>
     </form>
   );
 }

@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { track } from '@vercel/analytics';
 import { site } from '@/content/site';
 import AntiSpamChallenge from '@/components/AntiSpamChallenge';
-import { submitInquiry } from '@/lib/form-delivery.mjs';
+import { parseContactEndpoint, submitInquiry } from '@/lib/form-delivery.mjs';
 
 type RequestType = 'partnership' | 'research' | 'correction' | 'other';
 
@@ -44,6 +44,7 @@ type ContactFormProps = {
 };
 
 const contactFormEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
+const onlineDeliveryAvailable = Boolean(parseContactEndpoint(contactFormEndpoint));
 
 function normalizeRequestType(value: string | null | undefined, fallback: RequestType = 'research'): RequestType {
   if (!value) {
@@ -72,8 +73,8 @@ function displayValue(value: string) {
   return value.trim() || 'Not provided';
 }
 
-function buildWhatsAppHref(form: ContactFormState) {
-  const message = [
+function buildMessage(form: ContactFormState) {
+  return [
     `RoboSkin.ai ${form.requestType} note`,
     '',
     `Full name: ${form.fullName}`,
@@ -89,7 +90,10 @@ function buildWhatsAppHref(form: ContactFormState) {
     form.message,
   ].join('\n');
 
-  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(message)}`;
+}
+
+function buildWhatsAppHref(form: ContactFormState) {
+  return `https://wa.me/${site.contact.whatsappDial}?text=${encodeURIComponent(buildMessage(form))}`;
 }
 
 export default function ContactForm({ requestType, requestedAsset }: ContactFormProps) {
@@ -135,6 +139,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      {!onlineDeliveryAvailable && <p className="text-sm text-soft" role="note">Online sending is unavailable. You can prepare your note below, then review and send it using the email or WhatsApp link. Filling in this form does not send a message.</p>}
       <input
         className="hidden"
         tabIndex={-1}
@@ -261,7 +266,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       {contactFormEndpoint === '/api/contact' ? <AntiSpamChallenge key={challengeKey} action="contact" onToken={setChallengeToken} /> : null}
       <button
         type="submit"
-        disabled={status === 'submitting'}
+        disabled={!onlineDeliveryAvailable || status === 'submitting'}
         className="btn-primary"
       >
         {status === 'submitting' ? 'Sending...' : 'Send request'}
@@ -276,7 +281,7 @@ export default function ContactForm({ requestType, requestedAsset }: ContactForm
       </div>
 
       <p className="text-sm text-soft">
-        If needed, review and send your prepared note via <a className="text-accent hover:text-[#ff9b73]" href={buildWhatsAppHref(form)} target="_blank" rel="noreferrer">WhatsApp {site.contact.whatsapp}</a>
+        Review your prepared note in <a className="text-accent hover:text-[#ff9b73]" href={`mailto:${site.contact.inquiryEmail}?subject=${encodeURIComponent('RoboSkin research inquiry')}&body=${encodeURIComponent(buildMessage(form))}`}>your email app</a> or <a className="text-accent hover:text-[#ff9b73]" href={buildWhatsAppHref(form)} target="_blank" rel="noreferrer">WhatsApp {site.contact.whatsapp}</a>. You choose when to send it there.
       </p>
     </form>
   );
