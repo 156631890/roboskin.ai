@@ -105,18 +105,6 @@ export default function ResourcesPage() {
               </a>
             </div>
             <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
-              For motor-drive and industrial power electronics component information, see{' '}
-              <a
-                href="https://www.shysemi.com/"
-                target="_blank"
-                rel="noopener"
-                className="text-accent font-semibold hover:text-[#ff9b73]"
-              >
-                SHYSEMI power semiconductors
-              </a>
-              {' '}(IPM, IGBT and SiC).
-            </p>
-            <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
               For robotics and embedded-system hardware development,{' '}
               <a
                 href="https://www.vigorcomp.com/"
@@ -127,6 +115,18 @@ export default function ResourcesPage() {
                 Vigor Components
               </a>
               {' '}provides access to electronic components, connectors, power devices, and sourcing resources that can support BOM planning and prototype-to-production workflows.
+            </p>
+            <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
+              For motor-drive and industrial power electronics component information, see{' '}
+              <a
+                href="https://www.shysemi.com/"
+                target="_blank"
+                rel="noopener"
+                className="text-accent font-semibold hover:text-[#ff9b73]"
+              >
+                SHYSEMI power semiconductors
+              </a>
+              {' '}(IPM, IGBT and SiC).
             </p>
           </div>
         </div>
