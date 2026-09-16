@@ -1,8 +1,17 @@
 # Research resource forms: configuration and verification
 
-Reviewed 2026-09-13. The default build remains a static export. This branch has not been deployed. Public directories, JSON/CSV downloads and the free sample remain available without accounts or email submission.
+Reviewed 2026-09-16. The default build remains a static export. Public directories, JSON/CSV downloads and the free sample remain available without accounts or email submission.
 
-## Current state
+## Newsletter update — 2026-09-16
+
+Buttondown's review restriction has cleared. The owner-controlled confirmation,
+provider-state, duplicate, invalid-address and unsubscribe checks passed. The
+public management portal's sign-in email and dashboard were also verified.
+See [the verification record](verification/newsletter-activation-2026-09-16.md)
+and [activation batch](seo/growth-batches/2026-09-12-newsletter.json) for release
+state. The website uses the native static form; the optional API remains disabled.
+
+## Original observations — 2026-09-13
 
 - The local environment did not contain a configured contact endpoint or newsletter credentials. Only the presence of `VERCEL_OIDC_TOKEN` was observed; values were not copied.
 - The logged-in Buttondown account displayed **Account under review**. The owner must complete the provider's account review. No review form was submitted by this task.

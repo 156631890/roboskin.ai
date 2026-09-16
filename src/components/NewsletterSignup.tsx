@@ -72,8 +72,8 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
     >
       <label htmlFor="newsletter-email">Weekly Tactile Robotics Research Brief</label>
       <p>
-        One concise email with new tactile research and evidence boundaries. Signup is processed by {config.providerHost};
-        follow the provider&apos;s next step to complete signup. This page does not mark an address as subscribed.
+        A weekly selection of tactile robotics research, dataset releases and practical tutorials.
+        Buttondown will email you a confirmation link. Confirm your address to join.
       </p>
       <div>
         <input
@@ -83,7 +83,7 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
           maxLength={254}
           required
           autoComplete="email"
-          placeholder="Work email"
+          placeholder="Email address"
           aria-describedby="newsletter-feedback"
         />
         <input type="hidden" name="embed" value="1" />
@@ -91,9 +91,9 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
           {submitting ? 'Opening…' : 'Subscribe'}
         </button>
       </div>
-      <label className="newsletter-consent"><input type="checkbox" name="consent" required /> I agree to receive the weekly brief. Unsubscribe using the link in each email.</label>
+      <label className="newsletter-consent"><input type="checkbox" name="consent" required /> I agree to receive the weekly brief. I can unsubscribe at any time.</label>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" hidden aria-hidden="true" />
-      <p><a href={config.unsubscribeUrl}>Manage or cancel your subscription at Buttondown</a>. Existing subscribers are handled by the provider; submitting this form does not confirm a new subscription.</p>
+      <p><a href={config.unsubscribeUrl}>Manage or cancel your subscription at Buttondown</a>. <a href="/privacy">Privacy policy</a>.</p>
       <span id="newsletter-feedback" role="status" aria-live="polite">
         {feedback}
       </span>
