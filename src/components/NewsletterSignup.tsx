@@ -33,7 +33,7 @@ function NewsletterUnavailable() {
 function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
   const pathname = usePathname();
   const [submitting, setSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState('Confirm your address with Buttondown to complete signup.');
+  const [feedback, setFeedback] = useState('New subscribers receive a confirmation email from Buttondown.');
   const inFlight = useRef(false);
   useEffect(() => {
     const reset = () => { inFlight.current = false; setSubmitting(false); };
@@ -73,7 +73,7 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
       <label htmlFor="newsletter-email">Weekly Tactile Robotics Research Brief</label>
       <p>
         A weekly selection of tactile robotics research, dataset releases and practical tutorials.
-        Buttondown will email you a confirmation link. Confirm your address to join.
+        New subscribers receive a confirmation link from Buttondown. Previously confirmed addresses may rejoin immediately.
       </p>
       <div>
         <input

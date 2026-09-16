@@ -1,8 +1,8 @@
 {
   "batch": "2026-09-12-newsletter",
   "preparedAt": "2026-09-12",
-  "releaseStatus": "provider-verified-ready-for-activation",
-  "releasedAt": null,
+  "releaseStatus": "live-provider-verified",
+  "releasedAt": "2026-09-16",
   "providerVerifiedAt": "2026-09-16",
   "provider": "Buttondown",
   "placement": "site footer",
@@ -17,10 +17,11 @@
     "pendingSubscribers": null,
     "confirmedSubscribers": null,
     "unsubscribed": null,
-    "testSubscribersExcluded": 1
+    "testSubscribersExcluded": 2
   },
   "sourceAttribution": "Site events carry path and source_batch; confirmed subscriptions require provider evidence and cannot be inferred from handoffs.",
-  "blockingStep": "Provider checks passed. Activate the three verified public settings, deploy, and check the production signup form before recording releasedAt.",
+  "blockingStep": null,
+  "observationDates": { "D+7": "2026-09-23", "D+28": "2026-10-14" },
   "verificationRecord": "docs/verification/newsletter-activation-2026-09-16.md",
   "checkpointRule": "Create D+7 and D+28 observations relative to the actual newsletter activation date. No activation or future counts are assumed."
 }
