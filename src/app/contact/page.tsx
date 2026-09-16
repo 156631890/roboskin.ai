@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
 import JsonLd from '@/components/JsonLd';
+import { researchPositioning } from '@/components/ResearchResourceActions';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import { contactPaths, pageVisuals, site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
@@ -22,6 +23,7 @@ export default function ContactPage() {
               Use this page for source suggestions, corrections, editorial collaboration, or research notes related to robot skin and tactile AI.
             </p>
             <div className="contact-direct">
+              <p>{researchPositioning} For a paid evidence review, <Link href="/research-services#inquiry" className="text-accent underline">request research scope and availability</Link>.</p>
               <p>Primary: <a className="text-accent hover:text-white" href={`mailto:${site.contact.primaryEmail}`}>{site.contact.primaryEmail}</a></p>
               <p>WhatsApp: <a className="text-accent hover:text-white" href={`https://wa.me/${site.contact.whatsappDial}`} target="_blank" rel="noreferrer">{site.contact.whatsapp}</a></p>
               <p>WeChat: <span className="text-white">{site.contact.wechat}</span></p>

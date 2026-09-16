@@ -121,6 +121,10 @@ export async function generateAgentMarkdown(outputRoot = path.join(projectRoot, 
 
 const executablePath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : '';
 if (import.meta.url === executablePath) {
-  const result = await generateAgentMarkdown();
-  console.log(`Generated ${result.count} agent Markdown representations in ${result.outputRoot}`);
+  if (process.env.ROBOSKIN_RUNTIME === 'server') {
+    console.log('Server build: static-export Markdown generation skipped (out may belong to an earlier build).');
+  } else {
+    const result = await generateAgentMarkdown();
+    console.log(`Generated ${result.count} agent Markdown representations in ${result.outputRoot}`);
+  }
 }

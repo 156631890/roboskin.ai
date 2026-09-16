@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
 import TactileDatasetExplorer from '@/components/TactileDatasetExplorer';
+import DatasetAvailabilityAnalysis from '@/components/DatasetAvailabilityAnalysis';
+import ResearchResourceActions from '@/components/ResearchResourceActions';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
 import { buildTactileDatasetsJsonLd } from '@/lib/seo';
@@ -29,6 +31,7 @@ export default function TactileDatasetsPage() {
           { label: 'Human demonstrations', ids: ['egotouch', 'freetacman', 'vtdexmanip', 'touch-and-go', 'tactidex'] },
         ]} />
       }>
+        <DatasetAvailabilityAnalysis entries={tactileDatasetEntries} />
         <aside className="container-shell pb-12" aria-label="Data processing practice">
           <div className="signal-panel p-6">
             <h2 className="text-2xl font-semibold">Practice reading tactile data before choosing a dataset</h2>
@@ -37,6 +40,7 @@ export default function TactileDatasetsPage() {
           </div>
         </aside>
       </SeoTopicArticle>
+      <div className="container-shell pb-12"><ResearchResourceActions context="dataset selection and reproduction planning" /></div>
     </>
   );
 }

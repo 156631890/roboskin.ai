@@ -1,3 +1,4 @@
+import { getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
@@ -26,7 +27,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
       'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-09-11',
+    updated: '2026-09-13',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -158,7 +159,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
     description:
       'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
-    updated: '2026-08-22',
+    updated: '2026-09-13',
     priority: 0.82,
     changeFrequency: 'monthly',
     index: true,
@@ -212,8 +213,8 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/about',
     title: 'About RoboSkin.ai',
     description:
-      'Learn about RoboSkin.ai as a robot skin information hub and public robot skin information resource for tactile AI audiences.',
-    updated: '2026-08-20',
+      'RoboSkin.ai provides independent public research resources and paid, fixed-scope source research on robot skin and tactile robotics.',
+    updated: '2026-09-13',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -257,7 +258,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'RoboSkin.ai Research Contact',
     description:
       'Contact RoboSkin.ai about source suggestions, corrections, editorial collaboration, or robot skin research information.',
-    updated: '2026-08-16',
+    updated: '2026-09-13',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -268,7 +269,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Tactile AI and Robot Skin Research Services',
     description:
       'Commission a fixed-scope RoboSkin Research Sprint for source-backed tactile sensors, datasets, robot hands, humanoid touch, companies, and model intelligence.',
-    updated: '2026-08-17',
+    updated: '2026-09-13',
     priority: 0.86,
     changeFrequency: 'monthly',
     index: true,
@@ -279,7 +280,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Tactile AI and Robot Skin Landscape Report 2026',
     description:
       'Download a free source-backed sample report on tactile AI, robot skin, tactile robotics datasets, research signals, and evaluation questions.',
-    updated: '2026-08-17',
+    updated: '2026-09-13',
     priority: 0.75,
     changeFrequency: 'monthly',
     index: true,
@@ -289,7 +290,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/privacy',
     title: 'Privacy Policy',
     description: 'How RoboSkin handles contact form submissions and site usage data.',
-    updated: '2026-08-22',
+    updated: '2026-09-13',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -952,7 +953,6 @@ function buildDatasetCatalogJsonLd(
     name: entry.name,
     description: `${entry.sampleCount}. Tasks: ${entry.tasks.join(', ')}. ${entry.availability}`,
     url: entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl,
-    dateModified: entry.sourceReviewed,
     measurementTechnique: entry.sensor,
     variableMeasured: entry.modalities,
     keywords: entry.tasks,
@@ -965,8 +965,7 @@ function buildDatasetCatalogJsonLd(
         value: entry.institution.join('; '),
       },
     ],
-    ...(entry.licenseUrl ? { license: entry.licenseUrl } : {}),
-    ...(entry.datasetUrl ? { isAccessibleForFree: true } : {}),
+    ...(getDatasetEvidence(entry).dataLicenseUrl ? { license: getDatasetEvidence(entry).dataLicenseUrl } : {}),
     includedInDataCatalog: {
       '@id': `${pageUrl}#catalog`,
     },
@@ -979,6 +978,7 @@ function buildDatasetCatalogJsonLd(
         '@type': 'DataCatalog',
         '@id': `${pageUrl}#catalog`,
         name: catalogName,
+        creator: { '@type': 'Organization', name: 'RoboSkin.ai Editorial Team', url: canonicalUrl('/editorial-policy') },
         description: catalogDescription,
         url: pageUrl,
         dataset: datasetNodes.map((entry) => ({ '@id': entry['@id'] })),

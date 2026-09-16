@@ -195,7 +195,7 @@ export const ros2Tutorial: ProgrammingPage = {
     { question: 'Can I use the CSV from the repository as a captured run?', answer: 'No. sample_data/tactile_frame.csv is a separate 2 × 2, four-row synthetic fixture, not a recording of the default 4 × 4 publisher.' },
     { question: 'How do I inspect data before learning ROS 2?', answer: 'Use the Python tactile data exercise. It has independent synthetic time-series data, explicit validity checks and actual generated results, without a ROS dependency.' },
   ],
-  relatedLinks: [overview, pythonPractice, { label: 'Dataset reproduction evidence', href: '/datasets', description: 'Check access, licenses and splits before choosing training data.' }, { label: 'RoboSkin ROS 2 starter kit', href: kit, description: 'Open the Apache-2.0 code and its source history.' }],
+  relatedLinks: [overview, pythonPractice, { label: 'Dataset reproduction evidence', href: '/datasets#availability-analysis', description: 'Check access, licenses and splits before choosing training data.' }, { label: 'RoboSkin ROS 2 starter kit', href: kit, description: 'Open the Apache-2.0 code and its source history.' }],
   sources: [{ label: 'Pinned starter-kit source', href: `${kit}/tree/${starterKitCommit}` }, { label: 'Upstream build and interface check', href: `${kit}/actions/runs/32648006098` }],
 };
 
