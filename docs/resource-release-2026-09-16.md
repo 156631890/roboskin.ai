@@ -33,9 +33,11 @@ PyArrow 25.0.1、NumPy 2.2.6。
 
 ## External dependencies actually checked
 
-- Vercel 生产仅存在 `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`，读取后确认其值为空。没有修改环境变量。
-  页面新增填写前提示与禁用的在线发送按钮，保留携带填写内容的邮件／WhatsApp 草稿链接。
-  打开草稿必须由访客自己选择；本任务未发送任何邮件或咨询。
+- Vercel 列出的生产变量只有 `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`。本地 CLI 导出显示空值，
+  但后续实际生产 bundle 含通过校验的 FormSubmit AJAX 地址，浏览器中的发送按钮可用。
+  不能用本地导出推断生产未配置。没有修改环境变量；缺配置提示／禁用按钮只在实际缺配置时显示。
+  实测生产失败分支时先在浏览器拦截并中止 FormSubmit 请求，页面提示未确认投递并保留输入；
+  这不是服务商收件验证。邮件／WhatsApp 草稿包含已填内容，打开和发送由访客选择，本任务未发消息。
 - Buttondown 已登录页面仍显示 Account under review，并要求账号持有人本人填写审核信息。
   未代填身份审核，未启用订阅；RSS 保持可用。已询问用户控制的测试邮箱，回复前不做真实邮件验证。
 - 本机没有 Docker 或已安装 WSL 发行版。ROS 运行脚本已完成，但 GitHub 拒绝写入 workflow，
@@ -53,3 +55,8 @@ PyArrow 25.0.1、NumPy 2.2.6。
 原工作区 `.artifacts/resource-release-20260916/` 保存快照清单、安装／构建／测试日志、
 两份 loader 报告、网页与下载审计、浏览器证据。生产部署号、最终提交号和发布后结果另记入
 原工作区的本地交接记录；此前 9 月 13 日文档中的“未发布”描述属于历史状态。
+
+代码提交 `914166e3da7ecc6e9291a780a6c41cce114e715f` 已通过 GitHub Quality gate
+`35065845532`，并完成生产验证：121 sitemap URLs、125 protected entries、23 个相关页面、
+257 个内部链接／锚点、51 个教程下载文件及 3 个固定快照。两次暂时连接超时分别重试通过，
+原始失败保留在审计报告中。`/datasets.json` 统计及条目与固定快照一致。
