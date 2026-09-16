@@ -1,0 +1,2 @@
+# Verified on CPython 3.13.3, Windows x64. No ROS installation required.
+matplotlib==3.10.6

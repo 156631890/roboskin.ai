@@ -1,0 +1,12 @@
+{
+  "evidence_type": "synthetic_demo",
+  "purpose": "Numeric validation teaching fixture; not a complete official LeRobot dataset",
+  "coordinate_frame": "invented_demo_frame",
+  "timestamp": {"unit": "s", "clock": "episode-relative frame_index/fps", "fps": 10},
+  "observation.state": {"unit": "m", "dimensions": ["x", "y", "z"], "source": "synthetic"},
+  "action": {"unit": "m", "dimensions": ["dx", "dy"], "source": "synthetic; not executed"},
+  "observation.tactile": {"unit": "arbitrary_unit", "layout": "2x2 row-major", "standard": false},
+  "observation.tactile_valid": {"type": "boolean[4]", "false_means": "unknown; never replace with zero", "standard": false},
+  "task_index": {"value": 0, "note": "synthetic identifier only; task-text mapping omitted"},
+  "license": "CC0-1.0"
+}

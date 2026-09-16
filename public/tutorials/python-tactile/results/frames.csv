@@ -1,0 +1,13 @@
+timestamp_ns,usable_taxels,total_taxels,max_value,contact_state,gap_before
+0,4,4,0.1,clear,False
+100000000,4,4,0.2,clear,False
+200000000,4,4,0.7,contact,False
+300000000,4,4,0.85,contact,False
+400000000,3,4,0.1,unknown,False
+500000000,4,4,0.8,contact,False
+600000000,3,4,0.1,unknown,False
+700000000,4,4,0.1,clear,False
+800000000,3,4,0.1,unknown,False
+900000000,4,4,0.9,contact,False
+1000000000,4,4,0.75,contact,False
+1100000000,4,4,0.1,clear,False

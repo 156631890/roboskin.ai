@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
@@ -27,7 +28,15 @@ export default function TactileDatasetsPage() {
           { label: 'Full-hand touch', ids: ['ht-bench', 'humanoid-vta', 'tactidex'] },
           { label: 'Human demonstrations', ids: ['egotouch', 'freetacman', 'vtdexmanip', 'touch-and-go', 'tactidex'] },
         ]} />
-      } />
+      }>
+        <aside className="container-shell pb-12" aria-label="Data processing practice">
+          <div className="signal-panel p-6">
+            <h2 className="text-2xl font-semibold">Practice reading tactile data before choosing a dataset</h2>
+            <p className="mt-3 max-w-3xl text-soft">Use a small synthetic CSV to check timestamps, missing taxels, units and validity, then generate a heatmap and teaching contact events. Real datasets retain their own schemas and licenses.</p>
+            <Link href="/guides/python-tactile-data-processing" className="mt-4 inline-block text-accent underline underline-offset-4">Run the Python data-reading and quality-check tutorial →</Link>
+          </div>
+        </aside>
+      </SeoTopicArticle>
     </>
   );
 }

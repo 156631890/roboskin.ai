@@ -1,0 +1,7 @@
+SPDX-License-Identifier: CC0-1.0
+
+RoboSkin.ai dedicates the original synthetic fixtures, field contract, generated reports, and blank calibration record and field dictionary distributed in these teaching projects to the public domain under CC0 1.0 Universal.
+No hardware measurement, sensor accuracy, force calibration, physical simulation or official dataset compatibility is implied.
+
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+This calibration download contains no executable code. Third-party sources retain their terms.

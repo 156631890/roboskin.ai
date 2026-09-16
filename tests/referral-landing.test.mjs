@@ -63,3 +63,13 @@ test('direct visits remain unattributed through internal navigation', () => {
   tracker.render('/research-index');
   assert.deepEqual(tracker.events, []);
 });
+
+test('tutorial visits survive repeated effects and count a return navigation', () => {
+  const tracker = mountTracker('');
+  tracker.render('/guides/python-tactile-data-processing');
+  tracker.render('/guides/python-tactile-data-processing');
+  tracker.render('/datasets');
+  tracker.render('/guides/python-tactile-data-processing');
+  assert.equal(tracker.events.length, 2);
+  assert.ok(tracker.events.every(event => event.event === 'Tutorial Visit' && event.batch === 'programming-2026-09-16'));
+});

@@ -1,4 +1,6 @@
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
+import { programmingPages } from '@/content/programming-pages';
+import { engineeringPages } from '@/content/engineering-pages';
 
 export type SeoTopicPage = {
   path: string;
@@ -19,6 +21,7 @@ export type SeoTopicPage = {
     heading: string;
     body: string[];
     bullets?: string[];
+    links?: { label: string; href: string }[];
     table?: {
       headers: string[];
       rows: string[][];
@@ -42,6 +45,8 @@ export type SeoTopicPage = {
 
 export const seoTopicPages: SeoTopicPage[] = [
   ...sensorDetailPages,
+  ...programmingPages,
+  ...engineeringPages,
   {
     path: '/ai-robotics',
     title: 'AI and Robotics: Models, Learning & Physical Action',
@@ -198,6 +203,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'Start programming with sensor feedback', href: '/robotics-programming', description: 'Learn Python and ROS 2 foundations through synthetic tactile data exercises.' },
       { label: 'Physical AI', href: '/physical-ai', description: 'The broad physical perception, reasoning, action, and feedback system.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Verify which exact, family-level, or unnamed hardware a model was trained across, evaluated on, or demonstrated on.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'How demonstrations, interaction, correction, and evaluation shape robot behavior.' },
@@ -473,7 +479,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-09-12',
+    updated: '2026-09-16',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -606,6 +612,27 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['ScaleLab at Shanghai Jiao Tong University and eight source-listed collaborators', 'UniVTAC', 'Simulated Franka Panda with GelSight Mini; physical Tianji Marvin with ViTai GF225', 'Connects tactile simulation, representation pretraining, benchmark tasks, and protocol-bounded physical transfer.'],
           ],
         },
+      },
+      {
+        "heading": "From robotic tactile sensing to a usable learning signal",
+        "body": [
+          "Robotic tactile sensing supplies observations of contact; tactile AI depends on a defined representation, calibration target and data-quality contract. Keep raw image or sensor units separate from derived depth and force, and retain unknown values through preprocessing.",
+          "Start with a sensor-specific calibration plan, practice missing-data checks in the synthetic Python exercise, then inspect episode and timestamp conventions before combining observations with robot actions. None of these data exercises establishes physical sensor accuracy."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          },
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          }
+        ]
       },
     ],
     faqs: [
@@ -1347,7 +1374,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile sensor for robots',
     kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
-    updated: '2026-07-21',
+    updated: '2026-09-16',
     priority: 0.8,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1385,6 +1412,26 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Robot skin may use one tactile sensor type or combine many. Tactile sensors are the building blocks; robot skin is the surface-level system around them.',
           'Keeping those levels separate makes component selection and full-surface integration easier to evaluate.',
         ],
+      },
+      {
+        "heading": "Plan calibration and inspect the data path",
+        "body": [
+          "A practical robotic tactile sensing workflow connects sensor selection to a measurable target. For optical fingertips, distinguish the raw image baseline from reconstructed depth and independently calibrated force. Then preserve timestamps, units and invalid samples through processing before evaluating an application."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          },
+          {
+            "label": "Review tactile manipulation applications",
+            "href": "/tactile-manipulation"
+          }
+        ]
       },
     ],
     faqs: [
@@ -1587,107 +1634,6 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     paperBriefIds: ['graphene-liquid-metal-3d-force-2026', 'full-hand-tactile-sensing-2025'],
-  },
-  {
-    path: '/guides/ros2-tactile-sensing',
-    title: 'ROS 2 Tactile Sensing Pipeline Guide for Robot Skin Data',
-    description:
-      'ROS 2 tactile sensing needs timestamped messages, frame mapping, rosbag replay, and controller interfaces. Learn how robot skin data becomes usable.',
-    h1: 'ROS 2 tactile sensing pipeline',
-    kicker: 'Integration guide',
-    intent: 'Software integration page for ROS 2 tactile sensing, robot skin ROS 2, tactile data pipeline, and rosbag tactile replay searches.',
-    updated: '2026-08-23',
-    priority: 0.76,
-    changeFrequency: 'weekly',
-    schemaType: 'TechArticle',
-    visualKey: 'resources',
-    keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data', 'robot tactile middleware'],
-    quickAnswer: [
-      'ROS 2 tactile sensing is the software workflow that publishes, synchronizes, records, replays, and consumes robot touch data.',
-      'A serious tactile pipeline should define message format, timestamps, frame IDs, calibration metadata, raw-data logging, and controller-facing outputs.',
-      'Without replayable data and clear coordinate mapping, robot skin becomes difficult to debug and weak as evidence for tactile AI claims.',
-    ],
-    sections: [
-      {
-        heading: 'Minimum tactile data contract',
-        body: [
-          'A robot skin signal should not be treated as a screenshot or isolated plot. It needs a data contract: what was measured, when it was measured, where it happened on the robot, and how another engineer can replay the event.',
-          'ROS 2 gives robotics teams the vocabulary for topics, timestamps, frames, rosbag logs, controllers, and replayable experiments.',
-        ],
-        bullets: [
-          'Message schema for pressure maps, force vectors, events, or features',
-          'Timestamps aligned with robot state and other sensors',
-          'Frame IDs that map tactile readings to robot geometry',
-          'rosbag or equivalent logs for failed and successful grasps',
-        ],
-      },
-      {
-        heading: 'What to log',
-        body: [
-          'Teams should log raw tactile data when possible, not only classifications. A slip label is useful, but raw data helps explain false positives and compare controller timing.',
-          'A useful log also includes joint state, command outputs, calibration context, and object/task metadata.',
-        ],
-      },
-      {
-        heading: 'Why software integration matters',
-        body: [
-          'Most robot skin pages talk about materials. A ROS 2 tactile sensing page proves that RoboSkin.ai understands the software layer that turns skin into robot-ready evidence.',
-          'That layer makes timing, replay, calibration metadata, and controller-facing interfaces explicit enough to reproduce and evaluate.',
-        ],
-      },
-      {
-        heading: 'Open-source reference implementation',
-        body: [
-          'The RoboSkin ROS 2 Tactile Starter Kit publishes an experimental, hardware-neutral TactileArray message, a deterministic synthetic publisher, a contract monitor, rosbag2 QoS configuration, and calibration metadata examples.',
-          'It is a reference implementation rather than an official ROS standard, sensor driver, benchmark, or compatibility claim. Real deployments must validate timing, geometry, calibration, QoS, and controller behavior on their own hardware.',
-        ],
-        bullets: [
-          'Explicit channel-major array layout and validity mask',
-          'Measurement timestamp, frame ID, sensor ID, channels, and units',
-          'Synthetic publisher and contract monitor for integration checks',
-          'Versioned Apache-2.0 code with conservative evidence boundaries',
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: 'Does ROS 2 provide a standard robot skin message?',
-        answer:
-          'Not as a universal robot skin standard. Teams still need to define message schemas for their tactile output and document how each signal maps to the robot.',
-      },
-      {
-        question: 'Why is rosbag replay important for tactile sensing?',
-        answer:
-          'Tactile events happen quickly. Replay lets engineers inspect contact signals, joint states, controller actions, and failures after the run.',
-      },
-      {
-        question: 'Should tactile classifiers publish confidence values?',
-        answer:
-          'Yes. Confidence and raw-data traceability help engineers debug false events and decide how a controller should react.',
-      },
-    ],
-    relatedLinks: [
-      { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Why touch data matters for Physical AI workflows.' },
-      { label: 'Tactile AI', href: '/tactile-ai', description: 'The stack that uses robot touch signals.' },
-      { label: 'ROS 2 pipeline brief', href: '/research/ros2-kilted-tactile-pipeline-2026', description: 'Source-backed ROS 2 tactile pipeline article.' },
-      { label: 'RoboSkin ROS 2 starter kit', href: 'https://github.com/roboskin-ai/ros2-tactile-starter-kit', description: 'Experimental message, publisher, monitor, rosbag2 QoS, and calibration metadata examples.' },
-      { label: 'Technology context', href: '/technology', description: 'Existing site-level technology overview.' },
-    ],
-    sources: [
-      {
-        label: 'ROS 2 Lyrical tutorials',
-        href: 'https://docs.ros.org/en/lyrical/Tutorials.html',
-      },
-      {
-        label: 'ROS 2 Lyrical rosbag2 QoS override guide',
-        href: 'https://docs.ros.org/en/ros2_documentation/lyrical/How-To-Guides/Overriding-QoS-Policies-For-Recording-And-Playback.html',
-      },
-      {
-        label: 'ros2_control documentation',
-        href: 'https://control.ros.org/',
-      },
-    ],
-    paperBriefIds: ['ros2-kilted-tactile-pipeline-2026'],
   },
   {
     path: '/guides/robot-skin-vs-e-skin',
@@ -2206,7 +2152,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-09-11',
+    updated: '2026-09-16',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2296,6 +2242,27 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Frame count does not establish diversity, independent evaluation, target-robot transfer, or production readiness. Ten thousand adjacent frames from a small set of presses can contain less independent evidence than a smaller collection spread across objects, sensors, and trajectories.',
           'Use this directory to locate sources, then document the exact dataset version and split used in your experiment. Do not compare headline metrics across resources unless the sensor inputs, tasks, models, and evaluation protocols are genuinely aligned.',
         ],
+      },
+      {
+        "heading": "Inspect a dataset before adapting it for training",
+        "body": [
+          "After checking access and license at the original source, inspect episode boundaries, feature meanings, timestamp conventions and missing observations. Container names do not guarantee compatible actions, camera timing or tactile inputs.",
+          "The LeRobot tutorial explains v3 storage and supplies a small numeric checker with valid and broken synthetic fixtures. It complements the tactile CSV exercise; neither is an original research dataset or a complete training-readiness certificate."
+        ],
+        "links": [
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          },
+          {
+            "label": "Plan acquisition and export with teleoperation",
+            "href": "/robot-teleoperation"
+          }
+        ]
       },
     ],
     faqs: [
@@ -2716,7 +2683,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-09-12',
+    updated: '2026-09-16',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2774,6 +2741,27 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Closed-loop task improvement plus false-positive and failure-recovery behavior',
         ],
       },
+      {
+        "heading": "From sensor selection to calibrated data",
+        "body": [
+          "Tactile sensing in robotics requires more than choosing a sensing principle. Establish whether the output is an image, arbitrary-unit signal, reconstructed geometry or calibrated force; record settings, reference measurements and validity semantics before comparing results.",
+          "For original DIGIT and GelSight Mini, the calibration guide separates baselines, depth reconstruction and force estimation. The Python exercise lets you practice quality checks without purchasing either device."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          },
+          {
+            "label": "Connect the measurements to tactile manipulation",
+            "href": "/tactile-manipulation"
+          }
+        ]
+      },
     ],
     faqs: [
       { question: 'What tactile sensors are used in robot hands?', answer: 'Common choices include vision-based tactile fingertips, magnetic skins, distributed force arrays, and multimodal biomimetic fingertips. The right choice depends on hand geometry, contact task, control rate, and maintenance constraints.' },
@@ -2810,7 +2798,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: '2026-08-22',
+    updated: '2026-09-16',
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2883,6 +2871,31 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Tactile manipulation still faces hardware diversity, limited shared datasets, inconsistent evaluation, calibration drift, contact-sequence leakage, and weak transfer across sensors and embodiments. Whole-hand and humanoid systems also add bandwidth, wiring, coverage, and safety constraints.',
           'The practical research direction is not touch instead of vision. It is aligned vision, language, proprioception, and touch with an evaluation that shows which modality changes which physical outcome.',
         ],
+      },
+      {
+        "heading": "Prepare tactile feedback before a manipulation trial",
+        "body": [
+          "For tactile sensing in robotics, a plausible heatmap is only an observation. Define the calibrated quantity, clock alignment, contact validity and task outcome before evaluating a grasp or insertion. Keep a sensor acquisition failure separate from a policy action failure.",
+          "Use reference measurements to assess the sensor, preserve missing data in processing, and record observation/action episodes for later inspection. The synthetic tutorials teach the data workflow; real manipulation outcomes still need a robot, reference protocol and repeated trials."
+        ],
+        "links": [
+          {
+            "label": "Plan DIGIT and GelSight Mini calibration",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Run tactile CSV quality checks and plots in Python",
+            "href": "/guides/python-tactile-data-processing"
+          },
+          {
+            "label": "Plan robot demonstration collection",
+            "href": "/robot-teleoperation"
+          },
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          }
+        ]
       },
     ],
     faqs: [
@@ -3225,7 +3238,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: '2026-09-15',
+    updated: '2026-09-16',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3293,6 +3306,53 @@ export const seoTopicPages: SeoTopicPage[] = [
           'The August 22 review recorded ReTouch as paper-only, with ViTaR and τ announcing code to come. A September 15 check of the linked repositories still found UniTacVLA to be a project-page placeholder and VLA-Touch to provide partial code and resource links while marking its modified RDT inference implementation for future release. A paper, repository shell, dataset, controller checkpoint, and complete reproducible policy are different resources; project links alone do not establish successful reproduction.',
           'Use this comparison for action interfaces and tactile feedback. For broader pretraining and transfer questions, continue to the robot foundation-model directory. Dataset, benchmark, and manipulation guides provide the task and evaluation context needed to judge a model for your own robot.',
         ],
+      },
+      {
+        "heading": "Before using vision language action models, check the data contract",
+        "body": [
+          "Vision language action models connect visual observations and instructions to action outputs, but their runnable recipes accept specific data interfaces. The two public recipes below illustrate why a dataset directory or shared container format is not enough. These README-level requirements were checked on September 16, 2026; training and inference were not run for this review.",
+          "The model index below retains its model-specific source-review dates, input modalities, artifact availability, training-data summaries and original sources. The broader robot foundation-model page covers the wider model taxonomy; this page focuses on action interfaces and the evidence for live tactile input. Unconfirmed means the reviewed source does not establish a capability, not that the capability is impossible."
+        ],
+        "table": {
+          "headers": [
+            "Recipe and primary source",
+            "Input / code",
+            "Data requirement",
+            "Tactile support in this recipe"
+          ],
+          "rows": [
+            [
+              "OpenVLA base recipe [S1]",
+              "README inference example uses an image and language prompt; public repository contains fine-tuning code.",
+              "Documented training loader uses RLDS mixtures; custom data needs conversion/registration and matching observation/action transforms. A LeRobot folder is not a direct replacement.",
+              "Unconfirmed in the reviewed base README. Do not infer support from the ability to store an additional column."
+            ],
+            [
+              "OpenPI π0 / π0.5 recipes [S2]",
+              "Public code and checkpoints; image, prompt and robot state processing depend on the selected policy configuration.",
+              "The custom-data guide uses LeRobot conversion, a data configuration, input/output transforms and state/action normalization. Match the pinned dependency and selected embodiment; this does not establish support for every v3 export.",
+              "Unconfirmed in these reviewed recipes. A tactile-aware adapter and trained pathway would require separate evidence."
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "[S1] OpenVLA official README: inference and RLDS fine-tuning",
+            "href": "https://github.com/openvla/openvla#readme"
+          },
+          {
+            "label": "[S2] OpenPI official README: fine-tuning on your own data",
+            "href": "https://github.com/Physical-Intelligence/openpi#readme"
+          },
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Robot foundation models: broader model roles",
+            "href": "/robot-foundation-models"
+          }
+        ]
       },
     ],
     faqs: [
@@ -4115,7 +4175,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-09-16',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4195,6 +4255,87 @@ export const seoTopicPages: SeoTopicPage[] = [
           ],
         },
       },
+      {
+        "heading": "Robot Data Collection: from a demonstration to an export",
+        "body": [
+          "Define an episode before recording: task instruction, start/reset condition, expected outcome and failure categories. Record observations and operator commands separately so an action target cannot be mistaken for a measured robot state. Preserve raw streams and a capture manifest alongside any training export.",
+          "Time synchronization belongs in acquisition. Save sensor capture time, host receive time and clock domains; estimate offsets using a documented synchronization method and inspect residual alignment. A resampled episode timestamp is a training index, not a measurement of end-to-end latency.",
+          "Before exporting, inspect dropped frames, duplicate or reversed timestamps, changed array dimensions, stale observations, saturation and invalid tactile samples. Label failed trajectories, interventions and recovery segments with reasons. Retain their provenance whether the training recipe includes or excludes them; do not silently call every recorded episode a success.",
+          "For training export, record state/action names, units, coordinate frames, episode boundaries, task text and outcome labels. Split by the intended generalization claim before computing training statistics. The linked LeRobot exercise checks a numeric subset with synthetic data; it does not validate videos, policy compatibility or the quality of a physical demonstration."
+        ],
+        "links": [
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Compare robot and tactile datasets",
+            "href": "/datasets"
+          },
+          {
+            "label": "Build the programming and data foundations",
+            "href": "/robotics-programming"
+          }
+        ]
+      },
+      {
+        "heading": "UMI and GELLO collect different kinds of demonstrations",
+        "body": [
+          "Original UMI and GELLO are complementary collection approaches. UMI moves demonstration capture into a handheld gripper; GELLO maps a human-operated joint controller to a robot arm. The comparison below is scoped to the original project and paper, checked on September 16, 2026. It does not generalize later tactile variants to the originals."
+        ],
+        "table": {
+          "headers": [
+            "Aspect",
+            "Original UMI",
+            "Original GELLO"
+          ],
+          "rows": [
+            [
+              "Collection method",
+              "Human directly manipulates handheld grippers; the robot is not required at every collection site.",
+              "Operator moves a smaller controller with a kinematic structure matched to the target robot; joint measurements drive teleoperation."
+            ],
+            [
+              "Hardware requirements",
+              "Handheld parallel-jaw gripper and mounted GoPro; the processing pipeline reconstructs trajectories. Deployment later needs a suitable robot and mapping.",
+              "3D-printed controller with encoder-equipped servos, a communication interface and a supported robot for physical demonstrations; cameras are separate observation hardware."
+            ],
+            [
+              "Data produced",
+              "Visual observations, reconstructed end-effector trajectories and gripper width used by the collection/policy pipeline. This is not automatically a LeRobot export.",
+              "Controller joint targets and recorded robot observations; camera streams depend on the capture setup. Define action/state mappings before conversion."
+            ],
+            [
+              "Force / tactile information",
+              "The original UMI system is not a default tactile-sensor system. Video and gripper width do not supply calibrated contact force.",
+              "Encoder position and mechanical resistance at the controller are not a calibrated tactile stream. Additional sensing and alignment are required for force/touch labels."
+            ],
+            [
+              "Main quality question",
+              "Is pose reconstruction reliable, is timing aligned and is the trajectory feasible for the deployment embodiment?",
+              "Are joint mapping, offsets, robot observations and camera/command timing correct for the matched embodiment?"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "UMI original project: hardware and data collection",
+            "href": "https://umi-gripper.github.io/"
+          },
+          {
+            "label": "GELLO original paper and hardware scope",
+            "href": "https://arxiv.org/abs/2309.13037"
+          },
+          {
+            "label": "GELLO official software and acquisition setup",
+            "href": "https://github.com/wuphilipp/gello_software"
+          },
+          {
+            "label": "Inspect LeRobot episodes, timestamps and validation",
+            "href": "/guides/lerobot-dataset-format"
+          }
+        ]
+      },
     ],
     faqs: [
       { question: 'What is robot teleoperation?', answer: 'Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master.' },
@@ -4216,6 +4357,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'FreeTacMan research brief', href: '/research/freetacman-robot-free-visuotactile-data-collection-2025', description: 'Review wearable robot-free visuo-tactile collection evidence.' },
     ],
     sources: [
+      {"label": "UMI original project — checked 2026-09-16", "href": "https://umi-gripper.github.io/"},
+      {"label": "GELLO original paper — checked 2026-09-16", "href": "https://arxiv.org/abs/2309.13037"},
+
       { label: 'The Missing Touch spatial tactile feedback preprint', href: 'https://arxiv.org/abs/2608.19372' },
       { label: 'PRISM industrial skill dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
       { label: 'Hugging Face Grabette data-collection article', href: 'https://huggingface.co/blog/grabette' },

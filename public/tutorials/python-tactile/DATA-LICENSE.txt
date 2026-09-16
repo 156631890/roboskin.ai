@@ -1,0 +1,10 @@
+SPDX-License-Identifier: CC0-1.0
+
+RoboSkin.ai dedicates synthetic_tactile.csv and the original generated files
+in results/ to the public domain under CC0 1.0 Universal.
+These are independent synthetic teaching data, not a physical experiment,
+sensor recording, physics simulation or benchmark dataset.
+
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+No sensor accuracy, calibration, performance or compatibility is implied.
+The Python code and documentation use Apache-2.0; see LICENSE.txt.

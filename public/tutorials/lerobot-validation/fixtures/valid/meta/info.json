@@ -1,0 +1,73 @@
+{
+  "codebase_version": "v3.0",
+  "fps": 10,
+  "total_frames": 8,
+  "total_episodes": 2,
+  "features": {
+    "index": {
+      "dtype": "int64",
+      "shape": [
+        1
+      ]
+    },
+    "episode_index": {
+      "dtype": "int64",
+      "shape": [
+        1
+      ]
+    },
+    "frame_index": {
+      "dtype": "int64",
+      "shape": [
+        1
+      ]
+    },
+    "task_index": {
+      "dtype": "int64",
+      "shape": [
+        1
+      ]
+    },
+    "timestamp": {
+      "dtype": "float32",
+      "shape": [
+        1
+      ]
+    },
+    "observation.state": {
+      "dtype": "float32",
+      "shape": [
+        3
+      ],
+      "names": [
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "action": {
+      "dtype": "float32",
+      "shape": [
+        2
+      ],
+      "names": [
+        "dx",
+        "dy"
+      ]
+    },
+    "observation.tactile": {
+      "dtype": "float32",
+      "shape": [
+        4
+      ]
+    },
+    "observation.tactile_valid": {
+      "dtype": "bool",
+      "shape": [
+        4
+      ]
+    }
+  },
+  "data_path": "data/chunk-{chunk_index:03d}/file-{file_index:03d}.parquet",
+  "video_path": null
+}
