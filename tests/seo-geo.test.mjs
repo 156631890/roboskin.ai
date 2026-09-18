@@ -198,14 +198,14 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(llms, /\[Humanoid robot skin and contact-aware robotics\]\(https:\/\/roboskin\.ai\/applications\)/);
 });
 
-test('RoboSkin uses the owner-approved Gmail address for direct public inquiries', async () => {
+test('RoboSkin uses the verified domain mailbox for direct public inquiries', async () => {
   const site = await read('src/content/site.ts');
 
-  assert.match(site, /primaryEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /ownerEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /inquiryEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /legalEmail: 'messigoat147@gmail\.com'/);
-  assert.match(site, /privacyEmail: 'messigoat147@gmail\.com'/);
+  assert.match(site, /primaryEmail: 'hello@roboskin\.ai'/);
+  assert.match(site, /ownerEmail: 'hello@roboskin\.ai'/);
+  assert.match(site, /inquiryEmail: 'hello@roboskin\.ai'/);
+  assert.match(site, /legalEmail: 'hello@roboskin\.ai'/);
+  assert.match(site, /privacyEmail: 'hello@roboskin\.ai'/);
 });
 
 test('static SEO routes own explicit lastmod dates shared by sitemap and WebPage JSON-LD', async () => {

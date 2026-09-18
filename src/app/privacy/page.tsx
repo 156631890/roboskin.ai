@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
             <div>
               <h2 className="text-2xl font-semibold text-[#111318]">Sharing</h2>
               <p className="mt-3 text-[#4f5560]">
-                We do not sell personal information. Configured contact delivery may use FormSubmit and Gmail; the online form is unavailable until a delivery route is configured. When Newsletter signup is available, the interface names the external email-list provider before an address is submitted. That provider processes the signup and any later email-list controls under its own privacy terms. RoboSkin.ai does not treat a form handoff as proof of subscription.
+                We do not sell personal information. Configured contact delivery may use FormSubmit and Zoho Mail; the online form is unavailable until a delivery route is configured. When Newsletter signup is available, the interface names the external email-list provider before an address is submitted. That provider processes the signup and any later email-list controls under its own privacy terms. RoboSkin.ai does not treat a form handoff as proof of subscription.
               </p>
             </div>
             <div>
