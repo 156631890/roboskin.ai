@@ -2,6 +2,27 @@
 
 Use this log after each production deployment. It separates verified production facts from manual webmaster actions that require account access.
 
+## Current verified submission — September 19, 2026
+
+This section supersedes the old pending Bing queue below for the full sitemap and the URLs in this batch. Older rows remain historical evidence, not current status.
+
+Content release `3e71cba7c568af68119fbdf5a03588b1c6b33cb2` passed the apex production verifier: 126 sitemap URLs, 130 protected entries including five redirects, five noindex routes, 193 graph entities and 50 RSS items. GitHub quality run [35372635812](https://github.com/156631890/roboskin.ai/actions/runs/35372635812) succeeded. Vercel production deployment `dpl_95Z8qdeamc8sZXrcxFK7c9aCGnnC` was Ready and the apex deployment identity matched that commit.
+
+| Platform | Action performed | Actual result | Boundary |
+| --- | --- | --- | --- |
+| Bing Webmaster Tools | Added `https://roboskin.ai/`, served the official `BingSiteAuth.xml`, verified ownership, submitted `https://roboskin.ai/sitemap.xml` | Initially Submitted / Processing; subsequent live recheck: Success, 126 discovered URLs, one known sitemap, zero sitemap errors/warnings | Not an indexing confirmation. Bing's UI displayed September 18; local observation date was September 19 Asia/Shanghai. |
+| Google Search Console | Resubmitted apex sitemap in `sc-domain:roboskin.ai` | Success confirmation; submitted/read September 19; 126 discovered pages | Discovered pages are not indexed pages. Before this submission, the domain overview showed 114 indexed / 39 excluded. |
+| IndexNow global endpoint | Submitted eight changed canonical URLs after fresh exact-commit production verification | HTTP 200; command reported `IndexNow accepted 8 URLs with status 200` | Accepted for participating-engine notification, not proof of engine-by-engine indexing. |
+| Yahoo Search | Followed the official submission route through Bing | Bing submission above is the applicable route | No separate Yahoo receipt is claimed. |
+| DuckDuckGo | Checked official result-source documentation | Traditional links/images largely sourced from Bing | No separate submission or inclusion confirmation is claimed. |
+| Yandex independent dashboard | Opened webmaster add-site flow | Account-login page; independent dashboard connection incomplete | IndexNow notification covers participating Yandex endpoint; separate webmaster reporting remains pending login. |
+
+IndexNow paths: `/`, `/research`, `/research/slipsense-multimodal-slip-detection-2026`, `/research/touch2trace-tactile-cable-tracing-2026`, `/research/visible-touch-contact-overlays-visuomotor-policies-2026`, `/tactile-ai`, `/datasets`, `/guides/tactile-feedback-for-physical-ai`.
+
+Evidence: `.artifacts/search-expansion/indexnow-receipt.json`, `indexnow-receipt.log`, `bing-sitemap-receipt.txt/.png`, `bing-sitemap-recheck.txt/.png`, `google-sitemap-receipt.txt/.png`, and `.artifacts/production-verification.json`. Source/measurement context is in `growth-batches/2026-09-19-tactile-method-reviews.md`. Production-verification artifacts are local and intentionally not committed.
+
+Official guidance: [IndexNow participating endpoints and sharing](https://www.indexnow.org/faq), [Yahoo site submission](https://help.yahoo.com/kb/search-for-desktop/SLN2217.html), [DuckDuckGo result sources](https://duckduckgo.com/duckduckgo-help-pages/results/sources/). Currently listed IndexNow participants include Bing, Yandex, Naver, Seznam, Yep and Amazon. A global-endpoint receipt does not establish individual processing status for each participant.
+
 ## Production deployment verification
 
 Verified on 2026-08-22 after deploying commit `522a182d5ba924c785f3bad41957aa310f8e59b3`. The apex production verifier passed at `2026-08-22T13:29:27.879Z` with 114 protected URLs, four noindex URLs, an exact 110-URL sitemap, 30 research records, 191 knowledge-graph entities, 69 organizations, and 24 robots. A live follow-up check reproduced sitemap SHA-256 `dd842129e560f8253e8c1cd46059b0de3764e57157fa31ae74629e4fef04c7d0` and confirmed the UniVTAC research URL and all high-interest robotics parent routes are present.

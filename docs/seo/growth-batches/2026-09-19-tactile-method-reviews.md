@@ -54,3 +54,7 @@ Official submission guidance checked on September 19:
 - Yandex's independent webmaster workflow opened an account-login page. No password/MFA was attempted. Its separate dashboard remains pending login; IndexNow can still notify participating engines.
 
 Post-release receipts belong in the current indexing submission log and local evidence directory. Submission acceptance, indexing, search visibility and conversion are separate outcomes.
+
+## Post-release result
+
+Content deployed as `3e71cba7c568af68119fbdf5a03588b1c6b33cb2`; production verification and GitHub quality gate passed. Bing ownership verification completed and its sitemap advanced to Success with 126 discovered URLs. Google resubmission succeeded with 126 discovered pages. IndexNow accepted the eight changed URLs with HTTP 200. See `../indexing-submission-log.md` for precise scope and receipt locations, and `../traffic-dashboard-guide.md` for owner-facing dashboard links.
