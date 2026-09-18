@@ -479,7 +479,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-09-18',
+    updated: '2026-09-19',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -491,6 +491,50 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The phrase is broader than a single tactile sensor. It describes the full stack from contact surface to model, controller, benchmark, and feedback loop.',
     ],
     sections: [
+{
+  "heading": "Choose the integration point before comparing models",
+  "body": [
+    "Three recent studies make different engineering decisions: detect an event for a separate controller, learn joint actions directly from tactile history, or render contact into a visual policy. Choose the decision your robot needs to make before comparing reported accuracy or success. The linked reviews use the original v1 papers and retain the training, timing and hardware limits."
+  ],
+  "table": {
+    "headers": [
+      "Decision to improve",
+      "Integration route",
+      "Evidence needed before deployment"
+    ],
+    "rows": [
+      [
+        "Detect loss of grip",
+        "SlipSense combines pressure and vibration, then triggers regrasp.",
+        "Measure the delay distribution, false alarms and recovery failures separately."
+      ],
+      [
+        "Continue contact-rich motion",
+        "Touch2Trace predicts joint commands from tactile features and joint history.",
+        "Match control rate, history duration, pretrained encoder and distance-based success thresholds."
+      ],
+      [
+        "Use touch in an image-conditioned policy",
+        "Visible Touch projects contact markers onto camera images.",
+        "Validate geometry, signal normalization, policy training and complete-task success."
+      ]
+    ]
+  },
+  "links": [
+    {
+      "label": "SlipSense: detector labels, latency and recovery",
+      "href": "/research/slipsense-multimodal-slip-detection-2026"
+    },
+    {
+      "label": "Touch2Trace: policy timing and tactile history",
+      "href": "/research/touch2trace-tactile-cable-tracing-2026"
+    },
+    {
+      "label": "Visible Touch: contact projection and task failures",
+      "href": "/research/visible-touch-contact-overlays-visuomotor-policies-2026"
+    }
+  ]
+},
       {
         heading: 'Start a tactile AI experiment with a measurable question',
         body: [
@@ -1927,7 +1971,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'From Tactile Sensing to Robot Action: What the Evidence Shows',
     kicker: 'Tactile feedback · evidence review',
     intent: 'Existing tactile feedback guide expanded to explain when perception improvements change robot actions and how to select evidence and data; no duplicate research URL.',
-    updated: '2026-09-18',
+    updated: '2026-09-19',
     priority: 0.82,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1935,6 +1979,26 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['tactile feedback for Physical AI', 'tactile sensing to robot action', 'slip detection latency', 'tactile policy evaluation', 'robot manipulation success', 'tactile datasets'],
     quickAnswer: ['Better tactile perception can improve robot actions, but a higher classification score alone does not establish better manipulation. The signal must arrive in time, enter a useful representation, and drive a controller trained for the task.', 'The strongest evidence here comes from matched input ablations and explicitly defined physical outcomes. A simulation benchmark, a predicted touch map and a real-robot success rate answer different questions.', 'All experimental results below are reported by the original authors. RoboSkin checked papers and resource pages on September 18, 2026; we did not collect these datasets, run these experiments or independently reproduce the results.'],
     sections: [
+{
+  "heading": "Continue with the implementation evidence",
+  "body": [
+    "The paper-specific reviews expand the measurement and implementation details behind this comparison: independent slip labels and latency tails, the coupling between control rate and history, and the sensor-to-camera transformation used by contact overlays. Each retains the source version and current resource-access boundary."
+  ],
+  "links": [
+    {
+      "label": "SlipSense: detector labels, latency and recovery",
+      "href": "/research/slipsense-multimodal-slip-detection-2026"
+    },
+    {
+      "label": "Touch2Trace: policy timing and tactile history",
+      "href": "/research/touch2trace-tactile-cable-tracing-2026"
+    },
+    {
+      "label": "Visible Touch: contact projection and task failures",
+      "href": "/research/visible-touch-contact-overlays-visuomotor-policies-2026"
+    }
+  ]
+},
       {
         heading: 'Physical AI tactile feedback evaluation metrics: three different claims',
         body: ['Perception accuracy or Macro F1 measures agreement with labels under a particular split. It says little about whether a robot receives the right signal before losing contact. Slip latency measures time from a defined onset to detection; it still leaves communication, control computation and actuator response outside the outcome unless those stages are explicitly timed.', 'Task success asks whether the robot achieves a defined physical goal within a budget. It can improve because of touch, extra demonstrations, a different model, a recovery behavior or easier initial conditions. To attribute the improvement to tactile feedback, compare policies with matched training and evaluation, then inspect failures as well as average scores.', 'Evaluate latency, synchronization, drift, repeatability, and task outcome together. Follow the whole chain: contact → timestamped observation → useful feature → action command → actuator response → physical outcome. The studies below expose different weak points in that chain. Their percentages should not be ranked against one another.'],
@@ -2380,7 +2444,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-09-18',
+    updated: '2026-09-19',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2392,6 +2456,27 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
+{
+  "heading": "Does a paper describe data you can actually obtain?",
+  "body": [
+    "A result table can justify reading a method without establishing a usable download. SlipSense describes a labeled slip collection; Touch2Trace describes pretraining and cable demonstrations; Visible Touch describes real-robot demonstrations and magnetic hardware. The original papers and available official project links checked on September 19, 2026 did not establish verified downloads and reuse licenses for these collections. They remain method references rather than new downloadable dataset records.",
+    "When evaluating a release, distinguish the observation data from its task labels, action contract and pretrained weights. For slip, request independent onset labels and object-level splits. For cable policies, request ordered observations, joint commands and excluded-start rules. For overlays, request raw readings, sensor geometry, camera transforms and normalization statistics. Unknown fields remain unknown until the released assets support them."
+  ],
+  "links": [
+    {
+      "label": "SlipSense: detector labels, latency and recovery",
+      "href": "/research/slipsense-multimodal-slip-detection-2026"
+    },
+    {
+      "label": "Touch2Trace: policy timing and tactile history",
+      "href": "/research/touch2trace-tactile-cable-tracing-2026"
+    },
+    {
+      "label": "Visible Touch: contact projection and task failures",
+      "href": "/research/visible-touch-contact-overlays-visuomotor-policies-2026"
+    }
+  ]
+},
       {
         heading: 'How to read this directory',
         body: [

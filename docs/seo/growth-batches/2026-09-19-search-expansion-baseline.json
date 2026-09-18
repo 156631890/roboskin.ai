@@ -1,0 +1,42 @@
+{
+  "checkedDate": "2026-09-19",
+  "property": "sc-domain:roboskin.ai",
+  "source": "Live Google Search Console UI, Web search, all countries/devices, 28 days",
+  "startDate": "2026-08-19",
+  "endDate": "2026-09-15",
+  "clicks": 193,
+  "impressionsDisplay": "3.16万 (rounded UI value; exact export not obtained)",
+  "pageRows": [
+    {
+      "path": "/tactile-ai",
+      "clicks": 14,
+      "impressions": 1614
+    },
+    {
+      "path": "/datasets",
+      "clicks": 5,
+      "impressions": 2641
+    },
+    {
+      "path": "/robot-vla-models",
+      "clicks": 8,
+      "impressions": 3058
+    },
+    {
+      "path": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+      "clicks": 6,
+      "impressions": 688
+    },
+    {
+      "path": "/research/dream-tac-tactile-world-action-model-2026",
+      "clicks": 6,
+      "impressions": 674
+    }
+  ],
+  "indexedPagesOverview": 114,
+  "notIndexedPagesOverview": 39,
+  "indexingScope": "Domain overview, not sitemap-only. Latest indexing report date not retrieved.",
+  "exports": null,
+  "providerConfirmedSubscriptions": null,
+  "note": "Rolling interval overlaps historical baseline; no causal before/after conclusion. New method URLs have no prelaunch observations; not zero conversions."
+}

@@ -24,6 +24,253 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'slipsense-multimodal-slip-detection-2026',
+    title: 'SlipSense: from pressure and vibration to a timely regrasp',
+    seoTitle: 'SlipSense: Slip Detection, Latency & Regrasp Evidence',
+    seoDescription: 'How SlipSense labels slip, combines pressure and vibration, measures detection delay, and exposes the gap between detecting slip and preventing a dropped object.',
+    excerpt: 'Pressure and vibration improve slip recognition together. Independent motion labels and five failed recoveries explain why detector quality and controller quality need separate tests.',
+    content: `# SlipSense: from pressure and vibration to a timely regrasp
+
+SlipSense studies a practical question: can a robot detect slipping early enough to intervene? The paper reports strong classification and fast detection, then tests a regrasp controller. Its most instructive result is the separation between those stages: all 100 induced slips were detected, but five objects were still lost. A correct alarm does not determine a successful recovery. [SlipSense v1, Section 5.3](https://arxiv.org/html/2609.15910v1#S5).
+
+This review focuses on the detector's measurement contract and the controller's remaining work. For comparisons with cable policies and visual contact overlays, see [From Tactile Sensing to Robot Action](/guides/tactile-feedback-for-physical-ai).
+
+## What TacV5 measures
+
+TacV5 combines a 32 × 32 piezoresistive pressure layout with 942 active taxels at 240 Hz and a three-axis MEMS accelerometer at 8 kHz. The synchronized output uses 240 Hz frames. Pressure describes the contact distribution; acceleration captures vibration associated with frictional motion. The pressure array measures normal pressure, not direct shear force. [Hardware and acquisition](https://arxiv.org/html/2609.15910v1#S3).
+
+The detector encodes pressure maps and acceleration spectrograms, fuses their features with cross-attention, and uses temporal context to distinguish no contact, contact without slip, and slip. These signals are complementary: pressure can describe sustained loading while acceleration captures faster changes. Robot motion can also excite acceleration, which makes negative examples and independent slip labels essential.
+
+## Labels should come from outside the detector
+
+The authors induce linear slip with a Mark-10 F105-EM test stand. Its crosshead displacement supplies the labeling reference, rather than thresholding the same pressure or vibration signal the model must classify. Slip begins when cumulative displacement exceeds 0.07 mm, above the encoder's 0.02 mm resolution. The paper also collects control cases without induced slip. [Collection protocol](https://arxiv.org/html/2609.15910v1#S3).
+
+The collection exceeds 1.4 million synchronized frames across 37 objects: 28 training objects and nine held out for evaluation, with programmed speeds from 2 to 18 mm/s. Frames are not independent trials. The controlled displacement reference supports reproducible labels for this collection geometry; it does not automatically validate slip onset under every moving-robot condition.
+
+## Fusion improves more than the headline F1
+
+The following is the held-out-object UMI OOD comparison from [v1 Table 1](https://arxiv.org/html/2609.15910v1#S5.T1). Latency is the mean of per-seed median detection delay over three seeds, in 240 Hz frames. It is not the maximum delay.
+
+| Detector input | Macro F1 | False-positive rate | Detection latency, frames |
+| --- | --- | --- | --- |
+| Pressure only | 81.91% | 8.43% | 36.17 |
+| Acceleration only | 81.33% | 3.24% | 3.00 |
+| Pressure + acceleration | 95.75% | 1.57% | 1.50 |
+
+The fused condition improves classification and false alarms while retaining a short median delay. The often-quoted approximately 96.7% F1 corresponds to the in-distribution result, 96.77%; the held-out-object figure is 95.75%. Keeping those columns separate makes the transfer claim assessable.
+
+## A latency distribution is not a control guarantee
+
+The paper reports that 76% of slip events are detected within 20.8 ms of sensing delay, plus approximately 2.3 ms of mean inference time, yielding 23.1 ms. Inference was measured on an NVIDIA RTX A4500 workstation. The remaining events take longer, and an embedded processor may have a different inference budget. [Latency analysis and implementation](https://arxiv.org/html/2609.15910v1#S5).
+
+The slowest programmed slips show a longer tail: at 2 mm/s, Appendix Table 6 reports a three-frame median, a 14.9-frame mean, and a 106-frame maximum for 36 events. A single percentile-style statement hides that variation. The model's 250 ms history describes past observations available to inference; it should not be added as a fresh 250 ms wait on every steady-state decision. [Delay by slip speed](https://arxiv.org/html/2609.15910v1#A7.T6).
+
+For integration, log physical slip onset, model decision, command dispatch, force response, and final object outcome separately. Communication, actuation and contact mechanics remain after a detector produces its answer.
+
+## Why five correctly detected slips still failed
+
+Four operators performed 100 controlled pull trials on ten unseen objects using the Tesollo hand. Detection succeeded in 100/100 trials; the controller prevented loss in 95/100. Detection-to-peak-grasp-force time was approximately 50 ms. These are author-reported controlled disturbances, not 100 autonomous manipulation tasks. [Closed-loop experiment](https://arxiv.org/html/2609.15910v1#S5).
+
+The five failures involved a cable near the sensor edge: the inward recovery motion pushed it out despite correct detection. Increasing grasp force cannot fix every geometric loss of contact. A recovery policy may need contact-location awareness or a different motion, an engineering implication rather than a result evaluated by this paper.
+
+Cross-platform tests reuse TacV5 units on UMI and Tesollo hardware. The three-finger Tesollo condition reports 87.24% F1, below the two-finger condition's 94.39%. This is transfer across sensor units and arrangements of the same sensor design, not evidence of transfer to arbitrary optical or magnetic sensors. Quantitative latency during active robot manipulation remains unvalidated. [Transfer Table 2 and limitations](https://arxiv.org/html/2609.15910v1#S5.T2).
+
+## Before attempting a reproduction
+
+- Preserve the independent displacement reference and object-level splits; do not create a test set by randomly mixing adjacent frames.
+- Recheck no-slip robot-motion negatives, sensor synchronization and false alarms after mounting.
+- Benchmark the full latency distribution on the intended computer, then measure command-to-force response separately.
+- Score object retention and failure geometry in addition to slip classification.
+
+The [tactile AI system guide](/tactile-ai) places these steps in the sensing-to-action chain. The [dataset directory](/datasets) distinguishes verified file access from paper-described collections. No official SlipSense project, code or dataset download was identified in the arXiv record and paper checked on September 19, 2026. Their release status and reuse licenses remain unverified; the paper's collection is not listed as a downloadable dataset here.
+
+This review uses the September 14, 2026 v1. The arXiv comments report acceptance to CoRL 2026; conference proceedings were not independently verified. All experiments and measurements above belong to the authors. RoboSkin has not independently reproduced them.
+
+## Sources
+
+- [SlipSense arXiv record, authors and submission history](https://arxiv.org/abs/2609.15910)
+- [SlipSense v1: full method, experiments and appendices](https://arxiv.org/html/2609.15910v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-19',
+    updated: '2026-09-19',
+    readTime: '7 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'SlipSense: Multimodal Tactile Learning for Low-Latency and Generalized Slip Detection',
+    sourceUrl: 'https://arxiv.org/abs/2609.15910',
+    citationUrls: ['https://arxiv.org/abs/2609.15910', 'https://arxiv.org/html/2609.15910v1'],
+    technicalFocus: ['slip detection', 'pressure and vibration', 'detection latency', 'regrasp control'],
+  },
+  {
+    id: 'touch2trace-tactile-cable-tracing-2026',
+    title: 'Touch2Trace: what makes a tactile cable-tracing policy work',
+    seoTitle: 'Touch2Trace: Cable Tracing, Control Rate & Tactile History',
+    seoDescription: 'Examine Touch2Trace’s cable-tracing policy, frozen tactile encoder, control-rate and history ablations, success thresholds, hardware limits and resource status.',
+    excerpt: 'A 60 Hz tactile policy traces farther than a joint-only baseline, but the useful lesson is how sensor detail, pretraining, temporal context and action timing interact.',
+    content: `# Touch2Trace: what makes a tactile cable-tracing policy work
+
+Touch2Trace learns to feed a cable through a dexterous hand with repeated pinch-and-curl motions. It offers unusually useful ablations for a practical design decision: which parts of the tactile pipeline must be preserved when the demonstration budget is small? Its best condition averages 20.1 cm of tracing, compared with 0.2 cm for the matched joint-state-only policy. The result is specific to the paper's hand, cable setup and training protocol. [v1 Table 1](https://arxiv.org/html/2609.15921v1#S5.T1).
+
+The broader [touch-to-action evidence guide](/guides/tactile-feedback-for-physical-ai) compares task success with perception metrics. This article examines Touch2Trace's observation and action contract, the ablation controls, and the limits of a reproduction.
+
+## The policy controls eight joints on a fixed hand
+
+The platform is a fixed Tesollo DG-5F hand without a robot arm. Eight of its 20 degrees of freedom are controlled. TacV5 pressure images from the thumb and index finger provide two 32 × 32 inputs. A frozen ViT-MAE encoder produces a 128-dimensional feature for each fingertip; the policy concatenates both with eight joint positions into a 264-dimensional observation. It predicts eight absolute joint-position commands. [System and method](https://arxiv.org/html/2609.15921v1#S3).
+
+The main TF-GMM policy uses a causal transformer and a Gaussian-mixture action head, receiving 15 frames of history at 60 Hz. The paper describes this as approximately 250 ms of context. There is no explicit cable-state estimator or visual input in this main experiment. That scope isolates the contribution of touch; it does not establish that vision is unnecessary for approaching, locating or routing arbitrary cables.
+
+## Ten minutes of task data is not all the training data
+
+The task policy learns from 12 demonstrations totaling 10.1 minutes, collected on one USB cable in a ring arrangement. The tactile encoder was already pretrained on approximately two million simulated grasp/contact samples across 72 objects and approximately 30,000 real contact frames across ten objects. A claim that the complete system learns from only ten minutes would omit that pretraining. [Encoder and demonstrations](https://arxiv.org/html/2609.15921v1#S3).
+
+Each evaluated condition uses three random seeds and ten rollouts per seed, for 30 trials. The protocol excludes aborted starts shorter than five seconds. Mean tracing distance, SR@10 and SR@20 answer different questions: SR@10 requires reaching at least 10 cm; SR@20 requires at least 20 cm. The headline 93% is SR@10, while SR@20 is 57% for the default Ethernet-straight condition. [Evaluation and Table 1](https://arxiv.org/html/2609.15921v1#S5.T1).
+
+## Freezing preserves useful features in this small-data setting
+
+The following matched TF-GMM results use the main task setup. [Table 3 and Appendix Table 5](https://arxiv.org/html/2609.15921v1#S5.T3).
+
+| Representation or training choice | Mean tracing distance | SR@10 | SR@20 |
+| --- | --- | --- | --- |
+| Joint positions only | 0.2 cm | 0% | 0% |
+| Compact, 16-dimensional tactile features + joints | 7.2 cm | 30% | 0% |
+| Dense tactile, frozen pretrained encoder + joints | 20.1 cm | 93% | 57% |
+| Dense tactile, fine-tuned pretrained encoder + joints | 4.7 cm | 0% | 0% |
+| Dense tactile, randomly initialized encoder + joints | 0.2 cm | 0% | 0% |
+
+The compact representation already improves distance over joint state alone. Learned spatial detail and pretraining provide additional value in these comparisons. Fine-tuning hurts in this limited-data regime, supporting freezing as a candidate starting point. It does not prove that fine-tuning is generally inferior with larger or more diverse demonstrations.
+
+## Control rate and history must be compared together
+
+A frame count is not a time duration. Keeping 15 frames while reducing control rate changes both the response interval and the amount of past context. [Sensitivity study and Table 9](https://arxiv.org/html/2609.15921v1#A7.T9).
+
+| Control rate | History | Approximate duration | Mean tracing distance |
+| --- | --- | --- | --- |
+| 60 Hz | 15 frames | 250 ms | 20.1 cm |
+| 30 Hz | 15 frames | 500 ms | 5.7 cm |
+| 15 Hz | 15 frames | 1,000 ms | 0.5 cm |
+| 30 Hz | Duration held near the default | About 250 ms | 0.2 cm |
+
+The fixed-duration test shows that the longer context partly helps the slower 30 Hz policy. It does not rescue performance to the default level. At 60 Hz, five frames of history yield 5.3 cm, while 20 frames yield 14.5 cm with substantial variation. More history is not automatically better. These experiments support measuring both action timing and physical context duration; 60 Hz and 250 ms are not industry-wide requirements.
+
+Spatial resolution has its own confound. The 8 × 8 and 16 × 16 ablations reach 6.2 cm and 11.2 cm, respectively, but reduced-resolution images are upsampled into the same frozen full-resolution encoder. The decline can reflect lost detail and a mismatch with pretraining. It is not a clean comparison against an encoder trained specifically for each resolution.
+
+The separate visual experiment runs at 20 Hz with a different dataset, representation and action head. Its vision-only and vision-plus-touch comparison is useful within that experiment; it should not be ranked directly against the main 60 Hz TF-GMM result. [Appendix Table 6](https://arxiv.org/html/2609.15921v1#A4.T6).
+
+## Generalization remains bounded by mechanics
+
+Training uses USB-0 in a ring. Tests include three additional cables and straight or ring arrangements on the same fixed hand. These are meaningful held-out cable conditions, but not new robot embodiments or general dexterous tasks. [Generalization Table 2](https://arxiv.org/html/2609.15921v1#S5.T2).
+
+Reported failures include lateral escape beyond the fingers' reachable workspace, increasing gravitational tension in a straight cable, and a gap between fingers that cannot recover a thin cable. Better tactile features cannot create a missing direction of finger motion. A reproduction should therefore log cable geometry, reachability and termination causes alongside policy outputs.
+
+- Specify sensor layout, normalization, encoder checkpoint and pretraining data separately from task demonstrations.
+- Preserve the action definition, controlled joints, command rate, frame count and history duration.
+- Report distance and both success thresholds; retain the aborted-start exclusion rule.
+- Test held-out cables with the same declared training budget before claiming transfer.
+
+See [tactile AI](/tactile-ai) for the system-level evaluation workflow and [tactile datasets](/datasets) for access and split checks. No verified official code or data download was found in the paper and arXiv record checked on September 19, 2026; associated licenses remain unverified. A described demonstration corpus is not a confirmed public release.
+
+This review uses the September 14, 2026 v1. Its arXiv comments report CoRL 2026 acceptance; proceedings were not independently checked. Results are author-reported, with no independent RoboSkin reproduction.
+
+## Sources
+
+- [Touch2Trace arXiv record and version history](https://arxiv.org/abs/2609.15921)
+- [Touch2Trace v1: policy, ablations and evaluation protocol](https://arxiv.org/html/2609.15921v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-19',
+    updated: '2026-09-19',
+    readTime: '8 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing',
+    sourceUrl: 'https://arxiv.org/abs/2609.15921',
+    citationUrls: ['https://arxiv.org/abs/2609.15921', 'https://arxiv.org/html/2609.15921v1'],
+    technicalFocus: ['tactile policy', 'cable tracing', 'temporal context', 'encoder pretraining'],
+  },
+  {
+    id: 'visible-touch-contact-overlays-visuomotor-policies-2026',
+    title: 'Visible Touch: how contact overlays reach a visual robot policy',
+    seoTitle: 'Visible Touch: Contact Overlays, Calibration & Robot Results',
+    seoDescription: 'Review Visible Touch’s sensor-to-camera projection, magnetic hardware, contact ablations, task-level success counts and unverified code-release status.',
+    excerpt: 'Rendering contact as image arrows reuses a visual policy’s input pathway. The hardware and ablations show why spatial alignment, signal normalization and training still matter.',
+    content: `# Visible Touch: how contact overlays reach a visual robot policy
+
+Visible Touch renders tactile measurements as colored markers and arrows on the RGB images a robot policy already consumes. It avoids adding a dedicated tactile encoder, while preserving where contact occurs relative to the scene. The important integration work moves into geometry, normalization and policy training. It is not a camera-only method. [Visible Touch v1, Section 3](https://arxiv.org/html/2609.14156v1#S3).
+
+This review explains that input pathway and the experiments that isolate its value. For the broader distinction between accurate sensing and successful action, see the [touch-to-action evidence guide](/guides/tactile-feedback-for-physical-ai).
+
+## From a taxel to an arrow in the camera image
+
+The method starts with each sensing element's nominal position and three-axis reading in the sensor frame. Forward kinematics and fixed mounting transforms place the sensor on the robot. Camera intrinsics and extrinsics project the arrow's tail and tip into the image. An external camera has an offline extrinsic calibration; the wrist camera's pose updates with the robot's joints. Arrows are blended into RGB with distinct finger colors. [Projection derivation, Appendix A](https://arxiv.org/html/2609.14156v1#A1).
+
+Simulation supplies contact-force vectors. Real hardware supplies magnetic-flux deflections, which are different physical quantities. The rendering pipeline uses normalized values and a visual scale rather than requiring force estimates in newtons. That removes one kind of calibration; it does not remove camera calibration, sensor mounting geometry or the need to train on the augmented images.
+
+| Pipeline stage | Required information | Integration check |
+| --- | --- | --- |
+| Read contact | Per-element three-axis signals and element locations | Preserve sensor identity, axis order and timestamps |
+| Normalize | Unloaded baseline and demonstration-derived channel scales | Reset the baseline as specified; retain the fixed training scales |
+| Transform | Sensor mount, robot joints and camera transforms | Confirm markers follow the physical fingers through motion |
+| Render | Projection, arrow scale, opacity and finger colors | Check the overlay after cropping or resizing the camera image |
+| Train and act | Demonstrations with the same input convention | Compare final task outcomes against matched input variants |
+
+These checks are an implementation reading guide, not a claim that RoboSkin built the system. The [tactile calibration guide](/guides/tactile-sensor-calibration) explains why baseline correction, geometric registration and calibrated force are separate operations.
+
+## Magnetic hardware and training data
+
+The real setup uses an xArm7, a parallel-jaw gripper, two RealSense D435 cameras and one 3 × 3 magnetic array per finger. Magnets embedded in silicone move relative to three-axis magnetometers. Raw magnetic flux streams at 50 Hz; demonstration and action timing uses 10 Hz. These rates describe different stages of the pipeline. [Hardware and real-world protocol](https://arxiv.org/html/2609.14156v1#A6).
+
+Before rendering, each channel has its unloaded offset subtracted. Its scale is the maximum absolute baseline-corrected value observed in the demonstration dataset. Scales remain fixed, while the unloaded baseline is recorded again at the start of each episode or evaluation rollout. The reported unit-to-unit variation is handled with demonstrations from the same sensor unit, not evidence of unrestricted plug-and-play sensor transfer.
+
+The authors collected 100 demonstrations for each of four tasks and retained 397 after their acceptance and idle-trimming workflow: 97 tube episodes and 100 for each other task. Acceptance of a recorded episode is a data-quality filter, not an evaluation success rate. Input variants are applied to the same recorded sensor streams, making the comparison more informative than recollecting separate demonstrations for every representation. [Table 14](https://arxiv.org/html/2609.14156v1#A6.T14).
+
+## Read the final stage of each real task
+
+The table below extracts final-stage outcomes from [v1 Table 15](https://arxiv.org/html/2609.14156v1#A6.T15), with 30 trials per task and condition. It keeps the tasks separate rather than treating their percentages as comparable difficulty scores.
+
+| Complete task | Baseline | Position-only markers | Visible Touch multi-arrows |
+| --- | --- | --- | --- |
+| Lift | 20/30 | 22/30 | 24/30 |
+| Transfer tube: insertion completed | 0/30 | 7/30 | 16/30 |
+| Put mug in dishwasher: placement completed | 11/30 | 11/30 | 21/30 |
+| Plug charger: insertion completed | 0/30 | 0/30 | 2/30 |
+
+For the tube task, multi-arrows complete the picking stage in 24/30 trials, but only 16/30 complete insertion. For the charger, 18/30 reach picking while only 2/30 finish insertion. Reporting the earlier stage as full success would conceal the main remaining difficulty.
+
+Position-only markers improve tube insertion from 0/30 to 7/30 without the full contact vectors. Some benefit therefore comes from spatial cues. Multi-arrows improve further to 16/30. A separate tactile-view image yields 0/30 tube insertions, illustrating that how the contact signal reaches the policy matters. Binary-contact and bar variants also trail the real-world multi-arrow condition. These ablations help separate contact content from presentation, although 30 trials per condition still leave uncertainty.
+
+## The best overlay changes between simulation and hardware
+
+In the BC-Transformer simulation comparison, an averaged arrow outperforms multiple arrows across the reported suites. On real hardware, multiple arrows perform better. Simulated contacts can appear at changing mesh locations; physical taxels have fixed locations and a different signal distribution. An aggregate that helps one representation need not preserve the details needed by the other. [Simulation Table 2](https://arxiv.org/html/2609.14156v1#S4.T2).
+
+The miniVLA headline also needs version discipline. The project page reports a 28.9-percentage-point gain, while v1 Table 1 reports 50.9% versus 76.2%, a 25.3-point difference. This review uses the explicitly versioned v1 table. Its baseline entries are the strongest available single runs per suite, whereas the headline Visible Touch values average five training seeds. That asymmetry limits how confidently the aggregate can characterize variability. [v1 Table 1](https://arxiv.org/html/2609.14156v1#S4.T1); [official project](https://visibletouch.github.io/).
+
+## What is available to reproduce
+
+The paper calls the hardware open source, but the official project page checked on September 19, 2026 did not expose a verified code, CAD or dataset download. The linked miniVLA repository belongs to an underlying policy, not a confirmed release of the complete Visible Touch pipeline. Code, hardware-asset and dataset licenses therefore remain unverified. Use the [dataset directory](/datasets) to distinguish a described collection from an accessible resource.
+
+Before budgeting a reproduction, locate the actual sensor files and license, match the camera and mounting transforms, preserve preprocessing, and obtain the training and rollout configuration. The paper's bill of materials is useful context but not a supplier quote or a verified downloadable hardware package.
+
+This review uses the September 12, 2026 v1. The arXiv record reports CoRL 2026 acceptance, while the project retains anonymous/submitted wording. Proceedings were not independently verified. All results are the authors' experiments; RoboSkin has not built or independently evaluated this system. The [tactile AI guide](/tactile-ai) places this rendering approach alongside dedicated encoders and reactive controllers.
+
+## Sources
+
+- [Visible Touch arXiv record and publication comments](https://arxiv.org/abs/2609.14156)
+- [Visible Touch v1: rendering, hardware and task results](https://arxiv.org/html/2609.14156v1)
+- [Official project page, checked September 19, 2026](https://visibletouch.github.io/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-19',
+    updated: '2026-09-19',
+    readTime: '8 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'Visible Touch: Rendering Contact for Visuomotor Policies',
+    sourceUrl: 'https://arxiv.org/abs/2609.14156',
+    citationUrls: ['https://arxiv.org/abs/2609.14156', 'https://arxiv.org/html/2609.14156v1', 'https://visibletouch.github.io/'],
+    technicalFocus: ['contact overlays', 'visuomotor policy', 'magnetic tactile sensing', 'sensor-camera calibration'],
+  },
+  {
     id: 'dextouch-wm-human-touch-world-model-2026',
     title: 'DexTouch-WM learns robot contact dynamics from human touch',
     seoTitle: 'DexTouch-WM: Human Touch Data for Robot World Models',

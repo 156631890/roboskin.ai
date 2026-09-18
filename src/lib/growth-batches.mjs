@@ -7,6 +7,7 @@ const evidencePaths = new Set(['/benchmarks', '/sensors', '/sensors/digit', '/se
 
 /** @param {string} pathname */
 export function growthBatchForPath(pathname) {
+  if (['/research/slipsense-multimodal-slip-detection-2026', '/research/touch2trace-tactile-cable-tracing-2026', '/research/visible-touch-contact-overlays-visuomotor-policies-2026'].includes(pathname)) return '2026-09-19-tactile-method-reviews';
   if (pathname === '/robot-vla-models') return vlaGrowthBatch;
   if (['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing', '/guides/lerobot-dataset-format', '/guides/tactile-sensor-calibration'].includes(pathname)) return 'programming-2026-09-16';
   if (pathname === '/tactile-ai') return tactileAiGrowthBatch;

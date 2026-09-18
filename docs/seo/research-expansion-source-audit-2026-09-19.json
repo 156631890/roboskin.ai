@@ -1,0 +1,122 @@
+{
+  "checkedDate": "2026-09-19",
+  "baseCommit": "6b5dc1fee97e7e9fa12048a9ec8e2059e9ea4f1e",
+  "sources": [
+    {
+      "name": "slipsense-abs",
+      "url": "https://arxiv.org/abs/2609.15910",
+      "status": 200,
+      "sha256": "9ea093fff6fac5e3c70fb5916c57b007db6725e425322d1830319380ccae1a11",
+      "textLength": 5209,
+      "links": [
+        "https://arxiv.org/html/2609.15910v1",
+        "https://arxiv.org/abs/2609.15910v1",
+        "https://arxiv.org/html/2609.15910v1",
+        "https://huggingface.co/huggingface",
+        "https://huggingface.co/docs/hub/spaces"
+      ]
+    },
+    {
+      "name": "slipsense-v1",
+      "url": "https://arxiv.org/html/2609.15910v1",
+      "status": 200,
+      "sha256": "e980466a9b2f5d965e4f9632830a5019033928939fa2d3e0bf6555574c8b8322",
+      "textLength": 61515,
+      "links": [
+        "/abs/2609.15910v1",
+        "/pdf/2609.15910v1",
+        "./2609.15910v1/__stdout.txt",
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML",
+        "https://github.com/brucemiller/LaTeXML/issues"
+      ]
+    },
+    {
+      "name": "touch2trace-abs",
+      "url": "https://arxiv.org/abs/2609.15921",
+      "status": 200,
+      "sha256": "d56629fc2a5b9a66e6e951156165dd40fe260f68a3ee98db9c45e5445e58b4f8",
+      "textLength": 5223,
+      "links": [
+        "https://arxiv.org/html/2609.15921v1",
+        "https://arxiv.org/abs/2609.15921v1",
+        "https://arxiv.org/html/2609.15921v1",
+        "https://huggingface.co/huggingface",
+        "https://huggingface.co/docs/hub/spaces"
+      ]
+    },
+    {
+      "name": "touch2trace-v1",
+      "url": "https://arxiv.org/html/2609.15921v1",
+      "status": 200,
+      "sha256": "809079e5fbb705567467e90b691d7515342f2e2119cd4eaf900e1b892daccd65",
+      "textLength": 60959,
+      "links": [
+        "/abs/2609.15921v1",
+        "/pdf/2609.15921v1",
+        "./2609.15921v1/__stdout.txt",
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML",
+        "https://github.com/brucemiller/LaTeXML/issues"
+      ]
+    },
+    {
+      "name": "visible-touch-abs",
+      "url": "https://arxiv.org/abs/2609.14156",
+      "status": 200,
+      "sha256": "1079262f39c50ffbf248cc3260da8a5998b91ee6aa357ff461b9c46860c7132b",
+      "textLength": 5478,
+      "links": [
+        "https://arxiv.org/html/2609.14156v1",
+        "https://visibletouch.github.io/",
+        "https://arxiv.org/abs/2609.14156v1",
+        "https://arxiv.org/html/2609.14156v1",
+        "https://huggingface.co/huggingface",
+        "https://huggingface.co/docs/hub/spaces"
+      ]
+    },
+    {
+      "name": "visible-touch-v1",
+      "url": "https://arxiv.org/html/2609.14156v1",
+      "status": 200,
+      "sha256": "31cc669771d6bbb2da6b33eb2df362b4be7910b3674d03c45dcac4b6979c92e8",
+      "textLength": 97265,
+      "links": [
+        "/abs/2609.14156v1",
+        "/pdf/2609.14156v1",
+        "https://visibletouch.github.io/",
+        "https://github.com/Stanford-ILIAD/openvla-mini",
+        "./2609.14156v1/__stdout.txt",
+        "https://github.com/arXiv/html_feedback/issues",
+        "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML",
+        "https://github.com/brucemiller/LaTeXML/issues"
+      ]
+    },
+    {
+      "name": "visible-touch-project",
+      "url": "https://visibletouch.github.io/",
+      "status": 200,
+      "sha256": "290b8ff7012e9ba75c56031ab292b78e9a59ce243a0613ac24356c0cfa16201a",
+      "textLength": 16808,
+      "links": []
+    },
+    {
+      "name": "indexnow-faq",
+      "url": "https://www.indexnow.org/faq",
+      "status": 200,
+      "sha256": "fa678ff2c69ef503f1848421050509290010918242989255a93d417244382868",
+      "textLength": 28323,
+      "links": []
+    }
+  ],
+  "paperVersion": "All three arXiv records still expose v1 only.",
+  "reviewStatus": "arXiv comments report CoRL 2026 acceptance; proceedings not independently verified.",
+  "independentReproduction": "Not performed by RoboSkin.",
+  "resourceStatus": {
+    "SlipSense": "No official project/code/data release found in checked arXiv record and v1; licenses unknown.",
+    "Touch2Trace": "No official project/code/data release found in checked arXiv record and v1; licenses unknown.",
+    "Visible Touch": "Official project retrieved; no code, CAD or data download link found. Underlying miniVLA repository is not the method release. Licenses unknown."
+  },
+  "versionDiscrepancy": "Visible Touch project miniVLA gain 28.9 pp versus v1 Table 1 25.3 pp; article uses versioned paper and states asymmetric seed reporting.",
+  "datasetDirectory": "No new dataset records or Dataset schema for these three method reviews. Existing Bench2Dex record and STAR candidate preserved."
+}
