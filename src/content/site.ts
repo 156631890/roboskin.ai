@@ -253,7 +253,7 @@ export const footerNavigation = [
 
 export const homeStats = [
   { value: '30', label: 'Structured tactile and robot-learning paper records' },
-  { value: '52', label: 'Source-backed research and robotics news briefs' },
+  { value: '58', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
@@ -413,16 +413,18 @@ export const homeRoboticsIntelligence: ContentTile[] = [
 ];
 
 export const homeResearchWatch = {
-  eyebrow: 'August 2026 humanoid tactile watch',
-  title: 'Tac4Loco turns plantar pressure into post-contact locomotion feedback',
+  eyebrow: 'September 2026 tactile learning watch',
+  title: 'DexTouch-WM tests what human touch can teach a robot world model',
   summary:
-    'A new preprint equips a Unitree G1 with 60-element pressure insoles on each foot and feeds spatial and temporal load patterns into a locomotion policy. In the reported physical comparisons, Tac4Loco completed a ramp-to-foam transition in 10 of 10 trials versus 4 of 10 for the proprioception-only baseline.',
+    'The September 17 preprint adds human tactile demonstrations to robot world-model training. With robot pretraining data held fixed, its largest human-data condition improves reported contact prediction, while synthetic policy-training data produces mixed real-robot outcomes.',
   relevance:
-    'The result expands humanoid robot skin beyond hands and arms: foot pressure verifies partial, asymmetric, or compliant support after touchdown, while vision remains the complementary pre-contact channel.',
-  sourceLabel: 'Primary source: Tac4Loco on arXiv',
-  sourceUrl: 'https://arxiv.org/abs/2608.15766',
-  sourceDate: '2026-08-16',
-  reviewedAt: '2026-08-18',
+    'Our review separates prediction quality, policy evaluation, and downstream robot performance, with practical implications for recording touch, preserving data provenance, and evaluating generated trajectories.',
+  sourceLabel: 'Primary source: DexTouch-WM on arXiv',
+  sourceUrl: 'https://arxiv.org/abs/2609.20649',
+  sourceDate: '2026-09-17',
+  reviewedAt: '2026-09-18',
+  reviewUrl: '/research/dextouch-wm-human-touch-world-model-2026',
+  reviewLabel: 'Read the human-touch transfer review',
 };
 
 export const homeProofPoints: ContentTile[] = [

@@ -237,9 +237,9 @@ export default function Home() {
                   Track humanoid robots, Physical AI, embodied AI, and robot manipulation
                 </h2>
                 <p className="section-copy mt-6">
-                  Broad robotics terms only earn useful authority when they connect to a clear evidence lane. RoboSkin.ai
-                  maps each large topic back to tactile sensing, robot hands, contact-rich tasks, data, models, and measurable
-                  limitations.
+                  Follow new research through its sensors, data, models, and robot experiments. Each review connects
+                  the reported findings to contact-rich tasks and explains what the evidence means for an engineering
+                  workflow.
                 </p>
                 <p className="mt-5 font-mono text-[13px] uppercase tracking-[0.1em] text-[#5e5951]">
                   Research watch reviewed {homeResearchWatch.reviewedAt}
@@ -258,7 +258,7 @@ export default function Home() {
                   <a href={homeResearchWatch.sourceUrl} target="_blank" rel="noreferrer">
                     {homeResearchWatch.sourceLabel} ↗
                   </a>
-                  <Link href="/physical-ai">Open the Physical AI definition →</Link>
+                  <Link href={homeResearchWatch.reviewUrl}>{homeResearchWatch.reviewLabel} →</Link>
                 </div>
               </article>
             </div>

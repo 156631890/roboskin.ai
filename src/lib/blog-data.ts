@@ -24,6 +24,202 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'dextouch-wm-human-touch-world-model-2026',
+    title: 'DexTouch-WM learns robot contact dynamics from human touch',
+    seoTitle: 'DexTouch-WM: Human Touch Data for Robot World Models',
+    seoDescription:
+      'Review DexTouch-WM’s human-to-robot tactile transfer, contact prediction results, synthetic policy-data limits, and current code and dataset availability.',
+    excerpt:
+      'Human tactile pretraining improves the paper’s contact predictions, but synthetic training data does not consistently improve real-robot policy scores. Here is what each experiment measures.',
+    content: `# DexTouch-WM learns robot contact dynamics from human touch
+
+**Evidence review — September 17, 2026 preprint; sources checked September 18, 2026**
+
+DexTouch-WM is an action-conditioned world model that predicts future visual observations and touch for dexterous robot manipulation. The [paper by Qin and colleagues](https://arxiv.org/abs/2609.20649) studies whether tactile demonstrations collected from people can improve a model trained with limited robot data. Its most useful finding has two parts: human pretraining improves the reported contact predictions, while training policies on generated trajectories produces mixed real-robot outcomes.
+
+Those are different tests. A model can become better at predicting contact or ranking policies without generating training data that reliably replaces real demonstrations. This distinction matters when choosing between collecting more robot data, adding human demonstrations, and using synthetic rollouts.
+
+## What the model observes and predicts
+
+The model conditions on an initial RGB observation, left- and right-hand tactile maps, a language instruction, and a future action-pose sequence. It generates future RGB and tactile observations. A visual expert based on Wan2.2-TI2V-5B works with a lightweight tactile expert; the future actions are conditioning inputs, rather than evidence that the world model independently chooses safe robot commands. [Method and experiments](https://arxiv.org/html/2609.20649v1).
+
+Human collection uses Moxian piezoresistive tactile gloves, Manus MetaGloves, Vive wrist trackers, and wrist/head cameras. The raw tactile gloves have 360 taxels per hand and sample at 60 Hz. The training representation retains 320 taxels: five 4 × 4 fingertip pads and one 15 × 16 palm pad. The robot uses the same retained tactile layout on a Tianji arm and a 20-DoF Wuji hand configuration.
+
+The 60 Hz figure describes tactile acquisition. It is not a measured model inference rate or an end-to-end control frequency. Likewise, matching the 320-taxel layout does not remove the need for spatial alignment, clock synchronization, and motion retargeting. Human and robot motions are mapped into a common 67-dimensional pose representation. Transfer to an arbitrary hand, glove, or camera-only human video is not established by this experiment.
+
+For the practical collection side, see [robot teleoperation and demonstration quality](/robot-teleoperation). Preserve the original clocks, sensor layout, validity flags, and calibration record before converting observations into a common model representation.
+
+## Contact prediction improves with large-scale human pretraining
+
+The pretraining comparison holds robot data fixed at five hours from six tasks. The largest human-data condition adds 100 hours from 50 human tasks; the human and robot pretraining task sets are disjoint. Four downstream tasks form a separate evaluation stage.
+
+The following values come from Table I. They compare robot-only pretraining with the condition that adds 100 hours of human data. They are author-reported prediction metrics, not RoboSkin measurements.
+
+| Prediction metric | Five hours of robot data | Same robot data plus 100 hours of human data |
+| --- | --- | --- |
+| Visual LPIPS, lower is better | 0.098 | 0.048 |
+| Contact-IoU, higher is better | 0.415 | 0.588 |
+| Contact-F1, higher is better | 0.551 | 0.706 |
+
+The end-point comparison supports improved visual and contact prediction in this setup. It does not show that every increment of human data improves every metric: the paper’s smaller-data conditions include regressions. Contact overlap and F1 also do not measure calibrated force error. Readers should retain the source’s signal definitions rather than assigning newton or pressure units to a normalized tactile value.
+
+## Policy evaluation and policy training answer different questions
+
+The downstream study compares a world model adapted with 200 robot trajectories, WM-Robot, with WM-Mix, adapted with 100 robot and 100 human trajectories. These adaptation demonstrations are separate from the human pretraining collection. Policies are evaluated using ten matched rollouts per policy, task, and environment, with five human raters scoring each rollout.
+
+The reported task scores are normalized to the interval from zero to one. They are not binary success rates. Five raters do not turn ten robot rollouts into 50 independent robot trials. The imagined-rollout scoring also penalizes obvious physical inconsistency.
+
+For world-model-based policy evaluation, the reported mean Pearson correlation with real scores increases from 0.646 for WM-Robot to 0.844 for WM-Mix. This is a limited comparison involving three policies per task, and a ranking error remains on Stand Bottle. Better agreement in this evaluation does not establish a universal replacement for real-robot testing.
+
+## Generated training data still has a downstream cost
+
+Table IV tests policies on the real robot after three training-data choices. Each row below reports the mean normalized task score across four tasks; larger is better. It does not report a success percentage.
+
+| Policy | 200 real trajectories | 100 real + 100 WM-Robot trajectories | 100 real + 100 WM-Mix trajectories |
+| --- | --- | --- | --- |
+| FTP-1 | 0.731 | 0.688 | 0.694 |
+| π0.5 | 0.625 | 0.563 | 0.494 |
+| X-VLA | 0.500 | 0.506 | 0.400 |
+
+The mixed human/robot world model does not consistently produce the best policy-training data. For π0.5 and X-VLA, its generated-data condition is below both alternatives in the four-task mean. X-VLA also receives a zero score on Stand Bottle in that condition. These failures deserve to remain visible alongside the improved prediction metrics.
+
+The generated trajectories retain real initial observations and recorded robot actions while replacing future RGB and tactile observations with predictions. This is not a pipeline that creates complete demonstrations without any robot data. The source separates the held-out trajectories used for generation from those used to adapt the world model.
+
+## What to carry into a data workflow
+
+- Keep physical observations, human observations, and generated observations distinguishable at episode and field level. Record the generating model and its revision for synthetic data.
+- Split complete trajectories before adaptation or generation, and record which initial observations and actions remain real.
+- Evaluate visual quality, contact prediction, policy ranking, and final robot task performance separately. A gain in one is not evidence for all four.
+- Store raw tactile units and calibration provenance. Use the [tactile calibration workflow](/guides/tactile-sensor-calibration) to separate image or signal baselines from force estimation.
+- Validate episode boundaries, timestamps, and array dimensions before training. The [LeRobot data-format guide](/guides/lerobot-dataset-format) explains these checks; its teaching validator does not convert or certify DexTouch-WM data.
+
+For the broader architecture context, compare the [five-system visuo-tactile world-model guide](/guides/visuo-tactile-world-models-robot-manipulation). For simulated contact observations with an explicit benchmark protocol, read the [Bench2Dex resource review](/research/bench2dex-visuo-tactile-bimanual-benchmark-2026).
+
+## Publication and access boundary
+
+The arXiv record identifies this work as accepted to the IROS 2026 RoBoWoMo workshop as a lightning talk. That is distinct from acceptance as an IROS main-conference paper. This review uses the September 17 v1 preprint.
+
+No official code, model-weight, or dataset download was found in the paper and arXiv record reviewed on September 18. This is an access finding for those sources, not a claim that no release can exist elsewhere or appear later. RoboSkin reviewed the methods and result tables; we did not train the model, collect glove data, or reproduce the hardware experiments.
+
+## Sources
+
+- [DexTouch-WM arXiv record and publication note](https://arxiv.org/abs/2609.20649)
+- [DexTouch-WM v1: method, Tables I–IV, and experiment definitions](https://arxiv.org/html/2609.20649v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-18',
+    updated: '2026-09-18',
+    readTime: '7 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'DexTouch-WM: Learning Action-Conditioned Tactile World Models from Human Touch for Dexterous Robot Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.20649',
+    citationUrls: ['https://arxiv.org/abs/2609.20649', 'https://arxiv.org/html/2609.20649v1'],
+    technicalFocus: ['tactile world models', 'human-to-robot demonstrations', 'contact prediction', 'synthetic robot data'],
+  },
+  {
+    id: 'bench2dex-visuo-tactile-bimanual-benchmark-2026',
+    title: 'Bench2Dex benchmarks bimanual robots with simulated touch',
+    seoTitle: 'Bench2Dex: Visuo-Tactile Benchmark, Data & Code Review',
+    seoDescription:
+      'Explore Bench2Dex’s 26 task settings, simulated tactile signals, HDF5 data contract, policy results, public code, and dataset licensing limits.',
+    excerpt:
+      'Bench2Dex connects teleoperation, replay, tactile maps, and evaluation across 12 hand embodiments. We examine the data contract and distinguish simulation access from physical sensor validation.',
+    content: `# Bench2Dex benchmarks bimanual robots with simulated touch
+
+**Benchmark and resource review — September 14, 2026 preprint; access checked September 18, 2026**
+
+Bench2Dex is a simulation benchmark for long-horizon, two-handed robot manipulation. Its [preprint](https://arxiv.org/abs/2609.15726) describes 12 dexterous hand embodiments, 26 task–embodiment settings, and about 1,300 human-teleoperated demonstrations. Its contribution is a shared pipeline for collecting actions, replaying multimodal observations, and evaluating task completion under controlled scene changes.
+
+These demonstrations are collected in simulation. They are not recordings from 12 physical robot hands. The tactile maps describe local contact geometry and do not reproduce the optical response of a particular DIGIT or GelSight sensor. That makes Bench2Dex useful for studying data interfaces and simulated manipulation, with a clear boundary around claims about physical touch.
+
+## From teleoperation to offline observations
+
+The collection setup uses a Manus glove for hand motion and an ARKit wrist-tracking stream for arm targets. Hand keypoints are retargeted to the chosen robot hand; arm targets pass through inverse kinematics. The pipeline records the commanded action and resulting post-step state. This ordering matters when aligning an action with the observation it caused.
+
+The paper separates lightweight online motion recording from offline replay that renders richer observations. Its full schema includes RGB, depth, joint state, object state, tactile maps, bounding boxes, and occupancy labels. These are supported modalities, not a guarantee that every downloaded episode contains every field. The public README notes that depth is omitted in its current storage workflow because of size. Inspect the episode’s modality metadata and actual datasets before designing a loader. [Official repository](https://github.com/Bench2Dex/Bench2Dex).
+
+Reading public files does not require owning a robot or tactile sensor. Collecting new demonstrations with the documented input setup requires the corresponding tracking equipment, and running the simulation requires a supported NVIDIA GPU/software environment. Our [robot data collection guide](/robot-teleoperation) explains the separate roles of capture, synchronization, quality review, and training export.
+
+## What the tactile map actually measures
+
+Bench2Dex reconstructs contact surfaces for each supported hand and stores local surface points and normals. During replay, rays cast against task-object meshes produce a contact-consistency-filtered depth signal. The pipeline encodes that signal into an 8-bit image-like tactile map and also defines raw metric ray depth and a validity mask. The paper describes 240 × 240 tactile maps in the released-data schema. [Section 3.3 and Appendices C–D](https://arxiv.org/html/2609.15726v1).
+
+The compact image values run from zero to 255. They are not newtons, kilopascals, or camera intensities measured through an elastomer. Raw ray depth has metre units, but it remains simulator geometry rather than a force estimate. A common map shape also does not make the different hands mechanically equivalent.
+
+The main four-policy table should not be read as a tactile-input ablation. The paper describes ACT and Diffusion Policy using multi-view RGB and joint state, alongside fine-tuned π0.5 and GR00T N1.5 baselines. Availability of tactile observations does not by itself prove a performance gain from using them. A matched tactile-enabled versus tactile-disabled experiment is needed for that claim.
+
+## An HDF5 contract worth inspecting before training
+
+Appendix D defines a full per-episode HDF5 organization. The following is a reading guide to that schema, not an assertion that RoboSkin downloaded and validated the complete release.
+
+| Field or group | Meaning | Check before using it |
+| --- | --- | --- |
+| meta/ | Task, robot, modality list, schema and collection metadata | Confirm the embodiment and available modalities |
+| time/frame_index, time/timestamp_ns, time/sim_step | Frame order, stored timestamp, and simulation step | Check order and alignment; timestamp units alone do not establish wall-clock latency |
+| action/ and robot/qpos | Commanded action and observed joint positions | Match joint names, dimensions, control mode, and action/observation ordering |
+| frame_valid and frame_errors | Capture validity and error information | Filter or investigate invalid frames; do not silently fill missing observations with zero |
+| robot/tactile/tacmap/{site_name} | Per-site uint8 tactile image | Check site registry, dimensions, and encoding |
+| robot/tactile/distance_along_normal_m and robot/tactile/contact_mask | Raw ray depth and contact-validity datasets | Keep geometric units and validity separate from the compact image |
+| episode/ and metrics/ | Episode flags, task outcomes, and diagnostics | Separate partial progress, stable completion, and safety proxies |
+
+There is an additional training concern in the public code: a trajectory may include a return-to-home segment. The reviewed ACT loader uses meta/homing_start_sim_step and time/sim_step to determine an effective length. At the pinned revision, it falls back to the full length when the marker is absent or the computed boundary is not strictly inside the episode. A robust ingestion audit should flag missing or anomalous markers rather than assuming every sequence was trimmed. [Reviewed ACT loader](https://github.com/Bench2Dex/Bench2Dex/blob/f96a8b2b4eb475483af66e9e03916b35bc43f1be/policy/ACT/utils.py).
+
+Homing frames should also be excluded consistently from normalization statistics. Before any LeRobot export, map the source timestamps, action convention, episode boundary, and feature dimensions explicitly. The [LeRobot format and validation tutorial](/guides/lerobot-dataset-format) teaches these checks using synthetic data; it is not a Bench2Dex converter or a full compatibility validator.
+
+## What the reported policy scores compare
+
+The paper evaluates four policies on 26 task–embodiment settings with 50 rollouts per setting and channel. Four channels produce 20,800 evaluation episodes in total. The design does not cross every task with every one of the 12 hands, so it cannot isolate hand quality from task difficulty. Fifty evaluation rollouts are also not 50 independent retraining runs.
+
+Stable success requires the terminal predicate to remain true for a configured dwell time, 0.5 seconds by default. Latched stage completion records dependency-valid partial progress and is a different metric. High-speed diagnostics are motion proxies, not contact-force measurements.
+
+| Policy | Matched scene: successes / 1,300 | Combined scene changes: successes / 1,300 |
+| --- | --- | --- |
+| ACT | 383 / 1,300, 29.5% | 169 / 1,300, 13.0% |
+| Diffusion Policy | 168 / 1,300, 12.9% | 50 / 1,300, 3.8% |
+| π0.5 | 355 / 1,300, 27.3% | 256 / 1,300, 19.7% |
+| GR00T N1.5 | 631 / 1,300, 48.5% | 258 / 1,300, 19.8% |
+
+These are author-reported Table 2 outcomes. The combined channel independently samples both visual-context changes and geometry changes. It is not a paired, necessarily harder version of each matched episode. GR00T’s two-success lead over π0.5 under the combined shift should not be presented as a decisive general advantage. Aggregate scores also hide tasks where every policy records zero success.
+
+## Public resources and software requirements
+
+On September 18, the official code repository and Hugging Face listings for demonstrations, assets, and checkpoints were accessible. We inspected repository revision f96a8b2, selected loader/writer code, and listing metadata; we did not download the complete data or run the simulator.
+
+| Resource | Verified access | License and execution boundary |
+| --- | --- | --- |
+| [GitHub code](https://github.com/Bench2Dex/Bench2Dex/tree/f96a8b2b4eb475483af66e9e03916b35bc43f1be) | Public repository, pinned revision reviewed | Repository MIT license; bundled dependencies and assets need their own review |
+| [Demonstration files](https://huggingface.co/datasets/Bench2Dex/teleopdata) | Public, ungated HDF5 file listing | No top-level dataset card or explicit dataset license found in the reviewed listing |
+| [Simulation assets](https://huggingface.co/datasets/Bench2Dex/Assets) | Public, ungated listing | No collection-wide license confirmed; upstream asset terms may differ |
+| [Policy checkpoints](https://huggingface.co/Bench2Dex/policy_ckpt) | Public, ungated listing | Weight licensing and base-model terms require separate confirmation |
+
+The reviewed README specifies Python 3.11, Isaac Sim 5.1.0, Isaac Lab v2.3.2, PyTorch 2.7.0, and CUDA 12.8 wheels. These are the project’s stated versions, not an installation combination independently tested by RoboSkin. Consult the [official documentation](https://bench2dex.github.io/doc/) and preserve a working revision; compatibility with later Isaac Lab releases is not established here.
+
+The roughly 1,300 demonstrations are the paper’s reported collection size. We have not independently recounted or checked every hosted episode. Public download access and permission to reuse data are separate questions; the repository’s MIT license should not automatically be assigned to the dataset, assets, or model weights.
+
+## Where to go next
+
+Use the [benchmark directory](/benchmarks) to compare evaluation questions and the [dataset catalogue](/datasets) to compare physical and simulated sources. For a small exercise that runs without a simulator, start with [Python tactile CSV processing](/guides/python-tactile-data-processing). To contrast simulated geometric touch with learned tactile futures, read [DexTouch-WM’s human-data transfer results](/research/dextouch-wm-human-touch-world-model-2026).
+
+## Sources
+
+- [Bench2Dex arXiv record](https://arxiv.org/abs/2609.15726)
+- [Bench2Dex v1 methods, Table 2, and HDF5 schema](https://arxiv.org/html/2609.15726v1)
+- [Official project and resource links](https://bench2dex.github.io/)
+- [Pinned repository README and code](https://github.com/Bench2Dex/Bench2Dex/tree/f96a8b2b4eb475483af66e9e03916b35bc43f1be)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-18',
+    updated: '2026-09-18',
+    readTime: '8 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'Bench2Dex: Benchmarking Visuo-Tactile Bimanual Dexterous Manipulation Across Dexterous Hands',
+    sourceUrl: 'https://arxiv.org/abs/2609.15726',
+    citationUrls: ['https://arxiv.org/abs/2609.15726', 'https://arxiv.org/html/2609.15726v1', 'https://bench2dex.github.io/', 'https://github.com/Bench2Dex/Bench2Dex/tree/f96a8b2b4eb475483af66e9e03916b35bc43f1be', 'https://huggingface.co/datasets/Bench2Dex/teleopdata'],
+    technicalFocus: ['tactile simulation', 'bimanual manipulation', 'robot dataset validation', 'benchmark protocols'],
+  },
+  {
     id: 'tacprint-wearable-tactile-contact-reproduction-2026',
     title: 'TacPrint reconstructs contact from 24 tactile cells',
     seoTitle: 'TacPrint: Wearable Touch, Depth Reconstruction & Grasp Data',

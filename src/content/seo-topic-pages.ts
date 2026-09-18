@@ -479,7 +479,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-09-16',
+    updated: '2026-09-18',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -633,6 +633,18 @@ export const seoTopicPages: SeoTopicPage[] = [
             "href": "/guides/lerobot-dataset-format"
           }
         ]
+      },
+      {
+        heading: 'September research: learning from human and simulated touch',
+        body: [
+          'Two September 2026 preprints expose different data choices for tactile AI. DexTouch-WM transfers human glove observations into an action-conditioned robot world model using a shared tactile layout and motion retargeting. Bench2Dex provides a simulation pipeline for bimanual demonstrations, geometric tactile maps, and controlled policy evaluation.',
+          'Keep their evidence separate: better predicted contact does not guarantee better policies trained on synthetic observations, and a simulated tactile image is not a physical force measurement. Our September 18 source reviews examine the result definitions, data contracts, and release status before connecting either project to a training workflow.',
+        ],
+        links: [
+          { label: 'Human touch transfer in DexTouch-WM', href: '/research/dextouch-wm-human-touch-world-model-2026' },
+          { label: 'Simulated tactile data and evaluation in Bench2Dex', href: '/research/bench2dex-visuo-tactile-bimanual-benchmark-2026' },
+          { label: 'Practice timestamp, validity, and tactile-array checks in Python', href: '/guides/python-tactile-data-processing' },
+        ],
       },
     ],
     faqs: [
@@ -2453,7 +2465,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: '2026 world-model guide',
     intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
     published: '2026-08-15',
-    updated: '2026-08-22',
+    updated: '2026-09-18',
     priority: 0.87,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2525,6 +2537,17 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Do not compare isolated percentages across rows. Each paper uses different prediction targets, horizons, tasks, policies, sensors, baselines, and success definitions. Open the primary source, confirm the current version and released assets, then reproduce the relevant task and hardware contract before making an engineering decision.',
         ],
       },
+      {
+        heading: 'September update: human touch and synthetic policy data',
+        body: [
+          'DexTouch-WM adds a separate data-transfer question to the five-system comparison above. Its September 17 preprint keeps robot pretraining data fixed while adding human tactile demonstrations with a shared taxel layout and retargeted pose representation. The largest human-data condition improves contact prediction, but that improvement does not consistently carry into policies trained with generated observations.',
+          'In the reported four-task real-robot evaluation, the mixed-data world model produces lower policy-training scores than the real-data baseline for all three tested policies. These are normalized task scores, not binary success rates. Prediction quality, policy-ranking agreement, and final task behavior therefore need separate evaluation. This source update was checked on September 18, 2026; the original five-system table retains its own review scope.',
+        ],
+        links: [
+          { label: 'DexTouch-WM results, task-score definitions, and access review', href: '/research/dextouch-wm-human-touch-world-model-2026' },
+          { label: 'DexTouch-WM primary paper', href: 'https://arxiv.org/abs/2609.20649' },
+        ],
+      },
     ],
     faqs: [
       {
@@ -2586,7 +2609,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Structured benchmark directory',
     intent: 'Research directory for tactile benchmark robotics, tactile sensing benchmarks, robot manipulation evaluation, and visuo-tactile benchmark searches.',
     published: '2026-08-19',
-    updated: '2026-09-12',
+    updated: '2026-09-18',
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2644,6 +2667,17 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Filter by benchmark type, task, sensor, and year, then open the primary paper and official project or code page. Record the exact version you use. “Open source” on a project page does not automatically establish the license of every dataset, model weight, or bundled asset.',
           'The evidence-boundary column is deliberate. It prevents a benchmark’s strongest reported result from being generalized beyond its sensor, robot, task, split, or publication status.',
+        ],
+      },
+      {
+        heading: 'Bench2Dex: bimanual simulation and scene changes',
+        body: [
+          'The September 14, 2026 Bench2Dex preprint reports 26 task and embodiment settings spanning 12 dexterous hands, with about 1,300 human-teleoperated simulation demonstrations. Its tactile interface encodes local contact geometry into image-like maps; it does not reproduce a particular physical sensor or provide calibrated force measurements.',
+          'The main policy comparison separates matched scenes, visual-context changes, geometry changes, and independently sampled combined changes. It measures stable success and dependency-valid stage progress. The 50 evaluation rollouts per cell are not independent retraining runs, and the tasks are not fully crossed with all hands. The public code and data listings were checked on September 18; dataset, asset, and checkpoint licensing still require separate confirmation.',
+        ],
+        links: [
+          { label: 'Bench2Dex scores, HDF5 schema, and resource audit', href: '/research/bench2dex-visuo-tactile-bimanual-benchmark-2026' },
+          { label: 'Bench2Dex official project', href: 'https://bench2dex.github.io/' },
         ],
       },
     ],
