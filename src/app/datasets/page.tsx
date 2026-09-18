@@ -5,6 +5,7 @@ import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
 import TactileDatasetExplorer from '@/components/TactileDatasetExplorer';
 import DatasetAvailabilityAnalysis from '@/components/DatasetAvailabilityAnalysis';
+import TactileDataCandidates from '@/components/TactileDataCandidates';
 import ResearchResourceActions from '@/components/ResearchResourceActions';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
@@ -26,12 +27,13 @@ export default function TactileDatasetsPage() {
       <SeoTopicArticle page={page} leadContent={
         <TactileDatasetExplorer entries={tactileDatasetEntries} useCases={[
           { label: 'Materials & representations', ids: ['rct', 'tvl', 'touch-and-go', 'objectfolder-real', 'objectfolder-2', 'tacverse', 'univtac-encoder-pretraining-corpus'] },
-          { label: 'Robot manipulation', ids: ['t-rex', 'robotacdex', 'prism-industrial-skill', 'softvtbench', 'univtac-benchmark-dataset'] },
+          { label: 'Robot manipulation', ids: ['bench2dex', 't-rex', 'robotacdex', 'prism-industrial-skill', 'softvtbench', 'univtac-benchmark-dataset'] },
           { label: 'Full-hand touch', ids: ['ht-bench', 'humanoid-vta', 'tactidex'] },
           { label: 'Human demonstrations', ids: ['egotouch', 'freetacman', 'vtdexmanip', 'touch-and-go', 'tactidex'] },
         ]} />
       }>
         <DatasetAvailabilityAnalysis entries={tactileDatasetEntries} />
+        <TactileDataCandidates />
         <aside className="container-shell pb-12" aria-label="Data processing practice">
           <div className="signal-panel p-6">
             <h2 className="text-2xl font-semibold">Practice reading tactile data before choosing a dataset</h2>

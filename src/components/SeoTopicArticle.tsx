@@ -137,7 +137,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                   ) : null}
                   {section.table ? (
                     <div className="mt-6 overflow-x-auto rounded-md border border-white/10 bg-[#020408]" tabIndex={0} role="region" aria-label={`${section.heading} table`}>
-                      <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                      <table className={`w-full ${section.table.headers.length > 6 ? 'min-w-[1560px]' : 'min-w-[720px]'} border-collapse text-left text-sm`}>
                         <thead className="border-b border-white/10 bg-white/[0.03]">
                           <tr>
                             {section.table.headers.map((header) => (

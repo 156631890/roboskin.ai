@@ -89,7 +89,7 @@ test('the fifteen normalized organizations have primary identity evidence and a 
 
   assert.equal(newOrganizationSources.size, 15);
   assert.equal(contract.counts.organizations, 69);
-  assert.equal(contract.counts.knowledgeEntities, 191);
+  assert.equal(contract.counts.knowledgeEntities, 193);
 
   for (const [id, requiredIdentityUrl] of newOrganizationSources) {
     const block = organizationBlock(organizations, id);

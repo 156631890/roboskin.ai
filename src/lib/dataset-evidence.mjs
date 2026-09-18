@@ -1,6 +1,25 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.09.13', compiledAt: '2026-09-13', scope: 'Current RoboSkin tactile directory only; not an industry census.' };
+export const datasetAudit = { version: 'v2026.09.18', compiledAt: '2026-09-18', scope: 'Current RoboSkin tactile directory only; not an industry census.' };
 export const datasetAccessEvidence = {
+  "bench2dex": {
+  "access": "public-files",
+  "accessCheckedAt": "2026-09-18",
+  "licenseStatus": "unknown",
+  "dataLicense": "Unknown: no dataset card or dataset-file license found in the reviewed provider manifest. Code MIT is not a dataset license.",
+  "publicFileScale": "5,201 listed paths: 5,200 HDF5 files plus .gitattributes. Unique demonstrations, frames and bytes were not independently recounted.",
+  "verificationScope": "Official project, v1 paper, repository root MIT license and provider manifests inspected. No payload download, checksum or HDF5 validation, simulation run or independent reproduction.",
+  "splitStatus": "protocol-described",
+  "splitDetails": "Paper defines deterministic task-partitioned evaluation seeds and None / Equi. / Inv. / Full perturbation channels, with 50 rollouts per task/channel/policy. Released training/validation/test split membership and leakage remain unknown; a directory name is not a verified split.",
+  "formatStatus": "described",
+  "formatDetails": "HDF5 episodes. The documented schema aligns frame_index, timestamp_ns and sim_step; action commands precede the next simulator step and observations follow it. Actions include names, control mode, validity and source. Supported fields are not guaranteed in every payload; README says depth is omitted in the current storage workflow.",
+  "revision": "b195787c65046083e6a43776b67bdf1389dfa3eb",
+  "listedFileCount": 5201,
+  "sources": [
+    "https://huggingface.co/datasets/Bench2Dex/teleopdata/tree/b195787c65046083e6a43776b67bdf1389dfa3eb",
+    "https://github.com/Bench2Dex/Bench2Dex/blob/f96a8b2b4eb475483af66e9e03916b35bc43f1be/LICENSE",
+    "https://arxiv.org/html/2609.15726v1"
+  ]
+},
   "univtac-encoder-pretraining-corpus": {
     "access": "announced",
     "accessCheckedAt": "2026-08-22",

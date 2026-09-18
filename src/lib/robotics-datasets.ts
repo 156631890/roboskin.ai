@@ -3,6 +3,14 @@ export type RoboticsDatasetEntry = {
   name: string;
   institution: string[];
   year: number;
+  authors?: string[];
+  firstPublished?: string;
+  paperVersion?: string;
+  dataOrigin?: 'real' | 'simulation' | 'mixed';
+  codeLicense?: string;
+  assetLicense?: string;
+  modelLicense?: string;
+  generalization?: string;
   robot: string[];
   sensor: string[];
   modalities: string[];

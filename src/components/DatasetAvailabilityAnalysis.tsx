@@ -35,7 +35,8 @@ export default function DatasetAvailabilityAnalysis({ entries }: { entries: Robo
       </details>
       <div id="dataset-changelog" className="mt-8 scroll-mt-24">
         <h3 className="text-xl font-semibold">Directory change log</h3>
-        <p className="mt-3 text-sm text-soft"><time>{datasetAudit.compiledAt}</time> — Added separate access evidence, provider revisions, public-manifest scale, dataset-file license status and split evidence to existing records. Added this computable coverage analysis and JSON export. Scientific-source review dates were retained; these checks do not renew every paper review. No dataset was added to increase the count.</p>
+        <p className="mt-3 text-sm text-soft"><time>2026-09-18</time> — Added Bench2Dex simulation demonstrations with a pinned public manifest, separate license fields and original authors. STAR remains a paper-linked candidate outside the catalog count and Dataset schema. Published a new audit snapshot; older records retain their own verification dates.</p>
+        <p className="mt-3 text-sm text-soft"><time>2026-09-13</time> — Added separate access evidence, provider revisions, public-manifest scale, dataset-file license status and split evidence to existing records, with computable counts and JSON export. <a className="underline" href="/releases/datasets/v2026.09.13.json">Original audit snapshot</a>.</p>
       </div>
     </section>
   );

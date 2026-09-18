@@ -21,6 +21,26 @@ export type TactileBenchmarkEntry = {
 
 export const tactileBenchmarkEntries: TactileBenchmarkEntry[] = [
   {
+    id: 'bench2dex',
+    name: 'Bench2Dex',
+    year: 2026,
+    benchmarkType: 'Simulation benchmark for bimanual dexterous manipulation',
+    institutions: ['Shanghai Jiao Tong University', 'Fudan University', 'The University of Hong Kong', 'Inspire Robots', 'Zhongguancun Academy', 'COWARobot Co. Ltd', 'Nanyang Technological University'],
+    tasks: ['Bimanual tool use', 'Articulated-object interaction', 'Multi-stage manipulation', 'Controlled scene perturbations'],
+    modalities: ['Multi-view RGB', 'Joint state', 'Commanded actions', 'Object state', 'Surface-aligned tactile maps', 'Depth, 2D/3D boxes and occupancy when recorded'],
+    sensors: ['Surface-aligned simulated contact geometry; not measured output from a physical tactile sensor'],
+    robots: ['12 simulated bimanual dexterous arm–hand embodiments; 26 task–embodiment settings'],
+    metrics: ['Stable terminal success rate (SR)', 'Latched stage completion rate (LSCR)', 'Time to stable success conditional on success', 'Configured drop and high-speed diagnostics'],
+    protocol: 'arXiv v1, first submitted 2026-09-14: 26 task–embodiment settings, 50 rollouts per setting/channel/policy, four policies and four channels (20,800 evaluation episodes). Success requires a terminal predicate to hold for the configured dwell, 0.5 s by default. None/Equi./Inv. use matched anchors; Full is sampled independently.',
+    access: 'Official project and MIT code public. teleopdata revision b195787c65046083e6a43776b67bdf1389dfa3eb exposes HDF5 paths; dataset, model and collection-wide asset terms unknown. No payload validation or simulator run by RoboSkin.',
+    limitation: 'Author-reported technical report; peer-reviewed acceptance and independent reproduction unverified. Main results are not a tactile-on/off ablation. Contact geometry is simulated, not a real sensor output; 12 hand support does not prove zero-shot cross-hand transfer. High-speed diagnostics are not measured forces.',
+    paperUrl: 'https://arxiv.org/abs/2609.15726v1',
+    projectUrl: 'https://bench2dex.github.io/',
+    codeUrl: 'https://github.com/Bench2Dex/Bench2Dex',
+    researchUrl: '/research/bench2dex-visuo-tactile-bimanual-benchmark-2026',
+    sourceReviewed: '2026-09-18',
+  },
+  {
     id: 'univtac-benchmark',
     name: 'UniVTAC Benchmark',
     year: 2026,

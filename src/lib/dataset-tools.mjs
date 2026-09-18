@@ -20,7 +20,8 @@ export function csvCell(value) {
 export function buildDatasetCsv(entries, pathname) {
   const fields = ['id', 'name', 'institution', 'year', 'robot', 'sensor', 'modalities',
     'sampleCount', 'tasks', 'objectCategories', 'dataFormat', 'license', 'licenseUrl',
-    'availability', 'sourceReviewed', 'paperUrl', 'projectUrl', 'datasetUrl', 'githubUrl'];
+    'availability', 'sourceReviewed', 'paperUrl', 'projectUrl', 'datasetUrl', 'githubUrl',
+    'authors', 'firstPublished', 'paperVersion', 'dataOrigin', 'codeLicense', 'assetLicense', 'modelLicense', 'generalization'];
   const evidenceFields = ['access', 'accessCheckedAt', 'publicFileScale', 'verificationScope', 'dataLicense', 'licenseStatus', 'splitStatus', 'splitDetails', 'revision'];
   const rows = entries.map((entry) => [...fields.map((field) => entry[field] ?? ''),
     ...evidenceFields.map(field => getDatasetEvidence(entry)[field] ?? ''),

@@ -249,14 +249,24 @@ export default function TactileDatasetExplorer({
                     <span className="mt-3 block text-xs leading-relaxed text-[#8e98a8]">{entry.availability}</span>
                     <span className="mt-2 block font-mono text-[11px] uppercase text-[#8e98a8]">Reviewed {entry.sourceReviewed}</span>
                   </th>
-                  <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.institution.join('; ')}<br /><span className="mt-2 block font-mono text-xs text-white">{entry.year}</span></td>
+                  <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.institution.join('; ')}<br /><span className="mt-2 block font-mono text-xs text-white">{entry.year}</span>
+                    {entry.authors?.length ? <p className="mt-3"><strong className="text-white">Original authors:</strong> {entry.authors.join('; ')}</p> : null}
+                    {entry.firstPublished ? <p className="mt-3">First submitted {entry.firstPublished}</p> : null}
+                    {entry.paperVersion ? <p className="mt-2">{entry.paperVersion}</p> : null}
+                    {entry.dataOrigin ? <p className="mt-2"><strong className="text-white">Data origin:</strong> {entry.dataOrigin}</p> : null}
+                  </td>
                   <td className="w-[230px] border-b border-white/8 px-4 py-5"><strong className="text-white">Robot:</strong> {entry.robot.join('; ')}<br /><strong className="mt-3 inline-block text-white">Sensor:</strong> {entry.sensor.join('; ')}</td>
                   <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.modalities.join('; ')}<br /><strong className="mt-3 inline-block text-white">Reported / previously documented scale:</strong> {entry.sampleCount}
                     <p className="mt-3"><strong className="text-white">Public-file audit:</strong> {evidence.publicFileScale}</p>
                     <p className="mt-3"><strong className="text-white">Independent check:</strong> {evidence.verificationScope}</p></td>
-                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.tasks.join('; ')}<br /><strong className="mt-3 inline-block text-white">Objects:</strong> {entry.objectCategories}</td>
+                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.tasks.join('; ')}<br /><strong className="mt-3 inline-block text-white">Objects:</strong> {entry.objectCategories}
+                    {entry.generalization ? <p className="mt-3"><strong className="text-white">Generalization:</strong> {entry.generalization}</p> : null}
+                  </td>
                   <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.dataFormat}<br /><strong className="mt-3 inline-block text-white">Dataset-file license:</strong> {evidence.dataLicense}
                     <p className="mt-3"><strong className="text-white">Code / source terms:</strong> {entry.license}</p>
+                    {entry.codeLicense ? <p className="mt-3"><strong className="text-white">Code license:</strong> {entry.codeLicense}</p> : null}
+                    {entry.assetLicense ? <p className="mt-3"><strong className="text-white">Asset license:</strong> {entry.assetLicense}</p> : null}
+                    {entry.modelLicense ? <p className="mt-3"><strong className="text-white">Model license:</strong> {entry.modelLicense}</p> : null}
                     <p className="mt-3"><strong className="text-white">Train / test split:</strong> {evidence.splitDetails}</p></td>
                   <td className="w-[180px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">

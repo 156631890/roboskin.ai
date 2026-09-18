@@ -953,6 +953,11 @@ function buildDatasetCatalogJsonLd(
     name: entry.name,
     description: `${entry.sampleCount}. Tasks: ${entry.tasks.join(', ')}. ${entry.availability}`,
     url: entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl,
+    ...(entry.authors?.length ? { creator: entry.authors.map(name => ({ '@type': 'Person', name })) } : {}),
+    ...(entry.paperVersion ? { version: entry.paperVersion } : {}),
+    ...(entry.datasetUrl && getDatasetEvidence(entry).access === 'public-files' ? {
+      distribution: { '@type': 'DataDownload', url: entry.datasetUrl, description: entry.availability },
+    } : {}),
     measurementTechnique: entry.sensor,
     variableMeasured: entry.modalities,
     keywords: entry.tasks,

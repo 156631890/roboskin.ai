@@ -1,0 +1,170 @@
+{
+  "checkedAt": "2026-09-18",
+  "papersAndProjects": [
+    {
+      "key": "bench2dex-abs",
+      "url": "https://arxiv.org/abs/2609.15726",
+      "status": 200,
+      "title": "[2609.15726] Bench2Dex: Benchmarking Visuo-Tactile Bimanual Dexterous Manipulation Across Dexterous Hands",
+      "bytes": 47254,
+      "sha256": "37109b83630c52f263efa3ea335c319bb7b5b151e32da3959e4bab3b1ddda878",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "slipsense-abs",
+      "url": "https://arxiv.org/abs/2609.15910",
+      "status": 200,
+      "title": "[2609.15910] SlipSense: Multimodal Tactile Learning for Low-Latency and Generalized Slip Detection",
+      "bytes": 42388,
+      "sha256": "8d6d3c80a8e5f8a476199a22a27e9bd8233730bf7d029ca89481f4778d597f9e",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "touch2trace-abs",
+      "url": "https://arxiv.org/abs/2609.15921",
+      "status": 200,
+      "title": "[2609.15921] Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing",
+      "bytes": 42111,
+      "sha256": "2120ecc48521fb20f853cbc7affecab98d76ee1f2b19c33db87209adad526439",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "visible-touch-abs",
+      "url": "https://arxiv.org/abs/2609.14156",
+      "status": 200,
+      "title": "[2609.14156] Visible Touch: Rendering Contact for Visuomotor Policies",
+      "bytes": 42875,
+      "sha256": "de6aba67cbc5bbe72c5d1e13a84ec6d693718207825edccb3b383ca39e7da01d",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "star-abs",
+      "url": "https://arxiv.org/abs/2609.12549",
+      "status": 200,
+      "title": "[2609.12549] STAR: Sparse Tactile Representation Learning in Vision-Tactile-Language-Action Models for Dexterous Manipulation",
+      "bytes": 42056,
+      "sha256": "7297757f0d213b83c6ff00ef7913730ccb468431cf1379e671a28ab87c27bcac",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "predtac-abs",
+      "url": "https://arxiv.org/abs/2609.15198",
+      "status": 200,
+      "title": "[2609.15198] PredTac: Learning Contact-Rich Manipulation with Predicted Touch",
+      "bytes": 42441,
+      "sha256": "6a9bf6c3dd780414353f4dc32477d6ac383f6d5054a1160a24ca3609b6673229",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "bench2dex-v1",
+      "url": "https://arxiv.org/html/2609.15726v1",
+      "status": 200,
+      "title": "Bench2Dex: Benchmarking Visuo-Tactile Bimanual Dexterous Manipulation Across Dexterous Hands",
+      "bytes": 704808,
+      "sha256": "7bd0c5649d8cfb2ae09a65d08852775e528353ac23ac9d5d55ee0410cbdc416e",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "slipsense-v1",
+      "url": "https://arxiv.org/html/2609.15910v1",
+      "status": 200,
+      "title": "SlipSense: Multimodal Tactile Learning for Low-Latency and Generalized Slip Detection",
+      "bytes": 251793,
+      "sha256": "746a2d15c52e8a3bbcc8fbe6e946d9a60f70827bfaa662edb60508ab4b2d2e48",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "touch2trace-v1",
+      "url": "https://arxiv.org/html/2609.15921v1",
+      "status": 200,
+      "title": "Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing",
+      "bytes": 235264,
+      "sha256": "2be8ad242bb5ee0567b9741110ab5221828cc0f6e06643b1162325942a895238",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "visible-touch-v1",
+      "url": "https://arxiv.org/html/2609.14156v1",
+      "status": 200,
+      "title": "Visible Touch: Rendering Contact for Visuomotor Policies",
+      "bytes": 524650,
+      "sha256": "cec9360885f87ceccc78334110bd516e2948f550f0d49885c238399ba68a0c0f",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "star-v1",
+      "url": "https://arxiv.org/html/2609.12549v1",
+      "status": 200,
+      "title": "STAR: Sparse Tactile Representation Learning in Vision–Tactile–Language–Action Models for Dexterous Manipulation",
+      "bytes": 183838,
+      "sha256": "bb56da98ff82d622c3e922a24f6b2ad37c1384b9e874d904950cd3da37bc0880",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "predtac-v1",
+      "url": "https://arxiv.org/html/2609.15198v1",
+      "status": 200,
+      "title": "PredTac: Learning Contact-Rich Manipulationwith Predicted Touch",
+      "bytes": 148202,
+      "sha256": "4798310e5b86ee8d771204a19e0f7fd69371302ec1bc0f52af970cf84fd5d16c",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "bench2dex-project",
+      "url": "https://bench2dex.github.io/",
+      "status": 200,
+      "title": "Bench2Dex: Benchmarking Visuo-Tactile Bimanual Dexterous Manipulation Across Dexterous Hands",
+      "bytes": 42658,
+      "sha256": "d1e964b0fe5783c49bd27a93c353904b2851884b64990fe2ef89660064a6e75e",
+      "checkedAt": "2026-09-18"
+    },
+    {
+      "key": "visible-touch-project",
+      "url": "https://visibletouch.github.io/",
+      "status": 200,
+      "title": "Visible Touch: Rendering Contact for Visuomotor Policies",
+      "bytes": 36257,
+      "sha256": "10b9284da8be1f98667de3db77b933ee1f74fa576276fe907c0fc2307fbaa2b7",
+      "checkedAt": "2026-09-18"
+    }
+  ],
+  "additionalOfficialResources": [
+    {
+      "url": "https://stardex-web.github.io/Star/",
+      "status": 200,
+      "finding": "Project introduction and video; no dataset/code download or reuse license linked."
+    },
+    {
+      "url": "https://api.github.com/repos/Bench2Dex/Bench2Dex/commits/HEAD",
+      "status": 200,
+      "revision": "f96a8b2b4eb475483af66e9e03916b35bc43f1be"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/Bench2Dex/teleopdata",
+      "status": 200,
+      "revision": "b195787c65046083e6a43776b67bdf1389dfa3eb",
+      "listedPaths": 5201,
+      "hdf5Paths": 5200,
+      "datasetLicense": "unknown"
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/Bench2Dex/Assets",
+      "status": 200,
+      "revision": "bf65215f844d1fca30750e4cc70d7266650abf0a",
+      "collectionWideLicense": "unknown"
+    },
+    {
+      "url": "https://huggingface.co/api/models/Bench2Dex/policy_ckpt",
+      "status": 200,
+      "revision": "773e65842bd36de1cbe951b0f52c865a87d41732",
+      "weightLicense": "unknown"
+    }
+  ],
+  "limits": [
+    "No dataset payload downloaded or validated.",
+    "No model, simulator or physical-robot experiments run.",
+    "No independent scientific reproduction verified.",
+    "SlipSense, Touch2Trace and Visible Touch acceptance is author-reported in arXiv comments; proceedings not independently verified.",
+    "No separate official project/code/data linked in the reviewed SlipSense, Touch2Trace or PredTac records. Google HTTP discovery returned a search shell and is not counted as evidence of absence."
+  ]
+}

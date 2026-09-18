@@ -199,6 +199,8 @@ The roughly 1,300 demonstrations are the paper’s reported collection size. We 
 
 ## Where to go next
 
+Compare these simulation results with physical detection and control evidence in [From Tactile Sensing to Robot Action](/guides/tactile-feedback-for-physical-ai). The [Bench2Dex directory record](/datasets#dataset-bench2dex) separates public file access from dataset licensing and payload validation.
+
 Use the [benchmark directory](/benchmarks) to compare evaluation questions and the [dataset catalogue](/datasets) to compare physical and simulated sources. For a small exercise that runs without a simulator, start with [Python tactile CSV processing](/guides/python-tactile-data-processing). To contrast simulated geometric touch with learned tactile futures, read [DexTouch-WM’s human-data transfer results](/research/dextouch-wm-human-touch-world-model-2026).
 
 ## Sources
