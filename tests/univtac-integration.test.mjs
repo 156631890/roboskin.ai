@@ -146,7 +146,7 @@ test('UniVTAC data records keep four incompatible counting units separate', asyn
 
   assert.equal((datasets.match(/id: 'univtac-encoder-pretraining-corpus'/g) ?? []).length, 1);
   assert.equal((datasets.match(/id: 'univtac-benchmark-dataset'/g) ?? []).length, 1);
-  assert.match(article, /205,826 synthetic contact samples[\s\S]*?400 paper-reported policy-training trajectories[\s\S]*?800 currently hosted HDF5 episodes[\s\S]*?450 physical demonstrations/);
+  assert.match(article, /205,826 synthetic contact samples[\s\S]*?400 paper-reported policy-training trajectories[\s\S]*?800 HDF5 episodes in each current simulator-version task release[\s\S]*?450 physical demonstrations/);
   assert.match(article, /Evaluation rollouts measure outcomes; they should not be added to training trajectories/);
   assert.match(article, /did not verify it as part of the public benchmark download/);
 });

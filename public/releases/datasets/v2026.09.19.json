@@ -1,0 +1,1307 @@
+{
+  "version": "v2026.09.19",
+  "compiledAt": "2026-09-19",
+  "scope": "Current RoboSkin tactile directory only; not an industry census.",
+  "snapshot": "/releases/datasets/v2026.09.19.json",
+  "count": 20,
+  "candidates": [
+    {
+      "id": "star",
+      "name": "STAR paper-associated dexterous manipulation data",
+      "institution": [
+        "Shanghai Innovation Institute",
+        "Agibot"
+      ],
+      "year": 2026,
+      "authors": [
+        "Xiangcheng Liu",
+        "Tianhao Wu",
+        "Le Zheng",
+        "Yidong Wang",
+        "Bowen Jiang",
+        "Mingjie Pan",
+        "Xinlin Ren",
+        "Yi Liu",
+        "Jianlan Luo"
+      ],
+      "firstPublished": "2026-09-11",
+      "paperVersion": "arXiv v1 (2609.12549v1)",
+      "dataOrigin": "real",
+      "robot": [
+        "Bimanual wheeled mobile robot; two hands with 10 actuated DoF and 16 total DoF each; commercial model name unknown"
+      ],
+      "sensor": [
+        "268-dimensional piezoresistive tactile sensing per hand",
+        "Two wrist RGB cameras and one head RGB camera"
+      ],
+      "modalities": [
+        "Three-view RGB",
+        "Bilateral tactile signals",
+        "Robot state",
+        "Command actions",
+        "Task-level language instructions"
+      ],
+      "sampleCount": "Author-reported 200 hours, 10,576 trajectories and 65 tasks. No hosted-file count verified.",
+      "tasks": [
+        "Dexterous multi-finger manipulation",
+        "Pick-and-place and insertion",
+        "Long-horizon manipulation"
+      ],
+      "objectCategories": "Task-specific household and manipulation objects; exhaustive inventory and unique object count unknown.",
+      "dataFormat": "Paper describes timestamp alignment to 30 Hz; this is not the raw tactile sampling rate. Command actions use end-effector poses and hand joints (34 active dimensions, padded to 64 for the policy). Public package, file schema and train/validation/test manifests unknown.",
+      "license": "Unknown: no dataset-file, code, weight or asset license verified. The arXiv article license does not license the described dataset.",
+      "codeLicense": "Unknown",
+      "assetLicense": "Unknown",
+      "modelLicense": "Unknown",
+      "generalization": "Evaluation objects are held out from 200-hour pretraining but used in 100 task-specific post-training trajectories per task; 20 evaluation trials per task use held-out initial configurations. Not unseen-object zero-shot generalization.",
+      "paperUrl": "https://arxiv.org/abs/2609.12549v1",
+      "projectUrl": "https://stardex-web.github.io/Star/",
+      "researchUrl": "/guides/tactile-feedback-for-physical-ai",
+      "availability": "Paper-linked data candidate only. Official project reopened on 2026-09-18; no dataset download, code release or dataset reuse license verified. Excluded from the dataset catalog count, available-file filters and Dataset structured data.",
+      "sourceReviewed": "2026-09-18",
+      "directoryRecordUrl": "https://roboskin.ai/datasets#candidate-star"
+    }
+  ],
+  "statistics": {
+    "total": 20,
+    "access": {
+      "public-files": 7,
+      "announced": 3,
+      "linked-unverified": 6,
+      "unknown": 3,
+      "gated": 1
+    },
+    "licenseDocumented": 8,
+    "licenseUnknown": 12,
+    "splitFilesListed": 1,
+    "splitProtocolDescribed": 2,
+    "splitUnknown": 17,
+    "manifestInspected": 8
+  },
+  "entries": [
+    {
+      "id": "bench2dex",
+      "name": "Bench2Dex simulation demonstrations",
+      "institution": [
+        "Shanghai Jiao Tong University",
+        "Fudan University",
+        "The University of Hong Kong",
+        "Inspire Robots",
+        "Zhongguancun Academy",
+        "COWARobot Co. Ltd",
+        "Nanyang Technological University"
+      ],
+      "year": 2026,
+      "authors": [
+        "Zhenjie Yang",
+        "Yideng Zhang",
+        "Dongjie Zhang",
+        "Chenyu Jiang",
+        "Xianshuai Liu",
+        "Yufeng Li",
+        "Zuhao Ge",
+        "Xingyu Jiao",
+        "Zheng Zhang",
+        "Kaiyu He",
+        "He Wang",
+        "Yuwen Zhong",
+        "Yi Deng",
+        "Muyun Jiang",
+        "Xianliang Huang",
+        "Haisheng Su",
+        "Donghang Zhang",
+        "Jian Zhang",
+        "Xue Yang",
+        "Hongyang Li",
+        "Zuxuan Wu",
+        "Yu-Gang Jiang",
+        "Xiaosong Jia",
+        "Junchi Yan"
+      ],
+      "firstPublished": "2026-09-14",
+      "paperVersion": "arXiv v1 (2609.15726v1)",
+      "dataOrigin": "simulation",
+      "robot": [
+        "12 simulated bimanual dexterous arm–hand embodiments; 26 task–embodiment settings"
+      ],
+      "sensor": [
+        "Surface-aligned simulated contact geometry; not measured output from a physical tactile sensor"
+      ],
+      "modalities": [
+        "Multi-view RGB",
+        "Joint state",
+        "Commanded actions",
+        "Object state",
+        "Surface-aligned tactile maps",
+        "Depth, 2D/3D boxes and occupancy when recorded"
+      ],
+      "sampleCount": "About 1,300 human-teleoperated simulation demonstrations in the v1 paper. Public hosting separately lists 5,200 HDF5 file paths; file paths are not a verified count of unique demonstrations.",
+      "tasks": [
+        "Bimanual tool use",
+        "Articulated-object interaction",
+        "Multi-stage manipulation",
+        "Controlled scene perturbations"
+      ],
+      "objectCategories": "Task-specific tools, containers, articulated objects and assembly items; a deduplicated released object count is unknown.",
+      "dataFormat": "HDF5 episodes. The documented schema aligns frame_index, timestamp_ns and sim_step; action commands precede the next simulator step and observations follow it. Actions include names, control mode, validity and source. Supported fields are not guaranteed in every payload; README says depth is omitted in the current storage workflow.",
+      "license": "Repository root MIT applies to code; no separate dataset-file license or collection-wide model/asset license was verified.",
+      "codeLicense": "MIT at repository revision f96a8b2b4eb475483af66e9e03916b35bc43f1be.",
+      "assetLicense": "Unknown collection-wide terms; upstream robot and object asset licenses require separate review.",
+      "modelLicense": "Unknown: no top-level weight license or model card verified; base-model terms may differ.",
+      "generalization": "Four scene-perturbation channels (None, Equi., Inv., Full). Multiple hand support is not zero-shot cross-hand transfer; no physical-sensor or sim-to-real validation claimed.",
+      "paperUrl": "https://arxiv.org/abs/2609.15726v1",
+      "projectUrl": "https://bench2dex.github.io/",
+      "githubUrl": "https://github.com/Bench2Dex/Bench2Dex",
+      "datasetUrl": "https://huggingface.co/datasets/Bench2Dex/teleopdata/tree/b195787c65046083e6a43776b67bdf1389dfa3eb",
+      "researchUrl": "/research/bench2dex-visuo-tactile-bimanual-benchmark-2026",
+      "availability": "Public, ungated provider manifest verified on 2026-09-18. Dataset payloads were not downloaded; completeness, checksums, schema validity and permission to reuse data remain unverified. Paper-scale demonstrations and hosted file counts are different units.",
+      "sourceReviewed": "2026-09-18",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-18",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: no dataset card or dataset-file license found in the reviewed provider manifest. Code MIT is not a dataset license.",
+        "publicFileScale": "5,201 listed paths: 5,200 HDF5 files plus .gitattributes. Unique demonstrations, frames and bytes were not independently recounted.",
+        "verificationScope": "Official project, v1 paper, repository root MIT license and provider manifests inspected. No payload download, checksum or HDF5 validation, simulation run or independent reproduction.",
+        "splitStatus": "protocol-described",
+        "splitDetails": "Paper defines deterministic task-partitioned evaluation seeds and None / Equi. / Inv. / Full perturbation channels, with 50 rollouts per task/channel/policy. Released training/validation/test split membership and leakage remain unknown; a directory name is not a verified split.",
+        "formatStatus": "described",
+        "formatDetails": "HDF5 episodes. The documented schema aligns frame_index, timestamp_ns and sim_step; action commands precede the next simulator step and observations follow it. Actions include names, control mode, validity and source. Supported fields are not guaranteed in every payload; README says depth is omitted in the current storage workflow.",
+        "revision": "b195787c65046083e6a43776b67bdf1389dfa3eb",
+        "listedFileCount": 5201,
+        "sources": [
+          "https://huggingface.co/datasets/Bench2Dex/teleopdata/tree/b195787c65046083e6a43776b67bdf1389dfa3eb",
+          "https://github.com/Bench2Dex/Bench2Dex/blob/f96a8b2b4eb475483af66e9e03916b35bc43f1be/LICENSE",
+          "https://arxiv.org/html/2609.15726v1"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-bench2dex"
+    },
+    {
+      "id": "univtac-encoder-pretraining-corpus",
+      "name": "UniVTAC Encoder Pretraining Corpus",
+      "institution": [
+        "ScaleLab, Shanghai Jiao Tong University",
+        "D-Robotics",
+        "ViTai Robotics",
+        "The University of Hong Kong",
+        "Nanjing University",
+        "Shenzhen University",
+        "Wuhan University",
+        "Fudan University",
+        "Tsinghua University"
+      ],
+      "year": 2026,
+      "robot": [
+        "UniVTAC simulated gripper contact-generation setup; not a physical-robot trajectory corpus"
+      ],
+      "sensor": [
+        "Simulation-synthesized marker-based visuo-tactile observations"
+      ],
+      "modalities": [
+        "Raw tactile RGB image with markers",
+        "Marker-free tactile RGB image",
+        "Gelpad depth map",
+        "Projected 2D marker coordinates",
+        "Object pose as 3D translation plus quaternion"
+      ],
+      "sampleCount": "The paper reports 205,826 simulation samples across 14 geometric primitives. The September 19 provider inventory separately lists 638 contact-pretraining HDF5 files across 14 non-empty shape directories. File counts are not frame counts or proof of equivalence to the paper corpus; neither collection is the task benchmark, 400 paper policy-training trajectories or 450 physical demonstrations.",
+      "tasks": [
+        "Shape reconstruction",
+        "Contact-deformation prediction",
+        "Marker-position prediction",
+        "Relative object-pose regression",
+        "Tactile representation pretraining"
+      ],
+      "objectCategories": "Fourteen geometric primitives ranging from convex forms such as spheres and cones to non-convex forms such as stars and cross-shapes, mounted on a standardized prism base for simulated contact generation.",
+      "dataFormat": "The paper defines I_marked, I_pure, depth maps, projected 2D marker coordinates and a 7D object pose. The public contact/<shape>/hdf5/ paths were inventoried at revision e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd; payload arrays, frame totals and splits were not validated.",
+      "license": "The provider dataset card labels the repository MIT. This is separate from the code root Apache-2.0 license and does not resolve third-party asset or checkpoint terms.",
+      "paperUrl": "https://arxiv.org/abs/2602.10093",
+      "projectUrl": "https://univtac.github.io/",
+      "githubUrl": "https://github.com/univtac/UniVTAC",
+      "licenseUrl": "https://opensource.org/license/mit",
+      "datasetUrl": "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/contact",
+      "researchUrl": "/research/univtac-platform-encoder-benchmark-2026",
+      "availability": "Public contact-file listing verified on September 19, 2026. No standalone download establishing exact equivalence to the 205,826-sample paper corpus was verified; HDF5 payloads were not downloaded.",
+      "sourceReviewed": "2026-09-19",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-19",
+        "licenseStatus": "documented",
+        "dataLicense": "MIT in the provider dataset-card metadata; third-party assets and checkpoint terms require separate review.",
+        "dataLicenseUrl": "https://opensource.org/license/mit",
+        "revision": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+        "publicFileScale": "638 listed contact HDF5 files across 14 non-empty shape directories. Equivalence to the paper's 205,826 contact samples is unverified; files are not frames.",
+        "verificationScope": "Pinned provider file listing and code documentation inspected. No payload download, array validation, frame recount, training or hardware run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Public contact/<shape>/hdf5/ paths; the paper describes marked and marker-free RGB, depth, projected markers and 7D pose. Released payload arrays and paper-corpus equivalence remain unverified.",
+        "sources": [
+          "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/contact"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-univtac-encoder-pretraining-corpus"
+    },
+    {
+      "id": "univtac-benchmark-dataset",
+      "name": "UniVTAC Benchmark Dataset",
+      "institution": [
+        "ScaleLab, Shanghai Jiao Tong University",
+        "D-Robotics",
+        "ViTai Robotics",
+        "The University of Hong Kong",
+        "Nanjing University",
+        "Shenzhen University",
+        "Wuhan University",
+        "Fudan University",
+        "Tsinghua University"
+      ],
+      "year": 2026,
+      "robot": [
+        "Simulated Franka Panda with a parallel-jaw gripper and bilateral simulated GelSight Mini sensors"
+      ],
+      "sensor": [
+        "Bilateral simulated GelSight Mini sensors through UniVTAC and TacEx"
+      ],
+      "modalities": [
+        "Head RGB image",
+        "Wrist RGB image",
+        "Robot end-effector and joint state",
+        "Robot action and episode metadata",
+        "Bilateral tactile RGB",
+        "Bilateral marker-overlaid tactile RGB",
+        "Bilateral tactile depth",
+        "Bilateral marker coordinates",
+        "Bilateral tactile-sensor pose"
+      ],
+      "sampleCount": "September 19 file inventory at revision e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd lists 800 HDF5 paths under isaac45 and a separate 800 under isaac51, 100 per task. The historical August revision 172331dbbce95bc04c3e59b22f32dc72ba5561ae contained 800 HDF5 episodes, approximately 125.43 GB, with metadata marking 763 successful and 37 non-success episodes. Historical size/outcome counts were not revalidated for the current versions. Task files are distinct from encoder samples, policy-training trajectories and physical demonstrations.",
+      "tasks": [
+        "Lift Bottle",
+        "Pull-out Key",
+        "Lift Can",
+        "Put Bottle in Shelf",
+        "Insert Hole",
+        "Insert HDMI",
+        "Insert Tube",
+        "Grasp Classify"
+      ],
+      "objectCategories": "Task-specific bottles, cans, keys and locks, shelf-placement objects, peg-and-hole components, HDMI connectors and ports, tube fixtures, and tactile-classification shapes as defined by the eight benchmark tasks.",
+      "dataFormat": "Versioned isaac45/<task>/hdf5/ and isaac51/<task>/hdf5/ directories with task metadata. Collection documentation describes visual observations, robot state and bilateral tactile RGB, marker, depth and pose fields. Current payload schemas were not validated. The August Dataset Viewer CastError is historical; current viewer status was not retested.",
+      "license": "MIT as displayed by the current Hugging Face dataset card. The official GitHub repository root LICENSE is separately Apache-2.0; its README’s MIT statement conflicts with that root license and is not used as the repository-license authority.",
+      "licenseUrl": "https://opensource.org/license/mit",
+      "paperUrl": "https://arxiv.org/abs/2602.10093",
+      "projectUrl": "https://univtac.github.io/",
+      "githubUrl": "https://github.com/univtac/UniVTAC",
+      "datasetUrl": "https://huggingface.co/datasets/byml/UniVTAC",
+      "researchUrl": "/research/univtac-platform-encoder-benchmark-2026",
+      "availability": "Public file listing verified on September 19, 2026. Match main/Isaac Sim 4.5 to isaac45, or isaac51/Isaac Sim 5.1 to isaac51. The official repository states task data are not cross-compatible and released policy checkpoints target 4.5. See the research guide for the downloadable 30-row inventory and payload-verification limits.",
+      "sourceReviewed": "2026-09-19",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-19",
+        "licenseStatus": "documented",
+        "dataLicense": "mit in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
+        "publicFileScale": "2,344 paths in the entire provider repository, shared with the contact and checkpoint collections. Task-only inventory: 800 HDF5 paths in isaac45 and 800 in isaac51, 100 per task in each version. Bytes, frames and unique demonstrations were not recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Versioned isaac45/<task>/hdf5/ and isaac51/<task>/hdf5/ paths with task metadata. Documentation describes head/wrist observations, robot state and bilateral tactile RGB, marker, depth and pose. Version compatibility and payload validity were not executed; the prior Dataset Viewer error was not retested.",
+        "sources": [
+          "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd"
+        ],
+        "revision": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+        "listedFileCount": 2344,
+        "dataLicenseUrl": "https://opensource.org/license/mit"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-univtac-benchmark-dataset"
+    },
+    {
+      "id": "t-rex",
+      "name": "T-Rex Tactile-Reactive Dexterous Manipulation Dataset",
+      "institution": [
+        "UC Berkeley",
+        "NVIDIA",
+        "Stanford University",
+        "Panasonic",
+        "Sapienza University of Rome",
+        "ItalAI"
+      ],
+      "year": 2026,
+      "robot": [
+        "Fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave dexterous hands"
+      ],
+      "sensor": [
+        "ZED X Mini head camera",
+        "Two ZED X One S wrist cameras",
+        "Ten fingertip image-based tactile sensors, five per hand"
+      ],
+      "modalities": [
+        "Head RGB video",
+        "Bilateral wrist RGB video",
+        "Robot state",
+        "Current and target joint positions",
+        "Raw fingertip grayscale tactile video",
+        "Estimated tactile deformation maps",
+        "Estimated 6D fingertip wrenches",
+        "Frame and episode metadata"
+      ],
+      "sampleCount": "The paper and official repository report a complete 100-hour collection with 7,700-plus trajectories, 22 motor primitives, and more than 200 objects. The public Hugging Face card specifies 5,464 episodes, 5,473,459 frames at 30 FPS (approximately 50 hours), 5,370 language-annotated trajectories, 22 motor primitives, and 207 objects. The public subset must not be described as the complete 100-hour corpus.",
+      "tasks": [
+        "Bimanual tactile-reactive motor primitives",
+        "Dexterous manipulation",
+        "Force-sensitive contact",
+        "Deformable-object interaction",
+        "Vision-language-action midtraining"
+      ],
+      "objectCategories": "The current public dataset card reports 207 unique canonical objects and publishes composition metadata, but RoboSkin did not independently audit every object label or collapse them into an inferred category taxonomy.",
+      "dataFormat": "LeRobotDataset v3.0 with head and bilateral wrist videos, robot state, current and target joint positions, ten fingertip tactile streams, deformation maps, 6D wrenches, and episode metadata. The official repository provides selective download, inspection, and 3D replay examples.",
+      "license": "MIT according to the current Hugging Face dataset card. Repository code is also MIT, but upstream robot assets, dependencies, and any files outside the public package retain their own terms.",
+      "licenseUrl": "https://opensource.org/license/mit",
+      "paperUrl": "https://arxiv.org/abs/2606.17055",
+      "projectUrl": "https://tactile-reactive-dexterous.github.io/",
+      "githubUrl": "https://github.com/ZhuoyangLiu2005/T-Rex",
+      "datasetUrl": "https://huggingface.co/datasets/zekaiwang/trex_dataset",
+      "availability": "The 5,464-episode, approximately 50-hour LeRobot v3.0 subset is publicly browsable and downloadable on Hugging Face. The official repository provides a dataset quickstart and states that the full 100-hour pretraining and midtraining corpus is not part of the current release.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-13",
+        "licenseStatus": "documented",
+        "dataLicense": "mit in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
+        "publicFileScale": "7,903 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "LeRobotDataset v3.0 with head and bilateral wrist videos, robot state, current and target joint positions, ten fingertip tactile streams, deformation maps, 6D wrenches, and episode metadata. The official repository provides selective download, inspection, and 3D replay examples.",
+        "sources": [
+          "https://huggingface.co/datasets/zekaiwang/trex_dataset/tree/bf0eb24c4b8bdd95752b553f0fc50e46a22f1cc8"
+        ],
+        "revision": "bf0eb24c4b8bdd95752b553f0fc50e46a22f1cc8",
+        "listedFileCount": 7903,
+        "dataLicenseUrl": "https://opensource.org/license/mit"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-t-rex"
+    },
+    {
+      "id": "egotouch",
+      "name": "EgoTouch",
+      "institution": [
+        "Harbin Institute of Technology, Shenzhen",
+        "Meituan Academy of Robotics",
+        "Tsinghua Shenzhen International Graduate School, Tsinghua University"
+      ],
+      "year": 2026,
+      "robot": [
+        "Human-wearable bimanual collection; no robot platform is used in the EgoTouch capture pipeline"
+      ],
+      "sensor": [
+        "Head-mounted wide-angle camera",
+        "Dual wrist cameras",
+        "Bimanual pressure-sensing gloves with dense palm pressure maps",
+        "Bimanual 3D hand-pose capture"
+      ],
+      "modalities": [
+        "Head-mounted egocentric RGB",
+        "Dual wrist-mounted RGB",
+        "Bimanual 3D hand pose with 42 joints",
+        "Continuous bilateral tactile pressure maps",
+        "Camera and wrist poses",
+        "Frame timestamps"
+      ],
+      "sampleCount": "208 manipulation tasks across 1,891 episodes in indoor and outdoor environments. The official repository reports approximately 2 million frames and more than 1,000 objects; those repository statistics are author-reported and the repository still warns that the dataset upload may be incomplete.",
+      "tasks": [
+        "Bimanual hand-object manipulation",
+        "Egocentric vision-to-touch prediction",
+        "Contact prediction under visual occlusion",
+        "Multi-view tactile estimation"
+      ],
+      "objectCategories": "More than 1,000 objects across home, office, outdoor, retail, and workbench scenes are reported by the official repository; a complete reviewed object taxonomy was not verified.",
+      "dataFormat": "The official repository documents variable-length 30 FPS HDF5 episodes containing three 640 x 480 RGB views, bimanual hand-pose arrays, bilateral pressure grids, camera poses, masks when available, metadata, and timestamps. The Hugging Face repository also exposes scene folders and split.json.",
+      "license": "A separate dataset-file license was not verified. The official GitHub repository is MIT licensed, but that project-code license is not generalized here to the hosted EgoTouch data files.",
+      "paperUrl": "https://arxiv.org/abs/2605.13083",
+      "githubUrl": "https://github.com/Jianyi2004/TouchAnything",
+      "datasetUrl": "https://huggingface.co/datasets/zhouzhoujy/EgoTouch",
+      "availability": "The official Hugging Face repository exposes scene folders and split metadata. The official GitHub repository says the upload is in progress and currently accessible files may be incomplete, so completeness and the exact version must be checked before reuse.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-13",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "22,897 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "files-listed",
+        "splitDetails": "Split-named files listed: split.json. Contents and leakage were not validated.",
+        "formatStatus": "described",
+        "formatDetails": "The official repository documents variable-length 30 FPS HDF5 episodes containing three 640 x 480 RGB views, bimanual hand-pose arrays, bilateral pressure grids, camera poses, masks when available, metadata, and timestamps. The Hugging Face repository also exposes scene folders and split.json.",
+        "sources": [
+          "https://huggingface.co/datasets/zhouzhoujy/EgoTouch/tree/cfdbb0ac31cc2af4247943820aa250575e7e6637"
+        ],
+        "revision": "cfdbb0ac31cc2af4247943820aa250575e7e6637",
+        "listedFileCount": 22897
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-egotouch"
+    },
+    {
+      "id": "prism-industrial-skill",
+      "name": "PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing",
+      "institution": [
+        "State Key Laboratory of General Artificial Intelligence, School of Intelligence Science and Technology, Peking University",
+        "Delta Intelligence",
+        "PKU-Wuhan Institute for Artificial Intelligence",
+        "Hubei Humanoid Robot Innovation Center Co., Ltd.",
+        "China Academy of Information and Communications Technology"
+      ],
+      "year": 2026,
+      "robot": [
+        "Dual Franka Emika Panda tracker platform",
+        "Bimanual Realman RM75-6F exoskeleton platform",
+        "LEJU upper-body humanoid VR platform"
+      ],
+      "sensor": [
+        "Multi-view RGB-D cameras",
+        "6DoF force/torque sensing",
+        "Unnamed visuotactile gripper and visuotactile dexterous hand on a subset of Franka episodes"
+      ],
+      "modalities": [
+        "Multi-view RGB",
+        "Depth",
+        "Visuotactile image when available",
+        "6DoF force/torque when available",
+        "Robot joint angle and torque",
+        "End-effector Cartesian pose",
+        "Gripper state",
+        "Calibration and timestamps",
+        "Human control signal"
+      ],
+      "sampleCount": "5,000+ robot trajectories paired with 5,000 human demonstrations; 45+ hours; 25+ industrial tasks; approximately 27M images across visual and visuotactile streams. The paper does not disclose the number or share of tactile-equipped episodes.",
+      "tasks": [
+        "Electronic component plug and unplug",
+        "Caliper packaging",
+        "Conveyor sorting",
+        "NIST Assembly Task Board operations",
+        "Industrial installation and assembly",
+        "Long-horizon compositional procedures"
+      ],
+      "objectCategories": "Industrial components, assembly hardware, packaging items, conveyor-sorted materials, and task-board objects; the source does not provide one complete released object inventory.",
+      "dataFormat": "The paper describes timestamped episode files in a common cross-platform schema and reports conversion to LeRobot v3.0 for its experiments. The unreleased public package and final file inventory could not be inspected.",
+      "license": "Dataset-file license not published on the reviewed project page or GitHub repository; the article license does not license unreleased data files",
+      "paperUrl": "https://arxiv.org/abs/2608.17962",
+      "projectUrl": "https://tengbo-yu.github.io/PRISM/",
+      "githubUrl": "https://github.com/Tengbo-Yu/PRISM",
+      "availability": "The arXiv abstract says the dataset is open-sourced at the project page, but as of 2026-08-22 the official Dataset button is disabled and labeled “soon”; the GitHub repository contains website and paper assets but no dataset files, releases, or dataset license. Record PRISM as announced, download pending.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "announced",
+        "accessCheckedAt": "2026-08-22",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "The paper describes timestamped episode files in a common cross-platform schema and reports conversion to LeRobot v3.0 for its experiments. The unreleased public package and final file inventory could not be inspected.",
+        "sources": [
+          "https://tengbo-yu.github.io/PRISM/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-prism-industrial-skill"
+    },
+    {
+      "id": "softvtbench",
+      "name": "SoftVTBench",
+      "institution": [
+        "Tuojing Intelligence",
+        "Tsinghua University",
+        "King's College London",
+        "Southeast University",
+        "Stevens Institute of Technology",
+        "Hong Kong University of Science and Technology (Guangzhou)",
+        "University of Manchester",
+        "Simple AI",
+        "Imperial College London",
+        "Carnegie Mellon University",
+        "Zhejiang University",
+        "Beihang University",
+        "University of Hong Kong"
+      ],
+      "year": 2026,
+      "robot": [
+        "Simulated Franka arm with Panda parallel-jaw gripper in Isaac Sim and Isaac Lab"
+      ],
+      "sensor": [
+        "Simulated bilateral GelSight Mini profiles rendered through TacEx, Taxim, and FOTS"
+      ],
+      "modalities": [
+        "Multi-view RGB",
+        "Dual-finger tactile RGB",
+        "Tactile marker motion",
+        "Proprioception",
+        "Language",
+        "Continuous and binary gripper actions",
+        "Evaluator-only FEM state"
+      ],
+      "sampleCount": "Latest paper: 4,000 expert demonstrations across 40 tasks and more than 50 assets. Hugging Face dataset-card revision fd2793a documents four subsets with 10 tasks and 100 successful demonstrations each, or 4,000 demonstrations total. The GitHub README last changed 2026-07-22 still lists an earlier 1,628-demonstration, 33-asset state, so the first-party release documents are not synchronized.",
+      "tasks": [
+        "Deformable-object grasp and placement",
+        "Rigid-twin matched control tasks",
+        "Object-variation generalization",
+        "Spatial-variation generalization",
+        "Vision-only and visuo-tactile policy comparison"
+      ],
+      "objectCategories": "Ten volumetric deformable manipulated-object designs and matched rigid twins; the latest paper reports more than 50 assets across the complete benchmark inventory.",
+      "dataFormat": "HDF5 trajectories with synchronized policy observations, robot actions, simulator state, and evaluator fields, plus third-person, wrist, and bilateral tactile MP4 videos documented by the current dataset card.",
+      "license": "Apache-2.0 as shown on the current Hugging Face dataset card; upstream simulator, robot, tactile-runtime, and third-party asset terms may differ",
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+      "paperUrl": "https://arxiv.org/abs/2608.18701",
+      "projectUrl": "https://softvtbench.github.io/",
+      "githubUrl": "https://github.com/TuojingAI/SoftVTBench",
+      "datasetUrl": "https://huggingface.co/datasets/Arthur12137/SoftVTBench",
+      "availability": "The official repository links public code and the Hugging Face dataset mirror. The Hugging Face card reviewed on 2026-08-22 documents 4,000 hosted demonstrations, while the older GitHub README still lists 1,628 demonstrations and 33 assets. Pin the exact dataset revision because the first-party release documents currently disagree.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-13",
+        "licenseStatus": "documented",
+        "dataLicense": "apache-2.0 in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
+        "publicFileScale": "16,060 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "HDF5 trajectories with synchronized policy observations, robot actions, simulator state, and evaluator fields, plus third-person, wrist, and bilateral tactile MP4 videos documented by the current dataset card.",
+        "sources": [
+          "https://huggingface.co/datasets/Arthur12137/SoftVTBench/tree/fd2793a19310b5ba4ac6518f9a17ff43d56f6651"
+        ],
+        "revision": "fd2793a19310b5ba4ac6518f9a17ff43d56f6651",
+        "listedFileCount": 16060,
+        "dataLicenseUrl": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-softvtbench"
+    },
+    {
+      "id": "robotacdex",
+      "name": "RoboTacDex: A Dexterous Visual-Tactile-Action Dataset for Humanoid Manipulation",
+      "institution": [
+        "Fudan University",
+        "ByteDance Intelligent Creation",
+        "Shanghai AI Laboratory",
+        "The Chinese University of Hong Kong"
+      ],
+      "year": 2026,
+      "robot": [
+        "Unitree G1 humanoid with dual arms totaling 14 DoF and two BrainCo Revo2 Tactile dexterous hands totaling 12 hand DoF as counted by the paper; lower limbs and waist fixed during collection"
+      ],
+      "sensor": [
+        "Four RGB-D cameras, including two Intel RealSense D435i cameras for the head and third-person views",
+        "Two BrainCo Revo2 Tactile dexterous hands measuring fingertip normal force, tangential force and direction, and self-capacitance proximity"
+      ],
+      "modalities": [
+        "Four-view RGB at 640 x 480",
+        "Four-view depth at 640 x 480",
+        "Arm and finger joint state",
+        "Arm and finger joint action",
+        "Bilateral fingertip normal force",
+        "Bilateral fingertip tangential force and direction",
+        "Self-capacitance proximity",
+        "Natural-language semantic annotation"
+      ],
+      "sampleCount": "More than 6,000 physical-robot trajectories totaling approximately 25 hours, covering 19 tasks, an author-reported 23 skills, and 22 objects. Figure 4 exposes 22 discernible atomic-skill labels, so the 23-skill headline has an unresolved internal source discrepancy. Trajectories are recorded at 30 Hz; tactile and dexterous-hand joint-state messages are published at 100 Hz and recorded locally at 30 Hz with the other modalities.",
+      "tasks": [
+        "Basic grasping, placing, and pushing",
+        "Articulated-object manipulation",
+        "Dual-arm collaborative manipulation",
+        "Fine manipulation",
+        "Humanoid-interactive manipulation",
+        "Pick and place a pear",
+        "Turn a page",
+        "Insert a book into a document bag",
+        "Unscrew a bottle cap"
+      ],
+      "objectCategories": "Twenty-two objects spanning articulated, constrained, container, functional, and graspable categories, including kitchen food and office supplies as well as rigid and deformable objects. The paper does not publish a complete machine-readable object inventory.",
+      "dataFormat": "The v1 paper describes 30 Hz synchronized trajectories containing four 640 x 480 RGB-D views, arm and finger states and actions, bilateral tactile signals, and semantic annotations. It does not state the public package format, directory schema, compression, checksums, or train-validation-test file layout.",
+      "license": "Dataset-file license not stated. The arXiv article license does not license unreleased dataset files.",
+      "paperUrl": "https://arxiv.org/abs/2606.31836",
+      "availability": "The June 30, 2026 v1 paper says the dataset will be open-sourced soon. No official project page, repository, downloadable package, or dataset-file license was verified on 2026-08-22; record access as announced, not released.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "announced",
+        "accessCheckedAt": "2026-08-22",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "The v1 paper describes 30 Hz synchronized trajectories containing four 640 x 480 RGB-D views, arm and finger states and actions, bilateral tactile signals, and semantic annotations. It does not state the public package format, directory schema, compression, checksums, or train-validation-test file layout.",
+        "sources": [
+          "https://arxiv.org/abs/2606.31836"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-robotacdex"
+    },
+    {
+      "id": "ht-bench",
+      "name": "HT-Bench",
+      "institution": [
+        "Beihang University",
+        "Rimbot",
+        "ShanghaiTech University",
+        "Tsinghua University",
+        "Chinese Academy of Sciences",
+        "BUPT"
+      ],
+      "year": 2026,
+      "robot": [
+        "Single reported dexterous full-hand collection and downstream-evaluation platform; hardware model not stated in the reviewed HTML"
+      ],
+      "sensor": [
+        "Single reported full-hand tactile sensing pipeline; hardware model not stated in the reviewed HTML"
+      ],
+      "modalities": [
+        "Egocentric RGB",
+        "Full-hand tactile pressure maps"
+      ],
+      "sampleCount": "10M RGB frames; 7.8M tactile frames; 226 tasks",
+      "tasks": [
+        "Tactile similarity retrieval",
+        "Masked tactile inpainting",
+        "Vision-to-tactile synthesis",
+        "Tactile frame prediction"
+      ],
+      "objectCategories": "Home, electronics workbench, chemistry lab, retail, workbench, outdoor, and other scenes; object count not stated.",
+      "dataFormat": "Synchronized egocentric RGB and full-hand tactile maps; the benchmark pipeline normalizes tactile maps to 224 x 224.",
+      "license": "Dataset, model-weight, and code licenses not stated; the paper is CC BY 4.0, which does not establish a license for unreleased artifact files",
+      "paperUrl": "https://arxiv.org/abs/2606.19161v2",
+      "availability": "The v2 preprint says the authors will release all data, evaluation protocols, pretrained weights, and training/testing scripts. No dedicated downloadable dataset package, official repository, or artifact license was verified on 2026-08-22; record access as announced, not released.",
+      "sourceReviewed": "2026-08-22",
+      "evidence": {
+        "access": "announced",
+        "accessCheckedAt": "2026-08-22",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Synchronized egocentric RGB and full-hand tactile maps; the benchmark pipeline normalizes tactile maps to 224 x 224.",
+        "sources": [
+          "https://arxiv.org/abs/2606.19161v2"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-ht-bench"
+    },
+    {
+      "id": "rct",
+      "name": "RCT: Robotic Contact Tactile",
+      "institution": [
+        "TU Dresden",
+        "ScaDS.AI Dresden/Leipzig",
+        "LASR Lab"
+      ],
+      "year": 2026,
+      "robot": [
+        "Robot arm with rotating three-sensor adapter"
+      ],
+      "sensor": [
+        "DIGIT vision-based tactile sensor"
+      ],
+      "modalities": [
+        "Tactile image",
+        "Material RGB image",
+        "Language descriptors",
+        "Normal force",
+        "Indentation depth"
+      ],
+      "sampleCount": "29,279 tactile frames; 1,832 contact sequences; 122 materials; 3 DIGIT sensors",
+      "tasks": [
+        "Material generalization",
+        "Touch-to-text retrieval",
+        "Touch-to-vision retrieval",
+        "Sensor-disjoint evaluation"
+      ],
+      "objectCategories": "122 industrial reference materials in 7 categories.",
+      "dataFormat": "Ordered contact sequences with material, category, sensor, position, depth, force, image, and descriptor metadata.",
+      "license": "CC BY 4.0 dataset; Apache-2.0 code",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "paperUrl": "https://arxiv.org/abs/2606.31694",
+      "projectUrl": "https://faerber-lab.github.io/RCT/",
+      "githubUrl": "https://github.com/faerber-lab/RCT",
+      "datasetUrl": "https://figshare.com/s/a5ed417ba6602ccad0f6",
+      "availability": "Dataset, split tools, and evaluation code are publicly linked by the official project page.",
+      "sourceReviewed": "2026-08-16",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-16",
+        "licenseStatus": "documented",
+        "dataLicense": "CC BY 4.0 dataset; Apache-2.0 applies to code, according to the existing project review.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "protocol-described",
+        "splitDetails": "Existing source review documents split tools. File-level membership and train/test leakage were not independently validated.",
+        "formatStatus": "described",
+        "formatDetails": "Ordered contact sequences with material, category, sensor, position, depth, force, image, and descriptor metadata.",
+        "sources": [
+          "https://figshare.com/s/a5ed417ba6602ccad0f6"
+        ],
+        "dataLicenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-rct"
+    },
+    {
+      "id": "tactidex",
+      "name": "TactiDex",
+      "institution": [
+        "ShanghaiTech University",
+        "InstAdapt"
+      ],
+      "year": 2026,
+      "robot": [
+        "Human demonstration capture",
+        "Bimanual Franka Inspire deployment"
+      ],
+      "sensor": [
+        "Whole-hand tactile glove"
+      ],
+      "modalities": [
+        "Whole-hand pressure map",
+        "Hand kinematics",
+        "Object 6D pose",
+        "Language description",
+        "Task-phase annotation"
+      ],
+      "sampleCount": "Not stated on the reviewed project page",
+      "tasks": [
+        "Single-hand dexterous manipulation",
+        "Bimanual manipulation",
+        "Human-to-robot skill transfer"
+      ],
+      "objectCategories": "Household and tool objects shown in project demonstrations; total object count not stated.",
+      "dataFormat": "Synchronized tactile pressure, hand-object kinematics, 6D pose, language, and hierarchical task annotations.",
+      "license": "Dataset license not stated on the reviewed project page",
+      "paperUrl": "https://arxiv.org/abs/2607.09190",
+      "projectUrl": "https://tactidex.github.io/",
+      "availability": "The official project page documents the benchmark and demonstrations; no separate dataset download URL was verified.",
+      "sourceReviewed": "2026-08-16",
+      "evidence": {
+        "access": "unknown",
+        "accessCheckedAt": "2026-08-16",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Synchronized tactile pressure, hand-object kinematics, 6D pose, language, and hierarchical task annotations.",
+        "sources": [
+          "https://tactidex.github.io/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-tactidex"
+    },
+    {
+      "id": "freetacman",
+      "name": "FreeTacMan",
+      "institution": [
+        "Shanghai Innovation Institute",
+        "The University of Hong Kong",
+        "Shanghai Jiao Tong University",
+        "Fudan University"
+      ],
+      "year": 2025,
+      "robot": [
+        "Robot-free wearable gripper",
+        "Piper",
+        "Franka"
+      ],
+      "sensor": [
+        "Modular LED-based visuo-tactile sensor"
+      ],
+      "modalities": [
+        "Wrist RGB video",
+        "Visuo-tactile video",
+        "Tool-center-point pose",
+        "Gripper distance"
+      ],
+      "sampleCount": "More than 3M visuo-tactile image pairs; more than 10K trajectories; 50 tasks",
+      "tasks": [
+        "Contact-rich demonstrations",
+        "Imitation learning",
+        "Tactile pretraining",
+        "Visuo-tactile manipulation"
+      ],
+      "objectCategories": "Fifty contact-rich task categories; examples include fragile handling, insertion, stamping, texture classification, and calligraphy.",
+      "dataFormat": "MP4 wrist and tactile videos plus timestamped trajectory files containing TCP pose, quaternion, Euler angles, and gripper distance.",
+      "license": "MIT License",
+      "licenseUrl": "https://opensource.org/license/mit",
+      "paperUrl": "https://arxiv.org/abs/2506.01941",
+      "projectUrl": "https://opendrivelab.com/FreeTacMan",
+      "githubUrl": "https://github.com/OpenDriveLab/FreeTacMan",
+      "datasetUrl": "https://huggingface.co/datasets/OpenDriveLab/FreeTacMan",
+      "availability": "The official project page links the dataset, code, hardware guide, and mirror.",
+      "sourceReviewed": "2026-08-16",
+      "evidence": {
+        "access": "public-files",
+        "accessCheckedAt": "2026-09-13",
+        "licenseStatus": "documented",
+        "dataLicense": "mit in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
+        "publicFileScale": "24,915 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "MP4 wrist and tactile videos plus timestamped trajectory files containing TCP pose, quaternion, Euler angles, and gripper distance.",
+        "sources": [
+          "https://huggingface.co/datasets/OpenDriveLab/FreeTacMan/tree/030316fb41d6fa1e58cccb4bbe0f6fddbb932671"
+        ],
+        "revision": "030316fb41d6fa1e58cccb4bbe0f6fddbb932671",
+        "listedFileCount": 24915,
+        "dataLicenseUrl": "https://opensource.org/license/mit"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-freetacman"
+    },
+    {
+      "id": "humanoid-vta",
+      "name": "Humanoid Visual-Tactile-Action Dataset",
+      "institution": [
+        "Gwangju Institute of Science and Technology"
+      ],
+      "year": 2025,
+      "robot": [
+        "Humanoid teleoperation platform",
+        "Two Inspire RH56-DFX dexterous hands"
+      ],
+      "sensor": [
+        "1,062 tactile sensors per hand",
+        "Piezoresistive tactile carpet"
+      ],
+      "modalities": [
+        "Egocentric RGB",
+        "Third-person RGB",
+        "Dense tactile pressure",
+        "Arm and finger proprioception",
+        "Robot action",
+        "External pressure heatmap"
+      ],
+      "sampleCount": "101.9K synchronized samples; approximately 77-80 episodes per task",
+      "tasks": [
+        "Towel strong pressure",
+        "Towel weak pressure",
+        "Sponge strong pressure",
+        "Sponge weak pressure"
+      ],
+      "objectCategories": "Two deformable soft objects (towel and sponge), with rigid-object comparison data described in the paper.",
+      "dataFormat": "Synchronized visual, 2,124-channel hand tactile, proprioceptive, action, and external pressure signals; public file format not stated.",
+      "license": "Dataset access terms not stated on the reviewed paper page",
+      "paperUrl": "https://arxiv.org/abs/2510.25725",
+      "availability": "The paper describes the dataset; no official public download URL was verified on 2026-08-16.",
+      "sourceReviewed": "2026-08-16",
+      "evidence": {
+        "access": "unknown",
+        "accessCheckedAt": "2026-08-16",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Synchronized visual, 2,124-channel hand tactile, proprioceptive, action, and external pressure signals; public file format not stated.",
+        "sources": [
+          "https://arxiv.org/abs/2510.25725"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-humanoid-vta"
+    },
+    {
+      "id": "sparsh-x",
+      "name": "Sparsh-X Multisensory Touch Resource",
+      "institution": [
+        "FAIR at Meta",
+        "University of Washington",
+        "Carnegie Mellon University"
+      ],
+      "year": 2025,
+      "robot": [
+        "Robot manipulation platforms used for insertion and in-hand rotation"
+      ],
+      "sensor": [
+        "Digit 360"
+      ],
+      "modalities": [
+        "Tactile image",
+        "Audio",
+        "Motion",
+        "Pressure"
+      ],
+      "sampleCount": "Approximately 1M unlabeled contact-rich interactions",
+      "tasks": [
+        "Physical-property inference",
+        "Plug insertion",
+        "In-hand rotation",
+        "Tactile adaptation"
+      ],
+      "objectCategories": "Diverse manipulation interactions; object count and category inventory not stated on the reviewed paper page.",
+      "dataFormat": "Four synchronized Digit 360 modalities; public file format not stated on the reviewed paper page.",
+      "license": "Dataset license and download URL not stated on the reviewed paper page",
+      "paperUrl": "https://arxiv.org/abs/2506.14754",
+      "availability": "The paper documents the training resource; a dedicated public dataset URL was not verified.",
+      "sourceReviewed": "2026-08-16",
+      "evidence": {
+        "access": "unknown",
+        "accessCheckedAt": "2026-08-16",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Four synchronized Digit 360 modalities; public file format not stated on the reviewed paper page.",
+        "sources": [
+          "https://arxiv.org/abs/2506.14754"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-sparsh-x"
+    },
+    {
+      "id": "touch-and-go",
+      "name": "Touch and Go",
+      "institution": [
+        "University of Michigan",
+        "Carnegie Mellon University"
+      ],
+      "year": 2022,
+      "robot": [
+        "Human-operated GelSight collection device"
+      ],
+      "sensor": [
+        "GelSight"
+      ],
+      "modalities": [
+        "Egocentric RGB video",
+        "GelSight tactile video",
+        "Material labels"
+      ],
+      "sampleCount": "Approximately 13.9K detected touches; approximately 3,971 object instances; 20 material categories",
+      "tasks": [
+        "Visuo-tactile feature learning",
+        "Material recognition",
+        "Tactile-driven image stylization",
+        "Future tactile prediction"
+      ],
+      "objectCategories": "Rigid and deformable objects across indoor and outdoor environments; the paper reports 20 material categories.",
+      "dataFormat": "Synchronized egocentric video and GelSight tactile recordings with detected-touch timing and material annotations.",
+      "license": "Dataset license not stated on the reviewed paper page",
+      "paperUrl": "https://arxiv.org/abs/2211.12498",
+      "projectUrl": "https://touch-and-go.github.io/",
+      "availability": "The paper and project describe a human-collected in-the-wild visuo-tactile dataset; verify the current download terms before reuse.",
+      "sourceReviewed": "2026-08-19",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-19",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Synchronized egocentric video and GelSight tactile recordings with detected-touch timing and material annotations.",
+        "sources": [
+          "https://touch-and-go.github.io/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-touch-and-go"
+    },
+    {
+      "id": "tvl",
+      "name": "TVL: Touch, Vision, and Language",
+      "institution": [
+        "UC Berkeley",
+        "Meta AI Research",
+        "TU Dresden",
+        "CeTI"
+      ],
+      "year": 2024,
+      "robot": [
+        "Handheld 3D-printed HCT collection device",
+        "Robot-collected SSVTP subset"
+      ],
+      "sensor": [
+        "DIGIT"
+      ],
+      "modalities": [
+        "Tactile RGB image",
+        "RGB image",
+        "English tactile description"
+      ],
+      "sampleCount": "43,741 in-contact image-touch pairs; HCT contributes 39,154 pairs and SSVTP contributes 4,587 pairs",
+      "tasks": [
+        "Tactile-semantic classification",
+        "Touch-vision alignment",
+        "Touch-language alignment",
+        "Tactile description generation"
+      ],
+      "objectCategories": "In-the-wild surfaces and objects plus the SSVTP laboratory subset; a total object-category inventory is not stated on the reviewed project page.",
+      "dataFormat": "Temporally aligned touch, vision, and open-vocabulary language examples; 10% of labels are human annotations and 90% are VLM-generated in the paper.",
+      "license": "Dataset license not stated on the reviewed project page",
+      "paperUrl": "https://arxiv.org/abs/2402.13232",
+      "projectUrl": "https://tactile-vlm.github.io/",
+      "availability": "The official project page links the paper, code, dataset, and models.",
+      "sourceReviewed": "2026-08-19",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-19",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Temporally aligned touch, vision, and open-vocabulary language examples; 10% of labels are human annotations and 90% are VLM-generated in the paper.",
+        "sources": [
+          "https://tactile-vlm.github.io/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-tvl"
+    },
+    {
+      "id": "objectfolder-real",
+      "name": "ObjectFolder Real",
+      "institution": [
+        "Stanford University",
+        "Carnegie Mellon University"
+      ],
+      "year": 2023,
+      "robot": [
+        "Franka Emika Panda"
+      ],
+      "sensor": [
+        "GelSight robotic finger"
+      ],
+      "modalities": [
+        "3D mesh",
+        "HD RGB video",
+        "Impact audio",
+        "Tactile reading"
+      ],
+      "sampleCount": "100 real-world household objects",
+      "tasks": [
+        "Cross-sensory retrieval",
+        "Contact localization",
+        "Material classification",
+        "Reconstruction",
+        "Manipulation benchmarks"
+      ],
+      "objectCategories": "One hundred real-world household objects; detailed inventory is provided through the official ObjectFolder resources.",
+      "dataFormat": "Multisensory measurements aligned to object surface locations, including mesh, visual, acoustic, and tactile assets.",
+      "license": "Review the license bundled with the downloaded ObjectFolder release",
+      "paperUrl": "https://openaccess.thecvf.com/content/CVPR2023/html/Gao_The_ObjectFolder_Benchmark_Multisensory_Learning_With_Neural_and_Real_Objects_CVPR_2023_paper.html",
+      "projectUrl": "https://objectfolder.stanford.edu/",
+      "githubUrl": "https://github.com/rhgao/ObjectFolder",
+      "availability": "The official ObjectFolder site provides dataset and benchmark download routes.",
+      "sourceReviewed": "2026-08-19",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-19",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Multisensory measurements aligned to object surface locations, including mesh, visual, acoustic, and tactile assets.",
+        "sources": [
+          "https://objectfolder.stanford.edu/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-objectfolder-real"
+    },
+    {
+      "id": "objectfolder-2",
+      "name": "ObjectFolder 2.0",
+      "institution": [
+        "Stanford University",
+        "Carnegie Mellon University"
+      ],
+      "year": 2022,
+      "robot": [
+        "Simulation / neural object rendering"
+      ],
+      "sensor": [
+        "Simulated GelSight-style tactile rendering"
+      ],
+      "modalities": [
+        "Visual appearance",
+        "Impact audio",
+        "Tactile RGB image",
+        "3D geometry"
+      ],
+      "sampleCount": "1,000 multisensory neural objects",
+      "tasks": [
+        "Object scale estimation",
+        "Contact localization",
+        "Shape reconstruction",
+        "Multisensory representation learning"
+      ],
+      "objectCategories": "One thousand neural objects derived from real-object 3D assets across common household categories.",
+      "dataFormat": "Object File implicit neural representations with query parameters for view, lighting, impact, contact location, gel rotation, and indentation depth.",
+      "license": "CC BY 4.0 for ObjectFolder 2.0 according to the official download page",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "paperUrl": "https://arxiv.org/abs/2204.02389",
+      "projectUrl": "https://objectfolder.stanford.edu/objectfolder2-0-download",
+      "githubUrl": "https://github.com/rhgao/ObjectFolder",
+      "datasetUrl": "https://objectfolder.stanford.edu/objectfolder2-0-download",
+      "availability": "The official download page provides the Object Files, rendering instructions, metadata, and license information.",
+      "sourceReviewed": "2026-08-19",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-19",
+        "licenseStatus": "documented",
+        "dataLicense": "CC BY 4.0 for ObjectFolder 2.0 according to the existing review of the official download page.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Object File implicit neural representations with query parameters for view, lighting, impact, contact location, gel rotation, and indentation depth.",
+        "sources": [
+          "https://objectfolder.stanford.edu/objectfolder2-0-download"
+        ],
+        "dataLicenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-objectfolder-2"
+    },
+    {
+      "id": "tacverse",
+      "name": "TacVerse",
+      "institution": [
+        "Imperial College London",
+        "Queen Mary University of London",
+        "King’s College London"
+      ],
+      "year": 2026,
+      "robot": [
+        "Controlled tactile data-collection platform"
+      ],
+      "sensor": [
+        "GelSightNoMarker",
+        "GelSightMarker",
+        "MagicGripper",
+        "MagicTac",
+        "TacTip",
+        "ViTac",
+        "ViTacTip"
+      ],
+      "modalities": [
+        "Tactile RGB image",
+        "Shape label",
+        "Grating label",
+        "Force label"
+      ],
+      "sampleCount": "106,800 tactile images from seven vision-based tactile sensors",
+      "tasks": [
+        "Shape classification",
+        "Grating classification",
+        "Force regression",
+        "Zero-shot cross-sensor transfer",
+        "Few-shot adaptation"
+      ],
+      "objectCategories": "Controlled shape and grating stimuli plus force-regression contacts; a general object-category inventory is not stated.",
+      "dataFormat": "Multi-sensor tactile images and task labels organized for within-sensor, zero-shot cross-sensor, and few-shot protocols.",
+      "license": "CC BY 4.0 in the official Hugging Face metadata; access is gated and asset-specific terms were not independently checked",
+      "paperUrl": "https://arxiv.org/abs/2606.25877",
+      "projectUrl": "https://lannwei.github.io/Tactile_Database/",
+      "githubUrl": "https://github.com/LannWei/Tactile_Database",
+      "datasetUrl": "https://huggingface.co/datasets/Lan-2025/Tactile",
+      "researchUrl": "/research/tacverse-cross-sensor-tactile-dataset-2026",
+      "availability": "Official code and gated Hugging Face task archives verified on 2026-09-11. The 106,800-image count is paper-reported; files were not downloaded or recounted. No root code license was identified at the reviewed revision.",
+      "sourceReviewed": "2026-09-11",
+      "evidence": {
+        "access": "gated",
+        "accessCheckedAt": "2026-09-13",
+        "licenseStatus": "documented",
+        "dataLicense": "cc-by-4.0 in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
+        "publicFileScale": "7 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+        "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Multi-sensor tactile images and task labels organized for within-sensor, zero-shot cross-sensor, and few-shot protocols.",
+        "sources": [
+          "https://huggingface.co/datasets/Lan-2025/Tactile/tree/0bc27afe0d8f6c878b79e1eb0825255541ccaceb"
+        ],
+        "revision": "0bc27afe0d8f6c878b79e1eb0825255541ccaceb",
+        "listedFileCount": 7,
+        "dataLicenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-tacverse"
+    },
+    {
+      "id": "vtdexmanip",
+      "name": "VTDexManip",
+      "institution": [
+        "Zhejiang University"
+      ],
+      "year": 2025,
+      "robot": [
+        "Human dexterous demonstration platform",
+        "Simulated dexterous manipulation benchmark"
+      ],
+      "sensor": [
+        "Sparse binary tactile sensing"
+      ],
+      "modalities": [
+        "RGB image",
+        "Sparse binary touch",
+        "Proprioception",
+        "Manipulation trajectory"
+      ],
+      "sampleCount": "10 daily manipulation tasks across 182 objects; trajectory and frame totals are not stated as text on the reviewed project page",
+      "tasks": [
+        "Visual-tactile pretraining",
+        "Bottle-cap turning",
+        "Faucet screwing",
+        "Lever sliding",
+        "Table reorientation",
+        "In-hand reorientation",
+        "Bimanual hand-over"
+      ],
+      "objectCategories": "One hundred eighty-two objects used across ten daily manipulation tasks.",
+      "dataFormat": "Visual-tactile pretraining data and an Isaac Gym policy benchmark; inspect the official repository for the current file layout.",
+      "license": "MIT License for the benchmark code; verify dataset-file terms separately",
+      "licenseUrl": "https://opensource.org/license/mit",
+      "paperUrl": "https://openreview.net/forum?id=jf7C7EGw21",
+      "projectUrl": "https://lqts.github.io/VTDexManip/",
+      "githubUrl": "https://github.com/LQTS/VTDexManip",
+      "availability": "The author project and repository link benchmark code, paper, and dataset access.",
+      "sourceReviewed": "2026-08-19",
+      "evidence": {
+        "access": "linked-unverified",
+        "accessCheckedAt": "2026-08-19",
+        "licenseStatus": "unknown",
+        "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
+        "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
+        "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+        "splitStatus": "unknown",
+        "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
+        "formatStatus": "described",
+        "formatDetails": "Visual-tactile pretraining data and an Isaac Gym policy benchmark; inspect the official repository for the current file layout.",
+        "sources": [
+          "https://lqts.github.io/VTDexManip/"
+        ]
+      },
+      "directoryRecordUrl": "https://roboskin.ai/datasets#dataset-vtdexmanip"
+    }
+  ]
+}

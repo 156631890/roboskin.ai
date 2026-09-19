@@ -1,0 +1,54 @@
+{
+  "sourceSha256": "2c9063913c85c12bdae06ac2c738f643aea3ce4aa2a5246d4d3ae5a3791c21e9",
+  "start": "2026-08-20",
+  "end": "2026-09-16",
+  "chartTotals": {
+    "clicks": 194,
+    "impressions": 32654
+  },
+  "checkedAt": "2026-09-19",
+  "property": "sc-domain:roboskin.ai",
+  "searchType": "Web",
+  "filters": "All countries and devices; 28 days",
+  "pages": [
+    {
+      "url": "https://roboskin.ai/research/univtac-platform-encoder-benchmark-2026",
+      "clicks": 1,
+      "impressions": 1197,
+      "ctrPercent": 0.08,
+      "averagePosition": 7.34
+    },
+    {
+      "url": "https://roboskin.ai/robot-teleoperation",
+      "clicks": 1,
+      "impressions": 615,
+      "ctrPercent": 0.16,
+      "averagePosition": 10.29
+    },
+    {
+      "url": "https://roboskin.ai/robot-learning",
+      "clicks": 1,
+      "impressions": 528,
+      "ctrPercent": 0.19,
+      "averagePosition": 9.55
+    }
+  ],
+  "queries": [
+    {
+      "query": "univtac",
+      "clicks": 1,
+      "impressions": 306,
+      "ctrPercent": 0.33,
+      "averagePosition": 6.95
+    },
+    {
+      "query": "passive observation data vs teleoperation robot learning physical \ninteraction",
+      "clicks": 0,
+      "impressions": 88,
+      "ctrPercent": 0.0,
+      "averagePosition": 9.07
+    }
+  ],
+  "inventorySha256": "029ff95c67c79973b46f418c759f9ce9fc117c625623ef7666019ba6973a0662",
+  "providerConfirmedSubscriptions": null
+}

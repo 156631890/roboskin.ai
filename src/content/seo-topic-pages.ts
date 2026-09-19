@@ -18,6 +18,7 @@ export type SeoTopicPage = {
   keywords: string[];
   quickAnswer: string[];
   sections: {
+    id?: string;
     heading: string;
     body: string[];
     bullets?: string[];
@@ -3864,7 +3865,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics pillar',
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-08-22',
+    updated: '2026-09-19',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -3925,7 +3926,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.',
           'ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.',
-          'UniVTAC makes those units explicit: 205,826 samples pretrain a tactile encoder, 400 paper-reported trajectories train eight task policies, a separate public release hosts 800 HDF5 episodes, and 450 physical demonstrations support three real-world tasks. Evaluation rollouts are outcomes rather than additional training data.',
+          'UniVTAC makes those units explicit: 205,826 samples pretrain a tactile encoder, 400 paper-reported trajectories train eight task policies, the September inventory lists 800 task HDF5 files for each of Isaac Sim 4.5 and 5.1, and 450 physical demonstrations support three real-world tasks. Evaluation rollouts are outcomes rather than additional training data.',
           'In ADEPT, the tactile pathway is limited to five vision-based fingertips on one Flexiv-Sharpa student. The paper reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched insertion condition with ten trials per modality. This is useful causal evidence inside that condition, not proof of cross-sensor or cross-hand transfer.',
         ],
         bullets: [
@@ -3967,6 +3968,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How should sim-to-real results be judged?', answer: 'State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.' },
     ],
     relatedLinks: [
+      { label: 'Passive observation versus teleoperation data', href: '/robot-teleoperation#passive-observation-vs-teleoperation-data-for-robot-learning', description: 'Choose between video pretraining, structured handheld demonstrations and recorded robot actions.' },
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place learning methods inside the complete model, robot, action, and feedback system.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Separate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence.' },
       { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare reusable model roles, data, embodiment transfer, access, and evidence.' },
@@ -4513,7 +4515,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: '2026-09-16',
+    updated: '2026-09-19',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4525,6 +4527,47 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Demonstrations do not become a capable policy automatically. Training must account for action representation, embodiment, coverage, compounding errors, evaluation splits, interventions, and repeated real-robot testing.',
     ],
     sections: [
+      {
+        id: 'passive-observation-vs-teleoperation-data-for-robot-learning',
+        heading: 'Passive observation vs teleoperation data for robot learning',
+        body: [
+          'Passive observation data can show what a human did and how a scene changed. Teleoperation can additionally record the commands sent to a particular robot alongside its measured state. That observation-action pairing is the key distinction for policy training: ordinary video does not directly tell you which robot command produced each transition.',
+          'These are complementary data sources. R3M pretrains visual representations on Ego4D human video and uses the representation for downstream robot policy learning. It does not make the original videos a dataset of measured robot actions. The R3M paper is an example of representation pretraining followed by task learning, not proof that every imitation-learning recipe can train from unlabelled video.',
+          'UMI is a third case: an instrumented handheld demonstration interface. Its gripper-mounted camera and trajectory-processing pipeline provide more structure than passive video, while collection can happen away from a robot. GELLO instead controls a robot through a joint-based interface. The table summarizes the original projects and R3M sources checked on September 19, 2026; RoboSkin has not run these hardware systems.',
+        ],
+        table: {
+          headers: ['Data source', 'Observations and action information', 'Collection hardware', 'Contact-information boundary'],
+          rows: [
+            ['Passive human video', 'Images and temporal changes; optional text or annotations. Robot action targets are absent unless separately inferred or supplied.', 'An existing video corpus can be studied without a robot; acquiring footage needs a camera and appropriate permissions.', 'Visible contact is not a measurement of force, slip or an occluded contact patch.'],
+            ['Original UMI', 'Visual observations, reconstructed relative end-effector trajectories and gripper width; later robot deployment requires a compatible policy interface.', 'Handheld parallel-jaw gripper and mounted camera; no robot at every demonstration site.', 'Original UMI does not provide a default calibrated force or tactile stream.'],
+            ['Original GELLO', 'Controller joint measurements mapped to robot commands, plus the observations actually recorded by the robot setup.', 'Joint-encoder controller matched to the robot and a robot for physical demonstrations; cameras are separate.', 'Joint commands do not establish contact force. Record additional calibrated sensing if the task needs it.'],
+            ['Teleoperation with added tactile sensing', 'Aligned commands, measured state and recorded touch; haptic feedback to the operator is an independent design choice.', 'A suitable robot, interface and tactile sensor with a documented capture pipeline.', 'Preserve raw units, calibration, validity and clocks. A recorded tactile channel does not prove a trained policy uses it.'],
+          ],
+        },
+        links: [
+          { label: 'R3M: visual pretraining from human video', href: 'https://arxiv.org/abs/2203.12601' },
+          { label: 'UMI: demonstration and policy interface', href: 'https://arxiv.org/abs/2402.10329' },
+          { label: 'GELLO: joint-based teleoperation design', href: 'https://arxiv.org/html/2309.13037v2' },
+        ],
+      },
+      {
+        heading: 'Choose data by the training task',
+        body: [
+          'For visual representation learning, video may be useful before robot action labels are available. For supervised action imitation, first establish the action representation and its alignment with observations. For contact-sensitive insertion or grasp adjustment, decide whether touch supplies an observation, a training label, operator feedback or an evaluation signal; each role requires different records.',
+          'Consider inserting a plug. A passive clip shows motion and visible outcome. A teleoperation log can also preserve the commanded motion and measured robot state. Tactile sensing can add a local contact observation when the camera cannot see the mating surfaces. To compare these sources, hold out objects or scenes, report autonomous success separately from intervention, and state which streams the deployed policy actually receives. This is an experimental design example, not a RoboSkin hardware result.',
+        ],
+        bullets: [
+          'Before collecting: specify the task, embodiment, observation streams and whether actions are measured, commanded or reconstructed.',
+          'Before merging: check camera calibration, coordinate frames, capture and receive times, missing streams, action dimensions and units.',
+          'Before training: preserve failed and interrupted episodes with reasons; document exclusions and split by the intended generalization claim.',
+          'Before reporting: separate data-format validity, useful demonstrations and independently evaluated policy performance.',
+        ],
+        links: [
+          { label: 'Validate LeRobot episode and timestamp fields', href: '/guides/lerobot-dataset-format' },
+          { label: 'Practice tactile validity checks with a small Python dataset', href: '/guides/python-tactile-data-processing' },
+          { label: 'Compare available tactile datasets and access limits', href: '/datasets' },
+        ],
+      },
       {
         heading: 'What robot teleoperation controls',
         body: [
@@ -4676,6 +4719,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Can passive video replace teleoperation data?', answer: 'Passive video can support representation learning, but it does not directly supply synchronized robot action targets. Using it for policy learning requires a suitable learning objective, inferred or additional action information, and evaluation on the target robot.' },
+      { question: 'Is UMI the same as passive video collection?', answer: 'No. Original UMI uses an instrumented handheld gripper and a trajectory-processing pipeline to provide a structured demonstration and policy interface. It can collect away from a robot, but its original design does not include a default calibrated tactile or force stream.' },
       { question: 'What is robot teleoperation?', answer: 'Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master.' },
       { question: 'Is a teleoperated robot autonomous?', answer: 'No. Teleoperation shows human-controlled behavior. Autonomous capability requires the robot policy to perceive and act without the operator under a defined evaluation protocol.' },
       { question: 'How does teleoperation create robot-learning data?', answer: 'It records synchronized observations, robot state, human commands, actions, task context, and outcomes. Those episodes are calibrated, quality-checked, normalized, split, and used to train and evaluate a policy.' },
@@ -4695,7 +4740,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'FreeTacMan research brief', href: '/research/freetacman-robot-free-visuotactile-data-collection-2025', description: 'Review wearable robot-free visuo-tactile collection evidence.' },
     ],
     sources: [
-      {"label": "UMI original project — checked 2026-09-16", "href": "https://umi-gripper.github.io/"},
+      { label: 'R3M human-video pretraining paper — checked 2026-09-19', href: 'https://arxiv.org/abs/2203.12601' },
+      { label: 'UMI original paper — checked 2026-09-19', href: 'https://arxiv.org/abs/2402.10329' },
+      {"label": "UMI original project — checked 2026-09-19", "href": "https://umi-gripper.github.io/"},
       {"label": "GELLO original paper — checked 2026-09-16", "href": "https://arxiv.org/abs/2309.13037"},
 
       { label: 'The Missing Touch spatial tactile feedback preprint', href: 'https://arxiv.org/abs/2608.19372' },

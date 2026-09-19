@@ -130,7 +130,7 @@ export default function AnalyticsTracker() {
         return;
       }
 
-      if (url.pathname === '/research-index.csv' || url.pathname === '/research-index.json') {
+      if (url.pathname === '/research-index.csv' || url.pathname === '/research-index.json' || url.pathname === '/downloads/univtac-release-inventory-2026-09-19.csv') {
         track('Research Data Open', { ...properties, format: url.pathname.endsWith('.csv') ? 'CSV' : 'JSON' });
         return;
       }

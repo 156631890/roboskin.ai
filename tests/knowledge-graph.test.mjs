@@ -92,9 +92,9 @@ test('knowledge graph JSON is a protected deterministic static output outside th
   assert.equal(contract.version, '2.1.0');
   assert.equal(contract.counts.knowledgeEntities, 193);
   assert.equal(contract.counts.organizations, 69);
-  assert.equal(contract.counts.sourceDocuments, 252);
-  assert.equal(contract.counts.edges, 582);
-  assert.equal(contract.counts.supportedByEdges, 336);
+  assert.equal(contract.counts.sourceDocuments, 253);
+  assert.equal(contract.counts.edges, 584);
+  assert.equal(contract.counts.supportedByEdges, 338);
   assert.equal(contract.counts.robots, 24);
   assert.equal(contract.counts.robotRelationEdges, 44);
   assert.equal(contract.counts.evaluatedOnEdges, 28);

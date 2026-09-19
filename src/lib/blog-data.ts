@@ -679,18 +679,43 @@ For comparisons, use the [benchmark record](/benchmarks#benchmark-tacverse), [ta
   {
     id: 'univtac-platform-encoder-benchmark-2026',
     title: 'UniVTAC separates tactile simulation, representation learning, and policy evaluation',
-    seoTitle: 'UniVTAC: Tactile Dataset, Encoder & Benchmark Evidence',
+    seoTitle: 'UniVTAC: Code, Datasets & Isaac Sim Version Guide',
     seoDescription:
-      'Source-backed UniVTAC audit: 205,826 pretraining samples, an eight-task benchmark, 800 public HDF5 episodes, sim-to-real results, and release limits.',
+      'Find UniVTAC code and datasets, choose Isaac Sim 4.5 or 5.1, and compare the encoder, benchmark and public files with a dated release inventory.',
     excerpt:
-      'UniVTAC combines a tactile simulation platform, a 512-dimensional ResNet-18 representation encoder, and an eight-task benchmark—but its four data and evaluation pools must not be treated as one dataset.',
-    content: `# UniVTAC separates tactile simulation, representation learning, and policy evaluation
+      'Choose the matching code branch and dataset before using UniVTAC. This guide separates its tactile encoder, simulation benchmark, public downloads and paper-reported physical results.',
+    content: `# UniVTAC: code, datasets and simulator versions
 
-**Evidence review - August 22, 2026**
+**Release files and documentation checked September 19, 2026; paper analysis uses arXiv v1**
 
 UniVTAC is a February 2026 arXiv v1 preprint and public research project for simulation-based visuo-tactile data generation, tactile representation learning, and contact-rich manipulation evaluation. Its most useful contribution is not one headline score. It is a connected stack spanning a simulator, a synthetic encoder-pretraining corpus, a tactile representation encoder, an eight-task benchmark, public benchmark episodes, and a smaller physical sim-to-real study.
 
-Those assets have different units and purposes. The **205,826 synthetic contact samples**, **400 paper-reported policy-training trajectories**, **800 currently hosted HDF5 episodes**, and **450 physical demonstrations** are not interchangeable counts. RoboSkin keeps them separate so [tactile datasets](/datasets), [tactile benchmarks](/benchmarks), learned models, and evaluated robot behavior do not collapse into one claim.
+Those assets have different units and purposes. The **205,826 synthetic contact samples**, **400 paper-reported policy-training trajectories**, **800 HDF5 episodes in each current simulator-version task release**, and **450 physical demonstrations** are not interchangeable counts. The September file inventory also lists 638 contact-pretraining HDF5 files; it does not establish that their frames exactly reproduce the paper's pretraining corpus.
+
+## Start here: UniVTAC code and dataset downloads
+
+Use the [official project](https://univtac.github.io/) for demonstrations and the [code repository](https://github.com/univtac/UniVTAC) for implementation. For data, select one of the pinned directories below before downloading. Inspecting the directory or our small CSV inventory needs no robot or NVIDIA GPU. Running the simulator has separate Linux and NVIDIA software requirements.
+
+| Resource | Verified release entry point | What to check first |
+| --- | --- | --- |
+| Isaac Sim 4.5 task data | [isaac45 task files](https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/isaac45) | 800 HDF5 file paths, 100 per task; use the main code branch. |
+| Isaac Sim 5.1 task data | [isaac51 task files](https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/isaac51) | A separate 800 HDF5 file paths; use the isaac51 code branch. |
+| Contact-pretraining release | [contact shape directories](https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/contact) | 638 HDF5 paths across 14 non-empty shape directories; files are not frames or unique physical interactions. |
+| Encoder and policy artifacts | [checkpoint directory](https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/checkpoints) | The repository associates released policy checkpoints with the 4.5 task data. Do not assume a matching 5.1 policy release. |
+| Small release inventory | [Download the September 19 inventory CSV](/downloads/univtac-release-inventory-2026-09-19.csv) | 30 rows of task/shape file counts with the source revision and directory URL. No sensor payloads are included. |
+
+The inventory was generated from the provider's public file listing at revision e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd. Its columns are checked_date, dataset_revision, component, group, hdf5_file_count, source_directory and verification_scope. Counts describe listed .hdf5 paths only: we did not download these HDF5 payloads, validate their arrays, total their frames or rerun policies. The CSV is RoboSkin's editorial inventory under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); source data retain their own terms.
+
+## Choose the simulator version before installation
+
+| Code branch | Source-specified environment | Matching task directory |
+| --- | --- | --- |
+| main, reviewed at 0dafa10262e22f486f160a55d6f11aeab12d8e7b | Linux and NVIDIA GPU; Python 3.10, Isaac Sim 4.5.0, Isaac Lab 2.1.1 | isaac45 |
+| isaac51, reviewed at d541e5568227ca3b66104d294f63c80acad7c52c | Linux and NVIDIA GPU; installer specifies Python 3.11, Isaac Sim 5.1, Isaac Lab 2.3.0 and CUDA 12.6 | isaac51 |
+
+The project explicitly says the two task-data versions are not cross-compatible. Follow the [pinned main installation guide](https://github.com/univtac/UniVTAC/blob/0dafa10262e22f486f160a55d6f11aeab12d8e7b/docs/Installation.md) or inspect the [pinned 5.1 installer](https://github.com/univtac/UniVTAC/blob/d541e5568227ca3b66104d294f63c80acad7c52c/scripts/install.sh) for your chosen branch. Both depend on the project's modified local TacEx source. Replacing it with an arbitrary latest TacEx or Isaac Lab release is not a verified installation path.
+
+The 5.1 branch README still calls itself main in its installation paragraph; its branch notice and installer identify the 5.1 stack. We checked these files, but did not execute either installer or measure the README's throughput claim. The [pinned download script](https://github.com/univtac/UniVTAC/blob/0dafa10262e22f486f160a55d6f11aeab12d8e7b/data/download.sh) uses ModelScope by default, while the inventory above audits Hugging Face. Its revision option is provider-specific: do not pass the Hugging Face revision to the ModelScope download command.
 
 The paper lists ScaleLab at Shanghai Jiao Tong University, D-Robotics, ViTai Robotics, The University of Hong Kong, Nanjing University, Shenzhen University, Wuhan University, Fudan University, and Tsinghua University as its nine affiliations. These identify the authors' source-listed affiliations; they do not by themselves establish institutional ownership, endorsement, or responsibility for every project claim.
 
@@ -712,9 +737,9 @@ The paper and public repositories expose four materially different collections.
 
 | Collection | Verified scale | Purpose | Access boundary |
 | --- | ---: | --- | --- |
-| Encoder-pretraining corpus | 205,826 simulation samples from 14 shapes, approximately 14,000 interaction frames per shape | Train the UniVTAC Encoder on shape, contact deformation, marker motion, and relative pose supervision | The paper defines the corpus; RoboSkin did not verify a standalone public download for this exact 205,826-sample collection. |
+| Encoder-pretraining corpus | 205,826 simulation samples from 14 shapes, approximately 14,000 interaction frames per shape | Train the UniVTAC Encoder on shape, contact deformation, marker motion, and relative pose supervision | The current contact release lists 638 HDF5 files. Their equivalence to this exact paper corpus remains unverified. |
 | Paper policy-training data | 50 full trajectories for each of eight tasks, 400 total | Train the task-specific policies compared in the paper's simulated benchmark | This is a protocol count, not the encoder-pretraining sample count and not the hosted 800-episode release. |
-| Public Hugging Face benchmark data | 800 HDF5 episodes at pinned revision \`172331dbbce95bc04c3e59b22f32dc72ba5561ae\`; 763 marked successful and 37 non-successful; approximately 125.43 GB | Public task-episode release for the eight-task simulation configuration | The files remain hosted and downloadable, but the hosted dataset viewer currently fails to generate with a schema CastError. The data use a simulated Franka Panda configuration with bilateral GelSight Mini observations. |
+| Public Hugging Face benchmark data | Current inventory: 800 HDF5 file paths under isaac45 and 800 under isaac51 | Separate eight-task simulation releases; keep the selected simulator version in the experiment manifest | The earlier August audit at revision 172331dbbce95bc04c3e59b22f32dc72ba5561ae counted 800 HDF5 episodes, 763 marked successful and 37 non-successful, approximately 125.43 GB. Those historical outcome and size totals are not a new audit of either current directory. |
 | Physical demonstrations | 150 demonstrations for each of three tasks, 450 total | Train separate real-world task policies for the sim-to-real experiment | The paper describes this collection, but RoboSkin did not verify it as part of the public benchmark download. |
 
 The simulation evaluation adds another unit: **100 rollouts per method-task pair**. The physical evaluation uses **20 rollouts per method-task pair**. Evaluation rollouts measure outcomes; they should not be added to training trajectories or described as more dataset episodes.
@@ -791,9 +816,9 @@ The public release requires four separate checks.
 | Hosted encoder checkpoint | A checkpoint is present with evaluation logs | RoboSkin did not find a separate weight-license statement, so the legal terms for the weights should not be inferred from the dataset card. |
 | Sensor support | Project materials describe GelSight Mini, ViTai GF225, and Xense WS | The current public collection and evaluation workflow supports the simulated GelSight Mini path; the repository marks GF225 and Xense configuration work as planned or TODO. |
 
-The hosted checkpoint logs also do **not** reproduce the paper's Table I values exactly. The public UniVTAC checkpoint logs average 43.5, compared with 48.0 in the paper; the hosted vision baseline logs average 32.375, compared with 30.9 in the paper. The artifacts may still be useful, but these mismatches mean RoboSkin will not describe the public checkpoints as a reproduction of Table I without a reconciled protocol and result report.
+The checkpoint logs inspected in the August 22 audit also do **not** reproduce the paper's Table I values exactly. Those UniVTAC checkpoint logs average 43.5, compared with 48.0 in the paper; the hosted vision baseline logs average 32.375, compared with 30.9 in the paper. The artifacts may still be useful, but these mismatches mean RoboSkin will not describe the public checkpoints as a reproduction of Table I without a reconciled protocol and result report. The September file inventory is not a rerun of these evaluations.
 
-The public 800-episode dataset uses the simulated GelSight Mini plus Franka Panda configuration. The physical study uses ViTai GF225 plus a Tianji Marvin arm. Mixing those hardware identities would hide the central sim-to-real boundary.
+The public task data use the simulated GelSight Mini plus Franka Panda configuration. The physical study uses ViTai GF225 plus a Tianji Marvin arm. Mixing those hardware identities would hide the central sim-to-real boundary.
 
 ## What UniVTAC contributes to tactile AI
 
@@ -809,9 +834,9 @@ For [robot skin](/robot-skin), it shows how a fingertip tactile surface becomes 
 
 ## What this paper and release do not establish
 
-- The source is arXiv v1, submitted February 10, 2026; RoboSkin did not verify peer-reviewed acceptance.
+- The numerical paper analysis uses arXiv v1, submitted February 10, 2026. The official repository now announces CoRL 2026 acceptance; we have not independently checked a conference proceedings record or substituted a final paper's results.
 - UniVTAC Encoder is not a VLA, a language-conditioned policy, or a demonstrated universal tactile foundation model.
-- The 205,826-sample pretraining corpus is not the same as the 800 public HDF5 episodes.
+- The 205,826-sample pretraining corpus is not the same counting unit as the 638 contact files or the 800 task files in each simulator-version directory.
 - The 400 simulated policy-training trajectories are not the same as the 450 physical demonstrations.
 - The physical 25-point average change is tied to three tasks, one research configuration, and 20 rollouts per method-task pair.
 - The currently public simulator path does not establish complete working support for all three sensor types advertised by the project.
@@ -826,7 +851,7 @@ RoboSkin classifies UniVTAC Encoder as a pretrained tactile representation encod
 
 ### Is the public UniVTAC dataset 205,826 samples or 800 episodes?
 
-Both numbers describe different assets. The paper's encoder-pretraining corpus has 205,826 simulated contact samples. The pinned Hugging Face benchmark release contains 800 HDF5 task episodes. Neither number is the paper's 400 policy-training trajectories or 450 physical demonstrations.
+The paper reports 205,826 contact samples for encoder pretraining. The September file inventory lists 800 HDF5 task files for each of two simulator versions, plus 638 contact files. File counts do not establish frame counts or equivalence to the paper corpus. None is the paper's 400 policy-training trajectories or 450 physical demonstrations.
 
 ### What is the UniVTAC Benchmark?
 
@@ -834,14 +859,16 @@ It is an eight-task simulated visuo-tactile manipulation suite covering pose rea
 
 ### Does the public checkpoint reproduce the paper's 48.0 average?
 
-Not in the hosted logs reviewed by RoboSkin. Those logs report a 43.5 UniVTAC average and 32.375 vision baseline, while the paper reports 48.0 and 30.9. The difference needs a protocol or artifact explanation before a reproduction claim is justified.
+Not in the hosted logs inspected in the August 22 audit. Those logs report a 43.5 UniVTAC average and 32.375 vision baseline, while the paper reports 48.0 and 30.9. The difference needs a protocol or artifact explanation before a reproduction claim is justified.
 
 ### Which robot and tactile sensor are used in the physical study?
 
-The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile sensors and a wrist RGB camera. That physical configuration is different from the simulated Franka Panda and GelSight Mini configuration in the public 800-episode release.
+The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile sensors and a wrist RGB camera. That physical configuration is different from the simulated Franka Panda and GelSight Mini configuration in the public task releases.
 
 ## Related RoboSkin records
 
+- [Practice processing a small tactile dataset in Python](/guides/python-tactile-data-processing)
+- [Validate episode and timestamp fields before a LeRobot export](/guides/lerobot-dataset-format)
 - [UniVTAC pretraining corpus](/datasets#dataset-univtac-encoder-pretraining-corpus)
 - [UniVTAC public benchmark data](/datasets#dataset-univtac-benchmark-dataset)
 - [UniVTAC Benchmark](/benchmarks#benchmark-univtac-benchmark)
@@ -864,8 +891,8 @@ The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile senso
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '14 min read',
+    updated: '2026-09-19',
+    readTime: '17 min read',
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
     sourceTitle: 'UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking',

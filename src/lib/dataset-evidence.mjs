@@ -1,5 +1,5 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.09.18', compiledAt: '2026-09-18', scope: 'Current RoboSkin tactile directory only; not an industry census.' };
+export const datasetAudit = { version: 'v2026.09.19', compiledAt: '2026-09-19', scope: 'Current RoboSkin tactile directory only; not an industry census.' };
 export const datasetAccessEvidence = {
   "bench2dex": {
   "access": "public-files",
@@ -21,31 +21,33 @@ export const datasetAccessEvidence = {
   ]
 },
   "univtac-encoder-pretraining-corpus": {
-    "access": "announced",
-    "accessCheckedAt": "2026-08-22",
-    "licenseStatus": "unknown",
-    "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
-    "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
-    "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+    "access": "public-files",
+    "accessCheckedAt": "2026-09-19",
+    "licenseStatus": "documented",
+    "dataLicense": "MIT in the provider dataset-card metadata; third-party assets and checkpoint terms require separate review.",
+    "dataLicenseUrl": "https://opensource.org/license/mit",
+    "revision": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+    "publicFileScale": "638 listed contact HDF5 files across 14 non-empty shape directories. Equivalence to the paper's 205,826 contact samples is unverified; files are not frames.",
+    "verificationScope": "Pinned provider file listing and code documentation inspected. No payload download, array validation, frame recount, training or hardware run.",
     "splitStatus": "unknown",
     "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
     "formatStatus": "described",
-    "formatDetails": "The paper defines synchronized samples containing I_marked, I_pure, a dense depth map, projected fiducial-marker coordinates, and a 7D object pose. No standalone public corpus package, file manifest, checksum set, or machine-readable split was verified.",
+    "formatDetails": "Public contact/<shape>/hdf5/ paths; the paper describes marked and marker-free RGB, depth, projected markers and 7D pose. Released payload arrays and paper-corpus equivalence remain unverified.",
     "sources": [
-      "https://univtac.github.io/"
+      "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/contact"
     ]
   },
   "univtac-benchmark-dataset": {
     "access": "public-files",
-    "accessCheckedAt": "2026-09-13",
+    "accessCheckedAt": "2026-09-19",
     "licenseStatus": "documented",
     "dataLicense": "mit in the provider dataset-card metadata at the pinned revision; individual asset terms were not inspected.",
-    "publicFileScale": "2,344 paths in the provider file manifest, including metadata. Bytes, frames and episodes were not independently recounted.",
+    "publicFileScale": "2,344 paths in the entire provider repository, shared with the contact and checkpoint collections. Task-only inventory: 800 HDF5 paths in isaac45 and 800 in isaac51, 100 per task in each version. Bytes, frames and unique demonstrations were not recounted.",
     "verificationScope": "Official hosting API and file manifest inspected at the pinned revision. No dataset payloads downloaded; no checksums, schema validation or training run.",
     "splitStatus": "unknown",
     "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
     "formatStatus": "described",
-    "formatDetails": "Task directories contain HDF5 episodes with head and wrist observations, robot state, atom and episode metadata, and bilateral GelSight Mini RGB, marker, depth, and pose fields. The current Hugging Face Dataset Viewer fails schema generation with a CastError, while the hosted files remain available for download.",
+    "formatDetails": "Versioned isaac45/<task>/hdf5/ and isaac51/<task>/hdf5/ paths with task metadata. Documentation describes head/wrist observations, robot state and bilateral tactile RGB, marker, depth and pose. Version compatibility and payload validity were not executed; the prior Dataset Viewer error was not retested.",
     "sources": [
       "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd"
     ],

@@ -116,9 +116,9 @@ test('graph contract and GEO export expose relation counts and evidence boundari
     {
       knowledgeEntities: 193,
       organizations: 69,
-      sourceDocuments: 252,
-      edges: 582,
-      supportedByEdges: 336,
+      sourceDocuments: 253,
+      edges: 584,
+      supportedByEdges: 338,
       researchRelationEdges: 145,
       researchProvenanceEdges: 110,
       researchSemanticEdges: 35,

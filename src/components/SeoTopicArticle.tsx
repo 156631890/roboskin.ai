@@ -116,7 +116,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
           <div className="container-shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="min-w-0 space-y-5">
               {page.sections.map((section, index) => (
-                <section key={section.heading} className="glass-card p-6 md:p-8">
+                <section key={section.heading} id={section.id} className="glass-card scroll-mt-24 p-6 md:p-8">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Topic {String(index + 1).padStart(2, '0')}</p>
                   <h2 className="mt-3 text-2xl font-semibold text-white md:text-3xl">{section.heading}</h2>
                   <div className="mt-4 space-y-4">
