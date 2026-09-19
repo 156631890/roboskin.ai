@@ -955,9 +955,8 @@ function buildDatasetCatalogJsonLd(
     url: entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl,
     ...(entry.authors?.length ? { creator: entry.authors.map(name => ({ '@type': 'Person', name })) } : {}),
     ...(entry.paperVersion ? { version: entry.paperVersion } : {}),
-    ...(entry.datasetUrl && getDatasetEvidence(entry).access === 'public-files' ? {
-      distribution: { '@type': 'DataDownload', url: entry.datasetUrl, description: entry.availability },
-    } : {}),
+    // datasetUrl identifies a provider page or file inventory, not a downloadable payload.
+    // Keep it as Dataset.url; DataDownload requires a verified contentUrl and file format.
     measurementTechnique: entry.sensor,
     variableMeasured: entry.modalities,
     keywords: entry.tasks,

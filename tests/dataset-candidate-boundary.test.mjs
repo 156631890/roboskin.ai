@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import ts from 'typescript';
 import * as evidence from '../src/lib/dataset-evidence.mjs';
+import { validateDatasetDistributions } from '../scripts/lib/dataset-structured-data.mjs';
 
 function load(file, dependencies = {}) {
   const exports = {};
@@ -60,6 +61,51 @@ test('public manifest access does not grant the code license to dataset files', 
   assert.deepEqual(node.creator.map(person => person.name), bench.authors);
   assert.ok(node.creator.every(person => person['@type'] === 'Person' && !person.name.includes('RoboSkin')));
   assert.equal(node.citation, bench.paperUrl);
-  assert.equal(node.distribution.url, bench.datasetUrl);
-  assert.equal(node.distribution.contentUrl, undefined, 'A directory listing is not a direct payload download');
+  assert.equal(node.url, bench.datasetUrl);
+  assert.equal(node.distribution, undefined, 'A directory listing must not create an incomplete DataDownload');
+});
+
+test('catalogs preserve third-party dataset identities and provider links without claiming file downloads', () => {
+  const robotics = load('src/lib/robotics-datasets.ts').roboticsDatasetEntries;
+  for (const [entries, graph] of [
+    [records.tactileDatasetEntries, seo.buildTactileDatasetsJsonLd(records.tactileDatasetEntries)],
+    [robotics, seo.buildRoboticsDatasetsJsonLd(robotics)],
+  ]) {
+    const datasets = graph['@graph'].filter(node => node['@type'] === 'Dataset');
+    assert.equal(datasets.length, entries.length);
+    for (const [index, node] of datasets.entries()) {
+      const entry = entries[index];
+      assert.equal(node.url, entry.datasetUrl ?? entry.projectUrl ?? entry.paperUrl);
+      assert.equal(node.citation, entry.paperUrl);
+      assert.equal(node.distribution, undefined);
+    }
+    assert.deepEqual(validateDatasetDistributions(graph), []);
+  }
+});
+
+test('the original research index keeps two complete downloadable distributions', () => {
+  const graph = seo.buildResearchIndexJsonLd([]);
+  const dataset = graph['@graph'].find(node => node['@type'] === 'Dataset');
+  assert.deepEqual(dataset.distribution, [
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: 'https://roboskin.ai/research-index.csv' },
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: 'https://roboskin.ai/research-index.json' },
+  ]);
+  assert.deepEqual(validateDatasetDistributions(graph), []);
+});
+
+test('the export guard catches the reported nested distribution warnings', () => {
+  const reported = { '@graph': [{ '@type': 'Dataset', distribution: {
+    '@type': 'DataDownload', url: 'https://huggingface.co/datasets/example/collection',
+  } }] };
+  const errors = validateDatasetDistributions(reported);
+  assert.equal(errors.length, 2);
+  assert.ok(errors.some(error => error.includes('contentUrl')));
+  assert.ok(errors.some(error => error.includes('encodingFormat')));
+  assert.deepEqual(validateDatasetDistributions({ '@type': 'Dataset', url: 'https://example.org/catalog' }), []);
+  assert.equal(validateDatasetDistributions({ '@type': ['Dataset'], distribution: [{
+    '@type': 'DataDownload', contentUrl: '/relative.csv', encodingFormat: ' ',
+  }] }).length, 2);
+  assert.deepEqual(validateDatasetDistributions({ '@type': 'Dataset', distribution: [{
+    '@type': 'DataDownload', contentUrl: 'https://example.org/data.csv', encodingFormat: 'text/csv',
+  }] }), []);
 });
