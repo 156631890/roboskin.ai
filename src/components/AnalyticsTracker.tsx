@@ -81,6 +81,10 @@ export default function AnalyticsTracker() {
       const label = cleanLabel(anchor.textContent ?? '');
       const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
 
+      if (url.origin === window.location.origin && anchor.hasAttribute('data-search-route')) {
+        track('Search Route Open', { ...properties, section: url.hash, batch: '2026-09-20-search-entry-routes' });
+      }
+
       if (url.origin === window.location.origin && ['/tutorials/python-tactile/', '/tutorials/lerobot-validation/', '/tutorials/lerobot-loader/', '/tutorials/tactile-calibration/'].some(prefix => url.pathname.startsWith(prefix))) {
         track('Tutorial Example Download', { ...properties, batch: 'programming-2026-09-16' });
         return;

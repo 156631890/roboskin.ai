@@ -71,7 +71,19 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
 
             <div className="grid gap-4">
               <PageHeroVisual visual={visual} priority />
-              <dl className="grid gap-3 sm:grid-cols-3">
+              {page.startHere ? (
+                <nav aria-label={page.startHere.heading} className="signal-panel p-5">
+                  <h2 className="text-lg font-semibold text-white">{page.startHere.heading}</h2>
+                  <ul className="mt-3 divide-y divide-white/10">
+                    {page.startHere.links.map((link) => (
+                      <li key={link.href} className="py-3 first:pt-0 last:pb-0">
+                        <Link href={link.href} data-search-route="true" className="font-semibold text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link>
+                        <p className="mt-1 text-sm leading-relaxed text-[#c8d1de]">{link.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              ) : <dl className="grid gap-3 sm:grid-cols-3">
                 <div className="signal-panel p-4">
                   <dt className="font-mono text-lg font-semibold text-white">{page.sections.length}</dt>
                   <dd className="mt-1 text-xs uppercase tracking-[0.12em] text-[#8e98a8]">sections</dd>
@@ -84,7 +96,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                   <dt className="font-mono text-lg font-semibold text-white">{page.relatedLinks.length}</dt>
                   <dd className="mt-1 text-xs uppercase tracking-[0.12em] text-[#8e98a8]">next routes</dd>
                 </div>
-              </dl>
+              </dl>}
             </div>
           </div>
         </section>

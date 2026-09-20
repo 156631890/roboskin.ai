@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildDatasetCitation, buildDatasetCsv, matchesDatasetQuery } from '../src/lib/dataset-tools.mjs';
+import { buildDatasetCitation, buildDatasetCsv, matchesDatasetQuery, datasetSensorLabel } from '../src/lib/dataset-tools.mjs';
+
+test('physical DIGIT labels share a filter without conflating simulated or newer hardware', () => {
+  const labels = ['DIGIT', 'DIGIT vision-based tactile sensor', 'Digit 360', 'DIGIT Pinki', 'Simulated DIGIT'];
+  assert.deepEqual(labels.filter(label => datasetSensorLabel(label) === 'DIGIT'), labels.slice(0, 2));
+  assert.equal(new Set(labels.map(datasetSensorLabel)).size, 4);
+  assert.equal(datasetSensorLabel('DIGIT vision-based tactile sensor'), 'DIGIT');
+});
 
 const entry = {
   id: 'example', name: 'Touch, "Vision"\nExample', institution: ['Research lab'], year: 2026,

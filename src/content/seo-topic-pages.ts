@@ -16,6 +16,10 @@ export type SeoTopicPage = {
   schemaType: 'WebPage' | 'TechArticle' | 'DefinedTerm';
   visualKey: 'technology' | 'applications' | 'resources' | 'answers';
   keywords: string[];
+  startHere?: {
+    heading: string;
+    links: { label: string; href: string; description: string }[];
+  };
   quickAnswer: string[];
   sections: {
     id?: string;
@@ -376,12 +380,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-08-18',
+    updated: '2026-09-20',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'technology',
     keywords: ['robot skin', 'robotic skin', 'what is robot skin', 'robot skin technology', 'tactile sensing surface'],
+    startHere: {
+      heading: "Start exploring robot skin",
+      links: [
+        { label: "Compare tactile sensors", href: "/sensors", description: "Compare sensing principles, signal output and integration requirements." },
+        { label: "DIGIT tactile sensor", href: "/sensors/digit", description: "Inspect the original sensor specifications, Python interface and limits." },
+        { label: "Research evidence index", href: "/research-index", description: "Check primary sources, evidence classes and limitations." },
+      ],
+    },
     quickAnswer: [
       'Robot skin is a tactile sensing surface that helps a robot detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces.',
       'A useful robot skin system is not only a soft cover. It includes sensor materials, signal conditioning, data handling, robot middleware, and control logic that can use touch information.',
@@ -480,12 +492,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-09-19',
+    updated: '2026-09-20',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
     keywords: ['tactile AI', 'tactile intelligence', 'tactile perception', 'tactile learning', 'touch intelligence', 'tactile representation learning', 'multimodal tactile AI', 'robot tactile sensing'],
+    startHere: {
+      heading: "Put tactile AI into practice",
+      links: [
+        { label: "Process tactile data with Python", href: "/guides/python-tactile-data-processing", description: "Run a synthetic CSV exercise without a sensor or robot." },
+        { label: "Find tactile datasets", href: "/datasets", description: "Check tasks, sensors, access and dataset-specific reuse terms." },
+        { label: "Compare tactile world models", href: "/guides/visuo-tactile-world-models-robot-manipulation", description: "See how five systems connect predicted touch to robot actions." },
+      ],
+    },
     quickAnswer: [
       'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior.',
       'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for Physical AI systems.',
@@ -2445,12 +2465,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-09-19',
+    updated: '2026-09-20',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'resources',
     keywords: ['tactile dataset robotics', 'robot tactile dataset', 'visuo-tactile dataset', 'tactile manipulation dataset', 'tactile datasets for robot learning', 'tactile benchmark robotics'],
+    startHere: {
+      heading: "Find a named tactile dataset",
+      links: [
+        { label: "RoboTacDex", href: "/datasets#dataset-robotacdex", description: "Inspect humanoid visual-tactile-action data and its release status." },
+        { label: "TactiDex", href: "/datasets#dataset-tactidex", description: "Check hand-sensing data, access evidence and reuse terms." },
+        { label: "SoftVTBench", href: "/datasets#dataset-softvtbench", description: "Find the primary project, code and data-access evidence." },
+      ],
+    },
     quickAnswer: [
       'A useful tactile dataset is defined by more than frame count. Check the physical collection event, sensor and robot state alignment, object and task diversity, split unit, access terms, and downstream evaluation.',
       'Contact sequences matter because adjacent tactile frames from the same press or trajectory are strongly related. Random frame splits can leak near-duplicate contact evidence into both training and test sets.',
@@ -2768,12 +2796,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: '2026 world-model guide',
     intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
     published: '2026-08-15',
-    updated: '2026-09-18',
+    updated: '2026-09-20',
     priority: 0.87,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
     keywords: ['visuo-tactile world models', 'tactile world model', 'robot world model', 'world model robot manipulation', 'contact-rich manipulation'],
+    startHere: {
+      heading: "Find the comparison you need",
+      links: [
+        { label: "Compare five world models", href: "#world-model-comparison", description: "Read each system’s role, reported results and limits together." },
+        { label: "Plan an evaluation", href: "#evaluation-protocol", description: "Separate prediction accuracy from policy and real-robot outcomes." },
+        { label: "Human touch and synthetic policy data", href: "#world-model-updates", description: "See why improved predictions may not improve the resulting policy." },
+      ],
+    },
     quickAnswer: [
       'A visuo-tactile world model predicts how visual and tactile state may change after a robot action. Touch grounds the imagined future in contact that cameras may miss, including contact onset, force-related state, slip, and hidden object motion.',
       'The useful test is not whether a generated rollout looks plausible. Evaluation should show physical consistency, tactile prediction, planning or policy improvement, real-robot outcomes, and transfer beyond the training objects, sensors, tasks, or embodiment.',
@@ -2788,6 +2824,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'world-model-comparison',
         heading: '2026 visuo-tactile world model comparison',
         body: [
           'The rows below preserve the role and evidence boundary of each source. Relative improvements are included only when the arXiv abstract states them, and every number remains tied to the authors’ protocol.',
@@ -2819,6 +2856,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'evaluation-protocol',
         heading: 'A minimum evaluation protocol',
         body: [
           'World-model evaluation needs both offline and embodied evidence. Image similarity can diagnose visual rollout quality, but contact prediction needs its own labels or measurements. Planning claims need repeated real-robot trials, comparable baselines, trial counts, held-out conditions, and failures that can be replayed.',
@@ -2841,6 +2879,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'world-model-updates',
         heading: 'September update: human touch and synthetic policy data',
         body: [
           'DexTouch-WM adds a separate data-transfer question to the five-system comparison above. Its September 17 preprint keeps robot pretraining data fixed while adding human tactile demonstrations with a shared taxel layout and retargeted pose representation. The largest human-data condition improves contact prediction, but that improvement does not consistently carry into policies trained with generated observations.',
@@ -3021,12 +3060,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-09-16',
+    updated: '2026-09-20',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
     keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor'],
+    startHere: {
+      heading: "Explore a sensor in detail",
+      links: [
+        { label: "DIGIT tactile sensor", href: "/sensors/digit", description: "Original hardware specifications, Python frames and calibration limits." },
+        { label: "GelSight Mini", href: "/sensors/gelsight-mini", description: "Read the integration and evidence guide before selecting hardware." },
+        { label: "ReSkin magnetic tactile sensing", href: "/sensors/reskin", description: "Understand the sensing approach and source-bounded integration requirements." },
+      ],
+    },
     quickAnswer: [
       'A robot tactile sensor converts physical contact into measurable signals such as images, pressure, normal and shear force, vibration, temperature, or magnetic-field change. The best sensor is the one whose signal, geometry, rate, durability, and interface match the task.',
       'Vision-based sensors provide dense contact images but need a camera, lighting, compliant surface, and inference pipeline. Magnetic skins can be thin and fast but still require magnetometers, calibration strategy, and protection from mounting and field variation.',

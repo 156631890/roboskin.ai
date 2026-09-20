@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
-import { buildDatasetCitation, buildDatasetCsv, buildOriginalDatasetReference, matchesDatasetQuery } from '@/lib/dataset-tools.mjs';
+import { buildDatasetCitation, buildDatasetCsv, buildOriginalDatasetReference, matchesDatasetQuery, datasetSensorLabel } from '@/lib/dataset-tools.mjs';
 import { accessLabels, getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 
@@ -40,7 +40,7 @@ export default function TactileDatasetExplorer({
   const [modality, setModality] = useState('All modalities');
   const [year, setYear] = useState('All years');
 
-  const sensors = useMemo(() => unique(entries.flatMap((entry) => entry.sensor)), [entries]);
+  const sensors = useMemo(() => unique(entries.flatMap((entry) => entry.sensor.map(datasetSensorLabel))), [entries]);
   const robots = useMemo(() => unique(entries.flatMap((entry) => entry.robot)), [entries]);
   const tasks = useMemo(() => unique(entries.flatMap((entry) => entry.tasks)), [entries]);
   const modalities = useMemo(() => unique(entries.flatMap((entry) => entry.modalities)), [entries]);
@@ -55,7 +55,7 @@ export default function TactileDatasetExplorer({
   const filteredEntries = entries.filter((entry) =>
     matchesDatasetQuery(entry, query)
     && (!activeUseCase || activeUseCase.ids.includes(entry.id))
-    && (sensor === 'All sensors' || entry.sensor.includes(sensor))
+    && (sensor === 'All sensors' || entry.sensor.some((label) => datasetSensorLabel(label) === sensor))
     && (robot === 'All robots' || entry.robot.includes(robot))
     && (task === 'All tasks' || entry.tasks.includes(task))
     && (modality === 'All modalities' || entry.modalities.includes(modality))

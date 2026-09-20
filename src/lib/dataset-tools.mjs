@@ -1,6 +1,15 @@
 /** @typedef {import('./robotics-datasets').RoboticsDatasetEntry} Dataset */
 import { datasetAudit, getDatasetEvidence } from './dataset-evidence.mjs';
 
+/** Normalize only equivalent labels for the original physical DIGIT sensor.
+ * Simulation, Digit 360 and DIGIT Pinki retain their own evidence boundaries.
+ * @param {string} label
+ */
+export function datasetSensorLabel(label) {
+  return ['digit', 'digit vision-based tactile sensor'].includes(label.trim().toLowerCase())
+    ? 'DIGIT' : label;
+}
+
 /** @param {Dataset} entry @param {string} query */
 export function matchesDatasetQuery(entry, query) {
   const text = [entry.name, ...entry.institution, ...entry.robot, ...entry.sensor,
