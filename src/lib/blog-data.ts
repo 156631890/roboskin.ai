@@ -939,7 +939,7 @@ The reviewed source describes four typical hardware components and four sequenti
 | Stage 3 | Tactile image acquisition | Records the optical response as image data. |
 | Stage 4 | Contact inference | Estimates geometry, force-related cues, slip, contact state, or material properties. |
 
-This decomposition is important for comparing [tactile sensors for robots](/tactile-sensors). Two sensors can both output images while differing in elastomer mechanics, illumination, optical path, calibration, camera placement, rate, and the physical quantities their models can support.
+This decomposition is important for comparing [tactile sensors for robots](/guides/tactile-sensor-for-robots). Two sensors can both output images while differing in elastomer mechanics, illumination, optical path, calibration, camera placement, rate, and the physical quantities their models can support.
 
 ## Four optical readout families
 
