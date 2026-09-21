@@ -41,7 +41,7 @@ test('vision-based tactile intelligence brief preserves the review taxonomy and 
 
   for (const href of [
     '/tactile-ai',
-    '/tactile-sensors',
+    '/guides/tactile-sensor-for-robots',
     '/sensors',
     '/datasets',
     '/benchmarks',
