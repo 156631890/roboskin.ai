@@ -104,7 +104,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(seo, /buildPhysicsAiDefinedTermJsonLd/);
   assert.match(seo, /'\/physical-ai': \{[\s\S]*title: 'Physical AI: Models, Robots & Real-World Action'/);
   assert.match(seo, /'\/physical-ai': \{[\s\S]*Physical AI connects multimodal perception/);
-  assert.match(seo, /const keywords = \[[\s\S]*'Physical AI'[\s\S]*'RoboSkin Physical AI'/);
+  assert.doesNotMatch(seo, /const keywords = \[/, 'Do not copy a site-wide keyword list onto unrelated pages');
   assert.match(seo, /name: 'Physical AI'/);
   assert.match(seo, /alternateName:\s*\['physical-world artificial intelligence'\]/);
   assert.doesNotMatch(seo, /['"]Physics AI['"]/);
@@ -159,10 +159,10 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
       read('src/content/seo-topic-pages.ts'),
     ]);
 
-  assert.match(seo, /title: 'Robot Skin Guides for Tactile AI Learning'/);
-  assert.match(seo, /title: 'Robot Skin and Tactile Sensing Research'/);
-  assert.match(seo, /title: 'Robotic Gripper and Robot Hand Tactile Sensing Use Cases'/);
-  assert.match(seo, /title: 'Humanoid Robot Skin and Contact-Aware Robotics'/);
+  assert.match(seo, /title: 'Tactile Sensing Learning Paths: Sensors, Data & Control'/);
+  assert.match(seo, /title: 'Tactile Robotics Research: Paper Reviews & Evidence'/);
+  assert.match(seo, /title: 'Tactile Sensing Problems: Slip, Coverage, Calibration & Data'/);
+  assert.match(seo, /title: 'Robot Skin Applications: Hands, Grippers & Body Surfaces'/);
   assert.match(seo, /title: 'Tactile AI and Flexible Tactile Sensor Technology'/);
   assert.match(seo, /title: 'Robot Skin, Tactile AI & Robotics Research'/);
   assert.match(seo, /title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms'/);
@@ -173,13 +173,13 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(content, /Browse robot hand tactile sensor research/);
   assert.match(content, /View humanoid robot skin applications/);
 
-  assert.match(products, /Robot skin guides for tactile AI learning/);
-  assert.match(solutions, /Robotic gripper and robot hand tactile sensing use cases/);
-  assert.match(applications, /Humanoid robot skin and contact-aware robotics applications/);
+  assert.match(products, /Learn tactile sensing: from robot skin to working data/);
+  assert.match(solutions, /Solve the right tactile sensing problem/);
+  assert.match(applications, /Robot skin applications: hands, grippers, and body surfaces/);
   assert.match(technology, /Tactile AI and flexible tactile sensor technology/);
   assert.match(technology, /Read robot hand tactile sensor research/);
-  assert.match(research, /Robot hand tactile sensor research and slip detection briefs/);
-  assert.match(research, /slip detection robot hand/);
+  assert.match(research, /Tactile robotics research: methods, results, and limitations/);
+  assert.match(research, /primary sources to consult before attempting a reproduction/);
   assert.match(research, /Physical AI contact-feedback route/);
   assert.doesNotMatch(research, /Physics AI/);
   assert.match(glossary, /E-skin and robot skin glossary/);

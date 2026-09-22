@@ -12,12 +12,13 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/*.test.mjs",
-    "verify:export": "node scripts/verify-export.mjs",
+    "verify:export": "node scripts/verify-export.mjs && node scripts/audit-on-page-seo.mjs",
     "research:watch": "node scripts/daily-research-watch.mjs",
     "indexnow:configure": "node scripts/configure-indexnow.mjs",
     "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "generate:agent-markdown": "node scripts/generate-agent-markdown.mjs",
-    "generate:images": "node scripts/generate-site-images.mjs"
+    "generate:images": "node scripts/generate-site-images.mjs",
+    "audit:seo": "node scripts/audit-on-page-seo.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -26,6 +27,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@mixmark-io/domino": "2.2.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

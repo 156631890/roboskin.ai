@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import ArticleContents from '@/components/ArticleContents';
+import { getArticleHeadings } from '@/lib/article-headings';
 
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -38,6 +40,8 @@ function renderInline(text: string): ReactNode[] {
 
 export default function ArticleBody({ content }: { content: string }) {
   const lines = content.split('\n');
+  const headings = getArticleHeadings(content);
+  const headingIds = new Map(headings.map((heading) => [heading.line, heading.id]));
   const elements: ReactNode[] = [];
   let listItems: string[] = [];
   let tableRows: string[][] = [];
@@ -129,7 +133,7 @@ export default function ArticleBody({ content }: { content: string }) {
 
     if (trimmed.startsWith('## ')) {
       elements.push(
-        <h2 key={`h2-${index}`} className="mt-10 text-2xl font-semibold tracking-tight text-white">
+        <h2 key={`h2-${index}`} id={headingIds.get(index)} className="mt-10 scroll-mt-24 text-2xl font-semibold tracking-tight text-white">
           {trimmed.slice(3)}
         </h2>,
       );
@@ -155,5 +159,5 @@ export default function ArticleBody({ content }: { content: string }) {
   flushList();
   flushTable();
 
-  return <div className="mt-8">{elements}</div>;
+  return <div className="mt-8"><ArticleContents sections={headings} />{elements}</div>;
 }

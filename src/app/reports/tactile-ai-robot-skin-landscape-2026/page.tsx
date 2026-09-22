@@ -44,8 +44,8 @@ export default function TactileAiRobotSkinSampleReportPage() {
         <div className="container-shell report-hero-grid">
           <div className="report-hero-copy">
             <span className="eyebrow">Free sample report</span>
-            <h1>Tactile AI Landscape Report</h1>
-            <p>A source-backed robot skin sample showing the structure used in RoboSkin commercial intelligence work.</p>
+            <h1>Tactile AI and Robot Skin Landscape: Free Sample Report</h1>
+            <p>Preview the research questions and evaluation structure below, then download the fixed {sampleReport.edition} PDF edition with its source register.</p>
             <div className="report-hero-actions">
               <a href={pdfPath} download className="btn-primary">Download the PDF</a>
               <Link href="/research-services">Explore Research Sprint {'->'}</Link>
@@ -68,7 +68,7 @@ export default function TactileAiRobotSkinSampleReportPage() {
         <div className="container-shell report-definition-grid">
           <p className="section-label">What this is</p>
           <div>
-            <h2>A public sample, not a generic market report.</h2>
+            <h2>Use the sample to structure a research decision</h2>
             <p>
               This edition demonstrates how RoboSkin.ai organizes robot skin and tactile AI evidence. It does not include invented market sizing, paid rankings, hardware test results, or unsupported forecasts.
             </p>
@@ -99,6 +99,29 @@ export default function TactileAiRobotSkinSampleReportPage() {
             </dl>
             <a href={pdfPath} download className="report-download-link">Download sample PDF {'->'}</a>
           </aside>
+        </div>
+      </section>
+
+      <section className="pb-16" aria-labelledby="report-evaluation-heading">
+        <div className="container-shell">
+          <h2 id="report-evaluation-heading" className="text-2xl font-semibold text-white">Six questions to take from the report into an evaluation</h2>
+          <p className="mt-4 max-w-3xl text-soft">Work through the sensing-to-policy chain before shortlisting a technology. These questions organize a review; answers must come from the selected system and its primary evidence.</p>
+          <ol className="mt-6 grid gap-4 md:grid-cols-2">
+            {[
+              ['What makes contact?', 'Name the robot surface, object, motion, and operating conditions. A fingertip experiment does not establish whole-body performance.', '/applications', 'Map the robot application'],
+              ['What is the measured signal?', 'Separate raw images, magnetic readings, or array values from derived geometry and force estimates.', '/sensors', 'Compare sensor records'],
+              ['How is the signal calibrated?', 'Record the calibration target, reference measurement, mounting, and held-out checks.', '/guides/tactile-sensor-calibration', 'Review calibration'],
+              ['Can the data be reused?', 'Check actual file access, license, modality, timestamps, and the separation of training and test trajectories.', '/datasets', 'Inspect dataset availability'],
+              ['What job does the model perform?', 'Distinguish representation learning, contact prediction, action selection, and low-level control.', '/tactile-foundation-models', 'Compare tactile model roles'],
+              ['What changed in the robot task?', 'Compare the same protocol with and without the tactile input. Include failures, interventions, and timing.', '/benchmarks', 'Review evaluation benchmarks'],
+            ].map(([question, answer, href, label]) => (
+              <li key={question} className="glass-card p-6">
+                <h3 className="font-semibold text-white">{question}</h3>
+                <p className="mt-3 text-sm text-soft">{answer}</p>
+                <Link href={href} className="mt-4 inline-block text-sm text-accent underline underline-offset-4">{label}</Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

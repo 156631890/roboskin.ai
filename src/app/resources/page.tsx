@@ -3,12 +3,14 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import { seoTopicPages } from '@/content/seo-topic-pages';
+import { groupResourcePages, resourceGoals } from '@/content/resource-navigation';
 import { pageVisuals, resourceSections } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/resources');
 
 export default function ResourcesPage() {
+  const topicGroups = groupResourcePages(seoTopicPages);
   return (
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/resources'), buildBreadcrumbJsonLd('/resources')])} />
@@ -16,15 +18,33 @@ export default function ResourcesPage() {
         <div className="container-shell">
           <span className="eyebrow">Resources</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">Robot skin learning resources</h1>
+            <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">Tactile robotics resources by task</h1>
             <Link href="/research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Explore research resources {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Use these public routes to learn robot skin terminology, review source-backed research notes, and understand RoboSkin.ai source context.
+            Choose what you need to do, then follow a guide, sensor record, dataset, or paper review.
+            The complete directory below is grouped by subject so you can move from a question to the relevant evidence.
           </p>
           <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
+        </div>
+      </section>
+
+      <section className="pb-12" aria-labelledby="resource-goals-heading">
+        <div className="container-shell">
+          <h2 id="resource-goals-heading" className="mb-5 text-2xl font-semibold text-white">What are you working on?</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {resourceGoals.map((goal) => (
+              <Link key={goal.href} href={goal.href} className="glass-card block p-6">
+                <h3 className="text-lg font-semibold text-white">{goal.label}</h3>
+                <p className="mt-2 text-sm text-soft">{goal.description}</p>
+              </Link>
+            ))}
+          </div>
+          <nav aria-label="Browse resource subjects" className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+            {topicGroups.map((group) => <a key={group.id} href={`#${group.id}`} className="text-sm text-accent underline underline-offset-4">{group.title}</a>)}
+          </nav>
         </div>
       </section>
 
@@ -58,23 +78,28 @@ export default function ResourcesPage() {
         <div className="container-shell">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">Topic cluster</p>
-              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Robot skin search routes</h2>
+              <p className="eyebrow">Complete guide directory</p>
+              <h2 className="mt-4 text-3xl font-bold text-white md:text-4xl">Browse by subject</h2>
             </div>
             <Link href="/robot-skin" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Start at robot skin {'->'}
             </Link>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {seoTopicPages.filter(page => !['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing'].includes(page.path)).map((page) => (
-              <Link key={page.path} href={page.path} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
-                <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{page.kicker}</span>
-                <h3 className="mt-3 text-xl font-semibold text-white">{page.h1}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{page.description}</p>
-                <span className="mt-4 block text-xs uppercase tracking-[0.12em] text-[#8e98a8]">{page.relatedLinks.length} linked routes</span>
-              </Link>
-            ))}
-          </div>
+          {topicGroups.map((group) => (
+            <section key={group.id} id={group.id} className="mb-10 scroll-mt-24" aria-labelledby={`${group.id}-heading`}>
+              <h3 id={`${group.id}-heading`} className="text-2xl font-semibold text-white">{group.title}</h3>
+              <p className="mb-4 mt-2 text-sm text-soft">{group.description}</p>
+              <div className="grid gap-4 md:grid-cols-2">
+                {group.pages.map((page) => (
+                  <Link key={page.path} href={page.path} className="glass-card block p-6 transition-colors hover:bg-white/[0.04]">
+                    <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{page.kicker}</span>
+                    <h4 className="mt-3 text-xl font-semibold text-white">{page.h1}</h4>
+                    <p className="mt-3 text-sm leading-relaxed text-soft">{page.description}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
 
@@ -88,12 +113,12 @@ export default function ResourcesPage() {
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a
-                href="https://schema.org/Product"
+                href="https://publications.ri.cmu.edu/a-review-of-tactile-information-perception-and-action-through-touch"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
               >
-                schema.org Product markup
+                Tactile perception and action review
               </a>
               <a
                 href="https://docs.ros.org/"

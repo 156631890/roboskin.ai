@@ -13,18 +13,18 @@ export default function ProductsPage() {
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/products'), buildBreadcrumbJsonLd('/products'), buildCategoryGuideJsonLd()])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
-          <span className="eyebrow">Guide routes</span>
+          <span className="eyebrow">Learning paths</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">
-              Robot skin guides for tactile AI learning
+              Learn tactile sensing: from robot skin to working data
             </h1>
             <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Submit source {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            RoboSkin.ai organizes robot skin guides, tactile AI learning routes, source-backed research notes,
-            glossary terms, and application explainers without claiming active hardware availability.
+            Choose a starting point based on what you need to do: understand contact sensing, shortlist hardware,
+            or process sensor data. Each path leads to practical guides and their primary sources.
           </p>
           <PageHeroVisual visual={pageVisuals.products} className="mt-10" priority />
         </div>
@@ -36,19 +36,19 @@ export default function ProductsPage() {
             <article key={product.name} className="glass-card p-7 md:p-8">
               <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
                 <div>
-                  <p className="text-soft text-xs uppercase tracking-[0.14em]">Guide route</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-white md:text-3xl">{product.name}</h2>
+                  <p className="text-soft text-xs uppercase tracking-[0.14em]">Learning path</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-white md:text-3xl"><Link href={product.href}>{product.name}</Link></h2>
                   <p className="mt-3 text-soft">{product.summary}</p>
                   <p className="mt-4 text-sm text-soft"><span className="font-semibold text-white">Start here if:</span> {product.bestFor}</p>
                   <p className="mt-2 text-sm text-soft"><span className="font-semibold text-white">Inputs and outputs:</span> {product.inputsOutputs}</p>
                   <div className="mt-6 rounded-2xl border border-white/8 bg-[#0d1016] p-5">
                     <p className="text-xs uppercase tracking-[0.14em] text-soft">Decision note</p>
                     <p className="mt-2 text-sm leading-relaxed text-soft">
-                      If you are unsure, review the research and glossary routes first, then send a source suggestion or correction if a page needs improvement.
+                      {product.verificationNote}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-3">
-                      <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
-                        Submit source {'->'}
+                      <Link href={product.href} className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
+                        {product.cta} {'->'}
                       </Link>
                       <Link href="/research" className="text-sm font-semibold text-white hover:text-[#eadfd3]">
                         Explore research {'->'}

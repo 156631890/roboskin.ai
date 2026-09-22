@@ -77,8 +77,8 @@ test('research and glossary pages extend the brand content system', async () => 
     readFile(visualsPath, 'utf8'),
   ]);
 
-  assert.match(research, /source-backed signal board/);
-  assert.match(research, /Open robot hand tactile sensor briefs/);
+  assert.match(research, /Read paper reviews across robot skin/);
+  assert.match(research, /Browse paper reviews/);
   assert.match(research, /Research lane/);
   assert.match(research, /Submit source context/);
   assert.match(glossary, /terminology matrix/);

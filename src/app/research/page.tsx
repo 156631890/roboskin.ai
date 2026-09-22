@@ -75,11 +75,12 @@ export default function ResearchPage() {
           <div>
             <span className="eyebrow">Research</span>
             <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">
-              Robot hand tactile sensor research and slip detection briefs
+              Tactile robotics research: methods, results, and limitations
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">
-              A source-backed signal board for robot hand tactile sensor research, slip detection robot hand questions,
-              robot skin, tactile AI, e-skin, multimodal sensing, ROS 2 tactile pipelines, and contact-aware robot hands.
+              Read paper reviews across robot skin, tactile sensing, manipulation, and robot learning.
+              Each review explains the method, what the authors measured, where the evidence stops,
+              and which primary sources to consult before attempting a reproduction.
             </p>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#8e98a8]">
               Public notes use conservative language. Application-specific performance, durability, and integration claims still need
@@ -87,7 +88,7 @@ export default function ResearchPage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#research-notes" className="btn-primary w-full sm:w-auto">
-                Open robot hand tactile sensor briefs
+                Browse paper reviews
               </Link>
               <Link href="/research/robot-skin-papers" className="btn-secondary w-full sm:w-auto">
                 Browse robot skin papers
