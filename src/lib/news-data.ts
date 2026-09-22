@@ -190,7 +190,7 @@ The practical question is how to retain useful contact prediction without the co
 
 ## Key takeaways
 
-- Table II reports 62 successful trials out of 100 across five physical tasks, compared with 48/100 for the authors’ tactile-enabled VITA baseline; performance does not improve on every task.
+- Table II reports 63 successful trials out of 100 across five physical tasks, compared with 48/100 for the authors’ tactile-enabled VITA baseline; performance does not improve on every task.
 - Vision and touch use different prediction horizons: future vision aligns with the executed action segment, while touch predicts the next frame.
 - Table III reports 10.35 ms inference on an RTX 4090, whereas the abstract states 11.9 ms. These are source-reported figures, and neither establishes a complete robot control-loop rate.
 
