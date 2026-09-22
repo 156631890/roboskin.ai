@@ -100,8 +100,8 @@ As checked September 21, no project-specific code, checkpoint or dataset downloa
 - [ZeroTouch v1: methods, tables and limitations](https://arxiv.org/html/2609.21726v1)
 `,
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-09-21',
-    updated: '2026-09-21',
+    date: '2026-09-22',
+    updated: '2026-09-22',
     readTime: '6 min read',
     sourceDate: '2026-09-18',
     evidenceStatus: 'Preprint · arXiv v1',
@@ -170,8 +170,8 @@ For tactile research, better contact mechanics could improve the inputs to a sen
 - [Reviewed license](https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/LICENSE)
 `,
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-09-21',
-    updated: '2026-09-21',
+    date: '2026-09-22',
+    updated: '2026-09-22',
     readTime: '6 min read',
     sourceDate: '2026-09-18',
     evidenceStatus: 'Preprint · arXiv v1',
@@ -243,8 +243,8 @@ Use the [benchmark directory](/benchmarks) to compare protocols and the [tactile
 - [Official project: demonstrations and code status](https://hanchuzhou.github.io/TARO_project_page/)
 `,
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-09-20',
-    updated: '2026-09-20',
+    date: '2026-09-22',
+    updated: '2026-09-22',
     readTime: '6 min read',
     category: 'Tactile robot control',
     image: '/generated/news/agile-wam-prediction-horizons.png',
@@ -331,8 +331,8 @@ TouchSight remains a preprint. The reviewed study does not demonstrate a robot p
 - [ModelScope HumanTouch repository and displayed data license](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch)
 `,
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-09-20',
-    updated: '2026-09-20',
+    date: '2026-09-22',
+    updated: '2026-09-22',
     readTime: '6 min read',
     category: 'Tactile models and data',
     image: '/generated/news/touchsight-paired-data.png',
