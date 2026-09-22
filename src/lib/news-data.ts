@@ -180,7 +180,7 @@ For tactile research, better contact mechanics could improve the inputs to a sen
     id: 'agile-wam-tactile-world-action-model-robot-control',
     title: 'Agile-WAM pairs fast touch prediction with robot actions',
     seoTitle: 'Agile-WAM: Tactile Robot Control, Results and Latency',
-    seoDescription: 'Examine Agile-WAM’s five robot tasks, 62/100 trial result, conflicting latency figures and code status. Learn what its tactile world-action model changes.',
+    seoDescription: 'Examine Agile-WAM’s five robot tasks, 63/100 trial result, conflicting latency figures and code status. Learn what its tactile world-action model changes.',
     excerpt: 'The UC Davis and Analog Devices preprint combines action generation with visual and tactile prediction. Its task results are promising, but its latency claims need a closer reading.',
     content: `# Agile-WAM pairs fast touch prediction with robot actions
 
@@ -214,7 +214,7 @@ The physical experiments use a seven-degree-of-freedom Flexiv Rizon 4, an Intel 
 | Ethernet-cable insertion | 6/20 | 3/20 |
 | Ethernet-cable unplugging | 17/20 | 15/20 |
 
-Summing the table gives 62/100 versus 48/100: a 14-percentage-point difference, or approximately 29.2% relative improvement. The abstract instead states 29.4%; the displayed integer counts do not reproduce that exact percentage. RoboSkin reports the counts so readers can inspect the denominator. These small task cohorts do not establish a population-wide reliability improvement.
+Summing the table gives 63/100 versus 48/100: a 15-percentage-point difference, or 31.25% relative improvement. The abstract instead states 29.4%; the displayed integer counts do not reproduce that exact percentage. RoboSkin reports the counts so readers can inspect the denominator. These small task cohorts do not establish a population-wide reliability improvement.
 
 Peg insertion is a counterexample to an across-the-board gain: VITA-VT scores one additional success. Ethernet insertion remains difficult, with Agile-WAM succeeding in six of 20 trials. The simulation protocol also selects the highest success rate reached during training and averages across three seeds, which should be retained when comparing it with a fixed-checkpoint evaluation.
 
