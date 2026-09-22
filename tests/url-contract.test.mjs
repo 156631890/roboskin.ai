@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 134);
+  assert.equal(protectedUrls.length, 138);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -52,6 +52,10 @@ test('the audited production URL inventory is protected', async () => {
     '/news/touchsight-twintouch-bare-hand-tactile-prediction',
     '/news/zerotouch-tactile-supervision-visual-grasp-control',
     '/news/crisp-contact-simulation-geometry-solvers-release',
+    '/news/spectrobot-high-bandwidth-single-point-tactile-sensing',
+    '/news/tactile-jepa-topology-aware-electronic-skin-pretraining',
+    '/news/touch2robot-tactile-feedback-human-demonstrations',
+    '/news/when-touch-matters-cluttered-dexterous-grasping',
     '/robotics-programming',
     '/guides/python-tactile-data-processing',
     '/guides/lerobot-dataset-format',
