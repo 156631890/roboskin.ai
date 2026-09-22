@@ -92,8 +92,8 @@ test('research and news pages expose both published and modified dates', async (
   ]);
 
   for (const page of [researchPage, newsPage]) {
-    assert.match(page, /Published \{post\.date\}/);
-    assert.match(page, /Updated \{post\.updated\}/);
+    assert.match(page, /Published (?:<time dateTime=\{post\.date\}>)?\{post\.date\}/);
+    assert.match(page, /Updated (?:<time dateTime=\{post\.updated\}>)?\{post\.updated\}/);
   }
 });
 

@@ -38,11 +38,12 @@ export default function NewsPage() {
               <p className="news-index-number">{String(index + 1).padStart(2, '0')}</p>
               <div className="news-index-meta">
                 <strong>{item.category}</strong>
-                <span>Updated {item.updated}</span>
+                <span>Published <time dateTime={item.date}>{item.date}</time></span>
+                {item.updated !== item.date && <span>Updated <time dateTime={item.updated}>{item.updated}</time></span>}
                 <span>{item.readTime}</span>
               </div>
               <div className="news-index-body">
-                <h2>{item.title}</h2>
+                <h2><Link href={`/news/${item.id}`}>{item.title}</Link></h2>
                 <p>{item.excerpt}</p>
                 <div>
                   {item.technicalFocus.slice(0, 4).map((topic) => <span key={topic}>{topic}</span>)}
@@ -72,6 +73,7 @@ export default function NewsPage() {
               <Link href="/research" className="btn-secondary">
                 Explore research resources
               </Link>
+              <Link href="/rss" className="btn-secondary">Follow via RSS</Link>
             </div>
           </div>
         </div>

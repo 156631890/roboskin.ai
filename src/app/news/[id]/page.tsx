@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
 import JsonLd from '@/components/JsonLd';
+import { site } from '@/content/site';
 import { getNewsPostById, newsPosts } from '@/lib/news-data';
 import {
   buildGraphJsonLd,
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
-      images: [post.image],
+      images: [{ url: post.image, alt: post.imageAlt ?? `Illustration for ${post.title}` }],
       publishedTime: post.date,
       modifiedTime: post.updated,
       authors: [post.author],
@@ -116,7 +117,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           buildNewsArticleJsonLd(post),
         ])}
       />
-      <article className="article-page">
+      <article className="article-page news-article">
         <div className="container-shell">
           <Link href="/news" className="article-backlink">
             {'<-'} Back to news
@@ -124,10 +125,21 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <header className="article-masthead">
             <p className="article-meta">
-              {post.category} | Published {post.date} | Updated {post.updated}
+              {post.category}
             </p>
             <h1>{post.title}</h1>
             <p className="article-deck">{post.excerpt}</p>
+            <div className="news-byline">
+              <Link href={site.editorial.path} rel="author">By {post.author}</Link>
+              <span>Published <time dateTime={post.date}>{post.date}</time></span>
+              {post.updated !== post.date && <span>Updated <time dateTime={post.updated}>{post.updated}</time></span>}
+              <span>{post.readTime}</span>
+            </div>
+            <div className="news-source-context">
+              {post.evidenceStatus && <span>{post.evidenceStatus}</span>}
+              {post.sourceDate && <span>Source date: <time dateTime={post.sourceDate}>{post.sourceDate}</time></span>}
+              <a href={post.sourceUrl} target="_blank" rel="noreferrer">Read the primary source ↗</a>
+            </div>
             <div className="article-topics">
               {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
@@ -145,14 +157,17 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           </header>
 
           <figure className="article-cover">
+            <div className="news-cover-image">
             <Image
               src={post.image}
-              alt={`Illustration for ${post.title}`}
+              alt={post.imageAlt ?? `Illustration for ${post.title}`}
               fill
               priority
               sizes="(min-width: 1280px) 1120px, 100vw"
               className="object-cover"
             />
+            </div>
+            {post.imageCaption && <figcaption>{post.imageCaption}</figcaption>}
           </figure>
 
           <div className="article-grid">
@@ -179,6 +194,8 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
               </div>
               <div className="article-rail-block">
                 <p>Next step</p>
+                <Link href="/editorial-policy">Editorial standards and corrections {'->'}</Link>
+                <Link href="/rss">Follow research updates via RSS {'->'}</Link>
                 <Link href="/contact?requestType=research">
                   Send a research note {'->'}
                 </Link>
