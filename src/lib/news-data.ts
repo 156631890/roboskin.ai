@@ -33,6 +33,293 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'spectrobot-high-bandwidth-single-point-tactile-sensing',
+    title: 'SpectRobot turns single-point vibration into tactile policy input',
+    seoTitle: 'SpectRobot Tactile Sensing: Bandwidth, Results and Data',
+    seoDescription: 'SpectRobot converts one high-bandwidth tactile channel into spectrograms. Inspect its 80-trial tests, bandwidth limits, hardware and release status.',
+    excerpt: 'Wormsensing and Hugging Face researchers encode remote vibration sensors as spectrograms for a robot policy. Longer history mattered more than extending the tested band from 10 to 100 kHz.',
+    category: 'Tactile sensing hardware',
+    image: '/generated/news/spectrobot-single-point-spectrogram.png',
+    imageAlt: 'Diagram showing one mechanically coupled sensor converted into a time-frequency spectrogram and combined with vision in a robot policy.',
+    imageCaption: 'Original RoboSkin.ai explanation of SpectRobot v1. The diagram summarizes the signal path and is not an experiment image.',
+    sourceTitle: 'Learning tactile perception from high-bandwidth single-point sensing',
+    sourceUrl: 'https://arxiv.org/abs/2609.24621',
+    sources: [
+      { title: 'SpectRobot arXiv submission record', url: 'https://arxiv.org/abs/2609.24621' },
+      { title: 'SpectRobot v1 methods and results', url: 'https://arxiv.org/html/2609.24621v1' },
+      { title: 'SpectRobot official project repository', url: 'https://github.com/spectrobot-project/spectrobot-project.github.io' },
+      { title: 'SpectRobot public Hugging Face profile', url: 'https://huggingface.co/jogarulfop' },
+    ],
+    technicalFocus: ['high-bandwidth tactile sensing', 'vibration spectrograms', 'robot imitation learning', 'LeRobot'],
+    content: `# SpectRobot turns single-point vibration into tactile policy input
+
+Joseph Rigal, Emmanuel Virot and Caroline Pascal introduced SpectRobot in an arXiv preprint submitted on September 21, 2026. The Wormsensing and Hugging Face researchers convert a single mechanically coupled tactile signal into a fixed-size time-frequency spectrogram, then feed it through a standard image encoder alongside camera observations. The result is a practical test of whether temporal bandwidth can sometimes substitute for dense spatial coverage. [Paper and version record](https://arxiv.org/abs/2609.24621).
+
+## Key takeaways
+
+- SpectRobot samples signals as fast as 200 kS/s, but converts each history window into a 224 by 224 grayscale spectrogram delivered to the policy at roughly 30 Hz.
+- In the controlled four-class sorting task, a vision-only policy achieved 23% success. Tactile configurations ranged from 48% to 82% across sensor types, with 80 physical trials per condition.
+- Longer temporal history was the stronger result: roughly 0.3-second windows stayed near chance, while 2.3 to 2.9-second windows reached about 86% to 92%. The 10 and 100 kHz confidence intervals overlapped. [Methods and bandwidth study](https://arxiv.org/html/2609.24621v1#S3).
+
+## What changed
+
+Most robot touch systems add more sensing locations. SpectRobot instead asks how much interaction information can be recovered from one sensor mounted away from the contact surface but mechanically coupled to the gripper. Successive vibration samples are transformed into power-spectral-density images with a linear frequency axis. An Action Chunking with Transformers policy uses ResNet-18 encoders for the top camera, wrist camera and tactile spectrogram.
+
+The physical task uses an SO-101 arm to pick up and shake opaque boxes. Four visually identical classes contain nothing, one plastic spacer, seven plastic spacers or seven metal nuts. A trial counts only if the robot grasps the box and deposits it in the correct bin. Each training dataset contains 40 demonstrations; each sensor condition is evaluated with 20 trials per class. [Experimental protocol](https://arxiv.org/html/2609.24621v1#S2).
+
+## What the sensor comparison shows
+
+The reported success rates are 82% for a MEMS accelerometer, 80% at best for the IEPE Dragonfly strain sensor, 73% for a PZT disk, 71% for an IEPE accelerometer, 67% for a passive Dragonfly, 58% for a metallic strain gauge and 48% for an IEPE load cell. The authors explicitly note that several 95% Wilson confidence intervals overlap, so this is not a statistically resolved hardware leaderboard.
+
+The temporal ablation is more informative. At 10 kHz, success rose from about 31% with 0.36 seconds of history to about 86% with 2.9 seconds. At 100 kHz, it rose from about 32% with 0.29 seconds to about 92% with 2.3 seconds. Bandwidth and duration were not independently controlled because the same 224-pixel input grid was used. The safe conclusion is that longer context helped this shaking task; it is not that 100 kHz is generally unnecessary.
+
+The authors also tested a roughly EUR 100 acquisition chain built around an ADS8688 converter and Teensy 4.1. Three sensors reached about 90% on a separately collected, comparable dataset. That is encouraging engineering evidence, but not a matched replacement test against the research-grade chain.
+
+## What this means for robotics
+
+RoboSkin analysis: SpectRobot offers a useful design alternative when abrasion, wiring or surface geometry makes a dense array difficult. It does not recover contact location from one channel, and piezoelectric measurements emphasize dynamics rather than true static load. A real system may still combine these signals with distributed [tactile sensors](/sensors), motor-current force estimates or [robot skin](/robot-skin).
+
+The image-like interface may reduce software friction because it fits existing vision encoders and the [LeRobot workflow](/robotics-programming). Engineers still need synchronized acquisition, anti-alias filtering, stable mechanical coupling and dataset-level calibration checks. The [tactile calibration guide](/guides/tactile-sensor-calibration) explains why a shared tensor shape does not make different sensor installations interchangeable.
+
+## Limitations and availability
+
+The study is a preprint and RoboSkin.ai has not reproduced it. It evaluates one sorting task, one arm family and independently collected datasets for several grippers. Raw time signals were not retained in the reported pipeline, which limits reprocessing with alternative windows. Two authors work for Wormsensing, the Dragonfly sensor manufacturer; the paper discloses this conflict.
+
+The paper states that code is available under Apache 2.0 and points to the SpectRobot GitHub organization. As inspected on September 22, that organization exposed an Apache-2.0 project website repository, but no separate training-code repository was visible. The linked Hugging Face profile did expose many named datasets and policy models, including September 21 task assets, but not a single curated release page. Readers should identify the exact dataset and checkpoint before attempting reproduction.
+
+## Sources
+
+- [SpectRobot arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24621)
+- [SpectRobot v1 methods, results and availability statements](https://arxiv.org/html/2609.24621v1)
+- [Official SpectRobot repository](https://github.com/spectrobot-project/spectrobot-project.github.io)
+- [Public SpectRobot datasets and models profile](https://huggingface.co/jogarulfop)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-22',
+    updated: '2026-09-22',
+    readTime: '6 min read',
+    sourceDate: '2026-09-21',
+    evidenceStatus: 'Preprint · arXiv v1',
+  },
+  {
+    id: 'tactile-jepa-topology-aware-electronic-skin-pretraining',
+    title: 'Tactile-JEPA pretrains electronic-skin encoders on taxel topology',
+    seoTitle: 'Tactile-JEPA Results, Datasets, Code and Limitations',
+    seoDescription: 'Tactile-JEPA uses local and global graph masks for distributed robot touch. Compare force, pose and policy results plus code and license limits.',
+    excerpt: 'The self-supervised method learns from irregular taxel graphs across three public datasets. It leads several perception metrics, but MAE remains better on the reported policy RMSE.',
+    category: 'Tactile representation learning',
+    image: '/generated/news/tactile-jepa-taxel-graph-masking.png',
+    imageAlt: 'Diagram of local and global masks sampled over an irregular tactile taxel graph before representation learning.',
+    imageCaption: 'Original RoboSkin.ai diagram based on Tactile-JEPA v1. It explains graph masking and does not reproduce a paper figure.',
+    sourceTitle: 'Tactile-JEPA: Topology-Aware Self-Supervised Representation Learning for Distributed Tactile Sensors',
+    sourceUrl: 'https://arxiv.org/abs/2609.24385',
+    sources: [
+      { title: 'Tactile-JEPA arXiv submission record', url: 'https://arxiv.org/abs/2609.24385' },
+      { title: 'Tactile-JEPA v1 experiments and tables', url: 'https://arxiv.org/html/2609.24385v1' },
+      { title: 'Author-linked Tactile-JEPA code repository', url: 'https://github.com/E-Kovtun/tactile' },
+    ],
+    technicalFocus: ['distributed tactile sensors', 'electronic skin', 'self-supervised learning', 'taxel topology'],
+    content: `# Tactile-JEPA pretrains electronic-skin encoders on taxel topology
+
+Researchers from Sber AI, Skolkovo Institute of Science and Technology, HSE University and the Artificial Intelligence Research Institute released Tactile-JEPA as an arXiv preprint on September 21, 2026. The method pretrains encoders for distributed tactile sensors by masking connected and dispersed regions of an irregular taxel graph, rather than forcing electronic-skin signals onto a camera-like pixel grid. [Paper and version record](https://arxiv.org/abs/2609.24385).
+
+## Key takeaways
+
+- Tactile-JEPA learns from unlabeled time windows and taxel coordinates, predicting hidden taxel embeddings from visible context with both local and global graph masks.
+- Across three public datasets, it reports a 6.3% reduction in force RMSE and a 20.8% reduction in in-hand orientation RMSE against the strongest comparison for those metrics.
+- It is not best on every downstream result. On DECO-50 policy learning, MAE pretraining records 0.4400 normalized-action RMSE versus 0.4634 for Tactile-JEPA; lower is better. [Tables II and III](https://arxiv.org/html/2609.24385v1#S4).
+
+## What changed
+
+Distributed electronic skins produce multivariate time series from taxels placed across hands, feet or bodies. Their geometry is often sparse and irregular. Tactile-JEPA represents those taxels as a connectivity graph. A local target mask grows from a seed along connected neighbors; a global mask samples across the surface. The model receives the remaining context and predicts embeddings for the hidden regions. Equal local and global masking is intended to preserve fine contact details and whole-surface state.
+
+The encoder is a small transformer with 12 blocks, 192-dimensional embeddings and three attention heads. The paper freezes pretrained encoders for most perception tests, then trains task-specific heads. Pretraining used four NVIDIA A100 80 GB GPUs and took 0.7 to 6.1 hours depending on the dataset and task. [Architecture and compute](https://arxiv.org/html/2609.24385v1#S3).
+
+## Three datasets, three evidence types
+
+| Dataset | Sensor and scale | Evaluated use |
+| --- | --- | --- |
+| Sparsh-skin | Xela uSkin, 368 three-axis taxels, 100 Hz, 4.6 hours | Object class, force and in-hand pose |
+| Tactile socks | Two piezoresistive socks, 453 total taxels, 14 Hz, 5.9 hours | Human action and full-body pose |
+| DECO-50 subset | Two Inspire hands, 2,124 taxels, 30 Hz, 16.6 hours | Visuo-tactile assembly policy |
+
+On Sparsh-skin, Tactile-JEPA reports total force RMSE of 14.05 cN versus 15.00 cN for end-to-end training, the strongest alternative in that row. Orientation RMSE is 5.48 degrees versus 6.92 degrees for BYOL. On tactile socks, action accuracy is 96.91% versus 95.63% for DINO, and full-body pose RMSE is 13.42 radians versus 13.78. These are means across repeated training runs, and selected top-two comparisons use a one-sided Welch test with three pretraining seeds and no multiple-comparison correction.
+
+The policy table requires a different reading. Tactile-JEPA improves over vision-only, random tactile embeddings and an end-to-end tactile encoder, but MAE is better on the reported DECO-50 action RMSE. The paper's stronger claim is stable performance across heterogeneous datasets: BYOL or MAE collapses on some datasets, while Tactile-JEPA trains under one mask configuration.
+
+## What this means for robot skin
+
+RoboSkin analysis: representing taxel layout explicitly is a sound fit for conformable [robot skin](/robot-skin), where physical neighbors need not share adjacent array indices. The local-global mask result also suggests that pretraining should preserve both a contact patch and the state of the wider surface. This is relevant to [tactile foundation models](/tactile-foundation-models), but the evidence is still sensor-family-specific rather than a universal encoder.
+
+Integration is not plug-and-play. DECO-50 groups four or five neighboring taxels to make attention over 2,124 channels affordable. Magnetic data receives baseline correction; piezoresistive data uses different normalization. Dataset coordinates are also missing for DECO-50, so grouping and topology construction must be supplied by the implementation. The [datasets directory](/datasets) can help compare these data contracts before reuse.
+
+## Limitations and availability
+
+This is a preprint, and RoboSkin.ai has not rerun the experiments. All headline improvements are within the selected datasets, task heads and splits. The policy score is imitation-action error, not a physical task success rate. A lower action RMSE also does not by itself prove safer or more reliable contact.
+
+The paper links a public repository. Inspection on September 22 found runnable JEPA-related modules and configurations, but the README primarily documents earlier Sparsh-X and Sparsh-Skin work, some example configs contain author-local checkpoint paths, and no paper-specific pretrained checkpoint was identified. The repository license is Creative Commons Attribution-NonCommercial 4.0, so public access does not imply unrestricted commercial use.
+
+## Sources
+
+- [Tactile-JEPA arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24385)
+- [Tactile-JEPA v1 methods, datasets and results](https://arxiv.org/html/2609.24385v1)
+- [Author-linked code repository and license](https://github.com/E-Kovtun/tactile)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-22',
+    updated: '2026-09-22',
+    readTime: '6 min read',
+    sourceDate: '2026-09-21',
+    evidenceStatus: 'Preprint · arXiv v1 · code inspected',
+  },
+  {
+    id: 'touch2robot-tactile-feedback-human-demonstrations',
+    title: 'Touch2Robot adds simulated robot contact to human demonstrations',
+    seoTitle: 'Touch2Robot: Tactile Demonstration Results and Limits',
+    seoDescription: 'Touch2Robot visualizes predicted robot-hand contact during human demonstrations. Review replay, policy, contact F1 and release conditions.',
+    excerpt: 'The system lets demonstrators see reconstructed robot contact in VR. It improves four-task replay and downstream scores, while contact fidelity remains partial.',
+    category: 'Robot demonstration data',
+    image: '/generated/news/touch2robot-demonstration-loop.png',
+    imageAlt: 'Diagram showing human hand motion and tactile input feeding robot contact reconstruction and visual feedback during demonstration collection.',
+    imageCaption: 'Original RoboSkin.ai explanation of the Touch2Robot loop. It is a schematic, not a captured user-study or robot image.',
+    sourceTitle: 'Touch2Robot: Robot Touch in the Human Demonstration Loop',
+    sourceUrl: 'https://arxiv.org/abs/2609.24660',
+    sources: [
+      { title: 'Touch2Robot arXiv submission record', url: 'https://arxiv.org/abs/2609.24660' },
+      { title: 'Touch2Robot v1 methods and experiments', url: 'https://arxiv.org/html/2609.24660v1' },
+      { title: 'Official Touch2Robot project page', url: 'https://touch2robot.github.io/' },
+    ],
+    technicalFocus: ['human demonstration data', 'tactile retargeting', 'dexterous manipulation', 'robot teleoperation'],
+    content: `# Touch2Robot adds simulated robot contact to human demonstrations
+
+ShanghaiTech University, Beijing Institute for General Artificial Intelligence, Shanghai Jiao Tong University and Beihang University researchers introduced Touch2Robot on September 21, 2026. The framework records human motion, glove touch and object motion, reconstructs how a target robot hand would contact the object, and displays that contact in virtual reality while the person demonstrates. The goal is not haptic feedback to the user; it is visual feedback about predicted robot touch. [Paper and version record](https://arxiv.org/abs/2609.24660).
+
+## Key takeaways
+
+- Across four real-world tasks, average replay completion rises from 37.9% with visual-only feedback to 72.1% with Touch2Robot under the paper's staged completion metric.
+- Diffusion Policies trained on the resulting demonstrations average 62.0% completion, versus 32.9% for visual-feedback data with the same number of trajectories.
+- Reconstructed contact reaches 44.19% F1 against physical robot tactile measurements. Better coverage comes with a higher 6.38% false-positive rate, so the system does not perfectly predict real contact. [Tables I to IV](https://arxiv.org/html/2609.24660v1#S4).
+
+## What changed
+
+Human demonstrations are scalable, but a human hand and a robot hand do not share the same kinematics or contact geometry. Touch2Robot trains object-specific reinforcement-learning teachers to reproduce object motion while favoring contact patterns aligned with the tactile glove. Those teachers are distilled into one retargeter conditioned on human observation and object geometry. During collection, the retargeted hand and tracked object are synchronized in simulation; predicted contacts are shown through a Meta Quest 3 at 30 Hz.
+
+The physical evaluation uses an xArm6 with a LEAP Hand, TwinTac sensors and binary force-sensitive resistors. A MANUS glove records motion, a Juqiao tactile glove records human touch, and calibrated RGB cameras track the object with FoundationPose. The four tasks are pick-and-place, 180-degree object rotation, board wiping and drawer opening. [System and tasks](https://arxiv.org/html/2609.24660v1#S3).
+
+## How to read the reported percentages
+
+The evaluation metric is completion, not always binary success. Rotation, wiped area and drawer displacement are scaled toward a task goal. Pick-and-place awards 25% for each of reach, pick, move and place. Ten attempts per task are collected under each interface, then replayed on the physical robot without filtering demonstrations by replay outcome.
+
+| Collection interface | Replay average | Time per replay-successful trajectory |
+| --- | ---: | ---: |
+| Offline retargeting | 28.3% | 66.0 s |
+| Visual feedback | 37.9% | 58.6 s |
+| Touch2Robot | 72.1% | 18.2 s |
+
+The time figure divides demonstration time by the number of trajectories that replay successfully. It is not end-to-end dataset production time and does not include teacher training, retargeter training or system setup.
+
+For downstream imitation learning, Touch2Robot data improves the mean from 32.9% to 62.0% over visual feedback. Variation is wide on some tasks, including a 69.0 plus or minus 47.7% drawer score. The four-task average should not hide that uncertainty.
+
+## What this means for robotics data
+
+RoboSkin analysis: the most useful idea is moving embodiment feedback into collection before a physical robot executes every demonstration. This could reduce wasted trajectories where human intent looks plausible but maps to unstable robot contact. It complements rather than replaces direct [robot teleoperation](/robot-teleoperation) because simulated contact is still an estimate.
+
+The result also clarifies what a tactile demonstration contains. Touch2Robot keeps human tactile preference, predicted robot contact, object motion and eventual physical measurement as distinct signals. That separation is valuable when designing [robotics datasets](/robotics-datasets) or comparing with touch-rich resources in the [tactile dataset directory](/datasets).
+
+## Limitations and availability
+
+Contact fidelity remains incomplete: 44.19% F1 means reconstructed and measured contacts disagree often. The Touch2Robot variant also has a higher false-positive rate than the three reported baselines. The user study includes ten people on the rotation task, and cross-hand results for XHand and Shadow Hand are qualitative VR visualizations rather than physical cross-embodiment trials. Quantitative real-world tests use one LEAP Hand platform.
+
+This is a preprint and RoboSkin.ai has not reproduced it. As checked September 22, the official project page provides videos, images and an appendix PDF, but no public code repository, dataset download or software license was identified. The paper does not establish that the full collection system can be reconstructed from public assets alone.
+
+## Sources
+
+- [Touch2Robot arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24660)
+- [Touch2Robot v1 methods, tables and appendix](https://arxiv.org/html/2609.24660v1)
+- [Official Touch2Robot project page](https://touch2robot.github.io/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-22',
+    updated: '2026-09-22',
+    readTime: '6 min read',
+    sourceDate: '2026-09-21',
+    evidenceStatus: 'Preprint · arXiv v1',
+  },
+  {
+    id: 'when-touch-matters-cluttered-dexterous-grasping',
+    title: 'When Does Touch Matter tests tactile and wrench feedback in clutter',
+    seoTitle: 'When Does Touch Matter? Dexterous Grasping Results',
+    seoDescription: 'A 200-trial study compares vision, wrench and 508-taxel feedback for cluttered dexterous grasping. Read matched results and limitations.',
+    excerpt: 'A USC and University of New Mexico study holds demonstrations and control fixed while varying policy-visible sensing. The advantage grows in confined, cluttered scenes.',
+    category: 'Dexterous manipulation benchmarks',
+    image: '/generated/news/when-touch-matters-sensing-ablation.png',
+    imageAlt: 'Diagram comparing vision-only, wrench, taxel and combined robot grasp policies across increasing clutter and contact ambiguity.',
+    imageCaption: 'Original RoboSkin.ai summary of the paper’s sensing ablation. It is not a reconstruction of a physical trial.',
+    sourceTitle: 'When Does Touch Matter? Charting the Vision-Interaction Gap in Cluttered Dexterous Grasping',
+    sourceUrl: 'https://arxiv.org/abs/2609.24068',
+    sources: [
+      { title: 'When Does Touch Matter arXiv record', url: 'https://arxiv.org/abs/2609.24068' },
+      { title: 'When Does Touch Matter v1 evaluation', url: 'https://arxiv.org/html/2609.24068v1' },
+      { title: 'Official interaction-aware grasping project', url: 'https://interaction-dex-grasp.github.io/' },
+    ],
+    technicalFocus: ['dexterous grasping', 'distributed fingertip taxels', 'wrench estimation', 'cluttered manipulation'],
+    content: `# When Does Touch Matter tests tactile and wrench feedback in clutter
+
+University of Southern California and University of New Mexico researchers released “When Does Touch Matter?” on September 21, 2026. The study asks a narrow but important question: when does policy-visible interaction sensing improve on RGB-D geometry for target-oriented dexterous grasping in clutter? It holds demonstrations, action space and compliant control fixed while varying whether the learned policy sees estimated wrenches, fingertip taxels or both. [Paper and version record](https://arxiv.org/abs/2609.24068).
+
+## Key takeaways
+
+- The combined vision, wrench and taxel policy succeeds in 24/25 trials, versus 14/25 for vision-only, across five physical scene conditions.
+- On the three nested confined conditions, the combined policy scores 15/15 while vision-only scores 6/15. On easier or less ambiguous conditions, the gap is small or absent.
+- Every controlled policy still uses the same wrench-based compliant controller. The ablation changes what the learned policy observes, not whether the robot physically responds compliantly to contact. [Design and Table I](https://arxiv.org/html/2609.24068v1#S4).
+
+## What changed
+
+The xArm7 carries a 16-DoF LEAP Hand with four PaXini fingertip pads, providing 508 three-axis taxels. Motor currents and hand Jacobians estimate four fingertip wrenches and one aggregated wrist wrench. Two Intel RealSense cameras provide RGB-D views. Grounding DINO and SAM 2 produce target masks, which are converted into a 1,024-point target-context cloud.
+
+A diffusion policy runs at 10 Hz and predicts 16 steps of end-effector pose and hand-joint references, executing eight before replanning. Taxels are encoded with a two-layer attention model; wrench and proprioception are supplied directly. All variants use the same 320 demonstrations, 90/10 split, 300 training epochs and compliance controller. [System details](https://arxiv.org/html/2609.24068v1#S4).
+
+## Where the interaction gap appears
+
+| Policy-visible input | Overall physical success |
+| --- | ---: |
+| Vision only | 14/25 (56%) |
+| Vision plus wrench | 15/25 (60%) |
+| Vision plus taxels | 18/25 (72%) |
+| Vision plus wrench plus taxels | 24/25 (96%) |
+
+The combined result is not simply the sum of two sensors. Estimated wrench exposes weak or obstructed loading and can trigger an early regrasp. The taxel field describes how support is distributed across fingers. In the three progressively harder conditions, the combined policy stays at 5/5 while the stronger single-interaction result reaches only 3/5, 4/5 and 3/5.
+
+The study covers 200 physical trials across eight policy variants, five conditions and five trials per cell. That total sounds large, but the headline 24/25 comparison still has only five trials per scene. Manual resets introduce small placement variation, and confidence intervals are not reported for the success table.
+
+An external vision-only ClutterDexGrasp reproduction is not included in the matched physical table. The authors report that its zero-shot hardware deployment produced unsafe rapid motion and downward pushing that required an emergency stop. Because it did not share the compliant controller, it should be treated as an implementation warning rather than a clean performance baseline.
+
+## What this means for robot hands
+
+RoboSkin analysis: the main contribution is a demand-conditioned comparison, not a claim that every grasp needs touch. Vision-only ties the combined policy at 4/5 in the open small-object scene. Interaction sensing becomes decisive when confinement, occlusion and grasp sensitivity accumulate. That distinction helps teams decide where [robot-hand tactile sensing](/robot-hands) is worth integration effort.
+
+The ablation also warns against treating “force” and “tactile” as interchangeable. Wrench estimates provide compact load cues; distributed taxels provide contact geometry. The strongest policy uses both, which aligns with the design questions in the [tactile manipulation guide](/tactile-manipulation) and [robot gripper sensor guide](/applications/robot-gripper-tactile-sensor).
+
+## Limitations and availability
+
+The experiment uses one LEAP Hand embodiment, one PaXini sensor class and five engineered tabletop conditions. The thick fingertips limit access to narrow gaps. Complete target occlusion can defeat relocalization, and the policy can stall locally without explicit progress monitoring. Execution-time statistics condition on successful episodes and therefore have survivorship bias.
+
+This is a preprint, and RoboSkin.ai has not reproduced the trials. As checked September 22, the official project page provides method explanations and evaluation videos, but no public code, trained policy or dataset download was identified. The paper says all trial videos will be released; readers should verify that the complete set is present before using it as an audit trail.
+
+## Sources
+
+- [When Does Touch Matter arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24068)
+- [When Does Touch Matter v1 methods, tables and limitations](https://arxiv.org/html/2609.24068v1)
+- [Official interaction-aware grasping project page](https://interaction-dex-grasp.github.io/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-22',
+    updated: '2026-09-22',
+    readTime: '6 min read',
+    sourceDate: '2026-09-21',
+    evidenceStatus: 'Preprint · arXiv v1',
+  },
+  {
     id: 'zerotouch-tactile-supervision-visual-grasp-control',
     title: 'ZeroTouch learns visual grasp-force control from tactile supervision',
     seoTitle: 'ZeroTouch: Visual Grasp Control, Force Errors and Limits',
