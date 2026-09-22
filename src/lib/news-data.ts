@@ -16,6 +16,10 @@ export interface NewsPost {
   readTime: string;
   category: string;
   image: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  sourceDate?: string;
+  evidenceStatus?: string;
   sourceTitle: string;
   sourceUrl: string;
   sources: NewsSource[];
@@ -28,6 +32,325 @@ export type NewsSummary = Pick<
 >;
 
 export const newsPosts: NewsPost[] = [
+  {
+    id: 'zerotouch-tactile-supervision-visual-grasp-control',
+    title: 'ZeroTouch learns visual grasp-force control from tactile supervision',
+    seoTitle: 'ZeroTouch: Visual Grasp Control, Force Errors and Limits',
+    seoDescription: 'Read ZeroTouch’s tactile-supervised grasp results, validation versus test force errors, physical trial conditions and limits of visual load estimation.',
+    excerpt: 'The Skoltech preprint uses tactile supervision to predict contact and stop gripper closure from vision and robot state. Its force estimates and physical grasp results answer different questions.',
+    category: 'Tactile robot control',
+    image: '/generated/news/zerotouch-training-deployment.png',
+    imageAlt: 'Diagram separating tactile supervision during ZeroTouch training from RGB and robot-state inputs used for gripper closure at deployment.',
+    imageCaption: 'Original RoboSkin.ai diagram based on ZeroTouch v1. Tactile input supplies training supervision; deployment uses predicted current and target compression. Not an experiment image.',
+    sourceTitle: 'ZeroTouch: Tactile-Supervised Visual Contact Estimation for Contact-Rich Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.21726',
+    sources: [{"title": "ZeroTouch arXiv submission record", "url": "https://arxiv.org/abs/2609.21726"}, {"title": "ZeroTouch v1 methods, tables and limitations", "url": "https://arxiv.org/html/2609.21726v1"}],
+    technicalFocus: ["tactile supervision", "visual force estimation", "robot grasping", "contact-rich manipulation"],
+    content: `# ZeroTouch learns visual grasp-force control from tactile supervision
+
+Researchers at the Intelligent Space Robotics Laboratory of the Skolkovo Institute of Science and Technology introduced ZeroTouch in a September 18, 2026 preprint. Dmitriy Kosenkov and colleagues train a model with tactile measurements, then use wrist-camera RGB, gripper position and local gravity direction to estimate contact and stop gripper closure without tactile input. The study connects visual force prediction to physical grasp tests, while exposing the limits of inferring hidden loads from appearance. [Paper and submission record](https://arxiv.org/abs/2609.21726).
+
+## Key takeaways
+
+- ZeroTouch predicts a deformation map, six-axis force and torque, and a grasp-specific compression target; an upstream controller still supplies arm motion and grasp pose.
+- Normal-force mean absolute error is 0.531 N on the validation set and 0.828 N on the final test set. The smaller number is not the held-out test result.
+- Physical success is 19/20, 16/20 and 18/20 under three specified shifts. These are small, controlled lift-and-hold experiments, not general manipulation success rates. [Evaluation and results](https://arxiv.org/html/2609.21726v1#S5).
+
+## What does the robot predict instead of measuring?
+
+A frozen DINOv2 visual encoder supplies image features. Gripper position and gravity direction in the local gripper frame condition those features before attention associates visual regions with an 18 × 24 grid of tactile queries. The model predicts dense deformation and a six-axis wrench: three forces and three moments. A separate output estimates the desired compression for the selected grasp. The gravity input helps distinguish orientations that can look similar while producing different mechanical loads. [Framework](https://arxiv.org/html/2609.21726v1#S3).
+
+During training, a DM-Tac W2 vision-based tactile sensor supplies deformation and wrench references. At deployment, the predicted current compression is compared with the predicted target to determine when closure stops. Under the paper's convention, stronger compression is more negative. This is contact-state estimation and gripper regulation; selecting the approach trajectory remains outside ZeroTouch's scope.
+
+## Where does the desired force come from?
+
+The target is empirical. During collection, closure is adjusted until a grasp lifts the object 5 cm, holds it for 2 seconds without observable slip, and returns it. For successful demonstrations, the target is the median normal force in a settled interval after closure, rather than the transient force peak. It is not a theoretical minimum-safe force or a globally optimal setting. [Target construction](https://arxiv.org/html/2609.21726v1#S3).
+
+The dataset contains 270 episodes and 15,316 synchronized samples: 187 training episodes, 31 validation episodes, 46 final test episodes and six diagnostic episodes. Validation selects the model and checkpoint. Normalization uses training data only, and wrench error is averaged within each episode before averaging across episodes, so long recordings do not automatically dominate the reported score. [Dataset and evaluation](https://arxiv.org/html/2609.21726v1#S4).
+
+## What do the error figures actually measure?
+
+The abstract highlights a validation normal-force error reduction from 2.017 N for state-only input to 0.531 N for the full architecture. Table II reports 0.828 N on the final test set. The desired compression target has test error of 0.679 N and signed bias of −0.490 N, indicating a tendency toward stronger predicted compression under the negative-force convention. Several moment components deteriorate more than normal force. [Tables I and II](https://arxiv.org/html/2609.21726v1#S5).
+
+Those distinctions matter because stopping depends on the crossing of two predictions. Their errors can partially cancel, allowing a useful stopping point even when neither force estimate is individually accurate. Successful closure therefore does not independently validate both estimates. The sensor itself supplies the force reference; the authors report no independent external force/torque calibration.
+
+## How did it perform on physical grasps?
+
+The tests change object identity, grasp placement or internal loading. Each method receives the same upstream arm motion and target grasp configuration; the comparison concerns gripper-closure control. A success requires a 5 cm lift and a secure 2-second hold. [Physical protocol and Table III](https://arxiv.org/html/2609.21726v1#S5).
+
+| Evaluation condition | ZeroTouch | OpenVLA | SmolVLA |
+| --- | --- | --- | --- |
+| Unseen can | 19/20 | 5/20 | 2/20 |
+| Familiar bottle, unseen off-center grasp | 16/20 | 8/20 | 5/20 |
+| Water-filled bottle, empty-container training condition | 18/20 | 11/20 | 7/20 |
+
+These results favor ZeroTouch within this protocol. They should not become a ranking of the models' complete vision-language-action capabilities: approach planning is controlled externally, and the paper's protocol does not test general instruction following.
+
+## Limitations, access and engineering relevance
+
+RoboSkin analysis: the valuable separation is between measured training supervision, inferred contact at runtime and the downstream stopping rule. It suggests a way to reuse tactile data when deployment hardware is constrained. The [tactile dataset directory](/datasets) and [calibration guide](/guides/tactile-sensor-calibration) provide context for inspecting those references.
+
+Hidden loading remains a key limitation. A container can look similar while requiring different compression, and the authors explicitly acknowledge that insufficient visual evidence cannot reliably reveal its physical properties. The evaluated objects and load shifts are limited. [Limitations](https://arxiv.org/html/2609.21726v1#S6).
+
+As checked September 21, no project-specific code, checkpoint or dataset download was verified in the paper or arXiv record. The work remains a preprint, and RoboSkin has not reproduced it. For another use of human touch data, compare the distinct action-conditioned experiments in [DexTouch-WM](/research/dextouch-wm-human-touch-world-model-2026); its objective differs from ZeroTouch's grasp-force estimator.
+
+## Sources
+
+- [ZeroTouch arXiv record: September 18, 2026](https://arxiv.org/abs/2609.21726)
+- [ZeroTouch v1: methods, tables and limitations](https://arxiv.org/html/2609.21726v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-21',
+    updated: '2026-09-21',
+    readTime: '6 min read',
+    sourceDate: '2026-09-18',
+    evidenceStatus: 'Preprint · arXiv v1',
+  },
+  {
+    id: 'crisp-contact-simulation-geometry-solvers-release',
+    title: 'CRISP details contact simulation for tight-tolerance robot assembly',
+    seoTitle: 'CRISP Robot Simulation: Contact Results, Access and License',
+    seoDescription: 'Inspect CRISP’s contact geometry, CANAL and SubADMM results, prebuilt packages and research-only license. Separate simulator evidence from real-robot claims.',
+    excerpt: 'Seoul National University’s CRISP paper examines contact geometry and solver behavior in robot assembly. The public package provides examples and binaries under a restricted research license.',
+    category: 'Robotics simulation tools',
+    image: '/generated/news/crisp-geometry-solver-package.png',
+    imageAlt: 'Diagram separating CRISP collision geometry and contact solvers from the public examples and prebuilt library package, with a research-only license note.',
+    imageCaption: 'Original RoboSkin.ai explanation of CRISP’s architecture and public package. A schematic, not a simulator screenshot or physical experiment.',
+    sourceTitle: 'CRISP: Contact-Rich Robotic Simulation Platform with Extensive Geometries and Contact Solvers',
+    sourceUrl: 'https://arxiv.org/abs/2609.21761',
+    sources: [{"title": "CRISP arXiv record", "url": "https://arxiv.org/abs/2609.21761"}, {"title": "CRISP v1 evaluation and appendices", "url": "https://arxiv.org/html/2609.21761v1"}, {"title": "Official CRISP project", "url": "https://inrol.github.io/crisp/"}, {"title": "CRISP public package and examples", "url": "https://github.com/INRoL/crisp"}, {"title": "CRISP version 1.1.0 assets", "url": "https://github.com/INRoL/crisp/releases/tag/v1.1.0"}, {"title": "Reviewed CRISP license", "url": "https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/LICENSE"}],
+    technicalFocus: ["contact-rich simulation", "robot assembly", "collision geometry", "contact solvers"],
+    content: `# CRISP details contact simulation for tight-tolerance robot assembly
+
+Somang Lee and colleagues in Seoul National University's Department of Mechanical Engineering describe CRISP, the Contact-Rich Simulation Platform, in a September 18, 2026 preprint. The physics engine combines several collision-geometry representations with contact solvers designed for tightly coupled interactions, including peg insertion and threaded assembly. Its public package makes the work inspectable through examples, but access is restricted to academic and noncommercial research. [Paper record](https://arxiv.org/abs/2609.21761) and [official project](https://inrol.github.io/crisp/).
+
+The paper is the new research event covered here. It should not be confused with a first software launch: the inspected GitHub releases list version 1.1.0 on September 17, following earlier packages. This article distinguishes the paper's evaluation from the versioned software readers can obtain.
+
+## Key takeaways
+
+- CRISP supports meshes and function-based geometry, allowing collision representation and solver choice to be examined together rather than treating contact as one fixed approximation.
+- The reported comparisons use MuJoCo 3.4.0 and Isaac Sim 4.5.0 under specified geometry, friction and timestep conditions; they do not establish universal simulator superiority.
+- The public repository supplies example code and integration for a prebuilt library. Its restrictive license means public availability should not be described as a full open-source engine release. [Paper](https://arxiv.org/html/2609.21761v1), [repository](https://github.com/INRoL/crisp) and [license](https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/LICENSE).
+
+## Why geometry and solver choice belong together
+
+A simulator must first locate contacts and then resolve the resulting motion, forces and constraints. Improving one stage does not automatically fix errors in the other. CRISP supports primitives, convex shapes, triangle meshes, signed distance fields and differentiable support functions. A signed distance field describes distance to a surface; a support function describes a convex shape in terms of directional support. These representations expose different information to collision detection. [Geometry and architecture](https://arxiv.org/html/2609.21761v1#S4).
+
+For contact resolution, CRISP provides Cascaded Newton-based Augmented Lagrangian, or CANAL, and Subsystem-based Alternating Direction Method of Multipliers, or SubADMM. The former combines outer multiplier updates with inner Newton iterations; the latter separates dynamics and constraint updates. Official documentation says SubADMM's algorithm is parallelizable but CRISP does not currently exploit that parallelism. A related GPU paper is not evidence that this package supplies the same GPU implementation. [Solver documentation](https://inrol.github.io/crisp/docs/contact-solvers/).
+
+## What did the assembly comparisons show?
+
+The paper evaluates several contact scenarios on an AMD Ryzen 7 9800X3D CPU, using MuJoCo 3.4.0 and Isaac Sim 4.5.0 as comparison platforms. Geometry, physical parameters and timesteps are matched as closely as possible, but their representations and numerical methods remain different. [Evaluation](https://arxiv.org/html/2609.21761v1#S6).
+
+For peg insertion, a 2.5 cm-radius, 10 cm-high peg enters a hole with 50–200 micrometers of tolerance. Friction is set to 0.01, initial tilt to 0.5 degrees and timestep to 2 ms. At 50 micrometers, the CANAL configuration using a differentiable support-function peg and torus-specialized hole reports average penetration of approximately 37.8 micrometers; the Isaac Sim configuration fails to assemble at that tolerance. None of the compared engines is strictly intersection-free. [Table II and Appendix D](https://arxiv.org/html/2609.21761v1).
+
+That metric is the time average of each step's maximum penetration in a reduced two-dimensional representation. In the threaded bolt-nut test, the measurement instead averages maximum detected contact penetration during the middle of engagement, uses a 10 ms timestep, and sets friction to zero. Those are different measurement procedures, not interchangeable evidence of real manufacturing tolerances.
+
+The paper also reports cases where CRISP's mesh discretization prevents assembly, and where SubADMM's limited convergence produces larger penetration. Its appendix acknowledges that tuning MuJoCo parameters can mitigate some observed artifacts. The robot demonstrations follow predefined joint keyframes with proportional-derivative control; they are not demonstrations of a learned policy transferring to a physical robot.
+
+## What is actually available to download?
+
+RoboSkin inspected repository revision \`fc0684bdb3f325ab1586fc6df987c15839f08733\` on September 21. The [README](https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/README.md) identifies two assembly examples and CMake integration for a prebuilt package. The repository's engine directory is a download location, rather than the complete solver implementation source.
+
+[Version 1.1.0 release assets](https://github.com/INRoL/crisp/releases/tag/v1.1.0) list Windows x86-64, Linux x86-64/AArch64 and macOS packages with checksum files. Setup requires CMake 3.20 or later, a C++20 compiler and an OpenGL-capable desktop. Default configuration fetches the latest engine package and Eigen 3.4.0. The examples use a Franka arm, Robotiq 2F-85 gripper and prescribed joint targets. [Installation guide](https://inrol.github.io/crisp/docs/installation/).
+
+The license permits academic and noncommercial research but prohibits redistribution, modification and reverse engineering without written authorization. Those conditions are material for integration. RoboSkin verified the listed files and documentation, but did not install or run the engine.
+
+## What should a reproduction record?
+
+RoboSkin analysis: pinning the example repository alone is insufficient when CMake downloads the latest binary. Record the engine archive version, checksum, example revision, collision representation, timestep and solver settings together. Version 1.1.0 changes default budgets and replaces a shared iteration-limit option with separate CANAL and SubADMM options; old settings should not silently be assumed equivalent. [Release notes](https://inrol.github.io/crisp/docs/release-notes/).
+
+For tactile research, better contact mechanics could improve the inputs to a sensor simulator, but CRISP's contact solver is not itself a calibrated tactile-image or pressure-array generator. Soft-body dynamics is listed as future work. Compare the [tactile benchmark directory](/benchmarks) and [sensor guide](/sensors) before equating collision accuracy with sensor fidelity. The platform paper remains a preprint; its earlier method publications do not independently validate every result in this release.
+
+## Sources
+
+- [CRISP arXiv v1](https://arxiv.org/html/2609.21761v1)
+- [Official project and documentation](https://inrol.github.io/crisp/)
+- [Public repository and versioned packages](https://github.com/INRoL/crisp)
+- [Reviewed license](https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/LICENSE)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-21',
+    updated: '2026-09-21',
+    readTime: '6 min read',
+    sourceDate: '2026-09-18',
+    evidenceStatus: 'Preprint · arXiv v1',
+  },
+  {
+    id: 'agile-wam-tactile-world-action-model-robot-control',
+    title: 'Agile-WAM pairs fast touch prediction with robot actions',
+    seoTitle: 'Agile-WAM: Tactile Robot Control, Results and Latency',
+    seoDescription: 'Examine Agile-WAM’s five robot tasks, 62/100 trial result, conflicting latency figures and code status. Learn what its tactile world-action model changes.',
+    excerpt: 'The UC Davis and Analog Devices preprint combines action generation with visual and tactile prediction. Its task results are promising, but its latency claims need a closer reading.',
+    content: `# Agile-WAM pairs fast touch prediction with robot actions
+
+Researchers at the University of California, Davis and Analog Devices introduced Agile-WAM, a tactile world-action model for contact-rich robot control, in a September 17, 2026 arXiv preprint. Led in the author list by Hanchu Zhou and Brendan Lynch, the study tests whether a compact model can generate robot actions while predicting how vision and touch will change. It reports nine simulated tasks and five physical manipulation tasks. [Paper and submission record](https://arxiv.org/abs/2609.20761).
+
+The practical question is how to retain useful contact prediction without the cost of generating full future images. Agile-WAM predicts compact internal representations instead. The results justify examining that design, while inconsistencies between the abstract and tables make the exact evaluation conditions especially important.
+
+## Key takeaways
+
+- Table II reports 62 successful trials out of 100 across five physical tasks, compared with 48/100 for the authors’ tactile-enabled VITA baseline; performance does not improve on every task.
+- Vision and touch use different prediction horizons: future vision aligns with the executed action segment, while touch predicts the next frame.
+- Table III reports 10.35 ms inference on an RTX 4090, whereas the abstract states 11.9 ms. These are source-reported figures, and neither establishes a complete robot control-loop rate.
+
+## What changes in the model?
+
+A world-action model learns robot actions together with future observations. Agile-WAM combines an RGB image, a tactile observation and robot state into a shared latent representation. A lightweight flow-matching network transforms that representation into action, visual and tactile latents; an action decoder produces the commands. The visual encoder uses an ImageNet-pretrained ResNet-18, so “lightweight” does not mean that every component is trained without prior knowledge. [Method, Section III](https://arxiv.org/html/2609.20761v1).
+
+The model predicts 16 actions and executes eight before replanning. Visual prediction targets the longer, eight-step horizon, while tactile prediction targets the next frame. The authors’ rationale is that adjacent images can be nearly identical even when contact changes abruptly. This is different from rendering a photorealistic future video or independently proving that an action is safe.
+
+For the larger architectural context, see RoboSkin’s [visuo-tactile world-model comparison](/guides/visuo-tactile-world-models-robot-manipulation). Its planning and transfer distinctions also apply here.
+
+## What happened on the physical robot?
+
+The physical experiments use a seven-degree-of-freedom Flexiv Rizon 4, an Intel RealSense D405 wrist camera and an Analog Devices 32 × 32 piezoresistive pressure sensor on the gripper. Vision and tactile acquisition are reported at 30 Hz. Each task has 50 teleoperated training demonstrations and 20 evaluation episodes per policy. These physical pressure observations should not be confused with the simulation benchmark’s 10 × 14 × 3 tactile force field. [Experimental setup and Table II](https://arxiv.org/html/2609.20761v1).
+
+| Physical task | Agile-WAM | VITA-VT tactile baseline |
+| --- | --- | --- |
+| Gear assembly | 16/20 | 11/20 |
+| Peg insertion | 11/20 | 12/20 |
+| Power-plug insertion | 13/20 | 7/20 |
+| Ethernet-cable insertion | 6/20 | 3/20 |
+| Ethernet-cable unplugging | 17/20 | 15/20 |
+
+Summing the table gives 62/100 versus 48/100: a 14-percentage-point difference, or approximately 29.2% relative improvement. The abstract instead states 29.4%; the displayed integer counts do not reproduce that exact percentage. RoboSkin reports the counts so readers can inspect the denominator. These small task cohorts do not establish a population-wide reliability improvement.
+
+Peg insertion is a counterexample to an across-the-board gain: VITA-VT scores one additional success. Ethernet insertion remains difficult, with Agile-WAM succeeding in six of 20 trials. The simulation protocol also selects the highest success rate reached during training and averages across three seeds, which should be retained when comparing it with a fixed-checkpoint evaluation.
+
+## How fast is it, and what does latency include?
+
+Table III reports 10.35 ± 0.14 ms from observation input to action generation on one NVIDIA RTX 4090, using FP32, batch size one, a 16-action output and an average over 50 runs. The flow models use six integration steps; the diffusion baselines use 100 denoising steps. A speed comparison therefore includes different sampling budgets. [Inference protocol, Section IV-B2](https://arxiv.org/html/2609.20761v1).
+
+The abstract and official project page instead quote 11.9 ms. The reviewed materials do not reconcile the two values, so this article does not select one as an independently verified measurement. The table’s 96.62 Hz figure is an inference-supported maximum, not a demonstrated rate for sensing, transport, actuation and feedback together. The physical sensors operate at 30 Hz, and eight actions are executed per plan.
+
+## Why it matters for engineering
+
+RoboSkin analysis: the useful idea is to match prediction horizons to each signal’s dynamics, rather than assume vision and pressure need identical timing. A reproduction should measure sensor-to-command latency, action timing and failure recovery together. The [ROS 2 tactile integration guide](/guides/ros2-tactile-sensing) explains the timestamp and transport checks that model-only timing leaves out.
+
+The same analysis argues against assuming edge-device readiness from an RTX 4090 result. Performance on an embedded processor, unseen sensors or different contact materials remains a separate question.
+
+## Limitations and availability
+
+As checked on September 20, the [official project](https://hanchuzhou.github.io/TARO_project_page/) shows task demonstrations and labels its code “coming soon.” No linked checkpoint or experiment-dataset download was verified there. The arXiv record does not state peer-reviewed acceptance. RoboSkin reviewed the paper and project, but did not run the model or reproduce any robot trials.
+
+Use the [benchmark directory](/benchmarks) to compare protocols and the [tactile sensor guide](/sensors) to check hardware assumptions. The cover is an original explanatory diagram, not an experimental image.
+
+## Sources
+
+- [Agile-WAM arXiv record, submitted September 17, 2026](https://arxiv.org/abs/2609.20761)
+- [Agile-WAM v1: methods, task counts and inference table](https://arxiv.org/html/2609.20761v1)
+- [Official project: demonstrations and code status](https://hanchuzhou.github.io/TARO_project_page/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-20',
+    updated: '2026-09-20',
+    readTime: '6 min read',
+    category: 'Tactile robot control',
+    image: '/generated/news/agile-wam-prediction-horizons.png',
+    imageAlt: 'Diagram of Agile-WAM generating an action segment while predicting next-step touch and longer-horizon vision from current observations.',
+    imageCaption: 'RoboSkin.ai explanatory diagram based on Agile-WAM v1. The two prediction horizons are schematic; this is not an experiment image.',
+    sourceDate: '2026-09-17',
+    evidenceStatus: 'Preprint · arXiv v1',
+    sourceTitle: 'Agile-WAM: An Agile Tactile World Action Model for Contact-Rich Robot Control',
+    sourceUrl: 'https://arxiv.org/abs/2609.20761',
+    sources: [
+      { title: 'Agile-WAM arXiv record', url: 'https://arxiv.org/abs/2609.20761' },
+      { title: 'Agile-WAM v1 full paper', url: 'https://arxiv.org/html/2609.20761v1' },
+      { title: 'Official Agile-WAM project', url: 'https://hanchuzhou.github.io/TARO_project_page/' },
+    ],
+    technicalFocus: ['tactile world-action model', 'contact-rich manipulation', 'robot control', 'inference latency'],
+  },
+  {
+    id: 'touchsight-twintouch-bare-hand-tactile-prediction',
+    title: 'TouchSight learns bare-hand touch prediction from glove recordings',
+    seoTitle: 'TouchSight & TwinTouch-20H: Data, Results and Access',
+    seoDescription: 'Explore TouchSight’s video-to-touch model and TwinTouch-20H. Separate measured glove labels, generated video, contact metrics and verified dataset access.',
+    excerpt: 'The preprint combines measured glove signals with generated bare-hand video. Its 20-hour paired dataset and 500-hour training source describe different kinds of scale.',
+    content: `# TouchSight learns bare-hand touch prediction from glove recordings
+
+TouchSight, a video-based tactile prediction model from Danyan Zhou, Jinxuan Lu and colleagues at Tsinghua University, Xspark AI and collaborating universities, was submitted to arXiv on September 17, 2026. It learns from pressure-glove recordings and generated bare-hand imagery to estimate dense hand contact signals from egocentric RGB video. The accompanying TwinTouch-20H dataset tests how far measured tactile labels can travel when the glove’s visual appearance is removed. [Original paper record](https://arxiv.org/abs/2609.20414).
+
+The distinction is consequential: the model predicts touch at inference, but its training still depends on instrumented recordings. An apparently bare hand in a generated clip is not evidence that its tactile labels were measured from an uninstrumented person.
+
+## Key takeaways
+
+- TwinTouch-20H pairs approximately 10 hours of original glove video with 10 hours of generated bare-hand video; these share measured tactile labels rather than representing 20 independent hours of contact collection.
+- The model uses 500 hours of HumanTouch supervision in the paper, while the publicly described initial HumanTouch release is approximately 100 hours. Public files do not establish access to the full training corpus.
+- Quantitative force evaluation, geometry-derived contact evaluation and qualitative results on natural bare-hand video are separate tests; none is a demonstrated robot-policy improvement.
+
+## How are the paired videos constructed?
+
+The authors select glove recordings across 52 interaction tasks and 10 scenes, then use Seedance 2.0 to replace glove appearance and vary the background. The original tactile labels are reused for the generated video. Reviewers overlay the original hand at 40% opacity to reject changes in pose, motion, objects or interaction, as well as incomplete glove removal and distorted hands. [Dataset construction, Section III](https://arxiv.org/html/2609.20414v1).
+
+This supplies appearance variation without making a second physical measurement. HumanTouch episodes are split into training, validation and test sets before their generated counterparts inherit those assignments. Keeping each original and its derivative together is important: splitting paired views independently could let essentially the same interaction appear on both sides of evaluation.
+
+For a broader data-selection workflow, see the [tactile dataset directory](/datasets). Treat paired recordings, frames, episodes and hours as distinct units when comparing resources.
+
+## What does TouchSight predict?
+
+TouchSight combines frozen DINOv3 visual features and geometry-aware VGGT features, temporal attention and region queries for fingers and palms. It consumes eight-frame RGB clips and does not require external hand-pose reconstruction at inference. Glove supervision uses 275 trusted taxels per hand: 80 finger taxels and 195 palm taxels. Another 85 physical channels and the layout’s padding are excluded from losses and metrics. [Method and Appendix A](https://arxiv.org/html/2609.20414v1).
+
+Five additional hand–object interaction datasets contribute geometric contact labels, not measured forces. Their contact target marks a hand vertex when an object vertex is within 1 cm. These examples are excluded from the force loss. The model therefore learns from several supervision types; describing every label as a tactile measurement would obscure their origin.
+
+## What do the reported results support?
+
+On generated bare-hand TwinTouch test clips, Table III compares the full model with a version trained without generated visual augmentation. All values below are author-reported. Force-error values follow the paper’s glove-signal scale and must not be relabeled as newtons or kilopascals. [Evaluation definitions and Table III](https://arxiv.org/html/2609.20414v1).
+
+| TwinTouch metric | Without generated augmentation | Full model |
+| --- | --- | --- |
+| Mean absolute error, lower is better | 1.851 | 1.671 |
+| Active-taxel error, lower is better | 12.077 | 10.026 |
+| Volumetric intersection-over-union, higher is better | 0.239 | 0.300 |
+| Temporal Pearson correlation, higher is better | 0.255 | 0.272 |
+
+The active-taxel metric evaluates locations above five raw glove units. Its larger error matters because averages across inactive regions can conceal weaker prediction where contact actually occurs. Separately, the OakInk2 contact test reports F1 of 0.373 versus 0.329 for HACO, but HACO has higher recall: 0.623 versus 0.311. “Better contact prediction” therefore depends on which metric and error tradeoff matter.
+
+Natural videos from Ego-Exo4D, Ego4D and EgoDex lack measured tactile ground truth in this evaluation. Their visualizations provide qualitative generalization evidence, not a quantitative validation of physical force recovery on arbitrary bare hands.
+
+## What can readers actually download?
+
+The paper’s 500-hour HumanTouch training source, TwinTouch’s 20 hours of paired visual observations and the public HumanTouch subset are three different resources or scopes. SparkLab’s [official HumanTouch page](https://xsparkai.com/sparklab/humantouch/) describes an initial approximately 100-hour release and links ModelScope and Hugging Face.
+
+On September 20, RoboSkin verified a public, ungated [Hugging Face file listing](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5) containing Parquet, video and metadata files. Its [pinned README](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/blob/81822a10cac5def2638db546eaeced581d71a8b5/README.md) still describes roughly 100 hours, warns that uploading is ongoing, and lists an AIGC edition as in preparation. The README defers licensing to [ModelScope, whose dataset page displays CC-BY-NC-4.0](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch). That noncommercial condition matters for reuse; it does not license unreleased TwinTouch data or model weights. We did not decode the complete payload or independently total its duration.
+
+No dedicated TwinTouch-20H download or TouchSight checkpoint/code release was verified in the paper and linked materials reviewed. The public HumanTouch files should not be presented as the complete 500-hour training set or as a confirmed TwinTouch release.
+
+## Why the distinction matters
+
+RoboSkin analysis: generated appearance may help reuse expensive measured labels, but the resulting predictions need provenance. Store whether each field is measured, geometry-derived, generated or predicted; preserve episode relationships and excluded sensor channels. The [LeRobot format guide](/guides/lerobot-dataset-format) and [tactile calibration guide](/guides/tactile-sensor-calibration) explain useful integration checks without certifying compatibility with this release.
+
+TouchSight remains a preprint. The reviewed study does not demonstrate a robot policy trained on its predictions, and RoboSkin has not reproduced it. Compare [DexTouch-WM’s separate human-to-robot world-model experiments](/research/dextouch-wm-human-touch-world-model-2026) before equating a contact estimator with action-conditioned robot dynamics.
+
+## Sources
+
+- [TouchSight arXiv record, September 17, 2026](https://arxiv.org/abs/2609.20414)
+- [TouchSight v1: TwinTouch construction, metrics and appendix](https://arxiv.org/html/2609.20414v1)
+- [SparkLab HumanTouch acquisition and release description](https://xsparkai.com/sparklab/humantouch/)
+- [HumanTouch public repository at the reviewed revision](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5)
+- [ModelScope HumanTouch repository and displayed data license](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-20',
+    updated: '2026-09-20',
+    readTime: '6 min read',
+    category: 'Tactile models and data',
+    image: '/generated/news/touchsight-paired-data.png',
+    imageAlt: 'Diagram showing 10 hours of original glove video paired with 10 hours of generated bare-hand video, sharing the original measured tactile labels.',
+    imageCaption: 'RoboSkin.ai explanatory diagram of TwinTouch-20H’s paired visual data. The generated view reuses measured labels; it is not a second physical recording.',
+    sourceDate: '2026-09-17',
+    evidenceStatus: 'Preprint · arXiv v1',
+    sourceTitle: 'TouchSight: Bare-Handed Tactile Prediction from Egocentric Video via Generative Visual Augmentation',
+    sourceUrl: 'https://arxiv.org/abs/2609.20414',
+    sources: [
+      { title: 'TouchSight arXiv record', url: 'https://arxiv.org/abs/2609.20414' },
+      { title: 'TouchSight v1 full paper', url: 'https://arxiv.org/html/2609.20414v1' },
+      { title: 'Official HumanTouch acquisition and release page', url: 'https://xsparkai.com/sparklab/humantouch/' },
+      { title: 'HumanTouch public file listing, pinned revision', url: 'https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5' },
+      { title: 'ModelScope HumanTouch data license', url: 'https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch' },
+    ],
+    technicalFocus: ['tactile prediction', 'egocentric video', 'TwinTouch-20H', 'visuo-tactile datasets'],
+  },
   {
     id: 'fibtac-pneumatic-fiber-gripper-tactile-sensing-2026',
     title: 'FibTac combines pneumatic gripping and tactile sensing',
