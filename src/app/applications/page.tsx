@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
-import { pageVisuals, site } from '@/content/site';
+import { pageVisuals } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/applications');
@@ -10,19 +10,19 @@ export const metadata: Metadata = buildPageMetadata('/applications');
 const applicationAreas = [
   {
     title: 'Humanoid robot skin',
-    summary: 'Robot skin language is most visible around hands, arms, grippers, and curved humanoid surfaces where contact awareness matters.',
+    summary: 'Fingertips, palms, arms, and torso surfaces cover different contacts. Record sensing coverage and blind spots, then map each measurement to a robot frame.',
   },
   {
     title: 'Tactile AI and e-skin',
-    summary: 'Tactile AI connects sensing vocabulary with perception, control, slip detection, multimodal sensing, and flexible electronic skin research.',
+    summary: 'Soft sensing layers can conform to changing surfaces. Mounting strain, bending, drift, and crosstalk need evaluation alongside sensitivity.',
   },
   {
     title: 'Prosthetics and assistive devices',
     summary: 'Assistive robotics and prosthetics use touch-related terminology for safer interaction, force awareness, feedback, and human-centered design.',
   },
   {
-    title: 'Research, media, and category ownership',
-    summary: 'RoboSkin.ai can anchor a category guide, research initiative, media property, or brand narrative around the robot skin field.',
+    title: 'Contact-rich manipulation',
+    summary: 'Insertion, reorientation, and handling require a link between contact observations and robot action. Evaluate the complete task, including failures and interventions.',
   },
 ];
 
@@ -78,19 +78,19 @@ export default function ApplicationsPage() {
           <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
               <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
-                Humanoid robot skin and contact-aware robotics applications
+                Robot skin applications: hands, grippers, and body surfaces
               </h1>
               <p className="mt-5 max-w-3xl text-soft">
-                RoboSkin.ai frames where humanoid robot skin, contact-aware robotics, tactile AI, and e-skin terminology
-                appears across robotics research, assistive devices, media, and category ownership. The page is educational
-                and does not imply product availability.
+                Choose the surface that makes contact. Fingertips, gripper pads, compliant bodies, and distributed
+                body skin need different coverage, mounting, and signals. Use these application guides to connect
+                the robot geometry to a measurement and a task-level evaluation.
               </p>
             </div>
             <div className="glass-card p-6">
-              <p className="text-sm font-semibold text-white">{site.domainInquiry.headline}</p>
-              <p className="mt-3 text-sm leading-relaxed text-soft">{site.domainInquiry.summary}</p>
-              <Link href={site.domainInquiry.href} className="mt-5 inline-flex rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white">
-                {site.domainInquiry.ctaLabel}
+              <p className="text-sm font-semibold text-white">Start with the contact problem</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">Already have a failure to investigate? Find a workflow for slipping objects, missing body contact, calibration drift, or unusable touch data.</p>
+              <Link href="/solutions" className="mt-5 inline-flex rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white">
+                Find a problem-solving workflow
               </Link>
             </div>
           </div>
@@ -114,10 +114,10 @@ export default function ApplicationsPage() {
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
               <span className="eyebrow">Physical AI use cases</span>
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Where RoboSkin Physical AI becomes useful</h2>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-white">Which contact signals does the task need?</h2>
             </div>
             <Link href="/physical-ai" className="text-sm font-semibold text-accent hover:text-white">
-              Understand RoboSkin Physical AI {'->'}
+              Understand Physical AI feedback {'->'}
             </Link>
           </div>
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">

@@ -1451,7 +1451,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile sensor for robots',
     kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
-    updated: '2026-09-16',
+    updated: '2026-09-22',
     priority: 0.8,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1463,6 +1463,25 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The best sensor is task-specific: a fingertip, gripper pad, soft skin, and full-body contact surface do not need the same architecture.',
     ],
     sections: [
+      {
+        heading: 'Build a shortlist around documented outputs',
+        body: ['Compare the data a sensor actually exposes before comparing headline performance. An optical image, magnetic reading, reconstructed depth map, and calibrated force estimate are different observations. Software and calibration determine which can become a useful input to your robot.'],
+        table: {
+          headers: ['Selection question', 'Evidence to collect', 'Why it changes the choice'],
+          rows: [
+            ['Does the contact fit the sensor?', 'Active area, geometry, mounting, and expected contact locations.', 'A detailed fingertip measurement does not cover contacts elsewhere on the hand.'],
+            ['What is measured and what is inferred?', 'Raw sample format, units, reconstruction code, and calibration procedure.', 'Do not compare camera pixels directly with force accuracy or array element count.'],
+            ['Can the data reach the controller in time?', 'Capture timestamps, transfer delays, inference time, and response measurements.', 'Sensor frame rate alone does not establish end-to-end control latency.'],
+            ['Can the result be reproduced?', 'Hardware revision, code, dataset access, task protocol, and held-out evaluation.', 'A published demo may use a different sensor version, object set, or compute system.'],
+          ],
+        },
+        links: [
+          { label: 'DIGIT: raw RGB frames and Python access', href: '/sensors/digit' },
+          { label: 'GelSight Mini: specifications and calibration', href: '/sensors/gelsight-mini' },
+          { label: 'ReSkin: magnetic observations and replaceable skin', href: '/sensors/reskin' },
+          { label: 'New to touch sensing? Compare signal types first', href: '/guides/robot-touch-sensor' },
+        ],
+      },
       {
         heading: 'Start with the task, not the sensor type',
         body: [
@@ -1549,13 +1568,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/robot-touch-sensor',
-    title: 'Robot Touch Sensor Guide: From Contact Events to Tactile AI',
+    title: 'Robot Touch Sensors: Switches, Force & Tactile Arrays',
     description:
-      'Robot touch sensors detect contact events, pressure, force, slip, and tactile patterns. Learn when a touch sensor becomes useful robot skin or tactile AI input.',
-    h1: 'Robot touch sensor guide',
+      'Compare binary contact switches, force measurements, and tactile arrays. Choose the signal your robot needs and plan a first contact-sensing test.',
+    h1: 'Robot touch sensors: which signal do you need?',
     kicker: 'Evaluation guide',
-    intent: 'Evaluation page for robot touch sensor, robot touch sensing, robot pressure sensor, and contact sensor robotics searches.',
-    updated: '2026-06-06',
+    intent: 'Explain binary contact, force measurement, and spatial tactile sensing to readers choosing their first robot touch signal.',
+    updated: '2026-09-22',
     priority: 0.77,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1567,6 +1586,28 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Robot skin is the broader surface-level integration of touch sensors, packaging, electronics, data handling, and robot behavior.',
     ],
     sections: [
+      {
+        heading: 'Compare the observation before choosing the device',
+        body: ['Touch sensor is a broad label. The useful distinction is what a reading tells the robot and what it leaves unknown. The following is a signal-level comparison, not a ranking of hardware.'],
+        table: {
+          headers: ['Signal', 'What it can tell you', 'What needs more evidence', 'Example question'],
+          rows: [
+            ['Binary contact', 'Whether a switch or contact threshold is active.', 'Contact force, location outside the element, and whether an object is slipping.', 'Has the mechanism reached the intended contact?'],
+            ['Force or torque', 'A calibrated load at the transducer and its defined axes.', 'A spatial surface map or identification of multiple contacts.', 'How did the applied load change during the motion?'],
+            ['Tactile array', 'A pattern of readings across sensing elements.', 'Units, pressure or force reconstruction, crosstalk, and response after mounting.', 'Where on this surface is contact distributed?'],
+            ['Optical tactile image', 'How a deformable sensing surface appears to the camera.', 'Geometry or force estimates without a suitable reconstruction and calibration method.', 'How does the local contact shape change?'],
+          ],
+        },
+      },
+      {
+        heading: 'Plan a first contact-sensing test',
+        body: ['Choose one observable event and an independent reference, then record the raw reading before adding a control response. Repeat no-contact and contact conditions, including mounting changes and plausible sources of noise.'],
+        bullets: ['Log time, units or raw-value meaning, sensor location, and the reference event.', 'Define the threshold or model using one set of trials and check it on separate trials.', 'Count missed events and false alarms; inspect delay rather than reporting accuracy alone.', 'If a controller uses the signal, record the resulting motion and object outcome separately.'],
+        links: [
+          { label: 'Inspect synthetic tactile samples in Python', href: '/guides/python-tactile-data-processing' },
+          { label: 'Compare tactile sensor hardware for the next step', href: '/sensors' },
+        ],
+      },
       {
         heading: 'Simple contact versus tactile sensing',
         body: [
@@ -1604,7 +1645,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Can a simple contact sensor be enough?',
         answer:
-          'Yes, for binary contact events or safety triggers. More complex manipulation usually needs richer tactile signals.',
+          'Yes, when the task only needs a contact event. Safety-related use requires a separately engineered and validated safety function; an ordinary switch is not sufficient evidence.',
       },
       {
         question: 'What should I evaluate next?',

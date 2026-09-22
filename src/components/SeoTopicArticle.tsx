@@ -7,6 +7,8 @@ import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
 import { buildSeoTopicGraph } from '@/lib/seo-topic';
+import ArticleContents from '@/components/ArticleContents';
+import { buildSectionIds } from '@/lib/article-headings';
 
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
@@ -18,6 +20,7 @@ type SeoTopicArticleProps = {
 
 export default function SeoTopicArticle({ page, children, leadContent, leadHref, leadLabel }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
+  const sectionIds = buildSectionIds(page.sections);
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
     ? {
@@ -103,6 +106,10 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
 
         {leadContent}
 
+        <div className="container-shell">
+          <ArticleContents sections={page.sections.map((section, index) => ({ heading: section.heading, id: sectionIds[index] }))} />
+        </div>
+
         <section id="quick-answer" className="deferred-section pb-14 md:pb-20">
           <div className="container-shell grid gap-6 lg:grid-cols-[0.34fr_1fr]">
             <div>
@@ -128,7 +135,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
           <div className="container-shell grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="min-w-0 space-y-5">
               {page.sections.map((section, index) => (
-                <section key={section.heading} id={section.id} className="glass-card scroll-mt-24 p-6 md:p-8">
+                <section key={section.heading} id={sectionIds[index]} className="glass-card scroll-mt-24 p-6 md:p-8">
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Topic {String(index + 1).padStart(2, '0')}</p>
                   <h2 className="mt-3 text-2xl font-semibold text-white md:text-3xl">{section.heading}</h2>
                   <div className="mt-4 space-y-4">

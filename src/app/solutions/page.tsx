@@ -16,15 +16,15 @@ export default function SolutionsPage() {
           <span className="eyebrow">Use cases</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-white md:text-6xl">
-              Robotic gripper and robot hand tactile sensing use cases
+              Solve the right tactile sensing problem
             </h1>
-            <Link href="/comparison" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
-              Compare guide routes {'->'}
+            <Link href="/guides/tactile-sensor-for-robots" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
+              Compare sensor requirements {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Each path frames a robotic gripper, robot hand tactile sensing, prosthetics, or robot skin topic for research,
-            education, or category positioning without claiming product availability.
+            Start with a failure you can observe. A slipping object, missing contact location, drifting signal,
+            and unusable training data need different measurements. These workflows help define what to test next.
           </p>
           <PageHeroVisual visual={pageVisuals.applications} className="mt-10" priority />
         </div>
@@ -44,16 +44,16 @@ export default function SolutionsPage() {
               </div>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
-                  href="/contact?requestType=research"
+                  href={solution.href}
                   className="rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_rgba(98,168,255,0.22)]"
                 >
-                  Send a research note
+                  {solution.cta}
                 </Link>
                 <Link
-                  href="/comparison"
+                  href="/guides/tactile-sensor-for-robots"
                   className="rounded-xl border border-white/12 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/8"
                 >
-                  Compare guide routes
+                  Compare sensor requirements
                 </Link>
                 <Link
                   href="/technology"
@@ -70,9 +70,10 @@ export default function SolutionsPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Need help choosing a category route?</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Define success before choosing hardware</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Send your intended use for RoboSkin.ai, whether research inquiry, editorial collaboration, or content planning.
+              Write down the object, contact surface, operating conditions, measured signal, and desired outcome.
+              Then compare a baseline with the tactile system using the same task and failure criteria.
             </p>
             <div className="mt-7 flex justify-center">
               <Link
@@ -86,8 +87,8 @@ export default function SolutionsPage() {
               <Link href="/products" className="text-accent font-semibold hover:text-white">
                 View guides {'->'}
               </Link>
-              <Link href="/implementation" className="text-accent font-semibold hover:text-white">
-                See research roadmap {'->'}
+              <Link href="/guides/tactile-sensor-benchmark-robot-manipulation" className="text-accent font-semibold hover:text-white">
+                Compare task-level evidence {'->'}
               </Link>
             </div>
           </div>

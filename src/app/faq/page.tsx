@@ -15,7 +15,7 @@ export default function FAQPage() {
         <div className="container-shell">
           <span className="eyebrow">FAQ</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Questions we answer publicly</h1>
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin and tactile sensing questions</h1>
             <Link href="/contact" className="text-accent text-sm font-semibold hover:text-white">
               Contact {'->'}
             </Link>
