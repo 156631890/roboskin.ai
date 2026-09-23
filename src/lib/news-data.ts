@@ -33,6 +33,274 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'better-curriculum-tactile-reflex-fragile-grasping',
+    title: 'A tactile reflex becomes the teacher for fragile grasping',
+    seoTitle: 'Better Curriculum: Tactile Reflex Data for Fragile Grasping',
+    seoDescription: 'A 25 Hz tactile reflex shapes demonstrations for fragile grasping. Review the 20-trial results, tactile-free deployment and disturbance limits.',
+    excerpt: 'The Better Curriculum study uses a 25 Hz tactile controller during data collection, then trains vision-only ACT and pi0.5 policies. The gain is large on one cup task, but disturbance rejection still needs touch at runtime.',
+    category: 'Tactile robot learning',
+    image: '/generated/news/better-curriculum-tactile-reflex.png',
+    imageAlt: 'Diagram showing a tactile reflex shaping demonstrations, a tactile-free student policy, and an optional deployment-time safety arbiter.',
+    imageCaption: 'Original RoboSkin.ai explanation of the Better Curriculum study. This is a schematic, not an experiment image.',
+    sourceTitle: 'What is the Better Curriculum: Controller-Shaped Grasping Behavior for Contact Force-Sensitive Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.25887',
+    sources: [
+      { title: 'Better Curriculum arXiv submission record', url: 'https://arxiv.org/abs/2609.25887' },
+      { title: 'Better Curriculum v1 methods and results', url: 'https://arxiv.org/html/2609.25887v1' },
+      { title: 'Official Better Curriculum project page', url: 'https://shayfeng.github.io/better-curriculum/' },
+    ],
+    technicalFocus: ['tactile reflex control', 'fragile-object grasping', 'demonstration data', 'vision-language-action models'],
+    content: `# A tactile reflex becomes the teacher for fragile grasping
+
+Ziyan Feng and colleagues introduced a different role for touch in a preprint submitted on September 22, 2026: use tactile feedback to shape demonstrations, then train a policy that does not require tactile input at inference. A deterministic 25 Hz controller called TactileReflex produced stable grasps of a thin plastic cup for both Action Chunking with Transformers (ACT) and pi0.5 students. The study also shows the boundary of that idea: a tactile-free student did not retain the controller's disturbance rejection. [Paper and version record](https://arxiv.org/abs/2609.25887).
+
+## Key takeaways
+
+- With 30 reflex-shaped demonstrations, ACT achieved 19 stable grasps in 20 nominal trials. ACT trained on 30 visually screened manual demonstrations achieved 3 in 20.
+- The same data intervention produced 19 of 20 stable grasps with pi0.5, versus 1 of 20 for manual data. These are small physical trial sets on one fragile-cup setup, not a general manipulation benchmark.
+- Under randomized lateral disturbances, the same reflex-data pi0.5 policy retained 11 of 20 grasps alone and 20 of 20 with a separate deployment-time tactile arbiter. [Disturbance experiment](https://arxiv.org/html/2609.25887v1).
+
+## What changed
+
+The bottleneck is placed at collection time. Manual gripper commands are delayed and coarse relative to the narrow contact range of a 3.5-gram plastic cup with a 0.3-millimeter wall. The Piper arm uses two MC-Tac vision-based tactile sensors on its gripper. During demonstration collection, TactileReflex adjusts the gripper at 25 Hz from a vision-tactile force proxy while the human controls the arm.
+
+The resulting trajectory still trains a tactile-free student. The ACT model runs at 15 Hz; the two-billion-parameter pi0.5 model uses LoRA and generates actions at 20 Hz, with policy queries observed at roughly 1.7 to 1.8 Hz. The reported training and inference hardware includes one RTX 5090. [System description](https://arxiv.org/html/2609.25887v1).
+
+## Results and the important comparison
+
+The main ACT comparison uses 30 reflex demonstrations and 30 manual demonstrations selected by watching 100 manual trials. Outcomes were labeled stable, loose or dropped from video by five authors. In 20 nominal trials per policy, reflex data yielded 95% stable grasps, while manual data yielded 15%. Adding the tactile arbiter to the manual-data ACT policy raised stable grasps to 50%, still below the reflex-data result.
+
+Could better screening explain the gap? The authors logged tactile contact for a fresh pool of 100 manual demonstrations, ranked them by contact quality and trained ACT once on the top 30. That policy recorded 6 stable grasps in 20 trials, versus 19 of 20 for reflex data. This is a useful control, but it is one training run and still does not randomize the order of data collection.
+
+The unseen paper-cup test is exploratory: reflex-data pi0.5 reached 8 stable grasps in 10 trials and manual-data pi0.5 reached 3 in 10. The paper reports p=0.0698, so the result does not meet the study's conventional significance threshold.
+
+## What this means for robotics
+
+RoboSkin analysis: touch can improve a vision-only policy without becoming another runtime modality. That matters when production hardware cannot carry the training sensor, or when a fast controller can generate cleaner contact behavior than a human operator. It also reframes [robot demonstration data](/datasets): the controller that creates the trajectory can be as important as model size.
+
+The disturbance result prevents a stronger conclusion. A learned feed-forward policy can imitate nominal force-sensitive behavior, but cannot react to an unobserved external push. Contact-critical systems may still need a low-latency loop, whether from [tactile sensors](/sensors), motor current or a force-torque sensor. The separation between learned motion and a runtime arbiter is closer to a safety architecture than a complete removal of touch.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint and RoboSkin.ai has not reproduced it. The tactile controller signal is a dimensionless vision-tactile proxy, not a calibrated force measurement in Newtons. The approximately 0.5 N deformation observation describes the cup, not the controller's internal value. Collection order was not randomized, and the three outcome labels come from video rather than force ground truth.
+
+The official project page exposes the paper, diagrams and videos. On September 23, it linked to an author's general GitHub profile but did not provide a dedicated code, dataset or model download, and no asset license was stated. Reproduction therefore requires details and artifacts beyond the visible project page.
+
+## Sources
+
+- [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25887)
+- [Full Better Curriculum v1 paper](https://arxiv.org/html/2609.25887v1)
+- [Official project page](https://shayfeng.github.io/better-curriculum/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-23',
+    updated: '2026-09-23',
+    readTime: '6 min read',
+    sourceDate: '2026-09-22',
+    evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
+  },
+  {
+    id: 'visforce-visual-force-grounding-dexterous-manipulation',
+    title: 'VisForce draws force goals into a dexterous robot policy',
+    seoTitle: 'VisForce: Visual Force Grounding for Dexterous Manipulation',
+    seoDescription: 'VisForce renders current and desired finger forces into images for pi0.5. Review 20-trial task results, cross-attention gains and sensing limits.',
+    excerpt: 'VisForce overlays actuator-force cues at fingertips and combines current and goal images through cross-attention. Real-robot trials improve over four baselines, but the arrows are not measured contact-force vectors.',
+    category: 'Force-aware VLA',
+    image: '/generated/news/visforce-visual-force-grounding.png',
+    imageAlt: 'Diagram showing current fingertip force cues and a desired-force goal image feeding cross-attention and a dexterous robot action policy.',
+    imageCaption: 'Original RoboSkin.ai explanation of VisForce. Arrows are schematic conditioning cues, not reconstructed contact-force vectors.',
+    sourceTitle: 'VisForce: Visual Grounding of Current and Desired Forces for Goal-Conditioned Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.25785',
+    sources: [
+      { title: 'VisForce arXiv submission record', url: 'https://arxiv.org/abs/2609.25785' },
+      { title: 'VisForce v1 methods, tables and limitations', url: 'https://arxiv.org/html/2609.25785v1' },
+    ],
+    technicalFocus: ['force-conditioned manipulation', 'vision-language-action models', 'dexterous hands', 'goal-conditioned control'],
+    content: `# VisForce draws force goals into a dexterous robot policy
+
+Jung-Woo Lee and Soo-Chul Lim released VisForce on September 22, 2026, as an arXiv v1 preprint. The method turns present and desired finger-force values into spatial cues drawn over robot images, then uses cross-attention to condition a pi0.5-based dexterous manipulation policy. It is a direct test of whether a vision-language-action model can use force more effectively when the signal is placed where the fingertip appears. [Paper and version record](https://arxiv.org/abs/2609.25785).
+
+## Key takeaways
+
+- VisForce draws current force cues over a wrist-camera image and desired forces over a segmented goal image. The two representations meet in a single cross-attention block.
+- Across 20 real-robot trials per task, final success was 14 of 20 for cup insertion and pouring, 11 of 20 for tong-assisted bread transfer, and 8 of 20 for slip-modulated peg insertion.
+- The rendered arrows use actuator forces and estimated finger directions. The paper explicitly says they are visual cues, not estimated contact-force vectors. [Method and experiments](https://arxiv.org/html/2609.25785v1).
+
+## What changed
+
+Many multimodal policies append force as a state vector. VisForce instead aligns the value with its visual location. A UR10 arm carries an Inspire RH56F1 six-degree-of-freedom hand and two Intel RealSense D405 cameras. Per-finger actuator forces are synchronized with images, states and actions: cameras run at 30 Hz, while the other streams are recorded at 200 Hz and matched by nearest timestamp.
+
+Current-force arrows are placed at fingertip pixels in the wrist view. The desired force is rendered onto an object-only goal image. GroundingDINO and SAM2 isolate the goal object offline, while a MuJoCo model and edge-based Chamfer alignment connect the simulated hand to camera geometry. VisForce updates the SigLIP visual encoder and applies rank-16 LoRA to the larger model components.
+
+## Results under the reported conditions
+
+The study collects 25 to 30 demonstrations for each of four tasks and evaluates every policy in 20 independent trials. For medium-force grasping, VisForce lifts an egg in 14 of 20 trials and a toothpaste tube in 16 of 20. The visual-force plus text-goal baseline reaches 8 of 20 and 4 of 20 respectively; the state-force plus text-goal baseline reaches 7 and 1.
+
+The three multi-stage tasks make desired force part of task progress. VisForce obtains 70% final success for cup insertion followed by bottle pouring, 55% for grasping tongs and transferring bread, and 40% for a slip-triggered peg-in-hole task with 1-millimeter clearance. The unmodified pi0.5 baseline records 20%, 5% and 5%. A visual-input ablation without cross-attention records 10%, 5% and 15%, suggesting that simply drawing arrows is not the whole contribution.
+
+These are final-stage successes, not average subtask completion. The same hardware, training demonstrations and 20-trial count make the within-paper comparisons useful, while the limited task set and trial count leave wide uncertainty for deployment.
+
+## What this means for robotics
+
+RoboSkin analysis: visual grounding offers a practical interface between structured signals and pretrained visual backbones. Instead of asking a VLA to infer that the fifth number belongs to a particular finger, the representation encodes that relationship spatially. Similar interfaces could combine force, slip or [robot skin](/robot-skin) regions with goal images.
+
+However, localization depends on calibration and hand geometry. The visual cue does not remove the need to understand what the underlying sensor measures. Actuator load can include transmission friction and dynamics that differ from fingertip contact. For direct contact-force control, a calibrated [tactile sensor](/sensors) or force-torque estimate may still be required.
+
+## Limitations and availability
+
+This is a preprint, not independent validation, and RoboSkin.ai has not reproduced it. Experiments use one arm-hand configuration, four tasks and up to 30 demonstrations per task. Goal segmentation is performed offline, so the reported setup does not establish an online open-world goal-generation pipeline. Inference used an NVIDIA RTX A6000; latency and control frequency during deployment were not reported as a full end-to-end budget.
+
+The arXiv record and full text were publicly accessible on September 23. Neither linked a project page, code repository, dataset or model checkpoint. The paper's Creative Commons license covers the manuscript, not unlisted software or training assets. Availability should therefore be described as paper-only until an official release appears.
+
+## Sources
+
+- [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25785)
+- [Full VisForce v1 paper](https://arxiv.org/html/2609.25785v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-23',
+    updated: '2026-09-23',
+    readTime: '6 min read',
+    sourceDate: '2026-09-22',
+    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+  },
+  {
+    id: 'cablevla-tactile-cable-routing-vla',
+    title: 'CableVLA combines cable topology with tactile residual control',
+    seoTitle: 'CableVLA: Tactile VLA Results for Cable Routing',
+    seoDescription: 'CableVLA distills cable topology and tactile contact from simulation. Examine 345-rollout results, 96-taxel inputs and limited real transfer.',
+    excerpt: 'CableVLA adds topology prediction and a contact-gated tactile residual to pi0.5. It improves a 345-rollout simulation benchmark, while real-robot transfer remains a 10-trial result.',
+    category: 'Visuo-tactile robot learning',
+    image: '/generated/news/cablevla-topology-tactile-residual.png',
+    imageAlt: 'Diagram showing global cable topology and local tactile history feeding a contact-gated action residual for cable routing.',
+    imageCaption: 'Original RoboSkin.ai explanation of CableVLA. This schematic separates simulation-supervised topology from the local tactile residual.',
+    sourceTitle: 'CableVLA: Simulation-Privileged Global-Local Representation Learning for Cable Routing',
+    sourceUrl: 'https://arxiv.org/abs/2609.25606',
+    sources: [
+      { title: 'CableVLA arXiv submission record', url: 'https://arxiv.org/abs/2609.25606' },
+      { title: 'CableVLA v1 methods, tables and appendices', url: 'https://arxiv.org/html/2609.25606v1' },
+    ],
+    technicalFocus: ['cable routing', 'tactile representation learning', 'vision-language-action models', 'sim-to-real transfer'],
+    content: `# CableVLA combines cable topology with tactile residual control
+
+Researchers from Huazhong University of Science and Technology and Harbin Institute of Technology introduced CableVLA in an arXiv preprint submitted on September 22, 2026. Built around pi0.5, the framework distills global cable topology from simulation and learns local contact dynamics from tactile arrays. A contact gate then adds an eight-step force-tactile action residual to a frozen topology-conditioned policy. [Paper and version record](https://arxiv.org/abs/2609.25606).
+
+## Key takeaways
+
+- Across 345 MuJoCo rollouts, CableVLA reports 84.9% task success, versus 62.6% for the visual pi0.5-V baseline and 65.2% for the topology-only parent.
+- Each tactile array contains 96 resistive taxels. TacSense uses 25 frames at 30 Hz and combines a spatial frame branch with a per-taxel temporal branch.
+- Zero-shot real-hardware transfer reaches 4 successes in 10 trials under enhanced lighting, compared with 1 in 10 for the visual baseline. This is an early transfer result, not a robust real-world benchmark. [Evaluation tables](https://arxiv.org/html/2609.25606v1).
+
+## What changed
+
+Cable routing mixes two scales. The robot must reason about the cable's overall relation to clips and obstacles, then react locally when friction, slip or contact changes at the gripper. CableVLA separates those roles. TopoHead observes four visual frames and learns current and future topology from simulator-only node and relation labels. TacSense learns tactile dynamics from simulated kinematics and contact events in addition to the measured force map.
+
+The downstream policy uses a RealMan RM75-6F arm, an Inspire-Robots EG2-4C2 gripper, bilateral Loong96 tactile arrays and a wrist force-torque sensor. A contact threshold of 0.049 N opens the gate for the force-tactile residual. That number is a routing threshold, not the full sensor response range: the hardware arrays were calibrated over 5 to 100 gram-force.
+
+## Data and evaluation conditions
+
+Topology pretraining uses 33,654 windows from 1,228 training episodes, plus 3,004 validation windows from 113 episodes. TacSense draws from 7,338 episodes across 57 simulated tasks, producing more than 2.19 million candidate windows. Policy adaptation uses 2,004 demonstrations divided by scene-layout pairs.
+
+The 345-rollout benchmark is structured as 115 scenario-condition instances repeated three times. It includes 75 trials each for replay, in-distribution and out-of-distribution layouts, plus 30 each for weak light, strong light, low friction and camera-view changes. Success requires the target cable relations to hold for 2.5 seconds.
+
+CableVLA's 84.9% aggregate success is 22.3 percentage points above pi0.5-V under those conditions. In a camera-view shift, the tactile residual succeeds in 23 of 30 trials versus 3 of 30 for its frozen parent. In a separate Isaac Sim transfer, CableVLA reaches 27 of 50, compared with 17 of 50 for the visual baseline.
+
+Representation scores must not be confused with task success. TacSense reports slip-onset AUPRC of 0.8028 versus 0.1694 for a similarly sized CNN-LSTM, and slip-stop AUPRC of 0.3880 versus 0.1120. Those are simulated event-recognition tests, not physical cable-routing success rates.
+
+## What this means for robotics
+
+RoboSkin analysis: CableVLA is a useful architecture pattern for deformable-object manipulation. Global visual planning can remain relatively slow and semantic, while [tactile sensing](/sensors) supplies a gated correction only when contact begins. Freezing the parent policy also narrows what the local residual is allowed to change.
+
+The data scale reveals the cost. Rich labels come from simulation, and the real system must reproduce camera geometry, tactile calibration and cable behavior closely enough for those representations to transfer. Teams comparing [robotics datasets](/datasets) should distinguish the millions of sampled windows from the smaller count of independent episodes and physical trials.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not run the code or hardware. The real test contains only 10 trials per method and still exposes a large simulation-to-real gap. The authors identify grasp alignment, viewpoint mismatch, arm compliance and cable dynamics as failure sources. Target-domain fine-tuning was not used in the zero-shot comparison.
+
+As inspected on September 23, the arXiv record and full paper did not link a public code repository, project page, dataset download, checkpoints or an implementation license. The counts document internal research assets; they do not establish that those assets are downloadable.
+
+## Sources
+
+- [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25606)
+- [Full CableVLA v1 paper](https://arxiv.org/html/2609.25606v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-23',
+    updated: '2026-09-23',
+    readTime: '6 min read',
+    sourceDate: '2026-09-22',
+    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+  },
+  {
+    id: 'cartesian-hand-all-linear-in-hand-manipulation',
+    title: 'The Cartesian Hand replaces finger joints with seven linear axes',
+    seoTitle: 'Cartesian Hand: Seven Linear Axes for In-Hand Manipulation',
+    seoDescription: 'Duke researchers built a seven-axis all-linear robot hand. Review its 35-object tests, mechanics, cost estimate and open-source status.',
+    excerpt: 'Two stacked parallel grippers and four sliding fingertips operate caps, tools and lab equipment. The mechanism succeeds in a configured 350-trial test, but it does not sense contact force or location.',
+    category: 'Dexterous hand hardware',
+    image: '/generated/news/cartesian-hand-linear-axes.png',
+    imageAlt: 'Schematic of two stacked parallel grippers with four translating fingertips and seven labeled linear motion axes.',
+    imageCaption: 'Original RoboSkin.ai diagram of the Cartesian Hand concept. It is not a CAD file or experiment image.',
+    sourceTitle: 'The Cartesian Hand: In-Hand Manipulation with All-Linear Fingers',
+    sourceUrl: 'https://arxiv.org/abs/2609.25696',
+    sources: [
+      { title: 'Cartesian Hand arXiv submission record', url: 'https://arxiv.org/abs/2609.25696' },
+      { title: 'Cartesian Hand v1 methods and experiments', url: 'https://arxiv.org/html/2609.25696v1' },
+      { title: 'Official Cartesian Hand project page', url: 'https://generalroboticslab.com/cartesian_handv1' },
+    ],
+    technicalFocus: ['dexterous robot hands', 'in-hand manipulation', 'prismatic joints', 'robot hardware'],
+    content: `# The Cartesian Hand replaces finger joints with seven linear axes
+
+Duke University's General Robotics Lab introduced the Cartesian Hand in a preprint submitted on September 22, 2026. Instead of imitating an articulated human hand, the 850-gram end effector stacks two independently actuated parallel grippers and lets four fingertips translate along fixed axes. The seven-degree-of-freedom mechanism targets objects with threads, pivots, guides, plungers and triggers. [Paper and version record](https://arxiv.org/abs/2609.25696).
+
+## Key takeaways
+
+- All seven joints are prismatic: four fingertip slides, two gripper openings and one axis that changes the separation between the grippers.
+- The authors report 350 successful trials across 35 configured objects, with 10 trials per object. Objects began from prescribed positions, and new objects within an established category could require up to five setup trials.
+- The hand uses joint feedback and contact detection but does not directly measure contact location or contact force. Its strength comes from mechanism-specific motion, not general tactile dexterity. [Methods and tests](https://arxiv.org/html/2609.25696v1).
+
+## What changed
+
+Most dexterous hands add rotary joints so fingers can wrap around objects. The Cartesian Hand assigns separate roles to two simple grippers. One section can hold the body of a bottle, pipette or tool while the other moves a cap, plunger, second handle or trigger. Because every joint translates along a fixed axis, the fingertip position is a linear function of joint position and the Jacobian does not change with configuration.
+
+Seven Feetech-3915 servos drive rack-and-pinion stages and dovetail slides. The paper reports 65 millimeters of fingertip travel, 52 millimeters for each gripper opening and inter-gripper separation, and joint speeds around 60 millimeters per second. The closed assembly is approximately 166 by 100 by 76 millimeters. One gripper held a 2-kilogram bottle in a static test.
+
+The authors estimate about USD 500 for a complete hand. Structural printing is estimated at roughly USD 30 in PLA or USD 50 in SLS Nylon 12, and PLA assembly takes about two hours after printing. These are author estimates, not independently audited production costs. A theoretical rack force near 170 N derives from rated servo stall torque before transmission losses; it is not a measured continuous fingertip force.
+
+## What the 350 trials establish
+
+The evaluation covers cap opening and closing, pipetting, pumping, two-handle tools, screwdrivers, triggers and in-grasp reorientation. Ten trials on each of 35 objects all succeeded after object-specific parameters were configured. During the in-hand procedure, the Franka Panda arm remains stationary and an external holder no longer supports the object after lift.
+
+That repeatability is meaningful for a structured mechanism, but it is not zero-shot generalization. Initial object poses are prescribed. A new object in an existing mechanism category reuses the procedure, then changes settings such as grasp height, stroke or force limit; the paper allows up to five setup trials to find them.
+
+The project also shows two Cartesian Hands on Duke Humanoid V2 uncapping a tube, pipetting and recapping. This is a qualitative transfer demonstration. The paper does not report a second 350-trial evaluation on the humanoid.
+
+## What this means for robotics
+
+RoboSkin analysis: dexterity does not always require anthropomorphic fingers. Many industrial and laboratory objects already constrain motion through threads, hinges and guides. Designing a hand around those mechanisms can simplify planning and make a small library of primitives reusable. The result belongs alongside underactuated and anthropomorphic designs in any [robot hand](/robot-hands) comparison.
+
+It also highlights where touch would add value. Joint thresholds can detect resistance, but they cannot identify which surface made contact or separate desired tool load from a collision. Adding compact [tactile sensors](/sensors) could support automatic parameter selection, slip detection and safer force limiting without changing the linear kinematics.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint and RoboSkin.ai has not built the hand. The object set is structured, the starting poses are controlled, and the procedures use manually selected parameters. The platform does not observe object pose, contact location or contact force. Claims should therefore remain about repeatable mechanism-specific manipulation, not open-world hand autonomy.
+
+The paper says software and hardware design will be open-sourced. The official project page currently exposes specifications, videos and a link labeled Code to github.com/generalroboticslab/Cartesian_Hand. On September 23 that repository returned 404 through both the public GitHub page and API, so no files, revision or license could be verified. A future-release statement is not a current open-source release.
+
+## Sources
+
+- [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25696)
+- [Full Cartesian Hand v1 paper](https://arxiv.org/html/2609.25696v1)
+- [Official General Robotics Lab project page](https://generalroboticslab.com/cartesian_handv1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-23',
+    updated: '2026-09-23',
+    readTime: '6 min read',
+    sourceDate: '2026-09-22',
+    evidenceStatus: 'Preprint · arXiv v1 · linked repository unavailable',
+  },
+  {
     id: 'spectrobot-high-bandwidth-single-point-tactile-sensing',
     title: 'SpectRobot turns single-point vibration into tactile policy input',
     seoTitle: 'SpectRobot Tactile Sensing: Bandwidth, Results and Data',
