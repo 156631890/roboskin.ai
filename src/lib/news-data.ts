@@ -33,6 +33,80 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'internw0-contact-aware-world-model-pipetting',
+    title: "InternW0 links asynchronous world prediction with contact-aware pipetting",
+    seoTitle: "InternW0: Contact-Aware Pipetting Results and Model Access",
+    seoDescription: "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous action latency and EgoLab training data. Check what code and model assets are available.",
+    excerpt: "Shanghai AI Laboratory combines slower world prediction with faster action updates and contact-aware post-training. Its laboratory results require careful separation of task progress, full completion and model-side latency.",
+    category: "Contact-aware world models",
+    image: "/generated/news/internw0-asynchronous-contact-control.png",
+    imageAlt: "Diagram separating InternW0's slower video prediction, cached context updated by observations, and faster contact-aware action generation.",
+    imageCaption: "Original RoboSkin.ai schematic based on InternW0 v1. The reported action-path timing excludes asynchronous video-plan generation. Not an experiment image.",
+    sourceTitle: "InternW0: A Foundational Physical World Model for Efficient Real-World Interactions",
+    sourceUrl: "https://arxiv.org/abs/2609.27656",
+    sources: [{"title": "InternW0 v1 technical report and results", "url": "https://arxiv.org/html/2609.27656v1"}, {"title": "Official InternW0 project and availability", "url": "https://internrobotics.github.io/internw0"}],
+    technicalFocus: ["robot world models", "contact-aware manipulation", "dexterous manipulation", "egocentric robot learning"],
+    sourceDate: "2026-09-23",
+    evidenceStatus: "Technical report · arXiv v1",
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-09-25",
+    updated: "2026-09-25",
+    readTime: "7 min read",
+    content: `# InternW0 links asynchronous world prediction with contact-aware pipetting
+
+Shanghai AI Laboratory's Physical Intelligence Team introduced InternW0, a foundational physical world model for efficient real-world interactions, in a technical report submitted to arXiv on September 23, 2026. The system separates slower video prediction from faster action generation and adds force and tactile channels during contact-aware post-training. Its dexterous pipetting experiment connects world-model research to tool contact, but the headline laboratory scores measure task progress rather than complete-workflow success. [Paper and submission record](https://arxiv.org/abs/2609.27656).
+
+## Key takeaways
+
+- InternW0 reuses predictive video context while updating actions from incoming observations. Force and tactile histories can condition the action expert during downstream post-training.
+- The five-stage pipetting task reports 65.3% average progress over 15 trials, versus 46.7% for π0.5 and 18.7% for Fast-WAM. These percentages do not mean that the complete procedure succeeded that often.
+- The paper reports 7,233.5 pretraining hours and 60.73 ms critical-path action latency on RTX 5090D. Neither figure describes a downloadable tactile dataset or an end-to-end robot control guarantee; official model and code buttons were disabled when checked. [Real-robot results](https://arxiv.org/html/2609.27656v1#S5), [efficiency](https://arxiv.org/html/2609.27656v1#S6) and [project page](https://internrobotics.github.io/internw0).
+
+## How does the model keep predictions useful during contact?
+
+A predicted future becomes less useful when an object slips or a tool encounters unexpected resistance. Regenerating an entire video prediction for every action update is expensive, however. InternW0 uses separate video and action experts in a mixture-of-transformers architecture to operate at different timescales.
+
+The video expert produces longer-horizon context. Its internal attention keys and values are cached, then an observation-conditioned editor adapts how that context is exposed to each action chunk. Fresh visual observations can therefore change local control without requiring the full video predictor to finish another pass first. The video pathway uses a frozen Wan variational autoencoder, while a frozen DINOv3 encoder represents current visual observations.
+
+For contact-rich post-training, the action expert additionally receives available force and tactile histories. It jointly predicts future actions and interaction signals; action channels are executed, while the predicted contact channels represent expected feedback. This is a task-specific extension of the action interface, not evidence that every pretraining trajectory includes tactile measurements. [Architecture and contact-aware post-training](https://arxiv.org/html/2609.27656v1#S2.SS1).
+
+## What does the pipetting experiment establish?
+
+The setup combines a 20-degree-of-freedom hand with a seven-degree-of-freedom arm and hybrid force-position control. Its five stages are pickup and reorientation, tip attachment, aspiration, dispensing, and tip ejection with return. The authors run 15 trials per real-world task with randomized initial object positions and orientations. For multi-stage tasks, the compared methods share the same vision-language model for subtask generation.
+
+The 65.3% pipetting score is the proportion of correctly completed, ordered subtasks averaged over trials. Table 7 separately lists 46.7% for InternW0's final tip-ejection-and-return stage. Keeping both figures visible prevents average progress from being mistaken for full-sequence reliability. π0.5 also scores higher on the initial pickup and reorientation stage, 93.3% versus 86.7%, while InternW0 leads on the four subsequent stages. [Evaluation protocol and Table 7](https://arxiv.org/html/2609.27656v1#S5.SS1).
+
+The related 15-stage metal-organic-framework preparation task follows the same distinction: InternW0 reports 68.4% average progress, but 26.7% at the final listed stage. These are manipulation measurements, not proof of chemical synthesis quality. Likewise, the pipetting results do not provide a volumetric-accuracy benchmark merely because the task is named quantitative pipetting.
+
+RoboSkin analysis: these experiments make compliant tool interaction a useful evaluation target for [robot world models](/robot-world-models) and [tactile AI](/tactile-ai). They do not isolate the contribution of tactile input from pretraining, predictive modeling and low-level control. The reported comparison should therefore guide integration questions, not be read as a controlled measurement of the benefit of adding a particular touch sensor.
+
+## What is in the reported training mixture?
+
+Table 1 totals 7,233.5 hours and 811,969 episodes across seven datasets and 25 training domains. Those domains reflect data sources and configurations, rather than 25 distinct robot bodies. The mixture contains real-robot trajectories, simulated manipulation and EgoLab egocentric laboratory videos; it is not a 7,200-hour tactile corpus.
+
+EgoLab contributes 275.4 hours and 3,192 episodes. Although hand trajectories are reconstructed to assist filtering, its pretraining contribution uses a video-only pathway without robot-action labels. Other [robotics datasets](/datasets) supply action supervision through a unified 37-dimensional interface with validity masks for missing channels. The report also states that dexterous-hand robot data is excluded from this pretraining corpus, making downstream specialization important to interpreting the pipetting example. [Data recipe](https://arxiv.org/html/2609.27656v1#S3).
+
+## How fast is the action path?
+
+On the same RTX 5090D hardware and numerical-precision setting used for its comparison, the paper reports 60.73 ms per critical-path action update, corresponding to a maximum model-side rate of 16.47 Hz. This includes observation encoding, context routing and action denoising, but excludes asynchronously scheduled video-plan generation. The reported 3.13-fold speedup is relative to Fast-WAM under that action-generation protocol.
+
+Engineers still need to budget sensor acquisition, communication and actuator behavior. A model-side update rate is not the same as a tactile sampling rate or a certified contact-control loop. This distinction also matters when comparing [visuo-tactile world-model systems](/guides/visuo-tactile-world-models-robot-manipulation). [Timing definition](https://arxiv.org/html/2609.27656v1#S6.SS1).
+
+## Limitations and availability
+
+This is an arXiv v1 technical report, and RoboSkin has not independently reproduced its results. Laboratory evidence is limited to the reported tasks and trials; sustained operation, disturbance recovery and transfer to other instruments need further evaluation.
+
+On September 25, the official project provided the paper and demonstration videos, but its GitHub, Hugging Face and ModelScope buttons were disabled rather than linked to releases. No downloadable InternW0 weights, complete implementation or EgoLab archive was verified there. The paper's CC BY 4.0 license does not establish a license for unreleased software, models or data. Reported training scale and accessible release assets must remain separate. [Official availability](https://internrobotics.github.io/internw0).
+
+## Sources and related resources
+
+- [InternW0 arXiv v1, submitted September 23, 2026](https://arxiv.org/abs/2609.27656)
+- [Technical report and experimental tables](https://arxiv.org/html/2609.27656v1)
+- [Official InternW0 project](https://internrobotics.github.io/internw0)
+- [RoboSkin datasets directory](/datasets)
+`,
+  },
+  {
     id: 'glotouch-global-local-haptic-search',
     title: 'GLoTouch lets one parallel gripper search and identify objects without external vision',
     seoTitle: 'GLoTouch: Haptic Object Search Without External Vision',
@@ -140,9 +214,9 @@ Training, checkpoint selection and threshold calibration all use separate contac
 
 Each arm pushed five book stacks at three speeds, with three repetitions for every resistance condition: 5 by 3 by 3 equals 45 physical contact trials per arm. The stacks had separately measured peak sliding resistances from 1.5 to 5.5 N. Those reference values characterize test conditions; the researchers did not track force during individual pushes.
 
-On ARX, CoPRE recorded 74.1% recall, while both a learned torque-prediction baseline and a nominal inverse-dynamics baseline recorded zero under the combined calibration setting. CoPRE reached the study's F90 criterion at 3.5 N. Its held-out broad-motion confirmed-alarm time was 3.32%, versus 14.51% for the neural baseline and zero for dynamics.
+On ARX, CoPRE recorded 74.1% recall, while both a learned torque-prediction baseline and a nominal inverse-dynamics baseline recorded zero under the combined calibration setting. CoPRE reached the study's F90 criterion at 3.5 N. Its held-out broad-motion confirmed-alarm time was 3.32%, versus 14.51% for the neural baseline and zero for dynamics. [Full evaluation table](https://arxiv.org/html/2609.27381v1#S5).
 
-On G1, CoPRE recorded 82.2% recall, compared with 16.3% for the neural baseline and 42.2% for dynamics. Its F90 was 5.5 N, and broad-motion alarm time was 0.86%. The paper's 95% confidence intervals were 62.2% to 85.2% on ARX and 72.6% to 91.1% on G1.
+On G1, CoPRE recorded 82.2% recall, compared with 16.3% for the neural baseline and 42.2% for dynamics. Its F90 was 5.5 N, and broad-motion alarm time was 0.86%. The paper's 95% confidence intervals were 62.2% to 85.2% on ARX and 72.6% to 91.1% on G1. [Official result summary](https://copre-arm.github.io/assets/data/main-results.csv).
 
 Calibration is part of the result. A retrospective ARX sweep increased recall from 74.1% to 95.6% when the allowed calibration alarm budget rose from zero to 1%, while held-out broad alarm time climbed from 3.32% to 12.41%. This is not a free sensitivity gain.
 
@@ -167,7 +241,7 @@ The [official CoPRE page](https://copre-arm.github.io/) provides project videos,
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-24',
-    updated: '2026-09-24',
+    updated: '2026-09-25',
     readTime: '7 min read',
     sourceDate: '2026-09-23',
     evidenceStatus: 'Preprint · arXiv v1 · project evidence inspected',
@@ -549,11 +623,11 @@ The authors estimate about USD 500 for a complete hand. Structural printing is e
 
 ## What the 350 trials establish
 
-The evaluation covers cap opening and closing, pipetting, pumping, two-handle tools, screwdrivers, triggers and in-grasp reorientation. Ten trials on each of 35 objects all succeeded after object-specific parameters were configured. During the in-hand procedure, the Franka Panda arm remains stationary and an external holder no longer supports the object after lift.
+The evaluation covers cap opening and closing, pipetting, pumping, two-handle tools, screwdrivers, triggers and in-grasp reorientation. Ten trials on each of 35 objects all succeeded after object-specific parameters were configured. During the in-hand procedure, the Franka Panda arm remains stationary and an external holder no longer supports the object after lift. [Experimental setup and results](https://arxiv.org/html/2609.25696v1#S5).
 
 That repeatability is meaningful for a structured mechanism, but it is not zero-shot generalization. Initial object poses are prescribed. A new object in an existing mechanism category reuses the procedure, then changes settings such as grasp height, stroke or force limit; the paper allows up to five setup trials to find them.
 
-The project also shows two Cartesian Hands on Duke Humanoid V2 uncapping a tube, pipetting and recapping. This is a qualitative transfer demonstration. The paper does not report a second 350-trial evaluation on the humanoid.
+The project also shows two Cartesian Hands on Duke Humanoid V2 uncapping a tube, pipetting and recapping. This is a qualitative transfer demonstration. The paper does not report a second 350-trial evaluation on the humanoid. [Paper's humanoid demonstration](https://arxiv.org/html/2609.25696v1#S5.SS4).
 
 ## What this means for robotics
 
@@ -575,7 +649,7 @@ The paper says software and hardware design will be open-sourced. The official p
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-09-23',
+    updated: '2026-09-25',
     readTime: '6 min read',
     sourceDate: '2026-09-22',
     evidenceStatus: 'Preprint · arXiv v1 · linked repository unavailable',

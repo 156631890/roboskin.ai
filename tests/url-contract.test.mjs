@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 146);
+  assert.equal(protectedUrls.length, 147);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -58,6 +58,7 @@ test('the audited production URL inventory is protected', async () => {
     '/news/when-touch-matters-cluttered-dexterous-grasping',
     '/news/glotouch-global-local-haptic-search',
     '/news/copre-proprioceptive-contact-detection',
+    '/news/internw0-contact-aware-world-model-pipetting',
     '/news/berkeley-quad-hand-asymmetric-qdd-design',
     '/news/lima-asynchronous-diffusion-dexterous-manipulation',
     '/robotics-programming',
