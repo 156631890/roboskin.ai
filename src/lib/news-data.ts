@@ -33,6 +33,286 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'glotouch-global-local-haptic-search',
+    title: 'GLoTouch lets one parallel gripper search and identify objects without external vision',
+    seoTitle: 'GLoTouch: Haptic Object Search Without External Vision',
+    seoDescription: 'GLoTouch pairs a passive probe with bilateral visuotactile sensing. Examine its 50-trial robot result, matching ablations and release limits.',
+    excerpt: 'GLoTouch turns one parallel gripper into a long-range force probe and a local visuotactile matcher. It retrieved 38 of 50 model-specified targets on hardware, but requires known scene geometry and a target mesh.',
+    category: 'Haptic perception',
+    image: '/generated/news/glotouch-global-local-haptic-search.png',
+    imageAlt: 'Diagram showing a gripper using a long probe for global force search, then bilateral tactile fingertips for local object matching and retrieval.',
+    imageCaption: 'Original RoboSkin.ai explanation of GLoTouch. This is a schematic of the two-stage pipeline, not an experimental image.',
+    sourceTitle: 'GLoTouch: Global-to-Local Haptic Perception Using a Parallel Gripper for Object Search, Recognition, and Grasping Without External Vision',
+    sourceUrl: 'https://arxiv.org/abs/2609.27695',
+    sources: [
+      { title: 'GLoTouch arXiv submission record', url: 'https://arxiv.org/abs/2609.27695' },
+      { title: 'GLoTouch v1 methods, tables and limitations', url: 'https://arxiv.org/html/2609.27695v1' },
+    ],
+    technicalFocus: ['haptic object search', 'visuotactile sensing', 'parallel grippers', 'blind object retrieval'],
+    content: `# GLoTouch lets one parallel gripper search and identify objects without external vision
+
+Zonglin Li and colleagues introduced GLoTouch on September 23, 2026, as an arXiv v1 preprint from an independent researcher, Shanghai Jiao Tong University and the University of Hong Kong. The system gives a standard parallel gripper two haptic roles: it first carries a passive probe to search a container with wrist force sensing, then puts the probe away and uses bilateral visuotactile fingertips to identify and retrieve the object matching a supplied 3D mesh. In 50 randomized real-robot trials, the complete pipeline retrieved 38 targets. [Paper and version record](https://arxiv.org/abs/2609.27695).
+
+## Key takeaways
+
+- GLoTouch retrieved 84 of 100 targets in simulation and 38 of 50 on a Flexiv robot. Each scene contained the same five 3D-printed object classes, and success required search, recognition, grasping and lifting.
+- The local matcher needs no object-specific training, but it does need the target STL model, known container registration, known object count and objects that are reachable from above.
+- The paper says code will be open-sourced. No repository, downloadable dataset or software license was linked from the v1 record on September 24. [Full methods and experiments](https://arxiv.org/html/2609.27695v1).
+
+## What changed
+
+Parallel grippers normally trade dexterity for simple, reliable grasping. GLoTouch extends their perceptual range without adding an actuated search hand. During global exploration, the Xense gripper holds a spherical-tipped probe that has no embedded sensor. A six-axis wrist force-torque sensor, robot kinematics and the known probe shape localize contact while the robot follows a coverage path. Multi-directional probing estimates candidate centers, contours and heights.
+
+The robot then places the probe in a holder. Bilateral visuotactile depth maps and jaw aperture form a local TouchSet for each candidate. A finite-window matcher compares width, depth and acquisition mode against synthetic observations generated from the target STL. Candidates are ranked by matching loss before the gripper closes under a force limit.
+
+This division matters: the probe covers a larger workspace, while the fingertips collect spatially resolved geometry only after an object is found. The same gripper remains available for the final grasp.
+
+## Results under the reported conditions
+
+In simulation, each of five targets was tested 20 times in randomized five-object layouts. GLoTouch completed 84 of 100 retrievals. A separate global-search ablation found all five objects within a 5-meter motion budget in 55% of 100 layouts, compared with 30% for random descent. That is a scene-discovery metric, not the end-to-end success rate.
+
+The local matching component was also isolated on 60 target-and-phase samples from five physical objects. Width and action alone achieved 41 of 60 correct top-1 matches. Adding local depth raised this to 47 of 60; the complete matcher reached 54 of 60. The samples reuse different subsets of contact sequences, so 60 should not be read as 60 independently collected objects.
+
+On hardware, every target was evaluated in 10 randomized scenes. The Flexiv arm and Xense gripper retrieved 38 of 50 targets, or 76%. Apple was retrieved in all 10 trials, while Train succeeded in 5 of 10. Confusion between Train and Truck, object motion during probing and toppling during clamping were reported failure modes.
+
+## What this means for robotics
+
+RoboSkin analysis: GLoTouch is a useful integration pattern for haptic search. It reserves high-resolution [visuotactile sensing](/sensors) for the stage where local geometry is valuable, and uses cheaper tool-mediated force contact for global coverage. A detachable probe may be easier to service than a large tactile array and leaves the end effector free for manipulation.
+
+The method is not touch-only in the broadest sense: it relies on proprioception, wrist wrench sensing, known robot-to-container registration and a pre-existing target mesh. It also assumes top access and objects resting on the container floor. Deployments in cluttered bins would need safeguards for entanglement, stacked objects and accumulated pose error. Those integration conditions are at least as important as the recognition score for teams building [tactile manipulation](/tactile-manipulation) systems.
+
+## Limitations and availability
+
+This is a preprint, not an independently reproduced result, and RoboSkin.ai has not run the system. Evaluation uses one arm-gripper configuration and five printed objects. The global stage depends on a wrist force-torque sensor; the passive probe does not turn an otherwise sensorless gripper into a contact detector. The paper also assumes a known scene cardinality and does not evaluate transparent versus opaque objects as separate conditions because external vision is excluded from control.
+
+The arXiv record and full v1 paper were accessible on September 24. The manuscript states that source code will be released, which is a future commitment rather than current availability. No official code repository, data archive or license was linked. The safest current description is paper-only, with videos and implementation assets not established as reusable resources.
+
+## Sources
+
+- [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.27695)
+- [Full GLoTouch v1 paper](https://arxiv.org/html/2609.27695v1)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-24',
+    updated: '2026-09-24',
+    readTime: '6 min read',
+    sourceDate: '2026-09-23',
+    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+  },
+  {
+    id: 'copre-proprioceptive-contact-detection',
+    title: 'CoPRE detects weak robot contact from proprioception without force labels',
+    seoTitle: 'CoPRE: Weak Contact Detection for Low-Cost Robot Arms',
+    seoDescription: 'CoPRE learns contact-free joint response on ARX and G1 arms. Review its 90-trial protocol, force-reference caveat and public evidence files.',
+    excerpt: 'CoPRE learns the expected joint-torque response from contact-free motion and scores the residual through a noise-weighted Jacobian. It improves recall on ARX and G1 arms, with robot-specific calibration and unquantified downstream task success.',
+    category: 'Proprioceptive touch',
+    image: '/generated/news/copre-proprioceptive-contact-detection.png',
+    imageAlt: 'Diagram showing contact-free robot motion training a torque predictor, followed by residual scoring and a contact-triggered retreat.',
+    imageCaption: 'Original RoboSkin.ai explanation of CoPRE. Forces and detector traces are schematic rather than measured trial data.',
+    sourceTitle: 'CoPRE: Improving Sensitivity in Proprioceptive Contact Detection for Low-Cost Robot Arms',
+    sourceUrl: 'https://arxiv.org/abs/2609.27381',
+    sources: [
+      { title: 'CoPRE arXiv submission record', url: 'https://arxiv.org/abs/2609.27381' },
+      { title: 'CoPRE v1 methods, experiments and limitations', url: 'https://arxiv.org/html/2609.27381v1' },
+      { title: 'Official CoPRE project and evidence page', url: 'https://copre-arm.github.io/' },
+      { title: 'CoPRE evidence-file documentation', url: 'https://copre-arm.github.io/assets/data/README.txt' },
+    ],
+    technicalFocus: ['proprioceptive contact detection', 'sensorless touch', 'robot safety', 'humanoid arms'],
+    content: `# CoPRE detects weak robot contact from proprioception without force labels
+
+Researchers from Duke University, KTH Royal Institute of Technology and Carnegie Mellon University released Contact-free Proprioceptive Response Estimation, or CoPRE, on September 23, 2026. The arXiv v1 method trains on contact-free joint motion, predicts the torque response that should occur without contact and converts the residual into a contact score. It requires neither dedicated force sensors nor labeled collisions. Across 45 physical contact trials on each of two arms, CoPRE reported 74.1% recall on an ARX L5 and 82.2% on a Unitree G1 right arm. [Paper and version record](https://arxiv.org/abs/2609.27381).
+
+## Key takeaways
+
+- CoPRE excludes recent measured states from its prediction window so that contact does not immediately contaminate the nominal reference, then weights joint residuals by contact-free noise and the robot Jacobian.
+- Under each platform's reported calibration protocol, the detector reached at least 90% detection at separately measured sliding-resistance references of 3.5 N on ARX and 5.5 N on G1. These are not force measurements at the instant of detection.
+- The official page exposes videos and summary CSV files, but says those tables are manuscript transcriptions rather than raw logs. Placement and insertion demonstrations have no reported task-success rate. [Evidence documentation](https://copre-arm.github.io/assets/data/README.txt).
+
+## What changed
+
+Low-cost arms often estimate joint torque from motor current rather than dedicated torque sensors. A learned nominal model can flag contact when observed torque diverges from expectation, but a model that consumes very recent state may adapt to the collision itself and suppress the residual.
+
+CoPRE addresses that leakage by predicting three steps ahead from an earlier state-and-command history. A 96-dimensional transformer estimates contact-free joint position, velocity and torque. Detection uses the final predicted torque, centers and scales its error with training residuals, and maps the result into Cartesian space with a noise-weighted Jacobian. Three consecutive threshold crossings confirm contact.
+
+Training, checkpoint selection and threshold calibration all use separate contact-free recordings. The ARX windows use typical 32-millisecond intervals and the G1 windows 20 milliseconds. The method still needs a robot kinematic model for Jacobian scoring, even though it avoids a full analytical dynamics model.
+
+## What the 90 physical trials show
+
+Each arm pushed five book stacks at three speeds, with three repetitions for every resistance condition: 5 by 3 by 3 equals 45 physical contact trials per arm. The stacks had separately measured peak sliding resistances from 1.5 to 5.5 N. Those reference values characterize test conditions; the researchers did not track force during individual pushes.
+
+On ARX, CoPRE recorded 74.1% recall, while both a learned torque-prediction baseline and a nominal inverse-dynamics baseline recorded zero under the combined calibration setting. CoPRE reached the study's F90 criterion at 3.5 N. Its held-out broad-motion confirmed-alarm time was 3.32%, versus 14.51% for the neural baseline and zero for dynamics.
+
+On G1, CoPRE recorded 82.2% recall, compared with 16.3% for the neural baseline and 42.2% for dynamics. Its F90 was 5.5 N, and broad-motion alarm time was 0.86%. The paper's 95% confidence intervals were 62.2% to 85.2% on ARX and 72.6% to 91.1% on G1.
+
+Calibration is part of the result. A retrospective ARX sweep increased recall from 74.1% to 95.6% when the allowed calibration alarm budget rose from zero to 1%, while held-out broad alarm time climbed from 3.32% to 12.41%. This is not a free sensitivity gain.
+
+## What this means for robotics
+
+RoboSkin analysis: CoPRE shows how proprioception can provide a useful contact channel when adding [tactile sensors](/sensors) is impractical. A contact event can stop motion, update a spatial belief and trigger a safer alternative. That makes the method relevant to [robot safety](/robot-safety) and contact-aware manipulation, especially on platforms that already expose joint state and motor-current-derived torque estimates.
+
+It is not a substitute for calibrated force measurement. The detector produces a thresholded event rather than contact location, force vector or pressure map. Its strongest engineering value may be as a protective or task-state signal layered under a policy, not as complete tactile perception.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint and RoboSkin.ai has not reproduced it. The detector needs robot-specific training and calibration. Generalization to new payloads, motion distributions and contacts on other arm links was not tested. Sustained contact may enter the history and reduce the residual. The two contact-guided tasks are qualitative demonstrations, so the paper does not establish a numerical task-success improvement.
+
+The [official CoPRE page](https://copre-arm.github.io/) provides project videos, result summaries, ablation tables and a path-free index of the 90 recordings. Its own documentation says the CSV tables are presentation summaries, not raw logs, and that model seeds reuse physical trials. No training code, model checkpoint, raw experiment archive or software license was linked on September 24. Public evidence is therefore more substantial than a paper-only release but not a reproducible package.
+
+## Sources
+
+- [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.27381)
+- [Full CoPRE v1 paper](https://arxiv.org/html/2609.27381v1)
+- [Official project and experiment page](https://copre-arm.github.io/)
+- [Official notes on the downloadable evidence files](https://copre-arm.github.io/assets/data/README.txt)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-24',
+    updated: '2026-09-24',
+    readTime: '7 min read',
+    sourceDate: '2026-09-23',
+    evidenceStatus: 'Preprint · arXiv v1 · project evidence inspected',
+  },
+  {
+    id: 'berkeley-quad-hand-asymmetric-qdd-design',
+    title: 'Berkeley QUAD Hand trades finger symmetry for backdrivability and sustained force',
+    seoTitle: 'Berkeley QUAD Hand: Asymmetric QDD Robot Hand Design',
+    seoDescription: 'The Berkeley QUAD Hand combines eight actuators with 11 degrees of freedom. Review its grasp tests, backdrive force and 96-fold heat claim.',
+    excerpt: 'The Berkeley QUAD Hand couples its middle and ring fingers so a larger quasi-direct-drive motor can provide closure and thermal headroom. Hardware tests show broad static grasp coverage, but not autonomous task performance.',
+    category: 'Dexterous robot hands',
+    image: '/generated/news/berkeley-quad-hand-asymmetric-qdd-design.png',
+    imageAlt: 'Diagram of a four-finger robot hand with individually driven radial fingers and a mechanically coupled middle-ring finger pair.',
+    imageCaption: 'Original RoboSkin.ai schematic of the Berkeley QUAD Hand actuation concept. It is not a CAD drawing or experiment image.',
+    sourceTitle: 'A Quasi-Direct-Drive Underactuated Asymmetric Hand for Dexterous and Efficient Grasping and Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.27240',
+    sources: [
+      { title: 'Berkeley QUAD Hand arXiv submission record', url: 'https://arxiv.org/abs/2609.27240' },
+      { title: 'Berkeley QUAD Hand v1 design and evaluations', url: 'https://arxiv.org/html/2609.27240v1' },
+      { title: 'Official Berkeley QUAD Hand project page', url: 'https://benudavis.github.io/berkeley-quadhand/' },
+    ],
+    technicalFocus: ['quasi-direct-drive hands', 'underactuated fingers', 'backdrivability', 'dexterous grasping hardware'],
+    content: `# Berkeley QUAD Hand trades finger symmetry for backdrivability and sustained force
+
+Benjamin Davis, Chase Kidder and Hannah S. Stuart released the Berkeley QUAD Hand on September 23, 2026. The arXiv v1 hardware design uses four fingers, 11 degrees of freedom and eight actuators, assigning independent quasi-direct-drive motion to the radial side of the hand while mechanically coupling the middle and ring fingers around one larger motor. The prototype reached 29 of 33 Feix grasp-taxonomy poses and required as little as about 50 gram-force to backdrive some base joints. [Paper and version record](https://arxiv.org/abs/2609.27240).
+
+## Key takeaways
+
+- QUAD stands for Quasi-direct-drive, Underactuated, Asymmetric Design. The approximately 1-kilogram hand uses independent thumb and index motion for dexterity and a compliant middle-ring linkage for strength and enclosure.
+- Static hardware tests reached 29 of 33 Feix grasps and 10 of 11 Kapandji opposition poses. These tests establish reachable postures, not autonomous manipulation success.
+- The reported reduction of up to 96 times is calculated resistive heat energy under a five-minute sustained-load setup, not a universal efficiency advantage across tasks. [Hardware evaluation](https://arxiv.org/html/2609.27240v1).
+
+## What changed
+
+Most anthropomorphic hands make every finger mechanically similar. The QUAD Hand starts from the observation that human fingers play different roles. Its thumb, index and middle fingers handle more varied motion, while the ulnar side contributes closure and load support.
+
+The thumb and index use compact SteadyWin GIM3505-08 quasi-direct-drive motors at their bases. A larger CubeMars AKE60-8 drives the middle and ring fingers through a preloaded six-bar transmission. Under light load, the ring finger mirrors the middle finger. When middle-fingertip load exceeds an approximately 3.2 N spring threshold, the linkage deflects and sweeps the ring finger inward toward the palm. The threshold is tunable through spring preload rather than a fixed sensor limit.
+
+Distal joints on the actively controlled fingers use high-reduction servos, so the design is hybrid rather than fully direct drive. The underactuated ring finger adds flexion and cupping without another actuator, freeing enough palm volume for the larger ulnar motor.
+
+## What the hardware tests establish
+
+The grasp-taxonomy and Kapandji evaluations test kinematic coverage. QUAD formed 29 of 33 standardized grasps. It missed one Kapandji posture because the design has no fifth finger. These results support broad opposition and enclosure, but the poses were demonstrated statically and do not include perception, object uncertainty or dynamic task completion.
+
+For backdrivability, a force gauge pressed each fingertip until the actuator visibly rotated, with 15 trials per tested joint. Thumb and index base joints averaged around 50 gram-force. The coupled middle and ring fingers were near 250 gram-force. The paper presents these values as a lower bound for active force sensitivity, not calibrated tactile sensing.
+
+The sustained-load test applied 3 N at one fingertip for five minutes, plus a 6 N condition with both ulnar fingers loaded. Resistive heating was derived from measured quadrature-axis current and manufacturer phase resistance. Because the larger ulnar motor's phase resistance is much lower, the design reported up to a 96-fold reduction in calculated heat energy per finger. The comparison is specific to those actuators, loads, positions and the electrical-loss model.
+
+## What this means for robotics
+
+RoboSkin analysis: the interesting contribution is architectural, not a new grasp controller. Asymmetry gives the designer another way to allocate mass, palm volume and thermal capacity. Passive linkage behavior can respond immediately to contact, while backdrivable joints make active compliance easier to observe and control. This can complement [robot-hand](/robot-hands) tactile systems rather than replace them.
+
+The approach also creates coupled-control questions. One actuator influences two fingers, and linkage geometry changes mechanical advantage across the workspace. A learning policy or controller must model that state-dependent coupling. Adding fingertip or palm [tactile sensing](/sensors) would help separate commanded motion from actual contact, which the authors identify as future work.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the prototype. The hand was rapidly prototyped with 3D-printed ulnar transmission parts that yield before the larger motor reaches stall torque. Force tests cover one position per joint even though linkage mechanics vary with position. Peak fingertip force was deliberately not compared, and the approximately 5-kilogram lift shown in supplemental media is an example rather than a repeated benchmark.
+
+The [official project page](https://benudavis.github.io/berkeley-quadhand/) provides videos, design illustrations, an interactive grasp viewer and the paper. On September 24 it did not expose a CAD download, bill of materials, control repository or hardware license. The paper is distributed under a Creative Commons manuscript license, but that does not license unprovided design files. Current availability is therefore documentation and media, not an open build package.
+
+## Sources
+
+- [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.27240)
+- [Full Berkeley QUAD Hand v1 paper](https://arxiv.org/html/2609.27240v1)
+- [Official Berkeley QUAD Hand project page](https://benudavis.github.io/berkeley-quadhand/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-24',
+    updated: '2026-09-24',
+    readTime: '6 min read',
+    sourceDate: '2026-09-23',
+    evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
+  },
+  {
+    id: 'lima-asynchronous-diffusion-dexterous-manipulation',
+    title: 'LiMA separates slow visual imagination from faster dexterous action refinement',
+    seoTitle: 'LiMA: Asynchronous Diffusion for Dexterous Manipulation',
+    seoDescription: 'LiMA separates a slow visual Dreamer from a faster action Refiner. Review its 120-trial task result, 325 ms chunk latency and tactile gap.',
+    excerpt: 'LiMA amortizes a slow world-action Dreamer across faster action refinements for bimanual dexterous tasks. It improves the latency-performance trade-off on one H100, but remains vision-only and generates chunks at 325 milliseconds.',
+    category: 'Dexterous world-action models',
+    image: '/generated/news/lima-asynchronous-diffusion-dexterous-manipulation.png',
+    imageAlt: 'Diagram showing a slow visual future Dreamer sending intent to a faster motion Refiner for bimanual dexterous robot action chunks.',
+    imageCaption: 'Original RoboSkin.ai explanation of LiMA. This schematic represents the asynchronous hierarchy, not a measured timing trace.',
+    sourceTitle: 'LiMA: Bridging Long-term Imagination to Real-time Dexterous Manipulation via Asynchronous Diffusion',
+    sourceUrl: 'https://arxiv.org/abs/2609.28431',
+    sources: [
+      { title: 'LiMA arXiv submission record', url: 'https://arxiv.org/abs/2609.28431' },
+      { title: 'LiMA v1 methods, tables and limitations', url: 'https://arxiv.org/html/2609.28431v1' },
+      { title: 'Official LiMA project page', url: 'https://ccdcs.github.io/LiMA_repo/' },
+    ],
+    technicalFocus: ['world-action models', 'asynchronous diffusion', 'bimanual dexterity', 'vision-language-action models'],
+    content: `# LiMA separates slow visual imagination from faster dexterous action refinement
+
+Researchers from Peking University and the Beijing Academy of Artificial Intelligence introduced LiMA on September 23, 2026. The arXiv v1 world-action model separates sparse long-horizon visual imagination from denser motion refinement, then links the two with a latent Schrödinger bridge. Across six bimanual tasks with 20 physical trials each, LiMA completed 85 of 120 trials, or 70.8%, while reporting an amortized 325-millisecond latency for each 32-step action chunk on an NVIDIA H100. [Paper and version record](https://arxiv.org/abs/2609.28431).
+
+## Key takeaways
+
+- A slow Future Dreamer generates long-horizon visual and action intent; a Motion Refiner repeatedly combines cached intent with the newest three-camera observation and robot state.
+- LiMA reports 325 ms per 32-step chunk versus 600 ms for Cosmos-Policy under the same H100, batch-size and numerical-precision setup, a 45.8% reduction. This is chunk-generation latency, not latency per executed action.
+- Despite language about reacting to physical changes, the released system is vision-and-proprioception based. The limitations section names tactile integration as future work. [Methods and limitations](https://arxiv.org/html/2609.28431v1).
+
+## What changed
+
+Video-generative robot policies can spend many denoising steps jointly producing future images and actions. LiMA divides that workload. Its Future Dreamer creates a sparse strategic latent from three camera views, language and robot state. The Motion Refiner remains active between Dreamer refreshes and generates a clean execution latent containing dual-arm actions, anthropomorphic-hand motion and near-term visual features.
+
+The bridge between them is called I2SB, a latent Schrödinger Bridge Coupling. Instead of treating Dreamer output as an extra cross-attention condition, it models refinement as probabilistic transport from coarse intent to the execution trajectory. The default schedule refreshes the Dreamer once for every four Refiner updates.
+
+The real system uses two six-degree-of-freedom UR5 arms, two 22-degree-of-freedom SharpaWave hands and three RealSense D435 cameras. Demonstrations come from VIVE wrist tracking and MetaGlove Pro finger retargeting. Each of the six tasks has 100 expert teleoperation demonstrations.
+
+## Results and comparison conditions
+
+The evaluation includes Stack Cup, Roll T-shirt, Cook Rice, Make Sandwich, Make Coffee and Assemble Package. With 20 trials per task, LiMA recorded success rates of 90%, 75%, 80%, 70%, 60% and 50%, respectively. That sums to 85 successes in 120 trials. The paper's 78.9% progress success rate averages completion of defined subtasks and should not be confused with full-task success.
+
+The four baselines use the same task instructions, observations, hardware interfaces and task-specific dataset where fine-tuning is required. GR00T N1.6 completed 79 of 120 trials, InternVLA-A1 80, Cosmos-Policy 72 and VPP 66. LiMA therefore leads the paper's aggregate comparison, but not every task: it ties or trails a baseline on Roll T-shirt and Assemble Package.
+
+Latency was measured end to end from receiving multi-view observations to decoding a 32-step action chunk. LiMA amortizes one Dreamer pass across four Refiner updates, producing the reported 325 ms. GR00T N1.6 and VPP were faster at 270 ms and 225 ms, while InternVLA-A1 took 360 ms and Cosmos-Policy 600 ms. Calling LiMA real-time therefore describes its asynchronous closed-loop design; it does not mean a new chunk arrives every control timestep.
+
+In a Cook Rice visual-generalization test, LiMA retained 70% success with novel object instances over 20 trials. Other variations changed backgrounds, illumination and clutter. These are visual out-of-distribution tests, not tactile or force robustness tests.
+
+## What this means for robotics
+
+RoboSkin analysis: LiMA demonstrates a useful scheduling idea for [robot world models](/robot-world-models). A costly predictor does not need to run at the same cadence as every corrective action. Caching long-horizon intent and refining against current observations can reduce the cost of generative foresight without removing it.
+
+For contact-rich dexterity, the sensory boundary matters. The Refiner can react only to changes visible to its cameras or reflected in robot state. Occluded slip, distributed hand contact and incipient jamming may not be visually identifiable. Connecting the fast branch to [tactile manipulation](/tactile-manipulation) signals would test whether the asynchronous architecture handles physical contact rather than only visual change.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint whose manuscript is labeled CoRL 2026; RoboSkin.ai did not independently verify review status or reproduce the results. Experiments use one bimanual platform, six tasks, 100 demonstrations per task and an H100 GPU. Severe occlusion and low visual variance reduce performance. The latency comparison excludes model-specific compilation, quantization, operator fusion and multi-GPU optimization.
+
+The [official LiMA page](https://ccdcs.github.io/LiMA_repo/) provides the paper, method graphics and task videos. On September 24 it did not link source code, training data, model weights or a project-specific license. The page template carries a Creative Commons notice, but that does not establish a software or dataset license for assets that were not released. Availability is currently paper and media only.
+
+## Sources
+
+- [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.28431)
+- [Full LiMA v1 paper](https://arxiv.org/html/2609.28431v1)
+- [Official LiMA project page](https://ccdcs.github.io/LiMA_repo/)
+`,
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-24',
+    updated: '2026-09-24',
+    readTime: '7 min read',
+    sourceDate: '2026-09-23',
+    evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
+  },
+  {
     id: 'better-curriculum-tactile-reflex-fragile-grasping',
     title: 'A tactile reflex becomes the teacher for fragile grasping',
     seoTitle: 'Better Curriculum: Tactile Reflex Data for Fragile Grasping',
