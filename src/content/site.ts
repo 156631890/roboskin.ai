@@ -253,7 +253,7 @@ export const footerNavigation = [
 
 export const homeStats = [
   { value: '30', label: 'Structured tactile and robot-learning paper records' },
-  { value: '78', label: 'Source-backed research and robotics news briefs' },
+  { value: '82', label: 'Source-backed research and robotics news briefs' },
   { value: '5', label: 'Visuo-tactile world-model papers compared' },
   { value: '2026', label: 'Current Physical AI and humanoid robotics watch' },
 ];
