@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+<rect width="1200" height="675" fill="#11161b"/>
+<g font-family="Arial, sans-serif">
+<text x="62" y="61" fill="#f19a75" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+<text x="60" y="139" fill="#f3f0e9" font-size="43" font-weight="bold">Comply first, jam second, support the load</text>
+<text x="62" y="184" fill="#abb5bd" font-size="25">A soft gripper moves contact load into a continuum-robot tip</text>
+<rect x="60" y="246" width="318" height="236" rx="14" fill="#22333b"/>
+<text x="90" y="294" fill="#f19a75" font-size="20">UNJAMMED</text>
+<path d="M142 330 q76-54 152 0 v92 q-76 54-152 0z" fill="#f3f0e9" opacity=".92"/>
+<g fill="#f19a75">
+<circle cx="178" cy="350" r="8"/>
+<circle cx="222" cy="343" r="8"/>
+<circle cx="259" cy="365" r="8"/>
+<circle cx="190" cy="397" r="8"/>
+<circle cx="240" cy="405" r="8"/>
+</g>
+<rect x="198" y="379" width="43" height="51" fill="#11161b"/>
+<text x="90" y="455" fill="#b8c2c9" font-size="20">particles rearrange on contact</text>
+<path d="M378 365 H442" stroke="#f19a75" stroke-width="5"/>
+<path d="M442 365 l-18-12 v24z" fill="#f19a75"/>
+<rect x="452" y="246" width="306" height="236" rx="14" fill="#283b41"/>
+<text x="482" y="294" fill="#f19a75" font-size="20">VACUUM + SUPPORT</text>
+<path d="M530 330 q74-43 148 0 v92 q-74 42-148 0z" fill="#f3f0e9"/>
+<rect x="572" y="369" width="52" height="62" fill="#11161b"/>
+<path d="M604 316 V369" stroke="#f19a75" stroke-width="15"/>
+<text x="482" y="455" fill="#b8c2c9" font-size="20">rod creates a direct load path</text>
+<path d="M758 365 H820" stroke="#f19a75" stroke-width="5"/>
+<path d="M820 365 l-18-12 v24z" fill="#f19a75"/>
+<rect x="830" y="246" width="310" height="236" rx="14" fill="#4e3027"/>
+<text x="860" y="294" fill="#ffddca" font-size="20">MATCHED TEST</text>
+<text x="860" y="360" fill="#f3f0e9" font-size="38" font-weight="bold">10 / 10</text>
+<text x="860" y="400" fill="#ffddca" font-size="21">with support rod</text>
+<text x="860" y="438" fill="#ffddca" font-size="21">vs 6 / 10 without</text>
+<path d="M60 550 H1140" stroke="#49535c"/>
+<text x="62" y="595" fill="#f3f0e9" font-size="24">Mechanical adaptation widens a pose region—it does not erase geometry.</text>
+<text x="62" y="632" fill="#a6afb7" font-size="20">Source: arXiv:2609.29093v1. Original explanatory schematic.</text>
+</g>
+</svg>

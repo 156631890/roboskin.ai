@@ -33,6 +33,302 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tactilestep-sole-pressure-humanoid-locomotion',
+    title: 'TactileStep closes the loop on Unitree G1 sole pressure',
+    seoTitle: 'TactileStep: Sole Tactile Feedback for Humanoid Locomotion',
+    seoDescription: 'TactileStep uses 25 Hz pressure insoles on a Unitree G1. Examine its impact-force results, contact-area gains, energy trade-off and code status.',
+    excerpt: 'Tsinghua University researchers feed force, center-of-pressure and contact-area features from pressure insoles into a humanoid parkour policy. Hardware measurements improve on several terrains, while long-term sensor behavior and faster motion remain untested.',
+    category: 'Humanoid tactile sensing',
+    image: '/generated/news/tactilestep-sole-pressure-humanoid-locomotion.png',
+    imageAlt: 'Diagram showing sole pressure taxels becoming force, center-of-pressure and contact-area features for a Unitree G1 locomotion policy.',
+    imageCaption: 'Original RoboSkin.ai schematic of the TactileStep information flow. Values are reported measurements; the robot drawing is explanatory, not experiment imagery.',
+    sourceTitle: 'TactileStep: Sole Tactile Learning for Regulating Foot-Terrain Interaction in Humanoid Locomotion',
+    sourceUrl: 'https://arxiv.org/abs/2609.28959',
+    sources: [
+      { title: 'TactileStep arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.28959' },
+      { title: 'TactileStep v1 methods, results and limitations', url: 'https://arxiv.org/html/2609.28959v1' },
+      { title: 'Official TactileStep project and availability', url: 'https://tactilestep.github.io/' },
+    ],
+    technicalFocus: ['sole tactile sensing', 'humanoid locomotion', 'pressure insoles', 'sim-to-real reinforcement learning'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'CoRL 2026 project · arXiv v1 · code pending',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-25',
+    updated: '2026-09-25',
+    readTime: '7 min read',
+    content: `# TactileStep closes the loop on Unitree G1 sole pressure
+
+Tsinghua University researchers released TactileStep on September 24, 2026, as a sole-tactile learning framework for humanoid locomotion. The system equips a Unitree G1 with pressure insoles and exposes three contact features to the deployed policy: normalized normal force, center of pressure and contact-area ratio. In controlled hardware comparisons, the largest reported reduction in touchdown force is 48.8%, but that maximum comes from one terrain condition and should not be generalized to every step. [Paper and version record](https://arxiv.org/abs/2609.28959).
+
+## Key takeaways
+
+- The actor receives 16 tactile values from a two-frame history across both feet, alongside proprioception and depth. It does not consume the full pressure map.
+- Hardware testing uses 20 samples per condition and a 25 Hz wireless insole. A separate 100 Hz check on two conditions supports the paper's rising-edge force estimate, but does not establish long-term sensor accuracy.
+- TactileStep reduces impact and noise under the reported terrain-matched comparisons, yet its simulated policies generally use more energy and are slightly slower than the vision-based Hiking baseline. [Results and protocol](https://arxiv.org/html/2609.28959v1#S4).
+
+## What changed
+
+Humanoid parkour work often treats traversal as the outcome: the robot either clears the stairs or does not. TactileStep instead makes the quality of foot contact part of control. Its Isaac Sim tactile approximation distributes each foot's resultant normal contact force over 60 virtual taxels, diffuses that load spatially and converts the result into features that can also be computed from the real insole.
+
+The policy organizes every foot cycle into swing, pre-landing, landing and stance. Phase-aware rewards discourage excessive downward motion before contact, reduce the touchdown transient and encourage broader, more centered support after landing. The deployed actor combines these pressure-derived features with joint history and depth observations; privileged foot velocity and phase labels are reserved for training critics.
+
+This is an important integration detail for [humanoid robot skin](/humanoid-robot-skin): the authors avoid requiring a soft-body simulator to reproduce every taxel. They align compact contact statistics instead. That lowers simulation cost, but it also discards detailed shear and spatial-pressure structure that a richer foot skin might capture.
+
+## Results under the reported conditions
+
+Training uses 2,048 parallel Unitree G1 agents on one RTX 4090. Simulation evaluation contains 4,096 trials per policy and terrain; hardware evaluation contains 20 samples per condition. The external comparison is Hiking in the Wild, a perceptive vision-based parkour policy, plus ablations that remove tactile observations or contact-specific rewards.
+
+On hardware, the largest force reduction occurs during platform ascent: mean touchdown force falls from 695.0 plus or minus 49.4 N for Hiking to 355.7 plus or minus 39.8 N for TactileStep, a 48.8% relative reduction. On stair descent, peak A-weighted noise falls from 97.2 plus or minus 1.2 dB to 67.1 plus or minus 1.4 dB, while contact-area ratio rises from 0.483 to 0.598, a 23.8% relative increase. The paper reports within-terrain comparisons because material and geometry affect all three metrics. [Hardware table](https://arxiv.org/html/2609.28959v1#S4.SS3).
+
+The trade-off is visible in simulation. TactileStep matches or exceeds traversal success across six terrains, but usually has slightly higher velocity error, longer traversal time and higher energy. Stair ascent, for example, uses 1,126.3 plus or minus 66.6 J versus 802.2 plus or minus 97.0 J for the baseline. Lower impact is therefore not a free efficiency gain.
+
+## What this means for robotics
+
+RoboSkin analysis: TactileStep is strongest as evidence that distributed pressure can close the loop after vision has chosen a foothold. Geometry predicts where a foot may land; sole pressure reveals the contact that actually formed. That distinction matters for [physical AI touch](/physical-ai-touch) systems operating on edges, stairs or compliant structures.
+
+The engineering lesson is also conservative. A 25 Hz sensing path can improve learned whole-body behavior when the policy uses phase-level contact features, but it is not equivalent to a high-bandwidth impact controller. Teams should budget separately for insole acquisition, wireless reliability, model inference and the lower-level joint controller.
+
+## Limitations and availability
+
+The work evaluates one Unitree G1 within bounded motion commands. Faster motion, deformable or granular ground, systematic recovery behavior, insole durability, drift and recalibration are not evaluated. The project page labels the work accepted at CoRL 2026; RoboSkin.ai has not independently reproduced it.
+
+The wireless insole operates at 25 Hz with less than 1 ms of post-acquisition processing and communication delay; wired acquisition supports 100 Hz. In a two-condition validation, 100 Hz measurements were close but not identical to the 25 Hz values. This check addresses peak under-sampling, not every source of calibration error. [Sampling validation](https://arxiv.org/html/2609.28959v1#A3.SS3).
+
+The official project page supplied paper, videos and tables on September 25, but displayed “Code Soon.” No repository, weights, training environments or sensor dataset were verified. [Official availability](https://tactilestep.github.io/).
+
+## Sources and related resources
+
+- [TactileStep arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.28959)
+- [Full methods, evaluation and limitations](https://arxiv.org/html/2609.28959v1)
+- [Official TactileStep project](https://tactilestep.github.io/)
+- [RoboSkin tactile sensors guide](/sensors)
+`,
+  },
+  {
+    id: 'anthropomimetic-forearm-carpal-stiffness',
+    title: 'An open robotic forearm tests how eight carpal bones redirect wrist stiffness',
+    seoTitle: 'Open Anthropomimetic Forearm Tests Carpal Wrist Stiffness',
+    seoDescription: 'An open robotic forearm uses eight carpal bones and 22 actuated muscles. Review the stiffness experiment, single-build limit, CAD, data and licenses.',
+    excerpt: 'A University of Electro-Communications team compares anatomically shaped, fused and ellipsoidal wrist skeletons. Its open release includes CAD, printable parts, firmware and analysis data under file-specific licenses.',
+    category: 'Soft robotic hardware',
+    image: '/generated/news/anthropomimetic-forearm-carpal-stiffness.png',
+    imageAlt: 'Diagram comparing independently articulated carpal bones, a fused proximal row and an ellipsoidal wrist skeleton under tendon loading.',
+    imageCaption: 'Original RoboSkin.ai schematic of the three wrist configurations. It simplifies the anatomy and is not an experimental photograph.',
+    sourceTitle: 'Anthropomimetic Soft Robotic Forearm with Independently Articulated Carpal Bones Enabling Human-Like Adaptive Stiffness Modulability',
+    sourceUrl: 'https://arxiv.org/abs/2609.29176',
+    sources: [
+      { title: 'Anthropomimetic forearm arXiv v1 record', url: 'https://arxiv.org/abs/2609.29176' },
+      { title: 'Full v1 paper, methods and limitations', url: 'https://arxiv.org/html/2609.29176v1' },
+      { title: 'Official CAD, firmware, analysis and data repository', url: 'https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness' },
+    ],
+    technicalFocus: ['anthropomimetic forearm', 'robot wrist stiffness', 'open robot hardware', 'compliant fingertips'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · open hardware and data',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-25',
+    updated: '2026-09-25',
+    readTime: '7 min read',
+    content: `# An open robotic forearm tests how eight carpal bones redirect wrist stiffness
+
+Researchers at the University of Electro-Communications in Tokyo released an anthropomimetic soft robotic forearm on September 24, 2026, to test how carpal-bone structure changes wrist stiffness. The prototype reproduces eight independently movable carpal bones, 22 actuated muscles, 13 finger degrees of freedom and a three-degree-of-freedom wrist. Its open companion repository includes CAD, printable parts, firmware, measured data and analysis code. [Paper and version record](https://arxiv.org/abs/2609.29176).
+
+## Key takeaways
+
+- The study compares one anatomical wrist, a fused proximal carpal row and a geometric ellipsoidal skeleton under four muscle-activation patterns.
+- With the anatomical skeleton, switching from finger-only to combined wrist-and-finger activation rotates the stiffness ellipse by 48.2 degrees; a permutation test reports p equals 0.0038.
+- The release is unusually complete, but licenses differ by file: derived bone models and fingertip molds use CC BY-SA 2.1 JP, while the authors' other materials use CC BY 4.0. [Repository and license map](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness).
+
+## What changed
+
+Many robot wrists simplify the human carpus into one or two joints. This forearm instead uses CT-derived bone geometry, knitted polyethylene ligaments, tendon sheaths, a printed triangular fibrocartilage complex and dual-layer silicone fingertips. Nineteen muscles use tendon transmission; three intrinsic thumb muscles enable opposition. The assembled hand can grasp while its wrist moves, but the research question is mechanical rather than task-level autonomy.
+
+To isolate morphology, every active muscle receives the same 0.6 N tension. A force gauge deflects the wrist 3 mm from 12 directions at 30-degree intervals, while motion capture samples at 100 Hz. The team runs eight trials per activation condition and direction, fits a stiffness ellipse, then separately records 20 repetitions per condition of motion between selected carpal bones.
+
+That protocol matters when interpreting the result: the paper tests whether structure can redirect stiffness under uniform inputs. It does not optimize tendon forces or show an autonomous [robot hand](/robot-hands) choosing stiffness for a manipulation task.
+
+## What the stiffness experiment found
+
+For the anatomical skeleton, finger-muscle activation places the low-stiffness axis near the human dart-throwing direction. Combined wrist-and-finger activation instead aligns the high-stiffness axis with that direction. The observed 48.2-degree major-axis shift exceeded 4,982 of 5,000 shuffled-label outcomes.
+
+Fusing the proximal row changes that behavior. Under finger activation, minimum-axis stiffness rises from 80.1 N/m for the anatomical skeleton to 149.5 N/m for the fused skeleton, and the low-stiffness direction moves away from the dart-throwing range. The ellipsoidal skeleton is stiffer overall, reaching major-axis values from 282.2 to 518.3 N/m under finger-only and wrist-only activation, but its ellipse orientation stays between about 86 and 96 degrees across conditions.
+
+The carpal-motion test provides a narrower mechanistic result. Activation condition significantly changes relative rotation and translation at the proximal carpal row, while the midcarpal changes do not reach significance. The paper treats the latter as a supporting trend rather than a confirmed effect. [Stiffness and motion results](https://arxiv.org/html/2609.29176v1#S3).
+
+## What this means for robotics
+
+RoboSkin analysis: high stiffness alone is not the same as useful stiffness. The ellipsoidal wrist is strongest in absolute terms but least able to redirect its compliance. For contact-rich manipulation, morphology that changes where the hand yields may reduce how much active control is needed before [tactile feedback](/tactile-manipulation) reacts.
+
+The open hardware is also valuable as a reproducibility package. Engineers can inspect the bone and jig CAD, bill of materials, Dynamixel firmware and analysis scripts instead of inferring construction from figures. That makes this closer to a buildable mechanical research artifact than most paper-only robot-hand releases.
+
+## Limitations and availability
+
+All stiffness measurements are quasi-static. The paper does not evaluate impacts, fast grasp corrections, hammering, autonomous manipulation success or repeated builds. Every reported result comes from one physical prototype. Assembly jigs and current control improve consistency within that build, but cannot establish inter-build variation.
+
+The repository was publicly accessible on September 25 and contained analysis data, Python code, PlatformIO firmware, CAD, STL files, a bill of materials and video. Multiple licenses apply, so “open hardware” does not mean every file has the same reuse terms. Users must preserve the share-alike license for the derived BodyParts3D components where applicable. RoboSkin.ai did not fabricate or test the design.
+
+## Sources and related resources
+
+- [arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29176)
+- [Full paper and supplementary material](https://arxiv.org/html/2609.29176v1)
+- [Official open-hardware repository](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness)
+- [RoboSkin soft robotic skin overview](/applications/soft-robotic-skin)
+`,
+  },
+  {
+    id: 'camp-cooperative-arm-hand-motion-planning',
+    title: 'CAMP plans arm motion and hand shape together in constrained spaces',
+    seoTitle: 'CAMP Arm-Hand Motion Planning: Results and Code Status',
+    seoDescription: 'CAMP coordinates a UR7e and LinkerHand through constrained spaces. Check its simulation protocol, 30 physical trials, planning time and code status.',
+    excerpt: 'CAMP combines layered hand search, local arm relaxation and compact trajectory optimization. Its physical trials validate reaching prescribed configurations, not autonomous grasping or button actuation.',
+    category: 'Dexterous motion planning',
+    image: '/generated/news/camp-cooperative-arm-hand-motion-planning.png',
+    imageAlt: 'Diagram of an arm and articulated hand changing posture together while passing through a narrow obstacle field.',
+    imageCaption: 'Original RoboSkin.ai schematic of CAMP arm-hand coordination. It is not a simulation frame or real-robot result image.',
+    sourceTitle: 'CAMP: Cooperative Arm-Hand Motion Planning in Constrained Spaces',
+    sourceUrl: 'https://arxiv.org/abs/2609.29021',
+    sources: [
+      { title: 'CAMP arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.29021' },
+      { title: 'CAMP v1 methods, comparisons and physical trials', url: 'https://arxiv.org/html/2609.29021v1' },
+      { title: 'Official CAMP project and demonstrations', url: 'https://camp-armhand.github.io/' },
+      { title: 'Official CAMP code availability statement', url: 'https://camp-armhand.github.io/code.html' },
+    ],
+    technicalFocus: ['dexterous motion planning', 'arm-hand coordination', 'LinkerHand', 'constrained manipulation'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · code not yet released',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-25',
+    updated: '2026-09-25',
+    readTime: '7 min read',
+    content: `# CAMP plans arm motion and hand shape together in constrained spaces
+
+Researchers from Harbin Institute of Technology, Great Bay University and collaborating institutions introduced CAMP on September 24, 2026, for cooperative arm-hand motion planning. Instead of fixing a hand shape while an arm finds a path, CAMP adjusts both throughout the route. On six simulated constrained tasks, reported planning success ranges from 84.2% to 98.5%. Physical evaluation uses a UR7e arm and 16-degree-of-freedom LinkerHand, but its success definitions stop at prescribed goal configurations. [Paper and version record](https://arxiv.org/abs/2609.29021).
+
+## Key takeaways
+
+- CAMP searches hand configurations along multiple arm guides, locally relaxes the arm when transitions are blocked and then jointly optimizes both trajectories.
+- Simulation results average 10 batches of 100 trials per task. Solver time excludes setup, dense validation, collision-checker construction, file I/O and playback.
+- Thirty physical trials test three reaching or pregrasp configurations. They do not measure autonomous object pickup, lifting or a real button press. [Physical protocol](https://arxiv.org/html/2609.29021v1#S4.SS4).
+
+## What changed
+
+Separate planning creates a geometric blind spot. An arm path that clears an obstacle may still leave no continuous sequence of finger configurations. Searching all 22 active joints at once preserves that coupling but makes global planning difficult.
+
+CAMP represents the possible collision-free hand shapes at each arm configuration as a feasible hand fiber. It creates multiple arm-space guides, performs layered bidirectional hand search and permits small arm changes where adjacent hand layers cannot connect. Complete candidates are compressed into endpoint-preserving via-point movement primitives, then ranked through coarse-to-fine optimization.
+
+Under the reported settings, a waypoint-wise trajectory would require 4,356 optimization variables after fixing endpoints. The movement-primitive form uses 500 weights while keeping independent trajectories for the six arm and 16 hand joints. This compression helps explain why the method can retain coordinated [dexterous manipulation](/robot-manipulation) without optimizing every waypoint directly.
+
+## What do the simulation numbers mean?
+
+Each task-method batch contains 100 randomized obstacle scenes. The authors repeat the main comparison over 10 batches. A success is a complete trajectory that reaches a manually screened goal configuration, satisfies constraints and passes exact MuJoCo collision checks. It is a planning metric, not physical task completion.
+
+CAMP reports 98.5% mean success on Wall Traversal with 3.40 seconds mean solver time, 92.5% and 30.10 seconds on Narrow Passage Traversal, and 84.2% and 42.60 seconds on Cabinet Cylinder Pregrasp. It exceeds RRT-Connect, QRRT*, CHOMP and A-star-plus-CHOMP in reported success across all six tasks, though RRT-Connect is faster on the easiest wall case.
+
+A 100-trial Ball-in-Box ablation separates the design choices. Removing arm relaxation lowers success from 92% to 74%. Replacing the compact representation with waypoint-wise variables yields 79% and increases mean solver time from 32.45 to 84.97 seconds. Using fine-only optimization yields 81% at 25.15 seconds. [Full comparisons and ablations](https://arxiv.org/html/2609.29021v1#S4).
+
+## What happened on the physical robot?
+
+The authors run 10 complete-system trials for each of three configurations. Ball-in-Box Pregrasp reaches its goal in 8 of 10 trials, Display Button Press in 9 of 10 and Cabinet Cylinder Pregrasp in 8 of 10. A 1 cm collision margin compensates for obstacle-modeling error.
+
+The labels need careful reading. The two pregrasp tasks require reaching a goal pose but not grasping or lifting; later grasp motions shown for demonstration are manually adjusted. Display Button Press requires a fingertip to reach a target, and no physical button is actuated. Most failures are hand-obstacle collisions. The physical study therefore validates coordinated execution, not closed-loop contact manipulation.
+
+## What this means for robotics
+
+RoboSkin analysis: CAMP addresses the stage before touch. Better coordination can position a large articulated hand where [tactile sensing](/sensors) becomes useful, but the planner itself does not observe contact or adapt from tactile feedback. A production stack would still need scene updates, execution monitoring and a contact-aware controller after approach.
+
+The planning-time definitions also matter. Teams integrating CAMP would need to add perception, scene construction, validation and command transfer to the reported solver times. Static known geometry is a narrower problem than moving clutter or a deforming object.
+
+## Limitations and availability
+
+The experiments use one arm-hand platform, static obstacles and known geometry. Goal configurations are generated with IK and manually screened. Physical failures remain sensitive to obstacle localization, camera calibration and execution error. No dynamic replanning or contact recovery is evaluated.
+
+The official project page supplies videos and detailed tables, but identifies itself as an anonymous submission even though arXiv lists the authors. Its Code link states that implementation is planned after paper acceptance. No repository, license or downloadable planner was verified on September 25. [Official code statement](https://camp-armhand.github.io/code.html). RoboSkin.ai has not run CAMP.
+
+## Sources and related resources
+
+- [CAMP arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29021)
+- [Full CAMP methods and evaluation](https://arxiv.org/html/2609.29021v1)
+- [Official project and videos](https://camp-armhand.github.io/)
+- [RoboSkin robot-hands guide](/robot-hands)
+`,
+  },
+  {
+    id: 'support-enhanced-granular-jamming-gripper',
+    title: 'A support rod turns granular jamming into a continuum-robot gripper',
+    seoTitle: 'Support-Enhanced Granular-Jamming Gripper: Test Results',
+    seoDescription: 'A granular-jamming gripper adds an internal support rod for a continuum robot. Review 10-trial tests, shape limits, 4.23 cm reaching RMSE and availability.',
+    excerpt: 'The design couples a compliant membrane and particles with a direct load path at a bending robot tip. Mechanical tests are quantitative; the complete autonomous sequence is demonstrated without a reported success rate.',
+    category: 'Adaptive grippers',
+    image: '/generated/news/support-enhanced-granular-jamming-gripper.png',
+    imageAlt: 'Diagram showing an unjammed particle-filled membrane conforming around an object before vacuum and an internal rod form a load path.',
+    imageCaption: 'Original RoboSkin.ai schematic of the granular-jamming sequence. It is an explanatory graphic, not an experimental photograph.',
+    sourceTitle: 'A Support-Enhanced Granular-Jamming Gripper for RL-based Grasping with Continuum Manipulators',
+    sourceUrl: 'https://arxiv.org/abs/2609.29093',
+    sources: [
+      { title: 'Granular-jamming gripper arXiv v1 record', url: 'https://arxiv.org/abs/2609.29093' },
+      { title: 'Full v1 design, tests and deployment paper', url: 'https://arxiv.org/html/2609.29093v1' },
+    ],
+    technicalFocus: ['granular-jamming gripper', 'continuum robot', 'mechanical adaptation', 'sim-to-real reinforcement learning'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-25',
+    updated: '2026-09-25',
+    readTime: '7 min read',
+    content: `# A support rod turns granular jamming into a continuum-robot gripper
+
+Danyu Liu and colleagues released a support-enhanced granular-jamming gripper on September 24, 2026, for tendon-driven continuum manipulators. A flexible membrane and mobile particles conform during contact; vacuum locks that shape, while an internal rod promotes enclosure and carries load back to the bending robot tip. In a matched 10-trial mechanical test, the supported gripper completed 10 lifts and holds versus six without the rod. [Paper and version record](https://arxiv.org/abs/2609.29093).
+
+## Key takeaways
+
+- The reported 100% versus 60% result is one 10-trial configuration comparison with a common object, approach and vacuum condition. It is not a broad autonomous success rate.
+- Shape tests vary sharply: sphere 10/10, hexagonal prism 9/10, cylinder and cube 8/10 each, and triangular pyramid 1/10.
+- A reinforcement-learning controller reaches with 4.23 cm terminal RMSE over 16 physical rollouts, but it controls only the tendon-driven approach. Passive mechanics form the grasp and a task layer switches the vacuum. [Design and deployment results](https://arxiv.org/html/2609.29093v1#S6).
+
+## What changed
+
+Continuum manipulators reach through confined spaces by bending rather than rotating rigid joints, but that compliance makes their end-effector pose difficult to reproduce. A conventional rigid gripper can fail when tendon friction, hysteresis or external loading leaves a small residual error.
+
+The proposed end effector adds a support rod inside a particle-filled membrane. Before vacuum, the rod provides a boundary against which the membrane can wrap, transmits continued approach force and helps develop a deeper enclosure. After evacuation, it creates a more direct load path instead of asking the membrane alone to retain the object.
+
+The team compares natural-rubber and thermoplastic-polyurethane membranes, three particle types and three fill ratios. The selected design uses natural rubber, thermoplastic-rubber spheres and a 50% nominal filling ratio. The paper says the thermoplastic-rubber fill lowers gripper mass relative to polystyrene while retaining the same measured success, but does not report the absolute mass. [Configuration study](https://arxiv.org/html/2609.29093v1#S4.SS2).
+
+## How much contact error can it absorb?
+
+Mechanical characterization separates the gripper from the learned controller. A successful trial requires lifting an object clear of the table and retaining it through the lift. Ten trials are run per condition.
+
+The internal-rod comparison improves from 6/10 to 10/10 under the selected configuration. Fill ratio is not monotonic: one-third, one-half and four-fifths fill produce 90%, 100% and 70%, respectively. Too little fill reduces load-bearing particles; too much restricts conformity.
+
+Offset tests reveal an asymmetric graspable region rather than a circular tolerance around the nominal center. The rod approaches at roughly 30 to 40 degrees relative to the table, so the membrane, rod, object and table form better enclosures on one side. The plotted continuous field interpolates discrete tests; it is not a dense measurement at every position.
+
+Object geometry remains a strong constraint. The triangular pyramid succeeds only once in 10 attempts because sharp edges and limited stable contact promote membrane folding and slip. Mechanical compliance enlarges a set of workable poses; it does not remove pose and geometry requirements.
+
+## What does the learned controller contribute?
+
+The policy observes four frames of gripper position, target displacement and four tendon lengths, then outputs absolute tendon-length commands. Training randomizes initial posture, target position, effective stiffness and actuation delay in a piecewise-constant-curvature simulation. Deployment replaces simulated positions with RGB-camera estimates and performs no physical fine-tuning.
+
+Across 16 physical reaches to two target positions, terminal RMSE is 4.23 cm versus 2.51 cm in simulation. The complete reach-grasp-lift-transfer-release sequence is shown, but the paper does not report repeated end-to-end success. That distinction prevents one demonstration from being read as a reliability benchmark.
+
+## What this means for robotics
+
+RoboSkin analysis: this is physical intelligence at the contact interface. The learned policy only has to reach a finite region, while deformable material absorbs some residual error. That can be useful where a slender continuum robot cannot carry a heavy multi-fingered hand.
+
+The current design does not include [tactile or pressure sensing](/tactile-ai). Vacuum timing is coordinated by the task layer, not inferred from a measured pressure map. Adding contact feedback, as the authors propose, could help decide when sufficient enclosure has formed and detect retention loss during transfer.
+
+## Limitations and availability
+
+Tests cover a limited set of objects, approach orientations and contact offsets. The support geometry is not optimized, broader three-dimensional pose variation is not evaluated and the absolute gripper mass is unreported. The paper's title page does not state affiliations; acknowledgements cite support involving the Hong Kong Centre for Logistics Robotics, the Chinese University of Hong Kong, Zhejiang University and China's National Natural Science Foundation. That funding statement is not used here to infer author employment.
+
+The arXiv v1 paper was accessible on September 25. No official project page, CAD, bill of materials, controller repository, dataset or license for implementation assets was linked. RoboSkin.ai has not reproduced the hardware or policy.
+
+## Sources and related resources
+
+- [arXiv v1 record, submitted September 24, 2026](https://arxiv.org/abs/2609.29093)
+- [Full gripper design and evaluation](https://arxiv.org/html/2609.29093v1)
+- [RoboSkin soft robotic skin guide](/applications/soft-robotic-skin)
+- [RoboSkin robot manipulation guide](/robot-manipulation)
+`,
+  },
+  {
     id: 'internw0-contact-aware-world-model-pipetting',
     title: "InternW0 links asynchronous world prediction with contact-aware pipetting",
     seoTitle: "InternW0: Contact-Aware Pipetting Results and Model Access",
