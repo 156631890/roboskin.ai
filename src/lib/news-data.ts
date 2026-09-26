@@ -33,6 +33,304 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'polyumi-visual-tactile-audio-demonstration-interface',
+    title: 'PolyUMI records vision, touch and contact audio in one wireless interface',
+    seoTitle: 'PolyUMI: Visual-Tactile-Audio Robot Demonstrations',
+    seoDescription: 'PolyUMI combines optical touch, contact audio and wrist vision. Review its VisTA policy, slip results, build cost and current repository limits.',
+    excerpt: 'Northwestern University and TU Darmstadt researchers share a transferable sensing finger and VisTA policy for multimodal demonstrations. The release is substantial, but its paper and repository specifications do not yet fully agree.',
+    category: 'Multimodal tactile learning',
+    image: '/generated/news/polyumi-visual-tactile-audio-demonstration-interface.png',
+    imageAlt: 'Diagram showing wrist vision, an optical tactile finger and contact audio flowing from a handheld PolyUMI gripper into the VisTA robot policy.',
+    imageCaption: 'Original RoboSkin.ai schematic of the PolyUMI sensing and policy pipeline. It is explanatory artwork, not an experimental photograph.',
+    sourceTitle: 'PolyUMI: Accessible Visual-Tactile-Audio Data Collection for Object Inference and Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.29760',
+    sources: [
+      { title: 'PolyUMI arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.29760' },
+      { title: 'PolyUMI v1 methods and experiments', url: 'https://arxiv.org/html/2609.29760v1' },
+      { title: 'Official PolyUMI and VisTA project page', url: 'https://polyumi-vista.github.io/' },
+      { title: 'Official PolyUMI hardware and software repository', url: 'https://github.com/polyumi/PolyUMI-platform' },
+    ],
+    technicalFocus: ['visual-tactile-audio learning', 'multimodal demonstrations', 'optical tactile sensing', 'contact audio'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · MIT repository with unresolved review placeholders',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-26',
+    updated: '2026-09-26',
+    readTime: '8 min read',
+    content: `# PolyUMI records vision, touch and contact audio in one wireless interface
+
+Researchers at Northwestern University, TU Darmstadt, Hessian.AI and the Robotics Institute Germany released PolyUMI on September 24, 2026. The wireless handheld interface records wrist vision, optical touch, contact audio and proprioception, then moves the same sensing finger to a robot end effector. A companion policy called VisTA fuses the synchronized streams for object inference and contact-rich manipulation. [Paper and version record](https://arxiv.org/abs/2609.29760).
+
+## Key takeaways
+
+- The sensing finger adds an estimated $235.96 in parts and four hours of assembly to the UMI workflow; moving it between the handheld collector and robot takes about ten minutes.
+- In a ten-trial slip-control ablation, vision, touch and audio succeed 8/10 times, versus 2/10 for vision alone. This is a small task-specific experiment, not a general success rate.
+- The public repository is useful but not yet a clean reproduction package: several author-specific dependencies remain placeholder links, and its README lists an older tactile stream specification than the paper. [Repository notes](https://github.com/polyumi/PolyUMI-platform).
+
+## What changed
+
+Portable demonstration tools usually record what a camera sees and how the tool moves. PolyUMI adds signals that expose the physical interaction itself. Its curved-mirror optical finger observes a deformable reflective skin; a piezo contact microphone records structure-borne vibration; a fisheye GoPro supplies wrist vision; and SLAM plus ArUco markers recover the handheld pose and gripper opening.
+
+The paper reports 20 fps tactile video at 1152 by 648 pixels, 16 kHz mono contact audio and 60 fps wrist video at 1920 by 1080. The streams are aligned to a 10 Hz policy clock. Images use a two-step history, while audio becomes a log-Mel spectrogram covering roughly the latest 0.5 seconds. On the robot, those 10 Hz policy commands are interpolated into joint torques at 1 kHz by a Cartesian impedance controller.
+
+VisTA does not collapse every sensor to one vector before fusion. Modality-specific encoders produce 294 tokens across vision, touch, audio and robot state. An eight-layer transformer mixes those tokens across sensor, space and time, and an 18-layer flow-matching model predicts chunks of 16 relative end-effector actions.
+
+## Results under the reported conditions
+
+The experiments answer different questions, so their numbers should not be combined into one headline score. A tactile-image classifier reaches 92.3% accuracy over five printed surface patterns. For a closed box holding gears, thin screws or thick screws, sensor combinations without audio reach 42% to 44% accuracy; adding contact audio lifts each tested combination to about 80%. Training uses 20 demonstrations per class and validation uses ten, repeated across three seeds. [Object-inference protocol](https://arxiv.org/html/2609.29760v1#S4.SS2).
+
+Slip control is a ten-trial ablation. The robot must let a screwdriver rotate under gravity, then catch it within ten degrees of vertical. Vision-touch-audio succeeds 8/10, touch-audio 7/10, vision-touch and vision-audio 3/10 each, touch 3/10, vision 2/10 and audio alone 0/10.
+
+For complete manipulation, VisTA reaches 75% full success on board wiping and 100% when partial completion is included. On lightbulb turning, however, every evaluated method reaches at least 80%, and the vision-only diffusion policy performs best. The authors explicitly interpret this as a task where clear visual state makes extra contact sensing less useful. [Official results summary](https://polyumi-vista.github.io/#experiments).
+
+## What this means for robotics
+
+RoboSkin analysis: PolyUMI's most important contribution is not a universal multimodal-policy win. It is a practical bridge between demonstration and deployment. Sharing the same finger preserves sensing geometry, while live contact audio gives the human demonstrator feedback during collection. That can reduce two shifts at once: what the operator can perceive and what the policy later observes.
+
+The results also reinforce a useful design rule for [visuo-tactile learning](/visuo-tactile): choose sensors by hidden task state. Audio dominates the sealed-box classification, touch plus audio helps rapid slip control, and extra modalities add little when the goal remains visually obvious.
+
+## Limitations and availability
+
+PolyUMI is an arXiv v1 preprint, not an independently reproduced system. Manipulation trials use one Franka setup and modest evaluation counts. The off-the-shelf Franka Hand also required modification for 200 Hz continuous gripper positioning.
+
+The GitHub repository carries an MIT license and includes hardware, firmware, ingestion, ROS 2 and policy tooling. But it is an anonymized review copy with no commit history. Its documentation says several private forks are represented by links that will not resolve until a camera-ready release, so a fresh clone cannot complete every documented setup step today. Training was only tested on an RTX 6000 Ada with 48 GB; the authors estimate at least 32 GB of GPU memory.
+
+There is also a source mismatch worth checking before procurement: the paper and project page report 20 fps tactile video at 1152 by 648, while the current repository README says 10 fps at 540 by 480. That may reflect an older configuration, but no versioned explanation was visible. Teams should treat the manuscript specification as experimental context and verify the repository configuration they can actually build.
+
+## Sources and related resources
+
+- [PolyUMI arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29760)
+- [Full methods and evaluation](https://arxiv.org/html/2609.29760v1)
+- [Official PolyUMI and VisTA project](https://polyumi-vista.github.io/)
+- [Official MIT-licensed repository](https://github.com/polyumi/PolyUMI-platform)
+- [RoboSkin tactile dataset directory](/datasets)
+`,
+  },
+  {
+    id: 'propra-fingertip-sensor-pretraining',
+    title: 'PROPRA anchors pre-touch and tactile signals to robot state and future actions',
+    seoTitle: 'PROPRA Pretrains Proximity and Tactile Robot Sensors',
+    seoDescription: 'PROPRA aligns fingertip proximity and tactile histories with robot state and future actions. Check its four-task results, compute and code status.',
+    excerpt: 'AIST researchers pretrain sparse fingertip signals against proprioception and upcoming actions. Average real-robot success reaches 75.0%, but the advantage varies by task and remains within seed variation.',
+    category: 'Tactile representation learning',
+    image: '/generated/news/propra-fingertip-sensor-pretraining.png',
+    imageAlt: 'Diagram showing proximity sensing before contact and tactile sensing after contact anchored to robot state and future actions in PROPRA.',
+    imageCaption: 'Original RoboSkin.ai schematic of PROPRA phase-dependent sensing. It is not a figure copied from the paper.',
+    sourceTitle: 'Self-Supervised Anchoring of Fingertip Sensing to Proprioception and Proactive Actions for Robot Imitation Learning',
+    sourceUrl: 'https://arxiv.org/abs/2609.29822',
+    sources: [
+      { title: 'PROPRA arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.29822' },
+      { title: 'PROPRA v1 methods, results and limitations', url: 'https://arxiv.org/html/2609.29822v1' },
+      { title: 'Official PROPRA project and availability', url: 'https://tomohiromotoda.github.io/nia.propra/' },
+    ],
+    technicalFocus: ['fingertip proximity sensing', 'pressure tactile sensing', 'self-supervised pretraining', 'imitation learning'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · code announced but not released',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-26',
+    updated: '2026-09-26',
+    readTime: '7 min read',
+    content: `# PROPRA anchors pre-touch and tactile signals to robot state and future actions
+
+Researchers at Japan's National Institute of Advanced Industrial Science and Technology and the CNRS-AIST Joint Robotics Laboratory introduced PROPRA on September 24, 2026. Short for PROprioceptive-and-PRoactive Anchoring, the method pretrains separate encoders for reflective proximity and pressure-sensitive tactile histories by aligning each with the robot's current state and upcoming actions. On four real-robot tasks, it reports a 75.0% average success rate. [Paper and version record](https://arxiv.org/abs/2609.29822).
+
+## Key takeaways
+
+- Proximity sensing becomes informative during approach, while tactile pressure responds after contact. PROPRA gives both a continuously changing sensorimotor anchor without directly forcing the two sensor embeddings together.
+- Across three seeds and 20 trials per seed, PROPRA averages 75.0% versus 71.7% for image-anchored pretraining and 72.1% for image anchoring plus direct tactile-proximity pairing.
+- The improvement is not uniform: the image anchor reaches 76.7% on OpenLid versus 73.3% for PROPRA, and code is still labeled “soon.” [Official project](https://tomohiromotoda.github.io/nia.propra/).
+
+## Why naive sensor fusion is not enough
+
+The AIST gripper carries three tactile and six proximity channels. Each encoder receives 0.5 seconds of history. Proximity varies as the fingers approach an object; tactile stays near baseline until contact. After contact, the relationship reverses. In the authors' demonstrations, at least one sensor stays near its stationary value in more than half of the pretraining samples.
+
+That sparsity makes simple concatenation unreliable. Adding both raw histories to the vision-and-state diffusion policy raises average success from 30.4% to 40.4%, but MovePen falls from 31.7% to 20.0% and OpenLid also underperforms vision alone. More sensors can therefore create competition rather than useful context.
+
+PROPRA aligns each sensor encoder independently to an anchor containing the current end-effector pose, gripper opening and next ten actions. The contrastive objective never directly pairs tactile and proximity. After pretraining, the frozen sensor encoders feed the imitation policy, while the anchor itself is removed.
+
+## Results under the reported protocol
+
+The real-robot evaluation uses a UR5e on PickCup, PickSponge, MovePen and OpenLid, with 20 demonstrations per task. Every policy condition is trained with three seeds and evaluated for 20 trials per seed. PROPRA reaches 81.7% on both pickup tasks, 63.3% on MovePen and 73.3% on OpenLid. The corresponding image-anchor scores are 75.0%, 75.0%, 60.0% and 76.7%. [Complete comparison table](https://arxiv.org/html/2609.29822v1#S6).
+
+The 3.3-point average lead over the strongest image-anchored variant is modest, and the paper notes that per-task differences fall within variation across seeds. A fair reading is that PROPRA is competitive and strongest where sensor responses are sparse, not that it wins every manipulation setting.
+
+Representation probes add a more specific result. Over the two seconds before contact, a linear predictor on the frozen proximity embedding achieves the highest time-to-contact R-squared on three of four tasks. On PickSponge it reaches 0.440 versus 0.377 for the image anchor. On MovePen, the image-plus-pair condition is slightly higher, 0.554 versus 0.544.
+
+The authors also collect 100 additional execution episodes per task. After zero-point alignment to compensate for proximity-sensor drift, PROPRA remains positive on every task and seed when a predictor fitted on demonstrations is transferred without refitting. That preprocessing caveat matters: this is not calibration-free deployment.
+
+## What this means for robotics
+
+RoboSkin analysis: PROPRA offers a useful alternative to treating camera features as the universal alignment target. A robot's own state and intended action exist throughout the trajectory, including moments when an individual [tactile sensor](/sensors) is silent. This can be especially useful for custom fingertips that do not match large visual-tactile foundation-model hardware.
+
+The paper also supplies a warning for multimodal [robot learning](/robot-learning): an added channel does not help just because it measures contact. The learning objective must tell the model when that channel carries information. Separating pre-touch and post-contact phases may matter as much as increasing sensor resolution.
+
+## Limitations and availability
+
+PROPRA is an arXiv v1 preprint evaluated on one gripper, one robot and four grasp-oriented tasks. It does not compare directly with large-scale tactile foundation models, and it requires the demonstrated robot states and future action segments used as anchors. Pretraining takes about three to four hours and policy training about eight hours on one NVIDIA H200 with 141 GB of memory, which is a demanding reference configuration rather than a minimum requirement.
+
+The official project page provides the paper and videos under a CC BY-SA 4.0 page license, but its code link reads “soon.” No training repository, model weights, demonstration dataset or software license was verified on September 26. RoboSkin.ai has not reproduced the experiments.
+
+## Sources and related resources
+
+- [PROPRA arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29822)
+- [Full method, tables and limitations](https://arxiv.org/html/2609.29822v1)
+- [Official PROPRA project](https://tomohiromotoda.github.io/nia.propra/)
+- [RoboSkin tactile foundation models guide](/tactile-foundation-models)
+`,
+  },
+  {
+    id: 'whole-hand-force-regulation-without-tactile-sensors',
+    title: 'Whole-hand force regulation tracks contact without tactile sensors',
+    seoTitle: 'Whole-Hand Force Regulation Without Tactile Sensors',
+    seoDescription: 'A 27-DoF arm-hand estimates contact from geometry and tracks force at about 84 Hz. Review its simulation gains, hardware runs and sensing limits.',
+    excerpt: 'MIT, Seoul National University and Yonsei University researchers regulate contacts across finger sides, backs and palm from an object model and joint state. The approach is fast, but depends on pose tracking and quasi-static assumptions.',
+    category: 'Dexterous grasp control',
+    image: '/generated/news/whole-hand-force-regulation-without-tactile-sensors.png',
+    imageAlt: 'Diagram of a dexterous hand estimating contacts across fingertips, finger backs and palm from an object model before solving force allocation.',
+    imageCaption: 'Original RoboSkin.ai schematic of geometry-based whole-hand contact regulation. It is not a hardware photograph or measured force map.',
+    sourceTitle: 'Real-Time Force Regulation for Whole-Hand Dexterous Grasping',
+    sourceUrl: 'https://arxiv.org/abs/2609.30082',
+    sources: [
+      { title: 'Whole-hand force regulation arXiv v1 record', url: 'https://arxiv.org/abs/2609.30082' },
+      { title: 'Full v1 controller and evaluation', url: 'https://arxiv.org/html/2609.30082v1' },
+      { title: 'Official project, hardware runs and availability', url: 'https://sangminkim-99.github.io/reactive-grasp-whole-hand/' },
+    ],
+    technicalFocus: ['whole-hand contact estimation', 'force regulation', 'dexterous grasping', 'reactive regrasping'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · code pending',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-26',
+    updated: '2026-09-26',
+    readTime: '7 min read',
+    content: `# Whole-hand force regulation tracks contact without tactile sensors
+
+Researchers at Seoul National University, Massachusetts Institute of Technology and Yonsei University released a real-time whole-hand force controller on September 24, 2026. It estimates contact across fingertips, finger sides, dorsal surfaces and the palm from a tracked object model and joint angles, then reallocates desired forces as those contacts change. The method explicitly does not use tactile sensing at the contacts. [Paper and version record](https://arxiv.org/abs/2609.30082).
+
+## Key takeaways
+
+- About 3,000 sampled hand-surface points are queried against the object's signed distance field every cycle. That geometric contact search takes under 1 ms on the reported GPU.
+- In gravity-free simulation, whole-hand regulation reaches 88.6% success after a 90-degree perturbation versus 72.4% when contact candidates are restricted to fingertips.
+- Hardware evidence consists of three uncut runs totaling about 200 seconds, 78 human-applied perturbations and eight object losses; the system autonomously recovers six losses. [Official hardware summary](https://sangminkim-99.github.io/reactive-grasp-whole-hand/#real-world).
+
+## What changed
+
+Grasp planners usually choose contacts once, then execute forces or impedance targets tied to that initial geometry. That becomes brittle when an object rolls, slides or gains new contacts against another part of the hand.
+
+This controller treats contact as a live geometry query. The object mesh is converted to a signed distance field, and the measured hand configuration places sampled points from every link into that field. Points within a threshold become contact candidates. For each current set, a quadratic program allocates force under friction pyramids, minimum normal force, joint-torque limits and an actuation-consistency constraint.
+
+The last constraint is important. An optimizer can request forces that satisfy object-level equations but cannot be generated by controlled finger torques. The method suppresses force components in the null space of the actuated contact Jacobian. It remains a conservative allocation rule, not proof that compliant physical contacts realize every desired vector.
+
+Reactive reaching handles acquisition. It follows a tracked object until the thumb and two fingers make contact, hands control to force regulation, and returns to reaching after a detected loss. This creates an approach-hold-regrasp loop rather than evaluating a stored grasp alone.
+
+## Simulation and hardware evidence
+
+Simulation uses MuJoCo with gravity disabled, 79 YCB objects and ten power grasps per object. A six-direction load equal to 10% of object weight tests each initial grasp. For dynamic perturbations, five representative objects and 50 grasps per method are rotated up to 90 degrees; non-adaptive baselines allocate force only at initialization. Whole-hand online regulation beats fixed feedforward torque, fixed impedance and fingertip-only execution at every angle. [Simulation protocol](https://arxiv.org/html/2609.30082v1#S4.SS1).
+
+Under constant synthetic pose errors up to 30 degrees and 5 mm, the feedforward baseline falls from 79% to 54%, while adaptive regulation stays between 87% and 93%. That test does not include time-varying noise, latency or complete tracking loss.
+
+There is a measurable speed-coverage trade-off. Allowing one candidate per link gives a 227 Hz force solve and 90.9% success; five candidates peaks at 93.2%; seven slows to 66 Hz and falls to 91.9%. The selected five-contact setting runs the full quadratic program at about 84 Hz.
+
+Hardware uses a 7-DoF Flexiv Rizon 4 arm, a 20-DoF Robotis 5F hand, one RealSense D455, an Intel i9-13900K and an RTX 4090. The hand's fingertip tactile sensors are present but unused. A Pringles can and two boxes are pushed or taken during the three runs. Six of eight losses are recovered; the other two leave the arm workspace. These demonstrations show autonomous transitions, but three runs are not a comparative hardware benchmark.
+
+## What this means for robot skin
+
+RoboSkin analysis: this work is a useful counterexample to the claim that every contact-control problem requires dense skin. If the object model, pose tracker and hand kinematics are reliable, geometry can infer likely contacts over surfaces that have no taxels at all.
+
+That does not eliminate the case for [robot skin](/). It relocates it. A tactile layer can directly observe unexpected objects, normal uncertainty, local slip and contacts that the tracker cannot see. Geometry offers broad coverage; touch offers physical confirmation. A hybrid system could use this controller as a contact prior and tactile residuals to correct model error.
+
+## Limitations and availability
+
+The method requires an object model from CAD or a short RGB-D scan and a maintained six-degree-of-freedom pose. Heavy occlusion breaks contact estimation. Thin objects are especially sensitive because millimeter-scale pose error can flip a sampled point to the far side and reverse the estimated normal.
+
+Force allocation is quasi-static. It does not explicitly compensate gravity, inertia or external wrenches, even though friction is expected to resist unmodeled loads. Simulation disables gravity, and hardware disturbances are manual rather than standardized.
+
+The project supplies the paper, videos and detailed results. Its code link is labeled “Soon”; no repository, data package or software license was available on September 26. The project-page content is CC BY-SA 4.0, which licenses that page, not unreleased controller code. RoboSkin.ai has not reproduced the system.
+
+## Sources and related resources
+
+- [arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.30082)
+- [Full controller and evaluation](https://arxiv.org/html/2609.30082v1)
+- [Official project and uncut hardware runs](https://sangminkim-99.github.io/reactive-grasp-whole-hand/)
+- [RoboSkin dexterous robot hands guide](/robot-hands)
+`,
+  },
+  {
+    id: 'res-hil-human-guided-residual-rl-manipulation',
+    title: 'Res-HIL learns corrections around a frozen manipulation policy',
+    seoTitle: 'Res-HIL: Human-Guided Residual RL for Manipulation',
+    seoDescription: 'Res-HIL adds human-guided residual RL to a frozen ACT policy. Examine five contact-rich tasks, ten-minute results and release limits.',
+    excerpt: 'Siemens and Technical University of Munich researchers use interventions both as corrective targets and reward shaping. The real-robot study is strong on task coverage, but still depends on one operator and unreleased code.',
+    category: 'Human-in-the-loop learning',
+    image: '/generated/news/res-hil-human-guided-residual-rl-manipulation.png',
+    imageAlt: 'Diagram showing a frozen behavior-cloning policy, a learned residual correction and occasional human interventions controlling contact-rich robot tasks.',
+    imageCaption: 'Original RoboSkin.ai schematic of the Res-HIL learning loop. It is explanatory artwork, not an experimental screenshot.',
+    sourceTitle: 'Res-HIL: Human-Guided Residual Reinforcement Learning for Sample-Efficient Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.30023',
+    sources: [
+      { title: 'Res-HIL arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.30023' },
+      { title: 'Res-HIL v1 method, evaluation and ablations', url: 'https://arxiv.org/html/2609.30023v1' },
+      { title: 'Official Res-HIL project and videos', url: 'https://iavorskaiamariia.github.io/Res-HIL-website/' },
+    ],
+    technicalFocus: ['human-in-the-loop reinforcement learning', 'residual policy learning', 'contact-rich manipulation', 'robot interventions'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · videos available, no code release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-26',
+    updated: '2026-09-26',
+    readTime: '7 min read',
+    content: `# Res-HIL learns corrections around a frozen manipulation policy
+
+Researchers at Siemens and the Technical University of Munich introduced Res-HIL on September 24, 2026, for sample-efficient adaptation of contact-rich robot skills. Instead of replacing a behavior-cloning policy during online learning, the method freezes it and trains a residual correction. Human interventions supervise that correction and penalize the autonomous actions that led toward failure. [Paper and version record](https://arxiv.org/abs/2609.30023).
+
+## Key takeaways
+
+- Every online method starts from 20 demonstrations; frozen ACT and unguided ResFiT reference policies also receive 100-demonstration variants.
+- After ten minutes, Res-HIL reports 100%, 64%, 50%, 66% and 92% success across five task conditions. HIL-SERL reaches 90%, 30%, 10%, 0% and 0% under the same table.
+- Final evaluations use 50 fixed randomized configurations, three training repetitions and one intervention operator. That is substantial real-robot evidence, but not independent validation across people or platforms.
+
+## What changed
+
+Human-in-the-loop reinforcement learning can adapt a robot online, but changing the entire policy risks discarding useful behavior already learned from demonstrations. Residual learning preserves that base and learns only an additive correction. Res-HIL combines the two ideas while addressing an unstable start: the residual output layer is initialized to zero, so the deployed action initially equals the base action.
+
+During training, the operator takes over when failure, damage or an unrecoverable deviation seems likely, and releases control after returning the robot to a recoverable state. The human action becomes a target residual relative to the frozen base. Res-HIL also applies decaying penalties to autonomous steps immediately before the first two intervention segments, turning each correction into both a supervised example and a reward-shaping signal.
+
+Two replay buffers keep online experience separate from initial demonstrations and intervention transitions. Training batches draw equally from both. A TD3 actor-critic objective learns the residual at 7 Hz, behavior cloning matches human corrections, and a magnitude penalty discourages unnecessarily large changes.
+
+## Results under the reported conditions
+
+The five conditions are easy and hard peg insertion, vent-lid insertion, and cable manipulation with two or three cameras. The base ACT policy uses 20 demonstrations. Online budgets are 20 minutes for easy peg insertion and 45 minutes for the other tasks. Each evaluation uses the same 50 predefined randomized starts across methods, and every online experiment is repeated three times. [Protocol and full tables](https://arxiv.org/html/2609.30023v1#S4).
+
+After ten minutes, Res-HIL is already the strongest reported method on every condition. Final success is 100%, 96%, 100%, 88% and 100%. The 20-demonstration ACT base reaches 36%, 28%, 44%, 46% and 70%; ACT with 100 demonstrations reaches 84%, 60%, 80%, 80% and 92%.
+
+HIL-SERL eventually reaches 100%, 94% and 84% on the three insertion tasks but 0% on both cable conditions. Its vent score uses a stricter edge-first criterion; it would be 100% if pushing the lid directly through were counted. Res-HIL averages 5.46 seconds across successful task episodes, compared with 5.83 seconds for 100-demonstration ACT and 7.73 seconds for 20-demonstration ACT. HIL-SERL is faster on the insertion tasks it solves, so Res-HIL's strength is coverage rather than the fastest motion everywhere.
+
+The ablation is narrower than the main evaluation. On easy peg insertion, removing zero initialization doubles convergence time from eight to 16 minutes. Removing intervention-aware reward shaping prevents convergence within 30 minutes and finishes at 92%. The paper says direct residual supervision is critical, but these component tests do not establish identical effects on the long-horizon cable tasks.
+
+## What this means for robotics
+
+RoboSkin analysis: Res-HIL is relevant to [contact-rich manipulation](/tactile-manipulation) even though its policy observes cameras and proprioception rather than tactile arrays. It treats rare contact failures as correction opportunities instead of asking a new policy to rediscover the entire behavior online.
+
+For tactile systems, the same architecture could preserve a visual-proprioceptive base while a residual learns corrections from touch. But that extension remains an inference, not a result in this paper. The study does not test tactile input, force feedback or whether interventions transfer between operators.
+
+The comparison with 100 demonstrations also needs context. The authors estimate collecting 100 demonstrations takes about 30 minutes for peg insertion, 45 minutes for vent insertion and 60 minutes for cable manipulation. Res-HIL reduces initial demonstrations, but it adds online robot time plus a human who monitors and occasionally takes control. Sample efficiency is therefore a trade between offline demonstration and supervised online interaction, not zero human effort.
+
+## Limitations and availability
+
+Res-HIL is an arXiv v1 preprint on one robot setup. All interventions come from the same operator under a stated qualitative criterion. The paper reports that intervention ratios fall during training, but operator-to-operator variation, delayed takeover and safety outside the tested fixtures remain unknown.
+
+The paper acknowledges that concurrent FTC and HiL-ResRL methods were not reproduced because they appeared shortly before submission. Comparisons therefore cover the listed baselines rather than every current human-guided residual approach.
+
+The official project page provides task videos and a method overview. No public code repository, checkpoint, training data or software license was verified on September 26. The paper itself is available under CC BY 4.0; that license does not make absent implementation artifacts available. RoboSkin.ai has not run the training system.
+
+## Sources and related resources
+
+- [Res-HIL arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.30023)
+- [Full method, evaluation and ablations](https://arxiv.org/html/2609.30023v1)
+- [Official Res-HIL project and videos](https://iavorskaiamariia.github.io/Res-HIL-website/)
+- [RoboSkin robot manipulation guide](/robot-manipulation)
+`,
+  },
+  {
     id: 'tactilestep-sole-pressure-humanoid-locomotion',
     title: 'TactileStep closes the loop on Unitree G1 sole pressure',
     seoTitle: 'TactileStep: Sole Tactile Feedback for Humanoid Locomotion',
