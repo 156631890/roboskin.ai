@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import "./contact-edition.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
@@ -16,16 +17,21 @@ import {
   pageSeo,
 } from "@/lib/seo";
 
-const manrope = Manrope({
+const manrope = localFont({
+  src: "./fonts/manrope-latin-variable.woff2",
   variable: "--font-manrope",
-  subsets: ["latin"],
+  weight: "200 800",
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const ibmPlexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-600.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-ibm-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 const homeMetadata = buildPageMetadata('/');
@@ -66,7 +72,7 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8231924120348302"
           crossOrigin="anonymous"
         />
-        <meta name="theme-color" content="#11110f" />
+        <meta name="theme-color" content="#070c12" />
       </head>
       <body
         className={`${manrope.variable} ${ibmPlexMono.variable} antialiased flex flex-col min-h-screen`}

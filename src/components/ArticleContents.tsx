@@ -5,7 +5,7 @@ type ArticleContentsProps = {
 export default function ArticleContents({ sections }: ArticleContentsProps) {
   if (sections.length < 3) return null;
   return (
-    <nav aria-label="On this page" className="my-6 rounded-md border border-white/10 p-5">
+    <nav aria-label="On this page" className="article-contents my-6 rounded-md border border-white/10 p-5">
       <p className="text-sm font-semibold text-white">On this page</p>
       <ol className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
         {sections.map((section) => (

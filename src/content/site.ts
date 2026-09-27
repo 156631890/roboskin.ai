@@ -479,9 +479,9 @@ export const homeBrandAssets: HomeBrandAssets = {
       'RoboSkin.ai brand system board showing a tactile grid logo, cold blue signal palette, typography, report cover, and robotic skin imagery.',
   },
   hero: {
-    image: '/generated/brand/roboskin-hero-editorial-v2.webp',
+    image: '/generated/brand/roboskin-contact-cyber-v3.webp',
     imageAlt:
-      'Graphite humanoid robotic hand with flexible tactile skin approaching a sculptural ceramic surface in a warm industrial studio.',
+      'AI-generated concept rendering of a titanium robotic fingertip deforming a flexible tactile sensing surface under cool studio light.',
   },
 };
 

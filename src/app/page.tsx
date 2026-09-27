@@ -4,51 +4,25 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import ResearchResourceActions from '@/components/ResearchResourceActions';
 import AiRobotClosedLoop from '@/components/AiRobotClosedLoop';
+import { AuthorityIndex, DirectAnswerSection } from '@/components/IndustryVisuals';
 import {
-  AuthorityIndex,
-  ConversionPathPanel,
-  DirectAnswerSection,
-  FeaturedAssetCovers,
-  TactileStackMap,
-} from '@/components/IndustryVisuals';
-import {
-  authorityHeroVisual,
-  authorityLinkGroups,
-  directAnswerBlocks,
-  featuredIndustryAssets,
-  homeBrandAssets,
-  homeAiRobotLoop,
-  homeBroadResearchLanes,
-  homeKnowledgeMap,
-  homePhysicalAiSignals,
-  homeResearchWatch,
-  homeRoboticsIntelligence,
-  homeStats,
-  manifesto,
-  site,
-  tactileAiStack,
+  authorityLinkGroups, directAnswerBlocks, homeBrandAssets, homeAiRobotLoop,
+  homeKnowledgeMap, homeResearchWatch, homeRoboticsIntelligence,
 } from '@/content/site';
-import { getBlogSummaries } from '@/lib/blog-data';
-import { getNewsSummaries } from '@/lib/news-data';
+import { blogPosts } from '@/lib/blog-data';
+import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries } from '@/lib/research-index';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
 import {
-  buildBreadcrumbJsonLd,
-  buildFaqJsonLd,
-  buildGraphJsonLd,
-  buildHomePhysicalAiRoutesJsonLd,
-  buildPageJsonLd,
-  buildPageMetadata,
+  buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd,
+  buildHomePhysicalAiRoutesJsonLd, buildPageJsonLd, buildPageMetadata,
   buildPhysicalAiDefinedTermJsonLd,
 } from '@/lib/seo';
 
 const homeRobotSkinFaq = directAnswerBlocks.slice(0, 3).map((item) => ({
-  question: item.question,
-  answer: item.answer,
-  href: item.href,
-  ctaLabel: item.ctaLabel,
+  question: item.question, answer: item.answer, href: item.href, ctaLabel: item.ctaLabel,
 }));
 
 const homeAuthorityLinkGroups = authorityLinkGroups.map((group) => ({
@@ -57,445 +31,163 @@ const homeAuthorityLinkGroups = authorityLinkGroups.map((group) => ({
 }));
 
 const latestResearchSignals = [
-  ...getBlogSummaries().map((post) => ({
-    ...post,
-    href: `/research/${post.id}`,
-    label: 'Research brief',
-  })),
-  ...getNewsSummaries().map((post) => ({
-    ...post,
-    href: `/news/${post.id}`,
-    label: 'Robotics news',
-  })),
-]
-  .sort((left, right) => right.date.localeCompare(left.date))
-  .slice(0, 3);
+  ...blogPosts.map((post) => ({ ...post, href: `/research/${post.id}`, label: 'Research brief' })),
+  ...newsPosts.map((post) => ({ ...post, href: `/news/${post.id}`, label: 'Robotics news' })),
+].sort((left, right) => right.date.localeCompare(left.date)).slice(0, 3);
 
 const researchDatabases = [
-  { label: 'Datasets', detail: `${tactileDatasetEntries.length} source-reviewed records`, href: '/datasets' },
-  { label: 'Benchmarks', detail: `${tactileBenchmarkEntries.length} evaluation suites`, href: '/benchmarks' },
-  { label: 'Sensors', detail: `${tactileSensorEntries.length} sensor systems`, href: '/sensors' },
-  { label: 'Research index', detail: `${researchIndexEntries.length} papers and technical records`, href: '/research-index' },
+  { label: 'Research records', count: researchIndexEntries.length, detail: 'Papers & technical evidence', href: '/research-index' },
+  { label: 'Datasets', count: tactileDatasetEntries.length, detail: 'Source-reviewed records', href: '/datasets' },
+  { label: 'Sensors', count: tactileSensorEntries.length, detail: 'Tactile sensing systems', href: '/sensors' },
+  { label: 'Benchmarks', count: tactileBenchmarkEntries.length, detail: 'Evaluation suites', href: '/benchmarks' },
 ];
 
 export const metadata: Metadata = buildPageMetadata('/');
 
 export default function Home() {
   return (
-    <>
-      <JsonLd
-        data={buildGraphJsonLd([
-          buildPageJsonLd('/'),
-          buildBreadcrumbJsonLd('/'),
-          buildFaqJsonLd(homeRobotSkinFaq, '/'),
-          buildPhysicalAiDefinedTermJsonLd(),
-          buildHomePhysicalAiRoutesJsonLd(),
-        ])}
-      />
+    <div className="robo-home">
+      <JsonLd data={buildGraphJsonLd([
+        buildPageJsonLd('/'), buildBreadcrumbJsonLd('/'), buildFaqJsonLd(homeRobotSkinFaq, '/'),
+        buildPhysicalAiDefinedTermJsonLd(), buildHomePhysicalAiRoutesJsonLd(),
+      ])} />
 
-      <section className="brand-hero">
+      <section className="contact-hero" aria-labelledby="home-heading">
         <div className="container-shell">
-          <div className="hero-topline">
-            <span>Source-backed robotics research map</span>
-            <span>Humanoid robot skin / tactile AI / Physical AI</span>
+          <div className="contact-hero-topline">
+            <span><i aria-hidden="true" /> Source-backed robotics research map</span>
+            <span>Robot skin / Tactile AI / Physical AI</span>
           </div>
-
-          <div className="hero-stage">
-            <Image
-              src={homeBrandAssets.hero.image}
-              alt={homeBrandAssets.hero.imageAlt}
-              fill
-              priority
-              sizes="(max-width: 767px) 100vw, (min-width: 1480px) 650px, 45vw"
-              className="hero-stage-image"
-            />
-            <div className="hero-stage-copy">
-              <p className="hero-stage-label">Independent robotics intelligence</p>
-              <h1 aria-label="Robot skin and tactile AI for Physical AI and humanoid robots">
-                <span className="block">Robot skin <span className="hero-emphasis">and tactile AI</span></span>
-                <span className="hero-context">for Physical AI <span className="block sm:inline">and humanoid robots</span></span>
+          <div className="contact-hero-stage">
+            <div className="contact-hero-art">
+              <Image src={homeBrandAssets.hero.image} alt={homeBrandAssets.hero.imageAlt}
+                fill priority sizes="(max-width: 700px) 100vw, (min-width: 1480px) 960px, 72vw" />
+              <span className="contact-hero-coordinate" aria-hidden="true">01 / The contact layer</span>
+            </div>
+            <div className="contact-hero-copy">
+              <p className="eyebrow">Intelligence, in contact.</p>
+              <h1 id="home-heading" aria-label="Robot skin and tactile AI for Physical AI and humanoid robots">
+                Robot skin <span className="hero-emphasis">and tactile AI</span>
+                <span className="contact-hero-context">for Physical AI <span className="block sm:inline">and humanoid robots</span></span>
               </h1>
-              <p className="hero-stage-summary">
-                RoboSkin.ai tracks source-backed robotics research across robot skin, tactile sensors, robot hands,
-                and Physical AI. Find the papers, compare the evidence, and follow the sources.
-              </p>
-              <div className="hero-stage-actions">
+            </div>
+            <div className="contact-hero-body">
+              <p className="contact-hero-deck">The contact layer of intelligent machines.</p>
+              <p className="contact-hero-description">Explore source-backed robotics research across robot skin, tactile sensors, robot hands, and Physical AI. Find the papers. Understand the evidence.</p>
+              <div className="contact-hero-actions">
                 <Link href="/research-index#research-explorer" className="btn-primary">Compare research evidence <span aria-hidden="true">↗</span></Link>
-                <Link href="/research" className="hero-text-link">Browse research briefs</Link>
-                <Link href="/research-services" className="hero-text-link">Paid research services</Link>
+                <a href="#latest-research" className="contact-text-link">Latest research <span aria-hidden="true">↓</span></a>
               </div>
             </div>
-            <p className="hero-stage-caption">
-              <strong>Tactile AI stack map</strong>
-              <span>Surface / signal / inference / action — original RoboSkin.ai visual study</span>
-            </p>
+            <p className="contact-hero-caption">Touch study 01 <span>AI-generated concept · not an experimental image</span></p>
           </div>
-
-          <nav className="home-start-paths" aria-label="Choose a research starting point">
-            <Link href="/robot-skin">
-              <span className="home-path-number" aria-hidden="true">01</span>
-              <span><small>New to the field?</small><strong>Understand robot skin</strong></span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-            <Link href="/research-index#research-explorer">
-              <span className="home-path-number" aria-hidden="true">02</span>
-              <span><small>Evaluating the evidence?</small><strong>Search the research index</strong></span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-            <a href="#latest-research">
-              <span className="home-path-number" aria-hidden="true">03</span>
-              <span><small>Keeping up with robotics?</small><strong>Read the latest updates</strong></span>
-              <span aria-hidden="true">↓</span>
-            </a>
-          </nav>
-
-          <div className="hero-data-band">
-            <article className="hero-answer">
-              <h2>What is robot skin?</h2>
-              <p>
-                In practical robotics, robot skin helps robots detect contact, pressure, shear, slip, and interaction
-                events across hands, grippers, arms, or curved body surfaces. For Physical AI, it is the contact layer
-                that vision alone cannot provide.
-              </p>
-            </article>
-            {homeStats.map((item) => (
-              <dl key={item.label} className="hero-stat">
-                <dt>{item.value}</dt>
-                <dd>{item.label}</dd>
-              </dl>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="deferred-section border-y border-white/10 py-12 md:py-16" aria-labelledby="core-knowledge-map-heading">
-        <div className="container-shell">
-          <div className="mb-9 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-            <div>
-              <p className="brand-section-number">Field map / Core authority</p>
-              <h2 id="core-knowledge-map-heading" className="brand-section-title mt-5">Robot Skin → Tactile AI → Physical AI</h2>
-            </div>
-            <p className="section-copy lg:pt-10">
-              RoboSkin.ai maps the technologies, research, datasets, sensors, robot platforms, and AI models that power touch intelligence in robots. Start with a pillar, then follow its papers, datasets, benchmarks, and related entities.
-            </p>
-          </div>
-          <div className="home-knowledge-grid">
-            {homeKnowledgeMap.map((item, index) => (
-              <article key={item.title} className="home-knowledge-item">
-                <span className="home-knowledge-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  {item.href && item.ctaLabel ? <Link href={item.href}>{item.ctaLabel} <span aria-hidden="true">↗</span></Link> : null}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-5 grid border border-white/10 md:grid-cols-2 xl:grid-cols-4" aria-label="RoboSkin research databases">
+          <nav className="contact-database-strip" aria-label="RoboSkin research databases">
             {researchDatabases.map((item) => (
-              <Link key={item.href} href={item.href} className="group flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 last:border-b-0 md:border-r md:even:border-r-0 xl:border-b-0 xl:even:border-r xl:last:border-r-0">
-                <span>
-                  <span className="block text-sm font-semibold text-white">{item.label}</span>
-                  <span className="mt-1 block font-mono text-[13px] uppercase tracking-[0.08em] text-[#a39d92]">{item.detail}</span>
-                </span>
-                <span className="text-[#ff6b3d] transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+              <Link key={item.href} href={item.href}>
+                <span className="contact-database-count">{String(item.count).padStart(2, '0')}</span>
+                <span><strong>{item.label}</strong><small>{item.detail}</small></span>
+                <span className="contact-arrow" aria-hidden="true">↗</span>
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
       </section>
 
-      <section className="deferred-section border-b border-white/10 py-12 md:py-16" aria-labelledby="ai-robot-loop-heading">
-        <div className="container-shell">
-          <div className="brand-section-rule border-white/20">
-            <div>
-              <p className="brand-section-number">AI / Robot relationship</p>
-              <h2 id="ai-robot-loop-heading" className="brand-section-title mt-5">How AI becomes robot action</h2>
-            </div>
-            <div className="lg:pt-10">
-              <p className="section-copy">
-                Artificial intelligence supplies perception, prediction, reasoning, and action policies. Robotics supplies
-                sensors, embodiment, controllers, actuators, and safety constraints. Their relationship becomes useful when
-                physical outcomes return as feedback instead of ending at a generated command.
-              </p>
-              <Link href="/ai-robotics" className="mt-6 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
-                Open the AI and robotics field guide →
-              </Link>
-            </div>
-          </div>
-          <AiRobotClosedLoop stages={homeAiRobotLoop} />
+      <section id="latest-research" className="contact-section container-shell" aria-labelledby="latest-heading">
+        <div className="contact-section-heading">
+          <div><p className="quiet-label">01 / Research dispatch</p><h2 id="latest-heading">At the edge of touch.</h2></div>
+          <div className="contact-section-aside"><p>Newest robotics research briefs</p><Link href="/news">All news <span aria-hidden="true">↗</span></Link><Link href="/research">Browse research briefs <span aria-hidden="true">↗</span></Link></div>
+        </div>
+        <div className="contact-dispatches">
+          {latestResearchSignals.map((signal, index) => (
+            <article key={signal.href} className="contact-dispatch" data-lead={index === 0 ? 'true' : undefined}>
+              <div className="contact-dispatch-meta"><span>{signal.label}</span><time dateTime={signal.date}>{signal.date}</time></div>
+              <h3><Link href={signal.href}>{signal.title}</Link></h3>
+              <p>{signal.excerpt}</p>
+              {index === 0 && signal.image ? (
+                <Link href={signal.href} className="contact-dispatch-image" aria-label={`View illustration and sources: ${signal.title}`}>
+                  <Image src={signal.image} alt="" fill sizes="(max-width: 800px) 100vw, 46vw" />
+                </Link>
+              ) : null}
+              <div className="contact-dispatch-foot"><span>{signal.technicalFocus[0]}</span><Link href={signal.href} aria-label={`Read: ${signal.title}`}>Read brief <span aria-hidden="true">↗</span></Link></div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="editorial-light" aria-labelledby="robotics-research-pulse-heading">
-        <div className="deferred-section py-12 md:py-16">
-          <div className="container-shell">
-            <div className="brand-section-rule">
-              <div>
-                <p className="brand-section-number">01 / Robotics research pulse</p>
-                <h2 id="robotics-research-pulse-heading" className="brand-section-title mt-5">
-                  Track humanoid robots, Physical AI, embodied AI, and robot manipulation
-                </h2>
-                <p className="section-copy mt-6">
-                  Follow new research through its sensors, data, models, and robot experiments. Each review connects
-                  the reported findings to contact-rich tasks and explains what the evidence means for an engineering
-                  workflow.
-                </p>
-                <p className="mt-5 font-mono text-[13px] uppercase tracking-[0.1em] text-[#5e5951]">
-                  Research watch reviewed {homeResearchWatch.reviewedAt}
-                </p>
-              </div>
-
-              <article className="research-watch">
-                <div className="research-watch-meta">
-                  <span>{homeResearchWatch.eyebrow}</span>
-                  <span>Source date {homeResearchWatch.sourceDate}</span>
-                </div>
-                <h3>{homeResearchWatch.title}</h3>
-                <p>{homeResearchWatch.summary}</p>
-                <p>{homeResearchWatch.relevance}</p>
-                <div className="research-watch-links">
-                  <a href={homeResearchWatch.sourceUrl} target="_blank" rel="noreferrer">
-                    {homeResearchWatch.sourceLabel} ↗
-                  </a>
-                  <Link href={homeResearchWatch.reviewUrl}>{homeResearchWatch.reviewLabel} →</Link>
-                </div>
-              </article>
+      <section className="contact-field" aria-labelledby="field-heading">
+        <div className="container-shell contact-section">
+          <div className="contact-section-heading">
+            <div><p className="quiet-label">02 / Explore the field</p><h2 id="field-heading">From surface to intelligence.</h2></div>
+            <p className="contact-heading-description">Robot Skin → Tactile AI → Physical AI<br />Choose a starting point. Follow the evidence.</p>
+          </div>
+          <div className="contact-field-grid">
+            <div className="contact-field-intro">
+              <figure className="contact-material">
+                <Image src="/generated/brand/roboskin-material-cyber-v3.webp"
+                  alt="Concept rendering of flexible tactile sensing layers with fine conductors and a sensor matrix."
+                  fill sizes="(max-width: 800px) 100vw, 40vw" />
+                <figcaption>Material study 02 / AI-generated concept</figcaption>
+              </figure>
+              <h3>What is robot skin?</h3>
+              <p>Robot skin detects contact, pressure, shear and slip across hands, grippers and body surfaces. It gives robots information about physical interaction that vision alone cannot provide.</p>
+              <Link href="/robot-skin" className="contact-text-link">Start with the fundamentals <span aria-hidden="true">↗</span></Link>
             </div>
-
-            <div className="research-lanes">
-              {homeBroadResearchLanes.map((lane, index) => (
-                <article key={lane.title} className="research-lane">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{lane.title}</h3>
-                    <p>{lane.description}</p>
-                    {lane.href && lane.ctaLabel ? <Link href={lane.href}>{lane.ctaLabel} →</Link> : null}
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <nav className="home-topic-rail" aria-label="Robotics intelligence topics">
-              {homeRoboticsIntelligence.map((topic, index) => (
-                <Link key={topic.href} href={topic.href ?? '/research'}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{topic.title}</strong>
-                  <small aria-hidden="true">→</small>
+            <nav className="contact-field-routes" aria-label="Core research topics">
+              {homeKnowledgeMap.map((item, index) => (
+                <Link key={item.title} href={item.href ?? '/research'}>
+                  <span className="contact-route-number">{String(index + 1).padStart(2, '0')}</span>
+                  <span><strong>{item.title}</strong><small>{item.description}</small></span>
+                  <span className="contact-arrow" aria-hidden="true">↗</span>
                 </Link>
               ))}
             </nav>
-
-            <aside className="mt-10 border-l-2 border-[#ff6b3d] bg-white/[0.025] p-6" aria-label="Programming tutorials">
-              <p className="quiet-label">Build with touch data</p>
-              <h3 className="mt-3 text-2xl font-semibold">Start programming with sensor feedback</h3>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--light-muted)]">No robot required for the Python exercise: inspect synthetic tactile CSV data, generate plots and trace contact events. Then explore the ROS 2 message and replay walkthrough.</p>
-              <Link href="/robotics-programming" className="mt-4 inline-block text-sm font-semibold text-[#ff6b3d] underline underline-offset-4">Explore the programming learning path →</Link>
-            </aside>
-
-            <div id="latest-research" className="mt-14 md:mt-20">
-              <aside className="mb-10 border-l-2 border-[#ff6b3d] bg-white/40 p-6" aria-label="RoboSkin research in progress">
-                <p className="quiet-label">RoboSkin Working Papers / Research in progress</p>
-                <h3 className="mt-3 text-2xl font-semibold">Interaction as the Interface</h3>
-                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--light-muted)]">When should a robot probe before acting? Read our research proposal, inspect its synthetic decision benchmark, and follow the next study.</p>
-                <p className="mt-3 text-xs text-[var(--light-muted)]">Version 0.2 · Not peer reviewed · No physical-robot evaluation</p>
-                <div className="mt-4 flex flex-wrap gap-5 text-sm font-semibold text-[#b84623]">
-                  <Link href="/papers/interaction-as-the-interface" className="underline underline-offset-4">Explore the proposal →</Link>
-                  <Link href="/papers" className="underline underline-offset-4">All working papers →</Link>
-                </div>
-              </aside>
-              <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
-                <div>
-                  <p className="quiet-label">Latest source-backed updates</p>
-                  <h3 className="mt-3 text-3xl font-semibold md:text-5xl">Newest robotics research briefs</h3>
-                </div>
-                <Link href="/research" className="editorial-link">Browse all research →</Link>
-              </div>
-              <div className="latest-research-grid">
-                {latestResearchSignals.map((signal) => (
-                  <article key={signal.href} className="research-brief-card">
-                    <div className="research-brief-meta">
-                      <span>{signal.label}</span>
-                      <time dateTime={signal.date}>{signal.date}</time>
-                    </div>
-                    <h4>{signal.title}</h4>
-                    <p>{signal.excerpt}</p>
-                    <div className="topic-chips">
-                      {signal.technicalFocus.slice(0, 3).map((topic) => <span key={topic}>{topic}</span>)}
-                    </div>
-                    <Link href={signal.href}>Read update →</Link>
-                  </article>
-                ))}
-              </div>
-            </div>
           </div>
+          <nav className="home-topic-rail" aria-label="Robotics intelligence topics">
+            {homeRoboticsIntelligence.map((topic, index) => (
+              <Link key={topic.href} href={topic.href ?? '/research'}><span>{String(index + 1).padStart(2, '0')}</span><strong>{topic.title}</strong><small aria-hidden="true">↗</small></Link>
+            ))}
+          </nav>
         </div>
       </section>
 
-      <section className="deferred-section py-12 md:py-16">
-        <div className="container-shell">
-          <div className="brand-section-rule border-white/20">
-            <div>
-              <p className="brand-section-number">02 / Signal to action</p>
-              <h2 className="brand-section-title mt-5">Track the tactile AI stack with source-like entries</h2>
-              <p className="section-copy mt-6">
-                Research notes and resource entries organize the robot skin category around tactile sensors, e-skin
-                architectures, stack maps, reader questions, and public reference paths.
-              </p>
-              <div className="mt-7 border-l border-[#ff6b3d] pl-5">
-                <p className="quiet-label">{manifesto.title}</p>
-                <p className="mt-3 max-w-lg text-lg leading-relaxed text-[#f3efe5]">{manifesto.summary}</p>
-                <Link href="/applications" className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
-                  Read the application context →
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <div className="deferred-section mt-10">
-                <TactileStackMap layers={tactileAiStack} heroVisual={authorityHeroVisual} />
-              </div>
-            </div>
-          </div>
+      <section className="contact-section container-shell" aria-labelledby="working-paper-heading">
+        <div className="contact-paper">
+          <div className="contact-paper-index"><p className="quiet-label">RoboSkin Working Papers</p><span aria-hidden="true">WP—01</span><Link href="/papers">All working papers ↗</Link></div>
+          <div className="contact-paper-copy"><p className="contact-paper-status">Research in progress / Version 0.2</p><h2 id="working-paper-heading">Interaction as<br />the Interface.</h2><p>When should a robot probe before acting? Explore our research proposal and its synthetic decision benchmark.</p><p className="contact-paper-boundary">Not peer reviewed · No physical-robot evaluation</p><Link href="/papers/interaction-as-the-interface" className="contact-text-link">Explore the proposal <span aria-hidden="true">↗</span></Link></div>
+          <ol className="contact-paper-method" aria-label="Working paper materials"><li><span>01</span><strong>Read the proposal</strong><small>Versioned manuscript</small></li><li><span>02</span><strong>Inspect the experiment</strong><small>Synthetic decision benchmark</small></li><li><span>03</span><strong>Check the boundaries</strong><small>Methods & limitations</small></li></ol>
         </div>
       </section>
 
-      <section className="editorial-light">
-        <div className="deferred-section py-12 md:py-16">
-          <div className="container-shell">
-            <div className="mb-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-              <div>
-                <p className="brand-section-number">03 / Research atlas</p>
-                <h2 className="brand-section-title mt-5">Find the right robot skin research route</h2>
-              </div>
-              <div className="lg:pt-10">
-                <p className="section-copy">
-                  Use this research map to move from definitions to papers, technology evaluation, references, library
-                  pages, and source-submission paths.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
-                  <Link href="/faq" className="editorial-link">Robot skin FAQ</Link>
-                  <Link href="/resources" className="editorial-link">View RoboSkin library</Link>
-                  <Link href="/research-index" className="editorial-link">Compare the research index</Link>
-                  <Link href="/technology" className="editorial-link">Explore tactile AI technology</Link>
-                  <Link href="/applications" className="editorial-link">Explore humanoid robot skin use cases</Link>
-                  <Link href="/guides/tactile-sensor-benchmark-robot-manipulation" className="editorial-link">
-                    Compare tactile sensors
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <AuthorityIndex groups={homeAuthorityLinkGroups} />
-
-            <div className="mt-16 grid gap-8 border-t border-[#171714]/25 pt-8 lg:grid-cols-[0.78fr_1.22fr]">
-              <div>
-                <span className="eyebrow">Physical AI answer route</span>
-                <h2 className="mt-5 text-3xl font-semibold md:text-5xl">
-                  Physical AI needs robot skin, tactile AI, and contact feedback
-                </h2>
-                <p className="section-copy mt-5">
-                  In the RoboSkin context, Physical AI means physical-world AI systems that need robot skin, tactile AI,
-                  contact feedback, pressure, slip, and tactile sensing. The homepage is the broad research map; the
-                  Physical AI page is the canonical definition route.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <Link href="/physical-ai" className="editorial-link">Read Physical AI →</Link>
-                  <Link href="/guides/tactile-feedback-for-physical-ai" className="editorial-link">Map tactile feedback →</Link>
-                  <Link href="/physical-ai-touch" className="editorial-link">Trace touch data →</Link>
-                </div>
-              </div>
-              <div className="border-t border-[#171714]/25">
-                {homePhysicalAiSignals.map((signal, index) => (
-                  <article key={signal.title} className="grid gap-3 border-b border-[#171714]/25 py-5 md:grid-cols-[44px_0.48fr_1fr]">
-                    <span className="font-mono text-xs text-[#5e5951]">{String(index + 1).padStart(2, '0')}</span>
-                    <div>
-                      <h3 className="text-lg font-semibold">{signal.title}</h3>
-                      {signal.href && signal.ctaLabel ? (
-                        <Link href={signal.href} className="mt-3 inline-flex text-sm font-semibold text-[#9f351d]">
-                          {signal.ctaLabel} →
-                        </Link>
-                      ) : null}
-                    </div>
-                    <p className="text-sm leading-relaxed text-[#514c45]">{signal.description}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
+      <section className="contact-section contact-directory container-shell" aria-labelledby="directory-heading">
+        <div className="contact-section-heading"><div><p className="quiet-label">03 / Research desk</p><h2 id="directory-heading">Go a layer deeper.</h2></div><Link href="/resources" className="contact-text-link">View RoboSkin library <span aria-hidden="true">↗</span></Link></div>
+        <div className="contact-tool-row">
+          <div><span className="quiet-label">Hands-on learning</span><h3>Build with touch data.</h3><p>Start with a Python tactile-data exercise. Then explore ROS 2 messages, calibration and replay.</p></div>
+          <Link href="/robotics-programming" className="btn-secondary">Open the learning path <span aria-hidden="true">↗</span></Link>
         </div>
+        <details className="contact-fold">
+          <summary><span>01</span><h3>How AI becomes robot action</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body"><p className="section-copy">Artificial intelligence supplies perception, prediction, reasoning, and action policies. Robotics supplies the sensors, controllers and physical feedback.</p><Link href="/ai-robotics" className="contact-text-link">Open the AI and robotics field guide ↗</Link><AiRobotClosedLoop stages={homeAiRobotLoop} /></div>
+        </details>
+        <details className="contact-fold">
+          <summary><span>02</span><h3>Find the right robot skin research route</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body"><AuthorityIndex groups={homeAuthorityLinkGroups} /><nav className="contact-utility-links" aria-label="Research utilities"><Link href="/glossary">Open the glossary ↗</Link><Link href="/technology">Explore tactile AI technology ↗</Link><Link href="/research-index">Search the research index ↗</Link><Link href="/contact?requestType=research">Submit source ↗</Link></nav></div>
+        </details>
+        <details className="contact-fold">
+          <summary><span>03</span><h3>Physical AI needs robot skin, tactile AI, and contact feedback</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body"><p className="section-copy">In the RoboSkin context, Physical AI means physical-world AI systems that use sensing, reasoning and control to act. Touch connects those actions to contact, pressure and slip.</p><nav className="contact-utility-links" aria-label="Physical AI reading routes"><Link href="/physical-ai">Read Physical AI ↗</Link><Link href="/guides/tactile-feedback-for-physical-ai">Map tactile feedback ↗</Link><Link href="/physical-ai-touch">Trace touch data ↗</Link><Link href="/applications">Explore humanoid robot skin use cases ↗</Link></nav></div>
+        </details>
+        <details className="contact-fold">
+          <summary><span>04</span><h3>Robotics research pulse</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body contact-watch"><div><p className="quiet-label">Track humanoid robots, Physical AI, embodied AI, and robot manipulation</p><h4>{homeResearchWatch.title}</h4><p>{homeResearchWatch.summary}</p><p>{homeResearchWatch.relevance}</p><small>Reviewed {homeResearchWatch.reviewedAt} · Source date {homeResearchWatch.sourceDate}</small></div><div className="contact-utility-links"><a href={homeResearchWatch.sourceUrl} target="_blank" rel="noreferrer">{homeResearchWatch.sourceLabel} ↗</a><Link href={homeResearchWatch.reviewUrl}>{homeResearchWatch.reviewLabel} ↗</Link></div></div>
+        </details>
+        <details className="contact-fold">
+          <summary><span>05</span><h3>Short answers to common robot skin and tactile AI questions</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body"><DirectAnswerSection answers={homeRobotSkinFaq} /><Link href="/faq" className="contact-text-link">More questions & answers ↗</Link></div>
+        </details>
+        <ResearchResourceActions context="home" />
+        <div className="contact-editorial-note"><p>Independent research. Traceable sources. Clear limitations.</p><Link href="/editorial-policy">Our editorial standards ↗</Link><Link href="/contact?requestType=research">Submit research context ↗</Link></div>
       </section>
-
-      <section className="deferred-section py-12 md:py-16">
-        <div className="container-shell">
-          <div className="mb-10 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
-            <div>
-              <p className="brand-section-number">04 / Direct answers</p>
-              <h2 className="brand-section-title mt-5">Short answers to common robot skin and tactile AI questions</h2>
-            </div>
-            <p className="section-copy lg:pt-10">
-              Direct-answer coverage supports readers and answer engines without turning source boundaries into product claims.
-            </p>
-          </div>
-          <DirectAnswerSection answers={homeRobotSkinFaq} />
-        </div>
-      </section>
-
-      <section className="editorial-light">
-        <div className="deferred-section py-12 md:py-16">
-          <div className="container-shell">
-            <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <p className="brand-section-number">05 / Field guides</p>
-                <h2 className="mt-5 max-w-4xl text-3xl font-semibold md:text-5xl">
-                  Open tools, maps, and references for the robot skin category
-                </h2>
-                <p className="section-copy mt-5">
-                  Use these public resources to navigate category research, stack maps, references, and source-backed learning paths.
-                </p>
-              </div>
-              <Link href="/resources" className="editorial-link">View library →</Link>
-            </div>
-            <FeaturedAssetCovers assets={featuredIndustryAssets} compact />
-          </div>
-        </div>
-      </section>
-
-      <section className="deferred-section pb-20 pt-8">
-        <div className="container-shell">
-          <div className="border-y border-white/15 py-10 md:py-16">
-            <div className="grid gap-10 xl:grid-cols-[0.72fr_1.28fr] xl:items-start">
-              <div>
-                <span className="eyebrow">Research, glossary, or correction path</span>
-                <h2 className="mt-5 max-w-3xl text-3xl font-semibold md:text-5xl">
-                  Build the category around robot skin, tactile AI, and Physical AI touch
-                </h2>
-                <p className="mt-5 max-w-2xl text-[#b9b3a7]">
-                  Start with the public research notes, suggest a source, or send a correction when a claim needs better support.
-                </p>
-                <Link href="/contact?requestType=research" className="mt-6 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
-                  Submit research context →
-                </Link>
-              </div>
-              <ConversionPathPanel />
-            </div>
-            <p className="mt-8 text-sm text-[#7e7a72]">
-              Direct inquiries:{' '}
-              <a className="text-[#ff6b3d] underline decoration-white/30 underline-offset-4" href={`mailto:${site.contact.primaryEmail}`}>
-                {site.contact.primaryEmail}
-              </a>
-            </p>
-            <nav aria-label="Research utilities" className="mt-6 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6 text-sm">
-              <Link href="/glossary" className="text-[#b9b3a7] hover:text-white">Open the glossary</Link>
-              <Link href="/resources" className="text-[#b9b3a7] hover:text-white">View RoboSkin library</Link>
-              <Link href="/technology" className="text-[#b9b3a7] hover:text-white">Explore tactile AI technology</Link>
-              <Link href="/research" className="text-[#b9b3a7] hover:text-white">Browse research briefs</Link>
-              <Link href="/contact?requestType=research" className="text-[#ff6b3d] hover:text-white">Submit source</Link>
-            </nav>
-          </div>
-        </div>
-      </section>
-      <div className="container-shell pb-14"><ResearchResourceActions context="home" /></div>
-    </>
+    </div>
   );
 }
