@@ -1,0 +1,29 @@
+{
+  "release": "Interaction as the Interface v0.2",
+  "date": "2026-09-27",
+  "status": "Research proposal; not peer reviewed",
+  "evidence": "Analytical example and synthetic decision benchmark only. No physical-robot evaluation.",
+  "preparation": "Prepared for RoboSkin.ai with AI assistance; research authorship not assigned.",
+  "files": [
+    {
+      "path": "interaction-as-the-interface-v0.2.pdf",
+      "bytes": 573517,
+      "sha256": "c6f1357bfeae838e9c01a1971204bc2c81b981bc27020e3cc4119267812957de"
+    },
+    {
+      "path": "interaction-as-the-interface-v0.2.tex",
+      "bytes": 50405,
+      "sha256": "9cd292b3fc9e723fad7329be9e53a5472ee7ae366cef99c2fb218e6905099eea"
+    },
+    {
+      "path": "roboskin-interaction-reproduction-v0.2.zip",
+      "bytes": 64653,
+      "sha256": "3be14b063f419210e9d992cdbc50b606fb57ea24b4976d8ebf46974c2a4ef1a8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7511,
+      "sha256": "d4f65881b44ea6719598df0d3275a90e7c185efd4b3d7e52959e0cb347933b53"
+    }
+  ]
+}

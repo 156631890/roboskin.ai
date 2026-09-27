@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { inspectWorkingPaper } from './lib/working-paper-contract.mjs';
 
 const canonicalOrigin = 'https://roboskin.ai';
 const base = new URL(process.argv[2] ?? canonicalOrigin);
@@ -134,7 +135,36 @@ for (const absoluteUrl of protectedUrls) {
   const response = await fetchOk(pathname);
   const contentType = response.headers.get('content-type') ?? '';
   if (!contentType.includes('text/html')) throw new Error(`${pathname} did not return HTML`);
-  validateHtml(await response.text(), pathname, redirectTarget ?? pathname);
+  const html = await response.text();
+  const jsonLd = validateHtml(html, pathname, redirectTarget ?? pathname);
+  const paper = inspectWorkingPaper(html, jsonLd, pathname);
+  if (paper.errors.length) throw new Error(`${pathname}: ${paper.errors.join('; ')}`);
+  const releaseFiles = new Map();
+  for (const download of paper.downloads) {
+    const fileResponse = await fetchOk(download);
+    const file = Buffer.from(await fileResponse.arrayBuffer());
+    if (!file.length || (fileResponse.headers.get('content-type') ?? '').includes('text/html')) {
+      throw new Error(`${download} returned an empty file or an HTML fallback`);
+    }
+    if (download.endsWith('.pdf') && file.subarray(0, 4).toString('ascii') !== '%PDF') throw new Error(`${download} is not a PDF`);
+    if (download.endsWith('.zip') && file.readUInt32LE(0) !== 0x04034b50) throw new Error(`${download} is not a ZIP archive`);
+    if (download.endsWith('.tex') && !file.toString('utf8').includes('\\documentclass')) throw new Error(`${download} is not a LaTeX source`);
+    releaseFiles.set(download, file);
+  }
+  const manifestPath = paper.downloads.find((download) => download.endsWith('/manifest.json'));
+  if (manifestPath) {
+    const manifest = JSON.parse(releaseFiles.get(manifestPath).toString('utf8'));
+    if (!manifest.release?.endsWith(' v0.2') || !Array.isArray(manifest.files) || manifest.files.length !== releaseFiles.size - 1) {
+      throw new Error(`${manifestPath} does not describe the linked working-paper release`);
+    }
+    for (const entry of manifest.files) {
+      const download = new URL(entry.path, new URL(manifestPath, base)).pathname;
+      const file = releaseFiles.get(download);
+      if (!file || file.length !== entry.bytes || createHash('sha256').update(file).digest('hex') !== entry.sha256) {
+        throw new Error(`${download} differs from its release manifest`);
+      }
+    }
+  }
 }
 
 const [indexResponse, csvResponse, jsonResponse, graphResponse, llmsResponse, llmsFullResponse, organizationsResponse, robotsResponse, vlaModelsResponse, worldModelsResponse, crawlerRobotsResponse, rssResponse, newsSitemapResponse, deploymentResponse, keyResponse] = await Promise.all([

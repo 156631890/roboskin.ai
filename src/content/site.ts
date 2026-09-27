@@ -236,6 +236,7 @@ export const footerNavigation = [
       { href: '/research-index', label: 'Research Index' },
       { href: '/datasets', label: 'Datasets' },
       { href: '/research', label: 'Research Briefs' },
+      { href: '/papers', label: 'Working Papers' },
       { href: '/news', label: 'News' },
     ],
   },
