@@ -72,7 +72,7 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8231924120348302"
           crossOrigin="anonymous"
         />
-        <meta name="theme-color" content="#070c12" />
+        <meta name="theme-color" content="#181917" />
       </head>
       <body
         className={`${manrope.variable} ${ibmPlexMono.variable} antialiased flex flex-col min-h-screen`}

@@ -93,25 +93,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="latest-research" className="contact-section container-shell" aria-labelledby="latest-heading">
-        <div className="contact-section-heading">
-          <div><p className="quiet-label">01 / Research dispatch</p><h2 id="latest-heading">At the edge of touch.</h2></div>
-          <div className="contact-section-aside"><p>Newest robotics research briefs</p><Link href="/news">All news <span aria-hidden="true">↗</span></Link><Link href="/research">Browse research briefs <span aria-hidden="true">↗</span></Link></div>
-        </div>
-        <div className="contact-dispatches">
-          {latestResearchSignals.map((signal, index) => (
-            <article key={signal.href} className="contact-dispatch" data-lead={index === 0 ? 'true' : undefined}>
-              <div className="contact-dispatch-meta"><span>{signal.label}</span><time dateTime={signal.date}>{signal.date}</time></div>
-              <h3><Link href={signal.href}>{signal.title}</Link></h3>
-              <p>{signal.excerpt}</p>
-              {index === 0 && signal.image ? (
-                <Link href={signal.href} className="contact-dispatch-image" aria-label={`View illustration and sources: ${signal.title}`}>
-                  <Image src={signal.image} alt="" fill sizes="(max-width: 800px) 100vw, 46vw" />
-                </Link>
-              ) : null}
-              <div className="contact-dispatch-foot"><span>{signal.technicalFocus[0]}</span><Link href={signal.href} aria-label={`Read: ${signal.title}`}>Read brief <span aria-hidden="true">↗</span></Link></div>
-            </article>
-          ))}
+      <section id="latest-research" className="contact-section contact-dispatch-section" aria-labelledby="latest-heading">
+        <div className="container-shell">
+          <div className="contact-section-heading">
+            <div><p className="quiet-label">01 / Research dispatch</p><h2 id="latest-heading">At the edge of touch.</h2></div>
+            <div className="contact-section-aside"><p>Newest robotics research briefs</p><Link href="/news">All news <span aria-hidden="true">↗</span></Link><Link href="/research">Browse research briefs <span aria-hidden="true">↗</span></Link></div>
+          </div>
+          <div className="contact-dispatches">
+            {latestResearchSignals.map((signal, index) => (
+              <article key={signal.href} className="contact-dispatch" data-lead={index === 0 ? 'true' : undefined}>
+                <div className="contact-dispatch-meta"><span>{signal.label}</span><time dateTime={signal.date}>{signal.date}</time></div>
+                <h3><Link href={signal.href}>{signal.title}</Link></h3>
+                <p>{signal.excerpt}</p>
+                {index === 0 && signal.image ? (
+                  <Link href={signal.href} className="contact-dispatch-image" aria-label={`View illustration and sources: ${signal.title}`}>
+                    <Image src={signal.image} alt="" fill sizes="(max-width: 800px) 100vw, 46vw" />
+                  </Link>
+                ) : null}
+                <div className="contact-dispatch-foot"><span>{signal.technicalFocus[0]}</span><Link href={signal.href} aria-label={`Read: ${signal.title}`}>Read brief <span aria-hidden="true">↗</span></Link></div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -2,22 +2,22 @@
 
 :root {
   color-scheme: dark;
-  --bg: #070c12;
-  --bg-soft: #0e1822;
-  --panel: #12202b;
-  --panel-strong: #192b38;
-  --panel-border: rgba(173, 205, 222, 0.21);
-  --text: #edf3f6;
-  --text-soft: #bbc9d4;
-  --text-muted: #95aab9;
-  --paper: #e7eef0;
-  --paper-strong: #f4f7f8;
-  --ink: #12232c;
-  --light-muted: #50616b;
-  --light-accent: #155e68;
-  --primary: #9de8eb;
-  --secondary: #9de8eb;
-  --accent: #9de8eb;
+  --bg: #181917;
+  --bg-soft: #20211f;
+  --panel: #252622;
+  --panel-strong: #2d2e29;
+  --panel-border: #494a43;
+  --text: #f2f0e9;
+  --text-soft: #cecec5;
+  --text-muted: #aaa99f;
+  --paper: #f0eee7;
+  --paper-strong: #faf9f5;
+  --ink: #252722;
+  --light-muted: #5f6157;
+  --light-accent: #695334;
+  --primary: #d2c3a5;
+  --secondary: #d2c3a5;
+  --accent: #d2c3a5;
   --max-width: 1480px;
   --radius-lg: 4px;
   --radius-md: 2px;
