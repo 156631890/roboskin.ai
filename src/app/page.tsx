@@ -294,6 +294,16 @@ export default function Home() {
             </aside>
 
             <div id="latest-research" className="mt-14 md:mt-20">
+              <aside className="mb-10 border-l-2 border-[#ff6b3d] bg-white/40 p-6" aria-label="RoboSkin research in progress">
+                <p className="quiet-label">RoboSkin Working Papers / Research in progress</p>
+                <h3 className="mt-3 text-2xl font-semibold">Interaction as the Interface</h3>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--light-muted)]">When should a robot probe before acting? Read our research proposal, inspect its synthetic decision benchmark, and follow the next study.</p>
+                <p className="mt-3 text-xs text-[var(--light-muted)]">Version 0.2 · Not peer reviewed · No physical-robot evaluation</p>
+                <div className="mt-4 flex flex-wrap gap-5 text-sm font-semibold text-[#b84623]">
+                  <Link href="/papers/interaction-as-the-interface" className="underline underline-offset-4">Explore the proposal →</Link>
+                  <Link href="/papers" className="underline underline-offset-4">All working papers →</Link>
+                </div>
+              </aside>
               <div className="mb-7 flex flex-wrap items-end justify-between gap-5">
                 <div>
                   <p className="quiet-label">Latest source-backed updates</p>

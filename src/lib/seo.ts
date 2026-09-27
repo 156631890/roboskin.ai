@@ -19,6 +19,7 @@ export type SeoRoute = {
   changeFrequency: 'weekly' | 'monthly';
   index: boolean;
   breadcrumbs: string[];
+  breadcrumbPaths?: string[];
 };
 
 export const pageSeo: Record<string, SeoRoute> = {
@@ -27,7 +28,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
       'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-09-26',
+    updated: '2026-09-27',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -148,7 +149,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Tactile Robotics Research: Paper Reviews & Evidence',
     description:
       'Read tactile robotics paper reviews covering sensors, robot skin, manipulation, and learning. Compare methods, reported results, limitations, and primary sources.',
-    updated: '2026-09-22',
+    updated: '2026-09-27',
     priority: 0.78,
     changeFrequency: 'weekly',
     index: true,
@@ -164,6 +165,30 @@ export const pageSeo: Record<string, SeoRoute> = {
     changeFrequency: 'monthly',
     index: true,
     breadcrumbs: ['Home', 'Research Index'],
+  },
+  '/papers': {
+    path: '/papers',
+    title: 'Embodied AI Working Papers & Research Proposals',
+    description:
+      'Explore RoboSkin.ai working papers on embodied AI, with versioned manuscripts, reproducible synthetic benchmarks, evidence limits, and research proposals.',
+    updated: '2026-09-27',
+    priority: 0.72,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Research', 'Working Papers'],
+    breadcrumbPaths: ['/', '/research', '/papers'],
+  },
+  '/papers/interaction-as-the-interface': {
+    path: '/papers/interaction-as-the-interface',
+    title: 'Interaction as the Interface: Embodied AI Working Paper',
+    description:
+      'Read version 0.2 of an embodied AI research proposal, with a Bayesian probe benchmark, downloadable source and results, and explicit limits on its evidence.',
+    updated: '2026-09-27',
+    priority: 0.68,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Research', 'Working Papers', 'Interaction as the Interface'],
+    breadcrumbPaths: ['/', '/research', '/papers', '/papers/interaction-as-the-interface'],
   },
   '/organizations': {
     path: '/organizations',
@@ -475,7 +500,7 @@ export function buildBreadcrumbJsonLd(path: keyof typeof pageSeo | string) {
   const route = pageSeo[path];
   if (!route) throw new Error(`Missing page SEO configuration for ${path}`);
   const items = route.breadcrumbs.map((name, index) => {
-    const itemPath = index === 0 ? '/' : route.path;
+    const itemPath = route.breadcrumbPaths?.[index] ?? (index === 0 ? '/' : route.path);
 
     return {
       '@type': 'ListItem',

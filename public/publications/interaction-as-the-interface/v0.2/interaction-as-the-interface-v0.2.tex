@@ -1,0 +1,373 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,longtable}
+\usepackage{xcolor,hyperref,enumitem}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+\setlist{nosep,leftmargin=*}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\given}{\,\vert\,}
+\title{Interaction as the Interface:\\A Belief-Space Framework for\\Generalist Embodied Intelligence}
+\author{Prepared for RoboSkin.ai\\\small AI-assisted research manuscript}
+\date{27 September 2026 \quad $\cdot$ \quad Version 0.2: audited proposal}
+\begin{document}
+\maketitle
+\begin{center}
+\small\textbf{Manuscript type:} method proposal with an analytical and synthetic decision benchmark.\\
+The full architecture has not been trained or evaluated on physical robots.\\
+AI-assisted research proposal; not ready for submission as a validated robotics method.
+\end{center}
+
+\begin{abstract}
+Generalist robots must choose actions while important physical properties remain hidden. A grasp can appear visually correct yet fail because of friction, compliance, or an unobserved contact configuration. We propose an action--outcome interface that couples a history-conditioned belief, an embodiment-specific action adapter, and a predictive distribution over task-relevant consequences. The organizing hypothesis is that this interface can make probing, manipulation, and recovery share a learnable decision structure across related embodiments. We specify the data contract, learning objectives, belief-space controller, and conditions under which the transfer claim is meaningful. A binary contact-state model establishes an exact criterion: if the current best action succeeds with probability $M$, a symmetric diagnostic probe has accuracy $p$, and its normalized cost is $c$, the optimal value is $\max\{M,p-c\}$ under stated assumptions. Thus information acquisition is useful only when it changes a decision enough to repay its cost. A reproducible Monte Carlo benchmark checks this criterion and includes informative, redundant, uninformative, and incorrectly calibrated observations. This benchmark validates the decision calculation, not the proposed neural architecture or real-world robot performance. We conclude with a concrete comparative evaluation protocol against history-conditioned policies, latent world-model control, and belief-space active sensing. The intended contribution is a falsifiable integration hypothesis and an explicit interface for testing it, rather than a claim that general intelligence or a new scaling law has already been demonstrated.
+\end{abstract}
+
+\section{Introduction}
+The scientific lesson of \emph{Attention Is All You Need} is that a simple architectural proposal becomes consequential through a precise specification, comparative experiments, and reproducible evidence \cite{vaswani}. A comparable proposal for robotics must explain what changes in the learning problem, which capabilities should improve, and which observations would refute the proposal. A memorable slogan alone cannot establish a robot-learning paradigm.
+
+Robot interaction differs from passive prediction because actions change the observations that will become available. Consider a gripper about to lift an object whose friction and damage tolerance are unknown. Increasing grip force may prevent slip but damage a fragile object. A small preliminary motion may reveal the contact regime before the irreversible part of the task. The value of that motion lies partly in the subsequent decision it enables. A controller that predicts a single likely future while ignoring alternative contact states can be confidently wrong.
+
+Vision--language--action (VLA) models provide a powerful route to broad task coverage \cite{rt2,openvla,pi0}. Their architecture does not prohibit memory, feedback, uncertainty estimation, or exploratory actions. A sufficiently expressive history-conditioned policy can implement a belief-space strategy implicitly. Our question is narrower: \emph{under finite interaction data and compute, does making action-conditioned consequences and belief updates explicit improve adaptation and recovery in partially observed manipulation?}
+
+The proposed interface treats an interaction as a linked record of what was observed, what action was requested, what the embodiment actually executed, and what measurable consequences followed. A shared model predicts consequences in a declared reference frame and at a declared time horizon. An embodiment adapter expresses feasible commands; a belief state retains alternatives compatible with the available history. A controller compares ordinary task actions and diagnostic actions by their expected downstream utility. New feedback closes the loop.
+
+This manuscript makes three bounded contributions:
+\begin{enumerate}
+\item An implementable action--outcome data and model interface that keeps sensor timing, missing observations, commanded actions, executed actions, and embodiment calibration explicit.
+\item An exact binary decision benchmark, with a derivation and reproducible numerical validation, that identifies when probing helps, does nothing useful, or causes harm through cost or miscalibration.
+\item A controlled experimental protocol that distinguishes the benefit of the interface from additional tactile information, more interaction time, greater model capacity, or standard active sensing.
+\end{enumerate}
+The individual ingredients have substantial precedent. We do not claim that belief states, world models, active perception, action abstraction, or cross-embodiment adapters are new. The central architectural hypothesis remains untested.
+
+\section{Relationship to Existing Work}
+Large robot policies and heterogeneous robot datasets motivate sharing representations across tasks and embodiments \cite{rt2,openvla,octo,oxe,pi0,hpt}. World models support learning and planning through predicted consequences \cite{dreamer,vjepa2}. Predictive representations, interactive perception, and dual control explain why an action may have both instrumental and informational value \cite{psr,interactive,dualcontrol}. Tactile observations and action-conditioned multimodal prediction have already supported physical grasping and contact-rich manipulation \cite{calandra,lee}. These are complementary foundations, not deficiencies that every existing method necessarily exhibits.
+
+\begin{table}[ht]
+\small
+\centering
+\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}XX@{}}
+\toprule
+Research direction & Established contribution & Question tested here \\
+\midrule
+VLA and generalist policies & Broad conditioned action generation; transferable visual and language representations. & Does an explicit belief/outcome interface help after matching history, sensors, data, and compute? \\
+World models & Action-conditioned future prediction and imagined control. & Do task-relevant consequence targets and explicit observation branches improve contact decisions? \\
+Dual control / active sensing & Actions can improve both the task state and knowledge. & Can a shared learned interface realize this structure across calibrated embodiments? \\
+Cross-embodiment learning & Shared backbones with heterogeneous sensor/action handling. & Which consequence variables actually transfer, and which need local recalibration? \\
+Tactile manipulation & Contact observations, tactile representations, and closed-loop control. & When is a tactile probe decision-relevant rather than merely informative? \\
+\bottomrule
+\end{tabularx}
+\caption{The proposed study must outperform appropriate combinations of these ideas, not only a passive policy with fewer observations.}
+\end{table}
+
+Several precedents are especially close. V-JEPA 2 uses action-conditioned latent prediction for robot planning \cite{vjepa2}. Calandra et al. predict candidate grasp-adjustment outcomes using vision and touch, and explicitly discuss probing objects \cite{calandra}. Lee et al. learn contact-rich control representations through action-conditioned sensory prediction \cite{lee}. Plan2Explore selects informative behavior through imagined world-model trajectories \cite{plan2explore}. Task-relevant representation learning without pixel reconstruction also has a bisimulation-based precedent \cite{bisim}.
+
+Heterogeneous Pre-trained Transformers separate embodiment-specific processing from a shared trunk \cite{hpt}; UMI demonstrates the importance of relative action interfaces and latency matching \cite{umi}. Predictive state representations characterize state through future observable tests \cite{psr}. Recent VLA work also studies generalization to unfamiliar environments \cite{pi05}. Accordingly, our interface should be regarded as a specific design and evaluation contract until stronger evidence establishes a distinct algorithmic advantage. The literature review accompanying this manuscript records what was verified at the source and the limits of that verification; it is a targeted review, not an exhaustive search through all 2026 work.
+
+A subsequent submission audit identified further direct precedents. GoBOED optimizes experimental designs for downstream decision objectives and analyzes task-irrelevant parameter directions \cite{goboed}. Robust experimental design already studies ambiguity in information-gain objectives \cite{robusteig}, while distributionally robust POMDPs address uncertain transition--observation models \cite{drpomdp}. Thus decision-relevant probing, model ambiguity, or a worst-case objective alone would not establish novelty for an extension of this proposal. A finite-calibration study would need a distinct information structure, nontrivial guarantee, computational result, or new empirical finding, supported by explicit comparisons.
+
+\section{Problem Formulation}
+\subsection{History, embodiment, and hidden physical state}
+Let a robot embodiment be described by $e$: kinematics, actuator limits, controller type, sensor extrinsics, units, and calibration parameters. This descriptor need not identify every physical property. Let $s_t$ denote the task-relevant physical state and $\xi$ denote uncertain, relatively persistent parameters such as friction or compliance. With low-level command $a_t$ and observation $o_t$,
+\begin{align}
+s_{t+1} &\sim P_e(s_{t+1}\given s_t,a_t,\xi),\\
+o_t &\sim O_e(o_t\given s_t,\xi).
+\end{align}
+The available history is $h_t=(g,e,o_{0:t},a_{0:t-1},m_{0:t},\Delta t_{0:t})$, where $g$ is a task specification, $m_t$ is a modality/validity mask, and $\Delta t$ records elapsed time. This history must use acquisition timestamps rather than assuming synchronized camera and tactile samples. The ideal belief is
+\begin{equation}
+b_t(s,\xi)=P(s_t=s,\xi\given h_t).
+\end{equation}
+In practice, an encoder $q_\phi(s,\xi\given h_t)$ approximates it with samples or a distributional representation. A deterministic feature vector is not automatically a calibrated posterior. Ensemble disagreement is also not automatically posterior uncertainty. The history also includes previous outcome labels if they were actually available online; labels supplied only by an offline evaluator are excluded from policy inputs.
+
+The environment supplies observed consequences $y_{t+1}$, such as object displacement, slip occurrence, maximum measured contact force, task termination, or recovery success. Every consequence has an operational definition, reference frame, time interval, and missing-label mask. Variables not observed in a dataset cannot be treated as ground truth merely because a model predicts them.
+
+\subsection{Action abstraction and transfer scope}
+Let $\kappa_t$ denote known controller and calibration state, including any safety-filter memory. The complete decision state is $B_t=(b_t,\kappa_t,e,g)$. We require this state to contain the information used by the action adapter; otherwise a Bellman recursion in belief alone would be unjustified. The shared controller proposes an abstract command $u_t\in\mathcal U$. An embodiment adapter produces a feasible low-level command,
+\begin{equation}
+a_t=D_e(u_t,B_t).
+\end{equation}
+For manipulation, $u_t$ could contain a Cartesian end-effector increment, desired gripper aperture, a bounded compliance setting, and a duration. These fields are not universal across walking, flight, dexterous hands, and mobile manipulation. A valid transfer experiment must first establish a common task/action subset and known coordinate transforms. If one robot cannot realize an action, the adapter reports infeasibility; clipping a command silently changes the experiment.
+
+For the initial generative contract, $a^{\mathrm{exec}}$ denotes the control command selected and recorded before the transition, not a contact-dependent trajectory measured afterward. We assume $a^{\mathrm{exec}}$ is conditionally independent of $(s_t,\xi)$ given $(B_t,u_t)$. A stochastic command adapter is described by $K_e(a^{\mathrm{exec}}\given u,B)$; a deterministic adapter concentrates this distribution at $D_e(u,B)$. Planning integrates over the command before it is known. Once the actual command is recorded, filtering conditions on it. Supervised transition learning also uses the recorded command and its duration. If low-level contact feedback makes execution informative about hidden state, this independence assumption fails: a joint model of state, execution telemetry, and observations is required. Post-action telemetry must not be treated as an exogenous intervention without that model.
+
+We distinguish transferring a representation, adapting a sensor encoding, transferring a controller, and executing a previously unseen task. Success at the first two does not establish the latter two. Morphology-dependent dynamics remain conditioned on $e$; there is no assumption that all robots have identical consequence distributions.
+
+\section{The Action--Outcome Interface}
+\subsection{A concrete interaction record}
+We represent a transition by
+\begin{equation}
+\mathcal T_t=(g,e,h_t^{\mathrm{ref}},u_t,a_t^{\mathrm{exec}},\Delta t_t,o_{t+1},y_{t+1},m_t,\rho_t),
+\end{equation}
+where $h_t^{\mathrm{ref}}$ points to the preceding synchronized history and $\rho_t$ records data provenance and behavior-policy information. Separating requested from executed actions matters when a low-level safety filter intervenes or a controller saturates. Training only on the requested command would otherwise attribute the resulting transition to an action that never occurred.
+
+\begin{table}[ht]
+\small\centering
+\begin{tabularx}{\linewidth}{@{}p{0.23\linewidth}X@{}}
+\toprule
+Field & Minimum contract \\
+\midrule
+Observation & Sensor ID, acquisition time, validity mask, units, extrinsics, and unprocessed reference where permitted. \\
+Embodiment & Kinematic frame, control mode, command limits, calibration version, and available modalities. \\
+Action & Requested command, executed command or best available telemetry, duration, and intervention flag. \\
+Outcome & Measurable task consequence, time horizon, labeling procedure, and observed/missing flag. \\
+Provenance & Episode/robot/object split IDs, data policy, randomization assignment where used, and any human intervention. \\
+\bottomrule
+\end{tabularx}
+\caption{A minimum data contract. It can be serialized as tokens or tensors; neither serialization alone is claimed as a scientific contribution.}
+\end{table}
+
+\subsection{Predictive model and observation model}
+The shared model predicts a distribution over consequences and future observations:
+\begin{equation}
+p_\theta(y_{t+1:t+H},o_{t+1:t+H}\given B_t,u_{t:t+H-1}).
+\end{equation}
+Observation prediction is needed because the controller must know how future evidence could change the belief. Predicting task reward alone cannot express a diagnostic action's informational effect. Full pixel generation is not required: a calibrated distribution over future contact features may suffice for a particular task. Its sufficiency must be tested, not assumed.
+
+An implementation can use modality encoders, timestamp and embodiment embeddings, a causal sequence backbone, and separate action-conditioned heads for observed consequences and sensor features. Relative poses use a declared object or end-effector frame. Continuous force targets retain physical units after reversible normalization. Binary events use Bernoulli likelihoods; multimodal futures require mixture or sample-based predictions rather than a single averaged contact state.
+
+The consequence summary is admissible only for a declared task family, prediction horizon, and feasible continuation-policy class. Preserving policy rankings alone does not control the magnitude of a probe's predicted gain or its tradeoff with cost. A stronger target is a uniform value approximation $|\widehat V^\pi(B(h))-V^\pi(h)|\leq\epsilon$ over that class and the evaluated histories. If it holds, maximizing the approximate value incurs at most $2\epsilon$ regret relative to the best policy in the same class; this is the standard two-error comparison, not a new representation theorem. Equal one-step success predictions do not establish the condition: two states can look equivalent now but require different later recovery actions. The observation branch and retained history are therefore part of the interface. Neither this uniform bound nor a sufficient learned representation is established in the present work.
+
+\subsection{Belief update}
+Let $y_{t+1}^{\mathrm{on}}$ contain only consequence measurements available online, and let $w_{t+1}=(o_{t+1},y_{t+1}^{\mathrm{on}},\kappa_{t+1})$. Use a joint transition and online-observation kernel $J_e(s',w'\given s,\xi,a,\kappa)$, which can include measurements accumulated during contact. Under the execution-independence restriction above, the update after observing the executed command is
+\begin{equation}
+b_{t+1}(s',\xi)\propto
+\int J_e(s',w_{t+1}\given s,\xi,a_t^{\mathrm{exec}},\kappa_t)b_t(s,\xi)\,ds.
+\end{equation}
+Normalization integrates over $s'$ and $\xi$. With only an endpoint observation, the usual special case factors $J_e$ into the transition $P_e(s'\given s,a,\xi)$ and the observation likelihood $O_e(o'\given s',\xi)$. Planning averages over unobserved execution; filtering conditions on recorded execution. If execution is missing or measured with noise, the update integrates its conditional distribution given the available telemetry. If execution depends on unobserved state, use a joint kernel over next state, execution, and online observations instead of cancelling $K_e$. This is a proposed generative contract, not an implemented or empirically validated filter. An outcome predictor alone does not determine this kernel or its learned approximation. The experiment must verify whether the learned uncertainty reflects hidden-state ambiguity, model error, or both. A narrow predicted distribution after an unfamiliar contact warrants a calibration check; its reliability cannot be inferred from narrowness alone.
+
+\section{Learning Objectives and Data Requirements}
+We train a one-step generative model using only history available before the current executed action. The learned prediction interface receives $B_t$, with $b_t=q_\phi(h_t)$, rather than an unrestricted additional history bypass. A possible joint factorization is
+\begin{align}
+p_\theta(o_{t+1},y_{t+1}\given B_t,a_t^{\mathrm{exec}})
+&=p_\theta(o_{t+1}\given B_t,a_t^{\mathrm{exec}})\nonumber\\
+&\quad\cdot p_\theta(y_{t+1}\given o_{t+1},B_t,a_t^{\mathrm{exec}}).
+\end{align}
+At prediction time the future observation is sampled or integrated out; it is not supplied by an oracle. Conditioning the second factor on it is a joint-model factorization, not permission to use a future measurement for the current action. The primary predictive loss is
+\begin{equation}
+\mathcal L_{\mathrm{pred}}=-\E\log p_\theta(o_{t+1}^{\mathrm{valid}},y_{t+1}^{\mathrm{valid}}\given B_t,a_t^{\mathrm{exec}}).
+\end{equation}
+An initial complete objective is
+\begin{equation}
+\mathcal L=\mathcal L_{\mathrm{pred}}+
+\lambda_b\mathcal L_{\mathrm{belief}}+
+\lambda_\pi\mathcal L_{\mathrm{imit}},\qquad
+\mathcal L_{\mathrm{imit}}=-\E\log\pi_\psi(u_t\given h_t,g,e).
+\label{eq:loss}
+\end{equation}
+Use the imitation term only where an abstract command is logged or can be reconstructed unambiguously. Auxiliary weights are selected on validation tasks. If observation and outcome likelihoods are reweighted separately, disclose the change as a composite objective rather than an exact joint likelihood.
+
+Missing dimensions are marginalized under the model; any factorized mask approximation and missingness assumptions must be stated. Marginal heads alone do not identify observation--outcome dependence needed for planning. Observation targets can use fixed or separately validated sensory features; an unconstrained target encoder could collapse and make prediction artificially easy. Multi-step rollouts recursively apply the one-step model, proposed actions, and simulated belief updates. Training directly on a logged future action sequence can leak future information when those actions were chosen after later observations; that shortcut is excluded.
+
+$\mathcal L_{\mathrm{belief}}$ is implementation-dependent. A concrete first study can discretize simulated friction and compliance into a declared finite contact-regime set, learn a sensory likelihood per regime, update categorical belief weights, and supervise them using simulator labels. This restriction makes the first implementation explicit; it does not establish that real contact has only finitely many regimes. With only real observations, a variational filtering objective needs a documented generative model and an identifiability discussion. These alternatives are not interchangeable evidence. Calibration is evaluated with held-out proper scoring rules, reliability plots, and predictive coverage; an expected-calibration-error statistic is not itself a substitute for likelihood training or a safety guarantee.
+
+Demonstrations initialize behavior but rarely cover informative mistakes and recovery. Additional data should include bounded diagnostic actions, failed grasps, perturbations, and interventions. Logs must retain the policy or assignment mechanism. Calling a predictive distribution ``causal'' requires coverage and identification assumptions: an observed action may correlate with unrecorded operator knowledge. Randomized probes within a safe, specified operating set provide a cleaner test of action effects. Outside observed support, a counterfactual prediction is an extrapolation.
+
+The first implementable study should keep the backbone and data volume fixed, add the consequence and filtering losses, then evaluate the controller. Larger models and web-scale pretraining should follow only if the smaller comparison shows a benefit. This ordering prevents scale from hiding a weak interface hypothesis.
+
+\section{Control Through Expected Consequences}
+Let $z'=(a^{\mathrm{exec}},w')$ be the complete newly observed online record. Under the stated independence restriction, its planning distribution factors as $K_e(a^{\mathrm{exec}}\given u,B)p(w'\given B,a^{\mathrm{exec}})$. For a finite horizon, belief-space decision making has the form
+\begin{equation}
+V_t(B)=\max_{u\in\mathcal U_e(B)}\left[
+\bar r_t(B,u)-\bar c_t(B,u)+\gamma\E_{z'\given B,u}V_{t+1}(\tau(B,u,z'))\right],
+\label{eq:bellman}
+\end{equation}
+where $\bar r_t$ and $\bar c_t$ are conditional expectations of the declared transition reward and execution cost, and the terminal value $V_T$ is fixed by the task. The map $\tau$ returns $(b',\kappa',e,g)$ using the complete online record, and $\mathcal U_e(B)$ is the currently admissible action set. Offline-only labels may supervise reward prediction or evaluation but are excluded from $z'$ and the online posterior. The expectation includes uncertain execution before it is observed. A diagnostic action can be selected even with no immediate task reward because future observations change the later action. Equation~\ref{eq:bellman} expresses standard belief-space control, not a new Bellman equation. The filter parameterization, execution model, planner, and auxiliary belief objective remain implementation choices that must be fixed and evaluated before this proposal constitutes a complete algorithm.
+
+We deliberately avoid treating observation entropy reduction as a universal intrinsic reward. A sensor can reveal irrelevant texture while leaving the best grasp unchanged. A probe's decision value is the change in optimal downstream utility after accounting for its physical cost, delay, and state change. Practical planning can sample candidate short action sequences and observation branches, update approximate beliefs, and replan after executing only the first action. The branching cost must be measured against matched-compute alternatives.
+
+\textbf{Proposed controller.}
+\begin{enumerate}
+\item Timestamp and validate incoming modalities; update the belief and the current calibration state.
+\item Generate feasible task and diagnostic action candidates through the embodiment adapter.
+\item Predict task consequences and observation branches; reject commands violating independently enforced operating limits.
+\item Compare expected downstream utility, including probe cost, against the best admissible action without probing.
+\item Execute one action, record the action actually applied, observe the outcome, and replan.
+\end{enumerate}
+
+For a damage variable $d$, a learned constraint such as
+$\Prob_\theta(d>d_{\max}\given b,u)\leq\delta$ is only a model-based estimate. It becomes a physical guarantee only under additional justified assumptions. Force and workspace limits should be enforced independently where possible, and a probe itself can be hazardous. Near an unfamiliar regime, stopping or requesting a reset may be preferable to maximizing information.
+
+The interface does not specify a universally valid control rate. High-level prediction may run more slowly than an existing low-level servo. Experiments must report observation age, end-to-end command latency, replanning frequency, and the behavior when a deadline is missed. No latency claim is made here.
+
+\section{An Exact Diagnostic-Interaction Benchmark}
+\subsection{Model and assumptions}
+Consider hidden state $S\in\{0,1\}$ and two final actions $A\in\{0,1\}$. The reward is $1$ if $A=S$ and $0$ otherwise. One interpretation is choosing between two contact strategies under visually ambiguous physical conditions. It is an abstract classification decision, not a validated friction or damage simulator.
+
+The current belief is $b=\Prob(S=1\given h)$ and the best immediate success probability is $M=\max\{b,1-b\}$. An optional binary probe $X$ has symmetric conditional accuracy $p\in[1/2,1]$: $\Prob(X=S\given S,h)=p$. In particular, the channel is not inferred from marginal accuracy alone. The probe leaves $S$ unchanged, has known normalized cost $c\geq0$, and is followed by exactly one final decision. Signal likelihoods are known and correctly calibrated. Reward, cost, and success are reported separately. These restrictions are essential to the result.
+
+\textbf{Proposition 1 (one-step value of a symmetric probe).}
+Under the stated model, the expected success probability after a mandatory probe and optimal final action is
+\begin{equation}
+A(b,p)=\max\{b,1-b,p\}=\max\{M,p\}.
+\end{equation}
+If probing is optional, the optimal net utility is
+\begin{equation}
+V^*(b,p,c)=\max\{M,p-c\}.
+\label{eq:voi}
+\end{equation}
+A strictly beneficial probe satisfies $p-M>c$. At equality either choice is optimal; we choose not to probe.
+
+\textbf{Proof.}
+For each signal, choose the state/action with the larger unnormalized posterior mass. Thus
+\begin{equation}
+A(b,p)=\max\{bp,(1-b)(1-p)\}
++\max\{b(1-p),(1-b)p\}.
+\end{equation}
+For $b\leq1-p$ both decisions favor state $0$, so $A=1-b$. For $1-p\leq b\leq p$, the decision follows the signal and $A=p$. For $b\geq p$, both favor state $1$, so $A=b$. Therefore $A=\max\{M,p\}$. Comparing the unprobed value $M$ with $A-c$ gives Equation~\ref{eq:voi}. $\square$
+
+This is a standard Bayesian value-of-information calculation specialized to an auditable example. It is not a new general theorem of embodied intelligence. A history-conditioned policy can implement exactly this decision rule without an explicit belief module if it has learned the relevant sufficient statistic.
+
+\subsection{Illustrative consequences}
+If vision supplies no information, $M=0.5$. With $p=0.9$ and $c=0.1$, probing raises expected success from $0.5$ to $0.9$ and net utility to $0.8$. If vision already gives $M=0.95$, the same probe cannot improve the optimal final decision and reduces utility by its cost. An uninformative signal with $p=0.5$ is also worthless at positive cost. These cases jointly refute the rule ``more sensing is always better.''
+
+For asymmetric error costs, success probability is an insufficient objective. Let $L_{10}$ be the loss of choosing $1$ when $S=0$ and $L_{01}$ the loss of choosing $0$ when $S=1$. The immediate Bayes risk is
+\begin{equation}
+R(b)=\min\{(1-b)L_{10},bL_{01}\}.
+\end{equation}
+One must compute expected posterior risk under the actual signal model and compare the reduction with probe cost. A change in the risk-neutral optimum does not establish compliance with a separate hard safety constraint. State-changing probes and repeated probing require a transition model and the full sequential decision problem.
+
+\section{Reproducible Synthetic Evaluation}
+\label{sec:synthetic}
+\textbf{Scope.} The companion executable evaluates known-model policies in the binary decision problem. No neural network, language model, robot simulator, or physical robot is trained or run. Its role is to verify the decision rule, establish negative controls, and make the proposed evaluation discipline concrete.
+
+The hidden state is balanced. A visual cue has symmetric accuracy $q\in\{0.5,0.75,0.95\}$. Conditional on $S$, the informative probe has accuracy $p=0.9$ and is independent of the visual cue. The probe cost is $c=0.1$. Policies are: visual-only MAP; mandatory informative probe followed by Bayes MAP; selective probing by Equation~\ref{eq:voi}; an uninformative probe with its true likelihood; a dummy probe with the same cost but no new information; and an oracle with access to $S$. The oracle is an upper bound, not a competing learnable model.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+& \multicolumn{2}{c}{$q=0.50$} & \multicolumn{2}{c}{$q=0.75$} & \multicolumn{2}{c}{$q=0.95$}\\
+Policy & Success & Utility & Success & Utility & Success & Utility\\
+\midrule
+Visual MAP & .50 & .50 & .75 & .75 & .95 & .95\\
+Always informative probe & .90 & .80 & .90 & .80 & .95 & .85\\
+Selective informative probe & .90 & .80 & .90 & .80 & .95 & .95\\
+Uninformative / dummy probe & .50 & .40 & .75 & .65 & .95 & .85\\
+Oracle state & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00\\
+\bottomrule
+\end{tabular}
+\caption{Exact expected values from the specified model, not measured robot results. The mandatory uninformative and dummy probes also make identical sampled decisions in this implementation because both use the visual cue to break ties.}
+\label{tab:exact}
+\end{table}
+
+\textbf{Numerical validation.} We executed 20 random seeds (2026092700--2026092719), with 10,000 episodes per seed and visual-accuracy condition: 600,000 episode--condition evaluations in total. These reuse 200,000 base random scenarios across three $q$ conditions and are not 600,000 independent samples. Policies share the same underlying episode variables. Table~\ref{tab:mc} reports measured Monte Carlo values. Intervals use Student's $t$ distribution with 19 degrees of freedom across seed-wise paired means; they quantify sampling error in this artificial distribution only. The released output records parameters, seeds, code hash, and per-seed metrics. An independent rerun reproduced all five numerical CSV outputs byte for byte; this checks reproducibility, not the physical validity of the stipulated model.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}rrrrl@{}}
+\toprule
+$q$ & Visual utility & Selective utility & Difference & 95\% MC interval\\
+\midrule
+0.50 & 0.500350 & 0.799110 & 0.298760 & [0.295565, 0.301955]\\
+0.75 & 0.749655 & 0.799110 & 0.049455 & [0.046493, 0.052417]\\
+0.95 & 0.950395 & 0.950395 & 0.000000 & [0.000000, 0.000000]\\
+\bottomrule
+\end{tabular}
+\caption{Executed Monte Carlo results, not physical-robot measurements. At $q=0.95$ the policies coincide on every episode, hence the zero-width paired interval.}
+\label{tab:mc}
+\end{table}
+
+Within a fixed $q$ condition, posterior confidence is constant: selection probes in every episode for $q=0.50$ and $0.75$, and skips every episode for $q=0.95$. This benchmark does not demonstrate episode-dependent adaptation. The mandatory-probe utility at $q=0.95$ is 0.850395, exactly 0.1 lower because its added charge is deterministic. The dummy probe matches the abstract action budget and charge, not measured wall-clock time.
+
+An exact parameter sweep contains 7,803 settings with $p$ from 0.50 to 1.00 and $c$ from 0.00 to 0.50 in increments of 0.01, for the three $q$ values. It evaluates formulas, not extra sampled trials. Explicit signal-branch enumeration at 5,151 $(b,p)$ pairs agrees with the closed form to a maximum floating-point error of $1.11\times10^{-16}$. These are analytical consistency checks rather than independent validation of the model assumptions.
+
+The implementation uses a $10^{-12}$ comparison tolerance and skips gains within that tolerance of the cost. This convention does not change the reported grid or main results, but is not identical to a strict comparison for every real-valued input. The reported intervals are per-comparison Monte Carlo intervals, not a simultaneous family-wise coverage guarantee.
+
+\textbf{Calibration stress test.} We invert a synthetic sensor-token encoding, without introducing a second robot. Reusing the old sensor likelihood makes informative-looking evidence misleading. At $q=0.50$ and $0.75$, the incorrectly calibrated policy has expected success 0.10 and utility 0.00; measured values are 0.100890 and 0.000890. Supplying the known inverse mapping restores the original calculation. This tests dependence on calibration metadata; it is not evidence of learned zero-shot transfer across robots. Learning the calibration from a limited adaptation set is a separate proposed experiment.
+
+\textbf{Interpretation.} Improvement over visual-only MAP demonstrates the value of an additional useful observation under the stipulated model. Improvement over a dummy probe rules out merely spending an extra step as the explanation. Matching the selective rule with a conventional belief-space baseline would be expected: the toy problem cannot distinguish the proposed architecture from established active sensing. Its most important negative result is that selective sensing confers no utility advantage over the no-probe policy when existing evidence is already sufficient.
+
+\section{A Falsifiable Robot Evaluation Protocol}
+\subsection{Research hypotheses}
+The full architecture should be evaluated through explicit hypotheses, not an expectation that all modules will help:
+\begin{description}
+\item[H1: consequence supervision.] At equal data, sensors, backbone capacity, and compute, observed-consequence prediction improves generalization to held-out contact conditions compared with the same policy trained only with action supervision.
+\item[H2: decision-relevant probing.] Under partial observability, belief-space action selection improves task utility over both no-probe and fixed-probe policies. The benefit should shrink when the relevant state is directly observable or the probe is uninformative.
+\item[H3: calibrated embodiment adaptation.] A shared backbone plus a small calibrated adapter reduces adaptation data relative to retraining, while matching predictive coverage and task utility. Merely correcting a known sensor sign is insufficient evidence.
+\item[H4: composition.] Held-out combinations of known objects, contact modes, and task goals improve beyond matched baselines without leakage from near-duplicate demonstrations.
+\end{description}
+
+\subsection{Tasks and controlled splits}
+Start with contact-rich manipulation rather than claiming universal robotics coverage. A feasible staged study contains grasp-and-lift with unknown contact conditions, insertion under bounded pose uncertainty, and manipulation requiring recovery after a small controlled disturbance. The first stage can use a simulator whose state and sensor noise are accessible, but its contact-model limitations must be documented. Physical validation uses instrumented objects, established force limits, and reset criteria.
+
+Create train, validation, and test splits by physical object identity, material condition, task composition, and embodiment. Hold out entire collection sessions and near-duplicate trajectories. Log sensor failures and delayed observations. Compare familiar and unfamiliar sensor/actuator configurations only within a declared feasible task set. Reserve at least one morphology/configuration exclusively for adaptation evaluation; do not call a held-out camera view a new embodiment.
+
+The initial feasibility pilot should estimate variance and failure rates. Before confirmatory evaluation, fix the practically meaningful effect size and calculate the required number of independently reset trials for the primary utility contrast using its pilot variance. As a separate illustration for the secondary success metric, detecting a success-rate change from $0.60$ to $0.75$ requires roughly 152 independent trials per arm under a two-sided normal approximation with $\alpha=0.05$ and power $0.80$. This is a planning calculation, not a completed experiment; clustering by object, training seed, and robot generally increases the requirement. Small batches of demonstrations must not be treated as independent physical trials.
+
+\subsection{Baselines and resource controls}
+Use at least the following comparisons:
+\begin{enumerate}
+\item A strong history-conditioned VLA or generalist policy with the same visual, proprioceptive, and tactile inputs; permit it to learn probes.
+\item The same backbone with the outcome/filtering objectives but direct policy action selection, isolating representation learning from planning.
+\item Action-conditioned world-model control with the same model budget and execution interface.
+\item A conventional active-sensing or dual-control implementation with the same observations, dynamics model, and action set; this is the closest conceptual baseline.
+\item The complete proposed system, with individually ablated consequence targets, posterior representation, adaptive probe selection, and embodiment calibration.
+\end{enumerate}
+Tune methods on the same validation set and report tuning effort. Match training transitions, real interaction time, action horizon, backbone parameters, and inference budget as far as possible. If a method exceeds the budget, report a performance--compute curve rather than attributing all improvement to its architecture. A visual-only baseline is useful for sensor value but cannot isolate architectural value.
+
+\subsection{Outcomes and failure analysis}
+The primary outcome is preregistered task utility incorporating success, task time, sensing cost, and task-specific damage penalties. Also report success separately, maximum measured force, damage events, aborts, recovery rate, predictive log loss or Brier score, calibration, and end-to-end latency distributions. Publish the weight choices so the utility cannot conceal a safety or speed regression.
+
+Use independent training seeds and confidence intervals that respect episode and object/session clustering. Predefine the primary contrast and handle multiple comparisons explicitly. Report failures by cause: missed contact, timing error, invalid action abstraction, miscalibration, planning timeout, or unsupported extrapolation. Include tests where a tactile modality disappears, becomes delayed, or conveys no useful information. Evaluate a non-probing optimal task to detect needless exploratory behavior.
+
+\subsection{What would falsify the proposal?}
+Before testing, define a minimum meaningful improvement for each hypothesis and a confidence-interval or equivalence criterion. A nonsignificant difference alone does not refute a hypothesis; it may indicate inadequate power. Evidence against H1 would include an upper confidence bound below the required transfer benefit after matching history and resources. H2 is challenged if adaptive sensing fails the predefined utility criterion against a tuned fixed-probe strategy, or if miscalibration prevents useful probe selection. H3 is challenged if measured adaptation cost offers no meaningful advantage or predictive coverage cannot be restored. H4 is challenged if the predefined composition benefit disappears after strict deduplication. A matched dual-control method with equivalent performance would narrow the contribution to an implementation/data interface, not establish a new control principle.
+
+\section{What ``Emergence'' Would Mean Here}
+We use ``emergence'' only as a proposed measurement question. A candidate capability is success on held-out compositions requiring a useful probe followed by an appropriate recovery, despite training demonstrations containing only the constituent behaviors. Establishing such a capability requires leakage-controlled evaluations and suitable baselines. It does not require a mathematically discontinuous transition.
+
+Measure performance across model size, interaction data, and task diversity while holding evaluation protocols fixed. Plot continuous task utility, calibration, and success with uncertainty intervals. Thresholded success can make smooth improvement look abrupt. Therefore this manuscript predicts neither a critical parameter count nor a scaling exponent, and supplies no evidence of an emergent general robot intelligence. A scaling claim would require a separate multi-scale empirical study.
+
+\section{Limitations and Reproducibility}
+The principal limitation is empirical: the integrated neural framework has not been implemented or evaluated here. The synthetic benchmark assumes known symmetric sensor likelihoods, conditionally independent cues, a state-preserving single probe, and a balanced state prior in the reported simulations. Real contact can be continuous, irreversible, delayed, correlated, and hazardous. These differences can invalidate both the estimated belief and the probe decision.
+
+The interface itself may not be the right abstraction. Task-relevant outcomes can omit information needed for future tasks. Rich observation prediction may become computationally expensive; short-horizon consequence heads may overfit current task labels. Embodiment adapters can hide morphology-specific complexity rather than remove it. Reliable posterior calibration under distribution shift remains difficult. A strong recurrent policy can learn the same decision structure, making an explicit architecture unnecessary in some regimes.
+
+The accompanying release contains the standalone manuscript source, verified-source notes, a Chinese research explanation, executable experiment code, exact and sampled results, and run metadata. Synthetic results are identified as such throughout. Source checking is not independent replication of cited papers. Before external submission, authors should review every claim and citation, establish a distinct contribution, complete evidence appropriate to the chosen claims, and follow the target venue's disclosure requirements. A narrowly scoped theoretical paper need not include hardware, but would require a substantive theoretical result beyond the known-model calculation provided here.
+
+\section{Conclusion}
+An action--outcome interface offers a concrete way to organize the relationship between prediction and physical intervention. Its central test is whether explicit consequence distributions and belief updates improve learning and control when compared with equally informed, equally resourced alternatives. The exact diagnostic benchmark establishes when information is useful for a decision and when it is redundant or too costly. Turning the proposed interface into a significant result now requires measured transfer, recovery, calibration, and compute evidence on real embodied tasks.
+
+\appendix
+\section{Implementation Blueprint for the First Study}
+\begin{enumerate}
+\item Fix one action space and one simulator/task family. Define every outcome target and its observation horizon before collecting data.
+\item Collect ordinary demonstrations and bounded randomized probes, including unsuccessful outcomes. Preserve executed actions, interventions, timestamps, and calibration versions.
+\item Train the shared baseline and the proposed model with identical encoders and data splits. Use the same modality masks and missing-data treatment.
+\item Validate forward prediction before adding planning. Test whether predicted uncertainty separates ambiguous states and detects unfamiliar contacts.
+\item Add a small finite set of diagnostic actions and compare direct, fixed-probe, information-bonus, and downstream-value selection at matched budgets.
+\item Introduce one held-out embodiment/configuration with a documented adaptation budget. Repeat calibration and failure tests before physical evaluation.
+\end{enumerate}
+This sequence is an implementation plan, not an assertion that software for the full framework is already included. The supplied executable covers only the binary benchmark.
+
+\section{Units, Timing, and Reporting Contract}
+State whether force means a taxel reading, calibrated normal force, estimated resultant force, or externally measured ground truth. Report torque, displacement, and velocity in declared units and frames. Store acquisition time, arrival time, and command-application time separately. Specify whether success is an independently observed task outcome or a human label, and preserve inter-rater uncertainty when relevant. Report the rate of dropped or stale measurements. A nominal sensor rate is not the end-to-end feedback-loop rate.
+
+\begin{thebibliography}{99}
+\bibitem{vaswani} A. Vaswani et al. \emph{Attention Is All You Need}. NeurIPS, 2017. \url{https://arxiv.org/abs/1706.03762}.
+\bibitem{rt2} A. Brohan et al. \emph{RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control}. 2023. \url{https://arxiv.org/abs/2307.15818}.
+\bibitem{openvla} M. J. Kim et al. \emph{OpenVLA: An Open-Source Vision-Language-Action Model}. 2024. \url{https://arxiv.org/abs/2406.09246}.
+\bibitem{octo} Octo Model Team et al. \emph{Octo: An Open-Source Generalist Robot Policy}. 2024. \url{https://arxiv.org/abs/2405.12213}.
+\bibitem{oxe} Open X-Embodiment Collaboration et al. \emph{Open X-Embodiment: Robotic Learning Datasets and RT-X Models}. 2023. \url{https://arxiv.org/abs/2310.08864}.
+\bibitem{pi0} K. Black et al. \emph{$\pi_0$: A Vision-Language-Action Flow Model for General Robot Control}. 2024. \url{https://arxiv.org/abs/2410.24164}.
+\bibitem{hpt} L. Wang et al. \emph{Scaling Proprioceptive-Visual Learning with Heterogeneous Pre-trained Transformers}. 2024. \url{https://arxiv.org/abs/2409.20537}.
+\bibitem{dreamer} D. Hafner et al. \emph{Dream to Control: Learning Behaviors by Latent Imagination}. 2019. \url{https://arxiv.org/abs/1912.01603}.
+\bibitem{vjepa2} M. Assran et al. \emph{V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning}. 2025. \url{https://arxiv.org/abs/2506.09985}.
+\bibitem{psr} M. L. Littman, R. S. Sutton, and S. Singh. \emph{Predictive Representations of State}. Advances in Neural Information Processing Systems 14, 2001. \url{https://proceedings.neurips.cc/paper_files/paper/2001/hash/1e4d36177d71bbb3558e43af9577d70e-Abstract.html}. Author list checked against the original PDF.
+\bibitem{dualcontrol} E. D. Klenske and P. Hennig. \emph{Dual Control for Approximate Bayesian Reinforcement Learning}. 2015 preprint. \url{https://arxiv.org/abs/1510.03591}.
+\bibitem{interactive} J. Bohg et al. \emph{Interactive Perception: Leveraging Action in Perception and Perception in Action}. IEEE Transactions on Robotics 33, 1273--1291, 2017. \url{https://doi.org/10.1109/TRO.2017.2721939}.
+\bibitem{calandra} R. Calandra et al. \emph{More Than a Feeling: Learning to Grasp and Regrasp using Vision and Touch}. 2018. \url{https://arxiv.org/abs/1805.11085}.
+\bibitem{lee} M. A. Lee et al. \emph{Making Sense of Vision and Touch: Self-Supervised Learning of Multimodal Representations for Contact-Rich Tasks}. 2018 preprint; ICRA 2019. \url{https://arxiv.org/abs/1810.10191}.
+\bibitem{plan2explore} R. Sekar et al. \emph{Planning to Explore via Self-Supervised World Models}. 2020. \url{https://arxiv.org/abs/2005.05960}.
+\bibitem{bisim} A. Zhang et al. \emph{Learning Invariant Representations for Reinforcement Learning without Reconstruction}. 2020 preprint; ICLR 2021. \url{https://arxiv.org/abs/2006.10742}.
+\bibitem{umi} C. Chi et al. \emph{Universal Manipulation Interface: In-The-Wild Robot Teaching Without In-The-Wild Robots}. 2024. \url{https://arxiv.org/abs/2402.10329}.
+\bibitem{pi05} Physical Intelligence, K. Black et al. \emph{$\pi_{0.5}$: a Vision-Language-Action Model with Open-World Generalization}. 2025. \url{https://arxiv.org/abs/2504.16054}.
+\bibitem{goboed} J. Go, X. Qian, and B.-J. Yoon. \emph{Goal-driven Bayesian Optimal Experimental Design for Robust Decision-Making Under Model Uncertainty}. 2026 preprint. \url{https://arxiv.org/abs/2605.26093}.
+\bibitem{robusteig} J. Go and T. Isaac. \emph{Robust Expected Information Gain for Optimal Bayesian Experimental Design Using Ambiguity Sets}. UAI, 2022. \url{https://arxiv.org/abs/2205.09914}.
+\bibitem{drpomdp} H. Nakao, R. Jiang, and S. Shen. \emph{Distributionally Robust Partially Observable Markov Decision Process with Moment-based Ambiguity}. 2019 preprint; journal publication 2021. \url{https://arxiv.org/abs/1906.05988}.
+\end{thebibliography}
+\end{document}

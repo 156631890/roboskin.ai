@@ -2,6 +2,7 @@ import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { getNewsletterConfig } from '../src/lib/newsletter-config.mjs';
 import { validateDatasetDistributions } from './lib/dataset-structured-data.mjs';
+import { inspectWorkingPaper } from './lib/working-paper-contract.mjs';
 
 const canonicalOrigin = 'https://roboskin.ai';
 const root = process.cwd();
@@ -103,6 +104,11 @@ for (const absoluteUrl of protectedUrls) {
   if (!/<meta name="robots" content="index, follow"/i.test(html)) failures.push(`${pathname}: missing indexable robots metadata`);
   const jsonLd = parseJsonLd(html, pathname, failures);
   failures.push(...validateDatasetDistributions(jsonLd).map(error => `${pathname}: ${error}`));
+  const paper = inspectWorkingPaper(html, jsonLd, pathname);
+  failures.push(...paper.errors.map(error => `${pathname}: ${error}`));
+  for (const download of paper.downloads) {
+    if (!(await exists(path.join(out, download.slice(1))))) failures.push(`${pathname}: missing exported download ${download}`);
+  }
   if (/www\.roboskin\.ai|https:\/\/[^"'<]*\.vercel\.app/i.test(`${canonical ?? ''}${JSON.stringify(jsonLd)}`)) {
     failures.push(`${pathname}: canonical or JSON-LD leaks a non-apex host`);
   }

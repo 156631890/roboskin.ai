@@ -11,6 +11,13 @@ export const metadata: Metadata = buildPageMetadata('/research');
 
 const researchRouteCards = [
   {
+    label: 'Research in progress',
+    title: 'RoboSkin Working Papers',
+    text: 'Explore research proposals developed for RoboSkin.ai, with versioned manuscripts, reproducible experiments, and clear evidence status.',
+    href: '/papers',
+    ctaLabel: 'Browse working papers',
+  },
+  {
     label: 'Source boundary',
     title: 'Public sources stay visible',
     text: 'Each note keeps source attribution separate from RoboSkin.ai interpretation.',
@@ -89,6 +96,9 @@ export default function ResearchPage() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#research-notes" className="btn-primary w-full sm:w-auto">
                 Browse paper reviews
+              </Link>
+              <Link href="/papers" className="btn-secondary w-full sm:w-auto">
+                RoboSkin Working Papers
               </Link>
               <Link href="/research/robot-skin-papers" className="btn-secondary w-full sm:w-auto">
                 Browse robot skin papers
