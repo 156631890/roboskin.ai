@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import PageHeroVisual from '@/components/PageHeroVisual';
-import { pageVisuals } from '@/content/site';
 import { blogPosts } from '@/lib/blog-data';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
@@ -77,7 +75,7 @@ export default function ResearchPage() {
   return (
     <>
       <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/research'), buildBreadcrumbJsonLd('/research')])} />
-      <section className="py-14 md:py-20">
+      <section className="research-library-intro py-14 md:py-20">
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_1.02fr] lg:items-center">
           <div>
             <span className="eyebrow">Research</span>
@@ -93,7 +91,7 @@ export default function ResearchPage() {
               Public notes use conservative language. Application-specific performance, durability, and integration claims still need
               source-backed, application-specific evidence.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="research-library-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#research-notes" className="btn-primary w-full sm:w-auto">
                 Browse paper reviews
               </Link>
@@ -116,7 +114,12 @@ export default function ResearchPage() {
           </div>
 
           <div className="grid gap-4">
-            <PageHeroVisual visual={pageVisuals.resources} priority />
+            <figure className="contact-material">
+              <Image src="/generated/brand/roboskin-material-cyber-v3.webp"
+                alt="Concept rendering of flexible electronic skin layers, with a sensor matrix and fine conductors."
+                fill priority sizes="(max-width: 1023px) 100vw, 54vw" />
+              <figcaption>Material study 02 / AI-generated concept</figcaption>
+            </figure>
             <dl className="grid gap-3 sm:grid-cols-4">
               {researchStats.map((item) => (
                 <div key={item.label} className="signal-panel p-4">
@@ -129,8 +132,10 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      <section className="pb-14 md:pb-20">
-        <div className="container-shell grid gap-4 md:grid-cols-3">
+      <section className="research-library-notes container-shell" aria-label="Research reading routes">
+        <details className="contact-fold">
+          <summary><span>↳</span><h2>About the research, sources &amp; related routes</h2><span className="contact-fold-icon" aria-hidden="true" /></summary>
+          <div className="contact-fold-body grid gap-4 md:grid-cols-3">
           {researchRouteCards.map((card) => (
             <article key={card.title} className="signal-panel p-6">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{card.label}</p>
@@ -143,13 +148,22 @@ export default function ResearchPage() {
               ) : null}
             </article>
           ))}
-        </div>
+          </div>
+        </details>
       </section>
 
       <section id="research-notes" className="pb-20">
-        <div className="container-shell space-y-9">
-          {categoryEntries.map(([category, items]) => (
-            <section key={category} className="scroll-mt-24">
+        <div className="research-review-list container-shell space-y-9">
+          <details className="contact-fold research-topic-picker">
+            <summary><span>↳</span><h2>Browse {categoryEntries.length} research topics</h2><span className="contact-fold-icon" aria-hidden="true" /></summary>
+            <nav className="research-lane-navigation" aria-label="Browse research by topic">
+              <div>{categoryEntries.map(([category, items], index) => (
+                <a key={category} href={`#research-lane-${index + 1}`}>{category}<span>{items.length}</span></a>
+              ))}</div>
+            </nav>
+          </details>
+          {categoryEntries.map(([category, items], index) => (
+            <section key={category} id={`research-lane-${index + 1}`} className="scroll-mt-24">
               <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Research lane</p>
@@ -163,14 +177,14 @@ export default function ResearchPage() {
               <div className="signal-panel overflow-hidden p-0">
                 {items.map((post) => (
                   <article key={post.id} className="grid gap-5 border-b border-white/8 p-5 last:border-b-0 md:grid-cols-[184px_1fr] md:p-6">
-                    <Link href={`/research/${post.id}`} className="relative block aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
+                    <Link href={`/research/${post.id}`} aria-label={`Read: ${post.title}`} className="relative block aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-[#020408]">
                       <Image src={post.image} alt="" fill sizes="184px" className="object-cover transition-transform duration-300 hover:scale-[1.03]" />
                     </Link>
                     <div>
                       <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#8e98a8]">
                         {post.date} / {post.readTime}
                       </p>
-                      <h3 className="mt-3 text-xl font-semibold leading-snug text-white">{post.title}</h3>
+                      <h3 className="mt-3 text-xl font-semibold leading-snug text-white"><Link href={`/research/${post.id}`}>{post.title}</Link></h3>
                       <p className="mt-2 max-w-4xl text-sm leading-relaxed text-[#c8d1de]">{post.excerpt}</p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {post.technicalFocus.slice(0, 4).map((topic) => (
@@ -221,4 +235,3 @@ export default function ResearchPage() {
     </>
   );
 }
-

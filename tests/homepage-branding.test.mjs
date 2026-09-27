@@ -12,8 +12,8 @@ const researchPath = new URL('../src/app/research/page.tsx', import.meta.url);
 const glossaryPath = new URL('../src/app/glossary/page.tsx', import.meta.url);
 const brandVisualAssets = [
   'public/generated/brand/roboskin-brand-board.webp',
-  'public/generated/brand/roboskin-hero-editorial-v2.webp',
-  'public/generated/brand/roboskin-tactile-material-study-v2.webp',
+  'public/generated/brand/roboskin-contact-cyber-v3.webp',
+  'public/generated/brand/roboskin-material-cyber-v3.webp',
 ];
 const authorityVisualAssets = [
   'public/generated/authority/robot-skin-definition.webp',
@@ -47,12 +47,12 @@ test('homepage copy reflects the research map positioning', async () => {
   assert.match(home, /Submit source/);
   assert.match(home, /Submit research context/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
-  assert.match(home, /Track the tactile AI stack with source-like entries/);
-  assert.match(home, /Tactile AI stack map/);
-  assert.match(home, /Humanoid robot skin/);
+  assert.match(home, /From surface to intelligence/);
+  assert.match(home, /AI-generated concept/);
+  assert.match(home, /homeKnowledgeMap\.map/);
   assert.match(home, /Robotics research pulse/);
   assert.match(home, /Track humanoid robots, Physical AI, embodied AI, and robot manipulation/);
-  assert.match(home, /homeBroadResearchLanes/);
+  assert.match(home, /homeRoboticsIntelligence\.map/);
   assert.match(home, /homeResearchWatch/);
   assert.match(home, /Newest robotics research briefs/);
   assert.match(home, /homeBrandAssets/);

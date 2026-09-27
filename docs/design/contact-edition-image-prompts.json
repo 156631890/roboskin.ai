@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-27",
+  "method": "Built-in image_gen.imagegen",
+  "images": [
+    {
+      "asset": "public/generated/brand/roboskin-contact-cyber-v3.webp",
+      "original": "output/design/roboskin-contact-cyber-v3-source.png",
+      "use": "Homepage concept hero, clearly labelled as AI-generated; not research evidence",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 84640,
+      "prompt": "Use case: stylized-concept\nAsset type: premium editorial website hero image for RoboSkin.ai, an independent robotics and tactile sensing research publication.\nPrimary request: A beautifully art-directed close-up of a precision robotic hand discovering touch. A single articulated titanium index finger, with anatomically coherent joints and a translucent smoked elastomer tactile fingertip, gently presses a taut, thin black flexible sensing membrane. A fine regular cyan microdot sensor matrix on the membrane bends subtly around the contact. The rest of the robotic hand recedes naturally into shadow. At the point of contact a small restrained icy cyan rim of light reveals the deformation, not a magical energy sphere.\nScene/backdrop: completely dark blue-black studio, near #070c12, no scenery. Hand descends diagonally from upper right toward lower middle; tactile surface occupies the lower third. Wide landscape 3:2 framing, subject predominantly in right two-thirds, generous dark negative space on left for website headline.\nStyle/medium: high-end industrial design still life, physically based photographic-quality concept rendering, editorial art direction, sophisticated restrained cyberpunk, believable machining and material physics, sharp microtexture, excellent tonal detail.\nMaterials: brushed titanium, black anodized joints, subtle fine braided cable, translucent silicone contact pad, flexible carbon-black sensing surface with precise etched dot grid.\nLighting: sculptural softbox edge light, deep navy shadows, narrow cyan edge highlights, tiny muted warm light at contact only. Rich shadow detail and crisp silhouette.\nConstraints: no typography, no numbers, no logos, no text, no watermarks, no UI, no labels. Not a real product or experiment. Avoid human faces, humanoid heads, extra fingers, generic neon city, purple gradients, excessive glow, holograms, particles, floating icons and visual clutter. Produce one polished landscape image."
+    },
+    {
+      "asset": "public/generated/brand/roboskin-material-cyber-v3.webp",
+      "original": "output/design/roboskin-material-cyber-v3-source.png",
+      "use": "Homepage material study, clearly labelled as AI-generated; not a real sample",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 128834,
+      "prompt": "Use case: stylized-concept\nAsset type: editorial chapter image for RoboSkin.ai, an independent tactile robotics research site.\nPrimary request: extreme macro side view of a thin flexible electronic skin specimen, three elegant translucent dark layers curling gently apart at one corner over a graphite studio table. The top layer has an exact fine dot sensor matrix and a subtle patterned flexible conductor beneath it. Thin cyan edge light traces the layers; a single muted amber line separates one layer. It should feel like an exquisite material study in a high-end industrial design journal.\nComposition: landscape 3:2, sculptural ribbon specimen occupies center and right, generous clean blue-black background, tight coherent crop, restrained and quiet. Architectural studio photography style with real material textures, controlled depth of field, crisp focus on layer edges and fine circuit detail.\nLighting and palette: midnight navy, brushed graphite, transparent smoky silicone, pale silver, very limited icy cyan accent. Refined cyberpunk laboratory aesthetic.\nConstraints: concept rendering, not an actual experimental sample. No text, labels, logos, numbers, watermarks, interface, human, glowing blobs, neon city, clutter or magical effects. One image, no collage."
+    }
+  ],
+  "optimization": "Converted generated PNGs to WebP quality 84 via sharp. No visual compositing or retouching; original PNGs retained locally."
+}

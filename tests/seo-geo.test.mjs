@@ -54,7 +54,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
 
   assert.match(home, /Find the right robot skin research route/);
   assert.match(home, /Short answers to common robot skin and tactile AI questions/);
-  assert.match(home, /Direct-answer coverage supports readers and answer engines/);
+  assert.match(home, /<DirectAnswerSection answers=\{homeRobotSkinFaq\} \/>/);
   assert.match(home, /href="\/faq"|href=\{`\/faq/);
   assert.match(home, /href="\/research-index"|href=\{`\/research-index/);
   assert.match(home, /href="\/glossary"|href=\{`\/glossary/);
@@ -83,9 +83,10 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.doesNotMatch(faq, /robots:\s*\{\s*index:\s*false/);
 
   assert.match(globals, /\.deferred-section/);
-  assert.match(home, /className="deferred-section py-12 md:py-16"/);
-  assert.match(home, /className="deferred-section pb-20 pt-8"/);
-  assert.match(home, /className="deferred-section mt-10"/);
+  // Progressive disclosure keeps the full reading routes and FAQ in server-rendered HTML.
+  assert.match(home, /<details className="contact-fold">/);
+  assert.match(home, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} \/>/);
+  assert.match(home, /id="latest-research"/);
   assert.doesNotMatch(home, /hero-copy reveal|className="[^"]*\breveal\b/);
   assert.match(globals, /@keyframes floatUp/);
   assert.match(globals, /\.reveal\s*\{/);
