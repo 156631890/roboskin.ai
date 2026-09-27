@@ -272,7 +272,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI and Physical AI News',
     description:
       'Follow source-backed news on robot skin, tactile AI, electronic skin, tactile sensors, dexterous manipulation, and touch for Physical AI.',
-    updated: '2026-09-26',
+    updated: '2026-09-27',
     priority: 0.72,
     changeFrequency: 'weekly',
     index: true,

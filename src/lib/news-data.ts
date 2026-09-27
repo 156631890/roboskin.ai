@@ -33,6 +33,282 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'da-grd-tactile-grasp-recovery',
+    title: 'DA-GRD uses sparse touch to recover a grasp after the object moves',
+    seoTitle: 'DA-GRD: Tactile Grasp Recovery After Object Motion',
+    seoDescription: 'DA-GRD recovers stale visual grasps with sparse tactile probes. Review its 84.7% simulated lift rate, 60 real trials and planar limits.',
+    excerpt: 'A*STAR, NTU and Tsinghua researchers stop tactile exploration when the remaining object poses support the same grasp. Real hardware reaches 71.7% lift success, but only 38.3% task-conditioned success.',
+    category: 'Tactile grasp recovery',
+    image: '/generated/news/da-grd-tactile-grasp-recovery.png',
+    imageAlt: 'Diagram showing a stale visual grasp, sparse tactile probes and a recovered robot grasp in the DA-GRD pipeline.',
+    imageCaption: 'Original RoboSkin.ai schematic of DA-GRD belief updating and grasp-aware stopping. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'DA-GRD: Decision-Aware Grasp-Relevant Disambiguation for tactile recovery under perception-to-execution mismatches',
+    sourceUrl: 'https://arxiv.org/abs/2609.29065',
+    sources: [
+      { title: 'DA-GRD arXiv v1 submission record', url: 'https://arxiv.org/abs/2609.29065' },
+      { title: 'DA-GRD v1 method, experiments and limitations', url: 'https://arxiv.org/html/2609.29065v1' },
+    ],
+    technicalFocus: ['active tactile exploration', 'grasp recovery', 'touch-based localization', 'robot manipulation'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · no public code verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-27',
+    updated: '2026-09-27',
+    readTime: '7 min read',
+    content: `# DA-GRD uses sparse touch to recover a grasp after the object moves
+
+Researchers from A*STAR's Institute of Advanced Intelligence and Computing, Nanyang Technological University and Tsinghua University released DA-GRD on September 24, 2026. Decision-Aware Grasp-Relevant Disambiguation addresses a specific failure: vision selects a grasp, the object moves before execution, and the robot must recover without another camera observation. The method probes with touch until the remaining object-pose hypotheses support a common executable grasp. [Paper and version record](https://arxiv.org/abs/2609.29065).
+
+## Key takeaways
+
+- In MuJoCo, the principal DA-GRD variant reaches 84.7% physical lift success across ten objects, compared with 63.7% for a fixed 15-scan baseline using the same planar belief representation.
+- Successful simulated episodes use 4.13 probes on average, a reported 72.5% reduction from the fixed 15-probe baselines. Zero-probe successes are included in that average.
+- On a UR5, 60 trials across six objects produce 71.7% lift success but 38.3% task-conditioned success. The gap shows that lifting an object is easier than recovering the originally intended grasp.
+
+## What changed
+
+DA-GRD does not try to reconstruct a complete object pose before acting. It starts from the remembered RGB-D point cloud and task-conditioned grasp produced by a visual-language and AnyGrasp pipeline. When that grasp becomes stale, contact or free-space observations update a weighted 256-particle belief over planar translation and yaw.
+
+Candidate probes approach vertically or horizontally. The selector scores them by how much the expected hit or miss would reduce disagreement among grasps derived from the surviving hypotheses. A grasp-aware stopping rule executes once enough of the belief mass supports a common grasp. This is different from fixed tactile scanning, which spends the same interaction budget whether or not the next touch changes the decision.
+
+## Results under the reported conditions
+
+The simulation applies translations up to 5 cm and yaw changes up to plus or minus 45 degrees to ten rigid objects. Each object has 100 shared perturbation episodes per method. A lift counts as physically successful when the robot raises the target by 5 cm. DA-GRD's main policy reaches 84.7%, versus 9.1% for the unrecovered stale grasp, 21.2% for the original XY-only scan baseline, and 63.7% after that baseline receives the same SE(2) belief. [Full evaluation](https://arxiv.org/html/2609.29065v1#S4).
+
+The stricter task-conditioned measure asks whether the final grasp is also consistent with the grasp originally selected for the task. On that measure, DA-GRD reaches 57.3%, while the adapted fixed-scan baseline reaches 49.2%. A pose-sensitive DA-GRD variant reaches a similar 57.6% but uses 7.70 probes on average, compared with 4.13 for grasp-aware stopping.
+
+The physical setup uses a UR5, a Robotiq 2F-140 gripper, two finger-mounted force-sensitive resistors for lateral contact and a wrist FT300 sensor for vertical contact. Across ten trials on each of six objects, lift success ranges from 60% to 80%; task-conditioned success ranges from 30% to 50%. The overall averages are 71.7% and 38.3%, with 4.20 probes.
+
+## What this means for robotics
+
+RoboSkin analysis: the useful idea is that touch should resolve the action, not necessarily the entire scene. If multiple object poses all imply an acceptable grasp, further localization spends time and risks moving the object without improving the decision. That principle could reduce the interaction cost of [tactile manipulation](/tactile-manipulation) systems that operate after occlusion or scene change.
+
+The real-world result also argues for reporting more than a binary lift score. A controller can pick an object up while missing the requested handle, orientation or functional region. Keeping physical and task-conditioned success separate makes contact-aware recovery easier to evaluate honestly.
+
+## Limitations and availability
+
+DA-GRD is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The belief only covers planar SE(2) motion. Complex non-planar shapes can produce different three-dimensional contacts that look identical after projection; partial remembered geometry can preserve the same ambiguity. The physical implementation also uses both fingertip contact switches and a wrist force-torque sensor, so “sparse touch” does not mean sensor-free deployment.
+
+No official project repository, dataset, checkpoint or software license was linked from the paper or verified at publication time. The arXiv record provides the manuscript under its selected submission license, which does not by itself release implementation code.
+
+## Sources and related resources
+
+- [DA-GRD arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29065)
+- [Full method, protocols and limitations](https://arxiv.org/html/2609.29065v1)
+- [RoboSkin tactile sensing guide](/sensors)
+- [RoboSkin robot manipulation research](/robot-manipulation)
+`,
+  },
+  {
+    id: 'torque-observation-alignment-direct-drive-grasping',
+    title: 'Torque-change alignment transfers a simulated grasp policy to a direct-drive hand',
+    seoTitle: 'Torque Alignment for Zero-Shot Direct-Drive Grasping',
+    seoDescription: 'A direct-drive gripper aligns torque scale, offset and noise for zero-shot sim-to-real grasping. Check the 210-trial result and sensing limits.',
+    excerpt: 'Sogang University researchers calibrate motor current, subtract consecutive torque readings and inject measured noise. The hand succeeds in 208 of 210 object trials without vision or tactile sensors.',
+    category: 'Proprioceptive grasping',
+    image: '/generated/news/torque-observation-alignment-direct-drive-grasping.png',
+    imageAlt: 'Diagram showing motor current calibration, torque differencing and noise injection before a direct-drive gripper policy transfers from simulation.',
+    imageCaption: 'Original RoboSkin.ai schematic of the torque-observation alignment pipeline. It does not depict the paper\'s hardware or measured signals.',
+    sourceTitle: 'Simple Torque-Observation Alignment for Zero-Shot Sim-to-Real Grasping with a Direct-Drive Gripper',
+    sourceUrl: 'https://arxiv.org/abs/2609.29031',
+    sources: [
+      { title: 'Torque-observation alignment arXiv v1 record', url: 'https://arxiv.org/abs/2609.29031' },
+      { title: 'Full v1 hardware, ablations and limitations', url: 'https://arxiv.org/html/2609.29031v1' },
+      { title: 'Sogang RIM Lab publication listing', url: 'https://rim.sogang.ac.kr/publications' },
+    ],
+    technicalFocus: ['direct-drive grippers', 'proprioceptive contact sensing', 'sim-to-real transfer', 'reinforcement learning'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · real-robot evaluation · no public implementation verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-27',
+    updated: '2026-09-27',
+    readTime: '7 min read',
+    content: `# Torque-change alignment transfers a simulated grasp policy to a direct-drive hand
+
+Sogang University researchers released a torque-observation alignment method on September 24, 2026 for zero-shot transfer to a multifingered direct-drive gripper. Instead of adding tactile sensors, the method turns motor current into a contact cue: it calibrates the torque scale, differences consecutive readings to suppress offset, and injects measured noise during simulation training. The deployed policy then uses only joint positions and torque changes. [Paper and version record](https://arxiv.org/abs/2609.29031).
+
+## Key takeaways
+
+- The complete method records 100% success on nine in-distribution object variants, with ten physical trials per object.
+- Across 21 objects and 210 trials, it succeeds 208 times: 100% on nine training-shape objects and 98.3% on 12 objects with unseen geometry, material or surface properties.
+- Torque differencing removes a slowly varying baseline, but also hides sustained absolute load. The result should not be read as a replacement for calibrated force or tactile sensing in every task.
+
+## What changed
+
+Direct-drive actuators expose interaction through motor current, but a policy trained on ideal simulated torque sees the wrong distribution on hardware. The paper separates that gap into scale, offset and noise.
+
+First, a dynamometer estimates a motor-type-specific current-to-torque constant. Second, both simulator and robot feed the policy the change in torque from one 50 ms step to the next rather than the absolute reading. If the hardware bias changes slowly, subtraction cancels most of it. Third, Gaussian noise fitted from the dynamometer measurements is injected during training.
+
+A privileged teacher learns in simulation, then a student policy is distilled for deployment. Training uses three object families—cuboids, cylinders and spheres—with three sizes each. The student runs at 20 Hz and controls a six-degree-of-freedom direct-drive gripper through grasp, lift and hold stages.
+
+## Results under the reported conditions
+
+The ablation evaluates five observation variants on nine in-distribution objects, ten trials per object and condition. A position-only student transfers poorly despite 68.9% simulated success. Torque-aware policies behave differently depending on alignment: using raw absolute torque reaches 26.7% on hardware, while the scale-and-difference variants reach 100% in the reported test. [Ablation and protocol](https://arxiv.org/html/2609.29031v1#S3.SS1).
+
+The broader evaluation adds 12 out-of-distribution household objects. The full method succeeds on all 90 in-distribution trials and 118 of 120 out-of-distribution trials, for 208 of 210 overall. The two failures are a light bulb and a tennis ball; the paper attributes them to insufficient contact torque for the light bulb and overshoot or oscillation during tennis-ball grasping.
+
+These are repeated trials from a prescribed non-contact starting condition on a fixed gripper. The objects are within its workspace, and the test does not include arm motion, clutter, deformable-object safety or arbitrary initial hand-object geometry.
+
+## What this means for robotics
+
+RoboSkin analysis: for direct-drive hands, actuator telemetry can serve as a low-cost contact channel if the learning pipeline respects how that telemetry changes between simulation and hardware. Scale calibration and temporal differencing are simple enough to inspect, unlike a learned black-box adaptation layer.
+
+The result also draws a useful boundary between [proprioceptive contact detection](/robot-learning) and [robot skin](/robot-skin). Torque changes can reveal contact onset and changing load throughout the mechanism, but they do not localize pressure across a surface or preserve static force. Engineers should choose between them based on the task state that must be observed.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, not an independently reproduced system. Training runs for 2,000 iterations on an RTX 5090, but the paper does not establish that GPU as a minimum requirement. Calibration is tied to the tested motor type and dynamometer conditions; variation across individual motors and operating temperatures remains unknown.
+
+The authors explicitly note that differenced torque suppresses sustained load and assumes slowly varying offsets. Faster dynamics may need more compensation. No official public code, trained policy, calibration dataset, CAD package or software license was verified. The Sogang RIM Lab page lists the publication, but listing a paper is not an implementation release.
+
+## Sources and related resources
+
+- [arXiv v1 record, submitted September 24, 2026](https://arxiv.org/abs/2609.29031)
+- [Full method, 210-trial evaluation and limitations](https://arxiv.org/html/2609.29031v1)
+- [Sogang RIM Lab publication list](https://rim.sogang.ac.kr/publications)
+- [RoboSkin guide to full-hand sensing](/robot-hands)
+`,
+  },
+  {
+    id: 'outcome-sensitive-impact-aware-dexterous-catching',
+    title: 'Outcome-sensitive search teaches a dexterous hand to catch with less impact',
+    seoTitle: 'Outcome-Sensitive Search for Dexterous Robot Catching',
+    seoDescription: 'Outcome-Sensitive Motion Search improves simulated dexterous catching to 90.3% success while lowering peak impact. Review the protocol and limits.',
+    excerpt: 'A simulation-only study searches the short pre-contact motion window where small action changes alter impact. Its imitation policy beats the privileged teacher, but physical contact transfer remains untested.',
+    category: 'Impact-aware manipulation',
+    image: '/generated/news/outcome-sensitive-impact-aware-dexterous-catching.png',
+    imageAlt: 'Diagram of a fast object approaching a dexterous hand, a highlighted pre-contact motion window and a lower-impact catch trajectory.',
+    imageCaption: 'Original RoboSkin.ai schematic of outcome-sensitive motion search for catching. It is not a simulator frame or experimental result.',
+    sourceTitle: 'Outcome-Sensitive Motion Search for Impact-Aware Dexterous Catching',
+    sourceUrl: 'https://arxiv.org/abs/2609.29020',
+    sources: [
+      { title: 'Outcome-Sensitive Motion Search arXiv v1 record', url: 'https://arxiv.org/abs/2609.29020' },
+      { title: 'Full v1 simulation protocol, results and limitations', url: 'https://arxiv.org/html/2609.29020v1' },
+    ],
+    technicalFocus: ['dexterous catching', 'impact-aware contact', 'imitation learning', 'demonstration search'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation only · no public code verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-27',
+    updated: '2026-09-27',
+    readTime: '8 min read',
+    content: `# Outcome-sensitive search teaches a dexterous hand to catch with less impact
+
+Researchers spanning Taiyuan University of Technology, Hong Kong Polytechnic University, Southern University of Science and Technology, Great Bay University, KTH and Chery's Kaiyang Laboratory released Outcome-Sensitive Motion Search on September 24, 2026. The simulation method edits a short pre-contact motion window where small action changes strongly affect both interception and impact, then uses the successful rollouts to train a deployable imitation policy. [Paper and version record](https://arxiv.org/abs/2609.29020).
+
+## Key takeaways
+
+- The final imitation policy reaches 90.3% task success, 5.1 percentage points above the privileged reinforcement-learning teacher and 6.5 points above success-only imitation.
+- Peak simulated impact is 37.3 N for the full method, 8.6% below the teacher's 40.8 N, under the paper's defined catch and impact thresholds.
+- Every result is in MuJoCo. The paper explicitly says robustness to real perception and contact mismatch remains unverified without a physical arm-hand experiment.
+
+## What changed
+
+A teacher that catches an object is not automatically a good source of demonstrations. It may fail on some launch conditions, and two motions that both complete a catch can create very different relative speed, impact force and follow-through.
+
+The authors define an outcome-sensitive window around the motion immediately before contact. They learn a task-conditioned manifold of successful eight-step arm-action snippets, project teacher motions into it, and search along local geodesic directions. Search can refine a successful catch to reduce impact or repair a teacher failure. Candidate snippets are inserted back into a full rollout and kept only if the complete catch succeeds under a modeled imitation-student action error.
+
+The simulation uses a 7-DoF xArm7 and a 17-DoF ORCA Hand at 50 Hz. Objects vary across ten shape-size combinations, 40 to 60 g mass and roughly 2.8 to 5.0 m/s launch speed. Three source datasets contain 20,000 successful, 20,000 successful and 20,000 mixed teacher rollouts respectively. The constructed training set contains 99,328 successful demonstrations.
+
+## Results under the reported conditions
+
+The study separates catch completion from impact-aware task success. A catching-only teacher completes 92.5% of catches but satisfies all impact criteria in just 0.4%, with 160.1 N mean peak force. Adding impact objectives gives the privileged teacher 90.7% completion, 85.2% task success and 40.8 N peak force. This is a reminder that “caught” and “caught softly” are different outcomes. [Protocol and thresholds](https://arxiv.org/html/2609.29020v1#S5.SS1).
+
+Final policies are trained with three seeds and evaluated on the same 3,000 held-out task conditions. At matched dataset size, success-only imitation reaches 83.8% task success and 41.1 N peak force. Refinement alone lowers force to 36.2 N but reaches 83.2% success. Repair alone reaches 88.5% success and 42.7 N. Combining repair and refinement reaches 90.3% and 37.3 N.
+
+The full policy improves all ten shape-size combinations, with its largest reported gain—14.5 percentage points—on the large box. An ablation also shows that conditional geodesic search produces 44.3% repair, 59.8% refinement and 90.3% student success, versus 5.6%, 8.3% and 83.4% for direct action perturbations.
+
+## What this means for robotics
+
+RoboSkin analysis: the contribution is a data-selection method for the moment when contact dynamics matter most. Rather than treating a full trajectory as uniformly valuable, it concentrates computation on the pre-contact segment that controls impact and grasp stability. That idea could complement [tactile world models](/tactile-foundation-models) by identifying which action windows deserve denser sensing and validation.
+
+The paper also shows why success-only data can be misleading for contact-rich work. A system can maximize completion by accepting large impact. For fragile objects or human-facing manipulation, force, relative velocity and follow-through should remain visible metrics beside task success.
+
+## Limitations and availability
+
+Outcome-Sensitive Motion Search is an arXiv v1 preprint and a simulation-only result. Candidate selection depends on simulated contact dynamics and an error model calibrated from one imitation policy. The search cannot recover behavior outside the learned motion manifold, including failures that require different finger control or post-contact recovery.
+
+No official project page, repository, dataset download, trained model or software license was verified. The manuscript is readable through arXiv, but the 99,328 demonstrations described in the experiment are not thereby a publicly downloadable dataset. RoboSkin.ai has not run the simulator or reproduced the numbers.
+
+## Sources and related resources
+
+- [arXiv v1 record, submitted September 24, 2026](https://arxiv.org/abs/2609.29020)
+- [Full simulation setup, results and limitations](https://arxiv.org/html/2609.29020v1)
+- [RoboSkin dexterous manipulation overview](/tactile-manipulation)
+- [RoboSkin robot learning resources](/robot-learning)
+`,
+  },
+  {
+    id: 'body-grounded-replanning-physical-manipulation',
+    title: 'Body-grounded replanning lets joint load change the robot strategy',
+    seoTitle: 'Body-Grounded Replanning for Physical Robot Adaptation',
+    seoDescription: 'Body-grounded replanning uses joint state, effort and contact events to change manipulation strategy. Review its real-robot results and LLM limits.',
+    excerpt: 'Microsoft Research Asia, Waseda, Chiba and NII researchers move proprioceptive evidence into high-level replanning. Hardware success reaches 96.3%, while LLM pause time is excluded.',
+    category: 'Physical AI planning',
+    image: '/generated/news/body-grounded-replanning-physical-manipulation.png',
+    imageAlt: 'Diagram showing joint effort and contact events triggering a high-level strategy change in a robot manipulation task.',
+    imageCaption: 'Original RoboSkin.ai schematic of body-state-triggered manipulation replanning. It is explanatory artwork, not a robot experiment image.',
+    sourceTitle: 'Body-Grounded Replanning for Physically Adaptive Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.30024',
+    sources: [
+      { title: 'Body-Grounded Replanning arXiv v1 record', url: 'https://arxiv.org/abs/2609.30024' },
+      { title: 'Full v1 method, tables and limitations', url: 'https://arxiv.org/html/2609.30024v1' },
+      { title: 'Author-provided qualitative experiment video', url: 'https://youtu.be/_qclDPyHm4U' },
+    ],
+    technicalFocus: ['proprioceptive feedback', 'contact-aware replanning', 'physical AI', 'LLM robot planning'],
+    sourceDate: '2026-09-24',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · qualitative contact-task extension',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-27',
+    updated: '2026-09-27',
+    readTime: '7 min read',
+    content: `# Body-grounded replanning lets joint load change the robot strategy
+
+Researchers at Microsoft Research Asia–Tokyo, Waseda University, Chiba University and Japan's National Institute of Informatics released Body-Grounded Replanning on September 24, 2026. The framework turns joint position, actuator effort, contact and recent execution history into high-level evidence: when the current motion becomes physically unsuitable, GPT-4o-mini selects another strategy while the task objective and low-level controller remain unchanged. [Paper and version record](https://arxiv.org/abs/2609.30024).
+
+## Key takeaways
+
+- In ten real-robot reaching conditions, body-grounded replanning and an environment-only search baseline both reach 96.3% success; the main advantage is faster restricted completion, 24.57 seconds versus 28.18 seconds.
+- A rule-based controller using the same body-state events reaches 66.3%, showing that detecting strain or contact is not equivalent to choosing the right alternative.
+- The three contact-rich tasks—button pressing, box-lid opening and lint-roller extraction—are qualitative demonstrations without repeated success rates.
+
+## What changed
+
+Most manipulation planners ask whether a trajectory is geometrically feasible. This work adds a second question: is the strategy physically suitable for the robot's current body state? A path may still reach the target while producing high joint effort, approaching a joint limit or encountering contact earlier than expected.
+
+The monitor records per-joint position, velocity and effort plus binary contact at 20 Hz. Current measurements and a learned short-horizon prediction trigger events such as high effort, limited mobility, no progress or early contact. GPT-4o-mini, run at temperature zero, receives the current strategy, joint-level state, recent execution statistics, event summary, history and a manually defined menu of alternative strategies. Its structured choice changes the high-level motion while leaving the low-level controller in place.
+
+## Results under the reported conditions
+
+The controlled simulation uses a Franka Panda and generates 100 paired episodes for each of ten load or asymmetric-mobility conditions. The body-grounded method maintains 90% to 99% success and records the lowest mean joint-torque norm in every condition. Across the seven asymmetric-mobility conditions, overall success is 96.7%, compared with 88.5% for the rule-based body-state baseline. [Full results](https://arxiv.org/html/2609.30024v1#S5).
+
+The hardware study uses a CRANE-X7 with Dynamixel actuators. Environment-only search, rules and body-grounded replanning each receive eight trials per condition under a 45-second execution budget. The body-grounded and environment-only methods both average 96.3% success; rules average 66.3%. Body grounding has the lowest restricted completion time in nine of ten conditions and the lowest overall mean at 24.57 seconds. Its average actuator-effort norm is also lowest—2.18 versus 2.28 and 2.33—but it wins that metric in only five of ten individual conditions.
+
+Restricted completion time assigns the full 45 seconds to failures and excludes LLM inference pauses. That makes the metric useful for combining reliability and active robot time, but it is not end-to-end wall-clock latency. The paper does not publish a separate distribution for network or model response time.
+
+The authors also show one execution each for obstacle-avoiding button pressing, box-lid opening and lint-roller extraction. Contact or impeded motion triggers a strategy change and task completion in the shown sequences. These examples demonstrate interface reuse, not a quantified manipulation benchmark.
+
+## What this means for robotics
+
+RoboSkin analysis: body-grounded replanning moves [proprioceptive and contact signals](/sensors) above the servo layer. Instead of only correcting torque locally, the robot can decide that the entire approach direction, posture or action order is wrong for its current physical condition.
+
+The comparison with environment-only search is equally important. Both succeed at the same rate on hardware, so the evidence supports efficiency and physical suitability more strongly than raw completion. A production system would also need bounded fallback behavior when the language model is slow, unavailable or selects an unsafe strategy.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint. The high-level strategy set and event thresholds are manually defined, tasks are short-horizon, and the strongest repeated evaluation is controlled reaching rather than the three contact-rich demonstrations. Hardware effort uses raw Dynamixel readings, not calibrated joint torque, so values are only compared within that platform.
+
+The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyHm4U), but no public code repository, prompt package, logs, dataset or software license was verified. GPT-4o-mini is an external hosted model, and the evaluation excludes its inference pauses from active execution time. RoboSkin.ai has not reproduced the system.
+
+## Sources and related resources
+
+- [arXiv v1 record, submitted September 24, 2026](https://arxiv.org/abs/2609.30024)
+- [Full framework, tables and limitations](https://arxiv.org/html/2609.30024v1)
+- [Author-provided experiment video](https://youtu.be/_qclDPyHm4U)
+- [RoboSkin Physical AI overview](/physical-ai)
+`,
+  },
+  {
     id: 'polyumi-visual-tactile-audio-demonstration-interface',
     title: 'PolyUMI records vision, touch and contact audio in one wireless interface',
     seoTitle: 'PolyUMI: Visual-Tactile-Audio Robot Demonstrations',
