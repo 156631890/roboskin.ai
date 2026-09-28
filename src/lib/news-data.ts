@@ -33,6 +33,286 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'blind-grasp-reflex-proprioceptive-dexterous-hand',
+    title: 'A blind grasp reflex lets a dexterous hand feel through proprioception',
+    seoTitle: 'Blind Grasp Reflex for Proprioceptive Dexterous Hands',
+    seoDescription: 'Blind Grasp Reflex uses joint tracking error as implicit contact feedback. Review its 95% simulated grasp rate, dynamic tests and hardware limits.',
+    excerpt: 'MIT, Seoul National University and Yonsei researchers train a hand-local policy that reacts to contact through joint encoders, without fingertip tactile sensors. The strongest evidence is simulated; the hardware study is qualitative.',
+    category: 'Proprioceptive dexterity',
+    image: '/generated/news/blind-grasp-reflex-proprioceptive-dexterous-hand.png',
+    imageAlt: 'Diagram of a robot arm reaching visually before a dexterous hand closes using joint error as implicit contact feedback.',
+    imageCaption: 'Original RoboSkin.ai schematic of the Blind Grasp Reflex division between visual reaching and proprioceptive grasping. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'See to Reach, Feel to Grasp: Learning A Blind Grasp Reflex for Anthropomorphic Robotic Hands',
+    sourceUrl: 'https://arxiv.org/abs/2609.31323',
+    sources: [
+      { title: 'Blind Grasp Reflex arXiv v1 record', url: 'https://arxiv.org/abs/2609.31323' },
+      { title: 'Full v1 method, results and limitations', url: 'https://arxiv.org/html/2609.31323v1' },
+      { title: 'Official Blind Grasp Reflex project page', url: 'https://blindgraspreflex.github.io/' },
+    ],
+    technicalFocus: ['proprioceptive contact feedback', 'dexterous grasping', 'anthropomorphic robot hands', 'sim-to-real learning'],
+    sourceDate: '2026-09-25',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and qualitative hardware evaluation · code announced but not released',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-28',
+    updated: '2026-09-28',
+    readTime: '7 min read',
+    content: `# A blind grasp reflex lets a dexterous hand feel through proprioception
+
+Researchers from the Massachusetts Institute of Technology, Seoul National University and Yonsei University released Blind Grasp Reflex on September 25, 2026. The system separates visually guided reaching from a hand-local grasp controller that uses only joint positions and motor-command errors. It treats tracking error as an implicit sign of contact, so the hand can react without cameras or fingertip tactile sensors during closure. [Paper and version record](https://arxiv.org/abs/2609.31323).
+
+## Key takeaways
+
+- On 3,028 simulated GraspXL objects, the modular policy reports 95% grasp success, compared with 97% for an end-to-end reinforcement-learning policy under the same simulation study.
+- When an object is moved during closure, Blind Grasp Reflex reaches 92% in the reported dynamic test while the end-to-end baseline reaches 8%.
+- The hardware section shows successful grasps on 29 objects, but it does not provide repeated trial counts or a physical success rate. Those demonstrations should not be compared directly with the simulation percentages.
+
+## What changed
+
+The method gives the arm and hand different jobs. A perception-driven arm controller moves the palm toward an estimated object pose. Once the hand is in range, a reflex policy closes its 20-degree-of-freedom Robotis HX5-D20-MRT hand. The hand observes a five-frame history of joint position and the difference between commanded and measured position. A stalled finger therefore becomes a crude contact signal.
+
+Training uses a privileged teacher with simulated object state, then distills the behavior into a student that sees only proprioception. The policy runs at 11.9 Hz, above a 1 kHz low-level joint loop, and the authors report roughly four GPU-hours on one NVIDIA L40S. [Method details](https://arxiv.org/html/2609.31323v1#S3).
+
+This is not tactile sensing in the usual robot-skin sense. It does not measure pressure distribution, shear, slip or contact location directly. It infers contact from how the mechanism fails to follow a command. That distinction matters for readers comparing the work with [tactile manipulation](/tactile-manipulation) systems.
+
+## Results under the reported conditions
+
+On 78 YCB objects, Blind Grasp Reflex reaches 96% simulated success and the end-to-end reinforcement-learning baseline reaches 98%. On the larger 3,028-object GraspXL set, the corresponding figures are 95% and 97%. The small two-point gap suggests that modularity does not cost much in these static simulation tests.
+
+The separation matters more under intervention. In the paper's dynamic-object evaluation, an external motion changes the object during closure. The reflex policy succeeds in 92% of cases, while the end-to-end baseline succeeds in 8%. In a separate object-pose generalization test, the figures are 90% and 15%. These are results from the authors' simulator, not an independent benchmark or a physical disturbance study. [Evaluation tables](https://arxiv.org/html/2609.31323v1#S4).
+
+The authors also test whether a learned grasp score tracks the analytic Ferrari-Canny metric. Across 15,097 simulated grasps, the mean Spearman correlation is 0.77; the reported subsets are 0.78 for 14,346 successful grasps and 0.61 for 751 failures. Correlation supports the training signal, but it does not prove equivalent force closure on hardware.
+
+## What this means for robotics
+
+RoboSkin analysis: the architecture resembles a biological division of labor. Vision gets the limb near the target; fast local feedback handles uncertain contact. A frozen hand policy can therefore be paired with several unseen arm controllers without retraining the full perception-to-action stack. That modularity could make [robot hands](/robot-hands) easier to integrate.
+
+The practical trade-off is observability. Encoder error is inexpensive and available on many hands, but it combines contact, friction, backlash, saturation and controller dynamics. A grasp reflex may be robust enough to close around an object while remaining unable to estimate why a finger stopped. Tasks that depend on incipient slip, contact geometry or force regulation still need richer sensing.
+
+## Limitations and availability
+
+Blind Grasp Reflex is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The strongest quantitative evidence is in simulation. The project page shows hardware examples on 29 objects but gives no per-object trial count, failure count or physical success percentage. The arm still relies on perception to reach the target; “blind” describes the hand policy during grasping, not the entire robot.
+
+At publication time, the [official project page](https://blindgraspreflex.github.io/) labels code as “Coming Soon.” No public training environment, weights, dataset or software license was verified. The manuscript is available under CC BY 4.0, which licenses the paper rather than unreleased implementation assets.
+
+## Sources and related resources
+
+- [Blind Grasp Reflex arXiv v1, submitted September 25, 2026](https://arxiv.org/abs/2609.31323)
+- [Full method and evaluation](https://arxiv.org/html/2609.31323v1)
+- [Official project page and videos](https://blindgraspreflex.github.io/)
+- [RoboSkin robot learning guide](/robot-learning)
+`,
+  },
+  {
+    id: 'tactic-tactile-encoder-fusion-benchmark',
+    title: 'TACTIC finds no single best tactile encoder for contact-rich manipulation',
+    seoTitle: 'TACTIC Tactile Encoder and Fusion Benchmark',
+    seoDescription: 'TACTIC evaluates 25 tactile encoder-fusion combinations over 2,180 robot rollouts. Review its task-specific results and downloadable 410-episode data.',
+    excerpt: 'TACTIC crosses five tactile encoders with five conditioning methods on four real robot tasks. Its central result is conditional: the best combination changes with the contact problem.',
+    category: 'Tactile learning benchmark',
+    image: '/generated/news/tactic-tactile-encoder-fusion-benchmark.png',
+    imageAlt: 'Matrix diagram crossing five tactile encoders with five policy fusion methods before four contact-rich robot tasks.',
+    imageCaption: 'Original RoboSkin.ai schematic of the TACTIC 5-by-5 encoder and conditioning study. It is explanatory artwork, not a reproduction of the paper figures.',
+    sourceTitle: 'TACTIC: Understanding Tactile Encoders and Conditioning for Contact-rich Robot Manipulation Policies',
+    sourceUrl: 'https://arxiv.org/abs/2609.30969',
+    sources: [
+      { title: 'TACTIC arXiv v1 record', url: 'https://arxiv.org/abs/2609.30969' },
+      { title: 'Full TACTIC v1 paper', url: 'https://arxiv.org/html/2609.30969v1' },
+      { title: 'Official TACTIC project page', url: 'https://utn-air.github.io/TACTIC/' },
+      { title: 'Official TACTIC dataset collection', url: 'https://huggingface.co/collections/UTN-AIR/tactic' },
+    ],
+    technicalFocus: ['tactile encoders', 'multimodal policy fusion', 'contact-rich manipulation', 'robot datasets'],
+    sourceDate: '2026-09-25',
+    evidenceStatus: 'Preprint · arXiv v1 · real-robot ablation · four datasets available under MIT · code not released',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-28',
+    updated: '2026-09-28',
+    readTime: '8 min read',
+    content: `# TACTIC finds no single best tactile encoder for contact-rich manipulation
+
+Researchers led by the University of Technology Nuremberg released TACTIC on September 25, 2026. TACTIC is a real-robot study of how five tactile encoders and five policy-conditioning methods interact across wiping, USB-C insertion and screw insertion. After 2,180 evaluation rollouts, the answer is not a universal winner: encoder and fusion choices depend on the task. [Paper and version record](https://arxiv.org/abs/2609.30969).
+
+## Key takeaways
+
+- TACTIC evaluates 25 encoder-conditioning combinations on four tasks, with 20 rollouts for each reported ablation condition.
+- The simplest ResNet18 plus concatenation reaches 80% termination on USB-C insertion, compared with 55% for the vision-only policy in that task.
+- Four official datasets are downloadable now and contain 410 episodes in total. The project page still labels policy code “coming soon.”
+
+## What changed
+
+Many tactile-policy papers change the sensor representation and fusion mechanism at the same time, making the source of an improvement hard to identify. TACTIC instead fixes an Action Chunking with Transformers policy and crosses five encoders—ResNet18, SARL, UniT, Sparsh and T3—with concatenation, FiLM, gated cross-attention, CLIP-style replacement and CLIP-style token conditioning.
+
+The hardware uses two Franka FR3 arms in a leader-follower collection setup. The follower has two DIGIT sensors on a Franka Hand, an Intel RealSense D405 at the wrist and a D435 side camera. The team collects about 100 demonstrations per task at 30 Hz, using four pairs of replaceable DIGIT cartridges to introduce sensor variation. The policy predicts 120-step action chunks. [Experimental setup](https://arxiv.org/html/2609.30969v1#S4).
+
+## What the real-robot study found
+
+USB-C insertion favors the uncomplicated baseline: ResNet18 with feature concatenation reaches 80% termination, while vision-only reaches 55%. Screw insertion instead favors semantic alignment, with Sparsh-CLIP-T and T3-CLIP-T each reaching 90% termination under the reported protocol. On other tasks, the same CLIP-style mechanisms can reduce performance. That reversal is the paper's main engineering result.
+
+The authors also introduce out-of-distribution “disco” lighting. Non-CLIP variants fail under that visual shift, while some Sparsh-plus-CLIP configurations preserve partial performance. Each out-of-distribution condition uses ten trials, so these percentages have wider uncertainty than the 20-rollout main ablations. [Results and OOD analysis](https://arxiv.org/html/2609.30969v1#S5).
+
+The headline count needs careful interpretation. The 2,180 figure is evaluation rollouts across policies and conditions, not the size of the imitation-learning dataset. The [official Hugging Face collection](https://huggingface.co/collections/UTN-AIR/tactic) currently lists four datasets—screw, board, vase and USB-C—with 104, 102, 101 and 103 episodes respectively, or 410 episodes total. Dataset cards display an MIT license, 30 fps data and six cameras; several README bodies are still empty, so documentation depth does not yet match file availability.
+
+## What this means for robotics
+
+RoboSkin analysis: “use a pretrained tactile encoder” is not enough of a recipe. The representation must preserve the contact information a task needs, and the policy must expose that information in a useful way. A semantic alignment layer may help when tactile and visual observations share a stable task concept, but it can also discard continuous detail needed for surface interaction.
+
+For teams building [visuo-tactile](/visuo-tactile) policies, TACTIC argues for a small task-specific ablation before scaling data collection. A simpler encoder can outperform a larger pretrained model, especially when latency, cartridge changes and cross-device variation matter more than broad representation learning.
+
+## Limitations and availability
+
+TACTIC is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its 2,180 rollouts. The study uses one robot family, DIGIT sensors and four tasks. There is no confidence interval around most reported success rates, and 20 trials per setting cannot resolve small differences reliably. Performance under new sensor geometries or policies remains unknown.
+
+The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming soon.” The four datasets are publicly downloadable and display MIT licenses, but users should inspect each repository and file manifest before reuse. The arXiv manuscript uses arXiv's submission license; that does not license unreleased training code.
+
+## Sources and related resources
+
+- [TACTIC arXiv v1, submitted September 25, 2026](https://arxiv.org/abs/2609.30969)
+- [Full methods, ablations and limitations](https://arxiv.org/html/2609.30969v1)
+- [Official project page](https://utn-air.github.io/TACTIC/)
+- [Official four-dataset collection](https://huggingface.co/collections/UTN-AIR/tactic)
+- [RoboSkin tactile dataset directory](/datasets)
+`,
+  },
+  {
+    id: 'vistacalign-human-robot-tactile-demonstrations',
+    title: 'VisTacAlign turns human touch into robot training data',
+    seoTitle: 'VisTacAlign Human-to-Robot Tactile Demonstrations',
+    seoDescription: 'VisTacAlign maps glove touch and human stereo video into robot observation space. Review its drill, strawberry and Lego results and release limits.',
+    excerpt: 'VisTacAlign retargets a human glove and stereo camera rig into a tactile robot hand’s observation space, then co-trains one policy on human and robot demonstrations.',
+    category: 'Visuo-tactile learning',
+    image: '/generated/news/vistacalign-human-robot-tactile-demonstrations.png',
+    imageAlt: 'Diagram mapping human glove touch and stereo video into robot taxel signals and robot-rendered depth for shared policy training.',
+    imageCaption: 'Original RoboSkin.ai schematic of VisTacAlign human-to-robot observation alignment. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'VisTacAlign: Co-Training Dexterous Policies on Tactile Human and Robot Demonstrations',
+    sourceUrl: 'https://arxiv.org/abs/2609.30959',
+    sources: [
+      { title: 'VisTacAlign arXiv v1 record', url: 'https://arxiv.org/abs/2609.30959' },
+      { title: 'Full VisTacAlign v1 paper', url: 'https://arxiv.org/html/2609.30959v1' },
+      { title: 'Official VisTacAlign project page', url: 'https://vis-tac-align.github.io/' },
+    ],
+    technicalFocus: ['human robot demonstration alignment', 'tactile imitation learning', 'dexterous manipulation', 'multimodal robot policies'],
+    sourceDate: '2026-09-25',
+    evidenceStatus: 'Preprint · arXiv v1 · real-robot evaluation · project lists paper and code as coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-28',
+    updated: '2026-09-28',
+    readTime: '8 min read',
+    content: `# VisTacAlign turns human touch into robot training data
+
+ETH Zurich and Stanford University researchers released VisTacAlign on September 25, 2026. The method records human hand motion, stereo video and capacitive glove signals, maps them into a 17-degree-of-freedom tactile robot hand's observation space, and co-trains a diffusion policy with ordinary robot demonstrations. The goal is to make fast human demonstrations usable without pretending that human and robot sensing are naturally identical. [Paper and version record](https://arxiv.org/abs/2609.30959).
+
+## Key takeaways
+
+- In the drill task, 26 aligned human demonstrations added to 26 robot demonstrations raise reported lift success from 50% to 70%.
+- In Lego insertion, 50 human plus 30 robot demonstrations reach 80% over 20 trials, compared with 10% for 30 robot demonstrations alone.
+- The alignment is task-specific and compresses each fingertip to one normal-force value. It does not preserve full taxel geometry or shear.
+
+## What changed
+
+Human demonstrations are fast to collect but differ from robot data in embodiment, camera geometry and contact signals. VisTacAlign tackles both visual and tactile mismatch. It retargets the glove pose to an ORCA Hand, renders a robot-textured hand into the human stereo sequence and recomputes depth. Separately, it maps capacitive glove measurements into the range of the robot's fingertip taxels.
+
+The resulting human observations and robot observations train the same 23.5-million-parameter diffusion transformer. The policy predicts 64 action steps, executes the first 32—about 1.1 seconds—and replans. The authors report 269 milliseconds per inference on an RTX 4080. Human glove data arrives at 60 Hz, stereo video at 20 Hz and robot tactile data at 30 Hz. [Architecture and implementation](https://arxiv.org/html/2609.30959v1#S3).
+
+## Results and comparison conditions
+
+For drill pickup, 26 robot demonstrations alone reach 50% lift success. Adding 26 aligned human demonstrations raises the result to 70%. In the low-robot-data setting, ten robot demonstrations reach 35%; adding 26 human demonstrations without tactile alignment produces 30%, while adding aligned touch reaches 55%. This comparison supports the alignment mechanism more directly than the larger-data result.
+
+The strawberry task combines 124 human and 84 robot demonstrations. Over ten trials for each fruit size, the multimodal policy reaches 90%, 80% and 70% on small, medium and large strawberries. A robot-only policy without tactile input reaches 60%, 70% and 0%. The paper does not quantify strawberry damage, so the numbers measure task completion rather than gentle handling.
+
+For Lego insertion, 50 human plus 30 robot demonstrations reach 80% across 20 trials; 30 robot demonstrations alone reach 10%. Removing visual retargeting from the combined-data pipeline reduces success to 10–25% at comparable robot-data budgets, while the full alignment reaches 40–60%. Removing tactile input from the best configuration costs ten percentage points. [Task results and ablations](https://arxiv.org/html/2609.30959v1#S4).
+
+The alignment diagnostics are also useful. For thumb and index touch distributions, the reported Kolmogorov-Smirnov distances fall from 0.33 and 0.42 to 0.08 and 0.08. A domain classifier drops from 92% to 58%, near but not at 50% chance. Visual Chamfer distance falls from 13.3 to 10.2 mm, while the 10 mm F-score rises from 0.40 to 0.59.
+
+## What this means for robotics
+
+RoboSkin analysis: VisTacAlign turns embodiment mismatch into an explicit engineering step instead of asking a large policy to absorb it implicitly. That is promising for [robot teleoperation](/robot-teleoperation) programs where human collection is two to three times faster than robot teleoperation, as the authors report.
+
+The method is not a universal human-to-robot converter. Its force mapping is fitted per task from separate human and robot force samples, and it still requires a short robot recording. Teams should budget for calibration whenever the object, glove fit, fingertip material or sensor gain changes.
+
+## Limitations and availability
+
+VisTacAlign is an arXiv v1 preprint labeled “under review” for ICRA 2027; it should not be described as an accepted conference paper. RoboSkin.ai has not reproduced it. The study covers three short-horizon, mostly quasi-static tasks. Per-fingertip force discards spatial pressure, shear and incipient slip, and there is no comparison against learning a shared latent space without handcrafted mappings.
+
+The [official project page](https://vis-tac-align.github.io/) labels both paper and code “coming soon,” even though the arXiv manuscript is available. No code repository, dataset, checkpoint or software license was verified. The paper carries CC BY-NC-ND 4.0; this does not authorize unrestricted modification or commercial reuse of the manuscript.
+
+## Sources and related resources
+
+- [VisTacAlign arXiv v1, submitted September 25, 2026](https://arxiv.org/abs/2609.30959)
+- [Full method and real-robot evaluation](https://arxiv.org/html/2609.30959v1)
+- [Official project page](https://vis-tac-align.github.io/)
+- [RoboSkin DIGIT sensor profile](/sensors/digit)
+- [RoboSkin robot learning guide](/robot-learning)
+`,
+  },
+  {
+    id: 'phase-tactile-retrieval-few-shot-insertion',
+    title: 'PHASE retrieves tactile insertion experience one contact phase at a time',
+    seoTitle: 'PHASE Tactile Retrieval for Few-Shot Insertion',
+    seoDescription: 'PHASE retrieves prior insertion segments by tactile phase. Review its 77% normal and 47% shifted-start success with four target demonstrations.',
+    excerpt: 'OMRON SINIC X and University of Tokyo researchers segment insertion demonstrations by tactile-proprioceptive contact phase, then retrieve matching prior segments for few-shot policy learning.',
+    category: 'Few-shot tactile insertion',
+    image: '/generated/news/phase-tactile-retrieval-few-shot-insertion.png',
+    imageAlt: 'Diagram dividing peg insertion into tactile contact phases before retrieving matching demonstrations for an action policy.',
+    imageCaption: 'Original RoboSkin.ai schematic of PHASE phase detection, retrieval and few-shot policy training. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'PHASE: Compliance-Enabled Tactile Phase Retrieval for Few-Shot Insertion Learning',
+    sourceUrl: 'https://arxiv.org/abs/2609.30889',
+    sources: [
+      { title: 'PHASE arXiv v1 record', url: 'https://arxiv.org/abs/2609.30889' },
+      { title: 'Official PHASE project page', url: 'https://omron-sinicx.github.io/phase/' },
+      { title: 'OMRON SINIC X IROS 2026 announcement', url: 'https://www.omron.com/sinicx/en/news/2026/09/iros2026/' },
+    ],
+    technicalFocus: ['tactile phase retrieval', 'few-shot insertion', 'compliant robot wrists', 'imitation learning'],
+    sourceDate: '2026-09-25',
+    evidenceStatus: 'IROS 2026 paper · arXiv v1 · real-robot evaluation · no public code or dataset verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-28',
+    updated: '2026-09-28',
+    readTime: '7 min read',
+    content: `# PHASE retrieves tactile insertion experience one contact phase at a time
+
+Researchers from OMRON SINIC X and the University of Tokyo released PHASE on September 25, 2026. Accepted at IROS 2026, PHASE uses a compliant wrist and tactile-proprioceptive signals to split insertion demonstrations into contact phases, retrieve relevant portions of prior experience and train a new policy from only four target demonstrations. [Official project page](https://omron-sinicx.github.io/phase/).
+
+## Key takeaways
+
+- With four target demonstrations per peg shape, PHASE reaches 77% success in the normal-start evaluation, 13 percentage points above the strongest 64% comparison.
+- Under unseen starting positions, PHASE reaches 47%, compared with 17% for the strongest baseline—a 30-point gap under the reported setup.
+- The evaluation uses one UR5e, one compliant wrist, a 3-by-3 tactile array and 20 trials per shape. Code and data were not publicly linked.
+
+## What changed
+
+Demonstration retrieval usually compares entire trajectories. PHASE argues that contact-rich insertion is better compared in stages. A masked tactile-proprioceptive encoder called MAT3 represents contact, while a soft wrist makes the phases physically observable. The system places a boundary after the contact peak, when the coefficient of variation of estimated torque falls below a threshold.
+
+Fast Dynamic Time Warping then compares like phases between four target demonstrations and a pool of 122 prior demonstrations. The retrieved segments train an Action Chunking with Transformers policy. This avoids forcing an entire prior trajectory to match when only its search or insertion segment resembles the target. [Method and paper links](https://omron-sinicx.github.io/phase/).
+
+## Results under the reported conditions
+
+The physical setup uses a UR5e arm, a soft compliant wrist and a 3-by-3 distributed tactile sensor. Circle and square pegs supply prior experience; rectangle, oval and hexagon are unseen target shapes. Each method receives four target demonstrations per shape and is tested 20 times on each of five shapes, producing 100 trials per method.
+
+Under the normal-start protocol, the target-only policy reaches 50%. Training on all prior data without retrieval reaches 64%; single-trajectory retrieval reaches 56%; whole-trajectory retrieval reaches 64%; fixed-window retrieval reaches 55%; PHASE reaches 77%. The relevant gain is therefore 13 percentage points over the strongest 64% baselines, not a 13% relative improvement.
+
+When start positions shift outside the training distribution, target-only falls to 0%, the no-retrieval prior baseline reaches 17%, single retrieval 2%, full retrieval 14%, fixed-window retrieval 16% and PHASE 47%. The 30-point margin over 17% suggests that phase-level matching helps most when a policy must first recover contact before insertion.
+
+## What this means for robotics
+
+RoboSkin analysis: PHASE treats compliance as part of perception. The soft wrist does more than protect the fixture; it turns contact transitions into smooth signals that make retrieval boundaries detectable. That coupling between mechanism and learning is relevant to [robot manipulation](/robot-manipulation) systems that cannot rely on vision after the peg enters a fixture.
+
+The work also offers a practical data strategy. Instead of discarding old demonstrations because a new peg is different, teams can reuse the segments whose contact dynamics match. But the reuse benefit depends on recognizable phases. Tasks with repeated impacts, slip or more than two stable contact stages may require a learned or multi-boundary segmenter.
+
+## Limitations and availability
+
+PHASE is an IROS 2026 conference paper with an arXiv v1 record, and RoboSkin.ai has not reproduced it. Results come from a single arm, wrist and 3-by-3 tactile configuration. Twenty trials per shape limit precision, and the five peg geometries do not establish transfer to threaded, flexible or high-force assembly.
+
+The [official project page](https://omron-sinicx.github.io/phase/) provides paper, poster and video links. It does not link public code, trained policies or a demonstration dataset, and no software or data license was verified. The [OMRON SINIC X announcement](https://www.omron.com/sinicx/en/news/2026/09/iros2026/) confirms the conference acceptance but is not an independent experimental validation.
+
+## Sources and related resources
+
+- [PHASE arXiv v1, submitted September 25, 2026](https://arxiv.org/abs/2609.30889)
+- [Official PHASE project page, paper, poster and video](https://omron-sinicx.github.io/phase/)
+- [OMRON SINIC X IROS 2026 announcement](https://www.omron.com/sinicx/en/news/2026/09/iros2026/)
+- [RoboSkin tactile sensor benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation)
+- [RoboSkin tactile manipulation hub](/tactile-manipulation)
+`,
+  },
+  {
     id: 'da-grd-tactile-grasp-recovery',
     title: 'DA-GRD uses sparse touch to recover a grasp after the object moves',
     seoTitle: 'DA-GRD: Tactile Grasp Recovery After Object Motion',
