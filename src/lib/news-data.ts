@@ -33,6 +33,292 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'univlat-whole-body-tactile-vla-humanoid',
+    title: 'Uni-VLaT gives humanoid VLA policies whole-body touch',
+    seoTitle: 'Uni-VLaT Whole-Body Tactile VLA for Humanoids',
+    seoDescription: 'Uni-VLaT adds distributed tactile sensing and future prediction to humanoid VLA policies. Review five real-robot tasks, baselines and release limits.',
+    excerpt: 'Uni-VLaT adapts pretrained humanoid VLA policies with textile electronic skin across eight body regions and predicts future touch, body state and visual features during training.',
+    category: 'Whole-body tactile learning',
+    image: '/generated/news/univlat-whole-body-tactile-vla-humanoid.png',
+    imageAlt: 'Diagram of eight tactile regions on a humanoid feeding a VLA policy and three future-representation prediction heads.',
+    imageCaption: 'Original RoboSkin.ai schematic of Uni-VLaT whole-body tactile adaptation. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'Uni-VLaT: Whole-Body Tactile Adaptation of VLA Policies for Humanoid Loco-Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.35450',
+    sources: [
+      { title: 'Uni-VLaT arXiv v1 record', url: 'https://arxiv.org/abs/2609.35450' },
+      { title: 'Full Uni-VLaT v1 paper', url: 'https://arxiv.org/html/2609.35450v1' },
+      { title: 'Official Uni-VLaT project page', url: 'https://ggkiller-air.github.io/Uni-VLaT/' },
+    ],
+    technicalFocus: ['whole-body tactile sensing', 'humanoid VLA adaptation', 'electronic skin', 'loco-manipulation'],
+    sourceDate: '2026-09-28',
+    evidenceStatus: 'Preprint · arXiv v1 · five real-robot tasks · project videos available · code not released',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-29',
+    updated: '2026-09-29',
+    readTime: '8 min read',
+    content: `# Uni-VLaT gives humanoid VLA policies whole-body touch
+
+Researchers from Tsinghua University, Beihang University, the Communication University of China and the University of Hong Kong released Uni-VLaT on September 28, 2026. The method adapts pretrained vision-language-action policies to a Unitree G1 humanoid with distributed textile electronic skin, then uses touch as an anchor for predicting future tactile, proprioceptive and visual representations. In five real-robot tasks, the authors report a 75% average success rate. [Paper and version record](https://arxiv.org/abs/2609.35450).
+
+## Key takeaways
+
+- Uni-VLaT reaches 75% average success over five tasks, versus 32% without tactile input, 68% with touch but no prediction and 69% with tactile-only prediction.
+- The main Isaac-GR00T comparison uses 20 physical rollouts per configuration and about 50 demonstrations per task; the separate pi-0.5 comparison uses 10 rollouts per configuration.
+- The tactile system covers eight torso, shoulder, back and arm regions. Its values are pressure-related ADC readings in arbitrary units, not calibrated force measurements.
+
+## What changed
+
+Appending touch to a VLA policy does not guarantee that the model connects contact with body motion and scene change. Uni-VLaT encodes a four-frame tactile history into eight learned tokens, mixes those tokens with proprioceptive and action tokens inside the policy, and adds three training-only heads. Those heads predict four future tactile, proprioceptive and visual representations.
+
+The deployed system keeps the tactile pathway and action generator but discards the predictive heads. A pretrained SONIC controller converts each generated 64-dimensional motion token into coordinated whole-body commands. The vision-language model stays frozen while the action expert, state encoder and tactile modules are fine-tuned. [Method details](https://arxiv.org/html/2609.35450v1#S4).
+
+The hardware is a Unitree G1 with stereo RGB, proprioception and custom JQ Industries textile electronic skin. Sensors cover the chest, central back, both shoulders, both upper-back regions and both arms. Circumferential sleeve readings are pooled to reduce sensitivity to sleeve rotation, which also reduces the spatial detail available around the arm.
+
+## Results under the reported conditions
+
+With Isaac-GR00T as the policy backbone, the no-touch baseline averages 32% across Back-Tap Walking, Table Sweeping, Basket Loading, Human-Robot Hugging and Composed Cleanup. Adding tactile input without prediction raises the average to 68%. Tactile-only future prediction reaches 69%, and the complete three-modality objective reaches 75%.
+
+The task breakdown matters. Back-Tap Walking rises from 0% without touch to 85% with Uni-VLaT because contact itself is the instruction to walk or stop. Table Sweeping rises from 45% to 75%, while Basket Loading rises from 30% to 80%. Human-Robot Hugging reaches 80%, and the three-stage Composed Cleanup task reaches 55%. Each headline percentage in the main table corresponds to 20 real-robot rollouts. [Evaluation table](https://arxiv.org/html/2609.35450v1#S5.SS3).
+
+The cross-backbone study reports the same directional gains with pi-0.5: 0% to 90% on Back-Tap Walking, 30% to 60% on Table Sweeping and 30% to 60% on Basket Loading. Those configurations use ten rollouts, so their percentage resolution is ten points. A from-scratch diffusion-policy baseline is not assigned a success rate because three checkpoints failed the authors' SONIC pre-execution safety screen.
+
+## What this means for robotics
+
+RoboSkin analysis: whole-body tactile sensing changes what a humanoid can observe, especially when contact is broad, occluded or outside the hands. The important result is not merely the 43-point gap over the no-touch baseline. The smaller 7-point gap over touch without prediction suggests that most of the gain comes from making contact directly observable, while multimodal future supervision adds a further task-dependent benefit.
+
+For teams building [electronic skin](/e-skin) systems, the study also illustrates a practical representation choice: divide the body into stable regions, preserve temporal change, and avoid treating every taxel as an interchangeable flat vector. The trade-off is that pooling and arbitrary-unit readings do not yield calibrated forces or fine contact mechanics.
+
+## Limitations and availability
+
+Uni-VLaT is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Evaluation uses one humanoid, five tasks and about 50 demonstrations per task. The paper reports rollout counts but not confidence intervals. Results mix a discrete touch-triggered behavior with sustained manipulation, so the five-task average should not be read as one uniform capability measure.
+
+The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides task videos but still labels code as “coming soon.” It also retained stale “paper coming soon” text when checked, even though the arXiv paper was already public. No repository, dataset, checkpoint or software license was verified. The arXiv manuscript license does not grant rights to unreleased implementation assets.
+
+## Sources and related resources
+
+- [Uni-VLaT arXiv v1, submitted September 28, 2026](https://arxiv.org/abs/2609.35450)
+- [Full method, task definitions and results](https://arxiv.org/html/2609.35450v1)
+- [Official project page and real-robot videos](https://ggkiller-air.github.io/Uni-VLaT/)
+- [RoboSkin guide to tactile manipulation](/tactile-manipulation)
+`,
+  },
+  {
+    id: 'uvta-human-tactile-demonstrations-dexterous-manipulation',
+    title: 'UVTA scales dexterous policies with human tactile demonstrations',
+    seoTitle: 'UVTA Human Tactile Data for Dexterous Manipulation',
+    seoDescription: 'UVTA co-trains human and robot vision-touch-action data. Review its 70% five-task result, 5,750 demonstrations and public-release status.',
+    excerpt: 'UVTA aligns human and robot touch-action trajectories, combining 1,000 human and 150 robot demonstrations per task to train one contact-aware dexterous policy.',
+    category: 'Human tactile data',
+    image: '/generated/news/uvta-human-tactile-demonstrations-dexterous-manipulation.png',
+    imageAlt: 'Diagram of human tactile demonstrations and robot demonstrations entering a shared visual tactile action model.',
+    imageCaption: 'Original RoboSkin.ai schematic of UVTA cross-embodiment co-training. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Unified Visual-Tactile-Action Modeling from Human Demonstrations for Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.34182',
+    sources: [
+      { title: 'UVTA arXiv v1 record', url: 'https://arxiv.org/abs/2609.34182' },
+      { title: 'Full UVTA v1 paper', url: 'https://arxiv.org/html/2609.34182v1' },
+      { title: 'Official UVTA project page', url: 'https://uni-vta.github.io/' },
+      { title: 'Official UVTA repository link', url: 'https://github.com/uni-vta/UVTA' },
+    ],
+    technicalFocus: ['human tactile demonstrations', 'visual tactile action modeling', 'dexterous manipulation', 'cross-embodiment learning'],
+    sourceDate: '2026-09-28',
+    evidenceStatus: 'Preprint · arXiv v1 · five real-robot tasks · project page public · linked code repository unavailable at verification',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-29',
+    updated: '2026-09-29',
+    readTime: '8 min read',
+    content: `# UVTA scales dexterous policies with human tactile demonstrations
+
+Researchers from Shanghai Jiao Tong University, the Beijing Academy of Artificial Intelligence, Sharpa Robotics and Beijing Institute of Technology released Unified Visual-Tactile-Action Modeling, or UVTA, on September 28, 2026. The system co-trains on human and robot interaction data so that large volumes of human touch can improve a robot policy without treating human joint motion as directly executable robot commands. [Paper and version record](https://arxiv.org/abs/2609.34182).
+
+## Key takeaways
+
+- Each of five tasks uses 1,000 human demonstrations and 150 robot demonstrations, producing 5,750 demonstrations across the study.
+- The full model averages 70% stage-wise success over 10 physical trials per task, compared with 29% for the strongest reported baseline and 42% without future-tactile prediction.
+- The project links a GitHub repository, but that URL returned a public 404 during verification. No downloadable dataset, model weights or usable software license was confirmed.
+
+## What changed
+
+UVTA starts with a wearable capture system: a passive 22-degree-of-freedom hand exoskeleton records finger motion, two VIVE trackers recover wrist pose, a wrist camera captures RGB and four force-sensing regions on each fingertip produce a 20-dimensional tactile vector. The authors map these human observations into the same numerical representation used by a 22-degree-of-freedom Sharpa Wave robot hand.
+
+The model turns the current wrist image into a 384-dimensional visual token and the tactile input into a 20-dimensional token. Their concatenated 404-dimensional representation feeds a diffusion action head and a tactile regression head. Both human and robot sequences supervise the shared representation, but deployment decodes only robot actions. [Architecture and dataset](https://arxiv.org/html/2609.34182v1#S3).
+
+This is co-training rather than direct teleoperation transfer. Human hand actions still provide a learning signal, while embodiment-specific normalization and robot demonstrations teach the executable action space. The action head predicts 16 steps and executes eight before replanning from new visual and tactile observations.
+
+## What the real-robot evaluation found
+
+The five tasks are page flipping, bayonet light-bulb insertion, toggle-switch operation, tactile ball classification and liquid transfer. Every method receives the same wrist RGB, fingertip touch and right-arm/right-hand action space, and each result averages ten real-robot trials with randomized object positions or heights.
+
+UVTA reports an unweighted average of 70%: 83% on page flipping, 80% on the light bulb, 88% on the toggle switch, 56% on ball classification and 44% on liquid transfer. The strongest baseline, T-Rex, averages 29%; RDP averages 14%, and ViTacFormer averages 1%. Removing the future-tactile head but retaining touch reduces the average to 42%, while the vision-only ablation reaches 26%. [Full comparison](https://arxiv.org/html/2609.34182v1#S5.SS2).
+
+These are stage-wise scores, not purely binary task completion. For example, page turning assigns partial credit for separating pages or turning multiple pages before awarding full credit for turning exactly one. That scoring makes intermediate progress visible, but it also means the headline percentages should not be interpreted as 35 complete successes out of 50 trials.
+
+The scaling experiment holds 150 robot demonstrations per task fixed and evaluates three tasks as human data grows. The average moves from 0% with no human trajectories to 8%, 29%, 51% and 84% with 250, 500, 750 and 1,000 human trajectories. The largest reported step occurs between 750 and 1,000, but only three of the five tasks are included in this scaling curve.
+
+## What this means for robotics
+
+RoboSkin analysis: UVTA treats human touch as representation supervision rather than pretending away the embodiment gap. That is valuable for [robot datasets](/datasets), because people can generate diverse contact sequences much faster than they can teleoperate a high-dimensional robot hand.
+
+The study also shows why dataset totals need context. The 5,000 human demonstrations provide variety, while 750 robot demonstrations anchor executable behavior. Human data did not replace robot data in this experiment; it complemented it. The method therefore supports a hybrid scaling strategy, not a claim that tactile robot demonstrations are unnecessary.
+
+## Limitations and availability
+
+UVTA is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Evaluation uses one fixed-base North robot, one Sharpa Wave embodiment and five tasks. Touch is measured only at four regions per fingertip, so palm contact, shear and distributed whole-hand pressure are not represented. Ten trials per task also make small score differences uncertain.
+
+The [project page](https://uni-vta.github.io/) provides demos and limitations. Its Code button points to [github.com/uni-vta/UVTA](https://github.com/uni-vta/UVTA), but that repository returned 404 through both the public page and GitHub API at verification time. The page describes the dataset but does not expose a downloadable archive. Public links therefore should not be equated with released training assets.
+
+## Sources and related resources
+
+- [UVTA arXiv v1, submitted September 28, 2026](https://arxiv.org/abs/2609.34182)
+- [Full data, method and evaluation](https://arxiv.org/html/2609.34182v1)
+- [Official UVTA project page](https://uni-vta.github.io/)
+- [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+`,
+  },
+  {
+    id: 'tacgoosebumps-shear-encoding-tactile-sensor',
+    title: 'TacGooseBumps adds shear cues to normal-only tactile sensors',
+    seoTitle: 'TacGooseBumps Shear Encoding for Tactile Sensors',
+    seoDescription: 'TacGooseBumps is a passive domed film that encodes shear in pressure maps. Review insertion gains, fragile handling and calibration limits.',
+    excerpt: 'TacGooseBumps retrofits ordinary pressure arrays with an electronics-free dome film that converts tangential loading into learnable spatial patterns.',
+    category: 'Tactile sensor hardware',
+    image: '/generated/news/tacgoosebumps-shear-encoding-tactile-sensor.png',
+    imageAlt: 'Diagram showing tangential force tilting elastomer domes and redistributing pressure across a normal-only tactile array.',
+    imageCaption: 'Original RoboSkin.ai schematic of the TacGooseBumps mechanical encoding principle. It is explanatory artwork, not a calibrated force diagram.',
+    sourceTitle: 'TacGooseBumps (TacGB): Retrofitting Normal-Only Tactile Sensors with Shear Encoding for Learning Contact-Rich Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.34006',
+    sources: [
+      { title: 'TacGooseBumps arXiv v1 record', url: 'https://arxiv.org/abs/2609.34006' },
+      { title: 'Full TacGooseBumps v1 paper', url: 'https://arxiv.org/html/2609.34006v1' },
+    ],
+    technicalFocus: ['shear encoding', 'tactile sensor retrofit', 'contact-rich imitation learning', 'electronic skin'],
+    sourceDate: '2026-09-27',
+    evidenceStatus: 'Preprint · arXiv v1 · four physical robot tasks · no official code, CAD, dataset or software license verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-29',
+    updated: '2026-09-29',
+    readTime: '8 min read',
+    content: `# TacGooseBumps adds shear cues to normal-only tactile sensors
+
+University of California, Berkeley researchers released TacGooseBumps, or TacGB, on September 27, 2026. TacGB is a removable film of elastomeric domes that sits on an existing normal-pressure array. Tangential loading tilts each dome and redistributes pressure across neighboring taxels, giving a learned policy repeatable shear-dependent patterns without new electronics or explicit force reconstruction. [Paper and version record](https://arxiv.org/abs/2609.34006).
+
+## Key takeaways
+
+- On USB insertion, the bare pressure array succeeds in 15 of 20 rollouts, versus 19 of 20 with an off-the-shelf TacGB layer and 18 of 20 with molded domes.
+- On bayonet light-bulb insertion, success rises from 15 of 25 to 24 of 25; the 36-percentage-point gain is measured over 20 nominal and five out-of-distribution trials.
+- TacGB does not measure calibrated shear force. It mechanically encodes tangential interaction into a pressure-map pattern that an end-to-end policy may learn.
+
+## What changed
+
+Many thin electronic skins primarily report normal pressure. Adding true multi-axis sensing usually requires co-designed structures, electronics and calibration. TacGB instead changes the surface above an existing array. Each dome spans several taxels; shear causes a leading-edge increase and trailing-edge decrease in the native pressure map.
+
+The team tests both molded domes and inexpensive cabinet bumpers. Neither variant needs one-to-one dome-to-taxel registration. Policies receive the same kind of pressure-map tensor as before, so the retrofit changes the observation physics without requiring a new electrical interface. [Mechanical design](https://arxiv.org/html/2609.34006v1#S3).
+
+Two collection pipelines test the idea. USB and light-bulb insertion use a FANUC LR Mate arm, a rigid gripper and a 32-by-32 commercial capacitive array. Egg transfer and whiteboard drawing use a handheld iPhUMI setup with 12-by-32 open-source FlexiTac arrays and a compliant robot gripper.
+
+## Results beyond binary success
+
+For USB insertion, the researchers collect 100 demonstrations for each of three surfaces: bare, off-the-shelf TacGB and molded TacGB. Each policy receives the same 20 deployment initializations. Success is 75%, 95% and 90% respectively. Mean time among successful trials decreases from 29.3 seconds to 27.1 and 26.7 seconds. A surface-only control, where the robot wears the domes but the policy does not receive their pressure maps, does not reproduce the gain.
+
+For the bayonet light bulb, the off-the-shelf layer raises total success from 15/25 to 24/25. Nominal trials improve from 13/20 to 20/20, while the five changed-height/free-rotation trials improve from 2/5 to 4/5. Those five out-of-distribution episodes are too few for a stable standalone percentage, so the article preserves the counts. [Insertion evaluation](https://arxiv.org/html/2609.34006v1#S4).
+
+Egg transfer exposes a limitation of binary success. Both policies complete 25/25 rollouts, yet two eggs in the bare-sensor condition develop visible cracks. An external cup sensor—not an input to the policy—shows mean peak readout falling 66%, from 0.77 to 0.26, while mean contact-transfer duration rises from 0.99 to 3.84 seconds with TacGB. These readings are an external load proxy, not calibrated impact force.
+
+On whiteboard drawing, each policy is evaluated over 20 rollouts. TacGB improves ink coverage and reduces perpendicular path deviation, supporting the claim that the encoded signal helps with sustained two-directional contact as well as discrete insertion states.
+
+## What this means for robotics
+
+RoboSkin analysis: TacGB demonstrates a useful middle layer between sensor hardware and learned representation. If a policy needs a repeatable cue rather than a calibrated wrench, mechanical preprocessing may be cheaper than redesigning the sensor stack. This is particularly relevant to [robot skin](/robot-skin) systems where thickness, wiring and integration time are hard constraints.
+
+The engineering caveat is equally important. Pattern separability can help a policy while remaining unsuitable for safety limits, force control or comparison across sensors. A dome layer may also change friction and compliance; the paper's surface-only controls reduce that concern for the tested tasks but do not eliminate it across materials and geometries.
+
+## Limitations and availability
+
+TacGooseBumps is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Repeated deployment rollouts reuse a trained policy and therefore do not measure variability across independently trained seeds. The authors explicitly call for studies that vary dome geometry, material and layout while separating training, object and rollout variation.
+
+No official project page, public code repository, CAD or mold files, training data, checkpoints or software license was verified. The paper demonstrates off-the-shelf and lab-made surfaces, but it does not yet provide a packaged bill of materials or a calibrated shear-transfer function.
+
+## Sources and related resources
+
+- [TacGooseBumps arXiv v1, submitted September 27, 2026](https://arxiv.org/abs/2609.34006)
+- [Full design, controls and four-task evaluation](https://arxiv.org/html/2609.34006v1)
+- [RoboSkin tactile sensor guide](/sensors)
+- [RoboSkin electronic-skin overview](/e-skin)
+`,
+  },
+  {
+    id: 'dextag-tactile-guided-dexterous-retargeting',
+    title: 'DexTaG uses human touch to guide dexterous policy retargeting',
+    seoTitle: 'DexTaG Tactile-Guided Dexterous Retargeting',
+    seoDescription: 'DexTaG uses glove touch as RL guidance, then deploys without robot tactile sensors. Review tool-use results, retries and the MIT code release.',
+    excerpt: 'DexTaG records full-hand tactile maps during human tool use, rewards simulated robot contact patterns during retargeting and distills a vision-proprioception controller.',
+    category: 'Dexterous policy learning',
+    image: '/generated/news/dextag-tactile-guided-dexterous-retargeting.png',
+    imageAlt: 'Diagram showing a tactile glove guiding simulated reinforcement learning before distillation to a tactile-free robot controller.',
+    imageCaption: 'Original RoboSkin.ai schematic of the DexTaG training and deployment pipeline. It is explanatory artwork, not an experiment screenshot.',
+    sourceTitle: 'DexTaG: Tactile-as-Guidance in Reinforcement Learning for Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.33882',
+    sources: [
+      { title: 'DexTaG arXiv v1 record', url: 'https://arxiv.org/abs/2609.33882' },
+      { title: 'Full DexTaG v1 paper', url: 'https://arxiv.org/html/2609.33882v1' },
+      { title: 'Official DexTaG project page', url: 'https://dextag.github.io/' },
+      { title: 'Official DexTaG MIT-licensed repository', url: 'https://github.com/UMass-Embodied-AGI/DexTaG' },
+    ],
+    technicalFocus: ['tactile-guided reinforcement learning', 'dexterous retargeting', 'human demonstrations', 'open-source robot learning'],
+    sourceDate: '2026-09-27',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · MIT code, data and retargeter checkpoints available',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-29',
+    updated: '2026-09-29',
+    readTime: '9 min read',
+    content: `# DexTaG uses human touch to guide dexterous policy retargeting
+
+Researchers from the University of Massachusetts Amherst and Genesis AI released DexTaG on September 27, 2026. DexTaG records human hand motion and a 24-by-32 tactile glove map, uses those contact patterns to shape reinforcement-learning retargeting in simulation, and then distills the result into a controller that runs on a real xArm7 and WUJI hand without tactile sensing. [Paper and version record](https://arxiv.org/abs/2609.33882).
+
+## Key takeaways
+
+- The dataset contains 100 marker-pen and 140 hammer demonstrations. One retargeter is trained across all trajectories for each object rather than fitting a separate policy to every demonstration.
+- In the five-seed tactile-reward ablation, trajectory completion reaches 87.5% for the marker and 76.8% for the hammer, versus 24.7% and 27.6% without tactile rewards.
+- The official MIT-licensed repository includes simulation training code and links to a 209 MB demonstration archive plus two 21 MB pretrained retargeters. Real-robot control code and student checkpoints are not described as released.
+
+## What changed
+
+DexTaG uses human tactile readings as training guidance, not as a sensor stream for the deployed robot. A WUJI glove records five electromagnetic fingertip poses, wrist motion and a full-hand pressure map. After background correction, the authors retarget the human motion to a robot reference and align glove regions with about 700 simulated tactile points on the WUJI robot hand.
+
+The reinforcement-learning reward has two tactile components. One uses the recorded glove map to decide which fingertips should approach the object. The other compares normalized, smoothed simulated and human contact maps. Because the maps are independently normalized, the reward matches contact pattern rather than absolute force magnitude. [Tactile-guidance method](https://arxiv.org/html/2609.33882v1#S3.SS2).
+
+A PPO retargeter learns marker and hammer tool use in Genesis. It observes the motion reference, simulated state, simulated tactile map and a future-reference window. Behavior cloning with DAgger then distills the teacher into a student that sees joint angles, a target object trajectory, a wrist-camera point cloud and recent proprioception/action history.
+
+## Results and the retry denominator
+
+Across five training seeds, the complete tactile reward reaches 87.5% plus or minus 4.0 points of trajectory completion on the marker, compared with 48.6% for geometry-gated contact and 24.7% without tactile rewards. On the hammer, the reported figures are 76.8% plus or minus 27.7, 29.9% plus or minus 5.5 and 27.6% plus or minus 0.1. The large hammer variance makes the mean less conclusive than the marker result. [Reward ablation](https://arxiv.org/html/2609.33882v1#S4.SS1).
+
+For OakInk2, DexTaG trains one policy per object and compares it with per-trajectory ManipTrans policies. Its trajectory-weighted completion is 67.5% with one reference and 67.2% with all references. ManipTrans with the WUJI hand falls from 58.5% to 30.0%. The compute budgets are not matched: each DexTaG policy trains for 24 hours and each ManipTrans policy for eight hours on an NVIDIA L40S. Sharing policies nevertheless reduces the authors' estimated aggregate training from 1,632 to 72 policy-hours across 204 trajectories.
+
+Real-world reporting requires special care. The primary table evaluates 30 training-set references per object with up to three attempts each and keeps the furthest stage reached. Hammer pickup, functional grasp and placement are 22/30, 17/30 and 15/30. Marker figures are 21/30, 13/30 and 10/30. Per recorded attempt, full placement is 15/83 for the hammer and 10/86 for the marker. The best-of-three percentage measures recovery with limited retries, not single-attempt reliability.
+
+## What this means for robotics
+
+RoboSkin analysis: DexTaG offers a pragmatic answer to an embodiment mismatch. Human contact maps do not have to become robot tactile inputs; they can instead define what a plausible grasp should feel like during simulation training. That makes touch useful even when the deployed hand lacks sensors.
+
+The limitation is feedback at runtime. After distillation, the controller cannot directly detect slip or unexpected contact, so the pipeline transfers a contact-informed behavior prior rather than delivering tactile closed-loop control. It complements, rather than replaces, sensorized [dexterous manipulation](/tactile-manipulation).
+
+## Limitations and availability
+
+DexTaG is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The real-world references come from the training set, initial objects are manually placed and the headline physical result permits up to three attempts. The controller targets one xArm7-WUJI embodiment and two tools; adapting another hand requires new robot models, tactile mapping and retargeted demonstrations.
+
+The [official repository](https://github.com/UMass-Embodied-AGI/DexTaG) is public under MIT. Its README links a 209 MB demonstration archive and 21 MB pretrained retargeters for both tools, and documents training, evaluation and distillation. The repository notes that the tactile simulator depends on a specific Genesis fork. Readers should separately verify Google Drive file access and licenses for bundled meshes or third-party assets before redistribution.
+
+## Sources and related resources
+
+- [DexTaG arXiv v1, submitted September 27, 2026](https://arxiv.org/abs/2609.33882)
+- [Full method, ablations and real-world protocol](https://arxiv.org/html/2609.33882v1)
+- [Official project page](https://dextag.github.io/)
+- [MIT-licensed code, data links and retargeter checkpoints](https://github.com/UMass-Embodied-AGI/DexTaG)
+- [RoboSkin robot-learning guide](/robot-learning)
+`,
+  },
+  {
     id: 'blind-grasp-reflex-proprioceptive-dexterous-hand',
     title: 'A blind grasp reflex lets a dexterous hand feel through proprioception',
     seoTitle: 'Blind Grasp Reflex for Proprioceptive Dexterous Hands',

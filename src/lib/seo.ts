@@ -28,7 +28,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
       'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-09-28',
+    updated: '2026-09-29',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -272,7 +272,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI and Physical AI News',
     description:
       'Follow source-backed news on robot skin, tactile AI, electronic skin, tactile sensors, dexterous manipulation, and touch for Physical AI.',
-    updated: '2026-09-28',
+    updated: '2026-09-29',
     priority: 0.72,
     changeFrequency: 'weekly',
     index: true,
