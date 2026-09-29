@@ -485,7 +485,7 @@ if (failures.length === 0) {
   const graphRobots = (graph.entities ?? []).filter((entity) => entity.type === 'robot');
   const expectedRobotIds = new Set(graphRobots.map((robot) => robot.canonicalUrl));
   const robotSchemaNodes = robotJsonLdNodes.filter((node) => (
-    node?.['@type'] === 'Thing' && expectedRobotIds.has(node?.['@id'])
+    ['Thing', 'Product'].includes(node?.['@type']) && expectedRobotIds.has(node?.['@id'])
   ));
   const listedRobotIds = Array.isArray(robotList?.itemListElement)
     ? robotList.itemListElement.map((entry) => entry.item?.['@id'])

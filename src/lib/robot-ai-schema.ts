@@ -55,9 +55,6 @@ export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
           '@id': `${robotDirectoryUrl}#robot-${robotId}`,
         })),
       } : {}),
-      isPartOf: {
-        '@id': `${directoryUrl}#model-directory`,
-      },
       mainEntityOfPage: {
         '@id': `${directoryUrl}#webpage`,
       },

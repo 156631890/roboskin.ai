@@ -1,0 +1,4070 @@
+{
+  "baseSha": "adc5075c9d7dba3eb75c1636e83a670437abb2b0",
+  "scope": "Before: original 161-page audit baseline. After: 165 exported sitemap HTML documents on latest main, including four new News pages. No live deployment or Ahrefs recrawl claim.",
+  "exceptions": [],
+  "metadataChanges": [
+    {
+      "path": "/solutions",
+      "pageType": "Topic / other",
+      "field": "title",
+      "beforeLength": 74,
+      "afterLength": 65,
+      "before": "Tactile Sensing Problems: Slip, Coverage, Calibration & Data | RoboSkin.ai",
+      "after": "Tactile Sensing: Slip, Coverage, Calibration & Data | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/physical-ai",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 173,
+      "afterLength": 152,
+      "before": "Physical AI connects multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback. Map the full system and its tactile contact layer.",
+      "after": "Physical AI connects multimodal perception, reasoning, policies, control, embodiment, safety and feedback. Map the system and its tactile contact layer.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/faq",
+      "pageType": "Topic / other",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 62,
+      "before": "Robot Skin & Tactile Sensing FAQ: Selection, Data & Control | RoboSkin.ai",
+      "after": "Robot Skin FAQ: Sensor Selection, Data & Control | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 162,
+      "afterLength": 154,
+      "before": "Read tactile robotics paper reviews covering sensors, robot skin, manipulation, and learning. Compare methods, reported results, limitations, and primary sources.",
+      "after": "Read tactile robotics paper reviews on sensors, robot skin, manipulation and learning. Compare methods, reported results, limitations and primary sources.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research-index",
+      "pageType": "Directory",
+      "field": "title",
+      "beforeLength": 74,
+      "afterLength": 62,
+      "before": "RoboSkin Tactile Research Index: Sensors, Data, and Evidence | RoboSkin.ai",
+      "after": "Tactile Research Index: Sensors, Data & Evidence | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/organizations",
+      "pageType": "Directory",
+      "field": "description",
+      "beforeLength": 162,
+      "afterLength": 158,
+      "before": "Browse source-verified universities, labs, and companies connected to tactile papers, datasets, benchmarks, sensors, and robot AI models with evidence boundaries.",
+      "after": "Browse source-verified universities, labs and companies linked to tactile papers, datasets, benchmarks, sensors and robot AI models, with evidence boundaries.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/slipsense-multimodal-slip-detection-2026",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 161,
+      "afterLength": 151,
+      "before": "How SlipSense labels slip, combines pressure and vibration, measures detection delay, and exposes the gap between detecting slip and preventing a dropped object.",
+      "after": "How SlipSense labels slip, combines pressure and vibration, measures delay, and exposes the gap between detecting slip and preventing a dropped object.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/touch2trace-tactile-cable-tracing-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 67,
+      "before": "Touch2Trace: Cable Tracing, Control Rate & Tactile History | RoboSkin.ai",
+      "after": "Touch2Trace: Cable Tracing, Control & Tactile History | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/visible-touch-contact-overlays-visuomotor-policies-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 74,
+      "afterLength": 61,
+      "before": "Visible Touch: Contact Overlays, Calibration & Robot Results | RoboSkin.ai",
+      "after": "Visible Touch: Contact Overlays & Robot Results | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/tacprint-wearable-tactile-contact-reproduction-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 58,
+      "before": "TacPrint: Wearable Touch, Depth Reconstruction & Grasp Data | RoboSkin.ai",
+      "after": "TacPrint: Wearable Touch, Depth & Grasp Data | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/tacverse-cross-sensor-tactile-dataset-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 65,
+      "before": "TacVerse Dataset: 106,800 Images, Transfer Results & Access | RoboSkin.ai",
+      "after": "TacVerse: 106,800 Images, Transfer Results & Access | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/vision-based-tactile-intelligence-robotics-survey-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 64,
+      "before": "Vision-Based Tactile Sensors for Robotics: 2026 Survey Map | RoboSkin.ai",
+      "after": "Vision-Based Tactile Sensors: 2026 Robotics Survey | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 62,
+      "before": "SoftVTBench Visuo-Tactile Dataset and Deformation Benchmark | RoboSkin.ai",
+      "after": "SoftVTBench: Visuo-Tactile Deformation Benchmark | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 166,
+      "afterLength": 144,
+      "before": "SoftVTBench reports 4,000 simulated demonstrations across 40 tasks. Review its DSR metric, simulated Franka and GelSight scope, and conflicting release documentation.",
+      "after": "SoftVTBench reports 4,000 simulated demos over 40 tasks. Review DSR, simulated Franka and GelSight scope, and conflicting release documentation.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/robotacdex-humanoid-visual-tactile-action-dataset-2026",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 161,
+      "afterLength": 153,
+      "before": "RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.",
+      "after": "RoboTacDex reports 6,000+ Unitree G1 trajectories, 19 tasks, an author-reported 23 skills and 22 objects with RGB, depth, touch and semantic annotations.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/sparsh-x-multisensory-touch-representations-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 57,
+      "before": "Sparsh-X multisensory touch representations for tactile AI | RoboSkin.ai",
+      "after": "Sparsh-X Multisensory Touch Representations | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/mitas-multi-resolution-tactile-imitation-learning-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 79,
+      "afterLength": 64,
+      "before": "MiTaS multi-resolution tactile imitation learning for robot hands | RoboSkin.ai",
+      "after": "MiTaS: Multi-Resolution Tactile Imitation Learning | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/open-source-magnetic-tactile-calibration-2024",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 54,
+      "before": "Open-Source Magnetic Tactile Calibration for Robot Grippers | RoboSkin.ai",
+      "after": "Open-Source Magnetic Tactile Calibration | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/eflesh-customizable-magnetic-touch-sensing-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 79,
+      "afterLength": 62,
+      "before": "eFlesh and customizable magnetic touch sensing for robot grippers | RoboSkin.ai",
+      "after": "eFlesh: Customizable Magnetic Touch for Grippers | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/humanoid-visual-tactile-action-dataset-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 64,
+      "before": "GIST Humanoid Visual-Tactile-Action Dataset: 101.9K Samples | RoboSkin.ai",
+      "after": "GIST Visual-Tactile-Action Dataset: 101.9K Samples | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/tactile-robotics-outlook-research-landscape-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 59,
+      "before": "Tactile Robotics outlook for robot skin research priorities | RoboSkin.ai",
+      "after": "Tactile Robotics Outlook: Robot Skin Research | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/tactile-robotics-outlook-research-landscape-2025",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 162,
+      "afterLength": 132,
+      "before": "A source-backed research landscape note on Tactile Robotics outlook, sensor types, distributed tactile sensing, simulation, benchmarking, and data interpretation.",
+      "after": "A source-backed note on Tactile Robotics outlook, sensor types, distributed touch, simulation, benchmarking and data interpretation.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/wet-slippage-bionic-fingertip-eskin-2026",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 161,
+      "afterLength": 147,
+      "before": "A source-backed note on AI-integrated bionic fingertip e-skin, wet slippage detection, fingerprint microtextures, and why dry-surface slip claims are not enough.",
+      "after": "A note on AI-integrated bionic fingertip e-skin, wet slippage detection, fingerprint microtextures, and why dry-surface slip claims are not enough.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/origami-capacitive-robotic-eskin-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 78,
+      "afterLength": 60,
+      "before": "Origami capacitive robotic e-skin for large-area tactile sensing | RoboSkin.ai",
+      "after": "Origami Capacitive E-Skin for Large-Area Touch | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/genforce-transferable-force-sensing-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 65,
+      "before": "GenForce Force Sensing for Robot Skin and Tactile Sensors | RoboSkin.ai",
+      "after": "GenForce: Transferable Force Sensing for Robot Skin | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/dexskin-high-coverage-conformable-robotic-skin-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 66,
+      "before": "DexSkin Conformable Robot Skin for Dexterous Manipulation | RoboSkin.ai",
+      "after": "DexSkin: Conformable Skin for Dexterous Manipulation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/dexskin-high-coverage-conformable-robotic-skin-2025",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 161,
+      "afterLength": 150,
+      "before": "A practical research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer, and contact-rich manipulation learning.",
+      "after": "A research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer and contact-rich manipulation learning.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/fluid-based-robot-skin-thermal-contact-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 78,
+      "afterLength": 63,
+      "before": "Fluid-based robot skin for contact detection and thermal display | RoboSkin.ai",
+      "after": "Fluid-Based Robot Skin: Contact & Thermal Display | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/graphene-liquid-metal-3d-force-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 77,
+      "afterLength": 65,
+      "before": "Graphene and liquid metal 3D force sensing for robot fingertips | RoboSkin.ai",
+      "after": "Graphene & Liquid Metal: 3D Fingertip Force Sensing | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/single-material-soft-robotic-skin-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 77,
+      "afterLength": 67,
+      "before": "Single-material soft robotic skin for multimodal e-skin sensing | RoboSkin.ai",
+      "after": "Single-Material Soft Robotic Skin: Multimodal Sensing | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/single-material-soft-robotic-skin-2025",
+      "pageType": "Research",
+      "field": "description",
+      "beforeLength": 206,
+      "afterLength": 150,
+      "before": "A peer-reviewed single-material robotic skin uses wrist-mounted EIT electrodes and data-driven channel selection to interpret touch, strain, heat, damage, environment, and proprioception across a soft hand.",
+      "after": "Peer-reviewed soft robotic skin uses wrist EIT and data-driven channel selection to sense touch, strain, heat, damage, environment and proprioception.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/full-hand-tactile-sensing-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 62,
+      "before": "Full-hand tactile sensing for adaptive dexterous grasping | RoboSkin.ai",
+      "after": "Full-Hand Tactile Sensing for Dexterous Grasping | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/temperature-pressure-bimodal-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 76,
+      "afterLength": 65,
+      "before": "Temperature/pressure bimodal sensing and the crosstalk problem | RoboSkin.ai",
+      "after": "Temperature/Pressure Sensing: The Crosstalk Problem | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/event-based-opto-tactile-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 77,
+      "afterLength": 68,
+      "before": "Event-based tactile sensing for sparse, low-latency robot touch | RoboSkin.ai",
+      "after": "Event-Based Tactile Sensing: Sparse, Low-Latency Touch | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/self-healing-multimodal-eskin-2026",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 78,
+      "afterLength": 63,
+      "before": "Self-healing multimodal e-skin: useful direction, careful claims | RoboSkin.ai",
+      "after": "Self-Healing Multimodal E-Skin: Evidence & Limits | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/research/large-area-flexible-tactile-arrays-2025",
+      "pageType": "Research",
+      "field": "title",
+      "beforeLength": 74,
+      "afterLength": 65,
+      "before": "Large-area flexible tactile arrays for curved robot surfaces | RoboSkin.ai",
+      "after": "Large-Area Tactile Arrays for Curved Robot Surfaces | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/tactilestep-sole-pressure-humanoid-locomotion",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 61,
+      "before": "TactileStep: Sole Tactile Feedback for Humanoid Locomotion | RoboSkin.ai",
+      "after": "TactileStep: Sole Touch for Humanoid Locomotion | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/anthropomimetic-forearm-carpal-stiffness",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 64,
+      "before": "Open Anthropomimetic Forearm Tests Carpal Wrist Stiffness | RoboSkin.ai",
+      "after": "Open Anthropomimetic Forearm Tests Wrist Stiffness | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/internw0-contact-aware-world-model-pipetting",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 62,
+      "before": "InternW0: Contact-Aware Pipetting Results and Model Access | RoboSkin.ai",
+      "after": "InternW0: Contact-Aware Pipetting & Model Access | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/internw0-contact-aware-world-model-pipetting",
+      "pageType": "News",
+      "field": "description",
+      "beforeLength": 163,
+      "afterLength": 147,
+      "before": "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous action latency and EgoLab training data. Check what code and model assets are available.",
+      "after": "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous latency and EgoLab training data. Check available code and model assets.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/better-curriculum-tactile-reflex-fragile-grasping",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 68,
+      "before": "Better Curriculum: Tactile Reflex Data for Fragile Grasping | RoboSkin.ai",
+      "after": "Better Curriculum: Tactile Reflex for Fragile Grasping | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/visforce-visual-force-grounding-dexterous-manipulation",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 63,
+      "before": "VisForce: Visual Force Grounding for Dexterous Manipulation | RoboSkin.ai",
+      "after": "VisForce: Visual Force for Dexterous Manipulation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/cartesian-hand-all-linear-in-hand-manipulation",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 62,
+      "before": "Cartesian Hand: Seven Linear Axes for In-Hand Manipulation | RoboSkin.ai",
+      "after": "Cartesian Hand: Linear-Axis In-Hand Manipulation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/crisp-contact-simulation-geometry-solvers-release",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 73,
+      "afterLength": 65,
+      "before": "CRISP Robot Simulation: Contact Results, Access and License | RoboSkin.ai",
+      "after": "CRISP Simulation: Contact Results, Access & License | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026",
+      "pageType": "News",
+      "field": "description",
+      "beforeLength": 163,
+      "afterLength": 152,
+      "before": "Review Purdue’s FibTac gripper: fiber-based tactile sensing, liquid and underwater classification results, experiment sizes, payload, and public evaluation assets.",
+      "after": "Review Purdue’s FibTac gripper: fiber-based touch, liquid and underwater classification results, experiment sizes, payload and public evaluation assets.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/twins-aist-body-surface-tactile-demonstrations-2026",
+      "pageType": "News",
+      "field": "description",
+      "beforeLength": 165,
+      "afterLength": 157,
+      "before": "AIST’s TWINS uses 219 tactile cells to collect contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware, and learning-code limits.",
+      "after": "AIST’s TWINS uses 219 tactile cells for contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware and learning-code limits.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 61,
+      "before": "Three-Channel Textile Artificial Skin Controls a Robot Arm | RoboSkin.ai",
+      "after": "Three-Channel Textile Skin Controls a Robot Arm | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 67,
+      "before": "TouchWorld Tactile Foundation Model for Robot Manipulation | RoboSkin.ai",
+      "after": "TouchWorld: Tactile Foundation Model for Manipulation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+      "pageType": "News",
+      "field": "description",
+      "beforeLength": 165,
+      "afterLength": 147,
+      "before": "The TouchWorld preprint proposes a hierarchical tactile foundation model that combines contact prediction with fast feedback for dexterous, contact-rich robot tasks.",
+      "after": "The TouchWorld preprint proposes a hierarchical tactile foundation model combining contact prediction with fast feedback for dexterous robot tasks.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/color-changing-mechanochromic-tactile-sensor-2026",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 65,
+      "before": "Color-Changing Tactile Sensor Maps Robot Contact Pressure | RoboSkin.ai",
+      "after": "Color-Changing Tactile Sensor Maps Contact Pressure | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/electronic-skin-research-robot-skin-systems-problem",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 79,
+      "afterLength": 63,
+      "before": "Electronic skin research is becoming a robot skin systems problem | RoboSkin.ai",
+      "after": "Electronic Skin Research: A Robot Systems Problem | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/news/global-robot-installations-542000-physical-ai-touch",
+      "pageType": "News",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 60,
+      "before": "Global Robot Installations Pass 542,000: Why Touch Matters | RoboSkin.ai",
+      "after": "542,000 Robot Installations: Why Touch Matters | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/sensors/reskin",
+      "pageType": "Sensor detail",
+      "field": "title",
+      "beforeLength": 72,
+      "afterLength": 64,
+      "before": "ReSkin Magnetic Tactile Sensor: Design, Data & Calibration | RoboSkin.ai",
+      "after": "ReSkin Magnetic Sensor: Design, Data & Calibration | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/sensors/reskin",
+      "pageType": "Sensor detail",
+      "field": "description",
+      "beforeLength": 165,
+      "afterLength": 139,
+      "before": "Understand ReSkin magnetic tactile sensing: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection, and calibration evidence.",
+      "after": "Understand ReSkin: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection and calibration evidence.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/robotics-programming",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 162,
+      "afterLength": 159,
+      "before": "Start robotics programming with Python, ROS 2 and sensor feedback. Follow a hardware-free tactile data exercise, then explore messages, replay and robot learning.",
+      "after": "Start robotics programming with Python, ROS 2 and sensor feedback. Try a hardware-free tactile data exercise, then explore messages, replay and robot learning.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/ros2-tactile-sensing",
+      "pageType": "Guide",
+      "field": "description",
+      "beforeLength": 174,
+      "afterLength": 154,
+      "before": "Build the RoboSkin ROS 2 starter kit, inspect normalized tactile arrays and use rosbag2 to record and replay. Includes verified source references and explicit runtime limits.",
+      "after": "Build the RoboSkin ROS 2 starter kit, inspect normalized tactile arrays, and record and replay with rosbag2. Includes sources and explicit runtime limits.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/python-tactile-data-processing",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 87,
+      "afterLength": 65,
+      "before": "Process Tactile Sensor Data with Python: CSV, Heatmaps and Contact Events | RoboSkin.ai",
+      "after": "Python Tactile Data: CSV, Heatmaps & Contact Events | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/python-tactile-data-processing",
+      "pageType": "Guide",
+      "field": "description",
+      "beforeLength": 175,
+      "afterLength": 154,
+      "before": "Run a hardware-free Python exercise with synthetic tactile CSV data. Validate missing values and timestamps, plot a heatmap, detect teaching contact events and export results.",
+      "after": "Run a hardware-free Python exercise with synthetic tactile CSV data: validate missing values and timing, plot heatmaps, detect teaching events and export.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/lerobot-dataset-format",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 83,
+      "afterLength": 67,
+      "before": "LeRobot Dataset Format Explained: Episodes, Timestamps and Validation | RoboSkin.ai",
+      "after": "LeRobot Dataset Format: Episodes, Timing & Validation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/tactile-sensor-calibration",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 75,
+      "afterLength": 66,
+      "before": "Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows | RoboSkin.ai",
+      "after": "Tactile Calibration: DIGIT & GelSight Mini Workflows | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/ai-robotics",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 211,
+      "afterLength": 153,
+      "before": "AI provides perception, reasoning, prediction, and learned policies; robotics provides sensors, control, actuators, safety, and a physical body. Map the closed loop from instruction to action and touch feedback.",
+      "after": "Map AI perception, reasoning and policies to robot sensors, control, actuators and safety. Follow the loop from instruction to physical action and touch.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/tactile-ai",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 171,
+      "afterLength": 152,
+      "before": "Tactile AI turns robot touch signals into perception, learned representations, and action. Explore models, datasets, benchmarks, robot platforms, and Physical AI research.",
+      "after": "Tactile AI turns robot touch into perception, learned representations and action. Explore models, datasets, benchmarks, robot platforms and Physical AI.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/humanoid-robot-skin",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 163,
+      "afterLength": 140,
+      "before": "Humanoid robot skin brings tactile sensing to hands, arms, and body surfaces. Map the whole-body tactile stack, safety boundaries, sensors, datasets, and research.",
+      "after": "Humanoid robot skin brings touch to hands, arms and body surfaces. Map the tactile stack, safety boundaries, sensors, datasets and research.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/applications/robot-hand-tactile-sensor",
+      "pageType": "Application",
+      "field": "description",
+      "beforeLength": 165,
+      "afterLength": 131,
+      "before": "Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.",
+      "after": "Robot hand tactile sensors detect contact, slip, force patterns and grasp stability. Compare fingertip, palm and full-hand sensing.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/physical-ai-touch",
+      "pageType": "Topic / other",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 63,
+      "before": "Physical AI & Touch: Tactile Sensing for Embodied Systems | RoboSkin.ai",
+      "after": "Physical AI & Touch: Sensing for Embodied Systems | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/applications/robot-gripper-tactile-sensor",
+      "pageType": "Application",
+      "field": "title",
+      "beforeLength": 75,
+      "afterLength": 67,
+      "before": "Robot Gripper Tactile Sensor Guide for Contact-Aware Grasping | RoboSkin.ai",
+      "after": "Robot Gripper Tactile Sensors: Contact-Aware Grasping | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/applications/robot-gripper-tactile-sensor",
+      "pageType": "Application",
+      "field": "description",
+      "beforeLength": 165,
+      "afterLength": 139,
+      "before": "Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.",
+      "after": "Robot gripper tactile sensors detect contact, pressure patterns, slip and grasp stability. Learn what to evaluate before selecting sensors.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/tactile-sensor-for-robots",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 64,
+      "before": "Tactile Sensor for Robots: Selection and Evaluation Guide | RoboSkin.ai",
+      "after": "Tactile Sensors for Robots: Selection & Evaluation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/robot-skin-vs-tactile-sensor",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 75,
+      "afterLength": 63,
+      "before": "Robot Skin vs Tactile Sensor: System and Component Difference | RoboSkin.ai",
+      "after": "Robot Skin vs Tactile Sensor: System vs Component | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/tactile-feedback-for-physical-ai",
+      "pageType": "Guide",
+      "field": "title",
+      "beforeLength": 75,
+      "afterLength": 64,
+      "before": "From Tactile Sensing to Robot Action: What the Evidence Shows | RoboSkin.ai",
+      "after": "From Tactile Sensing to Robot Action: The Evidence | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/tactile-feedback-for-physical-ai",
+      "pageType": "Guide",
+      "field": "description",
+      "beforeLength": 181,
+      "afterLength": 158,
+      "before": "Does better touch sensing improve robot manipulation? Compare detection, control and task evidence from six studies, with trial counts, training limits and verified resource access.",
+      "after": "Does better touch improve manipulation? Compare detection, control and task evidence from six studies, with trial counts, training limits and resource access.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/guides/visuo-tactile-world-models-robot-manipulation",
+      "pageType": "Guide",
+      "field": "description",
+      "beforeLength": 163,
+      "afterLength": 151,
+      "before": "Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: what each predicts, how it guides robot actions, reported results and limits, with primary sources.",
+      "after": "Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: predictions, roles in robot actions, reported results and limits, with primary sources.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/visuo-tactile",
+      "pageType": "Topic / other",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 63,
+      "before": "Visuo-Tactile Robotics: Perception, Data and Manipulation | RoboSkin.ai",
+      "after": "Visuo-Tactile Robotics: Perception & Manipulation | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/robot-manipulation",
+      "pageType": "Topic / other",
+      "field": "title",
+      "beforeLength": 71,
+      "afterLength": 60,
+      "before": "Robot Manipulation: Learning, Grasping, Touch & Dexterity | RoboSkin.ai",
+      "after": "Robot Manipulation: Learning, Grasping & Touch | RoboSkin.ai",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/robotics-datasets",
+      "pageType": "Directory",
+      "field": "description",
+      "beforeLength": 168,
+      "afterLength": 150,
+      "before": "Compare robotics datasets by robot, task, modality, action space, timing, access, and license. Find robot learning, manipulation, teleoperation, VLA, and humanoid data.",
+      "after": "Compare robotics datasets by robot, task, modality, action space, timing, access and license. Find manipulation, teleoperation, VLA and humanoid data.",
+      "resolution": "editorial rewrite"
+    },
+    {
+      "path": "/robot-teleoperation",
+      "pageType": "Topic / other",
+      "field": "description",
+      "beforeLength": 170,
+      "afterLength": 153,
+      "before": "Learn how robot teleoperation captures demonstrations for robot learning and VLA training, including interfaces, synchronization, quality control, limits, and evaluation.",
+      "after": "Learn how teleoperation captures demonstrations for robot learning and VLA training: interfaces, synchronization, quality control, limits and evaluation.",
+      "resolution": "editorial rewrite"
+    }
+  ],
+  "schemaBefore": {
+    "version": "30.1",
+    "issues": [
+      {
+        "path": "/",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/physical-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/physical-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/physical-ai",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/physical-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/physical-ai",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/physical-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[87]",
+        "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[87]",
+        "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[88]",
+        "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[88]",
+        "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[89]",
+        "id": "https://roboskin.ai/sensors#sensor-biotac",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[89]",
+        "id": "https://roboskin.ai/sensors#sensor-biotac",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[90]",
+        "id": "https://roboskin.ai/sensors#sensor-uskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[90]",
+        "id": "https://roboskin.ai/sensors#sensor-uskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[91]",
+        "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[91]",
+        "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[92]",
+        "id": "https://roboskin.ai/robots#robot-unitree-g1",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[92]",
+        "id": "https://roboskin.ai/robots#robot-unitree-g1",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[93]",
+        "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[93]",
+        "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[94]",
+        "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[94]",
+        "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[95]",
+        "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[95]",
+        "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[96]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[96]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[97]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[97]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[98]",
+        "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[98]",
+        "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[99]",
+        "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/organizations",
+        "location": "$[2].@graph[99]",
+        "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[1]",
+        "id": "https://roboskin.ai/robots#robot-franka-panda-univtac-gelsight-mini-simulation-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[1]",
+        "id": "https://roboskin.ai/robots#robot-franka-panda-univtac-gelsight-mini-simulation-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[2]",
+        "id": "https://roboskin.ai/robots#robot-tianji-marvin-univtac-gf225-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[2]",
+        "id": "https://roboskin.ai/robots#robot-tianji-marvin-univtac-gf225-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[4]",
+        "id": "https://roboskin.ai/robots#robot-unitree-g1",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[4]",
+        "id": "https://roboskin.ai/robots#robot-unitree-g1",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[4]",
+        "id": "https://roboskin.ai/robots#robot-unitree-g1",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[5]",
+        "id": "https://roboskin.ai/robots#robot-franka-duo",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[5]",
+        "id": "https://roboskin.ai/robots#robot-franka-duo",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[6]",
+        "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[6]",
+        "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[6]",
+        "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[7]",
+        "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[7]",
+        "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[7]",
+        "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[8]",
+        "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[8]",
+        "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[8]",
+        "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[9]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[9]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[9]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[10]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[10]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[10]",
+        "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[11]",
+        "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[11]",
+        "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[11]",
+        "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[12]",
+        "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[12]",
+        "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[12]",
+        "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[13]",
+        "id": "https://roboskin.ai/robots#robot-aloha-bimanual-teleoperation-setup",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[13]",
+        "id": "https://roboskin.ai/robots#robot-aloha-bimanual-teleoperation-setup",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[14]",
+        "id": "https://roboskin.ai/robots#robot-google-rt-mobile-manipulator",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[14]",
+        "id": "https://roboskin.ai/robots#robot-google-rt-mobile-manipulator",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[15]",
+        "id": "https://roboskin.ai/robots#robot-palm-e-mobile-manipulator",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[15]",
+        "id": "https://roboskin.ai/robots#robot-palm-e-mobile-manipulator",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[16]",
+        "id": "https://roboskin.ai/robots#robot-language-table-setup",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[16]",
+        "id": "https://roboskin.ai/robots#robot-language-table-setup",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[17]",
+        "id": "https://roboskin.ai/robots#robot-kuka-iiwa7-allegro-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[17]",
+        "id": "https://roboskin.ai/robots#robot-kuka-iiwa7-allegro-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[18]",
+        "id": "https://roboskin.ai/robots#robot-flexiv-rizon-sharpa-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[18]",
+        "id": "https://roboskin.ai/robots#robot-flexiv-rizon-sharpa-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[19]",
+        "id": "https://roboskin.ai/robots#robot-dexmate-vega-1-sharpa-wave-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[19]",
+        "id": "https://roboskin.ai/robots#robot-dexmate-vega-1-sharpa-wave-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[20]",
+        "id": "https://roboskin.ai/robots#robot-realman-rm65b-vitar-tactile-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[20]",
+        "id": "https://roboskin.ai/robots#robot-realman-rm65b-vitar-tactile-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[21]",
+        "id": "https://roboskin.ai/robots#robot-xhand-ur7e-retouch-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[21]",
+        "id": "https://roboskin.ai/robots#robot-xhand-ur7e-retouch-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[22]",
+        "id": "https://roboskin.ai/robots#robot-franka-research-3-dm-tac-ws-tau-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[22]",
+        "id": "https://roboskin.ai/robots#robot-franka-research-3-dm-tac-ws-tau-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[23]",
+        "id": "https://roboskin.ai/robots#robot-realman-rm75b-dm-tac-w-unitacvla-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[23]",
+        "id": "https://roboskin.ai/robots#robot-realman-rm75b-dm-tac-w-unitacvla-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[24]",
+        "id": "https://roboskin.ai/robots#robot-franka-panda-robotiq-gelsight-vla-touch-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "category",
+        "rule": "domain",
+        "reason": "category is not applicable to Thing; expected ActionAccessSpecification/Guide/Invoice/Offer/PhysicalActivity/Product/Recommendation/Service/SpecialAnnouncement"
+      },
+      {
+        "path": "/robots",
+        "location": "$[2].@graph[24]",
+        "id": "https://roboskin.ai/robots#robot-franka-panda-robotiq-gelsight-vla-touch-configuration",
+        "types": [
+          "Thing"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/sensors/digit",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/sensors/digit#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/sensors/gelsight-mini",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/sensors/gelsight-mini#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/sensors/reskin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/sensors/reskin#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robotics-programming",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robotics-programming#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/ros2-tactile-sensing",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/ros2-tactile-sensing#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/python-tactile-data-processing",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/python-tactile-data-processing#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/lerobot-dataset-format",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/lerobot-dataset-format#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/tactile-sensor-calibration",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/tactile-sensor-calibration#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[1]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-univtac-encoder",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[2]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-gemini-robotics-2",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-gemini-robotics-er-2",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[4]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-rt-2",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[5]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-palm-e",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[6]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-openvla-7b",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[7]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-octo",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[8]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-pi0",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[9]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-isaac-gr00t-n1",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[10]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-t-rex",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[11]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-vitar",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[12]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-retouch",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[13]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-tau-touch-augmented-vla",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[14]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-unitacvla",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[15]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-vla-touch",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[16]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-dream-tac",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[17]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-touchworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[18]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-tac4loco",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[19]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-adept",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[1].@graph[20]",
+        "id": "https://roboskin.ai/robot-foundation-models#model-sparsh",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-foundation-models",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robot-foundation-models#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robot-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-skin#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/robot-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-skin#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/tactile-ai",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/tactile-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/tactile-ai",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/tactile-ai#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/e-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/e-skin#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/e-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/e-skin#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/humanoid-robot-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/humanoid-robot-skin#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/applications/robot-hand-tactile-sensor",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/applications/robot-hand-tactile-sensor#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/applications/soft-robotic-skin",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/applications/soft-robotic-skin#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/flexible-tactile-sensor-array",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/flexible-tactile-sensor-array#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/physical-ai-touch",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/physical-ai-touch#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/applications/robot-gripper-tactile-sensor",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/applications/robot-gripper-tactile-sensor#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/tactile-sensor-for-robots",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/tactile-sensor-for-robots#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/robot-touch-sensor",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/robot-touch-sensor#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/slip-detection-robot-hand",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/slip-detection-robot-hand#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/research/robot-skin-papers",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/research/robot-skin-papers#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/tactile-feedback-for-physical-ai",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/tactile-feedback-for-physical-ai#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/tactile-sensor-benchmark-robot-manipulation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[2]",
+        "id": "https://roboskin.ai/datasets#dataset-bench2dex",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/datasets#dataset-univtac-encoder-pretraining-corpus",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[4]",
+        "id": "https://roboskin.ai/datasets#dataset-univtac-benchmark-dataset",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[5]",
+        "id": "https://roboskin.ai/datasets#dataset-t-rex",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[6]",
+        "id": "https://roboskin.ai/datasets#dataset-egotouch",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[7]",
+        "id": "https://roboskin.ai/datasets#dataset-prism-industrial-skill",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[8]",
+        "id": "https://roboskin.ai/datasets#dataset-softvtbench",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[9]",
+        "id": "https://roboskin.ai/datasets#dataset-robotacdex",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[10]",
+        "id": "https://roboskin.ai/datasets#dataset-ht-bench",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[11]",
+        "id": "https://roboskin.ai/datasets#dataset-rct",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[12]",
+        "id": "https://roboskin.ai/datasets#dataset-tactidex",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[13]",
+        "id": "https://roboskin.ai/datasets#dataset-freetacman",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[14]",
+        "id": "https://roboskin.ai/datasets#dataset-humanoid-vta",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[15]",
+        "id": "https://roboskin.ai/datasets#dataset-sparsh-x",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[16]",
+        "id": "https://roboskin.ai/datasets#dataset-touch-and-go",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[17]",
+        "id": "https://roboskin.ai/datasets#dataset-tvl",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[18]",
+        "id": "https://roboskin.ai/datasets#dataset-objectfolder-real",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[19]",
+        "id": "https://roboskin.ai/datasets#dataset-objectfolder-2",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[20]",
+        "id": "https://roboskin.ai/datasets#dataset-tacverse",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[1].@graph[21]",
+        "id": "https://roboskin.ai/datasets#dataset-vtdexmanip",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/datasets",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/datasets#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/tactile-foundation-models",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/tactile-foundation-models#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/guides/visuo-tactile-world-models-robot-manipulation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/benchmarks",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/benchmarks#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[0].item",
+        "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[0].item",
+        "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[0].item",
+        "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[1].item",
+        "id": "https://roboskin.ai/sensors#sensor-digit",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[2].item",
+        "id": "https://roboskin.ai/sensors#sensor-digit-360",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[3].item",
+        "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[3].item",
+        "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[4].item",
+        "id": "https://roboskin.ai/sensors#sensor-reskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[5].item",
+        "id": "https://roboskin.ai/sensors#sensor-anyskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[6].item",
+        "id": "https://roboskin.ai/sensors#sensor-gelslim-4",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[7].item",
+        "id": "https://roboskin.ai/sensors#sensor-tactip",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[8].item",
+        "id": "https://roboskin.ai/sensors#sensor-biotac",
+        "types": [
+          "Thing"
+        ],
+        "property": "citation",
+        "rule": "domain",
+        "reason": "citation is not applicable to Thing; expected CreativeWork"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[8].item",
+        "id": "https://roboskin.ai/sensors#sensor-biotac",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[8].item",
+        "id": "https://roboskin.ai/sensors#sensor-biotac",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[9].item",
+        "id": "https://roboskin.ai/sensors#sensor-uskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "manufacturer",
+        "rule": "domain",
+        "reason": "manufacturer is not applicable to Thing; expected Product"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[9].item",
+        "id": "https://roboskin.ai/sensors#sensor-uskin",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[10].item",
+        "id": "https://roboskin.ai/sensors#sensor-densetact-2",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[11].item",
+        "id": "https://roboskin.ai/sensors#sensor-9dtact",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[12].item",
+        "id": "https://roboskin.ai/sensors#sensor-insight",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[1].itemListElement[13].item",
+        "id": "https://roboskin.ai/sensors#sensor-allsight",
+        "types": [
+          "Thing"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Thing; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/sensors",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/sensors#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/tactile-manipulation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/tactile-manipulation#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/research/eu-roboskin-project",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/research/eu-roboskin-project#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/visuo-tactile",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/visuo-tactile#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/humanoid-robots",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/humanoid-robots#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/humanoid-robots",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/humanoid-robots#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/robot-vla-models",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robot-vla-models#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robot-manipulation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-manipulation#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/robot-manipulation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-manipulation#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/robot-learning",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-learning#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/robot-learning",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-learning#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/robot-hands",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-hands#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/robot-hands",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-hands#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/robot-safety",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-safety#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robotics-datasets",
+        "location": "$[1].@graph[2]",
+        "id": "https://roboskin.ai/robotics-datasets#dataset-open-x-embodiment",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robotics-datasets",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robotics-datasets#dataset-droid",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robotics-datasets",
+        "location": "$[1].@graph[4]",
+        "id": "https://roboskin.ai/robotics-datasets#dataset-bridgedata-v2",
+        "types": [
+          "Dataset"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to Dataset; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robotics-datasets",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robotics-datasets#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[1]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-dream-tac",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[1]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-dream-tac",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to CreativeWork; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[2]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-feelworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[2]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-feelworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to CreativeWork; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-hitac-wam",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-hitac-wam",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to CreativeWork; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[4]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-touchworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[4]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-touchworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to CreativeWork; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[5]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-vitacworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "isPartOf",
+        "rule": "range",
+        "reason": "isPartOf expects CreativeWork/URL"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[1].@graph[5]",
+        "id": "https://roboskin.ai/robot-world-models#world-model-vitacworld",
+        "types": [
+          "CreativeWork"
+        ],
+        "property": "additionalProperty",
+        "rule": "domain",
+        "reason": "additionalProperty is not applicable to CreativeWork; expected MerchantReturnPolicy/Offer/Place/Product/QualitativeValue/QuantitativeValue"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robot-world-models#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "isPartOf",
+        "rule": "domain",
+        "reason": "isPartOf is not applicable to DefinedTerm; expected CreativeWork"
+      },
+      {
+        "path": "/robot-world-models",
+        "location": "$[2].@graph[3]",
+        "id": "https://roboskin.ai/robot-world-models#defined-term",
+        "types": [
+          "DefinedTerm"
+        ],
+        "property": "keywords",
+        "rule": "domain",
+        "reason": "keywords is not applicable to DefinedTerm; expected CreativeWork/Event/Organization/Place/Product"
+      },
+      {
+        "path": "/robot-teleoperation",
+        "location": "$[1].@graph[3]",
+        "id": "https://roboskin.ai/robot-teleoperation#article",
+        "types": [
+          "TechArticle"
+        ],
+        "property": "reviewedBy",
+        "rule": "domain",
+        "reason": "reviewedBy is not applicable to TechArticle; expected WebPage"
+      }
+    ],
+    "unverified": []
+  },
+  "schemaAfter": {
+    "version": "30.1",
+    "issues": [],
+    "unverified": []
+  },
+  "latestMainSha": "9e07e4ef76bceb74abe30af6641409168ec7ec47",
+  "finalOutputPages": [
+    {
+      "path": "/",
+      "pageType": "Home",
+      "titleLength": 42,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/products",
+      "pageType": "Topic / other",
+      "titleLength": 69,
+      "descriptionLength": 136
+    },
+    {
+      "path": "/solutions",
+      "pageType": "Topic / other",
+      "titleLength": 65,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/applications",
+      "pageType": "Topic / other",
+      "titleLength": 70,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/technology",
+      "pageType": "Topic / other",
+      "titleLength": 63,
+      "descriptionLength": 141
+    },
+    {
+      "path": "/physical-ai",
+      "pageType": "Topic / other",
+      "titleLength": 61,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/resources",
+      "pageType": "Topic / other",
+      "titleLength": 68,
+      "descriptionLength": 148
+    },
+    {
+      "path": "/faq",
+      "pageType": "Topic / other",
+      "titleLength": 62,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/research",
+      "pageType": "Topic / other",
+      "titleLength": 65,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/research-index",
+      "pageType": "Directory",
+      "titleLength": 62,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/papers",
+      "pageType": "Topic / other",
+      "titleLength": 61,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/papers/interaction-as-the-interface",
+      "pageType": "Topic / other",
+      "titleLength": 69,
+      "descriptionLength": 156
+    },
+    {
+      "path": "/organizations",
+      "pageType": "Directory",
+      "titleLength": 58,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/robots",
+      "pageType": "Directory",
+      "titleLength": 65,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/glossary",
+      "pageType": "Topic / other",
+      "titleLength": 65,
+      "descriptionLength": 139
+    },
+    {
+      "path": "/about",
+      "pageType": "Topic / other",
+      "titleLength": 31,
+      "descriptionLength": 132
+    },
+    {
+      "path": "/editorial-policy",
+      "pageType": "Topic / other",
+      "titleLength": 60,
+      "descriptionLength": 128
+    },
+    {
+      "path": "/news",
+      "pageType": "Topic / other",
+      "titleLength": 57,
+      "descriptionLength": 137
+    },
+    {
+      "path": "/contact",
+      "pageType": "Topic / other",
+      "titleLength": 42,
+      "descriptionLength": 119
+    },
+    {
+      "path": "/research-services",
+      "pageType": "Topic / other",
+      "titleLength": 57,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/reports/tactile-ai-robot-skin-landscape-2026",
+      "pageType": "Topic / other",
+      "titleLength": 62,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/privacy",
+      "pageType": "Topic / other",
+      "titleLength": 28,
+      "descriptionLength": 66
+    },
+    {
+      "path": "/terms",
+      "pageType": "Topic / other",
+      "titleLength": 30,
+      "descriptionLength": 61
+    },
+    {
+      "path": "/research/slipsense-multimodal-slip-detection-2026",
+      "pageType": "Research",
+      "titleLength": 67,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/research/touch2trace-tactile-cable-tracing-2026",
+      "pageType": "Research",
+      "titleLength": 67,
+      "descriptionLength": 160
+    },
+    {
+      "path": "/research/visible-touch-contact-overlays-visuomotor-policies-2026",
+      "pageType": "Research",
+      "titleLength": 61,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/research/dextouch-wm-human-touch-world-model-2026",
+      "pageType": "Research",
+      "titleLength": 66,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/research/bench2dex-visuo-tactile-bimanual-benchmark-2026",
+      "pageType": "Research",
+      "titleLength": 68,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/research/tacprint-wearable-tactile-contact-reproduction-2026",
+      "pageType": "Research",
+      "titleLength": 58,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/research/tacverse-cross-sensor-tactile-dataset-2026",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 157
+    },
+    {
+      "path": "/research/univtac-platform-encoder-benchmark-2026",
+      "pageType": "Research",
+      "titleLength": 63,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/research/vision-based-tactile-intelligence-robotics-survey-2026",
+      "pageType": "Research",
+      "titleLength": 64,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/research/adept-visuo-tactile-dexterity-rl-2026",
+      "pageType": "Research",
+      "titleLength": 69,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/research/prism-contact-rich-industrial-skill-dataset-2026",
+      "pageType": "Research",
+      "titleLength": 60,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/research/missing-touch-spatial-tactile-feedback-teleoperation-2026",
+      "pageType": "Research",
+      "titleLength": 62,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026",
+      "pageType": "Research",
+      "titleLength": 62,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/research/hitac-wam-hierarchical-tactile-world-action-model-2026",
+      "pageType": "Research",
+      "titleLength": 63,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/research/t-rex-tactile-reactive-dexterous-manipulation-2026",
+      "pageType": "Research",
+      "titleLength": 59,
+      "descriptionLength": 160
+    },
+    {
+      "path": "/research/robotacdex-humanoid-visual-tactile-action-dataset-2026",
+      "pageType": "Research",
+      "titleLength": 63,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/research/tactidex-tactile-guided-dexterous-benchmark-2026",
+      "pageType": "Research",
+      "titleLength": 70,
+      "descriptionLength": 141
+    },
+    {
+      "path": "/research/tac4loco-plantar-tactile-humanoid-locomotion-2026",
+      "pageType": "Research",
+      "titleLength": 70,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/research/feelworld-visuo-tactile-world-model-2026",
+      "pageType": "Research",
+      "titleLength": 68,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/research/ht-bench-full-hand-tactile-representations-2026",
+      "pageType": "Research",
+      "titleLength": 69,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/research/sparsh-x-multisensory-touch-representations-2025",
+      "pageType": "Research",
+      "titleLength": 57,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/research/mitas-multi-resolution-tactile-imitation-learning-2026",
+      "pageType": "Research",
+      "titleLength": 64,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/research/dream-tac-tactile-world-action-model-2026",
+      "pageType": "Research",
+      "titleLength": 66,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/research/open-source-magnetic-tactile-calibration-2024",
+      "pageType": "Research",
+      "titleLength": 54,
+      "descriptionLength": 122
+    },
+    {
+      "path": "/research/eflesh-customizable-magnetic-touch-sensing-2025",
+      "pageType": "Research",
+      "titleLength": 62,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/research/freetacman-robot-free-visuotactile-data-collection-2025",
+      "pageType": "Research",
+      "titleLength": 69,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/research/humanoid-visual-tactile-action-dataset-2025",
+      "pageType": "Research",
+      "titleLength": 64,
+      "descriptionLength": 141
+    },
+    {
+      "path": "/research/tactile-robotics-outlook-research-landscape-2025",
+      "pageType": "Research",
+      "titleLength": 59,
+      "descriptionLength": 132
+    },
+    {
+      "path": "/research/wet-slippage-bionic-fingertip-eskin-2026",
+      "pageType": "Research",
+      "titleLength": 64,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/research/spiking-touch-encoding-large-area-eskin-2026",
+      "pageType": "Research",
+      "titleLength": 69,
+      "descriptionLength": 145
+    },
+    {
+      "path": "/research/origami-capacitive-robotic-eskin-2026",
+      "pageType": "Research",
+      "titleLength": 60,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/research/slip-actuated-etextile-tactile-sensing-2025",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 142
+    },
+    {
+      "path": "/research/optical-electronic-artificial-skin-molecular-sensing-2025",
+      "pageType": "Research",
+      "titleLength": 70,
+      "descriptionLength": 132
+    },
+    {
+      "path": "/research/genforce-transferable-force-sensing-2026",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/research/dexskin-high-coverage-conformable-robotic-skin-2025",
+      "pageType": "Research",
+      "titleLength": 66,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/research/fluid-based-robot-skin-thermal-contact-2025",
+      "pageType": "Research",
+      "titleLength": 63,
+      "descriptionLength": 148
+    },
+    {
+      "path": "/research/graphene-liquid-metal-3d-force-2026",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 157
+    },
+    {
+      "path": "/research/single-material-soft-robotic-skin-2025",
+      "pageType": "Research",
+      "titleLength": 67,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/research/full-hand-tactile-sensing-2025",
+      "pageType": "Research",
+      "titleLength": 62,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/research/temperature-pressure-bimodal-2025",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 131
+    },
+    {
+      "path": "/research/event-based-opto-tactile-2025",
+      "pageType": "Research",
+      "titleLength": 68,
+      "descriptionLength": 145
+    },
+    {
+      "path": "/research/self-healing-multimodal-eskin-2026",
+      "pageType": "Research",
+      "titleLength": 63,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/research/ros2-kilted-tactile-pipeline-2026",
+      "pageType": "Research",
+      "titleLength": 70,
+      "descriptionLength": 135
+    },
+    {
+      "path": "/research/large-area-flexible-tactile-arrays-2025",
+      "pageType": "Research",
+      "titleLength": 65,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/news/univlat-whole-body-tactile-vla-humanoid",
+      "pageType": "News",
+      "titleLength": 59,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/news/uvta-human-tactile-demonstrations-dexterous-manipulation",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 137
+    },
+    {
+      "path": "/news/tacgoosebumps-shear-encoding-tactile-sensor",
+      "pageType": "News",
+      "titleLength": 62,
+      "descriptionLength": 139
+    },
+    {
+      "path": "/news/dextag-tactile-guided-dexterous-retargeting",
+      "pageType": "News",
+      "titleLength": 57,
+      "descriptionLength": 142
+    },
+    {
+      "path": "/news/blind-grasp-reflex-proprioceptive-dexterous-hand",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/news/tactic-tactile-encoder-fusion-benchmark",
+      "pageType": "News",
+      "titleLength": 57,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/news/vistacalign-human-robot-tactile-demonstrations",
+      "pageType": "News",
+      "titleLength": 63,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/news/phase-tactile-retrieval-few-shot-insertion",
+      "pageType": "News",
+      "titleLength": 60,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/news/da-grd-tactile-grasp-recovery",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 135
+    },
+    {
+      "path": "/news/torque-observation-alignment-direct-drive-grasping",
+      "pageType": "News",
+      "titleLength": 66,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/news/outcome-sensitive-impact-aware-dexterous-catching",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/news/body-grounded-replanning-physical-manipulation",
+      "pageType": "News",
+      "titleLength": 68,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/news/polyumi-visual-tactile-audio-demonstration-interface",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/news/propra-fingertip-sensor-pretraining",
+      "pageType": "News",
+      "titleLength": 66,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/news/whole-hand-force-regulation-without-tactile-sensors",
+      "pageType": "News",
+      "titleLength": 65,
+      "descriptionLength": 145
+    },
+    {
+      "path": "/news/res-hil-human-guided-residual-rl-manipulation",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 133
+    },
+    {
+      "path": "/news/tactilestep-sole-pressure-humanoid-locomotion",
+      "pageType": "News",
+      "titleLength": 61,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/news/anthropomimetic-forearm-carpal-stiffness",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/news/camp-cooperative-arm-hand-motion-planning",
+      "pageType": "News",
+      "titleLength": 68,
+      "descriptionLength": 148
+    },
+    {
+      "path": "/news/support-enhanced-granular-jamming-gripper",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/news/internw0-contact-aware-world-model-pipetting",
+      "pageType": "News",
+      "titleLength": 62,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/news/glotouch-global-local-haptic-search",
+      "pageType": "News",
+      "titleLength": 68,
+      "descriptionLength": 141
+    },
+    {
+      "path": "/news/copre-proprioceptive-contact-detection",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 140
+    },
+    {
+      "path": "/news/berkeley-quad-hand-asymmetric-qdd-design",
+      "pageType": "News",
+      "titleLength": 66,
+      "descriptionLength": 139
+    },
+    {
+      "path": "/news/lima-asynchronous-diffusion-dexterous-manipulation",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 138
+    },
+    {
+      "path": "/news/better-curriculum-tactile-reflex-fragile-grasping",
+      "pageType": "News",
+      "titleLength": 68,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/news/visforce-visual-force-grounding-dexterous-manipulation",
+      "pageType": "News",
+      "titleLength": 63,
+      "descriptionLength": 145
+    },
+    {
+      "path": "/news/cablevla-tactile-cable-routing-vla",
+      "pageType": "News",
+      "titleLength": 61,
+      "descriptionLength": 141
+    },
+    {
+      "path": "/news/cartesian-hand-all-linear-in-hand-manipulation",
+      "pageType": "News",
+      "titleLength": 62,
+      "descriptionLength": 135
+    },
+    {
+      "path": "/news/spectrobot-high-bandwidth-single-point-tactile-sensing",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 148
+    },
+    {
+      "path": "/news/tactile-jepa-topology-aware-electronic-skin-pretraining",
+      "pageType": "News",
+      "titleLength": 66,
+      "descriptionLength": 144
+    },
+    {
+      "path": "/news/touch2robot-tactile-feedback-human-demonstrations",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 138
+    },
+    {
+      "path": "/news/when-touch-matters-cluttered-dexterous-grasping",
+      "pageType": "News",
+      "titleLength": 64,
+      "descriptionLength": 136
+    },
+    {
+      "path": "/news/zerotouch-tactile-supervision-visual-grasp-control",
+      "pageType": "News",
+      "titleLength": 70,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/news/crisp-contact-simulation-geometry-solvers-release",
+      "pageType": "News",
+      "titleLength": 65,
+      "descriptionLength": 157
+    },
+    {
+      "path": "/news/agile-wam-tactile-world-action-model-robot-control",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/news/touchsight-twintouch-bare-hand-tactile-prediction",
+      "pageType": "News",
+      "titleLength": 66,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026",
+      "pageType": "News",
+      "titleLength": 63,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/news/twins-aist-body-surface-tactile-demonstrations-2026",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 157
+    },
+    {
+      "path": "/news/gemini-robotics-2-whole-body-vla-dexterity-2026",
+      "pageType": "News",
+      "titleLength": 61,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/news/lerobot-v060-world-models-vla-evaluation-2026",
+      "pageType": "News",
+      "titleLength": 61,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/news/nist-humanoid-baseline-performance-benchmark-2026",
+      "pageType": "News",
+      "titleLength": 62,
+      "descriptionLength": 160
+    },
+    {
+      "path": "/news/iso-10218-2025-industrial-robot-safety-scope",
+      "pageType": "News",
+      "titleLength": 58,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/news/twisted-yarn-textile-capacitive-robot-skin-2026",
+      "pageType": "News",
+      "titleLength": 60,
+      "descriptionLength": 138
+    },
+    {
+      "path": "/news/eit-pneumatic-hybrid-robot-skin-force-map-2026",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026",
+      "pageType": "News",
+      "titleLength": 61,
+      "descriptionLength": 145
+    },
+    {
+      "path": "/news/underwater-self-healing-electronic-skin-nus-2026",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 142
+    },
+    {
+      "path": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 147
+    },
+    {
+      "path": "/news/color-changing-mechanochromic-tactile-sensor-2026",
+      "pageType": "News",
+      "titleLength": 65,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/news/single-pixel-tactile-skin-compressive-sampling-2026",
+      "pageType": "News",
+      "titleLength": 67,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/news/service-robots-200000-units-logistics-tactile-ai",
+      "pageType": "News",
+      "titleLength": 70,
+      "descriptionLength": 130
+    },
+    {
+      "path": "/news/electronic-skin-research-robot-skin-systems-problem",
+      "pageType": "News",
+      "titleLength": 63,
+      "descriptionLength": 133
+    },
+    {
+      "path": "/news/full-hand-tactile-sensing-robot-hands-vision-control",
+      "pageType": "News",
+      "titleLength": 69,
+      "descriptionLength": 134
+    },
+    {
+      "path": "/news/global-robot-installations-542000-physical-ai-touch",
+      "pageType": "News",
+      "titleLength": 60,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/sensors/digit",
+      "pageType": "Sensor detail",
+      "titleLength": 68,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/sensors/gelsight-mini",
+      "pageType": "Sensor detail",
+      "titleLength": 67,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/sensors/reskin",
+      "pageType": "Sensor detail",
+      "titleLength": 64,
+      "descriptionLength": 139
+    },
+    {
+      "path": "/robotics-programming",
+      "pageType": "Topic / other",
+      "titleLength": 60,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/guides/ros2-tactile-sensing",
+      "pageType": "Guide",
+      "titleLength": 70,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/guides/python-tactile-data-processing",
+      "pageType": "Guide",
+      "titleLength": 65,
+      "descriptionLength": 154
+    },
+    {
+      "path": "/guides/lerobot-dataset-format",
+      "pageType": "Guide",
+      "titleLength": 67,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/guides/tactile-sensor-calibration",
+      "pageType": "Guide",
+      "titleLength": 66,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/ai-robotics",
+      "pageType": "Topic / other",
+      "titleLength": 65,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/robot-foundation-models",
+      "pageType": "Directory",
+      "titleLength": 66,
+      "descriptionLength": 156
+    },
+    {
+      "path": "/robot-skin",
+      "pageType": "Topic / other",
+      "titleLength": 58,
+      "descriptionLength": 157
+    },
+    {
+      "path": "/tactile-ai",
+      "pageType": "Topic / other",
+      "titleLength": 62,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/e-skin",
+      "pageType": "Topic / other",
+      "titleLength": 64,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/humanoid-robot-skin",
+      "pageType": "Topic / other",
+      "titleLength": 62,
+      "descriptionLength": 140
+    },
+    {
+      "path": "/applications/robot-hand-tactile-sensor",
+      "pageType": "Application",
+      "titleLength": 68,
+      "descriptionLength": 131
+    },
+    {
+      "path": "/applications/soft-robotic-skin",
+      "pageType": "Application",
+      "titleLength": 60,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/guides/flexible-tactile-sensor-array",
+      "pageType": "Guide",
+      "titleLength": 64,
+      "descriptionLength": 152
+    },
+    {
+      "path": "/physical-ai-touch",
+      "pageType": "Topic / other",
+      "titleLength": 63,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/applications/robot-gripper-tactile-sensor",
+      "pageType": "Application",
+      "titleLength": 67,
+      "descriptionLength": 139
+    },
+    {
+      "path": "/guides/tactile-sensor-for-robots",
+      "pageType": "Guide",
+      "titleLength": 64,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/guides/robot-touch-sensor",
+      "pageType": "Guide",
+      "titleLength": 67,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/guides/slip-detection-robot-hand",
+      "pageType": "Guide",
+      "titleLength": 65,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/guides/robot-skin-vs-e-skin",
+      "pageType": "Guide",
+      "titleLength": 59,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/research/robot-skin-papers",
+      "pageType": "Research",
+      "titleLength": 66,
+      "descriptionLength": 135
+    },
+    {
+      "path": "/guides/robot-skin-vs-tactile-sensor",
+      "pageType": "Guide",
+      "titleLength": 63,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/guides/tactile-feedback-for-physical-ai",
+      "pageType": "Guide",
+      "titleLength": 64,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/guides/tactile-sensor-benchmark-robot-manipulation",
+      "pageType": "Guide",
+      "titleLength": 61,
+      "descriptionLength": 142
+    },
+    {
+      "path": "/datasets",
+      "pageType": "Directory",
+      "titleLength": 68,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/tactile-foundation-models",
+      "pageType": "Topic / other",
+      "titleLength": 52,
+      "descriptionLength": 143
+    },
+    {
+      "path": "/guides/visuo-tactile-world-models-robot-manipulation",
+      "pageType": "Guide",
+      "titleLength": 59,
+      "descriptionLength": 151
+    },
+    {
+      "path": "/benchmarks",
+      "pageType": "Directory",
+      "titleLength": 60,
+      "descriptionLength": 124
+    },
+    {
+      "path": "/sensors",
+      "pageType": "Directory",
+      "titleLength": 62,
+      "descriptionLength": 153
+    },
+    {
+      "path": "/tactile-manipulation",
+      "pageType": "Topic / other",
+      "titleLength": 63,
+      "descriptionLength": 155
+    },
+    {
+      "path": "/research/eu-roboskin-project",
+      "pageType": "Research",
+      "titleLength": 67,
+      "descriptionLength": 158
+    },
+    {
+      "path": "/visuo-tactile",
+      "pageType": "Topic / other",
+      "titleLength": 63,
+      "descriptionLength": 149
+    },
+    {
+      "path": "/humanoid-robots",
+      "pageType": "Topic / other",
+      "titleLength": 67,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/robot-vla-models",
+      "pageType": "Topic / other",
+      "titleLength": 61,
+      "descriptionLength": 156
+    },
+    {
+      "path": "/robot-manipulation",
+      "pageType": "Topic / other",
+      "titleLength": 60,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/robot-learning",
+      "pageType": "Topic / other",
+      "titleLength": 68,
+      "descriptionLength": 146
+    },
+    {
+      "path": "/robot-hands",
+      "pageType": "Topic / other",
+      "titleLength": 64,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/robot-safety",
+      "pageType": "Topic / other",
+      "titleLength": 57,
+      "descriptionLength": 160
+    },
+    {
+      "path": "/robotics-datasets",
+      "pageType": "Directory",
+      "titleLength": 65,
+      "descriptionLength": 150
+    },
+    {
+      "path": "/robot-world-models",
+      "pageType": "Directory",
+      "titleLength": 64,
+      "descriptionLength": 159
+    },
+    {
+      "path": "/robot-teleoperation",
+      "pageType": "Topic / other",
+      "titleLength": 66,
+      "descriptionLength": 153
+    }
+  ]
+}

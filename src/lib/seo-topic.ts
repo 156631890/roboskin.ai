@@ -1,9 +1,11 @@
+import { assertSeoBudget } from '@/lib/seo-budget.mjs';
 import type { Metadata } from 'next';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
 import { buildEditorialTeamJsonLd, canonicalUrl } from '@/lib/seo';
 
 export function buildSeoTopicMetadata(page: SeoTopicPage): Metadata {
+  assertSeoBudget(page.path, page);
   const url = canonicalUrl(page.path);
   const visual = pageVisuals[page.visualKey];
 
@@ -103,6 +105,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
             },
           }
         : {}),
+    keywords: page.keywords,
     about: page.keywords,
     mentions: page.relatedLinks.map((link) => ({
       '@type': 'WebPage',
@@ -164,9 +167,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         author: {
           '@id': editorialTeamId,
         },
-        reviewedBy: {
-          '@id': editorialTeamId,
-        },
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
         },
@@ -197,10 +197,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
         },
-        isPartOf: {
-          '@id': `${site.url}/#website`,
-        },
-        keywords: page.keywords,
       }
     : undefined;
   const entityNodes = [articleNode, definedTermNode].filter(Boolean);

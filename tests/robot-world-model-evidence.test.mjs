@@ -108,8 +108,8 @@ test('world-model route and schema share one data source without creating a seco
   assert.match(schema, /'@type': 'CreativeWork'/);
   assert.match(schema, /numberOfItems: entries\.length/);
   assert.match(schema, /citation: entry\.primarySources\.map/);
-  assert.match(schema, /additionalProperty/);
-  assert.match(schema, /PropertyValue/);
+  assert.match(schema, /hasPart/);
+  assert.match(schema, /WebPageElement/);
   assert.match(schema, /Source reviewed/);
   assert.doesNotMatch(schema, /dateModified:\s*entry\.sourceReviewed/);
   assert.doesNotMatch(schema, /AggregateRating|ratingValue|reviewRating|['"]@type['"]:\s*['"]Review['"]/);

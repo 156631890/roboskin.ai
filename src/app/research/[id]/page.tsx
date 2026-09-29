@@ -1,3 +1,4 @@
+import { assertSeoBudget, resolveArticleSeo } from '@/lib/seo-budget.mjs';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -41,10 +42,11 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
   }
 
   const url = canonicalUrl(`/research/${post.id}`);
+  const seo = assertSeoBudget(`/research/${post.id}`, resolveArticleSeo(post));
 
   return {
-    title: post.seoTitle ?? post.title,
-    description: post.seoDescription ?? post.excerpt,
+    title: seo.title,
+    description: seo.description,
     authors: [{ name: post.author }],
     category: post.category,
     keywords: post.technicalFocus,
@@ -52,8 +54,8 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       canonical: url,
     },
     openGraph: {
-      title: post.seoTitle ?? post.title,
-      description: post.seoDescription ?? post.excerpt,
+      title: seo.title,
+      description: seo.description,
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
@@ -66,8 +68,8 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.seoTitle ?? post.title,
-      description: post.seoDescription ?? post.excerpt,
+      title: seo.title,
+      description: seo.description,
       images: [post.image],
     },
   };
