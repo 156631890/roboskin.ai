@@ -818,7 +818,8 @@ select:focus-visible {
   border-bottom: 0;
 }
 
-.ai-robot-stage a {
+.ai-robot-stage-content {
+  position: relative;
   display: flex;
   min-height: 228px;
   height: 100%;
@@ -827,16 +828,17 @@ select:focus-visible {
   transition: background-color 220ms var(--ease-brand), transform 220ms var(--ease-brand);
 }
 
-.ai-robot-stage a:hover {
+.ai-robot-stage:hover .ai-robot-stage-content,
+.ai-robot-stage:focus-within .ai-robot-stage-content {
   background: rgba(255, 107, 61, 0.08);
   transform: translateY(-2px);
 }
 
-.ai-robot-stage a:active {
+.ai-robot-stage:active .ai-robot-stage-content {
   transform: translateY(1px);
 }
 
-.ai-robot-stage span,
+.ai-robot-stage-label,
 .ai-robot-feedback-rail > span {
   color: var(--text-muted);
   font-family: var(--font-ibm-plex-mono), monospace;
@@ -845,7 +847,7 @@ select:focus-visible {
   text-transform: uppercase;
 }
 
-.ai-robot-stage strong {
+.ai-robot-stage-title {
   display: block;
   margin-top: 1.4rem;
   color: var(--text);
@@ -1230,6 +1232,13 @@ select:focus-visible {
 .authority-index-group li a:hover strong { color: var(--secondary); }
 .authority-index-group strong { display: block; font-size: 0.78rem; transition: color 180ms ease; }
 .authority-index-group small { display: block; margin-top: 0.35rem; color: var(--text-muted); font-size: 0.75rem; line-height: 1.55; }
+
+.authority-index-compact li { position: relative; padding-block: 0.9rem; }
+.authority-index-compact li a { padding-block: 0; }
+.authority-link-title { display: block; font-size: 0.78rem; font-weight: 700; transition: color 180ms ease; }
+.authority-index-compact li:hover .authority-link-title { color: var(--secondary); }
+.home-card-link::after { position: absolute; inset: 0; z-index: 1; content: ''; }
+.home-card-link:focus-visible::after { outline: 2px solid var(--secondary); outline-offset: 3px; }
 
 .editorial-light .authority-index-grid,
 .editorial-light .authority-index-group,
@@ -2867,7 +2876,7 @@ select:focus-visible {
   .ai-robot-stage:nth-child(2n),
   .ai-robot-stage:nth-child(4n) { border-right: 1px solid var(--panel-border); border-bottom: 0; scroll-snap-align: start; }
   .ai-robot-stage:last-child { border-right: 0; }
-  .ai-robot-stage a { min-height: 240px; padding: 1.25rem; }
+  .ai-robot-stage-content { min-height: 240px; padding: 1.25rem; }
   .ai-robot-stage small { margin-top: 1rem; padding-top: 0; }
   .ai-robot-swipe-note {
     display: block;

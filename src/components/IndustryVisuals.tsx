@@ -20,6 +20,7 @@ type FeaturedAssetCoversProps = {
 
 type AuthorityIndexProps = {
   groups: AuthorityLinkGroup[];
+  compactLinks?: boolean;
 };
 
 type DirectAnswerSectionProps = {
@@ -35,9 +36,9 @@ type ResearchBriefIndexProps = {
   entries: ResearchResourceEntry[];
 };
 
-export function AuthorityIndex({ groups }: AuthorityIndexProps) {
+export function AuthorityIndex({ groups, compactLinks = false }: AuthorityIndexProps) {
   return (
-    <div className="authority-index-grid">
+    <div className={`authority-index-grid${compactLinks ? ' authority-index-compact' : ''}`}>
       {groups.map((group) => (
         <section key={group.title} className="authority-index-group">
           <h3>{group.title}</h3>
@@ -45,10 +46,17 @@ export function AuthorityIndex({ groups }: AuthorityIndexProps) {
           <ul>
             {group.links.map((link) => (
               <li key={link.href}>
-                <Link href={link.href}>
-                  <strong>{link.label}</strong>
-                  <small>{link.description}</small>
-                </Link>
+                  {compactLinks ? (
+                    <>
+                      <Link href={link.href} className="home-card-link"><span className="authority-link-title">{link.label}</span></Link>
+                      <small>{link.description}</small>
+                    </>
+                  ) : (
+                    <Link href={link.href}>
+                      <strong>{link.label}</strong>
+                      <small>{link.description}</small>
+                    </Link>
+                  )}
               </li>
             ))}
           </ul>
