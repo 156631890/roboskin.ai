@@ -1,0 +1,321 @@
+[
+  {
+    "id": "dream-tac",
+    "name": "Dream-Tac",
+    "paperTitle": "Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation",
+    "sourceUrl": "https://arxiv.org/abs/2606.08737v1",
+    "releaseDate": "2026-06-07",
+    "institutions": [
+      "Peking University",
+      "The Hong Kong University of Science and Technology",
+      "Nanjing University"
+    ],
+    "predicts": [
+      "vision",
+      "touch",
+      "action",
+      "latent"
+    ],
+    "tactileSensor": "Two Xense Photon fingertip sensors",
+    "robotPlatform": "Franka Emika Panda",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 6,
+      "rolloutsPerSetting": 20
+    },
+    "openSource": {
+      "code": "released",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": "Apache-2.0 (code only)"
+    },
+    "evidenceLevel": "A",
+    "verdict": "Joint action and observation generation has six-task real-robot evidence and public code; cross-sensor transfer and independent replication remain unestablished.",
+    "briefUrl": "/research/dream-tac-tactile-world-action-model-2026",
+    "sources": [
+      "https://arxiv.org/abs/2606.08737v1",
+      "https://arxiv.org/html/2606.08737v1",
+      "https://github.com/LYFCLOUDFAN/Dream-Tac",
+      "https://roboskin.ai/research/dream-tac-tactile-world-action-model-2026"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "feelworld",
+    "name": "FeelWorld",
+    "paperTitle": "FeelWorld: Visuo-Tactile World Model for Hierarchical Contact Prediction and Planning",
+    "sourceUrl": "https://arxiv.org/abs/2607.24267v1",
+    "releaseDate": "2026-07-27",
+    "institutions": [
+      "Institute of Automation, Chinese Academy of Sciences",
+      "Imprintx Robotics",
+      "Beijing Academy of Artificial Intelligence"
+    ],
+    "predicts": [
+      "vision",
+      "touch",
+      "latent"
+    ],
+    "tactileSensor": "DM tactile sensors producing 3D tactile point clouds",
+    "robotPlatform": "Imeta-Y1",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 3,
+      "rolloutsPerSetting": 40
+    },
+    "openSource": {
+      "code": "unknown",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "D",
+    "verdict": "Contact-aware planning is evaluated on three real-robot tasks; code availability remains unverified, so the availability-based evidence grade is provisional.",
+    "briefUrl": "/research/feelworld-visuo-tactile-world-model-2026",
+    "sources": [
+      "https://arxiv.org/abs/2607.24267v1",
+      "https://arxiv.org/html/2607.24267v1",
+      "https://roboskin.ai/research/feelworld-visuo-tactile-world-model-2026"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "hitac-wam",
+    "name": "HiTac-WAM",
+    "paperTitle": "HiTac-WAM: A Hierarchical Tactile World Action Model for Contact-Rich Robot Manipulation",
+    "sourceUrl": "https://arxiv.org/abs/2608.19574v1",
+    "releaseDate": "2026-08-20",
+    "institutions": [
+      "Institute of Automation, Chinese Academy of Sciences",
+      "ImprintX Robotics",
+      "Beijing Academy of Artificial Intelligence"
+    ],
+    "predicts": [
+      "touch"
+    ],
+    "tactileSensor": "Bilateral DM-Tac W2 sensors",
+    "robotPlatform": "IMETA-Y1",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 3,
+      "rolloutsPerSetting": 30
+    },
+    "openSource": {
+      "code": "unknown",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "D",
+    "verdict": "Hierarchical contact forecasts support candidate selection and corrective replanning on three real-robot tasks; implementation availability remains unverified.",
+    "briefUrl": "/research/hitac-wam-hierarchical-tactile-world-action-model-2026",
+    "sources": [
+      "https://arxiv.org/abs/2608.19574v1",
+      "https://arxiv.org/html/2608.19574v1",
+      "https://roboskin.ai/research/hitac-wam-hierarchical-tactile-world-action-model-2026"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "touchworld",
+    "name": "TouchWorld",
+    "paperTitle": "TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation",
+    "sourceUrl": "https://arxiv.org/abs/2607.07287v2",
+    "releaseDate": "2026-07-08",
+    "institutions": [
+      "Harbin Institute of Technology, Shenzhen",
+      "PHANES AI"
+    ],
+    "predicts": [
+      "vision",
+      "touch"
+    ],
+    "tactileSensor": "JQ-Industries tactile glove",
+    "robotPlatform": "Unnamed humanoid with Wuji dexterous hands",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 6,
+      "rolloutsPerSetting": null
+    },
+    "openSource": {
+      "code": "unknown",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "D",
+    "verdict": "Predictive subgoals and reactive correction are evaluated on six tasks; per-condition rollout counts and implementation availability remain unresolved.",
+    "briefUrl": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+    "sources": [
+      "https://arxiv.org/abs/2607.07287v2",
+      "https://arxiv.org/html/2607.07287v2",
+      "https://phanes-lab.github.io/TouchWorld-website/",
+      "https://roboskin.ai/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "vitacworld",
+    "name": "ViTacWorld",
+    "paperTitle": "ViTacWorld: Scaling Visuo-Tactile World Models for Contact-Rich Robot Manipulation",
+    "sourceUrl": "https://arxiv.org/abs/2607.22530v2",
+    "releaseDate": "2026-07-24",
+    "institutions": [
+      "ShanghaiTech University",
+      "InstAdapt"
+    ],
+    "predicts": [
+      "vision",
+      "touch"
+    ],
+    "tactileSensor": "Xense optical fingertip sensors",
+    "robotPlatform": "Franka Panda with Robotiq 2F-85",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 4,
+      "rolloutsPerSetting": 50
+    },
+    "openSource": {
+      "code": "announced",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "B",
+    "verdict": "The v2 study evaluates generated-data policy improvement over 50 trials per policy, stage and task; official code remains announced.",
+    "briefUrl": "/guides/visuo-tactile-world-models-robot-manipulation",
+    "sources": [
+      "https://arxiv.org/abs/2607.22530v2",
+      "https://arxiv.org/html/2607.22530v2",
+      "https://vitacworld.github.io/",
+      "https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "dextouch-wm",
+    "name": "DexTouch-WM",
+    "paperTitle": "DexTouch-WM: Learning Action-Conditioned Tactile World Models from Human Touch for Dexterous Robot Manipulation",
+    "sourceUrl": "https://arxiv.org/abs/2609.20649v2",
+    "releaseDate": "2026-09-17",
+    "institutions": [
+      "HKUST (GZ)",
+      "Xspark AI",
+      "PKU",
+      "THU",
+      "HKU"
+    ],
+    "predicts": [
+      "vision",
+      "touch"
+    ],
+    "tactileSensor": "Moxian piezoresistive tactile gloves; shared 320-taxel training layout",
+    "robotPlatform": "Tianji arm with 20-DoF Wuji hand",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 4,
+      "rolloutsPerSetting": 10
+    },
+    "openSource": {
+      "code": "unknown",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "D",
+    "verdict": "Human pretraining improves reported contact prediction, but generated trajectories give mixed real-robot policy scores; code availability remains unverified.",
+    "briefUrl": "/research/dextouch-wm-human-touch-world-model-2026",
+    "sources": [
+      "https://arxiv.org/abs/2609.20649v2",
+      "https://arxiv.org/html/2609.20649v2",
+      "https://roboskin.ai/research/dextouch-wm-human-touch-world-model-2026"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "agile-wam",
+    "name": "Agile-WAM",
+    "paperTitle": "Agile-WAM: An Agile Tactile World Action Model for Contact-Rich Robot Control",
+    "sourceUrl": "https://arxiv.org/abs/2609.20761v2",
+    "releaseDate": "2026-09-17",
+    "institutions": [
+      "University of California, Davis",
+      "Analog Devices"
+    ],
+    "predicts": [
+      "vision",
+      "touch",
+      "action",
+      "latent"
+    ],
+    "tactileSensor": "Analog Devices 32 x 32 piezoresistive pressure sensor",
+    "robotPlatform": "Flexiv Rizon 4",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 5,
+      "rolloutsPerSetting": 20
+    },
+    "openSource": {
+      "code": "announced",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "B",
+    "verdict": "Asymmetric visual and tactile prediction supports five physical tasks; source-reported latency is model timing, and code is announced rather than released.",
+    "briefUrl": "/news/agile-wam-tactile-world-action-model-robot-control",
+    "sources": [
+      "https://arxiv.org/abs/2609.20761v2",
+      "https://arxiv.org/html/2609.20761v2",
+      "https://hanchuzhou.github.io/TARO_project_page/",
+      "https://roboskin.ai/news/agile-wam-tactile-world-action-model-robot-control"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  },
+  {
+    "id": "internw0",
+    "name": "InternW0",
+    "paperTitle": "InternW0: A Foundational Physical World Model for Efficient Real-World Interactions",
+    "sourceUrl": "https://arxiv.org/abs/2609.27656v1",
+    "releaseDate": "2026-09-23",
+    "institutions": [
+      "Shanghai AI Laboratory"
+    ],
+    "predicts": [
+      "vision",
+      "touch",
+      "action"
+    ],
+    "tactileSensor": null,
+    "robotPlatform": "Dual-arm parallel-gripper platform; 7-DoF arm with 20-DoF hand for pipetting",
+    "realRobotEval": {
+      "has": true,
+      "taskCount": 5,
+      "rolloutsPerSetting": 15
+    },
+    "openSource": {
+      "code": "unknown",
+      "data": "unknown",
+      "weights": "unknown",
+      "license": null
+    },
+    "evidenceLevel": "D",
+    "verdict": "Asynchronous world prediction supports contact-aware post-training; laboratory progress scores do not establish full-workflow success or isolate tactile contributions.",
+    "briefUrl": "/news/internw0-contact-aware-world-model-pipetting",
+    "sources": [
+      "https://arxiv.org/abs/2609.27656v1",
+      "https://arxiv.org/html/2609.27656v1",
+      "https://internrobotics.github.io/internw0",
+      "https://roboskin.ai/news/internw0-contact-aware-world-model-pipetting"
+    ],
+    "lastVerified": "2026-09-30",
+    "authorCheck": "not-contacted"
+  }
+]
