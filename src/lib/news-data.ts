@@ -33,6 +33,288 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tarl-tactile-reward-learning-demonstrations',
+    title: 'TaRL learns contact-rich rewards from tactile demonstrations',
+    seoTitle: 'TaRL Learns Rewards from Tactile Demonstrations',
+    seoDescription: 'TaRL turns tactile deformation histories into dense robot-learning rewards. Review its simulation and real-world results, data needs and release status.',
+    excerpt: 'TaRL regresses task progress from successful and failed tactile demonstrations, then uses that signal to shape contact-rich reinforcement learning.',
+    category: 'Tactile reward learning',
+    image: '/generated/news/tarl-tactile-reward-learning-demonstrations.png',
+    imageAlt: 'Diagram of tactile deformation sequences becoming a learned progress reward for downstream robot reinforcement learning.',
+    imageCaption: 'Original RoboSkin.ai schematic of the TaRL reward-learning pipeline. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TaRL: Learning General and Physical Rewards from Tactile Demonstrations',
+    sourceUrl: 'https://arxiv.org/abs/2609.36785',
+    sources: [
+      { title: 'TaRL arXiv v1 record', url: 'https://arxiv.org/abs/2609.36785' },
+      { title: 'Full TaRL v1 paper', url: 'https://arxiv.org/html/2609.36785v1' },
+      { title: 'Official TaRL project page', url: 'https://embodiedai-ntu.github.io/tarl/' },
+    ],
+    technicalFocus: ['tactile reward learning', 'contact-rich reinforcement learning', 'tactile demonstrations', 'visuo-tactile learning'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and two real-world tasks · project videos public · no code or dataset release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# TaRL learns contact-rich rewards from tactile demonstrations
+
+Researchers from National Taiwan University and Delta Electronics released Tactile Reward Learning, or TaRL, on September 29, 2026. TaRL learns a dense progress signal from sequences of tactile deformation maps, then adds that signal to reinforcement learning for contact-rich tasks. The reported gains include nut-threading success rising from 34% to 56% in simulation and cube pickup rising from 37% to 97% on a physical robot. [Paper and version record](https://arxiv.org/abs/2609.36785).
+
+## Key takeaways
+
+- TaRL treats touch as reward supervision, not only as a policy observation. Successful, rewound and failed tactile sequences teach a causal model to estimate task progress.
+- The simulation reward model uses 200 successful and 800 failed demonstrations per task. Real-world reward learning uses 40 successful and 40 failed trajectories per task, while the offline policy dataset contains another 90 successful and 90 failed trajectories.
+- The real-world percentages are averaged across three random seeds, but the manuscript does not state the number of inference trials per seed. The 60-point cube-pickup gain therefore lacks a disclosed evaluation denominator.
+
+## What changed
+
+Reward engineering is a persistent bottleneck in reinforcement learning. A sparse success flag gives little guidance before a task is complete, while a hand-written dense reward can favor the wrong behavior. Video-based reward models offer another route, but scene appearance does not reliably expose whether a grasp is firm or whether contact force is correctly directed.
+
+TaRL replaces the video sequence with tactile deformation maps from two fingertips. A shared three-layer convolutional encoder processes each map, and a causal Transformer estimates progress using only the history available at that step. Successful demonstrations receive a target that rises with time; failed demonstrations receive zero. Rewound successful sequences teach the model that undoing progress should reduce the reward. [Method details](https://arxiv.org/html/2609.36785v1).
+
+The learned value is a shaping reward. It supplements rather than replaces the task's basic sparse or stage reward, and it is trained separately for each task. In simulation, policies use Proximal Policy Optimization. The physical SO-101 arm experiments use Implicit Q-Learning on a fixed dataset, so their improvement is an offline-policy result rather than evidence of unrestricted online exploration.
+
+## Results under the reported conditions
+
+The simulated suite covers box placement, peg insertion, gear assembly and nut threading with a Franka Panda. Demonstrations are collected at one object position, while policies and reward quality are evaluated at other positions. The most concrete final-success comparison is nut threading: 34% without TaRL and 56% with it, an increase of 22 percentage points. Held-out reward tests use 50 successful and 150 failed trajectories for both in-domain and out-of-distribution positions.
+
+The authors also compare TaRL with ReWiND, a visual reward learner using the same high-level progress-regression recipe. Visual features shift when the object moves, while the tactile representation remains more similar across positions. Combining visual and tactile rewards improves learning further on the three compared tasks, supporting the narrower claim that the modalities contribute different signals.
+
+On the physical robot, cube pickup and peg insertion each use 80 demonstrations for the reward model and 180 different trajectories for offline policy learning. The cube-pickup score rises from 37% to 97%. For peg insertion, the paper separates pickup and insertion: TaRL adds 45 and 10 percentage points respectively. Those results are reported across three training seeds, but no test-rollout count or confidence interval is supplied.
+
+## What this means for robotics
+
+RoboSkin analysis: TaRL moves tactile sensing one step upstream in the learning stack. Instead of asking a policy to discover how touch relates to success, it first converts contact history into an explicit training signal. This could be useful when teams have [tactile demonstrations](/datasets) but cannot write a trustworthy force-aware reward.
+
+The method also exposes a scaling trade-off. Its reward model is local enough to tolerate position changes and, in one box-to-can experiment, a new object instance. Yet it still needs task-specific successful and failed touch sequences. It is not a general tactile foundation reward, and it does not eliminate data collection for a new behavior.
+
+## Limitations and availability
+
+TaRL is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its experiments. The comparison isolates modality carefully, but simulation and hardware use different RL algorithms. The physical study covers two tasks on one SO-101 setup, and the missing inference-trial denominator limits statistical interpretation of its largest percentage gain.
+
+The [official project page](https://embodiedai-ntu.github.io/tarl/) provides method explanations, plots and videos. At verification time it did not expose a public implementation repository, downloadable demonstrations, trained reward models or a software/data license. The arXiv manuscript's availability does not make those implementation assets reusable.
+
+## Sources and related resources
+
+- [TaRL arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36785)
+- [Full method, data counts and evaluation](https://arxiv.org/html/2609.36785v1)
+- [Official TaRL project page and videos](https://embodiedai-ntu.github.io/tarl/)
+- [RoboSkin guide to tactile manipulation](/tactile-manipulation)
+- [RoboSkin robot-learning overview](/robot-learning)
+`,
+  },
+  {
+    id: 'haco-haptic-active-compliance-dexterous-manipulation',
+    title: 'HACo grounds dexterous actions in touch and joint torque',
+    seoTitle: 'HACo Haptic Active Compliance for Dexterous Robots',
+    seoDescription: 'HACo fuses fingertip touch and joint torque with compliant demonstrations. Review 100-trial task results, baselines, hardware and release limits.',
+    excerpt: 'HACo learns compliant bimanual actions from regulated demonstrations and conditions them on fingertip tactile signals plus hand-joint torque.',
+    category: 'Force-aware dexterity',
+    image: '/generated/news/haco-haptic-active-compliance-dexterous-manipulation.png',
+    imageAlt: 'Diagram of fingertip tactile maps and joint-torque histories grounding compliant bimanual robot actions.',
+    imageCaption: 'Original RoboSkin.ai schematic of HACo haptic active compliance. It is explanatory artwork, not a laboratory image.',
+    sourceTitle: 'HACo: Learning Haptic Active Compliance for Force-Aware Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.36596',
+    sources: [
+      { title: 'HACo arXiv v1 record', url: 'https://arxiv.org/abs/2609.36596' },
+      { title: 'Full HACo v1 paper', url: 'https://arxiv.org/html/2609.36596v1' },
+      { title: 'Official HACo project page', url: 'https://opendrivelab.github.io/Haco-Page/' },
+    ],
+    technicalFocus: ['active compliance', 'dexterous manipulation', 'fingertip tactile sensing', 'joint torque'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · five physical bimanual tasks · 20 trials per task · code marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# HACo grounds dexterous actions in touch and joint torque
+
+Researchers from the University of Hong Kong, the Beijing Academy of Artificial Intelligence and Johns Hopkins University released HACo on September 29, 2026. HACo stands for Haptic Active Compliance: a dexterous policy that learns force-regulating motion from compliant demonstrations and conditions action generation on fingertip touch plus joint torque. Across five physical tasks and 20 trials per task, the authors report an 83% mean success rate versus 35% for the strongest evaluated baseline. [Paper and version record](https://arxiv.org/abs/2609.36596).
+
+## Key takeaways
+
+- HACo records controller-executable compliant actions, rather than copying either force-blind operator commands or the robot's constrained observed motion.
+- Its five-task mean is 83%, based on 83 successes in 100 rollouts. T-Rex records 35/100, GR00T with appended tactile features 22/100 and unmodified GR00T 15/100 under the paper's protocol.
+- The study uses 100 demonstrations per task on one dual-UR5, dual-Sharpa-hand platform. Code is still marked “coming soon,” and no downloadable dataset or model weights were verified.
+
+## What changed
+
+Contact creates a supervision problem. A nominal teleoperation command preserves the operator's intent but can keep pushing after an object blocks motion. The measured robot configuration has the opposite defect: it records what physically happened but omits the command-state offset that maintained force.
+
+HACo's data-collection controller regulates the arm through Cartesian admittance and adjusts hand references using fingertip force. It saves the resulting compliant arm and hand targets as executable actions. For the hand, the difference between compliant commands and observed joint positions becomes an auxiliary “compliant intent” target. The model therefore learns both the safe motion reference and evidence of the blocked motion that generated contact load. [Method details](https://arxiv.org/html/2609.36596v1).
+
+The haptic encoder has two inputs. Ten fingertip tokens combine a short history of local wrench readings with current deformation maps. A second stream embeds 44 joint-torque values. Finger and joint identity preserve the hand's kinematic structure before gated cross-attention lets action tokens query the haptic representation. HACo predicts motion references, not explicit target forces.
+
+## A benchmark built around force-sensitive failure
+
+The real-world benchmark covers inserting one playing card into another hand's grasp, opening a book to an interior page, drawing on a balloon, unscrewing a bottle cap and squeezing toothpaste onto a brush. Each method gets 20 physical trials on every task. HACo records 18, 17, 14, 19 and 15 successes, for 83/100 overall.
+
+The strongest comparison method, T-Rex, totals 35/100. Its best tasks are cap removal and toothpaste, where sustained load dominates; the paper argues that its cached visual context and tactile-only refinement may be less responsive to abrupt force transitions. GR00T improves from 15% to 22% when tactile features are simply concatenated, well below HACo's action-aligned haptic fusion.
+
+Ablations separate the ingredients. Removing all haptic input lowers the mean from 83% to 27%. Tactile-only input reaches 68%, joint torque alone reaches 45%, and using both without their coupled encoding reaches 70%. Removing compliant-intent supervision produces 73%; replacing the compliant action with nominal commands lowers it further to 59%. The full method also reports 19% lower mean fingertip force than the nominal-action variant over contact-active samples.
+
+## What this means for robotics
+
+RoboSkin analysis: the useful contribution is the link between sensing and action semantics. More touch channels alone do not tell a model how to yield, maintain traction or stop loading a fragile surface. HACo structures both the demonstrations and the policy so that contact evidence can change an executable motion reference.
+
+The baseline comparison still needs care. HACo and the GR00T variants inherit GR00T N1.7 pretraining, while T-Rex and ViTacFormer have different architectures and pretraining. The table is a system-level comparison, not a controlled proof that one fusion block alone creates the 48-point gap. The within-HACo ablations give cleaner evidence for the value of coupled haptic input and compliant targets.
+
+## Limitations and availability
+
+HACo is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The study uses one robot configuration, 100 task-specific demonstrations per task and no reported confidence intervals. It also depends on force-regulated teleoperation. The authors identify limited whole-hand coverage as an open problem because palm and phalange contacts must be inferred indirectly from joint torque.
+
+The [official project page](https://opendrivelab.github.io/Haco-Page/) includes task videos, exact rollout counts, ablations and documented failures. Its Code control was disabled and labelled “Coming soon” during verification. No public training code, demonstration archive, checkpoints or implementation license was available.
+
+## Sources and related resources
+
+- [HACo arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36596)
+- [Full architecture, protocol and limitations](https://arxiv.org/html/2609.36596v1)
+- [Official project page, videos and result tables](https://opendrivelab.github.io/Haco-Page/)
+- [RoboSkin robot-hands overview](/robot-hands)
+- [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+`,
+  },
+  {
+    id: 'single-element-tackiness-tactile-sensor',
+    title: 'A single-element tactile sensor separates pressure from tackiness',
+    seoTitle: 'Single-Element Tactile Sensor Measures Tackiness',
+    seoDescription: 'A Hall-effect tactile sensor separates compression and pull-off signals at one contact point. Review its ranges, response, durability and robot tests.',
+    excerpt: 'A soft magnet and one Hall sensor generate opposite-polarity signals for compression and pull-off, enabling continuous pressure and tackiness tracking.',
+    category: 'Electronic skin hardware',
+    image: '/generated/news/single-element-tackiness-tactile-sensor.png',
+    imageAlt: 'Cross-section diagram of a Hall-effect tactile sensor bending inward under pressure and outward during adhesive pull-off.',
+    imageCaption: 'Original RoboSkin.ai schematic of the reported magneto-mechanical sensing principle. It is not an experimental image or calibrated plot.',
+    sourceTitle: 'A robust single-sensing-element tactile sensor for concurrent pressure and tackiness detection with real-time signal decoupling capability',
+    sourceUrl: 'https://arxiv.org/abs/2609.36558',
+    sources: [
+      { title: 'Pressure-and-tackiness sensor arXiv v1 record', url: 'https://arxiv.org/abs/2609.36558' },
+      { title: 'Full pressure-and-tackiness sensor v1 PDF', url: 'https://arxiv.org/pdf/2609.36558' },
+    ],
+    technicalFocus: ['tackiness sensing', 'Hall-effect tactile sensor', 'electronic skin', 'bidirectional force sensing'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · laboratory sensor characterization and scripted robot demonstrations · no implementation files verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# A single-element tactile sensor separates pressure from tackiness
+
+Researchers at Sun Yat-sen University and Helmholtz-Zentrum Dresden-Rossendorf released a single-element tactile sensor for concurrent pressure and tackiness measurement on September 29, 2026. A soft magnet moves toward one Hall sensor during compression and away from it during adhesive pull-off, putting the two force directions on opposite sides of a stable electrical baseline. The authors report ranges of 0–150 kilopascals for pressure and 0–33 kilopascals for outward pulling stress. [Paper and version record](https://arxiv.org/abs/2609.36558).
+
+## Key takeaways
+
+- One magnet and one Hall element track inward pressure and outward pull-off at the same contact location; signal polarity separates the two modes without a learned decoder.
+- Reported response/recovery times are 33.2/33.5 milliseconds for pressure and 21.8/10.3 milliseconds for outward pull-off under the paper's laboratory setup.
+- The sensor survives more than 50,000 cycles near 63 kPa pressure and repeated robot touch tests, but the authors say its replaceable upper layer can still fail under large pull-off loads.
+
+## What changed
+
+Tackiness is not the same as friction or normal pressure. Measuring it requires monitoring the whole press-and-retract sequence: contact pressure, dwell time, retraction speed, peak pull-off stress and sometimes the energy dissipated before separation. Stacking separate sensing layers can introduce cross-talk, while a pressure-only skin loses the tensile half of the interaction.
+
+The reported device uses an elastic polydimethylsiloxane structure. A 0.3-millimeter membrane carries a soft neodymium-iron-boron/PDMS magnet above a fixed Hall sensor. Compression reduces their distance and raises the measured magnetic signal; adhesive pull-off bulges the surface outward and lowers it. A PDMS-filled melamine sponge extends the pressure range by adding compressive resistance. [Design and experiments](https://arxiv.org/pdf/2609.36558).
+
+This is a single-point prototype, not a spatial skin array. Its value is the shared transducer and baseline-separated waveform. The researchers vary membrane support height and magnet thickness to trade sensitivity against range, then choose a configuration that accommodates both compression and tensile deformation.
+
+## Characterization and robot demonstrations
+
+The optimized sensor covers 0–150 kPa compression and 0–33 kPa pull-off stress. The paper reports a stable no-load baseline over ten hours, more than 50,000 loading/unloading cycles at roughly 63 kPa and 5,000 pull-off trials. Hammer strikes did not damage the tested device or erase its ability to detect a lightly contaminated finger. These are author-run laboratory tests, not a standardized independent durability certification.
+
+The response-time test uses a 6-volt sensor supply, while most characterization uses 5 volts and robot demonstrations use 2 volts. That matters because the paper also notes that sensitivity changes with supply voltage. Range and timing figures should therefore be read as properties of the reported configurations, not universal ratings for every integration.
+
+For manipulation, the team mounts the sensor on a two-finger electric gripper attached to a commercial arm. Scripted grasps distinguish a clean bottle from one carrying double-sided tape: the contaminated object produces a pull-off signal and triggers another grasp attempt at a clean area. A separate robot-hand demonstration touches seven PDMS samples with different base-to-crosslinker ratios. Three runs reproduce their tackiness order at fast retraction speed.
+
+## What this means for robotics
+
+RoboSkin analysis: the device adds a contact property that most [electronic skins](/e-skin) do not expose. A gripper may need to know not only that contact exists but whether a lightweight object will remain attached after opening. The opposing-polarity signal is also attractive for embedded systems because separation does not depend on a complex multimodal inference model.
+
+Pull-off amplitude is not a complete material label, however. At slower separation speeds, the stickiest PDMS sample produces a lower peak than expected but the greatest separation energy. The paper concludes that integrating the full force-distance curve can be more accurate than ranking surfaces by peak pull-off alone. Robot software would therefore need controlled contact conditions or richer temporal features for reliable material comparison.
+
+## Limitations and availability
+
+This work is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Robot motions are predefined, and the manuscript does not report repeated end-to-end task success rates. The present device is one sensing element with commercial Hall packaging. The authors describe miniaturization and arrays as future work.
+
+Large adhesive loads can damage the upper structure despite its compression durability; replacement is possible, but the design is not yet maintenance-free. The arXiv record and manuscript were accessible during verification, while no official project page, fabrication repository, CAD package, raw dataset or implementation license was identified.
+
+## Sources and related resources
+
+- [Sensor arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36558)
+- [Full fabrication, characterization and robot tests](https://arxiv.org/pdf/2609.36558)
+- [RoboSkin electronic-skin guide](/e-skin)
+- [RoboSkin tactile sensor directory](/sensors)
+`,
+  },
+  {
+    id: 'wrench-act-direct-wrench-control-manipulation',
+    title: 'Wrench-ACT makes force and torque the robot policy action',
+    seoTitle: 'Wrench-ACT Uses Direct Wrench Actions for Manipulation',
+    seoDescription: 'Wrench-ACT predicts a six-axis wrench instead of pose. Review five contact-rich tasks, 1,000 evaluation rollouts, control rates and dataset status.',
+    excerpt: 'Wrench-ACT pairs force-reflecting bilateral demonstrations with an ACT policy that directly commands a six-dimensional target wrench.',
+    category: 'Force-control learning',
+    image: '/generated/news/wrench-act-direct-wrench-control-manipulation.png',
+    imageAlt: 'Diagram of bilateral force-feedback demonstrations training an ACT policy that outputs a six-dimensional wrench to a force controller.',
+    imageCaption: 'Original RoboSkin.ai schematic of Wrench-ACT data collection and control. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Wrench-ACT: Enhancing Robot Policies for Contact Rich Behavior Using Direct Wrench Control',
+    sourceUrl: 'https://arxiv.org/abs/2609.37552',
+    sources: [
+      { title: 'Wrench-ACT arXiv v1 record', url: 'https://arxiv.org/abs/2609.37552' },
+      { title: 'Full Wrench-ACT v1 paper', url: 'https://arxiv.org/html/2609.37552v1' },
+    ],
+    technicalFocus: ['direct wrench control', 'force-feedback teleoperation', 'contact-rich manipulation', 'imitation learning'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · five UR5e tasks · 50 rollouts per task-policy pair · demonstration release promised, not verified public',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# Wrench-ACT makes force and torque the robot policy action
+
+Researchers from Siemens and the University of Technology Nuremberg released Wrench-ACT on September 29, 2026. The system modifies the usual imitation-learning contract: instead of predicting a target position and letting controller error create contact force, its Action Chunking with Transformers policy outputs a six-dimensional force/torque wrench directly. With matching force-reflecting demonstrations, it averages 76.8% success across five contact-rich tasks versus 40% for a position-policy baseline. [Paper and version record](https://arxiv.org/abs/2609.37552).
+
+## Key takeaways
+
+- Direct wrench output works best only when the demonstrations contain intentional wrench commands. Converting ordinary position demonstrations into approximate wrenches averages 28.8% in the same action space.
+- The main table evaluates four collection/action combinations on five tasks with 50 rollouts each: 1,000 physical evaluation rollouts in total.
+- The paper promises more than 1,000 wrench-action demonstrations on a companion site upon publication, but no public companion URL, archive or license was verified with the v1 release.
+
+## What changed
+
+Position policies command where the tool should go. During contact, a Cartesian impedance controller turns the pose error into force. That is useful but indirect: two identical target poses can produce very different interaction loads as geometry and stiffness change.
+
+Wrench-ACT removes the pose target from the learned action. Three RGB streams, robot state and gripper position enter a standard single-task ACT model. Its seven-dimensional output contains a six-axis target wrench plus the gripper command. A UR5e force controller executes the wrench at 500 Hz while policy inference runs near 50 Hz and holds the latest target between predictions. [Method and controller](https://arxiv.org/html/2609.37552v1).
+
+Data collection is the other half of the design. In the bilateral setup, a human pushes a leader arm and feels the follower's reaction. The measured leader wrench becomes the action label. A second dataset uses a Meta Quest position interface and Cartesian impedance control. The authors also translate each dataset into the opposite action representation, producing four policy conditions that separate the collection interface from the learned output.
+
+## Results and the matched-data effect
+
+The five tasks are peg insertion, fuse clipping, fan insertion, industrial-connector mating and pen writing. Bilateral data plus wrench output records 74%, 88%, 58%, 80% and 84%, averaging 76.8%. The conventional VR-data/position-action condition records 6%, 96%, 8%, 12% and 78%, averaging 40%.
+
+That headline average hides two qualifications. Wrench-ACT is lower on fuse clipping, 88% versus 96%, and only three task differences are statistically significant after the paper's multiple-comparison correction: peg, fan and industrial-connector insertion. Pen writing and fuse clipping do not establish a significant advantage.
+
+The cross-condition table is more revealing. A wrench policy trained on wrenches reconstructed from VR position trajectories averages 28.8%. A position policy derived from bilateral wrench data averages 34.8%. The strongest outcome appears when the interface and action agree: humans deliberately command force, and the policy predicts the same quantity.
+
+An inference-rate ablation on the industrial connector reports 80% at 50 Hz, 36% at 30 Hz, 20% at 15 and 5 Hz, and 12% at 1 Hz. The nominal result uses 50 trials; each reduced-rate condition uses 25. When the paper support under the pen is raised 2.5 centimeters, the bilateral-wrench policy falls from 84% to 76%, while the VR-position policy falls from 78% to 24%.
+
+## What this means for robotics
+
+RoboSkin analysis: Wrench-ACT is evidence for aligning a [teleoperation](/robot-teleoperation) interface with the quantity a policy must control. Merely logging a force/torque sensor alongside position commands does not mean the dataset contains deliberate force strategy. For contact-rich data, action provenance matters as much as the presence of force channels.
+
+Direct wrench control is not a universal replacement for pose actions. The authors deliberately choose tasks where interaction force is central, and they state that incidental-contact tasks may not benefit. The system also depends on a capable inner force loop and a mechanically compliant setup; the learned policy is only one layer of the control stack.
+
+## Limitations and availability
+
+Wrench-ACT is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. All experiments use one UR5e-based setup and single-task models trained from scratch. Datasets contain 200–300 episodes per task and interface, but operator count is not stated. The force-reflecting collection rig is substantially more specialized than common handheld or VR capture systems.
+
+The manuscript says a dataset of more than 1,000 wrench-action demonstrations will be released on a companion website “upon publication.” At verification time the arXiv record did not link that site, code, downloadable data, checkpoints or a release license. A promised release should not be treated as an available dataset.
+
+## Sources and related resources
+
+- [Wrench-ACT arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.37552)
+- [Full controller, tasks and cross-condition results](https://arxiv.org/html/2609.37552v1)
+- [RoboSkin guide to robot manipulation](/robot-manipulation)
+- [RoboSkin Physical AI and touch guide](/physical-ai-touch)
+`,
+  },
+  {
     id: 'univlat-whole-body-tactile-vla-humanoid',
     title: 'Uni-VLaT gives humanoid VLA policies whole-body touch',
     seoTitle: 'Uni-VLaT Whole-Body Tactile VLA for Humanoids',
