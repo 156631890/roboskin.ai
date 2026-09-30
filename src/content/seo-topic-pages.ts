@@ -4474,7 +4474,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot learning model pillar',
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-10-01',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
