@@ -23,6 +23,17 @@ export type SeoRoute = {
 };
 
 export const pageSeo: Record<string, SeoRoute> = {
+  '/world-models/tracker': {
+    path: '/world-models/tracker',
+    title: 'Tactile World Model Tracker',
+    description: 'Compare tactile world models, robot platforms, real-robot evaluation and code availability. Review preview, updated as primary sources are checked.',
+    updated: '2026-10-01',
+    priority: 0.7,
+    changeFrequency: 'weekly',
+    index: false,
+    breadcrumbs: ['Home', 'Robot world models', 'Tracker'],
+    breadcrumbPaths: ['/', '/robot-world-models', '/world-models/tracker'],
+  },
   '/': {
     path: '/',
     title: 'Robot Skin, Tactile AI & Robotics Research',
