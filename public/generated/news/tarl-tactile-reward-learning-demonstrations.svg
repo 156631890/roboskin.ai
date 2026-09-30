@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#f19a75" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="143" fill="#f3f0e9" font-size="43" font-weight="bold">TaRL learns contact rewards from touch</text>
+    <text x="62" y="189" fill="#abb5bd" font-size="26">Contact history becomes dense progress feedback for robot learning</text>
+    <rect x="60" y="246" width="310" height="250" rx="16" fill="#22333b"/>
+    <text x="91" y="291" fill="#f19a75" font-size="20">TACTILE SEQUENCES</text>
+    <path d="M98 390 C130 318 164 456 198 360 S267 305 331 407" fill="none" stroke="#f19a75" stroke-width="8"/>
+    <circle cx="98" cy="390" r="8" fill="#f3f0e9"/><circle cx="198" cy="360" r="8" fill="#f3f0e9"/><circle cx="331" cy="407" r="8" fill="#f3f0e9"/>
+    <text x="91" y="460" fill="#b8c2c9" font-size="18">success · rewind · failure</text>
+    <path d="M370 371 H430" stroke="#f19a75" stroke-width="6"/>
+    <rect x="430" y="246" width="300" height="250" rx="16" fill="#283b41"/>
+    <text x="461" y="291" fill="#f19a75" font-size="20">PROGRESS MODEL</text>
+    <text x="461" y="357" fill="#f3f0e9" font-size="29" font-weight="bold">causal tactile</text><text x="461" y="399" fill="#f3f0e9" font-size="29" font-weight="bold">reward</text>
+    <text x="461" y="458" fill="#b8c2c9" font-size="18">task-specific · offline trained</text>
+    <path d="M730 371 H790" stroke="#f19a75" stroke-width="6"/>
+    <rect x="790" y="246" width="350" height="250" rx="16" fill="#4e3027"/>
+    <text x="821" y="291" fill="#ffddca" font-size="20">DOWNSTREAM RL</text>
+    <text x="821" y="357" fill="#f3f0e9" font-size="27" font-weight="bold">34% → 56%</text><text x="821" y="393" fill="#ffddca" font-size="20">simulated nut threading</text>
+    <text x="821" y="438" fill="#f3f0e9" font-size="27" font-weight="bold">37% → 97%</text><text x="821" y="470" fill="#ffddca" font-size="20">physical cube pickup</text>
+    <path d="M60 550 H1140" stroke="#49535c"/>
+    <text x="62" y="595" fill="#f3f0e9" font-size="24">The physical result spans 3 seeds; inference-trial count is not stated.</text>
+    <text x="62" y="632" fill="#a6afb7" font-size="20">Source: arXiv:2609.36785v1. Original explanatory schematic.</text>
+  </g>
+</svg>
