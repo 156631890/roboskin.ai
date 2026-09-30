@@ -315,7 +315,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/privacy',
     title: 'Privacy Policy',
     description: 'How RoboSkin handles contact form submissions and site usage data.',
-    updated: '2026-09-13',
+    updated: '2026-09-30',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,

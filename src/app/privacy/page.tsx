@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <div className="container-shell">
             <span className="eyebrow">Privacy</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Privacy Policy</h1>
-            <p className="mt-5 max-w-3xl">Last updated: September 13, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: September 30, 2026</p>
           </div>
         </header>
 
@@ -40,21 +40,6 @@ export default function PrivacyPolicyPage() {
                 <h2 className="text-2xl font-semibold">Sharing</h2>
                 <p className="mt-3">
                   We do not sell personal information. Configured contact delivery may use FormSubmit and Zoho Mail; the online form is unavailable until a delivery route is configured. When Newsletter signup is available, the interface names the external email-list provider before an address is submitted. That provider processes the signup and any later email-list controls under its own privacy terms. RoboSkin.ai does not treat a form handoff as proof of subscription.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-2xl font-semibold">Google advertising and cookies</h2>
-                <p className="mt-3">
-                  RoboSkin.ai uses Google AdSense to support the publication of its public research resources. When advertising is enabled, third-party vendors, including Google, use cookies to serve ads based on a visitor&apos;s prior visits to this website or other websites. Google&apos;s use of advertising cookies enables Google and its partners to serve ads based on visits to RoboSkin.ai and other sites on the Internet.
-                </p>
-                <p className="mt-3">
-                  Visitors can opt out of personalized advertising through <a className="legal-link" href="https://adssettings.google.com/" target="_blank" rel="noreferrer">Google Ads Settings</a>. Visitors can also review industry opt-out choices at <a className="legal-link" href="https://optout.aboutads.info/" target="_blank" rel="noreferrer">aboutads.info</a>. Other third-party advertising vendors or networks may use cookies when their services are enabled; their privacy and opt-out controls are provided through their respective websites.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-2xl font-semibold">Advertising consent choices</h2>
-                <p className="mt-3">
-                  For visitors in the European Economic Area, the United Kingdom, and Switzerland, RoboSkin.ai uses Google&apos;s certified consent-management messages to request applicable advertising choices before personalized advertising is served. Where available, visitors can decline consent or manage their options through the privacy message shown on the site.
                 </p>
               </div>
               <div>
