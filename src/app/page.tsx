@@ -31,8 +31,8 @@ const homeAuthorityLinkGroups = authorityLinkGroups.map((group) => ({
 }));
 
 const latestResearchSignals = [
-  ...blogPosts.map((post) => ({ ...post, href: `/research/${post.id}`, label: 'Research brief' })),
-  ...newsPosts.map((post) => ({ ...post, href: `/news/${post.id}`, label: 'Robotics news' })),
+  ...blogPosts.map((post) => ({ ...post, imageAlt: `Illustration for ${post.title}`, href: `/research/${post.id}`, label: 'Research brief' })),
+  ...newsPosts.map((post) => ({ ...post, imageAlt: post.imageAlt ?? `Illustration for ${post.title}`, href: `/news/${post.id}`, label: 'Robotics news' })),
 ].sort((left, right) => right.date.localeCompare(left.date)).slice(0, 3);
 
 const researchDatabases = [
@@ -67,7 +67,7 @@ export default function Home() {
             <div className="contact-hero-copy">
               <p className="eyebrow">Intelligence, in contact.</p>
               <h1 id="home-heading" aria-label="Robot skin and tactile AI for Physical AI and humanoid robots">
-                Robot skin <span className="hero-emphasis">and tactile AI</span>
+                Robot skin <span className="hero-emphasis">and tactile AI</span>{' '}
                 <span className="contact-hero-context">for Physical AI <span className="block sm:inline">and humanoid robots</span></span>
               </h1>
             </div>
@@ -107,10 +107,10 @@ export default function Home() {
                 <p>{signal.excerpt}</p>
                 {index === 0 && signal.image ? (
                   <Link href={signal.href} className="contact-dispatch-image" aria-label={`View illustration and sources: ${signal.title}`}>
-                    <Image src={signal.image} alt="" fill sizes="(max-width: 800px) 100vw, 46vw" />
+                    <Image src={signal.image} alt={signal.imageAlt} fill sizes="(max-width: 800px) 100vw, 46vw" />
                   </Link>
                 ) : null}
-                <div className="contact-dispatch-foot"><span>{signal.technicalFocus[0]}</span><Link href={signal.href} aria-label={`Read: ${signal.title}`}>Read brief <span aria-hidden="true">↗</span></Link></div>
+                <div className="contact-dispatch-foot"><span>{signal.technicalFocus[0]}</span><Link href={signal.href} aria-label={`Read: ${signal.title}`}>Read {signal.technicalFocus[0]} brief <span aria-hidden="true">↗</span></Link></div>
               </article>
             ))}
           </div>
@@ -131,17 +131,17 @@ export default function Home() {
                   fill sizes="(max-width: 800px) 100vw, 40vw" />
                 <figcaption>Material study 02 / AI-generated concept</figcaption>
               </figure>
-              <h3>What is robot skin?</h3>
+              <h3>Robot skin turns contact into information</h3>
               <p>Robot skin detects contact, pressure, shear and slip across hands, grippers and body surfaces. It gives robots information about physical interaction that vision alone cannot provide.</p>
               <Link href="/robot-skin" className="contact-text-link">Start with the fundamentals <span aria-hidden="true">↗</span></Link>
             </div>
             <nav className="contact-field-routes" aria-label="Core research topics">
               {homeKnowledgeMap.map((item, index) => (
-                <Link key={item.title} href={item.href ?? '/research'}>
+                <div key={item.title} className="contact-field-route">
                   <span className="contact-route-number">{String(index + 1).padStart(2, '0')}</span>
-                  <span><strong>{item.title}</strong><small>{item.description}</small></span>
+                  <div><Link href={item.href ?? '/research'} className="home-card-link"><span className="contact-route-title">{item.title}</span></Link><small>{item.description}</small></div>
                   <span className="contact-arrow" aria-hidden="true">↗</span>
-                </Link>
+                </div>
               ))}
             </nav>
           </div>
@@ -156,7 +156,7 @@ export default function Home() {
       <section className="contact-section container-shell" aria-labelledby="working-paper-heading">
         <div className="contact-paper">
           <div className="contact-paper-index"><p className="quiet-label">RoboSkin Working Papers</p><span aria-hidden="true">WP—01</span><Link href="/papers">All working papers ↗</Link></div>
-          <div className="contact-paper-copy"><p className="contact-paper-status">Research in progress / Version 0.2</p><h2 id="working-paper-heading">Interaction as<br />the Interface.</h2><p>When should a robot probe before acting? Explore our research proposal and its synthetic decision benchmark.</p><p className="contact-paper-boundary">Not peer reviewed · No physical-robot evaluation</p><Link href="/papers/interaction-as-the-interface" className="contact-text-link">Explore the proposal <span aria-hidden="true">↗</span></Link></div>
+          <div className="contact-paper-copy"><p className="contact-paper-status">Research in progress / Version 0.2</p><h2 id="working-paper-heading">Interaction as<br />{' '}the Interface.</h2><p>When should a robot probe before acting? Explore our research proposal and its synthetic decision benchmark.</p><p className="contact-paper-boundary">Not peer reviewed · No physical-robot evaluation</p><Link href="/papers/interaction-as-the-interface" className="contact-text-link">Explore the proposal <span aria-hidden="true">↗</span></Link></div>
           <ol className="contact-paper-method" aria-label="Working paper materials"><li><span>01</span><strong>Read the proposal</strong><small>Versioned manuscript</small></li><li><span>02</span><strong>Inspect the experiment</strong><small>Synthetic decision benchmark</small></li><li><span>03</span><strong>Check the boundaries</strong><small>Methods & limitations</small></li></ol>
         </div>
       </section>
@@ -173,7 +173,7 @@ export default function Home() {
         </details>
         <details className="contact-fold">
           <summary><span>02</span><h3>Find the right robot skin research route</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>
-          <div className="contact-fold-body"><AuthorityIndex groups={homeAuthorityLinkGroups} /><nav className="contact-utility-links" aria-label="Research utilities"><Link href="/glossary">Open the glossary ↗</Link><Link href="/technology">Explore tactile AI technology ↗</Link><Link href="/research-index">Search the research index ↗</Link><Link href="/contact?requestType=research">Submit source ↗</Link></nav></div>
+          <div className="contact-fold-body"><AuthorityIndex groups={homeAuthorityLinkGroups} compactLinks /><nav className="contact-utility-links" aria-label="Research utilities"><Link href="/glossary">Open the glossary ↗</Link><Link href="/technology">Explore tactile AI technology ↗</Link><Link href="/research-index">Search the research index ↗</Link><Link href="/contact?requestType=research">Submit source ↗</Link></nav></div>
         </details>
         <details className="contact-fold">
           <summary><span>03</span><h3>Physical AI needs robot skin, tactile AI, and contact feedback</h3><span className="contact-fold-icon" aria-hidden="true" /></summary>

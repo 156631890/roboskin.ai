@@ -85,7 +85,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(globals, /\.deferred-section/);
   // Progressive disclosure keeps the full reading routes and FAQ in server-rendered HTML.
   assert.match(home, /<details className="contact-fold">/);
-  assert.match(home, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} \/>/);
+  assert.match(home, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} compactLinks \/>/);
   assert.match(home, /id="latest-research"/);
   assert.doesNotMatch(home, /hero-copy reveal|className="[^"]*\breveal\b/);
   assert.match(globals, /@keyframes floatUp/);
