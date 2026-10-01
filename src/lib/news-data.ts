@@ -33,6 +33,285 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tacex-tactile-curiosity-robot-exploration',
+    title: 'TacEx makes tactile uncertainty a target for robot exploration',
+    seoTitle: 'TacEx Uses Tactile Curiosity for Robot Exploration',
+    seoDescription: 'TacEx directs robot exploration toward uncertain contact. Review its reward-free and VLA post-training tests, simulation limits and release status.',
+    excerpt: 'TacEx decomposes model uncertainty by sensing modality and rewards uncertainty in touch, steering robot learning toward contact-rich experience.',
+    category: 'Tactile robot learning',
+    image: '/generated/news/tacex-tactile-curiosity-robot-exploration.png',
+    imageAlt: 'Diagram of a robot gripper using tactile uncertainty to choose contact-rich exploration instead of free-space motion.',
+    imageCaption: 'Original RoboSkin.ai schematic of tactile-directed curiosity. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Tactile Curiosity Drives Robot Interaction',
+    sourceUrl: 'https://arxiv.org/abs/2609.40134',
+    sources: [
+      { title: 'TacEx arXiv v1 record', url: 'https://arxiv.org/abs/2609.40134' },
+      { title: 'Full TacEx v1 paper', url: 'https://arxiv.org/html/2609.40134v1' },
+    ],
+    technicalFocus: ['tactile exploration', 'intrinsic motivation', 'contact-rich reinforcement learning', 'VLA post-training'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation-only evaluation · reward-free and frozen-VLA experiments · no public code or dataset verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# TacEx makes tactile uncertainty a target for robot exploration
+
+Researchers from ETH Zurich, the University of California, Berkeley and the University of Texas at Austin released TacEx on September 30, 2026. The framework separates a learned dynamics model's uncertainty into visual, tactile and latent-state components, then lets a robot prioritize uncertainty in touch. The reported experiments show more contact-rich reward-free exploration and more sample-efficient post-training of a frozen vision-language-action policy, but all tests are in simulation. [Paper and version record](https://arxiv.org/abs/2609.40134).
+
+## Key takeaways
+
+- TacEx changes the exploration objective, not merely the policy input: ensemble disagreement about future tactile observations becomes an intrinsic reward.
+- Reward-free collection is evaluated across five random seeds. VLA post-training covers eight contact-rich LIBERO-90 tasks and ten seeds, with 500,000 environment steps for most tasks and one million for task 69.
+- The paper reports curves rather than a single aggregate success claim. Tactile-plus-visual uncertainty gives the highest reported mean final return on each of the five tasks in the extended comparison, but the benefit varies by task.
+
+## What changed
+
+Standard curiosity methods reward predictive uncertainty wherever it occurs. In manipulation, that can spend a large budget on novel motion through empty space. TacEx instead models uncertainty separately for visual features, tactile force maps and the fused latent state. Weighting the tactile term more heavily biases the policy toward states where contact dynamics are unknown. [Method and experiments](https://arxiv.org/html/2609.40134v1).
+
+The first experiment removes task reward entirely. A simulated parallel-jaw gripper explores scenes with one object and then four objects. After collection, the replay buffer is frozen, relabelled with a sparse pick-and-place reward and used to train Soft Actor-Critic offline. Tactile-weighted variants interact with and attempt to grasp objects more often than variants without tactile disagreement. Adding visual disagreement spreads interactions over roughly two objects, while tactile-only curiosity concentrates closer to one.
+
+The second experiment applies the same idea to a pretrained policy. A lightweight learner predicts noise for a frozen diffusion-based VLA; the base VLA still consumes its original image, proprioception and language inputs. TacEx gives the noise-steering learner tactile observations and an intrinsic disagreement bonus. This is post-training around a frozen policy, not tactile pretraining of the VLA itself.
+
+## Results under the reported conditions
+
+The LIBERO study uses task IDs 58, 69, 61, 77, 55, 21, 56 and 20. The simulated Panda gripper receives 32 × 64 × 3 tactile force maps and 64 × 64 images. Every main comparison uses the same pretrained policy checkpoint and per-task interaction budget. The authors report mean evaluation return with standard-error bands across ten seeds.
+
+Five tasks receive the most extensive baseline comparison: ketchup, soup and butter into a tray; a book into the back of a caddy; and turning on a stove before placing a frying pan. Tactile-plus-visual disagreement has the highest reported mean final return on all five. Additional controls aggregate the taxels into one signal, replace SAC with PPO or update the diffusion action head. The spatial tactile-plus-visual variant remains strongest under the displayed protocol.
+
+RoboSkin verification: the paper does not publish one numerical average across all eight tasks, so this article does not manufacture one from plotted curves. It also distinguishes tactile input from tactile-directed exploration. The ablation shows that adding touch to the learner state helps, while the best variants additionally predict spatial tactile outcomes as the disagreement target.
+
+## What this means for tactile robotics
+
+RoboSkin analysis: TacEx treats a tactile sensor as a guide to where the robot should collect experience. That is different from using touch only after contact has already occurred. For [contact-rich manipulation](/tactile-manipulation), it could make data collection more intentional by spending fewer transitions away from objects.
+
+The multi-object result also exposes a useful design trade-off. Tactile-only curiosity can over-focus on one reliable source of contact; combining vision and touch maintains broader scene coverage. A deployment may therefore need adaptive modality weights rather than one permanent setting. That question links exploration design to the wider [robot-learning pipeline](/robot-learning), not just sensor choice.
+
+## Limitations and availability
+
+TacEx is an arXiv v1 preprint marked under review, and RoboSkin.ai has not reproduced it. The study uses simulated force maps, one parallel-jaw gripper and no fragile or deformable objects. It does not test tactile noise, calibration drift, sensor wear, safe-force constraints or physical resets. Contact-seeking curiosity by itself does not prevent unsafe contact.
+
+The authors state that the representation could accept vision-based tactile images, but no multi-finger hand or real sensor is evaluated. At verification time, neither the arXiv record nor manuscript linked a public project page, code repository, dataset, checkpoint or implementation license. The article is CC BY 4.0; that license applies to the paper, not to absent software or data.
+
+## Sources and related resources
+
+- [TacEx arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.40134)
+- [Full method, hyperparameters, ablations and limitations](https://arxiv.org/html/2609.40134v1)
+- [RoboSkin tactile AI overview](/tactile-ai)
+- [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+`,
+  },
+  {
+    id: 'occludex-visuo-tactile-self-occlusion-dexterity',
+    title: 'OccluDex fuses 3D geometry and touch when robot hands block the view',
+    seoTitle: 'OccluDex Handles Self-Occlusion with Vision and Touch',
+    seoDescription: 'OccluDex combines partial 3D geometry with tactile contact for dexterous control under self-occlusion. Review simulation and 40 hardware trials.',
+    excerpt: 'OccluDex pretrains a 3D visuo-tactile encoder on human demonstrations, then freezes it for dexterous policies operating under hand-induced occlusion.',
+    category: 'Visuo-tactile dexterity',
+    image: '/generated/news/occludex-visuo-tactile-self-occlusion-dexterity.png',
+    imageAlt: 'Diagram of a dexterous hand occluding an object while partial 3D geometry and fingertip contact tokens feed a shared encoder.',
+    imageCaption: 'Original RoboSkin.ai schematic of OccluDex input fusion. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'OccluDex: Hierarchical 3D Visuo-Tactile Representation Learning for Egocentric Dexterous Manipulation under Self-Occlusion',
+    sourceUrl: 'https://arxiv.org/abs/2609.39017',
+    sources: [
+      { title: 'OccluDex arXiv v1 record', url: 'https://arxiv.org/abs/2609.39017' },
+      { title: 'Full OccluDex v1 paper', url: 'https://arxiv.org/html/2609.39017v1' },
+    ],
+    technicalFocus: ['3D visuo-tactile learning', 'self-occlusion', 'dexterous manipulation', 'sim-to-real transfer'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation plus 40 physical trials · zero-shot transfer on one Shadow Hand · no public code or dataset verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# OccluDex fuses 3D geometry and touch when robot hands block the view
+
+Researchers from Shanghai Jiao Tong University, Tongji University and the Chinese University of Hong Kong, Shenzhen released OccluDex on September 30, 2026. The framework combines partial egocentric point clouds with local touch so a dexterous hand can continue estimating object geometry and contact while its own fingers hide the scene. The authors report 17/20 successful physical faucet trials and 14/20 object-reorientation trials after simulation training, without real-world fine-tuning. [Paper and version record](https://arxiv.org/abs/2609.39017).
+
+## Key takeaways
+
+- A hierarchical masked autoencoder learns global 3D structure at multiple scales, then fuses 19 tactile contact tokens with high-level geometric features.
+- Pretraining uses 1,690 human manipulation sequences containing 409,035 synchronized visual-tactile frames from three subjects.
+- Simulation averages 100 evaluation episodes per setting and three policy seeds. Physical evaluation uses two unseen objects per task and ten trials per object, giving 40 trials in total.
+
+## What changed
+
+An egocentric camera stays aligned with the manipulating body, but the hand itself often blocks the contact region. Completing the hidden shape from vision can be ambiguous, while touch alone is local and says little about the rest of the object. OccluDex gives the two signals different jobs: multiscale point-cloud tokens preserve global geometry, and sensor-specific tactile tokens preserve localized contact.
+
+During pretraining, the model masks portions of both modalities and reconstructs them. The encoder progressively merges 512, 256 and 64 point groups, then cross-attends the final geometric tokens with 19 tactile tokens. The decoder is discarded after pretraining; the encoder remains frozen while Proximal Policy Optimization learns the downstream controller. [Architecture and protocol](https://arxiv.org/html/2609.39017v1).
+
+The human dataset uses a head-mounted Intel RealSense D435i and a WiseGlove with 19 tactile channels, synchronized at 30 Hz. Three contributors provide 565, 565 and 560 sequences. Pretraining runs on two RTX 4080 GPUs. The downstream simulated Shadow Hand receives a 4,096-point partial cloud, 19 binary contacts and 48 proprioceptive values at each control step.
+
+## Results and the percentage-point check
+
+Faucet rotation uses three training faucet geometries and tests scales of 0.9 and 1.1 as unseen conditions. OccluDex reports 99.9% success on seen faucets and 86.6% on the unseen scales. Tabletop reorientation trains on ten YCB objects and holds out six; success is 75.1% on seen objects and 83.3% on held-out objects.
+
+The paper's abstract says OccluDex is 8.3% higher on seen cases and 12.6% higher on unseen cases than the strongest baselines. RoboSkin recalculated those statements from Table III. Averaging the two tasks gives OccluDex 87.5% seen success versus 79.2% for the strongest per-task baseline, a difference of 8.3 percentage points. For unseen cases, 84.95% versus 72.4% produces 12.55 points, which rounds to 12.6. These are absolute percentage-point gaps, not relative percentage gains.
+
+The physical platform uses a right Shadow Hand with 19 force-sensitive resistors, a RealSense D435i and closed-loop control at 10 Hz. The tactile electronics sample at 1 kHz before binarization; depth arrives at 30 Hz. Two unseen objects are used for each task. Faucet rotation succeeds in 17/20 trials, while 180-degree tabletop reorientation succeeds in 14/20.
+
+## What this means for robot hands
+
+RoboSkin analysis: the result is useful because it tests a failure caused by the robot's own embodiment. More external cameras can reduce occlusion in a laboratory, but a [dexterous robot hand](/robot-hands) operating from an onboard view still needs local evidence when fingers cover the object. OccluDex uses touch as that local evidence without asking the tactile stream to reconstruct the entire shape.
+
+The ablation strengthens this interpretation. Removing touch drops faucet success by 45.7 points on seen instances and 48.0 points on unseen scales under the authors' ablation protocol. Removing the point cloud also hurts, but less consistently. The two modalities are complementary rather than interchangeable, which fits the broader [visuo-tactile learning](/visuo-tactile) design problem.
+
+## Limitations and availability
+
+OccluDex is an arXiv v1 manuscript submitted to IEEE, and RoboSkin.ai has not reproduced it. The physical study is 40 trials on one Shadow Hand setup. The real camera pose is matched to simulation, no point-cloud perturbation or dynamics randomization is used, and the policy sees binary contacts rather than rich tactile images or forces. The authors also note that training the full encoder jointly with PPO was infeasible on their hardware; the from-scratch comparison therefore uses a simplified architecture.
+
+At verification time, the paper and arXiv record did not link a project page, public code, dataset, trained model or implementation license. The arXiv article is CC BY 4.0, but that does not establish reuse rights for the unreleased dataset or software.
+
+## Sources and related resources
+
+- [OccluDex arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39017)
+- [Full data, baselines, ablations and hardware protocol](https://arxiv.org/html/2609.39017v1)
+- [RoboSkin robot manipulation overview](/robot-manipulation)
+- [RoboSkin tactile sensor directory](/sensors)
+`,
+  },
+  {
+    id: 'membrane-coupled-delta-array-micro-object-manipulation',
+    title: 'A stretchable membrane lets a delta array manipulate sub-pitch objects',
+    seoTitle: 'Membrane-Coupled Delta Array Moves Smaller Objects',
+    seoDescription: 'An 8×8 delta array turns 64 contacts into a continuous surface for 15–90 mm objects. Review its 192-DoF hardware and sim-to-real results.',
+    excerpt: 'A nylon-spandex membrane couples 64 three-axis delta robots into a continuous surface, removing actuator spacing as a hard object-size floor.',
+    category: 'Soft manipulation hardware',
+    image: '/generated/news/membrane-coupled-delta-array-micro-object-manipulation.png',
+    imageAlt: 'Diagram of an eight-by-eight delta robot array deforming a continuous membrane to move objects smaller than the actuator spacing.',
+    imageCaption: 'Original RoboSkin.ai schematic of the membrane-coupled array. It is explanatory artwork, not a photograph of the prototype.',
+    sourceTitle: 'Making Waves: A Membrane-Coupled Delta Array for Manipulating Objects Below the Actuator Spacing',
+    sourceUrl: 'https://arxiv.org/abs/2609.39652',
+    sources: [
+      { title: 'Making Waves arXiv v1 record', url: 'https://arxiv.org/abs/2609.39652' },
+      { title: 'Full Making Waves v1 paper', url: 'https://arxiv.org/html/2609.39652v1' },
+    ],
+    technicalFocus: ['distributed manipulation', 'soft robotic surface', 'delta robot array', 'sim-to-real control'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · physical 192-DoF platform · 50 learned-policy hardware trials · no public code, CAD or data verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# A stretchable membrane lets a delta array manipulate sub-pitch objects
+
+Researchers spanning IT University of Copenhagen and Carnegie Mellon University released a membrane-coupled delta array on September 30, 2026. The prototype links an 8 × 8 grid of three-degree-of-freedom delta robots with stretchable fabric, turning 64 discrete supports into one deformable contact surface. It manipulates objects from 15 to 90 millimeters on hardware even though neighboring actuators are 43.3 millimeters apart. [Paper and version record](https://arxiv.org/abs/2609.39652).
+
+## Key takeaways
+
+- Sixty-four delta robots provide 192 controlled degrees of freedom beneath a 263 × 325 mm nylon-spandex membrane.
+- Local open-loop primitives route 15 mm cubes, while a learned policy moves five 30–90 mm objects to target positions in 50 physical trials.
+- The learned policy reaches 76% hardware success versus 100% for identical start-goal cases in simulation; fine placement remains the main transfer gap.
+
+## What changed
+
+Distributed manipulation arrays normally require an object to bridge several actuators. Their center-to-center spacing therefore becomes a lower limit on object size. This design inserts a continuous interface: an 80/20 nylon-spandex sheet, 0.4 mm thick, mounted at neutral strain across the actuator tips. Small objects rest on the fabric between tips rather than falling through the grid.
+
+Each delta uses three 100 mm-stroke linear actuators, a compliant TPU/PETG parallel mechanism and position feedback. Sixteen modular 2 × 2 units form the full array. Four 1080p cameras running at 30 frames per second track objects with OpenCV image moments and AprilTags. The fabric can be relaxed to cradle an object or stretched to create local slope, curvature and strain. [Hardware and control details](https://arxiv.org/html/2609.39652v1).
+
+The authors describe the surface as a displacement field rather than 192 independent motors. Quasi-static fields tilt, translate, dilate or bend the membrane. Cyclic fields create traveling waves. Local cell primitives can move several sub-pitch objects concurrently, while larger objects use a neighborhood of tips for translation and rotation.
+
+## From 192 motors to a compact action space
+
+Directly exploring 192 actuator coordinates destabilized the simulated soft body. The learned controller instead acts on low-order discrete cosine transform coefficients. It commands either the whole array or a ring around the tracked object. All policies train for one million MuJoCo steps and are evaluated over 392 held-out episodes covering 49 EGAD shapes.
+
+A 19-delta neighborhood using three-axis motion reaches 95.1% simulation success, with a 3.5 mm median final error and 8.4 mm 90th-percentile error. The whole-array controller reaches a similar 93.5%, but its median and 90th-percentile errors are 6.5 and 14.2 mm. Thus “halves the placement error” refers to the median changing from 6.5 to 3.5 mm, a 46.2% reduction, not a doubled success rate.
+
+For physical transfer, the 19-delta policy is deployed without adaptation on five objects sized 30, 45, 60, 75 and 90 mm. Each receives ten start-goal trials, and the identical cases are replayed in simulation. Hardware succeeds on 38/50 trials, or 76%; simulation records 50/50. Mean final error is 19.4 mm on hardware versus 3.46 mm in simulation.
+
+## What this means for contact hardware
+
+RoboSkin analysis: the membrane is not a sensor, but it behaves like a mechanically continuous contact layer. It fills the spatial gaps between actuators, much as [robot skin](/robot-skin) fills sensing gaps across a body. That suggests an engineering pattern in which a compliant interface performs useful spatial interpolation before perception or control software runs.
+
+The paper also points directly to the missing next layer. The learned observation contains object position, goal, actuator state and object size, but no geometry or contact measurement. Concave features sometimes catch on real tips, a failure absent from the convex-hull simulation. Adding [tactile sensing](/sensors) at the tips or estimating contact through vision could let the policy distinguish rolling, sliding and snagging instead of treating them as unobserved disturbance.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the system. The 15 mm result comes from scripted local primitives; the learned-policy transfer covers 30–90 mm. Hardware trials total 50, with ten per object. The nylon-spandex membrane is nonlinear, anisotropic and subject to wrinkling, boundary loads, motor backlash and manufacturing tolerance. The simulation uses an idealized flex surface and convex-hull collision geometry, which helps explain the fine-placement gap.
+
+The manuscript does not link an official project page, public controller code, MuJoCo environment, CAD package, bill of materials, dataset or implementation license. The arXiv article is CC BY 4.0; no reuse terms were verified for the unreleased hardware or software assets.
+
+## Sources and related resources
+
+- [Making Waves arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39652)
+- [Full hardware, workspace, policy and transfer evaluation](https://arxiv.org/html/2609.39652v1)
+- [RoboSkin electronic-skin overview](/e-skin)
+- [RoboSkin Physical AI guide](/physical-ai)
+`,
+  },
+  {
+    id: 'funco-grasp-cross-embodiment-dexterous-grasping',
+    title: 'FunCo-Grasp transfers grasp structure across different robot hands',
+    seoTitle: 'FunCo-Grasp Transfers Grasps Across Robot Hands',
+    seoDescription: 'FunCo-Grasp aligns functional finger roles across hand designs. Review seven-hand simulation, 200 physical trials, ablations and code status.',
+    excerpt: 'FunCo-Grasp maps unlike robot hands into shared functional parts and canonical frames before generating an executable dexterous grasp.',
+    category: 'Cross-embodiment grasping',
+    image: '/generated/news/funco-grasp-cross-embodiment-dexterous-grasping.png',
+    imageAlt: 'Diagram aligning different robot hand morphologies to shared fingertip, distal, middle, proximal, metacarpal and wrist roles.',
+    imageCaption: 'Original RoboSkin.ai schematic of functional correspondence across hands. It is explanatory artwork, not a generated grasp result.',
+    sourceTitle: 'Function beyond Form: Functional Correspondence for Cross-Embodiment Dexterous Grasp Generation',
+    sourceUrl: 'https://arxiv.org/abs/2609.39006',
+    sources: [
+      { title: 'FunCo-Grasp arXiv v1 record', url: 'https://arxiv.org/abs/2609.39006' },
+      { title: 'Full FunCo-Grasp v1 paper', url: 'https://arxiv.org/html/2609.39006v1' },
+      { title: 'Official FunCo-Grasp project page', url: 'https://zblzz.github.io/FunCo-Grasp-Web/' },
+      { title: 'Official FunCo-Grasp repository placeholder', url: 'https://github.com/zblzz/FunCo-Grasp' },
+    ],
+    technicalFocus: ['cross-embodiment grasping', 'dexterous robot hands', 'functional correspondence', 'diffusion grasp generation'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · seven-hand simulation and 200 physical trials · project page public · repository is a placeholder without code or license',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '9 min read',
+    content: `# FunCo-Grasp transfers grasp structure across different robot hands
+
+Researchers from Southern University of Science and Technology, KTH Royal Institute of Technology, Shanghai Jiao Tong University and Rysen Robotics released FunCo-Grasp on September 30, 2026. The method assigns physically different links to shared functional roles, then expresses those roles in canonical local frames before generating a grasp. One model reaches 84/100 successes on ApexHand and 68/100 on Revo2, two hand designs not used for training. [Paper and version record](https://arxiv.org/abs/2609.39006).
+
+## Key takeaways
+
+- The model trains on 14,011 grasps from ShadowHand, Allegro and Barrett, then evaluates four unseen simulation hands without target-hand grasp data or fine-tuning.
+- Average simulated success is 92.40% on the three seen hands and 74.02% on ApexHand, XHand, LeapHand and Robotiq-3F.
+- The physical total is 152/200 trials across ApexHand and Revo2. The official repository existed at verification time but contained only a 13-byte “Comming soon” README and no license.
+
+## What changed
+
+Cross-embodiment grasp models face a representation mismatch. A thumb tip and an opposing finger may play similar roles on two hands even when their link names, topology and axes differ. FunCo-Grasp introduces Functional Part Alignment to map links into fingertip, distal, middle, proximal, metacarpal and wrist roles. Canonical Frame Alignment then gives those roles shared forward, closing and lateral directions.
+
+A graph encoder combines the aligned hand's geometry, roles and kinematics. A frozen object encoder supplies local shape features. A diffusion model generates the spatial arrangement of the functional parts, and inverse kinematics converts those target positions into wrist and joint configurations. Adapting a new hand requires its geometry, kinematics and a one-time role annotation, but not new grasp demonstrations. [Method and evaluation](https://arxiv.org/html/2609.39006v1).
+
+The filtered CMapDataset split contains 48 training objects and ten held-out objects. Training grasps comprise 3,754 ShadowHand, 6,242 Barrett and 4,015 Allegro examples. Each hand-object simulation pair is evaluated in three runs of 100 newly generated grasps. A grasp succeeds if it survives six directional disturbances and finishes with less than two centimeters of object displacement.
+
+## Results and baseline boundaries
+
+On seen hands, FunCo-Grasp averages 92.40%. That is below UniMorphGrasp's paper-reported 94.00% but above locally evaluated T(R,O) Grasp at 91.07%. UniMorphGrasp had no published results for the four unseen hands. On those unseen embodiments, FunCo-Grasp averages 74.02%, compared with 66.50% for CEDex, the strongest available all-four baseline in the table.
+
+The alignment ablation is especially revealing. Removing Functional Part Alignment reduces unseen-hand success from 74.02% to 33.90%; removing canonical frames lowers it to 19.40%; removing both reaches 0.95%. Seen-hand performance moves by less than 2.3 points in the same ablations. Functional correspondence therefore matters most when morphology changes, rather than simply increasing capacity on familiar hands.
+
+The authors also report a weakness: successful grasp diversity is 0.293 radians, lower than 0.401 for T(R,O), 0.450 for D(R,O) and 0.512 for CEDex under the cited protocols. The model is fast at 0.16 seconds per grasp on the reported workstation, but it produces a narrower set of configurations.
+
+## Physical tests on unseen hand designs
+
+Both physical platforms mount an unseen hand on a UR5 arm and use a RealSense D435i. Each trial captures fresh RGB-D data, segments the object with SAM2 and generates a grasp. Ten objects receive ten random placements per hand. ApexHand succeeds 84/100 times and Revo2 succeeds 68/100, yielding 152/200, or 76.00%, overall. Per-object counts range from 5/10 to 10/10 on ApexHand and 4/10 to 9/10 on Revo2.
+
+RoboSkin analysis: this is a grasp-generation result, not a full manipulation policy. It shows that an explicit functional schema can bridge [robot hand](/robot-hands) geometries, but the downstream test is lift-and-hold rather than in-hand reorientation, tool use or tactile recovery. A future system could combine this morphology transfer with [contact-aware manipulation](/tactile-manipulation) after the grasp closes.
+
+## Limitations and availability
+
+FunCo-Grasp is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The one-time functional annotation is described as lightweight but not timed or evaluated for annotator consistency. Baseline provenance is mixed: most methods use released checkpoints under the authors' local protocol, while UniMorphGrasp values come from its paper. The model also depends on object segmentation and does not consume tactile feedback.
+
+The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes explanations, figures, tables and videos. It links an [official GitHub repository](https://github.com/zblzz/FunCo-Grasp), created September 30. At verification time that repository contained only a 13-byte README saying “Comming soon”; there were no implementation files, model weights, dataset package or software license. The arXiv record uses the non-exclusive distribution license, which does not grant an open-source software license.
+
+## Sources and related resources
+
+- [FunCo-Grasp arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39006)
+- [Full training, baselines, ablations and physical protocol](https://arxiv.org/html/2609.39006v1)
+- [Official project page with videos and results](https://zblzz.github.io/FunCo-Grasp-Web/)
+- [Official repository placeholder](https://github.com/zblzz/FunCo-Grasp)
+- [RoboSkin dexterous manipulation guide](/robot-manipulation)
+`,
+  },
+  {
     id: 'tarl-tactile-reward-learning-demonstrations',
     title: 'TaRL learns contact-rich rewards from tactile demonstrations',
     seoTitle: 'TaRL Learns Rewards from Tactile Demonstrations',
