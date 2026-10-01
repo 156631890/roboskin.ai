@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 173);
+  assert.equal(protectedUrls.length, 177);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -81,6 +81,10 @@ test('the audited production URL inventory is protected', async () => {
     '/news/haco-haptic-active-compliance-dexterous-manipulation',
     '/news/single-element-tackiness-tactile-sensor',
     '/news/wrench-act-direct-wrench-control-manipulation',
+    '/news/tacex-tactile-curiosity-robot-exploration',
+    '/news/occludex-visuo-tactile-self-occlusion-dexterity',
+    '/news/membrane-coupled-delta-array-micro-object-manipulation',
+    '/news/funco-grasp-cross-embodiment-dexterous-grasping',
     '/news/outcome-sensitive-impact-aware-dexterous-catching',
     '/news/body-grounded-replanning-physical-manipulation',
     '/news/blind-grasp-reflex-proprioceptive-dexterous-hand',

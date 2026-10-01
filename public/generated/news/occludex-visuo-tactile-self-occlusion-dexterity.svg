@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#f19a75" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">OccluDex keeps contact visible to the policy</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">Partial 3D geometry + local touch under hand-induced occlusion</text>
+    <rect x="60" y="236" width="342" height="272" rx="16" fill="#22333b"/>
+    <text x="91" y="281" fill="#f19a75" font-size="20">OCCLUDED VIEW</text>
+    <circle cx="236" cy="388" r="79" fill="#35505a" stroke="#8bc7d2" stroke-width="4"/>
+    <path d="M115 338 C157 291 188 334 201 390 L184 467 H136 Z" fill="#f19a75" opacity="0.9"/>
+    <path d="M357 329 C319 292 285 329 274 390 L290 467 H340 Z" fill="#f19a75" opacity="0.9"/>
+    <circle cx="181" cy="404" r="11" fill="#ffe0cf"/><circle cx="293" cy="404" r="11" fill="#ffe0cf"/>
+    <path d="M402 372 H465" stroke="#f19a75" stroke-width="6"/>
+    <rect x="465" y="236" width="280" height="272" rx="16" fill="#283b41"/>
+    <text x="496" y="281" fill="#f19a75" font-size="20">FROZEN ENCODER</text>
+    <rect x="512" y="322" width="186" height="55" rx="10" fill="#35505a"/><text x="541" y="357" fill="#f3f0e9" font-size="21">3D hierarchy</text>
+    <rect x="512" y="401" width="186" height="55" rx="10" fill="#4e3027"/><text x="537" y="436" fill="#ffddca" font-size="21">19 touch tokens</text>
+    <path d="M745 372 H808" stroke="#f19a75" stroke-width="6"/>
+    <rect x="808" y="236" width="332" height="272" rx="16" fill="#4e3027"/>
+    <text x="839" y="281" fill="#ffddca" font-size="20">PHYSICAL SHADOW HAND</text>
+    <text x="839" y="355" fill="#f3f0e9" font-size="34" font-weight="bold">17 / 20</text><text x="973" y="355" fill="#ffddca" font-size="20">faucet</text>
+    <text x="839" y="414" fill="#f3f0e9" font-size="34" font-weight="bold">14 / 20</text><text x="973" y="414" fill="#ffddca" font-size="20">reorientation</text>
+    <text x="839" y="466" fill="#b8c2c9" font-size="18">zero-shot sim-to-real · unseen objects</text>
+    <path d="M60 550 H1140" stroke="#49535c"/>
+    <text x="62" y="595" fill="#f3f0e9" font-size="23">8.3 and 12.6 are absolute percentage-point gaps after averaging two tasks.</text>
+    <text x="62" y="632" fill="#a6afb7" font-size="20">Source: arXiv:2609.39017v1. Original explanatory schematic.</text>
+  </g>
+</svg>
