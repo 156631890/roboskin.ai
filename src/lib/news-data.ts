@@ -33,6 +33,278 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tacdyn-wam-implicit-tactile-dynamics',
+    title: 'TacDyn-WAM predicts contact dynamics without generating future touch pixels',
+    seoTitle: 'TacDyn-WAM Predicts Implicit Tactile Dynamics',
+    seoDescription: 'TacDyn-WAM predicts contact evolution in latent space. Review its UniVTAC and 100-trial hardware results, latency comparison and release limits.',
+    excerpt: 'TacDyn-WAM separates visual futures from implicit tactile dynamics, replacing iterative tactile-pixel generation with a contact-aware latent target.',
+    category: 'Tactile world models',
+    image: '/generated/news/tacdyn-wam-implicit-tactile-dynamics.png',
+    imageAlt: 'Diagram showing camera and tactile clips entering separate future-prediction experts before guiding a robot action policy.',
+    imageCaption: 'Original RoboSkin.ai schematic of TacDyn-WAM\'s separate visual and tactile prediction paths. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TacDyn-WAM: Learning Implicit Tactile Dynamics in a Heterogeneous Visuo-Tactile World Action Model',
+    sourceUrl: 'https://arxiv.org/abs/2610.00638',
+    sources: [
+      { title: 'TacDyn-WAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.00638' },
+      { title: 'Full TacDyn-WAM v1 paper', url: 'https://arxiv.org/html/2610.00638v1' },
+      { title: 'Official TacDyn-WAM project', url: 'https://enyi-bean.github.io/TacDyn-WAM-Page/' },
+    ],
+    technicalFocus: ['tactile world action model', 'implicit contact dynamics', 'visuo-tactile manipulation', 'UniVTAC'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · eight-task simulation benchmark · 100 physical trials per evaluated policy · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# TacDyn-WAM predicts contact dynamics without generating future touch pixels
+
+Researchers led by Tsinghua University's Institute for AI Industry Research released TacDyn-WAM on September 30, 2026. The world action model predicts how contact representations will evolve instead of reconstructing future tactile images through iterative denoising. It reports 81.5% average success on eight UniVTAC tasks using the benchmark demonstrations, then 71.0% across five physical tasks without its extra pretraining stage and 85.0% with that stage. [Paper and version record](https://arxiv.org/abs/2610.00638).
+
+## Key takeaways
+
+- TacRep learns a tactile target space from four-frame clips; an Implicit Tactile Dynamics Expert predicts future representations and their changes at several horizons in one forward pass.
+- A separate read-only tactile memory describes current contact. The action expert can therefore use both present touch and a forecast of contact evolution.
+- The real-robot study uses five tasks, 60 demonstrations per task and 20 trials per policy per task. The reported 85.0% is 85 successes per 100 trials when the published per-task percentages are summed.
+
+## What changed
+
+Most tactile world models inherit a video-generation objective. That preserves spatial detail, but the target can be brittle: a small shift in contact location may alter many tactile pixels even when the physical trend—deepening, sliding or rotating—remains predictable. TacDyn-WAM assigns vision and touch different target spaces. A visual expert predicts future visual latents, while the tactile expert predicts TacRep features and feature changes. Joint attention lets the two experts exchange information without forcing touch into a camera-oriented reconstruction space. [Architecture and training stages](https://arxiv.org/html/2610.00638v1).
+
+The tactile loss covers 49 patches per sensor and upweights patches whose representation changes more. A compact understanding path also compresses a frozen AnyTouch2 encoding into ten tokens. The model is trained in stages: tactile representation learning, tactile-world grounding, tactile–action alignment and joint training.
+
+## Results under the reported conditions
+
+On UniVTAC, each of eight tasks is evaluated with 100 rollouts. TacDyn-WAM averages 81.5%. The paper groups the 83.1% N0-VTLA and 84.5% N0-TWAM results separately because those systems use large-scale visuo-tactile trajectory pretraining. TacDyn-WAM uses the provided per-task demonstrations for this comparison; it is therefore close in outcome, but not evidence that the systems have equal training cost or generality.
+
+Ablations give the clearest evidence for the target design. Replacing TacRep with the base model's reconstruction-oriented Cosmos VAE reduces the average to 62.0%; a static DINOv2 target reaches 74.0%. Removing the tactile world model gives 67.9%, while removing current-state tactile memory gives 71.3%. These are absolute percentage-point comparisons within the authors' common protocol.
+
+For hardware tests, a Franka Research 3 uses Xense sensors on both gripper fingers plus wrist and third-person cameras. Across Stack Cups, Remove Plug, Insert Plug, Unscrew Cup Lid and Wipe Whiteboard, the non-pretrained model records 71/100 successes. Pretraining on a 6,000-trajectory OmniViTac subset, with the 300 task demonstrations also used in early stages, raises the total to 85/100. On one A100, the paper reports 484 ms for a 50-action chunk versus 1,338 ms for an optimized 40-action LingBot-VA chunk; that is a system-specific latency comparison, not a universal real-time guarantee.
+
+## RoboSkin analysis
+
+The useful engineering idea is not simply “latent is faster.” Contact images can be visually different while encoding the same corrective direction. A dynamics-aware target can focus capacity on what the controller needs next. That makes TacDyn-WAM relevant to [visuo-tactile world models](/guides/visuo-tactile-world-models-robot-manipulation) and to teams designing a [tactile manipulation](/tactile-manipulation) loop with distinct perception and action timescales.
+
+The benchmark comparison also needs care. The 81.5% simulation average trails the full N0 models, and the physical gains come from one vision-based tactile sensor family. The paper explicitly leaves force sensors and taxel arrays for future work. Cross-sensor robustness is therefore unproven.
+
+## Limitations and availability
+
+TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the results. Hardware evidence covers one parallel gripper, five tasks and randomized but laboratory-controlled starts. The official project publishes tables and a downloadable demo video, but labels code “coming soon”; no public training code, weights, real-robot dataset or implementation license was verified. The paper's arXiv license does not supply those missing rights.
+
+## Sources and related resources
+
+- [TacDyn-WAM v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00638)
+- [Full methods, ablations, latency and physical protocol](https://arxiv.org/html/2610.00638v1)
+- [Official project and result tables](https://enyi-bean.github.io/TacDyn-WAM-Page/)
+- [RoboSkin robot world models guide](/robot-world-models)
+`,
+  },
+  {
+    id: 'touchtherm-tactile-thermal-digital-twins',
+    title: 'TouchTherm gives digital twins tactile texture and cooling dynamics',
+    seoTitle: 'TouchTherm Builds Tactile-Thermal Digital Twins',
+    seoDescription: 'TouchTherm registers tactile microgeometry and thermal cooling fields to 3D objects. Review its 20-object tests, recognition gains and release status.',
+    excerpt: 'TouchTherm augments coarse collision meshes with registered tactile micro-height fields and time-varying surface temperature for multimodal simulation.',
+    category: 'Tactile simulation',
+    image: '/generated/news/touchtherm-tactile-thermal-digital-twins.png',
+    imageAlt: 'Diagram of a scanned object carrying separate collision mesh, tactile microtexture and time-varying thermal field layers.',
+    imageCaption: 'Original RoboSkin.ai schematic of a TouchTherm-style multimodal object asset. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TouchTherm: Building Multimodal Digital Twins of Objects for Tactile and Thermal Rendering',
+    sourceUrl: 'https://arxiv.org/abs/2610.01943',
+    sources: [
+      { title: 'TouchTherm arXiv v1 record', url: 'https://arxiv.org/abs/2610.01943' },
+      { title: 'Full TouchTherm v1 paper', url: 'https://arxiv.org/html/2610.01943v1' },
+      { title: 'Official anonymous TouchTherm project', url: 'https://anonymous-research1.github.io/' },
+    ],
+    technicalFocus: ['tactile simulation', 'thermal rendering', 'digital twins', 'GelSight microgeometry'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 20 reconstructed objects · tactile, thermal and VR demonstrations · code and object assets promised after acceptance',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# TouchTherm gives digital twins tactile texture and cooling dynamics
+
+ShanghaiTech University researchers released TouchTherm on October 1, 2026. The pipeline turns a physical object into a simulation asset with three registered layers: a coarse visual/collision mesh, local micro-height fields for optical tactile rendering and a dynamic surface-temperature field. Tests cover 20 objects, with held-out 30- and 45-second thermal predictions and synthetic-to-real tactile recognition. [Paper and version record](https://arxiv.org/abs/2610.01943).
+
+## Key takeaways
+
+- Structured-light geometry handles object shape and collision, while photometric-stereo normals recover contact-scale relief without making the collision mesh extremely dense.
+- Multiview infrared videos record natural cooling after controlled heating. A physics-regularized model identifies surface diffusion and ambient relaxation, then a graph-based rollout advances the temperature field.
+- TouchTherm raises synthetic-to-real Top-1 object recognition from 20.0% to 34.0% in the reported setup, an absolute gain of 14.0 percentage points, but the classifier uses only 20 object classes.
+
+## From a scan to a multisensory asset
+
+The acquisition stack combines an EinScan Pro 2X V2 structured-light scanner, smartphone image stacks under varied illumination, HIKMICRO P09 thermal cameras and a GelSight Mini for validation and per-object amplitude calibration. Normal maps are registered to the coarse mesh, transformed into a local tangent frame and integrated into micro-height residuals. At contact time, the renderer combines those residuals with coarse indentation. [Full reconstruction method](https://arxiv.org/html/2610.01943v1).
+
+For temperature, multiple cameras observe a heated object cooling. The method fuses visible measurements onto surface points, represents spatial connectivity with a graph operator and fits two physical parameters. The network helps reconstruct unobserved regions and identify the parameters; runtime rollout retains the graph and coefficients rather than the neural field.
+
+## Results under the reported conditions
+
+The tactile comparison uses three contacts per object across 20 objects. TouchTherm reports mean G-SSIM/HF-NCC scores of 0.0701/0.0911, versus 0.0480/0.0116 for coarse geometry and 0.0629/0.0081 for direct image-space height integration. Real-to-real repeatability is higher than real-to-sim similarity, so the result supports an improvement over those two renderers, not photorealistic equivalence to a physical sensor.
+
+Thermal evaluation uses a separate 60-second training capture for each object's parameters and 15 overlapping test windows per object: 300 windows at each horizon. Surface-temperature MAE is 0.465 °C at 30 seconds and 0.592 °C at 45 seconds. Removing ambient relaxation increases MAE to 0.820 °C and 1.083 °C; removing surface diffusion changes the headline MAE little, which the authors interpret as ambient exchange driving global cooling while diffusion adds smaller local gains.
+
+For recognition, a ResNet-18 trains on 90 simulated contacts per object and validates on ten. Six seeds use identical contact configurations. One hundred real images calibrate the renderer globally; a separate 20 real images per object are held out for evaluation, and no real image trains the classifier. Top-1/Top-3/Macro-F1 improve from 20.0/35.0/13.4% with coarse geometry to 34.0/63.0/29.3% with TouchTherm. A separate VR demo with ten participants reports perception and comfort ratings, but it is a small usability demonstration rather than a robotics task benchmark.
+
+## RoboSkin analysis
+
+TouchTherm moves tactile simulation from “object mesh plus sensor model” toward an object-side contact asset. That separation matters: the geometry needed for stable collision can stay coarse while the [vision-based tactile sensor](/sensors/gelsight-mini) queries finer surface relief. Temperature adds another field that could support material-aware teleoperation or [Physical AI touch data](/physical-ai-touch), although no temperature-conditioned robot policy is evaluated.
+
+The half-day-per-object estimate for each acquisition modality is also an integration warning. Scaling beyond 20 objects requires automation of manual illumination, 2D–3D correspondences, heat excitation and calibration. The paper demonstrates a pipeline, not a ready-made large catalog.
+
+## Limitations and availability
+
+TouchTherm is an arXiv v1 preprint under double-anonymous review, and RoboSkin.ai has not reproduced it. Manual registration and one-time per-object GelSight amplitude calibration remain in the workflow. Recognition uses one optical tactile sensor style; thermal feedback is demonstrated in VR rather than on a robot controller.
+
+The official project exposes videos and method descriptions. It states that code, reconstructed object assets and the simulation pipeline will be released upon acceptance. No downloadable archive, repository, dataset license or software license was verified on October 2, 2026. The paper itself uses arXiv's perpetual non-exclusive license, which is not an implementation license.
+
+## Sources and related resources
+
+- [TouchTherm v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01943)
+- [Full 20-object tactile and thermal evaluation](https://arxiv.org/html/2610.01943v1)
+- [Official project and demonstrations](https://anonymous-research1.github.io/)
+- [RoboSkin tactile sensor guide](/guides/tactile-sensor-for-robots)
+`,
+  },
+  {
+    id: 'ditto-x-reverse-dexterous-teleoperation',
+    title: 'DITTO-X makes a robot hand align the operator before takeover',
+    seoTitle: 'DITTO-X Adds Reverse Dexterous Teleoperation',
+    seoDescription: 'DITTO-X combines force and fingertip feedback with robot-to-human hand alignment. Review its six-person study, DAgger results and dataset status.',
+    excerpt: 'DITTO-X runs an actuated hand exoskeleton in both directions, rendering robot contact to a human and matching the operator to the robot before intervention.',
+    category: 'Haptic teleoperation',
+    image: '/generated/news/ditto-x-reverse-dexterous-teleoperation.png',
+    imageAlt: 'Diagram showing bidirectional control between a dexterous robot hand and an actuated human hand exoskeleton during policy takeover.',
+    imageCaption: 'Original RoboSkin.ai schematic of DITTO-X bidirectional authority transfer. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'DITTO-X: Forward and Reverse Teleoperation for Dexterous Manipulation and Human Intervention',
+    sourceUrl: 'https://arxiv.org/abs/2610.00781',
+    sources: [
+      { title: 'DITTO-X arXiv v1 record', url: 'https://arxiv.org/abs/2610.00781' },
+      { title: 'Full DITTO-X v1 paper', url: 'https://arxiv.org/html/2610.00781v1' },
+      { title: 'Official DITTO-X project', url: 'https://tml.stanford.edu/ditto-x/' },
+    ],
+    technicalFocus: ['haptic teleoperation', 'dexterous hands', 'human intervention', 'DAgger'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · six-person user study · three commercial robot hands · 1,888-episode dataset described but download still marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# DITTO-X makes a robot hand align the operator before takeover
+
+Stanford and Columbia researchers released DITTO-X on September 30, 2026. The actuated exoskeleton sends a person's finger motion to three commercial dexterous hands, renders joint-force and fingertip-contact feedback, and can reverse direction so the robot moves the operator into its current finger configuration before control transfers. In a six-person study, that matched takeover improved a contact-rich tool-use intervention from 27.7% to 78.3% success against a tracking-glove baseline. [Paper and version record](https://arxiv.org/abs/2610.00781).
+
+## Key takeaways
+
+- Forward teleoperation closes the loop with force feedback from robot joint currents plus vibrotactile contact cues at the operator's fingertips.
+- Reverse teleoperation maps the robot's commanded hand configuration back to the exoskeleton before takeover, reducing the pose jump that can release a held object.
+- The project describes 1,888 episodes and more than 16 hours at 30 Hz, but its Code, Dataset and Hardware Guide controls all still say “coming soon.”
+
+## How bidirectional control works
+
+DITTO-X aligns actuator axes with human finger joints. Index and middle fingers can map joint-to-joint on the 22-DoF Sharpa and 20-DoF Wuji 2 hands. Thumb motion is retargeted in task space, and the six-DoF Inspire hand receives a lower-dimensional flexion mapping. Supported hands expose either joint-current estimates or fingertip force sensing; DITTO-X converts those signals into exoskeleton torques and fingertip vibration. [Hardware and mapping details](https://arxiv.org/html/2610.00781v1).
+
+During autonomous execution, the robot's current command is projected back onto the exoskeleton. The operator's fingers follow the robot until the operator takes over; after correction, the same mapping returns control. Safety measures reported by the authors include software joint limits, motor-current limits below 200 mA with torque no greater than 0.08 N·m, and an emergency stop.
+
+## Results under the reported conditions
+
+Six participants completed blinded size and compliance discrimination, regular tool-use teleoperation and mid-policy intervention. With both feedback modes, size discrimination is 86.1% and compliance discrimination 91.7%, against 33.3% chance. Removing either force or vibration reduces the scores; the experiment supports complementarity within this prototype, not a universal ranking of haptic modalities.
+
+For collecting tong-use demonstrations, DITTO-X succeeds on 70.0% of trials versus 46.7% for the Manus Pro tracking glove, a 23.3-point gap. Mean time per success falls from 85.5 to 56.1 seconds. In intervention, success is 78.3% versus 27.7%, while time per success falls from 97.4 to 35.7 seconds. Each participant performs ten trials per condition; the sample is therefore repeated-measures evidence from six people, not a large operator population.
+
+Policy tests use 30 paired starting configurations per task. Before DAgger, DITTO-X data produces final-stage success of 63.3% on tong use, 63.3% on raspberry placement and 40.0% on battery insertion; Manus data yields 13.3%, 43.3% and 36.7%. After two DAgger rounds with 20 interventions per round, the DITTO-X policies reach 86.7%, 93.3% and 90.0%. The paper also quantity-matches extra demonstrations, helping separate on-policy failure coverage from data volume.
+
+## RoboSkin analysis
+
+The most important change is at the authority boundary. Conventional human intervention switches the controller, but the operator may begin with fingers in a different pose from the robot. With a dexterous hand already holding a tool or fragile object, that mismatch is itself a disturbance. DITTO-X treats body alignment as part of [robot teleoperation](/robot-teleoperation), while force and contact feedback give the operator evidence that cameras can lose under occlusion.
+
+The interface also shows why haptics should be evaluated downstream. Better blind discrimination is useful, but the stronger evidence is that contact-aware demonstrations produce better autonomous policies and that matched interventions cover failure states. This connects human feedback to the broader [robot learning](/robot-learning) pipeline.
+
+## Limitations and availability
+
+DITTO-X is an arXiv v1 preprint and RoboSkin.ai has not reproduced its hardware or results. The main user study has six participants, most policy experiments use the Sharpa hand, and mappings still require known hand kinematics and per-hand scaling. The design is not demonstrated on full-body teleoperation or unknown hands.
+
+The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 379 human-intervened and 662 autonomous episodes, totaling 1,888. However, on October 2 the Code, Dataset and Hardware Guide controls were non-links explicitly marked coming soon. No downloadable episodes, repository or license was verified. The paper's CC BY-NC-ND 4.0 license does not license absent code or hardware files.
+
+## Sources and related resources
+
+- [DITTO-X v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00781)
+- [Full user study, policy evaluation and safety details](https://arxiv.org/html/2610.00781v1)
+- [Official project and dataset composition](https://tml.stanford.edu/ditto-x/)
+- [RoboSkin tactile feedback guide](/guides/tactile-feedback-for-physical-ai)
+`,
+  },
+  {
+    id: 'flashdexretarget-multi-motion-dexterous-data',
+    title: 'FlashDexRetarget trains one policy across many human hand motions',
+    seoTitle: 'FlashDexRetarget Scales Dexterous Motion Retargeting',
+    seoDescription: 'FlashDexRetarget retargets many human hand-object motions with one RL policy. Review its 50-motion results, GPU-hour comparison and release limits.',
+    excerpt: 'FlashDexRetarget amortizes physics-based retargeting across a motion collection, using object geometry, hand-contact distance and future references.',
+    category: 'Dexterous data generation',
+    image: '/generated/news/flashdexretarget-multi-motion-dexterous-data.png',
+    imageAlt: 'Diagram showing many human hand-object motion references feeding one policy that generates trajectories for two robot hands.',
+    imageCaption: 'Original RoboSkin.ai schematic of multi-reference dexterous retargeting. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'FlashDexRetarget: Accelerating Dexterous Manipulation Data Generation through Multi-Motion Retargeting',
+    sourceUrl: 'https://arxiv.org/abs/2610.01849',
+    sources: [
+      { title: 'FlashDexRetarget arXiv v1 record', url: 'https://arxiv.org/abs/2610.01849' },
+      { title: 'Full FlashDexRetarget v1 paper', url: 'https://arxiv.org/html/2610.01849v1' },
+      { title: 'Official FlashDexRetarget project', url: 'https://davian-robotics.github.io/FlashDexRetarget/' },
+    ],
+    technicalFocus: ['dexterous retargeting', 'human demonstrations', 'multi-reference reinforcement learning', 'robot data generation'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · Isaac Sim evaluation on two robot hands · qualitative physical replay · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# FlashDexRetarget trains one policy across many human hand motions
+
+KAIST AI and Holiday Robotics researchers released FlashDexRetarget on October 1, 2026. Instead of optimizing a new controller for every human hand-object motion, the framework trains a shared reference-conditioned reinforcement-learning policy across a collection. On a 50-motion XHand benchmark, it reports 90% SPIDER success in 29 GPU-hours; the evaluated CHORD implementation reaches 46% in 2,847 GPU-hours. [Paper and version record](https://arxiv.org/abs/2610.01849).
+
+## Key takeaways
+
+- The main benchmark contains 25 single-object and 25 two-object motions from HOT3D, TACO and OakInk2, evaluated in Isaac Sim on RTX 3090 GPUs.
+- Object point clouds, hand-to-object distance features and the next ten reference frames help one policy distinguish geometry, contact intent and motion direction.
+- The 2,847-to-29 GPU-hour comparison is 98.2 times under the authors' setup. It supports the paper's “up to 100×” wording, but it is not a general speed guarantee against every retargeting system.
+
+## What changed
+
+Physics-based retargeting asks a robot hand to reproduce the demonstrated object motion through contacts that are feasible for its own kinematics. Single-motion optimization repeats that process for every clip. FlashDexRetarget distributes reference trajectories across parallel environments and trains one off-policy controller. Successful rollouts become robot trajectories, so optimization cost is shared across motions. [Method and evaluation protocol](https://arxiv.org/html/2610.01849v1).
+
+Each wrist-local observation includes 128 surface points for the current simulated object and next reference pose. Signed-distance features describe fingertip and wrist proximity to the object. A temporal encoder compresses hand and object states from the next ten reference frames into a 128-dimensional vector. Separate left- and right-hand actor-critic pairs receive hand-specific rewards, which matters when each hand manipulates a different object.
+
+The training algorithm adapts FlashSAC with a replay buffer enlarged from 10 million to 50 million transitions and a critic hidden dimension increased from 256 to 1,024. This is a substantial configuration, and the compute comparison includes algorithm and architecture choices rather than isolating a single trick.
+
+## Results under the reported conditions
+
+For XHand, FlashDexRetarget reports SPIDER/ManipTrans-object/ManipTrans success of 0.90/0.86/0.86, 10.95 mm mean object-position error and 29 GPU-hours. Do as I Do reaches 0.36 SPIDER in 66 GPU-hours; DexMachina reaches 0.48 in 447; CHORD reaches 0.46 in 2,847. The 44-point gain over CHORD is on SPIDER success. For Sharpa Wave Hand, FlashDexRetarget reports 0.72/0.70/0.70 and 33 GPU-hours, versus CHORD's 0.50/0.22/0.00 and 3,314 GPU-hours.
+
+Metric choice matters. SPIDER averages object errors and can overstate success when one object in a two-object motion barely moves. The authors therefore use the stricter object-only ManipTrans criterion for ablations. RoboSkin analysis: preserving both numbers is more informative than repeating the 90% headline alone.
+
+Scaling tests train on 200, 500 and 1,000 references for 600 million environment steps. The project page reports more than 600 of 1,000 motions converted, but the paper does not present a universal conversion fraction across arbitrary motion distributions. Physical replay shows wiping a board, pouring into a pan and closing a lid. No trial count, failure rate or closed-loop policy adaptation is reported for those hardware demonstrations, so they establish executability examples rather than a quantitative sim-to-real benchmark.
+
+## RoboSkin analysis
+
+FlashDexRetarget targets a practical bottleneck between human-motion collections and [dexterous robot hands](/robot-hands): a demonstration is not usable robot data until contact and object motion are feasible for a specific embodiment. Amortizing that conversion can matter more than slightly improving one hand's single-clip fit.
+
+The future-reference encoder is also an important contact insight. One pose cannot distinguish whether a hand is about to wipe, pour or close. By exposing the upcoming motion and object geometry, the controller can prepare for contact rather than chase it frame by frame. That complements tactile data collection even though the method itself uses simulated geometry and state rather than physical tactile sensor input.
+
+## Limitations and availability
+
+FlashDexRetarget is an arXiv v1 preprint, and RoboSkin.ai has not run the code or reproduced the metrics. Main results are simulation-based, use three source datasets and two robot hands, and compare methods under the authors' selected preprocessing and success definitions. Real-world evidence is qualitative replay of three tasks.
+
+The official project publishes videos, method details and tables but labels code “coming soon.” No repository, trained policy, converted trajectory archive or implementation license was verified on October 2, 2026. The paper is CC BY 4.0; that license covers the article, not unreleased software or third-party source datasets.
+
+## Sources and related resources
+
+- [FlashDexRetarget v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01849)
+- [Full benchmark, metrics and scaling study](https://arxiv.org/html/2610.01849v1)
+- [Official project and demonstration videos](https://davian-robotics.github.io/FlashDexRetarget/)
+- [RoboSkin robotics datasets guide](/robotics-datasets)
+`,
+  },
+  {
     id: 'tacex-tactile-curiosity-robot-exploration',
     title: 'TacEx makes tactile uncertainty a target for robot exploration',
     seoTitle: 'TacEx Uses Tactile Curiosity for Robot Exploration',
