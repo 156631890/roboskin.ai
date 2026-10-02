@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#8bc9ff" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">DITTO-X aligns the operator before takeover</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">Forward control and haptics · reverse hand-state matching</text>
+    <rect x="60" y="235" width="333" height="266" rx="18" fill="#243640"/>
+    <text x="89" y="278" fill="#8bc9ff" font-size="20">ACTUATED EXOSKELETON</text>
+    <path d="M128 430 L147 330 L179 407 L207 310 L238 404 L270 326 L295 432" fill="none" stroke="#8bc9ff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="147" cy="330" r="10" fill="#f3f0e9"/><circle cx="207" cy="310" r="10" fill="#f3f0e9"/><circle cx="270" cy="326" r="10" fill="#f3f0e9"/>
+    <text x="108" y="467" fill="#d7e9f5" font-size="18">human fingers + force feedback</text>
+    <path d="M393 335 H807" stroke="#8bc9ff" stroke-width="7"/><polygon points="807,335 781,321 781,349" fill="#8bc9ff"/>
+    <text x="491" y="315" fill="#d7e9f5" font-size="18">forward teleoperation</text>
+    <path d="M807 412 H393" stroke="#f09b78" stroke-width="7"/><polygon points="393,412 419,398 419,426" fill="#f09b78"/>
+    <text x="482" y="450" fill="#ffd8c8" font-size="18">reverse pose alignment</text>
+    <rect x="807" y="235" width="333" height="266" rx="18" fill="#463129"/>
+    <text x="838" y="278" fill="#ffd8c8" font-size="20">DEXTEROUS ROBOT HAND</text>
+    <path d="M881 432 L890 344 L922 404 L944 313 L974 403 L1002 326 L1024 410 L1052 347 L1075 432" fill="none" stroke="#f09b78" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="922" cy="404" r="12" fill="#f3f0e9"/><circle cx="974" cy="403" r="12" fill="#f3f0e9"/>
+    <text x="846" y="467" fill="#ffd8c8" font-size="18">contact sensing + policy state</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">78.3% vs 27.7% intervention success · six-person study</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.00781v1. Original explanatory schematic.</text>
+  </g>
+</svg>
