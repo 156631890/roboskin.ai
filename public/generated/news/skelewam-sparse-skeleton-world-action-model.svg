@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#69d6cf" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">SkeleWAM keeps interaction geometry</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">RGB-D · sparse 3D skeleton · action and future geometry</text>
+    <rect x="60" y="234" width="280" height="270" rx="18" fill="#23343b"/>
+    <text x="87" y="276" fill="#69d6cf" font-size="20">CURRENT SCENE</text>
+    <rect x="97" y="315" width="205" height="134" rx="12" fill="#36505a"/>
+    <rect x="127" y="351" width="54" height="54" rx="7" fill="#f09b78"/><circle cx="241" cy="378" r="28" fill="#7ab8c4"/>
+    <path d="M112 425 L169 324 M276 425 L230 324" stroke="#f3f0e9" stroke-width="7"/>
+    <text x="112" y="477" fill="#d8e1e4" font-size="18">pixels + depth</text>
+    <path d="M340 369 H397" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="397" y="234" width="384" height="270" rx="18" fill="#263e44"/>
+    <text x="425" y="276" fill="#69d6cf" font-size="20">SPARSE 3D SKELETON</text>
+    <path d="M454 416 L507 347 L566 403 L632 335 L712 401" fill="none" stroke="#d8e1e4" stroke-width="8"/>
+    <circle cx="454" cy="416" r="12" fill="#69d6cf"/><circle cx="507" cy="347" r="12" fill="#69d6cf"/><circle cx="566" cy="403" r="12" fill="#f09b78"/><circle cx="632" cy="335" r="12" fill="#69d6cf"/><circle cx="712" cy="401" r="12" fill="#f09b78"/>
+    <circle cx="591" cy="369" r="59" fill="none" stroke="#8c5c49" stroke-width="5" stroke-dasharray="10 10"/>
+    <text x="436" y="471" fill="#bbc6cb" font-size="18">joints · centers · interaction points</text>
+    <path d="M781 369 H838" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="838" y="234" width="302" height="270" rx="18" fill="#3f2d26"/>
+    <text x="866" y="276" fill="#ffd8c8" font-size="20">WORLD + ACTION</text>
+    <path d="M880 345 H1097 M905 377 H1072 M934 409 H1043" stroke="#f09b78" stroke-width="9" stroke-linecap="round"/>
+    <path d="M909 449 L956 424 L1001 449 L1048 424 L1094 449" fill="none" stroke="#69d6cf" stroke-width="8"/>
+    <text x="876" y="481" fill="#ffd8c8" font-size="18">future branch trains; action runs</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">85.9% LIBERO-Plus · 89/100 real-robot successes</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.02120v1. Original explanatory schematic.</text>
+  </g>
+</svg>

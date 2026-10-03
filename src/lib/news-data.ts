@@ -33,6 +33,273 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'reactive-humanoid-multi-contact-hand-bracing',
+    title: 'Reactive multi-contact planning turns a humanoid hand into a 10 ms brace',
+    seoTitle: 'Reactive Humanoid Hand Bracing in About 10 ms',
+    seoDescription: 'A learned stability model selects humanoid hand braces in about 10 ms. Review the impulse tests, 32 hardware pushes and contact-model limits.',
+    excerpt: 'A two-stage planner previews reachable hand contacts with a learned post-impact stability model, letting a humanoid brace against nearby surfaces before foot-only recovery fails.',
+    category: 'Humanoid contact control',
+    image: '/generated/news/reactive-humanoid-multi-contact-hand-bracing.png',
+    imageAlt: 'Diagram showing a pushed humanoid comparing nearby wall contacts and selecting a hand brace with the largest recovery region.',
+    imageCaption: 'Original RoboSkin.ai schematic of learned-stability hand-contact planning. It is explanatory artwork, not an experimental photograph.',
+    sourceTitle: 'Reactive Humanoid Multi-Contact Using Learned Stability Models',
+    sourceUrl: 'https://arxiv.org/abs/2610.00823',
+    sources: [
+      { title: 'Reactive Multi-Contact arXiv v1 record', url: 'https://arxiv.org/abs/2610.00823' },
+      { title: 'Full Reactive Multi-Contact v1 paper', url: 'https://arxiv.org/html/2610.00823v1' },
+    ],
+    technicalFocus: ['humanoid hand contacts', 'push recovery', 'learned stability model', 'reactive bracing'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation impulse search · 32 alternating hardware pushes · no code or dataset release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# Reactive multi-contact planning turns a humanoid hand into a 10 ms brace
+
+Researchers at the Florida Institute for Human and Machine Cognition and the University of West Florida released a reactive humanoid contact planner on September 30, 2026. Instead of asking the feet to absorb every push, it samples reachable hand contacts on nearby surfaces and estimates which brace will provide the most post-impact control. The learned stability approximation reduces a 388 ms numerical planning path to 9.7 ms in the authors’ benchmark. [Paper and version record](https://arxiv.org/abs/2610.00823).
+
+## Key takeaways
+
+- The planner first chooses a surface region, then a point inside that region, using predicted Center of Pressure control authority after hand impact.
+- Three simulation scenarios show average impulse resilience gains of 89% over foot-only recovery and 17% over choosing the closest reachable brace.
+- Hardware evidence covers 32 alternating pushes: two standing protocols with ten pushes each and one walking protocol with twelve pushes.
+
+## From reachable wall to useful brace
+
+The problem is not merely finding a wall. A reachable point can place the arm in a configuration with little capacity to redirect the whole-body load. The system therefore rolls a reduced centroidal model through pre-impact, impact and post-impact phases. Candidate points are scored by the size and direction of the feasible post-impact Center of Pressure region.
+
+Computing that region from inverse kinematics and linear programs for every candidate would be too slow for a reflex. The paper trains separate neural networks for five foot-and-hand contact permutations. Their inputs include planar contact geometry, center-of-mass position and robot posture summaries; their 18-dimensional output approximates the feasible region. Per-rollout region computation falls from 0.65 ms to 0.13 ms and avoids a reported 13 ms inverse-kinematics solve. With 14 rollouts per side, the full comparison is 9.7 ms for the learned path versus 388 ms for numerical optimization. [Model and planner details](https://arxiv.org/html/2610.00823v1).
+
+## Results under the reported conditions
+
+In simulation, maximum sustainable impulses are reported for standing, sideways walking and backward walking. Foot-only recovery handles 15.6, 17.7 and 23.0 N·s. The closest-contact baseline reaches 25.8, 36.4 and 26.6 N·s, while optimized bracing reaches 29.4, 42.3 and 32.1 N·s. Recomputing each relative gain gives an average 89.0% over no brace and 16.9% over the naive brace, consistent with the rounded abstract values.
+
+The hardware study alternates baseline and optimized trials rather than measuring a calibrated external impulse. The authors use capture-point-error slope at push time as a proxy and report less than 5% variation between the paired datasets. In the ten-push multi-surface standing test, choosing a front wall instead of the nearer slanted surface reduces average recovery time by 57%. In a second ten-push standing test, shifting one hand about 12 cm along a wall reduces it by 29%. Averaging those two reported reductions produces the abstract’s 43% standing figure. In twelve walking pushes, hand bracing reaches high stability in 316 ms versus 384 ms without hand contact, an 18% reduction.
+
+## RoboSkin analysis
+
+The engineering contribution is a contact-selection layer between perception and whole-body control. It does not add tactile skin, but it makes surface contact an active recovery resource: geometry decides where contact is possible, and the stability model estimates what that contact can do. That makes the work relevant to [humanoid robot contact design](/humanoid-robots) and to teams connecting [Physical AI touch](/physical-ai-touch) with [robot safety](/robot-safety).
+
+The benchmark also shows why “nearest reachable” is a weak policy. In the sideways simulation there is only one surface, yet moving the contact by 14.9 cm improves impulse resilience by 16%. Contact placement, not just contact availability, changes the recovery envelope.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the results. The learned models receive only partial information about the full robot configuration; reported feasible-region RMSE ranges from 0.89 to 2.62 cm across contact modes. The controller relies on reduced-order dynamics, does not directly measure hardware push magnitude, and observed only about 55 ms of hand contact in the walking test. The paper identifies contact-detection latency and unmodeled arm momentum after release as open issues.
+
+The arXiv manuscript is available under CC BY 4.0. No official project page, implementation repository, training data, model weights or software license was verified, so the publication should not be read as a reproducible software release.
+
+## Sources and related resources
+
+- [Reactive Humanoid Multi-Contact v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00823)
+- [Full planning, simulation and hardware protocol](https://arxiv.org/html/2610.00823v1)
+- [RoboSkin guide to tactile feedback for Physical AI](/guides/tactile-feedback-for-physical-ai)
+`,
+  },
+  {
+    id: 'continual-6dof-grasp-synthesis-memory',
+    title: 'Continual 6-DoF grasping learns from outcomes without weight updates',
+    seoTitle: 'Continual 6-DoF Grasping Uses Outcome Memory',
+    seoDescription: 'A 6-DoF grasp system updates scores from outcomes and recalls demonstrations without weight updates. Review 1,500+ trials, gains and release limits.',
+    excerpt: 'A memory-based grasp pipeline turns successes, failures and optional demonstrations into immediate proposal and score changes instead of repeatedly fine-tuning a network.',
+    category: 'Adaptive robot grasping',
+    image: '/generated/news/continual-6dof-grasp-synthesis-memory.png',
+    imageAlt: 'Diagram showing grasp attempts feeding outcome memory and demonstration memory before the robot selects a new six-degree-of-freedom grasp.',
+    imageCaption: 'Original RoboSkin.ai schematic of outcome-scored and demonstration-recalled grasp adaptation. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Continual Learning for 6-DoF Grasp Synthesis via Experience and Demonstrations',
+    sourceUrl: 'https://arxiv.org/abs/2610.01301',
+    sources: [
+      { title: 'Continual 6-DoF Grasping arXiv v1 record', url: 'https://arxiv.org/abs/2610.01301' },
+      { title: 'Full Continual 6-DoF Grasping v1 paper', url: 'https://arxiv.org/html/2610.01301v1' },
+      { title: 'Official Continual 6-DoF Grasping project', url: 'https://giuschio.github.io/cl_grasping/' },
+    ],
+    technicalFocus: ['continual grasp learning', '6-DoF grasp synthesis', 'outcome memory', 'demonstration recall'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'CoRL 2026 paper · arXiv v1 · more than 1,500 physical grasp attempts · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# Continual 6-DoF grasping learns from outcomes without weight updates
+
+ETH Zurich researchers released a continual-learning system for single-view 6-DoF grasp synthesis on October 1, 2026. The CoRL 2026 paper keeps its neural encoder fixed after deployment. Successful and failed grasps update a local memory-based score, while optional user demonstrations contribute new candidates through geometric registration. The evaluation includes more than 1,500 physical grasp attempts. [Paper and version record](https://arxiv.org/abs/2610.01301).
+
+## Key takeaways
+
+- A 32-dimensional geometric embedding lets nearby successes and failures update a Beta posterior for each proposed grasp without backpropagation.
+- A second memory registers demonstrated grasps onto similar object regions, adding candidates that fixed contact-normal or top-down heuristics miss.
+- After at most 50 adaptation attempts per category, the system exceeds 90% grasp success in five of six physical object groups, but reaches only 68.3% on pliers.
+
+## How the two memories change grasping
+
+The base system follows a sample-and-score pipeline. It builds grasp candidates from a partial point cloud, encodes a local patch around each candidate and ranks the candidates before collision checking. Deployment outcomes are automatically labeled from gripper width and written to scoring memory. At the next scene, nearby memory entries adjust the estimated success probability rather than changing the encoder weights.
+
+Demonstration recall addresses a different failure. If the geometric sampler never proposes the needed pose, better scoring cannot recover it. The user can provide a grasp, which is stored with local shape descriptors and later transferred to geometrically similar regions. This division is important: outcome memory refines selection among available candidates; demonstration memory expands the candidate set. [Method and evaluation protocol](https://arxiv.org/html/2610.01301v1).
+
+## Simulation and physical evidence
+
+Simulation uses 443 unseen objects across ten categories, with 2,500 attempts per category and method. Before online adaptation, the proposed base averages 94.6%, compared with 92.9% for EdgeGraspNet. Category-specific full adaptation raises the average to 98.1%; scoring-only reaches 97.1%, while recall-only reaches 85.6%. That ablation suggests the non-parametric scorer drives most average improvement, while recall remains useful for missing proposal modes.
+
+The physical setup uses a Franka Panda, parallel-jaw gripper and RealSense D435i. Fifty-four objects form one 13-object control set and five challenge groups: mugs and bowls, kitchen tools, pliers, screwdrivers and toys. Each category has 20 fixed evaluation scenes per method. Because scenes contain multiple objects, the number of attempts varies with how quickly a method clears a scene; “more than 1,500” is therefore the supported total, not a uniform trials-per-cell claim.
+
+After at most 50 adaptation attempts and a demonstration after each failure, success moves from 80.0% to 93.2% on controls, 92.7% to 100% on mugs and bowls, 77.4% to 91.3% on kitchen tools, 62.5% to 68.3% on pliers, 85.7% to 96.0% on screwdrivers and 83.6% to 94.4% on toys. A merged memory evaluated on 20 mixed scenes reaches 89.6% grasp success and clears all scenes, versus 72.4% success and 85.0% scene clearance for the base model.
+
+## RoboSkin analysis
+
+The most useful result is not the five “over 90%” categories in isolation. Pliers expose what local geometry cannot resolve: one instance needs a strategy that conflicts with the others, so pooled evidence favors the majority and repeatedly fails the exception. This is a practical warning for [robot grasp learning](/robot-learning): a memory can adapt immediately, but only if its similarity space separates the states that demand different contact strategies.
+
+The work also separates contact proposal from contact evaluation, a useful design pattern for [robot hands](/robot-hands). Failures caused by low friction or uneven mass can update scores; failures caused by missing depth geometry may require a demonstrated pose or another sensor. Teams working on [slip-aware robot hands](/guides/slip-detection-robot-hand) should not treat a binary gripper-width label as a substitute for direct slip or force observations.
+
+## Limitations and availability
+
+The experiments use one parallel-jaw platform and geometry-only observations. Reflective, transparent and metallic surfaces can corrupt depth, and memory cannot recover geometry absent from the input. Recall cost grows with demonstrations; the reported sequential simulation ends at 1.35 MB, but larger deployments would need filtering. The study focuses on difficult object categories rather than systematic variation in sensor noise or contact dynamics.
+
+The official project publishes videos and identifies the work as CoRL 2026, but its code link is labeled “Coming Soon.” No repository, trained model, grasp-memory archive, physical dataset or implementation license was verified. RoboSkin.ai did not run the system.
+
+## Sources and related resources
+
+- [Continual 6-DoF Grasping v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01301)
+- [Full method, tables and limitations](https://arxiv.org/html/2610.01301v1)
+- [Official project page and videos](https://giuschio.github.io/cl_grasping/)
+- [RoboSkin tactile manipulation overview](/tactile-manipulation)
+`,
+  },
+  {
+    id: 'jfm-rigid-soft-finger-jacobian-flow',
+    title: 'JFM learns a resolution-consistent Jacobian for a rigid-soft finger',
+    seoTitle: 'JFM Models a Tendon-Driven Rigid-Soft Finger',
+    seoDescription: 'Jacobian Flow Matching models a tendon-driven rigid-soft finger across sampling rates. Review 10,000-sample tests, RMSE gains and control limits.',
+    excerpt: 'Jacobian Flow Matching treats tendon-to-joint sensitivity as a continuous field, so predictions can be subdivided and integrated without the drift of a pointwise model.',
+    category: 'Soft robotic hands',
+    image: '/generated/news/jfm-rigid-soft-finger-jacobian-flow.png',
+    imageAlt: 'Diagram showing tendon commands entering a continuous Jacobian field and producing consistent finger-joint motion at dense and sparse sampling intervals.',
+    imageCaption: 'Original RoboSkin.ai schematic of resolution-consistent Jacobian flow for a rigid-soft finger. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Learning a Resolution-Consistent Jacobian Field for Bio-Inspired Rigid-Soft Finger',
+    sourceUrl: 'https://arxiv.org/abs/2610.01668',
+    sources: [
+      { title: 'Rigid-Soft Finger JFM arXiv v1 record', url: 'https://arxiv.org/abs/2610.01668' },
+      { title: 'Full Rigid-Soft Finger JFM v1 paper', url: 'https://arxiv.org/html/2610.01668v1' },
+    ],
+    technicalFocus: ['rigid-soft finger', 'Jacobian flow matching', 'tendon-driven actuation', 'proprioceptive modeling'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint under journal review · arXiv v1 · one physical finger · about 10,000 samples · open-loop validation only · no code or data release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# JFM learns a resolution-consistent Jacobian for a rigid-soft finger
+
+Researchers in China released Jacobian Flow Matching (JFM) on October 1, 2026 for modeling a tendon-driven, rigid-soft robotic finger. The method learns actuator-to-joint sensitivity as a continuous field rather than a pointwise mapping tied to one sampling interval. On the authors’ finger, it reduces average single-step RMSE by more than 53% and keeps multi-step predictions more stable when observations become sparse. [Paper and version record](https://arxiv.org/abs/2610.01668).
+
+## Key takeaways
+
+- The finger combines 3D-printed phalanges, PTFE-coated joint interfaces, a silicone capsule with woven ligaments and a tendon transmission network.
+- Training uses about 10,000 physical samples, with hand pose at 45 Hz and servo state at 55 Hz aligned by nearest timestamps.
+- The reported results validate prediction and open-loop command recovery; closed-loop ODE control, multi-finger coordination and out-of-plane motion remain future work.
+
+## Why a point Jacobian is not enough
+
+Rigid-soft fingers are difficult to model because the same tendon command can produce different motion depending on pose, friction, backlash, hysteresis and viscoelastic state. A discrete learned Jacobian can fit observed endpoints at one controller rate yet behave unpredictably when an optimizer queries intermediate states or a slower sensor produces larger steps.
+
+JFM normalizes each observed transition into a unit-time flow. Conditional Flow Matching supplies intermediate states between the start and end poses, and a consistency loss discourages the network from depending mainly on the starting anchor. The learned field can then serve either a single pointwise update or an ODE rollout that subdivides a command. The paper compares JFM with pointwise training under identical TinyTransformer and LSTM backbones, isolating the training framework rather than adding model capacity. [Architecture and physical data pipeline](https://arxiv.org/html/2610.01668v1).
+
+## What the numbers establish
+
+For single-step servo-to-angle prediction, JFM reduces global average RMSE by 57.27% with the TinyTransformer and 53.68% with the LSTM. Under the 0.015 RMSE threshold, 96.2% of TinyTransformer JFM samples qualify versus 77.9% for its baseline; the LSTM comparison is 96.1% versus 78.8%. These are distribution-level results across three joints, not a task success rate.
+
+Resolution tests use 160 held-out trajectories. At stride 1, pointwise and integrated predictions are close. At stride 8, ODE inference reduces median RMSE by 14.43% and variance by 24.87% relative to the pointwise mode. This supports the specific claim that the field remains useful when a transition is subdivided or samples are skipped.
+
+An open-loop inverse test optimizes tendon commands for target joint motion. It reports overall RMSE 1.4151, mean angular error −0.2576° and standard deviation 1.39°. The model smooths abrupt commands to zero at hard stops because those boundary conditions are not explicit in its continuous field. Pointwise inference takes about 3.5 ms per query, but the paper does not report a closed-loop ODE controller running on hardware.
+
+## RoboSkin analysis
+
+The paper addresses a quiet integration problem for [robot hands](/robot-hands): perception and control rarely run at identical, perfectly stable rates. A model that changes behavior when the update interval changes can make calibration results misleading. JFM’s value is therefore less about another predictor score and more about a testable consistency condition across controller resolutions.
+
+The current input is proprioceptive, not tactile. Contact, friction and material effects are absorbed as disturbances within the training distribution rather than measured explicitly. For teams combining compliant mechanisms with [robot-hand tactile sensors](/applications/robot-hand-tactile-sensor), the next question is whether direct contact observations improve the field or reveal regimes where a local first-order model breaks down.
+
+## Limitations and availability
+
+Evidence comes from one finger, flexion motion and one hardware/data pipeline. The method assumes mechanical characteristics change slowly within a trial. It has not been directly validated on pneumatic hands, silicone hands, multi-finger coordination or out-of-plane motion. Sparse-sampling results are open-loop prediction tests, and the inverse test does not demonstrate closed-loop task completion.
+
+The manuscript is an arXiv v1 preprint under review at Robotics and Autonomous Systems. It describes ROS 2 bags converted to HDF5, but no public dataset URL, code repository, model checkpoint, CAD package or implementation license was verified. The arXiv page itself does not grant rights to an absent implementation.
+
+## Sources and related resources
+
+- [Rigid-Soft Finger JFM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01668)
+- [Full method, data details and evaluation](https://arxiv.org/html/2610.01668v1)
+- [RoboSkin tactile sensor calibration guide](/guides/tactile-sensor-calibration)
+- [RoboSkin robot manipulation hub](/robot-manipulation)
+`,
+  },
+  {
+    id: 'skelewam-sparse-skeleton-world-action-model',
+    title: 'SkeleWAM compresses manipulation into a sparse 3D skeleton',
+    seoTitle: 'SkeleWAM Uses Sparse 3D Skeletons for Manipulation',
+    seoDescription: 'SkeleWAM represents robot joints and object interaction points as a sparse 3D skeleton. Review LIBERO-Plus, 100 hardware trials and limits.',
+    excerpt: 'SkeleWAM replaces visual-future reconstruction with robot joints, object centers and interaction points, using future geometry as training-only supervision.',
+    category: 'Robot world models',
+    image: '/generated/news/skelewam-sparse-skeleton-world-action-model.png',
+    imageAlt: 'Diagram showing RGB-D observations converted to a sparse three-dimensional skeleton of robot joints, object centers and interaction points before action generation.',
+    imageCaption: 'Original RoboSkin.ai schematic of SkeleWAM’s sparse geometric state. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'SkeleWAM: Skeleton World-Action Modeling for Efficient Robotic Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2610.02120',
+    sources: [
+      { title: 'SkeleWAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.02120' },
+      { title: 'Full SkeleWAM v1 paper', url: 'https://arxiv.org/html/2610.02120v1' },
+      { title: 'Official SkeleWAM project', url: 'https://skelewam-project.github.io/' },
+    ],
+    technicalFocus: ['world action model', 'sparse 3D skeleton', 'interaction points', 'robot manipulation'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 10,030 LIBERO-Plus variants · 100 physical trials per evaluated method · project demos public · no code release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# SkeleWAM compresses manipulation into a sparse 3D skeleton
+
+Peking University researchers released SkeleWAM on October 1, 2026, asking whether a world action model needs to predict pixels at all. The model converts RGB-D observations and robot proprioception into a sparse 3D skeleton of robot joints, object centers and interaction points. It jointly learns actions and future skeletons during training, then removes the future-prediction branch at inference. [Paper and version record](https://arxiv.org/abs/2610.02120).
+
+## Key takeaways
+
+- The RGB-D model has about 57.1 million parameters and reports 85.9% on 10,030 LIBERO-Plus perturbation variants, 3.7 points above the compared Cosmos-Policy result.
+- Removing future-skeleton supervision reduces success from 85.9% to 80.1%, even though both variants use the same action-only inference path.
+- On five ARX R5 tasks with 20 trials each, SkeleWAM records 89/100 successes; the margin over Cosmos-Policy is two percentage points.
+
+## A geometry-first world state
+
+Many world action models predict a future video or a latent produced by a visual encoder. Those targets can preserve appearance that is unrelated to control while leaving contact geometry implicit. SkeleWAM instead builds object centers and manipulation-relevant interaction points from RGB-D, adds robot keypoints from forward kinematics and expresses them in a shared robot-centric frame.
+
+A shared world expert processes the current skeleton and language. Separate flow-matching heads predict a 32-step action chunk and eight future skeleton states. The future head is training-only. At inference, Medoid Action Consensus samples three trajectories, compares their first ten motion steps and executes the representative candidate rather than averaging possibly incompatible actions. The default controller executes 16 actions before rebuilding the skeleton. [Architecture and ablations](https://arxiv.org/html/2610.02120v1).
+
+## Results and comparison boundaries
+
+The main simulation benchmark covers seven perturbation categories. SkeleWAM reaches 93.4% under camera changes, 71.9% for robot initial-state changes, 89.1% for language, 94.7% for lighting, 96.0% for background, 93.9% for noise and 66.6% for layout, averaging 85.9%. Cosmos-Policy reports 82.2% overall and 75.8% for camera perturbations. However, π0.5 reaches 84.1% on layout changes versus SkeleWAM’s 66.6%; sparse geometry does not eliminate spatial-generalization failures.
+
+The privileged sim-state skeleton reaches 87.7%, only 1.8 points above RGB-D overall, but still only 69.0% on layout. That indicates perception error is not the sole cause of the layout weakness. The policy itself must generalize to different spatial arrangements.
+
+Physical evaluation uses an ARX R5 with external and wrist-mounted RealSense cameras. Across Open Drawer, Close Drawer, Stack Blocks, Stack Bowls and Put Block in Drawer, SkeleWAM reports 80%, 90%, 90%, 95% and 90%, respectively—89 successes across 100 trials. Cosmos-Policy totals 87/100, Fast-WAM 83/100 and π0.5 76/100 under the authors’ setup. This is a useful hardware check, but the two-success margin over Cosmos-Policy is small and no confidence interval is supplied.
+
+## RoboSkin analysis
+
+SkeleWAM’s editorially important result is the ablation, not only the leaderboard. Centers alone score 82.3%; interaction points alone score 77.7%; combining them scores 85.9%. Static location and task-relevant contact geometry carry complementary information. That is a practical design clue for [robot world models](/robot-world-models) and [contact-rich manipulation](/robot-manipulation): a compact state should preserve both where an object is and where the policy can act on it.
+
+The system is not tactile. Interaction points are inferred from RGB-D rather than measured through touch. A [visuo-tactile world model](/guides/visuo-tactile-world-models-robot-manipulation) could use the skeleton as a geometric backbone while adding force, slip or contact-state evidence that cameras cannot recover under occlusion.
+
+## Limitations and availability
+
+The manuscript is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Training and evaluation use one RTX 4090 in the reported implementation, but training time and end-to-end control latency are not given. Hardware evidence covers one arm, five tabletop tasks and 20 trials per task. The benchmark’s strongest weakness is layout change, and the real-world comparison is too small to establish broad superiority.
+
+The official project provides figures, result tables and recorded demonstrations. No implementation repository, checkpoint, training dataset, perception model package or software license was verified. The paper is posted under CC BY-NC-ND 4.0, which covers the manuscript, not an absent software release.
+
+## Sources and related resources
+
+- [SkeleWAM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02120)
+- [Full methods, benchmark and hardware tables](https://arxiv.org/html/2610.02120v1)
+- [Official project page and recorded demonstrations](https://skelewam-project.github.io/)
+- [RoboSkin guide to tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+`,
+  },
+  {
     id: 'tacdyn-wam-implicit-tactile-dynamics',
     title: 'TacDyn-WAM predicts contact dynamics without generating future touch pixels',
     seoTitle: 'TacDyn-WAM Predicts Implicit Tactile Dynamics',

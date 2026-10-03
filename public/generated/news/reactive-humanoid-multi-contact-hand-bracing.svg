@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#69d6cf" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">Reactive hand-contact planning</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">push · preview contacts · choose the strongest brace</text>
+    <rect x="60" y="234" width="320" height="270" rx="18" fill="#23343b"/>
+    <text x="87" y="276" fill="#69d6cf" font-size="20">LOW STABILITY</text>
+    <circle cx="220" cy="322" r="31" fill="#f3f0e9"/>
+    <path d="M220 353 L220 425 M220 374 L161 405 M220 374 L281 397 M220 425 L178 475 M220 425 L274 471" stroke="#f3f0e9" stroke-width="14" stroke-linecap="round"/>
+    <path d="M88 355 H151" stroke="#f09b78" stroke-width="10"/><path d="M137 337 L161 355 L137 373" fill="none" stroke="#f09b78" stroke-width="8"/>
+    <path d="M380 369 H432" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="432" y="234" width="318" height="270" rx="18" fill="#263e44"/>
+    <text x="460" y="276" fill="#69d6cf" font-size="20">CONTACT PREVIEW</text>
+    <rect x="468" y="315" width="62" height="132" rx="8" fill="#36505a"/><rect x="645" y="315" width="62" height="132" rx="8" fill="#36505a"/>
+    <circle cx="499" cy="348" r="13" fill="#f09b78"/><circle cx="499" cy="400" r="13" fill="#69d6cf"/><circle cx="676" cy="370" r="13" fill="#f09b78"/>
+    <path d="M545 331 C584 349 584 414 622 432" fill="none" stroke="#8fcfd0" stroke-width="8"/>
+    <text x="473" y="478" fill="#d8e1e4" font-size="18">learned CoP regions</text>
+    <path d="M750 369 H802" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="802" y="234" width="338" height="270" rx="18" fill="#3f2d26"/>
+    <text x="830" y="276" fill="#ffd8c8" font-size="20">OPTIMIZED BRACE</text>
+    <path d="M1084 310 V459" stroke="#8c5c49" stroke-width="18"/>
+    <circle cx="938" cy="322" r="26" fill="#f3f0e9"/><path d="M938 348 L938 424 M938 373 L1070 369 M938 424 L901 469 M938 424 L982 469" stroke="#f3f0e9" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="1070" cy="369" r="12" fill="#69d6cf"/>
+    <text x="841" y="481" fill="#ffd8c8" font-size="18">hand contact in about 10 ms</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">89% mean impulse gain vs foot-only recovery · 32 hardware pushes</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.00823v1. Original explanatory schematic.</text>
+  </g>
+</svg>
