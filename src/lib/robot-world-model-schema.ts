@@ -7,9 +7,9 @@ function worldModelCanonicalId(entry: Pick<RobotWorldModelEvidenceEntry, 'id'>) 
 
 function property(name: string, value: string) {
   return {
-    '@type': 'PropertyValue',
+    '@type': 'WebPageElement',
     name,
-    value,
+    text: value,
   };
 }
 
@@ -53,13 +53,10 @@ export function buildRobotWorldModelEvidenceJsonLd(entries: RobotWorldModelEvide
           entry.actionConditioning.kind,
         ],
         citation: entry.primarySources.map((source) => source.url),
-        isPartOf: {
-          '@id': directoryId,
-        },
         mainEntityOfPage: {
           '@id': `${directoryUrl}#webpage`,
         },
-        additionalProperty: [
+        hasPart: [
           property('Prediction target', entry.predictionTarget),
           property(
             'Action conditioning',

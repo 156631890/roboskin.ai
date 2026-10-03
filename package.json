@@ -18,7 +18,9 @@
     "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "generate:agent-markdown": "node scripts/generate-agent-markdown.mjs",
     "generate:images": "node scripts/generate-site-images.mjs",
-    "audit:seo": "node scripts/audit-on-page-seo.mjs"
+    "audit:seo": "node scripts/audit-on-page-seo.mjs",
+    "check:seo-metadata": "node scripts/check-seo-metadata.mjs",
+    "prebuild": "npm run check:seo-metadata"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

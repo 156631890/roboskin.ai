@@ -1,3 +1,4 @@
+import * as seoBudget from '../src/lib/seo-budget.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -12,7 +13,7 @@ function load(file, dependencies = {}) {
     return dependencies[name];
   };
   new Function('exports', 'require', ts.transpileModule(fs.readFileSync(file, 'utf8'), {
-    compilerOptions: { module: ts.ModuleKind.CommonJS },
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
   }).outputText)(exports, require);
   return exports;
 }
@@ -25,6 +26,8 @@ const release = load('src/lib/research-index-release.ts', {
   },
 });
 const seo = load('src/lib/seo.ts', {
+  '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
+  '@/lib/seo-budget.mjs': seoBudget,
   '@/lib/dataset-evidence.mjs': evidence,
   '@/content/site': site,
   '@/lib/research-index-release': release,
@@ -33,7 +36,9 @@ const seo = load('src/lib/seo.ts', {
 test('paper-associated candidates stay outside catalog counts and Dataset structured data', async () => {
   const route = load('src/app/datasets.json/route.ts', {
     '@/lib/tactile-datasets': records,
-    '@/lib/dataset-evidence.mjs': evidence,
+    '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
+  '@/lib/seo-budget.mjs': seoBudget,
+  '@/lib/dataset-evidence.mjs': evidence,
   });
   const data = await route.GET().json();
   assert.equal(data.count, data.entries.length);
