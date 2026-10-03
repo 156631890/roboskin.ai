@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
+import EditorialReview from '@/components/EditorialReview';
 import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { getNewsPostById, newsPosts } from '@/lib/news-data';
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.excerpt,
-    authors: [{ name: post.author }],
+    authors: [{ name: post.author, url: canonicalUrl(site.editorial.path) }],
     category: post.category,
     keywords: post.technicalFocus,
     alternates: {
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       images: [{ url: post.image, alt: post.imageAlt ?? `Illustration for ${post.title}` }],
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: [post.author],
+      authors: [canonicalUrl(site.editorial.path)],
       section: post.category,
       tags: post.technicalFocus,
     },
@@ -167,7 +168,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
               className="object-cover"
             />
             </div>
-            {post.imageCaption && <figcaption>{post.imageCaption}</figcaption>}
+            <figcaption>{post.imageCaption ?? 'Explanatory illustration for this brief; technical evidence is in the cited sources.'}</figcaption>
           </figure>
 
           <div className="article-grid">
@@ -176,12 +177,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             </div>
 
             <aside className="article-rail">
-              <div className="article-rail-block">
-                <p>Editorial review</p>
-                <div>
-                  Written by {post.author}. This brief summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, affiliation, or measured performance by RoboSkin.ai.
-                </div>
-              </div>
+              <EditorialReview author={post.author} />
               <div className="article-rail-block">
                 <p>Sources</p>
                 <div>
