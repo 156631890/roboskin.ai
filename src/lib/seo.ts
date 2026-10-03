@@ -250,7 +250,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'About RoboSkin.ai',
     description:
       'RoboSkin.ai provides independent public research resources and paid, fixed-scope source research on robot skin and tactile robotics.',
-    updated: '2026-09-13',
+    updated: '2026-10-04',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -260,8 +260,8 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/editorial-policy',
     title: 'RoboSkin Editorial Policy and Source Standards',
     description:
-      'Read RoboSkin.ai editorial standards for source-backed robot skin, tactile AI, e-skin, Physical AI, and research-route coverage.',
-    updated: '2026-08-20',
+      'How RoboSkin.ai attributes authors, checks research evidence, discloses automation, handles corrections and separates paid work from public coverage.',
+    updated: '2026-10-04',
     priority: 0.68,
     changeFrequency: 'monthly',
     index: true,
@@ -422,6 +422,8 @@ export function buildOrganizationJsonLd() {
       url: site.url,
     },
     publishingPrinciples: canonicalUrl('/editorial-policy'),
+    correctionsPolicy: canonicalUrl('/editorial-policy#corrections'),
+    ethicsPolicy: canonicalUrl('/editorial-policy#independence'),
     knowsAbout: [
       'Robot skin',
       'Tactile AI',
