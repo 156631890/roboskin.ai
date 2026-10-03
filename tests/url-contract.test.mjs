@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 181);
+  assert.equal(protectedUrls.length, 185);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -36,6 +36,10 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/electronic-skin-research-robot-skin-systems-problem'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/reactive-humanoid-multi-contact-hand-bracing'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/continual-6dof-grasp-synthesis-memory'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/jfm-rigid-soft-finger-jacobian-flow'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/skelewam-sparse-skeleton-world-action-model'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/eu-roboskin-project'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026'));

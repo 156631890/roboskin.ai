@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#69d6cf" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">Continual 6-DoF grasp memory</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">attempt · remember outcome · recall missing grasp modes</text>
+    <rect x="60" y="234" width="280" height="270" rx="18" fill="#23343b"/>
+    <text x="87" y="276" fill="#69d6cf" font-size="20">GRASP ATTEMPT</text>
+    <path d="M121 327 H177 V382 M279 327 H223 V382" stroke="#f3f0e9" stroke-width="15" fill="none"/>
+    <rect x="175" y="365" width="50" height="80" rx="12" fill="#f09b78"/>
+    <path d="M139 456 C167 420 231 420 260 456" fill="none" stroke="#69d6cf" stroke-width="8"/>
+    <path d="M340 369 H397" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="397" y="234" width="384" height="270" rx="18" fill="#263e44"/>
+    <text x="425" y="276" fill="#69d6cf" font-size="20">TWO MEMORIES</text>
+    <rect x="435" y="316" width="138" height="116" rx="14" fill="#355762"/><text x="454" y="349" fill="#f3f0e9" font-size="19">OUTCOMES</text>
+    <circle cx="470" cy="390" r="12" fill="#69d6cf"/><text x="490" y="397" fill="#d8e1e4" font-size="18">success</text>
+    <circle cx="470" cy="421" r="12" fill="#f09b78"/><text x="490" y="428" fill="#d8e1e4" font-size="18">failure</text>
+    <rect x="605" y="316" width="138" height="116" rx="14" fill="#533328"/><text x="620" y="349" fill="#f3f0e9" font-size="19">DEMOS</text>
+    <path d="M634 407 L666 371 L714 408" fill="none" stroke="#f09b78" stroke-width="8"/>
+    <text x="439" y="471" fill="#bbc6cb" font-size="18">update scores · add candidates</text>
+    <path d="M781 369 H838" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="838" y="234" width="302" height="270" rx="18" fill="#3f2d26"/>
+    <text x="866" y="276" fill="#ffd8c8" font-size="20">NEXT SCENE</text>
+    <circle cx="989" cy="365" r="67" fill="none" stroke="#f09b78" stroke-width="9"/><path d="M926 365 H1052 M989 302 V428" stroke="#8c5c49" stroke-width="6"/>
+    <path d="M956 334 L1021 397 M1021 334 L956 397" stroke="#69d6cf" stroke-width="10"/>
+    <text x="873" y="475" fill="#ffd8c8" font-size="18">rank adapted grasps</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">1,500+ physical attempts · no deployment-time weight update</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.01301v1. Original explanatory schematic.</text>
+  </g>
+</svg>
