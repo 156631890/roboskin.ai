@@ -14,6 +14,7 @@ import {
   buildResearchArticleBreadcrumbJsonLd,
   buildResearchArticlePageJsonLd,
   canonicalUrl,
+  socialImageUrl,
 } from '@/lib/seo';
 import { getResearchTopicLinks } from '@/lib/topic-graph';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
       publishedTime: post.date,
       modifiedTime: post.updated,
       authors: [canonicalUrl(site.editorial.path)],
@@ -70,7 +71,7 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       card: 'summary_large_image',
       title: post.seoTitle ?? post.title,
       description: post.seoDescription ?? post.excerpt,
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
     },
   };
 }

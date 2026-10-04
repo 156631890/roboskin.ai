@@ -13,6 +13,7 @@ import {
   buildNewsArticleJsonLd,
   buildNewsArticlePageJsonLd,
   canonicalUrl,
+  socialImageUrl,
 } from '@/lib/seo';
 import { getResearchTopicLinks } from '@/lib/topic-graph';
 
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
-      images: [{ url: post.image, alt: post.imageAlt ?? `Illustration for ${post.title}` }],
+      images: [{ url: socialImageUrl(post.image), alt: post.imageAlt ?? `Illustration for ${post.title}` }],
       publishedTime: post.date,
       modifiedTime: post.updated,
       authors: [canonicalUrl(site.editorial.path)],
@@ -68,7 +69,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       card: 'summary_large_image',
       title: post.seoTitle ?? post.title,
       description: post.seoDescription ?? post.excerpt,
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
     },
   };
 }
