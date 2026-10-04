@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#10161c"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="62" fill="#69d6cf" font-size="22" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="137" fill="#f4f1e9" font-size="42" font-weight="700">Active vision becomes an action</text>
+    <text x="62" y="181" fill="#aeb8bf" font-size="24">remember evidence · move the camera · manipulate</text>
+    <rect x="60" y="231" width="310" height="274" rx="18" fill="#23343d"/>
+    <text x="87" y="273" fill="#69d6cf" font-size="20">VIDEO HISTORY</text>
+    <rect x="90" y="313" width="220" height="132" rx="10" fill="#152127" stroke="#57727d" stroke-width="3"/>
+    <circle cx="154" cy="370" r="30" fill="#e5a476"/>
+    <rect x="208" y="337" width="67" height="74" rx="8" fill="#6a8791"/>
+    <path d="M108 467 H318" stroke="#69d6cf" stroke-width="7" stroke-dasharray="22 12"/>
+    <path d="M370 370 H432" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="432" y="231" width="320" height="274" rx="18" fill="#294149"/>
+    <text x="461" y="273" fill="#69d6cf" font-size="20">WORLD–ACTION MODEL</text>
+    <path d="M486 337 C540 292 650 292 700 337 C650 384 540 384 486 337Z" fill="#365d64"/>
+    <circle cx="594" cy="337" r="30" fill="#69d6cf"/>
+    <text x="477" y="421" fill="#edf4f3" font-size="22">16-D joint command</text>
+    <text x="478" y="458" fill="#afbec4" font-size="18">arms · grippers · pan/tilt</text>
+    <path d="M752 370 H814" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="814" y="231" width="326" height="274" rx="18" fill="#3f3028"/>
+    <text x="842" y="273" fill="#ffd7c5" font-size="20">LOOK + ACT</text>
+    <circle cx="944" cy="326" r="25" fill="#f4f1e9"/>
+    <path d="M944 351 V429 M944 379 L882 418 M944 379 L1035 391 M944 429 L908 475 M944 429 L990 475" stroke="#f4f1e9" stroke-width="13" stroke-linecap="round"/>
+    <rect x="1008" y="306" width="83" height="50" rx="8" fill="#69d6cf"/>
+    <path d="M1049 306 V277 M1027 277 H1072" stroke="#69d6cf" stroke-width="8"/>
+    <path d="M60 548 H1140" stroke="#4a555f"/>
+    <text x="62" y="594" fill="#f4f1e9" font-size="23">53.3% compound-shift success · 30/60 physical sequences</text>
+    <text x="62" y="631" fill="#a6b0b8" font-size="20">Source: arXiv:2610.01698v1. Original explanatory schematic.</text>
+  </g>
+</svg>
