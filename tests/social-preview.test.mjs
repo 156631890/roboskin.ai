@@ -5,6 +5,7 @@ import test from 'node:test';
 import sharp from 'sharp';
 import ts from 'typescript';
 import * as datasetEvidence from '../src/lib/dataset-evidence.mjs';
+import * as seoBudget from '../src/lib/seo-budget.mjs';
 
 const root = new URL('../', import.meta.url);
 
@@ -21,6 +22,8 @@ function load(relative, dependencies = {}) {
 }
 
 const seo = load('src/lib/seo.ts', {
+  '@/lib/seo-budget.mjs': seoBudget,
+  '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
   '@/lib/dataset-evidence.mjs': datasetEvidence,
   '@/content/site': load('src/content/site.ts'),
   '@/lib/research-index-release': load('src/lib/research-index-release.ts'),
@@ -55,6 +58,7 @@ test('every News and Research preview has a decodable supported asset, including
   const research = load('src/lib/blog-data.ts');
   const news = load('src/lib/news-data.ts');
   const dependencies = {
+    '@/lib/seo-budget.mjs': seoBudget,
     '@/lib/seo': seo,
     '@/content/site': load('src/content/site.ts'),
     '@/lib/blog-data': research,

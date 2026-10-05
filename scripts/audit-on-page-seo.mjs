@@ -1,4 +1,5 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import domino from '@mixmark-io/domino';
@@ -147,7 +148,7 @@ export async function auditExport(directory) {
   return validatePages(pages, sitemapPaths, assets, redirects);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(path.resolve(process.argv[1]))).href) {
   const report = await auditExport(path.resolve(process.env.SEO_EXPORT_DIR ?? 'out'));
   const reportIndex = process.argv.indexOf('--report');
   if (reportIndex >= 0) {

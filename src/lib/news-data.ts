@@ -243,7 +243,7 @@ The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, pr
   {
     id: 'interevolve-reward-program-humanoid-manipulation',
     title: 'InterEvolve searches reward programs instead of retraining a humanoid',
-    seoTitle: 'InterEvolve Searches Humanoid Reward Programs at Test Time',
+    seoTitle: 'InterEvolve: Test-Time Humanoid Reward Program Search',
     seoDescription: 'InterEvolve edits and tunes staged reward programs for a frozen humanoid controller. Review 86.5% simulation results, cost and hardware limits.',
     excerpt: 'InterEvolve uses an LLM, numerical tuning and parallel simulation to revise staged reward programs while keeping the Unitree G1 control policy fixed.',
     category: 'Humanoid loco-manipulation',

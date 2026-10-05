@@ -1,4 +1,5 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import TurndownService from 'turndown';
@@ -119,7 +120,7 @@ export async function generateAgentMarkdown(outputRoot = path.join(projectRoot, 
   return { count: htmlFiles.length, outputRoot: markdownRoot };
 }
 
-const executablePath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : '';
+const executablePath = process.argv[1] ? pathToFileURL(realpathSync(path.resolve(process.argv[1]))).href : '';
 if (import.meta.url === executablePath) {
   if (process.env.ROBOSKIN_RUNTIME === 'server') {
     console.log('Server build: static-export Markdown generation skipped (out may belong to an earlier build).');

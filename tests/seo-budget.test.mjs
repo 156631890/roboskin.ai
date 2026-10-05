@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { SEO_BUDGET, SEO_TITLE_SUFFIX, finalSeoTitle, seoLength, seoLengthIssues, assertSeoBudget, resolveArticleSeo } from '../src/lib/seo-budget.mjs';
 import { inspectPage, validatePages } from '../scripts/audit-on-page-seo.mjs';
 import { contentSeoRecords } from '../scripts/check-seo-metadata.mjs';
@@ -48,4 +51,12 @@ test('exceptions require exact URL, field, text, reason and review; changing tex
 });
 test('every current News, Research and shared topic/page SEO record satisfies publication budgets', () => {
   for (const record of contentSeoRecords()) assert.doesNotThrow(() => assertSeoBudget(record.path, record), record.path);
+});
+test('the prebuild CLI runs through both real paths and the checkout path', () => {
+  const script = fileURLToPath(new URL('../scripts/check-seo-metadata.mjs', import.meta.url));
+  for (const entry of new Set([script, path.resolve('scripts/check-seo-metadata.mjs')])) {
+    const result = spawnSync(process.execPath, [entry], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /Editorial SEO budgets passed/);
+  }
 });
