@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import JsonLd from '@/components/JsonLd';
+import EditorialReview from '@/components/EditorialReview';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
@@ -55,8 +56,8 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
               {page.schemaType === 'TechArticle' ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
-                  {page.published ? <>Published {page.published} | </> : null}
-                  Updated {page.updated} by {site.editorial.name}
+                  {page.published ? <>Published <time dateTime={page.published}>{page.published}</time> | </> : null}
+                  Updated <time dateTime={page.updated}>{page.updated}</time> by <Link href={site.editorial.path} rel="author" className="underline underline-offset-4">{site.editorial.name}</Link>
                 </p>
               ) : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -192,6 +193,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
             </div>
 
             <aside className="space-y-4">
+              {page.schemaType === 'TechArticle' ? <EditorialReview className="signal-panel p-5" /> : null}
               <div className="signal-panel p-5">
                 <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">Related routes</p>
                 <div className="mt-4 space-y-3">

@@ -3,8 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
+import EditorialReview from '@/components/EditorialReview';
 import JsonLd from '@/components/JsonLd';
 import ResearchResourceActions from '@/components/ResearchResourceActions';
+import { site } from '@/content/site';
 import { blogPosts, getBlogPostById } from '@/lib/blog-data';
 import {
   buildArticleJsonLd,
@@ -12,6 +14,7 @@ import {
   buildResearchArticleBreadcrumbJsonLd,
   buildResearchArticlePageJsonLd,
   canonicalUrl,
+  socialImageUrl,
 } from '@/lib/seo';
 import { getResearchTopicLinks } from '@/lib/topic-graph';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.excerpt,
-    authors: [{ name: post.author }],
+    authors: [{ name: post.author, url: canonicalUrl(site.editorial.path) }],
     category: post.category,
     keywords: post.technicalFocus,
     alternates: {
@@ -57,10 +60,10 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: [post.author],
+      authors: [canonicalUrl(site.editorial.path)],
       section: post.category,
       tags: post.technicalFocus,
     },
@@ -68,7 +71,7 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
       card: 'summary_large_image',
       title: post.seoTitle ?? post.title,
       description: post.seoDescription ?? post.excerpt,
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
     },
   };
 }
@@ -103,7 +106,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
           buildArticleJsonLd(post),
         ])}
       />
-      <article className="article-page">
+      <article className="article-page research-article">
         <div className="container-shell">
           <Link href="/research" className="article-backlink">
             {'<-'} Back to research
@@ -111,10 +114,16 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
 
           <header className="article-masthead">
             <p className="article-meta">
-              {post.category} | Published {post.date} | Updated {post.updated}
+              {post.category}
             </p>
             <h1>{post.title}</h1>
             <p className="article-deck">{post.excerpt}</p>
+            <div className="news-byline">
+              <Link href={site.editorial.path} rel="author">By {post.author}</Link>
+              <span>Published <time dateTime={post.date}>{post.date}</time></span>
+              {post.updated !== post.date && <span>Updated <time dateTime={post.updated}>{post.updated}</time></span>}
+              <span>{post.readTime}</span>
+            </div>
             <div className="article-topics">
               {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
@@ -130,6 +139,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
           </header>
 
           <figure className="article-cover">
+            <div className="research-cover-image">
             <Image
               src={post.image}
               alt={`Illustration for ${post.title}`}
@@ -138,6 +148,8 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
               sizes="(min-width: 1280px) 1120px, 100vw"
               className="object-cover"
             />
+            </div>
+            <figcaption>RoboSkin.ai explanatory illustration; not a photograph or measurement from the cited experiment.</figcaption>
           </figure>
 
           <div className="article-grid">
@@ -152,12 +164,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             </div>
 
             <aside className="article-rail">
-              <div className="article-rail-block">
-                <p>Editorial review</p>
-                <div>
-                  Written by {post.author}. This note summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, or measured performance by RoboSkin.ai.
-                </div>
-              </div>
+              <EditorialReview author={post.author} />
               <div className="article-rail-block">
                 <p>Source</p>
                 <a href={post.sourceUrl} target="_blank" rel="noreferrer">

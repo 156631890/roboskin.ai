@@ -33,6 +33,285 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'activewam-active-vision-world-action-model',
+    title: 'ActiveWAM makes camera motion part of the robot action',
+    seoTitle: 'ActiveWAM Unifies Camera and Bimanual Robot Actions',
+    seoDescription: 'ActiveWAM jointly controls a pan-tilt camera and two robot arms. Review RoboTwin-AV, 60 physical trials, latency and release limits.',
+    excerpt: 'ActiveWAM treats where a robot looks as part of the same action sequence as bimanual manipulation, while using transformed video histories only during training.',
+    category: 'Active robot perception',
+    image: '/generated/news/activewam-active-vision-world-action-model.png',
+    imageAlt: 'Diagram showing camera history and task evidence flowing into a world-action model that jointly commands a pan-tilt head and two robot arms.',
+    imageCaption: 'Original RoboSkin.ai schematic of ActiveWAM\'s retain-and-acquire loop. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'ActiveWAM: Evidence-Aware Active Vision for World-Action Models',
+    sourceUrl: 'https://arxiv.org/abs/2610.01698',
+    sources: [
+      { title: 'ActiveWAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.01698' },
+      { title: 'Full ActiveWAM v1 paper', url: 'https://arxiv.org/html/2610.01698v1' },
+      { title: 'Official ActiveWAM project page', url: 'https://icr-lab.github.io/ActiveWAM/' },
+    ],
+    technicalFocus: ['active vision', 'world-action model', 'bimanual manipulation', 'camera control'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 50-task simulation benchmark · 300 physical trials across five methods · official code marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '8 min read',
+    content: `# ActiveWAM makes camera motion part of the robot action
+
+Beijing Institute of Technology researchers released ActiveWAM on October 1, 2026, a world-action model that predicts bimanual motion and a two-axis pan-tilt camera trajectory together. The central engineering question is simple: when a robot can move its eyes, can it learn where to look without losing evidence it saw a moment ago? ActiveWAM answers with a finite video history, training-time history transformations and one 16-dimensional arm-and-head action space. [Paper and version record](https://arxiv.org/abs/2610.01698).
+
+## Key takeaways
+
+- RoboTwin-AV extends all 50 RoboTwin 2.0 tasks with executable camera control and evaluates 100 episodes per task, seed and condition across three seeds.
+- Under combined appearance and initial-camera-pose shifts, ActiveWAM reports 53.3% success versus 33.3% for Fast-WAM, a 20.0 percentage-point difference.
+- On three physical kitchen sequences, ActiveWAM completes 30 of 60 trials; the system still uses prescribed stage switching and a fixed-focal-length camera.
+
+## Retain old evidence, acquire the next view
+
+The policy receives nine 240×320 RGB frames, robot state, camera pose, calibration and acquisition metadata. It produces two six-degree-of-freedom arm increments, two gripper commands and two camera increments. A stay command lets the camera hold a useful view rather than move continuously.
+
+During training, a frozen Wan2.2-TI2V-5B video prior partially transforms recorded histories. Task-weighted feature preservation and temporal correspondence losses constrain the transformation so important cues and visible motion remain. The original action continuation is kept as the target. At deployment, the system uses raw camera history and does not decode a predicted future video. In other words, the video model is a co-training instrument, not a runtime visual simulator. [Method and deployment design](https://arxiv.org/html/2610.01698v1).
+
+The authors also introduce RoboTwin-AV. Its gaze collector can use simulator-only masks and depth to create active-vision demonstrations, but those privileged inputs are withheld at evaluation. Each of the 50 tasks uses 100 successful training trajectories. Test failures and timeouts remain in the 100-episode evaluation sets.
+
+## Results under the reported protocol
+
+ActiveWAM reaches 80.3% in the clean RoboTwin-AV condition, 60.7% under appearance shifts, 65.0% under initial head-pose shifts and 53.3% when both shifts are applied. Fast-WAM scores 76.3%, 41.7%, 56.0% and 33.3%, respectively. Removing history inversion reduces the compound result to 41.7%, an 11.6-point gap; removing the full history reduces it to 34.0%.
+
+The physical setup is an AirbotPlay fixed-base dual-arm platform with a RealSense D455 on a two-DoF head. Three kitchen sequences each receive 20 attempts per method: cucumber slicing, egg frying and ingredient mixing. ActiveWAM completes 7, 11 and 12 full sequences, or 30 of 60. Fast-WAM completes 1, 6 and 7, or 14 of 60. That is a 26.7-point absolute difference, but it does not represent an unattended end-to-end kitchen system: policies are separately trained for segments, transitions are prescribed, and human inter-segment actions are outside the evaluation.
+
+## RoboSkin analysis
+
+ActiveWAM is not a tactile system. Its value for [robot world models](/robot-world-models) is the treatment of sensing motion as an action with physical consequences. A pan-tilt camera can reacquire an occluded target, but leaving a useful view also creates a memory problem. This retain-and-acquire framing is relevant to [visuo-tactile manipulation](/visuo-tactile), where cameras and touch sensors likewise reveal different parts of a contact state over time.
+
+The failure audit is as useful as the headline result. Of 30 failed ActiveWAM physical trials, 12 are labeled manipulation errors, 10 premature terminations, five camera field-of-view failures and three hardware issues. Moving the camera does not remove contact-control or termination problems; it changes which failures remain visible.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai did not reproduce the experiments. The physical evaluation uses one fixed-base platform, one camera arrangement and three composed kitchen sequences. Inference is reported at about 165 ms on an RTX 4090; action chunking yields roughly 15 Hz effective updates while interpolation maintains 25 Hz commands. The authors report only a short history window and no automatic high-level stage transition.
+
+The official project page was available when checked, but its code link was marked “Coming Soon.” RoboTwin-AV materials are linked from the project, while ActiveWAM training code, checkpoints and a software license were not verified as released. The arXiv manuscript uses arXiv's perpetual non-exclusive distribution license.
+
+## Sources and related resources
+
+- [ActiveWAM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01698)
+- [Full method, benchmarks and physical protocol](https://arxiv.org/html/2610.01698v1)
+- [Official ActiveWAM project page](https://icr-lab.github.io/ActiveWAM/)
+- [RoboSkin guide to visuo-tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+`,
+  },
+  {
+    id: 'radmcs-underwater-haptic-diver-guidance',
+    title: 'RADMCS steers scuba divers with low-thrust haptic cues',
+    seoTitle: 'RADMCS Tests Thruster Haptics for Scuba Divers',
+    seoDescription: 'RADMCS mounts two thrusters on a scuba tank to guide divers. Review the eight-person study, 10% threshold and distance-estimation failures.',
+    excerpt: 'A tank-mounted wearable robot uses two underwater thrusters as directional haptic cues, but its wall-following behavior depends on a distance estimate that failed in one documented run.',
+    category: 'Wearable haptics',
+    image: '/generated/news/radmcs-underwater-haptic-diver-guidance.png',
+    imageAlt: 'Diagram showing two tank-mounted underwater thrusters turning a diver toward or away from a wall according to camera distance error.',
+    imageCaption: 'Original RoboSkin.ai schematic of the RADMCS distance-to-thrust feedback loop. It is explanatory artwork, not an experiment photograph.',
+    sourceTitle: 'Towards Physical Underwater Robotic Assistance for Scuba Diver Movement in Confined Spaces',
+    sourceUrl: 'https://arxiv.org/abs/2610.01906',
+    sources: [
+      { title: 'RADMCS arXiv v1 record', url: 'https://arxiv.org/abs/2610.01906' },
+      { title: 'Full RADMCS v1 paper', url: 'https://arxiv.org/html/2610.01906v1' },
+    ],
+    technicalFocus: ['underwater haptics', 'wearable robotics', 'force feedback', 'human-robot interaction'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · IRB in-water study with eight participants across different subsets · CC BY 4.0 manuscript · no code or data release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '8 min read',
+    content: `# RADMCS steers scuba divers with low-thrust haptic cues
+
+University of Minnesota researchers Demetrious T. Kutzke and Junaed Sattar released RADMCS on October 1, 2026, a wearable underwater robot that straps to a scuba tank and uses two thrusters to cue a diver to turn toward or away from a surface. An IRB-approved study involved eight participants across several pool and ocean tests. The most stable quantitative finding is perceptual: approximately 10% of maximum thrust was enough to produce detectable motion in the tested configurations. [Paper and version record](https://arxiv.org/abs/2610.01906).
+
+## Key takeaways
+
+- RADMCS is a haptic navigation aid, not a propulsive exoskeleton: its thrusters perturb the diver so the diver responds with their own motion.
+- Pool threshold tests use four participants split across three thruster configurations; ocean threshold tests use two participants in two configurations.
+- A seven-participant pool wall-following study exposes a critical dependency: when visual distance estimation is lost, the last thrust command can persist.
+
+## From camera distance to physical cue
+
+RADMCS carries two Blue Robotics T200 thrusters in either longitudinal or transverse arrangements with 225 mm or 325 mm spacing. A camera estimates distance to a target surface. After exponential filtering and a dead zone, the controller maps distance error to differential thruster commands. The tested setup uses a practical sensing range of 1.5 m and clips larger errors.
+
+The mechanism deliberately closes the loop through a person. A positive or negative thrust moment asks the diver to yaw; it does not autonomously translate the diver to a coordinate. That distinction matters for [haptic interfaces](/physical-ai-touch): the relevant output is a perceivable, directional body cue, not robot trajectory accuracy.
+
+## What the participant study shows
+
+Eight divers participated overall, but not every person completed every test. In the pool, two participants tested the 225 mm longitudinal and transverse layouts, while two different participants tested the 325 mm transverse layout. Facility time prevented collection for the 325 mm longitudinal configuration. Participants were neutrally buoyant at 1.8 m depth and reported when they first perceived the force during ascending and descending PWM sweeps.
+
+Open-water threshold testing used two participants, 5 m from shore at 1.5 m depth, with both 325 mm layouts. Despite 0.25–0.5 m wave-height variation, the reported perceptible level again clustered around 10% of maximum thrust. The authors explicitly leave two explanations unresolved: divers may have confused environmental motion with robot feedback, or the device may couple strongly enough that directional cues remain distinct.
+
+The closed-water distance-maintaining test used seven participants wearing blackout masks beside a 7 m tarp carrying AprilGrid targets at 1 m intervals. In one illustrated run, participant P2 completed the course in 89.89 s while responding to left and right cues. In the P8 example, distance estimates disappeared at about 12 s and never recovered; the controller retained a high left-turn command until the 43.28 s run ended. The paper therefore supports guided movement when the estimate is stable, not robust autonomous wall following under arbitrary underwater vision.
+
+## RoboSkin analysis
+
+RADMCS is a useful counterexample to the idea that more force always makes a haptic cue better. A low, detectable threshold can conserve power and reduce intrusive motion, but perception reliability becomes the dominant safety constraint. The controller needs an explicit stale-signal policy before the device can be treated as a dependable [wearable robotics](/applications) platform.
+
+The sample structure also matters. “Eight participants” is the union of the study, not the denominator for every result. Threshold findings, wall-following examples and a form-fit test come from different subsets. Reporting those boundaries keeps a promising prototype from sounding like a validated navigation product.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, not an independently validated dive system, and RoboSkin.ai did not test it. The paper reports a qualitative ocean form-fit trial with one participant at up to 80% thrust. The apparatus shifted, moved regulator hoses forward and created a painful pinch point near the participant's head. Those observations are design constraints, not cosmetic issues.
+
+Distance sensing used structured AprilGrid targets rather than natural reef geometry for the pool control study. The tarp warped in circulation currents, autofocus affected measurements, and one documented run preserved an unsafe stale command after tracking loss. The manuscript is available under CC BY 4.0. No official code repository, CAD package, dataset or software license was verified.
+
+## Sources and related resources
+
+- [RADMCS v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01906)
+- [Full system and human-study protocol](https://arxiv.org/html/2610.01906v1)
+- [RoboSkin overview of force and touch in Physical AI](/physical-ai-touch)
+- [RoboSkin robot-safety resources](/robot-safety)
+`,
+  },
+  {
+    id: 'humanoidtoolbench-tool-selection-mobile-execution',
+    title: 'HumanoidToolBench separates tool choice from task completion',
+    seoTitle: 'HumanoidToolBench Tests Tool Choice and Execution',
+    seoDescription: 'HumanoidToolBench provides 18 Unitree G1 tasks, 55 tools and 3,094 demonstrations. Review contact funnels, real trials and release terms.',
+    excerpt: 'HumanoidToolBench tracks contact, correct selection, lifting and final success across stationary and mobile Unitree G1 tool-use tasks instead of collapsing them into one score.',
+    category: 'Humanoid benchmarks',
+    image: '/generated/news/humanoidtoolbench-tool-selection-mobile-execution.png',
+    imageAlt: 'Diagram showing a humanoid progressing through candidate contact, correct tool selection, tool lift, target contact and task success.',
+    imageCaption: 'Original RoboSkin.ai schematic of the HumanoidToolBench event funnel. It is explanatory artwork, not a benchmark frame.',
+    sourceTitle: 'HumanoidToolBench: Benchmarking Humanoid Tool Use from Selection to Mobile Execution',
+    sourceUrl: 'https://arxiv.org/abs/2610.02089',
+    sources: [
+      { title: 'HumanoidToolBench arXiv v1 record', url: 'https://arxiv.org/abs/2610.02089' },
+      { title: 'Full HumanoidToolBench v1 paper', url: 'https://arxiv.org/html/2610.02089v1' },
+      { title: 'Official HumanoidToolBench project', url: 'https://snu-pi.github.io/HumanoidToolBench/' },
+      { title: 'Official evaluation toolkit', url: 'https://github.com/SNU-PI/HumanoidToolBench' },
+    ],
+    technicalFocus: ['humanoid tool use', 'robot benchmark', 'mobile manipulation', 'demonstration dataset'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 18-task simulation benchmark · 40 reported real-robot test trials per policy · MIT evaluation code · CC BY-NC 4.0 dataset',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '9 min read',
+    content: `# HumanoidToolBench separates tool choice from task completion
+
+Researchers from Seoul National University, the University of Massachusetts Amherst and Google Research released HumanoidToolBench on October 1, 2026. The benchmark asks a Unitree G1 to infer which tool can accomplish a goal, grasp it and use it, sometimes while moving along a table. Its 18 tasks, 55 tool assets and 3,094-trajectory ToolBook dataset make the hand-to-object chain measurable instead of treating “tool use” as a single opaque success bit. [Paper and version record](https://arxiv.org/abs/2610.02089).
+
+## Key takeaways
+
+- Three scenarios—BallMove, BallRetrieve and IceBreak—combine with three execution levels and standard or decoy tool sets to form 18 conditions.
+- ToolBook contains 3,003 simulation trajectories and 91 curated real-robot trajectories collected by eight experienced teleoperators.
+- The released evaluation toolkit is MIT-licensed, while ToolBook is CC BY-NC 4.0 and third-party assets retain their own terms.
+
+## An evaluation funnel for physical tool use
+
+Each scene contains one suitable tool, two irrelevant objects and, in decoy mode, a misleading tool that differs in task-relevant length, shape, mass or compliance. Instructions describe the goal but do not name the tool. Level L0 ends when the correct tool is lifted 8 cm. L1 adds stationary execution. L2 moves the task target so the robot must locomote while carrying the tool.
+
+The environment records five events: any candidate contact, correct first contact, correct-tool lift, tool-target contact and final success. That funnel separates visual selection from grasping and contact execution. “Correct first contact” is still a proxy—it does not prove semantic reasoning—but it shows where a policy begins to diverge from the intended sequence.
+
+ToolBook is built from 1,959 L1/L2 simulation attempts that yielded 1,200 successful demonstrations. The authors cut 1,803 L0 prefixes from attempts in which the correct tool was lifted, including 614 attempts that later failed. Adding 91 real L1 demonstrations gives exactly 3,094 trajectories. [Dataset construction and protocol](https://arxiv.org/html/2610.02089v1).
+
+## What the scores reveal
+
+Simulation evaluation uses one trained policy instance and 100 episodes per task. FastWAM's standard-mode L1 success is 76%, 57% and 86% across the three scenarios, but its mobile L2 results fall to 9%, 20% and 69%. In decoy mode, the corresponding L1 scores are 75%, 45% and 82%; L2 scores are 8%, 11% and 61%. The benchmark changes both target layout and locomotion demand at L2, so the drop cannot be attributed to walking alone.
+
+Averaged across scenarios and L1/L2, FastWAM contacts some candidate in 99.8% of standard episodes and makes the correct tool its first contact in 87.7%, yet completes only 52.8%. Under decoys those values are 100%, 74.7% and 47.0%. Contact is easy; preserving the right grasp and applying the tool is the larger gap.
+
+Real evaluation covers L1 BallMove and BallRetrieve, each in two modes, with ten trials per cell. GR00T N1.7 succeeds in 18 of 40 trials; FastWAM also succeeds in 18 of 40; ACT succeeds in four. These are small platform-specific trials, not estimates of general humanoid tool competence.
+
+## RoboSkin analysis
+
+The strongest contribution is the intermediate event record. It lets researchers connect [robot-hand contact](/robot-hands) to final behavior: a policy may visually select the right object but fail at lift, maintain contact yet miss the target, or complete a stationary task and fail once whole-body motion is introduced.
+
+Focused probes also warn against over-interpreting success. GR00T N1.7's correct first-contact rate falls from 85% to 74% on unseen BallMove tools and from 59% to 36% on BallRetrieve. In one fixed IceBreak scene, an unrelated instruction still triggers task execution in 84 of 100 rollouts, compared with 77 under the intended instruction. That is evidence of scene-policy shortcuts, not language-grounded tool reasoning.
+
+## Availability and replication boundaries
+
+The official repository was live when checked. It includes the evaluation environment, recording validator, ACT and Diffusion Policy checkpoints and documented 100-episode protocol. The maintainers estimate about two hours and 1 GB of outputs for one condition on one GPU, roughly a day and a half and 15 GB for all 18 conditions sequentially. Training pipelines are not included.
+
+The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, project and repository but did not run the GPU benchmark or physical robot tests. Tool assets, third-party models and controller components carry separate terms; users should not infer that the dataset's non-commercial license covers every dependency.
+
+## Sources and related resources
+
+- [HumanoidToolBench v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02089)
+- [Full task, dataset and evaluation paper](https://arxiv.org/html/2610.02089v1)
+- [Official project and result tables](https://snu-pi.github.io/HumanoidToolBench/)
+- [MIT-licensed evaluation toolkit and replication requirements](https://github.com/SNU-PI/HumanoidToolBench)
+- [RoboSkin robotics dataset directory](/robotics-datasets)
+- [RoboSkin benchmark directory](/benchmarks)
+`,
+  },
+  {
+    id: 'interevolve-reward-program-humanoid-manipulation',
+    title: 'InterEvolve searches reward programs instead of retraining a humanoid',
+    seoTitle: 'InterEvolve Searches Humanoid Reward Programs at Test Time',
+    seoDescription: 'InterEvolve edits and tunes staged reward programs for a frozen humanoid controller. Review 86.5% simulation results, cost and hardware limits.',
+    excerpt: 'InterEvolve uses an LLM, numerical tuning and parallel simulation to revise staged reward programs while keeping the Unitree G1 control policy fixed.',
+    category: 'Humanoid loco-manipulation',
+    image: '/generated/news/interevolve-reward-program-humanoid-manipulation.png',
+    imageAlt: 'Diagram showing an LLM editing staged reward code, simulation verification and a frozen humanoid controller executing the selected program.',
+    imageCaption: 'Original RoboSkin.ai schematic of InterEvolve\'s reward-program search loop. It is explanatory artwork, not a robot experiment frame.',
+    sourceTitle: 'InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2610.02196',
+    sources: [
+      { title: 'InterEvolve arXiv v1 record', url: 'https://arxiv.org/abs/2610.02196' },
+      { title: 'Full InterEvolve v1 paper', url: 'https://arxiv.org/html/2610.02196v1' },
+      { title: 'Official InterEvolve project page', url: 'https://sirui-xu.github.io/InterEvolve/' },
+    ],
+    technicalFocus: ['humanoid loco-manipulation', 'reward program search', 'test-time adaptation', 'whole-body control'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation search over eight task families · physical G1 demonstrations · project videos public · no code, data or software license verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '9 min read',
+    content: `# InterEvolve searches reward programs instead of retraining a humanoid
+
+University of Illinois Urbana-Champaign researchers released InterEvolve on October 1, 2026. The system adapts a frozen humanoid controller to new contact-rich tasks by changing the reward program that queries it, rather than updating policy weights. An LLM edits program stages, CMA-ES tunes numerical constants, and parallel simulation verifies proposals. The reported macro-average rises from 34.6% for a tuned initial agent program to 86.5% after evolution. [Paper and version record](https://arxiv.org/abs/2610.02196).
+
+## Key takeaways
+
+- An object-aware forward-backward behavioral foundation model turns rewards into latent prompts for one fixed Unitree G1 controller.
+- Full InterEvolve reports 86.5% simulation success, 2.1 GPU-hours and 0.23 million LLM tokens across eight task families under the paper's protocol.
+- Real-robot demonstrations use an RGB-D camera on the robot, but perception, state estimation and policy inference run on an off-board GPU workstation.
+
+## Evolve the interface, not the weights
+
+The motor model starts with a frozen body prior and adds object-aware residual networks trained on retargeted OMOMO and GRAB interactions. The training collection contains 3,866 clips; 50 clips for each of four box-like objects are held out for tracking evaluation. At test time, a reward is projected against a state bank into a latent prompt that elicits behavior from the fixed policy.
+
+A reward program can contain multiple stages, completion conditions, weights and thresholds. DeepSeek-V4-Flash revises the program structure from simulator feedback, while CMA-ES calibrates constants. Each valid proposal receives 192 tuning rollouts and another 192 confirmation rollouts. Verified programs become a text skill library that later tasks can retrieve. [Method, search budget and evaluation details](https://arxiv.org/html/2610.02196v1).
+
+This is adaptation through task specification. It can expose behavior already present in the controller, but it does not manufacture a missing motor primitive. The same distinction appears in contact-rich [Physical AI](/physical-ai): better objectives can coordinate pushing, lifting and carrying only if the underlying control distribution contains usable versions of those motions.
+
+## What improved—and what did not
+
+Across eight large-box task families, the initial agent program with numerical tuning reaches 34.6% success. The full method reaches 86.5%. Removing CMA-ES reduces that result to 51.6%; forcing one stage reduces it to 44.7%; removing targeted edits, multi-scenario testing or scene context produces 68.9%, 68.4% and 78.7%.
+
+The progression is not monotonically successful. Full success moves from 32.2% initially to 75.0%, 76.8%, 73.6% and finally 86.5% over four rounds. The smoother “earned criteria” metric rises every round, but a change that fixes one criterion can temporarily break another when all conditions must hold in the same rollout.
+
+Skill-library reuse is tested on three composite tasks with ten episodes each. The full library completes 8/10 relocate, 4/10 stack and 5/10 carry-place-kick episodes. With no library those counts are 0/10, 0/10 and 1/10. These cells are small and task-specific, but they show that verified task descriptions can be reusable artifacts.
+
+## RoboSkin analysis
+
+The ablations make stage structure and calibration inseparable. A high-level program such as approach, grasp, carry and release is not sufficient if its thresholds do not match the robot and scene. Conversely, numerical tuning cannot repair a single-stage objective that confuses contact acquisition with task completion. This is directly relevant to [humanoid manipulation](/humanoid-robots), where each phase changes which contacts are desirable.
+
+The 86.5% figure is a simulation macro-average, not a hardware success rate. The project page shows autonomous G1 executions, including repeated kicks, but one kick sequence uses motion-capture box pose. Other demonstrations use robot-mounted RGB-D input with off-board computation. The paper does not publish a broad table of repeated physical success counts comparable to the simulation study.
+
+## Limitations and availability
+
+InterEvolve spends inference-time compute on LLM calls, CMA-ES and hundreds of simulator rollouts per candidate. It does not replan reward code in real time during hardware execution. Results are bounded by the pretrained motor repertoire, reward feature bank, available scene measurements and simulator fidelity. Transfer to different objects can require manual program adaptation; unchanged large-box programs show large drops on several objects.
+
+This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot. The official project publishes explanatory material and videos. No official source-code repository, trained controller, dataset download or software license was visible when checked. The manuscript is distributed under arXiv's perpetual non-exclusive license.
+
+## Sources and related resources
+
+- [InterEvolve v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02196)
+- [Full architecture, ablations and deployment details](https://arxiv.org/html/2610.02196v1)
+- [Official InterEvolve project page and videos](https://sirui-xu.github.io/InterEvolve/)
+- [RoboSkin humanoid robotics overview](/humanoid-robots)
+- [RoboSkin robot learning resources](/robot-learning)
+`,
+  },
+  {
     id: 'reactive-humanoid-multi-contact-hand-bracing',
     title: 'Reactive multi-contact planning turns a humanoid hand into a 10 ms brace',
     seoTitle: 'Reactive Humanoid Hand Bracing in About 10 ms',

@@ -1571,11 +1571,21 @@ select:focus-visible {
   aspect-ratio: 16 / 9;
 }
 
+.research-article .article-cover {
+  aspect-ratio: auto;
+}
+
+.research-cover-image {
+  position: relative;
+  aspect-ratio: 16 / 7;
+}
+
 .news-article .article-cover img {
   filter: none;
 }
 
-.news-article figcaption {
+.news-article figcaption,
+.research-article figcaption {
   border-top: 1px solid var(--panel-border);
   padding: 0.85rem 1rem;
   color: var(--text-soft);
@@ -2925,6 +2935,7 @@ select:focus-visible {
   .article-masthead h1 { font-size: clamp(2.9rem, 13vw, 5rem); }
   .article-topics { grid-column: 1; }
   .article-cover { width: 100%; aspect-ratio: 4 / 3; }
+  .research-cover-image { aspect-ratio: 4 / 3; }
   .article-grid { grid-template-columns: 1fr; }
   .article-rail { position: static; }
   .article-related > div { grid-template-columns: 1fr; }
