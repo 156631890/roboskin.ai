@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#d1b4ff" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="38" font-weight="bold">FlashDexRetarget shares learning across motions</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">Many human references · one policy · robot trajectories</text>
+    <rect x="60" y="235" width="295" height="266" rx="18" fill="#2d3442"/>
+    <text x="89" y="278" fill="#d1b4ff" font-size="20">REFERENCE COLLECTION</text>
+    <path d="M105 340 C138 300 172 386 205 340 S270 300 309 344" fill="none" stroke="#9b7acc" stroke-width="7"/>
+    <path d="M105 393 C143 351 170 434 211 389 S272 354 309 398" fill="none" stroke="#d1b4ff" stroke-width="7"/>
+    <path d="M105 446 C145 407 178 484 215 438 S275 411 309 448" fill="none" stroke="#8cc8ff" stroke-width="7"/>
+    <path d="M355 368 H421" stroke="#d1b4ff" stroke-width="6"/>
+    <rect x="421" y="235" width="348" height="266" rx="18" fill="#373148"/>
+    <text x="454" y="278" fill="#d1b4ff" font-size="20">SHARED RL POLICY</text>
+    <circle cx="501" cy="352" r="34" fill="#765e9a"/><circle cx="596" cy="352" r="34" fill="#765e9a"/><circle cx="690" cy="352" r="34" fill="#765e9a"/>
+    <path d="M535 352 H562 M630 352 H656" stroke="#f3f0e9" stroke-width="5"/>
+    <rect x="482" y="414" width="228" height="45" rx="12" fill="#51436a"/><text x="503" y="444" fill="#f3f0e9" font-size="19">future + geometry + contact</text>
+    <path d="M769 368 H835" stroke="#d1b4ff" stroke-width="6"/>
+    <rect x="835" y="235" width="305" height="266" rx="18" fill="#303846"/>
+    <text x="866" y="278" fill="#d1b4ff" font-size="20">ROBOT DATA</text>
+    <path d="M900 429 L909 342 L942 402 L966 318 L996 404 L1025 337 L1052 430" fill="none" stroke="#8cc8ff" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="974" cy="389" r="31" fill="#f0a06f"/>
+    <text x="882" y="470" fill="#d9e8f3" font-size="18">XHand · Sharpa Wave</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">90% success in 29 GPU-hours on the 50-motion XHand test</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.01849v1. Original explanatory schematic.</text>
+  </g>
+</svg>

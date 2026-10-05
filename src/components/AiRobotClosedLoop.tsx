@@ -11,12 +11,12 @@ export default function AiRobotClosedLoop({ stages }: AiRobotClosedLoopProps) {
       <ol className="ai-robot-loop-grid" aria-label="AI to robot action and feedback loop">
         {stages.map((item) => (
           <li key={item.stage} className="ai-robot-stage">
-            <Link href={item.href}>
-              <span>{item.stage}</span>
-              <strong>{item.title}</strong>
+            <div className="ai-robot-stage-content">
+              <span className="ai-robot-stage-label">{item.stage}</span>
+              <Link href={item.href} className="home-card-link"><span className="ai-robot-stage-title">{item.title}</span></Link>
               <p>{item.description}</p>
               <small aria-hidden="true">Open layer →</small>
-            </Link>
+            </div>
           </li>
         ))}
       </ol>

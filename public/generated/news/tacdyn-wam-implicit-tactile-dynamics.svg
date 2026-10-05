@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#69d6cf" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">TacDyn-WAM predicts contact dynamics</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">Separate visual futures · implicit tactile futures · action</text>
+    <rect x="60" y="236" width="278" height="262" rx="18" fill="#23343b"/>
+    <text x="89" y="278" fill="#69d6cf" font-size="20">CURRENT OBSERVATION</text>
+    <rect x="98" y="319" width="88" height="92" rx="12" fill="#36505a"/><circle cx="142" cy="365" r="24" fill="#7ab8c4"/>
+    <rect x="213" y="319" width="88" height="92" rx="12" fill="#493026"/><path d="M230 386 C240 333 266 404 286 346" fill="none" stroke="#f09b78" stroke-width="7"/>
+    <text x="108" y="448" fill="#d8e1e4" font-size="18">vision</text><text x="224" y="448" fill="#d8e1e4" font-size="18">touch</text>
+    <path d="M338 368 H392" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="392" y="236" width="416" height="262" rx="18" fill="#263e44"/>
+    <text x="422" y="278" fill="#69d6cf" font-size="20">HETEROGENEOUS FUTURES</text>
+    <rect x="431" y="316" width="154" height="112" rx="14" fill="#355762"/><text x="455" y="357" fill="#f3f0e9" font-size="21">visual latent</text><path d="M457 392 H558" stroke="#84cbd3" stroke-width="8"/>
+    <rect x="613" y="316" width="158" height="112" rx="14" fill="#533328"/><text x="633" y="357" fill="#f3f0e9" font-size="21">TacRep Δ</text><path d="M637 394 C665 345 701 428 746 365" fill="none" stroke="#f09b78" stroke-width="8"/>
+    <text x="431" y="466" fill="#bbc6cb" font-size="18">joint attention · one forward pass</text>
+    <path d="M808 368 H862" stroke="#69d6cf" stroke-width="6"/>
+    <rect x="862" y="236" width="278" height="262" rx="18" fill="#3f2d26"/>
+    <text x="894" y="278" fill="#ffd8c8" font-size="20">ACTION EXPERT</text>
+    <path d="M934 424 L934 333 L1002 379 L1067 330 L1067 424" fill="none" stroke="#f09b78" stroke-width="9"/>
+    <circle cx="934" cy="424" r="12" fill="#f3f0e9"/><circle cx="1067" cy="424" r="12" fill="#f3f0e9"/>
+    <text x="904" y="463" fill="#ffd8c8" font-size="18">contact-aware control</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">81.5% UniVTAC average · 85/100 pretrained hardware successes</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.00638v1. Original explanatory schematic.</text>
+  </g>
+</svg>

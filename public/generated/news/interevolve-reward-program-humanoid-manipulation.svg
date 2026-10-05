@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#10161c"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="62" fill="#69d6cf" font-size="22" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="137" fill="#f4f1e9" font-size="42" font-weight="700">Evolve the reward, freeze the controller</text>
+    <text x="62" y="181" fill="#aeb8bf" font-size="24">edit stages · tune constants · verify in simulation</text>
+    <rect x="60" y="235" width="292" height="270" rx="18" fill="#263940"/>
+    <text x="88" y="279" fill="#69d6cf" font-size="20">REWARD PROGRAM</text>
+    <text x="91" y="333" fill="#f0c68f" font-size="21">1  approach(box)</text>
+    <text x="91" y="376" fill="#f0c68f" font-size="21">2  contact(face)</text>
+    <text x="91" y="419" fill="#f0c68f" font-size="21">3  push(goal)</text>
+    <text x="91" y="466" fill="#aeb8bf" font-size="18">LLM edits + CMA-ES tunes</text>
+    <path d="M352 370 H425" stroke="#69d6cf" stroke-width="7"/>
+    <rect x="425" y="235" width="330" height="270" rx="18" fill="#29454b"/>
+    <text x="454" y="279" fill="#69d6cf" font-size="20">PARALLEL VERIFIER</text>
+    <rect x="459" y="320" width="70" height="106" rx="10" fill="#3b6168"/><rect x="555" y="320" width="70" height="106" rx="10" fill="#3b6168"/><rect x="651" y="320" width="70" height="106" rx="10" fill="#3b6168"/>
+    <path d="M477 397 L511 349 M573 397 L607 349 M669 397 L703 349" stroke="#f4f1e9" stroke-width="8"/>
+    <text x="470" y="466" fill="#c7d5d9" font-size="18">192 tune + 192 confirm</text>
+    <path d="M755 370 H828" stroke="#69d6cf" stroke-width="7"/>
+    <rect x="828" y="235" width="312" height="270" rx="18" fill="#403027"/>
+    <text x="857" y="279" fill="#ffd7c5" font-size="20">FROZEN HUMANOID</text>
+    <circle cx="982" cy="325" r="28" fill="#f4f1e9"/>
+    <path d="M982 353 V430 M982 378 L913 413 M982 378 L1055 411 M982 430 L940 481 M982 430 L1031 481" stroke="#f4f1e9" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="1060" cy="418" r="18" fill="#e99b76"/>
+    <path d="M60 548 H1140" stroke="#4a555f"/>
+    <text x="62" y="594" fill="#f4f1e9" font-size="23">86.5% simulation macro-average · 2.1 GPU-h · 0.23M tokens</text>
+    <text x="62" y="631" fill="#a6b0b8" font-size="20">Source: arXiv:2610.02196v1. Original explanatory schematic.</text>
+  </g>
+</svg>

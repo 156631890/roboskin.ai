@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ArticleBody from '@/components/ArticleBody';
+import EditorialReview from '@/components/EditorialReview';
 import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { getNewsPostById, newsPosts } from '@/lib/news-data';
@@ -13,6 +14,7 @@ import {
   buildNewsArticleJsonLd,
   buildNewsArticlePageJsonLd,
   canonicalUrl,
+  socialImageUrl,
 } from '@/lib/seo';
 import { getResearchTopicLinks } from '@/lib/topic-graph';
 
@@ -46,7 +48,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
   return {
     title: seo.title,
     description: seo.description,
-    authors: [{ name: post.author }],
+    authors: [{ name: post.author, url: canonicalUrl(site.editorial.path) }],
     category: post.category,
     keywords: post.technicalFocus,
     alternates: {
@@ -58,10 +60,10 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       url,
       type: 'article',
       siteName: 'RoboSkin.ai',
-      images: [{ url: post.image, alt: post.imageAlt ?? `Illustration for ${post.title}` }],
+      images: [{ url: socialImageUrl(post.image), alt: post.imageAlt ?? `Illustration for ${post.title}` }],
       publishedTime: post.date,
       modifiedTime: post.updated,
-      authors: [post.author],
+      authors: [canonicalUrl(site.editorial.path)],
       section: post.category,
       tags: post.technicalFocus,
     },
@@ -69,7 +71,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
       card: 'summary_large_image',
       title: seo.title,
       description: seo.description,
-      images: [post.image],
+      images: [socialImageUrl(post.image)],
     },
   };
 }
@@ -169,7 +171,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
               className="object-cover"
             />
             </div>
-            {post.imageCaption && <figcaption>{post.imageCaption}</figcaption>}
+            <figcaption>{post.imageCaption ?? 'Explanatory illustration for this brief; technical evidence is in the cited sources.'}</figcaption>
           </figure>
 
           <div className="article-grid">
@@ -178,12 +180,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             </div>
 
             <aside className="article-rail">
-              <div className="article-rail-block">
-                <p>Editorial review</p>
-                <div>
-                  Written by {post.author}. This brief summarizes public sources and adds RoboSkin.ai analysis for research orientation; it does not imply product availability, certification, affiliation, or measured performance by RoboSkin.ai.
-                </div>
-              </div>
+              <EditorialReview author={post.author} />
               <div className="article-rail-block">
                 <p>Sources</p>
                 <div>

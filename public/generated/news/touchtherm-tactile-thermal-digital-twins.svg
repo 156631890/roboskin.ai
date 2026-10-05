@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <rect width="1200" height="675" fill="#11161b"/>
+  <g font-family="Arial, sans-serif">
+    <text x="62" y="61" fill="#f0a06f" font-size="23" letter-spacing="3">ROBOSKIN.AI / RESEARCH EXPLAINED</text>
+    <text x="60" y="140" fill="#f3f0e9" font-size="42" font-weight="bold">TouchTherm builds multisensory object twins</text>
+    <text x="62" y="186" fill="#abb5bd" font-size="25">Collision geometry · tactile microtexture · thermal dynamics</text>
+    <rect x="60" y="235" width="300" height="266" rx="18" fill="#23343b"/>
+    <text x="89" y="278" fill="#f0a06f" font-size="20">REAL OBJECT</text>
+    <path d="M137 435 Q108 354 165 306 Q238 268 284 329 Q326 408 258 448 Z" fill="#6f8790" stroke="#d5e1e4" stroke-width="4"/>
+    <path d="M158 367 Q205 325 270 369" fill="none" stroke="#f0a06f" stroke-width="7"/>
+    <path d="M360 368 H414" stroke="#f0a06f" stroke-width="6"/>
+    <rect x="414" y="235" width="370" height="266" rx="18" fill="#293c43"/>
+    <text x="444" y="278" fill="#f0a06f" font-size="20">REGISTERED LAYERS</text>
+    <rect x="452" y="311" width="294" height="44" rx="10" fill="#415b64"/><text x="471" y="340" fill="#f3f0e9" font-size="20">coarse collision mesh</text>
+    <rect x="452" y="374" width="294" height="44" rx="10" fill="#4c3930"/><path d="M470 400 C488 380 507 419 527 390 S565 414 588 389" fill="none" stroke="#f0a06f" stroke-width="5"/><text x="607" y="403" fill="#f3f0e9" font-size="18">micro-height</text>
+    <rect x="452" y="437" width="294" height="44" rx="10" fill="#51352c"/><circle cx="485" cy="459" r="12" fill="#f4c55c"/><circle cx="520" cy="459" r="12" fill="#ed745f"/><circle cx="555" cy="459" r="12" fill="#72b6d4"/><text x="589" y="466" fill="#f3f0e9" font-size="18">thermal field</text>
+    <path d="M784 368 H838" stroke="#f0a06f" stroke-width="6"/>
+    <rect x="838" y="235" width="302" height="266" rx="18" fill="#442f29"/>
+    <text x="869" y="278" fill="#ffd8c2" font-size="20">SIMULATION QUERIES</text>
+    <circle cx="925" cy="361" r="50" fill="#634238"/><path d="M889 369 Q925 329 962 369" fill="none" stroke="#f0a06f" stroke-width="8"/>
+    <path d="M1000 330 C1042 354 1042 406 1000 430" fill="none" stroke="#f4c55c" stroke-width="9"/><path d="M1020 338 C1047 358 1047 400 1020 421" fill="none" stroke="#ed745f" stroke-width="6"/>
+    <text x="869" y="467" fill="#ffd8c2" font-size="18">touch image · temperature(t)</text>
+    <path d="M60 548 H1140" stroke="#49535c"/>
+    <text x="62" y="594" fill="#f3f0e9" font-size="23">20 objects · 0.465°C MAE at 30 s · 34.0% real Top-1</text>
+    <text x="62" y="631" fill="#a6afb7" font-size="20">Source: arXiv:2610.01943v1. Original explanatory schematic.</text>
+  </g>
+</svg>

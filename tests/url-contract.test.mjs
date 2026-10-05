@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 169);
+  assert.equal(protectedUrls.length, 189);
   assert.equal(new Set(protectedUrls).size, protectedUrls.length);
   assert.ok(protectedUrls.every((url) => url.startsWith('https://roboskin.ai/')));
   assert.ok(protectedUrls.every((url) => !url.startsWith('https://www.roboskin.ai/')));
@@ -36,6 +36,14 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/electronic-skin-research-robot-skin-systems-problem'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/eit-pneumatic-hybrid-robot-skin-force-map-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/twisted-yarn-textile-capacitive-robot-skin-2026'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/reactive-humanoid-multi-contact-hand-bracing'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/continual-6dof-grasp-synthesis-memory'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/jfm-rigid-soft-finger-jacobian-flow'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/skelewam-sparse-skeleton-world-action-model'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/activewam-active-vision-world-action-model'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/radmcs-underwater-haptic-diver-guidance'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/humanoidtoolbench-tool-selection-mobile-execution'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/interevolve-reward-program-humanoid-manipulation'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/eu-roboskin-project'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026'));
@@ -77,6 +85,18 @@ test('the audited production URL inventory is protected', async () => {
     '/news/uvta-human-tactile-demonstrations-dexterous-manipulation',
     '/news/tacgoosebumps-shear-encoding-tactile-sensor',
     '/news/dextag-tactile-guided-dexterous-retargeting',
+    '/news/tarl-tactile-reward-learning-demonstrations',
+    '/news/haco-haptic-active-compliance-dexterous-manipulation',
+    '/news/single-element-tackiness-tactile-sensor',
+    '/news/wrench-act-direct-wrench-control-manipulation',
+    '/news/tacex-tactile-curiosity-robot-exploration',
+    '/news/occludex-visuo-tactile-self-occlusion-dexterity',
+    '/news/membrane-coupled-delta-array-micro-object-manipulation',
+    '/news/funco-grasp-cross-embodiment-dexterous-grasping',
+    '/news/tacdyn-wam-implicit-tactile-dynamics',
+    '/news/touchtherm-tactile-thermal-digital-twins',
+    '/news/ditto-x-reverse-dexterous-teleoperation',
+    '/news/flashdexretarget-multi-motion-dexterous-data',
     '/news/outcome-sensitive-impact-aware-dexterous-catching',
     '/news/body-grounded-replanning-physical-manipulation',
     '/news/blind-grasp-reflex-proprioceptive-dexterous-hand',
@@ -146,12 +166,12 @@ test('utility and excluded legacy pages stay out of the index contract', async (
     read('config/noindex-urls.json').then(JSON.parse),
   ]);
 
-  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation', '/rss']) {
+  for (const pathname of ['/case-studies', '/comparison', '/downloads', '/implementation', '/rss', '/world-models/tracker']) {
     assert.match(seo, new RegExp(`'${pathname}': \\{[\\s\\S]*?index: false`));
     assert.ok(!protectedUrls.includes(`https://roboskin.ai${pathname}`));
     assert.ok(noindexUrls.includes(`https://roboskin.ai${pathname}`));
   }
-  assert.equal(noindexUrls.length, 5);
+  assert.equal(noindexUrls.length, 6);
 });
 
 test('the two production-only news routes remain in local content and sitemap generation', async () => {

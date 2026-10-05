@@ -81,6 +81,22 @@ export default function AboutPage() {
 
       <section className="pb-20">
         <div className="container-shell">
+          <div className="signal-panel p-8 md:p-10">
+            <p className="eyebrow">Work you can inspect</p>
+            <h2 className="mt-4 text-3xl font-bold text-white">Check the evidence behind the editorial work</h2>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-soft">The useful evidence is in the records, source links and disclosed limits. A paper summary is editorial work; it does not establish that RoboSkin.ai ran the authors&apos; code or tested their hardware.</p>
+            <ul className="mt-6 grid gap-5 md:grid-cols-3">
+              <li><Link href="/research-index" className="font-semibold text-accent underline underline-offset-4">Source-linked research index</Link><p className="mt-2 text-sm leading-relaxed text-soft">Inspect the cited research, editorial normalization, CSV and JSON records, and versioned release.</p></li>
+              <li><Link href="/datasets#availability-analysis" className="font-semibold text-accent underline underline-offset-4">Dataset availability audit</Link><p className="mt-2 text-sm leading-relaxed text-soft">Separate provider claims from inspected public manifests, file licenses, access dates and remaining reproduction gaps.</p></li>
+              <li><Link href="/benchmarks#experiment-evidence" className="font-semibold text-accent underline underline-offset-4">Experiment evidence records</Link><p className="mt-2 text-sm leading-relaxed text-soft">Trace source-reported trials, success definitions, hardware and conditions without treating different protocols as one leaderboard.</p></li>
+            </ul>
+            <p className="mt-6 text-sm text-soft"><Link href="/editorial-policy#evidence-method" className="text-accent underline underline-offset-4">Read the evidence method and its limits</Link>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need a practical next step?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">

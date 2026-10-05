@@ -33,6 +33,1385 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'activewam-active-vision-world-action-model',
+    title: 'ActiveWAM makes camera motion part of the robot action',
+    seoTitle: 'ActiveWAM Unifies Camera and Bimanual Robot Actions',
+    seoDescription: 'ActiveWAM jointly controls a pan-tilt camera and two robot arms. Review RoboTwin-AV, 60 physical trials, latency and release limits.',
+    excerpt: 'ActiveWAM treats where a robot looks as part of the same action sequence as bimanual manipulation, while using transformed video histories only during training.',
+    category: 'Active robot perception',
+    image: '/generated/news/activewam-active-vision-world-action-model.png',
+    imageAlt: 'Diagram showing camera history and task evidence flowing into a world-action model that jointly commands a pan-tilt head and two robot arms.',
+    imageCaption: 'Original RoboSkin.ai schematic of ActiveWAM\'s retain-and-acquire loop. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'ActiveWAM: Evidence-Aware Active Vision for World-Action Models',
+    sourceUrl: 'https://arxiv.org/abs/2610.01698',
+    sources: [
+      { title: 'ActiveWAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.01698' },
+      { title: 'Full ActiveWAM v1 paper', url: 'https://arxiv.org/html/2610.01698v1' },
+      { title: 'Official ActiveWAM project page', url: 'https://icr-lab.github.io/ActiveWAM/' },
+    ],
+    technicalFocus: ['active vision', 'world-action model', 'bimanual manipulation', 'camera control'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 50-task simulation benchmark · 300 physical trials across five methods · official code marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '8 min read',
+    content: `# ActiveWAM makes camera motion part of the robot action
+
+Beijing Institute of Technology researchers released ActiveWAM on October 1, 2026, a world-action model that predicts bimanual motion and a two-axis pan-tilt camera trajectory together. The central engineering question is simple: when a robot can move its eyes, can it learn where to look without losing evidence it saw a moment ago? ActiveWAM answers with a finite video history, training-time history transformations and one 16-dimensional arm-and-head action space. [Paper and version record](https://arxiv.org/abs/2610.01698).
+
+## Key takeaways
+
+- RoboTwin-AV extends all 50 RoboTwin 2.0 tasks with executable camera control and evaluates 100 episodes per task, seed and condition across three seeds.
+- Under combined appearance and initial-camera-pose shifts, ActiveWAM reports 53.3% success versus 33.3% for Fast-WAM, a 20.0 percentage-point difference.
+- On three physical kitchen sequences, ActiveWAM completes 30 of 60 trials; the system still uses prescribed stage switching and a fixed-focal-length camera.
+
+## Retain old evidence, acquire the next view
+
+The policy receives nine 240×320 RGB frames, robot state, camera pose, calibration and acquisition metadata. It produces two six-degree-of-freedom arm increments, two gripper commands and two camera increments. A stay command lets the camera hold a useful view rather than move continuously.
+
+During training, a frozen Wan2.2-TI2V-5B video prior partially transforms recorded histories. Task-weighted feature preservation and temporal correspondence losses constrain the transformation so important cues and visible motion remain. The original action continuation is kept as the target. At deployment, the system uses raw camera history and does not decode a predicted future video. In other words, the video model is a co-training instrument, not a runtime visual simulator. [Method and deployment design](https://arxiv.org/html/2610.01698v1).
+
+The authors also introduce RoboTwin-AV. Its gaze collector can use simulator-only masks and depth to create active-vision demonstrations, but those privileged inputs are withheld at evaluation. Each of the 50 tasks uses 100 successful training trajectories. Test failures and timeouts remain in the 100-episode evaluation sets.
+
+## Results under the reported protocol
+
+ActiveWAM reaches 80.3% in the clean RoboTwin-AV condition, 60.7% under appearance shifts, 65.0% under initial head-pose shifts and 53.3% when both shifts are applied. Fast-WAM scores 76.3%, 41.7%, 56.0% and 33.3%, respectively. Removing history inversion reduces the compound result to 41.7%, an 11.6-point gap; removing the full history reduces it to 34.0%.
+
+The physical setup is an AirbotPlay fixed-base dual-arm platform with a RealSense D455 on a two-DoF head. Three kitchen sequences each receive 20 attempts per method: cucumber slicing, egg frying and ingredient mixing. ActiveWAM completes 7, 11 and 12 full sequences, or 30 of 60. Fast-WAM completes 1, 6 and 7, or 14 of 60. That is a 26.7-point absolute difference, but it does not represent an unattended end-to-end kitchen system: policies are separately trained for segments, transitions are prescribed, and human inter-segment actions are outside the evaluation.
+
+## RoboSkin analysis
+
+ActiveWAM is not a tactile system. Its value for [robot world models](/robot-world-models) is the treatment of sensing motion as an action with physical consequences. A pan-tilt camera can reacquire an occluded target, but leaving a useful view also creates a memory problem. This retain-and-acquire framing is relevant to [visuo-tactile manipulation](/visuo-tactile), where cameras and touch sensors likewise reveal different parts of a contact state over time.
+
+The failure audit is as useful as the headline result. Of 30 failed ActiveWAM physical trials, 12 are labeled manipulation errors, 10 premature terminations, five camera field-of-view failures and three hardware issues. Moving the camera does not remove contact-control or termination problems; it changes which failures remain visible.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai did not reproduce the experiments. The physical evaluation uses one fixed-base platform, one camera arrangement and three composed kitchen sequences. Inference is reported at about 165 ms on an RTX 4090; action chunking yields roughly 15 Hz effective updates while interpolation maintains 25 Hz commands. The authors report only a short history window and no automatic high-level stage transition.
+
+The official project page was available when checked, but its code link was marked “Coming Soon.” RoboTwin-AV materials are linked from the project, while ActiveWAM training code, checkpoints and a software license were not verified as released. The arXiv manuscript uses arXiv's perpetual non-exclusive distribution license.
+
+## Sources and related resources
+
+- [ActiveWAM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01698)
+- [Full method, benchmarks and physical protocol](https://arxiv.org/html/2610.01698v1)
+- [Official ActiveWAM project page](https://icr-lab.github.io/ActiveWAM/)
+- [RoboSkin guide to visuo-tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+`,
+  },
+  {
+    id: 'radmcs-underwater-haptic-diver-guidance',
+    title: 'RADMCS steers scuba divers with low-thrust haptic cues',
+    seoTitle: 'RADMCS Tests Thruster Haptics for Scuba Divers',
+    seoDescription: 'RADMCS mounts two thrusters on a scuba tank to guide divers. Review the eight-person study, 10% threshold and distance-estimation failures.',
+    excerpt: 'A tank-mounted wearable robot uses two underwater thrusters as directional haptic cues, but its wall-following behavior depends on a distance estimate that failed in one documented run.',
+    category: 'Wearable haptics',
+    image: '/generated/news/radmcs-underwater-haptic-diver-guidance.png',
+    imageAlt: 'Diagram showing two tank-mounted underwater thrusters turning a diver toward or away from a wall according to camera distance error.',
+    imageCaption: 'Original RoboSkin.ai schematic of the RADMCS distance-to-thrust feedback loop. It is explanatory artwork, not an experiment photograph.',
+    sourceTitle: 'Towards Physical Underwater Robotic Assistance for Scuba Diver Movement in Confined Spaces',
+    sourceUrl: 'https://arxiv.org/abs/2610.01906',
+    sources: [
+      { title: 'RADMCS arXiv v1 record', url: 'https://arxiv.org/abs/2610.01906' },
+      { title: 'Full RADMCS v1 paper', url: 'https://arxiv.org/html/2610.01906v1' },
+    ],
+    technicalFocus: ['underwater haptics', 'wearable robotics', 'force feedback', 'human-robot interaction'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · IRB in-water study with eight participants across different subsets · CC BY 4.0 manuscript · no code or data release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '8 min read',
+    content: `# RADMCS steers scuba divers with low-thrust haptic cues
+
+University of Minnesota researchers Demetrious T. Kutzke and Junaed Sattar released RADMCS on October 1, 2026, a wearable underwater robot that straps to a scuba tank and uses two thrusters to cue a diver to turn toward or away from a surface. An IRB-approved study involved eight participants across several pool and ocean tests. The most stable quantitative finding is perceptual: approximately 10% of maximum thrust was enough to produce detectable motion in the tested configurations. [Paper and version record](https://arxiv.org/abs/2610.01906).
+
+## Key takeaways
+
+- RADMCS is a haptic navigation aid, not a propulsive exoskeleton: its thrusters perturb the diver so the diver responds with their own motion.
+- Pool threshold tests use four participants split across three thruster configurations; ocean threshold tests use two participants in two configurations.
+- A seven-participant pool wall-following study exposes a critical dependency: when visual distance estimation is lost, the last thrust command can persist.
+
+## From camera distance to physical cue
+
+RADMCS carries two Blue Robotics T200 thrusters in either longitudinal or transverse arrangements with 225 mm or 325 mm spacing. A camera estimates distance to a target surface. After exponential filtering and a dead zone, the controller maps distance error to differential thruster commands. The tested setup uses a practical sensing range of 1.5 m and clips larger errors.
+
+The mechanism deliberately closes the loop through a person. A positive or negative thrust moment asks the diver to yaw; it does not autonomously translate the diver to a coordinate. That distinction matters for [haptic interfaces](/physical-ai-touch): the relevant output is a perceivable, directional body cue, not robot trajectory accuracy.
+
+## What the participant study shows
+
+Eight divers participated overall, but not every person completed every test. In the pool, two participants tested the 225 mm longitudinal and transverse layouts, while two different participants tested the 325 mm transverse layout. Facility time prevented collection for the 325 mm longitudinal configuration. Participants were neutrally buoyant at 1.8 m depth and reported when they first perceived the force during ascending and descending PWM sweeps.
+
+Open-water threshold testing used two participants, 5 m from shore at 1.5 m depth, with both 325 mm layouts. Despite 0.25–0.5 m wave-height variation, the reported perceptible level again clustered around 10% of maximum thrust. The authors explicitly leave two explanations unresolved: divers may have confused environmental motion with robot feedback, or the device may couple strongly enough that directional cues remain distinct.
+
+The closed-water distance-maintaining test used seven participants wearing blackout masks beside a 7 m tarp carrying AprilGrid targets at 1 m intervals. In one illustrated run, participant P2 completed the course in 89.89 s while responding to left and right cues. In the P8 example, distance estimates disappeared at about 12 s and never recovered; the controller retained a high left-turn command until the 43.28 s run ended. The paper therefore supports guided movement when the estimate is stable, not robust autonomous wall following under arbitrary underwater vision.
+
+## RoboSkin analysis
+
+RADMCS is a useful counterexample to the idea that more force always makes a haptic cue better. A low, detectable threshold can conserve power and reduce intrusive motion, but perception reliability becomes the dominant safety constraint. The controller needs an explicit stale-signal policy before the device can be treated as a dependable [wearable robotics](/applications) platform.
+
+The sample structure also matters. “Eight participants” is the union of the study, not the denominator for every result. Threshold findings, wall-following examples and a form-fit test come from different subsets. Reporting those boundaries keeps a promising prototype from sounding like a validated navigation product.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, not an independently validated dive system, and RoboSkin.ai did not test it. The paper reports a qualitative ocean form-fit trial with one participant at up to 80% thrust. The apparatus shifted, moved regulator hoses forward and created a painful pinch point near the participant's head. Those observations are design constraints, not cosmetic issues.
+
+Distance sensing used structured AprilGrid targets rather than natural reef geometry for the pool control study. The tarp warped in circulation currents, autofocus affected measurements, and one documented run preserved an unsafe stale command after tracking loss. The manuscript is available under CC BY 4.0. No official code repository, CAD package, dataset or software license was verified.
+
+## Sources and related resources
+
+- [RADMCS v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01906)
+- [Full system and human-study protocol](https://arxiv.org/html/2610.01906v1)
+- [RoboSkin overview of force and touch in Physical AI](/physical-ai-touch)
+- [RoboSkin robot-safety resources](/robot-safety)
+`,
+  },
+  {
+    id: 'humanoidtoolbench-tool-selection-mobile-execution',
+    title: 'HumanoidToolBench separates tool choice from task completion',
+    seoTitle: 'HumanoidToolBench Tests Tool Choice and Execution',
+    seoDescription: 'HumanoidToolBench provides 18 Unitree G1 tasks, 55 tools and 3,094 demonstrations. Review contact funnels, real trials and release terms.',
+    excerpt: 'HumanoidToolBench tracks contact, correct selection, lifting and final success across stationary and mobile Unitree G1 tool-use tasks instead of collapsing them into one score.',
+    category: 'Humanoid benchmarks',
+    image: '/generated/news/humanoidtoolbench-tool-selection-mobile-execution.png',
+    imageAlt: 'Diagram showing a humanoid progressing through candidate contact, correct tool selection, tool lift, target contact and task success.',
+    imageCaption: 'Original RoboSkin.ai schematic of the HumanoidToolBench event funnel. It is explanatory artwork, not a benchmark frame.',
+    sourceTitle: 'HumanoidToolBench: Benchmarking Humanoid Tool Use from Selection to Mobile Execution',
+    sourceUrl: 'https://arxiv.org/abs/2610.02089',
+    sources: [
+      { title: 'HumanoidToolBench arXiv v1 record', url: 'https://arxiv.org/abs/2610.02089' },
+      { title: 'Full HumanoidToolBench v1 paper', url: 'https://arxiv.org/html/2610.02089v1' },
+      { title: 'Official HumanoidToolBench project', url: 'https://snu-pi.github.io/HumanoidToolBench/' },
+      { title: 'Official evaluation toolkit', url: 'https://github.com/SNU-PI/HumanoidToolBench' },
+    ],
+    technicalFocus: ['humanoid tool use', 'robot benchmark', 'mobile manipulation', 'demonstration dataset'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 18-task simulation benchmark · 40 reported real-robot test trials per policy · MIT evaluation code · CC BY-NC 4.0 dataset',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '9 min read',
+    content: `# HumanoidToolBench separates tool choice from task completion
+
+Researchers from Seoul National University, the University of Massachusetts Amherst and Google Research released HumanoidToolBench on October 1, 2026. The benchmark asks a Unitree G1 to infer which tool can accomplish a goal, grasp it and use it, sometimes while moving along a table. Its 18 tasks, 55 tool assets and 3,094-trajectory ToolBook dataset make the hand-to-object chain measurable instead of treating “tool use” as a single opaque success bit. [Paper and version record](https://arxiv.org/abs/2610.02089).
+
+## Key takeaways
+
+- Three scenarios—BallMove, BallRetrieve and IceBreak—combine with three execution levels and standard or decoy tool sets to form 18 conditions.
+- ToolBook contains 3,003 simulation trajectories and 91 curated real-robot trajectories collected by eight experienced teleoperators.
+- The released evaluation toolkit is MIT-licensed, while ToolBook is CC BY-NC 4.0 and third-party assets retain their own terms.
+
+## An evaluation funnel for physical tool use
+
+Each scene contains one suitable tool, two irrelevant objects and, in decoy mode, a misleading tool that differs in task-relevant length, shape, mass or compliance. Instructions describe the goal but do not name the tool. Level L0 ends when the correct tool is lifted 8 cm. L1 adds stationary execution. L2 moves the task target so the robot must locomote while carrying the tool.
+
+The environment records five events: any candidate contact, correct first contact, correct-tool lift, tool-target contact and final success. That funnel separates visual selection from grasping and contact execution. “Correct first contact” is still a proxy—it does not prove semantic reasoning—but it shows where a policy begins to diverge from the intended sequence.
+
+ToolBook is built from 1,959 L1/L2 simulation attempts that yielded 1,200 successful demonstrations. The authors cut 1,803 L0 prefixes from attempts in which the correct tool was lifted, including 614 attempts that later failed. Adding 91 real L1 demonstrations gives exactly 3,094 trajectories. [Dataset construction and protocol](https://arxiv.org/html/2610.02089v1).
+
+## What the scores reveal
+
+Simulation evaluation uses one trained policy instance and 100 episodes per task. FastWAM's standard-mode L1 success is 76%, 57% and 86% across the three scenarios, but its mobile L2 results fall to 9%, 20% and 69%. In decoy mode, the corresponding L1 scores are 75%, 45% and 82%; L2 scores are 8%, 11% and 61%. The benchmark changes both target layout and locomotion demand at L2, so the drop cannot be attributed to walking alone.
+
+Averaged across scenarios and L1/L2, FastWAM contacts some candidate in 99.8% of standard episodes and makes the correct tool its first contact in 87.7%, yet completes only 52.8%. Under decoys those values are 100%, 74.7% and 47.0%. Contact is easy; preserving the right grasp and applying the tool is the larger gap.
+
+Real evaluation covers L1 BallMove and BallRetrieve, each in two modes, with ten trials per cell. GR00T N1.7 succeeds in 18 of 40 trials; FastWAM also succeeds in 18 of 40; ACT succeeds in four. These are small platform-specific trials, not estimates of general humanoid tool competence.
+
+## RoboSkin analysis
+
+The strongest contribution is the intermediate event record. It lets researchers connect [robot-hand contact](/robot-hands) to final behavior: a policy may visually select the right object but fail at lift, maintain contact yet miss the target, or complete a stationary task and fail once whole-body motion is introduced.
+
+Focused probes also warn against over-interpreting success. GR00T N1.7's correct first-contact rate falls from 85% to 74% on unseen BallMove tools and from 59% to 36% on BallRetrieve. In one fixed IceBreak scene, an unrelated instruction still triggers task execution in 84 of 100 rollouts, compared with 77 under the intended instruction. That is evidence of scene-policy shortcuts, not language-grounded tool reasoning.
+
+## Availability and replication boundaries
+
+The official repository was live when checked. It includes the evaluation environment, recording validator, ACT and Diffusion Policy checkpoints and documented 100-episode protocol. The maintainers estimate about two hours and 1 GB of outputs for one condition on one GPU, roughly a day and a half and 15 GB for all 18 conditions sequentially. Training pipelines are not included.
+
+The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, project and repository but did not run the GPU benchmark or physical robot tests. Tool assets, third-party models and controller components carry separate terms; users should not infer that the dataset's non-commercial license covers every dependency.
+
+## Sources and related resources
+
+- [HumanoidToolBench v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02089)
+- [Full task, dataset and evaluation paper](https://arxiv.org/html/2610.02089v1)
+- [Official project and result tables](https://snu-pi.github.io/HumanoidToolBench/)
+- [MIT-licensed evaluation toolkit and replication requirements](https://github.com/SNU-PI/HumanoidToolBench)
+- [RoboSkin robotics dataset directory](/robotics-datasets)
+- [RoboSkin benchmark directory](/benchmarks)
+`,
+  },
+  {
+    id: 'interevolve-reward-program-humanoid-manipulation',
+    title: 'InterEvolve searches reward programs instead of retraining a humanoid',
+    seoTitle: 'InterEvolve Searches Humanoid Reward Programs at Test Time',
+    seoDescription: 'InterEvolve edits and tunes staged reward programs for a frozen humanoid controller. Review 86.5% simulation results, cost and hardware limits.',
+    excerpt: 'InterEvolve uses an LLM, numerical tuning and parallel simulation to revise staged reward programs while keeping the Unitree G1 control policy fixed.',
+    category: 'Humanoid loco-manipulation',
+    image: '/generated/news/interevolve-reward-program-humanoid-manipulation.png',
+    imageAlt: 'Diagram showing an LLM editing staged reward code, simulation verification and a frozen humanoid controller executing the selected program.',
+    imageCaption: 'Original RoboSkin.ai schematic of InterEvolve\'s reward-program search loop. It is explanatory artwork, not a robot experiment frame.',
+    sourceTitle: 'InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2610.02196',
+    sources: [
+      { title: 'InterEvolve arXiv v1 record', url: 'https://arxiv.org/abs/2610.02196' },
+      { title: 'Full InterEvolve v1 paper', url: 'https://arxiv.org/html/2610.02196v1' },
+      { title: 'Official InterEvolve project page', url: 'https://sirui-xu.github.io/InterEvolve/' },
+    ],
+    technicalFocus: ['humanoid loco-manipulation', 'reward program search', 'test-time adaptation', 'whole-body control'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation search over eight task families · physical G1 demonstrations · project videos public · no code, data or software license verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-04',
+    updated: '2026-10-04',
+    readTime: '9 min read',
+    content: `# InterEvolve searches reward programs instead of retraining a humanoid
+
+University of Illinois Urbana-Champaign researchers released InterEvolve on October 1, 2026. The system adapts a frozen humanoid controller to new contact-rich tasks by changing the reward program that queries it, rather than updating policy weights. An LLM edits program stages, CMA-ES tunes numerical constants, and parallel simulation verifies proposals. The reported macro-average rises from 34.6% for a tuned initial agent program to 86.5% after evolution. [Paper and version record](https://arxiv.org/abs/2610.02196).
+
+## Key takeaways
+
+- An object-aware forward-backward behavioral foundation model turns rewards into latent prompts for one fixed Unitree G1 controller.
+- Full InterEvolve reports 86.5% simulation success, 2.1 GPU-hours and 0.23 million LLM tokens across eight task families under the paper's protocol.
+- Real-robot demonstrations use an RGB-D camera on the robot, but perception, state estimation and policy inference run on an off-board GPU workstation.
+
+## Evolve the interface, not the weights
+
+The motor model starts with a frozen body prior and adds object-aware residual networks trained on retargeted OMOMO and GRAB interactions. The training collection contains 3,866 clips; 50 clips for each of four box-like objects are held out for tracking evaluation. At test time, a reward is projected against a state bank into a latent prompt that elicits behavior from the fixed policy.
+
+A reward program can contain multiple stages, completion conditions, weights and thresholds. DeepSeek-V4-Flash revises the program structure from simulator feedback, while CMA-ES calibrates constants. Each valid proposal receives 192 tuning rollouts and another 192 confirmation rollouts. Verified programs become a text skill library that later tasks can retrieve. [Method, search budget and evaluation details](https://arxiv.org/html/2610.02196v1).
+
+This is adaptation through task specification. It can expose behavior already present in the controller, but it does not manufacture a missing motor primitive. The same distinction appears in contact-rich [Physical AI](/physical-ai): better objectives can coordinate pushing, lifting and carrying only if the underlying control distribution contains usable versions of those motions.
+
+## What improved—and what did not
+
+Across eight large-box task families, the initial agent program with numerical tuning reaches 34.6% success. The full method reaches 86.5%. Removing CMA-ES reduces that result to 51.6%; forcing one stage reduces it to 44.7%; removing targeted edits, multi-scenario testing or scene context produces 68.9%, 68.4% and 78.7%.
+
+The progression is not monotonically successful. Full success moves from 32.2% initially to 75.0%, 76.8%, 73.6% and finally 86.5% over four rounds. The smoother “earned criteria” metric rises every round, but a change that fixes one criterion can temporarily break another when all conditions must hold in the same rollout.
+
+Skill-library reuse is tested on three composite tasks with ten episodes each. The full library completes 8/10 relocate, 4/10 stack and 5/10 carry-place-kick episodes. With no library those counts are 0/10, 0/10 and 1/10. These cells are small and task-specific, but they show that verified task descriptions can be reusable artifacts.
+
+## RoboSkin analysis
+
+The ablations make stage structure and calibration inseparable. A high-level program such as approach, grasp, carry and release is not sufficient if its thresholds do not match the robot and scene. Conversely, numerical tuning cannot repair a single-stage objective that confuses contact acquisition with task completion. This is directly relevant to [humanoid manipulation](/humanoid-robots), where each phase changes which contacts are desirable.
+
+The 86.5% figure is a simulation macro-average, not a hardware success rate. The project page shows autonomous G1 executions, including repeated kicks, but one kick sequence uses motion-capture box pose. Other demonstrations use robot-mounted RGB-D input with off-board computation. The paper does not publish a broad table of repeated physical success counts comparable to the simulation study.
+
+## Limitations and availability
+
+InterEvolve spends inference-time compute on LLM calls, CMA-ES and hundreds of simulator rollouts per candidate. It does not replan reward code in real time during hardware execution. Results are bounded by the pretrained motor repertoire, reward feature bank, available scene measurements and simulator fidelity. Transfer to different objects can require manual program adaptation; unchanged large-box programs show large drops on several objects.
+
+This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot. The official project publishes explanatory material and videos. No official source-code repository, trained controller, dataset download or software license was visible when checked. The manuscript is distributed under arXiv's perpetual non-exclusive license.
+
+## Sources and related resources
+
+- [InterEvolve v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02196)
+- [Full architecture, ablations and deployment details](https://arxiv.org/html/2610.02196v1)
+- [Official InterEvolve project page and videos](https://sirui-xu.github.io/InterEvolve/)
+- [RoboSkin humanoid robotics overview](/humanoid-robots)
+- [RoboSkin robot learning resources](/robot-learning)
+`,
+  },
+  {
+    id: 'reactive-humanoid-multi-contact-hand-bracing',
+    title: 'Reactive multi-contact planning turns a humanoid hand into a 10 ms brace',
+    seoTitle: 'Reactive Humanoid Hand Bracing in About 10 ms',
+    seoDescription: 'A learned stability model selects humanoid hand braces in about 10 ms. Review the impulse tests, 32 hardware pushes and contact-model limits.',
+    excerpt: 'A two-stage planner previews reachable hand contacts with a learned post-impact stability model, letting a humanoid brace against nearby surfaces before foot-only recovery fails.',
+    category: 'Humanoid contact control',
+    image: '/generated/news/reactive-humanoid-multi-contact-hand-bracing.png',
+    imageAlt: 'Diagram showing a pushed humanoid comparing nearby wall contacts and selecting a hand brace with the largest recovery region.',
+    imageCaption: 'Original RoboSkin.ai schematic of learned-stability hand-contact planning. It is explanatory artwork, not an experimental photograph.',
+    sourceTitle: 'Reactive Humanoid Multi-Contact Using Learned Stability Models',
+    sourceUrl: 'https://arxiv.org/abs/2610.00823',
+    sources: [
+      { title: 'Reactive Multi-Contact arXiv v1 record', url: 'https://arxiv.org/abs/2610.00823' },
+      { title: 'Full Reactive Multi-Contact v1 paper', url: 'https://arxiv.org/html/2610.00823v1' },
+    ],
+    technicalFocus: ['humanoid hand contacts', 'push recovery', 'learned stability model', 'reactive bracing'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation impulse search · 32 alternating hardware pushes · no code or dataset release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# Reactive multi-contact planning turns a humanoid hand into a 10 ms brace
+
+Researchers at the Florida Institute for Human and Machine Cognition and the University of West Florida released a reactive humanoid contact planner on September 30, 2026. Instead of asking the feet to absorb every push, it samples reachable hand contacts on nearby surfaces and estimates which brace will provide the most post-impact control. The learned stability approximation reduces a 388 ms numerical planning path to 9.7 ms in the authors’ benchmark. [Paper and version record](https://arxiv.org/abs/2610.00823).
+
+## Key takeaways
+
+- The planner first chooses a surface region, then a point inside that region, using predicted Center of Pressure control authority after hand impact.
+- Three simulation scenarios show average impulse resilience gains of 89% over foot-only recovery and 17% over choosing the closest reachable brace.
+- Hardware evidence covers 32 alternating pushes: two standing protocols with ten pushes each and one walking protocol with twelve pushes.
+
+## From reachable wall to useful brace
+
+The problem is not merely finding a wall. A reachable point can place the arm in a configuration with little capacity to redirect the whole-body load. The system therefore rolls a reduced centroidal model through pre-impact, impact and post-impact phases. Candidate points are scored by the size and direction of the feasible post-impact Center of Pressure region.
+
+Computing that region from inverse kinematics and linear programs for every candidate would be too slow for a reflex. The paper trains separate neural networks for five foot-and-hand contact permutations. Their inputs include planar contact geometry, center-of-mass position and robot posture summaries; their 18-dimensional output approximates the feasible region. Per-rollout region computation falls from 0.65 ms to 0.13 ms and avoids a reported 13 ms inverse-kinematics solve. With 14 rollouts per side, the full comparison is 9.7 ms for the learned path versus 388 ms for numerical optimization. [Model and planner details](https://arxiv.org/html/2610.00823v1).
+
+## Results under the reported conditions
+
+In simulation, maximum sustainable impulses are reported for standing, sideways walking and backward walking. Foot-only recovery handles 15.6, 17.7 and 23.0 N·s. The closest-contact baseline reaches 25.8, 36.4 and 26.6 N·s, while optimized bracing reaches 29.4, 42.3 and 32.1 N·s. Recomputing each relative gain gives an average 89.0% over no brace and 16.9% over the naive brace, consistent with the rounded abstract values.
+
+The hardware study alternates baseline and optimized trials rather than measuring a calibrated external impulse. The authors use capture-point-error slope at push time as a proxy and report less than 5% variation between the paired datasets. In the ten-push multi-surface standing test, choosing a front wall instead of the nearer slanted surface reduces average recovery time by 57%. In a second ten-push standing test, shifting one hand about 12 cm along a wall reduces it by 29%. Averaging those two reported reductions produces the abstract’s 43% standing figure. In twelve walking pushes, hand bracing reaches high stability in 316 ms versus 384 ms without hand contact, an 18% reduction.
+
+## RoboSkin analysis
+
+The engineering contribution is a contact-selection layer between perception and whole-body control. It does not add tactile skin, but it makes surface contact an active recovery resource: geometry decides where contact is possible, and the stability model estimates what that contact can do. That makes the work relevant to [humanoid robot contact design](/humanoid-robots) and to teams connecting [Physical AI touch](/physical-ai-touch) with [robot safety](/robot-safety).
+
+The benchmark also shows why “nearest reachable” is a weak policy. In the sideways simulation there is only one surface, yet moving the contact by 14.9 cm improves impulse resilience by 16%. Contact placement, not just contact availability, changes the recovery envelope.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the results. The learned models receive only partial information about the full robot configuration; reported feasible-region RMSE ranges from 0.89 to 2.62 cm across contact modes. The controller relies on reduced-order dynamics, does not directly measure hardware push magnitude, and observed only about 55 ms of hand contact in the walking test. The paper identifies contact-detection latency and unmodeled arm momentum after release as open issues.
+
+The arXiv manuscript is available under CC BY 4.0. No official project page, implementation repository, training data, model weights or software license was verified, so the publication should not be read as a reproducible software release.
+
+## Sources and related resources
+
+- [Reactive Humanoid Multi-Contact v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00823)
+- [Full planning, simulation and hardware protocol](https://arxiv.org/html/2610.00823v1)
+- [RoboSkin guide to tactile feedback for Physical AI](/guides/tactile-feedback-for-physical-ai)
+`,
+  },
+  {
+    id: 'continual-6dof-grasp-synthesis-memory',
+    title: 'Continual 6-DoF grasping learns from outcomes without weight updates',
+    seoTitle: 'Continual 6-DoF Grasping Uses Outcome Memory',
+    seoDescription: 'A 6-DoF grasp system updates scores from outcomes and recalls demonstrations without weight updates. Review 1,500+ trials, gains and release limits.',
+    excerpt: 'A memory-based grasp pipeline turns successes, failures and optional demonstrations into immediate proposal and score changes instead of repeatedly fine-tuning a network.',
+    category: 'Adaptive robot grasping',
+    image: '/generated/news/continual-6dof-grasp-synthesis-memory.png',
+    imageAlt: 'Diagram showing grasp attempts feeding outcome memory and demonstration memory before the robot selects a new six-degree-of-freedom grasp.',
+    imageCaption: 'Original RoboSkin.ai schematic of outcome-scored and demonstration-recalled grasp adaptation. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Continual Learning for 6-DoF Grasp Synthesis via Experience and Demonstrations',
+    sourceUrl: 'https://arxiv.org/abs/2610.01301',
+    sources: [
+      { title: 'Continual 6-DoF Grasping arXiv v1 record', url: 'https://arxiv.org/abs/2610.01301' },
+      { title: 'Full Continual 6-DoF Grasping v1 paper', url: 'https://arxiv.org/html/2610.01301v1' },
+      { title: 'Official Continual 6-DoF Grasping project', url: 'https://giuschio.github.io/cl_grasping/' },
+    ],
+    technicalFocus: ['continual grasp learning', '6-DoF grasp synthesis', 'outcome memory', 'demonstration recall'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'CoRL 2026 paper · arXiv v1 · more than 1,500 physical grasp attempts · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# Continual 6-DoF grasping learns from outcomes without weight updates
+
+ETH Zurich researchers released a continual-learning system for single-view 6-DoF grasp synthesis on October 1, 2026. The CoRL 2026 paper keeps its neural encoder fixed after deployment. Successful and failed grasps update a local memory-based score, while optional user demonstrations contribute new candidates through geometric registration. The evaluation includes more than 1,500 physical grasp attempts. [Paper and version record](https://arxiv.org/abs/2610.01301).
+
+## Key takeaways
+
+- A 32-dimensional geometric embedding lets nearby successes and failures update a Beta posterior for each proposed grasp without backpropagation.
+- A second memory registers demonstrated grasps onto similar object regions, adding candidates that fixed contact-normal or top-down heuristics miss.
+- After at most 50 adaptation attempts per category, the system exceeds 90% grasp success in five of six physical object groups, but reaches only 68.3% on pliers.
+
+## How the two memories change grasping
+
+The base system follows a sample-and-score pipeline. It builds grasp candidates from a partial point cloud, encodes a local patch around each candidate and ranks the candidates before collision checking. Deployment outcomes are automatically labeled from gripper width and written to scoring memory. At the next scene, nearby memory entries adjust the estimated success probability rather than changing the encoder weights.
+
+Demonstration recall addresses a different failure. If the geometric sampler never proposes the needed pose, better scoring cannot recover it. The user can provide a grasp, which is stored with local shape descriptors and later transferred to geometrically similar regions. This division is important: outcome memory refines selection among available candidates; demonstration memory expands the candidate set. [Method and evaluation protocol](https://arxiv.org/html/2610.01301v1).
+
+## Simulation and physical evidence
+
+Simulation uses 443 unseen objects across ten categories, with 2,500 attempts per category and method. Before online adaptation, the proposed base averages 94.6%, compared with 92.9% for EdgeGraspNet. Category-specific full adaptation raises the average to 98.1%; scoring-only reaches 97.1%, while recall-only reaches 85.6%. That ablation suggests the non-parametric scorer drives most average improvement, while recall remains useful for missing proposal modes.
+
+The physical setup uses a Franka Panda, parallel-jaw gripper and RealSense D435i. Fifty-four objects form one 13-object control set and five challenge groups: mugs and bowls, kitchen tools, pliers, screwdrivers and toys. Each category has 20 fixed evaluation scenes per method. Because scenes contain multiple objects, the number of attempts varies with how quickly a method clears a scene; “more than 1,500” is therefore the supported total, not a uniform trials-per-cell claim.
+
+After at most 50 adaptation attempts and a demonstration after each failure, success moves from 80.0% to 93.2% on controls, 92.7% to 100% on mugs and bowls, 77.4% to 91.3% on kitchen tools, 62.5% to 68.3% on pliers, 85.7% to 96.0% on screwdrivers and 83.6% to 94.4% on toys. A merged memory evaluated on 20 mixed scenes reaches 89.6% grasp success and clears all scenes, versus 72.4% success and 85.0% scene clearance for the base model.
+
+## RoboSkin analysis
+
+The most useful result is not the five “over 90%” categories in isolation. Pliers expose what local geometry cannot resolve: one instance needs a strategy that conflicts with the others, so pooled evidence favors the majority and repeatedly fails the exception. This is a practical warning for [robot grasp learning](/robot-learning): a memory can adapt immediately, but only if its similarity space separates the states that demand different contact strategies.
+
+The work also separates contact proposal from contact evaluation, a useful design pattern for [robot hands](/robot-hands). Failures caused by low friction or uneven mass can update scores; failures caused by missing depth geometry may require a demonstrated pose or another sensor. Teams working on [slip-aware robot hands](/guides/slip-detection-robot-hand) should not treat a binary gripper-width label as a substitute for direct slip or force observations.
+
+## Limitations and availability
+
+The experiments use one parallel-jaw platform and geometry-only observations. Reflective, transparent and metallic surfaces can corrupt depth, and memory cannot recover geometry absent from the input. Recall cost grows with demonstrations; the reported sequential simulation ends at 1.35 MB, but larger deployments would need filtering. The study focuses on difficult object categories rather than systematic variation in sensor noise or contact dynamics.
+
+The official project publishes videos and identifies the work as CoRL 2026, but its code link is labeled “Coming Soon.” No repository, trained model, grasp-memory archive, physical dataset or implementation license was verified. RoboSkin.ai did not run the system.
+
+## Sources and related resources
+
+- [Continual 6-DoF Grasping v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01301)
+- [Full method, tables and limitations](https://arxiv.org/html/2610.01301v1)
+- [Official project page and videos](https://giuschio.github.io/cl_grasping/)
+- [RoboSkin tactile manipulation overview](/tactile-manipulation)
+`,
+  },
+  {
+    id: 'jfm-rigid-soft-finger-jacobian-flow',
+    title: 'JFM learns a resolution-consistent Jacobian for a rigid-soft finger',
+    seoTitle: 'JFM Models a Tendon-Driven Rigid-Soft Finger',
+    seoDescription: 'Jacobian Flow Matching models a tendon-driven rigid-soft finger across sampling rates. Review 10,000-sample tests, RMSE gains and control limits.',
+    excerpt: 'Jacobian Flow Matching treats tendon-to-joint sensitivity as a continuous field, so predictions can be subdivided and integrated without the drift of a pointwise model.',
+    category: 'Soft robotic hands',
+    image: '/generated/news/jfm-rigid-soft-finger-jacobian-flow.png',
+    imageAlt: 'Diagram showing tendon commands entering a continuous Jacobian field and producing consistent finger-joint motion at dense and sparse sampling intervals.',
+    imageCaption: 'Original RoboSkin.ai schematic of resolution-consistent Jacobian flow for a rigid-soft finger. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Learning a Resolution-Consistent Jacobian Field for Bio-Inspired Rigid-Soft Finger',
+    sourceUrl: 'https://arxiv.org/abs/2610.01668',
+    sources: [
+      { title: 'Rigid-Soft Finger JFM arXiv v1 record', url: 'https://arxiv.org/abs/2610.01668' },
+      { title: 'Full Rigid-Soft Finger JFM v1 paper', url: 'https://arxiv.org/html/2610.01668v1' },
+    ],
+    technicalFocus: ['rigid-soft finger', 'Jacobian flow matching', 'tendon-driven actuation', 'proprioceptive modeling'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint under journal review · arXiv v1 · one physical finger · about 10,000 samples · open-loop validation only · no code or data release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# JFM learns a resolution-consistent Jacobian for a rigid-soft finger
+
+Researchers in China released Jacobian Flow Matching (JFM) on October 1, 2026 for modeling a tendon-driven, rigid-soft robotic finger. The method learns actuator-to-joint sensitivity as a continuous field rather than a pointwise mapping tied to one sampling interval. On the authors’ finger, it reduces average single-step RMSE by more than 53% and keeps multi-step predictions more stable when observations become sparse. [Paper and version record](https://arxiv.org/abs/2610.01668).
+
+## Key takeaways
+
+- The finger combines 3D-printed phalanges, PTFE-coated joint interfaces, a silicone capsule with woven ligaments and a tendon transmission network.
+- Training uses about 10,000 physical samples, with hand pose at 45 Hz and servo state at 55 Hz aligned by nearest timestamps.
+- The reported results validate prediction and open-loop command recovery; closed-loop ODE control, multi-finger coordination and out-of-plane motion remain future work.
+
+## Why a point Jacobian is not enough
+
+Rigid-soft fingers are difficult to model because the same tendon command can produce different motion depending on pose, friction, backlash, hysteresis and viscoelastic state. A discrete learned Jacobian can fit observed endpoints at one controller rate yet behave unpredictably when an optimizer queries intermediate states or a slower sensor produces larger steps.
+
+JFM normalizes each observed transition into a unit-time flow. Conditional Flow Matching supplies intermediate states between the start and end poses, and a consistency loss discourages the network from depending mainly on the starting anchor. The learned field can then serve either a single pointwise update or an ODE rollout that subdivides a command. The paper compares JFM with pointwise training under identical TinyTransformer and LSTM backbones, isolating the training framework rather than adding model capacity. [Architecture and physical data pipeline](https://arxiv.org/html/2610.01668v1).
+
+## What the numbers establish
+
+For single-step servo-to-angle prediction, JFM reduces global average RMSE by 57.27% with the TinyTransformer and 53.68% with the LSTM. Under the 0.015 RMSE threshold, 96.2% of TinyTransformer JFM samples qualify versus 77.9% for its baseline; the LSTM comparison is 96.1% versus 78.8%. These are distribution-level results across three joints, not a task success rate.
+
+Resolution tests use 160 held-out trajectories. At stride 1, pointwise and integrated predictions are close. At stride 8, ODE inference reduces median RMSE by 14.43% and variance by 24.87% relative to the pointwise mode. This supports the specific claim that the field remains useful when a transition is subdivided or samples are skipped.
+
+An open-loop inverse test optimizes tendon commands for target joint motion. It reports overall RMSE 1.4151, mean angular error −0.2576° and standard deviation 1.39°. The model smooths abrupt commands to zero at hard stops because those boundary conditions are not explicit in its continuous field. Pointwise inference takes about 3.5 ms per query, but the paper does not report a closed-loop ODE controller running on hardware.
+
+## RoboSkin analysis
+
+The paper addresses a quiet integration problem for [robot hands](/robot-hands): perception and control rarely run at identical, perfectly stable rates. A model that changes behavior when the update interval changes can make calibration results misleading. JFM’s value is therefore less about another predictor score and more about a testable consistency condition across controller resolutions.
+
+The current input is proprioceptive, not tactile. Contact, friction and material effects are absorbed as disturbances within the training distribution rather than measured explicitly. For teams combining compliant mechanisms with [robot-hand tactile sensors](/applications/robot-hand-tactile-sensor), the next question is whether direct contact observations improve the field or reveal regimes where a local first-order model breaks down.
+
+## Limitations and availability
+
+Evidence comes from one finger, flexion motion and one hardware/data pipeline. The method assumes mechanical characteristics change slowly within a trial. It has not been directly validated on pneumatic hands, silicone hands, multi-finger coordination or out-of-plane motion. Sparse-sampling results are open-loop prediction tests, and the inverse test does not demonstrate closed-loop task completion.
+
+The manuscript is an arXiv v1 preprint under review at Robotics and Autonomous Systems. It describes ROS 2 bags converted to HDF5, but no public dataset URL, code repository, model checkpoint, CAD package or implementation license was verified. The arXiv page itself does not grant rights to an absent implementation.
+
+## Sources and related resources
+
+- [Rigid-Soft Finger JFM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01668)
+- [Full method, data details and evaluation](https://arxiv.org/html/2610.01668v1)
+- [RoboSkin tactile sensor calibration guide](/guides/tactile-sensor-calibration)
+- [RoboSkin robot manipulation hub](/robot-manipulation)
+`,
+  },
+  {
+    id: 'skelewam-sparse-skeleton-world-action-model',
+    title: 'SkeleWAM compresses manipulation into a sparse 3D skeleton',
+    seoTitle: 'SkeleWAM Uses Sparse 3D Skeletons for Manipulation',
+    seoDescription: 'SkeleWAM represents robot joints and object interaction points as a sparse 3D skeleton. Review LIBERO-Plus, 100 hardware trials and limits.',
+    excerpt: 'SkeleWAM replaces visual-future reconstruction with robot joints, object centers and interaction points, using future geometry as training-only supervision.',
+    category: 'Robot world models',
+    image: '/generated/news/skelewam-sparse-skeleton-world-action-model.png',
+    imageAlt: 'Diagram showing RGB-D observations converted to a sparse three-dimensional skeleton of robot joints, object centers and interaction points before action generation.',
+    imageCaption: 'Original RoboSkin.ai schematic of SkeleWAM’s sparse geometric state. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'SkeleWAM: Skeleton World-Action Modeling for Efficient Robotic Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2610.02120',
+    sources: [
+      { title: 'SkeleWAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.02120' },
+      { title: 'Full SkeleWAM v1 paper', url: 'https://arxiv.org/html/2610.02120v1' },
+      { title: 'Official SkeleWAM project', url: 'https://skelewam-project.github.io/' },
+    ],
+    technicalFocus: ['world action model', 'sparse 3D skeleton', 'interaction points', 'robot manipulation'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 10,030 LIBERO-Plus variants · 100 physical trials per evaluated method · project demos public · no code release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-03',
+    updated: '2026-10-03',
+    readTime: '8 min read',
+    content: `# SkeleWAM compresses manipulation into a sparse 3D skeleton
+
+Peking University researchers released SkeleWAM on October 1, 2026, asking whether a world action model needs to predict pixels at all. The model converts RGB-D observations and robot proprioception into a sparse 3D skeleton of robot joints, object centers and interaction points. It jointly learns actions and future skeletons during training, then removes the future-prediction branch at inference. [Paper and version record](https://arxiv.org/abs/2610.02120).
+
+## Key takeaways
+
+- The RGB-D model has about 57.1 million parameters and reports 85.9% on 10,030 LIBERO-Plus perturbation variants, 3.7 points above the compared Cosmos-Policy result.
+- Removing future-skeleton supervision reduces success from 85.9% to 80.1%, even though both variants use the same action-only inference path.
+- On five ARX R5 tasks with 20 trials each, SkeleWAM records 89/100 successes; the margin over Cosmos-Policy is two percentage points.
+
+## A geometry-first world state
+
+Many world action models predict a future video or a latent produced by a visual encoder. Those targets can preserve appearance that is unrelated to control while leaving contact geometry implicit. SkeleWAM instead builds object centers and manipulation-relevant interaction points from RGB-D, adds robot keypoints from forward kinematics and expresses them in a shared robot-centric frame.
+
+A shared world expert processes the current skeleton and language. Separate flow-matching heads predict a 32-step action chunk and eight future skeleton states. The future head is training-only. At inference, Medoid Action Consensus samples three trajectories, compares their first ten motion steps and executes the representative candidate rather than averaging possibly incompatible actions. The default controller executes 16 actions before rebuilding the skeleton. [Architecture and ablations](https://arxiv.org/html/2610.02120v1).
+
+## Results and comparison boundaries
+
+The main simulation benchmark covers seven perturbation categories. SkeleWAM reaches 93.4% under camera changes, 71.9% for robot initial-state changes, 89.1% for language, 94.7% for lighting, 96.0% for background, 93.9% for noise and 66.6% for layout, averaging 85.9%. Cosmos-Policy reports 82.2% overall and 75.8% for camera perturbations. However, π0.5 reaches 84.1% on layout changes versus SkeleWAM’s 66.6%; sparse geometry does not eliminate spatial-generalization failures.
+
+The privileged sim-state skeleton reaches 87.7%, only 1.8 points above RGB-D overall, but still only 69.0% on layout. That indicates perception error is not the sole cause of the layout weakness. The policy itself must generalize to different spatial arrangements.
+
+Physical evaluation uses an ARX R5 with external and wrist-mounted RealSense cameras. Across Open Drawer, Close Drawer, Stack Blocks, Stack Bowls and Put Block in Drawer, SkeleWAM reports 80%, 90%, 90%, 95% and 90%, respectively—89 successes across 100 trials. Cosmos-Policy totals 87/100, Fast-WAM 83/100 and π0.5 76/100 under the authors’ setup. This is a useful hardware check, but the two-success margin over Cosmos-Policy is small and no confidence interval is supplied.
+
+## RoboSkin analysis
+
+SkeleWAM’s editorially important result is the ablation, not only the leaderboard. Centers alone score 82.3%; interaction points alone score 77.7%; combining them scores 85.9%. Static location and task-relevant contact geometry carry complementary information. That is a practical design clue for [robot world models](/robot-world-models) and [contact-rich manipulation](/robot-manipulation): a compact state should preserve both where an object is and where the policy can act on it.
+
+The system is not tactile. Interaction points are inferred from RGB-D rather than measured through touch. A [visuo-tactile world model](/guides/visuo-tactile-world-models-robot-manipulation) could use the skeleton as a geometric backbone while adding force, slip or contact-state evidence that cameras cannot recover under occlusion.
+
+## Limitations and availability
+
+The manuscript is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Training and evaluation use one RTX 4090 in the reported implementation, but training time and end-to-end control latency are not given. Hardware evidence covers one arm, five tabletop tasks and 20 trials per task. The benchmark’s strongest weakness is layout change, and the real-world comparison is too small to establish broad superiority.
+
+The official project provides figures, result tables and recorded demonstrations. No implementation repository, checkpoint, training dataset, perception model package or software license was verified. The paper is posted under CC BY-NC-ND 4.0, which covers the manuscript, not an absent software release.
+
+## Sources and related resources
+
+- [SkeleWAM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02120)
+- [Full methods, benchmark and hardware tables](https://arxiv.org/html/2610.02120v1)
+- [Official project page and recorded demonstrations](https://skelewam-project.github.io/)
+- [RoboSkin guide to tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+`,
+  },
+  {
+    id: 'tacdyn-wam-implicit-tactile-dynamics',
+    title: 'TacDyn-WAM predicts contact dynamics without generating future touch pixels',
+    seoTitle: 'TacDyn-WAM Predicts Implicit Tactile Dynamics',
+    seoDescription: 'TacDyn-WAM predicts contact evolution in latent space. Review its UniVTAC and 100-trial hardware results, latency comparison and release limits.',
+    excerpt: 'TacDyn-WAM separates visual futures from implicit tactile dynamics, replacing iterative tactile-pixel generation with a contact-aware latent target.',
+    category: 'Tactile world models',
+    image: '/generated/news/tacdyn-wam-implicit-tactile-dynamics.png',
+    imageAlt: 'Diagram showing camera and tactile clips entering separate future-prediction experts before guiding a robot action policy.',
+    imageCaption: 'Original RoboSkin.ai schematic of TacDyn-WAM\'s separate visual and tactile prediction paths. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TacDyn-WAM: Learning Implicit Tactile Dynamics in a Heterogeneous Visuo-Tactile World Action Model',
+    sourceUrl: 'https://arxiv.org/abs/2610.00638',
+    sources: [
+      { title: 'TacDyn-WAM arXiv v1 record', url: 'https://arxiv.org/abs/2610.00638' },
+      { title: 'Full TacDyn-WAM v1 paper', url: 'https://arxiv.org/html/2610.00638v1' },
+      { title: 'Official TacDyn-WAM project', url: 'https://enyi-bean.github.io/TacDyn-WAM-Page/' },
+    ],
+    technicalFocus: ['tactile world action model', 'implicit contact dynamics', 'visuo-tactile manipulation', 'UniVTAC'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · eight-task simulation benchmark · 100 physical trials per evaluated policy · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# TacDyn-WAM predicts contact dynamics without generating future touch pixels
+
+Researchers led by Tsinghua University's Institute for AI Industry Research released TacDyn-WAM on September 30, 2026. The world action model predicts how contact representations will evolve instead of reconstructing future tactile images through iterative denoising. It reports 81.5% average success on eight UniVTAC tasks using the benchmark demonstrations, then 71.0% across five physical tasks without its extra pretraining stage and 85.0% with that stage. [Paper and version record](https://arxiv.org/abs/2610.00638).
+
+## Key takeaways
+
+- TacRep learns a tactile target space from four-frame clips; an Implicit Tactile Dynamics Expert predicts future representations and their changes at several horizons in one forward pass.
+- A separate read-only tactile memory describes current contact. The action expert can therefore use both present touch and a forecast of contact evolution.
+- The real-robot study uses five tasks, 60 demonstrations per task and 20 trials per policy per task. The reported 85.0% is 85 successes per 100 trials when the published per-task percentages are summed.
+
+## What changed
+
+Most tactile world models inherit a video-generation objective. That preserves spatial detail, but the target can be brittle: a small shift in contact location may alter many tactile pixels even when the physical trend—deepening, sliding or rotating—remains predictable. TacDyn-WAM assigns vision and touch different target spaces. A visual expert predicts future visual latents, while the tactile expert predicts TacRep features and feature changes. Joint attention lets the two experts exchange information without forcing touch into a camera-oriented reconstruction space. [Architecture and training stages](https://arxiv.org/html/2610.00638v1).
+
+The tactile loss covers 49 patches per sensor and upweights patches whose representation changes more. A compact understanding path also compresses a frozen AnyTouch2 encoding into ten tokens. The model is trained in stages: tactile representation learning, tactile-world grounding, tactile–action alignment and joint training.
+
+## Results under the reported conditions
+
+On UniVTAC, each of eight tasks is evaluated with 100 rollouts. TacDyn-WAM averages 81.5%. The paper groups the 83.1% N0-VTLA and 84.5% N0-TWAM results separately because those systems use large-scale visuo-tactile trajectory pretraining. TacDyn-WAM uses the provided per-task demonstrations for this comparison; it is therefore close in outcome, but not evidence that the systems have equal training cost or generality.
+
+Ablations give the clearest evidence for the target design. Replacing TacRep with the base model's reconstruction-oriented Cosmos VAE reduces the average to 62.0%; a static DINOv2 target reaches 74.0%. Removing the tactile world model gives 67.9%, while removing current-state tactile memory gives 71.3%. These are absolute percentage-point comparisons within the authors' common protocol.
+
+For hardware tests, a Franka Research 3 uses Xense sensors on both gripper fingers plus wrist and third-person cameras. Across Stack Cups, Remove Plug, Insert Plug, Unscrew Cup Lid and Wipe Whiteboard, the non-pretrained model records 71/100 successes. Pretraining on a 6,000-trajectory OmniViTac subset, with the 300 task demonstrations also used in early stages, raises the total to 85/100. On one A100, the paper reports 484 ms for a 50-action chunk versus 1,338 ms for an optimized 40-action LingBot-VA chunk; that is a system-specific latency comparison, not a universal real-time guarantee.
+
+## RoboSkin analysis
+
+The useful engineering idea is not simply “latent is faster.” Contact images can be visually different while encoding the same corrective direction. A dynamics-aware target can focus capacity on what the controller needs next. That makes TacDyn-WAM relevant to [visuo-tactile world models](/guides/visuo-tactile-world-models-robot-manipulation) and to teams designing a [tactile manipulation](/tactile-manipulation) loop with distinct perception and action timescales.
+
+The benchmark comparison also needs care. The 81.5% simulation average trails the full N0 models, and the physical gains come from one vision-based tactile sensor family. The paper explicitly leaves force sensors and taxel arrays for future work. Cross-sensor robustness is therefore unproven.
+
+## Limitations and availability
+
+TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the results. Hardware evidence covers one parallel gripper, five tasks and randomized but laboratory-controlled starts. The official project publishes tables and a downloadable demo video, but labels code “coming soon”; no public training code, weights, real-robot dataset or implementation license was verified. The paper's arXiv license does not supply those missing rights.
+
+## Sources and related resources
+
+- [TacDyn-WAM v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00638)
+- [Full methods, ablations, latency and physical protocol](https://arxiv.org/html/2610.00638v1)
+- [Official project and result tables](https://enyi-bean.github.io/TacDyn-WAM-Page/)
+- [RoboSkin robot world models guide](/robot-world-models)
+`,
+  },
+  {
+    id: 'touchtherm-tactile-thermal-digital-twins',
+    title: 'TouchTherm gives digital twins tactile texture and cooling dynamics',
+    seoTitle: 'TouchTherm Builds Tactile-Thermal Digital Twins',
+    seoDescription: 'TouchTherm registers tactile microgeometry and thermal cooling fields to 3D objects. Review its 20-object tests, recognition gains and release status.',
+    excerpt: 'TouchTherm augments coarse collision meshes with registered tactile micro-height fields and time-varying surface temperature for multimodal simulation.',
+    category: 'Tactile simulation',
+    image: '/generated/news/touchtherm-tactile-thermal-digital-twins.png',
+    imageAlt: 'Diagram of a scanned object carrying separate collision mesh, tactile microtexture and time-varying thermal field layers.',
+    imageCaption: 'Original RoboSkin.ai schematic of a TouchTherm-style multimodal object asset. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TouchTherm: Building Multimodal Digital Twins of Objects for Tactile and Thermal Rendering',
+    sourceUrl: 'https://arxiv.org/abs/2610.01943',
+    sources: [
+      { title: 'TouchTherm arXiv v1 record', url: 'https://arxiv.org/abs/2610.01943' },
+      { title: 'Full TouchTherm v1 paper', url: 'https://arxiv.org/html/2610.01943v1' },
+      { title: 'Official anonymous TouchTherm project', url: 'https://anonymous-research1.github.io/' },
+    ],
+    technicalFocus: ['tactile simulation', 'thermal rendering', 'digital twins', 'GelSight microgeometry'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · 20 reconstructed objects · tactile, thermal and VR demonstrations · code and object assets promised after acceptance',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# TouchTherm gives digital twins tactile texture and cooling dynamics
+
+ShanghaiTech University researchers released TouchTherm on October 1, 2026. The pipeline turns a physical object into a simulation asset with three registered layers: a coarse visual/collision mesh, local micro-height fields for optical tactile rendering and a dynamic surface-temperature field. Tests cover 20 objects, with held-out 30- and 45-second thermal predictions and synthetic-to-real tactile recognition. [Paper and version record](https://arxiv.org/abs/2610.01943).
+
+## Key takeaways
+
+- Structured-light geometry handles object shape and collision, while photometric-stereo normals recover contact-scale relief without making the collision mesh extremely dense.
+- Multiview infrared videos record natural cooling after controlled heating. A physics-regularized model identifies surface diffusion and ambient relaxation, then a graph-based rollout advances the temperature field.
+- TouchTherm raises synthetic-to-real Top-1 object recognition from 20.0% to 34.0% in the reported setup, an absolute gain of 14.0 percentage points, but the classifier uses only 20 object classes.
+
+## From a scan to a multisensory asset
+
+The acquisition stack combines an EinScan Pro 2X V2 structured-light scanner, smartphone image stacks under varied illumination, HIKMICRO P09 thermal cameras and a GelSight Mini for validation and per-object amplitude calibration. Normal maps are registered to the coarse mesh, transformed into a local tangent frame and integrated into micro-height residuals. At contact time, the renderer combines those residuals with coarse indentation. [Full reconstruction method](https://arxiv.org/html/2610.01943v1).
+
+For temperature, multiple cameras observe a heated object cooling. The method fuses visible measurements onto surface points, represents spatial connectivity with a graph operator and fits two physical parameters. The network helps reconstruct unobserved regions and identify the parameters; runtime rollout retains the graph and coefficients rather than the neural field.
+
+## Results under the reported conditions
+
+The tactile comparison uses three contacts per object across 20 objects. TouchTherm reports mean G-SSIM/HF-NCC scores of 0.0701/0.0911, versus 0.0480/0.0116 for coarse geometry and 0.0629/0.0081 for direct image-space height integration. Real-to-real repeatability is higher than real-to-sim similarity, so the result supports an improvement over those two renderers, not photorealistic equivalence to a physical sensor.
+
+Thermal evaluation uses a separate 60-second training capture for each object's parameters and 15 overlapping test windows per object: 300 windows at each horizon. Surface-temperature MAE is 0.465 °C at 30 seconds and 0.592 °C at 45 seconds. Removing ambient relaxation increases MAE to 0.820 °C and 1.083 °C; removing surface diffusion changes the headline MAE little, which the authors interpret as ambient exchange driving global cooling while diffusion adds smaller local gains.
+
+For recognition, a ResNet-18 trains on 90 simulated contacts per object and validates on ten. Six seeds use identical contact configurations. One hundred real images calibrate the renderer globally; a separate 20 real images per object are held out for evaluation, and no real image trains the classifier. Top-1/Top-3/Macro-F1 improve from 20.0/35.0/13.4% with coarse geometry to 34.0/63.0/29.3% with TouchTherm. A separate VR demo with ten participants reports perception and comfort ratings, but it is a small usability demonstration rather than a robotics task benchmark.
+
+## RoboSkin analysis
+
+TouchTherm moves tactile simulation from “object mesh plus sensor model” toward an object-side contact asset. That separation matters: the geometry needed for stable collision can stay coarse while the [vision-based tactile sensor](/sensors/gelsight-mini) queries finer surface relief. Temperature adds another field that could support material-aware teleoperation or [Physical AI touch data](/physical-ai-touch), although no temperature-conditioned robot policy is evaluated.
+
+The half-day-per-object estimate for each acquisition modality is also an integration warning. Scaling beyond 20 objects requires automation of manual illumination, 2D–3D correspondences, heat excitation and calibration. The paper demonstrates a pipeline, not a ready-made large catalog.
+
+## Limitations and availability
+
+TouchTherm is an arXiv v1 preprint under double-anonymous review, and RoboSkin.ai has not reproduced it. Manual registration and one-time per-object GelSight amplitude calibration remain in the workflow. Recognition uses one optical tactile sensor style; thermal feedback is demonstrated in VR rather than on a robot controller.
+
+The official project exposes videos and method descriptions. It states that code, reconstructed object assets and the simulation pipeline will be released upon acceptance. No downloadable archive, repository, dataset license or software license was verified on October 2, 2026. The paper itself uses arXiv's perpetual non-exclusive license, which is not an implementation license.
+
+## Sources and related resources
+
+- [TouchTherm v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01943)
+- [Full 20-object tactile and thermal evaluation](https://arxiv.org/html/2610.01943v1)
+- [Official project and demonstrations](https://anonymous-research1.github.io/)
+- [RoboSkin tactile sensor guide](/guides/tactile-sensor-for-robots)
+`,
+  },
+  {
+    id: 'ditto-x-reverse-dexterous-teleoperation',
+    title: 'DITTO-X makes a robot hand align the operator before takeover',
+    seoTitle: 'DITTO-X Adds Reverse Dexterous Teleoperation',
+    seoDescription: 'DITTO-X combines force and fingertip feedback with robot-to-human hand alignment. Review its six-person study, DAgger results and dataset status.',
+    excerpt: 'DITTO-X runs an actuated hand exoskeleton in both directions, rendering robot contact to a human and matching the operator to the robot before intervention.',
+    category: 'Haptic teleoperation',
+    image: '/generated/news/ditto-x-reverse-dexterous-teleoperation.png',
+    imageAlt: 'Diagram showing bidirectional control between a dexterous robot hand and an actuated human hand exoskeleton during policy takeover.',
+    imageCaption: 'Original RoboSkin.ai schematic of DITTO-X bidirectional authority transfer. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'DITTO-X: Forward and Reverse Teleoperation for Dexterous Manipulation and Human Intervention',
+    sourceUrl: 'https://arxiv.org/abs/2610.00781',
+    sources: [
+      { title: 'DITTO-X arXiv v1 record', url: 'https://arxiv.org/abs/2610.00781' },
+      { title: 'Full DITTO-X v1 paper', url: 'https://arxiv.org/html/2610.00781v1' },
+      { title: 'Official DITTO-X project', url: 'https://tml.stanford.edu/ditto-x/' },
+    ],
+    technicalFocus: ['haptic teleoperation', 'dexterous hands', 'human intervention', 'DAgger'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · six-person user study · three commercial robot hands · 1,888-episode dataset described but download still marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# DITTO-X makes a robot hand align the operator before takeover
+
+Stanford and Columbia researchers released DITTO-X on September 30, 2026. The actuated exoskeleton sends a person's finger motion to three commercial dexterous hands, renders joint-force and fingertip-contact feedback, and can reverse direction so the robot moves the operator into its current finger configuration before control transfers. In a six-person study, that matched takeover improved a contact-rich tool-use intervention from 27.7% to 78.3% success against a tracking-glove baseline. [Paper and version record](https://arxiv.org/abs/2610.00781).
+
+## Key takeaways
+
+- Forward teleoperation closes the loop with force feedback from robot joint currents plus vibrotactile contact cues at the operator's fingertips.
+- Reverse teleoperation maps the robot's commanded hand configuration back to the exoskeleton before takeover, reducing the pose jump that can release a held object.
+- The project describes 1,888 episodes and more than 16 hours at 30 Hz, but its Code, Dataset and Hardware Guide controls all still say “coming soon.”
+
+## How bidirectional control works
+
+DITTO-X aligns actuator axes with human finger joints. Index and middle fingers can map joint-to-joint on the 22-DoF Sharpa and 20-DoF Wuji 2 hands. Thumb motion is retargeted in task space, and the six-DoF Inspire hand receives a lower-dimensional flexion mapping. Supported hands expose either joint-current estimates or fingertip force sensing; DITTO-X converts those signals into exoskeleton torques and fingertip vibration. [Hardware and mapping details](https://arxiv.org/html/2610.00781v1).
+
+During autonomous execution, the robot's current command is projected back onto the exoskeleton. The operator's fingers follow the robot until the operator takes over; after correction, the same mapping returns control. Safety measures reported by the authors include software joint limits, motor-current limits below 200 mA with torque no greater than 0.08 N·m, and an emergency stop.
+
+## Results under the reported conditions
+
+Six participants completed blinded size and compliance discrimination, regular tool-use teleoperation and mid-policy intervention. With both feedback modes, size discrimination is 86.1% and compliance discrimination 91.7%, against 33.3% chance. Removing either force or vibration reduces the scores; the experiment supports complementarity within this prototype, not a universal ranking of haptic modalities.
+
+For collecting tong-use demonstrations, DITTO-X succeeds on 70.0% of trials versus 46.7% for the Manus Pro tracking glove, a 23.3-point gap. Mean time per success falls from 85.5 to 56.1 seconds. In intervention, success is 78.3% versus 27.7%, while time per success falls from 97.4 to 35.7 seconds. Each participant performs ten trials per condition; the sample is therefore repeated-measures evidence from six people, not a large operator population.
+
+Policy tests use 30 paired starting configurations per task. Before DAgger, DITTO-X data produces final-stage success of 63.3% on tong use, 63.3% on raspberry placement and 40.0% on battery insertion; Manus data yields 13.3%, 43.3% and 36.7%. After two DAgger rounds with 20 interventions per round, the DITTO-X policies reach 86.7%, 93.3% and 90.0%. The paper also quantity-matches extra demonstrations, helping separate on-policy failure coverage from data volume.
+
+## RoboSkin analysis
+
+The most important change is at the authority boundary. Conventional human intervention switches the controller, but the operator may begin with fingers in a different pose from the robot. With a dexterous hand already holding a tool or fragile object, that mismatch is itself a disturbance. DITTO-X treats body alignment as part of [robot teleoperation](/robot-teleoperation), while force and contact feedback give the operator evidence that cameras can lose under occlusion.
+
+The interface also shows why haptics should be evaluated downstream. Better blind discrimination is useful, but the stronger evidence is that contact-aware demonstrations produce better autonomous policies and that matched interventions cover failure states. This connects human feedback to the broader [robot learning](/robot-learning) pipeline.
+
+## Limitations and availability
+
+DITTO-X is an arXiv v1 preprint and RoboSkin.ai has not reproduced its hardware or results. The main user study has six participants, most policy experiments use the Sharpa hand, and mappings still require known hand kinematics and per-hand scaling. The design is not demonstrated on full-body teleoperation or unknown hands.
+
+The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 379 human-intervened and 662 autonomous episodes, totaling 1,888. However, on October 2 the Code, Dataset and Hardware Guide controls were non-links explicitly marked coming soon. No downloadable episodes, repository or license was verified. The paper's CC BY-NC-ND 4.0 license does not license absent code or hardware files.
+
+## Sources and related resources
+
+- [DITTO-X v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00781)
+- [Full user study, policy evaluation and safety details](https://arxiv.org/html/2610.00781v1)
+- [Official project and dataset composition](https://tml.stanford.edu/ditto-x/)
+- [RoboSkin tactile feedback guide](/guides/tactile-feedback-for-physical-ai)
+`,
+  },
+  {
+    id: 'flashdexretarget-multi-motion-dexterous-data',
+    title: 'FlashDexRetarget trains one policy across many human hand motions',
+    seoTitle: 'FlashDexRetarget Scales Dexterous Motion Retargeting',
+    seoDescription: 'FlashDexRetarget retargets many human hand-object motions with one RL policy. Review its 50-motion results, GPU-hour comparison and release limits.',
+    excerpt: 'FlashDexRetarget amortizes physics-based retargeting across a motion collection, using object geometry, hand-contact distance and future references.',
+    category: 'Dexterous data generation',
+    image: '/generated/news/flashdexretarget-multi-motion-dexterous-data.png',
+    imageAlt: 'Diagram showing many human hand-object motion references feeding one policy that generates trajectories for two robot hands.',
+    imageCaption: 'Original RoboSkin.ai schematic of multi-reference dexterous retargeting. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'FlashDexRetarget: Accelerating Dexterous Manipulation Data Generation through Multi-Motion Retargeting',
+    sourceUrl: 'https://arxiv.org/abs/2610.01849',
+    sources: [
+      { title: 'FlashDexRetarget arXiv v1 record', url: 'https://arxiv.org/abs/2610.01849' },
+      { title: 'Full FlashDexRetarget v1 paper', url: 'https://arxiv.org/html/2610.01849v1' },
+      { title: 'Official FlashDexRetarget project', url: 'https://davian-robotics.github.io/FlashDexRetarget/' },
+    ],
+    technicalFocus: ['dexterous retargeting', 'human demonstrations', 'multi-reference reinforcement learning', 'robot data generation'],
+    sourceDate: '2026-10-01',
+    evidenceStatus: 'Preprint · arXiv v1 · Isaac Sim evaluation on two robot hands · qualitative physical replay · project videos public · code coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-02',
+    updated: '2026-10-02',
+    readTime: '8 min read',
+    content: `# FlashDexRetarget trains one policy across many human hand motions
+
+KAIST AI and Holiday Robotics researchers released FlashDexRetarget on October 1, 2026. Instead of optimizing a new controller for every human hand-object motion, the framework trains a shared reference-conditioned reinforcement-learning policy across a collection. On a 50-motion XHand benchmark, it reports 90% SPIDER success in 29 GPU-hours; the evaluated CHORD implementation reaches 46% in 2,847 GPU-hours. [Paper and version record](https://arxiv.org/abs/2610.01849).
+
+## Key takeaways
+
+- The main benchmark contains 25 single-object and 25 two-object motions from HOT3D, TACO and OakInk2, evaluated in Isaac Sim on RTX 3090 GPUs.
+- Object point clouds, hand-to-object distance features and the next ten reference frames help one policy distinguish geometry, contact intent and motion direction.
+- The 2,847-to-29 GPU-hour comparison is 98.2 times under the authors' setup. It supports the paper's “up to 100×” wording, but it is not a general speed guarantee against every retargeting system.
+
+## What changed
+
+Physics-based retargeting asks a robot hand to reproduce the demonstrated object motion through contacts that are feasible for its own kinematics. Single-motion optimization repeats that process for every clip. FlashDexRetarget distributes reference trajectories across parallel environments and trains one off-policy controller. Successful rollouts become robot trajectories, so optimization cost is shared across motions. [Method and evaluation protocol](https://arxiv.org/html/2610.01849v1).
+
+Each wrist-local observation includes 128 surface points for the current simulated object and next reference pose. Signed-distance features describe fingertip and wrist proximity to the object. A temporal encoder compresses hand and object states from the next ten reference frames into a 128-dimensional vector. Separate left- and right-hand actor-critic pairs receive hand-specific rewards, which matters when each hand manipulates a different object.
+
+The training algorithm adapts FlashSAC with a replay buffer enlarged from 10 million to 50 million transitions and a critic hidden dimension increased from 256 to 1,024. This is a substantial configuration, and the compute comparison includes algorithm and architecture choices rather than isolating a single trick.
+
+## Results under the reported conditions
+
+For XHand, FlashDexRetarget reports SPIDER/ManipTrans-object/ManipTrans success of 0.90/0.86/0.86, 10.95 mm mean object-position error and 29 GPU-hours. Do as I Do reaches 0.36 SPIDER in 66 GPU-hours; DexMachina reaches 0.48 in 447; CHORD reaches 0.46 in 2,847. The 44-point gain over CHORD is on SPIDER success. For Sharpa Wave Hand, FlashDexRetarget reports 0.72/0.70/0.70 and 33 GPU-hours, versus CHORD's 0.50/0.22/0.00 and 3,314 GPU-hours.
+
+Metric choice matters. SPIDER averages object errors and can overstate success when one object in a two-object motion barely moves. The authors therefore use the stricter object-only ManipTrans criterion for ablations. RoboSkin analysis: preserving both numbers is more informative than repeating the 90% headline alone.
+
+Scaling tests train on 200, 500 and 1,000 references for 600 million environment steps. The project page reports more than 600 of 1,000 motions converted, but the paper does not present a universal conversion fraction across arbitrary motion distributions. Physical replay shows wiping a board, pouring into a pan and closing a lid. No trial count, failure rate or closed-loop policy adaptation is reported for those hardware demonstrations, so they establish executability examples rather than a quantitative sim-to-real benchmark.
+
+## RoboSkin analysis
+
+FlashDexRetarget targets a practical bottleneck between human-motion collections and [dexterous robot hands](/robot-hands): a demonstration is not usable robot data until contact and object motion are feasible for a specific embodiment. Amortizing that conversion can matter more than slightly improving one hand's single-clip fit.
+
+The future-reference encoder is also an important contact insight. One pose cannot distinguish whether a hand is about to wipe, pour or close. By exposing the upcoming motion and object geometry, the controller can prepare for contact rather than chase it frame by frame. That complements tactile data collection even though the method itself uses simulated geometry and state rather than physical tactile sensor input.
+
+## Limitations and availability
+
+FlashDexRetarget is an arXiv v1 preprint, and RoboSkin.ai has not run the code or reproduced the metrics. Main results are simulation-based, use three source datasets and two robot hands, and compare methods under the authors' selected preprocessing and success definitions. Real-world evidence is qualitative replay of three tasks.
+
+The official project publishes videos, method details and tables but labels code “coming soon.” No repository, trained policy, converted trajectory archive or implementation license was verified on October 2, 2026. The paper is CC BY 4.0; that license covers the article, not unreleased software or third-party source datasets.
+
+## Sources and related resources
+
+- [FlashDexRetarget v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01849)
+- [Full benchmark, metrics and scaling study](https://arxiv.org/html/2610.01849v1)
+- [Official project and demonstration videos](https://davian-robotics.github.io/FlashDexRetarget/)
+- [RoboSkin robotics datasets guide](/robotics-datasets)
+`,
+  },
+  {
+    id: 'tacex-tactile-curiosity-robot-exploration',
+    title: 'TacEx makes tactile uncertainty a target for robot exploration',
+    seoTitle: 'TacEx Uses Tactile Curiosity for Robot Exploration',
+    seoDescription: 'TacEx directs robot exploration toward uncertain contact. Review its reward-free and VLA post-training tests, simulation limits and release status.',
+    excerpt: 'TacEx decomposes model uncertainty by sensing modality and rewards uncertainty in touch, steering robot learning toward contact-rich experience.',
+    category: 'Tactile robot learning',
+    image: '/generated/news/tacex-tactile-curiosity-robot-exploration.png',
+    imageAlt: 'Diagram of a robot gripper using tactile uncertainty to choose contact-rich exploration instead of free-space motion.',
+    imageCaption: 'Original RoboSkin.ai schematic of tactile-directed curiosity. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Tactile Curiosity Drives Robot Interaction',
+    sourceUrl: 'https://arxiv.org/abs/2609.40134',
+    sources: [
+      { title: 'TacEx arXiv v1 record', url: 'https://arxiv.org/abs/2609.40134' },
+      { title: 'Full TacEx v1 paper', url: 'https://arxiv.org/html/2609.40134v1' },
+    ],
+    technicalFocus: ['tactile exploration', 'intrinsic motivation', 'contact-rich reinforcement learning', 'VLA post-training'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation-only evaluation · reward-free and frozen-VLA experiments · no public code or dataset verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# TacEx makes tactile uncertainty a target for robot exploration
+
+Researchers from ETH Zurich, the University of California, Berkeley and the University of Texas at Austin released TacEx on September 30, 2026. The framework separates a learned dynamics model's uncertainty into visual, tactile and latent-state components, then lets a robot prioritize uncertainty in touch. The reported experiments show more contact-rich reward-free exploration and more sample-efficient post-training of a frozen vision-language-action policy, but all tests are in simulation. [Paper and version record](https://arxiv.org/abs/2609.40134).
+
+## Key takeaways
+
+- TacEx changes the exploration objective, not merely the policy input: ensemble disagreement about future tactile observations becomes an intrinsic reward.
+- Reward-free collection is evaluated across five random seeds. VLA post-training covers eight contact-rich LIBERO-90 tasks and ten seeds, with 500,000 environment steps for most tasks and one million for task 69.
+- The paper reports curves rather than a single aggregate success claim. Tactile-plus-visual uncertainty gives the highest reported mean final return on each of the five tasks in the extended comparison, but the benefit varies by task.
+
+## What changed
+
+Standard curiosity methods reward predictive uncertainty wherever it occurs. In manipulation, that can spend a large budget on novel motion through empty space. TacEx instead models uncertainty separately for visual features, tactile force maps and the fused latent state. Weighting the tactile term more heavily biases the policy toward states where contact dynamics are unknown. [Method and experiments](https://arxiv.org/html/2609.40134v1).
+
+The first experiment removes task reward entirely. A simulated parallel-jaw gripper explores scenes with one object and then four objects. After collection, the replay buffer is frozen, relabelled with a sparse pick-and-place reward and used to train Soft Actor-Critic offline. Tactile-weighted variants interact with and attempt to grasp objects more often than variants without tactile disagreement. Adding visual disagreement spreads interactions over roughly two objects, while tactile-only curiosity concentrates closer to one.
+
+The second experiment applies the same idea to a pretrained policy. A lightweight learner predicts noise for a frozen diffusion-based VLA; the base VLA still consumes its original image, proprioception and language inputs. TacEx gives the noise-steering learner tactile observations and an intrinsic disagreement bonus. This is post-training around a frozen policy, not tactile pretraining of the VLA itself.
+
+## Results under the reported conditions
+
+The LIBERO study uses task IDs 58, 69, 61, 77, 55, 21, 56 and 20. The simulated Panda gripper receives 32 × 64 × 3 tactile force maps and 64 × 64 images. Every main comparison uses the same pretrained policy checkpoint and per-task interaction budget. The authors report mean evaluation return with standard-error bands across ten seeds.
+
+Five tasks receive the most extensive baseline comparison: ketchup, soup and butter into a tray; a book into the back of a caddy; and turning on a stove before placing a frying pan. Tactile-plus-visual disagreement has the highest reported mean final return on all five. Additional controls aggregate the taxels into one signal, replace SAC with PPO or update the diffusion action head. The spatial tactile-plus-visual variant remains strongest under the displayed protocol.
+
+RoboSkin verification: the paper does not publish one numerical average across all eight tasks, so this article does not manufacture one from plotted curves. It also distinguishes tactile input from tactile-directed exploration. The ablation shows that adding touch to the learner state helps, while the best variants additionally predict spatial tactile outcomes as the disagreement target.
+
+## What this means for tactile robotics
+
+RoboSkin analysis: TacEx treats a tactile sensor as a guide to where the robot should collect experience. That is different from using touch only after contact has already occurred. For [contact-rich manipulation](/tactile-manipulation), it could make data collection more intentional by spending fewer transitions away from objects.
+
+The multi-object result also exposes a useful design trade-off. Tactile-only curiosity can over-focus on one reliable source of contact; combining vision and touch maintains broader scene coverage. A deployment may therefore need adaptive modality weights rather than one permanent setting. That question links exploration design to the wider [robot-learning pipeline](/robot-learning), not just sensor choice.
+
+## Limitations and availability
+
+TacEx is an arXiv v1 preprint marked under review, and RoboSkin.ai has not reproduced it. The study uses simulated force maps, one parallel-jaw gripper and no fragile or deformable objects. It does not test tactile noise, calibration drift, sensor wear, safe-force constraints or physical resets. Contact-seeking curiosity by itself does not prevent unsafe contact.
+
+The authors state that the representation could accept vision-based tactile images, but no multi-finger hand or real sensor is evaluated. At verification time, neither the arXiv record nor manuscript linked a public project page, code repository, dataset, checkpoint or implementation license. The article is CC BY 4.0; that license applies to the paper, not to absent software or data.
+
+## Sources and related resources
+
+- [TacEx arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.40134)
+- [Full method, hyperparameters, ablations and limitations](https://arxiv.org/html/2609.40134v1)
+- [RoboSkin tactile AI overview](/tactile-ai)
+- [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+`,
+  },
+  {
+    id: 'occludex-visuo-tactile-self-occlusion-dexterity',
+    title: 'OccluDex fuses 3D geometry and touch when robot hands block the view',
+    seoTitle: 'OccluDex Handles Self-Occlusion with Vision and Touch',
+    seoDescription: 'OccluDex combines partial 3D geometry with tactile contact for dexterous control under self-occlusion. Review simulation and 40 hardware trials.',
+    excerpt: 'OccluDex pretrains a 3D visuo-tactile encoder on human demonstrations, then freezes it for dexterous policies operating under hand-induced occlusion.',
+    category: 'Visuo-tactile dexterity',
+    image: '/generated/news/occludex-visuo-tactile-self-occlusion-dexterity.png',
+    imageAlt: 'Diagram of a dexterous hand occluding an object while partial 3D geometry and fingertip contact tokens feed a shared encoder.',
+    imageCaption: 'Original RoboSkin.ai schematic of OccluDex input fusion. It is explanatory artwork, not an experimental image.',
+    sourceTitle: 'OccluDex: Hierarchical 3D Visuo-Tactile Representation Learning for Egocentric Dexterous Manipulation under Self-Occlusion',
+    sourceUrl: 'https://arxiv.org/abs/2609.39017',
+    sources: [
+      { title: 'OccluDex arXiv v1 record', url: 'https://arxiv.org/abs/2609.39017' },
+      { title: 'Full OccluDex v1 paper', url: 'https://arxiv.org/html/2609.39017v1' },
+    ],
+    technicalFocus: ['3D visuo-tactile learning', 'self-occlusion', 'dexterous manipulation', 'sim-to-real transfer'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation plus 40 physical trials · zero-shot transfer on one Shadow Hand · no public code or dataset verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# OccluDex fuses 3D geometry and touch when robot hands block the view
+
+Researchers from Shanghai Jiao Tong University, Tongji University and the Chinese University of Hong Kong, Shenzhen released OccluDex on September 30, 2026. The framework combines partial egocentric point clouds with local touch so a dexterous hand can continue estimating object geometry and contact while its own fingers hide the scene. The authors report 17/20 successful physical faucet trials and 14/20 object-reorientation trials after simulation training, without real-world fine-tuning. [Paper and version record](https://arxiv.org/abs/2609.39017).
+
+## Key takeaways
+
+- A hierarchical masked autoencoder learns global 3D structure at multiple scales, then fuses 19 tactile contact tokens with high-level geometric features.
+- Pretraining uses 1,690 human manipulation sequences containing 409,035 synchronized visual-tactile frames from three subjects.
+- Simulation averages 100 evaluation episodes per setting and three policy seeds. Physical evaluation uses two unseen objects per task and ten trials per object, giving 40 trials in total.
+
+## What changed
+
+An egocentric camera stays aligned with the manipulating body, but the hand itself often blocks the contact region. Completing the hidden shape from vision can be ambiguous, while touch alone is local and says little about the rest of the object. OccluDex gives the two signals different jobs: multiscale point-cloud tokens preserve global geometry, and sensor-specific tactile tokens preserve localized contact.
+
+During pretraining, the model masks portions of both modalities and reconstructs them. The encoder progressively merges 512, 256 and 64 point groups, then cross-attends the final geometric tokens with 19 tactile tokens. The decoder is discarded after pretraining; the encoder remains frozen while Proximal Policy Optimization learns the downstream controller. [Architecture and protocol](https://arxiv.org/html/2609.39017v1).
+
+The human dataset uses a head-mounted Intel RealSense D435i and a WiseGlove with 19 tactile channels, synchronized at 30 Hz. Three contributors provide 565, 565 and 560 sequences. Pretraining runs on two RTX 4080 GPUs. The downstream simulated Shadow Hand receives a 4,096-point partial cloud, 19 binary contacts and 48 proprioceptive values at each control step.
+
+## Results and the percentage-point check
+
+Faucet rotation uses three training faucet geometries and tests scales of 0.9 and 1.1 as unseen conditions. OccluDex reports 99.9% success on seen faucets and 86.6% on the unseen scales. Tabletop reorientation trains on ten YCB objects and holds out six; success is 75.1% on seen objects and 83.3% on held-out objects.
+
+The paper's abstract says OccluDex is 8.3% higher on seen cases and 12.6% higher on unseen cases than the strongest baselines. RoboSkin recalculated those statements from Table III. Averaging the two tasks gives OccluDex 87.5% seen success versus 79.2% for the strongest per-task baseline, a difference of 8.3 percentage points. For unseen cases, 84.95% versus 72.4% produces 12.55 points, which rounds to 12.6. These are absolute percentage-point gaps, not relative percentage gains.
+
+The physical platform uses a right Shadow Hand with 19 force-sensitive resistors, a RealSense D435i and closed-loop control at 10 Hz. The tactile electronics sample at 1 kHz before binarization; depth arrives at 30 Hz. Two unseen objects are used for each task. Faucet rotation succeeds in 17/20 trials, while 180-degree tabletop reorientation succeeds in 14/20.
+
+## What this means for robot hands
+
+RoboSkin analysis: the result is useful because it tests a failure caused by the robot's own embodiment. More external cameras can reduce occlusion in a laboratory, but a [dexterous robot hand](/robot-hands) operating from an onboard view still needs local evidence when fingers cover the object. OccluDex uses touch as that local evidence without asking the tactile stream to reconstruct the entire shape.
+
+The ablation strengthens this interpretation. Removing touch drops faucet success by 45.7 points on seen instances and 48.0 points on unseen scales under the authors' ablation protocol. Removing the point cloud also hurts, but less consistently. The two modalities are complementary rather than interchangeable, which fits the broader [visuo-tactile learning](/visuo-tactile) design problem.
+
+## Limitations and availability
+
+OccluDex is an arXiv v1 manuscript submitted to IEEE, and RoboSkin.ai has not reproduced it. The physical study is 40 trials on one Shadow Hand setup. The real camera pose is matched to simulation, no point-cloud perturbation or dynamics randomization is used, and the policy sees binary contacts rather than rich tactile images or forces. The authors also note that training the full encoder jointly with PPO was infeasible on their hardware; the from-scratch comparison therefore uses a simplified architecture.
+
+At verification time, the paper and arXiv record did not link a project page, public code, dataset, trained model or implementation license. The arXiv article is CC BY 4.0, but that does not establish reuse rights for the unreleased dataset or software.
+
+## Sources and related resources
+
+- [OccluDex arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39017)
+- [Full data, baselines, ablations and hardware protocol](https://arxiv.org/html/2609.39017v1)
+- [RoboSkin robot manipulation overview](/robot-manipulation)
+- [RoboSkin tactile sensor directory](/sensors)
+`,
+  },
+  {
+    id: 'membrane-coupled-delta-array-micro-object-manipulation',
+    title: 'A stretchable membrane lets a delta array manipulate sub-pitch objects',
+    seoTitle: 'Membrane-Coupled Delta Array Moves Smaller Objects',
+    seoDescription: 'An 8×8 delta array turns 64 contacts into a continuous surface for 15–90 mm objects. Review its 192-DoF hardware and sim-to-real results.',
+    excerpt: 'A nylon-spandex membrane couples 64 three-axis delta robots into a continuous surface, removing actuator spacing as a hard object-size floor.',
+    category: 'Soft manipulation hardware',
+    image: '/generated/news/membrane-coupled-delta-array-micro-object-manipulation.png',
+    imageAlt: 'Diagram of an eight-by-eight delta robot array deforming a continuous membrane to move objects smaller than the actuator spacing.',
+    imageCaption: 'Original RoboSkin.ai schematic of the membrane-coupled array. It is explanatory artwork, not a photograph of the prototype.',
+    sourceTitle: 'Making Waves: A Membrane-Coupled Delta Array for Manipulating Objects Below the Actuator Spacing',
+    sourceUrl: 'https://arxiv.org/abs/2609.39652',
+    sources: [
+      { title: 'Making Waves arXiv v1 record', url: 'https://arxiv.org/abs/2609.39652' },
+      { title: 'Full Making Waves v1 paper', url: 'https://arxiv.org/html/2609.39652v1' },
+    ],
+    technicalFocus: ['distributed manipulation', 'soft robotic surface', 'delta robot array', 'sim-to-real control'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · physical 192-DoF platform · 50 learned-policy hardware trials · no public code, CAD or data verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '8 min read',
+    content: `# A stretchable membrane lets a delta array manipulate sub-pitch objects
+
+Researchers spanning IT University of Copenhagen and Carnegie Mellon University released a membrane-coupled delta array on September 30, 2026. The prototype links an 8 × 8 grid of three-degree-of-freedom delta robots with stretchable fabric, turning 64 discrete supports into one deformable contact surface. It manipulates objects from 15 to 90 millimeters on hardware even though neighboring actuators are 43.3 millimeters apart. [Paper and version record](https://arxiv.org/abs/2609.39652).
+
+## Key takeaways
+
+- Sixty-four delta robots provide 192 controlled degrees of freedom beneath a 263 × 325 mm nylon-spandex membrane.
+- Local open-loop primitives route 15 mm cubes, while a learned policy moves five 30–90 mm objects to target positions in 50 physical trials.
+- The learned policy reaches 76% hardware success versus 100% for identical start-goal cases in simulation; fine placement remains the main transfer gap.
+
+## What changed
+
+Distributed manipulation arrays normally require an object to bridge several actuators. Their center-to-center spacing therefore becomes a lower limit on object size. This design inserts a continuous interface: an 80/20 nylon-spandex sheet, 0.4 mm thick, mounted at neutral strain across the actuator tips. Small objects rest on the fabric between tips rather than falling through the grid.
+
+Each delta uses three 100 mm-stroke linear actuators, a compliant TPU/PETG parallel mechanism and position feedback. Sixteen modular 2 × 2 units form the full array. Four 1080p cameras running at 30 frames per second track objects with OpenCV image moments and AprilTags. The fabric can be relaxed to cradle an object or stretched to create local slope, curvature and strain. [Hardware and control details](https://arxiv.org/html/2609.39652v1).
+
+The authors describe the surface as a displacement field rather than 192 independent motors. Quasi-static fields tilt, translate, dilate or bend the membrane. Cyclic fields create traveling waves. Local cell primitives can move several sub-pitch objects concurrently, while larger objects use a neighborhood of tips for translation and rotation.
+
+## From 192 motors to a compact action space
+
+Directly exploring 192 actuator coordinates destabilized the simulated soft body. The learned controller instead acts on low-order discrete cosine transform coefficients. It commands either the whole array or a ring around the tracked object. All policies train for one million MuJoCo steps and are evaluated over 392 held-out episodes covering 49 EGAD shapes.
+
+A 19-delta neighborhood using three-axis motion reaches 95.1% simulation success, with a 3.5 mm median final error and 8.4 mm 90th-percentile error. The whole-array controller reaches a similar 93.5%, but its median and 90th-percentile errors are 6.5 and 14.2 mm. Thus “halves the placement error” refers to the median changing from 6.5 to 3.5 mm, a 46.2% reduction, not a doubled success rate.
+
+For physical transfer, the 19-delta policy is deployed without adaptation on five objects sized 30, 45, 60, 75 and 90 mm. Each receives ten start-goal trials, and the identical cases are replayed in simulation. Hardware succeeds on 38/50 trials, or 76%; simulation records 50/50. Mean final error is 19.4 mm on hardware versus 3.46 mm in simulation.
+
+## What this means for contact hardware
+
+RoboSkin analysis: the membrane is not a sensor, but it behaves like a mechanically continuous contact layer. It fills the spatial gaps between actuators, much as [robot skin](/robot-skin) fills sensing gaps across a body. That suggests an engineering pattern in which a compliant interface performs useful spatial interpolation before perception or control software runs.
+
+The paper also points directly to the missing next layer. The learned observation contains object position, goal, actuator state and object size, but no geometry or contact measurement. Concave features sometimes catch on real tips, a failure absent from the convex-hull simulation. Adding [tactile sensing](/sensors) at the tips or estimating contact through vision could let the policy distinguish rolling, sliding and snagging instead of treating them as unobserved disturbance.
+
+## Limitations and availability
+
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the system. The 15 mm result comes from scripted local primitives; the learned-policy transfer covers 30–90 mm. Hardware trials total 50, with ten per object. The nylon-spandex membrane is nonlinear, anisotropic and subject to wrinkling, boundary loads, motor backlash and manufacturing tolerance. The simulation uses an idealized flex surface and convex-hull collision geometry, which helps explain the fine-placement gap.
+
+The manuscript does not link an official project page, public controller code, MuJoCo environment, CAD package, bill of materials, dataset or implementation license. The arXiv article is CC BY 4.0; no reuse terms were verified for the unreleased hardware or software assets.
+
+## Sources and related resources
+
+- [Making Waves arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39652)
+- [Full hardware, workspace, policy and transfer evaluation](https://arxiv.org/html/2609.39652v1)
+- [RoboSkin electronic-skin overview](/e-skin)
+- [RoboSkin Physical AI guide](/physical-ai)
+`,
+  },
+  {
+    id: 'funco-grasp-cross-embodiment-dexterous-grasping',
+    title: 'FunCo-Grasp transfers grasp structure across different robot hands',
+    seoTitle: 'FunCo-Grasp Transfers Grasps Across Robot Hands',
+    seoDescription: 'FunCo-Grasp aligns functional finger roles across hand designs. Review seven-hand simulation, 200 physical trials, ablations and code status.',
+    excerpt: 'FunCo-Grasp maps unlike robot hands into shared functional parts and canonical frames before generating an executable dexterous grasp.',
+    category: 'Cross-embodiment grasping',
+    image: '/generated/news/funco-grasp-cross-embodiment-dexterous-grasping.png',
+    imageAlt: 'Diagram aligning different robot hand morphologies to shared fingertip, distal, middle, proximal, metacarpal and wrist roles.',
+    imageCaption: 'Original RoboSkin.ai schematic of functional correspondence across hands. It is explanatory artwork, not a generated grasp result.',
+    sourceTitle: 'Function beyond Form: Functional Correspondence for Cross-Embodiment Dexterous Grasp Generation',
+    sourceUrl: 'https://arxiv.org/abs/2609.39006',
+    sources: [
+      { title: 'FunCo-Grasp arXiv v1 record', url: 'https://arxiv.org/abs/2609.39006' },
+      { title: 'Full FunCo-Grasp v1 paper', url: 'https://arxiv.org/html/2609.39006v1' },
+      { title: 'Official FunCo-Grasp project page', url: 'https://zblzz.github.io/FunCo-Grasp-Web/' },
+      { title: 'Official FunCo-Grasp repository placeholder', url: 'https://github.com/zblzz/FunCo-Grasp' },
+    ],
+    technicalFocus: ['cross-embodiment grasping', 'dexterous robot hands', 'functional correspondence', 'diffusion grasp generation'],
+    sourceDate: '2026-09-30',
+    evidenceStatus: 'Preprint · arXiv v1 · seven-hand simulation and 200 physical trials · project page public · repository is a placeholder without code or license',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-01',
+    updated: '2026-10-01',
+    readTime: '9 min read',
+    content: `# FunCo-Grasp transfers grasp structure across different robot hands
+
+Researchers from Southern University of Science and Technology, KTH Royal Institute of Technology, Shanghai Jiao Tong University and Rysen Robotics released FunCo-Grasp on September 30, 2026. The method assigns physically different links to shared functional roles, then expresses those roles in canonical local frames before generating a grasp. One model reaches 84/100 successes on ApexHand and 68/100 on Revo2, two hand designs not used for training. [Paper and version record](https://arxiv.org/abs/2609.39006).
+
+## Key takeaways
+
+- The model trains on 14,011 grasps from ShadowHand, Allegro and Barrett, then evaluates four unseen simulation hands without target-hand grasp data or fine-tuning.
+- Average simulated success is 92.40% on the three seen hands and 74.02% on ApexHand, XHand, LeapHand and Robotiq-3F.
+- The physical total is 152/200 trials across ApexHand and Revo2. The official repository existed at verification time but contained only a 13-byte “Comming soon” README and no license.
+
+## What changed
+
+Cross-embodiment grasp models face a representation mismatch. A thumb tip and an opposing finger may play similar roles on two hands even when their link names, topology and axes differ. FunCo-Grasp introduces Functional Part Alignment to map links into fingertip, distal, middle, proximal, metacarpal and wrist roles. Canonical Frame Alignment then gives those roles shared forward, closing and lateral directions.
+
+A graph encoder combines the aligned hand's geometry, roles and kinematics. A frozen object encoder supplies local shape features. A diffusion model generates the spatial arrangement of the functional parts, and inverse kinematics converts those target positions into wrist and joint configurations. Adapting a new hand requires its geometry, kinematics and a one-time role annotation, but not new grasp demonstrations. [Method and evaluation](https://arxiv.org/html/2609.39006v1).
+
+The filtered CMapDataset split contains 48 training objects and ten held-out objects. Training grasps comprise 3,754 ShadowHand, 6,242 Barrett and 4,015 Allegro examples. Each hand-object simulation pair is evaluated in three runs of 100 newly generated grasps. A grasp succeeds if it survives six directional disturbances and finishes with less than two centimeters of object displacement.
+
+## Results and baseline boundaries
+
+On seen hands, FunCo-Grasp averages 92.40%. That is below UniMorphGrasp's paper-reported 94.00% but above locally evaluated T(R,O) Grasp at 91.07%. UniMorphGrasp had no published results for the four unseen hands. On those unseen embodiments, FunCo-Grasp averages 74.02%, compared with 66.50% for CEDex, the strongest available all-four baseline in the table.
+
+The alignment ablation is especially revealing. Removing Functional Part Alignment reduces unseen-hand success from 74.02% to 33.90%; removing canonical frames lowers it to 19.40%; removing both reaches 0.95%. Seen-hand performance moves by less than 2.3 points in the same ablations. Functional correspondence therefore matters most when morphology changes, rather than simply increasing capacity on familiar hands.
+
+The authors also report a weakness: successful grasp diversity is 0.293 radians, lower than 0.401 for T(R,O), 0.450 for D(R,O) and 0.512 for CEDex under the cited protocols. The model is fast at 0.16 seconds per grasp on the reported workstation, but it produces a narrower set of configurations.
+
+## Physical tests on unseen hand designs
+
+Both physical platforms mount an unseen hand on a UR5 arm and use a RealSense D435i. Each trial captures fresh RGB-D data, segments the object with SAM2 and generates a grasp. Ten objects receive ten random placements per hand. ApexHand succeeds 84/100 times and Revo2 succeeds 68/100, yielding 152/200, or 76.00%, overall. Per-object counts range from 5/10 to 10/10 on ApexHand and 4/10 to 9/10 on Revo2.
+
+RoboSkin analysis: this is a grasp-generation result, not a full manipulation policy. It shows that an explicit functional schema can bridge [robot hand](/robot-hands) geometries, but the downstream test is lift-and-hold rather than in-hand reorientation, tool use or tactile recovery. A future system could combine this morphology transfer with [contact-aware manipulation](/tactile-manipulation) after the grasp closes.
+
+## Limitations and availability
+
+FunCo-Grasp is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The one-time functional annotation is described as lightweight but not timed or evaluated for annotator consistency. Baseline provenance is mixed: most methods use released checkpoints under the authors' local protocol, while UniMorphGrasp values come from its paper. The model also depends on object segmentation and does not consume tactile feedback.
+
+The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes explanations, figures, tables and videos. It links an [official GitHub repository](https://github.com/zblzz/FunCo-Grasp), created September 30. At verification time that repository contained only a 13-byte README saying “Comming soon”; there were no implementation files, model weights, dataset package or software license. The arXiv record uses the non-exclusive distribution license, which does not grant an open-source software license.
+
+## Sources and related resources
+
+- [FunCo-Grasp arXiv v1, submitted September 30, 2026](https://arxiv.org/abs/2609.39006)
+- [Full training, baselines, ablations and physical protocol](https://arxiv.org/html/2609.39006v1)
+- [Official project page with videos and results](https://zblzz.github.io/FunCo-Grasp-Web/)
+- [Official repository placeholder](https://github.com/zblzz/FunCo-Grasp)
+- [RoboSkin dexterous manipulation guide](/robot-manipulation)
+`,
+  },
+  {
+    id: 'tarl-tactile-reward-learning-demonstrations',
+    title: 'TaRL learns contact-rich rewards from tactile demonstrations',
+    seoTitle: 'TaRL Learns Rewards from Tactile Demonstrations',
+    seoDescription: 'TaRL turns tactile deformation histories into dense robot-learning rewards. Review its simulation and real-world results, data needs and release status.',
+    excerpt: 'TaRL regresses task progress from successful and failed tactile demonstrations, then uses that signal to shape contact-rich reinforcement learning.',
+    category: 'Tactile reward learning',
+    image: '/generated/news/tarl-tactile-reward-learning-demonstrations.png',
+    imageAlt: 'Diagram of tactile deformation sequences becoming a learned progress reward for downstream robot reinforcement learning.',
+    imageCaption: 'Original RoboSkin.ai schematic of the TaRL reward-learning pipeline. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'TaRL: Learning General and Physical Rewards from Tactile Demonstrations',
+    sourceUrl: 'https://arxiv.org/abs/2609.36785',
+    sources: [
+      { title: 'TaRL arXiv v1 record', url: 'https://arxiv.org/abs/2609.36785' },
+      { title: 'Full TaRL v1 paper', url: 'https://arxiv.org/html/2609.36785v1' },
+      { title: 'Official TaRL project page', url: 'https://embodiedai-ntu.github.io/tarl/' },
+    ],
+    technicalFocus: ['tactile reward learning', 'contact-rich reinforcement learning', 'tactile demonstrations', 'visuo-tactile learning'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · simulation and two real-world tasks · project videos public · no code or dataset release verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# TaRL learns contact-rich rewards from tactile demonstrations
+
+Researchers from National Taiwan University and Delta Electronics released Tactile Reward Learning, or TaRL, on September 29, 2026. TaRL learns a dense progress signal from sequences of tactile deformation maps, then adds that signal to reinforcement learning for contact-rich tasks. The reported gains include nut-threading success rising from 34% to 56% in simulation and cube pickup rising from 37% to 97% on a physical robot. [Paper and version record](https://arxiv.org/abs/2609.36785).
+
+## Key takeaways
+
+- TaRL treats touch as reward supervision, not only as a policy observation. Successful, rewound and failed tactile sequences teach a causal model to estimate task progress.
+- The simulation reward model uses 200 successful and 800 failed demonstrations per task. Real-world reward learning uses 40 successful and 40 failed trajectories per task, while the offline policy dataset contains another 90 successful and 90 failed trajectories.
+- The real-world percentages are averaged across three random seeds, but the manuscript does not state the number of inference trials per seed. The 60-point cube-pickup gain therefore lacks a disclosed evaluation denominator.
+
+## What changed
+
+Reward engineering is a persistent bottleneck in reinforcement learning. A sparse success flag gives little guidance before a task is complete, while a hand-written dense reward can favor the wrong behavior. Video-based reward models offer another route, but scene appearance does not reliably expose whether a grasp is firm or whether contact force is correctly directed.
+
+TaRL replaces the video sequence with tactile deformation maps from two fingertips. A shared three-layer convolutional encoder processes each map, and a causal Transformer estimates progress using only the history available at that step. Successful demonstrations receive a target that rises with time; failed demonstrations receive zero. Rewound successful sequences teach the model that undoing progress should reduce the reward. [Method details](https://arxiv.org/html/2609.36785v1).
+
+The learned value is a shaping reward. It supplements rather than replaces the task's basic sparse or stage reward, and it is trained separately for each task. In simulation, policies use Proximal Policy Optimization. The physical SO-101 arm experiments use Implicit Q-Learning on a fixed dataset, so their improvement is an offline-policy result rather than evidence of unrestricted online exploration.
+
+## Results under the reported conditions
+
+The simulated suite covers box placement, peg insertion, gear assembly and nut threading with a Franka Panda. Demonstrations are collected at one object position, while policies and reward quality are evaluated at other positions. The most concrete final-success comparison is nut threading: 34% without TaRL and 56% with it, an increase of 22 percentage points. Held-out reward tests use 50 successful and 150 failed trajectories for both in-domain and out-of-distribution positions.
+
+The authors also compare TaRL with ReWiND, a visual reward learner using the same high-level progress-regression recipe. Visual features shift when the object moves, while the tactile representation remains more similar across positions. Combining visual and tactile rewards improves learning further on the three compared tasks, supporting the narrower claim that the modalities contribute different signals.
+
+On the physical robot, cube pickup and peg insertion each use 80 demonstrations for the reward model and 180 different trajectories for offline policy learning. The cube-pickup score rises from 37% to 97%. For peg insertion, the paper separates pickup and insertion: TaRL adds 45 and 10 percentage points respectively. Those results are reported across three training seeds, but no test-rollout count or confidence interval is supplied.
+
+## What this means for robotics
+
+RoboSkin analysis: TaRL moves tactile sensing one step upstream in the learning stack. Instead of asking a policy to discover how touch relates to success, it first converts contact history into an explicit training signal. This could be useful when teams have [tactile demonstrations](/datasets) but cannot write a trustworthy force-aware reward.
+
+The method also exposes a scaling trade-off. Its reward model is local enough to tolerate position changes and, in one box-to-can experiment, a new object instance. Yet it still needs task-specific successful and failed touch sequences. It is not a general tactile foundation reward, and it does not eliminate data collection for a new behavior.
+
+## Limitations and availability
+
+TaRL is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its experiments. The comparison isolates modality carefully, but simulation and hardware use different RL algorithms. The physical study covers two tasks on one SO-101 setup, and the missing inference-trial denominator limits statistical interpretation of its largest percentage gain.
+
+The [official project page](https://embodiedai-ntu.github.io/tarl/) provides method explanations, plots and videos. At verification time it did not expose a public implementation repository, downloadable demonstrations, trained reward models or a software/data license. The arXiv manuscript's availability does not make those implementation assets reusable.
+
+## Sources and related resources
+
+- [TaRL arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36785)
+- [Full method, data counts and evaluation](https://arxiv.org/html/2609.36785v1)
+- [Official TaRL project page and videos](https://embodiedai-ntu.github.io/tarl/)
+- [RoboSkin guide to tactile manipulation](/tactile-manipulation)
+- [RoboSkin robot-learning overview](/robot-learning)
+`,
+  },
+  {
+    id: 'haco-haptic-active-compliance-dexterous-manipulation',
+    title: 'HACo grounds dexterous actions in touch and joint torque',
+    seoTitle: 'HACo Haptic Active Compliance for Dexterous Robots',
+    seoDescription: 'HACo fuses fingertip touch and joint torque with compliant demonstrations. Review 100-trial task results, baselines, hardware and release limits.',
+    excerpt: 'HACo learns compliant bimanual actions from regulated demonstrations and conditions them on fingertip tactile signals plus hand-joint torque.',
+    category: 'Force-aware dexterity',
+    image: '/generated/news/haco-haptic-active-compliance-dexterous-manipulation.png',
+    imageAlt: 'Diagram of fingertip tactile maps and joint-torque histories grounding compliant bimanual robot actions.',
+    imageCaption: 'Original RoboSkin.ai schematic of HACo haptic active compliance. It is explanatory artwork, not a laboratory image.',
+    sourceTitle: 'HACo: Learning Haptic Active Compliance for Force-Aware Dexterous Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2609.36596',
+    sources: [
+      { title: 'HACo arXiv v1 record', url: 'https://arxiv.org/abs/2609.36596' },
+      { title: 'Full HACo v1 paper', url: 'https://arxiv.org/html/2609.36596v1' },
+      { title: 'Official HACo project page', url: 'https://opendrivelab.github.io/Haco-Page/' },
+    ],
+    technicalFocus: ['active compliance', 'dexterous manipulation', 'fingertip tactile sensing', 'joint torque'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · five physical bimanual tasks · 20 trials per task · code marked coming soon',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# HACo grounds dexterous actions in touch and joint torque
+
+Researchers from the University of Hong Kong, the Beijing Academy of Artificial Intelligence and Johns Hopkins University released HACo on September 29, 2026. HACo stands for Haptic Active Compliance: a dexterous policy that learns force-regulating motion from compliant demonstrations and conditions action generation on fingertip touch plus joint torque. Across five physical tasks and 20 trials per task, the authors report an 83% mean success rate versus 35% for the strongest evaluated baseline. [Paper and version record](https://arxiv.org/abs/2609.36596).
+
+## Key takeaways
+
+- HACo records controller-executable compliant actions, rather than copying either force-blind operator commands or the robot's constrained observed motion.
+- Its five-task mean is 83%, based on 83 successes in 100 rollouts. T-Rex records 35/100, GR00T with appended tactile features 22/100 and unmodified GR00T 15/100 under the paper's protocol.
+- The study uses 100 demonstrations per task on one dual-UR5, dual-Sharpa-hand platform. Code is still marked “coming soon,” and no downloadable dataset or model weights were verified.
+
+## What changed
+
+Contact creates a supervision problem. A nominal teleoperation command preserves the operator's intent but can keep pushing after an object blocks motion. The measured robot configuration has the opposite defect: it records what physically happened but omits the command-state offset that maintained force.
+
+HACo's data-collection controller regulates the arm through Cartesian admittance and adjusts hand references using fingertip force. It saves the resulting compliant arm and hand targets as executable actions. For the hand, the difference between compliant commands and observed joint positions becomes an auxiliary “compliant intent” target. The model therefore learns both the safe motion reference and evidence of the blocked motion that generated contact load. [Method details](https://arxiv.org/html/2609.36596v1).
+
+The haptic encoder has two inputs. Ten fingertip tokens combine a short history of local wrench readings with current deformation maps. A second stream embeds 44 joint-torque values. Finger and joint identity preserve the hand's kinematic structure before gated cross-attention lets action tokens query the haptic representation. HACo predicts motion references, not explicit target forces.
+
+## A benchmark built around force-sensitive failure
+
+The real-world benchmark covers inserting one playing card into another hand's grasp, opening a book to an interior page, drawing on a balloon, unscrewing a bottle cap and squeezing toothpaste onto a brush. Each method gets 20 physical trials on every task. HACo records 18, 17, 14, 19 and 15 successes, for 83/100 overall.
+
+The strongest comparison method, T-Rex, totals 35/100. Its best tasks are cap removal and toothpaste, where sustained load dominates; the paper argues that its cached visual context and tactile-only refinement may be less responsive to abrupt force transitions. GR00T improves from 15% to 22% when tactile features are simply concatenated, well below HACo's action-aligned haptic fusion.
+
+Ablations separate the ingredients. Removing all haptic input lowers the mean from 83% to 27%. Tactile-only input reaches 68%, joint torque alone reaches 45%, and using both without their coupled encoding reaches 70%. Removing compliant-intent supervision produces 73%; replacing the compliant action with nominal commands lowers it further to 59%. The full method also reports 19% lower mean fingertip force than the nominal-action variant over contact-active samples.
+
+## What this means for robotics
+
+RoboSkin analysis: the useful contribution is the link between sensing and action semantics. More touch channels alone do not tell a model how to yield, maintain traction or stop loading a fragile surface. HACo structures both the demonstrations and the policy so that contact evidence can change an executable motion reference.
+
+The baseline comparison still needs care. HACo and the GR00T variants inherit GR00T N1.7 pretraining, while T-Rex and ViTacFormer have different architectures and pretraining. The table is a system-level comparison, not a controlled proof that one fusion block alone creates the 48-point gap. The within-HACo ablations give cleaner evidence for the value of coupled haptic input and compliant targets.
+
+## Limitations and availability
+
+HACo is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The study uses one robot configuration, 100 task-specific demonstrations per task and no reported confidence intervals. It also depends on force-regulated teleoperation. The authors identify limited whole-hand coverage as an open problem because palm and phalange contacts must be inferred indirectly from joint torque.
+
+The [official project page](https://opendrivelab.github.io/Haco-Page/) includes task videos, exact rollout counts, ablations and documented failures. Its Code control was disabled and labelled “Coming soon” during verification. No public training code, demonstration archive, checkpoints or implementation license was available.
+
+## Sources and related resources
+
+- [HACo arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36596)
+- [Full architecture, protocol and limitations](https://arxiv.org/html/2609.36596v1)
+- [Official project page, videos and result tables](https://opendrivelab.github.io/Haco-Page/)
+- [RoboSkin robot-hands overview](/robot-hands)
+- [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+`,
+  },
+  {
+    id: 'single-element-tackiness-tactile-sensor',
+    title: 'A single-element tactile sensor separates pressure from tackiness',
+    seoTitle: 'Single-Element Tactile Sensor Measures Tackiness',
+    seoDescription: 'A Hall-effect tactile sensor separates compression and pull-off signals at one contact point. Review its ranges, response, durability and robot tests.',
+    excerpt: 'A soft magnet and one Hall sensor generate opposite-polarity signals for compression and pull-off, enabling continuous pressure and tackiness tracking.',
+    category: 'Electronic skin hardware',
+    image: '/generated/news/single-element-tackiness-tactile-sensor.png',
+    imageAlt: 'Cross-section diagram of a Hall-effect tactile sensor bending inward under pressure and outward during adhesive pull-off.',
+    imageCaption: 'Original RoboSkin.ai schematic of the reported magneto-mechanical sensing principle. It is not an experimental image or calibrated plot.',
+    sourceTitle: 'A robust single-sensing-element tactile sensor for concurrent pressure and tackiness detection with real-time signal decoupling capability',
+    sourceUrl: 'https://arxiv.org/abs/2609.36558',
+    sources: [
+      { title: 'Pressure-and-tackiness sensor arXiv v1 record', url: 'https://arxiv.org/abs/2609.36558' },
+      { title: 'Full pressure-and-tackiness sensor v1 PDF', url: 'https://arxiv.org/pdf/2609.36558' },
+    ],
+    technicalFocus: ['tackiness sensing', 'Hall-effect tactile sensor', 'electronic skin', 'bidirectional force sensing'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · laboratory sensor characterization and scripted robot demonstrations · no implementation files verified',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# A single-element tactile sensor separates pressure from tackiness
+
+Researchers at Sun Yat-sen University and Helmholtz-Zentrum Dresden-Rossendorf released a single-element tactile sensor for concurrent pressure and tackiness measurement on September 29, 2026. A soft magnet moves toward one Hall sensor during compression and away from it during adhesive pull-off, putting the two force directions on opposite sides of a stable electrical baseline. The authors report ranges of 0–150 kilopascals for pressure and 0–33 kilopascals for outward pulling stress. [Paper and version record](https://arxiv.org/abs/2609.36558).
+
+## Key takeaways
+
+- One magnet and one Hall element track inward pressure and outward pull-off at the same contact location; signal polarity separates the two modes without a learned decoder.
+- Reported response/recovery times are 33.2/33.5 milliseconds for pressure and 21.8/10.3 milliseconds for outward pull-off under the paper's laboratory setup.
+- The sensor survives more than 50,000 cycles near 63 kPa pressure and repeated robot touch tests, but the authors say its replaceable upper layer can still fail under large pull-off loads.
+
+## What changed
+
+Tackiness is not the same as friction or normal pressure. Measuring it requires monitoring the whole press-and-retract sequence: contact pressure, dwell time, retraction speed, peak pull-off stress and sometimes the energy dissipated before separation. Stacking separate sensing layers can introduce cross-talk, while a pressure-only skin loses the tensile half of the interaction.
+
+The reported device uses an elastic polydimethylsiloxane structure. A 0.3-millimeter membrane carries a soft neodymium-iron-boron/PDMS magnet above a fixed Hall sensor. Compression reduces their distance and raises the measured magnetic signal; adhesive pull-off bulges the surface outward and lowers it. A PDMS-filled melamine sponge extends the pressure range by adding compressive resistance. [Design and experiments](https://arxiv.org/pdf/2609.36558).
+
+This is a single-point prototype, not a spatial skin array. Its value is the shared transducer and baseline-separated waveform. The researchers vary membrane support height and magnet thickness to trade sensitivity against range, then choose a configuration that accommodates both compression and tensile deformation.
+
+## Characterization and robot demonstrations
+
+The optimized sensor covers 0–150 kPa compression and 0–33 kPa pull-off stress. The paper reports a stable no-load baseline over ten hours, more than 50,000 loading/unloading cycles at roughly 63 kPa and 5,000 pull-off trials. Hammer strikes did not damage the tested device or erase its ability to detect a lightly contaminated finger. These are author-run laboratory tests, not a standardized independent durability certification.
+
+The response-time test uses a 6-volt sensor supply, while most characterization uses 5 volts and robot demonstrations use 2 volts. That matters because the paper also notes that sensitivity changes with supply voltage. Range and timing figures should therefore be read as properties of the reported configurations, not universal ratings for every integration.
+
+For manipulation, the team mounts the sensor on a two-finger electric gripper attached to a commercial arm. Scripted grasps distinguish a clean bottle from one carrying double-sided tape: the contaminated object produces a pull-off signal and triggers another grasp attempt at a clean area. A separate robot-hand demonstration touches seven PDMS samples with different base-to-crosslinker ratios. Three runs reproduce their tackiness order at fast retraction speed.
+
+## What this means for robotics
+
+RoboSkin analysis: the device adds a contact property that most [electronic skins](/e-skin) do not expose. A gripper may need to know not only that contact exists but whether a lightweight object will remain attached after opening. The opposing-polarity signal is also attractive for embedded systems because separation does not depend on a complex multimodal inference model.
+
+Pull-off amplitude is not a complete material label, however. At slower separation speeds, the stickiest PDMS sample produces a lower peak than expected but the greatest separation energy. The paper concludes that integrating the full force-distance curve can be more accurate than ranking surfaces by peak pull-off alone. Robot software would therefore need controlled contact conditions or richer temporal features for reliable material comparison.
+
+## Limitations and availability
+
+This work is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Robot motions are predefined, and the manuscript does not report repeated end-to-end task success rates. The present device is one sensing element with commercial Hall packaging. The authors describe miniaturization and arrays as future work.
+
+Large adhesive loads can damage the upper structure despite its compression durability; replacement is possible, but the design is not yet maintenance-free. The arXiv record and manuscript were accessible during verification, while no official project page, fabrication repository, CAD package, raw dataset or implementation license was identified.
+
+## Sources and related resources
+
+- [Sensor arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.36558)
+- [Full fabrication, characterization and robot tests](https://arxiv.org/pdf/2609.36558)
+- [RoboSkin electronic-skin guide](/e-skin)
+- [RoboSkin tactile sensor directory](/sensors)
+`,
+  },
+  {
+    id: 'wrench-act-direct-wrench-control-manipulation',
+    title: 'Wrench-ACT makes force and torque the robot policy action',
+    seoTitle: 'Wrench-ACT Uses Direct Wrench Actions for Manipulation',
+    seoDescription: 'Wrench-ACT predicts a six-axis wrench instead of pose. Review five contact-rich tasks, 1,000 evaluation rollouts, control rates and dataset status.',
+    excerpt: 'Wrench-ACT pairs force-reflecting bilateral demonstrations with an ACT policy that directly commands a six-dimensional target wrench.',
+    category: 'Force-control learning',
+    image: '/generated/news/wrench-act-direct-wrench-control-manipulation.png',
+    imageAlt: 'Diagram of bilateral force-feedback demonstrations training an ACT policy that outputs a six-dimensional wrench to a force controller.',
+    imageCaption: 'Original RoboSkin.ai schematic of Wrench-ACT data collection and control. It is explanatory artwork, not an experimental figure.',
+    sourceTitle: 'Wrench-ACT: Enhancing Robot Policies for Contact Rich Behavior Using Direct Wrench Control',
+    sourceUrl: 'https://arxiv.org/abs/2609.37552',
+    sources: [
+      { title: 'Wrench-ACT arXiv v1 record', url: 'https://arxiv.org/abs/2609.37552' },
+      { title: 'Full Wrench-ACT v1 paper', url: 'https://arxiv.org/html/2609.37552v1' },
+    ],
+    technicalFocus: ['direct wrench control', 'force-feedback teleoperation', 'contact-rich manipulation', 'imitation learning'],
+    sourceDate: '2026-09-29',
+    evidenceStatus: 'Preprint · arXiv v1 · five UR5e tasks · 50 rollouts per task-policy pair · demonstration release promised, not verified public',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-09-30',
+    updated: '2026-09-30',
+    readTime: '8 min read',
+    content: `# Wrench-ACT makes force and torque the robot policy action
+
+Researchers from Siemens and the University of Technology Nuremberg released Wrench-ACT on September 29, 2026. The system modifies the usual imitation-learning contract: instead of predicting a target position and letting controller error create contact force, its Action Chunking with Transformers policy outputs a six-dimensional force/torque wrench directly. With matching force-reflecting demonstrations, it averages 76.8% success across five contact-rich tasks versus 40% for a position-policy baseline. [Paper and version record](https://arxiv.org/abs/2609.37552).
+
+## Key takeaways
+
+- Direct wrench output works best only when the demonstrations contain intentional wrench commands. Converting ordinary position demonstrations into approximate wrenches averages 28.8% in the same action space.
+- The main table evaluates four collection/action combinations on five tasks with 50 rollouts each: 1,000 physical evaluation rollouts in total.
+- The paper promises more than 1,000 wrench-action demonstrations on a companion site upon publication, but no public companion URL, archive or license was verified with the v1 release.
+
+## What changed
+
+Position policies command where the tool should go. During contact, a Cartesian impedance controller turns the pose error into force. That is useful but indirect: two identical target poses can produce very different interaction loads as geometry and stiffness change.
+
+Wrench-ACT removes the pose target from the learned action. Three RGB streams, robot state and gripper position enter a standard single-task ACT model. Its seven-dimensional output contains a six-axis target wrench plus the gripper command. A UR5e force controller executes the wrench at 500 Hz while policy inference runs near 50 Hz and holds the latest target between predictions. [Method and controller](https://arxiv.org/html/2609.37552v1).
+
+Data collection is the other half of the design. In the bilateral setup, a human pushes a leader arm and feels the follower's reaction. The measured leader wrench becomes the action label. A second dataset uses a Meta Quest position interface and Cartesian impedance control. The authors also translate each dataset into the opposite action representation, producing four policy conditions that separate the collection interface from the learned output.
+
+## Results and the matched-data effect
+
+The five tasks are peg insertion, fuse clipping, fan insertion, industrial-connector mating and pen writing. Bilateral data plus wrench output records 74%, 88%, 58%, 80% and 84%, averaging 76.8%. The conventional VR-data/position-action condition records 6%, 96%, 8%, 12% and 78%, averaging 40%.
+
+That headline average hides two qualifications. Wrench-ACT is lower on fuse clipping, 88% versus 96%, and only three task differences are statistically significant after the paper's multiple-comparison correction: peg, fan and industrial-connector insertion. Pen writing and fuse clipping do not establish a significant advantage.
+
+The cross-condition table is more revealing. A wrench policy trained on wrenches reconstructed from VR position trajectories averages 28.8%. A position policy derived from bilateral wrench data averages 34.8%. The strongest outcome appears when the interface and action agree: humans deliberately command force, and the policy predicts the same quantity.
+
+An inference-rate ablation on the industrial connector reports 80% at 50 Hz, 36% at 30 Hz, 20% at 15 and 5 Hz, and 12% at 1 Hz. The nominal result uses 50 trials; each reduced-rate condition uses 25. When the paper support under the pen is raised 2.5 centimeters, the bilateral-wrench policy falls from 84% to 76%, while the VR-position policy falls from 78% to 24%.
+
+## What this means for robotics
+
+RoboSkin analysis: Wrench-ACT is evidence for aligning a [teleoperation](/robot-teleoperation) interface with the quantity a policy must control. Merely logging a force/torque sensor alongside position commands does not mean the dataset contains deliberate force strategy. For contact-rich data, action provenance matters as much as the presence of force channels.
+
+Direct wrench control is not a universal replacement for pose actions. The authors deliberately choose tasks where interaction force is central, and they state that incidental-contact tasks may not benefit. The system also depends on a capable inner force loop and a mechanically compliant setup; the learned policy is only one layer of the control stack.
+
+## Limitations and availability
+
+Wrench-ACT is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. All experiments use one UR5e-based setup and single-task models trained from scratch. Datasets contain 200–300 episodes per task and interface, but operator count is not stated. The force-reflecting collection rig is substantially more specialized than common handheld or VR capture systems.
+
+The manuscript says a dataset of more than 1,000 wrench-action demonstrations will be released on a companion website “upon publication.” At verification time the arXiv record did not link that site, code, downloadable data, checkpoints or a release license. A promised release should not be treated as an available dataset.
+
+## Sources and related resources
+
+- [Wrench-ACT arXiv v1, submitted September 29, 2026](https://arxiv.org/abs/2609.37552)
+- [Full controller, tasks and cross-condition results](https://arxiv.org/html/2609.37552v1)
+- [RoboSkin guide to robot manipulation](/robot-manipulation)
+- [RoboSkin Physical AI and touch guide](/physical-ai-touch)
+`,
+  },
+  {
     id: 'univlat-whole-body-tactile-vla-humanoid',
     title: 'Uni-VLaT gives humanoid VLA policies whole-body touch',
     seoTitle: 'Uni-VLaT Whole-Body Tactile VLA for Humanoids',

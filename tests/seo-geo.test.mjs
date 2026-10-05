@@ -31,8 +31,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);
-  assert.match(layout, /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-8231924120348302/);
-  assert.match(layout, /name="google-adsense-account" content="ca-pub-8231924120348302"/);
+  assert.doesNotMatch(layout, /googlesyndication|adsbygoogle|google-adsense-account|ca-pub-/);
   assert.match(layout, /data-scroll-behavior="smooth"/);
   assert.match(layout, /buildOrganizationJsonLd/);
   assert.match(seo, /'\/faq'/);
@@ -85,7 +84,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(globals, /\.deferred-section/);
   // Progressive disclosure keeps the full reading routes and FAQ in server-rendered HTML.
   assert.match(home, /<details className="contact-fold">/);
-  assert.match(home, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} \/>/);
+  assert.match(home, /<AuthorityIndex groups=\{homeAuthorityLinkGroups\} compactLinks \/>/);
   assert.match(home, /id="latest-research"/);
   assert.doesNotMatch(home, /hero-copy reveal|className="[^"]*\breveal\b/);
   assert.match(globals, /@keyframes floatUp/);

@@ -67,12 +67,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="alternate" type="application/rss+xml" title="RoboSkin.ai Research and News" href="/feed.xml" />
         <link rel="describedby" type="text/markdown" href="/llms.txt" />
-        <meta name="google-adsense-account" content="ca-pub-8231924120348302" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8231924120348302"
-          crossOrigin="anonymous"
-        />
         <meta name="theme-color" content="#181917" />
       </head>
       <body
