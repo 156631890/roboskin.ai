@@ -80,10 +80,10 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/technology': {
     path: '/technology',
-    title: 'Tactile AI and Flexible Tactile Sensor Technology',
+    title: 'What Is Tactile Sensing? Robotics Basics & Sensor Types',
     description:
-      'Understand tactile AI, tactile sensing, flexible tactile sensor layers, signal processing, form-factor design, and robot-ready touch signals.',
-    updated: '2026-08-22',
+      'Learn how tactile sensing works in robotics, how it differs from robot skin and tactile AI, and how to choose sensors, datasets and integration guides.',
+    updated: '2026-10-06',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,

@@ -374,13 +374,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-skin',
-    title: 'Robot Skin: Technologies, Sensors & Research',
+    title: 'What Is Robot Skin? Types, Sensors & How It Works',
     description:
       'Robot skin is a tactile sensing surface for robots. Learn how robot skin relates to tactile AI, e-skin, humanoid hands, grippers, and contact-aware robotics.',
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-09-20',
+    updated: '2026-10-06',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -2499,14 +2499,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    title: 'Tactile Datasets: Sensors, Tasks, Downloads & Licenses',
+    title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
-    h1: 'Tactile datasets for robot learning',
+    h1: 'Tactile and visuo-tactile datasets for robot learning',
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-09-20',
+    updated: '2026-10-06',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3094,25 +3094,26 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors',
-    title: 'Tactile Sensors for Robots: Technology Directory',
+    title: 'Tactile Sensor Comparison: GelSight, DIGIT & TacTip',
     description:
-      'Compare tactile sensors for robot hands, grippers, and skins by sensing principle, signal, form factor, rate, integration, access, and evidence boundary.',
-    h1: 'Tactile sensors for robots compared',
+      'Compare GelSight Mini, DIGIT and TacTip, then shortlist tactile sensors for grasping, slip detection and insertion with source-specific limits.',
+    h1: 'Tactile sensor comparison for robot manipulation',
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-09-20',
+    updated: '2026-10-06',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
     keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor'],
     startHere: {
-      heading: "Explore a sensor in detail",
+      heading: "Choose a comparison route",
       links: [
         { label: "DIGIT tactile sensor", href: "/sensors/digit", description: "Original hardware specifications, Python frames and calibration limits." },
         { label: "GelSight Mini", href: "/sensors/gelsight-mini", description: "Read the integration and evidence guide before selecting hardware." },
-        { label: "ReSkin magnetic tactile sensing", href: "/sensors/reskin", description: "Understand the sensing approach and source-bounded integration requirements." },
+          { label: "ReSkin magnetic tactile sensing", href: "/sensors/reskin", description: "Understand the sensing approach and source-bounded integration requirements." },
+          { label: "Compare by manipulation task", href: "/sensors#task-selection", description: "Shortlist by grasping, slip, insertion or full-hand coverage." },
       ],
     },
     quickAnswer: [
@@ -3121,6 +3122,119 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Do not select a sensor from spatial resolution alone. Compare contact coverage, shear sensitivity, latency, force range, drift, replaceability, wear, wiring, middleware, and closed-loop task evidence.',
     ],
     sections: [
+{
+      "id": "optical-comparison",
+      "heading": "GelSight vs DIGIT vs TacTip: what should you compare?",
+      "body": [
+            "GelSight is both a sensing technology name and a manufacturer name. This comparison uses GelSight Mini and the original DIGIT; Digit 360 is a separate device. TacTip is a family of designs, so choose a particular variant before comparing specifications.",
+            "This is a source-based selection guide, not a head-to-head hardware test. A camera frame rate is not an end-to-end control rate, and an image is not a calibrated force measurement."
+      ],
+      "table": {
+            "headers": [
+                  "System",
+                  "Contact observation",
+                  "Integration decision",
+                  "Limit to preserve"
+            ],
+            "rows": [
+                  [
+                        "GelSight Mini",
+                        "Tactile RGB images, surface topography cues and marker motion",
+                  "Check the camera workflow, mounting and reconstruction software for your robot",
+                        "The manufacturer documents this model; force and slip accuracy require a defined model and protocol."
+                  ],
+                  [
+                        "Original DIGIT",
+                        "Tactile RGB images and contact geometry cues",
+                        "Check fingertip mounting and the archived design / Python interface repositories",
+                        "Raw images do not automatically provide force or slip; keep original DIGIT separate from Digit 360."
+                  ],
+                  [
+                        "TacTip",
+                        "Internal marker displacement in a soft optical fingertip",
+                        "Choose a geometry, camera, skin and inference pipeline before integration",
+                        "No single specification describes the whole sensor family."
+                  ]
+            ]
+      },
+      "links": [
+            {
+                  "label": "GelSight Mini official software and integration examples",
+                  "href": "https://github.com/gelsightinc/gsrobotics"
+            },
+            {
+                  "label": "Original DIGIT paper",
+                  "href": "https://arxiv.org/abs/2005.14679"
+            },
+            {
+                  "label": "TacTip review and sensor family",
+                  "href": "https://arxiv.org/abs/2105.14455"
+            },
+            {
+                  "label": "Plan tactile sensor calibration",
+                  "href": "/guides/tactile-sensor-calibration"
+            }
+      ]
+},
+{
+      "id": "task-selection",
+      "heading": "Tactile sensor comparison by manipulation task",
+      "body": [
+            "Use these task requirements to build a shortlist, then test that shortlist under matching objects, loads, mounts and controller settings. These are evaluation criteria, not measured rankings or claims that a sensor family is always best."
+      ],
+      "table": {
+            "headers": [
+                  "Task",
+                  "Signal to investigate",
+                  "What to measure",
+                  "Common selection mistake"
+            ],
+            "rows": [
+                  [
+                        "Grasping fragile objects",
+                        "Contact distribution and calibrated normal-force cues",
+                        "Object damage, grasp success and force overshoot at matched loads",
+                        "Choosing the highest image resolution without checking force calibration."
+                  ],
+                  [
+                        "Slip detection and recovery",
+                        "Time-varying shear, marker motion or vibration cues",
+                        "Detection delay, false alarms and recovery success across materials",
+                        "Treating a raw tactile image or advertised frame rate as validated slip detection."
+                  ],
+                  [
+                        "Insertion and alignment",
+                        "Local contact geometry and directional contact cues",
+                        "Insertion success, peak contact force and recovery under pose errors",
+                        "Comparing results obtained with different tolerances, parts or controllers."
+                  ],
+                  [
+                        "Dexterous hands and full-hand coverage",
+                        "Fingertip detail plus contact coverage across fingers and palm",
+                        "Missed contacts, wiring constraints, latency and repeatability after replacement",
+                        "Assuming one fingertip sensor measures contacts across the whole hand."
+                  ]
+            ]
+      },
+      "links": [
+            {
+                  "label": "Slip detection methods and evaluation",
+                  "href": "/guides/slip-detection-robot-hand"
+            },
+            {
+                  "label": "Robot-hand tactile sensor selection",
+                  "href": "/applications/robot-hand-tactile-sensor"
+            },
+            {
+                  "label": "ROS 2 tactile integration and timing",
+                  "href": "/guides/ros2-tactile-sensing"
+            },
+            {
+                  "label": "Design a robot manipulation benchmark",
+                  "href": "/guides/tactile-sensor-benchmark-robot-manipulation"
+            }
+      ]
+},
       {
         heading: 'Robot tactile sensor taxonomy',
         body: [

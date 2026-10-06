@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-06",
+  "status": "review_pending",
+  "snapshot_sha256": "f962d76aeed40d87d15e0deae7d60bb51eac64092e187e8db441b07231947505",
+  "human_review_event": null,
+  "production_changed": false,
+  "keyword_map": [
+    {
+      "keyword": "what is tactile sensing",
+      "path": "/technology",
+      "action": "本次补充定义、原理与下一步入口"
+    },
+    {
+      "keyword": "gelsight vs digit",
+      "path": "/sensors#optical-comparison",
+      "action": "本次补充三类光学传感器对比表"
+    },
+    {
+      "keyword": "tactile sensor comparison",
+      "path": "/sensors#task-selection",
+      "action": "本次补充四类任务的选型与验证表"
+    },
+    {
+      "keyword": "visuo-tactile datasets",
+      "path": "/datasets",
+      "action": "本次优化标题与H1，保留筛选/比较/导出"
+    },
+    {
+      "keyword": "robot skin vs e-skin",
+      "path": "/guides/robot-skin-vs-e-skin",
+      "action": "已有独立页面，本次不重复建页"
+    },
+    {
+      "keyword": "tactile foundation model",
+      "path": "/tactile-foundation-models",
+      "action": "已有页面，后续以模型证据更新为准"
+    },
+    {
+      "keyword": "tactile sensor ROS 2",
+      "path": "/guides/ros2-tactile-sensing",
+      "action": "已有教程；运行、回放与硬件验证须分别记录"
+    },
+    {
+      "keyword": "what is robot skin",
+      "path": "/robot-skin",
+      "action": "本次将搜索标题与已有定义式H1对齐"
+    },
+    {
+      "keyword": "slip detection tactile sensor",
+      "path": "/guides/slip-detection-robot-hand",
+      "action": "已有页面，新增选型表导向此页"
+    },
+    {
+      "keyword": "visuo-tactile world model",
+      "path": "/guides/visuo-tactile-world-models-robot-manipulation",
+      "action": "已有专题，不新增相似文章"
+    },
+    {
+      "keyword": "tactile sensor types",
+      "path": "/sensors#section-robot-tactile-sensor-taxonomy",
+      "action": "复用原有传感器类型表"
+    },
+    {
+      "keyword": "electronic skin humanoid robot",
+      "path": "/humanoid-robot-skin",
+      "action": "已有页面，保留"
+    },
+    {
+      "keyword": "tactile sensor calibration",
+      "path": "/guides/tactile-sensor-calibration",
+      "action": "已有指南，新增横评指向校准页"
+    },
+    {
+      "keyword": "best tactile sensor robot hand",
+      "path": "/applications/robot-hand-tactile-sensor",
+      "action": "已有选型指南，不制造无统一实验条件的最佳榜单"
+    }
+  ],
+  "checks": {
+    "tests": "217 passed",
+    "lint": "passed",
+    "build": "210 static pages generated",
+    "export": "185 sitemap URLs and on-page checks passed",
+    "desktop": "sensor comparison inspected",
+    "mobile": "390px sensor and technology views inspected; no whole-page horizontal overflow in DOM check",
+    "dataset_search": "Touch and Go query returned matching records",
+    "dataset_compare_export": "browser operation timed out; not verified this run",
+    "no_js": "core text verified in static HTML, separate browser session not run",
+    "google_live": "not run",
+    "google_indexed": "not run"
+  },
+  "measurement": {
+    "gsc_baseline": null,
+    "reason": "No current GSC or GA4 traffic export acquired in this task. No traffic change claimed.",
+    "primary": "organic visitors using research resources; use existing resource analytics where available",
+    "followup": "After release, review these four landing pages and mapped queries at 14 and 28 days; compare equal complete 28-day windows with the same country/device/search-type filters. Low samples extend observation."
+  },
+  "sources": {
+    "report": "User supplied roboskin-keyword-research.pdf dated 2026-10-06; SERP findings are report claims, not independently rerun here. No reliable search-volume baseline in report.",
+    "digit": "arXiv 2005.14679 abstract retrieved",
+    "tactip": "arXiv 2105.14455 abstract retrieved",
+    "gelsight": "Official gsrobotics README retrieved; datasheet returned 403, so new comparison cites official software repository. Existing sensor review dates unchanged."
+  }
+}
