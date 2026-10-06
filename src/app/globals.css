@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+.analytics-consent { position: fixed; bottom: 1rem; left: 1rem; right: 1rem; z-index: 100; max-width: 56rem; margin: auto; padding: 1.1rem 1.3rem; display: flex; align-items: center; gap: 1.5rem; border: 1px solid #b9bcb4; border-radius: 12px; background: #f5f6ef; color: #181917; box-shadow: 0 5px 28px #0002; font-size: .875rem; }
+.analytics-consent p { margin-top: .3rem; line-height: 1.5; }
+.analytics-consent a { text-decoration: underline; }
+.analytics-consent-actions { display: flex; flex-shrink: 0; gap: .6rem; }
+.analytics-consent-actions button { cursor: pointer; padding: .7rem .9rem; border: 1px solid #565a50; border-radius: 6px; min-height: 44px; }
+.analytics-consent-actions button:last-child { background: #181917; color: #fff; }
+.analytics-settings { cursor: pointer; text-decoration: underline; }
+@media (max-width: 640px) { .analytics-consent { align-items: stretch; flex-direction: column; gap: .8rem; } .analytics-consent-actions button { flex: 1; } }
+
 :root {
   color-scheme: dark;
   --bg: #181917;

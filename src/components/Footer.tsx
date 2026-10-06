@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { footerNavigation, site } from '@/content/site';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import { AnalyticsSettingsButton } from '@/components/GoogleAnalytics';
 
 export default function Footer() {
   return (
@@ -58,6 +59,7 @@ export default function Footer() {
           <div>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
+            <AnalyticsSettingsButton />
           </div>
         </div>
       </div>

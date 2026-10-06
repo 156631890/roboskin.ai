@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <div className="container-shell">
             <span className="eyebrow">Privacy</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Privacy Policy</h1>
-            <p className="mt-5 max-w-3xl">Last updated: September 30, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: October 6, 2026</p>
           </div>
         </header>
 
@@ -28,6 +28,18 @@ export default function PrivacyPolicyPage() {
                   When online submission is configured, requests are forwarded to our delivery service and management inbox. A prepared email or WhatsApp draft is sent only when you send it in your own app. Delivery errors are not recorded as successful inquiries.
                   When the Newsletter panel shows its unavailable state, it does not render an email field or collect an email address. If a signup form is displayed, it identifies the external email-list provider before submission. The Buttondown integration sends your address through our server for double opt-in confirmation; an approved hosted provider form may send it directly. An accepted request is not a confirmed subscription. Each sent brief includes an unsubscribe link.
                   When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold">Optional Google Analytics</h2>
+                <p className="mt-3">
+                  If you choose Allow analytics, Google Analytics 4 measures page visits and engagement on roboskin.ai. Google receives page paths, page titles, referring website information, and browser and device information, and derives approximate location from the connection. Analytics cookies distinguish browsers and sessions; we set a 90-day cookie lifetime that may refresh with visits. Google processes this data under its <a className="legal-link" href="https://policies.google.com/privacy">Privacy Policy</a>.
+                </p>
+                <p className="mt-3">
+                  We load the Google tag only after you allow it. We remove query strings and fragments from reported page addresses and exclude external referrer paths. We do not send form contents, email addresses, or user IDs to GA4, and we do not enable Google signals or advertising personalization. Automatic form, search, and outbound-link measurement is disabled.
+                </p>
+                <p className="mt-3">
+                  Use Analytics settings in the footer to allow or decline Google Analytics at any time. Declining stops further GA4 collection and removes its cookies on this site; it does not remove data already received by Google. We store your choice in this browser&apos;s local storage. This choice applies to Google Analytics; the cookie-free Vercel statistics described above remain separate.
                 </p>
               </div>
               <div>
