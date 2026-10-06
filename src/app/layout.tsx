@@ -6,6 +6,7 @@ import "./contact-edition.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
 import {
@@ -77,6 +78,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-grow">{children}</main>
         <Footer />
         <AnalyticsTracker />
+        <GoogleAnalytics />
         <Analytics />
       </body>
     </html>
