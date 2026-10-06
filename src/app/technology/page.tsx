@@ -33,13 +33,31 @@ export default function TechnologyPage() {
         <div className="container-shell">
           <span className="eyebrow">Technology</span>
           <h1 className="mt-5 text-4xl font-bold text-white md:text-6xl">
-            Tactile AI and flexible tactile sensor technology
+            What is tactile sensing in robotics?
           </h1>
           <p className="mt-5 max-w-3xl text-soft">
-            This page explains tactile AI, tactile sensing layers, flexible tactile sensor concepts, signal flow, and
-            validation questions without presenting RoboSkin.ai as an active product vendor.
+            Tactile sensing lets a robot measure physical contact through signals such as pressure, deformation,
+            vibration or changes in an optical image. The available measurements depend on the sensor and its calibration.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
+        </div>
+      </section>
+
+      <section className="pb-20" aria-labelledby="tactile-sensing-basics">
+        <div className="container-shell">
+          <div className="glass-card p-7 md:p-8">
+            <h2 id="tactile-sensing-basics" className="text-3xl font-bold text-white">How tactile sensing works</h2>
+            <p className="mt-4 max-w-3xl text-soft">Contact changes a sensing surface or element. Electronics or a camera capture that change; processing converts it into a usable observation. A controller can then use the observation to adjust a grasp or investigate an unexpected contact.</p>
+            <p className="mt-4 max-w-3xl text-soft">A tactile sensor supplies observations. Robot skin distributes sensing over a surface. Tactile AI uses learned models to interpret touch or support decisions. None of these labels alone establishes calibrated force, reliable slip detection or better task performance.</p>
+            <p className="mt-4 max-w-3xl text-soft">For example, an optical fingertip can record how a gel deforms during a grasp. Estimating force from those images needs calibration or a model; evaluating slip recovery also needs a controller and task-level tests.</p>
+            <nav aria-label="Tactile sensing next steps" className="mt-6 flex flex-wrap gap-5 text-accent underline underline-offset-4">
+              <Link href="/sensors#optical-comparison">Compare GelSight, DIGIT and TacTip</Link>
+              <Link href="/sensors#task-selection">Choose sensors by manipulation task</Link>
+              <Link href="/datasets">Find visuo-tactile datasets</Link>
+              <Link href="/guides/robot-skin-vs-e-skin">Robot skin vs e-skin</Link>
+            </nav>
+            <p className="mt-5 text-sm text-soft">Source example: <a className="text-accent underline" href="https://arxiv.org/abs/2005.14679">the original DIGIT paper</a>. This introduction summarizes sensing concepts; RoboSkin.ai has not performed a hardware comparison for this page.</p>
+          </div>
         </div>
       </section>
 
