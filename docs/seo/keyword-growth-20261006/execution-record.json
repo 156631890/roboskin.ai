@@ -1,6 +1,6 @@
 {
   "date": "2026-10-06",
-  "status": "review_pending",
+  "status": "release_prepared",
   "snapshot_sha256": "f962d76aeed40d87d15e0deae7d60bb51eac64092e187e8db441b07231947505",
   "human_review_event": null,
   "production_changed": false,
@@ -84,14 +84,23 @@
     "desktop": "sensor comparison inspected",
     "mobile": "390px sensor and technology views inspected; no whole-page horizontal overflow in DOM check",
     "dataset_search": "Touch and Go query returned matching records",
-    "dataset_compare_export": "browser operation timed out; not verified this run",
+    "dataset_compare_export": "passed: selected Touch and Go and TVL; retained comparison while filtering; CSV contains two records with original source links and unknown-license limitations. Browser download-event listener timed out, but actual download and page confirmation were verified.",
     "no_js": "core text verified in static HTML, separate browser session not run",
     "google_live": "not run",
     "google_indexed": "not run"
   },
   "measurement": {
-    "gsc_baseline": null,
-    "reason": "No current GSC or GA4 traffic export acquired in this task. No traffic change claimed.",
+    "gsc_baseline": {
+      "acquired": true,
+      "date": "2026-10-06",
+      "current_window": "2026-09-06 to 2026-10-03",
+      "previous_window": "2026-08-09 to 2026-09-05",
+      "search_type": "web",
+      "country": "all",
+      "device": "all",
+      "storage": "Private local evidence; raw data and account metrics are not committed."
+    },
+    "reason": "GSC UI and CSV export provide a pre-release baseline. No outcome from this release is claimed.",
     "primary": "organic visitors using research resources; use existing resource analytics where available",
     "followup": "After release, review these four landing pages and mapped queries at 14 and 28 days; compare equal complete 28-day windows with the same country/device/search-type filters. Low samples extend observation."
   },
@@ -100,5 +109,11 @@
     "digit": "arXiv 2005.14679 abstract retrieved",
     "tactip": "arXiv 2105.14455 abstract retrieved",
     "gelsight": "Official gsrobotics README retrieved; datasheet returned 403, so new comparison cites official software repository. Existing sensor review dates unchanged."
+  },
+  "release_authorization": {
+    "basis": "Existing user instructions in the originating conversation to fix, commit and deploy, followed by broad permission and the current keyword-report optimization request.",
+    "scope": "Four existing pages and their matching metadata; preserve resource tools and evidence limits.",
+    "separate_version_review_recorded": false,
+    "note": "User instructions take precedence over the local skill approval workflow. This entry records deployment authority, not a human content review."
   }
 }
