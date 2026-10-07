@@ -9,7 +9,7 @@ export const sensorDetailPages: SeoTopicPage[] = [
     kicker: 'Sensor evidence / Vision-based fingertip',
     intent: 'Help robotics researchers evaluate the original DIGIT hardware and start with its documented Python interface.',
     published: '2026-09-12',
-    updated: '2026-09-16',
+    updated: "2026-10-07",
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -81,6 +81,28 @@ export const sensorDetailPages: SeoTopicPage[] = [
           }
         ]
       },
+      {
+        "id": "ros2-integration",
+        "heading": "How to plan a DIGIT and ROS 2 integration",
+        "body": [
+          "Start by verifying acquisition through the official digit-interface on your unit. A ROS 2 adapter would then publish the camera frames using an image message with a declared encoding, sensor frame and timestamp convention. Keep the acquisition time distinct from the publish time, record dropped frames, and synchronize images with robot state and actions before using them for learning.",
+          "The linked RoboSkin ROS 2 tutorial exercises a synthetic taxel-message pipeline, not a tested DIGIT camera driver. Use it for message, validity and replay concepts; do not insert RGB pixels into a force-array message or call image transport calibrated tactile force. No DIGIT hardware integration was run for this guide."
+        ],
+        "links": [
+          {
+            "label": "Official DIGIT acquisition interface",
+            "href": 'https://github.com/facebookresearch/digit-interface/tree/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9'
+          },
+          {
+            "label": "ROS 2 tutorial: messages, validity and replay",
+            "href": "/guides/ros2-tactile-sensing"
+          },
+          {
+            "label": "Calibration before depth or force estimates",
+            "href": "/guides/tactile-sensor-calibration"
+          }
+        ]
+      }
     ],
     faqs: [
       { question: 'Does DIGIT run at 30 or 60 FPS?', answer: 'The original paper reports 60 FPS at 640 × 480. The official Python README initializes a 640 × 480 stream at 30 FPS. Check the supported formats on the actual unit and explicitly record the mode used.' },
@@ -89,11 +111,16 @@ export const sensorDetailPages: SeoTopicPage[] = [
       { question: 'Are DIGIT and Digit 360 the same sensor?', answer: 'No. This page covers the original 2020 DIGIT. Digit 360 and DIGIT Pinki are distinct designs; their sensing modalities and performance claims must be checked in their own sources.' },
     ],
     relatedLinks: [
+      {
+        "label": "GelSight vs DIGIT comparison",
+        "href": "/guides/gelsight-vs-digit",
+        "description": "Choose by task, integration requirements and a matched evaluation plan."
+      },
       { label: 'Sensor directory', href: '/sensors#sensor-digit', description: 'Return to the original DIGIT directory record.' },
       { label: 'GelSight Mini guide', href: '/sensors/gelsight-mini', description: 'Review a commercial optical sensor and its software workflow.' },
       { label: 'ReSkin guide', href: '/sensors/reskin', description: 'Compare a magnetic skin and its calibration requirements.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Check collection units, sensor identities, access, and splits.' },
-      { label: 'Experimental evidence', href: '/benchmarks#experiment-evidence', description: 'Read results alongside their protocol and evidence boundaries.' },
+      { label: 'Experimental evidence', href: '/benchmarks#experiment-evidence', description: 'Read results alongside their protocol and evidence boundaries.' }
     ],
     sources: [
       { label: 'Lambeta et al.: original DIGIT paper, Table I and hardware evaluation', href: 'https://arxiv.org/pdf/2005.14679#page=2' },
@@ -111,7 +138,7 @@ export const sensorDetailPages: SeoTopicPage[] = [
     kicker: 'Sensor evidence / Commercial optical touch',
     intent: 'Help researchers distinguish GelSight Mini manufacturer specifications from software reconstruction settings and experimental claims.',
     published: '2026-09-12',
-    updated: '2026-09-16',
+    updated: "2026-10-07",
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -193,12 +220,17 @@ export const sensorDetailPages: SeoTopicPage[] = [
       { question: 'Can the gel be replaced?', answer: 'The manufacturer describes a tool-free, user-replaceable cartridge. Check the image reference and task calibration after replacement; mechanical replacement alone does not verify that a learned model transfers unchanged.' },
     ],
     relatedLinks: [
+      {
+        "label": "GelSight vs DIGIT comparison",
+        "href": "/guides/gelsight-vs-digit",
+        "description": "Choose by task, integration requirements and a matched evaluation plan."
+      },
       { label: 'Sensor directory', href: '/sensors#sensor-gelsight-mini', description: 'Return to the GelSight Mini sensor record.' },
       { label: 'DIGIT guide', href: '/sensors/digit', description: 'Compare the original compact visual fingertip and its stream settings.' },
       { label: 'ReSkin guide', href: '/sensors/reskin', description: 'Review a magnetic alternative and its signal path.' },
       { label: 'Spatial-tactile teleoperation evidence', href: '/research/missing-touch-spatial-tactile-feedback-teleoperation-2026', description: 'Read the human-task protocol and its hardware boundary.' },
       { label: 'SoftVTBench evidence', href: '/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026', description: 'Keep simulated data and physical hardware claims distinct.' },
-      { label: 'Experimental evidence', href: '/benchmarks#experiment-evidence', description: 'Read numerical results with their sample and test conditions.' },
+      { label: 'Experimental evidence', href: '/benchmarks#experiment-evidence', description: 'Read numerical results with their sample and test conditions.' }
     ],
     sources: [
       { label: 'GelSight Mini official datasheet, specifications and environmental conditions on page 3', href: 'https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GelSight_Datasheet_GSMini.pdf#page=3' },
