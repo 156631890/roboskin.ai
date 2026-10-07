@@ -2,6 +2,7 @@ export const evidenceBatch = '2026-09-12-evidence-sensors';
 export const newsletterBatch = '2026-09-12-newsletter';
 export const tactileAiGrowthBatch = '2026-09-12-tactile-ai-expansion';
 export const vlaGrowthBatch = '2026-09-15-vla-search-intent';
+export const resourceGrowthBatch = '2026-10-07-resource-journeys';
 
 const evidencePaths = new Set(['/benchmarks', '/sensors', '/sensors/digit', '/sensors/gelsight-mini', '/sensors/reskin']);
 

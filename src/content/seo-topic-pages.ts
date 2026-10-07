@@ -27,7 +27,7 @@ export type SeoTopicPage = {
     heading: string;
     body: string[];
     bullets?: string[];
-    links?: { label: string; href: string }[];
+    links?: { label: string; href: string; download?: boolean }[];
     table?: {
       headers: string[];
       rows: string[][];
@@ -378,11 +378,11 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-skin',
     title: 'What Is Robot Skin? Types, Sensors & How It Works',
     description:
-      'Robot skin is a tactile sensing surface for robots. Learn how robot skin relates to tactile AI, e-skin, humanoid hands, grippers, and contact-aware robotics.',
+      'Understand robot skin types, optical and magnetic sensing, conductive surfaces, and the steps from raw contact signals to calibrated robot feedback.',
     h1: 'What is robot skin?',
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-10-06',
+    updated: '2026-10-07',
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -436,6 +436,48 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'robot-skin-types',
+        heading: 'Types of robot skin: compare the signal, not only the material',
+        body: [
+          'A soft contact surface can use very different sensing mechanisms. The examples below show how a physical interaction becomes an observation; they are not a ranking of accuracy, durability or readiness. A compact fingertip and a distributed hand surface also solve different coverage problems.',
+          'DIGIT is a vision-based tactile sensor, ReSkin separates a replaceable magnetic interface from the sensing electronics, and Cambridge’s single-material skin uses electrical impedance measurements and learned interpretation. The linked original sources establish these mechanisms; selecting and validating an installation remains a separate engineering task.',
+        ],
+        table: {
+          headers: ['Sensing route', 'What is observed', 'Example and coverage context', 'What to check for your task'],
+          rows: [
+            ['Optical tactile sensing', 'A camera observes changes in the deformable contact surface.', 'Original DIGIT: a compact sensor designed for in-hand manipulation.', 'Mounting space, illumination and gel condition; verify the calibration used to infer depth or force.'],
+            ['Magnetic tactile skin', 'Magnetic-field changes caused by deformation of a magnetic interface.', 'ReSkin: replaceable soft interfaces with separate electronics.', 'Skin placement, magnetic environment and response changes after replacement; validate the response model.'],
+            ['Conductive continuous skin', 'Electrical measurements across a soft conductive material.', 'Cambridge/UCL single-layer skin: a hand-shaped research prototype using electrical impedance tomography.', 'Electrode layout and training conditions; separate contact interpretation from a calibrated physical quantity.'],
+            ['Capacitive textile skin', 'Capacitance changes associated with the sensing structure.', 'The linked twisted-yarn preprint compares layer configurations in a small research prototype.', 'Pressure and proximity requirements, mounting and coverage; prototype results do not establish whole-body performance.'],
+          ],
+        },
+        links: [
+          { label: 'Compare GelSight Mini and original DIGIT integration choices', href: '/guides/gelsight-vs-digit' },
+          { label: 'Inspect ReSkin acquisition and calibration limits', href: '/sensors/reskin' },
+          { label: 'Choose sensor requirements by robot task', href: '/sensors#task-selection' },
+        ],
+      },
+      {
+        id: 'robot-skin-integration',
+        heading: 'How robot skin works: from contact to usable feedback',
+        body: [
+          'Start with the quantity the task needs: a contact event, location, calibrated force estimate or a prediction such as slip risk. These are different outputs. A raw image, resistance or magnetic reading does not become a force measurement simply because software displays a number.',
+          'Use the following sequence as a planning checklist. It is an editorial workflow, not a hardware test result or a safety certification procedure. Keep the evidence for each stage with the data so another researcher can see which parts were actually checked.',
+        ],
+        bullets: [
+          'Define the task and contact zones, then record the sensor version, mounting geometry and replaceable surface.',
+          'Capture raw readings with timestamps and validity flags; identify missing samples and the coordinate frame.',
+          'Record calibration inputs, reference measurements and the range of conditions actually checked.',
+          'Align touch, robot state and action timestamps; measure observed delays rather than assuming the requested sample rate was achieved.',
+          'Evaluate the task with a stated baseline, independent trials and failure counts; keep inferred contact state separate from the executed robot response.',
+        ],
+        links: [
+          { label: 'Download and use the tactile experiment worksheet', href: '/tactile-ai#experiment-worksheet' },
+          { label: 'Work through sensor calibration', href: '/guides/tactile-sensor-calibration' },
+          { label: 'Inspect the ROS 2 tactile integration guide and its validation status', href: '/guides/ros2-tactile-sensing' },
+        ],
+      },
+      {
         heading: 'Where robot skin is used',
         body: [
           'Robot skin appears across humanoid robot hands, robotic grippers, e-skin research, flexible tactile sensors, prosthetics, and Physical AI. These areas overlap, but they raise different engineering questions.',
@@ -482,6 +524,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     sources: [
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
+      { label: 'Original DIGIT paper: vision-based tactile sensor', href: 'https://arxiv.org/abs/2005.14679v1' },
+      { label: 'Original ReSkin paper: magnetic sensing and replaceable skin', href: 'https://arxiv.org/abs/2111.00071v2' },
       { label: 'Nature Communications GenForce article', href: 'https://www.nature.com/articles/s41467-026-68753-1' },
       { label: 'Twisted-yarn textile capacitive robotic-skin preprint', href: 'https://arxiv.org/abs/2608.14406' },
     ],
@@ -494,7 +538,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-09-20',
+    updated: '2026-10-07',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -558,6 +602,25 @@ export const seoTopicPages: SeoTopicPage[] = [
     }
   ]
 },
+      {
+        id: 'experiment-worksheet',
+        heading: 'Download a tactile experiment worksheet',
+        body: [
+          'Use this blank CSV to turn a paper, sensor comparison or dataset choice into a documented experiment. It has separate columns for planned values, observed values and evidence, with links to the relevant RoboSkin calibration, data and evaluation guides. Open it in a spreadsheet and fill it with your own records.',
+          'The worksheet is an editorial planning aid, version 2026-10-07. It contains no measured results, does not validate a robot or certify safety, and leaves unverified fields blank. Record not applicable with a reason where needed. Your completed sheet stays on your device; this download does not upload experiment data.',
+        ],
+        bullets: [
+          'Before collection: define the task, sensor or dataset revision, permitted reuse and success criterion.',
+          'Before training: document calibration, timestamps, missing observations and the unit held out for evaluation.',
+          'After evaluation: record independent trials, failures, measured timing, baseline conditions and artifact locations.',
+          'Keep source inspection, code execution, replay and physical robot testing as separate evidence stages.',
+        ],
+        links: [
+          { label: 'Download the blank tactile experiment worksheet (CSV)', href: '/resources/tactile-experiment-worksheet.csv', download: true },
+          { label: 'Practice data-quality checks with the synthetic Python exercise', href: '/guides/python-tactile-data-processing' },
+          { label: 'Compare reported experiments with their conditions attached', href: '/benchmarks#experiment-evidence' },
+        ],
+      },
       {
         heading: 'Start a tactile AI experiment with a measurable question',
         body: [

@@ -3,7 +3,7 @@
 import { track } from '@vercel/analytics';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { evidenceBatch, growthBatchForPath } from '@/lib/growth-batches.mjs';
+import { evidenceBatch, growthBatchForPath, resourceGrowthBatch } from '@/lib/growth-batches.mjs';
 
 const referralSources: Array<[string, string]> = [
   ['google.', 'Google'],
@@ -80,6 +80,15 @@ export default function AnalyticsTracker() {
       const url = new URL(anchor.href, window.location.href);
       const label = cleanLabel(anchor.textContent ?? '');
       const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
+
+      if (url.origin === window.location.origin && anchor.hasAttribute('data-resource-route')) {
+        track('Research Resource Route Open', { ...properties, resource: anchor.getAttribute('data-resource-route')!, batch: resourceGrowthBatch });
+      }
+
+      if (url.origin === window.location.origin && url.pathname === '/resources/tactile-experiment-worksheet.csv') {
+        track('Experiment Worksheet Download', { ...properties, batch: resourceGrowthBatch });
+        return;
+      }
 
       if (url.origin === window.location.origin && anchor.hasAttribute('data-search-route')) {
         track('Search Route Open', { ...properties, section: url.hash, batch: '2026-09-20-search-entry-routes' });

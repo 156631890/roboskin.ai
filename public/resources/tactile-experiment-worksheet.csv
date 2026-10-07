@@ -1,0 +1,25 @@
+worksheet_version,stage,record_id,question,planned_value,observed_value,evidence_location,reference_url,notes
+2026-10-07,scope,task,What task and outcome are being tested?,,,,https://roboskin.ai/tactile-ai,Blank planning template; not measured data or safety certification.
+2026-10-07,scope,success,What exact criterion defines one successful independent trial?,,,,https://roboskin.ai/benchmarks#experiment-evidence,Blank planning template; not measured data or safety certification.
+2026-10-07,scope,stage,"Is this source inspection, code execution, replay or a physical test?",,,,https://roboskin.ai/guides/ros2-tactile-sensing,Blank planning template; not measured data or safety certification.
+2026-10-07,hardware,sensor,"Which sensor, electronics, firmware and contact-surface revision is used?",,,,https://roboskin.ai/sensors,Blank planning template; not measured data or safety certification.
+2026-10-07,hardware,mounting,"What contact zones, mounting geometry and coordinate frames are used?",,,,https://roboskin.ai/robot-skin#robot-skin-integration,Blank planning template; not measured data or safety certification.
+2026-10-07,hardware,raw_signal,What does the raw channel measure and in which units?,,,,https://roboskin.ai/guides/tactile-sensor-calibration,Blank planning template; not measured data or safety certification.
+2026-10-07,calibration,reference,What independent reference and calibration artifact are available?,,,,https://roboskin.ai/guides/tactile-sensor-calibration,Blank planning template; not measured data or safety certification.
+2026-10-07,calibration,conditions,"Which loads, shapes, contact locations and environmental conditions were checked?",,,,https://roboskin.ai/guides/tactile-sensor-calibration,Blank planning template; not measured data or safety certification.
+2026-10-07,calibration,replacement,"What was rechecked after a surface, mount or hardware change?",,,,https://roboskin.ai/guides/tactile-sensor-calibration,Blank planning template; not measured data or safety certification.
+2026-10-07,data,revision,Which dataset files and release revision were actually accessed?,,,,https://roboskin.ai/datasets,Blank planning template; not measured data or safety certification.
+2026-10-07,data,license,What license applies to these data files and the intended reuse?,,,,https://roboskin.ai/datasets,Blank planning template; not measured data or safety certification.
+2026-10-07,data,timestamps,"Which clock, timestamp unit and alignment procedure are used?",,,,https://roboskin.ai/guides/lerobot-dataset-format,Blank planning template; not measured data or safety certification.
+2026-10-07,data,missing,"How are dropped, missing or invalid observations represented?",,,,https://roboskin.ai/guides/python-tactile-data-processing,Blank planning template; not measured data or safety certification.
+2026-10-07,data,episodes,How are episode boundaries and robot actions represented?,,,,https://roboskin.ai/guides/lerobot-dataset-format,Blank planning template; not measured data or safety certification.
+2026-10-07,data,split,"What independent objects, sessions, sensors or embodiments are held out?",,,,https://roboskin.ai/datasets,Blank planning template; not measured data or safety certification.
+2026-10-07,model,version,"Which code commit, checkpoint, preprocessing and environment were used?",,,,https://roboskin.ai/tactile-foundation-models,Blank planning template; not measured data or safety certification.
+2026-10-07,model,output,"Is the output measured, calibrated, predicted or a proposed action?",,,,https://roboskin.ai/tactile-ai,Blank planning template; not measured data or safety certification.
+2026-10-07,evaluation,baseline,"What comparator uses matched tasks, hardware and control conditions?",,,,https://roboskin.ai/benchmarks#experiment-evidence,Blank planning template; not measured data or safety certification.
+2026-10-07,evaluation,trials,How many independent trials and failures support the result?,,,,https://roboskin.ai/benchmarks#experiment-evidence,Blank planning template; not measured data or safety certification.
+2026-10-07,evaluation,timing,What timing distribution was measured and at which system boundaries?,,,,https://roboskin.ai/guides/ros2-tactile-sensing,Blank planning template; not measured data or safety certification.
+2026-10-07,evaluation,interventions,Which interventions and recovery attempts occurred?,,,,https://roboskin.ai/tactile-manipulation,Blank planning template; not measured data or safety certification.
+2026-10-07,evaluation,limits,Which conclusions remain untested or outside these conditions?,,,,https://roboskin.ai/benchmarks#experiment-evidence,Blank planning template; not measured data or safety certification.
+2026-10-07,artifacts,evidence,"Where are logs, scripts, raw observations and analysis revisions stored?",,,,https://roboskin.ai/research-index,Blank planning template; not measured data or safety certification.
+2026-10-07,artifacts,reproduction,What commands and expected outputs can another researcher reproduce?,,,,https://roboskin.ai/robotics-programming,Blank planning template; not measured data or safety certification.

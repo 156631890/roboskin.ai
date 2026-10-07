@@ -61,7 +61,7 @@ test('every News and Research preview has a decodable supported asset, including
     '@/lib/news-data': news,
     '@/lib/topic-graph': {},
     '@/lib/tactile-datasets': {},
-    ...Object.fromEntries(['ArticleBody', 'EditorialReview', 'JsonLd', 'ResearchResourceActions'].map(name => [`@/components/${name}`, {}])),
+    ...Object.fromEntries(['ArticleBody', 'EditorialReview', 'JsonLd', 'ResearchResourceActions', 'ResearchNextSteps'].map(name => [`@/components/${name}`, {}])),
   };
   const images = new Set();
   for (const [kind, posts] of [['research', research.blogPosts], ['news', news.newsPosts]]) {

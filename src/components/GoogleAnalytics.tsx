@@ -4,7 +4,7 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { analyticsConsentKey, analyticsPageUrl, analyticsReferrer, canUseGoogleAnalytics, createPageViewTracker } from '@/lib/google-analytics.mjs';
+import { analyticsCampaign, analyticsConsentKey, analyticsPageUrl, analyticsReferrer, analyticsResourceEvent, canUseGoogleAnalytics, createPageViewTracker } from '@/lib/google-analytics.mjs';
 
 declare global {
   interface Window {
@@ -41,10 +41,12 @@ export default function GoogleAnalytics() {
   const [consent, setConsent] = useState<Consent | null>(null);
   const [showChoices, setShowChoices] = useState(false);
   const initialized = useRef(false);
+  const landingLocation = useRef('');
   const tracker = useRef(createPageViewTracker((...args: unknown[]) => window.gtag?.(...args)));
 
   useEffect(() => {
     if (!canUseGoogleAnalytics(measurementId, window.location.hostname)) return;
+    landingLocation.current = window.location.href;
     setEnabled(true);
     let saved: string | null = null;
     try { saved = localStorage.getItem(analyticsConsentKey); } catch { /* Ask again when storage is unavailable. */ }
@@ -72,6 +74,7 @@ export default function GoogleAnalytics() {
         send_page_view: false,
         page_location: analyticsPageUrl(window.location.href),
         page_referrer: analyticsReferrer(document.referrer),
+        ...analyticsCampaign(landingLocation.current),
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
         cookie_expires: 60 * 60 * 24 * 90,
@@ -84,6 +87,18 @@ export default function GoogleAnalytics() {
     }));
     return () => cancelAnimationFrame(frame);
   }, [consent, enabled, pathname]);
+
+  useEffect(() => {
+    if (!enabled || consent !== 'granted') return;
+    function trackResource(event: MouseEvent) {
+      const anchor = (event.target as Element | null)?.closest?.('a');
+      if (!anchor) return;
+      const resource = analyticsResourceEvent(window.location.href, anchor.href);
+      if (resource) window.gtag?.('event', resource.name, resource.parameters);
+    }
+    document.addEventListener('click', trackResource);
+    return () => document.removeEventListener('click', trackResource);
+  }, [consent, enabled]);
 
   function choose(value: Consent) {
     try { localStorage.setItem(analyticsConsentKey, value); } catch { /* Keep the choice for this page session. */ }
