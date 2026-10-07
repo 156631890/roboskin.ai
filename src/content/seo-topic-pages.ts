@@ -1,3 +1,4 @@
+import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { programmingPages } from '@/content/programming-pages';
 import { engineeringPages } from '@/content/engineering-pages';
@@ -50,6 +51,7 @@ export type SeoTopicPage = {
 
 export const seoTopicPages: SeoTopicPage[] = [
   ...sensorDetailPages,
+  ...sensorComparisonPages,
   ...programmingPages,
   ...engineeringPages,
   {
@@ -2506,7 +2508,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-06',
+    updated: "2026-10-07",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2526,7 +2528,78 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
-{
+      {
+        "id": "choose-by-learning-task",
+        "heading": "Choose tactile datasets by the task you want to learn",
+        "body": [
+          "The best dataset is the one whose observations, labels and action contract match your experiment. Use this task shortlist to narrow the explorer, then check the dated access and license notes on each record. These are research-fit suggestions, not a benchmark ranking or a fresh verification of every download."
+        ],
+        "table": {
+          "headers": [
+            "Learning task",
+            "Start with these records",
+            "Check before training"
+          ],
+          "rows": [
+            [
+              "Materials, touch descriptions or cross-modal retrieval",
+              "Touch and Go and TVL",
+              "Touch and Go supports human-collected visuo-tactile research; TVL aligns touch, vision and language from its constituent collections. Do not infer robot action trajectories from paired observations. Keep contact sequences together and inspect label provenance."
+            ],
+            [
+              "Simulated grasping or insertion",
+              "UniVTAC Benchmark Dataset",
+              "Select the task and matching simulator version. This is simulation data; encoder pretraining samples and physical demonstrations are separate resources. Inspect actions and complete episodes before reuse."
+            ],
+            [
+              "Deformation-aware manipulation in simulation",
+              "SoftVTBench",
+              "Keep simulated visual/tactile observations and deformable-object tasks separate from claims about physical sensor transfer. Check the released files and dataset terms."
+            ],
+            [
+              "Humanoid visual-tactile-action learning",
+              "RoboTacDex",
+              "Inspect robot embodiment, tactile placement, action semantics and synchronization. Follow its dated access record; a paper or project link does not establish a verified training download."
+            ],
+            [
+              "Slip detection and recovery",
+              "Require event-labeled contact sequences; use the SlipSense research brief to define the evidence needed",
+              "Do not substitute generic grasp frames for independent slip-onset labels. Check false alarms, detection delay, load variation and held-out objects; recovery also requires actions and outcomes."
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "Touch and Go record",
+            "href": "/datasets#dataset-touch-and-go"
+          },
+          {
+            "label": "TVL record",
+            "href": "/datasets#dataset-tvl"
+          },
+          {
+            "label": "UniVTAC benchmark record",
+            "href": "/datasets#dataset-univtac-benchmark-dataset"
+          },
+          {
+            "label": "SoftVTBench record",
+            "href": "/datasets#dataset-softvtbench"
+          },
+          {
+            "label": "RoboTacDex record",
+            "href": "/datasets#dataset-robotacdex"
+          },
+          {
+            "label": "SlipSense labels and evaluation limits",
+            "href": "/research/slipsense-multimodal-slip-detection-2026"
+          },
+          {
+            "label": "Compare Sparsh and UniTouch model roles",
+            "href": "/tactile-foundation-models#sparsh-vs-unitouch"
+          }
+        ]
+      },
+      {
   "heading": "Does a paper describe data you can actually obtain?",
   "body": [
     "A result table can justify reading a method without establishing a usable download. SlipSense describes a labeled slip collection; Touch2Trace describes pretraining and cable demonstrations; Visible Touch describes real-robot demonstrations and magnetic hardware. The original papers and available official project links checked on September 19, 2026 did not establish verified downloads and reuse licenses for these collections. They remain method references rather than new downloadable dataset records.",
@@ -2646,7 +2719,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             "href": "/robot-teleoperation"
           }
         ]
-      },
+      }
     ],
     faqs: [
       {
@@ -2710,12 +2783,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/tactile-foundation-models',
     title: 'Tactile Foundation Models for Robotics',
     description:
-      'Compare tactile foundation models and related robot-learning systems by representation, prediction, policy role, evidence, and transfer limits.',
+      "Compare Sparsh, UniTouch and tactile learning systems by inputs, outputs, downstream tasks and transfer evidence. Separate encoders, world models and policies.",
     h1: 'Tactile foundation models for robotics compared',
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: '2026-08-22',
+    updated: "2026-10-07",
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2733,6 +2806,66 @@ export const seoTopicPages: SeoTopicPage[] = [
           'A reusable representation compresses raw tactile signals into features for later tasks. A world model predicts how touch may change after an action. A policy converts observations and goals into robot actions. A residual tactile controller makes fast local corrections around a slower plan.',
           'These roles can be combined, but they should not be confused. A model that improves material classification has not automatically demonstrated dexterous control. A policy with high task success has not automatically shown broad transfer across tactile sensors.',
         ],
+      },
+      {
+        "id": "sparsh-vs-unitouch",
+        "heading": "Sparsh vs UniTouch: what do you want to transfer?",
+        "body": [
+          "Original Sparsh learns reusable representations from vision-based tactile images; UniTouch aligns touch with a multimodal embedding space. Begin with the downstream output you need rather than treating them as interchangeable robot controllers. The comparison below summarizes their official project and repository documentation reviewed on October 7, 2026; RoboSkin has not run the models.",
+          "Sparsh-X is a separate multisensory extension associated with Digit 360. Its inputs and results should not be copied onto original Sparsh. Likewise, a standalone UniTouch embedding and the full Touch-LLM question-answering setup are different integration paths."
+        ],
+        "table": {
+          "headers": [
+            "Decision",
+            "Original Sparsh",
+            "UniTouch"
+          ],
+          "rows": [
+            [
+              "Representation objective",
+              "Self-supervised learning of visual tactile features for downstream touch tasks.",
+              "Bind touch to an ImageBind-based multimodal space for alignment with other modalities."
+            ],
+            [
+              "Example use",
+              "Investigate downstream contact-property estimation and manipulation tasks using TacBench evaluation.",
+              "Investigate cross-modal retrieval, classification and the separately configured Touch-LLM question-answering workflow."
+            ],
+            [
+              "Integration contract",
+              "Match sensor images, preprocessing, encoder checkpoint and the downstream task head or policy.",
+              "The standalone touch encoder returns an embedding; retrieval or language output requires the corresponding comparison or language components."
+            ],
+            [
+              "Choice criterion",
+              "A starting point when the target is reusable tactile features for a measured contact task.",
+              "A starting point when the target is touch-to-language or cross-modal semantic alignment."
+            ],
+            [
+              'Evidence boundary',
+              "A downstream demonstration does not establish transfer to every sensor or robot.",
+              "Embedding or question-answering quality does not establish closed-loop robot control success."
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "Sparsh official project and TacBench",
+            "href": 'https://sparsh-ssl.github.io/'
+          },
+          {
+            "label": "UniTouch official code and documented workflows",
+            "href": "https://github.com/cfeng16/UniTouch"
+          },
+          {
+            "label": "Choose data for the downstream task",
+            "href": "/datasets#choose-by-learning-task"
+          },
+          {
+            "label": "Need action-conditioned prediction? Compare world models",
+            "href": "/guides/visuo-tactile-world-models-robot-manipulation"
+          }
+        ]
       },
       {
         heading: 'Model and system comparison',
@@ -2779,7 +2912,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'The word foundation does not guarantee sensor independence, zero-shot robot transfer, safe contact, low latency, public weights, or production readiness. Each of those needs separate evidence. A large pretraining corpus can still contain split leakage or narrow sensor coverage.',
           'For deployment, treat the model as one layer in a tactile system. The surface, calibration, synchronization, robot state, control loop, failure logging, and task benchmark still determine whether learned touch changes behavior reliably.',
         ],
-      },
+      }
     ],
     faqs: [
       {
@@ -2819,12 +2952,20 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'UniVTAC representation evidence', href: '/research/univtac-platform-encoder-benchmark-2026', description: 'See why a pretrained tactile encoder, its datasets, policies, and benchmark must remain separate entities.' },
     ],
     sources: [
+      {
+        "label": "Original Sparsh: official project and downstream evaluation",
+        "href": 'https://sparsh-ssl.github.io/'
+      },
+      {
+        "label": "UniTouch: CVPR 2024 Binding Touch to Everything official repository",
+        "href": "https://github.com/cfeng16/UniTouch"
+      },
       { label: 'Sparsh-X multisensory touch preprint', href: 'https://arxiv.org/html/2506.14754v1' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/html/2606.08737v1' },
       { label: 'TouchWorld tactile foundation model preprint', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'EgoTouch and TouchAnything preprint', href: 'https://arxiv.org/abs/2605.13083' },
       { label: 'MiTaS multi-resolution tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
-      { label: 'UniVTAC simulation, encoder, and benchmark preprint', href: 'https://arxiv.org/html/2602.10093v1' },
+      { label: 'UniVTAC simulation, encoder, and benchmark preprint', href: 'https://arxiv.org/html/2602.10093v1' }
     ],
     paperBriefIds: ['univtac-platform-encoder-benchmark-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'mitas-multi-resolution-tactile-imitation-learning-2026'],
   },
@@ -3101,7 +3242,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-06',
+    updated: "2026-10-07",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3310,13 +3451,18 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Which tactile sensor has the best resolution?', answer: 'There is no task-independent winner. Spatial resolution must be considered with field of view, force or shear sensitivity, latency, bandwidth, durability, calibration, and closed-loop evidence.' },
     ],
     relatedLinks: [
+      {
+        "label": "GelSight vs DIGIT: detailed selection guide",
+        "href": "/guides/gelsight-vs-digit",
+        "description": "Compare integration work, calibration, task fit and a matched evaluation plan."
+      },
       { label: 'Robot skin', href: '/robot-skin', description: 'Connect individual sensors to distributed robot surfaces.' },
       { label: 'Robot hand tactile sensors', href: '/applications/robot-hand-tactile-sensor', description: 'Map fingertip, finger, and palm coverage to manipulation tasks.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Build a fair task-based sensor comparison.' },
       { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review shared evaluation suites and evidence boundaries.' },
       { label: 'ROS 2 tactile sensing', href: '/guides/ros2-tactile-sensing', description: 'Trace sensor data through logging, replay, and robot middleware.' },
       { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'See how contact signals affect robot actions.' },
-      { label: 'Vision-based tactile intelligence review', href: '/research/vision-based-tactile-intelligence-robotics-survey-2026', description: 'Compare four optical readout families and three levels of tactile information without treating inferred force as a direct measurement.' },
+      { label: 'Vision-based tactile intelligence review', href: '/research/vision-based-tactile-intelligence-robotics-survey-2026', description: 'Compare four optical readout families and three levels of tactile information without treating inferred force as a direct measurement.' }
     ],
     sources: [
       { label: 'DIGIT paper', href: 'https://arxiv.org/abs/2005.14679' },
@@ -3779,7 +3925,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: '2026-09-16',
+    updated: "2026-10-07",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3791,6 +3937,56 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Touch can extend a VLA during contact-rich manipulation by adding pressure, shear, slip, deformation, or contact-state evidence. The useful test is whether tactile input changes closed-loop outcomes under matched conditions.',
     ],
     sections: [
+      {
+        "id": "choose-a-vla",
+        "heading": "How to choose a VLA model for your robot",
+        "body": [
+          "There is no single best VLA model across robots and tasks. Use the source-reviewed model index below to reject incompatible candidates before comparing success rates. The following decision order does not change the individual records or their review dates."
+        ],
+        "table": {
+          "headers": [
+            "Your requirement",
+            "First check",
+            "Next step"
+          ],
+          "rows": [
+            [
+              "Run an available policy",
+              "Code, checkpoints, inference recipe, hardware requirements and separate licenses.",
+              "Distinguish a project-page announcement from runnable artifacts; reproduce the documented example first."
+            ],
+            [
+              "Adapt to your robot",
+              "State fields, action units, coordinate frame, gripper convention and normalization.",
+              "Compare with your dataset and controller contract before fine-tuning."
+            ],
+            [
+              "Use live tactile feedback",
+              "A documented tactile input and a trained pathway that can influence the action.",
+              "Use the tactile mechanism map; adding a dataset column does not establish model support."
+            ],
+            [
+              "Recover during contact",
+              "Control timing, intervention rules, disturbances and measured recovery on a matching task.",
+              "Evaluate a matched vision-only or no-touch baseline and report failures with trial counts."
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "Inspect demonstration and action fields in LeRobot",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Select tactile training data by task",
+            "href": "/datasets#choose-by-learning-task"
+          },
+          {
+            "label": "Compare tactile encoders separately from policies",
+            "href": "/tactile-foundation-models#sparsh-vs-unitouch"
+          }
+        ]
+      },
       {
         heading: 'What enters and leaves a robot VLA',
         body: [
@@ -3894,7 +4090,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             "href": "/robot-foundation-models"
           }
         ]
-      },
+      }
     ],
     faqs: [
       { question: 'What is a robot VLA model?', answer: 'A robot vision-language-action model uses visual observations and language instructions to produce or condition robot actions. Architectures and action interfaces vary, so the term does not specify one model design.' },
@@ -4717,7 +4913,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: '2026-09-19',
+    updated: "2026-10-07",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4862,7 +5058,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         ]
       },
       {
-        "heading": "UMI and GELLO collect different kinds of demonstrations",
+        "heading": "UMI vs GELLO: two routes to robot demonstration data",
         "body": [
           "Original UMI and GELLO are complementary collection approaches. UMI moves demonstration capture into a handheld gripper; GELLO maps a human-operated joint controller to a robot arm. The comparison below is scoped to the original project and paper, checked on September 16, 2026. It does not generalize later tactile variants to the originals."
         ],
@@ -4917,8 +5113,9 @@ export const seoTopicPages: SeoTopicPage[] = [
             "label": "Inspect LeRobot episodes, timestamps and validation",
             "href": "/guides/lerobot-dataset-format"
           }
-        ]
-      },
+        ],
+        "id": "section-umi-and-gello-collect-different-kinds-of-demonstrations"
+      }
     ],
     faqs: [
       { question: 'Can passive video replace teleoperation data?', answer: 'Passive video can support representation learning, but it does not directly supply synchronized robot action targets. Using it for policy learning requires a suitable learning objective, inferred or additional action information, and evaluation on the target robot.' },
