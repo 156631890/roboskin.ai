@@ -161,7 +161,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
 
   assert.match(seo, /title: 'Tactile Sensing Learning Paths: Sensors, Data & Control'/);
   assert.match(seo, /title: 'Tactile Robotics Research: Paper Reviews & Evidence'/);
-  assert.match(seo, /title: 'Tactile Sensing Problems: Slip, Coverage, Calibration & Data'/);
+  assert.match(seo, /title: ["']Tactile Sensing: Slip, Coverage, Calibration & Data["']/);
   assert.match(seo, /title: 'Robot Skin Applications: Hands, Grippers & Body Surfaces'/);
   assert.match(seo, /title: 'What Is Tactile Sensing\? Robotics Basics & Sensor Types'/);
   assert.match(seo, /title: 'Robot Skin, Tactile AI & Robotics Research'/);

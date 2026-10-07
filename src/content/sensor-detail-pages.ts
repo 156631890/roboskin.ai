@@ -209,8 +209,8 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/reskin',
-    title: 'ReSkin Magnetic Tactile Sensor: Design, Data & Calibration',
-    description: 'Understand ReSkin magnetic tactile sensing: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection, and calibration evidence.',
+    title: "ReSkin Magnetic Sensor: Design, Data & Calibration",
+    description: "Understand ReSkin: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection and calibration evidence.",
     h1: 'ReSkin: magnetic touch with a replaceable skin',
     kicker: 'Sensor evidence / Magnetic tactile skin',
     intent: 'Explain ReSkin hardware, raw observations, software access, and the limits of cross-skin calibration claims.',

@@ -22,7 +22,7 @@ export const roboticsProgramming: ProgrammingPage = {
   path: '/robotics-programming',
   title: 'Robotics Programming: Python, ROS 2 & Projects',
   h1: 'Robotics Programming: From First Code to Sensor Feedback',
-  description: 'Start robotics programming with Python, ROS 2 and sensor feedback. Follow a hardware-free tactile data exercise, then explore messages, replay and robot learning.',
+  description: "Start robotics programming with Python, ROS 2 and sensor feedback. Try a hardware-free tactile data exercise, then explore messages, replay and robot learning.",
   kicker: 'Programming & tutorials',
   intent: 'A single beginner overview for robotics programming, robot programming and programming robots.',
   updated: '2026-09-16', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
@@ -109,7 +109,7 @@ export const roboticsProgramming: ProgrammingPage = {
 export const ros2Tutorial: ProgrammingPage = {
   path: '/guides/ros2-tactile-sensing', title: 'ROS 2 Tactile Sensing: Publish, Inspect, Record & Replay',
   h1: 'ROS 2 tactile sensing: from synthetic messages to replay',
-  description: 'Build the RoboSkin ROS 2 starter kit, inspect normalized tactile arrays and use rosbag2 to record and replay. Includes verified source references and explicit runtime limits.',
+  description: "Build the RoboSkin ROS 2 starter kit, inspect normalized tactile arrays, and record and replay with rosbag2. Includes sources and explicit runtime limits.",
   kicker: 'ROS 2 tutorial', intent: 'An executable, version-scoped tactile message and recording walkthrough.',
   updated: '2026-09-16', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data'],
@@ -201,9 +201,9 @@ export const ros2Tutorial: ProgrammingPage = {
 
 export const pythonTactileTutorial: ProgrammingPage = {
   path: '/guides/python-tactile-data-processing',
-  title: 'Process Tactile Sensor Data with Python: CSV, Heatmaps and Contact Events',
+  title: "Python Tactile Data: CSV, Heatmaps & Contact Events",
   h1: 'Process Tactile Sensor Data with Python: CSV, Heatmaps and Contact Events',
-  description: 'Run a hardware-free Python exercise with synthetic tactile CSV data. Validate missing values and timestamps, plot a heatmap, detect teaching contact events and export results.',
+  description: "Run a hardware-free Python exercise with synthetic tactile CSV data: validate missing values and timing, plot heatmaps, detect teaching events and export.",
   kicker: 'Python tutorial', intent: 'A complete beginner tactile data processing project with reproducible outputs.',
   updated: '2026-09-16', priority: 0.78, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['Python tactile data processing', 'tactile CSV', 'tactile heatmap', 'Python robotics'],

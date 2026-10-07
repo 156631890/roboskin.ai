@@ -1,7 +1,10 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import domino from '@mixmark-io/domino';
+import { seoLength, seoLengthIssues } from '../src/lib/seo-budget.mjs';
+import { entityTypes, validateSchema, vocabulary } from './lib/schema-semantics.mjs';
 
 const origin = 'https://roboskin.ai';
 const cleanPath = (value) => new URL(value, origin).pathname.replace(/\/$/, '') || '/';
@@ -12,6 +15,15 @@ const canonicalIdentity = (value) => new URL(value, origin).href.replace(/\/$/, 
 // Domino builds a DOM without executing scripts or requesting subresources.
 export function inspectPage(html, pathname) {
   const document = domino.createDocument(html);
+  const schema = [];
+  const schemaParseErrors = [];
+  for (const script of Array.from(document.querySelectorAll('script[type="application/ld+json"]'))) {
+    try { schema.push(JSON.parse(script.textContent)); } catch (error) { schemaParseErrors.push(error.message); }
+  }
+  const pageType = pathname === '/' ? 'Home' : pathname.startsWith('/news/') ? 'News'
+    : pathname.startsWith('/research/') ? 'Research' : pathname.startsWith('/guides/') ? 'Guide'
+    : pathname.startsWith('/sensors/') ? 'Sensor detail' : pathname.startsWith('/applications/') ? 'Application'
+    : ['datasets', 'robotics-datasets', 'robot-foundation-models', 'robot-world-models', 'sensors', 'robots', 'organizations', 'research-index', 'benchmarks'].includes(pathname.replace(/^\//, '')) ? 'Directory' : 'Topic / other';
   const main = document.querySelector('main') ?? document.body;
   const links = Array.from(main.querySelectorAll('a[href]')).map((link) => ({
     href: link.getAttribute('href'),
@@ -23,6 +35,7 @@ export function inspectPage(html, pathname) {
   const description = document.querySelector('meta[name="description"]')?.getAttribute('content') ?? '';
   const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') ?? '';
   return {
+    schema, schemaParseErrors, pageType,
     path: pathname, title: normalizeText(title), description: normalizeText(description), canonical,
     h1: Array.from(document.querySelectorAll('h1')).map((heading) => normalizeText(heading.textContent)),
     titleCount: document.querySelectorAll('title').length,
@@ -40,6 +53,8 @@ export function validatePages(pages, sitemapPaths, assetPaths = new Set(), redir
   const errors = [];
   const warnings = [];
   const records = [];
+  const lengthIssues = [], schemaIssues = [], schemaUnverified = [];
+  const allTypes = entityTypes([...pages.values()].flatMap((page) => page.schema ?? []));
   const titleOwners = new Map();
   const descriptionOwners = new Map();
   const inbound = new Map(sitemapPaths.map((pathname) => [pathname, new Set()]));
@@ -66,6 +81,19 @@ export function validatePages(pages, sitemapPaths, assetPaths = new Set(), redir
       else if (value) owners.set(normalized, pathname);
     }
 
+    const lengths = seoLengthIssues(pathname, page.title, page.description).map((issue) => ({ ...issue, url: `${origin}${pathname}`, pageType: page.pageType }));
+    lengthIssues.push(...lengths);
+    for (const issue of lengths) if (!issue.exception) errors.push(`${pathname} [${page.pageType}]: ${issue.reason} (${issue.length}/${issue.limit})`);
+    for (const reason of page.schemaParseErrors ?? []) errors.push(`${pathname}: invalid JSON-LD: ${reason}`);
+    const semantics = validateSchema(page.schema ?? [], pathname, allTypes);
+    schemaIssues.push(...semantics.errors);
+    schemaUnverified.push(...semantics.unverified);
+    for (const issue of semantics.unverified) {
+      const message = `${pathname}: unverified schema reference ${issue.id} (${issue.property})`;
+      if (issue.id.startsWith(origin)) errors.push(message);
+      else warnings.push(message);
+    }
+    for (const issue of semantics.errors) errors.push(`${pathname}: schema ${issue.rule}: ${issue.types.join('/')} ${issue.property}: ${issue.reason} at ${issue.location}`);
     const destinations = new Set();
     for (const link of page.links) {
       let url;
@@ -90,10 +118,10 @@ export function validatePages(pages, sitemapPaths, assetPaths = new Set(), redir
         inbound.get(targetPath)?.add(pathname);
       }
     }
-    records.push({ path: pathname, title: page.title, description: page.description, h1: page.h1[0], bodyWords: page.bodyWords, linkedPages: destinations.size });
+    records.push({ path: pathname, pageType: page.pageType, titleLength: seoLength(page.title), descriptionLength: seoLength(page.description), title: page.title, description: page.description, h1: page.h1[0], bodyWords: page.bodyWords, linkedPages: destinations.size });
   }
   for (const record of records) record.bodyInlinks = inbound.get(record.path)?.size ?? 0;
-  return { pages: records, errors: [...new Set(errors)], warnings: [...new Set(warnings)] };
+  return { pages: records, lengthIssues, schema: { version: vocabulary.version, issues: schemaIssues, unverified: schemaUnverified }, errors: [...new Set(errors)], warnings: [...new Set(warnings)] };
 }
 
 async function listFiles(directory) {
@@ -120,8 +148,8 @@ export async function auditExport(directory) {
   return validatePages(pages, sitemapPaths, assets, redirects);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const report = await auditExport(path.resolve('out'));
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(path.resolve(process.argv[1]))).href) {
+  const report = await auditExport(path.resolve(process.env.SEO_EXPORT_DIR ?? 'out'));
   const reportIndex = process.argv.indexOf('--report');
   if (reportIndex >= 0) {
     if (!process.argv[reportIndex + 1]) throw new Error('--report requires a file path');

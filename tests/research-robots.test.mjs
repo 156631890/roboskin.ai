@@ -100,7 +100,8 @@ test('robot directory is indexable, structured, and internally connected without
   assert.match(schema, /buildResearchRobotWebPageJsonLd/);
   assert.match(schema, /mainEntity:[\s\S]*?robot-directory/);
   assert.doesNotMatch(schema, /robot\.officialUrl \? \{ sameAs/);
-  assert.doesNotMatch(schema, /Product|Offer|AggregateRating/);
+  assert.match(schema, /manufacturerRelation \? 'Product' : 'Thing'/);
+  assert.doesNotMatch(schema, /Offer|AggregateRating/);
   assert.match(seo, /'\/robots': \{[\s\S]*?index: true/);
   assert.match(protectedUrls, /https:\/\/roboskin\.ai\/robots/);
   assert.doesNotMatch(sitemap, /knowledge-graph\.json/);

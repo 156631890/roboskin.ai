@@ -1,3 +1,4 @@
+import { finalSeoTitle, SEO_TITLE_TEMPLATE } from '@/lib/seo-budget.mjs';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
@@ -41,8 +42,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   ...homeMetadata,
   title: {
-    default: `${pageSeo['/'].title} | ${site.name}`,
-    template: `%s | ${site.name}`,
+    default: finalSeoTitle(pageSeo['/'].title),
+    template: SEO_TITLE_TEMPLATE,
   },
   authors: [{ name: site.name }],
   creator: site.name,

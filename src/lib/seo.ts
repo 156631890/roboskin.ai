@@ -1,3 +1,5 @@
+import { buildEvidenceNote } from '@/lib/schema-evidence';
+import { assertSeoBudget } from '@/lib/seo-budget.mjs';
 import { getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
@@ -58,7 +60,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/solutions': {
     path: '/solutions',
-    title: 'Tactile Sensing Problems: Slip, Coverage, Calibration & Data',
+    title: "Tactile Sensing: Slip, Coverage, Calibration & Data",
     description:
       'Find an evaluation workflow for slipping objects, missing body contact, drifting sensor readings, or robot policies that need reusable touch data.',
     updated: '2026-09-22',
@@ -93,7 +95,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/physical-ai',
     title: 'Physical AI: Models, Robots & Real-World Action',
     description:
-      'Physical AI connects multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback. Map the full system and its tactile contact layer.',
+      "Physical AI connects multimodal perception, reasoning, policies, control, embodiment, safety and feedback. Map the system and its tactile contact layer.",
     updated: '2026-08-22',
     priority: 0.92,
     changeFrequency: 'weekly',
@@ -146,7 +148,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/faq': {
     path: '/faq',
-    title: 'Robot Skin & Tactile Sensing FAQ: Selection, Data & Control',
+    title: "Robot Skin FAQ: Sensor Selection, Data & Control",
     description:
       'Answers to practical robot skin questions: sensor selection, force calibration, slip detection, tactile datasets, Python, ROS 2, and research evidence.',
     updated: '2026-09-22',
@@ -159,7 +161,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/research',
     title: 'Tactile Robotics Research: Paper Reviews & Evidence',
     description:
-      'Read tactile robotics paper reviews covering sensors, robot skin, manipulation, and learning. Compare methods, reported results, limitations, and primary sources.',
+      "Read tactile robotics paper reviews on sensors, robot skin, manipulation and learning. Compare methods, reported results, limitations and primary sources.",
     updated: '2026-09-27',
     priority: 0.78,
     changeFrequency: 'weekly',
@@ -168,7 +170,7 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/research-index': {
     path: '/research-index',
-    title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
+    title: "Tactile Research Index: Sensors, Data & Evidence",
     description:
       'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
     updated: '2026-09-13',
@@ -205,7 +207,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/organizations',
     title: 'Tactile AI & Robotics Research Organizations',
     description:
-      'Browse source-verified universities, labs, and companies connected to tactile papers, datasets, benchmarks, sensors, and robot AI models with evidence boundaries.',
+      "Browse source-verified universities, labs and companies linked to tactile papers, datasets, benchmarks, sensors and robot AI models, with evidence boundaries.",
     updated: '2026-08-22',
     priority: 0.78,
     changeFrequency: 'monthly',
@@ -359,6 +361,7 @@ export function socialImageUrl(image: string) {
 export function buildPageMetadata(path: keyof typeof pageSeo | string): Metadata {
   const route = pageSeo[path];
   if (!route) throw new Error(`Missing page SEO configuration for ${path}`);
+  assertSeoBudget(route.path, route);
   const url = canonicalUrl(route.path);
 
   return {
@@ -706,22 +709,21 @@ export function buildPhysicalAiDefinedTermJsonLd() {
       name: 'RoboSkin robot skin and tactile AI terminology',
       url: canonicalUrl('/glossary'),
     },
+    mainEntityOfPage: { '@id': `${url}#webpage` },
     subjectOf: {
+      '@type': 'WebPage',
       '@id': `${url}#webpage`,
+      keywords: [
+        'Physical AI',
+        'AI in robotics',
+        'robot AI',
+        'embodied AI',
+        'robot learning',
+        'robot policy',
+        'robot control',
+        'physical-world AI',
+      ],
     },
-    isPartOf: {
-      '@id': `${site.url}/#website`,
-    },
-    keywords: [
-      'Physical AI',
-      'AI in robotics',
-      'robot AI',
-      'embodied AI',
-      'robot learning',
-      'robot policy',
-      'robot control',
-      'physical-world AI',
-    ],
   };
 }
 
@@ -982,13 +984,13 @@ function buildDatasetCatalogJsonLd(
     keywords: entry.tasks,
     citation: entry.paperUrl,
     conditionsOfAccess: entry.availability,
-    additionalProperty: [
-      {
-        '@type': 'PropertyValue',
-        name: 'Source-listed institutions',
-        value: entry.institution.join('; '),
-      },
-    ],
+    subjectOf: {
+      ...buildEvidenceNote(`${pageUrl}#dataset-${entry.id}`, `${entry.name}: source attribution`,
+        `Source-listed institutions: ${entry.institution.join('; ')}. ${entry.availability}`, [entry.paperUrl]),
+      // Affiliation in a source does not establish dataset authorship.
+      mentions: entry.institution.map((name) => ({ '@type': 'Organization', name })),
+      mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+    },
     ...(getDatasetEvidence(entry).dataLicenseUrl ? { license: getDatasetEvidence(entry).dataLicenseUrl } : {}),
     includedInDataCatalog: {
       '@id': `${pageUrl}#catalog`,
@@ -1089,24 +1091,20 @@ export function buildTactileSensorsJsonLd(
       '@type': 'ListItem',
       position: index + 1,
       item: {
-        '@type': 'Thing',
+        '@type': manufacturerOrganizationIds[entry.id] ? 'Product' : 'Thing',
         '@id': `${pageUrl}#sensor-${entry.id}`,
         name: entry.name,
         description: `${entry.principle}; ${entry.formFactor}. ${entry.evidenceBoundary}`,
         url: entry.projectUrl ?? entry.sourceUrl,
         sameAs: [entry.sourceUrl, entry.projectUrl, entry.codeUrl].filter(Boolean),
-        ...(entry.manufacturerEvidenceUrl ? { citation: [entry.manufacturerEvidenceUrl] } : {}),
         ...(manufacturerOrganizationIds[entry.id] ? {
           manufacturer: {
             '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerOrganizationIds[entry.id]}`,
           },
         } : {}),
-        additionalProperty: [
-          { '@type': 'PropertyValue', name: 'Sensing principle', value: entry.principle },
-          { '@type': 'PropertyValue', name: 'Form factor', value: entry.formFactor },
-          { '@type': 'PropertyValue', name: 'Reported signals', value: entry.signals.join(', ') },
-          { '@type': 'PropertyValue', name: 'Reported rate', value: entry.reportedRate },
-        ],
+        subjectOf: buildEvidenceNote(`${pageUrl}#sensor-${entry.id}`, `${entry.name}: sensor evidence`,
+          `Sensing principle: ${entry.principle}. Form factor: ${entry.formFactor}. Reported signals: ${entry.signals.join(', ')}. Reported rate: ${entry.reportedRate}. Integration: ${entry.integration}. Access: ${entry.access}. Evidence boundary: ${entry.evidenceBoundary}`,
+          [entry.sourceUrl, entry.projectUrl, entry.codeUrl, entry.manufacturerEvidenceUrl].filter((url): url is string => Boolean(url))),
       },
     })),
   };

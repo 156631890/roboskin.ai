@@ -12,7 +12,7 @@ const lerobotSource = 'https://github.com/huggingface/lerobot/blob/89236ea0f4f81
 
 export const lerobotTutorial: ProgrammingPage = {
   path: '/guides/lerobot-dataset-format',
-  title: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
+  title: "LeRobot Dataset Format: Episodes, Timing & Validation",
   h1: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   description: 'Understand LeRobot dataset v3 metadata, Parquet, video and episode timing. Run a small Python checker on synthetic numeric data and inspect its limits.',
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
@@ -128,7 +128,7 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
 
 export const calibrationTutorial: ProgrammingPage = {
   path: '/guides/tactile-sensor-calibration',
-  title: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
+  title: "Tactile Calibration: DIGIT & GelSight Mini Workflows",
   h1: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
   description: 'Plan DIGIT and GelSight Mini calibration: separate image baselines, depth reconstruction and force estimation, then record references, repeats and uncertainty.',
   kicker: 'Tactile engineering guide', intent: 'Choose and document an appropriate tactile sensor calibration workflow without conflating image, depth and force.',

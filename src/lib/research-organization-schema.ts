@@ -1,3 +1,4 @@
+import { buildEvidenceNote } from '@/lib/schema-evidence';
 import {
   researchManufacturingRelations,
   researchOrganizationPartOfRelations,
@@ -85,14 +86,16 @@ export function buildResearchOrganizationDirectoryJsonLd() {
     }
 
     return {
-      '@type': 'Thing',
+      '@type': 'Product',
       '@id': relation.fromType === 'sensor'
         ? `${canonicalUrl('/sensors')}#sensor-${source.id}`
         : `${canonicalUrl('/robots')}#robot-${source.id}`,
       identifier: source.id,
       name: source.name,
       manufacturer: organizationReference(relation.toId),
-      citation: [...relation.evidenceUrls],
+      subjectOf: buildEvidenceNote(
+        `${canonicalUrl(relation.fromType === 'sensor' ? '/sensors' : '/robots')}#${relation.fromType}-${source.id}`,
+        `${source.name}: manufacturer attribution`, relation.evidenceBoundary, [...relation.evidenceUrls], 'manufacturer-evidence'),
     };
   });
 

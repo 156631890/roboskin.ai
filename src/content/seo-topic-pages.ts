@@ -56,7 +56,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/ai-robotics',
     title: 'AI and Robotics: Models, Learning & Physical Action',
     description:
-      'AI provides perception, reasoning, prediction, and learned policies; robotics provides sensors, control, actuators, safety, and a physical body. Map the closed loop from instruction to action and touch feedback.',
+      "Map AI perception, reasoning and policies to robot sensors, control, actuators and safety. Follow the loop from instruction to physical action and touch.",
     h1: 'How artificial intelligence works in robots',
     kicker: 'AI and robotics hub',
     intent: 'Answer-first guide to AI in robotics, robot AI, embodied AI, VLMs, VLA models, world models, robot policies, control, and tactile feedback.',
@@ -488,7 +488,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/tactile-ai',
     title: 'Tactile AI: Models, Datasets & Robotics Research',
     description:
-      'Tactile AI turns robot touch signals into perception, learned representations, and action. Explore models, datasets, benchmarks, robot platforms, and Physical AI research.',
+      "Tactile AI turns robot touch into perception, learned representations and action. Explore models, datasets, benchmarks, robot platforms and Physical AI.",
     h1: 'Tactile AI: touch data for Physical AI',
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
@@ -852,7 +852,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/humanoid-robot-skin',
     title: 'Humanoid Robot Skin & Whole-Body Tactile Sensing',
     description:
-      'Humanoid robot skin brings tactile sensing to hands, arms, and body surfaces. Map the whole-body tactile stack, safety boundaries, sensors, datasets, and research.',
+      "Humanoid robot skin brings touch to hands, arms and body surfaces. Map the tactile stack, safety boundaries, sensors, datasets and research.",
     h1: 'Humanoid robot skin and whole-body tactile sensing',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
@@ -997,7 +997,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/applications/robot-hand-tactile-sensor',
     title: 'Robot Hand Tactile Sensor Guide for Dexterous Grasping',
     description:
-      'Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.',
+      "Robot hand tactile sensors detect contact, slip, force patterns and grasp stability. Compare fingertip, palm and full-hand sensing.",
     h1: 'Robot hand tactile sensor guide',
     kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
@@ -1228,7 +1228,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/physical-ai-touch',
-    title: 'Physical AI & Touch: Tactile Sensing for Embodied Systems',
+    title: "Physical AI & Touch: Sensing for Embodied Systems",
     description:
       'Touch grounds Physical AI in real contact. Learn how tactile sensing combines with vision, language, proprioception, world models, robot learning, and control.',
     h1: 'Physical AI and touch',
@@ -1362,9 +1362,9 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/applications/robot-gripper-tactile-sensor',
-    title: 'Robot Gripper Tactile Sensor Guide for Contact-Aware Grasping',
+    title: "Robot Gripper Tactile Sensors: Contact-Aware Grasping",
     description:
-      'Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.',
+      "Robot gripper tactile sensors detect contact, pressure patterns, slip and grasp stability. Learn what to evaluate before selecting sensors.",
     h1: 'Robot gripper tactile sensor guide',
     kicker: 'Evaluation guide',
     intent: 'Buyer and evaluator page for robot gripper tactile sensor, tactile gripper, gripper slip detection, and contact-aware grasping queries.',
@@ -1445,7 +1445,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-sensor-for-robots',
-    title: 'Tactile Sensor for Robots: Selection and Evaluation Guide',
+    title: "Tactile Sensors for Robots: Selection & Evaluation",
     description:
       'A tactile sensor for robots measures pressure, force, slip, strain, or contact maps. Compare sensors for robot hands, grippers, and robot skin.',
     h1: 'Tactile sensor for robots',
@@ -1943,7 +1943,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/robot-skin-vs-tactile-sensor',
-    title: 'Robot Skin vs Tactile Sensor: System and Component Difference',
+    title: "Robot Skin vs Tactile Sensor: System vs Component",
     description:
       'Compare robot skin and tactile sensor terms. Learn when a robot needs a tactile sensor, when it needs robot skin, and how tactile AI connects the system.',
     h1: 'Robot skin vs tactile sensor',
@@ -2028,8 +2028,8 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-feedback-for-physical-ai',
-    title: 'From Tactile Sensing to Robot Action: What the Evidence Shows',
-    description: 'Does better touch sensing improve robot manipulation? Compare detection, control and task evidence from six studies, with trial counts, training limits and verified resource access.',
+    title: "From Tactile Sensing to Robot Action: The Evidence",
+    description: "Does better touch improve manipulation? Compare detection, control and task evidence from six studies, with trial counts, training limits and resource access.",
     h1: 'From Tactile Sensing to Robot Action: What the Evidence Shows',
     kicker: 'Tactile feedback · evidence review',
     intent: 'Existing tactile feedback guide expanded to explain when perception improvements change robot actions and how to select evidence and data; no duplicate research URL.',
@@ -2832,7 +2832,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/guides/visuo-tactile-world-models-robot-manipulation',
     title: 'Visuo-Tactile World Models: Compare 5 Systems',
     description:
-      'Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: what each predicts, how it guides robot actions, reported results and limits, with primary sources.',
+      "Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: predictions, roles in robot actions, reported results and limits, with primary sources.",
     h1: 'Visuo-tactile world models for robot manipulation',
     kicker: '2026 world-model guide',
     intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
@@ -3564,7 +3564,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/visuo-tactile',
-    title: 'Visuo-Tactile Robotics: Perception, Data and Manipulation',
+    title: "Visuo-Tactile Robotics: Perception & Manipulation",
     description:
       'Understand visuo-tactile robotics: how robots align vision and touch for contact perception, representation learning, world models, and manipulation.',
     h1: 'Visuo-tactile robotics: combining sight and touch',
@@ -3944,7 +3944,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-manipulation',
-    title: 'Robot Manipulation: Learning, Grasping, Touch & Dexterity',
+    title: "Robot Manipulation: Learning, Grasping & Touch",
     description:
       'Explore robot manipulation across grasping, dexterous hands, insertion, robot learning, VLA policies, force control, tactile feedback, and evaluation.',
     h1: 'Robot manipulation: learning, control and tactile feedback',
@@ -4451,7 +4451,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robotics-datasets',
     title: 'Robotics Datasets for Robot Learning & Manipulation',
     description:
-      'Compare robotics datasets by robot, task, modality, action space, timing, access, and license. Find robot learning, manipulation, teleoperation, VLA, and humanoid data.',
+      "Compare robotics datasets by robot, task, modality, action space, timing, access and license. Find manipulation, teleoperation, VLA and humanoid data.",
     h1: 'Robotics datasets: data for robot learning and evaluation',
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
@@ -4712,7 +4712,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-teleoperation',
     title: 'Robot Teleoperation: Demonstrations, Data & Learning',
     description:
-      'Learn how robot teleoperation captures demonstrations for robot learning and VLA training, including interfaces, synchronization, quality control, limits, and evaluation.',
+      "Learn how teleoperation captures demonstrations for robot learning and VLA training: interfaces, synchronization, quality control, limits and evaluation.",
     h1: 'Robot teleoperation: from human demonstration to robot data',
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',

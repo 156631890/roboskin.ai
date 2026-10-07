@@ -243,7 +243,7 @@ The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, pr
   {
     id: 'interevolve-reward-program-humanoid-manipulation',
     title: 'InterEvolve searches reward programs instead of retraining a humanoid',
-    seoTitle: 'InterEvolve Searches Humanoid Reward Programs at Test Time',
+    seoTitle: 'InterEvolve: Test-Time Humanoid Reward Program Search',
     seoDescription: 'InterEvolve edits and tunes staged reward programs for a frozen humanoid controller. Review 86.5% simulation results, cost and hardware limits.',
     excerpt: 'InterEvolve uses an LLM, numerical tuning and parallel simulation to revise staged reward programs while keeping the Unitree G1 control policy fixed.',
     category: 'Humanoid loco-manipulation',
@@ -2554,7 +2554,7 @@ The official project page provides task videos and a method overview. No public 
   {
     id: 'tactilestep-sole-pressure-humanoid-locomotion',
     title: 'TactileStep closes the loop on Unitree G1 sole pressure',
-    seoTitle: 'TactileStep: Sole Tactile Feedback for Humanoid Locomotion',
+    seoTitle: "TactileStep: Sole Touch for Humanoid Locomotion",
     seoDescription: 'TactileStep uses 25 Hz pressure insoles on a Unitree G1. Examine its impact-force results, contact-area gains, energy trade-off and code status.',
     excerpt: 'Tsinghua University researchers feed force, center-of-pressure and contact-area features from pressure insoles into a humanoid parkour policy. Hardware measurements improve on several terrains, while long-term sensor behavior and faster motion remain untested.',
     category: 'Humanoid tactile sensing',
@@ -2626,7 +2626,7 @@ The official project page supplied paper, videos and tables on September 25, but
   {
     id: 'anthropomimetic-forearm-carpal-stiffness',
     title: 'An open robotic forearm tests how eight carpal bones redirect wrist stiffness',
-    seoTitle: 'Open Anthropomimetic Forearm Tests Carpal Wrist Stiffness',
+    seoTitle: "Open Anthropomimetic Forearm Tests Wrist Stiffness",
     seoDescription: 'An open robotic forearm uses eight carpal bones and 22 actuated muscles. Review the stiffness experiment, single-build limit, CAD, data and licenses.',
     excerpt: 'A University of Electro-Communications team compares anatomically shaped, fused and ellipsoidal wrist skeletons. Its open release includes CAD, printable parts, firmware and analysis data under file-specific licenses.',
     category: 'Soft robotic hardware',
@@ -2850,8 +2850,8 @@ The arXiv v1 paper was accessible on September 25. No official project page, CAD
   {
     id: 'internw0-contact-aware-world-model-pipetting',
     title: "InternW0 links asynchronous world prediction with contact-aware pipetting",
-    seoTitle: "InternW0: Contact-Aware Pipetting Results and Model Access",
-    seoDescription: "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous action latency and EgoLab training data. Check what code and model assets are available.",
+    seoTitle: "InternW0: Contact-Aware Pipetting & Model Access",
+    seoDescription: "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous latency and EgoLab training data. Check available code and model assets.",
     excerpt: "Shanghai AI Laboratory combines slower world prediction with faster action updates and contact-aware post-training. Its laboratory results require careful separation of task progress, full completion and model-side latency.",
     category: "Contact-aware world models",
     image: "/generated/news/internw0-asynchronous-contact-control.png",
@@ -3204,7 +3204,7 @@ The [official LiMA page](https://ccdcs.github.io/LiMA_repo/) provides the paper,
   {
     id: 'better-curriculum-tactile-reflex-fragile-grasping',
     title: 'A tactile reflex becomes the teacher for fragile grasping',
-    seoTitle: 'Better Curriculum: Tactile Reflex Data for Fragile Grasping',
+    seoTitle: "Better Curriculum: Tactile Reflex for Fragile Grasping",
     seoDescription: 'A 25 Hz tactile reflex shapes demonstrations for fragile grasping. Review the 20-trial results, tactile-free deployment and disturbance limits.',
     excerpt: 'The Better Curriculum study uses a 25 Hz tactile controller during data collection, then trains vision-only ACT and pi0.5 policies. The gain is large on one cup task, but disturbance rejection still needs touch at runtime.',
     category: 'Tactile robot learning',
@@ -3271,7 +3271,7 @@ The official project page exposes the paper, diagrams and videos. On September 2
   {
     id: 'visforce-visual-force-grounding-dexterous-manipulation',
     title: 'VisForce draws force goals into a dexterous robot policy',
-    seoTitle: 'VisForce: Visual Force Grounding for Dexterous Manipulation',
+    seoTitle: "VisForce: Visual Force for Dexterous Manipulation",
     seoDescription: 'VisForce renders current and desired finger forces into images for pi0.5. Review 20-trial task results, cross-attention gains and sensing limits.',
     excerpt: 'VisForce overlays actuator-force cues at fingertips and combines current and goal images through cross-attention. Real-robot trials improve over four baselines, but the arrows are not measured contact-force vectors.',
     category: 'Force-aware VLA',
@@ -3403,7 +3403,7 @@ As inspected on September 23, the arXiv record and full paper did not link a pub
   {
     id: 'cartesian-hand-all-linear-in-hand-manipulation',
     title: 'The Cartesian Hand replaces finger joints with seven linear axes',
-    seoTitle: 'Cartesian Hand: Seven Linear Axes for In-Hand Manipulation',
+    seoTitle: "Cartesian Hand: Linear-Axis In-Hand Manipulation",
     seoDescription: 'Duke researchers built a seven-axis all-linear robot hand. Review its 35-object tests, mechanics, cost estimate and open-source status.',
     excerpt: 'Two stacked parallel grippers and four sliding fingertips operate caps, tools and lab equipment. The mechanism succeeds in a configured 350-trial test, but it does not sense contact force or location.',
     category: 'Dexterous hand hardware',
@@ -3833,7 +3833,7 @@ As checked September 21, no project-specific code, checkpoint or dataset downloa
   {
     id: 'crisp-contact-simulation-geometry-solvers-release',
     title: 'CRISP details contact simulation for tight-tolerance robot assembly',
-    seoTitle: 'CRISP Robot Simulation: Contact Results, Access and License',
+    seoTitle: "CRISP Simulation: Contact Results, Access & License",
     seoDescription: 'Inspect CRISP’s contact geometry, CANAL and SubADMM results, prebuilt packages and research-only license. Separate simulator evidence from real-robot claims.',
     excerpt: 'Seoul National University’s CRISP paper examines contact geometry and solver behavior in robot assembly. The public package provides examples and binaries under a restricted research license.',
     category: 'Robotics simulation tools',
@@ -4080,7 +4080,7 @@ TouchSight remains a preprint. The reviewed study does not demonstrate a robot p
     title: 'FibTac combines pneumatic gripping and tactile sensing',
     seoTitle: 'FibTac: Pneumatic Tactile Gripper and Lab Results',
     seoDescription:
-      'Review Purdue’s FibTac gripper: fiber-based tactile sensing, liquid and underwater classification results, experiment sizes, payload, and public evaluation assets.',
+      "Review Purdue’s FibTac gripper: fiber-based touch, liquid and underwater classification results, experiment sizes, payload and public evaluation assets.",
     excerpt:
       'Purdue researchers use the same fiber array to grasp objects and sense contact. The peer-reviewed study reports air and water experiments, with separate protocols for objects, liquids, and granular media.',
     content: `# FibTac combines pneumatic gripping and tactile sensing
@@ -4158,7 +4158,7 @@ RoboSkin did not conduct these laboratory experiments. The article synthesizes t
     title: 'TWINS captures touch beyond the robot hand',
     seoTitle: 'AIST TWINS: Body-Surface Touch and Robot Demonstrations',
     seoDescription:
-      'AIST’s TWINS uses 219 tactile cells to collect contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware, and learning-code limits.',
+      "AIST’s TWINS uses 219 tactile cells for contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware and learning-code limits.",
     excerpt:
       'AIST’s wearable dual-arm system records pressure and proximity on the hands, arms, and chest. Its public hardware release makes the embodiment inspectable, while policy evidence remains qualitative.',
     content: `# TWINS captures touch beyond the robot hand
@@ -4817,7 +4817,7 @@ This article summarizes an arXiv preprint and adds RoboSkin.ai analysis for robo
   {
     id: 'self-powered-textile-artificial-skin-three-channel-robot-control-2026',
     title: 'Self-powered textile artificial skin uses three channels for touch and robot control',
-    seoTitle: 'Three-Channel Textile Artificial Skin Controls a Robot Arm',
+    seoTitle: "Three-Channel Textile Skin Controls a Robot Arm",
     seoDescription:
       'A Nano Energy paper reports a textile artificial skin that locates touch, measures pressure, and controls a robot arm with three signal channels.',
     excerpt:
@@ -4963,9 +4963,10 @@ This brief summarizes the NUS report and the associated Advanced Materials paper
     technicalFocus: ['self-healing electronic skin', 'underwater robotics', 'damage sensing', 'soft robotics'],
   },
   {
+    seoDescription: "The TouchWorld preprint proposes a hierarchical tactile foundation model combining contact prediction with fast feedback for dexterous robot tasks.",
     id: 'touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     title: 'TouchWorld separates tactile prediction from fast contact correction in robot manipulation',
-    seoTitle: 'TouchWorld Tactile Foundation Model for Robot Manipulation',
+    seoTitle: "TouchWorld: Tactile Foundation Model for Manipulation",
     excerpt:
       'The TouchWorld preprint proposes a hierarchical tactile foundation model that combines contact prediction with fast feedback for dexterous, contact-rich robot tasks.',
     content: `# TouchWorld separates tactile prediction from fast contact correction in robot manipulation
@@ -5051,7 +5052,7 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
   {
     id: 'color-changing-mechanochromic-tactile-sensor-2026',
     title: 'Color-changing tactile sensor turns robot contact into real-time pressure maps',
-    seoTitle: 'Color-Changing Tactile Sensor Maps Robot Contact Pressure',
+    seoTitle: "Color-Changing Tactile Sensor Maps Contact Pressure",
     excerpt:
       'A Queen Mary-led mechanochromic sensor converts contact, strain, and pressure into visible color fields that a standard camera can observe in real time.',
     content: `# Color-changing tactile sensor turns robot contact into real-time pressure maps
@@ -5246,6 +5247,7 @@ The sales total does not show that every service robot uses tactile sensing. Vul
     technicalFocus: ['service robots', 'logistics robotics', 'Amazon Vulcan', 'tactile AI'],
   },
   {
+    seoTitle: "Electronic Skin Research: A Robot Systems Problem",
     id: 'electronic-skin-research-robot-skin-systems-problem',
     title: 'Electronic skin research is becoming a robot skin systems problem',
     seoDescription: 'A Cambridge-UCL study shows why large-area e-skin depends on sensing, wiring, calibration, damage tolerance, and control integration.',
@@ -5408,7 +5410,7 @@ This article summarizes public research and Meta FAIR announcements. RoboSkin.ai
   {
     id: 'global-robot-installations-542000-physical-ai-touch',
     title: 'Global robot installations passed 542,000 units: why Physical AI needs touch',
-    seoTitle: 'Global Robot Installations Pass 542,000: Why Touch Matters',
+    seoTitle: "542,000 Robot Installations: Why Touch Matters",
     excerpt:
       'IFR data shows 542,000 industrial robots were installed in 2024. For Physical AI, the next bottleneck is contact, tactile sensing, and robot skin.',
     content: `# Global robot installations passed 542,000 units: why Physical AI needs touch

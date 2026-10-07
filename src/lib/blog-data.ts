@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     id: 'slipsense-multimodal-slip-detection-2026',
     title: 'SlipSense: from pressure and vibration to a timely regrasp',
     seoTitle: 'SlipSense: Slip Detection, Latency & Regrasp Evidence',
-    seoDescription: 'How SlipSense labels slip, combines pressure and vibration, measures detection delay, and exposes the gap between detecting slip and preventing a dropped object.',
+    seoDescription: "How SlipSense labels slip, combines pressure and vibration, measures delay, and exposes the gap between detecting slip and preventing a dropped object.",
     excerpt: 'Pressure and vibration improve slip recognition together. Independent motion labels and five failed recoveries explain why detector quality and controller quality need separate tests.',
     content: `# SlipSense: from pressure and vibration to a timely regrasp
 
@@ -105,7 +105,7 @@ This review uses the September 14, 2026 v1. The arXiv comments report acceptance
   {
     id: 'touch2trace-tactile-cable-tracing-2026',
     title: 'Touch2Trace: what makes a tactile cable-tracing policy work',
-    seoTitle: 'Touch2Trace: Cable Tracing, Control Rate & Tactile History',
+    seoTitle: "Touch2Trace: Cable Tracing, Control & Tactile History",
     seoDescription: 'Examine Touch2Trace’s cable-tracing policy, frozen tactile encoder, control-rate and history ablations, success thresholds, hardware limits and resource status.',
     excerpt: 'A 60 Hz tactile policy traces farther than a joint-only baseline, but the useful lesson is how sensor detail, pretraining, temporal context and action timing interact.',
     content: `# Touch2Trace: what makes a tactile cable-tracing policy work
@@ -191,7 +191,7 @@ This review uses the September 14, 2026 v1. Its arXiv comments report CoRL 2026 
   {
     id: 'visible-touch-contact-overlays-visuomotor-policies-2026',
     title: 'Visible Touch: how contact overlays reach a visual robot policy',
-    seoTitle: 'Visible Touch: Contact Overlays, Calibration & Robot Results',
+    seoTitle: "Visible Touch: Contact Overlays & Robot Results",
     seoDescription: 'Review Visible Touch’s sensor-to-camera projection, magnetic hardware, contact ablations, task-level success counts and unverified code-release status.',
     excerpt: 'Rendering contact as image arrows reuses a visual policy’s input pathway. The hardware and ablations show why spatial alignment, signal normalization and training still matter.',
     content: `# Visible Touch: how contact overlays reach a visual robot policy
@@ -471,7 +471,7 @@ Use the [benchmark directory](/benchmarks) to compare evaluation questions and t
   {
     id: 'tacprint-wearable-tactile-contact-reproduction-2026',
     title: 'TacPrint reconstructs contact from 24 tactile cells',
-    seoTitle: 'TacPrint: Wearable Touch, Depth Reconstruction & Grasp Data',
+    seoTitle: "TacPrint: Wearable Touch, Depth & Grasp Data",
     seoDescription:
       'Examine TacPrint’s 24-taxel sensor, physical indentation errors, and 40-trial grasp comparison: dense-depth feedback reaches 87.5% versus 67.5% for raw taxels.',
     excerpt:
@@ -562,7 +562,7 @@ A useful follow-up should retain all boundary contacts, separate simulated and p
   {
     id: 'tacverse-cross-sensor-tactile-dataset-2026',
     title: 'TacVerse tests whether touch transfers between sensors',
-    seoTitle: 'TacVerse Dataset: 106,800 Images, Transfer Results & Access',
+    seoTitle: "TacVerse: 106,800 Images, Transfer Results & Access",
     seoDescription:
       'Audit TacVerse’s seven tactile sensors, 106,800 reported images, cross-sensor benchmark results, trial splits, official code, and gated Hugging Face dataset.',
     excerpt:
@@ -909,7 +909,7 @@ The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile senso
   {
     id: 'vision-based-tactile-intelligence-robotics-survey-2026',
     title: 'Vision-based tactile intelligence connects sensor optics to robot action',
-    seoTitle: 'Vision-Based Tactile Sensors for Robotics: 2026 Survey Map',
+    seoTitle: "Vision-Based Tactile Sensors: 2026 Robotics Survey",
     seoDescription:
       'A source-backed map of vision-based tactile sensors: four hardware components, four optical readouts, three information levels, tactile AI, and open gaps.',
     excerpt:
@@ -1380,9 +1380,9 @@ The [robot learning](/robot-learning) hub explains the additional steps required
   {
     id: 'softvtbench-deformation-aware-visuo-tactile-dataset-2026',
     title: 'SoftVTBench separates deformable-task completion from contact quality',
-    seoTitle: 'SoftVTBench Visuo-Tactile Dataset and Deformation Benchmark',
+    seoTitle: "SoftVTBench: Visuo-Tactile Deformation Benchmark",
     seoDescription:
-      'SoftVTBench reports 4,000 simulated demonstrations across 40 tasks. Review its DSR metric, simulated Franka and GelSight scope, and conflicting release documentation.',
+      "SoftVTBench reports 4,000 simulated demos over 40 tasks. Review DSR, simulated Franka and GelSight scope, and conflicting release documentation.",
     excerpt:
       'SoftVTBench pairs simulated visual and tactile observations with evaluator-only FEM state; its Hugging Face card and GitHub README currently disagree about the hosted release scale.',
     content: `# SoftVTBench separates deformable-task completion from contact quality
@@ -1680,7 +1680,7 @@ The result also does not isolate one causal factor by itself. Dataset collection
     title: 'RoboTacDex maps 6,000+ humanoid visual-tactile trajectories',
     seoTitle: 'RoboTacDex Humanoid Visual-Tactile-Action Dataset',
     seoDescription:
-      'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.',
+      "RoboTacDex reports 6,000+ Unitree G1 trajectories, 19 tasks, an author-reported 23 skills and 22 objects with RGB, depth, touch and semantic annotations.",
     excerpt:
       'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects, but public dataset access remains pending.',
     content: `# RoboTacDex maps 6,000+ humanoid visual-tactile trajectories
@@ -2107,6 +2107,7 @@ Version 2 says the authors will release the data, evaluation protocols, pretrain
     technicalFocus: ['HT-Bench', 'full-hand tactile sensing', 'egocentric vision', 'tactile representation learning'],
   },
   {
+    seoTitle: "Sparsh-X Multisensory Touch Representations",
     id: 'sparsh-x-multisensory-touch-representations-2025',
     title: 'Sparsh-X multisensory touch representations for tactile AI',
     excerpt:
@@ -2172,6 +2173,7 @@ The practical lesson is that tactile AI combines representation design with sens
     technicalFocus: ['Sparsh-X', 'multisensory touch', 'Digit 360', 'self-supervised tactile representation'],
   },
   {
+    seoTitle: "MiTaS: Multi-Resolution Tactile Imitation Learning",
     id: 'mitas-multi-resolution-tactile-imitation-learning-2026',
     title: 'MiTaS multi-resolution tactile imitation learning for robot hands',
     excerpt:
@@ -2321,7 +2323,7 @@ Tactile AI benefits from prediction and replay. Robot skin data becomes more val
   {
     id: 'open-source-magnetic-tactile-calibration-2024',
     title: 'Open-source magnetic tactile calibration for gripper-agnostic touch',
-    seoTitle: 'Open-Source Magnetic Tactile Calibration for Robot Grippers',
+    seoTitle: "Open-Source Magnetic Tactile Calibration",
     seoDescription: 'Open-source magnetic tactile calibration for three-axis force sensing, in-situ setup, and repeatable low-cost robot touch.',
     excerpt:
       'A practical research note on open-source magnetic tactile calibration, three-axis force sensing, in-situ calibration, and why low-cost sensors still need repeatable setup.',
@@ -2382,6 +2384,7 @@ Calibration belongs in any serious tactile sensor evaluation. Without calibratio
     technicalFocus: ['open-source magnetic tactile calibration', 'three-axis force sensing', 'in-situ calibration', 'robot grippers'],
   },
   {
+    seoTitle: "eFlesh: Customizable Magnetic Touch for Grippers",
     id: 'eflesh-customizable-magnetic-touch-sensing-2025',
     title: 'eFlesh and customizable magnetic touch sensing for robot grippers',
     excerpt:
@@ -2511,7 +2514,7 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
   {
     id: 'humanoid-visual-tactile-action-dataset-2025',
     title: 'GIST humanoid visual-tactile-action dataset maps 101.9K soft-object samples',
-    seoTitle: 'GIST Humanoid Visual-Tactile-Action Dataset: 101.9K Samples',
+    seoTitle: "GIST Visual-Tactile-Action Dataset: 101.9K Samples",
     seoDescription:
       'GIST reports 101.9K samples across four towel and sponge pressure conditions, 2,124 hand tactile units, dual camera views, and ACT baselines.',
     excerpt:
@@ -2607,6 +2610,8 @@ The ACT study also does not show that dense touch always outperforms a 42-locati
     technicalFocus: ['GIST', 'humanoid visual-tactile-action dataset', 'Inspire RH56-DFX', 'soft-object manipulation', 'dense tactile sensing'],
   },
   {
+    seoDescription: "A source-backed note on Tactile Robotics outlook, sensor types, distributed touch, simulation, benchmarking and data interpretation.",
+    seoTitle: "Tactile Robotics Outlook: Robot Skin Research",
     id: 'tactile-robotics-outlook-research-landscape-2025',
     title: 'Tactile Robotics outlook for robot skin research priorities',
     excerpt:
@@ -2669,6 +2674,7 @@ Each research note maps to a layer in the tactile robotics stack so readers can 
     technicalFocus: ['Tactile Robotics outlook', 'distributed tactile sensing', 'tactile benchmarking', 'robot skin research map'],
   },
   {
+    seoDescription: "A note on AI-integrated bionic fingertip e-skin, wet slippage detection, fingerprint microtextures, and why dry-surface slip claims are not enough.",
     id: 'wet-slippage-bionic-fingertip-eskin-2026',
     title: 'Wet slippage detection for bionic fingertip e-skin',
     excerpt:
@@ -2791,6 +2797,7 @@ This note supports a narrower claim: large-area e-skin evaluation must include c
     technicalFocus: ['energy constrained touch encoding', 'spiking neural network', 'large-area e-skin', 'neuromorphic tactile sensing'],
   },
   {
+    seoTitle: "Origami Capacitive E-Skin for Large-Area Touch",
     id: 'origami-capacitive-robotic-eskin-2026',
     title: 'Origami capacitive robotic e-skin for large-area tactile sensing',
     excerpt:
@@ -2977,7 +2984,7 @@ For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be 
   {
     id: 'genforce-transferable-force-sensing-2026',
     title: 'GenForce transferable force sensing for robot skin and tactile sensors',
-    seoTitle: 'GenForce Force Sensing for Robot Skin and Tactile Sensors',
+    seoTitle: "GenForce: Transferable Force Sensing for Robot Skin",
     excerpt:
       'GenForce explores transferable force sensing across tactile sensors, reducing repeated calibration work for robot skin replacements and hardware changes.',
     content: `# GenForce transferable force sensing for robot skin and tactile sensors
@@ -3070,9 +3077,10 @@ Calibration transfer is critical to robot skin evaluation. A serious tactile AI 
     technicalFocus: ['transferable force sensing', 'GenForce', 'cross-sensor calibration', 'slip detection'],
   },
   {
+    seoDescription: "A research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer and contact-rich manipulation learning.",
     id: 'dexskin-high-coverage-conformable-robotic-skin-2025',
     title: 'DexSkin and high-coverage conformable robotic skin for manipulation',
-    seoTitle: 'DexSkin Conformable Robot Skin for Dexterous Manipulation',
+    seoTitle: "DexSkin: Conformable Skin for Dexterous Manipulation",
     excerpt:
       'A practical research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer, and contact-rich manipulation learning.',
     content: `# DexSkin and high-coverage conformable robotic skin for manipulation
@@ -3145,6 +3153,7 @@ For RoboSkin.ai, the useful lesson is specific: high-coverage robot skin should 
     technicalFocus: ['DexSkin', 'conformable robot skin', 'contact-rich manipulation', 'calibration transfer'],
   },
   {
+    seoTitle: "Fluid-Based Robot Skin: Contact & Thermal Display",
     id: 'fluid-based-robot-skin-thermal-contact-2025',
     title: 'Fluid-based robot skin for contact detection and thermal display',
     excerpt:
@@ -3217,6 +3226,7 @@ For RoboSkin.ai, the useful lesson is that robot skin can be an interaction surf
     technicalFocus: ['fluid-based robot skin', 'thermal display', 'contact detection', 'human-robot interaction'],
   },
   {
+    seoTitle: "Graphene & Liquid Metal: 3D Fingertip Force Sensing",
     id: 'graphene-liquid-metal-3d-force-2026',
     title: 'Graphene and liquid metal 3D force sensing for robot fingertips',
     excerpt:
@@ -3290,6 +3300,8 @@ This article summarizes the public Cambridge report and adds RoboSkin.ai editori
     technicalFocus: ['graphene and liquid metal', '3D force sensing', 'slip detection', 'robot fingertips'],
   },
   {
+    seoDescription: "Peer-reviewed soft robotic skin uses wrist EIT and data-driven channel selection to sense touch, strain, heat, damage, environment and proprioception.",
+    seoTitle: "Single-Material Soft Robotic Skin: Multimodal Sensing",
     id: 'single-material-soft-robotic-skin-2025',
     title: 'Single-material soft robotic skin for multimodal e-skin sensing',
     excerpt:
@@ -3381,6 +3393,7 @@ This review uses the peer-reviewed Science Robotics article, the author-accepted
     technicalFocus: ['single-material soft robotic skin', 'electrical impedance tomography', 'multimodal touch', 'proprioception'],
   },
   {
+    seoTitle: "Full-Hand Tactile Sensing for Dexterous Grasping",
     id: 'full-hand-tactile-sensing-2025',
     title: 'Full-hand tactile sensing for adaptive dexterous grasping',
     excerpt:
@@ -3456,6 +3469,7 @@ For RoboSkin.ai, the source supports a conservative editorial point: robot hands
     technicalFocus: ['full-hand tactile sensing', 'adaptive grasping', 'dexterous manipulation', 'high-resolution touch'],
   },
   {
+    seoTitle: "Temperature/Pressure Sensing: The Crosstalk Problem",
     id: 'temperature-pressure-bimodal-2025',
     title: 'Temperature/pressure bimodal sensing and the crosstalk problem',
     excerpt:
@@ -3536,6 +3550,7 @@ A multimodal e-skin evaluation should not merely list "pressure and temperature"
     technicalFocus: ['temperature/pressure bimodal', 'signal decoupling', 'crosstalk', 'multimodal e-skin'],
   },
   {
+    seoTitle: "Event-Based Tactile Sensing: Sparse, Low-Latency Touch",
     id: 'event-based-opto-tactile-2025',
     title: 'Event-based tactile sensing for sparse, low-latency robot touch',
     excerpt:
@@ -3614,6 +3629,7 @@ For RoboSkin.ai, the useful editorial point is that tactile AI should include da
     technicalFocus: ['event-based', 'neuromorphic tactile sensing', 'opto-tactile skin', 'low-latency touch'],
   },
   {
+    seoTitle: "Self-Healing Multimodal E-Skin: Evidence & Limits",
     id: 'self-healing-multimodal-eskin-2026',
     title: 'Self-healing multimodal e-skin: useful direction, careful claims',
     excerpt:
@@ -3804,6 +3820,7 @@ For RoboSkin.ai, the editorial point is clear: serious robot skin content should
     technicalFocus: ['ROS 2 Kilted', 'ros2_control', 'force/torque broadcaster', 'sensor data pipeline'],
   },
   {
+    seoTitle: "Large-Area Tactile Arrays for Curved Robot Surfaces",
     id: 'large-area-flexible-tactile-arrays-2025',
     title: 'Large-area flexible tactile arrays for curved robot surfaces',
     excerpt:
