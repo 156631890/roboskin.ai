@@ -6,6 +6,7 @@ import ArticleBody from '@/components/ArticleBody';
 import EditorialReview from '@/components/EditorialReview';
 import JsonLd from '@/components/JsonLd';
 import ResearchResourceActions from '@/components/ResearchResourceActions';
+import ResearchNextSteps from '@/components/ResearchNextSteps';
 import { site } from '@/content/site';
 import { blogPosts, getBlogPostById } from '@/lib/blog-data';
 import {
@@ -151,6 +152,8 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             </div>
             <figcaption>RoboSkin.ai explanatory illustration; not a photograph or measurement from the cited experiment.</figcaption>
           </figure>
+
+          <ResearchNextSteps articleId={post.id} />
 
           <div className="article-grid">
             <div className="article-reading-surface">

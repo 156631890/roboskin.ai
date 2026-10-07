@@ -187,7 +187,7 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                       </table>
                     </div>
                   ) : null}
-                  {section.links?.length ? <ul className="mt-5 space-y-3 text-sm leading-relaxed">{section.links.map(link => <li key={link.href}><Link href={link.href} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link></li>)}</ul> : null}
+                  {section.links?.length ? <ul className="mt-5 space-y-3 text-sm leading-relaxed">{section.links.map(link => <li key={link.href}><Link href={link.href} download={link.download} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link></li>)}</ul> : null}
                 </section>
               ))}
             </div>

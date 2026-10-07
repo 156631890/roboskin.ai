@@ -21,8 +21,8 @@ The growth target is daily unique visitors. Vercel visitors are an instrument-sp
 | 1 | what is robot skin | I | /robot-skin | retain existing owner |
 | 2 | robot skin vs e-skin | C | /guides/robot-skin-vs-e-skin | retain existing owner |
 | 3 | robot skin vs tactile sensor | C | /guides/robot-skin-vs-tactile-sensor | retain existing owner |
-| 4 | types of robot skin | I | /robot-skin | retain existing owner |
-| 5 | how does robot skin work | I | /robot-skin | retain existing owner |
+| 4 | types of robot skin | I | /robot-skin#robot-skin-types | expanded with four sensing routes in the resource-growth release |
+| 5 | how does robot skin work | I | /robot-skin#robot-skin-integration | expanded with an integration and evidence checklist in the resource-growth release |
 | 6 | what is tactile AI | I | /tactile-ai | retain existing owner |
 | 7 | tactile AI stack explained | I | /tactile-ai | retain existing owner |
 | 8 | tactile sensing vs tactile AI | C | /tactile-ai | retain existing owner |
@@ -84,5 +84,11 @@ The growth target is daily unique visitors. Vercel visitors are an instrument-sp
 New sensor comparison: official GelSight gsrobotics documentation, original DIGIT paper and the pinned interface/design revisions linked in the page. New model comparison: official Sparsh project and UniTouch repository reviewed October 7, 2026. Dataset recommendations reuse the existing source-reviewed records and retain their original review dates and unknown access/license fields. Editorial recommendations are conditional and are not measured rankings. AI assisted drafting and implementation; no new independent human expert review is claimed. Release authorization is the owner's existing instruction to modify, submit and deploy.
 
 ## Measurement checkpoints
+
+The subsequent October 7 resource-growth release adds a blank experiment worksheet
+to `/tactile-ai#experiment-worksheet`, contextual resource links on eight existing
+research briefs, and consent-aware GA4 resource/campaign measurement. It does not
+claim that the remaining mapped terms have all received individual deep rewrites.
+See [release scope](resource-growth-20261007.md).
 
 At 7 days, check UV data completeness, changed-page visits, internal navigation and resource use; inspect discovery and index status separately. At 28 days, compare same-provider daily UV and matched Search Console query/page cohorts. Segment search, referral and direct traffic; keep request bots and preview/test activity out where the provider supports it. Track download/source clicks as resource use, not unique people or completed research. Extend the observation window for sparse query data. No new recurring automation is created by this document.
