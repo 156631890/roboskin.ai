@@ -1,0 +1,137 @@
+
+> roboskin-website@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.20
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 7.9s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/211) ...
+   Generating static pages (52/211) 
+   Generating static pages (105/211) 
+   Generating static pages (158/211) 
+ ✓ Generating static pages (211/211)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/2) ...
+ ✓ Exporting (2/2)
+
+Route (app)                                                                 Size  First Load JS
+┌ ○ /                                                                      272 B         111 kB
+├ ○ /_not-found                                                            170 B         103 kB
+├ ○ /about                                                                 272 B         111 kB
+├ ○ /ai-robotics                                                           272 B         111 kB
+├ ƒ /api/contact                                                           170 B         103 kB
+├ ƒ /api/newsletter                                                        170 B         103 kB
+├ ○ /applications                                                          217 B         111 kB
+├ ○ /applications/robot-gripper-tactile-sensor                             272 B         111 kB
+├ ○ /applications/robot-hand-tactile-sensor                                272 B         111 kB
+├ ○ /applications/soft-robotic-skin                                        272 B         111 kB
+├ ○ /benchmarks                                                          3.88 kB         121 kB
+├ ○ /careers                                                               195 B         106 kB
+├ ○ /case-studies                                                          217 B         111 kB
+├ ○ /comparison                                                            217 B         111 kB
+├ ○ /contact                                                             3.48 kB         118 kB
+├ ○ /datasets                                                              134 B         122 kB
+├ ○ /datasets.json                                                         170 B         103 kB
+├ ○ /deployment.json                                                       170 B         103 kB
+├ ○ /downloads                                                             217 B         111 kB
+├ ○ /e-skin                                                                272 B         111 kB
+├ ○ /editorial-policy                                                      195 B         106 kB
+├ ○ /experiment-results.csv                                                170 B         103 kB
+├ ○ /faq                                                                   217 B         111 kB
+├ ○ /feed.xml                                                              170 B         103 kB
+├ ○ /glossary                                                              217 B         111 kB
+├ ○ /guides/flexible-tactile-sensor-array                                  272 B         111 kB
+├ ○ /guides/gelsight-vs-digit                                              272 B         111 kB
+├ ○ /guides/lerobot-dataset-format                                         582 B         112 kB
+├ ○ /guides/python-tactile-data-processing                                 582 B         112 kB
+├ ○ /guides/robot-skin-vs-e-skin                                           272 B         111 kB
+├ ○ /guides/robot-skin-vs-tactile-sensor                                   272 B         111 kB
+├ ○ /guides/robot-touch-sensor                                             272 B         111 kB
+├ ○ /guides/ros2-tactile-sensing                                           585 B         112 kB
+├ ○ /guides/slip-detection-robot-hand                                      272 B         111 kB
+├ ○ /guides/tactile-feedback-for-physical-ai                               272 B         111 kB
+├ ○ /guides/tactile-sensor-benchmark-robot-manipulation                    272 B         111 kB
+├ ○ /guides/tactile-sensor-calibration                                     585 B         112 kB
+├ ○ /guides/tactile-sensor-for-robots                                      272 B         111 kB
+├ ○ /guides/visuo-tactile-world-models-robot-manipulation                  272 B         111 kB
+├ ○ /humanoid-robot-skin                                                   272 B         111 kB
+├ ○ /humanoid-robots                                                       272 B         111 kB
+├ ○ /implementation                                                        217 B         111 kB
+├ ○ /knowledge-graph.json                                                  170 B         103 kB
+├ ○ /llms-full.txt                                                         170 B         103 kB
+├ ○ /news                                                                  195 B         106 kB
+├ ○ /news-sitemap.xml                                                      170 B         103 kB
+├ ● /news/[id]                                                             272 B         111 kB
+├   ├ /news/activewam-active-vision-world-action-model
+├   ├ /news/radmcs-underwater-haptic-diver-guidance
+├   ├ /news/humanoidtoolbench-tool-selection-mobile-execution
+├   └ [+71 more paths]
+├ ○ /organizations                                                         195 B         106 kB
+├ ○ /papers                                                                195 B         106 kB
+├ ○ /papers/interaction-as-the-interface                                   195 B         106 kB
+├ ○ /partners                                                              195 B         106 kB
+├ ○ /physical-ai                                                           217 B         111 kB
+├ ○ /physical-ai-touch                                                     272 B         111 kB
+├ ○ /privacy                                                               170 B         103 kB
+├ ○ /products                                                              217 B         111 kB
+├ ○ /reports/tactile-ai-robot-skin-landscape-2026                          217 B         111 kB
+├ ○ /research                                                              217 B         111 kB
+├ ○ /research-index                                                      2.81 kB         114 kB
+├ ○ /research-index.csv                                                    170 B         103 kB
+├ ○ /research-index.json                                                   170 B         103 kB
+├ ○ /research-services                                                   3.12 kB         118 kB
+├ ● /research/[id]                                                         272 B         111 kB
+├   ├ /research/slipsense-multimodal-slip-detection-2026
+├   ├ /research/touch2trace-tactile-cable-tracing-2026
+├   ├ /research/visible-touch-contact-overlays-visuomotor-policies-2026
+├   └ [+41 more paths]
+├ ○ /research/eu-roboskin-project                                          272 B         111 kB
+├ ○ /research/robot-skin-papers                                            272 B         111 kB
+├ ○ /resources                                                             217 B         111 kB
+├ ○ /robot-foundation-models                                             3.36 kB         115 kB
+├ ○ /robot-hands                                                           272 B         111 kB
+├ ○ /robot-learning                                                        272 B         111 kB
+├ ○ /robot-manipulation                                                    272 B         111 kB
+├ ○ /robot-safety                                                          272 B         111 kB
+├ ○ /robot-skin                                                            272 B         111 kB
+├ ○ /robot-teleoperation                                                   272 B         111 kB
+├ ○ /robot-vla-models                                                      233 B         111 kB
+├ ○ /robot-world-models                                                    272 B         111 kB
+├ ○ /robotics-datasets                                                     134 B         122 kB
+├ ○ /robotics-programming                                                  585 B         112 kB
+├ ○ /robots                                                                195 B         106 kB
+├ ○ /rss                                                                   821 B         107 kB
+├ ○ /sensors                                                             2.12 kB         113 kB
+├ ● /sensors/[id]                                                          272 B         111 kB
+├   ├ /sensors/digit
+├   ├ /sensors/gelsight-mini
+├   └ /sensors/reskin
+├ ○ /sitemap.xml                                                           170 B         103 kB
+├ ○ /solutions                                                             217 B         111 kB
+├ ○ /tactile-ai                                                            272 B         111 kB
+├ ○ /tactile-foundation-models                                             272 B         111 kB
+├ ○ /tactile-manipulation                                                  272 B         111 kB
+├ ○ /team                                                                  195 B         106 kB
+├ ○ /technology                                                            217 B         111 kB
+├ ○ /terms                                                                 170 B         103 kB
+├ ○ /visuo-tactile                                                         272 B         111 kB
+└ ○ /world-models/tracker                                                2.84 kB         109 kB
++ First Load JS shared by all                                             103 kB
+  ├ chunks/15261125-93d81c3f33ebc38a.js                                  54.2 kB
+  ├ chunks/3378-1a47a03a3f994ac9.js                                      46.3 kB
+  └ other shared chunks (total)                                          2.03 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> roboskin-website@0.1.0 postbuild
+> node scripts/generate-agent-markdown.mjs
+
+Generated 196 agent Markdown representations in E:\C-drive-migrated\roboskin-worktrees\vla-world-expansion-20261009\out\_agent-markdown

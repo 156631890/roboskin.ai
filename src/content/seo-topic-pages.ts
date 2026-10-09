@@ -3981,19 +3981,19 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-vla-models',
-    title: 'VLA Robotics: Models, Code & Tactile Comparison',
+    title: 'VLA Robotics: Architecture, Open Models & Touch',
     description:
-      'What is VLA in robotics? Learn how vision-language-action models work, compare 11 models, and find OpenVLA, UniTacVLA and VLA-Touch code and access details.',
+      'How do vision-language-action models work? Compare VLA architectures, action chunks, open models, deployment tradeoffs and tactile feedback with source links.',
     h1: 'VLA robotics: models, code and tactile feedback',
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: "2026-10-07",
+    updated: '2026-10-09',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA'],
+    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA', 'vision language action model architecture', 'vision language action models open source', 'efficient vision language action models', 'vision language action model benchmark'],
     quickAnswer: [
       'A robot vision-language-action model, usually shortened to VLA, uses visual observations and language instructions to produce or condition robot actions. Implementations differ in action representation, training data, embodiment coverage, control rate, and whether a separate planner or controller is required.',
       'A VLA is not automatically a world model or an embodied reasoning system. A world model predicts future state; embodied reasoning can decompose and monitor tasks; a VLA maps observations and instructions toward physical action.',
@@ -4058,6 +4058,40 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'vision-language-action-model-architecture',
+        heading: 'How do vision-language-action models work? An architecture walkthrough',
+        body: [
+          'A useful vision-language-action model architecture has three interfaces to inspect: observations entering the model, multimodal features carrying task context, and an action head producing commands. A camera image and an instruction such as "place the cup on the tray" are encoded together; robot state may supply the current pose or gripper position. The action head then predicts values in the action representation used during training.',
+          'Architectures differ in how they generate those values. An autoregressive head can decode discrete action tokens in sequence. Diffusion or flow-matching heads can generate continuous action sequences through iterative refinement. These are design choices, not an automatic quality ranking: the robot interface, training coverage and inference budget still determine whether a model is a candidate for a task.',
+        ],
+        table: {
+          headers: ['Architecture interface', 'What to inspect', 'Failure to catch before deployment'],
+          rows: [
+            ['Observation encoder', 'Camera views, image size, language prompt, robot state and history.', 'Missing views or a different state order can change the input seen by the trained policy.'],
+            ['Multimodal backbone', 'How visual, language and robot features interact; which parts are adapted.', 'Language understanding alone does not establish a learned robot action mapping.'],
+            ['Action head', 'Tokens or continuous values, action dimensions, horizon and decoding steps.', 'A valid output tensor may still use the wrong frame, units or gripper convention.'],
+            ['Execution adapter', 'Unnormalization, command limits, timing and controller interface.', 'The commanded action and the action physically executed can differ.'],
+          ],
+        },
+        links: [
+          { label: 'OpenVLA: an example of a VLA action interface', href: 'https://arxiv.org/abs/2406.09246' },
+          { label: 'π0: a flow-based robot action model', href: 'https://www.physicalintelligence.company/download/pi0.pdf' },
+        ],
+      },
+      {
+        id: 'vla-action-chunks-and-control-rate',
+        heading: 'Action chunks, continuous trajectories and feedback timing',
+        body: [
+          'An action chunk is a sequence of future commands predicted together. Predicting a longer chunk can reduce how often the model must run, but executing the entire sequence before observing again also delays reaction to a changed scene or unexpected contact. Prediction horizon, executed horizon and controller frequency are separate settings: a model can predict many steps while the robot executes only a prefix and then replans.',
+          'The October 2026 Vela preprint explores a different output representation: a fixed set of spline control points plus a motion-dependent horizon describes a continuous trajectory. The trajectory can be sampled at chosen control times. This is a useful example of current research on action representation; sampling more often does not mean the model receives new observations or makes a fresh decision at every sample.',
+          'For tactile manipulation, trace the complete feedback route. If slip is detected during a chunk, determine whether it can trigger a new policy call, change a residual controller, interrupt execution or only enter the next scheduled observation. A faster command stream alone does not prove faster contact response.',
+        ],
+        links: [
+          { label: 'Vela preprint: adaptive action curves and prediction horizons', href: 'https://arxiv.org/abs/2610.05230' },
+          { label: 'Follow contact measurements into tactile manipulation', href: '/tactile-manipulation' },
+        ],
+      },
+      {
         heading: 'VLA, VLM, world model and embodied reasoning',
         body: [
           'These model categories can be connected inside one system, but they answer different questions. Keeping the roles separate makes research comparisons more useful.',
@@ -4105,6 +4139,27 @@ export const seoTopicPages: SeoTopicPage[] = [
           'The detailed index separates eleven VLA records. Gemini Robotics 2, RT-2, OpenVLA 7B, π0, and Isaac GR00T N1 do not document live tactile input in the reviewed releases. T-Rex, ViTaR, ReTouch, τ, UniTacVLA, and VLA-Touch do. In the August 22 source review, T-Rex exposed a comparatively complete combination of public checkpoints, model code, inference code, and a downloadable tactile dataset subset.',
           'The August 22 review recorded ReTouch as paper-only, with ViTaR and τ announcing code to come. A September 15 check of the linked repositories still found UniTacVLA to be a project-page placeholder and VLA-Touch to provide partial code and resource links while marking its modified RDT inference implementation for future release. A paper, repository shell, dataset, controller checkpoint, and complete reproducible policy are different resources; project links alone do not establish successful reproduction.',
           'Use this comparison for action interfaces and tactile feedback. For broader pretraining and transfer questions, continue to the robot foundation-model directory. Dataset, benchmark, and manipulation guides provide the task and evaluation context needed to judge a model for your own robot.',
+        ],
+      },
+      {
+        id: 'open-and-efficient-vla-deployment',
+        heading: 'Open-source and efficient vision-language-action models: deployment choices',
+        body: [
+          'When looking for open-source vision-language-action models, check code, weights, training data and licenses separately. A public repository or downloadable checkpoint does not establish an unrestricted license or a complete reproduction. The model records below preserve release-specific evidence; the checklist here helps turn an available release into a deployment shortlist.',
+          'Efficient vision-language-action models should be compared using an end-to-end budget. Measure observation capture and preprocessing, model inference, communication, action decoding and execution delay on the intended hardware. Parameter count, tokens per second or an author-reported inference rate alone does not tell you how old the observation is when the robot moves.',
+        ],
+        table: {
+          headers: ['Deployment choice', 'Practical benefit to investigate', 'Tradeoff to measure'],
+          rows: [
+            ['Smaller backbone or fewer input tokens', 'Lower memory use or shorter inference time.', 'Task success under occlusion, small objects and varied instructions.'],
+            ['Fewer action-generation steps or compressed action output', 'Less decoding work per prediction.', 'Action precision, smoothness and recovery under the same task protocol.'],
+            ['Longer chunks or asynchronous inference', 'More continuous command delivery between model calls.', 'Observation age, interruption behavior and reaction to unexpected contact.'],
+            ['Local versus remote inference', 'Fit available compute and integration constraints.', 'Communication delay and variability, data handling, and behavior if a response is late.'],
+          ],
+        },
+        links: [
+          { label: 'OpenVLA official code and deployment instructions', href: 'https://github.com/openvla/openvla#readme' },
+          { label: 'OpenPI policy recipes and interfaces', href: 'https://github.com/Physical-Intelligence/openpi#readme' },
         ],
       },
       {
@@ -4162,6 +4217,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'Is a VLA the same as a robot foundation model?', answer: 'Not always. A VLA may be trained as a broad reusable foundation model or for a narrower robot and task set. Foundation-model claims require evidence for transfer, adaptation, or reuse.' },
       { question: 'Do robot VLA models use touch?', answer: 'Some do, but many are vision-language-action systems without live tactile input. Touch may be fused into the policy, used by a fast correction layer, or predicted by a world model.' },
       { question: 'How should VLA models be compared?', answer: 'Compare them only after aligning robot embodiment, tasks, inputs, action space, data, baselines, control rate, and real-robot evaluation. Unlike settings should not be collapsed into a leaderboard.' },
+      { question: 'How do vision-language-action models work?', answer: 'They encode visual observations and a language instruction, often together with robot state, then generate actions through a trained action head. The output may be discrete tokens, continuous action chunks or trajectory parameters. An execution adapter and robot controller must interpret that output in the documented units, frame and timing.' },
+      { question: 'What makes a vision-language-action model efficient for deployment?', answer: 'Efficiency depends on memory, observation processing, inference, communication and action execution on the target hardware. Smaller models, compressed outputs and fewer decoding steps can reduce computation, but compare task success and feedback delay as well. A high controller frequency does not establish that the model replans at the same rate.' },
+      { question: 'Which vision-language-action model benchmark should I use?', answer: 'Choose a benchmark that matches the claimed task and generalization setting, then keep the embodiment, observation streams, action interface, training data and evaluation budget aligned. Simulation and real-robot trials answer different questions. For tactile claims, include a matched no-touch comparison and contact-related outcomes rather than relying only on a general manipulation score.' },
     ],
     relatedLinks: [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place VLA policies inside the full perception, reasoning, control, action, and feedback loop.' },
@@ -4189,6 +4247,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'RT-2 vision-language-action paper', href: 'https://arxiv.org/abs/2307.15818' },
       { label: 'OpenVLA paper', href: 'https://arxiv.org/abs/2406.09246' },
       { label: 'OpenVLA official project, code and models', href: 'https://openvla.github.io/' },
+      { label: 'Vela adaptive action curve parametrization preprint', href: 'https://arxiv.org/abs/2610.05230' },
       { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
       { label: 'T-Rex official repository', href: 'https://github.com/ZhuoyangLiu2005/T-Rex' },
       { label: 'T-Rex public dataset subset', href: 'https://huggingface.co/datasets/zekaiwang/trex_dataset' },
@@ -4842,17 +4901,17 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-world-models',
     title: 'Robot World Models: Prediction, Planning & Control',
     description:
-      'Learn how robot world models predict future states for planning and control, how they differ from VLA and foundation models, and where tactile prediction fits.',
+      'Explore world models for robot learning and control: action-conditioned prediction, latent vs video models, manipulation examples and tactile feedback.',
     h1: 'Robot world models: prediction for physical action',
     kicker: 'Robot learning model pillar',
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: '2026-10-01',
+    updated: '2026-10-09',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'technology',
-    keywords: ['robot world models', 'world models for robotics', 'robot world model', 'world action model', 'predictive robot model', 'learned robot dynamics', 'world model robot manipulation', 'tactile world model', 'Physical AI world model'],
+    keywords: ['robot world models', 'world models for robotics', 'robot world model', 'world action model', 'predictive robot model', 'learned robot dynamics', 'world model robot manipulation', 'tactile world model', 'Physical AI world model', 'world models for robot learning', 'world models for robotic manipulation', 'world models for robot control', 'action-conditioned world model', 'vision language action world models'],
     quickAnswer: [
       'A robot world model predicts how an environment, robot state, observation, reward, or contact state may change after an action. The prediction can be in pixels, tactile observations, explicit state, or a learned latent representation.',
       'A world model is not automatically a robot policy, VLA, foundation model, or planner. Those components can share a backbone or be combined, but prediction, action selection, language grounding, and reusable pretraining are different roles.',
@@ -4874,6 +4933,39 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Reward or value model', 'Predicted success, progress, preference, or return', 'Ranking quality and policy outcomes', 'Can exploit narrow labels or miss unmodeled hazards'],
           ],
         },
+      },
+      {
+        id: 'action-conditioned-world-models-for-robotics',
+        heading: 'Should world models for robotics be action-conditioned?',
+        body: [
+          'For comparing the consequences of robot commands, action conditioning is central: the prediction should depend on which candidate action the robot takes, not only on what usually happens next in a video. The 2026 survey World Models for Robotic Manipulation uses an action-conditioned operational definition. Broader literature sometimes uses "world model" more loosely, so inspect the actual interface rather than assuming it from the name.',
+          'Consider an illustrative insertion task. From the same observation, moving forward, backing away and shifting sideways should produce different predicted outcomes where the physical situation warrants it. A text prompt saying "insert the peg" specifies a goal; it does not by itself identify the executed displacement, gripper command or force-related input. A useful model needs a documented route from the candidate robot action to the predicted consequence.',
+          'Check whether actions are measured, commanded or inferred, and whether the model sees the complete candidate sequence. Then test action sensitivity on held-out transitions: a convincing-looking future that barely responds to changed commands is weak evidence for planning. This example describes an evaluation design, not a RoboSkin hardware experiment.',
+        ],
+        links: [
+          { label: 'World Models for Robotic Manipulation: definition and prediction–action interfaces', href: 'https://arxiv.org/abs/2606.00113' },
+          { label: 'Inspect contact-conditioned manipulation evidence', href: '/guides/visuo-tactile-world-models-robot-manipulation' },
+        ],
+      },
+      {
+        id: 'latent-vs-video-world-models',
+        heading: 'Latent vs video world models: choose the information the task needs',
+        body: [
+          'A video world model predicts observations that a reader can inspect, such as where an object may move. A latent world model predicts learned features that may preserve the state needed for action selection without reconstructing every pixel. Neither representation guarantees physical accuracy. The right comparison is whether it retains task-critical information at a useful prediction horizon and computation budget.',
+          'For world models for robotic manipulation, visual appearance may be less decisive than an occluded contact, a small alignment error or an object slipping inside a gripper. A latent representation can also omit those variables if its training objective does not preserve them. Touch, explicit geometry or state measurements can add information, but their benefit must be established under a matched evaluation.',
+        ],
+        table: {
+          headers: ['Selection question', 'Video or observation prediction', 'Latent prediction'],
+          rows: [
+            ['What can a human inspect?', 'Generated frames expose visible motion and some failure cases.', 'Feature probes or a separate decoder are needed to interpret the predicted state.'],
+            ['What should determine the compute budget?', 'Resolution, views, horizon, generation steps and candidate count.', 'Feature size, rollout length, candidate count and any decoding required.'],
+            ['What can go wrong?', 'Plausible texture can conceal incorrect geometry, contact or action response.', 'A compact representation can discard a small but decisive physical change.'],
+            ['How should the choice be validated?', 'Check action consistency and task-critical state in addition to image quality.', 'Check action consistency, preserved task state and downstream decisions.'],
+          ],
+        },
+        links: [
+          { label: 'Read the survey discussion of world-model representations', href: 'https://arxiv.org/abs/2606.00113' },
+        ],
       },
       {
         heading: 'World model, VLA, foundation model, and policy',
@@ -4901,6 +4993,28 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Expose whether the model is used during training, planning, online control, or only visualization',
           'Compare against a policy without the world-model pathway and against appropriate planning baselines',
           'Measure physical task value, compute and latency, failure detection, and behavior under distribution shift',
+        ],
+      },
+      {
+        id: 'world-models-for-robot-learning-and-control',
+        heading: 'World models for robot learning and control: choose by use case',
+        body: [
+          'Start by deciding when predictions affect the robot. World models for robot learning can supply pretraining objectives, synthetic transitions or a learned environment for policy improvement. World models for robot control must also fit the online decision loop if their predictions are used during execution. A method trained with future prediction may deploy without running a world model at every step.',
+          'Vision-language-action world models can connect prediction and action generation inside one system, or let a separate planner score actions proposed by a VLA. Check which direction the interface runs: predicting a future from an action differs from inferring an action from a desired future. The manipulation survey distinguishes integrated prediction–action models from explicit predictive planners; this distinction helps identify what the model actually contributes.',
+        ],
+        table: {
+          headers: ['Intended use', 'Required interface', 'Decision evidence to request'],
+          rows: [
+            ['Learn from imagined experience', 'Action-conditioned transitions plus the reward or task feedback used by the learner.', 'Real held-out task performance and whether learned-simulator errors mislead policy improvement.'],
+            ['Rank or refine candidate actions', 'Candidate commands, predicted outcomes and an explicit scoring objective.', 'Ranking or refinement quality against measured outcomes under the same compute budget.'],
+            ['Plan during manipulation', 'A rollout interface, action constraints, observation updates and replanning schedule.', 'End-to-end latency, recovery after prediction error and repeated physical trials.'],
+            ['Learn predictive features inside a VLA', 'A future-prediction training target and a documented connection to the action pathway.', 'An ablation isolating the predictive objective and clarity about which modules run at deployment.'],
+          ],
+        },
+        links: [
+          { label: 'World-model lifecycle and learning roles in the 2026 survey', href: 'https://arxiv.org/abs/2606.00113' },
+          { label: 'Compare VLA architecture and action interfaces', href: '/robot-vla-models#vision-language-action-model-architecture' },
+          { label: 'Connect predictive training to robot learning', href: '/robot-learning' },
         ],
       },
       {
@@ -4941,6 +5055,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'How are robot world models evaluated?', answer: 'Evaluate the prediction target and horizon, then test whether the model improves planning, control, data efficiency, recovery, or task outcomes under matched physical conditions.' },
       { question: 'What is a tactile world model?', answer: 'It predicts future tactile observations or contact-related state conditioned on action, sometimes together with visual state, so planning or control can reason about physical contact.' },
       { question: 'Does a plausible generated video prove a useful world model?', answer: 'No. Visual plausibility can hide physically wrong geometry, contact, timing, or action consequences. Downstream planning and repeated real-robot evidence are required for stronger claims.' },
+      { question: 'Should world models for robotics be action-conditioned?', answer: 'When the goal is to compare candidate robot commands, the prediction must reflect those commands through a documented action interface. A goal-conditioned video alone does not establish this capability. Test whether changing the candidate action changes the predicted outcome appropriately, and verify those differences against measured transitions.' },
+      { question: 'What is the difference between latent and video world models?', answer: 'Video world models predict observable frames, while latent world models predict learned features. Video is easier to inspect visually; latent prediction can avoid reconstructing every pixel. Either can lose contact-critical information, so compare action sensitivity, task-relevant state, computation and downstream robot outcomes.' },
+      { question: 'How can world models improve robot learning without running during control?', answer: 'They can provide predictive representation targets, generate training experience or support policy improvement before deployment. The resulting policy may then execute without an online world-model rollout. Record the training role separately from the deployed system and use an ablation to establish the contribution of prediction.' },
     ],
     relatedLinks: [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place consequence prediction inside the complete perception, policy, control, and feedback loop.' },
@@ -4958,6 +5075,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sources: [
       { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
+      { label: 'World Models for Robotic Manipulation: A Survey', href: 'https://arxiv.org/abs/2606.00113' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/abs/2606.08737' },
       { label: 'TouchWorld tactile world model preprint', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'EgoTouch and TouchAnything preprint', href: 'https://arxiv.org/abs/2605.13083' },

@@ -1,0 +1,100 @@
+{
+  "observed_on": "2026-10-09",
+  "autocomplete_source": "Ubersuggest google_suggestions; language=en; country=us; seeds=vision language action, world models robotics",
+  "metric_market": "United States/en; location resolved to 2840",
+  "volume": null,
+  "difficulty": null,
+  "metrics_limitation": "Free daily report quota exhausted (3); keyword_overview returned HTTP 403. No metrics inferred.",
+  "google_serp_context": "Actual Chrome Google searches, signed-in personalized results with Chinese UI; not a depersonalized US ranking measurement.",
+  "google_searches": [
+    {
+      "query": "vision language action models 2026 robotics papers",
+      "url": "https://www.google.com/search?q=vision+language+action+models+2026+robotics+papers",
+      "observed_primary_candidates": [
+        "https://arxiv.org/abs/2610.05230",
+        "https://huggingface.co/papers/2607.15330",
+        "https://openaccess.thecvf.com/content/CVPR2026/papers/Lin_Evo-1_Lightweight_Vision-Language-Action_Model_with_Preserved_Semantic_Alignment_CVPR_2026_paper.pdf"
+      ]
+    },
+    {
+      "query": "world models robotics 2026 papers",
+      "url": "https://www.google.com/search?q=world+models+robotics+2026+papers",
+      "observed_primary_candidates": [
+        "https://arxiv.org/abs/2609.28258",
+        "https://arxiv.org/abs/2606.00113",
+        "https://arxiv.org/abs/2605.00080"
+      ]
+    }
+  ],
+  "research_topics": [
+    "adaptive action horizons",
+    "lightweight VLA deployment",
+    "UMI data and VLA scaling",
+    "action-conditioned prediction",
+    "latent versus video world models",
+    "contact-rich insertion"
+  ],
+  "trend_limitation": "Research topics observed in current papers/search results, not measured Google Trends growth.",
+  "mapping": [
+    {
+      "keyword": "vision language action model architecture",
+      "target": "/robot-vla-models#vision-language-action-model-architecture",
+      "placement": "Architecture explanation + interface comparison",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "how do vision language action models work",
+      "target": "/robot-vla-models#vision-language-action-model-architecture",
+      "placement": "Explanation + FAQ",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "vision language action models open source",
+      "target": "/robot-vla-models#open-and-efficient-vla-deployment",
+      "placement": "Code/weights/data/license checklist",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "efficient vision language action models",
+      "target": "/robot-vla-models#open-and-efficient-vla-deployment",
+      "placement": "End-to-end deployment budget + Evo-1 reading",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "vision language action model benchmark",
+      "target": "/robot-vla-models",
+      "placement": "Benchmark selection FAQ",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "vision language action world models",
+      "target": "/robot-world-models#world-models-for-robot-learning-and-control",
+      "placement": "VLA/world-model interfaces + cross-link",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "world models for robot learning",
+      "target": "/robot-world-models#world-models-for-robot-learning-and-control",
+      "placement": "Training vs inference roles",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "world models for robotic manipulation",
+      "target": "/robot-world-models#latent-vs-video-world-models",
+      "placement": "Contact, representation and survey reading",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "should world models for robotics be action conditioned",
+      "target": "/robot-world-models#action-conditioned-world-models-for-robotics",
+      "placement": "Action sensitivity explanation + FAQ",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    },
+    {
+      "keyword": "world models for robot control",
+      "target": "/robot-world-models#world-models-for-robot-learning-and-control",
+      "placement": "Control role and decision evidence",
+      "evidence": "Observed Google autocomplete via Ubersuggest; selected excerpt, not the complete raw response"
+    }
+  ]
+}

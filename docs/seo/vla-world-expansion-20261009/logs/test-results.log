@@ -1,0 +1,1360 @@
+
+> roboskin-website@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: ADEPT brief preserves paper metadata, physical results, access state, and evidence boundaries
+ok 1 - ADEPT brief preserves paper metadata, physical results, access state, and evidence boundaries
+  ---
+  duration_ms: 14.0294
+  type: 'test'
+  ...
+# Subtest: ADEPT model and robot configurations remain embodiment-specific
+ok 2 - ADEPT model and robot configurations remain embodiment-specific
+  ---
+  duration_ms: 9.5069
+  type: 'test'
+  ...
+# Subtest: ADEPT graph relations connect the paper, policy, organizations, and both robot setups without inventing artifacts
+ok 3 - ADEPT graph relations connect the paper, policy, organizations, and both robot setups without inventing artifacts
+  ---
+  duration_ms: 9.3545
+  type: 'test'
+  ...
+# Subtest: exported HTML is converted into a canonical, compact Markdown representation
+ok 4 - exported HTML is converted into a canonical, compact Markdown representation
+  ---
+  duration_ms: 18.8837
+  type: 'test'
+  ...
+# Subtest: HTML output paths map to stable private Markdown asset paths
+ok 5 - HTML output paths map to stable private Markdown asset paths
+  ---
+  duration_ms: 0.4192
+  type: 'test'
+  ...
+# Subtest: Vercel negotiates Markdown without changing the browser HTML route
+ok 6 - Vercel negotiates Markdown without changing the browser HTML route
+  ---
+  duration_ms: 9.7543
+  type: 'test'
+  ...
+# Subtest: the 404 page gives agents and people explicit recovery routes
+ok 7 - the 404 page gives agents and people explicit recovery routes
+  ---
+  duration_ms: 1.9413
+  type: 'test'
+  ...
+# Subtest: Organization schema strengthens brand identity without inventing a postal address
+ok 8 - Organization schema strengthens brand identity without inventing a postal address
+  ---
+  duration_ms: 2.4922
+  type: 'test'
+  ...
+# Subtest: homepage gives AI and robotics one compact closed-loop authority route
+ok 9 - homepage gives AI and robotics one compact closed-loop authority route
+  ---
+  duration_ms: 15.2695
+  type: 'test'
+  ...
+# Subtest: AI and robotics is an answer-first crawlable hub with explicit model and control boundaries
+ok 10 - AI and robotics is an answer-first crawlable hub with explicit model and control boundaries
+  ---
+  duration_ms: 20.3989
+  type: 'test'
+  ...
+# Subtest: Physical AI has one broad canonical URL and a separate touch child route
+ok 11 - Physical AI has one broad canonical URL and a separate touch child route
+  ---
+  duration_ms: 31.364
+  type: 'test'
+  ...
+# Subtest: daily research watch parses source-backed arXiv and relevant Google Trends entries
+ok 12 - daily research watch parses source-backed arXiv and relevant Google Trends entries
+  ---
+  duration_ms: 12.3372
+  type: 'test'
+  ...
+# Subtest: daily research watch splits the arXiv query into bounded batches
+ok 13 - daily research watch splits the arXiv query into bounded batches
+  ---
+  duration_ms: 1.0551
+  type: 'test'
+  ...
+# Subtest: daily research report never presents an arXiv source failure as zero papers
+ok 14 - daily research report never presents an arXiv source failure as zero papers
+  ---
+  duration_ms: 98.5088
+  type: 'test'
+  ...
+# Subtest: daily research report labels partial arXiv results as incomplete
+ok 15 - daily research report labels partial arXiv results as incomplete
+  ---
+  duration_ms: 0.5744
+  type: 'test'
+  ...
+# Subtest: daily research report keeps candidates out of the publishing path
+ok 16 - daily research report keeps candidates out of the publishing path
+  ---
+  duration_ms: 38.2263
+  type: 'test'
+  ...
+# Subtest: paper-associated candidates stay outside catalog counts and Dataset structured data
+ok 17 - paper-associated candidates stay outside catalog counts and Dataset structured data
+  ---
+  duration_ms: 60.9027
+  type: 'test'
+  ...
+# Subtest: public manifest access does not grant the code license to dataset files
+ok 18 - public manifest access does not grant the code license to dataset files
+  ---
+  duration_ms: 0.4336
+  type: 'test'
+  ...
+# Subtest: catalogs preserve third-party dataset identities and provider links without claiming file downloads
+ok 19 - catalogs preserve third-party dataset identities and provider links without claiming file downloads
+  ---
+  duration_ms: 15.4858
+  type: 'test'
+  ...
+# Subtest: the original research index keeps two complete downloadable distributions
+ok 20 - the original research index keeps two complete downloadable distributions
+  ---
+  duration_ms: 0.8272
+  type: 'test'
+  ...
+# Subtest: the export guard catches the reported nested distribution warnings
+ok 21 - the export guard catches the reported nested distribution warnings
+  ---
+  duration_ms: 1.202
+  type: 'test'
+  ...
+# Subtest: physical DIGIT labels share a filter without conflating simulated or newer hardware
+ok 22 - physical DIGIT labels share a filter without conflating simulated or newer hardware
+  ---
+  duration_ms: 2.807
+  type: 'test'
+  ...
+# Subtest: dataset search combines terms across fields and preserves an empty-query result
+ok 23 - dataset search combines terms across fields and preserves an empty-query result
+  ---
+  duration_ms: 0.5621
+  type: 'test'
+  ...
+# Subtest: CSV preserves quoted and multiline evidence while neutralizing spreadsheet formulas
+ok 24 - CSV preserves quoted and multiline evidence while neutralizing spreadsheet formulas
+  ---
+  duration_ms: 0.903
+  type: 'test'
+  ...
+# Subtest: export is limited to the provided selection and does not invent download URLs
+ok 25 - export is limited to the provided selection and does not invent download URLs
+  ---
+  duration_ms: 0.3863
+  type: 'test'
+  ...
+# Subtest: citation separates the directory editor from the original research
+ok 26 - citation separates the directory editor from the original research
+  ---
+  duration_ms: 0.2963
+  type: 'test'
+  ...
+# Subtest: CSV and JSON routes serialize the shared research index
+ok 27 - CSV and JSON routes serialize the shared research index
+  ---
+  duration_ms: 56.7368
+  type: 'test'
+  ...
+# Subtest: RSS is generated from research and news with apex URLs
+ok 28 - RSS is generated from research and news with apex URLs
+  ---
+  duration_ms: 5.5052
+  type: 'test'
+  ...
+# Subtest: Google News sitemap includes only recent news and apex URLs
+ok 29 - Google News sitemap includes only recent news and apex URLs
+  ---
+  duration_ms: 4.6411
+  type: 'test'
+  ...
+# Subtest: crawler robots policy overrides the conflicting static RSC path without breaking /robots navigation
+ok 30 - crawler robots policy overrides the conflicting static RSC path without breaking /robots navigation
+  ---
+  duration_ms: 4.676
+  type: 'test'
+  ...
+# (node:39324) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/C-drive-migrated/roboskin-worktrees/vla-world-expansion-20261009/src/app/deployment.json/route.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to E:\\C-drive-migrated\\roboskin-worktrees\\vla-world-expansion-20261009\\package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: IndexNow requires a recent successful production verification report
+ok 31 - IndexNow requires a recent successful production verification report
+  ---
+  duration_ms: 3.6886
+  type: 'test'
+  ...
+# Subtest: deployment identity ignores empty platform commit variables
+ok 32 - deployment identity ignores empty platform commit variables
+  ---
+  duration_ms: 148.1608
+  type: 'test'
+  ...
+# Subtest: deployment and measurement are gated and reproducible
+ok 33 - deployment and measurement are gated and reproducible
+  ---
+  duration_ms: 4.1099
+  type: 'test'
+  ...
+# Subtest: visible content uses one institutional editorial team with a named editorial lead
+ok 34 - visible content uses one institutional editorial team with a named editorial lead
+  ---
+  duration_ms: 35.9904
+  type: 'test'
+  ...
+# Subtest: article authors and the publisher resolve to factual organization nodes
+ok 35 - article authors and the publisher resolve to factual organization nodes
+  ---
+  duration_ms: 2.04
+  type: 'test'
+  ...
+# Subtest: technical topic pages use the visible institutional editorial identity
+ok 36 - technical topic pages use the visible institutional editorial identity
+  ---
+  duration_ms: 2.4771
+  type: 'test'
+  ...
+# Subtest: the EU ROBOSKIN project has a crawlable source-backed route
+ok 37 - the EU ROBOSKIN project has a crawlable source-backed route
+  ---
+  duration_ms: 17.1508
+  type: 'test'
+  ...
+# Subtest: the historical project record receives multiple internal links
+ok 38 - the historical project record receives multiple internal links
+  ---
+  duration_ms: 7.4753
+  type: 'test'
+  ...
+# Subtest: each published evidence result has a unique anchor, versioned source, and explicit protocol boundaries
+ok 39 - each published evidence result has a unique anchor, versioned source, and explicit protocol boundaries
+  ---
+  duration_ms: 2.2817
+  type: 'test'
+  ...
+# Subtest: filtered CSV round-trips all evidence fields and preserves source links and caveats
+ok 40 - filtered CSV round-trips all evidence fields and preserves source links and caveats
+  ---
+  duration_ms: 1.4272
+  type: 'test'
+  ...
+# Subtest: an empty export contains headers only and export text cannot start a spreadsheet formula
+ok 41 - an empty export contains headers only and export text cannot start a spreadsheet formula
+  ---
+  duration_ms: 0.3976
+  type: 'test'
+  ...
+# Subtest: batch attribution includes only the released route cohort
+ok 42 - batch attribution includes only the released route cohort
+  ---
+  duration_ms: 0.3098
+  type: 'test'
+  ...
+# Subtest: missing configuration never returns success or calls a network
+ok 43 - missing configuration never returns success or calls a network
+  ---
+  duration_ms: 64.3828
+  type: 'test'
+  ...
+# Subtest: email validation accepts a plus tag and rejects invalid types or line breaks
+ok 44 - email validation accepts a plus tag and rejects invalid types or line breaks
+  ---
+  duration_ms: 0.4433
+  type: 'test'
+  ...
+# Subtest: consent, honeypot and origin failures never become a receipt
+ok 45 - consent, honeypot and origin failures never become a receipt
+  ---
+  duration_ms: 4.9077
+  type: 'test'
+  ...
+# Subtest: oversized body is bounded even without Content-Length
+ok 46 - oversized body is bounded even without Content-Length
+  ---
+  duration_ms: 1.6497
+  type: 'test'
+  ...
+# Subtest: a commercial inquiry retains decision scope and accepts a real delivery acknowledgement
+ok 47 - a commercial inquiry retains decision scope and accepts a real delivery acknowledgement
+  ---
+  duration_ms: 6.4057
+  type: 'test'
+  ...
+# Subtest: wrong anti-spam hostname or action fails closed
+ok 48 - wrong anti-spam hostname or action fails closed
+  ---
+  duration_ms: 3.652
+  type: 'test'
+  ...
+# Subtest: HTTP 200 without a delivery receipt and network errors do not confirm delivery
+ok 49 - HTTP 200 without a delivery receipt and network errors do not confirm delivery
+  ---
+  duration_ms: 3.9002
+  type: 'test'
+  ...
+# Subtest: existing FormSubmit AJAX acknowledgement is supported
+ok 50 - existing FormSubmit AJAX acknowledgement is supported
+  ---
+  duration_ms: 1.7503
+  type: 'test'
+  ...
+# Subtest: newsletter requests double opt-in and reports pending, never subscribed
+ok 51 - newsletter requests double opt-in and reports pending, never subscribed
+  ---
+  duration_ms: 2.3701
+  type: 'test'
+  ...
+# Subtest: a duplicate preserves existing/unsubscribed state and makes no reminder call
+ok 52 - a duplicate preserves existing/unsubscribed state and makes no reminder call
+  ---
+  duration_ms: 1.9224
+  type: 'test'
+  ...
+# Subtest: provider refusal does not claim signup succeeded
+ok 53 - provider refusal does not claim signup succeeded
+  ---
+  duration_ms: 5.0802
+  type: 'test'
+  ...
+# Subtest: burst control expires and browser delivery checks structured receipts
+ok 54 - burst control expires and browser delivery checks structured receipts
+  ---
+  duration_ms: 1.3198
+  type: 'test'
+  ...
+# Subtest: only the production hostname with a valid measurement ID can collect
+ok 55 - only the production hostname with a valid measurement ID can collect
+  ---
+  duration_ms: 1.6786
+  type: 'test'
+  ...
+# Subtest: page and referrer URLs exclude queries, fragments, and external paths
+ok 56 - page and referrer URLs exclude queries, fragments, and external paths
+  ---
+  duration_ms: 0.3521
+  type: 'test'
+  ...
+# Subtest: navigation sends one view, correct previous page, and counts a return visit
+ok 57 - navigation sends one view, correct previous page, and counts a return visit
+  ---
+  duration_ms: 1.4274
+  type: 'test'
+  ...
+# Subtest: no choice or declining never loads the Google tag or queues events
+ok 58 - no choice or declining never loads the Google tag or queues events
+  ---
+  duration_ms: 3.3575
+  type: 'test'
+  ...
+# Subtest: only approved campaign combinations survive; private and duplicate values are discarded
+ok 59 - only approved campaign combinations survive; private and duplicate values are discarded
+  ---
+  duration_ms: 1.0523
+  type: 'test'
+  ...
+# Subtest: resource events exclude external links, arbitrary queries and self-navigation
+ok 60 - resource events exclude external links, arbitrary queries and self-navigation
+  ---
+  duration_ms: 0.5451
+  type: 'test'
+  ...
+# Subtest: resource click collection respects consent, withdrawal and route changes
+ok 61 - resource click collection respects consent, withdrawal and route changes
+  ---
+  duration_ms: 5.6808
+  type: 'test'
+  ...
+# Subtest: approved landing campaign survives a pre-consent navigation without retaining arbitrary query values
+ok 62 - approved landing campaign survives a pre-consent navigation without retaining arbitrary query values
+  ---
+  duration_ms: 1.673
+  type: 'test'
+  ...
+# Subtest: consent initializes once, handles navigation, and supports withdrawal
+ok 63 - consent initializes once, handles navigation, and supports withdrawal
+  ---
+  duration_ms: 2.7054
+  type: 'test'
+  ...
+# Subtest: saved choices, absent configuration, previews, and blocked storage are handled
+ok 64 - saved choices, absent configuration, previews, and blocked storage are handled
+  ---
+  duration_ms: 7.2505
+  type: 'test'
+  ...
+# Subtest: homepage keeps canonical meaning while reducing repeated long-form blocks
+ok 65 - homepage keeps canonical meaning while reducing repeated long-form blocks
+  ---
+  duration_ms: 36.3539
+  type: 'test'
+  ...
+# Subtest: research index exposes a versioned, licensed, citable GitHub release
+ok 66 - research index exposes a versioned, licensed, citable GitHub release
+  ---
+  duration_ms: 4.6672
+  type: 'test'
+  ...
+# Subtest: ROS 2 starter kit is connected to the implementation guide and agent-readable map
+ok 67 - ROS 2 starter kit is connected to the implementation guide and agent-readable map
+  ---
+  duration_ms: 3.8889
+  type: 'test'
+  ...
+# Subtest: conversion analytics cover the agreed growth actions without user-entered properties
+ok 68 - conversion analytics cover the agreed growth actions without user-entered properties
+  ---
+  duration_ms: 14.6693
+  type: 'test'
+  ...
+# Subtest: newsletter endpoints accept only credential-free HTTPS provider URLs
+ok 69 - newsletter endpoints accept only credential-free HTTPS provider URLs
+  ---
+  duration_ms: 2.5764
+  type: 'test'
+  ...
+# Subtest: the August research-news release and five-target outreach batch are complete assets
+ok 70 - the August research-news release and five-target outreach batch are complete assets
+  ---
+  duration_ms: 9.5492
+  type: 'test'
+  ...
+# Subtest: the five priority pillars have canonical static routes and legacy redirects
+ok 71 - the five priority pillars have canonical static routes and legacy redirects
+  ---
+  duration_ms: 36.941
+  type: 'test'
+  ...
+# Subtest: the tactile dataset hub is structured, filterable, source-bounded, and machine-readable
+ok 72 - the tactile dataset hub is structured, filterable, source-bounded, and machine-readable
+  ---
+  duration_ms: 7.0822
+  type: 'test'
+  ...
+# Subtest: the internal research graph and homepage expose the semantic authority chain
+ok 73 - the internal research graph and homepage expose the semantic authority chain
+  ---
+  duration_ms: 3.3924
+  type: 'test'
+  ...
+# Subtest: the keyword matrix assigns all 20 strategic clusters to canonical owners
+ok 74 - the keyword matrix assigns all 20 strategic clusters to canonical owners
+  ---
+  duration_ms: 8.1879
+  type: 'test'
+  ...
+# Subtest: homepage copy reflects the research map positioning
+ok 75 - homepage copy reflects the research map positioning
+  ---
+  duration_ms: 16.5291
+  type: 'test'
+  ...
+# Subtest: research and glossary pages extend the brand content system
+ok 76 - research and glossary pages extend the brand content system
+  ---
+  duration_ms: 45.659
+  type: 'test'
+  ...
+# Subtest: homepage brand visual assets exist and are wired into the hero
+ok 77 - homepage brand visual assets exist and are wired into the hero
+  ---
+  duration_ms: 16.4419
+  type: 'test'
+  ...
+# Subtest: homepage authority visual assets are generated and wired into components
+ok 78 - homepage authority visual assets are generated and wired into components
+  ---
+  duration_ms: 14.7512
+  type: 'test'
+  ...
+# Subtest: HT-Bench brief follows arXiv v2 Table 2 and preserves source discrepancies
+ok 79 - HT-Bench brief follows arXiv v2 Table 2 and preserves source discrepancies
+  ---
+  duration_ms: 27.5878
+  type: 'test'
+  ...
+# Subtest: HT-Bench v2 real-robot results and scope remain source-bounded
+ok 80 - HT-Bench v2 real-robot results and scope remain source-bounded
+  ---
+  duration_ms: 17.6195
+  type: 'test'
+  ...
+# Subtest: HT-Bench dataset, benchmark, index, graph, and topic sources pin v2 and do not imply release
+ok 81 - HT-Bench dataset, benchmark, index, graph, and topic sources pin v2 and do not imply release
+  ---
+  duration_ms: 19.0567
+  type: 'test'
+  ...
+# Subtest: the reviewed semantic inventory adds bounded model-dataset training and Tac4Loco relations
+ok 82 - the reviewed semantic inventory adds bounded model-dataset training and Tac4Loco relations
+  ---
+  duration_ms: 4.3878
+  type: 'test'
+  ...
+# Subtest: relation vocabulary constrains every v2 endpoint pair
+ok 83 - relation vocabulary constrains every v2 endpoint pair
+  ---
+  duration_ms: 1.6642
+  type: 'test'
+  ...
+# Subtest: graph contract and GEO export expose relation counts and evidence boundaries
+ok 84 - graph contract and GEO export expose relation counts and evidence boundaries
+  ---
+  duration_ms: 2.0851
+  type: 'test'
+  ...
+# Subtest: export and production verifiers enforce knowledge graph v2 evidence relations
+ok 85 - export and production verifiers enforce knowledge graph v2 evidence relations
+  ---
+  duration_ms: 14.5909
+  type: 'test'
+  ...
+# Subtest: RSS and production status reflect the current generated artifacts
+ok 86 - RSS and production status reflect the current generated artifacts
+  ---
+  duration_ms: 2.4911
+  type: 'test'
+  ...
+# Subtest: knowledge graph is built from the existing reviewed collections with honest types
+ok 87 - knowledge graph is built from the existing reviewed collections with honest types
+  ---
+  duration_ms: 8.2735
+  type: 'test'
+  ...
+# Subtest: knowledge graph JSON is a protected deterministic static output outside the HTML sitemap
+ok 88 - knowledge graph JSON is a protected deterministic static output outside the HTML sitemap
+  ---
+  duration_ms: 3.0872
+  type: 'test'
+  ...
+# Subtest: directory rows expose stable fragment targets without creating thin entity pages
+ok 89 - directory rows expose stable fragment targets without creating thin entity pages
+  ---
+  duration_ms: 3.3096
+  type: 'test'
+  ...
+# Subtest: llms-full route is statically generated as UTF-8 plain text
+ok 90 - llms-full route is statically generated as UTF-8 plain text
+  ---
+  duration_ms: 2.3631
+  type: 'test'
+  ...
+# Subtest: llms-full generator uses the shared knowledge sources
+ok 91 - llms-full generator uses the shared knowledge sources
+  ---
+  duration_ms: 1.8737
+  type: 'test'
+  ...
+# Subtest: curated llms file and homepage head expose machine-readable discovery
+ok 92 - curated llms file and homepage head expose machine-readable discovery
+  ---
+  duration_ms: 0.9939
+  type: 'test'
+  ...
+# Subtest: the fifteen normalized organizations have primary identity evidence and a semantic connection
+ok 93 - the fifteen normalized organizations have primary identity evidence and a semantic connection
+  ---
+  duration_ms: 52.9618
+  type: 'test'
+  ...
+# Subtest: manufacturedBy is an exact thirteen-edge sensor-or-robot to organization inventory
+ok 94 - manufacturedBy is an exact thirteen-edge sensor-or-robot to organization inventory
+  ---
+  duration_ms: 13.7208
+  type: 'test'
+  ...
+# Subtest: the five new source affiliations remain exact, primary-source bounded links
+ok 95 - the five new source affiliations remain exact, primary-source bounded links
+  ---
+  duration_ms: 24.1915
+  type: 'test'
+  ...
+# Subtest: BioTac evidence no longer uses the retired syntouchllc.com domain
+ok 96 - BioTac evidence no longer uses the retired syntouchllc.com domain
+  ---
+  duration_ms: 9.6297
+  type: 'test'
+  ...
+# Subtest: manufacturer JSON-LD resolves to the same canonical organization anchors used by the directory
+ok 97 - manufacturer JSON-LD resolves to the same canonical organization anchors used by the directory
+  ---
+  duration_ms: 12.6216
+  type: 'test'
+  ...
+# Subtest: primary navigation expresses the RoboSkin authority chain without generic top-level clutter
+ok 98 - primary navigation expresses the RoboSkin authority chain without generic top-level clutter
+  ---
+  duration_ms: 27.7551
+  type: 'test'
+  ...
+# Subtest: on-page audit parses the DOM without counting hydration payloads as content
+ok 99 - on-page audit parses the DOM without counting hydration payloads as content
+  ---
+  duration_ms: 33.3736
+  type: 'test'
+  ...
+# Subtest: on-page audit catches a homepage canonical, noindex, and duplicate metadata in the sitemap
+ok 100 - on-page audit catches a homepage canonical, noindex, and duplicate metadata in the sitemap
+  ---
+  duration_ms: 8.6549
+  type: 'test'
+  ...
+# Subtest: on-page audit checks real destinations and decoded fragments while allowing files and external links
+ok 101 - on-page audit checks real destinations and decoded fragments while allowing files and external links
+  ---
+  duration_ms: 5.0486
+  type: 'test'
+  ...
+# Subtest: on-page audit reports absent descriptions and duplicate sitemap URLs
+ok 102 - on-page audit reports absent descriptions and duplicate sitemap URLs
+  ---
+  duration_ms: 1.1658
+  type: 'test'
+  ...
+# Subtest: section IDs keep existing deep links and disambiguate repeated headings
+ok 103 - section IDs keep existing deep links and disambiguate repeated headings
+  ---
+  duration_ms: 2.4062
+  type: 'test'
+  ...
+# Subtest: resource directory includes every supplied page exactly once, including new uncategorized topics
+ok 104 - resource directory includes every supplied page exactly once, including new uncategorized topics
+  ---
+  duration_ms: 0.8034
+  type: 'test'
+  ...
+# Subtest: secondary page visual assets exist and are wired into page heroes
+ok 105 - secondary page visual assets exist and are wired into page heroes
+  ---
+  duration_ms: 49.6302
+  type: 'test'
+  ...
+# Subtest: PRISM brief and dataset preserve tactile coverage, image-count, access, license, and identity boundaries
+ok 106 - PRISM brief and dataset preserve tactile coverage, image-count, access, license, and identity boundaries
+  ---
+  duration_ms: 52.806
+  type: 'test'
+  ...
+# Subtest: The Missing Touch brief preserves participant, task, haptic-channel, and autonomy limits
+ok 107 - The Missing Touch brief preserves participant, task, haptic-channel, and autonomy limits
+  ---
+  duration_ms: 5.9118
+  type: 'test'
+  ...
+# Subtest: knowledge relations add only source-supported PRISM hardware and Missing Touch sensor edges
+ok 108 - knowledge relations add only source-supported PRISM hardware and Missing Touch sensor edges
+  ---
+  duration_ms: 3.4253
+  type: 'test'
+  ...
+# Subtest: pillar pages and homepage expose reverse links without adding a new thin route
+ok 109 - pillar pages and homepage expose reverse links without adding a new thin route
+  ---
+  duration_ms: 6.8692
+  type: 'test'
+  ...
+# Subtest: a search referral is attributed only to the initial document landing
+ok 110 - a search referral is attributed only to the initial document landing
+  ---
+  duration_ms: 3.4308
+  type: 'test'
+  ...
+# Subtest: direct visits remain unattributed through internal navigation
+ok 111 - direct visits remain unattributed through internal navigation
+  ---
+  duration_ms: 1.9771
+  type: 'test'
+  ...
+# Subtest: tutorial visits survive repeated effects and count a return navigation
+ok 112 - tutorial visits survive repeated effects and count a return navigation
+  ---
+  duration_ms: 1.0702
+  type: 'test'
+  ...
+# Subtest: research content is current, conservative, source-backed, and crawlable
+ok 113 - research content is current, conservative, source-backed, and crawlable
+  ---
+  duration_ms: 52.5647
+  type: 'test'
+  ...
+# Subtest: the audited GSC priority pages own one query-aligned treatment
+ok 114 - the audited GSC priority pages own one query-aligned treatment
+  ---
+  duration_ms: 19.8497
+  type: 'test'
+  ...
+# Subtest: the Cambridge single-material skin brief preserves the paper configuration, channel, and rate boundaries
+ok 115 - the Cambridge single-material skin brief preserves the paper configuration, channel, and rate boundaries
+  ---
+  duration_ms: 5.6493
+  type: 'test'
+  ...
+# Subtest: the SoftVTBench brief separates paper scale, conflicting release documentation, simulation, and metric scope
+ok 116 - the SoftVTBench brief separates paper scale, conflicting release documentation, simulation, and metric scope
+  ---
+  duration_ms: 6.6747
+  type: 'test'
+  ...
+# Subtest: the research index edition is normalized and source-backed
+ok 117 - the research index edition is normalized and source-backed
+  ---
+  duration_ms: 20.7614
+  type: 'test'
+  ...
+# Subtest: the research index is indexable, filterable, and visible before interaction
+ok 118 - the research index is indexable, filterable, and visible before interaction
+  ---
+  duration_ms: 5.038
+  type: 'test'
+  ...
+# Subtest: news detail pages are crawlable source-backed article pages with structured data
+ok 119 - news detail pages are crawlable source-backed article pages with structured data
+  ---
+  duration_ms: 61.9438
+  type: 'test'
+  ...
+# Subtest: research article schema uses technical article signals for robot skin authority
+ok 120 - research article schema uses technical article signals for robot skin authority
+  ---
+  duration_ms: 3.0616
+  type: 'test'
+  ...
+# Subtest: research and news pages expose both published and modified dates
+ok 121 - research and news pages expose both published and modified dates
+  ---
+  duration_ms: 5.7769
+  type: 'test'
+  ...
+# Subtest: GSC-visible research pages use search-intent titles and snippets
+ok 122 - GSC-visible research pages use search-intent titles and snippets
+  ---
+  duration_ms: 4.9763
+  type: 'test'
+  ...
+# Subtest: the GIST humanoid visual-tactile-action brief preserves the v2 source boundaries
+ok 123 - the GIST humanoid visual-tactile-action brief preserves the v2 source boundaries
+  ---
+  duration_ms: 5.4371
+  type: 'test'
+  ...
+# Subtest: answer-engine and monitoring files expose updated GSC-visible research and news routes
+ok 124 - answer-engine and monitoring files expose updated GSC-visible research and news routes
+  ---
+  duration_ms: 3.0799
+  type: 'test'
+  ...
+# Subtest: homepage authority routes promote news and GSC-visible article pages
+ok 125 - homepage authority routes promote news and GSC-visible article pages
+  ---
+  duration_ms: 5.358
+  type: 'test'
+  ...
+# Subtest: GSC priority articles include answer-first sections and crawlable internal links
+ok 126 - GSC priority articles include answer-first sections and crawlable internal links
+  ---
+  duration_ms: 15.214
+  type: 'test'
+  ...
+# Subtest: priority research schema images match each article subject
+ok 127 - priority research schema images match each article subject
+  ---
+  duration_ms: 3.7649
+  type: 'test'
+  ...
+# Subtest: each audited priority article has explicit evidence boundaries and bounded internal links
+ok 128 - each audited priority article has explicit evidence boundaries and bounded internal links
+  ---
+  duration_ms: 5.6148
+  type: 'test'
+  ...
+# Subtest: organization records preserve the original twelve identities and extend the verified directory
+ok 129 - organization records preserve the original twelve identities and extend the verified directory
+  ---
+  duration_ms: 26.2168
+  type: 'test'
+  ...
+# Subtest: model-organization relations preserve evidence strength and primary-source provenance
+ok 130 - model-organization relations preserve evidence strength and primary-source provenance
+  ---
+  duration_ms: 5.9573
+  type: 'test'
+  ...
+# Subtest: organization directory is server-rendered, evidence bounded, and schema connected
+ok 131 - organization directory is server-rendered, evidence bounded, and schema connected
+  ---
+  duration_ms: 7.9619
+  type: 'test'
+  ...
+# Subtest: research organizations keep normalized university and lab identities separate and source bounded
+ok 132 - research organizations keep normalized university and lab identities separate and source bounded
+  ---
+  duration_ms: 49.587
+  type: 'test'
+  ...
+# Subtest: research relations separate strict provenance from the v2 semantic vocabulary
+ok 133 - research relations separate strict provenance from the v2 semantic vocabulary
+  ---
+  duration_ms: 3.3902
+  type: 'test'
+  ...
+# Subtest: source affiliation batches preserve labels, primary sources, and conservative boundaries
+ok 134 - source affiliation batches preserve labels, primary sources, and conservative boundaries
+  ---
+  duration_ms: 4.5441
+  type: 'test'
+  ...
+# Subtest: partOf edges keep only directly supported lab relationships
+ok 135 - partOf edges keep only directly supported lab relationships
+  ---
+  duration_ms: 2.099
+  type: 'test'
+  ...
+# Subtest: dataset usage edges distinguish sensor use, physical embodiments, and simulation-only embodiments
+ok 136 - dataset usage edges distinguish sensor use, physical embodiments, and simulation-only embodiments
+  ---
+  duration_ms: 2.6121
+  type: 'test'
+  ...
+# Subtest: paper sensor edges preserve UniVTAC, GenForce, and Missing Touch sensor use
+ok 137 - paper sensor edges preserve UniVTAC, GenForce, and Missing Touch sensor use
+  ---
+  duration_ms: 1.9789
+  type: 'test'
+  ...
+# Subtest: robot platform records preserve exact, family, and undisclosed hardware boundaries
+ok 138 - robot platform records preserve exact, family, and undisclosed hardware boundaries
+  ---
+  duration_ms: 44.8186
+  type: 'test'
+  ...
+# Subtest: robot directory is indexable, structured, and internally connected without thin entity pages
+ok 139 - robot directory is indexable, structured, and internally connected without thin entity pages
+  ---
+  duration_ms: 18.2843
+  type: 'test'
+  ...
+# Subtest: robot platform relationships are part of the graph, LLM outputs, and deployment gates
+ok 140 - robot platform relationships are part of the graph, LLM outputs, and deployment gates
+  ---
+  duration_ms: 21.3107
+  type: 'test'
+  ...
+# Subtest: the Research Sprint has an indexable sales page with explicit scope and evidence boundaries
+ok 141 - the Research Sprint has an indexable sales page with explicit scope and evidence boundaries
+  ---
+  duration_ms: 28.2204
+  type: 'test'
+  ...
+# Subtest: commercial inquiries use the configured delivery endpoint with complete form states and safe analytics
+ok 142 - commercial inquiries use the configured delivery endpoint with complete form states and safe analytics
+  ---
+  duration_ms: 4.1158
+  type: 'test'
+  ...
+# Subtest: the free sample report is crawlable, downloadable, source-bounded, and large enough to be substantive
+ok 143 - the free sample report is crawlable, downloadable, source-bounded, and large enough to be substantive
+  ---
+  duration_ms: 4.1554
+  type: 'test'
+  ...
+# Subtest: newsletter remains closed without verified provider and removal settings
+ok 144 - newsletter remains closed without verified provider and removal settings
+  ---
+  duration_ms: 3.5671
+  type: 'test'
+  ...
+# Subtest: browser transport requires actual acknowledgement and makes no request without configuration
+ok 145 - browser transport requires actual acknowledgement and makes no request without configuration
+  ---
+  duration_ms: 39.9668
+  type: 'test'
+  ...
+# Subtest: dataset coverage is recomputable, keeps unknowns, and matches its immutable snapshot
+ok 146 - dataset coverage is recomputable, keeps unknowns, and matches its immutable snapshot
+  ---
+  duration_ms: 6.2005
+  type: 'test'
+  ...
+# Subtest: the old research release still matches the current records; no cosmetic version bump
+ok 147 - the old research release still matches the current records; no cosmetic version bump
+  ---
+  duration_ms: 237.4044
+  type: 'test'
+  ...
+# Subtest: sample PDF count is independent of live directory and published bytes remain unchanged
+ok 148 - sample PDF count is independent of live directory and published bytes remain unchanged
+  ---
+  duration_ms: 10.1796
+  type: 'test'
+  ...
+# (node:47432) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/C-drive-migrated/roboskin-worktrees/vla-world-expansion-20261009/src/lib/robot-ai-models.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to E:\\C-drive-migrated\\roboskin-worktrees\\vla-world-expansion-20261009\\package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: robot AI model records are unique, typed, dated, and evidence bounded
+ok 149 - robot AI model records are unique, typed, dated, and evidence bounded
+  ---
+  duration_ms: 25.6632
+  type: 'test'
+  ...
+# Subtest: robot AI model filtering preserves exact role, tactile, year, and text semantics
+ok 150 - robot AI model filtering preserves exact role, tactile, year, and text semantics
+  ---
+  duration_ms: 4.0699
+  type: 'test'
+  ...
+# Subtest: model explorer keeps complete rows in initial markup and exposes accessible controls
+ok 151 - model explorer keeps complete rows in initial markup and exposes accessible controls
+  ---
+  duration_ms: 22.2607
+  type: 'test'
+  ...
+# Subtest: robot AI model directory exposes source-bounded entity schema
+ok 152 - robot AI model directory exposes source-bounded entity schema
+  ---
+  duration_ms: 49.8955
+  type: 'test'
+  ...
+# Subtest: robot foundation model pillar owns the model intent and renders the database
+ok 153 - robot foundation model pillar owns the model intent and renders the database
+  ---
+  duration_ms: 43.8616
+  type: 'test'
+  ...
+# (node:12772) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/C-drive-migrated/roboskin-worktrees/vla-world-expansion-20261009/src/lib/robot-ai-models.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to E:\\C-drive-migrated\\roboskin-worktrees\\vla-world-expansion-20261009\\package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the curated VLA index separates six source-bounded tactile mechanisms without turning unlike models into a leaderboard
+ok 154 - the curated VLA index separates six source-bounded tactile mechanisms without turning unlike models into a leaderboard
+  ---
+  duration_ms: 4.4523
+  type: 'test'
+  ...
+# Subtest: T-Rex model, public dataset subset, research platform, paper brief, and graph relations retain one evidence boundary
+ok 155 - T-Rex model, public dataset subset, research platform, paper brief, and graph relations retain one evidence boundary
+  ---
+  duration_ms: 16.9071
+  type: 'test'
+  ...
+# Subtest: the VLA page is a server-rendered topical index that references canonical model entities
+ok 156 - the VLA page is a server-rendered topical index that references canonical model entities
+  ---
+  duration_ms: 6.0767
+  type: 'test'
+  ...
+# (node:48408) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/C-drive-migrated/roboskin-worktrees/vla-world-expansion-20261009/src/lib/robot-world-models.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to E:\\C-drive-migrated\\roboskin-worktrees\\vla-world-expansion-20261009\\package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: world-model evidence records are unique, source-bounded, and explicit about unknown artifacts
+ok 157 - world-model evidence records are unique, source-bounded, and explicit about unknown artifacts
+  ---
+  duration_ms: 3.8486
+  type: 'test'
+  ...
+# Subtest: world-model evidence table is server rendered, accessible, and uses stable anchors
+ok 158 - world-model evidence table is server rendered, accessible, and uses stable anchors
+  ---
+  duration_ms: 42.3099
+  type: 'test'
+  ...
+# Subtest: world-model route and schema share one data source without creating a second URL
+ok 159 - world-model route and schema share one data source without creating a second URL
+  ---
+  duration_ms: 9.645
+  type: 'test'
+  ...
+# Subtest: llms-full publishes the same world-model evidence records and boundaries
+ok 160 - llms-full publishes the same world-model evidence records and boundaries
+  ---
+  duration_ms: 4.6338
+  type: 'test'
+  ...
+# Subtest: RoboTacDex is a source-bounded tactile dataset record and remains distinct from GIST humanoid-vta
+ok 161 - RoboTacDex is a source-bounded tactile dataset record and remains distinct from GIST humanoid-vta
+  ---
+  duration_ms: 33.079
+  type: 'test'
+  ...
+# Subtest: RoboTacDex article exposes the hardware, benchmark outcomes, and non-release boundary
+ok 162 - RoboTacDex article exposes the hardware, benchmark outcomes, and non-release boundary
+  ---
+  duration_ms: 4.0077
+  type: 'test'
+  ...
+# Subtest: RoboTacDex connects the paper, tactile dataset, and physical Unitree G1 with bounded graph edges
+ok 163 - RoboTacDex connects the paper, tactile dataset, and physical Unitree G1 with bounded graph edges
+  ---
+  duration_ms: 9.3886
+  type: 'test'
+  ...
+# Subtest: general robot-learning datasets remain separate from the tactile dataset directory
+ok 164 - general robot-learning datasets remain separate from the tactile dataset directory
+  ---
+  duration_ms: 41.8714
+  type: 'test'
+  ...
+# Subtest: model-dataset and dataset-robot edges retain primary-source boundaries
+ok 165 - model-dataset and dataset-robot edges retain primary-source boundaries
+  ---
+  duration_ms: 4.5459
+  type: 'test'
+  ...
+# Subtest: broad robotics topics route search demand back into the RoboSkin tactile authority graph
+ok 166 - broad robotics topics route search demand back into the RoboSkin tactile authority graph
+  ---
+  duration_ms: 29.0064
+  type: 'test'
+  ...
+# Subtest: robotics intelligence parents are crawlable and assigned to one canonical owner
+ok 167 - robotics intelligence parents are crawlable and assigned to one canonical owner
+  ---
+  duration_ms: 32.4136
+  type: 'test'
+  ...
+# Subtest: new paper entities remain primary-source bounded and enter the structured index
+ok 168 - new paper entities remain primary-source bounded and enter the structured index
+  ---
+  duration_ms: 6.2567
+  type: 'test'
+  ...
+# Subtest: official updates distinguish provider reports, proposals, and standards scope
+ok 169 - official updates distinguish provider reports, proposals, and standards scope
+  ---
+  duration_ms: 11.1721
+  type: 'test'
+  ...
+# Subtest: RoboSkin expands authority, topic graph, keyword coverage, image discovery, and webmaster operations
+ok 170 - RoboSkin expands authority, topic graph, keyword coverage, image discovery, and webmaster operations
+  ---
+  duration_ms: 49.0026
+  type: 'test'
+  ...
+# Subtest: SEO and GEO source files expose metadata, schema, sitemap, and internal links
+ok 171 - SEO and GEO source files expose metadata, schema, sitemap, and internal links
+  ---
+  duration_ms: 72.4771
+  type: 'test'
+  ...
+# Subtest: RoboSkin keeps Physical AI canonical on physical-ai and redirects the legacy physics-ai route
+ok 172 - RoboSkin keeps Physical AI canonical on physical-ai and redirects the legacy physics-ai route
+  ---
+  duration_ms: 22.1313
+  type: 'test'
+  ...
+# Subtest: RoboSkin maps each search keyword cluster to one canonical page and descriptive internal anchors
+ok 173 - RoboSkin maps each search keyword cluster to one canonical page and descriptive internal anchors
+  ---
+  duration_ms: 12.0963
+  type: 'test'
+  ...
+# Subtest: RoboSkin uses the verified domain mailbox for direct public inquiries
+ok 174 - RoboSkin uses the verified domain mailbox for direct public inquiries
+  ---
+  duration_ms: 3.8341
+  type: 'test'
+  ...
+# Subtest: static SEO routes own explicit lastmod dates shared by sitemap and WebPage JSON-LD
+ok 175 - static SEO routes own explicit lastmod dates shared by sitemap and WebPage JSON-LD
+  ---
+  duration_ms: 47.0513
+  type: 'test'
+  ...
+# Subtest: site authority health checks pass
+ok 176 - site authority health checks pass
+  ---
+  duration_ms: 79.9254
+  type: 'test'
+  ...
+# Subtest: default sharing metadata uses a crawler-compatible raster image on every shared route
+ok 177 - default sharing metadata uses a crawler-compatible raster image on every shared route
+  ---
+  duration_ms: 2.0159
+  type: 'test'
+  ...
+# Subtest: the default preview asset is a decodable PNG with the declared dimensions and a small payload
+ok 178 - the default preview asset is a decodable PNG with the declared dimensions and a small payload
+  ---
+  duration_ms: 14.7163
+  type: 'test'
+  ...
+# Subtest: every News and Research preview has a decodable supported asset, including SVG illustration copies
+ok 179 - every News and Research preview has a decodable supported asset, including SVG illustration copies
+  ---
+  duration_ms: 2615.8853
+  type: 'test'
+  ...
+# Subtest: structured tactile databases and pillars are crawlable, source-bounded, and linked
+ok 180 - structured tactile databases and pillars are crawlable, source-bounded, and linked
+  ---
+  duration_ms: 51.937
+  type: 'test'
+  ...
+# Subtest: tactile benchmark, dataset, foundation-model, and world-model guides form an indexable content cluster
+ok 181 - tactile benchmark, dataset, foundation-model, and world-model guides form an indexable content cluster
+  ---
+  duration_ms: 63.8877
+  type: 'test'
+  ...
+# Subtest: SoftVTBench has source-aligned dataset and benchmark records without physical-hardware claims
+ok 182 - SoftVTBench has source-aligned dataset and benchmark records without physical-hardware claims
+  ---
+  duration_ms: 6.8317
+  type: 'test'
+  ...
+# (node:56096) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/C-drive-migrated/roboskin-worktrees/vla-world-expansion-20261009/src/lib/topic-graph.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to E:\\C-drive-migrated\\roboskin-worktrees\\vla-world-expansion-20261009\\package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: general robot concepts resolve to broad parents without tactile children
+ok 183 - general robot concepts resolve to broad parents without tactile children
+  ---
+  duration_ms: 4.8961
+  type: 'test'
+  ...
+# Subtest: explicit tactile context adds relevant touch children after broad parents
+ok 184 - explicit tactile context adds relevant touch children after broad parents
+  ---
+  duration_ms: 1.5016
+  type: 'test'
+  ...
+# Subtest: tactile extensions distinguish broad and contact-specific datasets and humanoids
+ok 185 - tactile extensions distinguish broad and contact-specific datasets and humanoids
+  ---
+  duration_ms: 0.7367
+  type: 'test'
+  ...
+# Subtest: topic links are unique and capped for readable article navigation
+ok 186 - topic links are unique and capped for readable article navigation
+  ---
+  duration_ms: 0.3593
+  type: 'test'
+  ...
+# Subtest: news articles use the topic classifier and dynamic robotics headings
+ok 187 - news articles use the topic classifier and dynamic robotics headings
+  ---
+  duration_ms: 16.4253
+  type: 'test'
+  ...
+# Subtest: EgoTouch preserves scale, access, collection, and license boundaries
+ok 188 - EgoTouch preserves scale, access, collection, and license boundaries
+  ---
+  duration_ms: 35.6801
+  type: 'test'
+  ...
+# Subtest: TouchWorld task suite remains an author-defined evaluation protocol
+ok 189 - TouchWorld task suite remains an author-defined evaluation protocol
+  ---
+  duration_ms: 1.7759
+  type: 'test'
+  ...
+# Subtest: TouchWorld connects to EgoTouch and its protocol with exact model evidence
+ok 190 - TouchWorld connects to EgoTouch and its protocol with exact model evidence
+  ---
+  duration_ms: 3.8122
+  type: 'test'
+  ...
+# Subtest: the existing TouchWorld canonical article exposes the complete internal evidence chain
+ok 191 - the existing TouchWorld canonical article exposes the complete internal evidence chain
+  ---
+  duration_ms: 9.9319
+  type: 'test'
+  ...
+# Subtest: shared dark and light text tokens meet WCAG AA contrast for normal text
+ok 192 - shared dark and light text tokens meet WCAG AA contrast for normal text
+  ---
+  duration_ms: 9.3582
+  type: 'test'
+  ...
+# Subtest: robot learning becomes a crawlable parent route with source-backed internal links
+ok 193 - robot learning becomes a crawlable parent route with source-backed internal links
+  ---
+  duration_ms: 7.6717
+  type: 'test'
+  ...
+# Subtest: UniVTAC graph edges preserve supported endpoint types and evidence boundaries
+ok 194 - UniVTAC graph edges preserve supported endpoint types and evidence boundaries
+  ---
+  duration_ms: 13.6757
+  type: 'test'
+  ...
+# Subtest: UniVTAC data records keep four incompatible counting units separate
+ok 195 - UniVTAC data records keep four incompatible counting units separate
+  ---
+  duration_ms: 11.8443
+  type: 'test'
+  ...
+# Subtest: UniVTAC benchmark and article preserve paper and artifact result boundaries
+ok 196 - UniVTAC benchmark and article preserve paper and artifact result boundaries
+  ---
+  duration_ms: 6.1128
+  type: 'test'
+  ...
+# Subtest: UniVTAC Encoder remains a representation encoder and not the existing UniTacVLA entity
+ok 197 - UniVTAC Encoder remains a representation encoder and not the existing UniTacVLA entity
+  ---
+  duration_ms: 3.9
+  type: 'test'
+  ...
+# Subtest: UniVTAC entities link back to one canonical RoboSkin evidence review
+ok 198 - UniVTAC entities link back to one canonical RoboSkin evidence review
+  ---
+  duration_ms: 9.1445
+  type: 'test'
+  ...
+# Subtest: the audited production URL inventory is protected
+ok 199 - the audited production URL inventory is protected
+  ---
+  duration_ms: 15.4291
+  type: 'test'
+  ...
+# Subtest: utility and excluded legacy pages stay out of the index contract
+ok 200 - utility and excluded legacy pages stay out of the index contract
+  ---
+  duration_ms: 3.9168
+  type: 'test'
+  ...
+# Subtest: the two production-only news routes remain in local content and sitemap generation
+ok 201 - the two production-only news routes remain in local content and sitemap generation
+  ---
+  duration_ms: 6.2044
+  type: 'test'
+  ...
+# Subtest: the service-robot brief matches the audited IFR count and sample boundary
+ok 202 - the service-robot brief matches the audited IFR count and sample boundary
+  ---
+  duration_ms: 5.7083
+  type: 'test'
+  ...
+# Subtest: the electronic-skin brief separates the joint study from its contextual source
+ok 203 - the electronic-skin brief separates the joint study from its contextual source
+  ---
+  duration_ms: 5.4661
+  type: 'test'
+  ...
+# Subtest: NewsArticle JSON-LD uses the visible byline and a separate site publisher
+ok 204 - NewsArticle JSON-LD uses the visible byline and a separate site publisher
+  ---
+  duration_ms: 3.9913
+  type: 'test'
+  ...
+# Subtest: the production snapshot rejects non-apex loc entries instead of filtering them out
+ok 205 - the production snapshot rejects non-apex loc entries instead of filtering them out
+  ---
+  duration_ms: 3.4681
+  type: 'test'
+  ...
+# Subtest: the production snapshot preserves redirect sources instead of shrinking the URL contract
+ok 206 - the production snapshot preserves redirect sources instead of shrinking the URL contract
+  ---
+  duration_ms: 1.9126
+  type: 'test'
+  ...
+# Subtest: www root and deep paths have explicit permanent redirects
+ok 207 - www root and deep paths have explicit permanent redirects
+  ---
+  duration_ms: 2.1553
+  type: 'test'
+  ...
+# Subtest: the export verifier checks protected URLs, canonicals, and generated outputs
+ok 208 - the export verifier checks protected URLs, canonicals, and generated outputs
+  ---
+  duration_ms: 3.5929
+  type: 'test'
+  ...
+# Subtest: production verification accepts an honest updated-only editorial date
+ok 209 - production verification accepts an honest updated-only editorial date
+  ---
+  duration_ms: 1.9625
+  type: 'test'
+  ...
+# Subtest: vision-based tactile intelligence brief preserves the review taxonomy and evidence boundary
+ok 210 - vision-based tactile intelligence brief preserves the review taxonomy and evidence boundary
+  ---
+  duration_ms: 14.2504
+  type: 'test'
+  ...
+# Subtest: research index records the source as a preprint review rather than an artifact release
+ok 211 - research index records the source as a preprint review rather than an artifact release
+  ---
+  duration_ms: 4.3274
+  type: 'test'
+  ...
+# Subtest: survey affiliations connect one paper to eight normalized institutions without ownership inference
+ok 212 - survey affiliations connect one paper to eight normalized institutions without ownership inference
+  ---
+  duration_ms: 4.4275
+  type: 'test'
+  ...
+# Subtest: tactile AI and sensor pillars link back to the survey as a visible research brief
+ok 213 - tactile AI and sensor pillars link back to the survey as a visible research brief
+  ---
+  duration_ms: 4.4035
+  type: 'test'
+  ...
+# Subtest: working-paper routes are indexable with canonical research breadcrumbs
+ok 214 - working-paper routes are indexable with canonical research breadcrumbs
+  ---
+  duration_ms: 2.4202
+  type: 'test'
+  ...
+# Subtest: rendered working papers retain evidence labels, versioned downloads, and honest schema
+ok 215 - rendered working papers retain evidence labels, versioned downloads, and honest schema
+  ---
+  duration_ms: 814.8608
+  type: 'test'
+  ...
+# Subtest: every linked release asset matches its version, byte count, and SHA-256 manifest
+ok 216 - every linked release asset matches its version, byte count, and SHA-256 manifest
+  ---
+  duration_ms: 5.8391
+  type: 'test'
+  ...
+# Subtest: tracker filters compose, preserve unknown code status, and sort null dates last
+ok 217 - tracker filters compose, preserve unknown code status, and sort null dates last
+  ---
+  duration_ms: 20.4827
+  type: 'test'
+  ...
+# Subtest: Dataset schema uses real sources and the compilation license, without fabricated downloads
+ok 218 - Dataset schema uses real sources and the compilation license, without fabricated downloads
+  ---
+  duration_ms: 1.9549
+  type: 'test'
+  ...
+# Subtest: T2 contains all eight source-backed, uncontacted seed records
+ok 219 - T2 contains all eight source-backed, uncontacted seed records
+  ---
+  duration_ms: 35.9608
+  type: 'test'
+  ...
+# Subtest: evaluation conditions and unknown release states retain their source boundaries
+ok 220 - evaluation conditions and unknown release states retain their source boundaries
+  ---
+  duration_ms: 0.3744
+  type: 'test'
+  ...
+# Subtest: validation rejects malformed imports and unsupported evidence grades
+ok 221 - validation rejects malformed imports and unsupported evidence grades
+  ---
+  duration_ms: 3.8436
+  type: 'test'
+  ...
+1..221
+# tests 221
+# suites 0
+# pass 221
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7369.0533

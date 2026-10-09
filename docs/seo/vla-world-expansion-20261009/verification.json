@@ -1,0 +1,87 @@
+{
+  "state": "review_pending",
+  "timestamp_utc": "2026-10-09T08:44:04.431808+00:00",
+  "scope": [
+    "/robot-vla-models",
+    "/robot-world-models"
+  ],
+  "missing_modules": [],
+  "checks": {
+    "tests": "221 passed, 0 failed",
+    "lint": "passed; final component/source lint passed",
+    "build": "passed; final SVG-only correction regenerated and served bytes verified",
+    "export": "186 sitemap pages passed; 190 protected URL contract entries retained",
+    "content_items": {
+      "C01": "通过",
+      "C02": "通过",
+      "C03": "通过",
+      "C04": "通过",
+      "C05": "通过",
+      "C06": "通过",
+      "C07": "通过",
+      "C08": "通过",
+      "C09": "通过",
+      "C10": "通过",
+      "C11": "通过",
+      "C12": "通过",
+      "C13": "通过",
+      "C14": "通过",
+      "C16": "通过",
+      "C17": "通过"
+    },
+    "C15": "不适用：现有英语单语言页面，无新增语言",
+    "browser": {
+      "desktop_css_width": 1309,
+      "mobile_css_width": 355,
+      "horizontal_overflow": false,
+      "images_loaded": true,
+      "native_details_with_js": "passed",
+      "no_js_body": "both pages retain 3 paper cards and details content",
+      "no_js_click": "automation click timed out with scripts disabled; not claimed as passed",
+      "console_errors": "none in VLA tested view"
+    },
+    "google_live": "未执行：本次版本未公开发布",
+    "google_indexed": "未执行；不宣称收录",
+    "production": "未发布",
+    "human_content_review": "待用户审阅明确版本；未伪造审核事件"
+  },
+  "http": [
+    {
+      "path": "/robot-vla-models",
+      "status": 200,
+      "sha256": "91aa0d0a0ca63ab3defced43efadf668c34b12f42b80d23e41f7b3c51ade837b",
+      "cards_in_script_free_html": 3,
+      "details_in_script_free_html": 3,
+      "canonical": "https://roboskin.ai/robot-vla-models"
+    },
+    {
+      "path": "/robot-world-models",
+      "status": 200,
+      "sha256": "ccf8f34c3b7b762c39ed92810b2975ef659c01faecc03c9e37e2c5b27ceae4be",
+      "cards_in_script_free_html": 3,
+      "details_in_script_free_html": 3,
+      "canonical": "https://roboskin.ai/robot-world-models"
+    },
+    {
+      "asset": "vla-action-chunks.svg",
+      "status": 200,
+      "matches_source": true
+    },
+    {
+      "asset": "vla-observe-act-loop.svg",
+      "status": 200,
+      "matches_source": true
+    },
+    {
+      "asset": "world-model-planning-loop.svg",
+      "status": 200,
+      "matches_source": true
+    },
+    {
+      "asset": "world-model-prediction-spaces.svg",
+      "status": 200,
+      "matches_source": true
+    }
+  ],
+  "snapshot_sha256": "c6592388241bde7432ec3dc7a6dca8cf2860f8f3621295fc1485e55eb161633f"
+}

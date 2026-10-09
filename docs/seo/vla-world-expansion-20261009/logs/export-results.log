@@ -1,0 +1,6 @@
+
+> roboskin-website@0.1.0 verify:export
+> node scripts/verify-export.mjs && node scripts/audit-on-page-seo.mjs
+
+Verified 186 sitemap URLs, 190 protected URL contract entries including 5 redirect sources, 6 noindex URLs, 193 graph entities, full LLM knowledge, 30 research-index records, and 50 RSS items
+On-page SEO verified: 186 sitemap pages; unique titles/descriptions, H1s, canonicals, and internal destinations/anchors.

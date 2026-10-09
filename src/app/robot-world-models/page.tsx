@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import RobotWorldModelEvidenceTable from '@/components/RobotWorldModelEvidenceTable';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
+import ResearchReadingGuide from '@/components/ResearchReadingGuide';
+import worldModelResearchUpdate from '@/content/world-model-research-update.json';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
 import { buildRobotWorldModelEvidenceJsonLd } from '@/lib/robot-world-model-schema';
@@ -24,7 +26,8 @@ export default function RobotWorldModelsPage() {
   return (
     <>
       <JsonLd data={buildRobotWorldModelEvidenceJsonLd(robotWorldModelEvidenceEntries)} />
-      <SeoTopicArticle page={page} leadHref="#recent-world-models" leadLabel="See recent model records" leadContent={
+      <SeoTopicArticle page={page} leadHref="#world-models-research-update" leadLabel="Explore papers and visual guides" leadContent={<>
+        <ResearchReadingGuide update={worldModelResearchUpdate} />
         <section id="recent-world-models" className="container-shell scroll-mt-28 pb-14" aria-labelledby="recent-world-models-heading">
           <p className="eyebrow">Tactile world model tracker</p>
           <h2 id="recent-world-models-heading" className="mt-4 text-3xl font-semibold text-white">Recently added</h2>
@@ -38,7 +41,7 @@ export default function RobotWorldModelsPage() {
           </div>
           <Link href={trackerPath} className="btn-primary mt-6">See all tactile world models in the tracker →</Link>
         </section>
-      }>
+      </>}>
         <aside className="container-shell pb-6" aria-label="Full world model tracker">
           <p className="text-sm text-soft">For the complete, updated list, visit the <Link href={trackerPath} className="text-accent underline underline-offset-4">tactile world model tracker (review preview)</Link>. The five-model evidence table below retains its original source-review dates and paper versions.</p>
         </aside>

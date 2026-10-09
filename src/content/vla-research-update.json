@@ -1,0 +1,60 @@
+{
+  "topic": "vla",
+  "updated": "2026-10-09",
+  "papers": [
+    {
+      "id": "vela",
+      "name": "Vela",
+      "title": "Vela: Scaling Vision-Language-Action Models with Adaptive Action Curve Parametrization",
+      "published": "2026-10-04",
+      "status": "arXiv preprint",
+      "summary": "Vela represents a robot's future actions as a continuous trajectory instead of a fixed-rate action chunk. A compact spline representation lets the same output budget describe either longer smooth motions or shorter motions that need finer control.",
+      "whyRead": "Read this paper to understand adaptive action horizons, continuous action representations, and the trade-off between long-horizon robot manipulation and contact precision. It changes the action interface while retaining a pi0.5-style model architecture.",
+      "method": "A flow-matching action expert jointly predicts cubic B-spline control points and a motion-dependent temporal horizon. The authors pretrain in trajectory space on approximately 40,000 hours of public and private robot data, using a shared action interface across embodiments.",
+      "evaluation": "The authors evaluate LIBERO-X and EBench simulations, plus egg-cake cooking and potato shredding on a wheeled dual-arm robot. Physical-robot results average success across four subtasks with 10 trials per subtask; these are not whole-task completion rates.",
+      "limitation": "The physical study covers two task families, while the number of spline control points remains fixed and broader model scaling is left for future work. RoboSkin has not reproduced these experiments.",
+      "availability": "The paper and demonstration page are public. The official project page still labels code as 'Coming soon' on 9 October 2026.",
+      "sources": [
+        { "label": "Paper and submission history", "url": "https://arxiv.org/abs/2610.05230" },
+        { "label": "Official project and demonstrations", "url": "https://clementine24.github.io/Vela/" }
+      ]
+    },
+    {
+      "id": "xiaomi-robotics-1",
+      "name": "Xiaomi-Robotics-1",
+      "title": "Xiaomi-Robotics-1: Scaling Vision-Language-Action Models with over 100K Hours of Real-World Trajectories",
+      "published": "2026-07-16",
+      "status": "arXiv preprint; revised 22 July 2026",
+      "summary": "Xiaomi-Robotics-1 studies how VLA policies scale with embodiment-free manipulation data. It combines over 100,000 hours of Universal Manipulation Interface (UMI) trajectories with post-training that aligns the policy to robots and human instructions.",
+      "whyRead": "This is a useful reference for UMI data collection, VLA scaling laws, and data-efficient adaptation to new robot tasks. It separates broad action pretraining from the embodiment and instruction alignment needed for physical deployment.",
+      "method": "A vision-language model automatically labels trajectory clips with descriptions of scene state transitions. Cross-embodiment post-training then teaches the policy to act on particular robots and follow imperative task instructions.",
+      "evaluation": "The study includes four simulation benchmarks, four familiar task types in unseen environments, and adaptation to four new physical-robot tasks. For new-task adaptation, the authors report 75% average success from 10 trials per task after fine-tuning on 36 hours of demonstrations in total.",
+      "limitation": "The out-of-the-box experiments use task types seen in post-training; unseen environments and objects do not mean unseen tasks. New-task results require additional demonstrations, and RoboSkin has not reproduced the reported experiments.",
+      "availability": "The official repository records a 3 August 2026 release of post-training, inference, and evaluation code. Apache-2.0 code and a public 5B checkpoint are available, superseding the paper's earlier 'will be released' wording.",
+      "sources": [
+        { "label": "Paper and submission history", "url": "https://arxiv.org/abs/2607.15330" },
+        { "label": "Official project", "url": "https://robotics.xiaomi.com/xiaomi-robotics-1.html" },
+        { "label": "Code and release notes", "url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-1" },
+        { "label": "5B checkpoint and model card", "url": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-1-5B" }
+      ]
+    },
+    {
+      "id": "evo-1",
+      "name": "Evo-1",
+      "title": "Evo-1: Lightweight Vision-Language-Action Model with Preserved Semantic Alignment",
+      "published": "2025-11-06",
+      "status": "CVPR 2026 paper; first preprint November 2025",
+      "summary": "Evo-1 is a 0.77-billion-parameter VLA model designed to preserve a pretrained vision-language model's semantic representations while learning robot control. It explores a compact alternative to policies that depend on large-scale robot-data pretraining.",
+      "whyRead": "Use it to study lightweight VLA models, two-stage action alignment, and the practical constraints of robot-policy inference. The official repository also provides evaluation and deployment instructions for several robot platforms.",
+      "method": "Evo-1 combines a native multimodal backbone, a cross-modulated diffusion transformer, and an integration module for visual, language, and robot-state features. Two-stage training progressively aligns action generation with the pretrained representations.",
+      "evaluation": "The paper evaluates Meta-World, LIBERO, and RoboTwin simulation suites, plus four xArm6 manipulation tasks. Its reported 78% average physical-task success follows 100 training demonstrations and 20 evaluation trials per task.",
+      "limitation": "'Without robot-data pretraining' still involves a pretrained vision-language backbone and task-specific robot demonstrations. The physical evaluation covers four tabletop tasks, and RoboSkin has not reproduced the results or hardware-dependent inference measurements.",
+      "availability": "The CVPR 2026 proceedings confirm the conference publication. The official MIT-licensed repository provides code, evaluation instructions, and model-weight links, with documented updates through August 2026.",
+      "sources": [
+        { "label": "CVPR 2026 proceedings", "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Lin_Evo-1_Lightweight_Vision-Language-Action_Model_with_Preserved_Semantic_Alignment_CVPR_2026_paper.html" },
+        { "label": "Preprint and submission history", "url": "https://arxiv.org/abs/2511.04555" },
+        { "label": "Official code and model links", "url": "https://github.com/MINT-SJTU/Evo-1" }
+      ]
+    }
+  ]
+}
