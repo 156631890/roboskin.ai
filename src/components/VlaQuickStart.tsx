@@ -40,6 +40,7 @@ export default function VlaQuickStart({ entries }: { entries: RobotAiModelEntry[
               and produces or conditions actions. The robot executes those actions and observes the result, closing the feedback loop.
             </p>
             <nav aria-label="VLA guide sections" className="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[#ffd5c5]">
+              <a href="#vla-research-update" className="underline underline-offset-4 hover:text-white">Recent papers and visual explanations</a>
               <a href="#vla-starting-points" className="underline underline-offset-4 hover:text-white">Model and code starting points</a>
               <a href="#vla-model-index" className="underline underline-offset-4 hover:text-white">Compare all {entries.length} models</a>
               <a href="#tactile-vla-integration-index" className="underline underline-offset-4 hover:text-white">Compare tactile mechanisms</a>

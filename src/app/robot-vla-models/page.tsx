@@ -4,6 +4,8 @@ import JsonLd from '@/components/JsonLd';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
 import VlaModelIndex from '@/components/VlaModelIndex';
 import VlaQuickStart from '@/components/VlaQuickStart';
+import ResearchReadingGuide from '@/components/ResearchReadingGuide';
+import vlaResearchUpdate from '@/content/vla-research-update.json';
 import { getSeoTopicPage } from '@/content/seo-topic-pages';
 import { robotAiModelEntries } from '@/lib/robot-ai-models';
 import { buildSeoTopicMetadata } from '@/lib/seo-topic';
@@ -25,7 +27,7 @@ export default function RobotVlaModelsPage() {
       <JsonLd data={buildVlaModelIndexJsonLd(vlaModelEntries, tactileVlaEvidenceEntries)} />
       <SeoTopicArticle
         page={page}
-        leadContent={<VlaQuickStart entries={vlaModelEntries} />}
+        leadContent={<><VlaQuickStart entries={vlaModelEntries} /><ResearchReadingGuide update={vlaResearchUpdate} /></>}
         leadHref="#vla-start"
         leadLabel="Explore VLA models and code"
       >

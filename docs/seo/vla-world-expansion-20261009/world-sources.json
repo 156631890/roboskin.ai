@@ -1,0 +1,76 @@
+{
+  "reviewed": "2026-10-09",
+  "scope": "Primary-source checks for three world-model research additions. Google discovery was performed by the parent task; this file records direct paper and metadata verification, not search-volume evidence.",
+  "dateConvention": "The published field in the content file records the first arXiv submission date, not a conference publication date or the month encoded in an arXiv identifier.",
+  "sources": [
+    {
+      "id": "insertionwm",
+      "title": "Generalizable Robotic Insertion with World Models",
+      "firstSubmitted": "2026-09-23",
+      "version": "v1",
+      "metadataUrl": "https://arxiv.org/abs/2609.28258",
+      "fullTextUrl": "https://arxiv.org/html/2609.28258v1",
+      "publicationCheck": "The arXiv record lists IROS 2026 in Comments. A separate proceedings publication record was not verified; content labels the reviewed version an arXiv preprint and attributes the venue note to the authors.",
+      "checkedSections": ["Abstract", "I Introduction", "III Preliminaries", "IV Dataset and Environment", "VI-A Experimental Details", "VI-B Results", "VII Conclusion"],
+      "verifiedClaims": [
+        "InsertionWM is a system using TD-MPC2 visual model-based RL, rather than a newly proposed base RL algorithm.",
+        "Inputs include wrist-camera depth images and proprioception; actions are end-effector pose changes selected through latent-space planning.",
+        "All experiments are conducted in simulation with a Franka Panda configuration.",
+        "The dataset contains 100 assembly pairs. The last 10 by asset ID are held out; they are unseen geometries from the same distribution.",
+        "The generalist trained on 90 pairs reports up to 56% zero-shot success over the held-out pairs, with 100 trials per assembly.",
+        "The study reports occlusion sensitivity and discusses depth-sensor noise, contact-simulation mismatch and real-time processing as obstacles to physical deployment."
+      ],
+      "cautions": [
+        "Do not describe the 56% result as real-robot success or unrestricted out-of-distribution generalization.",
+        "Avoid an unqualified 56% versus 7% superiority claim: the text acknowledges that the precise AutoMate splits are unknown and that the observation interfaces differ.",
+        "No official code or weights were verified."
+      ]
+    },
+    {
+      "id": "world-models-robotic-manipulation-survey-2026",
+      "title": "World Models for Robotic Manipulation: A Survey",
+      "firstSubmitted": "2026-05-27",
+      "version": "v1",
+      "metadataUrl": "https://arxiv.org/abs/2606.00113",
+      "fullTextUrl": "https://arxiv.org/html/2606.00113v1",
+      "publicationCheck": "The reviewed arXiv record provides no verified conference or journal publication reference. The content labels this a survey preprint.",
+      "checkedSections": ["Abstract", "I Introduction", "II Definition and Scope of World Models", "VIII Benchmarks and Evaluation", "VIII-D Open Challenges in Benchmarking", "IX Conclusion"],
+      "verifiedClaims": [
+        "A survey with three organizing questions: what future representation is predicted, how prediction connects to action, and when prediction is used.",
+        "The paper discusses five representation families and reviews 34 principal manipulation datasets.",
+        "The evaluation discussion distinguishes predictive fidelity, downstream task performance and simulator reliability.",
+        "The paper identifies contact-rich evaluation, metric fragmentation, action-conditioned calibration and closed-loop exploitation as benchmark gaps.",
+        "The conclusion calls for non-visual signals including force and tactile streams, alongside tests of physical credibility and action alignment."
+      ],
+      "cautions": [
+        "The first submission was 27 May 2026 despite the identifier beginning 2606.",
+        "The survey does not provide a newly trained model, a new controlled experiment or a single comparable leaderboard."
+      ]
+    },
+    {
+      "id": "world-model-robot-learning-survey-2026",
+      "title": "World Model for Robot Learning: A Comprehensive Survey",
+      "firstSubmitted": "2026-04-30",
+      "version": "v1",
+      "metadataUrl": "https://arxiv.org/abs/2605.00080",
+      "fullTextUrl": "https://arxiv.org/html/2605.00080v1",
+      "publicationCheck": "The reviewed arXiv record lists 43 pages and 6 figures in Comments, with no verified conference or journal publication reference. The content labels this a survey preprint.",
+      "checkedSections": ["Abstract", "1 Introduction", "7.3 Representative Results on Common Benchmarks", "8 Challenges and Future Directions", "8.1 Causal Conditioning Gaps", "8.2 Efficiency Bottlenecks", "8.3 Multi-Modal Perception Bottlenecks", "8.6 Open Challenges in Evaluation Metrics"],
+      "verifiedClaims": [
+        "The review covers world models for policies, as learned simulators, and for robotic video generation, with navigation and driving as additional applications.",
+        "Its policy taxonomy includes decoupled, single-backbone, mixture, unified VLA and latent-space approaches.",
+        "It collates benchmark results including LIBERO, RoboTwin, CALVIN and SIMPLER-style evaluations without presenting those results as a new controlled experiment.",
+        "Section 7.3 explicitly cautions against strict ranking across heterogeneous embodiments and protocols.",
+        "Challenges include weak action conditioning, latency and training costs, non-visual sensing and the lack of a widely accepted evaluation metric."
+      ],
+      "resourceChecks": [
+        { "url": "https://ntumars.github.io/wm-robot-survey/", "result": "HTTP 200; page title matches the survey" },
+        { "url": "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy", "result": "HTTP 200; repository is linked by the paper" }
+      ],
+      "cautions": [
+        "The first submission was 30 April 2026 despite the identifier beginning 2605.",
+        "The repository is a curated research-resource list, not one newly released world-model checkpoint."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "human_content_approval",
+  "recorded_utc": "2026-10-09T08:52:17.379286+00:00",
+  "source_thread": "01a11fbc-e0bd-7011-87a3-6c7171e3f218",
+  "source": "Direct user message in this conversation",
+  "verbatim_user_message": "确认，提交各个站点",
+  "review_snapshot_sha256": "c6592388241bde7432ec3dc7a6dca8cf2860f8f3621295fc1485e55eb161633f",
+  "approved_content_commit": "fd2c0f2cc7dd34aedaa2165e264c5b630a54d010",
+  "scope": [
+    "https://roboskin.ai/robot-vla-models",
+    "https://roboskin.ai/robot-world-models"
+  ],
+  "authorization": "Publish the reviewed version and submit the updated URLs to configured Google and Bing search services",
+  "snapshot_unchanged": true
+}

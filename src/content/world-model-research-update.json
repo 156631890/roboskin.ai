@@ -1,0 +1,59 @@
+{
+  "topic": "world-models",
+  "updated": "2026-10-09",
+  "papers": [
+    {
+      "id": "insertionwm",
+      "name": "InsertionWM",
+      "title": "Generalizable Robotic Insertion with World Models",
+      "published": "2026-09-23",
+      "status": "Research paper · arXiv preprint; authors list IROS 2026",
+      "summary": "InsertionWM uses a visual world model to plan precise robotic insertion across different part geometries. It studies whether model-based reinforcement learning can scale from individual assembly specialists to a generalist that handles unseen assemblies.",
+      "whyRead": "A concrete example of a world model for contact-rich manipulation, with evidence about object generalization, camera placement and adaptation to new assemblies. It connects predictive control to the practical challenges of occlusion and accurate contact sensing.",
+      "method": "The system builds on TD-MPC2, learning latent dynamics, rewards and values from wrist-camera depth images and robot proprioception. It selects actions through model predictive control and trains with an adaptive curriculum; its contribution is the assembly system and empirical study, rather than a new underlying RL algorithm.",
+      "evaluation": "In Isaac simulation with a Franka Panda setup, the generalist trained on 90 assembly pairs achieved 56% zero-shot success on 10 held-out pairs from the same asset distribution, evaluated over 100 trials per pair. The paper also studies specialist policies, fine-tuning and ablations of vision and training curricula.",
+      "limitation": "The reported evaluation is in simulation, with no physical-robot deployment demonstrated in this paper. Occlusion, noisy real depth sensing and contact-model mismatch remain challenges; unseen geometry within this asset distribution does not establish unrestricted real-world generalization.",
+      "availability": "The arXiv paper and full HTML text are accessible. An official code or model-weight release was not verified in this review.",
+      "sources": [
+        { "label": "arXiv record", "url": "https://arxiv.org/abs/2609.28258" },
+        { "label": "Full paper", "url": "https://arxiv.org/html/2609.28258v1" }
+      ]
+    },
+    {
+      "id": "world-models-robotic-manipulation-survey-2026",
+      "name": "Manipulation world-model survey",
+      "title": "World Models for Robotic Manipulation: A Survey",
+      "published": "2026-05-27",
+      "status": "Survey · arXiv preprint",
+      "summary": "This survey organizes robotic manipulation world models by the future representation they predict, the way predictions guide actions and the stage of learning in which they are used. It distinguishes an action-conditioned world model from a perception module, policy or value function alone.",
+      "whyRead": "Use it to compare latent world models, action-conditioned video prediction, geometric representations and physics-informed models without treating them as interchangeable. Its discussion of contact, force and tactile data is particularly relevant when evaluating world models for dexterous manipulation.",
+      "method": "The review compares five representation families and separates integrated prediction-action models from explicit predictive planners. It maps their roles across pretraining, post-training and inference, and reviews 34 manipulation datasets.",
+      "evaluation": "This is a synthesis of existing research, not a newly trained model or a new robot benchmark result. It separates evaluation into predictive fidelity, downstream task performance and simulator reliability, explaining why visual quality alone cannot establish control utility.",
+      "limitation": "The reviewed methods use heterogeneous tasks and metrics, so the survey does not establish a single best world model. It identifies gaps in contact-rich benchmarking, uncertainty calibration and tests of whether policies exploit errors in learned simulators.",
+      "availability": "The full survey is available on arXiv. Its contribution is a taxonomy and review of datasets and evaluation protocols, rather than model weights.",
+      "sources": [
+        { "label": "arXiv record", "url": "https://arxiv.org/abs/2606.00113" },
+        { "label": "Full survey", "url": "https://arxiv.org/html/2606.00113v1" }
+      ]
+    },
+    {
+      "id": "world-model-robot-learning-survey-2026",
+      "name": "Robot-learning world-model survey",
+      "title": "World Model for Robot Learning: A Comprehensive Survey",
+      "published": "2026-04-30",
+      "status": "Survey · arXiv preprint",
+      "summary": "A policy-centered survey of how world models support robot learning, including VLA policies, learned simulators and robotic video generation. It connects these uses to planning, evaluation and synthetic training data, with additional coverage of navigation and autonomous driving.",
+      "whyRead": "A useful reading map for the growing overlap between VLA models and world models. It helps distinguish a model that generates plausible future video from one whose predictions are useful for action selection or policy improvement.",
+      "method": "The review compares decoupled video-and-action pipelines, shared backbones, mixture architectures, unified VLA systems and latent predictive models. It separately examines world models as simulators for reinforcement learning and evaluation, alongside datasets and benchmarks.",
+      "evaluation": "This survey collates published results and protocols, including LIBERO, RoboTwin, CALVIN and SIMPLER-style evaluations; it does not introduce a new model or report a new controlled benchmark experiment. Its tables preserve benchmark settings and warn that differences in embodiment and protocol limit strict ranking across methods.",
+      "limitation": "Its broad scope does not make heterogeneous results directly comparable or establish reliable physical deployment. The authors highlight weak action conditioning, computational cost, limited non-visual feedback and fragmented evaluation as unresolved issues.",
+      "availability": "The open-access survey has an accompanying project page and a public reading-list repository. The repository collects research resources rather than providing one unified world-model implementation.",
+      "sources": [
+        { "label": "arXiv record", "url": "https://arxiv.org/abs/2605.00080" },
+        { "label": "Full survey", "url": "https://arxiv.org/html/2605.00080v1" },
+        { "label": "Project page", "url": "https://ntumars.github.io/wm-robot-survey/" },
+        { "label": "Reading-list repository", "url": "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy" }
+      ]
+    }
+  ]
+}

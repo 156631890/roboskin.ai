@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-10-09",
+  "scope": "Primary-source verification for the three VLA research additions. Discovery queries and Google trend evidence are maintained separately.",
+  "reproductionStatus": "RoboSkin has not trained or evaluated these models. Performance statements are attributed to the authors and scoped to their protocols.",
+  "papers": [
+    {
+      "id": "vela",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2610.05230v1",
+          "localText": "2610.05230v1.txt",
+          "verified": [
+            "First version dated 4 October 2026; treated as a preprint, with no conference acceptance inferred.",
+            "Section 3 predicts cubic B-spline control points and a motion-dependent horizon using a flow-matching action expert.",
+            "Section 4.1 describes approximately 20,000 hours of public data and 20,000 hours of private data, with a fixed budget of 12 control points.",
+            "Sections 4.1-4.3 and Appendix D cover LIBERO-X, EBench, egg-cake cooking, and potato shredding.",
+            "Section 4.3 reports four subtasks with 10 trials each; 67.5% is a mean subtask success rate, not full-sequence completion.",
+            "Appendix E leaves larger backbones, more pretraining, larger action experts, and variable control-point budgets for future work."
+          ]
+        },
+        {
+          "url": "https://clementine24.github.io/Vela/",
+          "localText": "vela-project.txt",
+          "verified": [
+            "Re-fetched directly on 9 October 2026: code is labeled 'Coming soon'.",
+            "The project labels physical results as mean subtask success rate across four stages and 10 trials per stage."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "xiaomi-robotics-1",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2607.15330",
+          "verified": [
+            "Submission history re-fetched directly: v1 is 16 July 2026 and v2 is 22 July 2026.",
+            "No conference acceptance is inferred; displayed as an arXiv preprint."
+          ]
+        },
+        {
+          "url": "https://arxiv.org/html/2607.15330v2",
+          "localText": "2607.15330v2.txt",
+          "verified": [
+            "Abstract and Section 2 describe over 100,000 hours of UMI trajectories, state-transition auto-labeling, and cross-embodiment post-training.",
+            "Section 3.2 explicitly says the four out-of-the-box task types are seen in post-training, while evaluation environments and object instances are unseen.",
+            "Section 3.3 evaluates four new tasks with 10 trials per task after fine-tuning on a 36-hour total low-data subset; average success is 75%.",
+            "Under 10 hours per task is an average: the printer-refilling task has 10.3 hours. The site uses the exact 36-hour total instead.",
+            "The paper's 'Code and model checkpoints will be released' sentence is stale relative to the repository inspected below."
+          ]
+        },
+        {
+          "url": "https://robotics.xiaomi.com/xiaomi-robotics-1.html",
+          "localText": "xiaomi-project.txt",
+          "verified": [
+            "Official page re-fetched directly and links to XiaomiRobotics/Xiaomi-Robotics-1 on GitHub and the Hugging Face collection.",
+            "Project and paper use different RoboDojo figures/metric presentations; the site does not combine them or publish an unsourced current leaderboard claim."
+          ]
+        },
+        {
+          "url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-1",
+          "verified": [
+            "GitHub API confirms public repository contents including xr1, deploy, and benchmark evaluation folders, and Apache-2.0 license metadata.",
+            "Official README update dated 3 August 2026 says: 'Released code and checkpoints for post-training, inference, and benchmark evaluation.'",
+            "Scope is released implementation/checkpoints; no claim that the entire training dataset is public."
+          ]
+        },
+        {
+          "url": "https://huggingface.co/api/models/XiaomiRobotics/Xiaomi-Robotics-1-5B",
+          "verified": [
+            "Hugging Face API returns private=false, gated=false, cardData.license=apache-2.0.",
+            "Files include README.md and model_states.pt, confirming a checkpoint artifact is listed rather than only a promised release. The checkpoint was not downloaded or run."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evo-1",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2511.04555",
+          "localText": "evo1-abs.txt",
+          "verified": [
+            "Submission history gives 6 November 2025 for v1 and 5 December 2025 for v2.",
+            "The site displays the initial publication date separately from CVPR 2026 status."
+          ]
+        },
+        {
+          "url": "https://arxiv.org/html/2511.04555v2",
+          "localText": "2511.04555v2.txt",
+          "verified": [
+            "Abstract and Section 3 describe a 0.77B-parameter model, pretrained native multimodal backbone, cross-modulated diffusion transformer, integration module, and two-stage training.",
+            "Section 4 covers Meta-World, LIBERO, and RoboTwin; Section 4.2 evaluates four xArm6 tasks with 100 teleoperation demonstrations per task and 20 test trials per task.",
+            "The paper reports 78% average success across those four tasks; this does not establish general real-world reliability.",
+            "No robot-data pretraining does not mean no robot demonstrations or no pretrained vision-language backbone."
+          ]
+        },
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Lin_Evo-1_Lightweight_Vision-Language-Action_Model_with_Preserved_Semantic_Alignment_CVPR_2026_paper.html",
+          "localText": "cvpr-evo1.txt",
+          "verified": [
+            "CVF page re-fetched directly with HTTP 200 and matching citation title.",
+            "Proceedings record: CVPR 2026, June, pages 13397-13406. Conference status is confirmed independently of the repository claim."
+          ]
+        },
+        {
+          "url": "https://github.com/MINT-SJTU/Evo-1",
+          "localText": "evo1-github.txt",
+          "verified": [
+            "Official repository displays an MIT license, code, model-weight download instructions, and evaluation guides.",
+            "News entries include initial code/weights on 6 November 2025, CVPR acceptance on 20 February 2026, and integrations/evaluation updates through 5 August 2026.",
+            "Hardware performance and deployment instructions are author-provided; no model was run for this content update."
+          ]
+        }
+      ]
+    }
+  ]
+}
