@@ -33,6 +33,15 @@ const robotSkinPattern = /\brobot(?:ic)?[\s-]+skin\b|\bhumanoid[\s-]+robot[\s-]+
 const tactileModelPattern = /\btactile[\s-]+(?:foundation[\s-]+)?models?\b|\btactile[\s-]+representation\b|\bvisuo[\s-]+tactile[\s-]+models?\b|\bworld[\s-]+(?:action[\s-]+)?models?\b|\bworld[\s-]+action\b/;
 const visuoTactilePattern = /\bvisuo[\s-]+tactile\b|\bvisual[\s-]+tactile\b|\bvision[\s-]+touch\b/;
 
+// Match a concrete workflow before the broad topic navigation. These routes
+// help a reader act on the article without implying that it implements a tutorial.
+const workflowRoutes = [
+  { pattern: /\bros[\s_-]*2\b|\bros2_control\b/, label: 'ROS 2 tactile sensing guide', href: '/guides/ros2-tactile-sensing' },
+  { pattern: /\blerobot\b/, label: 'LeRobot dataset format guide', href: '/guides/lerobot-dataset-format' },
+  { pattern: /\bcalibrat(?:ion|ing|e)\b/, label: 'Tactile sensor calibration guide', href: '/guides/tactile-sensor-calibration' },
+  { pattern: /\bslip(?:page)?[\s-]+(?:detection|detecting|recovery)\b/, label: 'Robot-hand slip detection guide', href: '/guides/slip-detection-robot-hand' },
+];
+
 function addUniqueLink(links: TopicPillarLink[], link: TopicPillarLink) {
   if (!links.some((candidate) => candidate.href === link.href)) {
     links.push(link);
@@ -43,6 +52,11 @@ export function getResearchTopicLinks(post: ResearchTopicInput): TopicPillarLink
   const text = [post.title, post.category, ...post.technicalFocus].join(' ').toLowerCase();
   const broadLinks: TopicPillarLink[] = [];
   const tactileLinks: TopicPillarLink[] = [];
+  const workflowLinks = workflowRoutes
+    .filter(({ pattern, href }) => pattern.test(text)
+      && (href === '/guides/lerobot-dataset-format' || tactileContextPattern.test(text)))
+    .slice(0, 2)
+    .map(({ label, href }) => ({ label, href }));
 
   if (vlaPattern.test(text)) {
     addUniqueLink(broadLinks, { label: 'Robot VLA models', href: '/robot-vla-models' });
@@ -110,13 +124,21 @@ export function getResearchTopicLinks(post: ResearchTopicInput): TopicPillarLink
     }
   }
 
+  // Present concrete tactile resources before the overview, while keeping
+  // space for both the parent topics and the tactile context.
+  const availableSlots = MAX_TOPIC_LINKS - workflowLinks.length;
   const broadLimit = tactileLinks.length > 0
-    ? MAX_TOPIC_LINKS - Math.min(TACTILE_LINK_RESERVE, tactileLinks.length)
-    : MAX_TOPIC_LINKS;
+    ? availableSlots - Math.min(TACTILE_LINK_RESERVE, tactileLinks.length)
+    : availableSlots;
   const selectedBroadLinks = broadLinks.slice(0, broadLimit);
-  const selectedTactileLinks = tactileLinks.slice(0, MAX_TOPIC_LINKS - selectedBroadLinks.length);
+  const specificTactileLinks = tactileLinks.filter((link) => link.href !== '/tactile-ai');
+  const tactileSlots = availableSlots - selectedBroadLinks.length;
+  const selectedTactileLinks = [
+    ...specificTactileLinks.slice(0, Math.max(0, tactileSlots - 1)),
+    ...tactileLinks.filter((link) => link.href === '/tactile-ai'),
+  ];
 
-  return [...selectedBroadLinks, ...selectedTactileLinks]
+  return [...workflowLinks, ...selectedBroadLinks, ...selectedTactileLinks]
     .filter((link, index, links) => links.findIndex((candidate) => candidate.href === link.href) === index)
     .slice(0, MAX_TOPIC_LINKS);
 }

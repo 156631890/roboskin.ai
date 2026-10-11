@@ -59,6 +59,7 @@ test('every News and Research preview has a decodable supported asset, including
     '@/content/site': load('src/content/site.ts'),
     '@/lib/blog-data': research,
     '@/lib/news-data': news,
+    '@/lib/related-articles': load('src/lib/related-articles.ts'),
     '@/lib/topic-graph': {},
     '@/lib/tactile-datasets': {},
     ...Object.fromEntries(['ArticleBody', 'EditorialReview', 'JsonLd', 'ResearchResourceActions', 'ResearchNextSteps'].map(name => [`@/components/${name}`, {}])),
