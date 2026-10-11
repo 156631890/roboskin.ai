@@ -74,6 +74,29 @@ test('topic links are unique and capped for readable article navigation', () => 
   assert.ok(links.includes('/tactile-ai'), 'dense articles with touch context must retain a tactile child');
 });
 
+test('engineering articles lead to their specific workflow before broad topics', () => {
+  for (const [title, expected] of [
+    ['ROS 2 Kilted tactile sensor data pipeline', '/guides/ros2-tactile-sensing'],
+    ['Open-source magnetic tactile calibration', '/guides/tactile-sensor-calibration'],
+    ['Wet slippage detection with a tactile fingertip', '/guides/slip-detection-robot-hand'],
+    ['LeRobot robot demonstration dataset format', '/guides/lerobot-dataset-format'],
+  ]) {
+    assert.equal(hrefs(title)[0], expected);
+  }
+  assert.ok(!hrefs('Camera calibration for robot vision').includes('/guides/tactile-sensor-calibration'));
+  assert.ok(!hrefs('A tactile world model with slip prediction').includes('/guides/slip-detection-robot-hand'));
+});
+
+test('dense workflow navigation stays unique, bounded and retains topic context', () => {
+  const links = hrefs('ROS 2 tactile calibration slip detection VLA world model dataset benchmark robot manipulation');
+  assert.equal(links[0], '/guides/ros2-tactile-sensing');
+  assert.equal(links[1], '/guides/tactile-sensor-calibration');
+  assert.equal(new Set(links).size, links.length);
+  assert.ok(links.length <= 6);
+  assert.ok(links.includes('/robot-vla-models'));
+  assert.ok(links.includes('/tactile-ai'));
+});
+
 test('news articles use the topic classifier and dynamic robotics headings', async () => {
   const newsPage = await read('src/app/news/[id]/page.tsx');
 

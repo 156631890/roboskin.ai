@@ -30,7 +30,8 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
       }
     : undefined;
   const paperBriefs = page.paperBriefIds
-    ? blogPosts.filter((post) => page.paperBriefIds?.includes(post.id))
+    ? page.paperBriefIds.map((id) => blogPosts.find((post) => post.id === id))
+      .filter((post) => post !== undefined)
     : [];
 
   return (

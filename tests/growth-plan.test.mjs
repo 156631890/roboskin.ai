@@ -94,7 +94,7 @@ test('the internal research graph and homepage expose the semantic authority cha
   for (const route of ['/robot-skin', '/tactile-ai', '/physical-ai-touch', '/datasets', '/tactile-foundation-models', '/humanoid-robot-skin']) {
     assert.match(graph, new RegExp(`href: '${route.replaceAll('/', '\\/')}'`));
   }
-  assert.match(researchPage, /Research topic path/);
+  assert.match(researchPage, /aria-label="Related topic links"/);
   assert.match(researchPage, /getResearchTopicLinks/);
   assert.match(home, /Robot Skin → Tactile AI → Physical AI/);
   assert.match(home, /homeKnowledgeMap/);

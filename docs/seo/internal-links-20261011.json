@@ -1,0 +1,267 @@
+{
+  "observedAt": "2026-10-11T11:49:55.343Z",
+  "baseSha": "3d6d124234323617ee54768af1a63407e0108b05",
+  "scope": "Existing internal-link navigation, recommendation relevance and configured reading order. No research facts, page URLs, canonical or indexing rules changed.",
+  "baseline": {
+    "sitemapPages": 186,
+    "exportedHtmlPages": 196,
+    "internalLinkOccurrences": 11219,
+    "linksByScope": {
+      "article": 3590,
+      "main": 456,
+      "navigation": 6057,
+      "footer": 930,
+      "header": 0,
+      "other": 186
+    },
+    "brokenLinks": 0,
+    "redirectLinks": 0,
+    "sitemapErrors": 0,
+    "pagesWithoutBodyInlinks": 3,
+    "unreachablePages": 0,
+    "maxCrawlDepth": 2,
+    "depthHistogram": {
+      "0": 1,
+      "1": 47,
+      "2": 138
+    },
+    "researchPages": 44,
+    "newsPages": 74,
+    "zeroScoreResearchRecommendations": 40
+  },
+  "result": {
+    "sitemapPages": 186,
+    "exportedHtmlPages": 196,
+    "internalLinkOccurrences": 11146,
+    "linksByScope": {
+      "article": 3504,
+      "main": 456,
+      "navigation": 6070,
+      "footer": 930,
+      "header": 0,
+      "other": 186
+    },
+    "brokenLinks": 0,
+    "redirectLinks": 0,
+    "sitemapErrors": 0,
+    "pagesWithoutBodyInlinks": 3,
+    "unreachablePages": 0,
+    "maxCrawlDepth": 2,
+    "depthHistogram": {
+      "0": 1,
+      "1": 47,
+      "2": 138
+    }
+  },
+  "changedArticleCount": 117,
+  "changedArticles": [
+    "/research/slipsense-multimodal-slip-detection-2026",
+    "/research/touch2trace-tactile-cable-tracing-2026",
+    "/research/visible-touch-contact-overlays-visuomotor-policies-2026",
+    "/research/dextouch-wm-human-touch-world-model-2026",
+    "/research/bench2dex-visuo-tactile-bimanual-benchmark-2026",
+    "/research/tacprint-wearable-tactile-contact-reproduction-2026",
+    "/research/tacverse-cross-sensor-tactile-dataset-2026",
+    "/research/univtac-platform-encoder-benchmark-2026",
+    "/research/vision-based-tactile-intelligence-robotics-survey-2026",
+    "/research/adept-visuo-tactile-dexterity-rl-2026",
+    "/research/prism-contact-rich-industrial-skill-dataset-2026",
+    "/research/missing-touch-spatial-tactile-feedback-teleoperation-2026",
+    "/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026",
+    "/research/hitac-wam-hierarchical-tactile-world-action-model-2026",
+    "/research/t-rex-tactile-reactive-dexterous-manipulation-2026",
+    "/research/robotacdex-humanoid-visual-tactile-action-dataset-2026",
+    "/research/tactidex-tactile-guided-dexterous-benchmark-2026",
+    "/research/tac4loco-plantar-tactile-humanoid-locomotion-2026",
+    "/research/feelworld-visuo-tactile-world-model-2026",
+    "/research/ht-bench-full-hand-tactile-representations-2026",
+    "/research/sparsh-x-multisensory-touch-representations-2025",
+    "/research/mitas-multi-resolution-tactile-imitation-learning-2026",
+    "/research/dream-tac-tactile-world-action-model-2026",
+    "/research/open-source-magnetic-tactile-calibration-2024",
+    "/research/eflesh-customizable-magnetic-touch-sensing-2025",
+    "/research/freetacman-robot-free-visuotactile-data-collection-2025",
+    "/research/humanoid-visual-tactile-action-dataset-2025",
+    "/research/tactile-robotics-outlook-research-landscape-2025",
+    "/research/wet-slippage-bionic-fingertip-eskin-2026",
+    "/research/spiking-touch-encoding-large-area-eskin-2026",
+    "/research/origami-capacitive-robotic-eskin-2026",
+    "/research/slip-actuated-etextile-tactile-sensing-2025",
+    "/research/optical-electronic-artificial-skin-molecular-sensing-2025",
+    "/research/genforce-transferable-force-sensing-2026",
+    "/research/dexskin-high-coverage-conformable-robotic-skin-2025",
+    "/research/fluid-based-robot-skin-thermal-contact-2025",
+    "/research/graphene-liquid-metal-3d-force-2026",
+    "/research/single-material-soft-robotic-skin-2025",
+    "/research/full-hand-tactile-sensing-2025",
+    "/research/temperature-pressure-bimodal-2025",
+    "/research/event-based-opto-tactile-2025",
+    "/research/self-healing-multimodal-eskin-2026",
+    "/research/ros2-kilted-tactile-pipeline-2026",
+    "/research/large-area-flexible-tactile-arrays-2025",
+    "/news/activewam-active-vision-world-action-model",
+    "/news/radmcs-underwater-haptic-diver-guidance",
+    "/news/interevolve-reward-program-humanoid-manipulation",
+    "/news/reactive-humanoid-multi-contact-hand-bracing",
+    "/news/continual-6dof-grasp-synthesis-memory",
+    "/news/jfm-rigid-soft-finger-jacobian-flow",
+    "/news/skelewam-sparse-skeleton-world-action-model",
+    "/news/tacdyn-wam-implicit-tactile-dynamics",
+    "/news/touchtherm-tactile-thermal-digital-twins",
+    "/news/ditto-x-reverse-dexterous-teleoperation",
+    "/news/flashdexretarget-multi-motion-dexterous-data",
+    "/news/tacex-tactile-curiosity-robot-exploration",
+    "/news/occludex-visuo-tactile-self-occlusion-dexterity",
+    "/news/membrane-coupled-delta-array-micro-object-manipulation",
+    "/news/funco-grasp-cross-embodiment-dexterous-grasping",
+    "/news/tarl-tactile-reward-learning-demonstrations",
+    "/news/haco-haptic-active-compliance-dexterous-manipulation",
+    "/news/single-element-tackiness-tactile-sensor",
+    "/news/wrench-act-direct-wrench-control-manipulation",
+    "/news/univlat-whole-body-tactile-vla-humanoid",
+    "/news/uvta-human-tactile-demonstrations-dexterous-manipulation",
+    "/news/tacgoosebumps-shear-encoding-tactile-sensor",
+    "/news/dextag-tactile-guided-dexterous-retargeting",
+    "/news/blind-grasp-reflex-proprioceptive-dexterous-hand",
+    "/news/tactic-tactile-encoder-fusion-benchmark",
+    "/news/vistacalign-human-robot-tactile-demonstrations",
+    "/news/phase-tactile-retrieval-few-shot-insertion",
+    "/news/da-grd-tactile-grasp-recovery",
+    "/news/torque-observation-alignment-direct-drive-grasping",
+    "/news/outcome-sensitive-impact-aware-dexterous-catching",
+    "/news/body-grounded-replanning-physical-manipulation",
+    "/news/polyumi-visual-tactile-audio-demonstration-interface",
+    "/news/propra-fingertip-sensor-pretraining",
+    "/news/whole-hand-force-regulation-without-tactile-sensors",
+    "/news/res-hil-human-guided-residual-rl-manipulation",
+    "/news/tactilestep-sole-pressure-humanoid-locomotion",
+    "/news/anthropomimetic-forearm-carpal-stiffness",
+    "/news/camp-cooperative-arm-hand-motion-planning",
+    "/news/support-enhanced-granular-jamming-gripper",
+    "/news/internw0-contact-aware-world-model-pipetting",
+    "/news/glotouch-global-local-haptic-search",
+    "/news/copre-proprioceptive-contact-detection",
+    "/news/berkeley-quad-hand-asymmetric-qdd-design",
+    "/news/lima-asynchronous-diffusion-dexterous-manipulation",
+    "/news/better-curriculum-tactile-reflex-fragile-grasping",
+    "/news/visforce-visual-force-grounding-dexterous-manipulation",
+    "/news/cablevla-tactile-cable-routing-vla",
+    "/news/cartesian-hand-all-linear-in-hand-manipulation",
+    "/news/spectrobot-high-bandwidth-single-point-tactile-sensing",
+    "/news/tactile-jepa-topology-aware-electronic-skin-pretraining",
+    "/news/touch2robot-tactile-feedback-human-demonstrations",
+    "/news/when-touch-matters-cluttered-dexterous-grasping",
+    "/news/zerotouch-tactile-supervision-visual-grasp-control",
+    "/news/crisp-contact-simulation-geometry-solvers-release",
+    "/news/agile-wam-tactile-world-action-model-robot-control",
+    "/news/touchsight-twintouch-bare-hand-tactile-prediction",
+    "/news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026",
+    "/news/twins-aist-body-surface-tactile-demonstrations-2026",
+    "/news/gemini-robotics-2-whole-body-vla-dexterity-2026",
+    "/news/lerobot-v060-world-models-vla-evaluation-2026",
+    "/news/nist-humanoid-baseline-performance-benchmark-2026",
+    "/news/iso-10218-2025-industrial-robot-safety-scope",
+    "/news/twisted-yarn-textile-capacitive-robot-skin-2026",
+    "/news/eit-pneumatic-hybrid-robot-skin-force-map-2026",
+    "/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026",
+    "/news/underwater-self-healing-electronic-skin-nus-2026",
+    "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026",
+    "/news/color-changing-mechanochromic-tactile-sensor-2026",
+    "/news/single-pixel-tactile-skin-compressive-sampling-2026",
+    "/news/service-robots-200000-units-logistics-tactile-ai",
+    "/news/electronic-skin-research-robot-skin-systems-problem",
+    "/news/full-hand-tactile-sensing-robot-hands-vision-control",
+    "/news/global-robot-installations-542000-physical-ai-touch"
+  ],
+  "examples": [
+    {
+      "path": "/research/hitac-wam-hierarchical-tactile-world-action-model-2026",
+      "before": [
+        "dextouch-wm-human-touch-world-model-2026",
+        "slipsense-multimodal-slip-detection-2026",
+        "touch2trace-tactile-cable-tracing-2026"
+      ],
+      "after": [
+        "dextouch-wm-human-touch-world-model-2026",
+        "feelworld-visuo-tactile-world-model-2026",
+        "dream-tac-tactile-world-action-model-2026"
+      ],
+      "topicLinks": [
+        "/robot-world-models",
+        "/robot-manipulation",
+        "/tactile-foundation-models",
+        "/tactile-manipulation",
+        "/tactile-ai"
+      ]
+    },
+    {
+      "path": "/research/ros2-kilted-tactile-pipeline-2026",
+      "before": [
+        "slipsense-multimodal-slip-detection-2026",
+        "touch2trace-tactile-cable-tracing-2026",
+        "visible-touch-contact-overlays-visuomotor-policies-2026"
+      ],
+      "after": [],
+      "topicLinks": [
+        "/guides/ros2-tactile-sensing",
+        "/ai-robotics",
+        "/sensors",
+        "/robot-skin",
+        "/tactile-ai"
+      ]
+    },
+    {
+      "path": "/news/tactic-tactile-encoder-fusion-benchmark",
+      "before": [
+        "when-touch-matters-cluttered-dexterous-grasping",
+        "wrench-act-direct-wrench-control-manipulation",
+        "res-hil-human-guided-residual-rl-manipulation"
+      ],
+      "after": [
+        "propra-fingertip-sensor-pretraining",
+        "cablevla-tactile-cable-routing-vla",
+        "tactile-jepa-topology-aware-electronic-skin-pretraining"
+      ],
+      "topicLinks": [
+        "/robotics-datasets",
+        "/robot-manipulation",
+        "/datasets",
+        "/benchmarks",
+        "/tactile-manipulation",
+        "/tactile-ai"
+      ]
+    },
+    {
+      "path": "/news/iso-10218-2025-industrial-robot-safety-scope",
+      "before": [
+        "haco-haptic-active-compliance-dexterous-manipulation",
+        "single-element-tackiness-tactile-sensor",
+        "tacgoosebumps-shear-encoding-tactile-sensor"
+      ],
+      "after": [
+        "copre-proprioceptive-contact-detection"
+      ],
+      "topicLinks": [
+        "/robot-safety",
+        "/robot-skin",
+        "/tactile-ai"
+      ]
+    }
+  ],
+  "validation": {
+    "tests": 238,
+    "lint": true,
+    "build": true,
+    "exportVerification": true,
+    "desktop": "HiTac-WAM world-model recommendations; keyboard focus visible",
+    "mobile": "390x844 ROS 2 article; no horizontal overflow; tutorial link opens the intended h1"
+  },
+  "commands": [
+    "npm test",
+    "npm run lint",
+    "npm run build",
+    "npm run verify:export",
+    "npm run audit:links"
+  ],
+  "limits": "Static graph audit is not a search ranking or indexing measurement. Production verification is recorded in the local maintenance ledger after release."
+}

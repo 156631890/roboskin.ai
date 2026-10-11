@@ -7,6 +7,7 @@ import EditorialReview from '@/components/EditorialReview';
 import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { getNewsPostById, newsPosts } from '@/lib/news-data';
+import { getRelatedArticles } from '@/lib/related-articles';
 import {
   buildGraphJsonLd,
   buildNewsArticleBreadcrumbJsonLd,
@@ -83,19 +84,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
   }
 
   const topicLinks = getResearchTopicLinks(post);
-  const topicHrefs = new Set(topicLinks.map((link) => link.href));
-  const postFocus = new Set(post.technicalFocus.map((topic) => topic.toLowerCase()));
-  const relatedPosts = newsPosts
-    .filter((candidate) => candidate.id !== post.id)
-    .map((candidate) => ({
-      post: candidate,
-      score: getResearchTopicLinks(candidate).filter((link) => topicHrefs.has(link.href)).length * 3
-        + candidate.technicalFocus.filter((topic) => postFocus.has(topic.toLowerCase())).length
-        + (candidate.category === post.category ? 2 : 0),
-    }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((item) => item.post);
+  const relatedPosts = getRelatedArticles(post, newsPosts);
   const hasTactileTopic = topicLinks.some((link) => [
     '/tactile-ai',
     '/datasets',
@@ -150,7 +139,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                 <span className="font-mono uppercase tracking-[0.12em] text-[#8e98a8]">Related topic links</span>
                 {topicLinks.map((link, index) => (
                   <span key={link.href} className="flex items-center gap-2">
-                    <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? '/' : '→'}</span>
+                    <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? ':' : '·'}</span>
                     <Link href={link.href} className="font-semibold text-[#ffd5c5] hover:text-white">{link.label}</Link>
                   </span>
                 ))}
@@ -203,7 +192,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             </aside>
           </div>
 
-          <section className="article-related" aria-labelledby="related-news-heading">
+          {relatedPosts.length > 0 && <section className="article-related" aria-labelledby="related-news-heading">
             <p className="eyebrow">Continue the topic</p>
             <h2 id="related-news-heading" className="mt-4 text-3xl font-bold text-white">{relatedNewsHeading}</h2>
             <div>
@@ -219,7 +208,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                 </Link>
               ))}
             </div>
-          </section>
+          </section>}
         </div>
       </article>
     </>

@@ -9,6 +9,7 @@ import ResearchResourceActions from '@/components/ResearchResourceActions';
 import ResearchNextSteps from '@/components/ResearchNextSteps';
 import { site } from '@/content/site';
 import { blogPosts, getBlogPostById } from '@/lib/blog-data';
+import { getRelatedArticles } from '@/lib/related-articles';
 import {
   buildArticleJsonLd,
   buildGraphJsonLd,
@@ -85,16 +86,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
     notFound();
   }
 
-  const relatedPosts = blogPosts
-    .filter((candidate) => candidate.id !== post.id)
-    .map((candidate) => ({
-      post: candidate,
-      score: candidate.technicalFocus.filter((topic) => post.technicalFocus.includes(topic)).length
-        + (candidate.category === post.category ? 2 : 0),
-    }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((item) => item.post);
+  const relatedPosts = getRelatedArticles(post, blogPosts);
   const topicLinks = getResearchTopicLinks(post);
   const relatedDatasets = tactileDatasetEntries.filter((entry) => entry.researchUrl === `/research/${post.id}` || entry.paperUrl === post.sourceUrl);
 
@@ -128,11 +120,11 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             <div className="article-topics">
               {post.technicalFocus.map((topic) => <span key={topic}>{topic}</span>)}
             </div>
-            <nav aria-label="Research topic path" className="mt-6 flex flex-wrap items-center gap-2 text-xs">
-              <span className="font-mono uppercase tracking-[0.12em] text-[#8e98a8]">Research topic path</span>
+            <nav aria-label="Related topic links" className="mt-6 flex flex-wrap items-center gap-2 text-xs">
+              <span className="font-mono uppercase tracking-[0.12em] text-[#8e98a8]">Related topic links</span>
               {topicLinks.map((link, index) => (
                 <span key={link.href} className="flex items-center gap-2">
-                  <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? '/' : '→'}</span>
+                  <span aria-hidden="true" className="text-[#8e98a8]">{index === 0 ? ':' : '·'}</span>
                   <Link href={link.href} className="font-semibold text-[#ffd5c5] hover:text-white">{link.label}</Link>
                 </span>
               ))}
@@ -186,7 +178,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             </aside>
           </div>
 
-          <section className="article-related" aria-labelledby="related-research-heading">
+          {relatedPosts.length > 0 && <section className="article-related" aria-labelledby="related-research-heading">
             <p className="eyebrow">Continue the topic</p>
             <h2 id="related-research-heading" className="mt-4 text-3xl font-bold text-white">Related tactile research</h2>
             <div>
@@ -202,7 +194,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
                 </Link>
               ))}
             </div>
-          </section>
+          </section>}
         </div>
       </article>
       <div className="container-shell pb-12"><ResearchResourceActions /></div>
