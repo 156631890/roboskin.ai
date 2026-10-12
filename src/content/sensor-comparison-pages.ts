@@ -25,6 +25,7 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         id: 'integration-comparison',
         heading: 'Compare the integration work, not just the camera',
         body: ['The official DIGIT interface and GelSight robotics examples establish different software starting points. Preserve the distinction between a hardware specification, a configured stream and a derived estimate when building your shortlist.'],
+        contextLinks: [{ before: 'Use the ', label: 'tactile sensing introduction', href: '/technology', after: ' to distinguish raw contact observations from inferred quantities before comparing the outputs in this table.' }],
         table: {
           headers: ['Decision', 'GelSight Mini', 'Original DIGIT', 'Check before committing'],
           rows: [
@@ -45,6 +46,7 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         id: 'choose-by-task',
         heading: 'Which sensor fits your robot task?',
         body: ['Use these as conditional starting points for investigation. A task label such as grasping or insertion does not establish that either device will work on your robot.'],
+        contextLinks: [{ before: 'If the task requires learned representations or a policy, check the ', label: 'tactile datasets by learning task', href: '/datasets#choose-by-learning-task', after: ' for sensor and modality compatibility before treating an available collection as a reason to choose hardware.' }],
         table: {
           headers: ['Your task', 'Shortlist logic', 'Evidence you still need'],
           rows: [
@@ -84,9 +86,8 @@ export const sensorComparisonPages: SeoTopicPage[] = [
           'First validate the official acquisition example for your device. For a ROS 2 application, preserve camera-frame semantics, sensor identity and capture timing; transporting an image does not turn it into a calibrated force array. The RoboSkin ROS 2 tutorial teaches a separate synthetic taxel-message pipeline and has no tested DIGIT or GelSight camera driver.',
           'Before storing demonstrations, define how tactile frames align with camera observations, robot state and action commands. The dataset directory and LeRobot guide help inspect episode and format contracts; neither guarantees that a chosen model accepts an extra tactile field.',
         ],
+        contextLinks: [{ before: 'Follow the ', label: 'ROS 2 tactile message and replay tutorial', href: '/guides/ros2-tactile-sensing', after: ' to inspect timestamps, validity and recording semantics with synthetic data before designing a separate acquisition path for your optical sensor.' }],
         links: [
-          { label: 'ROS 2 message, timestamp and replay tutorial', href: '/guides/ros2-tactile-sensing' },
-          { label: 'Select tactile datasets by learning task', href: '/datasets#choose-by-learning-task' },
           { label: 'Inspect the LeRobot episode format', href: '/guides/lerobot-dataset-format' },
         ],
       },

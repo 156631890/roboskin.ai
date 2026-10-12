@@ -83,7 +83,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'What Is Tactile Sensing? Robotics Basics & Sensor Types',
     description:
       'Learn how tactile sensing works in robotics, how it differs from robot skin and tactile AI, and how to choose sensors, datasets and integration guides.',
-    updated: '2026-10-06',
+    updated: '2026-10-12',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -228,7 +228,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',
     description:
       'A practical e-skin and electronic skin glossary for robot skin, tactile AI, tactile sensing, slip detection, and source-backed terminology.',
-    updated: '2026-08-22',
+    updated: '2026-10-12',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,
@@ -266,6 +266,17 @@ export const pageSeo: Record<string, SeoRoute> = {
     changeFrequency: 'monthly',
     index: true,
     breadcrumbs: ['Home', 'Editorial policy'],
+  },
+  '/methodology': {
+    path: '/methodology',
+    title: 'Research Methodology and Evidence Standards',
+    description:
+      'How RoboSkin.ai selects primary sources, separates reported results from verification, compares models and datasets, and updates research records.',
+    updated: '2026-10-12',
+    priority: 0.68,
+    changeFrequency: 'monthly',
+    index: true,
+    breadcrumbs: ['Home', 'Methodology'],
   },
   '/rss': {
     path: '/rss',

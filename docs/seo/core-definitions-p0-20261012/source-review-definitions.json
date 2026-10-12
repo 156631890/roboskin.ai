@@ -1,0 +1,147 @@
+{
+  "accessDate": "2026-10-12",
+  "reviewType": "automated-primary-source-review",
+  "reviewer": "Codex definitions_content agent",
+  "approvalBoundary": "This file records an automated evidence review. It is not human approval, editorial sign-off, deployment authorization, or independent experimental reproduction.",
+  "scope": "New technology FAQ and limitations; new EIT and iontronic sections; active tactile sensing; independent read-only review of new HFM wording.",
+  "method": "Read versioned arXiv abstracts and HTML, the publisher's iontronic full text, and official ROS 2 documentation. Confirmed the EIT v1 title through both the browser research tool and a direct public HTTP read of the abstract citation_title and HTML title. No hardware, model, or dataset experiment was performed.",
+  "sources": [
+    {
+      "id": "digit-v1",
+      "title": "DIGIT: A Novel Design for a Low-Cost Compact High-Resolution Tactile Sensor with Application to In-Hand Manipulation",
+      "url": "https://arxiv.org/html/2005.14679v1",
+      "version": "v1",
+      "locations": ["II Related Work", "III DIGIT", "III-C Elastomer Design", "III-D Mechanical Robustness of the Elastomer"],
+      "supports": [
+        "DIGIT observes deformation of a contact elastomer through camera images.",
+        "The paper identifies elastomer wear and manufacturing variability as limits of optical tactile sensors; replacement can require recalibration or retraining.",
+        "The study improves durability and replaceability, but its abrasion experiment does not establish a service lifetime for arbitrary robotic tasks."
+      ],
+      "usedOn": ["/technology"],
+      "status": "confirmed-in-versioned-primary-source"
+    },
+    {
+      "id": "densetact-v2",
+      "title": "DenseTact 2.0: Optical Tactile Sensor for Shape and Force Reconstruction",
+      "url": "https://arxiv.org/abs/2209.10122v2",
+      "version": "v2",
+      "locations": ["Abstract"],
+      "supports": [
+        "The sensor uses a neural mapping from deformation images to calibrated shape and six-axis wrench estimates.",
+        "Calibration of new fingertips through transfer learning is part of the reported method; a raw tactile image is not itself a calibrated force measurement."
+      ],
+      "usedOn": ["/technology"],
+      "status": "confirmed-in-versioned-primary-source"
+    },
+    {
+      "id": "ros2-jazzy-qos",
+      "title": "ROS 2 Jazzy: Quality of Service settings",
+      "url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst",
+      "readUrl": "https://raw.githubusercontent.com/ros2/ros2_documentation/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst",
+      "version": "jazzy branch as read on the access date",
+      "locations": ["Overview", "QoS policies", "QoS profiles: Sensor data", "QoS compatibilities"],
+      "supports": [
+        "Incompatible publisher and subscriber QoS profiles can prevent message delivery.",
+        "Best-effort reliability permits lost samples; reliable delivery may retry.",
+        "History depth, deadline, and lifespan govern different queue and timing properties."
+      ],
+      "usedOn": ["/technology"],
+      "status": "confirmed-in-official-documentation",
+      "accessNote": "The rendered docs.ros.org URL returned an anti-bot page; the official source document was read instead."
+    },
+    {
+      "id": "eit-skin-v1",
+      "title": "Robot Skin with Touch and Bend Sensing using Electrical Impedance Tomography",
+      "url": "https://arxiv.org/html/2503.13048v1",
+      "abstractUrl": "https://arxiv.org/abs/2503.13048v1",
+      "version": "v1",
+      "submittedAtUtc": "2025-03-17T10:53:42Z",
+      "authors": ["Haofeng Chen", "Bin Li", "Bedrich Himmel", "Xiaojie Wang", "Matej Hoffmann"],
+      "locations": ["I Introduction", "II-A Working Principle of EIT for Multimodal Sensing", "III-A Single touch test"],
+      "supports": [
+        "EIT applies electrical currents and uses boundary-voltage measurements to reconstruct internal conductivity changes.",
+        "Both bending and contact affect the signal; the paper describes their coupling and an adaptive reference method.",
+        "The inverse problem is ill-posed and susceptible to reconstruction error from small measurement changes.",
+        "The reported bending area, farther from electrodes, has poorer touch localization accuracy."
+      ],
+      "usedOn": ["/e-skin#eit-tactile-skin", "/e-skin#challenges-and-limitations"],
+      "status": "confirmed-in-versioned-primary-source",
+      "versionBoundary": {
+        "latestAbstractUrlChecked": "https://arxiv.org/abs/2503.13048",
+        "latestVersionObserved": "v4",
+        "latestRevisionUtc": "2026-08-26T16:13:28Z",
+        "latestTitleObserved": "Multi-Touch and Bending Sensing Using Electrical Impedance Tomography for Robotics",
+        "interpretation": "The title differs by version. The site cites v1 and the evidence above was checked against v1. Do not replace its title or experimental details with the unversioned latest record without reviewing that version."
+      }
+    },
+    {
+      "id": "iontronic-biogel-2026",
+      "title": "Skin-mimicking biogel-based iontronic sensor with hierarchical bionic coupling for dexterous tactile e-skin",
+      "url": "https://www.nature.com/articles/s41467-026-73736-3",
+      "doi": "https://doi.org/10.1038/s41467-026-73736-3",
+      "published": "2026-05-26",
+      "locations": ["Introduction", "Results: Skin-mimicking design of the iontronic sensor", "Figure 3 and pressure-dependent equivalent-circuit explanation"],
+      "supports": [
+        "Pressure changes the biogel-electrode contact area and interfacial ion distribution, affecting electrical-double-layer capacitance.",
+        "The reported mechanism is a capacitive interface transducer; its behavior depends on the material, microstructure, and pressure regime."
+      ],
+      "usedOn": ["/e-skin#iontronic-e-skin"],
+      "status": "confirmed-in-publisher-full-text",
+      "accessNote": "The canonical publisher URL intermittently failed. Its public cookie-error redirect returned the full article; Figure 3 and the surrounding mechanism description were read."
+    },
+    {
+      "id": "active-tactile-v1",
+      "title": "Active Tactile Exploration for Rigid Body Pose and Shape Estimation",
+      "url": "https://arxiv.org/html/2510.13595v1",
+      "projectUrl": "https://dairlab.github.io/activetactile/",
+      "version": "v1",
+      "authors": ["Ethan K. Gordon", "Bruke Baraki", "Hien Bui", "Michael Posa"],
+      "locations": ["I Introduction", "III Problem Formulation", "V Maximizing Expected Information Gain", "VIII Discussion"],
+      "supports": [
+        "Touch provides local contact observations and probing can move an unrestrained object.",
+        "Exploration uses expected information gain while pose and geometry are estimated together.",
+        "The formulation assumes convex rigid geometry. Light-touch detection is a hardware limitation reported in the discussion."
+      ],
+      "usedOn": ["/technology", "/physical-ai-touch#active-sensing", "/physical-ai-touch#challenges-and-limitations"],
+      "status": "confirmed-in-versioned-primary-source",
+      "boundary": "The generalization warning is an evidence boundary. The paper does not demonstrate unrestricted transfer to deformable or non-convex objects."
+    },
+    {
+      "id": "hfm-v1-independent-check",
+      "title": "The Potential of Haptic Foundation Models",
+      "url": "https://arxiv.org/html/2608.28664v1",
+      "version": "v1",
+      "locations": ["Definition of a Haptic Foundation Model", "Evolution from LLM/VLM to HFM", "Benchmarking Haptic Foundation Models"],
+      "supports": [
+        "The framework is explicitly prospective; active perception and prediction are design objectives.",
+        "The reported benchmark uses frozen encoders and task-specific linear readouts for force, slip, and relative pose.",
+        "The authors call existing tactile encoders haptic foundation models; the site appropriately treats the terminology as overlapping rather than standardized disjoint classes."
+      ],
+      "usedOn": ["/tactile-foundation-models"],
+      "status": "independently-confirmed-in-versioned-primary-source",
+      "additionalRecord": "docs/seo/core-definitions-p0-20261012/source-review-hfm-romi.json"
+    }
+  ],
+  "editorialInferences": [
+    {
+      "claim": "EIT is a measurement and reconstruction architecture; the cited iontronic device is an interface-capacitance mechanism. These labels are not necessarily mutually exclusive.",
+      "sourceIds": ["eit-skin-v1", "iontronic-biogel-2026"],
+      "status": "qualified-comparison-of-the-two-documented-mechanisms"
+    },
+    {
+      "claim": "A raw image, inferred force, tactile representation, and closed-loop controller are different evidence levels.",
+      "sourceIds": ["digit-v1", "densetact-v2", "hfm-v1-independent-check"],
+      "status": "editorial-evidence-boundary"
+    }
+  ],
+  "corePageReview": [
+    { "path": "/e-skin", "faqCount": 5, "newLimitationsCount": 3, "newClaimsReview": "supported-with-version-specific-scope" },
+    { "path": "/physical-ai-touch", "faqCount": 5, "newLimitationsCount": 3, "newClaimsReview": "supported-with-study-specific-scope" },
+    { "path": "/tactile-foundation-models", "faqCount": 5, "newLimitationsCount": 3, "newClaimsReview": "prospective-framework-and-benchmark-boundaries-preserved" }
+  ],
+  "exclusions": [
+    "This review covers additions and directly affected claims; historical source claims elsewhere on the pages were not exhaustively re-audited.",
+    "FAQ counts were checked in the source TypeScript AST. Final rendered HTML, JSON-LD equality, build success, links, and deployment remain separate verification steps.",
+    "ROMA release access and license findings are recorded in source-review-hfm-romi.json. This review independently confirmed only the physical-ai-touch statement that downstream manipulation integration is future work, against paper v2 section 9."
+  ]
+}

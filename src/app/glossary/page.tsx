@@ -81,6 +81,7 @@ export default function GlossaryPage() {
               Definitions are written for practical reading: what the term means, which signals it touches, and where to go next for
               research context.
             </p>
+            <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added HFM with its paper version and proposed-capability boundary.</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#term-matrix" className="btn-primary w-full sm:w-auto">
                 Open term matrix
@@ -168,6 +169,7 @@ export default function GlossaryPage() {
                 </div>
                 <div>
                   <p className="text-base leading-relaxed text-[#c8d1de]">{item.definition}</p>
+                  {item.source ? <p className="mt-3 text-sm"><a href={item.source.href} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">Source: {item.source.label}</a></p> : null}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {item.related.map((related) => (
                       <span key={related} className="rounded-md border border-white/8 bg-[#020408] px-3 py-1 text-xs text-[#c8d1de]">

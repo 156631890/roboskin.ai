@@ -35,6 +35,7 @@ export default function DatasetAvailabilityAnalysis({ entries }: { entries: Robo
       </details>
       <div id="dataset-changelog" className="mt-8 scroll-mt-24">
         <h3 className="text-xl font-semibold">Directory change log</h3>
+        <p className="mt-3 text-sm text-soft"><time>2026-10-12</time> — Added ROMI-2K for active perception. The official card still says Coming soon; complete dataset files and dataset-specific reuse terms remain unverified. Preserved the source discrepancy and separated handheld optical touch from tabletop force/torque. Older records retain their own check dates.</p>
         <p className="mt-3 text-sm text-soft"><time>2026-09-18</time> — Added Bench2Dex simulation demonstrations with a pinned public manifest, separate license fields and original authors. STAR remains a paper-linked candidate outside the catalog count and Dataset schema. Published a new audit snapshot; older records retain their own verification dates.</p>
         <p className="mt-3 text-sm text-soft"><time>2026-09-13</time> — Added separate access evidence, provider revisions, public-manifest scale, dataset-file license status and split evidence to existing records, with computable counts and JSON export. <a className="underline" href="/releases/datasets/v2026.09.13.json">Original audit snapshot</a>.</p>
       </div>

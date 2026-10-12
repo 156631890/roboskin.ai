@@ -108,6 +108,7 @@ export type GlossaryTerm = {
   definition: string;
   related: string[];
   href: string;
+  source?: { label: string; href: string };
 };
 
 export type FeaturedIndustryAsset = {
@@ -248,6 +249,7 @@ export const footerNavigation = [
       { href: '/about', label: 'About' },
       { href: '/contact', label: 'Contact' },
       { href: '/editorial-policy', label: 'Editorial policy' },
+      { href: '/methodology', label: 'Methodology' },
     ],
   },
 ];
@@ -1547,6 +1549,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: 'A broadly pretrained tactile or multimodal model intended to transfer across multiple downstream tasks, sensors, objects, or embodiments, with the claimed breadth requiring direct evidence.',
     related: ['tactile representation', 'transfer learning', 'multimodal model'],
     href: '/tactile-foundation-models',
+  },
+  {
+    term: 'HFM',
+    definition: 'Haptic foundation model: a proposed reusable model for heterogeneous touch and contact signals. The 2026 HFM framework includes action-coupled sensing and prediction as research objectives; its frozen-encoder benchmark does not establish the full proposed framework. The term overlaps with tactile foundation model rather than defining a standardized separate class.',
+    related: ['haptic foundation model', 'tactile foundation model', 'active sensing'],
+    href: '/tactile-foundation-models#tactile-vs-haptic-foundation-model',
+    source: { label: 'Wang et al., The Potential of Haptic Foundation Models (v1)', href: 'https://arxiv.org/html/2608.28664v1' },
   },
   {
     term: 'Tactile world model',

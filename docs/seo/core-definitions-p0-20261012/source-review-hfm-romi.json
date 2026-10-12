@@ -1,0 +1,189 @@
+{
+  "reviewedAtUtc": "2026-10-12T02:07:24Z",
+  "accessDate": "2026-10-12",
+  "method": "Read live arXiv abstracts and versioned HTML, the paper-linked official project and repository, GitHub metadata and the complete repository tree, the official Hugging Face card and file manifest. No model inference, complete dataset download, or hardware execution was performed.",
+  "hfm": {
+    "arxivId": "2608.28664",
+    "version": "v1",
+    "title": "The Potential of Haptic Foundation Models",
+    "authors": ["Jianquan Wang", "Haiwei Dong", "Abdulmotaleb El Saddik"],
+    "submittedAtUtc": "2026-08-23T03:30:23Z",
+    "paperUrl": "https://arxiv.org/abs/2608.28664",
+    "fullTextUrl": "https://arxiv.org/html/2608.28664v1",
+    "relatedDoi": "https://doi.org/10.1109/MCE.2026.3723054",
+    "publicationStatus": "The arXiv record says accepted by IEEE Consumer Electronics Magazine; journal publication details were not independently checked.",
+    "claims": [
+      {
+        "claim": "The proposed HFM inherits broad data coverage, self-supervised pretraining and downstream adaptability from the foundation-model concept.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx1",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-in-paper"
+      },
+      {
+        "claim": "The prospective scope includes optical tactile images, force/torque time series, vibration, thermal feedback, contact sound and interaction trajectories, potentially aligned with vision and language.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx1",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-as-proposed-scope"
+      },
+      {
+        "claim": "The proposed transition emphasizes action-coupled active perception, physical dynamical representations, continuous spatiotemporal signals and action-conditioned future haptic-state prediction.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx2",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-as-research-roadmap"
+      },
+      {
+        "claim": "The authors explicitly describe the HFM framework as prospective design objectives, not capabilities directly established by their benchmark.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx1",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-boundary"
+      },
+      {
+        "claim": "The benchmark compares ten pretrained encoder variants from UniTouch, AnyTouch, T3 and Sparsh with frozen encoders and linear readouts on TacBench force, slip and relative-pose tasks; it does not validate the full proposed HFM framework.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx5",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-benchmark-scope"
+      },
+      {
+        "claim": "HFM can be presented as a broader proposed contact-and-action framework, while tactile foundation model commonly describes reusable tactile representations. This is a qualified editorial distinction, not a standardized disjoint taxonomy: the paper itself calls existing tactile encoders haptic foundation models.",
+        "source": "https://arxiv.org/html/2608.28664v1#Sx5",
+        "additionalSource": "https://arxiv.org/html/2608.28664v1#Sx1",
+        "accessDate": "2026-10-12",
+        "status": "editorial-inference-with-explicit-limit"
+      }
+    ],
+    "releaseBoundary": "No new model named HFM, paper-specific checkpoint release, or dedicated official project/repository was identified in the reviewed abstract and full text. Links to AnyTouch and existing model checkpoints are cited comparison resources, not an HFM release. This is not an exhaustive web-wide absence claim."
+  },
+  "romi": {
+    "arxivId": "2610.06955",
+    "version": "v2",
+    "paperTitle": "ROMA: LLM System for Real-World Object-Centric Multi-Sensory Active Perception",
+    "authors": ["Ruoxuan Feng", "Yutong Chen", "Ruihua Song", "Huan Yang", "Zhongyuan Wang", "Guocai Yao", "Di Hu"],
+    "submittedAtUtc": "2026-10-03T13:58:56Z",
+    "revisedAtUtc": "2026-10-08T16:42:00Z",
+    "datasetName": "ROMI-2K",
+    "paperUrl": "https://arxiv.org/abs/2610.06955",
+    "fullTextUrl": "https://arxiv.org/html/2610.06955v2",
+    "projectUrl": "https://gewu-lab.github.io/ROMA/",
+    "codeUrl": "https://github.com/GeWu-Lab/ROMA",
+    "datasetLandingUrl": "https://huggingface.co/datasets/GeWu-Lab/ROMA",
+    "claims": [
+      {
+        "claim": "ROMA is the active-perception system, ROMI-2K is its object-interaction dataset, and ROMA Bench is the held-out tabletop evaluation. These names do not denote the same artifact.",
+        "source": "https://arxiv.org/html/2610.06955v2#S3",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-in-paper"
+      },
+      {
+        "claim": "The paper reports nearly 2,000 everyday objects including content combinations, with six atomic interactions: lift, press, collide, shake, rotate and squeeze. Do not translate this headline into 2,000 independent trajectories or deduplicated object identities.",
+        "source": "https://arxiv.org/html/2610.06955v2#S3",
+        "accessDate": "2026-10-12",
+        "status": "paper-reported-scale"
+      },
+      {
+        "claim": "The handheld subset contains 1,657 object-content combinations, three grasp locations per object, wrist and third-person RGB, two GelSight Mini tactile streams and audio. Its Pika Sense collector has no force sensor.",
+        "source": "https://arxiv.org/html/2610.06955v2#S10",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-subset-boundary"
+      },
+      {
+        "claim": "The tabletop subset contains 400 training and 100 test scenes with 1-5 objects per scene; the test set includes 56 additional unseen objects. Most collection objects are reused from the handheld subset.",
+        "source": "https://arxiv.org/html/2610.06955v2#S3",
+        "accessDate": "2026-10-12",
+        "status": "paper-reported-splits"
+      },
+      {
+        "claim": "The tabletop platform uses xArm 6, Robotiq 2F-140, two GelSight Mini sensors, wrist and external RealSense cameras, a USB microphone and a six-axis force/torque sensor. RGB and tactile collection is listed at 10 fps and force measurement at 30 Hz; initial scene depth is also recorded.",
+        "source": "https://arxiv.org/html/2610.06955v2#S11.SS1",
+        "accessDate": "2026-10-12",
+        "status": "paper-reported-hardware-not-file-validated"
+      },
+      {
+        "claim": "ROMA transforms wrist force to the robot base frame and removes the empty-gripper component, but supplies the LLM only the mean gravity force as text. Direct modeling of full force/torque trajectories remains future work.",
+        "source": "https://arxiv.org/html/2610.06955v2#S4.SS1",
+        "additionalSource": "https://arxiv.org/html/2610.06955v2#S9",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-model-input-boundary"
+      },
+      {
+        "claim": "Annotations include object identity, material, hardness, roughness, texture and contents. Gemini 3.5 Flash produces initial annotations that the authors say are manually verified and corrected; they are not all direct physical measurements.",
+        "source": "https://arxiv.org/html/2610.06955v2#S10.SS3",
+        "accessDate": "2026-10-12",
+        "status": "paper-reported-annotation-process"
+      },
+      {
+        "claim": "ROMA Bench contains 2,100 offline active-perception QA tasks. Real-robot evaluation uses 132 questions from eight scenes; the two evaluation sizes must not be conflated.",
+        "source": "https://arxiv.org/html/2610.06955v2#S13",
+        "accessDate": "2026-10-12",
+        "status": "paper-reported-evaluation-scope"
+      },
+      {
+        "claim": "The authors report 1,269 training and 325 test tabletop object instances without deduplicating repeated objects across scenes; these counts are not unique object totals.",
+        "source": "https://arxiv.org/html/2610.06955v2#S12",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-counting-boundary"
+      },
+      {
+        "claim": "The system is demonstrated on one arm and gripper with six predefined interaction primitives. Integration with downstream manipulation policies, richer skills, multi-turn reasoning, persistent object memory and full force/torque modeling remain open directions.",
+        "source": "https://arxiv.org/html/2610.06955v2#S9",
+        "accessDate": "2026-10-12",
+        "status": "confirmed-limitations"
+      }
+    ],
+    "accessReview": {
+      "fullDatasetStatus": "coming-soon-not-confirmed-downloadable",
+      "benchmarkStatus": "coming-soon",
+      "checkpointStatus": "public-file-list-confirmed-not-executed",
+      "demoStatus": "one-recorded-scene-and-demo-code-confirmed-not-executed",
+      "datasetLicense": "not-identified",
+      "codeLicense": "not-identified",
+      "observations": [
+        {
+          "claim": "The official Hugging Face card explicitly marks ROMI-2K and ROMA Bench Coming soon, while listing the ROMA-7B checkpoint and one demo scene as available.",
+          "source": "https://huggingface.co/datasets/GeWu-Lab/ROMA/raw/main/README.md",
+          "accessDate": "2026-10-12",
+          "status": "live-card-confirmed"
+        },
+        {
+          "claim": "The public, ungated Hugging Face manifest contains README and a model directory, including ROMA-LLM.bin, tactile.bin, audio.bin and anytouch2.pth; no complete ROMI-2K or ROMA Bench data files appear in the reviewed manifest. Its card metadata contains no dataset license.",
+          "source": "https://huggingface.co/api/datasets/GeWuLab/ROMA",
+          "canonicalRepoIdReturned": "GeWu-Lab/ROMA",
+          "revision": "3069e802f83de142ad034964c3cd48779cd1e387",
+          "accessDate": "2026-10-12",
+          "status": "live-manifest-confirmed"
+        },
+        {
+          "claim": "The GitHub README is internally inconsistent: introductory ROMI-2K and ROMA Bench entries say Coming Soon, while a TODO checkbox claims the checkpoint and ROMI-2K dataset release is complete. The checked box alone does not establish dataset availability.",
+          "source": "https://raw.githubusercontent.com/GeWu-Lab/ROMA/main/README.md",
+          "accessDate": "2026-10-12",
+          "status": "release-claim-conflict"
+        },
+        {
+          "claim": "The complete GitHub tree contains one recorded example scene with tactile images, audio and force CSVs; resources/datasets contains only puts_datasets_here.txt. No license-named file appears anywhere in the non-truncated 499-entry tree.",
+          "source": "https://api.github.com/repos/GeWu-Lab/ROMA/git/trees/main?recursive=1",
+          "treeSha": "b016abf1ab8ef782ffe37f19b8094f447965daf1",
+          "accessDate": "2026-10-12",
+          "status": "live-tree-confirmed"
+        },
+        {
+          "claim": "An Apache-2.0 text exists under models/ROMA-Qwen2.5-Omni-7B/LICENSE. Its model-directory scope does not establish a license for ROMI-2K, ROMA Bench, or the separate GitHub code repository.",
+          "source": "https://huggingface.co/datasets/GeWu-Lab/ROMA/raw/main/models/ROMA-Qwen2.5-Omni-7B/LICENSE",
+          "accessDate": "2026-10-12",
+          "status": "license-scope-boundary"
+        },
+        {
+          "claim": "The public GitHub README leaves training code, ROMA Bench evaluation code and the physical grasp/interaction interface unchecked. A local recorded-feedback demo must not be described as the complete released training or robot-control pipeline.",
+          "source": "https://raw.githubusercontent.com/GeWu-Lab/ROMA/main/README.md",
+          "accessDate": "2026-10-12",
+          "status": "live-release-boundary"
+        }
+      ],
+      "unknowns": [
+        "Complete ROMI-2K and ROMA Bench archive availability and file-level contents.",
+        "Dataset-specific reuse license, including commercial-use permission.",
+        "GitHub code reuse license.",
+        "Complete dataset size in bytes, independent trajectory count and file-level split membership.",
+        "Independent reproduction of model inference, benchmark results or physical robot operation."
+      ]
+    }
+  }
+}

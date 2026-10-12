@@ -50,6 +50,7 @@ export default function ProgrammingArticle({ page, children }: { page: Programmi
               <section id={section.id} key={section.id} className="tutorial-section">
                 <h2>{section.heading}</h2>
                 {section.body.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                {section.contextLinks?.map(link => <p key={link.href}>{link.before}<Link href={link.href}>{link.label}</Link>{link.after}</p>)}
                 {section.bullets && <ul>{section.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>}
                 {section.table && (
                   <div className="tutorial-table" tabIndex={0} role="region" aria-label={`${section.heading} table`}>

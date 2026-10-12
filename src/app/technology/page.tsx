@@ -3,9 +3,42 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import { fitCriteria, pageVisuals, sensorDataFlow, technologyLayers } from '@/content/site';
-import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
+import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/technology');
+
+const technologyFaqs = [
+  {
+    question: 'What does a tactile sensor actually measure?',
+    answer:
+      'It measures a physical response at a contact surface. For example, DIGIT records images of a deforming elastomer. A contact image, reconstructed shape, force estimate, and slip estimate are different outputs; check which ones the sensor and processing pipeline actually provide.',
+    source: { label: 'DIGIT: sensing principle and sensor design', href: 'https://arxiv.org/html/2005.14679v1' },
+  },
+  {
+    question: 'Does a tactile image directly give calibrated force?',
+    answer:
+      'No. A tactile image records deformation or appearance. Producing force in physical units needs a documented calibration or inference method. DenseTact 2.0, for example, uses a learned mapping for shape reconstruction and six-axis wrench estimation, with calibration for new fingertips.',
+    source: { label: 'DenseTact 2.0: calibrated shape and wrench estimation', href: 'https://arxiv.org/abs/2209.10122v2' },
+  },
+  {
+    question: 'Can tactile sensing replace robot vision?',
+    answer:
+      'Touch and vision provide different observations. Touch can help when a contact is visually occluded, but it only samples the surface being touched. Exploring the rest of an object requires additional motion, and a probing action can move the object being measured.',
+    source: { label: 'Active Tactile Exploration: sparsity and disturbance', href: 'https://arxiv.org/html/2510.13595v1' },
+  },
+  {
+    question: 'Why might a replacement tactile sensor need recalibration?',
+    answer:
+      'Manufacturing variation and wear can change the response of an optical tactile sensor. The DIGIT paper identifies sensor-to-sensor variability and the possible need to recalibrate or retrain after replacement. Repeat the relevant calibration and task checks instead of assuming an old mapping still applies.',
+    source: { label: 'DIGIT: replacement, wear, and manufacturing variability', href: 'https://arxiv.org/html/2005.14679v1' },
+  },
+  {
+    question: 'Why can a ROS 2 tactile topic fail to deliver readings?',
+    answer:
+      'Publisher and subscriber Quality of Service settings must be compatible. ROS 2 also distinguishes best-effort delivery, which can lose samples, from reliable delivery, which may retry. Check compatibility, queue depth, deadlines, and message age before using the stream for a contact response.',
+    source: { label: 'ROS 2 Jazzy: official Quality of Service documentation', href: 'https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst' },
+  },
+];
 
 const technologyTopicLinks = [
   {
@@ -28,7 +61,7 @@ const technologyTopicLinks = [
 export default function TechnologyPage() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/technology'), buildBreadcrumbJsonLd('/technology')])} />
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/technology'), buildBreadcrumbJsonLd('/technology'), buildFaqJsonLd(technologyFaqs, '/technology')])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">Technology</span>
@@ -40,6 +73,7 @@ export default function TechnologyPage() {
             vibration or changes in an optical image. The available measurements depend on the sensor and its calibration.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
+          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added source-linked limitations, five FAQs and reading routes from sensor selection to data and ROS integration.</p>
         </div>
       </section>
 
@@ -50,6 +84,9 @@ export default function TechnologyPage() {
             <p className="mt-4 max-w-3xl text-soft">Contact changes a sensing surface or element. Electronics or a camera capture that change; processing converts it into a usable observation. A controller can then use the observation to adjust a grasp or investigate an unexpected contact.</p>
             <p className="mt-4 max-w-3xl text-soft">A tactile sensor supplies observations. Robot skin distributes sensing over a surface. Tactile AI uses learned models to interpret touch or support decisions. None of these labels alone establishes calibrated force, reliable slip detection or better task performance.</p>
             <p className="mt-4 max-w-3xl text-soft">For example, an optical fingertip can record how a gel deforms during a grasp. Estimating force from those images needs calibration or a model; evaluating slip recovery also needs a controller and task-level tests.</p>
+            <p className="mt-4 max-w-3xl text-soft">
+              Start with the observation your task needs, then use the <Link href="/sensors#optical-comparison" className="text-accent underline underline-offset-4">GelSight, DIGIT, and TacTip comparison</Link> to examine sensing method, packaging, and the scope of each published evaluation.
+            </p>
             <nav aria-label="Tactile sensing next steps" className="mt-6 flex flex-wrap gap-5 text-accent underline underline-offset-4">
               <Link href="/sensors#optical-comparison">Compare GelSight, DIGIT and TacTip</Link>
               <Link href="/sensors#task-selection">Choose sensors by manipulation task</Link>
@@ -104,6 +141,9 @@ export default function TechnologyPage() {
               </article>
             ))}
           </div>
+          <p className="mt-6 max-w-3xl text-soft">
+            To bring those observations into robot software, follow the <Link href="/guides/ros2-tactile-sensing" className="text-accent underline underline-offset-4">ROS 2 tactile sensing tutorial</Link> for message structure, timestamps, and recording and replay checks.
+          </p>
         </div>
       </section>
 
@@ -151,6 +191,9 @@ export default function TechnologyPage() {
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
             <p className="text-soft text-xs uppercase tracking-[0.14em]">Fit criteria</p>
             <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">What must be validated before making claims</h2>
+            <p className="mt-4 max-w-3xl text-soft">
+              If you plan to train a model, check the <Link href="/datasets" className="text-accent underline underline-offset-4">tactile dataset directory</Link> for sensor type, recorded modalities, access terms, and evaluation splits before choosing data for your hardware.
+            </p>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {fitCriteria.map((item) => (
                 <article key={item.title} className="rounded-2xl border border-white/8 bg-[#0d1016] p-5">
@@ -189,6 +232,52 @@ export default function TechnologyPage() {
                 Read tactile AI FAQ {'->'}
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20" aria-labelledby="tactile-sensing-limitations">
+        <div className="container-shell">
+          <span className="eyebrow">Evidence boundaries</span>
+          <h2 id="tactile-sensing-limitations" className="mt-4 text-3xl font-bold text-white md:text-4xl">Challenges &amp; Limitations</h2>
+          <p className="mt-4 max-w-3xl text-soft">These limitations come from specific sensor studies and robot software documentation. Their severity depends on the hardware, contact conditions, and task; they are not a universal ranking of tactile technologies.</p>
+          <div className="mt-7 grid gap-5 md:grid-cols-2">
+            <article className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white">Contact is local and can disturb the object</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">A tactile observation covers the surface currently touching the sensor. Gathering more geometry requires movement, and probing can shift an unrestrained object. Active tactile exploration therefore has to reason about both what remains unknown and how the next action changes the scene.</p>
+              <p className="mt-4 text-sm"><a href="https://arxiv.org/html/2510.13595v1" className="text-accent underline underline-offset-4">Source: Active Tactile Exploration, introduction</a></p>
+            </article>
+            <article className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white">Soft sensing surfaces wear and vary between units</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">The DIGIT paper identifies wear of optical sensor elastomers and manufacturing variation as practical limits. Its design improves durability and replacement, but does not establish a lifetime for every application. A replacement surface may require recalibration or retraining before its readings are comparable.</p>
+              <p className="mt-4 text-sm"><a href="https://arxiv.org/html/2005.14679v1" className="text-accent underline underline-offset-4">Source: DIGIT, sensor design and elastomer evaluation</a></p>
+            </article>
+            <article className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white">Force estimates depend on a calibrated mapping</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">DenseTact 2.0 estimates shape and six-axis wrench from images using a learned model and calibrates new fingertips through transfer learning. That result supports a particular calibrated system; it does not make every optical tactile image a force measurement. Check the calibration data and held-out conditions for the output you need.</p>
+              <p className="mt-4 text-sm"><a href="https://arxiv.org/abs/2209.10122v2" className="text-accent underline underline-offset-4">Source: DenseTact 2.0</a></p>
+            </article>
+            <article className="glass-card p-6">
+              <h3 className="text-xl font-semibold text-white">Transport settings affect usable feedback</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">ROS 2 documents that incompatible Quality of Service profiles can prevent messages from arriving. Best-effort delivery may lose samples, while reliable delivery may retry them. A sensor stream therefore needs delivery and freshness checks before it becomes a controller input.</p>
+              <p className="mt-4 text-sm"><a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" className="text-accent underline underline-offset-4">Source: ROS 2 Jazzy Quality of Service documentation</a></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-20" aria-labelledby="tactile-sensing-faq">
+        <div className="container-shell">
+          <span className="eyebrow">Common questions</span>
+          <h2 id="tactile-sensing-faq" className="mt-4 text-3xl font-bold text-white md:text-4xl">Tactile sensing FAQ</h2>
+          <div className="mt-7 space-y-4">
+            {technologyFaqs.map((item) => (
+              <article key={item.question} className="glass-card p-6 md:p-7">
+                <h3 className="text-xl font-semibold text-white">{item.question}</h3>
+                <p className="mt-3 max-w-4xl text-sm leading-relaxed text-soft">{item.answer}</p>
+                <p className="mt-4 text-sm"><a href={item.source.href} className="text-accent underline underline-offset-4">{item.source.label}</a></p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
