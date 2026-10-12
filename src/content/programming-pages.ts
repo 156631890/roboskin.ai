@@ -1,3 +1,4 @@
+import { icraTutorialSection, tactileSources } from '@/content/tactile-topic-additions';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 
 export type ProgrammingSection = Omit<SeoTopicPage['sections'][number], 'links'> & {
@@ -109,9 +110,9 @@ export const roboticsProgramming: ProgrammingPage = {
 export const ros2Tutorial: ProgrammingPage = {
   path: '/guides/ros2-tactile-sensing', title: 'ROS 2 Tactile Sensing: Publish, Inspect, Record & Replay',
   h1: 'ROS 2 tactile sensing: from synthetic messages to replay',
-  description: 'Build the RoboSkin ROS 2 starter kit, inspect normalized tactile arrays and use rosbag2 to record and replay. Includes verified source references and explicit runtime limits.',
+  description: 'Follow a source-checked ROS 2 tactile message and replay workflow. Explore an ICRA hardware tutorial, with runtime and compatibility limits stated.',
   kicker: 'ROS 2 tutorial', intent: 'An executable, version-scoped tactile message and recording walkthrough.',
-  updated: '2026-09-16', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  updated: '2026-10-12', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data'],
   verification: 'Source checked at 7bf81d2 on 2026-09-16. Four contract tests and Python compilation passed locally. Upstream Lyrical CI built the packages and inspected the interface. Launch, live messages, recording and replay were not executed in this Windows environment, which has no ROS 2 installation or Linux runtime.',
   quickAnswer: ['Publish a deterministic synthetic array, inspect its contract, record one topic and replay it with the publisher stopped. No robot, hardware driver or actuator command is involved.'],
@@ -192,6 +193,7 @@ export const ros2Tutorial: ProgrammingPage = {
         ['Replay appears to contain extra frames', 'Stop the live publisher before playback and check for other publishers on the same topic.'],
       ] },
     },
+    icraTutorialSection,
   ],
   faqs: [
     { question: 'Is this a hardware driver or standard message?', answer: 'No. It is an Apache-2.0 experimental message and synthetic publisher. Hardware acquisition, calibration, compatibility and actuator control have not been implemented or verified by this tutorial.' },
@@ -199,7 +201,7 @@ export const ros2Tutorial: ProgrammingPage = {
     { question: 'How do I inspect data before learning ROS 2?', answer: 'Use the Python tactile data exercise. It has independent synthetic time-series data, explicit validity checks and actual generated results, without a ROS dependency.' },
   ],
   relatedLinks: [overview, pythonPractice, { label: 'Dataset reproduction evidence', href: '/datasets#availability-analysis', description: 'Check access, licenses and splits before choosing training data.' }, { label: 'RoboSkin ROS 2 starter kit', href: kit, description: 'Open the Apache-2.0 code and its source history.' }],
-  sources: [{ label: 'Pinned starter-kit source', href: `${kit}/tree/${starterKitCommit}` }, { label: 'Upstream build and interface check', href: `${kit}/actions/runs/32648006098` }],
+  sources: [tactileSources.tutorial, { label: 'Pinned starter-kit source', href: `${kit}/tree/${starterKitCommit}` }, { label: 'Upstream build and interface check', href: `${kit}/actions/runs/32648006098` }],
 };
 
 export const pythonTactileTutorial: ProgrammingPage = {

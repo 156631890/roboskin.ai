@@ -1,3 +1,5 @@
+import TactileTopicSections from '@/components/TactileTopicSections';
+import { surgicalRoboticsSection } from '@/content/tactile-topic-additions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -95,6 +97,7 @@ export default function ApplicationsPage() {
             </div>
           </div>
           <PageHeroVisual visual={pageVisuals.applications} className="mt-10" priority />
+          <p className="mt-5 text-sm text-soft">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added surgical tactile sensing studies and their experimental limits.</p>
         </div>
       </section>
 
@@ -108,6 +111,8 @@ export default function ApplicationsPage() {
           ))}
         </div>
       </section>
+
+      <TactileTopicSections sections={[surgicalRoboticsSection]} />
 
       <section className="pb-20">
         <div className="container-shell">
