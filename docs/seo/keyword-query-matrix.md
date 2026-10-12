@@ -91,3 +91,17 @@ Do not create separate synonym pages for `humanoid robotics`, `robotic manipulat
 3. Record whether answer engines cite the homepage, `/ai-robotics`, `/physical-ai`, or a guide page.
 4. Change one thing at a time: internal link, heading evidence, title/meta, or new content.
 5. Wait at least one full crawl cycle before making another change to the same URL.
+
+
+## 2026-10-12 tactile long-tail content batch
+
+English-language search observations are exploratory and not a country-controlled ranking survey. No search volume, difficulty score or GSC baseline was available for this batch; low competition is not established.
+
+| Query | Primary URL | Supporting URL | Distinct intent / measurement |
+| --- | --- | --- | --- |
+| how to choose a tactile sensor | `/guides/how-to-choose-a-tactile-sensor` | `/guides/tactile-sensor-for-robots`, `/sensors` | Decision workflow and acceptance worksheet. Existing guide remains the sensor-output overview. Compare query-to-page impressions and worksheet engagement after publication. |
+| tactile sensing minimally invasive surgery | `/applications#surgical-robotics` | `/guides/how-to-choose-a-tactile-sensor#special-cases` | Optical palpation versus magnetic force sensing, with study limits. Measure the parent page in GSC; fragments are not separate indexed URLs. |
+| tactile super-resolution explained | `/technology#tactile-super-resolution` | `/research/tacprint-wearable-tactile-contact-reproduction-2026` | Explain inferred contact detail, physical pitch and evaluation. Monitor the technology URL for relevant queries. |
+| magnet-based tactile skin explained | `/e-skin#magnet-based-tactile-skin` | `/sensors/reskin`, `/technology#tactile-super-resolution` | Explain the deformation-to-field-to-estimate path. Monitor e-skin queries without creating a duplicate magnetic-skin page. |
+
+Recheck on 2026-10-26 for discovery and query matching if published by 2026-10-12. Assess the first complete 28 days after actual publication against the previous complete 28 days with identical country/device/search-type filters. If impressions are sparse, extend the observation period. Do not interpret average position across changing queries as a causal effect of this batch. These are manual review dates, not scheduled automations.

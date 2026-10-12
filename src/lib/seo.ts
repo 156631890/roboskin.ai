@@ -72,7 +72,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin Applications: Hands, Grippers & Body Surfaces',
     description:
       'Explore tactile sensing by robot surface: dexterous hands, gripper pads, soft bodies, and distributed skin. Compare contact signals and evaluation needs.',
-    updated: '2026-09-22',
+    updated: '2026-10-12',
     priority: 0.82,
     changeFrequency: 'weekly',
     index: true,
@@ -105,7 +105,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Tactile Robotics Resources: Guides, Sensors & Datasets',
     description:
       'Find tactile robotics guides by task: learn the basics, compare sensors, select datasets and models, or build Python and ROS 2 processing workflows.',
-    updated: '2026-09-22',
+    updated: '2026-10-12',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,

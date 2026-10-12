@@ -1,0 +1,13 @@
+requirement,application_target,candidate_evidence,test_protocol,measured_result,decision,source_or_record
+Contact decision and robot action,,,,,,
+Contact geometry and active area,,,,,,
+Force or pressure range and units,,,,,,
+Raw output versus inferred quantity,,,,,,
+Spatial sampling versus localization error,,,,,,
+Contact-to-response delay and variation,,,,,,
+Calibration and remounting repeatability,,,,,,
+Wear and replacement procedure,,,,,,
+SDK access license and recorded data,,,,,,
+Task success and trial count,,,,,,
+Damage failures and human interventions,,,,,,
+Total integration cost and current quote,,,,,,

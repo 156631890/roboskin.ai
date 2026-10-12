@@ -1,3 +1,5 @@
+import TactileTopicSections from '@/components/TactileTopicSections';
+import { robotechWatchSection } from '@/content/tactile-topic-additions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -102,6 +104,8 @@ export default function ResourcesPage() {
           ))}
         </div>
       </section>
+
+      <TactileTopicSections sections={[robotechWatchSection]} />
 
       <section className="pb-20">
         <div className="container-shell">

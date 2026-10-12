@@ -1,3 +1,5 @@
+import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
+import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { programmingPages } from '@/content/programming-pages';
@@ -53,6 +55,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  tactileSelectionGuide,
   ...sensorDetailPages,
   ...sensorComparisonPages,
   ...programmingPages,
@@ -840,7 +843,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 12, 2026: added EIT and iontronic sensing distinctions, source-bounded limitations, FAQs and practical reading routes.',
+    revisionNote: 'October 12, 2026: added magnetic skin, eLuminator, EIT and iontronic sensing distinctions, source-bounded limitations and practical reading routes.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
@@ -859,6 +862,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       'E-skin becomes robot skin when the surface is designed, mounted, interpreted, and validated for robot use.',
     ],
     sections: [
+      ...eSkinAdditions,
       {
         heading: 'What e-skin is designed to do',
         body: [
@@ -979,6 +983,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'How does magnet-based tactile skin work?', answer: 'Contact deforms a magnetic interface, changing the field measured by sensors below it. Calibration or a learned mapping estimates the contact property. Check the exact geometry and validated outputs; field readings are not automatically force measurements.', sources: [tactileSources.lattice, { label: 'ReSkin author project', href: 'https://reskin.dev/' }] },
       {
         question: 'What does e-skin stand for?',
         answer: 'E-skin stands for electronic skin, a flexible sensor layer that can measure contact-related or surface-related signals.',
@@ -1027,6 +1032,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Glossary', href: '/glossary', description: 'Definitions for robot skin, tactile AI, and e-skin terms.' },
     ],
     sources: [
+      tactileSources.lattice,
+      tactileSources.eluminator,
+      { label: 'ReSkin author project', href: 'https://reskin.dev/' },
       { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
       { label: 'npj Flexible Electronics origami e-skin article', href: 'https://www.nature.com/articles/s41528-026-00563-3' },
       { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
@@ -1748,13 +1756,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-sensor-for-robots',
-    title: 'Tactile Sensor for Robots: Selection and Evaluation Guide',
+    title: 'Tactile Sensor for Robots: Outputs & Evaluation',
     description:
       'A tactile sensor for robots measures pressure, force, slip, strain, or contact maps. Compare sensors for robot hands, grippers, and robot skin.',
     h1: 'Tactile sensor for robots',
     kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
-    updated: '2026-09-22',
+    updated: '2026-10-12',
     priority: 0.8,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1851,6 +1859,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     relatedLinks: [
+      { label: 'How to choose a tactile sensor', href: '/guides/how-to-choose-a-tactile-sensor', description: 'Follow a decision workflow and download an acceptance worksheet.' },
       { label: 'Robot skin', href: '/robot-skin', description: 'The integrated surface system.' },
       { label: 'Flexible tactile sensor array', href: '/guides/flexible-tactile-sensor-array', description: 'Array-level sensing tradeoffs.' },
       { label: 'Robot gripper tactile sensor', href: '/applications/robot-gripper-tactile-sensor', description: 'Gripper-specific evaluation.' },

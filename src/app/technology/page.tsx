@@ -1,3 +1,5 @@
+import TactileTopicSections from '@/components/TactileTopicSections';
+import { technologyAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -8,6 +10,7 @@ import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonL
 export const metadata: Metadata = buildPageMetadata('/technology');
 
 const technologyFaqs = [
+  { question: 'What is tactile super-resolution?', answer: 'It estimates contact details finer than the spacing of physical sensing elements by using the joint response of neighboring sensors and a calibrated model. A larger output map alone does not prove finer physical resolution.', source: tactileSources.lattice },
   {
     question: 'What does a tactile sensor actually measure?',
     answer:
@@ -73,7 +76,7 @@ export default function TechnologyPage() {
             vibration or changes in an optical image. The available measurements depend on the sensor and its calibration.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
-          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added source-linked limitations, five FAQs and reading routes from sensor selection to data and ROS integration.</p>
+          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added sensing-mechanism comparisons, tactile super-resolution, source-linked limitations and selection-to-integration reading routes.</p>
         </div>
       </section>
 
@@ -90,6 +93,7 @@ export default function TechnologyPage() {
             <nav aria-label="Tactile sensing next steps" className="mt-6 flex flex-wrap gap-5 text-accent underline underline-offset-4">
               <Link href="/sensors#optical-comparison">Compare GelSight, DIGIT and TacTip</Link>
               <Link href="/sensors#task-selection">Choose sensors by manipulation task</Link>
+              <Link href="/guides/how-to-choose-a-tactile-sensor">Follow the sensor selection checklist</Link>
               <Link href="/datasets">Find visuo-tactile datasets</Link>
               <Link href="/guides/robot-skin-vs-e-skin">Robot skin vs e-skin</Link>
             </nav>
@@ -97,6 +101,8 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
+
+      <TactileTopicSections sections={technologyAdditions} />
 
       <section className="pb-20">
         <div className="container-shell grid gap-6 lg:grid-cols-2">
