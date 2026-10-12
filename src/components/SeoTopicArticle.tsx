@@ -55,12 +55,13 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               <p className="section-label">{page.kicker}</p>
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
-              {page.schemaType === 'TechArticle' ? (
+              {page.schemaType === 'TechArticle' || page.revisionNote ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   {page.published ? <>Published <time dateTime={page.published}>{page.published}</time> | </> : null}
                   Updated <time dateTime={page.updated}>{page.updated}</time> by <Link href={site.editorial.path} rel="author" className="underline underline-offset-4">{site.editorial.name}</Link>
                 </p>
               ) : null}
+              {page.revisionNote ? <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{page.revisionNote}</p> : null}
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link href={leadHref ?? (leadContent ? '#dataset-explorer' : '#quick-answer')} className="btn-primary w-full sm:w-auto">
                   {leadLabel ?? (leadContent ? 'Find and compare datasets' : 'Read the short answer')}
@@ -144,6 +145,11 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                     {section.body.map((paragraph) => (
                       <p key={paragraph} className="text-sm leading-relaxed text-[#c8d1de]">
                         {paragraph}
+                      </p>
+                    ))}
+                    {section.contextLinks?.map((link) => (
+                      <p key={link.href} className="text-sm leading-relaxed text-[#c8d1de]">
+                        {link.before}<Link href={link.href} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link>{link.after}
                       </p>
                     ))}
                   </div>
@@ -261,7 +267,12 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                 <section key={faq.question} className="grid gap-5 border-b border-white/8 p-5 last:border-b-0 md:grid-cols-[80px_0.42fr_1fr] md:p-7">
                   <span className="font-mono text-sm font-semibold text-[#ff6b3d]">{String(index + 1).padStart(2, '0')}</span>
                   <h3 className="text-xl font-semibold text-white">{faq.question}</h3>
-                  <p className="text-sm leading-relaxed text-[#c8d1de]">{faq.answer}</p>
+                  <div className="text-sm leading-relaxed text-[#c8d1de]">
+                    <p>{faq.answer}</p>
+                    {faq.sources?.length ? <ul aria-label="Answer sources" className="mt-3 space-y-2">{faq.sources.map((source) => (
+                      <li key={source.href}><a href={source.href} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{source.label}</a></li>
+                    ))}</ul> : null}
+                  </div>
                 </section>
               ))}
             </div>

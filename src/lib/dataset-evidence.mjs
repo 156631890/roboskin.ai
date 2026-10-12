@@ -1,6 +1,24 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.09.19', compiledAt: '2026-09-19', scope: 'Current RoboSkin tactile directory only; not an industry census.' };
+export const datasetAudit = { version: 'v2026.10.12', compiledAt: '2026-10-12', scope: 'Current RoboSkin tactile directory only; not an industry census. Access dates are per record; adding a record does not recheck older entries.' };
 export const datasetAccessEvidence = {
+  'romi-2k': {
+    access: 'announced',
+    accessCheckedAt: '2026-10-12',
+    licenseStatus: 'unknown',
+    dataLicense: 'Unknown: no dataset-specific terms identified. The Apache-2.0 text in a model subdirectory does not license the dataset.',
+    publicFileScale: 'Complete ROMI-2K data files not confirmed. The reviewed Hugging Face manifest lists model files; the GitHub tree contains one recorded demo scene.',
+    verificationScope: 'Paper v2, official card, Hugging Face manifest and complete GitHub tree inspected. Coming-soon text conflicts with a checked README release item. No complete payload download, inference, training or hardware run.',
+    splitStatus: 'protocol-described',
+    splitDetails: 'Paper reports 400 training and 100 test tabletop scenes, with 56 additional unseen test objects. Released file-level split membership and leakage are unverified.',
+    formatStatus: 'described',
+    formatDetails: 'Visual, optical tactile and audio interactions; force/torque only in robotic tabletop collection. Full archive schema and completeness unverified.',
+    revision: '3069e802f83de142ad034964c3cd48779cd1e387',
+    sources: [
+      'https://huggingface.co/datasets/GeWu-Lab/ROMA/tree/3069e802f83de142ad034964c3cd48779cd1e387',
+      'https://github.com/GeWu-Lab/ROMA/tree/b016abf1ab8ef782ffe37f19b8094f447965daf1',
+      'https://arxiv.org/html/2610.06955v2',
+    ],
+  },
   "bench2dex": {
   "access": "public-files",
   "accessCheckedAt": "2026-09-18",

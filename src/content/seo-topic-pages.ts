@@ -12,6 +12,7 @@ export type SeoTopicPage = {
   intent: string;
   published?: string;
   updated: string;
+  revisionNote?: string;
   priority: number;
   changeFrequency: 'weekly' | 'monthly';
   schemaType: 'WebPage' | 'TechArticle' | 'DefinedTerm';
@@ -26,6 +27,7 @@ export type SeoTopicPage = {
     id?: string;
     heading: string;
     body: string[];
+    contextLinks?: { before: string; label: string; href: string; after: string }[];
     bullets?: string[];
     links?: { label: string; href: string; download?: boolean }[];
     table?: {
@@ -36,6 +38,7 @@ export type SeoTopicPage = {
   faqs: {
     question: string;
     answer: string;
+    sources?: { label: string; href: string }[];
   }[];
   relatedLinks: {
     label: string;
@@ -837,13 +840,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
+    revisionNote: 'October 12, 2026: added EIT and iontronic sensing distinctions, source-bounded limitations, FAQs and practical reading routes.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: '2026-07-21',
+    updated: "2026-10-12",
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -867,12 +871,28 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Potential use on robot hands, prosthetics, soft grippers, and body covers',
           'Calibration and packaging requirements that change by robot geometry',
         ],
+        contextLinks: [
+          {
+            "before": "For the measurement principles behind a sensing surface, start with ",
+            "label": "what tactile sensing measures",
+            "href": "/technology",
+            "after": " and distinguish the raw signal from inferred contact properties."
+          }
+        ],
       },
       {
         heading: 'E-skin versus robot skin',
         body: [
           'E-skin is a material and sensing category. Robot skin is the robot-facing application of that category. A lab e-skin sample may be impressive without being ready for a robot hand or arm.',
           'When evaluating e-skin for a robot, ask how it is mounted, how the signal is read, what data rate is available, how drift is handled, and what robot behavior uses the data.',
+        ],
+        contextLinks: [
+          {
+            "before": "When choosing between flexible coverage and optical fingertips, use the ",
+            "label": "tactile sensor comparison",
+            "href": "/sensors#optical-comparison",
+            "after": " to frame the task and mounting requirements before comparing numbers."
+          }
         ],
       },
       {
@@ -881,6 +901,81 @@ export const seoTopicPages: SeoTopicPage[] = [
           'E-skin research is useful for soft robotic skin, prosthetic feedback, large-area tactile arrays, humanoid robot hands, wearable sensing, and human-robot interaction surfaces.',
           'The best source-backed pages separate what a paper demonstrates from what readers should not infer. A research prototype is not automatically a deployable robot skin system.',
         ],
+        contextLinks: [
+          {
+            "before": "Check the ",
+            "label": "tactile dataset directory",
+            "href": "/datasets",
+            "after": " for sensor and modality matches; an image-based dataset is not automatically compatible with an electrical skin readout."
+          }
+        ],
+      },
+      {
+        "id": "eit-tactile-skin",
+        "heading": "EIT tactile skin: reconstructing contact from boundary measurements",
+        "body": [
+          "Electrical impedance tomography (EIT) tactile skin injects current through electrodes and measures boundary voltages to infer conductivity changes inside a sensing surface. The reviewed EIT study uses this inverse reconstruction to localize touch on a deformable skin rather than reading a separate sensor at every contact location.",
+          "In that study, bending and touch can both change the electrical measurements. Reconstruction therefore depends on assumptions about deformation and the reference state; the method does not make geometry or calibration irrelevant."
+        ],
+        "contextLinks": [
+          {
+            "before": "Compare this readout architecture with ",
+            "label": "iontronic e-skin",
+            "href": "/e-skin#iontronic-e-skin",
+            "after": ": EIT describes how measurements reconstruct a field, while iontronic sensing describes a transduction mechanism. The categories need not be mutually exclusive."
+          }
+        ],
+        "links": [
+          {
+            "label": "EIT tactile skin study (v1): reconstruction, bending and localization limits",
+            "href": "https://arxiv.org/html/2503.13048v1"
+          }
+        ]
+      },
+      {
+        "id": "iontronic-e-skin",
+        "heading": "Iontronic e-skin: sensing through ionic interfaces",
+        "body": [
+          "The cited iontronic e-skin study uses electric-double-layer capacitance at an electrode–ionic-material interface. Contact changes the interfacial response, providing a capacitive readout of mechanical interaction. Its reported device behavior belongs to its materials, geometry and experimental protocol.",
+          "The presence of ionic material alone does not identify the readout as an electric-double-layer capacitive sensor. The electrodes, excitation, measured quantity and reconstruction method must be specified."
+        ],
+        "contextLinks": [
+          {
+            "before": "Return to ",
+            "label": "EIT tactile skin",
+            "href": "/e-skin#eit-tactile-skin",
+            "after": " to compare boundary-voltage reconstruction with the interface-based capacitive mechanism."
+          }
+        ],
+        "links": [
+          {
+            "label": "Iontronic e-skin study: electric-double-layer capacitive sensing",
+            "href": "https://www.nature.com/articles/s41467-026-73736-3"
+          }
+        ]
+      },
+      {
+        "id": "challenges-and-limitations",
+        "heading": "Challenges & Limitations",
+        "body": [
+          "Deformation and touch can be coupled. The cited EIT study describes both bending and contact changing the electrical response, so a reconstruction must account for geometry rather than attribute every change to a new touch.",
+          "Inverse reconstruction is sensitive to measurement error. The EIT paper describes an ill-posed inverse problem in which small changes in boundary measurements can produce substantial changes in the reconstructed field; regularization and calibration assumptions matter.",
+          "Localization is not uniform across the surface. The same study reports poorer localization away from electrodes. A single spatial-resolution number should not be assumed to hold across an entire skin or a different electrode layout."
+        ],
+        "contextLinks": [
+          {
+            "before": "When exporting skin measurements to robot software, follow the ",
+            "label": "ROS 2 tactile data-contract tutorial",
+            "href": "/guides/ros2-tactile-sensing",
+            "after": " to preserve units, geometry, timestamps and validity. Its synthetic example does not validate an EIT or iontronic device."
+          }
+        ],
+        "links": [
+          {
+            "label": "EIT tactile skin study (v1): reconstruction, bending and localization limits",
+            "href": "https://arxiv.org/html/2503.13048v1"
+          }
+        ]
       },
     ],
     faqs: [
@@ -898,6 +993,30 @@ export const seoTopicPages: SeoTopicPage[] = [
         answer:
           'They should cite the original paper or public source, then clearly separate reported claims from RoboSkin.ai analysis or application context.',
       },
+      {
+        "question": "What is EIT tactile skin?",
+        "answer": "It uses electrical impedance tomography: injected current and boundary-voltage measurements are used to reconstruct changes within a sensing surface. In the cited study, touch localization depends on deformation, measurement quality and electrode layout.",
+        "sources": [
+          {
+            "label": "EIT tactile skin study (v1): reconstruction, bending and localization limits",
+            "href": "https://arxiv.org/html/2503.13048v1"
+          }
+        ]
+      },
+      {
+        "question": "Is EIT tactile skin the same as iontronic e-skin?",
+        "answer": "No single equivalence is justified. EIT names a measurement and reconstruction architecture. The cited iontronic device uses electric-double-layer capacitance at ionic interfaces. Materials can overlap, but the readout and transduction mechanism must be checked separately.",
+        "sources": [
+          {
+            "label": "EIT tactile skin study (v1): reconstruction, bending and localization limits",
+            "href": "https://arxiv.org/html/2503.13048v1"
+          },
+          {
+            "label": "Iontronic e-skin study: electric-double-layer capacitive sensing",
+            "href": "https://www.nature.com/articles/s41467-026-73736-3"
+          }
+        ]
+      },
     ],
     relatedLinks: [
       { label: 'Robot skin', href: '/robot-skin', description: 'Robot-facing framing for tactile surfaces.' },
@@ -911,6 +1030,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Nature Communications spiking touch e-skin article', href: 'https://www.nature.com/articles/s41467-026-68858-7' },
       { label: 'npj Flexible Electronics origami e-skin article', href: 'https://www.nature.com/articles/s41528-026-00563-3' },
       { label: 'University of Cambridge single-material robotic skin report', href: 'https://www.cam.ac.uk/stories/robotic-skin' },
+      {
+        "label": "EIT tactile skin study (v1): reconstruction, bending and localization limits",
+        "href": "https://arxiv.org/html/2503.13048v1"
+      },
+      {
+        "label": "Iontronic e-skin study: electric-double-layer capacitive sensing",
+        "href": "https://www.nature.com/articles/s41467-026-73736-3"
+      },
     ],
   },
   {
@@ -1293,13 +1420,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/physical-ai-touch',
+    revisionNote: 'October 12, 2026: added active sensing, its experimental boundaries, ROMI-2K context, FAQs and practical reading routes.',
     title: 'Physical AI & Touch: Tactile Sensing for Embodied Systems',
     description:
       'Touch grounds Physical AI in real contact. Learn how tactile sensing combines with vision, language, proprioception, world models, robot learning, and control.',
     h1: 'Physical AI and touch',
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: '2026-08-22',
+    updated: "2026-10-12",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1323,6 +1451,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Task evaluation through replayable tactile logs',
           'Feedback loops for manipulation and robot learning',
         ],
+        contextLinks: [
+          {
+            "before": "Use the ",
+            "label": "tactile sensing definition",
+            "href": "/technology",
+            "after": " to separate directly measured contact signals from physical properties inferred by a model."
+          }
+        ],
       },
       {
         heading: 'What makes touch data useful',
@@ -1337,6 +1473,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Robot skin is one way to collect touch data at the surface. A tactile sensor array, soft skin, fingertip pad, or full-hand skin can all produce contact signals for a Physical AI stack.',
           'The practical connection is the data path from contact event and calibration through timestamps, robot state, control, and task-level evaluation.',
         ],
+        contextLinks: [
+          {
+            "before": "Choose the physical input with the ",
+            "label": "GelSight versus DIGIT comparison",
+            "href": "/guides/gelsight-vs-digit",
+            "after": " before deciding which sensing assumptions a model must support."
+          }
+        ],
       },
       {
         heading: 'Touch data pipeline for embodied AI',
@@ -1349,6 +1493,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Align: synchronize tactile data with joint state, vision, commands, and task phase',
           'Store: retain calibration metadata, sensor location, units, sampling rate, and failure notes',
           'Use: expose features for grasp control, safety checks, replay diagnostics, or learning systems',
+        ],
+        contextLinks: [
+          {
+            "before": "Practice the observation-to-log path with the ",
+            "label": "ROS 2 tactile sensing tutorial",
+            "href": "/guides/ros2-tactile-sensing",
+            "after": "; its publish, inspect, record and replay steps use synthetic data and document the boundary of verification."
+          }
         ],
       },
       {
@@ -1372,6 +1524,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'A VLA policy can connect visual observations and language goals to robot actions, but touch may require a faster feedback pathway than semantic planning. TouchWorld, for example, separates higher-level planning and tactile subgoal prediction from high-frequency tactile residual correction. That architecture is one research result, not a universal prescription.',
           'Visuo-tactile world models predict possible visual and contact futures under candidate actions. Their value must be tested twice: whether the predicted tactile state is physically informative, and whether using that prediction improves planning or control on the real robot. Offline image similarity alone is not a Physical AI benchmark.',
         ],
+        contextLinks: [
+          {
+            "before": "Compare reusable encoders, prediction and policy roles in the ",
+            "label": "tactile foundation model guide",
+            "href": "/tactile-foundation-models",
+            "after": " before assigning a model to the control loop."
+          }
+        ],
       },
       {
         heading: 'Minimum evidence for embodied tactile intelligence',
@@ -1384,6 +1544,56 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Failures under occlusion, slip, misalignment, force mismatch, and external disturbance',
           'Replayable logs that preserve observation, action, prediction, measured touch, and outcome',
         ],
+      },
+      {
+        "id": "active-sensing",
+        "heading": "Active sensing: choosing the next touch",
+        "body": [
+          "Active tactile sensing selects an action to obtain useful information, rather than only reacting to a contact already made. In the cited active-exploration study, Gordon and colleagues select exploratory motions using expected information gain while jointly estimating object pose and shape.",
+          "A probe can also move the object. The sensing policy must therefore account for disturbance as well as information. This implementation assumes convex rigid geometry and reports difficulty detecting light touches; it does not establish unrestricted transfer to deformable objects.",
+          "ROMA offers a separate object-centric example using predefined interactions and multisensory evidence. Its ROMI-2K training resource and ROMA Bench evaluation are distinct artifacts. They should not be conflated with a general manipulation policy or a complete released dataset."
+        ],
+        "contextLinks": [
+          {
+            "before": "Inspect the modality and access boundaries in the ",
+            "label": "ROMI-2K dataset record",
+            "href": "/datasets#dataset-romi-2k",
+            "after": " before planning an active-perception experiment."
+          }
+        ],
+        "links": [
+          {
+            "label": "Gordon et al., Active Tactile Exploration (v1): method and limitations",
+            "href": "https://arxiv.org/html/2510.13595v1"
+          },
+          {
+            "label": "ROMA and ROMI-2K: paper v2, dataset and collection protocol",
+            "href": "https://arxiv.org/html/2610.06955v2"
+          }
+        ]
+      },
+      {
+        "id": "challenges-and-limitations",
+        "heading": "Challenges & Limitations",
+        "body": [
+          "Local observability: a touch samples only part of an object. The active-exploration study jointly estimates pose and shape across interactions; a single contact does not reveal a complete physical state.",
+          "Exploration changes the scene: the same study explicitly addresses object motion caused by probing. An information-seeking action can invalidate a previous pose estimate, so exploration and state estimation must be evaluated together.",
+          "Geometry and detection assumptions: that implementation uses convex rigid-object models and reports difficulty with very light touches. These are boundaries of its evidence, not proof that the method generalizes to soft, concave or barely contacting objects."
+        ],
+        "links": [
+          {
+            "label": "Gordon et al., Active Tactile Exploration (v1): method and limitations",
+            "href": "https://arxiv.org/html/2510.13595v1"
+          }
+        ],
+        "contextLinks": [
+          {
+            "before": "Compare dataset coverage and splits in the ",
+            "label": "tactile dataset directory",
+            "href": "/datasets",
+            "after": " to test whether the available observations actually support your intended transfer claim."
+          }
+        ]
       },
     ],
     faqs: [
@@ -1401,6 +1611,26 @@ export const seoTopicPages: SeoTopicPage[] = [
         question: 'Why treat Physical AI touch data separately from robot skin?',
         answer:
           'Robot skin describes the sensing surface. Physical AI touch data also includes timing, calibration, alignment, storage, interpretation, and how the signal changes a robot action or evaluation.',
+      },
+      {
+        "question": "What is active tactile sensing?",
+        "answer": "It chooses a movement or contact to reduce uncertainty about the environment. In the cited study, expected information gain guides exploration while pose and shape are estimated together, accounting for the fact that a probe can move the object.",
+        "sources": [
+          {
+            "label": "Gordon et al., Active Tactile Exploration (v1): method and limitations",
+            "href": "https://arxiv.org/html/2510.13595v1"
+          }
+        ]
+      },
+      {
+        "question": "Does an active-perception demonstration prove general robot manipulation?",
+        "answer": "No. The demonstrated sensing actions, object assumptions, hardware and evaluation protocol bound the claim. ROMA, for example, separates object-centric perception from future integration with downstream manipulation policies.",
+        "sources": [
+          {
+            "label": "ROMA and ROMI-2K: paper v2, dataset and collection protocol",
+            "href": "https://arxiv.org/html/2610.06955v2"
+          }
+        ]
       },
     ],
     relatedLinks: [
@@ -1423,6 +1653,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TouchWorld tactile foundation model preprint', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'FeelWorld visuo-tactile world model preprint', href: 'https://arxiv.org/abs/2607.24267' },
       { label: 'UniVTAC simulation, representation, and benchmark preprint', href: 'https://arxiv.org/abs/2602.10093' },
+      {
+        "label": "Gordon et al., Active Tactile Exploration (v1): method and limitations",
+        "href": "https://arxiv.org/html/2510.13595v1"
+      },
+      {
+        "label": "ROMA and ROMI-2K: paper v2, dataset and collection protocol",
+        "href": "https://arxiv.org/html/2610.06955v2"
+      },
     ],
   },
   {
@@ -2564,6 +2802,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
+    revisionNote: 'October 12, 2026: added ROMI-2K with per-record access and license evidence. Older entries retain their own source-review dates.',
     title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
@@ -2571,7 +2810,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: "2026-10-07",
+    updated: "2026-10-12",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2689,6 +2928,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'The entries below are research resources with different goals; they are not interchangeable rows in one leaderboard. Some emphasize tactile-language and material understanding, others whole-hand contact, data collection, humanoid action alignment, or multisensory representation learning.',
           'Before use, open the primary source and project page. Verify the actual downloadable files, license, sensor hardware, collection protocol, annotations, train-test splits, and version. A paper saying that a resource is open does not replace checking the current repository terms.',
         ],
+        contextLinks: [
+          {
+            "before": "If a modality label is unfamiliar, read ",
+            "label": "what tactile sensing measures",
+            "href": "/technology",
+            "after": " before interpreting an image, taxel value or inferred force as interchangeable data."
+          }
+        ],
       },
       {
         heading: 'From a dataset shortlist to a loading plan',
@@ -2702,6 +2949,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Inspect one complete sequence: units, timestamps, coordinate frames, missing values, and action meaning.',
           'Check the official host and dataset-file terms separately from the paper and code licenses.',
           'Record the version and review date; use the directory citation for these notes and cite the original authors for their research.',
+        ],
+        contextLinks: [
+          {
+            "before": "Check optical sensor differences in the ",
+            "label": "GelSight versus DIGIT comparison",
+            "href": "/guides/gelsight-vs-digit",
+            "after": " so preprocessing and calibration choices match the collection hardware."
+          }
         ],
       },
       {
@@ -2781,8 +3036,53 @@ export const seoTopicPages: SeoTopicPage[] = [
             "label": "Plan acquisition and export with teleoperation",
             "href": "/robot-teleoperation"
           }
+        ],
+        contextLinks: [
+          {
+            "before": "For time-aligned acquisition and replay, use the ",
+            "label": "ROS 2 tactile tutorial",
+            "href": "/guides/ros2-tactile-sensing",
+            "after": " and preserve the source dataset’s units and validity semantics when designing an adapter."
+          }
+        ],
+      },
+      {
+        "id": "romi-2k-active-perception",
+        "heading": "ROMI-2K: active perception data and release boundaries",
+        "body": [
+          "ROMI-2K is the object-interaction dataset introduced with ROMA (arXiv:2610.06955). Paper v2 reports 1,657 handheld object–content combinations and 500 robotic tabletop scenes, spanning lift, press, collide, shake, rotate and squeeze interactions. These are different counting units; they must not be added and labeled as unique trajectories or unique objects.",
+          "The handheld Pika Sense subset captures vision, audio and optical touch without a force sensor. The robotic tabletop setup adds a six-axis force/torque sensor. ROMA itself uses mean gravity force as text, so recorded force/torque trajectories and the model’s consumed input are different claims.",
+          "Access checked October 12, 2026: the official Hugging Face card still marks ROMI-2K and ROMA Bench as coming soon. Public checkpoints and one recorded demo scene do not establish a complete dataset release. A checked release item in the GitHub README conflicts with its coming-soon text. No dataset-specific reuse license was identified; a license in a model subdirectory must not be applied to the data."
+        ],
+        "contextLinks": [
+          {
+            "before": "Use the ",
+            "label": "ROMI-2K structured record",
+            "href": "/datasets#dataset-romi-2k",
+            "after": " for collection details and source links; revisit the official card before attempting reuse."
+          },
+          {
+            "before": "Place these interactions in the ",
+            "label": "active sensing explanation",
+            "href": "/physical-ai-touch#active-sensing",
+            "after": " to distinguish information gathering from downstream manipulation."
+          }
+        ],
+        "links": [
+          {
+            "label": "ROMA and ROMI-2K: paper v2, dataset and collection protocol",
+            "href": "https://arxiv.org/html/2610.06955v2"
+          },
+          {
+            "label": "Official ROMA dataset card: current availability and files",
+            "href": "https://huggingface.co/datasets/GeWu-Lab/ROMA"
+          },
+          {
+            "label": "Official ROMA code and release checklist",
+            "href": "https://github.com/GeWu-Lab/ROMA"
+          }
         ]
-      }
+      },
     ],
     faqs: [
       {
@@ -2839,11 +3139,24 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'EgoTouch official Hugging Face repository', href: 'https://huggingface.co/datasets/zhouzhoujy/EgoTouch' },
       { label: 'TacVerse preprint', href: 'https://arxiv.org/abs/2606.25877' },
       { label: 'VTDexManip project page', href: 'https://lqts.github.io/VTDexManip/' },
+      {
+        "label": "ROMA and ROMI-2K: paper v2, dataset and collection protocol",
+        "href": "https://arxiv.org/html/2610.06955v2"
+      },
+      {
+        "label": "ROMA official dataset card and files",
+        "href": "https://huggingface.co/datasets/GeWu-Lab/ROMA"
+      },
+      {
+        "label": "ROMA official repository",
+        "href": "https://github.com/GeWu-Lab/ROMA"
+      },
     ],
     paperBriefIds: ['tacverse-cross-sensor-tactile-dataset-2026', 'prism-contact-rich-industrial-skill-dataset-2026', 'ht-bench-full-hand-tactile-representations-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'humanoid-visual-tactile-action-dataset-2025'],
   },
   {
     path: '/tactile-foundation-models',
+    revisionNote: 'October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
     title: 'Tactile Foundation Models for Robotics',
     description:
       "Compare Sparsh, UniTouch and tactile learning systems by inputs, outputs, downstream tasks and transfer evidence. Separate encoders, world models and policies.",
@@ -2851,7 +3164,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: "2026-10-07",
+    updated: "2026-10-12",
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2868,6 +3181,14 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'A reusable representation compresses raw tactile signals into features for later tasks. A world model predicts how touch may change after an action. A policy converts observations and goals into robot actions. A residual tactile controller makes fast local corrections around a slower plan.',
           'These roles can be combined, but they should not be confused. A model that improves material classification has not automatically demonstrated dexterous control. A policy with high task success has not automatically shown broad transfer across tactile sensors.',
+        ],
+        contextLinks: [
+          {
+            "before": "Start with the ",
+            "label": "tactile sensing definition",
+            "href": "/technology",
+            "after": " to distinguish a physical measurement from the features a model learns."
+          }
         ],
       },
       {
@@ -2960,6 +3281,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Recovery under slip, occlusion, contact uncertainty, and external disturbance',
           'Availability and license for model weights, code, data, and evaluation tasks',
         ],
+        contextLinks: [
+          {
+            "before": "Before transferring an encoder, compare the sensing surfaces in the ",
+            "label": "GelSight versus DIGIT guide",
+            "href": "/guides/gelsight-vs-digit",
+            "after": " and record which hardware assumptions carry into training."
+          }
+        ],
       },
       {
         heading: 'Where TouchWorld fits',
@@ -2968,6 +3297,14 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Those numbers are useful within the paper protocol, not as a general score for all tactile foundation models. The architectural lesson is more portable: semantic task reasoning and high-frequency contact correction operate on different time scales and may need separate pathways.',
           'Its tactile world-model component is first pretrained on EgoTouch and then adapted to robot demonstrations. RoboSkin keeps that training resource separate from the authors’ six-task evaluation protocol so a dataset, model, and benchmark are not collapsed into one claim.',
         ],
+        contextLinks: [
+          {
+            "before": "Check the training-resource side in the ",
+            "label": "tactile dataset directory",
+            "href": "/datasets",
+            "after": "; a training corpus and a robot evaluation protocol answer different questions."
+          }
+        ],
       },
       {
         heading: 'What foundation does not guarantee',
@@ -2975,7 +3312,61 @@ export const seoTopicPages: SeoTopicPage[] = [
           'The word foundation does not guarantee sensor independence, zero-shot robot transfer, safe contact, low latency, public weights, or production readiness. Each of those needs separate evidence. A large pretraining corpus can still contain split leakage or narrow sensor coverage.',
           'For deployment, treat the model as one layer in a tactile system. The surface, calibration, synchronization, robot state, control loop, failure logging, and task benchmark still determine whether learned touch changes behavior reliably.',
         ],
-      }
+        contextLinks: [
+          {
+            "before": "For the observation interface, use the ",
+            "label": "ROS 2 tactile publishing and replay tutorial",
+            "href": "/guides/ros2-tactile-sensing",
+            "after": " to inspect timestamps, units and validity before connecting a learned model. The tutorial uses synthetic signals."
+          }
+        ],
+      },
+      {
+        "id": "tactile-vs-haptic-foundation-model",
+        "heading": "Tactile foundation model vs haptic foundation model",
+        "body": [
+          "A tactile foundation model usually refers to reusable representations or dynamics learned from touch. Wang, Dong and El Saddik’s The Potential of Haptic Foundation Models proposes a broader haptic foundation model (HFM) framework spanning optical tactile images, force/torque, vibration, thermal feedback, contact sound and interaction trajectories, potentially aligned with vision and language.",
+          "In that proposal, action-coupled sensing and action-conditioned prediction extend the discussion beyond encoding a tactile frame. This is a useful distinction in scope, not a standardized boundary between two disjoint model classes: the paper also describes existing tactile encoders as haptic foundation models.",
+          "The authors explicitly frame the HFM architecture as prospective design objectives. Their benchmark uses frozen encoders and linear readouts for force, slip and relative-pose tasks; it does not establish the full proposed active-perception or predictive framework. HFM here names a research direction, not a newly released universal checkpoint."
+        ],
+        "contextLinks": [
+          {
+            "before": "Use the ",
+            "label": "HFM glossary entry",
+            "href": "/glossary#hfm",
+            "after": " for the short definition, and read active sensing in context before treating a representation as an action policy."
+          }
+        ],
+        "links": [
+          {
+            "label": "Wang et al., The Potential of Haptic Foundation Models (v1)",
+            "href": "https://arxiv.org/html/2608.28664v1"
+          }
+        ]
+      },
+      {
+        "id": "challenges-and-limitations",
+        "heading": "Challenges & Limitations",
+        "body": [
+          "Sensor heterogeneity: the HFM paper identifies incompatible sensing modalities, rates and representations as a challenge. A result for an optical tactile encoder does not demonstrate the same transfer for force arrays, contact audio or a different mounting geometry.",
+          "Benchmark scope: the HFM study freezes pretrained encoders and tests linear readouts on selected TacBench tasks. Those results concern that evaluation setup; they do not validate the proposed complete HFM architecture or unrestricted robot transfer.",
+          "Action and deployment evidence: the same paper treats action-coupled exploration and future haptic-state prediction as design objectives. Neither an embedding score nor the foundation-model label establishes a reliable closed-loop controller, safe contact or real-time execution on a new robot."
+        ],
+        "links": [
+          {
+            "label": "Wang et al., The Potential of Haptic Foundation Models (v1)",
+            "href": "https://arxiv.org/html/2608.28664v1"
+          }
+        ],
+        "contextLinks": [
+          {
+            "before": "Record these boundaries using the ",
+            "label": "research methodology",
+            "href": "/methodology",
+            "after": " so model comparisons keep proposed capabilities separate from demonstrated results."
+          }
+        ]
+      },
     ],
     faqs: [
       {
@@ -2997,6 +3388,16 @@ export const seoTopicPages: SeoTopicPage[] = [
         question: 'Should model comparisons use task success or offline metrics?',
         answer:
           'Use both when possible. Offline metrics diagnose representation or prediction quality; real-robot task success shows whether the tactile pathway changes manipulation under execution noise.',
+      },
+      {
+        "question": "How is a haptic foundation model different from a tactile foundation model?",
+        "answer": "The 2026 HFM paper proposes a broader contact-and-action framework covering heterogeneous haptic signals, active sensing and prediction. The terms overlap in the literature. Its proposed framework goes beyond the frozen-encoder tasks actually benchmarked, so the paper does not establish a new universal HFM checkpoint.",
+        "sources": [
+          {
+            "label": "Wang et al., The Potential of Haptic Foundation Models (v1)",
+            "href": "https://arxiv.org/html/2608.28664v1"
+          }
+        ]
       },
     ],
     relatedLinks: [
@@ -3028,7 +3429,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'TouchWorld tactile foundation model preprint', href: 'https://arxiv.org/abs/2607.07287' },
       { label: 'EgoTouch and TouchAnything preprint', href: 'https://arxiv.org/abs/2605.13083' },
       { label: 'MiTaS multi-resolution tactile imitation learning preprint', href: 'https://arxiv.org/html/2606.06281v1' },
-      { label: 'UniVTAC simulation, encoder, and benchmark preprint', href: 'https://arxiv.org/html/2602.10093v1' }
+      { label: 'UniVTAC simulation, encoder, and benchmark preprint', href: 'https://arxiv.org/html/2602.10093v1' },
+      {
+        "label": "Wang et al., The Potential of Haptic Foundation Models (v1)",
+        "href": "https://arxiv.org/html/2608.28664v1"
+      },
     ],
     paperBriefIds: ['univtac-platform-encoder-benchmark-2026', 'sparsh-x-multisensory-touch-representations-2025', 'dream-tac-tactile-world-action-model-2026', 'mitas-multi-resolution-tactile-imitation-learning-2026'],
   },
