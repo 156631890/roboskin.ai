@@ -3719,7 +3719,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: "2026-10-07",
+    updated: '2026-10-13',
+    revisionNote: 'October 13, 2026: added source-linked comparison limits and contextual routes to sensing definitions, datasets and ROS integration.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3747,6 +3748,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             "GelSight is both a sensing technology name and a manufacturer name. This comparison uses GelSight Mini and the original DIGIT; Digit 360 is a separate device. TacTip is a family of designs, so choose a particular variant before comparing specifications.",
             "This is a source-based selection guide, not a head-to-head hardware test. A camera frame rate is not an end-to-end control rate, and an image is not a calibrated force measurement."
       ],
+      contextLinks: [{ before: 'Start with the ', label: 'tactile sensing definition', href: '/technology', after: ' to distinguish measured signals from inferred geometry, force and contact state before reading these comparisons.' }],
       "table": {
             "headers": [
                   "System",
@@ -3800,6 +3802,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       "body": [
             "Use these task requirements to build a shortlist, then test that shortlist under matching objects, loads, mounts and controller settings. These are evaluation criteria, not measured rankings or claims that a sensor family is always best."
       ],
+      contextLinks: [{ before: 'For a learned estimator or policy, inspect the ', label: 'tactile dataset directory', href: '/datasets', after: ' for matching sensor inputs, task labels, splits and access conditions before committing to a hardware/data pairing.' }],
       "table": {
             "headers": [
                   "Task",
@@ -3881,6 +3884,20 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'challenges-and-limitations',
+        heading: 'Challenges & Limitations',
+        body: [
+          'Maintenance changes the input distribution. The original DIGIT paper identifies elastomer wear and manufacturing variation in optical tactile sensing, including possible recalibration or retraining after replacement. Treat its durability experiment as evidence for the tested gels and abrasion conditions, not a lifetime specification for every optical sensor.',
+          'Image detail does not establish calibrated accuracy. GelSight’s official Mini FAQ distinguishes 2D camera images, derived 3D point clouds and a learned pressure-force mapping, and states that Mini is not a metrology device. Record the sensor, processing model and reference measurements together; camera resolution alone cannot rank force or reconstruction accuracy.',
+          'A nominal stream rate does not establish delivery to a controller. ROS 2 documentation explains that incompatible QoS can block messages and best-effort transport may lose samples. A sensor specification therefore needs a separate acquisition, transport and controller timing check before it can support a closed-loop comparison.',
+        ],
+        links: [
+          { label: 'DIGIT v1: wear, variability and replacement limits', href: 'https://arxiv.org/html/2005.14679v1#S3' },
+          { label: 'GelSight Mini official FAQ: derived outputs and accuracy scope', href: 'https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md' },
+          { label: 'ROS 2 Lyrical: QoS delivery and compatibility', href: 'https://github.com/ros2/ros2_documentation/blob/lyrical/source/ROS-Framework/interfaces/topics/About-Quality-of-Service-Settings.rst' },
+        ],
+      },
+      {
         heading: 'Specifications are not task performance',
         body: [
           'A manufacturer or paper may report frame rate, taxel pitch, force error, or durability under a controlled setup. Those figures describe that configuration. Mounting, protective layers, contact material, robot vibration, preprocessing, inference, and controller timing can change the useful result.',
@@ -3892,6 +3909,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Validate the complete sensor-to-action loop on the target robot. First measure no-contact drift, contact repeatability, saturation, and timing. Then run the real task with touch enabled and disabled, including sensor replacement and disturbed contacts.',
         ],
+        contextLinks: [{ before: 'Use the ', label: 'ROS 2 tactile message and replay tutorial', href: '/guides/ros2-tactile-sensing', after: ' to practice message units, validity and recording semantics before integrating a separately verified hardware acquisition path.' }],
         bullets: [
           'Timestamp stability and end-to-end latency under full robot load',
           'Repeatability across sensor instances, skins, gels, mounts, and days',

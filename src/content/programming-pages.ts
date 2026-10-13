@@ -112,7 +112,8 @@ export const ros2Tutorial: ProgrammingPage = {
   h1: 'ROS 2 tactile sensing: from synthetic messages to replay',
   description: 'Follow a source-checked ROS 2 tactile message and replay workflow. Explore an ICRA hardware tutorial, with runtime and compatibility limits stated.',
   kicker: 'ROS 2 tutorial', intent: 'An executable, version-scoped tactile message and recording walkthrough.',
-  updated: '2026-10-12', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  updated: '2026-10-13', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  revisionNote: 'October 13, 2026: added source-linked limitations on synthetic signals, QoS delivery and timing/geometry. The recorded ROS execution status is unchanged.',
   keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data'],
   verification: 'Source checked at 7bf81d2 on 2026-09-16. Four contract tests and Python compilation passed locally. Upstream Lyrical CI built the packages and inspected the interface. Launch, live messages, recording and replay were not executed in this Windows environment, which has no ROS 2 installation or Linux runtime.',
   quickAnswer: ['Publish a deterministic synthetic array, inspect its contract, record one topic and replay it with the publisher stopped. No robot, hardware driver or actuator command is involved.'],
@@ -178,6 +179,19 @@ export const ros2Tutorial: ProgrammingPage = {
       contextLinks: [{ before: 'When moving from this software exercise to research data, consult the ', label: 'tactile dataset access and reproduction review', href: '/datasets#availability-analysis', after: ' to check actual files, licenses and splits. A working message pipeline does not establish that a paper\'s dataset can be obtained or reproduced.' }],
       code: [{ label: 'Actual local dependency-free test output (duration omitted)', language: 'text', value: 'test_demo_is_explicitly_synthetic_and_normalized ... ok\ntest_message_fields_and_layout_rule_are_published ... ok\ntest_qos_matches_ros_sensor_data_profile_shape ... ok\ntest_sample_frame_is_a_complete_two_by_two_grid ... ok\nRan 4 tests\nOK' }],
       links: [{ label: 'Run the same source contract tests', href: `${kit}/blob/${starterKitCommit}/tests/test_contract.py` }, pythonPractice],
+    },
+    {
+      id: 'challenges-and-limitations', heading: 'Challenges & Limitations',
+      body: [
+        'Synthetic signals cannot validate a sensor. At the pinned starter-kit revision, the publisher constructs its channels from sine and cosine functions and labels every unit normalized. Successful message delivery would test the software contract, not physical pressure, shear calibration, contact detection or hardware compatibility.',
+        'QoS compatibility does not guarantee a complete recording. ROS 2 Lyrical documents that incompatible publisher/subscriber policies can prevent delivery, and that best-effort delivery may lose samples. This publisher uses the sensor-data QoS profile. Inspect the actual publisher, subscriber and rosbag2 settings and message counts before treating a bag as complete evidence.',
+        'Timestamps and grid shape do not supply latency or geometry. The publisher stamps each generated frame with its ROS clock; it does not measure a physical acquisition-to-action path. The message contract requires separate clock/synchronization documentation, taxel positions, calibration and invalid-taxel metadata. Replaying old stamps cannot recover a live latency measurement that was never recorded.',
+      ],
+      links: [
+        { label: 'Pinned publisher: synthetic values, normalized units, timestamp and QoS', href: `${kit}/blob/${starterKitCommit}/src/roboskin_tactile_demo/roboskin_tactile_demo/synthetic_publisher.py` },
+        { label: 'Official Lyrical QoS documentation: reliability, sensor profile and compatibility', href: 'https://github.com/ros2/ros2_documentation/blob/lyrical/source/ROS-Framework/interfaces/topics/About-Quality-of-Service-Settings.rst' },
+        { label: 'Pinned message contract: clocks, geometry and calibration metadata', href: `${kit}/blob/${starterKitCommit}/docs/message-contract.md` },
+      ],
     },
     {
       id: 'troubleshooting', heading: 'Troubleshooting by symptom',

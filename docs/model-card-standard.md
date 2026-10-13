@@ -4,6 +4,36 @@ Standard introduced: 2026-10-12. Applies to editorial records for robot world mo
 
 The public explanation is [/methodology](https://roboskin.ai/methodology). The existing [/editorial-policy](https://roboskin.ai/editorial-policy) remains the policy for attribution, evidence boundaries, automation, independence, and corrections.
 
+## Common eight-field card
+
+Template clarified: 2026-10-13. Use these eight visible fields, in this order, for both world-model and VLA cards and for the future individual pages linked from `/world-models/tracker`. Keep the detailed evidence worksheet below with each record. This compact authoring template does not change the current strict tracker JSON schema.
+
+| Field | Editorial key | Required meaning |
+| --- | --- | --- |
+| Model name | `model_name` | Source-published model and variant; retain its stable ID separately. |
+| Organization | `organizations` | Source-attributed institutions or organizations; do not infer ownership from an author's current employer. |
+| Paper link | `paper_url` | Primary paper URL, preferably with the inspected version; `null` plus a reason if no paper is verified. |
+| Code link | `code_url` | Verified official implementation URL and release status; `null` plus a reason if unknown or unreleased. A project homepage is not a code release. |
+| Datasets | `datasets` | Named training and evaluation datasets, their roles/versions and source URLs; an empty array means not yet documented, not “trained without data.” |
+| Input modalities | `input_modalities` | Actual inference inputs; keep training-only supervision and predicted outputs in separate evidence fields. In particular, tracker `predicts` must never be reused as inputs. |
+| Year | `year` | Four-digit year derived from the first paper submission/publication date, with `year_basis` and source date retained. If there is no paper, use a sourced model announcement and label that basis. Never use the ingestion or review year. |
+| One-sentence summary | `one_sentence_summary` | One original, source-backed sentence stating the model's role, inputs and output or task boundary. No unsupported superlatives or cross-benchmark ranking. |
+
+Blank worksheet (placeholders are not model facts):
+
+```yaml
+model_name: "<published name and variant>"
+organizations: []
+paper_url: null
+code_url: null
+datasets: [] # each item: name, role (training/evaluation), version, source_url
+input_modalities: []
+year: null
+one_sentence_summary: "<one bounded, source-backed sentence>"
+```
+
+Retain supporting metadata alongside the worksheet: stable ID, `year_basis`, source date/version, claim-to-source references, source-review date, code/data access status, and reasons for unknown values. Display unknowns as “Not verified” or the more precise documented status; do not silently omit the visible field. For current records, map name/organizations to identity fields, paper/code to typed source links and artifact records, datasets to training/evaluation evidence, year to the correctly scoped source date, and the summary to a source-checked editorial description. When the current contract lacks a dedicated input-modality or summary field, retain it in the authoring worksheet until the P1 schema migration rather than overloading `predicts` or an evidence-rating `verdict`.
+
 ## Existing data contracts
 
 Preserve stable IDs and public URLs. Use the current types and validators when editing production data; do not paste the full authoring template below into a strict runtime record.
