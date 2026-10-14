@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-14T15:23:04.036Z",
+  "pages": [
+    {
+      "route": "/vla/models",
+      "title": "VLA Model Comparison: Tactile Inputs, Code & Benchmarks | RoboSkin.ai",
+      "h1": "VLA model comparison",
+      "h1Count": 1,
+      "canonical": "https://roboskin.ai/vla/models",
+      "robots": "index, follow",
+      "description": "Filter and sort VLA models by year, open-source status and tactile input. Compare source-linked parameters, training data and benchmark results.",
+      "tableRows": 18,
+      "timelineEntries": 0,
+      "sourceLinks": 173,
+      "hasCoreHtml": true
+    },
+    {
+      "route": "/vla/timeline",
+      "title": "VLA Model Timeline: RT-1 to Tactile Robot Policies | RoboSkin.ai",
+      "h1": "VLA model timeline",
+      "h1Count": 1,
+      "canonical": "https://roboskin.ai/vla/timeline",
+      "robots": "index, follow",
+      "description": "Follow a chronological, paper-linked VLA timeline from RT-1 through open robot policies and tactile extensions, with dates, organizations and significance.",
+      "tableRows": 0,
+      "timelineEntries": 18,
+      "sourceLinks": 72,
+      "hasCoreHtml": true
+    },
+    {
+      "route": "/vla/concepts",
+      "title": "VLA vs VDA vs World Models vs HFM: Robot Model Concepts | RoboSkin.ai",
+      "h1": "VLA vs VDA vs world models vs HFM",
+      "h1Count": 1,
+      "canonical": "https://roboskin.ai/vla/concepts",
+      "robots": "index, follow",
+      "description": "Compare robot model concepts by inputs, outputs and role: VLA, diffusion action policies, world models and haptic foundation models, with primary sources.",
+      "tableRows": 4,
+      "timelineEntries": 0,
+      "sourceLinks": 18,
+      "hasCoreHtml": true
+    }
+  ]
+}

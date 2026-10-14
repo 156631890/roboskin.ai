@@ -3344,6 +3344,12 @@ export const seoTopicPages: SeoTopicPage[] = [
             "label": "HFM glossary entry",
             "href": "/glossary#hfm",
             "after": " for the short definition, and read active sensing in context before treating a representation as an action policy."
+          },
+          {
+            "before": "For policy integration, compare ",
+            "label": "VLA, diffusion action policies, world models and HFM",
+            "href": "/vla/concepts#hfm",
+            "after": " by their inputs, prediction targets and roles in the robot control loop."
           }
         ],
         "links": [
