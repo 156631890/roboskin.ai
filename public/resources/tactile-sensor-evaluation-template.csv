@@ -1,0 +1,4 @@
+task,sensor_model_revision,source_url,evidence_type,objects_surfaces,normal_load,sliding_speed,hand_geometry,controller_training,split,metric_definition,units,trial_count,result,processing_delay,coverage_blind_spots,limitations
+slip detection,,,planned,,,,,,held-out objects,missed events and false alarms plus detection-to-controller delay,,,,,,Define slip onset and match loading conditions before comparing
+dexterous manipulation,,,planned,,,,,,held-out objects and initial poses,task success and drops with trial count,,,,,,Use the same hand and controller and separate trained from unseen objects
+full-hand coverage,,,planned,,,,,,,instrumented area and simultaneous-contact readout,,,,,,Separate physical taxels from pixels and test all modules together

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import ts from 'typescript';
 import * as evidence from '../src/lib/dataset-evidence.mjs';
+import * as selection from '../src/lib/dataset-selection.mjs';
 import { validateDatasetDistributions } from '../scripts/lib/dataset-structured-data.mjs';
 
 function load(file, dependencies = {}) {
@@ -32,12 +33,18 @@ const seo = load('src/lib/seo.ts', {
 
 test('paper-associated candidates stay outside catalog counts and Dataset structured data', async () => {
   const route = load('src/app/datasets.json/route.ts', {
+    '@/lib/dataset-selection.mjs': selection,
     '@/lib/tactile-datasets': records,
     '@/lib/dataset-evidence.mjs': evidence,
   });
   const data = await route.GET().json();
   assert.equal(data.count, data.entries.length);
   assert.equal(data.statistics.total, data.entries.length);
+  for (const entry of data.entries) {
+    assert.ok(entry.selectionGuidance.intendedUse.includes(entry.tasks[0]));
+    assert.ok(entry.selectionGuidance.useLimitations.length > 0);
+    assert.match(entry.selectionGuidance.basis, /not an independent reproduction/);
+  }
   const graph = seo.buildTactileDatasetsJsonLd(records.tactileDatasetEntries)['@graph'];
   const datasets = graph.filter(node => node['@type'] === 'Dataset');
   assert.equal(datasets.length, data.count);
