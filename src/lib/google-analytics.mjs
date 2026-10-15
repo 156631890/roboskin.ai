@@ -44,6 +44,12 @@ export function analyticsCampaign(value) {
 }
 
 const resourceLinks = new Map([
+  ['/robot-vla-models', ['vla-models', 'resource_open']],
+  ['/robot-foundation-models', ['robot-foundation-models', 'resource_open']],
+  ['/robot-world-models', ['robot-world-models', 'resource_open']],
+  ['/robot-skin', ['robot-skin-guide', 'resource_open']],
+  ['/tactile-ai', ['tactile-ai-guide', 'resource_open']],
+  ['/benchmarks', ['benchmark-directory', 'resource_open']],
   ['/datasets', ['dataset-directory', 'resource_open']],
   ['/sensors', ['sensor-directory', 'resource_open']],
   ['/tactile-ai#experiment-worksheet', ['experiment-worksheet', 'resource_open']],
@@ -70,7 +76,11 @@ export function analyticsResourceEvent(location, href) {
     const to = new URL(href, from);
     if (from.origin !== 'https://roboskin.ai' || to.origin !== from.origin) return null;
     if (from.pathname === to.pathname && from.hash === to.hash) return null;
-    const resource = resourceLinks.get(to.pathname + to.hash) || resourceLinks.get(to.pathname);
+    const fragmentResource = to.hash ? resourceLinks.get(to.pathname + to.hash) : undefined;
+    // A table of contents jump is not another resource open. Explicit resources
+    // such as the experiment worksheet can still be opened within their page.
+    if (from.pathname === to.pathname && !fragmentResource) return null;
+    const resource = fragmentResource || resourceLinks.get(to.pathname);
     if (!resource) return null;
     return {
       name: resource[1],

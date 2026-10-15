@@ -56,6 +56,11 @@ export default function Footer() {
         <div className="site-footer-base">
           <p>© {new Date().getFullYear()} {site.name}</p>
           <p>Evidence first. Claims stay inside their sources.</p>
+          <p>
+            Listed on <a href="https://www.aitoolzdir.com" target="_blank">AI Toolz Dir</a>
+            {' · '}
+            <a href="https://fazier.com" target="_blank" rel="noreferrer">Fazier</a>
+          </p>
           <div>
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
