@@ -33,6 +33,7 @@ export default function ProgrammingArticle({ page, children }: { page: Programmi
           <h1>{page.h1}</h1>
           <p className="tutorial-deck">{page.description}</p>
           <p className="tutorial-byline">By <Link href={site.editorial.path}>{site.editorial.name}</Link> · {page.published && <>Published <time dateTime={page.published}>{page.published}</time> · </>}Updated <time dateTime={page.updated}>{page.updated}</time></p>
+          {page.revisionNote && <p className="tutorial-byline">{page.revisionNote}</p>}
           <div className="tutorial-answer">{page.quickAnswer.map(text => <p key={text}>{text}</p>)}</div>
         </header>
         <div className="tutorial-layout">
