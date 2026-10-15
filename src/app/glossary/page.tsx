@@ -81,6 +81,7 @@ export default function GlossaryPage() {
               Definitions are written for practical reading: what the term means, which signals it touches, and where to go next for
               research context.
             </p>
+            <p className="mt-4 text-sm leading-relaxed text-[#8e98a8]">Comparing model roles? Use the <Link href="/vla/concepts" className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">VLA, VDA, world model and HFM comparison</Link> alongside the definitions below.</p>
             <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added HFM with its paper version and proposed-capability boundary.</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link href="#term-matrix" className="btn-primary w-full sm:w-auto">

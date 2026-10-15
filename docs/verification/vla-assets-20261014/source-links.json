@@ -1,0 +1,342 @@
+{
+  "checkedAt": "2026-10-14T15:16:25.407507+00:00",
+  "scope": "Primary sources linked by the new VLA assets; availability checks supplement the editorial content review. HTTP status alone does not validate a claim.",
+  "results": [
+    {
+      "url": "https://arxiv.org/abs/2212.06817",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2212.06817",
+      "sha256": "3481756943c4b0ef6fa67ecd757546a373d556a1f468143d8028f6fde59862fd"
+    },
+    {
+      "url": "https://arxiv.org/abs/2301.04104",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2301.04104",
+      "sha256": "9b8279c15123de4ddb395d7b0333cfe29b8eadfcfe669550a97477fe9317ff1e"
+    },
+    {
+      "url": "https://arxiv.org/abs/2303.03378",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2303.03378",
+      "sha256": "32312ddf20f5de2d58e6a8da8f2d080f63c5f615a55826cd5ecf2b331d383ae4"
+    },
+    {
+      "url": "https://arxiv.org/abs/2303.04137",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2303.04137",
+      "sha256": "4874b602861337e0a8790120481b87bb062b5549aa5766c7e0a2669859d95608"
+    },
+    {
+      "url": "https://arxiv.org/abs/2307.15818",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2307.15818",
+      "sha256": "44ca4597835076726fa8cdae294d10b6a5ab5847e68293c09ff349c502cbba9b"
+    },
+    {
+      "url": "https://arxiv.org/abs/2405.12213",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2405.12213",
+      "sha256": "6e9e93b9090faf6a8ff6e4f149da863af6c601c934ba4b6b6a9ad1b78e06e2cc"
+    },
+    {
+      "url": "https://arxiv.org/abs/2406.09246",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2406.09246",
+      "sha256": "6eee376f1fe547b781dc37cf881690453e55929b51d7b3c00720f9c436228545"
+    },
+    {
+      "url": "https://arxiv.org/abs/2410.07864",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2410.07864",
+      "sha256": "49dd5d1f7ce340d14d21bca92ad71109e225bcc2c6fa9c048b0161f51b32252a"
+    },
+    {
+      "url": "https://arxiv.org/abs/2410.24090",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2410.24090",
+      "sha256": "76fe39d3e21ad99920a1c1e53619bc4704493aed77a85b0f5bab71251b2fd4e2"
+    },
+    {
+      "url": "https://arxiv.org/abs/2410.24164",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2410.24164",
+      "sha256": "ac4d3d6e424fab1597bee3db5469e08337700c5f3ac51afd1afe8bf18938650f"
+    },
+    {
+      "url": "https://arxiv.org/abs/2502.19645",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2502.19645",
+      "sha256": "980d82df1cbc51f007e2e7a1bae602a5ed8b3ae4acbc4da7d756ba5f3c9b0bf5"
+    },
+    {
+      "url": "https://arxiv.org/abs/2503.14734",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2503.14734",
+      "sha256": "a3f24e4ea3e6025b026a04802d9e16802794e09e4bf999a3023babbb0aebfd73"
+    },
+    {
+      "url": "https://arxiv.org/abs/2504.16054",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2504.16054",
+      "sha256": "bd188bdea0c24c3eeef87c977492037c35ee84fdbd4f9d82db054b33d5bdcdba"
+    },
+    {
+      "url": "https://arxiv.org/abs/2505.09577",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2505.09577",
+      "sha256": "0c9e6777eefbbf350a5e1a66a316bc5f5f1b0dd49344ad3cf6be6cc01acde8d7"
+    },
+    {
+      "url": "https://arxiv.org/abs/2506.01844",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2506.01844",
+      "sha256": "b79ac5f8ad8446d216a09f658834f24c595f625371141689ea6d1f674fc6141e"
+    },
+    {
+      "url": "https://arxiv.org/abs/2507.17294",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2507.17294",
+      "sha256": "10c0ce7923b3f2a37ef5dd4d1d92c04369a52387f3093f495263128a8737ec4b"
+    },
+    {
+      "url": "https://arxiv.org/abs/2508.08706",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2508.08706",
+      "sha256": "942520aa166b1cb1089f8cab39a09e55a9b708170a48094115e6627e427ba5ac"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.15169",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2603.15169",
+      "sha256": "4150d97882a46ab142e47548203c66d2dd2be55e88758036ab3f96ad24ccda67"
+    },
+    {
+      "url": "https://arxiv.org/abs/2608.15816",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2608.15816",
+      "sha256": "3a735208d473e947602888a907c2ef9109564afcad35293fda15660253167742"
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.05230",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/abs/2610.05230",
+      "sha256": "cb2b2aaf5c55940e8bb87f999c4722e2ccb6d015685e9bac6b69e284ed0eb064"
+    },
+    {
+      "url": "https://arxiv.org/html/2212.06817v2",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2212.06817v2",
+      "sha256": "8eaf7539dc57ffdc46aacb31795879878a90b239e5f622bb58f60773e4573452"
+    },
+    {
+      "url": "https://arxiv.org/html/2410.07864v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2410.07864v1",
+      "sha256": "a5ec65527fb280a30dbc1bb168cba67701243274ea446f51aa6d4a9fbf8f3eea"
+    },
+    {
+      "url": "https://arxiv.org/html/2410.24164v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2410.24164v1",
+      "sha256": "3e0641909f7b6325d36047ddad8957278599e76bb4a9cc5fd52692552e495cf5"
+    },
+    {
+      "url": "https://arxiv.org/html/2503.14734v2",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2503.14734v2",
+      "sha256": "ffb556ea87ad372017400641e068c6cdf5af40f83f8af1536c65b702b5963ea8"
+    },
+    {
+      "url": "https://arxiv.org/html/2504.16054v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2504.16054v1",
+      "sha256": "c7a1b886d8ce67370d31d0beebe5f9fb8176b4266a29330ca69923d58f387171"
+    },
+    {
+      "url": "https://arxiv.org/html/2505.09577v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2505.09577v1",
+      "sha256": "a86d47653bc3fbf4245fa61d30277d5dbe29bb81cae657a7577ce3c20efd87e6"
+    },
+    {
+      "url": "https://arxiv.org/html/2506.01844v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2506.01844v1",
+      "sha256": "7c29c280d3f3284040af6489e832d21907c3abe813acd25668ffa0cd254f6c10"
+    },
+    {
+      "url": "https://arxiv.org/html/2507.17294v2",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2507.17294v2",
+      "sha256": "78d3bc70cfc29bf74ea7a7b0211f3e10ae6cbb893840239102ff207688ff97f6"
+    },
+    {
+      "url": "https://arxiv.org/html/2508.08706v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2508.08706v1",
+      "sha256": "401ebb3c5b3eeac5691aae8f93c0343782e809ae76c298b88dfe4e0187ef40d3"
+    },
+    {
+      "url": "https://arxiv.org/html/2603.15169v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2603.15169v1",
+      "sha256": "9957e0440e19fed83ecb1998e11624dc90c8078901bce829a0f9ac9210411880"
+    },
+    {
+      "url": "https://arxiv.org/html/2608.15816v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2608.15816v1",
+      "sha256": "3f97370cb0ebc216bc527daef16d06e42b51b8caabc2a89411a6e2b55b4f86a0"
+    },
+    {
+      "url": "https://arxiv.org/html/2608.28664v1",
+      "status": 200,
+      "finalUrl": "https://arxiv.org/html/2608.28664v1",
+      "sha256": "0075af20e26bf972c8a0a10bbd9d3873e80170195f1a8ef03e009980e131a9a1"
+    },
+    {
+      "url": "https://clementine24.github.io/Vela/",
+      "status": 200,
+      "finalUrl": "https://clementine24.github.io/Vela/",
+      "sha256": "fc5b29b184f8d76dcf6d2198034e52e19b798d54f698789bd846b4d8e19d192c"
+    },
+    {
+      "url": "https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action/",
+      "status": 200,
+      "finalUrl": "https://deepmind.google/blog/rt-2-new-model-translates-vision-and-language-into-action/",
+      "sha256": "426ae92ef26283ed243717cca97ec35e9f4ad537041f5b2ad87032e719deb9f7"
+    },
+    {
+      "url": "https://diffusion-policy.cs.columbia.edu/",
+      "status": 200,
+      "finalUrl": "https://diffusion-policy.cs.columbia.edu/",
+      "sha256": "361b244003e973cefe369dc0b448a8ef7c5c2892f1a7567b8ddc603954bb584a"
+    },
+    {
+      "url": "https://github.com/NVIDIA/Isaac-GR00T",
+      "status": 200,
+      "finalUrl": "https://github.com/NVIDIA/Isaac-GR00T",
+      "sha256": "5bd5a4be0d0e1d237de3b5e2df875aa0386d0148ed59ea95bed7e1975d782960"
+    },
+    {
+      "url": "https://github.com/Physical-Intelligence/openpi",
+      "status": 200,
+      "finalUrl": "https://github.com/Physical-Intelligence/openpi",
+      "sha256": "24e7024b2e12dbac6dbe7249eac8fe01e82c06e5abebad9b4c5c42b1c6d41cb9"
+    },
+    {
+      "url": "https://github.com/google-research/robotics_transformer",
+      "status": 200,
+      "finalUrl": "https://github.com/google-research/robotics_transformer",
+      "sha256": "e167b8a507b91c61f715e5d5126560643f199cb2c99a31e342eeac848481b582"
+    },
+    {
+      "url": "https://github.com/huggingface/lerobot",
+      "status": 200,
+      "finalUrl": "https://github.com/huggingface/lerobot",
+      "sha256": "4f8f78fab32a220f044ff02ca213749ee49fd2a125c7171d2660ca7527ba9b0c"
+    },
+    {
+      "url": "https://github.com/jxbi1010/VLA-Touch",
+      "status": 200,
+      "finalUrl": "https://github.com/jxbi1010/VLA-Touch",
+      "sha256": "8ee32a5ce35aea9397405e8ea12d5a91b816d477e1066d72a221bc91de7c2289"
+    },
+    {
+      "url": "https://github.com/moojink/openvla-oft",
+      "status": 200,
+      "finalUrl": "https://github.com/moojink/openvla-oft",
+      "sha256": "f2cb1aaaa22d960cb319b7454b2abedc52cdd585712eac8391358be6f7eb7566"
+    },
+    {
+      "url": "https://github.com/octo-models/octo",
+      "status": 200,
+      "finalUrl": "https://github.com/octo-models/octo",
+      "sha256": "46f208a027856a29edb84202d12dad6d0a30f35338ba74eeea1299263c36efa8"
+    },
+    {
+      "url": "https://github.com/openvla/openvla",
+      "status": 200,
+      "finalUrl": "https://github.com/openvla/openvla",
+      "sha256": "924d3f6bd46099187068f6a2ec983cca230eaf111f00d549fa9078290cff2c4e"
+    },
+    {
+      "url": "https://github.com/real-stanford/diffusion_policy",
+      "status": 200,
+      "finalUrl": "https://github.com/real-stanford/diffusion_policy",
+      "sha256": "4ee59cff7da80865768c8c5b13ee4267cea561058e932d51a6b70dd7f7216501"
+    },
+    {
+      "url": "https://github.com/thu-ml/RoboticsDiffusionTransformer",
+      "status": 200,
+      "finalUrl": "https://github.com/thu-ml/RoboticsDiffusionTransformer",
+      "sha256": "b9fe813d828a964733f74121ab300bb43f680b408c162984401fe19e2d31e462"
+    },
+    {
+      "url": "https://icr-lab.github.io/ViTaR/",
+      "status": 200,
+      "finalUrl": "https://icr-lab.github.io/ViTaR/",
+      "sha256": "e86603a9cfe7d67c541f87277d20398c53b0a3ef13945527fa97f2a2bd31a7c9"
+    },
+    {
+      "url": "https://octo-models.github.io/",
+      "status": 200,
+      "finalUrl": "https://octo-models.github.io/",
+      "sha256": "4f23c47e37533137b1e3845afd57bbbd74ed37865f3fce0699ca673a8cde0b6b"
+    },
+    {
+      "url": "https://openvla-oft.github.io/",
+      "status": 200,
+      "finalUrl": "https://openvla-oft.github.io/",
+      "sha256": "6709795850923f19af801f7f3860a8d2c4774d1d94cb3b9b5cada2e0eca5ea49"
+    },
+    {
+      "url": "https://openvla.github.io/",
+      "status": 200,
+      "finalUrl": "https://openvla.github.io/",
+      "sha256": "fc8d7c59138ef1d5b668e12986d7b94d247b0ecf21e04063a2a65846b2aa824c"
+    },
+    {
+      "url": "https://palm-e.github.io/",
+      "status": 200,
+      "finalUrl": "https://palm-e.github.io/",
+      "sha256": "a0a316d5539e12d0be1952f27b57a1441174493e5178d3a118f34a6d5d6e2a57"
+    },
+    {
+      "url": "https://rdt-robotics.github.io/rdt-robotics/",
+      "status": 200,
+      "finalUrl": "https://rdt-robotics.github.io/rdt-robotics/",
+      "sha256": "f520839ad96fdd5a4bba93bd3f0df10969c588c39e4d2e7ff17b75b724cc6034"
+    },
+    {
+      "url": "https://research.google/blog/palm-e-an-embodied-multimodal-language-model/",
+      "status": 200,
+      "finalUrl": "https://research.google/blog/palm-e-an-embodied-multimodal-language-model/",
+      "sha256": "e9ca1be904a7901f5efe1606cb9e5a37f7c518e5c1353b9ca7e438e14df165e6"
+    },
+    {
+      "url": "https://robotics-transformer1.github.io/",
+      "status": 200,
+      "finalUrl": "https://robotics-transformer1.github.io/",
+      "sha256": "d4ecf2205f7d7ff12a8c4d68d85535660d3ea86342031c33559d7a5bddc55202"
+    },
+    {
+      "url": "https://robotics-transformer2.github.io/",
+      "status": 200,
+      "finalUrl": "https://robotics-transformer2.github.io/",
+      "sha256": "0e3adbcf6031c4959fca91905f3838f484482527778b7dc71f12d4a9b183994b"
+    },
+    {
+      "url": "https://sites.google.com/view/force-vla2/home",
+      "status": 200,
+      "finalUrl": "https://sites.google.com/view/force-vla2/home",
+      "sha256": "1b78ae833649f38395cb2090b84ca8a1ed011ac7b5dd2aca7f41f6d52d1194a4"
+    },
+    {
+      "url": "https://sites.google.com/view/vtla",
+      "status": 200,
+      "finalUrl": "https://sites.google.com/view/vtla",
+      "sha256": "9e3100073f4fdb1bba5cc5fac4a62e2c18ed0234836944b2899ac8aa9c75ba4e"
+    }
+  ]
+}
