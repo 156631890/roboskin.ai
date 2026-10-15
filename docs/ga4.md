@@ -31,6 +31,17 @@ withdrawal. Page-view ownership and disabled Enhanced measurement are unchanged.
 In GA4, use event counts for the two event names. Parameter-level reporting needs
 matching event-scoped custom dimensions; their creation is separate from this code.
 
+The resource allowlist also includes the VLA, robot foundation model and robot
+world model directories, the robot skin and tactile AI guides, and benchmarks.
+These use the existing `resource_open` event with a stable public resource ID.
+The tactile experiment worksheet retains its separate ID when its fragment is
+present. Table-of-contents jumps within the same resource page do not count as
+new opens; explicit fragment resources such as the worksheet remain measurable.
+Coverage added October 15, 2026 is prospective: historical missing resource
+events cannot be recovered or compared as if they had been collected.
+This does not change page-view counts or visitor counts, and does not establish
+that a visitor completed a resource task.
+
 Validate a clean browser: no Google requests before consent or after decline;
 allow, then check `g/collect` uses the configured ID, sanitized `dl`/`dr`, and one
 `en=page_view` per navigation. Check GA4 Realtime for receipt, separately from

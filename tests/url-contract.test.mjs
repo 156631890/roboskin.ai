@@ -28,7 +28,7 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 195);
+  assert.equal(protectedUrls.length, 196);
   for (const path of ['/vla/models', '/vla/timeline', '/vla/concepts']) {
     assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`));
   }
@@ -50,6 +50,7 @@ test('the audited production URL inventory is protected', async () => {
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/radmcs-underwater-haptic-diver-guidance'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/humanoidtoolbench-tool-selection-mobile-execution'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/news/interevolve-reward-program-humanoid-manipulation'));
+  assert.ok(protectedUrls.includes('https://roboskin.ai/news/neura-neuron-ai-touch-memory-pla'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/eu-roboskin-project'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/softvtbench-deformation-aware-visuo-tactile-dataset-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026'));
