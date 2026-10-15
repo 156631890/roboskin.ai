@@ -71,3 +71,15 @@ Evidence is the final local export, local browser inspection, source-linked reco
 C10 excluded: no new images or media. C15 excluded: these English assets have no corresponding translated versions; no hreflang pairs were invented.
 
 Publication conclusion: pre-publication checks passed. Production publication and post-deployment verification were not performed; local results must not be represented as live-site results.
+
+## Release recheck — October 15, 2026
+
+The owner requested submission of important completed features. The branch was synchronized with main `4d08793c62cc60578bb61f73915f360f7a347283`, including the latest analytics fixes, Neuron AI article and PR #48. URL-list conflicts were resolved by preserving both the three new VLA routes and the new article; no existing protected route was removed.
+
+- Final combined local build and export/on-page checks pass: 192 sitemap URLs, 196 protected entries and 6 intentional noindex URLs. All 267 tests pass. Lint passed on the VLA changes and separately on PR #48.
+- The source-linked data and the previously inspected technical claims are unchanged. The October 14 source-review date is retained rather than relabeled as a new fact review.
+- Browser recheck on the production export: tactile filtering returns 6 rows; tactile + 2025 + partial release returns VLA-Touch; incompatible filters show the empty state; reset restores all 18 rows; model-name ascending starts with Diffusion Policy.
+- React review: the interactive matrix uses local state, labeled controls, stable row keys and immutable filtering/sorting. The core rows remain server-rendered; no new dependency, backend credential or API request is required for filtering.
+- C01–C09, C11–C14, C16 and C17 remain passed for each of the three routes within the final pre-publication scope. C10 and C15 remain inapplicable for the reasons above. Live deployment identity, canonical/robots/sitemap and interactions are checked separately after merge.
+
+This recheck authorizes no claim of indexing, traffic growth or independent model reproduction. Release and production verification results are recorded by merge SHA in the local maintenance checkpoint.
