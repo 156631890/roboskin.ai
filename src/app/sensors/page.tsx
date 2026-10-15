@@ -35,13 +35,13 @@ export default function TactileSensorsPage() {
   return (
     <>
       <JsonLd data={buildTactileSensorsJsonLd(tactileSensorEntries, manufacturerOrganizationIds)} />
-      <SeoTopicArticle page={page}>
+      <SeoTopicArticle page={page} leadHref="#task-selector" leadLabel="Choose by task" leadContent={
         <TactileSensorExplorer
           entries={tactileSensorEntries}
           organizationLinks={manufacturerOrganizationLinks}
           detailLinks={detailLinks}
         />
-      </SeoTopicArticle>
+      } />
     </>
   );
 }

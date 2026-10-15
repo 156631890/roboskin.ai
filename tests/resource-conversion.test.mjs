@@ -6,6 +6,7 @@ import ts from 'typescript';
 import { getNewsletterConfig, validateNewsletterSignup } from '../src/lib/newsletter-config.mjs';
 import { submitInquiry } from '../src/lib/form-delivery.mjs';
 import { datasetAudit, getDatasetEvidence, summarizeDatasetEvidence } from '../src/lib/dataset-evidence.mjs';
+import { getDatasetSelection } from '../src/lib/dataset-selection.mjs';
 
 function load(file, require = () => { throw new Error('Unexpected import'); }) {
   const exports = {};
@@ -47,7 +48,7 @@ test('dataset coverage is recomputable, keeps unknowns, and matches its immutabl
   assert.equal(stats.licenseDocumented+stats.licenseUnknown,entries.length);
   assert.equal(stats.splitFilesListed+stats.splitProtocolDescribed+stats.splitUnknown,entries.length);
   assert.deepEqual(stats,snapshot.statistics);
-  assert.deepEqual(entries.map(entry=>({...entry,evidence:getDatasetEvidence(entry),directoryRecordUrl:`https://roboskin.ai/datasets#dataset-${entry.id}`})),snapshot.entries);
+  assert.deepEqual(entries.map(entry=>({...entry,evidence:getDatasetEvidence(entry),selectionGuidance:getDatasetSelection(entry),directoryRecordUrl:`https://roboskin.ai/datasets#dataset-${entry.id}`})),snapshot.entries);
   assert.equal(getDatasetEvidence(entries.find(e=>e.id==='egotouch')).licenseStatus,'unknown');
   assert.equal(getDatasetEvidence(entries.find(e=>e.id==='tacverse')).access,'gated');
   assert.ok(getDatasetEvidence(entries.find(e=>e.id==='t-rex')).publicFileScale.includes('not independently recounted'));

@@ -6,6 +6,7 @@ import { useMemo, useRef, useState } from 'react';
 import { track } from '@vercel/analytics';
 import { buildDatasetCitation, buildDatasetCsv, buildOriginalDatasetReference, matchesDatasetQuery, datasetSensorLabel } from '@/lib/dataset-tools.mjs';
 import { accessLabels, getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
+import { getDatasetSelection } from '@/lib/dataset-selection.mjs';
 import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 
 type TactileDatasetExplorerProps = {
@@ -51,7 +52,7 @@ export default function TactileDatasetExplorer({
   );
 
   const activeUseCase = useCases?.find((item) => item.label === useCase);
-  const selectedEntries = selectedIds.map((id) => entries.find((entry) => entry.id === id)).filter(Boolean);
+  const selectedEntries = selectedIds.flatMap((id) => entries.filter((entry) => entry.id === id));
   const filteredEntries = entries.filter((entry) =>
     matchesDatasetQuery(entry, query)
     && (!activeUseCase || activeUseCase.ids.includes(entry.id))
@@ -182,7 +183,7 @@ export default function TactileDatasetExplorer({
           <button type="button" disabled={!filteredEntries.length} onClick={() => exportCsv(filteredEntries, 'results')}
             className="btn-secondary disabled:cursor-not-allowed disabled:opacity-40">Export results as CSV</button>
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-[#8e98a8]">Select up to three records to compare. Your selection stays when filters change. Exports preserve access, license and source-review notes; they do not redistribute dataset files.</p>
+        <p className="mt-3 text-xs leading-relaxed text-[#8e98a8]">Select up to three records to compare sensors, tasks, file format, dataset license, download route, intended use and limitations. Your selection stays when filters change. Exports preserve evidence notes; they do not redistribute dataset files.</p>
         <p role="status" className="mt-3 text-sm text-[#ffd5c5]">{feedback}</p>
         {copyFallback ? <label className="mt-3 grid gap-2 text-sm text-white">Citation to copy
           <textarea readOnly value={copyFallback} rows={5} onFocus={(event) => event.target.select()}
@@ -205,9 +206,15 @@ export default function TactileDatasetExplorer({
                   <dl className="mt-4 space-y-3">
                     <div><dt className="font-semibold text-white">Collection setup</dt><dd>{entry.robot.join('; ')} / {entry.sensor.join('; ')}</dd></div>
                     <div><dt className="font-semibold text-white">Signals and tasks</dt><dd>{entry.modalities.join('; ')}. {entry.tasks.join('; ')}</dd></div>
+                    <div><dt className="font-semibold text-white">Data format</dt><dd>{getDatasetEvidence(entry).formatDetails}</dd></div>
                     <div><dt className="font-semibold text-white">Access</dt><dd>{entry.availability}</dd></div>
+                    <div><dt className="font-semibold text-white">Download entry</dt><dd>{entry.datasetUrl ? <a href={entry.datasetUrl} target="_blank" rel="noreferrer" className="underline">Provider download / access route ↗</a> : <>No separate dataset download verified. <a href={entry.projectUrl ?? entry.paperUrl} target="_blank" rel="noreferrer" className="underline">Check official source ↗</a></>}</dd></div>
                     <div><dt className="font-semibold text-white">Dataset-file license</dt><dd>{getDatasetEvidence(entry).dataLicense}</dd></div>
+                    <div><dt className="font-semibold text-white">Intended use — editorial guidance</dt><dd>{getDatasetSelection(entry).intendedUse}</dd></div>
+                    <div><dt className="font-semibold text-white">Use limitations — editorial guidance</dt><dd>{getDatasetSelection(entry).useLimitations}</dd></div>
                     <div><dt className="font-semibold text-white">Train / test split</dt><dd>{getDatasetEvidence(entry).splitDetails}</dd></div>
+                    <div><dt className="font-semibold text-white">Verification boundary</dt><dd>{getDatasetEvidence(entry).verificationScope}</dd></div>
+                    <div><dt className="font-semibold text-white">Access checked / revision</dt><dd className="break-all">{getDatasetEvidence(entry).accessCheckedAt} / {getDatasetEvidence(entry).revision ?? 'No pinned artifact revision verified'}</dd></div>
                   </dl>
                   <p className="mt-4 text-xs text-[#8e98a8]">Source reviewed {entry.sourceReviewed}</p>
                   <div className="mt-4 flex flex-wrap gap-4">
@@ -260,9 +267,10 @@ export default function TactileDatasetExplorer({
                     <p className="mt-3"><strong className="text-white">Public-file audit:</strong> {evidence.publicFileScale}</p>
                     <p className="mt-3"><strong className="text-white">Independent check:</strong> {evidence.verificationScope}</p></td>
                   <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.tasks.join('; ')}<br /><strong className="mt-3 inline-block text-white">Objects:</strong> {entry.objectCategories}
+                    <p className="mt-3"><strong className="text-white">Use limitations (editorial):</strong> {getDatasetSelection(entry).useLimitations}</p>
                     {entry.generalization ? <p className="mt-3"><strong className="text-white">Generalization:</strong> {entry.generalization}</p> : null}
                   </td>
-                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{entry.dataFormat}<br /><strong className="mt-3 inline-block text-white">Dataset-file license:</strong> {evidence.dataLicense}
+                  <td className="w-[250px] border-b border-white/8 px-4 py-5">{evidence.formatDetails}<br /><strong className="mt-3 inline-block text-white">Dataset-file license:</strong> {evidence.dataLicense}
                     <p className="mt-3"><strong className="text-white">Code / source terms:</strong> {entry.license}</p>
                     {entry.codeLicense ? <p className="mt-3"><strong className="text-white">Code license:</strong> {entry.codeLicense}</p> : null}
                     {entry.assetLicense ? <p className="mt-3"><strong className="text-white">Asset license:</strong> {entry.assetLicense}</p> : null}

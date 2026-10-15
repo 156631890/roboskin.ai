@@ -1,5 +1,5 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.12', compiledAt: '2026-10-12', scope: 'Current RoboSkin tactile directory only; not an industry census. Access dates are per record; adding a record does not recheck older entries.' };
+export const datasetAudit = { version: 'v2026.10.15', compiledAt: '2026-10-15', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds editorial selection guidance. Individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
   'romi-2k': {
     access: 'announced',

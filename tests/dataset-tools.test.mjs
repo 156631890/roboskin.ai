@@ -37,6 +37,10 @@ test('export is limited to the provided selection and does not invent download U
   const csv = buildDatasetCsv([entry], '/robotics-datasets');
   assert.ok(csv.includes('https://roboskin.ai/robotics-datasets#dataset-example'));
   assert.ok(csv.includes('"https://example.org/paper","","","",'));
+  assert.ok(csv.includes('"auditedFormat","intendedUse","useLimitations","selectionBasis"'));
+  assert.ok(csv.includes('Material recognition. Collection: Human collection.'));
+  assert.ok(csv.includes('Applicability outside the recorded tasks'));
+  assert.ok(csv.includes('not an independent reproduction'));
 });
 
 test('citation separates the directory editor from the original research', () => {

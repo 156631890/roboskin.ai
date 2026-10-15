@@ -1,5 +1,6 @@
 /** @typedef {import('./robotics-datasets').RoboticsDatasetEntry} Dataset */
 import { datasetAudit, getDatasetEvidence } from './dataset-evidence.mjs';
+import { getDatasetSelection } from './dataset-selection.mjs';
 
 /** Normalize only equivalent labels for the original physical DIGIT sensor.
  * Simulation, Digit 360 and DIGIT Pinki retain their own evidence boundaries.
@@ -34,8 +35,10 @@ export function buildDatasetCsv(entries, pathname) {
   const evidenceFields = ['access', 'accessCheckedAt', 'publicFileScale', 'verificationScope', 'dataLicense', 'licenseStatus', 'splitStatus', 'splitDetails', 'revision'];
   const rows = entries.map((entry) => [...fields.map((field) => entry[field] ?? ''),
     ...evidenceFields.map(field => getDatasetEvidence(entry)[field] ?? ''),
+    getDatasetEvidence(entry).formatDetails, getDatasetSelection(entry).intendedUse,
+    getDatasetSelection(entry).useLimitations, getDatasetSelection(entry).basis,
     `https://roboskin.ai${pathname}#dataset-${entry.id}`]);
-  return '\uFEFF' + [[...fields, ...evidenceFields, 'directoryRecordUrl'], ...rows]
+  return '\uFEFF' + [[...fields, ...evidenceFields, 'auditedFormat', 'intendedUse', 'useLimitations', 'selectionBasis', 'directoryRecordUrl'], ...rows]
     .map((row) => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }
 
