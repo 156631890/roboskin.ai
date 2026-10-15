@@ -44,6 +44,12 @@ export function analyticsCampaign(value) {
 }
 
 const resourceLinks = new Map([
+  ['/robot-vla-models', ['vla-models', 'resource_open']],
+  ['/robot-foundation-models', ['robot-foundation-models', 'resource_open']],
+  ['/robot-world-models', ['robot-world-models', 'resource_open']],
+  ['/robot-skin', ['robot-skin-guide', 'resource_open']],
+  ['/tactile-ai', ['tactile-ai-guide', 'resource_open']],
+  ['/benchmarks', ['benchmark-directory', 'resource_open']],
   ['/datasets', ['dataset-directory', 'resource_open']],
   ['/sensors', ['sensor-directory', 'resource_open']],
   ['/tactile-ai#experiment-worksheet', ['experiment-worksheet', 'resource_open']],

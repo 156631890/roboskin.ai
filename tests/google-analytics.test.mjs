@@ -110,6 +110,43 @@ test('resource events exclude external links, arbitrary queries and self-navigat
   assert.equal(analytics.analyticsResourceEvent('https://preview.vercel.app/', '/datasets'), null);
 });
 
+test('model and topic resource navigation is measured with public paths only', () => {
+  const origin = 'https://roboskin.ai/news/cartesian-hand-all-linear-in-hand-manipulation?email=private@example.com';
+  for (const [path, id] of [
+    ['/robot-vla-models', 'vla-models'],
+    ['/robot-foundation-models', 'robot-foundation-models'],
+    ['/robot-world-models', 'robot-world-models'],
+    ['/robot-skin', 'robot-skin-guide'],
+    ['/tactile-ai', 'tactile-ai-guide'],
+    ['/benchmarks', 'benchmark-directory'],
+  ]) {
+    assert.deepEqual(analytics.analyticsResourceEvent(origin, `${path}?q=private#comparison`), {
+      name: 'resource_open',
+      parameters: { resource_id: id, from_path: '/news/cartesian-hand-all-linear-in-hand-manipulation', target_path: path },
+    });
+    assert.equal(analytics.analyticsResourceEvent(`https://roboskin.ai${path}`, path), null);
+  }
+  // The specific worksheet keeps its identity after adding the broader topic route.
+  assert.equal(analytics.analyticsResourceEvent(origin, '/tactile-ai#experiment-worksheet').parameters.resource_id, 'experiment-worksheet');
+});
+
+test('model resource clicks follow the existing consent and withdrawal lifecycle', () => {
+  const app = mount({ path: '/news/cartesian-hand-all-linear-in-hand-manipulation' });
+  const resources = () => app.commands().filter(args => args[0] === 'event' && args[1] === 'resource_open');
+  app.render(); app.clickLink('/robot-vla-models');
+  assert.equal(resources().length, 0);
+  app.click('Allow analytics'); app.clickLink('/robot-vla-models?private=discard#vla-model-index');
+  assert.equal(resources().length, 1);
+  assert.equal(resources()[0][2].resource_id, 'vla-models');
+  assert.equal(resources()[0][2].target_path, '/robot-vla-models');
+  app.navigate('/robot-vla-models'); app.clickLink('/robot-world-models');
+  assert.equal(resources().length, 2);
+  assert.equal(resources()[1][2].from_path, '/robot-vla-models');
+  app.settings(); app.click('Decline'); app.clickLink('/robot-foundation-models');
+  assert.equal(resources().length, 2);
+  assert.ok(!JSON.stringify(app.commands()).includes('discard'));
+});
+
 test('resource click collection respects consent, withdrawal and route changes', () => {
   const app = mount(); app.render(); app.clickLink('/datasets');
   assert.equal(app.commands().length, 0);
