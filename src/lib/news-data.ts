@@ -33,6 +33,118 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'neura-neuron-ai-touch-memory-pla',
+    title: 'NEURA Neuron AI: what touch, audio and memory add to robot action',
+    seoTitle: 'NEURA Neuron AI: Touch, Memory and PLA Evidence',
+    seoDescription: 'An evidence review of NEURA Neuron AI: tactile sensing, audio, memory, PLA claims, related robotics papers and the tests needed to assess real performance.',
+    excerpt: 'NEURA presents a multisensory robot model. We separate its public claims from open research, explain memory versus learning, and outline the evidence still needed.',
+    category: 'Multimodal robot learning',
+    image: '/generated/news/neura-neuron-ai-touch-memory-pla.png',
+    imageAlt: 'Editorial diagram separating multisensory robot inputs and temporal context from the tests needed to measure contact success, recovery and latency.',
+    imageCaption: 'Original RoboSkin.ai conceptual diagram based on public claims. It is not a disclosed Neuron AI architecture, experimental result or NEURA product image.',
+    sourceTitle: 'NEURA Robotics introduces Neuron AI — official announcement',
+    sourceUrl: 'https://neura-robotics.com/neura-robotics-introduces-neuron-ai/',
+    sources: [
+      { title: 'NEURA official announcement — October 14, 2026', url: 'https://neura-robotics.com/neura-robotics-introduces-neuron-ai/' },
+      { title: 'Neuron AI official product description', url: 'https://neura-robotics.com/neuron-ai/' },
+      { title: 'Background paper: OpenVLA', url: 'https://arxiv.org/abs/2406.09246' },
+      { title: 'Background paper: MimicTouch', url: 'https://arxiv.org/abs/2310.16917' },
+      { title: 'Background paper: DexTouch-WM', url: 'https://arxiv.org/abs/2609.20649' },
+    ],
+    technicalFocus: ['tactile sensing', 'multimodal robot learning', 'robot memory', 'vision-language-action'],
+    sourceDate: '2026-10-14',
+    evidenceStatus: 'Company announcement · no public Neuron AI paper or reproducible benchmark located in this review · related papers are independent background',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-15',
+    updated: '2026-10-15',
+    readTime: '8 min read',
+    content: `# NEURA Neuron AI: what touch, audio and memory add to robot action
+
+NEURA introduced Neuron AI on October 14, 2026. Its [product description](https://neura-robotics.com/neuron-ai/) presents a Perception-Language-Action, or PLA, model combining 3D vision, touch, audio, robot state and language with memory. For tactile robotics, the interesting question is whether additional observations change what a robot does when contact is hidden, ambiguous or unsuccessful.
+
+This is an evidence review of a company announcement, not a review of a Neuron AI research paper. As of October 15, our review of the official announcement, product page and targeted paper searches did not locate a public Neuron AI manuscript or a reproducible comparative benchmark. The three papers below provide independent research context; NEURA has not identified them as components of its system in the materials reviewed.
+
+## What NEURA has announced
+
+The [official release](https://neura-robotics.com/neura-robotics-introduces-neuron-ai/) describes training from real robot interactions, simulation-expanded data and human demonstrations, and claims operation across five robot embodiments. Customers would fine-tune skills and distribute them through Neuraverse, with optional sharing supporting later model development. NEURA emphasizes the time needed to learn a useful skill, but the announcement does not supply a matched baseline for that measure.
+
+The [product page](https://neura-robotics.com/neuron-ai/) describes tactile and force-torque signals entering the model, temporal alignment of modalities, and inference on the robot. It does not provide the sensor-to-action latency distribution, compute specification or controlled modality ablations needed to assess those claims. Local inference alone does not establish that a contact-control deadline is met.
+
+## Public evidence and open questions
+
+| Evidence item | Status in this review | What would make it assessable |
+| --- | --- | --- |
+| Named model and multisensory design | Described by the manufacturer | Architecture, input specification and training objective |
+| Neuron AI research paper | Not located in the checked materials | Public manuscript with methods and evaluation protocol |
+| Reusable implementation | Code and weights not verified as released | Versioned repository, checkpoints and license |
+| Performance advantage | No reproducible comparative benchmark located | Matched hardware, tasks, training budgets and attempt counts |
+| Memory and adaptation | Implementation details remain unresolved | Memory horizon, reset behavior and whether weights change during use |
+
+These are limits of the available evidence, not proof that the company lacks internal results. They also prevent an honest ranking against a named VLA model. A demonstration can establish that one sequence was executed; a performance claim needs the distribution of successes, failures and interventions across repeated attempts.
+
+## Why touch, sound and history are different signals
+
+RoboSkin analysis: consider a connector hidden behind a robot hand. Vision may establish the approach pose while leaving the final contact state uncertain. Touch could indicate slip or growing resistance; sound could suggest an engagement event; recent observations could preserve the target location through occlusion. Each cue answers a different question, and each can also be wrong.
+
+A useful controller must handle disagreement. An audible click without the expected force change should not automatically count as success. Similarly, a remembered object location should lose confidence if another object may have moved it. A practical evaluation should therefore include misleading sounds, sensor dropouts and changes during occlusion, alongside clean demonstrations.
+
+The PLA label is not itself an evaluation result. To compare systems, inspect the actual input channels, history representation, action output and control loop. Do not assume that every system described as a VLA processes only one frame or lacks robot-state inputs. Our [robot VLA guide](/robot-vla-models) provides the broader category context; [visuo-tactile manipulation](/visuo-tactile) focuses on how visual and contact evidence interact.
+
+## Three related papers, and what each can answer
+
+These are background readings, not Neuron AI papers or evidence of a NEURA partnership. Their published results must not be transferred to Neuron AI.
+
+| Paper | Research contribution | Useful comparison question |
+| --- | --- | --- |
+| [OpenVLA](https://arxiv.org/abs/2406.09246) — first submitted June 2024 | An open, 7B vision-language-action model trained on 970,000 real robot demonstrations, with released code and checkpoints | Is the candidate system documented well enough to reproduce a task-specific baseline? |
+| [MimicTouch](https://arxiv.org/abs/2310.16917) — first submitted October 2023; revised February 2025 | Uses human tactile demonstrations for imitation learning and online residual reinforcement learning to address the human-to-robot gap | Does adaptation change the policy, and what does it add beyond tactile observation alone? |
+| [DexTouch-WM](https://arxiv.org/abs/2609.20649) — September 2026 preprint | Studies action-conditioned tactile world models using aligned human and robot touch data | Do better predictions translate into better closed-loop robot actions? |
+
+[OpenVLA's paper](https://arxiv.org/abs/2406.09246) is useful as a disclosure reference: model, training data and adaptation procedures are concrete objects that another team can inspect. Its existence does not establish a fair performance comparison with a proprietary multisensory model; that still requires a shared protocol.
+
+[MimicTouch](https://arxiv.org/abs/2310.16917) makes the learning distinction explicit by describing online residual reinforcement learning. That is a more specific claim than remembering observations. The relevant engineering questions include the adaptation budget, safe exploration constraints and evaluation on unseen objects.
+
+[DexTouch-WM](https://arxiv.org/abs/2609.20649) provides context for combining human touch with robot data. Its reported improvements in predicting future observations should be assessed separately from downstream policy success. Our [DexTouch-WM evidence review](/research/dextouch-wm-human-touch-world-model-2026) discusses that separation in more detail. RoboSkin has not reproduced the experiments in any of these papers.
+
+## Memory does not automatically mean online learning
+
+A robot can maintain a history buffer or recurrent state while its model weights remain fixed. That is memory during inference. A team can also collect deployment data and train a later model version; that is an update between deployments. Online learning is a third possibility: the policy changes using new experience during operation.
+
+Those mechanisms need different tests. For memory, vary the length of an occlusion, interrupt a task and test the reset boundary between episodes. For offline updates, compare frozen model versions on the same held-out tasks. If online adaptation is claimed, measure improvement against a no-update control and check whether previously learned skills regress. None of these outcomes follows merely from adding the word memory to a product description.
+
+## A proposed touch-and-memory evaluation
+
+The following is a RoboSkin evaluation proposal, not an experiment we have performed or a description of NEURA's test setup. It could guide a request for a vendor evaluation or a future open implementation.
+
+Start with three bounded manipulation tasks: grasp an object after brief occlusion, seat a connector, and recover from a controlled slip. Fix the robot, objects, vision, language instructions and compute budget. Use independently verified task completion rather than the policy's own success declaration.
+
+| Condition | Contact observations | Temporal context | Question |
+| --- | --- | --- | --- |
+| A | Disabled | Disabled | What can the instantaneous baseline accomplish? |
+| B | Enabled | Disabled | What does touch add at the same history setting? |
+| C | Disabled | Enabled | What does history add without touch? |
+| D | Enabled | Enabled | Do touch and history provide complementary benefits? |
+
+Hold audio fixed for this comparison, then test it separately with clean sound, background noise and misleading contact sounds. Train or adapt each variant comparably; simply blanking a sensor at inference can measure a distribution shift rather than the benefit of that modality. If the vendor cannot expose these controls, describe the result as a black-box system evaluation rather than an architectural ablation.
+
+Randomize conditions and object order, reserve unseen objects, and publish every attempt, including timeouts and human recoveries. Report full-task success, peak contact force, recovery time, intervention rate and sensor-to-command latency with median and tail values. Predefine force limits and safe stop rules. For memory, include an object moved during occlusion so remembering an outdated state is not rewarded.
+
+## What to watch at the planned demonstration
+
+NEURA's [October 14 announcement](https://neura-robotics.com/neura-robotics-introduces-neuron-ai/) schedules an eleven-minute 4NE1 laundry-handling demonstration at NVIDIA GTC Berlin on October 20–22. This is a future event as of this article's publication. The described sequence covers handling and transfers around laundry appliances; it is not evidence of completing a full wash-and-dry cycle in eleven minutes.
+
+Useful follow-up evidence would include an uncut run, the number of attempts, intervention logs and unexpected-state recovery. For now, the announcement offers a relevant multisensory product direction, while its quantitative advantage and the implementation of memory remain open questions.
+
+## Continue the research
+
+- [Physical AI and touch: sensing-to-action context](/physical-ai-touch)
+- [Robot world models: prediction and control](/robot-world-models)
+- [Robot learning: demonstrations and policy adaptation](/robot-learning)
+- [RoboSkin research index](/research)
+
+Source review date: October 15, 2026. Manufacturer statements, independent papers and RoboSkin's proposed tests are distinguished throughout. No affiliation with NEURA or independent validation of Neuron AI is claimed.`,
+  },
+  {
     id: 'activewam-active-vision-world-action-model',
     title: 'ActiveWAM makes camera motion part of the robot action',
     seoTitle: 'ActiveWAM Unifies Camera and Bimanual Robot Actions',
