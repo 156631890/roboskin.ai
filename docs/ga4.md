@@ -35,8 +35,10 @@ The resource allowlist also includes the VLA, robot foundation model and robot
 world model directories, the robot skin and tactile AI guides, and benchmarks.
 These use the existing `resource_open` event with a stable public resource ID.
 The tactile experiment worksheet retains its separate ID when its fragment is
-present. Coverage added October 15, 2026 is prospective: historical missing
-resource events cannot be recovered or compared as if they had been collected.
+present. Table-of-contents jumps within the same resource page do not count as
+new opens; explicit fragment resources such as the worksheet remain measurable.
+Coverage added October 15, 2026 is prospective: historical missing resource
+events cannot be recovered or compared as if they had been collected.
 This does not change page-view counts or visitor counts, and does not establish
 that a visitor completed a resource task.
 
