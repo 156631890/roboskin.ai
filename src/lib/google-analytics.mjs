@@ -76,7 +76,11 @@ export function analyticsResourceEvent(location, href) {
     const to = new URL(href, from);
     if (from.origin !== 'https://roboskin.ai' || to.origin !== from.origin) return null;
     if (from.pathname === to.pathname && from.hash === to.hash) return null;
-    const resource = resourceLinks.get(to.pathname + to.hash) || resourceLinks.get(to.pathname);
+    const fragmentResource = to.hash ? resourceLinks.get(to.pathname + to.hash) : undefined;
+    // A table of contents jump is not another resource open. Explicit resources
+    // such as the experiment worksheet can still be opened within their page.
+    if (from.pathname === to.pathname && !fragmentResource) return null;
+    const resource = fragmentResource || resourceLinks.get(to.pathname);
     if (!resource) return null;
     return {
       name: resource[1],

@@ -125,9 +125,13 @@ test('model and topic resource navigation is measured with public paths only', (
       parameters: { resource_id: id, from_path: '/news/cartesian-hand-all-linear-in-hand-manipulation', target_path: path },
     });
     assert.equal(analytics.analyticsResourceEvent(`https://roboskin.ai${path}`, path), null);
+    assert.equal(analytics.analyticsResourceEvent(`https://roboskin.ai${path}`, `${path}#comparison`), null);
+    assert.equal(analytics.analyticsResourceEvent(`https://roboskin.ai${path}#first`, `${path}#second`), null);
   }
   // The specific worksheet keeps its identity after adding the broader topic route.
   assert.equal(analytics.analyticsResourceEvent(origin, '/tactile-ai#experiment-worksheet').parameters.resource_id, 'experiment-worksheet');
+  assert.equal(analytics.analyticsResourceEvent('https://roboskin.ai/tactile-ai', '#experiment-worksheet').parameters.resource_id, 'experiment-worksheet');
+  assert.equal(analytics.analyticsResourceEvent('https://roboskin.ai/tactile-ai#experiment-worksheet', '#experiment-worksheet'), null);
 });
 
 test('model resource clicks follow the existing consent and withdrawal lifecycle', () => {
