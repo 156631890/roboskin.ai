@@ -15,6 +15,7 @@ const modules = new Map();
 const normalize = (value) => value.replace(/\s+/g, ' ').trim();
 const definitionPaths = ['/technology', '/tactile-foundation-models', '/e-skin', '/physical-ai-touch'];
 const workflowPaths = ['/datasets', '/guides/gelsight-vs-digit', '/guides/ros2-tactile-sensing'];
+const contentPaths = [...definitionPaths, '/sensors', '/guides/gelsight-vs-digit', '/guides/ros2-tactile-sensing'];
 let currentPath = '/';
 
 function TestLink({ href, children, ...props }) {
@@ -89,21 +90,22 @@ function contextLinks(document) {
   });
 }
 
-for (const pathname of definitionPaths) {
-  test(`${pathname}: visible FAQ and one FAQPage contain the same 3–6 answers`, () => {
+for (const pathname of contentPaths) {
+  const [minFaqs, maxFaqs] = ['/tactile-foundation-models', '/e-skin', '/physical-ai-touch'].includes(pathname) ? [5, 8] : [3, 6];
+  test(`${pathname}: visible FAQ and one FAQPage contain the same ${minFaqs}–${maxFaqs} answers`, () => {
     const document = renderRoute(pathname);
     const faqNodes = graphNodes(document).filter((node) => node?.['@type'] === 'FAQPage');
     assert.equal(faqNodes.length, 1, 'Do not emit duplicate FAQPage nodes');
     const schemaAnswers = faqNodes[0].mainEntity.map((question) => ({
       question: normalize(question.name), answer: normalize(question.acceptedAnswer.text),
     }));
-    assert.ok(schemaAnswers.length >= 3 && schemaAnswers.length <= 6, `FAQ count: ${schemaAnswers.length}`);
+    assert.ok(schemaAnswers.length >= minFaqs && schemaAnswers.length <= maxFaqs, `FAQ count: ${schemaAnswers.length}`);
     assert.equal(new Set(schemaAnswers.map((item) => item.question)).size, schemaAnswers.length);
-    const faqHeading = Array.from(document.querySelectorAll('h2')).find((heading) => /\bFAQ\b/i.test(heading.textContent));
+    const faqHeading = Array.from(document.querySelectorAll('h2')).find((heading) => /\bFAQ\b|common questions/i.test(heading.textContent));
     assert.ok(faqHeading, 'Visible FAQ heading is required');
     const faqSection = ancestor(faqHeading, (node) => node.localName === 'section');
     const visibleAnswers = Array.from(faqSection.querySelectorAll('h3')).map((heading) => {
-      const item = ancestor(heading, (node) => ['section', 'article'].includes(node.localName));
+      const item = ancestor(heading, (node) => ['section', 'article'].includes(node.localName) || node.classList.contains('tutorial-faq'));
       return { question: normalize(heading.textContent), answer: normalize(item.querySelector('p')?.textContent ?? '') };
     });
     assert.deepEqual(visibleAnswers, schemaAnswers, 'Rendered answers and schema must stay in sync');
@@ -132,7 +134,7 @@ for (const pathname of definitionPaths) {
   });
 }
 
-for (const pathname of [...definitionPaths, ...workflowPaths]) {
+for (const pathname of [...definitionPaths, '/sensors', ...workflowPaths]) {
   test(`${pathname}: contextual internal links are distributed across at least three sections`, () => {
     const links = contextLinks(renderRoute(pathname));
     assert.ok(new Set(links.map(({ section }) => section)).size >= 3, 'Three links in one block or navigation do not satisfy contextual discovery');

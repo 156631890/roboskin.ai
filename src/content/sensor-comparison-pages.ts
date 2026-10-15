@@ -9,7 +9,8 @@ export const sensorComparisonPages: SeoTopicPage[] = [
     kicker: 'Sensor selection / Source-based comparison',
     intent: 'Help researchers choose between GelSight Mini and original DIGIT and plan a fair robot-task evaluation.',
     published: '2026-10-07',
-    updated: '2026-10-07',
+    updated: '2026-10-13',
+    revisionNote: 'October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates; existing FAQs and comparison criteria are retained.',
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -77,6 +78,19 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         links: [
           { label: 'Use the tactile sensor calibration workflow', href: '/guides/tactile-sensor-calibration' },
           { label: 'Plan matched sensor and robot-task benchmarks', href: '/guides/tactile-sensor-benchmark-robot-manipulation' },
+        ],
+      },
+      {
+        id: 'challenges-and-limitations',
+        heading: 'Challenges & Limitations',
+        body: [
+          'Gel wear changes the sensing surface. The original DIGIT paper describes wear and manufacturing variation as reasons an optical tactile system may need recalibration or retraining after replacement. GelSight’s Mini documentation also warns that rough surfaces can shear the gel and sharp edges can damage its coating. Neither source establishes a service lifetime for your robot task.',
+          'Reconstruction is not a certified accuracy specification. GelSight’s official Mini FAQ states that Mini is not a metrology device and does not provide a reconstruction-accuracy study. Its camera resolution and example point clouds therefore cannot establish geometric accuracy or superiority over DIGIT under matched conditions.',
+          'Force is a derived output. The Mini documentation describes learning pressure force from height displacement; the DIGIT paper starts from tactile images for model-based manipulation. An available camera stream or reconstruction demo does not establish calibrated normal-force or shear-force accuracy on your unit. Validate the intended estimate against an independent reference.',
+        ],
+        links: [
+          { label: 'DIGIT v1, sensor design and elastomer wear', href: 'https://arxiv.org/html/2005.14679v1#S3' },
+          { label: 'GelSight Mini official FAQ, questions 5, 17, 23 and 26 (pinned source)', href: 'https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md' },
         ],
       },
       {
