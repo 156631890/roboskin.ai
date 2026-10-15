@@ -30,6 +30,7 @@ The article separates manufacturer statements, the limits of this source review,
 
 - Local required quality gate passed: `npm test` (255/255), `npm run lint`, `npm run build` (214 static pages, 199 agent Markdown representations), and `npm run verify:export` (189 sitemap URLs, 193 protected URL entries, 194 graph entities, 30 research-index records, 50 RSS items).
 - The first export verification identified the new URL as missing from the protected URL contract. Added the new article to that manifest without changing verification logic; the complete export and on-page audit then passed.
+- The first CI run caught the existing inventory test's fixed count of 192. Updated it to 193 and added an explicit assertion for the new route; the inventory checks remain intact.
 - Targeted HTML checks passed: one H1, self-canonical, indexable robots, unique 61-character title and 155-character description, `NewsArticle`/`BreadcrumbList`, three tables, all three independent paper links, correct social image and presence in homepage, News, both sitemaps and RSS.
 - The 1200 × 675 image was rendered and visually inspected. Future-event and unperformed-experiment qualifiers were checked in the exported page.
 - Production deployment and live acceptance: pending.
