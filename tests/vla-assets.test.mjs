@@ -56,5 +56,5 @@ test('sorts are stable, chronological and keep unknown parameter totals last in 
   }
   const timeline = selectVlaModels(vlaCatalog, all, 'date', 'asc');
   assert.equal(timeline[0].id, 'rt-1');
-  assert.equal(timeline.at(-1).id, 'vela');
+  assert.equal(timeline.at(-1).id, 'spark-0');
 });
