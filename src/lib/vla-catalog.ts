@@ -24,7 +24,7 @@ export type VlaCatalogEntry = {
   detail?: string;
 };
 
-export const vlaCatalogReviewed = '2026-10-14';
+export const vlaCatalogReviewed = '2026-10-16';
 const fact = (text: string, source: string): VlaFact => ({ text, source });
 const paper = (id: string) => `https://arxiv.org/abs/${id}`;
 const full = (id: string) => `https://arxiv.org/html/${id}`;
@@ -35,6 +35,19 @@ const oft = 'https://openvla-oft.github.io/';
 const openpi = 'https://github.com/Physical-Intelligence/openpi';
 
 export const vlaCatalog: VlaCatalogEntry[] = [
+  {
+    id: 'spark-0', name: 'Spark-0', date: '2026-10-15', paper: paper('2610.22342'), role: 'VLA',
+    organization: fact('Xspark AI, Tsinghua University, HKU, HKUST (Guangzhou) and Peking University', 'https://arxiv.org/pdf/2610.22342v1'),
+    code: null,
+    parameters: fact('Qwen3-VL-4B backbone; total policy parameter count not verified.', 'https://arxiv.org/pdf/2610.22342v1'), parameterBillions: null,
+    vision: true, language: true, tactile: true,
+    modalities: fact('Vision, language and robot state, with optional online touch. Train-only contact and geometry supervision is removed at inference; tactile-conditioned operation retains regional force histories and 3D taxel inputs (Sections 4.2–4.4).', 'https://arxiv.org/pdf/2610.22342v1'),
+    access: 'not-found',
+    availability: fact('Paper public. Checked 2026-10-16: project fetch failed and paper-linked GitHub repository returned 404. Weights, usable code, full data and reuse licenses remain unverified; no training or commercial-use permission established.', paper('2610.22342v1')),
+    benchmark: fact('Authors report vision-only and tactile-conditioned evaluations on different tracks; RoboSkin has not reproduced them. These are not interchangeable sensor configurations.', paper('2610.22342v1')),
+    dataset: fact('Authors describe 1,000 hours of HumanTouch within a mixed pretraining corpus. This does not establish a full public download or supersede earlier HumanTouch subset checks.', paper('2610.22342v1')),
+    description: fact('Touch serves as training supervision and optional deployment input. The authors describe one checkpoint using tactile placeholders for vision-only operation or live touch for tactile-conditioned operation; training supervision is not a requirement for a sensor at every deployment.', 'https://arxiv.org/pdf/2610.22342v1'),
+  },
   {
     id: 'rt-1', name: 'RT-1', date: '2022-12-13', paper: paper('2212.06817'), role: 'VLA',
     organization: fact('Google Research / Robotics at Google', paper('2212.06817')),
