@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <div className="container-shell">
             <span className="eyebrow">Privacy</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Privacy Policy</h1>
-            <p className="mt-5 max-w-3xl">Last updated: October 7, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: October 16, 2026</p>
           </div>
         </header>
 
@@ -28,6 +28,18 @@ export default function PrivacyPolicyPage() {
                   When online submission is configured, requests are forwarded to our delivery service and management inbox. A prepared email or WhatsApp draft is sent only when you send it in your own app. Delivery errors are not recorded as successful inquiries.
                   When the Newsletter panel shows its unavailable state, it does not render an email field or collect an email address. If a signup form is displayed, it identifies the external email-list provider before submission. The Buttondown integration sends your address through our server for double opt-in confirmation; an approved hosted provider form may send it directly. An accepted request is not a confirmed subscription. Each sent brief includes an unsubscribe link.
                   When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold">Paid report membership</h2>
+                <p className="mt-3">
+                  When enabled, report membership stores your verified email address, email delivery preference, subscription references and status, access period, and email delivery receipts in a private database. Resend processes sign-in codes and report notification emails. Waffo hosts checkout, handles payment details, and provides the billing portal under its own terms and privacy policy. We do not collect or store your card number.
+                </p>
+                <p className="mt-3">
+                  Sign-in codes expire after 10 minutes. A secure, HTTP-only cookie keeps your report session signed in for up to 30 days; signing out removes that session. Hashed request identifiers limit abuse. Expired authentication and rate-limit records are removed by the report delivery task. Billing and delivery records are retained for account support and applicable accounting obligations. Contact us to request access or deletion; records required by law may need to be retained.
+                </p>
+                <p className="mt-3">
+                  You can stop report notifications from your membership page. This preference does not cancel subscription billing; cancel renewal in the Waffo billing portal. Paid report membership does not subscribe you to the separate free Newsletter.
                 </p>
               </div>
               <div>
