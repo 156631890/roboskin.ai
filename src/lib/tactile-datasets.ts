@@ -3,6 +3,48 @@ import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
+{
+  "id": "tacclaw-infinity",
+  "name": "TacClaw-Infinity / Daimon-Infinity public release",
+  "institution": [
+    "Daimon Robotics and the TacClaw-Infinity paper collaborators"
+  ],
+  "year": 2026,
+  "firstPublished": "2026-10-14",
+  "paperVersion": "arXiv v1 (2610.20320)",
+  "dataOrigin": "real",
+  "robot": [
+    "TacClaw handheld collection interface; public host also contains DM-DataClaw and DM-DataDex material"
+  ],
+  "sensor": [
+    "Fingertip tactile sensors and visual observation channels described by the authors"
+  ],
+  "modalities": [
+    "Vision",
+    "Tactile observations",
+    "Language annotations",
+    "End-effector trajectories"
+  ],
+  "sampleCount": "The paper reports over 10,000 hours, 1 million episodes and 1 billion frames across more than 1,000 task types. The hosting card separately describes a first 1,000-hour release. Neither the paper totals nor displayed storage bytes are an independently verified count of downloadable, complete episodes.",
+  "tasks": [
+    "Contact-rich manipulation demonstrations",
+    "Vision-tactile-language-action learning",
+    "Cross-embodiment transfer research"
+  ],
+  "objectCategories": "Diverse manipulation tasks reported by the authors; a deduplicated object inventory for the inspected public files was not verified.",
+  "dataFormat": "The card documents a LeRobot-style layout. Public folders include DM-DataClaw, DataDex_Datasets and TacExo. Payload completeness, alignment and file-level train/test membership were not validated.",
+  "license": "The hosting card labels the dataset CC BY-NC-SA 4.0: attribution, noncommercial use and share-alike conditions apply. Public download visibility is not a commercial-use permission.",
+  "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "codeLicense": "Not verified in this data-access review; dataset terms do not establish code terms.",
+  "modelLicense": "No model-weight license verified in this review.",
+  "generalization": "The authors report transfer across three heterogeneous robots. RoboSkin has not reproduced that result. Human-collected end-effector trajectories require task, action-space and sensor compatibility checks before use on a different robot.",
+  "paperUrl": "https://arxiv.org/abs/2610.20320v1",
+  "projectUrl": "https://daimon-robotics.github.io/tacclaw-infinity-page/",
+  "githubUrl": "https://github.com/daimon-robotics/TacClaw-Infinity",
+  "datasetUrl": "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity",
+  "availability": "Checked 2026-10-16: public file listings are visible at revision 27b2420cf9f516b3456d01418e0ed01b74c8a2b5. The card describes the first 1,000 hours, while the paper reports a larger corpus. The project page still marks release links Coming soon, so public-host files do not establish full paper-corpus release. We inspected documentation and directory listings only; no bulk download, checksum audit, training or hardware experiment was performed.",
+  "sourceReviewed": "2026-10-16"
+},
   {
     id: 'romi-2k',
     name: 'ROMI-2K object-interaction dataset',

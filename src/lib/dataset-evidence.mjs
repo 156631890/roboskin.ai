@@ -1,6 +1,25 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.15', compiledAt: '2026-10-15', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds editorial selection guidance. Individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.10.16', compiledAt: '2026-10-16', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds TacClaw-Infinity public-release scope and license evidence. Other individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
+  "tacclaw-infinity": {
+  "access": "public-files",
+  "accessCheckedAt": "2026-10-16",
+  "licenseStatus": "documented",
+  "dataLicense": "The hosting card labels the dataset CC BY-NC-SA 4.0: attribution, noncommercial use and share-alike conditions apply. Public download visibility is not a commercial-use permission.",
+  "publicFileScale": "Public directories observed: DM-DataClaw, DataDex_Datasets and TacExo. First 1,000 hours are claimed in the card; complete unique episode count and equivalence to the paper corpus remain unverified.",
+  "verificationScope": "Paper abstract, hosting card, root and subset directory listings inspected. No payload download, checksum verification, split audit, training or hardware run.",
+  "splitStatus": "unknown",
+  "splitDetails": "No file-level split manifest validated. Do not infer leakage-free splits from task folder names.",
+  "formatStatus": "described",
+  "formatDetails": "The card documents a LeRobot-style layout. Public folders include DM-DataClaw, DataDex_Datasets and TacExo. Payload completeness, alignment and file-level train/test membership were not validated.",
+  "revision": "27b2420cf9f516b3456d01418e0ed01b74c8a2b5",
+  "sources": [
+    "https://arxiv.org/abs/2610.20320v1",
+    "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity",
+    "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/tree/27b2420cf9f516b3456d01418e0ed01b74c8a2b5",
+    "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  ]
+},
   'romi-2k': {
     access: 'announced',
     accessCheckedAt: '2026-10-12',

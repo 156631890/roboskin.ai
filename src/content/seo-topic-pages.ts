@@ -2811,7 +2811,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: 'October 15, 2026: added intended-use and limitation guidance, format, download and verification fields to comparison and exports. Individual source and access check dates are unchanged.',
+    revisionNote: 'October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.',
     title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
@@ -2819,7 +2819,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-15',
+    updated: '2026-10-16',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
