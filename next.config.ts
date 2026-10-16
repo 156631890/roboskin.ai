@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { membershipConfig } from './src/lib/membership/config.mjs';
 
 const serverRuntime = process.env.ROBOSKIN_RUNTIME === 'server';
 const newsletterEnabled = process.env.NEWSLETTER_ENABLED === 'true';
@@ -8,6 +9,9 @@ if ((newsletterEnabled || contactEndpoint === '/api/contact') && (!serverRuntime
 }
 if (newsletterEnabled && !process.env.BUTTONDOWN_API_KEY) throw new Error('Newsletter activation requires BUTTONDOWN_API_KEY.');
 if (contactEndpoint === '/api/contact' && !process.env.CONTACT_WEBHOOK_URL) throw new Error('Contact activation requires CONTACT_WEBHOOK_URL.');
+if (process.env.REPORTS_ENABLED === 'true' && !membershipConfig().ready) {
+  throw new Error('Paid reports require server runtime, monthly billing, and all documented Waffo/database/email/auth settings.');
+}
 
 const nextConfig: NextConfig = {
   ...(serverRuntime ? {} : { output: 'export' as const }),
