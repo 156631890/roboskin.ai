@@ -194,6 +194,17 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
                       </table>
                     </div>
                   ) : null}
+                  {section.subsections?.map((subsection) => (
+                    <div key={subsection.heading} className="mt-7 border-t border-white/10 pt-6">
+                      <h3 className="text-xl font-semibold text-white">{subsection.heading}</h3>
+                      <div className="mt-3 space-y-4">
+                        {subsection.body.map((paragraph) => <p key={paragraph} className="text-sm leading-relaxed text-[#c8d1de]">{paragraph}</p>)}
+                      </div>
+                      {subsection.links?.length ? <ul className="mt-4 space-y-2 text-sm leading-relaxed">{subsection.links.map((link) => (
+                        <li key={link.href}><a href={link.href} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</a></li>
+                      ))}</ul> : null}
+                    </div>
+                  ))}
                   {section.links?.length ? <ul className="mt-5 space-y-3 text-sm leading-relaxed">{section.links.map(link => <li key={link.href}><Link href={link.href} download={link.download} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link></li>)}</ul> : null}
                 </section>
               ))}

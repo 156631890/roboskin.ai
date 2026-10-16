@@ -1,5 +1,6 @@
 import TactileTopicSections from '@/components/TactileTopicSections';
 import { technologyAdditions, tactileSources } from '@/content/tactile-topic-additions';
+import { practicalSensingSources } from '@/content/tactile-practical-guides';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
@@ -10,6 +11,9 @@ import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonL
 export const metadata: Metadata = buildPageMetadata('/technology');
 
 const technologyFaqs = [
+  { question: 'Do tactile sensors replace force-torque sensors?', answer: 'Not in general. Distributed contact sensing and a resultant force-torque measurement answer different questions. A particular calibrated tactile system may estimate a net load, but that does not make all tactile sensors interchangeable with a wrist transducer.', source: practicalSensingSources.forceAxes },
+  { question: 'Which is better for grasping delicate objects?', answer: 'Local contact sensing can inform finger pressure distribution and incipient slip; arm force sensing can inform approach and interaction loads. Choose using the failure you need to detect, then validate the complete gripper and controller on the intended objects.', source: practicalSensingSources.forceComparison },
+  { question: 'Why do some robots use both tactile and force-torque sensors?', answer: 'They can combine information about the local contact patch with loads transmitted through the tool or joints. Align timestamps and reference frames before using both signals in a controller. Adding sensors alone does not establish better task performance.', source: practicalSensingSources.enlight },
   { question: 'What is tactile super-resolution?', answer: 'It estimates contact details finer than the spacing of physical sensing elements by using the joint response of neighboring sensors and a calibrated model. A larger output map alone does not prove finer physical resolution.', source: tactileSources.lattice },
   {
     question: 'What does a tactile sensor actually measure?',
@@ -267,6 +271,52 @@ export default function TechnologyPage() {
               <h3 className="text-xl font-semibold text-white">Transport settings affect usable feedback</h3>
               <p className="mt-3 text-sm leading-relaxed text-soft">ROS 2 documents that incompatible Quality of Service profiles can prevent messages from arriving. Best-effort delivery may lose samples, while reliable delivery may retry them. A sensor stream therefore needs delivery and freshness checks before it becomes a controller input.</p>
               <p className="mt-4 text-sm"><a href="https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst" className="text-accent underline underline-offset-4">Source: ROS 2 Jazzy Quality of Service documentation</a></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="tactile-vs-force-torque" className="scroll-mt-24 pb-20" aria-labelledby="tactile-vs-force-torque-title">
+        <div className="container-shell">
+          <span className="eyebrow">Sensor selection</span>
+          <h2 id="tactile-vs-force-torque-title" className="mt-4 max-w-4xl text-3xl font-bold text-white md:text-4xl">Tactile Sensors vs Force-Torque Sensors: When to Use Which</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">Start with the observation your task needs: the local contact pattern, the resultant load, or both. Source review: October 16, 2026.</p>
+          <div className="mt-7 space-y-5">
+            <article className="glass-card p-6 md:p-8">
+              <h3 className="text-xl font-semibold text-white">What each measures</h3>
+              <div className="mt-4 overflow-x-auto" role="region" aria-label="Tactile and force-torque comparison" tabIndex={0}>
+                <table className="w-full min-w-[620px] border-collapse text-left text-sm">
+                  <thead><tr className="border-b border-white/10">
+                    <th scope="col" className="p-3 text-white">Measurement</th><th scope="col" className="p-3 text-white">Tactile sensing</th><th scope="col" className="p-3 text-white">Force-torque sensing</th>
+                  </tr></thead>
+                  <tbody className="text-soft">
+                    <tr className="border-b border-white/10"><th scope="row" className="p-3 align-top text-white">Typical output</th><td className="p-3 align-top">A local array, image or other contact signal; available modalities depend on the sensor.</td><td className="p-3 align-top">Resultant forces and moments. A six-axis transducer measures three force and three torque components.</td></tr>
+                    <tr><th scope="row" className="p-3 align-top text-white">Interpretation limit</th><td className="p-3 align-top">Raw contact data may require calibration or inference before it becomes force or slip.</td><td className="p-3 align-top">A net wrench does not by itself uniquely reveal a distributed contact-pressure map.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-4 text-sm"><a href={practicalSensingSources.forceAxes.href} className="text-accent underline underline-offset-4">Robotiq: force-torque measurement axes</a>. <a href={practicalSensingSources.tsfSdk.href} className="text-accent underline underline-offset-4">TSF-85: example local sensor outputs</a>.</p>
+            </article>
+            <article className="glass-card p-6 md:p-8">
+              <h3 className="text-xl font-semibold text-white">Where each sits on the robot</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">Tactile sensing is commonly placed on fingertips, gripper pads or skin surfaces. A wrist force-torque transducer sits between the robot flange and tool and senses loads transmitted through that interface. Joint sensing is another architecture; it should not be described as an array of fingertip taxels.</p>
+              <p className="mt-4 text-sm"><a href={practicalSensingSources.forceComparison.href} className="text-accent underline underline-offset-4">Robotiq comparison, published September 16, 2014 and updated December 19, 2024</a></p>
+            </article>
+            <article className="glass-card p-6 md:p-8">
+              <h3 className="text-xl font-semibold text-white">Can they replace each other?</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">Usually they are complementary. Flexiv&apos;s September 2026 IROS announcement describes Enlight with multi-dimensional force sensors in each of its seven joints. This illustrates force perception distributed through the arm; the announcement does not establish a dense fingertip pressure map or prove that tactile skin is unnecessary.</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">Our selection inference is to compare the outputs required by the task, not the sensor labels. For example, an object can change its contact distribution while producing a similar net load. Conversely, a fingertip contact image alone does not describe every external load on the arm.</p>
+              <p className="mt-4 text-sm"><a href={practicalSensingSources.enlight.href} className="text-accent underline underline-offset-4">Flexiv: Enlight joint sensing at IROS 2026</a></p>
+            </article>
+            <article className="glass-card p-6 md:p-8">
+              <h3 className="text-xl font-semibold text-white">Practical selection guidance for robot builders</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">For contact location, distribution or slip cues, evaluate a suitable fingertip sensor. For tool interaction loads during insertion or surface following, evaluate force-torque feedback. If both matter, test the combined system with common timestamps, coordinate frames and success criteria.</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">For delicate objects, validate contact coverage, calibrated limits, reaction time and failure recovery. Neither a tactile array nor a force sensor automatically guarantees a safe grasp. This is a selection framework, not a comparative hardware benchmark.</p>
+              <div className="mt-5 flex flex-wrap gap-4 text-sm">
+                <Link href="/sensors" className="text-accent underline underline-offset-4">Compare tactile sensors</Link>
+                <Link href="/sensors/robotiq-tsf-85" className="text-accent underline underline-offset-4">Read the TSF-85 profile</Link>
+                <Link href="/e-skin#temperature-and-thermal-sensing" className="text-accent underline underline-offset-4">Explore thermal touch</Link>
+              </div>
             </article>
           </div>
         </div>

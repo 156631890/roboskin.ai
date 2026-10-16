@@ -91,7 +91,11 @@ function contextLinks(document) {
 }
 
 for (const pathname of contentPaths) {
-  const [minFaqs, maxFaqs] = ['/tactile-foundation-models', '/e-skin', '/physical-ai-touch'].includes(pathname) ? [5, 8] : [3, 6];
+  // October 16 additions retain every previous answer and add 3–5 focused
+  // questions per requested topic. Keep the rendered/schema equality gate.
+  const expandedFaqRanges = { '/technology': [9, 11], '/e-skin': [9, 11], '/sensors': [7, 9] };
+  const [minFaqs, maxFaqs] = expandedFaqRanges[pathname]
+    ?? (['/tactile-foundation-models', '/physical-ai-touch'].includes(pathname) ? [5, 8] : [3, 6]);
   test(`${pathname}: visible FAQ and one FAQPage contain the same ${minFaqs}–${maxFaqs} answers`, () => {
     const document = renderRoute(pathname);
     const faqNodes = graphNodes(document).filter((node) => node?.['@type'] === 'FAQPage');

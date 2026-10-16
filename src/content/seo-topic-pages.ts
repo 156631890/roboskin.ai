@@ -4,6 +4,7 @@ import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { programmingPages } from '@/content/programming-pages';
 import { engineeringPages } from '@/content/engineering-pages';
+import { thermalSensingSection, thermalSensingFaqs, tactileSensorCostSection, tactileSensorCostFaqs } from '@/content/tactile-practical-guides';
 
 export type SeoTopicPage = {
   path: string;
@@ -29,6 +30,11 @@ export type SeoTopicPage = {
     id?: string;
     heading: string;
     body: string[];
+    subsections?: {
+      heading: string;
+      body: string[];
+      links?: { label: string; href: string }[];
+    }[];
     contextLinks?: { before: string; label: string; href: string; after: string }[];
     bullets?: string[];
     links?: { label: string; href: string; download?: boolean }[];
@@ -843,19 +849,19 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 12, 2026: added magnetic skin, eLuminator, EIT and iontronic sensing distinctions, source-bounded limitations and practical reading routes.',
+    revisionNote: 'October 16, 2026: added thermal sensing, physical sensor examples and the limits of TouchTherm reconstruction results. Existing modality explanations and sources are retained.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: "2026-10-12",
+    updated: '2026-10-16',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'answers',
-    keywords: ['e-skin', 'electronic skin robotics', 'conformable electronic skin', 'flexible tactile sensor', 'robotic electronic skin'],
+    keywords: ['e-skin', 'electronic skin robotics', 'conformable electronic skin', 'flexible tactile sensor', 'robotic electronic skin', 'what is thermal tactile sensing', 'temperature sensing robot skin explained'],
     quickAnswer: [
       'E-skin, or electronic skin, is a flexible or soft sensor layer designed to measure contact-related signals on non-flat surfaces.',
       'In robotics, e-skin can cover fingertips, palms, gripper pads, prosthetics, arms, or safety surfaces.',
@@ -958,6 +964,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           }
         ]
       },
+      thermalSensingSection,
       {
         "id": "challenges-and-limitations",
         "heading": "Challenges & Limitations",
@@ -983,6 +990,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      ...thermalSensingFaqs,
       { question: 'How does magnet-based tactile skin work?', answer: 'Contact deforms a magnetic interface, changing the field measured by sensors below it. Calibration or a learned mapping estimates the contact property. Check the exact geometry and validated outputs; field readings are not automatically force measurements.', sources: [tactileSources.lattice, { label: 'ReSkin author project', href: 'https://reskin.dev/' }] },
       {
         question: 'What does e-skin stand for?',
@@ -3725,16 +3733,17 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-15',
-    revisionNote: 'October 15, 2026: added task filters for slip, dexterity and full-hand coverage, with evaluation conditions and a blank comparison worksheet. Existing source-linked limitations are retained.',
+    updated: '2026-10-16',
+    revisionNote: 'October 16, 2026: added published cost examples, integration budgeting and a TSF-85 profile route. Task filters, comparison tables and the blank worksheet are retained.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor'],
+    keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor', 'how much does a tactile sensor cost'],
     startHere: {
       heading: "Choose a comparison route",
       links: [
+        { label: "Robotiq TSF-85", href: "/sensors/robotiq-tsf-85", description: "Pressure and vibration rates, official SDK and integration limits." },
         { label: "DIGIT tactile sensor", href: "/sensors/digit", description: "Original hardware specifications, Python frames and calibration limits." },
         { label: "GelSight Mini", href: "/sensors/gelsight-mini", description: "Read the integration and evidence guide before selecting hardware." },
           { label: "ReSkin magnetic tactile sensing", href: "/sensors/reskin", description: "Understand the sensing approach and source-bounded integration requirements." },
@@ -3944,8 +3953,10 @@ export const seoTopicPages: SeoTopicPage[] = [
           }
         ]
       },
+      tactileSensorCostSection,
     ],
     faqs: [
+      ...tactileSensorCostFaqs,
       { question: 'What tactile sensors are used in robot hands?', answer: 'Common choices include vision-based tactile fingertips, magnetic skins, distributed force arrays, and multimodal biomimetic fingertips. The right choice depends on hand geometry, contact task, control rate, and maintenance constraints.' },
       { question: 'Are vision-based tactile sensors force sensors?', answer: 'They produce images of a deforming interface. Force can be estimated after calibration or learned mapping, but a raw tactile image is not automatically a calibrated force measurement.' },
       { question: 'What is a taxel?', answer: 'A taxel is a tactile sensing element in an array, analogous to a pixel only at the level of spatial indexing. Taxels can measure different physical quantities and may not have independent responses.' },

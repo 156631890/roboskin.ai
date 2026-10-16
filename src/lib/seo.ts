@@ -116,7 +116,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'What Is Tactile Sensing? Robotics Basics & Sensor Types',
     description:
       'Learn how tactile sensing works in robotics, how it differs from robot skin and tactile AI, and how to choose sensors, datasets and integration guides.',
-    updated: '2026-10-12',
+    updated: '2026-10-16',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
