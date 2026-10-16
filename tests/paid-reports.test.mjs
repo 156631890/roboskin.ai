@@ -13,7 +13,7 @@ import { createMailer } from '../src/lib/membership/mail.mjs';
 
 const migration = await readFile(new URL('../db/migrations/001-paid-reports.sql', import.meta.url), 'utf8');
 const fixedNow = new Date('2026-10-16T02:00:00Z');
-const config = { ready: true, enabled: true, checkoutEnabled: true, interval: 'weekly', mode: 'test',
+const config = { ready: true, enabled: true, checkoutEnabled: true, interval: 'monthly', mode: 'test',
   origin: 'https://roboskin.ai', storeId: 'STO_test', productId: 'PROD_test', authSecret: 'test-auth-secret-with-at-least-32-chars',
   cronSecret: 'test-cron-secret-with-at-least-32-chars' };
 function issue() {
@@ -46,11 +46,11 @@ async function fixture(t) {
   async function buy() {
     const auth = await login();
     const reportId = await publishReport(db, issue(), clock);
-    await service.checkout(auth.user, 'weekly:9.90:USD:v1');
+    await service.checkout(auth.user, 'monthly:9.90:USD:v1');
     const checkout = (await db.query('SELECT * FROM report_checkouts')).rows[0];
-    const order = { id: 'ORD_test', orderMerchantExternalId: checkout.id, status: 'active', billingPeriod: 'weekly',
+    const order = { id: 'ORD_test', orderMerchantExternalId: checkout.id, status: 'active', billingPeriod: 'monthly',
       subscriptionProduct: { id: 'PROD_test' }, priceSnapshot: { currency: 'USD', regularPhase: { subtotal: '9.90' } },
-      currentPeriodStart: '2026-10-15T00:00:00Z', currentPeriodEnd: '2026-10-22T00:00:00Z', currentPeriodNumber: 1,
+      currentPeriodStart: '2026-10-15T00:00:00Z', currentPeriodEnd: '2026-11-15T00:00:00Z', currentPeriodNumber: 1,
       payments: [{ id: 'PAY_1', status: 'succeeded', periodNumber: 1 }] };
     orders.set(checkout.id, order);
     const event = { mode: 'test', storeId: 'STO_test', eventType: 'subscription.activated', eventId: 'ORD_test',
@@ -65,12 +65,22 @@ function request(body, token, extra = {}) {
     headers: { origin: config.origin, 'content-type': 'application/json', ...(token ? { cookie: `${cookieName}=${token}` } : {}), ...extra }, body: JSON.stringify(body) });
 }
 
-test('membership is disabled by default and never invents a billing interval', () => {
+test('membership remains disabled by default with the confirmed monthly billing interval', () => {
   assert.equal(membershipConfig({}).ready, false);
-  assert.equal(membershipConfig({}).interval, undefined);
+  assert.equal(membershipConfig({}).interval, 'monthly');
   assert.equal(membershipConfig({ REPORTS_ENABLED: 'true', ROBOSKIN_RUNTIME: 'server' }).ready, false);
   assert.equal(moneyCents('9.90'), 990);
   for (const value of [9.9, '9.999', '-9.90', '9e2', 'NaN']) assert.equal(moneyCents(value), null);
+});
+
+test('a conflicting billing environment setting cannot activate weekly charging', () => {
+  const env = { REPORTS_ENABLED: 'true', ROBOSKIN_RUNTIME: 'server', WAFFO_MODE: 'test',
+    WAFFO_STORE_ID: 'fixture', WAFFO_PRODUCT_ID: 'fixture', WAFFO_MERCHANT_ID: 'fixture', WAFFO_PRIVATE_KEY: 'fixture',
+    REPORTS_DATABASE_URL: 'fixture', REPORTS_AUTH_SECRET: 'a'.repeat(32), RESEND_API_KEY: 'fixture',
+    REPORTS_MAIL_FROM: 'fixture@example.org', REPORTS_CRON_SECRET: 'b'.repeat(32) };
+  assert.equal(membershipConfig(env).ready, true);
+  assert.equal(membershipConfig({ ...env, REPORTS_BILLING_INTERVAL: 'monthly' }).ready, true);
+  assert.equal(membershipConfig({ ...env, REPORTS_BILLING_INTERVAL: 'weekly' }).ready, false);
 });
 
 test('official SDK verifies raw RSA signatures, rejects altered bodies and expired signatures', () => {
@@ -87,11 +97,11 @@ test('official SDK verifies raw RSA signatures, rejects altered bodies and expir
 test('official SDK checkout adapter pins product, tax category, amount, interval and idempotency key', async () => {
   const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048, privateKeyEncoding: { type: 'pkcs8', format: 'pem' } });
   const requests = [];
-  let price = '9.90';
+  let price = '9.90', billingPeriod = 'monthly';
   const client = createWaffo({ ...config, merchantId: 'MER_3kF9mNpQrStUvWxYz1A2bC', privateKey }, async (url, options) => {
     const body = JSON.parse(options.body); requests.push({ url, options, body });
     if (url.endsWith('/graphql')) return Response.json({ data: { store: { prodEnabled: false, subscriptionProducts: [
-      { id: 'PROD_test', billingPeriod: 'weekly', status: 'active', prices: [{ currency: 'USD', priceInfo: { amount: price } }] },
+      { id: 'PROD_test', billingPeriod, status: 'active', prices: [{ currency: 'USD', priceInfo: { amount: price } }] },
     ] } } });
     return Response.json({ data: { sessionId: 'fixture', checkoutUrl: 'https://pancake.waffo.ai/store/test/checkout/fixture', expiresAt: '2026-10-16T03:00:00Z' } });
   });
@@ -104,6 +114,8 @@ test('official SDK checkout adapter pins product, tax category, amount, interval
   assert.equal(sent.options.headers['X-Idempotency-Key'], 'roboskin-checkout-reference');
   assert.equal(new URL(result.url).searchParams.get('test'), 'true');
   price = '99.00';
+  await assert.rejects(client.validateProduct());
+  price = '9.90'; billingPeriod = 'weekly';
   await assert.rejects(client.validateProduct());
 });
 
@@ -125,11 +137,11 @@ test('email ownership requires a single-use code and invalid attempts survive tr
 
 test('checkout requires exact recurring consent and a fresh issue, then reuses a durable session', async t => {
   const f = await fixture(t), { user } = await f.login();
-  await assert.rejects(f.service.checkout(user, 'monthly:9.90:USD:v1'), { status: 400 });
-  await assert.rejects(f.service.checkout(user, 'weekly:9.90:USD:v1'), { status: 503 });
+  await assert.rejects(f.service.checkout(user, 'weekly:9.90:USD:v1'), { status: 400 });
+  await assert.rejects(f.service.checkout(user, 'monthly:9.90:USD:v1'), { status: 503 });
   await publishReport(f.db, issue(), fixedNow);
-  const a = await f.service.checkout(user, 'weekly:9.90:USD:v1');
-  const b = await f.service.checkout(user, 'weekly:9.90:USD:v1');
+  const a = await f.service.checkout(user, 'monthly:9.90:USD:v1');
+  const b = await f.service.checkout(user, 'monthly:9.90:USD:v1');
   assert.equal(a.url, b.url); assert.equal(f.checkoutCalls(), 1);
   assert.equal(await f.service.access(user.id), null);
 });
@@ -139,8 +151,8 @@ test('checkout timeout retains the reference for an idempotent retry', async t =
   await publishReport(f.db, issue(), fixedNow);
   const original = f.waffo.checkout; const references = [];
   f.waffo.checkout = async id => { references.push(id); if (references.length === 1) throw new Error('timeout'); return original(id); };
-  await assert.rejects(f.service.checkout(user, 'weekly:9.90:USD:v1'));
-  await f.service.checkout(user, 'weekly:9.90:USD:v1');
+  await assert.rejects(f.service.checkout(user, 'monthly:9.90:USD:v1'));
+  await f.service.checkout(user, 'monthly:9.90:USD:v1');
   assert.equal(references[0], references[1]);
 });
 
@@ -174,10 +186,10 @@ test('renewal requires payment for that period; overdue, trial and expired perio
     assert.equal(entitlement({ ...a.order, status }, a.checkout, [], fixedNow), false);
   }
   assert.equal(entitlement({ ...a.order, currentPeriodNumber: 2 }, a.checkout, [], fixedNow), false);
-  f.setNow('2026-10-22T00:00:00Z');
+  f.setNow('2026-11-15T00:00:00Z');
   assert.equal(await f.service.access(a.user.id), null);
   await assert.rejects(f.service.report(a.user.id, a.reportId), { status: 403 });
-  Object.assign(a.order, { currentPeriodNumber: 2, currentPeriodStart: '2026-10-22T00:00:00Z', currentPeriodEnd: '2026-10-29T00:00:00Z', payments: [...a.order.payments, { id: 'PAY_2', periodNumber: 2, status: 'succeeded' }] });
+  Object.assign(a.order, { currentPeriodNumber: 2, currentPeriodStart: '2026-11-15T00:00:00Z', currentPeriodEnd: '2026-12-15T00:00:00Z', payments: [...a.order.payments, { id: 'PAY_2', periodNumber: 2, status: 'succeeded' }] });
   await f.service.webhook({ ...a.event, eventType: 'subscription.renewed', eventId: 'period-2' });
   assert.ok(await f.service.access(a.user.id));
 });
@@ -248,6 +260,21 @@ test('weekly delivery is once per paid member, respects opt-out and never emails
   await f.service.preferences(a.user.id, false);
   assert.equal((await dispatchReports(f)).sent, 0);
   await assert.rejects(publishReport(f.db, issue(), fixedNow));
+});
+
+test('one monthly payment gives access to successive weekly issues without a new checkout', async t => {
+  const f = await fixture(t), a = await f.buy();
+  assert.equal((await dispatchReports(f)).sent, 1);
+  f.setNow('2026-10-23T02:00:00Z');
+  const nextIssue = { ...issue(), weekStart: '2026-10-19', title: 'Fixture: following weekly issue',
+    sourceCutoff: '2026-10-22T00:00:00Z', reviewedAt: '2026-10-22T01:00:00Z', publishedAt: '2026-10-22T02:00:00Z' };
+  const nextId = await publishReport(f.db, nextIssue, f.now());
+  assert.equal((await dispatchReports(f)).sent, 1);
+  assert.equal((await dispatchReports(f)).sent, 0);
+  assert.equal((await f.service.account(a.user.id)).reports.length, 2);
+  assert.equal((await f.service.report(a.user.id, nextId)).title, nextIssue.title);
+  assert.equal(f.checkoutCalls(), 1);
+  assert.equal(a.order.currentPeriodNumber, 1);
 });
 
 test('ambiguous mail errors retry with same key inside provider window, then hold rather than double-send', async t => {

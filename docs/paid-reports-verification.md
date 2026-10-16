@@ -6,7 +6,7 @@ Scope: email verification → Waffo checkout → authoritative paid access → p
 
 | Check | Result / evidence |
 | --- | --- |
-| `npm test` | 284 passed, 0 failed, including 17 new payment/report tests |
+| `npm test` | 286 passed, 0 failed, including 19 payment/report tests |
 | `npm run lint` | Passed |
 | Static `npm run build` | Passed on Next 15.5.28; 203 HTML/Markdown representations |
 | `npm run verify:export` | Passed: 192 sitemap URLs, 196 protected contract entries, existing SEO/link checks |
@@ -20,9 +20,11 @@ The new tests run the real SQL migration in PGlite. They exercise one-time codes
 
 The Waffo adapter is tested through the official SDK with an injected HTTP transport. This does not establish compatibility with a real merchant's live GraphQL schema. Browser automation is unavailable in this session (`iab` unavailable); HTTP/HTML checks are not represented as visual or interactive browser acceptance.
 
+Monthly-plan follow-up: config rejects a weekly environment override, the official SDK adapter rejects a weekly Waffo product, and a real-SQL delivery test verifies two successive weekly issues under one monthly payment without another checkout. This follow-up reruns tests, lint, static build and export checks. Server-build and running HTTP checks above are baseline evidence from `7757a67`; they are not a new live-payment acceptance result.
+
 ## Remaining release gates
 
-- Owner must confirm whether **US$9.90 is charged weekly or monthly**. No billing interval defaults in production configuration.
+The owner confirmed **US$9.90 per month, with one new report every week** on 2026-10-16. Configuration and checkout now accept monthly billing only; charging frequency is no longer an outstanding question.
 - Waffo merchant credentials, store/product, environment pairing, tax behavior, webhook registration and a genuine sandbox order must be verified. No real checkout, refund, or charge was executed.
 - Postgres, a verified Resend sender and scheduled delivery must be configured. No real member email was sent.
 - GitHub rejected the initial branch push because the active OAuth credential lacks `workflow` scope. The original full candidate remains in local commit `f0cf6da`; the review branch contains the identical scheduler as a non-executing template in `docs/operations/report-delivery.workflow.yml`. It must be installed by an authorized identity before scheduling can run. No permission change or alternative credential was attempted.

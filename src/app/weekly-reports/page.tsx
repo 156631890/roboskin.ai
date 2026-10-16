@@ -42,8 +42,8 @@ export default function WeeklyReportsPage() {
           {config.mode === 'test' && <p className="mt-4 font-semibold" role="note">Sandbox — test payments only. This is not a live subscription offer.</p>}
           <ReportMembership checkoutEnabled={config.checkoutEnabled} />
         </> : <>
-          <p className="mt-4 text-3xl font-semibold">Planned price: US$9.90</p>
-          <p className="mt-3">The billing interval and launch date are not confirmed. Subscription terms and a current issue will be available before checkout opens.</p>
+          <p className="mt-4 text-3xl font-semibold">US$9.90 / month</p>
+          <p className="mt-3">Monthly subscription with one new industry report every week. Applicable tax is shown before payment. Checkout is not open yet; the launch date and first issue will be available before subscriptions begin.</p>
           <p className="mt-4"><Link className="underline" href="/#newsletter">Explore the free Newsletter</Link> or <Link className="underline" href="/rss">follow the research RSS feed</Link>.</p>
         </>}
         <p className="mt-6 text-sm"><a className="underline" href={PORTAL_URL}>Manage or cancel billing at Waffo</a> · <Link className="underline" href="/terms">Terms</Link> · <Link className="underline" href="/privacy">Privacy</Link></p>

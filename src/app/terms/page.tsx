@@ -36,7 +36,7 @@ export default function TermsPage() {
               <div>
                 <h2 className="text-2xl font-semibold">Weekly report subscriptions</h2>
                 <p className="mt-3">
-                  When report checkout is open, the membership page and Waffo checkout display the US-dollar price, billing interval and applicable tax before payment. Subscriptions renew automatically at the stated interval until canceled. Report delivery is weekly, independently of the billing interval. Email verification alone does not create a paid subscription.
+                  Report membership costs US$9.90 per month, plus applicable tax shown at Waffo checkout before payment. Subscriptions renew automatically each month until canceled. Members receive one new industry report every week during their paid subscription. Email verification alone does not create a paid subscription, and billing does not begin while checkout is closed.
                 </p>
                 <p className="mt-3">
                   Active members receive an email notice linking to each published report and may read the private report library. The free Newsletter remains separate. Reports present source-linked research and analysis, not investment advice or a guarantee of technical performance. Source cutoffs and limitations are included in each report.

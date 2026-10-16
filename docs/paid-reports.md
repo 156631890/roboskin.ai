@@ -1,10 +1,10 @@
 # Paid weekly reports with Waffo
 
-Implementation date: 2026-10-16. This is a disabled integration until the merchant, billing interval, delivery service, database and current reviewed issue are configured. It has not processed a real payment. Do not interpret unit tests as Waffo sandbox certification.
+Implementation date: 2026-10-16. This is a disabled integration until the merchant, delivery service, database and current reviewed issue are configured. It has not processed a real payment. Do not interpret unit tests as Waffo sandbox certification.
 
 ## Product contract
 
-- Proposed price: **US$9.90**, before applicable tax. **No default billing interval.** Set `weekly` or `monthly` only after the owner confirms the charging interval. Report delivery is weekly in either case.
+- Owner-confirmed plan (2026-10-16): **US$9.90 per month**, before applicable tax, renewing monthly until canceled. **One new industry report each week.** Billing is fixed to `monthly`; a conflicting environment override or weekly Waffo product is rejected.
 - Users verify their email, accept the exact interval/price, and open Waffo hosted checkout. The server pins the product, USD price, no trial, business reference and HTTPS return URL. The browser cannot provide price or product overrides.
 - Use the same verified email for Waffo billing; the billing portal independently verifies the purchase email. Checkout return never grants access. Waffo's **Done** button returns to RoboSkin; closing checkout does not redirect automatically.
 - Access requires an active/canceling authoritative order, the expected product/price/interval, a successful payment for the current period, and an unexpired period. Canceling retains the remaining paid period. Past-due, pending, canceled, expired, trial-only and mismatched records do not grant access.
@@ -21,7 +21,7 @@ Set these as server-only secrets/configuration in the existing **roboskin-ai** V
 | `ROBOSKIN_RUNTIME=server` | Enables Next server routes; default remains static export |
 | `REPORTS_ENABLED=true` | Enables member sign-in/read APIs after complete configuration |
 | `REPORTS_CHECKOUT_ENABLED=false` | Keep closed through verification; independently stops new purchases without blocking existing members/webhooks |
-| `REPORTS_BILLING_INTERVAL` | Explicit `weekly` or `monthly`, confirmed by owner |
+| `REPORTS_BILLING_INTERVAL` | Optional; omit or set `monthly`. Any other value prevents activation |
 | `REPORTS_SITE_ORIGIN` | Exact HTTPS origin, no trailing slash; production `https://roboskin.ai` |
 | `WAFFO_MODE` | `test` or `prod`; must match the API key's environment |
 | `WAFFO_MERCHANT_ID`, `WAFFO_PRIVATE_KEY` | Server-side merchant signing credentials; escaped PEM newlines supported |
@@ -35,14 +35,14 @@ Set these as server-only secrets/configuration in the existing **roboskin-ai** V
 
 ### Setup sequence
 
-1. Owner confirms billing interval and completes Waffo merchant onboarding/KYB and payout setup. No code can substitute for this. In Waffo test mode create the dedicated digital report subscription: USD `9.90`, confirmed billing period, no trial. Do not expose plan changes to other products.
+1. Complete Waffo merchant onboarding/KYB and payout setup. No code can substitute for this. In Waffo test mode create the dedicated digital report subscription: USD `9.90`, billing period `monthly`, no trial. Do not expose plan changes to other products.
 2. Provision an existing or explicitly approved Postgres database and verified Resend sender. The code does not provision or purchase services. Load settings through your normal local/Vercel secret mechanism.
 3. Run `node scripts/reports.mjs migrate` against the intended database. Re-running the initial migration is safe. For future schema changes add numbered migrations; never overwrite production tables.
 4. Run `node scripts/reports.mjs check-waffo`. It checks price/product/interval and the read query against the current official schema without creating an order. Waffo documentation has inconsistent GraphQL examples; real sandbox validation is a release prerequisite.
 5. Configure Waffo HTTP webhooks at `https://<preview-host>/api/waffo/webhook`, then production's corresponding URL. Subscribe to all `subscription.*` and `refund.*` events. Verification uses the official SDK RSA keys, raw bytes and the 45-minute retry tolerance, plus persistent event deduplication. Keep test and production keys/environment paired; the API environment is derived from the key, not the SDK's environment option.
 6. Prepare the first real weekly report, verify primary sources and approval, and import it with the command below. Checkout rejects stale/missing issues (source cutoff older than 7 days).
 7. In an HTTPS preview enable test checkout and run: sign-in/email delivery, checkout, activation, repeated/delayed webhook, renewal, cancellation at period end, overdue/recovery, current/previous/partial refund, expired access, billing portal, sign-out, and report email preference. A placeholder or dashboard sample event cannot stand in for an actual sandbox order. Verify tax and the exact renewal wording in Waffo's cashier.
-8. After owner-confirmed interval and successful sandbox acceptance, publish the Waffo product to production using production credentials. Configure the production webhook. Enable checkout only with a current issue and a named operational owner for weekly editorial delivery.
+8. After successful sandbox acceptance of the monthly plan, publish the Waffo product to production using production credentials. Configure the production webhook. Enable checkout only with a current issue and a named operational owner for weekly editorial delivery.
 9. Have an identity with GitHub workflow permission install `docs/operations/report-delivery.workflow.yml` as `.github/workflows/report-delivery.yml`. The current publishing credential lacks that permission, so this PR contains a **non-executing template**, not an installed scheduled workflow. Set Actions secret `REPORTS_CRON_SECRET` and repository variable `REPORTS_DELIVERY_ENABLED=true`. The hourly workflow only dispatches the latest reviewed weekly issue, once per member. It does not create reports or send marketing. Run a manual dispatch and verify the receipt and inbox. Until installed and enabled, automatic email delivery is **not running**. An existing authorized external scheduler may instead POST to the same dispatch endpoint with the bearer secret.
 10. Follow the repository's protected PR/production validation process. Main auto-deploys. Confirm production deployment SHA and run `node scripts/verify-production.mjs https://roboskin.ai` plus membership flow acceptance. Do not claim production readiness with missing credentials.
 
