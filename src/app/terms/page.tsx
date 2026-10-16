@@ -30,7 +30,7 @@ export default function TermsPage() {
               <div>
                 <h2 className="text-2xl font-semibold">Services</h2>
                 <p className="mt-3">
-                  Public pages describe robot skin category context, learning resources, and the RoboSkin.ai research inquiry path. Any commercial engagement is subject to a separate written agreement.
+                  Public research pages and the free Newsletter are available without a report membership. The weekly report subscription described below is a separate digital service. Bespoke research work is quoted individually and begins only after you accept a written scope, price, delivery schedule and payment terms; sending an inquiry does not create a charge.
                 </p>
               </div>
               <div>
@@ -45,7 +45,28 @@ export default function TermsPage() {
                   Cancel future renewals through the <a className="legal-link" href="https://pancake.waffo.ai/consumer/portal/login">Waffo billing portal</a>, using the email on your payment receipt. Canceling preserves access until the end of the paid period. Turning off report emails does not cancel billing. A full refund of the current period ends that period&apos;s access; partial refunds and refunds of earlier periods do not remove a later paid period.
                 </p>
                 <p className="mt-3">
-                  For billing errors, missing reports, or refund requests, <a className="legal-link" href="/contact?requestType=other">contact RoboSkin support</a> with your order reference. Requests are reviewed against the payment record and applicable consumer rights; this page does not limit rights that cannot legally be waived.
+                  Waffo.com Limited is the Merchant of Record for subscription payments and issues payment receipts. RoboSkin provides the report content and membership support. The price, applicable tax and recurring billing terms are shown before you pay.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold">Refunds and billing problems</h2>
+                <p className="mt-3">
+                  You may request a full refund within seven days of your first subscription payment. For a duplicate charge, incorrect amount, or a paid report that we fail to provide, contact us with your order reference so we can investigate and arrange the appropriate refund or delivery remedy. Canceling renewal alone does not refund an already-paid period; statutory cancellation and refund rights still apply.
+                </p>
+                <p className="mt-3">
+                  Send refund requests to <a className="legal-link" href={`mailto:${site.contact.legalEmail}`}>{site.contact.legalEmail}</a> or <a className="legal-link" href="/contact?requestType=other">our support form</a>, using your purchase email and order reference. Do not send card numbers. Approved refunds are processed through Waffo to the original payment method; the time for the credit to appear depends on the payment provider and bank. A full refund ends access for the refunded billing period.
+                </p>
+                <p className="mt-3">
+                  Bespoke research has its own written cancellation and refund terms, agreed before payment. If we cannot deliver agreed work, contact us to resolve delivery or a refund for the affected work. Nothing in these terms removes consumer rights that cannot legally be waived.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold">Misuse, suspension and termination</h2>
+                <p className="mt-3">
+                  Do not share account access, redistribute private paid reports without permission, submit fraudulent information, interfere with the site, or attempt to access another member&apos;s data. We may warn you, restrict access, or suspend or terminate an account for these violations. Where practicable, we will explain the reason and give you an opportunity to respond; immediate restrictions may be needed to prevent fraud or protect other users. Contact support if you believe a restriction is mistaken.
+                </p>
+                <p className="mt-3">
+                  An account restriction does not itself cancel a Waffo subscription. If we terminate your paid membership, we will arrange cancellation of future renewals and address any unused paid service and applicable refund rights. You may also stop future charges directly in the Waffo billing portal.
                 </p>
               </div>
               <div>

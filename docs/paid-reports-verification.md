@@ -18,14 +18,14 @@ Scope: email verification → Waffo checkout → authoritative paid access → p
 
 The new tests run the real SQL migration in PGlite. They exercise one-time codes, exhausted attempts, session logout, checkout consent/freshness, persistent checkout references across timeout retries, official SDK request signing/price fields, RSA raw-body verification, 45-minute signature tolerance, event mode/store identity, duplicate events, out-of-order state, renewal, expiry, cancellation, partial/full/previous-period refunds, transactional rollback/retry, private report access, editorial validation, email preferences, email receipt validation and retry/hold behavior.
 
-The Waffo adapter is tested through the official SDK with an injected HTTP transport. This does not establish compatibility with a real merchant's live GraphQL schema. Browser automation is unavailable in this session (`iab` unavailable); HTTP/HTML checks are not represented as visual or interactive browser acceptance.
+The original local Waffo tests used the official SDK with an injected HTTP transport. On October 16, after the owner signed in, the real Waffo test API successfully validated the RoboSkin monthly USD 9.90 product and the order-query GraphQL contract. A real sandbox checkout session was created and its hosted page displayed USD 9.90/month and the no-real-charge banner. No successful sandbox payment or callback is claimed yet. Chrome became available for browser verification during merchant setup.
 
 Monthly-plan follow-up: config rejects a weekly environment override, the official SDK adapter rejects a weekly Waffo product, and a real-SQL delivery test verifies two successive weekly issues under one monthly payment without another checkout. This follow-up reruns tests, lint, static build and export checks. Server-build and running HTTP checks above are baseline evidence from `7757a67`; they are not a new live-payment acceptance result.
 
 ## Remaining release gates
 
 The owner confirmed **US$9.90 per month, with one new report every week** on 2026-10-16. Configuration and checkout now accept monthly billing only; charging frequency is no longer an outstanding question.
-- Waffo merchant credentials, store/product, environment pairing, tax behavior, webhook registration and a genuine sandbox order must be verified. No real checkout, refund, or charge was executed.
+- Waffo test credentials, a dedicated RoboSkin store, monthly USD 9.90 product and initial API schema checks are verified. Production onboarding, tax behavior, webhook registration and a successfully paid sandbox order remain unverified. No refund or charge was executed.
 - Postgres, a verified Resend sender and scheduled delivery must be configured. No real member email was sent.
 - GitHub rejected the initial branch push because the active OAuth credential lacks `workflow` scope. The original full candidate remains in local commit `f0cf6da`; the review branch contains the identical scheduler as a non-executing template in `docs/operations/report-delivery.workflow.yml`. It must be installed by an authorized identity before scheduling can run. No permission change or alternative credential was attempted.
 - A current, actually reviewed first issue and ongoing weekly editorial responsibility are needed before taking payment. The scheduler delivers approved issues; it does not create or approve research automatically.
@@ -54,6 +54,14 @@ Pages: proposed `/weekly-reports`, affected `/terms`, `/privacy` and footer entr
 | C17 Actual functionality | 不过 | 通过 |
 
 C07/C17: closed state is honest; full paid transaction cannot yet be accepted without merchant/configuration/inbox evidence. C14: actual built HTML/HTTP and index intent verified, but browser rendering is unverified. C10/C15 excluded: no new media or language variants. **Current paid release is not cleared for production.** Draft code can be reviewed while these external requirements are completed.
+
+## Merchant-readiness follow-up
+
+The owner approved a seven-day full refund window for the first subscription payment, investigation/remedy for duplicate or incorrect charges and failed report delivery, and cancellation without an automatic refund of the current paid period. Terms now state that policy, the support channel, refund processing, account misuse and termination handling. The shared footer displays USD 9.90/month and links to availability. These changes are intended for a **public, checkout-closed onboarding release**; opening paid membership remains subject to all gates above.
+
+The Waffo site precheck against the old production pages identified missing pricing, refund terms and misuse consequences. Both policy URLs returned HTTP 200. The required Cloudflare TXT record was added without changing routing or mail records; public DNS returned the record and Waffo displayed the RoboSkin domain as verified. Business review is not yet approved. Merchant credentials are stored outside the repository and are not included in evidence or commits.
+
+Follow-up tests: 286 passed, lint passed, static build and export checks passed. Logs: `tests-merchant-readiness.log`, `lint-merchant-readiness.log`, `build-merchant-readiness.log`, `export-merchant-readiness.log` in the same local evidence directory. Browser preview and production SHA checks will be recorded separately; a closed onboarding release is not evidence of a completed payment integration.
 
 ## Dependency audit
 
