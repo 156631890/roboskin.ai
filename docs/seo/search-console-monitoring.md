@@ -2,6 +2,63 @@
 
 Use this table weekly after the sitemap is submitted. The current decision workflow and September 12 priority queue are in [Search-led content decisions](search-led-content-loop.md); individual baselines and observation windows are in `growth-batches/`. Preserve post-change observation windows, distinguish indexed status from submission receipts, and do not infer a winner from a few clicks. Historical snapshots below retain their original dates.
 
+## ChatSEO weekly baseline - report received 2026-10-02, reviewed 2026-10-03
+
+Source: the authenticated ChatSEO email `Weekly SEO Report - roboskin.ai`, sent October 2, 2026 at 08:46:45 UTC. The email explicitly covers **September 23–29, 2026**, not October 2 or the October 3 editing week. The comparator is labelled "previous week"; September 16–22 is the inferred immediately preceding seven-day interval, not a separately verified export. Search type, country, device, property identifier, reporting timezone and completeness are not specified. No page-filtered query rows or query-filtered page rows are supplied. Do not substitute the September 12 export's filters for this report's unknown filters.
+
+| Metric | Reported week | Change versus previous week |
+| --- | ---: | --- |
+| Clicks | 123 | +57.7% |
+| Impressions | 7,091 | -12.4% |
+| CTR | 1.7% | +0.8 percentage points |
+| Average position | 7.3 | +0.2 positions (numerically worse) |
+
+123 / 7,091 gives 1.735% CTR before rounding. These are site totals; the query rows below neither sum to these totals nor identify the landing page.
+
+| Query | Clicks | Click change | Impressions | CTR | Average position | Position change |
+| --- | ---: | ---: | ---: | --- | ---: | --- |
+| `bench2dex` | 4 | -11 | Not supplied | Not calculable | 4.2 | +1.0 (worse) |
+| `bench2dex: benchmarking visuo-tactile bimanual dexterous manipulation across dexterous hands` | 0 | -1 | Not supplied | Not calculable | 7.0 | +2.4 (worse) |
+| `vla robotics` | 1 | -1 | 82 | 1.22%, calculated as 1 / 82 | 7.2 | -1.4 (better) |
+| `robot skin` | 2 | Not supplied | 74 | 2.70%, calculated as 2 / 74 | 5.2 | Not supplied |
+
+Bench2Dex's previous 15 clicks and VLA's previous 2 clicks can be derived from the reported click differences. Previous impressions and CTR remain unknown. One fewer VLA click despite improved aggregate position is a diagnostic clue, not evidence of a CTR decline. Bench2Dex's lost clicks and worse aggregate position do not identify whether demand, ranking, query mix or a competing page caused the change. Small absolute samples do not justify rewriting either article.
+
+### Existing search entrances and intent ownership
+
+Rechecked GitHub `main` at `96714f0b542e1ccb27264fa865d33de6a276b2a7`, which adds the October 3 News release (#35) to the supplied October 2 baseline `01b7dac424d9e7832a0c98ae83f2292da3499db6`. Independent clean checkout; the existing SEO/schema PR #26 is outside this batch. Public pages were also read on October 3 and showed the same target titles, descriptions and opening answers. Public page reads do not establish Google's displayed snippet, selected canonical or query-to-page attribution. Public search lookups returned no usable query-to-URL evidence; no live Google SERP or authenticated GSC performance export was obtained.
+
+| Query / task | Intended owner or existing supporting entrance | Evidence and decision |
+| --- | --- | --- |
+| `vla robotics`, VLA definition / model comparison / code discovery | `/robot-vla-models` | Existing matrix assigns this synonym to the VLA parent. The September 14 treatment (`68d7e246`) already added the exact-query title, H1, definition, code starting points and comparison anchors. Related links from `/robot-learning` and `/robot-foundation-models` already point here. Preserve that treatment and the existing mixed definition/comparison/implementation navigation until page-filtered queries justify a different emphasis. |
+| `bench2dex`, named-paper methods / results / resource review | `/research/bench2dex-visuo-tactile-bimanual-benchmark-2026` | Existing independent review has the full paper name in `sourceTitle`, a direct simulation-benchmark answer, policy results, HDF5 schema and primary resources. Its SEO title already names Bench2Dex, data and code. Keep it as the named-project review owner. |
+| Bench2Dex dataset access, format and reuse limits | `/datasets#dataset-bench2dex` | Existing directory row owns structured access/license facts and links back to the research review. `/robotics-datasets` also reuses the tactile record for broad dataset comparison; that is another directory entrance, not a second Bench2Dex article. |
+| Bench2Dex metrics and evaluation conditions | `/benchmarks#benchmark-bench2dex` | Existing benchmark row owns the protocol/metrics and links back to the research review. Dataset and benchmark fragments are rows on their respective directories, not new independently canonical project pages. |
+| `robot skin` | `/robot-skin` | Matrix-defined owner. Record as an unchanged query reference; its query totals do not prove which URL received them. |
+
+The VLA, foundation-model and world-model pages separate action generation, broader transfer and future prediction. Bench2Dex's review, dataset row and benchmark row serve different reader tasks and already cross-link. No confirmed keyword cannibalization or wrong ranking URL can be inferred from this weekly email. Do not add a VLA synonym page, duplicate Bench2Dex article, redirect, `noindex` or cross-page canonical based on this evidence.
+
+### Minimal navigation batch prepared 2026-10-03
+
+| Surface | Change / preservation | Reason |
+| --- | --- | --- |
+| `/robot-vla-models` | Preserve title, description, H1, quick answer, model/code starting points and all evidence sections. Final title including ` | RoboSkin.ai` is 61 characters; description is 156. | Existing treatment already matches the query and satisfies this batch's 70/160 project budgets. No evidence for a second snippet treatment. |
+| `/robot-learning` → VLA owner | Change the existing related-link anchor from `Robot VLA models` to `VLA robotics: models, code and tactile feedback`; keep URL and description. | Make the existing destination's actual scope clear in context. |
+| `/robot-foundation-models` → VLA owner | Change the existing related-link anchor from `Robot VLA models` to `VLA robotics: models and action interfaces`; keep URL and description. | Reinforce the VLA-specific action-interface route without relabelling the broad directory. |
+| Bench2Dex research opening | Add one navigation paragraph after the existing definition and simulation boundary, linking to the exact dataset and benchmark rows with task-specific anchors. | Previously those directory routes were near the end; readers can now choose access/reuse or evaluation details before the technical sections. |
+| Bench2Dex metadata / sources | Preserve title, description, H1, `sourceTitle`, numerical results, caveats and source links. Final SEO title including brand is 68 characters; description is 143. Set editorial `updated` to October 3 for the navigation addition; retain September 18 access/source checks. | No new scientific or release-status claim, and no simulated-to-physical generalization. |
+
+This is an internal-navigation batch, not a title/CTR experiment. No modules, tables, images, downloads, interactions, existing links or structured-data relationships are removed. Parent-page source-review dates remain unchanged for anchor-only edits. The branch/PR is a reviewable proposal; production deployment, recrawl and search outcomes remain unverified until release is recorded.
+
+Validation on Node 22.23.3: 208/208 existing tests, lint, production build and `verify:export` passed. Export verification covered 181 sitemap pages. Targeted rendered-HTML checks confirmed both self-canonicals and metadata budgets, both new Bench2Dex fragment targets and directory-to-review backlinks, the two VLA inbound anchors, and the new paragraph before the first technical section. A source comparison confirmed the original Bench2Dex article content is unchanged apart from that added paragraph, and the VLA and robot-skin records are unchanged. No new permanent tests were added for these copy/navigation edits.
+
+Follow-up after deployment:
+
+1. Record the deployed commit and date, then confirm recrawl of the affected URLs. Allow a complete crawl cycle before proposing another title change.
+2. Export `query × page` for the VLA owner and Bench2Dex review, plus query-filtered page rows for `vla robotics`, `bench2dex` and the full paper-name query. Include `/datasets`, `/robotics-datasets` and `/benchmarks` to test whether impressions are actually split. Record property, exact complete dates, search type, country, device and export limits. Only then choose definition, comparison or implementation emphasis, or identify a wrong landing page.
+3. Compare equal, non-overlapping complete 28-day windows after release using the same filters; retain this September 23–29 weekly snapshot as context, not the sole pre-change window. Track clicks, impressions, CTR and position together. Bench2Dex weekly impressions are still missing, so do not claim CTR recovery from this baseline. Extend observation if samples remain small.
+4. Keep `/robot-skin` unchanged in this batch. Track its query separately and record the October 3 News release and other concurrent changes; it is an observational reference, not a controlled experiment. Resource use, subscriptions and external citations require separate evidence.
+
 ## Day 0 baseline - 2026-07-10
 
 | Window | Impressions | Clicks | CTR | Average position |

@@ -380,6 +380,8 @@ Bench2Dex is a simulation benchmark for long-horizon, two-handed robot manipulat
 
 These demonstrations are collected in simulation. They are not recordings from 12 physical robot hands. The tactile maps describe local contact geometry and do not reproduce the optical response of a particular DIGIT or GelSight sensor. That makes Bench2Dex useful for studying data interfaces and simulated manipulation, with a clear boundary around claims about physical touch.
 
+For data access and reuse limits, open the [Bench2Dex simulation dataset record](/datasets#dataset-bench2dex). For success metrics and test conditions, use the [Bench2Dex evaluation protocol record](/benchmarks#benchmark-bench2dex).
+
 ## From teleoperation to offline observations
 
 The collection setup uses a Manus glove for hand motion and an ARKit wrist-tracking stream for arm targets. Hand keypoints are retargeted to the chosen robot hand; arm targets pass through inverse kinematics. The pipeline records the commanded action and resulting post-step state. This ordering matters when aligning an action with the observation it caused.
@@ -459,7 +461,7 @@ Use the [benchmark directory](/benchmarks) to compare evaluation questions and t
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-18',
-    updated: '2026-09-18',
+    updated: '2026-10-03',
     readTime: '8 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
