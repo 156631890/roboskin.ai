@@ -1,4 +1,5 @@
 import { aspireSetup } from '@/content/aspire-setup';
+import { opticalTactileGuides } from '@/content/optical-tactile-guides';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
 import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
@@ -56,6 +57,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  ...opticalTactileGuides,
   aspireSetup,
   tactileSelectionGuide,
   ...sensorDetailPages,
@@ -3167,7 +3169,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-foundation-models',
-    revisionNote: 'October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
+    revisionNote: 'October 17, 2026: added the N0-Foundation / NeoForce section. October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
     title: 'Tactile Foundation Models for Robotics',
     description:
       "Compare Sparsh, UniTouch and tactile learning systems by inputs, outputs, downstream tasks and transfer evidence. Separate encoders, world models and policies.",
@@ -3175,7 +3177,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: "2026-10-12",
+    updated: '2026-10-17',
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3187,6 +3189,24 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Evaluate a model by the role touch plays, the transfer claim it tests, the robot task it changes, and the latency and hardware assumptions required at deployment.',
     ],
     sections: [
+      {
+        id: 'n0-foundation-neoforce',
+        heading: 'What Is N0-Foundation? NeoData, NeoForce and N0-VTLA',
+        body: [
+          'N0-Foundation, pronounced Neo-Foundation, is a tactile-centred research framework from the NeoteAI and Fudan TEAI teams, combining hardware, data, representations and evaluation. The September 20, 2026 report describes NeoData as more than 30,000 hours of synchronized visual-tactile demonstrations from robot teleoperation and the handheld N0-TacUMI interface. It reports OpenNeoData as a 5,000-hour open subset; the full corpus and the open subset are different resources.',
+          'NeoForce learns visuo-tactile representations using dense three-axis force fields as a shared supervision space: two shear components and one normal component. The intended benefit is a physical contact representation less tied to sensor-specific images. NeoReal evaluates physical manipulation and NeoSim supplies simulated tasks. These author-reported evaluations do not establish unrestricted transfer to every tactile sensor.',
+          'N0-VTLA is the related vision-tactile-language-action policy described in a separate official project. It uses NeoData pretraining and predicts latent tactile tokens to condition action generation. Keep this policy distinct from the Foundation infrastructure and NeoForce representation. Dataset size alone does not establish the exact training mixture of every checkpoint, and RoboSkin has not independently reproduced the models.',
+        ],
+        contextLinks: [
+          { before: 'Compare access and collection units in the ', label: 'tactile dataset directory', href: '/datasets', after: '.' },
+          { before: 'For the action-producing component, use the ', label: 'robot VLA model guide', href: '/robot-vla-models', after: '.' },
+        ],
+        links: [
+          { label: 'N0-Foundation report on arXiv (v2 reviewed, September 20, 2026)', href: 'https://arxiv.org/html/2608.29601' },
+          { label: 'N0-Foundation publisher PDF (alternate report link)', href: 'https://research.neoteai.com/assets/n0-foundation-report.pdf' },
+          { label: 'N0-VTLA: separate official policy project and report', href: 'https://research.neoteai.com/n0-vtla/' },
+        ],
+      },
       {
         heading: 'Four different jobs for tactile learning',
         body: [
