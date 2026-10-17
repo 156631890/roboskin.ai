@@ -57,6 +57,9 @@ export const melexisTactaxis: SeoTopicPage = {
         'Melexis describes a gradiometric arrangement intended to reject stray magnetic fields. Treat that as a design property reported by the manufacturer, not evidence of immunity to every magnet, motor or installation condition. Ask for the applicable interference test and mounting constraints.',
       ],
       links: [launch, guide],
+      contextLinks: [
+        { before: 'For a separate magnetic design and its calibration boundaries, read the ', label: 'ReSkin sensor profile', href: '/sensors/reskin', after: '.' },
+      ],
     },
     {
       heading: 'Variants and Modules: A Development Timeline',

@@ -25,6 +25,8 @@ export const technologyAdditions: Section[] = [
     links: [
       { label: 'Research review: mechanisms and practical sensing constraints', href: 'https://link.springer.com/article/10.1007/s40820-025-01872-4' },
       { label: 'Follow the tactile sensor selection workflow', href: '/guides/how-to-choose-a-tactile-sensor' },
+      { label: 'Compare optical and capacitive tactile sensors', href: '/guides/optical-vs-capacitive-tactile-sensors' },
+      { label: 'Melexis Tactaxis: magnetic sensing and dated specifications', href: '/sensors/melexis-tactaxis' },
       { label: 'Further reading: Quality Magazine on tactile sensing and vision', href: 'https://www.qualitymag.com/articles/99943-how-tactile-sensing-fills-the-gap-vision-cant-measure' },
     ],
   },
