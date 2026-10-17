@@ -1,3 +1,4 @@
+import { aspireSetup } from '@/content/aspire-setup';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
 import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
@@ -55,6 +56,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  aspireSetup,
   tactileSelectionGuide,
   ...sensorDetailPages,
   ...sensorComparisonPages,
