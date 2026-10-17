@@ -257,7 +257,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed model directory',
     intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'Added a source-reviewed REKI checkpoint, interface, license and evaluation boundary note; no model or hardware test.',
     priority: 0.9,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -331,6 +332,35 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'reki-checkpoint-readiness',
+        heading: 'REKI: checkpoint choice and evaluation readiness',
+        body: [
+          'Kyutai lists REKI on October 16, 2026; arXiv v1 was submitted on October 15 at 16:34:06 UTC. REKI is a 2.4B vision-language-action model with recent-history register memory. This October 17 documentation review concerns the released LIBERO checkpoint and its integration boundaries. RoboSkin.ai has not downloaded weights, installed the environment, reproduced a benchmark or tested robot safety.',
+          'Choose kyutai/reki-2b for further finetuning; kyutai/reki-2b-libero is the Franka Panda simulation checkpoint for LIBERO and LIBERO-Plus. Other released checkpoints target different benchmarks and embodiments. The LIBERO card reports 97.6% over four suites of ten tasks with fifty episodes per task, and 90.4% over 10,030 LIBERO-Plus perturbed episodes. These are author-reported simulation results. The card explicitly states no real-robot or safety evaluation for this checkpoint; they are not tactile capability or deployment-readiness evidence.',
+          'The pinned repository requires Linux x86-64, an NVIDIA GPU with CUDA 12 and pixi; its environment supplies Python 3.12. Benchmark simulators have separate environments. No minimum VRAM is established here, and checkpoint size does not establish runtime memory requirements. Reset episode memory with policy.reset() at each episode start; retaining previous-episode registers changes the evaluation condition.',
+          'Check the interface at the adapter boundary. The model card describes an eight-component observation state and seven-component action, while the evaluation documentation spells out transformed Euler coordinates, padding and gripper handling. These descriptions are not interchangeable arrays. Follow the released adapter and inference spec for the selected checkpoint rather than guessing a mapping from dimensions alone. The checklist below is a documentation map, not a tested configuration.',
+          'Code and weights have separate terms: the repository code is MIT with identified Apache-2.0 portions; the weights are CC BY-NC-SA 4.0 and retain upstream model/data obligations. A public download is not blanket permission for commercial deployment. Although the paper abstract describes a full release, the inspected repository still says the pretraining code and data pipeline will arrive later. A published recipe is not the complete released pipeline.',
+          'Preserve the real-robot server warning when assessing integration: the documented protocol unpickles client messages, so someone who can reach its port can execute code on that machine. Its default binding is loopback. Do not expose it publicly; the repository recommends a trusted network or SSH tunnel. We did not start this server. An application-specific control and safety review remains separate from code availability or simulation success.',
+        ],
+        table: {
+          headers: ['Boundary', 'Documented detail', 'What to verify before an authorized evaluation'],
+          rows: [
+            ['Images', 'Agent-view and wrist-view cameras; LIBERO environment images are rotated 180 degrees to match the dataset.', 'Use the checkpoint camera keys and expected RGB orientation; retain the simulator/version settings.'],
+            ['State and action', 'Card: state 8, action 7. Evaluation adapter: eef xyz, Euler xyz, zero padding and gripper_qpos[0]; action rotation is converted back to axis-angle.', 'Read the adapter conversion, normalization and controller scaling together; do not pass a raw simulator state solely because its length matches.'],
+            ['Memory and cadence', 'LIBERO card: three-frame memory at one-second spacing, 10 Hz control and ten actions per chunk.', 'Clear memory for each episode and keep the documented predict/execute cadence.'],
+            ['Benchmark boundary', 'LIBERO-Plus reports seven perturbation axes; its documented instruction-suffix issue is retained for comparability.', 'Record checkpoint, protocol, seeds and perturbation setting; do not compare a modified protocol as the same experiment.'],
+          ],
+        },
+        links: [
+          { label: 'REKI LIBERO model card and limitations', href: 'https://huggingface.co/kyutai/reki-2b-libero' },
+          { label: 'Pinned REKI setup, release status and server warning', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/README.md' },
+          { label: 'Pinned evaluation protocol and adapter rules', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/docs/evaluation.md' },
+          { label: 'Compare VLA interfaces and evidence', href: '/robot-vla-models' },
+          { label: 'Separate robot safety evidence', href: '/robot-safety' },
+          { label: 'Request a scoped source-research brief', href: '/contact' },
+        ],
+      },
+      {
         heading: 'Where touch fits in robot foundation models',
         body: [
           'Most broadly discussed robot models are organized around vision, language, and robot state. Touch can enter as an additional observation, a learned tactile representation, a predicted contact state, a reward or success signal, or a faster corrective policy after physical contact begins.',
@@ -377,6 +407,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI', href: '/physical-ai', description: 'Connect models to embodiment, control, safety, and physical feedback.' },
     ],
     sources: [
+      { label: 'Kyutai release listing: REKI, October 16, 2026', href: 'https://kyutai.org/blog/' },
+      { label: 'REKI preprint and submission history', href: 'https://arxiv.org/abs/2610.22178' },
+      { label: 'REKI LIBERO checkpoint model card', href: 'https://huggingface.co/kyutai/reki-2b-libero' },
+      { label: 'REKI code license at inspected revision', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/LICENSE' },
+      { label: 'REKI third-party code notices at inspected revision', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/NOTICE' },
       { label: 'Open X-Embodiment and RT-X paper', href: 'https://arxiv.org/abs/2310.08864' },
       { label: 'OpenVLA paper', href: 'https://arxiv.org/abs/2406.09246' },
       { label: 'Octo paper', href: 'https://arxiv.org/abs/2405.12213' },
