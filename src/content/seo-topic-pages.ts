@@ -5347,7 +5347,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot learning model pillar',
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: '2026-10-09',
+    updated: '2026-10-17',
+    revisionNote: 'Added a source-reviewed MAIA/CRIA evidence note. Existing model-table records retain their original review dates; no RoboSkin replication was performed.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5474,6 +5475,41 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "maia-contact-anomaly",
+        "heading": "MAIA: anticipating contact anomalies before action",
+        "body": [
+          "MAIA uses visual and wrist force/torque history plus planned actions to predict future interactions and anomalies. Its CRIA corpus contains 2,852 trajectories across 18 tasks. Collection used a Franka FR3, an ATI Axia80-M8 wrist F/T sensor and three cameras. An interaction anomaly is not necessarily final task failure.",
+          "In Section VI-E, a frozen pi0.5 proposes eight action chunks; MAIA selects the lowest predicted anomaly probability and executes the first 20 actions. The authors report 52.6% versus 61.5% success over 18 tasks, with 30 trials per task per method (540 per method, calculated). This is 8.9 percentage points, not a universal improvement.",
+          "The predictor was trained on 13 seen tasks and adapted using task-specific data for five novel tasks. No policy retraining does not mean no predictor training or adaptation. Single-platform, fixed-sensor experiments leave hardware transfer unestablished. The method predicts anomalies rather than supplying root-cause diagnosis or autonomous recovery.",
+          "Evidence: arXiv v1, submitted October 15, 2026 at 11:11:27 UTC; reviewed here October 17. Code, weights, downloadable data and their licenses were not verified. This is not a released-dataset listing or runnable tutorial.",
+          "For a sensing decision, distinguish a wrist F/T signal from a spatial skin-contact map: they expose different information. This result does not establish performance with distributed robot skin. RoboSkin reviewed the paper only; no reproduction, hardware migration or safety certification is claimed."
+        ],
+        "bullets": [
+          "Before evaluating force/torque feedback for robot failure prediction, define whether the target is a transient contact anomaly or final task failure. Report both missed events and false alarms.",
+          "Ask which predictor parameters were adapted, what task-specific data were allowed, and whether candidate count, latency and compute match the comparison policy.",
+          "Check camera placement, wrench calibration, timing alignment and contact conditions against the intended setup; require fresh evidence for a new robot or sensor.",
+          "Request per-task trial outcomes, intervention rules, artifact access and licenses. Keep anomaly-aware action selection separate from the system safety case."
+        ],
+        "links": [
+          {
+            "label": "MAIA arXiv v1 and submission history",
+            "href": "https://arxiv.org/abs/2610.21686v1"
+          },
+          {
+            "label": "MAIA methods and real-robot protocol, Sections IV–VII",
+            "href": "https://arxiv.org/html/2610.21686v1"
+          },
+          {
+            "label": "How robot skin measures distributed contact",
+            "href": "/robot-skin"
+          },
+          {
+            "label": "Separate research evidence from robot safety validation",
+            "href": "/robot-safety"
+          }
+        ]
+      },
+      {
         heading: 'World-model evidence checklist',
         body: [
           'A useful result identifies the training data, observation and action interfaces, target representation, horizon, uncertainty, compute, robot, task, baseline, and real-world trial protocol. It also reports what happens when prediction is wrong.',
@@ -5515,6 +5551,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review the data contracts behind predictive robot models.' },
     ],
     sources: [
+      { label: 'MAIA / CRIA arXiv v1, reviewed October 17, 2026', href: 'https://arxiv.org/abs/2610.21686v1' },
       { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'World Models for Robotic Manipulation: A Survey', href: 'https://arxiv.org/abs/2606.00113' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/abs/2606.08737' },
