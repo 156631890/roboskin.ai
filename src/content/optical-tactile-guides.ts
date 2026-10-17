@@ -5,8 +5,8 @@ const miniSheet = {
   href: 'https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GS_Mini_Product_Sheet_10.07.24.pdf',
 };
 const miniFaq = {
-  label: 'GelSight gsrobotics: manufacturer FAQ, especially questions 26 and 27',
-  href: 'https://github.com/gelsightinc/gsrobotics/blob/main/README.md',
+  label: 'GelSight Mini cleaning and wear FAQ: questions 26–27, reviewed revision 321d6a2',
+  href: 'https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md#frequently-asked-questions',
 };
 const miniGel = {
   label: 'GelSight Mini standard replacement cartridge and gel reformulation notice',
@@ -14,11 +14,11 @@ const miniGel = {
 };
 const digitPaper = {
   label: 'Lambeta et al., DIGIT (2020), mechanical and elastomer design',
-  href: 'https://arxiv.org/pdf/2005.14679#page=3',
+  href: 'https://arxiv.org/pdf/2005.14679v1#page=3',
 };
 const digitDesign = {
-  label: 'Official DIGIT design files: enclosure, elastomer and manufacturing resources',
-  href: 'https://github.com/facebookresearch/digit-design',
+  label: 'Official DIGIT design files: enclosure and elastomer, reviewed revision de29222',
+  href: 'https://github.com/facebookresearch/digit-design/tree/de292229d43eed1deba58b856b2fe1ee04097631',
 };
 const capacitivePaper = {
   label: 'Maiolino et al., A Flexible and Robust Large Scale Capacitive Tactile System for Robots',
@@ -56,6 +56,9 @@ export const opticalTactileGuides: SeoTopicPage[] = [
           'Debris is not the same as torn material. For Mini, use the documented cleaning method below before attributing an image defect to permanent wear. If damage remains or measurement quality is uncertain, ask the supplier whether the cartridge should be replaced; the reviewed sources do not define a universal image-error rejection threshold.',
         ],
         links: [miniFaq, digitPaper],
+        contextLinks: [
+          { before: 'If maintenance requirements affect the hardware shortlist, compare ', label: 'optical and capacitive tactile sensors', href: '/guides/optical-vs-capacitive-tactile-sensors', after: ' by their documented surfaces and complete measurement workflow.' },
+        ],
       },
       {
         heading: 'What You Need',
@@ -138,6 +141,9 @@ export const opticalTactileGuides: SeoTopicPage[] = [
           'GelSight Mini lists an 18.6 × 14.3 mm field of view. Original DIGIT reports a 19 × 16 mm sensing field. These describe two specific fingertips, not a limit on optical sensor coverage. Camera pixels must not be counted as independently calibrated force taxels.',
         ],
         links: [miniSheet, digitPaper],
+        contextLinks: [
+          { before: 'For a concrete hardware reference, inspect the ', label: 'GelSight Mini sensor profile', href: '/sensors/gelsight-mini', after: ' and keep camera acquisition separate from reconstructed depth or force.' },
+        ],
       },
       {
         heading: 'How Capacitive Tactile Sensors Work',
@@ -179,6 +185,9 @@ export const opticalTactileGuides: SeoTopicPage[] = [
           ],
         },
         links: [capacitivePaper, pps, digitPaper],
+        contextLinks: [
+          { before: 'If local normal-and-shear force is the priority, also evaluate the magnetic ', label: 'Melexis Tactaxis alternative', href: '/sensors/melexis-tactaxis', after: ' using the specifications for the exact hardware version.' },
+        ],
       },
       {
         heading: 'Maintenance and Cost: Compare the Installed System',

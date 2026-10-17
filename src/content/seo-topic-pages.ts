@@ -2815,7 +2815,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: 'October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.',
+    revisionNote: "October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
     title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
@@ -2823,7 +2823,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-16',
+    updated: '2026-10-17',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3029,6 +3029,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Frame count does not establish diversity, independent evaluation, target-robot transfer, or production readiness. Ten thousand adjacent frames from a small set of presses can contain less independent evidence than a smaller collection spread across objects, sensors, and trajectories.',
           'Use this directory to locate sources, then document the exact dataset version and split used in your experiment. Do not compare headline metrics across resources unless the sensor inputs, tasks, models, and evaluation protocols are genuinely aligned.',
         ],
+        contextLinks: [
+          { before: 'For a concrete example, read the ', label: 'N0-Foundation explanation of NeoData and OpenNeoData', href: '/tactile-foundation-models#n0-foundation-neoforce', after: ' and distinguish the reported corpus from the open subset and individual model training claims.' },
+        ],
       },
       {
         "heading": "Inspect a dataset before adapting it for training",
@@ -3202,8 +3205,10 @@ export const seoTopicPages: SeoTopicPage[] = [
           { before: 'For the action-producing component, use the ', label: 'robot VLA model guide', href: '/robot-vla-models', after: '.' },
         ],
         links: [
-          { label: 'N0-Foundation report on arXiv (v2 reviewed, September 20, 2026)', href: 'https://arxiv.org/html/2608.29601' },
-          { label: 'N0-Foundation publisher PDF (alternate report link)', href: 'https://research.neoteai.com/assets/n0-foundation-report.pdf' },
+          { label: 'N0-Foundation report on arXiv (v2 reviewed, September 20, 2026)', href: 'https://arxiv.org/html/2608.29601v2' },
+          { label: 'N0-Foundation official project: readable overview and resource links', href: 'https://research.neoteai.com/n0-foundation/' },
+          { label: 'N0-Foundation arXiv record: v2 metadata and PDF access', href: 'https://arxiv.org/abs/2608.29601v2' },
+          { label: 'N0-Foundation publisher PDF (18.6 MB download)', href: 'https://research.neoteai.com/assets/n0-foundation-report.pdf' },
           { label: 'N0-VTLA: separate official policy project and report', href: 'https://research.neoteai.com/n0-vtla/' },
         ],
       },
@@ -3747,8 +3752,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-15',
-    revisionNote: 'October 15, 2026: added task filters for slip, dexterity and full-hand coverage, with evaluation conditions and a blank comparison worksheet. Existing source-linked limitations are retained.',
+    updated: '2026-10-17',
+    revisionNote: "October 17, 2026: added links to the optical/capacitive comparison, gel maintenance and Tactaxis profile. Existing evidence dates are retained. October 15, 2026: added task filters for slip, dexterity and full-hand coverage, with evaluation conditions and a blank comparison worksheet. Existing source-linked limitations are retained.",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3776,7 +3781,9 @@ export const seoTopicPages: SeoTopicPage[] = [
             "GelSight is both a sensing technology name and a manufacturer name. This comparison uses GelSight Mini and the original DIGIT; Digit 360 is a separate device. TacTip is a family of designs, so choose a particular variant before comparing specifications.",
             "This is a source-based selection guide, not a head-to-head hardware test. A camera frame rate is not an end-to-end control rate, and an image is not a calibrated force measurement."
       ],
-      contextLinks: [{ before: 'Start with the ', label: 'tactile sensing definition', href: '/technology', after: ' to distinguish measured signals from inferred geometry, force and contact state before reading these comparisons.' }],
+      contextLinks: [{ before: 'Start with the ', label: 'tactile sensing definition', href: '/technology', after: ' to distinguish measured signals from inferred geometry, force and contact state before reading these comparisons.' },
+          { before: 'For servicing those optical fingertips, follow the ', label: 'gel replacement and maintenance guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' and match the instructions to the installed sensor.' },
+        ],
       "table": {
             "headers": [
                   "System",
@@ -3898,6 +3905,10 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Fluid-filled biomimetic', 'Electrode impedance, fluid pressure, vibration, and temperature', 'Multimodal fingertip sensing with compliant contact', 'Mechanical maintenance, nonlinear calibration, platform adapters', 'Per-modality bandwidth, force reconstruction, skin replacement, task results'],
           ],
         },
+        contextLinks: [
+          { before: 'Compare contact images and distributed electrical measurements in the ', label: 'optical versus capacitive sensor guide', href: '/guides/optical-vs-capacitive-tactile-sensors', after: '.' },
+          { before: 'For a named magnetic alternative, read the ', label: 'Melexis Tactaxis profile', href: '/sensors/melexis-tactaxis', after: ' with its dated prototype and module evidence.' },
+        ],
       },
       {
         heading: 'Selection starts from the contact event',

@@ -9,8 +9,8 @@ export const sensorComparisonPages: SeoTopicPage[] = [
     kicker: 'Sensor selection / Source-based comparison',
     intent: 'Help researchers choose between GelSight Mini and original DIGIT and plan a fair robot-task evaluation.',
     published: '2026-10-07',
-    updated: '2026-10-13',
-    revisionNote: 'October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates; existing FAQs and comparison criteria are retained.',
+    updated: '2026-10-17',
+    revisionNote: "October 17, 2026: linked maintenance and cross-principle selection guidance. Existing source review dates are retained. October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates; existing FAQs and comparison criteria are retained.",
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -26,7 +26,9 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         id: 'integration-comparison',
         heading: 'Compare the integration work, not just the camera',
         body: ['The official DIGIT interface and GelSight robotics examples establish different software starting points. Preserve the distinction between a hardware specification, a configured stream and a derived estimate when building your shortlist.'],
-        contextLinks: [{ before: 'Use the ', label: 'tactile sensing introduction', href: '/technology', after: ' to distinguish raw contact observations from inferred quantities before comparing the outputs in this table.' }],
+        contextLinks: [{ before: 'Use the ', label: 'tactile sensing introduction', href: '/technology', after: ' to distinguish raw contact observations from inferred quantities before comparing the outputs in this table.' },
+          { before: 'If the shortlist extends beyond optical fingertips, use the ', label: 'optical versus capacitive tactile sensor guide', href: '/guides/optical-vs-capacitive-tactile-sensors', after: ' to compare sensing principles before choosing a model.' },
+        ],
         table: {
           headers: ['Decision', 'GelSight Mini', 'Original DIGIT', 'Check before committing'],
           rows: [
@@ -91,6 +93,9 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         links: [
           { label: 'DIGIT v1, sensor design and elastomer wear', href: 'https://arxiv.org/html/2005.14679v1#S3' },
           { label: 'GelSight Mini official FAQ, questions 5, 17, 23 and 26 (pinned source)', href: 'https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md' },
+        ],
+        contextLinks: [
+          { before: 'For supported cleaning and replacement options, consult the ', label: 'optical tactile gel maintenance guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' before budgeting spares and recalibration work.' },
         ],
       },
       {
