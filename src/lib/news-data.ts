@@ -416,6 +416,7 @@ This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot
 
 ## Sources and related resources
 
+- [ASPIRE simulation setup and evaluation boundaries](/guides/aspire-libero-pro-setup)
 - [InterEvolve v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02196)
 - [Full architecture, ablations and deployment details](https://arxiv.org/html/2610.02196v1)
 - [Official InterEvolve project page and videos](https://sirui-xu.github.io/InterEvolve/)
