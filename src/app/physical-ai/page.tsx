@@ -266,6 +266,7 @@ export default function PhysicalAiPage() {
                     ['/robots', 'Robot platforms and embodiments'],
                     ['/robot-learning', 'Robot learning'],
                     ['/robot-vla-models', 'Robot VLA models'],
+                    ['/guides/aspire-libero-pro-setup', 'ASPIRE simulation setup and evaluation'],
                     ['/robot-world-models', 'Robot world models'],
                     ['/robotics-datasets', 'Robotics datasets'],
                     ['/robot-manipulation', 'Robot manipulation'],

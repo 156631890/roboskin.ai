@@ -128,11 +128,12 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
 
 export const calibrationTutorial: ProgrammingPage = {
   path: '/guides/tactile-sensor-calibration',
+  revisionNote: 'October 17, 2026: linked gel inspection and replacement before calibration. The documented tutorial verification date is unchanged.',
   title: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
   h1: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
   description: 'Plan DIGIT and GelSight Mini calibration: separate image baselines, depth reconstruction and force estimation, then record references, repeats and uncertainty.',
   kicker: 'Tactile engineering guide', intent: 'Choose and document an appropriate tactile sensor calibration workflow without conflating image, depth and force.',
-  published: checked, updated: checked, priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  published: checked, updated: '2026-10-17', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['tactile sensor calibration', 'DIGIT calibration', 'GelSight Mini calibration', 'robotic tactile sensing'],
   verification: 'Official sensor materials, source READMEs and the 3D Cal paper were checked on September 16, 2026. This is a source-based workflow and a blank recording template. RoboSkin has not run DIGIT, GelSight Mini, a calibration rig, TouchNet training or a force experiment for this guide. No measured accuracy or hardware compatibility is claimed.',
   quickAnswer: ['Tactile sensor calibration starts with a target quantity. A stable reference image supports image comparison; geometry calibration supports depth reconstruction; force estimation needs force reference measurements and its own validation.', 'DIGIT and GelSight Mini are vision-based tactile sensors. Their camera images and depth demonstrations should not be relabeled as calibrated newtons or pressure.'],
@@ -157,6 +158,8 @@ export const calibrationTutorial: ProgrammingPage = {
       'For either sensor, record model, serial number, gel identity/condition, mount, camera settings, software revision and an unmodified raw image stream. Use a repeatable mount and confirm the field of view. Save a new baseline after changes to gel, optics, illumination, exposure or geometry. Retain the previous calibration instead of silently overwriting it.',
       'For depth work, prepare an independently characterized probe and positioning reference, define the sensor coordinate system and retain uncertainties in probe size, alignment and displacement. A commanded printer position is not automatically the true indentation depth. The 3D Cal authors used a spherical probe and a purpose-built mount; reproduce only a workflow appropriate to your actual equipment and device limits.',
       'For force work, add a reference transducer with a known range, unit and calibration record. Define axis signs, normal/shear components, loading and unloading directions, dwell times and synchronization. No force procedure can be completed from the supplied blank template alone.',
+    ], contextLinks: [
+      { before: 'If the sensing surface needs attention first, use the ', label: 'gel inspection and replacement guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' before recording the new calibration baseline.' },
     ] },
     { id: 'digit-workflow', heading: 'DIGIT workflow: baseline first, then a geometry model', body: [
       '1. Identify the original DIGIT by serial number and inspect the raw stream using its official interface. Record the chosen resolution/FPS and available illumination/exposure controls. Fix configurable image settings for the run; if a control is unavailable or automatic, record that limitation.',

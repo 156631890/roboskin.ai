@@ -44,6 +44,13 @@ The platform is independent and is not affiliated with similarly named products,
 - [View the learning resources](https://roboskin.ai/resources)
 - [Suggest a source or correction](https://roboskin.ai/contact?requestType=research)
 
+## Engineering Reading Routes
+
+- [Optical tactile sensor gel maintenance](https://roboskin.ai/guides/optical-tactile-sensor-maintenance): documented GelSight Mini and original DIGIT replacement, cleaning and recalibration boundaries.
+- [Optical vs capacitive tactile sensors](https://roboskin.ai/guides/optical-vs-capacitive-tactile-sensors): compare measurement outputs, packaging, maintenance and task fit.
+- [Melexis Tactaxis sensor profile](https://roboskin.ai/sensors/melexis-tactaxis): magnetic 3D force sensing, dated specifications and module availability evidence.
+- [N0-Foundation and NeoForce explained](https://roboskin.ai/tactile-foundation-models#n0-foundation-neoforce): distinguish NeoData, OpenNeoData, the shared force representation and N0-VTLA.
+
 ---
 
 **RoboSkin.ai: mapping the sense of touch for Physical AI.**

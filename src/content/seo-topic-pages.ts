@@ -1,3 +1,5 @@
+import { aspireSetup } from '@/content/aspire-setup';
+import { opticalTactileGuides } from '@/content/optical-tactile-guides';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
 import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
@@ -61,6 +63,8 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  ...opticalTactileGuides,
+  aspireSetup,
   tactileSelectionGuide,
   ...sensorDetailPages,
   ...sensorComparisonPages,
@@ -259,7 +263,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed model directory',
     intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'Added a source-reviewed REKI checkpoint, interface, license and evaluation boundary note; no model or hardware test.',
     priority: 0.9,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -333,6 +338,35 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        id: 'reki-checkpoint-readiness',
+        heading: 'REKI: checkpoint choice and evaluation readiness',
+        body: [
+          'Kyutai lists REKI on October 16, 2026; arXiv v1 was submitted on October 15 at 16:34:06 UTC. REKI is a 2.4B vision-language-action model with recent-history register memory. This October 17 documentation review concerns the released LIBERO checkpoint and its integration boundaries. RoboSkin.ai has not downloaded weights, installed the environment, reproduced a benchmark or tested robot safety.',
+          'Choose kyutai/reki-2b for further finetuning; kyutai/reki-2b-libero is the Franka Panda simulation checkpoint for LIBERO and LIBERO-Plus. Other released checkpoints target different benchmarks and embodiments. The LIBERO card reports 97.6% over four suites of ten tasks with fifty episodes per task, and 90.4% over 10,030 LIBERO-Plus perturbed episodes. These are author-reported simulation results. The card explicitly states no real-robot or safety evaluation for this checkpoint; they are not tactile capability or deployment-readiness evidence.',
+          'The pinned repository requires Linux x86-64, an NVIDIA GPU with CUDA 12 and pixi; its environment supplies Python 3.12. Benchmark simulators have separate environments. No minimum VRAM is established here, and checkpoint size does not establish runtime memory requirements. Reset episode memory with policy.reset() at each episode start; retaining previous-episode registers changes the evaluation condition.',
+          'Check the interface at the adapter boundary. The model card describes an eight-component observation state and seven-component action, while the evaluation documentation spells out transformed Euler coordinates, padding and gripper handling. These descriptions are not interchangeable arrays. Follow the released adapter and inference spec for the selected checkpoint rather than guessing a mapping from dimensions alone. The checklist below is a documentation map, not a tested configuration.',
+          'Code and weights have separate terms: the repository code is MIT with identified Apache-2.0 portions; the weights are CC BY-NC-SA 4.0 and retain upstream model/data obligations. A public download is not blanket permission for commercial deployment. Although the paper abstract describes a full release, the inspected repository still says the pretraining code and data pipeline will arrive later. A published recipe is not the complete released pipeline.',
+          'Preserve the real-robot server warning when assessing integration: the documented protocol unpickles client messages, so someone who can reach its port can execute code on that machine. Its default binding is loopback. Do not expose it publicly; the repository recommends a trusted network or SSH tunnel. We did not start this server. An application-specific control and safety review remains separate from code availability or simulation success.',
+        ],
+        table: {
+          headers: ['Boundary', 'Documented detail', 'What to verify before an authorized evaluation'],
+          rows: [
+            ['Images', 'Agent-view and wrist-view cameras; LIBERO environment images are rotated 180 degrees to match the dataset.', 'Use the checkpoint camera keys and expected RGB orientation; retain the simulator/version settings.'],
+            ['State and action', 'Card: state 8, action 7. Evaluation adapter: eef xyz, Euler xyz, zero padding and gripper_qpos[0]; action rotation is converted back to axis-angle.', 'Read the adapter conversion, normalization and controller scaling together; do not pass a raw simulator state solely because its length matches.'],
+            ['Memory and cadence', 'LIBERO card: three-frame memory at one-second spacing, 10 Hz control and ten actions per chunk.', 'Clear memory for each episode and keep the documented predict/execute cadence.'],
+            ['Benchmark boundary', 'LIBERO-Plus reports seven perturbation axes; its documented instruction-suffix issue is retained for comparability.', 'Record checkpoint, protocol, seeds and perturbation setting; do not compare a modified protocol as the same experiment.'],
+          ],
+        },
+        links: [
+          { label: 'REKI LIBERO model card and limitations', href: 'https://huggingface.co/kyutai/reki-2b-libero' },
+          { label: 'Pinned REKI setup, release status and server warning', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/README.md' },
+          { label: 'Pinned evaluation protocol and adapter rules', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/docs/evaluation.md' },
+          { label: 'Compare VLA interfaces and evidence', href: '/robot-vla-models' },
+          { label: 'Separate robot safety evidence', href: '/robot-safety' },
+          { label: 'Request a scoped source-research brief', href: '/contact' },
+        ],
+      },
+      {
         heading: 'Where touch fits in robot foundation models',
         body: [
           'Most broadly discussed robot models are organized around vision, language, and robot state. Touch can enter as an additional observation, a learned tactile representation, a predicted contact state, a reward or success signal, or a faster corrective policy after physical contact begins.',
@@ -371,7 +405,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place foundation models inside the full perception, reasoning, policy, control, and feedback loop.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Trace exact, family-level, and unnamed hardware to evaluated-on, trained-across, or demonstrated-on evidence.' },
       { label: 'Robot AI research organizations', href: '/organizations', description: 'Trace verified developers and source-listed contributor affiliations to official identity and model evidence.' },
-      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
+      { label: 'VLA robotics: models and action interfaces', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
       { label: 'Robot world models', href: '/robot-world-models', description: 'Separate future prediction from action selection and control.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Trace demonstrations, reinforcement, correction, transfer, and deployment.' },
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Compare broad robot observations, actions, embodiments, access, and license evidence.' },
@@ -379,6 +413,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI', href: '/physical-ai', description: 'Connect models to embodiment, control, safety, and physical feedback.' },
     ],
     sources: [
+      { label: 'Kyutai release listing: REKI, October 16, 2026', href: 'https://kyutai.org/blog/' },
+      { label: 'REKI preprint and submission history', href: 'https://arxiv.org/abs/2610.22178' },
+      { label: 'REKI LIBERO checkpoint model card', href: 'https://huggingface.co/kyutai/reki-2b-libero' },
+      { label: 'REKI code license at inspected revision', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/LICENSE' },
+      { label: 'REKI third-party code notices at inspected revision', href: 'https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/NOTICE' },
       { label: 'Open X-Embodiment and RT-X paper', href: 'https://arxiv.org/abs/2310.08864' },
       { label: 'OpenVLA paper', href: 'https://arxiv.org/abs/2406.09246' },
       { label: 'Octo paper', href: 'https://arxiv.org/abs/2405.12213' },
@@ -849,14 +888,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 16, 2026: added thermal sensing, physical sensor examples and the limits of TouchTherm reconstruction results. Existing modality explanations and sources are retained.',
+    revisionNote: 'October 17, 2026: added thermal sensing, physical sensor examples and the limits of TouchTherm reconstruction results. Existing modality explanations and sources are retained.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: '2026-10-16',
+    updated: '2026-10-17',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -2819,7 +2858,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: 'October 15, 2026: added intended-use and limitation guidance, format, download and verification fields to comparison and exports. Individual source and access check dates are unchanged.',
+    revisionNote: "October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
     title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
@@ -2827,7 +2866,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-15',
+    updated: '2026-10-17',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3033,6 +3072,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Frame count does not establish diversity, independent evaluation, target-robot transfer, or production readiness. Ten thousand adjacent frames from a small set of presses can contain less independent evidence than a smaller collection spread across objects, sensors, and trajectories.',
           'Use this directory to locate sources, then document the exact dataset version and split used in your experiment. Do not compare headline metrics across resources unless the sensor inputs, tasks, models, and evaluation protocols are genuinely aligned.',
         ],
+        contextLinks: [
+          { before: 'For a concrete example, read the ', label: 'N0-Foundation explanation of NeoData and OpenNeoData', href: '/tactile-foundation-models#n0-foundation-neoforce', after: ' and distinguish the reported corpus from the open subset and individual model training claims.' },
+        ],
       },
       {
         "heading": "Inspect a dataset before adapting it for training",
@@ -3173,7 +3215,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-foundation-models',
-    revisionNote: 'October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
+    revisionNote: 'October 17, 2026: added the N0-Foundation / NeoForce section. October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
     title: 'Tactile Foundation Models for Robotics',
     description:
       "Compare Sparsh, UniTouch and tactile learning systems by inputs, outputs, downstream tasks and transfer evidence. Separate encoders, world models and policies.",
@@ -3181,7 +3223,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: "2026-10-12",
+    updated: '2026-10-17',
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3193,6 +3235,26 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Evaluate a model by the role touch plays, the transfer claim it tests, the robot task it changes, and the latency and hardware assumptions required at deployment.',
     ],
     sections: [
+      {
+        id: 'n0-foundation-neoforce',
+        heading: 'What Is N0-Foundation? NeoData, NeoForce and N0-VTLA',
+        body: [
+          'N0-Foundation, pronounced Neo-Foundation, is a tactile-centred research framework from the NeoteAI and Fudan TEAI teams, combining hardware, data, representations and evaluation. The September 20, 2026 report describes NeoData as more than 30,000 hours of synchronized visual-tactile demonstrations from robot teleoperation and the handheld N0-TacUMI interface. It reports OpenNeoData as a 5,000-hour open subset; the full corpus and the open subset are different resources.',
+          'NeoForce learns visuo-tactile representations using dense three-axis force fields as a shared supervision space: two shear components and one normal component. The intended benefit is a physical contact representation less tied to sensor-specific images. NeoReal evaluates physical manipulation and NeoSim supplies simulated tasks. These author-reported evaluations do not establish unrestricted transfer to every tactile sensor.',
+          'N0-VTLA is the related vision-tactile-language-action policy described in a separate official project. It uses NeoData pretraining and predicts latent tactile tokens to condition action generation. Keep this policy distinct from the Foundation infrastructure and NeoForce representation. Dataset size alone does not establish the exact training mixture of every checkpoint, and RoboSkin has not independently reproduced the models.',
+        ],
+        contextLinks: [
+          { before: 'Compare access and collection units in the ', label: 'tactile dataset directory', href: '/datasets', after: '.' },
+          { before: 'For the action-producing component, use the ', label: 'robot VLA model guide', href: '/robot-vla-models', after: '.' },
+        ],
+        links: [
+          { label: 'N0-Foundation report on arXiv (v2 reviewed, September 20, 2026)', href: 'https://arxiv.org/html/2608.29601v2' },
+          { label: 'N0-Foundation official project: readable overview and resource links', href: 'https://research.neoteai.com/n0-foundation/' },
+          { label: 'N0-Foundation arXiv record: v2 metadata and PDF access', href: 'https://arxiv.org/abs/2608.29601v2' },
+          { label: 'N0-Foundation publisher PDF (18.6 MB download)', href: 'https://research.neoteai.com/assets/n0-foundation-report.pdf' },
+          { label: 'N0-VTLA: separate official policy project and report', href: 'https://research.neoteai.com/n0-vtla/' },
+        ],
+      },
       {
         heading: 'Four different jobs for tactile learning',
         body: [
@@ -3733,8 +3795,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-16',
-    revisionNote: 'October 16, 2026: added published cost examples, integration budgeting and a TSF-85 profile route. Task filters, comparison tables and the blank worksheet are retained.',
+    updated: '2026-10-17',
+    revisionNote: 'October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3763,7 +3825,9 @@ export const seoTopicPages: SeoTopicPage[] = [
             "GelSight is both a sensing technology name and a manufacturer name. This comparison uses GelSight Mini and the original DIGIT; Digit 360 is a separate device. TacTip is a family of designs, so choose a particular variant before comparing specifications.",
             "This is a source-based selection guide, not a head-to-head hardware test. A camera frame rate is not an end-to-end control rate, and an image is not a calibrated force measurement."
       ],
-      contextLinks: [{ before: 'Start with the ', label: 'tactile sensing definition', href: '/technology', after: ' to distinguish measured signals from inferred geometry, force and contact state before reading these comparisons.' }],
+      contextLinks: [{ before: 'Start with the ', label: 'tactile sensing definition', href: '/technology', after: ' to distinguish measured signals from inferred geometry, force and contact state before reading these comparisons.' },
+          { before: 'For servicing those optical fingertips, follow the ', label: 'gel replacement and maintenance guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' and match the instructions to the installed sensor.' },
+        ],
       "table": {
             "headers": [
                   "System",
@@ -3885,6 +3949,10 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Fluid-filled biomimetic', 'Electrode impedance, fluid pressure, vibration, and temperature', 'Multimodal fingertip sensing with compliant contact', 'Mechanical maintenance, nonlinear calibration, platform adapters', 'Per-modality bandwidth, force reconstruction, skin replacement, task results'],
           ],
         },
+        contextLinks: [
+          { before: 'Compare contact images and distributed electrical measurements in the ', label: 'optical versus capacitive sensor guide', href: '/guides/optical-vs-capacitive-tactile-sensors', after: '.' },
+          { before: 'For a named magnetic alternative, read the ', label: 'Melexis Tactaxis profile', href: '/sensors/melexis-tactaxis', after: ' with its dated prototype and module evidence.' },
+        ],
       },
       {
         heading: 'Selection starts from the contact event',
@@ -4718,7 +4786,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics task pillar',
     intent: 'Broad pillar for robot manipulation, robotic manipulation, dexterous manipulation, robot grasping, contact-rich tasks, manipulation learning, and tactile feedback.',
     published: '2026-08-20',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -4762,6 +4831,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
       {
         heading: 'Hands, grippers and whole-body manipulation',
+        contextLinks: [
+          { before: 'The ', label: 'Cartesian Hand case study', href: '/news/cartesian-hand-all-linear-in-hand-manipulation', after: ' shows why the mechanism, object setup and released software must be checked separately when evaluating in-hand manipulation.' },
+        ],
         body: [
           'A two-finger gripper can be reliable and easier to control for many industrial tasks. Multi-finger hands add contact options and human-tool compatibility but also increase sensing, calibration, action-space, control, and maintenance complexity. Whole-body manipulation adds balance, mobility, reach, and environmental contacts.',
           'Compare systems by the task and embodiment they actually test, not by assuming that more degrees of freedom always produce better manipulation.',
@@ -4941,7 +5013,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place learning methods inside the complete model, robot, action, and feedback system.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Separate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence.' },
       { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare reusable model roles, data, embodiment transfer, access, and evidence.' },
-      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
+      { label: 'VLA robotics: models, code and tactile feedback', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the path from touch signals to robot perception and action.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Filter source-reviewed resources by robot, sensor, task, modality, and license.' },
@@ -4973,7 +5045,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robotics hardware pillar',
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -4987,6 +5060,9 @@ export const seoTopicPages: SeoTopicPage[] = [
     sections: [
       {
         heading: 'Robot hand, adaptive hand, or gripper?',
+        contextLinks: [
+          { before: 'For a mechanism-focused example, read the ', label: 'Cartesian Hand review and verified code/CAD resources', href: '/news/cartesian-hand-all-linear-in-hand-manipulation', after: '. It separates the paper’s configured-object trials from the limitations of the released control stack.' },
+        ],
         body: [
           'End-effectors should be selected for the work they must perform. A parallel gripper can be reliable for repetitive pick-and-place, while a multi-finger hand can support more grasp shapes, in-hand motion, and tools designed for people. Adaptive or underactuated hands sit between these categories by allowing several joints to conform with fewer independently controlled actuators.',
           'The words hand, gripper, dexterous, and anthropomorphic do not establish capability by themselves. A defensible comparison names the joints and actuators, sensing, payload and object range, control interface, cycle time, durability, task protocol, and failure behavior actually tested.',
@@ -5356,7 +5432,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot learning model pillar',
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: '2026-10-09',
+    updated: '2026-10-17',
+    revisionNote: 'Added a source-reviewed MAIA/CRIA evidence note. Existing model-table records retain their original review dates; no RoboSkin replication was performed.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5483,6 +5560,41 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "maia-contact-anomaly",
+        "heading": "MAIA: anticipating contact anomalies before action",
+        "body": [
+          "MAIA uses visual and wrist force/torque history plus planned actions to predict future interactions and anomalies. Its CRIA corpus contains 2,852 trajectories across 18 tasks. Collection used a Franka FR3, an ATI Axia80-M8 wrist F/T sensor and three cameras. An interaction anomaly is not necessarily final task failure.",
+          "In Section VI-E, a frozen pi0.5 proposes eight action chunks; MAIA selects the lowest predicted anomaly probability and executes the first 20 actions. The authors report 52.6% versus 61.5% success over 18 tasks, with 30 trials per task per method (540 per method, calculated). This is 8.9 percentage points, not a universal improvement.",
+          "The predictor was trained on 13 seen tasks and adapted using task-specific data for five novel tasks. No policy retraining does not mean no predictor training or adaptation. Single-platform, fixed-sensor experiments leave hardware transfer unestablished. The method predicts anomalies rather than supplying root-cause diagnosis or autonomous recovery.",
+          "Evidence: arXiv v1, submitted October 15, 2026 at 11:11:27 UTC; reviewed here October 17. Code, weights, downloadable data and their licenses were not verified. This is not a released-dataset listing or runnable tutorial.",
+          "For a sensing decision, distinguish a wrist F/T signal from a spatial skin-contact map: they expose different information. This result does not establish performance with distributed robot skin. RoboSkin reviewed the paper only; no reproduction, hardware migration or safety certification is claimed."
+        ],
+        "bullets": [
+          "Before evaluating force/torque feedback for robot failure prediction, define whether the target is a transient contact anomaly or final task failure. Report both missed events and false alarms.",
+          "Ask which predictor parameters were adapted, what task-specific data were allowed, and whether candidate count, latency and compute match the comparison policy.",
+          "Check camera placement, wrench calibration, timing alignment and contact conditions against the intended setup; require fresh evidence for a new robot or sensor.",
+          "Request per-task trial outcomes, intervention rules, artifact access and licenses. Keep anomaly-aware action selection separate from the system safety case."
+        ],
+        "links": [
+          {
+            "label": "MAIA arXiv v1 and submission history",
+            "href": "https://arxiv.org/abs/2610.21686v1"
+          },
+          {
+            "label": "MAIA methods and real-robot protocol, Sections IV–VII",
+            "href": "https://arxiv.org/html/2610.21686v1"
+          },
+          {
+            "label": "How robot skin measures distributed contact",
+            "href": "/robot-skin"
+          },
+          {
+            "label": "Separate research evidence from robot safety validation",
+            "href": "/robot-safety"
+          }
+        ]
+      },
+      {
         heading: 'World-model evidence checklist',
         body: [
           'A useful result identifies the training data, observation and action interfaces, target representation, horizon, uncertainty, compute, robot, task, baseline, and real-world trial protocol. It also reports what happens when prediction is wrong.',
@@ -5524,6 +5636,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review the data contracts behind predictive robot models.' },
     ],
     sources: [
+      { label: 'MAIA / CRIA arXiv v1, reviewed October 17, 2026', href: 'https://arxiv.org/abs/2610.21686v1' },
       { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'World Models for Robotic Manipulation: A Survey', href: 'https://arxiv.org/abs/2606.00113' },
       { label: 'Dream-Tac tactile world-action model preprint', href: 'https://arxiv.org/abs/2606.08737' },

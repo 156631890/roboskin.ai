@@ -1,0 +1,23 @@
+name: Deliver approved weekly reports
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: paid-report-delivery
+  cancel-in-progress: false
+jobs:
+  deliver:
+    if: vars.REPORTS_DELIVERY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Deliver pending issues and check freshness
+        env:
+          REPORTS_CRON_SECRET: ${{ secrets.REPORTS_CRON_SECRET }}
+        run: |
+          test -n "$REPORTS_CRON_SECRET"
+          curl --fail-with-body --silent --show-error --max-time 290 \
+            --request POST --header "Authorization: Bearer $REPORTS_CRON_SECRET" \
+            https://roboskin.ai/api/reports/dispatch

@@ -24,7 +24,7 @@ export default function VlaAssetLayout({ path, eyebrow, title, intro, children }
           <p className="mt-5 max-w-4xl text-base leading-relaxed text-[#c8d1de]">{intro}</p>
           <p className="mt-4 text-sm text-[#8e98a8]">
             By <Link href="/editorial-policy" className="underline underline-offset-4 hover:text-white">RoboSkin.ai Editorial Team</Link>
-            {' · '}Source review: <time dateTime={vlaCatalogReviewed}>October 14, 2026</time>
+            {' · '}Source review: <time dateTime={path === '/vla/concepts' ? '2026-10-14' : vlaCatalogReviewed}>{path === '/vla/concepts' ? 'October 14, 2026' : 'October 16, 2026'}</time>
           </p>
           <nav aria-label="VLA resources" className="mt-7 flex flex-wrap gap-3">
             {routes.map(([href, label]) => (

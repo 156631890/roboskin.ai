@@ -1,7 +1,9 @@
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { practicalSensingSources as sources } from '@/content/tactile-practical-guides';
+import { melexisTactaxis } from '@/content/melexis-tactaxis';
 
 export const sensorDetailPages: SeoTopicPage[] = [
+  melexisTactaxis,
   {
     path: '/sensors/robotiq-tsf-85',
     title: 'Robotiq TSF-85 Tactile Sensor: Specs, Use Cases & SDK',
@@ -9,8 +11,8 @@ export const sensorDetailPages: SeoTopicPage[] = [
     h1: 'Robotiq TSF-85 Tactile Sensor: Specs, Use Cases, and SDK',
     kicker: 'Sensor evidence / Multimodal capacitive fingertips',
     intent: 'Help robot builders review TSF-85 documentation and distinguish raw sensing, software acquisition and validated grasp control.',
-    published: '2026-10-16',
-    updated: '2026-10-16',
+    published: '2026-10-17',
+    updated: '2026-10-17',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -91,13 +93,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/digit',
+    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
     title: 'DIGIT Tactile Sensor: Specs, Python Interface & Limits',
     description: 'Evaluate the original DIGIT tactile sensor: paper specifications, Python stream settings, design files, calibration needs, repository status, and reuse terms.',
     h1: 'DIGIT tactile sensor: from RGB frames to robot touch',
     kicker: 'Sensor evidence / Vision-based fingertip',
     intent: 'Help robotics researchers evaluate the original DIGIT hardware and start with its documented Python interface.',
     published: '2026-09-12',
-    updated: "2026-10-07",
+    updated: '2026-10-17',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -136,6 +139,9 @@ export const sensorDetailPages: SeoTopicPage[] = [
         body: [
           'The image can reveal where the gel contacts an object and how its appearance changes as contact moves. A depth map, force vector, slip decision, or grasp-success estimate is a separate model output. Evaluate that model using independent reference measurements appropriate to the claimed quantity.',
           'For geometric reconstruction, specify the reference objects and the part of the gel included in calibration. For force estimation, synchronize a force reference with the images. For a manipulation policy, compare trials on the same robot, objects, controller budget, and success criterion. Camera FPS is not the latency of that complete feedback loop.',
+        ],
+        contextLinks: [
+          { before: 'Before reusing a model after surface damage, review the ', label: 'original DIGIT gel replacement guidance', href: '/guides/optical-tactile-sensor-maintenance', after: ' and retain the replacement history with the calibration record.' },
         ],
       },
       {
@@ -220,13 +226,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/gelsight-mini',
+    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
     title: 'GelSight Mini: Specifications, Software & Calibration',
     description: 'Review GelSight Mini specifications, RGB and 3D workflows, calibration limits, replaceable gel, Python examples, and evidence for robotics use.',
     h1: 'GelSight Mini: specifications and a usable research workflow',
     kicker: 'Sensor evidence / Commercial optical touch',
     intent: 'Help researchers distinguish GelSight Mini manufacturer specifications from software reconstruction settings and experimental claims.',
     published: '2026-09-12',
-    updated: "2026-10-07",
+    updated: '2026-10-17',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -268,6 +275,9 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'The official repository describes example reconstruction from RGB images and includes a reference calibrated model. The existence of that example does not establish a calibrated force vector for every purchased unit. For metric geometry, verify the image scale and reference depth on your device; for force, collect synchronized reference-force measurements.',
           'The cartridge is described as user-replaceable without tools. After a change, inspect unloaded appearance, focus, contact coverage, and reconstruction on reference shapes. Replacement can alter the image distribution seen by a model, even when the mechanical cartridge returns to a similar position.',
           'Marker motion can support shear estimation, but a visible marker displacement is not automatically a value in newtons. Record the calibration procedure and quantify its error independently from grasp or teleoperation success.',
+        ],
+        contextLinks: [
+          { before: 'Use the ', label: 'GelSight Mini cleaning and cartridge replacement guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' to distinguish the documented Mini procedure from original DIGIT hardware.' },
         ],
       },
       {
@@ -329,13 +339,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/reskin',
+    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
     title: 'ReSkin Magnetic Tactile Sensor: Design, Data & Calibration',
     description: 'Understand ReSkin magnetic tactile sensing: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection, and calibration evidence.',
     h1: 'ReSkin: magnetic touch with a replaceable skin',
     kicker: 'Sensor evidence / Magnetic tactile skin',
     intent: 'Explain ReSkin hardware, raw observations, software access, and the limits of cross-skin calibration claims.',
     published: '2026-09-12',
-    updated: '2026-09-12',
+    updated: '2026-10-17',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -384,6 +395,9 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'A magnetic sensor depends on the relationship between the elastomer, board, and surrounding field. Fix the mounting geometry and characterize unloaded signals before and after replacement. Test whether nearby magnetic or moving metallic components affect the measurements in your intended setup.',
           'Separate three checks: whether contact is detectable, whether the calibrated quantity is accurate, and whether using that quantity improves robot behavior. A high acquisition rate can help capture changes, but it does not establish a low-latency control loop or robust slip recovery.',
           'Compared with an optical fingertip, ReSkin supplies sparse magnetic measurements rather than a dense contact image. Its replaceable surface can suit different collection geometries, while the choice should follow the signals and validation resources required by the task.',
+        ],
+        contextLinks: [
+          { before: 'For another magnetic design, compare the ', label: 'Melexis Tactaxis specifications and module timeline', href: '/sensors/melexis-tactaxis', after: ' while keeping the devices and calibration evidence separate.' },
         ],
       },
       {

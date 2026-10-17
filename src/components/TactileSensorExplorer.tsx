@@ -65,7 +65,7 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {},
 
         <section id="task-selector" className="signal-panel mt-7 scroll-mt-24 p-5 md:p-7" aria-labelledby="task-selection-heading">
           <h3 id="task-selection-heading" className="text-2xl font-semibold text-white">Start with the task, then compare the evidence</h3>
-          <p className="mt-3 text-sm leading-relaxed text-soft">Editorial selection guidance, updated 2026-10-15. Candidate lists route you to documented sensing approaches; they are not exhaustive or ordered by performance. Individual source-review dates remain in the records below.</p>
+          <p className="mt-3 text-sm leading-relaxed text-soft">Editorial selection guidance, updated 2026-10-17. Candidate lists route you to documented sensing approaches; they are not exhaustive or ordered by performance. Individual source-review dates remain in the records below.</p>
           <label className="mt-5 grid gap-2 text-sm font-semibold text-white">Your task
             <select value={taskId} onChange={(event) => { resetFilters(); setTaskId(event.target.value); }} className="min-h-11 w-full rounded-md border border-white/10 bg-[#020408] px-3 text-sm text-white">
               <option value="all">All tasks — show evaluation plans</option>

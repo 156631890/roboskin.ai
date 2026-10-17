@@ -80,7 +80,7 @@ export default function TechnologyPage() {
             vibration or changes in an optical image. The available measurements depend on the sensor and its calibration.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
-          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-12">October 12, 2026</time>: added sensing-mechanism comparisons, tactile super-resolution, source-linked limitations and selection-to-integration reading routes.</p>
+          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-17">October 17, 2026</time>: added optical/capacitive comparison and Tactaxis reading routes. The October 12 mechanism comparisons, tactile super-resolution and source-linked limitations are retained.</p>
         </div>
       </section>
 

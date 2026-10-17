@@ -416,6 +416,7 @@ This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot
 
 ## Sources and related resources
 
+- [ASPIRE simulation setup and evaluation boundaries](/guides/aspire-libero-pro-setup)
 - [InterEvolve v1, submitted October 1, 2026](https://arxiv.org/abs/2610.02196)
 - [Full architecture, ablations and deployment details](https://arxiv.org/html/2610.02196v1)
 - [Official InterEvolve project page and videos](https://sirui-xu.github.io/InterEvolve/)
@@ -3528,6 +3529,9 @@ As inspected on September 23, the arXiv record and full paper did not link a pub
       { title: 'Cartesian Hand arXiv submission record', url: 'https://arxiv.org/abs/2609.25696' },
       { title: 'Cartesian Hand v1 methods and experiments', url: 'https://arxiv.org/html/2609.25696v1' },
       { title: 'Official Cartesian Hand project page', url: 'https://generalroboticslab.com/cartesian_handv1' },
+      { title: 'Cartesian Hand control stack, reviewed revision 83b738e', url: 'https://github.com/generalroboticslab/Cartesian_Hand/tree/83b738e8c7bf3b74e08e36250492d774aa432324' },
+      { title: 'Cartesian Hand hardware guide and bill of materials', url: 'https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/hardware/README.md' },
+      { title: 'Cartesian Hand repository license', url: 'https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/LICENSE' },
     ],
     technicalFocus: ['dexterous robot hands', 'in-hand manipulation', 'prismatic joints', 'robot hardware'],
     content: `# The Cartesian Hand replaces finger joints with seven linear axes
@@ -3566,7 +3570,20 @@ It also highlights where touch would add value. Joint thresholds can detect resi
 
 This is an arXiv v1 preprint and RoboSkin.ai has not built the hand. The object set is structured, the starting poses are controlled, and the procedures use manually selected parameters. The platform does not observe object pose, contact location or contact force. Claims should therefore remain about repeatable mechanism-specific manipulation, not open-world hand autonomy.
 
-The paper says software and hardware design will be open-sourced. The official project page currently exposes specifications, videos and a link labeled Code to github.com/generalroboticslab/Cartesian_Hand. On September 23 that repository returned 404 through both the public GitHub page and API, so no files, revision or license could be verified. A future-release statement is not a current open-source release.
+## Code, CAD and build resources
+
+The repository that was unavailable at our September 23 check is now public. On October 17, we verified revision [83b738e](https://github.com/generalroboticslab/Cartesian_Hand/tree/83b738e8c7bf3b74e08e36250492d774aa432324), committed October 10, and its root [Apache-2.0 license](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/LICENSE). Use these versioned resources when evaluating a build:
+
+| Reader task | Official resource | What to check |
+| --- | --- | --- |
+| Inspect software and installation | [Control-stack README](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/README.md) | Linux, Python and native build requirements; hardware, mock and MuJoCo entry points |
+| Find parts and assembly instructions | [Hardware guide and bill of materials](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/hardware/README.md) | Required tools, print settings, wiring, assembly and zeroing |
+| Inspect mechanical files | [CAD directory](https://github.com/generalroboticslab/Cartesian_Hand/tree/83b738e8c7bf3b74e08e36250492d774aa432324/hardware/CAD) | STEP parts and Fusion 360 design files; adapt tolerances to the build |
+| Review operating limits | [Hardware status and known issues](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/docs/hardware.md) | Configuration, calibration and travel-limit checks before driving the hand |
+
+The release does not independently reproduce the paper’s 350 trials. Its README explicitly describes a rewritten control stack, not the software used for those results, and says the transcribed manipulation tasks have not been completed on their physical objects. The mock and MuJoCo examples also contain no objects to manipulate. A completed simulation program therefore does not establish a successful grasp. RoboSkin.ai has inspected the public files but has not run this software or built the hand.
+
+For evaluating contact feedback in a future build, use the [robot-hand tactile sensor selection guide](/applications/robot-hand-tactile-sensor); the released hand should not be described as having that added tactile capability.
 
 ## Sources
 
@@ -3576,10 +3593,10 @@ The paper says software and hardware design will be open-sourced. The official p
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-09-25',
+    updated: '2026-10-17',
     readTime: '6 min read',
     sourceDate: '2026-09-22',
-    evidenceStatus: 'Preprint · arXiv v1 · linked repository unavailable',
+    evidenceStatus: 'Preprint · arXiv v1 · public code/CAD · reproduction unverified',
   },
   {
     id: 'spectrobot-high-bandwidth-single-point-tactile-sensing',

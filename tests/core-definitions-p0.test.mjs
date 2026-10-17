@@ -90,6 +90,28 @@ function contextLinks(document) {
   });
 }
 
+test('sensor profiles and task candidates resolve to visible directory records and schema', () => {
+  const { tactileSensorEntries } = load('src/lib/tactile-sensors.ts');
+  const { sensorDetailPages } = load('src/content/sensor-detail-pages.ts');
+  const { sensorTasks } = load('src/lib/sensor-selection.ts');
+  const document = renderRoute('/sensors');
+  const ids = new Set(tactileSensorEntries.map((entry) => entry.id));
+  assert.equal(ids.size, tactileSensorEntries.length);
+  const directory = graphNodes(document).find((node) => node?.['@type'] === 'ItemList' && node.numberOfItems === tactileSensorEntries.length);
+  assert.ok(directory, 'Structured data must cover the same sensor inventory as the table');
+  for (const profile of sensorDetailPages) {
+    const id = profile.path.split('/').at(-1);
+    assert.ok(ids.has(id), `${profile.path} is missing from the filterable directory`);
+    assert.ok(document.querySelector(`#sensor-${id} a[href="${profile.path}"]`), `${id} needs a row-to-profile link`);
+  }
+  for (const task of sensorTasks) {
+    for (const candidate of task.candidates) {
+      assert.ok(ids.has(candidate.id), `${task.id} references an unknown sensor`);
+      assert.ok(document.querySelector(`#sensor-${candidate.id}`), `${candidate.id} must render before filtering`);
+    }
+  }
+});
+
 for (const pathname of contentPaths) {
   // October 16 additions retain every previous answer and add 3–5 focused
   // questions per requested topic. Keep the rendered/schema equality gate.
