@@ -200,6 +200,9 @@ export function buildLlmsFullText() {
 
     for (const section of page.sections) {
       lines.push(`#### ${section.heading}`, '', ...section.body.map(compact), '');
+      for (const link of section.contextLinks ?? []) {
+        lines.push(`${link.before}${markdownLink(link.label, link.href)}${link.after}`, '');
+      }
       if (section.bullets?.length) lines.push(...section.bullets.map((item) => `- ${compact(item)}`), '');
       if (section.table) {
         lines.push(
@@ -209,6 +212,11 @@ export function buildLlmsFullText() {
           '',
         );
       }
+      for (const subsection of section.subsections ?? []) {
+        lines.push(`##### ${subsection.heading}`, '', ...subsection.body.map(compact), '');
+        if (subsection.links?.length) lines.push(...subsection.links.map((link) => `- ${markdownLink(link.label, link.href)}`), '');
+      }
+      if (section.links?.length) lines.push(...section.links.map((link) => `- ${markdownLink(link.label, link.href)}`), '');
     }
 
     if (page.faqs.length) {

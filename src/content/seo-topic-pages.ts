@@ -6,6 +6,7 @@ import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { programmingPages } from '@/content/programming-pages';
 import { engineeringPages } from '@/content/engineering-pages';
+import { thermalSensingSection, thermalSensingFaqs, tactileSensorCostSection, tactileSensorCostFaqs } from '@/content/tactile-practical-guides';
 
 export type SeoTopicPage = {
   path: string;
@@ -31,6 +32,11 @@ export type SeoTopicPage = {
     id?: string;
     heading: string;
     body: string[];
+    subsections?: {
+      heading: string;
+      body: string[];
+      links?: { label: string; href: string }[];
+    }[];
     contextLinks?: { before: string; label: string; href: string; after: string }[];
     bullets?: string[];
     links?: { label: string; href: string; download?: boolean }[];
@@ -399,7 +405,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place foundation models inside the full perception, reasoning, policy, control, and feedback loop.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Trace exact, family-level, and unnamed hardware to evaluated-on, trained-across, or demonstrated-on evidence.' },
       { label: 'Robot AI research organizations', href: '/organizations', description: 'Trace verified developers and source-listed contributor affiliations to official identity and model evidence.' },
-      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
+      { label: 'VLA robotics: models and action interfaces', href: '/robot-vla-models', description: 'Focus specifically on vision-language-action interfaces and evaluation.' },
       { label: 'Robot world models', href: '/robot-world-models', description: 'Separate future prediction from action selection and control.' },
       { label: 'Robot learning', href: '/robot-learning', description: 'Trace demonstrations, reinforcement, correction, transfer, and deployment.' },
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Compare broad robot observations, actions, embodiments, access, and license evidence.' },
@@ -882,19 +888,19 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 12, 2026: added magnetic skin, eLuminator, EIT and iontronic sensing distinctions, source-bounded limitations and practical reading routes.',
+    revisionNote: 'October 17, 2026: added thermal sensing, physical sensor examples and the limits of TouchTherm reconstruction results. Existing modality explanations and sources are retained.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: "2026-10-12",
+    updated: '2026-10-17',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'answers',
-    keywords: ['e-skin', 'electronic skin robotics', 'conformable electronic skin', 'flexible tactile sensor', 'robotic electronic skin'],
+    keywords: ['e-skin', 'electronic skin robotics', 'conformable electronic skin', 'flexible tactile sensor', 'robotic electronic skin', 'what is thermal tactile sensing', 'temperature sensing robot skin explained'],
     quickAnswer: [
       'E-skin, or electronic skin, is a flexible or soft sensor layer designed to measure contact-related signals on non-flat surfaces.',
       'In robotics, e-skin can cover fingertips, palms, gripper pads, prosthetics, arms, or safety surfaces.',
@@ -997,6 +1003,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           }
         ]
       },
+      thermalSensingSection,
       {
         "id": "challenges-and-limitations",
         "heading": "Challenges & Limitations",
@@ -1022,6 +1029,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      ...thermalSensingFaqs,
       { question: 'How does magnet-based tactile skin work?', answer: 'Contact deforms a magnetic interface, changing the field measured by sensors below it. Calibration or a learned mapping estimates the contact property. Check the exact geometry and validated outputs; field readings are not automatically force measurements.', sources: [tactileSources.lattice, { label: 'ReSkin author project', href: 'https://reskin.dev/' }] },
       {
         question: 'What does e-skin stand for?',
@@ -3788,15 +3796,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
     updated: '2026-10-17',
-    revisionNote: "October 17, 2026: added links to the optical/capacitive comparison, gel maintenance and Tactaxis profile. Existing evidence dates are retained. October 15, 2026: added task filters for slip, dexterity and full-hand coverage, with evaluation conditions and a blank comparison worksheet. Existing source-linked limitations are retained.",
+    revisionNote: 'October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor'],
+    keywords: ['tactile sensors for robots', 'tactile sensor robot hand', 'robot gripper tactile sensor', 'vision-based tactile sensor', 'magnetic tactile skin', 'soft tactile sensor', 'how much does a tactile sensor cost'],
     startHere: {
       heading: "Choose a comparison route",
       links: [
+        { label: "Robotiq TSF-85", href: "/sensors/robotiq-tsf-85", description: "Pressure and vibration rates, official SDK and integration limits." },
         { label: "DIGIT tactile sensor", href: "/sensors/digit", description: "Original hardware specifications, Python frames and calibration limits." },
         { label: "GelSight Mini", href: "/sensors/gelsight-mini", description: "Read the integration and evidence guide before selecting hardware." },
           { label: "ReSkin magnetic tactile sensing", href: "/sensors/reskin", description: "Understand the sensing approach and source-bounded integration requirements." },
@@ -4012,8 +4021,10 @@ export const seoTopicPages: SeoTopicPage[] = [
           }
         ]
       },
+      tactileSensorCostSection,
     ],
     faqs: [
+      ...tactileSensorCostFaqs,
       { question: 'What tactile sensors are used in robot hands?', answer: 'Common choices include vision-based tactile fingertips, magnetic skins, distributed force arrays, and multimodal biomimetic fingertips. The right choice depends on hand geometry, contact task, control rate, and maintenance constraints.' },
       { question: 'Are vision-based tactile sensors force sensors?', answer: 'They produce images of a deforming interface. Force can be estimated after calibration or learned mapping, but a raw tactile image is not automatically a calibrated force measurement.' },
       { question: 'What is a taxel?', answer: 'A taxel is a tactile sensing element in an array, analogous to a pixel only at the level of spatial indexing. Taxels can measure different physical quantities and may not have independent responses.' },
@@ -4775,7 +4786,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics task pillar',
     intent: 'Broad pillar for robot manipulation, robotic manipulation, dexterous manipulation, robot grasping, contact-rich tasks, manipulation learning, and tactile feedback.',
     published: '2026-08-20',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -4819,6 +4831,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
       {
         heading: 'Hands, grippers and whole-body manipulation',
+        contextLinks: [
+          { before: 'The ', label: 'Cartesian Hand case study', href: '/news/cartesian-hand-all-linear-in-hand-manipulation', after: ' shows why the mechanism, object setup and released software must be checked separately when evaluating in-hand manipulation.' },
+        ],
         body: [
           'A two-finger gripper can be reliable and easier to control for many industrial tasks. Multi-finger hands add contact options and human-tool compatibility but also increase sensing, calibration, action-space, control, and maintenance complexity. Whole-body manipulation adds balance, mobility, reach, and environmental contacts.',
           'Compare systems by the task and embodiment they actually test, not by assuming that more degrees of freedom always produce better manipulation.',
@@ -4998,7 +5013,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'AI and robotics', href: '/ai-robotics', description: 'Place learning methods inside the complete model, robot, action, and feedback system.' },
       { label: 'Robot platforms and embodiments', href: '/robots', description: 'Separate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence.' },
       { label: 'Robot foundation models', href: '/robot-foundation-models', description: 'Compare reusable model roles, data, embodiment transfer, access, and evidence.' },
-      { label: 'Robot VLA models', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
+      { label: 'VLA robotics: models, code and tactile feedback', href: '/robot-vla-models', description: 'Place vision-language-action policies inside the broader robot-learning stack.' },
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Follow the path from touch signals to robot perception and action.' },
       { label: 'Tactile datasets', href: '/datasets', description: 'Filter source-reviewed resources by robot, sensor, task, modality, and license.' },
@@ -5030,7 +5045,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robotics hardware pillar',
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-08-22',
+    updated: '2026-10-17',
+    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5044,6 +5060,9 @@ export const seoTopicPages: SeoTopicPage[] = [
     sections: [
       {
         heading: 'Robot hand, adaptive hand, or gripper?',
+        contextLinks: [
+          { before: 'For a mechanism-focused example, read the ', label: 'Cartesian Hand review and verified code/CAD resources', href: '/news/cartesian-hand-all-linear-in-hand-manipulation', after: '. It separates the paper’s configured-object trials from the limitations of the released control stack.' },
+        ],
         body: [
           'End-effectors should be selected for the work they must perform. A parallel gripper can be reliable for repetitive pick-and-place, while a multi-finger hand can support more grasp shapes, in-hand motion, and tools designed for people. Adaptive or underactuated hands sit between these categories by allowing several joints to conform with fewer independently controlled actuators.',
           'The words hand, gripper, dexterous, and anthropomorphic do not establish capability by themselves. A defensible comparison names the joints and actuators, sensing, payload and object range, control interface, cycle time, durability, task protocol, and failure behavior actually tested.',

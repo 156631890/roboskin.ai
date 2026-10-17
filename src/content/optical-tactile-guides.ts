@@ -187,6 +187,7 @@ export const opticalTactileGuides: SeoTopicPage[] = [
         links: [capacitivePaper, pps, digitPaper],
         contextLinks: [
           { before: 'If local normal-and-shear force is the priority, also evaluate the magnetic ', label: 'Melexis Tactaxis alternative', href: '/sensors/melexis-tactaxis', after: ' using the specifications for the exact hardware version.' },
+          { before: 'For a capacitive gripper-fingertip example, read the ', label: 'Robotiq TSF-85 profile', href: '/sensors/robotiq-tsf-85', after: ' and distinguish pressure-array refresh, vibration sampling and the gripper control interface.' },
         ],
       },
       {

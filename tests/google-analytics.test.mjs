@@ -119,6 +119,11 @@ test('model and topic resource navigation is measured with public paths only', (
     ['/robot-skin', 'robot-skin-guide'],
     ['/tactile-ai', 'tactile-ai-guide'],
     ['/benchmarks', 'benchmark-directory'],
+    ['/guides/optical-tactile-sensor-maintenance', 'optical-sensor-maintenance'],
+    ['/guides/optical-vs-capacitive-tactile-sensors', 'optical-capacitive-comparison'],
+    ['/sensors/melexis-tactaxis', 'melexis-tactaxis'],
+    ['/sensors/robotiq-tsf-85', 'robotiq-tsf-85'],
+    ['/research/bench2dex-visuo-tactile-bimanual-benchmark-2026', 'bench2dex-review'],
   ]) {
     assert.deepEqual(analytics.analyticsResourceEvent(origin, `${path}?q=private#comparison`), {
       name: 'resource_open',
