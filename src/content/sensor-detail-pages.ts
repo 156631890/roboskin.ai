@@ -1,6 +1,8 @@
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
+import { melexisTactaxis } from '@/content/melexis-tactaxis';
 
 export const sensorDetailPages: SeoTopicPage[] = [
+  melexisTactaxis,
   {
     path: '/sensors/digit',
     title: 'DIGIT Tactile Sensor: Specs, Python Interface & Limits',
