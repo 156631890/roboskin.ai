@@ -1475,25 +1475,57 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/physical-ai-touch',
-    revisionNote: 'October 12, 2026: added active sensing, its experimental boundaries, ROMI-2K context, FAQs and practical reading routes.',
-    title: 'Physical AI & Touch: Tactile Sensing for Embodied Systems',
+    revisionNote: 'October 18, 2026: added a task-first tactile sensing roadmap, acceptance checks and direct reading routes. The October 12 active-sensing and ROMI-2K material is retained.',
+    title: 'Physical AI Touch: Tactile Sensing Roadmap',
     description:
-      'Touch grounds Physical AI in real contact. Learn how tactile sensing combines with vision, language, proprioception, world models, robot learning, and control.',
-    h1: 'Physical AI and touch',
+      'Plan tactile sensing for embodied AI: choose contact signals, align robot data, test feedback and evaluate policies with a staged roadmap and source links.',
+    h1: 'Physical AI and touch: a tactile sensing roadmap',
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: "2026-10-12",
+    updated: '2026-10-18',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'answers',
-    keywords: ['Physical AI tactile sensing', 'Physical AI touch', 'tactile Physical AI', 'embodied tactile intelligence', 'Physical AI touch data', 'robot touch data', 'multimodal Physical AI'],
+    keywords: ['Physical AI tactile sensing', 'Physical AI touch', 'tactile sensing roadmap', 'tactile Physical AI', 'embodied tactile intelligence', 'Physical AI touch data', 'robot touch data', 'multimodal Physical AI'],
+    startHere: {
+      heading: 'Plan your tactile sensing workflow',
+      links: [
+        { label: 'Follow the staged roadmap', href: '#tactile-sensing-roadmap', description: 'Move from the contact problem to sensing, aligned data and measured robot outcomes.' },
+        { label: 'Choose a sensor by task', href: '/guides/how-to-choose-a-tactile-sensor', description: 'Compare task requirements, sensing limits and integration constraints.' },
+        { label: 'Inspect a ROS 2 data pipeline', href: '/guides/ros2-tactile-sensing', description: 'Use the documented synthetic-data example; hardware performance is a separate check.' },
+      ],
+    },
     quickAnswer: [
+      'A tactile sensing roadmap for embodied AI starts with a contact-dependent task, then selects a sensor, aligns touch with robot state and actions, tests feedback, and evaluates the learned policy. The stages below are an integration checklist, not a forecast of product releases or a claim that every robot needs a VLA.',
       'Physical AI touch data is contact information collected from robot surfaces during real interaction with objects, people, tools, or environments.',
       'It complements vision because the robot often needs feedback at the exact surface where contact happens, especially when the hand blocks the camera.',
       'Useful touch data is timestamped, calibrated, mapped to robot geometry, and connected to control, evaluation, or learning workflows.',
     ],
     sections: [
+      {
+        id: 'tactile-sensing-roadmap',
+        heading: 'A tactile sensing roadmap for embodied AI',
+        body: [
+          'Start with the contact uncertainty that prevents a task from succeeding: slip, seating, occluded contact or deformation. Select the measured signal and sensor placement before choosing a model. A visual contact image, a force measurement and an inferred slip label are different evidence.',
+          'Use each stage as a decision gate. Recording touch does not establish that a policy uses it, and a plausible predicted tactile frame does not establish better robot control. Keep sensor-specific calibration, latency and physical test conditions attached to the result.',
+        ],
+        table: {
+          headers: ['Stage', 'What to build or inspect', 'Evidence before moving on'],
+          rows: [
+            ['1. Define the task', 'Contact event, object, robot, failure and outcome metric.', 'A named contact problem and a baseline that can expose its effect.'],
+            ['2. Select the sensing surface', 'Modality, placement, coverage, calibration, rate and replaceability.', 'Measured signals and units, plus missing-contact regions and hardware limits.'],
+            ['3. Align and replay data', 'Touch, camera, robot state, command, timestamp and coordinate frame.', 'Replayable episodes with timing, validity, calibration and failure metadata.'],
+            ['4. Test feedback', 'A controller or correction pathway that can consume the signal.', 'Contact-to-response timing and matched trials with and without tactile feedback.'],
+            ['5. Evaluate learning or prediction', 'A tactile representation, policy or action-conditioned world model, if needed.', 'Held-out tasks or conditions, physical outcomes, interventions and failure logs.'],
+          ],
+        },
+        links: [
+          { label: 'Choose tactile hardware by manipulation task', href: '/guides/how-to-choose-a-tactile-sensor' },
+          { label: 'Inspect touch data, access and license boundaries', href: '/datasets' },
+          { label: 'Separate tactile policy feedback from world-model prediction', href: '/robot-world-models' },
+        ],
+      },
       {
         heading: 'Why vision is not enough',
         body: [
@@ -4899,25 +4931,59 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-learning',
-    title: 'Robot Learning: Models, Datasets & Real-World Robotics',
+    title: 'Robot Learning Data: Datasets, Formats & Evaluation',
     description:
-      'Learn how robots learn from demonstrations, reinforcement, datasets, simulation, and touch, with source-backed guidance for real-world evaluation.',
-    h1: 'Robot learning: data, models and real-world evaluation',
+      'Choose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.',
+    h1: 'Robot learning data: datasets, formats and evaluation',
     kicker: 'High-interest robotics pillar',
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-09-19',
+    updated: '2026-10-18',
+    revisionNote: 'October 18, 2026: added a data-selection checklist and direct routes to dataset access, formats and collection. Existing learning-method and evaluation material is retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'resources',
-    keywords: ['robot learning', 'robotics machine learning', 'imitation learning robotics', 'reinforcement learning robots', 'robot learning datasets', 'sim-to-real robotics', 'robot policy learning', 'tactile robot learning', 'LeRobot'],
+    keywords: ['robot learning', 'robot learning data', 'robotics machine learning', 'imitation learning robotics', 'reinforcement learning robots', 'robot learning datasets', 'sim-to-real robotics', 'robot policy learning', 'tactile robot learning', 'LeRobot'],
+    startHere: {
+      heading: 'Find and check robot learning data',
+      links: [
+        { label: 'Use the data-selection checklist', href: '#choose-robot-learning-data', description: 'Check task fit, actions, sensing, access and evaluation before training.' },
+        { label: 'Find robot dataset sources', href: '/robotics-datasets', description: 'Follow source links and inspect embodiment, task coverage and reuse limits.' },
+        { label: 'Inspect the LeRobot format', href: '/guides/lerobot-dataset-format', description: 'Check episodes, fields, timestamps and action conventions.' },
+      ],
+    },
     quickAnswer: [
+      'Robot learning data includes observations, robot state, actions, task context and outcomes used to train or evaluate a robot model. Start with the task and action interface, then check sensing, timing, held-out splits, access and license. Dataset size alone does not establish that the data fits your robot.',
       'Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources.',
       'A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability.',
       'Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.',
     ],
     sections: [
+      {
+        id: 'choose-robot-learning-data',
+        heading: 'How to choose robot learning data',
+        body: [
+          'First decide what you want to learn: a visual or tactile representation, an action policy, a reward or a dynamics model. Human video, robot demonstrations and tactile records can serve different roles; a video dataset is not automatically a set of executable robot-action targets.',
+          'Use the checklist before downloading or converting data. Follow the original dataset for access and license terms, and the format guide for storage and field conventions. A common format does not make different robots, action units or train-test splits interchangeable.',
+        ],
+        table: {
+          headers: ['Decision', 'What to inspect', 'Why it changes your choice'],
+          rows: [
+            ['Task and embodiment', 'Robot, end effector, objects, tasks, resets and failed attempts.', 'Reject data that does not represent the behavior or hardware you need.'],
+            ['Action contract', 'Command versus measured state, joint or end-effector space, units, frames and gripper convention.', 'Similar field names do not establish compatible action targets.'],
+            ['Sensor and timing contract', 'Camera, proprioception, touch, timestamps, calibration and missing observations.', 'A recorded modality must be aligned and supported by the training recipe.'],
+            ['Access and reuse', 'Original download, version, dataset license and separate code or model terms.', 'Public metadata does not establish that files are downloadable or reusable for your purpose.'],
+            ['Evaluation split', 'Held-out objects, scenes, tasks, operators or embodiments and repeated trajectories.', 'Match the split to the transfer claim and avoid training-test leakage.'],
+          ],
+        },
+        links: [
+          { label: 'Find broad robotics datasets and their original sources', href: '/robotics-datasets' },
+          { label: 'Compare tactile datasets by task and release evidence', href: '/datasets' },
+          { label: 'Inspect LeRobot episode fields and conversion checks', href: '/guides/lerobot-dataset-format' },
+          { label: 'Plan new demonstration collection', href: '/robot-teleoperation#teleoperation-data-checklist' },
+        ],
+      },
       {
         heading: 'The robot-learning loop',
         body: [
@@ -5650,25 +5716,58 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-teleoperation',
-    title: 'Robot Teleoperation: Demonstrations, Data & Learning',
+    title: 'Robot Teleoperation Data: Collection & Quality Checks',
     description:
-      'Learn how robot teleoperation captures demonstrations for robot learning and VLA training, including interfaces, synchronization, quality control, limits, and evaluation.',
-    h1: 'Robot teleoperation: from human demonstration to robot data',
+      'Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.',
+    h1: 'Robot teleoperation data: collection and quality checks',
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: "2026-10-07",
+    updated: '2026-10-18',
+    revisionNote: 'October 18, 2026: added an episode-quality checklist and direct routes to the existing UMI/GELLO comparison, formats and dataset selection.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['robot teleoperation', 'humanoid robot teleoperation', 'robot demonstration data', 'teleoperation robotics', 'imitation learning data collection', 'VLA training data', 'robot data collection', 'robot retargeting', 'robot learning demonstrations'],
+    keywords: ['robot teleoperation', 'robot teleoperation data', 'humanoid robot teleoperation', 'robot demonstration data', 'teleoperation robotics', 'imitation learning data collection', 'VLA training data', 'robot data collection', 'robot retargeting', 'robot learning demonstrations'],
+    startHere: {
+      heading: 'Build usable demonstration episodes',
+      links: [
+        { label: 'Check a teleoperation episode', href: '#teleoperation-data-checklist', description: 'Inspect actions, clock alignment, outcomes and reuse conditions before training.' },
+        { label: 'Compare UMI and GELLO', href: '#section-umi-and-gello-collect-different-kinds-of-demonstrations', description: 'Use the existing comparison of collection hardware, data and tactile limits.' },
+        { label: 'Inspect episode storage and fields', href: '/guides/lerobot-dataset-format', description: 'Validate the data contract before converting a recording.' },
+      ],
+    },
     quickAnswer: [
+      'Robot teleoperation data pairs recorded observations and robot state with human-controlled commands or action targets. To use it for learning, document the action interface, align clocks, retain resets and interventions, check episode quality, and define evaluation splits and reuse terms. Teleoperation demonstrates human control, not autonomous policy capability.',
       'Robot teleoperation is remote or mediated human control of a robot through interfaces such as joysticks, teach pendants, motion capture, wearable devices, cameras, handheld end effectors, or bilateral systems. Teleoperated behavior is not autonomous behavior.',
       'For robot learning, teleoperation can generate aligned observations and actions, but useful data also requires calibration, timing, task definitions, resets, failures, operator context, quality control, schema, access, and license.',
       'Demonstrations do not become a capable policy automatically. Training must account for action representation, embodiment, coverage, compounding errors, evaluation splits, interventions, and repeated real-robot testing.',
     ],
     sections: [
+      {
+        id: 'teleoperation-data-checklist',
+        heading: 'Robot teleoperation data collection: episode-quality checklist',
+        body: [
+          'Define the learning data contract before choosing an interface. Direct robot teleoperation can record commands for a particular embodiment; original UMI instead uses an instrumented handheld gripper and reconstructs trajectories for later policy deployment. Neither raw video nor a controller joint angle is automatically a calibrated tactile measurement.',
+          'Review a small set of recorded episodes before scaling collection. Inspect the streams together, preserve failures and corrections, and document what was commanded versus what the robot measured. Passing file validation alone does not show that the resulting policy succeeds on a physical robot.',
+        ],
+        table: {
+          headers: ['Collection check', 'What the episode should document', 'What to verify'],
+          rows: [
+            ['Action meaning', 'Command and measured state, control mode, units, frames, gripper range and retargeting.', 'The targets match the policy and deployment controller.'],
+            ['Clock alignment', 'Observation, state, command and optional tactile timestamps with capture-rate metadata.', 'Replay exposes missing frames, offsets and stale sensor values.'],
+            ['Task coverage', 'Task label, objects, setup, resets, failures, interventions and operator context.', 'The retained episodes represent the conditions the policy will face.'],
+            ['Contact evidence', 'Sensor identity, placement, calibration and raw versus inferred touch fields.', 'An added tactile channel is valid, synchronized and supported by the learning method.'],
+            ['Release and evaluation', 'Dataset version, access, license and held-out split definition.', 'The release can be used for your purpose without leaking repeated episodes into evaluation.'],
+          ],
+        },
+        links: [
+          { label: 'Compare the original UMI and GELLO collection systems', href: '#section-umi-and-gello-collect-different-kinds-of-demonstrations' },
+          { label: 'Validate LeRobot fields, timestamps and conversion', href: '/guides/lerobot-dataset-format' },
+          { label: 'Choose existing robot learning data before collecting more', href: '/robot-learning#choose-robot-learning-data' },
+        ],
+      },
       {
         id: 'passive-observation-vs-teleoperation-data-for-robot-learning',
         heading: 'Passive observation vs teleoperation data for robot learning',
