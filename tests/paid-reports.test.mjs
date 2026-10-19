@@ -262,6 +262,19 @@ test('weekly delivery is once per paid member, respects opt-out and never emails
   await assert.rejects(publishReport(f.db, issue(), fixedNow));
 });
 
+test('cron GET requires the bearer secret and shares delivery deduplication with POST', async t => {
+  const f = await fixture(t);
+  await f.buy();
+  const url = 'https://roboskin.ai/api/reports-cron';
+  assert.equal((await f.handlers.dispatch(new Request(url))).status, 401);
+  const headers = { authorization: `Bearer ${config.cronSecret}` };
+  const first = await f.handlers.dispatch(new Request(url, { headers }));
+  assert.equal(first.status, 200);
+  assert.equal((await first.json()).sent, 1);
+  const retry = await f.handlers.dispatch(new Request(url, { method: 'POST', headers }));
+  assert.equal((await retry.json()).sent, 0);
+});
+
 test('one monthly payment gives access to successive weekly issues without a new checkout', async t => {
   const f = await fixture(t), a = await f.buy();
   assert.equal((await dispatchReports(f)).sent, 1);
