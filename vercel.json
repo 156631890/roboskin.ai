@@ -4,6 +4,7 @@
     "deploymentEnabled": true
   },
   "buildCommand": "npm run build",
+  "crons": [{ "path": "/api/reports-cron", "schedule": "17 * * * *" }],
   "routes": [
     {
       "src": "/physics-ai",
