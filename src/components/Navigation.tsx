@@ -90,8 +90,13 @@ export default function Navigation() {
               </svg>
               <span>Research index</span>
             </Link>
-            <Link href="/contact?requestType=research" className="site-nav-cta">
-              Submit source <span aria-hidden="true">↗</span>
+            <Link
+              href="/weekly-reports"
+              className="site-nav-cta"
+              aria-current={pathname === '/weekly-reports' ? 'page' : undefined}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Weekly reports <span aria-hidden="true">↗</span>
             </Link>
             <button
               ref={menuButtonRef}
@@ -114,6 +119,14 @@ export default function Navigation() {
       {mobileMenuOpen ? (
         <div id="mobile-navigation" className="site-mobile-menu">
           <div className="container-shell">
+            <Link
+              href="/weekly-reports"
+              onClick={() => setMobileMenuOpen(false)}
+              className="site-mobile-cta"
+              aria-current={pathname === '/weekly-reports' ? 'page' : undefined}
+            >
+              Weekly reports · US$9.90/month <span aria-hidden="true">↗</span>
+            </Link>
             <p className="site-mobile-label">Explore RoboSkin.ai</p>
             <div className="site-mobile-links">
               {primaryNavigation.map((link, index) => {
