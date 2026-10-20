@@ -889,14 +889,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 17, 2026: added thermal sensing, physical sensor examples and the limits of TouchTherm reconstruction results. Existing modality explanations and sources are retained.',
+    revisionNote: 'October 20, 2026: expanded magnetic sensing with PhantomTac scope, proposed contact-consistency checks and procurement questions. The October 17 thermal sensing and TouchTherm boundaries, earlier modality explanations and sources are retained.',
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
       'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: '2026-10-17',
+    updated: '2026-10-20',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
