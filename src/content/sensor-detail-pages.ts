@@ -1,9 +1,11 @@
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { practicalSensingSources as sources } from '@/content/tactile-practical-guides';
 import { melexisTactaxis } from '@/content/melexis-tactaxis';
+import { loomiaSmartSkin } from '@/content/loomia-smart-skin';
 
 export const sensorDetailPages: SeoTopicPage[] = [
   melexisTactaxis,
+  loomiaSmartSkin,
   {
     path: '/sensors/robotiq-tsf-85',
     title: 'Robotiq TSF-85 Tactile Sensor: Specs, Use Cases & SDK',

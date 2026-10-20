@@ -1,3 +1,4 @@
+import { omnimodalSection, omnimodalFaqs, omnimodalSources, contactStateSection, contactStateFaqs, contactStateSources } from '@/content/longtail-october-20';
 import { aspireSetup } from '@/content/aspire-setup';
 import { opticalTactileGuides } from '@/content/optical-tactile-guides';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
@@ -4096,18 +4097,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: '2026-09-18',
+    updated: '2026-10-20',
+    revisionNote: 'October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.',
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
-    keywords: ['tactile manipulation', 'touch-guided robot manipulation', 'tactile robot control', 'contact-rich manipulation', 'dexterous manipulation tactile sensing', 'robot grasp slip detection'],
+    keywords: ['contact state recognition', 'tactile manipulation', 'touch-guided robot manipulation', 'tactile robot control', 'contact-rich manipulation', 'dexterous manipulation tactile sensing', 'robot grasp slip detection'],
     quickAnswer: [
       'Tactile manipulation is robot manipulation that uses measured contact to estimate physical state and change an action. The loop is contact → sensor → tactile representation → state estimate or policy → robot command → new contact.',
       'Touch is most useful after vision becomes ambiguous: during grasp closure, slip, occluded insertion, deformable-object handling, and contacts whose force or stability cannot be inferred reliably from an external image.',
       'A tactile model is not enough. Useful manipulation requires synchronized robot state, low-latency sensing, a controller or policy that can act on touch, and task-level evidence against a no-touch baseline.',
     ],
     sections: [
+      contactStateSection,
       {
         heading: 'The tactile manipulation control loop',
         body: [
@@ -4197,6 +4200,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      ...contactStateFaqs,
       { question: 'What is tactile manipulation?', answer: 'It is robot manipulation that uses measured contact to estimate physical state and update actions such as grip force, pose, trajectory, or recovery mode.' },
       { question: 'Why is touch useful when a robot already has cameras?', answer: 'Cameras can lose contact information under occlusion and often cannot directly observe pressure, shear, slip, seating, or hidden local motion. Touch supplies evidence at the physical interface.' },
       { question: 'Does tactile sensing always improve manipulation?', answer: 'No. Improvement depends on sensor placement, signal quality, synchronization, latency, model, controller, and task. It should be shown against a matched no-touch baseline.' },
@@ -4214,6 +4218,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Slip detection', href: '/guides/slip-detection-robot-hand', description: 'Trace slip signals into grasp recovery.' },
     ],
     sources: [
+      ...contactStateSources,
       { label: 'The Missing Touch spatial tactile feedback preprint', href: 'https://arxiv.org/abs/2608.19372' },
       { label: 'Sparsh and TacBench paper', href: 'https://arxiv.org/abs/2410.24090' },
       { label: 'ManiSkill-ViTac 2025 challenge paper', href: 'https://arxiv.org/abs/2411.12503' },
@@ -4537,18 +4542,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: '2026-10-09',
+    updated: '2026-10-20',
+    revisionNote: 'October 20, 2026: added a source-reviewed omnimodal VLA explanation and FAQ. Earlier model records retain their own evidence dates.',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA', 'vision language action model architecture', 'vision language action models open source', 'efficient vision language action models', 'vision language action model benchmark'],
+    keywords: ['omnimodal VLA', 'robot VLA models', 'vision-language-action model', 'VLA robotics', 'vision language action policy', 'robot action model', 'multimodal robot policy', 'tactile VLA', 'vision language action model architecture', 'vision language action models open source', 'efficient vision language action models', 'vision language action model benchmark'],
     quickAnswer: [
       'A robot vision-language-action model, usually shortened to VLA, uses visual observations and language instructions to produce or condition robot actions. Implementations differ in action representation, training data, embodiment coverage, control rate, and whether a separate planner or controller is required.',
       'A VLA is not automatically a world model or an embodied reasoning system. A world model predicts future state; embodied reasoning can decompose and monitor tasks; a VLA maps observations and instructions toward physical action.',
       'Touch can extend a VLA during contact-rich manipulation by adding pressure, shear, slip, deformation, or contact-state evidence. The useful test is whether tactile input changes closed-loop outcomes under matched conditions.',
     ],
     sections: [
+      omnimodalSection,
       {
         "id": "choose-a-vla",
         "heading": "How to choose a VLA model for your robot",
@@ -4760,6 +4767,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       }
     ],
     faqs: [
+      ...omnimodalFaqs,
       { question: 'What is a robot VLA model?', answer: 'A robot vision-language-action model uses visual observations and language instructions to produce or condition robot actions. Architectures and action interfaces vary, so the term does not specify one model design.' },
       { question: 'Where can I find VLA model code and weights?', answer: 'OpenVLA’s official project links its code and model checkpoints. Access differs across other VLA systems: some release weights and training code, while others provide a paper, a repository placeholder, or only selected controllers and datasets. Check the access and license fields for the exact release before planning a reproduction.' },
       { question: 'What is the difference between UniTacVLA and VLA-Touch?', answer: 'UniTacVLA combines tactile understanding, future-touch prediction, and residual action correction. VLA-Touch adds tactile-language feedback to planning and uses a controller to refine VLA actions. Their robots, evaluation protocols, and public artifacts differ, so the reported results are not directly comparable.' },
@@ -4788,6 +4796,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI and touch', href: '/physical-ai-touch', description: 'Map multimodal inputs, contact logs, models, and action loops.' },
     ],
     sources: [
+      ...omnimodalSources,
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
       { label: 'Google DeepMind Gemini Robotics model overview', href: 'https://deepmind.google/models/gemini-robotics/' },
       { label: 'NVIDIA Isaac GR00T developer overview', href: 'https://developer.nvidia.com/isaac/gr00t' },

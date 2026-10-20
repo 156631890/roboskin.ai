@@ -76,9 +76,9 @@ test('curated llms file and homepage head expose machine-readable discovery', ()
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/llms-full\.txt/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/research-index\.json/);
   assert.match(llmsSource, /https:\/\/roboskin\.ai\/knowledge-graph\.json/);
-  assert.match(llmsSource, /197 source-reviewed knowledge entities/);
-  assert.match(llmsSource, /29 papers, 1 documentation record, 25 datasets, 13 benchmarks, 16 sensors, 20 robot AI models, 69 verified organizations, and 24 normalized robot-platform records/);
-  assert.match(llmsSource, /267 deduplicated primary and official source records/);
+  assert.match(llmsSource, /198 source-reviewed knowledge entities/);
+  assert.match(llmsSource, /29 papers, 1 documentation record, 25 datasets, 13 benchmarks, 17 sensors, 20 robot AI models, 69 verified organizations, and 24 normalized robot-platform records/);
+  assert.match(llmsSource, /269 deduplicated primary and official source records/);
   assert.match(llmsSource, /50 model-organization relations/);
   assert.match(llmsSource, /44 model-robot relations/);
   assert.match(llmsSource, /110 research-provenance relations, and 35 semantic entity relations/);
