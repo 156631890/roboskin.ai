@@ -4543,7 +4543,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
     updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added a source-reviewed omnimodal VLA explanation and FAQ. Earlier model records retain their own evidence dates.',
+    revisionNote: 'October 20, 2026: added omnimodal VLA guidance and an FR-VLA force-admission reading note. Earlier model records retain their own evidence dates.',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4556,6 +4556,26 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sections: [
       omnimodalSection,
+      {
+        id: 'fr-vla-force-admission',
+        heading: 'FR-VLA force admission: force-aware VLA versus direct conditioning',
+        body: [
+          'In the October 19, 2026 FR-VLA preprint, visual-language context estimates when force should influence action. Measured wrench history follows a separate action-side pathway. Unlike simply appending force measurements to robot state, force admission modulates attention to that pathway. Its signed, uncertainty-attenuated signal is not a binary contact detector or a certified safety switch.',
+          'Does FR-VLA use tactile skin? The reported UR5e and UR3e experiments use built-in six-axis force/torque measurements, not distributed tactile skin arrays. Offline force and gripper signals supervise phase learning; inference estimates phase from visual-language context while measured force remains available to the action pathway.',
+          'The authors evaluate five tasks across six task/stage bins, with 20 trials per method per bin. These are author-reported experiments, not a RoboSkin replication or a cross-paper ranking. Reported limitations include small, fine-grained action corrections; the force tokenizer is pretrained separately for each task, so broad transfer is not established.',
+          'Source review: October 20, 2026, paper v1. The project page returned an access error during this check. Runnable code, weights and their licenses remain unverified; the paper license alone does not establish implementation reuse or deployment readiness.',
+        ],
+        bullets: [
+          'Before integration, document the wrench frame, units, bias correction and timestamps alongside the action interface. Do not substitute a skin pressure map for a six-axis wrench without a validated conversion.',
+          'Plan matched force-on/off and direct-conditioning comparisons on your own task. Record failures, force peaks, recovery and observation-to-action delay; keep independent controller limits outside the learned admission mechanism.',
+        ],
+        links: [
+          { label: 'FR-VLA v1: methods, experimental protocol and limitations', href: 'https://arxiv.org/html/2610.25981v1' },
+          { label: 'FR-VLA paper record and version history', href: 'https://arxiv.org/abs/2610.25981' },
+          { label: 'Compare tactile sensors with force-torque sensors', href: '/technology#tactile-vs-force-torque' },
+          { label: 'Discuss a scoped research evidence review', href: '/research-services' },
+        ],
+      },
       {
         "id": "choose-a-vla",
         "heading": "How to choose a VLA model for your robot",
@@ -4947,8 +4967,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics pillar',
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-10-18',
-    revisionNote: 'October 18, 2026: added a data-selection checklist and direct routes to dataset access, formats and collection. Existing learning-method and evaluation material is retained.',
+    updated: '2026-10-20',
+    revisionNote: 'October 20, 2026: added collective experience learning, FERT and the remaining human-work requirements. The October 18 data-selection checklist and existing learning-method guidance are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -4991,6 +5011,29 @@ export const seoTopicPages: SeoTopicPage[] = [
           { label: 'Compare tactile datasets by task and release evidence', href: '/datasets' },
           { label: 'Inspect LeRobot episode fields and conversion checks', href: '/guides/lerobot-dataset-format' },
           { label: 'Plan new demonstration collection', href: '/robot-teleoperation#teleoperation-data-checklist' },
+        ],
+      },
+      {
+        id: 'collective-experience-learning-fert',
+        heading: 'Collective experience learning: what does “without human corrections” remove?',
+        body: [
+          'The October 19, 2026 preprint by Chao Yu, Shu’ang Yu and colleagues at Tsinghua University, AgiBot and Infinigence AI names three distinct pieces: collective experience learning (CEL), the shared-policy learning paradigm; failure-guided experience retrieval fine-tuning (FERT), its algorithm; and FATS, the fault-tolerant asynchronous training system.',
+          'FERT uses observations before a failed execution ends to retrieve successful fleet segments. Their recorded actions become prioritized supervised fine-tuning targets. Compared with imitation learning from new expert demonstrations, it changes the source and selection of action supervision; it still learns by fitting successful actions.',
+          '“Without additional expert corrections” applies after expert SFT and HG-DAgger initialization. Humans still label episode outcomes and reset environments. Inputs include RGB views and proprioception, not tactile skin. This is not unattended learning.',
+          'The authors evaluate each policy/task over 120 trials split between two held-out AgiBot G2 robots. That tests other instances of the same platform, not cross-model transfer. Holding collection time per robot fixed gives larger fleets more total experience, so fleet size alone cannot explain the gains. These are author experiments, not RoboSkin tests. Source review: October 20, 2026, v1.',
+        ],
+        bullets: [
+          'Budget initial demonstrations and corrective teleoperation separately from ongoing outcome labeling, resets, maintenance and failed-run review. Ask for operator time per successful episode before estimating labor savings.',
+          'Keep robot identity, policy version, outcome labels, failed-query provenance and retrieved-success provenance in the data contract. Audit retrieval quality and prevent held-out robot data from entering training.',
+          'To isolate a fleet-size effect, compare equal total data or interaction budgets as well as equal time per robot. Predefine task success, intervention rules and held-out instances.',
+        ],
+        links: [
+          { label: 'CEL paper v1: FERT, human supervision and evaluation protocol', href: 'https://arxiv.org/html/2610.25736v1' },
+          { label: 'Learning from Fleet Experience: paper and version history', href: 'https://arxiv.org/abs/2610.25736' },
+          { label: 'CEL author project page', href: 'https://cel-robot-learning.github.io/' },
+          { label: 'Inspect the teleoperation data contract', href: '/robot-teleoperation#teleoperation-data-checklist' },
+          { label: 'Compare VLA action interfaces and evidence', href: '/robot-vla-models' },
+          { label: 'Scope a research and integration evidence review', href: '/research-services' },
         ],
       },
       {
