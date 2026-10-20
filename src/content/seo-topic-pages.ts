@@ -4128,6 +4128,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
       {
         heading: 'Where tactile manipulation changes the task',
+        contextLinks: [
+          { before: 'For in-hand rotation, use the ', label: 'hand-layout comparison and acceptance checklist', href: '/robot-hands#anthropomorphic-vs-symmetric-tactile-hands', after: ' to separate geometry, sensing and task outcomes before selecting hardware.' },
+        ],
         body: [
           'Touch should be added where it resolves a physical uncertainty. More sensor channels are not automatically useful; the controller must connect a specific tactile event to a specific action or recovery rule.',
         ],
@@ -5186,8 +5189,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robotics hardware pillar',
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-10-17',
-    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
+    updated: '2026-10-20',
+    revisionNote: 'October 20, 2026: added a source-bounded anthropomorphic versus symmetric hand case and a procurement acceptance checklist. The Cartesian Hand route and existing evidence tables are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5247,6 +5250,35 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Task evidence', 'Objects, trials, success criteria, speed, interventions, failures, and baseline', 'Treat official demos, preprints, peer review, and independent tests as different evidence levels'],
           ],
         },
+      },
+      {
+        id: 'anthropomorphic-vs-symmetric-tactile-hands',
+        heading: 'Anthropomorphic versus symmetric hands: a tactile rotation case',
+        body: [
+          'An October 19, 2026 preprint compares two modified LEAP layouts using AnyRotate: each has four fingers, 16 actuated joints and four TacTip optical fingertips. “Full tactile” means contact indicators, contact-pose and force features, not raw RGB fed end-to-end to the policy.',
+          'Simulation compares full tactile, binary contact and proprioception on 12 unseen objects. Hardware uses only full tactile: ten objects, five trials per object/hand orientation, a 30-second limit and palm-axis rotation. Revolutions are estimated visually. Without reduced-touch hardware ablations, this does not establish a causal real-robot benefit from richer touch.',
+          'The authors report greater rotation progress and more even cumulative finger loading for the symmetric layout under this protocol. Orientation-group means are equally weighted; aggregate rate is the ratio of aggregate rotations to duration. Additional load recordings use image-model force estimates, not independent force/torque ground truth.',
+          'Compliant physical fingertips, rigid simulation contacts and residual dynamics mismatch limit transfer. Arbitrary-axis simulation is not arbitrary-axis hardware evidence. Source review: October 20, 2026, v1; author experiments, not RoboSkin tests. Code, weights and reproduction readiness were not verified.',
+          'For a buyer shortlist, choose from the contact geometry required by your job. For repeated rotation, assess how opposing fingers can release, recontact and support the object through the required gravity orientations. For human-tool compatibility or constrained access, assess thumb opposition, approach clearance and reachable contacts on those specific objects. A human-like silhouette or a higher sensor-channel count is not an acceptance result.',
+          'The table below is a proposed acceptance plan, not additional findings from the paper. Agree thresholds and failure rules before testing, and keep each candidate on a comparable evaluation budget. Rotation evidence does not establish assembly performance, tool-use competence or production durability.',
+        ],
+        table: {
+          headers: ['Acceptance question', 'Keep comparable', 'Request and review'],
+          rows: [
+            ['Can it perform our rotation task?', 'Object geometry, mass and surface; starting grasp; rotation axis; gravity orientation.', 'Per-object and per-orientation results, including drops, jams, resets and invalid trials. Avoid a single pooled winner.'],
+            ['Is progress faster or merely sustained longer?', 'Trial limit, stopping rules and measurement method.', 'Revolutions, duration and rate with explicit denominators. Prefer pose tracking or auditable video; retain censored time-limit trials.'],
+            ['How do the fingertips share load?', 'Sensor revision, contact material and calibration procedure.', 'Per-finger force traces, force-time integrals and peaks. Separate the sum of force magnitudes from net force; validate estimates against an independent reference on your hardware.'],
+            ['Does richer touch justify its integration cost?', 'Same hand, controller, training budget and test set.', 'Matched full-touch, binary-contact and proprioception trials on hardware. Record calibration drift, missing data, latency and uncertainty alongside task outcomes.'],
+            ['Will the result survive deployment?', 'Target duty cycle, environment and maintenance procedure.', 'Repeat after sensor replacement and wear. Require separate evidence for assembly, tools and endurance; inspect the exact software release and reuse terms.'],
+          ],
+        },
+        links: [
+          { label: 'Primary paper v1: morphology, tactile observations and hardware protocol', href: 'https://arxiv.org/html/2610.26759v1' },
+          { label: 'Paper record and submission history', href: 'https://arxiv.org/abs/2610.26759' },
+          { label: 'TacTip sensor-family record and version boundaries', href: '/sensors#sensor-tactip' },
+          { label: 'Tactile versus force-torque measurement', href: '/technology#tactile-vs-force-torque' },
+          { label: 'Scope a hand and sensor evidence review', href: '/research-services' },
+        ],
       },
       {
         heading: 'Tactile sensing across fingertips, fingers, and palms',
