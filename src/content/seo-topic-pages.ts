@@ -4543,7 +4543,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
     updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added omnimodal VLA guidance and an FR-VLA force-admission reading note. Earlier model records retain their own evidence dates.',
+    revisionNote: 'October 20, 2026: added omnimodal VLA guidance, FR-VLA force admission and VLDA training-versus-inference boundaries. Earlier model records retain their own evidence dates.',
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4556,6 +4556,29 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sections: [
       omnimodalSection,
+      {
+        id: 'vlda-delta-training-inference',
+        heading: 'What is VLDA in robotics, and does inference need future images?',
+        body: [
+          'VLDA means Vision-Language-Delta-Action. In the October 19, 2026 paper by Lingsen Zhang, Wei Li and colleagues, Delta is a compact representation of task-relevant state change, not “Data”. It connects visual-language understanding to action refinement.',
+          'VLDA versus VLA versus world-action models: a direct VLA maps observations toward actions; world-action approaches connect future prediction with control in different ways. VLDA adds an explicit compact transition interface rather than requiring complete future-state prediction. This is an architectural distinction, not a universal performance ranking.',
+          'Training uses a future primary-camera image to supervise change. Inference uses current RGB views, proprioception and instructions, without observed future images. The documented inputs do not include tactile skin. Learning from training trajectories and action supervision is not data-free autonomous learning.',
+          'The authors report four physical tasks on GALAXEA R1 Lite and AgileX Cobot Magic, with 25 trials per method, task and platform. Unrelated background motion can contaminate transition selection; the horizon is fixed; cross-embodiment transition transfer remains future work. These are author experiments, not RoboSkin tests.',
+          'Reviewed October 20, 2026, v1. The author project provides Code and Model links. Checkpoint licensing and reproducibility remain unverified; the LoongForge framework license does not establish model-weight reuse terms.',
+        ],
+        bullets: [
+          'Before adapting this approach, map each current observation to its future training target and action horizon. Check timestamps, camera identity and train/test separation; do not let future observations leak into deployment inputs.',
+          'For a reproduction decision, request the exact checkpoint, model card, applicable license and runnable recipe. Evaluate background distractors, timing and your robot separately before inferring transfer.',
+        ],
+        links: [
+          { label: 'VLDA v1: training inputs, physical protocol and limitations', href: 'https://arxiv.org/html/2610.25874v1' },
+          { label: 'VLDA author project: Paper, Code and Model entrances', href: 'https://baidu-baige.github.io/LoongForge/projects/vlda.html' },
+          { label: 'Contrast FR-VLA force admission with transition modeling', href: '#fr-vla-force-admission' },
+          { label: 'Compare robot learning data and supervision requirements', href: '/robot-learning' },
+          { label: 'Trace world-model prediction and control boundaries', href: '/robot-world-models' },
+          { label: 'Discuss a scoped research evidence review', href: '/research-services' },
+        ],
+      },
       {
         id: 'fr-vla-force-admission',
         heading: 'FR-VLA force admission: force-aware VLA versus direct conditioning',
