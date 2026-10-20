@@ -4994,7 +4994,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
     updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added collective experience learning, FERT and the remaining human-work requirements. The October 18 data-selection checklist and existing learning-method guidance are retained.',
+    revisionNote: 'October 20, 2026: added collective experience learning, FERT and the remaining human-work requirements, plus a DexOAK case separating human motion, robot references and conditional hardware replay. The October 18 data-selection checklist and existing learning-method guidance are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5018,6 +5018,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         id: 'choose-robot-learning-data',
         heading: 'How to choose robot learning data',
+        contextLinks: [
+          { before: 'When considering human hand-object recordings, read the ', label: 'DexOAK retargeting and replay evidence checklist', href: '#dexoak-object-aware-retargeting', after: ' before treating reconstructed motion as executable robot training data.' },
+        ],
         body: [
           'First decide what you want to learn: a visual or tactile representation, an action policy, a reward or a dynamics model. Human video, robot demonstrations and tactile records can serve different roles; a video dataset is not automatically a set of executable robot-action targets.',
           'Use the checklist before downloading or converting data. Follow the original dataset for access and license terms, and the format guide for storage and field conventions. A common format does not make different robots, action units or train-test splits interchangeable.',
@@ -5060,6 +5063,34 @@ export const seoTopicPages: SeoTopicPage[] = [
           { label: 'Inspect the teleoperation data contract', href: '/robot-teleoperation#teleoperation-data-checklist' },
           { label: 'Compare VLA action interfaces and evidence', href: '/robot-vla-models' },
           { label: 'Scope a research and integration evidence review', href: '/research-services' },
+        ],
+      },
+      {
+        id: 'dexoak-object-aware-retargeting',
+        heading: 'DexOAK: from human hand-object motion to robot references',
+        body: [
+          'DexOAK (Object-Aware Kinematic Retargeting) uses structured human hand-object motion capture to produce robot wrist and joint references. Its inputs include human keypoints and object geometry, not arbitrary video or tactile sensor recordings. Contact-aware geometry is not a measured touch signal.',
+          'An interaction-graph optimizer supplies training references. A learned retargeter then generates references without solving each new frame, with contact and collision objectives refining the mapping. A separate residual reinforcement-learning stage corrects dynamics; a plausible hand pose alone is not an executable trajectory.',
+          'The authors report 46/56 successful open-loop replays on a UR5 with a right Allegro hand across Take out, Close gate, Pour, Unplug and Cut. They select the first successful simulation rollout per policy, then repeat it four times. Objects are manually reset near the simulated starting pose. This measures repeatability after selection, not end-to-end success over arbitrary human inputs; failed simulation policies can reduce the hardware denominator.',
+          'The project page shows seven tasks: the five main-table tasks plus held-out Close Laptop and Press Button, each reported at 10/12 hardware replays. Those two use a frozen retargeter but still receive task-specific RL. The seven-task showcase and five-task 46/56 total therefore describe different sets.',
+          'Reviewed October 20, 2026 against the October 19 v1 preprint and author project page. These are author experiments, not RoboSkin reproduction results. The project’s GitHub label has no repository destination and is marked pending; code, weights, release terms and runnable reproduction are unverified.',
+          'For a data-conversion decision, keep a record of what each stage adds or removes. The checklist below is editorial guidance: require evidence for the intended robot and task before budgeting a conversion pipeline, and preserve failed or rejected inputs alongside the retained trajectories.',
+        ],
+        table: {
+          headers: ['Handoff', 'What to retain', 'Acceptance question'],
+          rows: [
+            ['Human recording to reference', 'Object geometry and motion, hand keypoints, frames, units, timing and source reuse terms.', 'Can the target hand reach the required contacts without penetration or impossible joints?'],
+            ['Reference to simulated rollout', 'Reference version, robot model, dynamics assumptions, RL budget, seeds and all attempted sequences.', 'Does the downstream controller execute the object interaction, and how often does refinement fail?'],
+            ['Simulation to hardware replay', 'Selection rule, excluded policies, unique trajectories, repeat counts, resets and outcome definitions.', 'Is the reported result conditional on a successful simulation, and does it tolerate realistic starting-state changes?'],
+            ['Replay to reusable robot data', 'Commanded targets versus measured state, timestamps, observations, failures and split membership.', 'Can a learner consume these records without confusing reference motion with executed actions or leaking repeated trajectories across splits?'],
+          ],
+        },
+        links: [
+          { label: 'DexOAK v1: method and hardware protocol', href: 'https://arxiv.org/html/2610.26762v1' },
+          { label: 'Author project: main and held-out demonstrations', href: 'https://fspinola.github.io/dexoak/' },
+          { label: 'Human observations versus recorded robot actions', href: '/robot-teleoperation#passive-observation-vs-teleoperation-data-for-robot-learning' },
+          { label: 'Check robot episode fields before conversion', href: '/guides/lerobot-dataset-format' },
+          { label: 'Scope a robot-data evidence review', href: '/research-services' },
         ],
       },
       {
