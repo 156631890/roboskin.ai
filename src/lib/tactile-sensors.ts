@@ -19,6 +19,21 @@ export type TactileSensorEntry = {
 
 export const tactileSensorEntries: TactileSensorEntry[] = [
   {
+    id: 'loomia-smart-skin',
+    name: 'Loomia Smart Skin',
+    organization: 'Loomia Technologies',
+    principle: 'Flexible capacitive and resistive sensing',
+    formFactor: 'Glove, individual sensors and pressure matrices',
+    signals: ['Electrical contact readings'],
+    reportedRate: 'Component-specific; see the dated profile specification table.',
+    integration: 'Review the kit guide and validate mounting, calibration and timing for the robot.',
+    access: 'Developer kit listing exists; confirm current ordering terms with Loomia.',
+    evidenceBoundary: 'Documentation review only. The profile separates kit specifications, application-level inference and the pending acquisition.',
+    sourceUrl: 'https://www.loomia.com/s/20250617_Tactile_Dev_Kit.pdf',
+    projectUrl: 'https://www.loomia.com/samples/p/tactile-sensing-developer-kit',
+    sourceReviewed: '2026-10-20',
+  },
+  {
     id: 'robotiq-tsf-85',
     name: 'Robotiq TSF-85',
     organization: 'Robotiq',
