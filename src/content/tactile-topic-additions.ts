@@ -45,6 +45,27 @@ export const technologyAdditions: Section[] = [
   },
 ];
 
+export const senseAlignSection: Section = {
+  id: 'sensealign-vision-touch-fusion', heading: 'SenseAlign: weighting vision and touch for recognition',
+  body: [
+    'Combining vision and touch does not guarantee a better object or material label. SenseAlign, submitted to arXiv on October 20, 2026, examines cases where an unreliable modality is more confident than the useful one. Its Alignment Trust module compares accumulated unlabeled observations with class-text embeddings to weight the modalities; Anchor Realignment uses the same history to correct features for class separation. The encoders stay frozen.',
+    'The authors evaluate existing visual-tactile datasets with two checkpoints, UniTouch and AnyTouch, under natural shifts and controlled image corruptions. Benefits vary with the backbone and sensing condition. This is recognition evidence: the study does not deploy a physical robot, establish contact-force accuracy, select actions, or validate safe manipulation and physical failure recovery.',
+    'For a recognition evaluation, ask the questions below before treating an average score as evidence for your setting. They are editorial planning guidance. RoboSkin.ai has not reproduced these experiments or independently verified a runnable SenseAlign code and weight release.',
+  ],
+  bullets: [
+    'Which labels, checkpoint and sensor conditions match the intended recognition task, and where do they differ?',
+    'How do vision-only, touch-only and equal-fusion baselines behave under each condition, including cases where adaptation loses?',
+    'What observation history and update timing does evaluation allow, and which separate physical tests would a downstream controller require?',
+  ],
+  links: [
+    { label: 'SenseAlign v1: method, recognition experiments and ethics statement', href: 'https://arxiv.org/html/2610.28511v1' },
+    { label: 'Choose datasets by sensor, task and evaluation split', href: '/datasets' },
+    { label: 'Keep recognition separate from VLA action models', href: '/robot-vla-models' },
+    { label: 'Separate issue: magnetic interference and contact consistency', href: '/e-skin#magnet-based-tactile-skin' },
+    { label: 'Discuss a source-backed evaluation brief', href: '/research-services' },
+  ],
+};
+
 export const surgicalRoboticsSection: Section = {
   id: 'surgical-robotics', heading: 'Tactile sensing in minimally invasive surgery',
   body: [
