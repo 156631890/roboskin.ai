@@ -4997,8 +4997,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics pillar',
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added collective experience learning, FERT and the remaining human-work requirements, plus a DexOAK case separating human motion, robot references and conditional hardware replay. The October 18 data-selection checklist and existing learning-method guidance are retained.',
+    updated: '2026-10-21',
+    revisionNote: 'October 21, 2026: clarified tactile demonstrations in context versus parameter training and execution feedback, with a bounded Tactile-ETA example. The October 20 CEL/FERT and DexOAK cases and October 18 data-selection checklist are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5144,10 +5144,27 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Tactile robot learning',
         body: [
+          'Tactile in-context learning uses examples in the model input rather than updating its parameters. Tactile-ETA pairs action segments with before-and-after camera views, robot state and tactile observations; it retains tactile endpoints and selected change frames in ordered demonstrations. The frozen agent also receives current sensing and execution feedback.',
+          'In four simulated tasks, the authors keep two expert demonstrations, current inputs and the execution interface fixed. Adding tactile observations inside the demonstrations raises mean success from 15.75% to 24%, with 100 trials per task and condition; not every task improves. On Wipe Board and Pick Up Chips, each condition has current vision and touch: one aligned multimodal demonstration versus none yields 3/5 versus 0/5 successes per task. This is not a touch-versus-no-touch comparison or an industrial reliability estimate.',
+          'Decisions occur between motion segments, so this context does not replace fast tactile feedback control during execution. These are author-reported results from the October 20, 2026 v1 preprint, reviewed October 21; RoboSkin has not reproduced them or verified code and runnable reproduction. Task coverage and hardware samples are small.',
           'Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.',
           'ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.',
           'UniVTAC makes those units explicit: 205,826 samples pretrain a tactile encoder, 400 paper-reported trajectories train eight task policies, the September inventory lists 800 task HDF5 files for each of Isaac Sim 4.5 and 5.1, and 450 physical demonstrations support three real-world tasks. Evaluation rollouts are outcomes rather than additional training data.',
           'In ADEPT, the tactile pathway is limited to five vision-based fingertips on one Flexiv-Sharpa student. The paper reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched insertion condition with ten trials per modality. This is useful causal evidence inside that condition, not proof of cross-sensor or cross-hand transfer.',
+        ],
+        table: {
+          headers: ['Role of tactile data', 'What changes?', 'What to check before reuse'],
+          rows: [
+            ['Fine-tuning', 'An optimizer changes model parameters using training records.', 'Separate training and held-out episodes; retain sensor calibration and the action contract.'],
+            ['Demonstrations in context', 'Examples condition a fixed model at inference.', 'Keep observations aligned with actions, segment order and outcomes; distinguish recorded touch from current touch.'],
+            ['Execution feedback', 'New observations inform the next decision or controller correction.', 'Measure observation age, decision interval and actuation latency; a supplied touch stream alone does not establish a fast control loop.'],
+          ],
+        },
+        links: [
+          { label: 'Tactile-ETA v1: controlled comparisons, limitations and hardware protocol', href: 'https://arxiv.org/html/2610.27613v1' },
+          { label: 'Inspect episode fields, timing and action conventions', href: '/guides/lerobot-dataset-format' },
+          { label: 'Connect tactile feedback to manipulation outcomes', href: '/tactile-manipulation' },
+          { label: 'Scope a robot-data and integration evidence review', href: '/research-services' },
         ],
         bullets: [
           'Synchronize touch with camera frames, pose, joint state, action, and contact events',
