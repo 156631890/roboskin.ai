@@ -16,10 +16,14 @@ enabling automatic history events would count navigation twice. No automatic
 form/search/outbound data is collected. Queries and hashes are removed; external
 referrers retain only their origin. The `roboskin-resources-20261007` campaign
 accepts only four exact source/medium pairs: `x/social`, `reddit/social`,
-`github/referral`, and `newsletter/email`. Only these approved labels are passed
+`github/referral`, and `newsletter/email`. These approved labels are passed
 as `campaign_source`, `campaign_medium`, and `campaign_name` at initialization.
-Unknown values, duplicate campaign parameters, `utm_term`, `utm_content` and
-all other query values are discarded. Campaign labels are held in memory, not
+Separately, when the browser supplies no referrer, exactly one
+`utm_source=chatgpt.com` recovers the fixed source `chatgpt.com` and medium
+`referral`, with no campaign name. This fallback never overrides an existing
+referrer. Its other query values are discarded, including medium and campaign.
+Unknown campaign values, duplicate required campaign parameters, `utm_term`,
+`utm_content` and all other query values are discarded. Labels are held in memory, not
 persisted separately. This intentionally does not support arbitrary campaigns.
 Advertising personalization and Google signals are disabled.
 
@@ -41,6 +45,15 @@ Coverage added October 15, 2026 is prospective: historical missing resource
 events cannot be recovered or compared as if they had been collected.
 This does not change page-view counts or visitor counts, and does not establish
 that a visitor completed a resource task.
+
+Coverage added October 21, 2026 includes `/vla/models` with resource ID
+`vla-model-comparison` and `/vla/timeline` with `vla-research-timeline`.
+These measure internal link clicks after consent, including the next step from
+`/tactile-ai`; direct arrivals are page views, not synthetic resource opens.
+The same query removal and same-page anchor exclusions apply. These new events
+and the ChatGPT source fallback cannot recover missing historical measurements.
+GA4 covers consenting visits; do not add its users to Vercel visitor estimates
+or treat referral clicks as the number of AI answers citing the site.
 
 Validate a clean browser: no Google requests before consent or after decline;
 allow, then check `g/collect` uses the configured ID, sanitized `dl`/`dr`, and one

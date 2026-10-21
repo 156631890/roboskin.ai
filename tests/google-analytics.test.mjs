@@ -170,6 +170,8 @@ test('model and topic resource navigation is measured with public paths only', (
   const origin = 'https://roboskin.ai/news/cartesian-hand-all-linear-in-hand-manipulation?email=private@example.com';
   for (const [path, id] of [
     ['/robot-vla-models', 'vla-models'],
+    ['/vla/models', 'vla-model-comparison'],
+    ['/vla/timeline', 'vla-research-timeline'],
     ['/robot-foundation-models', 'robot-foundation-models'],
     ['/robot-world-models', 'robot-world-models'],
     ['/robot-skin', 'robot-skin-guide'],

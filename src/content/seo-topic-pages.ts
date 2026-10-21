@@ -758,6 +758,10 @@ export const seoTopicPages: SeoTopicPage[] = [
           'A vision-language-action model can provide semantic task context and propose actions, while tactile feedback supplies local physical evidence after contact. A tactile or visuo-tactile world model instead predicts how contact state may evolve under a candidate action. These roles can be combined, but a VLA label does not prove high-frequency touch control and a plausible world-model rollout does not prove safe execution.',
           'Physical AI is the broader embodied system: vision observes the scene, language represents goals and knowledge, proprioception describes the robot body, and touch grounds the interaction at the contact surface. Tactile AI is the part of that system responsible for interpreting and using touch.',
         ],
+        links: [
+          { label: 'Compare VLA inputs, code access and source-specific results', href: '/vla/models' },
+          { label: 'Compare how tactile feedback enters VLA planning and control', href: '/robot-vla-models#tactile-vla-integration-index' },
+        ],
       },
       {
         heading: 'Current tactile AI research landscape',

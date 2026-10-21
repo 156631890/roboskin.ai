@@ -8,6 +8,7 @@
 - Do not auto-publish or deploy a page solely because a term is trending.
 - Promote a finding to the website only when it has a primary source, a distinct search intent, and a clear RoboSkin tactile/contact angle.
 - Apply the user's [search-led content loop](search-led-content-loop.md) before choosing publication work. Prioritize verified updates to topics with useful traffic; diagnose weak stages and preserve active observation windows. Consult the latest batch records rather than treating a historical winner list as permanent.
+- Follow the [GEO maintenance protocol](geo-maintenance.md) for fixed-question citation samples, referral/resource-use measurement and release acceptance. Its Tuesday/Friday local review is separate from this daily source-discovery workflow; the protocol distinguishes schedule configuration from completed runs.
 
 ## Monitored topic set
 

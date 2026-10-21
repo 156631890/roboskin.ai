@@ -208,7 +208,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     access: 'partial', availability: fact('Partial open code (MIT), controller/data links; the modified RDT inference script is still described as a future release.', 'https://github.com/jxbi1010/VLA-Touch'),
     benchmark: fact('12/20 Wipe completions for the tactile interpolant controller; manipulation component evaluation, not full planning-plus-execution success.', full('2507.17294v2')),
     dataset: fact('Task-specific tactile demonstrations and pretrained RDT / Octopi components; no single unified training corpus.', full('2507.17294v2')),
-    description: fact('Adds tactile feedback at planning and execution levels without fine-tuning the base VLA.', paper('2507.17294')),
+    description: fact('Adds tactile planning and action refinement without tactile fine-tuning of the base VLA; the RDT baseline is still aligned to the robot and fine-tuned per task without touch.', `${full('2507.17294v2')}#A3`),
     detail: '/robot-vla-models#tactile-vla-vla-touch',
   },
   {

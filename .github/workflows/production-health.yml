@@ -1,0 +1,81 @@
+name: Production response verification
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-health-roboskin-ai
+  cancel-in-progress: false
+
+jobs:
+  verify-production:
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production – roboskin-ai' &&
+      github.event.deployment.creator.login == 'vercel[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # Old events can refer to commits that predate the runner. Reject them
+      # before checkout; the runner repeats this check to cover a later push.
+      - name: Check that the successful deployment is still latest main
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
+        shell: bash
+        run: |
+          current_sha="$(gh api repos/156631890/roboskin.ai/git/ref/heads/main --jq '.object.sha')"
+          if [ "$current_sha" = "$EXPECTED_DEPLOYMENT_SHA" ]; then
+            echo 'eligible=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'eligible=false' >> "$GITHUB_OUTPUT"
+            mkdir -p .artifacts
+            CURRENT_MAIN_SHA="$current_sha" node --input-type=module - <<'NODE'
+          import { writeFileSync, appendFileSync } from 'node:fs';
+          const report = { status: 'superseded', ok: false, verified: false,
+            expectedSha: process.env.EXPECTED_DEPLOYMENT_SHA, currentMainSha: process.env.CURRENT_MAIN_SHA,
+            reason: 'The deployment event no longer identifies latest main; no production verification was claimed.' };
+          writeFileSync('.artifacts/production-health.json', JSON.stringify(report, null, 2) + '\n');
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, 'Production verification skipped: this deployment was superseded by a newer main commit.\n');
+          NODE
+          fi
+
+      - name: Checkout the deployed commit
+        if: steps.current.outputs.eligible == 'true'
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          persist-credentials: false
+
+      - name: Install verification dependencies
+        if: steps.current.outputs.eligible == 'true'
+        run: npm ci
+
+      - name: Wait for the matching public deployment and verify responses
+        if: steps.current.outputs.eligible == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/verify-production-health.mjs
+
+      - name: Upload production verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: roboskin-production-health-${{ github.event.deployment.id }}-${{ github.run_attempt }}
+          path: |
+            .artifacts/production-health.json
+            .artifacts/production-verification.json
+            .artifacts/agent-markdown-verification.json
+            .artifacts/production-health-*.log
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 30
