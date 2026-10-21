@@ -83,9 +83,14 @@
     },
     {
       "src": "^/(?:$|(?!(?:_next|_vercel|api|private|_agent-markdown|weekly-reports|account|auth|login|logout|case-studies|comparison|downloads|implementation|rss|world-models/tracker)(?:/|$))(?!.*\\.[^/]+$).*)$",
-      "headers": {
-        "Vary": "Accept, Accept-Encoding"
-      },
+      "transforms": [
+        {
+          "type": "response.headers",
+          "op": "append",
+          "target": { "key": "vary" },
+          "args": ["Accept", "Accept-Encoding"]
+        }
+      ],
       "continue": true
     },
     {

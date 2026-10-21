@@ -132,7 +132,10 @@ test('Vercel negotiates Markdown without changing the browser HTML route', async
     const recoveryRoute = markdownRoutes.find((entry) => entry.status === 404);
     assert.equal(new RegExp(recoveryRoute.src).test(route), false, `${route} must keep its original error status and response type`);
   }
-  const varyRoute = vercel.routes.find((route) => route.continue && route.headers?.Vary);
+  const varyRoute = vercel.routes.find((route) => route.continue && route.transforms?.some((transform) => transform.target?.key === 'vary'));
+  assert.deepEqual(varyRoute.transforms, [{
+    type: 'response.headers', op: 'append', target: { key: 'vary' }, args: ['Accept', 'Accept-Encoding'],
+  }], 'Append after the framework response so Next.js Vary fields and Accept are both preserved');
   const varyPattern = new RegExp(varyRoute.src);
   const noindexUrls = JSON.parse(await read('config/noindex-urls.json'));
   for (const url of noindexUrls) {
