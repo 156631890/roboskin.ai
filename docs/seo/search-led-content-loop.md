@@ -35,6 +35,11 @@ The live page filter `contains https://roboskin.ai/tactile-ai` returned the same
 
 ## Repeated measurement
 
+For AI discovery, use the [GEO maintenance protocol](geo-maintenance.md): fixed
+question samples, verified citations, comparable seven-/28-day referrals and
+resource-use evidence. Keep those signals separate from search clicks and
+publication counts; the protocol records its local scheduling status explicitly.
+
 Export GSC Performance as CSV ZIP, retain its property/search/filter settings, then run:
 
 ```powershell

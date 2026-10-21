@@ -185,7 +185,10 @@ test('deployment and measurement are gated and reproducible', async () => {
   assert.match(workflow, /run: npm test/);
   assert.match(workflow, /run: npm run lint/);
   assert.match(workflow, /run: npm run verify:export/);
-  assert.equal(workflow.match(/run: npm run build/g)?.length, 1);
+  // Separate export and server jobs must both build their actual runtime.
+  assert.equal(workflow.match(/run: npm run build/g)?.length, 2);
+  assert.match(workflow, /ROBOSKIN_RUNTIME: server/);
+  assert.match(workflow, /run: node scripts\/verify-server-markdown\.mjs/);
   assert.doesNotMatch(workflow, /deploy-pages|upload-pages-artifact/);
   assert.match(workflow, /actions\/checkout@v7/);
   assert.match(workflow, /actions\/setup-node@v7/);

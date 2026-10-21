@@ -47,3 +47,37 @@ jobs:
           name: roboskin-static-export
           path: out
           retention-days: 7
+
+  verify-server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the production server runtime
+        env:
+          ROBOSKIN_RUNTIME: server
+        run: npm run build
+
+      - name: Verify generated public Markdown against this server build
+        run: node scripts/verify-server-markdown.mjs
+
+      - name: Upload server Markdown verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: roboskin-server-markdown-verification
+          path: .artifacts/server-markdown-verification.json
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 7

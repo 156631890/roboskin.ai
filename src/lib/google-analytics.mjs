@@ -53,6 +53,8 @@ export function analyticsCampaign(value, referrer = '') {
 
 const resourceLinks = new Map([
   ['/robot-vla-models', ['vla-models', 'resource_open']],
+  ['/vla/models', ['vla-model-comparison', 'resource_open']],
+  ['/vla/timeline', ['vla-research-timeline', 'resource_open']],
   ['/robot-foundation-models', ['robot-foundation-models', 'resource_open']],
   ['/robot-world-models', ['robot-world-models', 'resource_open']],
   ['/robot-skin', ['robot-skin-guide', 'resource_open']],
