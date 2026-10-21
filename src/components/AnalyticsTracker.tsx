@@ -4,15 +4,7 @@ import { track } from '@vercel/analytics';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { evidenceBatch, growthBatchForPath, resourceGrowthBatch } from '@/lib/growth-batches.mjs';
-
-const referralSources: Array<[string, string]> = [
-  ['google.', 'Google'],
-  ['bing.com', 'Bing'],
-  ['chatgpt.com', 'ChatGPT'],
-  ['perplexity.ai', 'Perplexity'],
-  ['claude.ai', 'Claude'],
-  ['copilot.microsoft.com', 'Microsoft Copilot'],
-];
+import { referralLandingSource } from '@/lib/referral-attribution.mjs';
 
 function cleanLabel(value: string) {
   return value.replace(/\s+/g, ' ').trim().slice(0, 80);
@@ -44,11 +36,10 @@ export default function AnalyticsTracker() {
     if (landingRecorded.current) return;
     landingRecorded.current = true;
 
-    const referrer = document.referrer.toLowerCase();
-    const referral = referralSources.find(([domain]) => referrer.includes(domain));
+    const referral = referralLandingSource(window.location.href, document.referrer);
 
     if (referral) {
-      track('Referral Landing', { source: referral[1], path: pathname, batch: growthBatchForPath(pathname) });
+      track('Referral Landing', { source: referral, path: pathname, batch: growthBatchForPath(pathname) });
     }
   }, [pathname]);
 

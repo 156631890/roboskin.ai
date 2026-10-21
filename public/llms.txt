@@ -24,8 +24,12 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [AI and robotics](https://roboskin.ai/ai-robotics): Canonical answer to how AI perception, reasoning, world models, policies, robot control, embodiment, and feedback form a physical action loop.
 - [Robot skin definition](https://roboskin.ai/robot-skin): Canonical definition for robot skin, robotic skin, and tactile sensing surfaces.
 - [Tactile AI definition](https://roboskin.ai/tactile-ai): Canonical explanation of the sensing, data, model, and control stack for robot touch.
+- [Tactile experiment worksheet](https://roboskin.ai/tactile-ai#experiment-worksheet): Instructions and a free blank CSV for recording planned values, observations, and evidence; this is an editorial planning aid, not measured results or a validated benchmark.
+- [Blank tactile experiment worksheet CSV](https://roboskin.ai/resources/tactile-experiment-worksheet.csv): Download the existing planning template without signup; completed records stay on the reader's device.
 - [Humanoid robots](https://roboskin.ai/humanoid-robots): Broad research map for humanoid embodiment, whole-body control, hands, manipulation, safety, and tactile sensing.
 - [Robot VLA models](https://roboskin.ai/robot-vla-models): Canonical map for vision-language-action inputs, action interfaces, embodiments, evaluation, and six source-reviewed tactile VLA integration mechanisms without a cross-paper leaderboard.
+- [VLA model comparison](https://roboskin.ai/vla/models): Filterable, source-linked comparison of model inputs, code access, parameters, training data, and source-specific results. Related planners and policies are labeled separately; reported benchmark scores are not a shared leaderboard.
+- [VLA research timeline](https://roboskin.ai/vla/timeline): Source-linked chronology using first arXiv submission dates, not code-release dates; the selection is curated rather than exhaustive.
 - [Robot foundation models](https://roboskin.ai/robot-foundation-models): Source-reviewed model-role guide and directory covering VLMs, embodied reasoning, VLA policies, world models, tactile models, access, and evidence limits.
 - [Robot platforms and embodiments](https://roboskin.ai/robots): Source-reviewed humanoids, robot arms, mobile manipulators, and research setups connected to robot AI models through explicit evaluated-on, trained-across, or demonstrated-on evidence.
 - [Tactile AI and robotics research organizations](https://roboskin.ai/organizations): Source-reviewed universities, labs, and companies connected to papers, datasets, benchmarks, sensors, and robot AI models through explicit, evidence-bounded relations.
@@ -242,4 +246,4 @@ Homepage Physical AI routes:
 ## Sensing-to-action evidence update
 
 - [From Tactile Sensing to Robot Action](https://roboskin.ai/guides/tactile-feedback-for-physical-ai): Six versioned studies distinguish perception, latency and control outcomes; author-reported results are not RoboSkin experiments.
-- [Tactile dataset audit](https://roboskin.ai/datasets.json): Twenty catalog records and one separately identified STAR data candidate. Bench2Dex has a public simulation-data manifest, with dataset, model and asset licensing unverified. STAR is excluded from Dataset schema and catalog counts.
+- [Tactile dataset audit](https://roboskin.ai/datasets.json): Current tactile catalog records, access and license evidence, review dates, and a separately identified STAR data candidate. Read the count and compiledAt fields for the current catalog edition; STAR is excluded from Dataset schema and catalog counts. Bench2Dex has a public simulation-data manifest, with dataset, model and asset licensing unverified.

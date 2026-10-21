@@ -74,7 +74,7 @@ export default function GoogleAnalytics() {
         send_page_view: false,
         page_location: analyticsPageUrl(window.location.href),
         page_referrer: analyticsReferrer(document.referrer),
-        ...analyticsCampaign(landingLocation.current),
+        ...analyticsCampaign(landingLocation.current, document.referrer),
         allow_google_signals: false,
         allow_ad_personalization_signals: false,
         cookie_expires: 60 * 60 * 24 * 90,
