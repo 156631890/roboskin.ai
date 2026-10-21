@@ -1,5 +1,5 @@
 import TactileTopicSections from '@/components/TactileTopicSections';
-import { technologyAdditions, tactileSources } from '@/content/tactile-topic-additions';
+import { technologyAdditions, tactileSources, senseAlignSection } from '@/content/tactile-topic-additions';
 import { practicalSensingSources } from '@/content/tactile-practical-guides';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -80,7 +80,7 @@ export default function TechnologyPage() {
             vibration or changes in an optical image. The available measurements depend on the sensor and its calibration.
           </p>
           <PageHeroVisual visual={pageVisuals.technology} className="mt-10" priority />
-          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-17">October 17, 2026</time>: added optical/capacitive comparison and Tactaxis reading routes. The October 12 mechanism comparisons, tactile super-resolution and source-linked limitations are retained.</p>
+          <p className="mt-5 max-w-3xl text-sm text-soft">Updated <time dateTime="2026-10-21">October 21, 2026</time>: added SenseAlign recognition-fusion evidence and evaluation boundaries. Earlier optical/capacitive comparisons, Tactaxis reading routes, mechanism explanations and tactile super-resolution are retained.</p>
         </div>
       </section>
 
@@ -100,6 +100,7 @@ export default function TechnologyPage() {
               <Link href="/guides/how-to-choose-a-tactile-sensor">Follow the sensor selection checklist</Link>
               <Link href="/datasets">Find visuo-tactile datasets</Link>
               <Link href="/guides/robot-skin-vs-e-skin">Robot skin vs e-skin</Link>
+              <Link href="#sensealign-vision-touch-fusion">When vision and touch disagree in recognition</Link>
             </nav>
             <p className="mt-5 text-sm text-soft">Source example: <a className="text-accent underline" href="https://arxiv.org/abs/2005.14679">the original DIGIT paper</a>. This introduction summarizes sensing concepts; RoboSkin.ai has not performed a hardware comparison for this page.</p>
           </div>
@@ -107,6 +108,7 @@ export default function TechnologyPage() {
       </section>
 
       <TactileTopicSections sections={technologyAdditions} />
+      <TactileTopicSections sections={[senseAlignSection]} />
 
       <section className="pb-20">
         <div className="container-shell grid gap-6 lg:grid-cols-2">
