@@ -1,6 +1,7 @@
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import domino from '@mixmark-io/domino';
 import TurndownService from 'turndown';
 import turndownPluginGfm from 'turndown-plugin-gfm';
 
@@ -24,6 +25,28 @@ function pathnameForHtml(relativeHtmlPath) {
   if (normalized === '404.html') return '/404';
   if (normalized.endsWith('/index.html')) return `/${normalized.slice(0, -'/index.html'.length)}`;
   return `/${normalized.slice(0, -'.html'.length)}`;
+}
+
+const excludedRoute = /^\/(?:api|private|_next|_vercel|_agent-markdown|weekly-reports|account|auth|login|logout)(?:\/|$)/;
+
+export function publicCanonicalPath(html, relativeHtmlPath) {
+  const pathname = pathnameForHtml(relativeHtmlPath);
+  if (excludedRoute.test(pathname) || /^\/(?:404|500|_not-found)$/.test(pathname)) return null;
+  const document = domino.createWindow(html).document;
+  const robots = [...document.querySelectorAll('meta[name]')]
+    .filter((node) => /^(?:robots|googlebot|bingbot)$/i.test(node.getAttribute('name')))
+    .map((node) => node.getAttribute('content') || '');
+  if (robots.some((value) => /(?:^|[\s,])(?:noindex|none)(?:$|[\s,])/i.test(value))) return null;
+  const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href');
+  if (!canonical) return null;
+  try {
+    const url = new URL(canonical);
+    const canonicalPath = url.pathname.replace(/\/$/, '') || '/';
+    if (url.origin !== canonicalOrigin || url.search || url.hash || canonicalPath !== pathname) return null;
+    return pathname;
+  } catch {
+    return null;
+  }
 }
 
 export function markdownRelativePathForHtml(relativeHtmlPath) {
@@ -99,30 +122,46 @@ export function htmlToMarkdown(html, pathname) {
   return `${header}\n\n${body}\n`;
 }
 
-export async function generateAgentMarkdown(outputRoot = path.join(projectRoot, 'out')) {
-  const htmlFiles = await listHtmlFiles(outputRoot);
-  const markdownRoot = path.join(outputRoot, '_agent-markdown');
-
+export async function generateAgentMarkdown(outputRoot = path.join(projectRoot, 'out'), { htmlRoot = outputRoot } = {}) {
+  const htmlFiles = await listHtmlFiles(htmlRoot);
+  const markdownRoot = path.resolve(outputRoot, '_agent-markdown');
+  const records = [];
   for (const htmlFile of htmlFiles) {
-    const relativeHtml = path.relative(outputRoot, htmlFile);
+    const relativeHtml = path.relative(htmlRoot, htmlFile);
     const relativeMarkdown = markdownRelativePathForHtml(relativeHtml);
     const outputFile = path.resolve(markdownRoot, relativeMarkdown);
-    if (!outputFile.startsWith(`${path.resolve(markdownRoot)}${path.sep}`)) {
+    if (!outputFile.startsWith(`${markdownRoot}${path.sep}`)) {
       throw new Error(`Refusing to write outside the agent Markdown directory: ${relativeMarkdown}`);
     }
     const html = await readFile(htmlFile, 'utf8');
-    const markdown = htmlToMarkdown(html, pathnameForHtml(relativeHtml));
+    const pathname = publicCanonicalPath(html, relativeHtml);
+    if (!pathname) continue;
+    records.push({ outputFile, markdown: htmlToMarkdown(html, pathname) });
+  }
+  if (!records.length) throw new Error(`No public canonical HTML found in ${htmlRoot}; refusing to publish stale Markdown.`);
+
+  // This is a build-owned directory only. Resolve and check its exact location before
+  // removing old assets, so removed/noindex pages cannot survive a later build.
+  if (path.dirname(markdownRoot) !== path.resolve(outputRoot) || path.basename(markdownRoot) !== '_agent-markdown') {
+    throw new Error(`Refusing to clear unexpected Markdown directory: ${markdownRoot}`);
+  }
+  await rm(markdownRoot, { recursive: true, force: true });
+  for (const { outputFile, markdown } of records) {
     await mkdir(path.dirname(outputFile), { recursive: true });
     await writeFile(outputFile, markdown, 'utf8');
   }
-
-  return { count: htmlFiles.length, outputRoot: markdownRoot };
+  // A fixed recovery document avoids exposing an error page or member-page HTML.
+  await writeFile(path.join(markdownRoot, '404.md'), 'Status: 404 Not Found\n\n# Page not found\n\n[Home](https://roboskin.ai/)\n\n[Public sitemap](https://roboskin.ai/sitemap.xml)\n\n[Machine-readable resource index](https://roboskin.ai/llms.txt)\n\n[Expanded knowledge file](https://roboskin.ai/llms-full.txt)\n\n[Research index](https://roboskin.ai/research-index)\n\n[Glossary](https://roboskin.ai/glossary)\n', 'utf8');
+  return { count: records.length, outputRoot: markdownRoot };
 }
 
 const executablePath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : '';
 if (import.meta.url === executablePath) {
   if (process.env.ROBOSKIN_RUNTIME === 'server') {
-    console.log('Server build: static-export Markdown generation skipped (out may belong to an earlier build).');
+    const result = await generateAgentMarkdown(path.join(projectRoot, 'public'), {
+      htmlRoot: path.join(projectRoot, '.next', 'server', 'app'),
+    });
+    console.log(`Generated ${result.count} public agent Markdown representations from this server build in ${result.outputRoot}`);
   } else {
     const result = await generateAgentMarkdown();
     console.log(`Generated ${result.count} agent Markdown representations in ${result.outputRoot}`);

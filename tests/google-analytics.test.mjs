@@ -35,13 +35,13 @@ const compiled = ts.transpileModule(readFileSync('src/components/GoogleAnalytics
   compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
 }).outputText;
 
-function mount({ saved = null, hostname = 'roboskin.ai', id = 'G-TEST123', storageThrows = false, path = '/' } = {}) {
+function mount({ saved = null, hostname = 'roboskin.ai', id = 'G-TEST123', storageThrows = false, path = '/', referrer = 'https://www.google.com/search?q=private' } = {}) {
   const hooks = []; let index = 0; let effects = []; let tree; let dirty = true;
   const frames = new Map(); let frameId = 0;
   const listeners = new Map(); const exports = {};
   const window = { location: { hostname, href: `https://${hostname}${path}` }, addEventListener: (name, cb) => listeners.set(name, cb), removeEventListener: (name) => listeners.delete(name) };
   const documentListeners = new Map();
-  const document = { referrer: 'https://www.google.com/search?q=private', title: 'RoboSkin.ai', cookie: '_ga=123; _ga_TEST123=456', addEventListener: (name, cb) => documentListeners.set(name, cb), removeEventListener: name => documentListeners.delete(name) };
+  const document = { referrer, title: 'RoboSkin.ai', cookie: '_ga=123; _ga_TEST123=456', addEventListener: (name, cb) => documentListeners.set(name, cb), removeEventListener: name => documentListeners.delete(name) };
   let stored = saved;
   runInNewContext(compiled, {
     exports, window, document, process: { env: { NEXT_PUBLIC_GA_MEASUREMENT_ID: id } },
@@ -97,6 +97,62 @@ test('only approved campaign combinations survive; private and duplicate values 
     '',
   ]) assert.deepEqual(analytics.analyticsCampaign(`https://roboskin.ai/?${query}`), {});
   assert.deepEqual(analytics.analyticsCampaign(`https://unrelated.example/?utm_source=x&utm_medium=social&utm_campaign=${campaign}`), {});
+});
+
+test('ChatGPT-only tags recover missing referrers using fixed campaign labels', () => {
+  const location = 'https://roboskin.ai/tactile-ai?utm_source=chatgpt.com&utm_medium=private@example.com&utm_campaign=private&utm_content=secret';
+  assert.deepEqual(analytics.analyticsCampaign(location, ''), { campaign_source: 'chatgpt.com', campaign_medium: 'referral' });
+  assert.equal(analytics.analyticsPageUrl(location), 'https://roboskin.ai/tactile-ai');
+  for (const source of ['chatgpt', 'openai.com', 'chatgpt.com.evil.example', 'private@example.com']) {
+    assert.deepEqual(analytics.analyticsCampaign(`https://roboskin.ai/?utm_source=${source}`, ''), {});
+  }
+  assert.deepEqual(analytics.analyticsCampaign('https://roboskin.ai/?utm_source=chatgpt.com&utm_source=chatgpt.com', ''), {});
+  assert.deepEqual(analytics.analyticsCampaign('https://unrelated.example/?utm_source=chatgpt.com', ''), {});
+  for (const referrer of ['https://chatgpt.com/c/private', 'https://chat.openai.com/c/private', 'https://www.google.com/', 'https://roboskin.ai/datasets']) {
+    assert.deepEqual(analytics.analyticsCampaign(location, referrer), {});
+  }
+});
+
+test('ChatGPT attribution waits for consent and initializes once across route changes', () => {
+  const app = mount({ path: '/tactile-ai?utm_source=chatgpt.com&q=private', referrer: '' });
+  app.render();
+  assert.equal(app.commands().length, 0);
+  app.navigate('/datasets');
+  assert.equal(app.commands().length, 0);
+  app.click('Allow analytics');
+  app.navigate('/sensors');
+  app.navigate('/datasets');
+  const configs = app.commands().filter(args => args[0] === 'config');
+  assert.equal(configs.length, 1);
+  assert.equal(configs[0][2].campaign_source, 'chatgpt.com');
+  assert.equal(configs[0][2].campaign_medium, 'referral');
+  assert.equal('campaign_name' in configs[0][2], false);
+  assert.equal(configs[0][2].send_page_view, false);
+  assert.equal(app.commands().filter(args => args[0] === 'event' && args[1] === 'page_view').length, 3);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
+  app.settings(); app.click('Decline');
+  const stoppedCount = app.commands().length;
+  app.navigate('/tactile-ai?utm_source=chatgpt.com');
+  assert.equal(app.commands().length, stoppedCount);
+});
+
+test('a source tag introduced during internal navigation cannot relabel a direct arrival', () => {
+  const app = mount({ path: '/datasets', referrer: '' });
+  app.render();
+  app.navigate('/tactile-ai?utm_source=chatgpt.com');
+  app.click('Allow analytics');
+  const config = app.commands().find(args => args[0] === 'config')[2];
+  assert.equal('campaign_source' in config, false);
+});
+
+test('legacy ChatGPT referrer is retained without its conversation path', () => {
+  const app = mount({ saved: 'granted', path: '/tactile-ai', referrer: 'https://chat.openai.com/c/private?secret=value' });
+  app.render();
+  const config = app.commands().find(args => args[0] === 'config')[2];
+  assert.equal(config.page_referrer, 'https://chat.openai.com/');
+  assert.equal('campaign_source' in config, false);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
+  assert.ok(!JSON.stringify(app.commands()).includes('secret'));
 });
 
 test('resource events exclude external links, arbitrary queries and self-navigation', () => {

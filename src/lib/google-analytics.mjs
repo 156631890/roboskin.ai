@@ -1,3 +1,5 @@
+import { hasChatGptSourceTag } from './referral-attribution.mjs';
+
 export const analyticsConsentKey = 'roboskin-google-analytics-consent';
 
 export function canUseGoogleAnalytics(measurementId, hostname) {
@@ -27,7 +29,7 @@ const campaignChannels = new Map([
   ['x', 'social'], ['reddit', 'social'], ['github', 'referral'], ['newsletter', 'email'],
 ]);
 
-export function analyticsCampaign(value) {
+export function analyticsCampaign(value, referrer = '') {
   try {
     const url = new URL(value);
     if (url.origin !== 'https://roboskin.ai') return {};
@@ -35,6 +37,12 @@ export function analyticsCampaign(value) {
     const source = params.get('utm_source');
     const medium = params.get('utm_medium');
     const campaign = params.get('utm_campaign');
+    // ChatGPT links can carry only this source tag. Recover it when the browser
+    // supplies no referrer, without exposing other query values or inventing a
+    // campaign name. GoogleAnalytics applies these fields only at initialization.
+    if (!referrer.trim() && hasChatGptSourceTag(value)) {
+      return { campaign_source: 'chatgpt.com', campaign_medium: 'referral' };
+    }
     if (['utm_source', 'utm_medium', 'utm_campaign'].some(key => params.getAll(key).length !== 1)) return {};
     if (campaign !== resourceCampaign || !campaignChannels.has(source) || campaignChannels.get(source) !== medium) return {};
     return { campaign_source: source, campaign_medium: medium, campaign_name: campaign };

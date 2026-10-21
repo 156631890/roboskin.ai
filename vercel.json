@@ -82,7 +82,7 @@
       "continue": true
     },
     {
-      "src": "^/(?:$|(?!_next/|_vercel/|api/|_agent-markdown/)(?!.*\\.[^/]+$).*)$",
+      "src": "^/(?:$|(?!(?:_next|_vercel|api|private|_agent-markdown|weekly-reports|account|auth|login|logout|case-studies|comparison|downloads|implementation|rss|world-models/tracker)(?:/|$))(?!.*\\.[^/]+$).*)$",
       "headers": {
         "Vary": "Accept, Accept-Encoding"
       },
@@ -99,14 +99,13 @@
       ],
       "dest": "/_agent-markdown/index.md",
       "headers": {
-        "Content-Type": "text/markdown; charset=utf-8",
         "Vary": "Accept, Accept-Encoding",
         "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
         "X-Content-Type-Options": "nosniff"
       }
     },
     {
-      "src": "^/((?!_next/|_vercel/|api/|_agent-markdown/)(?!.*\\.[^/]+$).+?)/?$",
+      "src": "^/((?!(?:_next|_vercel|api|private|_agent-markdown|weekly-reports|account|auth|login|logout|case-studies|comparison|downloads|implementation|rss|world-models/tracker)(?:/|$))(?!.*\\.[^/]+$).+?)/?$",
       "has": [
         {
           "type": "header",
@@ -116,7 +115,6 @@
       ],
       "dest": "/_agent-markdown/$1.md",
       "headers": {
-        "Content-Type": "text/markdown; charset=utf-8",
         "Vary": "Accept, Accept-Encoding",
         "Cache-Control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
         "X-Content-Type-Options": "nosniff"
@@ -140,7 +138,7 @@
       "handle": "error"
     },
     {
-      "src": "^/.*$",
+      "src": "^/(?:$|(?!(?:_next|_vercel|api|private|_agent-markdown|weekly-reports|account|auth|login|logout|case-studies|comparison|downloads|implementation|rss|world-models/tracker)(?:/|$))(?!.*\\.[^/]+$).*)$",
       "has": [
         {
           "type": "header",
