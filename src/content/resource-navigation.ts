@@ -21,7 +21,7 @@ export function resourceGroupFor(path: string) {
   if (['/robotics-programming', '/guides/ros2-tactile-sensing', '/guides/python-tactile-data-processing', '/guides/lerobot-dataset-format', '/guides/tactile-sensor-calibration'].includes(path)) return 'engineering';
   if (path.startsWith('/sensors') || ['/guides/how-to-choose-a-tactile-sensor', '/guides/tactile-sensor-for-robots', '/guides/tactile-sensor-benchmark-robot-manipulation', '/guides/flexible-tactile-sensor-array'].includes(path)) return 'hardware';
   if (path.startsWith('/applications/') || ['/humanoid-robot-skin', '/humanoid-robots', '/robot-hands', '/robot-manipulation', '/tactile-manipulation', '/robot-safety', '/guides/slip-detection-robot-hand'].includes(path)) return 'applications';
-  if (/models|datasets|benchmarks/.test(path) || ['/robot-learning', '/robot-teleoperation', '/visuo-tactile'].includes(path)) return 'models-data';
+  if (/models|datasets|benchmarks/.test(path) || ['/robot-learning', '/robot-teleoperation', '/visuo-tactile', '/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra'].includes(path)) return 'models-data';
   return 'foundations';
 }
 

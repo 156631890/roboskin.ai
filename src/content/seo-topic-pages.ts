@@ -4,6 +4,7 @@ import { opticalTactileGuides } from '@/content/optical-tactile-guides';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
 import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
+import { tactileIclComparisonPage } from '@/content/tactile-icl-comparison';
 import { sensorDetailPages } from '@/content/sensor-detail-pages';
 import { programmingPages } from '@/content/programming-pages';
 import { engineeringPages } from '@/content/engineering-pages';
@@ -69,6 +70,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   tactileSelectionGuide,
   ...sensorDetailPages,
   ...sensorComparisonPages,
+  tactileIclComparisonPage,
   ...programmingPages,
   ...engineeringPages,
   {
@@ -79,7 +81,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'How artificial intelligence works in robots',
     kicker: 'AI and robotics hub',
     intent: 'Answer-first guide to AI in robotics, robot AI, embodied AI, VLMs, VLA models, world models, robot policies, control, and tactile feedback.',
-    updated: '2026-08-22',
+    updated: '2026-10-22',
+    revisionNote: 'October 22, 2026: added the distinction between a general model and the tactile context, action adapter and controller used in two Astra-based research setups.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'WebPage',
@@ -167,6 +170,12 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Vision can describe a scene and guide an approach, but cameras may not directly measure local pressure, shear, slip, deformation, or hidden contact after a hand or tool reaches an object. Tactile sensing supplies that local measurement channel.',
           'Robot skin is the physical sensing surface. Tactile AI is the representation, inference, and action workflow that uses touch data. Depending on the system, touch can enter a multimodal policy, a predictive world model, a task evaluator, or a faster reactive correction loop. None of those roles should be inferred unless the source documents it.',
+          'Tactile-ETA and the TacTalent study illustrate why the model name alone is insufficient: both use GPT-6 Astra, but Tactile-ETA supplies action-aligned tactile demonstrations and robot tools, while TacTalent generates translation, rotation and gripper commands through a benchmark adapter. Their context, inference settings and evaluation conditions differ. A controller execution frequency is not the model decision frequency, and the TacTalent results are simulation only.',
+        ],
+        contextLinks: [{ before: 'Compare the inputs, action interfaces, trial counts and hardware limits in ', label: 'Tactile-ETA vs. GPT-6 Astra: tactile in-context learning', href: '/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra', after: ' before treating a model capability claim as evidence for a complete robot system.' }],
+        links: [
+          { label: 'Tactile-ETA v1: context and tool execution', href: 'https://arxiv.org/html/2610.27613v1#S3' },
+          { label: 'TacTalent v1: direct tactile-image control', href: 'https://arxiv.org/html/2610.26846v1#S3' },
         ],
         table: {
           headers: ['Touch layer', 'Role in robot AI', 'Minimum evidence'],
@@ -4999,8 +5008,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'High-interest robotics pillar',
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-10-21',
-    revisionNote: 'October 21, 2026: clarified tactile demonstrations in context versus parameter training and execution feedback, with a bounded Tactile-ETA example. The October 20 CEL/FERT and DexOAK cases and October 18 data-selection checklist are retained.',
+    updated: '2026-10-22',
+    revisionNote: 'October 22, 2026: added Tactile-ETA’s frame-selection ablation and a comparison with the separate TacTalent Astra study. The October 21 distinction between demonstrations, training and execution feedback and earlier learning examples are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5148,7 +5157,8 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Tactile in-context learning uses examples in the model input rather than updating its parameters. Tactile-ETA pairs action segments with before-and-after camera views, robot state and tactile observations; it retains tactile endpoints and selected change frames in ordered demonstrations. The frozen agent also receives current sensing and execution feedback.',
           'In four simulated tasks, the authors keep two expert demonstrations, current inputs and the execution interface fixed. Adding tactile observations inside the demonstrations raises mean success from 15.75% to 24%, with 100 trials per task and condition; not every task improves. On Wipe Board and Pick Up Chips, each condition has current vision and touch: one aligned multimodal demonstration versus none yields 3/5 versus 0/5 successes per task. This is not a touch-versus-no-touch comparison or an industrial reliability estimate.',
-          'Decisions occur between motion segments, so this context does not replace fast tactile feedback control during execution. These are author-reported results from the October 20, 2026 v1 preprint, reviewed October 21; RoboSkin has not reproduced them or verified code and runnable reproduction. Task coverage and hardware samples are small.',
+          'Decisions occur between motion segments, so this context does not replace fast tactile feedback control during execution. These are author-reported results from the October 20, 2026 v1 preprint, with source and code inspection updated October 22; RoboSkin has not run the controller or reproduced the results. Task coverage and hardware samples are small.',
+          'A separate Lift Bottle ablation in the same v1 holds the two demonstrations, their visual-motion content and current sensing fixed: endpoints yield 27/100 successes, all historical tactile frames 2/100, and endpoints plus a selected change pair 36/100. This supports testing action-aligned frame selection, not a general claim that dense touch is harmful. The separate TacTalent Astra study changes touch in both demonstrations and online inputs, so its modality comparison answers a different question.',
           'Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.',
           'ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.',
           'UniVTAC makes those units explicit: 205,826 samples pretrain a tactile encoder, 400 paper-reported trajectories train eight task policies, the September inventory lists 800 task HDF5 files for each of Isaac Sim 4.5 and 5.1, and 450 physical demonstrations support three real-world tasks. Evaluation rollouts are outcomes rather than additional training data.',
@@ -5164,6 +5174,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         },
         links: [
           { label: 'Tactile-ETA v1: controlled comparisons, limitations and hardware protocol', href: 'https://arxiv.org/html/2610.27613v1' },
+          { label: 'Compare Tactile-ETA and the TacTalent Astra setup, with a matched frame-selection plan', href: '/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra' },
           { label: 'Inspect episode fields, timing and action conventions', href: '/guides/lerobot-dataset-format' },
           { label: 'Connect tactile feedback to manipulation outcomes', href: '/tactile-manipulation' },
           { label: 'Scope a robot-data and integration evidence review', href: '/research-services' },
