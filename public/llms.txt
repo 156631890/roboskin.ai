@@ -132,6 +132,7 @@ Use RoboSkin public pages for category definitions, research route discovery, te
 - [Robot foundation models](https://roboskin.ai/robot-foundation-models): Robot foundation model, generalist robot model, multi-embodiment transfer, model access, and evidence parent cluster.
 - [Robot platforms and embodiments](https://roboskin.ai/robots): Robot platforms used for Physical AI training, robot evaluation embodiments, humanoid model demonstrations, and hardware evidence boundaries.
 - [Robot learning](https://roboskin.ai/robot-learning): Robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real, and tactile learning parent cluster.
+- [Tactile in-context learning: Tactile-ETA and GPT-6 Astra](https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra): Compare demonstrations in context, model roles, robot execution feedback and the limits of the reported evidence.
 - [Robot hands](https://roboskin.ai/robot-hands): Robot hands, robotic hands, dexterous hands, hand-versus-gripper, actuation, sensing, and manipulation parent cluster.
 - [Robot safety](https://roboskin.ai/robot-safety): Robot safety, industrial robot safety, humanoid safety, collision response, safety sensors, and standards-scope parent cluster.
 - [Robotics datasets](https://roboskin.ai/robotics-datasets): Robotics datasets and robot-learning datasets parent cluster; tactile-only dataset queries remain assigned to `/datasets`.

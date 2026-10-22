@@ -1,5 +1,6 @@
 import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
+import { tactileIclComparisonPage } from '@/content/tactile-icl-comparison';
 import { canonicalUrl } from '@/lib/seo';
 
 const xmlEscape = (value: string) => value
@@ -13,6 +14,13 @@ export function getRssItems() {
   return [
     ...blogPosts.map((post) => ({ ...post, path: `/research/${post.id}` })),
     ...newsPosts.map((post) => ({ ...post, path: `/news/${post.id}` })),
+    {
+      title: tactileIclComparisonPage.title,
+      path: tactileIclComparisonPage.path,
+      excerpt: tactileIclComparisonPage.description,
+      date: tactileIclComparisonPage.published!,
+      updated: tactileIclComparisonPage.updated,
+    },
   ]
     .sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
     .slice(0, 50);

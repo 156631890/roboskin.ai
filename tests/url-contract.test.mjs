@@ -28,7 +28,8 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 202);
+  assert.equal(protectedUrls.length, 203);
+  assert.ok(protectedUrls.includes('https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/sensors/loomia-smart-skin'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/guides/optical-tactile-sensor-maintenance'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/guides/optical-vs-capacitive-tactile-sensors'));
