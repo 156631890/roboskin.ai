@@ -2895,7 +2895,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: "October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
+    revisionNote: "October 22, 2026: clarified geometry-derived pseudo-contact versus measured tactile data using HuTact as a method example; no dataset record or availability status changed. October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
     title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
     description:
       'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
@@ -2903,7 +2903,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-17',
+    updated: '2026-10-22',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3020,8 +3020,10 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'The entries below are research resources with different goals; they are not interchangeable rows in one leaderboard. Some emphasize tactile-language and material understanding, others whole-hand contact, data collection, humanoid action alignment, or multisensory representation learning.',
           'Before use, open the primary source and project page. Verify the actual downloadable files, license, sensor hardware, collection protocol, annotations, train-test splits, and version. A paper saying that a resource is open does not replace checking the current repository terms.',
+          'Keep geometry-derived pseudo-contact separate from measured touch. HuTact pretrains on human hand-object interaction geometry: reconstructed hand and object meshes provide a proximity-like cue, not measured physical contact properties. Optional midtraining uses unlabeled robot play, and downstream fine-tuning still uses real robotic tactile data. The authors evaluate only a Revo2-based bimanual setup; transfer to other hands and sensing modalities is untested. This is a complementary pretraining source, not evidence that tactile sensors or robot data can be removed. Budget geometry preparation, robot adaptation and labeled task data separately. Code, weights, dataset release and reproduction have not been independently verified by RoboSkin, so this method example is not a downloadable dataset entry.',
         ],
         contextLinks: [
+          { before: 'Source reviewed October 22, 2026: ', label: 'HuTact v1 methodology and limitations', href: 'https://arxiv.org/html/2610.27995v1', after: '. The paper reports the experiments; RoboSkin has not reproduced them.' },
           {
             "before": "If a modality label is unfamiliar, read ",
             "label": "what tactile sensing measures",
