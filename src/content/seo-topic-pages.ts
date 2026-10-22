@@ -4112,8 +4112,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.',
+    updated: '2026-10-22',
+    revisionNote: 'October 22, 2026: clarified predicted wrench references and separate model/controller rates with CW-WAM. October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.',
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4130,6 +4130,12 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'The tactile manipulation control loop',
         body: [
           'Physical contact changes a sensor surface or taxel array. The system timestamps and preprocesses that signal, estimates a contact state or embedding, then changes grip force, pose, trajectory, or recovery mode. The action creates the next contact observation, closing the loop.',
+          "CW-WAM separates measured wrench input from a predicted wrench reference: past wrist force/torque measurements condition the model; its predicted motion and wrench guide a separate admittance controller, which compares predicted and measured loads to correct pose. The authors report roughly 0.5–0.6-second model queries on one RTX 5090, excluding network communication. Their 20 Hz admittance loop and 1 kHz robot controller are separate execution rates, not model inference speeds.",
+          "Evidence comes from four Franka tasks using a wrist six-axis F/T sensor, not a skin array. Adding admittance reduced force-reference error without changing insertion or wiping success rates. Tests stayed within the demonstration distribution, with manually chosen gains and compliant directions; they do not establish new-task generalization or industrial safety. These are author-reported results, not RoboSkin experiments. Code, weights and reuse terms remain unverified here.",
+        ],
+        links: [
+          { label: 'CW-WAM v1: control interface and evaluation', href: 'https://arxiv.org/html/2610.30117v1' },
+          { label: 'Compare measured-force admission in FR-VLA', href: '/robot-vla-models#fr-vla-force-admission' },
         ],
         table: {
           headers: ['Layer', 'Question', 'Typical output', 'Failure if omitted'],
