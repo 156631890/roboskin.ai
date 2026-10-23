@@ -19,11 +19,13 @@ function mountTracker(referrer) {
   let pathname = '/datasets';
   const exports = {};
   const listeners = { addEventListener() {}, removeEventListener() {} };
-  const window = { ...listeners, location: { href: 'https://roboskin.ai/datasets' } };
+  const documentListeners = new Map();
+  const window = { ...listeners, location: { href: 'https://roboskin.ai/datasets', origin: 'https://roboskin.ai' } };
   runInNewContext(compiled, {
     exports,
-    document: { ...listeners, referrer },
+    document: { referrer, addEventListener: (name, handler) => documentListeners.set(name, handler), removeEventListener: name => documentListeners.delete(name) },
     window,
+    URL,
     require(name) {
       if (name === '@vercel/analytics') return { track: (event, properties) => events.push({ event, ...properties }) };
       if (name === 'next/navigation') return { usePathname: () => pathname };
@@ -38,6 +40,9 @@ function mountTracker(referrer) {
   });
   return {
     events,
+    clickLink(href) {
+      documentListeners.get('click')?.({ target: { closest: () => ({ href, textContent: 'Download resource', hasAttribute: () => false }) } });
+    },
     render(path) {
       window.location.href = new URL(path, 'https://roboskin.ai').href;
       pathname = new URL(window.location.href).pathname;
@@ -47,7 +52,7 @@ function mountTracker(referrer) {
       // Replaying effects also exercises React Strict Mode's development replay.
       for (const effect of effects) {
         effect()?.();
-        effect()?.();
+        effect();
       }
     },
   };
@@ -124,4 +129,22 @@ test('tutorial visits survive repeated effects and count a return navigation', (
   tracker.render('/guides/python-tactile-data-processing');
   assert.equal(tracker.events.length, 2);
   assert.ok(tracker.events.every(event => event.event === 'Tutorial Visit' && event.batch === 'programming-2026-09-16'));
+});
+
+test('resource downloads retain tutorial tracking and add the same-origin sensor template', () => {
+  const tracker = mountTracker('');
+  tracker.render('/datasets');
+  const paths = [
+    '/tutorials/lerobot-validation/lerobot-numeric-validation.zip',
+    '/tutorials/lerobot-loader/lerobot-official-loader.zip',
+    '/resources/tactile-sensor-evaluation-template.csv',
+  ];
+  for (const path of paths) tracker.clickLink(`${path}?email=private@example.com#private`);
+  assert.deepEqual(tracker.events.map(event => event.event), ['Tutorial Example Download', 'Tutorial Example Download', 'Sensor Evaluation Template Download']);
+  assert.deepEqual(tracker.events.map(event => event.target), paths);
+  assert.ok(tracker.events.every(event => event.from === '/datasets'));
+  assert.ok(!JSON.stringify(tracker.events).includes('private'));
+  tracker.clickLink('https://other.example/resources/tactile-sensor-evaluation-template.csv');
+  assert.equal(tracker.events.filter(event => event.event === 'Sensor Evaluation Template Download').length, 1);
+  assert.equal(tracker.events.at(-1).event, 'Source Open');
 });

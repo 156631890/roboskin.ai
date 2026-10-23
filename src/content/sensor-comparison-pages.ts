@@ -78,6 +78,7 @@ export const sensorComparisonPages: SeoTopicPage[] = [
           'Repeat after realistic contact wear or a gel change. Record the maintenance and recalibration effort together with performance.',
         ],
         links: [
+          { label: 'Download task evaluation template (CSV)', href: '/resources/tactile-sensor-evaluation-template.csv', download: true },
           { label: 'Use the tactile sensor calibration workflow', href: '/guides/tactile-sensor-calibration' },
           { label: 'Plan matched sensor and robot-task benchmarks', href: '/guides/tactile-sensor-benchmark-robot-manipulation' },
         ],

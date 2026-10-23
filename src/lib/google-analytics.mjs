@@ -83,6 +83,9 @@ const resourceLinks = new Map([
   ['/research-index.json', ['research-index', 'resource_download']],
   ['/experiment-results.csv', ['experiment-evidence', 'resource_download']],
   ['/resources/tactile-dataset-selection-checklist.csv', ['dataset-checklist', 'resource_download']],
+  ['/resources/tactile-sensor-evaluation-template.csv', ['sensor-evaluation-template', 'resource_download']],
+  ['/tutorials/lerobot-validation/lerobot-numeric-validation.zip', ['lerobot-numeric-validation', 'resource_download']],
+  ['/tutorials/lerobot-loader/lerobot-official-loader.zip', ['lerobot-official-loader', 'resource_download']],
 ]);
 
 // Return only public route IDs and paths; never anchor text, form fields or queries.

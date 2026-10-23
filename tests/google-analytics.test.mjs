@@ -229,6 +229,32 @@ test('resource click collection respects consent, withdrawal and route changes',
   assert.equal(resources().length, 3);
 });
 
+test('verified exercise and evaluation downloads use fixed IDs and respect consent', () => {
+  const downloads = [
+    ['/tutorials/lerobot-validation/lerobot-numeric-validation.zip', 'lerobot-numeric-validation'],
+    ['/tutorials/lerobot-loader/lerobot-official-loader.zip', 'lerobot-official-loader'],
+    ['/resources/tactile-sensor-evaluation-template.csv', 'sensor-evaluation-template'],
+  ];
+  const app = mount({ path: '/datasets?email=private@example.com' });
+  const resources = () => app.commands().filter(args => args[0] === 'event' && args[1] === 'resource_download');
+  app.render();
+  for (const [path] of downloads) app.clickLink(path);
+  assert.equal(resources().length, 0);
+  app.click('Allow analytics');
+  for (const [path, id] of downloads) {
+    app.clickLink(`${path}?email=private@example.com#private`);
+    assert.deepEqual(resources().at(-1)[2], { resource_id: id, from_path: '/datasets', target_path: path });
+    assert.equal(analytics.analyticsResourceEvent('https://roboskin.ai/datasets', `https://other.example${path}`), null);
+  }
+  assert.equal(resources().length, 3);
+  app.clickLink('/tutorials/lerobot-loader/unlisted.zip');
+  assert.equal(resources().length, 3);
+  app.settings(); app.click('Decline');
+  for (const [path] of downloads) app.clickLink(path);
+  assert.equal(resources().length, 3);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
+});
+
 test('approved landing campaign survives a pre-consent navigation without retaining arbitrary query values', () => {
   const app = mount({path: `/?utm_source=x&utm_medium=social&utm_campaign=${analytics.resourceCampaign}&email=private@example.com`});
   app.render(); app.navigate('/tactile-ai'); app.click('Allow analytics');

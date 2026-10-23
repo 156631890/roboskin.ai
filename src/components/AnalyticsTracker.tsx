@@ -115,6 +115,11 @@ export default function AnalyticsTracker() {
         return;
       }
 
+      if (url.origin === window.location.origin && url.pathname === '/resources/tactile-sensor-evaluation-template.csv') {
+        track('Sensor Evaluation Template Download', properties);
+        return;
+      }
+
       if (url.pathname === '/feed.xml') {
         track('RSS Feed Open', properties);
         return;
