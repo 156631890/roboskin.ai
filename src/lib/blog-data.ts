@@ -24,6 +24,148 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'softmimicgen-synthetic-data-sim-to-real-2026',
+    title: 'SoftMimicGen Explained: Synthetic Data, Sim-to-Real Results and Tactile Limits',
+    seoTitle: 'SoftMimicGen: Robot Data, Sim-to-Real & Tactile Limits',
+    seoDescription: 'Understand SoftMimicGen generation, three real-robot comparisons, tactile limits and code/data licensing, with a practical adoption checklist.',
+    excerpt: 'A source-reviewed guide to turning deformable-object demonstrations into training data: what transfers to real robots, what remains unmeasured, and what to verify before adoption.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-23',
+    updated: '2026-10-23',
+    readTime: '12 min read',
+    category: 'Robot learning',
+    image: '/generated/authority/tactile-ai-loop.webp',
+    sourceTitle: 'SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation',
+    sourceUrl: 'https://arxiv.org/abs/2603.25725',
+    citationUrls: [
+        'https://arxiv.org/abs/2603.25725',
+        'https://arxiv.org/html/2603.25725v1',
+        'https://softmimicgen.github.io/',
+        'https://github.com/NVlabs/SoftMimicGen/tree/c9d146ba57358a544167de8ebe946caaac8f6220'
+    ],
+    technicalFocus: [
+        'synthetic robot datasets',
+        'deformable object manipulation',
+        'sim-to-real evaluation',
+        'tactile evidence limits'
+    ],
+    content: `# SoftMimicGen Explained: Synthetic Data, Sim-to-Real Results and Tactile Limits
+
+SoftMimicGen is useful when a lab has a few successful demonstrations of deformable-object manipulation and wants more training examples across different starting shapes. It adapts demonstrated motion to simulated object geometry, executes the candidate trajectories, and retains successful episodes. The resulting dataset can train a policy; the generator is not itself a universal deployed controller.
+
+This is a research interpretation published by RoboSkin on October 23, 2026, of the March 26, 2026 arXiv v1 by Masoud Moghani, Mahdi Azizian, Animesh Garg, Yuke Zhu, Sean Huver and Ajay Mandlekar. The official project labels the work ICRA 2026. All experimental results below are author-reported. We reviewed the paper and public source material, but did not install the system, train a policy or reproduce a robot experiment. [Paper record](https://arxiv.org/abs/2603.25725) · [Official project](https://softmimicgen.github.io/).
+
+For an engineering team, the useful question is whether the generator's state, task and action assumptions fit its own experiment. A thousand accepted simulation episodes can be valuable without establishing reliability on a different material, camera or gripper. The [robot-learning guide](/robot-learning) provides the broader training context; the [robotics dataset guide](/robotics-datasets) explains the records needed to compare collections.
+
+## How a small demonstration library becomes a dataset
+
+The workflow has five distinct stages. Keeping their artifacts separate makes failures easier to diagnose. [Method, Sections III–IV](https://arxiv.org/html/2603.25725v1#S4).
+
+| Stage | What the method does | What an adopter should retain |
+| --- | --- | --- |
+| Seed capture and segmentation | Splits teleoperated demonstrations into object-centric subtasks | Original episodes, boundaries, object identities and action conventions |
+| State matching | Uses deformable-object node positions to register a source configuration to a new one | Source and target geometry, registration settings and match quality |
+| Motion adaptation | Warps the selected trajectory to the new configuration | The selected seed segment and transformed motion, not just the final video |
+| Execution and filtering | Runs the adapted motion in simulation and keeps task successes | Attempts, rejections, success rules and failure reasons |
+| Policy training and evaluation | Learns from accepted trajectories and tests the resulting policy | Training split, checkpoint selection and independent evaluation outcomes |
+
+The main experiments use one to three seed demonstrations per task to generate 1,000 demonstrations, across ten tasks and four robot embodiments. That is a description of this experimental setup, not a promise that any single demonstration will yield a useful thousand-episode dataset. [Experimental setup](https://arxiv.org/html/2603.25725v1#S5).
+
+Consider a towel-folding experiment. A useful seed must describe a meaningful sequence of interactions. Moving its grasp waypoint to a new geometric location does not answer whether the new fold is physically feasible, whether the cloth stays in the gripper, or whether the success detector accepts a bad fold. The simulation execution and filtering stage is therefore essential. When adopting the method, inspect rejected trajectories as well as accepted ones: they reveal which initial states the training collection systematically excludes.
+
+## SoftMimicGen versus MimicGen
+
+MimicGen transfers object-relative motion using rigid object poses. SoftMimicGen extends this idea to configurations described by deformable-object nodes and a non-rigid spatial mapping. A rope that bends into a new shape cannot generally be described by one rigid transformation. [Representation and registration](https://arxiv.org/html/2603.25725v1#S4.SS1).
+
+The engineering distinction is the state representation needed to adapt a demonstration. For a rigid object, a pose may be a sufficient reference for a subtask. For a deformable object, a single pose can conceal the part of the shape that matters at the grasp or manipulation location. This does not make rigid registration obsolete: choose the simpler representation when it actually captures the task variation.
+
+Ask three questions before selecting an approach. Can the object state needed for registration be obtained consistently? Does the demonstration remain meaningful under the proposed deformation? Can the simulator reject motions that look geometrically plausible but fail physically? If the answers are uncertain, generating more trajectories can magnify the uncertainty rather than resolve it.
+
+## Generation success and policy success are different measurements
+
+Generation success measures how many adapted candidate executions pass a task's acceptance criterion. Policy success measures how often a learned controller completes an evaluation task. A generator can produce clean demonstrations while a policy learns poorly, and a policy can fail outside the accepted demonstrations' coverage.
+
+For a reproduction, report both denominators. A generation log should distinguish attempted, completed, rejected and retained episodes. A policy evaluation should identify the number of trials, initialization distribution, checkpoint rule and success criterion. Neither the number of frames nor the size of a training archive is an evaluation denominator.
+
+Another reporting detail matters: simulation Tables I and II describe success rates selected as the maximum over three training seeds, rather than the mean across seeds. Do not present those selected values as expected performance from a typical training run. [Simulation tables and protocol](https://arxiv.org/html/2603.25725v1#S5). A new study should save every seed's result and state its checkpoint-selection rule before inspecting the test outcomes.
+
+## What the three real-robot comparisons actually show
+
+Table III compares three training-data conditions. The values below are percentages transcribed from the authors' table; the column counts describe training demonstrations. [Real-world evaluation, Section V-E and Table III](https://arxiv.org/html/2603.25725v1#S5.T3).
+
+| Physical task | Real only: 30 demonstrations | Simulation only: 1,000 demonstrations | Joint training: 1,000 simulation + 30 real |
+| --- | --- | --- | --- |
+| Franka towel | 76.6% | 70.0% | 76.6% |
+| Franka rope | 46.7% | 33.3% | 76.6% |
+| YAM bag loading | 33.3% | 63.3% | 93.3% |
+
+Joint training ties the real-only towel result. Simulation-only training is lower than real-only training for both towel and rope, while bag loading improves. The joint-versus-real differences calculated from the displayed values are 0, 29.9 and 60.0 percentage points respectively. These are differences between rounded table entries, not relative percentage improvements or significance tests.
+
+The reviewed v1 Section V-E and Table III do not specify the physical evaluation trial counts. The number 30 labels training demonstrations; it must not be repurposed as the trial denominator. Without reported counts and trial-level outcomes, this review cannot reconstruct confidence intervals or judge statistical significance. Videos demonstrate examples, not the missing denominator. The same table is visible on page 7 of the [paper PDF](https://arxiv.org/pdf/2603.25725).
+
+For a lab considering the approach, the appropriate follow-up is a matched comparison on its intended object and robot: real-only, simulation-only and combined training, evaluated on the same held-out cases. Record unsuccessful attempts and interventions. A task-specific result is more useful for this decision than averaging these three different tasks into a marketing score.
+
+## Sim-to-real depends on the observation pipeline
+
+Generation uses simulator-provided object-node state. Physical deployment instead uses Point Bridge: task-relevant point observations are extracted from RGB-D input, with VLM guidance. The policy acts from point-based observations rather than running non-rigid registration as an explicit online controller. [Section V-E](https://arxiv.org/html/2603.25725v1#S5.SS5).
+
+This separation changes the integration plan. A working data generator does not establish that a real camera can recover every task-relevant surface. Evaluate segmentation, camera calibration, occlusion and point quality independently of trajectory generation. Preserve the transformation between the camera, robot and action frames, and log the observation age used for each command.
+
+Likewise, the action interface is part of the dataset contract. Do not transfer an action array between robots because its length happens to match. Verify whether values describe joint positions, absolute or relative end-effector targets, gripper commands, units and control intervals. Check the task configuration and controller together before replaying an episode.
+
+## Does SoftMimicGen use tactile sensing?
+
+The reported physical comparison uses RGB-D-derived point observations; it is not a tactile-versus-vision experiment. It neither demonstrates that tactile sensing is unnecessary nor measures the benefit of adding it. A simulated deformable-object node is also not a measured pressure, force or tactile-image channel.
+
+The following is RoboSkin's engineering analysis, not a finding tested by SoftMimicGen. In a new cloth, rope or bag task, ask what must be observed at contact: whether the material is still held, whether a hidden region has slipped, and whether the applied load remains acceptable. Visible shape alone should not be treated as a measurement of those quantities. A task may need an additional contact observation, a different camera arrangement, a conservative controller or a combination; the paper does not select that design for you.
+
+If touch is added, run a matched ablation with the same training budget and evaluation cases. Record sensor placement, calibration, timestamps, missing frames and the point where feedback changes action. Score physical task outcomes separately from contact classification. The [tactile manipulation guide](/tactile-manipulation) and [sensor calibration guide](/guides/tactile-sensor-calibration) provide complementary questions for that experiment.
+
+## Failure boundaries to test before scaling
+
+The method assumes a fixed sequence of object-centric subtasks. The authors identify flexible task structures, including retries and conditional transitions, as future work. [Conclusion](https://arxiv.org/html/2603.25725v1#S6). An autonomous system that must recover from a missed grasp needs evidence for that recovery behavior; it cannot inherit it from an orderly successful demonstration.
+
+An adoption evaluation should therefore include cases beyond the easiest accepted rollouts. Vary the initial configuration within a declared range, distinguish geometry changes from material changes, and test camera occlusions separately from control errors. Track which failures originate in state estimation, registration, actuation, contact mechanics or the success detector. These are proposed checks, not additional failure rates reported by the paper.
+
+Material parameters deserve their own record. A visually similar mesh does not establish matching friction, stiffness, damping or grasp behavior. Keep parameter choices and any calibration evidence alongside the dataset version. The ten-task suite also should not be read as a single policy that handles arbitrary tasks or as clinical validation of its surgical simulation examples.
+
+## Code, data and dependencies: what is actually verified
+
+The [official NVlabs repository](https://github.com/NVlabs/SoftMimicGen) exposes collection, annotation and generation tooling. This review inspected revision c9d146ba57358a544167de8ebe946caaac8f6220. Its [project license](https://github.com/NVlabs/SoftMimicGen/blob/c9d146ba57358a544167de8ebe946caaac8f6220/LICENSE) is Apache-2.0. Source availability is not evidence that RoboSkin has executed the pipeline successfully.
+
+The [installer](https://github.com/NVlabs/SoftMimicGen/blob/c9d146ba57358a544167de8ebe946caaac8f6220/softmimicgen.sh) points to masoudmoghani/SoftMimicGen on Hugging Face for annotated datasets and asset files. We did not verify that dataset's file inventory, per-file rights or a dataset-specific license, and did not download the archives. Do not infer that every generated training collection, asset or policy checkpoint is publicly available under the code license.
+
+Dependencies have separate notices, including Isaac Lab, rapprentice and other components. The installation script also installs Isaac Sim and sets an agreement-acceptance variable. Review the relevant software and asset terms before running it; this article does not grant rights to third-party components. [Third-party notices](https://github.com/NVlabs/SoftMimicGen/blob/c9d146ba57358a544167de8ebe946caaac8f6220/THIRD_PARTY_NOTICES.md) · [Third-party license details](https://github.com/NVlabs/SoftMimicGen/blob/c9d146ba57358a544167de8ebe946caaac8f6220/THIRD_PARTY_LICENSES.md).
+
+## A practical data-adoption checklist
+
+Use this checklist for a small pilot before expanding generation. It is an evaluation plan, not a claim that the paper or public release supplies every field.
+
+| Check | Evidence to collect | Decision it supports |
+| --- | --- | --- |
+| Object state | Node representation, geometry version, coordinate frames and access at each subtask boundary | Can the generator observe the state it assumes? |
+| Task decomposition | Boundary annotations, object associations, fixed order and required recovery branches | Does the demonstrated sequence cover the intended workflow? |
+| Action interface | Controller mode, units, timing, limits and embodiment-specific configuration | Can trajectories be executed without silently changing their meaning? |
+| Seed coverage | Starting shapes, grasps, operators, accepted attempts and rejected attempts | Where is the generated distribution narrow or selectively filtered? |
+| Material and contact | Simulation parameters, calibration evidence and held-out physical materials | Which parts of transfer are measured rather than assumed? |
+| Access and licensing | Pinned source revision, data manifest, checksums, asset terms and dependency notices | Can the exact artifacts be obtained and reused for the intended work? |
+| Physical acceptance | Predeclared success rules, trial counts, interventions, all training seeds and failure logs | Does the trained policy meet the lab's own task requirements? |
+
+Start with one well-instrumented task and an explicit stopping rule for the pilot. Retain the source demonstration, generated trajectory, policy version and real trial record as separate artifacts. That makes a disappointing result actionable: the team can improve data coverage, perception or control instead of simply requesting more synthetic episodes.
+
+For help defining a source-backed evaluation scope, use [RoboSkin research services](/research-services). The service inquiry is separate from this paper review; no implementation or performance of SoftMimicGen has been independently validated here.
+
+## Primary sources and review scope
+
+- [arXiv record: title, authors and March 26, 2026 v1](https://arxiv.org/abs/2603.25725)
+- [Full v1 method, experiments and limitations](https://arxiv.org/html/2603.25725v1)
+- [Official project and demonstration videos](https://softmimicgen.github.io/)
+- [Official source repository at the reviewed revision](https://github.com/NVlabs/SoftMimicGen/tree/c9d146ba57358a544167de8ebe946caaac8f6220)
+
+Source review completed October 23, 2026. Runtime reproduction, dataset archive contents and physical evaluation denominators remain unverified. Future source revisions should be checked against this dated review before adopting its access or setup details.
+`
+  },
+  {
     id: 'slipsense-multimodal-slip-detection-2026',
     title: 'SlipSense: from pressure and vibration to a timely regrasp',
     seoTitle: 'SlipSense: Slip Detection, Latency & Regrasp Evidence',
