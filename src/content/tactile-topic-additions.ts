@@ -121,6 +121,29 @@ export const eSkinAdditions: Section[] = [
     ],
     links: [tactileSources.eluminator, { label: 'NUS September 28 research announcement', href: 'https://news.nus.edu.sg/electronic-skin-see-touch/' }, { label: 'Compare surgical sensing approaches', href: '/applications#surgical-robotics' }],
   },
+  {
+    id: 'garment-gui', heading: 'Touch-sensitive textiles are not automatically robot skin',
+    body: [],
+    contextLinks: [
+      {
+        before: 'NUS describes an October 21, 2026 Nature study combining addressable pixels and touch localization in digital fibres to form a 96 × 54-pixel sleeve interface. Its 30-frame-per-second display refresh is not a robot tactile-control rate. Unlike eLuminator’s pixel-free pressure visualization, this system combines an electronically addressed display with touch input. ',
+        label: 'NUS system description', href: 'https://news.nus.edu.sg/worlds-first-touchscreen-in-garment/', after: '.',
+      },
+      {
+        before: 'NUS reports nearly unchanged light output and touch response after 50 detergent washes and 1,000 bends around a 5 mm radius. These are author-reported prototype tests, not RoboSkin.ai measurements or evidence of abrasion resistance on a working gripper. ',
+        label: 'Reported wash and bend tests', href: 'https://news.nus.edu.sg/worlds-first-touchscreen-in-garment/', after: '.',
+      },
+      {
+        before: 'For robot integration, ask separately for force and shear calibration, contact-to-controller latency, mounting repeatability and performance after realistic wear. Display resolution and touch location do not establish those properties. The public repository contains source-data files and image/video conversion scripts; its README does not document a ready-made robot driver. ',
+        label: 'Author repository and script instructions', href: 'https://github.com/ZiangLi-NUS/GarmentGUI/tree/c829120a496fcc44a221635bcfd351c27b522f0d', after: '.',
+      },
+    ],
+    links: [
+      { label: 'Nature paper: Touch-sensing digital pixel fibre enables interactive garment GUI', href: 'https://www.nature.com/articles/s41586-026-11128-9' },
+      { label: 'Compare eLuminator pressure visualization', href: '/e-skin#eluminator' },
+      { label: 'Define a robot sensor acceptance trial', href: '/guides/how-to-choose-a-tactile-sensor#acceptance-trial' },
+    ],
+  },
 ];
 
 export const icraTutorialSection: Section = {
