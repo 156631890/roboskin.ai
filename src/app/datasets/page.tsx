@@ -25,6 +25,12 @@ export default function TactileDatasetsPage() {
     <>
       <JsonLd data={buildTactileDatasetsJsonLd(tactileDatasetEntries)} />
       <SeoTopicArticle page={page} leadContent={
+        <>
+        <nav className="container-shell mb-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-accent underline underline-offset-4" aria-label="Dataset validation resources">
+          <Link href="/guides/lerobot-dataset-format#download">LeRobot numeric validation ↗</Link>
+          <Link href="/guides/lerobot-dataset-format#official-loader">Run the official LeRobot loader ↗</Link>
+          <a href="/resources/tactile-dataset-selection-checklist.csv" download>Download selection checklist</a>
+        </nav>
         <TactileDatasetExplorer entries={tactileDatasetEntries} useCases={[
           { label: 'Active perception', ids: ['romi-2k'] },
           { label: 'Materials & representations', ids: ['rct', 'tvl', 'touch-and-go', 'objectfolder-real', 'objectfolder-2', 'tacverse', 'univtac-encoder-pretraining-corpus'] },
@@ -32,6 +38,7 @@ export default function TactileDatasetsPage() {
           { label: 'Full-hand touch', ids: ['ht-bench', 'humanoid-vta', 'tactidex'] },
           { label: 'Human demonstrations', ids: ['tacclaw-infinity', 'egotouch', 'freetacman', 'vtdexmanip', 'touch-and-go', 'tactidex'] },
         ]} />
+        </>
       }>
         <DatasetAvailabilityAnalysis entries={tactileDatasetEntries} />
         <TactileDataCandidates />

@@ -90,6 +90,11 @@ export default function Home() {
               </Link>
             ))}
           </nav>
+          <nav className="contact-utility-links mt-6" aria-label="Research tools">
+            <Link href="/vla/models">Compare VLA models ↗</Link>
+            <Link href="/guides/lerobot-dataset-format#download">LeRobot dataset validation ↗</Link>
+            <Link href="/guides/gelsight-vs-digit#evaluation-plan">GelSight vs DIGIT evaluation plan ↗</Link>
+          </nav>
         </div>
       </section>
 
