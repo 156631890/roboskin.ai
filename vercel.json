@@ -7,6 +7,13 @@
   "crons": [{ "path": "/api/reports-cron", "schedule": "17 * * * *" }],
   "routes": [
     {
+      "src": "^/tactile-sensors/?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://roboskin.ai/sensors"
+      }
+    },
+    {
       "src": "/physics-ai",
       "status": 301,
       "headers": {
