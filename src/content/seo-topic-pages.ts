@@ -5260,8 +5260,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robotics hardware pillar',
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-10-20',
-    revisionNote: 'October 20, 2026: added a source-bounded anthropomorphic versus symmetric hand case and a procurement acceptance checklist. The Cartesian Hand route and existing evidence tables are retained.',
+    updated: '2026-10-23',
+    revisionNote: 'October 23, 2026: added a bounded Robotiq 2FC upgrade and software-acceptance example. October 20, 2026: added a source-bounded anthropomorphic versus symmetric hand case and a procurement acceptance checklist. The Cartesian Hand route and existing evidence tables are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5310,6 +5310,13 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Degrees of freedom and actuator count describe architecture, not universal dexterity. Payload, fingertip force, speed, repeatability, tactile coverage, compliance, environmental tolerance, power, mass, maintenance, software access, and task evidence all matter. Values from different test methods should not be placed in one ranked table without aligning definitions and conditions.',
           'For procurement or research selection, record whether each specification is a manufacturer statement, a calibrated measurement, a peer-reviewed result, an independent benchmark, or an observation from a demonstration. Unknown fields should stay unknown rather than being inferred from a product image or marketing name.',
+          "Robotiq's 2FC illustrates upgrade-versus-replacement evaluation: the manufacturer describes adding TSF fingertips and an AI Hub to 2F-85 or 2F-140 grippers. Reviewed October 23, 2026: pre-orders advertise Q1 2027 shipping, not an in-stock commitment. The 1000 Hz specification applies to dynamic sensing, not end-to-end latency or the complete control loop.",
+          "Request a revision-matched bill of materials, timestamped logs with clock-alignment and packet-loss checks, and exact Contact Core skill interfaces, software versions, licenses and delivery milestones. Existing control, tactile and simulation repositories do not establish that every new 2FC skill SDK is released; a saved repository list is not live availability evidence. Agree object-specific slip, recovery and wear acceptance criteria. These are manufacturer claims and proposed checks, not RoboSkin hardware tests.",
+        ],
+        links: [
+          { label: 'Robotiq 2FC: upgrade and shipping scope', href: 'https://robotiq.com/physical-ai-grippers' },
+          { label: 'Contact Core software and compatibility overview', href: 'https://robotiq.com/contact-core-robotiq' },
+          { label: 'TSF-85 specifications and revision-level compatibility', href: '/sensors/robotiq-tsf-85' },
         ],
         table: {
           headers: ['Comparison field', 'What to record', 'Evidence check'],
