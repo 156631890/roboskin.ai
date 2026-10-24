@@ -2880,7 +2880,7 @@ For RoboSkin.ai, the useful editorial rule is simple: slip detection claims shou
       'A technical brief on bioinspired spiking architecture, large-area soft e-skin, low-power tactile localization, and neuromorphic touch processing.',
     content: `# Energy constrained touch encoding for large-area e-skin
 
-**Updated technical brief - June 2026**
+**Technical brief published June 18, 2026; updated October 24, 2026 with a related synthetic-input study.**
 
 ## Why this source matters
 
@@ -2905,6 +2905,14 @@ The strongest lesson is architectural. Robot skin should not be evaluated only a
 
 This matters for Physical AI because tactile feedback becomes useful only when it can influence action. A delayed contact map is less valuable than a lower-power contact event that arrives quickly enough to change grip, stop motion, or log an interaction.
 
+## Synthetic touch is not a chip power measurement
+
+A related Frontiers study, [Orientation detection for self-calibrating neuromorphic systems](https://www.frontiersin.org/journals/computational-neuroscience/articles/10.3389/fncom.2026.1878557/full), was published on October 23, 2026 after acceptance on September 23. It provides a useful evidence contrast to the hardware-oriented source above, rather than a newly demonstrated physical sensor.
+
+The authors classify bar orientations using synthetic pressure patterns on a simulated 15 × 15 taxel patch. They assume instantaneous stimulation, omitting touch-onset dynamics. Different receptive-field layouts feed a spiking network with local learning; describing its rules as hardware-compatible does not establish deployment on a chip or successful robot control. Network settings still require tuning for the conditions being evaluated.
+
+The energy result is a first-order estimate from spike statistics, not measured chip power. A [sensor acceptance trial](/guides/how-to-choose-a-tactile-sensor#acceptance-trial) should separately request recorded dynamic tactile inputs, a named hardware implementation, measured energy boundaries and end-to-end latency. These are adoption checks, not results demonstrated by this study. The paper identifies dynamic-data evaluation and neuromorphic hardware deployment as future work; RoboSkin.ai has not reproduced its experiments.
+
 ## Evaluation checklist
 
 - Check whether power consumption is measured at the sensor, processor, or whole system level.
@@ -2926,7 +2934,7 @@ This note supports a narrower claim: large-area e-skin evaluation must include c
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
+    updated: '2026-10-24',
     readTime: '5 min read',
     category: 'Neuromorphic Touch',
     image: '/generated/research-neuromorphic-2026.svg',
