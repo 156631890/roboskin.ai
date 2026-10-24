@@ -100,7 +100,9 @@ test('sensor profiles and task candidates resolve to visible directory records a
   const directory = graphNodes(document).find((node) => node?.['@type'] === 'ItemList' && node.numberOfItems === tactileSensorEntries.length);
   assert.ok(directory, 'Structured data must cover the same sensor inventory as the table');
   for (const profile of sensorDetailPages) {
-    const id = profile.path.split('/').at(-1);
+    // The branded profile keeps the existing uSkin directory identity and anchor.
+    const slug = profile.path.split('/').at(-1);
+    const id = slug === 'xela-uskin' ? 'uskin' : slug;
     assert.ok(ids.has(id), `${profile.path} is missing from the filterable directory`);
     assert.ok(document.querySelector(`#sensor-${id} a[href="${profile.path}"]`), `${id} needs a row-to-profile link`);
   }

@@ -1,3 +1,4 @@
+import { printedTactileGuide } from '@/content/printed-tactile-guide';
 import { omnimodalSection, omnimodalFaqs, omnimodalSources, contactStateSection, contactStateFaqs, contactStateSources } from '@/content/longtail-october-20';
 import { aspireSetup } from '@/content/aspire-setup';
 import { opticalTactileGuides } from '@/content/optical-tactile-guides';
@@ -65,6 +66,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  printedTactileGuide,
   ...opticalTactileGuides,
   aspireSetup,
   tactileSelectionGuide,
@@ -1262,18 +1264,116 @@ export const seoTopicPages: SeoTopicPage[] = [
     h1: 'Robot hand tactile sensor guide',
     kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
-    updated: '2026-07-21',
+    updated: '2026-10-24',
+    revisionNote: 'October 24, 2026: clarified sensing positions versus channels, configuration-specific counts, coverage and acceptance timing.',
     priority: 0.81,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
     keywords: ['robot hand tactile sensor', 'tactile robot hand', 'robot hand touch sensor', 'dexterous hand tactile sensing', 'robot hand slip detection'],
     quickAnswer: [
+      'There is no universal number of tactile sensing positions required for a robot hand. Choose contact coverage and validated resolution for the task, then verify timing and calibration.',
       'A robot hand tactile sensor measures contact at the hand surface so the robot can understand pressure, slip, grasp stability, and local interaction events.',
       'Fingertip sensors are useful for pinch and precision tasks, while palm and full-hand skin help with power grasps, handovers, and multi-contact manipulation.',
       'A strong robot hand evaluation covers mounting, wiring, calibration, latency, signal interpretation, and whether tactile data improves a real manipulation task.',
     ],
     sections: [
+{
+  "heading": "How many tactile sensing positions does a robot hand need?",
+  "body": [
+    "There is no universal required taxel count. Define the contacts that must be detected and the action each observation should change. A dense fingertip cannot observe an uncovered palm, and broad coverage does not necessarily resolve a small contact feature.",
+    "Use the terms below separately. Count and density describe a layout; effective resolution describes what the complete calibrated system can distinguish under a stated test."
+  ],
+  "id": "taxel-count-and-coverage",
+  "table": {
+    "headers": [
+      "Term",
+      "Meaning for a hand specification"
+    ],
+    "rows": [
+      [
+        "Taxel or sensing position",
+        "One spatial sensing location; specify the measured quantities at that location"
+      ],
+      [
+        "Module",
+        "A packaged group of locations, with mounting and readout requirements"
+      ],
+      [
+        "Axes or measurement channels",
+        "Different quantities or directions; three force axes do not triple the spatial count"
+      ],
+      [
+        "Pitch and density",
+        "Center-to-center spacing and positions per stated area; neither is the same as point footprint"
+      ],
+      [
+        "Coverage",
+        "The surfaces actually sensed, including gaps, edges and inaccessible regions"
+      ],
+      [
+        "Effective resolution",
+        "The smallest distinction validated with the complete mechanics, signal processing and calibration"
+      ]
+    ]
+  },
+  "links": [
+    {
+      "label": "Model-specific uSkin counts and interfaces",
+      "href": "/sensors/xela-uskin"
+    },
+    {
+      "label": "OpenTac fabrication and readout evidence",
+      "href": "/research/opentac-custom-tactile-skins-readout-limits-2026"
+    }
+  ]
+},{
+  "heading": "Two documented layouts illustrate counts, not a ranking",
+  "body": [
+    "XELA lists 368 sensing positions for its complete Allegro Hand V4 Curved layout and 114 for the Tesollo DG-5F-M layout. Their corresponding 1,472 and 456 measurement items each include three-axis touch plus internal temperature. Those item totals are not taxel totals.",
+    "These are different geometries and configurations, not a matched experiment demonstrating that one hand performs better. Compare the intended contact map and missing coverage before comparing counts. The detailed model profile separates fingertip rates from other modules and whole-hand constraints."
+  ],
+  "links": [
+    {
+      "label": "XELA: Allegro Hand V4 Curved configuration",
+      "href": "https://xelarobotics.com/products/for-allegro-hand-v4-curved/"
+    },
+    {
+      "label": "XELA: Tesollo hand configuration",
+      "href": "https://xelarobotics.com/products/for-tesollo-hand/"
+    },
+    {
+      "label": "XELA uSkin model evidence",
+      "href": "/sensors/xela-uskin"
+    }
+  ]
+},{
+  "heading": "Specify coverage and timing in the acceptance trial",
+  "body": [
+    "Make the buying or building decision with a task-specific contact map and a repeatable test. The following checks are proposed evaluation steps, not RoboSkin.ai hardware measurements."
+  ],
+  "bullets": [
+    "Map fingertip, side and palm contacts for the intended grasps; test likely blind regions and small objects.",
+    "Distinguish sensor update, whole-array refresh and host output. For partial reads, record which positions were sampled and the age of reused values.",
+    "Measure contact detection through controller action, including acquisition, transport, processing and command delay.",
+    "Check reference loads and held-out contacts before and after remounting or replacing surfaces.",
+    "Record misses, false contact detections, saturation and recovery, rather than reporting only successful grasps."
+  ],
+  "links": [
+    {
+      "label": "Plan a tactile calibration protocol",
+      "href": "/guides/tactile-sensor-calibration"
+    },
+    {
+      "label": "OpenTac fabrication and readout evidence",
+      "href": "/research/opentac-custom-tactile-skins-readout-limits-2026"
+    },
+    {
+      "label": "Compare fabrication routes",
+      "href": "/guides/3d-printed-tactile-sensors"
+    }
+  ]
+},
       {
         heading: 'Where tactile sensing belongs on a robot hand',
         body: [
@@ -1303,6 +1403,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'How many taxels does a robot hand need?', answer: 'There is no task-independent required count. Specify sensing positions, axes, pitch, coverage and effective resolution separately, then validate blind spots and contact-to-action timing on the intended hand.' },
       {
         question: 'Is a robot hand tactile sensor the same as robot skin?',
         answer:
