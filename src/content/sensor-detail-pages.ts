@@ -1,9 +1,11 @@
+import { xelaUskin } from '@/content/xela-uskin';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { practicalSensingSources as sources } from '@/content/tactile-practical-guides';
 import { melexisTactaxis } from '@/content/melexis-tactaxis';
 import { loomiaSmartSkin } from '@/content/loomia-smart-skin';
 
 export const sensorDetailPages: SeoTopicPage[] = [
+  xelaUskin,
   melexisTactaxis,
   loomiaSmartSkin,
   {

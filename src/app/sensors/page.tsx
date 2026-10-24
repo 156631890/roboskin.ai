@@ -30,7 +30,7 @@ export default function TactileSensorsPage() {
       `/organizations#organization-${organizationId}`,
     ]),
   );
-  const detailLinks = Object.fromEntries(sensorDetailPages.map((item) => [item.path.split('/').at(-1)!, item.path]));
+  const detailLinks = { ...Object.fromEntries(sensorDetailPages.map((item) => [item.path.split('/').at(-1)!, item.path])), uskin: '/sensors/xela-uskin' };
 
   return (
     <>
