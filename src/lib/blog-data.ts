@@ -24,6 +24,98 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "opentac-custom-tactile-skins-readout-limits-2026",
+    title: "OpenTac Explained: Custom Tactile Skins, Shear Feedback and Partial-Readout Limits",
+    seoTitle: "OpenTac: Custom Tactile Skins & Readout Limits",
+    seoDescription: "Understand OpenTac custom skins, shear feedback, partial-readout rates and transfer limits, with manufacturing, calibration and license checks.",
+    excerpt: "A source-reviewed guide to OpenTac fabrication, normal/shear sensing and adaptive acquisition, separating reported robot results from the work still needed for integration.",
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-10-24",
+    updated: "2026-10-24",
+    readTime: "9 min read",
+    category: "Tactile sensing",
+    image: "/generated/research-scalable-manufacturing-2025.svg",
+    sourceTitle: "OpenTac: An Open Ecosystem for Customizable, Scalable, and Transferable 3D Tactile Sensing",
+    sourceUrl: "https://arxiv.org/abs/2610.31661",
+    citationUrls: ["https://arxiv.org/abs/2610.31661", "https://arxiv.org/html/2610.31661v1", "https://opentac.github.io/", "https://github.com/opentac/opentac/tree/e21a8ae283711591f8722609ba399d8ebad8ebaa"],
+    technicalFocus: ["custom tactile skins", "normal and shear sensing", "adaptive partial readout", "contact-shape transfer", "fabrication and calibration"],
+    content: `# OpenTac Explained: Custom Tactile Skins, Shear Feedback and Partial-Readout Limits
+
+OpenTac is a research toolkit for designing and fabricating tactile skins that fit a robot surface, then reading, simulating and comparing their contact signals. Its useful contribution is the connection between geometry, electronics, mechanical covers and software. A custom outline alone does not deliver a calibrated, durable robot sensor: the assembly and its readout still need application-specific validation.
+
+This RoboSkin.ai interpretation was published on October 24, 2026. It reviews Ariel Slepyan and colleagues' **October 22, 2026 arXiv v1 preprint**, not a newly published October 24 paper or a verified peer-reviewed result. Experiments below are author-reported. We read the paper, project and public repository, but did not install OpenTac, fabricate a skin, run its tests or reproduce a robot experiment. [Paper record](https://arxiv.org/abs/2610.31661) · [Official project](https://opentac.github.io/).
+
+The decision for an integration team is whether customizable coverage and shear-sensitive contact measurements justify the manufacturing, calibration and maintenance work. The [e-skin overview](/e-skin) introduces surface sensing; the [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) helps turn requirements into an acceptance trial.
+
+## What measures normal and shear contact
+
+The sensor combines a flexible printed circuit board, a piezoresistive film and a deformable mechanical cover. Pressure changes the film's local resistance at the board's taxels. In a bump-covered configuration, a bump spreads its load across neighboring taxels. A roughly shared response carries normal-load information; differences between neighboring responses carry tangential information. The paper describes an optional calibrated mapping from these signal combinations to force units. Raw counts, normal/shear signal proxies and calibrated newtons are different outputs. [Sensor design, Section 3.1](https://arxiv.org/html/2610.31661v1#S3.SS1).
+
+The bump cover is part of the transducer. Changing its shape, material or mounting changes how contact reaches the sensing film, so the calibration should follow the complete assembly. The paper's material and geometry studies also show why a taxel pitch or film choice cannot be treated as a cosmetic CAD setting: those choices affect sensitivity and saturation as well as spatial sampling. [Characterization, Section 4.2](https://arxiv.org/html/2610.31661v1#S4.SS2).
+
+## Custom geometry still needs a manufacturable surface
+
+OpenTac-CAD accepts outlines and selected mesh surfaces, generates a sensing layout and routing, and exports fabrication information plus a shared sensor manifest. The manifest records physical taxel positions, electrical addressing, connector mapping and mechanical grouping. This matters on irregular skins because scan order and physical neighbors need not be the same. The authors report 31 fabricated layouts; language-assisted design examples are a separate evaluation of design generation, not proof that every suggested shape was fabricated. [CAD and design evaluation](https://arxiv.org/html/2610.31661v1#S3.SS2).
+
+**Flexible does not mean stretchable.** The paper limits mesh-derived layouts to developable patches that can be flattened. Cylindrical, conical or faceted regions can be suitable; an arbitrary doubly curved area cannot simply become a distortion-free flat PCB. For a proposed gripper, inspect patch boundaries, cable exit, connector clearance, mounting and contact coverage before ordering parts. These are integration checks, not guarantees from a successful CAD export. [Limitations](https://arxiv.org/html/2610.31661v1#S5).
+
+## 1286 updates per second is a partial readout
+
+The acquisition benchmark concerns a 32 × 32 skin containing 1024 taxels. The fast condition reads a small budget of taxels per update, whereas raster scanning reads the full array. These are different spatial measurements, even when both are described as frames. [Adaptive acquisition, Section 4.7 and Figure 12](https://arxiv.org/html/2610.31661v1#S4.SS7).
+
+| Author-reported condition | Taxels sampled per update | Reported rate | What it establishes |
+| --- | --- | --- | --- |
+| Full raster scan | All 1024 | 67 frames/s | Complete-array sampling in the reported setup |
+| Fast adaptive partial scan | 16 | 1286 updates/s | Faster updates with incomplete spatial sampling |
+
+The adaptive method divides its budget between searching the skin and revisiting recently active regions. It uses the expectation that contact is localized and changes coherently over time. A larger or distributed contact needs more samples, reducing the speed advantage. An unsampled taxel is unknown for that update; it should not silently become a zero-pressure measurement. [Acquisition method](https://arxiv.org/html/2610.31661v1#S3.SS5).
+
+For a controller, ask for the sampled-taxel mask, timestamps, age of reused values and behavior when contact appears outside the current region. Measure contact-to-host and host-to-action delay separately. The paper's readout rate does not establish a 1286 Hz full-skin force map, a 1286 Hz robot controller or a guaranteed worst-case detection latency. Match the benchmark's array, board and firmware configuration before using its numbers in a specification.
+
+## Shear feedback evidence includes a mechanical change
+
+In the SO-101 manipulation experiments, the authors compare normal-only and bump-covered OpenTac variants using the same skin and readout board. They train policies with joint state alone and with tactile observations; the reported protocol uses 100 demonstrations and 50 evaluation trials per policy. For plug insertion, the bump-covered tactile policy reports 70% success against 54% for its corresponding joint-state-only baseline: a **16-percentage-point difference**, not a general product success rate. [Policy learning, Section 4.4](https://arxiv.org/html/2610.31661v1#S4.SS4).
+
+The cover also changes contact mechanics and grip friction. The authors therefore include per-sensor proprioception-only baselines. This is evidence for evaluating the combined sensor/interface configuration, not a clean claim that adding a software shear channel alone causes the same improvement on any gripper. For an adoption trial, keep the object, surface, mount, demonstrations and controller comparable, and log both failures and successes. The [tactile manipulation guide](/tactile-manipulation) gives the broader feedback-control context.
+
+## Contact-shape transfer is narrower than policy transfer
+
+OpenTac-Transfer maps calibrated observations using physical coordinates, surface alignment and source/target calibration. The reported transfer experiment uses four smooth, bump-free skins and supplies contact pose to every predictor. Its score compares the predicted and measured **normal-contact shape** after spatial processing and thresholding. It does not evaluate transferred shear-force accuracy or a manipulation policy moved from simulation to a real robot. [Transfer method](https://arxiv.org/html/2610.31661v1#S3.SS4) · [Evaluation, Section 4.6](https://arxiv.org/html/2610.31661v1#S4.SS6).
+
+OpenTac-Sim is another component: the paper describes different models for bump-covered and smooth skins, and limits the current stable sensor-object simulation to rigid objects. Compatible manifests and output formats simplify engineering interfaces, but do not remove model error. A plausible contact picture is not enough to certify force magnitude, material behavior or a deployed policy. [Simulation scope](https://arxiv.org/html/2610.31661v1#S3.SS3).
+
+## Calibration, drift and wear remain acceptance work
+
+The paper explicitly retains hysteresis, drift and temperature dependence as piezoresistive-sensing limitations. Its ten-hour repeated-indentation test reports an initial response change before stabilization and recommends warmup or relative measurements for consistency. That protocol is not an abrasion, cleaning, chemical-resistance or service-life qualification for a working gripper. [Endurance test](https://arxiv.org/html/2610.31661v1#S4.SS8) · [Limitations](https://arxiv.org/html/2610.31661v1#S5).
+
+Our proposed acceptance record should include:
+
+- **Geometry and version:** the exact PCB, film, cover, mount, manifest, readout board and firmware used.
+- **Calibration:** normal and tangential loading directions, useful range, saturation, repeated loading/unloading and variation across locations or replacements.
+- **Timing:** complete versus partial sampling, spatial masks, stale values, transport delay and the actual controller update schedule.
+- **Environment:** temperature, warmup, accumulated cycles and the cleaning or abrasion conditions relevant to the application.
+- **Task evidence:** a matched baseline, held-out conditions, trial counts, failure categories and checks after remounting.
+- **Cost and maintenance:** fabrication yield, covers, readout electronics, fixtures, calibration labor, spares and integration time. A paper's sensor-only estimate is not a current complete-system quote.
+
+These are RoboSkin.ai engineering questions, not additional results attributed to the authors. Teams needing help defining the evaluation can use the existing [research services inquiry](/research-services).
+
+## Public repository and licensing boundaries
+
+We inspected repository commit **e21a8ae** (the source links below pin the full version) on October 24. It includes a Python package, firmware, hardware design files, examples and tests. Its README notes that some tests skip on a fresh clone because required data is absent, with further optional dependencies for other checks. We did not execute that suite or verify a complete reproduction package. [Reviewed README](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/README.md).
+
+| Material | License identified in the reviewed repository | Boundary to retain |
+| --- | --- | --- |
+| Code | MIT | Applies to the covered code, not automatically every bundled asset |
+| Hardware designs | CERN-OHL-P-2.0 | Read the hardware license for the design being used |
+| Documentation and media | CC BY 4.0 | Separate attribution terms from code licensing |
+| Third-party robot meshes | Their own source licenses | Some are non-commercial or have unresolved source/licensing notes |
+
+The repository's [mesh-source inventory](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/examples/stl/end_effectors/SOURCES.md) explicitly separates third-party meshes from OpenTac's licenses. Do not describe the entire checkout as unrestricted commercial material. This article copies no project image, robot mesh or fabrication asset; it links the [code license](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/LICENSE), [hardware license](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/LICENSE-hardware) and [documentation/media license](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/LICENSE-docs) for review.
+
+OpenTac is worth evaluating when a team needs a custom contact surface and can own fabrication, calibration and integration. A useful first milestone is a small, versioned patch with documented force and timing behavior on the intended mount. Expanding coverage or adding a learned policy should follow that evidence, rather than treating a fast partial readout or a transferable contact shape as a complete robot-skin qualification.
+`,
+  },
+  {
     id: 'softmimicgen-synthetic-data-sim-to-real-2026',
     title: 'SoftMimicGen Explained: Synthetic Data, Sim-to-Real Results and Tactile Limits',
     seoTitle: 'SoftMimicGen: Robot Data, Sim-to-Real & Tactile Limits',
