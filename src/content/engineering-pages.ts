@@ -14,11 +14,11 @@ export const lerobotTutorial: ProgrammingPage = {
   path: '/guides/lerobot-dataset-format',
   title: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   h1: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
-  description: 'Understand LeRobot dataset v3 metadata, Parquet, video and episode timing. Run a small Python checker on synthetic numeric data and inspect its limits.',
+  description: 'Read LeRobot v3 metadata and episode timing, inspect video, state and action with the official visualizer, and run a bounded Python numeric checker.',
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
-  published: checked, updated: '2026-10-17', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
-  keywords: ['lerobot dataset format', 'lerobot dataset v3', 'robot dataset validation'],
-  verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility.',
+  published: checked, updated: '2026-10-25', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  keywords: ['lerobot dataset format', 'lerobot dataset v3', 'lerobot dataset visualizer', 'robot dataset validation'],
+  verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility. The visualizer workflow added October 25, 2026 was checked against official documentation and v0.6.1 source; RoboSkin did not launch its viewer or decode a video episode for this addition.',
   quickAnswer: ['LeRobot dataset v3.0 separates storage files from episodes: multiple episodes can share Parquet and MP4 shards, while metadata identifies each episode and its offsets. A filename is not an episode boundary.', 'Start by checking what each observation and action means, then check shapes, timestamps and episode coverage. Passing a numeric check does not establish that a policy can use the data.'],
   sections: [
     { id: 'version', heading: 'Which version does this guide describe?', body: [
@@ -51,6 +51,26 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
       ['observation.tactile [4]', 'Four independently designed teaching taxels in row-major 2 × 2 order.', 'Arbitrary units, not newtons or pressure; an invalid sample remains unknown.'],
       ['observation.tactile_valid [4]', 'Boolean validity for the four custom tactile values.', 'One false flag accompanies a null; a null marked true is an error.'],
     ] }, links: [{ label: 'Source: writer-generated frame indices and timestamps', href: `${lerobotSource}/dataset_writer.py` }, teleop] },
+    { id: 'dataset-visualizer', heading: 'Use the LeRobot dataset visualizer to inspect an episode', body: [
+      'The official browser visualizer lets you choose a Hub dataset and episode, then inspect camera recordings alongside state and action charts. Open the linked SO-101 example, pause near a visible movement and select the corresponding chart position. Record the repository, revision and episode ID with any finding. This is a route to the official tool, not a RoboSkin-hosted viewer or a verified tactile dataset.',
+      'For local viewing, the command below follows the LeRobot 0.6.1 documentation and script. Use a separate environment with the official installation prerequisites, including its video dependencies. The dataset_viz extra supplies visualization dependencies; the Hub example may download dataset files. The package version is separate from format v3.0, and the live browser Space can change independently. These commands were source-checked on October 25, 2026, not executed in this review.',
+    ], code: [
+      { label: 'Existing clean LeRobot-compatible environment — source-checked, not executed here', language: 'bash', value: 'python -m pip install "lerobot[dataset_viz]==0.6.1"\nlerobot-dataset-viz --help\nlerobot-dataset-viz --repo-id lerobot/pusht --episode-index 0' },
+    ], table: { headers: ['Inspect', 'Review step', 'What it does not establish'], rows: [
+      ['Time and frame', 'In the local Rerun viewer, inspect the timestamp and frame_index timelines around a selected event. Compare the dataset row and declared FPS; check the episode boundaries in metadata.', 'Smooth playback does not prove capture-clock synchronization or recover timing lost during resampling.'],
+      ['State and action', 'Read dimension names and units from the dataset contract. At the same selected time, compare observation.state with action and the visible motion; retain the interval if a discontinuity needs investigation.', 'A command need not equal the observed state. Different units, control conventions or physical response can explain a difference.'],
+      ['Camera frames', 'Inspect each camera at the event and nearby frames. Check camera identity, freezes, missing views and whether visible motion agrees with the selected interval; retain camera keys and timestamps.', 'Visual agreement is a screening observation, not a calibrated alignment measurement or a training-quality certificate.'],
+    ] }, bullets: [
+      'The existing numeric fixtures below contain no video. Their passing reports do not validate either viewer, this public example or a new dataset.',
+      'If the command or decoder fails, record the installed version, dataset revision and full error before following the matching official installation guidance. Do not change FPS, pad data or remove episodes just to obtain playback.',
+    ], links: [
+      { label: 'Open the official LeRobot dataset visualizer', href: 'https://huggingface.co/spaces/lerobot/visualize_dataset' },
+      { label: 'Official browser example: SO-101 pick-and-place, episode 0', href: 'https://huggingface.co/spaces/lerobot/visualize_dataset?path=/lerobot/svla_so101_pickplace/episode_0' },
+      { label: 'Official browser inspection walkthrough', href: 'https://huggingface.co/docs/lerobot/main/using_dataset_tools#explore-a-dataset-in-the-browser' },
+      { label: 'LeRobot 0.6.1 visualization commands', href: 'https://huggingface.co/docs/lerobot/v0.6.1/using_dataset_tools#dataset-visualization' },
+      { label: 'LeRobot 0.6.1 installation prerequisites', href: 'https://huggingface.co/docs/lerobot/v0.6.1/installation' },
+      { label: 'Versioned viewer source: dependencies, arguments and time axes', href: 'https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/scripts/lerobot_dataset_viz.py' },
+    ] },
     { id: 'download', heading: 'Download the complete numeric exercise', body: [
       'The ZIP includes check_dataset.py, generate_fixtures.py, test_validator.py, requirements.txt, two tiny Parquet fixtures, an example field contract and the reports produced in our run. All data is independently generated synthetic data. It does not reuse robot demonstrations or represent a physical tactile sensor.',
       'This is intentionally not a complete loadable LeRobot dataset: the fixtures omit task-text metadata, statistics, images and videos. The checker validates a small numeric snapshot using v3 field and boundary conventions. Use it to learn failure modes or adapt the checks to an export; use the official loader and your policy pipeline for subsequent compatibility checks.',
@@ -142,6 +162,7 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
   relatedLinks: [overview, datasets, teleop, python],
   sources: [
     { label: 'Official LeRobotDataset v3.0 documentation — checked 2026-09-16', href: 'https://huggingface.co/docs/lerobot/lerobot-dataset-v3' },
+    { label: 'Official dataset visualizer documentation — source checked 2026-10-25', href: 'https://huggingface.co/docs/lerobot/v0.6.1/using_dataset_tools#dataset-visualization' },
     { label: 'Pinned LeRobot source: dataset metadata and version', href: `${lerobotSource}/dataset_metadata.py` },
     { label: 'Pinned LeRobot source: storage paths', href: `${lerobotSource}/utils.py` },
     { label: 'Pinned LeRobot source: writer timing and finalization', href: `${lerobotSource}/dataset_writer.py` },

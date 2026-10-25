@@ -51,6 +51,20 @@ export function analyticsCampaign(value, referrer = '') {
   }
 }
 
+const sensorEvaluationResources = new Map([
+  ['/resources/tactile-sensor-evaluation-template.csv', ['sensor-evaluation-template', 'resource_download']],
+  ['/resources/gelsight-digit-comparison-protocol.csv', ['gelsight-digit-protocol', 'resource_download']],
+  ['/resources/gelsight-digit-comparison-trials.csv', ['gelsight-digit-trials', 'resource_download']],
+  ['/resources/gelsight-digit-comparison-slip-events.csv', ['gelsight-digit-slip-events', 'resource_download']],
+  ['/resources/gelsight-digit-comparison-instructions.txt', ['gelsight-digit-instructions', 'resource_open']],
+]);
+
+// Shared fixed IDs keep both analytics providers on the same public resource list.
+export function sensorEvaluationResource(pathname) {
+  const resource = sensorEvaluationResources.get(pathname);
+  return resource ? { id: resource[0], event: resource[1] } : null;
+}
+
 const resourceLinks = new Map([
   ['/robot-vla-models', ['vla-models', 'resource_open']],
   ['/vla/models', ['vla-model-comparison', 'resource_open']],
@@ -83,7 +97,7 @@ const resourceLinks = new Map([
   ['/research-index.json', ['research-index', 'resource_download']],
   ['/experiment-results.csv', ['experiment-evidence', 'resource_download']],
   ['/resources/tactile-dataset-selection-checklist.csv', ['dataset-checklist', 'resource_download']],
-  ['/resources/tactile-sensor-evaluation-template.csv', ['sensor-evaluation-template', 'resource_download']],
+  ...sensorEvaluationResources,
   ['/tutorials/lerobot-validation/lerobot-numeric-validation.zip', ['lerobot-numeric-validation', 'resource_download']],
   ['/tutorials/lerobot-loader/lerobot-official-loader.zip', ['lerobot-official-loader', 'resource_download']],
 ]);

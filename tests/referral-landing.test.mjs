@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 import * as growthBatches from '../src/lib/growth-batches.mjs';
 import * as referralAttribution from '../src/lib/referral-attribution.mjs';
+import * as analytics from '../src/lib/google-analytics.mjs';
 
 const source = readFileSync('src/components/AnalyticsTracker.tsx', 'utf8');
 const compiled = ts.transpileModule(source, {
@@ -31,6 +32,7 @@ function mountTracker(referrer) {
       if (name === 'next/navigation') return { usePathname: () => pathname };
       if (name === '@/lib/growth-batches.mjs') return growthBatches;
       if (name === '@/lib/referral-attribution.mjs') return referralAttribution;
+      if (name === '@/lib/google-analytics.mjs') return analytics;
       if (name === 'react') return {
         useRef(value) { return refs[refIndex++] ??= { current: value }; },
         useEffect(effect) { effects.push(effect); },
@@ -40,8 +42,8 @@ function mountTracker(referrer) {
   });
   return {
     events,
-    clickLink(href) {
-      documentListeners.get('click')?.({ target: { closest: () => ({ href, textContent: 'Download resource', hasAttribute: () => false }) } });
+    clickLink(href, textContent = 'Download resource') {
+      documentListeners.get('click')?.({ target: { closest: () => ({ href, textContent, hasAttribute: () => false }) } });
     },
     render(path) {
       window.location.href = new URL(path, 'https://roboskin.ai').href;
@@ -147,4 +149,29 @@ test('resource downloads retain tutorial tracking and add the same-origin sensor
   tracker.clickLink('https://other.example/resources/tactile-sensor-evaluation-template.csv');
   assert.equal(tracker.events.filter(event => event.event === 'Sensor Evaluation Template Download').length, 1);
   assert.equal(tracker.events.at(-1).event, 'Source Open');
+});
+
+test('sensor comparison resource events contain only fixed IDs and public paths', () => {
+  const tracker = mountTracker('');
+  const from = '/guides/gelsight-vs-digit';
+  tracker.render(`${from}?participant=private@example.com`);
+  const resources = [
+    ['/resources/gelsight-digit-comparison-protocol.csv', 'gelsight-digit-protocol', 'download'],
+    ['/resources/gelsight-digit-comparison-trials.csv', 'gelsight-digit-trials', 'download'],
+    ['/resources/gelsight-digit-comparison-slip-events.csv', 'gelsight-digit-slip-events', 'download'],
+    ['/resources/gelsight-digit-comparison-instructions.txt', 'gelsight-digit-instructions', 'open'],
+  ];
+  for (const [path, id, interaction] of resources) {
+    tracker.clickLink(`${path}?trial=private&resource_id=private#private`, 'private filled-in trial data');
+    assert.deepEqual(tracker.events.at(-1), {
+      event: 'Sensor Evaluation Template Download', from, target: path,
+      batch: growthBatches.growthBatchForPath(from), resource_id: id, interaction,
+    });
+  }
+  assert.equal(tracker.events.length, resources.length);
+  assert.ok(!JSON.stringify(tracker.events).includes('private'));
+  tracker.clickLink('/resources/gelsight-digit-comparison-unlisted.csv');
+  assert.equal(tracker.events.length, resources.length);
+  for (const [path] of resources) tracker.clickLink(`https://other.example${path}`);
+  assert.equal(tracker.events.filter(event => event.event === 'Sensor Evaluation Template Download').length, resources.length);
 });

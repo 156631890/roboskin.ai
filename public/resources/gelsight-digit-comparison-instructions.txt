@@ -1,0 +1,209 @@
+GelSight Mini / original DIGIT matched-task records
+RoboSkin.ai template version: 2026-10-25
+Guide: https://roboskin.ai/guides/gelsight-vs-digit#comparison-records
+
+PURPOSE AND EVIDENCE BOUNDARY
+
+These blank records help plan and document a comparison on your own robot.
+They contain no sensor measurements, simulated results or device ranking.
+RoboSkin.ai has not bench-tested GelSight Mini or original DIGIT for this guide.
+This is a proposed recording method, not a certified benchmark or safety test.
+The CSV files do not execute code, calculate statistics or upload data.
+
+The scope is GelSight Mini and original DIGIT. Keep Digit 360, DIGIT Pinki and
+other GelSight devices in separate, explicitly named evaluations. Hardware
+version, specimen, software and mounting differences matter even within one
+product name. A common task alone does not make all conditions comparable.
+
+FILES AND ORDER
+
+1. Open gelsight-digit-comparison-protocol.csv in a spreadsheet or CSV editor.
+   Fill the two value columns. Match the study ID, task, objects, success rule
+   and controller budget where possible. Describe all remaining differences.
+   Freeze the protocol revision before examining evaluation outcomes.
+
+2. Add one row to gelsight-digit-comparison-trials.csv for EVERY attempted
+   trial, including failures and exclusions. Reuse the exact study, condition
+   and calibration IDs. A trial is an attempted task, not an individual frame.
+   Keep raw evidence and calibration files; use stable local paths or URIs.
+
+3. If evaluating slip, use gelsight-digit-comparison-slip-events.csv for each
+   independently annotated onset and each unmatched detector alarm. Join it
+   to the trial log using study_id + condition_id + trial_id. The event log is
+   optional for tasks that do not evaluate slip.
+
+4. Summarize only after checking missing data, protocol deviations, trial
+   counts and clock alignment. Keep separate results for different conditions
+   and for the held-out groups declared in the protocol.
+
+The trial and event files intentionally have headers only. Add your own rows;
+no apparent zero values or prefilled successes are supplied. Blank means not
+measured or not entered. A blank is never a zero. Use not_applicable only when
+the field does not apply and put the reason in notes. Use numeric 0 only for an
+observed zero. Preserve unknown outcomes as unknown and explain them.
+Quote CSV text containing commas, quotes or line breaks using your editor's
+CSV export. Do not replace raw evidence with a summary spreadsheet.
+
+PROTOCOL DETAILS
+
+Give each configuration a unique condition_id. Record the sensor unit, gel
+state, unloaded reference, software/model revisions, actual robot/hand, mount
+and cable path. Create a new condition when changing an acquisition mode,
+model or gel affects the comparison; retain the relationship to the old one.
+Do not silently overwrite a calibration record.
+
+Separate three kinds of evidence:
+- Configured: requested resolution, FPS, exposure, controller budget.
+- Observed: received frames, timestamps, independently labeled contact,
+  robot-task outcomes and reference measurements.
+- Derived: reconstructed depth, force estimates, detector decisions and
+  statistics calculated from the observed evidence.
+
+An RGB stream is not a calibrated force measurement. Set the target quantity,
+reference, unit and validation range before claiming depth or force accuracy.
+Record the independent reference's uncertainty and repeated-contact error.
+Camera pixel count and requested FPS are not task accuracy or control latency.
+
+TRIAL FIELD DEFINITIONS
+
+Identifiers:
+- study_id / protocol_revision / condition_id: keys from the protocol.
+- trial_id: unique within study and condition; do not reuse after an exclusion.
+- session_id: collection session used to trace time, wear or calibration drift.
+- trial_order: actual execution order; retain the planned ordering separately.
+- object_id / evaluation_group: object and declared split or held-out group.
+- initial_conditions: actual setup and units; record deviations from the plan.
+- calibration_id: version applied to the data or not_applicable with a reason.
+- raw_evidence_path: raw stream/robot log plus metadata needed to interpret it.
+- slip_annotation_path: independent annotation or reference recording.
+
+Status and counts:
+- trial_status: completed, excluded, or incomplete. Completed means the trial
+  reached an outcome; it can be a task failure. Do not label failure excluded
+  merely to improve the success rate.
+- exclusion_reason: required for an exclusion; reference the predeclared rule.
+- frames_received: received frames in the measurement window, including
+  invalid frames if they arrived. Define the window in the protocol.
+- invalid_frames: received frames failing the declared validity rule.
+- observed_stream_rate_hz: measured received rate using the protocol's clock
+  and counting convention; never copy the requested or advertised FPS here.
+- frame_gap_count: gaps under the declared rule. A timestamp gap is not proof
+  of an exact number of lost frames; retain the source timestamps.
+
+Timing:
+- loop_delay_ms: measured delay between the exact start and end events in the
+  protocol. A host receive timestamp cannot establish earlier exposure time.
+- loop_delay_statistic: the actual statistic, such as median or p95, matching
+  the protocol. Do not compare one device's median with another's maximum.
+- loop_delay_sample_count: number of latency observations behind that value.
+- clock_uncertainty_ms: remaining uncertainty after mapping clocks; do not
+  enter zero just because the devices share a host.
+- non_slip_observation_s: independently labeled non-slip exposure used for
+  false-alarm reporting; state any excluded time in the protocol.
+
+Outcomes:
+- task_success: true, false, or unknown under the predeclared end-to-end rule.
+- outcome_reason: evidence for success/failure/unknown, including partial
+  completion, drops, jams or a time-limit failure as appropriate to the task.
+- intervention_count: counted under the protocol's definition. Include its
+  effect on success in outcome_reason; do not silently count assisted trials
+  as unassisted successes.
+- measurement_uncertainty: quantity, unit, method and unresolved limits;
+  reference a fuller calibration/analysis file when needed.
+- protocol_deviation / notes: deviations, missing measurements and reasons.
+
+OPTIONAL SLIP EVENT FIELDS AND MATCHING
+
+Define a physical onset criterion using an independent reference, an alarm
+matching window, and treatment of early or duplicate alarms BEFORE evaluating
+the detector. Match at most one alarm to each physical event. Store each
+additional unmatched alarm as its own false_alarm row under the frozen rule.
+Do not use the detector being evaluated to generate its own ground truth.
+
+event_class is one of:
+- detected: independently confirmed onset with one matching detector alarm.
+- missed: independently confirmed onset with no alarm in the matching window.
+- false_alarm: an alarm without a matching onset under the declared rule.
+- unresolved: reference or timing evidence is insufficient; explain why.
+
+Use event_id to identify one row. reference_evidence_path identifies the
+source used for classification. in_non_slip_window is true, false or unknown
+according to the independently labeled non-slip intervals counted in the trial
+log. It distinguishes false alarms during non-slip exposure from unmatched or
+duplicate alarms outside that exposure. reference_clock names the common time basis.
+onset_lower_s and onset_upper_s bound the reference onset on that clock.
+Use a single value in both fields only when the measurement supports it.
+Keep temporal resolution and annotation ambiguity visible; an image frame
+does not establish an infinitely precise onset time.
+
+detector_event_s is the alarm time mapped to the SAME clock. Leave it blank
+for a missed event. Leave onset bounds blank for an unmatched alarm. Leave
+delay fields blank for missed, false_alarm and unresolved rows; they do not
+have a matched detection delay. Keep detector events before the onset if the
+matching rule permits them; do not clip negative delays to zero.
+
+clock_uncertainty_ms records remaining clock-mapping uncertainty.
+annotation_uncertainty_ms describes additional annotation uncertainty beyond
+the onset interval, if present. Record the method and interpretation in notes;
+do not automatically add quantities with incompatible uncertainty definitions.
+
+For a matched detected event with a shared clock:
+  delay_lower_ms = 1000 * (detector_event_s - onset_upper_s)
+  delay_upper_ms = 1000 * (detector_event_s - onset_lower_s)
+These bound delay from the onset interval only. They are not confidence
+intervals and do not include extra clock/annotation uncertainty automatically.
+Leave them blank if clock alignment is unknown and explain unresolved_reason.
+Retain raw timestamps and the mapping used for any later recalculation.
+
+REPORTING WITHOUT HIDING FAILURES
+
+For each condition and held-out group, report attempted, excluded and
+evaluable trial counts. State the denominator for task success and show the
+count of unknown/incomplete outcomes. Report unassisted and assisted outcomes
+according to the declared intervention rule. Do not average partial stages
+and relabel that number as end-to-end completion.
+
+For slip detection, report detected and missed reference events together.
+Recall = detected / (detected + missed), only if that denominator is positive.
+Precision = detected / (detected + false_alarm), only if positive and using
+the frozen matching rule. Report unresolved rows separately. False alarms per
+non-slip minute = false_alarm rows with in_non_slip_window=true divided by
+(non_slip_observation_s / 60), only with positive, independently labeled
+non-slip exposure. Count alarms and exposure over the same evaluation window.
+An undefined denominator is not zero.
+
+Summarize delay only for matched detections and report how many events were
+missed. This is conditional detection delay, not latency for all events.
+Report recovery/task success separately; detecting slip does not establish
+that the controller prevented a drop. Capture-to-controller delay, physical
+actuator response and slip-onset-to-detection delay measure different events.
+
+Choose an uncertainty interval appropriate to the independent sampling unit.
+Adjacent frames and repeated contacts from one object/session are correlated;
+do not count them as independent robot trials. Name the interval/resampling
+method, unit, sample count and aggregation. State when object/session/unit
+coverage is too limited to support a wider transfer claim.
+
+SOURCE BASIS
+
+The recording structure is RoboSkin.ai's proposed method. It operationalizes
+the guide's existing matched-task evaluation plan; it is not an official
+GelSight or DIGIT benchmark. The following pinned primary documentation was
+re-read on 2026-10-25 for the acquisition and derived-output boundaries:
+
+DIGIT interface, revision 87a28bbf2beee8008a5308e9a12d72e1bc4fefb9:
+https://github.com/facebookresearch/digit-interface/blob/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9/README.md
+Supports serial-based identification, get_frame(), the documented default
+stream and explicit stream configuration. It does not establish a successful
+run or the performance of your unit.
+
+GelSight robotics, revision 321d6a22da64529138ff10237335038fd8c5189f:
+https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md
+The FAQ separates reconstruction examples and camera resolution from accuracy,
+describes learning force from height displacement, and discusses gel damage.
+It does not supply a matched comparison with original DIGIT.
+
+Related workflows:
+https://roboskin.ai/guides/tactile-sensor-calibration
+https://roboskin.ai/guides/tactile-sensor-benchmark-robot-manipulation
+https://roboskin.ai/guides/slip-detection-robot-hand

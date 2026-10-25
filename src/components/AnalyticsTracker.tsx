@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { evidenceBatch, growthBatchForPath, resourceGrowthBatch } from '@/lib/growth-batches.mjs';
 import { referralLandingSource } from '@/lib/referral-attribution.mjs';
+import { sensorEvaluationResource } from '@/lib/google-analytics.mjs';
 
 function cleanLabel(value: string) {
   return value.replace(/\s+/g, ' ').trim().slice(0, 80);
@@ -115,8 +116,13 @@ export default function AnalyticsTracker() {
         return;
       }
 
-      if (url.origin === window.location.origin && url.pathname === '/resources/tactile-sensor-evaluation-template.csv') {
-        track('Sensor Evaluation Template Download', properties);
+      const sensorEvaluation = sensorEvaluationResource(url.pathname);
+      if (url.origin === window.location.origin && sensorEvaluation) {
+        // Count resource intent using fixed IDs, never labels or filled-in data.
+        track('Sensor Evaluation Template Download', {
+          from: pathname, target: url.pathname, batch: properties.batch, resource_id: sensorEvaluation.id,
+          interaction: sensorEvaluation.event === 'resource_download' ? 'download' : 'open',
+        });
         return;
       }
 

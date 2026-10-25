@@ -255,6 +255,36 @@ test('verified exercise and evaluation downloads use fixed IDs and respect conse
   assert.ok(!JSON.stringify(app.commands()).includes('private'));
 });
 
+test('sensor comparison files use fixed IDs, distinguish instructions, and preserve consent and privacy', () => {
+  const paths = [
+    ['/resources/gelsight-digit-comparison-protocol.csv', 'gelsight-digit-protocol', 'resource_download'],
+    ['/resources/gelsight-digit-comparison-trials.csv', 'gelsight-digit-trials', 'resource_download'],
+    ['/resources/gelsight-digit-comparison-slip-events.csv', 'gelsight-digit-slip-events', 'resource_download'],
+    ['/resources/gelsight-digit-comparison-instructions.txt', 'gelsight-digit-instructions', 'resource_open'],
+  ];
+  const app = mount({ path: '/guides/gelsight-vs-digit?participant=private@example.com' });
+  const resources = () => app.commands().filter(args => args[0] === 'event' && ['resource_download', 'resource_open'].includes(args[1]));
+  app.render();
+  for (const [path] of paths) app.clickLink(path);
+  assert.equal(resources().length, 0);
+  app.click('Allow analytics');
+  for (const [path, id, event] of paths) {
+    app.clickLink(`${path}?trial=private&resource_id=private#private`);
+    assert.equal(resources().at(-1)[1], event);
+    assert.deepEqual(resources().at(-1)[2], { resource_id: id, from_path: '/guides/gelsight-vs-digit', target_path: path });
+    app.clickLink(`https://other.example${path}`);
+    app.clickLink(`https://roboskin.ai.example.com${path}`);
+    assert.equal(analytics.analyticsResourceEvent('https://preview.vercel.app/guides/gelsight-vs-digit', path), null);
+  }
+  assert.equal(resources().length, paths.length);
+  app.clickLink('/resources/gelsight-digit-comparison-private.csv');
+  assert.equal(resources().length, paths.length);
+  app.settings(); app.click('Decline');
+  for (const [path] of paths) app.clickLink(path);
+  assert.equal(resources().length, paths.length);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
+});
+
 test('approved landing campaign survives a pre-consent navigation without retaining arbitrary query values', () => {
   const app = mount({path: `/?utm_source=x&utm_medium=social&utm_campaign=${analytics.resourceCampaign}&email=private@example.com`});
   app.render(); app.navigate('/tactile-ai'); app.click('Allow analytics');
