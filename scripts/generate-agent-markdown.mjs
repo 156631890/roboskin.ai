@@ -1,4 +1,5 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import domino from '@mixmark-io/domino';
@@ -155,7 +156,7 @@ export async function generateAgentMarkdown(outputRoot = path.join(projectRoot, 
   return { count: records.length, outputRoot: markdownRoot };
 }
 
-const executablePath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : '';
+const executablePath = process.argv[1] ? pathToFileURL(realpathSync(path.resolve(process.argv[1]))).href : '';
 if (import.meta.url === executablePath) {
   if (process.env.ROBOSKIN_RUNTIME === 'server') {
     const result = await generateAgentMarkdown(path.join(projectRoot, 'public'), {

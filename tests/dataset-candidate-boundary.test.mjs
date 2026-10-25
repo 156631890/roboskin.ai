@@ -13,7 +13,7 @@ function load(file, dependencies = {}) {
     return dependencies[name];
   };
   new Function('exports', 'require', ts.transpileModule(fs.readFileSync(file, 'utf8'), {
-    compilerOptions: { module: ts.ModuleKind.CommonJS },
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
   }).outputText)(exports, require);
   return exports;
 }
@@ -26,6 +26,7 @@ const release = load('src/lib/research-index-release.ts', {
   },
 });
 const seo = load('src/lib/seo.ts', {
+  '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
   '@/lib/dataset-evidence.mjs': evidence,
   '@/content/site': site,
   '@/lib/research-index-release': release,

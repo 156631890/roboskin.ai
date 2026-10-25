@@ -73,7 +73,7 @@ test('PRISM brief and dataset preserve tactile coverage, image-count, access, li
 
   assert.match(seo, /citation: post\.citationUrls \?\? post\.sourceUrl/);
   assert.doesNotMatch(seo, /creator: entry\.institution\.map/);
-  assert.match(seo, /name: 'Source-listed institutions'/);
+  assert.match(seo, /Source-listed institutions:/);
 });
 
 test('The Missing Touch brief preserves participant, task, haptic-channel, and autonomy limits', async () => {
