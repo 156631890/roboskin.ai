@@ -40,7 +40,7 @@
     "downloads": "Three CSV files plus public-sample ZIP downloaded in Chromium with source hashes; TXT, Python, manifest, report, lock and license HTTP bodies matched source.",
     "copyCommand": "LeRobot command copied through its real button and clipboard contents verified",
     "priorModulesMissing": [],
-    "snapshotSha256": "35ee367dae875f2c7bd9dd80f775297954dd34f6f6c188aa21adfe93fde7d28b",
+    "snapshotSha256": "34641f4debc180be04a923b5476467e0a0685cd53109cb2fe5bfc9d250a49c46",
     "publicDataset": {
       "repository": "lerobot/koch_pick_place_1_lego",
       "revision": "afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
