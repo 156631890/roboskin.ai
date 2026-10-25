@@ -1,3 +1,4 @@
+import { buildEvidenceNote } from '@/lib/schema-evidence';
 import { buildPageJsonLd, canonicalUrl } from '@/lib/seo';
 import { researchManufacturingRelations } from '@/lib/research-entity-relations';
 import {
@@ -18,12 +19,12 @@ export function buildResearchRobotDirectoryJsonLd() {
     );
 
     return {
-      '@type': 'Thing',
+      '@type': manufacturerRelation ? 'Product' : 'Thing',
       '@id': robotCanonicalId(robot),
       identifier: robot.id,
       name: robot.name,
       ...(robot.aliases.length > 0 ? { alternateName: robot.aliases } : {}),
-      category: robot.kind,
+      ...(manufacturerRelation ? { category: robot.kind } : {}),
       description: robot.description,
       url: robotCanonicalId(robot),
       ...(robot.schemaSameAsUrl ? { sameAs: [robot.schemaSameAsUrl] } : {}),
@@ -32,8 +33,11 @@ export function buildResearchRobotDirectoryJsonLd() {
           '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerRelation.toId}`,
         },
       } : {}),
-      isPartOf: {
-        '@id': `${directoryUrl}#robot-directory`,
+      subjectOf: {
+        ...buildEvidenceNote(robotCanonicalId(robot), `${robot.name}: research evidence`,
+          `${robot.description} Evidence boundary: ${robot.evidenceBoundary}`,
+          robot.identitySources.map((source) => source.url)),
+        genre: robot.kind,
       },
       mainEntityOfPage: {
         '@id': `${directoryUrl}#webpage`,

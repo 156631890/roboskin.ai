@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-25",
+  "scope": "Deterministic Schema.org property/domain and range corrections; no new editorial claims",
+  "baseline": "d02fccd87490ace0400019405ad97259e0f430da",
+  "existingPullRequest": 26,
+  "preservedOriginalHead": "35db87b00800db5b5d6497ec4be8ca773c7c45ba",
+  "deferred": "Original 77 metadata field rewrites remain unapproved in the preserved original commit and October 5 review artifacts. They are excluded from this current-main diff. No SEO length budgets introduced. PR 90 content review is separate.",
+  "technicalChecks": {
+    "pages": 203,
+    "beforeDiagnostics": 225,
+    "affectedBeforePages": 56,
+    "afterDiagnostics": 0,
+    "schemaChangedPages": [
+      "/",
+      "/ai-robotics",
+      "/applications/robot-gripper-tactile-sensor",
+      "/applications/robot-hand-tactile-sensor",
+      "/applications/soft-robotic-skin",
+      "/benchmarks",
+      "/datasets",
+      "/e-skin",
+      "/guides/3d-printed-tactile-sensors",
+      "/guides/aspire-libero-pro-setup",
+      "/guides/flexible-tactile-sensor-array",
+      "/guides/gelsight-vs-digit",
+      "/guides/how-to-choose-a-tactile-sensor",
+      "/guides/lerobot-dataset-format",
+      "/guides/optical-tactile-sensor-maintenance",
+      "/guides/optical-vs-capacitive-tactile-sensors",
+      "/guides/python-tactile-data-processing",
+      "/guides/robot-skin-vs-e-skin",
+      "/guides/robot-skin-vs-tactile-sensor",
+      "/guides/robot-touch-sensor",
+      "/guides/ros2-tactile-sensing",
+      "/guides/slip-detection-robot-hand",
+      "/guides/tactile-feedback-for-physical-ai",
+      "/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra",
+      "/guides/tactile-sensor-benchmark-robot-manipulation",
+      "/guides/tactile-sensor-calibration",
+      "/guides/tactile-sensor-for-robots",
+      "/guides/visuo-tactile-world-models-robot-manipulation",
+      "/humanoid-robot-skin",
+      "/humanoid-robots",
+      "/organizations",
+      "/physical-ai",
+      "/physical-ai-touch",
+      "/research/eu-roboskin-project",
+      "/research/robot-skin-papers",
+      "/robot-foundation-models",
+      "/robot-hands",
+      "/robot-learning",
+      "/robot-manipulation",
+      "/robot-safety",
+      "/robot-skin",
+      "/robot-teleoperation",
+      "/robot-vla-models",
+      "/robot-world-models",
+      "/robotics-datasets",
+      "/robotics-programming",
+      "/robots",
+      "/sensors",
+      "/sensors/digit",
+      "/sensors/gelsight-mini",
+      "/sensors/loomia-smart-skin",
+      "/sensors/melexis-tactaxis",
+      "/sensors/reskin",
+      "/sensors/robotiq-tsf-85",
+      "/sensors/xela-uskin",
+      "/tactile-ai",
+      "/tactile-foundation-models",
+      "/tactile-manipulation",
+      "/visuo-tactile"
+    ],
+    "unresolvedReferences": 0,
+    "visibleContentDifferences": 0,
+    "comparedFields": [
+      "title",
+      "all meta name/property values",
+      "H1",
+      "body without scripts/styles",
+      "links",
+      "images and alt",
+      "canonical"
+    ],
+    "baselineComparison": "Same-environment static builds of exact main and candidate. Live baseline has deployment-specific footer/font differences, so it was used for schema diagnosis, not as proof of content identity.",
+    "dataExports": {
+      "sitemap.xml": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "news-sitemap.xml": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "feed.xml": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "datasets.json": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "research-index.json": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "research-index.csv": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "knowledge-graph.json": {
+        "byteIdentical": true,
+        "textIdentical": true
+      },
+      "llms.txt": {
+        "byteIdentical": false,
+        "textIdentical": true
+      },
+      "llms-full.txt": {
+        "byteIdentical": true,
+        "textIdentical": true
+      }
+    },
+    "tests": "329/329 full suite, followed by 9/9 semantic fixtures after adding one malformed/local-reference regression; final CI required",
+    "lint": "pass",
+    "buildAndTypecheck": "pass",
+    "exportAudit": "pass"
+  },
+  "vocabulary": {
+    "version": "30.1",
+    "source": "https://raw.githubusercontent.com/schemaorg/schemaorg/5f2d8cdec99b7329459ef6584e94b6a840f88471/data/releases/30.1/schemaorg-current-https.jsonld",
+    "sha256": "0a4b8c4c910fc831ec8695196510973390906a5ee34dc6b862dfec4d21a12f74",
+    "projection": "939 classes, 1538 properties, 546 enumerations; identical rules to previous projection, corrected raw-source hash",
+    "limit": "Site Schema.org profile, not a Google rich-result or ranking guarantee"
+  },
+  "release": "Pending exact-head CI and production validation; existing project authorization covers technical fixes."
+}

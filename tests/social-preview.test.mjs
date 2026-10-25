@@ -14,13 +14,14 @@ function load(relative, dependencies = {}) {
   const nativeRequire = createRequire(file);
   const require = (name) => Object.hasOwn(dependencies, name) ? dependencies[name] : nativeRequire(name);
   const { outputText } = ts.transpileModule(readFileSync(file, 'utf8'), {
-    compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true },
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true },
   });
   new Function('exports', 'require', outputText)(exports, require);
   return exports;
 }
 
 const seo = load('src/lib/seo.ts', {
+  '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
   '@/lib/dataset-evidence.mjs': datasetEvidence,
   '@/content/site': load('src/content/site.ts'),
   '@/lib/research-index-release': load('src/lib/research-index-release.ts'),
