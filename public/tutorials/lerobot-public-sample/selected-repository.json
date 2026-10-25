@@ -1,0 +1,49 @@
+{
+  "repo": "lerobot/koch_pick_place_1_lego",
+  "revision": "afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
+  "license": "apache-2.0",
+  "gated": false,
+  "files": [
+    {
+      "path": "data/chunk-000/file-000.parquet",
+      "bytes": 989817,
+      "sha256": "046b2e2d30a53329acff37c06e8d8ab0506c61db3a38fa33c95c5faf53bbc50c"
+    },
+    {
+      "path": "meta/episodes/chunk-000/file-000.parquet",
+      "bytes": 142855,
+      "sha256": "acc56ea0a97c798248a190b76e0894854bf6e5f22a7e5acd846a1d947954eb82"
+    },
+    {
+      "path": "meta/info.json",
+      "bytes": 3399,
+      "sha256": "43f10a8cc5b3e77d2320e5b331a92aba64248230b6009610315d664cab66aabf"
+    },
+    {
+      "path": "meta/stats.json",
+      "bytes": 6115,
+      "sha256": "8fa487eecda75a6f36f367b573df83ebb968323eaaafd125d327e221357b1a05"
+    },
+    {
+      "path": "meta/tasks.parquet",
+      "bytes": 2222,
+      "sha256": "350bab15b120161ff9e2ae1af1442bcd64b9b0f65ccc9a14bf566324abd0f3f5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4283,
+      "sha256": "4cd1051b209189c8db6fb8a409197da13f8ad6ec8a097b3a11e5baaed3b4cf51"
+    },
+    {
+      "path": "videos/observation.images.laptop/chunk-000/file-000.mp4",
+      "bytes": 203662132,
+      "sha256": "1a4b34425264116c8236a567231a81d615694ed7a387cc9da75e744e0c88450c"
+    },
+    {
+      "path": "videos/observation.images.phone/chunk-000/file-000.mp4",
+      "bytes": 204826374,
+      "sha256": "0cda49bbd6c9ccd05536e8dd35c8d65157d26b36cebc874ecd486a13e0a8d71e"
+    }
+  ],
+  "scope": "Only files needed for episode 0; shards contain additional episodes. Those other episodes are not validated."
+}

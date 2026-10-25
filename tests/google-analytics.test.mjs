@@ -233,6 +233,7 @@ test('verified exercise and evaluation downloads use fixed IDs and respect conse
   const downloads = [
     ['/tutorials/lerobot-validation/lerobot-numeric-validation.zip', 'lerobot-numeric-validation'],
     ['/tutorials/lerobot-loader/lerobot-official-loader.zip', 'lerobot-official-loader'],
+    ['/tutorials/lerobot-public-sample/lerobot-public-sample.zip', 'lerobot-public-sample'],
     ['/resources/tactile-sensor-evaluation-template.csv', 'sensor-evaluation-template'],
   ];
   const app = mount({ path: '/datasets?email=private@example.com' });
@@ -246,12 +247,12 @@ test('verified exercise and evaluation downloads use fixed IDs and respect conse
     assert.deepEqual(resources().at(-1)[2], { resource_id: id, from_path: '/datasets', target_path: path });
     assert.equal(analytics.analyticsResourceEvent('https://roboskin.ai/datasets', `https://other.example${path}`), null);
   }
-  assert.equal(resources().length, 3);
+  assert.equal(resources().length, downloads.length);
   app.clickLink('/tutorials/lerobot-loader/unlisted.zip');
-  assert.equal(resources().length, 3);
+  assert.equal(resources().length, downloads.length);
   app.settings(); app.click('Decline');
   for (const [path] of downloads) app.clickLink(path);
-  assert.equal(resources().length, 3);
+  assert.equal(resources().length, downloads.length);
   assert.ok(!JSON.stringify(app.commands()).includes('private'));
 });
 

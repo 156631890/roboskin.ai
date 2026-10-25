@@ -1,0 +1,232 @@
+{
+  "status": "pass",
+  "verified_at": "2026-10-25T06:56:22.450227+00:00",
+  "repository": "lerobot/koch_pick_place_1_lego",
+  "revision": "afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
+  "source_license_metadata": "apache-2.0",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "versions": {
+    "lerobot": "0.6.1",
+    "torch": "2.11.0+cpu",
+    "torchvision": "0.26.0+cpu",
+    "av": "15.1.0",
+    "datasets": "4.8.5",
+    "pyarrow": "25.0.1",
+    "numpy": "2.2.6"
+  },
+  "scope": {
+    "episode": 0,
+    "numeric_frames_checked": 445,
+    "official_loader_video_samples": 5,
+    "camera_count": 2,
+    "downloaded_parquet_contains_other_episodes": true,
+    "format": "v3.0",
+    "metadata_robot_type": "unknown",
+    "metadata_fps": 30
+  },
+  "numeric": {
+    "state_shape": [
+      6
+    ],
+    "action_shape": [
+      6
+    ],
+    "finite": true,
+    "matches_parquet": true,
+    "max_cadence_error_s": 5.086263020828707e-07
+  },
+  "videos": [
+    {
+      "key": "observation.images.laptop",
+      "codec": "libdav1d",
+      "decoded_shape_hwc": [
+        480,
+        640,
+        3
+      ],
+      "stream_rate": "30",
+      "episode_video_offset_s": 0.0,
+      "decoded_pts_count": 446,
+      "matched_data_rows": 445,
+      "max_file_timestamp_error_s": 4.4504801444134046e-07,
+      "negative_control": {
+        "type": "FrameTimestampError",
+        "query_seconds": 0.016666666666666666
+      }
+    },
+    {
+      "key": "observation.images.phone",
+      "codec": "libdav1d",
+      "decoded_shape_hwc": [
+        480,
+        640,
+        3
+      ],
+      "stream_rate": "30",
+      "episode_video_offset_s": 0.0,
+      "decoded_pts_count": 446,
+      "matched_data_rows": 445,
+      "max_file_timestamp_error_s": 4.4504801444134046e-07,
+      "negative_control": {
+        "type": "FrameTimestampError",
+        "query_seconds": 0.016666666666666666
+      }
+    }
+  ],
+  "samples": [
+    {
+      "frame_index": 0,
+      "timestamp_s": 0.0,
+      "task": "\"Pick the lego blocks and place them in the box\"",
+      "camera_tensors": {
+        "observation.images.laptop": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "a65cb7731b356ce84fe4d295235f787d49b6291c576eb20fbab857d5917c82dd"
+        },
+        "observation.images.phone": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "20c5fc583c9bf8fb28d6cf3b8413893064c0e1632ebdea24c4b30402903e88bd"
+        }
+      }
+    },
+    {
+      "frame_index": 111,
+      "timestamp_s": 3.700000047683716,
+      "task": "\"Pick the lego blocks and place them in the box\"",
+      "camera_tensors": {
+        "observation.images.laptop": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "d64d829435515d79fa517ff600384673e53ced02873fd7a6c9e49abf4ccb57f4"
+        },
+        "observation.images.phone": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "d5a25e6186b0cd7d1742278a1a01aa0d7577dc5253a0d89c5c3ccbf64979bc79"
+        }
+      }
+    },
+    {
+      "frame_index": 222,
+      "timestamp_s": 7.400000095367432,
+      "task": "\"Pick the lego blocks and place them in the box\"",
+      "camera_tensors": {
+        "observation.images.laptop": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "0811d8a4b6cd64fc0773d33df00291d55cdb614b7a93b9740373398ac10607e4"
+        },
+        "observation.images.phone": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "6dd05e985d7130b44b905eb69fe96cd25851c667a1bf5515cb28f311fd712bf2"
+        }
+      }
+    },
+    {
+      "frame_index": 333,
+      "timestamp_s": 11.100000381469727,
+      "task": "\"Pick the lego blocks and place them in the box\"",
+      "camera_tensors": {
+        "observation.images.laptop": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "9beaeaa1eda44e8776045e660e6df7f0273082e336fbf2bad1177891632292ea"
+        },
+        "observation.images.phone": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "1d98364f3b5fd169f789ec8ef18d8970815e6a7792dcd3da25945912ba3da195"
+        }
+      }
+    },
+    {
+      "frame_index": 444,
+      "timestamp_s": 14.800000190734863,
+      "task": "\"Pick the lego blocks and place them in the box\"",
+      "camera_tensors": {
+        "observation.images.laptop": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "c1402f982e69cd04ebfec5cf6a6b1d80d017ac27fdaaa02ac201ffdd24420c1a"
+        },
+        "observation.images.phone": {
+          "shape": [
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32",
+          "min": 0.0,
+          "max": 1.0,
+          "sha256": "ea17b8d9aa139190c64865787b9f8d69a98d333844d172edc61928eb219a6d23"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "One episode only; not a full-dataset validation.",
+    "File timestamps and nominal cadence are not measured sensor acquisition latency or physical cross-camera synchronization.",
+    "No tactile channel is declared; observation.state/action units are not certified.",
+    "robot_type remains unknown in the metadata; the repository name is not hardware identity evidence.",
+    "No visualizer UI, policy training, hardware control, force calibration or ROS 2 runtime was tested.",
+    "Source dataset files stay local and are not bundled with the website."
+  ]
+}

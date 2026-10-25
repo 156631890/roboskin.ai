@@ -100,6 +100,7 @@ const resourceLinks = new Map([
   ...sensorEvaluationResources,
   ['/tutorials/lerobot-validation/lerobot-numeric-validation.zip', ['lerobot-numeric-validation', 'resource_download']],
   ['/tutorials/lerobot-loader/lerobot-official-loader.zip', ['lerobot-official-loader', 'resource_download']],
+  ['/tutorials/lerobot-public-sample/lerobot-public-sample.zip', ['lerobot-public-sample', 'resource_download']],
 ]);
 
 // Return only public route IDs and paths; never anchor text, form fields or queries.

@@ -18,7 +18,7 @@ export const lerobotTutorial: ProgrammingPage = {
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
   published: checked, updated: '2026-10-25', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['lerobot dataset format', 'lerobot dataset v3', 'lerobot dataset visualizer', 'robot dataset validation'],
-  verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility. The visualizer workflow added October 25, 2026 was checked against official documentation and v0.6.1 source; RoboSkin did not launch its viewer or decode a video episode for this addition.',
+  verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility. On October 25, 2026, a separate pinned public-data check loaded 445 numeric rows from episode 0, decoded two camera streams and read five complete samples through LeRobot 0.6.1. This tests file timestamps, not physical synchronization or hardware calibration. The visualizer workflow was source-checked; its UI was not run.',
   quickAnswer: ['LeRobot dataset v3.0 separates storage files from episodes: multiple episodes can share Parquet and MP4 shards, while metadata identifies each episode and its offsets. A filename is not an episode boundary.', 'Start by checking what each observation and action means, then check shapes, timestamps and episode coverage. Passing a numeric check does not establish that a policy can use the data.'],
   sections: [
     { id: 'version', heading: 'Which version does this guide describe?', body: [
@@ -70,6 +70,25 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
       { label: 'LeRobot 0.6.1 visualization commands', href: 'https://huggingface.co/docs/lerobot/v0.6.1/using_dataset_tools#dataset-visualization' },
       { label: 'LeRobot 0.6.1 installation prerequisites', href: 'https://huggingface.co/docs/lerobot/v0.6.1/installation' },
       { label: 'Versioned viewer source: dependencies, arguments and time axes', href: 'https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/scripts/lerobot_dataset_viz.py' },
+    ] },
+    { id: 'public-episode', heading: 'Verified public episode: load state, action and two video streams', body: [
+      'On October 25, 2026, RoboSkin inspected episode 0 of lerobot/koch_pick_place_1_lego at commit afc0b3e54679cb8a94283fbab5a4ccf0d405f10b. The source card declares Apache-2.0; its metadata says robot_type is unknown. We retain that value and do not infer hardware identity or physical units from the repository name. No tactile feature is declared.',
+      'In Windows x64 with Python 3.13.3, LeRobot 0.6.1 and CPU PyTorch 2.11.0, the official local loader exposed 445 rows. Every 6-dimensional state/action vector was finite and matched the source Parquet values. Episode/frame/global indices and the nominal 30 Hz timestamp grid were checked. The shared Parquet and MP4 shards contain other episodes, which this run did not validate.',
+      'Both laptop and phone video streams were decoded across this episode. All 445 row timestamps matched distinct decoded frame timestamps within the explicit 0.0001-second tolerance. Five complete official-loader samples, at frames 0, 111, 222, 333 and 444, returned two float32 camera tensors of shape [3, 480, 640]. A deliberate half-frame query was rejected by the decoder timestamp check.',
+      'This is file-level matching, not measured capture-clock synchronization, camera latency or training readiness. A nominal timestamp grid can be generated or resampled. The run does not validate visualizer UI behavior, tactile measurements, calibration, a policy, robot hardware or ROS 2.',
+    ], table: { headers: ['Check', 'Observed result', 'Scope limit'], rows: [
+      ['Numeric rows', '445 rows; state/action shape [6]; finite and identical to source Parquet.', 'One episode; feature units and physical accuracy are not certified.'],
+      ['Video timestamps', 'Two camera streams; 445 unique matches per stream; maximum file-timestamp difference below 0.000001 seconds.', 'The tolerance was 0.0001 seconds; neither number measures acquisition synchronization.'],
+      ['Official loader', 'Five complete samples; two [3, 480, 640] image tensors per sample.', 'This is not an exhaustive loader pass over all episodes or a visual quality audit.'],
+      ['Negative control', 'Half-frame time offset rejected with FrameTimestampError.', 'A rejection demonstrates the selected timestamp check, not detection of all data faults.'],
+    ] }, links: [
+      { label: 'Download pinned public-sample scripts, manifest and reference report (ZIP)', href: '/tutorials/lerobot-public-sample/lerobot-public-sample.zip', download: true },
+      { label: 'Read the actual public-episode verification report', href: '/tutorials/lerobot-public-sample/reference-verification.json' },
+      { label: 'Read download size, commands and limitations', href: '/tutorials/lerobot-public-sample/README.txt' },
+      { label: 'Pinned source dataset and license declaration', href: 'https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/tree/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b' },
+    ], bullets: [
+      'The ZIP contains no third-party dataset files. Its downloader retrieves about 410 MB of pinned public shards and checks byte counts and SHA-256. Dependencies require additional disk space.',
+      'Use a fresh extracted folder and follow README.txt. The verifier runs with Hub access disabled and preserves existing reports; it does not upload data, train a model or control hardware.',
     ] },
     { id: 'download', heading: 'Download the complete numeric exercise', body: [
       'The ZIP includes check_dataset.py, generate_fixtures.py, test_validator.py, requirements.txt, two tiny Parquet fixtures, an example field contract and the reports produced in our run. All data is independently generated synthetic data. It does not reuse robot demonstrations or represent a physical tactile sensor.',

@@ -1,7 +1,7 @@
 {
   "date": "2026-10-25",
   "status": "review_pending",
-  "baselineCommit": "d02fccd87490ace0400019405ad97259e0f430da",
+  "baselineCommit": "326718932e0ddfa6135eff92de5375f7a2e1f4c0",
   "scope": [
     {
       "path": "/resources",
@@ -9,7 +9,7 @@
     },
     {
       "path": "/guides/lerobot-dataset-format#dataset-visualizer",
-      "change": "Add official browser and pinned v0.6.1 visualization entry points, commands, time/state/action/camera checks and failure boundaries. Retain the existing numeric exercises and evidence."
+      "change": "Add official browser and pinned v0.6.1 visualization entry points, commands, time/state/action/camera checks and failure boundaries. Retain the existing numeric exercises and evidence. Add a pinned public-episode inspection, observed report and reproducible source-only ZIP; preserve the distinction between file timestamps and physical synchronization."
     },
     {
       "path": "/guides/gelsight-vs-digit#comparison-records",
@@ -23,19 +23,42 @@
     "https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/scripts/lerobot_dataset_viz.py",
     "https://github.com/huggingface/lerobot/blob/v0.6.1/pyproject.toml",
     "https://github.com/facebookresearch/digit-interface/blob/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9/README.md",
-    "https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md"
+    "https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md",
+    "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/blob/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/README.md",
+    "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/blob/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/meta/info.json"
   ],
   "verification": {
-    "nodeTests": { "passed": 324, "failed": 0, "skipped": 0 },
+    "nodeTests": {
+      "total": 333,
+      "status": "Full suite initially 332/333; fixed new download fixture count, all18 analytics tests passed; require final exact-head CI."
+    },
     "lintAndTypecheck": "passed in final static build",
     "staticBuild": "passed",
     "export": "203 sitemap URLs, 208 protected URL entries, 6 intentional noindex URLs; metadata and internal destination/anchor checks passed",
     "browser": "Chromium desktop 1440x900 and mobile 390x844; 3 pages; no page errors; no page-level horizontal overflow; resource groups verified",
     "noJavaScript": "All three affected sections readable in a separate mobile context",
-    "downloads": "Three CSV downloads completed in Chromium and matched source SHA-256; instruction TXT HTTP body also matched source",
+    "downloads": "Three CSV files plus public-sample ZIP downloaded in Chromium with source hashes; TXT, Python, manifest, report, lock and license HTTP bodies matched source.",
     "copyCommand": "LeRobot command copied through its real button and clipboard contents verified",
     "priorModulesMissing": [],
-    "snapshotSha256": "57f8fcf73e3c88e3da40f5e48ff080da274522425f319fbbf1ee52495f27f7ce"
+    "snapshotSha256": "35ee367dae875f2c7bd9dd80f775297954dd34f6f6c188aa21adfe93fde7d28b",
+    "publicDataset": {
+      "repository": "lerobot/koch_pick_place_1_lego",
+      "revision": "afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
+      "numericFrames": 445,
+      "episode": 0,
+      "cameraStreams": 2,
+      "officialLoaderSamples": [
+        0,
+        111,
+        222,
+        333,
+        444
+      ],
+      "negativeControl": "Half-frame timestamp offset rejected on both streams",
+      "packageRerun": "Extracted scripts reproduced every numerical/video result; six metadata/data files downloaded afresh; two video files reused after full source-hash verification.",
+      "report": "public/tutorials/lerobot-public-sample/reference-verification.json",
+      "sourceBytes": 409637197
+    }
   },
   "measurement": {
     "resources": "Fixed same-origin IDs; GA4 download/open events retain existing consent and withdrawal behavior; Vercel reuses the sensor evaluation event with an interaction label",
@@ -43,7 +66,7 @@
     "interpretation": "Clicks indicate resource intent, not successful experiments or training"
   },
   "limitations": [
-    "Visualizer commands were checked against official documentation and source, not executed; no video decoding claim",
+    "Visualizer UI was source-checked but not executed. Public-sample video decoding and file timestamps were tested only for one episode; no physical synchronization claim.",
     "No new hardware comparison, sensor calibration or robot experiment was performed",
     "ROS 2 runtime remains unavailable locally; Docker and a WSL distribution are absent, and the GitHub OAuth login lacks workflow scope",
     "Google Live and indexed-version inspections were not performed in this batch",
@@ -56,9 +79,9 @@
     "publication": "hold substantive content until the owner reviews this version; existing maintenance authorization remains in effect"
   },
   "deferred": [
-    "Synchronize and separately complete existing metadata/schema PR 26; do not duplicate it",
     "PR 36 navigation changes are already present in current main",
-    "Gather real ROS 2 runtime and a bounded real-dataset loading record when the required environment is available",
-    "Evaluate the October 23 release after its complete observation window; begin a separate window for this batch after actual publication"
-  ]
+    "Evaluate the October 23 release after its complete observation window; begin a separate window for this batch after actual publication",
+    "ROS 2 runtime execution still needs a suitable environment."
+  ],
+  "completedSeparately": "PR26 technical schema repair merged and production-verified at3267189; original77 metadata rewrites remain deferred."
 }
