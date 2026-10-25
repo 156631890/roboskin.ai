@@ -1,3 +1,5 @@
+import { inspectPage } from './audit-on-page-seo.mjs';
+import { entityTypes, validateSchema, vocabulary } from './lib/schema-semantics.mjs';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -129,6 +131,7 @@ if (unexpectedSitemapUrls.length) throw new Error(`Production sitemap contains u
 if (missingSitemapUrls.length) throw new Error(`Production sitemap is missing URLs: ${missingSitemapUrls.join(', ')}`);
 if (invalidSitemapUrls.length) throw new Error(`Production sitemap contains non-apex URLs: ${invalidSitemapUrls.join(', ')}`);
 
+const seoDocuments = new Map();
 for (const absoluteUrl of protectedUrls) {
   const pathname = new URL(absoluteUrl).pathname;
   const redirectTarget = protectedRedirects[pathname];
@@ -136,6 +139,7 @@ for (const absoluteUrl of protectedUrls) {
   const contentType = response.headers.get('content-type') ?? '';
   if (!contentType.includes('text/html')) throw new Error(`${pathname} did not return HTML`);
   const html = await response.text();
+  if (!redirectTarget) seoDocuments.set(pathname, inspectPage(html, pathname));
   const jsonLd = validateHtml(html, pathname, redirectTarget ?? pathname);
   const paper = inspectWorkingPaper(html, jsonLd, pathname);
   if (paper.errors.length) throw new Error(`${pathname}: ${paper.errors.join('; ')}`);
@@ -226,6 +230,7 @@ if (!/^User-agent:\s*\*/i.test(crawlerRobots)
 }
 if (deployedIndexNowKey.trim() !== expectedIndexNowKey) throw new Error('Deployed IndexNow key does not match the committed key');
 const indexJsonLd = validateHtml(indexHtml, '/research-index');
+seoDocuments.set('/research-index', inspectPage(indexHtml, '/research-index'));
 if (!JSON.stringify(indexJsonLd).includes('"@type":"Dataset"') || !JSON.stringify(indexJsonLd).includes('"@type":"ItemList"')) {
   throw new Error('/research-index is missing Dataset or ItemList JSON-LD');
 }
@@ -486,7 +491,7 @@ if (listedRobotSchemaIds.some((id) => !id) || new Set(listedRobotSchemaIds).size
   throw new Error('/robots ItemList contains missing or duplicate robot IDs');
 }
 const actualRobotSchemaIds = robotSchemaNodes
-  .filter((node) => node['@type'] === 'Thing'
+  .filter((node) => ['Thing', 'Product'].includes(node['@type'])
     && typeof node['@id'] === 'string'
     && node['@id'].startsWith(`${canonicalFor('/robots')}#robot-`))
   .map((node) => node['@id']);
@@ -663,6 +668,19 @@ for (const absoluteUrl of noindexUrls) {
   validateHtml(await response.text(), pathname, pathname, false);
 }
 
+// Check the fixed Schema.org profile against live HTML after deployment.
+const liveTypes = entityTypes([...seoDocuments.values()].flatMap((page) => page.schema));
+const seoFailures = [];
+const schemaUnverified = [];
+for (const [pathname, page] of seoDocuments) {
+  seoFailures.push(...page.schemaParseErrors.map((reason) => `${pathname}: invalid JSON-LD: ${reason}`));
+  const semantics = validateSchema(page.schema, pathname, liveTypes);
+  seoFailures.push(...semantics.errors.map((issue) => `${pathname}: ${issue.property}: ${issue.reason}`));
+  schemaUnverified.push(...semantics.unverified);
+  seoFailures.push(...semantics.unverified.filter((issue) => issue.id.startsWith(canonicalOrigin)).map((issue) => `${pathname}: unresolved local schema entity ${issue.id}`));
+}
+if (seoFailures.length) throw new Error(`Production SEO verification failed:\n${seoFailures.join('\n')}`);
+
 const verifiedPaths = [
   ...new Set([
     ...protectedUrls.map((url) => new URL(url).pathname),
@@ -680,6 +698,9 @@ const verifiedPaths = [
 const sitemapSha256 = createHash('sha256').update(sitemapXml).digest('hex');
 const report = {
   ok: true,
+  seoVerifiedPages: seoDocuments.size,
+  schemaVocabularyVersion: vocabulary.version,
+  schemaUnverified,
   baseUrl: base.origin,
   verifiedAt: new Date().toISOString(),
   commitSha: deployment.commitSha,

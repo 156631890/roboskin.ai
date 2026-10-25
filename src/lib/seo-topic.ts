@@ -103,6 +103,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
             },
           }
         : {}),
+    keywords: page.keywords,
     about: page.keywords,
     mentions: page.relatedLinks.map((link) => ({
       '@type': 'WebPage',
@@ -164,9 +165,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         author: {
           '@id': editorialTeamId,
         },
-        reviewedBy: {
-          '@id': editorialTeamId,
-        },
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
         },
@@ -197,10 +195,6 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         mainEntityOfPage: {
           '@id': `${url}#webpage`,
         },
-        isPartOf: {
-          '@id': `${site.url}/#website`,
-        },
-        keywords: page.keywords,
       }
     : undefined;
   const entityNodes = [articleNode, definedTermNode].filter(Boolean);
