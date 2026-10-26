@@ -1,6 +1,24 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.16', compiledAt: '2026-10-16', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds TacClaw-Infinity public-release scope and license evidence. Other individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.10.26', compiledAt: '2026-10-26', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds EgoExplorer gated-mini-release scope and noncommercial data terms. Other individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
+"egoexplorer": {
+  "access": "gated",
+  "accessCheckedAt": "2026-10-26",
+  "licenseStatus": "documented",
+  "dataLicense": "Dataset card: CC BY-NC 4.0. Noncommercial conditions apply; approval or download access is not commercial permission.",
+  "dataLicenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "publicFileScale": "Card-described mini release: 18 episodes / 66 minutes. Payload files gated and not inspected; distinct from the paper 100-hour corpus.",
+  "verificationScope": "Public card, paper abstract and toolkit commit inspected. No gated access request, payload download, training or hardware run.",
+  "splitStatus": "unknown",
+  "splitDetails": "No file-level train/test partition or leakage audit verified.",
+  "formatStatus": "described",
+  "formatDetails": "The card describes LeRobot v3.0 at 30 Hz, video, five tracker poses, two 21-joint hand skeletons, 24 x 31 Wuji tactile arrays per hand and refined SMPL-X. Reconstructed body geometry is distinct from measured tactile signals. Archive alignment and completeness were not tested.",
+  "sources": [
+    "https://arxiv.org/abs/2610.18872",
+    "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+    "https://github.com/InternRobotics/EgoExplorer/commit/0de464fd576939c053356df9be8be1cabc41c8cc"
+  ]
+},
   "tacclaw-infinity": {
   "access": "public-files",
   "accessCheckedAt": "2026-10-16",
