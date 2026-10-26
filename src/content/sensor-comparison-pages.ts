@@ -9,8 +9,8 @@ export const sensorComparisonPages: SeoTopicPage[] = [
     kicker: 'Sensor selection / Source-based comparison',
     intent: 'Help researchers choose between GelSight Mini and original DIGIT and plan a fair robot-task evaluation.',
     published: '2026-10-07',
-    updated: '2026-10-17',
-    revisionNote: "October 17, 2026: linked maintenance and cross-principle selection guidance. Existing source review dates are retained. October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates; existing FAQs and comparison criteria are retained.",
+    updated: '2026-10-25',
+    revisionNote: "October 25, 2026: added blank protocol, trial and slip-event records with filling instructions for a matched GelSight Mini / original DIGIT evaluation. This is a planning resource, not new hardware test evidence. Existing source review dates are retained. October 17, 2026: linked maintenance and cross-principle selection guidance. October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates.",
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -81,6 +81,34 @@ export const sensorComparisonPages: SeoTopicPage[] = [
           { label: 'Download task evaluation template (CSV)', href: '/resources/tactile-sensor-evaluation-template.csv', download: true },
           { label: 'Use the tactile sensor calibration workflow', href: '/guides/tactile-sensor-calibration' },
           { label: 'Plan matched sensor and robot-task benchmarks', href: '/guides/tactile-sensor-benchmark-robot-manipulation' },
+        ],
+      },
+      {
+        id: 'comparison-records',
+        heading: 'Download a GelSight Mini vs DIGIT evaluation record',
+        body: [
+          'Use these blank CSV files to turn the evaluation plan into a record for your own robot task. They contain no example measurements or device ranking. Complete the protocol before running trials, retain every attempted trial, and use the optional event log when evaluating slip detection. The files work in a spreadsheet or a CSV editor; completed records stay on your device.',
+          'Assign a condition ID to each hardware, software and calibration configuration. Match task, objects, success criteria and controller budget where possible, and document any difference. A changed gel, model or acquisition mode needs a new condition or an explicitly versioned record. Keep planned stream settings separate from received-frame measurements.',
+        ],
+        table: {
+          headers: ['Record', 'What to fill in', 'What it lets you check'],
+          rows: [
+            ['Protocol: one value column per sensor', 'Hardware revision and unit; mounting and gel state; task, split and success rule; calibration reference; timestamp and delay definitions.', 'Whether the two conditions answer the same question, and which differences prevent a direct comparison.'],
+            ['Trials: one row per attempted trial', 'Condition and calibration IDs; raw evidence; received and invalid frames; measured rate and loop delay; outcome, exclusions and interventions.', 'Successes and failures against a declared denominator, with missing or invalid measurements kept visible.'],
+            ['Slip events: optional, one row per annotated onset or unmatched alarm', 'Independent reference, onset interval, matched detector time, common clock and timing uncertainty; retain misses and false alarms.', 'Detection errors and delay separately from task recovery. An unknown onset is not a confirmed detection or a zero-delay event.'],
+          ],
+        },
+        bullets: [
+          'Read the instructions first. Blank means unmeasured or not yet entered; use not_applicable with a reason only when a field does not apply. Enter 0 only for an observed zero.',
+          'For slip, define onset and the alarm-matching window before inspecting outcomes. Record non-slip observation time for false alarms, and keep missed events in the recall denominator.',
+          'Calculate delay only from timestamps on an aligned clock. Keep capture-to-controller delay separate from slip-onset-to-detection delay; neither can be inferred from advertised camera FPS.',
+          'Summarize separately by condition and declared held-out group. Report attempted, excluded and evaluable trial counts, the success fraction and an appropriate uncertainty interval; do not treat adjacent video frames as independent robot trials.',
+        ],
+        links: [
+          { label: 'Download comparison protocol (CSV)', href: '/resources/gelsight-digit-comparison-protocol.csv', download: true },
+          { label: 'Download blank trial log (CSV)', href: '/resources/gelsight-digit-comparison-trials.csv', download: true },
+          { label: 'Download optional slip-event log (CSV)', href: '/resources/gelsight-digit-comparison-slip-events.csv', download: true },
+          { label: 'Read field definitions and comparison instructions', href: '/resources/gelsight-digit-comparison-instructions.txt' },
         ],
       },
       {

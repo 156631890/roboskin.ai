@@ -1,0 +1,1 @@
+study_id,condition_id,trial_id,event_id,event_class,reference_evidence_path,in_non_slip_window,reference_clock,onset_lower_s,onset_upper_s,detector_event_s,clock_uncertainty_ms,annotation_uncertainty_ms,delay_lower_ms,delay_upper_ms,unresolved_reason,notes

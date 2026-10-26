@@ -48,7 +48,8 @@ class TutorialBundleTests(unittest.TestCase):
         for name in PUBLIC_FILES:
             with self.subTest(project=name):
                 project, target = self.fixture(name)
-                (project/'README.md').unlink()
+                readme = next(filename for filename in PUBLIC_FILES[name] if filename.startswith('README.'))
+                (project/readme).unlink()
                 with self.assertRaises(FileNotFoundError):
                     package_public_files(project, target)
                 self.assertEqual(target.read_bytes(), b'previous download')

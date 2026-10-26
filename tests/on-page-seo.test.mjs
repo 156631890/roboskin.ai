@@ -66,3 +66,16 @@ test('resource directory includes every supplied page exactly once, including ne
   assert.deepEqual(grouped.slice().sort(), paths.slice().sort());
   assert.equal(new Set(grouped).size, paths.length);
 });
+
+test('resource directory separates sensor selection from practical setup and maintenance', () => {
+  const expected = {
+    hardware: ['/guides/gelsight-vs-digit', '/guides/optical-vs-capacitive-tactile-sensors', '/guides/robot-touch-sensor'],
+    engineering: ['/guides/optical-tactile-sensor-maintenance', '/guides/3d-printed-tactile-sensors', '/guides/aspire-libero-pro-setup'],
+    foundations: ['/robot-skin', '/guides/robot-skin-vs-e-skin'],
+  };
+  const pages = Object.values(expected).flat().map((path) => ({ path }));
+  const groups = groupResourcePages(pages);
+  for (const [id, paths] of Object.entries(expected)) {
+    assert.deepEqual(groups.find((group) => group.id === id)?.pages.map((page) => page.path), paths);
+  }
+});

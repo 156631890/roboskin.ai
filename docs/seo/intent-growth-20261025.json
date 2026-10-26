@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-25",
+  "status": "owner_approved_for_publication",
+  "baselineCommit": "326718932e0ddfa6135eff92de5375f7a2e1f4c0",
+  "scope": [
+    {
+      "path": "/resources",
+      "change": "Classify existing selection/comparison guides as hardware and maintenance/fabrication/setup guides as engineering. All directory entries are retained."
+    },
+    {
+      "path": "/guides/lerobot-dataset-format#dataset-visualizer",
+      "change": "Add official browser and pinned v0.6.1 visualization entry points, commands, time/state/action/camera checks and failure boundaries. Retain the existing numeric exercises and evidence. Add a pinned public-episode inspection, observed report and reproducible source-only ZIP; preserve the distinction between file timestamps and physical synchronization."
+    },
+    {
+      "path": "/guides/gelsight-vs-digit#comparison-records",
+      "change": "Add blank paired-device protocol, per-trial and optional slip-event CSV records plus field definitions. Preserve the existing generic evaluation template."
+    }
+  ],
+  "intentDecision": "Expand existing useful resources; no new canonical page or duplicate VLA/VLM/world-model explanation. The private 50-query map reuses October 23 DataForSEO evidence, with unknown metrics kept unknown.",
+  "sources": [
+    "https://huggingface.co/docs/lerobot/v0.6.1/using_dataset_tools#dataset-visualization",
+    "https://huggingface.co/docs/lerobot/v0.6.1/installation",
+    "https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/scripts/lerobot_dataset_viz.py",
+    "https://github.com/huggingface/lerobot/blob/v0.6.1/pyproject.toml",
+    "https://github.com/facebookresearch/digit-interface/blob/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9/README.md",
+    "https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md",
+    "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/blob/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/README.md",
+    "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/blob/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/meta/info.json"
+  ],
+  "verification": {
+    "nodeTests": {
+      "total": 333,
+      "status": "Exact approved content head 799c8bdf2c800886e791e92e6d999ecd70d18038 passed the full Quality gate verify and verify-server CI. Integration with current main is checked separately before merge."
+    },
+    "lintAndTypecheck": "passed in final static build",
+    "staticBuild": "passed",
+    "export": "203 sitemap URLs, 208 protected URL entries, 6 intentional noindex URLs; metadata and internal destination/anchor checks passed",
+    "browser": "Chromium desktop 1440x900 and mobile 390x844; 3 pages; no page errors; no page-level horizontal overflow; resource groups verified",
+    "noJavaScript": "All three affected sections readable in a separate mobile context",
+    "downloads": "Three CSV files plus public-sample ZIP downloaded in Chromium with source hashes; TXT, Python, manifest, report, lock and license HTTP bodies matched source.",
+    "copyCommand": "LeRobot command copied through its real button and clipboard contents verified",
+    "priorModulesMissing": [],
+    "snapshotSha256": "34641f4debc180be04a923b5476467e0a0685cd53109cb2fe5bfc9d250a49c46",
+    "publicDataset": {
+      "repository": "lerobot/koch_pick_place_1_lego",
+      "revision": "afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
+      "numericFrames": 445,
+      "episode": 0,
+      "cameraStreams": 2,
+      "officialLoaderSamples": [
+        0,
+        111,
+        222,
+        333,
+        444
+      ],
+      "negativeControl": "Half-frame timestamp offset rejected on both streams",
+      "packageRerun": "Extracted scripts reproduced every numerical/video result; six metadata/data files downloaded afresh; two video files reused after full source-hash verification.",
+      "report": "public/tutorials/lerobot-public-sample/reference-verification.json",
+      "sourceBytes": 409637197
+    }
+  },
+  "measurement": {
+    "resources": "Fixed same-origin IDs; GA4 download/open events retain existing consent and withdrawal behavior; Vercel reuses the sensor evaluation event with an interaction label",
+    "privacy": "No query, fragment, anchor text or completed worksheet content in the new resource event properties",
+    "interpretation": "Clicks indicate resource intent, not successful experiments or training"
+  },
+  "limitations": [
+    "Visualizer UI was source-checked but not executed. Public-sample video decoding and file timestamps were tested only for one episode; no physical synchronization claim.",
+    "No new hardware comparison, sensor calibration or robot experiment was performed",
+    "ROS 2 runtime remains unavailable locally; Docker and a WSL distribution are absent, and the GitHub OAuth login lacks workflow scope",
+    "Google Live and indexed-version inspections were not performed in this batch",
+    "Technical validation and agent source review are not independent human content approval"
+  ],
+  "review": {
+    "humanReviewer": "Project owner / user in this conversation; no personal name asserted",
+    "approvalEvent": {
+      "recordedDate": "2026-10-26",
+      "channel": "explicit user response to the content-review question for PR #90",
+      "statement": "我已审阅该版本，批准发布",
+      "approvedContentHead": "799c8bdf2c800886e791e92e6d999ecd70d18038",
+      "snapshotSha256": "34641f4debc180be04a923b5476467e0a0685cd53109cb2fe5bfc9d250a49c46"
+    },
+    "decision": "approved",
+    "publication": "Owner approved the specified content snapshot. Publish after integration checks; this record is not a claim of production deployment."
+  },
+  "deferred": [
+    "PR 36 navigation changes are already present in current main",
+    "Evaluate the October 23 release after its complete observation window; begin a separate window for this batch after actual publication",
+    "ROS 2 runtime execution still needs a suitable environment."
+  ],
+  "completedSeparately": "PR26 technical schema repair merged and production-verified at3267189; original77 metadata rewrites remain deferred."
+}

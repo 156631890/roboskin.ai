@@ -5,6 +5,11 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 
 PUBLIC_FILES = {
+    'lerobot-public-sample': (
+        'LICENSE-CODE.txt', 'README.txt', 'download_sample.py',
+        'verify_public_sample.py', 'selected-repository.json',
+        'requirements-windows-py313.lock.txt', 'reference-verification.json',
+    ),
     'lerobot-validation': (
         'LICENSE-CODE.txt', 'LICENSE-DATA.txt', 'README.md',
         'check_dataset.py', 'example-contract.json', 'generate_fixtures.py',
