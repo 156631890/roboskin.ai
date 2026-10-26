@@ -4,6 +4,50 @@ export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
 {
+  "id": "egoexplorer",
+  "name": "EgoExplorer human vision-motion-touch mini release",
+  "institution": [
+    "InternRobotics and EgoExplorer paper collaborators"
+  ],
+  "year": 2026,
+  "firstPublished": "2026-10-13",
+  "paperVersion": "arXiv v1 (2610.18872)",
+  "dataOrigin": "real",
+  "robot": [
+    "Human wearable collection rig; no verified robot-action training release"
+  ],
+  "sensor": [
+    "Wuji tactile arrays",
+    "Egocentric camera",
+    "Body trackers and hand tracking"
+  ],
+  "modalities": [
+    "Egocentric video",
+    "Tracker poses",
+    "Hand skeletons",
+    "Wuji tactile observations",
+    "Reconstructed SMPL-X",
+    "English step captions"
+  ],
+  "sampleCount": "The paper reports a 100-hour corpus. The current card describes an approval-gated mini release of 18 episodes / 66 minutes; these are not the full paper corpus or independently recounted payloads.",
+  "tasks": [
+    "Human loco-manipulation observation",
+    "Multimodal representation and retargeting research"
+  ],
+  "objectCategories": "Ten task templates across laboratory, household and industrial activities, according to the card.",
+  "dataFormat": "The card describes LeRobot v3.0 at 30 Hz, video, five tracker poses, two 21-joint hand skeletons, 24 x 31 Wuji tactile arrays per hand and refined SMPL-X. Reconstructed body geometry is distinct from measured tactile signals. Archive alignment and completeness were not tested.",
+  "license": "Dataset card: CC BY-NC 4.0. Noncommercial conditions apply; approval or download access is not commercial permission.",
+  "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "codeLicense": "Toolkit code license not verified; do not inherit the dataset license.",
+  "modelLicense": "Model-weight and third-party body-model terms not verified.",
+  "generalization": "Human observations require embodiment, action-space and sensor mapping before robot policy use. Retargeting demonstrations do not establish robot-action labels or validated transfer to another hand.",
+  "paperUrl": "https://arxiv.org/abs/2610.18872",
+  "githubUrl": "https://github.com/InternRobotics/EgoExplorer",
+  "datasetUrl": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+  "availability": "Checked 2026-10-26: the public card describes approval-gated access to 18 episodes / 66 minutes and a separate full-collection waitlist. Toolkit commit 0de464fd576939c053356df9be8be1cabc41c8cc exposes capture and reconstruction code. No access request, agreement acceptance, payload download, toolkit execution or training was performed.",
+  "sourceReviewed": "2026-10-26"
+},
+{
   "id": "tacclaw-infinity",
   "name": "TacClaw-Infinity / Daimon-Infinity public release",
   "institution": [
