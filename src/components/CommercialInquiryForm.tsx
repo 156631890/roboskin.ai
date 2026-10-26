@@ -6,6 +6,7 @@ import { useRef, useState } from 'react';
 import { site } from '@/content/site';
 import AntiSpamChallenge from '@/components/AntiSpamChallenge';
 import { parseContactEndpoint, submitInquiry } from '@/lib/form-delivery.mjs';
+import { emitResearchInquiryStage } from '@/lib/research-inquiry-analytics.mjs';
 
 type InquiryState = {
   fullName: string;
@@ -64,10 +65,15 @@ export default function CommercialInquiryForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedback, setFeedback] = useState('');
   const inFlight = useRef(false);
+  const started = useRef(false);
   const [challengeToken, setChallengeToken] = useState('');
   const [challengeKey, setChallengeKey] = useState(0);
 
   function updateField<K extends keyof InquiryState>(field: K, value: InquiryState[K]) {
+    if (field !== 'website' && !started.current) {
+      started.current = true;
+      emitResearchInquiryStage('start');
+    }
     setForm((current) => ({ ...current, [field]: value }));
   }
 
@@ -77,18 +83,22 @@ export default function CommercialInquiryForm() {
     inFlight.current = true;
     setStatus('submitting');
     setFeedback('');
+    emitResearchInquiryStage('submit');
     track('Research Services Form Submit', { project_type: form.projectType });
     try {
       const result = await submitInquiry(contactFormEndpoint, { ...form, challengeToken, requestType: 'commercial-research', formName: 'RoboSkin Research Services', _subject: 'New RoboSkin Research Sprint inquiry' });
       if (!result.ok) {
+        emitResearchInquiryStage('error');
         setStatus('error');
         setFeedback(result.error ?? 'Delivery could not be confirmed. Please use a direct contact link.');
         return;
       }
       setStatus('success');
+      emitResearchInquiryStage('accepted');
       setFeedback('The delivery service accepted your inquiry. We aim to reply within two business days; this acknowledgement does not confirm inbox delivery.');
       track('Research Services Form Success', { project_type: form.projectType });
       setForm(emptyInquiry);
+      started.current = false;
     } finally { inFlight.current = false; setChallengeToken(''); setChallengeKey(key => key + 1); }
   }
 

@@ -4,13 +4,19 @@ import { getArticleHeadings } from '@/lib/article-headings';
 
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
-  const linkPattern = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)]+)\)/g;
+  const inlinePattern = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)]+)\)|\*\*(.+?)\*\*/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
-  while ((match = linkPattern.exec(text)) !== null) {
+  while ((match = inlinePattern.exec(text)) !== null) {
     if (match.index > lastIndex) {
       nodes.push(text.slice(lastIndex, match.index));
+    }
+
+    if (match[3] !== undefined) {
+      nodes.push(<strong key={`strong-${match.index}`}>{renderInline(match[3])}</strong>);
+      lastIndex = match.index + match[0].length;
+      continue;
     }
 
     const href = match[2];
@@ -25,7 +31,7 @@ function renderInline(text: string): ReactNode[] {
         rel={isExternal ? 'noreferrer' : undefined}
         className="text-accent underline decoration-white/30 underline-offset-4 hover:text-white"
       >
-        {match[1]}
+        {renderInline(match[1])}
       </a>,
     );
     lastIndex = match.index + match[0].length;
