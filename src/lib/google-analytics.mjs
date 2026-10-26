@@ -52,6 +52,9 @@ export function analyticsCampaign(value, referrer = '') {
 }
 
 const resourceLinks = new Map([
+  ['/research-services', ['research-services', 'resource_open']],
+  ['/reports/tactile-ai-robot-skin-landscape-2026', ['research-sample', 'resource_open']],
+  ['/reports/roboskin-tactile-ai-robot-skin-sample-report-2026.pdf', ['research-sample-pdf', 'resource_download']],
   ['/robot-vla-models', ['vla-models', 'resource_open']],
   ['/vla/models', ['vla-model-comparison', 'resource_open']],
   ['/vla/timeline', ['vla-research-timeline', 'resource_open']],

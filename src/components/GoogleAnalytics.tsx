@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { analyticsCampaign, analyticsConsentKey, analyticsPageUrl, analyticsReferrer, analyticsResourceEvent, canUseGoogleAnalytics, createPageViewTracker } from '@/lib/google-analytics.mjs';
+import { researchInquiryEvent, researchInquirySignal } from '@/lib/research-inquiry-analytics.mjs';
 
 declare global {
   interface Window {
@@ -98,6 +99,16 @@ export default function GoogleAnalytics() {
     }
     document.addEventListener('click', trackResource);
     return () => document.removeEventListener('click', trackResource);
+  }, [consent, enabled]);
+
+  useEffect(() => {
+    if (!enabled || consent !== 'granted') return;
+    function trackInquiry(event: Event) {
+      const inquiry = researchInquiryEvent(window.location.href, (event as CustomEvent<unknown>).detail);
+      if (inquiry) window.gtag?.('event', inquiry.name, inquiry.parameters);
+    }
+    window.addEventListener(researchInquirySignal, trackInquiry);
+    return () => window.removeEventListener(researchInquirySignal, trackInquiry);
   }, [consent, enabled]);
 
   function choose(value: Consent) {
