@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "status": "review_pending",
+  "status": "owner_approved_for_publication",
   "baselineCommit": "326718932e0ddfa6135eff92de5375f7a2e1f4c0",
   "scope": [
     {
@@ -30,7 +30,7 @@
   "verification": {
     "nodeTests": {
       "total": 333,
-      "status": "Full suite initially 332/333; fixed new download fixture count, all18 analytics tests passed; require final exact-head CI."
+      "status": "Exact approved content head 799c8bdf2c800886e791e92e6d999ecd70d18038 passed the full Quality gate verify and verify-server CI. Integration with current main is checked separately before merge."
     },
     "lintAndTypecheck": "passed in final static build",
     "staticBuild": "passed",
@@ -73,10 +73,16 @@
     "Technical validation and agent source review are not independent human content approval"
   ],
   "review": {
-    "humanReviewer": null,
-    "approvalEvent": null,
-    "decision": "pending",
-    "publication": "hold substantive content until the owner reviews this version; existing maintenance authorization remains in effect"
+    "humanReviewer": "Project owner / user in this conversation; no personal name asserted",
+    "approvalEvent": {
+      "recordedDate": "2026-10-26",
+      "channel": "explicit user response to the content-review question for PR #90",
+      "statement": "我已审阅该版本，批准发布",
+      "approvedContentHead": "799c8bdf2c800886e791e92e6d999ecd70d18038",
+      "snapshotSha256": "34641f4debc180be04a923b5476467e0a0685cd53109cb2fe5bfc9d250a49c46"
+    },
+    "decision": "approved",
+    "publication": "Owner approved the specified content snapshot. Publish after integration checks; this record is not a claim of production deployment."
   },
   "deferred": [
     "PR 36 navigation changes are already present in current main",
