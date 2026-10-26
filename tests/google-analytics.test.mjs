@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 import * as analytics from '../src/lib/google-analytics.mjs';
+import * as inquiries from '../src/lib/research-inquiry-analytics.mjs';
 
 test('only the production hostname with a valid measurement ID can collect', () => {
   for (const host of ['localhost', 'roboskin-preview.vercel.app', 'roboskin.ai.example.com']) {
@@ -53,6 +54,7 @@ function mount({ saved = null, hostname = 'roboskin.ai', id = 'G-TEST123', stora
       if (name === 'next/link') return { default: 'Link' };
       if (name === 'next/navigation') return { usePathname: () => new URL(window.location.href).pathname };
       if (name === '@/lib/google-analytics.mjs') return analytics;
+      if (name === '@/lib/research-inquiry-analytics.mjs') return inquiries;
       if (name === 'react') return {
         useRef(initial) { return hooks[index++] ??= { current: initial }; },
         useState(initial) { const i = index++; hooks[i] ??= { value: initial }; return [hooks[i].value, value => { if (hooks[i].value !== value) { hooks[i].value = value; dirty = true; } }]; },
@@ -67,6 +69,7 @@ function mount({ saved = null, hostname = 'roboskin.ai', id = 'G-TEST123', stora
     window, document, render, nodes: () => nodes(tree),
     click(label) { nodes(tree).find(n => n.type === 'button' && n.props.children === label).props.onClick(); render(); },
     settings() { listeners.get('roboskin:analytics-settings')?.(); render(); },
+    inquiry(stage) { listeners.get(inquiries.researchInquirySignal)?.({ detail: stage }); },
     clickLink(href) { documentListeners.get('click')?.({ target: { closest: () => ({ href }) } }); },
     navigate(path) { window.location.href = `https://${hostname}${path}`; document.title = new URL(window.location.href).pathname; render(); },
     commands() { return Array.from(window.dataLayer ?? [], args => Array.from(args)); },
@@ -80,6 +83,58 @@ test('no choice or declining never loads the Google tag or queues events', () =>
   app.click('Decline'); app.navigate('/datasets');
   assert.equal(app.nodes().some(n => n.type === 'Script'), false);
   assert.equal(app.commands().length, 0);
+});
+
+test('research inquiry collection respects consent, route scope and fixed properties', () => {
+  const app = mount({ path: '/research-services?email=private@example.com#private' });
+  const events = () => app.commands().filter(args => args[0] === 'event' && args[1].startsWith('research_inquiry_'));
+  app.render(); app.inquiry('start');
+  assert.equal(events().length, 0);
+  app.click('Allow analytics');
+  for (const stage of ['start', 'submit', 'accepted', 'error']) app.inquiry(stage);
+  assert.deepEqual(events().map(args => args[1]), ['research_inquiry_start', 'research_inquiry_submit', 'research_inquiry_accepted', 'research_inquiry_error']);
+  for (const event of events()) assert.deepEqual(event[2], { form_id: 'research-services', page_path: '/research-services' });
+  app.inquiry({ stage: 'accepted', email: 'private@example.com' });
+  app.inquiry('private@example.com');
+  assert.equal(events().length, 4);
+  app.navigate('/contact'); app.inquiry('accepted');
+  assert.equal(events().length, 4);
+  app.navigate('/research-services');
+  app.settings(); app.click('Decline'); app.inquiry('accepted');
+  assert.equal(events().length, 4);
+  app.settings(); app.click('Allow analytics');
+  assert.equal(events().length, 4, 'no replay of stages observed without consent');
+  app.inquiry('start');
+  assert.equal(events().length, 5);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
+  for (const options of [{ hostname: 'localhost', saved: 'granted' }, { id: '', saved: 'granted' }]) {
+    const disabled = mount({ ...options, path: '/research-services' });
+    disabled.render(); disabled.inquiry('accepted');
+    assert.equal(disabled.commands().length, 0);
+  }
+});
+
+test('sample and research service links complete the fixed resource funnel', () => {
+  const paths = [
+    ['/research-services', 'research-services', 'resource_open'],
+    ['/reports/tactile-ai-robot-skin-landscape-2026', 'research-sample', 'resource_open'],
+    ['/reports/roboskin-tactile-ai-robot-skin-sample-report-2026.pdf', 'research-sample-pdf', 'resource_download'],
+  ];
+  const app = mount({ path: '/datasets?private=value' }); app.render();
+  const events = () => app.commands().filter(args => args[0] === 'event' && ['resource_open', 'resource_download'].includes(args[1]));
+  for (const [path] of paths) app.clickLink(path);
+  assert.equal(events().length, 0);
+  app.click('Allow analytics');
+  for (const [path, id, name] of paths) {
+    app.clickLink(`${path}?private=value#private`);
+    assert.deepEqual(events().at(-1), ['event', name, { resource_id: id, from_path: '/datasets', target_path: path }]);
+    app.clickLink(`https://other.example${path}`);
+  }
+  assert.equal(events().length, 3);
+  app.settings(); app.click('Decline');
+  for (const [path] of paths) app.clickLink(path);
+  assert.equal(events().length, 3);
+  assert.ok(!JSON.stringify(app.commands()).includes('private'));
 });
 
 test('only approved campaign combinations survive; private and duplicate values are discarded', () => {

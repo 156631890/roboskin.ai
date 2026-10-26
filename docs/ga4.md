@@ -61,3 +61,37 @@ allow, then check `g/collect` uses the configured ID, sanitized `dl`/`dr`, and o
 HTTP transport success. Standard reports can take 24–48 hours to populate.
 
 Tests: `node --test tests/google-analytics.test.mjs`, then the project quality gate.
+
+## Research service funnel
+
+The resource allowlist includes the landscape sample page (`research-sample`),
+its PDF link (`research-sample-pdf`), and the service entrance (`research-services`).
+These remain internal click events. Direct arrivals are page views.
+
+The research form emits four fixed events through the existing consent-controlled
+GoogleAnalytics collector: `research_inquiry_start` on the first visible field
+change, `research_inquiry_submit` on a submission attempt, `research_inquiry_error`
+when the delivery cannot be confirmed, and `research_inquiry_accepted` only after
+the existing transport validates an acknowledgement. A pending duplicate submit
+does not emit another attempt. Consent is required at the time of the event;
+earlier stages are never replayed after permission. Withdrawal removes collection.
+
+Only `form_id=research-services` and `page_path=/research-services` are sent.
+No names, emails, company names, budget values, research questions, receipt IDs,
+challenge tokens, queries or fragments enter these events. The form's existing
+delivery and Vercel Analytics behavior are retained. No automatic form tracking
+or additional persistence is enabled.
+
+An accepted event means the delivery service acknowledged the request. It does
+not confirm inbox delivery, qualification, a unique prospect, an order or revenue.
+Retries can be accepted separately; deduplicate real opportunities in the private
+sales register. Qualify by an identifiable organization, a concrete research
+decision within scope, timing and a confirmed commercial next step. Record paid
+revenue from verified business records, not browser events. GA4's consented funnel
+is a subset of activity and must not be used as the total number of inquiries.
+
+Coverage starts only after this change is deployed; historical missing stages
+cannot be reconstructed. Configure event-scoped dimensions or key events only in
+the verified RoboSkin property if operationally needed. Do not assign monetary
+value to an accepted form or label it as a purchase. Realtime receipt remains a
+separate production check from the local transport/consent tests.
