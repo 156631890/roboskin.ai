@@ -4,6 +4,95 @@ export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
 {
+  "institution": [
+    "Cornell University EmPRISE Lab and paper collaborators"
+  ],
+  "year": 2025,
+  "dataOrigin": "real",
+  "sourceReviewed": "2026-10-27",
+  "modelLicense": "Model-weight terms not verified in this documentation review.",
+  "id": "clamp",
+  "name": "CLAMP multimodal haptic dataset",
+  "paperVersion": "CoRL 2025; arXiv v1 (2505.21495)",
+  "robot": [
+    "Human-operated sensorized reacher-grabber"
+  ],
+  "sensor": [
+    "Active and passive thermal sensors",
+    "Normal-force sensing resistor",
+    "Contact microphone for vibration",
+    "Two IMUs"
+  ],
+  "modalities": [
+    "Thermal",
+    "Normal-force signal",
+    "Vibration",
+    "Proprioception",
+    "Object images",
+    "Spoken annotations and derived language labels"
+  ],
+  "sampleCount": "Authors report 12.3 million samples across 5,357 household objects from 16 devices and 41 participants. These are paper totals, not independently recounted released files.",
+  "tasks": [
+    "Material recognition",
+    "Compliance recognition",
+    "Multimodal object perception"
+  ],
+  "objectCategories": "Household objects in the authors' collection.",
+  "dataFormat": "The repository describes raw data and a filtered NPZ with precomputed visual predictions. The paper uses processed sensor features; its force input is an uncalibrated signal, not a verified Newton-valued release. File schema and payload completeness remain unverified.",
+  "license": "Dataset license unverified: the official Dataverse route could not be inspected. The code license does not grant data reuse rights.",
+  "codeLicense": "Repository code is labeled BSD-3-Clause; dataset and third-party terms must be checked separately.",
+  "generalization": "Human collection and author-reported robot fine-tuning are different evidence. Sensor-specific preprocessing and embodiment adaptation are required; RoboSkin has not reproduced perception or manipulation results.",
+  "paperUrl": "https://arxiv.org/html/2505.21495v1",
+  "projectUrl": "https://emprise.cs.cornell.edu/clamp/",
+  "githubUrl": "https://github.com/empriselab/CLAMP",
+  "datasetUrl": "https://doi.org/10.7910/DVN/HNS2Z4",
+  "availability": "Checked 2026-10-27: official project and repository link a Dataverse dataset. The data landing route was inaccessible in this review; no verification challenge was solved. File manifest, dataset license and payload remain unverified. No download, installation or experiment performed."
+},
+{
+  "institution": [
+    "Cornell University EmPRISE Lab and paper collaborators"
+  ],
+  "year": 2025,
+  "dataOrigin": "real",
+  "sourceReviewed": "2026-10-27",
+  "modelLicense": "Model-weight terms not verified in this documentation review.",
+  "id": "openrobocare",
+  "name": "OpenRoboCare expert caregiving demonstrations",
+  "paperVersion": "IROS 2025",
+  "robot": [
+    "Occupational therapists demonstrating on two manikins; not recorded robot trajectories"
+  ],
+  "sensor": [
+    "Manikin pressure skin: 44 readings per frame",
+    "RGB-D cameras",
+    "Gaze and pose tracking"
+  ],
+  "modalities": [
+    "Pressure JSON",
+    "RGB-D",
+    "Eye gaze",
+    "2D/3D pose",
+    "Hierarchical action annotations",
+    "First/third-person video"
+  ],
+  "sampleCount": "Official sources report 21 occupational therapists, 15 tasks, 315 sessions and 19.8 hours. Counts are provider-reported, not independently audited.",
+  "tasks": [
+    "Caregiving activity perception",
+    "Human demonstration analysis",
+    "Multimodal contact and pose research"
+  ],
+  "objectCategories": "Caregiving activities performed on manikins, not clinical trials with patients.",
+  "dataFormat": "Documentation describes pressure JSON, RGB JPEG, depth PNG, gaze/action CSV and pose JSON. Not every session contains every modality; inspect timestamps and missing files before alignment. Some 3D poses are reconstructed from 2D annotations and may contain noise.",
+  "license": "Documentation names BSD-3-Clause but additionally limits use to research and education, prohibits re-identification, requires citation and participant privacy, and disallows redistribution without permission. AWS describes academic/non-commercial use. Do not treat this as unrestricted commercial permission.",
+  "licenseUrl": "https://emprise.cs.cornell.edu/robo-care/docs/download.html",
+  "codeLicense": "Separate software licensing not verified; the dataset documentation is not a blanket code license.",
+  "generalization": "Manikin demonstrations are not clinical efficacy or safety evidence, and human activity annotations are not robot action supervision. Robot embodiment mapping and patient-context validation remain separate work; RoboSkin has not run these data.",
+  "paperUrl": "https://emprise.cs.cornell.edu/robo-care/",
+  "projectUrl": "https://emprise.cs.cornell.edu/robo-care/docs/organization.html",
+  "datasetUrl": "https://registry.opendata.aws/open-robo-care/",
+  "availability": "Checked 2026-10-27: official docs and AWS registry document public unsigned S3 access. This review inspected documentation only, not a live object manifest or payload; no data downloaded and no terms accepted."
+},
+{
   "id": "egoexplorer",
   "name": "EgoExplorer human vision-motion-touch mini release",
   "institution": [
