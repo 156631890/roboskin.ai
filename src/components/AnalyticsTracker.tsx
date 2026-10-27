@@ -1,6 +1,7 @@
 'use client';
 
-import { track } from '@vercel/analytics';
+import { track as trackVercel } from '@vercel/analytics';
+import { trackGeoEvent } from '@/lib/geoinflow.mjs';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { evidenceBatch, growthBatchForPath, resourceGrowthBatch } from '@/lib/growth-batches.mjs';
@@ -9,6 +10,11 @@ import { sensorEvaluationResource } from '@/lib/google-analytics.mjs';
 
 function cleanLabel(value: string) {
   return value.replace(/\s+/g, ' ').trim().slice(0, 80);
+}
+
+function track(...args: Parameters<typeof trackVercel>) {
+  trackVercel(...args);
+  trackGeoEvent(args[0], args[1]);
 }
 
 export default function AnalyticsTracker() {
