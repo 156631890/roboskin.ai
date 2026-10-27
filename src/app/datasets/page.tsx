@@ -42,6 +42,18 @@ export default function TactileDatasetsPage() {
       }>
         <DatasetAvailabilityAnalysis entries={tactileDatasetEntries} />
         <TactileDataCandidates />
+        <section id="related-collections" className="container-shell pb-12" aria-labelledby="related-collections-heading">
+          <div className="signal-panel p-6">
+            <h2 id="related-collections-heading" className="text-2xl font-semibold">Related collections: check each release separately</h2>
+            <p className="mt-3 text-soft">These collection hubs are excluded from the dataset record count and comparison exports. Documentation reviewed October 27, 2026; individual payloads and reuse rights have not been verified.</p>
+            <h3 className="mt-6 text-xl font-semibold"><a href="https://www.oahd.gatech.edu/" className="text-accent underline">OAHD: Open Access Haptic Database</a></h3>
+            <p className="mt-3 text-soft">The official indexed pages identify a collection of haptic datasets. The home page timed out and the <a href="https://www.oahd.gatech.edu/multi-data/" className="underline">multiple-modalities page</a> returned an error during this review. We cannot verify current files, individual dataset scope or a shared license; treat this as a discovery link, not a validated download.</p>
+            <h3 className="mt-6 text-xl font-semibold"><a href="https://robotfeeding.io/datasets/" className="text-accent underline">Robot Assisted Feeding datasets</a></h3>
+            <p className="mt-3 text-soft">The collection describes force, torque, pose and RGB-D for two Food Manipulation Strategies releases: <a href="https://doi.org/10.7910/DVN/C8SI1D" className="underline">diverse foods</a> and <a href="https://doi.org/10.7910/DVN/8TTXZ7" className="underline">food manipulation strategies</a>. These are source descriptions, not inspected files. The <a href="https://doi.org/10.7910/DVN/GHV7XZ" className="underline">image-mask subset</a> contains visual annotations, not measured touch. The <a href="https://doi.org/10.7910/DVN/8A1XO3" className="underline">bite-acquisition trials</a> describe a force-equipped robot, but that alone does not prove released force streams. Verify each subset's schema and license before reuse.</p>
+            <p className="mt-4 text-soft">Use the <Link href="/guides/lerobot-dataset-format" className="text-accent underline">dataset format and validation guide</Link> to plan field, timestamp and embodiment checks; a linked collection is not a ready-to-train robot policy dataset.</p>
+          </div>
+        </section>
+
         <aside className="container-shell pb-12" aria-label="Data processing practice">
           <div className="signal-panel p-6">
             <h2 className="text-2xl font-semibold">Practice reading tactile data before choosing a dataset</h2>

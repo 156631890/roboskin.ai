@@ -1,6 +1,42 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.26', compiledAt: '2026-10-26', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds EgoExplorer gated-mini-release scope and noncommercial data terms. Other individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.10.27', compiledAt: '2026-10-27', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds CLAMP and OpenRoboCare with documentation-only access and reuse boundaries; related collection hubs are excluded. Other individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
+"clamp": {
+  "access": "linked-unverified",
+  "accessCheckedAt": "2026-10-27",
+  "licenseStatus": "unknown",
+  "dataLicense": "Dataset license unverified: the official Dataverse route could not be inspected. The code license does not grant data reuse rights.",
+  "publicFileScale": "No object manifest or payload independently inspected; counts are source-reported.",
+  "verificationScope": "Official documentation review only; no access request, agreement acceptance, dataset download or reproduction.",
+  "splitStatus": "unknown",
+  "splitDetails": "Released file-level splits and leakage not verified.",
+  "formatStatus": "described",
+  "formatDetails": "The repository describes raw data and a filtered NPZ with precomputed visual predictions. The paper uses processed sensor features; its force input is an uncalibrated signal, not a verified Newton-valued release. File schema and payload completeness remain unverified.",
+  "sources": [
+    "https://arxiv.org/html/2505.21495v1",
+    "https://emprise.cs.cornell.edu/clamp/",
+    "https://doi.org/10.7910/DVN/HNS2Z4",
+    "https://github.com/empriselab/CLAMP"
+  ]
+},
+"openrobocare": {
+  "access": "linked-unverified",
+  "accessCheckedAt": "2026-10-27",
+  "licenseStatus": "documented",
+  "dataLicense": "Documentation names BSD-3-Clause but additionally limits use to research and education, prohibits re-identification, requires citation and participant privacy, and disallows redistribution without permission. AWS describes academic/non-commercial use. Do not treat this as unrestricted commercial permission.",
+  "publicFileScale": "No object manifest or payload independently inspected; counts are source-reported.",
+  "verificationScope": "Official documentation review only; no access request, agreement acceptance, dataset download or reproduction.",
+  "splitStatus": "unknown",
+  "splitDetails": "Released file-level splits and leakage not verified.",
+  "formatStatus": "described",
+  "formatDetails": "Documentation describes pressure JSON, RGB JPEG, depth PNG, gaze/action CSV and pose JSON. Not every session contains every modality; inspect timestamps and missing files before alignment. Some 3D poses are reconstructed from 2D annotations and may contain noise.",
+  "sources": [
+    "https://emprise.cs.cornell.edu/robo-care/",
+    "https://emprise.cs.cornell.edu/robo-care/docs/organization.html",
+    "https://registry.opendata.aws/open-robo-care/",
+    "https://emprise.cs.cornell.edu/robo-care/docs/download.html"
+  ]
+},
 "egoexplorer": {
   "access": "gated",
   "accessCheckedAt": "2026-10-26",
