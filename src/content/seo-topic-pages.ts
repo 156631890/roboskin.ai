@@ -5117,7 +5117,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
     updated: '2026-10-28',
-    revisionNote: 'October 28, 2026: added a five-entry, source-linked dataset decision matrix, a one-episode inspection workflow and downloadable decision records. Earlier research sections, sources and dates are retained.',
+    revisionNote: 'October 28, 2026: added a CARD source-and-replay comparison; added a five-entry, source-linked dataset decision matrix, a one-episode inspection workflow and downloadable decision records. Earlier research sections, sources and dates are retained.',
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5293,6 +5293,29 @@ export const seoTopicPages: SeoTopicPage[] = [
           { label: 'Scope a research and integration evidence review', href: '/research-services' },
         ],
       },
+{
+        "id": "card-contact-source-comparison",
+        "heading": "CARD: inferred contact, measured touch and replay feedback",
+        "body": [
+                "CARD (October 27, 2026 preprint) separates demonstration sources: Vid-HACO infers contact from monocular video; tactile gloves measure pressure; sources without force measurements receive synthesized force targets. A shared hand-contact representation and semantic human-region-to-robot-link mapping produce motion and contact targets. Inferred contact and synthesized force are not sensor measurements.",
+                "Unlike the DexOAK reference-and-RL pipeline below, CARD examines retargeting and replay. Its tactile tracker requires measured fingertip force, an admittance loop and joint-impedance control. The paper calls replay open-loop because it has no object-pose estimate or learned policy, while retaining local force feedback. Tactile-free embodiment demonstrations use different accommodations; they do not establish equivalent force tracking.",
+                "The authors report contact fidelity pooled over anchor-frames, not autonomous task success. Their separate SHARPA Wave tracker ablation uses three tasks with ten trials each; it is not a general reliability estimate. Before adoption, distinguish source observations, generated targets, semantic mapping and available hardware feedback. RoboSkin has not reproduced these experiments or verified code, data or reuse licenses."
+        ],
+        "links": [
+                {
+                        "label": "CARD v1: source representation, replay and evaluation",
+                        "href": "https://arxiv.org/html/2610.36539v1"
+                },
+                {
+                        "label": "DexTaG: tactile guidance during policy training",
+                        "href": "/news/dextag-tactile-guided-dexterous-retargeting"
+                },
+                {
+                        "label": "Review robot-data interfaces",
+                        "href": "/research-services"
+                }
+        ]
+},
       {
         id: 'dexoak-object-aware-retargeting',
         heading: 'DexOAK: from human hand-object motion to robot references',
