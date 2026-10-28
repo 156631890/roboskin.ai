@@ -1,0 +1,89 @@
+{
+  "version": "2026.10.28",
+  "source_reviewed": "2026-10-28",
+  "publisher": "RoboSkin.ai Editorial Team",
+  "purpose": "Choose a first dataset inspection route by task and evidence, not by a universal score.",
+  "scope": "Five deliberately selected starting points, not an exhaustive catalog or an interoperability certification.",
+  "records": [
+    {
+      "id": "open-x-embodiment",
+      "name": "Open X-Embodiment",
+      "use_when": "You need a mixture of robot embodiments and are prepared to define a per-dataset adapter.",
+      "signals_and_actions": "RLDS episodes; cameras, state fields and action conventions vary across constituent datasets. The RT-1-X checkpoint interface is not a schema for every dataset.",
+      "format": "RLDS episodes; download and loading examples in the official repository.",
+      "first_check": "Choose one constituent dataset in the official inventory, inspect an episode with the official notebook, and record its action units and split before mixing it with others.",
+      "access_url": "https://github.com/google-deepmind/open_x_embodiment/blob/9eeb68b989efbcf474e8fb9019e01d02b962a604/README.md#dataset-access",
+      "rights": "Repository: Apache-2.0 for software; CC BY 4.0 for other repository materials. Inspect the selected constituent dataset's own terms and citation; do not assign one inferred license to the whole mixture.",
+      "evidence": "Source inspection on 2026-10-28. No dataset payload or training run was checked in this review.",
+      "stop_if": "The intended subset has unresolved action semantics, rights, or a held-out evaluation boundary.",
+      "sources": [{"label": "Official repository at 9eeb68b: access, constituent inventory and licensing", "url": "https://github.com/google-deepmind/open_x_embodiment/blob/9eeb68b989efbcf474e8fb9019e01d02b962a604/README.md"}]
+    },
+    {
+      "id": "droid",
+      "name": "DROID",
+      "use_when": "You need varied real-world manipulation scenes on a common Franka platform.",
+      "signals_and_actions": "The documented RLDS schema exposes three camera views, observed state and action_dict commands. A pinned policy-loader example constructs a 10-dimensional absolute target from Cartesian position, a 6D rotation representation and gripper position.",
+      "format": "RLDS for training; separate raw high-resolution/stereo files. The documentation advertises a 100-episode RLDS debugging subset (~2 GB).",
+      "first_check": "Start with the official visualizer or 100-episode subset, then trace the exact loader's command representation and camera selection. The subset size is provider-reported, not a download measured by RoboSkin.",
+      "access_url": "https://droid-dataset.github.io/droid/the-droid-dataset.html",
+      "rights": "The v2 paper states CC BY 4.0 for the dataset. Keep dataset rights separate from the software license and any later annotation release.",
+      "evidence": "Documentation, v2 paper and pinned loader source inspected on 2026-10-28. The DROID loader was not executed and no DROID episode was downloaded in this review.",
+      "stop_if": "A seven-number array is being treated as seven joint targets without tracing the producing transform and controller.",
+      "sources": [
+        {"label": "Official data access and schema", "url": "https://droid-dataset.github.io/droid/the-droid-dataset.html"},
+        {"label": "DROID paper v2: platform and dataset license", "url": "https://arxiv.org/html/2403.12945v2"},
+        {"label": "Pinned action transform", "url": "https://github.com/droid-dataset/droid_policy_learning/blob/9a29c832b4c81bf38401111f5e4cdddaca217581/robomimic/utils/rlds_utils.py#L27-L38"},
+        {"label": "Pinned loader: absolute targets, camera selection and filters", "url": "https://github.com/droid-dataset/droid_policy_learning/blob/9a29c832b4c81bf38401111f5e4cdddaca217581/examples/droid_dataloader.py"}
+      ]
+    },
+    {
+      "id": "bridgedata-v2",
+      "name": "BridgeData V2",
+      "use_when": "You need goal- or language-conditioned manipulation examples on the WidowX platform.",
+      "signals_and_actions": "Robot observations, states, actions and language; camera/depth coverage varies. Teleoperated demonstrations and scripted pick-and-place rollouts are separate collections.",
+      "format": "Raw JPEG/PNG/pickle files; processed 256 × 256 TFDS/RLDS option. A file container is not an action-unit specification.",
+      "first_check": "Choose demonstrations or scripted rollouts deliberately, inspect the available camera views, then pin the conversion and loader used for the training target.",
+      "access_url": "https://rail.eecs.berkeley.edu/datasets/bridge_release/data/",
+      "rights": "The official project states CC BY 4.0 for all data. The training repository's software terms are separate.",
+      "evidence": "Official project and pinned training README inspected on 2026-10-28. No raw archive, converter or policy was run in this review.",
+      "stop_if": "You need a tactile stream or all four camera views and have not confirmed them in the chosen episodes.",
+      "sources": [
+        {"label": "Official composition, hardware, camera coverage and data license", "url": "https://rail-berkeley.github.io/bridgedata/"},
+        {"label": "Pinned raw/TFDS loading routes", "url": "https://github.com/rail-berkeley/bridge_data_v2/blob/bc60a35b701a12021c8c95e9d8601274d3acd928/README.md#data"}
+      ]
+    },
+    {
+      "id": "lerobot-public-example",
+      "name": "LeRobot koch_pick_place_1_lego example",
+      "use_when": "You need a bounded exercise to inspect LeRobot v3 storage and loader behavior before choosing training data.",
+      "signals_and_actions": "Two camera streams; six-element state and action vectors. The pinned metadata declares robot_type unknown and does not establish physical units. No tactile feature is declared.",
+      "format": "LeRobot v3 Parquet and MP4 shards with episode metadata.",
+      "first_check": "Use RoboSkin's existing episode-0 exercise: 445 rows, two decoded video streams and five complete official-loader samples. Read the dated report and its limits.",
+      "access_url": "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/tree/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b",
+      "rights": "The pinned dataset card declares Apache-2.0. It does not supply a complete robot/controller contract.",
+      "evidence": "Pinned card re-read on 2026-10-28; file/loader results are the separate recorded RoboSkin run of 2026-10-25, not a new run today.",
+      "stop_if": "The repository name is being used to infer verified robot identity, units, calibration or suitability for another policy.",
+      "sources": [
+        {"label": "Pinned card and metadata", "url": "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/blob/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/README.md"},
+        {"label": "RoboSkin's dated loader exercise and limits", "url": "https://roboskin.ai/guides/lerobot-dataset-format"}
+      ]
+    },
+    {
+      "id": "univtac-lift-bottle",
+      "name": "UniVTAC / Tactile-ETA Lift Bottle inputs",
+      "use_when": "You need a public simulated example of action-aligned camera and bilateral tactile context.",
+      "signals_and_actions": "Head/wrist RGB, bilateral marker RGB, measured end-effector/joint state and simulation steps. The released demonstration describes measured motion; original actuator/tool commands are not available in that package.",
+      "format": "Pinned HDF5 episodes plus Tactile-ETA JSON and PNG strips.",
+      "first_check": "Run the accompanying offline audit of upstream episodes 0 and 1. It checks 24 segments and released strip pixels against the raw data, without policy inference.",
+      "access_url": "https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/isaac51/lift_bottle",
+      "rights": "The pinned UniVTAC dataset card declares MIT; Tactile-ETA's demonstration README attributes these processed inputs to that release. Review separately any simulator, model or task-asset terms.",
+      "evidence": "Actual local input audit on 2026-10-28. This does not reproduce a success rate, run a selector's feature computation, or test a physical robot.",
+      "stop_if": "You need measured physical contact, original commanded actions or an independently reproduced control result.",
+      "sources": [
+        {"label": "Pinned UniVTAC card", "url": "https://huggingface.co/datasets/byml/UniVTAC/blob/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/README.md"},
+        {"label": "Pinned demonstration provenance", "url": "https://github.com/No-518/Tactile-ETA/blob/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/demonstrations/README.md"},
+        {"label": "Pinned preparation code: measured motion and nominal timing", "url": "https://github.com/No-518/Tactile-ETA/blob/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/scripts/univtac/prepare_demonstrations.py"}
+      ]
+    }
+  ]
+}

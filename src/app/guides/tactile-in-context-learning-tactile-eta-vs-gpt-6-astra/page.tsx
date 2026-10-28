@@ -12,5 +12,5 @@ export function generateMetadata(): Metadata {
 
 export default function TactileInContextLearningComparisonPage() {
   if (!page) notFound();
-  return <SeoTopicArticle page={page} />;
+  return <SeoTopicArticle page={page} leadHref="#published-input-audit" leadLabel="Inspect the executed input audit" />;
 }

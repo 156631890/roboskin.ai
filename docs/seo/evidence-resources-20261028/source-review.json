@@ -1,0 +1,96 @@
+{
+  "review_date": "2026-10-28",
+  "scope": "New dataset selection and action-trace material. Source snapshots retained locally; third-party bodies are not redistributed here. Tactile numerical paper results retain their earlier v1 review.",
+  "sources": [
+    {
+      "file": "eta-demo.json",
+      "url": "https://raw.githubusercontent.com/No-518/Tactile-ETA/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/demonstrations/lift_bottle/expert_demonstrations.json",
+      "sha256": "728d73024ee0946aca5ba39975eafa30d9e27a6242a6ec27c0092e254a17f55c",
+      "bytes": 78875
+    },
+    {
+      "file": "eta-readme.txt",
+      "url": "https://raw.githubusercontent.com/No-518/Tactile-ETA/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/demonstrations/README.md",
+      "sha256": "c9efd0dae378a747ac0f16850cf1dad56476d36a3a6ae62520bfa1de86533d80",
+      "bytes": 766
+    },
+    {
+      "file": "eta-prepare.py",
+      "url": "https://raw.githubusercontent.com/No-518/Tactile-ETA/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/scripts/univtac/prepare_demonstrations.py",
+      "sha256": "85ae030ef592c812a311158623f9cc40d6a7f364bc675d02ff7795aae596f8b8",
+      "bytes": 7115
+    },
+    {
+      "file": "eta-history.py",
+      "url": "https://raw.githubusercontent.com/No-518/Tactile-ETA/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/sim/envs/univtac/tactile_history.py",
+      "sha256": "49f4458e861d21cb96b8a27be743e9f35c6ee6ed3162c12635e455b8fcf8192e",
+      "bytes": 16209
+    },
+    {
+      "file": "eta-config.yaml",
+      "url": "https://raw.githubusercontent.com/No-518/Tactile-ETA/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/configs/tasks/lift_bottle.yaml",
+      "sha256": "1ce48a86a5c99f3bf4fd235dd08a0b4ef0cfd0ac0d99deed619c84b520f562f2",
+      "bytes": 2220
+    },
+    {
+      "file": "oxe-readme.txt",
+      "url": "https://raw.githubusercontent.com/google-deepmind/open_x_embodiment/9eeb68b989efbcf474e8fb9019e01d02b962a604/README.md",
+      "sha256": "e7dbf6bb04559e981b7eab2e0f4510579bf82b09948a0fe6471ba1794f86ae59",
+      "bytes": 4719
+    },
+    {
+      "file": "droid-readme.txt",
+      "url": "https://raw.githubusercontent.com/droid-dataset/droid_policy_learning/9a29c832b4c81bf38401111f5e4cdddaca217581/README.md",
+      "sha256": "017b89f99a2f1d122ec1dcb5d13f32ad07e854432bd4ba12d242f2d49da2a3eb",
+      "bytes": 10071
+    },
+    {
+      "file": "bridge-readme.txt",
+      "url": "https://raw.githubusercontent.com/rail-berkeley/bridge_data_v2/bc60a35b701a12021c8c95e9d8601274d3acd928/README.md",
+      "sha256": "495f26dbfea53876db3f470e7b8a04901962e9e86b170d65aa7408536945ff7b",
+      "bytes": 6902
+    },
+    {
+      "file": "droid-loader.py",
+      "url": "https://raw.githubusercontent.com/droid-dataset/droid_policy_learning/9a29c832b4c81bf38401111f5e4cdddaca217581/examples/droid_dataloader.py",
+      "bytes": 3440,
+      "sha256": "78bab3a44359c2aceaf2d77f6a4cb38b5d7cb6f9aab6e3406d79756830a7b24d"
+    },
+    {
+      "file": "droid-rlds.py",
+      "url": "https://raw.githubusercontent.com/droid-dataset/droid_policy_learning/9a29c832b4c81bf38401111f5e4cdddaca217581/robomimic/utils/rlds_utils.py",
+      "bytes": 3209,
+      "sha256": "97c26f0cae681f9f48e0a040872451d080a54be3bcbbbb5d86466b778519de3c"
+    },
+    {
+      "file": "droid-dataset.html",
+      "url": "https://droid-dataset.github.io/droid/the-droid-dataset.html",
+      "bytes": 26993,
+      "sha256": "a7ad29d7af6024e72e5ea6d9223ced548f283b15dc02e3dd37fbed5efc531099"
+    },
+    {
+      "file": "droid-paper.html",
+      "url": "https://arxiv.org/html/2403.12945v2",
+      "bytes": 258605,
+      "sha256": "52b3697faead93f4ffa81582cb55db8c08696036c28e140ddcff682bc2edef65"
+    },
+    {
+      "file": "bridge-project.html",
+      "url": "https://rail-berkeley.github.io/bridgedata/",
+      "bytes": 31765,
+      "sha256": "b0bde8e18443d2c9867cc8e44bd6845e3827a18d52279e81951cfacc570084cc"
+    },
+    {
+      "file": "univtac-card.txt",
+      "url": "https://huggingface.co/datasets/byml/UniVTAC/raw/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/README.md",
+      "bytes": 1355,
+      "sha256": "87e0f0421e004d32e346fef2a902e5c71a5c4331c34702ec1901aea7d931316a"
+    },
+    {
+      "file": "lerobot-card.txt",
+      "url": "https://huggingface.co/datasets/lerobot/koch_pick_place_1_lego/raw/afc0b3e54679cb8a94283fbab5a4ccf0d405f10b/README.md",
+      "bytes": 4283,
+      "sha256": "4cd1051b209189c8db6fb8a409197da13f8ad6ec8a097b3a11e5baaed3b4cf51"
+    }
+  ]
+}

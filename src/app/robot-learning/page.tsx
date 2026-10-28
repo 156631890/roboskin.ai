@@ -13,5 +13,5 @@ export function generateMetadata(): Metadata {
 
 export default function RobotLearningPage() {
   if (!page) notFound();
-  return <SeoTopicArticle page={page} />;
+  return <SeoTopicArticle page={page} leadHref="#robot-data-starting-points" leadLabel="Choose a dataset starting point" />;
 }

@@ -1,0 +1,6 @@
+# Environment used for the published input audit: Python 3.13.3, Windows.
+# Optional local installation; no model service or paid API is used.
+numpy==2.2.6
+h5py==3.16.0
+opencv-python-headless==5.0.0.93
+Pillow==11.3.0

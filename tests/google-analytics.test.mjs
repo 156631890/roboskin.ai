@@ -290,6 +290,9 @@ test('verified exercise and evaluation downloads use fixed IDs and respect conse
     ['/tutorials/lerobot-loader/lerobot-official-loader.zip', 'lerobot-official-loader'],
     ['/tutorials/lerobot-public-sample/lerobot-public-sample.zip', 'lerobot-public-sample'],
     ['/resources/tactile-sensor-evaluation-template.csv', 'sensor-evaluation-template'],
+    ['/resources/robot-data/v2026.10.28/robot-data-decision-kit.zip', 'robot-data-decision-kit'],
+    ['/resources/tactile-icl/v2026.10.28/tactile-context-reproduction-kit.zip', 'tactile-icl-kit'],
+    ['/resources/tactile-icl/v2026.10.28/citation.bib', 'tactile-icl-citation'],
   ];
   const app = mount({ path: '/datasets?email=private@example.com' });
   const resources = () => app.commands().filter(args => args[0] === 'event' && args[1] === 'resource_download');
