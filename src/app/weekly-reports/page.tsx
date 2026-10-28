@@ -4,8 +4,8 @@ import ReportMembership from '@/components/ReportMembership';
 import { membershipConfig, BILLING_PERIODS, PORTAL_URL } from '@/lib/membership/config.mjs';
 
 export const metadata: Metadata = {
-  title: 'Weekly Robotics Industry Reports',
-  description: 'Follow robot learning, teleoperation and tactile robotics with source-linked industry reports. See subscription availability, report access and billing controls.',
+  title: 'Paid Robotics Research Reports — US$9.90/month',
+  description: 'One source-linked robotics research report each week for US$9.90/month, plus applicable tax. Explore paid report access, billing and the separate free newsletter.',
   alternates: { canonical: 'https://roboskin.ai/weekly-reports' },
   robots: { index: false, follow: true },
 };
@@ -15,9 +15,11 @@ export default function WeeklyReportsPage() {
   const unit = BILLING_PERIODS[config.interval];
   return <article className="container-shell py-16 md:py-24">
     <header className="max-w-3xl">
-      <span className="eyebrow">RoboSkin industry intelligence</span>
-      <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-6xl">Weekly robotics industry reports</h1>
-      <p className="mt-6 text-lg leading-relaxed">A weekly view of robot learning, teleoperation, tactile sensing and embodied AI: what changed, why it matters, and what the evidence can support.</p>
+      <span className="eyebrow">Paid research subscription</span>
+      <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-6xl">RoboSkin Research Reports</h1>
+      <p className="mt-6 text-lg leading-relaxed">Go beyond the reading list with source-linked analysis of robotics developments, implications for engineering and product decisions, and clearly stated limitations.</p>
+      <p className="mt-4 text-lg font-semibold">US$9.90/month · One report each week</p>
+      <p className="mt-3">Billed monthly and renews automatically until canceled. Applicable tax is shown at checkout.</p>
       {!config.ready && <p className="mt-5 rounded-lg border p-4" role="status">Paid subscriptions are being prepared. Checkout is closed and this page does not collect payment or email addresses.</p>}
     </header>
     <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1fr]">
@@ -28,12 +30,12 @@ export default function WeeklyReportsPage() {
           <li>Implications for engineering and product decisions, including unresolved questions and limitations.</li>
           <li>A dated source register and access to the report library while your subscription is active.</li>
         </ul>
-        <p className="mt-6">The report format is separate from the free Newsletter. Reports are prepared and reviewed before publication; a source claim is not a RoboSkin hardware test.</p>
+        <p className="mt-6">Includes access to the private report library while your paid subscription is active. The <Link className="underline" href="/#newsletter">free tactile robotics newsletter</Link> is a separate email list and does not include paid report access. Reports are prepared and reviewed before publication; a source claim is not a RoboSkin hardware test.</p>
         <p className="mt-4"><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Read our free landscape sample</Link> for an example of our research approach. It is not a current weekly issue.</p>
         <p className="mt-4"><Link className="underline" href="/editorial-policy">Editorial standards</Link> · <Link className="underline" href="/contact?requestType=research">Report questions and support</Link></p>
       </section>
       <section className="rounded-xl border p-6 md:p-8" aria-labelledby="membership">
-        <h2 id="membership" className="text-2xl font-semibold">Report membership</h2>
+        <h2 id="membership" className="text-2xl font-semibold">Paid report membership</h2>
         {config.ready && unit ? <>
           <p className="mt-4 text-4xl font-semibold">US$9.90 <span className="text-lg font-normal">/ {unit}</span></p>
           <p className="mt-3">Billed automatically every {unit}. One report per week, delivered as an email notice and a private online report. Applicable tax is shown at Waffo checkout before you pay.</p>
@@ -44,7 +46,7 @@ export default function WeeklyReportsPage() {
         </> : <>
           <p className="mt-4 text-3xl font-semibold">US$9.90 / month</p>
           <p className="mt-3">Monthly subscription with one new industry report every week. Applicable tax is shown before payment. Checkout is not open yet; the launch date and first issue will be available before subscriptions begin.</p>
-          <p className="mt-4"><Link className="underline" href="/#newsletter">Explore the free Newsletter</Link> or <Link className="underline" href="/rss">follow the research RSS feed</Link>.</p>
+          <p className="mt-4"><Link className="underline" href="/#newsletter">Explore the free newsletter</Link> or <Link className="underline" href="/rss">follow the research RSS feed</Link>.</p>
         </>}
         <p className="mt-6 text-sm"><a className="underline" href={PORTAL_URL}>Manage or cancel billing at Waffo</a> · <Link className="underline" href="/terms">Terms</Link> · <Link className="underline" href="/privacy">Privacy</Link></p>
       </section>

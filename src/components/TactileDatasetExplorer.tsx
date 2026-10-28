@@ -131,7 +131,7 @@ export default function TactileDatasetExplorer({
         </div>
 
         {pathname === '/datasets' ? <div className="mt-5 flex flex-wrap gap-5 text-sm underline"><a href="#availability-analysis">Read the availability analysis</a><a href="#dataset-changelog">What changed in this directory</a><a href="/datasets.json">Open full audit JSON</a></div> : null}
-        {pathname === '/datasets' ? <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c8d1de]" aria-label="Follow or discuss dataset research"><a className="underline" href="#newsletter">Weekly brief / signup status</a><a className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Free sample report</a><a className="underline" href="/research-services?source=datasets#inquiry">Discuss a dataset research question</a></p> : null}
+        {pathname === '/datasets' ? <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c8d1de]" aria-label="Follow or discuss dataset research"><a className="underline" href="#newsletter">Free newsletter / signup status</a><a className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Free sample report</a><a className="underline" href="/research-services?source=datasets#inquiry">Discuss a dataset research question</a></p> : null}
         <div className="signal-panel mt-7 grid gap-5 p-5 md:grid-cols-[1fr_auto] md:items-end">
           <label className="grid gap-2 text-sm font-semibold text-white">
             Search datasets

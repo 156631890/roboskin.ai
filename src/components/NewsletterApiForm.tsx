@@ -34,15 +34,15 @@ export default function NewsletterApiForm() {
     finally { inFlight.current = false; setBusy(false); setToken(''); setChallengeKey((key) => key + 1); }
   }
   return <form id="newsletter-signup" className="newsletter-form" onSubmit={submit}>
-    <label htmlFor="newsletter-email">Weekly Tactile Robotics Research Brief</label>
-    <p>One weekly email with research, dataset releases and reproduction notes. Buttondown manages the list. Confirm your email to join; each brief includes an unsubscribe link.</p>
+    <label htmlFor="newsletter-email">Free Tactile Robotics Newsletter</label>
+    <p id="newsletter-details">Get a weekly selection of research papers, dataset releases and practical tutorials. Free to join. No payment details required. Paid research reports are a separate subscription.</p>
     <input name="website" aria-hidden="true" tabIndex={-1} autoComplete="off" className="hidden" />
-    <div><input id="newsletter-email" name="email" type="email" maxLength={254} autoComplete="email" placeholder="Email address" required aria-describedby="newsletter-feedback" />
-      <button type="submit" disabled={busy || !token}>{busy ? 'Submitting…' : 'Send confirmation email'}</button></div>
-    <label className="newsletter-consent"><input name="consent" type="checkbox" required /> I want the weekly brief. <Link href="/privacy">Privacy</Link></label>
+    <div><input id="newsletter-email" name="email" type="email" maxLength={254} autoComplete="email" placeholder="Email address" required aria-describedby="newsletter-details newsletter-feedback" />
+      <button type="submit" disabled={busy || !token}>{busy ? 'Submitting…' : 'Join the free newsletter'}</button></div>
+    <label className="newsletter-consent"><input name="consent" type="checkbox" required /> I agree to receive the free RoboSkin newsletter. I can unsubscribe at any time. <Link href="/privacy">Privacy</Link></label>
     <AntiSpamChallenge key={challengeKey} action="newsletter" onToken={setToken} />
     <span id="newsletter-feedback" role={error ? 'alert' : 'status'} aria-live="polite">{feedback}</span>
-    <p>Already signed up? Use the link in your confirmation email or a previous brief. <Link href="/contact?requestType=other">Get help or request removal</Link>. <a href="/rss">RSS is always available</a>.</p>
+    <p>New subscribers receive an email from Buttondown to confirm their free newsletter signup. Already signed up? Use your original confirmation email or a previous brief. <Link href="/contact?requestType=other">Get help or request removal</Link>. <a href="/rss">RSS is always available</a>.</p>
     <noscript>Email signup requires JavaScript for the anti-spam check. Use RSS or contact us for help.</noscript>
   </form>;
 }

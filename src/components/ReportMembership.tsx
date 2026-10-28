@@ -57,7 +57,7 @@ export default function ReportMembership({ checkoutEnabled }: { checkoutEnabled:
     void run(async () => {
       if (challenge) {
         await request({ action: 'confirm', challenge, code: data.get('code') });
-        setChallenge(''); await refresh(); setFeedback('Email verified. Signing in has not charged you.');
+        setChallenge(''); await refresh(); setFeedback('Email verified. Signing in does not start a paid subscription.');
       } else {
         const result = await request({ action: 'login', email });
         setChallenge(result.challenge); setFeedback('Check your inbox for an eight-digit code. It expires in 10 minutes.');
@@ -66,7 +66,7 @@ export default function ReportMembership({ checkoutEnabled }: { checkoutEnabled:
   }
   return <div className="mt-6 space-y-5">
     {loading ? <p role="status">Checking your membership…</p> : !account ? <form onSubmit={signIn} className="space-y-4">
-      <p>Sign in with your report delivery email. A sign-in code is sent through Resend. No password is needed.</p>
+      <p>Verify your email to continue. Signing in does not start a paid subscription. We will email you a sign-in code; no password is needed.</p>
       <label className="block" htmlFor="report-email">Email address</label>
       <input className="w-full rounded border bg-transparent p-3" id="report-email" type="email" maxLength={254} autoComplete="email" value={email} onChange={event => setEmail(event.target.value)} required disabled={Boolean(challenge) || busy} />
       {challenge && <><label className="block" htmlFor="report-code">Eight-digit sign-in code</label><input className="w-full rounded border bg-transparent p-3" id="report-code" name="code" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{8}" maxLength={8} required /></>}
@@ -75,14 +75,14 @@ export default function ReportMembership({ checkoutEnabled }: { checkoutEnabled:
     </form> : <>
       <p>Signed in as <strong>{account.email}</strong>.</p>
       {account.subscription ? <>
-        <p role="status">{account.subscription.status === 'canceling' ? 'Renewal canceled. Access ends' : 'Paid access through'} {date(account.subscription.periodEnd)} (UTC).</p>
+        <p role="status">{account.subscription.status === 'canceling' ? 'Renewal canceled. Paid report access ends' : 'Paid report access through'} {date(account.subscription.periodEnd)} (UTC).</p>
         <h3 className="text-xl font-semibold">Your report library</h3>
         {account.reports.length ? <ul className="space-y-3">{account.reports.map(item => <li key={item.id} className="rounded border p-4">
           <button className="text-left font-semibold underline" disabled={busy} onClick={() => void run(async () => { setReport(await request({ action: 'report', id: item.id })); })}>{item.title}</button>
           <p className="mt-2">{item.summary}</p><p className="mt-2 text-sm">Published {date(item.publishedAt)} · Sources through {date(item.sourceCutoff)}</p>
         </li>)}</ul> : <p>No report is available yet. Please contact support.</p>}
       </> : <>
-        <p>No active paid report subscription is confirmed.</p>
+        <p role="status">No active paid report subscription is confirmed. Access starts after payment is confirmed.</p>
         {checkoutEnabled && account.checkoutEnabled ? <>
           <label className="flex gap-3"><input type="checkbox" checked={consent} onChange={event => setConsent(event.target.checked)} />
             <span>I agree to US$9.90 every {account.unit}, plus applicable tax, renewing automatically until canceled, and the subscription Terms. Reports arrive weekly.</span></label>
@@ -91,7 +91,7 @@ export default function ReportMembership({ checkoutEnabled }: { checkoutEnabled:
             const url = new URL(result.url);
             if (url.protocol !== 'https:' || url.hostname !== 'pancake.waffo.ai') throw new Error('Unexpected payment destination.');
             window.location.assign(url.href);
-          })}>{account.mode === 'test' ? 'Open Waffo test checkout' : 'Subscribe with Waffo'}</button>
+          })}>{account.mode === 'test' ? 'Open Waffo test checkout' : `Continue to payment — US$9.90/${account.unit}`}</button>
         </> : <p>New subscriptions are currently closed.</p>}
       </>}
       <button className="underline" disabled={busy} onClick={() => void run(async () => { await refresh(); setFeedback('Payment status refreshed.'); })}>Refresh payment status</button>
