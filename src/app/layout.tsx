@@ -7,6 +7,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import GeoInflow from "@/components/GeoInflow";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
 import {
@@ -79,6 +80,7 @@ export default function RootLayout({
         <Footer />
         <AnalyticsTracker />
         <GoogleAnalytics />
+        <GeoInflow />
         <Analytics />
       </body>
     </html>
