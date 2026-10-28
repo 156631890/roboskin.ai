@@ -1,0 +1,18 @@
+{
+  "recorded_at_utc": "2026-10-28T02:33:36.589475+00:00",
+  "synced_main": "c25ecf74b6c42c2afa05cc3ee518867ca5a10794",
+  "checked_code_commit": "9a738f31f5a5bf107ae55e77eacf2008db3fb923",
+  "approved_commit": "371c0e551180243b5fdcb672e367ec9f04ef4766",
+  "approved_snapshot_sha256": "ee8d2bebec25ebaf8e6ec56c54056f9ecf96534cf33e0be2c28ded29c710584f",
+  "output_equivalence": "All three rendered main bodies, title, description, H1, canonical, robots, schema, alt texts, Markdown bytes and 14 linked-resource checks equal approved snapshot.",
+  "node_tests": {
+    "pass": 344,
+    "fail": 0
+  },
+  "lint": "pass",
+  "static_build": "pass",
+  "export_and_seo": "pass; 203 sitemap pages",
+  "server_build": "Exact-head CI pending; prior approved code local server build passed.",
+  "remote_ci": "pending",
+  "production": "pending"
+}

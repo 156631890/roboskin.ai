@@ -1,6 +1,6 @@
 # Evidence resources: review version 2026.10.28
 
-Status: **review_pending**. Human content approval has not been recorded for this revision. No production merge or publication is claimed.
+Status: **human approved; release verification in progress**. The owner reviewed and approved commit `371c0e551180243b5fdcb672e367ec9f04ef4766` and its final snapshot. The real approval event is retained in [approval.json](approval.json). The snapshot and original verification files below are immutable pre-approval records; their historical `review_pending` values do not supersede this approval. No production publication is claimed by this pre-release record.
 
 Module omissions: **none**. All original learning and teleoperation sections were checked for exact retained text (normalizing line endings). Two learning research sections move later on the page; their IDs and sources remain. The tactile comparison retains its original numerical tables, methods, hardware limits, experimental protocol and source routes. No URL, image, form or business feature was removed. The comparison title now names both research systems accurately; its canonical URL remains unchanged.
 
@@ -39,7 +39,7 @@ The [snapshot](review-snapshot.json) binds full rendered body, title with site s
 - Both ZIPs passed CRC checks; public/exported resource bytes agree; package checksums pass. Both kits were downloaded through the browser and matched their source ZIPs byte for byte. The extracted tactile kit was rerun offline against the original files: every report field except execution time matched the published output.
 - All three pages were checked in the in-app browser at 1280 × 900 and 390 × 844. Headings/body fit; tables retain horizontal scrolling; anchor controls and resource destinations work. Screenshots are retained in the local run evidence. Initial Chrome screenshot timeouts were resolved by using the app preview. Long revision hashes on the narrow screen were replaced with short IDs in prose; full hashes remain in the report.
 - React page review: existing server components and semantic links retained; no new hooks, client fetching or animation. Duplicate access/source links are removed before rendering to keep list keys unique.
-- Remote PR and preview creation are blocked by the existing project maintenance lock, owned by `geoinflow-20261027-01a17c68`. This run did not acquire or remove that lock and made no remote write. Current-head remote CI is therefore not claimed; local static and server verification is recorded separately.
+- At the original snapshot, remote work was blocked by another task's maintenance lock. That task subsequently released its lock. This release acquired its own lock on October 28 at 02:29:36 UTC and synchronized main `c25ecf74b6c42c2afa05cc3ee518867ca5a10794`; the approved content is unchanged. Current-head remote CI remains a separate release requirement.
 - Google Live/Indexed for this new revision: pending production publication. Existing indexed pages do not prove this new revision was indexed.
 - New resource mappings use existing GA4 consent and fixed public IDs. Resource events record link interactions, not successful experiment execution or qualified enquiries. No new Vercel custom resource events are claimed.
 
@@ -68,6 +68,6 @@ These judgments cover the three changed pages and new downloadable files at the 
 
 C15 excluded: no translated version or language pairing added or changed. No site-specific prohibited-word list was supplied; factual limitations remain applicable under C05/C08.
 
-Release conclusion at this record: **local built-output content checks pass; production release remains on hold**. The project lock must be released by its owner before remote writes. Then obtain exact-head CI/preview evidence and a real review of this final snapshot. Existing operational publishing authorization remains; do not treat the older PR 79 review as approval of new claims.
+Release conclusion at this record: **local built-output content checks and real human content approval pass; exact-head CI and production acceptance remain pending**. The release holds its own maintenance lock. Existing operational publishing authorization remains; approval is the current version's recorded human event, not the older PR 79 review.
 
 After publication, record the actual production SHA and date before starting a 28-day observation window. Check index visibility and resource interactions after seven full days; compare GSC query/page cohorts after 28 complete days, keeping date/timezone and filters fixed. Low event counts and consent-limited GA4 data remain uncertainty, not zeros or proof of failure. Do not rewrite titles again without new evidence.
