@@ -103,8 +103,8 @@ export function createFormHandlers({ env = process.env, fetcher = fetch, limit =
         body: JSON.stringify({ email_address: payload.email, type: 'unactivated', referrer_url: `${origin}${path}` }), signal: AbortSignal.timeout(10000),
       });
       const result = await response.json().catch(() => null);
-      if (response.status === 201 && result?.id && result.type === 'unactivated') return json(202, { ok: true, status: 'pending', message: 'Check your inbox for the confirmation email. You are not subscribed until you confirm. Every brief includes an unsubscribe link.' });
-      if ((response.status === 400 && result?.code === 'email_already_exists') || response.status === 409) return json(200, { ok: true, status: 'unchanged', message: 'No subscription was changed. If you signed up before, check your original confirmation email or manage preferences from a previous brief. Contact us if you need help.' });
+      if (response.status === 201 && result?.id && result.type === 'unactivated') return json(202, { ok: true, status: 'pending', message: 'Check your inbox to confirm your free newsletter signup. You are not subscribed until you confirm. No payment is required. Every brief includes an unsubscribe link.' });
+      if ((response.status === 400 && result?.code === 'email_already_exists') || response.status === 409) return json(200, { ok: true, status: 'unchanged', message: 'No free newsletter subscription was changed. If you signed up before, check your original confirmation email or manage preferences from a previous brief. Contact us if you need help.' });
       if (response.status === 429) return fail(429, 'The provider is busy. Try again later.');
       return fail(502, 'Signup could not be confirmed. Try again later or use RSS.');
     } catch { return fail(502, 'Signup could not be confirmed. Try again later or use RSS.'); }

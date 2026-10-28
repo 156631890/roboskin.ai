@@ -18,8 +18,8 @@ const newsletterConfig = getNewsletterConfig(
 function NewsletterUnavailable() {
   return (
     <section id="newsletter-signup" className="newsletter-form newsletter-form-unavailable" aria-labelledby="newsletter-unavailable-title">
-      <h2 id="newsletter-unavailable-title" className="newsletter-form-title">Newsletter is not open yet</h2>
-      <p>The weekly tactile robotics research brief is being prepared. No email address is collected here while signup is unavailable.</p>
+      <h2 id="newsletter-unavailable-title" className="newsletter-form-title">Free newsletter is not open yet</h2>
+      <p>The free tactile robotics newsletter is being prepared. No email address is collected here while signup is unavailable. Paid research reports are a separate subscription.</p>
       <div className="newsletter-form-links">
         <a href="/rss">
           Follow research updates via RSS <span aria-hidden="true">↗</span>
@@ -33,7 +33,7 @@ function NewsletterUnavailable() {
 function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
   const pathname = usePathname();
   const [submitting, setSubmitting] = useState(false);
-  const [feedback, setFeedback] = useState('New subscribers receive a confirmation email from Buttondown.');
+  const [feedback, setFeedback] = useState('New subscribers receive an email from Buttondown to confirm their free newsletter signup.');
   const inFlight = useRef(false);
   useEffect(() => {
     const reset = () => { inFlight.current = false; setSubmitting(false); };
@@ -58,7 +58,7 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
       source_batch: growthBatchForPath(pathname),
     });
     setSubmitting(true);
-    setFeedback(`Opening signup at ${config.providerHost}…`);
+    setFeedback(`Opening free newsletter signup at ${config.providerHost}…`);
     track('Newsletter Provider Handoff', { placement: 'footer', provider_domain: config.providerHost, path: pathname, batch: newsletterBatch, source_batch: growthBatchForPath(pathname) });
   }
 
@@ -70,10 +70,10 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
       method="post"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="newsletter-email">Weekly Tactile Robotics Research Brief</label>
-      <p>
-        A weekly selection of tactile robotics research, dataset releases and practical tutorials.
-        New subscribers receive a confirmation link from Buttondown. Previously confirmed addresses may rejoin immediately.
+      <label htmlFor="newsletter-email">Free Tactile Robotics Newsletter</label>
+      <p id="newsletter-details">
+        Get a weekly selection of research papers, dataset releases and practical tutorials.
+        {' '}Free to join. No payment details required. Paid research reports are a separate subscription.
       </p>
       <div>
         <input
@@ -84,16 +84,16 @@ function NewsletterProviderForm({ config }: { config: NewsletterConfig }) {
           required
           autoComplete="email"
           placeholder="Email address"
-          aria-describedby="newsletter-feedback"
+          aria-describedby="newsletter-details newsletter-feedback"
         />
         <input type="hidden" name="embed" value="1" />
         <button type="submit" disabled={submitting}>
-          {submitting ? 'Opening…' : 'Subscribe'}
+          {submitting ? 'Opening…' : 'Join the free newsletter'}
         </button>
       </div>
-      <label className="newsletter-consent"><input type="checkbox" name="consent" required /> I agree to receive the weekly brief. I can unsubscribe at any time.</label>
+      <label className="newsletter-consent"><input type="checkbox" name="consent" required /> I agree to receive the free RoboSkin newsletter. I can unsubscribe at any time.</label>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" hidden aria-hidden="true" />
-      <p><a href={config.unsubscribeUrl}>Manage or cancel your subscription at Buttondown</a>. <a href="/privacy">Privacy policy</a>.</p>
+      <p>Previously confirmed addresses may rejoin immediately. <a href={config.unsubscribeUrl}>Manage or unsubscribe from the free newsletter</a>. <a href="/privacy">Privacy policy</a>.</p>
       <span id="newsletter-feedback" role="status" aria-live="polite">
         {feedback}
       </span>

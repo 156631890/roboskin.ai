@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div id="newsletter" className="scroll-mt-24"><NewsletterSignup /></div>
-        <p className="py-4"><Link href="/weekly-reports">Weekly industry reports — US$9.90/month · View availability</Link></p>
+        <p className="py-4"><Link href="/weekly-reports">Explore paid research reports — US$9.90/month</Link></p>
 
         <div className="site-footer-base">
           <p>© {new Date().getFullYear()} {site.name}</p>

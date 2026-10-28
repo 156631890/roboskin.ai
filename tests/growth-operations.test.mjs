@@ -31,7 +31,7 @@ test('conversion analytics cover the agreed growth actions without user-entered 
   assert.match(newsletter, /name="embed"/);
   assert.match(newsletter, /action=\{config\.endpoint\}/);
   assert.match(newsletter, /method="post"/);
-  assert.match(newsletter, /Newsletter is not open yet/);
+  assert.match(newsletter, /Free newsletter is not open yet/);
   assert.match(newsletter, /href="\/rss"/);
   assert.match(newsletter, /if \(!newsletterConfig\) return <NewsletterUnavailable \/>/);
   assert.doesNotMatch(newsletter, /Newsletter Submit|Newsletter WhatsApp Open|wa\.me|window\.location\.href|encodeURIComponent/);

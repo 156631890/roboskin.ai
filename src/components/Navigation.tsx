@@ -96,7 +96,7 @@ export default function Navigation() {
               aria-current={pathname === '/weekly-reports' ? 'page' : undefined}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Weekly reports <span aria-hidden="true">↗</span>
+              Paid research reports <span aria-hidden="true">↗</span>
             </Link>
             <button
               ref={menuButtonRef}
@@ -125,7 +125,7 @@ export default function Navigation() {
               className="site-mobile-cta"
               aria-current={pathname === '/weekly-reports' ? 'page' : undefined}
             >
-              Weekly reports · US$9.90/month <span aria-hidden="true">↗</span>
+              Paid research reports · US$9.90/month <span aria-hidden="true">↗</span>
             </Link>
             <p className="site-mobile-label">Explore RoboSkin.ai</p>
             <div className="site-mobile-links">
