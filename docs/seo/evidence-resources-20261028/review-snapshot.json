@@ -1,0 +1,1238 @@
+{
+  "status": "review_pending",
+  "human_review_event": null,
+  "base_commit": "98d89083e9e20dd2c718eb2a14f459bdadc10d6b",
+  "version": "2026.10.28",
+  "pages": [
+    {
+      "path": "/robot-learning",
+      "title": "Robot Learning Data: Datasets, Formats & Evaluation | RoboSkin.ai",
+      "description": "Choose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.",
+      "h1": "Robot learning data: datasets, formats and evaluation",
+      "canonical": "https://roboskin.ai/robot-learning",
+      "robots": "index, follow",
+      "body": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"@id\":\"https://roboskin.ai/robot-learning#webpage\",\"url\":\"https://roboskin.ai/robot-learning\",\"name\":\"Robot Learning Data: Datasets, Formats & Evaluation\",\"headline\":\"Robot learning data: datasets, formats and evaluation\",\"description\":\"Choose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://roboskin.ai/generated/pages/resources-library.webp\",\"contentUrl\":\"https://roboskin.ai/generated/pages/resources-library.webp\",\"caption\":\"Resource-library visual for public learning routes and technical references.\",\"description\":\"Organized robot skin learning library with technical cards, tactile sensor samples, and research screens.\"},\"inLanguage\":\"en\",\"isPartOf\":{\"@id\":\"https://roboskin.ai/#website\"},\"publisher\":{\"@id\":\"https://roboskin.ai/#organization\"},\"author\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"reviewedBy\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"breadcrumb\":{\"@id\":\"https://roboskin.ai/robot-learning#breadcrumb\"},\"mainEntity\":{\"@id\":\"https://roboskin.ai/robot-learning#defined-term\"},\"keywords\":[\"robot learning\",\"robot learning data\",\"robotics machine learning\",\"imitation learning robotics\",\"reinforcement learning robots\",\"robot learning datasets\",\"sim-to-real robotics\",\"robot policy learning\",\"tactile robot learning\",\"LeRobot\"],\"about\":[\"robot learning\",\"robot learning data\",\"robotics machine learning\",\"imitation learning robotics\",\"reinforcement learning robots\",\"robot learning datasets\",\"sim-to-real robotics\",\"robot policy learning\",\"tactile robot learning\",\"LeRobot\"],\"mentions\":[{\"@type\":\"WebPage\",\"name\":\"Passive observation versus teleoperation data\",\"url\":\"https://roboskin.ai/robot-teleoperation#passive-observation-vs-teleoperation-data-for-robot-learning\",\"description\":\"Choose between video pretraining, structured handheld demonstrations and recorded robot actions.\"},{\"@type\":\"WebPage\",\"name\":\"AI and robotics\",\"url\":\"https://roboskin.ai/ai-robotics\",\"description\":\"Place learning methods inside the complete model, robot, action, and feedback system.\"},{\"@type\":\"WebPage\",\"name\":\"Robot platforms and embodiments\",\"url\":\"https://roboskin.ai/robots\",\"description\":\"Separate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence.\"},{\"@type\":\"WebPage\",\"name\":\"Robot foundation models\",\"url\":\"https://roboskin.ai/robot-foundation-models\",\"description\":\"Compare reusable model roles, data, embodiment transfer, access, and evidence.\"},{\"@type\":\"WebPage\",\"name\":\"VLA robotics: models, code and tactile feedback\",\"url\":\"https://roboskin.ai/robot-vla-models\",\"description\":\"Place vision-language-action policies inside the broader robot-learning stack.\"},{\"@type\":\"WebPage\",\"name\":\"Robot manipulation\",\"url\":\"https://roboskin.ai/robot-manipulation\",\"description\":\"Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile AI\",\"url\":\"https://roboskin.ai/tactile-ai\",\"description\":\"Follow the path from touch signals to robot perception and action.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile datasets\",\"url\":\"https://roboskin.ai/datasets\",\"description\":\"Filter source-reviewed resources by robot, sensor, task, modality, and license.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile benchmarks\",\"url\":\"https://roboskin.ai/benchmarks\",\"description\":\"Review tasks, protocols, metrics, baselines, and evidence boundaries.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile foundation models\",\"url\":\"https://roboskin.ai/tactile-foundation-models\",\"description\":\"Separate reusable tactile representations, predictive models, and policies.\"},{\"@type\":\"WebPage\",\"name\":\"Physical AI and touch\",\"url\":\"https://roboskin.ai/physical-ai-touch\",\"description\":\"Connect learned robot behavior to multimodal physical-world feedback.\"},{\"@type\":\"WebPage\",\"name\":\"Humanoid robots\",\"url\":\"https://roboskin.ai/humanoid-robots\",\"description\":\"Map learning, control, hands, locomotion, safety, and tactile sensing.\"},{\"@type\":\"WebPage\",\"name\":\"ADEPT visuo-tactile dexterity\",\"url\":\"https://roboskin.ai/research/adept-visuo-tactile-dexterity-rl-2026\",\"description\":\"Review an embodiment-specific RL and sim-to-real result with a matched tactile ablation.\"},{\"@type\":\"WebPage\",\"name\":\"UniVTAC tactile simulation and learning\",\"url\":\"https://roboskin.ai/research/univtac-platform-encoder-benchmark-2026\",\"description\":\"Trace encoder samples, policy trajectories, hosted task episodes, physical demonstrations, and evaluation rollouts as separate evidence.\"}],\"dateModified\":\"2026-10-28\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"@id\":\"https://roboskin.ai/robot-learning#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://roboskin.ai/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"robot learning\",\"item\":\"https://roboskin.ai/robot-learning\"}]},{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"@id\":\"https://roboskin.ai/robot-learning#faq\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"What is robot learning?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Robot learning uses data or experience to train robot perception, prediction, or action instead of specifying every behavior as a fixed rule.\"}},{\"@type\":\"Question\",\"name\":\"What is the difference between imitation learning and reinforcement learning for robots?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Imitation learning learns from demonstrated behavior. Reinforcement learning improves behavior using a reward signal from interaction or simulation. Systems can combine both.\"}},{\"@type\":\"Question\",\"name\":\"What makes a robot-learning dataset useful?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"It should identify the robot, observations, actions, task context, timing, calibration, trajectory unit, collection policy, splits, access path, and license.\"}},{\"@type\":\"Question\",\"name\":\"Why does robot learning need tactile data?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"It needs tactile data when physical success depends on pressure, shear, slip, seating, deformation, or contact transitions that other sensors do not measure directly.\"}},{\"@type\":\"Question\",\"name\":\"How should sim-to-real results be judged?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.\"}}]},{\"@context\":\"https://schema.org\",\"@type\":\"DefinedTerm\",\"@id\":\"https://roboskin.ai/robot-learning#defined-term\",\"name\":\"Robot learning data: datasets, formats and evaluation\",\"description\":\"Robot learning data includes observations, robot state, actions, task context and outcomes used to train or evaluate a robot model. Start with the task and action interface, then check sensing, timing, held-out splits, access and license. Dataset size alone does not establish that the data fits your robot. Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources. A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability. Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.\",\"url\":\"https://roboskin.ai/robot-learning\",\"inDefinedTermSet\":{\"@type\":\"DefinedTermSet\",\"name\":\"RoboSkin.ai robot skin glossary\",\"url\":\"https://roboskin.ai/glossary\"},\"mainEntityOfPage\":{\"@id\":\"https://roboskin.ai/robot-learning#webpage\"}},{\"@type\":\"Organization\",\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\",\"name\":\"RoboSkin.ai Editorial Team\",\"url\":\"https://roboskin.ai/editorial-policy\"}]}Home/Robot learning data: datasets, formats and evaluationHigh-interest robotics pillarRobot learning data: datasets, formats and evaluationChoose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.Published 2026-08-20 | Updated 2026-10-28 by RoboSkin.ai Editorial TeamOctober 28, 2026: added a five-entry, source-linked dataset decision matrix, a one-episode inspection workflow and downloadable decision records. Earlier research sections, sources and dates are retained.Choose a dataset starting pointBrowse researchSubmit a sourceResource-library visual for public learning routes and technical references.Find and check robot learning dataChoose a dataset starting pointCompare five source-linked routes by task, format, rights and first check.Inspect one episode before scalingDownload decision and action-contract records with evidence fields.Find broader dataset sourcesExplore the directory after narrowing your task and embodiment.On this pageChoose a dataset starting point for your taskHow to choose robot learning dataMake a decision from one inspected episodeThe robot-learning loopMajor learning paradigmsData is part of the robot systemSimulation and sim-to-real transferTactile robot learningHow to evaluate robot-learning claimsOpen tooling and the 2026 ecosystemCollective experience learning: what does “without human corrections” remove?DexOAK: from human hand-object motion to robot referencesShort answerWhat you need to know1Robot learning data includes observations, robot state, actions, task context and outcomes used to train or evaluate a robot model. Start with the task and action interface, then check sensing, timing, held-out splits, access and license. Dataset size alone does not establish that the data fits your robot.2Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources.3A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability.4Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.Topic 01Choose a dataset starting point for your taskFor a cross-embodiment mixture, start with Open X-Embodiment; for varied scenes on a common Franka platform, inspect DROID; for WidowX manipulation, inspect BridgeData V2. Use the small LeRobot exercise to learn the storage contract, or the UniVTAC example to inspect simulated tactile context. These are different routes, not a ranking of interchangeable datasets.The five-entry shortlist below was source-checked on October 28, 2026. “Use when” and “first check” are RoboSkin selection guidance. Upstream descriptions remain attributed; only the specifically identified local exercises were run. Follow the original release for data and rights.Starting pointUse whenInput boundaryFirst checkOpen X-EmbodimentYou need a mixture of robot embodiments and are prepared to define a per-dataset adapter.RLDS episodes; cameras, state fields and action conventions vary across constituent datasets. The RT-1-X checkpoint interface is not a schema for every dataset.Choose one constituent dataset in the official inventory, inspect an episode with the official notebook, and record its action units and split before mixing it with others.DROIDYou need varied real-world manipulation scenes on a common Franka platform.The documented RLDS schema exposes three camera views, observed state and action_dict commands. A pinned policy-loader example constructs a 10-dimensional absolute target from Cartesian position, a 6D rotation representation and gripper position.Start with the official visualizer or 100-episode subset, then trace the exact loader's command representation and camera selection. The subset size is provider-reported, not a download measured by RoboSkin.BridgeData V2You need goal- or language-conditioned manipulation examples on the WidowX platform.Robot observations, states, actions and language; camera/depth coverage varies. Teleoperated demonstrations and scripted pick-and-place rollouts are separate collections.Choose demonstrations or scripted rollouts deliberately, inspect the available camera views, then pin the conversion and loader used for the training target.LeRobot koch_pick_place_1_lego exampleYou need a bounded exercise to inspect LeRobot v3 storage and loader behavior before choosing training data.Two camera streams; six-element state and action vectors. The pinned metadata declares robot_type unknown and does not establish physical units. No tactile feature is declared.Use RoboSkin's existing episode-0 exercise: 445 rows, two decoded video streams and five complete official-loader samples. Read the dated report and its limits.UniVTAC / Tactile-ETA Lift Bottle inputsYou need a public simulated example of action-aligned camera and bilateral tactile context.Head/wrist RGB, bilateral marker RGB, measured end-effector/joint state and simulation steps. The released demonstration describes measured motion; original actuator/tool commands are not available in that package.Run the accompanying offline audit of upstream episodes 0 and 1. It checks 24 segments and released strip pixels against the raw data, without policy inference.Open X-Embodiment: access and evidenceRLDS episodes; download and loading examples in the official repository.Repository: Apache-2.0 for software; CC BY 4.0 for other repository materials. Inspect the selected constituent dataset's own terms and citation; do not assign one inferred license to the whole mixture.Source inspection on 2026-10-28. No dataset payload or training run was checked in this review.Reconsider this route if: The intended subset has unresolved action semantics, rights, or a held-out evaluation boundary.Original access routeOfficial repository at 9eeb68b: access, constituent inventory and licensingDROID: access and evidenceRLDS for training; separate raw high-resolution/stereo files. The documentation advertises a 100-episode RLDS debugging subset (~2 GB).The v2 paper states CC BY 4.0 for the dataset. Keep dataset rights separate from the software license and any later annotation release.Documentation, v2 paper and pinned loader source inspected on 2026-10-28. The DROID loader was not executed and no DROID episode was downloaded in this review.Reconsider this route if: A seven-number array is being treated as seven joint targets without tracing the producing transform and controller.Original access routeDROID paper v2: platform and dataset licensePinned action transformPinned loader: absolute targets, camera selection and filtersBridgeData V2: access and evidenceRaw JPEG/PNG/pickle files; processed 256 × 256 TFDS/RLDS option. A file container is not an action-unit specification.The official project states CC BY 4.0 for all data. The training repository's software terms are separate.Official project and pinned training README inspected on 2026-10-28. No raw archive, converter or policy was run in this review.Reconsider this route if: You need a tactile stream or all four camera views and have not confirmed them in the chosen episodes.Original access routeOfficial composition, hardware, camera coverage and data licensePinned raw/TFDS loading routesLeRobot koch_pick_place_1_lego example: access and evidenceLeRobot v3 Parquet and MP4 shards with episode metadata.The pinned dataset card declares Apache-2.0. It does not supply a complete robot/controller contract.Pinned card re-read on 2026-10-28; file/loader results are the separate recorded RoboSkin run of 2026-10-25, not a new run today.Reconsider this route if: The repository name is being used to infer verified robot identity, units, calibration or suitability for another policy.Original access routePinned card and metadataRoboSkin's dated loader exercise and limitsUniVTAC / Tactile-ETA Lift Bottle inputs: access and evidencePinned HDF5 episodes plus Tactile-ETA JSON and PNG strips.The pinned UniVTAC dataset card declares MIT; Tactile-ETA's demonstration README attributes these processed inputs to that release. Review separately any simulator, model or task-asset terms.Actual local input audit on 2026-10-28. This does not reproduce a success rate, run a selector's feature computation, or test a physical robot.Reconsider this route if: You need measured physical contact, original commanded actions or an independently reproduced control result.Original access routePinned UniVTAC cardPinned demonstration provenancePinned preparation code: measured motion and nominal timingDownload the five-entry selection matrix (CSV)Read the versioned matrix with per-entry sources (JSON)For a broader source inventory, open the robotics dataset directoryFor physical tactile data, compare the specialized tactile directoryTopic 02How to choose robot learning dataFirst decide what you want to learn: a visual or tactile representation, an action policy, a reward or a dynamics model. Human video, robot demonstrations and tactile records can serve different roles; a video dataset is not automatically a set of executable robot-action targets.Use the checklist before downloading or converting data. Follow the original dataset for access and license terms, and the format guide for storage and field conventions. A common format does not make different robots, action units or train-test splits interchangeable.When considering human hand-object recordings, read the DexOAK retargeting and replay evidence checklist before treating reconstructed motion as executable robot training data.DecisionWhat to inspectWhy it changes your choiceTask and embodimentRobot, end effector, objects, tasks, resets and failed attempts.Reject data that does not represent the behavior or hardware you need.Action contractCommand versus measured state, joint or end-effector space, units, frames and gripper convention.Similar field names do not establish compatible action targets.Sensor and timing contractCamera, proprioception, touch, timestamps, calibration and missing observations.A recorded modality must be aligned and supported by the training recipe.Access and reuseOriginal download, version, dataset license and separate code or model terms.Public metadata does not establish that files are downloadable or reusable for your purpose.Evaluation splitHeld-out objects, scenes, tasks, operators or embodiments and repeated trajectories.Match the split to the transfer claim and avoid training-test leakage.Find broad robotics datasets and their original sourcesCompare tactile datasets by task and release evidenceInspect LeRobot episode fields and conversion checksPlan new demonstration collectionTopic 03Make a decision from one inspected episodeBefore downloading a full collection, choose one candidate and write down the target task, embodiment and policy interface. Inspect one accessible episode as a screening step. A clean episode can justify a larger sample; it cannot establish that an entire dataset is suitable.The downloadable decision record separates source claims from your observations and leaves unanswered fields empty. Keep the source revision and evidence location with each decision. Do not turn “not checked” into “absent,” or a file-format pass into training readiness.CheckEvidence to retainDecision it supportsAccess and rightsExact release, file path, download result and dataset terms; code/model terms separately.Can this candidate be inspected and reused for the intended purpose?Action targetRaw field → transform → training target → controller; units, frame, gripper range and temporal offset.Can the policy consume and execute this target, or is an adapter still missing?Time and observationsEpisode boundaries, camera/touch keys, valid masks, missing samples and the provenance of each timestamp.Are the selected streams usable for this task? Nominal timestamps do not establish physical synchronization.Coverage and splitObjects, scenes, people/sessions, failed attempts, repeated trajectories and holdout grouping.What is represented, and what new evidence is required before a transfer claim?DecisionInspect further, adapt, hold or reject; link the reason to the evidence and name the next check.A recorded selection decision; never a universal quality score.Download the decision and action-contract workbook (ZIP, CSV files)Run the existing LeRobot public-episode checkInspect the measured-motion versus commanded-action exampleInspect the tactile demonstration auditTopic 04The robot-learning loopRobot learning connects observations to actions through a training objective and an evaluation protocol. Observations may include cameras, depth, language, proprioception, force, torque, or tactile signals. Actions may be joint commands, end-effector motion, gripper state, trajectories, or action chunks.The loop is only as reliable as its data and evaluation. Demonstration quality, timing, calibration, resets, interventions, failed attempts, and hardware changes can all alter what the learned policy actually represents.Collect synchronized observations, robot state, actions, task context, and failure metadataTrain a policy, representation, reward model, dynamics model, or reusable foundation modelEvaluate on held-out tasks, objects, scenes, robots, sensors, or physical conditionsMeasure real-robot success, speed, recovery, force, damage, and intervention instead of only offline lossTopic 05Major learning paradigmsRobot-learning labels describe different supervision and optimization choices. Many practical systems combine several of them, so comparisons should identify the exact training and deployment role.ApproachLearning signalTypical strengthEvidence boundaryImitation learningExpert or teleoperated demonstrationsDirectly learns behaviors represented in the demonstrationsSensitive to demonstration coverage and distribution shiftReinforcement learningReward from interaction or simulationCan optimize behavior through trial and feedbackReward design, safety, sample cost, and sim-to-real transfer must be reportedOffline robot learningPreviously collected trajectoriesReuses data without new online exploration during trainingCannot assume the logged data covers every useful action or failureSelf-supervised representation learningStructure inside unlabeled or weakly labeled observationsCan create reusable visual, tactile, or multimodal featuresRepresentation scores do not automatically prove closed-loop task valueVision-language-action policyRobot trajectories paired with images and instructionsConnects task language and observations to actionsEmbodiment, action interface, data mix, and real-robot evaluation determine scopeTopic 06Data is part of the robot systemOpen X-Embodiment, DROID, and the LeRobot ecosystem illustrate different routes toward reusable robot data: cross-embodiment aggregation, a large real-world manipulation dataset, and a standardized open data and tooling ecosystem. They are complementary examples, not interchangeable benchmarks.A dataset record should expose the robot, sensor streams, control interface, task labels, trajectory unit, timing, calibration, collection policy, train-test split, access path, and license. Without those fields, scale is difficult to interpret and reuse is harder to audit.Topic 07Simulation and sim-to-real transferSimulation can generate experience, perturbations, labels, and repeatable evaluation without exposing hardware to every trial. Transfer to a physical robot still depends on geometry, dynamics, contact, sensing, latency, control, and observation differences between the simulator and the deployed system.Report what was randomized, adapted, calibrated, or fine-tuned, and separate simulation success from repeated physical trials. A simulator benchmark can test a method under controlled conditions; it does not by itself establish real-world reliability.ADEPT is a current source-bounded example: it pretrains generic object reposing in simulation, then trains each embodiment and downstream task independently before transferring student policies to two physical workbench systems without real-world fine-tuning. Its use of “zero-shot sim-to-real” does not mean zero-shot transfer to a new hand, sensor, task, or robot.SoftMimicGen adapts a small library of deformable-object demonstrations into successful simulated trajectories for policy training. Its three real-robot comparisons distinguish simulation-only and joint training; the towel result ties the real-only baseline. The source review separates generation acceptance, policy success and the RGB-D deployment pathway from untested tactile claims.SoftMimicGen: method, real-robot evidence and tactile limitsTopic 08Tactile robot learningTactile in-context learning uses examples in the model input rather than updating its parameters. Tactile-ETA pairs action segments with before-and-after camera views, robot state and tactile observations; it retains tactile endpoints and selected change frames in ordered demonstrations. The frozen agent also receives current sensing and execution feedback.In four simulated tasks, the authors keep two expert demonstrations, current inputs and the execution interface fixed. Adding tactile observations inside the demonstrations raises mean success from 15.75% to 24%, with 100 trials per task and condition; not every task improves. On Wipe Board and Pick Up Chips, each condition has current vision and touch: one aligned multimodal demonstration versus none yields 3/5 versus 0/5 successes per task. This is not a touch-versus-no-touch comparison or an industrial reliability estimate.Decisions occur between motion segments, so this context does not replace fast tactile feedback control during execution. These are author-reported results from the October 20, 2026 v1 preprint, with source and code inspection updated October 22; RoboSkin has not run the controller or reproduced the results. Task coverage and hardware samples are small.A separate Lift Bottle ablation in the same v1 holds the two demonstrations, their visual-motion content and current sensing fixed: endpoints yield 27/100 successes, all historical tactile frames 2/100, and endpoints plus a selected change pair 36/100. This supports testing action-aligned frame selection, not a general claim that dense touch is harmful. The separate TacTalent Astra study changes touch in both demonstrations and online inputs, so its modality comparison answers a different question.Touch can enter robot learning as raw tactile images, force or pressure arrays, compact contact representations, predicted future observations, a reward signal, or a fast correction pathway. The right representation depends on the sensor, task, controller rate, and data available.ManiSkill-ViTac provides a primary-source example of a simulation benchmark focused on visuo-tactile manipulation. Physical tactile datasets and full-hand benchmarks add different evidence. Results should stay attached to their robot, sensor, task, split, and protocol.UniVTAC makes those units explicit: 205,826 samples pretrain a tactile encoder, 400 paper-reported trajectories train eight task policies, the September inventory lists 800 task HDF5 files for each of Isaac Sim 4.5 and 5.1, and 450 physical demonstrations support three real-world tasks. Evaluation rollouts are outcomes rather than additional training data.In ADEPT, the tactile pathway is limited to five vision-based fingertips on one Flexiv-Sharpa student. The paper reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched insertion condition with ten trials per modality. This is useful causal evidence inside that condition, not proof of cross-sensor or cross-hand transfer.Synchronize touch with camera frames, pose, joint state, action, and contact eventsCompare against matched no-touch or shuffled-touch baselines where tactile value is claimedTest occlusion, slip, insertion, deformable objects, or disturbances that make contact information relevantReport sensor calibration, wear, drift, replacement, and latency when they can affect the learned behaviorRole of tactile dataWhat changes?What to check before reuseFine-tuningAn optimizer changes model parameters using training records.Separate training and held-out episodes; retain sensor calibration and the action contract.Demonstrations in contextExamples condition a fixed model at inference.Keep observations aligned with actions, segment order and outcomes; distinguish recorded touch from current touch.Execution feedbackNew observations inform the next decision or controller correction.Measure observation age, decision interval and actuation latency; a supplied touch stream alone does not establish a fast control loop.Tactile-ETA v1: controlled comparisons, limitations and hardware protocolCompare Tactile-ETA and the TacTalent Astra setup, with a matched frame-selection planInspect episode fields, timing and action conventionsConnect tactile feedback to manipulation outcomesScope a robot-data and integration evidence reviewTopic 09How to evaluate robot-learning claimsEvaluation should make the claimed generalization axis explicit. A new object, background, instruction, robot, sensor, task, or dynamics setting tests a different kind of transfer. Combining them into one broad label hides the actual boundary.QuestionWhat to recordWhy it mattersWhat was learned?Policy, representation, reward, dynamics, plan, or controller rolePrevents different model roles from being ranked as if they were identicalWhat data was used?Robots, tasks, trajectories, modalities, failures, licenses, and splitsDefines the experience available to the modelWhat changed at test time?Object, scene, instruction, embodiment, sensor, task, or physicsNames the actual generalization claimHow physical was the evidence?Replay, simulation, staged demo, repeated real-robot trials, or deploymentSeparates offline performance from physical reliabilityWhat happened when it failed?Retries, resets, intervention, damage, safety stops, and recoveryExposes operational cost and robustnessTopic 10Open tooling and the 2026 ecosystemHugging Face describes LeRobot as an open robotics ecosystem for models, datasets, and tools. Its official v0.6.0 release expands policy evaluation and model-development workflows. These releases are useful infrastructure signals; any capability claim still needs the named policy, dataset, robot, task, and evaluation result.Google DeepMind’s Gemini Robotics materials represent another branch of the field: models intended to connect multimodal understanding and robot action. RoboSkin.ai keeps those broad model developments connected to the narrower question of when tactile evidence improves contact-rich behavior.Topic 11Collective experience learning: what does “without human corrections” remove?The October 19, 2026 preprint by Chao Yu, Shu’ang Yu and colleagues at Tsinghua University, AgiBot and Infinigence AI names three distinct pieces: collective experience learning (CEL), the shared-policy learning paradigm; failure-guided experience retrieval fine-tuning (FERT), its algorithm; and FATS, the fault-tolerant asynchronous training system.FERT uses observations before a failed execution ends to retrieve successful fleet segments. Their recorded actions become prioritized supervised fine-tuning targets. Compared with imitation learning from new expert demonstrations, it changes the source and selection of action supervision; it still learns by fitting successful actions.“Without additional expert corrections” applies after expert SFT and HG-DAgger initialization. Humans still label episode outcomes and reset environments. Inputs include RGB views and proprioception, not tactile skin. This is not unattended learning.The authors evaluate each policy/task over 120 trials split between two held-out AgiBot G2 robots. That tests other instances of the same platform, not cross-model transfer. Holding collection time per robot fixed gives larger fleets more total experience, so fleet size alone cannot explain the gains. These are author experiments, not RoboSkin tests. Source review: October 20, 2026, v1.Budget initial demonstrations and corrective teleoperation separately from ongoing outcome labeling, resets, maintenance and failed-run review. Ask for operator time per successful episode before estimating labor savings.Keep robot identity, policy version, outcome labels, failed-query provenance and retrieved-success provenance in the data contract. Audit retrieval quality and prevent held-out robot data from entering training.To isolate a fleet-size effect, compare equal total data or interaction budgets as well as equal time per robot. Predefine task success, intervention rules and held-out instances.CEL paper v1: FERT, human supervision and evaluation protocolLearning from Fleet Experience: paper and version historyCEL author project pageInspect the teleoperation data contractCompare VLA action interfaces and evidenceScope a research and integration evidence reviewTopic 12DexOAK: from human hand-object motion to robot referencesDexOAK (Object-Aware Kinematic Retargeting) uses structured human hand-object motion capture to produce robot wrist and joint references. Its inputs include human keypoints and object geometry, not arbitrary video or tactile sensor recordings. Contact-aware geometry is not a measured touch signal.An interaction-graph optimizer supplies training references. A learned retargeter then generates references without solving each new frame, with contact and collision objectives refining the mapping. A separate residual reinforcement-learning stage corrects dynamics; a plausible hand pose alone is not an executable trajectory.The authors report 46/56 successful open-loop replays on a UR5 with a right Allegro hand across Take out, Close gate, Pour, Unplug and Cut. They select the first successful simulation rollout per policy, then repeat it four times. Objects are manually reset near the simulated starting pose. This measures repeatability after selection, not end-to-end success over arbitrary human inputs; failed simulation policies can reduce the hardware denominator.The project page shows seven tasks: the five main-table tasks plus held-out Close Laptop and Press Button, each reported at 10/12 hardware replays. Those two use a frozen retargeter but still receive task-specific RL. The seven-task showcase and five-task 46/56 total therefore describe different sets.Reviewed October 20, 2026 against the October 19 v1 preprint and author project page. These are author experiments, not RoboSkin reproduction results. The project’s GitHub label has no repository destination and is marked pending; code, weights, release terms and runnable reproduction are unverified.For a data-conversion decision, keep a record of what each stage adds or removes. The checklist below is editorial guidance: require evidence for the intended robot and task before budgeting a conversion pipeline, and preserve failed or rejected inputs alongside the retained trajectories.HandoffWhat to retainAcceptance questionHuman recording to referenceObject geometry and motion, hand keypoints, frames, units, timing and source reuse terms.Can the target hand reach the required contacts without penetration or impossible joints?Reference to simulated rolloutReference version, robot model, dynamics assumptions, RL budget, seeds and all attempted sequences.Does the downstream controller execute the object interaction, and how often does refinement fail?Simulation to hardware replaySelection rule, excluded policies, unique trajectories, repeat counts, resets and outcome definitions.Is the reported result conditional on a successful simulation, and does it tolerate realistic starting-state changes?Replay to reusable robot dataCommanded targets versus measured state, timestamps, observations, failures and split membership.Can a learner consume these records without confusing reference motion with executed actions or leaking repeated trajectories across splits?DexOAK v1: method and hardware protocolAuthor project: main and held-out demonstrationsHuman observations versus recorded robot actionsCheck robot episode fields before conversionScope a robot-data evidence reviewRelated routesPassive observation versus teleoperation dataChoose between video pretraining, structured handheld demonstrations and recorded robot actions.AI and roboticsPlace learning methods inside the complete model, robot, action, and feedback system.Robot platforms and embodimentsSeparate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence.Robot foundation modelsCompare reusable model roles, data, embodiment transfer, access, and evidence.VLA robotics: models, code and tactile feedbackPlace vision-language-action policies inside the broader robot-learning stack.Robot manipulationConnect learning methods to grasping, insertion, dexterity, and contact-rich tasks.Tactile AIFollow the path from touch signals to robot perception and action.Tactile datasetsFilter source-reviewed resources by robot, sensor, task, modality, and license.Tactile benchmarksReview tasks, protocols, metrics, baselines, and evidence boundaries.Tactile foundation modelsSeparate reusable tactile representations, predictive models, and policies.Physical AI and touchConnect learned robot behavior to multimodal physical-world feedback.Humanoid robotsMap learning, control, hands, locomotion, safety, and tactile sensing.ADEPT visuo-tactile dexterityReview an embodiment-specific RL and sim-to-real result with a matched tactile ablation.UniVTAC tactile simulation and learningTrace encoder samples, policy trajectories, hosted task episodes, physical demonstrations, and evaluation rollouts as separate evidence.Source pathsHugging Face LeRobot v0.6.0 ->Hugging Face LeRobot documentation ->Open X-Embodiment ->DROID robot manipulation dataset ->Google DeepMind Gemini Robotics ->ManiSkill-ViTac ->ADEPT reinforcement-learning preprint ->UniVTAC simulation, representation, and benchmark preprint ->Paper routesStart with source-backed RoboSkin briefsTactile AI / 2026-09-19UniVTAC separates tactile simulation, representation learning, and policy evaluationChoose the matching code branch and dataset before using UniVTAC. This guide separates its tactile encoder, simulation benchmark, public downloads and paper-reported physical results.Robot learning / 2026-08-22ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertionADEPT reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched Flexiv-Sharpa insertion condition, with ten physical trials per condition.Tactile AI / 2026-08-22HT-Bench full-hand tactile benchmark for robot manipulationHT-Bench v2 pairs egocentric vision with millions of full-hand tactile frames, corrects the vision-to-tactile metric split, and adds four real-robot evaluations.Tactile Data / 2026-08-22FreeTacMan robot-free visuo-tactile data collection for tactile AIA research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.Tactile AI / 2026-08-15Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot ManipulationDream-Tac models action-conditioned tactile futures for contact-rich robot manipulation, showing why robot skin data needs prediction, not only reaction.Tactile manipulation / 2026-08-22T-Rex adds high-rate tactile reaction to dexterous robot policiesT-Rex reports a 100-hour collection and a 30-point gap over EgoScale; its official release now provides code, checkpoints, and an approximately 50-hour public subset.Tactile datasets / 2026-08-22RoboTacDex maps 6,000+ humanoid visual-tactile trajectoriesRoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects, but public dataset access remains pending.Common questionsFAQ for this topic01What is robot learning?Robot learning uses data or experience to train robot perception, prediction, or action instead of specifying every behavior as a fixed rule.02What is the difference between imitation learning and reinforcement learning for robots?Imitation learning learns from demonstrated behavior. Reinforcement learning improves behavior using a reward signal from interaction or simulation. Systems can combine both.03What makes a robot-learning dataset useful?It should identify the robot, observations, actions, task context, timing, calibration, trajectory unit, collection policy, splits, access path, and license.04Why does robot learning need tactile data?It needs tactile data when physical success depends on pressure, shear, slip, seating, deformation, or contact transitions that other sensors do not measure directly.05How should sim-to-real results be judged?State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.",
+      "structured_data": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/#organization",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "sameAs": [
+                "https://github.com/roboskin-ai"
+              ],
+              "email": "hello@roboskin.ai",
+              "description": "An independent research and intelligence platform mapping robot skin, tactile sensing, tactile AI, robot manipulation, humanoid touch, and Physical AI.",
+              "disambiguatingDescription": "RoboSkin.ai is an independent robot-skin, tactile-AI, and Physical-AI research intelligence platform. It is not affiliated with the former EU FP7 ROBOSKIN consortium or similarly named products unless a cited page states otherwise.",
+              "identifier": {
+                "@type": "PropertyValue",
+                "propertyID": "domain",
+                "value": "roboskin.ai",
+                "url": "https://roboskin.ai"
+              },
+              "publishingPrinciples": "https://roboskin.ai/editorial-policy",
+              "correctionsPolicy": "https://roboskin.ai/editorial-policy#corrections",
+              "ethicsPolicy": "https://roboskin.ai/editorial-policy#independence",
+              "knowsAbout": [
+                "Robot skin",
+                "Tactile AI",
+                "Tactile sensing",
+                "Humanoid robotics",
+                "Robot manipulation",
+                "Physical AI"
+              ],
+              "founder": {
+                "@id": "https://roboskin.ai/about#steven-yang"
+              },
+              "logo": {
+                "@type": "ImageObject",
+                "@id": "https://roboskin.ai/#logo",
+                "url": "https://roboskin.ai/apple-touch-icon.svg",
+                "width": 180,
+                "height": 180
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "content and research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://roboskin.ai/about#steven-yang",
+              "name": "Steven Yang",
+              "jobTitle": "Founder & Editor",
+              "url": "https://roboskin.ai/about#editorial-lead",
+              "worksFor": {
+                "@id": "https://roboskin.ai/#organization"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://roboskin.ai/#website",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "inLanguage": "en",
+              "description": "Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations."
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "@id": "https://roboskin.ai/robot-learning#webpage",
+              "url": "https://roboskin.ai/robot-learning",
+              "name": "Robot Learning Data: Datasets, Formats & Evaluation",
+              "headline": "Robot learning data: datasets, formats and evaluation",
+              "description": "Choose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://roboskin.ai/generated/pages/resources-library.webp",
+                "contentUrl": "https://roboskin.ai/generated/pages/resources-library.webp",
+                "caption": "Resource-library visual for public learning routes and technical references.",
+                "description": "Organized robot skin learning library with technical cards, tactile sensor samples, and research screens."
+              },
+              "inLanguage": "en",
+              "isPartOf": {
+                "@id": "https://roboskin.ai/#website"
+              },
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "author": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "reviewedBy": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "breadcrumb": {
+                "@id": "https://roboskin.ai/robot-learning#breadcrumb"
+              },
+              "mainEntity": {
+                "@id": "https://roboskin.ai/robot-learning#defined-term"
+              },
+              "keywords": [
+                "robot learning",
+                "robot learning data",
+                "robotics machine learning",
+                "imitation learning robotics",
+                "reinforcement learning robots",
+                "robot learning datasets",
+                "sim-to-real robotics",
+                "robot policy learning",
+                "tactile robot learning",
+                "LeRobot"
+              ],
+              "about": [
+                "robot learning",
+                "robot learning data",
+                "robotics machine learning",
+                "imitation learning robotics",
+                "reinforcement learning robots",
+                "robot learning datasets",
+                "sim-to-real robotics",
+                "robot policy learning",
+                "tactile robot learning",
+                "LeRobot"
+              ],
+              "mentions": [
+                {
+                  "@type": "WebPage",
+                  "name": "Passive observation versus teleoperation data",
+                  "url": "https://roboskin.ai/robot-teleoperation#passive-observation-vs-teleoperation-data-for-robot-learning",
+                  "description": "Choose between video pretraining, structured handheld demonstrations and recorded robot actions."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "AI and robotics",
+                  "url": "https://roboskin.ai/ai-robotics",
+                  "description": "Place learning methods inside the complete model, robot, action, and feedback system."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot platforms and embodiments",
+                  "url": "https://roboskin.ai/robots",
+                  "description": "Separate training coverage, evaluation hardware, configuration identity, and demonstration-only evidence."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot foundation models",
+                  "url": "https://roboskin.ai/robot-foundation-models",
+                  "description": "Compare reusable model roles, data, embodiment transfer, access, and evidence."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "VLA robotics: models, code and tactile feedback",
+                  "url": "https://roboskin.ai/robot-vla-models",
+                  "description": "Place vision-language-action policies inside the broader robot-learning stack."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot manipulation",
+                  "url": "https://roboskin.ai/robot-manipulation",
+                  "description": "Connect learning methods to grasping, insertion, dexterity, and contact-rich tasks."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile AI",
+                  "url": "https://roboskin.ai/tactile-ai",
+                  "description": "Follow the path from touch signals to robot perception and action."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile datasets",
+                  "url": "https://roboskin.ai/datasets",
+                  "description": "Filter source-reviewed resources by robot, sensor, task, modality, and license."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile benchmarks",
+                  "url": "https://roboskin.ai/benchmarks",
+                  "description": "Review tasks, protocols, metrics, baselines, and evidence boundaries."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile foundation models",
+                  "url": "https://roboskin.ai/tactile-foundation-models",
+                  "description": "Separate reusable tactile representations, predictive models, and policies."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Physical AI and touch",
+                  "url": "https://roboskin.ai/physical-ai-touch",
+                  "description": "Connect learned robot behavior to multimodal physical-world feedback."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Humanoid robots",
+                  "url": "https://roboskin.ai/humanoid-robots",
+                  "description": "Map learning, control, hands, locomotion, safety, and tactile sensing."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "ADEPT visuo-tactile dexterity",
+                  "url": "https://roboskin.ai/research/adept-visuo-tactile-dexterity-rl-2026",
+                  "description": "Review an embodiment-specific RL and sim-to-real result with a matched tactile ablation."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "UniVTAC tactile simulation and learning",
+                  "url": "https://roboskin.ai/research/univtac-platform-encoder-benchmark-2026",
+                  "description": "Trace encoder samples, policy trajectories, hosted task episodes, physical demonstrations, and evaluation rollouts as separate evidence."
+                }
+              ],
+              "dateModified": "2026-10-28"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "@id": "https://roboskin.ai/robot-learning#breadcrumb",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://roboskin.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "robot learning",
+                  "item": "https://roboskin.ai/robot-learning"
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "@id": "https://roboskin.ai/robot-learning#faq",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is robot learning?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Robot learning uses data or experience to train robot perception, prediction, or action instead of specifying every behavior as a fixed rule."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is the difference between imitation learning and reinforcement learning for robots?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Imitation learning learns from demonstrated behavior. Reinforcement learning improves behavior using a reward signal from interaction or simulation. Systems can combine both."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What makes a robot-learning dataset useful?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It should identify the robot, observations, actions, task context, timing, calibration, trajectory unit, collection policy, splits, access path, and license."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Why does robot learning need tactile data?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It needs tactile data when physical success depends on pressure, shear, slip, seating, deformation, or contact transitions that other sensors do not measure directly."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How should sim-to-real results be judged?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred."
+                  }
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "DefinedTerm",
+              "@id": "https://roboskin.ai/robot-learning#defined-term",
+              "name": "Robot learning data: datasets, formats and evaluation",
+              "description": "Robot learning data includes observations, robot state, actions, task context and outcomes used to train or evaluate a robot model. Start with the task and action interface, then check sensing, timing, held-out splits, access and license. Dataset size alone does not establish that the data fits your robot. Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources. A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability. Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.",
+              "url": "https://roboskin.ai/robot-learning",
+              "inDefinedTermSet": {
+                "@type": "DefinedTermSet",
+                "name": "RoboSkin.ai robot skin glossary",
+                "url": "https://roboskin.ai/glossary"
+              },
+              "mainEntityOfPage": {
+                "@id": "https://roboskin.ai/robot-learning#webpage"
+              }
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/editorial-policy#editorial-team",
+              "name": "RoboSkin.ai Editorial Team",
+              "url": "https://roboskin.ai/editorial-policy"
+            }
+          ]
+        }
+      ],
+      "alt_texts": [
+        {
+          "src": "/generated/pages/resources-library.webp",
+          "alt": "Organized robot skin learning library with technical cards, tactile sensor samples, and research screens."
+        },
+        {
+          "src": "/generated/authority/state-of-tactile-ai-cover.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/tactile-ai-loop.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/state-of-tactile-ai-cover.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/authority-hero-tactile-stack.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/tactile-ai-loop.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/roboskin-index-cover.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/humanoid-stack-map-cover.webp",
+          "alt": ""
+        }
+      ],
+      "assets": [
+        {
+          "path": "/resources/robot-data/v2026.10.28/selection-matrix.csv",
+          "bytes": 6625,
+          "sha256": "68985eabf0925131fbe4b4ad57e9dca13c837723cf347333e1e0037c16b5bf66"
+        },
+        {
+          "path": "/resources/robot-data/v2026.10.28/selection-matrix.json",
+          "bytes": 8963,
+          "sha256": "e3d018a8ff9d9c7ce1daa6ca0090171a0f8c4b94c6553356669723256fda2552"
+        },
+        {
+          "path": "/resources/robot-data/v2026.10.28/robot-data-decision-kit.zip",
+          "bytes": 9620,
+          "sha256": "721c9ec70c8863180162e471769bde8db7f6a2d61009f3374b102a1bf7842233"
+        }
+      ],
+      "feed": null,
+      "feed_reason": "No RSS entry or feed text changed by this resource update.",
+      "markdown_sha256": "45cce815376371beb829a7443d75c5a958dfb3d9563f8e3ee6e0318edd29ae54"
+    },
+    {
+      "path": "/robot-teleoperation",
+      "title": "Robot Teleoperation Data: Collection & Quality Checks | RoboSkin.ai",
+      "description": "Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.",
+      "h1": "Robot teleoperation data: collection and quality checks",
+      "canonical": "https://roboskin.ai/robot-teleoperation",
+      "robots": "index, follow",
+      "body": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"@id\":\"https://roboskin.ai/robot-teleoperation#webpage\",\"url\":\"https://roboskin.ai/robot-teleoperation\",\"name\":\"Robot Teleoperation Data: Collection & Quality Checks\",\"headline\":\"Robot teleoperation data: collection and quality checks\",\"description\":\"Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://roboskin.ai/generated/pages/application-contexts.webp\",\"contentUrl\":\"https://roboskin.ai/generated/pages/application-contexts.webp\",\"caption\":\"Application-context visual for robot skin, e-skin, and tactile AI use cases.\",\"description\":\"Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals.\"},\"inLanguage\":\"en\",\"isPartOf\":{\"@id\":\"https://roboskin.ai/#website\"},\"publisher\":{\"@id\":\"https://roboskin.ai/#organization\"},\"author\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"reviewedBy\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"breadcrumb\":{\"@id\":\"https://roboskin.ai/robot-teleoperation#breadcrumb\"},\"mainEntity\":{\"@id\":\"https://roboskin.ai/robot-teleoperation#article\"},\"keywords\":[\"robot teleoperation\",\"robot teleoperation data\",\"humanoid robot teleoperation\",\"robot demonstration data\",\"teleoperation robotics\",\"imitation learning data collection\",\"VLA training data\",\"robot data collection\",\"robot retargeting\",\"robot learning demonstrations\"],\"about\":[\"robot teleoperation\",\"robot teleoperation data\",\"humanoid robot teleoperation\",\"robot demonstration data\",\"teleoperation robotics\",\"imitation learning data collection\",\"VLA training data\",\"robot data collection\",\"robot retargeting\",\"robot learning demonstrations\"],\"mentions\":[{\"@type\":\"WebPage\",\"name\":\"AI and robotics\",\"url\":\"https://roboskin.ai/ai-robotics\",\"description\":\"Connect human demonstrations to robot data, policy learning, deployment, and feedback.\"},{\"@type\":\"WebPage\",\"name\":\"Robotics datasets\",\"url\":\"https://roboskin.ai/robotics-datasets\",\"description\":\"Review broad robot-data fields, splits, access, and license.\"},{\"@type\":\"WebPage\",\"name\":\"Robot learning\",\"url\":\"https://roboskin.ai/robot-learning\",\"description\":\"Connect demonstrations to imitation, correction, evaluation, and transfer.\"},{\"@type\":\"WebPage\",\"name\":\"Robot VLA models\",\"url\":\"https://roboskin.ai/robot-vla-models\",\"description\":\"Understand how images, language, state, and actions enter generalist policies.\"},{\"@type\":\"WebPage\",\"name\":\"Robot manipulation\",\"url\":\"https://roboskin.ai/robot-manipulation\",\"description\":\"Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks.\"},{\"@type\":\"WebPage\",\"name\":\"Robot hands\",\"url\":\"https://roboskin.ai/robot-hands\",\"description\":\"Map end-effector interfaces, sensing, and dexterous action spaces.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile datasets\",\"url\":\"https://roboskin.ai/datasets\",\"description\":\"Find touch-specific data resources and sensor metadata.\"},{\"@type\":\"WebPage\",\"name\":\"The Missing Touch research brief\",\"url\":\"https://roboskin.ai/research/missing-touch-spatial-tactile-feedback-teleoperation-2026\",\"description\":\"Review spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary.\"},{\"@type\":\"WebPage\",\"name\":\"PRISM research brief\",\"url\":\"https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026\",\"description\":\"Review the industrial collection design, tactile subset, and pending release status.\"},{\"@type\":\"WebPage\",\"name\":\"FreeTacMan research brief\",\"url\":\"https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025\",\"description\":\"Review wearable robot-free visuo-tactile collection evidence.\"}],\"dateModified\":\"2026-10-28\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"@id\":\"https://roboskin.ai/robot-teleoperation#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://roboskin.ai/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"robot teleoperation\",\"item\":\"https://roboskin.ai/robot-teleoperation\"}]},{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"@id\":\"https://roboskin.ai/robot-teleoperation#faq\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Can passive video replace teleoperation data?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Passive video can support representation learning, but it does not directly supply synchronized robot action targets. Using it for policy learning requires a suitable learning objective, inferred or additional action information, and evaluation on the target robot.\"}},{\"@type\":\"Question\",\"name\":\"Is UMI the same as passive video collection?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Original UMI uses an instrumented handheld gripper and a trajectory-processing pipeline to provide a structured demonstration and policy interface. It can collect away from a robot, but its original design does not include a default calibrated tactile or force stream.\"}},{\"@type\":\"Question\",\"name\":\"What is robot teleoperation?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master.\"}},{\"@type\":\"Question\",\"name\":\"Is a teleoperated robot autonomous?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Teleoperation shows human-controlled behavior. Autonomous capability requires the robot policy to perceive and act without the operator under a defined evaluation protocol.\"}},{\"@type\":\"Question\",\"name\":\"How does teleoperation create robot-learning data?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"It records synchronized observations, robot state, human commands, actions, task context, and outcomes. Those episodes are calibrated, quality-checked, normalized, split, and used to train and evaluate a policy.\"}},{\"@type\":\"Question\",\"name\":\"What limits learning from teleoperation?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Limits include interface bias, latency, morphology mismatch, narrow task coverage, inconsistent operators, missing failures, action retargeting, compounding policy errors, and evaluation leakage.\"}},{\"@type\":\"Question\",\"name\":\"Why record tactile data during teleoperation?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Touch can expose contact onset, pressure, shear, slip, seating, and corrective behavior that cameras may miss, but it must be synchronized with robot state and actions to support learning.\"}}]},{\"@context\":\"https://schema.org\",\"@type\":\"TechArticle\",\"@id\":\"https://roboskin.ai/robot-teleoperation#article\",\"headline\":\"Robot teleoperation data: collection and quality checks\",\"name\":\"Robot Teleoperation Data: Collection & Quality Checks\",\"description\":\"Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://roboskin.ai/generated/pages/application-contexts.webp\",\"contentUrl\":\"https://roboskin.ai/generated/pages/application-contexts.webp\",\"caption\":\"Application-context visual for robot skin, e-skin, and tactile AI use cases.\",\"description\":\"Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals.\"},\"url\":\"https://roboskin.ai/robot-teleoperation\",\"datePublished\":\"2026-08-21\",\"dateModified\":\"2026-10-28\",\"inLanguage\":\"en\",\"publisher\":{\"@id\":\"https://roboskin.ai/#organization\"},\"author\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"mainEntityOfPage\":{\"@id\":\"https://roboskin.ai/robot-teleoperation#webpage\"},\"about\":[\"robot teleoperation\",\"robot teleoperation data\",\"humanoid robot teleoperation\",\"robot demonstration data\",\"teleoperation robotics\",\"imitation learning data collection\",\"VLA training data\",\"robot data collection\",\"robot retargeting\",\"robot learning demonstrations\"],\"mentions\":[{\"@type\":\"WebPage\",\"name\":\"AI and robotics\",\"url\":\"https://roboskin.ai/ai-robotics\",\"description\":\"Connect human demonstrations to robot data, policy learning, deployment, and feedback.\"},{\"@type\":\"WebPage\",\"name\":\"Robotics datasets\",\"url\":\"https://roboskin.ai/robotics-datasets\",\"description\":\"Review broad robot-data fields, splits, access, and license.\"},{\"@type\":\"WebPage\",\"name\":\"Robot learning\",\"url\":\"https://roboskin.ai/robot-learning\",\"description\":\"Connect demonstrations to imitation, correction, evaluation, and transfer.\"},{\"@type\":\"WebPage\",\"name\":\"Robot VLA models\",\"url\":\"https://roboskin.ai/robot-vla-models\",\"description\":\"Understand how images, language, state, and actions enter generalist policies.\"},{\"@type\":\"WebPage\",\"name\":\"Robot manipulation\",\"url\":\"https://roboskin.ai/robot-manipulation\",\"description\":\"Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks.\"},{\"@type\":\"WebPage\",\"name\":\"Robot hands\",\"url\":\"https://roboskin.ai/robot-hands\",\"description\":\"Map end-effector interfaces, sensing, and dexterous action spaces.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile datasets\",\"url\":\"https://roboskin.ai/datasets\",\"description\":\"Find touch-specific data resources and sensor metadata.\"},{\"@type\":\"WebPage\",\"name\":\"The Missing Touch research brief\",\"url\":\"https://roboskin.ai/research/missing-touch-spatial-tactile-feedback-teleoperation-2026\",\"description\":\"Review spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary.\"},{\"@type\":\"WebPage\",\"name\":\"PRISM research brief\",\"url\":\"https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026\",\"description\":\"Review the industrial collection design, tactile subset, and pending release status.\"},{\"@type\":\"WebPage\",\"name\":\"FreeTacMan research brief\",\"url\":\"https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025\",\"description\":\"Review wearable robot-free visuo-tactile collection evidence.\"}],\"citation\":[\"https://arxiv.org/abs/2203.12601\",\"https://arxiv.org/abs/2402.10329\",\"https://umi-gripper.github.io/\",\"https://arxiv.org/abs/2309.13037\",\"https://arxiv.org/abs/2608.19372\",\"https://arxiv.org/abs/2608.17962\",\"https://huggingface.co/blog/grabette\",\"https://huggingface.co/blog/lerobot-release-v060\",\"https://opendrivelab.com/FreeTacMan\",\"https://arxiv.org/abs/2403.12945\",\"https://arxiv.org/abs/2310.08864\",\"https://huggingface.co/blog/lerobot-datasets-v3\"]},{\"@type\":\"Organization\",\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\",\"name\":\"RoboSkin.ai Editorial Team\",\"url\":\"https://roboskin.ai/editorial-policy\"}]}Home/Robot teleoperation data: collection and quality checksRobot data collection pillarRobot teleoperation data: collection and quality checksCollect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.Published 2026-08-21 | Updated 2026-10-28 by RoboSkin.ai Editorial TeamOctober 28, 2026: added a pinned DROID action-target trace, a measured-motion comparison and downloadable action-contract records. These are source checks, not a DROID loader or hardware run; earlier collection evidence is retained.Check the action contractBrowse researchSubmit a sourceApplication-context visual for robot skin, e-skin, and tactile AI use cases.Build usable demonstration episodesTrace a real action targetSee the difference between a stored field, training transform and robot command.Check a teleoperation episodeInspect timing, outcomes and reuse conditions before training.Compare UMI and GELLOCompare collection hardware, data and tactile limits.On this pageTrace the action target before collecting or converting dataRobot teleoperation data collection: episode-quality checklistPassive observation vs teleoperation data for robot learningChoose data by the training taskWhat robot teleoperation controlsThe demonstration-to-policy pipelineTeleoperation data is not autonomous capabilityCurrent open data-collection signalsTouch and force feedback in teleoperationQuality and evaluation checklistRobot Data Collection: from a demonstration to an exportUMI vs GELLO: two routes to robot demonstration dataShort answerWhat you need to know1Robot teleoperation data pairs recorded observations and robot state with human-controlled commands or action targets. To use it for learning, document the action interface, align clocks, retain resets and interventions, check episode quality, and define evaluation splits and reuse terms. Teleoperation demonstrates human control, not autonomous policy capability.2Robot teleoperation is remote or mediated human control of a robot through interfaces such as joysticks, teach pendants, motion capture, wearable devices, cameras, handheld end effectors, or bilateral systems. Teleoperated behavior is not autonomous behavior.3For robot learning, teleoperation can generate aligned observations and actions, but useful data also requires calibration, timing, task definitions, resets, failures, operator context, quality control, schema, access, and license.4Demonstrations do not become a capable policy automatically. Training must account for action representation, embodiment, coverage, compounding errors, evaluation splits, interventions, and repeated real-robot testing.Topic 01Trace the action target before collecting or converting dataA field named action is not a complete control specification. Trace one record through its producing software and training loader to the intended robot interface. Dimension, units, reference frame, absolute versus incremental meaning, rotation representation and observation-to-action timing all belong in that record.DROID provides a concrete source-inspected example. Its public schema lists a seven-element action and several action_dict fields. The pinned policy-learning example instead constructs a ten-element target: three Cartesian-position values, six values representing rotation, and one gripper position. It marks these targets absolute and leaves the gripper dimension out of normalization. This is a particular training pipeline, not a claim that every DROID user has the same target.EvidenceWhat the inspected material saysWhat to do with itDROID serialized schemaSeven-element action; separate commanded Cartesian/joint position and velocity fields, plus observed state.Record the exact raw field. The docs’ short “6x joint velocities” comment is insufficient to specify a controller and is not used here as a verified joint-action contract.DROID pinned transformdroid_dataset_transform builds 3 + 6 + 1 values from action_dict.cartesian_position and gripper_position.Pin the transform and normalization. A ten-element rotation representation cannot be sent as ten robot joint commands.DROID pinned loaderThe example selects two exterior cameras and filters for success trajectories by default. A later transform slices action[1:] within its prepared window.Inspect camera selection, filtering and temporal alignment in the actual training recipe; source inspection alone does not validate a loaded batch.Tactile-ETA released demonstrationsMeasured end-effector/joint transitions and recorded simulation steps; original actuator/tool commands are marked unavailable.Useful for historical context; do not relabel measured displacement as the original control command.A practical collection checkpointBefore a larger collection session, complete the action-contract sheet and replay a small pilot batch through the intended loader. Retain a visible success, a failure or intervention, and a missing/stale-data case where available. Keep attempts and exclusions in the ledger; do not collect only a polished demonstration video.Define acceptance thresholds from the target robot and task, then record who checked them and what is still unresolved. This is an engineering planning aid, not a safety certification or a claim that RoboSkin has tested your controller. The DROID findings above are source inspection on October 28, 2026; no DROID training or hardware run was performed.DROID official data schemaPinned DROID target construction, lines 27–38Pinned DROID loader and camera/filter settingsTactile-ETA preparation: recorded motion and unavailable commandsDownload the action-contract sheet (CSV)Download the complete decision kit with instructionsChoose an existing dataset before scaling new collectionTopic 02Robot teleoperation data collection: episode-quality checklistDefine the learning data contract before choosing an interface. Direct robot teleoperation can record commands for a particular embodiment; original UMI instead uses an instrumented handheld gripper and reconstructs trajectories for later policy deployment. Neither raw video nor a controller joint angle is automatically a calibrated tactile measurement.Review a small set of recorded episodes before scaling collection. Inspect the streams together, preserve failures and corrections, and document what was commanded versus what the robot measured. Passing file validation alone does not show that the resulting policy succeeds on a physical robot.Collection checkWhat the episode should documentWhat to verifyAction meaningCommand and measured state, control mode, units, frames, gripper range and retargeting.The targets match the policy and deployment controller.Clock alignmentObservation, state, command and optional tactile timestamps with capture-rate metadata.Replay exposes missing frames, offsets and stale sensor values.Task coverageTask label, objects, setup, resets, failures, interventions and operator context.The retained episodes represent the conditions the policy will face.Contact evidenceSensor identity, placement, calibration and raw versus inferred touch fields.An added tactile channel is valid, synchronized and supported by the learning method.Release and evaluationDataset version, access, license and held-out split definition.The release can be used for your purpose without leaking repeated episodes into evaluation.Compare the original UMI and GELLO collection systemsValidate LeRobot fields, timestamps and conversionChoose existing robot learning data before collecting moreTopic 03Passive observation vs teleoperation data for robot learningPassive observation data can show what a human did and how a scene changed. Teleoperation can additionally record the commands sent to a particular robot alongside its measured state. That observation-action pairing is the key distinction for policy training: ordinary video does not directly tell you which robot command produced each transition.These are complementary data sources. R3M pretrains visual representations on Ego4D human video and uses the representation for downstream robot policy learning. It does not make the original videos a dataset of measured robot actions. The R3M paper is an example of representation pretraining followed by task learning, not proof that every imitation-learning recipe can train from unlabelled video.UMI is a third case: an instrumented handheld demonstration interface. Its gripper-mounted camera and trajectory-processing pipeline provide more structure than passive video, while collection can happen away from a robot. GELLO instead controls a robot through a joint-based interface. The table summarizes the original projects and R3M sources checked on September 19, 2026; RoboSkin has not run these hardware systems.Data sourceObservations and action informationCollection hardwareContact-information boundaryPassive human videoImages and temporal changes; optional text or annotations. Robot action targets are absent unless separately inferred or supplied.An existing video corpus can be studied without a robot; acquiring footage needs a camera and appropriate permissions.Visible contact is not a measurement of force, slip or an occluded contact patch.Original UMIVisual observations, reconstructed relative end-effector trajectories and gripper width; later robot deployment requires a compatible policy interface.Handheld parallel-jaw gripper and mounted camera; no robot at every demonstration site.Original UMI does not provide a default calibrated force or tactile stream.Original GELLOController joint measurements mapped to robot commands, plus the observations actually recorded by the robot setup.Joint-encoder controller matched to the robot and a robot for physical demonstrations; cameras are separate.Joint commands do not establish contact force. Record additional calibrated sensing if the task needs it.Teleoperation with added tactile sensingAligned commands, measured state and recorded touch; haptic feedback to the operator is an independent design choice.A suitable robot, interface and tactile sensor with a documented capture pipeline.Preserve raw units, calibration, validity and clocks. A recorded tactile channel does not prove a trained policy uses it.R3M: visual pretraining from human videoUMI: demonstration and policy interfaceGELLO: joint-based teleoperation designTopic 04Choose data by the training taskFor visual representation learning, video may be useful before robot action labels are available. For supervised action imitation, first establish the action representation and its alignment with observations. For contact-sensitive insertion or grasp adjustment, decide whether touch supplies an observation, a training label, operator feedback or an evaluation signal; each role requires different records.Consider inserting a plug. A passive clip shows motion and visible outcome. A teleoperation log can also preserve the commanded motion and measured robot state. Tactile sensing can add a local contact observation when the camera cannot see the mating surfaces. To compare these sources, hold out objects or scenes, report autonomous success separately from intervention, and state which streams the deployed policy actually receives. This is an experimental design example, not a RoboSkin hardware result.Before collecting: specify the task, embodiment, observation streams and whether actions are measured, commanded or reconstructed.Before merging: check camera calibration, coordinate frames, capture and receive times, missing streams, action dimensions and units.Before training: preserve failed and interrupted episodes with reasons; document exclusions and split by the intended generalization claim.Before reporting: separate data-format validity, useful demonstrations and independently evaluated policy performance.Validate LeRobot episode and timestamp fieldsPractice tactile validity checks with a small Python datasetCompare available tactile datasets and access limitsTopic 05What robot teleoperation controlsTeleoperation can command a mobile base, arm pose, joint motion, gripper, dexterous hand, whole humanoid body, or a high-level subtask. The operator may watch direct video, stereo or depth views, a digital twin, or the physical robot. Some systems provide haptic or force feedback; others are one-way.The interface changes the data. A low-dimensional joystick, handheld gripper, motion-capture rig, exoskeleton, and bilateral master device encode different human intent and produce different action distributions. Dataset records should preserve that acquisition contract.Interface familyTypical commandStrengthData limitation to recordJoystick or gamepadBase, end-effector, gripper, or mode commandsPortable and familiarLow-dimensional mapping and operator-specific mode switchesTeach pendant or kinesthetic teachingWaypoints, joint motion, or physically guided poseDirect connection to industrial workflows or robot geometryMay be slow, robot-specific, or unsuitable for free whole-body motionMotion capture or wearable interfaceHuman pose, hand pose, or joint targets retargeted to the robotCan capture natural coordinated motionHuman-robot morphology, occlusion, calibration, and retargeting errorsBilateral or haptic masterPosition or force-related commands with feedbackCan expose contact to the operatorCost, stability, latency, scaling, and master-slave mismatchHandheld data-collection deviceEnd-effector pose and gripper state without the full robotCan lower collection friction and move data capture away from a robot cellRequires reliable calibration and later embodiment mappingTopic 06The demonstration-to-policy pipelineA teleoperation recording is a source trajectory, not a finished learning asset. The complete pipeline aligns sensors and commands, segments tasks, records outcomes and failure context, validates the episode, converts it to a stable schema, splits it without leakage, trains a model, and tests the model in closed loop.Specify task, object, environment, operator instruction, success criteria, and reset policyCalibrate and synchronize cameras, depth, proprioception, hand state, force or touch, commands, and timestampsRecord latency, packet loss, control modes, interventions, discarded episodes, failures, and operator identity or experience when relevantNormalize episodes and action spaces while preserving raw data, units, coordinate frames, and provenanceTrain and evaluate with splits that isolate the claimed objects, scenes, tasks, operators, or embodimentsTopic 07Teleoperation data is not autonomous capabilityA teleoperated demonstration proves that a person and interface could make the robot perform the task under those conditions. It does not prove that a learned policy can perceive the same state, recover from error, or act safely without the operator.A policy trained by imitation can encounter states absent from expert demonstrations because small prediction errors compound during execution. Corrective demonstrations, interactive data collection, recovery examples, and policy rollouts can target this gap, but they still require an explicit intervention policy and fair evaluation.Topic 08Current open data-collection signalsThe official Hugging Face Grabette article describes a handheld gripper-and-camera device that records data in the standard LeRobot dataset format. It is an example of collecting manipulation demonstrations without keeping a full robot in the loop during every recording. The transfer value still depends on calibration, task coverage, observation and action mapping, and later robot evaluation.The LeRobot v0.6 release describes rollout tools and DAgger-style human corrections. FreeTacMan investigates wearable, robot-free visuo-tactile data collection. DROID and Open X-Embodiment represent broader real-robot and multi-embodiment data strategies. These resources solve different parts of the pipeline and should not be treated as identical teleoperation systems.Topic 09Touch and force feedback in teleoperationTouch can be recorded as robot-side training data, returned to the operator as haptic feedback, or both. Robot-side tactile data can label contact onset, slip, pressure distribution, or grasp state. Haptic feedback can help a person adjust motion, but the master device, scaling, delay, and feedback modality shape what the operator feels.For imitation learning, synchronize tactile observations with the action that preceded the contact and the corrective action that followed it. A contact stream without robot state, timestamps, or action context is much harder to use for closed-loop policy learning.The Missing Touch study maps GelSight Mini contact images to a 32-DoF cutaneous display and reports more natural and consistent trajectories in two 2-DoF tasks. It did not train an autonomous policy, so its learning relevance is a demonstration-quality implication rather than a measured policy-success gain. PRISM provides a separate collection perspective by combining exoskeleton, tracker, and VR interfaces across industrial tasks, while limiting tactile sensing to an unspecified subset of episodes.Origami describes S1 as a skill-capture glove recording 20 finger joint angles with encoders, fingertip and palm pressure, and wrist-camera video on a shared timeline. Its matched glove/robot joint arrangement maps measured angles to corresponding robot position targets. This preserves joint correspondence, but wearer hand size and robot fingertip geometry can still change contact location and pressure distribution. The manufacturer says its contact-alignment model remains in development.The reported 30 tasks demonstrate people wearing S1, not autonomous robot success. The OptiTrack check covers index, middle and ring fingertip positions in the glove wrist frame in one recording; it does not establish universal whole-hand accuracy. The product page offers Request access, not a verified downloadable dataset. These are manufacturer reports, not RoboSkin hardware tests.Before procurement, request wearer-specific fitting/calibration records, sensor layouts and units, raw capture/receive timestamps, clock offsets and validity flags. Preserve glove observations separately from commanded and measured robot joints. Require an object-specific contact-transfer check across wearer sizes and robot fingertips, plus written export, reuse and availability terms.Origami S1: capture, calibration and contact-alignment limitsS1 product access informationCompare robot-hand geometry and sensingTopic 10Quality and evaluation checklistData quality is a measured property, not a consequence of collection volume. Before training, inspect timing, calibration, missing streams, task labels, duplicated episodes, operator shortcuts, failures, and inconsistent resets. Before a capability claim, test the learned policy on the physical robot under a protocol that distinguishes autonomous success from human correction.StageWhat to verifyFailure if omittedCaptureCalibration, clocks, latency, commands, observations, raw units, and failure flagsThe trajectory can look complete while actions and observations are misalignedCurationEpisode boundaries, outcomes, duplicates, exclusions, class balance, and operator distributionThe model learns shortcuts or the dataset overstates coverageTrainingAction representation, normalization, history, embodiment mapping, and intervention handlingThe learned interface differs from the deployed robotEvaluationAutonomy, objects, scenes, trials, resets, interventions, recovery, force, damage, and timeA staged or corrected run is reported as autonomous capabilityReleaseSchema, version, documentation, access, license, checksums, and known limitationsOther teams cannot audit or legally reuse the dataTopic 11Robot Data Collection: from a demonstration to an exportDefine an episode before recording: task instruction, start/reset condition, expected outcome and failure categories. Record observations and operator commands separately so an action target cannot be mistaken for a measured robot state. Preserve raw streams and a capture manifest alongside any training export.Time synchronization belongs in acquisition. Save sensor capture time, host receive time and clock domains; estimate offsets using a documented synchronization method and inspect residual alignment. A resampled episode timestamp is a training index, not a measurement of end-to-end latency.Before exporting, inspect dropped frames, duplicate or reversed timestamps, changed array dimensions, stale observations, saturation and invalid tactile samples. Label failed trajectories, interventions and recovery segments with reasons. Retain their provenance whether the training recipe includes or excludes them; do not silently call every recorded episode a success.For training export, record state/action names, units, coordinate frames, episode boundaries, task text and outcome labels. Split by the intended generalization claim before computing training statistics. The linked LeRobot exercise checks a numeric subset with synthetic data; it does not validate videos, policy compatibility or the quality of a physical demonstration.Inspect LeRobot episodes, timestamps and validationCompare robot and tactile datasetsBuild the programming and data foundationsTopic 12UMI vs GELLO: two routes to robot demonstration dataOriginal UMI and GELLO are complementary collection approaches. UMI moves demonstration capture into a handheld gripper; GELLO maps a human-operated joint controller to a robot arm. The comparison below is scoped to the original project and paper, checked on September 16, 2026. It does not generalize later tactile variants to the originals.AspectOriginal UMIOriginal GELLOCollection methodHuman directly manipulates handheld grippers; the robot is not required at every collection site.Operator moves a smaller controller with a kinematic structure matched to the target robot; joint measurements drive teleoperation.Hardware requirementsHandheld parallel-jaw gripper and mounted GoPro; the processing pipeline reconstructs trajectories. Deployment later needs a suitable robot and mapping.3D-printed controller with encoder-equipped servos, a communication interface and a supported robot for physical demonstrations; cameras are separate observation hardware.Data producedVisual observations, reconstructed end-effector trajectories and gripper width used by the collection/policy pipeline. This is not automatically a LeRobot export.Controller joint targets and recorded robot observations; camera streams depend on the capture setup. Define action/state mappings before conversion.Force / tactile informationThe original UMI system is not a default tactile-sensor system. Video and gripper width do not supply calibrated contact force.Encoder position and mechanical resistance at the controller are not a calibrated tactile stream. Additional sensing and alignment are required for force/touch labels.Main quality questionIs pose reconstruction reliable, is timing aligned and is the trajectory feasible for the deployment embodiment?Are joint mapping, offsets, robot observations and camera/command timing correct for the matched embodiment?UMI original project: hardware and data collectionGELLO original paper and hardware scopeGELLO official software and acquisition setupInspect LeRobot episodes, timestamps and validationEditorial reviewWritten by RoboSkin.ai Editorial Team. Source-reported findings and RoboSkin.ai analysis are kept separate.Reading a paper is not an independent reproduction. Code execution, replay and hardware testing are separate evidence types; look for a dated record and its stated conditions before treating a result as tested by RoboSkin.ai.This review does not imply product availability, certification, laboratory affiliation or measured performance by RoboSkin.ai.Editorial lead: Steven Yang.How evidence is checkedReport a source or attribution issueRelated routesAI and roboticsConnect human demonstrations to robot data, policy learning, deployment, and feedback.Robotics datasetsReview broad robot-data fields, splits, access, and license.Robot learningConnect demonstrations to imitation, correction, evaluation, and transfer.Robot VLA modelsUnderstand how images, language, state, and actions enter generalist policies.Robot manipulationPlace demonstrations inside grasping, insertion, dexterity, and tool-use tasks.Robot handsMap end-effector interfaces, sensing, and dexterous action spaces.Tactile datasetsFind touch-specific data resources and sensor metadata.The Missing Touch research briefReview spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary.PRISM research briefReview the industrial collection design, tactile subset, and pending release status.FreeTacMan research briefReview wearable robot-free visuo-tactile collection evidence.Source pathsR3M human-video pretraining paper — checked 2026-09-19 ->UMI original paper — checked 2026-09-19 ->UMI original project — checked 2026-09-19 ->GELLO original paper — checked 2026-09-16 ->The Missing Touch spatial tactile feedback preprint ->PRISM industrial skill dataset preprint ->Hugging Face Grabette data-collection article ->Hugging Face LeRobot v0.6 ->FreeTacMan project ->DROID robot manipulation dataset paper ->Open X-Embodiment paper ->Hugging Face LeRobot Dataset v3 ->Paper routesStart with source-backed RoboSkin briefsRobot teleoperation / 2026-08-22The Missing Touch tests spatial tactile feedback in robot teleoperationA GelSight Mini and 32-DoF fingertip display made two teleoperation tasks more natural and consistent, but no autonomous robot policy was trained or evaluated.Tactile datasets / 2026-08-22PRISM maps 5,000+ contact-rich industrial robot trajectoriesPRISM reports 5,000+ robot trajectories across 25+ industrial tasks, but tactile observations cover only a subset and the announced dataset download is not yet available.Tactile datasets / 2026-08-22RoboTacDex maps 6,000+ humanoid visual-tactile trajectoriesRoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects, but public dataset access remains pending.Tactile Data / 2026-08-22FreeTacMan robot-free visuo-tactile data collection for tactile AIA research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.Tactile Data / 2026-08-22GIST humanoid visual-tactile-action dataset maps 101.9K soft-object samplesThe GIST preprint reports 101.9K visual-tactile-action samples for towel and sponge manipulation, with dense hand touch, two camera views, and explicit access limits.Common questionsFAQ for this topic01Can passive video replace teleoperation data?Passive video can support representation learning, but it does not directly supply synchronized robot action targets. Using it for policy learning requires a suitable learning objective, inferred or additional action information, and evaluation on the target robot.02Is UMI the same as passive video collection?No. Original UMI uses an instrumented handheld gripper and a trajectory-processing pipeline to provide a structured demonstration and policy interface. It can collect away from a robot, but its original design does not include a default calibrated tactile or force stream.03What is robot teleoperation?Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master.04Is a teleoperated robot autonomous?No. Teleoperation shows human-controlled behavior. Autonomous capability requires the robot policy to perceive and act without the operator under a defined evaluation protocol.05How does teleoperation create robot-learning data?It records synchronized observations, robot state, human commands, actions, task context, and outcomes. Those episodes are calibrated, quality-checked, normalized, split, and used to train and evaluate a policy.06What limits learning from teleoperation?Limits include interface bias, latency, morphology mismatch, narrow task coverage, inconsistent operators, missing failures, action retargeting, compounding policy errors, and evaluation leakage.07Why record tactile data during teleoperation?Touch can expose contact onset, pressure, shear, slip, seating, and corrective behavior that cameras may miss, but it must be synchronized with robot state and actions to support learning.",
+      "structured_data": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/#organization",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "sameAs": [
+                "https://github.com/roboskin-ai"
+              ],
+              "email": "hello@roboskin.ai",
+              "description": "An independent research and intelligence platform mapping robot skin, tactile sensing, tactile AI, robot manipulation, humanoid touch, and Physical AI.",
+              "disambiguatingDescription": "RoboSkin.ai is an independent robot-skin, tactile-AI, and Physical-AI research intelligence platform. It is not affiliated with the former EU FP7 ROBOSKIN consortium or similarly named products unless a cited page states otherwise.",
+              "identifier": {
+                "@type": "PropertyValue",
+                "propertyID": "domain",
+                "value": "roboskin.ai",
+                "url": "https://roboskin.ai"
+              },
+              "publishingPrinciples": "https://roboskin.ai/editorial-policy",
+              "correctionsPolicy": "https://roboskin.ai/editorial-policy#corrections",
+              "ethicsPolicy": "https://roboskin.ai/editorial-policy#independence",
+              "knowsAbout": [
+                "Robot skin",
+                "Tactile AI",
+                "Tactile sensing",
+                "Humanoid robotics",
+                "Robot manipulation",
+                "Physical AI"
+              ],
+              "founder": {
+                "@id": "https://roboskin.ai/about#steven-yang"
+              },
+              "logo": {
+                "@type": "ImageObject",
+                "@id": "https://roboskin.ai/#logo",
+                "url": "https://roboskin.ai/apple-touch-icon.svg",
+                "width": 180,
+                "height": 180
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "content and research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://roboskin.ai/about#steven-yang",
+              "name": "Steven Yang",
+              "jobTitle": "Founder & Editor",
+              "url": "https://roboskin.ai/about#editorial-lead",
+              "worksFor": {
+                "@id": "https://roboskin.ai/#organization"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://roboskin.ai/#website",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "inLanguage": "en",
+              "description": "Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations."
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "@id": "https://roboskin.ai/robot-teleoperation#webpage",
+              "url": "https://roboskin.ai/robot-teleoperation",
+              "name": "Robot Teleoperation Data: Collection & Quality Checks",
+              "headline": "Robot teleoperation data: collection and quality checks",
+              "description": "Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://roboskin.ai/generated/pages/application-contexts.webp",
+                "contentUrl": "https://roboskin.ai/generated/pages/application-contexts.webp",
+                "caption": "Application-context visual for robot skin, e-skin, and tactile AI use cases.",
+                "description": "Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals."
+              },
+              "inLanguage": "en",
+              "isPartOf": {
+                "@id": "https://roboskin.ai/#website"
+              },
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "author": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "reviewedBy": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "breadcrumb": {
+                "@id": "https://roboskin.ai/robot-teleoperation#breadcrumb"
+              },
+              "mainEntity": {
+                "@id": "https://roboskin.ai/robot-teleoperation#article"
+              },
+              "keywords": [
+                "robot teleoperation",
+                "robot teleoperation data",
+                "humanoid robot teleoperation",
+                "robot demonstration data",
+                "teleoperation robotics",
+                "imitation learning data collection",
+                "VLA training data",
+                "robot data collection",
+                "robot retargeting",
+                "robot learning demonstrations"
+              ],
+              "about": [
+                "robot teleoperation",
+                "robot teleoperation data",
+                "humanoid robot teleoperation",
+                "robot demonstration data",
+                "teleoperation robotics",
+                "imitation learning data collection",
+                "VLA training data",
+                "robot data collection",
+                "robot retargeting",
+                "robot learning demonstrations"
+              ],
+              "mentions": [
+                {
+                  "@type": "WebPage",
+                  "name": "AI and robotics",
+                  "url": "https://roboskin.ai/ai-robotics",
+                  "description": "Connect human demonstrations to robot data, policy learning, deployment, and feedback."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robotics datasets",
+                  "url": "https://roboskin.ai/robotics-datasets",
+                  "description": "Review broad robot-data fields, splits, access, and license."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot learning",
+                  "url": "https://roboskin.ai/robot-learning",
+                  "description": "Connect demonstrations to imitation, correction, evaluation, and transfer."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot VLA models",
+                  "url": "https://roboskin.ai/robot-vla-models",
+                  "description": "Understand how images, language, state, and actions enter generalist policies."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot manipulation",
+                  "url": "https://roboskin.ai/robot-manipulation",
+                  "description": "Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot hands",
+                  "url": "https://roboskin.ai/robot-hands",
+                  "description": "Map end-effector interfaces, sensing, and dexterous action spaces."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile datasets",
+                  "url": "https://roboskin.ai/datasets",
+                  "description": "Find touch-specific data resources and sensor metadata."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "The Missing Touch research brief",
+                  "url": "https://roboskin.ai/research/missing-touch-spatial-tactile-feedback-teleoperation-2026",
+                  "description": "Review spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "PRISM research brief",
+                  "url": "https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026",
+                  "description": "Review the industrial collection design, tactile subset, and pending release status."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "FreeTacMan research brief",
+                  "url": "https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025",
+                  "description": "Review wearable robot-free visuo-tactile collection evidence."
+                }
+              ],
+              "dateModified": "2026-10-28"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "@id": "https://roboskin.ai/robot-teleoperation#breadcrumb",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://roboskin.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "robot teleoperation",
+                  "item": "https://roboskin.ai/robot-teleoperation"
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "@id": "https://roboskin.ai/robot-teleoperation#faq",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Can passive video replace teleoperation data?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Passive video can support representation learning, but it does not directly supply synchronized robot action targets. Using it for policy learning requires a suitable learning objective, inferred or additional action information, and evaluation on the target robot."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is UMI the same as passive video collection?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Original UMI uses an instrumented handheld gripper and a trajectory-processing pipeline to provide a structured demonstration and policy interface. It can collect away from a robot, but its original design does not include a default calibrated tactile or force stream."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is robot teleoperation?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Robot teleoperation is remote or mediated human control of a robot through an interface such as a joystick, teach pendant, motion-capture system, wearable device, handheld end effector, or bilateral master."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is a teleoperated robot autonomous?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Teleoperation shows human-controlled behavior. Autonomous capability requires the robot policy to perceive and act without the operator under a defined evaluation protocol."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How does teleoperation create robot-learning data?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It records synchronized observations, robot state, human commands, actions, task context, and outcomes. Those episodes are calibrated, quality-checked, normalized, split, and used to train and evaluate a policy."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What limits learning from teleoperation?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Limits include interface bias, latency, morphology mismatch, narrow task coverage, inconsistent operators, missing failures, action retargeting, compounding policy errors, and evaluation leakage."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Why record tactile data during teleoperation?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Touch can expose contact onset, pressure, shear, slip, seating, and corrective behavior that cameras may miss, but it must be synchronized with robot state and actions to support learning."
+                  }
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              "@id": "https://roboskin.ai/robot-teleoperation#article",
+              "headline": "Robot teleoperation data: collection and quality checks",
+              "name": "Robot Teleoperation Data: Collection & Quality Checks",
+              "description": "Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://roboskin.ai/generated/pages/application-contexts.webp",
+                "contentUrl": "https://roboskin.ai/generated/pages/application-contexts.webp",
+                "caption": "Application-context visual for robot skin, e-skin, and tactile AI use cases.",
+                "description": "Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals."
+              },
+              "url": "https://roboskin.ai/robot-teleoperation",
+              "datePublished": "2026-08-21",
+              "dateModified": "2026-10-28",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "author": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "mainEntityOfPage": {
+                "@id": "https://roboskin.ai/robot-teleoperation#webpage"
+              },
+              "about": [
+                "robot teleoperation",
+                "robot teleoperation data",
+                "humanoid robot teleoperation",
+                "robot demonstration data",
+                "teleoperation robotics",
+                "imitation learning data collection",
+                "VLA training data",
+                "robot data collection",
+                "robot retargeting",
+                "robot learning demonstrations"
+              ],
+              "mentions": [
+                {
+                  "@type": "WebPage",
+                  "name": "AI and robotics",
+                  "url": "https://roboskin.ai/ai-robotics",
+                  "description": "Connect human demonstrations to robot data, policy learning, deployment, and feedback."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robotics datasets",
+                  "url": "https://roboskin.ai/robotics-datasets",
+                  "description": "Review broad robot-data fields, splits, access, and license."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot learning",
+                  "url": "https://roboskin.ai/robot-learning",
+                  "description": "Connect demonstrations to imitation, correction, evaluation, and transfer."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot VLA models",
+                  "url": "https://roboskin.ai/robot-vla-models",
+                  "description": "Understand how images, language, state, and actions enter generalist policies."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot manipulation",
+                  "url": "https://roboskin.ai/robot-manipulation",
+                  "description": "Place demonstrations inside grasping, insertion, dexterity, and tool-use tasks."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Robot hands",
+                  "url": "https://roboskin.ai/robot-hands",
+                  "description": "Map end-effector interfaces, sensing, and dexterous action spaces."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile datasets",
+                  "url": "https://roboskin.ai/datasets",
+                  "description": "Find touch-specific data resources and sensor metadata."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "The Missing Touch research brief",
+                  "url": "https://roboskin.ai/research/missing-touch-spatial-tactile-feedback-teleoperation-2026",
+                  "description": "Review spatial cutaneous feedback, participant evidence, and the autonomous-policy boundary."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "PRISM research brief",
+                  "url": "https://roboskin.ai/research/prism-contact-rich-industrial-skill-dataset-2026",
+                  "description": "Review the industrial collection design, tactile subset, and pending release status."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "FreeTacMan research brief",
+                  "url": "https://roboskin.ai/research/freetacman-robot-free-visuotactile-data-collection-2025",
+                  "description": "Review wearable robot-free visuo-tactile collection evidence."
+                }
+              ],
+              "citation": [
+                "https://arxiv.org/abs/2203.12601",
+                "https://arxiv.org/abs/2402.10329",
+                "https://umi-gripper.github.io/",
+                "https://arxiv.org/abs/2309.13037",
+                "https://arxiv.org/abs/2608.19372",
+                "https://arxiv.org/abs/2608.17962",
+                "https://huggingface.co/blog/grabette",
+                "https://huggingface.co/blog/lerobot-release-v060",
+                "https://opendrivelab.com/FreeTacMan",
+                "https://arxiv.org/abs/2403.12945",
+                "https://arxiv.org/abs/2310.08864",
+                "https://huggingface.co/blog/lerobot-datasets-v3"
+              ]
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/editorial-policy#editorial-team",
+              "name": "RoboSkin.ai Editorial Team",
+              "url": "https://roboskin.ai/editorial-policy"
+            }
+          ]
+        }
+      ],
+      "alt_texts": [
+        {
+          "src": "/generated/pages/application-contexts.webp",
+          "alt": "Robot hand, gripper, and assistive surface examples connected by blue tactile sensing signals."
+        },
+        {
+          "src": "/generated/authority/tactile-ai-loop.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/roboskin-index-cover.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/humanoid-stack-map-cover.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/authority-hero-tactile-stack.webp",
+          "alt": ""
+        },
+        {
+          "src": "/generated/authority/humanoid-stack-map-cover.webp",
+          "alt": ""
+        }
+      ],
+      "assets": [
+        {
+          "path": "/resources/robot-data/v2026.10.28/action-contract.csv",
+          "bytes": 442,
+          "sha256": "274bccafe62b3a0e86de15ce0bd6b821d48607b9b9fabc7db381b81dc460017c"
+        },
+        {
+          "path": "/resources/robot-data/v2026.10.28/robot-data-decision-kit.zip",
+          "bytes": 9620,
+          "sha256": "721c9ec70c8863180162e471769bde8db7f6a2d61009f3374b102a1bf7842233"
+        }
+      ],
+      "feed": null,
+      "feed_reason": "No RSS entry or feed text changed by this resource update.",
+      "markdown_sha256": "86da4d4c4cffc940cd657194966e72137095367c59e77b69300fdb35b91a80cd"
+    },
+    {
+      "path": "/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra",
+      "title": "Tactile In-Context Learning: Tactile-ETA and TacTalent | RoboSkin.ai",
+      "description": "Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.",
+      "h1": "Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup",
+      "canonical": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra",
+      "robots": "index, follow",
+      "body": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@context\":\"https://schema.org\",\"@type\":\"WebPage\",\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#webpage\",\"url\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra\",\"name\":\"Tactile In-Context Learning: Tactile-ETA and TacTalent\",\"headline\":\"Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup\",\"description\":\"Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://roboskin.ai/generated/pages/technology-signal-flow.webp\",\"contentUrl\":\"https://roboskin.ai/generated/pages/technology-signal-flow.webp\",\"caption\":\"Technology visual showing tactile sensing layers and signal flow.\",\"description\":\"Layered tactile sensor surface sending signals through processing boards and robot-ready data views.\"},\"inLanguage\":\"en\",\"isPartOf\":{\"@id\":\"https://roboskin.ai/#website\"},\"publisher\":{\"@id\":\"https://roboskin.ai/#organization\"},\"author\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"reviewedBy\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"breadcrumb\":{\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#breadcrumb\"},\"mainEntity\":{\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#article\"},\"keywords\":[\"tactile in-context learning\",\"Tactile-ETA\",\"GPT-6 Astra tactile control\",\"TacTalent\",\"tactile demonstration frame selection\"],\"about\":[\"tactile in-context learning\",\"Tactile-ETA\",\"GPT-6 Astra tactile control\",\"TacTalent\",\"tactile demonstration frame selection\"],\"mentions\":[{\"@type\":\"WebPage\",\"name\":\"Robot learning\",\"url\":\"https://roboskin.ai/robot-learning\",\"description\":\"Separate parameter training, context examples and current feedback.\"},{\"@type\":\"WebPage\",\"name\":\"AI and robotics\",\"url\":\"https://roboskin.ai/ai-robotics\",\"description\":\"Map the model, action interface, controller and physical feedback loop.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile manipulation\",\"url\":\"https://roboskin.ai/tactile-manipulation\",\"description\":\"Connect contact observations to task-specific control decisions.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile experiment worksheet\",\"url\":\"https://roboskin.ai/tactile-ai#experiment-worksheet\",\"description\":\"Record proposed settings and later observations without conflating them.\"}],\"dateModified\":\"2026-10-28\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://roboskin.ai/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"guides\",\"item\":\"https://roboskin.ai/resources\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"tactile in context learning tactile eta vs gpt 6 astra\",\"item\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra\"}]},{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#faq\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Is Tactile-ETA an alternative model to GPT-6 Astra?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Its main evaluated setup uses GPT-6 Astra as the frozen agent. This page compares Tactile-ETA’s context and tool design with the separate TacTalent study’s Astra/RoboICL control setup, not two independent model families.\"}},{\"@type\":\"Question\",\"name\":\"Do the reported percentages show which setup is better?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Task sets, cameras, demonstrations, reasoning effort, scene samples and execution interfaces differ. Tactile-ETA’s 15.75% to 24.00% result is a within-study demonstration-touch comparison; TacTalent’s 93.8% and 81.8% are separate simulation suite means.\"}},{\"@type\":\"Question\",\"name\":\"What does Tactile-ETA’s ten-trial hardware result mean?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Each condition has five Wipe Board and five Pick Up Chips trials. One multimodal demonstration per task yields 6/10 combined successes versus 0/10 without demonstrations. Both conditions have current touch. This small sample does not establish deployment reliability or isolate historical touch from the rest of the demonstration.\"}},{\"@type\":\"Question\",\"name\":\"Should a robot agent always receive fewer tactile frames?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Tactile-ETA reports 2/100 for all demonstration frames and 36/100 for its selected representation on Lift Bottle, under one fixed setup. Test endpoints, endpoints plus a peak-change pair and full sequences under matched conditions before generalizing.\"}}]},{\"@context\":\"https://schema.org\",\"@type\":\"TechArticle\",\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#article\",\"headline\":\"Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup\",\"name\":\"Tactile In-Context Learning: Tactile-ETA and TacTalent\",\"description\":\"Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://roboskin.ai/generated/pages/technology-signal-flow.webp\",\"contentUrl\":\"https://roboskin.ai/generated/pages/technology-signal-flow.webp\",\"caption\":\"Technology visual showing tactile sensing layers and signal flow.\",\"description\":\"Layered tactile sensor surface sending signals through processing boards and robot-ready data views.\"},\"url\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra\",\"datePublished\":\"2026-10-22\",\"dateModified\":\"2026-10-28\",\"inLanguage\":\"en\",\"publisher\":{\"@id\":\"https://roboskin.ai/#organization\"},\"author\":{\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\"},\"mainEntityOfPage\":{\"@id\":\"https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#webpage\"},\"about\":[\"tactile in-context learning\",\"Tactile-ETA\",\"GPT-6 Astra tactile control\",\"TacTalent\",\"tactile demonstration frame selection\"],\"mentions\":[{\"@type\":\"WebPage\",\"name\":\"Robot learning\",\"url\":\"https://roboskin.ai/robot-learning\",\"description\":\"Separate parameter training, context examples and current feedback.\"},{\"@type\":\"WebPage\",\"name\":\"AI and robotics\",\"url\":\"https://roboskin.ai/ai-robotics\",\"description\":\"Map the model, action interface, controller and physical feedback loop.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile manipulation\",\"url\":\"https://roboskin.ai/tactile-manipulation\",\"description\":\"Connect contact observations to task-specific control decisions.\"},{\"@type\":\"WebPage\",\"name\":\"Tactile experiment worksheet\",\"url\":\"https://roboskin.ai/tactile-ai#experiment-worksheet\",\"description\":\"Record proposed settings and later observations without conflating them.\"}],\"citation\":[\"https://arxiv.org/html/2610.27613v1\",\"https://arxiv.org/html/2610.26846v1\",\"https://github.com/No-518/Tactile-ETA/tree/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818\",\"https://github.com/ccyydd/TacTalent/tree/75441c18c3054b6032c4923f4047b9deaef26694\"]},{\"@type\":\"Organization\",\"@id\":\"https://roboskin.ai/editorial-policy#editorial-team\",\"name\":\"RoboSkin.ai Editorial Team\",\"url\":\"https://roboskin.ai/editorial-policy\"}]}Home/Guides/Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra SetupResearch comparison / Context, control and evidenceTactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra SetupCompare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.Published 2026-10-22 | Updated 2026-10-28 by RoboSkin.ai Editorial TeamOctober 28, 2026: added a reproducible offline audit of two pinned Lift Bottle demonstrations, 24 action segments and 96 published image strips, plus a versioned experiment kit. Paper results retain the October 22 source review. RoboSkin has not run either controller or the proposed A/B/C task-success experiment.Inspect the executed input auditBrowse researchSubmit a sourceTechnology visual showing tactile sensing layers and signal flow.Compare the evidence or check the inputsCompare methods and action interfacesSee what each setup receives, changes and executes.Inspect the executed input auditCheck observed counts, pixel agreement, source revisions and limits.Plan a matched A/B/C experimentDownload code, the report and blank outcome records.On this pageWhat is actually being compared?Simulation: what Tactile-ETA’s controlled comparison showsSimulation: what the TacTalent Astra study reportsReal robots: ten trials per condition, across two tasksMore tactile frames are not necessarily betterExecuted input audit: what the released Lift Bottle files containNext experiment: matched tasks, matched vision, three tactile contextsHow to use and cite this comparisonShort answerWhat you need to know1Tactile-ETA and TacTalent both use GPT-6 Astra, with different context and control designs. Tactile-ETA supplies action-aligned tactile demonstrations and robot tools to a frozen agent. TacTalent uses Astra with RoboICL to generate action sequences from scene images, tactile images and demonstration context. Compare these configured systems, not the model name alone.2Tactile-ETA isolates the value of adding touch to the same two demonstrations: mean simulation success rises from 15.75% to 24.00% across four tasks. TacTalent reports 93.8% on UniVTAC and 81.8% on OpenViTac with vision and touch, under a different evaluation. These percentages do not establish a winner between the two setups.3The hardware evidence is much smaller: Tactile-ETA reports 6/10 successes with one multimodal demonstration per task versus 0/10 without demonstrations, pooled across two tasks. Both conditions receive current touch. TacTalent reports simulation only. The next useful experiment is a matched comparison of endpoints, endpoints plus peak-change frames, and complete tactile sequences.4RoboSkin independently checked the released inputs for two Lift Bottle episodes: 24 action segments, 96 image strips and 228 panels matched the raw data. This is an offline input audit, not a reproduction of robot success. The script, full report and experiment records are available below.Topic 01What is actually being compared?In-context learning conditions a model through examples supplied at inference; it does not mean updating model weights. The useful comparison is between two ways to package experience and connect a general model to a robot. Neither study establishes that an unconfigured chat model can control arbitrary hardware.Tactile-ETA’s main configuration identifies gpt-6-astra with low reasoning effort. TacTalent’s method configuration identifies gpt-6-astra with xhigh effort. Shared model naming therefore does not imply matched inference settings, camera inputs, prompts, action budgets or execution code.For the distinction between training, demonstrations and execution feedback, see the robot learning guide.DimensionTactile-ETATacTalent: Astra direct tactile-image controlCurrent inputsIn simulation: task text, head/wrist camera observations, bilateral touch, robot state and tool execution feedback. The hardware study uses wrist and third-person cameras.Task text, configured scene cameras, end-effector/proprioceptive state and, in V+T mode, two fingertip tactile RGB images. Wrist-camera availability depends on the task.Demonstration formatComplete expert episodes split at action boundaries. Camera views, motion records and selected bilateral tactile observations cover the same interval.Selected observation/action/receipt/result blocks from successful trajectories, plus bounded online interaction memory. Demonstration and online images share an input interface.Number of demonstrationsMain simulation: two complete expert episodes per task. Hardware: one recorded human demonstration per task.12 tasks: one trajectory with 12 blocks. Six class/selection tasks: two trajectories with five blocks each. Insert Block v2: three trajectories with five blocks each. A block is not a separate demonstration.Model updatesFrozen agent; adaptation through context, without task-specific parameter updates.Inference with Astra, without task-specific policy training; demonstrations remain in context. This is the study’s setup, not an audit of closed model weights.Action interfaceIn simulation, tools such as observe and move_to; move_to specifies an end-effector target and optional gripper command for the underlying controller.Ordered seven-dimensional commands: translation increment, rotation increment and gripper target. A benchmark adapter executes them and returns observations and a receipt.Where touch changesThe key controlled comparison adds historical touch to demonstrations while retaining current touch and the same execution interface.Vision-only versus V+T removes/adds tactile images in both demonstration context and online observations. It does not isolate demonstration touch alone.Evidence scopeFour simulated tasks and a separate two-task hardware study.19 simulated tasks across UniVTAC and OpenViTac; physical-robot validation remains open.Tactile-ETA v1 §3: context and robot toolsTactile-ETA v1 Appendix F: simulation tool interfaceTacTalent v1 §3: observations, demonstrations and actionsTacTalent v1 Table 5: per-task demonstration countsTactile-ETA pinned configuration and implementationTacTalent pinned method configuration and implementationTopic 02Simulation: what Tactile-ETA’s controlled comparison showsTable 1 of Tactile-ETA uses 100 rollouts per task and condition, with matched initial conditions. The comparison below keeps the same two expert demonstrations, current sensory inputs and execution interface. It changes whether tactile observations are included in those demonstrations. Both columns receive current vision and touch.The mean gain is 8.25 percentage points, not a uniform gain on every task: Lift Can changes from 3/100 to 2/100. The native Lift Can success predicate is a pose condition; it should not be reinterpreted as a separate test of stable suspended lifting.Simulated taskVisual-motion demonstrationsTactile-ETA demonstrationsInsert Tube15/100 (15%)32/100 (32%)Lift Can3/100 (3%)2/100 (2%)Lift Bottle27/100 (27%)36/100 (36%)Pull Out Key18/100 (18%)26/100 (26%)Mean of four task rates15.75%24.00%Source: Tactile-ETA v1 Table 1Native success predicates and evaluation boundariesTopic 03Simulation: what the TacTalent Astra study reportsThe separate Astra study evaluates eight UniVTAC tasks and eleven OpenViTac tasks. Each input setting has 210 sampled evaluation episodes: 80 on UniVTAC and 130 on OpenViTac. Most tasks have ten episodes; Insert Block v2 has thirty, covering three shapes. The table reports task-equal mean success, not a pooled 210-trial success rate.The vision-only condition omits tactile images from both demonstrations and online observations. V+T supplies them in both places. This comparison measures their combined contribution within this setup; it cannot identify how much comes from historical demonstrations versus current touch.Simulation suiteEpisodes per input settingVision onlyVision + touchUniVTAC, eight tasks80; ten per task76.3% task mean93.8% task meanOpenViTac, eleven tasks130; ten per task except thirty for Insert Block v280.6% task mean81.8% task meanWhy 93.8% versus 24.0% is not a method rankingThese papers do not run the two systems under one shared protocol. They differ in task coverage, sampled scenes, demonstration selection, camera configuration, reasoning effort, context management and action execution. TacTalent also documents a relaxed Grasp Chip success criterion. Even overlapping task names do not establish identical evaluation conditions.Most TacTalent task rates are based on ten episodes, so one outcome changes a task rate by ten percentage points. The paper calls for more scenes, sampling seeds and repeated executions. Its reported comparisons with specialist policies also use those policies’ published benchmark results; they are not a new matched rerun by RoboSkin.TacTalent v1 Table 1: UniVTAC resultsTacTalent v1 Table 2: OpenViTac resultsEvaluation setup and small-sample limitationsTacTalent v1 §8: simulation and generalization limitsTopic 04Real robots: ten trials per condition, across two tasksTactile-ETA’s hardware study uses a reBot Arm B601-RS, a vitai GF225 tactile gripper, an Orbbec wrist camera and a RealSense D435i third-person camera. Both conditions receive current vision, touch and robot state. The intervention is one whole multimodal human demonstration per task versus no demonstration, with fixed model parameters.The ten-trial headline means five Wipe Board trials plus five Pick Up Chips trials in each condition: twenty trials across both conditions. It does not mean ten trials per task. It also does not isolate tactile demonstration content from the visual and motion information added alongside it.Physical taskNo demonstrationOne Tactile-ETA demonstrationHuman-evaluated successWipe Board0/53/5Target writing removed and eraser moved away to expose the cleaned region.Pick Up Chips0/53/5Chip lifted clear and held without visible breakage or dropping; support and its base remain on the table.Combined descriptive total0/10 (0%)6/10 (60%)Two different tasks pooled; not a deployment reliability estimate.TacTalent Astra studyNo physical trials reportedNo physical trials reportedAll reported evaluations are simulation.What the small sample cannot establishOne additional success or failure changes a five-trial task rate by twenty percentage points. These observations motivate larger, task-specific tests; they do not establish stable performance across objects, days, sensor wear, robots or operators. A 0/5 baseline does not establish that the baseline can never succeed.Keep this hardware evidence separate from both papers’ simulation tables. Neither reading public code nor watching a rollout video constitutes an independent control-performance reproduction. RoboSkin has performed only the separate offline input audit described below.Tactile-ETA v1 Appendix E: hardware, five-trial counts and success criteriaTacTalent v1 §8: physical validation remains necessaryTopic 05More tactile frames are not necessarily betterTactile-ETA Table 3 changes only the tactile representation inside the same two Lift Bottle demonstrations. Action segments, visual observations, motion records and current sensing remain fixed. Every condition has 100 rollouts. “No demo tactile” still has current tactile sensing.The selected representation always keeps the action endpoints. When a change threshold is reached, it also retains the single adjacent-frame pair around the largest normalized bilateral change. Both fingertips use the same selected times; after deduplication, each fingertip has at most four observations per segment. This is more specific than selecting arbitrary interesting frames.Historical tactile representationLift Bottle resultScope of the observationNo demonstration touch27/100 (27%)Visual-motion demonstration baseline; online touch retained.Endpoints only27/100 (27%)Beginning and end of each action segment.All frames2/100 (2%)Dense historical tactile representation in this configuration.Endpoints + selected change pair36/100 (36%)Action-aligned sparse representation used by Tactile-ETA.Engineering interpretation, rather than a universal lawChoose context around contact transitions and the action they explain. Preserve timing and left/right alignment, and measure how frame packaging changes image count, token use, delay and task outcomes. Keep the complete recorded sequence available for inspection even when the model receives a sparse view.This single-task result does not prove that dense touch always harms performance or that the selector transfers to every sensor. Redundancy, image scaling and context competition are possible explanations to test, not mechanisms established by the success table. The ablation concerns historical demonstration images; it is not a reason to reduce the sampling rate of a fast tactile controller.Tactile-ETA v1 Table 3: the frame-representation ablationTactile-ETA v1 §3.2: endpoint and change-pair selectionAppendix B: selector settings and tactile packagingTopic 06Executed input audit: what the released Lift Bottle files containOn October 28, 2026, RoboSkin ran an offline inspector on UniVTAC episodes 0 and 1 for Lift Bottle and Tactile-ETA’s corresponding published demonstration manifest and PNG strips. The source revisions are pinned: UniVTAC e1aee7b and Tactile-ETA e7e5efb. The two HDF5 files total 944,306,887 bytes; full revision IDs, exact file and script hashes, and the execution environment are in the report.The check decoded all 2,780 images in the head, wrist and bilateral tactile streams across 695 recorded rows. It matched 228 panels in all 96 released image strips pixel for pixel against the raw decoded images, excluding the 30-pixel label band. End-effector and joint states at segment boundaries matched the manifest. The published tactile selections were ordered, unique, within their action segments and shared across fingertips, with endpoints retained.Observed or counted inputResult across two episodesWhat this number meansRaw episodes and action segments348 + 347 rows; 12 + 12 segmentsTwo source episodes, not 24 independent robot trials.A: segment endpoints48 appearances per fingertipCounted from the raw segment boundaries; not submitted to a model.B: published selected observations66 appearances per fingertipReleased selections and image pixels checked; optical features and peak-selection algorithm not recomputed.C: all recorded segment observations717 appearances per fingertipIncludes 22 repeated boundary rows. There are 695 unique raw rows; C was not submitted to a model.Published visual/tactile strips96 strips; 228 panels matchedThe report includes each strip hash so future conditions can share identical demonstration vision.A concrete segment and the audit’s limitsEpisode 0, segment 1 spans recorded steps 110–238. The published tactile steps are [110, 234, 236, 238]; A/B/C contain 2/4/65 observations per fingertip. This is an input-packaging difference that can be inspected before purchasing model inference or running a robot.These are context appearances, not token counts, API image counts, latency measurements or success-rate improvements. Simulation steps are not measured wall-clock timestamps. The source episodes are labeled successful upstream; this check did not rerun a task success predicate. It ran no simulator, policy, online controller or physical hardware, and it does not establish full-dataset quality.Use the kit’s explicit download command to retrieve about 0.97 GB of pinned public inputs, then rerun offline. The ZIP contains RoboSkin’s code, report, hashes and templates; it does not redistribute the source datasets or images. Five synthetic rejection tests check the inspector’s behavior and do not add robot evidence.Read the complete observed input-audit report (JSON)Download all 24 segment records and fixed vision hashes (CSV)Download the audit code and experiment kit (ZIP)Read the commands, scope and limitationsInspect the standalone audit codePinned upstream HDF5 inputsPinned upstream processed demonstration inputsTopic 07Next experiment: matched tasks, matched vision, three tactile contextsThis is a proposed RoboSkin evaluation protocol, not an experiment already run. Start with the published Lift Bottle task to check the reported ablation, then repeat on the other tasks before making a broader claim. First compare frame selection within one fixed controller setup; compare two controller stacks only in a separately documented study.Reuse the same two source demonstration episodes, action segmentation, visual images, robot-state records and action records. Keep the visual image bytes, resolution, camera views and ordering identical across conditions. Keep the online observation policy and tactile packaging fixed. Online trajectories can diverge after different actions, so actual later camera frames cannot be guaranteed identical in closed-loop trials.For other contact-sensing experiments, the general tactile experiment worksheet remains available. The dedicated kit above already includes task, scene, repetition, condition, model settings, image/token load, latency, outcome and failure fields. Its three example rows are planned runs with no observed outcomes.Pin the simulator, task assets, success predicate, controller, model identifier, reasoning effort, prompts and API settings. For a historical reproduction, record any unavailable model snapshot or dependency instead of silently substituting it.Use the same evaluation scene/seed list for A, B and C, with separate rollouts and a randomized or counterbalanced run order. To reproduce Tactile-ETA’s reported table, plan 100 initial conditions per task and representation; additional repeats should follow a stated precision and compute budget.Predeclare timeouts, failure categories, intervention rules and how infrastructure failures are handled. Keep attempted trials in the ledger; report invalid runs and any rerun policy separately from robot failures.Keep common inference and action limits. Log image dimensions, actual tactile frame counts, prompt size, API time, executed actions and context overflow. If C exceeds the interface limit, record that limitation; a truncated sequence must not be labeled “all frames.”Report successes/attempts for every task and condition, uncertainty intervals and paired scene outcomes. Separate API errors, contact failures, invalid commands and task failures. Do not hide task differences inside a single average.For offline input comparisons, replay identical recorded observations to all variants. Label those results as offline action analysis, separate from closed-loop task success. For hardware follow-up, add per-task repetitions across sessions and preserve independent success assessment.ConditionDemonstration touch supplied to the modelWhat stays fixedA — endpointsFirst and last tactile observation of every action segment.Tasks, demonstration episodes, visual input construction, action segmentation and online sensing policy.B — endpoints + peak-change pairA plus the adjacent pair at the largest bilateral normalized change when the pinned threshold is reached; deduplicate and retain time order.The same inputs and settings as A; record selector revision and selected timestamps.C — full sequenceAll recorded tactile frames in the same segment, in timestamp order.The same visual images and controller; report changed image/token load and any resizing or context truncation.Download the dedicated A/B/C experiment kitRead the proposed configuration and unresolved settings (JSON)Download the trial ledger with empty outcome fields (CSV)Topic 08How to use and cite this comparisonUse this page to select a context representation and identify the controls missing from a fair experiment. Cite the original paper and its exact table for its success rates; cite this version for the cross-study interface comparison, offline input audit and proposed evaluation design. Both research sources are v1 preprints, so later revisions may change their claims. The claim ledger separates author-reported results, locally observed inputs and proposed experiments.The linked repositories were inspected at the revisions below on October 22, 2026. Source inspection establishes what the released materials describe; it does not establish a successful installation, controller execution, measured latency on your system or physical robot reproduction. The TacTalent results are the research authors’ evaluation, not an OpenAI robotics certification or benchmark guarantee.Neither a simulator’s controller frequency nor a stream’s sampling rate is the model’s decision frequency. Tactile-ETA makes decisions between motion segments; TacTalent executes generated action sequences through its adapter. Hardware integration still needs an appropriate controller, coordinate conventions, calibration and independently verified execution behavior.Download a citation for this version (BibTeX; no DOI assigned)Download the claim-to-source ledger (CSV)Tactile-ETA source snapshot e7e5efbTacTalent source snapshot 75441c1How AI models connect to robot control and feedbackContact feedback in tactile manipulationEditorial reviewWritten by RoboSkin.ai Editorial Team. Source-reported findings and RoboSkin.ai analysis are kept separate.Reading a paper is not an independent reproduction. Code execution, replay and hardware testing are separate evidence types; look for a dated record and its stated conditions before treating a result as tested by RoboSkin.ai.This review does not imply product availability, certification, laboratory affiliation or measured performance by RoboSkin.ai.Editorial lead: Steven Yang.How evidence is checkedReport a source or attribution issueRelated routesRobot learningSeparate parameter training, context examples and current feedback.AI and roboticsMap the model, action interface, controller and physical feedback loop.Tactile manipulationConnect contact observations to task-specific control decisions.Tactile experiment worksheetRecord proposed settings and later observations without conflating them.Source pathsWang et al.: Embodied Task Agents Can Perform Fine Manipulation through Tactile In-Context Learning, arXiv 2610.27613v1 ->Yang et al.: GPT-6 Astra Is a Native Visuo-Tactile Policy for Contact-Rich Manipulation, arXiv 2610.26846v1 ->Tactile-ETA official code, reviewed revision e7e5efb ->TacTalent official code, reviewed revision 75441c1 ->Common questionsFAQ for this topic01Is Tactile-ETA an alternative model to GPT-6 Astra?No. Its main evaluated setup uses GPT-6 Astra as the frozen agent. This page compares Tactile-ETA’s context and tool design with the separate TacTalent study’s Astra/RoboICL control setup, not two independent model families.02Do the reported percentages show which setup is better?No. Task sets, cameras, demonstrations, reasoning effort, scene samples and execution interfaces differ. Tactile-ETA’s 15.75% to 24.00% result is a within-study demonstration-touch comparison; TacTalent’s 93.8% and 81.8% are separate simulation suite means.03What does Tactile-ETA’s ten-trial hardware result mean?Each condition has five Wipe Board and five Pick Up Chips trials. One multimodal demonstration per task yields 6/10 combined successes versus 0/10 without demonstrations. Both conditions have current touch. This small sample does not establish deployment reliability or isolate historical touch from the rest of the demonstration.04Should a robot agent always receive fewer tactile frames?No. Tactile-ETA reports 2/100 for all demonstration frames and 36/100 for its selected representation on Lift Bottle, under one fixed setup. Test endpoints, endpoints plus a peak-change pair and full sequences under matched conditions before generalizing.",
+      "structured_data": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/#organization",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "sameAs": [
+                "https://github.com/roboskin-ai"
+              ],
+              "email": "hello@roboskin.ai",
+              "description": "An independent research and intelligence platform mapping robot skin, tactile sensing, tactile AI, robot manipulation, humanoid touch, and Physical AI.",
+              "disambiguatingDescription": "RoboSkin.ai is an independent robot-skin, tactile-AI, and Physical-AI research intelligence platform. It is not affiliated with the former EU FP7 ROBOSKIN consortium or similarly named products unless a cited page states otherwise.",
+              "identifier": {
+                "@type": "PropertyValue",
+                "propertyID": "domain",
+                "value": "roboskin.ai",
+                "url": "https://roboskin.ai"
+              },
+              "publishingPrinciples": "https://roboskin.ai/editorial-policy",
+              "correctionsPolicy": "https://roboskin.ai/editorial-policy#corrections",
+              "ethicsPolicy": "https://roboskin.ai/editorial-policy#independence",
+              "knowsAbout": [
+                "Robot skin",
+                "Tactile AI",
+                "Tactile sensing",
+                "Humanoid robotics",
+                "Robot manipulation",
+                "Physical AI"
+              ],
+              "founder": {
+                "@id": "https://roboskin.ai/about#steven-yang"
+              },
+              "logo": {
+                "@type": "ImageObject",
+                "@id": "https://roboskin.ai/#logo",
+                "url": "https://roboskin.ai/apple-touch-icon.svg",
+                "width": 180,
+                "height": 180
+              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "content and research inquiry",
+                  "email": "hello@roboskin.ai",
+                  "availableLanguage": [
+                    "en"
+                  ]
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://roboskin.ai/about#steven-yang",
+              "name": "Steven Yang",
+              "jobTitle": "Founder & Editor",
+              "url": "https://roboskin.ai/about#editorial-lead",
+              "worksFor": {
+                "@id": "https://roboskin.ai/#organization"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": "https://roboskin.ai/#website",
+              "name": "RoboSkin.ai",
+              "url": "https://roboskin.ai",
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "inLanguage": "en",
+              "description": "Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations."
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#webpage",
+              "url": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra",
+              "name": "Tactile In-Context Learning: Tactile-ETA and TacTalent",
+              "headline": "Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup",
+              "description": "Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://roboskin.ai/generated/pages/technology-signal-flow.webp",
+                "contentUrl": "https://roboskin.ai/generated/pages/technology-signal-flow.webp",
+                "caption": "Technology visual showing tactile sensing layers and signal flow.",
+                "description": "Layered tactile sensor surface sending signals through processing boards and robot-ready data views."
+              },
+              "inLanguage": "en",
+              "isPartOf": {
+                "@id": "https://roboskin.ai/#website"
+              },
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "author": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "reviewedBy": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "breadcrumb": {
+                "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#breadcrumb"
+              },
+              "mainEntity": {
+                "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#article"
+              },
+              "keywords": [
+                "tactile in-context learning",
+                "Tactile-ETA",
+                "GPT-6 Astra tactile control",
+                "TacTalent",
+                "tactile demonstration frame selection"
+              ],
+              "about": [
+                "tactile in-context learning",
+                "Tactile-ETA",
+                "GPT-6 Astra tactile control",
+                "TacTalent",
+                "tactile demonstration frame selection"
+              ],
+              "mentions": [
+                {
+                  "@type": "WebPage",
+                  "name": "Robot learning",
+                  "url": "https://roboskin.ai/robot-learning",
+                  "description": "Separate parameter training, context examples and current feedback."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "AI and robotics",
+                  "url": "https://roboskin.ai/ai-robotics",
+                  "description": "Map the model, action interface, controller and physical feedback loop."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile manipulation",
+                  "url": "https://roboskin.ai/tactile-manipulation",
+                  "description": "Connect contact observations to task-specific control decisions."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile experiment worksheet",
+                  "url": "https://roboskin.ai/tactile-ai#experiment-worksheet",
+                  "description": "Record proposed settings and later observations without conflating them."
+                }
+              ],
+              "dateModified": "2026-10-28"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#breadcrumb",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://roboskin.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "guides",
+                  "item": "https://roboskin.ai/resources"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "tactile in context learning tactile eta vs gpt 6 astra",
+                  "item": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra"
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#faq",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Is Tactile-ETA an alternative model to GPT-6 Astra?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Its main evaluated setup uses GPT-6 Astra as the frozen agent. This page compares Tactile-ETA’s context and tool design with the separate TacTalent study’s Astra/RoboICL control setup, not two independent model families."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Do the reported percentages show which setup is better?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Task sets, cameras, demonstrations, reasoning effort, scene samples and execution interfaces differ. Tactile-ETA’s 15.75% to 24.00% result is a within-study demonstration-touch comparison; TacTalent’s 93.8% and 81.8% are separate simulation suite means."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What does Tactile-ETA’s ten-trial hardware result mean?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Each condition has five Wipe Board and five Pick Up Chips trials. One multimodal demonstration per task yields 6/10 combined successes versus 0/10 without demonstrations. Both conditions have current touch. This small sample does not establish deployment reliability or isolate historical touch from the rest of the demonstration."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Should a robot agent always receive fewer tactile frames?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Tactile-ETA reports 2/100 for all demonstration frames and 36/100 for its selected representation on Lift Bottle, under one fixed setup. Test endpoints, endpoints plus a peak-change pair and full sequences under matched conditions before generalizing."
+                  }
+                }
+              ]
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "TechArticle",
+              "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#article",
+              "headline": "Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup",
+              "name": "Tactile In-Context Learning: Tactile-ETA and TacTalent",
+              "description": "Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.",
+              "image": {
+                "@type": "ImageObject",
+                "url": "https://roboskin.ai/generated/pages/technology-signal-flow.webp",
+                "contentUrl": "https://roboskin.ai/generated/pages/technology-signal-flow.webp",
+                "caption": "Technology visual showing tactile sensing layers and signal flow.",
+                "description": "Layered tactile sensor surface sending signals through processing boards and robot-ready data views."
+              },
+              "url": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra",
+              "datePublished": "2026-10-22",
+              "dateModified": "2026-10-28",
+              "inLanguage": "en",
+              "publisher": {
+                "@id": "https://roboskin.ai/#organization"
+              },
+              "author": {
+                "@id": "https://roboskin.ai/editorial-policy#editorial-team"
+              },
+              "mainEntityOfPage": {
+                "@id": "https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra#webpage"
+              },
+              "about": [
+                "tactile in-context learning",
+                "Tactile-ETA",
+                "GPT-6 Astra tactile control",
+                "TacTalent",
+                "tactile demonstration frame selection"
+              ],
+              "mentions": [
+                {
+                  "@type": "WebPage",
+                  "name": "Robot learning",
+                  "url": "https://roboskin.ai/robot-learning",
+                  "description": "Separate parameter training, context examples and current feedback."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "AI and robotics",
+                  "url": "https://roboskin.ai/ai-robotics",
+                  "description": "Map the model, action interface, controller and physical feedback loop."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile manipulation",
+                  "url": "https://roboskin.ai/tactile-manipulation",
+                  "description": "Connect contact observations to task-specific control decisions."
+                },
+                {
+                  "@type": "WebPage",
+                  "name": "Tactile experiment worksheet",
+                  "url": "https://roboskin.ai/tactile-ai#experiment-worksheet",
+                  "description": "Record proposed settings and later observations without conflating them."
+                }
+              ],
+              "citation": [
+                "https://arxiv.org/html/2610.27613v1",
+                "https://arxiv.org/html/2610.26846v1",
+                "https://github.com/No-518/Tactile-ETA/tree/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818",
+                "https://github.com/ccyydd/TacTalent/tree/75441c18c3054b6032c4923f4047b9deaef26694"
+              ]
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://roboskin.ai/editorial-policy#editorial-team",
+              "name": "RoboSkin.ai Editorial Team",
+              "url": "https://roboskin.ai/editorial-policy"
+            }
+          ]
+        }
+      ],
+      "alt_texts": [
+        {
+          "src": "/generated/pages/technology-signal-flow.webp",
+          "alt": "Layered tactile sensor surface sending signals through processing boards and robot-ready data views."
+        }
+      ],
+      "assets": [
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/input-audit.json",
+          "bytes": 28721,
+          "sha256": "049949e8d9dec684d81be3699eac4eeaa639933580705a8ae2c0df4170af6da7"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/segment-audit.csv",
+          "bytes": 4172,
+          "sha256": "a6de04152be60d2d8f7f2de60c102ab71b16774726b62eb6beb5982c68f081b9"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/tactile-context-reproduction-kit.zip",
+          "bytes": 22402,
+          "sha256": "8cafc438dd0f4783397324f1b4e3c31b1739dd9ff621a14224e16a4195ee06dd"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/README.txt",
+          "bytes": 6266,
+          "sha256": "4b46401980b588ff24e1a96031f59f074190ce8ca69dd17c86efff6506218694"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/inspect_release.py",
+          "bytes": 11620,
+          "sha256": "089860e154bc1a65dc06604ba44d35ac27c928f8fc5cee3bc8e201a7d86570b3"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/experiment-config.json",
+          "bytes": 1361,
+          "sha256": "807c8d1bac207e67c1ad9829a1f8d55e6a5db09d0154aa73a2cf82d760c698ac"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/trial-ledger.csv",
+          "bytes": 585,
+          "sha256": "f4b83684ba0f72e1260b794a0eb9cd814be3dcce9b9a90f0216d845bb0fdf135"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/citation.bib",
+          "bytes": 556,
+          "sha256": "ed59c8fdce2f23c5e6f760b7950ba9e4d7feaef31d3519dc940900d5681f3e2e"
+        },
+        {
+          "path": "/resources/tactile-icl/v2026.10.28/claim-ledger.csv",
+          "bytes": 1920,
+          "sha256": "ef7545d1116154cae861c381b2725d4677a83070f74d42bc829ef9ca79332805"
+        }
+      ],
+      "feed": null,
+      "feed_reason": "No RSS entry or feed text changed by this resource update.",
+      "markdown_sha256": "d4b396876c2e02d554677ba75e46955f29c02d2bc67f435a4d399e63b17076e4"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-28T02:17:59.685Z",
+  "runtime": "server",
+  "publicPageCount": 203,
+  "markdownAssetCount": 204,
+  "corePaths": [
+    "/",
+    "/tactile-ai",
+    "/datasets",
+    "/sensors",
+    "/guides/lerobot-dataset-format"
+  ]
+}

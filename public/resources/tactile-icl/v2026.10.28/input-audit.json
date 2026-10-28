@@ -1,0 +1,882 @@
+{
+  "schema_version": 1,
+  "evidence_type": "offline_published_input_audit",
+  "status": "pass",
+  "executed_at_utc": "2026-10-28T01:49:42.709929+00:00",
+  "inspector_sha256": "089860e154bc1a65dc06604ba44d35ac27c928f8fc5cee3bc8e201a7d86570b3",
+  "task": "Lift Bottle",
+  "eta_revision": "e7e5efbd42d3be7532ff5eb940a3cb015c2f7818",
+  "univtac_revision": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows",
+    "numpy": "2.2.6",
+    "h5py": "3.16.0",
+    "opencv": "5.0.0",
+    "pillow": "11.3.0"
+  },
+  "input_files": [
+    {
+      "path": "expert_demonstrations.json",
+      "bytes": 78875,
+      "sha256": "728d73024ee0946aca5ba39975eafa30d9e27a6242a6ec27c0092e254a17f55c"
+    },
+    {
+      "path": "0.hdf5",
+      "bytes": 472644952,
+      "sha256": "b18596a52c52dfd25f495e8cca4587aaa2be8efd6600706b3d410db3a664024d"
+    },
+    {
+      "path": "1.hdf5",
+      "bytes": 471661935,
+      "sha256": "949416b2eefc32f009c0dd3834462ff33c016809138ae8ec0c0ff842a4cff8a9"
+    }
+  ],
+  "episodes": [
+    {
+      "episode": 0,
+      "rows": 348,
+      "segments": 12,
+      "decoded_images": 1392,
+      "first_step": 110,
+      "last_step": 804
+    },
+    {
+      "episode": 1,
+      "rows": 347,
+      "segments": 12,
+      "decoded_images": 1388,
+      "first_step": 104,
+      "last_step": 796
+    }
+  ],
+  "segments": [
+    {
+      "episode": 0,
+      "segment": 1,
+      "start_step": 110,
+      "end_step": 238,
+      "selected_steps": [
+        110,
+        234,
+        236,
+        238
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 65,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s1_head.png",
+          "sha256": "53da71e770ae6bd922607aa4c885f9500d9c824bdbf291fad83549c9c91aca20"
+        },
+        "wrist": {
+          "path": "images/e0_s1_wrist.png",
+          "sha256": "4cac42ab1e4451b6504da7bd5bcb60d618d9cd0d6357057104262d91690ade82"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s1_left_tactile.png",
+          "sha256": "9eefb48f1233101393f6404b35c65411f5a7a728443d4432c364f09297e89564"
+        },
+        "right_tactile": {
+          "path": "images/e0_s1_right_tactile.png",
+          "sha256": "119b742fe10f3de1f2df99493b9372bb99bd9d9d5b1e2fa5bde5f1f187a8f616"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 2,
+      "start_step": 238,
+      "end_step": 248,
+      "selected_steps": [
+        238,
+        248
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s2_head.png",
+          "sha256": "c911da1adc0a1dde4be6a85970fff883f21b5773ac432613309c2f201bdcf524"
+        },
+        "wrist": {
+          "path": "images/e0_s2_wrist.png",
+          "sha256": "d075ca2a643e880a8899cf84e2a3db93bfb95cf255d1bd9f93b3c0229d75f02f"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s2_left_tactile.png",
+          "sha256": "e08b872583180bc655361963a1e2df8755c18344c958e150689a0a472ec03c87"
+        },
+        "right_tactile": {
+          "path": "images/e0_s2_right_tactile.png",
+          "sha256": "aad57c34187e4fb2ad48d97ecba456087573047d36c40ba7efb4316f14420fb4"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 3,
+      "start_step": 248,
+      "end_step": 318,
+      "selected_steps": [
+        248,
+        318
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 36,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s3_head.png",
+          "sha256": "0e40ee6e4902fa17ee9afe5acd4ef03311e5a0aba41261a04f035447451e1001"
+        },
+        "wrist": {
+          "path": "images/e0_s3_wrist.png",
+          "sha256": "d29b5f8dc36bd9929b144fda3a5bf88b73a1bd9a695b376825b283d78fea99ca"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s3_left_tactile.png",
+          "sha256": "a94d16d763bdced2d138cc45c298b92f2497019642dcfe4a8b99ee3729a93752"
+        },
+        "right_tactile": {
+          "path": "images/e0_s3_right_tactile.png",
+          "sha256": "d1adbe9d8e0cdaf5df2a62c75580ed91a133f82faeef8853a646ab4d59466c71"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 4,
+      "start_step": 318,
+      "end_step": 392,
+      "selected_steps": [
+        318,
+        392
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 38,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s4_head.png",
+          "sha256": "e352e9a956237879dac79693cd83a2f290e02f54e892fd01dd5a60681143fb8c"
+        },
+        "wrist": {
+          "path": "images/e0_s4_wrist.png",
+          "sha256": "428c1b36319b3c725382fa4eb4b8385c6bb4460469109b4ca2c43016dc5e3e4c"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s4_left_tactile.png",
+          "sha256": "1f73d8511a6aeeeef3859c8ef4673d23232f2733c67280e73c305dfdd267e306"
+        },
+        "right_tactile": {
+          "path": "images/e0_s4_right_tactile.png",
+          "sha256": "6072c157ffcae5b6ff3853c4c3827292c8a5bf6eefe3dab3811f4854799b8322"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 5,
+      "start_step": 392,
+      "end_step": 464,
+      "selected_steps": [
+        392,
+        428,
+        430,
+        464
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 37,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s5_head.png",
+          "sha256": "9301c0acbef17f3d2fdbaa99e17dea70fb89c27ff07a7363570d396f4545d885"
+        },
+        "wrist": {
+          "path": "images/e0_s5_wrist.png",
+          "sha256": "6eb6c7e1d715e32f35f5b9c5f860937b3670b3c480288ecb00295fb7fb13971c"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s5_left_tactile.png",
+          "sha256": "4b66290bc9f2577d623ef111980bb5953496de2c7832d6aee806686644a06b05"
+        },
+        "right_tactile": {
+          "path": "images/e0_s5_right_tactile.png",
+          "sha256": "5075857de7034cd520cf4478c6026fa70584ccca3b4df4d7285c29e0f9aef89b"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 6,
+      "start_step": 464,
+      "end_step": 544,
+      "selected_steps": [
+        464,
+        544
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 41,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s6_head.png",
+          "sha256": "c93e4b59d06eb792f658d1f9e9a6fc47d1e234d2b0557db7565b8fb08cf8f88f"
+        },
+        "wrist": {
+          "path": "images/e0_s6_wrist.png",
+          "sha256": "b494b4590a1b4a2b9320f7efa8d73286f37263eb53b0641e4f02c719c04030bf"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s6_left_tactile.png",
+          "sha256": "f36c20395043caf737e321bfd87bf3acf50042260f149b13a7d296738c00f8cc"
+        },
+        "right_tactile": {
+          "path": "images/e0_s6_right_tactile.png",
+          "sha256": "b39afeaa66ea82255d81000bf3f45f27245b689749a710201ec21e89b8c31609"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 7,
+      "start_step": 544,
+      "end_step": 682,
+      "selected_steps": [
+        544,
+        590,
+        592,
+        682
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 70,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s7_head.png",
+          "sha256": "04e06705de22abd585eccc8c2b99a569c847162f97252af3ba5d95ecb062cf79"
+        },
+        "wrist": {
+          "path": "images/e0_s7_wrist.png",
+          "sha256": "74d50d442bf7b15cb8db607afe8592f89c2213c1c3a380148601d2cb22f785f9"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s7_left_tactile.png",
+          "sha256": "65c3652f235a4bdcf931c35e7e6410496287b28055741a425e2bc1f1e1a60d66"
+        },
+        "right_tactile": {
+          "path": "images/e0_s7_right_tactile.png",
+          "sha256": "3633df5fd9da8922875526754305b5d22f951bfc9b4927f9006e239e09231d59"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 8,
+      "start_step": 682,
+      "end_step": 692,
+      "selected_steps": [
+        682,
+        692
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s8_head.png",
+          "sha256": "83a635da39902f7683710bbffb3017904423934725a195433529969809a1e9f9"
+        },
+        "wrist": {
+          "path": "images/e0_s8_wrist.png",
+          "sha256": "106df0012711714fc705e27848084087b25d300f012dbf9a26473aa4c75b67bb"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s8_left_tactile.png",
+          "sha256": "d9836de42d43733a419dbecf4bf58121957b21f12d95d4471461794a96d5587a"
+        },
+        "right_tactile": {
+          "path": "images/e0_s8_right_tactile.png",
+          "sha256": "30e783bd85f527aa3b1f5900e3097cb27c845fc420f320f4ef102d7c705f1c2d"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 9,
+      "start_step": 692,
+      "end_step": 766,
+      "selected_steps": [
+        692,
+        766
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 38,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s9_head.png",
+          "sha256": "d668a5fb76c7a3c4c930c9eadbeea4e24995eedb44bed9d6121cb39236607029"
+        },
+        "wrist": {
+          "path": "images/e0_s9_wrist.png",
+          "sha256": "37865c15b9d1fa987a8a55ddf25583ba9ac93a3d316f051dc616a272d65d47b6"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s9_left_tactile.png",
+          "sha256": "4db17c1db037a61d7aa0706759bf809f4dd37091276ca336be34a85386e842b6"
+        },
+        "right_tactile": {
+          "path": "images/e0_s9_right_tactile.png",
+          "sha256": "8f7a023f2c6a76eda7a4c8491a21a1e81ff0623856019a8419d5959927ba4b34"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 10,
+      "start_step": 766,
+      "end_step": 776,
+      "selected_steps": [
+        766,
+        776
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s10_head.png",
+          "sha256": "8332049ce1d5d709066df702352975e705099814e82d0695494205e38cac6bb6"
+        },
+        "wrist": {
+          "path": "images/e0_s10_wrist.png",
+          "sha256": "7e0b4d95a30dad2263ca688e422a2b894847865dae909e5a2849d0e9c51d517e"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s10_left_tactile.png",
+          "sha256": "7b8e8188815e963f2413b3dc4d0aa9e342cb36fb0a67c3ce5f0e98176f1497d4"
+        },
+        "right_tactile": {
+          "path": "images/e0_s10_right_tactile.png",
+          "sha256": "a1add735c0a7aaa01041437635c8497628c2df240f3c12445f6e36fe372d80a3"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 11,
+      "start_step": 776,
+      "end_step": 794,
+      "selected_steps": [
+        776,
+        778,
+        794
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 3,
+      "C_observations_per_fingertip": 10,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s11_head.png",
+          "sha256": "a02333fc5f2db168415b6bd0d6d618a523b92a51bc1a9e7749fde5606f2ac049"
+        },
+        "wrist": {
+          "path": "images/e0_s11_wrist.png",
+          "sha256": "3a82df7cfd49138fe6f0c32ec1c8d31879c8192e4363d9d5e0e2c4ee8386773e"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s11_left_tactile.png",
+          "sha256": "0dd75ceb5203522ac28351a347b17759261369dcc0fb3101b7b2bca5da25814d"
+        },
+        "right_tactile": {
+          "path": "images/e0_s11_right_tactile.png",
+          "sha256": "8b791de047edfc3ae6b060decce359104b855d99d9f9a2da307cfad501cea71e"
+        }
+      }
+    },
+    {
+      "episode": 0,
+      "segment": 12,
+      "start_step": 794,
+      "end_step": 804,
+      "selected_steps": [
+        794,
+        804
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e0_s12_head.png",
+          "sha256": "8ea189e8b92558fe1fa20c92326686b07e6740aec0f92dc151e5a8a9203d3751"
+        },
+        "wrist": {
+          "path": "images/e0_s12_wrist.png",
+          "sha256": "935b2f7e04902eaa73062cde7f99f779fa41a53350f2f1c1632087e0dec97baa"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e0_s12_left_tactile.png",
+          "sha256": "846dbe7e1629110b41b0d25a38bfd1d666c7f0152729f464ee0b405dde53a3a6"
+        },
+        "right_tactile": {
+          "path": "images/e0_s12_right_tactile.png",
+          "sha256": "a6e4b6211de38f61e66b314f88d768587105ad72bdbcee5637e09ce92473d990"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 1,
+      "start_step": 104,
+      "end_step": 232,
+      "selected_steps": [
+        104,
+        220,
+        222,
+        232
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 65,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s1_head.png",
+          "sha256": "ebec63abc74d9c995ec956640c339b01d4b578c0eace9f6b1c25169666fcb7d7"
+        },
+        "wrist": {
+          "path": "images/e1_s1_wrist.png",
+          "sha256": "7d5f559330c14bfc90c3a2aa56ac7be3db0edb7706cac6db4cdee785a8714de1"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s1_left_tactile.png",
+          "sha256": "fe0168ee5b3c054730eb383b9e4499c02d624b2dc79b41fb0e89eb7080e77681"
+        },
+        "right_tactile": {
+          "path": "images/e1_s1_right_tactile.png",
+          "sha256": "dc4d628104aa460c9f852b350c426cee20a1bb80bc58f66c19ba27941c216d52"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 2,
+      "start_step": 232,
+      "end_step": 242,
+      "selected_steps": [
+        232,
+        242
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s2_head.png",
+          "sha256": "b585b54eb6e383dff4fc44b8e7c66f893a7c773c391617196b7449618f42d2f7"
+        },
+        "wrist": {
+          "path": "images/e1_s2_wrist.png",
+          "sha256": "a145b02fbd13f02e914f2570cc211b00450cd8ee2f599d82cbaec664f3bce4cb"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s2_left_tactile.png",
+          "sha256": "346566fe532b709694f3e53c101b0e4a8f2c4e588508bbf036765974d36eff67"
+        },
+        "right_tactile": {
+          "path": "images/e1_s2_right_tactile.png",
+          "sha256": "d6da0b3b20cb8a08c490c62344f55d99b5bb79cf89fcc8ed9121258e9ccbc746"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 3,
+      "start_step": 242,
+      "end_step": 310,
+      "selected_steps": [
+        242,
+        286,
+        288,
+        310
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 35,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s3_head.png",
+          "sha256": "dcf12f4fb3ab0c650927f6388ce60178b8b85781a188c88246116bffea6caa2d"
+        },
+        "wrist": {
+          "path": "images/e1_s3_wrist.png",
+          "sha256": "3d3b04d4615db3da967f4513ebea519a3b16ba979a431a00b2810c48177a0adf"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s3_left_tactile.png",
+          "sha256": "0e318e79d910e6db136d03a4fdf0c8692f4e73b16511594b9701703cd06657db"
+        },
+        "right_tactile": {
+          "path": "images/e1_s3_right_tactile.png",
+          "sha256": "abb26fa97152e1836d18e0a77cf7b6f3e68b37ea10940f03a938c3b3b867cd9a"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 4,
+      "start_step": 310,
+      "end_step": 388,
+      "selected_steps": [
+        310,
+        388
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 40,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s4_head.png",
+          "sha256": "3e21e29b9085a5a8fe7710d18f6a4e3375de6701dfac36962f3474dd08152145"
+        },
+        "wrist": {
+          "path": "images/e1_s4_wrist.png",
+          "sha256": "b5fdfabd348113a7fccdcfb78ac676eb1ab40f11e075061654aed257b7728954"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s4_left_tactile.png",
+          "sha256": "4406720a7ad083782b99f1e39514b606ea03cb2ebc5d8ed06b1d1bb04756b1fc"
+        },
+        "right_tactile": {
+          "path": "images/e1_s4_right_tactile.png",
+          "sha256": "52d830efa6c861d8ca9e66f8be374c052ea464c93cba562be648d8b7ca7ef8ad"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 5,
+      "start_step": 388,
+      "end_step": 460,
+      "selected_steps": [
+        388,
+        444,
+        446,
+        460
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 37,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s5_head.png",
+          "sha256": "d38de7aa99df0078b973e486341d7dcfbdb3b9e71c16139f97958633d979699a"
+        },
+        "wrist": {
+          "path": "images/e1_s5_wrist.png",
+          "sha256": "328ba983da437f6c27c66c40cf8c0ca00baa4680143a4e6f0ed8e53adaf7c6b4"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s5_left_tactile.png",
+          "sha256": "68353f627700aaa2407ec4feed1e14dc34e9046f9d4188774e5877844ef159ec"
+        },
+        "right_tactile": {
+          "path": "images/e1_s5_right_tactile.png",
+          "sha256": "2fe28c80c9c7f49ba0902cf29044fd4ca92132f19ea67c38c547cadf59a5feb8"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 6,
+      "start_step": 460,
+      "end_step": 530,
+      "selected_steps": [
+        460,
+        530
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 36,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s6_head.png",
+          "sha256": "020a1a928fc248c7485c33db16915305cca37b315183a45319a99b147e2be57d"
+        },
+        "wrist": {
+          "path": "images/e1_s6_wrist.png",
+          "sha256": "3aba8f09e01dfbfb4635ccc760643d92a0ac7906cc821acc45fb45e7ba5d8af9"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s6_left_tactile.png",
+          "sha256": "9cb8d69a68ecc5ad2c62f840da41d6170e82e0b89e51a7a5986cc6a0592ff54a"
+        },
+        "right_tactile": {
+          "path": "images/e1_s6_right_tactile.png",
+          "sha256": "9804742e744692d95b97600ff49a77a3f6f40f35b534f536e0c7dc1ce4170e3f"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 7,
+      "start_step": 530,
+      "end_step": 684,
+      "selected_steps": [
+        530,
+        588,
+        590,
+        684
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 78,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s7_head.png",
+          "sha256": "a86a58d86b3b4ebb9d9090e9f0dccc3469f8c5e6db7ebed3ece60a3c0fc81542"
+        },
+        "wrist": {
+          "path": "images/e1_s7_wrist.png",
+          "sha256": "5549976110d55b118c749ab3d50523f74b900e80cc5f7e32accd196e81aee539"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s7_left_tactile.png",
+          "sha256": "c2b72e09bb5d5070b8a13cf8aed530402e47c521f3f3a136f3d9585a6a68fdc4"
+        },
+        "right_tactile": {
+          "path": "images/e1_s7_right_tactile.png",
+          "sha256": "8ecab927fd1d79908ae3916111aa842a55b491e22a20396db7cca194dd4b6039"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 8,
+      "start_step": 684,
+      "end_step": 694,
+      "selected_steps": [
+        684,
+        694
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s8_head.png",
+          "sha256": "8d597292b007045a021d88c44412020f49f1775d473848b3f9fffbc4e2c2f747"
+        },
+        "wrist": {
+          "path": "images/e1_s8_wrist.png",
+          "sha256": "49560442858ae60681134133e234d01ea6eba497cbef639b5601160db766ce46"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s8_left_tactile.png",
+          "sha256": "232c76cd443e5e331ce381cb341ef9f20a6da5186e704da18c1b6edfb355800e"
+        },
+        "right_tactile": {
+          "path": "images/e1_s8_right_tactile.png",
+          "sha256": "00c244820187c8e79a7cbb357a287a0b91fb92acc47866fb9880a775b7ef346d"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 9,
+      "start_step": 694,
+      "end_step": 758,
+      "selected_steps": [
+        694,
+        730,
+        732,
+        758
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 4,
+      "C_observations_per_fingertip": 33,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s9_head.png",
+          "sha256": "2debe5419a97ec05a7d0f7e7481f4842a7478f64ccb2a390d65f7afe73338b75"
+        },
+        "wrist": {
+          "path": "images/e1_s9_wrist.png",
+          "sha256": "762e50dcf1dec9b1abcb2777ad849a6222a9de1de7c79a5657bd376455fdf22f"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s9_left_tactile.png",
+          "sha256": "ad4e76b30b1323eabe9ce3c8f642851b2ad082375756e680a9d379fe5d313945"
+        },
+        "right_tactile": {
+          "path": "images/e1_s9_right_tactile.png",
+          "sha256": "a7c79cf461dffd5a78e1bb7c6c2ee45af48e3034ad639aa84ea2643214ebe3c5"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 10,
+      "start_step": 758,
+      "end_step": 768,
+      "selected_steps": [
+        758,
+        768
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s10_head.png",
+          "sha256": "abaf89c8c943f4f4af1a1df86d57c848e000989ecbcad916b60a761a718cc435"
+        },
+        "wrist": {
+          "path": "images/e1_s10_wrist.png",
+          "sha256": "a95d0010195884fa60f58d573ff4066d6dc1cf43684bd4b58bd1ba0755457dc9"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s10_left_tactile.png",
+          "sha256": "7fcb678b74b125d744b571dd10b379a8681081eca0c66cc8748fa58da1eef369"
+        },
+        "right_tactile": {
+          "path": "images/e1_s10_right_tactile.png",
+          "sha256": "3a91e113fbf42b536ce926377cee70539d73b74aead0622870890fedeab1a964"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 11,
+      "start_step": 768,
+      "end_step": 786,
+      "selected_steps": [
+        768,
+        770,
+        786
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 3,
+      "C_observations_per_fingertip": 10,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s11_head.png",
+          "sha256": "717b0ecd198f5e630926f2baadf8a4c901f2af07869d5c2747d1d3f1e9c2d4db"
+        },
+        "wrist": {
+          "path": "images/e1_s11_wrist.png",
+          "sha256": "3cbbb1b22d922b246a1c95f5ea4cce79bf35ad813794a98387b95b4a3e8d5458"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s11_left_tactile.png",
+          "sha256": "43465acfddada61a4ec28063e26886aaf30da404c19015dbec2fe8b5df22de3a"
+        },
+        "right_tactile": {
+          "path": "images/e1_s11_right_tactile.png",
+          "sha256": "e5f5f28d112f988ec3fe1e104732013a6afccd2b23cbd92cf97a321a4ddbf0bc"
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "segment": 12,
+      "start_step": 786,
+      "end_step": 796,
+      "selected_steps": [
+        786,
+        796
+      ],
+      "A_observations_per_fingertip": 2,
+      "B_released_observations_per_fingertip": 2,
+      "C_observations_per_fingertip": 6,
+      "shared_vision_strips": {
+        "head": {
+          "path": "images/e1_s12_head.png",
+          "sha256": "079711e0fb98a0ade44d35ce0b715906bbb2efd101ef52bfa79cd559340abf9b"
+        },
+        "wrist": {
+          "path": "images/e1_s12_wrist.png",
+          "sha256": "c9f628c51ddc72e3da19eebbe8bccac481e2a871a118ece1fa99c61a6b3cb223"
+        }
+      },
+      "released_tactile_strips": {
+        "left_tactile": {
+          "path": "images/e1_s12_left_tactile.png",
+          "sha256": "9d09905b76f9d80ecdbd00b3481b91b81eff96e76013f41302dbe4983b036fa9"
+        },
+        "right_tactile": {
+          "path": "images/e1_s12_right_tactile.png",
+          "sha256": "451dbe9563ea70d5f9d38635bb877a4db934e7573d4725ddc91a67894673bd33"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "A_observations_per_fingertip": 48,
+    "B_released_observations_per_fingertip": 66,
+    "C_observations_per_fingertip": 717,
+    "raw_rows": 695,
+    "decoded_images": 2780,
+    "segments": 24,
+    "strips_checked": 96,
+    "image_panels_checked": 228
+  },
+  "limits": [
+    "The released B selection is checked against raw rows and image panels; its optical feature scores and peak-selection algorithm are not recomputed.",
+    "A and C are counted from the same raw segment boundaries. They are not submitted to a model. Shared vision hashes describe the fixed inputs for a future packaging comparison.",
+    "Segment boundaries overlap by one row. Totals count context appearances, not unique recorded frames, tokens, API images or costs.",
+    "Recorded simulation steps are not measured wall-clock timestamps. No force calibration, online controller, robot task success or hardware reliability is evaluated.",
+    "The two upstream episodes were selected as successful demonstrations; no success predicate was rerun."
+  ]
+}

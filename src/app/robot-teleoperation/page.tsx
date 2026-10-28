@@ -13,5 +13,5 @@ export function generateMetadata(): Metadata {
 
 export default function RobotTeleoperationPage() {
   if (!page) notFound();
-  return <SeoTopicArticle page={page} />;
+  return <SeoTopicArticle page={page} leadHref="#trace-action-targets" leadLabel="Check the action contract" />;
 }

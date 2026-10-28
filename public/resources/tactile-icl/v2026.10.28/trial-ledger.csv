@@ -1,0 +1,4 @@
+trial_id,status,task,scene_id,seed,repeat,condition,execution_mode,run_order,demonstration_ids,config_sha256,vision_manifest_sha256,selected_steps_manifest_sha256,model_snapshot,started_at_utc,attempted,valid_run,success,failure_category,exclusion_reason,rerun_of,actual_image_count,actual_input_tokens,api_latency_ms,executed_action_count,context_truncated,outcome_evidence,assessor
+planned-A,planned_not_run,Lift Bottle,,,,A,,,0;1,,,,,,,,,,,,,,,,,,
+planned-B,planned_not_run,Lift Bottle,,,,B,,,0;1,,,,,,,,,,,,,,,,,,
+planned-C,planned_not_run,Lift Bottle,,,,C,,,0;1,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,9 @@
+{
+  "status": "approved",
+  "recorded_at_utc": "2026-10-28T02:30:02.075233+00:00",
+  "approved_commit": "371c0e551180243b5fdcb672e367ec9f04ef4766",
+  "approved_snapshot_sha256": "ee8d2bebec25ebaf8e6ec56c54056f9ecf96534cf33e0be2c28ded29c710584f",
+  "source": "Human reply to request_user_input_async call_f10d8039dbd64f0297e32341a815b524 question 0",
+  "reply": "已审阅，确认这版内容",
+  "scope": "Three page final outputs and two resource kits; publication under existing authorization."
+}

@@ -1,0 +1,142 @@
+{
+  "status": "pass",
+  "missing_modules": [],
+  "pages": [
+    {
+      "path": "/robot-learning",
+      "modules": [
+        {
+          "id": "choose-robot-learning-data",
+          "heading": "How to choose robot learning data",
+          "original_section_sha256": "d6d7ef2ebeeeecacfa29292810e8263ac3a54f585d33d531f905ecd6abc89ff7",
+          "exact_content_retained": true
+        },
+        {
+          "id": "collective-experience-learning-fert",
+          "heading": "Collective experience learning: what does “without human corrections” remove?",
+          "original_section_sha256": "4e934552f3a157ef9d8549249a2470af3b5c1c0c335b621e7ea039951c026eae",
+          "exact_content_retained": true
+        },
+        {
+          "id": "dexoak-object-aware-retargeting",
+          "heading": "DexOAK: from human hand-object motion to robot references",
+          "original_section_sha256": "e92fef904949e123838dffb953515b32fbc21a2cc8fcc89ba5a694207b73e96f",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "The robot-learning loop",
+          "original_section_sha256": "1f6fdf70bb471932f4173939fb5bf51ccf332d771242775baaa3ba7bed7584d8",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Major learning paradigms",
+          "original_section_sha256": "48c55ffbd0849a3f3db27c4b04db2dafca0028dcd39f869e91659a9256e27af0",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Data is part of the robot system",
+          "original_section_sha256": "fe8b95fac19d8e7674f4680d6c6b370213bcd3957ddf62610d94918fa45323d0",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Simulation and sim-to-real transfer",
+          "original_section_sha256": "1fb64e0408800cff3db03192cbd10886032da9876ff2d194b961dbba9c5d3fd9",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Tactile robot learning",
+          "original_section_sha256": "84b6bb78ea2b9936745a9a9cd5e4ba87362fa8edeb3418fe535d91ea0fcea8f1",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "How to evaluate robot-learning claims",
+          "original_section_sha256": "9804b3eebf6c7d586ddfb35209366186fd1636a9ab9e4daee7a45f6b7b949a18",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Open tooling and the 2026 ecosystem",
+          "original_section_sha256": "4461647938664f86f923d1a858434de0838e0f97801280f2e11bafe498217a50",
+          "exact_content_retained": true
+        }
+      ]
+    },
+    {
+      "path": "/robot-teleoperation",
+      "modules": [
+        {
+          "id": "teleoperation-data-checklist",
+          "heading": "Robot teleoperation data collection: episode-quality checklist",
+          "original_section_sha256": "34246bbab08ee6ac44b44ba6b595c5a07123081498b372b4fe45ea21bea0d2f5",
+          "exact_content_retained": true
+        },
+        {
+          "id": "passive-observation-vs-teleoperation-data-for-robot-learning",
+          "heading": "Passive observation vs teleoperation data for robot learning",
+          "original_section_sha256": "8b4f89a61131f62774c8a2f1cbc6ecaeddab20f626547c1f047a07b2caf048c9",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Choose data by the training task",
+          "original_section_sha256": "ed598f6680059f684f939eb0b048bdd3b70cd645ce0caff8e10fc9bbccfa87b5",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "What robot teleoperation controls",
+          "original_section_sha256": "3a51e988807ea83f035997130ec3d4ae0e8e8921535d7891df2601e3cb51db91",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "The demonstration-to-policy pipeline",
+          "original_section_sha256": "eca25980154052134c04185caac7ea942637a8147b5089a90d833fac3a851481",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Teleoperation data is not autonomous capability",
+          "original_section_sha256": "41709d7b9cb524cc95b14ab9a51c223541ca61d1cb94a94e4faeaf2891f71e1a",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Current open data-collection signals",
+          "original_section_sha256": "a293038f5267bafc924b45787a9714ce2a5900c5bc17152b4606eecb3721948e",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Touch and force feedback in teleoperation",
+          "original_section_sha256": "15d25749796d44b53b3239aa766e0115f1b4a4681ff131f46c5c18fd9e187506",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": "Quality and evaluation checklist",
+          "original_section_sha256": "94eb48f1dbc70b0ee32f2396225f537da79e43dde52ec0fa79a1ab2f49770fc2",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": null,
+          "original_section_sha256": "f1de22ad91feab244f5a319bd7ad5805804820614bcca9f056c7d460c2891ae5",
+          "exact_content_retained": true
+        },
+        {
+          "id": null,
+          "heading": null,
+          "original_section_sha256": "b073080280d9192acf4505e606be930eb4c583cb750791b360df535dede0a27f",
+          "exact_content_retained": true
+        }
+      ]
+    }
+  ]
+}

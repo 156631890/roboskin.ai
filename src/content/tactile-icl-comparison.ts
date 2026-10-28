@@ -4,26 +4,36 @@ const etaPaper = 'https://arxiv.org/html/2610.27613v1';
 const astraPaper = 'https://arxiv.org/html/2610.26846v1';
 const etaCode = 'https://github.com/No-518/Tactile-ETA/tree/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818';
 const astraCode = 'https://github.com/ccyydd/TacTalent/tree/75441c18c3054b6032c4923f4047b9deaef26694';
+const auditResource = '/resources/tactile-icl/v2026.10.28';
 
 export const tactileIclComparisonPage: SeoTopicPage = {
   path: '/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra',
-  title: 'Tactile In-Context Learning: Tactile-ETA vs. GPT-6 Astra',
-  description: 'Compare Tactile-ETA and TacTalent’s Astra setup: inputs, demonstrations, action interfaces, simulation results, 10-trial hardware limits and frame-selection tests.',
-  h1: 'Tactile In-Context Learning for Robot Agents: Tactile-ETA vs. GPT-6 Astra',
+  title: 'Tactile In-Context Learning: Tactile-ETA and TacTalent',
+  description: 'Compare two Astra tactile-control setups, separate simulation from small hardware trials, and reproduce an offline audit of 24 demonstration segments.',
+  h1: 'Tactile In-Context Learning: Tactile-ETA and TacTalent’s GPT-6 Astra Setup',
   kicker: 'Research comparison / Context, control and evidence',
   intent: 'Compare two tactile in-context robot-control setups and design a matched test of demonstration frame selection.',
   published: '2026-10-22',
-  updated: '2026-10-22',
-  revisionNote: 'Source review: October 22, 2026. This comparison uses the two v1 preprints and pinned author repositories. Results are author-reported; RoboSkin has not run either controller or the proposed experiment.',
+  updated: '2026-10-28',
+  revisionNote: 'October 28, 2026: added a reproducible offline audit of two pinned Lift Bottle demonstrations, 24 action segments and 96 published image strips, plus a versioned experiment kit. Paper results retain the October 22 source review. RoboSkin has not run either controller or the proposed A/B/C task-success experiment.',
   priority: 0.8,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
   visualKey: 'technology',
   keywords: ['tactile in-context learning', 'Tactile-ETA', 'GPT-6 Astra tactile control', 'TacTalent', 'tactile demonstration frame selection'],
+  startHere: {
+    heading: 'Compare the evidence or check the inputs',
+    links: [
+      { label: 'Compare methods and action interfaces', href: '#methods-and-interfaces', description: 'See what each setup receives, changes and executes.' },
+      { label: 'Inspect the executed input audit', href: '#published-input-audit', description: 'Check observed counts, pixel agreement, source revisions and limits.' },
+      { label: 'Plan a matched A/B/C experiment', href: '#matched-reproduction-plan', description: 'Download code, the report and blank outcome records.' },
+    ],
+  },
   quickAnswer: [
-    'Tactile-ETA and GPT-6 Astra are not competing model families. Tactile-ETA uses a frozen Astra agent with action-aligned tactile demonstrations and robot tools. Here, “vs. GPT-6 Astra” refers to the separate TacTalent study, which uses Astra with RoboICL to generate robot actions from scene images, tactile images and demonstration context.',
+    'Tactile-ETA and TacTalent both use GPT-6 Astra, with different context and control designs. Tactile-ETA supplies action-aligned tactile demonstrations and robot tools to a frozen agent. TacTalent uses Astra with RoboICL to generate action sequences from scene images, tactile images and demonstration context. Compare these configured systems, not the model name alone.',
     'Tactile-ETA isolates the value of adding touch to the same two demonstrations: mean simulation success rises from 15.75% to 24.00% across four tasks. TacTalent reports 93.8% on UniVTAC and 81.8% on OpenViTac with vision and touch, under a different evaluation. These percentages do not establish a winner between the two setups.',
     'The hardware evidence is much smaller: Tactile-ETA reports 6/10 successes with one multimodal demonstration per task versus 0/10 without demonstrations, pooled across two tasks. Both conditions receive current touch. TacTalent reports simulation only. The next useful experiment is a matched comparison of endpoints, endpoints plus peak-change frames, and complete tactile sequences.',
+    'RoboSkin independently checked the released inputs for two Lift Bottle episodes: 24 action segments, 96 image strips and 228 panels matched the raw data. This is an offline input audit, not a reproduction of robot success. The script, full report and experiment records are available below.',
   ],
   sections: [
     {
@@ -125,7 +135,7 @@ export const tactileIclComparisonPage: SeoTopicPage = {
         heading: 'What the small sample cannot establish',
         body: [
           'One additional success or failure changes a five-trial task rate by twenty percentage points. These observations motivate larger, task-specific tests; they do not establish stable performance across objects, days, sensor wear, robots or operators. A 0/5 baseline does not establish that the baseline can never succeed.',
-          'Keep this hardware evidence separate from both papers’ simulation tables. Neither reading public code nor watching a rollout video constitutes an independent reproduction, and RoboSkin has not performed one.',
+          'Keep this hardware evidence separate from both papers’ simulation tables. Neither reading public code nor watching a rollout video constitutes an independent control-performance reproduction. RoboSkin has performed only the separate offline input audit described below.',
         ],
       }],
       links: [
@@ -163,6 +173,41 @@ export const tactileIclComparisonPage: SeoTopicPage = {
       ],
     },
     {
+      id: 'published-input-audit',
+      heading: 'Executed input audit: what the released Lift Bottle files contain',
+      body: [
+        'On October 28, 2026, RoboSkin ran an offline inspector on UniVTAC episodes 0 and 1 for Lift Bottle and Tactile-ETA’s corresponding published demonstration manifest and PNG strips. The source revisions are pinned: UniVTAC e1aee7b and Tactile-ETA e7e5efb. The two HDF5 files total 944,306,887 bytes; full revision IDs, exact file and script hashes, and the execution environment are in the report.',
+        'The check decoded all 2,780 images in the head, wrist and bilateral tactile streams across 695 recorded rows. It matched 228 panels in all 96 released image strips pixel for pixel against the raw decoded images, excluding the 30-pixel label band. End-effector and joint states at segment boundaries matched the manifest. The published tactile selections were ordered, unique, within their action segments and shared across fingertips, with endpoints retained.',
+      ],
+      table: {
+        headers: ['Observed or counted input', 'Result across two episodes', 'What this number means'],
+        rows: [
+          ['Raw episodes and action segments', '348 + 347 rows; 12 + 12 segments', 'Two source episodes, not 24 independent robot trials.'],
+          ['A: segment endpoints', '48 appearances per fingertip', 'Counted from the raw segment boundaries; not submitted to a model.'],
+          ['B: published selected observations', '66 appearances per fingertip', 'Released selections and image pixels checked; optical features and peak-selection algorithm not recomputed.'],
+          ['C: all recorded segment observations', '717 appearances per fingertip', 'Includes 22 repeated boundary rows. There are 695 unique raw rows; C was not submitted to a model.'],
+          ['Published visual/tactile strips', '96 strips; 228 panels matched', 'The report includes each strip hash so future conditions can share identical demonstration vision.'],
+        ],
+      },
+      subsections: [{
+        heading: 'A concrete segment and the audit’s limits',
+        body: [
+          'Episode 0, segment 1 spans recorded steps 110–238. The published tactile steps are [110, 234, 236, 238]; A/B/C contain 2/4/65 observations per fingertip. This is an input-packaging difference that can be inspected before purchasing model inference or running a robot.',
+          'These are context appearances, not token counts, API image counts, latency measurements or success-rate improvements. Simulation steps are not measured wall-clock timestamps. The source episodes are labeled successful upstream; this check did not rerun a task success predicate. It ran no simulator, policy, online controller or physical hardware, and it does not establish full-dataset quality.',
+          'Use the kit’s explicit download command to retrieve about 0.97 GB of pinned public inputs, then rerun offline. The ZIP contains RoboSkin’s code, report, hashes and templates; it does not redistribute the source datasets or images. Five synthetic rejection tests check the inspector’s behavior and do not add robot evidence.',
+        ],
+      }],
+      links: [
+        { label: 'Read the complete observed input-audit report (JSON)', href: `${auditResource}/input-audit.json` },
+        { label: 'Download all 24 segment records and fixed vision hashes (CSV)', href: `${auditResource}/segment-audit.csv`, download: true },
+        { label: 'Download the audit code and experiment kit (ZIP)', href: `${auditResource}/tactile-context-reproduction-kit.zip`, download: true },
+        { label: 'Read the commands, scope and limitations', href: `${auditResource}/README.txt` },
+        { label: 'Inspect the standalone audit code', href: `${auditResource}/inspect_release.py`, download: true },
+        { label: 'Pinned upstream HDF5 inputs', href: 'https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/isaac51/lift_bottle/hdf5' },
+        { label: 'Pinned upstream processed demonstration inputs', href: 'https://github.com/No-518/Tactile-ETA/tree/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/demonstrations/lift_bottle' },
+      ],
+    },
+    {
       id: 'matched-reproduction-plan',
       heading: 'Next experiment: matched tasks, matched vision, three tactile contexts',
       body: [
@@ -185,17 +230,24 @@ export const tactileIclComparisonPage: SeoTopicPage = {
         'Report successes/attempts for every task and condition, uncertainty intervals and paired scene outcomes. Separate API errors, contact failures, invalid commands and task failures. Do not hide task differences inside a single average.',
         'For offline input comparisons, replay identical recorded observations to all variants. Label those results as offline action analysis, separate from closed-loop task success. For hardware follow-up, add per-task repetitions across sessions and preserve independent success assessment.',
       ],
-      contextLinks: [{ before: 'Use the ', label: 'tactile experiment worksheet', href: '/tactile-ai#experiment-worksheet', after: ' to record planned conditions and evidence. Add fields for task, scene seed, repetition, condition, demonstration IDs, selected timestamps, model/settings, prompt size, latency, outcome and failure reason; leave outcome fields empty until a run occurs.' }],
+      links: [
+        { label: 'Download the dedicated A/B/C experiment kit', href: `${auditResource}/tactile-context-reproduction-kit.zip`, download: true },
+        { label: 'Read the proposed configuration and unresolved settings (JSON)', href: `${auditResource}/experiment-config.json` },
+        { label: 'Download the trial ledger with empty outcome fields (CSV)', href: `${auditResource}/trial-ledger.csv`, download: true },
+      ],
+      contextLinks: [{ before: 'For other contact-sensing experiments, the general ', label: 'tactile experiment worksheet', href: '/tactile-ai#experiment-worksheet', after: ' remains available. The dedicated kit above already includes task, scene, repetition, condition, model settings, image/token load, latency, outcome and failure fields. Its three example rows are planned runs with no observed outcomes.' }],
     },
     {
       id: 'source-and-reuse',
       heading: 'How to use and cite this comparison',
       body: [
-        'Use this page to select a context representation and identify the controls missing from a fair experiment. Cite the original paper and its exact table for a numerical result; cite this page for the cross-study interface comparison and proposed evaluation design. Both research sources are v1 preprints, so later revisions may change their claims.',
+        'Use this page to select a context representation and identify the controls missing from a fair experiment. Cite the original paper and its exact table for its success rates; cite this version for the cross-study interface comparison, offline input audit and proposed evaluation design. Both research sources are v1 preprints, so later revisions may change their claims. The claim ledger separates author-reported results, locally observed inputs and proposed experiments.',
         'The linked repositories were inspected at the revisions below on October 22, 2026. Source inspection establishes what the released materials describe; it does not establish a successful installation, controller execution, measured latency on your system or physical robot reproduction. The TacTalent results are the research authors’ evaluation, not an OpenAI robotics certification or benchmark guarantee.',
         'Neither a simulator’s controller frequency nor a stream’s sampling rate is the model’s decision frequency. Tactile-ETA makes decisions between motion segments; TacTalent executes generated action sequences through its adapter. Hardware integration still needs an appropriate controller, coordinate conventions, calibration and independently verified execution behavior.',
       ],
       links: [
+        { label: 'Download a citation for this version (BibTeX; no DOI assigned)', href: `${auditResource}/citation.bib`, download: true },
+        { label: 'Download the claim-to-source ledger (CSV)', href: `${auditResource}/claim-ledger.csv`, download: true },
         { label: 'Tactile-ETA source snapshot e7e5efb', href: etaCode },
         { label: 'TacTalent source snapshot 75441c1', href: astraCode },
         { label: 'How AI models connect to robot control and feedback', href: '/ai-robotics' },

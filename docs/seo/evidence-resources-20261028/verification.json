@@ -1,0 +1,54 @@
+{
+  "verified_at_utc": "2026-10-28T02:20:40.005881+00:00",
+  "scope": "Local final working-tree build; not remote CI, production, Google live/indexed or human approval.",
+  "node_tests": {
+    "pass": 341,
+    "fail": 0
+  },
+  "inspector_synthetic_tests": {
+    "pass": 5,
+    "fail": 0
+  },
+  "lint": "pass",
+  "static_build": "pass",
+  "export_and_seo_audit": "pass",
+  "server_build": "pass",
+  "server_markdown": {
+    "ok": true,
+    "checkedAt": "2026-10-28T02:17:59.685Z",
+    "runtime": "server",
+    "publicPageCount": 203,
+    "markdownAssetCount": 204,
+    "corePaths": [
+      "/",
+      "/tactile-ai",
+      "/datasets",
+      "/sensors",
+      "/guides/lerobot-dataset-format"
+    ]
+  },
+  "zip_downloads": "Both browser downloads match source bytes; both CRC checks pass.",
+  "extracted_zip_rerun": "All recorded audit fields match except executed_at_utc.",
+  "browser": {
+    "surface": "Codex in-app browser",
+    "desktop": [
+      1280,
+      900
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "routes": [
+      "/robot-learning",
+      "/robot-teleoperation",
+      "/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra"
+    ],
+    "body_horizontal_overflow": false,
+    "table_overflow": "Contained horizontal scrolling",
+    "screenshots": "screenshots/"
+  },
+  "snapshot_sha256": "ee8d2bebec25ebaf8e6ec56c54056f9ecf96534cf33e0be2c28ded29c710584f",
+  "human_review_event": null,
+  "production_published": false
+}

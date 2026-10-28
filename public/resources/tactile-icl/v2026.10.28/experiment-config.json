@@ -1,0 +1,36 @@
+{
+  "version": "2026.10.28",
+  "status": "proposed_not_executed",
+  "task": "Lift Bottle",
+  "eta_revision": "e7e5efbd42d3be7532ff5eb940a3cb015c2f7818",
+  "univtac_revision": "e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd",
+  "demonstrations": [
+    0,
+    1
+  ],
+  "fixed_vision_contract": "segment-audit.csv head/wrist strip SHA256; same bytes, resolution and order for A/B/C",
+  "conditions": {
+    "A": "Segment endpoints; deduplicate if identical",
+    "B": "Published selected recorded steps; algorithm recomputation remains a separate check",
+    "C": "Every recorded row in each segment in order; retain boundary overlap; no silent truncation"
+  },
+  "planned_initial_conditions_per_representation": 100,
+  "scene_seed_list": null,
+  "run_order_and_randomization_seed": null,
+  "simulator_version": null,
+  "task_asset_revision": null,
+  "success_predicate_revision": null,
+  "controller_revision": null,
+  "model_snapshot": null,
+  "reasoning_effort": null,
+  "prompt_sha256": null,
+  "api_parameters": null,
+  "image_resolution_and_packaging": null,
+  "online_observation_policy": null,
+  "max_actions": null,
+  "timeout_seconds": null,
+  "infrastructure_exclusion_and_rerun_policy": null,
+  "planned_uncertainty_method": null,
+  "execution_gate": "Complete unresolved settings and budget before any run; this file executes nothing.",
+  "outcomes": null
+}
