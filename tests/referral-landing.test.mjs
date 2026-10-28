@@ -6,6 +6,7 @@ import ts from 'typescript';
 import * as growthBatches from '../src/lib/growth-batches.mjs';
 import * as referralAttribution from '../src/lib/referral-attribution.mjs';
 import * as analytics from '../src/lib/google-analytics.mjs';
+import * as geoinflow from '../src/lib/geoinflow.mjs';
 
 const source = readFileSync('src/components/AnalyticsTracker.tsx', 'utf8');
 const compiled = ts.transpileModule(source, {
@@ -33,6 +34,7 @@ function mountTracker(referrer) {
       if (name === '@/lib/growth-batches.mjs') return growthBatches;
       if (name === '@/lib/referral-attribution.mjs') return referralAttribution;
       if (name === '@/lib/google-analytics.mjs') return analytics;
+      if (name === '@/lib/geoinflow.mjs') return geoinflow;
       if (name === 'react') return {
         useRef(value) { return refs[refIndex++] ??= { current: value }; },
         useEffect(effect) { effects.push(effect); },

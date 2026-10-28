@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <div className="container-shell">
             <span className="eyebrow">Privacy</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Privacy Policy</h1>
-            <p className="mt-5 max-w-3xl">Last updated: October 16, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: October 27, 2026</p>
           </div>
         </header>
 
@@ -28,6 +28,9 @@ export default function PrivacyPolicyPage() {
                   When online submission is configured, requests are forwarded to our delivery service and management inbox. A prepared email or WhatsApp draft is sent only when you send it in your own app. Delivery errors are not recorded as successful inquiries.
                   When the Newsletter panel shows its unavailable state, it does not render an email field or collect an email address. If a signup form is displayed, it identifies the external email-list provider before submission. The Buttondown integration sends your address through our server for double opt-in confirmation; an approved hosted provider form may send it directly. An accepted request is not a confirmed subscription. Each sent brief includes an unsubscribe link.
                   When Vercel Web Analytics is enabled, we also collect aggregated page-view, referrer, country, device, browser, and operating-system data. Vercel Web Analytics does not use cookies or store personal identifiers for this site.
+                </p>
+                <p className="mt-3">
+                  We also use GEOInflow, hosted on our server in Singapore, for cookie-free statistics about public page visits, referring websites (including AI assistants), reading depth, and selected resource and contact clicks. Requests pass through Cloudflare. The collector uses network and browser information to derive anonymous visit identifiers and approximate location. We remove query strings and fragments from reported page addresses and remove paths from referrers. We do not send form contents, link labels, email addresses, phone numbers, or membership identifiers in these events. Contact and download clicks measure intent, not completed submissions or downloads. This tracker respects your browser&apos;s Do Not Track setting and does not run on our membership or authentication routes.
                 </p>
               </div>
               <div>
@@ -51,7 +54,7 @@ export default function PrivacyPolicyPage() {
                   We load the Google tag only after you allow it. We remove query strings and fragments from reported page addresses and exclude external referrer paths. For our published resource-sharing links, we separately report only pre-approved source, medium and campaign labels; other query values are discarded. We also measure clicks to selected public research resources and downloads using resource identifiers and page paths. A download click does not confirm a completed download. We do not send form contents, email addresses, or user IDs to GA4, and we do not enable Google signals or advertising personalization. Automatic form, search, and outbound-link measurement is disabled.
                 </p>
                 <p className="mt-3">
-                  Use Analytics settings in the footer to allow or decline Google Analytics at any time. Declining stops further GA4 collection and removes its cookies on this site; it does not remove data already received by Google. We store your choice in this browser&apos;s local storage. This choice applies to Google Analytics; the cookie-free Vercel statistics described above remain separate.
+                  Use Analytics settings in the footer to allow or decline Google Analytics at any time. Declining stops further GA4 collection and removes its cookies on this site; it does not remove data already received by Google. We store your choice in this browser&apos;s local storage. This choice applies to Google Analytics; the cookie-free Vercel and GEOInflow statistics described above remain separate.
                 </p>
               </div>
               <div>
