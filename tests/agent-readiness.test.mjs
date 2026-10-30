@@ -111,7 +111,7 @@ test('Vercel negotiates Markdown without changing the browser HTML route', async
       && route.dest?.startsWith('/_agent-markdown/'));
 
   assert.equal(vercel.buildCommand, 'npm run build');
-  assert.equal(packageJson.scripts.postbuild, 'node scripts/generate-agent-markdown.mjs');
+  assert.equal(packageJson.scripts.postbuild, 'node scripts/normalize-not-found.mjs && node scripts/generate-agent-markdown.mjs');
   assert.equal(markdownRoutes.length, 3);
   assert.ok(markdownRoutes.some((route) => route.dest === '/_agent-markdown/index.md'));
   assert.ok(markdownRoutes.some((route) => route.dest === '/_agent-markdown/$1.md'));

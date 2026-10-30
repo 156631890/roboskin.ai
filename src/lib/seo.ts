@@ -26,9 +26,9 @@ export type SeoRoute = {
 export const pageSeo: Record<string, SeoRoute> = {
   '/vla/models': {
     path: '/vla/models',
-    title: 'VLA Model Comparison: Tactile Inputs, Code & Benchmarks',
+    title: 'VLA Model Index: Timeline and Weights',
     description: 'Filter and sort VLA models by year, open-source status and tactile input. Compare source-linked parameters, training data and benchmark results.',
-    updated: '2026-10-16',
+    updated: '2026-10-30',
     priority: 0.75,
     changeFrequency: 'monthly',
     index: true,
@@ -39,7 +39,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/vla/timeline',
     title: 'VLA Model Timeline: RT-1 to Tactile Robot Policies',
     description: 'Follow a chronological, paper-linked VLA timeline from RT-1 through open robot policies and tactile extensions, with dates, organizations and significance.',
-    updated: '2026-10-16',
+    updated: '2026-10-30',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -50,7 +50,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/vla/concepts',
     title: 'VLA vs VDA vs World Models vs HFM: Robot Model Concepts',
     description: 'Compare robot model concepts by inputs, outputs and role: VLA, diffusion action policies, world models and haptic foundation models, with primary sources.',
-    updated: '2026-10-14',
+    updated: '2026-10-30',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -73,7 +73,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description:
       'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-10-04',
+    updated: '2026-10-30',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,

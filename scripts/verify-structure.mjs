@@ -47,7 +47,7 @@ for (const [path,keyword] of Object.entries(keywordByPath)) {
   const graphs=[...doc.querySelectorAll('script[type="application/ld+json"]')].map(node=>JSON.parse(node.textContent));
   const nodes=graphs.flatMap(flatten);
   const pageNode=nodes.find(node=>node['@type']==='WebPage'&&node.url===`https://roboskin.ai${path}`);
-  lines.push(`\n== ${path}\n<title>${title}</title>\n<meta name="description" content="${desc}">\nTitle characters: ${title.length}; description characters: ${desc.length}\nH1: ${h1}\nFirst 100 words keyword occurrences: ${count}\nDouble suffix: ${title.includes('RoboSkin.ai | RoboSkin.ai')}\nDate modified: ${pageNode?.dateModified ?? 'missing'}`);
+  lines.push(`\n== ${path}\nHTTP ${status}\n<title>${title}</title>\n<meta name="description" content="${desc}">\nTitle characters: ${title.length}; description characters: ${desc.length}\nH1: ${h1}\nFirst 100 words keyword occurrences: ${count}\nDouble suffix: ${title.includes('RoboSkin.ai | RoboSkin.ai')}\nDate modified: ${pageNode?.dateModified ?? 'missing'}`);
   check(title===`${page?.title} | RoboSkin.ai` && title.length<=60, `${path} title mismatch or length`);
   check(!/roboskin/i.test(title.replace(/ \| RoboSkin\.ai$/,'')), `${path} brand in main title`);
   check(desc===page?.description && desc.length<=155, `${path} description mismatch or length`);
@@ -57,6 +57,7 @@ for (const [path,keyword] of Object.entries(keywordByPath)) {
   check(graphs.some(graph=>Array.isArray(graph['@graph'])), `${path} @graph`);
   check(pageNode?.dateModified===page?.updated, `${path} dateModified`);
   check(nodes.some(node=>['CollectionPage','ItemList','TechArticle','FAQPage'].includes(node['@type'])), `${path} entity type`);
+  for(const [selector,expected] of Object.entries(path==='/sensors'?{'#sensor-specifications tbody tr':17}:path==='/robot-vla-models'?{'#vla-comparison table tbody tr':11}:path==='/benchmarks'?{'#benchmark-comparison tbody tr':13}:path==='/robot-tactile-sensors'?{'#robot-tactile-models tbody tr':17}:{})) check(doc.querySelectorAll(selector).length===expected,`${path} comparison row count must be ${expected}`);
   const anchors=[...doc.querySelectorAll('main a[href]')].map(a=>({href:a.getAttribute('href'),text:a.textContent.trim().replace(/\s+/g,' ')}));
   const internal=anchors.filter(a=>a.href.startsWith('/') && !a.href.startsWith('//'));
   lines.push('Internal links:\n'+internal.slice(0,20).map(a=>`${a.href}\t${a.text}`).join('\n'));
@@ -76,6 +77,15 @@ if(batch>=3){
   check(robots.length===1&&robots[0].includes('noindex'),'404 must have one noindex robots tag');
   check(!doc.querySelector('meta[name="googlebot"]'),'404 must not inherit googlebot index');
   check(!doc.querySelector('link[rel="canonical"]'),'404 must not canonicalize to homepage');
+  for(const path of ['/vla/models','/vla/timeline','/vla/concepts']) {
+    const {html,status}=await get(path); const doc=domino.createDocument(html);
+    const title=doc.querySelector('title')?.textContent;
+    const canonical=doc.querySelector('link[rel="canonical"]')?.getAttribute('href');
+    lines.push(`VLA child ${path}: HTTP ${status}; title ${title}; canonical ${canonical}`);
+    check(status===200&&canonical===`https://roboskin.ai${path}`,`${path} must retain self canonical`);
+    check(!/VLA robotics/i.test(title),`${path} title competes with hub`);
+    check(doc.querySelector('a[data-structure-position="subpage_parent"]')?.getAttribute('href')==='/robot-vla-models',`${path} missing parent link`);
+  }
 }
 if(batch>=2) {
   const {html:sitemap}=await get('/sitemap.xml');
@@ -88,7 +98,7 @@ if(batch>=2) {
     const doc=domino.createDocument(html);
     for(const anchor of doc.querySelectorAll('a[data-structure-position]')) inserted.push({
       source_url:`https://roboskin.ai${path}`, target_url:new URL(anchor.getAttribute('href'),'https://roboskin.ai').href,
-      anchor_text:anchor.textContent.trim().replace(/\s+/g,' '), insertion_position:anchor.getAttribute('data-structure-position'),
+      anchor_text:anchor.textContent.trim().replace(/\s+/g,' '), insertion_position:anchor.getAttribute('data-structure-position')==='home_hub'?'nav':anchor.getAttribute('data-structure-position')==='related_block'?'related_block':'body_top',
     });
     for(const anchor of doc.querySelectorAll('main a[href]')) if(/\b(click here|read more|learn more|see details)\b/i.test(anchor.textContent)) generic.push(`${path}\t${anchor.getAttribute('href')}\t${anchor.textContent.trim()}`);
     check(doc.querySelectorAll('[data-structure-position="body_backlink"]').length<=1,`${path} duplicated body hub backlink`);

@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: ResearchArticlePageProps): Pr
 
   return {
     title: post.seoTitle ?? post.title,
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 } },
     description: post.seoDescription ?? post.excerpt,
     authors: [{ name: post.author, url: canonicalUrl(site.editorial.path) }],
     category: post.category,

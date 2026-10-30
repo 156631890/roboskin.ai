@@ -20,6 +20,7 @@ export default function VlaAssetLayout({ path, eyebrow, title, intro, children }
       <section className="py-14 md:py-20">
         <div className="container-shell">
           <span className="eyebrow">{eyebrow}</span>
+          <p className="mt-4 text-sm text-soft">Part of <Link href="/robot-vla-models" data-structure-position="subpage_parent" className="underline underline-offset-4">VLA robotics</Link>.</p>
           <h1 className="mt-5 max-w-5xl text-4xl font-bold leading-tight text-white md:text-6xl">{title}</h1>
           <p className="mt-5 max-w-4xl text-base leading-relaxed text-[#c8d1de]">{intro}</p>
           <p className="mt-4 text-sm text-[#8e98a8]">

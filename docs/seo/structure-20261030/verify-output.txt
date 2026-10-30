@@ -1,7 +1,8 @@
-Verification 2026-10-30T09:55:54.672Z
-Batch 2; source out
+Verification 2026-10-30T10:10:41.428Z
+Batch 3; source out
 
 == /sensors
+HTTP 200
 <title>Tactile Sensing: Types, Specs, Comparison | RoboSkin.ai</title>
 <meta name="description" content="Tactile sensing explained: vision-based, magnetic and soft sensor types, published specs, and how to shortlist one for grasping or slip detection.">
 Title characters: 55; description characters: 146
@@ -32,6 +33,7 @@ Internal links:
 /organizations#organization-syntouch	SynTouch
 
 == /robot-vla-models
+HTTP 200
 <title>VLA Robotics Models: Full Comparison (2026) | RoboSkin.ai</title>
 <meta name="description" content="Every major VLA robotics model compared: parameter count, training data, open weights and whether it accepts tactile input, with links to primary sources.">
 Title characters: 57; description characters: 154
@@ -41,6 +43,9 @@ Double suffix: false
 Date modified: 2026-10-30
 Internal links:
 /	Home
+/vla/models	VLA model index
+/vla/timeline	VLA timeline
+/vla/concepts	VLA concepts
 /editorial-policy	RoboSkin.ai Editorial Team
 /research	Browse research
 /contact?requestType=research	Submit a source
@@ -57,11 +62,9 @@ Internal links:
 /tactile-foundation-models	tactile foundation models
 /tactile-manipulation#what-is-contact-state-recognition	tactile manipulation
 /robot-learning	Compare robot learning data and supervision requirements
-/robot-world-models	Trace world-model prediction and control boundaries
-/research-services	Discuss a scoped research evidence review
-/technology#tactile-vs-force-torque	Compare tactile sensors with force-torque sensors
 
 == /robot-foundation-models
+HTTP 200
 <title>Robot Foundation Models (2026): Comparison | RoboSkin.ai</title>
 <meta name="description" content="Robot foundation models compared on training data, embodiment and released weights — plus which ones you can actually run today.">
 Title characters: 56; description characters: 128
@@ -92,6 +95,7 @@ Internal links:
 /physical-ai	Physical AIConnect models to embodiment, control, safety, and physical feedback.
 
 == /datasets
+HTTP 200
 <title>Tactile Datasets for Robot Learning: Index | RoboSkin.ai</title>
 <meta name="description" content="Indexed tactile datasets for robot learning: sensor type, embodiment, size, license and download link, with the last-updated date on every record.">
 Title characters: 56; description characters: 146
@@ -122,6 +126,7 @@ Internal links:
 /datasets#dataset-bench2dex	Bench2Dex simulation demonstrations
 
 == /tactile-ai
+HTTP 200
 <title>Tactile AI: From Sensor Signal to Policy | RoboSkin.ai</title>
 <meta name="description" content="How tactile AI turns contact signals into robot policies: encoders, tactile foundation models and the sim-to-real gap, with cited papers.">
 Title characters: 54; description characters: 137
@@ -152,6 +157,7 @@ Internal links:
 /research/bench2dex-visuo-tactile-bimanual-benchmark-2026	Simulated tactile data and evaluation in Bench2Dex
 
 == /robot-skin
+HTTP 200
 <title>Robot Skin: Materials, Sensors, Vendors | RoboSkin.ai</title>
 <meta name="description" content="Robot skin for humanoid robots: materials, embedded tactile sensing, vendor landscape and cost drivers — disambiguated from game skins.">
 Title characters: 53; description characters: 135
@@ -182,6 +188,7 @@ Internal links:
 /research/robot-skin-papers	Robot skin papersResearch routes and source-backed briefs.
 
 == /benchmarks
+HTTP 200
 <title>Tactile Robotics Benchmarks: Task Suites | RoboSkin.ai</title>
 <meta name="description" content="Tactile robotics benchmarks compared: task suites, success metrics, hardware requirements and whether results are comparable across labs.">
 Title characters: 54; description characters: 137
@@ -212,6 +219,7 @@ Internal links:
 /tactile-manipulation	Tactile manipulationConnect perception metrics to closed-loop robot behavior.
 
 == /physical-ai-touch
+HTTP 200
 <title>Physical AI and Touch: Tactile Sensing Roadmap | RoboSkin.ai</title>
 <meta name="description" content="Why Physical AI needs tactile input, and a staged roadmap from sensor choice to closed-loop control — with the evidence behind each step.">
 Title characters: 60; description characters: 137
@@ -241,6 +249,147 @@ Internal links:
 /contact?requestType=research	Report a source or attribution issue
 /physical-ai	Physical AIThe broad parent route for physical perception, reasoning, policy, control, and feedback.
 
-Sitemap anchor audit: 203 pages; generic anchors: 0; inserted links: 89
+== /robot-grippers
+HTTP 200
+<title>Robot Grippers: Types, Selection Guide (2026) | RoboSkin.ai</title>
+<meta name="description" content="Compare robot gripper types and sourced models by payload, grip force, interface, contact sensing and price disclosure before selecting an end effector.">
+Title characters: 59; description characters: 152
+H1: Robot Grippers: Types, Selection Guide and Vendors
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/sensors	tactile sensing
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/sensors	tactile sensingSensing principles, specifications and task selection.
+/datasets	tactile datasetsSource-reviewed data for contact learning.
+/robot-tactile-sensors	robot tactile sensor modelsModel-specific sensing and integration fields.
+
+== /electronic-skin
+HTTP 200
+<title>Electronic Skin (E-Skin): Materials and Uses | RoboSkin.ai</title>
+<meta name="description" content="Electronic skin materials, sensing mechanisms and uses, with a comparison to robot skin and source-backed limits for pressure and contact measurements.">
+Title characters: 58; description characters: 151
+H1: Electronic Skin: Materials, Sensing Mechanisms and Uses
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/robot-skin	robot skinRobot coverings, integration and vendors.
+/sensors	tactile sensingSensing principles, specifications and task selection.
+/guides/robot-skin-vs-e-skin	robot skin versus e-skinTerminology and integration boundaries.
+
+== /robot-tactile-sensors
+HTTP 200
+<title>Robot Tactile Sensors: Models and Selection | RoboSkin.ai</title>
+<meta name="description" content="Robot tactile sensor models compared by sensing type, force range, sampling rate, interface and vendor, with sources and explicit unknown specifications.">
+Title characters: 57; description characters: 153
+H1: Robot Tactile Sensor Models: Specs and Selection
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/sensors	tactile sensing
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/sensors	tactile sensingSensing principles, specifications and task selection.
+/datasets	tactile datasetsSource-reviewed data for contact learning.
+/benchmarks	tactile robotics benchmarksTask protocols and comparison limits.
+
+== /humanoid-robot-companies
+HTTP 200
+<title>Humanoid Robot Companies: Tracked Directory | RoboSkin.ai</title>
+<meta name="description" content="Tracked humanoid robot companies: founding year, location, robot models, tactile approach, official sources and row-level verification dates.">
+Title characters: 57; description characters: 141
+H1: Humanoid Robot Companies: A Tracked Directory (2026)
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/robot-skin	robot skinRobot coverings, integration and vendors.
+/sensors	tactile sensingSensing principles, specifications and task selection.
+/robot-vla-models	VLA roboticsRobot policy inputs and released model evidence.
+
+== /embodied-ai
+HTTP 200
+<title>Embodied AI: Methods and Physical AI Compared | RoboSkin.ai</title>
+<meta name="description" content="Embodied AI defined through perception, action and feedback: core learning methods, evaluation limits and a comparison with Physical AI.">
+Title characters: 59; description characters: 136
+H1: Embodied AI Explained: Methods and How It Differs from Physical AI
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/robot-vla-models	VLA roboticsCompare vision-language-action policy evidence.
+/tactile-ai	tactile AIFrom contact measurements to learned representations.
+/physical-ai	Physical AIPhysical-world systems and the touch feedback loop.
+
+404 status 404; robots ["noindex, follow"]; googlebot 0; canonical 0
+VLA child /vla/models: HTTP 200; title VLA Model Index: Timeline and Weights | RoboSkin.ai; canonical https://roboskin.ai/vla/models
+VLA child /vla/timeline: HTTP 200; title VLA Model Timeline: RT-1 to Tactile Robot Policies | RoboSkin.ai; canonical https://roboskin.ai/vla/timeline
+VLA child /vla/concepts: HTTP 200; title VLA vs VDA vs World Models vs HFM: Robot Model Concepts | RoboSkin.ai; canonical https://roboskin.ai/vla/concepts
+
+Sitemap anchor audit: 208 pages; generic anchors: 0; inserted links: 99
 
 RESULT: PASS (0 failures)
+
+$ npm run verify:export
+
+> roboskin-website@0.1.0 verify:export
+> node scripts/verify-export.mjs && node scripts/audit-on-page-seo.mjs
+
+Verified 208 sitemap URLs, 213 protected URL contract entries including 6 redirect sources, 6 noindex URLs, 201 graph entities, full LLM knowledge, 30 research-index records, and 50 RSS items
+On-page SEO verified: 208 sitemap pages; unique titles/descriptions, H1s, canonicals, and internal destinations/anchors.
+
+$ node scripts/verify-server-markdown.mjs
+{
+  "ok": true,
+  "checkedAt": "2026-10-30T10:13:30.964Z",
+  "runtime": "server",
+  "publicPageCount": 208,
+  "markdownAssetCount": 209,
+  "corePaths": [
+    "/",
+    "/tactile-ai",
+    "/datasets",
+    "/sensors",
+    "/guides/lerobot-dataset-format"
+  ]
+}

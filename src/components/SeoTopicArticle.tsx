@@ -57,6 +57,8 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
               <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.introduction ?? page.description}</p>
               {page.introduction ? <p className="mt-4 text-sm text-[#8e98a8]">Last updated: <time dateTime={page.updated}>{page.updated}</time></p> : null}
+              {page.path === '/robot-vla-models' ? <p className="mt-4 text-sm text-soft">Sub-pages: <Link href="/vla/models" data-structure-position="subpages" className="underline">VLA model index</Link>, <Link href="/vla/timeline" data-structure-position="subpages" className="underline">VLA timeline</Link>, <Link href="/vla/concepts" data-structure-position="subpages" className="underline">VLA concepts</Link>.</p> : null}
+              {['/robot-grippers', '/robot-tactile-sensors'].includes(page.path) ? <p className="mt-4 text-sm text-soft">Part of <Link href="/sensors" data-structure-position="subpage_parent" className="underline">tactile sensing</Link>: compare sensing principles before selecting a model or end effector.</p> : null}
               {page.path === '/tactile-ai' ? <p className="mt-4 text-sm text-[#c8d1de]">For sensor hardware and specs, see <Link href="/sensors" className="underline underline-offset-4">tactile sensing</Link>.</p> : null}
               {page.schemaType === 'TechArticle' || page.revisionNote ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">

@@ -5,6 +5,8 @@ export const homeTopicHubs = [
   { href: '/datasets', label: 'tactile datasets', description: '25 datasets by sensor type and task' },
   { href: '/robot-vla-models', label: 'VLA robotics', description: '11 models compared on touch input' },
   { href: '/robot-skin', label: 'robot skin', description: 'Materials, sensing and vendors' },
+  { href: '/robot-grippers', label: 'robot gripper', description: 'Types, selection and vendors' },
+  { href: '/humanoid-robot-companies', label: 'humanoid robot companies', description: 'Tracked companies and tactile approaches' },
 ];
 
 export const relatedHubLinks: Record<string, HubLink[]> = {
@@ -22,7 +24,7 @@ export function getArticleHubLink(content: string): HubLink | undefined {
     { pattern: /\b(?:tactile sensors?|GelSight|DIGIT|TacTip)\b/i, href: '/sensors', label: 'tactile sensing' },
     { pattern: /\b(?:datasets?|LeRobot|Open X-Embodiment)\b/i, href: '/datasets', label: 'tactile datasets' },
     { pattern: /\b(?:VLA|vision-language-action)\b/i, href: '/robot-vla-models', label: 'VLA robotics' },
-    { pattern: /\b(?:electronic skin|e-skin)\b/i, href: '/robot-skin', label: 'robot skin' },
+    { pattern: /\b(?:electronic skin|e-skin)\b/i, href: '/electronic-skin', label: 'electronic skin' },
   ];
   const prose = content.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
   const rule = rules.find(({ pattern }) => pattern.test(prose));

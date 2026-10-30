@@ -1,4 +1,5 @@
 import structureRelease from '@/content/structure-release.json';
+import { structureNewPages } from '@/content/structure-new-pages';
 import { robotDatasetStartingPoints, robotDataPreflight, teleoperationActionTrace } from '@/content/robot-data-evidence';
 import { printedTactileGuide } from '@/content/printed-tactile-guide';
 import { omnimodalSection, omnimodalFaqs, omnimodalSources, contactStateSection, contactStateFaqs, contactStateSources } from '@/content/longtail-october-20';
@@ -69,6 +70,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  ...structureNewPages,
   printedTactileGuide,
   ...opticalTactileGuides,
   aspireSetup,

@@ -51,3 +51,45 @@ Base: `579c6d16f5d3c206b57dbb662fabba65decdc61d`. Actual editing time: 2026-10-3
 Added four homepage Topic hubs before database counts, ordered research/news body backlinks with destination deduplication, and end-of-body hub links. No article source text was rewritten. The six primary navigation items are unchanged.
 
 Production build, targeted lint, ordered-rule tests, structure acceptance and full export/on-page audit passed. The sitemap-wide scan covered all 203 pages: zero generic anchors, zero broken internal destinations/anchors, 89 marked link insertions. Exact source, destination, anchor and position are recorded in internal-links.csv.
+
+## Batch 3: new pages and hierarchy
+
+| Page / field | Before | After |
+|---|---|---|
+| /robot-grippers / title | No indexable page (404) | Robot Grippers: Types, Selection Guide (2026) &#124; RoboSkin.ai (59) |
+| /robot-grippers / description | No indexable page (404) | Compare robot gripper types and sourced models by payload, grip force, interface, contact sensing and price disclosure before selecting an end effector. (152) |
+| /robot-grippers / h1 | No indexable page (404) | Robot Grippers: Types, Selection Guide and Vendors (50) |
+| /electronic-skin / title | No indexable page (404) | Electronic Skin (E-Skin): Materials and Uses &#124; RoboSkin.ai (58) |
+| /electronic-skin / description | No indexable page (404) | Electronic skin materials, sensing mechanisms and uses, with a comparison to robot skin and source-backed limits for pressure and contact measurements. (151) |
+| /electronic-skin / h1 | No indexable page (404) | Electronic Skin: Materials, Sensing Mechanisms and Uses (55) |
+| /robot-tactile-sensors / title | No indexable page (404) | Robot Tactile Sensors: Models and Selection &#124; RoboSkin.ai (57) |
+| /robot-tactile-sensors / description | No indexable page (404) | Robot tactile sensor models compared by sensing type, force range, sampling rate, interface and vendor, with sources and explicit unknown specifications. (153) |
+| /robot-tactile-sensors / h1 | No indexable page (404) | Robot Tactile Sensor Models: Specs and Selection (48) |
+| /humanoid-robot-companies / title | No indexable page (404) | Humanoid Robot Companies: Tracked Directory &#124; RoboSkin.ai (57) |
+| /humanoid-robot-companies / description | No indexable page (404) | Tracked humanoid robot companies: founding year, location, robot models, tactile approach, official sources and row-level verification dates. (141) |
+| /humanoid-robot-companies / h1 | No indexable page (404) | Humanoid Robot Companies: A Tracked Directory (2026) (52) |
+| /embodied-ai / title | No indexable page (404) | Embodied AI: Methods and Physical AI Compared &#124; RoboSkin.ai (59) |
+| /embodied-ai / description | No indexable page (404) | Embodied AI defined through perception, action and feedback: core learning methods, evaluation limits and a comparison with Physical AI. (136) |
+| /embodied-ai / h1 | No indexable page (404) | Embodied AI Explained: Methods and How It Differs from Physical AI (66) |
+
+VLA child canonical URLs remain self-referential. `/vla/models` changes its main title from `VLA Model Comparison: Tactile Inputs, Code & Benchmarks` to `VLA Model Index: Timeline and Weights`; its description and H1 remain unchanged. Timeline and concepts titles already omit the complete phrase “VLA robotics” and remain unchanged. All three receive the explicit parent link, and the hub receives the three subpage links. Their modification dates and the homepage date reflect this actual edit.
+
+### Constraint reconciliation
+
+The supplied embodied-AI title is 48 characters, or 62 including the mandatory suffix, despite the document’s stated count. The exact-copy instruction and strict 60-character limit cannot both hold. A clarification was offered with no answer returned; the strict length gate was applied using `Embodied AI: Methods and Physical AI Compared | RoboSkin.ai` (59). The H1 and assigned keyword/intent remain as supplied. No keyword targeting decision or new search-volume estimate was introduced.
+
+### Content, data and rendering
+
+The five pages are complete RSC articles with direct tables, definitions, sources and dated metadata. Four manufacturer-sourced gripper examples include payload conditions, force, interfaces, contact points and explicit price unknowns. Native HTML details groups provide type-filtered table views without client JavaScript or URL parameters. The sensor model library retains all 17 source-reviewed records and their evidence dates. Five humanoid companies have actual 2026-10-30 source checks; optional tactile hardware stays labelled optional and Figure’s historical office location is explicitly qualified. These directories state inclusion and manual, event-driven review rules, not a claim of automatic monitoring.
+
+Electronic skin has a direct robot-skin distinction table and one mechanism overview paragraph. Embodied AI retains a long-tail methods/comparison scope. Research/news prose is unchanged apart from the separately rendered requested hub backlink and canonical model-entity link destinations. No client component, stylesheet or navigation item was added.
+
+### 404 and verification
+
+Page-level indexing metadata replaces inherited homepage robots/canonical defaults. Research and news retain their original explicit index/follow and Googlebot policy for valid records. Next 15 inserts noindex automatically; a narrowly scoped postbuild normalizer expresses default follow explicitly in the generated not-found artifacts, removes duplicate robots/Googlebot and homepage canonical, and preserves the Agent recovery UI. Dedicated tests cover idempotence and actual root/research/news 404 responses.
+
+Static production build, 13-page structure acceptance, 208-page sitemap/metadata/internal-link audit and targeted regression tests passed. The protected URL contract now has 213 entries. The full local suite has one unchanged Windows junction-creation restriction after the affected postbuild fixture is updated; Linux CI is required before merging. Local browser access to the isolated preview is unavailable, so visual verification uses the Vercel PR preview. Ordinary shell outbound DNS is unavailable; the read-only production CI job runs the existing production verifier against the exact merged SHA and waits for the existing automatic Vercel deployment. No second deployment is created.
+
+GSC export and dispositions are documented in gsc-tracking.md and gsc-url-disposition.csv. No requests to force indexation or restart validation were made. Raw rendered-HTML verification is in verify-output.txt; live output is retained as verify-output-live.txt when deployment completes.
+
+Local server build and server Markdown comparison passed (208 public pages, 209 Markdown assets). The local HTTP probe could not connect to the started Next server in this isolated environment, so the real root/research/news 404 response check remains an explicit Linux CI gate; it is not reported as a local pass. Full ESLint completed without errors.
