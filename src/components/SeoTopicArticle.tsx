@@ -10,6 +10,7 @@ import { blogPosts } from '@/lib/blog-data';
 import { buildSeoTopicGraph } from '@/lib/seo-topic';
 import ArticleContents from '@/components/ArticleContents';
 import { buildSectionIds } from '@/lib/article-headings';
+import { relatedHubLinks } from '@/lib/structure-links';
 
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
@@ -291,6 +292,12 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
             </div>
           </div>
         </section>
+        {relatedHubLinks[page.path] ? <section className="container-shell pb-14" aria-label="Related">
+          <h2 className="text-2xl font-semibold text-white">Related</h2>
+          <nav className="mt-4 flex flex-wrap gap-4" aria-label="Related hubs">
+            {relatedHubLinks[page.path].map((link) => <Link key={link.href} href={link.href} data-structure-position="related_block" className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link>)}
+          </nav>
+        </section> : null}
       </article>
     </>
   );

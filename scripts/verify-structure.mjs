@@ -77,6 +77,31 @@ if(batch>=3){
   check(!doc.querySelector('meta[name="googlebot"]'),'404 must not inherit googlebot index');
   check(!doc.querySelector('link[rel="canonical"]'),'404 must not canonicalize to homepage');
 }
+if(batch>=2) {
+  const {html:sitemap}=await get('/sitemap.xml');
+  const sitemapText=base?sitemap:await readFile(join(root,'sitemap.xml'),'utf8');
+  const paths=[...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>new URL(match[1]).pathname);
+  const inserted=[];
+  const generic=[];
+  for(const path of paths) {
+    const {html}=await get(path);
+    const doc=domino.createDocument(html);
+    for(const anchor of doc.querySelectorAll('a[data-structure-position]')) inserted.push({
+      source_url:`https://roboskin.ai${path}`, target_url:new URL(anchor.getAttribute('href'),'https://roboskin.ai').href,
+      anchor_text:anchor.textContent.trim().replace(/\s+/g,' '), insertion_position:anchor.getAttribute('data-structure-position'),
+    });
+    for(const anchor of doc.querySelectorAll('main a[href]')) if(/\b(click here|read more|learn more|see details)\b/i.test(anchor.textContent)) generic.push(`${path}\t${anchor.getAttribute('href')}\t${anchor.textContent.trim()}`);
+    check(doc.querySelectorAll('[data-structure-position="body_backlink"]').length<=1,`${path} duplicated body hub backlink`);
+  }
+  lines.push(`\nSitemap anchor audit: ${paths.length} pages; generic anchors: ${generic.length}; inserted links: ${inserted.length}`, ...generic);
+  check(generic.length===0,'sitemap generic anchors');
+  const csvCell=value=>'"'+String(value).replaceAll('"','""')+'"';
+  await mkdir('docs/seo/structure-20261030',{recursive:true});
+  await writeFile('docs/seo/structure-20261030/internal-links.csv',['source_url,target_url,anchor_text,insertion_position',...inserted.map(row=>Object.values(row).map(csvCell).join(','))].join('\n')+'\n');
+  const {html:home}=await get('/');
+  const homeDoc=domino.createDocument(home);
+  check(homeDoc.querySelectorAll('[data-structure-position="home_hub"]').length===(batch>=3?6:4),'homepage topic hub count');
+}
 lines.push(`\nRESULT: ${errors===0?'PASS':'FAIL'} (${errors} failures)`);
 console.log(lines.join('\n'));
 await mkdir('docs/seo/structure-20261030',{recursive:true});

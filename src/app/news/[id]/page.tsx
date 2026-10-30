@@ -163,7 +163,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <div className="article-grid">
             <div className="article-reading-surface">
-              <ArticleBody content={post.content} />
+              <ArticleBody content={post.content} hubBacklink />
             </div>
 
             <aside className="article-rail">

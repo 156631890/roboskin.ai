@@ -149,7 +149,7 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
 
           <div className="article-grid">
             <div className="article-reading-surface">
-              <ArticleBody content={post.content} />
+              <ArticleBody content={post.content} hubBacklink />
               {relatedDatasets.length > 0 && <section className="mt-8 border-t border-white/10 pt-6" aria-labelledby="article-dataset-evidence">
                 <h2 id="article-dataset-evidence">Check the data behind this research</h2>
                 <p>Compare the reported collection with the publicly listed files, dataset license, split documentation and dated access evidence.</p>

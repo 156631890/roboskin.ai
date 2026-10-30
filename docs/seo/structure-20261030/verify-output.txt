@@ -1,5 +1,5 @@
-Verification 2026-10-30T09:47:27.303Z
-Batch 1; source out
+Verification 2026-10-30T09:55:54.672Z
+Batch 2; source out
 
 == /sensors
 <title>Tactile Sensing: Types, Specs, Comparison | RoboSkin.ai</title>
@@ -240,5 +240,7 @@ Internal links:
 /editorial-policy#evidence-method	How evidence is checked
 /contact?requestType=research	Report a source or attribution issue
 /physical-ai	Physical AIThe broad parent route for physical perception, reasoning, policy, control, and feedback.
+
+Sitemap anchor audit: 203 pages; generic anchors: 0; inserted links: 89
 
 RESULT: PASS (0 failures)

@@ -45,3 +45,9 @@ Base: `579c6d16f5d3c206b57dbb662fabba65decdc61d`. Actual editing time: 2026-10-3
 - Schema tests: 14/14 passed; unique-model-owner regression passed.
 - Full suite initially 343/345: one old mobile-label fixture corrected without removing coverage; the unchanged tutorial junction test is blocked by Windows sandbox junction creation. Linux CI remains the release gate.
 - Existing model-owner export checks were updated to require one VLA-owned definition, preserving source citations and evidence-boundary checks.
+
+## Batch 2 acceptance
+
+Added four homepage Topic hubs before database counts, ordered research/news body backlinks with destination deduplication, and end-of-body hub links. No article source text was rewritten. The six primary navigation items are unchanged.
+
+Production build, targeted lint, ordered-rule tests, structure acceptance and full export/on-page audit passed. The sitemap-wide scan covered all 203 pages: zero generic anchors, zero broken internal destinations/anchors, 89 marked link insertions. Exact source, destination, anchor and position are recorded in internal-links.csv.
