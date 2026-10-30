@@ -28,7 +28,10 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 208);
+  assert.equal(protectedUrls.length, 213);
+  for (const path of ['/robot-grippers', '/electronic-skin', '/robot-tactile-sensors', '/humanoid-robot-companies', '/embodied-ai']) {
+    assert.ok(protectedUrls.includes(`https://roboskin.ai${path}`), `Missing protected directory ${path}`);
+  }
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/opentac-custom-tactile-skins-readout-limits-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/softmimicgen-synthetic-data-sim-to-real-2026'));
   assert.ok(protectedUrls.includes('https://roboskin.ai/guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra'));
