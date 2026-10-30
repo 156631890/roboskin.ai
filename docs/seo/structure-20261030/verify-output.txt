@@ -1,0 +1,244 @@
+Verification 2026-10-30T09:47:27.303Z
+Batch 1; source out
+
+== /sensors
+<title>Tactile Sensing: Types, Specs, Comparison | RoboSkin.ai</title>
+<meta name="description" content="Tactile sensing explained: vision-based, magnetic and soft sensor types, published specs, and how to shortlist one for grasping or slip detection.">
+Title characters: 55; description characters: 146
+H1: Tactile Sensing — Sensor Types, Specifications and Comparison
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/sensors/robotiq-tsf-85	Robotiq TSF-85
+/sensors/digit	DIGIT tactile sensor
+/sensors/gelsight-mini	GelSight Mini
+/sensors/reskin	ReSkin magnetic tactile sensing
+/sensors#task-selection	Compare by manipulation task
+/resources/tactile-sensor-evaluation-template.csv	Download task evaluation template
+/sensors/loomia-smart-skin	Read sensor guide
+/sensors/robotiq-tsf-85	Read sensor guide
+/sensors/melexis-tactaxis	Read sensor guide
+/organizations#organization-vitai-robotics	ViTai Robotics
+/research/univtac-platform-encoder-benchmark-2026	RoboSkin evidence review
+/sensors/digit	Read sensor guide
+/sensors/gelsight-mini	Read sensor guide
+/organizations#organization-gelsight	GelSight
+/sensors/reskin	Read sensor guide
+/organizations#organization-syntouch	SynTouch
+
+== /robot-vla-models
+<title>VLA Robotics Models: Full Comparison (2026) | RoboSkin.ai</title>
+<meta name="description" content="Every major VLA robotics model compared: parameter count, training data, open weights and whether it accepts tactile input, with links to primary sources.">
+Title characters: 57; description characters: 154
+H1: VLA Robotics Models: Architecture, Open Weights and Touch Input
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/vla/models	Sortable model comparison
+/vla/timeline	Model timeline
+/vla/concepts	VLA, VDA, world models and HFM
+/robot-foundation-models	Robot AI Model Directory
+/robotics-datasets	robotics dataset comparison
+/robot-world-models	Compare with world models →
+/generated/research-guides/vla-observe-act-loop.svg	
+/generated/research-guides/vla-observe-act-loop.svg	View full-size diagram ↗
+/generated/research-guides/vla-action-chunks.svg	
+/generated/research-guides/vla-action-chunks.svg	View full-size diagram ↗
+/tactile-foundation-models	tactile foundation models
+/tactile-manipulation#what-is-contact-state-recognition	tactile manipulation
+/robot-learning	Compare robot learning data and supervision requirements
+/robot-world-models	Trace world-model prediction and control boundaries
+/research-services	Discuss a scoped research evidence review
+/technology#tactile-vs-force-torque	Compare tactile sensors with force-torque sensors
+
+== /robot-foundation-models
+<title>Robot Foundation Models (2026): Comparison | RoboSkin.ai</title>
+<meta name="description" content="Robot foundation models compared on training data, embodiment and released weights — plus which ones you can actually run today.">
+Title characters: 56; description characters: 128
+H1: Robot Foundation Models: What Each One Can Do
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/robot-vla-models	Compare VLA interfaces and evidence
+/robot-safety	Separate robot safety evidence
+/contact	Request a scoped source-research brief
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/ai-robotics	AI and roboticsPlace foundation models inside the full perception, reasoning, policy, control, and feedback loop.
+/robots	Robot platforms and embodimentsTrace exact, family-level, and unnamed hardware to evaluated-on, trained-across, or demonstrated-on evidence.
+/organizations	Robot AI research organizationsTrace verified developers and source-listed contributor affiliations to official identity and model evidence.
+/robot-vla-models	VLA robotics: models and action interfacesFocus specifically on vision-language-action interfaces and evaluation.
+/robot-world-models	Robot world modelsSeparate future prediction from action selection and control.
+/robot-learning	Robot learningTrace demonstrations, reinforcement, correction, transfer, and deployment.
+/robotics-datasets	Robotics datasetsCompare broad robot observations, actions, embodiments, access, and license evidence.
+/tactile-foundation-models	Tactile foundation modelsReview touch representations, world models, policies, and transfer evidence.
+/physical-ai	Physical AIConnect models to embodiment, control, safety, and physical feedback.
+
+== /datasets
+<title>Tactile Datasets for Robot Learning: Index | RoboSkin.ai</title>
+<meta name="description" content="Indexed tactile datasets for robot learning: sensor type, embodiment, size, license and download link, with the last-updated date on every record.">
+Title characters: 56; description characters: 146
+H1: Tactile Datasets Index: What Each Dataset Contains
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/datasets#dataset-robotacdex	RoboTacDex
+/datasets#dataset-tactidex	TactiDex
+/datasets#dataset-softvtbench	SoftVTBench
+/guides/lerobot-dataset-format#download	LeRobot numeric validation ↗
+/guides/lerobot-dataset-format#official-loader	Run the official LeRobot loader ↗
+/resources/tactile-dataset-selection-checklist.csv	Download selection checklist
+/datasets.json	Open full audit JSON
+/reports/tactile-ai-robot-skin-landscape-2026	Free sample report
+/research-services?source=datasets#inquiry	Discuss a dataset research question
+/resources/tactile-dataset-selection-checklist.csv	Download selection checklist
+/datasets#dataset-clamp	CLAMP multimodal haptic dataset
+/datasets#dataset-openrobocare	OpenRoboCare expert caregiving demonstrations
+/datasets#dataset-egoexplorer	EgoExplorer human vision-motion-touch mini release
+/datasets#dataset-tacclaw-infinity	TacClaw-Infinity / Daimon-Infinity public release
+/datasets#dataset-romi-2k	ROMI-2K object-interaction dataset
+/datasets#dataset-bench2dex	Bench2Dex simulation demonstrations
+
+== /tactile-ai
+<title>Tactile AI: From Sensor Signal to Policy | RoboSkin.ai</title>
+<meta name="description" content="How tactile AI turns contact signals into robot policies: encoders, tactile foundation models and the sim-to-real gap, with cited papers.">
+Title characters: 54; description characters: 137
+H1: Tactile AI Explained: From Sensor Signal to Learned Policy
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/sensors	tactile sensing
+/research	Browse research
+/contact?requestType=research	Submit a source
+/guides/python-tactile-data-processing	Process tactile data with Python
+/datasets	Find tactile datasets
+/guides/visuo-tactile-world-models-robot-manipulation	Compare tactile world models
+/research/slipsense-multimodal-slip-detection-2026	SlipSense: detector labels, latency and recovery
+/research/touch2trace-tactile-cable-tracing-2026	Touch2Trace: policy timing and tactile history
+/research/visible-touch-contact-overlays-visuomotor-policies-2026	Visible Touch: contact projection and task failures
+/resources/tactile-experiment-worksheet.csv	Download the blank tactile experiment worksheet (CSV)
+/guides/python-tactile-data-processing	Practice data-quality checks with the synthetic Python exercise
+/benchmarks#experiment-evidence	Compare reported experiments with their conditions attached
+/vla/models	Compare VLA inputs, code access and source-specific results
+/robot-vla-models#tactile-vla-integration-index	Compare how tactile feedback enters VLA planning and control
+/guides/tactile-sensor-calibration	Plan DIGIT and GelSight Mini calibration
+/guides/python-tactile-data-processing	Run tactile CSV quality checks and plots in Python
+/guides/lerobot-dataset-format	Inspect LeRobot episodes, timestamps and validation
+/research/dextouch-wm-human-touch-world-model-2026	Human touch transfer in DexTouch-WM
+/research/bench2dex-visuo-tactile-bimanual-benchmark-2026	Simulated tactile data and evaluation in Bench2Dex
+
+== /robot-skin
+<title>Robot Skin: Materials, Sensors, Vendors | RoboSkin.ai</title>
+<meta name="description" content="Robot skin for humanoid robots: materials, embedded tactile sensing, vendor landscape and cost drivers — disambiguated from game skins.">
+Title characters: 53; description characters: 135
+H1: Robot Skin for Humanoid Robots: Materials, Sensing and Vendors
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/research	Browse research
+/contact?requestType=research	Submit a source
+/sensors	Compare tactile sensors
+/sensors/digit	DIGIT tactile sensor
+/research-index	Research evidence index
+/guides/gelsight-vs-digit	Compare GelSight Mini and original DIGIT integration choices
+/sensors/reskin	Inspect ReSkin acquisition and calibration limits
+/sensors#task-selection	Choose sensor requirements by robot task
+/tactile-ai#experiment-worksheet	Download and use the tactile experiment worksheet
+/guides/tactile-sensor-calibration	Work through sensor calibration
+/guides/ros2-tactile-sensing	Inspect the ROS 2 tactile integration guide and its validation status
+/tactile-ai	Tactile AIHow touch signals become useful robot behavior.
+/physical-ai	Physical AIPlace robot skin inside the broader physical perception, action, and feedback system.
+/e-skin	E-skinHow electronic skin overlaps with robot skin.
+/guides/robot-skin-vs-tactile-sensor	Robot skin vs tactile sensorClarify the system-versus-component distinction.
+/applications/robot-hand-tactile-sensor	Robot hand tactile sensorHow robot skin applies to dexterous hands and grasping.
+/applications/soft-robotic-skin	Soft robotic skinFlexible robot skin for soft and curved surfaces.
+/guides/robot-skin-vs-e-skin	Robot skin vs e-skinA comparison page for overlapping terms.
+/research/robot-skin-papers	Robot skin papersResearch routes and source-backed briefs.
+
+== /benchmarks
+<title>Tactile Robotics Benchmarks: Task Suites | RoboSkin.ai</title>
+<meta name="description" content="Tactile robotics benchmarks compared: task suites, success metrics, hardware requirements and whether results are comparable across labs.">
+Title characters: 54; description characters: 137
+H1: Tactile Robotics Benchmarks and Task Suites (2026)
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/experiment-results.csv	Download all records
+/research/tacprint-wearable-tactile-contact-reproduction-2026	Read evidence review
+/research/tacprint-wearable-tactile-contact-reproduction-2026	Read evidence review
+/research/tacprint-wearable-tactile-contact-reproduction-2026	Read evidence review
+/research/tacverse-cross-sensor-tactile-dataset-2026	Read evidence review
+/research/tacverse-cross-sensor-tactile-dataset-2026	Read evidence review
+/news/twins-aist-body-surface-tactile-demonstrations-2026	Read evidence review
+/research/bench2dex-visuo-tactile-bimanual-benchmark-2026	Bench2Dex scores, HDF5 schema, and resource audit
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/guides/tactile-feedback-for-physical-ai	From tactile sensing to robot actionCompare six studies with success definitions, trial counts and resource limits.
+/datasets	Tactile datasetsCompare the underlying data, collection units, licenses, and split risks.
+/sensors	Tactile sensorsCompare the hardware signals and integration boundaries behind benchmark inputs.
+/tactile-manipulation	Tactile manipulationConnect perception metrics to closed-loop robot behavior.
+
+== /physical-ai-touch
+<title>Physical AI and Touch: Tactile Sensing Roadmap | RoboSkin.ai</title>
+<meta name="description" content="Why Physical AI needs tactile input, and a staged roadmap from sensor choice to closed-loop control — with the evidence behind each step.">
+Title characters: 60; description characters: 137
+H1: Physical AI Needs Touch: The Tactile Sensing Roadmap
+First 100 words keyword occurrences: 2
+Double suffix: false
+Date modified: 2026-10-30
+Internal links:
+/	Home
+/editorial-policy	RoboSkin.ai Editorial Team
+/research	Browse research
+/contact?requestType=research	Submit a source
+/guides/how-to-choose-a-tactile-sensor	Choose a sensor by task
+/guides/ros2-tactile-sensing	Inspect a ROS 2 data pipeline
+/guides/how-to-choose-a-tactile-sensor	Choose tactile hardware by manipulation task
+/datasets	Inspect touch data, access and license boundaries
+/robot-world-models	Separate tactile policy feedback from world-model prediction
+/technology	tactile sensing definition
+/guides/gelsight-vs-digit	GelSight versus DIGIT comparison
+/guides/ros2-tactile-sensing	ROS 2 tactile sensing tutorial
+/tactile-foundation-models	tactile foundation model guide
+/datasets#dataset-romi-2k	ROMI-2K dataset record
+/datasets	tactile dataset directory
+/editorial-policy	RoboSkin.ai Editorial Team
+/about#editorial-lead	Steven Yang
+/editorial-policy#evidence-method	How evidence is checked
+/contact?requestType=research	Report a source or attribution issue
+/physical-ai	Physical AIThe broad parent route for physical perception, reasoning, policy, control, and feedback.
+
+RESULT: PASS (0 failures)

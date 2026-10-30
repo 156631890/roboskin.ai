@@ -88,7 +88,7 @@ test('the existing TouchWorld canonical article exposes the complete internal ev
 
   const touchworldNews = record(news, 'touchworld-tactile-foundation-model-dexterous-manipulation-2026');
   for (const href of [
-    '/robot-foundation-models#model-touchworld',
+    '/robot-vla-models#model-touchworld',
     '/datasets#dataset-egotouch',
     '/benchmarks#benchmark-touchworld-real-robot',
     '/robot-world-models',

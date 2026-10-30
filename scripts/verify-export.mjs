@@ -536,16 +536,16 @@ if (failures.length === 0) {
     || tactileVlaList?.numberOfItems !== expectedTactileVlaIds.length
     || listedTactileVlaIds.length !== expectedTactileVlaIds.length
     || new Set(listedTactileVlaIds).size !== expectedTactileVlaIds.length
-    || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+    || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-vla-models#model-${id}`)))) {
     failures.push('/robot-vla-models: tactile VLA mechanism ItemList is invalid');
   }
-  if (vlaModelJsonLdNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
-    failures.push('/robot-vla-models: duplicates CreativeWork ownership from the model directory');
+  if (vlaModelIds.some((id) => vlaModelJsonLdNodes.filter((node) => node?.['@type'] === 'CreativeWork' && node['@id'] === canonicalFor(`/robot-vla-models#model-${id}`)).length !== 1)) {
+    failures.push('/robot-vla-models: must own exactly one CreativeWork definition per VLA model');
   }
   for (const id of vlaModelIds) {
     if (!vlaModelHtml.includes(`id="vla-model-${id}"`)) failures.push(`/robot-vla-models: missing visible anchor for ${id}`);
-    if (!vlaModelHtml.includes(canonicalFor(`/robot-foundation-models#model-${id}`))) failures.push(`/robot-vla-models: missing canonical model reference for ${id}`);
-    if (!vlaModelHtml.includes(`href="/robot-foundation-models#model-${id}"`)) failures.push(`/robot-vla-models: missing visible canonical-model link for ${id}`);
+    if (!vlaModelHtml.includes(canonicalFor(`/robot-vla-models#model-${id}`))) failures.push(`/robot-vla-models: missing canonical model reference for ${id}`);
+    if (!vlaModelHtml.includes(`href="/robot-vla-models#model-${id}"`)) failures.push(`/robot-vla-models: missing visible canonical-model link for ${id}`);
   }
   for (const id of expectedTactileVlaIds) {
     if (!vlaModelHtml.includes(`data-tactile-vla-record="${id}"`)) failures.push(`/robot-vla-models: missing tactile mechanism row for ${id}`);
@@ -644,7 +644,7 @@ if (failures.length === 0) {
   if (!llmsFull.includes(canonicalFor('/knowledge-graph.json'))) failures.push('/llms-full.txt: missing knowledge graph discovery URL');
   if (!llmsFull.includes('## Robot World Model Evidence') || !llmsFull.includes('GitHub Coming Soon')) failures.push('/llms-full.txt: missing world-model evidence boundaries');
   if (!llmsFull.includes('## Robot VLA Evidence Index')
-    || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+    || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-vla-models#model-${id}`)))) {
     failures.push('/llms-full.txt: missing VLA evidence index or canonical model references');
   }
   if (/www\.roboskin\.ai|\.vercel\.app/.test(llmsFull)) failures.push('/llms-full.txt: non-apex URL found');

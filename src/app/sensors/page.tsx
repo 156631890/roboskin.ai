@@ -1,3 +1,4 @@
+import { SensorComparisonTable } from '@/components/HubComparisonTables';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
@@ -36,11 +37,11 @@ export default function TactileSensorsPage() {
     <>
       <JsonLd data={buildTactileSensorsJsonLd(tactileSensorEntries, manufacturerOrganizationIds)} />
       <SeoTopicArticle page={page} leadHref="#task-selector" leadLabel="Choose by task" leadContent={
-        <TactileSensorExplorer
+        <><SensorComparisonTable /><TactileSensorExplorer
           entries={tactileSensorEntries}
           organizationLinks={manufacturerOrganizationLinks}
           detailLinks={detailLinks}
-        />
+        /></>
       } />
     </>
   );

@@ -24,6 +24,7 @@ const graphs = [
   seo.buildTactileDatasetsJsonLd(datasets), seo.buildRoboticsDatasetsJsonLd(generalDatasets),
   seo.buildTactileSensorsJsonLd(sensors, sensorManufacturers),
   load('src/lib/robot-ai-schema.ts').buildRobotAiModelDirectoryJsonLd(models),
+  { '@graph': load('src/lib/robot-ai-schema.ts').buildRobotAiModelNodes(models) },
   load('src/lib/robot-world-model-schema.ts').buildRobotWorldModelEvidenceJsonLd(worlds),
   load('src/lib/research-robot-schema.ts').buildResearchRobotDirectoryJsonLd(),
   load('src/lib/research-organization-schema.ts').buildResearchOrganizationDirectoryJsonLd(),
@@ -143,7 +144,7 @@ test('hardware and research configurations stay distinct with source-bounded man
 });
 test('model and world-model evidence keeps citations, limitations, resource access and list members', () => {
   for (const entry of [...models, ...worlds]) {
-    const route = models.includes(entry) ? '/robot-foundation-models#model-' : '/robot-world-models#world-model-';
+    const route = models.includes(entry) ? '/robot-vla-models#model-' : '/robot-world-models#world-model-';
     const work = node(`https://roboskin.ai${route}${entry.id}`, 'CreativeWork');
     assert.deepEqual(work.citation, entry.primarySources.map((s) => s.url));
     assert.equal(work.abstract, entry.evidenceLimitations ?? entry.limitations);

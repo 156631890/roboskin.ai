@@ -70,7 +70,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('not found — a single robot-action aggregate applicable to all variants; the paper separates embodied and question-answering evaluations.', paper('2303.03378')),
     dataset: fact('Embodied-task data mixed with language, vision and vision-language data.', paper('2303.03378')),
     description: fact('Grounds a language model in continuous observations for embodied reasoning and high-level planning.', paper('2303.03378')),
-    detail: '/robot-foundation-models#model-palm-e',
+    detail: '/robot-vla-models#model-palm-e',
   },
   {
     id: 'diffusion-policy', name: 'Diffusion Policy', date: '2023-03-07', paper: paper('2303.04137'), role: 'Related policy',
@@ -94,7 +94,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('not found — a single aggregate shared by the variants and evaluation categories; use the paper’s per-condition results.', paper('2307.15818')),
     dataset: fact('Robot demonstrations co-fine-tuned with web-scale vision-language tasks.', paper('2307.15818')),
     description: fact('Represents robot actions as text tokens to transfer vision-language knowledge into control.', paper('2307.15818')),
-    detail: '/robot-foundation-models#model-rt-2',
+    detail: '/robot-vla-models#model-rt-2',
   },
   {
     id: 'octo', name: 'Octo', date: '2024-05-20', paper: paper('2405.12213'), role: 'VLA',
@@ -106,7 +106,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('0.72 average success in the project’s fine-tuning evaluation; separate from zero-shot results.', octo),
     dataset: fact('800k trajectories from Open X-Embodiment, plus target-task data for adaptation.', paper('2405.12213')),
     description: fact('Provides an adaptable generalist policy with a diffusion head and configurable observation / action spaces.', paper('2405.12213')),
-    detail: '/robot-foundation-models#model-octo',
+    detail: '/robot-vla-models#model-octo',
   },
   {
     id: 'openvla', name: 'OpenVLA', date: '2024-06-13', paper: paper('2406.09246'), role: 'VLA',
@@ -118,7 +118,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('76.5% LIBERO mean success for the OpenVLA reference in the OFT paper; a later benchmark evaluation, not the original real-robot aggregate.', paper('2502.19645')),
     dataset: fact('970k real-world demonstrations from an Open X-Embodiment mixture.', paper('2406.09246')),
     description: fact('Makes a pretrained vision-language backbone available for robot action prediction and adaptation.', paper('2406.09246')),
-    detail: '/robot-foundation-models#model-openvla-7b',
+    detail: '/robot-vla-models#model-openvla-7b',
   },
   {
     id: 'rdt', name: 'RDT (RDT-1B)', date: '2024-10-10', paper: paper('2410.07864'), role: 'VLA',
@@ -141,7 +141,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('not found — a single original-paper aggregate across its distinct zero-shot and fine-tuned task protocols.', full('2410.24164v1')),
     dataset: fact('Cross-embodiment robot demonstrations, including single-arm, dual-arm and mobile platforms.', paper('2410.24164')),
     description: fact('Combines pretrained vision-language knowledge with flow matching for continuous action chunks.', paper('2410.24164')),
-    detail: '/robot-foundation-models#model-pi0',
+    detail: '/robot-vla-models#model-pi0',
   },
   {
     id: 'openvla-oft', name: 'OpenVLA-OFT', date: '2025-02-27', paper: paper('2502.19645'), role: 'VLA',
@@ -164,7 +164,7 @@ export const vlaCatalog: VlaCatalogEntry[] = [
     benchmark: fact('32.1% RoboCasa success with 100 demonstrations per task, paper Table 2; simulation only.', full('2503.14734v2')),
     dataset: fact('Real-robot trajectories, human video and synthetic data.', paper('2503.14734')),
     description: fact('Couples a vision-language reasoning module to a diffusion action module for humanoid control.', paper('2503.14734')),
-    detail: '/robot-foundation-models#model-isaac-gr00t-n1',
+    detail: '/robot-vla-models#model-isaac-gr00t-n1',
   },
   {
     id: 'pi05', name: 'π0.5 (pi0.5)', date: '2025-04-22', paper: paper('2504.16054'), role: 'VLA',

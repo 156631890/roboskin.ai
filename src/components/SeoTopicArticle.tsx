@@ -54,7 +54,9 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               </nav>
               <p className="section-label">{page.kicker}</p>
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
+              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.introduction ?? page.description}</p>
+              {page.introduction ? <p className="mt-4 text-sm text-[#8e98a8]">Last updated: <time dateTime={page.updated}>{page.updated}</time></p> : null}
+              {page.path === '/tactile-ai' ? <p className="mt-4 text-sm text-[#c8d1de]">For sensor hardware and specs, see <Link href="/sensors" className="underline underline-offset-4">tactile sensing</Link>.</p> : null}
               {page.schemaType === 'TechArticle' || page.revisionNote ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   {page.published ? <>Published <time dateTime={page.published}>{page.published}</time> | </> : null}

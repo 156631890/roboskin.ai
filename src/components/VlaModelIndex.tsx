@@ -80,7 +80,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                       {entry.releaseDate}
                     </time>
                     <Link
-                      href={`/robot-foundation-models#model-${entry.id}`}
+                      href={`/robot-vla-models#model-${entry.id}`}
                       className="mt-4 inline-block font-semibold text-[#ffd5c5] underline decoration-white/25 underline-offset-4 hover:text-white"
                     >
                       Full evidence record
@@ -193,7 +193,7 @@ export default function VlaModelIndex({ entries, tactileEvidence }: VlaModelInde
                         {evidence.integrationRole}
                       </span>
                       <Link
-                        href={`/robot-foundation-models#model-${model.id}`}
+                        href={`/robot-vla-models#model-${model.id}`}
                         className="mt-4 block font-semibold text-[#ffd5c5] underline decoration-white/25 underline-offset-4 hover:text-white"
                       >
                         Full model evidence

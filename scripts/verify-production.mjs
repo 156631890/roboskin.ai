@@ -538,18 +538,18 @@ if (tactileVlaDirectory?.['@type'] !== 'ItemList'
   || tactileVlaDirectory?.numberOfItems !== expectedTactileVlaIds.length
   || listedTactileVlaIds.length !== expectedTactileVlaIds.length
   || new Set(listedTactileVlaIds).size !== expectedTactileVlaIds.length
-  || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))) {
+  || expectedTactileVlaIds.some((id) => !listedTactileVlaIds.includes(canonicalFor(`/robot-vla-models#model-${id}`)))) {
   throw new Error('/robot-vla-models tactile VLA mechanism ItemList is invalid');
 }
-if (vlaModelSchemaNodes.some((node) => node?.['@type'] === 'CreativeWork')) {
-  throw new Error('/robot-vla-models duplicates CreativeWork ownership from the model directory');
+if (vlaModelIds.some((id) => vlaModelSchemaNodes.filter((node) => node?.['@type'] === 'CreativeWork' && node['@id'] === canonicalFor(`/robot-vla-models#model-${id}`)).length !== 1)) {
+  throw new Error('/robot-vla-models must own exactly one CreativeWork definition per VLA model');
 }
 for (const id of vlaModelIds) {
   if (!vlaModelsHtml.includes(`id="vla-model-${id}"`)) throw new Error(`/robot-vla-models is missing ${id}`);
-  if (!vlaModelsHtml.includes(canonicalFor(`/robot-foundation-models#model-${id}`))) {
+  if (!vlaModelsHtml.includes(canonicalFor(`/robot-vla-models#model-${id}`))) {
     throw new Error(`/robot-vla-models is missing the canonical model entity for ${id}`);
   }
-  if (!vlaModelsHtml.includes(`href="/robot-foundation-models#model-${id}"`)) {
+  if (!vlaModelsHtml.includes(`href="/robot-vla-models#model-${id}"`)) {
     throw new Error(`/robot-vla-models is missing the visible canonical-model link for ${id}`);
   }
 }
@@ -614,7 +614,7 @@ if (llmsFullCountChecks.some(([label, count]) => !llmsFull.includes(`- ${label}:
   || !llmsFull.includes(canonicalFor('/organizations'))
   || !llmsFull.includes(canonicalFor('/robots'))
   || !llmsFull.includes('## Robot VLA Evidence Index')
-  || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-foundation-models#model-${id}`)))
+  || vlaModelIds.some((id) => !llmsFull.includes(canonicalFor(`/robot-vla-models#model-${id}`)))
   || !llmsFull.includes('## Robot World Model Evidence')
   || !llmsFull.includes('GitHub Coming Soon')) throw new Error('/llms-full.txt is missing deployed entity knowledge');
 

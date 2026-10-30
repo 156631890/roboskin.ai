@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   ...homeMetadata,
   title: {
     default: `${pageSeo['/'].title} | ${site.name}`,
-    template: `%s | ${site.name}`,
+    template: '%s | RoboSkin.ai',
   },
   authors: [{ name: site.name }],
   creator: site.name,

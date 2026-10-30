@@ -1108,7 +1108,7 @@ The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile senso
 - [UniVTAC pretraining corpus](/datasets#dataset-univtac-encoder-pretraining-corpus)
 - [UniVTAC public benchmark data](/datasets#dataset-univtac-benchmark-dataset)
 - [UniVTAC Benchmark](/benchmarks#benchmark-univtac-benchmark)
-- [UniVTAC Encoder model record](/robot-foundation-models#model-univtac-encoder)
+- [UniVTAC Encoder model record](/robot-vla-models#model-univtac-encoder)
 - [ViTai GF225 sensor record](/sensors#sensor-vitai-gf225)
 - [Simulated Franka Panda and GelSight Mini configuration](/robots#robot-franka-panda-univtac-gelsight-mini-simulation-configuration)
 - [Physical Tianji Marvin and GF225 configuration](/robots#robot-tianji-marvin-univtac-gf225-configuration)
@@ -1371,7 +1371,7 @@ The arXiv article is distributed under CC BY 4.0. That article license does not 
 - [Robot manipulation](/robot-manipulation)
 - [Robot hands](/robot-hands)
 - [Tactile AI](/tactile-ai)
-- [Robot policy and model directory](/robot-foundation-models#model-adept)
+- [Robot policy and model directory](/robot-vla-models#model-adept)
 - [Verified robot configurations](/robots#robot-flexiv-rizon-sharpa-configuration)
 
 ## Primary sources
@@ -1842,7 +1842,7 @@ The artifact status changed after the original RoboSkin review. The [official T-
 
 The [public T-Rex dataset](https://huggingface.co/datasets/zekaiwang/trex_dataset) is labeled MIT and its card currently specifies 5,464 episodes, 5,473,459 frames at 30 FPS (approximately 50 hours), 5,370 language-annotated trajectories, 22 motor primitives, and 207 objects in LeRobot v3.0. Its signals include head and bilateral wrist video, robot state and actions, ten fingertip tactile streams, deformation maps, and estimated 6D wrenches. The repository explicitly distinguishes this release from the complete 100-hour collection, so RoboSkin records both values instead of replacing one with the other.
 
-Use the [normalized T-Rex dataset record](/datasets#dataset-t-rex), [T-Rex model record](/robot-foundation-models#model-t-rex), and [verified robot configuration](/robots#robot-dexmate-vega-1-sharpa-wave-configuration) to inspect the release, license, embodiment, and evidence boundaries separately.
+Use the [normalized T-Rex dataset record](/datasets#dataset-t-rex), [T-Rex model record](/robot-vla-models#model-t-rex), and [verified robot configuration](/robots#robot-dexmate-vega-1-sharpa-wave-configuration) to inspect the release, license, embodiment, and evidence boundaries separately.
 
 ## Reported evidence
 

@@ -211,21 +211,21 @@ export default function RobotAiModelExplorer({
                     ) : (
                       <span className="mt-3 block text-xs leading-relaxed text-[#aeb8c7]">{entry.organization}</span>
                     )}
-                    <span className="mt-2 block font-mono text-[11px] uppercase text-[#aeb8c7]">Reviewed {entry.sourceReviewed}</span>
+                    <span className="mt-2 block font-mono text-[11px] uppercase text-[#aeb8c7]">Source reviewed on {entry.sourceReviewed}.</span>
                   </th>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[185px]">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Role / release</span>
-                    <span className="font-semibold text-white">{sentenceCase(entry.category)}</span>
-                    <time dateTime={entry.releaseDate} className="mt-3 block font-mono text-xs">{entry.releaseDate}</time>
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Role / release</span>
+                    <span className="font-semibold text-white">{sentenceCase(entry.category)} model.</span>
+                    <p className="mt-3 block font-mono text-xs">Released <time dateTime={entry.releaseDate}>{entry.releaseDate}</time>.</p>
                   </td>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[250px]">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Inputs / output</span>
-                    <strong className="text-white">Inputs:</strong> {entry.inputModalities.join('; ')}
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Inputs / output</span>
+                    <strong className="text-white">Accepts:</strong> {entry.inputModalities.join('; ')}.
                     <br />
                     <strong className="mt-3 inline-block text-white">Output:</strong> {entry.outputType}
                   </td>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[300px]">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Training / embodiments</span>
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Training / embodiments</span>
                     {entry.trainingDataSummary}
                     <br />
                     <strong className="mt-3 inline-block text-white">Embodiments:</strong> {entry.embodiments.join('; ')}
@@ -256,22 +256,22 @@ export default function RobotAiModelExplorer({
                     ) : null}
                   </td>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[270px]">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Real-robot evidence</span>
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Real-robot evidence</span>
                     {entry.realRobotEvaluation}
                   </td>
                   <td className="block w-full border-b border-white/10 px-4 py-5 md:table-cell md:w-[255px]">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Access / touch</span>
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Access / touch</span>
                     {entry.availability}
                     <br />
                     <strong className="mt-3 inline-block text-white">License:</strong> {entry.license}
                     <br />
-                    <strong className="mt-3 inline-block text-white">Tactile input:</strong>{' '}
+                    <strong className="mt-3 inline-block text-white">Documented tactile input:</strong>{' '}
                     <span className="rounded-full border border-white/15 px-2 py-1 font-mono text-xs uppercase text-white">
                       {entry.tactileInput}
                     </span>
                   </td>
                   <td className="block w-full px-4 py-5 md:table-cell md:w-[350px] md:border-b md:border-white/10">
-                    <span className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Evidence boundary / sources</span>
+                    <span aria-hidden="true" className="mb-3 block font-mono text-[11px] uppercase tracking-[0.1em] text-[#aeb8c7] md:hidden">Evidence boundary / sources</span>
                     {entry.evidenceLimitations}
                     <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                       {entry.researchUrl ? (

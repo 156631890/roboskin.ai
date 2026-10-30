@@ -263,7 +263,7 @@ test('UniVTAC entities link back to one canonical RoboSkin evidence review', asy
     '/datasets#dataset-univtac-encoder-pretraining-corpus',
     '/datasets#dataset-univtac-benchmark-dataset',
     '/benchmarks#benchmark-univtac-benchmark',
-    '/robot-foundation-models#model-univtac-encoder',
+    '/robot-vla-models#model-univtac-encoder',
     '/sensors#sensor-vitai-gf225',
     '/robots#robot-franka-panda-univtac-gelsight-mini-simulation-configuration',
     '/robots#robot-tianji-marvin-univtac-gf225-configuration',

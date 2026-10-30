@@ -88,7 +88,7 @@ function researchRelationEntity(
     }
     case 'model': {
       const entry = robotAiModelEntries.find((candidate) => candidate.id === id);
-      return entry ? { name: entry.name, url: canonicalUrl(`/robot-foundation-models#model-${entry.id}`) } : undefined;
+      return entry ? { name: entry.name, url: canonicalUrl(`/robot-vla-models#model-${entry.id}`) } : undefined;
     }
     case 'organization': {
       const entry = researchOrganizationEntries.find((candidate) => candidate.id === id);
@@ -439,7 +439,7 @@ export function buildLlmsFullText() {
       const model = robotAiModelEntries.find((entry) => entry.id === relation.modelId);
       if (!model) throw new Error(`LLM robot record references missing model ${relation.modelId}.`);
       lines.push(
-        `  - ${markdownLink(model.name, canonicalUrl(`/robot-foundation-models#model-${model.id}`))}: ${relation.relation}`,
+        `  - ${markdownLink(model.name, canonicalUrl(`/robot-vla-models#model-${model.id}`))}: ${relation.relation}`,
         `    - Source embodiment wording: ${list(relation.sourceEmbodimentLabels)}`,
         `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
         `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
@@ -515,7 +515,7 @@ export function buildLlmsFullText() {
       const model = robotAiModelEntries.find((entry) => entry.id === relation.modelId);
       if (!model) throw new Error(`LLM organization record references missing model ${relation.modelId}.`);
       lines.push(
-        `  - ${markdownLink(model.name, canonicalUrl(`/robot-foundation-models#model-${model.id}`))}: ${relation.relation}`,
+        `  - ${markdownLink(model.name, canonicalUrl(`/robot-vla-models#model-${model.id}`))}: ${relation.relation}`,
         `    - Relationship evidence: ${relation.evidenceUrls.join('; ')}`,
         `    - Relationship boundary: ${compact(relation.evidenceBoundary)}`,
       );
@@ -584,7 +584,7 @@ export function buildLlmsFullText() {
     lines.push(
       `- ${entry.name}`,
       `  - Topical row: ${canonicalUrl(`/robot-vla-models#vla-model-${entry.id}`)}`,
-      `  - Canonical model entity: ${canonicalUrl(`/robot-foundation-models#model-${entry.id}`)}`,
+      `  - Canonical model entity: ${canonicalUrl(`/robot-vla-models#model-${entry.id}`)}`,
       `  - Action output: ${compact(entry.outputType)}`,
       `  - Tactile input: ${entry.tactileInput}`,
       `  - Primary sources: ${entry.primarySources.map((source) => source.url).join('; ')}`,
