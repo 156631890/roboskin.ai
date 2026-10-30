@@ -41,9 +41,12 @@ const homeMetadata = buildPageMetadata('/');
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   ...homeMetadata,
+  // Canonical and indexing policy belong to the resolved page, including 404s.
+  alternates: undefined,
+  robots: undefined,
   title: {
     default: `${pageSeo['/'].title} | ${site.name}`,
-    template: `%s | ${site.name}`,
+    template: '%s | RoboSkin.ai',
   },
   authors: [{ name: site.name }],
   creator: site.name,

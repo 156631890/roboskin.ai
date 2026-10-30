@@ -10,6 +10,7 @@ import { blogPosts } from '@/lib/blog-data';
 import { buildSeoTopicGraph } from '@/lib/seo-topic';
 import ArticleContents from '@/components/ArticleContents';
 import { buildSectionIds } from '@/lib/article-headings';
+import { relatedHubLinks } from '@/lib/structure-links';
 
 type SeoTopicArticleProps = {
   page: SeoTopicPage;
@@ -54,7 +55,11 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               </nav>
               <p className="section-label">{page.kicker}</p>
               <h1 className="mt-5 text-4xl font-bold leading-tight text-white md:text-6xl">{page.h1}</h1>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.description}</p>
+              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#c8d1de]">{page.introduction ?? page.description}</p>
+              {page.introduction ? <p className="mt-4 text-sm text-[#8e98a8]">Last updated: <time dateTime={page.updated}>{page.updated}</time></p> : null}
+              {page.path === '/robot-vla-models' ? <p className="mt-4 text-sm text-soft">Sub-pages: <Link href="/vla/models" data-structure-position="subpages" className="underline">VLA model index</Link>, <Link href="/vla/timeline" data-structure-position="subpages" className="underline">VLA timeline</Link>, <Link href="/vla/concepts" data-structure-position="subpages" className="underline">VLA concepts</Link>.</p> : null}
+              {['/robot-grippers', '/robot-tactile-sensors'].includes(page.path) ? <p className="mt-4 text-sm text-soft">Part of <Link href="/sensors" data-structure-position="subpage_parent" className="underline">tactile sensing</Link>: compare sensing principles before selecting a model or end effector.</p> : null}
+              {page.path === '/tactile-ai' ? <p className="mt-4 text-sm text-[#c8d1de]">For sensor hardware and specs, see <Link href="/sensors" className="underline underline-offset-4">tactile sensing</Link>.</p> : null}
               {page.schemaType === 'TechArticle' || page.revisionNote ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   {page.published ? <>Published <time dateTime={page.published}>{page.published}</time> | </> : null}
@@ -289,6 +294,12 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
             </div>
           </div>
         </section>
+        {relatedHubLinks[page.path] ? <section className="container-shell pb-14" aria-label="Related">
+          <h2 className="text-2xl font-semibold text-white">Related</h2>
+          <nav className="mt-4 flex flex-wrap gap-4" aria-label="Related hubs">
+            {relatedHubLinks[page.path].map((link) => <Link key={link.href} href={link.href} data-structure-position="related_block" className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{link.label}</Link>)}
+          </nav>
+        </section> : null}
       </article>
     </>
   );

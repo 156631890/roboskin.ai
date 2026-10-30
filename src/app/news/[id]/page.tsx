@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
 
   return {
     title: post.seoTitle ?? post.title,
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 } },
     description: post.seoDescription ?? post.excerpt,
     authors: [{ name: post.author, url: canonicalUrl(site.editorial.path) }],
     category: post.category,
@@ -163,7 +164,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           <div className="article-grid">
             <div className="article-reading-surface">
-              <ArticleBody content={post.content} />
+              <ArticleBody content={post.content} hubBacklink />
             </div>
 
             <aside className="article-rail">

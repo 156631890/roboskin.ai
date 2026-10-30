@@ -19,7 +19,7 @@ test('robot foundation model pillar owns the model intent and renders the databa
   assert.match(route, /robots=\{researchRobotEntries\}/);
   assert.match(route, /robotRelations=\{robotAiRobotRelations\}/);
   assert.match(topics, /path: '\/robot-foundation-models'/);
-  assert.match(topics, /Robot Foundation Models: Data, Transfer & Evaluation/);
+  assert.match(topics, /Robot Foundation Models \(2026\): Comparison/);
   assert.match(topics, /Unknown facts remain unknown/);
   assert.match(schema, /'@type': 'CreativeWork'/);
   assert.match(explorer, /Every row keeps real-robot evidence/);

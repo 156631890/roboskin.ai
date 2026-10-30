@@ -347,7 +347,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     id: `model:${entry.id}`,
     type: 'model',
     name: entry.name,
-    canonicalUrl: canonicalUrl(`/robot-foundation-models#model-${entry.id}`),
+    canonicalUrl: canonicalUrl(`/robot-vla-models#model-${entry.id}`),
     reviewedAt: entry.sourceReviewed,
     primarySourceIds: registerSources(entry.primarySources.map((source) => ({
       url: source.url,

@@ -1,3 +1,4 @@
+import { DatasetIndexes } from '@/components/HubComparisonTables';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -31,6 +32,7 @@ export default function TactileDatasetsPage() {
           <Link href="/guides/lerobot-dataset-format#official-loader">Run the official LeRobot loader ↗</Link>
           <a href="/resources/tactile-dataset-selection-checklist.csv" download>Download selection checklist</a>
         </nav>
+        <DatasetIndexes updated={page.updated} />
         <TactileDatasetExplorer entries={tactileDatasetEntries} useCases={[
           { label: 'Active perception', ids: ['romi-2k'] },
           { label: 'Materials & representations', ids: ['rct', 'tvl', 'touch-and-go', 'objectfolder-real', 'objectfolder-2', 'tacverse', 'univtac-encoder-pretraining-corpus'] },

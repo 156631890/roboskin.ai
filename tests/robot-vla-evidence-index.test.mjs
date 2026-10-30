@@ -109,7 +109,7 @@ test('the VLA page is a server-rendered topical index that references canonical 
   assert.match(component, /data-tactile-vla-record=\{evidence\.modelId\}/);
   assert.match(component, /id="tactile-vla-integration-index"/);
   assert.match(component, /cross-paper rank scores/);
-  assert.match(component, /\/robot-foundation-models#model-\$\{entry\.id\}/);
+  assert.match(component, /\/robot-vla-models#model-\$\{entry\.id\}/);
   assert.match(component, /Training \/ data:[\s\S]*?entry\.trainingDataSummary/);
   assert.match(component, /entry\.primarySources\.map/);
   assert.match(schema, /'@type': 'ItemList'/);

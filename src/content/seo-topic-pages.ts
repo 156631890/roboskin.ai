@@ -1,3 +1,5 @@
+import structureRelease from '@/content/structure-release.json';
+import { structureNewPages } from '@/content/structure-new-pages';
 import { robotDatasetStartingPoints, robotDataPreflight, teleoperationActionTrace } from '@/content/robot-data-evidence';
 import { printedTactileGuide } from '@/content/printed-tactile-guide';
 import { omnimodalSection, omnimodalFaqs, omnimodalSources, contactStateSection, contactStateFaqs, contactStateSources } from '@/content/longtail-october-20';
@@ -16,6 +18,7 @@ export type SeoTopicPage = {
   path: string;
   title: string;
   description: string;
+  introduction?: string;
   h1: string;
   kicker: string;
   intent: string;
@@ -67,6 +70,7 @@ export type SeoTopicPage = {
 };
 
 export const seoTopicPages: SeoTopicPage[] = [
+  ...structureNewPages,
   printedTactileGuide,
   ...opticalTactileGuides,
   aspireSetup,
@@ -269,14 +273,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-foundation-models',
-    title: 'Robot Foundation Models: Data, Transfer & Evaluation',
-    description:
-      'Compare OpenVLA, Octo, RT-2 and other robot AI models by training data, robot compatibility, code and weight access, tactile input, and evaluation evidence.',
-    h1: 'Robot foundation models and the robot AI model stack',
+    title: "Robot Foundation Models (2026): Comparison",
+    description: "Robot foundation models compared on training data, embodiment and released weights — plus which ones you can actually run today.",
+    introduction: "Robot foundation model refers to a broadly pretrained model intended for adaptation across robot tasks or embodiments. A robot foundation model can support perception, planning or action, but these roles are not interchangeable. Compare training data, robot compatibility, released artifacts and evaluation limits before deciding whether a system can run on your hardware.",
+    h1: "Robot Foundation Models: What Each One Can Do",
     kicker: 'Source-reviewed model directory',
     intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
     published: '2026-08-21',
-    updated: '2026-10-17',
+    updated: structureRelease.modifiedDate,
     revisionNote: 'Added a source-reviewed REKI checkpoint, interface, license and evaluation boundary note; no model or hardware test.',
     priority: 0.9,
     changeFrequency: 'weekly',
@@ -440,13 +444,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-skin',
-    title: 'What Is Robot Skin? Types, Sensors & How It Works',
-    description:
-      'Understand robot skin types, optical and magnetic sensing, conductive surfaces, and the steps from raw contact signals to calibrated robot feedback.',
-    h1: 'What is robot skin?',
+    title: "Robot Skin: Materials, Sensors, Vendors",
+    description: "Robot skin for humanoid robots: materials, embedded tactile sensing, vendor landscape and cost drivers — disambiguated from game skins.",
+    introduction: "Robot skin is the engineered, sensor-bearing covering on a physical humanoid or robotic arm, not a game cosmetic. Robot skin combines compliant materials, embedded sensing, signal processing and a connection to robot control. Compare surface coverage, measurable contact signals, mounting requirements and vendor documentation before selecting a system.",
+    h1: "Robot Skin for Humanoid Robots: Materials, Sensing and Vendors",
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: '2026-10-07',
+    updated: structureRelease.modifiedDate,
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -596,13 +600,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-ai',
-    title: 'Tactile AI: Models, Datasets & Robotics Research',
-    description:
-      'Tactile AI turns robot touch signals into perception, learned representations, and action. Explore models, datasets, benchmarks, robot platforms, and Physical AI research.',
-    h1: 'Tactile AI: touch data for Physical AI',
+    title: "Tactile AI: From Sensor Signal to Policy",
+    description: "How tactile AI turns contact signals into robot policies: encoders, tactile foundation models and the sim-to-real gap, with cited papers.",
+    introduction: "Tactile AI is the use of learning and inference to turn contact signals into robot perception, representations or actions. Tactile AI connects a sensor and calibrated data pipeline to an encoder, policy and evaluation protocol. Its value depends on whether measured touch improves a defined task under comparable conditions.",
+    h1: "Tactile AI Explained: From Sensor Signal to Learned Policy",
     kicker: 'Core concept',
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: '2026-10-07',
+    updated: structureRelease.modifiedDate,
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -1592,13 +1596,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/physical-ai-touch',
     revisionNote: 'October 18, 2026: added a task-first tactile sensing roadmap, acceptance checks and direct reading routes. The October 12 active-sensing and ROMI-2K material is retained.',
-    title: 'Physical AI Touch: Tactile Sensing Roadmap',
-    description:
-      'Plan tactile sensing for embodied AI: choose contact signals, align robot data, test feedback and evaluate policies with a staged roadmap and source links.',
-    h1: 'Physical AI and touch: a tactile sensing roadmap',
+    title: "Physical AI and Touch: Tactile Sensing Roadmap",
+    description: "Why Physical AI needs tactile input, and a staged roadmap from sensor choice to closed-loop control — with the evidence behind each step.",
+    introduction: "Tactile sensing roadmap refers to a staged plan connecting a contact-dependent task to sensor choice, synchronized data, feedback control and policy evaluation. This tactile sensing roadmap identifies the evidence needed at each step. Physical AI provides the application context; hardware acquisition, successful software execution and measured robot improvement remain separate milestones.",
+    h1: "Physical AI Needs Touch: The Tactile Sensing Roadmap",
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: '2026-10-18',
+    updated: structureRelease.modifiedDate,
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3007,14 +3011,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/datasets',
     revisionNote: "October 27, 2026: added CLAMP and OpenRoboCare records with access and licensing limits; OAHD and Robot Assisted Feeding remain separate collection links. October 26, 2026: added EgoExplorer gated mini-release scope and separate data/code rights. October 22, 2026: clarified geometry-derived pseudo-contact versus measured tactile data using HuTact as a method example; no dataset record or availability status changed. October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
-    title: 'Visuo-Tactile Datasets: Downloads, Tasks & Licenses',
-    description:
-      'Find tactile and visuo-tactile datasets for robot learning. Filter by sensor, robot and task; compare primary download links, license status and split design.',
-    h1: 'Tactile and visuo-tactile datasets for robot learning',
+    title: "Tactile Datasets for Robot Learning: Index",
+    description: "Indexed tactile datasets for robot learning: sensor type, embodiment, size, license and download link, with the last-updated date on every record.",
+    introduction: "Tactile dataset refers to a collection of recorded or simulated contact observations, often aligned with images, robot state or actions. This tactile dataset index contains 25 records organized by sensor type, task and license. Each record keeps its source-review date, download route and access limitations; a linked dataset is not necessarily a verified or unrestricted download.",
+    h1: "Tactile Datasets Index: What Each Dataset Contains",
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-27',
+    updated: structureRelease.modifiedDate,
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3641,7 +3645,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile datasets for robot learning', href: '/datasets', description: 'Compare training resources, splits, signals, and access evidence.' },
       { label: 'Tactile sensor benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation', description: 'Evaluate the hardware and task layer beneath learned models.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'Read the source-bounded summary of the 2026 preprint.' },
-      { label: 'TouchWorld model record', href: '/robot-foundation-models#model-touchworld', description: 'Inspect the normalized model, training, evaluation, availability, and limitation fields.' },
+      { label: 'TouchWorld model record', href: '/robot-vla-models#model-touchworld', description: 'Inspect the normalized model, training, evaluation, availability, and limitation fields.' },
       { label: 'EgoTouch dataset record', href: '/datasets#dataset-egotouch', description: 'Inspect the human bimanual pretraining resource and its incomplete-upload boundary.' },
       { label: 'TouchWorld evaluation protocol', href: '/benchmarks#benchmark-touchworld-real-robot', description: 'Inspect the six-task, single-platform evaluation contract.' },
       { label: 'Robot world models', href: '/robot-world-models', description: 'Separate predictive dynamics from planning, policy, and foundation-model claims.' },
@@ -3809,7 +3813,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Compare representations, policies, world-model roles, and transfer claims.' },
       { label: 'Dream-Tac research brief', href: '/research/dream-tac-tactile-world-action-model-2026', description: 'Read the action-conditioned tactile-future analysis.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'See how predictive planning and fast tactile correction are separated.' },
-      { label: 'TouchWorld model record', href: '/robot-foundation-models#model-touchworld', description: 'Inspect the structured model evidence separately from the comparison guide.' },
+      { label: 'TouchWorld model record', href: '/robot-vla-models#model-touchworld', description: 'Inspect the structured model evidence separately from the comparison guide.' },
       { label: 'Robot world model evidence table', href: '/robot-world-models#world-model-evidence', description: 'Compare prediction targets, conditioning roles, real-robot protocols, artifacts, and evidence boundaries.' },
       { label: 'EgoTouch dataset record', href: '/datasets#dataset-egotouch', description: 'Inspect the human tactile resource used for TouchWorld world-model pretraining.' },
       { label: 'TouchWorld evaluation protocol', href: '/benchmarks#benchmark-touchworld-real-robot', description: 'Review the six-task clean and perturbation protocol without treating it as an independent leaderboard.' },
@@ -3829,14 +3833,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/benchmarks',
-    title: 'Tactile Robotics Benchmarks for Robot Learning',
-    description:
-      'Compare tactile robotics benchmarks by task, sensor, robot, modality, metric, split protocol, access, and evidence boundary.',
-    h1: 'Tactile robotics benchmarks compared',
+    title: "Tactile Robotics Benchmarks: Task Suites",
+    description: "Tactile robotics benchmarks compared: task suites, success metrics, hardware requirements and whether results are comparable across labs.",
+    introduction: "Tactile robotics benchmark refers to an evaluation contract specifying contact tasks, sensor inputs, hardware, data splits and metrics. A tactile robotics benchmark supports comparison only when those conditions match. This index retains 13 task suites and records whether cross-lab comparability is established, with source and protocol limits beside each entry.",
+    h1: "Tactile Robotics Benchmarks and Task Suites (2026)",
     kicker: 'Structured benchmark directory',
     intent: 'Research directory for tactile benchmark robotics, tactile sensing benchmarks, robot manipulation evaluation, and visuo-tactile benchmark searches.',
     published: '2026-08-19',
-    updated: '2026-09-18',
+    updated: structureRelease.modifiedDate,
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3938,14 +3942,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors',
-    title: 'Tactile Sensor Comparison: GelSight, DIGIT & TacTip',
-    description:
-      'Compare GelSight Mini, DIGIT and TacTip, then shortlist tactile sensors for grasping, slip detection and insertion with source-specific limits.',
-    h1: 'Tactile sensor comparison for robot manipulation',
+    title: "Tactile Sensing: Types, Specs, Comparison",
+    description: "Tactile sensing explained: vision-based, magnetic and soft sensor types, published specs, and how to shortlist one for grasping or slip detection.",
+    introduction: "Tactile sensing is the measurement of contact forces and geometry at a robot's surface, converted into a signal a policy can act on. This tactile sensing index covers 17 sensors across vision-based, magnetic and soft sensing systems. Compare spatial resolution, force range, sampling rate, interface and public specification sources; a missing published value is not a measured zero.",
+    h1: "Tactile Sensing — Sensor Types, Specifications and Comparison",
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-17',
+    updated: structureRelease.modifiedDate,
     revisionNote: 'October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
     priority: 0.92,
     changeFrequency: 'weekly',
@@ -4661,14 +4665,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-vla-models',
-    title: 'VLA Robotics: Architecture, Open Models & Touch',
-    description:
-      'How do vision-language-action models work? Compare VLA architectures, action chunks, open models, deployment tradeoffs and tactile feedback with source links.',
-    h1: 'VLA robotics: models, code and tactile feedback',
+    title: "VLA Robotics Models: Full Comparison (2026)",
+    description: "Every major VLA robotics model compared: parameter count, training data, open weights and whether it accepts tactile input, with links to primary sources.",
+    introduction: "VLA robotics refers to vision-language-action systems that use visual observations and language instructions to produce or condition robot actions. This VLA robotics comparison covers 11 source-reviewed models, including their parameters, training data, released weights and tactile input. Source availability and reported results do not establish independent reproduction or readiness for your robot.",
+    h1: "VLA Robotics Models: Architecture, Open Weights and Touch Input",
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: '2026-10-20',
+    updated: structureRelease.modifiedDate,
     revisionNote: 'October 20, 2026: added omnimodal VLA guidance, FR-VLA force admission and VLDA training-versus-inference boundaries. Earlier model records retain their own evidence dates.',
     priority: 0.95,
     changeFrequency: 'weekly',
@@ -6011,7 +6015,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robot manipulation', href: '/robot-manipulation', description: 'Connect predictions to grasping, insertion, dexterity, and recovery.' },
       { label: 'Tactile foundation models', href: '/tactile-foundation-models', description: 'Separate reusable pretraining claims from predictive model roles.' },
       { label: 'TouchWorld news brief', href: '/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026', description: 'Follow one predictive-and-reactive tactile model from primary sources to evidence boundaries.' },
-      { label: 'TouchWorld model record', href: '/robot-foundation-models#model-touchworld', description: 'Inspect the normalized model record and source-bounded training and evaluation fields.' },
+      { label: 'TouchWorld model record', href: '/robot-vla-models#model-touchworld', description: 'Inspect the normalized model record and source-bounded training and evaluation fields.' },
       { label: 'EgoTouch dataset record', href: '/datasets#dataset-egotouch', description: 'Inspect the human tactile resource used in TouchWorld pretraining.' },
       { label: 'TouchWorld evaluation protocol', href: '/benchmarks#benchmark-touchworld-real-robot', description: 'Inspect the single-platform, six-task protocol separately from the model claim.' },
       { label: 'Tactile AI', href: '/tactile-ai', description: 'Map sensing, representation, prediction, policy, and control.' },

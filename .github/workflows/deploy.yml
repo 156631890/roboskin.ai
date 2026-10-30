@@ -41,6 +41,9 @@ jobs:
       - name: Verify static export
         run: npm run verify:export
 
+      - name: Verify structure, hub links and new directories
+        run: node scripts/verify-structure.mjs --batch 3
+
       - name: Upload verified static export
         uses: actions/upload-artifact@v7
         with:
@@ -72,6 +75,9 @@ jobs:
       - name: Verify generated public Markdown against this server build
         run: node scripts/verify-server-markdown.mjs
 
+      - name: Verify real server 404 indexing metadata
+        run: node scripts/verify-not-found-server.mjs
+
       - name: Upload server Markdown verification
         if: always()
         uses: actions/upload-artifact@v7
@@ -81,3 +87,33 @@ jobs:
           if-no-files-found: warn
           include-hidden-files: true
           retention-days: 7
+
+  verify-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [verify, verify-server]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Wait for the existing Vercel deployment and verify production
+        env:
+          EXPECTED_COMMIT_SHA: ${{ github.sha }}
+        run: node scripts/verify-structure-production.mjs
+      - name: Upload production verification evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: roboskin-structure-production-verification
+          path: |
+            .artifacts/production-verification.json
+            docs/seo/structure-20261030
+          include-hidden-files: true
+          retention-days: 30

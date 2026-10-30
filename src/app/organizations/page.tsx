@@ -436,7 +436,7 @@ export default function OrganizationsPage() {
                                 <li key={`${relation.modelId}-${relation.relation}`}>
                                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                                     <Link
-                                      href={`/robot-foundation-models#model-${model.id}`}
+                                      href={`/robot-vla-models#model-${model.id}`}
                                       className="font-semibold text-white hover:text-[#ff6b3d]"
                                     >
                                       {model.name}

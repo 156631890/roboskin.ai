@@ -18,9 +18,9 @@ function organizationReference(alias: string) {
   };
 }
 
-export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
-  const directoryUrl = canonicalUrl('/robot-foundation-models');
-  const modelNodes = entries.map((entry) => {
+export function buildRobotAiModelNodes(entries: RobotAiModelEntry[]) {
+  const directoryUrl = canonicalUrl('/robot-vla-models');
+  return entries.map((entry) => {
     const relations = robotAiOrganizationRelations.filter((relation) => relation.modelId === entry.id);
     const creatorAliases = relations
       .filter((relation) => relation.relation !== 'contributedBy')
@@ -61,6 +61,11 @@ export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
     };
   });
 
+}
+
+export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
+  const directoryUrl = canonicalUrl('/robot-foundation-models');
+  const modelDirectoryUrl = canonicalUrl('/robot-vla-models');
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -77,11 +82,10 @@ export function buildRobotAiModelDirectoryJsonLd(entries: RobotAiModelEntry[]) {
           '@type': 'ListItem',
           position: index + 1,
           item: {
-            '@id': `${directoryUrl}#model-${entry.id}`,
+            '@id': `${modelDirectoryUrl}#model-${entry.id}`,
           },
         })),
       },
-      ...modelNodes,
     ],
   };
 }

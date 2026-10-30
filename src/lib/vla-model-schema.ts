@@ -1,6 +1,8 @@
 import { canonicalUrl } from '@/lib/seo';
 import type { RobotAiModelEntry } from '@/lib/robot-ai-models';
 import type { TactileVlaEvidenceEntry } from '@/lib/tactile-vla-evidence';
+import { robotAiModelEntries } from '@/lib/robot-ai-models';
+import { buildRobotAiModelNodes } from '@/lib/robot-ai-schema';
 
 export function buildVlaModelIndexJsonLd(
   entries: RobotAiModelEntry[],
@@ -11,7 +13,7 @@ export function buildVlaModelIndexJsonLd(
   }
 
   const directoryUrl = canonicalUrl('/robot-vla-models');
-  const modelDirectoryUrl = canonicalUrl('/robot-foundation-models');
+  const modelDirectoryUrl = directoryUrl;
 
   const itemList = {
     '@type': 'ItemList',
@@ -54,6 +56,7 @@ export function buildVlaModelIndexJsonLd(
     '@graph': [
       itemList,
       tactileIntegrationList,
+      ...buildRobotAiModelNodes(robotAiModelEntries),
       {
         '@type': 'DefinedTerm',
         '@id': `${directoryUrl}#defined-term`,

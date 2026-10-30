@@ -15,6 +15,7 @@ import { researchIndexEntries } from '@/lib/research-index';
 import { tactileBenchmarkEntries } from '@/lib/tactile-benchmarks';
 import { tactileDatasetEntries } from '@/lib/tactile-datasets';
 import { tactileSensorEntries } from '@/lib/tactile-sensors';
+import { homeTopicHubs } from '@/lib/structure-links';
 import {
   buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd,
   buildHomePhysicalAiRoutesJsonLd, buildPageJsonLd, buildPageMetadata,
@@ -81,6 +82,12 @@ export default function Home() {
             </div>
             <p className="contact-hero-caption">Touch study 01 <span>AI-generated concept · not an experimental image</span></p>
           </div>
+          <section className="mt-8" aria-labelledby="topic-hubs-heading">
+            <h2 id="topic-hubs-heading" className="quiet-label">Topic hubs</h2>
+            <nav className="home-topic-rail" aria-label="Topic hubs">
+              {homeTopicHubs.map((hub) => <div key={hub.href} className="signal-panel p-4"><Link href={hub.href} data-structure-position="home_hub" className="font-semibold text-white underline underline-offset-4">{hub.label}</Link><p className="mt-2 text-sm text-soft">{hub.description}</p></div>)}
+            </nav>
+          </section>
           <nav className="contact-database-strip" aria-label="RoboSkin research databases">
             {researchDatabases.map((item) => (
               <Link key={item.href} href={item.href}>

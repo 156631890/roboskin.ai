@@ -1,3 +1,4 @@
+import { VlaComparisonTable } from '@/components/HubComparisonTables';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
@@ -27,7 +28,7 @@ export default function RobotVlaModelsPage() {
       <JsonLd data={buildVlaModelIndexJsonLd(vlaModelEntries, tactileVlaEvidenceEntries)} />
       <SeoTopicArticle
         page={page}
-        leadContent={<><VlaQuickStart entries={vlaModelEntries} /><ResearchReadingGuide update={vlaResearchUpdate} /></>}
+        leadContent={<><VlaComparisonTable /><VlaQuickStart entries={vlaModelEntries} /><ResearchReadingGuide update={vlaResearchUpdate} /></>}
         leadHref="#vla-start"
         leadLabel="Explore VLA models and code"
       >

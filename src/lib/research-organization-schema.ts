@@ -67,7 +67,7 @@ export function buildResearchOrganizationDirectoryJsonLd() {
 
     return {
       '@type': 'CreativeWork',
-      '@id': `${canonicalUrl('/robot-foundation-models')}#model-${model.id}`,
+      '@id': `${canonicalUrl('/robot-vla-models')}#model-${model.id}`,
       identifier: model.id,
       name: model.name,
       url: model.projectUrl,

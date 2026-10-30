@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import ArticleContents from '@/components/ArticleContents';
 import { getArticleHeadings } from '@/lib/article-headings';
+import { getArticleHubLink } from '@/lib/structure-links';
 
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -44,13 +45,15 @@ function renderInline(text: string): ReactNode[] {
   return nodes;
 }
 
-export default function ArticleBody({ content }: { content: string }) {
+export default function ArticleBody({ content, hubBacklink = false }: { content: string; hubBacklink?: boolean }) {
   const lines = content.split('\n');
   const headings = getArticleHeadings(content);
   const headingIds = new Map(headings.map((heading) => [heading.line, heading.id]));
   const elements: ReactNode[] = [];
   let listItems: string[] = [];
   let tableRows: string[][] = [];
+  const hubLink = hubBacklink ? getArticleHubLink(content) : undefined;
+  let firstParagraph = true;
 
   const flushList = () => {
     if (!listItems.length) {
@@ -160,6 +163,12 @@ export default function ArticleBody({ content }: { content: string }) {
         {renderInline(trimmed)}
       </p>,
     );
+    if (firstParagraph && hubLink) elements.push(
+      <p key="hub-backlink" className="mt-4 text-sm leading-relaxed text-soft">
+        Explore <a href={hubLink.href} data-structure-position="body_backlink" className="text-accent underline decoration-white/30 underline-offset-4 hover:text-white">{hubLink.label}</a> for the broader comparison.
+      </p>,
+    );
+    firstParagraph = false;
   });
 
   flushList();

@@ -1,3 +1,4 @@
+import { BenchmarkComparisonTable } from '@/components/HubComparisonTables';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
@@ -22,7 +23,7 @@ export default function TactileBenchmarksPage() {
   return (
     <>
       <JsonLd data={buildTactileBenchmarksJsonLd(tactileBenchmarkEntries)} />
-      <SeoTopicArticle page={page} leadContent={<ExperimentEvidenceExplorer entries={experimentEvidence} />} leadHref="#experiment-evidence" leadLabel="Explore reported results">
+      <SeoTopicArticle page={page} leadContent={<><BenchmarkComparisonTable /><ExperimentEvidenceExplorer entries={experimentEvidence} /></>} leadHref="#experiment-evidence" leadLabel="Explore reported results">
         <TactileBenchmarkExplorer entries={tactileBenchmarkEntries} />
       </SeoTopicArticle>
     </>
