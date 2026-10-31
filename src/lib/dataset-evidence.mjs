@@ -1,6 +1,27 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.27', compiledAt: '2026-10-27', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds CLAMP and OpenRoboCare with documentation-only access and reuse boundaries; related collection hubs are excluded. Other individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.10.31', compiledAt: '2026-10-31', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds one pinned DexSuite scripted Lift simulation subset with inspected metadata and a public file manifest. No trajectory replay or physical test is claimed. Other individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
+  'dexsuite-lift-scripted': {
+    access: 'public-files',
+    accessCheckedAt: '2026-10-31',
+    licenseStatus: 'documented',
+    dataLicense: 'The pinned subset card labels the data Apache-2.0. Simulator software and third-party asset rights are separate and were not verified.',
+    dataLicenseUrl: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/README.md',
+    publicFileScale: '21 listed paths. Metadata declares 200 episodes and 15,030 frames; payload rows were not independently recounted.',
+    verificationScope: 'Pinned public file manifest, dataset card and JSON metadata inspected. No Parquet/video payload download, loader run, trajectory replay, training or hardware validation.',
+    splitStatus: 'unknown',
+    splitDetails: 'The inspected metadata declares train 0:200. No held-out evaluation partition or leakage-free split was validated.',
+    formatStatus: 'described',
+    formatDetails: 'JSON schema inspected: LeRobot v3.0, 20 Hz, [12,32] float32 left/right force grids and [224,224,3] RGB videos. Action layout has 7 manipulator pose-controller values plus 2 gripper joint targets. Payload decoding is untested.',
+    revision: 'f4be6e95af40843da39cd5a88d8bd736393dd59c',
+    listedFileCount: 21,
+    sources: [
+      'https://arxiv.org/html/2610.37799v1',
+      'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/tree/f4be6e95af40843da39cd5a88d8bd736393dd59c',
+      'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/info.json',
+      'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/action_layout.json',
+    ],
+  },
 "clamp": {
   "access": "linked-unverified",
   "accessCheckedAt": "2026-10-27",

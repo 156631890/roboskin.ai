@@ -3,6 +3,32 @@ import type { RoboticsDatasetEntry } from '@/lib/robotics-datasets';
 export type TactileDatasetEntry = RoboticsDatasetEntry;
 
 export const tactileDatasetEntries: TactileDatasetEntry[] = [
+  {
+    id: 'dexsuite-lift-scripted',
+    name: 'DexSuite scripted Lift tactile subset',
+    institution: ['DexSuite authors, led by Mila and McGill University collaborators'],
+    year: 2026,
+    paperVersion: 'arXiv v1 (2610.37799); subset revision f4be6e95af40843da39cd5a88d8bd736393dd59c',
+    dataOrigin: 'simulation',
+    robot: ['Simulated Franka arm with UMI-style tactile parallel gripper'],
+    sensor: ['Simulated FlexiTac-style fingertip pads'],
+    modalities: ['Simulated tactile force grids', 'Front and wrist RGB video', 'Robot and object state', 'Controller actions'],
+    sampleCount: 'Metadata declares 200 episodes and 15,030 frames for this Lift subset. The paper-wide 4,700 episodes are a different scope; payload rows were not independently recounted.',
+    tasks: ['Scripted simulated lifting', 'Contact-conditioned imitation learning research'],
+    objectCategories: 'Lift-task objects with randomized initialization, according to the subset card.',
+    dataFormat: 'Inspected meta/info.json: LeRobot v3.0, 20 Hz, Parquet and MP4; left/right float32 force grids [12,32]; front/wrist RGB [224,224,3]. Action layout: 9 values, split into 7 manipulator pose-controller values and 2 gripper joint targets. Do not treat this as 9 joint angles.',
+    license: 'This pinned dataset card labels the subset Apache-2.0. This is not a blanket license verification for the full corpus or simulator assets.',
+    licenseUrl: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/README.md',
+    codeLicense: 'Code license not verified; the repository route linked by PyPI returned 404 in this review.',
+    assetLicense: 'Simulator and third-party asset terms require separate review.',
+    generalization: 'Simulated contact is not physical sensor measurement. The card records pre-action observations and omits the final post-action state. Define terminal handling and a held-out episode split before training; the declared train split covers all 200 episodes.',
+    paperUrl: 'https://arxiv.org/html/2610.37799v1',
+    projectUrl: 'https://dexsuiteorg.github.io/',
+    datasetUrl: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/tree/f4be6e95af40843da39cd5a88d8bd736393dd59c',
+    researchUrl: '/news/dexsuite-tactile-simulation-lerobot-data',
+    availability: 'Checked 2026-10-31: public manifest, card, info.json, action_layout.json and collection_qa.json fetched at the pinned revision. Metadata inspected only; no Parquet/video payload download, loader execution, trajectory replay, training or hardware test.',
+    sourceReviewed: '2026-10-31',
+  },
 {
   "institution": [
     "Cornell University EmPRISE Lab and paper collaborators"
