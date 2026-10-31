@@ -1,0 +1,300 @@
+{
+  "reviewedAt": "2026-10-31T09:38:47.877Z",
+  "market": "United States",
+  "language": "English",
+  "cacheRetrievedAt": "2026-10-23T09:58:52.523Z",
+  "refresh": {
+    "endpoint": "/v3/appendix/user_data",
+    "httpStatus": 401,
+    "statusCode": 40100,
+    "cost": 0,
+    "paidCalls": 0,
+    "browserStatus": "signed out"
+  },
+  "overview": [
+    {
+      "keyword": "digit tactile sensor",
+      "estimatedMonthlyVolume": 30,
+      "metricUpdatedAt": "2026-10-19 04:46:09 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 50
+        }
+      ],
+      "trend": {
+        "monthly": 100,
+        "quarterly": -20,
+        "yearly": 0
+      }
+    },
+    {
+      "keyword": "gelsight mini",
+      "estimatedMonthlyVolume": 140,
+      "metricUpdatedAt": "2026-10-20 09:20:59 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 170
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 110
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 110
+        }
+      ],
+      "trend": {
+        "monthly": 55,
+        "quarterly": 55,
+        "yearly": 55
+      }
+    },
+    {
+      "keyword": "lerobot dataset format",
+      "estimatedMonthlyVolume": 40,
+      "metricUpdatedAt": "2026-09-17 09:42:49 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 30
+        }
+      ],
+      "trend": {
+        "monthly": -50,
+        "quarterly": -67,
+        "yearly": -75
+      }
+    },
+    {
+      "keyword": "robot skin",
+      "estimatedMonthlyVolume": 320,
+      "metricUpdatedAt": "2026-10-17 01:41:09 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 260
+        }
+      ],
+      "trend": {
+        "monthly": 0,
+        "quarterly": 23,
+        "yearly": 0
+      }
+    },
+    {
+      "keyword": "robot touch sensor",
+      "estimatedMonthlyVolume": 40,
+      "metricUpdatedAt": "2026-10-15 23:48:40 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 50
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 20
+        }
+      ],
+      "trend": {
+        "monthly": 25,
+        "quarterly": 150,
+        "yearly": 0
+      }
+    },
+    {
+      "keyword": "robotic skin",
+      "estimatedMonthlyVolume": 320,
+      "metricUpdatedAt": "2026-10-17 09:32:34 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 320
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 260
+        }
+      ],
+      "trend": {
+        "monthly": 0,
+        "quarterly": 23,
+        "yearly": 0
+      }
+    },
+    {
+      "keyword": "tactile ai",
+      "estimatedMonthlyVolume": 40,
+      "metricUpdatedAt": "2026-09-17 18:16:43 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 30
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 40
+        },
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 40
+        }
+      ],
+      "trend": {
+        "monthly": -25,
+        "quarterly": -25,
+        "yearly": 0
+      }
+    },
+    {
+      "keyword": "vision language action models",
+      "estimatedMonthlyVolume": 880,
+      "metricUpdatedAt": "2026-10-16 00:59:21 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 720
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 720
+        }
+      ],
+      "trend": {
+        "monthly": 0,
+        "quarterly": 0,
+        "yearly": -18
+      }
+    },
+    {
+      "keyword": "vla model robotics",
+      "estimatedMonthlyVolume": 30,
+      "metricUpdatedAt": "2026-09-17 03:15:00 +00:00",
+      "latestMonths": [
+        {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 20
+        },
+        {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 10
+        },
+        {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 20
+        }
+      ],
+      "trend": {
+        "monthly": 100,
+        "quarterly": 0,
+        "yearly": 0
+      }
+    }
+  ],
+  "related": [
+    {
+      "keyword": "robot learning",
+      "estimatedMonthlyVolume": 720,
+      "metricUpdatedAt": "2026-09-13 02:43:57 +00:00"
+    },
+    {
+      "keyword": "robot teleoperation",
+      "estimatedMonthlyVolume": 480,
+      "metricUpdatedAt": "2026-09-15 13:09:04 +00:00"
+    },
+    {
+      "keyword": "lerobot dataset",
+      "estimatedMonthlyVolume": 170,
+      "metricUpdatedAt": "2026-09-14 09:30:51 +00:00"
+    },
+    {
+      "keyword": "lerobot dataset visualizer",
+      "estimatedMonthlyVolume": 70,
+      "metricUpdatedAt": "2026-09-15 02:32:48 +00:00"
+    },
+    {
+      "keyword": "robot dataset",
+      "estimatedMonthlyVolume": 50,
+      "metricUpdatedAt": "2026-09-16 09:34:52 +00:00"
+    }
+  ],
+  "newResearchEntities": [
+    {
+      "keyword": "Tactus tactile glove",
+      "eventDate": "2026-10-29",
+      "searchVolume": null,
+      "status": "new paper entity; not a verified trending query"
+    },
+    {
+      "keyword": "DexSuite tactile simulation",
+      "eventDate": "2026-10-27",
+      "searchVolume": null,
+      "status": "new paper entity; not a verified trending query"
+    }
+  ]
+}

@@ -3010,15 +3010,15 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: "October 27, 2026: added CLAMP and OpenRoboCare records with access and licensing limits; OAHD and Robot Assisted Feeding remain separate collection links. October 26, 2026: added EgoExplorer gated mini-release scope and separate data/code rights. October 22, 2026: clarified geometry-derived pseudo-contact versus measured tactile data using HuTact as a method example; no dataset record or availability status changed. October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
+    revisionNote: "October 31, 2026: added a pinned DexSuite scripted Lift subset with inspected metadata, action layout, simulated-contact origin and subset-specific license evidence. October 27, 2026: added CLAMP and OpenRoboCare records with access and licensing limits; OAHD and Robot Assisted Feeding remain separate collection links. October 26, 2026: added EgoExplorer gated mini-release scope and separate data/code rights. October 22, 2026: clarified geometry-derived pseudo-contact versus measured tactile data using HuTact as a method example; no dataset record or availability status changed. October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
     title: "Tactile Datasets for Robot Learning: Index",
     description: "Indexed tactile datasets for robot learning: sensor type, embodiment, size, license and download link, with the last-updated date on every record.",
-    introduction: "Tactile dataset refers to a collection of recorded or simulated contact observations, often aligned with images, robot state or actions. This tactile dataset index contains 25 records organized by sensor type, task and license. Each record keeps its source-review date, download route and access limitations; a linked dataset is not necessarily a verified or unrestricted download.",
+    introduction: "Tactile dataset refers to a collection of recorded or simulated contact observations, often aligned with images, robot state or actions. This tactile dataset index contains 26 records organized by sensor type, task and license. Each record keeps its source-review date, download route and access limitations; a linked dataset is not necessarily a verified or unrestricted download.",
     h1: "Tactile Datasets Index: What Each Dataset Contains",
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: structureRelease.modifiedDate,
+    updated: '2026-10-31',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3038,6 +3038,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
+      {
+        id: 'simulation-file-inspection',
+        heading: 'A simulated tactile subset: inspect the action contract',
+        body: ['The DexSuite scripted Lift record now links a pinned public subset with inspected JSON metadata. It separates simulation from physical sensing and the subset from the paper-wide corpus. The data card places observations before actions and omits the final post-action state, so a next-observation loader must handle the terminal boundary explicitly.', 'RoboSkin inspected metadata and the file listing, not trajectory payloads. Before training, check one complete episode, tactile values, time alignment, action semantics and a held-out split. A declared feature shape does not establish successful decoding or policy performance.'],
+        links: [{ label: 'Inspect the DexSuite subset record', href: '/datasets#dataset-dexsuite-lift-scripted' }, { label: 'Read the DexSuite data inspection', href: '/news/dexsuite-tactile-simulation-lerobot-data' }],
+      },
       {
         "id": "choose-by-learning-task",
         "heading": "Choose tactile datasets by the task you want to learn",
@@ -3949,8 +3955,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: structureRelease.modifiedDate,
-    revisionNote: 'October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
+    updated: '2026-10-31',
+    revisionNote: 'October 31, 2026: added human-demonstration glove selection criteria and a source-bounded Tactus example; no new sensor product record or hardware test is claimed. October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3972,6 +3978,18 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Do not select a sensor from spatial resolution alone. Compare contact coverage, shear sensitivity, latency, force range, drift, replaceability, wear, wiring, middleware, and closed-loop task evidence.',
     ],
     sections: [
+      {
+        id: 'human-demonstration-gloves',
+        heading: 'Selecting tactile gloves for human demonstration capture',
+        body: ['A human recording glove needs a separate acceptance test from a robot fingertip sensor. Specify calibration per wearing session, contact units, sensor locations, clock alignment and the mapping from human observations to robot actions.', 'The October 29 Tactus preprint illustrates the distinction between measurement and deployment evidence. Its 11.0 mm fingertip relative-error result uses offline optimization with wrist alignment. Do not use it as an online absolute-position specification. This is a source review, not a product listing or RoboSkin hardware test.'],
+        table: { headers: ['Collection decision', 'Evidence to preserve', 'Acceptance question'], rows: [
+          ['Force measurement', 'Reference load, calibration version and session ID', 'Does reference agreement survive a new wearing session?'],
+          ['Pose tracking', 'Coordinate frames and causal versus offline processing', 'Was this estimate available when the controller needed it?'],
+          ['Time alignment', 'Capture timestamps, missing samples and clock offsets', 'Do contact, image and action observations describe the same event?'],
+          ['Robot transfer', 'Embodiment mapping and matched robot evaluation', 'Does the signal improve the target robot task under a controlled comparison?'],
+        ] },
+        links: [{ label: 'Tactus original manuscript, Tables III and IV', href: 'https://arxiv.org/html/2610.39076v1' }, { label: 'Tactus data-collection evidence and evaluation plan', href: '/news/tactus-tactile-glove-data-collection' }],
+      },
 {
       "id": "optical-comparison",
       "heading": "GelSight vs DIGIT vs TacTip: what should you compare?",

@@ -33,6 +33,186 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tactus-tactile-glove-data-collection',
+    title: 'Tactus tactile glove: reading the evidence before collecting robot learning data',
+    seoTitle: 'Tactus Glove: Touch and Pose Data Evidence',
+    seoDescription: 'Tactus combines tactile and pose sensing. Read its measurement limits, offline tracking distinction and a plan for evaluating human demonstration data.',
+    excerpt: 'A new sensing-glove preprint raises a practical question: what must a human demonstration record preserve before it can support contact-aware robot learning?',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-31', updated: '2026-10-31', sourceDate: '2026-10-29',
+    readTime: '7 min read', category: 'Tactile data collection',
+    image: '/generated/news/tactus-data-evidence.png',
+    imageAlt: 'RoboSkin evaluation diagram separating contact measurement, hand pose, calibration and a later robot transfer test.',
+    imageCaption: 'Original editorial evaluation framework. This is not a Tactus product image, disclosed architecture or experimental result.',
+    evidenceStatus: 'Preprint and measurement-method review; no glove test, dataset download or robot-policy reproduction by RoboSkin.',
+    sourceTitle: 'Tactus: Tactile & Pose Sensing Glove for Natural Dexterity Data Collection',
+    sourceUrl: 'https://arxiv.org/abs/2610.39076v1',
+    sources: [
+      { title: 'Tactus v1: original manuscript, October 29, 2026', url: 'https://arxiv.org/html/2610.39076v1' },
+      { title: 'NIST: measurement process characterization', url: 'https://www.itl.nist.gov/div898/handbook/mpc/section1/mpc1.htm' },
+      { title: 'LeRobotDataset v3.0: schema and episode metadata', url: 'https://huggingface.co/docs/lerobot/lerobot-dataset-v3' },
+    ],
+    technicalFocus: ['tactile glove', 'capacitive tactile sensing', 'hand pose tracking', 'session calibration', 'robot learning data'],
+    content: `# Tactus tactile glove: reading the evidence before collecting robot learning data
+
+Tactus is a sensing-glove preprint from Meta Reality Labs Research, submitted on October 29, 2026. It combines capacitive touch sensing with inertial-assisted hand tracking. The useful question for robot learning is how to qualify a demonstration stream: contact measurements, hand geometry and an eventual robot action each need their own evidence.
+
+This article separates a short source review from RoboSkin's proposed evaluation workflow. We have not used the glove or reproduced its experiments. A public dataset release, reusable implementation and commercial availability were not established by the manuscript review; a paper link should not be treated as a download or purchase route.
+
+## The measurements that need their qualifiers
+
+The [original manuscript](https://arxiv.org/html/2610.39076v1) reports the following. Preserve the measurement definition when comparing another system.
+
+| Reported item | Condition that belongs beside it |
+| --- | --- |
+| 0.59 N minimum detectable force | 95% confidence; the fingertip force comparison used three participants |
+| 11.0 mm fingertip relative error | Offline trajectory optimization with wrist translation alignment; not online absolute position accuracy |
+| Session calibration | Supplements factory calibration to account for wearer and session variation |
+
+Detection threshold, regression error and pose error answer different questions. A low detectable force does not establish equally low error across the working range. A relative hand-pose score does not establish where the hand is in a robot's world frame. These distinctions should govern the experiment before any headline number enters a procurement comparison.
+
+## Start from the decision a recording must support
+
+RoboSkin analysis: a demonstration can serve several purposes. A perception model might need a contact/no-contact label. A manipulation policy needs observations aligned with an action target. A retargeting pipeline needs a mapping between a human hand and a robot hand. A world-model experiment needs a defined prediction horizon and a way to test predicted outcomes. Recording more channels does not automatically satisfy all four contracts.
+
+Write one concrete acceptance question first. For example: can a model trained on these recordings distinguish a stable hold from the beginning of an object movement on a new recording session? That question suggests what to label, which sessions to hold out and which mistakes matter. It is more assessable than asking whether a glove produces high-quality data in general.
+
+If the intended use is imitation learning, define the action representation before collection. Human joint positions, robot joint targets and object-relative contact goals are different targets. A file containing accurate hand positions may still lack the robot commands needed by a particular trainer. Keep the recorded observations intact so a later mapping can be audited or replaced.
+
+## Treat calibration as part of the dataset
+
+The [NIST measurement-process framework](https://www.itl.nist.gov/div898/handbook/mpc/section1/mpc1.htm) distinguishes reference measurements, bias and variability. That is a useful starting point for a glove evaluation: ask both whether readings agree with a reference and whether that agreement survives repeated use. One accurate sample cannot answer the second question.
+
+Our proposed collection record would attach a calibration identifier to every episode. Store the reference instrument, loading geometry, units, fitted coefficients, unloaded baseline and the times of calibration and recording. Record whether a correction was applied during acquisition or later. Preserve raw readings alongside corrected outputs where the acquisition system permits it.
+
+Evaluate repeatability within one wearing session separately from changes after removing and replacing the glove. A fresh fit can alter the measurement conditions without changing the nominal hardware. A model trained across sessions needs to know whether a change in signal came from the object, the wearer or the calibration procedure. Treat a missing calibration record as missing evidence, not as proof that no correction was necessary.
+
+For a small pilot, we would reserve a reference interaction at the beginning and end of each session. Inspect the residuals before pooling sessions. The acceptance limit should come from the intended task: a coarse contact detector and a force-sensitive manipulation target should not inherit the same tolerance simply because they share a sensor.
+
+## Keep causal and offline pose streams separate
+
+Offline processing can use observations that arrive after the instant being estimated. That can be appropriate for curating a demonstration, while an online controller must act using information available at its decision time. Both outputs may be useful, but they belong in separate columns with separate descriptions.
+
+For a robot-control experiment, our recommendation is to retain the causal estimate, its timestamp and its availability time. If an offline trajectory is used as a training label, identify it as a reconstructed target. Otherwise, a model can appear to work with a signal that the deployed controller could never receive at the same moment.
+
+Check coordinate conventions as carefully as error magnitudes. Document the wrist frame, camera frame, object frame and any robot reference frame. Store the transformations and their calibration versions. A hand articulation estimate can be internally consistent while the entire hand is displaced relative to the object. For a contact task, those failure modes should be scored separately.
+
+## An episode contract worth checking before a large collection
+
+The following table is a RoboSkin proposal, not the released Tactus file schema. It makes the evidence needed by a downstream team explicit.
+
+| Field group | Proposed record | Reason to retain it |
+| --- | --- | --- |
+| Identity | Episode, session, glove revision and calibration ID | Prevent accidental mixing of incompatible conditions |
+| Timing | Capture time, clock source, dropped samples and synchronization method | Detect lag and gaps across modalities |
+| Contact | Raw signal, calibrated value, units and sensor-location map | Distinguish a measurement from a derived label |
+| Pose | Coordinate frame, causal/offline flag and tracking validity | Prevent future information or frame mismatch in a controller input |
+| Outcome | Independent task annotation and intervention log | Separate a successful recording from a successful manipulation |
+| Split | Participant, session, object and task grouping | Evaluate the intended kind of generalization |
+
+If exporting to LeRobot, inspect the actual schema rather than assuming that the format supplies these fields. The [v3 documentation](https://huggingface.co/docs/lerobot/lerobot-dataset-v3) describes shared Parquet and video files with episode boundaries resolved through metadata. That storage organization helps locate samples; it does not define a glove's calibration or human-to-robot mapping for you.
+
+## Test transfer as a second experiment
+
+Our suggested pilot has three gates. First, verify measurement integrity against a reference under the intended contact conditions. Second, train and evaluate a bounded perception task using held-out sessions or participants. Third, test whether the resulting signal improves a robot task with a matched no-touch baseline. Passing one gate should not be reported as passing the next.
+
+Keep the robot, objects, training budget and success definition fixed in that last comparison. Include failed attempts and interventions in the denominator. A transfer result should also specify what was changed to bridge the embodiments: contact-location mapping, sensor normalization, action retargeting or additional robot demonstrations. Without that record, it is difficult to tell which part of the system produced an improvement.
+
+For practical planning, the next useful artifact is a small, inspectable episode with its calibration and timing record. Use our [sensor task-selection guide](/sensors#human-demonstration-gloves) to define the measurement requirements, then the [tactile dataset index](/datasets) to compare available records. The companion [DexSuite data review](/news/dexsuite-tactile-simulation-lerobot-data) examines a different evidence stage: inspecting a public simulated tactile dataset before treating it as training-ready.
+`,
+  },
+  {
+    id: 'dexsuite-tactile-simulation-lerobot-data',
+    title: 'DexSuite brings tactile simulation to dexterous learning: what the released data contains',
+    seoTitle: 'DexSuite: Tactile Simulation and LeRobot Data',
+    seoDescription: 'Inspect DexSuite tactile simulation and a pinned LeRobot dataset: metadata, action layout, licensing, benchmark scope and checks needed before training.',
+    excerpt: 'The new DexSuite paper links simulation, teleoperation and evaluation. We inspect one public tactile subset and separate framework claims from verified file metadata.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-10-31', updated: '2026-10-31', sourceDate: '2026-10-27',
+    readTime: '8 min read', category: 'Simulation and datasets',
+    image: '/generated/news/dexsuite-data-evidence.png',
+    imageAlt: 'Editorial diagram separating a simulation framework, a benchmark and a versioned dataset with distinct verification gates.',
+    imageCaption: 'Original RoboSkin.ai evidence map. Counts and performance are not encoded in this conceptual diagram; it is not a DexSuite experiment figure.',
+    evidenceStatus: 'Preprint and official documentation reviewed; one pinned dataset manifest and metadata files inspected. No trajectory replay, training or hardware validation.',
+    sourceTitle: 'DexSuite: An All-in-One Framework for Dexterous Manipulation Across Arms, Hands, and Tasks',
+    sourceUrl: 'https://arxiv.org/abs/2610.37799v1',
+    sources: [
+      { title: 'DexSuite v1 paper, October 27, 2026', url: 'https://arxiv.org/html/2610.37799v1' },
+      { title: 'Official DexSuite project and dataset links', url: 'https://dexsuiteorg.github.io/' },
+      { title: 'DexSuite documentation reviewed October 31, 2026', url: 'https://dexsuite.readthedocs.io/en/latest/' },
+      { title: 'DexSuite package listing and its repository link', url: 'https://pypi.org/project/dexsuite/' },
+      { title: 'Pinned scripted Lift tactile dataset card', url: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/README.md' },
+      { title: 'Pinned dataset schema: meta/info.json', url: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/info.json' },
+      { title: 'Pinned controller action layout', url: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/action_layout.json' },
+      { title: 'LeRobotDataset v3.0 storage and episode indexing', url: 'https://huggingface.co/docs/lerobot/lerobot-dataset-v3' },
+    ],
+    technicalFocus: ['DexSuite', 'tactile simulation', 'LeRobot dataset', 'dexterous manipulation', 'tactile datasets'],
+    content: `# DexSuite brings tactile simulation to dexterous learning: what the released data contains
+
+DexSuite's October 27, 2026 preprint presents a Genesis-based manipulation framework connecting robot configurations, teleoperation, simulated touch and evaluation. For a team looking for a LeRobot dataset with tactile channels, the immediate opportunity is a concrete file inspection: determine which subset contains the required observations and how its recorded actions should be interpreted before starting a training run.
+
+RoboSkin reviewed the paper and official documentation, then fetched the public manifest, dataset card and JSON metadata for one version-pinned scripted Lift subset on October 31. This is a metadata inspection. We did not download its trajectory shards or videos, execute the simulator, replay an episode, train a policy or test real hardware.
+
+## Three scopes that should not be collapsed
+
+The [v1 paper](https://arxiv.org/html/2610.37799v1) reports 30 framework tasks, 10 arms and 12 end-effectors. Its benchmark contains 16 task-embodiment pairs; the associated corpus contains 4,700 successful simulated episodes. Those are three different scopes: configurable environments, evaluated combinations and recorded demonstrations. None is a count of independently verified real-robot deployments.
+
+The [official project page](https://dexsuiteorg.github.io/) separates the corpus into 700 human-teleoperated, 1,200 scripted and 2,800 machine-generated episodes. Human teleoperation here still controls a simulated robot. Preserve collection origin when assembling a training mixture; the word human does not convert a simulated contact signal into a physical measurement.
+
+There is also a version boundary. The [documentation landing page](https://dexsuite.readthedocs.io/en/latest/) displayed 26 tasks, 16 arms and robots, and 11 end-effectors when reviewed. Its taxonomy differs from the paper's. We have not reconciled the package inventory by executing a particular release, so the article keeps each count attached to its source instead of presenting a single supposedly universal total.
+
+## What we could inspect directly
+
+The concrete dataset is [dexsuite/lift_franka_franka_umi_tacticle_scripted](https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/tree/f4be6e95af40843da39cd5a88d8bd736393dd59c), pinned to revision f4be6e95af40843da39cd5a88d8bd736393dd59c. The spelling tacticle is part of the upstream repository identifier and is retained in the link.
+
+Its [card](https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/README.md) describes scripted successful Lift demonstrations with a Franka arm and UMI-style tactile gripper. The license metadata is Apache-2.0. That statement is scoped to this dataset card; it is not a verified license for every simulator asset, package or dataset in the wider project.
+
+| Inspected file | Recorded value | What the inspection establishes |
+| --- | --- | --- |
+| meta/info.json | LeRobot v3.0; 20 Hz; 200 episodes; 15,030 frames | Declared metadata, not an independent recount of trajectory rows |
+| Feature schema | Left and right force_grid arrays: 12 by 32, float32 | The named tactile feature and shape are declared |
+| Feature schema | Front and wrist RGB video: 224 by 224 | Camera shape is declared; video decoding was not tested |
+| meta/action_layout.json | Nine action values: seven manipulator values and two gripper values | Controller segments are explicit; the nine values are not nine robot joint angles |
+| Public file manifest | Parquet data and episode metadata, JSON metadata and MP4 files | File paths exist in the listing; payload completeness remains untested |
+
+The [action-layout file](https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/action_layout.json) names OSCPoseAbsoluteQuatController for the manipulator segment and JointPositionController for the gripper segment. A trainer must preserve that distinction. Matching tensor width alone is insufficient to establish matching action meaning.
+
+## The observation-action boundary is a practical trap
+
+The dataset card states that frame t stores the observation before action t. Its final success flag describes the transition triggered by the last action; the terminal state itself is not stored. That is a small documentation detail with a large consequence for any code that expects every action to have a following observation in the same episode.
+
+RoboSkin analysis: do not silently pair the final action with the first observation of the next episode. Decide explicitly whether the loader drops that transition, represents the next observation as unavailable, or obtains it through a separately validated replay. A padded terminal observation may be useful to a particular model, but it should stay marked as padding rather than recorded evidence.
+
+The [LeRobot v3 documentation](https://huggingface.co/docs/lerobot/lerobot-dataset-v3) explains that episode boundaries are reconstructed from metadata while multiple episodes share storage files. Counting Parquet files therefore cannot recover the episode count. Inspect the episode index and offsets, then check how the chosen loader resolves temporal windows near both ends of a sequence.
+
+## Simulated tactile values need a simulation-specific interpretation
+
+The paper describes FlexiTac-style simulated pads and says tactile observations are included in scripted tactile configurations. It does not justify assuming that every episode in every release has the same contact channels. Our file check narrows that claim to one named subset with explicit tactile features.
+
+For an experiment, record how the simulated quantity maps to the intended input. A spatial array can support a contact-learning study without being interchangeable with an optical fingertip image or a calibrated physical force sensor. Shape compatibility is only the first check. Coordinate frame, normalization, contact law, sample timing and the controller's response all affect what a learned model can use.
+
+Our recommendation is to begin with a channel-level inspection before a full policy comparison. Plot unloaded intervals and contact intervals, compare left and right pads, and check whether the signal changes at the same step as the relevant action and object motion. Those are proposed checks; we have not performed them on the trajectory payload in this review.
+
+## Successful demonstrations are not a measured deployment success rate
+
+A collection selected for successful episodes is a training resource. It cannot by itself estimate the probability of success across all attempted rollouts. That estimate needs the evaluation protocol and an attempt denominator that includes failures and interventions. Keep collection yield, training-set size and policy success in separate fields in a report.
+
+For a fair contact ablation, we would hold the task, embodiment, visual inputs, training episodes and evaluation seeds fixed while changing access to tactile inputs. Compare the same policy family under the same compute budget. Also check whether ground-truth simulator state is available to one model but not another; a state-based baseline and an image-based policy are different observation conditions.
+
+Keep each task's result visible before averaging. A model that improves pickup while failing release may have a different practical value from one that makes a small improvement across the entire sequence. Report the failure stage and intervention rule alongside the final success fraction. This is an evaluation design recommendation, not a new DexSuite result.
+
+## A bounded adoption sequence
+
+First, freeze the dataset revision and the intended simulator/package version. Save the schema, action layout, card and license evidence with the experiment configuration. The public PyPI listing links a repository route that returned 404 during this review, so we do not label that route a verified working source checkout. Public package documentation and verified source access are separate states.
+
+Second, inspect one complete episode with the chosen loader. Confirm lengths, timestamps, action meanings, terminal handling and the tactile feature values. Define a held-out split by episode or the relevant collection grouping before training; random adjacent frames do not form an independent contact evaluation. The inspected metadata declares a train split covering all 200 episodes, so a research split remains an explicit experiment choice.
+
+Third, run a small reproducibility experiment and preserve failures. Only after those checks should a team scale the training mixture or investigate physical transfer. A simulation result can guide that work, but the real robot introduces a separate sensor, controller and contact environment that must be tested.
+
+The [DexSuite entry in our tactile dataset directory](/datasets#dataset-dexsuite-lift-scripted) now preserves this subset's format, license marker and inspection limits. Use the [benchmark guide](/benchmarks) to plan comparisons, and the [Tactus glove evidence review](/news/tactus-tactile-glove-data-collection) for the complementary problem of qualifying physical human-demonstration measurements.
+`,
+  },
+  {
     id: 'neura-neuron-ai-touch-memory-pla',
     title: 'NEURA Neuron AI: what touch, audio and memory add to robot action',
     seoTitle: 'NEURA Neuron AI: Touch, Memory and PLA Evidence',
