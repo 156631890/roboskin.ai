@@ -1133,20 +1133,20 @@ export function buildTactileSensorsJsonLd(
       '@type': 'ListItem',
       position: index + 1,
       item: {
-        '@type': manufacturerOrganizationIds[entry.id] ? 'Product' : 'Thing',
+        '@type': 'Thing',
         '@id': `${pageUrl}#sensor-${entry.id}`,
         name: entry.name,
         description: `${entry.principle}; ${entry.formFactor}. ${entry.evidenceBoundary}`,
         url: entry.projectUrl ?? entry.sourceUrl,
         sameAs: [entry.sourceUrl, entry.projectUrl, entry.codeUrl].filter(Boolean),
-        ...(manufacturerOrganizationIds[entry.id] ? {
-          manufacturer: {
-            '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerOrganizationIds[entry.id]}`,
-          },
-        } : {}),
-        subjectOf: buildEvidenceNote(`${pageUrl}#sensor-${entry.id}`, `${entry.name}: sensor evidence`,
-          `Sensing principle: ${entry.principle}. Form factor: ${entry.formFactor}. Reported signals: ${entry.signals.join(', ')}. Reported rate: ${entry.reportedRate}. Integration: ${entry.integration}. Access: ${entry.access}. Evidence boundary: ${entry.evidenceBoundary}`,
-          [entry.sourceUrl, entry.projectUrl, entry.codeUrl, entry.manufacturerEvidenceUrl].filter((url): url is string => Boolean(url))),
+        subjectOf: {
+          ...buildEvidenceNote(`${pageUrl}#sensor-${entry.id}`, `${entry.name}: sensor evidence`,
+            `Sensing principle: ${entry.principle}. Form factor: ${entry.formFactor}. Reported signals: ${entry.signals.join(', ')}. Reported rate: ${entry.reportedRate}. Integration: ${entry.integration}. Access: ${entry.access}. Evidence boundary: ${entry.evidenceBoundary}`,
+            [entry.sourceUrl, entry.projectUrl, entry.codeUrl, entry.manufacturerEvidenceUrl].filter((url): url is string => Boolean(url))),
+          ...(manufacturerOrganizationIds[entry.id] ? {
+            hasPart: { '@id': `${pageUrl}#sensor-${entry.id}-manufacturer-evidence` },
+          } : {}),
+        },
       },
     })),
   };

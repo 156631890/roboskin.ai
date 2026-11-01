@@ -1,0 +1,31 @@
+{
+  "comparison": "Pre-fix production HTML versus repaired static build",
+  "pages": [
+    {
+      "route": "/robots",
+      "mainContentUnchanged": true,
+      "metadataUnchanged": true,
+      "mainLinksUnchanged": true,
+      "mainAnchorsUnchanged": true
+    },
+    {
+      "route": "/sensors",
+      "mainContentUnchanged": true,
+      "metadataUnchanged": true,
+      "mainLinksUnchanged": true,
+      "mainAnchorsUnchanged": true
+    },
+    {
+      "route": "/organizations",
+      "mainContentUnchanged": true,
+      "metadataUnchanged": true,
+      "mainLinksUnchanged": true,
+      "mainAnchorsUnchanged": true
+    }
+  ],
+  "knowledgeGraphUnchanged": true,
+  "llmsFullUnchanged": true,
+  "seoRoutesUnchanged": true,
+  "seoTopicPagesUnchanged": true,
+  "limit": "Production newsletter is enabled; local default static build disables it. Full-document preservation must be checked against the deployed server build using existing production settings."
+}

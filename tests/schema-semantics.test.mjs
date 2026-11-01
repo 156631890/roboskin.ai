@@ -4,6 +4,7 @@ import test from 'node:test';
 import { validateSchema, graphNodes, vocabulary, isSubtype } from '../scripts/lib/schema-semantics.mjs';
 import { inspectPage, validatePages } from '../scripts/audit-on-page-seo.mjs';
 import { createTypeScriptLoader } from '../scripts/lib/load-typescript.mjs';
+import { validateResearchSchema } from '../scripts/lib/research-schema-policy.mjs';
 const load = createTypeScriptLoader();
 const seo = load('src/lib/seo.ts');
 const topics = load('src/content/seo-topic-pages.ts').seoTopicPages;
@@ -119,28 +120,54 @@ test('dataset attribution preserves actual authors, source institutions, access,
     assert.ok(nodes.some((n) => n['@type'] === 'ListItem' && n.item?.['@id'] === data['@id']));
   }
 });
-test('hardware and research configurations stay distinct with source-bounded manufacturer relationships', () => {
+test('research subjects retain stable identity and source-bounded manufacturer evidence without Product markup', () => {
   for (const robot of robots) {
     const relation = manufacturers.find((r) => r.fromType === 'robot' && r.fromId === robot.id);
-    const entity = node(`https://roboskin.ai/robots#robot-${robot.id}`, relation ? 'Product' : 'Thing');
+    const entity = node(`https://roboskin.ai/robots#robot-${robot.id}`, 'Thing');
     assert.ok(entity);
     assert.ok(entity.subjectOf.text.includes(robot.evidenceBoundary));
     assert.deepEqual(entity.subjectOf.citation, robot.identitySources.map((s) => s.url));
-    assert.equal(entity.manufacturer?.['@id'], relation ? `https://roboskin.ai/organizations#organization-${relation.toId}` : undefined);
+    assert.equal(entity.subjectOf.genre, robot.kind);
+    assert.equal(entity.subjectOf.hasPart?.['@id'], relation ? `${entity['@id']}-manufacturer-evidence` : undefined);
+    assert.equal(entity.manufacturer, undefined);
+    assert.equal(entity.category, undefined);
     assert.equal(entity.isPartOf, undefined);
   }
   for (const sensor of sensors) {
-    const entity = node(`https://roboskin.ai/sensors#sensor-${sensor.id}`, sensorManufacturers[sensor.id] ? 'Product' : 'Thing');
+    const entity = node(`https://roboskin.ai/sensors#sensor-${sensor.id}`, 'Thing');
     for (const value of [sensor.principle, sensor.formFactor, sensor.reportedRate, sensor.access, sensor.evidenceBoundary]) assert.ok(entity.subjectOf.text.includes(value));
     assert.ok(entity.subjectOf.citation.includes(sensor.sourceUrl));
+    assert.equal(entity.subjectOf.hasPart?.['@id'], sensorManufacturers[sensor.id] ? `${entity['@id']}-manufacturer-evidence` : undefined);
   }
   for (const relation of manufacturers) {
-    const entity = nodes.find((n) => n['@type'] === 'Product' && n.subjectOf?.name?.endsWith('manufacturer attribution') && n['@id'].endsWith(`#${relation.fromType}-${relation.fromId}`));
-    assert.equal(entity.manufacturer['@id'], `https://roboskin.ai/organizations#organization-${relation.toId}`);
+    const entity = nodes.find((n) => n['@type'] === 'Thing' && n.subjectOf?.name?.endsWith('manufacturer attribution') && n['@id'].endsWith(`#${relation.fromType}-${relation.fromId}`));
+    assert.ok(entity, `Missing hardware subject ${relation.fromId}`);
+    assert.equal(entity.subjectOf['@id'], `${entity['@id']}-manufacturer-evidence`);
+    assert.equal(entity.subjectOf.about['@id'], entity['@id']);
+    assert.equal(entity.subjectOf.mentions['@id'], `https://roboskin.ai/organizations#organization-${relation.toId}`);
+    assert.ok(node(entity.subjectOf.mentions['@id'], 'Organization') || node(entity.subjectOf.mentions['@id'], 'CollegeOrUniversity'));
     assert.deepEqual(entity.subjectOf.citation, relation.evidenceUrls);
     assert.equal(entity.subjectOf.text, relation.evidenceBoundary);
   }
-  for (const n of nodes) { assert.equal(n.offers, undefined); assert.equal(n.aggregateRating, undefined); }
+  for (const n of nodes) {
+    assert.notEqual(n['@type'], 'Product');
+    for (const field of ['offers', 'aggregateRating', 'review', 'manufacturer', 'price', 'ratingValue']) assert.equal(n[field], undefined);
+  }
+});
+
+test('research catalog policy catches commercial markup even when Schema.org semantics are valid', () => {
+  const bad = { '@graph': [{ '@type': 'ItemList', itemListElement: [{ '@type': 'ListItem', position: 1, item: { '@type': ['Thing', 'https://schema.org/Product'], name: 'Hardware' } }] }] };
+  assert.deepEqual(validateSchema([bad]).errors, []);
+  for (const path of ['/robots', '/sensors/', '/organizations', '/sensors/melexis-tactaxis']) {
+    assert.ok(validateResearchSchema([bad], path).length > 0, path);
+    for (const field of ['offers', 'review', 'aggregateRating', 'price', 'manufacturer', 'category']) {
+      assert.ok(validateResearchSchema([{ '@type': 'Thing', [field]: 'invalid' }], path).length > 0, field);
+    }
+    assert.deepEqual(validateResearchSchema([{ '@type': 'Thing', subjectOf: { '@type': 'CreativeWork', citation: ['https://example.org/source'] } }], path), []);
+  }
+  assert.deepEqual(validateResearchSchema([bad], '/unrelated-commercial-route'), []);
+  const html = `<html><head><title>Directory</title><meta name="description" content="Research"><link rel="canonical" href="https://roboskin.ai/robots"></head><body><main><h1>Robots</h1><script type="application/ld+json">${JSON.stringify(bad)}</script></main></body></html>`;
+  assert.ok(validatePages(new Map([['/robots', inspectPage(html, '/robots')]]), ['/robots']).errors.some((e) => e.includes('commercial/review type')));
 });
 test('model and world-model evidence keeps citations, limitations, resource access and list members', () => {
   for (const entry of [...models, ...worlds]) {

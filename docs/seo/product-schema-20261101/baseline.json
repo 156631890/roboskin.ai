@@ -1,0 +1,256 @@
+{
+  "checkedAt": "2026-11-01T07:17:40.634003+00:00",
+  "deployment": {
+    "commitSha": "3a14b59c1afa033a015f1f725b794f32e998724e"
+  },
+  "scope": "All 210 URLs in the production sitemap; server-returned application/ld+json only, not Next.js hydration data. This is an independent live crawl, not GSC URL samples.",
+  "total": 210,
+  "affectedPages": [
+    {
+      "url": "https://roboskin.ai/organizations",
+      "status": 200,
+      "final": "https://roboskin.ai/organizations",
+      "blocks": 3,
+      "products": [
+        {
+          "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+          "name": "ViTai VT-GF225",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+          "name": "GelSight Mini",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-biotac",
+          "name": "BioTac",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-uskin",
+          "name": "uSkin",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+          "name": "Apptronik Apollo 2",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-unitree-g1",
+          "name": "Unitree G1",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+          "name": "Fourier GR-1",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+          "name": "1X humanoid platform family",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+          "name": "Franka Emika Panda",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+          "name": "Universal Robots UR5e",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+          "name": "Universal Robots UR5",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+          "name": "Trossen ViperX arm family",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+          "name": "Trossen WidowX-250 6DOF",
+          "missing": true
+        }
+      ],
+      "canonical": [
+        "https://roboskin.ai/organizations"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/robots",
+      "status": 200,
+      "final": "https://roboskin.ai/robots",
+      "blocks": 3,
+      "products": [
+        {
+          "id": "https://roboskin.ai/robots#robot-apptronik-apollo-2",
+          "name": "Apptronik Apollo 2",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-unitree-g1",
+          "name": "Unitree G1",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-fourier-gr-1",
+          "name": "Fourier GR-1",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-1x-humanoid-family",
+          "name": "1X humanoid platform family",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-franka-emika-panda",
+          "name": "Franka Emika Panda",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-universal-robots-ur5e",
+          "name": "Universal Robots UR5e",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-universal-robots-ur5",
+          "name": "Universal Robots UR5",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-trossen-viperx-family",
+          "name": "Trossen ViperX arm family",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/robots#robot-trossen-widowx-250-6dof",
+          "name": "Trossen WidowX-250 6DOF",
+          "missing": true
+        }
+      ],
+      "canonical": [
+        "https://roboskin.ai/robots"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors",
+      "blocks": 3,
+      "products": [
+        {
+          "id": "https://roboskin.ai/sensors#sensor-vitai-gf225",
+          "name": "ViTai VT-GF225",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-gelsight-mini",
+          "name": "GelSight Mini",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-biotac",
+          "name": "BioTac",
+          "missing": true
+        },
+        {
+          "id": "https://roboskin.ai/sensors#sensor-uskin",
+          "name": "uSkin",
+          "missing": true
+        }
+      ],
+      "canonical": [
+        "https://roboskin.ai/sensors"
+      ],
+      "noindex": false
+    }
+  ],
+  "errors": [],
+  "sensorDetailPages": [
+    {
+      "url": "https://roboskin.ai/sensors/xela-uskin",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/xela-uskin",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/xela-uskin"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/melexis-tactaxis",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/melexis-tactaxis",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/melexis-tactaxis"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/loomia-smart-skin",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/loomia-smart-skin",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/loomia-smart-skin"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/robotiq-tsf-85",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/robotiq-tsf-85",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/robotiq-tsf-85"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/digit",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/digit",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/digit"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/gelsight-mini",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/gelsight-mini",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/gelsight-mini"
+      ],
+      "noindex": false
+    },
+    {
+      "url": "https://roboskin.ai/sensors/reskin",
+      "status": 200,
+      "final": "https://roboskin.ai/sensors/reskin",
+      "blocks": 2,
+      "products": [],
+      "canonical": [
+        "https://roboskin.ai/sensors/reskin"
+      ],
+      "noindex": false
+    }
+  ]
+}

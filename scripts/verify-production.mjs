@@ -1,5 +1,6 @@
 import { inspectPage } from './audit-on-page-seo.mjs';
 import { entityTypes, validateSchema, vocabulary } from './lib/schema-semantics.mjs';
+import { validateResearchSchema } from './lib/research-schema-policy.mjs';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -491,7 +492,7 @@ if (listedRobotSchemaIds.some((id) => !id) || new Set(listedRobotSchemaIds).size
   throw new Error('/robots ItemList contains missing or duplicate robot IDs');
 }
 const actualRobotSchemaIds = robotSchemaNodes
-  .filter((node) => ['Thing', 'Product'].includes(node['@type'])
+  .filter((node) => node['@type'] === 'Thing'
     && typeof node['@id'] === 'string'
     && node['@id'].startsWith(`${canonicalFor('/robots')}#robot-`))
   .map((node) => node['@id']);
@@ -674,6 +675,7 @@ const seoFailures = [];
 const schemaUnverified = [];
 for (const [pathname, page] of seoDocuments) {
   seoFailures.push(...page.schemaParseErrors.map((reason) => `${pathname}: invalid JSON-LD: ${reason}`));
+  seoFailures.push(...validateResearchSchema(page.schema, pathname));
   const semantics = validateSchema(page.schema, pathname, liveTypes);
   seoFailures.push(...semantics.errors.map((issue) => `${pathname}: ${issue.property}: ${issue.reason}`));
   schemaUnverified.push(...semantics.unverified);
