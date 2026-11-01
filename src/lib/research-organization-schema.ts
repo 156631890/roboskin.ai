@@ -86,16 +86,20 @@ export function buildResearchOrganizationDirectoryJsonLd() {
     }
 
     return {
-      '@type': 'Product',
+      '@type': 'Thing',
       '@id': relation.fromType === 'sensor'
         ? `${canonicalUrl('/sensors')}#sensor-${source.id}`
         : `${canonicalUrl('/robots')}#robot-${source.id}`,
       identifier: source.id,
       name: source.name,
-      manufacturer: organizationReference(relation.toId),
-      subjectOf: buildEvidenceNote(
-        `${canonicalUrl(relation.fromType === 'sensor' ? '/sensors' : '/robots')}#${relation.fromType}-${source.id}`,
-        `${source.name}: manufacturer attribution`, relation.evidenceBoundary, [...relation.evidenceUrls], 'manufacturer-evidence'),
+      // Keep source-bounded attribution as editorial evidence. manufacturer is
+      // a Product-only property, so it must not be copied onto a Thing.
+      subjectOf: {
+        ...buildEvidenceNote(
+          `${canonicalUrl(relation.fromType === 'sensor' ? '/sensors' : '/robots')}#${relation.fromType}-${source.id}`,
+          `${source.name}: manufacturer attribution`, relation.evidenceBoundary, [...relation.evidenceUrls], 'manufacturer-evidence'),
+        mentions: organizationReference(relation.toId),
+      },
     };
   });
 

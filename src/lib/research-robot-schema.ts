@@ -19,25 +19,23 @@ export function buildResearchRobotDirectoryJsonLd() {
     );
 
     return {
-      '@type': manufacturerRelation ? 'Product' : 'Thing',
+      // These are research subjects, not product offers or editorial reviews.
+      '@type': 'Thing',
       '@id': robotCanonicalId(robot),
       identifier: robot.id,
       name: robot.name,
       ...(robot.aliases.length > 0 ? { alternateName: robot.aliases } : {}),
-      ...(manufacturerRelation ? { category: robot.kind } : {}),
       description: robot.description,
       url: robotCanonicalId(robot),
       ...(robot.schemaSameAsUrl ? { sameAs: [robot.schemaSameAsUrl] } : {}),
-      ...(manufacturerRelation ? {
-        manufacturer: {
-          '@id': `${canonicalUrl('/organizations')}#organization-${manufacturerRelation.toId}`,
-        },
-      } : {}),
       subjectOf: {
         ...buildEvidenceNote(robotCanonicalId(robot), `${robot.name}: research evidence`,
           `${robot.description} Evidence boundary: ${robot.evidenceBoundary}`,
           robot.identitySources.map((source) => source.url)),
         genre: robot.kind,
+        ...(manufacturerRelation ? {
+          hasPart: { '@id': `${robotCanonicalId(robot)}-manufacturer-evidence` },
+        } : {}),
       },
       mainEntityOfPage: {
         '@id': `${directoryUrl}#webpage`,

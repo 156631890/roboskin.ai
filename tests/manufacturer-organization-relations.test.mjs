@@ -189,14 +189,14 @@ test('manufacturer JSON-LD resolves to the same canonical organization anchors u
     organizationSchema,
     /return `\$\{canonicalUrl\('\/organizations'\)\}#organization-\$\{organization\.id\}`;/,
   );
-  assert.match(organizationSchema, /manufacturer: organizationReference\(relation\.toId\)/);
+  assert.match(organizationSchema, /mentions: organizationReference\(relation\.toId\)/);
   assert.match(
     robotSchema,
-    /manufacturer:[\s\S]*?'@id': `\$\{canonicalUrl\('\/organizations'\)\}#organization-\$\{manufacturerRelation\.toId\}`/,
+    /hasPart:[\s\S]*?manufacturer-evidence/,
   );
   assert.match(
     sensorSeo,
-    /manufacturer:[\s\S]*?'@id': `\$\{canonicalUrl\('\/organizations'\)\}#organization-\$\{manufacturerOrganizationIds\[entry\.id\]\}`/,
+    /hasPart:[\s\S]*?manufacturer-evidence/,
   );
   assert.match(sensorPage, /researchManufacturingRelations[\s\S]*?\[relation\.fromId, relation\.toId\]/);
   assert.match(sensorPage, /`\/organizations#organization-\$\{organizationId\}`/);

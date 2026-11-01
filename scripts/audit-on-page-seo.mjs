@@ -4,6 +4,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import domino from '@mixmark-io/domino';
 import { entityTypes, validateSchema, vocabulary } from './lib/schema-semantics.mjs';
+import { validateResearchSchema } from './lib/research-schema-policy.mjs';
 
 const origin = 'https://roboskin.ai';
 const cleanPath = (value) => new URL(value, origin).pathname.replace(/\/$/, '') || '/';
@@ -81,6 +82,7 @@ export function validatePages(pages, sitemapPaths, assetPaths = new Set(), redir
     }
 
     for (const reason of page.schemaParseErrors ?? []) errors.push(`${pathname}: invalid JSON-LD: ${reason}`);
+    errors.push(...validateResearchSchema(page.schema ?? [], pathname));
     const semantics = validateSchema(page.schema ?? [], pathname, allTypes);
     schemaIssues.push(...semantics.errors);
     schemaUnverified.push(...semantics.unverified);

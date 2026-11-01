@@ -96,11 +96,11 @@ test('robot directory is indexable, structured, and internally connected without
   assert.match(schema, /numberOfItems: researchRobotEntries\.length/);
   assert.match(schema, /robot\.schemaSameAsUrl \? \{ sameAs: \[robot\.schemaSameAsUrl\] \}/);
   assert.match(schema, /researchManufacturingRelations\.find/);
-  assert.match(schema, /manufacturer:[\s\S]*?'@id': `\$\{canonicalUrl\('\/organizations'\)\}#organization-\$\{manufacturerRelation\.toId\}`/);
+  assert.match(schema, /hasPart:[\s\S]*?manufacturer-evidence/);
   assert.match(schema, /buildResearchRobotWebPageJsonLd/);
   assert.match(schema, /mainEntity:[\s\S]*?robot-directory/);
   assert.doesNotMatch(schema, /robot\.officialUrl \? \{ sameAs/);
-  assert.match(schema, /manufacturerRelation \? 'Product' : 'Thing'/);
+  assert.doesNotMatch(schema, /'@type': 'Product'|manufacturer:|category:/);
   assert.doesNotMatch(schema, /Offer|AggregateRating/);
   assert.match(seo, /'\/robots': \{[\s\S]*?index: true/);
   assert.match(protectedUrls, /https:\/\/roboskin\.ai\/robots/);
