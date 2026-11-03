@@ -65,13 +65,13 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | inventory only; claim-by-claim review pending | 1463 | 6 |
 | /research/feelworld-visuo-tactile-world-model-2026 | inventory only; claim-by-claim review pending | 975 | 9 |
 | /research/ht-bench-full-hand-tactile-representations-2026 | inventory only; claim-by-claim review pending | 1453 | 16 |
-| /research/sparsh-x-multisensory-touch-representations-2025 | learning-study evidence review complete; production verification pending | 887 | 4 |
-| /research/mitas-multi-resolution-tactile-imitation-learning-2026 | learning-study evidence review complete; production verification pending | 739 | 5 |
-| /research/dream-tac-tactile-world-action-model-2026 | learning-study evidence review complete; production verification pending | 1172 | 15 |
+| /research/sparsh-x-multisensory-touch-representations-2025 | rewritten and production verified in PR107 | 887 | 4 |
+| /research/mitas-multi-resolution-tactile-imitation-learning-2026 | rewritten and production verified in PR107 | 739 | 5 |
+| /research/dream-tac-tactile-world-action-model-2026 | rewritten and production verified in PR107 | 1172 | 15 |
 | /research/open-source-magnetic-tactile-calibration-2024 | rewritten and production verified in PR105 | 697 | 6 |
 | /research/eflesh-customizable-magnetic-touch-sensing-2025 | rewritten and production verified in PR105 | 718 | 4 |
-| /research/freetacman-robot-free-visuotactile-data-collection-2025 | learning-study evidence review complete; production verification pending | 842 | 10 |
-| /research/humanoid-visual-tactile-action-dataset-2025 | learning-study evidence review complete; production verification pending | 1375 | 7 |
+| /research/freetacman-robot-free-visuotactile-data-collection-2025 | rewritten and production verified in PR107 | 842 | 10 |
+| /research/humanoid-visual-tactile-action-dataset-2025 | rewritten and production verified in PR107 | 1375 | 7 |
 | /research/tactile-robotics-outlook-research-landscape-2025 | rewritten and production verified in PR104 | 668 | 1 |
 | /research/wet-slippage-bionic-fingertip-eskin-2026 | rewritten and production verified in PR104 | 801 | 2 |
 | /research/spiking-touch-encoding-large-area-eskin-2026 | rewritten and production verified in PR104 | 951 | 2 |
@@ -84,11 +84,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/graphene-liquid-metal-3d-force-2026 | rewritten and production verified in PR105 | 1199 | 9 |
 | /research/single-material-soft-robotic-skin-2025 | inventory only; claim-by-claim review pending | 1204 | 6 |
 | /research/full-hand-tactile-sensing-2025 | rewritten and production verified in PR105 | 1228 | 11 |
-| /research/temperature-pressure-bimodal-2025 | inventory only; claim-by-claim review pending | 1119 | 3 |
+| /research/temperature-pressure-bimodal-2025 | abstract-bounded material review complete; production verification pending | 1119 | 3 |
 | /research/event-based-opto-tactile-2025 | rewritten and production verified in PR105 | 1138 | 3 |
-| /research/self-healing-multimodal-eskin-2026 | inventory only; claim-by-claim review pending | 1084 | 2 |
+| /research/self-healing-multimodal-eskin-2026 | abstract-bounded material review complete; production verification pending | 1084 | 2 |
 | /research/ros2-kilted-tactile-pipeline-2026 | inventory only; claim-by-claim review pending | 1363 | 10 |
-| /research/large-area-flexible-tactile-arrays-2025 | inventory only; claim-by-claim review pending | 1168 | 6 |
+| /research/large-area-flexible-tactile-arrays-2025 | abstract-bounded material review complete; production verification pending | 1168 | 6 |
 | /news/tactus-tactile-glove-data-collection | inventory only; claim-by-claim review pending | 1479 | 5 |
 | /news/dexsuite-tactile-simulation-lerobot-data | inventory only; claim-by-claim review pending | 1588 | 9 |
 | /news/neura-neuron-ai-touch-memory-pla | inventory only; claim-by-claim review pending | 1689 | 3 |
@@ -242,3 +242,7 @@ Four established guides retain their substantive modules while adding diagnostic
 ## Learning-study evidence pass
 
 Four generic interpretations are replaced with study-specific metrics, interfaces and evaluation decisions. The existing detailed GIST interpretation is retained with a small evaluation-unit addition. Source dates, original page publication dates, anchors, images and internal routes remain. Prior four-guide PR106 verification is complete; these five pages require their own production checks. The full-site queue remains active.
+
+## Material-study evidence pass
+
+Three existing interpretations distinguish official abstract-level evidence from original engineering evaluation frameworks. Source access limits are explicit. No device performance is inferred from unread methods. Original URLs, publication dates, H1/H2 anchors, illustrations and source routes remain. Single-material hydrogel full-method verification remains pending. The full-site queue remains active.

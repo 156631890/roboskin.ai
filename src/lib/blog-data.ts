@@ -3924,64 +3924,68 @@ Do not infer complete surface coverage, human-equivalent touch, calibrated force
       'A practical brief on temperature and pressure bimodal tactile sensing, signal decoupling, and why crosstalk matters for robot skin.',
     content: `# Temperature/pressure bimodal sensing and the crosstalk problem
 
-**Updated technical brief - May 2026**
+**Updated technical brief - November 3, 2026**
 
 ## Why this source matters
 
-Human skin does not sense only pressure. It responds to force, texture, temperature, pain, vibration, and spatial contact patterns. Electronic skin research often tries to reproduce part of that multimodal behavior. The RSC Journal of Materials Chemistry C review on biological skin inspired temperature/pressure bimodal tactile sensing is useful because it focuses on a practical problem: sensing more than one stimulus is valuable only when the signals can be separated reliably.
+A two-output sensor does not automatically provide two independent physical measurements. For robot skin, the useful question is whether pressure and temperature can be distinguished under the combinations the robot will encounter, with known error and delay.
 
-For robot skin, temperature and pressure are a natural pair. Pressure tells the robot how it is contacting an object. Temperature can indicate environmental conditions, human contact, object state, or safety constraints. But combining both measurements in a soft sensor is not automatically useful. If temperature changes the pressure signal, or pressure changes the temperature signal, the robot may make the wrong inference.
+The cited Journal of Materials Chemistry C review was first published on August 15, 2025. Its public abstract describes temperature/pressure sensing through material selection, device design and system integration. The full review text was not accessible in this pass. This article therefore provides an explicitly editorial evaluation framework, not a device ranking or a claim that every item below was validated by the review. [Publisher abstract and publication record](https://pubs.rsc.org/en/Content/ArticleLanding/2025/TC/D5TC02514A).
 
 ## Core idea
 
-Crosstalk is the central issue. Crosstalk happens when one stimulus affects the channel intended for another stimulus. In a bimodal sensor, pressure may change electrical resistance, capacitance, or geometry. Temperature may also change material properties or electrical response. If both effects appear in the same measurement channel, the system has to separate them before the data can be trusted.
+Crosstalk means that a change in one physical input also affects the observation used to estimate another. A correction model must distinguish those effects rather than merely produce two named outputs. A useful first step is to document the measurement path: physical contact, transducer response, raw channel, compensation and reported estimate.
 
-| Problem | Example in e-skin | Why it matters |
+Consider a hypothetical sensor with two electrical channels that both change almost identically with heating and compression. Two channels are available, but separating the causes can remain unstable: a small observation error may produce a large change in the estimated inputs. Adding a second output label does not solve that problem. The illustration is conceptual, not experimental data from the cited devices.
+
+| Observed behavior | Possible ambiguity | Evidence needed |
 | --- | --- | --- |
-| Pressure-temperature crosstalk | Heat shifts the pressure baseline | Grip force may be misread |
-| Mechanical drift | Repeated compression changes material response | Calibration becomes unstable |
-| Slow thermal response | Temperature lags behind contact events | Control loops may use stale data |
-| Mixed signals | One channel responds to multiple stimuli | Classification becomes unreliable |
+| Pressure estimate changes during warming at fixed load | Thermal response is entering the pressure estimate | Load reference and temperature history |
+| Temperature estimate changes during compression at fixed thermal conditions | Mechanical response is entering the thermal estimate | Contact geometry and thermal reference |
+| Output slowly returns after unloading | Recovery, drift or compensation history | Unloaded baseline over a declared interval |
+| Separate-input tests pass but combined inputs fail | The correction does not describe the joint operating range | Held-out combined-condition tests |
 
 ## What good bimodal sensing should clarify
 
-A useful bimodal tactile sensor should make clear what is measured, how the signals are separated, and what the output means. If the output is two raw channels, downstream software must perform interpretation. If the output is already decoupled into pressure and temperature estimates, the article or datasheet should explain the assumptions behind that decoupling.
+State the quantity and location of each reference. Object temperature, contact-surface temperature and an internal sensor reading are different observations. Likewise, pressure and total normal force require a defined contact area to be compared. The [optical-versus-capacitive comparison](/guides/optical-vs-capacitive-tactile-sensors#compare-the-same-quantity) explains that distinction without treating arithmetic as sensor evidence.
 
-This matters because tactile AI models can learn shortcuts. A model trained in one lab setup may associate temperature drift with pressure events if the dataset is not balanced. A sensor that looks accurate in controlled tests may fail when a robot moves from a cool lab bench to a warm factory cell or outdoor environment.
+A calibration record should identify the tested input combinations and the conditions excluded from fitting. If every warm sample also has a high load, a learned model can use that association without demonstrating that it separates the causes. Independent variation and held-out combinations make the intended inference testable.
 
 ## Reader value
 
-The value of this source is the warning it gives to anyone writing or evaluating multimodal sensor claims. More modalities do not automatically mean better robot skin. A pressure-only sensor with stable calibration may be more useful than a pressure-temperature sensor whose channels interfere with each other. The right question is whether the second modality improves the task after decoupling, calibration, and delay are considered.
+Use a small calibration matrix to organize the evidence before comparing headline sensitivity. The following is a proposed experiment structure; it contains no measured result and prescribes no universal operating range.
 
-For a practical robotics team, temperature data should be tied to a decision. If the robot needs to avoid hot objects, detect human contact, handle food, monitor prosthetic comfort, or classify material state, thermal sensing has a clear role. If the task is fast grasp stabilization, thermal data may be slower background context. This distinction keeps the article from overstating the technology while still explaining why the research matters.
+| Proposed comparison | Hold fixed | Vary | Report |
+| --- | --- | --- | --- |
+| Mechanical response | Thermal condition and contact geometry | Applied load | Reference error, loading/unloading behavior |
+| Thermal response | Mechanical load and mounting | Thermal condition | Reference error and settling behavior |
+| Combined response | Declared fixture and processing | Both inputs independently | Residual cross-sensitivity and uncertainty |
+| Transfer check | Evaluation protocol | Sensor unit, mounting or contact material | Error before and after recalibration |
 
-| Use case | Pressure value | Temperature value |
-| --- | --- | --- |
-| Dexterous grasping | Contact force and slip context | Usually secondary or slow context |
-| Human contact safety | Contact intensity | Warmth can support contact classification |
-| Food or medical handling | Handling force | Temperature may affect safety decisions |
-| Material identification | Shape and deformation clues | Thermal transfer may add classification signal |
+Choose ranges from the actual task and supported device conditions. Do not turn this table into a qualification claim simply because every cell contains a number. The reference quality, split rule and acceptance criterion must also be visible.
 
 ## Evaluation checklist
 
-- Are pressure and temperature measured through separate mechanisms or shared material response?
-- Does the source show decoupling across a range of pressures and temperatures?
-- Is the response time fast enough for the robot task?
-- Does repeated loading change the baseline?
-- Are calibration procedures described clearly?
-- Does the sensor work on curved or moving surfaces, or only as a flat sample?
+- Are the outputs raw electrical readings or calibrated physical estimates?
+- Where are the pressure and thermal references measured?
+- Which combined conditions were used for calibration, and which were held out?
+- Does the evaluation include loading history, baseline recovery and repeated contacts?
+- What happens outside the tested range or when a reference channel is missing?
+- Which delay is reported: sensing, estimation, communication or controller response?
+
+Keep these answers with the [tactile calibration record](/guides/tactile-sensor-calibration). A model revision or changed protective cover can alter the measurement path even when the displayed units stay the same. The [sensor directory](/sensors) can help identify documented sensing modalities; confirm the actual measured quantity before treating two entries as comparable.
 
 ## Robot skin implications
 
-Temperature/pressure bimodal sensing is most useful when temperature affects the task. A warehouse gripper handling cardboard may not need thermal sensing. A medical assistive device, prosthetic cover, food-handling robot, or human-contact safety surface may benefit from knowing both contact force and thermal condition. The value depends on the task.
+Tie each estimated quantity to a decision. Temperature may be relevant to a task's material-state question while pressure supports a contact-load decision. The required update timing and error tolerance need not be identical. An application should define them separately rather than assign both channels the fastest advertised rate.
 
-For humanoid robots, temperature can also help distinguish object categories or human contact scenarios, but it should not be oversold. Thermal sensing is usually slower than pressure sensing, and soft materials may introduce delay. A robot controller must know whether a thermal reading is immediate enough for control or better suited for monitoring and classification.
+For a robot integration, also specify behavior when the estimate is uncertain: flag it, stop using it for that decision or enter a separately validated fallback. That behavior is a controller design requirement, not a property implied by the phrase “bimodal skin.” The [tactile manipulation guide](/tactile-manipulation) places the sensor output within the wider execution loop.
 
 ## What not to infer
 
-The RSC review is a research and survey source, not a universal product recommendation. It should not be used to claim that any particular robot skin can measure temperature and pressure accurately in all environments. The correct conclusion is more disciplined: multimodal sensing is promising, but decoupling, calibration, response time, and drift must be evaluated together.
+This review does not establish a clinical, burn-prevention or human-contact safety capability. It also does not supply a matched product benchmark. The public source supports the research topic; a device-specific accuracy, durability or response claim requires the relevant methods and results.
 
-A multimodal e-skin evaluation should not merely list "pressure and temperature" as features. It must explain crosstalk, decoupling, and validation to show whether the modalities are genuinely useful together.
+RoboSkin.ai did not test hardware or reproduce a decoupling model. The decision framework above is intended to make the missing evidence explicit and help a team request a useful validation record.
 
 ## Source
 
@@ -3989,8 +3993,8 @@ A multimodal e-skin evaluation should not merely list "pressure and temperature"
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-22',
-    updated: '2026-05-14',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Multimodal Sensing',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'RSC temperature/pressure bimodal tactile sensing review',
@@ -4087,66 +4091,68 @@ This paper does not establish a microsecond robot control loop, a universal powe
       'A conservative guide to self-healing e-skin claims, multimodal sensing, damage recovery, and what must be validated before deployment language is credible.',
     content: `# Self-healing multimodal e-skin: useful direction, careful claims
 
-**Updated technical brief - May 2026**
+**Updated technical brief - November 3, 2026**
 
 ## Why this source matters
 
-Robot skin is exposed. It touches objects, bends around joints, scrapes against surfaces, and may be cut, compressed, contaminated, or replaced. That makes self-healing e-skin an attractive research direction. If a sensor layer can recover mechanical and electrical function after damage, it could reduce maintenance and make soft robotic surfaces more practical.
+For a robot skin, repair matters only if the surface can return to the work it is expected to do. A closed cut, restored electrical continuity and a calibrated sensing output are different outcomes. The relevant comparison is the post-repair measurement and service process, not the appearance of the repaired sample alone.
 
-The cited Chemical Engineering Journal article is useful as a research signal because it connects self-healing material behavior with multimodal sensing. For RoboSkin.ai, the more important point is not that "self-healing skin exists." The important point is that healing claims need careful boundaries.
+Sungkyunkwan University's official record identifies the cited Chemical Engineering Journal article as volume 528, article 172404, with an issue publication date of January 15, 2026. Its abstract describes stacked polymer and liquid-metal layers, with tactile, pressure, nociceptive and thermal sensing. The accessible record is an abstract, not the complete experimental protocol. [Institutional publication record](https://pure.skku.edu/en/publications/a-self-healing-e-skin-for-quadruple-modal-sensing/).
 
 ## Core idea
 
-Self-healing e-skin usually involves materials that can restore some structure or electrical pathway after damage. That may involve reversible bonds, polymer networks, liquid metal pathways, conductive fillers, or layered architectures. Multimodal sensing means the same skin may respond to more than one stimulus, such as pressure, strain, temperature, or damage.
+The authors describe triboelectric and capacitive sensing for tactile and pressure signals, with optical waveguide readout of mechanoluminescent and thermochromic responses. They report functional recovery after healing. This pass did not verify the underlying healing-time, temperature-range or repeated-damage data, so it does not quote numerical recovery performance. The term “nociceptive” here concerns a stimulus-response design; it does not establish subjective pain or validated human injury prevention. [Author abstract](https://pure.skku.edu/en/publications/a-self-healing-e-skin-for-quadruple-modal-sensing/).
 
-Those ideas are valuable, but they also multiply validation questions. A material can look healed visually while its electrical signal remains shifted. A sensor can recover conductivity while calibration is no longer reliable. A sample can heal under warm, clean lab conditions but fail in a dirty, cold, or mechanically loaded robot environment.
+For integration, separate four acceptance questions:
 
-| Claim type | What should be checked | Why it matters |
+| Recovery layer | Proposed comparison | Why another layer is insufficient |
 | --- | --- | --- |
-| Mechanical healing | Tensile strength, flexibility, surface integrity | The skin must still survive motion |
-| Electrical healing | Conductivity and signal continuity | The sensor must still produce data |
-| Sensing recovery | Baseline, sensitivity, drift, crosstalk | The data must remain interpretable |
-| Operational recovery | Healing time and required conditions | The robot needs a realistic service path |
+| Mechanical | Intact and repaired samples under the same declared loading | Electrical continuity does not establish strength |
+| Electrical | Baseline, continuity and noise before and after repair | A visible closed cut does not establish a stable signal |
+| Sensing | Reference-input error, drift and cross-sensitivity | Some response to touch does not establish calibration |
+| Operational | Service steps, elapsed downtime and restart checks | A laboratory recovery image does not establish a field procedure |
 
 ## Why careful claims matter
 
-Self-healing is easy to overstate. A public page might say a skin "repairs itself," but that phrase hides many details. What kind of damage? How deep? How long does recovery take? Does it require heat, pressure, water, light, or rest? How many cycles can it survive? Does the repaired area match the original calibration?
+A recovery percentage needs a denominator and a named property. “Full recovery” of one electrical measurement cannot be silently extended to mechanical strength, every sensing channel or repeated service life. Retain the intact value, damaged value, recovered value, measurement conditions and uncertainty for each property that matters.
 
-Repairability depends on the damage mode, healing conditions and recovery of the sensing signal. A mechanically closed cut does not establish restored calibration or service life. Self-healing e-skin remains an application-specific research direction.
+The damage description is equally important. A clean cut, worn surface, detached bond and contaminated connector are different failures. If only one was tested, state that scope. Do not infer that a material-level response restores the entire assembled sensor, including its wiring, attachment and protective layers.
 
 ## Reader value
 
-The practical contribution of this source is a vocabulary for separating recovery claims. A material can heal mechanically, electrically, or functionally, and those are not the same thing. Functional recovery is the most important for robot skin because the robot does not care whether the surface looks repaired if the pressure, strain, or temperature signal has shifted beyond calibration.
+Compare service strategies using the same task requirement. The table below is an editorial planning tool, not an economic analysis or a reported experiment.
 
-For a robotics reader, the important comparison is service strategy. A self-healing skin might reduce small-damage downtime, but a modular replaceable skin might be simpler for industrial maintenance. A hybrid approach may also make sense: use materials that recover from minor scratches while designing larger damaged sections to be replaced. That kind of deployment reasoning is more credible than presenting self-healing as a magic property.
-
-| Recovery question | Strong evidence would show | Weak evidence would show |
+| Decision | Evidence needed before adoption | Result that would change the plan |
 | --- | --- | --- |
-| Mechanical recovery | Strength and flexibility after repeated damage | A visual close-up of a healed cut |
-| Electrical recovery | Conductivity and signal continuity after healing | One conductivity reading without cycling |
-| Sensing recovery | Baseline and sensitivity after repair | Contact still produces some response |
-| Service recovery | Practical healing time and conditions | Healing only under ideal lab conditions |
+| Leave a damaged surface in service | A validated operating envelope for that damage state | Unbounded output error or continued damage growth |
+| Wait for material recovery | Supported recovery conditions and a restart test | Recovery requires conditions unavailable at the site |
+| Replace a module | Compatible spare, replacement steps and recalibration record | Replacement changes the observation enough to invalidate the model |
+| Repair then recalibrate | Evidence that the repaired assembly can meet the task criterion | Repeated repairs no longer meet the criterion |
+
+A team can compare these paths without inventing a universal winner. A repairable material may still need a replaceable assembly. A replaceable assembly may still require downtime, calibration and policy checks. Record those costs and responsibilities for the actual installation.
 
 ## Evaluation checklist
 
-- What damage was tested: cut, puncture, abrasion, bending fatigue, or compression?
-- Was recovery measured mechanically, electrically, or as sensing performance?
-- How long did healing take, and under what conditions?
-- How many damage-heal cycles were tested?
-- Did the source report calibration shift after healing?
-- Is the sensing layer still usable on curved, moving, or attached surfaces?
+- Describe the damage location, size and mechanism, including the affected layers.
+- State any external energy, contact, rest or environmental conditions required for recovery.
+- Retain intact, damaged and recovered measurements from the same declared protocol.
+- Recheck every sensing modality used by the application, including cross-sensitivity.
+- Separate one recovery event from repeated damage-and-recovery performance.
+- Define a return-to-service criterion and what happens when it is not met.
+
+The [calibration guide](/guides/tactile-sensor-calibration) helps define the measurement record. The [optical tactile maintenance guide](/guides/optical-tactile-sensor-maintenance) illustrates a different, manufacturer-documented replacement path; it is not a self-healing procedure.
 
 ## Deployment implications
 
-For a robot hand or gripper, repair is only one part of serviceability. The skin must remain attached, safe, cleanable, and replaceable. If a damaged surface heals but becomes sticky, swollen, electrically noisy, or mechanically weak, the robot may still need service. A useful deployment discussion should include both healing and maintenance.
+Plan the handoff from material recovery to system restart. Someone must determine whether the repaired surface, attachment, readout and derived estimates still meet the intended conditions. A policy may see a changed observation distribution after repair even if the raw signal is continuous. Preserve pre-damage references so that change can be investigated.
 
-Multimodal sensing makes the problem harder. A sensor that measures pressure and temperature may heal mechanically but change its temperature response. A damage sensor may detect cuts but interfere with pressure readings. The more signals a skin claims, the more carefully crosstalk and recovery must be documented.
+For multimodal skin, avoid collapsing all results into one pass/fail label. A pressure estimate may recover differently from an optical temperature response. The [bimodal sensing review](/research/temperature-pressure-bimodal-2025) explains why combined-condition checks matter when several stimuli influence the outputs.
 
 ## What not to infer
 
-The cited source should not be read as proof that self-healing e-skin is ready for all robot skin applications. It supports a research direction and a vocabulary. It does not remove the need for application-specific testing.
+The accessible abstract does not establish a purchasable robot skin, a maintenance-free system or certified injury prevention. We have not independently tested the material, verified a production service interval or reproduced the reported experiments. Missing full-method evidence remains a limitation of this review, not a reason to invent a numerical specification.
 
-For RoboSkin.ai, this article sets a policy for language: use "self-healing" only with context. Say what heals, what is measured, and what conditions are required. Avoid universal claims about durability, repair, or commercial readiness unless a public source explicitly supports them.
+Use “self-healing” with the property, damage and conditions attached. That makes a research result useful for an engineering decision while preserving the difference between an interesting material response and a validated robot system.
 
 ## Source
 
@@ -4154,8 +4160,8 @@ For RoboSkin.ai, this article sets a policy for language: use "self-healing" onl
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-20',
-    updated: '2026-09-13',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Soft E-Skin',
     image: '/generated/research-self-healing-2025.svg',
     sourceTitle: 'Chemical Engineering Journal self-healing e-skin article',
@@ -4277,71 +4283,75 @@ For RoboSkin.ai, the editorial point is clear: serious robot skin content should
       'A deployment-focused article on large-area tactile arrays, curved-surface coverage, adjustable resolution, slip detection, and manufacturing tradeoffs.',
     content: `# Large-area flexible tactile arrays for curved robot surfaces
 
-**Updated technical brief - May 2026**
+**Updated technical brief - November 3, 2026**
 
 ## Why this source matters
 
-Many tactile sensor demonstrations begin with a small flat sample. Robot skin rarely ends there. A useful robotic surface may need to cover a curved gripper, palm, forearm, torso panel, prosthetic socket, or assistive device. Large-area flexible tactile arrays are relevant because they move the discussion from isolated sensing pixels to coverage, routing, durability, and manufacturability.
+A larger sensing sheet does not automatically produce more usable robot coverage. The engineering question is which contacts remain measurable after installation, routing, protective covering and service. Contact location, force estimation, slip interpretation and physical fit require different evidence.
 
-The cited ACS Applied Electronic Materials article is useful as a research signal because it connects skin-inspired flexible tactile sensing with larger surface coverage and robotic electronic skin. For RoboSkin.ai, the key editorial issue is how to evaluate scale. A sensor that works as a square sample is not automatically practical as a robot skin.
+The ACS Applied Electronic Materials article was published online on September 17, 2025 and appeared in the October 14 issue. Its public abstract describes a rhombic-grid electrode arrangement with adjustable resolution and demonstrations on curved surfaces. This pass verified the publisher's public abstract and metadata, not the full experimental methods. [Publisher record](https://pubs.acs.org/doi/10.1021/acsaelm.5c01200).
 
 ## Core idea
 
-Large-area tactile arrays must balance coverage, resolution, wiring, cost, and mechanical fit. Higher resolution can reveal more detailed contact patterns, but it also increases channel count, data volume, and calibration effort. Larger coverage helps detect unexpected contact, but it may make repair and replacement harder.
+The abstract reports a minimum detectable force of 0.01 N, paired with 68 Pa, and retained sensing after 10,000 loading–unloading cycles. It also describes direction and velocity measurement for objects moving across the surface. These are author-reported results with protocol details outside the accessible abstract. They do not establish force accuracy, an arbitrary-contact threshold, installed lifetime or a complete robot slip-control loop. [Abstract](https://pubs.acs.org/doi/10.1021/acsaelm.5c01200).
 
-| Design choice | Benefit | Tradeoff |
+Use separate acceptance criteria for the properties that matter:
+
+| Property | Define before comparison | Do not substitute |
 | --- | --- | --- |
-| High spatial resolution | Better contact pattern detail | More channels and data |
-| Large surface coverage | Detects contact across more robot area | More routing and attachment complexity |
-| Flexible substrate | Fits curved surfaces | Durability and drift must be tested |
-| Modular tiles | Easier replacement | Seams may create blind spots |
+| Coverage | Installed active surface and relevant contact locations | Total sheet area |
+| Resolution | A contact feature and a measured discrimination criterion | Nominal electrode density |
+| Force output | Reference load, area, direction and error measure | A detection threshold |
+| Timing | Acquisition and decision boundaries under the full readout load | A rate measured on a smaller configuration |
 
 ## Curved surfaces change the problem
 
-Flat-sample testing is useful for material characterization, but curved robot surfaces introduce new failure modes. A sensor may stretch on the outside of a curve and compress on the inside. Adhesives may fail at edges. Cables may pull during joint motion. A protective layer may change sensitivity. Cleaning and abrasion may matter more than peak sensitivity.
+Treat mounting as a change to the measurement system. Record the surface geometry, attachment, pre-strain, cable route and cover. Repeat the reference contacts after installation rather than assuming that a flat-sample result transfers unchanged.
 
-This is why large-area robot skin should be evaluated as a mechanical system, not only an electrical sensor. Mounting, strain relief, connector placement, replaceable sections, and surface protection can determine whether the skin is useful.
+A useful geometry check includes the central region, edges, seams and locations affected by joint motion. Mark inaccessible or mechanically protected regions as such; they should not disappear from the coverage map. If an object can contact one of those regions during the task, the controller needs a declared interpretation of missing contact information.
+
+The [OpenTac interpretation](/research/opentac-custom-tactile-skins-readout-limits-2026) discusses a different manufacturing route and why a flexible substrate should not automatically be treated as stretchable. That distinction is useful when defining a mounting trial, but its results should not be transferred to the ACS design.
 
 ## Slip and gesture context
 
-Large-area arrays can support more than touch detection. If the array captures contact movement over time, it may help estimate slip direction, sliding velocity, or gesture-like interactions. For grippers, slip direction can guide grip adjustment. For human-robot interaction surfaces, contact movement can help distinguish accidental bumps from intentional touch.
+Motion across a sensor and incipient loss of a robot grasp are different events. A moving contact pattern may be informative, but a slip detector needs an independent reference for the event it is intended to detect. State whether the output estimates location, sliding direction, velocity or a threshold decision.
 
-But these use cases require temporal data quality. It is not enough for the sensor to detect a contact point. The system must track how that point moves, how quickly, and whether the pattern is reliable under repeated loading.
+For a controller, record the detection delay and the action that followed. A correct retrospective classification is not evidence that the robot reacted soon enough. The [slip-detection guide](/guides/slip-detection-robot-hand) separates event labeling, detector evaluation and physical recovery.
 
 ## Reader value
 
-The value of this source is that it forces a scale discussion. Large-area robot skin is not just a bigger sensor. It changes how engineers think about routing, maintenance, replacement, data compression, and coverage gaps. A small pad can be judged mostly by sensitivity and response time. A large surface must also be judged by how it survives being installed on a robot.
+An installed-array evaluation can expose problems that nominal sensing-point counts cannot. The following is a proposed test matrix, not a summary of experiments performed by RoboSkin.ai.
 
-For readers comparing technologies, the key is to separate array performance from system performance. A high-resolution array may look impressive in a figure, but the real question is what resolution remains usable after bending, protective covering, connector routing, and calibration. A lower-resolution modular skin may be more useful if it can be repaired quickly and covers the places where contact actually occurs.
-
-| Scale issue | Why it appears | What to verify |
+| Stage | Retain | Decision it supports |
 | --- | --- | --- |
-| Wiring density | More sensing points need more routes or multiplexing | Channel count and connector design |
-| Calibration drift | Large soft surfaces see uneven strain | Baseline before and after mounting |
-| Repair cost | Exposed skin wears out | Replaceable sections and service time |
-| Blind spots | Seams and edges interrupt coverage | Contact tests across module boundaries |
+| Before mounting | Sensor identity, reference contacts and readout configuration | Establish the comparison baseline |
+| After mounting | Geometry, attachment and repeated reference contacts | Determine whether installation changes the estimate |
+| During representative use | Full-array timing, contact locations and failed observations | Identify task-relevant blind spots and delay |
+| After service | Replaced parts, calibration revision and acceptance results | Decide whether the assembly can return to the task |
+
+If a configuration changes resolution by selecting or combining channels, record that configuration alongside every result. A finer nominal setting may change readout load, noise or processing work. Compare complete operating modes rather than choosing one favorable number from each mode.
 
 ## Evaluation checklist
 
-- What area can the array cover without losing signal quality?
-- How does the sensor behave on convex and concave surfaces?
-- What is the channel count and data rate at full size?
-- Are seams, connectors, and cable exits included in the design?
-- Does repeated bending change baseline or sensitivity?
-- Can damaged sections be replaced without replacing the whole skin?
-- Does the system detect slip direction or only contact location?
+- Is the quoted area the material outline or the actively validated sensing region?
+- Which shapes and contact geometries were evaluated?
+- Are detection threshold, force error and spatial discrimination reported separately?
+- Does timing include every channel and the intended downstream processing?
+- Are seams, cable exits, covers and attachment included in the evaluation?
+- What changes after bending, repeated contact or replacement?
+- Is sliding measured directly, inferred from contact patterns or used in an actual robot-control trial?
 
 ## Manufacturing and service implications
 
-Manufacturing matters because robot skin is a consumable surface in many applications. A hand or gripper that works in a demo may require replacement after abrasion, contamination, or mechanical damage. If the skin is difficult to manufacture consistently, field service becomes expensive.
+Define the replacement unit before comparing manufacturing convenience. A continuous sheet and tiled modules have different service paths, but neither is automatically cheaper. Retain fabrication yield, spare availability, installation time and recalibration work for the actual design before making a cost claim.
 
-Modular approaches can help. A large surface divided into replaceable tiles may be easier to maintain than a single continuous skin. However, modular seams can create blind spots and mechanical edges. A continuous skin may improve coverage but complicate repair. The correct choice depends on the robot and task.
+The [robot-hand tactile coverage guide](/applications/robot-hand-tactile-sensor) connects these questions to task contacts. The useful coverage map includes the places where a hand may touch during approach, grasp, recovery and release, not only the most photogenic fingertip contact.
 
 ## What not to infer
 
-The ACS source should not be treated as proof that large-area flexible tactile arrays are ready for every curved robot surface. It supports a research direction and a set of engineering questions. Real deployment still depends on mounting, calibration, environmental exposure, data handling, and maintenance strategy.
+The public abstract does not supply a verified commercial specification or a complete lifetime model. We did not reproduce the reported cycles, threshold or curved-surface demonstrations. Full-method access remains unverified in this pass, and no human-skin superiority claim is adopted.
 
-Large-area robot skin evaluation should cover geometry, channels, data rates, attachment, damage, replacement, and slip behavior. Without those details, the deployment limits remain unclear.
+Use the study as a bounded research example. For a new robot, the installation, readout mode, calibration and task-level acceptance record determine what the array can actually support.
 
 ## Source
 
@@ -4349,7 +4359,7 @@ Large-area robot skin evaluation should cover geometry, channels, data rates, at
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-18',
-    updated: '2026-05-14',
+    updated: '2026-11-03',
     readTime: '5 min read',
     category: 'Manufacturing',
     image: '/generated/research-scalable-manufacturing-2025.svg',
