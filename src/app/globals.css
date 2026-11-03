@@ -1485,6 +1485,7 @@ select:focus-visible {
 
 .article-masthead h1 {
   max-width: 19ch;
+  overflow-wrap: anywhere;
   font-size: clamp(3rem, 6.5vw, 7rem);
   font-weight: 680;
   letter-spacing: -0.07em;
