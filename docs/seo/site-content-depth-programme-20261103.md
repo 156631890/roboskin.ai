@@ -65,13 +65,13 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | inventory only; claim-by-claim review pending | 1463 | 6 |
 | /research/feelworld-visuo-tactile-world-model-2026 | inventory only; claim-by-claim review pending | 975 | 9 |
 | /research/ht-bench-full-hand-tactile-representations-2026 | inventory only; claim-by-claim review pending | 1453 | 16 |
-| /research/sparsh-x-multisensory-touch-representations-2025 | inventory only; claim-by-claim review pending | 887 | 4 |
-| /research/mitas-multi-resolution-tactile-imitation-learning-2026 | inventory only; claim-by-claim review pending | 739 | 5 |
-| /research/dream-tac-tactile-world-action-model-2026 | inventory only; claim-by-claim review pending | 1172 | 15 |
+| /research/sparsh-x-multisensory-touch-representations-2025 | learning-study evidence review complete; production verification pending | 887 | 4 |
+| /research/mitas-multi-resolution-tactile-imitation-learning-2026 | learning-study evidence review complete; production verification pending | 739 | 5 |
+| /research/dream-tac-tactile-world-action-model-2026 | learning-study evidence review complete; production verification pending | 1172 | 15 |
 | /research/open-source-magnetic-tactile-calibration-2024 | rewritten and production verified in PR105 | 697 | 6 |
 | /research/eflesh-customizable-magnetic-touch-sensing-2025 | rewritten and production verified in PR105 | 718 | 4 |
-| /research/freetacman-robot-free-visuotactile-data-collection-2025 | inventory only; claim-by-claim review pending | 842 | 10 |
-| /research/humanoid-visual-tactile-action-dataset-2025 | inventory only; claim-by-claim review pending | 1375 | 7 |
+| /research/freetacman-robot-free-visuotactile-data-collection-2025 | learning-study evidence review complete; production verification pending | 842 | 10 |
+| /research/humanoid-visual-tactile-action-dataset-2025 | learning-study evidence review complete; production verification pending | 1375 | 7 |
 | /research/tactile-robotics-outlook-research-landscape-2025 | rewritten and production verified in PR104 | 668 | 1 |
 | /research/wet-slippage-bionic-fingertip-eskin-2026 | rewritten and production verified in PR104 | 801 | 2 |
 | /research/spiking-touch-encoding-large-area-eskin-2026 | rewritten and production verified in PR104 | 951 | 2 |
@@ -172,8 +172,8 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
 | /embodied-ai | inventory only; claim-by-claim review pending | 736 | 1 |
 | /guides/3d-printed-tactile-sensors | inventory only; claim-by-claim review pending | 1376 | 2 |
-| /guides/optical-tactile-sensor-maintenance | practical evidence review and enhancement complete; production verification pending | 1273 | 7 |
-| /guides/optical-vs-capacitive-tactile-sensors | practical evidence review and enhancement complete; production verification pending | 1360 | 6 |
+| /guides/optical-tactile-sensor-maintenance | enhanced and production verified in PR106 | 1273 | 7 |
+| /guides/optical-vs-capacitive-tactile-sensors | enhanced and production verified in PR106 | 1360 | 6 |
 | /guides/aspire-libero-pro-setup | inventory only; claim-by-claim review pending | 1322 | 3 |
 | /guides/how-to-choose-a-tactile-sensor | reviewed and deployed in PR102 | 2637 | 10 |
 | /sensors/xela-uskin | inventory only; claim-by-claim review pending | 1184 | 4 |
@@ -183,11 +183,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /sensors/digit | inventory only; claim-by-claim review pending | 1439 | 13 |
 | /sensors/gelsight-mini | inventory only; claim-by-claim review pending | 1319 | 11 |
 | /sensors/reskin | inventory only; claim-by-claim review pending | 1198 | 9 |
-| /guides/gelsight-vs-digit | practical evidence review and enhancement complete; production verification pending | 2140 | 10 |
+| /guides/gelsight-vs-digit | enhanced and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | inventory only; claim-by-claim review pending | 3426 | 3 |
 | /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
 | /guides/ros2-tactile-sensing | inventory only; claim-by-claim review pending | 2153 | 21 |
-| /guides/python-tactile-data-processing | practical evidence review and enhancement complete; production verification pending | 2851 | 16 |
+| /guides/python-tactile-data-processing | enhanced and production verified in PR106 | 2851 | 16 |
 | /guides/lerobot-dataset-format | inventory only; claim-by-claim review pending | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
 | /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
@@ -238,3 +238,7 @@ Eight existing interpretations distinguish calibration effort, transfer prerequi
 ## Practical guide pass
 
 Four established guides retain their substantive modules while adding diagnostic reasoning, a unit-consistent comparison, software-continuity checks and a genuinely executed synthetic-data recheck. The new Python evidence is separate from the historical September record and is not hardware or ROS evidence. Remaining pages are still queued individually.
+
+## Learning-study evidence pass
+
+Four generic interpretations are replaced with study-specific metrics, interfaces and evaluation decisions. The existing detailed GIST interpretation is retained with a small evaluation-unit addition. Source dates, original page publication dates, anchors, images and internal routes remain. Prior four-guide PR106 verification is complete; these five pages require their own production checks. The full-site queue remains active.
