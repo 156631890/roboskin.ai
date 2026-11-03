@@ -2558,59 +2558,75 @@ Tactile AI benefits from prediction and replay. Robot skin data becomes more val
     id: 'open-source-magnetic-tactile-calibration-2024',
     title: 'Open-source magnetic tactile calibration for gripper-agnostic touch',
     seoTitle: 'Open-Source Magnetic Tactile Calibration for Robot Grippers',
-    seoDescription: 'Open-source magnetic tactile calibration for three-axis force sensing, in-situ setup, and repeatable low-cost robot touch.',
+    seoDescription: "Review magnetic tactile calibration, force-reference requirements, squared-error units and the checks needed after changing a gripper cover.",
     excerpt:
-      'A practical research note on open-source magnetic tactile calibration, three-axis force sensing, in-situ calibration, and why low-cost sensors still need repeatable setup.',
+      "Review magnetic tactile calibration, force-reference requirements, squared-error units and the checks needed after changing a gripper cover.",
     content: `# Open-source magnetic tactile calibration for gripper-agnostic touch
 
-**Updated technical brief - June 2026**
+Automatic calibration reduces manual data collection; it does not remove the reference force sensor, fixture, coordinate setup or post-calibration validation. This paper is most useful as a concrete calibration workflow with identifiable prerequisites.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** This review uses the May 28, 2024 arXiv v1 by Van den Stockt, Proesmans and wyffels. RoboSkin.ai has not built the fingertip or executed the procedure.
 
 ## Why this source matters
 
-Magnetic tactile sensors are attractive because they can provide multi-axis force information with relatively affordable components. The hard part is often calibration. A sensor that performs well after careful manual calibration may be less useful when installed on a different gripper or replaced in the field.
+The [paper](https://arxiv.org/html/2405.18582v1) describes a 2 × 2 Hall-sensor fingertip calibrated while mounted on a robot. The procedure requires an arm force/torque reference and a rigid external probe with known direction. Its initial calibration omits the optional silicone contact pad. These prerequisites matter when estimating setup work for a different gripper.
 
-The open-source magnetic tactile sensor paper is useful because it focuses on automatic, in-situ, gripper-agnostic calibration. For RoboSkin.ai, this is exactly the kind of deployment detail that separates a sensor demo from a usable robot skin route.
+“In situ” answers where calibration happens. “Gripper-agnostic” describes the intended adaptability of the procedure; neither phrase proves compatibility with every gripper, contact surface or mounting arrangement. The integration team still needs a reachable fixture and a reference measurement in the correct frame.
 
 ## Core idea
 
-Magnetic tactile sensing typically tracks the movement of magnets through magnetic field measurements. From that movement, the system estimates forces or deformation. Calibration maps raw magnetic readings to meaningful force outputs. If the sensor can calibrate automatically after being mounted, it reduces setup friction.
+The authors fit a per-taxel polynomial regression from magnetic readings to three force components, using a random 80/20 train/test split. Table I reports average MSE of approximately 0.97 N² and R² of approximately 0.83. MSE in squared newtons is not an absolute force error in newtons. The authors note a lagging prediction response and identify hysteresis compensation and further coupling calibration as future work. [Paper, calibration, results and conclusion](https://arxiv.org/html/2405.18582v1).
 
-| Calibration issue | Why it matters | What to verify |
+| Calibration issue | What must be specified | Acceptance question |
 | --- | --- | --- |
-| Manual data collection | Slow and operator-dependent | Repeatability across users |
-| Mounting geometry | Sensor behavior changes after installation | In-situ calibration |
-| Three-axis force | More useful than scalar pressure | Ground-truth force validation |
-| Open-source hardware | Easier reproduction | Fabrication tolerance and documentation |
+| Reference measurement | F/T device, coordinate transform and synchronization | Are training labels traceable to the intended force components? |
+| Mounted geometry | Finger, probe direction, fixture rigidity and pad state | Does the deployed assembly match the calibrated assembly? |
+| Per-taxel model | Inputs, units, trained range and model version | Does a held-out load remain within the required error? |
+| Replacement | Part identity, mounting and recalibration record | Can another operator reproduce the usable result? |
 
 ## Engineering implications
 
-Open-source magnetic tactile calibration matters for robot skin because low-cost sensors are only useful if they can be reproduced and maintained. A cheap sensor that takes hours to calibrate is not cheap at system level. The better question is total setup cost: fabrication, mounting, calibration, validation, and replacement.
+Separate calibration fitting from deployment acceptance. A random split of collected samples can evaluate the fitted mapping within that collection; it does not automatically establish performance after a new mounting, temperature change or sensor replacement. Decide which change matters, then reserve an independent validation condition for it.
 
-This topic also connects to robot hand experiments. Grippers vary widely in jaw geometry, material, compliance, and payload. A gripper-agnostic calibration method is valuable because it lets teams test tactile feedback without redesigning calibration for every embodiment.
+Timing deserves its own test. A force estimate may fit settled loads adequately while lagging during a contact transition. The controller's requirement should specify whether it needs a static estimate, a rapid threshold crossing or both. Do not infer a dynamic response bound from an aggregate regression score.
+
+## What to record before and after adding a contact cover
+
+The optional pad creates a practical handoff question. Keep the bare calibration configuration documented, then validate the assembled contact interface before using the output for a robot decision. This is our proposed adoption check, not a claim that the paper completed every covered-fingertip validation below.
+
+| Record | Before deployment | After a replacement or cover change |
+| --- | --- | --- |
+| Hardware | Sensor serial, taxel positions and mount | Identify exactly what changed |
+| Force mapping | Axes, units, reference and calibration version | Recheck sign, scale and coordinate transform |
+| Contact loading | Representative normal and tangential loads | Repeat the same reference cases |
+| Dynamic response | Synchronized input/output trace | Compare lag and recovery behavior |
+| Release decision | Task-specific tolerance and failure policy | Approve reuse, recalibrate or reject the assembly |
+
+Use the [calibration guide](/guides/tactile-sensor-calibration) to distinguish residuals from validation error. The [robot gripper guide](/applications/robot-gripper-tactile-sensor) connects those measurements to a controlled handling trial.
 
 ## Evaluation checklist
 
-- Check whether calibration happens after the sensor is mounted on the gripper.
-- Ask what ground-truth force device was used.
-- Review normal and shear force accuracy separately.
-- Test repeatability after sensor removal and replacement.
-- Inspect whether fabrication files and calibration code are actually available.
-- Compare calibration time against manual procedures.
+- Confirm the reference sensor, rigid probe and required robot motion are available.
+- Record whether the protective or gripping cover is present during calibration.
+- Keep force axes and error units explicit; do not rename MSE as accuracy.
+- Validate normal and tangential behavior over the intended load range.
+- Reserve a replacement, remounting or independent session for validation.
+- Review current design/readout files and their licenses before reproducing hardware.
 
 ## What not to infer
 
-This source does not mean magnetic tactile sensors are universally better than capacitive, optical, resistive, or piezoelectric designs. Magnetic sensing has its own limits around interference, magnet placement, deformation range, and packaging.
+The paper's linked public [design and readout repository](https://github.com/LowiekVDS/Open-source-Magnetic-Tactile-Sensor) is an author-provided route, not a reproduction we performed. The article's license does not establish the license or completeness of every hardware and software dependency.
 
-Calibration belongs in any serious tactile sensor evaluation. Without calibration details, the evidence is incomplete.
+Calibration evidence also does not establish immunity to magnetic interference, industrial durability or a universally lower total cost. Compare fabrication, fixtures, reference equipment, collection, validation and maintenance as separate work items. For a bounded comparison with [eFlesh](/research/eflesh-customizable-magnetic-touch-sensing-2025) or other approaches, use [research services](/research-services) with the actual gripper and force requirement.
 
 ## Source
 
-[arXiv: Automatic Calibration for an Open-source Magnetic Tactile Sensor](https://arxiv.org/abs/2405.18582)
+[Automatic Calibration for an Open-source Magnetic Tactile Sensor — paper record](https://arxiv.org/abs/2405.18582) and [reviewed v1 full text](https://arxiv.org/html/2405.18582v1). No calibration time, current component price or deployment success is inferred where the reviewed evidence does not establish it.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Magnetic Tactile Sensing',
     image: '/generated/research-scalable-manufacturing-2025.svg',
     sourceTitle: 'Open-source magnetic tactile calibration preprint',
@@ -2620,58 +2636,74 @@ Calibration belongs in any serious tactile sensor evaluation. Without calibratio
   {
     id: 'eflesh-customizable-magnetic-touch-sensing-2025',
     title: 'eFlesh and customizable magnetic touch sensing for robot grippers',
+    seoDescription: "Assess eFlesh fabrication, magnetic interference and replacement calibration without confusing magnet cost with a complete tactile system.",
     excerpt:
-      'A source-backed note on eFlesh, cut-cell microstructures, 3D-printable magnetic tactile sensors, low-cost fabrication, and robot gripper deployment tradeoffs.',
+      "Assess eFlesh fabrication, magnetic interference and replacement calibration without confusing magnet cost with a complete tactile system.",
     content: `# eFlesh and customizable magnetic touch sensing for robot grippers
 
-**Updated technical brief - June 2026**
+eFlesh makes tactile geometry and compliance designable, but a printable shape is only the start of a usable sensor. A team still needs to check the assembled mechanical response, magnetic environment and calibration compatibility of replacement parts.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** This page reviews Pattabiraman and colleagues' June 11, 2025 arXiv v1. RoboSkin.ai has not printed a sensor, run the design tool or reproduced the robot experiments.
 
 ## Why this source matters
 
-Robot skin adoption is slowed by cost, fabrication difficulty, and poor fit to real gripper geometry. A sensor that is accurate but hard to manufacture or customize may not spread beyond a lab. The eFlesh preprint is useful because it focuses on highly customizable magnetic touch sensing using cut-cell microstructures and accessible fabrication.
+The [eFlesh paper](https://arxiv.org/html/2506.09994v1) combines printed cut-cell structures, magnets and a magnetometer board. Its conversion tool targets convex OBJ/STL inputs. The abstract's under-$5 statement applies to magnets, not a complete installed sensing system. Printer access, electronics, assembly, calibration and validation remain separate cost items.
 
-The source frames eFlesh as a low-cost tactile sensor that can be fabricated with common 3D printing tools and off-the-shelf magnets. For RoboSkin.ai, the useful point is not that every team should print sensors. The useful point is that fabrication workflow is part of tactile sensor evaluation.
+For a custom finger, start with the contact region and acceptable mechanical behavior. A shape that fits the housing can still interfere with object contact, routing or joint motion. The [3D-printed tactile sensor guide](/guides/3d-printed-tactile-sensors) separates printed structures from the electronics and integration they require.
 
 ## Core idea
 
-eFlesh uses printed microstructures and embedded magnetic elements so that contact deformation can be sensed magnetically. The cut-cell geometry allows customization to different shapes. That matters for grippers because contact surfaces are rarely identical. A sensor pad for a parallel gripper, soft jaw, curved finger, or fingertip needs different geometry.
+The authors vary microstructure geometry to tune response, and report that embedded magnets themselves increase stiffness. Their interference study tests selected nearby objects and other eFlesh instances, with alternating magnet polarity reducing cross-talk. Discussion still identifies stronger industrial magnetic fields as a limitation. Three independently fabricated sensors inform the reported consistency comparison; this is narrower than long-term fleet interchangeability. [Paper, sections 2.7 and 3](https://arxiv.org/html/2506.09994v1).
 
-| Design factor | Why it matters | What to verify |
+| Design factor | What to decide | What to validate after fabrication |
 | --- | --- | --- |
-| Custom geometry | Fits different grippers and surfaces | CAD-to-sensor workflow |
-| Magnetic sensing | Can estimate deformation and force | Calibration and interference |
-| Low-cost materials | Reduces entry barrier | Reproducibility across printers |
-| Cut-cell structure | Tunes compliance and response | Durability under repeated grasps |
+| Geometry | Contact area, thickness and attachment | Fit, motion clearance and active contact coverage |
+| Microstructure | Target compliance and expected load | Assembled response rather than CAD settings alone |
+| Magnetic layout | Orientation, spacing and neighboring devices | Baseline and contact response in the mounted environment |
+| Replaceability | Which component can be changed | Calibration and model behavior after that exact change |
 
 ## Engineering implications
 
-Customizable tactile sensing is valuable when a robot team needs a sensor for a specific end effector. Off-the-shelf flat sensors often do not match the robot. A fabrication route that adapts to geometry can reduce integration friction, but it shifts responsibility to calibration, mechanical repeatability, and documentation.
+Treat design parameters as inputs to a fabrication process, not as certified properties of the finished part. Keep the CAD revision, print orientation, material and settings with the sensor record. If two copies differ, that record lets the team investigate a manufacturing change before retraining a policy indiscriminately.
 
-The strongest use of this source is as a manufacturing lens. If a tactile sensor can be printed quickly, the next question is whether two printed sensors behave similarly enough for a policy to transfer. Low cost is useful only if the data remains reliable.
+Keep output tasks distinct. Contact localization, force regression, slip classification and robot success each need their own reference and denominator. A model that classifies an unseen object is not automatically a model that transfers to a new sensor geometry. Likewise, similar raw signals across copies do not establish that all downstream policies can be reused without validation.
+
+## A replacement trial that tests the actual reuse claim
+
+Use one known working assembly as the reference. Replace only the intended component, preserve the task and controller, and repeat fixed contacts before attempting handling. This is a proposed acceptance design; it is not an additional eFlesh result.
+
+| Reuse claim | Controlled comparison | Evidence that would narrow the claim |
+| --- | --- | --- |
+| Same geometry, new print | Old and new assembly under the same reference loads | Systematic offset or changed response slope |
+| Same print, new mounting | Identical contact coordinates after remounting | Coordinate or preload dependence |
+| Nearby sensors | One sensor alone versus the intended multi-sensor arrangement | Baseline shift during neighboring motion |
+| Reused policy | Same objects and initial conditions before/after replacement | New failures despite apparently similar raw traces |
+
+Set the required tolerances before inspecting the results. If a reference test fails, retain the raw data and investigate the physical change; do not hide it by reporting only a retrained model's best run. The [calibration guide](/guides/tactile-sensor-calibration) gives a structure for that release decision.
 
 ## Evaluation checklist
 
-- Check what printer, material, magnets, and magnetometer hardware are required.
-- Ask whether the sensor works on the target gripper geometry.
-- Review contact localization, force estimation, and slip detection separately.
-- Test multiple printed copies to see fabrication variation.
-- Look for open-source design files, code, and calibration procedures.
-- Evaluate abrasion, compression fatigue, and magnet stability over time.
+- Confirm the desired geometry is supported by the current fabrication route.
+- Include electronics and validation in cost estimates instead of repeating a component-only price.
+- Compare complete assemblies, including magnets and attachment.
+- Check the actual magnetic environment with the robot and neighboring devices in relevant states.
+- Separate copy-to-copy consistency from wear, replacement and policy-transfer tests.
+- Verify current code, design-file and dependency licenses before reuse; this review does not establish them.
 
 ## What not to infer
 
-This source does not mean 3D-printed tactile sensors are ready for every industrial or humanoid hand. Printed materials, magnets, and electronics may change behavior under heat, wear, contamination, and high load.
+Customizability is not proof of arbitrary geometry, unlimited load range or interference immunity. The reviewed work does not validate every printer, material, industrial environment or robot hand. A source-reported demonstration remains specific to its configuration.
 
-eFlesh supports a practical engineering rule: evaluate how the sensor is made, replaced, and calibrated, not only how it performs in one demo.
+Compare [automatic magnetic calibration](/research/open-source-magnetic-tactile-calibration-2024) when reference data collection is the main bottleneck, and [DexSkin](/research/dexskin-high-coverage-conformable-robotic-skin-2025) when evaluating a different coverage and cross-instance calibration route. For an evidence shortlist, [research services](/research-services) can be scoped around geometry, replacement and measurement requirements.
 
 ## Source
 
-[arXiv: eFlesh: Highly customizable Magnetic Touch Sensing using Cut-Cell Microstructures](https://arxiv.org/html/2506.09994v1)
+[eFlesh: Highly customizable Magnetic Touch Sensing using Cut-Cell Microstructures — arXiv v1](https://arxiv.org/html/2506.09994v1). The paper's [project link](https://www.e-flesh.com/) is provided as an author resource; current downloads and reproduction were not independently tested here.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Magnetic Tactile Sensing',
     image: '/generated/research-scalable-manufacturing-2025.svg',
     sourceTitle: 'eFlesh magnetic touch sensing preprint',
@@ -3330,91 +3362,82 @@ For a broader comparison, the [technology overview](/technology) distinguishes s
     id: 'genforce-transferable-force-sensing-2026',
     title: 'GenForce transferable force sensing for robot skin and tactile sensors',
     seoTitle: 'GenForce Force Sensing for Robot Skin and Tactile Sensors',
+    seoDescription: "Understand GenForce source calibration, target observations and material priors, with a practical framework for validating force transfer.",
     excerpt:
       'GenForce explores transferable force sensing across tactile sensors, reducing repeated calibration work for robot skin replacements and hardware changes.',
     content: `# GenForce transferable force sensing for robot skin and tactile sensors
 
-**Updated technical brief - June 2026**
+**Updated technical brief — November 3, 2026. Originally published June 18, 2026.**
 
-GenForce is a framework for transferring force-sensing knowledge across tactile sensors. It addresses repeated calibration and force-label collection when sensor instances, geometries, or sensing principles change. For robot skin, that matters because hands and distributed surfaces contain many patches that wear, drift, or require replacement, turning calibration reuse into a deployment and maintenance problem rather than a one-time benchmark.
+GenForce transfers force-sensing knowledge between tactile sensors. It can reduce repeated force-label collection on a target sensor, but still needs a calibrated source, material information, target observations and independent validation. For a robot integration team, the decision is which calibration work can be reused and which checks remain necessary after a sensor or material changes.
 
 ## Source findings
 
-Robot skin systems do not fail only because a sensor is not sensitive enough. They also fail because each sensor instance often needs its own calibration data, force labels, and model training. That problem becomes expensive when a robot hand uses many tactile sensors across fingertips, palms, grippers, or replaceable skin modules.
+Chen and colleagues' Nature Communications paper was published January 28, 2026. This is a source review and engineering analysis, not a RoboSkin.ai reproduction.
 
-The Nature Communications article on GenForce is useful because it frames tactile sensing as a transfer problem. The authors describe a framework intended to let force prediction models trained with one tactile sensor transfer to other tactile sensors, including sensors with different sensing principles and physical configurations. For a robot skin research map, the important signal is not just model accuracy. The important signal is the possibility of reducing repeated calibration work across many tactile surfaces.
+The [paper](https://www.nature.com/articles/s41467-026-68753-1) translates sensor signals into a shared marker representation, maps between representations and estimates force over time. Its limitations require at least one force-calibrated source sensor with material priors, plus location-paired tactile images for the target. The evaluated sensing families include GelSight, uSkin and TacTip configurations. The 132 combinations in the synthetic marker experiment are not 132 physical force-calibration trials.
+
+The authors also caution that transferred prediction may not match extensive supervised calibration. Their method expects spatial marker or taxel patterns; extending it to sensors without explicit spatial taxels, including EIT, remains an open problem. Material compensation and temporal input address differences that a single-image comparison can conceal. These conditions matter more to an adoption decision than a claim of universal transfer. [Source discussion and limitations](https://www.nature.com/articles/s41467-026-68753-1).
 
 ## RoboSkin analysis
 
-GenForce treats tactile sensor outputs through a shared marker-style representation. The source paper describes a route where tactile signals from calibrated sensors can be transformed toward uncalibrated sensors, then used for force prediction. That matters because robot skin is rarely one perfect sensor. It is usually a collection of sensor patches, batches, repairs, replacements, and geometries.
+For a fleet with replaceable tactile pads, the practical opportunity is to reuse a costly reference dataset. The decision is whether the remaining target-data and validation work is cheaper and sufficiently accurate for the task. Count fixture setup, matched contacts, material characterization, failed transfers and acceptance testing; do not count only model-training time.
 
-| Deployment problem | Why it matters | What GenForce points toward |
-| --- | --- | --- |
-| Sensor-to-sensor variation | Same design can behave differently after fabrication | Cross-sensor representation alignment |
-| New skin replacement | Recalibration slows service and repair | Reuse of prior force-labeled data |
-| Mixed tactile modalities | Hands may combine optical, magnetic, and electronic sensors | A shared representation layer |
-| Force prediction | Controllers need calibrated values, not just raw patterns | Transferable force estimation |
+Keep the intended output explicit. Estimating force, identifying a contact and completing a manipulation are different requirements. A policy may tolerate an error that a force-limited inspection cannot. Define the acceptable error and its consequence before choosing a transfer route.
 
 ## Engineering implications
 
-Most public robot skin coverage focuses on the material: hydrogel, graphene, elastomer, liquid metal, textile, or flexible circuit. That misses the software burden. A tactile sensor that looks promising in one lab setup may become hard to use when the robot has many copies of it. Every fingertip can drift. Every pad can wear. Every replacement can shift the signal baseline.
-
-Transferable force sensing is a practical response to that maintenance problem. It asks whether tactile experience can be reused instead of recollected from scratch. For Physical AI and contact-rich manipulation, that is a stronger story than simply saying robots need touch. Robots need touch that can be calibrated, transferred, replayed, and trusted across hardware changes.
+| Evidence layer | What must be identified | What it does not establish |
+| --- | --- | --- |
+| Source calibration | Sensor, reference loads, units and material state | Accuracy on a new pad |
+| Paired target observations | Matched locations, geometry and preprocessing | Coverage of unseen contacts |
+| Representation translation | Inputs and validity checks | Correct force in newtons |
+| Force prediction | Held-out loads, directions and error distribution | Reliable task recovery |
+| Robot trial | Controller, objects, failures and stopping rules | Performance outside the trial conditions |
 
 ## What this means for robot skin
 
-For robot skin, GenForce is a reminder that sensing surfaces are maintained, replaced, and recalibrated. A hand with many tactile patches cannot depend on one-off calibration forever. Transferable force sensing gives readers a concrete way to think about sensor-to-sensor variation, replacement skins, and learned tactile representations.
+A change in cover thickness or compliance can affect both the tactile appearance and the mechanics that generated it. Treat replacing a pad, changing its material and moving to another sensing principle as separate validation cases. A visually plausible translation is not sufficient evidence that the corresponding force label remains valid.
 
-Read this alongside the [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026), where predictive control depends on reliable tactile values, and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026), where calibration metadata travels with recorded touch data.
+The [tactile calibration guide](/guides/tactile-sensor-calibration) provides a place to define the reference, held-out contacts and replacement checks. Store those decisions with the model version, not only in a notebook attached to the initial sensor.
 
 ## What this does not prove yet
 
-GenForce does not prove that any tactile sensor can learn from any other tactile sensor without constraints. Transfer depends on representation quality, sensor similarity, task distribution, ground-truth force data, and what happens after wear or replacement. A strong robot skin claim still needs application-specific validation.
+The reviewed evidence does not establish calibration-free deployment, universal sensor compatibility, industrial lifetime or unchanged accuracy after arbitrary damage. Nor does it turn a force estimate into a certified protective function. A separate system assessment is needed for any application with consequences from excessive contact force.
 
 ## Where this fits next
 
-The next route is operational: record raw and calibrated tactile data, preserve calibration metadata, test transfer after sensor replacement, and compare policy performance before and after transfer. That makes GenForce part of a maintenance and learning workflow, not only a model benchmark.
+Compare this sensing-transfer problem with the [DreamTac world-action-model interpretation](/research/dream-tac-tactile-world-action-model-2026): learning a sensor output and selecting actions are different stages. Connect the calibrated output to the [ROS 2 pipeline discussion](/research/ros2-kilted-tactile-pipeline-2026) only after its units, reference frame and timing are defined.
 
 ## Practical questions
 
-- What is transferable force sensing? It is the attempt to reuse force-sensing knowledge across tactile sensors instead of rebuilding every calibration from zero.
-- Why does it matter for robot skin? Robot skin often means many sensors on one robot, so calibration cost and replacement behavior become system-level problems.
-- What should readers open next? Use [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replay and metadata, then [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) for predictive tactile AI context.
+Before a pilot, ask who owns the calibrated source data, which target contacts can be reproduced, and whether the target's material properties are known. Also ask what happens when a translation fails its plausibility checks. Retaining an explicit invalid state is more useful than silently feeding an uncertain estimate to a controller.
 
 ## How to evaluate the claim
 
-The useful reader question is not whether one framework solves calibration forever. It does not. The useful question is which assumptions make transfer possible. Does the tactile signal contain spatial structure? Can the source and target sensors be mapped into a common representation? Does the new sensor have enough similarity for force prediction to remain meaningful? What happens after wear, replacement, or surface damage?
-
-| Evaluation question | Strong evidence would show | Weak evidence would show |
-| --- | --- | --- |
-| Cross-sensor transfer | Multiple sensor families and geometries | One sensor batch only |
-| Force accuracy | Force prediction tested against measured labels | Visual similarity only |
-| Manipulation relevance | Grasping or slip tasks using transferred sensing | Offline reconstruction only |
-| Maintenance value | Less relabeling after replacement | Full new calibration still required |
+Compare three conditions where feasible: a source model used directly, the proposed transfer procedure, and a target-calibrated reference. Keep test contacts and scoring identical. Report the calibration effort alongside accuracy, including contacts excluded from training. This is an evaluation proposal, not an experiment conducted here.
 
 ## Evaluation checklist
 
-- Check which tactile sensor types were included in transfer experiments.
-- Separate representation transfer from force prediction accuracy.
-- Ask whether slip detection, grasping, or manipulation tasks used transferred sensing.
-- Look for evidence on both homogeneous sensors and heterogeneous sensors.
-- Check whether the method still needs a small target-domain calibration set.
-- Treat replacement, wear, and batch variation as deployment tests, not footnotes.
+- Identify source and target hardware, material, cover and mounting revisions.
+- Separate force-labeled data from location-paired observations.
+- Hold out contact positions, directions and loading sequences relevant to the task.
+- Report error by load and condition, including the worst relevant cases.
+- Check replacement and drift independently of initial calibration.
+- Record preprocessing, model version, timing and invalid-output behavior.
 
 ## What not to infer
 
-This source does not mean any tactile sensor can automatically learn force sensing from any other sensor. It also does not remove the need for ground-truth measurements, calibration discipline, or application-specific validation. Transfer works only within the limits of the representation, the training data, and the physical behavior of the sensors involved.
-
-Calibration transfer is critical to robot skin evaluation. A serious tactile AI stack must explain how force labels, sensor drift, replacement, and cross-sensor learning are handled. Without that, the evidence still describes a sensor sample rather than a deployable tactile system.
+Do not convert a translation score into force accuracy, a force error into a grasp success rate, or a collection-time reduction into total project savings. The study's future extensions are research directions. Code, downloaded data and third-party licensing were not independently validated in this review. For a requirements-led comparison, use the existing [research services](/research-services) route.
 
 ## Source
 
-[Nature Communications: Training tactile sensors to learn force sensing from each other](https://www.nature.com/articles/s41467-026-68753-1)
+[Training tactile sensors to learn force sensing from each other — Nature Communications](https://www.nature.com/articles/s41467-026-68753-1). All study results are attributed to the authors; the adoption framework above is RoboSkin.ai editorial analysis.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-27',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'Nature Communications GenForce tactile sensing article',
@@ -3425,71 +3448,78 @@ Calibration transfer is critical to robot skin evaluation. A serious tactile AI 
     id: 'dexskin-high-coverage-conformable-robotic-skin-2025',
     title: 'DexSkin and high-coverage conformable robotic skin for manipulation',
     seoTitle: 'DexSkin Conformable Robot Skin for Dexterous Manipulation',
+    seoDescription: "Distinguish DexSkin response alignment from force calibration, and evaluate coverage, sensor replacement and task recovery evidence.",
     excerpt:
-      'A practical research note on DexSkin, conformable capacitive e-skin, high-coverage tactile sensing, calibration transfer, and contact-rich manipulation learning.',
+      "Distinguish DexSkin response alignment from force calibration, and evaluate coverage, sensor replacement and task recovery evidence.",
     content: `# DexSkin and high-coverage conformable robotic skin for manipulation
 
-**Updated technical brief - June 2026**
+DexSkin tests whether broad finger coverage and calibration make tactile learning more reusable. Its fast cross-instance alignment procedure must be distinguished from a full per-taxel normal-force calibration, and its gripper experiments do not establish performance on every robot morphology.
+
+**Research interpretation published June 17, 2026; evidence reviewed November 3, 2026.** Wistreich and colleagues' reviewed arXiv v1 dates to September 23, 2025. RoboSkin.ai has not fabricated DexSkin or reproduced its tasks.
 
 ## Why this source matters
 
-Many tactile sensors are strong at one contact patch but weak at coverage. Robot skin needs something different: a sensing surface that can wrap around useful geometry and still provide localized, repeatable signals. The DexSkin preprint is useful because it puts coverage, conformability, calibration, and robot learning in the same discussion.
+The [paper](https://arxiv.org/html/2509.18830v1) evaluates capacitive skin on a pair of parallel-jaw fingers. Its readout handles 120 taxels across both fingers and reports a 30 Hz serial stream in the experimental configuration. Limitations include a 66° angular blind spot and dependence on a common electrical ground. “High coverage” therefore needs a coverage map and electrical configuration, not just a sensor count.
 
-The authors describe DexSkin as a soft conformable capacitive electronic skin. In the reported gripper integration, the skin covers almost the entire surfaces of parallel-jaw gripper fingers. The research then evaluates whether that coverage helps contact-rich manipulation tasks and whether calibration can support transfer across sensor instances.
+For a buyer, the useful question is where contacts occur during the intended task. Finger sides may matter during reorientation; another task may concentrate contact on a small pad. Use the [robot-hand sensor guide](/applications/robot-hand-tactile-sensor) to map task coverage before comparing density.
 
 ## Core idea
 
-DexSkin points toward a practical robot skin design question: where does contact actually happen? A flat fingertip pad may miss side contact, rolling contact, edge contact, or accidental contact. A higher-coverage skin can expose more of the contact story to a learning system.
+Appendix A.5 separates roughly three-minute pneumatic response alignment from normal-force calibration taking about three minutes per taxel, around three hours for 60 taxels. Table 3 reports replaced-sensor pen-task outcomes improving from 13/20 to 18/20 for initial reorientation and from 5/20 to 14/20 for perturbation recovery after calibration. These are separate stages in the authors' setup, not universal replacement success rates. [Paper, section 4.2 and Appendix A.5](https://arxiv.org/html/2509.18830v1).
 
-| Design issue | Why it matters | DexSkin relevance |
+| Requirement | Appropriate evidence | Avoid confusing it with |
 | --- | --- | --- |
-| Surface coverage | Contact may happen around sides and curved regions | Conformable skin around finger geometry |
-| Localized readings | Learning systems need where contact occurs | Addressable tactile signals |
-| Calibration | Data-driven policies need consistent inputs | Sensor instance calibration and transfer |
-| Contact-rich tasks | Manipulation often depends on hidden touch | Learning from tactile feedback |
+| Broader contact coverage | Active regions and blind spots in the mounted geometry | The number of taxels alone |
+| Calibrated normal force | Reference-force validation at relevant taxels and loads | Matching two sensors' raw response distributions |
+| Policy reuse | Task results before and after a defined replacement | A calibration fit or heat-map similarity score |
+| Fast feedback | Complete acquisition and controller timing | A serial output rate alone |
 
 ## Why high coverage changes manipulation
 
-Vision is often blocked during manipulation. Once a robot finger touches an object, the camera may no longer see the contact patch. Tactile coverage becomes the missing evidence layer. If the skin covers only a small front pad, the policy may miss side pressure or a changing contact edge. If the skin covers more of the finger, the policy can receive richer contact information.
+Decide which output the application needs. A learned policy may consume normalized sensor features without interpreting each as newtons. A force-limited task needs an appropriately validated force estimate. Those requirements lead to different calibration work and should not share one undifferentiated “calibrated” label.
 
-The source discusses manipulation tasks such as in-hand object reorientation, elastic band wrapping, and delicate object handling as examples for learning with tactile feedback. For RoboSkin.ai, the editorial value is not the task list by itself. The value is the connection between skin coverage and what a policy can learn.
+Retain the source and target sensor identities when evaluating transfer. A left/right swap, a replacement from another batch and a different finger geometry are distinct changes. A successful comparison under one does not eliminate the others from an acceptance plan.
 
 ## Calibration and transfer matter as much as sensitivity
 
-A high-coverage skin produces more data. That is useful only if the data is stable enough to compare across trials and hardware instances. Calibration is therefore not a secondary detail. It is part of the robot skin product concept, even when the source is a research prototype.
+The following is an integration proposal. Set success criteria before collecting trials and preserve failed cases as well as successful ones.
 
-For a robotics reader, the practical test is whether a model trained with one skin instance can still work after replacement or recalibration. If every new sensor requires a full new training campaign, the system becomes hard to scale. DexSkin is useful because it makes this scaling problem visible.
-
-| Reader question | Why it matters |
+| Record | Purpose |
 | --- | --- |
-| How much of the useful contact surface is covered? | Coverage determines what contact signals exist |
-| How are taxels calibrated? | Calibration determines whether readings are comparable |
-| Can policies transfer across skins? | Transfer determines maintenance cost |
-| What blind spots remain? | Blind spots become manipulation failure modes |
+| Sensor pair, sleeve, mount and readout revision | Defines what was actually swapped or replaced |
+| Calibration method and duration | Distinguishes response alignment from force metrology |
+| Reference contacts before and after replacement | Detects distribution changes before robot operation |
+| Policy version and input preprocessing | Prevents an unreported software change from obscuring the comparison |
+| Initial task and recovery outcomes | Separates ordinary completion from response to disturbance |
+| Unobserved contact regions and failure policy | Makes coverage limits actionable |
+
+The [calibration guide](/guides/tactile-sensor-calibration) explains validation after replacement; the [robot-learning overview](/robot-learning) distinguishes prediction, policy and hardware evidence. Keep those checks connected rather than assuming an aligned signal guarantees a successful action.
 
 ## Evaluation checklist
 
-- Check which robot morphology was actually tested.
-- Compare coverage claims against blind spots, seams, and cable exits.
-- Ask whether the tactile readings are used directly or processed into features.
-- Separate sensor characterization from manipulation performance.
-- Look for transfer across sensor instances, not just repeated trials on one unit.
-- Treat preprint results as research context until peer review and broader replication are available.
+- Draw the installed coverage and identify seams or blind regions used by the task.
+- Record the full-array output configuration and timestamp behavior.
+- Specify whether calibration targets normal force or source-to-target response alignment.
+- Validate the intended replacement type using a held-out task run.
+- Check common-ground and shielding requirements in the actual installation.
+- Treat other robot morphologies as new integration cases.
+
+For named hardware alternatives, use the [sensor directory](/sensors) and compare the output and installation requirements of each device.
 
 ## What not to infer
 
-DexSkin should not be read as proof that conformable robot skin is solved for all dexterous hands. The reported system is a research implementation, and the source itself discusses limits around tested morphology and remaining blind spots. Different robot hands, grippers, surface materials, and tasks would need their own validation.
+DexSkin's experiments do not establish arbitrary-hand transfer, fully covered skin, shear-force calibration or industrial lifetime. Source-reported calibration time is tied to the named protocol and setup; it is not the total time to commission a robot.
 
-For RoboSkin.ai, the useful lesson is specific: high-coverage robot skin should be evaluated by contact coverage, calibration effort, transfer between hardware instances, and learning value. A page that only says "more skin area" is not enough.
+For an alternative fabrication and interference tradeoff, see [eFlesh](/research/eflesh-customizable-magnetic-touch-sensing-2025). For cross-sensor representation transfer, see [GenForce](/research/genforce-transferable-force-sensing-2026). A [research-services review](/research-services) can compare those approaches against a specified replacement and control requirement.
 
 ## Source
 
-[arXiv: DexSkin: High-Coverage Conformable Robotic Skin for Learning Contact-Rich Manipulation](https://arxiv.org/html/2509.18830v1)
+[DexSkin: High-Coverage Conformable Robotic Skin for Learning Contact-Rich Manipulation — arXiv v1](https://arxiv.org/html/2509.18830v1). Hardware fabrication, downloaded code and dataset licenses were not independently validated in this review.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-17',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Conformable Skin',
     image: '/generated/research-scalable-manufacturing-2025.svg',
     sourceTitle: 'DexSkin high-coverage conformable robotic skin preprint',
@@ -3499,69 +3529,84 @@ For RoboSkin.ai, the useful lesson is specific: high-coverage robot skin should 
   {
     id: 'fluid-based-robot-skin-thermal-contact-2025',
     title: 'Fluid-based robot skin for contact detection and thermal display',
+    seoDescription: "Review fluid-based contact and thermal skin, channel localization limits and a practical acceptance matrix for an installed robot exterior.",
     excerpt:
-      'A source-backed note on fluid-based soft robot skin, human-robot interaction, contact detection, temperature control, and why exterior feel matters.',
+      "Review fluid-based contact and thermal skin, channel localization limits and a practical acceptance matrix for an installed robot exterior.",
     content: `# Fluid-based robot skin for contact detection and thermal display
 
-**Updated technical brief - June 2026**
+A fluid channel can carry both heat and a contact-related pressure signal. That makes a robot exterior an active system: temperature control, fluid flow and touch detection must be evaluated together, rather than treating warmth as proof of more capable or safer touch sensing.
+
+**Research interpretation published June 16, 2026; evidence reviewed November 3, 2026.** Shionoiri and Osawa's ROBOMECH Journal paper was published November 1, 2025. RoboSkin.ai has not built this device or conducted a human-interaction study.
 
 ## Why this source matters
 
-Robot skin is not always about dexterous grasping. In human-robot interaction, the exterior surface can also affect trust, comfort, and safety. A robot that physically interacts with people may need a soft surface, contact detection, and temperature behavior that does not feel mechanical or unpleasant.
+The [paper](https://link.springer.com/article/10.1186/s40648-025-00326-1) combines water-filled tubing, pressure measurement, pumping and Peltier-based thermal control. Contact deforms the tube and changes fluid pressure; controlled water temperature changes the exterior's thermal behavior. This is not a dense map of independently measured surface forces.
 
-The ROBOMECH Journal article on fluid-based robot skin is useful because it treats skin as both a sensing layer and an interaction surface. The paper proposes a soft robot skin design that can detect human contact while also providing thermal display. Instead of placing extra contact sensors on the skin surface, the design uses the fluid system itself for contact detection and temperature control.
+The authors identify important boundaries: a channel cannot determine where along its length a touch occurred, simultaneous contacts are not separately resolved, and gaps between tubes create insensitive regions. Thermal-control flow also complicates detection of small pressure changes. Their discussion of finer spatial arrangements is a proposed direction, not a measured high-resolution skin. [Source results and discussion](https://link.springer.com/article/10.1186/s40648-025-00326-1).
 
 ## Core idea
 
-The central idea is to use circulating fluid as part of the sensing and thermal mechanism. A pressure sensor in the fluid path can detect changes related to contact, while heated or cooled fluid can control the surface temperature. This makes the skin different from a conventional tactile pad because the same soft exterior supports both touch detection and human-facing thermal feel.
+Separate the three system functions when specifying an installation. Fluid pressure is an observation; temperature is a controlled physical state; the robot's response to a person or object is a further control decision. Each needs its own acceptance criteria.
 
-| Function | What it does | Why it matters |
+| Function | Useful acceptance evidence | Do not substitute |
 | --- | --- | --- |
-| Soft exterior | Gives the robot a more compliant surface | Reduces harsh mechanical contact |
-| Contact detection | Detects human touch through fluid pressure changes | Supports safer physical interaction |
-| Thermal display | Adjusts surface warmth | Affects comfort and perceived naturalness |
-| No surface-mounted sensor | Keeps the outside smoother | Avoids compromising tactile feel |
+| Contact detection | Detection and false-trigger behavior at defined positions | A pressure trace from one touch |
+| Localization | Demonstrated separation of relevant contact regions | Tube length or covered area |
+| Thermal display | Surface temperature over time and across the installed exterior | Reservoir temperature alone |
+| Robot response | Detection-to-action timing and a defined failure response | Pump or sensor specifications alone |
+
+For distributed sensing terminology and coverage, compare the [flexible tactile-array guide](/guides/flexible-tactile-sensor-array). A fluid channel and an array of localized sensing elements answer different measurement questions.
 
 ## Why exterior feel is part of robot skin
 
-Many robot skin pages focus on pressure maps, taxel density, or slip detection. Those topics matter, but they are not the whole category. For care robots, companion robots, assistive devices, and physical interaction systems, the surface is also what a person touches. A hard or cold exterior can change how people respond to the robot.
+An exterior can be compliant or warm without detecting every contact, and it can detect contact without establishing that an interaction is comfortable. Keep mechanical feel, thermal behavior and perception as separate requirements. Claims about human comfort, injury prevention or clinical benefit need evidence beyond an engineering prototype.
 
-This source is valuable because it connects sensing and affective physical interaction without turning the robot into a vague emotional product. The engineering question stays concrete: can the surface detect contact and manage temperature while remaining soft and smooth enough for human touch?
+An integration review should consider accessible surface temperatures, control faults, leaks, material compatibility and maintenance. Those are proposed review topics, not failures demonstrated by this paper. Any relevant safety assessment remains specific to the application and its users.
 
 ## Evaluation lens
 
-Fluid-based skin introduces different tradeoffs from electronic e-skin. It may reduce surface-mounted electronics, but it adds pumps, reservoirs, channels, pressure sensors, temperature control, and leak risk. That means evaluation should include not only sensing accuracy but also thermal response, safety, maintenance, and mechanical packaging.
+Test the installed system under both steady and changing thermal conditions. First record pressure with no external contact while the pump and temperature controller follow their expected operating cycle. Then introduce defined contacts at representative channel positions and between channels. Finally, repeat after the exterior is mounted on its intended geometry.
 
-| Design tradeoff | Benefit | Risk to verify |
-| --- | --- | --- |
-| Fluid channel sensing | Contact can be detected without surface sensors | Spatial resolution may be coarse |
-| Thermal control | Surface warmth becomes adjustable | System bulk and response delay |
-| Soft skin surface | Better human-facing feel | Durability and cleaning concerns |
-| Pressure-based detection | Uses a shared physical channel | Ambiguity from motion or external load |
+This sequence helps distinguish a contact-related signal from a change introduced by the system itself. Keep the reference contact, temperature, pump command and timestamp together. If a decision threshold changes with operating state, document that dependency rather than presenting one universal sensitivity number.
+
+### A practical acceptance matrix
+
+| Condition | Question for the pilot |
+| --- | --- |
+| Stable temperature, isolated touch | Can the intended contact be detected repeatedly? |
+| Temperature changing, no touch | Does thermal operation cause false contact decisions? |
+| Two contacts on one channel | Is the ambiguity represented rather than hidden? |
+| Contact between channels | Does the coverage map identify the blind region? |
+| Changed routing or mounting | Does the original calibration still apply? |
+| Interrupted flow or sensor input | What state does the robot enter? |
 
 ## Evaluation checklist
 
-- Check whether contact detection is localized or only detects that contact occurred.
-- Ask how fast the skin changes temperature and how stable the target temperature is.
-- Review whether pumps, tubes, and tanks fit the robot form factor.
-- Look for leak, cleaning, and maintenance considerations.
-- Separate human comfort claims from measured thermal and tactile behavior.
-- Consider whether the skin can detect accidental contact during robot motion.
+- Define whether the task needs contact presence, location or calibrated force.
+- Map channels, gaps and regions where simultaneous contact is expected.
+- Measure the installed surface's thermal behavior separately from fluid temperature.
+- Retain pump state and temperature alongside pressure recordings.
+- Validate contact decisions during the intended operating transitions.
+- Include inspection, replacement and fault-response work in the system estimate.
+
+Use the [calibration guide](/guides/tactile-sensor-calibration) to structure repeatability checks, and [robot touch sensing](/guides/robot-touch-sensor) to compare observation types before selecting a modality.
+
+The [electronic-skin overview](/electronic-skin) connects this exterior-system question to other sensing architectures without equating warmth with tactile resolution.
 
 ## What not to infer
 
-This source does not mean fluid-based robot skin is ready for all human-robot interaction systems. It reports a prototype and verifies contact detection and thermal display capabilities in that context. Real robots would still need safety validation, long-duration testing, cleaning design, temperature limits, and mechanical integration.
+This study does not establish whole-surface force imaging, simultaneous multi-contact localization, a clinically validated touch experience or industrial readiness. A successful controlled contact trace should not be generalized to every tube routing, cover or ambient condition. Procurement price, lifetime and a production-ready robot interface were not verified in the reviewed evidence.
 
-For RoboSkin.ai, the useful lesson is that robot skin can be an interaction surface, not only a sensor array. Good content should explain whether a skin is optimized for manipulation, safety, comfort, thermal display, or some combination of those goals.
+For a robot exterior that combines several requirements, [research services](/research-services) can help organize a source-based comparison; that is not a certification or a promise that this design meets them.
 
 ## Source
 
-[ROBOMECH Journal: Fluid-based robot skin for contact detection and thermal stimulation](https://link.springer.com/article/10.1186/s40648-025-00326-1)
+[Fluid-based robot skin for contact detection and thermal stimulation — ROBOMECH Journal](https://link.springer.com/article/10.1186/s40648-025-00326-1). Device findings above are author-reported. The acceptance matrix is an editorial proposal and has not been executed by RoboSkin.ai.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-16',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Human-Robot Interaction',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'ROBOMECH Journal fluid-based robot skin article',
@@ -3571,70 +3616,83 @@ For RoboSkin.ai, the useful lesson is that robot skin can be an interaction surf
   {
     id: 'graphene-liquid-metal-3d-force-2026',
     title: 'Graphene and liquid metal 3D force sensing for robot fingertips',
+    seoDescription: "Review graphene and liquid-metal 3D force sensing, source limits, shear-versus-slip evidence and fingertip integration checks.",
     excerpt:
-      'A source-backed technical brief on miniaturized tactile sensors that separate normal force, shear force, slip, and texture signals for dexterous robot hands.',
+      "Review graphene and liquid-metal 3D force sensing, source limits, shear-versus-slip evidence and fingertip integration checks.",
     content: `# Graphene and liquid metal 3D force sensing for robot fingertips
 
-**Updated technical brief - May 2026**
+Three-axis force sensing can distinguish loading into a surface from loading along it. The integration question is whether those components remain calibrated after the sensor is packaged on a fingertip, and whether the resulting observation supports the intended control decision.
+
+**Research interpretation published April 25, 2026; evidence reviewed November 3, 2026.** This review uses the University of Cambridge's March 5, 2026 report on Yun and colleagues' work. The underlying paper's full methods were not verified in this pass; numerical performance claims requiring them are omitted.
 
 ## Why this source matters
 
-Robot skin is often described as a pressure layer, but pressure alone is a weak description of real contact. A gripper usually needs to know not only that it touched an object, but how force is distributed, whether the object is sliding, and whether the surface texture changes the required grip strategy. The University of Cambridge report on graphene and liquid metal 3D force sensing is useful because it frames touch as a multi-axis measurement problem rather than a single pressure value.
+The [Cambridge report](https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots) describes a silicone composite containing graphene, liquid-metal microdroplets and nickel particles. Pyramid structures and signals from four underlying electrodes enable reconstruction of a three-dimensional force vector. The report describes robotic-gripper demonstrations and identifies the associated Nature Materials paper.
 
-The Cambridge team describes a miniature tactile sensor architecture based on graphene, liquid metal composites, nickel particles, and skin-inspired microstructures. The public report says the sensor can detect how hard a robot is pressing, the direction of applied forces, whether an object is slipping, and surface roughness. That combination is important for robot fingertips because fingertips are small, curved, mechanically constrained, and often the first place where contact-rich manipulation fails.
+That supports discussion of a material-and-electrode route to multidirectional sensing. It does not give this review enough evidence to reproduce calibration, compare uncertainty across the full load range or verify a production lifetime. Future miniaturization and additional sensing modalities should remain future directions. No hardware was tested by RoboSkin.ai.
 
 ## Core idea
 
-The important idea is vector contact. A scalar pressure sensor gives a controller one simplified number or map: more pressure here, less pressure there. A 3D force sensor is more informative because it separates normal pressure from tangential force. Normal force tells the robot how strongly it is pushing into an object. Tangential force tells the robot whether the object may be sliding across the contact surface. Texture response gives another signal that can help distinguish a smooth object from a rough or deformable one.
+A normal-force signal describes loading perpendicular to the local contact surface. Tangential components describe loading within that surface. Both depend on the chosen coordinate frame, and neither automatically describes the complete contact distribution over an object.
 
-For a robot hand, this matters before the object visibly moves. Vision may see the object before grasping, but vision often loses useful information after contact because fingers cover the object. A tactile sensor that can detect early slip gives the controller a chance to adjust grip force or finger pose before the grasp fails.
+For a fingertip designer, ask which physical deformation produces each electrical signal and how calibration separates the force components. A compact structure can still need careful mounting, signal conditioning and compensation. The [technology overview](/technology) provides context for comparing electrical, magnetic and optical routes without treating them as interchangeable products.
 
 | Contact signal | What it tells the robot | Why it matters |
 | --- | --- | --- |
-| Normal force | How hard the finger presses into the object | Prevents under-gripping and crushing |
-| Shear force | Whether load is moving sideways at the contact patch | Helps detect slip before a drop |
-| Texture response | How the surface interacts with the fingertip | Supports material and handling decisions |
-| Spatial pattern | Where contact occurs across the fingertip | Helps adjust pose and contact strategy |
+| Normal force | Loading into the local surface, when calibrated | Can inform grip adjustment; does not itself prevent crushing |
+| Shear force | Tangential loading at the contact | Helps characterize interaction; static shear is not proof of slip |
+| Texture-related response | A response that depends on surface and motion conditions | Requires a validated task before assigning a material or handling decision |
+| Spatial pattern | A distributed observation where the installed design provides it | Can inform contact location; one force vector is not a complete contact map |
 
 ## Practical design implications
 
-Miniaturization is more than a laboratory convenience. A fingertip sensor has to fit into a small mechanical envelope without making the finger too bulky, too stiff, or too fragile. The smaller the sensing unit, the easier it becomes to place arrays around curved surfaces, fingertip pads, and narrow gripper jaws.
+| Design decision | Evidence to request | Why it matters |
+| --- | --- | --- |
+| Sensor orientation | Local axes and transformation into the robot frame | The sign and direction must remain meaningful after mounting |
+| Protective surface | Calibration with the intended cover | A cover can redistribute the load reaching the sensing structure |
+| Multiaxis loading | Combined-load validation and residual cross-axis error | Separate single-axis fits may not describe simultaneous loading |
+| Slip response | Independent motion evidence and decision timing | Shear force can exist while a contact is still sticking |
+| Replacement | Repeatability across installed samples | A material result does not establish interchangeability |
 
-The public Cambridge description also matters because it combines material choice with geometry. Graphene and liquid metal composites provide electrical behavior, while skin-inspired microstructures concentrate stress and help the sensor respond to small forces. In robot skin design, the sensing material and the surface geometry cannot be treated as separate decisions. A material that performs well as a flat coupon may behave differently once molded into pyramids, bonded to a gripper, routed through wires, and cycled through thousands of grasps.
+These are engineering review questions, not additional results reported for this device. Use the [tactile calibration guide](/guides/tactile-sensor-calibration) to turn them into a reference measurement and a held-out validation plan.
 
 ## How to read the result
 
-The strongest use of this source is as a design lens, not as a purchasing shortcut. A robot fingertip team can use it to separate three questions that are often mixed together. First, does the sensor produce a physically meaningful contact signal? Second, can that signal be preserved after packaging, bending, and repeated use? Third, can the robot controller react to that signal quickly enough to change the grasp?
+Keep material geometry, spatial sampling and force accuracy separate. A small pyramid does not by itself establish the pitch of a finished array, effective contact resolution after a cover, or the uncertainty of each force axis. Similarly, reconstructing a force vector does not establish the latency of a complete robot response.
 
-Those questions keep the article useful even when a reader is not building the same sensor. They also prevent a common mistake in robot skin coverage: treating material novelty as the whole story. For manipulation, the output format, calibration method, mounting geometry, and control-loop timing are as important as the sensing material.
+Read an application demonstration as a bounded example. Identify the object, initial grasp, controller, sensing arrangement and failure criterion before extrapolating to another task. A delicate-object demonstration does not establish a universal safe grip force or performance across unknown surfaces.
+
+### From shear observation to a slip decision
+
+An evaluation should distinguish static tangential loading, intentional motion and unintended relative motion. For example, compare a contact held under increasing lateral load with a contact that is deliberately sliding, using an independent observation of motion. Then test the detector's timing and false alarms before enabling a recovery action. This is a proposed validation sequence, not a result of this research review.
+
+The [slip-detection guide](/guides/slip-detection-robot-hand) separates signal, detection and recovery. Keep that distinction when deciding whether a new three-axis sensor adds useful information to an existing gripper.
 
 ## Evaluation checklist
 
-- Confirm whether the sensor measures normal force only, shear force only, or a reconstructed 3D force vector.
-- Check whether slip detection is demonstrated during real grasping, not only in a bench press test.
-- Ask how calibration changes when the sensor is mounted on a curved fingertip.
-- Separate sensitivity claims from usable operating range.
-- Review whether surface texture recognition is task-relevant or just a demonstration.
-- Look for repeated loading, bending, temperature, and contamination tests before assuming deployment readiness.
+- Identify the measured force axes, coordinate frame and usable range.
+- Request combined-load tests and uncertainty, not sensitivity alone.
+- Validate the intended cover and mechanical mounting.
+- Record contact-to-output and output-to-action timing separately.
+- Include sticking contacts when testing a slip detector.
+- Check sample variation and replacement calibration before scaling the installation.
 
 ## What not to infer
 
-This source does not mean every graphene or liquid metal tactile sensor is ready for commercial robot skin. It also does not mean a single fingertip demonstration transfers directly to a full humanoid hand. Scaling from one small contact patch to a full hand introduces wiring density, data bandwidth, calibration drift, replacement strategy, and mechanical packaging problems.
-
-For RoboSkin.ai, the useful lesson is narrower: robot skin content should distinguish pressure sensing from multi-axis tactile sensing. Articles that treat all tactile sensors as generic pressure pads miss the most important engineering difference. A high-value tactile AI stack needs contact direction, slip information, timestamped data, and a controller that can use those signals.
+This review does not verify clinical or prosthetic benefit, industrial robustness, general human-equivalent touch or universal slip recovery. It does not establish availability, price, production yield or commercial rights to reproduce the design. The university's reported demonstrations are not independent product tests.
 
 ## Source boundary
 
-This article summarizes the public Cambridge report and adds RoboSkin.ai editorial analysis for research orientation. Performance values, patents, demonstrations, and researcher statements should be attributed to the cited source, not to RoboSkin.ai.
+The accessible source for this pass is the university report. The linked publisher methods could not be read through the research tool, so force-resolution, bandwidth, durability and comparative superiority claims were not added. A [research-services inquiry](/research-services) can specify which missing evidence matters to a particular integration decision; it should not assume that evidence already exists.
 
 ## Source
 
-[University of Cambridge: Graphene-based artificial skin brings human-like touch closer to robots](https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots)
+[Graphene-based artificial skin brings human-like touch closer to robots — University of Cambridge, March 5, 2026](https://www.cam.ac.uk/research/news/graphene-based-artificial-skin-brings-human-like-touch-closer-to-robots). Associated paper: [Multiscale-structured miniaturized 3D force sensors](https://doi.org/10.1038/s41563-026-02508-7). The article's images were not reproduced or adapted.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-25',
-    updated: '2026-05-14',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile Hardware',
     image: '/generated/research-graphene-quantum-tunneling.svg',
     sourceTitle: 'University of Cambridge graphene-based artificial skin report',
@@ -3735,72 +3793,78 @@ This review uses the peer-reviewed Science Robotics article, the author-accepted
   {
     id: 'full-hand-tactile-sensing-2025',
     title: 'Full-hand tactile sensing for adaptive dexterous grasping',
+    seoDescription: "Understand F-TAC Hand coverage, pixel-scale limits and task-led evaluation of distributed tactile sensing for dexterous manipulation.",
     excerpt:
-      'A research-oriented explanation of why full-hand tactile coverage matters for adaptive grasping, occluded manipulation, and contact-aware robot hands.',
+      "Understand F-TAC Hand coverage, pixel-scale limits and task-led evaluation of distributed tactile sensing for dexterous manipulation.",
     content: `# Full-hand tactile sensing for adaptive dexterous grasping
 
-**Updated technical brief - May 2026**
+F-TAC Hand illustrates why sensing beyond the fingertips can matter for dexterous manipulation. Its name should not be read as complete surface coverage: the reported configuration covers approximately 70% of the hand, and visual sampling density is not a force-accuracy specification.
+
+**Research interpretation published April 23, 2026; evidence reviewed November 3, 2026.** The Nature Machine Intelligence paper was published June 9, 2025. All hardware and task findings below are the authors' reports, not RoboSkin.ai experiments.
 
 ## Why this source matters
 
-Robot hands are often evaluated through motion: how many degrees of freedom they have, how human-like the finger geometry looks, or whether the hand can close around an object. Motion matters, but motion without contact feedback is limited. The Nature Machine Intelligence article on high-resolution touch across robotic hands is useful because it frames tactile sensing as part of adaptive manipulation, not as a cosmetic surface layer.
+The [paper](https://www.nature.com/articles/s42256-025-01053-3) describes 17 vision-based tactile sensors in six configurations, integrated across a dexterous hand. It reports approximately 70% surface coverage and a calibrated visual scale of 0.1 mm per pixel. That scale should not be relabeled as force accuracy or as the smallest reliably distinguishable contact under every condition.
 
-The reported F-TAC Hand work is relevant to RoboSkin.ai because it treats a robot hand as a contact-rich system. The key issue is not whether a hand can touch an object. The issue is whether it can sense enough of the contact interaction to adjust its behavior while grasping.
+The hardware uses camera readout and an integrated processing path; the study demonstrates grasping and adaptation in its own setup. The paper's grasp repertoire does not establish arbitrary-object competence, a maintenance interval or a guaranteed industrial response time. Read the published configuration before comparing it with hands using different sensing principles or coverage maps. [Source methods and results](https://www.nature.com/articles/s42256-025-01053-3).
 
 ## Core idea
 
-A robot hand with only joint encoders and vision can estimate where its fingers are, but it may not know what is happening at the contact surface. The object can shift, rotate, deform, or slip while the hand blocks the camera. Full-hand tactile sensing helps fill that gap by providing distributed information across fingers, palm, or other contact areas.
+An object can contact a finger side, joint region or palm while being grasped or repositioned. Sensing at those locations can provide observations that a fingertip-only arrangement does not directly measure. Whether that observation improves a task depends on the controller, mechanics and which contacts occur.
 
-Adaptive grasping depends on feedback loops. The hand touches, senses, adjusts, and senses again. If tactile feedback is sparse, the controller may know only that one pad is pressed. If coverage is broader and higher resolution, the controller can detect contact location, pressure distribution, emerging slip, and whether the grasp is becoming more stable or less stable.
-
-| Sensing level | What the hand can know | Typical limitation |
-| --- | --- | --- |
-| No tactile sensing | Finger pose and planned motion | Contact outcome must be guessed |
-| Single force sensor | Aggregate load at a point or joint | Little information about contact pattern |
-| Fingertip pads | Local contact on selected surfaces | Palm and side contacts may be invisible |
-| Full-hand coverage | Distributed contact across the hand | More data, wiring, calibration, and processing |
+Other observations, such as joint state or a wrist force/torque sensor, can also support contact inference. Distributed tactile coverage adds spatial information; it does not mean every alternative system is unaware of contact. Use the [robot-hand sensor guide](/applications/robot-hand-tactile-sensor) to define the task before choosing a sensor count.
 
 ## Why full-hand coverage is difficult
 
-Full-hand tactile sensing is hard because a hand is not a flat plate. Fingers bend, surfaces stretch, cables move, and contact can happen at unexpected locations. A sensor placed on a fingertip may be useful for pinch grasping, but a power grasp may involve the palm, finger sides, and multiple contact transitions.
+The installed surface includes joints, seams, cable exits and regions that deform during motion. Treat active coverage as a geometry-dependent map. An impressive percentage can still leave a critical task contact unsensed, while a smaller carefully located sensing area may serve a narrower task well.
 
-The data volume also grows quickly. More tactile pixels or taxels create richer information, but they also create a software problem. A controller cannot simply consume unfiltered high-dimensional tactile streams without a clear representation. Teams need feature extraction, event detection, compression, or learning-based policies that know what to do with the data.
+| Question | Practical comparison |
+| --- | --- |
+| Where does the object touch? | Overlay representative task contacts on active and blind regions |
+| What changes during articulation? | Inspect the map at relevant joint configurations |
+| What does each channel measure? | Separate images, geometry estimates and calibrated forces |
+| Are contacts synchronized? | Measure acquisition timing across the installed sensors |
+| What can be serviced? | Identify replacement units and required recalibration |
 
 ## Reader value
 
-The practical value of this paper is that it pushes evaluation beyond fingertip demos. Many robot skin examples look persuasive because a single pad responds clearly when pressed. A full hand is less forgiving. Contacts appear on the side of a finger, across the palm, near a joint, or in multiple places at once. A controller that cannot locate those contacts in the hand model cannot use them well.
+For a hand integrator, this paper is most useful as a system-design reference: sensing geometry, mechanics and inference must be considered together. It is not a purchase specification for every robot hand.
 
-This is also where source-backed content can add original analysis. The useful comparison is not "tactile sensing versus no tactile sensing." The useful comparison is which coverage pattern supports which manipulation behavior. Fingertip sensing may be enough for controlled pinch tasks. Palm and side coverage become more important for power grasps, handovers, and objects that roll or shift under partial occlusion.
+### A task-led coverage review
+
+Start with a small set of representative manipulations and record expected contacts throughout the motion, not just at the final grasp. Mark which observations the controller actually consumes. Then define the behavior when an object reaches an unsensed region or a sensor becomes invalid.
+
+This review can reveal whether the next investment should be added coverage, better calibration, synchronized acquisition or a change in control logic. The proposal is an editorial evaluation method, not an additional F-TAC experiment.
 
 ## Evaluation checklist
 
-- Does the sensor cover only fingertips, or also the palm and finger sides?
-- Does the hand preserve range of motion after the tactile layer is installed?
-- Are tactile readings spatially registered to the robot hand model?
-- Can the system detect slip or contact transitions during motion?
-- Is tactile data synchronized with joint state, vision, and force-torque data?
-- Does the evaluation include occluded or visually ambiguous manipulation tasks?
+- Preserve the distinction between nominal hand area and active tactile area.
+- Record seams, blind regions and the effect of joint configuration.
+- Keep pixel scale separate from contact localization and force uncertainty.
+- Check sensor synchronization and full-system latency under the intended load.
+- Report task successes with failures and a clear denominator.
+- Repeat relevant checks after cover, camera or sensor-module replacement.
+
+The [calibration guide](/guides/tactile-sensor-calibration) helps define repeatability checks. The [sensor-selection guide](/guides/how-to-choose-a-tactile-sensor) connects those requirements to integration tradeoffs rather than a single density ranking.
 
 ## What this means for tactile AI
 
-Tactile AI is not only a model that classifies touch. It is the pipeline that turns touch into action. A full-hand system needs sensing, timestamping, calibration, spatial mapping, logging, policy input, and validation. If any part is weak, the tactile layer becomes a data generator rather than a useful control input.
+A richer observation does not automatically produce a stronger policy. Training data need to identify sensor locations, frames, timing, invalid states and changes to the installed hand. An algorithm trained with one pattern of missing contacts should not silently be evaluated with another.
 
-For example, a high-resolution skin may detect a local pressure pattern, but the robot still needs to know which finger segment produced that pattern, whether the object is expected to move, what the safe grip force is, and whether increasing force would damage the object. That is why tactile sensing and robot control must be discussed together.
+The [robot-learning overview](/robot-learning) distinguishes sensing evidence from policy and hardware evaluation. When comparing learning systems, hold the task and observation conditions explicit instead of attributing every outcome to the number of sensors.
 
 ## What not to infer
 
-The Nature Machine Intelligence article should not be treated as a blanket claim that all full-hand skins are deployable. Research results depend on the hand design, sensor layout, tasks, training data, and evaluation method. A full-hand sensor system that works in one robotic hand may not transfer directly to another hand with different geometry, compliance, cable routing, or controller architecture.
-
-For RoboSkin.ai, the source supports a conservative editorial point: robot hands need more than attractive mechanical design. They need contact feedback that is placed, calibrated, and used by the control stack. Thin content that says "humanoid hands need touch" is not enough. Useful content should explain why coverage, synchronization, and adaptive response matter.
+Do not infer complete surface coverage, human-equivalent touch, calibrated force from pixel density, or universal grasp robustness. Product availability, service life and reproduction licenses were not independently verified in this review. A requirements-based [research-services review](/research-services) can organize the unresolved questions without treating the paper as a certified product.
 
 ## Source
 
-[Nature Machine Intelligence: Embedding high-resolution touch across robotic hands enables adaptive human-like grasping](https://www.nature.com/articles/s42256-025-01053-3)
+[Full-hand tactile sensing for adaptive dexterous grasping — Nature Machine Intelligence](https://www.nature.com/articles/s42256-025-01053-3). Publication date, hardware configuration and reported coverage were checked against the publisher article; no hardware reproduction was performed.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-23',
-    updated: '2026-05-14',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Dexterous Manipulation',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'Nature Machine Intelligence full-hand tactile sensing paper',
@@ -3890,75 +3954,80 @@ A multimodal e-skin evaluation should not merely list "pressure and temperature"
   {
     id: 'event-based-opto-tactile-2025',
     title: 'Event-based tactile sensing for sparse, low-latency robot touch',
+    seoDescription: "Separate event-camera timestamps from tactile decision latency, and compare localization accuracy, valid estimates and system power.",
     excerpt:
-      'A source-backed note on event-based and neuromorphic tactile sensing, sparse contact events, and why low-latency touch matters for robot control.',
+      "Separate event-camera timestamps from tactile decision latency, and compare localization accuracy, valid estimates and system power.",
     content: `# Event-based tactile sensing for sparse, low-latency robot touch
 
-**Updated technical brief - May 2026**
+Event cameras can represent changes without transmitting a conventional sequence of full images. That property does not establish the latency, power or contact accuracy of an entire tactile system. The reviewed opto-tactile study is especially useful for separating these levels of evidence.
+
+**Research interpretation published April 21, 2026; evidence reviewed November 3, 2026.** Frontiers lists the paper's publication as January 23, 2026, although its volume and DOI contain 2025. The existing page URL is retained. RoboSkin.ai has not reproduced the device or its measurements.
 
 ## Why this source matters
 
-Most tactile systems are described as frames or maps: a sensor array is sampled at a fixed rate, producing a stream of pressure or contact values. That can be useful, but it may waste bandwidth when nothing changes and may introduce latency when fast events matter. The Frontiers article on event-based opto-tactile skin is useful because it applies an event-driven idea to touch: report meaningful changes rather than continuously sending dense frames.
+The [paper](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full) uses two event cameras to observe contact-induced optical changes in a silicone structure and estimates press location through stereo processing. It reports 4.66 mm localization RMSE for the successfully observed presses, with 95% of presses visible in both cameras over the probed area. The denominator matters: conditional localization error is not an error measure for every attempted contact.
 
-This is similar in spirit to event-based vision. A camera does not always need to send a full image if the important information is motion or change. A tactile system does not always need a full pressure map if the important information is slip onset, vibration, or a sudden contact transition.
+A heavily downsampled condition increased RMSE to 9.33 mm and reduced valid localization to 85%. The authors explicitly state that they did not demonstrate the cameras' potential microsecond-scale sensing latency in this complete setup; reliable press distinction required approximately 31 ms. These are paper-specific findings, not a universal event-sensor specification. [Source results and discussion](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full).
 
 ## Core idea
 
-Event-based tactile sensing focuses on changes. Instead of sampling every taxel at the same frequency regardless of activity, the sensor or processing layer emits events when contact conditions change. For robot manipulation, this can be useful because many important tactile moments are short: first contact, micro-slip, release, impact, vibration, and texture transitions.
+Separate the sensor's event timestamp from the decision window that collects enough events to identify a contact. Then separate that decision from the controller receiving it and the actuator responding. A short timestamp resolution can coexist with a longer useful decision latency.
 
-| Data style | Strength | Weakness |
-| --- | --- | --- |
-| Dense frame tactile data | Rich spatial map at each time step | Higher bandwidth and processing load |
-| Event-based tactile data | Sparse, fast response to changes | Less intuitive for static contact maps |
-| Hybrid tactile data | Combines state and change information | More complex software architecture |
+| Timing layer | What to measure |
+| --- | --- |
+| Optical or electrical change | The physical event and its reference timestamp |
+| Sensor output | First relevant event and acquisition behavior |
+| Contact inference | Enough evidence to issue a valid detection or location |
+| Controller delivery | Transport, processing and queue delay |
+| Physical response | Motion or force change following the decision |
 
 ## Why opto-tactile designs are relevant
 
-Opto-tactile systems often separate the compliant contact surface from the sensing electronics. A deformable surface changes optical patterns, and the system interprets those changes as tactile information. An event-based opto-tactile design can reduce the amount of data sent downstream by focusing on meaningful contact changes.
+Optical tactile structures convert deformation or contact into an image-related signal. Event-based readout changes how those observations are encoded; it does not remove the structure, illumination, cameras or processing from the system budget.
 
-This matters for robot skin because large surfaces can generate large data streams. A full hand, arm sleeve, or safety skin may contain many sensing regions. If every region streams dense data continuously, the robot needs more bandwidth, memory, synchronization, and processing. Event-based encoding can make the data stream more task-focused.
+In this study, illumination remains part of the apparatus. Sparse output therefore cannot be equated with zero idle power or a measured system-level energy saving. The [technology overview](/technology) places this route alongside conventional optical and electrical tactile sensing.
 
 ## Where event-based touch helps
 
-Event-based tactile sensing is strongest when timing matters more than a complete static map. Slip detection is the clearest example. A robot may need to react quickly when an object begins sliding, long before a dense pressure map would be interpreted by a slower control loop. Vibration and texture detection are also event-like because they depend on changes over time.
+A useful candidate application has meaningful changes that can be represented sparsely and a controller able to use asynchronous observations. That is a design hypothesis to test, not proof that event-based touch is always faster or more efficient.
 
-For static load monitoring, event-based sensing may not be enough by itself. A robot holding a heavy object may still need an estimate of current pressure distribution or grip force. That is why a hybrid design can be attractive: dense or reduced state data for slower decisions, event streams for rapid changes.
+Test conditions should also include sustained contact and quiet periods. A lack of new events does not, by itself, establish a lack of physical contact. The system needs an explicit state model for an ongoing contact, a lost observation and a newly released contact.
 
 ## Reader value
 
-This source is useful because it gives tactile AI writers a concrete way to discuss latency. Instead of saying a sensor is "fast," the article can ask what data is emitted when a contact changes. A sparse event stream can make early slip and vibration easier to detect, but it also changes the debugging workflow. Engineers must inspect event timing, thresholds, noise filters, and spatial registration.
+The study provides a concrete example of a bandwidth–accuracy tradeoff. When comparing configurations, report both successful localization accuracy and the fraction of contacts for which a valid estimate was produced. Otherwise a configuration that rejects difficult contacts can appear deceptively accurate.
 
-The distinction matters for real robots. A manipulation policy may need dense state to decide grip posture and event data to react to sudden slip. A safety skin may need persistent contact state and separate impact events. A research article that names these differences is more helpful than a general claim that event-based sensing is efficient.
+### A fair comparison record
+
+Record attempted presses, valid estimates, localization error, decision delay, transferred data and complete-system power as separate fields. Define the valid-estimate rule before evaluation. Keep mounting, illumination and the reference contact sequence consistent across settings. This is an evaluation proposal; it was not performed by RoboSkin.ai.
 
 ## Evaluation checklist
 
-- What qualifies as an event: threshold crossing, optical change, vibration, slip, or learned feature?
-- Are event timestamps precise enough to synchronize with robot control?
-- Does the system preserve spatial location of events?
-- Can static contact state still be recovered when needed?
-- What happens during high-frequency vibration or repeated contact?
-- Does event filtering remove noise without suppressing useful early slip signals?
+- State whether latency describes an event, a contact decision or robot action.
+- Report localization error together with coverage and valid-estimate rate.
+- Include sustained contacts and releases, not only sharp transients.
+- Measure the complete apparatus when discussing energy consumption.
+- Test performance after mounting or illumination changes.
+- Preserve raw timing and invalid-output flags in recorded data.
 
 ## Software implications
 
-Event-based tactile data changes the software pipeline. A frame-based tactile map can be visualized as an image. An event stream is more like a time-stamped log. The robot stack needs message definitions, buffering, replay, synchronization, and algorithms that understand sparse events. Without this software layer, event-based touch remains difficult to use in production robotics.
+An asynchronous stream needs ordering, timestamp interpretation and a defined accumulation window. Record these with the model or detector version so that replay does not silently change the decision problem. If packets arrive late, the downstream controller should distinguish an old contact estimate from a current observation.
 
-For ROS 2 or similar middleware, the practical questions are straightforward: what message type carries events, how are timestamps assigned, how are coordinate frames handled, and how can engineers replay a failed grasp? Event-based sensing is valuable only if it can be debugged.
+The [ROS 2 tactile pipeline discussion](/research/ros2-kilted-tactile-pipeline-2026) covers the interface questions. The [slip-detection guide](/guides/slip-detection-robot-hand) is a separate step: press localization does not demonstrate slip detection or recovery.
 
 ## What not to infer
 
-Event-based tactile sensing is not automatically better than dense tactile sensing. It solves a different problem. It can reduce bandwidth and improve responsiveness for changes, but it may be less direct for slow force distribution, static pressure maps, or calibration inspection.
-
-For RoboSkin.ai, the useful editorial point is that tactile AI should include data representation. A robot skin article should not stop at "the sensor detects touch." It should explain whether the output is a frame, a feature, an event, a contact class, or a controller-ready signal.
+This paper does not establish a microsecond robot control loop, a universal power advantage, calibrated force accuracy or closed-loop slip recovery. Downsampling gains should not be reported without their validity and localization tradeoffs. Production availability, lifetime and full reproduction were not verified here. Use [research services](/research-services) to frame a comparison around a specific measurement requirement.
 
 ## Source
 
-[Frontiers in Neuroscience: An event-based opto-tactile skin](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full)
+[Frontiers in Neuroscience, DOI 10.3389/fnins.2025.1735068](https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2025.1735068/full). The publisher date is January 23, 2026. Study measurements are author-reported; the timing and comparison worksheets above are editorial analysis.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-21',
-    updated: '2026-05-14',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/research-neuromorphic-2026.svg',
     sourceTitle: 'Frontiers event-based opto-tactile skin article',
