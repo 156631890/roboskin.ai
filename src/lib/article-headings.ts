@@ -21,3 +21,14 @@ export function getArticleHeadings(content: string) {
   const ids = buildSectionIds(sections);
   return sections.map((section, index) => ({ ...section, id: ids[index] }));
 }
+
+/** Subheadings reserve every existing H2 ID so adding one cannot move an old link. */
+export function getArticleSubheadings(content: string) {
+  const parents = getArticleHeadings(content);
+  const sections = content.split('\n').flatMap((line, index) => {
+    const match = line.trim().match(/^###\s+(.+)$/);
+    return match ? [{ heading: match[1], line: index }] : [];
+  });
+  const ids = buildSectionIds([...parents, ...sections]).slice(parents.length);
+  return sections.map((section, index) => ({ ...section, id: ids[index] }));
+}

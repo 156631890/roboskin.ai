@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import ArticleContents from '@/components/ArticleContents';
-import { getArticleHeadings } from '@/lib/article-headings';
+import { getArticleHeadings, getArticleSubheadings } from '@/lib/article-headings';
 import { getArticleHubLink } from '@/lib/structure-links';
 
 function renderInline(text: string): ReactNode[] {
@@ -48,7 +48,7 @@ function renderInline(text: string): ReactNode[] {
 export default function ArticleBody({ content, hubBacklink = false }: { content: string; hubBacklink?: boolean }) {
   const lines = content.split('\n');
   const headings = getArticleHeadings(content);
-  const headingIds = new Map(headings.map((heading) => [heading.line, heading.id]));
+  const headingIds = new Map([...headings, ...getArticleSubheadings(content)].map((heading) => [heading.line, heading.id]));
   const elements: ReactNode[] = [];
   let listItems: string[] = [];
   let tableRows: string[][] = [];
@@ -145,6 +145,15 @@ export default function ArticleBody({ content, hubBacklink = false }: { content:
         <h2 key={`h2-${index}`} id={headingIds.get(index)} className="mt-10 scroll-mt-24 text-2xl font-semibold tracking-tight text-white">
           {trimmed.slice(3)}
         </h2>,
+      );
+      return;
+    }
+
+    if (trimmed.startsWith('### ')) {
+      elements.push(
+        <h3 key={`h3-${index}`} id={headingIds.get(index)} className="mt-8 scroll-mt-24 text-xl font-semibold tracking-tight text-white">
+          {trimmed.slice(4)}
+        </h3>,
       );
       return;
     }
