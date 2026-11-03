@@ -1,0 +1,17 @@
+# Learning research: source, metric and deployment review
+
+Reviewed November 3, 2026 within the existing full-site goal. All five primary arXiv HTML versions were read using public access and saved with content hashes in the local audit directory. No models, datasets or hardware projects were installed or executed.
+
+## Source-specific decisions
+
+- FreeTacMan, https://arxiv.org/html/2506.01941v1 (June 2, 2025): sections 3.2, 4.2–4.3, limitations and appendices B/D. Distinguish 300 Hz tracking from 30 Hz synchronized records, 12-person collection study from 20 robot trials per task, and 21/55/71% policy averages. Replace the unsupported implication that these data already support Dream-Tac with a conceptual comparison. The paper's statement that no large-scale dataset was released is historical, not a present-day release audit. Proposed mapping and timing checks are editorial analysis.
+- Sparsh-X, https://arxiv.org/html/2506.14754v1 (June 17, 2025): input histories, section 4.2 and appendix C. Four modalities belong to Digit 360, not original DIGIT. Insertion is pre-grasped/fixed-socket, 20 trials; rotation uses different drift/time-to-fall metrics. Distinguish prepared-input model rate from four-fingertip end-to-end processing. Do not turn the reported relative percentages into universal reliability claims.
+- GIST, https://arxiv.org/html/2510.25725v2 (November 13, 2025): existing detailed tables were checked against the full paper and retained. Frame/sample counts, normalized readings, dense/sparse action MAE and demonstration videos remain separate evidence. Add an explicitly proposed evaluation-unit matrix. Preserve the dated August availability record; the November review is of the cited paper and does not assert a fresh exhaustive artifact search.
+- MiTaS, https://arxiv.org/html/2606.06281v1 (June 4, 2026): sections 4–5, Tables 1–2 and controller appendix. Same-sensor architecture comparison is 80% versus 54%; co-training without Evetac at evaluation is mixed, including Key in Lock 55% to 20%. Five tasks, 20 policy trials per task. 15 Hz replanning and 1 kHz servo are separate. Four-DoF action space, no proprioception in policy observations. No claim of general sensor-outage robustness.
+- Dream-Tac, https://arxiv.org/html/2606.08737v1 (June 7, 2026): sections 4.1–4.3 and Appendix D. Replace abstract-level “31.7% action accuracy” with named average task success, 20 trials per method/task and best-checkpoint selection. Mean ablations 51.7/74.2/83.3%; Peel Cucumber full/cached inference 1109/619 ms with 85% success. Neither establishes a low-level force-control rate. The paper links code, but code, checkpoints, artifact licensing and reproduction were not verified.
+
+## Editorial review
+
+Preserve titles, original publication dates, section anchors, source routes, illustrations and useful internal links. Keep direct answers and distinct study-specific decision tables. New recommendations are explicitly editorial; author-reported results remain attributed and bounded. No copied figures, invented tests, broad availability claims, current pricing or fabricated search metrics.
+
+The four previously generic research notes receive substantial replacement text. GIST already has detailed source-backed coverage, so retain it and add the small evaluation matrix instead of padding or replacing useful detail. Human factual sign-off remains pending; it is not claimed. Normal tests, build, SEO/export, preservation and production checks are required. No outreach, GSC requests, access requests or new agreements.

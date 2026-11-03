@@ -2349,49 +2349,58 @@ Version 2 says the authors will release the data, evaluation protocols, pretrain
       'Sparsh-X fuses image, audio, motion, and pressure from Digit 360, showing how multisensory touch can improve tactile AI for robot manipulation.',
     content: `# Sparsh-X multisensory touch representations for tactile AI
 
-**Updated technical brief - June 2026**
+**Updated technical brief - November 3, 2026**
 
-Sparsh-X is a self-supervised tactile representation system for contact-rich robot manipulation. It combines touch signals beyond a single tactile image, addressing how tactile AI can retain deformation, vibration, motion, and pressure cues in one reusable representation. For robot skin, the result matters because useful contact data must transfer into perception and control tasks instead of remaining sensor-specific output.
+Sparsh-X learns a shared representation of tactile images, audio, motion and pressure from Digit 360. Its practical relevance is the interface between those observations and a downstream task. A representation that helps classify a contact still needs a policy, synchronized inputs and an execution schedule before it can guide a robot. Those layers should be evaluated separately.
 
 ## Source findings
 
-Most robot skin pages treat tactile data as a pressure map or a camera-like tactile image. The Sparsh-X paper is useful because it frames touch as a multisensory signal family: image, audio, motion, and pressure. That matters for robot skin because a real contact event can include deformation, vibration, impact, sliding, pressure change, and motion history.
+The June 17, 2025 preprint reports self-supervised training on approximately one million interactions. It studies plug insertion and tactile adaptation of an existing rotation policy. The insertion result reaches 90% over 20 trials with a pre-grasped plug and fixed socket; it is not an arbitrary insertion guarantee. [Methods and policy experiments](https://arxiv.org/html/2506.14754v1#S4.SS2).
 
-The source describes Sparsh-X as a self-supervised representation system trained on contact-rich interactions collected with the Digit 360 sensor. For RoboSkin.ai, the value is not the model name. The value is a clearer way to discuss tactile AI: touch representations should preserve complementary contact signals instead of flattening everything into one channel.
+The modalities use different histories: audio and accelerometer windows span 0.55 seconds, while pressure spans 1.1 seconds. The deployment appendix reports approximately 20 Hz end-to-end processing for four fingertips on an RTX 4090, versus 50 Hz model inference after input preparation. The reported rotation improvement concerns vertical drift, separately from time-to-fall. It must not become a universal “90% safer” claim. [Input construction](https://arxiv.org/html/2506.14754v1#S3) and [deployment appendix](https://arxiv.org/html/2506.14754v1#A3).
 
 ## RoboSkin analysis
 
-Sparsh-X fuses several tactile modalities into a shared representation. That gives downstream policies a richer contact embedding than a single tactile image can provide. In robot skin terms, the system points toward skin data pipelines where pressure, vibration, motion, and visual tactile deformation are synchronized before they are used for control.
+Different signals answer different questions, and a shared embedding does not erase their measurement conditions. The useful design exercise is to state the decision each modality is expected to support, then test whether that information remains available when conditions change.
 
-| Tactile modality | What it may capture | Robot value |
+| Observation family | Possible evaluation question | Interpretation to avoid |
 | --- | --- | --- |
-| Tactile image | Local deformation and contact geometry | Contact shape and pose clues |
-| Audio or vibration | Fast events and impacts | Slip, tapping, and texture cues |
-| Motion | Sensor movement during interaction | Contact dynamics |
-| Pressure | Load and contact intensity | Grip adjustment and force context |
+| Tactile image | Does a contact feature remain distinguishable after remounting? | Pixel detail alone establishes force accuracy |
+| Audio | Does the signal distinguish the event under background vibration? | Every transient is slip |
+| Motion | Does the model separate sensor motion from object interaction? | Accelerometer output directly supplies object pose |
+| Pressure | Does the learned estimate remain valid across contact locations? | An internal pressure channel is a calibrated surface-force map |
+
+These are proposed checks for a new integration, not claims that the paper completed them. Their purpose is to prevent one successful downstream task from becoming an unsupported promise about every physical property.
 
 ## Engineering implications
 
-Multisensory representation learning makes the technical boundary explicit. It is not enough to say a robot uses touch: an evaluation must identify the signals, their synchronization, whether the model receives raw data or features, and which task the representation improves.
+An observation window introduces history, not just additional channels. For a control decision, record the newest and oldest observation contributing to the embedding. Include the alignment rule and any missing samples. A fast neural-network call can still consume a partly stale window, and a high-rate raw stream can still be summarized into a slower decision process.
 
-This is also relevant for robot skin hardware. A skin that exposes only a low-rate pressure number may be easier to integrate, but it may lose high-frequency contact information that could help with slip or impact. A richer sensor creates a harder data problem, but it can support stronger manipulation policies.
+Compare systems at three boundaries: raw acquisition to prepared input, prepared input to representation, and representation to issued action. Measure each boundary on the intended host. The combined result is more useful than quoting an isolated inference figure, especially when the number of active fingertips changes.
 
-Readers can compare the representation problem with [FreeTacMan data collection](/research/freetacman-robot-free-visuotactile-data-collection-2025) and the synchronization problem with the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026).
+Also distinguish two training choices. A frozen representation leaves its weights unchanged while another model learns to use its output. End-to-end training changes the representation together with the policy. A fair comparison should say which is used, how much task data each receives and whether the evaluation conditions overlap with training. A pretrained label alone does not settle that comparison.
+
+The [tactile foundation-model guide](/tactile-foundation-models) places this representation choice in context. For collection and timing, compare [FreeTacMan data collection](/research/freetacman-robot-free-visuotactile-data-collection-2025) and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026).
 
 ## Evaluation checklist
 
-- Check which tactile modalities are actually recorded and synchronized.
-- Ask whether the representation is trained with labels or self-supervision.
-- Review whether downstream tasks use real robot manipulation, not only offline classification.
-- Separate physical-property prediction from policy success.
-- Ask whether the representation transfers across objects, actions, and sensor placements.
-- Compare performance against single-modality tactile baselines.
+Keep a compact experiment record with the task definition, sensor revision, available modalities, window lengths, alignment rule, model revision, frozen or trainable components, training episodes and evaluation trials. Add the compute platform and actual action timing.
+
+Report different outcomes separately:
+
+- Classification: which classes, split rule and error measure were used?
+- Physical estimation: which reference quantity and calibration conditions define the error?
+- Manipulation: how many attempts, what success criterion and which failures occurred?
+- Robustness: what changed, and was that condition included in training?
+- Runtime: which preprocessing, model and controller stages are included?
+
+A failure review should return to the first incorrect boundary. Missing audio, a misaligned window and a poor action choice require different fixes even when all three produce the same failed insertion.
 
 ## What this does not prove yet
 
-This source does not mean every robot skin should use Digit 360 or a transformer backbone. It also does not prove multisensory touch solves all manipulation tasks. The result depends on sensor availability, data volume, temporal alignment, policy design, and task distribution.
+Digit 360 is not the original DIGIT sensor, and the same model inputs should not be assumed available on another fingertip. A source-reviewed architecture is also not a verified package for a new robot.
 
-The practical lesson is that tactile AI combines representation design with sensor design. Robot skin data is not automatically useful until a model can convert it into task-relevant state.
+RoboSkin.ai did not run Sparsh-X, download its training data or reproduce its manipulation trials. Current code, checkpoints and artifact-specific licenses were not independently checked here. The adoption question remains whether the complete observation-to-action interface can be reproduced and evaluated under the intended task conditions.
 
 ## Source
 
@@ -2399,8 +2408,8 @@ The practical lesson is that tactile AI combines representation design with sens
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
     sourceTitle: 'Sparsh-X multisensory touch representations preprint',
@@ -2414,45 +2423,57 @@ The practical lesson is that tactile AI combines representation design with sens
       'A technical note on MiTaS, heterogeneous tactile sensors, GelSight and event-based touch fusion, and why tactile frequency matters for robot hand learning.',
     content: `# MiTaS multi-resolution tactile imitation learning for robot hands
 
-**Updated technical brief - June 2026**
+**Updated technical brief - November 3, 2026**
 
 ## Why this source matters
 
-Robot touch is not one sampling rate. A frame-based tactile sensor can capture geometry, while an event-based tactile sensor can capture fast contact changes. The MiTaS paper is useful because it focuses on combining tactile sensors that operate at different temporal resolutions.
+MiTaS combines wrist vision, frame-based GelSight Mini and event-based Evetac input for contact-rich manipulation. The June 4, 2026 preprint evaluates five tasks on a Franka gripper, with 20 trials per policy and task. Its contribution is a specific fusion design, not proof that every robot needs two tactile technologies. [Experimental setup](https://arxiv.org/html/2606.06281v1#S4).
 
-The source describes Multi-Resolution Tactile Sensing, or MiTaS, as a framework that fuses RGB, GelSight Mini, and event-based Evetac signals for contact-rich manipulation. For RoboSkin.ai, this is useful because it turns "tactile sensor" into a sharper question: what kind of touch signal is needed at each phase of the task?
+The practical question is which contact information changes a decision. A static image, an event history and an action command describe different parts of an interaction. Adding them together is worthwhile only if the resulting policy uses the extra information reliably enough to justify acquisition, calibration and maintenance work.
 
 ## Core idea
 
-MiTaS separates spatial detail from fast temporal detail. A GelSight-style sensor can show local deformation and contact shape. An event-based tactile sensor can react to rapid impact, slip, or vibration. A manipulation policy may need both, especially for tasks where the object moves quickly or the contact state changes before a conventional frame updates.
+The reported all-sensor MiTaS average is 80%, compared with 54% for the matched multisensory architecture baseline. Co-training with Evetac but evaluating without it is mixed: MiTaS's mean rises from 51% to 53%, while Key in Lock falls from 55% to 20%. These are author-reported success rates, not a general missing-sensor guarantee. [Tables 1–2](https://arxiv.org/html/2606.06281v1#S4.SS2).
 
-| Sensor stream | Strength | Risk if missing |
+The policy replans at 15 Hz; the separate impedance servo runs at 1 kHz. The tested action space has four degrees of freedom, and proprioception is omitted from policy observations. Faster event sensing therefore does not mean the learned policy acts at the event rate. [Limitations](https://arxiv.org/html/2606.06281v1#S5) and [controller appendix](https://arxiv.org/html/2606.06281v1#S1.SS1).
+
+| Integration layer | Record before comparison | Why it changes the conclusion |
 | --- | --- | --- |
-| RGB vision | Global object and scene context | Contact remains hidden |
-| GelSight-style touch | Local geometry and deformation | Fast slip can be missed |
-| Event-based touch | High-frequency contact changes | Shape detail may be sparse |
-| Fused representation | Task-level contact state | Calibration and synchronization burden |
+| Sensor acquisition | Which signal is physically present and its timestamp | A missing modality is different from a quiet signal |
+| History construction | Window length, sampling and alignment | Two observations can cover different contact intervals |
+| Policy input | Modalities and any robot-state channels | A comparison must identify what information each policy receives |
+| Action generation | Command representation and replanning interval | Model output is not the low-level servo loop |
 
 ## Engineering implications
 
-Multi-resolution tactile learning is important for robot skin roadmaps because full-body or full-hand skins may combine sensor families. A fingertip may use high-resolution imaging touch, while a palm or gripper side uses lower-resolution pressure or event sensing. Treating those signals as equivalent hides the integration problem.
+Start with the failure that the extra modality is supposed to resolve. If a task fails because the object is mislocalized, a rapid contact-change signal may not supply the missing geometry. If the geometry is adequate but a transition is missed, temporal information may be more relevant. This is an engineering hypothesis to test, rather than a technology-wide ranking.
 
-The key engineering question becomes synchronization. If one signal is high rate and another is low rate, the policy needs a coherent time base. Without that, the robot may react to stale contact data or align a slip event with the wrong hand pose.
+A useful comparison changes one declared component at a time. Keep the task, demonstration set, success criterion and trial budget visible. Record whether removing a modality also changes the model size, training procedure or observation history. Otherwise an apparent sensor advantage may include several simultaneous changes.
+
+Training with a richer sensor set and deploying with fewer sensors is a separate experiment from handling an unexpected sensor outage. The first can prepare a model for a known input configuration. The second requires detecting the failure and deciding what the robot should do with incomplete observations. Do not substitute the first result for evidence about the second.
+
+Use the [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) to define the task requirement, and the [robot learning guide](/robot-learning) to place the observation design within the training and execution pipeline.
 
 ## Evaluation checklist
 
-- Identify the sampling rate and latency of each tactile stream.
-- Ask which task phases need geometry and which need fast event response.
-- Check whether sensor fusion is trained end-to-end or through fixed features.
-- Review whether ablations show the value of each tactile modality.
-- Ask how missing sensors are handled at inference time.
-- Verify whether the policy can replay and inspect failed contact events.
+Before adopting a multi-resolution design, record a proposed acceptance comparison:
+
+1. Define the critical contact phase and the failure that would make the task unacceptable.
+2. State which modality is expected to resolve it, and what information is already available.
+3. Retain aligned raw streams so a failed decision can be replayed without guessing input order.
+4. Compare per-task outcomes as well as an average; record regressions explicitly.
+5. Measure observation age and command timing through the complete processing chain.
+6. Evaluate the intended deployment configuration, including deliberately missing data if outage handling is required.
+
+For reporting, keep success counts, denominators and conditions together. A mean can improve while a critical task becomes worse. Decide in advance whether such a regression is acceptable for the intended application, rather than choosing that rule after seeing results.
+
+The [event-based tactile research note](/research/event-based-opto-tactile-2025) offers a related timing distinction: sensor events, reconstructed observations and robot actions need their own measurements.
 
 ## What not to infer
 
-This source does not prove every robot needs multiple tactile sensors on every finger. Extra sensors add cost, wiring, calibration, and data complexity. The practical lesson is narrower: tactile sensing frequency and modality should match the contact dynamics of the task.
+The paper does not establish that every frame-based sensor misses slip, that any event sensor supplies a drop-in improvement, or that co-training makes a robot tolerant of arbitrary failures. Those are separate claims requiring separate evaluations.
 
-For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactile sensing, event-based tactile sensing, and multi-resolution tactile fusion.
+RoboSkin.ai reviewed the paper, not a running implementation. We did not reproduce the robot trials or verify current code, checkpoints and their reuse terms. For a new integration, treat the study as evidence for a bounded design comparison and retain an independent acceptance test for the actual robot, objects and contact conditions.
 
 ## Source
 
@@ -2460,8 +2481,8 @@ For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactil
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/research-neuromorphic-2026.svg',
     sourceTitle: 'MiTaS multi-resolution tactile imitation learning preprint',
@@ -2476,69 +2497,71 @@ For RoboSkin.ai, MiTaS supports a content distinction between frame-based tactil
       'Dream-Tac models action-conditioned tactile futures for contact-rich robot manipulation, showing why robot skin data needs prediction, not only reaction.',
     content: `# Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation
 
-**Updated technical brief - June 2026**
+**Updated technical brief - November 3, 2026**
 
-Dream-Tac is a unified tactile world action model for contact-rich robot manipulation. It predicts future visual and tactile observations conditioned on robot actions, addressing the gap between sensing current contact and anticipating what happens next. For robot skin and tactile AI, that matters because predictive contact data can inform regrasping, insertion, slip response, and failure analysis.
+Dream-Tac jointly models actions and future visual and tactile observations for contact-rich manipulation. Its engineering value is the proposed connection between predicted contact and action selection. That prediction is not a measured future force or a guarantee of safe execution. A useful evaluation must separate task success, predictive quality and the time needed to issue an action.
 
 ## Source findings
 
-Many tactile policies react to what the sensor reports now. Contact-rich manipulation often needs more than reaction. The robot needs to predict how contact will evolve after an action: whether the object will slip, rotate, jam, release, or settle into a stable grasp.
+The June 7, 2026 preprint reports Franka experiments with two fingertip tactile cameras. It evaluates six tasks, with 20 trials per method and task, reporting the best-performing checkpoint under the authors' selection rule. [Experiment protocol](https://arxiv.org/html/2606.08737v1#S4).
 
-The Dream-Tac preprint is useful because it integrates tactile sensing into a world-action model. The source explicitly models future visual and tactile observations conditioned on robot actions. For RoboSkin.ai, this points toward a stronger tactile AI standard: robot skin should support prediction, not only detection.
+| Author-reported comparison | Result | Read it as |
+| --- | --- | --- |
+| Visual WAM / visuo-tactile WAM / visuo-tactile WAM with bias | 51.7% / 74.2% / 83.3% mean success | Task success under the stated protocol, not generic action accuracy |
+| Full versus cached denoising on Peel Cucumber | 1,109 ms / 619 ms, both at 85% success | One inference comparison, not the robot's force-control frequency |
 
-The paper adds contact-gated visuo-tactile fusion and contact-aware attention. Its abstract reports up to 2.9x faster training, 1.8x faster inference, and a 31.7% average action-accuracy improvement across six contact-rich manipulation tasks. These are source-reported preprint results tied to the authors' model, tasks, acceleration design, and baselines.
+[Ablation table](https://arxiv.org/html/2606.08737v1#S4.SS2) and [efficiency experiment](https://arxiv.org/html/2606.08737v1#S4.SS3). The earlier abstract's broad “action accuracy” wording should not replace these named metrics. The gate uses frame-to-frame tactile-image variation; the authors acknowledge limited tasks and computational cost. [Limitations](https://arxiv.org/html/2606.08737v1#A4).
 
 ## RoboSkin analysis
 
-A tactile world model links action, visual state, tactile state, and future contact dynamics. Instead of treating tactile feedback as an isolated signal, it becomes part of a model that estimates what will happen next. That is important for insertion, regrasping, manipulation under occlusion, and tasks where contact changes faster than vision can resolve.
+A generated tactile observation is a hypothesis about a future observation. To use it operationally, define what decision changes when that prediction changes. A plausible-looking image alone does not identify an acceptable force, a collision-free trajectory or a stable grasp.
 
-| Model input | Why it matters | Evaluation question |
+| Information | Useful engineering question | Separate evidence needed |
 | --- | --- | --- |
-| Visual state | Object pose and scene context | Does vision lose contact after grasping? |
-| Tactile observation | Local force, contact, or deformation | Does it predict hidden state? |
-| Robot action | What the policy intends to do | Does the model predict action effects? |
-| Future tactile state | Expected contact evolution | Can it warn about slip or jam? |
+| Current tactile image | What contact is observed now? | Sensor and preprocessing validity |
+| Predicted tactile image | Which future contact pattern is expected? | Prediction error on held-out interactions |
+| Proposed action | Which motion is requested? | Feasibility and controller response |
+| Executed outcome | Did the intended task succeed? | Trial definition, failures and conditions |
+
+These rows are an evaluation framework, not four capabilities independently demonstrated by this review. Keeping them separate makes failure analysis more useful: a correct-looking prediction can accompany an infeasible action, and a successful action does not by itself establish calibrated prediction quality.
 
 ## Engineering implications
 
-This source matters because it moves robot skin content away from sensor specs alone. A sensor can be sensitive and still weak if the policy cannot use it predictively. A tactile world model asks whether robot skin data can support action-conditioned reasoning.
+Log when observations were acquired, when inference began and ended, when the command was issued and when the robot responded. Model acceleration reduces one part of that chain. It does not measure the entire contact-to-action interval, and it does not replace an appropriate low-level controller.
 
-The practical challenge is data. World models require consistent trajectories, synchronized streams, and enough diverse contact examples to avoid learning only a narrow lab distribution. That ties Dream-Tac back to data collection systems and tactile datasets.
+For model comparison, preserve the checkpoint selection rule and report all declared evaluation conditions. A best-checkpoint result answers a different question from the performance of a fixed checkpoint chosen before evaluation. Neither should be silently presented as average reliability across training runs or an industrial acceptance figure.
 
 ## What this means for robot skin
 
-For robot skin, Dream-Tac changes the question from "can the surface detect contact?" to "can the robot predict what contact will do next?" A useful tactile skin does not only publish pressure, deformation, or slip hints. It should produce data that can be aligned with actions, replayed after failure, and used by models that estimate future contact outcomes.
+A predictive model needs a traceable observation contract. Record the contact surface, camera settings, preprocessing, mounting and replacement history. If the observed appearance changes, investigate whether it represents a different physical contact or a different measurement path before interpreting the prediction error.
 
-This makes Dream-Tac a bridge between sensor pages and software pages. Readers should compare it with the [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) for the broader 2026 model landscape and the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for replayable data handling.
+The [visuo-tactile world model guide](/guides/visuo-tactile-world-models-robot-manipulation) explains the broader model comparison. The [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) provides related logging and replay context; it is not evidence that Dream-Tac was integrated with that pipeline.
 
 ## What this does not prove yet
 
-Dream-Tac does not prove that one tactile world model will generalize across every robot hand, gripper, sensor material, and manipulation task. It also does not remove the need for careful sensor calibration, synchronized data, and real-world failure analysis. The model can only learn useful contact dynamics when the training data covers the contacts that matter.
+The study does not establish arbitrary-hand transfer, calibrated force prediction or a safety guarantee. A new robot or contact surface needs its own evaluation. Reusing an architecture name does not reproduce the authors' hardware, data or timing conditions.
+
+RoboSkin.ai did not run the model or reproduce its trials. The paper provides a code link, but this review did not verify current code contents, downloadable weights or artifact licenses. No implementation-readiness claim follows from the paper alone.
 
 ## Where this fits next
 
-The next route is a stack question: tactile sensing captures contact, a ROS 2-style pipeline records and replays it, calibration-transfer work keeps force labels usable across sensors, and world-action models try to predict what will happen after the next robot action. That stack is the practical path from robot skin data to Physical AI behavior.
+Decide what the application needs before choosing a model. A contact-state estimator, a predictive model and a controller have different acceptance criteria. If the immediate requirement is an independently bounded force response, a successful generative-model demonstration is not a substitute for that validation.
 
 ## Practical questions
 
-- Is Dream-Tac a robot skin sensor? No. It is a tactile world-action model; the robot skin relevance is how tactile observations can support action-conditioned prediction.
-- Why does this matter for Physical AI? Physical AI systems need to act under contact uncertainty, and tactile world models give them a way to reason beyond the current reading.
-- What should readers open next? Start with [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for data replay and [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration transfer.
+- **Is this a tactile sensor?** No; evaluate the observation hardware and the learned model separately.
+- **Does faster inference establish a faster physical response?** Only a measurement through the complete execution chain can establish that.
+- **What can be checked first?** Inspect a replayable episode, the observation/action conventions and the evaluation protocol before attempting task transfer.
+
+Use the [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) for the replay question and [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for a distinct calibration-transfer problem. A prediction study should not inherit force-calibration claims from another method.
 
 ## Evaluation checklist
 
-- Check whether the model predicts future tactile observations, future actions, or both.
-- Ask what tactile sensor type and sampling rate were used.
-- Review whether tasks include hidden contact dynamics such as slip, insertion, or jamming.
-- Separate simulation performance from real robot transfer.
-- Ask whether prediction errors are interpretable during failure.
-- Compare against reactive tactile policies and vision-only policies.
+Retain model revision, sensor configuration, observation histories, action convention, inference hardware, timing boundaries, checkpoint-selection rule, task success definition and all trial outcomes. Record prediction metrics separately from control metrics. Add a failure example that shows the inputs, prediction, command and physical outcome together.
 
 ## What not to infer
 
-This source does not mean tactile world models are ready for arbitrary robot hands. It also does not mean more tactile data automatically produces better prediction. World models can fail when the sensor changes, the task distribution shifts, or contacts become too different from training data.
-
-Tactile AI benefits from prediction and replay. Robot skin data becomes more valuable when it helps a robot anticipate contact outcomes before failure.
+Neither more tactile data nor a faster inference setting guarantees useful anticipation. Select an evaluation that can reveal the wrong prediction, stale observation or failed action before treating a lab result as a deployment decision.
 
 ## Source
 
@@ -2546,8 +2569,8 @@ Tactile AI benefits from prediction and replay. Robot skin data becomes more val
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-08-15',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'Dream-Tac tactile world action model preprint',
@@ -2718,49 +2741,57 @@ Compare [automatic magnetic calibration](/research/open-source-magnetic-tactile-
       'A research note on FreeTacMan, robot-free visuo-tactile datasets, tactile AI data collection, and why robot skin models need contact diversity.',
     content: `# FreeTacMan robot-free visuo-tactile data collection for tactile AI
 
-**Updated technical brief - August 2026**
+**Updated technical brief - November 3, 2026**
 
-FreeTacMan is a robot-free visuo-tactile data collection system for contact-rich manipulation. It addresses the cost and limited task coverage of collecting every tactile demonstration with a fixed robot arm. For robot skin and tactile AI, the system matters because broader human-guided contact data can accelerate learning, while still leaving embodiment transfer and target-robot validation as explicit engineering constraints.
+FreeTacMan collects human-guided visual, tactile and motion demonstrations without moving a robot during collection. Deployment still needs a robot-specific coordinate and action mapping. The useful engineering question is therefore which parts of the demonstration survive that mapping: the observed contact, the intended tool pose, the gripper opening and the feasible motion. Collection convenience alone does not answer it.
 
 ## Source findings
 
-Tactile AI needs data. Collecting robot tactile data is slow because the sensor is often tied to a specific robot, gripper, controller, and task setup. The FreeTacMan preprint is useful because it explores robot-free data collection using a human-centric visuo-tactile device.
+The June 2, 2025 preprint describes fingertip-operated visuo-tactile grippers, external optical tracking and transfer through a robot model and inverse kinematics. Its 300 Hz tracking is synchronized into 30 Hz trajectories containing wrist RGB, two tactile images, pose and gripper width. [Paper, sections 3.1–3.2](https://arxiv.org/html/2506.01941v1#S3).
 
-The source describes a wearable or handheld data collection approach with visuo-tactile grippers and optical tracking. It aims to capture human interaction, tactile feedback, and motion information for contact-rich manipulation. For RoboSkin.ai, this matters because data collection is one of the bottlenecks between tactile sensor hardware and useful robot policies.
+The human study uses 12 participants; the separate policy study evaluates each task over 20 robot trials. Reported average success is 21% for vision-only ACT, 55% after adding unpretrained tactile input and 71% with tactile pretraining. These are author-reported task results, not collection throughput or a 50% relative improvement. The paper identifies external localization as a dependency and says it did not release a large-scale dataset in that work. That historical statement is not a current artifact-availability check. [Experiments and limitations](https://arxiv.org/html/2506.01941v1#S4).
 
 ## RoboSkin analysis
 
-FreeTacMan separates tactile data collection from a fixed robot embodiment. Instead of requiring a robot arm for every demonstration, a human operator can collect visuo-tactile examples through a portable device. That can make task coverage broader and faster, but it also raises transfer questions.
+The distinction between collection and execution matters because a valid observation can accompany an unusable action. A demonstrator may reach a contact pose that the intended robot cannot reach, or approach it through a path that crosses a joint limit. Keeping the tactile image does not repair that action. The mapping must preserve the meaning of the sample while identifying motions that cannot be executed.
 
-| Data issue | Why it matters | FreeTacMan angle |
+An engineering review can split the record into four contracts:
+
+| Layer | Retain in the record | Question before training |
 | --- | --- | --- |
-| Robot collection cost | Robot time is slow and expensive | Human-centric collection |
-| Tactile feedback | Demonstrator needs to feel contact | Real-time tactile interface |
-| Pose tracking | Tactile data needs motion context | Optical tracking |
-| Embodiment gap | Human device differs from robot | Policy transfer validation |
+| Contact observation | Sensor identity, orientation, raw image and preprocessing revision | Will the deployed contact surface produce a comparable observation? |
+| Tool motion | Pose convention, reference frame, tool offset and timestamp | Does this describe the same physical point after mounting? |
+| Gripper opening | Units, zero reference and valid travel | Is a recorded opening mechanically achievable? |
+| Robot action | Mapping revision, joint limits and invalid-sample flags | Which demonstrations remain feasible on the target embodiment? |
+
+This table is a proposed integration record, not an additional experiment from the paper. It helps locate a failure before changing the learning algorithm. For example, a consistent contact offset can originate in the tool transform; adding more demonstrations with the same offset would preserve the error.
 
 ## Engineering implications
 
-Robot skin content often focuses on sensors, but datasets are equally important. A sensor without data can only support demos. A dataset without a transfer path may not improve real manipulation. FreeTacMan is useful because it makes the data pipeline visible: sensor, operator, tracking, synchronization, task, and robot deployment.
+Use synchronization as a testable property. Store the acquisition timestamp, the sample selected for each aligned record and the age of that observation. A regular output rate does not show that all inputs were acquired simultaneously. During replay, inspect contact transitions rather than only settled grasps, because a small ordering error can change whether a motion appears to precede or follow contact.
 
-The hard question is embodiment. A human-held gripper does not move exactly like the robot that will execute the policy. The collected tactile data must be mapped into robot-action space. That mapping is where many tactile learning systems become fragile.
+Separate mapping validation from policy evaluation. First check that recorded frames, tool offsets and gripper values reproduce the intended geometry. Then evaluate the learned policy with declared task conditions and failures. If mapping fails, changing the policy may conceal the original problem. If mapping passes but the policy fails on a new object, the investigation moves toward coverage and learning rather than coordinate conversion.
 
-The data can support models such as the [Dream-Tac tactile world action model](/research/dream-tac-tactile-world-action-model-2026), while a [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) gives teams a route for synchronized logging and replay.
+The [robot teleoperation guide](/robot-teleoperation) provides the wider collection-interface context. The [dataset directory](/datasets) helps distinguish an available collection from a paper describing a collection system. Neither listing status nor a large sample count establishes target-robot compatibility.
 
 ## Evaluation checklist
 
-- Check which tactile sensor is used and whether it matches the deployment robot.
-- Ask how visual, tactile, and pose streams are synchronized.
-- Review the number and diversity of contact-rich tasks.
-- Separate data collection speed from downstream robot performance.
-- Ask how human demonstrations are converted into robot actions.
-- Look for public dataset or code availability before assuming reproducibility.
+Before treating a demonstration set as reusable, retain:
+
+- The sensor and contact-surface revisions, including replacements during collection.
+- Coordinate transforms and their calibration evidence, with an explicit tool reference point.
+- Stream timing, dropped observations and the alignment rule used to form a sample.
+- The target robot model, action representation and the handling of unreachable poses.
+- Episode boundaries, operator and object conditions, and a held-out evaluation plan.
+- Separate collection-time measures and robot-task outcomes, including failed attempts.
+
+Compare the modeling question with the [Dream-Tac tactile world action model](/research/dream-tac-tactile-world-action-model-2026). A [ROS 2 tactile sensor pipeline](/research/ros2-kilted-tactile-pipeline-2026) is relevant to logging and replay; it does not itself validate demonstration transfer.
 
 ## What this does not prove yet
 
-This source does not mean robot-free collection removes the need for robot trials. It can reduce data collection friction, but final policies still need validation on the target robot, gripper, objects, and environment.
+Robot-free collection does not establish robot-free validation. A successful demonstration, a feasible mapped trajectory and a successful learned policy are three different results. An adoption decision should identify which of those has actually been checked on the intended hardware.
 
-Tactile AI evaluation must explain where data comes from. Robot skin becomes useful when sensing, data collection, policy learning, and deployment are connected.
+RoboSkin.ai reviewed the cited paper; we did not build the device, collect demonstrations or reproduce its robot trials. Current code, dataset payloads and artifact-specific reuse terms were not independently verified in this review. A paper's license should not be assumed to cover a later data release or every hardware component.
 
 ## Source
 
@@ -2768,8 +2799,8 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-08-22',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Tactile Data',
     image: '/generated/authority/authority-hero-tactile-stack.webp',
     sourceTitle: 'FreeTacMan robot-free visuo-tactile data collection preprint',
@@ -2786,9 +2817,9 @@ Tactile AI evaluation must explain where data comes from. Robot skin becomes use
       'The GIST preprint reports 101.9K visual-tactile-action samples for towel and sponge manipulation, with dense hand touch, two camera views, and explicit access limits.',
     content: `# GIST humanoid visual-tactile-action dataset maps 101.9K soft-object samples
 
-**Updated technical brief - August 2026**
+**Updated technical brief - November 3, 2026**
 
-The GIST v2 preprint reports 101.9K visual-tactile-action samples collected by three experimenters across four towel and sponge pressure conditions. Its two Inspire RH56-DFX hands provide 2,124 tactile sensing units in total. The source is useful as a documented soft-object collection and ACT baseline study, but it is not currently a verified downloadable dataset or cross-humanoid benchmark.
+The GIST v2 preprint reports 101.9K visual-tactile-action samples collected by three experimenters across four towel and sponge pressure conditions. Its two Inspire RH56-DFX hands provide 2,124 tactile sensing units in total. The source is useful as a documented soft-object collection and ACT baseline study, but this review does not establish a downloadable dataset or a cross-humanoid benchmark.
 
 ## Source findings
 
@@ -2840,7 +2871,22 @@ A usable visual-tactile-action dataset needs more than a large sample count. Tea
 
 The dense-versus-sparse comparison also argues for measuring both representation quality and downstream control. Clearer clustering can show that dense signals preserve pressure-condition structure, while policy loss reveals whether the learning system can exploit it. Those are different questions and should remain separate.
 
+## Define the unit of evaluation before comparing density
+
+A frame count describes recorded observations; it does not describe the number of independent opportunities to succeed. For an adoption comparison, keep related frames together and state whether the held-out unit is an episode, object, operator or hardware configuration. Choose that unit to match the transfer claim the team wants to make.
+
+| Proposed question | Appropriate evidence to retain | Insufficient substitute |
+| --- | --- | --- |
+| Does the policy reproduce the collected behavior? | Held-out action error with a declared split | Training loss alone |
+| Does dense input help complete the task? | Matched dense/sparse robot trials with success counts | A more separated embedding plot |
+| Does the policy transfer to another object? | Trials on an object excluded from training | More frames of the original objects |
+| Is the dense stream practical to operate? | Acquisition, missing-data, processing and maintenance records | Nominal sensor count alone |
+
+This is a proposed evaluation framework, not an additional GIST result. Record the dense and sparse layouts, preprocessing and model capacity so that a difference can be attributed to a declared experimental change. Keep physical outcomes alongside prediction errors; they answer different adoption questions.
+
 ## Availability and licensing
+
+The November 3, 2026 review checked the cited November 13, 2025 arXiv v2 paper. It did not download data or independently repeat the earlier artifact-availability search. The dated access record below remains historical.
 
 As of 2026-08-22, no official dataset download, code repository, dedicated project page, or dataset license could be verified from the paper or its arXiv record. The CC BY 4.0 notice on arXiv applies to the article. It does not by itself grant a license to unpublished dataset files, code, images, or other research artifacts.
 
@@ -2866,8 +2912,8 @@ The ACT study also does not show that dense touch always outperforms a 42-locati
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: '2026-11-03',
+    readTime: '6 min read',
     category: 'Tactile Data',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
     sourceTitle: 'GIST humanoid visual-tactile-action dataset preprint, arXiv v2',
