@@ -84,11 +84,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/graphene-liquid-metal-3d-force-2026 | rewritten and production verified in PR105 | 1199 | 9 |
 | /research/single-material-soft-robotic-skin-2025 | inventory only; claim-by-claim review pending | 1204 | 6 |
 | /research/full-hand-tactile-sensing-2025 | rewritten and production verified in PR105 | 1228 | 11 |
-| /research/temperature-pressure-bimodal-2025 | abstract-bounded material review complete; production verification pending | 1119 | 3 |
+| /research/temperature-pressure-bimodal-2025 | rewritten and production verified in PR109 | 1119 | 3 |
 | /research/event-based-opto-tactile-2025 | rewritten and production verified in PR105 | 1138 | 3 |
-| /research/self-healing-multimodal-eskin-2026 | abstract-bounded material review complete; production verification pending | 1084 | 2 |
+| /research/self-healing-multimodal-eskin-2026 | rewritten and production verified in PR109 | 1084 | 2 |
 | /research/ros2-kilted-tactile-pipeline-2026 | inventory only; claim-by-claim review pending | 1363 | 10 |
-| /research/large-area-flexible-tactile-arrays-2025 | abstract-bounded material review complete; production verification pending | 1168 | 6 |
+| /research/large-area-flexible-tactile-arrays-2025 | rewritten and production verified in PR109 | 1168 | 6 |
 | /news/tactus-tactile-glove-data-collection | inventory only; claim-by-claim review pending | 1479 | 5 |
 | /news/dexsuite-tactile-simulation-lerobot-data | inventory only; claim-by-claim review pending | 1588 | 9 |
 | /news/neura-neuron-ai-touch-memory-pla | inventory only; claim-by-claim review pending | 1689 | 3 |
@@ -162,9 +162,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 868 | 7 |
 | /news/color-changing-mechanochromic-tactile-sensor-2026 | inventory only; claim-by-claim review pending | 702 | 3 |
 | /news/single-pixel-tactile-skin-compressive-sampling-2026 | inventory only; claim-by-claim review pending | 710 | 1 |
-| /news/service-robots-200000-units-logistics-tactile-ai | inventory only; claim-by-claim review pending | 555 | 2 |
-| /news/electronic-skin-research-robot-skin-systems-problem | inventory only; claim-by-claim review pending | 532 | 2 |
-| /news/full-hand-tactile-sensing-robot-hands-vision-control | inventory only; claim-by-claim review pending | 1240 | 1 |
+| /news/service-robots-200000-units-logistics-tactile-ai | historical news evidence review complete; production verification pending | 555 | 2 |
+| /news/electronic-skin-research-robot-skin-systems-problem | historical news evidence review complete; production verification pending | 532 | 2 |
+| /news/full-hand-tactile-sensing-robot-hands-vision-control | historical news evidence review complete; production verification pending | 1240 | 1 |
 | /news/global-robot-installations-542000-physical-ai-touch | inventory only; claim-by-claim review pending | 1001 | 2 |
 | /robot-grippers | inventory only; claim-by-claim review pending | 1187 | 2 |
 | /electronic-skin | inventory only; claim-by-claim review pending | 772 | 11 |
@@ -246,3 +246,7 @@ Four generic interpretations are replaced with study-specific metrics, interface
 ## Material-study evidence pass
 
 Three existing interpretations distinguish official abstract-level evidence from original engineering evaluation frameworks. Source access limits are explicit. No device performance is inferred from unread methods. Original URLs, publication dates, H1/H2 anchors, illustrations and source routes remain. Single-material hydrogel full-method verification remains pending. The full-site queue remains active.
+
+## Historical news evidence pass
+
+Three old briefs receive date, denominator and measurement corrections plus distinct decision frameworks. The F-TAC news metadata no longer implies vision-free control. Existing URLs, publication dates, H2 anchors, illustrations and sources remain. Source evidence and unresolved access are documented; the full-site queue remains active.

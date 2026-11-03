@@ -5496,33 +5496,52 @@ This brief summarizes the published paper and adds RoboSkin.ai systems context. 
   {
     id: 'service-robots-200000-units-logistics-tactile-ai',
     title: 'Service robot sales reached almost 200,000 units: logistics makes tactile AI practical',
-    seoTitle: 'Service Robot Sales Near 200,000: Why Tactile AI Matters',
-    seoDescription: 'IFR reports nearly 200,000 professional service robot sales in 2024. Amazon Vulcan shows why tactile control matters in logistics.',
+    seoTitle: 'IFR 2024 Robot Sales: Logistics and Tactile Adoption Limits',
+    seoDescription: 'What IFR 2024 service robot data and Amazon Vulcan show about contact sensing, item eligibility and logistics pilot evaluation.',
     excerpt:
       'IFR sample data shows professional service robot sales reached almost 200,000 units in 2024, while Amazon Vulcan shows why contact sensing and tactile control matter in logistics.',
     content: `# Service robot sales reached almost 200,000 units: logistics makes tactile AI practical
 
-**News brief - June 2026**
+**Historical news brief - June 2026. Evidence reviewed November 3, 2026.**
 
-The International Federation of Robotics reported that professional service robot sales reached almost 200,000 units in 2024. Transportation and logistics remained the largest application group. This is relevant to tactile AI because logistics robots repeatedly handle packages, shelves, totes, and irregular contact conditions at operational scale.
+The near-200,000 figure describes professional service robot sales in IFR's 2024 supplier sample. It is not a count of tactile robots or a current estimate of the market for electronic skin. For a logistics team, the useful question is narrower: which handling steps require contact information that its existing vision and motion systems do not provide?
 
 ## Source findings
 
-IFR describes continuing growth in professional service robots, led by transport and logistics. Amazon separately introduced Vulcan, a warehouse robot designed to use touch while stowing and picking items. Amazon states that the system combines force feedback with other perception and planning methods so it can detect and respond to contact during manipulation.
+IFR's October 7, 2025 release states that professional service robot sales reached almost 200,000 units in 2024, with 102,900 in transportation and logistics. That category consists mainly of mobile robots transporting and handling goods. These are sample data from 294 suppliers, not projected to the whole industry. The figures should not be compared directly across annual reports because the sample changes. These are historical report figures, not a November 2026 market update. [IFR release](https://ifr.org/ifr-press-releases/news/service-robots-see-global-growth-boom).
 
-IFR states that the 2024 figures are sample data from 294 suppliers. They are not projected to the whole industry and should not be compared directly across annual reports because the sample composition varies each year.
+Amazon's May 9, 2025 technical account describes a separate system: Vulcan uses force/torque sensing at its end-of-arm tools alongside vision to interact with crowded fabric storage pods. Its pick workflow checks eligibility, monitors extraction and can pass difficult cases to a human. That is evidence about one company's manipulation design, not the sensing architecture of the IFR population. [Amazon Science](https://www.amazon.science/blog/how-amazons-vulcan-robots-use-touch-to-plan-and-execute-motions).
+
+Amazon's product story describes different pick and stow tools and advertises handling approximately 75% of the item types it stores. That describes item coverage in Amazon's account; it is not a 75% task-success rate, a result for arbitrary warehouses or an independent RoboSkin test. [Amazon's Vulcan description](https://www.aboutamazon.com/news/operations/amazon-vulcan-robot-pick-stow-touch).
 
 ## RoboSkin analysis
 
-The two sources describe different evidence: IFR reports market activity, while Amazon describes one deployed manipulation system. Together they show why touch is becoming an engineering interface rather than a laboratory accessory. A logistics robot must distinguish expected contact from a jam, excessive force, a shifted package, or a failed grasp.
+Keep three decisions separate: moving goods through a facility, manipulating an individual item and interpreting contact during that manipulation. A mobile transport installation may create no requirement for a tactile gripper. A picking station may benefit from force feedback without needing a distributed skin array. A hand manipulating a fragile or shifting object may need information about where contact occurs as well as the resultant load.
+
+This distinction changes the adoption question. Start with the failed operation and the missing observation, then choose the measurement. Do not start with the market total and infer a sensor purchase. The [tactile manipulation guide](/tactile-manipulation) explains the path from observation to controller action; the [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) helps compare the required outputs.
+
+| Proposed operation | Question for the team | Evidence to collect |
+| --- | --- | --- |
+| Move a loaded tote | Is the problem navigation, payload stability or item contact? | Failure records that separate those causes |
+| Insert an item into a crowded bin | Which contacts are intended, and which require retreat? | Synchronized pose, contact observation and action traces |
+| Extract a selected item | Did the robot take the correct item without disturbing another? | Independent outcome labels and recovery records |
+| Handle an out-of-scope item | Can the system identify its limit and complete a handoff? | Eligibility rule, escalation event and final disposition |
+
+This table is an editorial evaluation framework. It does not describe new measurements of Vulcan or prescribe a universal warehouse design.
 
 ## Engineering implications
 
-Useful tactile systems need more than sensor sensitivity. They need calibrated contact values, timestamps, robot-frame context, replayable logs, controller thresholds, and maintainable hardware. Fleet scale also makes replacement, drift detection, and diagnostics important.
+Define the denominator before comparing a pilot. Report all presented cases, the cases judged eligible, attempted operations, completed operations, damage events and human interventions separately. A system can improve success among attempted cases simply by rejecting more difficult cases. That may be a useful operating choice, but its coverage and labor consequences should remain visible.
+
+Retain the exact observation-to-action sequence for failures. A force threshold recorded after an item is damaged does not demonstrate timely prevention. Separate acquisition time, processing delay, controller response and physical recovery. The [calibration guide](/guides/tactile-sensor-calibration) provides a place to define the force reference and coordinate frame rather than treating a raw channel as a calibrated load.
+
+Include service conditions in the pilot: changed packaging, contaminated contact surfaces, tool replacement and recalibration. Compare performance under those declared conditions rather than extrapolating a clean demonstration to continuous operation. No specific uptime, return on investment or safety certification follows from the sources cited here.
 
 ## What the sources do not prove
 
-The sales total does not show that every service robot uses tactile sensing. Vulcan does not establish a universal sensor architecture for logistics. The cautious conclusion is that contact-aware manipulation has clear operational value where robots physically interact with cluttered inventory.
+IFR's sampled sales total does not measure tactile-sensor penetration, installed robotic skin area or the addressable market for a particular product. Amazon's account does not establish a universal best sensor, an open implementation or a transferable success rate for another warehouse.
+
+The practical conclusion is to identify a contact-dependent failure and test a bounded intervention. Preserve the eligibility and handoff policy alongside the success metric. RoboSkin.ai reviewed public sources; it did not operate Vulcan, inspect Amazon's internal logs or conduct a logistics pilot.
 
 ## Sources
 
@@ -5532,7 +5551,7 @@ The sales total does not show that every service robot uses tactile sensing. Vul
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
-    updated: '2026-07-10',
+    updated: '2026-11-03',
     readTime: '4 min read',
     category: 'Industry data',
     image: '/generated/pages/application-contexts.webp',
@@ -5557,32 +5576,50 @@ The sales total does not show that every service robot uses tactile sensing. Vul
   {
     id: 'electronic-skin-research-robot-skin-systems-problem',
     title: 'Electronic skin research is becoming a robot skin systems problem',
-    seoDescription: 'A Cambridge-UCL study shows why large-area e-skin depends on sensing, wiring, calibration, damage tolerance, and control integration.',
+    seoDescription: 'Use a 2025 Cambridge-UCL skin study to separate material response, contact estimation and robot control, with evidence limits and integration checks.',
     excerpt:
       'A joint Cambridge-UCL study shows that large-area e-skin progress depends on sensing, wiring, calibration, damage tolerance, and control integration working together.',
     content: `# Electronic skin research is becoming a robot skin systems problem
 
-**News brief - June 2026**
+**Historical news brief - June 2026. Evidence reviewed November 3, 2026.**
 
-Recent UK research highlights a shift from isolated tactile patches toward larger, conformable electronic skin systems. In one joint Cambridge-UCL study, researchers reported a single-material robotic skin that can sense multiple forms of contact across a flexible surface.
+An electronic skin can produce a recognizable response in a material experiment without providing a calibrated, timely observation for a robot controller. The engineering work lies in the connections between those stages. This article uses a 2025 joint Cambridge-UCL study as a bounded example, then sets out an editorial framework for evaluating that transition.
 
 ## Source findings
 
-The joint project emphasizes a single-material approach, distributed sensing over complex shapes, and the practical difficulty of maintaining useful signals when a soft surface bends, stretches, or is damaged.
+UCL's June 12, 2025 report describes a conductive gelatin-based hydrogel cast into a hand shape, with 32 electrodes at the wrist. The team varied electrode configurations and used physical stimuli to train a model to distinguish contact types. UCL describes more than 860,000 pathways and more than 1.7 million pieces of information; these are not counts of discrete, independently calibrated taxels placed across a robot hand. The report also says durability improvements and further real-world robot-task tests remain future work. [UCL research report](https://www.ucl.ac.uk/news/2025/jun/improved-electronic-skin-gives-robots-human-touch).
 
-The third Cambridge Engineering source is a separate 2026 Cambridge-only graphene/liquid-metal 3D-force study included as contextual reading. It is not evidence for the 2025 joint Cambridge-UCL hydrogel study.
+This review could reread the UCL account, but not the complete publisher methods through the available access route. It therefore does not derive a new scan rate, accuracy specification or service lifetime from the institutional summary. The existing [single-material skin interpretation](/research/single-material-soft-robotic-skin-2025) treats electrode configurations, measurement channels and scan modes in greater detail; its numerical method claims should be read with their cited evidence scope.
+
+The third source below concerns a separate 2026 Cambridge-only graphene/liquid-metal 3D-force study included as contextual reading. It was reported in March 2026 and is not evidence for the 2025 joint Cambridge-UCL hydrogel study. Keeping those identities separate prevents a later result from being silently assigned to an earlier design.
 
 ## RoboSkin analysis
 
-The central engineering problem is no longer only whether a material changes electrically under pressure. A robot skin system also needs scalable electrodes, calibration, localization, multiplexing, noise control, packaging, repair strategy, data transport, and a controller that can act on the signal.
+Treat the sensing system as a chain of transformations. An electrical change becomes a recorded observation; a model maps that observation to an estimate; a controller uses the estimate for a decision. Each transition needs a definition of what is preserved and what may be lost.
+
+| Stage | Question to resolve | Example of an unsupported shortcut |
+| --- | --- | --- |
+| Material response | Which physical inputs affect the signal? | Calling every signal change a force measurement |
+| Acquisition | Which configuration, reference and timestamp produced the sample? | Treating sequential scans as simultaneous contacts |
+| Estimation | Which labels and held-out conditions validate the output? | Extending stimulus classification to calibrated magnitude |
+| Control | Which decision uses the output, with what delay and fallback? | Calling offline recognition closed-loop robot control |
+| Service | What changes after damage, replacement or remounting? | Treating continued response as unchanged calibration |
+
+These are proposed review questions, not additional reported experiments. A team can use them to identify the next missing piece of evidence without declaring an entire material route ready or unsuitable.
 
 ## Engineering implications
 
-Researchers and engineers should compare e-skin work across the complete path from material response to robot behavior. Important questions include which modalities are separable, how spatial location is reconstructed, how drift is handled, what happens after damage, and whether the data can be synchronized with robot state.
+Begin with one decision the robot needs to make. For example, detecting that contact happened is different from estimating its location, measuring load or determining whether an object is slipping. Assign a reference and an acceptance criterion to that decision. The [technology overview](/technology) distinguishes sensing mechanisms; the [calibration guide](/guides/tactile-sensor-calibration) helps specify the relation between a raw observation and a physical estimate.
+
+Next, define the transfer conditions. A model trained on one material sample and fixture may need a new check after changes in shape, mounting, temperature or electronics. Keep sensor identity, geometry, reference inputs and model revision together. Otherwise a changed baseline can be mistaken for a changed contact.
+
+Finally, connect the observation to a replayable action record. Include rejected or uncertain estimates rather than saving only clean successful examples. A controller that can ignore an unreliable channel under declared conditions is a different system from one that assumes every sample is valid. The [tactile manipulation guide](/tactile-manipulation) provides the wider control context.
 
 ## What the sources do not prove
 
-This study does not establish immediate commercial readiness or one best architecture for all robot bodies. It supports a narrower conclusion: large-area robot skin must be evaluated as a sensing and integration system, not only as a material sample.
+The UCL account does not establish a purchasable skin system, a validated maintenance interval, clinical benefit or a universal human-equivalent sense of touch. Demonstrating several stimulus responses also does not prove that all can be separated simultaneously under arbitrary combinations.
+
+For procurement or replication planning, request the acquisition configuration, calibration and evaluation split, tested geometries, timing boundaries and post-service checks. Missing evidence should remain a named question. RoboSkin.ai did not fabricate the material, run a classifier or test robot behavior in this review.
 
 ## Sources
 
@@ -5592,7 +5629,7 @@ This study does not establish immediate commercial readiness or one best archite
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
-    updated: '2026-07-10',
+    updated: '2026-11-03',
     readTime: '4 min read',
     category: 'Electronic skin',
     image: '/generated/authority/research-soft-robotic-skin.webp',
@@ -5617,77 +5654,66 @@ This study does not establish immediate commercial readiness or one best archite
   {
     id: 'full-hand-tactile-sensing-robot-hands-vision-control',
     title: 'Full-hand tactile sensing moves robot hands beyond vision-only control',
-    seoTitle: 'Full-Hand Tactile Sensing for Vision-Free Robot Control',
+    seoTitle: 'Full-Hand Tactile Sensing: Coverage, Pixels and Control',
+    seoDescription: 'Compare F-TAC Hand, Sparsh and Digit 360 by coverage, pixel scale and evaluation scope, without confusing optical sensing with force accuracy.',
     excerpt:
-      'New research in full-hand tactile sensing shows why dexterous robot hands need distributed touch, not just cameras and joint feedback.',
+      'A historical comparison of F-TAC Hand, Sparsh and Digit 360 separates coverage, visual sampling and task evidence for robot hand integrators.',
     content: `# Full-hand tactile sensing moves robot hands beyond vision-only control
 
-**News brief - June 2026**
+**Historical news brief - June 2026. Evidence reviewed November 3, 2026.**
 
-Robot hands are getting better mechanically, but dexterous manipulation still depends on feedback from contact. A 2025 Nature Machine Intelligence study presented F-TAC Hand, a biomimetic robot hand with high-resolution tactile sensing across 70% of its surface.
-
-The reported system used 0.1 mm spatial resolution and integrated 17 vision-based tactile sensors across six configurations. It preserved human-like hand motion with 15 degrees of freedom and the ability to perform all 33 human grasp types referenced in the study.
-
-The key result is not the hardware specification alone. The researchers evaluated the system across 600 real-world trials and reported that tactile-informed control significantly outperformed non-tactile alternatives in complex manipulation tasks. That matters because real execution often breaks ideal grasp plans: objects shift, collide, rotate, or behave differently than expected.
-
-Meta FAIR's tactile AI work points in the same direction. Meta Sparsh was trained on more than 460,000 tactile images and evaluated across six touch-centric tasks. Meta also introduced Digit 360, a tactile fingertip with more than 18 sensing features, force detection down to 1 millinewton, and an optical field of view with more than 8 million taxels.
+Distributed touch can expose contacts at the palm and sides of fingers that fingertip-only sensing does not directly observe. The useful comparison is what those observations allow a controller to do. A sensor count, image scale and benchmark score answer different parts of that question.
 
 ## Key data points
 
-- F-TAC Hand covers 70% of the hand surface with tactile sensing.
-- Spatial resolution: 0.1 mm.
-- Integrated 17 vision-based tactile sensors.
-- Evaluated across 600 real-world trials.
-- Meta Sparsh used more than 460,000 tactile images.
-- Digit 360 reports force detection down to 1 millinewton and more than 8 million taxels.
+The F-TAC Hand paper was published on June 9, 2025. It describes 17 vision-based tactile sensors, approximately 70% hand-surface coverage and a calibrated visual scale of 0.1 mm per pixel. Its manipulation evaluation includes 600 trials across 60 object combinations. These are author-reported results from the study configuration; they do not establish complete surface coverage, a universal success rate or force-measurement accuracy. [Nature Machine Intelligence paper](https://www.nature.com/articles/s42256-025-01053-3).
 
-| Metric | Reported value | Why it matters for robot skin |
+Meta's October 31, 2024 announcement concerns separate projects. It describes Sparsh pretraining on more than 460,000 tactile images and a six-task benchmark. For Digit 360 it advertises over 18 sensing features, detection of forces as small as 1 mN and an optical field described as over 8 million taxels. Those are the publisher's terms and claims, not independently measured specifications or directly comparable counts of physical sensor modules. [Meta FAIR announcement](https://ai.meta.com/blog/fair-robotics-open-source/).
+
+| Published quantity | What it describes | What it does not establish |
 | --- | --- | --- |
-| F-TAC Hand tactile coverage | 70% of the hand surface | Coverage moves touch from a fingertip accessory to a hand-level sensing layer. |
-| F-TAC Hand spatial resolution | 0.1 mm | Dense geometry can support in-hand pose and contact-shape reasoning. |
-| Real-world evaluation | 600 trials | The paper gives readers more than a hardware description; it tests contact-rich behavior. |
-| Meta Sparsh dataset | More than 460,000 tactile images | Tactile AI increasingly depends on representation learning, not only sensor construction. |
-| Digit 360 optical field | More than 8 million taxels | High-dimensional touch data needs processing, compression, and task-aware interpretation. |
+| F-TAC Hand coverage | Active sensing area on the reported hand | Every task-relevant contact is observed |
+| F-TAC Hand pixel scale | Spatial calibration of visual readout | Force accuracy or universal contact discrimination |
+| F-TAC Hand trial count | Size of the reported manipulation evaluation | Independent environments or arbitrary-object performance |
+| Sparsh image count | Pretraining material | Number of robot-action demonstrations |
+| Digit 360 optical taxels | An optical sensing description in Meta's announcement | That many separate calibrated force cells |
 
 ## RoboSkin analysis
 
-The F-TAC Hand paper is important because it frames tactile sensing as embodied coverage. A fingertip sensor can help a gripper detect local contact, but dexterous hands use fingers, palm, thumb opposition, and changing contact patches. If a hand rolls, reorients, catches, or stabilizes an object, the informative contact may not be where a single sensor was placed.
+These projects address different layers. F-TAC Hand integrates sensing with a hand and its behavior. Sparsh addresses representations learned from tactile images. Digit 360 addresses a multimodal fingertip; Digit Plexus is described as an integration platform. They should not be ranked on one density scale or treated as one experiment.
 
-The study's real value is the connection between coverage and control. The 70% surface coverage and 0.1 mm resolution are impressive, but the stronger question is what the controller can do with that information. The paper reports closed-loop tactile-informed behavior, real-world trials, and a statistically significant performance difference compared with non-tactile alternatives. That gives readers a better standard for evaluating future robot hand claims.
-
-Meta's work adds the representation layer. Sparsh shows that touch data can be treated as a general-purpose perception problem across sensors and tasks. Digit 360 shows how much signal a fingertip can produce when a sensor captures multimodal contact. Digit Plexus then points toward hardware-software integration across fingertips, fingers, and palm.
-
-For robot skin, this stack includes the elastomer or sensing surface, sensor placement, calibration, local processing, representation learning, robot middleware, and controller behavior. A site that only repeats "robots need touch" adds little value. A useful article tells readers where the data comes from, what its resolution or modality means, how it affects control, and what remains difficult.
+For an integrator, the important boundary is between available observations and observations actually used by the policy. More coverage can reveal a previously hidden contact, but it can also add acquisition, synchronization and processing work. Compare complete configurations under the same task instead of combining the best hardware number from one project with the best learning result from another.
 
 ## What this means for robot hands
 
-Full-hand tactile sensing matters because dexterous manipulation uses more than fingertip contact. A robot hand may stabilize an object through the palm, side of a finger, thumb opposition, or a contact patch that shifts during motion. High-resolution touch is useful only when that distributed data changes control behavior.
+Map contact over the whole manipulation sequence: approach, initial grasp, repositioning, recovery and release. Mark active areas, seams and blind regions at the relevant joint positions. Then identify which estimate each contact supports and which action can use it.
 
-For readers, the next useful route is the [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor). That page frames fingertip, palm, full-hand, slip, and grasp-stability sensing as one evaluation problem instead of separate hardware facts.
+The [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) owns the general coverage decision. For paper-specific hardware and measurement boundaries, use the [F-TAC Hand interpretation](/research/full-hand-tactile-sensing-2025). This news page provides historical context across projects rather than another full hardware guide.
 
 ## What this does not prove yet
 
-The F-TAC Hand result does not prove that every robot hand needs the same sensor placement, coverage percentage, or vision-based tactile architecture. It also does not remove integration costs: calibration, wiring, compute load, cleaning, durability, and data handling still decide whether a tactile hand is practical outside a study.
+The phrase “vision-based tactile sensor” means that cameras can read deformation inside the contact sensor. It does not mean the robot must use an external scene camera, nor does it prove that scene vision is unnecessary. Removing a scene camera and removing all optical sensing are different claims.
+
+Similarly, a force-detection threshold is not an accuracy bound, and a visual pixel scale is not a force threshold. A fair comparison names the reference, contact geometry, coordinate frame and error metric. The [calibration guide](/guides/tactile-sensor-calibration) develops that measurement record.
 
 ## Where this fits next
 
-The next step after full-hand sensing is model and middleware. [Dream-Tac tactile world model](/research/dream-tac-tactile-world-action-model-2026) explains why tactile data should support prediction, while the [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026) explains why contact data must be replayable and synchronized.
+The [Dream-Tac tactile world model](/research/dream-tac-tactile-world-action-model-2026) interpretation distinguishes predictive outputs from policy and timing results. The [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026) addresses a different requirement: observations must retain enough context to be synchronized and replayed. Neither linked article turns a hardware specification into a guaranteed task outcome.
 
 ## Practical questions
 
-- Why is full-hand tactile sensing different from fingertip sensing? Full-hand sensing can expose palm, side-finger, and shifting contact patches that fingertip-only systems may miss.
-- Does high-resolution touch replace vision? No. Vision still gives scene context; tactile sensing adds local contact evidence after the hand touches an object.
-- What should readers compare next? Compare this news brief with the [Dream-Tac tactile world model](/research/dream-tac-tactile-world-action-model-2026) and the [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026).
+- **What is the task's missing observation?** Identify whether it is contact presence, location, direction, magnitude or motion before comparing density.
+- **What is the evaluation unit?** Keep object combinations, repeated trials, images and training episodes separate.
+- **What changes after service?** Record replacement, remounting and calibration changes before comparing a new run with the original result.
+- **What happens when a channel is missing?** State whether the controller detects the condition and which fallback has actually been evaluated.
 
 ## What readers should take away
 
-Full-hand tactile sensing matters because dexterous manipulation is distributed. A grasp may start at the fingertips, stabilize through the palm, and fail through slip or collision at an unexpected surface. Robot hands therefore need tactile coverage that matches the task, not merely a decorative sensor label.
-
-The cautious conclusion is that high-resolution touch does not automatically solve manipulation. It adds data, and data must be calibrated, synchronized, interpreted, and acted on. The strongest robot skin systems will be judged by whether tactile feedback changes robot behavior under real execution noise.
+Choose coverage around the contacts and decisions that matter. A useful comparison record includes the installed configuration, observations consumed, timing boundaries, task denominator and failure cases. This is an editorial planning recommendation, not an additional F-TAC Hand or Meta experiment.
 
 ## Source boundary
 
-This article summarizes public research and Meta FAIR announcements. RoboSkin.ai adds editorial interpretation for robot skin and tactile AI readers; it does not claim affiliation with the cited projects.
+RoboSkin.ai reviewed the F-TAC Hand publisher article and Meta's dated announcement. All performance statements remain attributed to those sources. We did not run the hardware, download models, verify current procurement or licensing, or establish a service-life or safety claim. Historical release plans are not presented as current availability.
 
 ## Sources
 
@@ -5696,7 +5722,7 @@ This article summarizes public research and Meta FAIR announcements. RoboSkin.ai
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
-    updated: '2026-06-27',
+    updated: '2026-11-03',
     readTime: '4 min read',
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',
