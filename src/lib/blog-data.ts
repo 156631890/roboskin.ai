@@ -2845,58 +2845,76 @@ The ACT study also does not show that dense touch always outperforms a 42-locati
   {
     id: 'tactile-robotics-outlook-research-landscape-2025',
     title: 'Tactile Robotics outlook for robot skin research priorities',
+    seoDescription: "Use the Tactile Robotics outlook to separate hardware, data and control evidence, compare research fairly and define an integration trial.",
     excerpt:
-      'A source-backed research landscape note on Tactile Robotics outlook, sensor types, distributed tactile sensing, simulation, benchmarking, and data interpretation.',
+      "Use the Tactile Robotics outlook to separate hardware, data and control evidence, compare research fairly and define an integration trial.",
     content: `# Tactile Robotics outlook for robot skin research priorities
 
-**Updated technical brief - June 2026**
+A tactile robotics roadmap should start with the contact decision a robot must make, then identify which sensing, data and control evidence is missing. A survey can organize that investigation; it cannot establish that a particular sensor is ready for deployment.
+
+**Research interpretation published June 18, 2026; source and decision framework reviewed November 3, 2026.** RoboSkin.ai has not conducted the experiments discussed in the source.
 
 ## Why this source matters
 
-Individual robot skin papers can be narrow: one sensor, one material, one hand, one task. The Tactile Robotics outlook article is useful because it steps back and maps the field. It discusses tactile sensor types, distributed tactile sensing, simulation tools, benchmarking, and tactile data interpretation as part of a wider robotics research landscape.
+Luo and colleagues' [Tactile Robotics: An Outlook, arXiv v1, August 15, 2025](https://arxiv.org/html/2508.11261v1) connects materials and transduction with sensor networks, simulation, benchmarks, data interpretation and active perception. It is a field outlook, not a matched comparison of commercial products. Its discussion of competing requirements supports a task-dependent selection process rather than one universally best tactile technology.
 
-For RoboSkin.ai, this source is useful as a category map. It helps keep the site from becoming a pile of unrelated papers. Robot skin content needs a structure that connects hardware, data, control, benchmarking, and applications.
+That distinction matters when a team must choose its next experiment. A manipulation failure can originate before the learning algorithm: the relevant contact may fall outside the sensing area, arrive too late, or change after replacing a cover. Buying a higher-resolution sensor would not, by itself, identify which failure occurred. Use the [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) to write a requirement before comparing papers.
 
 ## Core idea
 
-Tactile robotics is not only sensor fabrication. It includes how touch is sensed, simulated, interpreted, benchmarked, and used for robot behavior. That matches the direction of RoboSkin.ai: robot skin should be treated as a stack, not a single layer.
+The source distinguishes distributed tactile information from aggregate force/torque measurements and discusses materials, computation and networking as coupled design choices. It also examines simulation and benchmarks as research infrastructure. These are useful categories for asking what evidence a result actually supplies; they are not interchangeable stages of deployment readiness. [Outlook, sections II–VIII](https://arxiv.org/html/2508.11261v1).
 
-| Research layer | What it covers | RoboSkin.ai use |
+The following is our engineering review framework, not a ranking or a result reported by the authors.
+
+| Research layer | Decision for an integration team | Evidence to request before moving on |
 | --- | --- | --- |
-| Sensor types | Materials, readout, modality | Categorize hardware routes |
-| Distributed sensing | Skin over hands or bodies | Evaluate coverage and wiring |
-| Simulation | Synthetic contact data | Discuss sim-to-real limits |
-| Benchmarking | Comparable tasks and metrics | Avoid isolated demo claims |
-| Data interpretation | Turning signals into state | Connect tactile AI to action |
+| Material and transducer | Can the surface measure the contact variable needed? | Units, load range, mounting state, temperature conditions and repeatability |
+| Coverage and network | Will the relevant contact be observed in time? | Coverage map, blind spots, full-array acquisition, timestamps and missing-packet behavior |
+| Interpretation | Does the output mean force, contact location, texture or a learned label? | Reference measurement, split design, error distribution and uncertain-output handling |
+| Simulation and data | What can be reused without collecting everything again? | Real versus synthetic fields, calibration provenance, access and licenses |
+| Robot behavior | Does using the signal improve the chosen task? | Controlled feedback comparison, repeated trials, failure categories and recovery cost |
 
 ## Engineering implications
 
-A field outlook is not a deployment guide, but it is useful for building a content taxonomy. If a note only describes sensitivity, it belongs in hardware. If it describes a dataset, it belongs in tactile data. If it describes a policy, it belongs in tactile AI. If it describes body coverage, it belongs in distributed robot skin.
+Keep a chain of evidence from raw observation to action. For example, an illustrative gripper study might ask whether a slip event should trigger a grip adjustment. A sensor characterization addresses signal quality. A classifier evaluation addresses event detection. A controller trial addresses whether the adjustment preserves the object without unacceptable force. Passing one stage does not pass the next.
 
-The technical boundaries matter: material behavior, sensing, integration, and robot learning are related but distinct layers that should be compared explicitly.
+For body contact, the question may instead be where contact occurred and whether motion should pause. That needs a different coverage map, timing budget and failure policy. It would be misleading to compare those two projects using only their best localization error. The [robot skin versus tactile sensor guide](/guides/robot-skin-vs-tactile-sensor) separates a sensing component from the integration work around it.
+
+## How to compare two papers without creating a false leaderboard
+
+Write the denominator beside the result: number of trials, objects, sensor instances or contact sites. Then record the split unit. Samples from the same object or recording can answer a different question from held-out objects, replacement sensors or new sessions. If the papers do not test the same question, keep separate rows instead of sorting their headline percentages.
+
+| Comparison question | Keep separate | Useful next check |
+| --- | --- | --- |
+| Better spatial sensing? | Physical sensing sites, inferred location error and image pixels | Contact size, load, reference accuracy and mounting geometry |
+| Faster response? | Sampling interval, inference duration and detection-to-action delay | A synchronized trace with a defined event and controller response |
+| More reusable data? | Dataset size, usable released subset and compatible action fields | A task-level field and license review in the [dataset directory](/datasets) |
+| Better manipulation? | Offline prediction and executed robot success | Same objects, initial conditions, allowed interventions and failure rules |
+
+Do not copy a historical price or availability statement from a survey into a current procurement comparison. Follow the model-specific source and date it. A literature review remains useful after its product examples change, provided the page separates its conceptual argument from present-day purchasing facts.
 
 ## Evaluation checklist
 
-- Use the outlook to identify which layer each new paper belongs to.
-- Separate tactile sensor research from tactile robotics behavior.
-- Ask whether a source contributes hardware, data, simulation, benchmarking, or control.
-- Look for benchmarkable claims instead of one-off demonstrations.
-- Track gaps: calibration, durability, large-area wiring, and policy transfer.
-- Use review papers as maps, not as proof of deployment readiness.
+- State one robot decision and the consequence of an incorrect tactile output.
+- Identify the missing evidence layer before choosing a sensor or model.
+- Record the source version, tested hardware and evaluation denominator.
+- Preserve uncertainty when a paper omits a protocol or access condition.
+- Check replacement, calibration and maintenance requirements alongside initial performance.
+- Use the [robot-learning overview](/robot-learning) for policy evidence and the [calibration guide](/guides/tactile-sensor-calibration) for measurement validation.
 
 ## What not to infer
 
-This source should not be treated as evidence that any single robot skin technology is commercially ready. It is a landscape paper. Its value is organizing the field and identifying research directions.
+A broad research outlook is not evidence of commercial readiness, a universal sensor ranking or guaranteed task transfer. This page's added value is a way to separate questions that otherwise get compressed into “better touch.” It does not turn literature coverage into RoboSkin.ai hardware experience.
 
-Each research note maps to a layer in the tactile robotics stack so readers can connect individual findings to materials, sensing, integration, or robot learning.
+For a concrete shortlist, bring the target contact decision, candidate papers and unresolved acceptance criteria to [research services](/research-services). That creates a bounded evidence-review request rather than a request to endorse a technology in general.
 
 ## Source
 
-[arXiv: Tactile Robotics: An Outlook](https://arxiv.org/html/2508.11261v1)
+[Tactile Robotics: An Outlook — reviewed arXiv v1](https://arxiv.org/html/2508.11261v1). The source predates this site's interpretation; the November review does not make it a new paper.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
+    updated: '2026-11-03',
     readTime: '5 min read',
     category: 'Field Map',
     image: '/generated/authority/roboskin-index-cover.webp',
@@ -2907,58 +2925,76 @@ Each research note maps to a layer in the tactile robotics stack so readers can 
   {
     id: 'wet-slippage-bionic-fingertip-eskin-2026',
     title: 'Wet slippage detection for bionic fingertip e-skin',
+    seoDescription: "Review wet-slip sensing conditions, the meaning of 98.3% material classification, and the evidence still needed for robot grasp recovery.",
     excerpt:
-      'A source-backed note on AI-integrated bionic fingertip e-skin, wet slippage detection, fingerprint microtextures, and why dry-surface slip claims are not enough.',
+      "Review wet-slip sensing conditions, the meaning of 98.3% material classification, and the evidence still needed for robot grasp recovery.",
     content: `# Wet slippage detection for bionic fingertip e-skin
 
-**Updated technical brief - June 2026**
+This study demonstrates wet-surface slip signals and material classification, not a general probability of preventing a dropped object. For a robot integration decision, separate the surface condition, the classification task and the controller's response.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** The source paper was published March 19, 2026. Results below are the authors' reports, not RoboSkin.ai experiments.
 
 ## Why this source matters
 
-Many robot gripper and e-skin papers demonstrate slip detection on dry surfaces. That is useful, but it is not enough for real manipulation. Objects can be wet, oily, dusty, textured, or low friction. A sensor that detects slip only under clean dry conditions may fail in kitchens, warehouses, medical handling, agriculture, or outdoor service robots.
+Adachi and colleagues investigate a fingerprint-patterned multilayer slip sensor in [Scientific Reports](https://www.nature.com/articles/s41598-026-41096-z). Their controlled sliding tests include dry, water-wet and oil-wet conditions. The reported setup uses approximately 1 N of normal load and a scan speed of 50 mm/s. Those conditions belong beside the result: they are not an operating envelope established for arbitrary liquids, objects or grasp motions.
 
-The Scientific Reports article on AI-integrated bionic fingertip e-skin is useful because it targets wet slippage detection. The source describes a micropatterned structure inspired by human fingerprints and reports slip detection under water- or oil-coated surface conditions. For RoboSkin.ai, the key value is the shift from generic slip detection to surface-condition-aware slip detection.
+For a buyer, “wet-capable” leaves several unanswered questions. Which liquid, how much of it, which surface finish and how long after application? Is the surface refreshed between trials? Is the sensor itself clean? A reproducible wet-contact test should identify those variables before comparing signal amplitude or classification accuracy. The [electronic skin overview](/electronic-skin) places this patterned sensing layer in the wider system context.
 
 ## Core idea
 
-The research frames slip as a dynamic surface interaction, not just a threshold on force. The sensor uses a patterned outer layer to interact with microtextures and capture high-speed signal changes during sliding. That matters because wet slip can look different from dry slip: friction drops, vibration patterns change, and the object may move before a simple force threshold warns the controller.
+The authors use a laser-patterned outer surface to obtain dynamic slip signals. Their material-classification dataset contains 120 waveforms from two sensor devices, evaluated with stratified five-fold cross-validation. The reported 98.3% mixed-condition accuracy is a classification result. The soft-hand demonstration records slip signals from tested objects; it does not establish a 98.3% grasp-recovery rate. [Paper, material classification and robotic-hand results](https://www.nature.com/articles/s41598-026-41096-z).
 
-| Slip condition | Why it is harder | What to verify |
+| Surface condition | What a comparison should hold or record | What the result still cannot answer alone |
 | --- | --- | --- |
-| Dry surface | Baseline case for many sensors | Normal and shear response |
-| Water-coated surface | Lubrication changes friction | Early sliding signal |
-| Oil-coated surface | Low-friction film can hide contact changes | High-speed slip response |
-| Microtextured object | Fine texture affects vibration | Signal bandwidth and noise |
+| Dry | Object finish, normal load, travel and speed | Whether performance survives contamination |
+| Water-wet | Water application, contact time and remaining film | Behavior with another liquid or changing film thickness |
+| Oil-wet | Oil identity, preparation and cleaning procedure | Universal resistance to oily handling |
+| Textured | Texture direction, scan direction and sampling window | Recognition of a new material or a new surface finish |
+
+These are proposed evaluation fields. They are not additional conditions we tested or claims that the source evaluated every row comprehensively.
 
 ## Engineering implications
 
-Wet slippage detection is especially relevant for robot hands that touch food, packaging, glass, tools, medical objects, or outdoor surfaces. A robot can have good force control and still lose an object if the tactile system cannot recognize the change from static contact to sliding contact. The system also needs a controller that reacts quickly enough to adjust grip before the object escapes.
+Avoid the blanket assumption that adding liquid always changes friction in the same direction. The practical comparison is the measured contact behavior of the chosen pad, liquid and object. If a grip failure changes after replacing the sensor surface, investigate that mechanical change as well as the detector.
 
-For content strategy, this topic deserves its own route because "slip detection" is too broad. A page that only says a sensor detects slip may hide the most important deployment question: slip under what surface condition?
+A classification split also needs careful interpretation. Stratifying labels preserves class proportions; it does not, by itself, establish that an entire sensor, object or acquisition session was held out. Before adopting a trained model, request a split manifest and identify what is new at test time. Use the [slip-detection guide](/guides/slip-detection-robot-hand) to define event labels and trial-level failure rates.
+
+## From a detected waveform to a recovery decision
+
+An integration trial should distinguish three outcomes: a visible signal during sliding, a detector that identifies an event with an acceptable false-alarm rate, and a controller that acts in time. Record these separately. A signal recorded after substantial motion may help diagnose failure without providing enough warning to recover.
+
+| Stage | Record | Decision supported |
+| --- | --- | --- |
+| Contact observation | Raw waveform, synchronized motion reference and surface preparation | Whether a signal accompanies the defined event |
+| Detection | Threshold or model version, decision time and false alarms during no-slip periods | Whether the event estimate is usable |
+| Response | Command time, measured force, object motion and permitted intervention | Whether the chosen recovery works within task limits |
+| Repeatability | Object, device, session and cleaning history | Whether the result survives meaningful changes |
+
+The [E-textile slip study](/research/slip-actuated-etextile-tactile-sensing-2025) provides a different example with feedback experiments. It should not be ranked against this paper by placing a controller delay beside a classification percentage. They measure different parts of the problem.
 
 ## Evaluation checklist
 
-- Check whether slip was tested on dry, wet, oily, and low-friction surfaces.
-- Ask whether the sensor reports early slip or only visible sliding after movement begins.
-- Review the sampling rate and signal bandwidth for microvibration detection.
-- Separate texture recognition from slip control.
-- Ask whether the sensor was mounted on a robotic finger or only tested as a film.
-- Look for controller-loop experiments, not only offline classification.
+- Specify dry, wet and oily conditions separately rather than one contamination label.
+- Define slip onset using an independent motion reference and retain the signal before and after it.
+- Review window duration, acquisition delay and decision timing together.
+- Separate texture or material classification from event detection and grasp recovery.
+- Include an object or device holdout relevant to the intended deployment.
+- Recheck the mounted pad after cleaning or replacement using the [calibration guide](/guides/tactile-sensor-calibration).
 
 ## What not to infer
 
-This source does not mean every fingerprint-inspired e-skin can handle all wet environments. It also does not prove cleaning resistance, long-term abrasion resistance, or readiness for food, medical, or industrial certification. Wet slip sensing still depends on surface chemistry, sensor packaging, contact force, controller timing, and contamination.
+This evidence does not establish performance with all liquids, food-contact suitability, abrasion life or medical certification. Neither the source nor this review validates a universal grip-force increase: fragile objects and constrained tasks need their own response limits.
 
-For RoboSkin.ai, the useful editorial rule is simple: slip detection claims should state the surface condition. Dry-surface slip detection, wet-surface slip detection, and oil-film slip detection are not interchangeable.
+Use the [gripper integration guide](/applications/robot-gripper-tactile-sensor) to connect an event detector to a bounded acceptance trial. For an evidence comparison, [research services](/research-services) can be scoped around the specific liquid, object and failure mode rather than a generic “wet slip” claim.
 
 ## Source
 
-[Scientific Reports: AI-integrated bionic fingertip E-Skin for precision slippage detection in wet environments](https://www.nature.com/articles/s41598-026-41096-z)
+[AI-integrated bionic fingertip E-Skin for precision slippage detection in wet environments](https://www.nature.com/articles/s41598-026-41096-z), Scientific Reports, March 19, 2026. Full article reviewed; no sensor fabrication, software execution or robot test was performed by RoboSkin.ai.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Slip Detection',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'Scientific Reports wet slippage bionic fingertip e-skin article',
@@ -2968,34 +3004,50 @@ For RoboSkin.ai, the useful editorial rule is simple: slip detection claims shou
   {
     id: 'spiking-touch-encoding-large-area-eskin-2026',
     title: 'Energy constrained touch encoding for large-area e-skin',
+    seoDescription: "Separate spiking tactile hardware results, estimated chip power and full-system energy, with a practical latency and power review worksheet.",
     excerpt:
-      'A technical brief on bioinspired spiking architecture, large-area soft e-skin, low-power tactile localization, and neuromorphic touch processing.',
+      "Separate spiking tactile hardware results, estimated chip power and full-system energy, with a practical latency and power review worksheet.",
     content: `# Energy constrained touch encoding for large-area e-skin
 
-**Technical brief published June 18, 2026; updated October 24, 2026 with a related synthetic-input study.**
+A neuromorphic tactile processor can be evaluated on real hardware while its quoted power remains an estimate for only part of the system. Keep the physical skin, neural implementation, power accounting and robot response as separate evidence questions.
+
+**Research interpretation published June 18, 2026; expanded October 24 and reviewed November 3, 2026.** The primary Nature Communications article was published January 28, 2026. RoboSkin.ai has not reproduced either study discussed here.
 
 ## Why this source matters
 
-Large-area robot skin creates a data problem. More surface coverage means more signals, more wiring, more sampling, and more computation. If every contact point needs dense high-rate processing, the tactile system becomes difficult to scale on mobile robots, humanoids, prosthetics, or assistive devices.
+Ortone and colleagues combine a Fiber Bragg Grating skin with a spiking neural network for contact localization. Their [Nature Communications paper](https://www.nature.com/articles/s41467-026-68858-7) includes DYNAP-SE hardware implementation; it is not solely a simulated network. However, Methods states that chip power is indirectly estimated from spike generation, transmission and integration. The reported median 185 μW during inference is not a measured wall-plug budget for the full tactile system.
 
-The Nature Communications article on bioinspired spiking architecture is useful because it connects e-skin hardware with energy constrained touch encoding. The source describes a Fiber Bragg Grating-based e-skin combined with a spiking neural network that mimics early somatosensory processing. For RoboSkin.ai, the important idea is not just neuromorphic branding. It is the need to process tactile signals under energy, wiring, and latency constraints.
+That distinction changes a procurement calculation. A processor figure cannot specify battery life until the rest of acquisition, communication and computing is included. Conversely, an estimated power figure does not erase the value of a hardware localization experiment. Review implementation evidence and energy evidence independently.
 
 ## Core idea
 
-Spiking systems process information through events rather than dense continuous frames. That can be attractive for robot skin because many tactile surfaces are quiet most of the time, then suddenly produce local contact events. Event-like processing may help focus computation where contact changes happen.
+The study uses 21 FBG transducers and evaluates contact localization, including a separate multi-touch test. The implementation places 95% of the neurons on DYNAP-SE, and the system still uses a benchtop optical interrogator. Its five-fold localization evaluation is distinct from the power estimate. [Paper, hardware implementation, Discussion and Methods](https://www.nature.com/articles/s41467-026-68858-7).
 
-| Scaling pressure | Why it appears | What spiking touch processing can test |
+| Scaling question | Evidence needed | What a single headline leaves unresolved |
 | --- | --- | --- |
-| Large coverage | More sensing locations | Distributed event encoding |
-| Power limits | Mobile robots cannot spend unlimited compute on touch | Low-power processing |
-| Latency | Contact response must be fast | Event-driven localization |
-| Multitouch | More than one area may be active | Parallel tactile processing |
+| Larger surface | Coverage, full-system acquisition and communication under load | Whether the same architecture meets a larger installation's timing budget |
+| Lower energy | Defined electrical boundary and comparable workload | Whether peripherals dominate the total |
+| Faster response | Acquisition-to-decision trace and controller timing | Whether low compute cost produces timely action |
+| More simultaneous contacts | Contact count, separation and missed-contact accounting | Whether nearby contacts can be distinguished |
+
+“Event-driven” also needs a boundary. Ask where continuous sensor measurements become events, what happens during sustained contact and what computation remains active at rest. Do not assume that a spiking representation makes every upstream component event-driven or power-free.
 
 ## Engineering implications
 
-The strongest lesson is architectural. Robot skin should not be evaluated only as a sensor material. It also needs a signal-processing plan. A large skin surface that requires heavy centralized processing may work in the lab and fail on a mobile platform. Energy constrained touch encoding asks whether tactile intelligence can move closer to the surface.
+Build two records before comparing a neuromorphic system with conventional inference. The first is a measurement record: same input traces, target error, output cadence and definition of latency. The second is an energy record: what hardware is included, how its consumption was obtained and how much time it spends idle, acquiring, processing and communicating.
 
-This matters for Physical AI because tactile feedback becomes useful only when it can influence action. A delayed contact map is less valuable than a lower-power contact event that arrives quickly enough to change grip, stop motion, or log an interaction.
+For a proposed mobile-robot installation, measure the complete path from sensor excitation or optical readout to the controller-facing estimate. Report processor-only numbers as a subset. If a number comes from a model or component specification, label it as estimated rather than combining it silently with measured rails.
+
+## A power and latency accounting worksheet
+
+| Boundary | Record for a candidate installation | Comparison rule |
+| --- | --- | --- |
+| Sensor and readout | Excitation, interrogator or acquisition electronics; active and idle demand | Include equipment required to obtain usable signals |
+| Encoding and inference | Processor, encoding, model version and workload | Keep estimated and measured figures in separate columns |
+| Communication and host | Transfer, routing, host processing and buffering | Include work moved off the quoted chip |
+| Controller interface | Output timestamp, stale-data handling and command timing | Do not equate localization latency with physical stopping time |
+
+This is a proposed accounting worksheet, not a claim that the paper tested the complete installation. The [flexible-array guide](/guides/flexible-tactile-sensor-array) covers acquisition boundaries; the [robot touch sensor guide](/guides/robot-touch-sensor) distinguishes valid no-contact from unavailable data.
 
 ## Synthetic touch is not a chip power measurement
 
@@ -3007,26 +3059,26 @@ The energy result is a first-order estimate from spike statistics, not measured 
 
 ## Evaluation checklist
 
-- Check whether power consumption is measured at the sensor, processor, or whole system level.
-- Ask whether the system handles multitouch and dynamic contact, not only a single static touch.
-- Review localization accuracy under constrained sensor resolution.
-- Compare event-like processing against dense frame processing.
-- Ask whether the neuromorphic chip result is a real hardware implementation or only simulation.
-- Look for latency and wiring analysis before assuming scalability.
+- Label every energy value as measured, estimated or supplied by a component specification.
+- State whether the number covers a chip, processor board, sensing module or complete installation.
+- Use the same workload and accuracy requirement when comparing architectures.
+- Separate single-contact localization, simultaneous contacts and executed robot behavior.
+- Record how dropped packets, stale estimates and quiet sensor periods are handled.
+- Review replacement and mounting effects independently of the inference architecture.
 
 ## What not to infer
 
-This source does not mean every robot skin should use spiking neural networks. It also does not prove that neuromorphic processing is always better than conventional embedded inference. The right architecture depends on surface area, sensing modality, latency target, available power, and controller requirements.
+The hardware experiment does not make neuromorphic inference universally preferable. The synthetic-input study does not establish physical sensor performance. Neither result alone certifies safe human interaction or a robot's ability to recover from contact.
 
-This note supports a narrower claim: large-area e-skin evaluation must include compute and energy constraints. A tactile sensor is not scalable if the readout and processing architecture cannot scale with it.
+For a bounded adoption decision, compare the complete acquisition and control path against the required task, then use the [sensor acceptance trial](/guides/how-to-choose-a-tactile-sensor#acceptance-trial). [Research services](/research-services) can help structure the evidence comparison; this article supplies no hardware qualification or reproduced benchmark.
 
 ## Source
 
-[Nature Communications: Bioinspired spiking architecture enables energy constrained touch encoding](https://www.nature.com/articles/s41467-026-68858-7)
+[Bioinspired spiking architecture enables energy constrained touch encoding](https://www.nature.com/articles/s41467-026-68858-7), Nature Communications, January 28, 2026. The related Frontiers source is linked in its own section so synthetic-input findings are not merged with the hardware study.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-10-24',
+    updated: '2026-11-03',
     readTime: '5 min read',
     category: 'Neuromorphic Touch',
     image: '/generated/research-neuromorphic-2026.svg',
@@ -3037,58 +3089,77 @@ This note supports a narrower claim: large-area e-skin evaluation must include c
   {
     id: 'origami-capacitive-robotic-eskin-2026',
     title: 'Origami capacitive robotic e-skin for large-area tactile sensing',
+    seoDescription: "Review origami e-skin localization, load and training conditions, non-adjacent contact limits, and the checks needed for a new robot mounting.",
     excerpt:
-      'A source-backed brief on origami capacitive robotic e-skin, large-area coverage, super-resolution tactile localization, shear sensing, and proximity detection.',
+      "Review origami e-skin localization, load and training conditions, non-adjacent contact limits, and the checks needed for a new robot mounting.",
     content: `# Origami capacitive robotic e-skin for large-area tactile sensing
 
-**Updated technical brief - June 2026**
+Origami capacitive skin uses mechanical coupling and learned interpretation to estimate contact from a relatively sparse readout. The adoption question is whether that relationship survives the intended mounting, loads and contact patterns—not simply whether a large sheet can be fabricated.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** Xu and colleagues' paper appeared March 25, 2026. RoboSkin.ai has not fabricated or tested this skin.
 
 ## Why this source matters
 
-Large-area tactile skin has a basic contradiction. Robots need broad coverage, but conventional dense sensor arrays increase wiring, readout complexity, and calibration burden. The npj Flexible Electronics article on origami capacitive robotic e-skin is useful because it treats structure as part of the sensing strategy.
+The [npj Flexible Electronics paper](https://www.nature.com/articles/s41528-026-00563-3) combines an origami-with-scale structure, capacitive readout, shear sensing and conductive-object proximity sensing. The authors report a 60,000 mm² skin and single-contact average localization and force-estimation errors below 3.5 mm and 0.04 N. These are source-specific results, not a guaranteed error across every load and robot surface.
 
-The source describes a bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities. It reports a large-area skin using an origami-with-scale structure, capacitive sensing, shear-force sensing, proximity sensing, and machine-learning-assisted localization. For RoboSkin.ai, the useful theme is how mechanical structure can reduce the gap between broad coverage and detailed contact information.
+Coverage, sensing-site count and inferred spatial precision should therefore occupy separate fields in a comparison. The [electronic skin overview](/electronic-skin) introduces the device category; the [flexible-array guide](/guides/flexible-tactile-sensor-array) explains the measurement boundaries needed before translating a “super-resolution” headline into a requirement for finger pads or body panels.
 
 ## Core idea
 
-Origami structures can transmit deformation across a surface. That means local contact can influence a larger mechanical pattern, allowing a sensing system to infer contact location and force from fewer or differently arranged signals than a simple dense grid might require. This is why the source is relevant to large-area robot skin, not only wearable electronics.
+The paper's machine-learning section uses 0.2–1 N indentations and a 70%/15%/15% training/validation/test split. Methods specifies a two-second settling delay before recording training signals. Multi-contact inference is demonstrated for non-adjacent loads using superimposed single-contact data. Three additional curved samples received 210 random indentations each without retraining. These conditions do not establish transfer to arbitrary geometry or rapidly changing, densely adjacent contacts. [Paper, machine-learning results, multi-point touch and Methods](https://www.nature.com/articles/s41528-026-00563-3).
 
-| Design element | Robot skin value | What to verify |
+| Design element | Integration question | Evidence to keep separate |
 | --- | --- | --- |
-| Origami structure | Deformation can propagate across a large surface | Stability under repeated folding |
-| Capacitive readout | Detects deformation and proximity effects | Crosstalk and environmental sensitivity |
-| Shear-force sensing | Adds tangential contact context | Calibration across curved surfaces |
-| Machine learning | Improves localization from indirect signals | Generalization outside training conditions |
+| Origami structure | Does mounting preserve the mechanical response used for calibration? | Free-sheet, mounted and remounted measurements |
+| Capacitive readout | Which channels change, and under which electrical conditions? | Raw channel stability versus learned output error |
+| Shear sensing | What load direction and reference frame does the output describe? | Normal-load estimation versus tangential calibration |
+| Proximity sensing | What target and distance are detectable in the intended installation? | Approach detection versus physical contact localization |
+| Learned interpretation | What conditions were absent from training? | Random sample splits versus geometry, device and session holdouts |
 
 ## Engineering implications
 
-Super-resolution tactile sensing sounds attractive, but the engineering question is specific: does the inferred contact map remain reliable after mounting, bending, aging, and environmental change? A model that performs well on a controlled sheet may need retraining when placed on a robot arm, gripper, or torso panel.
+Do not interpret an inferred location between electrodes as a new physical taxel. A useful output can be more precise than electrode spacing, but its validity still belongs to a calibration and test domain. Ask for the coordinate convention, contactor shape, loading direction and error statistic alongside the estimate.
 
-The proximity layer is also important. Robot skin can be more than a contact sensor if it warns about approaching conductive objects. For human-robot interaction, that creates a route from tactile skin to collision-aware surfaces. But proximity sensing has its own limits around material type, humidity, grounding, and nearby electronics.
+Average error is also not a maximum error or a safety margin. A buyer needing a particular contact boundary should request errors near that boundary and examples of missed or merged contacts. The relevant question is whether a wrong location would cause an inappropriate robot response, not whether one average looks attractive.
+
+The reviewed article reports different sampling dimensions and totals in its learning-results and Methods descriptions. We have not reconciled a raw manifest, so this page does not calculate a supposedly exact training-set size or use it to estimate reproduction effort. Resolve that documentation discrepancy before promising a collection budget.
+
+## What to validate after changing the robot surface
+
+Treat a new mounting as a controlled change. First record the original geometry and fastening method. Repeat a small, fixed set of reference contacts after installation, then decide whether a full recalibration is needed. Keep the comparison in the same coordinates and units; otherwise a mounting transform error can resemble a sensor error.
+
+| Change | Suggested acceptance question | Reason to pause adoption |
+| --- | --- | --- |
+| New curvature or fastening | Does the existing model remain valid at representative contact sites? | Unexplained bias or failure near seams |
+| Adjacent contacts | Can two contacts be resolved at the required separation? | A merged estimate where two independent responses are required |
+| Dynamic contact | Does the output remain useful before the robot must react? | Settled-contact performance is the only available evidence |
+| Replaced module | Can calibration and coordinate mapping be restored reproducibly? | Results depend on undocumented manual adjustment |
+
+These are proposed integration tests, not failures observed by RoboSkin.ai. The [calibration guide](/guides/tactile-sensor-calibration) explains how to retain reference data and separate fitting from validation.
 
 ## Evaluation checklist
 
-- Check the actual tested skin area and compare it with the target robot surface.
-- Ask whether super-resolution is validated on unseen contact locations and load patterns.
-- Separate normal force, shear force, and proximity sensing performance.
-- Review whether multi-point touch works for adjacent and non-adjacent contacts.
-- Look for durability tests under repeated folding, bending, and mounting strain.
-- Ask how much training data the machine-learning model needs.
+- Compare tested area with the actual contact region, including seams and blind spots.
+- Record physical channels separately from inferred localization precision.
+- Keep normal force, shear, proximity and robot behavior as distinct results.
+- Request multi-contact tests at the separations the task requires.
+- Inspect repeatability after folding, mounting and surface replacement.
+- Resolve dataset and collection-protocol ambiguities before estimating reproduction work.
 
 ## What not to infer
 
-This source does not mean origami capacitive e-skin is ready for every humanoid surface. It supports a promising architecture for large-area multimodal sensing, but deployment still depends on packaging, calibration, wiring, environmental robustness, and controller integration.
+The paper is evidence for a specific large-area sensing architecture, not certification of collision protection or readiness for every humanoid body. Conductive-object proximity does not imply universal object detection. The study's same-process sample transfer is narrower than arbitrary-robot transfer.
 
-Large-area skin combines structure, sensing, and inference. A surface can be mechanically clever and still need careful validation before it becomes robot-ready.
+For another manufacturing route, see [OpenTac's flexible-PCB and readout limits](/research/opentac-custom-tactile-skins-readout-limits-2026). For deformation during actuation, see [soft robotic skin](/applications/soft-robotic-skin). A [research-services review](/research-services) can compare these routes against an actual coverage and calibration requirement without treating their metrics as a shared leaderboard.
 
 ## Source
 
-[npj Flexible Electronics: A bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities](https://www.nature.com/articles/s41528-026-00563-3)
+[A bio-inspired origami capacitive robotic e-skin with multimodal sensing capabilities](https://www.nature.com/articles/s41528-026-00563-3), npj Flexible Electronics, March 25, 2026. The result and Methods boundaries above come from the full paper; proposed acceptance checks are our analysis.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Large-Area E-Skin',
     image: '/generated/research-scalable-manufacturing-2025.svg',
     sourceTitle: 'npj Flexible Electronics origami capacitive robotic e-skin article',
@@ -3098,58 +3169,76 @@ Large-area skin combines structure, sensing, and inference. A surface can be mec
   {
     id: 'slip-actuated-etextile-tactile-sensing-2025',
     title: 'Slip-actuated bionic tactile sensing with E-textile',
+    seoDescription: "Review E-textile slip feedback, detection-delay comparisons and controller limits, with a practical framework for testing grasp recovery.",
     excerpt:
-      'A source-backed note on slip-actuated bionic tactile sensing, dynamic DC generator E-textile, robotic fingers, and real-time grasp monitoring.',
+      "Review E-textile slip feedback, detection-delay comparisons and controller limits, with a practical framework for testing grasp recovery.",
     content: `# Slip-actuated bionic tactile sensing with E-textile
 
-**Updated technical brief - June 2026**
+The value of this E-textile study is its connection between slip sensing and feedback experiments. Its sensor signal, algorithm processing time and closed-loop recovery must still be evaluated separately; none is a universal robot response time.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** Gautham and colleagues' Nature Communications paper was published July 30, 2025. All experimental results are author-reported, not RoboSkin.ai tests.
 
 ## Why this source matters
 
-Slip detection is central to dexterous manipulation. A robot can touch an object, apply force, and still fail if it cannot detect the moment contact begins to slide. The Nature Communications article on slip-actuated bionic tactile sensing is useful because it treats slip as a distinct dynamic event and pairs it with a normal force sensing route.
+The [paper](https://www.nature.com/articles/s41467-025-61843-6) integrates a textile-based dynamic DC generator with robotic fingers and reports feedback experiments involving linear pulling and rotational slip. Its comparison includes measurements with feedback enabled and disabled. That is more directly relevant to an action decision than classifying a recorded waveform alone, while remaining evidence from the reported apparatus and tasks.
 
-The source describes a slip-actuated bionic tactile sensing system using a dynamic direct-current generator integrated into stretchable electronic textile. It is designed to work with robotic fingers and support fast slip and grasp monitoring. For RoboSkin.ai, this source strengthens the distinction between static pressure sensing and dynamic slip-aware touch.
+An integration team should start by defining what recovery means. Is success retaining an object, limiting its displacement, avoiding damage, or completing the original manipulation? Those outcomes can differ. A stronger grip may reduce sliding while violating the task's permitted contact load.
 
 ## Core idea
 
-Human touch uses different receptor behaviors for slowly changing pressure and fast changing events. A robot skin system can follow a similar principle by separating normal force monitoring from fast slip event detection. That is useful because the controller needs both: how hard the robot is pressing and whether the object is starting to move.
+In the paper's compared setup, the 95% confidence intervals for slip-detection delay are 28.7–39.8 ms for BTS and 89–103 ms for the GelSight pipeline. The approximately 50 μs number in Methods refers to an image-difference computation, not complete detection or actuator response. These results cannot rank every optical sensor or controller. [Paper, Fig. 4 and Methods](https://www.nature.com/articles/s41467-025-61843-6).
 
-| Signal type | Robot question | Why it matters |
+| Signal or component | Robot question | Separate validation needed |
 | --- | --- | --- |
-| Normal force | How hard is the finger pressing? | Prevents weak grip or crushing |
-| Slip event | Is the object starting to slide? | Enables fast corrective grip |
-| Multidirectional force | Which way is contact changing? | Helps adjust pose and force |
-| Textile integration | Can the sensor conform to a finger? | Supports skin-like placement |
+| Normal-load information | Is contact within the permitted load? | Calibration, mounting and force limit |
+| Dynamic slip signal | Has the defined sliding event occurred? | Motion reference, event labels and false alarms |
+| Direction or movement information | What corrective motion is appropriate? | Coordinate convention and task-specific response |
+| Textile mounting | Does the contact interface remain repeatable? | Attachment, replacement and wear checks |
+
+The “self-powered” sensing principle does not establish an unpowered robot system. Acquisition, processing, communication and actuation must be accounted for separately. Do not omit those components from an integration or energy budget.
 
 ## Engineering implications
 
-Dynamic slip sensing is not just another feature label. It changes the controller problem. A robot may not need to wait until a camera sees object motion. It can use tactile signals to increase grip, reposition contact, or pause motion. That is one reason slip detection should have its own content cluster rather than being buried inside general tactile sensing pages.
+The useful comparison is a controlled intervention: same contact setup and disturbance, with the tactile response enabled and disabled. Retain the mechanical interface when changing the feedback condition. If the pad, grip preload and detector all change together, the experiment cannot isolate which change produced the result.
 
-The E-textile angle also matters because robot skin is a surface. Stretchable textile-like integration may help fit curved fingers or soft gripper forms, but it raises questions about durability, washing, abrasion, electrical stability, and attachment.
+Record the detector threshold and the allowed response before running a trial. Log unsuccessful recoveries, unnecessary corrections and damage alongside retained objects. Otherwise an impressive recovery video can conceal the cost of frequent false alarms or excessive corrective force.
+
+## How to read a latency result
+
+Use separate timestamps for the reference slip event, available sample, detector output, controller command and measured mechanical response. This proposed reporting scheme prevents a fast arithmetic operation from being presented as a fast robot loop.
+
+| Timing boundary | What it measures | What it does not measure |
+| --- | --- | --- |
+| Event to acquired data | Sensing and acquisition delay | Whether the detector has decided |
+| Data to detector output | Windowing and processing | Whether a command has reached the actuator |
+| Decision to command | Control and communication | Mechanical recovery |
+| Command to acceptable state | Actual robot and object response | Generalization to a different task |
+
+Keep the sampling, filtering and event definitions beside the timing distribution. Compare like boundaries. See the [slip-detection guide](/guides/slip-detection-robot-hand) for event-level reporting and the [gripper integration guide](/applications/robot-gripper-tactile-sensor) for a bounded feedback trial.
 
 ## Evaluation checklist
 
-- Ask whether slip is detected before visible object displacement.
-- Separate normal force measurement from dynamic slip signal generation.
-- Check whether tests include different directions, speeds, and surface textures.
-- Review whether the sensor is integrated into robotic fingers or only tested on a bench.
-- Ask how the controller uses slip events in a feedback loop.
-- Look for durability evidence under stretching, repeated contact, and abrasion.
+- Define allowable displacement, force and damage before a recovery experiment.
+- Use a synchronized independent reference to label motion onset.
+- Keep pad, object and initial grasp conditions comparable across feedback conditions.
+- Report false alarms, missed events, recovery failures and required interventions.
+- Test the intended directions, speeds, textures and contamination conditions rather than assuming transfer.
+- Record the mounted textile's condition and repeat checks after replacement.
 
 ## What not to infer
 
-This source does not mean every E-textile tactile sensor is ready for robot hands. It also does not prove all slipping objects can be controlled. Slip behavior depends on surface material, contact geometry, contamination, robot speed, and controller timing.
+The reported feedback experiments do not establish universal handling of fragile, wet or unfamiliar objects. Textile integration does not itself prove washing resistance, long-term abrasion life or suitability for every finger geometry. Commercial availability and a complete reproduction environment were not independently verified for this review.
 
-Slip detection evaluation must explain timing. A useful slip sensor is not only accurate; it must produce a signal early enough for the robot to act.
+For a contrasting evidence type, read the [wet-slip material-classification study](/research/wet-slippage-bionic-fingertip-eskin-2026). Its classification percentage and this paper's delay measurements answer different questions. A [research-services comparison](/research-services) should retain those distinctions instead of producing a single unsupported score.
 
 ## Source
 
-[Nature Communications: Slip-actuated bionic tactile sensing system with dynamic DC generator integrated E-textile for dexterous robotic manipulation](https://www.nature.com/articles/s41467-025-61843-6)
+[Slip-actuated bionic tactile sensing system with dynamic DC generator integrated E-textile for dexterous robotic manipulation](https://www.nature.com/articles/s41467-025-61843-6), Nature Communications, July 30, 2025. Full article reviewed; no code, dataset, fabricated sensor or robot experiment was executed by RoboSkin.ai.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Slip Detection',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'Nature Communications slip-actuated bionic tactile sensing article',
@@ -3159,59 +3248,78 @@ Slip detection evaluation must explain timing. A useful slip sensor is not only 
   {
     id: 'optical-electronic-artificial-skin-molecular-sensing-2025',
     title: 'Optical/electronic artificial skin for molecular sensing',
-    seoDescription: 'Optical/electronic artificial skin combines haptics, force-temperature sensing, and near-infrared molecular perception for robotics.',
+    seoDescription: "Separate optical/electronic skin contact measurements from molecular predictions, artificial-eye results and robot integration requirements.",
     excerpt:
-      'A research note on optical/electronic artificial skin, CNT haptic layers, near-infrared molecular sensing, force-temperature sensing, and robotic perception beyond touch.',
+      "Separate optical/electronic skin contact measurements from molecular predictions, artificial-eye results and robot integration requirements.",
     content: `# Optical/electronic artificial skin for molecular sensing
 
-**Updated technical brief - June 2026**
+Optical/electronic skin adds a spectral measurement to contact sensing; a molecular prediction is not automatically a validated diagnosis or a universal material identifier. The useful engineering question is how contact geometry and optical acquisition affect each output.
+
+**Research interpretation published June 18, 2026; evidence reviewed November 3, 2026.** Dai and colleagues' paper was published August 12, 2025. RoboSkin.ai has not fabricated the device or reproduced its experiments.
 
 ## Why this source matters
 
-Robot skin is usually discussed as a pressure, strain, force, or slip layer. The npj Flexible Electronics article on optical/electronic artificial skin expands the category by adding chemical molecular sensing. That makes it useful for a research map because it shows where e-skin can move beyond physical contact signals.
+The [npj Flexible Electronics paper](https://www.nature.com/articles/s41528-025-00431-6) integrates optical fibers with a carbon-nanotube haptic layer. It combines force/temperature sensing with near-infrared spectral measurements and demonstrates fruit-related sensing. The eye experiment uses an artificial eyeball model and prepared glucose solutions; the discussion identifies clinical trials as future work. It is not evidence of validated diagnosis in human patients.
 
-The source describes optical/electronic artificial skin that combines a carbon nanotube-based haptic electronic skin with optical fibers. The system is reported to sense force and temperature while collecting near-infrared optical signals from molecules. Demonstrations include medical-oriented sensing and fruit harvesting/grading scenarios. For RoboSkin.ai, the key lesson is multimodal perception discipline: physical and chemical sensing should be separated, then evaluated together.
+For a robot integrator, these are different measurement contracts. A contact-force estimate, a temperature estimate and a predicted composition each need their own reference, units, calibration and failure handling. Calling the system “multimodal” does not remove those separate requirements.
 
 ## Core idea
 
-The design combines electronic haptic sensing and optical spectroscopy. The electronic layer handles force and temperature context, while the optical path provides molecular information. In robot terms, that means the skin is not only detecting that contact happened; it may also help infer something about what was touched.
+Methods describes a fixed optical detection distance, two spectrometers and a halogen light source. Those instruments are part of the demonstrated acquisition setup, not functionality proven to reside entirely inside the flexible skin. [Paper, optical acquisition and artificial-eye Methods](https://www.nature.com/articles/s41528-025-00431-6).
 
-| Modality | What it can indicate | What to verify |
+| Modality | Question it may help investigate | Acceptance evidence to request |
 | --- | --- | --- |
-| Force | Contact load and firmness context | Calibration and range |
-| Temperature | Thermal interaction | Response time and drift |
-| Near-infrared signal | Molecular or material cues | Specificity and environmental robustness |
-| Robot integration | Whether sensing survives handling tasks | Packaging and task validation |
+| Force | What load is applied during contact? | Reference-load comparison across the mounted range |
+| Temperature | What thermal quantity is being estimated? | Reference, equilibration conditions and response timing |
+| Near-infrared spectrum | Does a calibrated model predict the target property? | Independent reference assay, split design and prediction errors |
+| Integrated robot output | Does the information improve the intended action? | Executed task comparison with failure and intervention records |
 
 ## Engineering implications
 
-Chemical-aware robot skin is appealing for agriculture, medical robotics, food handling, and inspection tasks. But it also raises the bar for evidence. A pressure sensor can often be validated with mechanical loads. Molecular sensing requires controlled samples, spectral interpretation, calibration, and interference analysis. A robot in the field may face changing light, surface moisture, temperature, contamination, and geometry.
+Separate an observed signal from the property inferred from it. A spectral trace is not a concentration, just as a raw tactile channel is not automatically a calibrated force. Record the processing and calibration version used to produce each output. If the model is unavailable or the sample lies outside its validated domain, the interface should expose uncertainty rather than display an unsupported precise result.
 
-This is why the content should not collapse everything into "multimodal e-skin." Force-temperature sensing and molecular sensing are different signal families. They require different validation methods and different failure analysis.
+Also separate the contact and optical interfaces. A change in mounting or target geometry may affect both. A validation plan should vary one relevant condition at a time and preserve the original trace, contact state and reference label. This is a proposed test design, not a claim that we measured the prototype's sensitivities.
+
+## How to design a useful adoption trial
+
+Begin with one target property and one object population. For an illustrative fruit-sorting proposal, specify the fruit type, reference measurement and acceptable error before collecting spectra. Hold out the units that need to generalize—such as a later collection session or a new batch—rather than relying only on shuffled readings of the same objects.
+
+Keep physical handling success separate from property prediction. A correct predicted value does not prove that the gripper avoided damage, and an undamaged object does not validate the predicted value. The trial needs both outcome records if both matter to the workflow.
+
+| Proposed trial record | Why it belongs in the evidence packet |
+| --- | --- |
+| Object identity and acquisition session | Makes leakage and repeated readings visible |
+| Contact pose, force and optical geometry | Allows changed acquisition conditions to be investigated |
+| Raw channels and processing version | Supports diagnosis of output changes |
+| Reference label and its method | Defines what a prediction is being compared against |
+| Held-out split and out-of-range cases | Separates interpolation from the required generalization |
+| Handling outcome and intervention | Measures the robot task independently of prediction error |
+
+Use the [calibration guide](/guides/tactile-sensor-calibration) for measurement records and the [robot-learning overview](/robot-learning) for separating model evaluation from executed behavior.
 
 ## Evaluation checklist
 
-- Check which physical signals and molecular signals are measured separately.
-- Ask whether the optical signal is robust under surface moisture, lighting, and contact variation.
-- Review whether the robot demonstration uses sensing for action or only post-hoc classification.
-- Separate medical or agriculture proof-of-concept from general robot skin readiness.
-- Look for calibration methods for both haptic and optical channels.
-- Ask whether the optical fibers affect flexibility, durability, or mounting.
+- State the physical and molecular targets separately, with units and reference methods.
+- Include the optical source, spectrometers, computing and wiring in the system description.
+- Record geometry, illumination, moisture and temperature conditions relevant to the proposed task.
+- Review sample-level and session-level separation in model evaluation.
+- Distinguish artificial-model demonstrations from tests on the intended real population.
+- Require application-specific handling and prediction evidence before making deployment claims.
 
 ## What not to infer
 
-This source does not mean robot skin can generally diagnose medical conditions or grade fruit in arbitrary real-world settings. Those are source-specific demonstrations and require careful application boundaries. It also does not mean every artificial skin needs chemical sensing.
+This paper does not establish a clinical diagnostic service, general fruit grading or chemical sensing for arbitrary substances. The proposed adoption checks above are engineering analysis, not regulatory guidance or proof that a particular medical use is suitable.
 
-For RoboSkin.ai, the useful editorial point is that multimodal e-skin should be unpacked by modality. If a source claims force, temperature, and molecular sensing, each channel needs its own evidence and its own limitations.
+For a broader comparison, the [technology overview](/technology) distinguishes sensing mechanisms, while [robot skin versus e-skin](/guides/robot-skin-vs-e-skin) separates a material or device demonstration from an integrated robot surface. [Research services](/research-services) can be scoped around a concrete measurement requirement; the existence of a paper is not an endorsement of a product.
 
 ## Source
 
-[npj Flexible Electronics: An optical/electronic artificial skin extends the robotic sense to molecular sensing](https://www.nature.com/articles/s41528-025-00431-6)
+[An optical/electronic artificial skin extends the robotic sense to molecular sensing](https://www.nature.com/articles/s41528-025-00431-6), npj Flexible Electronics, August 12, 2025. Full article reviewed; no patient study, sensor measurement or exported model was independently tested by RoboSkin.ai.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-18',
-    updated: '2026-06-18',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '4 min read',
     category: 'Multimodal E-Skin',
     image: '/generated/research-multimodal-sensing-2025.svg',
     sourceTitle: 'npj Flexible Electronics optical/electronic artificial skin article',
