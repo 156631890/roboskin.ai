@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -110,7 +111,9 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
             <p className="article-meta">
               {post.category}
             </p>
-            <h1>{post.title}</h1>
+            <h1>{post.title.split(/(?<=\/)/).map((part, index) => (
+              <Fragment key={index}>{part}{part.endsWith('/') && <wbr />}</Fragment>
+            ))}</h1>
             <p className="article-deck">{post.excerpt}</p>
             <div className="news-byline">
               <Link href={site.editorial.path} rel="author">By {post.author}</Link>

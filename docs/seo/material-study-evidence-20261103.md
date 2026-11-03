@@ -17,3 +17,5 @@ The three revisions preserve original URLs, H1, H2 anchors, dates, illustrations
 Tests/build/export/SEO, original-module preservation, actual source/inner links, structured data, canonical/index/sitemap, mobile/desktop and source-matched production checks remain required. Human factual sign-off is pending and not claimed. No GSC, outreach, accounts, payment, agreements, credentials or data-access requests.
 
 Mobile QA identified an existing masthead overflow: the unbroken Temperature/pressure label made a 390 px document 403 px wide. A scoped article H1 overflow-wrap rule preserves the title text while allowing a necessary line break. Horizontal scrolling remains inside tables. The three article views must pass after this correction.
+
+Research titles prefer a break after a slash, avoiding an awkward split inside “pressure.” The local Windows HTTP harness also required the correct image/svg+xml MIME type; its registry default image/svg prevented valid SVG files from decoding. No image asset changed. Browser verification now checks actual decoded images on local and production pages.
