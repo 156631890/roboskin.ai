@@ -1,3 +1,4 @@
+import { sensingIntegrationDepth } from '@/content/sensing-integration-depth';
 import structureRelease from '@/content/structure-release.json';
 import { structureNewPages } from '@/content/structure-new-pages';
 import { robotDatasetStartingPoints, robotDataPreflight, teleoperationActionTrace } from '@/content/robot-data-evidence';
@@ -1442,12 +1443,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/applications/soft-robotic-skin',
     title: 'Soft Robotic Skin for Flexible Contact Sensing',
-    description:
-      'Soft robotic skin uses flexible sensing surfaces for curved robots, grippers, prosthetics, and soft machines. Learn how it differs from generic e-skin.',
+    description: "Evaluate soft robotic skin by bending, stretch, contact calibration and actuation effects. Compare prototype evidence with installed validation needs.",
     h1: 'Soft robotic skin',
     kicker: 'Application guide',
     intent: 'Application page for soft robotic skin, flexible robot skin, soft gripper tactile sensing, and soft robotics e-skin queries.',
-    updated: '2026-07-21',
+    updated: '2026-11-03',
     priority: 0.79,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1456,7 +1456,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'Soft robotic skin is a flexible tactile surface designed for curved, deformable, or soft robot structures.',
       'It overlaps with e-skin, but the robotics question is whether the skin survives mounting, bending, repeated contact, and robot-level data use.',
-      'The strongest use cases include soft grippers, prosthetic hands, humanoid surfaces, assistive robotics, and contact-rich research platforms.',
+      'Research applications include soft grippers, prosthetic interfaces and curved humanoid surfaces. Suitability depends on the measured output and installed validation; the application label alone does not establish readiness.',
     ],
     sections: [
       {
@@ -1486,6 +1486,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'RoboSkin.ai frames soft skin around what was tested, what surface was used, what signal was measured, and what remains unproven for robot deployment.',
         ],
       },
+      ...sensingIntegrationDepth['/applications/soft-robotic-skin'],
     ],
     faqs: [
       {
@@ -1499,9 +1500,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'A flexible tactile sensor is usually the sensing element or array. Soft robotic skin is the integrated robot surface, including mounting, wiring, calibration, and use in robot tasks.',
       },
       {
-        question: 'What should be cited on a soft robotic skin page?',
+        question: 'Does a flat calibration remain valid after bending the skin?',
         answer:
-          'Original papers or public lab reports should be cited, with clear separation between the reported result and RoboSkin.ai editorial interpretation.',
+          'Not automatically. Bending, mounting and actuation can change the baseline and the relation between contact and output. Compare known contacts across the intended deformation states and record when recalibration is required.',
       },
     ],
     relatedLinks: [
@@ -1519,12 +1520,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/flexible-tactile-sensor-array',
     title: 'Flexible Tactile Sensor Array Guide for Robot Skin',
-    description:
-      'Flexible tactile sensor arrays measure contact across curved robot surfaces. Learn how arrays relate to robot skin, e-skin, calibration, and tactile AI.',
+    description: "Evaluate flexible tactile arrays by active coverage, partial versus full readout, mounted spatial calibration, force validation and robot data contracts.",
     h1: 'Flexible tactile sensor array guide',
     kicker: 'Technology guide',
     intent: 'Technology guide for flexible tactile sensor array, tactile sensor matrix, robot skin array, and e-skin sensor array searches.',
-    updated: '2026-07-21',
+    updated: '2026-11-03',
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1563,6 +1563,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'This is where a flexible array becomes more than hardware. The software path determines whether the robot can use the contact map for grasping, safety, or evaluation.',
         ],
       },
+      ...sensingIntegrationDepth['/guides/flexible-tactile-sensor-array'],
     ],
     faqs: [
       {
@@ -1873,12 +1874,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/applications/robot-gripper-tactile-sensor',
     title: 'Robot Gripper Tactile Sensor Guide for Contact-Aware Grasping',
-    description:
-      'Robot gripper tactile sensors help detect contact, pressure patterns, slip, and grasp stability. Learn what to evaluate before choosing tactile sensing for grippers.',
+    description: "Plan tactile gripper integration by grasp phase, pad mechanics and controller response. Define a trial ledger, damage limits and acceptance evidence.",
     h1: 'Robot gripper tactile sensor guide',
     kicker: 'Evaluation guide',
     intent: 'Buyer and evaluator page for robot gripper tactile sensor, tactile gripper, gripper slip detection, and contact-aware grasping queries.',
-    updated: '2026-06-06',
+    updated: '2026-11-03',
     priority: 0.79,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1917,6 +1917,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Together these views let teams evaluate the sensing layer, the data path, and the task outcome without collapsing them into one generic category.',
         ],
       },
+      ...sensingIntegrationDepth['/applications/robot-gripper-tactile-sensor'],
     ],
     faqs: [
       {
@@ -1956,12 +1957,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/tactile-sensor-for-robots',
     title: 'Tactile Sensor for Robots: Outputs & Evaluation',
-    description:
-      'A tactile sensor for robots measures pressure, force, slip, strain, or contact maps. Compare sensors for robot hands, grippers, and robot skin.',
+    description: "Compare robot tactile sensors by raw signals, derived outputs and calibration. Specify units, frames and validity before choosing a hardware model.",
     h1: 'Tactile sensor for robots',
     kicker: 'Evaluation guide',
     intent: 'Evaluation page for tactile sensor for robots, robot tactile sensor, tactile sensing robotics, and sensor selection searches.',
-    updated: '2026-10-12',
+    updated: '2026-11-03',
     priority: 0.8,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2039,6 +2039,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           }
         ]
       },
+      ...sensingIntegrationDepth['/guides/tactile-sensor-for-robots'],
     ],
     faqs: [
       {
@@ -2052,9 +2053,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'There is no universal best sensor. The correct choice depends on task, geometry, signal needs, durability, data rate, and software integration.',
       },
       {
-        question: 'Should a tactile sensor page include research citations?',
+        question: 'Does an optical tactile image already measure force?',
         answer:
-          'Yes. Cite public papers or documentation, then separate reported source claims from RoboSkin.ai interpretation.',
+          'No. The image is an observation of a deforming surface. A force output requires a specified estimator and a reference calibration with validated conditions and error.',
       },
     ],
     relatedLinks: [
@@ -2080,12 +2081,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/robot-touch-sensor',
     title: 'Robot Touch Sensors: Switches, Force & Tactile Arrays',
-    description:
-      'Compare binary contact switches, force measurements, and tactile arrays. Choose the signal your robot needs and plan a first contact-sensing test.',
+    description: "Compare contact events, force readings and tactile maps. Define valid, uncertain and missing data before testing touch feedback on a robot.",
     h1: 'Robot touch sensors: which signal do you need?',
     kicker: 'Evaluation guide',
     intent: 'Explain binary contact, force measurement, and spatial tactile sensing to readers choosing their first robot touch signal.',
-    updated: '2026-09-22',
+    updated: '2026-11-03',
     priority: 0.77,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2122,7 +2122,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Simple contact versus tactile sensing',
         body: [
-          'A simple touch sensor can answer whether contact happened. A tactile sensor can answer more: where contact happened, how force is distributed, whether slip is beginning, or how contact changes over time.',
+          'A binary contact sensor can report a contact event under its defined conditions. Other tactile systems may expose spatial patterns or derived force and slip estimates. Each additional output needs its own documented processing and validation.',
           'Both can be useful. The problem is when a page treats all touch sensors as if they support the same robot behavior.',
         ],
         bullets: [
@@ -2146,6 +2146,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Choose the narrowest route that matches the component, surface, software layer, or robot task being evaluated.',
         ],
       },
+      ...sensingIntegrationDepth['/guides/robot-touch-sensor'],
     ],
     faqs: [
       {
@@ -2184,19 +2185,18 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/slip-detection-robot-hand',
     title: 'Slip Detection for Robot Hands and Tactile Grippers',
-    description:
-      'Slip detection helps robot hands and grippers react before an object drops. Learn the tactile signals, validation questions, and robot-control constraints.',
+    description: "Evaluate robot slip detection with event labels, held-out objects, false alarms, detection delay and closed-loop recovery, with a practical trial checklist.",
     h1: 'Slip detection for robot hands',
     kicker: 'Evaluation guide',
     intent: 'Manipulation page for slip detection robot hand, gripper slip detection, tactile slip sensing, and grasp stability searches.',
-    updated: '2026-09-18',
+    updated: '2026-11-03',
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'applications',
     keywords: ['slip detection robot hand', 'gripper slip detection', 'tactile slip sensing', 'robot grasp stability', 'robot hand slip sensor'],
     quickAnswer: [
-      'Slip detection uses tactile, force, vibration, optical, or multimodal signals to identify object motion at the contact surface before the grasp fails.',
+      'Slip detection uses tactile, force, vibration, optical or multimodal observations to identify relative motion at a contact. Detecting incipient slip before gross sliding is a separate claim that requires its own labels and timing evidence.',
       'For robot hands and grippers, slip detection only matters if the controller can react quickly enough to adjust grip, pose, or task state.',
       'Credible slip evaluation separates sensing demonstrations from closed-loop robot behavior under realistic grasp conditions.',
     ],
@@ -2228,6 +2228,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'It is most useful when teams can connect the contact signal to reaction latency, controller behavior, and grasp outcomes.',
         ],
       },
+      ...sensingIntegrationDepth['/guides/slip-detection-robot-hand'],
     ],
     faqs: [
       {
@@ -2236,9 +2237,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Yes. Slip can be detected with force, vibration, optical, or event-based signals. Arrays are useful when contact movement across the surface matters.',
       },
       {
-        question: 'What is the biggest slip-detection failure mode?',
+        question: 'Why can a slip detector pass offline evaluation and still fail on a robot?',
         answer:
-          'Late or poorly synchronized detection. The signal must arrive early enough and be connected to a controller response.',
+          'Possible causes include shared episodes across train and test, changed objects or sensor instances, late detection, and a controller that cannot recover within the remaining time. Report detection and recovery results separately rather than naming a universal biggest cause.',
       },
       {
         question: 'Should slip detection be tested on the final gripper?',
@@ -2268,19 +2269,18 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/robot-skin-vs-e-skin',
     title: 'Robot Skin vs E-Skin: What Is the Difference?',
-    description:
-      'Compare robot skin and e-skin. Learn where the terms overlap, where they differ, and how tactile AI connects electronic skin to robot behavior.',
+    description: "Understand robot skin versus e-skin through material, wearable and robot experiments. Compare evidence levels and write a clear integration brief.",
     h1: 'Robot skin vs e-skin',
     kicker: 'Comparison guide',
     intent: 'Comparison page for robot skin vs e-skin, robotic skin vs electronic skin, and terminology disambiguation searches.',
-    updated: '2026-06-06',
+    updated: '2026-11-03',
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'WebPage',
     visualKey: 'answers',
     keywords: ['robot skin vs e-skin', 'robotic skin vs electronic skin', 'robot skin e-skin difference', 'e-skin robotics', 'robot tactile skin'],
     quickAnswer: [
-      'E-skin means electronic skin: a flexible sensor layer that can measure contact-related signals.',
+      'E-skin means electronic skin: skin-like sensing systems that may combine flexible sensors with processing, communications or other functions. Their intended use can be wearable, robotic or another interface.',
       'Robot skin means tactile sensing applied to a robot surface, usually with robot-specific mounting, data, calibration, and control needs.',
       'The terms overlap when an e-skin layer is used as the tactile surface of a robot hand, gripper, prosthetic, arm, or body cover.',
     ],
@@ -2288,7 +2288,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'The practical difference',
         body: [
-          'E-skin describes the sensing layer. Robot skin describes the robot application of that sensing layer. One is closer to materials and flexible electronics; the other is closer to robotics integration.',
+          'In this comparison, e-skin emphasizes skin-like electronics and robot skin emphasizes the robot-facing integration. This is a useful reading convention, not a universal taxonomy: research projects can use either term for a complete system.',
           'A research article may show a flexible electronic skin sample. A robot skin system needs that sample to survive mounting, bending, wiring, calibration, data handling, and robot use.',
         ],
         bullets: [
@@ -2309,9 +2309,10 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'How RoboSkin.ai separates the terms',
         body: [
           'The robot skin page answers the core robotics definition. The e-skin page explains electronic skin. This comparison page resolves the overlap. Research briefs then show source-backed examples.',
-          'That structure gives readers one complete comparison instead of several thin explanations that only swap terminology.',
+          'Use the comparison to define the evidence you need: material characterization, installed coverage, a calibrated output or a validated robot action.',
         ],
       },
+      ...sensingIntegrationDepth['/guides/robot-skin-vs-e-skin'],
     ],
     faqs: [
       {
@@ -2325,9 +2326,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Yes. E-skin also appears in wearables, health monitoring, prosthetics, human-machine interfaces, and flexible electronics research.',
       },
       {
-        question: 'Why not create separate pages for robotic skin, robo skin, and robot skins?',
+        question: 'Does the term robot skin mean the system is certified for human contact?',
         answer:
-          'Those are mostly wording variants. They should usually be covered inside one strong robot skin page instead of split into thin duplicate pages.',
+          'No. The name identifies a sensing or integration concept. It does not establish a validated safety function or certification for the intended robot application.',
       },
     ],
     relatedLinks: [
@@ -2455,12 +2456,11 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/guides/robot-skin-vs-tactile-sensor',
     title: 'Robot Skin vs Tactile Sensor: System and Component Difference',
-    description:
-      'Compare robot skin and tactile sensor terms. Learn when a robot needs a tactile sensor, when it needs robot skin, and how tactile AI connects the system.',
+    description: "Separate tactile sensor specifications from robot skin integration. Map coverage, calibration, data interfaces and maintenance responsibilities.",
     h1: 'Robot skin vs tactile sensor',
     kicker: 'Comparison guide',
     intent: 'Comparison page for robot skin vs tactile sensor, robot tactile sensor, tactile sensing surface, and robot skin system searches.',
-    updated: '2026-06-16',
+    updated: '2026-11-03',
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'WebPage',
@@ -2499,6 +2499,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           'A useful comparison should identify what was measured, how the sensor was mounted, whether data was logged, and whether the tactile signal changed a real robot decision.',
         ],
       },
+      ...sensingIntegrationDepth['/guides/robot-skin-vs-tactile-sensor'],
     ],
     faqs: [
       {
@@ -2512,9 +2513,9 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Use tactile sensor for component selection and measurement questions. Use robot skin for full-surface robot integration, humanoid hands, grippers, and Physical AI contact feedback.',
       },
       {
-        question: 'Can one page cover both terms?',
+        question: 'When does replacing a sensor require a system check?',
         answer:
-          'Yes, when the page explains the distinction. Separate thin pages for every wording variant are weaker than one comparison page with clear related routes.',
+          'When the replacement changes coverage, mounting, calibration, timing or processing assumptions used by the robot. Check the installed configuration and task response rather than accepting mechanical fit as proof of equivalence.',
       },
     ],
     relatedLinks: [
