@@ -1,13 +1,15 @@
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
+import { selectionClaimSection, selectionTimingSubsections, selectionTrialSubsections, selectionDecisionSection } from '@/content/tactile-decision-depth';
 
 export const tactileSelectionGuide: SeoTopicPage = {
   path: '/guides/how-to-choose-a-tactile-sensor',
   title: 'How to Choose a Tactile Sensor: A Practical Guide',
-  description: 'Choose a tactile sensor by task, force range, contact geometry, latency and integration. Build a shortlist with a downloadable evaluation worksheet.',
+  description: 'Choose tactile sensors by measurement claims, contact geometry, response time and calibration. Compare hard gates and plan a documented acceptance trial.',
   h1: 'How to choose a tactile sensor',
   kicker: 'Selection workflow',
   intent: 'A practical decision process and acceptance worksheet for choosing tactile sensing hardware; complements the sensor-output overview.',
-  published: '2026-10-12', updated: '2026-10-12',
+  published: '2026-10-12', updated: '2026-11-03',
+  revisionNote: 'November 3, 2026: expanded specification comparison, timing, acceptance decisions and worked scenarios. Original selection steps and worksheet are retained. New scenarios are illustrative, not hardware tests.',
   priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'technology',
   keywords: ['how to choose a tactile sensor', 'tactile sensor selection checklist', 'robot gripper sensor selection'],
   quickAnswer: [
@@ -50,8 +52,10 @@ export const tactileSelectionGuide: SeoTopicPage = {
         { label: 'ReSkin author project and source code', href: 'https://reskin.dev/' },
       ],
     },
+    selectionClaimSection,
     {
       id: 'data-and-timing', heading: '4. Budget the complete data and response path',
+      subsections: selectionTimingSubsections,
       body: [
         'Ask for a sample recording before committing to an integration. It should let you identify time, sensor revision, units, geometry and invalid samples. Confirm how to obtain raw data, preserve calibration and detect a disconnected or stale sensor. Check the documentation and license for the exact driver or SDK you plan to use.',
         'Measure from physical contact to the resulting robot response. A frame-rate figure excludes some combination of capture, transfer, queuing, reconstruction and control. Record delay variation and the slow cases as well as the typical case. Select acceptable limits before testing, based on the task, rather than retrofitting a pass threshold to the result.',
@@ -68,6 +72,7 @@ export const tactileSelectionGuide: SeoTopicPage = {
     },
     {
       id: 'acceptance-trial', heading: '6. Run a bounded acceptance trial and keep the failures',
+      subsections: selectionTrialSubsections,
       body: [
         'Use a small representative object and contact set, including the cases that currently fail. Separate tuning trials from evaluation trials. Record sensor version, mount, software, conditions, trial count and pass criteria so a colleague can repeat the comparison. If possible, change only the sensing input while holding the rest of the system constant.',
         'Report task success with its denominator, plus damage, interventions, missed events, false alarms and response delay where relevant. Inspect edge contacts and repeated loading. A pass applies to the tested conditions; it is not evidence for arbitrary objects, environments or deployment duration.',
@@ -78,6 +83,7 @@ export const tactileSelectionGuide: SeoTopicPage = {
         { label: 'Compare published task-level sensor evidence', href: '/guides/tactile-sensor-benchmark-robot-manipulation' },
       ],
     },
+    selectionDecisionSection,
     {
       id: 'special-cases', heading: 'Special cases: surgery, wearables and learned resolution',
       body: [
@@ -103,6 +109,9 @@ export const tactileSelectionGuide: SeoTopicPage = {
     { label: 'Magnet-based tactile skin', href: '/e-skin#magnet-based-tactile-skin', description: 'Follow deformation through magnetic sensing to an estimated contact.' },
   ],
   sources: [
+    { label: 'TacO: task-dependent sensor evaluation, v1 — reviewed November 3, 2026', href: 'https://arxiv.org/html/2605.21976v1' },
+    { label: 'Costanzo et al.: acquisition interface and calibration — reviewed November 3, 2026', href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6412380/' },
+    { label: 'PPS: tactile pressure calibration considerations — reviewed November 3, 2026', href: 'https://pressureprofile.com/calibration-white-paper' },
     { label: 'DIGIT original sensor study', href: 'https://arxiv.org/abs/2005.14679' },
     { label: 'ReSkin author project', href: 'https://reskin.dev/' },
     { label: 'Tactile Robotics: An Outlook', href: 'https://arxiv.org/abs/2508.11261' },

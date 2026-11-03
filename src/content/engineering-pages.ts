@@ -1,4 +1,5 @@
 import type { ProgrammingPage } from '@/content/programming-pages';
+import { calibrationValidationSection, calibrationEvaluationSubsections, calibrationReleaseSection, decisionDepthSources } from '@/content/tactile-decision-depth';
 
 const checked = '2026-09-16';
 const lr = '/tutorials/lerobot-validation';
@@ -190,14 +191,14 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
 
 export const calibrationTutorial: ProgrammingPage = {
   path: '/guides/tactile-sensor-calibration',
-  revisionNote: 'October 17, 2026: linked gel inspection and replacement before calibration. The documented tutorial verification date is unchanged.',
+  revisionNote: 'November 3, 2026: added validation splits, error interpretation, uncertainty and reuse/refit decisions. The original DIGIT/Mini steps, gel-maintenance link and blank record remain. Earlier tutorial verification is dated separately below.',
   title: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
   h1: 'Tactile Sensor Calibration: DIGIT and GelSight Mini Workflows',
-  description: 'Plan DIGIT and GelSight Mini calibration: separate image baselines, depth reconstruction and force estimation, then record references, repeats and uncertainty.',
+  description: 'Plan DIGIT and GelSight Mini calibration, held-out validation, error and uncertainty checks. Know when to reuse or refit, with blank recording worksheets.',
   kicker: 'Tactile engineering guide', intent: 'Choose and document an appropriate tactile sensor calibration workflow without conflating image, depth and force.',
-  published: checked, updated: '2026-10-17', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  published: checked, updated: '2026-11-03', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['tactile sensor calibration', 'DIGIT calibration', 'GelSight Mini calibration', 'robotic tactile sensing'],
-  verification: 'Official sensor materials, source READMEs and the 3D Cal paper were checked on September 16, 2026. This is a source-based workflow and a blank recording template. RoboSkin has not run DIGIT, GelSight Mini, a calibration rig, TouchNet training or a force experiment for this guide. No measured accuracy or hardware compatibility is claimed.',
+  verification: 'Official sensor materials, source READMEs and the 3D Cal paper were checked on September 16, 2026. This is a source-based workflow and a blank recording template. RoboSkin has not run DIGIT, GelSight Mini, a calibration rig, TouchNet training or a force experiment for this guide. No measured accuracy or hardware compatibility is claimed. The November 3, 2026 extension reviews calibration validation and NIST uncertainty guidance; its scenarios and arithmetic are illustrative and no physical experiment was added.',
   quickAnswer: ['Tactile sensor calibration starts with a target quantity. A stable reference image supports image comparison; geometry calibration supports depth reconstruction; force estimation needs force reference measurements and its own validation.', 'DIGIT and GelSight Mini are vision-based tactile sensors. Their camera images and depth demonstrations should not be relabeled as calibrated newtons or pressure.'],
   sections: [
     { id: 'targets', heading: 'Choose one calibration target at a time', body: ['In robotic tactile sensing, calibration links a sensor output to a defined reference under stated conditions. Decide the target, unit, coordinate frame and operating range before collecting examples. A model can be useful for geometry without being a force sensor.'], table: { headers: ['Target', 'Reference and procedure', 'What it does not establish'], rows: [
@@ -244,7 +245,8 @@ export const calibrationTutorial: ProgrammingPage = {
       { label: 'Download field dictionary and recording instructions', href: `${cal}/README.md`, download: true },
       { label: 'Download CC0 data/template license', href: `${cal}/LICENSE-DATA.txt`, download: true },
     ] },
-    { id: 'evaluate', heading: 'Evaluate error, repeatability and drift', body: [
+    calibrationValidationSection,
+    { id: 'evaluate', heading: 'Evaluate error, repeatability and drift', subsections: calibrationEvaluationSubsections, body: [
       'Use held-out contacts and sessions. For each valid matched reference, calculate residual = estimate − reference in the same unit and coordinate convention. Report bias (mean residual), MAE (mean absolute residual) and RMSE (square root of mean squared residual), with sample counts, invalid counts and reference uncertainty. Do not pool millimetres, newtons and pixels into one error metric.',
       'For depth maps, report the evaluated region, alignment method and masking rules; separate contact and non-contact regions so a large flat background cannot hide contact errors. Examine spatial error across the sensing surface and performance on held-out geometries. For forces, report normal and shear axes separately, plus load-range coverage, hysteresis and held-out sessions.',
       'Repeatability requires independent contacts at matched conditions. Compare repeated load/unload cycles and baseline measurements across time, temperature and gel condition. Report drift and failed measurements. Pick acceptance criteria for the application before testing; no sensor accuracy, threshold or minimum sample count is established by this guide.',
@@ -257,6 +259,7 @@ export const calibrationTutorial: ProgrammingPage = {
       ['Different force on load and unload', 'Gel hysteresis, loading rate, reference alignment and time synchronization.', 'Record loading phase and independently validate the force model across the claimed conditions.'],
       ['Low training error but poor new contacts', 'Leakage across adjacent frames, positions, objects or sessions.', 'Split by physical contact/session and test held-out geometries before reporting transfer.'],
     ] } },
+    calibrationReleaseSection,
     { id: 'connect', heading: 'Connect calibration to processing and manipulation', body: [
       'Version each calibration and associate it with the observations that use it. Keep raw image or sensor units and validity flags alongside derived depth or force, recording the transformation and model revision. Sampling time, host receive time and end-to-end latency are distinct; a dataset timestamp does not substitute for those measurements.',
       'For tactile sensing in robotics, the next question is whether the calibrated quantity supports a specific action or evaluation. A depth estimate may describe local contact geometry; a force estimate may support a separately validated contact task. Both need a task-specific protocol before a manipulation claim.',
@@ -270,6 +273,7 @@ export const calibrationTutorial: ProgrammingPage = {
   relatedLinks: [overview, python, { label: 'Compare tactile sensors', href: '/sensors', description: 'Check measurement principles, interfaces and calibration requirements.' }, { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Connect measurement quality to a contact task and its evaluation.' }],
   sources: [
     { label: '3D Cal: An Open-Source Software Library for Calibrating Tactile Sensors — checked 2026-09-16', href: 'https://arxiv.org/abs/2511.03078' },
+    ...decisionDepthSources,
     { label: '3D Cal author project', href: 'https://rohankotanu.github.io/3DCal/' },
     { label: 'DIGIT official documentation — checked 2026-09-16', href: 'https://digit.ml/digit.html' },
     { label: 'DIGIT interface pinned source', href: 'https://github.com/facebookresearch/digit-interface/tree/87a28bbf2beee8008a5308e9a12d72e1bc4fefb9' },

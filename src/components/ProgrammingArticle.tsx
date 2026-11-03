@@ -62,6 +62,11 @@ export default function ProgrammingArticle({ page, children }: { page: Programmi
                   </div>
                 )}
                 {section.code?.map(code => <CodeBlock key={code.label} {...code} />)}
+                {section.subsections?.map(subsection => <div key={subsection.heading}>
+                  <h3>{subsection.heading}</h3>
+                  {subsection.body.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                  {subsection.links && <ul className="tutorial-links">{subsection.links.map(link => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul>}
+                </div>)}
                 {section.image && <figure><Image src={section.image.src} alt={section.image.alt} width={section.image.width} height={section.image.height} sizes="(max-width: 900px) 100vw, 850px" /><figcaption>{section.image.caption}</figcaption></figure>}
                 {section.links && <ul className="tutorial-links">{section.links.map(link => <li key={link.href}>{link.download ? <a href={link.href} download>{link.label} ↓</a> : <Link href={link.href}>{link.label} <span aria-hidden="true">→</span></Link>}</li>)}</ul>}
               </section>
