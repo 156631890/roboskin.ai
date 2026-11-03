@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-11-03T19:45:32.503276+00:00",
+  "runtime": {
+    "python": "3.13.3",
+    "packages": {
+      "matplotlib": "3.10.8",
+      "numpy": "2.2.6"
+    }
+  },
+  "tests": 12,
+  "results": {
+    "synthetic": true,
+    "unit": "normalized",
+    "threshold": 0.6,
+    "max_gap_ms": 150.0,
+    "frames": 12,
+    "events": 3,
+    "unknown_frames": 3,
+    "contact_frames": 5,
+    "quality_counts": {
+      "usable": 45,
+      "invalid_flag": 1,
+      "missing_taxel": 1,
+      "missing_value": 1
+    }
+  },
+  "sameReferenceTextResults": {
+    "processed.csv": true,
+    "frames.csv": true,
+    "contact_events.csv": true,
+    "summary.json": true
+  },
+  "sourceSha256": "0621e2735a3de65508d4c9224c8554644a56c44ec9dc669f16cbdf30c842ef12",
+  "inputSha256": "197687e343c4ac6e6f84c86ff2220e45c728428455a364bcf9ee24edd82375b0",
+  "scope": "Synthetic fixture only; existing installed dependencies; no fresh-venv, hardware or ROS execution",
+  "sourceLfSha256": "0621e2735a3de65508d4c9224c8554644a56c44ec9dc669f16cbdf30c842ef12",
+  "zipSourceMatches": {
+    "process_tactile.py": true,
+    "test_process_tactile.py": true,
+    "synthetic_tactile.csv": true
+  },
+  "sourceCommit": "15180016c1e4efb32232de08b60395bf76171a68",
+  "platform": "Windows x64",
+  "notVerified": [
+    "Fresh dependency installation",
+    "Linux/macOS",
+    "Real sensor acquisition",
+    "Hardware calibration",
+    "ROS runtime",
+    "Physical contact accuracy"
+  ]
+}

@@ -9,8 +9,8 @@ export const sensorComparisonPages: SeoTopicPage[] = [
     kicker: 'Sensor selection / Source-based comparison',
     intent: 'Help researchers choose between GelSight Mini and original DIGIT and plan a fair robot-task evaluation.',
     published: '2026-10-07',
-    updated: '2026-10-25',
-    revisionNote: "October 25, 2026: added blank protocol, trial and slip-event records with filling instructions for a matched GelSight Mini / original DIGIT evaluation. This is a planning resource, not new hardware test evidence. Existing source review dates are retained. October 17, 2026: linked maintenance and cross-principle selection guidance. October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates.",
+    updated: '2026-11-03',
+    revisionNote: "November 3, 2026: rechecked source evidence and added original-DIGIT software-continuity checks; no connected-sensor test. October 25, 2026: added blank protocol, trial and slip-event records with filling instructions for a matched GelSight Mini / original DIGIT evaluation. This is a planning resource, not new hardware test evidence. Existing source review dates are retained. October 17, 2026: linked maintenance and cross-principle selection guidance. October 13, 2026: added source-linked limits on gel wear, reconstruction accuracy and software-derived force estimates.",
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -138,6 +138,25 @@ export const sensorComparisonPages: SeoTopicPage[] = [
         links: [
           { label: 'Inspect the LeRobot episode format', href: '/guides/lerobot-dataset-format' },
         ],
+      },
+      {
+        "id": "software-continuity",
+        "heading": "Include software continuity in the adoption decision",
+        "body": [
+          "On November 3, 2026, the official original-DIGIT interface repository remained a public archive, with GitHub showing an archive date of November 1, 2024. Its README documents a default VGA 640 × 480 stream at 30 fps. That configured default and the original paper's camera capability describe different things; neither proves the received rate on a particular host.",
+          "An archived repository can still be a useful reproducible reference. It does not establish ongoing maintenance or compatibility with a new operating system. Before committing a project, record the exact interface revision, supported environment, acquisition settings and who will own fixes. Ask the hardware supplier separately about current support and replacement parts; repository status is not a product-stock statement.",
+          "Treat successful import, device discovery, received frames and validated derived output as separate checkpoints. The comparison records above can capture the environment and actual observations. RoboSkin.ai did not install or run a connected DIGIT or Mini during this source review."
+        ],
+        "links": [
+          {
+            "label": "Original DIGIT interface: archive status and documented stream defaults",
+            "href": "https://github.com/facebookresearch/digit-interface"
+          },
+          {
+            "label": "Original DIGIT profile and revision-specific evidence",
+            "href": "/sensors/digit"
+          }
+        ]
       },
     ],
     faqs: [

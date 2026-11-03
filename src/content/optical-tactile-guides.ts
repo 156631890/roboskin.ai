@@ -38,7 +38,8 @@ export const opticalTactileGuides: SeoTopicPage[] = [
     kicker: 'Engineering guide / Optical tactile sensor maintenance',
     intent: 'Help readers identify gel wear and follow the documented maintenance path for their exact optical tactile sensor.',
     published: '2026-10-17',
-    updated: '2026-10-17',
+    updated: '2026-11-03',
+    revisionNote: "November 3, 2026: rechecked manufacturer maintenance sources and added a symptom-based diagnostic record. No hardware service performed.",
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -101,6 +102,57 @@ export const opticalTactileGuides: SeoTopicPage[] = [
         ],
         links: [miniFaq, miniSheet, miniGel],
       },
+      {
+        "id": "diagnose-before-replacement",
+        "heading": "Diagnose the changed measurement before replacing the gel",
+        "body": [
+          "A changed image, a changed reconstruction and a changed robot outcome are different symptoms. Preserve a short unloaded recording, a repeatable reference contact and the acquisition settings before deciding which component to replace. The checks below are an engineering diagnostic plan, not a manufacturer service procedure or a test performed on hardware here.",
+          "For GelSight Mini, the cited FAQ provides the cleaning instruction; it does not provide a universal rejection threshold. For any device, use the procedure for the supplied surface and revision. Do not transfer Mini cleaning instructions to another coating or infer a repair process from a successful cleaning example."
+        ],
+        "table": {
+          "headers": [
+            "Observed change",
+            "First comparison",
+            "Decision boundary"
+          ],
+          "rows": [
+            [
+              "Debris or an isolated image mark",
+              "Inspect the unloaded image before and after supported cleaning.",
+              "A remaining defect may require supplier guidance; cleaning is not evidence that a cut has healed."
+            ],
+            [
+              "Whole-image brightness or focus change",
+              "Compare exposure, lighting, focus and mounting with the retained configuration.",
+              "Do not attribute an acquisition change to gel wear without checking the imaging path."
+            ],
+            [
+              "Reference geometry or force estimate shifts",
+              "Repeat the same reference with the same processing and note any replaced component.",
+              "A usable image is not proof that the old calibration remains valid."
+            ],
+            [
+              "A learned policy fails after replacement",
+              "Separate image acquisition, derived estimates and task behavior in the log.",
+              "Recalibration and policy retraining are different interventions; retain evidence for which one is needed."
+            ]
+          ]
+        },
+        "contextLinks": [
+          {
+            "before": "Use the ",
+            "label": "calibration acceptance record",
+            "href": "/guides/tactile-sensor-calibration",
+            "after": " to retain sensor identity, surface revision, reference conditions and the output that was actually validated."
+          }
+        ],
+        "links": [
+          {
+            "label": "Manufacturer Mini FAQ: wear and cleaning, questions 26–27",
+            "href": "https://github.com/gelsightinc/gsrobotics/blob/321d6a22da64529138ff10237335038fd8c5189f/README.md#frequently-asked-questions"
+          }
+        ]
+      },
     ],
     faqs: [
       { question: 'How often should I replace tactile sensor gel?', answer: 'There is no universal replacement interval in the reviewed sources. Contact material, damage and the quality required by the application matter. A coin-press test is not a schedule for every robot task.' },
@@ -123,7 +175,8 @@ export const opticalTactileGuides: SeoTopicPage[] = [
     kicker: 'Sensor selection / Optical and capacitive touch',
     intent: 'Help engineers choose a sensing principle using documented outputs and application requirements rather than unmatched specifications.',
     published: '2026-10-17',
-    updated: '2026-10-17',
+    updated: '2026-11-03',
+    revisionNote: "November 3, 2026: rechecked the cited sensing designs and added a common-quantity comparison with a labeled arithmetic example, not measured sensor data.",
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -198,6 +251,52 @@ export const opticalTactileGuides: SeoTopicPage[] = [
           'For a procurement comparison, ask for the same scope: usable sensing area, required readout, mounting, software access, spares and support. A low component cost in a research paper does not establish the delivered price of a working system.',
         ],
         links: [miniGel, miniFaq, capacitivePaper],
+      },
+      {
+        "id": "compare-the-same-quantity",
+        "heading": "Compare the same physical quantity before comparing accuracy",
+        "body": [
+          "A pressure value, a total normal force and an image reconstruction can all be useful, but their error numbers cannot be placed in one ranking without a common reference. Choose the quantity the robot needs, then decide how each candidate's raw observation becomes that quantity.",
+          "A simple hypothetical calculation illustrates the area dependence. A uniform 1 N normal load over 1 cm² corresponds to 10 kPa; over 2 cm² it corresponds to 5 kPa. These are arithmetic examples, not measurements of either sensor. The same total force can produce different pressures, and a real contact need not be uniform. Summing raw capacitance or image pixels does not perform this conversion.",
+          "For a distributed pressure estimate, integration into force requires calibrated values, the relevant physical area and a consistent surface orientation. For an optical force estimate, validate the image-to-force model against a reference under the intended contacts. In both cases, report the conditions and uncertainty of the derived output."
+        ],
+        "table": {
+          "headers": [
+            "Comparison question",
+            "Keep matched",
+            "Report separately"
+          ],
+          "rows": [
+            [
+              "Which resolves the needed contact feature?",
+              "Feature, contact position, loading and usable surface area",
+              "Pixel dimensions, electrode pitch and measured resolution"
+            ],
+            [
+              "Which estimates force adequately?",
+              "Reference force, direction, load history and evaluation contacts",
+              "Pressure error, force error and cross-axis error"
+            ],
+            [
+              "Which responds soon enough?",
+              "Contact reference event and controller destination",
+              "Acquisition rate, inference delay and physical response"
+            ],
+            [
+              "Which is practical to maintain?",
+              "Objects, contact cycle and required output quality",
+              "Surface replacement, recalibration and downtime"
+            ]
+          ]
+        },
+        "contextLinks": [
+          {
+            "before": "Turn these quantities into a task-specific comparison with the ",
+            "label": "sensor selection acceptance trial",
+            "href": "/guides/how-to-choose-a-tactile-sensor#acceptance-trial",
+            "after": ". No technology-wide winner follows from the arithmetic example."
+          }
+        ]
       },
     ],
     faqs: [

@@ -224,9 +224,10 @@ export const pythonTactileTutorial: ProgrammingPage = {
   h1: 'Process Tactile Sensor Data with Python: CSV, Heatmaps and Contact Events',
   description: 'Run a hardware-free Python exercise with synthetic tactile CSV data. Validate missing values and timestamps, plot a heatmap, detect teaching contact events and export results.',
   kicker: 'Python tutorial', intent: 'A complete beginner tactile data processing project with reproducible outputs.',
-  updated: '2026-09-16', priority: 0.78, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  updated: '2026-11-03', priority: 0.78, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['Python tactile data processing', 'tactile CSV', 'tactile heatmap', 'Python robotics'],
-  verification: 'Executed in a fresh virtual environment on Windows x64 with CPython 3.13.3, Matplotlib 3.10.6 and NumPy 2.5.3. Twelve behavior tests passed. The plots and downloadable results below were produced by the supplied script, not drawn as a demonstration.',
+  revisionNote: 'November 3, 2026: reran the synthetic Python fixture with existing dependencies and added an event-boundary interpretation table. The original September verification, lock file, code and reference outputs are preserved.',
+  verification: 'September 16, 2026 record: Executed in a fresh virtual environment on Windows x64 with CPython 3.13.3, Matplotlib 3.10.6 and NumPy 2.5.3. Twelve behavior tests passed. The plots and downloadable results below were produced by the supplied script, not drawn as a demonstration.',
   quickAnswer: ['Read a 47-row synthetic CSV describing 12 frames of a 2 × 2 array. Preserve missing data, plot the usable values and export three teaching contact-event segments. No robot, tactile sensor, GPU or ROS installation is required.'],
   sections: [
     {
@@ -308,6 +309,57 @@ export const pythonTactileTutorial: ProgrammingPage = {
         {
           "label": "Plan demonstration capture and failure labels",
           "href": "/robot-teleoperation"
+        }
+      ]
+    },
+    {
+      "id": "interpret-observed-segments",
+      "heading": "9. Read event boundaries without inventing physical durations",
+      "body": [
+        "The supplied fixture was rerun on November 3, 2026 using the existing Windows CPython 3.13.3 environment, Matplotlib 3.10.8 and NumPy 2.2.6. All 12 behavior tests passed. The four text outputs matched the supplied reference results after newline normalization: 12 frames, three event segments and three unknown frames. The two generated plots were also inspected. This was not a fresh-environment installation or a hardware, ROS or detector-accuracy test; the September 16 verification and dependency lock remain a separate historical record.",
+        "The event file records spans between observed threshold-crossing frames. It cannot recover motion or contact hidden by missing observations. In particular, a one-frame segment has a zero observed span, which does not mean the physical contact lasted zero milliseconds."
+      ],
+      "table": {
+        "headers": [
+          "Fixture segment",
+          "Recorded evidence",
+          "Interpretation limit"
+        ],
+        "rows": [
+          [
+            "0.2–0.3 s",
+            "100 ms observed span; the next frame is unknown; right_censored=true",
+            "The end of physical contact was not observed."
+          ],
+          [
+            "0.5 s only",
+            "0 ms observed span; left_censored=true and right_censored=true",
+            "Neither physical boundary is established by this one observation."
+          ],
+          [
+            "0.9–1.0 s",
+            "100 ms observed span; a clear frame follows at 1.1 s; left_censored=true",
+            "A later clear observation bounds release, but the contact start remains unobserved."
+          ]
+        ]
+      },
+      "contextLinks": [
+        {
+          "before": "When moving to a real slip detector, use the ",
+          "label": "slip-detection evaluation guide",
+          "href": "/guides/slip-detection-robot-hand",
+          "after": " to define an independent onset reference. A teaching threshold segment is not a labeled slip event."
+        }
+      ],
+      "links": [
+        {
+          "label": "Read the November 3 synthetic-run verification record",
+          "href": "/tutorials/python-tactile/verification-2026-11-03.json"
+        },
+        {
+          "label": "Inspect the original event CSV",
+          "href": "/tutorials/python-tactile/results/contact_events.csv",
+          "download": true
         }
       ]
     },
