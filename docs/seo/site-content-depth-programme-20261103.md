@@ -68,24 +68,24 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/sparsh-x-multisensory-touch-representations-2025 | inventory only; claim-by-claim review pending | 887 | 4 |
 | /research/mitas-multi-resolution-tactile-imitation-learning-2026 | inventory only; claim-by-claim review pending | 739 | 5 |
 | /research/dream-tac-tactile-world-action-model-2026 | inventory only; claim-by-claim review pending | 1172 | 15 |
-| /research/open-source-magnetic-tactile-calibration-2024 | inventory only; claim-by-claim review pending | 697 | 6 |
-| /research/eflesh-customizable-magnetic-touch-sensing-2025 | inventory only; claim-by-claim review pending | 718 | 4 |
+| /research/open-source-magnetic-tactile-calibration-2024 | source review and rewrite complete; production verification pending | 697 | 6 |
+| /research/eflesh-customizable-magnetic-touch-sensing-2025 | source review and rewrite complete; production verification pending | 718 | 4 |
 | /research/freetacman-robot-free-visuotactile-data-collection-2025 | inventory only; claim-by-claim review pending | 842 | 10 |
 | /research/humanoid-visual-tactile-action-dataset-2025 | inventory only; claim-by-claim review pending | 1375 | 7 |
-| /research/tactile-robotics-outlook-research-landscape-2025 | primary-source review and rewrite complete; this PR awaits production verification | 668 | 1 |
-| /research/wet-slippage-bionic-fingertip-eskin-2026 | primary-source review and rewrite complete; this PR awaits production verification | 801 | 2 |
-| /research/spiking-touch-encoding-large-area-eskin-2026 | primary-source review and rewrite complete; this PR awaits production verification | 951 | 2 |
-| /research/origami-capacitive-robotic-eskin-2026 | primary-source review and rewrite complete; this PR awaits production verification | 742 | 1 |
-| /research/slip-actuated-etextile-tactile-sensing-2025 | primary-source review and rewrite complete; this PR awaits production verification | 787 | 2 |
-| /research/optical-electronic-artificial-skin-molecular-sensing-2025 | primary-source review and rewrite complete; this PR awaits production verification | 742 | 2 |
-| /research/genforce-transferable-force-sensing-2026 | inventory only; claim-by-claim review pending | 1321 | 9 |
-| /research/dexskin-high-coverage-conformable-robotic-skin-2025 | inventory only; claim-by-claim review pending | 968 | 1 |
-| /research/fluid-based-robot-skin-thermal-contact-2025 | inventory only; claim-by-claim review pending | 886 | 1 |
-| /research/graphene-liquid-metal-3d-force-2026 | inventory only; claim-by-claim review pending | 1199 | 9 |
+| /research/tactile-robotics-outlook-research-landscape-2025 | rewritten and production verified in PR104 | 668 | 1 |
+| /research/wet-slippage-bionic-fingertip-eskin-2026 | rewritten and production verified in PR104 | 801 | 2 |
+| /research/spiking-touch-encoding-large-area-eskin-2026 | rewritten and production verified in PR104 | 951 | 2 |
+| /research/origami-capacitive-robotic-eskin-2026 | rewritten and production verified in PR104 | 742 | 1 |
+| /research/slip-actuated-etextile-tactile-sensing-2025 | rewritten and production verified in PR104 | 787 | 2 |
+| /research/optical-electronic-artificial-skin-molecular-sensing-2025 | rewritten and production verified in PR104 | 742 | 2 |
+| /research/genforce-transferable-force-sensing-2026 | source review and rewrite complete; production verification pending | 1321 | 9 |
+| /research/dexskin-high-coverage-conformable-robotic-skin-2025 | source review and rewrite complete; production verification pending | 968 | 1 |
+| /research/fluid-based-robot-skin-thermal-contact-2025 | source review and rewrite complete; production verification pending | 886 | 1 |
+| /research/graphene-liquid-metal-3d-force-2026 | source review and rewrite complete; production verification pending | 1199 | 9 |
 | /research/single-material-soft-robotic-skin-2025 | inventory only; claim-by-claim review pending | 1204 | 6 |
-| /research/full-hand-tactile-sensing-2025 | inventory only; claim-by-claim review pending | 1228 | 11 |
+| /research/full-hand-tactile-sensing-2025 | source review and rewrite complete; production verification pending | 1228 | 11 |
 | /research/temperature-pressure-bimodal-2025 | inventory only; claim-by-claim review pending | 1119 | 3 |
-| /research/event-based-opto-tactile-2025 | inventory only; claim-by-claim review pending | 1138 | 3 |
+| /research/event-based-opto-tactile-2025 | source review and rewrite complete; production verification pending | 1138 | 3 |
 | /research/self-healing-multimodal-eskin-2026 | inventory only; claim-by-claim review pending | 1084 | 2 |
 | /research/ros2-kilted-tactile-pipeline-2026 | inventory only; claim-by-claim review pending | 1363 | 10 |
 | /research/large-area-flexible-tactile-arrays-2025 | inventory only; claim-by-claim review pending | 1168 | 6 |
@@ -230,3 +230,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 ## Research interpretation pass
 
 Six older research briefs now replace editorial-facing filler with source-bounded results and distinct adoption frameworks. Original dates, URLs, headings/anchors, images and prior useful source links are preserved. The Frontiers contrast section is retained verbatim. Deployment status must be taken from the release record, not inferred from this source document. Remaining rows are still pending individual review.
+
+## Sensor-system evidence pass
+
+Eight existing interpretations distinguish calibration effort, transfer prerequisites, geometry, thermal operation and event processing. Original URLs, dates, headings, images and source routes remain. Publisher-access limits are recorded rather than silently called a completed review. Previous PR104 six-page production verification is complete; the eight pages in this pass require their own live evidence. All remaining URL rows stay pending.
