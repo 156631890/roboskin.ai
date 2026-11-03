@@ -10,7 +10,7 @@ async function loadTypeScript(relative) {
   return import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
 }
 
-const { buildSectionIds, getArticleHeadings } = await loadTypeScript('../src/lib/article-headings.ts');
+const { buildSectionIds, getArticleHeadings, getArticleSubheadings } = await loadTypeScript('../src/lib/article-headings.ts');
 const { groupResourcePages } = await loadTypeScript('../src/content/resource-navigation.ts');
 const markup = (pathname, options = {}) => `<!doctype html><html><head>
   <title>${options.title ?? `Title for ${pathname}`}</title>
@@ -78,4 +78,24 @@ test('resource directory separates sensor selection from practical setup and mai
   for (const [id, paths] of Object.entries(expected)) {
     assert.deepEqual(groups.find((group) => group.id === id)?.pages.map((page) => page.path), paths);
   }
+});
+
+test('article subheadings cannot displace existing parent anchors, including later duplicates', () => {
+  const content = '# Article\n## Shared\n### Shared\nText\n## Shared\n### Detail\n### Detail';
+  const parents = getArticleHeadings(content);
+  const subheadings = getArticleSubheadings(content);
+  assert.deepEqual(parents.map(({ id }) => id), ['section-shared', 'section-shared-2']);
+  assert.deepEqual(subheadings.map(({ id, line }) => ({ id, line })), [
+    { id: 'section-shared-3', line: 2 },
+    { id: 'section-detail', line: 5 },
+    { id: 'section-detail-2', line: 6 },
+  ]);
+  assert.equal(new Set([...parents, ...subheadings].map(({ id }) => id)).size, 5);
+});
+
+test('article subheading parsing leaves the major-section contents unchanged', () => {
+  const content = '# Title\n## Evidence\n### Fine-grained result\nText with ### inside\n#### Unsupported deeper level';
+  assert.deepEqual(getArticleHeadings(content).map(({ heading }) => heading), ['Evidence']);
+  assert.deepEqual(getArticleSubheadings(content).map(({ heading }) => heading), ['Fine-grained result']);
+  assert.deepEqual(getArticleSubheadings('# Title\n## Evidence\nOrdinary paragraph'), []);
 });
