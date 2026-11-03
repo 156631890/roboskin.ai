@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-11-03T20:57:38.785289+00:00",
+  "commit": "7bf81d2575e3ef4b62034f4771daf948033b4d76",
+  "python": "3.13.3",
+  "testCount": 4,
+  "testsPassed": true,
+  "sourceCompilation": [
+    "src\\roboskin_tactile_demo\\setup.py",
+    "src\\roboskin_tactile_demo\\launch\\demo.launch.py",
+    "src\\roboskin_tactile_demo\\roboskin_tactile_demo\\contract_monitor.py",
+    "src\\roboskin_tactile_demo\\roboskin_tactile_demo\\synthetic_publisher.py",
+    "src\\roboskin_tactile_demo\\roboskin_tactile_demo\\__init__.py"
+  ],
+  "rosInstalledOrExecuted": false,
+  "hardwareTest": false,
+  "limitations": "Only dependency-free source/fixture contract tests and Python syntax compilation. No ROS build, launch, message transport, bag recording, replay, timing or hardware verification.",
+  "repository": "https://github.com/roboskin-ai/ros2-tactile-starter-kit",
+  "historicalCI": {
+    "evidenceType": "Read-only summary of GitHub Actions run/job response; not a new run",
+    "reviewDate": "2026-11-03",
+    "repository": "roboskin-ai/ros2-tactile-starter-kit",
+    "url": "https://github.com/roboskin-ai/ros2-tactile-starter-kit/actions/runs/32648006098",
+    "headSha": "7bf81d2575e3ef4b62034f4771daf948033b4d76",
+    "createdAt": "2026-08-23T15:15:57Z",
+    "updatedAt": "2026-08-23T15:17:29Z",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "ros-build",
+        "conclusion": "success",
+        "scope": "dependencies, colcon build, generated interface inspection"
+      },
+      {
+        "name": "static-contract",
+        "conclusion": "success",
+        "scope": "four dependency-free source/fixture tests and Python compilation"
+      }
+    ],
+    "notCovered": [
+      "node launch",
+      "message transport",
+      "recording",
+      "replay",
+      "timing",
+      "hardware"
+    ]
+  }
+}
