@@ -1,5 +1,23 @@
 # Blank tactile calibration record
 
+## Additional validation-plan worksheet — November 3, 2026
+
+`validation-plan.csv` is a separate header-only planning sheet. The original
+`calibration-record-template.csv` and its column contract below are unchanged.
+Use one row per proposed calibration claim and validation condition, not per
+video frame. This sheet contains no hardware results or approval.
+
+Record the target quantity/unit/frame and tested range; name the held-out factor
+and whole contact/session IDs. Identify the sensor, surface and reference.
+For reference_uncertainty, supply units, the stated coverage factor if applicable
+and its basis in uncertainty_basis; do not enter MAE as a substitute.
+Set the acceptance_criterion and criterion_date before evaluation. Preserve
+attempted_contacts, valid_contacts, excluded_conditions and the evidence_file.
+Use decision for pass, fail or unknown within the stated scope. reviewer and
+review_date must describe an actual review; leave them blank until it occurs.
+
+## Original measurement record and field dictionary
+
 RoboSkin.ai, 2026-09-16. This header-only CSV has **no measurements**. It is a
 recording aid, not a hardware experiment, calibration certificate or safe-motion
 program. No third-party software is bundled. Template and dictionary: CC0-1.0.

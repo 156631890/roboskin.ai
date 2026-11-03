@@ -1,0 +1,1 @@
+candidate_id,revision,requirement,critical_gate,criterion_set_before_test,protocol,reference_and_units,configuration,evidence_type,evidence_file,attempted_trials,valid_trials,result,uncertainty_or_limit,decision_pass_fail_unknown,reason,next_action,reviewer,review_date
