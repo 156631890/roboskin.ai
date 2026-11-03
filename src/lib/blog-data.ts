@@ -4171,105 +4171,109 @@ Use “self-healing” with the property, damage and conditions attached. That m
   {
     id: 'ros2-kilted-tactile-pipeline-2026',
     title: 'ROS 2 tactile sensor pipeline for robot skin data replay',
+    seoDescription: 'Plan ROS 2 tactile recordings with explicit units, frames, filtering and timing. Separate Kilted wrench interfaces from a Lyrical synthetic replay tutorial.',
     excerpt:
       'A robotics software guide to ROS 2 tactile data messages, rosbag workflows, force-torque context, and replayable robot skin evaluation.',
     content: `# ROS 2 tactile sensor pipeline for robot skin data replay
 
-**Updated technical brief - May 2026**
+**Updated technical brief - November 3, 2026**
 
 ## Why this source matters
 
-Robot skin is not useful if its data cannot be recorded, replayed, synchronized, and consumed by the robot stack. Hardware teams often focus on sensitivity, resolution, and material design, but tactile AI fails in practice when data handling is weak. ROS 2 matters because it gives robotics teams a shared middleware vocabulary for topics, timestamps, coordinate frames, recordings, and controllers.
+A tactile recording is useful when another engineer can tell what each value means, which transformation produced it and which robot decision consumed it. Successfully publishing a topic answers only part of that question.
 
-The ROS 2 documentation lists Kilted Kaiju as a supported distribution released in May 2025 with an end-of-life date in December 2026. It also lists Jazzy and Humble as supported releases with longer support windows. For tactile sensing teams in May 2026, the practical question is not which name sounds newest. The practical question is which distribution, controller packages, and recording tools match the robot program.
+This interpretation uses the current public ROS 2 Kilted ros2_control documentation as a concrete interface example. It is not an installation tutorial or a fresh verification of the distribution support calendar. The separate [publish-and-replay walkthrough](/guides/ros2-tactile-sensing) targets a pinned Lyrical starter kit; do not mix its environment with Kilted packages. Its documented execution limits remain separate from this source review.
 
 ## Core idea
 
-A tactile pipeline should be designed before the sensor is judged. If a team cannot replay a grasp, align tactile events with joint motion, or inspect frame transforms, it cannot reliably improve the system. A good pipeline answers four basic questions:
+Define the observation before choosing its transport. A pressure field, optical image, six-axis wrench and learned slip label contain different information. Putting them on ROS topics does not make them interchangeable or establish physical units.
 
-- What data is produced?
-- When was each reading produced?
-- Where on the robot did it happen?
-- How can the event be replayed later?
+The documented **force_torque_sensor_broadcaster** publishes **geometry_msgs/msg/WrenchStamped** from force/torque state interfaces. It accepts either a sensor-name convention or explicitly named interfaces, with a declared frame. That is a force/torque interface, not an automatic adapter for an arbitrary tactile array. [Kilted broadcaster documentation](https://control.ros.org/kilted/doc/ros2_controllers/force_torque_sensor_broadcaster/doc/userdoc.html).
 
-| Pipeline layer | Example decision | Why it matters |
+| Observation | Meaning to retain | Information that can be lost in a shortcut |
 | --- | --- | --- |
-| Message format | Pressure map, force vector, event stream, or feature list | Defines what software can consume |
-| Timestamping | Sensor time, host time, or synchronized clock | Enables replay and sensor fusion |
-| Frame mapping | Fingertip, palm, gripper, or tool frame | Makes contact spatially meaningful |
-| Recording | rosbag2 or equivalent log format | Enables debugging after failure |
+| Taxel array | Location map, channel order, units and validity | Spatial contact distribution when reduced to one value |
+| Optical tactile image | Sensor identity, acquisition and imaging configuration | Deformation evidence when only a classifier label is saved |
+| Force/torque sample | Components, reference frame and calibration | Meaning of direction and moment when the frame is omitted |
+| Derived event | Detector version, input interval and event definition | Evidence needed to explain a false or late decision |
 
 ## Tactile data is not one data type
 
-Different robot skin architectures produce different outputs. A pressure array may publish a dense matrix. A 3D force fingertip may publish vectors. An event-based skin may publish time-stamped contact events. A learned tactile classifier may publish classes such as slip, contact, release, or texture state.
+An aggregate wrench does not preserve a full contact map. Conversely, an array labeled pressure does not become a calibrated force/torque measurement just because its values can be added. Any conversion needs a documented physical model, geometry and calibration appropriate to the measured quantity.
 
-Treating all of these as "touch data" hides engineering differences. Dense arrays may need compression. Event streams may need buffering and ordering. Force vectors need coordinate frames. Classification outputs need confidence values and traceability back to raw data.
+Preserve the original stream when adding a derived one. Name the transformation and retain its configuration. This makes it possible to distinguish a changed sensor response from a changed processing rule. The [calibration guide](/guides/tactile-sensor-calibration) explains the reference evidence needed before assigning physical units.
 
 ## Reader value
 
-This source helps turn robot skin from a material story into an integration story. A team can publish a sensitive tactile sensor and still fail to build a useful robot skin if the data cannot be synchronized, replayed, or connected to controller decisions. ROS 2 documentation is not a tactile paper, but it provides the practical language needed to make tactile experiments reproducible.
+The Kilted release notes describe per-axis multipliers applied after existing offset logic, sequential filter chains with a separate filtered output, and transformation of wrench messages into target frames. The current broadcaster documentation also describes its TF2-based transformer node. These are documented software facilities; their presence does not validate a particular sensor calibration or its timing. [Release notes](https://control.ros.org/kilted/doc/ros2_controllers/doc/release_notes.html).
 
-The strongest editorial use is to define a minimum data contract. Each tactile message should say what was measured, when it was measured, where it belongs on the robot, and how it can be replayed. Without that contract, comparison between sensors is weak because one system may publish clean calibrated force vectors while another publishes raw noisy arrays with unclear timing.
+For each output, keep a processing record:
 
-| Tactile output | Integration need | Debugging question |
-| --- | --- | --- |
-| Pressure image | Array shape, units, timestamp, frame | Can the same grasp be replayed visually? |
-| 3D force vector | Coordinate frame and calibration | Is shear direction expressed consistently? |
-| Slip event | Event time, location, confidence | Did the controller react before the object moved? |
-| Learned class | Training context and raw-data trace | Can a false classification be explained later? |
+| Record field | Question it answers |
+| --- | --- |
+| Input topic/type and sensor identity | Which observation entered the calculation? |
+| Offset, scale and calibration revision | Which mapping produced the physical estimate? |
+| Filter order and parameters | Which processing changed the values and their temporal behavior? |
+| Source/target frames and transform record | Where are the components expressed? |
+| Output topic and consumer | Which version of the observation reached the decision? |
+
+This table is an editorial record template, not an official tactile message standard. Merely changing a frame name is not a coordinate transformation. Similarly, a numerically plausible filtered signal is not proof that the right reference or transformation was used.
 
 ## ROS 2 evaluation checklist
 
-- Define the tactile message schema before collecting experiments.
-- Include timestamps and frame identifiers in every useful message.
-- Record raw data when possible, not only processed classifications.
-- Use replay logs to compare failed and successful grasps.
-- Document QoS settings for high-rate or lossy data streams.
-- Keep calibration metadata with the recorded session.
-- Decide whether the controller consumes raw signals, features, or events.
+- Record the distribution and exact relevant package versions; a documentation page is not an inventory of the installed system.
+- Distinguish raw, calibrated, filtered, transformed and event topics.
+- Define each timestamp's meaning and clock domain.
+- Keep missing or invalid observations distinguishable from measured zero.
+- Save calibration, geometry and processing configuration with the session.
+- State which observations the controller actually consumes.
+- Verify that a recording includes the required streams and context before evaluating a failure.
 
 ## Why rosbag and replay matter
 
-Tactile sensing is hard to debug live. A grasp may fail in half a second. A robot may drop an object because of slip, bad force control, delayed contact detection, or a mechanical issue. Without replay, engineers are left guessing. With replay, they can inspect tactile data, joint state, camera state, and controller decisions together.
+A recording can support an investigation only if it retains the evidence the question requires. To examine a late response, keep relevant acquisition, arrival and decision timing with a documented clock relationship. Message order alone does not reconstruct an unrecorded delay.
 
-Record contact signals, joint state, frame transforms and controller outputs together so a failed grasp can be replayed. This lets engineers distinguish sensing errors, synchronization errors and control decisions before attributing an outcome to the tactile sensor.
+Separate replay fidelity from physical repeatability. Recovering the recorded values does not recreate the original friction, object pose, actuator state or controller scheduling. An offline replay may help compare processing revisions; a claim about physical recovery still requires the appropriate robot experiment.
+
+The existing [ROS 2 walkthrough](/guides/ros2-tactile-sensing#replay) owns the version-scoped commands and synthetic exercise. This article adds the evidence questions needed when replacing an exercise with a real sensing path, without claiming that those commands were executed here.
 
 ## What this means for robot skin
 
-For robot skin, ROS 2 is not the sensor. It is the route that makes sensor evidence reusable. A tactile surface can report pressure, force, deformation, slip, or learned classes, but those signals need timestamps, frames, units, calibration metadata, and replayable logs before they can support debugging or robot learning.
+Robot skin can change after remounting, cover replacement or repair. Preserve the sensor identity and calibration revision so a later analyst can recognize that change. Otherwise a model may appear to drift when its input assembly actually changed.
 
-This makes the ROS 2 tactile sensor pipeline the internal bridge between hardware and AI pages. Readers should connect it to [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) for prediction and [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) for calibration-transfer context.
+The [GenForce transferable force sensing](/research/genforce-transferable-force-sensing-2026) interpretation explains why calibration-transfer conditions matter. The [Dream-Tac world-action model](/research/dream-tac-tactile-world-action-model-2026) interpretation distinguishes model timing and prediction evidence from the complete control loop.
 
 ## What this does not prove yet
 
-Using ROS 2 does not prove that a robot skin system is integrated, low-latency, calibrated, or safe for a task. Middleware can move messages, but it cannot define the right tactile schema, fix noisy sensors, or decide how a controller should react to contact. Those decisions still need engineering evidence.
+Publishing a valid message does not prove complete delivery, correct calibration, deterministic latency, hardware compatibility or safe control. The checks must follow the specific claim. A source review and a successful software build also do not establish a live sensor-to-action result.
 
 ## Where this fits next
 
-The next step is a data contract: define the tactile message, preserve raw and processed data, record robot state beside touch state, and keep enough metadata to replay failed manipulation. That contract supports [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) pages and source-backed research notes instead of isolated sensor claims.
+Start with one observed failure and name the evidence needed to distinguish its possible causes. If the question concerns a contact location, retain geometry. If it concerns a late response, retain timing. If it concerns a changed estimate, retain the raw input and processing revision. Use the [robot hand tactile sensor route](/applications/robot-hand-tactile-sensor) to connect those records to the hand's task contacts.
 
 ## Practical questions
 
-- What is a ROS 2 tactile sensor pipeline? It is a software route for publishing, recording, replaying, and consuming tactile data with useful timing and frame context.
-- Why does robot skin need replay? Contact failures happen quickly, and replay lets engineers compare touch signals with joint state, camera state, and controller decisions after the event.
-- Does ROS 2 make tactile AI automatic? No. It gives teams a shared data path; models and controllers still need task-specific validation.
+- **Does one force/torque topic replace distributed touch?** It represents a different observation; retain the spatial data needed by the task.
+- **Does filtering establish calibration?** No. Signal processing and comparison with a physical reference answer different questions.
+- **Can replay prove the original robot would recover?** No. Replaying observations is not replaying the complete physical interaction.
+- **Which guide provides commands?** Use the separate Lyrical walkthrough and its explicit verification record; this page reviews interface and evidence choices.
 
 ## What not to infer
 
-ROS 2 support does not mean a robot skin product is ready, compatible, or easy to integrate. Middleware is only one part of the system. The sensor still needs electrical integration, calibration, mechanical mounting, data validation, and task-specific control logic.
-
-For RoboSkin.ai, the editorial point is clear: serious robot skin content should include software architecture. A sensor page that omits timestamps, frame mapping, replay, and calibration is incomplete.
+RoboSkin.ai did not install or execute ROS 2, benchmark a controller or validate a hardware driver for this interpretation. Package behavior is attributed to the cited documentation. The proposed records and checks are editorial integration guidance, with no universal rate or safety guarantee.
 
 ## Sources
 
-[ROS 2 Kilted distributions](https://docs.ros.org/en/kilted/Releases.html)
+[ROS 2 Kilted distributions](https://docs.ros.org/en/kilted/Releases.html) — retained reference; the support calendar could not be reread in this pass.
 
 [ros2_control Kilted release notes](https://control.ros.org/kilted/doc/ros2_controllers/doc/release_notes.html)
+
+[Kilted force/torque broadcaster and transformer documentation](https://control.ros.org/kilted/doc/ros2_controllers/force_torque_sensor_broadcaster/doc/userdoc.html)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-19',
-    updated: '2026-09-13',
-    readTime: '5 min read',
+    updated: '2026-11-03',
+    readTime: '6 min read',
     category: 'Robotics Software',
     image: '/generated/authority/research-ros2-tactile-pipeline.webp',
     sourceTitle: 'ROS 2 and ros2_control Kilted documentation',

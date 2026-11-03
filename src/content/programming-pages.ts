@@ -112,15 +112,15 @@ export const ros2Tutorial: ProgrammingPage = {
   h1: 'ROS 2 tactile sensing: from synthetic messages to replay',
   description: 'Follow a source-checked ROS 2 tactile message and replay workflow. Explore an ICRA hardware tutorial, with runtime and compatibility limits stated.',
   kicker: 'ROS 2 tutorial', intent: 'An executable, version-scoped tactile message and recording walkthrough.',
-  updated: '2026-10-13', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
-  revisionNote: 'October 13, 2026: added source-linked limitations on synthetic signals, QoS delivery and timing/geometry. The recorded ROS execution status is unchanged.',
+  updated: '2026-11-03', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  revisionNote: 'November 3, 2026: rechecked the pinned source, reran four dependency-free tests and added a verification ladder. The original September record is retained; ROS runtime and hardware validation remain pending.',
   keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data'],
-  verification: 'Source checked at 7bf81d2 on 2026-09-16. Four contract tests and Python compilation passed locally. Upstream Lyrical CI built the packages and inspected the interface. Launch, live messages, recording and replay were not executed in this Windows environment, which has no ROS 2 installation or Linux runtime.',
+  verification: 'Pinned commit 7bf81d2: the original source check is dated September 16. Four dependency-free tests and Python syntax compilation passed again on November 3, 2026. Historical Lyrical CI built packages and inspected the interface. No local ROS launch, live transport, recording, replay or hardware test is claimed.',
   quickAnswer: ['Publish a deterministic synthetic array, inspect its contract, record one topic and replay it with the publisher stopped. No robot, hardware driver or actuator command is involved.'],
   sections: [
     {
       id: 'environment', heading: '1. Use one ROS and operating-system combination',
-      body: ['This walkthrough targets Ubuntu 26.04 (Resolute), Bash and ROS 2 Lyrical. The starter-kit CI uses osrf/ros:lyrical-desktop; the upstream image is based on Ubuntu Resolute. Do not mix these commands with a Humble, Jazzy or Kilted workspace.', 'Follow the official Lyrical Ubuntu installation guide to configure UTF-8, the Ubuntu repositories and the ROS apt source, then install the desktop packages and development tools below. This requires administrator access on that Linux environment. Run rosdep init only on a fresh installation; skip it if rosdep is already initialized.', 'These installation and runtime commands are source-checked instructions, not a local ROS execution transcript. The upstream CI result covers building and interface inspection only.'],
+      body: ['This walkthrough targets Ubuntu 26.04 (Resolute), Bash and ROS 2 Lyrical. The inspected August 23, 2026 CI run used osrf/ros:lyrical-desktop with Ubuntu Resolute package sources inside the container; its Ubuntu 24.04 host runner is a separate environment. That historical run does not pin the current contents of the image tag. Do not mix these commands with a Humble, Jazzy or Kilted workspace.', 'Follow the official Lyrical Ubuntu installation guide to configure UTF-8, the Ubuntu repositories and the ROS apt source, then install the desktop packages and development tools below. This requires administrator access on that Linux environment. Run rosdep init only on a fresh installation; skip it if rosdep is already initialized.', 'These installation and runtime commands are source-checked instructions, not a local ROS execution transcript. The upstream CI result covers building and interface inspection only.'],
       code: [{ label: 'Ubuntu 26.04 / Bash — after configuring the official ROS apt repository', language: 'bash', value: 'sudo apt update\nsudo apt install ros-lyrical-desktop ros-dev-tools git\nsource /opt/ros/lyrical/setup.bash\nsudo rosdep init  # once per fresh rosdep installation\nrosdep update\nprintenv ROS_DISTRO' }],
       links: [
         { label: 'Official Lyrical Ubuntu installation instructions', href: 'https://docs.ros.org/en/lyrical/Get-Started/Installation/Ubuntu-Install-Debs.html' },
@@ -206,6 +206,72 @@ export const ros2Tutorial: ProgrammingPage = {
         ['Unexpected shape, units or invalid values', 'Compare lengths with rows × columns × channels; inspect units and validity. Do not turn invalid taxels into zero or interpret normalized data as force.'],
         ['Replay appears to contain extra frames', 'Stop the live publisher before playback and check for other publishers on the same topic.'],
       ] },
+    },
+    {
+      "id": "verification-ladder",
+      "heading": "What each verification stage can establish",
+      "body": [
+        "On November 3, 2026, we reread the same full starter-kit commit, checked its public files against their Git blob hashes and reran the four existing dependency-free tests on Windows CPython 3.13.3. Five Python files also compiled in memory. No ROS package was imported or executed by that check. The September record above remains a separate historical run.",
+        "The tests inspect source conventions and the separate 2 by 2 CSV fixture; they do not execute the default 4 by 4 publisher. Passing them is useful evidence about the teaching contract, but it cannot establish delivered message counts or a recording that can be replayed. The stages below show what evidence to collect next, without presenting unrun steps as results."
+      ],
+      "table": {
+        "headers": [
+          "Stage",
+          "Evidence in this review",
+          "Still not established"
+        ],
+        "rows": [
+          [
+            "Source and fixture contract",
+            "Four existing tests passed; five Python files compiled on November 3.",
+            "ROS imports, node execution and middleware behavior."
+          ],
+          [
+            "Package build and interface",
+            "Successful August 23 CI run for the pinned commit; historical logs reread.",
+            "A fresh build on your machine or the current mutable container image."
+          ],
+          [
+            "Live publication and inspection",
+            "Commands retained; local runtime not executed.",
+            "Actual delivered rate, complete frames and clock behavior."
+          ],
+          [
+            "Record and replay",
+            "Procedure retained; no new bag or playback result.",
+            "Message completeness or faithful replay in your installation."
+          ],
+          [
+            "Physical sensing and control",
+            "No hardware experiment.",
+            "Calibration, acquisition-to-action latency or task performance."
+          ]
+        ]
+      },
+      "contextLinks": [
+        {
+          "before": "For raw, filtered and transformed physical observations, compare the ",
+          "label": "Kilted force/torque pipeline interpretation",
+          "href": "/research/ros2-kilted-tactile-pipeline-2026",
+          "after": ". It explains a different interface and version scope; its configuration examples are not drop-in additions to this Lyrical kit."
+        },
+        {
+          "before": "Before assigning physical units, use the ",
+          "label": "tactile calibration guide",
+          "href": "/guides/tactile-sensor-calibration",
+          "after": " to choose an independent reference. A normalized array with valid dimensions is not a calibrated sensor."
+        }
+      ],
+      "links": [
+        {
+          "label": "November 3 source-contract verification record",
+          "href": "/tutorials/ros2-tactile/verification-2026-11-03.json"
+        },
+        {
+          "label": "Official Lyrical recording tutorial source",
+          "href": "https://github.com/ros2/ros2_documentation/blob/lyrical/source/ROS-Framework/interfaces/Working-with-interfaces/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.rst"
+        }
+      ]
     },
     icraTutorialSection,
   ],

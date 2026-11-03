@@ -61,7 +61,8 @@ test('site authority health checks pass', async () => {
   assert.doesNotMatch(blogData, /RoboSkin-style systems/);
   assert.doesNotMatch(blogData, /datasheets and integration reviews/);
   assert.doesNotMatch(blogData, /Product implication/);
-  assert.match(blogData, /Updated technical brief - May 2026/);
+  // Exact visible/metadata date consistency is checked in research-content.test.mjs.
+  assert.match(blogData, /Updated technical brief [-—] [A-Za-z]+ (?:\d{1,2}, )?\d{4}/);
   assert.match(blogData, /Editorial review|Source boundary|Evaluation checklist|What not to infer/);
   assert.match(layout, /\/site\.webmanifest/);
   assert.ok(await exists('public/og-image.svg'));

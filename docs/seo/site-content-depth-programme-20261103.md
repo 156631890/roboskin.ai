@@ -87,7 +87,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/temperature-pressure-bimodal-2025 | rewritten and production verified in PR109 | 1119 | 3 |
 | /research/event-based-opto-tactile-2025 | rewritten and production verified in PR105 | 1138 | 3 |
 | /research/self-healing-multimodal-eskin-2026 | rewritten and production verified in PR109 | 1084 | 2 |
-| /research/ros2-kilted-tactile-pipeline-2026 | inventory only; claim-by-claim review pending | 1363 | 10 |
+| /research/ros2-kilted-tactile-pipeline-2026 | ROS interface and source-evidence review complete; production verification pending | 1363 | 10 |
 | /research/large-area-flexible-tactile-arrays-2025 | rewritten and production verified in PR109 | 1168 | 6 |
 | /news/tactus-tactile-glove-data-collection | inventory only; claim-by-claim review pending | 1479 | 5 |
 | /news/dexsuite-tactile-simulation-lerobot-data | inventory only; claim-by-claim review pending | 1588 | 9 |
@@ -162,9 +162,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 868 | 7 |
 | /news/color-changing-mechanochromic-tactile-sensor-2026 | inventory only; claim-by-claim review pending | 702 | 3 |
 | /news/single-pixel-tactile-skin-compressive-sampling-2026 | inventory only; claim-by-claim review pending | 710 | 1 |
-| /news/service-robots-200000-units-logistics-tactile-ai | historical news evidence review complete; production verification pending | 555 | 2 |
-| /news/electronic-skin-research-robot-skin-systems-problem | historical news evidence review complete; production verification pending | 532 | 2 |
-| /news/full-hand-tactile-sensing-robot-hands-vision-control | historical news evidence review complete; production verification pending | 1240 | 1 |
+| /news/service-robots-200000-units-logistics-tactile-ai | rewritten and production verified in PR110 | 555 | 2 |
+| /news/electronic-skin-research-robot-skin-systems-problem | rewritten and production verified in PR110 | 532 | 2 |
+| /news/full-hand-tactile-sensing-robot-hands-vision-control | rewritten and production verified in PR110 | 1240 | 1 |
 | /news/global-robot-installations-542000-physical-ai-touch | inventory only; claim-by-claim review pending | 1001 | 2 |
 | /robot-grippers | inventory only; claim-by-claim review pending | 1187 | 2 |
 | /electronic-skin | inventory only; claim-by-claim review pending | 772 | 11 |
@@ -186,7 +186,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/gelsight-vs-digit | enhanced and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | inventory only; claim-by-claim review pending | 3426 | 3 |
 | /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
-| /guides/ros2-tactile-sensing | inventory only; claim-by-claim review pending | 2153 | 21 |
+| /guides/ros2-tactile-sensing | ROS interface and source-evidence review complete; production verification pending | 2153 | 21 |
 | /guides/python-tactile-data-processing | enhanced and production verified in PR106 | 2851 | 16 |
 | /guides/lerobot-dataset-format | inventory only; claim-by-claim review pending | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
@@ -250,3 +250,7 @@ Three existing interpretations distinguish official abstract-level evidence from
 ## Historical news evidence pass
 
 Three old briefs receive date, denominator and measurement corrections plus distinct decision frameworks. The F-TAC news metadata no longer implies vision-free control. Existing URLs, publication dates, H2 anchors, illustrations and sources remain. Source evidence and unresolved access are documented; the full-site queue remains active.
+
+## ROS evidence pass
+
+Two existing pages retain distinct Kilted interface and Lyrical tutorial intents. Source/fixture tests were rerun, historical CI reread, and runtime/hardware gaps remain explicit. Existing commands, anchors and original dates are retained. The whole-site goal remains incomplete.

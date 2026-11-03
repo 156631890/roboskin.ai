@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import ts from 'typescript';
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
@@ -59,7 +60,20 @@ test('research content is current, conservative, source-backed, and crawlable', 
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2606\.06281v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/html\/2506\.14754v1/);
   assert.match(blogData, /https:\/\/arxiv\.org\/abs\/2608\.15766/);
-  assert.match(blogData, /Updated technical brief - May 2026/);
+  const compiled = ts.transpileModule(blogData, {
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  const { blogPosts } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+  for (const post of blogPosts) {
+    assert.match(post.date, /^\d{4}-\d{2}-\d{2}$/, post.id);
+    assert.match(post.updated, /^\d{4}-\d{2}-\d{2}$/, post.id);
+    assert.ok(post.updated >= post.date, `${post.id}: update precedes publication`);
+    const label = post.content.match(/Updated technical brief [-—] ([A-Za-z]+ \d{1,2}, \d{4})(?:\*\*|\. Originally published)/);
+    if (label) {
+      const displayed = new Date(`${label[1]} UTC`).toISOString().slice(0, 10);
+      assert.equal(displayed, post.updated, `${post.id}: visible update differs from metadata`);
+    }
+  }
   assert.match(blogData, /Evaluation checklist/);
   assert.match(blogData, /\| Contact signal \| What it tells the robot \| Why it matters \|/);
   assert.match(blogData, /What not to infer/);
