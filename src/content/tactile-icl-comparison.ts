@@ -14,8 +14,8 @@ export const tactileIclComparisonPage: SeoTopicPage = {
   kicker: 'Research comparison / Context, control and evidence',
   intent: 'Compare two tactile in-context robot-control setups and design a matched test of demonstration frame selection.',
   published: '2026-10-22',
-  updated: '2026-10-28',
-  revisionNote: 'October 28, 2026: added a reproducible offline audit of two pinned Lift Bottle demonstrations, 24 action segments and 96 published image strips, plus a versioned experiment kit. Paper results retain the October 22 source review. RoboSkin has not run either controller or the proposed A/B/C task-success experiment.',
+  updated: '2026-11-04',
+  revisionNote: "November 4, 2026: rechecked the cited paper protocols and clarified command receipts versus task outcomes. The October 28 offline input audit and downloadable kit remain unchanged; no API, controller or robot evaluation was run.",
   priority: 0.8,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
@@ -206,6 +206,52 @@ export const tactileIclComparisonPage: SeoTopicPage = {
         { label: 'Pinned upstream HDF5 inputs', href: 'https://huggingface.co/datasets/byml/UniVTAC/tree/e1aee7b0c95543b535e0146b2de3ee1bc6ddaabd/isaac51/lift_bottle/hdf5' },
         { label: 'Pinned upstream processed demonstration inputs', href: 'https://github.com/No-518/Tactile-ETA/tree/e7e5efbd42d3be7532ff5eb940a3cb015c2f7818/demonstrations/lift_bottle' },
       ],
+    },
+    {
+      "id": "execution-evidence",
+      "heading": "A completed command is not a completed task",
+      "body": [
+        "Tactile-ETA Appendix C describes a failed episode in which every requested target was reached. TacTalent likewise distinguishes execution receipts from progress on the object. Both examples matter when interpreting an agent trace: a plausible explanation or a completed motion does not establish a stable grasp, an inserted part or the benchmark success condition.",
+        "For the proposed A/B/C experiment, preserve three separate records. This is an addition to the evaluation plan, not an experiment performed by RoboSkin.ai."
+      ],
+      "table": {
+        "headers": [
+          "Record",
+          "Evidence to retain",
+          "Do not substitute"
+        ],
+        "rows": [
+          [
+            "Requested action",
+            "Resolved target, coordinate frame, command sequence and request ID",
+            "The model’s prose for the command actually sent"
+          ],
+          [
+            "Executed motion",
+            "Receipt, measured state, stop reason and next observation",
+            "Target arrival for the resulting object state"
+          ],
+          [
+            "Task outcome",
+            "Declared predicate or independent assessment, attempted trial and intervention history",
+            "A successful command for successful manipulation"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Tactile-ETA: target arrival and object outcomes",
+          "href": "https://arxiv.org/html/2610.27613v1#A3.SS1"
+        },
+        {
+          "label": "TacTalent: action generation and execution feedback",
+          "href": "https://arxiv.org/html/2610.26846v1#S3.SS3"
+        },
+        {
+          "label": "Record observations and actions with ROS 2",
+          "href": "/guides/ros2-tactile-sensing"
+        }
+      ]
     },
     {
       id: 'matched-reproduction-plan',

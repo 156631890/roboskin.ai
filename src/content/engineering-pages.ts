@@ -13,11 +13,12 @@ const lerobotSource = 'https://github.com/huggingface/lerobot/blob/89236ea0f4f81
 
 export const lerobotTutorial: ProgrammingPage = {
   path: '/guides/lerobot-dataset-format',
+  revisionNote: "November 4, 2026: inspected the versioned temporal reader and added an episode-boundary review. The September and October execution records below retain their original dates and scope; this addition is source review, not a new loader run.",
   title: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   h1: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   description: 'Read LeRobot v3 metadata and episode timing, inspect video, state and action with the official visualizer, and run a bounded Python numeric checker.',
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
-  published: checked, updated: '2026-10-25', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  published: checked, updated: '2026-11-04', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['lerobot dataset format', 'lerobot dataset v3', 'lerobot dataset visualizer', 'robot dataset validation'],
   verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility. On October 25, 2026, a separate pinned public-data check loaded 445 numeric rows from episode 0, decoded two camera streams and read five complete samples through LeRobot 0.6.1. This tests file timestamps, not physical synchronization or hardware calibration. The visualizer workflow was source-checked; its UI was not run.',
   quickAnswer: ['LeRobot dataset v3.0 separates storage files from episodes: multiple episodes can share Parquet and MP4 shards, while metadata identifies each episode and its offsets. A filename is not an episode boundary.', 'Start by checking what each observation and action means, then check shapes, timestamps and episode coverage. Passing a numeric check does not establish that a policy can use the data.'],
@@ -52,6 +53,56 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
       ['observation.tactile [4]', 'Four independently designed teaching taxels in row-major 2 × 2 order.', 'Arbitrary units, not newtons or pressure; an invalid sample remains unknown.'],
       ['observation.tactile_valid [4]', 'Boolean validity for the four custom tactile values.', 'One false flag accompanies a null; a null marked true is an error.'],
     ] }, links: [{ label: 'Source: writer-generated frame indices and timestamps', href: `${lerobotSource}/dataset_writer.py` }, teleop] },
+    {
+      "id": "temporal-window-boundaries",
+      "heading": "A valid row can still become a padded training window",
+      "body": [
+        "LeRobot 0.6.1 separates raw row access from temporal sample construction. In the inspected DatasetReader, requested indices outside the current episode are clamped to its first or last row, and per-feature *_is_pad flags identify those requests. The returned window can therefore repeat a boundary value without recording another observation. This is source inspection; we did not run a new temporal-loader experiment.",
+        "For a hypothetical episode with rows 0, 1 and 2, asking at row 0 for offsets -1, 0 and +1 selects rows 0, 0 and 1. The first requested position is padding. That example explains the index rule; it does not establish how your policy applies the mask or handles a missing terminal state."
+      ],
+      "table": {
+        "headers": [
+          "Review sample",
+          "Check",
+          "Decision it supports"
+        ],
+        "rows": [
+          [
+            "First and last rows",
+            "Requested offsets, selected episode indices and padding flags",
+            "Distinguish repeated boundary values from recorded transitions"
+          ],
+          [
+            "Filtered episode selection",
+            "Original episode IDs, global offsets and returned sample indices",
+            "Prevent a mistaken join between adjacent stored episodes"
+          ],
+          [
+            "Policy input and loss",
+            "Which observations/targets are used and whether padding is respected",
+            "Avoid counting manufactured context as independent recorded evidence"
+          ]
+        ]
+      },
+      "bullets": [
+        "Keep temporal-window review separate from capture synchronization and sensor calibration. Correct index arithmetic does not recover physical timing.",
+        "The numeric exercise below does not test these loader or policy behaviors. Preserve its bounded purpose rather than treating PASS as approval for training."
+      ],
+      "links": [
+        {
+          "label": "LeRobot 0.6.1 temporal indices and padding flags",
+          "href": "https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/datasets/dataset_reader.py"
+        },
+        {
+          "label": "Raw rows versus transformed samples",
+          "href": "https://github.com/huggingface/lerobot/blob/v0.6.1/src/lerobot/datasets/lerobot_dataset.py"
+        },
+        {
+          "label": "DexSuite example: a missing terminal observation",
+          "href": "/news/dexsuite-tactile-simulation-lerobot-data"
+        }
+      ]
+    },
     { id: 'dataset-visualizer', heading: 'Use the LeRobot dataset visualizer to inspect an episode', body: [
       'The official browser visualizer lets you choose a Hub dataset and episode, then inspect camera recordings alongside state and action charts. Open the linked SO-101 example, pause near a visible movement and select the corresponding chart position. Record the repository, revision and episode ID with any finding. This is a route to the official tool, not a RoboSkin-hosted viewer or a verified tactile dataset.',
       'For local viewing, the command below follows the LeRobot 0.6.1 documentation and script. Use a separate environment with the official installation prerequisites, including its video dependencies. The dataset_viz extra supplies visualization dependencies; the Hub example may download dataset files. The package version is separate from format v3.0, and the live browser Space can change independently. These commands were source-checked on October 25, 2026, not executed in this review.',

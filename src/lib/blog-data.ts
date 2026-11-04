@@ -261,7 +261,7 @@ Source review completed October 23, 2026. Runtime reproduction, dataset archive 
     id: 'slipsense-multimodal-slip-detection-2026',
     title: 'SlipSense: from pressure and vibration to a timely regrasp',
     seoTitle: 'SlipSense: Slip Detection, Latency & Regrasp Evidence',
-    seoDescription: 'How SlipSense labels slip, combines pressure and vibration, measures detection delay, and exposes the gap between detecting slip and preventing a dropped object.',
+    seoDescription: 'Review SlipSense detection labels, latency tails, transfer tests and recovery failures, with checks for replacing its sensor or compute platform.',
     excerpt: 'Pressure and vibration improve slip recognition together. Independent motion labels and five failed recoveries explain why detector quality and controller quality need separate tests.',
     content: `# SlipSense: from pressure and vibration to a timely regrasp
 
@@ -270,6 +270,8 @@ SlipSense studies a practical question: can a robot detect slipping early enough
 This review focuses on the detector's measurement contract and the controller's remaining work. For comparisons with cable policies and visual contact overlays, see [From Tactile Sensing to Robot Action](/guides/tactile-feedback-for-physical-ai).
 
 ## What TacV5 measures
+
+**Evidence review: November 4, 2026.** The cited paper versions and original access observations are distinguished below; no independent hardware or model reproduction was performed.
 
 TacV5 combines a 32 × 32 piezoresistive pressure layout with 942 active taxels at 240 Hz and a three-axis MEMS accelerometer at 8 kHz. The synchronized output uses 240 Hz frames. Pressure describes the contact distribution; acceleration captures vibration associated with frictional motion. The pressure array measures normal pressure, not direct shear force. [Hardware and acquisition](https://arxiv.org/html/2609.15910v1#S3).
 
@@ -309,6 +311,12 @@ The five failures involved a cable near the sensor edge: the inward recovery mot
 
 Cross-platform tests reuse TacV5 units on UMI and Tesollo hardware. The three-finger Tesollo condition reports 87.24% F1, below the two-finger condition's 94.39%. This is transfer across sensor units and arrangements of the same sensor design, not evidence of transfer to arbitrary optical or magnetic sensors. Quantitative latency during active robot manipulation remains unvalidated. [Transfer Table 2 and limitations](https://arxiv.org/html/2609.15910v1#S5.T2).
 
+## A sampling ablation is not a smaller sensor
+
+SlipSense's lower-resolution conditions are made by spatially striding measurements from the original array while retaining the fusion pipeline. That tests the information available to this model; it does not independently measure a physically smaller array with different electronics, taxel area or contact mechanics. [Resolution ablation](https://arxiv.org/html/2609.15910v1#S5).
+
+For a hardware substitution, start with the required contact event, then keep the altered measurement and the altered model separate. Record whether fewer channels change coverage, synchronization or the preprocessing convention. Evaluate a candidate device against the same independently labeled contacts before assigning it the paper's result. The [sensor benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation) describes matched system comparisons; this is a proposed acceptance step, not an additional SlipSense experiment.
+
 ## Before attempting a reproduction
 
 - Preserve the independent displacement reference and object-level splits; do not create a test set by randomly mixing adjacent frames.
@@ -327,8 +335,8 @@ This review uses the September 14, 2026 v1. The arXiv comments report acceptance
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-19',
-    updated: '2026-09-19',
-    readTime: '7 min read',
+    updated: '2026-11-04',
+    readTime: '6 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'SlipSense: Multimodal Tactile Learning for Low-Latency and Generalized Slip Detection',
@@ -340,7 +348,7 @@ This review uses the September 14, 2026 v1. The arXiv comments report acceptance
     id: 'touch2trace-tactile-cable-tracing-2026',
     title: 'Touch2Trace: what makes a tactile cable-tracing policy work',
     seoTitle: 'Touch2Trace: Cable Tracing, Control Rate & Tactile History',
-    seoDescription: 'Examine Touch2Trace’s cable-tracing policy, frozen tactile encoder, control-rate and history ablations, success thresholds, hardware limits and resource status.',
+    seoDescription: 'Review Touch2Trace control timing, encoder pretraining, cable transfer and trial accounting before reproducing tactile cable tracing.',
     excerpt: 'A 60 Hz tactile policy traces farther than a joint-only baseline, but the useful lesson is how sensor detail, pretraining, temporal context and action timing interact.',
     content: `# Touch2Trace: what makes a tactile cable-tracing policy work
 
@@ -349,6 +357,8 @@ Touch2Trace learns to feed a cable through a dexterous hand with repeated pinch-
 The broader [touch-to-action evidence guide](/guides/tactile-feedback-for-physical-ai) compares task success with perception metrics. This article examines Touch2Trace's observation and action contract, the ablation controls, and the limits of a reproduction.
 
 ## The policy controls eight joints on a fixed hand
+
+**Evidence review: November 4, 2026.** The cited paper versions and original access observations are distinguished below; no independent hardware or model reproduction was performed.
 
 The platform is a fixed Tesollo DG-5F hand without a robot arm. Eight of its 20 degrees of freedom are controlled. TacV5 pressure images from the thumb and index finger provide two 32 × 32 inputs. A frozen ViT-MAE encoder produces a 128-dimensional feature for each fingertip; the policy concatenates both with eight joint positions into a 264-dimensional observation. It predicts eight absolute joint-position commands. [System and method](https://arxiv.org/html/2609.15921v1#S3).
 
@@ -391,6 +401,12 @@ Spatial resolution has its own confound. The 8 × 8 and 16 × 16 ablations reach
 
 The separate visual experiment runs at 20 Hz with a different dataset, representation and action head. Its vision-only and vision-plus-touch comparison is useful within that experiment; it should not be ranked directly against the main 60 Hz TF-GMM result. [Appendix Table 6](https://arxiv.org/html/2609.15921v1#A4.T6).
 
+## The inference budget can change the comparison
+
+Touch2Trace reports 32 ms inference for its ten-step diffusion-policy baseline, versus 3.4 ms for TF-GMM. A nominal 60 Hz cycle lasts about 16.7 ms, so the slower inference cannot be interpreted as meeting every requested control deadline. The lower-rate diffusion experiment also changes training from 50 to 400 epochs; its result is not a pure control-frequency intervention. [Section 5.2 and Appendix B](https://arxiv.org/html/2609.15921v1#S5).
+
+For a reproduction, record requested cadence, actual command intervals, observation age and missed deadlines alongside the policy checkpoint and training budget. Compare policies under a feasible execution schedule before concluding that an architecture is intrinsically unsuitable. The [ROS 2 timing guide](/guides/ros2-tactile-sensing) provides a route into timestamp and replay records. These are proposed checks, not latency measurements performed here.
+
 ## Generalization remains bounded by mechanics
 
 Training uses USB-0 in a ring. Tests include three additional cables and straight or ring arrangements on the same fixed hand. These are meaningful held-out cable conditions, but not new robot embodiments or general dexterous tasks. [Generalization Table 2](https://arxiv.org/html/2609.15921v1#S5.T2).
@@ -413,8 +429,8 @@ This review uses the September 14, 2026 v1. Its arXiv comments report CoRL 2026 
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-19',
-    updated: '2026-09-19',
-    readTime: '8 min read',
+    updated: '2026-11-04',
+    readTime: '6 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing',
@@ -426,7 +442,7 @@ This review uses the September 14, 2026 v1. Its arXiv comments report CoRL 2026 
     id: 'visible-touch-contact-overlays-visuomotor-policies-2026',
     title: 'Visible Touch: how contact overlays reach a visual robot policy',
     seoTitle: 'Visible Touch: Contact Overlays, Calibration & Robot Results',
-    seoDescription: 'Review Visible Touch’s sensor-to-camera projection, magnetic hardware, contact ablations, task-level success counts and unverified code-release status.',
+    seoDescription: 'Review Visible Touch contact overlays, sensor-to-camera calibration, final-stage robot outcomes and the checks needed after replacing a sensor.',
     excerpt: 'Rendering contact as image arrows reuses a visual policy’s input pathway. The hardware and ablations show why spatial alignment, signal normalization and training still matter.',
     content: `# Visible Touch: how contact overlays reach a visual robot policy
 
@@ -435,6 +451,8 @@ Visible Touch renders tactile measurements as colored markers and arrows on the 
 This review explains that input pathway and the experiments that isolate its value. For the broader distinction between accurate sensing and successful action, see the [touch-to-action evidence guide](/guides/tactile-feedback-for-physical-ai).
 
 ## From a taxel to an arrow in the camera image
+
+**Evidence review: November 4, 2026.** The cited paper versions and original access observations are distinguished below; no independent hardware or model reproduction was performed.
 
 The method starts with each sensing element's nominal position and three-axis reading in the sensor frame. Forward kinematics and fixed mounting transforms place the sensor on the robot. Camera intrinsics and extrinsics project the arrow's tail and tip into the image. An external camera has an offline extrinsic calibration; the wrist camera's pose updates with the robot's joints. Arrows are blended into RGB with distinct finger colors. [Projection derivation, Appendix A](https://arxiv.org/html/2609.14156v1#A1).
 
@@ -479,9 +497,23 @@ In the BC-Transformer simulation comparison, an averaged arrow outperforms multi
 
 The miniVLA headline also needs version discipline. The project page reports a 28.9-percentage-point gain, while v1 Table 1 reports 50.9% versus 76.2%, a 25.3-point difference. This review uses the explicitly versioned v1 table. Its baseline entries are the strongest available single runs per suite, whereas the headline Visible Touch values average five training seeds. That asymmetry limits how confidently the aggregate can characterize variability. [v1 Table 1](https://arxiv.org/html/2609.14156v1#S4.T1); [official project](https://visibletouch.github.io/).
 
+## Separate a sensor replacement from a policy change
+
+The paper characterizes four fabricated sensors, but its policy pipeline uses demonstrations from the same sensor unit to handle variation. A replaceable elastomer is therefore a mechanical feature; it is not evidence that the old input scaling and trained policy remain valid after replacement. [Sensor characterization and limitations](https://arxiv.org/html/2609.14156v1#S3).
+
+For an acceptance record, separate three changes:
+
+| Change | Preserve for comparison | Question to resolve |
+| --- | --- | --- |
+| New unloaded baseline | Raw values and the previous baseline | Is the change offset-only, or does the loaded response also differ? |
+| New pad, mount or camera alignment | Sensor identity, geometry and projection configuration | Do corresponding physical contacts still appear at the intended image positions? |
+| New normalization or policy | Training scales, rendered examples and checkpoint | Does the entire input-to-action system still complete the matched task? |
+
+This is a proposed integration record. It does not establish automatic recalibration, cross-unit policy transfer or a downloadable replacement workflow. Keep the original raw streams so that a plausible overlay can be checked against its underlying measurement.
+
 ## What is available to reproduce
 
-The paper calls the hardware open source, but the official project page checked on September 19, 2026 did not expose a verified code, CAD or dataset download. The linked miniVLA repository belongs to an underlying policy, not a confirmed release of the complete Visible Touch pipeline. Code, hardware-asset and dataset licenses therefore remain unverified. Use the [dataset directory](/datasets) to distinguish a described collection from an accessible resource.
+The paper calls the hardware open source, but the official project page checked on September 19, 2026 did not expose a verified code, CAD or dataset download. The linked miniVLA repository belongs to an underlying policy, not a confirmed release of the complete Visible Touch pipeline. The November 4 source reader could not retrieve that project page; it does not update the historical release check. Code, hardware-asset and dataset licenses remain unverified in this review. Use the [dataset directory](/datasets) to distinguish a described collection from an accessible resource.
 
 Before budgeting a reproduction, locate the actual sensor files and license, match the camera and mounting transforms, preserve preprocessing, and obtain the training and rollout configuration. The paper's bill of materials is useful context but not a supplier quote or a verified downloadable hardware package.
 
@@ -495,8 +527,8 @@ This review uses the September 12, 2026 v1. The arXiv record reports CoRL 2026 a
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-19',
-    updated: '2026-09-19',
-    readTime: '8 min read',
+    updated: '2026-11-04',
+    readTime: '7 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'Visible Touch: Rendering Contact for Visuomotor Policies',
@@ -508,8 +540,7 @@ This review uses the September 12, 2026 v1. The arXiv record reports CoRL 2026 a
     id: 'dextouch-wm-human-touch-world-model-2026',
     title: 'DexTouch-WM learns robot contact dynamics from human touch',
     seoTitle: 'DexTouch-WM: Human Touch Data for Robot World Models',
-    seoDescription:
-      'Review DexTouch-WM’s human-to-robot tactile transfer, contact prediction results, synthetic policy-data limits, and current code and dataset availability.',
+    seoDescription: 'Read DexTouch-WM human-touch transfer, policy ranking, score calibration and mixed real-robot outcomes from synthetic training data.',
     excerpt:
       'Human tactile pretraining improves the paper’s contact predictions, but synthetic training data does not consistently improve real-robot policy scores. Here is what each experiment measures.',
     content: `# DexTouch-WM learns robot contact dynamics from human touch
@@ -521,6 +552,8 @@ DexTouch-WM is an action-conditioned world model that predicts future visual obs
 Those are different tests. A model can become better at predicting contact or ranking policies without generating training data that reliably replaces real demonstrations. This distinction matters when choosing between collecting more robot data, adding human demonstrations, and using synthetic rollouts.
 
 ## What the model observes and predicts
+
+**Evidence review: November 4, 2026.** Original paper results and dated resource observations are retained; additions below clarify evaluation and transfer decisions. No independent robot or simulator experiment was performed.
 
 The model conditions on an initial RGB observation, left- and right-hand tactile maps, a language instruction, and a future action-pose sequence. It generates future RGB and tactile observations. A visual expert based on Wan2.2-TI2V-5B works with a lightweight tactile expert; the future actions are conditioning inputs, rather than evidence that the world model independently chooses safe robot commands. [Method and experiments](https://arxiv.org/html/2609.20649v1).
 
@@ -552,6 +585,12 @@ The reported task scores are normalized to the interval from zero to one. They a
 
 For world-model-based policy evaluation, the reported mean Pearson correlation with real scores increases from 0.646 for WM-Robot to 0.844 for WM-Mix. This is a limited comparison involving three policies per task, and a ranking error remains on Stand Bottle. Better agreement in this evaluation does not establish a universal replacement for real-robot testing.
 
+## Ranking agreement does not calibrate an absolute score
+
+In Table II, FTP-1 on Place Shoes scores 0.725 on the robot and 0.963 in WM-Mix. The difference is 0.238 on the normalized task scale, not a measured increase in robot success. A model can order policies correctly while producing optimistic absolute scores. The paper's 0.925 correlation between WM-Robot and WM-Mix compares two imagined environments; it is not their correlation with real execution. [September 18 v2, Tables II–III and Section IV-D](https://arxiv.org/html/2609.20649v2#S4.SS4).
+
+Before using an imagined score as a release criterion, specify whether the decision needs policy ordering, calibrated task completion or identification of individual failures. Retain the real rollout rubric and compare score differences by task, not only a pooled correlation. A prediction model that supports early screening still needs a separate physical acceptance result. This is an evaluation recommendation, not an additional experiment.
+
 ## Generated training data still has a downstream cost
 
 Table IV tests policies on the real robot after three training-data choices. Each row below reports the mean normalized task score across four tasks; larger is better. It does not report a success percentage.
@@ -578,7 +617,7 @@ For the broader architecture context, compare the [five-system visuo-tactile wor
 
 ## Publication and access boundary
 
-The arXiv record identifies this work as accepted to the IROS 2026 RoBoWoMo workshop as a lightning talk. That is distinct from acceptance as an IROS main-conference paper. This review uses the September 17 v1 preprint.
+The arXiv record identifies this work as accepted to the IROS 2026 RoBoWoMo workshop as a lightning talk. That is distinct from acceptance as an IROS main-conference paper. The original review used the September 17 v1 preprint. The November 4 review also checked the September 18 v2 methods and result tables; the cited v1 routes remain available for the original analysis.
 
 No official code, model-weight, or dataset download was found in the paper and arXiv record reviewed on September 18. This is an access finding for those sources, not a claim that no release can exist elsewhere or appear later. RoboSkin reviewed the methods and result tables; we did not train the model, collect glove data, or reproduce the hardware experiments.
 
@@ -589,7 +628,7 @@ No official code, model-weight, or dataset download was found in the paper and a
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-18',
-    updated: '2026-09-18',
+    updated: '2026-11-04',
     readTime: '7 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
@@ -602,8 +641,7 @@ No official code, model-weight, or dataset download was found in the paper and a
     id: 'bench2dex-visuo-tactile-bimanual-benchmark-2026',
     title: 'Bench2Dex benchmarks bimanual robots with simulated touch',
     seoTitle: 'Bench2Dex: Visuo-Tactile Benchmark, Data & Code Review',
-    seoDescription:
-      'Explore Bench2Dex’s 26 task settings, simulated tactile signals, HDF5 data contract, policy results, public code, and dataset licensing limits.',
+    seoDescription: 'Inspect Bench2Dex simulated touch, HDF5 fields, versioned evaluation protocols and resource licenses before comparing or training robot policies.',
     excerpt:
       'Bench2Dex connects teleoperation, replay, tactile maps, and evaluation across 12 hand embodiments. We examine the data contract and distinguish simulation access from physical sensor validation.',
     content: `# Bench2Dex benchmarks bimanual robots with simulated touch
@@ -617,6 +655,8 @@ These demonstrations are collected in simulation. They are not recordings from 1
 For data access and reuse limits, open the [Bench2Dex simulation dataset record](/datasets#dataset-bench2dex). For success metrics and test conditions, use the [Bench2Dex evaluation protocol record](/benchmarks#benchmark-bench2dex).
 
 ## From teleoperation to offline observations
+
+**Evidence review: November 4, 2026.** Original paper results and dated resource observations are retained; additions below clarify evaluation and transfer decisions. No independent robot or simulator experiment was performed.
 
 The collection setup uses a Manus glove for hand motion and an ARKit wrist-tracking stream for arm targets. Hand keypoints are retargeted to the chosen robot hand; arm targets pass through inverse kinematics. The pipeline records the commanded action and resulting post-step state. This ordering matters when aligning an action with the observation it caused.
 
@@ -665,6 +705,22 @@ Stable success requires the terminal predicate to remain true for a configured d
 
 These are author-reported Table 2 outcomes. The combined channel independently samples both visual-context changes and geometry changes. It is not a paired, necessarily harder version of each matched episode. GR00T’s two-success lead over π0.5 under the combined shift should not be presented as a decisive general advantage. Aggregate scores also hide tasks where every policy records zero success.
 
+## Keep the paper result separate from the evolving leaderboard
+
+The table above is the September v1 experiment, not a live ranking. The [current official leaderboard](https://bench2dex.github.io/Bench2Dex-Leaderboard/), reviewed November 4, provides evaluation groups and explicitly asks contributors to disclose actual episode counts, execution budgets and protocol differences. Its reference setting uses 50 episodes per task and channel; contributions restricted to the Full channel are not four-channel means. The older leaderboard URL now redirects to this page.
+
+For a comparison record, retain:
+
+| Field | Why it changes the interpretation |
+| --- | --- |
+| Paper version or leaderboard snapshot | A newer submission need not reproduce the original table |
+| Observation and tactile configuration | Available dataset fields do not establish the policy input |
+| Tasks, channels and actual episodes | A subset cannot inherit the full benchmark denominator |
+| Execution budget and retry policy | Additional attempts or longer execution change the opportunity to finish |
+| Training data and checkpoint | A changed policy is not an isolated sensor ablation |
+
+Use the [benchmark comparison guide](/guides/tactile-sensor-benchmark-robot-manipulation) to define the comparison before choosing a score. We have not rerun these contributions or independently validated their logs.
+
 ## Public resources and software requirements
 
 On September 18, the official code repository and Hugging Face listings for demonstrations, assets, and checkpoints were accessible. We inspected repository revision f96a8b2, selected loader/writer code, and listing metadata; we did not download the complete data or run the simulator.
@@ -695,7 +751,7 @@ Use the [benchmark directory](/benchmarks) to compare evaluation questions and t
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-18',
-    updated: '2026-10-17',
+    updated: '2026-11-04',
     readTime: '8 min read',
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
@@ -1915,8 +1971,7 @@ The result also does not isolate one causal factor by itself. Dataset collection
     id: 'robotacdex-humanoid-visual-tactile-action-dataset-2026',
     title: 'RoboTacDex maps 6,000+ humanoid visual-tactile trajectories',
     seoTitle: 'RoboTacDex Humanoid Visual-Tactile-Action Dataset',
-    seoDescription:
-      'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects with RGB, depth, touch, and semantic annotations.',
+    seoDescription: 'Review RoboTacDex recording rates, physical trial counts, tactile failure modes and the evidence still needed for dataset access and reuse.',
     excerpt:
       'RoboTacDex reports 6,000+ Unitree G1 trajectories across 19 tasks, an author-reported 23 skills, and 22 objects, but public dataset access remains pending.',
     content: `# RoboTacDex maps 6,000+ humanoid visual-tactile trajectories
@@ -1928,6 +1983,8 @@ RoboTacDex is a June 30, 2026 arXiv v1 preprint describing a multimodal dataset 
 The abstract says the dataset will be open-sourced soon. That is an announced intention, not evidence that files, a license, or a stable download endpoint are currently available.
 
 ## Reported dataset structure
+
+**Evidence review: November 4, 2026.** Original paper results and dated resource observations are retained; additions below clarify evaluation and transfer decisions. No independent robot or simulator experiment was performed.
 
 | Field | Source-reported value | What still needs verification for reuse |
 | --- | --- | --- |
@@ -1959,6 +2016,14 @@ The tactile ablation is particularly important to interpret correctly. On the bo
 
 RoboSkin therefore does not convert those statements into a leaderboard. A useful dataset assessment needs per-task criteria, exact train and test partitions, repeated trials, comparable policy budgets, and a record of which trajectories were available to each method.
 
+## Read rounded averages and failure categories separately
+
+The paper's average row is coarsely reported. Adding its four displayed task counts gives ACT 13/40 (32.5%), Diffusion Policy 13/40 (32.5%) and GR00T N1.5 25/40 (62.5%). These are arithmetic summaries of the published counts, not new experiments or corrected underlying data. Keeping the per-task rows prevents rounding from hiding a different failure pattern. [Table II](https://arxiv.org/pdf/2606.31836#page=5).
+
+The tactile comparison is specifically Diffusion Policy on UnscrewBottle. More secure cap engagement shifts failures toward getting stuck or failing to adjust; it does not establish successful unscrewing. For an evaluation plan, record the complete outcome and the failed stage alongside contact observations. A sensor can expose a missing state while the policy still lacks the corrective action. [Figure 7 and Section V-B](https://arxiv.org/pdf/2606.31836#page=6).
+
+Before adopting a released package, preserve both acquisition timestamps and stored frame timestamps. A 100 Hz published hand stream saved at 30 Hz cannot be assumed to preserve every contact transient. Verify the actual sampling and alignment procedure rather than interpolating a higher rate into the record. See the [data-format guide](/guides/lerobot-dataset-format) for episode and timing checks.
+
 ## Why this matters for humanoid tactile learning
 
 Humanoid manipulation data is not only an image-action pair. Dual-arm coordination, dexterous hand state, body configuration, tactile contact, object state, and language or semantic labels must share a coherent trajectory and clock. RoboTacDex is relevant because its declared schema spans several of these layers on one humanoid platform.
@@ -1969,7 +2034,7 @@ The [humanoid robot skin guide](/humanoid-robot-skin) places hand touch inside t
 
 A paper can describe a dataset before the dataset is released. Until an official package is accessible, a potential user cannot confirm file structure, missing frames, calibration metadata, licensing, or whether all 6,000 trajectories are included.
 
-The practical listing state for RoboTacDex is therefore announced, not verified downloadable. RoboSkin should update that state only after checking an official project or repository, recording the access date, and confirming the actual license rather than inferring one from the paper or arXiv page.
+The November 4 arXiv record still describes a planned release and does not identify a verified payload in the sources reviewed here. The practical listing state in this review remains announced, not verified downloadable. RoboSkin should update that state only after checking an official project or repository, recording the access date, and confirming the actual license rather than inferring one from the paper or arXiv page.
 
 ## What this does not prove yet
 
@@ -1992,8 +2057,8 @@ The phrase millisecond synchronization is an author claim about the collection s
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-22',
-    readTime: '9 min read',
+    updated: '2026-11-04',
+    readTime: '6 min read',
     category: 'Tactile datasets',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
     sourceTitle: 'RoboTacDex humanoid visual-tactile-action dataset preprint',
@@ -2004,8 +2069,7 @@ The phrase millisecond synchronization is an author claim about the collection s
     id: 'tactidex-tactile-guided-dexterous-benchmark-2026',
     title: 'TactiDex benchmarks contact-level human-to-robot dexterity',
     seoTitle: 'TactiDex Tactile-Guided Dexterous Manipulation Benchmark',
-    seoDescription:
-      'TactiDex aligns whole-hand touch with hand, wrist, and object states, then uses tactile guidance for single- and bimanual dexterous transfer.',
+    seoDescription: 'Understand TactiDex human tactile data, simulation success metrics and open-loop robot deployment before using its contact-guided transfer results.',
     excerpt:
       'TactiDex aligns whole-hand tactile signals with kinematic and object states to evaluate physically grounded human-to-robot dexterous transfer.',
     content: `# TactiDex benchmarks contact-level human-to-robot dexterity
@@ -2014,9 +2078,11 @@ The phrase millisecond synchronization is an author claim about the collection s
 
 TactiDex is a July 2026 arXiv preprint that frames human-to-robot dexterous transfer as a contact problem, not only a kinematic imitation problem. The benchmark aligns whole-hand tactile signals with hand kinematics, wrist pose, and object state. The paper also introduces TactiSkill, a tactile-guided transfer framework evaluated on single-hand and bimanual tasks.
 
-The source reports better manipulation success and physical realism than its compared methods, but the abstract does not provide a standardized numerical result suitable for comparison with other benchmarks. This brief therefore preserves the qualitative claim and avoids inventing a cross-paper leaderboard.
+The full paper provides quantitative simulation metrics, but these are not directly comparable with success rates from other task suites. The source-specific comparison below separates those scores from the hardware demonstrations.
 
 ## What the benchmark aligns
+
+**Evidence review: November 4, 2026.** Original paper results and dated resource observations are retained; additions below clarify evaluation and transfer decisions. No independent robot or simulator experiment was performed.
 
 Kinematic imitation can reproduce joint motion while missing the physical interaction that made a human demonstration work. A hand can follow a visually plausible pose yet hover above the object, press too hard, or distribute load across the wrong fingers. TactiDex adds synchronized contact information to the transfer target.
 
@@ -2036,6 +2102,23 @@ TactiSkill uses a three-component tactile reward. Tactile guidance encourages th
 
 This is structured supervision rather than simply appending a tactile vector to the policy observation. Touch specifies properties of a desired interaction and helps evaluate whether the retargeted robot motion is physically plausible.
 
+## Separate human capture, simulation scoring and robot replay
+
+The v1 paper reports 757 human interaction sequences and 49 objects. Its tactile glove has 162 sensing elements at 17 Hz; motion capture operates at 120 Hz. Synchronization does not make the tactile stream acquire new measurements at the motion-capture rate. [Dataset and hardware](https://arxiv.org/html/2607.09190v1#S3).
+
+Table 2 evaluates 73 selected sequences in simulation:
+
+| Reported metric | Kinematic baseline | TactiSkill |
+| --- | --- | --- |
+| Kinematic success | 72.91% | 81.95% |
+| Tactile-aware success | 39.35% | 64.64% |
+
+Tactile-aware success adds force-error and contact-F1 conditions to the kinematic criteria. PeakSafe@3N concerns peak force **error**, not a universal 3 N contact limit or safety certification. These are author-defined evaluation metrics, not real-robot success rates. [Definitions and Table 2](https://arxiv.org/html/2607.09190v1#S5).
+
+On the physical Franka/Inspire setup, simulated trajectories are retargeted to the hand's six actuators and replayed without online tactile feedback. The hardware has tactile sensing, but the reported deployment does not feed it back into the policy. Training-time contact supervision and execution-time feedback must therefore be assessed separately. [Deployment and Appendix C](https://arxiv.org/html/2607.09190v1#A3).
+
+For adoption, request the source sequence, retargeted command stream, physical outcome and any feedback-controller configuration as separate evidence. The [teleoperation guide](/robot-teleoperation) explains the interface checks; this is a proposed record, not our hardware test.
+
 ## Why this matters for robot learning
 
 TactiDex connects human hand-object interaction data with robot policy learning. That creates several conversion problems: human and robot hands have different morphology, tactile layouts have different spatial support, sensor readings need calibration, and simulated contact variables may not match measured pressure directly.
@@ -2046,7 +2129,7 @@ TactiDex also has relevance to [whole-body and humanoid tactile sensing](/humano
 
 ## What this does not prove yet
 
-TactiDex is an arXiv v1 preprint. The reported superiority comes from the authors' experiments, definitions, simulation and deployment choices, and selected tasks. It is not independent confirmation that tactile-guided transfer will outperform kinematic transfer for every robot hand, sensor layout, object, or manipulation regime.
+This review evaluates the arXiv v1 methods. The [official project page](https://tactidex.github.io/) now identifies acceptance to ACM Multimedia 2026; that publication note does not establish an independent reproduction. The reported superiority comes from the authors' experiments, definitions, simulation and deployment choices, and selected tasks. It is not independent confirmation that tactile-guided transfer will outperform kinematic transfer for every robot hand, sensor layout, object, or manipulation regime.
 
 The work also does not show that a human tactile map transfers directly to any robot. Morphological retargeting, sensor-to-simulation calibration, contact modeling, reward weights, and hardware deployment all affect the result. Single-hand and bimanual experiments demonstrate coverage within the paper; they do not establish open-world generalization.
 
@@ -2059,6 +2142,8 @@ The work also does not show that a human tactile map transfers directly to any r
 - Compare kinematic-only and tactile-guided methods under matched training budgets.
 - Test unseen objects, hands, contacts, and bimanual coordination patterns.
 
+The official project page reviewed on November 4 links the paper and demonstrations. A data manifest, downloadable payload and applicable data/code licenses were not verified; a project video is not a release package.
+
 ## Primary sources
 
 - [arXiv: TactiDex - A Real-World Tactile-Guided Benchmark for Human-Like Dexterous Manipulation](https://arxiv.org/abs/2607.09190)
@@ -2066,8 +2151,8 @@ The work also does not show that a human tactile map transfers directly to any r
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '7 min read',
+    updated: '2026-11-04',
+    readTime: '5 min read',
     category: 'Tactile benchmarks',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'TactiDex tactile-guided dexterous manipulation benchmark preprint',
@@ -2183,23 +2268,40 @@ The paper states that code and experiment configurations will be released, but t
     id: 'feelworld-visuo-tactile-world-model-2026',
     title: 'FeelWorld predicts contact, tactile force states, and slip for robot planning',
     seoTitle: 'FeelWorld Visuo-Tactile World Model for Robot Planning',
-    seoDescription:
-      'FeelWorld predicts visual futures, contact, a force-related 3D tactile latent, and slip for robot planning. Review the reported results and limits.',
+    seoDescription: 'Read FeelWorld contact, point-cloud latent and slip predictions separately from its 40-trial-per-task planning results and execution limits.',
     excerpt:
       'FeelWorld adds explicit contact, force-related tactile, and slip prediction to a visual world model for contact-rich robot planning.',
     content: `# FeelWorld predicts contact, tactile force states, and slip for robot planning
 
-**Updated technical brief - August 2026**
+**Updated technical brief: November 4, 2026; first published August 15.**
 
 FeelWorld is a July 2026 preprint that adds explicit contact, force-related tactile, and slip states to an action-conditioned visual world model. It reports stronger long-horizon visual prediction and 81.7% average zero-shot planning success on three contact-rich tasks. For tactile AI, the important idea is not the headline score: predicted touch becomes part of planning rather than a passive observation.
 
 ## Source findings
 
-The authors organize tactile prediction into three levels: whether contact exists, a three-dimensional tactile latent that encodes force-related information, and whether slip occurs. A shared latent dynamics model predicts these states together with future visual latents.
+**Evidence review: November 4, 2026.** The cited paper versions and original access observations are distinguished below; no independent hardware or model reproduction was performed.
+
+The authors organize tactile prediction into three levels: whether contact exists, a latent encoded from three-dimensional tactile point clouds that retains force-related information, and whether slip occurs. A shared latent dynamics model predicts these states together with future visual latents.
 
 FeelWorld also uses contact-gated asymmetric attention. Before contact, the model preserves a visual-only pathway so irrelevant tactile signals do not degrade prediction. During contact, it enables joint visual-tactile dynamics prediction. The predicted contact and slip states then feed contact-aware cross-entropy-method planning.
 
 On chip grasping, fruit grasping, and USB insertion, the preprint reports that 10-step LPIPS falls from 0.084 to 0.058. After an 80-step autoregressive rollout, it reports LPIPS 61% below the visual baseline and 81.7% average zero-shot planning success. These are author-reported preprint results, not independent validation.
+
+## Read prediction and planning as separate experiments
+
+The tactile latent is encoded from a three-dimensional tactile point cloud; it is not a three-component force vector. Table III evaluates slip over all test frames: 99.7% accuracy accompanies 83.4% F1, which is more informative for the rare positive events. Onset errors are reported in frames at 6 fps, not as a fast control-loop latency. [Method and state-prediction table](https://arxiv.org/html/2607.24267v1#S4).
+
+Table IV reports 40 robot trials per task for each planning condition:
+
+| Planner | Chip | Fruit | USB |
+| --- | --- | --- | --- |
+| Visual-only | 40.0% | 70.0% | 37.5% |
+| Naive visuo-tactile | 47.5% | 75.0% | 50.0% |
+| Contact-aware | 82.5% | 87.5% | 75.0% |
+
+The contact-aware mean is 81.7%. CEM searches a six-step horizon and executes two actions before replanning. The 80-step prediction test is a different horizon and experiment. None of these quantities establishes production response time. [Planning protocol and Table IV](https://arxiv.org/html/2607.24267v1#S4).
+
+Before transferring this design, separate prediction error, planner compute time, observation age and action execution in the evaluation record. A perceptually accurate rollout can still lead to a late or unsuitable command. This is an engineering acceptance question, not a new result.
 
 ## RoboSkin analysis
 
@@ -2241,8 +2343,8 @@ The paper also does not establish production latency, hardware durability, calib
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-15',
-    updated: '2026-08-15',
-    readTime: '6 min read',
+    updated: '2026-11-04',
+    readTime: '5 min read',
     category: 'Tactile AI',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'FeelWorld visuo-tactile world model preprint',
@@ -2253,8 +2355,7 @@ The paper also does not establish production latency, hardware durability, calib
     id: 'ht-bench-full-hand-tactile-representations-2026',
     title: 'HT-Bench full-hand tactile benchmark for robot manipulation',
     seoTitle: 'HT-Bench Full-Hand Tactile Benchmark for Robot Learning',
-    seoDescription:
-      'HT-Bench v2 pairs 10M RGB frames with 7.8M full-hand tactile frames across 226 tasks, with four 15-trial robot evaluations and explicit transfer limits.',
+    seoDescription: 'Understand HT-Bench retrieval, pressure-map metrics, task-level splits and 15-trial robot evaluations without conflating representation and control.',
     excerpt:
       'HT-Bench v2 pairs egocentric vision with millions of full-hand tactile frames, corrects the vision-to-tactile metric split, and adds four real-robot evaluations.',
     content: `# HT-Bench full-hand tactile benchmark for robot manipulation
@@ -2264,6 +2365,8 @@ The paper also does not establish production latency, hardware durability, calib
 HT-Bench is an arXiv preprint benchmark for learning and evaluating dexterous full-hand tactile representations alongside egocentric vision. Version 2, submitted on August 20, 2026, reports 10 million RGB frames and 7.8 million tactile frames collected across 226 tasks. For robot skin, its value is a concrete evaluation structure: test contact geometry, cross-modal alignment, and bounded downstream transfer instead of treating tactile frame count as proof of useful robot learning.
 
 ## Source findings
+
+**Evidence review: November 4, 2026.** The cited paper versions and original access observations are distinguished below; no independent hardware or model reproduction was performed.
 
 The HT-Bench paper starts from a real benchmarking problem: tactile sensors, data formats, and robot embodiments vary too much for one universal leaderboard. The authors therefore study a narrower route based on egocentric vision paired with full-hand tactile observations.
 
@@ -2283,6 +2386,14 @@ HT-Bench evaluates the representation layer, not whether one tactile sensor is u
 | Masked tactile inpainting | Spatial contact structure | Can missing parts of a tactile observation be reconstructed from context? | Reconstruction quality depends on the sensing layout and training distribution. |
 | Vision-to-tactile synthesis | Cross-modal alignment | Can egocentric vision constrain likely contact patterns? | Predicted touch is not a substitute for measured contact during deployment. |
 | Multimodal frame prediction | Temporal and cross-modal dynamics | Does the model preserve how visual and tactile state change together? | Frame prediction does not by itself establish safe robot control. |
+
+## Check the metric definition before comparing columns
+
+HT-Bench retrieval uses an SSIM-based reference ordering. Hit@1 asks whether the nearest candidate is ranked first; Recall@5 measures recovery of the reference top-five set. They are different targets, so a higher Hit@1 than Recall@5 is not itself a contradiction. [Section 5.1](https://arxiv.org/html/2606.19161v2#S5.SS1).
+
+The paper defines cIoU using sums of pointwise minima and maxima of pressure maps. It should not silently become a binary contact-mask IoU computed with a new threshold. Likewise, full-map scores include visible regions, while hole-region scores isolate the missing region. On OOD inpainting, ResNet-18 performs better on the hole-region metrics despite HandTouch's stronger full-map cIoU. A whole-map improvement does not establish improvement at the missing contact. [Table 2 and metric definition](https://arxiv.org/html/2606.19161v2).
+
+For a comparison, save the query/candidate split, reference similarity, pressure normalization, mask and evaluation region beside each score. Recompute baselines under that same definition before attributing a discrepancy to the encoder. This is an evaluation checklist, not a new benchmark execution.
 
 ## v2 real-world downstream evaluation
 
@@ -2334,8 +2445,8 @@ Version 2 says the authors will release the data, evaluation protocols, pretrain
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-05',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: '2026-11-04',
+    readTime: '6 min read',
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
     sourceTitle: 'HT-Bench full-hand tactile representation benchmark preprint v2',

@@ -48,7 +48,7 @@ test('tactile benchmark, dataset, foundation-model, and world-model guides form 
   assert.match(topics, /path: '\/guides\/visuo-tactile-world-models-robot-manipulation'[\s\S]*VT-WM[\s\S]*Dream-Tac[\s\S]*TouchWorld[\s\S]*ViTacWorld[\s\S]*FeelWorld/);
   assert.match(topics, /10-step LPIPS from 0\.084 to 0\.058/);
   assert.match(topics, /81\.7% average zero-shot planning success/);
-  assert.match(topics, /All five systems in this comparison are 2026 arXiv preprints/);
+  assert.match(topics, /This does not assert their latest publication or artifact-release status/);
   assert.match(topics, /paperBriefIds: \['ht-bench-full-hand-tactile-representations-2026'/);
 
   assert.match(topics, /table\?: \{/);

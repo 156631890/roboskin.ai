@@ -2,13 +2,14 @@ import type { SeoTopicPage } from '@/content/seo-topic-pages';
 
 export const printedTactileGuide: SeoTopicPage = {
   "path": "/guides/3d-printed-tactile-sensors",
+  "revisionNote": "November 4, 2026: rechecked the original fabrication sources and added a within-print, replacement and geometry-transfer comparison. No fabrication or calibration experiment was performed.",
   "title": "3D-Printed Tactile Sensors: Fabrication & Calibration",
   "description": "Compare printed housings, optical structures, conductive sensing and hybrid tactile skins, with X-Hinges evidence, calibration, electronics and license limits.",
   "h1": "3D-printed tactile sensors: choose a fabrication route",
   "kicker": "Source-reviewed engineering guide",
   "intent": "Help labs distinguish what is actually printed and budget the remaining sensing, calibration and integration work.",
   "published": "2026-10-24",
-  "updated": "2026-10-24",
+  "updated": "2026-11-04",
   "priority": 0.75,
   "changeFrequency": "monthly",
   "schemaType": "TechArticle",
@@ -110,9 +111,55 @@ export const printedTactileGuide: SeoTopicPage = {
       ]
     },
     {
+      "id": "print-transfer-evidence",
+      "heading": "Which kind of print-to-print transfer has been tested?",
+      "body": [
+        "X-Hinges separates decoding on an existing specimen from calibration of a second same-geometry specimen and a stressed original specimen. Its reported adaptation study uses single-DOF hinges and labeled camera observations. Improvement after that calibration does not demonstrate that an arbitrary new geometry can use the old model unchanged.",
+        "For an engineering pilot, separate the three comparisons below. This is our proposed evidence plan, not an additional experiment or a claim that a printed sensor must pass one universal numerical threshold."
+      ],
+      "table": {
+        "headers": [
+          "Claim to evaluate",
+          "Hold fixed or change",
+          "Evidence needed"
+        ],
+        "rows": [
+          [
+            "Repeat a measurement on one print",
+            "Keep specimen, mount and readout; use held-out motions",
+            "Residuals across loading direction, dwell and repeated sessions"
+          ],
+          [
+            "Replace a nominally identical print",
+            "Keep CAD; identify material batch, print and calibration records",
+            "Before/after adaptation results on separate reference motions"
+          ],
+          [
+            "Change the geometry or application",
+            "Change the declared geometry or contact conditions explicitly",
+            "A new validation set; a same-geometry transfer result is insufficient"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "X-Hinges: instance calibration and generalization limits",
+          "href": "https://arxiv.org/html/2609.11077v1#S8.SS3"
+        },
+        {
+          "label": "Separate fitted calibration from validation",
+          "href": "/guides/tactile-sensor-calibration"
+        },
+        {
+          "label": "Compare the target task before selecting a sensor",
+          "href": "/guides/how-to-choose-a-tactile-sensor"
+        }
+      ]
+    },
+    {
       "heading": "Whole-body design tools and hybrid skins solve different problems",
       "body": [
-        "The author-maintained GenTact Toolbox groups several fabrication and sensing approaches, including RC-coupling, capacitive, impedance and time-of-flight work. Use the publication and tutorial corresponding to the selected method; a toolbox landing page is not evidence that every linked prototype has the same modality, readiness or commercial terms. Its premade-STL and electronics-purchase links were marked coming soon when reviewed.",
+        "The author-maintained GenTact Toolbox groups several fabrication and sensing approaches, including RC-coupling, capacitive, impedance and time-of-flight work. Use the publication and tutorial corresponding to the selected method; a toolbox landing page is not evidence that every linked prototype has the same modality, readiness or commercial terms. Its premade-STL and electronics-purchase links remained marked coming soon in the November 4, 2026 source check.",
         "OpenTac is a useful comparison for teams needing customized geometry, but its flexible-PCB and sensing-film stack is a hybrid manufacturing route. Its cover and readout choices have their own mechanical and calibration effects. The existing OpenTac explainer covers its partial sampling and transfer results; those results should not be generalized to FDM sensors."
       ],
       "links": [
