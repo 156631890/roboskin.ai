@@ -2718,7 +2718,7 @@ The last column is an integration checklist, not a demonstrated transfer result.
     id: 'outcome-sensitive-impact-aware-dexterous-catching',
     title: 'Outcome-sensitive search teaches a dexterous hand to catch with less impact',
     seoTitle: 'Outcome-Sensitive Search for Dexterous Robot Catching',
-    seoDescription: 'Outcome-Sensitive Motion Search improves simulated dexterous catching to 90.3% success while lowering peak impact. Review the protocol and limits.',
+    seoDescription: "Read outcome-sensitive catching through separate repair, completion and impact metrics; examine simulated error validation and physical transfer limits.",
     excerpt: 'A simulation-only study searches the short pre-contact motion window where small action changes alter impact. Its imitation policy beats the privileged teacher, but physical contact transfer remains untested.',
     category: 'Impact-aware manipulation',
     image: '/generated/news/outcome-sensitive-impact-aware-dexterous-catching.png',
@@ -2735,16 +2735,16 @@ The last column is an integration checklist, not a demonstrated transfer result.
     evidenceStatus: 'Preprint · arXiv v1 · simulation only · no public code verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-27',
-    updated: '2026-09-27',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# Outcome-sensitive search teaches a dexterous hand to catch with less impact
 
-Researchers spanning Taiyuan University of Technology, Hong Kong Polytechnic University, Southern University of Science and Technology, Great Bay University, KTH and Chery's Kaiyang Laboratory released Outcome-Sensitive Motion Search on September 24, 2026. The simulation method edits a short pre-contact motion window where small action changes strongly affect both interception and impact, then uses the successful rollouts to train a deployable imitation policy. [Paper and version record](https://arxiv.org/abs/2609.29020).
+Researchers spanning Taiyuan University of Technology, Hong Kong Polytechnic University, Southern University of Science and Technology, Great Bay University, KTH and Chery's Kaiyang Laboratory released Outcome-Sensitive Motion Search on September 24, 2026. The simulation method edits a short pre-contact motion window where small action changes strongly affect both interception and impact, then uses selected simulated rollouts to train an observation-restricted imitation policy. Its observation interface is intended for deployment, but hardware deployment was not evaluated. [Paper and version record](https://arxiv.org/abs/2609.29020).
 
 ## Key takeaways
 
 - The final imitation policy reaches 90.3% task success, 5.1 percentage points above the privileged reinforcement-learning teacher and 6.5 points above success-only imitation.
-- Peak simulated impact is 37.3 N for the full method, 8.6% below the teacher's 40.8 N, under the paper's defined catch and impact thresholds.
+- Mean peak simulated impact among completed catches is 37.3 N for the full method, 8.6% below the teacher's 40.8 N. Missed or dropped catches are excluded from those force averages.
 - Every result is in MuJoCo. The paper explicitly says robustness to real perception and contact mismatch remains unverified without a physical arm-hand experiment.
 
 ## What changed
@@ -2753,7 +2753,7 @@ A teacher that catches an object is not automatically a good source of demonstra
 
 The authors define an outcome-sensitive window around the motion immediately before contact. They learn a task-conditioned manifold of successful eight-step arm-action snippets, project teacher motions into it, and search along local geodesic directions. Search can refine a successful catch to reduce impact or repair a teacher failure. Candidate snippets are inserted back into a full rollout and kept only if the complete catch succeeds under a modeled imitation-student action error.
 
-The simulation uses a 7-DoF xArm7 and a 17-DoF ORCA Hand at 50 Hz. Objects vary across ten shape-size combinations, 40 to 60 g mass and roughly 2.8 to 5.0 m/s launch speed. Three source datasets contain 20,000 successful, 20,000 successful and 20,000 mixed teacher rollouts respectively. The constructed training set contains 99,328 successful demonstrations.
+The simulation uses a 7-DoF xArm7 and a 17-DoF ORCA Hand at 50 Hz. Objects vary across ten shape-size combinations, 40 to 60 g mass and roughly 2.8 to 5.0 m/s launch speed. Three source datasets contain 20,000 successful, 20,000 successful and 20,000 mixed teacher rollouts respectively. The constructed set contains 99,328 successful simulated demonstrations, including perturbed executions. Baselines are expanded to the same count; this is not a count of independent physical catches.
 
 ## Results under the reported conditions
 
@@ -2767,7 +2767,7 @@ The full policy improves all ten shape-size combinations, with its largest repor
 
 RoboSkin analysis: the contribution is a data-selection method for the moment when contact dynamics matter most. Rather than treating a full trajectory as uniformly valuable, it concentrates computation on the pre-contact segment that controls impact and grasp stability. That idea could complement [tactile world models](/tactile-foundation-models) by identifying which action windows deserve denser sensing and validation.
 
-The paper also shows why success-only data can be misleading for contact-rich work. A system can maximize completion by accepting large impact. For fragile objects or human-facing manipulation, force, relative velocity and follow-through should remain visible metrics beside task success.
+The paper also shows why success-only data can be misleading for contact-rich work. In this simulation, optimizing catching without the impact objectives produces similar completion but much larger impact. For fragile objects or human-facing manipulation, force, relative velocity and follow-through should remain visible metrics beside task success.
 
 ## Limitations and availability
 
@@ -2775,12 +2775,29 @@ Outcome-Sensitive Motion Search is an arXiv v1 preprint and a simulation-only re
 
 No official project page, repository, dataset download, trained model or software license was verified. The manuscript is readable through arXiv, but the 99,328 demonstrations described in the experiment are not thereby a publicly downloadable dataset. RoboSkin.ai has not run the simulator or reproduced the numbers.
 
+## Keep demonstration repair and policy evaluation separate
+
+The 44.3% repair rate concerns task conditions where the original teacher failed. The 91.8% demonstration coverage concerns conditions represented by successful unperturbed rollouts. The final policy's 90.3% task success is another experiment, on held-out conditions. None of these percentages is interchangeable. [Construction and evaluation tables](https://arxiv.org/html/2609.29020v1#S5).
+
+| Stage | What the method can change or observe |
+| --- | --- |
+| Offline motion search | Privileged simulator state and event alignment; replace the short arm-motion segment while the teacher controls the fingers |
+| Candidate validation | Execute complete simulated rollouts with modeled student action errors; retain qualified successes |
+| Final policy execution | Observe a restricted history, predict an action chunk, execute its first action and replan at 50 Hz |
+| Hardware transfer | Still requires evidence for perception, contact dynamics, force measurement and executed recovery |
+
+The distinction explains an otherwise surprising result: unperturbed-only selection covers more conditions, yet its resulting policy performs worse than the full method. A demonstration that succeeds precisely in simulation may be sensitive to the execution errors of the learner.
+
+For evaluation, retain both the 93.6% catch-completion rate and the stricter 90.3% task-success rate, then label impact averages as conditional on completion. A low mean force among retained catches does not bound the forces of failures or the worst case. No tactile-skin benefit is measured here: any proposal to add touch is a new system design requiring its own test. The [robot-hand evidence guide](/robot-hands#mechanics-measurement-task) connects those control metrics to the mechanical and sensing properties that a physical hand must actually provide.
+
 ## Sources and related resources
 
 - [arXiv v1 record, submitted September 24, 2026](https://arxiv.org/abs/2609.29020)
 - [Full simulation setup, results and limitations](https://arxiv.org/html/2609.29020v1)
 - [RoboSkin dexterous manipulation overview](/tactile-manipulation)
 - [RoboSkin robot learning resources](/robot-learning)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
   },
   {
@@ -3262,7 +3279,7 @@ The official project page supplied paper, videos and tables on September 25, but
     id: 'anthropomimetic-forearm-carpal-stiffness',
     title: 'An open robotic forearm tests how eight carpal bones redirect wrist stiffness',
     seoTitle: 'Open Anthropomimetic Forearm Tests Carpal Wrist Stiffness',
-    seoDescription: 'An open robotic forearm uses eight carpal bones and 22 actuated muscles. Review the stiffness experiment, single-build limit, CAD, data and licenses.',
+    seoDescription: "Interpret carpal-wrist stiffness direction, single-build statistics and quasi-static tests; inspect assembly repeatability and file-specific release terms.",
     excerpt: 'A University of Electro-Communications team compares anatomically shaped, fused and ellipsoidal wrist skeletons. Its open release includes CAD, printable parts, firmware and analysis data under file-specific licenses.',
     category: 'Soft robotic hardware',
     image: '/generated/news/anthropomimetic-forearm-carpal-stiffness.png',
@@ -3271,6 +3288,7 @@ The official project page supplied paper, videos and tables on September 25, but
     sourceTitle: 'Anthropomimetic Soft Robotic Forearm with Independently Articulated Carpal Bones Enabling Human-Like Adaptive Stiffness Modulability',
     sourceUrl: 'https://arxiv.org/abs/2609.29176',
     sources: [
+      {"title": "Forearm hardware and file-license map, reviewed revision da5103e", "url": "https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness/tree/da5103e04a3798a591024c528c0e6d169e783f93"},
       { title: 'Anthropomimetic forearm arXiv v1 record', url: 'https://arxiv.org/abs/2609.29176' },
       { title: 'Full v1 paper, methods and limitations', url: 'https://arxiv.org/html/2609.29176v1' },
       { title: 'Official CAD, firmware, analysis and data repository', url: 'https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness' },
@@ -3280,8 +3298,8 @@ The official project page supplied paper, videos and tables on September 25, but
     evidenceStatus: 'Preprint · arXiv v1 · open hardware and data',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-25',
-    updated: '2026-09-25',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# An open robotic forearm tests how eight carpal bones redirect wrist stiffness
 
 Researchers at the University of Electro-Communications in Tokyo released an anthropomimetic soft robotic forearm on September 24, 2026, to test how carpal-bone structure changes wrist stiffness. The prototype reproduces eight independently movable carpal bones, 22 actuated muscles, 13 finger degrees of freedom and a three-degree-of-freedom wrist. Its open companion repository includes CAD, printable parts, firmware, measured data and analysis code. [Paper and version record](https://arxiv.org/abs/2609.29176).
@@ -3290,7 +3308,7 @@ Researchers at the University of Electro-Communications in Tokyo released an ant
 
 - The study compares one anatomical wrist, a fused proximal carpal row and a geometric ellipsoidal skeleton under four muscle-activation patterns.
 - With the anatomical skeleton, switching from finger-only to combined wrist-and-finger activation rotates the stiffness ellipse by 48.2 degrees; a permutation test reports p equals 0.0038.
-- The release is unusually complete, but licenses differ by file: derived bone models and fingertip molds use CC BY-SA 2.1 JP, while the authors' other materials use CC BY 4.0. [Repository and license map](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness).
+- The linked release includes mechanical, control and analysis materials, but licenses differ by file: derived bone models and fingertip molds use CC BY-SA 2.1 JP, while the authors' other materials use CC BY 4.0. [Repository and license map](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness).
 
 ## What changed
 
@@ -3310,9 +3328,9 @@ The carpal-motion test provides a narrower mechanistic result. Activation condit
 
 ## What this means for robotics
 
-RoboSkin analysis: high stiffness alone is not the same as useful stiffness. The ellipsoidal wrist is strongest in absolute terms but least able to redirect its compliance. For contact-rich manipulation, morphology that changes where the hand yields may reduce how much active control is needed before [tactile feedback](/tactile-manipulation) reacts.
+RoboSkin analysis: high stiffness alone is not the same as useful stiffness. The ellipsoidal wrist has the highest measured major-axis stiffness across the tested activation conditions, but changes its stiffness direction little. Stiffness is resistance per displacement, not a destructive strength or payload rating. For contact-rich manipulation, morphology that changes where the hand yields may reduce how much active control is needed before [tactile feedback](/tactile-manipulation) reacts.
 
-The open hardware is also valuable as a reproducibility package. Engineers can inspect the bone and jig CAD, bill of materials, Dynamixel firmware and analysis scripts instead of inferring construction from figures. That makes this closer to a buildable mechanical research artifact than most paper-only robot-hand releases.
+The open hardware is also valuable as a reproducibility package. Engineers can inspect the bone and jig CAD, bill of materials, Dynamixel firmware and analysis scripts instead of inferring construction from figures. Those artifacts support a more specific reproduction plan, although their presence alone does not establish that a second build will reproduce the result.
 
 ## Limitations and availability
 
@@ -3320,12 +3338,28 @@ All stiffness measurements are quasi-static. The paper does not evaluate impacts
 
 The repository was publicly accessible on September 25 and contained analysis data, Python code, PlatformIO firmware, CAD, STL files, a bill of materials and video. Multiple licenses apply, so “open hardware” does not mean every file has the same reuse terms. Users must preserve the share-alike license for the derived BodyParts3D components where applicable. RoboSkin.ai did not fabricate or test the design.
 
+## What a second build would need to reproduce
+
+The experiment asks whether morphology redirects resistance under controlled tendon activation. It does not show an online controller selecting the best stiffness for each task. The 100 Hz motion-capture stream measures the experiment; it is not a demonstrated adaptation rate. [Methods and supplementary assembly notes](https://arxiv.org/html/2609.29176v1).
+
+Three records would make a reproduction interpretable:
+
+1. **Mechanical state:** record bone revision, ligament attachment and resting length, tendon route, fingertip construction and neutral pose. The authors' jigs control several of these variables; a nominally identical CAD model alone does not.
+2. **Measurement and exclusions:** preserve loading direction, contact reference, force/displacement synchronization and every repeated measurement. The analysis excludes negative stiffness and values below 5 N/m for stated measurement reasons. Report exclusions instead of presenting the retained ellipse as all observations.
+3. **Repeatability level:** distinguish repeated pushes on one assembly from rebuilding the assembly. The permutation result addresses within-build variation; dynamic impacts and variation among separately built forearms remain different tests.
+
+For a task-specific design decision, ask which direction should yield and which should resist, then evaluate that choice under the intended motion. A large stiffness value can be undesirable along a direction that must accommodate misalignment. This is an engineering interpretation, not a manipulation-performance result from the paper.
+
+As reviewed on November 4, the [versioned release](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness/tree/da5103e04a3798a591024c528c0e6d169e783f93) retains separate licenses for anatomy-derived parts and the specified original materials. Check the file map alongside the [robot-hand mechanics comparison](/robot-hands#mechanics-measurement-task); no analysis scripts or hardware were executed for this review.
+
 ## Sources and related resources
 
 - [arXiv v1, submitted September 24, 2026](https://arxiv.org/abs/2609.29176)
 - [Full paper and supplementary material](https://arxiv.org/html/2609.29176v1)
 - [Official open-hardware repository](https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness)
 - [RoboSkin soft robotic skin overview](/applications/soft-robotic-skin)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
   },
   {
@@ -3658,7 +3692,7 @@ These are proposed receiving checks. The 84/100 simulation result includes runti
     id: 'copre-proprioceptive-contact-detection',
     title: 'CoPRE detects weak robot contact from proprioception without force labels',
     seoTitle: 'CoPRE: Weak Contact Detection for Low-Cost Robot Arms',
-    seoDescription: 'CoPRE learns contact-free joint response on ARX and G1 arms. Review its 90-trial protocol, force-reference caveat and public evidence files.',
+    seoDescription: "Review CoPRE detection windows, calibration trade-offs and newly linked MIT implementation; distinguish a confirmed alarm from measured force or a safety stop.",
     excerpt: 'CoPRE learns the expected joint-torque response from contact-free motion and scores the residual through a noise-weighted Jacobian. It improves recall on ARX and G1 arms, with robot-specific calibration and unquantified downstream task success.',
     category: 'Proprioceptive touch',
     image: '/generated/news/copre-proprioceptive-contact-detection.png',
@@ -3667,6 +3701,7 @@ These are proposed receiving checks. The 84/100 simulation result includes runti
     sourceTitle: 'CoPRE: Improving Sensitivity in Proprioceptive Contact Detection for Low-Cost Robot Arms',
     sourceUrl: 'https://arxiv.org/abs/2609.27381',
     sources: [
+      {"title": "CoPRE implementation, reviewed revision e6449cd", "url": "https://github.com/copre-arm/copre/tree/e6449cdd9b217886f08b71529136b3827b3dda0d"},
       { title: 'CoPRE arXiv submission record', url: 'https://arxiv.org/abs/2609.27381' },
       { title: 'CoPRE v1 methods, experiments and limitations', url: 'https://arxiv.org/html/2609.27381v1' },
       { title: 'Official CoPRE project and evidence page', url: 'https://copre-arm.github.io/' },
@@ -3703,15 +3738,25 @@ Calibration is part of the result. A retrospective ARX sweep increased recall fr
 
 ## What this means for robotics
 
-RoboSkin analysis: CoPRE shows how proprioception can provide a useful contact channel when adding [tactile sensors](/sensors) is impractical. A contact event can stop motion, update a spatial belief and trigger a safer alternative. That makes the method relevant to [robot safety](/robot-safety) and contact-aware manipulation, especially on platforms that already expose joint state and motor-current-derived torque estimates.
+RoboSkin analysis: CoPRE shows how proprioception can provide a useful contact channel when adding [tactile sensors](/sensors) is impractical. A contact alarm can be used by a controller to stop motion, update a spatial belief and choose another attempt; the controller must define and validate that response. That makes the method relevant to [robot safety](/robot-safety) and contact-aware manipulation, especially on platforms that already expose joint state and motor-current-derived torque estimates.
 
-It is not a substitute for calibrated force measurement. The detector produces a thresholded event rather than contact location, force vector or pressure map. Its strongest engineering value may be as a protective or task-state signal layered under a policy, not as complete tactile perception.
+It is not a substitute for calibrated force measurement. The detector produces a contact score and confirmed alarm. Its fitted equivalent-force vector is a scoring proxy, not validated force magnitude or localization, and it does not provide a pressure map. Its strongest engineering value may be as a protective or task-state signal layered under a policy, not as complete tactile perception.
 
 ## Limitations and availability
 
 This is an arXiv v1 preprint and RoboSkin.ai has not reproduced it. The detector needs robot-specific training and calibration. Generalization to new payloads, motion distributions and contacts on other arm links was not tested. Sustained contact may enter the history and reduce the residual. The two contact-guided tasks are qualitative demonstrations, so the paper does not establish a numerical task-success improvement.
 
-The [official CoPRE page](https://copre-arm.github.io/) provides project videos, result summaries, ablation tables and a path-free index of the 90 recordings. Its own documentation says the CSV tables are presentation summaries, not raw logs, and that model seeds reuse physical trials. No training code, model checkpoint, raw experiment archive or software license was linked on September 24. Public evidence is therefore more substantial than a paper-only release but not a reproducible package.
+The [official CoPRE page](https://copre-arm.github.io/) provides project videos, result summaries, ablation tables and a path-free index of the 90 recordings. Its own documentation says the CSV tables are presentation summaries, not raw logs, and that model seeds reuse physical trials. The September 24 availability check found no implementation link. By November 4, the page links a public [CoPRE implementation at e6449cd](https://github.com/copre-arm/copre/tree/e6449cdd9b217886f08b71529136b3827b3dda0d), with training, calibration, replay and streaming interfaces under a root MIT license. Its reference tests use synthetic signals and analytically assigned model parameters, not released physical recordings or pretrained robot weights. Dependency and robot-model licenses remain separate. We inspected the files without installing or executing them.
+
+## A detection window is not a measured stopping delay
+
+With the same G1 predictor and thresholds, recall falls from 82.2% in a 0.50-second evaluation window to 20.7% in a 0.10-second window. The clock begins at a geometric contact-plane reference, not an independently measured physical onset. The result therefore cannot be converted into a guaranteed reaction time from the 20 ms sample interval. [Evaluation-window ablation](https://arxiv.org/html/2609.27381v1#S5).
+
+For integration, separate three decisions. First, choose and document the motion distribution used for contact-free calibration. Second, validate the alarm with a held-out contact protocol and explicit deadline. Third, test the application response—including stop, retreat, latch and restart—because a detected event alone does not execute those actions.
+
+The public package makes two relevant distinctions in its [pinned documentation](https://github.com/copre-arm/copre/blob/e6449cdd9b217886f08b71529136b3827b3dda0d/README.md): an alarm can clear during continued contact, and the application owns the motion response. Its [numerical-verification notes](https://github.com/copre-arm/copre/blob/e6449cdd9b217886f08b71529136b3827b3dda0d/reproduction/README.md) also state that generic pooled-time calibration does not automatically impose the paper's separate motion-family budgets or cross-fitting. Running a default example would therefore not reproduce the published experiment.
+
+Record readiness, score, threshold, confirmation, reference event and executed response separately. Use the [mechanics-and-measurement comparison](/robot-hands#mechanics-measurement-task) when deciding whether an end-effector needs direct tactile sensing as well as arm-level contact alarms. This is a proposed integration check, not a certified protective system.
 
 ## Sources
 
@@ -3719,19 +3764,21 @@ The [official CoPRE page](https://copre-arm.github.io/) provides project videos,
 - [Full CoPRE v1 paper](https://arxiv.org/html/2609.27381v1)
 - [Official project and experiment page](https://copre-arm.github.io/)
 - [Official notes on the downloadable evidence files](https://copre-arm.github.io/assets/data/README.txt)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-24',
-    updated: '2026-09-25',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-23',
-    evidenceStatus: 'Preprint · arXiv v1 · project evidence inspected',
+    evidenceStatus: "Preprint · physical contact detection · MIT implementation inspected · physical reproduction unverified",
   },
   {
     id: 'berkeley-quad-hand-asymmetric-qdd-design',
     title: 'Berkeley QUAD Hand trades finger symmetry for backdrivability and sustained force',
     seoTitle: 'Berkeley QUAD Hand: Asymmetric QDD Robot Hand Design',
-    seoDescription: 'The Berkeley QUAD Hand combines eight actuators with 11 degrees of freedom. Review its grasp tests, backdrive force and 96-fold heat claim.',
+    seoDescription: "Understand QUAD Hand posture coverage, zero-current backdrive tests and calculated heating; compare passive coupling with measured control performance.",
     excerpt: 'The Berkeley QUAD Hand couples its middle and ring fingers so a larger quasi-direct-drive motor can provide closure and thermal headroom. Hardware tests show broad static grasp coverage, but not autonomous task performance.',
     category: 'Dexterous robot hands',
     image: '/generated/news/berkeley-quad-hand-asymmetric-qdd-design.png',
@@ -3767,7 +3814,7 @@ Distal joints on the actively controlled fingers use high-reduction servos, so t
 
 The grasp-taxonomy and Kapandji evaluations test kinematic coverage. QUAD formed 29 of 33 standardized grasps. It missed one Kapandji posture because the design has no fifth finger. These results support broad opposition and enclosure, but the poses were demonstrated statically and do not include perception, object uncertainty or dynamic task completion.
 
-For backdrivability, a force gauge pressed each fingertip until the actuator visibly rotated, with 15 trials per tested joint. Thumb and index base joints averaged around 50 gram-force. The coupled middle and ring fingers were near 250 gram-force. The paper presents these values as a lower bound for active force sensitivity, not calibrated tactile sensing.
+For backdrivability, the actuators received zero current, setting minimum commanded stiffness. A force gauge slowly pressed each fingertip until the actuator visibly rotated, with 15 trials at one tested posture per joint. Thumb and index base joints averaged around 50 gram-force. The coupled middle and ring fingers were near 250 gram-force. These are movement-onset loads under that passive test. They are not the resolution, accuracy or bandwidth of a calibrated force sensor or active controller.
 
 The sustained-load test applied 3 N at one fingertip for five minutes, plus a 6 N condition with both ulnar fingers loaded. Resistive heating was derived from measured quadrature-axis current and manufacturer phase resistance. Because the larger ulnar motor's phase resistance is much lower, the design reported up to a 96-fold reduction in calculated heat energy per finger. The comparison is specific to those actuators, loads, positions and the electrical-loss model.
 
@@ -3779,22 +3826,39 @@ The approach also creates coupled-control questions. One actuator influences two
 
 ## Limitations and availability
 
-This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the prototype. The hand was rapidly prototyped with 3D-printed ulnar transmission parts that yield before the larger motor reaches stall torque. Force tests cover one position per joint even though linkage mechanics vary with position. Peak fingertip force was deliberately not compared, and the approximately 5-kilogram lift shown in supplemental media is an example rather than a repeated benchmark.
+This review uses the arXiv v1 paper; the current official project identifies IEEE Humanoids 2026 acceptance. RoboSkin.ai has not reproduced the prototype. The hand was rapidly prototyped with 3D-printed ulnar transmission parts that yield before the larger motor reaches stall torque. Force tests cover one position per joint even though linkage mechanics vary with position. Peak fingertip force was deliberately not compared, and the approximately 5-kilogram lift shown in supplemental media is an example rather than a repeated benchmark.
 
-The [official project page](https://benudavis.github.io/berkeley-quadhand/) provides videos, design illustrations, an interactive grasp viewer and the paper. On September 24 it did not expose a CAD download, bill of materials, control repository or hardware license. The paper is distributed under a Creative Commons manuscript license, but that does not license unprovided design files. Current availability is therefore documentation and media, not an open build package.
+The [official project page](https://benudavis.github.io/berkeley-quadhand/) provides videos, design illustrations, an interactive grasp viewer and the paper. The November 4 recheck still found no CAD, bill-of-materials or control-package link on that page. A manuscript license does not establish rights to unprovided design files; a build package and its hardware terms remain unverified.
+
+## Separate passive sensitivity from controlled load performance
+
+A backdrivable joint can move under a small external load while its controller is inactive. Once a controller holds position, its gains, current limits and sensing determine the response. Treat the passive threshold as one mechanical observation, then request a separate active-control evaluation. The same distinction applies to the ulnar linkage: passive adaptation changes finger motion but does not independently measure or regulate each contact. [Evaluation methods](https://arxiv.org/html/2609.27240v1).
+
+| Published measurement | Different question for integration |
+| --- | --- |
+| Movement onset at zero current | What force error and response delay occur under the intended active controller? |
+| Current-derived resistive heat over five minutes | What temperatures occur at the motor, housing and contact surface under the actual duty cycle? |
+| Static grasp and opposition poses | Can the system acquire, retain and manipulate uncertain objects repeatedly? |
+| Shared-actuator loading | How does load divide between fingers as contact geometry and linkage position change? |
+
+The combined 6 N ulnar condition should not be read as an equal 3 N load on each finger: the authors interpret its current trace as consistent with the ring finger carrying most of the load. Nor does lower calculated resistive loss establish a safe surface temperature. These distinctions help a buyer choose which measurements to request without converting the 96-fold model result into a general thermal or efficiency rating.
+
+For the [hand-selection comparison](/robot-hands#mechanics-measurement-task), keep mechanical yield, continuous loading and controller behavior separate. The supplemental lift remains a demonstration, not a rated payload or endurance test.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.27240)
 - [Full Berkeley QUAD Hand v1 paper](https://arxiv.org/html/2609.27240v1)
 - [Official Berkeley QUAD Hand project page](https://benudavis.github.io/berkeley-quadhand/)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-24',
-    updated: '2026-09-24',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-23',
-    evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
+    evidenceStatus: "Author-reported hardware study · v1 reviewed · project identifies Humanoids 2026 · build package unverified",
   },
   {
     id: 'lima-asynchronous-diffusion-dexterous-manipulation',
@@ -4086,7 +4150,7 @@ As inspected on September 23, the arXiv record and full paper did not link a pub
     id: 'cartesian-hand-all-linear-in-hand-manipulation',
     title: 'The Cartesian Hand replaces finger joints with seven linear axes',
     seoTitle: 'Cartesian Hand: Seven Linear Axes for In-Hand Manipulation',
-    seoDescription: 'Duke researchers built a seven-axis all-linear robot hand. Review its 35-object tests, mechanics, cost estimate and open-source status.',
+    seoDescription: "Examine Cartesian Hand kinematics, configured-object trials and released control limits; distinguish joint resistance, contact force and task completion.",
     excerpt: 'Two stacked parallel grippers and four sliding fingertips operate caps, tools and lab equipment. The mechanism succeeds in a configured 350-trial test, but it does not sense contact force or location.',
     category: 'Dexterous hand hardware',
     image: '/generated/news/cartesian-hand-linear-axes.png',
@@ -4133,7 +4197,7 @@ The project also shows two Cartesian Hands on Duke Humanoid V2 uncapping a tube,
 
 RoboSkin analysis: dexterity does not always require anthropomorphic fingers. Many industrial and laboratory objects already constrain motion through threads, hinges and guides. Designing a hand around those mechanisms can simplify planning and make a small library of primitives reusable. The result belongs alongside underactuated and anthropomorphic designs in any [robot hand](/robot-hands) comparison.
 
-It also highlights where touch would add value. Joint thresholds can detect resistance, but they cannot identify which surface made contact or separate desired tool load from a collision. Adding compact [tactile sensors](/sensors) could support automatic parameter selection, slip detection and safer force limiting without changing the linear kinematics.
+It also highlights where touch would add value. Joint thresholds can detect resistance, but they cannot identify which surface made contact or separate desired tool load from a collision. Adding compact [tactile sensors](/sensors) is a possible route to observing those missing contact variables. Whether it enables automatic parameter selection, slip response or better force limiting would require a new integrated evaluation; it is not a capability demonstrated here.
 
 ## Limitations and availability
 
@@ -4154,16 +4218,33 @@ The release does not independently reproduce the paper’s 350 trials. Its READM
 
 For evaluating contact feedback in a future build, use the [robot-hand tactile sensor selection guide](/applications/robot-hand-tactile-sensor); the released hand should not be described as having that added tactile capability.
 
+## Linear finger motion does not make object control linear
+
+The constant Jacobian relates seven joint displacements to fingertip reference positions. Turning a cap still depends on where the fingers engage, whether they slip, and how the cap constrains motion. Thus a simpler kinematic model reduces one planning problem without solving contact estimation. A useful receiving test separates these layers. [Kinematics and manipulation methods](https://arxiv.org/html/2609.25696v1).
+
+| Layer | Evidence to retain for a new object |
+| --- | --- |
+| Joint motion | Measured travel, direction, zero reference and tracking error for the actual build |
+| Contact inference | The low-velocity contact rule, commanded effort and object geometry; distinguish object resistance from a joint stop or binding |
+| Object operation | Configured starting pose and primitive, setup attempts, then separate evaluation trials with object-specific completion criteria |
+| Application outcome | A separate measurement of the quantity that matters, such as dispensed volume or fastener torque |
+
+The paper's detector recognizes sustained low joint velocity while movement is commanded. It can estimate a width or diameter from closure position, but that estimate depends on contact geometry and deformation. It is not a force sensor. Likewise, opening a cap or moving a plunger does not itself establish metering accuracy.
+
+The November 4 recheck of the pinned hardware notes also matters: software travel limits, encoder scaling and zero references require build-specific verification, and the released task stack is distinct from the paper's implementation. Keep successful program execution separate from successful physical manipulation. Use the [robot-hand evidence comparison](/robot-hands#mechanics-measurement-task) to connect a build's mechanics, observations and completed task rather than transferring the paper's 350/350 result to an untested assembly.
+
 ## Sources
 
 - [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25696)
 - [Full Cartesian Hand v1 paper](https://arxiv.org/html/2609.25696v1)
 - [Official General Robotics Lab project page](https://generalroboticslab.com/cartesian_handv1)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-10-17',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-22',
     evidenceStatus: 'Preprint · arXiv v1 · public code/CAD · reproduction unverified',
   },
@@ -4171,7 +4252,7 @@ For evaluating contact feedback in a future build, use the [robot-hand tactile s
     id: 'spectrobot-high-bandwidth-single-point-tactile-sensing',
     title: 'SpectRobot turns single-point vibration into tactile policy input',
     seoTitle: 'SpectRobot Tactile Sensing: Bandwidth, Results and Data',
-    seoDescription: 'SpectRobot converts one high-bandwidth tactile channel into spectrograms. Inspect its 80-trial tests, bandwidth limits, hardware and release status.',
+    seoDescription: "Distinguish SpectRobot sampling, spectrogram history and motor updates; review complete-sort denominators, public implementation and reproducibility limits.",
     excerpt: 'Wormsensing and Hugging Face researchers encode remote vibration sensors as spectrograms for a robot policy. Longer history mattered more than extending the tested band from 10 to 100 kHz.',
     category: 'Tactile sensing hardware',
     image: '/generated/news/spectrobot-single-point-spectrogram.png',
@@ -4180,6 +4261,7 @@ For evaluating contact feedback in a future build, use the [robot-hand tactile s
     sourceTitle: 'Learning tactile perception from high-bandwidth single-point sensing',
     sourceUrl: 'https://arxiv.org/abs/2609.24621',
     sources: [
+      {"title": "SpectRobot implementation, reviewed revision b4cf724", "url": "https://github.com/spectrobot-project/spectrobot/tree/b4cf7249378941d26ac26d96f256941a6c9e730f"},
       { title: 'SpectRobot arXiv submission record', url: 'https://arxiv.org/abs/2609.24621' },
       { title: 'SpectRobot v1 methods and results', url: 'https://arxiv.org/html/2609.24621v1' },
       { title: 'SpectRobot official project repository', url: 'https://github.com/spectrobot-project/spectrobot-project.github.io' },
@@ -4220,7 +4302,22 @@ The image-like interface may reduce software friction because it fits existing v
 
 The study is a preprint and RoboSkin.ai has not reproduced it. It evaluates one sorting task, one arm family and independently collected datasets for several grippers. Raw time signals were not retained in the reported pipeline, which limits reprocessing with alternative windows. Two authors work for Wormsensing, the Dragonfly sensor manufacturer; the paper discloses this conflict.
 
-The paper states that code is available under Apache 2.0 and points to the SpectRobot GitHub organization. As inspected on September 22, that organization exposed an Apache-2.0 project website repository, but no separate training-code repository was visible. The linked Hugging Face profile did expose many named datasets and policy models, including September 21 task assets, but not a single curated release page. Readers should identify the exact dataset and checkpoint before attempting reproduction.
+The September 22 check found only the project website repository. On November 4, we also inspected the public [SpectRobot implementation at b4cf724](https://github.com/spectrobot-project/spectrobot/tree/b4cf7249378941d26ac26d96f256941a6c9e730f). It contains a LeRobot integration, sensor configuration, acquisition code and Teensy firmware, with a root Apache-2.0 license. Its README documents Teensy/ADS8688 and openDAQ paths; this review did not install, run or benchmark them. The linked Hugging Face profile contains many separate datasets and models. Identify the exact assets, feature names and individual reuse terms; the code license does not establish every dataset or checkpoint license.
+
+## A shared image shape does not preserve the measurement contract
+
+Two 224-by-224 images can encode different frequency ranges, histories, amplitude windows and mechanical responses. A policy expects the representation it learned, not merely the same tensor dimensions. The public [implementation README](https://github.com/spectrobot-project/spectrobot/blob/b4cf7249378941d26ac26d96f256941a6c9e730f/README.md) makes observation-key consistency explicit; acquisition and preprocessing settings need an equally clear record.
+
+| Record | Why it matters |
+| --- | --- |
+| Sensor, attachment and gripper revision | Structural coupling changes the vibration reaching the measurement point |
+| Sample rate, analog conditioning and spectral window | These determine what signal enters the spectrogram before resizing |
+| History length, amplitude mapping and timestamp | They determine which events are visible and how recent the observation is |
+| Feature names and policy revision | They connect the recorded stream to the input the model was trained to consume |
+
+Preserve the evaluation denominator too. The reported overall sorting rate includes grasp and drop failures; the confusion matrices include only boxes delivered to a bin. A classification percentage computed from delivered boxes answers a narrower question than complete robot-task success. [Data collection and results](https://arxiv.org/html/2609.24621v1#S3).
+
+Finally, the stored spectrogram videos cannot reconstruct the discarded raw vibration waveform. A later experiment with another filter or spectral window may require new collection. Nor does one dynamic channel establish static force, contact localization or multi-contact load sharing. Compare that observable with other [hand sensing and mechanics choices](/robot-hands#mechanics-measurement-task), then define the measurement and task evidence your application actually needs.
 
 ## Sources
 
@@ -4228,13 +4325,15 @@ The paper states that code is available under Apache 2.0 and points to the Spect
 - [SpectRobot v1 methods, results and availability statements](https://arxiv.org/html/2609.24621v1)
 - [Official SpectRobot repository](https://github.com/spectrobot-project/spectrobot-project.github.io)
 - [Public SpectRobot datasets and models profile](https://huggingface.co/jogarulfop)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not built or run these systems.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-21',
-    evidenceStatus: 'Preprint · arXiv v1',
+    evidenceStatus: "Preprint · physical sorting study · Apache-2.0 implementation inspected · reproduction unverified",
   },
   {
     id: 'tactile-jepa-topology-aware-electronic-skin-pretraining',

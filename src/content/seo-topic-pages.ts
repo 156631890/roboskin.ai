@@ -5811,13 +5811,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-hands',
     title: 'Robot Hands: Dexterity, Sensors & Comparison Guide',
     description:
-      'Compare robot hands and grippers by actuation, sensing, control, task fit, and evidence. Learn how tactile robot hands support dexterous manipulation.',
+      "Compare robot hands by mechanics, measured signals and task evidence; review passive coupling, contact estimates, software releases and acceptance checks.",
     h1: 'Robot hands: dexterity, sensing and evidence',
-    kicker: 'Robotics hardware pillar',
+    kicker: "Robot hand selection and evidence",
     intent: 'Technical category guide for robot hands, robotic hands, humanoid robot hands, dexterous hands, tactile robot hands, and robot hand versus gripper searches.',
     published: '2026-08-21',
-    updated: '2026-10-23',
-    revisionNote: 'October 23, 2026: added a bounded Robotiq 2FC upgrade and software-acceptance example. October 20, 2026: added a source-bounded anthropomorphic versus symmetric hand case and a procurement acceptance checklist. The Cartesian Hand route and existing evidence tables are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed the full guide and sources; added mechanics-to-task comparisons, qualified sensing claims and corrected HRDexDB contact provenance. Existing rotation and Robotiq upgrade sections remain; original publication date is retained.",
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5826,7 +5826,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'A robot hand is an end effector with fingers or multiple articulated contacts designed to grasp, reorient, manipulate, or use objects. The term covers simple adaptive hands as well as highly actuated anthropomorphic systems.',
       'A multi-finger hand can create more contact configurations than a two-finger gripper, but it also increases mechanical, sensing, calibration, control, data, and maintenance complexity. More joints do not guarantee better task performance.',
-      'Tactile sensors on fingertips, fingers, and palms can expose contact location, pressure, shear, slip, and grasp state after vision becomes occluded. Their value should be tested through closed-loop task outcomes, not sensitivity claims alone.',
+      'Depending on modality and calibration, fingertip, finger and palm sensors can measure or help infer local contact properties after vision becomes occluded. Pressure, shear, slip and grasp state are different outputs; verify which ones the actual system estimates or measures, then test their value through task outcomes.',
     ],
     sections: [
       {
@@ -5866,7 +5866,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'Degrees of freedom and actuator count describe architecture, not universal dexterity. Payload, fingertip force, speed, repeatability, tactile coverage, compliance, environmental tolerance, power, mass, maintenance, software access, and task evidence all matter. Values from different test methods should not be placed in one ranked table without aligning definitions and conditions.',
           'For procurement or research selection, record whether each specification is a manufacturer statement, a calibrated measurement, a peer-reviewed result, an independent benchmark, or an observation from a demonstration. Unknown fields should stay unknown rather than being inferred from a product image or marketing name.',
-          "Robotiq's 2FC illustrates upgrade-versus-replacement evaluation: the manufacturer describes adding TSF fingertips and an AI Hub to 2F-85 or 2F-140 grippers. Reviewed October 23, 2026: pre-orders advertise Q1 2027 shipping, not an in-stock commitment. The 1000 Hz specification applies to dynamic sensing, not end-to-end latency or the complete control loop.",
+          "Robotiq's 2FC illustrates upgrade-versus-replacement evaluation: the manufacturer describes adding TSF fingertips and an AI Hub to 2F-85 or 2F-140 grippers. Originally reviewed October 23 and rechecked November 4, 2026: pre-orders still advertise Q1 2027 shipping, not an in-stock commitment. The 1000 Hz specification applies to dynamic sensing, not end-to-end latency or the complete control loop.",
           "Request a revision-matched bill of materials, timestamped logs with clock-alignment and packet-loss checks, and exact Contact Core skill interfaces, software versions, licenses and delivery milestones. Existing control, tactile and simulation repositories do not establish that every new 2FC skill SDK is released; a saved repository list is not live availability evidence. Agree object-specific slip, recovery and wear acceptance criteria. These are manufacturer claims and proposed checks, not RoboSkin hardware tests.",
         ],
         links: [
@@ -5884,6 +5884,95 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Task evidence', 'Objects, trials, success criteria, speed, interventions, failures, and baseline', 'Treat official demos, preprints, peer review, and independent tests as different evidence levels'],
           ],
         },
+      },
+      {
+        "id": "mechanics-measurement-task",
+        "heading": "Connect mechanics, measurement and task evidence",
+        "body": [
+          "Start with the job: what must the hand move, what contact condition must it observe, and what counts as completion? A mechanical feature can improve contact without measuring it. A contact estimator can produce an alarm without controlling the hand. A learned policy can succeed in simulation without establishing a hardware operating limit. Keep those contributions separate when assembling a shortlist."
+        ],
+        "table": {
+          "headers": [
+            "Design or method",
+            "Evidence it contributes",
+            "Separate integration question"
+          ],
+          "rows": [
+            [
+              "Cartesian Hand",
+              "Simple fingertip kinematics and configured procedures for mechanism-constrained objects",
+              "Does the actual build reproduce object-level motion, contact handling and the required application outcome?"
+            ],
+            [
+              "Berkeley QUAD Hand",
+              "Passive finger coupling, zero-current backdrivability and calculated resistive heating",
+              "What contact forces, temperatures and dynamic outcomes occur under the intended active controller?"
+            ],
+            [
+              "Anthropomimetic forearm",
+              "Direction-dependent wrist stiffness under controlled tendon activation",
+              "Does the desired compliance persist after rebuilding, under dynamic loading and during the target task?"
+            ],
+            [
+              "CoPRE",
+              "Arm-level contact alarms inferred from joint signals",
+              "Are calibration, detection deadline and application response validated for this payload and motion distribution?"
+            ],
+            [
+              "SpectRobot",
+              "A mechanically coupled vibration history used for a sorting policy",
+              "Does the representation retain the needed signal after changing the sensor, mounting or gripper?"
+            ],
+            [
+              "Outcome-sensitive catching",
+              "Simulated demonstration selection and policy evaluation around impact",
+              "Are complete-task success, failed catches and measured hardware impact all accounted for?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Use one task record across hardware and software revisions",
+            "body": [
+              "For a proposed cap-opening task, record the cap and bottle, starting pose, permitted setup attempts, hand revision, control-stack commit, calibration and contact observations. Evaluate opening and retention separately from any downstream requirement such as torque or liquid dispensing. Count failed approaches, slips, retries and interventions; do not transfer a configured-object paper result to a new assembly by name alone.",
+              "Then change one relevant condition at a time: an object geometry, pad replacement, controller setting or deployment environment. Preserve the previous revision and measurement definition so the result can be compared. A static posture, a low passive movement threshold, an inferred contact score and a successful task are useful evidence for different decisions; none alone establishes the others. This is a proposed evaluation workflow, not an additional RoboSkin hardware experiment."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Cartesian Hand: kinematics and released-stack limits",
+            "href": "/news/cartesian-hand-all-linear-in-hand-manipulation"
+          },
+          {
+            "label": "QUAD Hand: passive and active performance questions",
+            "href": "/news/berkeley-quad-hand-asymmetric-qdd-design"
+          },
+          {
+            "label": "Carpal forearm: stiffness and build repeatability",
+            "href": "/news/anthropomimetic-forearm-carpal-stiffness"
+          },
+          {
+            "label": "CoPRE: contact alarms and calibration scope",
+            "href": "/news/copre-proprioceptive-contact-detection"
+          },
+          {
+            "label": "SpectRobot: acquisition and representation contract",
+            "href": "/news/spectrobot-high-bandwidth-single-point-tactile-sensing"
+          },
+          {
+            "label": "Catching: task completion and conditional impact metrics",
+            "href": "/news/outcome-sensitive-impact-aware-dexterous-catching"
+          },
+          {
+            "label": "Plan a tactile calibration record",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Scope a hand and contact evidence review",
+            "href": "/research-services"
+          }
+        ]
       },
       {
         id: 'anthropomorphic-vs-symmetric-tactile-hands',
@@ -5933,7 +6022,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           rows: [
             ['HT-Bench / HandTouch', 'Full-hand tactile data and learned representation evaluation', 'Cross-task tactile representation research', '2026 preprint with named sensors, tasks, splits, and evaluation tracks'],
             ['TactiDex', 'Aligned human tactile and kinematic state for tactile-guided dexterous transfer', 'Single- and bimanual skill-transfer research', '2026 preprint; results belong to its capture and robot deployment setup'],
-            ['HRDexDB', 'Human and multiple robot-hand grasp records with tactile, visual, and kinematic data', 'Cross-hand grasp and contact research', '2026 preprint; scale and coverage do not by themselves prove policy transfer'],
+            ['HRDexDB', 'Human and robot grasp records with RGB, reconstructed geometry, robot state and object-pose trajectories', 'Cross-hand grasp research and geometry-derived contact-label evaluation', '2026 preprint; geometry-derived contact labels are not measured tactile streams, and scale does not establish policy transfer'],
             ['Gemini Robotics 2', 'Official manipulation evaluation across different end effectors and embodiments', 'VLA and whole-body system research context', 'Developer-reported task results, not a neutral robot-hand benchmark'],
             ['ADEPT', 'Embodiment-specific RL on KUKA-Allegro and Flexiv-Sharpa workbenches', 'Matched vision-only and visuo-tactile evidence on one Flexiv-Sharpa insertion condition', 'Ten trials per modality; not a cross-hand checkpoint, foundation model, or hand leaderboard'],
           ],
@@ -5953,9 +6042,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Does backdrivability mean a hand measures contact force?', answer: 'No. A low movement-onset load describes a mechanical response under a specified controller state. Calibrated force measurement and active force control require separate sensing, calibration and dynamic evaluation.' },
+      { question: 'Is a public control repository enough to reproduce a hand demonstration?', answer: 'Check the exact code and hardware revision, released assets, dependencies and experiment protocol. A rewritten stack or an object-free simulator may not implement the system that produced the paper results.' },
       { question: 'What is a robot hand?', answer: 'A robot hand is an end effector with fingers or multiple articulated contacts used to grasp, reorient, manipulate, or operate objects. Designs range from adaptive hands to highly actuated anthropomorphic systems.' },
       { question: 'Is a robot hand better than a robot gripper?', answer: 'Not universally. A gripper may be simpler and more repeatable for constrained tasks. A multi-finger hand can offer more contact configurations and tool compatibility but increases control, sensing, data, and maintenance complexity.' },
-      { question: 'Why do robot hands need tactile sensors?', answer: 'Tactile sensors can expose local contact, pressure distribution, shear, slip, and seating after the fingers occlude the object or external cameras cannot see the contact state.' },
+      { question: 'Why do robot hands need tactile sensors?', answer: 'Touch can supply local contact evidence when external vision is occluded. The actual output depends on sensor modality, coverage and calibration; slip or seating may be inferred rather than directly measured. Verify the required variable on the intended task.' },
       { question: 'How should robot hands be compared?', answer: 'Align kinematics, actuation, physical limits, sensing, software, task, objects, trials, success criteria, interventions, failures, and evidence level. Do not rank hands by degrees of freedom alone.' },
     ],
     relatedLinks: [
@@ -5970,6 +6061,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'ADEPT visuo-tactile dexterity', href: '/research/adept-visuo-tactile-dexterity-rl-2026', description: 'Inspect the exact arm-hand configurations, tactile ablation, and transfer boundary.' },
     ],
     sources: [
+      { label: 'HRDexDB v3: reconstruction and contact-label provenance', href: 'https://arxiv.org/html/2604.14944v3' },
       { label: 'Nature Machine Intelligence full-hand tactile sensing paper', href: 'https://www.nature.com/articles/s42256-025-01053-3' },
       { label: 'HT-Bench full-hand tactile representation preprint', href: 'https://arxiv.org/abs/2606.19161v2' },
       { label: 'TactiDex tactile-guided dexterous benchmark preprint', href: 'https://arxiv.org/abs/2607.09190' },

@@ -1,0 +1,56 @@
+# Hand mechanics and contact evidence review — November 4, 2026
+
+Status: independent primary-source reading and editorial preparation. Not published, reproduced or human-fact-signed-off. Six original articles and all six v1 full papers read, including methods/results/limitations. Source HTML, paragraph extracts, public asset responses and hashes are saved locally. Original article dates, source dates, figures, useful headings and links must remain.
+
+## Cartesian Hand
+
+https://arxiv.org/html/2609.25696v1 and the author-linked versioned repository 83b738e8c7bf3b74e08e36250492d774aa432324.
+
+Seven linear DOF, 850 g. Constant full-column-rank 12×7 Jacobian maps reference fingertip motion, not arbitrary object motion or contact wrench. Object constraints/contact geometry enable specific operations. Contact detection uses low joint velocity sustained while motion is commanded with an effort limit; it does not measure local force or position. Closure-based width/diameter estimates depend on geometry and compliance. 35 objects ×10 configured trials =350, with up to five separate setup trials per object; these are not randomized unseen-object trials. Task-specific outcomes do not establish pipetting volume accuracy, screw torque or clinical suitability. Arm stationary during manipulation after lift. Humanoid demonstration is qualitative; separate objects in two hands are not shared-load coordination. Paper estimate of $500 and two-hour assembly excludes printing and is not a current complete procurement quote. Motor stall-derived theoretical force is not continuous contact rating.
+
+Pinned public README explicitly describes a rewritten stack, not code used for paper experiments; MuJoCo lacks articulated objects, and tasks were not validated on physical objects. Re-read README, hardware guide, known issues and Apache-2.0 file without running code or hardware. Keep dated October 17 release evidence; add November 4 limitations rather than backdate it.
+
+## Berkeley QUAD Hand
+
+https://arxiv.org/html/2609.27240v1 and https://benudavis.github.io/berkeley-quadhand/.
+
+Four fingers, 11 DOF/eight actuators, asymmetric radial/ulnar design. Feix29/33 and Kapandji10/11 are posture coverage, not autonomous-task success. Backdrive force measured at zero current/minimum stiffness, 15 slow force-gauge trials per tested joint posture. About50gf radial and250gf ulnar are movement-onset loads, not force resolution. Passive ulnar coupling does not imply independent control of all contacts. Five-minute 3N individual/6N combined loads; heat is derived from q-current and manufacturer phase resistance, not measured temperature, total system energy or human-contact certification. Similar combined6N/middle3N current suggests ring load dominance; no equal3N-per-finger assumption. Up-to96-fold result is selected normalized comparison. Printed-link yielding prevented peak motor-force evaluation. Qualitative5kg lift is not payload rating. Official page presently paper/video/viewer, Humanoids2026 attribution; no hardware package link found. Do not infer unavailable everywhere.
+
+## Anthropomimetic forearm
+
+https://arxiv.org/html/2609.29176v1 and https://github.com/TogoLab/anthropomimetic-forearm-carpal-stiffness.
+
+Single physical build, normal/fused/ellipsoidal comparisons, uniform0.6N active tendon tension. Quasi-static3mm deflection,12directions,8trials each;100Hz is motion acquisition, not adaptive-controller rate. Stiffness F/displacement in N/m, not destructive strength or absolute grasp force. Negative and below5N/m observations excluded per method; these affect interpretation/reanalysis. Ellipse48.2° shift p=.0038 from5000stratified permutations measures within-build repeat variability, not manufacturing replication. Proximal-row kinematics significant, midcarpal changes non-significant. Directional stiffness min80.1→149.5N/m normal/fused under finger activation. Ellipsoidal maximum stiffness highest, but not best configurable direction. Jigs make ligament lengths controlled, not proven inter-build reproducibility. Wholehand anatomy and published CAD are not evidence of tactile sensing. Current README/license map verified: bone and fingertip mold derivatives CC BY-SA2.1JP; other specified original parts, firmware, analysis/data and media CC BY4.0. No execution/downloaded data analysis.
+
+## CoPRE
+
+https://arxiv.org/html/2609.27381v1 and https://copre-arm.github.io/.
+
+Separate per-robot contact-free training/validation/calibration, earlier20-sample history,3step prediction, current torque/Jacobian residual. Motor-derived torque, no dedicated force sensors. Weighted equivalent end-effector force is unvalidated force measurement. Recent states excluded, but sustained contacts can eventually contaminate earlier history. Three consecutive threshold samples. ARX32ms/G120ms sample interval is not measured reaction latency. 45 physical trials per arm, three seeds reuse them. Geometric contact-plane reference not independently measured onset. ARX detects through push-end, G1within0.5s; shortening G1windowto0.1s changes82.2%→20.7%, not same-latency benchmark. F90 uses separately measured sliding resistance; force-at-detection unmeasured. False alarm fraction is time, not event probability. ARXzero calibration alarm budget versus G11%; held-out broad3.32%/.86% can exceed budget. Calibration sweep is retrospective; payload/unseenmotion shifts untested. Placement/book demos qualitative. Evidence CSVs are manuscript transcriptions;90recording index is not raw dataset. November4 project now has Code link; inspect exact repo and license before updating old availability wording.
+
+## Outcome-sensitive catching
+
+https://arxiv.org/html/2609.29020v1.
+
+All MuJoCo xArm7/ORCA17DOF,50Hz. Eight-step pre-contact arm intervention, hand remains teacher closed-loop; teacher resumes full control at actual contact/windowend. Offline privileged event alignment plus calibrated student-error perturbation; final student receives observation history with objectposition only object-state input, predicts8actions/executesfirst/replans every step. No measured tactile skin input established. Separate20k successful manifold,20k successful error-model and20k mixed search records.99,328 retained successful demonstrations include correlated perturbed executions, not independent hardware trials; baselines count-matched. Three training seeds evaluated on same3000heldoutconditions. Task success has contact, velocity, peak-normal-force, follow-through and1sretention criteria. Catch completion relaxes three impact conditions; impact metrics conditional on completion, so dropped/missed episodes are excluded.93.6%completion vs90.3%fulltask forfinal;teacher90.7/85.2. 37.3N vs40.8N are conditional simulated peak-force means, not all-attempt safety bound. Repair44.3%conditionalfailed originals,coverage91.8%originalconditions,policy90.3% separate. Unperturbed-only highercoverage94.9%butpolicy81.7% supports selection/execution distinction. Search cannot fix changed handcontrol/postcontactrecovery outside manifold. Hardware robustness/code/data/license unverified.
+
+## SpectRobot
+
+https://arxiv.org/html/2609.24621v1; https://github.com/spectrobot-project/spectrobot; https://huggingface.co/jogarulfop.
+
+Seven sensor types/three gripper geometries, mechanically coupled remote mounting.40demos per dataset,80trials percondition20/class. Total sorting success includes grasp/drop failures, confusion matrix only deliveries; don't compare denominators.200kS/s→100kHzNyquist,224×224 spectrogram observations andmotorupdatesabout30Hz. Rawtime signals notretained, so laterresizing cannotrecover raw acquisition orrerunotherfilters. Bandwidth andcontext notindependently controlled (10kHz2.9s/100kHz2.3s); overlapping intervals don'tresolvewinner orproveequivalence. Sameclasslimitedopaque-boxsorting notarbitrarymaterialrecognition orstaticforce/localization. Current paper explicitly describes grayscale repeatedRGB channels, nottrue3channelphysicalmodality. Lowcost~EUR100acquisition uses separate dataset, notsensorprice/fullrobot/currentquote ormatcheduniversalreplacement. Preliminaryblankinputone model can'tproveallarchitecturecausality. Twoauthors workforDragonflymanufacturer; keep disclosure. New implementation repo exists; README backend/examples are documentation, notrun. Check exact files/Apache license separately from everydataset/checkpointlicense; no payload download. HFprofilecollectionnotoneauditeddataset.
+
+## Editorial workflow
+
+Deepen individual decision questions, not generic appended disclaimers: kinematics/object transfer; passive mechanism/control observability; stiffness direction/build repeatability; detection window/calibration tradeoff; conditional impact metrics; acquisition/representation/reproduction. Integrate with a substantive evergreen comparison on a matching existing hand page after full-page/source audit. No new URLs, copied figures, clinical/industrial guarantees, experiments, keyword metrics, GSC or outreach.
+
+
+## Current release and full companion audit
+
+CoPRE e6449cdd9b217886f08b71529136b3827b3dda0d: root MIT, actual source modules and replay/training/calibration API inspected. Numerical reference tests use synthetic signals and assigned parameters, not paper raw trials or pretrained robot weights; generic pooled calibration differs from separate-family paper constraints. No execution. SpectRobot b4cf7249378941d26ac26d96f256941a6c9e730f: actual src/lerobot/robots/spectrobot files, firmware and root Apache-2.0 inspected. README path prefix differs from tree; link repository rather than reproduce a guessed local path. HF API metadata read only; many assets, not one licensed curated release, no payload download. Forearm da5103e04a3798a591024c528c0e6d169e783f93 file-license map reconfirmed.
+
+Full /robot-hands source read. Existing Robotiq2FC/ContactCore manufacturer pages freshly checked: preorder/Q12027 and dynamic-sensing1000Hz unchanged; keep attributed claim and dated recheck, no new vendor test claims. Full 2610.26759v1 comparison paper read: existing hardware/simulation conditions, five trials/object/orientation,30sec, visual revolution estimates, pooled force samples and unequal orientation-group weighting retained accurately. Full-hand Nature abstract and HTBench/TactiDex records support current general descriptions; their embedded briefs and ADEPT/T-Rex were individually reviewed earlier in this programme. Current HRDexDBv3 source exposes an actual correction: RGB/reconstruction/robot-state records and geometry-derived contact labels, not measured tactile streams. Correct table and add primary source. Gemini and ADEPT source checks from batch75 remain current and reused rather than duplicating research.
+
+Search cross-check November4 returned primary projects/papers, existing RoboSkin pages and other summaries for Cartesian/QUAD/CoPRE/SpectRobot. Preserve page ownership and add no new URLs or unsupported keyword metrics.
+
+All six proposed article diffs and the full evergreen insertion reviewed before implementation. Existing headings, source links, dated history and figures preserved; bounded corrections include conditional-force denominators, new public code availability and geometry-derived contact provenance. No implementation or asset execution.
