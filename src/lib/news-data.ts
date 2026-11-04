@@ -36,10 +36,10 @@ export const newsPosts: NewsPost[] = [
     id: 'tactus-tactile-glove-data-collection',
     title: 'Tactus tactile glove: reading the evidence before collecting robot learning data',
     seoTitle: 'Tactus Glove: Touch and Pose Data Evidence',
-    seoDescription: 'Tactus combines tactile and pose sensing. Read its measurement limits, offline tracking distinction and a plan for evaluating human demonstration data.',
+    seoDescription: 'Read Tactus force and pose metrics with their calibration conditions, then plan session records, causal tracking and a separate robot-transfer evaluation.',
     excerpt: 'A new sensing-glove preprint raises a practical question: what must a human demonstration record preserve before it can support contact-aware robot learning?',
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-10-31', updated: '2026-10-31', sourceDate: '2026-10-29',
+    date: '2026-10-31', updated: '2026-11-04', sourceDate: '2026-10-29',
     readTime: '7 min read', category: 'Tactile data collection',
     image: '/generated/news/tactus-data-evidence.png',
     imageAlt: 'RoboSkin evaluation diagram separating contact measurement, hand pose, calibration and a later robot transfer test.',
@@ -89,6 +89,14 @@ Evaluate repeatability within one wearing session separately from changes after 
 
 For a small pilot, we would reserve a reference interaction at the beginning and end of each session. Inspect the residuals before pooling sessions. The acceptance limit should come from the intended task: a coarse contact detector and a force-sensitive manipulation target should not inherit the same tolerance simply because they share a sensor.
 
+### Why two force-error tables cannot be merged
+
+The paper uses two different calibration and comparison procedures. Section IV-A estimates pressure across the glove from per-sensor transfer functions and then applies a session correction. Section V-B compares learned, multi-channel fingertip normal-force regressors against a Nano-17 reference in lighter-force pressing trials. Their error values do not describe the same estimator, contact region or loading range. [Calibration and tactile protocols](https://arxiv.org/html/2610.39076v1).
+
+The comparison also does not show one glove winning every metric: the authors report a slightly lower fingertip point error for JQ, while Tactus has the lower minimum detectable force. A selection decision should identify which error matters to the intended recording, rather than combine the best number from each table into a synthetic specification.
+
+For a proposed procurement record, keep the estimator, loaded region, force range, reference, session correction and held-out grouping beside each metric. Request residuals under the intended conditions before adopting a headline threshold. The [tactile calibration guide](/guides/tactile-sensor-calibration) provides the broader distinction between a fitted mapping, repeatability and an independently checked measurement.
+
 ## Keep causal and offline pose streams separate
 
 Offline processing can use observations that arrive after the instant being estimated. That can be appropriate for curating a demonstration, while an online controller must act using information available at its decision time. Both outputs may be useful, but they belong in separate columns with separate descriptions.
@@ -119,16 +127,19 @@ Our suggested pilot has three gates. First, verify measurement integrity against
 Keep the robot, objects, training budget and success definition fixed in that last comparison. Include failed attempts and interventions in the denominator. A transfer result should also specify what was changed to bridge the embodiments: contact-location mapping, sensor normalization, action retargeting or additional robot demonstrations. Without that record, it is difficult to tell which part of the system produced an improvement.
 
 For practical planning, the next useful artifact is a small, inspectable episode with its calibration and timing record. Use our [sensor task-selection guide](/sensors#human-demonstration-gloves) to define the measurement requirements, then the [tactile dataset index](/datasets) to compare available records. The companion [DexSuite data review](/news/dexsuite-tactile-simulation-lerobot-data) examines a different evidence stage: inspecting a public simulated tactile dataset before treating it as training-ready.
+
+
+Evidence and editorial review: November 4, 2026. Original publication date retained.
 `,
   },
   {
     id: 'dexsuite-tactile-simulation-lerobot-data',
     title: 'DexSuite brings tactile simulation to dexterous learning: what the released data contains',
     seoTitle: 'DexSuite: Tactile Simulation and LeRobot Data',
-    seoDescription: 'Inspect DexSuite tactile simulation and a pinned LeRobot dataset: metadata, action layout, licensing, benchmark scope and checks needed before training.',
+    seoDescription: 'Inspect DexSuite tactile data, action semantics and collection splits; distinguish the accessible MIT code from dataset and third-party asset licenses.',
     excerpt: 'The new DexSuite paper links simulation, teleoperation and evaluation. We inspect one public tactile subset and separate framework claims from verified file metadata.',
     author: 'RoboSkin.ai Editorial Team',
-    date: '2026-10-31', updated: '2026-10-31', sourceDate: '2026-10-27',
+    date: '2026-10-31', updated: '2026-11-04', sourceDate: '2026-10-27',
     readTime: '8 min read', category: 'Simulation and datasets',
     image: '/generated/news/dexsuite-data-evidence.png',
     imageAlt: 'Editorial diagram separating a simulation framework, a benchmark and a versioned dataset with distinct verification gates.',
@@ -140,6 +151,7 @@ For practical planning, the next useful artifact is a small, inspectable episode
       { title: 'DexSuite v1 paper, October 27, 2026', url: 'https://arxiv.org/html/2610.37799v1' },
       { title: 'Official DexSuite project and dataset links', url: 'https://dexsuiteorg.github.io/' },
       { title: 'DexSuite documentation reviewed October 31, 2026', url: 'https://dexsuite.readthedocs.io/en/latest/' },
+      { title: 'Current source repository and software license, checked November 4', url: 'https://github.com/anashoussaini/Dexsuite' },
       { title: 'DexSuite package listing and its repository link', url: 'https://pypi.org/project/dexsuite/' },
       { title: 'Pinned scripted Lift tactile dataset card', url: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/README.md' },
       { title: 'Pinned dataset schema: meta/info.json', url: 'https://huggingface.co/datasets/dexsuite/lift_franka_franka_umi_tacticle_scripted/blob/f4be6e95af40843da39cd5a88d8bd736393dd59c/meta/info.json' },
@@ -159,7 +171,7 @@ The [v1 paper](https://arxiv.org/html/2610.37799v1) reports 30 framework tasks, 
 
 The [official project page](https://dexsuiteorg.github.io/) separates the corpus into 700 human-teleoperated, 1,200 scripted and 2,800 machine-generated episodes. Human teleoperation here still controls a simulated robot. Preserve collection origin when assembling a training mixture; the word human does not convert a simulated contact signal into a physical measurement.
 
-There is also a version boundary. The [documentation landing page](https://dexsuite.readthedocs.io/en/latest/) displayed 26 tasks, 16 arms and robots, and 11 end-effectors when reviewed. Its taxonomy differs from the paper's. We have not reconciled the package inventory by executing a particular release, so the article keeps each count attached to its source instead of presenting a single supposedly universal total.
+There is also a version boundary. The [documentation landing page](https://dexsuite.readthedocs.io/en/latest/) displayed 26 tasks, 16 arms and robots, and 11 end-effectors in the October 31 review. The [repository README](https://github.com/anashoussaini/Dexsuite), read November 4, advertises 31 tasks, ten arms plus six integrated robots, and eleven end-effectors. These are dated inventories with different categories, not a single fixed benchmark count. We have not enumerated an installed release; the paper's 16 evaluated task-embodiment pairs remain a separate scope.
 
 ## What we could inspect directly
 
@@ -201,22 +213,33 @@ For a fair contact ablation, we would hold the task, embodiment, visual inputs, 
 
 Keep each task's result visible before averaging. A model that improves pickup while failing release may have a different practical value from one that makes a small improvement across the entire sequence. Report the failure stage and intervention rule alongside the final success fraction. This is an evaluation design recommendation, not a new DexSuite result.
 
+### Match the held-out unit to the claim
+
+An episode split asks whether a policy handles new episodes from the represented collection process. A collector split asks a different question: whether behavior transfers beyond the demonstrator or policy that generated the training data. An embodiment split changes the robot and action interpretation as well. Label the intended generalization before selecting the split.
+
+Our proposed review would list the task, embodiment, collection tier and collector revision for each group. Keep all frames from an episode together, then decide which additional groups must remain unseen. If a subset lacks the metadata needed for that separation, report the limit instead of describing a random frame split as cross-collector transfer. This is an evaluation design, not evidence that leakage occurred in the published benchmark. See the [LeRobot format guide](/guides/lerobot-dataset-format) for the separate storage and sequence-boundary checks.
+
 ## A bounded adoption sequence
 
-First, freeze the dataset revision and the intended simulator/package version. Save the schema, action layout, card and license evidence with the experiment configuration. The public PyPI listing links a repository route that returned 404 during this review, so we do not label that route a verified working source checkout. Public package documentation and verified source access are separate states.
+First, freeze the dataset revision and the intended simulator/package version. Save the schema, action layout, card and license evidence with the experiment configuration. The repository returned 404 during our October 31 review, but the [official project](https://dexsuiteorg.github.io/) now links a readable [source repository](https://github.com/anashoussaini/Dexsuite), checked November 4. That changes its access status; it does not establish a successful installation or reproduction.
+
+The repository's [LICENSE](https://github.com/anashoussaini/Dexsuite/blob/main/LICENSE) identifies MIT for its software. Its [third-party notice](https://github.com/anashoussaini/Dexsuite/blob/main/THIRD_PARTY_LICENSES.md) separately lists model and asset terms, including non-commercial research/education restrictions for PartNet-Mobility objects. Do not apply the software license to every scene asset or to the separately versioned dataset. This review reads the notices; it does not clear a particular commercial use.
 
 Second, inspect one complete episode with the chosen loader. Confirm lengths, timestamps, action meanings, terminal handling and the tactile feature values. Define a held-out split by episode or the relevant collection grouping before training; random adjacent frames do not form an independent contact evaluation. The inspected metadata declares a train split covering all 200 episodes, so a research split remains an explicit experiment choice.
 
 Third, run a small reproducibility experiment and preserve failures. Only after those checks should a team scale the training mixture or investigate physical transfer. A simulation result can guide that work, but the real robot introduces a separate sensor, controller and contact environment that must be tested.
 
 The [DexSuite entry in our tactile dataset directory](/datasets#dataset-dexsuite-lift-scripted) now preserves this subset's format, license marker and inspection limits. Use the [benchmark guide](/benchmarks) to plan comparisons, and the [Tactus glove evidence review](/news/tactus-tactile-glove-data-collection) for the complementary problem of qualifying physical human-demonstration measurements.
+
+
+Evidence and editorial review: November 4, 2026. Original publication date retained.
 `,
   },
   {
     id: 'neura-neuron-ai-touch-memory-pla',
     title: 'NEURA Neuron AI: what touch, audio and memory add to robot action',
     seoTitle: 'NEURA Neuron AI: Touch, Memory and PLA Evidence',
-    seoDescription: 'An evidence review of NEURA Neuron AI: tactile sensing, audio, memory, PLA claims, related robotics papers and the tests needed to assess real performance.',
+    seoDescription: 'Review Neuron AI touch, memory and local inference claims, the dated laundry demonstration limits and practical evidence for a customer evaluation.',
     excerpt: 'NEURA presents a multisensory robot model. We separate its public claims from open research, explain memory versus learning, and outline the evidence still needed.',
     category: 'Multimodal robot learning',
     image: '/generated/news/neura-neuron-ai-touch-memory-pla.png',
@@ -226,6 +249,7 @@ The [DexSuite entry in our tactile dataset directory](/datasets#dataset-dexsuite
     sourceUrl: 'https://neura-robotics.com/neura-robotics-introduces-neuron-ai/',
     sources: [
       { title: 'NEURA official announcement — October 14, 2026', url: 'https://neura-robotics.com/neura-robotics-introduces-neuron-ai/' },
+      { title: 'Manufacturer event recap, October 31, 2026', url: 'https://neura-robotics.com/nvidia-gtc-berlin-2026-recap/' },
       { title: 'Neuron AI official product description', url: 'https://neura-robotics.com/neuron-ai/' },
       { title: 'Background paper: OpenVLA', url: 'https://arxiv.org/abs/2406.09246' },
       { title: 'Background paper: MimicTouch', url: 'https://arxiv.org/abs/2310.16917' },
@@ -236,13 +260,13 @@ The [DexSuite entry in our tactile dataset directory](/datasets#dataset-dexsuite
     evidenceStatus: 'Company announcement · no public Neuron AI paper or reproducible benchmark located in this review · related papers are independent background',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-15',
-    updated: '2026-10-15',
+    updated: '2026-11-04',
     readTime: '8 min read',
     content: `# NEURA Neuron AI: what touch, audio and memory add to robot action
 
 NEURA introduced Neuron AI on October 14, 2026. Its [product description](https://neura-robotics.com/neuron-ai/) presents a Perception-Language-Action, or PLA, model combining 3D vision, touch, audio, robot state and language with memory. For tactile robotics, the interesting question is whether additional observations change what a robot does when contact is hidden, ambiguous or unsuccessful.
 
-This is an evidence review of a company announcement, not a review of a Neuron AI research paper. As of October 15, our review of the official announcement, product page and targeted paper searches did not locate a public Neuron AI manuscript or a reproducible comparative benchmark. The three papers below provide independent research context; NEURA has not identified them as components of its system in the materials reviewed.
+This is an evidence review of a company announcement, not a review of a Neuron AI research paper. The original October 15 review did not locate a public Neuron AI manuscript or a reproducible comparative benchmark. A November 4 check of the official announcement, product description and October 31 event recap still leaves the methods, matched benchmark and implementation of memory unresolved in those materials. The three papers below provide independent research context; NEURA has not identified them as components of its system in the materials reviewed.
 
 ## What NEURA has announced
 
@@ -292,6 +316,18 @@ A robot can maintain a history buffer or recurrent state while its model weights
 
 Those mechanisms need different tests. For memory, vary the length of an occlusion, interrupt a task and test the reset boundary between episodes. For offline updates, compare frozen model versions on the same held-out tasks. If online adaptation is claimed, measure improvement against a no-update control and check whether previously learned skills regress. None of these outcomes follows merely from adding the word memory to a product description.
 
+### Keep an acceptance record across resets and updates
+
+For a proposed customer evaluation, record the model and skill version, memory reset rule and permitted data flow before the run. These three boundaries answer different questions:
+
+| Change under review | Keep fixed | Evidence to request |
+| --- | --- | --- |
+| Object moves during occlusion | Model version and task | Whether remembered state is revised after contradictory observation |
+| A new episode or operator begins | Model and hardware | Whether relevant history persists or is deliberately cleared |
+| A fleet skill is updated | Held-out task set and scoring | Which version changed and whether earlier skills regress |
+
+These are proposed acceptance checks, not controls NEURA has demonstrated or promised to expose. Local inference describes where an action is computed; it does not by itself establish the behavior of training, telemetry or optional data sharing. Keep those questions separate from a contact-latency test. Our [robot learning guide](/robot-learning) distinguishes demonstrations, adaptation and deployed feedback.
+
 ## A proposed touch-and-memory evaluation
 
 The following is a RoboSkin evaluation proposal, not an experiment we have performed or a description of NEURA's test setup. It could guide a request for a vendor evaluation or a future open implementation.
@@ -311,9 +347,13 @@ Randomize conditions and object order, reserve unseen objects, and publish every
 
 ## What to watch at the planned demonstration
 
-NEURA's [October 14 announcement](https://neura-robotics.com/neura-robotics-introduces-neuron-ai/) schedules an eleven-minute 4NE1 laundry-handling demonstration at NVIDIA GTC Berlin on October 20–22. This is a future event as of this article's publication. The described sequence covers handling and transfers around laundry appliances; it is not evidence of completing a full wash-and-dry cycle in eleven minutes.
+The original [October 14 announcement](https://neura-robotics.com/neura-robotics-introduces-neuron-ai/) scheduled an eleven-minute 4NE1 laundry-handling demonstration for October 20–22. It was a future event when this article was published; the following is a dated follow-up, not a new publication claim.
 
-Useful follow-up evidence would include an uncut run, the number of attempts, intervention logs and unexpected-state recovery. For now, the announcement offers a relevant multisensory product direction, while its quantitative advantage and the implementation of memory remain open questions.
+### November 4 follow-up: the manufacturer's event recap
+
+NEURA's [October 31 recap](https://neura-robotics.com/nvidia-gtc-berlin-2026-recap/) reports repeated autonomous handling sequences by 4NE1 Wheels during the show. It also states that the appliances' wash and dry programs were shortened to about ten seconds for the demonstration. The approximately eleven-minute sequence therefore should not be presented as an ordinary full-duration household wash-and-dry cycle.
+
+This is manufacturer reporting. We have not independently reviewed every run, counted all attempts or verified interventions from complete logs. The recap adds an account of the event, but does not supply the matched modality ablation or failure denominator needed to quantify Neuron AI's advantage. A customer evaluation still needs a fixed task definition, complete attempt accounting and the intended appliance conditions.
 
 ## Continue the research
 
@@ -322,13 +362,14 @@ Useful follow-up evidence would include an uncut run, the number of attempts, in
 - [Robot learning: demonstrations and policy adaptation](/robot-learning)
 - [RoboSkin research index](/research)
 
-Source review date: October 15, 2026. Manufacturer statements, independent papers and RoboSkin's proposed tests are distinguished throughout. No affiliation with NEURA or independent validation of Neuron AI is claimed.`,
+Original source review: October 15, 2026. Official-source follow-up: November 4, 2026. Manufacturer statements, independent papers and RoboSkin's proposed tests are distinguished throughout. No affiliation with NEURA or independent validation of Neuron AI is claimed.
+`,
   },
   {
     id: 'activewam-active-vision-world-action-model',
     title: 'ActiveWAM makes camera motion part of the robot action',
     seoTitle: 'ActiveWAM Unifies Camera and Bimanual Robot Actions',
-    seoDescription: 'ActiveWAM jointly controls a pan-tilt camera and two robot arms. Review RoboTwin-AV, 60 physical trials, latency and release limits.',
+    seoDescription: 'Separate ActiveWAM camera control, retained history, physical trial denominators and timing stages before evaluating active robot perception.',
     excerpt: 'ActiveWAM treats where a robot looks as part of the same action sequence as bimanual manipulation, while using transformed video histories only during training.',
     category: 'Active robot perception',
     image: '/generated/news/activewam-active-vision-world-action-model.png',
@@ -343,11 +384,11 @@ Source review date: October 15, 2026. Manufacturer statements, independent paper
     ],
     technicalFocus: ['active vision', 'world-action model', 'bimanual manipulation', 'camera control'],
     sourceDate: '2026-10-01',
-    evidenceStatus: 'Preprint · arXiv v1 · 50-task simulation benchmark · 300 physical trials across five methods · official code marked coming soon',
+    evidenceStatus: 'Preprint · arXiv v1 · 50-task simulation benchmark · 300 physical trials across five methods · current code availability unverified in November 4 review',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-04',
-    updated: '2026-10-04',
-    readTime: '8 min read',
+    updated: '2026-11-04',
+    readTime: '5 min read',
     content: `# ActiveWAM makes camera motion part of the robot action
 
 Beijing Institute of Technology researchers released ActiveWAM on October 1, 2026, a world-action model that predicts bimanual motion and a two-axis pan-tilt camera trajectory together. The central engineering question is simple: when a robot can move its eyes, can it learn where to look without losing evidence it saw a moment ago? ActiveWAM answers with a finite video history, training-time history transformations and one 16-dimensional arm-and-head action space. [Paper and version record](https://arxiv.org/abs/2610.01698).
@@ -376,13 +417,27 @@ The physical setup is an AirbotPlay fixed-base dual-arm platform with a RealSens
 
 ActiveWAM is not a tactile system. Its value for [robot world models](/robot-world-models) is the treatment of sensing motion as an action with physical consequences. A pan-tilt camera can reacquire an occluded target, but leaving a useful view also creates a memory problem. This retain-and-acquire framing is relevant to [visuo-tactile manipulation](/visuo-tactile), where cameras and touch sensors likewise reveal different parts of a contact state over time.
 
-The failure audit is as useful as the headline result. Of 30 failed ActiveWAM physical trials, 12 are labeled manipulation errors, 10 premature terminations, five camera field-of-view failures and three hardware issues. Moving the camera does not remove contact-control or termination problems; it changes which failures remain visible.
+The failure audit is as useful as the headline result. Of 30 failed ActiveWAM physical trials, 12 are labeled manipulation errors, 10 premature terminations, five camera field-of-view failures and three hardware issues. Moving the camera does not remove contact-control or termination problems; it changes which failures remain visible. These categories use the 30 failed trials as their denominator. They describe observed failure labels, not established root causes or percentages of all 60 attempts. [Physical protocol and failure analysis](https://arxiv.org/html/2610.01698v1).
+
+### Choose a camera-control check that matches the task
+
+For a proposed evaluation, record when the target and destination are both observable, how old the retained evidence is, and whether a camera move interrupts useful manipulation. More head movement is not inherently better: a stable view can be the correct sensing action.
+
+Compare a locked camera, a declared rule-based camera strategy and the learned strategy under matched observations and task scoring. Log unsuccessful reacquisition and timeouts, not only examples where an occluded object becomes visible again. If camera reach prevents a view, report that mechanical limit separately from a policy that fails to request an available view. These are suggested checks, not an additional ActiveWAM experiment. The [visuo-tactile evaluation guide](/guides/visuo-tactile-world-models-robot-manipulation) provides the broader separation between observation quality and completed actions.
 
 ## Limitations and availability
 
-This is an arXiv v1 preprint, and RoboSkin.ai did not reproduce the experiments. The physical evaluation uses one fixed-base platform, one camera arrangement and three composed kitchen sequences. Inference is reported at about 165 ms on an RTX 4090; action chunking yields roughly 15 Hz effective updates while interpolation maintains 25 Hz commands. The authors report only a short history window and no automatic high-level stage transition.
+This is an arXiv v1 preprint, and RoboSkin.ai did not reproduce the experiments. The physical evaluation uses one fixed-base platform, one camera arrangement and three composed kitchen sequences. The authors report three timing quantities that should stay separate:
 
-The official project page was available when checked, but its code link was marked “Coming Soon.” RoboTwin-AV materials are linked from the project, while ActiveWAM training code, checkpoints and a software license were not verified as released. The arXiv manuscript uses arXiv's perpetual non-exclusive distribution license.
+| Reported timing | Stage | What it does not establish |
+| --- | --- | --- |
+| About 165 ms on RTX 4090 | Model action inference | A complete physical response-time distribution |
+| About 15 Hz | Effective updates with action chunking | A fresh full model evaluation for every command |
+| 25 Hz | Interpolated robot commands | 25 new independent visual decisions per second |
+
+For integration, request capture, inference, command and observed-motion timestamps on a declared clock relationship. The table reports the paper's quantities; RoboSkin has not measured them. The authors report only a short history window and no automatic high-level stage transition.
+
+The official project page displayed a “Coming Soon” code link in the original October 4 review. It could not be read during the November 4 follow-up, so that old observation is not a current release-status claim. Current training code, checkpoint and software-license availability remain unverified in this review; retain the project link for a direct check. The arXiv manuscript uses arXiv's perpetual non-exclusive distribution license.
 
 ## Sources and related resources
 
@@ -390,6 +445,9 @@ The official project page was available when checked, but its code link was mark
 - [Full method, benchmarks and physical protocol](https://arxiv.org/html/2610.01698v1)
 - [Official ActiveWAM project page](https://icr-lab.github.io/ActiveWAM/)
 - [RoboSkin guide to visuo-tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+
+
+Evidence and editorial review: November 4, 2026. Original publication date retained.
 `,
   },
   {

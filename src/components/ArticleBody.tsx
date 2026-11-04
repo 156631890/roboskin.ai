@@ -183,5 +183,5 @@ export default function ArticleBody({ content, hubBacklink = false }: { content:
   flushList();
   flushTable();
 
-  return <div className="mt-8"><ArticleContents sections={headings} />{elements}</div>;
+  return <div className="mt-8 [overflow-wrap:anywhere]"><ArticleContents sections={headings} />{elements}</div>;
 }

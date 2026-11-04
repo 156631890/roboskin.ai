@@ -89,10 +89,10 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/self-healing-multimodal-eskin-2026 | rewritten and production verified in PR109 | 1084 | 2 |
 | /research/ros2-kilted-tactile-pipeline-2026 | rewritten and production verified in PR111 | 1363 | 10 |
 | /research/large-area-flexible-tactile-arrays-2025 | rewritten and production verified in PR109 | 1168 | 6 |
-| /news/tactus-tactile-glove-data-collection | inventory only; claim-by-claim review pending | 1479 | 5 |
-| /news/dexsuite-tactile-simulation-lerobot-data | inventory only; claim-by-claim review pending | 1588 | 9 |
-| /news/neura-neuron-ai-touch-memory-pla | inventory only; claim-by-claim review pending | 1689 | 3 |
-| /news/activewam-active-vision-world-action-model | inventory only; claim-by-claim review pending | 1004 | 4 |
+| /news/tactus-tactile-glove-data-collection | collection and control evidence reviewed; production verification pending | 1479 | 5 |
+| /news/dexsuite-tactile-simulation-lerobot-data | collection and control evidence reviewed; production verification pending | 1588 | 9 |
+| /news/neura-neuron-ai-touch-memory-pla | collection and control evidence reviewed; production verification pending | 1689 | 3 |
+| /news/activewam-active-vision-world-action-model | collection and control evidence reviewed; production verification pending | 1004 | 4 |
 | /news/radmcs-underwater-haptic-diver-guidance | inventory only; claim-by-claim review pending | 995 | 1 |
 | /news/humanoidtoolbench-tool-selection-mobile-execution | inventory only; claim-by-claim review pending | 1046 | 12 |
 | /news/interevolve-reward-program-humanoid-manipulation | inventory only; claim-by-claim review pending | 1037 | 8 |
@@ -155,10 +155,10 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/lerobot-v060-world-models-vla-evaluation-2026 | inventory only; claim-by-claim review pending | 1181 | 4 |
 | /news/nist-humanoid-baseline-performance-benchmark-2026 | inventory only; claim-by-claim review pending | 1098 | 5 |
 | /news/iso-10218-2025-industrial-robot-safety-scope | inventory only; claim-by-claim review pending | 1075 | 2 |
-| /news/twisted-yarn-textile-capacitive-robot-skin-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 1256 | 3 |
-| /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 1099 | 3 |
+| /news/twisted-yarn-textile-capacitive-robot-skin-2026 | rewritten and production verified in PR114 | 1256 | 3 |
+| /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | rewritten and production verified in PR114 | 1099 | 3 |
 | /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | inventory only; claim-by-claim review pending | 906 | 1 |
-| /news/underwater-self-healing-electronic-skin-nus-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 722 | 2 |
+| /news/underwater-self-healing-electronic-skin-nus-2026 | rewritten and production verified in PR114 | 722 | 2 |
 | /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 868 | 7 |
 | /news/color-changing-mechanochromic-tactile-sensor-2026 | rewritten and production verified in PR113 | 702 | 3 |
 | /news/single-pixel-tactile-skin-compressive-sampling-2026 | rewritten and production verified in PR113 | 710 | 1 |
@@ -262,3 +262,7 @@ Three historical news pages separate industrial installation figures from tactil
 ## Textile, hybrid and recovery evidence pass
 
 Three existing briefs retain their substantial source-backed sections while correcting yarn geometry/timing, EIT configuration/force boundaries and underwater healing endpoints. Original dates, URLs, anchors and source routes remain. The separate three-channel textile source is still access-limited and excluded from completion. Whole-site review remains incomplete.
+
+## Collection, memory and active perception review
+
+Four existing pages retain substantial source-backed analysis while clarifying glove calibration protocols, simulation source access and licenses, a dated manufacturer demonstration follow-up, and active-perception timing and trial denominators. Original dates, URLs, anchors, images and source routes remain. Whole-site review remains incomplete.
