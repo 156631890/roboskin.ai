@@ -71,9 +71,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/': {
     path: '/',
     title: 'Robot Skin, Tactile AI & Robotics Research',
-    description:
-      'Research robot skin, tactile AI, humanoid robots, robot learning, VLA models, tactile sensors, datasets, and Physical AI with primary-source citations.',
-    updated: '2026-10-30',
+    description: "Explore robot skin and tactile AI through source-linked research, sensors, datasets and practical evaluation guides for robotics decisions.",
+    updated: '2026-11-04',
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -102,9 +101,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/applications': {
     path: '/applications',
     title: 'Robot Skin Applications: Hands, Grippers & Body Surfaces',
-    description:
-      'Explore tactile sensing by robot surface: dexterous hands, gripper pads, soft bodies, and distributed skin. Compare contact signals and evaluation needs.',
-    updated: '2026-10-12',
+    description: "Match robot-skin applications to contact geometry, observations and action. Plan task-level checks for hands, grippers, body surfaces and assistive research.",
+    updated: '2026-11-04',
     priority: 0.82,
     changeFrequency: 'weekly',
     index: true,
@@ -113,9 +111,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/technology': {
     path: '/technology',
     title: 'What Is Tactile Sensing? Robotics Basics & Sensor Types',
-    description:
-      'Learn how tactile sensing works in robotics, how it differs from robot skin and tactile AI, and how to choose sensors, datasets and integration guides.',
-    updated: '2026-10-21',
+    description: "Understand tactile sensing mechanisms, calibration and signal flow; diagnose raw-signal, estimated-force and timing failures before judging a controller.",
+    updated: '2026-11-04',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -178,9 +175,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/faq': {
     path: '/faq',
     title: 'Robot Skin & Tactile Sensing FAQ: Selection, Data & Control',
-    description:
-      'Answers to practical robot skin questions: sensor selection, force calibration, slip detection, tactile datasets, Python, ROS 2, and research evidence.',
-    updated: '2026-09-22',
+    description: "Get practical answers about robot-skin selection, tactile data, force estimates, timing and research evidence, with links to deeper guides.",
+    updated: '2026-11-04',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -231,9 +227,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/organizations': {
     path: '/organizations',
     title: 'Tactile AI & Robotics Research Organizations',
-    description:
-      'Browse source-verified universities, labs, and companies connected to tactile papers, datasets, benchmarks, sensors, and robot AI models with evidence boundaries.',
-    updated: '2026-08-22',
+    description: "Trace robotics organizations to specific papers, datasets, hardware and models; distinguish author affiliation, artifact stewardship and product support.",
+    updated: '2026-11-04',
     priority: 0.78,
     changeFrequency: 'monthly',
     index: true,
@@ -242,9 +237,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/robots': {
     path: '/robots',
     title: 'Robot Platforms for Physical AI Models and Research',
-    description:
-      'Compare source-verified humanoids, robot arms, mobile manipulators, and research setups used to train, evaluate, or demonstrate robot AI models.',
-    updated: '2026-08-22',
+    description: "Compare robot platform evidence by exact hardware, trained or evaluated relationship, adaptation and execution conditions before assuming compatibility.",
+    updated: '2026-11-04',
     priority: 0.8,
     changeFrequency: 'monthly',
     index: true,
@@ -253,9 +247,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/glossary': {
     path: '/glossary',
     title: 'E-Skin Glossary for Robot Skin and Tactile AI Terms',
-    description:
-      'A practical e-skin and electronic skin glossary for robot skin, tactile AI, tactile sensing, slip detection, and source-backed terminology.',
-    updated: '2026-10-12',
+    description: "Read tactile and robot-skin terminology with clear distinctions between resolution, precision, sensitivity, calibration and learned contact estimates.",
+    updated: '2026-11-04',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,
@@ -346,9 +339,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/reports/tactile-ai-robot-skin-landscape-2026': {
     path: '/reports/tactile-ai-robot-skin-landscape-2026',
     title: 'Tactile AI & Robot Skin Report 2026: Free Sample',
-    description:
-      'Preview and download the free RoboSkin research sample: tactile datasets, research signals, primary sources, and a sensor-to-policy evaluation checklist.',
-    updated: '2026-09-22',
+    description: "Use the fixed 2026 tactile-AI sample report with a current reading note. Separate historical dataset snapshots, license evidence and your evaluation decision.",
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     index: true,
@@ -357,8 +349,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/privacy': {
     path: '/privacy',
     title: 'Privacy Policy',
-    description: 'How RoboSkin handles contact form submissions and site usage data.',
-    updated: '2026-09-30',
+    description: "Understand RoboSkin.ai privacy choices for inquiries, analytics, newsletter signup and report membership, including which controls affect which service.",
+    updated: '2026-11-04',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,
@@ -367,8 +359,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/terms': {
     path: '/terms',
     title: 'Terms of Service',
-    description: 'Terms of use for the RoboSkin website and research inquiries.',
-    updated: '2026-05-14',
+    description: "Read RoboSkin.ai terms for public research, paid reports and scoped services. Find the distinct routes for email preferences, renewal and billing support.",
+    updated: '2026-11-04',
     priority: 0.3,
     changeFrequency: 'monthly',
     index: true,

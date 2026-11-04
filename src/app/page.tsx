@@ -45,6 +45,64 @@ const researchDatabases = [
 
 export const metadata: Metadata = buildPageMetadata('/');
 
+const readingGuide = {
+  "id": "choose-evidence-route",
+  "heading": "Start with the decision you need to make",
+  "body": [
+    "A sensor specification, a dataset record and a robot experiment answer different questions. Use the route that matches your decision, then follow its primary sources and stated limits. Directory counts describe the records included here; they are not market totals, quality rankings or counts of independently tested systems."
+  ],
+  "table": {
+    "headers": [
+      "Your decision",
+      "Start with",
+      "Evidence to carry forward"
+    ],
+    "rows": [
+      [
+        "Choose a contact measurement",
+        "Sensor records and application guides",
+        "Exact configuration, calibration, timing and task requirements"
+      ],
+      [
+        "Choose data or a model",
+        "Dataset evidence and model guides",
+        "Available artifacts, permissions, observation/action interfaces and transfer limits"
+      ],
+      [
+        "Interpret a research claim",
+        "Research briefs and benchmark records",
+        "Source version, experimental conditions, metric and what remains untested"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Know what kind of evidence you are reading",
+      "body": [
+        "Author-reported experiments remain attributed to their authors. RoboSkin.ai tutorials identify synthetic fixtures and software checks separately from hardware measurements. Our working paper is a research proposal with a synthetic decision benchmark; it is not a peer-reviewed robot evaluation. Use the editorial policy and source links to keep those distinctions visible."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Compare sensors and their evidence",
+      "href": "/sensors"
+    },
+    {
+      "label": "Inspect dataset access and formats",
+      "href": "/datasets"
+    },
+    {
+      "label": "Read a paper against its experiment",
+      "href": "/research/robot-skin-papers#paper-claim-trace"
+    },
+    {
+      "label": "How we handle evidence and corrections",
+      "href": "/editorial-policy"
+    }
+  ]
+};
+
 export default function Home() {
   return (
     <div className="robo-home">
@@ -129,6 +187,24 @@ export default function Home() {
         </div>
       </section>
 
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing research dates and service terms remain separately identified.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
+
       <section className="contact-field" aria-labelledby="field-heading">
         <div className="container-shell contact-section">
           <div className="contact-section-heading">
@@ -144,7 +220,7 @@ export default function Home() {
                 <figcaption>Material study 02 / AI-generated concept</figcaption>
               </figure>
               <h3>Robot skin turns contact into information</h3>
-              <p>Robot skin detects contact, pressure, shear and slip across hands, grippers and body surfaces. It gives robots information about physical interaction that vision alone cannot provide.</p>
+              <p>Robot skin supplies observations at contact surfaces across hands, grippers and bodies. Pressure, shear or slip estimates depend on the sensor and processing pipeline; their usefulness depends on the task and controller.</p>
               <Link href="/robot-skin" className="contact-text-link">Start with the fundamentals <span aria-hidden="true">↗</span></Link>
             </div>
             <nav className="contact-field-routes" aria-label="Core research topics">

@@ -20,6 +20,79 @@ const reportSections = [
   'Primary-source register with direct URLs',
 ];
 
+const readingGuide = {
+  "id": "report-reading-note",
+  "heading": "Read the fixed edition alongside a current evidence note",
+  "body": [
+    "The downloadable PDF remains the August 17, 2026 edition. Its six dataset records and six research signals are a dated sample, not a claim to exhaust the field or describe current availability. The live directory preview below is a separate view. A new review date on this page does not update the PDF or turn its historical access notes into fresh checks.",
+    "One practical example is FreeTacMan. The current provider dataset card labels the data MIT, while the code repository’s root LICENSE is Apache-2.0. Its README still calls the project MIT. Preserve that source distinction: the sample’s short license label is not a single license for every file, dependency, model or downstream use. We reviewed public documentation, not downloaded dataset contents or executed software."
+  ],
+  "table": {
+    "headers": [
+      "When using the sample",
+      "Record separately",
+      "Decision it supports"
+    ],
+    "rows": [
+      [
+        "Compare a historical entry with today’s directory",
+        "PDF edition, live entry review date and the changed field",
+        "Whether the original shortlist needs to be reconsidered"
+      ],
+      [
+        "Follow a data or code link",
+        "Exact artifact, revision, access result and applicable terms",
+        "Whether further technical and rights review can proceed"
+      ],
+      [
+        "Carry a research result into a proposal",
+        "Reported task, metric, baseline and untested conditions",
+        "Which local validation remains necessary"
+      ],
+      [
+        "Request a focused research brief",
+        "Decision, constraints, deliverable and unresolved evidence",
+        "A scope to agree before scheduling work"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Keep conclusions narrower than the source register",
+      "body": [
+        "A list of source URLs helps trace a claim; it does not prove that every hosted artifact is available, that a policy transfers to a different robot, or that a supplier meets an acceptance criterion. Use the sample to structure those questions, then attach current evidence to the specific decision.",
+        "For a correction, identify the PDF edition, page or entry, original statement and proposed primary source. The historical file can then remain distinguishable from a later correction or edition. The current directory and editorial policy provide the routes for checking evidence and submitting a correction."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "FreeTacMan provider dataset card",
+      "href": "https://huggingface.co/datasets/OpenDriveLab/FreeTacMan"
+    },
+    {
+      "label": "FreeTacMan repository root LICENSE",
+      "href": "https://github.com/OpenDriveLab/FreeTacMan/blob/main/LICENSE"
+    },
+    {
+      "label": "FreeTacMan README: separate license wording",
+      "href": "https://github.com/OpenDriveLab/FreeTacMan"
+    },
+    {
+      "label": "Current dataset evidence",
+      "href": "/datasets"
+    },
+    {
+      "label": "Correction and source policy",
+      "href": "/editorial-policy"
+    },
+    {
+      "label": "Discuss an evidence question",
+      "href": "/contact?requestType=research"
+    }
+  ]
+};
+
 export default function TactileAiRobotSkinSampleReportPage() {
   const documentJsonLd = {
     '@context': 'https://schema.org',
@@ -125,6 +198,24 @@ export default function TactileAiRobotSkinSampleReportPage() {
         </div>
       </section>
 
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. The PDF edition and original research dates remain separate; no independent reproduction.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
+
       <section className="report-dataset-preview" aria-labelledby="dataset-preview-heading">
         <div className="container-shell">
           <div className="report-preview-heading">
@@ -152,7 +243,7 @@ export default function TactileAiRobotSkinSampleReportPage() {
         <div className="container-shell report-final-cta-grid">
           <div>
             <h2>Need the same structure applied to your decision?</h2>
-            <p>The Research Sprint turns one technical or commercial question into a five-day evidence package.</p>
+            <p>Discuss a focused evidence package for one technical or commercial question. Scope, deliverables and timing are agreed before work starts.</p>
           </div>
           <Link href="/research-services#inquiry" className="btn-primary">Request a Research Sprint</Link>
         </div>

@@ -20,7 +20,7 @@ const applicationAreas = [
   },
   {
     title: 'Prosthetics and assistive devices',
-    summary: 'Assistive robotics and prosthetics use touch-related terminology for safer interaction, force awareness, feedback, and human-centered design.',
+    summary: 'Assistive robotics and prosthetics investigate contact sensing and feedback in specific experimental settings. Intended use does not establish clinical effectiveness or safe operation.',
   },
   {
     title: 'Contact-rich manipulation',
@@ -31,7 +31,7 @@ const applicationAreas = [
 const physicalAiUseCases = [
   {
     title: 'Humanoid hands',
-    summary: 'Physical AI needs touch when robot hands must understand contact timing, grip confidence, and object stability.',
+    summary: 'Hand tasks may benefit from contact observations when they help distinguish task-relevant states; evaluate the sensing pathway and resulting action.',
   },
   {
     title: 'Robotic grippers',
@@ -39,11 +39,11 @@ const physicalAiUseCases = [
   },
   {
     title: 'Assistive and medical robotics',
-    summary: 'Tactile sensing gives physical-world AI systems more context for safer force awareness and human-centered interaction.',
+    summary: 'Tactile sensing can provide contact observations for assistive research. Clinical and safety claims require evidence for the particular system and use.',
   },
   {
     title: 'Contact-aware safety surfaces',
-    summary: 'Distributed robot skin can help safety surfaces detect contact events that vision or remote sensing may miss.',
+    summary: 'Distributed skin can detect contact at instrumented surfaces. Coverage, missed events and response timing must be evaluated; detection alone is not a safety guarantee.',
   },
 ];
 
@@ -69,6 +69,71 @@ const applicationTopicLinks = [
     summary: 'Contact-aware jaw pads, slip signals, replacement, and gripper evaluation.',
   },
 ];
+
+const readingGuide = {
+  "id": "application-acceptance-plan",
+  "heading": "Define the contact decision before choosing the surface",
+  "body": [
+    "An application label is too broad to be an acceptance criterion. Describe who or what contacts the robot, where contact occurs, which state must be distinguished, and how the robot should respond. Then choose an observation and evaluation suited to that decision. The examples below are proposed planning cases, not tests performed by RoboSkin.ai.",
+    "Keep perception and action separate in the result. Detecting contact does not prove that the controller reacted in time. Correctly estimating a force does not establish that an object was handled without damage. A task comparison must record the complete outcome, including failures and assistance."
+  ],
+  "table": {
+    "headers": [
+      "Illustrative application",
+      "Observation and response to specify",
+      "Evidence to collect"
+    ],
+    "rows": [
+      [
+        "Gripper handling an object",
+        "Relevant contact or motion estimate and a bounded grip adjustment",
+        "Contact state, command timing, retention, damage and retries"
+      ],
+      [
+        "Hand reorienting an object",
+        "Contact movement across the regions actually used",
+        "Blind spots, pose outcome, assistance and full attempt count"
+      ],
+      [
+        "Body surface contacting the environment",
+        "Contact location and the intended response",
+        "Coverage, missed/false events, timing and configuration-specific task result"
+      ],
+      [
+        "Assistive or medical research",
+        "The experimental setup and permitted human involvement",
+        "Protocol, participants or models used, and the limits of the study"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Use a matched comparison and retain unsuccessful attempts",
+      "body": [
+        "For a proposed evaluation, keep the objects, task instructions, initial conditions, allowed assistance and success rule explicit. Compare the relevant configurations under that protocol. A result on a manikin, bench fixture or controlled research task cannot by itself establish clinical effectiveness or general safety.",
+        "Choose the focused guide for mounting and calibration details, then use the benchmark route to document the metric. Where evidence is missing, record a question for evaluation rather than converting the intended application into a product capability."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Plan hand sensing around task observations",
+      "href": "/applications/robot-hand-tactile-sensor#hand-task-observation"
+    },
+    {
+      "label": "Evaluate a gripper sensing configuration",
+      "href": "/applications/robot-gripper-tactile-sensor"
+    },
+    {
+      "label": "Separate contact and control-loop evidence",
+      "href": "/tactile-manipulation"
+    },
+    {
+      "label": "Compare benchmark protocols",
+      "href": "/benchmarks"
+    }
+  ]
+};
 
 export default function ApplicationsPage() {
   return (
@@ -111,6 +176,24 @@ export default function ApplicationsPage() {
           ))}
         </div>
       </section>
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing research dates and service terms remain separately identified.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
       <TactileTopicSections sections={[surgicalRoboticsSection]} />
 

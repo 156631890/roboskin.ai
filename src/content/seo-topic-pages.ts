@@ -1720,12 +1720,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/applications/robot-hand-tactile-sensor',
     title: 'Robot Hand Tactile Sensor Guide for Dexterous Grasping',
     description:
-      'Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.',
+      "Choose robot-hand sensing by contact location, useful observation and task outcome. Compare coverage, timing and calibration without a universal taxel count.",
     h1: 'Robot hand tactile sensor guide',
     kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
-    updated: '2026-10-24',
-    revisionNote: 'October 24, 2026: clarified sensing positions versus channels, configuration-specific counts, coverage and acceptance timing.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: added task-specific sensing decisions and qualified binary-contact, pressure and slip claims. Configuration counts remain source-specific; no hardware evaluation.",
     priority: 0.81,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1733,11 +1733,75 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['robot hand tactile sensor', 'tactile robot hand', 'robot hand touch sensor', 'dexterous hand tactile sensing', 'robot hand slip detection'],
     quickAnswer: [
       'There is no universal number of tactile sensing positions required for a robot hand. Choose contact coverage and validated resolution for the task, then verify timing and calibration.',
-      'A robot hand tactile sensor measures contact at the hand surface so the robot can understand pressure, slip, grasp stability, and local interaction events.',
+      'A robot hand tactile sensor records a response at the contact surface. Pressure, slip and grasp-stability outputs require a suitable sensing and interpretation pipeline; not every sensor provides them.',
       'Fingertip sensors are useful for pinch and precision tasks, while palm and full-hand skin help with power grasps, handovers, and multi-contact manipulation.',
       'A strong robot hand evaluation covers mounting, wiring, calibration, latency, signal interpretation, and whether tactile data improves a real manipulation task.',
     ],
     sections: [
+      {
+        "id": "hand-task-observation",
+        "heading": "Start with the failure your hand needs to distinguish",
+        "body": [
+          "Choose coverage from the contacts that change a decision. In a proposed pinch task, the question may be whether the object contacts the intended fingertip region; in a power grasp it may be whether the object is seated against the palm; in reorientation it may be how the contact moves along a finger. The sensor layout should make that particular state observable.",
+          "DexSkin provides a bounded research example: the authors sensorize parallel-jaw gripper fingers and evaluate tasks that use contact beyond the tips. That supports studying task-relevant coverage in those setups, not a universal claim that full-hand skin is always necessary or that more taxels always improve performance. Keep its capacitive measurements and calibration separate from an optical fingertip’s image stream."
+        ],
+        "table": {
+          "headers": [
+            "Proposed task question",
+            "Observation to evaluate",
+            "Failure the comparison should retain"
+          ],
+          "rows": [
+            [
+              "Did intended contact occur?",
+              "A calibrated threshold or contact event at the relevant surface",
+              "Missed contacts, false triggers and event timing"
+            ],
+            [
+              "Is the object seated as intended?",
+              "Contact location or distribution across the contacted regions",
+              "Blind spots and similar total load with different contact patterns"
+            ],
+            [
+              "Is the object moving relative to the hand?",
+              "A task-validated motion or slip estimate over time",
+              "Confusion with intended rolling, vibration or changing normal load"
+            ],
+            [
+              "Can feedback improve the manipulation?",
+              "Fresh observations connected to a specified action rule",
+              "Dropped objects, damage, retries, assistance and elapsed time"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Choose the smallest useful observation, then test the complete loop",
+            "body": [
+              "A binary contact signal can be useful when the decision is genuinely binary. A spatial map or force estimate is justified when the task needs that additional information and the system can validate it. More channels add calibration, transport and interpretation work; they are not a substitute for identifying the state that matters.",
+              "For a proposed comparison, hold the task, objects, success rule and allowed assistance explicit. Record whether touch changes an action or is merely logged. Evaluate failures and recovery as well as successful grasps, and repeat relevant checks after replacing a contact surface. The table is a planning aid, not a claim that RoboSkin.ai ran these trials."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "DexSkin: coverage and task-specific evaluation",
+            "href": "https://arxiv.org/html/2509.18830v1#S4"
+          },
+          {
+            "label": "Specify a slip evaluation and feedback response",
+            "href": "/guides/slip-detection-robot-hand"
+          },
+          {
+            "label": "Separate hardware and policy metrics",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Compare exact uSkin configurations",
+            "href": "/sensors/xela-uskin"
+          }
+        ]
+      },
 {
   "heading": "How many tactile sensing positions does a robot hand need?",
   "body": [
@@ -1850,7 +1914,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'What a useful hand sensor must report',
         body: [
-          'A useful tactile hand sensor reports more than a contact yes-or-no value. It should give the robot contact location, timing, pressure or force distribution, and enough signal quality to support decisions.',
+          'A useful tactile hand sensor reports the observation required by the task. A contact event can support a binary decision; location, distribution or force estimates require additional sensing and validation when those quantities matter.',
           'Slip response is a common target, but teams should be precise. Detecting slip in a lab setup is different from using that signal to adjust grip during a moving, occluded, real-world task.',
         ],
       },
@@ -1872,7 +1936,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Do robot hands need fingertip sensors or full-hand sensing?',
         answer:
-          'It depends on the task. Fingertips are enough for some pinch grasps, but palm and full-hand sensing are more useful for power grasps, handovers, and multi-contact tasks.',
+          'It depends on the task. Fingertips can cover some pinch contacts. Palm or side sensing may help when those regions contact the object; the useful coverage and resulting benefit must be evaluated for the intended task.',
       },
       {
         question: 'What should a robot hand tactile sensor page prove?',
@@ -2870,14 +2934,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    revisionNote: "November 4, 2026: added a claim-to-evidence reading method and a synthetic-data example. Original research briefs and publication dates retained; no reproduction claimed.",
     path: '/research/robot-skin-papers',
     title: 'Robot Skin Papers and Tactile Sensing Research Index',
     description:
-      'Browse source-backed robot skin papers and research routes for tactile sensing, e-skin, soft robotic skin, robot hands, and tactile AI.',
+      "Read robot-skin papers by claim, experiment and artifact. Follow source versions, sensing evidence and task metrics into the relevant research route.",
     h1: 'Robot skin papers and tactile sensing research index',
     kicker: 'Research guide',
     intent: 'Research index for robot skin papers, tactile AI papers, e-skin research, and source-backed technical briefs.',
-    updated: '2026-06-06',
+    updated: "2026-11-04",
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2889,6 +2954,74 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use it as a starting point for understanding which papers map to materials, sensor arrays, full-hand sensing, software pipelines, and application constraints.',
     ],
     sections: [
+      {
+        "id": "paper-claim-trace",
+        "heading": "Turn a paper into a checkable claim, not a technology endorsement",
+        "body": [
+          "Start with the decision the paper could change. A material response may justify a sensor experiment; a calibrated sensor result may justify an integration trial; a task comparison may justify evaluating a policy. These are different conclusions. Record the smallest claim supported by the experiment before deciding what to build or buy.",
+          "For example, SoftMimicGen studies synthetic demonstrations for deformable-object manipulation. Its March 26, 2026 paper describes a data-generation pipeline and policy evaluations. A successful generated demonstration is an accepted training sample; it is not itself a successful trial of a policy learned from those samples. Neither result establishes a tactile measurement that the experiment did not collect."
+        ],
+        "table": {
+          "headers": [
+            "Reading step",
+            "Evidence to retain",
+            "Question before transferring the result"
+          ],
+          "rows": [
+            [
+              "Identify the claim",
+              "Paper version, section or table, authors and publication status",
+              "Is this a stated goal, measured outcome or interpretation?"
+            ],
+            [
+              "Describe the experiment",
+              "Sensor, robot, objects, protocol, metric and denominator",
+              "Which conditions resemble the intended deployment?"
+            ],
+            [
+              "Inspect the comparison",
+              "Baseline, data budget, assistance and aggregation rule",
+              "Are the differences attributable to the proposed component?"
+            ],
+            [
+              "Trace the artifact",
+              "Exact code/data/model revision and its access terms",
+              "Does the available artifact cover the reported experiment?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Write the uncertainty beside the result",
+            "body": [
+              "A useful evidence note names both what was shown and what remains untested. If only an abstract is accessible, record that limit; do not infer the missing protocol from a publicity summary. If a later paper version changes a table, cite the version actually read and keep the earlier comparison distinguishable.",
+              "Use this page to choose a research route, the structured index to compare recorded attributes, and individual research briefs for method-level analysis. The workflow above is an editorial reading aid. It does not mean RoboSkin.ai executed the referenced code or independently reproduced the results."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "SoftMimicGen: original paper and version history",
+            "href": "https://arxiv.org/abs/2603.25725"
+          },
+          {
+            "label": "Read the SoftMimicGen method and metric analysis",
+            "href": "/research/softmimicgen-synthetic-data-sim-to-real-2026"
+          },
+          {
+            "label": "Compare research evidence fields",
+            "href": "/research-index"
+          },
+          {
+            "label": "Separate benchmark metrics and protocols",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Check data access and license evidence",
+            "href": "/datasets"
+          }
+        ]
+      },
       {
         heading: 'How to read robot skin papers',
         body: [
@@ -5402,15 +5535,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['missing-touch-spatial-tactile-feedback-teleoperation-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
   },
   {
+    revisionNote: "November 4, 2026: rechecked the grant and publication records and added a source-selection guide. Historical dates remain unchanged; full chapter access and modern product performance are not claimed.",
     path: '/research/eu-roboskin-project',
     title: 'EU ROBOSKIN Project (2009-2012): History and Research',
     description:
-      'A source-backed record of the EU FP7 ROBOSKIN project, its robot-skin research scope, funding, partners, 2013 Springer paper, and relationship to RoboSkin.ai.',
+      "Verify the historical EU ROBOSKIN grant and 2013 paper separately. Distinguish project objectives, archived records and present-day robot-skin evidence.",
     h1: 'The EU FP7 ROBOSKIN project: history, scope and sources',
     kicker: 'Historical research project',
     intent: 'Entity and disambiguation page for the ROBOSKIN project, EU robot skin research, FP7-231500, and the 2013 ROBOSKIN conference paper.',
     published: '2026-08-20',
-    updated: '2026-08-20',
+    updated: "2026-11-04",
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -5422,6 +5556,74 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The former EU ROBOSKIN consortium and the current RoboSkin.ai website are separate entities. RoboSkin.ai did not participate in the FP7 project and does not claim endorsement by its authors, partners, Springer Nature, or the European Commission.',
     ],
     sections: [
+      {
+        "id": "historical-source-selection",
+        "heading": "Choose the source that can answer the historical question",
+        "body": [
+          "The grant record and the research paper serve different purposes. CORDIS establishes the formal project identity; the Springer record identifies a later publication. Neither a record archive date nor this page’s review date changes when the project ran. Cite the relevant original record when making a historical statement.",
+          "The public Springer abstract and bibliographic record were reviewed for this page. The full subscription chapter was not inspected during this update, so no new detailed experimental results are inferred from it. The CORDIS objectives describe intended work, not a list of commercially certified capabilities."
+        ],
+        "table": {
+          "headers": [
+            "Question",
+            "Best starting source",
+            "Limit of that source"
+          ],
+          "rows": [
+            [
+              "What was funded, and when?",
+              "CORDIS grant 231500",
+              "Funding and objectives do not quantify achieved sensor performance"
+            ],
+            [
+              "Which publication discusses the project?",
+              "Springer DOI and the university publication record",
+              "Public abstract and metadata do not expose the full experimental protocol"
+            ],
+            [
+              "Can a present robot use the technology?",
+              "Current hardware, interface and evaluation documentation",
+              "Historical consortium participation does not establish current supply or support"
+            ],
+            [
+              "Is the present RoboSkin.ai site affiliated?",
+              "The independent-site disclosure on this page",
+              "A shared name is not evidence of institutional continuity"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Use the history to frame a modern engineering question",
+            "body": [
+              "The enduring question is how distributed contact observations become useful robot behavior. For a current system, ask which body regions are covered, how observations are calibrated and timed, and which action changes because of contact. Answer those questions with evidence from the current configuration rather than transferring an old project objective into a new specification.",
+              "Preserve the grant identifier and publication DOI in a citation note. Add the claim being supported and the source section, so a reader can distinguish project administration from research evidence. This is a suggested reading practice, not a claim that the historical consortium validated present-day products."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "CORDIS: formal grant record",
+            "href": "https://cordis.europa.eu/project/id/231500"
+          },
+          {
+            "label": "Springer: chapter record and public abstract",
+            "href": "https://link.springer.com/chapter/10.1007/978-3-7091-1379-0_43"
+          },
+          {
+            "label": "University of Hertfordshire: publication metadata",
+            "href": "https://researchprofiles.herts.ac.uk/en/publications/the-roboskin-project-challenges-and-results/"
+          },
+          {
+            "label": "Current large-area skin integration questions",
+            "href": "/humanoid-robot-skin"
+          },
+          {
+            "label": "Current sensing and signal interpretation",
+            "href": "/technology"
+          }
+        ]
+      },
       {
         heading: 'Verified project record',
         body: [

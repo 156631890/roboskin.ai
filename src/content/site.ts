@@ -746,7 +746,7 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
   {
     question: 'What is robot skin?',
     answer:
-      'Robot skin is a tactile sensing surface that helps robots detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces. It gives Physical AI systems a contact layer that vision alone cannot provide.',
+      'Robot skin integrates contact sensors with a robot surface, electronics and data handling. Available pressure, shear or slip estimates depend on the sensing pipeline. Contact observations can complement vision, particularly where the interaction is occluded.',
     href: '/glossary',
     ctaLabel: 'Open the robot skin glossary',
     image: '/generated/authority/robot-skin-definition.webp',
@@ -755,7 +755,7 @@ export const directAnswerBlocks: DirectAnswerBlock[] = [
   {
     question: 'What is tactile AI?',
     answer:
-      'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior. It can support grasp confidence, slip response, contact-aware motion, safety reflexes, and evaluation analytics for Physical AI systems.',
+      'Tactile AI applies learned methods to contact observations for perception, prediction or robot action. An inferred contact state and a successful feedback response are different outputs; each needs evaluation in its intended sensing and task conditions.',
     href: '/research',
     ctaLabel: 'Browse tactile AI research',
     image: '/generated/authority/tactile-ai-loop.webp',
@@ -1392,7 +1392,7 @@ export const faqItems: FaqItem[] = [
   },
   {
     question: 'Where can I find tactile datasets with usable downloads?',
-    answer: 'The dataset directory distinguishes verified files from paper-described collections. Check each provider link, data license, sensor modality, task, and train/test split before reuse.',
+    answer: 'The dataset directory distinguishes inspected provider manifests, linked but unverified routes, gated resources and paper-described collections. A public file listing is not a payload validation or permission for every use. Check the record’s access date, data license, modality and split evidence.',
     ctaLabel: 'Check tactile dataset access', href: '/datasets',
   },
   {
@@ -1415,6 +1415,25 @@ export const faqItems: FaqItem[] = [
     answer: 'Send the page URL, the statement to review, and a primary paper or official document. The editorial policy explains attribution and the separation between reported results and our interpretation.',
     ctaLabel: 'Send a source or correction', href: '/contact?requestType=research',
   },
+  {
+    "question": "Does a high sensor update rate mean fast robot feedback?",
+    "answer": "No. Distinguish sampling, complete-array delivery, processing, model inference and command application. A fast partial readout does not establish a fresh full-surface observation or a low contact-to-action delay. Record timestamps and the clock relationship for the complete path.",
+    "ctaLabel": "Trace sensing and controller timing",
+    "href": "/guides/ros2-tactile-sensing"
+  },
+  {
+    "question": "Does a benchmark score establish transfer to my robot?",
+    "answer": "Only the reported conditions were evaluated. Check which objects, tasks, sensors and robots were held out, what adaptation data was used and which components were retrained. A frozen-encoder probe, fine-tuned policy and real-robot task result answer different questions.",
+    "ctaLabel": "Compare adaptation and transfer evidence",
+    "href": "/tactile-foundation-models"
+  },
+  {
+    "question": "Can a larger taxel count settle a sensor comparison?",
+    "answer": "No. Count physical sensing positions separately from axes, channels and reconstructed pixels. Then compare contact coverage, blind spots, useful resolution, full-array timing and the outcome of the intended task. Different hand configurations are not a ranking by count.",
+    "ctaLabel": "Plan hand coverage and taxel count",
+    "href": "/applications/robot-hand-tactile-sensor#taxel-count-and-coverage"
+  },
+
 ];
 
 export const glossaryTerms: GlossaryTerm[] = [

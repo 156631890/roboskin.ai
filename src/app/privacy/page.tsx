@@ -1,9 +1,69 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/privacy');
+
+const readingGuide = {
+  "id": "privacy-controls",
+  "heading": "Find the control for the information you want to manage",
+  "body": [
+    "The controls below apply to different activities. Changing one preference does not automatically change the others. The sections that follow explain the information involved and the providers used."
+  ],
+  "table": {
+    "headers": [
+      "Your request",
+      "Where to act",
+      "What it does not do"
+    ],
+    "rows": [
+      [
+        "Change Google Analytics consent",
+        "Analytics settings in the footer, when enabled",
+        "Does not control the separate cookie-free statistics described below"
+      ],
+      [
+        "Stop free Newsletter emails",
+        "The named provider’s unsubscribe controls, when signup is available",
+        "Does not cancel paid report membership"
+      ],
+      [
+        "Stop report notification emails",
+        "Your report membership page",
+        "Does not cancel subscription renewal"
+      ],
+      [
+        "Ask about a submitted inquiry or stored information",
+        "The privacy email below",
+        "Does not itself confirm that deletion has been completed"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Send only the context needed for the request",
+      "body": [
+        "Identify the relevant service and the email address or page involved so we can locate your request. Do not send passwords, sign-in codes or payment-card numbers. The retention and deletion qualifications below still apply."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Privacy contact",
+      "href": "#privacy-contact"
+    },
+    {
+      "label": "Report membership",
+      "href": "/weekly-reports"
+    },
+    {
+      "label": "Billing and cancellation information",
+      "href": "/terms#subscription-controls"
+    }
+  ]
+};
 
 export default function PrivacyPolicyPage() {
   return (
@@ -14,9 +74,27 @@ export default function PrivacyPolicyPage() {
           <div className="container-shell">
             <span className="eyebrow">Privacy</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Privacy Policy</h1>
-            <p className="mt-5 max-w-3xl">Last updated: October 27, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: October 27, 2026. Navigation guide reviewed November 4, 2026.</p>
           </div>
         </header>
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing research dates and service terms remain separately identified.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-inherit">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-black/20 p-4 text-inherit">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-black/20 p-4 align-top text-inherit">{text}</th> : <td key={text} className="border-b border-black/20 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-inherit">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-inherit underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
         <section className="legal-content">
           <div className="container-shell">
@@ -76,7 +154,7 @@ export default function PrivacyPolicyPage() {
                 </p>
               </div>
               <div>
-                <h2 className="text-2xl font-semibold">Contact</h2>
+                <h2 id="privacy-contact" className="text-2xl font-semibold">Contact</h2>
                 <p className="mt-3">
                   For privacy questions, email <a className="legal-link" href={`mailto:${site.contact.privacyEmail}`}>{site.contact.privacyEmail}</a>.
                 </p>
