@@ -5360,54 +5360,78 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
   {
     id: 'color-changing-mechanochromic-tactile-sensor-2026',
     title: 'Color-changing tactile sensor turns robot contact into real-time pressure maps',
-    seoTitle: 'Color-Changing Tactile Sensor Maps Robot Contact Pressure',
+    seoTitle: 'Mechanochromic Tactile Sensing: Colour and Calibration',
+    seoDescription: 'Understand colour-changing tactile sensing, its evidence limits and the optical, calibration and timing checks needed before robot integration.',
     excerpt:
       'A Queen Mary-led mechanochromic sensor converts contact, strain, and pressure into visible color fields that a standard camera can observe in real time.',
     content: `# Color-changing tactile sensor turns robot contact into real-time pressure maps
 
-**News brief - July 2026**
+**Historical news brief - July 2026. Evidence reviewed November 3–4, 2026.**
 
-Researchers led by Queen Mary University of London reported a tactile sensor that converts mechanical interaction directly into changing structural colors. A camera observes those color fields as contact, strain, and pressure maps, making the material itself part of the tactile encoding process.
+A colour-changing sensing material can make deformation visible to a camera. Turning that observation into a calibrated contact quantity remains a separate engineering question. This review explains the distinction using the July 3, 2026 paper and Queen Mary's institutional report, then provides an original evaluation plan for teams considering a camera-based sensing surface.
 
 ## What the researchers reported
 
-When pressure is applied to the soft sensing surface, the material produces spatially varying color patterns. The university report states that a standard low-cost USB camera can capture the signal in real time. The approach is designed to reduce dependence on dense electronic taxel arrays and heavy reconstruction pipelines.
+The university describes a mechanochromic surface whose structural colour changes under mechanical interaction. A standard USB camera reads the resulting spatial patterns. The report presents this as a way to encode contact information in the material's optical response and reduce reconstruction complexity. Its real-time wording does not provide a numeric sensor-to-controller latency in the material reviewed here. [Queen Mary report](https://www.qmul.ac.uk/news/latest-news/2026/science-and-engineering/se/robots-can-now-see-touch-thanks-to-a-new-colour-changing-tactile-sensor.html).
 
-The work uses mechanochromic materials: deformation changes their optical response, so mechanical cues become visible information. The researchers position the method for precision grippers, prosthetics, and surgical systems where small pressure changes matter.
+The [paper's public PMC copy](https://pmc.ncbi.nlm.nih.gov/articles/PMC13330820/) adds a crucial distinction: direct colour visualization is not the same as a calibrated pressure estimate. The authors combine measured hue–strain behavior with finite-element modeling for strain maps. Their writing/drawing pressure test uses a 3 mm stylus, a selected layer-thickness ratio and a load-cell reference normalized by the stylus area. These conditions support a particular measurement, not a universal colour-to-force conversion.
+
+The Discussion also identifies angle-dependent colour shifts: changing curvature or camera distance can affect calibration. Cyclic fatigue and possible hue–strain hysteresis remain future investigations. These source-specific limits make mounting, optical geometry and service checks relevant rather than optional assumptions. No full robot-loop latency or clinical validation is established by this review.
 
 ## Why this matters for robot skin
 
-Vision-based tactile sensors are already important in robotics, but many systems reconstruct contact geometry from internal images using significant calibration and computation. Encoding pressure into the optical signal could simplify part of that path.
+The integration question shifts from counting electrical channels to defining an optical measurement. The camera observes an image; a physical interpretation needs a reference and a known configuration. A visible colour difference alone does not identify whether a change arose from contact, material deformation or the acquisition conditions.
 
-The broader lesson is that tactile sensing does not have to begin with one electrical channel per sensing point. Materials can perform part of the encoding before software receives the data. That may create new trade-offs among spatial resolution, latency, camera bandwidth, lighting control, durability, and manufacturability.
+For a proposed evaluation, separate the stages below. This table is editorial guidance, not a reported experiment or an assertion that the prototype failed these checks.
+
+| Stage | Record before comparing runs | Question to resolve |
+| --- | --- | --- |
+| Contact and material | Fixture, surface state, mounting and load reference | Which physical condition changed? |
+| Optical acquisition | Camera position, lighting, exposure and colour settings | Are images comparable under the same acquisition setup? |
+| Interpretation | Raw image, mapping method and calibration revision | Which quantity is estimated, in what units? |
+| Decision | Consumer, threshold or model, timestamps and fallback | What action uses the estimate, and when? |
+
+Preserve raw images alongside derived values. If the colour-to-quantity mapping changes later, the original observation helps distinguish a processing revision from a different contact. The [calibration guide](/guides/tactile-sensor-calibration) explains why an image baseline, geometric reconstruction and force reference answer different questions.
+
+### A small evaluation that separates the causes
+
+Start with a fixed optical setup and a declared mechanical reference. Repeat the same reference condition before changing the load or geometry. Then vary one acquisition condition while holding the mechanical reference fixed. This proposed comparison asks whether the output follows the intended input or an uncontrolled change; it supplies no result or universal acceptable tolerance.
+
+Next, test the combinations that the intended task will produce. A mapping established under one contact shape or mounting condition should not silently become a specification for all surfaces. Keep repeated trials and held-out conditions separate, and retain examples where interpretation is uncertain.
+
+Finally, time the complete observation-to-decision path. An image arriving quickly and an action occurring quickly are separate events. Record acquisition, processing and consumer timing with a defined clock relationship before making a controller-rate claim.
 
 ## What this does not prove yet
 
-The report does not establish that the sensor is ready for industrial deployment or that it outperforms every existing vision-based tactile sensor. Real robot use would still need evidence on repeatability, calibration drift, hysteresis, surface wear, contamination, camera placement, and performance across curved or large areas.
+The institutional description does not establish service life, reliable performance after contamination or remounting, industrial availability, or suitability for medical use. Application possibilities in a university story are not clinical validation or a procurement specification.
+
+Nor does simpler optical encoding remove the need for calibration, electronics, software or maintenance. Compare complete configurations against the same task and reference. Do not infer that every camera-based tactile sensor uses an equally costly reconstruction method, or that this route is universally faster or cheaper.
 
 ## Where this fits next
 
-The [tactile sensing technology map](/technology) explains how a sensing surface connects to signal processing and robot control. The [robot gripper tactile sensor guide](/applications/robot-gripper-tactile-sensor) frames pressure mapping as one part of grasp stability, slip response, and integration.
+The [tactile sensing technology map](/technology) places optical encoding beside other sensing mechanisms. The [robot gripper tactile sensor guide](/applications/robot-gripper-tactile-sensor) connects the measurement to grasp stability and integration. For service planning, use the [optical sensor maintenance guide](/guides/optical-tactile-sensor-maintenance) to separate surface changes, imaging faults and calibration checks.
 
 ## Practical questions
 
-- What is mechanochromic sensing? It uses a material whose visible optical response changes under mechanical deformation.
-- Why use a camera? A camera can capture a spatial field without routing a separate electrical channel from every sensing point.
-- What should be compared next? Spatial resolution, response time, reconstruction cost, lighting sensitivity, durability, and calibration over repeated contact.
+- **Does a colour image directly give force?** A physical estimate needs an appropriate calibration and independent reference; visual contrast alone is not a force-accuracy claim.
+- **Does real-time mean a verified robot-loop rate?** No complete numeric timing result was established in the source scope of this review.
+- **What should a team request?** Raw and processed examples, calibration conditions, repeated and held-out measurements, acquisition settings and timing definitions.
+- **What should happen after replacement?** Recheck the observation and mapping under the new assembly rather than assuming the previous calibration transfers unchanged.
 
 ## Source boundary
 
-This brief summarizes the Queen Mary University report and linked Science Advances work. RoboSkin.ai did not test the sensor and does not claim product availability or comparative performance.
+The mechanism and experimental conditions are attributed to Queen Mary's report and the paper's Results, Discussion and Methods, read through its public PMC copy. The direct publisher route was inaccessible; no access restriction was bypassed. The evaluation plan is RoboSkin.ai editorial analysis. We did not fabricate or operate the sensor, reproduce the paper, validate a clinical application or verify current product availability.
 
 ## Sources
 
 - [Queen Mary University of London: Robots can now see touch through a color-changing tactile sensor](https://www.qmul.ac.uk/news/latest-news/2026/science-and-engineering/se/robots-can-now-see-touch-thanks-to-a-new-colour-changing-tactile-sensor.html)
 - [Science Advances paper DOI](https://doi.org/10.1126/sciadv.aee5236)
+- [Public PMC copy: High-resolution real-time mechanochromic tactile sensors](https://pmc.ncbi.nlm.nih.gov/articles/PMC13330820/)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-07-20',
-    readTime: '4 min read',
+    updated: '2026-11-04',
+    readTime: '5 min read',
     category: 'Tactile sensors',
     image: '/generated/pages/technology-signal-flow.webp',
     sourceTitle: 'Queen Mary color-changing tactile sensor report',
@@ -5427,56 +5451,74 @@ This brief summarizes the Queen Mary University report and linked Science Advanc
   {
     id: 'single-pixel-tactile-skin-compressive-sampling-2026',
     title: 'Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch',
-    seoTitle: 'Single-Pixel Tactile Skin Reduces Robot Sensor Wiring',
+    seoTitle: 'Single-Pixel Tactile Skin: Readout and Reconstruction Limits',
+    seoDescription: 'Separate single-output tactile acquisition, reconstructed maps, classification and robot control using the public SPTS preprint and an evaluation checklist.',
     excerpt:
       'A flexible 10 x 10 tactile array uses compressive sampling and one summed output channel to reduce wiring and readout demands for responsive robot skin.',
     content: `# Single-pixel tactile skin targets the wiring bottleneck in large-area robot touch
 
-**News brief - July 2026**
+**Historical news brief - July 2026. Evidence reviewed November 3–4, 2026.**
 
-A Communications Engineering paper presents Single-Pixel Tactile Skin, a flexible tactile array that applies compressive sampling in hardware. Instead of reading every sensing element independently, the array combines programmable weighted signals into one output channel and reconstructs tactile images from repeated global measurements.
+Single-Pixel Tactile Skin uses a shared output to reconstruct observations from many sensing locations. “Single pixel” names the readout approach, not a skin containing one physical contact element. Its effective reconstruction rate should also remain separate from the time needed to make and execute a robot decision.
 
 ## What the paper reported
 
-The prototype uses a flexible, daisy-chainable 10 x 10 array. Each sensing element applies a programmable analog weight, and the pixel currents are summed into a single channel. Sparse-recovery methods then reconstruct the contact image.
+The public [November 21, 2025 preprint](https://arxiv.org/abs/2511.16898) describes a 10 × 10 resistive array with per-cell weighting electronics, shared control/clock lines and a summed analog output. A learned tactile dictionary supports reconstruction from successive measurements. The publisher route is retained below, but its current full text was inaccessible in this review; the detailed checks here refer to the author preprint, not an assumed identical journal version.
 
-In the reported experiments, the system achieved at least 98% object-classification accuracy with 20 measurements, corresponding to an effective 3,500 frames per second. It also captured an 8 millisecond projectile impact in 23 reconstructed frames. The authors describe progressive reconstruction: a robot can localize contact from fewer measurements and refine the image as more data arrives.
+The preprint evaluates 17 objects with 10 indentations each. It reports at least 98% classification accuracy at 20 measurements and an effective 3,500 FPS. A separate impact experiment uses 25 measurements per reconstruction and reports approximately 23 frames during an 8 ms bounce. These are author results with different measurement settings, not one combined operating specification. The methods also describe overlapping classification windows and voting; reconstructed frames are not automatically independent trials. [Preprint Results and Methods](https://arxiv.org/pdf/2511.16898).
 
 ## Why this matters for robot skin
 
-Large-area tactile skin creates a scaling problem. More sensing points usually mean more wires, more readout channels, more bandwidth, and more failure points. A body-scale sensor cannot be evaluated only by sensitivity at one pixel; the data path must also remain practical as coverage grows.
+The design moves part of the information-selection problem into acquisition. That makes the evaluation question more specific than “how fast is the sensor?” A team needs to know how much observation is collected, how reconstruction uses it, and when a sufficiently reliable result becomes available for its task.
 
-Compressive sampling changes the trade-off. Rather than demanding a complete raster scan before acting, the system can use a coarse early estimate and improve it over time. That is relevant to robots that need a fast contact location first and detailed contact shape second.
+| Stage | Quantity to report | Boundary to preserve |
+| --- | --- | --- |
+| Acquire projections | Number and timing of measurements | One summed value is not a complete spatial map |
+| Reconstruct contact | Settings, retained observations and reconstruction time | An effective frame rate is not full controller latency |
+| Classify or localize | Task, reference, evaluation unit and decision time | A class label and contact-location error are different metrics |
+| Act on the result | Consumer, action timing and physical outcome | A sensing experiment is not a closed-loop task-success result |
+
+This is an editorial reporting framework. It does not add timing measurements to the paper. The [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026) explains how raw, processed and decision records can retain their identities through a software system.
+
+### Choose the measurement budget for the decision
+
+Suppose an integration team first needs approximate contact location, then a more detailed shape estimate. It can evaluate those as separate decisions, each with its own reference and acceptable uncertainty. An early estimate should not inherit the quality of a later reconstruction that used more evidence.
+
+Keep the selected measurement budget, reconstruction revision and input interval with each output. When comparing two settings, hold the physical task and outcome definition constant. Record incomplete, uncertain and incorrect outputs as well as successful ones. This proposed procedure prevents a comparison from silently changing both the evidence available and the task being scored.
 
 ## What this does not prove yet
 
-The publisher labels the current article as an unedited early version. The reported classification and impact results are specific to the prototype and experimental setup. They do not yet prove performance on full robot bodies, in cluttered environments, or after long-term mechanical wear.
+The study does not establish a universally sufficient number of measurements for arbitrary contact patterns. A useful adoption check would include unfamiliar objects, changed mounting and simultaneous contacts under a declared evaluation split. These are proposed tests, not failures observed by RoboSkin.ai.
 
-The architecture also introduces reconstruction assumptions and distributed electronics at each sensing element. Wiring is reduced, not eliminated, and teams would still need to evaluate power, synchronization, fault isolation, calibration, and latency in a complete robot.
+Shared readout also does not mean electronics or wiring disappear. An integration plan still needs power, configuration, synchronization and diagnosis. Ask how a team would distinguish a changed sensing element from a shared acquisition or reconstruction problem, and what calibration evidence remains valid after service.
+
+Do not compare reconstructed contact support with force accuracy. The former concerns where contact is identified; the latter requires a physical reference, units and an error definition. The [calibration guide](/guides/tactile-sensor-calibration) helps make that distinction explicit.
 
 ## Where this fits next
 
-The [robot skin definition guide](/robot-skin) explains why body coverage changes the sensing problem. The [ROS 2 tactile data pipeline](/research/ros2-kilted-tactile-pipeline-2026) adds the software side: timestamps, message structure, recording, and replay after tactile data leaves the surface.
+The [robot skin definition guide](/robot-skin) explains why coverage matters. The [flexible array guide](/guides/flexible-tactile-sensor-array) addresses installed geometry and integration. For a different readout design, the [OpenTac interpretation](/research/opentac-custom-tactile-skins-readout-limits-2026) distinguishes partial sampling from full-array acquisition; the two methods should not be ranked by an unqualified maximum-rate figure.
 
 ## Practical questions
 
-- What is the single pixel? It refers to the shared output used to reconstruct the array, not a skin with only one physical sensing location.
-- Why use compressive sampling? It can recover useful spatial information from fewer global measurements than a complete point-by-point scan.
-- What should be tested next? Larger arrays, multiple simultaneous contacts, damaged pixels, long-term drift, controller latency, and robot-scale integration.
+- **Is there only one sensing location?** No. The shared output carries information from an array.
+- **Is 3,500 FPS a robot control rate?** No complete sensing-to-actuation rate follows from the quoted effective reconstruction figure.
+- **Can a few measurements always replace a full scan?** Choose and validate the budget for the observation and task; do not assume one setting transfers to all contacts.
+- **What should a reproducibility record contain?** Source version, array configuration, raw measurements, reconstruction settings, evaluation split, timing definitions and failure cases.
 
 ## Source boundary
 
-This brief summarizes the published paper and adds RoboSkin.ai systems context. All quantitative results belong to the cited study and have not been independently reproduced by RoboSkin.ai.
+RoboSkin.ai read the public preprint's results and methods. We did not operate the sensor, run its reconstruction code, download a dataset or verify current code/data licensing. The publisher's present version status was not established, so the earlier statement describing it as an unedited early article is not repeated as a current fact.
 
 ## Sources
 
 - [Communications Engineering: Single-Pixel Tactile Skin via compressive sampling](https://www.nature.com/articles/s44172-026-00697-2)
 - [arXiv preprint: Single-Pixel Tactile Skin via Compressive Sampling](https://arxiv.org/abs/2511.16898)
+- [Public author preprint PDF](https://arxiv.org/pdf/2511.16898)
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-07-20',
-    readTime: '5 min read',
+    updated: '2026-11-04',
+    readTime: '4 min read',
     category: 'Robot skin systems',
     image: '/generated/research-scalable-manufacturing-2025.svg',
     sourceTitle: 'Communications Engineering single-pixel tactile skin paper',
@@ -5743,55 +5785,60 @@ RoboSkin.ai reviewed the F-TAC Hand publisher article and Meta's dated announcem
   {
     id: 'global-robot-installations-542000-physical-ai-touch',
     title: 'Global robot installations passed 542,000 units: why Physical AI needs touch',
-    seoTitle: 'Global Robot Installations Pass 542,000: Why Touch Matters',
+    seoTitle: 'IFR 2024 Industrial Robots: Installation and Tactile Limits',
+    seoDescription: 'Read 542,000 industrial robot installations as historical market context, then define a task-level sensing trial without inferring tactile adoption.',
     excerpt:
-      'IFR data shows 542,000 industrial robots were installed in 2024. For Physical AI, the next bottleneck is contact, tactile sensing, and robot skin.',
+      'Historical IFR installation data provides context for task-level sensing decisions; it does not measure tactile adoption or a market for robot skin.',
     content: `# Global robot installations passed 542,000 units: why Physical AI needs touch
 
-**News brief - June 2026**
+**Historical news brief - June 2026. Evidence reviewed November 3–4, 2026.**
 
-Global industrial robot deployment remains near record levels. According to the International Federation of Robotics, 542,000 industrial robots were installed worldwide in 2024, more than double the level recorded ten years earlier. Annual installations stayed above 500,000 units for the fourth consecutive year.
-
-The regional pattern is also clear. Asia accounted for 74% of new industrial robot deployments in 2024, compared with 16% in Europe and 9% in the Americas. China remained the largest market, with 295,000 installations and 54% of global deployments. The global operational stock of industrial robots reached 4.664 million units, up 9% year over year.
-
-For robot skin and tactile AI, this matters because scale changes the problem. When robots are deployed in larger numbers, the limiting factor is not only motion planning or visual recognition. Robots that work around parts, packages, tools, shelves, people, and deformable objects need local contact evidence. They need to know when they touched something, how hard they pressed, whether an object is slipping, and whether a grasp remains stable.
-
-That is where tactile sensing becomes relevant to Physical AI. Vision can guide a robot toward a target, but contact-rich work happens after the hand, gripper, tool, or arm reaches the object. Robot skin gives Physical AI systems a contact layer that cameras alone cannot provide.
+IFR's 542,000 figure counts industrial robots installed in 2024. It does not count tactile-equipped robots or establish demand for a particular skin technology. The practical question for an automation team is whether a specific operation lacks contact information, and whether a sensing change can improve that operation under its actual constraints.
 
 ## Key data points
 
-- 542,000 industrial robots installed worldwide in 2024.
-- 4.664 million industrial robots in operational use.
-- Asia represented 74% of new deployments.
-- China installed 295,000 units, 54% of global deployments.
-- IFR describes 2024 as the second-highest annual installation count in history.
+The September 25, 2025 [IFR release](https://ifr.org/ifr-press-releases/news/global-robot-demand-in-factories-doubles-over-10-years) reports 542,000 new industrial installations in 2024 and an operational stock of 4.664 million. It describes 2024 as the second-highest installation year in its series. Asia accounted for 74% of new deployments, Europe 16% and the Americas 9%; China accounted for 295,000 installations, or 54%. These rounded shares need not sum to exactly 100%.
 
-| Metric | Reported value | Why it matters for robot skin |
+| Historical measure | Reported value | Correct comparison boundary |
 | --- | --- | --- |
-| 2024 global industrial robot installations | 542,000 units | Large installed fleets increase the number of contact-rich tasks that need sensing beyond vision. |
-| Operational stock | 4.664 million units | A larger installed base makes maintenance, repeatability, and measurable contact feedback more important. |
-| Asia share of new deployments | 74% | Tactile AI adoption will be shaped by Asian manufacturing, not only Western lab demonstrations. |
-| China installations | 295,000 units | The largest robot market is also where high-volume tactile sensing cost constraints will be tested. |
+| New installations worldwide in 2024 | 542,000 | An annual flow, not the number of all robots in use |
+| Operational industrial-robot stock in 2024 | 4.664 million | Installed population, not new purchases that year |
+| Asia share of new deployments | 74% | Geographic share of installations, not tactile adoption |
+| China installations | 295,000; 54% of global deployments | A market-specific count and share, not a sensor requirement |
+
+The release's forecasts are dated expectations, not observed later outcomes. This article retains the original historical reporting period rather than presenting those numbers as a current November 2026 market estimate. The separate [service-robot logistics brief](/news/service-robots-200000-units-logistics-tactile-ai) covers a different reporting category and supplier-sample scope; do not add the two series into a tactile market total.
 
 ## RoboSkin analysis
 
-The useful reading of the IFR data is not simply that factories are buying more robots. The useful reading is that robot deployment is now large enough for edge cases to matter. A factory can tolerate a robot that works only under highly structured conditions when the task is narrow and the workcell is isolated. A broader fleet creates more contact variation: shifted parts, flexible packaging, worn fixtures, mixed bins, human intervention, and changing process conditions.
+An installed robot and an unmet sensing need are different units of analysis. A repetitive operation with controlled fixtures may already have adequate feedback. Another operation may lose useful information once a part contacts a gripper or tool. Start with that missing observation, not a market-size multiplier.
 
-That is the point where Physical AI becomes more than a label. If a system acts in the physical world, it needs feedback from the physical world. Cameras provide global scene information, but they often lose the state that matters after contact starts. The robot may know that a part is present, yet still not know whether the fingers are centered, whether a surface is slipping, whether the contact force is rising too quickly, or whether a cable, gasket, cloth, or carton is deforming.
+Consider a proposed insertion retrofit. A team should distinguish locating the part, detecting initial contact, estimating loading direction and recognizing a failed insertion. Those decisions may need different observations. A wrist force/torque measurement and a distributed contact map are not interchangeable, and adding both is not automatically justified. The [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) helps connect the decision to an output and reference. The [electronic skin overview](/electronic-skin) separates sensing materials and surface coverage from the complete measurement and control system.
 
-Industrial robot growth also changes the economics of touch. A single advanced tactile hand can be a research instrument. A multi-million-robot installed base needs sensors, calibration methods, replacement procedures, middleware conventions, and diagnostics that technicians can understand. Robot skin content therefore has to discuss systems, not only materials.
+Use the following planning sequence before treating a large installed base as a business case:
 
-For readers comparing vision, force-torque sensing, and robot skin, the correct question is where the contact information is lost. A wrist force-torque sensor may show aggregate load but miss distributed finger contact. A camera may see object pose but not pressure, shear, or slip. A fingertip sensor may capture local geometry but miss palm contact.
+1. **Name the failure.** Record the operation, part condition and consequence. Separate perception, fixture, actuator and contact-observation failures.
+2. **Define the missing observation.** State which decision would change if the robot knew contact location, load, motion or another quantity.
+3. **Check the integration path.** Identify mechanical space, acquisition, calibration, timestamping and the controller interface that would consume the signal.
+4. **Choose a comparison.** Keep the task, eligibility rules and outcome definitions consistent when comparing configurations.
+5. **Include service work.** Count remounting, replacement, recalibration and troubleshooting in the proposed operating process.
+
+This is an editorial retrofit framework, not an IFR finding or a completed RoboSkin pilot. It makes the next evidence request specific without assuming that every industrial robot requires full-body skin.
+
+### What would make a pilot result useful?
+
+Keep both task outcomes and operating effort visible. A configuration that completes more eligible trials may also reject more incoming cases or require more maintenance. Record those changes rather than reporting only success among selected attempts. Define how retries and human interventions are counted before comparing results.
+
+For example, a proposed trial record can contain the part/fixture condition, sensor and calibration revision, eligible/attempted/completed outcome, intervention reason and recovery time. These are suggested fields, with no measured value supplied here. The [tactile manipulation guide](/tactile-manipulation) connects observations to action; the [calibration guide](/guides/tactile-sensor-calibration) defines the measurement reference.
 
 ## What readers should take away
 
-The IFR installation numbers make tactile AI more relevant because scale punishes fragile assumptions. More robots in more factories means more contact cases that cannot be solved by rigid programming alone. Robot skin should be evaluated as part of a closed loop: contact surface, sensor modality, data quality, calibration, robot middleware, controller response, and evidence from the actual task.
+Use industrial-robot statistics for historical market context. Use task-level evidence to choose sensing. An annual installation count cannot answer which surface needs coverage, how much delay a controller can tolerate or whether a proposed retrofit pays for its maintenance.
 
-The conservative conclusion is also important. A bigger robot market does not prove that every robot needs full-body e-skin. It proves that contact feedback deserves a more serious place in the automation roadmap.
+The next useful document is a bounded evaluation plan: the operation, missing observation, comparison conditions, outcome denominator and service assumptions. If those are unknown, preserve them as questions rather than converting a large market figure into a capability or revenue claim.
 
 ## Source boundary
 
-This article summarizes public IFR data and adds RoboSkin.ai editorial context for robot skin, tactile AI, and Physical AI. It does not imply that RoboSkin.ai produced the cited robotics statistics or measured robot performance.
+RoboSkin.ai reread IFR's public release and added original evaluation guidance. It did not produce the installation statistics, measure tactile adoption, run a factory pilot or calculate a return on investment. The release does not substantiate a general claim that industrial growth causes demand for a specific tactile product.
 
 ## Sources
 
@@ -5799,7 +5846,7 @@ This article summarizes public IFR data and adds RoboSkin.ai editorial context f
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-06-22',
-    updated: '2026-06-22',
+    updated: '2026-11-04',
     readTime: '4 min read',
     category: 'Industry data',
     image: '/generated/pages/application-contexts.webp',
