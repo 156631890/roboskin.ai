@@ -117,8 +117,8 @@ export const structureNewPages: SeoTopicPage[] = [
     sources: [robotiq, { label: 'OnRobot RG2-FT specifications', href: 'https://onrobot.com/en/products/rg2-ft-finger-gripper' }, { label: 'OnRobot VG10 specifications', href: 'https://onrobot.com/en/products/vg10-vacuum-gripper' }, { label: 'OnRobot Soft Gripper specifications', href: 'https://onrobot.com/en/products/soft-gripper' }],
   },
   {
-    ...shared, path: '/electronic-skin', title: 'Electronic Skin (E-Skin): Materials and Uses', h1: 'Electronic Skin: Materials, Sensing Mechanisms and Uses',
-    description: 'Electronic skin materials, sensing mechanisms and uses, with a comparison to robot skin and source-backed limits for pressure and contact measurements.',
+    ...shared, updated: '2026-11-04', revisionNote: 'November 4, 2026: added a material-to-controller measurement chain and source-reviewed textile/hydrogel comparisons. No device testing or reproduction claimed.', path: '/electronic-skin', title: 'Electronic Skin (E-Skin): Materials and Uses', h1: 'Electronic Skin: Materials, Sensing Mechanisms and Uses',
+    description: "Understand electronic-skin materials, readout and calibration, with textile and hydrogel examples separating electrical signals from robot performance.",
     introduction: 'Electronic skin is a conformable sensing system that converts physical stimuli at a surface into electrical signals. Electronic skin can be mounted on a robot, a prosthesis or a wearable, so it is broader than a robotic covering. This page compares materials and measurement mechanisms; the robot skin guide covers whole-robot integration and vendor choices.',
     kicker: 'Materials and mechanisms', intent: 'Define electronic skin and distinguish its material-level sensing role from robot skin integration.', keywords: ['electronic skin', 'e-skin', 'electronic skin materials', 'robot skin'],
     quickAnswer: ['A flexible substrate alone is not electronic skin: the system needs sensing elements, electrical readout and a defined measurement.', 'Pressure, strain, temperature and vibration may require different sensing elements. One successful laboratory channel does not prove all of these capabilities.', 'Use robot skin for the complete installed covering and electronic skin for the sensing material or device architecture. The terms overlap when electronic skin is installed on a robot.'],
@@ -136,15 +136,88 @@ export const structureNewPages: SeoTopicPage[] = [
         ['Piezoelectric', 'Piezoelectric polymer or ceramic structures', 'Charge leakage and electronics affect low-frequency response'],
         ['Triboelectric', 'Paired contact surfaces with electrodes', 'Signal depends on contact history, separation and environment'],
       ] } },
+      {
+        "id": "measurement-chain",
+        "heading": "Trace the measurement from material to robot decision",
+        "body": [
+          "Electronic skin becomes useful through a measurement chain: a physical interaction changes an electrical signal, readout electronics acquire it, calibration or a learned model estimates a quantity, and a host system decides what to do. A strong result at one layer does not validate the layers after it.",
+          "Mannsfeld and colleagues’ 2010 capacitive-sensor study shows why structure belongs in the specification: microstructuring the compliant dielectric changes its response relative to an unstructured film. This does not give every microstructured device the same range, accuracy or lifetime. Use the original specimen, loading interval and readout conditions when comparing a sensitivity claim."
+        ],
+        "table": {
+          "headers": [
+            "Layer",
+            "Evidence to retain",
+            "What it cannot establish alone"
+          ],
+          "rows": [
+            [
+              "Material and mounting",
+              "Composition, geometry, electrodes, attachment and loading conditions",
+              "A reference calibration after recasting, remounting or replacing the cover"
+            ],
+            [
+              "Electrical acquisition",
+              "Measured variable, selected channels, scan schedule and timestamps",
+              "A simultaneous full-surface refresh rate from the fastest single-channel rate"
+            ],
+            [
+              "Estimated quantity",
+              "Reference instrument or labels, model version, calibration and evaluation split",
+              "Force accuracy from a classification or touch-localization score"
+            ],
+            [
+              "Host behavior",
+              "Which estimate reaches the controller, with what delay and failure handling",
+              "Robot task performance or safety from a sensor-only demonstration"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Two research architectures, two different interfaces",
+            "body": [
+              "The single-material hydrogel hand uses distributed impedance measurements and selected information channels to infer interactions. Its millions of available amplitude/phase channels are not millions of physical taxels. Its response also depends on contact conductivity and environmental conditions. A new geometry or electrode interface requires new evidence.",
+              "The three-channel textile instead combines triboelectric touch localization with a resistive pressure channel in a wearable human–robot interface. A person commands the arm through the textile; this is different from measuring the arm’s contact with its surroundings. Self-generated localization signals do not power the complete readout and actuation system."
+            ],
+            "links": [
+              {
+                "label": "Single-material hydrogel skin: acquisition and localization evidence",
+                "href": "/research/single-material-soft-robotic-skin-2025"
+              },
+              {
+                "label": "Three-channel textile: signals, commands and power boundary",
+                "href": "/news/self-powered-textile-artificial-skin-three-channel-robot-control-2026"
+              }
+            ]
+          },
+          {
+            "heading": "A useful comparison holds the intended decision constant",
+            "body": [
+              "Start with a decision such as detecting contact onset, estimating a sustained load or locating a human command on a wearable. Specify the reference quantity, contact material, surface region, mounting state and required update interval. Compare candidate devices under that same question; do not rank a classifier, a force sensor and a wearable command surface by one sensitivity number.",
+              "For a proposed installation, keep unloaded drift, repeated loading/unloading, bending without contact and contact under the intended mounting as separate observations. Record which behavior changes after replacement. These are suggested engineering comparisons, not tests performed by RoboSkin.ai, a certification protocol or proof that a device is suitable for a medical or safety application."
+            ],
+            "links": [
+              {
+                "label": "Calibration: reference loads, drift and replacement",
+                "href": "/guides/tactile-sensor-calibration"
+              },
+              {
+                "label": "Define a source-review or integration question",
+                "href": "/research-services"
+              }
+            ]
+          }
+        ]
+      },
       { heading: 'Materials and uses', body: ['Elastomers provide compliance; conductive fillers, films or patterned electrodes provide electrical pathways. Microstructured surfaces can change contact area and sensitivity, but quoted sensitivity must be tied to a pressure interval and loading method.', 'Robot contact patches, prosthetic interfaces and wearable measurement patches place different demands on packaging, wiring and durability. For a robot, evaluate repeated loading on the actual mounting surface and check how replacement or bending changes the calibration.'], table: { headers: ['Use', 'Relevant observation', 'Evidence to request'], rows: [
         ['Robot fingertips or body patches', 'Local pressure or distributed contact', 'Coverage map, timing, calibration and repeated-load data'],
         ['Prosthetic interfaces', 'Contact or fit at the interface', 'Mechanical compatibility and application-specific validation'],
         ['Wearable research patches', 'Deformation or surface stimuli', 'Drift, attachment conditions and comparison with a reference'],
       ] } },
     ],
-    faqs: [{ question: 'Are electronic skin and robot skin synonyms?', answer: 'They overlap but are not interchangeable. Electronic skin describes the sensing device architecture; robot skin describes the installed covering and its integration on a robot.' }, { question: 'Does high sensitivity prove useful robot touch?', answer: 'No. The usable force or pressure range, spatial coverage, bandwidth, hysteresis, durability and controller integration must also match the task.' }],
+    faqs: [{ question: 'Does a large channel count mean many physical taxels?', answer: 'No. A channel may be an electrical configuration, amplitude, phase or derived feature. Report physical sensing locations, selected readouts and simultaneous update rate separately. The hydrogel example uses many configurations around only 32 electrodes.' }, { question: 'Are electronic skin and robot skin synonyms?', answer: 'They overlap but are not interchangeable. Electronic skin describes the sensing device architecture; robot skin describes the installed covering and its integration on a robot.' }, { question: 'Does high sensitivity prove useful robot touch?', answer: 'No. The usable force or pressure range, spatial coverage, bandwidth, hysteresis, durability and controller integration must also match the task.' }],
     relatedLinks: [skin, sensors, { label: 'robot skin versus e-skin', href: '/guides/robot-skin-vs-e-skin', description: 'Terminology and integration boundaries.' }],
-    sources: [{ label: 'Electronic skin pressure-sensor mechanisms and materials review', href: 'https://www.mdpi.com/1424-8220/20/16/4407' }, { label: 'Microstructured dielectric pressure sensors: original research', href: 'https://www.nature.com/articles/nmat2834' }, { label: 'Skin-inspired organic digital mechanoreceptor: original research', href: 'https://doi.org/10.1126/science.aaa9306' }],
+    sources: [{ label: 'Single-layer hydrogel skin: author-accepted manuscript', href: 'https://www.repository.cam.ac.uk/items/c0f9486d-ef1a-42c8-bd8a-27ca9e2a9828' }, { label: 'Three-channel textile: publisher abstract and metadata', href: 'https://doi.org/10.1016/j.nanoen.2026.112233' }, { label: 'Electronic skin pressure-sensor mechanisms and materials review', href: 'https://www.mdpi.com/1424-8220/20/16/4407' }, { label: 'Microstructured dielectric pressure sensors: original research', href: 'https://www.nature.com/articles/nmat2834' }, { label: 'Skin-inspired organic digital mechanoreceptor: original research', href: 'https://doi.org/10.1126/science.aaa9306' }],
   },
   {
     ...shared, path: '/robot-tactile-sensors', title: 'Robot Tactile Sensors: Models and Selection', h1: 'Robot Tactile Sensor Models: Specs and Selection',
