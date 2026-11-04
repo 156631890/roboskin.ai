@@ -179,6 +179,41 @@ test('dataset selection, sensor comparison and ROS 2 practice form a contextual 
   }
 });
 
+test('ROS tutorial schema mentions preserve the visible external starter-kit destination', () => {
+  const document = renderRoute('/guides/ros2-tactile-sensing');
+  const destination = 'https://github.com/roboskin-ai/ros2-tactile-starter-kit';
+  assert.ok(document.querySelector(`a[href="${destination}"]`));
+  for (const type of ['WebPage', 'TechArticle']) {
+    const node = graphNodes(document).find((item) => item?.['@type'] === type);
+    assert.ok(node?.mentions.some((mention) => mention.url === destination), type);
+    assert.ok(node.mentions.every((mention) => !mention.url.includes('roboskin.aihttps://')), type);
+  }
+});
+
+test('topic graph mentions resolve internal paths and preserve external URLs without changing canonicals', () => {
+  const { seoTopicPages } = load('src/content/seo-topic-pages.ts');
+  const { buildSeoTopicGraph } = load('src/lib/seo-topic.ts');
+  const external = 'https://example.org/reference?version=2#method';
+  const relatedLinks = [
+    { label: 'External reference', href: external, description: 'Absolute URL' },
+    { label: 'Internal reference', href: '/datasets?view=table#dataset-egotouch', description: 'Local path' },
+  ];
+  const sample = { ...seoTopicPages.find((page) => page.schemaType === 'TechArticle'), relatedLinks };
+  for (const page of [...seoTopicPages, sample]) {
+    const graph = buildSeoTopicGraph(page)['@graph'];
+    const nodes = graph.filter((node) => ['WebPage', 'TechArticle'].includes(node?.['@type']));
+    for (const node of nodes) {
+      assert.equal(node.url, `https://roboskin.ai${page.path}`, `${page.path}: canonical unchanged`);
+      assert.equal(node.mentions.length, page.relatedLinks.length);
+      node.mentions.forEach((mention, index) => {
+        const target = page.relatedLinks[index].href;
+        assert.equal(mention.url, target.startsWith('/') ? `https://roboskin.ai${target}` : target, `${page.path}: ${target}`);
+        assert.ok(['https:', 'http:'].includes(new URL(mention.url).protocol));
+      });
+    }
+  }
+});
+
 test('ROMI-2K announcements and model files do not become public dataset or license claims', async () => {
   const { tactileDatasetEntries } = load('src/lib/tactile-datasets.ts');
   const entry = tactileDatasetEntries.find((item) => item.id === 'romi-2k');

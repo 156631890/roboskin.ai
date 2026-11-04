@@ -108,7 +108,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
     mentions: page.relatedLinks.map((link) => ({
       '@type': 'WebPage',
       name: link.label,
-      url: canonicalUrl(link.href),
+      url: new URL(link.href, site.url).href,
       description: link.description,
     })),
     dateModified: page.updated,
@@ -172,7 +172,7 @@ export function buildSeoTopicGraph(page: SeoTopicPage) {
         mentions: page.relatedLinks.map((link) => ({
           '@type': 'WebPage',
           name: link.label,
-          url: canonicalUrl(link.href),
+          url: new URL(link.href, site.url).href,
           description: link.description,
         })),
         citation: page.sources?.map((source) => source.href),
