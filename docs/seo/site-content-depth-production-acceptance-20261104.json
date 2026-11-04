@@ -1,0 +1,92 @@
+{
+  "schema": "content-production-acceptance/v1",
+  "reconciledAt": "2026-11-04T16:43:55.978700+00:00",
+  "acceptanceCheckedAt": "2026-11-04T16:35:31.045242+00:00",
+  "site": "https://roboskin.ai",
+  "repository": "156631890/roboskin.ai",
+  "scope": "210 existing indexable inventory URLs; final 18 individual content releases reconciled from already completed production evidence",
+  "completed": 210,
+  "pending": 0,
+  "commit": "a6ac18d7b1f62f5c5ab040eb48e73c73ef1fb8fc",
+  "pullRequest": "https://github.com/156631890/roboskin.ai/pull/139",
+  "deployment": "dpl_8G9MuUtkisS2FqCLeduBcyCrTdqp",
+  "allUrlChecks": {
+    "http200": 210,
+    "selfCanonicalAndIndexable": 210,
+    "parsedJsonLd": 210,
+    "reviewedSourceBodyMatches": 210,
+    "rawBuildBodyMatches": 209,
+    "sourceVerifiedRuntimeDifferences": [
+      {
+        "path": "/research-services",
+        "difference": "Existing onlineDeliveryAvailable condition hides offline-send notice and enables button in production; no form submitted or configuration changed."
+      }
+    ],
+    "internalLinks": 562,
+    "internalTargets": 294,
+    "rosExternalMentionsCorrect": true
+  },
+  "finalBatchChecks": {
+    "urls": [
+      "https://roboskin.ai/datasets",
+      "https://roboskin.ai/robotics-datasets",
+      "https://roboskin.ai/benchmarks",
+      "https://roboskin.ai/sensors",
+      "https://roboskin.ai/organizations",
+      "https://roboskin.ai/robots",
+      "https://roboskin.ai/humanoid-robot-companies",
+      "https://roboskin.ai/technology",
+      "https://roboskin.ai/glossary",
+      "https://roboskin.ai/applications/robot-hand-tactile-sensor",
+      "https://roboskin.ai/research/robot-skin-papers",
+      "https://roboskin.ai/research/eu-roboskin-project",
+      "https://roboskin.ai/reports/tactile-ai-robot-skin-landscape-2026",
+      "https://roboskin.ai/",
+      "https://roboskin.ai/applications",
+      "https://roboskin.ai/faq",
+      "https://roboskin.ai/privacy",
+      "https://roboskin.ai/terms"
+    ],
+    "desktopAndMobileRenders": 36,
+    "internalLinks": 240,
+    "bodyAndOriginalModulesVerified": true
+  },
+  "qualityGate": {
+    "localTests": 353,
+    "localLintStaticAndServerBuild": "passed",
+    "finalMergedCommitChecks": [
+      "verify: success",
+      "verify-server: success",
+      "verify-production: success"
+    ],
+    "remoteReadbackAt": "2026-11-04T16:36:10.981144+00:00"
+  },
+  "evidenceFiles": [
+    {
+      "taskRelativePath": "batch88/full-production-audit.json",
+      "sha256": "27901d2324b62fafa92dd80981d6ba8854bb3154ceca5d7d9bdd8670219c70bc"
+    },
+    {
+      "taskRelativePath": "batch88/production-verification.json",
+      "sha256": "808eb00ed2dcde17c3a850730201577cafdc23a9483f4a2743ac251366d85a17"
+    },
+    {
+      "taskRelativePath": "batch88/production-contract-result.json",
+      "sha256": "cc563f1f1f7747540021bf89c3b43705b61c126101b47042776ba62309d94774"
+    },
+    {
+      "taskRelativePath": "batch88/release-record.json",
+      "sha256": "595e93218b245d13626dc57da14cb6c33858653e37dac4657428d0c9e7ecb2d8"
+    },
+    {
+      "taskRelativePath": "batch88/ci-final-readback.json",
+      "sha256": "9c2430fbbbcbca3ec82accc624f81f5cc3e688f2cc3929416e89fe6214081cbc"
+    }
+  ],
+  "boundaries": [
+    "Source/editorial review, not independent hardware or all-paper reproduction.",
+    "Human factual sign-off not claimed.",
+    "Indexable does not mean indexed by Google.",
+    "No new outreach, GSC request, dataset download or form submission."
+  ]
+}

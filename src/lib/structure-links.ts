@@ -1,8 +1,10 @@
+import { tactileDatasetEntries } from './tactile-datasets';
+
 export type HubLink = { href: string; label: string };
 
 export const homeTopicHubs = [
   { href: '/sensors', label: 'tactile sensing', description: '17 sensors with published specs' },
-  { href: '/datasets', label: 'tactile datasets', description: '25 datasets by sensor type and task' },
+  { href: '/datasets', label: 'tactile datasets', description: `${tactileDatasetEntries.length} datasets by sensor type and task` },
   { href: '/robot-vla-models', label: 'VLA robotics', description: '11 models compared on touch input' },
   { href: '/robot-skin', label: 'robot skin', description: 'Materials, sensing and vendors' },
   { href: '/robot-grippers', label: 'robot gripper', description: 'Types, selection and vendors' },
