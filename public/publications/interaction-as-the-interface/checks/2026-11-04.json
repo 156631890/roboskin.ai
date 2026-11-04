@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-11-04T09:45:49.414747+00:00",
+  "release": "0.2",
+  "releaseDate": "2026-09-27",
+  "scope": "known-model synthetic binary decision calculation only; no physical robot, trained architecture or sensor test",
+  "python": "3.13.3",
+  "command": "python run_benchmark.py --episodes 10000 --output results",
+  "sourceScriptSha256": "62fac9482bf3be05ff85e602f57ad429a27ede3ea19a6b1f71bebe9e2acfaae7",
+  "archiveMembersVerified": 9,
+  "outputs": [
+    {
+      "file": "per_seed_metrics.csv",
+      "byteIdentical": true,
+      "sha256": "bd27e8eed15e849de3ba734cf729136b3cb6e289da3cd66a9d4b368e04aa2084"
+    },
+    {
+      "file": "aggregate_metrics.csv",
+      "byteIdentical": true,
+      "sha256": "1138fb3646ae2ce28ec1b669b2a184b4470b54972e3606e3fa8e87db06ce3f2a"
+    },
+    {
+      "file": "paired_per_seed.csv",
+      "byteIdentical": true,
+      "sha256": "2739abde3fd7bad6d415ad385b5d5bb13d911ea8d41e447beb4ea82109857349"
+    },
+    {
+      "file": "paired_comparisons.csv",
+      "byteIdentical": true,
+      "sha256": "f184fdcc3981269e5855d63b416ed9c3f164c64208530d55a38d796144397c94"
+    },
+    {
+      "file": "exact_parameter_scan.csv",
+      "byteIdentical": true,
+      "sha256": "5b6ce2e59daf49842a322581872785d8e7eecbfeb08a1e0126898909713c744b"
+    }
+  ],
+  "limitations": [
+    "Known-model synthetic binary decision example only.",
+    "No physical robot, sensor or complete learning architecture was tested.",
+    "Matching files do not establish novelty, generalization or artifact licensing."
+  ]
+}

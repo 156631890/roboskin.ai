@@ -33,6 +33,24 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      <section id="resource-evidence-route" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Choose the evidence you need, then choose the resource"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"A good starting page depends on the decision. Learning a message format, choosing a sensor and reproducing a policy require different evidence. Use the routes below to produce a concrete record before moving to a more expensive experiment."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Choose the evidence you need, then choose the resource">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Your next decision"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Useful output"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Start here"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Select a sensing approach"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"A task-specific comparison of outputs, geometry, timing, calibration and replacement requirements. A vendor specification is a candidate condition to verify."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/guides/how-to-choose-a-tactile-sensor" className="text-accent underline underline-offset-4">{"Sensor selection workflow"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Reuse a dataset"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"A record of actual access, modalities, action labels, split and license. A paper-scale collection is not necessarily the downloadable subset."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/datasets" className="text-accent underline underline-offset-4">{"Live dataset directory"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Connect data to software"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"A message and timestamp contract plus a known input/output fixture. A synthetic check validates that fixture; it does not validate a physical sensor."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/robotics-programming" className="text-accent underline underline-offset-4">{"Programming and replay routes"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Evaluate a research claim"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"The exact source version, task denominator, baseline and remaining uncertainty. Preserve the difference between author-reported results and local execution."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research" className="text-accent underline underline-offset-4">{"Paper-review library"}</Link></td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"Keep the record with its source date. If the next route requires hardware, gated data or a software version you do not have, document that missing prerequisite rather than treating a readable tutorial as a completed integration."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/methodology" className="text-accent underline underline-offset-4">{"How evidence is classified"}</Link><Link href="/research-index" className="text-accent underline underline-offset-4">{"Versioned research taxonomy"}</Link><Link href="/research-services" className="text-accent underline underline-offset-4">{"Scope a public-source research question"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
       <section className="pb-12" aria-labelledby="resource-goals-heading">
         <div className="container-shell">
           <h2 id="resource-goals-heading" className="mb-5 text-2xl font-semibold text-white">What are you working on?</h2>
@@ -110,7 +128,7 @@ export default function ResourcesPage() {
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-7 md:p-8">
-            <p className="text-soft text-xs uppercase tracking-[0.14em]">Trusted external references</p>
+            <p className="text-soft text-xs uppercase tracking-[0.14em]">External reference routes</p>
             <h2 className="mt-2 text-2xl font-semibold text-white">Reference points for robot skin learning</h2>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-soft">
               RoboSkin.ai keeps external links narrow and useful. These resources help readers align terminology and avoid unsupported product claims.
@@ -143,7 +161,7 @@ export default function ResourcesPage() {
               >
                 Vigor Components
               </a>
-              {' '}provides access to electronic components, connectors, power devices, and sourcing resources that can support BOM planning and prototype-to-production workflows.
+              {' '}lists electronic components, connectors and power devices in its catalog. Treat this as a supplier information route; stock, provenance and suitability for a particular BOM have not been independently verified by RoboSkin.ai.
             </p>
             <p className="mt-5 max-w-3xl text-sm leading-relaxed text-soft">
               For motor-drive and industrial power electronics component information, see{' '}
@@ -155,7 +173,7 @@ export default function ResourcesPage() {
               >
                 SHYSEMI power semiconductors
               </a>
-              {' '}(IPM, IGBT and SiC).
+              {' '}(its catalog lists IPM, IGBT and SiC). A catalog link does not establish that a part meets a robot drive’s ratings or qualification requirements.
             </p>
           </div>
         </div>

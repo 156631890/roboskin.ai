@@ -95,6 +95,24 @@ export default function InteractionPaperPage() {
             <p className="mt-3 text-sm leading-relaxed text-[#aebaca]">The manuscript and download package include exact expectations, per-seed results, and paired intervals that measure Monte Carlo sampling error only.</p>
           </section>
 
+      <section id="numerical-recheck" className="pb-12 pt-8 scroll-mt-28">
+        <div>
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"What the November 4 numerical recheck establishes"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"On November 4, 2026, we reran the unmodified v0.2 benchmark script with Python 3.13.3 and 10,000 episodes per seed. All five generated CSV files were byte-identical to the released files. The package and manuscript remain version 0.2; this is a dated execution check of the numerical example, not a new experiment on a robot."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="What the November 4 numerical recheck establishes">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Output or comparison"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"How to read it"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Boundary"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Twenty seeds and three visual conditions"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Each seed contributes 10,000 base scenarios; those scenarios are reused across the three conditions. Eight policies are evaluated on the same sampled cases."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"The resulting policy decisions are paired, not millions of independent trials."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"0.298760 and 0.049455 utility differences"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"At visual accuracies 0.50 and 0.75, the selective rule uses the probe. At 0.95 it skips, producing zero difference from direct action."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"These are net-utility differences in the specified reward units, not robot-success percentage-point gains."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Paired intervals across seeds"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"They summarize Monte Carlo variability under the same known observation model."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"They do not include uncertainty in real sensor calibration, model misspecification or deployment conditions."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Exact parameter scan"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"This enumerates the analytical decision example over a parameter grid."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Rows in that file are calculations, not additional physical or independently sampled experiments."}</td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"The result is intentionally narrow. With fixed accuracy inside each visual condition, the selective policy always probes or always skips; it does not learn an adaptive contact strategy from tactile data. A stronger next study would estimate observation reliability from limited calibration data, keep evaluation cases separate, and compare actual outcomes and interaction costs under model error. Those checks are proposed work."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/publications/interaction-as-the-interface/checks/2026-11-04.json" className="text-accent underline underline-offset-4">{"Read the execution and checksum record"}</Link><Link href="/publications/interaction-as-the-interface/v0.2/README.md" className="text-accent underline underline-offset-4">{"Released run instructions"}</Link><Link href="/methodology" className="text-accent underline underline-offset-4">{"Interpret measured and proposed evidence"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
           <section id="next-study" className="scroll-mt-24">
             <h2 className="text-3xl font-semibold text-white">The next research question</h2>
             <p className="mt-5 text-base leading-relaxed text-[#c8d1de]">With limited calibration data, how reliably can a system determine whether a probe will improve the task outcome? The next study will need a precise method and fair comparisons with existing decision-focused experimental design and robust control.</p>
@@ -131,7 +149,7 @@ export default function InteractionPaperPage() {
           <nav aria-label="On this page" className="px-2">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-white">In this paper</h2>
             <ul className="mt-4 space-y-3 text-sm text-[#aebaca]">
-              {[['overview', 'Research question'], ['evidence', 'Current evidence'], ['benchmark', 'Decision example'], ['next-study', 'Next study'], ['versions', 'Version history']].map(([id, label]) => <li key={id}><a href={`#${id}`} className="hover:text-white">{label}</a></li>)}
+              {[['overview', 'Research question'], ['evidence', 'Current evidence'], ['benchmark', 'Decision example'], ['numerical-recheck', 'Dated numerical recheck'], ['next-study', 'Next study'], ['versions', 'Version history']].map(([id, label]) => <li key={id}><a href={`#${id}`} className="hover:text-white">{label}</a></li>)}
             </ul>
           </nav>
           <section className="border-t border-white/10 px-2 pt-6">

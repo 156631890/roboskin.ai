@@ -135,9 +135,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/resources': {
     path: '/resources',
     title: 'Tactile Robotics Resources: Guides, Sensors & Datasets',
-    description:
-      'Find tactile robotics guides by task: learn the basics, compare sensors, select datasets and models, or build Python and ROS 2 processing workflows.',
-    updated: '2026-10-12',
+    description: "Navigate tactile robotics guides, datasets, paper reviews and runnable examples by task, evidence type and the decision you need to make.",
+    updated: '2026-11-04',
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -190,9 +189,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/research': {
     path: '/research',
     title: 'Tactile Robotics Research: Paper Reviews & Evidence',
-    description:
-      'Read tactile robotics paper reviews covering sensors, robot skin, manipulation, and learning. Compare methods, reported results, limitations, and primary sources.',
-    updated: '2026-09-27',
+    description: "Browse tactile robotics paper reviews with source versions, task results, artifact access and limits; distinguish reported findings from local checks.",
+    updated: '2026-11-04',
     priority: 0.78,
     changeFrequency: 'weekly',
     index: true,
@@ -201,9 +199,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/research-index': {
     path: '/research-index',
     title: 'RoboSkin Tactile Research Index: Sensors, Data, and Evidence',
-    description:
-      'Compare source-backed robot skin and tactile AI research by sensing principle, modalities, form factor, data output, evidence level, and limitations.',
-    updated: '2026-09-13',
+    description: "Use the 30-record tactile research taxonomy with versioned exports, source dates, evidence classes and clear limits on current artifact availability.",
+    updated: '2026-11-04',
     priority: 0.82,
     changeFrequency: 'monthly',
     index: true,
@@ -212,9 +209,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/papers': {
     path: '/papers',
     title: 'Embodied AI Working Papers & Research Proposals',
-    description:
-      'Explore RoboSkin.ai working papers on embodied AI, with versioned manuscripts, reproducible synthetic benchmarks, evidence limits, and research proposals.',
-    updated: '2026-09-27',
+    description: "Inspect RoboSkin working-paper proposals, versioned manuscripts and synthetic benchmark evidence; distinguish numerical reproduction from robot validation.",
+    updated: '2026-11-04',
     priority: 0.72,
     changeFrequency: 'monthly',
     index: true,
@@ -224,9 +220,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/papers/interaction-as-the-interface': {
     path: '/papers/interaction-as-the-interface',
     title: 'Interaction as the Interface: Embodied AI Working Paper',
-    description:
-      'Read version 0.2 of an embodied AI research proposal, with a Bayesian probe benchmark, downloadable source and results, and explicit limits on its evidence.',
-    updated: '2026-09-27',
+    description: "Inspect the Interaction as the Interface proposal, known-model decision example, exact assumptions and reproduced CSV results; no robot validation claimed.",
+    updated: '2026-11-04',
     priority: 0.68,
     changeFrequency: 'monthly',
     index: true,
@@ -321,9 +316,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/news': {
     path: '/news',
     title: 'Robot Skin, Tactile AI and Physical AI News',
-    description:
-      'Follow source-backed news on robot skin, tactile AI, electronic skin, tactile sensors, dexterous manipulation, and touch for Physical AI.',
-    updated: '2026-10-04',
+    description: "Follow robot skin and tactile AI reports with original publication dates, source attribution, updated evidence notes and links to deeper technical reviews.",
+    updated: '2026-11-04',
     priority: 0.72,
     changeFrequency: 'weekly',
     index: true,
