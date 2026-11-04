@@ -6341,15 +6341,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['adept-visuo-tactile-dexterity-rl-2026', 'ht-bench-full-hand-tactile-representations-2026', 'full-hand-tactile-sensing-2025', 't-rex-tactile-reactive-dexterous-manipulation-2026', 'tactidex-tactile-guided-dexterous-benchmark-2026'],
   },
   {
+    revisionNote: "November 4, 2026: reviewed public standard records and the NIST proposal, and added an evidence-handoff framework. No paid standard text was accessed, and no conformity assessment or physical validation was performed.",
     path: '/robot-safety',
     title: 'Robot Safety: Standards, Sensors & Evidence',
     description:
-      'Understand industrial and humanoid robot safety, ISO 10218 scope, risk reduction, collision and contact sensing, validation, and robot-skin evidence boundaries.',
+      "Review robot safety evidence: industrial scope, integration, tactile-sensor limits and performance benchmarks, with a practical evidence-handoff checklist.",
     h1: 'Robot safety: standards, sensing and validation',
-    kicker: 'Robotics assurance pillar',
+    kicker: "Scope, integration and evidence",
     intent: 'Technical orientation for robot safety, humanoid robot safety, industrial robot safety, collaborative robot safety, collision detection, safety sensors, and robot skin safety searches.',
     published: '2026-08-21',
-    updated: '2026-08-21',
+    updated: "2026-11-04",
     priority: 0.93,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -6382,7 +6383,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         body: [
           'The public ISO record describes ISO 10218-1:2025 as safety requirements for industrial robots and ISO 10218-2:2025 as the companion standard for industrial robot applications and robot cells. The ISO robotics overview also lists ISO/TS 15066:2016 for collaborative industrial robot applications.',
           'Scope matters. The public ISO 10218-1 page lists exclusions, including service and medical applications. A humanoid used in a factory cell may intersect industrial-robot requirements differently from a service humanoid in a home, hospital, or public space. Determine the applicable edition, jurisdiction, product category, integrator responsibilities, and conformity route with qualified safety and legal professionals.',
-          'This page is a technical research map, not legal advice, a risk assessment, or a certification decision. The full paid standards and applicable local rules—not this summary—control formal compliance work.',
+          'This page is a technical research map, not legal advice, a risk assessment, or a certification decision. Applicable standard texts and local requirements must be checked for formal compliance work; this summary does not establish legal applicability or conformity.',
         ],
       },
       {
@@ -6409,7 +6410,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         bullets: [
           'Map blind spots, joints, seams, tools, carried objects, hands, feet, and replaceable covers',
           'Measure detection threshold, spatial coverage, response time, end-to-end stopping response, drift, wear, and fault behavior',
-          'Test expected contact as well as sensor disconnection, saturation, partial damage, timing faults, and communication loss',
+          'Have qualified personnel define controlled validation for relevant contact, disconnection, saturation, damage, timing and communication faults',
           'Validate the complete sensing-to-control chain in the final robot application',
         ],
       },
@@ -6421,6 +6422,71 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "safety-evidence-handoff",
+        "heading": "Keep performance evidence separate from protective-function evidence",
+        "body": [
+          "A supplier may provide a sensor test, a robot specification and a successful demonstration. Those documents answer different questions. Before comparing claims, identify the system boundary, the person responsible for integration and the requirement each item is meant to support. The table below is an editorial review aid, not a standards clause list or a completed risk assessment."
+        ],
+        "table": {
+          "headers": [
+            "Evidence offered",
+            "What it can support",
+            "What remains to be established"
+          ],
+          "rows": [
+            [
+              "Sensor calibration or detection test",
+              "The stated device response under a named setup",
+              "Coverage, mounting, faults and the effect on the complete protective function"
+            ],
+            [
+              "Industrial robot documentation",
+              "The documented robot configuration and applicable manufacturer claim",
+              "End effector, workpiece, integration, operating modes and hazards outside that scope"
+            ],
+            [
+              "Repeated manipulation or mobility trials",
+              "Performance under a defined task and assistance protocol",
+              "Unobserved conditions, unresolved hazards and application-specific safety requirements"
+            ],
+            [
+              "Protective-function validation record",
+              "The requirement and system configuration actually assessed",
+              "Whether later mechanical, sensor, software or environmental changes invalidate its assumptions"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "An illustrative sensor-replacement review",
+            "body": [
+              "Suppose a research team replaces a worn tactile cover and updates the model that interprets its signals. A successful demonstration with the new cover does not establish that the old detection, timing or fault assumptions remain valid. Record the changed components, calibration, covered locations, software versions and evidence owner; identify the validation that the responsible safety engineer requires before relying on a protective function. This is a hypothetical review example, not a tested installation.",
+              "Keep sensing latency, communication/decision latency and physical response distinct. Retain failures and interventions with the result, and define how invalid or stale data is handled within the assessed architecture. An absence of recorded collisions is not a substitute for a hazard analysis or a specified fault response."
+            ]
+          },
+          {
+            "heading": "Check both scope and publication status",
+            "body": [
+              "The current public ISO 10218 records address the industrial robot and its application separately, and exclude mobility-related hazards of manipulators on mobile platforms from their stated coverage. A mobile manipulator therefore needs a broader scope review than the arm alone. ISO also lists the proposed successor to ISO 13482:2014 as a final draft under development at this review date; a draft is not an already published replacement. Determine the applicable editions and local requirements for the actual use rather than treating a standard number as universal approval."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "ISO 10218: robot, integration and mobile-system scope",
+            "href": "/news/iso-10218-2025-industrial-robot-safety-scope"
+          },
+          {
+            "label": "NIST humanoid proposal: reporting assistance and incomplete trials",
+            "href": "/news/nist-humanoid-baseline-performance-benchmark-2026"
+          },
+          {
+            "label": "Inspect sensor calibration and reference measurements",
+            "href": "/guides/tactile-sensor-calibration"
+          }
+        ]
+      },
+      {
         heading: 'Robot-safety validation checklist',
         body: [
           'Validation should trace each safety-related requirement to a method, acceptance criterion, result, and retained record. Software, model, payload, tooling, speed, environment, sensor, network, and operating-mode changes may invalidate earlier assumptions and need controlled review.',
@@ -6428,12 +6494,13 @@ export const seoTopicPages: SeoTopicPage[] = [
         bullets: [
           'Name the applicable standard, edition, clause-owned requirement, local rule, and responsible party',
           'Trace hazards to design measures, protective measures, residual risks, and verification evidence',
-          'Test normal operation, foreseeable misuse, faults, recovery, maintenance, and degraded sensing',
+          'Define an appropriate controlled validation plan for normal operation, foreseeable misuse, faults, recovery, maintenance and degraded sensing',
           'Retain versioned configurations, calibration, test equipment, raw logs, failures, interventions, and approvals',
         ],
       },
     ],
     faqs: [
+      { question: 'Does replacing a tactile cover preserve earlier safety evidence?', answer: 'Not automatically. The change can affect sensing, calibration, mounting and response. The responsible integrator must assess which assumptions and validation remain applicable to the complete protective function; a successful demonstration alone does not answer that question.' },
       { question: 'What does robot safety include?', answer: 'Robot safety includes intended-use definition, hazard analysis, risk assessment, inherently safer design, protective measures, validated controls, integration, procedures, maintenance, and incident response.' },
       { question: 'Does ISO 10218:2025 cover every humanoid robot?', answer: 'No. ISO 10218-1:2025 covers industrial robots and ISO 10218-2:2025 covers industrial robot applications and cells. The applicable requirements for a humanoid depend on its use, product category, jurisdiction, integration, and other standards or regulations.' },
       { question: 'Can robot skin make a humanoid safe?', answer: 'Robot skin can contribute contact information, but no single sensor makes a humanoid safe. Its role depends on coverage, latency, diagnostics, failure response, control integration, validation, and the rest of the risk-reduction system.' },
@@ -6451,6 +6518,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'NIST humanoid benchmark brief', href: '/news/nist-humanoid-baseline-performance-benchmark-2026', description: 'Separate a performance-benchmark proposal from a safety determination.' },
     ],
     sources: [
+      {"label": "ISO 10218-2:2025 public application and cell scope", "href": "https://www.iso.org/standard/73934.html"},
+      {"label": "ISO 13482:2014 published personal-care scope", "href": "https://www.iso.org/standard/53820.html"},
+      {"label": "ISO/FDIS 13482 proposed successor: under development", "href": "https://www.iso.org/standard/83498.html"},
       { label: 'ISO 10218-1:2025 public standard record', href: 'https://www.iso.org/standard/73933.html' },
       { label: 'ISO robotics standards overview', href: 'https://www.iso.org/cms/live/live/en/sites/isoorg/home/sectors/engineering/robotics.html' },
       { label: 'NIST Humanoid Robot Baseline Performance Benchmark', href: 'https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark' },
