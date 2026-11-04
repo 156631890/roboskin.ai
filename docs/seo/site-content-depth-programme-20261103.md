@@ -93,11 +93,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/dexsuite-tactile-simulation-lerobot-data | rewritten and production verified in PR115 | 1588 | 9 |
 | /news/neura-neuron-ai-touch-memory-pla | rewritten and production verified in PR115 | 1689 | 3 |
 | /news/activewam-active-vision-world-action-model | rewritten and production verified in PR115 | 1004 | 4 |
-| /news/radmcs-underwater-haptic-diver-guidance | inventory only; claim-by-claim review pending | 995 | 1 |
+| /news/radmcs-underwater-haptic-diver-guidance | individual tactile evidence-chain review; production verification pending | 995 | 1 |
 | /news/humanoidtoolbench-tool-selection-mobile-execution | rewritten and production verified in PR128 | 1046 | 12 |
 | /news/interevolve-reward-program-humanoid-manipulation | rewritten and production verified in PR128 | 1037 | 8 |
 | /news/reactive-humanoid-multi-contact-hand-bracing | rewritten and production verified in PR128 | 1026 | 4 |
-| /news/continual-6dof-grasp-synthesis-memory | individual robot-learning adaptation review; production verification pending | 1038 | 7 |
+| /news/continual-6dof-grasp-synthesis-memory | rewritten and production verified in PR130 | 1038 | 7 |
 | /news/jfm-rigid-soft-finger-jacobian-flow | rewritten and production verified in PR125 | 1001 | 3 |
 | /news/skelewam-sparse-skeleton-world-action-model | rewritten and production verified in PR129 | 975 | 2 |
 | /news/tacdyn-wam-implicit-tactile-dynamics | rewritten and production verified in PR129 | 998 | 5 |
@@ -105,9 +105,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/ditto-x-reverse-dexterous-teleoperation | rewritten and production verified in PR123 | 1027 | 14 |
 | /news/flashdexretarget-multi-motion-dexterous-data | rewritten and production verified in PR123 | 1027 | 10 |
 | /news/tacex-tactile-curiosity-robot-exploration | rewritten and production verified in PR126 | 1088 | 3 |
-| /news/occludex-visuo-tactile-self-occlusion-dexterity | individual robot-learning adaptation review; production verification pending | 1070 | 2 |
+| /news/occludex-visuo-tactile-self-occlusion-dexterity | rewritten and production verified in PR130 | 1070 | 2 |
 | /news/membrane-coupled-delta-array-micro-object-manipulation | rewritten and production verified in PR125 | 1012 | 1 |
-| /news/funco-grasp-cross-embodiment-dexterous-grasping | individual robot-learning adaptation review; production verification pending | 1071 | 8 |
+| /news/funco-grasp-cross-embodiment-dexterous-grasping | rewritten and production verified in PR130 | 1071 | 8 |
 | /news/tarl-tactile-reward-learning-demonstrations | rewritten and production verified in PR124 | 1075 | 2 |
 | /news/haco-haptic-active-compliance-dexterous-manipulation | rewritten and production verified in PR121 | 1052 | 1 |
 | /news/single-element-tackiness-tactile-sensor | rewritten and production verified in PR125 | 1012 | 1 |
@@ -127,7 +127,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/polyumi-visual-tactile-audio-demonstration-interface | rewritten and production verified in PR123 | 1137 | 4 |
 | /news/propra-fingertip-sensor-pretraining | rewritten and production verified in PR124 | 1063 | 3 |
 | /news/whole-hand-force-regulation-without-tactile-sensors | rewritten and production verified in PR121 | 1146 | 6 |
-| /news/res-hil-human-guided-residual-rl-manipulation | individual robot-learning adaptation review; production verification pending | 1126 | 1 |
+| /news/res-hil-human-guided-residual-rl-manipulation | rewritten and production verified in PR130 | 1126 | 1 |
 | /news/tactilestep-sole-pressure-humanoid-locomotion | rewritten and production verified in PR128 | 1105 | 1 |
 | /news/anthropomimetic-forearm-carpal-stiffness | rewritten and production verified in PR127 | 953 | 1 |
 | /news/camp-cooperative-arm-hand-motion-planning | rewritten and production verified in PR128 | 1070 | 1 |
@@ -136,21 +136,21 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/glotouch-global-local-haptic-search | rewritten and production verified in PR126 | 1032 | 1 |
 | /news/copre-proprioceptive-contact-detection | rewritten and production verified in PR127 | 1112 | 2 |
 | /news/berkeley-quad-hand-asymmetric-qdd-design | rewritten and production verified in PR127 | 1072 | 1 |
-| /news/lima-asynchronous-diffusion-dexterous-manipulation | individual robot-learning adaptation review; production verification pending | 1080 | 10 |
+| /news/lima-asynchronous-diffusion-dexterous-manipulation | rewritten and production verified in PR130 | 1080 | 10 |
 | /news/better-curriculum-tactile-reflex-fragile-grasping | rewritten and production verified in PR126 | 1026 | 7 |
-| /news/visforce-visual-force-grounding-dexterous-manipulation | individual robot-learning adaptation review; production verification pending | 974 | 6 |
-| /news/cablevla-tactile-cable-routing-vla | inventory only; claim-by-claim review pending | 956 | 7 |
+| /news/visforce-visual-force-grounding-dexterous-manipulation | rewritten and production verified in PR130 | 974 | 6 |
+| /news/cablevla-tactile-cable-routing-vla | individual tactile evidence-chain review; production verification pending | 956 | 7 |
 | /news/cartesian-hand-all-linear-in-hand-manipulation | rewritten and production verified in PR127 | 1226 | 4 |
 | /news/spectrobot-high-bandwidth-single-point-tactile-sensing | rewritten and production verified in PR127 | 1031 | 1 |
-| /news/tactile-jepa-topology-aware-electronic-skin-pretraining | inventory only; claim-by-claim review pending | 1020 | 3 |
+| /news/tactile-jepa-topology-aware-electronic-skin-pretraining | individual tactile evidence-chain review; production verification pending | 1020 | 3 |
 | /news/touch2robot-tactile-feedback-human-demonstrations | rewritten and production verified in PR123 | 958 | 2 |
 | /news/when-touch-matters-cluttered-dexterous-grasping | rewritten and production verified in PR124 | 993 | 3 |
 | /news/zerotouch-tactile-supervision-visual-grasp-control | rewritten and production verified in PR124 | 1139 | 1 |
-| /news/crisp-contact-simulation-geometry-solvers-release | inventory only; claim-by-claim review pending | 1120 | 1 |
+| /news/crisp-contact-simulation-geometry-solvers-release | individual tactile evidence-chain review; production verification pending | 1120 | 1 |
 | /news/agile-wam-tactile-world-action-model-robot-control | rewritten and production verified in PR129 | 1183 | 3 |
 | /news/touchsight-twintouch-bare-hand-tactile-prediction | rewritten and production verified in PR124 | 1205 | 1 |
 | /news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026 | rewritten and production verified in PR125 | 1202 | 3 |
-| /news/twins-aist-body-surface-tactile-demonstrations-2026 | inventory only; claim-by-claim review pending | 1191 | 4 |
+| /news/twins-aist-body-surface-tactile-demonstrations-2026 | individual tactile evidence-chain review; production verification pending | 1191 | 4 |
 | /news/gemini-robotics-2-whole-body-vla-dexterity-2026 | inventory only; claim-by-claim review pending | 1342 | 4 |
 | /news/lerobot-v060-world-models-vla-evaluation-2026 | inventory only; claim-by-claim review pending | 1181 | 4 |
 | /news/nist-humanoid-baseline-performance-benchmark-2026 | inventory only; claim-by-claim review pending | 1098 | 5 |
@@ -159,7 +159,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | rewritten and production verified in PR114 | 1099 | 3 |
 | /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | inventory only; claim-by-claim review pending | 906 | 1 |
 | /news/underwater-self-healing-electronic-skin-nus-2026 | rewritten and production verified in PR114 | 722 | 2 |
-| /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 868 | 7 |
+| /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | individual tactile evidence-chain review; production verification pending | 868 | 7 |
 | /news/color-changing-mechanochromic-tactile-sensor-2026 | rewritten and production verified in PR113 | 702 | 3 |
 | /news/single-pixel-tactile-skin-compressive-sampling-2026 | rewritten and production verified in PR113 | 710 | 1 |
 | /news/service-robots-200000-units-logistics-tactile-ai | rewritten and production verified in PR110 | 555 | 2 |
@@ -193,7 +193,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
 | /robot-foundation-models | inventory only; claim-by-claim review pending | 8015 | 8 |
 | /robot-skin | inventory only; claim-by-claim review pending | 1495 | 77 |
-| /tactile-ai | inventory only; claim-by-claim review pending | 3220 | 134 |
+| /tactile-ai | individual tactile evidence-chain review; production verification pending | 3220 | 134 |
 | /e-skin | inventory only; claim-by-claim review pending | 2724 | 16 |
 | /humanoid-robot-skin | inventory only; claim-by-claim review pending | 1560 | 25 |
 | /applications/robot-hand-tactile-sensor | inventory only; claim-by-claim review pending | 1203 | 31 |
@@ -220,7 +220,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /humanoid-robots | rewritten and production verified in PR128 | 1242 | 23 |
 | /robot-vla-models | inventory only; claim-by-claim review pending | 11478 | 41 |
 | /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
-| /robot-learning | individual robot-learning adaptation review; production verification pending | 4886 | 53 |
+| /robot-learning | rewritten and production verified in PR130 | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
 | /robot-safety | inventory only; claim-by-claim review pending | 1391 | 12 |
 | /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
@@ -326,3 +326,7 @@ Six existing News reports and /robot-world-models distinguish predictive trainin
 ## Robot learning adaptation and supervision
 
 Six existing reports and /robot-learning distinguish memory updates, learned parameters, runtime conditioning and human labor. Corrected sample assignments, goal-image content, unsupported operator-count claims and control-frequency wording. Original modules and dated data exercises remain. No research execution or human fact sign-off is claimed. Whole-site review remains incomplete.
+
+## Tactile measurement, prediction and control evidence
+
+Six existing reports and /tactile-ai now distinguish haptic cues, demonstration records, solver forces, embeddings, predicted goals and committed actions. Corrected topology requirements and architecture, updated source-pinned release status, and separated original from follow-up results. Original sections, links, assets and publication dates remain. No research execution or human fact sign-off is claimed. Whole-site review remains incomplete.
