@@ -798,8 +798,8 @@ The official project publishes videos and identifies the work as CoRL 2026, but 
     id: 'jfm-rigid-soft-finger-jacobian-flow',
     title: 'JFM learns a resolution-consistent Jacobian for a rigid-soft finger',
     seoTitle: 'JFM Models a Tendon-Driven Rigid-Soft Finger',
-    seoDescription: 'Jacobian Flow Matching models a tendon-driven rigid-soft finger across sampling rates. Review 10,000-sample tests, RMSE gains and control limits.',
-    excerpt: 'Jacobian Flow Matching treats tendon-to-joint sensitivity as a continuous field, so predictions can be subdivided and integrated without the drift of a pointwise model.',
+    seoDescription: "Assess JFM’s data splits, clock pairing and inverse-command test; resolution-consistent prediction is distinct from physical closed-loop validation.",
+    excerpt: "Jacobian Flow Matching models tendon-to-joint sensitivity as a continuous field and reduces sampling-dependent prediction error on the authors’ recorded finger trajectories.",
     category: 'Soft robotic hands',
     image: '/generated/news/jfm-rigid-soft-finger-jacobian-flow.png',
     imageAlt: 'Diagram showing tendon commands entering a continuous Jacobian field and producing consistent finger-joint motion at dense and sparse sampling intervals.',
@@ -815,8 +815,8 @@ The official project publishes videos and identifies the work as CoRL 2026, but 
     evidenceStatus: 'Preprint under journal review · arXiv v1 · one physical finger · about 10,000 samples · open-loop validation only · no code or data release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-03',
-    updated: '2026-10-03',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# JFM learns a resolution-consistent Jacobian for a rigid-soft finger
 
 Researchers in China released Jacobian Flow Matching (JFM) on October 1, 2026 for modeling a tendon-driven, rigid-soft robotic finger. The method learns actuator-to-joint sensitivity as a continuous field rather than a pointwise mapping tied to one sampling interval. On the authors’ finger, it reduces average single-step RMSE by more than 53% and keeps multi-step predictions more stable when observations become sparse. [Paper and version record](https://arxiv.org/abs/2610.01668).
@@ -824,14 +824,14 @@ Researchers in China released Jacobian Flow Matching (JFM) on October 1, 2026 fo
 ## Key takeaways
 
 - The finger combines 3D-printed phalanges, PTFE-coated joint interfaces, a silicone capsule with woven ligaments and a tendon transmission network.
-- Training uses about 10,000 physical samples, with hand pose at 45 Hz and servo state at 55 Hz aligned by nearest timestamps.
+- The collection totals about 10,000 physical samples, split 80/10/10 for training, validation and testing, with hand pose at 45 Hz and servo state at 55 Hz aligned by nearest timestamps.
 - The reported results validate prediction and open-loop command recovery; closed-loop ODE control, multi-finger coordination and out-of-plane motion remain future work.
 
 ## Why a point Jacobian is not enough
 
 Rigid-soft fingers are difficult to model because the same tendon command can produce different motion depending on pose, friction, backlash, hysteresis and viscoelastic state. A discrete learned Jacobian can fit observed endpoints at one controller rate yet behave unpredictably when an optimizer queries intermediate states or a slower sensor produces larger steps.
 
-JFM normalizes each observed transition into a unit-time flow. Conditional Flow Matching supplies intermediate states between the start and end poses, and a consistency loss discourages the network from depending mainly on the starting anchor. The learned field can then serve either a single pointwise update or an ODE rollout that subdivides a command. The paper compares JFM with pointwise training under identical TinyTransformer and LSTM backbones, isolating the training framework rather than adding model capacity. [Architecture and physical data pipeline](https://arxiv.org/html/2610.01668v1).
+JFM normalizes each observed transition into a unit-time flow. Conditional Flow Matching supplies intermediate states between the start and end poses, and a consistency loss discourages the network from depending mainly on the starting anchor. The learned field can then serve either a single pointwise update or an ODE rollout that subdivides a command. The paper compares the training objectives with matched TinyTransformer and LSTM backbones and evaluates pointwise and ODE inference separately. [Architecture and physical data pipeline](https://arxiv.org/html/2610.01668v1).
 
 ## What the numbers establish
 
@@ -839,13 +839,13 @@ For single-step servo-to-angle prediction, JFM reduces global average RMSE by 57
 
 Resolution tests use 160 held-out trajectories. At stride 1, pointwise and integrated predictions are close. At stride 8, ODE inference reduces median RMSE by 14.43% and variance by 24.87% relative to the pointwise mode. This supports the specific claim that the field remains useful when a transition is subdivided or samples are skipped.
 
-An open-loop inverse test optimizes tendon commands for target joint motion. It reports overall RMSE 1.4151, mean angular error −0.2576° and standard deviation 1.39°. The model smooths abrupt commands to zero at hard stops because those boundary conditions are not explicit in its continuous field. Pointwise inference takes about 3.5 ms per query, but the paper does not report a closed-loop ODE controller running on hardware.
+An open-loop inverse test optimizes tendon commands for target joint motion. It reports overall RMSE 1.4151, mean angular error −0.2576° and standard deviation 1.39°. The model smooths abrupt commands to zero at hard stops because those boundary conditions are not explicit in its continuous field. Pointwise inference takes about 3.5 ms per query on the reported workstation, but the paper does not report a closed-loop ODE controller running on hardware.
 
 ## RoboSkin analysis
 
 The paper addresses a quiet integration problem for [robot hands](/robot-hands): perception and control rarely run at identical, perfectly stable rates. A model that changes behavior when the update interval changes can make calibration results misleading. JFM’s value is therefore less about another predictor score and more about a testable consistency condition across controller resolutions.
 
-The current input is proprioceptive, not tactile. Contact, friction and material effects are absorbed as disturbances within the training distribution rather than measured explicitly. For teams combining compliant mechanisms with [robot-hand tactile sensors](/applications/robot-hand-tactile-sensor), the next question is whether direct contact observations improve the field or reveal regimes where a local first-order model breaks down.
+The recorded signals are proprioceptive, including glove-based finger orientation and servo state, not tactile measurements. Contact, friction and material effects are absorbed as disturbances within the training distribution rather than measured explicitly. For teams combining compliant mechanisms with [robot-hand tactile sensors](/applications/robot-hand-tactile-sensor), the next question is whether direct contact observations improve the field or reveal regimes where a local first-order model breaks down.
 
 ## Limitations and availability
 
@@ -853,12 +853,26 @@ Evidence comes from one finger, flexion motion and one hardware/data pipeline. T
 
 The manuscript is an arXiv v1 preprint under review at Robotics and Autonomous Systems. It describes ROS 2 bags converted to HDF5, but no public dataset URL, code repository, model checkpoint, CAD package or implementation license was verified. The arXiv page itself does not grant rights to an absent implementation.
 
+## Separate interpolation, inference timing and physical validation
+
+JFM normalizes an observed transition into a unit interval. Its intermediate training states and integrated queries are model constructions, not newly measured high-rate finger motion or an independently calibrated instantaneous physical Jacobian. Likewise, evaluating strides of 1, 4 and 8 on held-out recorded trajectories tests sampling consistency; it does not test arbitrary communication delays or a replacement mechanism. [Method and evaluation details](https://arxiv.org/html/2610.01668v1).
+
+Three checks matter before incorporating this field into a controller:
+
+- **Data independence:** identify the split unit and keep complete capture sequences, sessions or replacement-hardware trials together as appropriate. The reported sample split alone does not establish generalization to a new day, person or finger.
+- **Timing and units:** inspect nearest-timestamp pairing between the glove and servo streams; record query mode, solver work and the age of the observations. A pointwise query time excludes the rest of a physical control loop.
+- **Executed motion:** distinguish reconstructing recorded tendon commands from applying them and measuring tracking, hard-stop behavior and contact under a new load. The inverse test reported here supplies the former, not closed-loop task completion.
+
+These are proposed follow-up checks. Retain separate angular-error and physical-task criteria, and repeat calibration when tendon tension or contact mechanics changes. A useful motion model can support [gripper integration](/robot-grippers#contact-evidence), but does not itself supply contact sensing, a force limit or grasp reliability.
+
 ## Sources and related resources
 
 - [Rigid-Soft Finger JFM v1, submitted October 1, 2026](https://arxiv.org/abs/2610.01668)
 - [Full method, data details and evaluation](https://arxiv.org/html/2610.01668v1)
 - [RoboSkin tactile sensor calibration guide](/guides/tactile-sensor-calibration)
 - [RoboSkin robot manipulation hub](/robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
   },
   {
@@ -1368,7 +1382,7 @@ At verification time, the paper and arXiv record did not link a project page, pu
     id: 'membrane-coupled-delta-array-micro-object-manipulation',
     title: 'A stretchable membrane lets a delta array manipulate sub-pitch objects',
     seoTitle: 'Membrane-Coupled Delta Array Moves Smaller Objects',
-    seoDescription: 'An 8×8 delta array turns 64 contacts into a continuous surface for 15–90 mm objects. Review its 192-DoF hardware and sim-to-real results.',
+    seoDescription: "Separate visual-feedback routing from learned membrane control; compare final-position criteria, simulation timing, coupled motion and hardware transfer limits.",
     excerpt: 'A nylon-spandex membrane couples 64 three-axis delta robots into a continuous surface, removing actuator spacing as a hard object-size floor.',
     category: 'Soft manipulation hardware',
     image: '/generated/news/membrane-coupled-delta-array-micro-object-manipulation.png',
@@ -1385,8 +1399,8 @@ At verification time, the paper and arXiv record did not link a project page, pu
     evidenceStatus: 'Preprint · arXiv v1 · physical 192-DoF platform · 50 learned-policy hardware trials · no public code, CAD or data verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-01',
-    updated: '2026-10-01',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# A stretchable membrane lets a delta array manipulate sub-pitch objects
 
 Researchers spanning IT University of Copenhagen and Carnegie Mellon University released a membrane-coupled delta array on September 30, 2026. The prototype links an 8 × 8 grid of three-degree-of-freedom delta robots with stretchable fabric, turning 64 discrete supports into one deformable contact surface. It manipulates objects from 15 to 90 millimeters on hardware even though neighboring actuators are 43.3 millimeters apart. [Paper and version record](https://arxiv.org/abs/2609.39652).
@@ -1394,7 +1408,7 @@ Researchers spanning IT University of Copenhagen and Carnegie Mellon University 
 ## Key takeaways
 
 - Sixty-four delta robots provide 192 controlled degrees of freedom beneath a 263 × 325 mm nylon-spandex membrane.
-- Local open-loop primitives route 15 mm cubes, while a learned policy moves five 30–90 mm objects to target positions in 50 physical trials.
+- Predefined local primitives, supervised by visual tracking and replanning, route 15 mm cubes, while a learned policy moves five 30–90 mm objects to target positions in 50 physical trials.
 - The learned policy reaches 76% hardware success versus 100% for identical start-goal cases in simulation; fine placement remains the main transfer gap.
 
 ## What changed
@@ -1421,9 +1435,23 @@ The paper also points directly to the missing next layer. The learned observatio
 
 ## Limitations and availability
 
-This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the system. The 15 mm result comes from scripted local primitives; the learned-policy transfer covers 30–90 mm. Hardware trials total 50, with ten per object. The nylon-spandex membrane is nonlinear, anisotropic and subject to wrinkling, boundary loads, motor backlash and manufacturing tolerance. The simulation uses an idealized flex surface and convex-hull collision geometry, which helps explain the fine-placement gap.
+This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the system. The 15 mm result comes from predefined primitives with tracking, retries and route updates; the learned-policy transfer covers 30–90 mm. Hardware trials total 50, with ten per object. The nylon-spandex membrane is nonlinear, anisotropic and subject to wrinkling, boundary loads, motor backlash and manufacturing tolerance. The simulation uses an idealized flex surface and convex-hull collision geometry, which helps explain the fine-placement gap.
 
-The manuscript does not link an official project page, public controller code, MuJoCo environment, CAD package, bill of materials, dataset or implementation license. The arXiv article is CC BY 4.0; no reuse terms were verified for the unreleased hardware or software assets.
+The manuscript does not link an official project page, public controller code, MuJoCo environment, CAD package, bill of materials, dataset or implementation license. The arXiv article is CC BY 4.0; that article license does not establish reuse terms for separate hardware or software assets, which were not verified in this review.
+
+## State the control layer and success criterion before comparing accuracy
+
+The small-object demonstration and learned-policy evaluation answer different questions. Routing holds a predefined transfer primitive until tracking confirms movement; stalled transfers can be retried and the graph route revised. Calling the whole process open-loop would hide that feedback. The learned controller instead chooses a low-dimensional deformation field from the tracked state. [Routing and policy methods](https://arxiv.org/html/2609.39652v1).
+
+| Evaluation | Feedback and comparison | Boundary to retain |
+| --- | --- | --- |
+| 15 mm-object routing | Visual confirmation, retries and graph replanning | Demonstrated routes do not establish arbitrary final pose or independent simultaneous operation |
+| Learned physical transfer | Final-position error below 20 mm after 100 steps; 38 of 50 trials | A closest approach is not the final held position; orientation is not the reported goal metric |
+| Local versus whole-array policy | Both use 27 action parameters | Allocating them locally changes spatial resolution, so this is not simply a comparison of motor count |
+
+The physical policy runs at 5 Hz; the paper’s 2 kHz value describes simulation physics. Neither the camera frame rate nor that simulator rate establishes contact-to-command latency. The membrane also couples neighboring motions and has strain and edge constraints, so concurrent objects need a combined-load evaluation.
+
+For adoption, specify final position, orientation, holding interval, allowed retries and surface condition before collecting trials. Log snagging and edge failures separately from transient proximity to the goal. These proposed checks extend the [gripper/contact acceptance guide](/robot-grippers#contact-evidence); the array is a manipulation surface, not a tactile skin or a commercial gripper rating.
 
 ## Sources and related resources
 
@@ -1431,6 +1459,8 @@ The manuscript does not link an official project page, public controller code, M
 - [Full hardware, workspace, policy and transfer evaluation](https://arxiv.org/html/2609.39652v1)
 - [RoboSkin electronic-skin overview](/e-skin)
 - [RoboSkin Physical AI guide](/physical-ai)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
   },
   {
@@ -1672,7 +1702,7 @@ Before adapting it, write down which fields supervise learning, which feed infer
     id: 'single-element-tackiness-tactile-sensor',
     title: 'A single-element tactile sensor separates pressure from tackiness',
     seoTitle: 'Single-Element Tactile Sensor Measures Tackiness',
-    seoDescription: 'A Hall-effect tactile sensor separates compression and pull-off signals at one contact point. Review its ranges, response, durability and robot tests.',
+    seoDescription: "Interpret a Hall sensor’s compression and pull-off signals; distinguish peak stress, separation work, scripted handling and replacement calibration.",
     excerpt: 'A soft magnet and one Hall sensor generate opposite-polarity signals for compression and pull-off, enabling continuous pressure and tackiness tracking.',
     category: 'Electronic skin hardware',
     image: '/generated/news/single-element-tackiness-tactile-sensor.png',
@@ -1689,8 +1719,8 @@ Before adapting it, write down which fields supervise learning, which feed infer
     evidenceStatus: 'Preprint · arXiv v1 · laboratory sensor characterization and scripted robot demonstrations · no implementation files verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-30',
-    updated: '2026-09-30',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# A single-element tactile sensor separates pressure from tackiness
 
 Researchers at Sun Yat-sen University and Helmholtz-Zentrum Dresden-Rossendorf released a single-element tactile sensor for concurrent pressure and tackiness measurement on September 29, 2026. A soft magnet moves toward one Hall sensor during compression and away from it during adhesive pull-off, putting the two force directions on opposite sides of a stable electrical baseline. The authors report ranges of 0–150 kilopascals for pressure and 0–33 kilopascals for outward pulling stress. [Paper and version record](https://arxiv.org/abs/2609.36558).
@@ -1715,7 +1745,7 @@ The optimized sensor covers 0–150 kPa compression and 0–33 kPa pull-off stre
 
 The response-time test uses a 6-volt sensor supply, while most characterization uses 5 volts and robot demonstrations use 2 volts. That matters because the paper also notes that sensitivity changes with supply voltage. Range and timing figures should therefore be read as properties of the reported configurations, not universal ratings for every integration.
 
-For manipulation, the team mounts the sensor on a two-finger electric gripper attached to a commercial arm. Scripted grasps distinguish a clean bottle from one carrying double-sided tape: the contaminated object produces a pull-off signal and triggers another grasp attempt at a clean area. A separate robot-hand demonstration touches seven PDMS samples with different base-to-crosslinker ratios. Three runs reproduce their tackiness order at fast retraction speed.
+For manipulation, the team mounts the sensor on a two-finger electric gripper attached to a commercial arm. Scripted grasps distinguish a clean bottle from one carrying double-sided tape: the contaminated object produces a pull-off signal, after which the authors clean the bottle before handling it again. They also describe opening and closing the gripper to weaken adhesion when cleaning is unavailable. This does not demonstrate an autonomous policy that locates a clean grasp area. A separate robot-hand demonstration touches seven PDMS samples with different base-to-crosslinker ratios. Three runs reproduce their tackiness order at fast retraction speed.
 
 ## What this means for robotics
 
@@ -1727,7 +1757,22 @@ Pull-off amplitude is not a complete material label, however. At slower separati
 
 This work is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Robot motions are predefined, and the manuscript does not report repeated end-to-end task success rates. The present device is one sensing element with commercial Hall packaging. The authors describe miniaturization and arrays as future work.
 
-Large adhesive loads can damage the upper structure despite its compression durability; replacement is possible, but the design is not yet maintenance-free. The arXiv record and manuscript were accessible during verification, while no official project page, fabrication repository, CAD package, raw dataset or implementation license was identified.
+Large adhesive loads can damage the upper structure despite its compression durability; replacement is possible, but the design is not yet maintenance-free. The arXiv record and manuscript were accessible during verification, while the November 4 review of those sources identified no official project page, fabrication repository, CAD package, raw dataset or implementation license.
+
+## Define adhesion measurement and successful release separately
+
+Signal polarity answers a narrower question than material identification: whether the structure is compressed or pulled outward relative to its baseline. Converting that signal to stress requires the tested calibration and contact geometry. The paper’s sensor-selection study also reports the best of three devices for a range comparison; that is not a manufacturing-yield result. [Characterization and selection protocol](https://arxiv.org/pdf/2609.36558).
+
+For an adhesive-part handling trial, keep four records separate:
+
+| Record | What to hold fixed or measure | What it establishes |
+| --- | --- | --- |
+| Contact preparation | Surface condition, contact area, preload and dwell | Whether two pull-off trials are comparable |
+| Retraction | Displacement and speed alongside calibrated load | Peak pull-off and force–distance work, which can rank samples differently |
+| Release | Independent observation of complete separation and final part location | Whether opening the gripper actually released the object |
+| Reset | No-load baseline, supply voltage and upper-layer condition | Whether the next reading uses a comparable sensor state |
+
+These are proposed acceptance records, not additional author experiments. A voltage–time integral is not automatically separation energy, and a large compression-cycle count does not establish survival under large adhesive loads. After replacing the upper layer, repeat the relevant calibration before comparing material labels or setting control thresholds. Use the [gripper contact-evidence framework](/robot-grippers#contact-evidence) to distinguish a useful release signal from a complete manipulation result.
 
 ## Sources and related resources
 
@@ -1735,6 +1780,8 @@ Large adhesive loads can damage the upper structure despite its compression dura
 - [Full fabrication, characterization and robot tests](https://arxiv.org/pdf/2609.36558)
 - [RoboSkin electronic-skin guide](/e-skin)
 - [RoboSkin tactile sensor directory](/sensors)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
   },
   {
@@ -1976,7 +2023,7 @@ Before reuse, pin the code and dataset revisions, record the artifact-specific t
     id: 'tacgoosebumps-shear-encoding-tactile-sensor',
     title: 'TacGooseBumps adds shear cues to normal-only tactile sensors',
     seoTitle: 'TacGooseBumps Shear Encoding for Tactile Sensors',
-    seoDescription: 'TacGooseBumps is a passive domed film that encodes shear in pressure maps. Review insertion gains, fragile handling and calibration limits.',
+    seoDescription: "Assess TacGooseBumps surface geometry, clock alignment and damage criteria; shear-dependent patterns are distinct from calibrated force or retrofit reliability.",
     excerpt: 'TacGooseBumps retrofits ordinary pressure arrays with an electronics-free dome film that converts tangential loading into learnable spatial patterns.',
     category: 'Tactile sensor hardware',
     image: '/generated/news/tacgoosebumps-shear-encoding-tactile-sensor.png',
@@ -1993,8 +2040,8 @@ Before reuse, pin the code and dataset revisions, record the artifact-specific t
     evidenceStatus: 'Preprint · arXiv v1 · four physical robot tasks · no official code, CAD, dataset or software license verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-29',
-    updated: '2026-09-29',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# TacGooseBumps adds shear cues to normal-only tactile sensors
 
 University of California, Berkeley researchers released TacGooseBumps, or TacGB, on September 27, 2026. TacGB is a removable film of elastomeric domes that sits on an existing normal-pressure array. Tangential loading tilts each dome and redistributes pressure across neighboring taxels, giving a learned policy repeatable shear-dependent patterns without new electronics or explicit force reconstruction. [Paper and version record](https://arxiv.org/abs/2609.34006).
@@ -2015,13 +2062,13 @@ Two collection pipelines test the idea. USB and light-bulb insertion use a FANUC
 
 ## Results beyond binary success
 
-For USB insertion, the researchers collect 100 demonstrations for each of three surfaces: bare, off-the-shelf TacGB and molded TacGB. Each policy receives the same 20 deployment initializations. Success is 75%, 95% and 90% respectively. Mean time among successful trials decreases from 29.3 seconds to 27.1 and 26.7 seconds. A surface-only control, where the robot wears the domes but the policy does not receive their pressure maps, does not reproduce the gain.
+For USB insertion, the researchers collect 100 demonstrations for each of three surfaces: bare, off-the-shelf TacGB and molded TacGB. Each policy receives the same 20 deployment initializations. Success is 75%, 95% and 90% respectively. Mean time among successful trials decreases from 29.3 seconds to 27.1 and 26.7 seconds. A surface-only control, where the robot wears the domes but the policy does not receive their pressure maps, does not reproduce a consistent gain: the three vision-only surface conditions report 60%, 65% and 55% success.
 
 For the bayonet light bulb, the off-the-shelf layer raises total success from 15/25 to 24/25. Nominal trials improve from 13/20 to 20/20, while the five changed-height/free-rotation trials improve from 2/5 to 4/5. Those five out-of-distribution episodes are too few for a stable standalone percentage, so the article preserves the counts. [Insertion evaluation](https://arxiv.org/html/2609.34006v1#S4).
 
-Egg transfer exposes a limitation of binary success. Both policies complete 25/25 rollouts, yet two eggs in the bare-sensor condition develop visible cracks. An external cup sensor—not an input to the policy—shows mean peak readout falling 66%, from 0.77 to 0.26, while mean contact-transfer duration rises from 0.99 to 3.84 seconds with TacGB. These readings are an external load proxy, not calibrated impact force.
+Egg transfer exposes a limitation of binary success. Both policies complete 25/25 rollouts, yet two of the five repeatedly used eggs in the bare-sensor condition develop visible cracks. Each egg receives five trials, so this is not a count of two failures among 25 independent fresh objects. An external cup sensor—not an input to the policy—shows mean peak readout falling 66%, from 0.77 to 0.26, while mean contact-transfer duration rises from 0.99 to 3.84 seconds with TacGB. These readings are an external load proxy, not calibrated impact force.
 
-On whiteboard drawing, each policy is evaluated over 20 rollouts. TacGB improves ink coverage and reduces perpendicular path deviation, supporting the claim that the encoded signal helps with sustained two-directional contact as well as discrete insertion states.
+On whiteboard drawing, each policy is evaluated over 20 rollouts. TacGB improves ink coverage and reduces perpendicular path deviation in this setup. Its pressure map is tared during the first three seconds with the marker already held, so the resulting signal is not absolute grasp force.
 
 ## What this means for robotics
 
@@ -2033,7 +2080,21 @@ The engineering caveat is equally important. Pattern separability can help a pol
 
 TacGooseBumps is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Repeated deployment rollouts reuse a trained policy and therefore do not measure variability across independently trained seeds. The authors explicitly call for studies that vary dome geometry, material and layout while separating training, object and rollout variation.
 
-No official project page, public code repository, CAD or mold files, training data, checkpoints or software license was verified. The paper demonstrates off-the-shelf and lab-made surfaces, but it does not yet provide a packaged bill of materials or a calibrated shear-transfer function.
+The November 4 source review did not verify an official project page, public code repository, CAD or mold files, training data, checkpoints or software license. The paper demonstrates off-the-shelf and lab-made surfaces, but it does not yet provide a packaged bill of materials or a calibrated shear-transfer function.
+
+## A retrofit still changes the measurement and evaluation contract
+
+Avoid treating unchanged electronics as unchanged sensing. The tested off-the-shelf and molded layers have different dome sizes and spacing; neither requires exact dome-to-taxel registration, but both change contact mechanics. Replacing a pad can therefore change the pressure patterns used by a policy even when its tensor shape is identical. The paper does not establish that an existing policy transfers unchanged to any replacement surface. [Design and collection methods](https://arxiv.org/html/2609.34006v1).
+
+The handheld collection pipeline also aligns separately recorded phone and tactile streams using a single estimated time offset. That is different from shared-clock acquisition and does not by itself measure time-varying drift. Before reuse, document the dome revision, installation, sensor baseline, acquisition clocks and alignment residual around actual contact events.
+
+| Task outcome | An incomplete criterion | A more informative acceptance record |
+| --- | --- | --- |
+| Insertion | Reaching the target pose | Seating, locking or connection, according to the task; the bulb study requires illumination and locking |
+| Fragile transfer | Arriving at the destination | Damage per object, repeated-use history and contact duration alongside completed trials |
+| Sustained contact | A lower pressure-map value | Tare conditions, coverage/path error and an independent load reference when force matters |
+
+This is a proposed evaluation checklist. Surface friction, compliance, policy training and tactile input can all affect outcomes; an improvement on one task does not identify a calibrated shear-transfer function. Compare the [contact evidence required for a gripper](/robot-grippers#contact-evidence) before deciding whether encoded patterns are sufficient for the intended controller.
 
 ## Sources and related resources
 
@@ -2041,6 +2102,8 @@ No official project page, public code repository, CAD or mold files, training da
 - [Full design, controls and four-task evaluation](https://arxiv.org/html/2609.34006v1)
 - [RoboSkin tactile sensor guide](/sensors)
 - [RoboSkin electronic-skin overview](/e-skin)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
   },
   {
@@ -3276,7 +3339,7 @@ The official project page supplies videos and detailed tables, but identifies it
     id: 'support-enhanced-granular-jamming-gripper',
     title: 'A support rod turns granular jamming into a continuum-robot gripper',
     seoTitle: 'Support-Enhanced Granular-Jamming Gripper: Test Results',
-    seoDescription: 'A granular-jamming gripper adds an internal support rod for a continuum robot. Review 10-trial tests, shape limits, 4.23 cm reaching RMSE and availability.',
+    seoDescription: "Compare granular-gripper capture regions with reaching error; review v2 evidence, volume-based fill ratios and the missing end-to-end task denominator.",
     excerpt: 'The design couples a compliant membrane and particles with a direct load path at a bending robot tip. Mechanical tests are quantitative; the complete autonomous sequence is demonstrated without a reported success rate.',
     category: 'Adaptive grippers',
     image: '/generated/news/support-enhanced-granular-jamming-gripper.png',
@@ -3285,16 +3348,17 @@ The official project page supplies videos and detailed tables, but identifies it
     sourceTitle: 'A Support-Enhanced Granular-Jamming Gripper for RL-based Grasping with Continuum Manipulators',
     sourceUrl: 'https://arxiv.org/abs/2609.29093',
     sources: [
+      { title: "Current v2, revised September 25, 2026", url: "https://arxiv.org/html/2609.29093v2" },
       { title: 'Granular-jamming gripper arXiv v1 record', url: 'https://arxiv.org/abs/2609.29093' },
       { title: 'Full v1 design, tests and deployment paper', url: 'https://arxiv.org/html/2609.29093v1' },
     ],
     technicalFocus: ['granular-jamming gripper', 'continuum robot', 'mechanical adaptation', 'sim-to-real reinforcement learning'],
     sourceDate: '2026-09-24',
-    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+    evidenceStatus: "Preprint · arXiv v2 reviewed November 4 · separate mechanical and reaching tests · no repeated complete-task success rate or implementation assets verified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-25',
-    updated: '2026-09-25',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# A support rod turns granular jamming into a continuum-robot gripper
 
 Danyu Liu and colleagues released a support-enhanced granular-jamming gripper on September 24, 2026, for tendon-driven continuum manipulators. A flexible membrane and mobile particles conform during contact; vacuum locks that shape, while an internal rod promotes enclosure and carries load back to the bending robot tip. In a matched 10-trial mechanical test, the supported gripper completed 10 lifts and holds versus six without the rod. [Paper and version record](https://arxiv.org/abs/2609.29093).
@@ -3311,7 +3375,7 @@ Continuum manipulators reach through confined spaces by bending rather than rota
 
 The proposed end effector adds a support rod inside a particle-filled membrane. Before vacuum, the rod provides a boundary against which the membrane can wrap, transmits continued approach force and helps develop a deeper enclosure. After evacuation, it creates a more direct load path instead of asking the membrane alone to retain the object.
 
-The team compares natural-rubber and thermoplastic-polyurethane membranes, three particle types and three fill ratios. The selected design uses natural rubber, thermoplastic-rubber spheres and a 50% nominal filling ratio. The paper says the thermoplastic-rubber fill lowers gripper mass relative to polystyrene while retaining the same measured success, but does not report the absolute mass. [Configuration study](https://arxiv.org/html/2609.29093v1#S4.SS2).
+The team compares natural-rubber and thermoplastic-polyurethane membranes, three particle types and three fill ratios. The selected design uses natural rubber, thermoplastic-rubber spheres and a 50% nominal filling ratio, defined as loose-particle volume divided by the membrane’s natural uncompressed interior volume—not a mass fraction. The paper says the thermoplastic-rubber fill lowers gripper mass relative to polystyrene while retaining the same measured success, but does not report the absolute mass. [Configuration study](https://arxiv.org/html/2609.29093v1#S4.SS2).
 
 ## How much contact error can it absorb?
 
@@ -3337,9 +3401,23 @@ The current design does not include [tactile or pressure sensing](/tactile-ai). 
 
 ## Limitations and availability
 
-Tests cover a limited set of objects, approach orientations and contact offsets. The support geometry is not optimized, broader three-dimensional pose variation is not evaluated and the absolute gripper mass is unreported. The paper's title page does not state affiliations; acknowledgements cite support involving the Hong Kong Centre for Logistics Robotics, the Chinese University of Hong Kong, Zhejiang University and China's National Natural Science Foundation. That funding statement is not used here to infer author employment.
+Tests cover a limited set of objects, approach orientations and contact offsets. The support geometry is not optimized, broader three-dimensional pose variation is not evaluated and the absolute gripper mass is unreported. The current v2 title page lists the Hong Kong Embodied AI Lab and the Chinese University of Hong Kong for most authors, and Zhejiang University for Wei Tang. This updates the earlier v1-based affiliation note; funding acknowledgements are not substituted for affiliations.
 
-The arXiv v1 paper was accessible on September 25. No official project page, CAD, bill of materials, controller repository, dataset or license for implementation assets was linked. RoboSkin.ai has not reproduced the hardware or policy.
+The first version was submitted September 24; the current v2 is dated September 25 and was reviewed November 4. The reviewed paper and arXiv record did not identify an official project page, CAD, bill of materials, controller repository, dataset or license for implementation assets. RoboSkin.ai has not reproduced the hardware or policy.
+
+## Evaluate the overlap between reaching error and a usable grasp
+
+A scalar reaching RMSE and a capture-region plot cannot be combined into a full-task success rate. One aggregates distance error over reaches; the other samples object-specific contact conditions with manual or fixed motion. A reach can be close in distance yet approach from an unfavorable orientation, or pass through a usable region without settling long enough to form enclosure. [Current v2 system and evaluation](https://arxiv.org/html/2609.29093v2).
+
+For a deployment trial, define one complete attempt and keep the same object and setup identifiers through each stage:
+
+| Stage | Record for each attempt |
+| --- | --- |
+| Reach and settle | Position, orientation, residual motion and whether the intended contact region was reached |
+| Form and retain contact | Continued compression, pneumatic state, lift/hold outcome and loss of enclosure |
+| Transfer and release | Retention through the motion, final destination, release and any intervention |
+
+This is a proposed combined test, not a denominator supplied by the paper. Do not multiply the separate ten-trial mechanical result by a reaching score. The support-rod comparison also combines several mechanical effects; it does not isolate one load-path mechanism. For a different object, membrane replacement or approach direction, repeat the conditional capture tests before treating the previous map as applicable. The [gripper selection framework](/robot-grippers#contact-evidence) separates passive adaptation from measured contact and executed feedback.
 
 ## Sources and related resources
 
@@ -3347,6 +3425,8 @@ The arXiv v1 paper was accessible on September 25. No official project page, CAD
 - [Full gripper design and evaluation](https://arxiv.org/html/2609.29093v1)
 - [RoboSkin soft robotic skin guide](/applications/soft-robotic-skin)
 - [RoboSkin robot manipulation guide](/robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
   },
   {
@@ -4649,12 +4729,12 @@ For downstream use, select a permitted held-out recording with independent conta
     title: 'FibTac combines pneumatic gripping and tactile sensing',
     seoTitle: 'FibTac: Pneumatic Tactile Gripper and Lab Results',
     seoDescription:
-      'Review Purdue’s FibTac gripper: fiber-based tactile sensing, liquid and underwater classification results, experiment sizes, payload, and public evaluation assets.',
+      "Read FibTac’s motion-dependent sensing, task splits and open-loop pneumatics; distinguish classification, flow estimation and verified release permissions.",
     excerpt:
       'Purdue researchers use the same fiber array to grasp objects and sense contact. The peer-reviewed study reports air and water experiments, with separate protocols for objects, liquids, and granular media.',
     content: `# FibTac combines pneumatic gripping and tactile sensing
 
-**Research news — paper published August 31, 2026; reviewed September 11, 2026**
+**Research news — paper published August 31, 2026; first reviewed September 11; source review updated November 4, 2026**
 
 FibTac is a pneumatic gripper that uses carbon fibers both to manipulate objects and to sense their interaction with the environment. Researchers at Purdue University describe the system in a peer-reviewed paper published in npj Robotics on August 31, 2026. Its useful distinction is the shared mechanical structure: the fibers do the grasping, while an internal camera reads their movement as tactile information. [Read the paper](https://www.nature.com/articles/s44182-026-00112-0).
 
@@ -4662,7 +4742,7 @@ The laboratory results cover chess-piece identification, liquid classification, 
 
 ## How a fiber gripper senses touch
 
-Carbon fibers are embedded in silicone inside a waterproof housing. Pneumatic pressure changes the fiber array’s configuration to grasp or release an object. The camera observes fiber-tip motion, which also changes when an object or surrounding medium resists that movement. Learned models use these image sequences for classification or regression.
+Carbon fibers are embedded in silicone inside a waterproof housing. Pneumatic pressure deforms the silicone membrane, translating and reorienting the rigid fibers to grasp or release an object; the fibers themselves are not the compliant bending element. The camera observes fiber-tip motion, which also changes when an object or surrounding medium resists that movement. Learned models use these image sequences for classification or regression.
 
 This combines actuation and sensing in a compact contact structure. It also makes the signal depend on how the robot moves: liquid tests use active grasp–release cycles, whereas the granular tests move the gripper vertically with passive fibers. The sensing protocol is part of the measurement, not just a detail of the demonstration.
 
@@ -4677,7 +4757,7 @@ The following values are author-reported results from the paper. Clips, held-out
 | Chess-piece recognition | Six piece types; 105 clips per class, with 20% reserved for validation; a separate online manipulation evaluation uses 20 trials in total | 100% in the 20 online trials | A small online cohort, not 100% accuracy across arbitrary grasped objects |
 | Liquid classification | Water, honey, syrup, dish liquid, oil, and an empty reference; 220 training and 20 test clips per class | Approximately 97.5% classification accuracy | Six classes include the empty reference; this is not six different liquids |
 | Granular-material classification | Flour, beans, rice, oats, and sugar; 200 clips per class with 10% for validation, plus 20 test samples per class | Approximately 90% classification accuracy | Passive fibers sense resistance during robot-driven vertical movement |
-| Underwater object classification | Four objects; 110 clips per object, including 10 validation and 10 test clips per object | 100% classification accuracy | A controlled four-object underwater experiment |
+| Underwater object classification | Four objects; 110 clips per object, including 10 validation and 10 test clips per object | 100% classification accuracy | A controlled four-object underwater experiment; three objects are artificial replicas and one is seaweed |
 
 The chess experiment’s 20 online trials should not be substituted for the larger clip-based training and validation collection. Likewise, the underwater result does not imply that the gripper can identify unseen marine objects. These distinctions matter when comparing FibTac with other [robotic gripper tactile sensors](/applications/robot-gripper-tactile-sensor).
 
@@ -4691,9 +4771,9 @@ For an engineering reader, this makes FibTac a candidate for studying coupled gr
 
 ## What can be inspected or reproduced today?
 
-The authors’ [FibTac repository](https://github.com/xvvzhang/FibTac) provides evaluation notebooks for five tasks and links external data and checkpoints. At the reviewed revision, the repository describes validation/test assets rather than a complete training-data release. RoboSkin reviewed the repository and its instructions but did not download the external data or rerun the models.
+The authors’ [FibTac repository](https://github.com/xvvzhang/FibTac) provides evaluation notebooks for five tasks and links external data and checkpoints. The November 4 root and README review still describes validation/test assets rather than a complete training-data release. RoboSkin reviewed the repository and its instructions but did not download the external data or rerun the models.
 
-The paper and repository point to different Google Drive folders. Both are source-provided links; their contents and equivalence were not independently verified in this review. A reproducer should first confirm that the selected notebook, checkpoint, and evaluation split belong together. The reviewed GitHub root did not contain a license file, so the paper’s open-access status should not be treated as a software or data license.
+The paper and repository point to different Google Drive folders. Both are source-provided links; their contents and equivalence were not independently verified in this review. A reproducer should first confirm that the selected notebook, checkpoint, and evaluation split belong together. The November 4 GitHub root has no license file and its license metadata is empty, so the paper’s open-access status should not be treated as a software or data license.
 
 ## Limits to carry into a comparison
 
@@ -4701,16 +4781,26 @@ The paper discusses practical constraints, including camera-cable fragility, the
 
 RoboSkin did not conduct these laboratory experiments. The article synthesizes the authors’ paper and public repository, and the cover is an illustration. For alternative contact structures, see [soft robotic skin](/applications/soft-robotic-skin) and the [tactile sensor benchmark guide](/benchmarks). For a different approach that reconstructs contact geometry from sparse electrical measurements, compare [TacPrint’s controlled grasping results](/research/tacprint-wearable-tactile-contact-reproduction-2026).
 
+## Sensing does not automatically close the pneumatic control loop
+
+FibTac’s active sensing uses timed pneumatic commands and predefined robot waypoints. In the chess example, classification selects a predefined destination; it does not establish a controller that continuously adjusts grasp pressure from measured contact. The camera’s 60 fps is an acquisition setting, not evidence of a 60 Hz robot feedback loop. [Control and experimental methods](https://www.nature.com/articles/s44182-026-00112-0).
+
+There is also a model-selection boundary in the flow experiment: the methods select the model using the lowest test-set MAE. That score therefore should not be presented as performance on an untouched final holdout. A new comparison should reserve an additional evaluation set, freeze model selection first and preserve the grouping by angle, flow condition and capture sequence. This is a proposed evaluation design; RoboSkin has not rerun the model.
+
+For a new gripper or medium, record commanded pressure, robot motion, camera timing, fiber geometry and the actual outcome alongside the predicted class or flow. Recheck those relationships after replacing the membrane or fibers. Include unfamiliar objects and an explicit rejection decision instead of assuming every input belongs to a known class. The paper itself reports unreliable weight estimation, so successful classification must not be converted into a calibrated weight or contact-force claim. See the [contact-evidence comparison](/robot-grippers#contact-evidence) for the separate tests needed before using a sensor output in control.
+
 ## Sources
 
 - [Athar et al.: FibTac, npj Robotics, August 31, 2026](https://www.nature.com/articles/s44182-026-00112-0)
 - [Purdue MARS Lab research listing](https://www.purduemars.com/research)
 - [FibTac evaluation repository, reviewed revision](https://github.com/xvvzhang/FibTac/tree/3f2d29848c1d0eeddd89605259a19d1188241bb0)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Experiments are attributed to their authors; RoboSkin did not reproduce the hardware, execute the models or inspect downloaded experimental payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-11',
-    updated: '2026-09-11',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile grippers',
     image: '/generated/authority/research-soft-robotic-skin.webp',
     sourceTitle: 'FibTac: a fiber-based pneumatic gripper with embodied tactile sensing',
