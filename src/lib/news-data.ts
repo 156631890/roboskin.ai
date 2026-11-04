@@ -783,7 +783,7 @@ For an integration review, keep assumed friction, impact model, contact geometry
     id: 'continual-6dof-grasp-synthesis-memory',
     title: 'Continual 6-DoF grasping learns from outcomes without weight updates',
     seoTitle: 'Continual 6-DoF Grasping Uses Outcome Memory',
-    seoDescription: 'A 6-DoF grasp system updates scores from outcomes and recalls demonstrations without weight updates. Review 1,500+ trials, gains and release limits.',
+    seoDescription: "Assess memory-based grasp adaptation, outcome labels and recall budgets; separate sequential tests, merged memories and the current public code release.",
     excerpt: 'A memory-based grasp pipeline turns successes, failures and optional demonstrations into immediate proposal and score changes instead of repeatedly fine-tuning a network.',
     category: 'Adaptive robot grasping',
     image: '/generated/news/continual-6dof-grasp-synthesis-memory.png',
@@ -798,11 +798,11 @@ For an integration review, keep assumed friction, impact model, contact geometry
     ],
     technicalFocus: ['continual grasp learning', '6-DoF grasp synthesis', 'outcome memory', 'demonstration recall'],
     sourceDate: '2026-10-01',
-    evidenceStatus: 'CoRL 2026 paper · arXiv v1 · more than 1,500 physical grasp attempts · project videos public · code coming soon',
+    evidenceStatus: "CoRL 2026 paper · arXiv v1 · public benchmark/model documentation and MIT code licenses reviewed · no payload or execution verified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-03',
-    updated: '2026-10-03',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# Continual 6-DoF grasping learns from outcomes without weight updates
 
 ETH Zurich researchers released a continual-learning system for single-view 6-DoF grasp synthesis on October 1, 2026. The CoRL 2026 paper keeps its neural encoder fixed after deployment. Successful and failed grasps update a local memory-based score, while optional user demonstrations contribute new candidates through geometric registration. The evaluation includes more than 1,500 physical grasp attempts. [Paper and version record](https://arxiv.org/abs/2610.01301).
@@ -821,7 +821,7 @@ Demonstration recall addresses a different failure. If the geometric sampler nev
 
 ## Simulation and physical evidence
 
-Simulation uses 443 unseen objects across ten categories, with 2,500 attempts per category and method. Before online adaptation, the proposed base averages 94.6%, compared with 92.9% for EdgeGraspNet. Category-specific full adaptation raises the average to 98.1%; scoring-only reaches 97.1%, while recall-only reaches 85.6%. That ablation suggests the non-parametric scorer drives most average improvement, while recall remains useful for missing proposal modes.
+The main category-wise simulation comparison uses 443 unseen objects across ten categories, with 2,500 attempts per category for the base and full adaptation methods. Before online adaptation, the proposed base averages 94.6%, compared with 92.9% for EdgeGraspNet. Category-specific full adaptation raises the average to 98.1%; scoring-only reaches 97.1%, while recall-only reaches 85.6%. That ablation suggests the non-parametric scorer drives most average improvement, while recall remains useful for missing proposal modes.
 
 The physical setup uses a Franka Panda, parallel-jaw gripper and RealSense D435i. Fifty-four objects form one 13-object control set and five challenge groups: mugs and bowls, kitchen tools, pliers, screwdrivers and toys. Each category has 20 fixed evaluation scenes per method. Because scenes contain multiple objects, the number of attempts varies with how quickly a method clears a scene; “more than 1,500” is therefore the supported total, not a uniform trials-per-cell claim.
 
@@ -835,9 +835,26 @@ The work also separates contact proposal from contact evaluation, a useful desig
 
 ## Limitations and availability
 
-The experiments use one parallel-jaw platform and geometry-only observations. Reflective, transparent and metallic surfaces can corrupt depth, and memory cannot recover geometry absent from the input. Recall cost grows with demonstrations; the reported sequential simulation ends at 1.35 MB, but larger deployments would need filtering. The study focuses on difficult object categories rather than systematic variation in sensor noise or contact dynamics.
+The experiments use one parallel-jaw platform and geometry-only observations. Reflective, transparent and metallic surfaces can corrupt depth, and memory cannot recover geometry absent from the input. Recall workload grows with demonstrations under a fixed time budget; the reported sequential simulation memory ends at 1.35 MB, which is not total system memory. Larger deployments would need to measure the resulting recall tradeoff. The study focuses on difficult object categories rather than systematic variation in sensor noise or contact dynamics.
 
-The official project publishes videos and identifies the work as CoRL 2026, but its code link is labeled “Coming Soon.” No repository, trained model, grasp-memory archive, physical dataset or implementation license was verified. RoboSkin.ai did not run the system.
+The November 4 review found that the official project now links public [benchmark code](https://github.com/giuschio/graspcl-benchmark-public/tree/3a77d13e2774e39beb4b8468c9e6b25bb429244c) and [model code](https://github.com/giuschio/graspcl-model-public/tree/a70396107067d3894624b359107b17470cbb97ef), both carrying MIT software licenses. Their READMEs describe simulation and Panda integration, and link base/adapted modules and synthetic training data. Those external payloads were not downloaded or verified here; third-party object assets and submodules require their own checks. Source documentation is available, but RoboSkin has not executed the code or reproduced the experiments.
+
+## Version the memory as carefully as the neural checkpoint
+
+A frozen encoder does not make the deployed behavior fixed. Outcome memory changes candidate scores, while demonstration memory can introduce a previously absent grasp. The weighted Beta update uses similarity-weighted evidence and source-dependent weighting; its score should not be treated as a calibrated probability of safe completion. A demonstrated pose can also receive a positive label without an executed success. [Scoring, recall and evaluation appendices](https://arxiv.org/html/2610.01301v1).
+
+| Evidence layer | What a receiving team should retain |
+| --- | --- |
+| Observation and label | Point cloud, gripper-width outcome, label origin and any independently observed slip or failed lift |
+| Adaptation state | Encoder revision, offline memory, accumulated outcomes and demonstrated poses |
+| Evaluation boundary | Whether feedback was permitted, which object instances were held out and when memory was frozen |
+| Search budget | Candidate source, recall budget, missed registrations and time spent per demonstration |
+
+The sequential simulation visits ten categories in one order. The mixed-scene hardware result instead merges independently adapted category memories. Both are useful, but the latter does not test uninterrupted lifelong adaptation on a physical robot. Report those protocols separately when evaluating forgetting or conflicting examples.
+
+The implementation also trades recall coverage for bounded time: a fixed recall budget is divided among stored demonstrations. Increasing memory can therefore reduce search time per item even without increasing the total runtime. Record missed proposals as well as failed executions; a higher score cannot rescue a grasp that was never generated.
+
+The public model README specifies a Panda-specific grasp-center frame, rather than the robot flange, and separates base from adapted modules. A different gripper requires more than changing a width value. The [robot-learning adaptation checklist](/robot-learning#learning-change-contract) keeps memory changes, parameter updates and runtime conditioning distinct. When direct contact observations are needed, compare the measured signals and access boundaries in the [tactile dataset directory](/datasets).
 
 ## Sources and related resources
 
@@ -845,6 +862,8 @@ The official project publishes videos and identifies the work as CoRL 2026, but 
 - [Full method, tables and limitations](https://arxiv.org/html/2610.01301v1)
 - [Official project page and videos](https://giuschio.github.io/cl_grasping/)
 - [RoboSkin tactile manipulation overview](/tactile-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
   },
   {
@@ -1438,7 +1457,7 @@ Finally, seeking uncertain contact is not a force limiter. The study does not se
     id: 'occludex-visuo-tactile-self-occlusion-dexterity',
     title: 'OccluDex fuses 3D geometry and touch when robot hands block the view',
     seoTitle: 'OccluDex Handles Self-Occlusion with Vision and Touch',
-    seoDescription: 'OccluDex combines partial 3D geometry with tactile contact for dexterous control under self-occlusion. Review simulation and 40 hardware trials.',
+    seoDescription: "Review OccluDex binary-contact inputs, frozen representation transfer and matched-view hardware tests; distinguish masking, unseen scales and force feedback.",
     excerpt: 'OccluDex pretrains a 3D visuo-tactile encoder on human demonstrations, then freezes it for dexterous policies operating under hand-induced occlusion.',
     category: 'Visuo-tactile dexterity',
     image: '/generated/news/occludex-visuo-tactile-self-occlusion-dexterity.png',
@@ -1455,8 +1474,8 @@ Finally, seeking uncertain contact is not a force limiter. The study does not se
     evidenceStatus: 'Preprint · arXiv v1 · simulation plus 40 physical trials · zero-shot transfer on one Shadow Hand · no public code or dataset verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-01',
-    updated: '2026-10-01',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# OccluDex fuses 3D geometry and touch when robot hands block the view
 
 Researchers from Shanghai Jiao Tong University, Tongji University and the Chinese University of Hong Kong, Shenzhen released OccluDex on September 30, 2026. The framework combines partial egocentric point clouds with local touch so a dexterous hand can continue estimating object geometry and contact while its own fingers hide the scene. The authors report 17/20 successful physical faucet trials and 14/20 object-reorientation trials after simulation training, without real-world fine-tuning. [Paper and version record](https://arxiv.org/abs/2609.39017).
@@ -1493,7 +1512,24 @@ The ablation strengthens this interpretation. Removing touch drops faucet succes
 
 OccluDex is an arXiv v1 manuscript submitted to IEEE, and RoboSkin.ai has not reproduced it. The physical study is 40 trials on one Shadow Hand setup. The real camera pose is matched to simulation, no point-cloud perturbation or dynamics randomization is used, and the policy sees binary contacts rather than rich tactile images or forces. The authors also note that training the full encoder jointly with PPO was infeasible on their hardware; the from-scratch comparison therefore uses a simplified architecture.
 
-At verification time, the paper and arXiv record did not link a project page, public code, dataset, trained model or implementation license. The arXiv article is CC BY 4.0, but that does not establish reuse rights for the unreleased dataset or software.
+The November 4 paper and arXiv review did not verify a project page, public code, dataset, trained model or implementation license through those sources. The article is CC BY 4.0, but its manuscript license does not establish reuse rights for implementation assets or data.
+
+## Check contact semantics before transferring the frozen encoder
+
+Nineteen tactile channels do not provide nineteen calibrated force estimates to this policy. Each channel is thresholded into contact/no-contact before embedding. That can reduce sensitivity to force magnitude, but also removes information needed to distinguish a light touch from excessive pressure. Channel identity, placement and threshold convention remain part of the input contract. [Tactile representation and physical setup](https://arxiv.org/html/2609.39017v1).
+
+| Boundary | What remains to be checked on another system |
+| --- | --- |
+| Human glove to robot hand | Correspondence between the nineteen contact regions and the robot's sensing locations |
+| Pretraining to control | The representation is frozen; a downstream PPO policy is still trained for the task |
+| Simulation to hardware | Camera pose, contact preprocessing and control timing; matched viewpoints are not unrestricted camera transfer |
+| Task score to force regulation | Successful rotation/reorientation does not establish force accuracy or overload protection |
+
+The random masking objective is explicitly not a simulator of physical self-occlusion. It teaches cross-modal structure, while the downstream experiment tests a particular camera/hand configuration. Likewise, an unseen faucet scale and a held-out YCB object are different generalization axes; their scores should not be collapsed into universal unseen-object capability.
+
+The manuscript's simulation setup describes a full revolution for both tasks, while its abstract and explicit hardware criterion describe at least 180 degrees for object reorientation. The physical counts above use the stated hardware criterion; a reproduction should resolve the simulation goal before comparing protocols.
+
+A proposed transfer check should retain timestamp alignment, channel order, contact thresholds and camera extrinsics with each policy checkpoint. The [learning-change comparison](/robot-learning#learning-change-contract) distinguishes this frozen encoder plus trained policy from memory adaptation and visual goal conditioning.
 
 ## Sources and related resources
 
@@ -1501,6 +1537,8 @@ At verification time, the paper and arXiv record did not link a project page, pu
 - [Full data, baselines, ablations and hardware protocol](https://arxiv.org/html/2609.39017v1)
 - [RoboSkin robot manipulation overview](/robot-manipulation)
 - [RoboSkin tactile sensor directory](/sensors)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
   },
   {
@@ -1592,7 +1630,7 @@ For adoption, specify final position, orientation, holding interval, allowed ret
     id: 'funco-grasp-cross-embodiment-dexterous-grasping',
     title: 'FunCo-Grasp transfers grasp structure across different robot hands',
     seoTitle: 'FunCo-Grasp Transfers Grasps Across Robot Hands',
-    seoDescription: 'FunCo-Grasp aligns functional finger roles across hand designs. Review seven-hand simulation, 200 physical trials, ablations and code status.',
+    seoDescription: "Inspect FunCo-Grasp functional annotations, IK realization and held-out hand tests; separate warm generation time from complete physical grasp execution.",
     excerpt: 'FunCo-Grasp maps unlike robot hands into shared functional parts and canonical frames before generating an executable dexterous grasp.',
     category: 'Cross-embodiment grasping',
     image: '/generated/news/funco-grasp-cross-embodiment-dexterous-grasping.png',
@@ -1611,8 +1649,8 @@ For adoption, specify final position, orientation, holding interval, allowed ret
     evidenceStatus: 'Preprint · arXiv v1 · seven-hand simulation and 200 physical trials · project page public · repository is a placeholder without code or license',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-01',
-    updated: '2026-10-01',
-    readTime: '9 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# FunCo-Grasp transfers grasp structure across different robot hands
 
 Researchers from Southern University of Science and Technology, KTH Royal Institute of Technology, Shanghai Jiao Tong University and Rysen Robotics released FunCo-Grasp on September 30, 2026. The method assigns physically different links to shared functional roles, then expresses those roles in canonical local frames before generating a grasp. One model reaches 84/100 successes on ApexHand and 68/100 on Revo2, two hand designs not used for training. [Paper and version record](https://arxiv.org/abs/2609.39006).
@@ -1629,7 +1667,7 @@ Cross-embodiment grasp models face a representation mismatch. A thumb tip and an
 
 A graph encoder combines the aligned hand's geometry, roles and kinematics. A frozen object encoder supplies local shape features. A diffusion model generates the spatial arrangement of the functional parts, and inverse kinematics converts those target positions into wrist and joint configurations. Adapting a new hand requires its geometry, kinematics and a one-time role annotation, but not new grasp demonstrations. [Method and evaluation](https://arxiv.org/html/2609.39006v1).
 
-The filtered CMapDataset split contains 48 training objects and ten held-out objects. Training grasps comprise 3,754 ShadowHand, 6,242 Barrett and 4,015 Allegro examples. Each hand-object simulation pair is evaluated in three runs of 100 newly generated grasps. A grasp succeeds if it survives six directional disturbances and finishes with less than two centimeters of object displacement.
+The filtered CMapDataset split contains 48 training objects and ten held-out objects. Training grasps comprise 3,754 Allegro, 6,242 Barrett and 4,015 ShadowHand examples. Each hand-object simulation pair is evaluated in three runs of 100 newly generated grasps. A grasp succeeds if it survives six directional disturbances and finishes with less than two centimeters of object displacement.
 
 ## Results and baseline boundaries
 
@@ -1649,7 +1687,24 @@ RoboSkin analysis: this is a grasp-generation result, not a full manipulation po
 
 FunCo-Grasp is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The one-time functional annotation is described as lightweight but not timed or evaluated for annotator consistency. Baseline provenance is mixed: most methods use released checkpoints under the authors' local protocol, while UniMorphGrasp values come from its paper. The model also depends on object segmentation and does not consume tactile feedback.
 
-The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes explanations, figures, tables and videos. It links an [official GitHub repository](https://github.com/zblzz/FunCo-Grasp), created September 30. At verification time that repository contained only a 13-byte README saying “Comming soon”; there were no implementation files, model weights, dataset package or software license. The arXiv record uses the non-exclusive distribution license, which does not grant an open-source software license.
+The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes explanations, figures, tables and videos. The previously identified [official GitHub repository](https://github.com/zblzz/FunCo-Grasp) still contained only a 13-byte README saying “Comming soon” in the November 4 root-directory and README check; no implementation files, model weights, dataset package or software license were verified there. The arXiv record uses the non-exclusive distribution license, which does not grant an open-source software license.
+
+## A transferable representation still needs an embodiment contract
+
+No target-hand fine-tuning does not mean no target-hand work. The model needs the hand's geometry, kinematic description and functional annotations. These define both what each part means and the local axes in which interactions are represented. A mislabeled closing axis changes the problem before grasp generation begins. [Functional alignment and realization](https://arxiv.org/html/2609.39006v1).
+
+The final inverse-kinematics step fits functional-part positions, rather than explicitly matching every predicted part orientation. Consequently, inspect the realized joint configuration and contact geometry as well as the model's predicted arrangement. The separate simulation disturbance test and physical lift-and-hold test supply evidence that IK output alone cannot.
+
+| Integration record | Why it changes the interpretation |
+| --- | --- |
+| URDF, meshes and functional annotation revision | Establishes the actual target embodiment and coordinate conventions |
+| Predicted versus realized part positions | Exposes conversion error between the generated arrangement and joint commands |
+| Object observation and segmentation | Identifies perception failures separately from grasp-generation failures |
+| Generation and execution timing | Separates warm model/IK computation from acquisition, startup and physical motion |
+
+The reported 0.16 seconds includes encoding, generation and IK after warm-up, but excludes loading, one-time compilation, I/O and simulation. It is not an end-to-end pick cycle. Finger-length experiments also keep palm geometry, topology and joint axes fixed; they do not establish arbitrary mechanical redesign transfer.
+
+For a proposed comparison, retain unsuccessful candidates and realized configurations under the same object placements. Report per-hand and per-object results before pooling them. The [robot-learning evidence map](/robot-learning#learning-change-contract) separates morphology annotation from online learning and tactile feedback.
 
 ## Sources and related resources
 
@@ -1658,6 +1713,8 @@ The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes ex
 - [Official project page with videos and results](https://zblzz.github.io/FunCo-Grasp-Web/)
 - [Official repository placeholder](https://github.com/zblzz/FunCo-Grasp)
 - [RoboSkin dexterous manipulation guide](/robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
   },
   {
@@ -3272,8 +3329,8 @@ Use the [tactile manipulation interface comparison](/tactile-manipulation#contac
     id: 'res-hil-human-guided-residual-rl-manipulation',
     title: 'Res-HIL learns corrections around a frozen manipulation policy',
     seoTitle: 'Res-HIL: Human-Guided Residual RL for Manipulation',
-    seoDescription: 'Res-HIL adds human-guided residual RL to a frozen ACT policy. Examine five contact-rich tasks, ten-minute results and release limits.',
-    excerpt: 'Siemens and Technical University of Munich researchers use interventions both as corrective targets and reward shaping. The real-robot study is strong on task coverage, but still depends on one operator and unreleased code.',
+    seoDescription: "Review Res-HIL intervention labels, duplicate replay roles and human-time costs; separate frozen base weights, residual updates and successful-cycle timing.",
+    excerpt: "Res-HIL uses interventions as corrective targets and reward shaping around a frozen base policy. Review task evidence, residual updates and the remaining human workload.",
     category: 'Human-in-the-loop learning',
     image: '/generated/news/res-hil-human-guided-residual-rl-manipulation.png',
     imageAlt: 'Diagram showing a frozen behavior-cloning policy, a learned residual correction and occasional human interventions controlling contact-rich robot tasks.',
@@ -3290,8 +3347,8 @@ Use the [tactile manipulation interface comparison](/tactile-manipulation#contac
     evidenceStatus: 'Preprint · arXiv v1 · videos available, no code release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-26',
-    updated: '2026-09-26',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# Res-HIL learns corrections around a frozen manipulation policy
 
 Researchers at Siemens and the Technical University of Munich introduced Res-HIL on September 24, 2026, for sample-efficient adaptation of contact-rich robot skills. Instead of replacing a behavior-cloning policy during online learning, the method freezes it and trains a residual correction. Human interventions supervise that correction and penalize the autonomous actions that led toward failure. [Paper and version record](https://arxiv.org/abs/2609.30023).
@@ -3300,7 +3357,7 @@ Researchers at Siemens and the Technical University of Munich introduced Res-HIL
 
 - Every online method starts from 20 demonstrations; frozen ACT and unguided ResFiT reference policies also receive 100-demonstration variants.
 - After ten minutes, Res-HIL reports 100%, 64%, 50%, 66% and 92% success across five task conditions. HIL-SERL reaches 90%, 30%, 10%, 0% and 0% under the same table.
-- Final evaluations use 50 fixed randomized configurations, three training repetitions and one intervention operator. That is substantial real-robot evidence, but not independent validation across people or platforms.
+- Final evaluations use 50 fixed randomized configurations and three training repetitions under a stated intervention criterion. That is substantial real-robot evidence, but not independent validation across people or platforms.
 
 ## What changed
 
@@ -3308,7 +3365,7 @@ Human-in-the-loop reinforcement learning can adapt a robot online, but changing 
 
 During training, the operator takes over when failure, damage or an unrecoverable deviation seems likely, and releases control after returning the robot to a recoverable state. The human action becomes a target residual relative to the frozen base. Res-HIL also applies decaying penalties to autonomous steps immediately before the first two intervention segments, turning each correction into both a supervised example and a reward-shaping signal.
 
-Two replay buffers keep online experience separate from initial demonstrations and intervention transitions. Training batches draw equally from both. A TD3 actor-critic objective learns the residual at 7 Hz, behavior cloning matches human corrections, and a magnitude penalty discourages unnecessarily large changes.
+Two replay buffers organize online experience and demonstration/intervention samples, with intervention transitions represented in both. Training batches draw equally from the buffers. A TD3 actor-critic objective learns the residual; the reported 7 Hz is the robot control frequency, not an optimizer-update rate. Behavior cloning matches human corrections, and a magnitude penalty discourages unnecessarily large changes.
 
 ## Results under the reported conditions
 
@@ -3316,7 +3373,7 @@ The five conditions are easy and hard peg insertion, vent-lid insertion, and cab
 
 After ten minutes, Res-HIL is already the strongest reported method on every condition. Final success is 100%, 96%, 100%, 88% and 100%. The 20-demonstration ACT base reaches 36%, 28%, 44%, 46% and 70%; ACT with 100 demonstrations reaches 84%, 60%, 80%, 80% and 92%.
 
-HIL-SERL eventually reaches 100%, 94% and 84% on the three insertion tasks but 0% on both cable conditions. Its vent score uses a stricter edge-first criterion; it would be 100% if pushing the lid directly through were counted. Res-HIL averages 5.46 seconds across successful task episodes, compared with 5.83 seconds for 100-demonstration ACT and 7.73 seconds for 20-demonstration ACT. HIL-SERL is faster on the insertion tasks it solves, so Res-HIL's strength is coverage rather than the fastest motion everywhere.
+HIL-SERL eventually reaches 100%, 94% and 84% on the three insertion tasks but 0% on both cable conditions. The shared vent criterion requires edge-first insertion; it would be 100% if pushing the lid directly through were counted. Res-HIL averages 5.46 seconds across successful task episodes, compared with 5.83 seconds for 100-demonstration ACT and 7.73 seconds for 20-demonstration ACT. HIL-SERL is faster on the insertion tasks it solves, so Res-HIL's strength is coverage rather than the fastest motion everywhere.
 
 The ablation is narrower than the main evaluation. On easy peg insertion, removing zero initialization doubles convergence time from eight to 16 minutes. Removing intervention-aware reward shaping prevents convergence within 30 minutes and finishes at 92%. The paper says direct residual supervision is critical, but these component tests do not establish identical effects on the long-horizon cable tasks.
 
@@ -3330,11 +3387,28 @@ The comparison with 100 demonstrations also needs context. The authors estimate 
 
 ## Limitations and availability
 
-Res-HIL is an arXiv v1 preprint on one robot setup. All interventions come from the same operator under a stated qualitative criterion. The paper reports that intervention ratios fall during training, but operator-to-operator variation, delayed takeover and safety outside the tested fixtures remain unknown.
+Res-HIL is an arXiv v1 preprint on one robot setup. Interventions follow a stated qualitative criterion; the reviewed paper does not establish an operator-count or cross-operator evaluation. The paper reports that intervention ratios fall during training, but operator-to-operator variation, delayed takeover and safety outside the tested fixtures remain unknown.
 
 The paper acknowledges that concurrent FTC and HiL-ResRL methods were not reproduced because they appeared shortly before submission. Comparisons therefore cover the listed baselines rather than every current human-guided residual approach.
 
-The official project page provides task videos and a method overview. No public code repository, checkpoint, training data or software license was verified on September 26. The paper itself is available under CC BY 4.0; that license does not make absent implementation artifacts available. RoboSkin.ai has not run the training system.
+The official project page provides task videos and a method overview. No public code repository, checkpoint, training data or software license was verified through the project page in the November 4 check. The paper itself is available under CC BY 4.0; that license does not make absent implementation artifacts available. RoboSkin.ai has not run the training system.
+
+## An intervention is both a control decision and a training label
+
+The human supplies a complete action, and the learning target subtracts the frozen base action to obtain the desired residual. Intervention timing also shapes rewards on preceding autonomous transitions. Those two signals depend on the operator's judgment; an intervention does not independently prove which earlier action caused the problem. [Method and protocol](https://arxiv.org/html/2609.30023v1).
+
+The online replay buffer contains autonomous and human-controlled transitions. Intervention transitions also enter the demonstration buffer alongside initial demonstrations, and each training batch samples equally from the two buffers. Record those sampling roles instead of adding buffer sizes as if they were disjoint unique experiences.
+
+| Cost or outcome | What to retain in a proposed study |
+| --- | --- |
+| Demonstrations | Collection time, unique episodes and initialization checkpoint |
+| Supervision | Monitoring duration, takeovers, resets and operator identity |
+| Adaptation | Online interaction, optimizer updates, residual magnitude and policy versions |
+| Evaluation | Frozen evaluation policy, fixed starts, failed trials and elapsed time |
+
+The intervention fraction measures time under human control because transitions have equal duration. It does not count the attention needed while the robot runs autonomously or the labor of resetting scenes. Similarly, 5.46 seconds averages successful episodes; it is not throughput after failures, retries and human work.
+
+Zero initialization preserves the base behavior only at the start. A residual magnitude penalty encourages small corrections but is not a hard bound on future commands or evidence of safe exploration. The paper does not establish transfer across intervention operators, so operator composition and takeover rules should be explicit in a receiving test. See the [learning-change comparison](/robot-learning#learning-change-contract) for the distinction between fixed base weights and a changing complete policy.
 
 ## Sources and related resources
 
@@ -3342,6 +3416,8 @@ The official project page provides task videos and a method overview. No public 
 - [Full method, evaluation and ablations](https://arxiv.org/html/2609.30023v1)
 - [Official Res-HIL project and videos](https://iavorskaiamariia.github.io/Res-HIL-website/)
 - [RoboSkin robot manipulation guide](/robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
   },
   {
@@ -4058,7 +4134,7 @@ For the [hand-selection comparison](/robot-hands#mechanics-measurement-task), ke
     id: 'lima-asynchronous-diffusion-dexterous-manipulation',
     title: 'LiMA separates slow visual imagination from faster dexterous action refinement',
     seoTitle: 'LiMA: Asynchronous Diffusion for Dexterous Manipulation',
-    seoDescription: 'LiMA separates a slow visual Dreamer from a faster action Refiner. Review its 120-trial task result, 325 ms chunk latency and tactile gap.',
+    seoDescription: "Separate LiMA cached intent, denoising allocation and amortized latency; inspect task definitions, visual failures and the limits of its physical evidence.",
     excerpt: 'LiMA amortizes a slow world-action Dreamer across faster action refinements for bimanual dexterous tasks. It improves the latency-performance trade-off on one H100, but remains vision-only and generates chunks at 325 milliseconds.',
     category: 'Dexterous world-action models',
     image: '/generated/news/lima-asynchronous-diffusion-dexterous-manipulation.png',
@@ -4080,7 +4156,7 @@ Researchers from Peking University and the Beijing Academy of Artificial Intelli
 
 - A slow Future Dreamer generates long-horizon visual and action intent; a Motion Refiner repeatedly combines cached intent with the newest three-camera observation and robot state.
 - LiMA reports 325 ms per 32-step chunk versus 600 ms for Cosmos-Policy under the same H100, batch-size and numerical-precision setup, a 45.8% reduction. This is chunk-generation latency, not latency per executed action.
-- Despite language about reacting to physical changes, the released system is vision-and-proprioception based. The limitations section names tactile integration as future work. [Methods and limitations](https://arxiv.org/html/2609.28431v1).
+- Despite language about reacting to physical changes, the evaluated system is vision-and-proprioception based. The limitations section names tactile integration as future work. [Methods and limitations](https://arxiv.org/html/2609.28431v1).
 
 ## What changed
 
@@ -4110,18 +4186,37 @@ For contact-rich dexterity, the sensory boundary matters. The Refiner can react 
 
 This is an arXiv v1 preprint whose manuscript is labeled CoRL 2026; RoboSkin.ai did not independently verify review status or reproduce the results. Experiments use one bimanual platform, six tasks, 100 demonstrations per task and an H100 GPU. Severe occlusion and low visual variance reduce performance. The latency comparison excludes model-specific compilation, quantization, operator fusion and multi-GPU optimization.
 
-The [official LiMA page](https://ccdcs.github.io/LiMA_repo/) provides the paper, method graphics and task videos. On September 24 it did not link source code, training data, model weights or a project-specific license. The page template carries a Creative Commons notice, but that does not establish a software or dataset license for assets that were not released. Availability is currently paper and media only.
+The [official LiMA page](https://ccdcs.github.io/LiMA_repo/) provides the paper, method graphics and task videos. The November 4 review did not verify source code, training data, model weights or a project-specific implementation license through that page. Paper and media access should be distinguished from runnable assets; a page-template license would not establish the terms of separately released software, data or weights.
+
+## Separate refresh cadence, compute allocation and task meaning
+
+Two ratios in LiMA describe different decisions. Refreshing the Dreamer once every four Refiner updates controls how often intent is renewed. The reported 3:7 slow–fast configuration allocates denoising work. Neither ratio is a measured sensor-to-actuator deadline. The 325 ms average distributes one Dreamer pass across four chunks; it does not state the worst delay when a new plan is needed. [Scheduling, ablations and timing](https://arxiv.org/html/2609.28431v1).
+
+| Question | Evidence needed beyond the headline average |
+| --- | --- |
+| How old is the intent? | Timestamp of the observation used by the cached Dreamer output |
+| When can a disturbance affect motion? | Latest Refiner observation, generated chunk, executed prefix and next query |
+| Is compute actually concurrent? | Execution trace; the paper leaves further parallel/multi-GPU deployment to future work |
+| What counts as task completion? | Ordered goals, physical materials and every failed or interrupted attempt |
+
+Task names also require reading their definitions. Make Coffee uses simulated pouring motions rather than actual liquid transfer, for hardware protection. Its score does not measure dispensing volume, spillage or hot-liquid handling. Roll T-shirt failures include pinching empty space, while package assembly is affected by camera coverage and transparent parts. These examples motivate a contact-observability test; they do not demonstrate tactile capability.
+
+The paper's six-task progress average is 78.9%. The current project abstract says 78.5% while displaying the same per-task table; this article retains the paper/table value and does not invent a reconciliation. Neither progress figure is the 85/120 complete-task result.
+
+The [learning-change checklist](/robot-learning#learning-change-contract) helps separate pretrained weights, task-specific training, cached intent and current observations when budgeting a receiving experiment.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.28431)
 - [Full LiMA v1 paper](https://arxiv.org/html/2609.28431v1)
 - [Official LiMA project page](https://ccdcs.github.io/LiMA_repo/)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-24',
-    updated: '2026-09-24',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-23',
     evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
   },
@@ -4212,7 +4307,7 @@ Nominal 25 Hz capture does not establish fresh camera input at every control ste
     id: 'visforce-visual-force-grounding-dexterous-manipulation',
     title: 'VisForce draws force goals into a dexterous robot policy',
     seoTitle: 'VisForce: Visual Force Grounding for Dexterous Manipulation',
-    seoDescription: 'VisForce renders current and desired finger forces into images for pi0.5. Review 20-trial task results, cross-attention gains and sensing limits.',
+    seoDescription: "Assess VisForce actuator-force cues, offline goals and user-selected stages; distinguish learned joint commands from autonomous sequencing and force regulation.",
     excerpt: 'VisForce overlays actuator-force cues at fingertips and combines current and goal images through cross-attention. Real-robot trials improve over four baselines, but the arrows are not measured contact-force vectors.',
     category: 'Force-aware VLA',
     image: '/generated/news/visforce-visual-force-grounding.png',
@@ -4239,7 +4334,7 @@ Jung-Woo Lee and Soo-Chul Lim released VisForce on September 22, 2026, as an arX
 
 Many multimodal policies append force as a state vector. VisForce instead aligns the value with its visual location. A UR10 arm carries an Inspire RH56F1 six-degree-of-freedom hand and two Intel RealSense D405 cameras. Per-finger actuator forces are synchronized with images, states and actions: cameras run at 30 Hz, while the other streams are recorded at 200 Hz and matched by nearest timestamp.
 
-Current-force arrows are placed at fingertip pixels in the wrist view. The desired force is rendered onto an object-only goal image. GroundingDINO and SAM2 isolate the goal object offline, while a MuJoCo model and edge-based Chamfer alignment connect the simulated hand to camera geometry. VisForce updates the SigLIP visual encoder and applies rank-16 LoRA to the larger model components.
+Current-force arrows are placed at fingertip pixels in the wrist view. The desired force is rendered onto a hand-and-object foreground goal image. GroundingDINO and SAM2 remove its background offline, while a MuJoCo model and edge-based Chamfer alignment connect the simulated hand to camera geometry. VisForce updates the SigLIP visual encoder and applies rank-16 LoRA to the larger model components.
 
 ## Results under the reported conditions
 
@@ -4259,19 +4354,38 @@ However, localization depends on calibration and hand geometry. The visual cue d
 
 This is a preprint, not independent validation, and RoboSkin.ai has not reproduced it. Experiments use one arm-hand configuration, four tasks and up to 30 demonstrations per task. Goal segmentation is performed offline, so the reported setup does not establish an online open-world goal-generation pipeline. Inference used an NVIDIA RTX A6000; latency and control frequency during deployment were not reported as a full end-to-end budget.
 
-The arXiv record and full text were publicly accessible on September 23. Neither linked a project page, code repository, dataset or model checkpoint. The paper's Creative Commons license covers the manuscript, not unlisted software or training assets. Availability should therefore be described as paper-only until an official release appears.
+The November 4 arXiv and full-text review did not verify a project page, code repository, dataset or model checkpoint through those sources. The paper's Creative Commons license covers the manuscript, not unlisted software or training assets. This review establishes paper access, not runnable implementation availability.
+
+## The user supplies the stage; the model produces joint actions
+
+VisForce's current subtask is specified by the user. The corresponding instruction and prepared goal image are then retrieved automatically. This is a useful conditioning interface, but it is not evidence that the policy independently recognizes every phase or chooses the next desired force. The goal image is selected from a reference demonstration and retains the hand and manipulated object after background removal. [Goal construction and inference protocol](https://arxiv.org/html/2609.25785v1).
+
+The model outputs a twelve-dimensional delta joint action for the arm and hand. Rendering a desired force does not turn that output into a directly commanded fingertip-force vector or a verified force servo. The arrow direction comes from hand geometry, while its magnitude encodes an actuator scalar.
+
+| Receiving check | Failure it can distinguish |
+| --- | --- |
+| Subtask selection and goal-image identity | A wrong stage or reference rather than an action-model failure |
+| Camera/hand alignment and cue threshold | Misplaced or suppressed force cues |
+| Actuator reading versus contact measurement | Transmission/load effects rather than fingertip force accuracy |
+| Observation, inference and action timestamps | Recording rate versus actual response delay |
+
+Uncertainty remains large at twenty trials. The paper reports 95% Wilson intervals of 48.1–85.5% for cup/pouring, 34.2–74.2% for tong transfer and 21.9–61.3% for peg insertion. These describe the small reported samples, not guaranteed operating ranges. A matched receiving test should also record incorrect stage choices, drops, damage and failed transitions instead of counting only final successes.
+
+Use the [robot-learning comparison](/robot-learning#learning-change-contract) to distinguish runtime goal conditioning from learning new parameters or receiving measured tactile feedback.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25785)
 - [Full VisForce v1 paper](https://arxiv.org/html/2609.25785v1)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these research systems or robot experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-09-23',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-22',
-    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+    evidenceStatus: "Preprint · arXiv v1 · paper reviewed · implementation assets not verified",
   },
   {
     id: 'cablevla-tactile-cable-routing-vla',

@@ -5630,13 +5630,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-learning',
     title: 'Robot Learning Data: Datasets, Formats & Evaluation',
     description:
-      'Choose robot learning data by task, action space and sensor coverage. Find datasets, check formats and licenses, and plan held-out robot evaluation.',
+      "Choose robot learning data and compare adaptation methods; inspect action interfaces, observation timing, human supervision and held-out evaluation.",
     h1: 'Robot learning data: datasets, formats and evaluation',
-    kicker: 'High-interest robotics pillar',
+    kicker: "Data, adaptation and evaluation",
     intent: 'Definition and research map for robot learning, imitation learning, reinforcement learning, robot datasets, sim-to-real transfer, policy training, and tactile learning.',
     published: '2026-08-20',
-    updated: '2026-10-28',
-    revisionNote: 'October 28, 2026: added a CARD source-and-replay comparison; added a five-entry, source-linked dataset decision matrix, a one-episode inspection workflow and downloadable decision records. Earlier research sections, sources and dates are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed the full learning overview and added a comparison of memory, parameters, runtime context and human supervision. Earlier dataset records and local exercises retain their original dates and source versions; no new robot experiment or reproduction is claimed.",
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5654,7 +5654,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Robot learning data includes observations, robot state, actions, task context and outcomes used to train or evaluate a robot model. Start with the task and action interface, then check sensing, timing, held-out splits, access and license. Dataset size alone does not establish that the data fits your robot.',
       'Robot learning is the use of data and experience to train robots to perceive, predict, or act instead of specifying every behavior as a fixed rule. The training signal may come from demonstrations, rewards, self-supervision, simulation, human feedback, or combinations of these sources.',
       'A useful robot-learning claim must name the robot, observations, action space, data, task, training method, evaluation split, autonomy level, and real-world trial protocol. Model size or dataset size alone does not establish physical capability.',
-      'Touch matters when success depends on hidden contact state. Tactile observations can expose pressure, shear, slip, seating, deformation, and contact transitions that vision and proprioception may not measure directly.',
+      'Tactile observations can help when contact state is poorly observed by the available vision and proprioception. Check the particular sensor and task: pressure, shear, slip and seating are not interchangeable measurements, and an added modality needs a matched evaluation of benefit and cost.',
     ],
     sections: [
       robotDatasetStartingPoints,
@@ -5714,6 +5714,87 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Vision-language-action policy', 'Robot trajectories paired with images and instructions', 'Connects task language and observations to actions', 'Embodiment, action interface, data mix, and real-robot evaluation determine scope'],
           ],
         },
+      },
+      {
+        "id": "learning-change-contract",
+        "heading": "What changes when a robot learns or adapts?",
+        "body": [
+          "A frozen neural checkpoint does not guarantee fixed behavior. Memory, a retrieved goal, an updated residual policy or a human-selected stage can change the deployed system. Before choosing more data, identify which component is allowed to change and which evidence would establish its value. These source-reviewed examples use different tasks and are not a performance ranking."
+        ],
+        "table": {
+          "headers": [
+            "Example",
+            "Changing component",
+            "Receiving evaluation question"
+          ],
+          "rows": [
+            [
+              "Continual 6-DoF grasping",
+              "Outcome and demonstration memory around a frozen encoder",
+              "Is feedback allowed during evaluation, and is merged memory being mistaken for sequential hardware learning?"
+            ],
+            [
+              "OccluDex",
+              "Human-pretrained frozen representation plus a trained control policy",
+              "Do contact thresholds and channels transfer, and are the objects and occlusion protocol matched?"
+            ],
+            [
+              "FunCo-Grasp",
+              "Annotated hand morphology and generated grasp configuration",
+              "Are the new hand geometry, IK fit and physical grasp validated separately?"
+            ],
+            [
+              "LiMA",
+              "Task-trained weights and periodically refreshed intent",
+              "How old is the cached context when a new observation affects an action?"
+            ],
+            [
+              "VisForce",
+              "User-selected stage and retrieved offline goal at inference",
+              "Who chooses the phase, and do actuator cues represent the contact quantity required?"
+            ],
+            [
+              "Res-HIL",
+              "Learned residual around a frozen base policy",
+              "How much monitoring, intervention and reset work is required, beyond human-control time?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Keep an adaptation record",
+            "body": [
+              "For a proposed experiment, save the model and memory versions, training data, runtime context, sensor timestamps, human decisions and evaluation freeze point. Separate unique demonstrations from duplicated replay samples. Report unsuccessful attempts and resets alongside successful-cycle time. A retained action chunk, a controller update and an optimizer step are different clocks.",
+              "Choose the data route only after that interface is explicit. Representation learning needs suitable observation coverage; policy learning additionally needs compatible action targets and task outcomes. Runtime goals need a documented preparation and selection process. More records cannot resolve an undefined action frame, a missing observation or an evaluation that quietly permits adaptation."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Continual grasping: memory and recall budgets",
+            "href": "/news/continual-6dof-grasp-synthesis-memory"
+          },
+          {
+            "label": "OccluDex: contact representation transfer",
+            "href": "/news/occludex-visuo-tactile-self-occlusion-dexterity"
+          },
+          {
+            "label": "FunCo-Grasp: hand geometry and physical evidence",
+            "href": "/news/funco-grasp-cross-embodiment-dexterous-grasping"
+          },
+          {
+            "label": "LiMA: intent freshness and amortized latency",
+            "href": "/news/lima-asynchronous-diffusion-dexterous-manipulation"
+          },
+          {
+            "label": "VisForce: stage selection and force cues",
+            "href": "/news/visforce-visual-force-grounding-dexterous-manipulation"
+          },
+          {
+            "label": "Res-HIL: supervision and residual updates",
+            "href": "/news/res-hil-human-guided-residual-rl-manipulation"
+          }
+        ]
       },
       {
         heading: 'Data is part of the robot system',
@@ -5865,10 +5946,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Can a robot adapt while its neural weights stay frozen?', answer: 'Yes. Memory contents, retrieved demonstrations or runtime goals can change behavior without updating the encoder. Record those states alongside model weights, and distinguish memory adaptation from parameter learning and feedback control.' },
       { question: 'What is robot learning?', answer: 'Robot learning uses data or experience to train robot perception, prediction, or action instead of specifying every behavior as a fixed rule.' },
       { question: 'What is the difference between imitation learning and reinforcement learning for robots?', answer: 'Imitation learning learns from demonstrated behavior. Reinforcement learning improves behavior using a reward signal from interaction or simulation. Systems can combine both.' },
       { question: 'What makes a robot-learning dataset useful?', answer: 'It should identify the robot, observations, actions, task context, timing, calibration, trajectory unit, collection policy, splits, access path, and license.' },
-      { question: 'Why does robot learning need tactile data?', answer: 'It needs tactile data when physical success depends on pressure, shear, slip, seating, deformation, or contact transitions that other sensors do not measure directly.' },
+      { question: 'Why does robot learning need tactile data?', answer: 'Tactile data can help when relevant contact changes are poorly observed by other sensors. It is not universally required: compare the same task and policy with matched sensing conditions, and include calibration, latency and failure costs.' },
       { question: 'How should sim-to-real results be judged?', answer: 'State what was trained in simulation, what was randomized or adapted, which physical robot and tasks were tested, how many trials were run, and which failures or interventions occurred.' },
     ],
     relatedLinks: [
@@ -5888,6 +5970,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'UniVTAC tactile simulation and learning', href: '/research/univtac-platform-encoder-benchmark-2026', description: 'Trace encoder samples, policy trajectories, hosted task episodes, physical demonstrations, and evaluation rollouts as separate evidence.' },
     ],
     sources: [
+      {"label": "continual 6dof grasp synthesis memory \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.01301v1"},
+      {"label": "occludex visuo tactile self occlusion dexterity \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.39017v1"},
+      {"label": "funco grasp cross embodiment dexterous grasping \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.39006v1"},
+      {"label": "lima asynchronous diffusion dexterous manipulation \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.28431v1"},
+      {"label": "visforce visual force grounding dexterous manipulation \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.25785v1"},
+      {"label": "res hil human guided residual rl manipulation \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.30023v1"},
       { label: 'Hugging Face LeRobot v0.6.0', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'Hugging Face LeRobot documentation', href: 'https://huggingface.co/docs/lerobot/index' },
       { label: 'Open X-Embodiment', href: 'https://arxiv.org/abs/2310.08864' },
