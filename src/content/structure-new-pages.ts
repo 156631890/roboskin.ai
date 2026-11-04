@@ -13,7 +13,7 @@ export const structureNewPages: SeoTopicPage[] = [
     updated: '2026-11-04',
     revisionNote: 'November 4, 2026: reviewed the full guide and four manufacturer model sources; added contact-evidence distinctions and a receiving-test record linked to six source-reviewed studies. No hardware tests are claimed.',
     h1: 'Robot Grippers: Types, Selection Guide and Vendors',
-    description: "Choose robot grippers by contact geometry, payload conditions, sensing and control evidence; compare sourced models and define pickup-to-release acceptance.",
+    description: "Choose robot grippers by contact geometry, payload conditions, sensing and control evidence; compare models and define pickup-to-release acceptance.",
     introduction: 'A robot gripper is the end effector that holds, releases or repositions an object at the end of a robot arm. Robot gripper selection starts with the object, contact geometry and load case, then the actuator and interface. The tables below separate gripper types from model-specific specifications so a payload rating is never mistaken for a measured grasp success rate.',
     kicker: 'End-effector selection', intent: 'Compare robot gripper types and select a sourced model for an actual contact task.', keywords: ['robot gripper', 'robot gripper types', 'gripper selection', 'tactile sensing'],
     quickAnswer: ['Choose the contact method from object geometry, surface leakage, fragility and the required placement accuracy.', 'Check the exact payload conditions, available grip force, tool mass and controller interface together. A form-fit payload is not a friction-grip guarantee.', 'Tactile sensor data can support contact detection or slip feedback, but the controller must actually consume it at the required latency.'],
