@@ -3992,19 +3992,20 @@ The accessible source for this pass is the university report. The linked publish
     technicalFocus: ['graphene and liquid metal', '3D force sensing', 'slip detection', 'robot fingertips'],
   },
   {
+    seoDescription: "Read the single-material hydrogel skin study: EIT channel selection, localization errors, contact conductivity, environmental effects and reuse limits.",
     id: 'single-material-soft-robotic-skin-2025',
     title: 'Single-material soft robotic skin for multimodal e-skin sensing',
     excerpt:
       'A peer-reviewed single-material robotic skin uses wrist-mounted EIT electrodes and data-driven channel selection to interpret touch, strain, heat, damage, environment, and proprioception across a soft hand.',
     content: `# Single-material soft robotic skin for multimodal e-skin sensing
 
-**Updated technical brief - August 2026**
+**Updated technical brief — 2025 research paper; originally published here April 24, 2026. Accepted-manuscript review updated November 4, 2026.**
 
 The 2025 Science Robotics paper by David Hardman, Thomas George Thuruthel, and Fumiya Iida reports a single-layer sensory skin made from a conductive gelatine-based hydrogel. The team cast the material as a full-size hollow hand, routed 32 electrodes around its wrist, and used high-density electrical impedance tomography (EIT) plus data-driven information selection to interpret interactions across the continuous surface.
 
 ## Source findings
 
-The work demonstrates a research architecture for multimodal soft sensing. It does not establish calibrated force magnitude, production durability, or deployment on a working humanoid. The University of Cambridge report identifies improved durability and further testing on real-world robotic tasks as future work.
+The work demonstrates a research architecture for multimodal soft sensing. It does not establish calibrated force magnitude, production durability, or deployment on a working humanoid. The accepted manuscript identifies material durability, soft-to-rigid electrode interfaces and transfer between sensors as unresolved engineering questions.
 
 ### What “single-material” means
 
@@ -4041,9 +4042,28 @@ EIT measurements across a continuous conductive body are highly redundant and co
 
 This approach moves part of the sensor design problem into experiment design and computation. Electrode placement, excitation configuration, selected channels, environmental drift, training data, and model assumptions all affect the output. Recasting the same material on a different geometry would require new validation rather than inheriting the hand's reported behavior automatically.
 
+## What the localization experiment actually measures
+
+The [author-accepted manuscript, pages 18–22 and Figure 6](https://www.repository.cam.ac.uk/bitstreams/f788f6c1-b4e5-4feb-9616-3ee81502822f/download) makes the acquisition and evaluation boundaries clearer than the headline channel count. For the hand experiment, the authors collected 1,080 touches over a 380 cm² surface. They first restricted acquisition to 5,568 electrode configurations, yielding 11,136 amplitude/phase channels every 6.5 seconds. That is a dataset-acquisition setting, not a demonstrated fast robot-control loop.
+
+| Result or procedure | Scope in the accepted manuscript | Incorrect interpretation to avoid |
+| --- | --- | --- |
+| 24.7 mm localization error | Mean error with F-test ranking and 500 selected channels; the localization evaluation uses a 10% test set | A 24.7 mm taxel pitch, force error or guaranteed accuracy at every location |
+| Spatial error distribution | Errors vary across the hand; fingertips and front/back assignment are harder cases | Uniform full-hand precision from a single average |
+| Environmental monitoring | Approximately 100 hours of temperature/humidity observations and learned prediction | A 100-hour abrasion, service-life or drift-immunity qualification |
+| Temperature/humidity experiment | Reported environment spans 19–25 °C and 38–72% relative humidity | Validation outdoors, under washing or across every operating environment |
+
+The environmental sensitivity is part of the sensing principle as well as a possible confounder. A useful signal for temperature prediction can also change a touch-localization input. The paper reports a separate 250-touch environment experiment with a 26.3 mm mean localization error; it should not be substituted for the 24.7 mm experiment or pooled into an unspecified overall accuracy. All values here are author-reported, not independently reproduced.
+
+### Contact material changes what the skin observes
+
+The initial circular-membrane experiments distinguish an insulated press from conductive human contact. An insulated light touch is used as a baseline that does not produce the same response. Human contact can add an electrical conduction path, and multiple human touches need not combine as a simple sum of single-touch responses. A localization model trained with those contacts therefore does not establish equivalent behavior with gloves, an insulating tool, a wet object or a different electrode interface.
+
+For a proposed robot installation, retain the specimen identity, casting geometry, electrode map, selected configurations, acquisition timestamps, contact material, reference locations and evaluation split. Compare errors by surface region and contact condition, not only by their mean. This is an evaluation recommendation derived from the paper’s mechanism, not a reproduced result or an industrial acceptance standard. Use the [electronic-skin measurement chain](/electronic-skin#measurement-chain) to separate the material response from the inferred quantity and the controller that might consume it.
+
 ## RoboSkin analysis
 
-A continuous hydrogel field may simplify soft coverage over complex geometry, but it shifts responsibility into electrode routing, calibration, channel selection, timing, and data interpretation. A conventional taxel array exposes discrete sensing locations. This EIT architecture exposes a distributed electrical field whose useful signals must be learned or reconstructed.
+A continuous hydrogel field may simplify soft coverage over complex geometry, but it shifts responsibility into electrode routing, calibration, channel selection, timing, and data interpretation. Before deployment, an integration programme would need to improve durability and conduct further real-world robotic-task tests. This is our assessment of the remaining work, not an experiment completed by the paper or RoboSkin.ai. A conventional taxel array exposes discrete sensing locations. This EIT architecture exposes a distributed electrical field whose useful signals must be learned or reconstructed.
 
 ## Engineering implications
 
@@ -4053,7 +4073,13 @@ For system design, the key question is not how many raw channels exist. It is ho
 
 This is a peer-reviewed experimental study, but it is not a commercial specification or a universal benchmark for robot skin. The evidence comes from the reported hydrogel samples, electronics, channel-selection procedures, and hand geometry. The study does not establish long-duration abrasion resistance, cleaning tolerance, attachment to a moving robot, replacement calibration, production yield, or closed-loop task performance on a deployed humanoid.
 
-The Cambridge research story explicitly says the team hopes to improve durability and conduct further real-world robotic-task tests. Those remain future-work boundaries, not demonstrated deployment claims.
+The accepted manuscript discusses improved material durability and transfer of channel rankings between sensors as future work. A new casting, cover, electrode attachment or task therefore needs its own evaluation; none automatically inherits the reported hand’s calibration.
+
+## Reuse requires more than downloading the analysis
+
+The authors link [InfoStructuring code and analysis resources](https://github.com/DSHardman/InfoStructuring/tree/713dde5d3b7f47dfc8ce2f65995b468fc2a55da9) and a [Zenodo record](https://doi.org/10.5281/zenodo.15387404). The repository README organizes MATLAB analyses by membrane and hand experiments and points to EIDORS. Reviewing that index is not running the pipeline: we did not execute code, retrieve experiment payloads or verify numerical reproduction.
+
+The Cambridge manuscript record labels the manuscript CC BY 4.0 except where otherwise noted. That does not establish a license for every code file, dataset, toolbox or third-party component. Code/data reuse permissions and dependency compatibility remain unverified in this review. Before adopting the approach, resolve those permissions and confirm access to the matching sample, electronics, acquisition configuration and calibration records. The skin is a research system whose electrical and mechanical interfaces are part of the experiment, not a drop-in sensor specified by a model file alone.
 
 ## Practical questions
 
@@ -4064,7 +4090,7 @@ The Cambridge research story explicitly says the team hopes to improve durabilit
 
 ## Source boundary
 
-This review uses the peer-reviewed Science Robotics article, the author-accepted manuscript in the University of Cambridge repository, and the official University of Cambridge research story. Numerical values belong to the authors' reported hardware and protocols. RoboSkin.ai did not reproduce the experiments and is not affiliated with the authors, Cambridge, UCL, or Science Robotics.
+The November 4 review directly read the author-accepted manuscript in the University of Cambridge repository, its repository record and the authors’ public code index. The journal landing page and Cambridge news story were not accessible during this pass and remain linked as original references; they are not presented as freshly read full text. Numerical values belong to the authors' reported hardware and protocols. RoboSkin.ai did not reproduce the experiments and is not affiliated with the authors, Cambridge, UCL, or Science Robotics.
 
 ## Primary and official sources
 
@@ -4074,8 +4100,8 @@ This review uses the peer-reviewed Science Robotics article, the author-accepted
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-04-24',
-    updated: '2026-08-22',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "8 min read",
     category: 'Soft E-Skin',
     image: '/generated/authority/research-soft-robotic-skin.webp',
     sourceTitle: 'Science Robotics peer-reviewed single-layer soft sensory skin article',

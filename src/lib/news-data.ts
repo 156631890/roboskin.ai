@@ -6185,12 +6185,12 @@ This article summarizes an arXiv preprint and adds RoboSkin.ai analysis for robo
     title: 'Self-powered textile artificial skin uses three channels for touch and robot control',
     seoTitle: 'Three-Channel Textile Artificial Skin Controls a Robot Arm',
     seoDescription:
-      'A Nano Energy paper reports a textile artificial skin that locates touch, measures pressure, and controls a robot arm with three signal channels.',
+      "A three-channel textile combines touch localization, pressure and wearable robot commands. Review the signal, power and six-class evaluation boundaries.",
     excerpt:
       'A Nano Energy paper reports a textile artificial skin that locates touch, measures pressure, and controls a robot arm with a three-channel architecture.',
     content: `# Self-powered textile artificial skin uses three channels for touch and robot control
 
-**News brief - July 2026**
+**News brief — originally published July 27, 2026. Evidence and engineering interpretation reviewed November 4, 2026.**
 
 A paper available online in Nano Energy on July 22 reports a textile-based artificial skin designed to reduce two practical burdens in wearable tactile interfaces: the number of signal channels and dependence on an external power source for touch localization. The research team combines triboelectric and resistive sensing in a fabric structure, then demonstrates the interface in robot-arm control and marine-debris classification.
 
@@ -6200,7 +6200,7 @@ The textile artificial skin uses an S-shaped, series-connected triboelectric arr
 
 This division gives the system three signal channels for both spatial addressing and pressure sensing. The triboelectric layer generates its localization signal from mechanical interaction, while the carbon-nanotube and silicone resistive layer provides the pressure measurement.
 
-The paper also describes a nylon textile structure intended to remain flexible and resist environmental interference. Deep-learning analysis was used to distinguish six types of debris in the reported marine-collection scenario, with a 94.5% success rate in that experiment.
+The publisher describes a nylon textile structure and reports a 94.5% success rate for distinguishing six debris classes with deep learning. That is the authors’ reported aggregate, not RoboSkin.ai testing. The accessible abstract does not provide the evaluation denominator, train/test split or a field-deployment protocol; the number cannot establish end-to-end marine-cleanup performance or recognition of unfamiliar debris.
 
 ## From touch input to robot-arm commands
 
@@ -6214,9 +6214,24 @@ Large tactile arrays often face a wiring problem: increasing the number of sensi
 
 The research also connects sensing to an application loop. Position and pressure are not presented as isolated bench signals; they become commands for a robotic system. For wearable teleoperation, field robotics, and other human-robot interfaces, that system-level connection may be as important as peak sensor sensitivity.
 
+## Three channels: separate the signal, estimate and command
+
+Three acquisition channels are a wiring property, not three independent force taxels or a spatial-resolution specification. The [publisher’s abstract and highlights](https://www.sciencedirect.com/science/article/pii/S2211285526005379) describe two different transduction mechanisms. Follow each signal to its actual use before comparing this interface with a robot-mounted tactile array.
+
+| Layer | What the paper reports | What an integration test would still need to establish |
+| --- | --- | --- |
+| Touch localization | A ratio of triboelectric signals at two terminal resistors identifies position | Position error across the worn surface, including repeat touches and changed mounting tension |
+| Pressure observation | A separate carbon-nanotube/silicone resistive layer responds to contact pressure | Calibration, loading/unloading behavior and separation from bending or fabric stretch |
+| Robot command | Position selects motion or rotation; pressure changes command duration | Command latency, stale-input handling and the behavior when a touch is lost or ambiguous |
+| Debris classification | A learned six-class result in the authors’ experiment | Evaluation units, held-out objects, confusion between classes and failure handling outside that set |
+
+The last column is a proposed evaluation plan, not a list of tests we performed or a claim that the authors omitted them from the full paper. Full methods were not available in this review. In particular, a robot moving in response to a human touch does not demonstrate feedback from contact between the robot and its environment.
+
+For a wearable controller, first specify whether a sustained press should keep a command active, change its duration or stop it. Then record the textile signal, inferred input and outgoing command on a common timeline. Test this interface under the intended mounting and environmental conditions before treating its output as a calibrated control input. Separate sensing energy from the energy used by acquisition, communication and actuation. The [electronic-skin mechanism guide](/electronic-skin#measurement-chain) explains why the material’s electrical response and the final physical measurement require separate evidence.
+
 ## What this does not prove yet
 
-The paper was listed as an in-press journal pre-proof when this brief was prepared. The 94.5% result belongs to the authors' six-class debris experiment and should not be read as open-world recognition performance.
+The original July brief described an in-press pre-proof. The current publisher record identifies Nano Energy, volume 157, October 2026, article 112233. This is a bibliographic update to an existing study, not a newly discovered experiment. The 94.5% result belongs to the authors’ six-class debris experiment and should not be read as open-world recognition performance.
 
 The term self-powered applies to the triboelectric sensing and addressing mechanism. It does not mean the robot arm, computing hardware, communications, or complete control system operates without external energy. The public report also does not establish long-term saltwater durability, field maintenance intervals, calibration stability, or performance after repeated damage.
 
@@ -6233,7 +6248,7 @@ The [flexible tactile sensor array guide](/guides/flexible-tactile-sensor-array)
 
 ## Source boundary
 
-This brief summarizes the publisher's abstract, highlights, and article metadata and adds RoboSkin.ai analysis. The reported architecture and results belong to the cited study. The cover image is an editorial illustration, not a photograph or figure from the experiment. RoboSkin.ai is not affiliated with the authors or publisher.
+This brief summarizes the publisher’s abstract, highlights and article metadata, rechecked November 4, 2026, and adds explicitly proposed RoboSkin.ai evaluation guidance. The publisher’s full methods were not accessible in this review; no fabric, robot-control interface or classifier was tested. The reported architecture and results belong to the cited study. The cover image is an editorial illustration, not a photograph or figure from the experiment. RoboSkin.ai is not affiliated with the authors or publisher.
 
 ## Source
 
@@ -6241,8 +6256,8 @@ This brief summarizes the publisher's abstract, highlights, and article metadata
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-27',
-    updated: '2026-07-27',
-    readTime: '5 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     category: 'Electronic skin',
     image: '/generated/authority/news-textile-artificial-skin-2026.webp',
     sourceTitle: 'Nano Energy textile-based artificial skin paper',

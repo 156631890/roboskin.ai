@@ -82,7 +82,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/dexskin-high-coverage-conformable-robotic-skin-2025 | rewritten and production verified in PR105 | 968 | 1 |
 | /research/fluid-based-robot-skin-thermal-contact-2025 | rewritten and production verified in PR105 | 886 | 1 |
 | /research/graphene-liquid-metal-3d-force-2026 | rewritten and production verified in PR105 | 1199 | 9 |
-| /research/single-material-soft-robotic-skin-2025 | inventory only; claim-by-claim review pending | 1204 | 6 |
+| /research/single-material-soft-robotic-skin-2025 | individual material/readout evidence review; production verification pending | 1204 | 6 |
 | /research/full-hand-tactile-sensing-2025 | rewritten and production verified in PR105 | 1228 | 11 |
 | /research/temperature-pressure-bimodal-2025 | rewritten and production verified in PR109 | 1119 | 3 |
 | /research/event-based-opto-tactile-2025 | rewritten and production verified in PR105 | 1138 | 3 |
@@ -151,13 +151,13 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/touchsight-twintouch-bare-hand-tactile-prediction | rewritten and production verified in PR124 | 1205 | 1 |
 | /news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026 | rewritten and production verified in PR125 | 1202 | 3 |
 | /news/twins-aist-body-surface-tactile-demonstrations-2026 | rewritten and production verified in PR131 | 1191 | 4 |
-| /news/gemini-robotics-2-whole-body-vla-dexterity-2026 | individual model-readiness evidence review; production verification pending | 1342 | 4 |
-| /news/lerobot-v060-world-models-vla-evaluation-2026 | individual model-readiness evidence review; production verification pending | 1181 | 4 |
+| /news/gemini-robotics-2-whole-body-vla-dexterity-2026 | rewritten and production verified in PR133 | 1342 | 4 |
+| /news/lerobot-v060-world-models-vla-evaluation-2026 | rewritten and production verified in PR133 | 1181 | 4 |
 | /news/nist-humanoid-baseline-performance-benchmark-2026 | rewritten and production verified in PR132 | 1098 | 5 |
 | /news/iso-10218-2025-industrial-robot-safety-scope | rewritten and production verified in PR132 | 1075 | 2 |
 | /news/twisted-yarn-textile-capacitive-robot-skin-2026 | rewritten and production verified in PR114 | 1256 | 3 |
 | /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | rewritten and production verified in PR114 | 1099 | 3 |
-| /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | inventory only; claim-by-claim review pending | 906 | 1 |
+| /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | individual material/readout evidence review; production verification pending | 906 | 1 |
 | /news/underwater-self-healing-electronic-skin-nus-2026 | rewritten and production verified in PR114 | 722 | 2 |
 | /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | rewritten and production verified in PR131 | 868 | 7 |
 | /news/color-changing-mechanochromic-tactile-sensor-2026 | rewritten and production verified in PR113 | 702 | 3 |
@@ -167,7 +167,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/full-hand-tactile-sensing-robot-hands-vision-control | rewritten and production verified in PR110 | 1240 | 1 |
 | /news/global-robot-installations-542000-physical-ai-touch | rewritten and production verified in PR113 | 1001 | 2 |
 | /robot-grippers | rewritten and production verified in PR125 | 1187 | 2 |
-| /electronic-skin | inventory only; claim-by-claim review pending | 772 | 11 |
+| /electronic-skin | individual material/readout evidence review; production verification pending | 772 | 11 |
 | /robot-tactile-sensors | inventory only; claim-by-claim review pending | 1250 | 2 |
 | /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
 | /embodied-ai | inventory only; claim-by-claim review pending | 736 | 1 |
@@ -191,7 +191,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/lerobot-dataset-format | rewritten and production verified in PR118 | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
 | /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
-| /robot-foundation-models | individual model-readiness evidence review; production verification pending | 8015 | 8 |
+| /robot-foundation-models | rewritten and production verified in PR133 | 8015 | 8 |
 | /robot-skin | inventory only; claim-by-claim review pending | 1495 | 77 |
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
 | /e-skin | inventory only; claim-by-claim review pending | 2724 | 16 |
@@ -338,3 +338,7 @@ Two existing reports and /robot-safety now distinguish benchmark conditions, sou
 ## Model interfaces and evaluation entry points
 
 Two release analyses and /robot-foundation-models gain distinct source-reviewed boundaries: Gemini chart aggregation and model interfaces; LeRobot recording segments and checkpoint compatibility; REKI benchmark protocol comparability. Preserve original publication dates, modules and historical reviews. No installation, API call or hardware result claimed. Whole-site review remains incomplete.
+
+## Electronic-skin measurement evidence
+
+Three individual revisions: textile readout and command boundaries, accepted-manuscript hydrogel evidence, and an evergreen material-to-controller comparison. Preserve original dates and modules. No hardware, code or dataset execution. Whole-site goal remains incomplete.
