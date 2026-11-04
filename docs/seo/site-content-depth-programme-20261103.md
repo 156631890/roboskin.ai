@@ -209,21 +209,21 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/robot-skin-vs-tactile-sensor | rewritten and production verified in PR103 | 645 | 3 |
 | /guides/tactile-feedback-for-physical-ai | rewritten and production verified in PR118 | 3086 | 14 |
 | /guides/tactile-sensor-benchmark-robot-manipulation | rewritten and production verified in PR118 | 1500 | 13 |
-| /datasets | inventory only; claim-by-claim review pending | 17213 | 94 |
-| /tactile-foundation-models | individual model-interface review; production verification pending | 2571 | 37 |
+| /datasets | individual directory-evidence review; production verification pending | 17213 | 94 |
+| /tactile-foundation-models | rewritten and production verified in PR138 | 2571 | 37 |
 | /guides/visuo-tactile-world-models-robot-manipulation | rewritten and production verified in PR118 | 1932 | 21 |
-| /benchmarks | inventory only; claim-by-claim review pending | 5157 | 40 |
-| /sensors | inventory only; claim-by-claim review pending | 6094 | 110 |
+| /benchmarks | individual directory-evidence review; production verification pending | 5157 | 40 |
+| /sensors | individual directory-evidence review; production verification pending | 6094 | 110 |
 | /tactile-manipulation | rewritten and production verified in PR121 | 2323 | 65 |
 | /research/eu-roboskin-project | inventory only; claim-by-claim review pending | 1029 | 4 |
 | /visuo-tactile | rewritten and production verified in PR124 | 1040 | 22 |
 | /humanoid-robots | rewritten and production verified in PR128 | 1242 | 23 |
-| /robot-vla-models | individual model-interface review; production verification pending | 11478 | 41 |
+| /robot-vla-models | rewritten and production verified in PR138 | 11478 | 41 |
 | /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
 | /robot-learning | rewritten and production verified in PR130 | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
 | /robot-safety | rewritten and production verified in PR132 | 1391 | 12 |
-| /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
+| /robotics-datasets | individual directory-evidence review; production verification pending | 3039 | 32 |
 | /robot-world-models | rewritten and production verified in PR129 | 5409 | 25 |
 | /robot-teleoperation | rewritten and production verified in PR123 | 3967 | 32 |
 
@@ -358,3 +358,7 @@ Nineteen first-submission dates checked; three separate reader decisions added. 
 ## VLA and tactile representation transfer
 
 Qualified catalog scope, added an action-interface handoff and adaptation ledger, and clarified estimated force supervision. Original source dates and modules retained. Whole-site review remains incomplete.
+
+## Directory evidence review
+
+Four individual directory decisions: manifest versus payload, semantic conversion, score reconstruction and sensor output chains. PRISM access changes only to linked/unverified. Record counts and fixed research snapshots retained. Whole-site review remains active.

@@ -1,6 +1,22 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { createTypeScriptLoader } from '../scripts/lib/load-typescript.mjs';
+
+test('a newly checked dataset route does not refresh its older scientific evidence', () => {
+  const { buildKnowledgeGraph, validateKnowledgeGraph } = createTypeScriptLoader()('src/lib/knowledge-graph.ts');
+  const graph = buildKnowledgeGraph();
+  const entity = graph.entities.find((item) => item.id === 'dataset:prism-industrial-skill');
+  const route = graph.sources.find((item) => item.url === 'https://modelscope.cn/datasets/Turboyuuuu/PRISM');
+  const paper = graph.sources.find((item) => item.url === 'https://arxiv.org/abs/2608.17962');
+  assert.equal(entity.reviewedAt, '2026-08-22');
+  assert.equal(route.reviewedAt, '2026-11-04');
+  const edgeTo = (source) => graph.edges.find((edge) => edge.from === entity.id && edge.to === source.id);
+  assert.equal(edgeTo(route).reviewedAt, '2026-11-04');
+  assert.equal(edgeTo(paper).reviewedAt, '2026-08-22');
+  assert.equal(graph.updated, '2026-11-04');
+  assert.deepEqual(validateKnowledgeGraph(graph), []);
+});
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
@@ -116,9 +132,9 @@ test('graph contract and GEO export expose relation counts and evidence boundari
     {
       knowledgeEntities: 202,
       organizations: 69,
-      sourceDocuments: 285,
-      edges: 616,
-      supportedByEdges: 370,
+      sourceDocuments: 286,
+      edges: 617,
+      supportedByEdges: 371,
       researchRelationEdges: 145,
       researchProvenanceEdges: 110,
       researchSemanticEdges: 35,

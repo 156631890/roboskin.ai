@@ -1,5 +1,5 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.10.31', compiledAt: '2026-10-31', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds one pinned DexSuite scripted Lift simulation subset with inspected metadata and a public file manifest. No trajectory replay or physical test is claimed. Other individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.11.04', compiledAt: '2026-11-04', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition updates PRISM to a linked but unverified data route; the prior pinned DexSuite metadata inspection is unchanged. No trajectory replay or physical test is claimed. Other individual access and source review dates are unchanged.' };
 export const datasetAccessEvidence = {
   'dexsuite-lift-scripted': {
     access: 'public-files',
@@ -203,18 +203,19 @@ export const datasetAccessEvidence = {
     "listedFileCount": 22897
   },
   "prism-industrial-skill": {
-    "access": "announced",
-    "accessCheckedAt": "2026-08-22",
+    "access": "linked-unverified",
+    "accessCheckedAt": "2026-11-04",
     "licenseStatus": "unknown",
     "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
     "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
-    "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+    "verificationScope": "Official project data link checked. Linked ModelScope page did not expose readable file manifest or terms; no payload download, checksum, loader, training or hardware test.",
     "splitStatus": "unknown",
     "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
     "formatStatus": "described",
-    "formatDetails": "The paper describes timestamped episode files in a common cross-platform schema and reports conversion to LeRobot v3.0 for its experiments. The unreleased public package and final file inventory could not be inspected.",
+    "formatDetails": "The paper describes timestamped episodes in a cross-platform schema and conversion to LeRobot v3.0 for its experiments. The current linked host did not expose a readable manifest or payload in this review; final file layout and decoding remain unverified.",
     "sources": [
-      "https://tengbo-yu.github.io/PRISM/"
+      "https://tengbo-yu.github.io/PRISM/",
+      "https://modelscope.cn/datasets/Turboyuuuu/PRISM"
     ]
   },
   "softvtbench": {

@@ -275,7 +275,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
       { url: entry.paperUrl, label: `${entry.name} paper`, kind: 'paper', reviewedAt: entry.sourceReviewed },
       ...(entry.projectUrl ? [{ url: entry.projectUrl, label: `${entry.name} project`, kind: 'project' as const, reviewedAt: entry.sourceReviewed }] : []),
       ...(entry.githubUrl ? [{ url: entry.githubUrl, label: `${entry.name} code`, kind: 'code' as const, reviewedAt: entry.sourceReviewed }] : []),
-      ...(entry.datasetUrl ? [{ url: entry.datasetUrl, label: `${entry.name} dataset`, kind: 'dataset' as const, reviewedAt: entry.sourceReviewed }] : []),
+      ...(entry.datasetUrl ? [{ url: entry.datasetUrl, label: `${entry.name} dataset`, kind: 'dataset' as const, reviewedAt: entry.datasetUrlReviewed ?? entry.sourceReviewed }] : []),
       ...(entry.licenseUrl ? [{ url: entry.licenseUrl, label: `${entry.name} license`, kind: 'license' as const, reviewedAt: entry.sourceReviewed }] : []),
     ]),
     attributes: {
@@ -435,11 +435,15 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
     }))
     .sort((left, right) => compareText(left.id, right.id));
 
+  const datasetSourceDates = new Map<string, string>(datasetRecords.flatMap(({ entry }) =>
+    entry.datasetUrl && entry.datasetUrlReviewed
+      ? [[`dataset:${entry.id}|${sourceId(normalizeSourceUrl(entry.datasetUrl))}`, entry.datasetUrlReviewed] as const]
+      : []));
   const edges: KnowledgeEdge[] = entities.flatMap((entity) => entity.primarySourceIds.map((id) => ({
     from: entity.id,
     relation: 'supportedBy' as const,
     to: id,
-    reviewedAt: entity.reviewedAt,
+    reviewedAt: datasetSourceDates.get(`${entity.id}|${id}`) ?? entity.reviewedAt,
   })));
 
   const benchmarkIds = new Set(tactileBenchmarkEntries.map((entry) => entry.id));
@@ -546,7 +550,7 @@ export function buildKnowledgeGraph(): KnowledgeGraph {
   const evaluatedByEdges = edges.filter((edge) => edge.relation === 'evaluatedBy').length;
   const graph: KnowledgeGraph = {
     version: knowledgeGraphVersion,
-    updated: latestDate(entities.map((entry) => entry.reviewedAt)),
+    updated: latestDate([...entities, ...sources, ...edges].map((entry) => entry.reviewedAt)),
     counts: {
       knowledgeEntities: entities.length,
       researchEntities: entities.length - organizationEntities.length,
