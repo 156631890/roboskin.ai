@@ -98,6 +98,71 @@ const sourceLinks = [
   },
 ];
 
+const evidenceLadder = {
+  "id": "physical-ai-evidence-ladder",
+  "heading": "What evidence moves a demonstration toward deployment?",
+  "body": [
+    "A demonstration establishes that something happened under the shown conditions. Repeated evaluation asks how often it happens under a stated protocol. Deployment asks whether the complete system continues to meet its requirements in the intended operating setting. These are different questions, not three interchangeable descriptions of a successful video.",
+    "The original Gemini Robotics announcement distinguishes an action-producing model from embodied reasoning used with a roboticist’s own programs. That is a source example of a system boundary, not a promise that a model API supplies a complete robot. Follow the artifact through its action adapter, controller and measured outcome."
+  ],
+  "table": {
+    "headers": [
+      "Evidence level",
+      "Record to inspect",
+      "Unresolved by this level alone"
+    ],
+    "rows": [
+      [
+        "Shown demonstration",
+        "Hardware, task, visible outcome and editing/assistance disclosures",
+        "Repeatability, failure frequency and unseen conditions"
+      ],
+      [
+        "Repeated task evaluation",
+        "Independent attempts, starting conditions, failures, retries and interventions",
+        "Transfer beyond the evaluated distribution"
+      ],
+      [
+        "Changed-condition evaluation",
+        "What changed, permitted adaptation and matched comparison",
+        "Unbounded generalization to other robots and environments"
+      ],
+      [
+        "Operational qualification",
+        "Application requirements, maintenance, monitoring and validated protective functions",
+        "A universal certificate derived from model benchmark scores"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Use a stop condition as well as a success condition",
+      "body": [
+        "For a proposed evaluation, define the outcome and the conditions that invalidate or end an attempt before collecting attractive runs. Include lost observations, stale commands, human assistance and resets in the record. A stopped or assisted attempt should remain visible in the denominator appropriate to the reported metric.",
+        "Keep performance evidence separate from the safety case. Task completion does not establish a protective function, and an error-free short demonstration does not establish acceptable risk in operation. Use the application-specific safety process and qualified engineering review rather than deriving safety from an AI success percentage."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Original Gemini Robotics architecture announcement",
+      "href": "https://deepmind.google/blog/gemini-robotics-brings-ai-into-the-physical-world/"
+    },
+    {
+      "label": "Model/API/framework access boundaries",
+      "href": "/robot-foundation-models#model-evaluation-entry-points"
+    },
+    {
+      "label": "Safety evidence and integration scope",
+      "href": "/robot-safety#safety-evidence-handoff"
+    },
+    {
+      "label": "Prepare a scoped evidence review",
+      "href": "/research-services"
+    }
+  ]
+};
+
 export default function PhysicalAiPage() {
   return (
     <>
@@ -156,6 +221,22 @@ export default function PhysicalAiPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id={evidenceLadder.id} className="deferred-section pb-14 md:pb-20">
+          <div className="container-shell signal-panel p-6 md:p-8">
+            <p className="text-sm text-soft">November 4, 2026: reviewed architecture sources and added an evidence ladder. Documentation review only; no robot deployment or safety validation.</p>
+            <h2 className="mt-4 text-3xl font-semibold text-white">{evidenceLadder.heading}</h2>
+            {evidenceLadder.body.map((text) => <p key={text} className="mt-4 text-base leading-relaxed text-soft">{text}</p>)}
+            <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label="Physical AI evidence levels">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead><tr>{evidenceLadder.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+                <tbody>{evidenceLadder.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+              </table>
+            </div>
+            {evidenceLadder.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 text-base leading-relaxed text-soft">{text}</p>)}</div>)}
+            <ul className="mt-6 grid gap-3">{evidenceLadder.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
           </div>
         </section>
 

@@ -332,12 +332,85 @@ export const structureNewPages: SeoTopicPage[] = [
     sources: [{ label: 'Agility company history and locations', href: 'https://www.agilityrobotics.com/company-overview' }, { label: 'Apptronik company and Apollo announcement', href: 'https://apptronik.com/news-collection/apptronik-unveils-apollo' }, { label: 'Figure 03 tactile hardware announcement', href: 'https://www.figure.ai/news/introducing-figure-03' }, { label: '1X company history and location', href: 'https://www.1x.tech/about' }, { label: 'Unitree company history', href: 'https://www.unitree.com/about/' }],
   },
   {
-    ...shared, path: '/embodied-ai', title: 'Embodied AI: Methods and Physical AI Compared', h1: 'Embodied AI Explained: Methods and How It Differs from Physical AI',
-    description: 'Embodied AI defined through perception, action and feedback: core learning methods, evaluation limits and a comparison with Physical AI.',
+    ...shared, updated: "2026-11-04", revisionNote: "November 4, 2026: added a transfer-claim comparison with Open X-Embodiment and OpenVLA source boundaries. No model run or reproduction.", path: '/embodied-ai', title: 'Embodied AI: Methods and Physical AI Compared', h1: 'Embodied AI Explained: Methods and How It Differs from Physical AI',
+    description: "Understand embodied AI through observation, action and environment, then distinguish unseen tasks, new robots, fine-tuning and simulation transfer claims.",
     introduction: 'Embodied AI is artificial intelligence studied or deployed through an agent that perceives and acts in an environment with a body or simulated embodiment. Embodied AI connects observations to actions and evaluates their consequences. The definition includes simulated agents; a successful simulation is not by itself evidence that a physical robot will work outside the simulator.',
     kicker: 'Definition and methods', intent: 'Explain embodied AI methods and the difference from Physical AI without competing for a broad Physical AI hub.', keywords: ['embodied AI', 'embodied AI methods', 'embodied AI vs Physical AI'],
     quickAnswer: ['Embodiment constrains what an agent can observe, reach and do. Evaluate the policy together with its sensors, action space and environment.', 'Imitation learning, reinforcement learning, model-based planning and multimodal policies are methods that can be used in embodied systems. None alone establishes general capability.', 'Physical AI is commonly used for AI systems interacting with the physical world. The terms overlap in robotics, but their boundaries are not a universal technical standard.'],
     sections: [
+    {
+      "id": "embodiment-transfer",
+      "heading": "Which part of the embodiment is actually new?",
+      "body": [
+        "Generalization needs a named change. A different object, camera viewpoint, task instruction, end effector and robot body each alters the problem in a different way. State what appeared in training, what was adapted and what was held out before calling a result transfer.",
+        "Open X-Embodiment reports positive transfer among its studied robots, while its discussion says the experiments do not study generalization to new robots. OpenVLA’s project page identifies direct WidowX/Google Robot evaluation separately from fine-tuned Franka demonstrations. These source-specific distinctions are more informative than treating both systems as universally cross-robot."
+      ],
+      "table": {
+        "headers": [
+          "Claim",
+          "Comparison needed",
+          "What remains separate"
+        ],
+        "rows": [
+          [
+            "New object or scene",
+            "Disclosed object/scene split with the same robot and interface",
+            "An unseen robot or new actuator layout"
+          ],
+          [
+            "New task instruction",
+            "Meaningfully new task requirements and a clear success rule",
+            "A paraphrase of a familiar command"
+          ],
+          [
+            "Adaptation to a robot",
+            "Target-robot data, tuning procedure and evaluation after tuning",
+            "Zero-shot use without target adaptation"
+          ],
+          [
+            "Simulation to reality",
+            "Matched task definitions and physical evaluation conditions",
+            "Rendered video quality or simulator-only success"
+          ],
+          [
+            "New sensing arrangement",
+            "Sensor pose/calibration, permitted preprocessing and held-out observations",
+            "Simply adding an unused sensor stream"
+          ]
+        ]
+      },
+      "subsections": [
+        {
+          "heading": "A practical transfer record",
+          "body": [
+            "Keep four separate entries: training exposure, adaptation data, evaluation exposure and execution assistance. Include the exact robot and tool, observation channels, action convention, timing and reset rule. For example, a changed camera plus newly collected demonstrations is an adaptation experiment; it is not evidence that the unchanged policy tolerates arbitrary viewpoints.",
+            "For a proposed evaluation, select the change that matters to your deployment and keep the remaining conditions explicit. Report all attempts and interventions under that question. Combining several changes may be useful for stress testing, but it makes the cause of a difference harder to identify. These are comparison principles, not a universal benchmark or a claim of measured transfer."
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Open X-Embodiment: discussion and open problems",
+          "href": "https://arxiv.org/html/2310.08864v9#S6"
+        },
+        {
+          "label": "OpenVLA: robot-specific evaluation and fine-tuning",
+          "href": "https://openvla.github.io/"
+        },
+        {
+          "label": "Compare source evidence by robot platform",
+          "href": "/robots"
+        },
+        {
+          "label": "Check learning and evaluation protocols",
+          "href": "/robot-learning"
+        },
+        {
+          "label": "Read task and split limitations in benchmarks",
+          "href": "/benchmarks"
+        }
+      ]
+    },
       { heading: 'Embodied AI versus Physical AI', body: ['The table describes common usage rather than a formal taxonomy. State the embodiment and evaluation setting instead of relying on the label alone.'], table: { headers: ['Question', 'Embodied AI', 'Physical AI'], rows: [
         ['Emphasis', 'Intelligence shaped by perception, action and an environment', 'AI interacting with or modelling physical systems'],
         ['Does it require a physical robot?', 'No; simulated embodied agents are widely studied', 'Often physical deployment, though simulation is used for development'],
