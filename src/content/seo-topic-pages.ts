@@ -2540,12 +2540,13 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-feedback-for-physical-ai',
+    revisionNote: "November 4, 2026: rechecked the cited v1 papers and added limits for using latency and resolution ablations in hardware decisions. September resource-access observations remain historical; no new data download or robot test was performed.",
     title: 'From Tactile Sensing to Robot Action: What the Evidence Shows',
-    description: 'Does better touch sensing improve robot manipulation? Compare detection, control and task evidence from six studies, with trial counts, training limits and verified resource access.',
+    description: 'Compare tactile detection, control and task outcomes across six studies, with trial counts, training limits and dated resource-access checks.',
     h1: 'From Tactile Sensing to Robot Action: What the Evidence Shows',
     kicker: 'Tactile feedback · evidence review',
     intent: 'Existing tactile feedback guide expanded to explain when perception improvements change robot actions and how to select evidence and data; no duplicate research URL.',
-    updated: '2026-09-19',
+    updated: '2026-11-04',
     priority: 0.82,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2697,6 +2698,51 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "hardware-ablation-limits",
+        "heading": "Before using an ablation to choose hardware",
+        "body": [
+          "Two details change how these papers should inform a purchase. SlipSense reports detection delay by slip speed; slow-slip cases have a longer tail than the aggregate headline suggests. Touch2Trace reduces spatial detail by pooling and resizing observations through its existing frozen encoder. That experiment also changes the input distribution seen by the encoder; it is not a direct comparison of separately calibrated low- and high-resolution hardware."
+        ],
+        "table": {
+          "headers": [
+            "Observed evidence",
+            "Decision it can inform",
+            "Additional check to plan"
+          ],
+          "rows": [
+            [
+              "SlipSense delay distribution by imposed slip speed",
+              "Which contact conditions need separate timing analysis",
+              "Measure missed events and long delays at the slow movements expected in the task"
+            ],
+            [
+              "Touch2Trace pooled-and-resized observations",
+              "Whether this learned pipeline depends on retained spatial detail",
+              "Evaluate the actual candidate sensor and its representation with matched task trials"
+            ],
+            [
+              "A detection followed by a grip response",
+              "Whether an event reaches the action path",
+              "Keep detection, command, actuator response and retained-object outcome separate"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "SlipSense Appendix G: speed-dependent detection delay",
+            "href": "https://arxiv.org/html/2609.15910v1#A7"
+          },
+          {
+            "label": "Touch2Trace Appendix G: resolution-ablation construction",
+            "href": "https://arxiv.org/html/2609.15921v1#A7"
+          },
+          {
+            "label": "Design matched tactile-sensor comparisons",
+            "href": "/guides/tactile-sensor-benchmark-robot-manipulation"
+          }
+        ]
+      },
+      {
         heading: 'Choose papers and data by the decision you need to make',
         body: ['Start with the failure you need to reduce. SlipSense helps separate detection from recovery; Touch2Trace shows why temporal context and matched policy tests matter; Visible Touch tests how contact reaches a visual policy. Bench2Dex supports simulated protocol development, STAR informs physical data and post-training design, and PredTac probes when predicted contact is useful.'],
         bullets: ['Define a physical success criterion, timeout and excluded-trial rule before choosing a metric. Preserve both partial progress and complete success.', 'Match model, training budget, initial conditions and trial counts when testing tactile-on/off policies. Report task-specific results and uncertainty, not only a pooled mean.', 'For latency, log onset, acquisition, inference, command and actuator response on compatible clocks. A sensor rate, alignment rate and control rate are different quantities.', 'For reuse, pin paper and repository versions; inspect actual files, units, action semantics, splits and provenance. Public file listings are not payload validation.', 'Check code, dataset, model and third-party asset terms separately. Keep unknowns explicit; choose another resource if access or legal reuse cannot yet be established.'],
@@ -2717,7 +2763,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
       {
         heading: 'Versions, review status and resource checks',
-        body: ['Sources were reopened on September 18, 2026. Each arXiv record then listed v1 only: Bench2Dex, SlipSense, Touch2Trace and PredTac were first submitted September 14; Visible Touch September 12; STAR September 11. This review cites those exact v1 full texts rather than silently mixing later project-page figures.', 'The arXiv comments for SlipSense, Touch2Trace and Visible Touch report CoRL 2026 acceptance. This is an author-reported publication status in the reviewed records; conference proceedings were not independently checked. Bench2Dex is marked a technical report; no peer-reviewed acceptance was verified for Bench2Dex, STAR or PredTac. Acceptance status does not constitute independent replication.', 'Bench2Dex code revision f96a8b2b4eb475483af66e9e03916b35bc43f1be has an MIT root license. The public teleopdata manifest at b195787c65046083e6a43776b67bdf1389dfa3eb lists 5,200 HDF5 paths plus .gitattributes; files are not independently counted demonstrations. No payloads were downloaded or checksums validated. Dataset, model-weight and collection-wide asset terms remain unknown.', 'The STAR and Visible Touch official pages were checked directly. No separate official project or code/data release was linked from the reviewed SlipSense, Touch2Trace or PredTac paper records. Their resource status remains unverified, not a claim that no release can exist elsewhere. Only Bench2Dex enters the confirmed file-manifest category; paper-only methods do not receive Dataset structured data.'],
+        body: ['Sources were reopened on September 18, 2026. Each arXiv record then listed v1 only: Bench2Dex, SlipSense, Touch2Trace and PredTac were first submitted September 14; Visible Touch September 12; STAR September 11. This review cites those exact v1 full texts rather than silently mixing later project-page figures.', 'The arXiv comments for SlipSense, Touch2Trace and Visible Touch report CoRL 2026 acceptance. This is an author-reported publication status in the reviewed records; conference proceedings were not independently checked. Bench2Dex is marked a technical report; no peer-reviewed acceptance was verified for Bench2Dex, STAR or PredTac. Acceptance status does not constitute independent replication.', 'Bench2Dex code revision f96a8b2b4eb475483af66e9e03916b35bc43f1be has an MIT root license. The public teleopdata manifest at b195787c65046083e6a43776b67bdf1389dfa3eb lists 5,200 HDF5 paths plus .gitattributes; files are not independently counted demonstrations. No payloads were downloaded or checksums validated. Dataset, model-weight and collection-wide asset terms remain unknown.', 'The STAR and Visible Touch official pages were checked directly on September 18. The November 4 browser-source check could not retrieve either page, so it does not update their release or licensing status. No separate official project or code/data release was linked from the reviewed SlipSense, Touch2Trace or PredTac paper records. Their resource status remains unverified, not a claim that no release can exist elsewhere. Only Bench2Dex enters the confirmed file-manifest category; paper-only methods do not receive Dataset structured data.'],
         links: [
           {
             label: 'Bench2Dex official project',
@@ -2769,7 +2815,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
       {
         question: 'Are STAR and Bench2Dex equally ready to download?',
-        answer: 'No. Bench2Dex has a verified public file manifest, though payload integrity and dataset licensing remain unchecked. STAR is a paper-linked data candidate with no verified download or reuse license in the reviewed official project.',
+        answer: 'Their September 18 resource checks established different evidence: a public Bench2Dex file manifest, but no verified STAR download or reuse license. Those dated observations do not establish today’s availability. Payload integrity and relevant reuse terms still require verification before adoption.',
       },
     ],
     relatedLinks: [
@@ -2873,6 +2919,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-sensor-benchmark-robot-manipulation',
+    revisionNote: "November 4, 2026: checked TacO methods and HT-Bench v2; clarified task coverage, trained baselines and missing-sensor tests. No hardware experiment was performed.",
     title: 'Tactile Sensor Benchmark for Robot Manipulation',
     description:
       'Compare visual, acoustic, magnetic, and resistive tactile sensors by manipulation task, signal, integration constraint, and evidence boundary.',
@@ -2880,7 +2927,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Sensor comparison guide',
     intent: 'Comparison guide for tactile sensor benchmark, robot manipulation tactile sensor comparison, and robot touch sensor evaluation searches.',
     published: '2026-07-20',
-    updated: '2026-08-05',
+    updated: '2026-11-04',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2909,13 +2956,13 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Separate sensor selection from representation learning',
         body: [
           'TacO and HT-Bench use the word benchmark at different layers. TacO compares how four tactile sensor modalities affect manipulation-policy performance across three tasks. HT-Bench evaluates learned full-hand tactile representations with egocentric vision across contact-geometry, cross-modal, temporal, and unseen-task tests.',
-          'These sources should not be collapsed into one leaderboard. A sensor can produce a useful signal while a weak representation fails to preserve it, and a strong representation can still depend on a sensing layout that is impractical for another robot hand.',
+          'These sources should not be collapsed into one leaderboard. HT-Bench v2 separately evaluates downstream manipulation on four tasks with 15 trials per task and method; its offline retrieval or reconstruction scores are not task-success rates. A strong representation can still depend on a sensing layout that is impractical for another robot hand.',
         ],
         table: {
           headers: ['Benchmark layer', 'Primary source', 'What it evaluates', 'Do not infer'],
           rows: [
             ['Sensor and policy selection', 'TacO', 'Visual, acoustic, magnetic, and resistive tactile sensing across pick-and-place, reorientation, and insertion.', 'One modality is universally best for every task or sensor implementation.'],
-            ['Learned full-hand representation', 'HT-Bench', '10M RGB frames and 7.8M tactile frames across 226 tasks, evaluated through retrieval, inpainting, synthesis, and prediction.', 'The reported encoder or sensing layout transfers to every robot hand and contact distribution.'],
+            ['Learned full-hand representation', 'HT-Bench', 'Authors report 10M RGB and 7.8M tactile frames across 226 tasks; offline retrieval, inpainting, synthesis and prediction are separate from robot evaluation.', 'The reported encoder or sensing layout transfers to every robot hand and contact distribution.'],
           ],
         },
       },
@@ -2947,6 +2994,48 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Plug insertion', 'Small pose errors create contact forces that must guide alignment.', 'Insertion success, peak force, completion time, jamming, and corrective actions.', 'Did tactile input reveal useful alignment error before the controller jammed the plug?'],
           ],
         },
+      },
+      {
+        "id": "baseline-interpretation",
+        "heading": "Three comparisons that answer different questions",
+        "body": [
+          "TacO does not test all six sensors on every task. Pick-and-place uses the full set; insertion and reorientation use smaller selections. Its vision-only policies are trained separately on the corresponding demonstrations. The microphone setup also uses a different gripper and teleoperation interface. Read each task configuration before attributing an outcome to sensing modality alone.",
+          "Use the following distinctions when designing your own study. These are evaluation recommendations, not additional RoboSkin.ai experiments."
+        ],
+        "table": {
+          "headers": [
+            "Comparison",
+            "Keep visible",
+            "Supported question"
+          ],
+          "rows": [
+            [
+              "Matched trained policies, with and without touch",
+              "Demonstrations, optimization budget, action interface and evaluation starts",
+              "Does access to touch improve the trained system under this protocol?"
+            ],
+            [
+              "One trained policy with touch missing at inference",
+              "Missing-input encoding, training exposure to dropout and recovery behavior",
+              "How does this policy behave when its expected sensor input is absent?"
+            ],
+            [
+              "Different sensor assemblies on the same task",
+              "Fingertip friction, mounting, gripper mechanics, calibration and controller",
+              "Which complete assembly suits the task, and which differences remain confounded?"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "TacO methods and task-specific comparisons",
+            "href": "https://arxiv.org/html/2605.21976v1"
+          },
+          {
+            "label": "Calibration and replacement checks",
+            "href": "/guides/tactile-sensor-calibration"
+          }
+        ]
       },
       {
         heading: 'A minimum evaluation protocol',
@@ -2985,7 +3074,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'What is the most important tactile benchmark baseline?',
         answer:
-          'Use the same manipulation system without tactile input or with the tactile pathway disabled. This shows whether touch changes the task outcome instead of merely producing an attractive signal visualization.',
+          'Compare separately trained policies with and without tactile input under a matched data and evaluation budget. Disabling touch only at inference asks a different question: robustness to a missing expected input. Report that ablation separately rather than treating it as the trained no-touch baseline.',
       },
       {
         question: 'Is TacO a final industry standard?',
@@ -3685,14 +3774,15 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/visuo-tactile-world-models-robot-manipulation',
+    revisionNote: "November 4, 2026: revisited the cited full papers, corrected the Dream-Tac gain description and added execution-interface questions. Original publication date and the September DexTouch-WM update remain; no models were run.",
     title: 'Visuo-Tactile World Models: Compare 5 Systems',
     description:
-      'Compare VT-WM, Dream-Tac, TouchWorld, ViTacWorld and FeelWorld: what each predicts, how it guides robot actions, reported results and limits, with primary sources.',
+      'Compare visuo-tactile world models by predicted states, robot action interfaces, reported trial protocols and transfer limits, with primary sources.',
     h1: 'Visuo-tactile world models for robot manipulation',
     kicker: '2026 world-model guide',
     intent: 'Technical comparison for visuo-tactile world models, tactile world models, robot world models, and contact-rich manipulation searches.',
     published: '2026-08-15',
-    updated: '2026-09-20',
+    updated: '2026-11-04',
     priority: 0.87,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3723,16 +3813,16 @@ export const seoTopicPages: SeoTopicPage[] = [
         id: 'world-model-comparison',
         heading: '2026 visuo-tactile world model comparison',
         body: [
-          'The rows below preserve the role and evidence boundary of each source. Relative improvements are included only when the arXiv abstract states them, and every number remains tied to the authors’ protocol.',
+          'The rows below distinguish the measured quantity, trial protocol and controller role. The November 4 review uses the cited full-paper versions; abstract percentages are not automatically relative improvements. All results are author-reported, not RoboSkin.ai measurements.',
         ],
         table: {
           headers: ['System', 'World-model role', 'Source-reported evidence', 'What it does not establish'],
           rows: [
-            ['VT-WM', 'Learns multi-task visual and tactile contact dynamics for imagination and planning.', 'The preprint reports 33% better object permanence, 29% better compliance with motion laws, and up to 35% higher zero-shot real-robot success.', 'The relative gains are tied to the reported tasks and baselines; they do not establish universal sensor or embodiment transfer.'],
-            ['Dream-Tac', 'Jointly models robot actions, future visual observations, and tactile dynamics with contact-gated fusion.', 'Across six tasks, the preprint reports 31.7% average action-accuracy improvement, up to 2.9x faster training, and 1.8x faster inference.', 'The relative gains are tied to the reported tasks and baselines; faster inference does not by itself prove safe control or hardware transfer.'],
+            ['VT-WM', 'Learns multi-task visual and tactile contact dynamics for imagination and planning.', 'The paper reports roughly 33% and 29% relative reductions in normalized trajectory error for moving and nominally static objects. Real-robot open-loop planning is evaluated separately over five initial conditions per task.', 'Trajectory-error reductions are not success-rate gains. The abstract also states up to 35% higher planning success; inspect the task scoring before treating that wording as a transferable effect size.'],
+            ['Dream-Tac', 'Jointly models robot actions, future visual observations, and tactile dynamics with contact-gated fusion.', 'Section 4 reports 83.3% mean success versus 51.7% for Cosmos Policy: about 31.6 percentage points using the displayed rounded values. Each method has 20 trials per task across six tasks, using its best-performing checkpoint under the stated selection rule.', 'The abstract calls the gain 31.7%; it is not a 31.7% relative improvement. Its 2.9x training and 1.8x inference speedups concern specified compute configurations, not end-to-end control or safety.'],
             ['TouchWorld', 'Combines predicted tactile subgoals with visuo-tactile action generation and fast tactile residual correction.', 'Across six tasks, the preprint reports 65.0% clean success and 53.7% under perturbations, 15.7 and 18.5 percentage points above its strongest reported baseline.', 'It is a hierarchical predictive-and-reactive system, not a common-score comparison with the other rows.'],
-            ['ViTacWorld', 'Generates aligned visual-tactile-action rollouts for data augmentation and action-conditioned policy evaluation.', 'The preprint reports physically meaningful rollouts, downstream policy improvement, and policy evaluation using public real data plus simulation.', 'Its abstract does not provide one universal gain; simulation-to-real behavior and policy-evaluation accuracy remain setup-specific.'],
-            ['FeelWorld', 'Predicts contact state, a force-related 3D tactile latent, slip, and visual futures for contact-aware planning.', 'The preprint reports 10-step LPIPS from 0.084 to 0.058, 61% lower LPIPS than the visual baseline after 80 steps, and 81.7% average zero-shot planning success.', 'LPIPS is not a direct force or safety metric, and the three reported task setups do not prove broad robot transfer.'],
+            ['ViTacWorld', 'Generates aligned visual-tactile-action rollouts for data augmentation and action-conditioned policy evaluation.', 'Table 1 evaluates four robot tasks with 10 trials per task and policy condition. Adding generated rollouts to real demonstrations improves the reported averages, with results depending on the policy.', 'Generated successful trajectories are still partly selected by manual inspection. A useful rollout generator is not automatically a calibrated predictor of real policy success.'],
+            ['FeelWorld', 'Predicts contact state, a force-related 3D tactile latent, slip, and visual futures for contact-aware planning.', 'The preprint reports 10-step LPIPS from 0.084 to 0.058, 61% lower LPIPS than the visual baseline after 80 steps, and 81.7% average zero-shot planning success.', 'The planning comparison uses 40 trials per method on each of three tasks. LPIPS is not force accuracy; the CEM planner searches a six-step horizon and executes two actions before replanning.'],
           ],
         },
       },
@@ -3750,6 +3840,56 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Correct: use fresh tactile feedback when real contact diverges from the prediction',
           'Log: preserve prediction error, measured touch, robot state, and outcome for later evaluation',
         ],
+      },
+      {
+        "id": "prediction-execution-contract",
+        "heading": "What happens between a predicted contact and a robot command?",
+        "body": [
+          "A forecast horizon is not a feedback-loop frequency. Before choosing a model, write down which observations are measured, which are imagined, who selects the action, and when fresh sensor data can change an action already in progress. These interface questions are more transferable than a ranking of unrelated success percentages."
+        ],
+        "table": {
+          "headers": [
+            "Interface",
+            "Concrete source example",
+            "Evaluation question"
+          ],
+          "rows": [
+            [
+              "Initial context to an open-loop plan",
+              "VT-WM conditions planning on initial RGB and touch; its goal cost is visual.",
+              "Can a disturbance after planning change the selected sequence, or does the controller need a separate intervention?"
+            ],
+            [
+              "Joint future and action generation",
+              "Dream-Tac predicts action chunks with future observations.",
+              "How old is the measured input when each command executes, and what happens during inference delay?"
+            ],
+            [
+              "Nominal actions plus fresh residual correction",
+              "TouchWorld commits four corrected actions before refreshing its residual prediction in the described implementation.",
+              "At the actual robot rate, how long can new contact information wait before altering a command?"
+            ],
+            [
+              "Generated observations for later policy training",
+              "ViTacWorld uses selected synthetic rollouts to augment demonstrations.",
+              "Does the trained policy improve on held-out hardware trials, and who accepted or rejected each generated trajectory?"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "VT-WM planning method",
+            "href": "https://arxiv.org/html/2602.06001v1#S3.SS3"
+          },
+          {
+            "label": "TouchWorld implementation and evaluation",
+            "href": "https://arxiv.org/html/2607.07287v1#S4"
+          },
+          {
+            "label": "Tactile feedback evaluation guide",
+            "href": "/guides/tactile-feedback-for-physical-ai"
+          }
+        ]
       },
       {
         id: 'evaluation-protocol',
@@ -3770,7 +3910,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Claim boundary for the 2026 evidence',
         body: [
-          'All five systems in this comparison are 2026 arXiv preprints as reviewed on August 15, 2026. Their reported results are useful research evidence, but they are not independent validation, certification, production benchmarks, or proof that one model is best across robots.',
+          'This comparison was first published on August 15, 2026. On November 4 we rechecked the cited arXiv full-paper versions and their evaluation protocols. This does not assert their latest publication or artifact-release status. The authors’ results are not independent validation, certification, production benchmarks or proof that one model is best across robots.',
           'Do not compare isolated percentages across rows. Each paper uses different prediction targets, horizons, tasks, policies, sensors, baselines, and success definitions. Open the primary source, confirm the current version and released assets, then reproduce the relevant task and hardware contract before making an engineering decision.',
         ],
       },

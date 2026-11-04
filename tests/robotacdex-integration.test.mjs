@@ -56,7 +56,8 @@ test('RoboTacDex article exposes the hardware, benchmark outcomes, and non-relea
     assert.match(article, new RegExp(signal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
   }
 
-  assert.match(article, /updated: '2026-08-22'/);
+  assert.match(article, /date: '2026-08-21'/);
+  assert.match(article, /updated: '2026-11-04'/);
 });
 
 test('RoboTacDex connects the paper, tactile dataset, and physical Unitree G1 with bounded graph edges', async () => {

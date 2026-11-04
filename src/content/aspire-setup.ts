@@ -4,12 +4,13 @@ const revision = 'fa00f0ef2bc1d91d594b9aa502c22133c9f538f7';
 const tree = `https://github.com/NVlabs/ASPIRE/blob/${revision}`;
 export const aspireSetup: ProgrammingPage = {
   path: '/guides/aspire-libero-pro-setup',
+  revisionNote: "November 4, 2026: rechecked the pinned setup and paper, and added a search-versus-evaluation record. No installation, model call or robot trial was performed.",
   title: 'ASPIRE v1.0: LIBERO-Pro Setup and Evaluation Boundaries',
   h1: 'ASPIRE v1.0: Check the Host and Evaluation Before Running',
   description: 'Review ASPIRE LIBERO-Pro host requirements, gated SAM3 access, saved versus seeded evaluation, and the limits of structural checks and agent-generated code.',
   kicker: 'Simulation reproduction planning',
   intent: 'Plan a source-checked ASPIRE LIBERO-Pro reproduction without confusing setup validation, seed coverage or demos with measured task reliability.',
-  published: '2026-10-17', updated: '2026-10-17', priority: 0.7, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  published: '2026-10-17', updated: '2026-11-04', priority: 0.7, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['ASPIRE LIBERO Pro setup requirements', 'ASPIRE saved vs seeded evaluation', 'ASPIRE Codex Claude Code robot skills'],
   verification: 'Documentation inspection at commit fa00f0ef2bc1d91d594b9aa502c22133c9f538f7. RoboSkin.ai did not install or run ASPIRE, download gated weights, call a model API, accept dataset terms, or operate a robot. Proposed review steps are not completed experiments.',
   quickAnswer: ['ASPIRE v1.0 packages workflows for coding agents, but a usable skill file is only one part of a reproduction. Confirm the host, model access, simulator and evaluation state policy before authorizing a run. Treat author-reported success, structural validation and physical demonstrations as different kinds of evidence.'],
@@ -42,6 +43,52 @@ export const aspireSetup: ProgrammingPage = {
       ['The program generalizes across layouts', 'Initialization mode, distinct initial states and held-out coverage; count repeated states explicitly.'],
       ['The method works on a robot', 'A separately authorized physical protocol, trial outcomes and interventions; simulation or a demo link cannot substitute.']
     ]}},
+    {
+      "id": "search-and-evaluation",
+      "heading": "Count discovery attempts separately from evaluation trials",
+      "body": [
+        "The paper evaluates a selected program per LIBERO-Pro or Robosuite task after debugging on a separate seed set. It describes incremental block execution for BEHAVIOR instead. Those interfaces make different use of reasoning during evaluation. A comparison should state when code can still change, not only which model produced it.",
+        "Use the following proposed record to distinguish finding a program from testing it. The current project gallery contains later models and online-learning examples; those do not automatically reproduce the pinned v1.0 setup or the original paper protocol. This guide remains a versioned setup review."
+      ],
+      "table": {
+        "headers": [
+          "Stage",
+          "Retain",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Discovery",
+            "Candidate versions, inspected failures, attempts and search budget",
+            "How the program was selected; the winning debug score is not the held-out result"
+          ],
+          [
+            "Frozen-program evaluation",
+            "Selected program hash, task IDs, actual initial-state coverage and all outcomes",
+            "Performance of that selected artifact under the declared conditions"
+          ],
+          [
+            "Online revision during evaluation",
+            "When code or memory changes, retries and carried-over state",
+            "A different adaptive procedure; do not pool it with frozen trials without labeling it"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Original paper: search and evaluation protocols",
+          "href": "https://arxiv.org/html/2607.00272v1#S3.SS3"
+        },
+        {
+          "label": "Current author project and dated evidence scope",
+          "href": "https://research.nvidia.com/labs/gear/aspire/"
+        },
+        {
+          "label": "Choose comparable robot-learning evidence",
+          "href": "/benchmarks"
+        }
+      ]
+    },
     {id: 'code', heading: 'Coding-agent skills and watchdogs are not a security boundary', body: [
       'The README states that generated Python has full import access. Trial processes and watchdogs are not a security sandbox. An agent skill packages instructions; it does not constrain everything imported code can read or execute.',
       'For a proposed simulation trial, define isolation, network access, allowed data and a stop condition before running generated programs. Keep simulation agents separated from physical hardware. Review the actual execution environment with its operator; this guide does not validate a sandbox or authorize a real-robot procedure.'

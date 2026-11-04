@@ -45,11 +45,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /terms | business/policy page; preserve factual services and legal scope; not an article rewrite | 611 | 0 |
 | /research/opentac-custom-tactile-skins-readout-limits-2026 | inventory only; claim-by-claim review pending | 1776 | 6 |
 | /research/softmimicgen-synthetic-data-sim-to-real-2026 | inventory only; claim-by-claim review pending | 2366 | 4 |
-| /research/slipsense-multimodal-slip-detection-2026 | inventory only; claim-by-claim review pending | 1304 | 10 |
-| /research/touch2trace-tactile-cable-tracing-2026 | inventory only; claim-by-claim review pending | 1296 | 4 |
-| /research/visible-touch-contact-overlays-visuomotor-policies-2026 | inventory only; claim-by-claim review pending | 1387 | 8 |
-| /research/dextouch-wm-human-touch-world-model-2026 | inventory only; claim-by-claim review pending | 1503 | 16 |
-| /research/bench2dex-visuo-tactile-bimanual-benchmark-2026 | inventory only; claim-by-claim review pending | 1722 | 6 |
+| /research/slipsense-multimodal-slip-detection-2026 | evidence and decision depth reviewed; production verification pending | 1304 | 10 |
+| /research/touch2trace-tactile-cable-tracing-2026 | evidence and decision depth reviewed; production verification pending | 1296 | 4 |
+| /research/visible-touch-contact-overlays-visuomotor-policies-2026 | evidence and decision depth reviewed; production verification pending | 1387 | 8 |
+| /research/dextouch-wm-human-touch-world-model-2026 | evidence and decision depth reviewed; production verification pending | 1503 | 16 |
+| /research/bench2dex-visuo-tactile-bimanual-benchmark-2026 | evidence and decision depth reviewed; production verification pending | 1722 | 6 |
 | /research/tacprint-wearable-tactile-contact-reproduction-2026 | inventory only; claim-by-claim review pending | 1406 | 11 |
 | /research/tacverse-cross-sensor-tactile-dataset-2026 | inventory only; claim-by-claim review pending | 1446 | 7 |
 | /research/univtac-platform-encoder-benchmark-2026 | inventory only; claim-by-claim review pending | 3028 | 14 |
@@ -60,11 +60,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/softvtbench-deformation-aware-visuo-tactile-dataset-2026 | inventory only; claim-by-claim review pending | 1443 | 4 |
 | /research/hitac-wam-hierarchical-tactile-world-action-model-2026 | inventory only; claim-by-claim review pending | 1118 | 8 |
 | /research/t-rex-tactile-reactive-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 1509 | 8 |
-| /research/robotacdex-humanoid-visual-tactile-action-dataset-2026 | inventory only; claim-by-claim review pending | 1293 | 9 |
-| /research/tactidex-tactile-guided-dexterous-benchmark-2026 | inventory only; claim-by-claim review pending | 1027 | 7 |
+| /research/robotacdex-humanoid-visual-tactile-action-dataset-2026 | evidence and decision depth reviewed; production verification pending | 1293 | 9 |
+| /research/tactidex-tactile-guided-dexterous-benchmark-2026 | evidence and decision depth reviewed; production verification pending | 1027 | 7 |
 | /research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | inventory only; claim-by-claim review pending | 1463 | 6 |
-| /research/feelworld-visuo-tactile-world-model-2026 | inventory only; claim-by-claim review pending | 975 | 9 |
-| /research/ht-bench-full-hand-tactile-representations-2026 | inventory only; claim-by-claim review pending | 1453 | 16 |
+| /research/feelworld-visuo-tactile-world-model-2026 | evidence and decision depth reviewed; production verification pending | 975 | 9 |
+| /research/ht-bench-full-hand-tactile-representations-2026 | evidence and decision depth reviewed; production verification pending | 1453 | 16 |
 | /research/sparsh-x-multisensory-touch-representations-2025 | rewritten and production verified in PR107 | 887 | 4 |
 | /research/mitas-multi-resolution-tactile-imitation-learning-2026 | rewritten and production verified in PR107 | 739 | 5 |
 | /research/dream-tac-tactile-world-action-model-2026 | rewritten and production verified in PR107 | 1172 | 15 |
@@ -171,24 +171,24 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /robot-tactile-sensors | inventory only; claim-by-claim review pending | 1250 | 2 |
 | /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
 | /embodied-ai | inventory only; claim-by-claim review pending | 736 | 1 |
-| /guides/3d-printed-tactile-sensors | inventory only; claim-by-claim review pending | 1376 | 2 |
+| /guides/3d-printed-tactile-sensors | evidence and decision depth reviewed; production verification pending | 1376 | 2 |
 | /guides/optical-tactile-sensor-maintenance | enhanced and production verified in PR106 | 1273 | 7 |
 | /guides/optical-vs-capacitive-tactile-sensors | enhanced and production verified in PR106 | 1360 | 6 |
-| /guides/aspire-libero-pro-setup | inventory only; claim-by-claim review pending | 1322 | 3 |
+| /guides/aspire-libero-pro-setup | evidence and decision depth reviewed; production verification pending | 1322 | 3 |
 | /guides/how-to-choose-a-tactile-sensor | reviewed and deployed in PR102 | 2637 | 10 |
-| /sensors/xela-uskin | sensor-family configuration and acceptance reviewed; production verification pending | 1184 | 4 |
-| /sensors/melexis-tactaxis | sensor-family configuration and acceptance reviewed; production verification pending | 1221 | 5 |
-| /sensors/loomia-smart-skin | sensor-family configuration and acceptance reviewed; production verification pending | 1363 | 3 |
+| /sensors/xela-uskin | rewritten and production verified in PR117 | 1184 | 4 |
+| /sensors/melexis-tactaxis | rewritten and production verified in PR117 | 1221 | 5 |
+| /sensors/loomia-smart-skin | rewritten and production verified in PR117 | 1363 | 3 |
 | /sensors/robotiq-tsf-85 | rewritten and production verified in PR116 | 1206 | 5 |
 | /sensors/digit | rewritten and production verified in PR116 | 1439 | 13 |
 | /sensors/gelsight-mini | rewritten and production verified in PR116 | 1319 | 11 |
 | /sensors/reskin | rewritten and production verified in PR116 | 1198 | 9 |
 | /guides/gelsight-vs-digit | enhanced and production verified in PR106 | 2140 | 10 |
-| /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | inventory only; claim-by-claim review pending | 3426 | 3 |
+| /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | evidence and decision depth reviewed; production verification pending | 3426 | 3 |
 | /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
 | /guides/ros2-tactile-sensing | rewritten and production verified in PR111 | 2153 | 21 |
 | /guides/python-tactile-data-processing | enhanced and production verified in PR106 | 2851 | 16 |
-| /guides/lerobot-dataset-format | inventory only; claim-by-claim review pending | 4604 | 19 |
+| /guides/lerobot-dataset-format | evidence and decision depth reviewed; production verification pending | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
 | /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
 | /robot-foundation-models | inventory only; claim-by-claim review pending | 8015 | 8 |
@@ -207,11 +207,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/robot-skin-vs-e-skin | rewritten and production verified in PR103 | 518 | 9 |
 | /research/robot-skin-papers | inventory only; claim-by-claim review pending | 777 | 8 |
 | /guides/robot-skin-vs-tactile-sensor | rewritten and production verified in PR103 | 645 | 3 |
-| /guides/tactile-feedback-for-physical-ai | inventory only; claim-by-claim review pending | 3086 | 14 |
-| /guides/tactile-sensor-benchmark-robot-manipulation | inventory only; claim-by-claim review pending | 1500 | 13 |
+| /guides/tactile-feedback-for-physical-ai | evidence and decision depth reviewed; production verification pending | 3086 | 14 |
+| /guides/tactile-sensor-benchmark-robot-manipulation | evidence and decision depth reviewed; production verification pending | 1500 | 13 |
 | /datasets | inventory only; claim-by-claim review pending | 17213 | 94 |
 | /tactile-foundation-models | inventory only; claim-by-claim review pending | 2571 | 37 |
-| /guides/visuo-tactile-world-models-robot-manipulation | inventory only; claim-by-claim review pending | 1932 | 21 |
+| /guides/visuo-tactile-world-models-robot-manipulation | evidence and decision depth reviewed; production verification pending | 1932 | 21 |
 | /benchmarks | inventory only; claim-by-claim review pending | 5157 | 40 |
 | /sensors | inventory only; claim-by-claim review pending | 6094 | 110 |
 | /tactile-manipulation | inventory only; claim-by-claim review pending | 2323 | 65 |
@@ -274,3 +274,7 @@ Four existing profiles retain their verified specifications and source history. 
 ## Sensor-family configuration review
 
 Three existing profiles preserve source-specific model specifications and dated availability. Additions address local-to-resultant force interpretation, taxel-to-module acceptance and loading artifacts versus mounted behavior. No product test, purchase or independent ranking is claimed. Whole-site review remains incomplete.
+
+## Guide and research evidence review
+
+Sixteen individually reviewed existing URLs combine seven guides and nine research interpretations in one release. Source findings, editorial evaluation proposals and historical executed records remain distinct. Preserve original dates, anchors, images and valuable content. Correct metric semantics, denominator and configuration limits rather than adding generic length. Whole-site review remains incomplete.
