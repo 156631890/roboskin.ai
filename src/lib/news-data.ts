@@ -4946,13 +4946,12 @@ This article is based on ISO’s public product page and public robotics-sector 
     id: 'twisted-yarn-textile-capacitive-robot-skin-2026',
     title: 'Twisted-yarn robot skin gains pressure sensitivity but loses proximity range',
     seoTitle: 'Twisted-Yarn Robot Skin: Pressure vs Proximity',
-    seoDescription:
-      'A 2026 preprint tests layered textile capacitive robot skin, exposing a tradeoff between pressure sensitivity and proximity sensing range.',
+    seoDescription: 'Compare yarn-layer trade-offs, junction stress, step response and robot reaction timing before evaluating a textile capacitive sensing surface.',
     excerpt:
       'A new textile capacitive robot-skin study shows that adding twisted-yarn layers improves pressure sensitivity and strength while shortening proximity range.',
     content: `# Twisted-yarn robot skin gains pressure sensitivity but loses proximity range
 
-**Research news brief — August 18, 2026**
+**Research news brief — August 18, 2026. Evidence reviewed November 3–4, 2026.**
 
 A preprint submitted on August 14 tests how yarn architecture changes the behavior of textile capacitive sensors for robotic skin. The researchers built one-, two-, and four-layer structures from silver-coated yarns insulated with polydimethylsiloxane (PDMS), then compared pressure, proximity, mechanical, cyclic, thermal, and robot-integration behavior.
 
@@ -4960,7 +4959,7 @@ The most useful result is a design tradeoff. More twisted-yarn layers increased 
 
 ## What the researchers changed
 
-The study holds the basic material system constant and changes the number of twisted yarn layers. The reported effective electrode-overlap area grows from 0.25 mm² in the one-layer structure to 1.0 mm² with two layers and 4.0 mm² with four layers. That makes the four-layer overlap 16 times the one-layer value.
+The study holds the basic material system constant and changes the number of twisted yarn layers. The reported effective electrode-overlap area grows from 0.25 mm² in the one-layer structure to 1.0 mm² with two layers and 4.0 mm² with four layers. That makes the four-layer overlap 16 times the one-layer value. The overlap area describes the capacitive geometry; it is not the localized single-fiber area used to normalize the applied stress. Keep those denominators separate when comparing sensitivity. [Methods III-B–C](https://arxiv.org/html/2608.14406v1).
 
 The paper evaluates applied stress from 0.4 to 3.9 MPa using the localized yarn-contact area. This normalization matters: those values should not be compared directly with pressure ranges calculated from a much larger indenter or skin-patch area.
 
@@ -4987,13 +4986,24 @@ The paper relates the shorter range to the more compact field distribution in th
 
 ## From one sensor to a robot-skin matrix
 
-The researchers assembled a 4 × 4 textile matrix with an active area of about 30 × 30 mm² and roughly 10 mm spacing between sensing points. They mounted the system on a Franka Emika Panda arm for three demonstrations:
+The researchers assembled a 4 × 4 textile matrix with an active area of about 30 × 30 mm² and roughly 10 mm spacing between sensing points. The matrix readout uses PSoC CapSense. A separate yarn-sensor integration on a Franka Emika Panda uses an FDC1004 converter and microcontroller; the paper describes different implementations rather than one identical acquisition chain for every result. Across its demonstrations the team shows:
 
 - mapping touch across the textile array;
 - triggering an evasive robot motion when proximity crossed a threshold; and
 - distinguishing a rigid gear contact from a human hand using threshold-based safety logic.
 
 The paper reports about 403 milliseconds of end-to-end reaction latency in the prototype. That value includes the demonstrated sensing and control path; it is not a universal response time for textile robot skin. The demonstrations use threshold rules rather than a learned tactile model, so this work belongs primarily to the robot-skin and signal-to-control layers—not yet to tactile foundation models.
+
+### Compare the timing quantities before choosing a layer
+
+| Quantity | What it describes | What it cannot establish alone |
+| --- | --- | --- |
+| Electrical excitation frequency | The capacitance measurement condition | How quickly a robot reacts |
+| Step rise and recovery | A transient sensor response under the stated load | Full settling during each periodic cycle |
+| Periodic modulation | Whether repeated loading produces a detectable signal | An independent settled measurement for every cycle |
+| Robot reaction latency | The demonstrated acquisition-to-action path | The same latency on a different controller or mount |
+
+For an integration trial, choose the required pre-contact distance and contact quantity separately. Keep the yarn configuration, mounting tension, converter settings, reference geometry and decision threshold with each run. Recheck both outputs after remounting; a stronger contact response should not silently relax the pre-contact requirement. This is a proposed evaluation procedure, not a test performed by RoboSkin.ai. The [calibration guide](/guides/tactile-sensor-calibration) helps define the reference, while the [ROS 2 pipeline review](/research/ros2-kilted-tactile-pipeline-2026) separates raw acquisition, processed outputs and action records.
 
 ## What this adds to the tactile intelligence stack
 
@@ -5003,7 +5013,7 @@ For the broader system context, start with the [robot skin definition](/robot-sk
 
 ## Evidence limits
 
-This is an arXiv v1 preprint submitted to IEEE Transactions on Instrumentation and Measurement, not a final peer-reviewed journal article. The evidence comes from one research prototype and a small 4 × 4 matrix. The robot demonstrations show threshold-based behaviors, not learned generalization, certified safety, or whole-body humanoid deployment.
+This review uses arXiv v1, whose manuscript states submission to IEEE Transactions on Instrumentation and Measurement. It does not verify a subsequent journal decision or a final journal version. The evidence comes from one research prototype and a small 4 × 4 matrix. The robot demonstrations show threshold-based behaviors, not learned generalization, certified safety, or whole-body humanoid deployment.
 
 The study also does not establish manufacturing yield across large textile surfaces, repeatable performance over complex curvature, resistance to abrasion and contamination, or transfer across users and environmental conditions. Those questions remain necessary before treating the design as a deployable safety skin.
 
@@ -5012,7 +5022,7 @@ The study also does not establish manufacturing yield across large textile surfa
 - Does adding yarn layers improve every sensing mode? No. It improved the reported pressure sensitivity and mechanical strength but reduced proximity range.
 - Is 5 Hz the same as a 200 ms response time? No. The paper reports detectable periodic response up to 5 Hz, while step rise and recovery were each about 0.9 seconds.
 - Does the robot demo use tactile AI? It uses contact and proximity signals in a robot-control loop, but the demonstrated decision logic is threshold-based rather than a learned model.
-- Is this full-body humanoid skin? No. It is a 4 × 4 textile prototype mounted on a Panda robot arm.
+- Is this full-body humanoid skin? No. The paper reports a small textile matrix and separate yarn-sensor robot demonstrations, not whole-body coverage.
 
 ## Source boundary
 
@@ -5024,8 +5034,8 @@ This brief summarizes the authors' arXiv preprint and adds RoboSkin.ai analysis.
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-18',
-    updated: '2026-08-18',
-    readTime: '7 min read',
+    updated: '2026-11-04',
+    readTime: '6 min read',
     category: 'Robot skin research',
     image: '/generated/authority/news-textile-artificial-skin-2026.webp',
     sourceTitle: 'Effect of Twisted-Yarn Architecture on Pressure and Proximity Sensing Characteristics of Textile Capacitive Sensors for Robotic Skin',
@@ -5041,20 +5051,19 @@ This brief summarizes the authors' arXiv preprint and adds RoboSkin.ai analysis.
   {
     id: 'eit-pneumatic-hybrid-robot-skin-force-map-2026',
     title: 'Hybrid robot skin combines EIT location maps with pneumatic force sensing',
-    seoTitle: 'Hybrid EIT–Pneumatic Robot Skin Reconstructs Force Maps',
-    seoDescription:
-      'A 2026 preprint combines electrical impedance tomography and pneumatic sensing in a 3D-printed robot skin, reducing reported sensitivity non-uniformity.',
+    seoTitle: 'EIT–Pneumatic Robot Skin: Localization and Force Limits',
+    seoDescription: 'Separate the EIT testbed from chest integration, pad-level force from localization, and reported reconstruction speed from robot control.',
     excerpt:
       'A 2026 preprint combines electrical impedance tomography with pneumatic sensing to improve force reconstruction across a large-area humanoid robot skin.',
     content: `# Hybrid robot skin combines EIT location maps with pneumatic force sensing
 
-**Research news brief — August 2026**
+**Research news brief — August 2026. Evidence reviewed November 3–4, 2026.**
 
-A May 2026 preprint proposes a hybrid robotic skin that combines electrical impedance tomography (EIT) with pneumatic pressure sensing. EIT supplies spatial information about where contact changes the conductive surface; four sealed pneumatic pads supply a more stable estimate of net force. The authors use the two signals together to correct a known weakness of large-area EIT skin: sensitivity can vary with contact location.
+The May 27, 2026 arXiv manuscript, whose metadata states acceptance to ICRA 2026, proposes a hybrid robotic skin that combines electrical impedance tomography (EIT) with pneumatic pressure sensing. EIT supplies spatial information about where contact changes the conductive surface; four sealed pneumatic pads supply a more stable estimate of net force. The authors use the two signals together to correct a known weakness of large-area EIT skin: sensitivity can vary with contact location.
 
 ## What the researchers built
 
-The prototype uses a rigid base, four soft air-tight pads, a continuous piezoresistive layer, and 32 boundary electrodes. Its parts were produced through 3D printing and spray coating. The reported chest-mounted version measures 280 × 280 mm and reconstructs EIT images at 100 Hz using a precomputed matrix.
+Two configurations need to stay distinct. The indentation testbed is 200 × 200 mm with a 5 × 5 electrode arrangement. The chest-mounted version is 280 × 280 mm with 32 electrodes and four pneumatic pads; it reconstructs EIT images at 100 Hz using a precomputed matrix. The structures use 3D printing and conductive coatings, with separate electronics, pressure sensors and tubing. [Hardware III and Demonstration V](https://arxiv.org/html/2605.28468v1).
 
 The processing path is deliberately modest. A Tikhonov-regularized inverse reconstruction produces the spatial EIT map. Each pneumatic pad is calibrated against ground-truth force. The pad signal then rescales the reconstructed conductivity image so the final map retains location cues while using the pneumatic estimate for force magnitude.
 
@@ -5065,10 +5074,10 @@ In load-cell indentation experiments, the paper reports that the coefficient of 
 | Reported item | Value | Why it matters |
 | --- | --- | --- |
 | Humanoid chest skin area | 280 × 280 mm | Demonstrates a body-scale patch rather than a fingertip-only sensor. |
-| EIT electrodes | 32 | Boundary measurements reconstruct contact over a continuous surface. |
+| Chest-version EIT electrodes | 32 | Boundary measurements reconstruct contact over a continuous surface. |
 | Pneumatic pads | 4 | Each pad contributes an independent net-force estimate. |
 | EIT reconstruction rate | 100 Hz | Shows the reported visualization pipeline can run in real time. |
-| Sensitivity variation | 0.31 → 0.14 coefficient of variation | The hybrid calibration reduced location-dependent non-uniformity in the reported indentation test. |
+| Testbed sensitivity variation | 0.31 → 0.14 coefficient of variation | The hybrid calibration reduced location-dependent non-uniformity in the reported indentation test. |
 
 ## Why the two modalities complement each other
 
@@ -5080,9 +5089,19 @@ The hybrid design assigns each modality the job it handles better. EIT preserves
 
 The authors also pressed two locations sequentially on the same pneumatic pad. The pressure signal followed the sum of the contacts, while the EIT image retained spatial cues. This supports a limited conclusion: the pad can continue estimating aggregate load during more than one contact. It does not mean the pneumatic channel alone separates the force applied at each individual point.
 
+### Keep localization, load and reconstruction quality separate
+
+A proposed acceptance record should retain three outputs: the estimated contact region, the force summed within each pad and the reconstructed spatial distribution. Check each against its own reference. A visually sharper map need not have a better force estimate; a correct total load need not allocate that load correctly among several contacts.
+
+For a repeatable comparison, record the pad geometry, electrode layout, forward mesh, reconstruction settings, pressure-force calibration and synchronized raw observations. Include interior, boundary and overlap conditions in the declared evaluation set. After changing the cover or pad assembly, recheck the relevant calibration instead of treating the previous map as a portable specification. These are editorial evaluation questions, not additional experiments reported by the authors.
+
+The [sensor calibration guide](/guides/tactile-sensor-calibration) provides a place to define units and error references. The [3D-printed tactile sensor guide](/guides/3d-printed-tactile-sensors) separates printable structures from the remaining acquisition and integration work.
+
 ## What this does not prove yet
 
-This is a preprint, not an independently replicated product benchmark. The paper identifies lower sensitivity near overlap regions between pads; because the current fusion relies heavily on the pneumatic estimate, errors there can bias reconstruction. The humanoid demonstration shows sensing and logging, but it does not evaluate a closed-loop safety controller, long-duration abrasion, cleaning, field repair, temperature drift, or production lifetime.
+This review uses the arXiv v1 manuscript. Its metadata states ICRA 2026 acceptance; conference status does not establish independent replication or a product benchmark. The paper identifies lower sensitivity near overlap regions between pads; because the current fusion relies heavily on the pneumatic estimate, errors there can bias reconstruction. The humanoid demonstration shows sensing and logging, but it does not evaluate a closed-loop safety controller, long-duration abrasion, cleaning, field repair, temperature drift, or production lifetime.
+
+Location-aware correction near pad overlaps, adaptive measurement patterns and continual learning are proposed follow-up directions in the Discussion. They should not be presented as validated features of the reported demonstration.
 
 The 100 Hz value describes the reported EIT reconstruction pipeline. It should not be read as a complete end-to-end reflex latency, which would also include acquisition, transport, filtering, decision logic, and robot actuation.
 
@@ -5109,8 +5128,8 @@ This article summarizes an arXiv preprint and adds RoboSkin.ai analysis for robo
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-16',
-    updated: '2026-08-16',
-    readTime: '6 min read',
+    updated: '2026-11-04',
+    readTime: '5 min read',
     category: 'Robot skin research',
     image: '/generated/brand/roboskin-tactile-material-study-v2.webp',
     sourceTitle: 'EIT-Pneumatic Hybrid Robotic Skin for Practical and Accurate Force Map Reconstruction',
@@ -5206,21 +5225,34 @@ This brief summarizes the publisher's abstract, highlights, and article metadata
   {
     id: 'underwater-self-healing-electronic-skin-nus-2026',
     title: 'Underwater self-healing electronic skin combines touch, damage detection, and repair',
-    seoTitle: 'Underwater Self-Healing Electronic Skin for Soft Robots',
-    seoDescription: 'NUS researchers combine touch sensing, damage detection, and underwater self-repair in an electronic skin for soft robots and marine machines.',
+    seoTitle: 'Underwater Self-Healing Skin: Recovery and Repair Limits',
+    seoDescription: 'Distinguish electrical restoration, mechanical healing and post-repair calibration in the NUS underwater sensor study, with practical acceptance checks.',
     excerpt:
       'NUS researchers combined self-powered touch sensing, damage detection, and underwater self-repair in one electronic skin system for soft robotics and marine machines.',
     content: `# Underwater self-healing electronic skin combines touch, damage detection, and repair
 
-**News brief - July 2026**
+**News brief - July 2026. Evidence reviewed November 3–4, 2026.**
 
-The National University of Singapore reported a self-healing magnetoelectric sensory system that can sense touch and proximity, detect damage, and recover after damage in both air and water. The research targets a practical weakness in electronic skin: a soft sensor may perform well when new but lose value quickly if a puncture, cut, or harsh environment disables it.
+NUS published its institutional report on July 17, 2026; the associated Advanced Materials paper was first published on April 18, 2026. The work describes a self-healing magnetoelectric sensory system that can sense touch and proximity, detect damage, and recover after damage in both air and water. The research targets a practical weakness in electronic skin: a soft sensor may perform well when new but lose value quickly if a puncture, cut, or harsh environment disables it.
 
 ## What the researchers reported
 
 The system combines a damage-sensing layer with an electromagnetic sensing layer. Both use a stretchable, self-healing elastomer with liquid-metal conductors. The NUS team demonstrated the technology in a smart diving glove and in a robotic hand that grasped objects under water while monitoring damage.
 
 The university reports that the material reached up to 92% elastic recovery. Under mild heating, it reached about 82% healing efficiency in air after seven days and nearly 100% under water after ten days. After needle punctures, the sensor recovered its original electrical performance within seconds; larger cuts required contact pressure and a longer healing period.
+
+### What recovered, and under which conditions?
+
+The paper defines mechanical healing efficiency as post-healing elongation divided by initial elongation. It is not the fraction of damaged robots repaired or a task-success rate. Electrical restoration after minor damage and recovery under substantial repeated deformation are also different endpoints: the authors describe a longer healing period for the latter. [Sections 2.2–2.3 and 4.4](https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/adma.202523052).
+
+| Evidence to request | Keep in the record | Decision it informs |
+| --- | --- | --- |
+| Electrical continuity | Damage type, signal baseline and recovery interval | Whether a readable electrical path has returned |
+| Mechanical recovery | Original and healed reference, environment, temperature and duration | Whether the assembly tolerates the intended deformation |
+| Measurement after repair | Calibration revision, reference inputs and residual error | Whether readings remain useful for the intended quantity |
+| Task after repair | Eligible cases, interventions and repeated damage history | Whether the robot can resume the intended operation |
+
+The last two rows are proposed integration checks, not additional results from this study. A maintenance decision should retain them separately rather than declare the whole assembly ready when one signal returns.
 
 ## Why this matters for robot skin
 
@@ -5230,11 +5262,13 @@ The research also connects three functions that are often evaluated separately: 
 
 ## What this does not prove yet
 
-The work does not establish commercial readiness, indefinite underwater service, or suitability for every marine robot. The reported healing conditions and time scales also differ by damage type. Readers should separate rapid electrical recovery after a puncture from longer material healing after a severe cut.
+The work does not establish commercial readiness, indefinite underwater service, or suitability for every marine robot. In the robot-hand demonstration, severe damage could require manual intervention or replacement. The paper also examines proximity through relative motion of magnetic components; this is not evidence of universal obstacle detection. Self-powered transduction does not establish that processing, wireless transmission, indicators or robot actuation need no energy. [Sections 2.4–2.5](https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/adma.202523052). The reported healing conditions and time scales also differ by damage type. Readers should separate rapid electrical recovery after a puncture from longer material healing after a severe cut.
 
 ## Where this fits next
 
 Compare this result with the [single-material soft robotic skin research brief](/research/single-material-soft-robotic-skin-2025), which examines multimodal sensing and damage awareness across a flexible surface. The broader [e-skin guide](/e-skin) explains how electronic skin relates to robot skin, tactile sensing, and Physical AI.
+
+For a repair decision, use the [calibration guide](/guides/tactile-sensor-calibration) to specify the post-repair reference and the [flexible array guide](/guides/flexible-tactile-sensor-array) to record mounting and service constraints. Keep a damaged component out of the intended task until its relevant acceptance conditions are met; the article supplies no universal threshold or certification.
 
 ## Practical questions
 
@@ -5253,7 +5287,7 @@ This brief summarizes the NUS report and the associated Advanced Materials paper
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-07-20',
+    updated: '2026-11-04',
     readTime: '4 min read',
     category: 'Electronic skin',
     image: '/generated/research-self-healing-2025.svg',

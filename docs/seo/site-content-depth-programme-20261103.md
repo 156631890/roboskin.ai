@@ -155,17 +155,17 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/lerobot-v060-world-models-vla-evaluation-2026 | inventory only; claim-by-claim review pending | 1181 | 4 |
 | /news/nist-humanoid-baseline-performance-benchmark-2026 | inventory only; claim-by-claim review pending | 1098 | 5 |
 | /news/iso-10218-2025-industrial-robot-safety-scope | inventory only; claim-by-claim review pending | 1075 | 2 |
-| /news/twisted-yarn-textile-capacitive-robot-skin-2026 | inventory only; claim-by-claim review pending | 1256 | 3 |
-| /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | inventory only; claim-by-claim review pending | 1099 | 3 |
+| /news/twisted-yarn-textile-capacitive-robot-skin-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 1256 | 3 |
+| /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 1099 | 3 |
 | /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | inventory only; claim-by-claim review pending | 906 | 1 |
-| /news/underwater-self-healing-electronic-skin-nus-2026 | inventory only; claim-by-claim review pending | 722 | 2 |
+| /news/underwater-self-healing-electronic-skin-nus-2026 | textile, hybrid and recovery evidence reviewed; production verification pending | 722 | 2 |
 | /news/touchworld-tactile-foundation-model-dexterous-manipulation-2026 | inventory only; claim-by-claim review pending | 868 | 7 |
-| /news/color-changing-mechanochromic-tactile-sensor-2026 | market and readout evidence review complete; production verification pending | 702 | 3 |
-| /news/single-pixel-tactile-skin-compressive-sampling-2026 | market and readout evidence review complete; production verification pending | 710 | 1 |
+| /news/color-changing-mechanochromic-tactile-sensor-2026 | rewritten and production verified in PR113 | 702 | 3 |
+| /news/single-pixel-tactile-skin-compressive-sampling-2026 | rewritten and production verified in PR113 | 710 | 1 |
 | /news/service-robots-200000-units-logistics-tactile-ai | rewritten and production verified in PR110 | 555 | 2 |
 | /news/electronic-skin-research-robot-skin-systems-problem | rewritten and production verified in PR110 | 532 | 2 |
 | /news/full-hand-tactile-sensing-robot-hands-vision-control | rewritten and production verified in PR110 | 1240 | 1 |
-| /news/global-robot-installations-542000-physical-ai-touch | market and readout evidence review complete; production verification pending | 1001 | 2 |
+| /news/global-robot-installations-542000-physical-ai-touch | rewritten and production verified in PR113 | 1001 | 2 |
 | /robot-grippers | inventory only; claim-by-claim review pending | 1187 | 2 |
 | /electronic-skin | inventory only; claim-by-claim review pending | 772 | 11 |
 | /robot-tactile-sensors | inventory only; claim-by-claim review pending | 1250 | 2 |
@@ -258,3 +258,7 @@ Two existing pages retain distinct Kilted interface and Lyrical tutorial intents
 ## Market and sensing-readout evidence pass
 
 Three historical news pages separate industrial installation figures from tactile adoption, optical colour observations from calibration, and effective reconstruction rates from controller timing. Original dates, URLs, anchors and source routes remain. Source access limits and version boundaries are explicit; whole-site review remains incomplete.
+
+## Textile, hybrid and recovery evidence pass
+
+Three existing briefs retain their substantial source-backed sections while correcting yarn geometry/timing, EIT configuration/force boundaries and underwater healing endpoints. Original dates, URLs, anchors and source routes remain. The separate three-channel textile source is still access-limited and excluded from completion. Whole-site review remains incomplete.
