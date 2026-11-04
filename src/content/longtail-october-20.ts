@@ -77,7 +77,7 @@ export const contactStateSection: Section = {
       heading: 'Use contact events to select actions',
       body: [
         'The table is an engineering illustration, not a tested controller. A state can gate an action, such as switching from approach to insertion after contact, while continuous force feedback regulates the motion within that state. State labels complement force values; they do not replace them. Define transitions, confidence handling and recovery behavior before collecting evaluation trials.',
-        'Jang, Bae and Haninger estimate force from integrated soft pressure and strain sensors, then examine contact, non-contact, sticking and slipping in a plug-in task. The paper reports limitations for slip detection and multi-finger interpretation. Its material-dependent rule should not be copied as a universal slip threshold.',
+        'Jang, Bae and Haninger estimate force from integrated soft pressure and strain sensors, then examine slip and plug insertion in separate experiments. Their estimator misses the force change during bulk slip and the smaller assembly forces in the successful insertion case. Pressure channels do not measure shear directly; the authors identify directional sensitivity and multi-finger interpretation as limitations. These results do not establish a universal slip threshold.',
       ],
       links: [contactPaper],
     },

@@ -4372,13 +4372,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/tactile-manipulation',
     title: 'Tactile Manipulation for Robot Hands and Grippers',
     description:
-      'Learn how tactile manipulation turns contact, pressure, shear, and slip into closed-loop robot actions for grasping, insertion, dexterity, and Physical AI.',
+      "Compare tactile observations, inferred contact, action targets and controller timing; plan manipulation trials with explicit outcome and evidence limits.",
     h1: 'Tactile manipulation: from contact to robot action',
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: '2026-10-22',
-    revisionNote: 'October 22, 2026: clarified predicted wrench references and separate model/controller rates with CW-WAM. October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: compared observation and action interfaces, corrected contact-state evidence limits, and added timing and intervention checks. October 22, 2026: clarified predicted wrench references and separate model/controller rates with CW-WAM. October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.",
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4413,6 +4413,100 @@ export const seoTopicPages: SeoTopicPage[] = [
         },
       },
       {
+        "id": "contact-information-and-command-interfaces",
+        "heading": "Separate contact information from the command interface",
+        "body": [
+          "Before choosing a policy, identify what is observed, what is inferred and what the controller is asked to execute. A force value in a dataset can be an input, a target or an auxiliary training label. These roles require different calibration and runtime checks.",
+          "The examples below compare interfaces in source-reported systems, not their task scores. Different robots, tasks, training and operator assistance prevent a common performance ranking. The final column is a proposed integration question, not a result demonstrated by RoboSkin.ai."
+        ],
+        "table": {
+          "headers": [
+            "Reported interface",
+            "Observation and executed target",
+            "Question before reuse"
+          ],
+          "rows": [
+            [
+              "HACo compliant motion",
+              "Tactile and torque inputs condition compliant motion references. The compliant-intent residual is auxiliary supervision, not another execution offset.",
+              "Which saved fields train the model, and which exact fields reach your controller?"
+            ],
+            [
+              "Wrench-ACT force action",
+              "Measured follower wrench is an input; demonstrated target wrench supervises the action. The force-mode controller retains velocity damping.",
+              "Are units, frames and damping specified, and is operator-assisted setup counted separately?"
+            ],
+            [
+              "Torque-change grasping",
+              "Calibrated motor-current changes provide an indirect contact cue. The student commands joint-position changes.",
+              "Can the task tolerate loss of absolute static-load information?"
+            ],
+            [
+              "Geometry-based whole-hand regulation",
+              "Tracked object geometry and joints imply contact candidates; optimization allocates desired forces. They are not contact-force measurements.",
+              "What happens to the command when the pose is stale or the optimization fails?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Specify timing at each boundary",
+            "body": [
+              "Record sensor acquisition, observation age, inference duration, command update and low-level tracking separately. Whole-hand regulation illustrates why this matters: its reported solve-time reciprocal is about 84 Hz, while hardware contact updates follow the 30 Hz object tracker. CW-WAM's rates above describe another distinct arrangement.",
+              "For your evaluation, keep acquisition and execution timestamps, invalid-data flags, command saturation, fallback events and human interventions. Score the physical outcome as well as the signal or tracking error. A low measured load during a failed insertion is not evidence of successful compliant manipulation."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "HACo: auxiliary targets and public artifact scope",
+            "href": "/news/haco-haptic-active-compliance-dexterous-manipulation"
+          },
+          {
+            "label": "Wrench-ACT: assistance, commands and force statistics",
+            "href": "/news/wrench-act-direct-wrench-control-manipulation"
+          },
+          {
+            "label": "Torque alignment: calibration and static-load limits",
+            "href": "/news/torque-observation-alignment-direct-drive-grasping"
+          },
+          {
+            "label": "Whole-hand regulation: geometry and hardware timing",
+            "href": "/news/whole-hand-force-regulation-without-tactile-sensors"
+          },
+          {
+            "label": "HACo primary method",
+            "href": "https://arxiv.org/html/2609.36596v1"
+          },
+          {
+            "label": "Wrench-ACT primary method",
+            "href": "https://arxiv.org/html/2609.37552v1"
+          },
+          {
+            "label": "Torque-alignment primary method",
+            "href": "https://arxiv.org/html/2609.29031v1"
+          },
+          {
+            "label": "Whole-hand regulation primary method",
+            "href": "https://arxiv.org/html/2609.30082v1"
+          }
+        ],
+        "contextLinks": [
+          {
+            "before": "Use the ",
+            "label": "sensor calibration guide",
+            "href": "/guides/tactile-sensor-calibration",
+            "after": " for measurement references, then the task protocol to evaluate the action."
+          },
+          {
+            "before": "Define your comparison with the ",
+            "label": "robot manipulation benchmark checklist",
+            "href": "/guides/tactile-sensor-benchmark-robot-manipulation",
+            "after": "."
+          }
+        ]
+      },
+      {
         heading: 'Where tactile manipulation changes the task',
         contextLinks: [
           { before: 'For in-hand rotation, use the ', label: 'hand-layout comparison and acceptance checklist', href: '/robot-hands#anthropomorphic-vs-symmetric-tactile-hands', after: ' to separate geometry, sensing and task outcomes before selecting hardware.' },
@@ -4438,7 +4532,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Evidence ladder for touch-guided control',
         body: [
-          'Evidence becomes stronger as it moves from sensor visualization to real robot outcomes. The most useful result connects a tactile signal to an action and then shows repeatable improvement under held-out objects, disturbances, sensor replacement, or other deployment-relevant variation.',
+          'This ladder is a planning aid for a manipulation claim, not a certification scale: each stage answers a different question. A perception result may be sufficient for perception, while a control benefit needs physical task evidence. The most useful result connects a tactile signal to an action and then shows repeatable improvement under held-out objects, disturbances, sensor replacement, or other deployment-relevant variation.',
         ],
         bullets: [
           'Level 1: raw signal responds to contact under controlled loading',

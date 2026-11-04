@@ -1555,7 +1555,7 @@ The [official project page](https://embodiedai-ntu.github.io/tarl/) provides met
     id: 'haco-haptic-active-compliance-dexterous-manipulation',
     title: 'HACo grounds dexterous actions in touch and joint torque',
     seoTitle: 'HACo Haptic Active Compliance for Dexterous Robots',
-    seoDescription: 'HACo fuses fingertip touch and joint torque with compliant demonstrations. Review 100-trial task results, baselines, hardware and release limits.',
+    seoDescription: "Trace HACo compliant action targets, cumulative ablations and physical trials. Inspect the public code and two-second sample without assuming full data access.",
     excerpt: 'HACo learns compliant bimanual actions from regulated demonstrations and conditions them on fingertip tactile signals plus hand-joint torque.',
     category: 'Force-aware dexterity',
     image: '/generated/news/haco-haptic-active-compliance-dexterous-manipulation.png',
@@ -1564,17 +1564,18 @@ The [official project page](https://embodiedai-ntu.github.io/tarl/) provides met
     sourceTitle: 'HACo: Learning Haptic Active Compliance for Force-Aware Dexterous Manipulation',
     sourceUrl: 'https://arxiv.org/abs/2609.36596',
     sources: [
+      { title: "Public HACo code and sample metadata, inspected November 4", url: "https://github.com/OpenDriveLab/HACo/tree/44a3fb4607bea9ba9353a722ac6a3405ce3318f1" },
       { title: 'HACo arXiv v1 record', url: 'https://arxiv.org/abs/2609.36596' },
       { title: 'Full HACo v1 paper', url: 'https://arxiv.org/html/2609.36596v1' },
       { title: 'Official HACo project page', url: 'https://opendrivelab.github.io/Haco-Page/' },
     ],
     technicalFocus: ['active compliance', 'dexterous manipulation', 'fingertip tactile sensing', 'joint torque'],
     sourceDate: '2026-09-29',
-    evidenceStatus: 'Preprint · arXiv v1 · five physical bimanual tasks · 20 trials per task · code marked coming soon',
+    evidenceStatus: "Preprint · v1 physical-task results · public code and sample metadata inspected November 4 · no execution or full-data verification",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-30',
-    updated: '2026-09-30',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# HACo grounds dexterous actions in touch and joint torque
 
 Researchers from the University of Hong Kong, the Beijing Academy of Artificial Intelligence and Johns Hopkins University released HACo on September 29, 2026. HACo stands for Haptic Active Compliance: a dexterous policy that learns force-regulating motion from compliant demonstrations and conditions action generation on fingertip touch plus joint torque. Across five physical tasks and 20 trials per task, the authors report an 83% mean success rate versus 35% for the strongest evaluated baseline. [Paper and version record](https://arxiv.org/abs/2609.36596).
@@ -1583,13 +1584,13 @@ Researchers from the University of Hong Kong, the Beijing Academy of Artificial 
 
 - HACo records controller-executable compliant actions, rather than copying either force-blind operator commands or the robot's constrained observed motion.
 - Its five-task mean is 83%, based on 83 successes in 100 rollouts. T-Rex records 35/100, GR00T with appended tactile features 22/100 and unmodified GR00T 15/100 under the paper's protocol.
-- The study uses 100 demonstrations per task on one dual-UR5, dual-Sharpa-hand platform. Code is still marked “coming soon,” and no downloadable dataset or model weights were verified.
+- The study uses 100 demonstrations per task on one dual-UR5, dual-Sharpa-hand platform. A November 4 source check found public code and sample metadata; the full demonstration corpus and HACo checkpoints remain unverified.
 
 ## What changed
 
 Contact creates a supervision problem. A nominal teleoperation command preserves the operator's intent but can keep pushing after an object blocks motion. The measured robot configuration has the opposite defect: it records what physically happened but omits the command-state offset that maintained force.
 
-HACo's data-collection controller regulates the arm through Cartesian admittance and adjusts hand references using fingertip force. It saves the resulting compliant arm and hand targets as executable actions. For the hand, the difference between compliant commands and observed joint positions becomes an auxiliary “compliant intent” target. The model therefore learns both the safe motion reference and evidence of the blocked motion that generated contact load. [Method details](https://arxiv.org/html/2609.36596v1).
+HACo's data-collection controller regulates the arm through Cartesian admittance and adjusts hand references using fingertip force. It saves the resulting compliant arm and hand targets as executable actions. For the hand, the difference between compliant commands and observed joint positions becomes an auxiliary “compliant intent” target. The model therefore learns both the executable motion reference and evidence of the blocked motion that generated contact load. [Method details](https://arxiv.org/html/2609.36596v1).
 
 The haptic encoder has two inputs. Ten fingertip tokens combine a short history of local wrench readings with current deformation maps. A second stream embeds 44 joint-torque values. Finger and joint identity preserve the hand's kinematic structure before gated cross-attention lets action tokens query the haptic representation. HACo predicts motion references, not explicit target forces.
 
@@ -1599,7 +1600,7 @@ The real-world benchmark covers inserting one playing card into another hand's g
 
 The strongest comparison method, T-Rex, totals 35/100. Its best tasks are cap removal and toothpaste, where sustained load dominates; the paper argues that its cached visual context and tactile-only refinement may be less responsive to abrupt force transitions. GR00T improves from 15% to 22% when tactile features are simply concatenated, well below HACo's action-aligned haptic fusion.
 
-Ablations separate the ingredients. Removing all haptic input lowers the mean from 83% to 27%. Tactile-only input reaches 68%, joint torque alone reaches 45%, and using both without their coupled encoding reaches 70%. Removing compliant-intent supervision produces 73%; replacing the compliant action with nominal commands lowers it further to 59%. The full method also reports 19% lower mean fingertip force than the nominal-action variant over contact-active samples.
+Ablations separate the ingredients. Removing all haptic input lowers the mean from 83% to 27%. Tactile-only input reaches 68%, joint torque alone reaches 45%, and using both without their coupled encoding reaches 70%. Removing compliant-intent supervision produces 73%; additionally replacing compliant actions with nominal commands lowers it to 59%. This is a cumulative ablation, not a separate estimate of the action representation alone. The full method also reports 19% lower mean fingertip force than the nominal-action variant over contact-active samples.
 
 ## What this means for robotics
 
@@ -1611,7 +1612,15 @@ The baseline comparison still needs care. HACo and the GR00T variants inherit GR
 
 HACo is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The study uses one robot configuration, 100 task-specific demonstrations per task and no reported confidence intervals. It also depends on force-regulated teleoperation. The authors identify limited whole-hand coverage as an open problem because palm and phalange contacts must be inferred indirectly from joint torque.
 
-The [official project page](https://opendrivelab.github.io/Haco-Page/) includes task videos, exact rollout counts, ablations and documented failures. Its Code control was disabled and labelled “Coming soon” during verification. No public training code, demonstration archive, checkpoints or implementation license was available.
+The [official project page](https://opendrivelab.github.io/Haco-Page/) includes task videos, exact rollout counts, ablations and documented failures. The September 30 check found its Code control disabled. On November 4, the page links the [public HACo repository](https://github.com/OpenDriveLab/HACo). At commit [44a3fb4](https://github.com/OpenDriveLab/HACo/tree/44a3fb4607bea9ba9353a722ac6a3405ce3318f1), we inspected README, license and sample metadata, not executable behavior or binary payloads. The root code license is Apache-2.0; that does not establish the terms of pretrained checkpoints, all data or third-party dependencies. The README requires GR00T N1.7 and Cosmos Reason2 assets. Full training data and HACo weights were not verified.
+
+## What crosses the controller boundary?
+
+The compliant-intent difference between commanded and observed joints is an auxiliary training target; it is not an extra offset to add to the executed action. HACo already predicts the compliant motion reference. Adding the residual again would change the method. The hand regulator's virtual gain is also not a measurement of an object's material stiffness. [Paper method](https://arxiv.org/html/2609.36596v1). For a broader data comparison, the [tactile dataset directory](/datasets) separates released subsets from paper-described collections.
+
+The public [sample metadata](https://github.com/OpenDriveLab/HACo/blob/44a3fb4607bea9ba9353a722ac6a3405ce3318f1/dataset/sample/meta/info.json) describes one episode, 60 frames at 30 Hz: a two-second clip, not 60 demonstrations. Its 150 action fields include wrist targets, observed joints, compliant joints and their differences. The README's inference adapter returns compliant joint targets for execution; the storage vector is not a 150-dimensional motor command. We have not downloaded or replayed the sample payload.
+
+Before adapting it, write down which fields supervise learning, which feed inference and which reach the controller. Then specify coordinate frames, units, saturation and stale-command handling for your hardware. This is a proposed integration check, not a validated HACo deployment. Compare these roles in the [tactile manipulation control interface](/tactile-manipulation#contact-information-and-command-interfaces).
 
 ## Sources and related resources
 
@@ -1620,6 +1629,8 @@ The [official project page](https://opendrivelab.github.io/Haco-Page/) includes 
 - [Official project page, videos and result tables](https://opendrivelab.github.io/Haco-Page/)
 - [RoboSkin robot-hands overview](/robot-hands)
 - [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+
+*Evidence review updated November 4, 2026. The original paper and article dates are retained; source inspection is not a RoboSkin.ai reproduction.*
 `,
   },
   {
@@ -1695,7 +1706,7 @@ Large adhesive loads can damage the upper structure despite its compression dura
     id: 'wrench-act-direct-wrench-control-manipulation',
     title: 'Wrench-ACT makes force and torque the robot policy action',
     seoTitle: 'Wrench-ACT Uses Direct Wrench Actions for Manipulation',
-    seoDescription: 'Wrench-ACT predicts a six-axis wrench instead of pose. Review five contact-rich tasks, 1,000 evaluation rollouts, control rates and dataset status.',
+    seoDescription: "Review Wrench-ACT wrench inputs and outputs, operator-assisted peg setup, task results, policy/controller rates and limits of force-based evaluation.",
     excerpt: 'Wrench-ACT pairs force-reflecting bilateral demonstrations with an ACT policy that directly commands a six-dimensional target wrench.',
     category: 'Force-control learning',
     image: '/generated/news/wrench-act-direct-wrench-control-manipulation.png',
@@ -1712,8 +1723,8 @@ Large adhesive loads can damage the upper structure despite its compression dura
     evidenceStatus: 'Preprint · arXiv v1 · five UR5e tasks · 50 rollouts per task-policy pair · demonstration release promised, not verified public',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-30',
-    updated: '2026-09-30',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# Wrench-ACT makes force and torque the robot policy action
 
 Researchers from Siemens and the University of Technology Nuremberg released Wrench-ACT on September 29, 2026. The system modifies the usual imitation-learning contract: instead of predicting a target position and letting controller error create contact force, its Action Chunking with Transformers policy outputs a six-dimensional force/torque wrench directly. With matching force-reflecting demonstrations, it averages 76.8% success across five contact-rich tasks versus 40% for a position-policy baseline. [Paper and version record](https://arxiv.org/abs/2609.37552).
@@ -1728,13 +1739,13 @@ Researchers from Siemens and the University of Technology Nuremberg released Wre
 
 Position policies command where the tool should go. During contact, a Cartesian impedance controller turns the pose error into force. That is useful but indirect: two identical target poses can produce very different interaction loads as geometry and stiffness change.
 
-Wrench-ACT removes the pose target from the learned action. Three RGB streams, robot state and gripper position enter a standard single-task ACT model. Its seven-dimensional output contains a six-axis target wrench plus the gripper command. A UR5e force controller executes the wrench at 500 Hz while policy inference runs near 50 Hz and holds the latest target between predictions. [Method and controller](https://arxiv.org/html/2609.37552v1).
+Wrench-ACT removes the pose target from the learned action. Three RGB streams, measured follower wrench, robot position and velocity, and gripper state enter a single-task ACT model. Its seven-dimensional output contains a six-axis target wrench plus the gripper command. The inner robot controller runs at 500 Hz, policy inference near 50 Hz, and observations are collected at 60 Hz. The force-mode interface retains velocity damping; the learned wrench is not a direct motor-torque command. The latest policy target is held between predictions. [Method and controller](https://arxiv.org/html/2609.37552v1).
 
 Data collection is the other half of the design. In the bilateral setup, a human pushes a leader arm and feels the follower's reaction. The measured leader wrench becomes the action label. A second dataset uses a Meta Quest position interface and Cartesian impedance control. The authors also translate each dataset into the opposite action representation, producing four policy conditions that separate the collection interface from the learned output.
 
 ## Results and the matched-data effect
 
-The five tasks are peg insertion, fuse clipping, fan insertion, industrial-connector mating and pen writing. Bilateral data plus wrench output records 74%, 88%, 58%, 80% and 84%, averaging 76.8%. The conventional VR-data/position-action condition records 6%, 96%, 8%, 12% and 78%, averaging 40%.
+The five tasks are peg insertion, fuse clipping, fan insertion, industrial-connector mating and pen writing. In the peg setup, a person holds the peg to ensure grasp acquisition; the transfer and insertion phases are autonomous. The peg result therefore does not measure autonomous pickup-to-insertion. Bilateral data plus wrench output records 74%, 88%, 58%, 80% and 84%, averaging 76.8%. The conventional VR-data/position-action condition records 6%, 96%, 8%, 12% and 78%, averaging 40%.
 
 That headline average hides two qualifications. Wrench-ACT is lower on fuse clipping, 88% versus 96%, and only three task differences are statistically significant after the paper's multiple-comparison correction: peg, fan and industrial-connector insertion. Pen writing and fuse clipping do not establish a significant advantage.
 
@@ -1752,7 +1763,15 @@ Direct wrench control is not a universal replacement for pose actions. The autho
 
 Wrench-ACT is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. All experiments use one UR5e-based setup and single-task models trained from scratch. Datasets contain 200–300 episodes per task and interface, but operator count is not stated. The force-reflecting collection rig is substantially more specialized than common handheld or VR capture systems.
 
-The manuscript says a dataset of more than 1,000 wrench-action demonstrations will be released on a companion website “upon publication.” At verification time the arXiv record did not link that site, code, downloadable data, checkpoints or a release license. A promised release should not be treated as an available dataset.
+The v1 introduction and abstract promise demonstrations upon publication, while its conclusion describes a release alongside the work. The November 4 arXiv record check did not resolve a concrete companion archive or its terms. Public payload, code, checkpoints and reuse licenses remain unverified; neither sentence alone proves access.
+
+## Record assistance and outcome alongside force
+
+Low force can mean that the task was never completed. The paper summarizes a high-percentile force from each rollout, and discusses low-force fan failures that did not finish insertion. That statistic is not a damage test or a general safety result. [Evaluation details](https://arxiv.org/html/2609.37552v1).
+
+For a comparison on your task, keep three records together: who established the initial grasp; whether the required insertion, release or writing outcome occurred; and the force trace with units, reference frame and timestamps. Declare any reset or intervention before counting a trial. Keep the measured wrench, demonstrated target wrench and controller-adjusted command in separate fields.
+
+This proposed review prevents an easier starting condition or an incomplete low-force attempt from looking like improved manipulation. It does not add tests to the authors' study. Use the [control-interface comparison](/tactile-manipulation#contact-information-and-command-interfaces) before choosing a demonstration format.
 
 ## Sources and related resources
 
@@ -1760,6 +1779,8 @@ The manuscript says a dataset of more than 1,000 wrench-action demonstrations wi
 - [Full controller, tasks and cross-condition results](https://arxiv.org/html/2609.37552v1)
 - [RoboSkin guide to robot manipulation](/robot-manipulation)
 - [RoboSkin Physical AI and touch guide](/physical-ai-touch)
+
+*Evidence review updated November 4, 2026. The original paper and article dates are retained; source inspection is not a RoboSkin.ai reproduction.*
 `,
   },
   {
@@ -2399,7 +2420,7 @@ No official project repository, dataset, checkpoint or software license was link
     id: 'torque-observation-alignment-direct-drive-grasping',
     title: 'Torque-change alignment transfers a simulated grasp policy to a direct-drive hand',
     seoTitle: 'Torque Alignment for Zero-Shot Direct-Drive Grasping',
-    seoDescription: 'A direct-drive gripper aligns torque scale, offset and noise for zero-shot sim-to-real grasping. Check the 210-trial result and sensing limits.',
+    seoDescription: "Review 9-DoF torque-change grasping, the 62.2% versus 100% alignment ablation, 210-trial protocol and limits of current-derived contact cues.",
     excerpt: 'Sogang University researchers calibrate motor current, subtract consecutive torque readings and inject measured noise. The hand succeeds in 208 of 210 object trials without vision or tactile sensors.',
     category: 'Proprioceptive grasping',
     image: '/generated/news/torque-observation-alignment-direct-drive-grasping.png',
@@ -2417,8 +2438,8 @@ No official project repository, dataset, checkpoint or software license was link
     evidenceStatus: 'Preprint · arXiv v1 · real-robot evaluation · no public implementation verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-27',
-    updated: '2026-09-27',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# Torque-change alignment transfers a simulated grasp policy to a direct-drive hand
 
 Sogang University researchers released a torque-observation alignment method on September 24, 2026 for zero-shot transfer to a multifingered direct-drive gripper. Instead of adding tactile sensors, the method turns motor current into a contact cue: it calibrates the torque scale, differences consecutive readings to suppress offset, and injects measured noise during simulation training. The deployed policy then uses only joint positions and torque changes. [Paper and version record](https://arxiv.org/abs/2609.29031).
@@ -2435,13 +2456,13 @@ Direct-drive actuators expose interaction through motor current, but a policy tr
 
 First, a dynamometer estimates a motor-type-specific current-to-torque constant. Second, both simulator and robot feed the policy the change in torque from one 50 ms step to the next rather than the absolute reading. If the hardware bias changes slowly, subtraction cancels most of it. Third, Gaussian noise fitted from the dynamometer measurements is injected during training.
 
-A privileged teacher learns in simulation, then a student policy is distilled for deployment. Training uses three object families—cuboids, cylinders and spheres—with three sizes each. The student runs at 20 Hz and controls a six-degree-of-freedom direct-drive gripper through grasp, lift and hold stages.
+A privileged teacher learns in simulation, then a student policy is distilled for deployment. Training uses three object families—cuboids, cylinders and spheres—with three sizes each. The student runs at 20 Hz and controls a three-finger, nine-degree-of-freedom direct-drive gripper through grasp, lift and hold stages.
 
 ## Results under the reported conditions
 
-The ablation evaluates five observation variants on nine in-distribution objects, ten trials per object and condition. A position-only student transfers poorly despite 68.9% simulated success. Torque-aware policies behave differently depending on alignment: using raw absolute torque reaches 26.7% on hardware, while the scale-and-difference variants reach 100% in the reported test. [Ablation and protocol](https://arxiv.org/html/2609.29031v1#S3.SS1).
+The ablation evaluates five observation variants on nine in-distribution objects, ten trials per object and condition. A position-only student reaches 15.6% on hardware despite 68.9% simulated success. Absolute torque with noise reaches 26.7%. Scale calibration plus differencing without injected noise reaches 62.2%; only the full scale, difference and noise condition reaches 100%. These are observation-alignment variants, some sharing trained policies, not five independent training methods. [Ablation and protocol](https://arxiv.org/html/2609.29031v1#S3.SS1).
 
-The broader evaluation adds 12 out-of-distribution household objects. The full method succeeds on all 90 in-distribution trials and 118 of 120 out-of-distribution trials, for 208 of 210 overall. The two failures are a light bulb and a tennis ball; the paper attributes them to insufficient contact torque for the light bulb and overshoot or oscillation during tennis-ball grasping.
+The broader evaluation adds 12 out-of-distribution household objects. The full method succeeds on all 90 in-distribution trials and 118 of 120 out-of-distribution trials, for 208 of 210 overall. The two failures are a light bulb and a tennis ball; the light bulb tilts and falls during holding, and the tennis ball slips during lifting. The separate ablation discussion of wrong-scale overtravel and noiseless oscillation should not be substituted for these two full-method failures.
 
 These are repeated trials from a prescribed non-contact starting condition on a fixed gripper. The objects are within its workspace, and the test does not include arm motion, clutter, deformable-object safety or arbitrary initial hand-object geometry.
 
@@ -2455,7 +2476,19 @@ The result also draws a useful boundary between [proprioceptive contact detectio
 
 This is an arXiv v1 preprint, not an independently reproduced system. Training runs for 2,000 iterations on an RTX 5090, but the paper does not establish that GPU as a minimum requirement. Calibration is tied to the tested motor type and dynamometer conditions; variation across individual motors and operating temperatures remains unknown.
 
-The authors explicitly note that differenced torque suppresses sustained load and assumes slowly varying offsets. Faster dynamics may need more compensation. No official public code, trained policy, calibration dataset, CAD package or software license was verified. The Sogang RIM Lab page lists the publication, but listing a paper is not an implementation release.
+The authors explicitly note that differenced torque suppresses sustained load and assumes slowly varying offsets. Faster dynamics may need more compensation. No official public code, trained policy, calibration dataset, CAD package or software license was verified in this review. The Sogang RIM Lab page lists the publication, but listing a paper is not an implementation release.
+
+## Which alignment operation addresses which error?
+
+A current-to-torque fit does not supply a surface contact map. Keep the three operations separate when assessing whether the method fits your hand:
+
+| Operation | What the paper changes | What remains to check on another hand |
+| --- | --- | --- |
+| Scale calibration | Fits motor current to torque using a dynamometer | Motor instance, temperature, load range and the reference used |
+| Consecutive differencing | Supplies torque change rather than absolute torque | Lost static-load information and whether offsets vary slowly enough |
+| Noise injection | Adds measurement-informed variation during training | Noise under your acquisition, filtering and operating conditions |
+
+The last column is an integration checklist, not a demonstrated transfer result. [Paper methods and limitations](https://arxiv.org/html/2609.29031v1) support the distinction between calibration and policy training: zero-shot policy transfer still uses physical calibration evidence. Compare this indirect signal with [measured tactile contact and controller inputs](/tactile-manipulation#contact-information-and-command-interfaces).
 
 ## Sources and related resources
 
@@ -2463,6 +2496,8 @@ The authors explicitly note that differenced torque suppresses sustained load an
 - [Full method, 210-trial evaluation and limitations](https://arxiv.org/html/2609.29031v1)
 - [Sogang RIM Lab publication list](https://rim.sogang.ac.kr/publications)
 - [RoboSkin guide to full-hand sensing](/robot-hands)
+
+*Evidence review updated November 4, 2026. The original paper and article dates are retained; source inspection is not a RoboSkin.ai reproduction.*
 `,
   },
   {
@@ -2754,7 +2789,7 @@ The official project page provides the paper and videos under a CC BY-SA 4.0 pag
     id: 'whole-hand-force-regulation-without-tactile-sensors',
     title: 'Whole-hand force regulation tracks contact without tactile sensors',
     seoTitle: 'Whole-Hand Force Regulation Without Tactile Sensors',
-    seoDescription: 'A 27-DoF arm-hand estimates contact from geometry and tracks force at about 84 Hz. Review its simulation gains, hardware runs and sensing limits.',
+    seoDescription: "Separate whole-hand geometry-based contact estimates, force-solver timing, 30 Hz pose updates and the limits of three physical recovery runs.",
     excerpt: 'MIT, Seoul National University and Yonsei University researchers regulate contacts across finger sides, backs and palm from an object model and joint state. The approach is fast, but depends on pose tracking and quasi-static assumptions.',
     category: 'Dexterous grasp control',
     image: '/generated/news/whole-hand-force-regulation-without-tactile-sensors.png',
@@ -2772,8 +2807,8 @@ The official project page provides the paper and videos under a CC BY-SA 4.0 pag
     evidenceStatus: 'Preprint · arXiv v1 · code pending',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-26',
-    updated: '2026-09-26',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# Whole-hand force regulation tracks contact without tactile sensors
 
 Researchers at Seoul National University, Massachusetts Institute of Technology and Yonsei University released a real-time whole-hand force controller on September 24, 2026. It estimates contact across fingertips, finger sides, dorsal surfaces and the palm from a tracked object model and joint angles, then reallocates desired forces as those contacts change. The method explicitly does not use tactile sensing at the contacts. [Paper and version record](https://arxiv.org/abs/2609.30082).
@@ -2800,15 +2835,15 @@ Simulation uses MuJoCo with gravity disabled, 79 YCB objects and ten power grasp
 
 Under constant synthetic pose errors up to 30 degrees and 5 mm, the feedforward baseline falls from 79% to 54%, while adaptive regulation stays between 87% and 93%. That test does not include time-varying noise, latency or complete tracking loss.
 
-There is a measurable speed-coverage trade-off. Allowing one candidate per link gives a 227 Hz force solve and 90.9% success; five candidates peaks at 93.2%; seven slows to 66 Hz and falls to 91.9%. The selected five-contact setting runs the full quadratic program at about 84 Hz.
+There is a measurable speed-coverage trade-off. Allowing one candidate per link gives a 227 Hz force solve and 90.9% success; five candidates peaks at 93.2%; seven slows to 66 Hz and falls to 91.9%. The selected five-contact setting has a mean solve time whose reciprocal is about 84 Hz. That computation benchmark is not the physical controller update rate: the hardware contact search and solve run once per 30 Hz tracked pose, paired with joint state at the image timestamp.
 
-Hardware uses a 7-DoF Flexiv Rizon 4 arm, a 20-DoF Robotis 5F hand, one RealSense D455, an Intel i9-13900K and an RTX 4090. The hand's fingertip tactile sensors are present but unused. A Pringles can and two boxes are pushed or taken during the three runs. Six of eight losses are recovered; the other two leave the arm workspace. These demonstrations show autonomous transitions, but three runs are not a comparative hardware benchmark.
+Hardware uses a 7-DoF Flexiv Rizon 4 arm, a 20-DoF Robotis 5F hand, one RealSense D455, an Intel i9-13900K and an RTX 4090. The hand's fingertip tactile sensors are present but unused. A Pringles can and two boxes are pushed or taken during the three runs. Six of eight losses are recovered autonomously; the other two leave the arm workspace and require a person to reposition the object and restart. These demonstrations show autonomous transitions, but three runs are not a comparative hardware benchmark.
 
 ## What this means for robot skin
 
 RoboSkin analysis: this work is a useful counterexample to the claim that every contact-control problem requires dense skin. If the object model, pose tracker and hand kinematics are reliable, geometry can infer likely contacts over surfaces that have no taxels at all.
 
-That does not eliminate the case for [robot skin](/). It relocates it. A tactile layer can directly observe unexpected objects, normal uncertainty, local slip and contacts that the tracker cannot see. Geometry offers broad coverage; touch offers physical confirmation. A hybrid system could use this controller as a contact prior and tactile residuals to correct model error.
+That does not eliminate the case for [robot skin](/). It relocates it. A suitably placed and calibrated tactile layer could supply local evidence of contact or slip when geometry is uncertain; which quantities it measures depends on the sensor and estimator. Geometry offers broad coverage; touch offers physical confirmation. A hybrid system could use this controller as a contact prior and tactile residuals to correct model error.
 
 ## Limitations and availability
 
@@ -2816,7 +2851,15 @@ The method requires an object model from CAD or a short RGB-D scan and a maintai
 
 Force allocation is quasi-static. It does not explicitly compensate gravity, inertia or external wrenches, even though friction is expected to resist unmodeled loads. Simulation disables gravity, and hardware disturbances are manual rather than standardized.
 
-The project supplies the paper, videos and detailed results. Its code link is labeled “Soon”; no repository, data package or software license was available on September 26. The project-page content is CC BY-SA 4.0, which licenses that page, not unreleased controller code. RoboSkin.ai has not reproduced the system.
+The project supplies the paper, videos and detailed results. Its code link is labeled “Soon”; no repository, data package or software license was verified on September 26, and the November 4 project-page check still shows that pending code control. The project-page content is CC BY-SA 4.0, which licenses that page, not unreleased controller code. RoboSkin.ai has not reproduced the system.
+
+## Check stale state before trusting the force command
+
+The rendered force arrows are commands, not measured contact forces. Contact locations come from geometry, so a plausible visualization does not independently verify the physical force distribution. The paper also retains the last feasible command when the optimization fails, starting from zero before a feasible solution exists. [Controller and hardware timing](https://arxiv.org/html/2609.30082v1).
+
+For an integration review, ask how old the object pose may be, which joint sample it is paired with, and how a failed solve or lost tracker is signaled. Record any human repositioning separately from automatic regrasp. These are proposed acceptance questions; the paper does not establish a validated stale-data watchdog for a new platform.
+
+Use the [tactile manipulation interface comparison](/tactile-manipulation#contact-information-and-command-interfaces) to distinguish a geometry-derived contact hypothesis from a measured force input, a desired force and the controller that executes it.
 
 ## Sources and related resources
 
@@ -2824,6 +2867,8 @@ The project supplies the paper, videos and detailed results. Its code link is la
 - [Full controller and evaluation](https://arxiv.org/html/2609.30082v1)
 - [Official project and uncut hardware runs](https://sangminkim-99.github.io/reactive-grasp-whole-hand/)
 - [RoboSkin dexterous robot hands guide](/robot-hands)
+
+*Evidence review updated November 4, 2026. The original paper and article dates are retained; source inspection is not a RoboSkin.ai reproduction.*
 `,
   },
   {
