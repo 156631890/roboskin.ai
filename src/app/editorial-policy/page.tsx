@@ -121,6 +121,30 @@ export default function EditorialPolicyPage() {
             </div>
           </section>
 
+      <section id="conflicting-sources" className="pb-12 pt-8 scroll-mt-28">
+        <div>
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"How we describe conflicting or inaccessible sources"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"A newer page does not automatically resolve a conflict. Match the model, configuration, source version and measurement before choosing a claim to publish."}</p>
+          <ul className="mt-6 grid gap-4">
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Paper and project page report different scales"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Attribute each figure to its version and unit. Do not silently combine a paper corpus, released subset and image count."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"A download route exists but files cannot be inspected"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"State that the route is linked and identify what was actually checked. Access failure does not prove that the resource does not exist."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Code, data or model licenses differ"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Name the applicable artifact and unresolved terms separately. A repository badge does not establish permission for every dataset, checkpoint or third-party asset."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"A source or reader supplies a correction"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Locate the affected claim and supporting evidence. Update the material interpretation and its revision note without rewriting the original scientific publication date."}</p>
+            </li>
+          </ul>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"The page should expose the unresolved point that affects reuse. We do not fill missing trial counts, file manifests, licenses or availability from a plausible inference."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/methodology#source-tracing" className="text-accent underline underline-offset-4">{"Follow the source-tracing steps"}</Link><Link href="/contact?requestType=correction" className="text-accent underline underline-offset-4">{"Send a specific correction"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
           <section id="evidence-method" className="deferred-section mt-10 scroll-mt-28">
             <p className="eyebrow">Evidence and experience</p>
             <h2 className="mt-4 text-3xl font-bold text-white">A source review and a tested result answer different questions</h2>

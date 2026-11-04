@@ -20,8 +20,8 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /vla/timeline | inventory only; claim-by-claim review pending | 776 | 3 |
 | /vla/concepts | inventory only; claim-by-claim review pending | 1015 | 5 |
 | / | inventory only; claim-by-claim review pending | 1580 | 63 |
-| /products | business/policy page; preserve factual services and legal scope; not an article rewrite | 509 | 4 |
-| /solutions | business/policy page; preserve factual services and legal scope; not an article rewrite | 403 | 2 |
+| /products | individual purpose and content reviewed; production verification pending | 509 | 4 |
+| /solutions | individual purpose and content reviewed; production verification pending | 403 | 2 |
 | /applications | inventory only; claim-by-claim review pending | 653 | 12 |
 | /technology | inventory only; claim-by-claim review pending | 2571 | 19 |
 | /physical-ai | inventory only; claim-by-claim review pending | 908 | 22 |
@@ -34,35 +34,35 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /organizations | inventory only; claim-by-claim review pending | 11081 | 6 |
 | /robots | inventory only; claim-by-claim review pending | 5225 | 12 |
 | /glossary | inventory only; claim-by-claim review pending | 1355 | 9 |
-| /about | business/policy page; preserve factual services and legal scope; not an article rewrite | 582 | 167 |
-| /editorial-policy | inventory only; claim-by-claim review pending | 897 | 185 |
-| /methodology | inventory only; claim-by-claim review pending | 918 | 4 |
+| /about | individual purpose and content reviewed; production verification pending | 582 | 167 |
+| /editorial-policy | individual purpose and content reviewed; production verification pending | 897 | 185 |
+| /methodology | individual purpose and content reviewed; production verification pending | 918 | 4 |
 | /news | inventory only; claim-by-claim review pending | 4407 | 78 |
-| /contact | business/policy page; preserve factual services and legal scope; not an article rewrite | 239 | 196 |
-| /research-services | business/policy page; preserve factual services and legal scope; not an article rewrite | 540 | 63 |
+| /contact | individual purpose and content reviewed; production verification pending | 239 | 196 |
+| /research-services | individual purpose and content reviewed; production verification pending | 540 | 63 |
 | /reports/tactile-ai-robot-skin-landscape-2026 | business/policy page; preserve factual services and legal scope; not an article rewrite | 485 | 50 |
 | /privacy | business/policy page; preserve factual services and legal scope; not an article rewrite | 892 | 0 |
 | /terms | business/policy page; preserve factual services and legal scope; not an article rewrite | 611 | 0 |
-| /research/opentac-custom-tactile-skins-readout-limits-2026 | evidence and decision depth reviewed; production verification pending | 1776 | 6 |
-| /research/softmimicgen-synthetic-data-sim-to-real-2026 | evidence and decision depth reviewed; production verification pending | 2366 | 4 |
+| /research/opentac-custom-tactile-skins-readout-limits-2026 | rewritten and production verified in PR119 | 1776 | 6 |
+| /research/softmimicgen-synthetic-data-sim-to-real-2026 | rewritten and production verified in PR119 | 2366 | 4 |
 | /research/slipsense-multimodal-slip-detection-2026 | rewritten and production verified in PR118 | 1304 | 10 |
 | /research/touch2trace-tactile-cable-tracing-2026 | rewritten and production verified in PR118 | 1296 | 4 |
 | /research/visible-touch-contact-overlays-visuomotor-policies-2026 | rewritten and production verified in PR118 | 1387 | 8 |
 | /research/dextouch-wm-human-touch-world-model-2026 | rewritten and production verified in PR118 | 1503 | 16 |
 | /research/bench2dex-visuo-tactile-bimanual-benchmark-2026 | rewritten and production verified in PR118 | 1722 | 6 |
-| /research/tacprint-wearable-tactile-contact-reproduction-2026 | evidence and decision depth reviewed; production verification pending | 1406 | 11 |
-| /research/tacverse-cross-sensor-tactile-dataset-2026 | evidence and decision depth reviewed; production verification pending | 1446 | 7 |
-| /research/univtac-platform-encoder-benchmark-2026 | evidence and decision depth reviewed; production verification pending | 3028 | 14 |
-| /research/vision-based-tactile-intelligence-robotics-survey-2026 | evidence and decision depth reviewed; production verification pending | 1801 | 8 |
-| /research/adept-visuo-tactile-dexterity-rl-2026 | evidence and decision depth reviewed; production verification pending | 1352 | 10 |
-| /research/prism-contact-rich-industrial-skill-dataset-2026 | evidence and decision depth reviewed; production verification pending | 1397 | 9 |
-| /research/missing-touch-spatial-tactile-feedback-teleoperation-2026 | evidence and decision depth reviewed; production verification pending | 1356 | 10 |
-| /research/softvtbench-deformation-aware-visuo-tactile-dataset-2026 | evidence and decision depth reviewed; production verification pending | 1443 | 4 |
-| /research/hitac-wam-hierarchical-tactile-world-action-model-2026 | evidence and decision depth reviewed; production verification pending | 1118 | 8 |
-| /research/t-rex-tactile-reactive-dexterous-manipulation-2026 | evidence and decision depth reviewed; production verification pending | 1509 | 8 |
+| /research/tacprint-wearable-tactile-contact-reproduction-2026 | rewritten and production verified in PR119 | 1406 | 11 |
+| /research/tacverse-cross-sensor-tactile-dataset-2026 | rewritten and production verified in PR119 | 1446 | 7 |
+| /research/univtac-platform-encoder-benchmark-2026 | rewritten and production verified in PR119 | 3028 | 14 |
+| /research/vision-based-tactile-intelligence-robotics-survey-2026 | rewritten and production verified in PR119 | 1801 | 8 |
+| /research/adept-visuo-tactile-dexterity-rl-2026 | rewritten and production verified in PR119 | 1352 | 10 |
+| /research/prism-contact-rich-industrial-skill-dataset-2026 | rewritten and production verified in PR119 | 1397 | 9 |
+| /research/missing-touch-spatial-tactile-feedback-teleoperation-2026 | rewritten and production verified in PR119 | 1356 | 10 |
+| /research/softvtbench-deformation-aware-visuo-tactile-dataset-2026 | rewritten and production verified in PR119 | 1443 | 4 |
+| /research/hitac-wam-hierarchical-tactile-world-action-model-2026 | rewritten and production verified in PR119 | 1118 | 8 |
+| /research/t-rex-tactile-reactive-dexterous-manipulation-2026 | rewritten and production verified in PR119 | 1509 | 8 |
 | /research/robotacdex-humanoid-visual-tactile-action-dataset-2026 | rewritten and production verified in PR118 | 1293 | 9 |
 | /research/tactidex-tactile-guided-dexterous-benchmark-2026 | rewritten and production verified in PR118 | 1027 | 7 |
-| /research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | evidence and decision depth reviewed; production verification pending | 1463 | 6 |
+| /research/tac4loco-plantar-tactile-humanoid-locomotion-2026 | rewritten and production verified in PR119 | 1463 | 6 |
 | /research/feelworld-visuo-tactile-world-model-2026 | rewritten and production verified in PR118 | 975 | 9 |
 | /research/ht-bench-full-hand-tactile-representations-2026 | rewritten and production verified in PR118 | 1453 | 16 |
 | /research/sparsh-x-multisensory-touch-representations-2025 | rewritten and production verified in PR107 | 887 | 4 |
@@ -282,3 +282,7 @@ Sixteen individually reviewed existing URLs combine seven guides and nine resear
 ## Research metrics and artifact review
 
 Thirteen existing research URLs now distinguish evaluation score semantics, calibration and validation budgets, component configurations and dated artifact access. Full original explanations, anchors and publication dates are retained. Source reports and proposed evaluation designs remain distinct; no independent hardware or model reproduction is claimed. Whole-site programme remains active.
+
+## Learning, trust and inquiry route review
+
+Seven existing pages gain distinct learning outputs, evaluation questions, attribution guidance, denominator checks, source-conflict treatment, a correction template and service-scoping examples. Existing forms, business terms, modules and links remain. No new technical measurement or human sign-off is claimed. Whole-site review remains incomplete.

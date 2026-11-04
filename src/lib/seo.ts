@@ -82,9 +82,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/products': {
     path: '/products',
     title: 'Tactile Sensing Learning Paths: Sensors, Data & Control',
-    description:
-      'Choose a tactile sensing learning path: understand robot skin, compare sensor hardware, or work through Python and ROS 2 data tutorials.',
-    updated: '2026-09-22',
+    description: "Choose a tactile sensing learning path, define a concrete output, then move from contact requirements to sensor evidence, calibration and replay.",
+    updated: '2026-11-04',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -93,9 +92,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/solutions': {
     path: '/solutions',
     title: 'Tactile Sensing Problems: Slip, Coverage, Calibration & Data',
-    description:
-      'Find an evaluation workflow for slipping objects, missing body contact, drifting sensor readings, or robot policies that need reusable touch data.',
-    updated: '2026-09-22',
+    description: "Map slip, missing contact, calibration drift and unusable tactile data to a measurement, comparison and failure record before choosing hardware.",
+    updated: '2026-11-04',
     priority: 0.9,
     changeFrequency: 'weekly',
     index: true,
@@ -282,9 +280,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/about': {
     path: '/about',
     title: 'About RoboSkin.ai',
-    description:
-      'RoboSkin.ai provides independent public research resources and paid, fixed-scope source research on robot skin and tactile robotics.',
-    updated: '2026-10-04',
+    description: "Understand RoboSkin.ai editorial authorship, public research resources, evidence limits and paid source research, with routes to inspect the work.",
+    updated: '2026-11-04',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -293,9 +290,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/editorial-policy': {
     path: '/editorial-policy',
     title: 'RoboSkin Editorial Policy and Source Standards',
-    description:
-      'How RoboSkin.ai attributes authors, checks research evidence, discloses automation, handles corrections and separates paid work from public coverage.',
-    updated: '2026-10-04',
+    description: "Read RoboSkin.ai standards for attribution, conflicting sources, artifact access, corrections, automation disclosure and editorial independence.",
+    updated: '2026-11-04',
     priority: 0.68,
     changeFrequency: 'monthly',
     index: true,
@@ -304,9 +300,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/methodology': {
     path: '/methodology',
     title: 'Research Methodology and Evidence Standards',
-    description:
-      'How RoboSkin.ai selects primary sources, separates reported results from verification, compares models and datasets, and updates research records.',
-    updated: '2026-10-12',
+    description: "Trace robotics claims to source versions, metrics, trial denominators, artifact access and licenses; keep reported results separate from reproduction.",
+    updated: '2026-11-04',
     priority: 0.68,
     changeFrequency: 'monthly',
     index: true,
@@ -337,9 +332,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/contact': {
     path: '/contact',
     title: 'RoboSkin.ai Research Contact',
-    description:
-      'Contact RoboSkin.ai about source suggestions, corrections, editorial collaboration, or robot skin research information.',
-    updated: '2026-09-13',
+    description: "Send RoboSkin.ai a source, precise correction or editorial inquiry. Include the affected URL, exact claim, source version and proposed change.",
+    updated: '2026-11-04',
     priority: 0.85,
     changeFrequency: 'weekly',
     index: true,
@@ -348,9 +342,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/research-services': {
     path: '/research-services',
     title: 'Tactile AI and Robot Skin Research Services',
-    description:
-      'Commission a fixed-scope RoboSkin Research Sprint for source-backed tactile sensors, datasets, robot hands, humanoid touch, companies, and model intelligence.',
-    updated: '2026-09-13',
+    description: "Scope a paid tactile robotics evidence review: one decision, traceable sources, comparison criteria and explicit unknowns, with a free sample to inspect.",
+    updated: '2026-11-04',
     priority: 0.86,
     changeFrequency: 'monthly',
     index: true,

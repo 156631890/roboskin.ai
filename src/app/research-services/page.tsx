@@ -151,6 +151,30 @@ export default function ResearchServicesPage() {
         </div>
       </section>
 
+      <section id="scope-a-decision" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"What makes a question ready for a source-based Sprint?"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"A useful brief names the choice, the constraints and the evidence needed to decide. The examples below illustrate scope; they are not client cases or tested recommendations."}</p>
+          <ul className="mt-6 grid gap-4 lg:grid-cols-3">
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Too broad"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Which tactile sensor is best?"}</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"No task, mounting geometry, output or acceptance condition is specified."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Ready to scope"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Which documented sensor configurations could fit our gripper geometry and required output?"}</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Provide the robot, contact surfaces, interface constraints and the primary specifications already available."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Outside a source review"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Prove that the selected sensor meets our accuracy or safety requirement."}</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"That requires an agreed physical test or certification process, which this Sprint does not provide."}</p>
+            </li>
+          </ul>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"The decision package can identify a supported option, a conditional shortlist or a gap that prevents a defensible choice. An unknown remains in the evidence register; it is not replaced with an assumed specification. Scope and availability are confirmed before work starts."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/reports/tactile-ai-robot-skin-landscape-2026" className="text-accent underline underline-offset-4">{"Inspect the free sample structure"}</Link><Link href="/methodology#evidence-types" className="text-accent underline underline-offset-4">{"Check what a source review establishes"}</Link><Link href="/contact?requestType=correction" className="text-accent underline underline-offset-4">{"Send a public-page correction instead"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
       <section id="inquiry" className="services-inquiry" aria-labelledby="inquiry-heading">
         <div className="container-shell services-inquiry-grid">
           <div className="services-inquiry-intro">

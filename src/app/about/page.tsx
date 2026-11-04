@@ -122,6 +122,23 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <section id="read-the-page-type" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Which parts are our work, and which belong to the cited researchers?"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"The page type tells you what is being attributed. Check the linked source and the evidence label before reusing a result."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Which parts are our work, and which belong to the cited researchers?">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Page type"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"RoboSkin.ai contribution"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"What to verify"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Where to inspect it"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Research interpretations"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Our explanation of another team’s paper, including method, reported results and limits."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"The scientific claim belongs to the cited authors; our commentary is not a reproduction."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research" className="text-accent underline underline-offset-4">{"Read external-paper interpretations"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Directories and comparisons"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Our organization of source-linked records and explicit unknowns."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Record counts describe that index or edition, not all work in the field."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research-index" className="text-accent underline underline-offset-4">{"Inspect the research index"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Tutorials and working papers"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"A documented exercise, proposal or execution record with its own status."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"A proposal is not a validated result, and a synthetic replay is not a physical robot test."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/papers" className="text-accent underline underline-offset-4">{"Check working-paper status"}</Link></td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"Use the original paper for scientific attribution and the RoboSkin.ai page for the specific explanation or comparison you are citing. Keep both dates when the source and our review were published at different times."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/methodology" className="text-accent underline underline-offset-4">{"See how claims are traced"}</Link><Link href="/editorial-policy#automation" className="text-accent underline underline-offset-4">{"Read the automation disclosure"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
     </>
   );
 }
