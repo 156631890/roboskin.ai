@@ -29,7 +29,7 @@ test('ADEPT brief preserves paper metadata, physical results, access state, and 
     '| Flexiv-Sharpa, visuo-tactile, FMB square/round | 10/10 | 10/10 | 10/10 | 9/10 | 8/10 | 8/10 |',
     '| KUKA-Allegro, vision, dish placement | 10/10 | 10/10 | 8/10 | 7/10 | 6/10 | 6/10 |',
     'Each condition contains ten physical trials',
-    'Code control says **Coming soon**',
+    'Code control still does not expose a verified implementation link',
     'no verified training implementation, model weights, checkpoint release, demonstration dataset, artifact license',
     'https://arxiv.org/abs/2608.19182',
     'https://adept-dexterity.github.io/',
