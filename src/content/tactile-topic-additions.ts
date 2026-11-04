@@ -161,9 +161,9 @@ export const icraTutorialSection: Section = {
 };
 
 export const robotechWatchSection: Section = {
-  id: 'robotech-2026', heading: 'ROBOTECH 2026: a source-discovery watchlist',
+  id: 'robotech-2026', heading: 'ROBOTECH: check the event edition before using supplier evidence',
   body: [
-    'The organizer lists October 27–29, 2026 at Shenzhen World Exhibition & Convention Center (Bao’an). Checked October 12, 2026. The event covers embodied robotics and its supply chain; its dates and general scope do not confirm that a particular tactile supplier will exhibit.',
+    'The October 12 check recorded the October 27–29, 2026 Shenzhen edition. On November 4, the official page header shows October 27–29, 2027, while body material still refers to the 2026 edition and thanks visitors. Check the organizer’s current edition and venue directly before making plans. These page dates do not establish attendance or a tactile supplier’s participation.',
     'For tactile research discovery, collect an official exhibitor listing, an identifiable sensor model, a datasheet or paper, and a documented demonstration before adding a vendor to a technical comparison. A booth demo or exhibition listing does not validate throughput or force-measurement claims.',
   ],
   bullets: ['Record sensing principle, normal/shear outputs and active contact area.', 'Request calibration conditions, latency, driver access and replacement documentation.', 'Record the source date and distinguish supplier-reported measurements from independent tests.'],

@@ -60,7 +60,7 @@ export default function ResearchIndexPage() {
           <dl className="mt-9 grid gap-3 sm:grid-cols-3">
             <div className="border-l-2 border-[#ff6b3d] pl-4">
               <dt className="font-mono text-2xl font-semibold text-white">{researchIndexEntries.length}</dt>
-              <dd className="mt-1 text-xs uppercase text-[#8e98a8]">reviewed records</dd>
+              <dd className="mt-1 text-xs uppercase text-[#8e98a8]">records in this edition</dd>
             </div>
             <div className="border-l-2 border-[#ff6b3d] pl-4">
               <dt className="font-mono text-2xl font-semibold text-white">{new Set(researchIndexEntries.map((entry) => entry.evidence)).size}</dt>
@@ -72,6 +72,23 @@ export default function ResearchIndexPage() {
             </div>
           </dl>
           <p className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#c8d1de]"><a className="underline" href="#newsletter">Weekly brief / signup status</a><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Free sample report</Link><Link className="underline" href="/research-services?source=research-index#inquiry">Discuss a research question</Link></p>
+        </div>
+      </section>
+
+      <section id="index-version-and-claim-check" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Use the taxonomy without inheriting an old availability claim"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"This structured index remains the 30-record edition identified above. Its root exports and preserved release have matching record content at this review. The November 4, 2026 update improves reading guidance; it does not redate every record or publish a new dataset edition."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Use the taxonomy without inheriting an old availability claim">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"When you use a record"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"What to check"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Where to continue"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Compare sensing approaches"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Read modality, output and application together. A three-axis force estimate and an optical image are not interchangeable observations."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/technology" className="text-accent underline underline-offset-4">{"Measurement principles and limits"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Quote a numerical result"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Open the current review and original paper version. Historical shorthand may omit a subtask denominator or experimental condition."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research/t-rex-tactile-reactive-dexterous-manipulation-2026" className="text-accent underline underline-offset-4">{"T-Rex score versus complete success"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Download or redistribute material"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Check current access and artifact-specific terms. An older record saying release pending is dated evidence, not a live availability check."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/datasets#availability-analysis" className="text-accent underline underline-offset-4">{"Current dataset access analysis"}</Link></td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"CC BY 4.0 applies to the RoboSkin index metadata, not automatically to the papers, source datasets, model weights, images or code it references. The fixed research index and the evolving dataset directory count different things. For a citation, retain the edition and source URL; for an engineering decision, also retain the date and result of your own artifact check."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/research" className="text-accent underline underline-offset-4">{"Current research reviews"}</Link><Link href="/editorial-policy" className="text-accent underline underline-offset-4">{"Source conflicts and corrections"}</Link><Link href="/contact?requestType=correction" className="text-accent underline underline-offset-4">{"Report a specific record issue"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
         </div>
       </section>
 

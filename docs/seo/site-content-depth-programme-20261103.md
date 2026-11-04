@@ -25,19 +25,19 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /applications | inventory only; claim-by-claim review pending | 653 | 12 |
 | /technology | inventory only; claim-by-claim review pending | 2571 | 19 |
 | /physical-ai | inventory only; claim-by-claim review pending | 908 | 22 |
-| /resources | inventory only; claim-by-claim review pending | 2711 | 70 |
+| /resources | individual navigation and evidence review; production verification pending | 2711 | 70 |
 | /faq | inventory only; claim-by-claim review pending | 488 | 3 |
-| /research | inventory only; claim-by-claim review pending | 3103 | 192 |
-| /research-index | inventory only; claim-by-claim review pending | 4238 | 15 |
-| /papers | inventory only; claim-by-claim review pending | 186 | 3 |
-| /papers/interaction-as-the-interface | inventory only; claim-by-claim review pending | 687 | 2 |
+| /research | individual navigation and evidence review; production verification pending | 3103 | 192 |
+| /research-index | individual navigation and evidence review; production verification pending | 4238 | 15 |
+| /papers | individual navigation and evidence review; production verification pending | 186 | 3 |
+| /papers/interaction-as-the-interface | individual navigation and evidence review; production verification pending | 687 | 2 |
 | /organizations | inventory only; claim-by-claim review pending | 11081 | 6 |
 | /robots | inventory only; claim-by-claim review pending | 5225 | 12 |
 | /glossary | inventory only; claim-by-claim review pending | 1355 | 9 |
 | /about | rewritten and production verified in PR120 | 582 | 167 |
 | /editorial-policy | rewritten and production verified in PR120 | 897 | 185 |
 | /methodology | rewritten and production verified in PR120 | 918 | 4 |
-| /news | inventory only; claim-by-claim review pending | 4407 | 78 |
+| /news | individual navigation and evidence review; production verification pending | 4407 | 78 |
 | /contact | rewritten and production verified in PR120 | 239 | 196 |
 | /research-services | rewritten and production verified in PR120 | 540 | 63 |
 | /reports/tactile-ai-robot-skin-landscape-2026 | business/policy page; preserve factual services and legal scope; not an article rewrite | 485 | 50 |
@@ -109,9 +109,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/membrane-coupled-delta-array-micro-object-manipulation | inventory only; claim-by-claim review pending | 1012 | 1 |
 | /news/funco-grasp-cross-embodiment-dexterous-grasping | inventory only; claim-by-claim review pending | 1071 | 8 |
 | /news/tarl-tactile-reward-learning-demonstrations | inventory only; claim-by-claim review pending | 1075 | 2 |
-| /news/haco-haptic-active-compliance-dexterous-manipulation | individual evidence and control-interface review; production verification pending | 1052 | 1 |
+| /news/haco-haptic-active-compliance-dexterous-manipulation | rewritten and production verified in PR121 | 1052 | 1 |
 | /news/single-element-tackiness-tactile-sensor | inventory only; claim-by-claim review pending | 1012 | 1 |
-| /news/wrench-act-direct-wrench-control-manipulation | individual evidence and control-interface review; production verification pending | 1067 | 1 |
+| /news/wrench-act-direct-wrench-control-manipulation | rewritten and production verified in PR121 | 1067 | 1 |
 | /news/univlat-whole-body-tactile-vla-humanoid | inventory only; claim-by-claim review pending | 1054 | 4 |
 | /news/uvta-human-tactile-demonstrations-dexterous-manipulation | inventory only; claim-by-claim review pending | 1060 | 3 |
 | /news/tacgoosebumps-shear-encoding-tactile-sensor | inventory only; claim-by-claim review pending | 977 | 1 |
@@ -121,12 +121,12 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/vistacalign-human-robot-tactile-demonstrations | inventory only; claim-by-claim review pending | 1029 | 1 |
 | /news/phase-tactile-retrieval-few-shot-insertion | inventory only; claim-by-claim review pending | 909 | 1 |
 | /news/da-grd-tactile-grasp-recovery | inventory only; claim-by-claim review pending | 996 | 1 |
-| /news/torque-observation-alignment-direct-drive-grasping | individual evidence and control-interface review; production verification pending | 985 | 4 |
+| /news/torque-observation-alignment-direct-drive-grasping | rewritten and production verified in PR121 | 985 | 4 |
 | /news/outcome-sensitive-impact-aware-dexterous-catching | inventory only; claim-by-claim review pending | 1008 | 1 |
 | /news/body-grounded-replanning-physical-manipulation | inventory only; claim-by-claim review pending | 1009 | 2 |
 | /news/polyumi-visual-tactile-audio-demonstration-interface | inventory only; claim-by-claim review pending | 1137 | 4 |
 | /news/propra-fingertip-sensor-pretraining | inventory only; claim-by-claim review pending | 1063 | 3 |
-| /news/whole-hand-force-regulation-without-tactile-sensors | individual evidence and control-interface review; production verification pending | 1146 | 6 |
+| /news/whole-hand-force-regulation-without-tactile-sensors | rewritten and production verified in PR121 | 1146 | 6 |
 | /news/res-hil-human-guided-residual-rl-manipulation | inventory only; claim-by-claim review pending | 1126 | 1 |
 | /news/tactilestep-sole-pressure-humanoid-locomotion | inventory only; claim-by-claim review pending | 1105 | 1 |
 | /news/anthropomimetic-forearm-carpal-stiffness | inventory only; claim-by-claim review pending | 953 | 1 |
@@ -214,7 +214,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/visuo-tactile-world-models-robot-manipulation | rewritten and production verified in PR118 | 1932 | 21 |
 | /benchmarks | inventory only; claim-by-claim review pending | 5157 | 40 |
 | /sensors | inventory only; claim-by-claim review pending | 6094 | 110 |
-| /tactile-manipulation | individual evidence and control-interface review; production verification pending | 2323 | 65 |
+| /tactile-manipulation | rewritten and production verified in PR121 | 2323 | 65 |
 | /research/eu-roboskin-project | inventory only; claim-by-claim review pending | 1029 | 4 |
 | /visuo-tactile | inventory only; claim-by-claim review pending | 1040 | 22 |
 | /humanoid-robots | inventory only; claim-by-claim review pending | 1242 | 23 |
@@ -290,3 +290,7 @@ Seven existing pages gain distinct learning outputs, evaluation questions, attri
 ## Control-interface evidence review
 
 Four existing News reports receive primary-source corrections and a substantive companion comparison on /tactile-manipulation. Original publication dates, modules, diagrams and anchors remain. No hardware reproduction or full-dataset verification is claimed; whole-site review remains incomplete.
+
+## Research navigation and numerical evidence
+
+Six existing pages gain purpose-specific reading guidance, clearer record/version boundaries and a dated local reproduction of the existing synthetic numerical example. Original versioned assets and the 30-record index are unchanged. No hardware test or new research-architecture result is claimed. Whole-site review remains incomplete.

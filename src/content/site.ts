@@ -1160,15 +1160,15 @@ export const resourceSections: ResourceSection[] = [
     title: 'Category guides',
     items: [
       {
-        title: 'Robot skin overview',
-        description: 'Read a plain-language route into robot skin, tactile AI, e-skin, and tactile sensing terminology.',
+        title: 'Robot skin application questions',
+        description: 'Connect contact-related failures to application-specific sensing and evaluation questions.',
         availability: 'Public guide',
         ctaLabel: 'Explore',
         href: '/applications',
       },
       {
-        title: 'RoboSkin.ai source context',
-        description: 'Understand how the site supports robotics education, research notes, and source-backed category pages.',
+        title: 'RoboSkin learning routes',
+        description: 'Choose a learning route with a concrete output, from terminology to source and data review.',
         availability: 'Public guide',
         ctaLabel: 'Explore',
         href: '/products',
@@ -1179,9 +1179,9 @@ export const resourceSections: ResourceSection[] = [
     title: 'Research routes',
     items: [
       {
-        title: 'Research index',
+        title: 'Paper-review library',
         description: 'Browse source-backed notes on robot skin, flexible tactile sensing, e-skin, and related robotics research.',
-        availability: 'Public index',
+        availability: 'Source-based reviews',
         ctaLabel: 'Read',
         href: '/research',
       },
@@ -1225,10 +1225,10 @@ export const resourceSections: ResourceSection[] = [
     items: [
       {
         title: 'Correction inquiry',
-        description: 'Use the contact route for corrections, partnership, or content collaboration around RoboSkin.ai.',
+        description: 'Identify the page, exact claim and supporting source when requesting a correction.',
         availability: 'Contact path',
         ctaLabel: 'Send note',
-        href: '/contact?requestType=research',
+        href: '/contact?requestType=correction',
       },
       {
         title: 'Research note submission',

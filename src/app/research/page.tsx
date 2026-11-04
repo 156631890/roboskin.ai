@@ -11,7 +11,7 @@ const researchRouteCards = [
   {
     label: 'Research in progress',
     title: 'RoboSkin Working Papers',
-    text: 'Explore research proposals developed for RoboSkin.ai, with versioned manuscripts, reproducible experiments, and clear evidence status.',
+    text: 'Explore research proposals developed for RoboSkin.ai, with versioned manuscripts, a reproducible synthetic decision example, and clear evidence status.',
     href: '/papers',
     ctaLabel: 'Browse working papers',
   },
@@ -27,7 +27,7 @@ const researchRouteCards = [
   },
   {
     label: 'Organization map',
-    title: 'Models connect to verified institutions',
+    title: 'Trace source-listed institutional relationships',
     text: 'Trace source-listed universities, research labs, and companies to the robot AI models and primary evidence that support each relationship.',
     href: '/organizations',
     ctaLabel: 'Browse research organizations',
@@ -132,6 +132,23 @@ export default function ResearchPage() {
         </div>
       </section>
 
+      <section id="reading-a-research-result" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Read a result through its measurement contract"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"Start with the question the experiment actually answers. A perception score, successful rollout and available download are different findings. These examples show how to use the library without turning unlike experiments into a ranking."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Read a result through its measurement contract">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Question"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Evidence to retain"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Worked example"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"What is the unit being scored?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Identify a complete trial, subtask score, object, frame or episode. A partial-completion mean is not a percentage of fully completed trials."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research/t-rex-tactile-reactive-dexterous-manipulation-2026" className="text-accent underline underline-offset-4">{"T-Rex metric interpretation"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Which measurements share a denominator?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Read each task and training condition separately. Do not convert a sim-to-real improvement on one task into a claim of universal superiority."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/research/softmimicgen-synthetic-data-sim-to-real-2026" className="text-accent underline underline-offset-4">{"SoftMimicGen task-by-task comparison"}</Link></td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Which artifacts are actually accessible?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Separate a project link, repository contents, sample metadata, full data and weights. Record the license for the artifact you plan to use."}</td><td className="border-b border-white/10 px-4 py-4 align-top"><Link href="/news/haco-haptic-active-compliance-dexterous-manipulation" className="text-accent underline underline-offset-4">{"HACo code and sample scope"}</Link></td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"The counts above describe this library, not all tactile robotics literature or independent reproductions. Review dates and paper versions belong to each article. Follow a primary source when you need its complete protocol; use our interpretation as a reading aid, not a substitute for that protocol."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/methodology" className="text-accent underline underline-offset-4">{"Evidence and denominator checks"}</Link><Link href="/datasets" className="text-accent underline underline-offset-4">{"Data access and reuse conditions"}</Link><Link href="/papers" className="text-accent underline underline-offset-4">{"RoboSkin working papers, separately labeled"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
       <section className="research-library-notes container-shell" aria-label="Research reading routes">
         <details className="contact-fold">
           <summary><span>↳</span><h2>About the research, sources &amp; related routes</h2><span className="contact-fold-icon" aria-hidden="true" /></summary>
@@ -139,7 +156,7 @@ export default function ResearchPage() {
           {researchRouteCards.map((card) => (
             <article key={card.title} className="signal-panel p-6">
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#ff6b3d]">{card.label}</p>
-              <h2 className="mt-3 text-xl font-semibold text-white">{card.title}</h2>
+              <h3 className="mt-3 text-xl font-semibold text-white">{card.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-[#8e98a8]">{card.text}</p>
               {'href' in card ? (
                 <Link href={card.href} className="mt-5 inline-flex text-sm font-semibold text-[#ff6b3d] hover:text-white">
