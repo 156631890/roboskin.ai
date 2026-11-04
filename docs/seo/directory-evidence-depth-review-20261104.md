@@ -1,0 +1,23 @@
+# Directory evidence depth review — November 4, 2026
+
+Existing /datasets, /robotics-datasets, /benchmarks and /sensors each retain their own purpose. Read full guide objects and underlying schema, rendering and export paths. Counts remain 26 tactile datasets, 17 sensors and 13 benchmark records. Related collection hubs and the fixed 30-paper research snapshot remain separate. No new record or whole-directory availability claim.
+
+PRISM primary project reread: now links https://modelscope.cn/datasets/Turboyuuuu/PRISM. Public target fetch yields no readable manifest or terms. Update access only to linked-unverified; do not claim downloaded, complete, licensed or decoded data. Preserve the original scientific-source date separately from the new access check. Retain the paper's unspecified tactile subset rather than expanding broad project copy to every episode. The old test asserting no dataset URL would preserve a now-false condition; replace only that factual assertion with required linked-but-unverified wording and the exact official route. Fixed research-index snapshot remains unchanged.
+
+LeRobot v3 official format article reread: multiple episodes share physical files; metadata recovers boundaries. Open X-Embodiment v9 action-consolidation and limitations reviewed in batch85. These support conversion receipts, not newly executed data jobs. DROID and BridgeData source-backed records keep their original dates, counts, licenses and observed release routes; no recounted payload claim. Existing synthetic checker and prior official-loader execution retain their own verification dates.
+
+ReTouch v2 evaluation protocol and Appendix B.3 reread: 20 trials per task, normalized partial-credit scores except binary Button Press, one evaluator, macro-average. New ten-attempt arithmetic is explicitly hypothetical and is not an author result. No-touch comparison wording now discloses training and inference-distribution differences. Preserve benchmark-specific evaluation and availability records rather than treating them as one leaderboard.
+
+XELA Allegro V4 Curved official specification reread: 368 sensing positions, four values per position, 1,472 measurements; configuration-specific 275 Hz, module-dependent rates separately. No generic footer value substituted. Existing original DIGIT/GelSight calibration and optical-family evidence from reviewed sensor profiles retained. Distinguish raw output, physical estimate, event classifier and action outcome; no new accuracy, price, stock, lifespan or safety claim.
+
+ROMA current public card fetch unavailable in this pass. Preserve its October 12 access observation explicitly; do not infer present release or conceal the date. No gate bypass, terms acceptance, data request or download. Other individual access records retain their dates. Four editorial passes cover sources, distinct reader decisions, hierarchy/expression and SEO/links. Human fact sign-off remains pending. Validate export/schema and unchanged counts, all relevant tests/builds, HTML/Markdown, canonical/index/sitemap, internal anchors, interactive filters/comparison exports, responsive layout and exact production source/body.
+# Additional artifact-license check
+
+November 4, 2026: FreeTacMan provider dataset card still labels data MIT; GitHub root LICENSE is Apache-2.0 while README says MIT. Dataset row now names that distinction and adds a code-license observation. Existing scientific-source and pinned manifest dates/counts remain unchanged. Sources: https://huggingface.co/datasets/OpenDriveLab/FreeTacMan and https://github.com/OpenDriveLab/FreeTacMan/blob/main/LICENSE . No payload download or code execution. The fixed historical sample report remains unchanged; its landing page receives a separate reading note in the later report batch.
+
+
+Acceptance follow-up: retained a visible link to the immutable October 31 dataset snapshot. PRISM’s newly linked ModelScope route adds exactly one source node and one supportedBy edge; graph counts become 286 sources / 617 edges / 371 supportedBy, with all entity counts unchanged. Contract, discovery text and exact-count regression expectations updated together, without relaxing structural assertions. Removed a now-unused date import and retained the required definitional opening.
+
+PRISM's newly checked dataset route uses its own November 4 evidence date in the export and graph. Its original August 22 scientific record and paper-edge date remain unchanged. A regression checks both dates and graph validity.
+
+Mobile acceptance found intrinsic select-option widths expanding the sensor filter grid to 728px on a 390px viewport. Constrain grid tracks, labels and selects while preserving all options and filtering behavior.

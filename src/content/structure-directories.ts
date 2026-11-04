@@ -6,21 +6,21 @@ export const grippers = [
 ];
 
 export const humanoidCompanies = [
-  { name: 'Agility Robotics', founded: '2015', location: 'Salem, Oregon, United States', model: 'Digit; Digit 5 announced, early access expected in 2027', tactile: 'Detailed tactile sensor architecture: Not published in the reviewed company and Digit 5 announcement', website: 'https://www.agilityrobotics.com/', verified: '2026-10-30', sources: [
+  { name: 'Agility Robotics', founded: '2015', location: 'Salem, Oregon, United States', model: 'Digit; Digit 5 announced, early access expected in 2027', tactile: 'Detailed tactile sensor architecture: Not published in the reviewed company and Digit 5 announcement', website: 'https://www.agilityrobotics.com/', verified: '2026-11-04', sources: [
     { label: 'Company history and locations', href: 'https://www.agilityrobotics.com/company-overview' },
     { label: 'Digit 5 announcement and availability scope', href: 'https://www.agilityrobotics.com/content/agility-unveils-digit-5-humanoid-robot-built-for-cooperatively-safe-work-at-scale' },
   ] },
-  { name: 'Apptronik', founded: '2016', location: 'Austin, Texas, United States', model: 'Apollo', tactile: 'Tactile array specifications: Not published in the reviewed Apollo announcement', website: 'https://apptronik.com/', verified: '2026-10-30', sources: [
+  { name: 'Apptronik', founded: '2016', location: 'Austin, Texas, United States', model: 'Apollo', tactile: 'Tactile array specifications: Not published in the reviewed Apollo announcement', website: 'https://apptronik.com/', verified: '2026-11-04', sources: [
     { label: 'Apollo announcement and company origin', href: 'https://apptronik.com/news-collection/apptronik-unveils-apollo' },
   ] },
-  { name: 'Figure', founded: '2022', location: 'Sunnyvale, California (2023 company announcement; current headquarters not verified)', model: 'Figure 03', tactile: 'Internally developed fingertip tactile sensors; compliant fingertips and separate palm cameras', website: 'https://www.figure.ai/', verified: '2026-10-30', sources: [
+  { name: 'Figure', founded: '2022', location: 'Sunnyvale, California (2023 company announcement; current headquarters not verified)', model: 'Figure 03', tactile: 'Internally developed fingertip tactile sensors; compliant fingertips and separate palm cameras', website: 'https://www.figure.ai/', verified: '2026-11-04', sources: [
     { label: 'Figure company-issued founding announcement', href: 'https://www.prnewswire.com/news-releases/figure-emerges-from-stealth-and-unveils-figure-01--a-humanoid-robot-to-support-supply-chain-on-a-global-scale-301759983.html' },
     { label: 'Figure 03 hand and tactile design', href: 'https://www.figure.ai/news/introducing-figure-03' },
   ] },
-  { name: '1X', founded: '2014 (originally Halodi Robotics)', location: 'Palo Alto, California, United States', model: 'NEO', tactile: 'Soft lattice covering and tendon-driven actuation described; detailed tactile array specifications: Not published on the reviewed page', website: 'https://www.1x.tech/', verified: '2026-10-30', sources: [
+  { name: '1X', founded: '2014 (originally Halodi Robotics)', location: 'San Carlos, California, United States', model: 'NEO', tactile: 'Soft lattice covering and tendon-driven actuation described; detailed tactile array specifications: Not published on the reviewed page', website: 'https://www.1x.tech/', verified: '2026-11-04', sources: [
     { label: '1X history and location', href: 'https://www.1x.tech/about' }, { label: 'NEO product and body design', href: 'https://www.1x.tech/neo' },
   ] },
-  { name: 'Unitree', founded: '2016', location: 'Hangzhou, China', model: 'G1 (selected model)', tactile: 'Dex3-1 hand can optionally include tactile sensor arrays; not standard on every G1 configuration', website: 'https://www.unitree.com/', verified: '2026-10-30', sources: [
+  { name: 'Unitree', founded: '2016', location: 'Hangzhou, China', model: 'G1 (selected model)', tactile: 'Dex3-1 hand can optionally include tactile sensor arrays; not standard on every G1 configuration', website: 'https://www.unitree.com/', verified: '2026-11-04', sources: [
     { label: 'Unitree registered company information', href: 'https://www.unitree.com/operate/company/' }, { label: 'G1 and optional Dex3-1 tactile arrays', href: 'https://www.unitree.com/g1/' },
   ] },
 ];

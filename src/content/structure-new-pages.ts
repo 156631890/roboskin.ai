@@ -313,12 +313,84 @@ export const structureNewPages: SeoTopicPage[] = [
     sources: [{ label: 'DIGIT original sensor paper', href: 'https://arxiv.org/abs/2005.14679' }, { label: 'Robotiq TSF-85 user guide', href: 'https://robotiq.com/hubfs/Tactile%20Sensor%20Fingertips/Tactile%20Sensors%20TSF-85%20-%20User%20Guide.pdf' }],
   },
   {
-    ...shared, path: '/humanoid-robot-companies', title: 'Humanoid Robot Companies: Tracked Directory', h1: 'Humanoid Robot Companies: A Tracked Directory (2026)',
-    description: 'Tracked humanoid robot companies: founding year, location, robot models, tactile approach, official sources and row-level verification dates.',
+    ...shared, updated: "2026-11-04", revisionNote: "November 4, 2026: rechecked the five company rows, corrected the 1X location to the current official About page and added configuration-specific procurement questions. Documentation review only; no hardware trial.", path: '/humanoid-robot-companies', title: 'Humanoid Robot Companies: Tracked Directory', h1: 'Humanoid Robot Companies: A Tracked Directory (2026)',
+    description: "Compare five humanoid companies through exact model configurations, tactile disclosure and availability evidence, with sources and dated review limits.",
     introduction: 'The humanoid robot companies directory is a source-checked list of businesses developing physical humanoid robots. Humanoid robot companies differ in their robot embodiments, deployment claims and published tactile hardware. This directory records five companies with official product or company sources; inclusion is not a ranking, investment assessment or confirmation of general autonomy.',
     kicker: 'Company directory', intent: 'Track humanoid robot companies and distinguish published touch hardware from missing disclosure.', keywords: ['humanoid robot companies', 'humanoid company directory', 'humanoid tactile sensing'],
     quickAnswer: ['Five companies are currently tracked. Count each company once, even when it lists several robot models.', 'Each row links company or product sources and carries a Last verified date. Verification means an editorial source check, not a factory visit or hardware test.', 'Review is manual and event-driven when a company, model or sensor release changes. No automatic monitoring or daily revalidation is claimed.'],
     sections: [
+      {
+        "id": "company-to-configuration",
+        "heading": "Compare the deliverable configuration, not the company headline",
+        "body": [
+          "Use the company row to locate a product, then make a separate record for the configuration you would evaluate. Figure’s Figure 03 announcement describes fingertip tactile sensors and separate palm cameras. Unitree’s G1 specification says Dex3-1 tactile arrays are optional. A company-level “has touch” checkbox would hide that difference and would not tell you which signals a customer can access.",
+          "Availability also needs a date and a named model. Agility’s September 15, 2026 Digit 5 announcement describes expected early access in the first half of 2027; that is different from the earlier Digit deployments described by the company. Do not carry deployment evidence from one generation into a claim that another is already generally available."
+        ],
+        "table": {
+          "headers": [
+            "Decision",
+            "Ask for",
+            "Keep separate"
+          ],
+          "rows": [
+            [
+              "Choose a hand configuration",
+              "Included and optional sensors, exact hand revision and exposed channels",
+              "Dexterity, actuator force control and measured contact arrays"
+            ],
+            [
+              "Plan software integration",
+              "Documented data access, timestamps, commands and supported version",
+              "An internal demonstration versus a customer-accessible interface"
+            ],
+            [
+              "Evaluate autonomy",
+              "Task protocol, interventions and remote-assistance conditions",
+              "Shown completion versus unassisted repeated operation"
+            ],
+            [
+              "Plan delivery and maintenance",
+              "Current offer, region, configuration, replacement and recalibration process",
+              "A future availability statement or factory-capacity target"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Record assistance and contact evidence explicitly",
+            "body": [
+              "For example, the current NEO page describes scheduled Expert Mode for tasks the robot does not know, in addition to its autonomy claims. Record the operating mode alongside a demonstrated task. A soft lattice cover and tendon actuation describe construction; they do not, on their own, specify a calibrated tactile array.",
+              "For a proposed procurement comparison, retain the official source date, configuration identifier, unanswered integration questions and a task-specific acceptance plan. Ask for contact calibration, replaceable surface behavior and synchronized data where those matter to the application. These are buyer questions, not verified performance, a safety approval or an endorsement of any company."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Figure 03: fingertip sensors and palm cameras",
+            "href": "https://www.figure.ai/news/introducing-figure-03"
+          },
+          {
+            "label": "Unitree G1: optional Dex3-1 tactile arrays",
+            "href": "https://www.unitree.com/g1/"
+          },
+          {
+            "label": "Digit 5: expected availability",
+            "href": "https://www.agilityrobotics.com/content/agility-unveils-digit-5-humanoid-robot-built-for-cooperatively-safe-work-at-scale"
+          },
+          {
+            "label": "NEO: autonomy and scheduled Expert Mode",
+            "href": "https://www.1x.tech/neo"
+          },
+          {
+            "label": "Compare exact robot platforms",
+            "href": "/robots"
+          },
+          {
+            "label": "Read robot-hand procurement boundaries",
+            "href": "/robot-hands"
+          }
+        ]
+      },
       { heading: 'How companies enter the directory', body: ['Include a company when an official source identifies a physical humanoid model and the organisation responsible for it. Exclude software-only providers and speculative projects without an identifiable official product source.', 'Founding year and location are separate claims from product capability. The location field uses the cited company location; it is not an inference about where every robot is manufactured. Not published means the linked source did not establish the requested field.'], table: { headers: ['Field', 'Verification rule', 'Important limit'], rows: [
         ['Company and model', 'Official company or product page', 'An announcement is not proof of customer deployment'],
         ['Founded and location', 'Company history, contact page or company-issued announcement', 'A historical office address may not be the present headquarters'],

@@ -90,14 +90,14 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {},
           <a href="/resources/tactile-sensor-evaluation-template.csv" download className="btn-secondary mt-6 inline-flex">Download task evaluation template</a>
         </section>
 
-        <div className="mt-7 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
           {filters.map((filter) => (
-            <label key={filter.label} className="grid gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#8e98a8]">
+            <label key={filter.label} className="grid min-w-0 gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#8e98a8]">
               {filter.label}
               <select
                 value={filter.value}
                 onChange={(event) => filter.setter(event.target.value)}
-                className="min-h-11 rounded-md border border-white/10 bg-[#020408] px-3 text-sm normal-case tracking-normal text-white"
+                className="min-h-11 w-full min-w-0 rounded-md border border-white/10 bg-[#020408] px-3 text-sm normal-case tracking-normal text-white"
               >
                 <option>{filter.all}</option>
                 {filter.options.map((option) => <option key={option}>{option}</option>)}

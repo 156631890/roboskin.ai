@@ -37,6 +37,76 @@ const kindLabels = {
   'research setup': 'Research setups',
 } as const;
 
+const readingGuide = {
+  "id": "platform-transfer-record",
+  "heading": "Turn a platform name into a configuration you can compare",
+  "body": [
+    "A useful comparison needs more than “Franka” or “humanoid.” Identify the arm revision, gripper, sensor mounting, observation processing, action convention and controller. Two studies can share a robot family while using different end effectors, camera placements and control rates. Keep a paper-specific configuration intact instead of silently replacing it with the latest commercial specification.",
+    "OpenVLA’s project separates direct evaluation on WidowX and Google Robot from adaptation on Franka setups. Its Franka-Tabletop and Franka-DROID configurations use different control frequencies, 5 Hz and 15 Hz respectively. These are source-reported evaluation settings, not recommended rates for every Franka or evidence that an arbitrary checkpoint will run unchanged."
+  ],
+  "table": {
+    "headers": [
+      "Record layer",
+      "Useful comparison field",
+      "What a mismatch changes"
+    ],
+    "rows": [
+      [
+        "Physical configuration",
+        "Exact robot/tool, sensor type and mounting",
+        "Reach, contact geometry and observed signals"
+      ],
+      [
+        "Policy interface",
+        "Checkpoint, observation history, action units and frame",
+        "The meaning of an otherwise valid tensor"
+      ],
+      [
+        "Adaptation",
+        "Target data, trained parameters and preprocessing",
+        "Whether the result is direct use or an adapted system"
+      ],
+      [
+        "Execution",
+        "Control rate, action horizon, limits and feedback path",
+        "How predictions become movement"
+      ],
+      [
+        "Evaluation",
+        "Task, resets, attempts, interventions and success rule",
+        "Which outcomes can be compared"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "A proposed transfer decision",
+      "body": [
+        "Start from the source configuration and mark each field as matched, changed or unknown for your planned setup. A changed gripper warrants a new contact and action check; a changed camera warrants an observation check; a changed controller warrants timing and command checks. This record helps locate the missing evidence before a deployment claim is made.",
+        "Retain the original relationship label when sharing a shortlist. Included in training answers a data-exposure question; evaluated on answers a bounded experimental question; demonstrated on preserves a qualitative result. None is a general compatibility certificate. The procedure here is an editorial comparison aid, not a robot trial performed by RoboSkin.ai."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "OpenVLA: direct and adapted evaluation configurations",
+      "href": "https://openvla.github.io/"
+    },
+    {
+      "label": "Check the observation-to-action handoff",
+      "href": "/robot-vla-models#vla-interface-handoff"
+    },
+    {
+      "label": "Compare contact geometry and hand interfaces",
+      "href": "/robot-hands"
+    },
+    {
+      "label": "Define calibration conditions",
+      "href": "/guides/tactile-sensor-calibration"
+    }
+  ]
+};
+
 export default function RobotsPage() {
   const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
   const connectedModelCount = new Set(robotAiRobotRelations.map((relation) => relation.modelId)).size;
@@ -283,6 +353,24 @@ export default function RobotsPage() {
           </section>
         );
       })}
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Individual source dates remain on the records; no hardware or model testing.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
       <section className="pb-20">
         <div className="container-shell grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">

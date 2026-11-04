@@ -63,9 +63,9 @@ test('PRISM brief and dataset preserve tactile coverage, image-count, access, li
 
   assert.match(dataset, /name: 'PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing'/);
   assert.match(dataset, /The paper does not disclose the number or share of tactile-equipped episodes/);
-  assert.match(dataset, /Dataset-file license not published/);
-  assert.match(dataset, /official Dataset button is disabled and labeled “soon”/);
-  assert.doesNotMatch(dataset, /\n\s+datasetUrl:/);
+  assert.match(dataset, /Dataset-file license not verified/);
+  assert.match(dataset, /Download route linked; files, payload completeness, reuse license and loader execution remain unverified/);
+  assert.match(dataset, /datasetUrl: \'https:\/\/modelscope\.cn\/datasets\/Turboyuuuu\/PRISM\'/);
   assert.doesNotMatch(dataset, /\n\s+licenseUrl:/);
   assert.doesNotMatch(dataset, /DIGIT|GelSight|TacTip|uSkin/);
 
@@ -138,8 +138,8 @@ test('pillar pages and homepage expose reverse links without adding a new thin r
   for (const path of ['/datasets', '/robot-manipulation', '/robotics-datasets']) {
     assert.match(pages[path], /prism-contact-rich-industrial-skill-dataset-2026/);
   }
-  assert.match(pages['/datasets'], /official project still marks the dataset “soon”/);
-  assert.match(pages['/robotics-datasets'], /official dataset control remained marked “soon”/);
+  assert.match(pages['/datasets'], /official project links a ModelScope dataset route; file inventory, payload and dataset-file license remain unverified/);
+  assert.match(pages['/robotics-datasets'], /official project linked a ModelScope route; payload and dataset-file terms were not verified/);
   assert.match(pages['/tactile-manipulation'], /missing-touch-spatial-tactile-feedback-teleoperation-2026/);
   assert.match(pages['/robot-teleoperation'], /missing-touch-spatial-tactile-feedback-teleoperation-2026/);
   assert.match(pages['/robot-teleoperation'], /prism-contact-rich-industrial-skill-dataset-2026/);

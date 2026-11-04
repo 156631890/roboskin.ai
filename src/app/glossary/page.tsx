@@ -62,6 +62,79 @@ const coreTopicRoutes = [
   },
 ];
 
+const readingGuide = {
+  "id": "measurement-language",
+  "heading": "Four measurement words that should not be interchangeable",
+  "body": [
+    "A sensor specification can use a familiar word in a narrower way than a buyer expects. Before comparing numbers, identify the quantity, unit, reference, conditions and statistic. The JCGM international metrology vocabulary separates accuracy, precision, resolution and sensitivity. The reading questions below apply those distinctions to tactile documentation; they are not a new sensor benchmark.",
+    "For tactile systems, also separate physical sensing locations from channels and reconstructed pixels. One position can report several quantities, and a learned map can contain more output cells than there are physical sensing elements. Neither multiplication establishes more independently resolved contacts."
+  ],
+  "table": {
+    "headers": [
+      "Term",
+      "Practical interpretation",
+      "Question for a tactile specification"
+    ],
+    "rows": [
+      [
+        "Accuracy",
+        "Agreement with the quantity being measured; not synonymous with repeatability",
+        "Which reference and error statistic support the claim, under what conditions?"
+      ],
+      [
+        "Precision",
+        "Agreement among repeated indications under specified conditions",
+        "Were the same sensor, mounting, load history and environment retained?"
+      ],
+      [
+        "Resolution",
+        "The smallest change in the measured quantity that produces a distinguishable change in indication",
+        "Does the number describe force, position, digitization or merely image dimensions?"
+      ],
+      [
+        "Sensitivity",
+        "Change in output relative to change in the input quantity",
+        "What are the units, loading range and response slope?"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "An illustrative reading error",
+      "body": [
+        "Suppose a hypothetical sensor repeatedly reports a similar force while consistently differing from a reference. Closely grouped readings alone do not establish accuracy. Likewise, a finely digitized output can still have noise, bias or cross-axis effects that prevent useful small changes from being distinguished. These examples illustrate terminology, not measured performance of a named device.",
+        "Keep measured, estimated and predicted labels on the signal. A tactile image is an observation; a calibrated force reconstruction is an estimate; a future-contact model predicts an outcome. The downstream controller may use any of these, but their evidential roles remain different. Follow the linked definition to the relevant method and evaluation rather than treating a shared word as a compatibility guarantee."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "JCGM VIM: measurement accuracy",
+      "href": "https://jcgm.bipm.org/vim/en/2.13.html"
+    },
+    {
+      "label": "JCGM VIM: measurement precision",
+      "href": "https://jcgm.bipm.org/vim/en/2.15.html"
+    },
+    {
+      "label": "JCGM VIM: resolution",
+      "href": "https://jcgm.bipm.org/vim/en/4.14.html"
+    },
+    {
+      "label": "JCGM VIM: sensitivity",
+      "href": "https://jcgm.bipm.org/vim/en/4.12.html"
+    },
+    {
+      "label": "Taxels, axes and coverage in a hand layout",
+      "href": "/applications/robot-hand-tactile-sensor#taxel-count-and-coverage"
+    },
+    {
+      "label": "Trace sensing and inference",
+      "href": "/technology#tactile-diagnostic-trace"
+    }
+  ]
+};
+
 export default function GlossaryPage() {
   return (
     <>
@@ -144,6 +217,24 @@ export default function GlossaryPage() {
           </div>
         </div>
       </section>
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing source and research dates remain separate; no hardware measurements.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
       <section id="term-matrix" className="pb-20">
         <div className="container-shell">

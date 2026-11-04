@@ -1,5 +1,4 @@
 import { sensingIntegrationDepth } from '@/content/sensing-integration-depth';
-import structureRelease from '@/content/structure-release.json';
 import { structureNewPages } from '@/content/structure-new-pages';
 import { robotDatasetStartingPoints, robotDataPreflight, teleoperationActionTrace } from '@/content/robot-data-evidence';
 import { printedTactileGuide } from '@/content/printed-tactile-guide';
@@ -1721,12 +1720,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/applications/robot-hand-tactile-sensor',
     title: 'Robot Hand Tactile Sensor Guide for Dexterous Grasping',
     description:
-      'Robot hand tactile sensors help dexterous hands detect contact, slip, force patterns, and grasp stability. Learn where fingertip, palm, and full-hand sensing differ.',
+      "Choose robot-hand sensing by contact location, useful observation and task outcome. Compare coverage, timing and calibration without a universal taxel count.",
     h1: 'Robot hand tactile sensor guide',
     kicker: 'Application guide',
     intent: 'Application page for robot hand tactile sensor, tactile robot hand, slip detection, and dexterous manipulation searches.',
-    updated: '2026-10-24',
-    revisionNote: 'October 24, 2026: clarified sensing positions versus channels, configuration-specific counts, coverage and acceptance timing.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: added task-specific sensing decisions and qualified binary-contact, pressure and slip claims. Configuration counts remain source-specific; no hardware evaluation.",
     priority: 0.81,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1734,11 +1733,75 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['robot hand tactile sensor', 'tactile robot hand', 'robot hand touch sensor', 'dexterous hand tactile sensing', 'robot hand slip detection'],
     quickAnswer: [
       'There is no universal number of tactile sensing positions required for a robot hand. Choose contact coverage and validated resolution for the task, then verify timing and calibration.',
-      'A robot hand tactile sensor measures contact at the hand surface so the robot can understand pressure, slip, grasp stability, and local interaction events.',
+      'A robot hand tactile sensor records a response at the contact surface. Pressure, slip and grasp-stability outputs require a suitable sensing and interpretation pipeline; not every sensor provides them.',
       'Fingertip sensors are useful for pinch and precision tasks, while palm and full-hand skin help with power grasps, handovers, and multi-contact manipulation.',
       'A strong robot hand evaluation covers mounting, wiring, calibration, latency, signal interpretation, and whether tactile data improves a real manipulation task.',
     ],
     sections: [
+      {
+        "id": "hand-task-observation",
+        "heading": "Start with the failure your hand needs to distinguish",
+        "body": [
+          "Choose coverage from the contacts that change a decision. In a proposed pinch task, the question may be whether the object contacts the intended fingertip region; in a power grasp it may be whether the object is seated against the palm; in reorientation it may be how the contact moves along a finger. The sensor layout should make that particular state observable.",
+          "DexSkin provides a bounded research example: the authors sensorize parallel-jaw gripper fingers and evaluate tasks that use contact beyond the tips. That supports studying task-relevant coverage in those setups, not a universal claim that full-hand skin is always necessary or that more taxels always improve performance. Keep its capacitive measurements and calibration separate from an optical fingertip’s image stream."
+        ],
+        "table": {
+          "headers": [
+            "Proposed task question",
+            "Observation to evaluate",
+            "Failure the comparison should retain"
+          ],
+          "rows": [
+            [
+              "Did intended contact occur?",
+              "A calibrated threshold or contact event at the relevant surface",
+              "Missed contacts, false triggers and event timing"
+            ],
+            [
+              "Is the object seated as intended?",
+              "Contact location or distribution across the contacted regions",
+              "Blind spots and similar total load with different contact patterns"
+            ],
+            [
+              "Is the object moving relative to the hand?",
+              "A task-validated motion or slip estimate over time",
+              "Confusion with intended rolling, vibration or changing normal load"
+            ],
+            [
+              "Can feedback improve the manipulation?",
+              "Fresh observations connected to a specified action rule",
+              "Dropped objects, damage, retries, assistance and elapsed time"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Choose the smallest useful observation, then test the complete loop",
+            "body": [
+              "A binary contact signal can be useful when the decision is genuinely binary. A spatial map or force estimate is justified when the task needs that additional information and the system can validate it. More channels add calibration, transport and interpretation work; they are not a substitute for identifying the state that matters.",
+              "For a proposed comparison, hold the task, objects, success rule and allowed assistance explicit. Record whether touch changes an action or is merely logged. Evaluate failures and recovery as well as successful grasps, and repeat relevant checks after replacing a contact surface. The table is a planning aid, not a claim that RoboSkin.ai ran these trials."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "DexSkin: coverage and task-specific evaluation",
+            "href": "https://arxiv.org/html/2509.18830v1#S4"
+          },
+          {
+            "label": "Specify a slip evaluation and feedback response",
+            "href": "/guides/slip-detection-robot-hand"
+          },
+          {
+            "label": "Separate hardware and policy metrics",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Compare exact uSkin configurations",
+            "href": "/sensors/xela-uskin"
+          }
+        ]
+      },
 {
   "heading": "How many tactile sensing positions does a robot hand need?",
   "body": [
@@ -1851,7 +1914,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'What a useful hand sensor must report',
         body: [
-          'A useful tactile hand sensor reports more than a contact yes-or-no value. It should give the robot contact location, timing, pressure or force distribution, and enough signal quality to support decisions.',
+          'A useful tactile hand sensor reports the observation required by the task. A contact event can support a binary decision; location, distribution or force estimates require additional sensing and validation when those quantities matter.',
           'Slip response is a common target, but teams should be precise. Detecting slip in a lab setup is different from using that signal to adjust grip during a moving, occluded, real-world task.',
         ],
       },
@@ -1873,7 +1936,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         question: 'Do robot hands need fingertip sensors or full-hand sensing?',
         answer:
-          'It depends on the task. Fingertips are enough for some pinch grasps, but palm and full-hand sensing are more useful for power grasps, handovers, and multi-contact tasks.',
+          'It depends on the task. Fingertips can cover some pinch contacts. Palm or side sensing may help when those regions contact the object; the useful coverage and resulting benefit must be evaluated for the intended task.',
       },
       {
         question: 'What should a robot hand tactile sensor page prove?',
@@ -2871,14 +2934,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    revisionNote: "November 4, 2026: added a claim-to-evidence reading method and a synthetic-data example. Original research briefs and publication dates retained; no reproduction claimed.",
     path: '/research/robot-skin-papers',
     title: 'Robot Skin Papers and Tactile Sensing Research Index',
     description:
-      'Browse source-backed robot skin papers and research routes for tactile sensing, e-skin, soft robotic skin, robot hands, and tactile AI.',
+      "Read robot-skin papers by claim, experiment and artifact. Follow source versions, sensing evidence and task metrics into the relevant research route.",
     h1: 'Robot skin papers and tactile sensing research index',
     kicker: 'Research guide',
     intent: 'Research index for robot skin papers, tactile AI papers, e-skin research, and source-backed technical briefs.',
-    updated: '2026-06-06',
+    updated: "2026-11-04",
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -2890,6 +2954,74 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use it as a starting point for understanding which papers map to materials, sensor arrays, full-hand sensing, software pipelines, and application constraints.',
     ],
     sections: [
+      {
+        "id": "paper-claim-trace",
+        "heading": "Turn a paper into a checkable claim, not a technology endorsement",
+        "body": [
+          "Start with the decision the paper could change. A material response may justify a sensor experiment; a calibrated sensor result may justify an integration trial; a task comparison may justify evaluating a policy. These are different conclusions. Record the smallest claim supported by the experiment before deciding what to build or buy.",
+          "For example, SoftMimicGen studies synthetic demonstrations for deformable-object manipulation. Its March 26, 2026 paper describes a data-generation pipeline and policy evaluations. A successful generated demonstration is an accepted training sample; it is not itself a successful trial of a policy learned from those samples. Neither result establishes a tactile measurement that the experiment did not collect."
+        ],
+        "table": {
+          "headers": [
+            "Reading step",
+            "Evidence to retain",
+            "Question before transferring the result"
+          ],
+          "rows": [
+            [
+              "Identify the claim",
+              "Paper version, section or table, authors and publication status",
+              "Is this a stated goal, measured outcome or interpretation?"
+            ],
+            [
+              "Describe the experiment",
+              "Sensor, robot, objects, protocol, metric and denominator",
+              "Which conditions resemble the intended deployment?"
+            ],
+            [
+              "Inspect the comparison",
+              "Baseline, data budget, assistance and aggregation rule",
+              "Are the differences attributable to the proposed component?"
+            ],
+            [
+              "Trace the artifact",
+              "Exact code/data/model revision and its access terms",
+              "Does the available artifact cover the reported experiment?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Write the uncertainty beside the result",
+            "body": [
+              "A useful evidence note names both what was shown and what remains untested. If only an abstract is accessible, record that limit; do not infer the missing protocol from a publicity summary. If a later paper version changes a table, cite the version actually read and keep the earlier comparison distinguishable.",
+              "Use this page to choose a research route, the structured index to compare recorded attributes, and individual research briefs for method-level analysis. The workflow above is an editorial reading aid. It does not mean RoboSkin.ai executed the referenced code or independently reproduced the results."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "SoftMimicGen: original paper and version history",
+            "href": "https://arxiv.org/abs/2603.25725"
+          },
+          {
+            "label": "Read the SoftMimicGen method and metric analysis",
+            "href": "/research/softmimicgen-synthetic-data-sim-to-real-2026"
+          },
+          {
+            "label": "Compare research evidence fields",
+            "href": "/research-index"
+          },
+          {
+            "label": "Separate benchmark metrics and protocols",
+            "href": "/benchmarks"
+          },
+          {
+            "label": "Check data access and license evidence",
+            "href": "/datasets"
+          }
+        ]
+      },
       {
         heading: 'How to read robot skin papers',
         body: [
@@ -3630,15 +3762,15 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: "October 31, 2026: added a pinned DexSuite scripted Lift subset with inspected metadata, action layout, simulated-contact origin and subset-specific license evidence. October 27, 2026: added CLAMP and OpenRoboCare records with access and licensing limits; OAHD and Robot Assisted Feeding remain separate collection links. October 26, 2026: added EgoExplorer gated mini-release scope and separate data/code rights. October 22, 2026: clarified geometry-derived pseudo-contact versus measured tactile data using HuTact as a method example; no dataset record or availability status changed. October 17, 2026: linked the NeoData/OpenNeoData explanation; this is not a new verified download record. October 16, 2026: added TacClaw-Infinity with separate paper-corpus and public-release scope, a pinned file-listing revision and noncommercial dataset terms. Other source review dates are unchanged.",
+    revisionNote: "November 4, 2026: clarified the evidence recorded by directory exports and updated the PRISM data-route observation. Existing 26 records and other individual review dates remain; no payload download or training.",
     title: "Tactile Datasets for Robot Learning: Index",
-    description: "Indexed tactile datasets for robot learning: sensor type, embodiment, size, license and download link, with the last-updated date on every record.",
+    description: "Compare tactile datasets by contact origin, episodes, access and reuse terms; distinguish paper scale, listed files and inspected payloads.",
     introduction: "Tactile dataset refers to a collection of recorded or simulated contact observations, often aligned with images, robot state or actions. This tactile dataset index contains 26 records organized by sensor type, task and license. Each record keeps its source-review date, download route and access limitations; a linked dataset is not necessarily a verified or unrestricted download.",
     h1: "Tactile Datasets Index: What Each Dataset Contains",
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: '2026-10-31',
+    updated: "2026-11-04",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3658,6 +3790,74 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
+      {
+        "id": "dataset-evidence-handoff",
+        "heading": "What a directory export does and does not establish",
+        "body": [
+          "Keep three quantities separate when planning data use: what the paper reports collecting, what the host lists, and what your loader successfully decodes. They can differ without implying that data is lost. A file listing can include metadata, duplicates, auxiliary media or only one released subset; a successful metadata read does not count every episode inside a payload.",
+          "The current directory has 26 records, while related collection hubs are excluded from that count. The fixed research index is a separate paper selection, not a second dataset inventory. CSV and JSON exports describe the directory evidence; they neither redistribute the underlying data nor certify a working training loader."
+        ],
+        "table": {
+          "headers": [
+            "Evidence stage",
+            "Record it explicitly",
+            "Next unresolved question"
+          ],
+          "rows": [
+            [
+              "Paper collection",
+              "Unit, collection protocol and exact paper version",
+              "Which part is actually released?"
+            ],
+            [
+              "Public route or manifest",
+              "Host, revision, observed paths and access conditions",
+              "Can the intended payload be read under its terms?"
+            ],
+            [
+              "Decoded episode",
+              "Loader version, complete boundaries, field meanings and missing values",
+              "Does it match the target model and evaluation split?"
+            ],
+            [
+              "Training/evaluation run",
+              "Data selection, transformations, split and actual outcome",
+              "What transfers beyond that experiment?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A concrete access-state change: PRISM",
+            "body": [
+              "On November 4, 2026, the official PRISM project linked a ModelScope dataset route. The target page did not expose a readable file manifest or reuse terms in this check. This supersedes the earlier disabled-button observation, but it does not establish payload completeness, a dataset license or successful decoding. The record therefore distinguishes a linked route from verified files.",
+              "For tactile adaptation, also preserve the paper's modality boundary: tactile sensing covers an unspecified subset. The project's broad multimodal description should not be used to fill missing episode-level touch fields. No dataset payload was downloaded for this update."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "PRISM official project and current data route",
+            "href": "https://tengbo-yu.github.io/PRISM/"
+          },
+          {
+            "label": "PRISM linked host; files and terms unverified",
+            "href": "https://modelscope.cn/datasets/Turboyuuuu/PRISM"
+          },
+          {
+            "label": "Inspect the dated PRISM record",
+            "href": "/datasets#dataset-prism-industrial-skill"
+          },
+          {
+            "label": "Inspect complete episodes before model adaptation",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Previous October 31 directory audit snapshot",
+            "href": "/releases/datasets/v2026.10.31.json"
+          }
+        ]
+      },
       {
         id: 'simulation-file-inspection',
         heading: 'A simulated tactile subset: inspect the action contract',
@@ -3803,7 +4003,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Resource', 'Signals and scale', 'Best-fit question', 'Evaluation unit', 'Evidence boundary'],
           rows: [
-            ['PRISM', '5,000+ robot trajectories, 5,000 paired human demonstrations, 45+ hours, and approximately 27M images across visual and visuotactile streams; tactile sensing covers an unspecified subset.', 'Industrial contact-rich manipulation across multiple robots, grippers, and teleoperation interfaces.', 'Split by complete episode, task, operator, hardware configuration, object, and modality availability.', 'The paper says open-sourced, but the official project still marks the dataset “soon”; no public data files or dataset-file license were verified on 2026-08-22.'],
+            ['PRISM', '5,000+ robot trajectories, 5,000 paired human demonstrations, 45+ hours, and approximately 27M images across visual and visuotactile streams; tactile sensing covers an unspecified subset.', 'Industrial contact-rich manipulation across multiple robots, grippers, and teleoperation interfaces.', 'Split by complete episode, task, operator, hardware configuration, object, and modality availability.', 'November 4, 2026: the official project links a ModelScope dataset route; file inventory, payload and dataset-file license remain unverified.'],
             ['EgoTouch', '208 human bimanual manipulation tasks across 1,891 episodes with head and dual-wrist RGB, 3D hand pose, and wearable pressure maps; the repository reports about 2M frames.', 'Egocentric vision-to-touch prediction and human contact representation pretraining.', 'Split by complete episode, task, object, scene, and subject or collection condition where exposed.', 'This is human-wearable interaction data, not robot action trajectories. Hosted files exist, but the official repository warns that upload may be incomplete and a separate dataset-file license was not verified.'],
             ['HT-Bench', '10M egocentric RGB frames and 7.8M full-hand tactile frames collected across 226 tasks.', 'Full-hand tactile representation learning, cross-modal alignment, and unseen-task evaluation.', 'Split by task and trajectory; test held-out tasks, objects, sensor units, or embodiments for the claimed transfer.', 'A 2026 preprint. Scale does not make temporally adjacent frames independent, and reported results are specific to the benchmark setup.'],
             ['RCT', '29,279 tactile frames from 122 industrial reference materials in 7 categories, collected with 3 DIGIT sensors; paired touch, image, language, and force context.', 'Material understanding and tactile-language retrieval.', 'Keep full press or contact sequences together; test held-out materials where possible.', 'A 2026 preprint. Reported performance is specific to its sensors, materials, models, and splits.'],
@@ -4577,15 +4777,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['feelworld-visuo-tactile-world-model-2026', 'dream-tac-tactile-world-action-model-2026'],
   },
   {
+    revisionNote: "November 4, 2026: added a worked metric-reading example and qualified no-touch comparisons. The 13 existing benchmark records retain their individual source dates; no benchmark run.",
     path: '/benchmarks',
     title: "Tactile Robotics Benchmarks: Task Suites",
-    description: "Tactile robotics benchmarks compared: task suites, success metrics, hardware requirements and whether results are comparable across labs.",
+    description: "Interpret tactile benchmarks by scoring rule, trial unit, split and adaptation budget; separate partial progress from full success and repeated training.",
     introduction: "Tactile robotics benchmark refers to an evaluation contract specifying contact tasks, sensor inputs, hardware, data splits and metrics. A tactile robotics benchmark supports comparison only when those conditions match. This index retains 13 task suites and records whether cross-lab comparability is established, with source and protocol limits beside each entry.",
     h1: "Tactile Robotics Benchmarks and Task Suites (2026)",
     kicker: 'Structured benchmark directory',
     intent: 'Research directory for tactile benchmark robotics, tactile sensing benchmarks, robot manipulation evaluation, and visuo-tactile benchmark searches.',
     published: '2026-08-19',
-    updated: structureRelease.modifiedDate,
+    updated: "2026-11-04",
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4594,9 +4795,69 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'A tactile robotics benchmark is a defined evaluation contract: task, sensor input, robot or collection platform, data split, metric, baseline, and version. A dataset becomes a benchmark only when it is paired with a reproducible protocol.',
       'Benchmark scores are not portable across different tactile sensors, robots, objects, control rates, or success definitions. Compare systems only inside the same protocol or reproduce both under one shared setup.',
-      'For manipulation, always include an outcome-level baseline with touch disabled. Representation accuracy alone does not prove that tactile sensing improves robot behavior.',
+      'For a manipulation claim about touch, plan a relevant no-touch or ablated comparison and disclose its training and deployment differences. Representation accuracy alone does not establish better robot behavior.',
     ],
     sections: [
+      {
+        "id": "benchmark-score-reconstruction",
+        "heading": "Reconstruct the score before comparing the percentage",
+        "body": [
+          "Two papers can both write \"success rate\" while measuring different outcomes. ReTouch v2 explicitly uses normalized task scores: one standard task is binary and the others award partial credit. Its mean therefore cannot be read as the percentage of trials that completed every task requirement.",
+          "For an arithmetic illustration, imagine ten hypothetical attempts, each earning half of the available progress points and none completing the full task. Mean progress is 50%, while full completion is 0/10. These numbers are a teaching example, not research results. A score definition is part of the evidence, not a footnote that can be discarded."
+        ],
+        "table": {
+          "headers": [
+            "Reported quantity",
+            "Reconstruct from the source",
+            "Comparison limit"
+          ],
+          "rows": [
+            [
+              "Binary completion",
+              "Successful full attempts divided by evaluated attempts",
+              "Record retries, timeouts, exclusions and assistance"
+            ],
+            [
+              "Normalized progress",
+              "Task rubric, component weights and partial credit",
+              "Do not convert a mean score into a count of completed trials"
+            ],
+            [
+              "Macro-average",
+              "Per-task result and weighting across tasks",
+              "Does not necessarily equal a pooled trial-level rate"
+            ],
+            [
+              "Repeated rollouts",
+              "Trials for one trained checkpoint under stated conditions",
+              "Not independent training seeds or evidence across laboratories"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Match the intervention as well as the task",
+            "body": [
+              "For a tactile contribution claim, describe how the no-touch condition was produced. Disabling a stream at inference can create an observation distribution the policy never saw; retraining without touch can change training cost and model capacity. Either comparison can be informative when its question and adaptation budget are explicit. Neither automatically isolates all causal effects of adding hardware.",
+              "Retain the exact method, source version, trial unit and denominator beside every exported comparison. The 13 directory records remain separate source-defined suites; the new reading example does not add a benchmark or claim an independently reproduced result."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "ReTouch v2: evaluation protocol and task scoring",
+            "href": "https://arxiv.org/html/2608.01824v2#A2.SS3"
+          },
+          {
+            "label": "Tactile model adaptation accounting",
+            "href": "/tactile-foundation-models#representation-adaptation-ledger"
+          },
+          {
+            "label": "Plan a matched tactile evaluation",
+            "href": "/guides/tactile-sensor-benchmark-robot-manipulation"
+          }
+        ]
+      },
       {
         heading: 'What makes a tactile benchmark credible?',
         body: [
@@ -4661,7 +4922,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { question: 'What is a tactile robotics benchmark?', answer: 'It is a reproducible evaluation contract for a tactile perception, representation, or robot-control question. It specifies inputs, hardware, data splits, metrics, baselines, and evaluation conditions.' },
       { question: 'Can benchmark scores be compared across tactile sensors?', answer: 'Only when both systems use a shared protocol that controls sensor mounting, calibration, data, robot, task, metric, and evaluation version. Otherwise the numbers describe different experiments.' },
       { question: 'Is a tactile dataset automatically a benchmark?', answer: 'No. A dataset supplies observations. A benchmark adds defined tasks, splits, metrics, baselines, and evaluation code or instructions.' },
-      { question: 'Which baseline matters most for tactile manipulation?', answer: 'Use the same robot, task, controller budget, and visual inputs with the tactile pathway disabled. That isolates whether touch improves the task outcome.' },
+      { question: 'Which baseline matters most for tactile manipulation?', answer: 'Use a task-matched no-touch or ablated comparison and disclose training, adaptation, observation and controller differences. Disabling an input alone may create a distribution shift, so interpret the result within that intervention.' },
     ],
     relatedLinks: [
       { label: 'From tactile sensing to robot action', href: '/guides/tactile-feedback-for-physical-ai', description: 'Compare six studies with success definitions, trial counts and resource limits.' },
@@ -4688,14 +4949,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/sensors',
     title: "Tactile Sensing: Types, Specs, Comparison",
-    description: "Tactile sensing explained: vision-based, magnetic and soft sensor types, published specs, and how to shortlist one for grasping or slip detection.",
-    introduction: "Tactile sensing is the measurement of contact forces and geometry at a robot's surface, converted into a signal a policy can act on. This tactile sensing index covers 17 sensors across vision-based, magnetic and soft sensing systems. Compare spatial resolution, force range, sampling rate, interface and public specification sources; a missing published value is not a measured zero.",
+    description: "Compare tactile sensors by raw and inferred outputs, model-specific coverage, calibration and dated specifications; map the signal to the task.",
+    introduction: "Tactile sensing is the conversion of physical interaction at a surface into observable signals. Geometry, force or contact state may then be inferred through device-specific calibration and processing; a recorded signal is not automatically used by a policy. This tactile sensing index covers 17 sensors across vision-based, magnetic and soft sensing systems. Compare spatial resolution, force range, sampling rate, interface and public specification sources; a missing published value is not a measured zero.",
     h1: "Tactile Sensing — Sensor Types, Specifications and Comparison",
     kicker: 'Source-reviewed sensor directory',
     intent: 'Technical directory for tactile sensors for robots, tactile sensor robot hand, robot gripper sensors, optical tactile sensors, and magnetic tactile skins.',
     published: '2026-08-19',
-    updated: '2026-10-31',
-    revisionNote: 'October 31, 2026: added human-demonstration glove selection criteria and a source-bounded Tactus example; no new sensor product record or hardware test is claimed. October 17, 2026: added structured TSF-85 and Tactaxis records, task-selection routes and source-dated cost guidance. Optical/capacitive, gel-maintenance and profile links, existing comparison tables and the evaluation worksheet are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: clarified the sensing definition and added a raw-signal-to-task comparison. Existing 17 records retain their individual review dates; no device test or current price/stock audit.",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4717,6 +4978,70 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Do not select a sensor from spatial resolution alone. Compare contact coverage, shear sensitivity, latency, force range, drift, replaceability, wear, wiring, middleware, and closed-loop task evidence.',
     ],
     sections: [
+      {
+        "id": "sensor-output-chain",
+        "heading": "Compare the output chain before comparing specifications",
+        "body": [
+          "A sensor record can describe raw acquisition, a reconstructed quantity or a task classifier. Keep those stages visible. Original DIGIT produces images; calibrated geometry or force needs additional processing. XELA's Allegro V4 Curved page separates 368 sensing positions from 1,472 measurements, because each position reports three touch axes and internal temperature. Neither an image pixel nor an axis count is automatically an independent taxel.",
+          "The correct comparison begins with the output your application needs. If you need force in newtons, ask for the calibration reference and valid loading conditions. If you need slip detection, ask how slip onset was independently labelled and measured. Resolution, force-estimation error and detector accuracy are different quantities."
+        ],
+        "table": {
+          "headers": [
+            "Output stage",
+            "What to preserve",
+            "Unsupported shortcut"
+          ],
+          "rows": [
+            [
+              "Raw signal",
+              "Image, counts or electrical/field response, acquisition settings and time",
+              "Calling every raw value a calibrated force"
+            ],
+            [
+              "Estimated physical quantity",
+              "Algorithm, calibration reference, units, frame and valid range",
+              "Applying one device's error to another mounting or cover"
+            ],
+            [
+              "Task event or state",
+              "Label definition, decision threshold and timing",
+              "Treating a classifier score as guaranteed recovery"
+            ],
+            [
+              "Robot response",
+              "Policy/controller interface and measured outcome",
+              "Treating a high sampling rate as end-to-end control bandwidth"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Preserve model and configuration specificity",
+            "body": [
+              "The same XELA page lists 275 Hz for the full Allegro configuration and different maxima for selected modules. Generic marketing text elsewhere on a product page must not overwrite the configuration-specific table. The existing uSkin profile separates Allegro and Tesollo layouts; use that profile instead of combining their sizes, counts or rates.",
+              "The 17 directory entries are dated research and product records, not a live stock or price feed. Unknown means the reviewed evidence did not establish a field. Request the exact revision and configuration, then compare candidates under the same reference and task protocol."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "XELA Allegro V4 Curved: configuration-specific table",
+            "href": "https://xelarobotics.com/products/for-allegro-hand-v4-curved/"
+          },
+          {
+            "label": "Model-specific uSkin evidence",
+            "href": "/sensors/xela-uskin"
+          },
+          {
+            "label": "Original DIGIT output and calibration boundaries",
+            "href": "/sensors/digit"
+          },
+          {
+            "label": "Define calibration reference and conditions",
+            "href": "/guides/tactile-sensor-calibration"
+          }
+        ]
+      },
       {
         id: 'human-demonstration-gloves',
         heading: 'Selecting tactile gloves for human demonstration capture',
@@ -5210,15 +5535,16 @@ export const seoTopicPages: SeoTopicPage[] = [
     paperBriefIds: ['missing-touch-spatial-tactile-feedback-teleoperation-2026', 'freetacman-robot-free-visuotactile-data-collection-2025', 'dream-tac-tactile-world-action-model-2026'],
   },
   {
+    revisionNote: "November 4, 2026: rechecked the grant and publication records and added a source-selection guide. Historical dates remain unchanged; full chapter access and modern product performance are not claimed.",
     path: '/research/eu-roboskin-project',
     title: 'EU ROBOSKIN Project (2009-2012): History and Research',
     description:
-      'A source-backed record of the EU FP7 ROBOSKIN project, its robot-skin research scope, funding, partners, 2013 Springer paper, and relationship to RoboSkin.ai.',
+      "Verify the historical EU ROBOSKIN grant and 2013 paper separately. Distinguish project objectives, archived records and present-day robot-skin evidence.",
     h1: 'The EU FP7 ROBOSKIN project: history, scope and sources',
     kicker: 'Historical research project',
     intent: 'Entity and disambiguation page for the ROBOSKIN project, EU robot skin research, FP7-231500, and the 2013 ROBOSKIN conference paper.',
     published: '2026-08-20',
-    updated: '2026-08-20',
+    updated: "2026-11-04",
     priority: 0.8,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -5230,6 +5556,74 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The former EU ROBOSKIN consortium and the current RoboSkin.ai website are separate entities. RoboSkin.ai did not participate in the FP7 project and does not claim endorsement by its authors, partners, Springer Nature, or the European Commission.',
     ],
     sections: [
+      {
+        "id": "historical-source-selection",
+        "heading": "Choose the source that can answer the historical question",
+        "body": [
+          "The grant record and the research paper serve different purposes. CORDIS establishes the formal project identity; the Springer record identifies a later publication. Neither a record archive date nor this page’s review date changes when the project ran. Cite the relevant original record when making a historical statement.",
+          "The public Springer abstract and bibliographic record were reviewed for this page. The full subscription chapter was not inspected during this update, so no new detailed experimental results are inferred from it. The CORDIS objectives describe intended work, not a list of commercially certified capabilities."
+        ],
+        "table": {
+          "headers": [
+            "Question",
+            "Best starting source",
+            "Limit of that source"
+          ],
+          "rows": [
+            [
+              "What was funded, and when?",
+              "CORDIS grant 231500",
+              "Funding and objectives do not quantify achieved sensor performance"
+            ],
+            [
+              "Which publication discusses the project?",
+              "Springer DOI and the university publication record",
+              "Public abstract and metadata do not expose the full experimental protocol"
+            ],
+            [
+              "Can a present robot use the technology?",
+              "Current hardware, interface and evaluation documentation",
+              "Historical consortium participation does not establish current supply or support"
+            ],
+            [
+              "Is the present RoboSkin.ai site affiliated?",
+              "The independent-site disclosure on this page",
+              "A shared name is not evidence of institutional continuity"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Use the history to frame a modern engineering question",
+            "body": [
+              "The enduring question is how distributed contact observations become useful robot behavior. For a current system, ask which body regions are covered, how observations are calibrated and timed, and which action changes because of contact. Answer those questions with evidence from the current configuration rather than transferring an old project objective into a new specification.",
+              "Preserve the grant identifier and publication DOI in a citation note. Add the claim being supported and the source section, so a reader can distinguish project administration from research evidence. This is a suggested reading practice, not a claim that the historical consortium validated present-day products."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "CORDIS: formal grant record",
+            "href": "https://cordis.europa.eu/project/id/231500"
+          },
+          {
+            "label": "Springer: chapter record and public abstract",
+            "href": "https://link.springer.com/chapter/10.1007/978-3-7091-1379-0_43"
+          },
+          {
+            "label": "University of Hertfordshire: publication metadata",
+            "href": "https://researchprofiles.herts.ac.uk/en/publications/the-roboskin-project-challenges-and-results/"
+          },
+          {
+            "label": "Current large-area skin integration questions",
+            "href": "/humanoid-robot-skin"
+          },
+          {
+            "label": "Current sensing and signal interpretation",
+            "href": "/technology"
+          }
+        ]
+      },
       {
         heading: 'Verified project record',
         body: [
@@ -7105,13 +7499,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robotics-datasets',
     title: 'Robotics Datasets for Robot Learning & Manipulation',
     description:
-      'Compare robotics datasets by robot, task, modality, action space, timing, access, and license. Find robot learning, manipulation, teleoperation, VLA, and humanoid data.',
+      "Plan robot dataset conversion with episode boundaries, action meaning, timing and held-out splits; distinguish a file format from a policy contract.",
     h1: 'Robotics datasets: data for robot learning and evaluation',
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
     published: '2026-08-21',
-    updated: '2026-10-23',
-    revisionNote: 'October 23, 2026: added a SoftMimicGen research-review route distinguishing generated episodes, physical policy evaluation and artifact rights; earlier evidence and source dates are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: added a conversion-evidence handoff and refreshed the PRISM route wording. Original dataset records and source dates remain distinct; no data loading or model run.",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -7123,6 +7517,70 @@ export const seoTopicPages: SeoTopicPage[] = [
       'This page covers broad robot learning, manipulation, teleoperation, VLA, and humanoid data. RoboSkin.ai’s /datasets directory remains the specialized hub for tactile and visuo-tactile robotics datasets.',
     ],
     sections: [
+      {
+        "id": "dataset-conversion-handoff",
+        "heading": "Conversion changes a container, not the meaning of an action",
+        "body": [
+          "LeRobot v3 stores multiple episodes in shared files and uses metadata to recover each episode. A file boundary is therefore not a reliable trajectory boundary. Converting records into that layout does not establish whether an action is a position, displacement, velocity, gripper command or an operator reference.",
+          "Open X-Embodiment illustrates the semantic problem: coarse alignment can leave different reference frames and absolute, relative or velocity conventions. A loader that produces the expected array shape has passed a storage/interface check, not a physical equivalence test. Preserve the source contract before adapting a model."
+        ],
+        "table": {
+          "headers": [
+            "Before conversion",
+            "After conversion",
+            "Acceptance evidence"
+          ],
+          "rows": [
+            [
+              "Episode identity and terminal state",
+              "Stable IDs, boundaries and valid next-observation handling",
+              "Same episode membership; no accidental cross-episode transition"
+            ],
+            [
+              "Action convention and reference frame",
+              "Documented transform and normalization",
+              "Known source action maps to the intended target quantity"
+            ],
+            [
+              "Observation time and validity",
+              "Clock semantics, missing samples and alignment policy",
+              "No fabricated contact sample or unexplained time shift"
+            ],
+            [
+              "Source split and provenance",
+              "Stable source membership and derived-data version",
+              "Held-out groups stay separate after packing and filtering"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A proposed conversion receipt",
+            "body": [
+              "Record the source revision, selected episodes, converter revision, excluded records and reasons, field mapping, normalization source and output manifest. Keep raw and transformed meanings in the receipt so a future reader can reconstruct why a value changed. Do not describe a converted release as independently collected data.",
+              "For a policy recipe, compare the transformed observation/action contract against that exact checkpoint and robot adapter. The existing LeRobot walkthrough provides small synthetic checks and a separately dated loader record; this page update did not run a new conversion, loader or training job."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "LeRobot v3: storage and episode metadata",
+            "href": "https://huggingface.co/blog/lerobot-datasets-v3"
+          },
+          {
+            "label": "Open X-Embodiment: coarse action alignment",
+            "href": "https://arxiv.org/html/2310.08864v9#S4.SS1"
+          },
+          {
+            "label": "LeRobot validation and its actual limits",
+            "href": "/guides/lerobot-dataset-format"
+          },
+          {
+            "label": "Model action-interface requirements",
+            "href": "/robot-vla-models#vla-interface-handoff"
+          }
+        ]
+      },
       {
         heading: 'Robotics datasets and tactile datasets serve different scopes',
         body: [
@@ -7161,7 +7619,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Resource', 'Scope', 'Primary-source signal', 'Boundary to verify'],
           rows: [
-            ['PRISM', 'Contact-rich industrial manipulation across Franka, Realman, and a source-literal LEJU upper-body humanoid setup', 'The 2026 preprint reports 5,000+ robot trajectories, paired human demonstrations, 45+ hours, and three teleoperation interfaces', 'Tactile signals cover only a subset, and the official dataset control remained marked “soon” on 2026-08-22'],
+            ['PRISM', 'Contact-rich industrial manipulation across Franka, Realman, and a source-literal LEJU upper-body humanoid setup', 'The 2026 preprint reports 5,000+ robot trajectories, paired human demonstrations, 45+ hours, and three teleoperation interfaces', 'Tactile signals cover only an unspecified subset. On November 4, 2026 the official project linked a ModelScope route; payload and dataset-file terms were not verified'],
             ['Open X-Embodiment', 'Aggregated multi-embodiment robot learning data', 'Research paper describes cross-institution robot data and generalist-policy experiments', 'Individual source datasets, embodiments, action mappings, and licenses differ'],
             ['DROID', 'Large real-world robot manipulation dataset', 'Paper documents diverse manipulation collection across settings and tasks', 'Read the current project and dataset records for exact access, version, schema, and license'],
             ['LeRobot datasets', 'Open tooling and standardized dataset format for robot episodes', 'Official documentation and Dataset v3 materials describe storage and loading conventions', 'Quality and rights remain dataset-specific; format compatibility is not capability evidence'],

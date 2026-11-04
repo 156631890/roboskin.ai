@@ -19,30 +19,30 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /vla/models | rewritten and production verified in PR137 | 2817 | 5 |
 | /vla/timeline | rewritten and production verified in PR137 | 776 | 3 |
 | /vla/concepts | rewritten and production verified in PR137 | 1015 | 5 |
-| / | inventory only; claim-by-claim review pending | 1580 | 63 |
+| / | individual content review complete; final production verification pending | 1580 | 63 |
 | /products | rewritten and production verified in PR120 | 509 | 4 |
 | /solutions | rewritten and production verified in PR120 | 403 | 2 |
-| /applications | inventory only; claim-by-claim review pending | 653 | 12 |
-| /technology | inventory only; claim-by-claim review pending | 2571 | 19 |
+| /applications | individual content review complete; final production verification pending | 653 | 12 |
+| /technology | individual sensing and terminology review; production verification pending | 2571 | 19 |
 | /physical-ai | rewritten and production verified in PR136 | 908 | 22 |
 | /resources | rewritten and production verified in PR122 | 2711 | 70 |
-| /faq | inventory only; claim-by-claim review pending | 488 | 3 |
+| /faq | individual content review complete; final production verification pending | 488 | 3 |
 | /research | rewritten and production verified in PR122 | 3103 | 192 |
 | /research-index | rewritten and production verified in PR122 | 4238 | 15 |
 | /papers | rewritten and production verified in PR122 | 186 | 3 |
 | /papers/interaction-as-the-interface | rewritten and production verified in PR122 | 687 | 2 |
-| /organizations | inventory only; claim-by-claim review pending | 11081 | 6 |
-| /robots | inventory only; claim-by-claim review pending | 5225 | 12 |
-| /glossary | inventory only; claim-by-claim review pending | 1355 | 9 |
+| /organizations | individual directory reading review; production verification pending | 11081 | 6 |
+| /robots | individual directory reading review; production verification pending | 5225 | 12 |
+| /glossary | individual sensing and terminology review; production verification pending | 1355 | 9 |
 | /about | rewritten and production verified in PR120 | 582 | 167 |
 | /editorial-policy | rewritten and production verified in PR120 | 897 | 185 |
 | /methodology | rewritten and production verified in PR120 | 918 | 4 |
 | /news | rewritten and production verified in PR122 | 4407 | 78 |
 | /contact | rewritten and production verified in PR120 | 239 | 196 |
 | /research-services | rewritten and production verified in PR120 | 540 | 63 |
-| /reports/tactile-ai-robot-skin-landscape-2026 | business/policy page; preserve factual services and legal scope; not an article rewrite | 485 | 50 |
-| /privacy | business/policy page; preserve factual services and legal scope; not an article rewrite | 892 | 0 |
-| /terms | business/policy page; preserve factual services and legal scope; not an article rewrite | 611 | 0 |
+| /reports/tactile-ai-robot-skin-landscape-2026 | individual research-reading review; production verification pending | 485 | 50 |
+| /privacy | individual content review complete; final production verification pending | 892 | 0 |
+| /terms | individual content review complete; final production verification pending | 611 | 0 |
 | /research/opentac-custom-tactile-skins-readout-limits-2026 | rewritten and production verified in PR119 | 1776 | 6 |
 | /research/softmimicgen-synthetic-data-sim-to-real-2026 | rewritten and production verified in PR119 | 2366 | 4 |
 | /research/slipsense-multimodal-slip-detection-2026 | rewritten and production verified in PR118 | 1304 | 10 |
@@ -169,7 +169,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /robot-grippers | rewritten and production verified in PR125 | 1187 | 2 |
 | /electronic-skin | rewritten and production verified in PR134 | 772 | 11 |
 | /robot-tactile-sensors | rewritten and production verified in PR135 | 1250 | 2 |
-| /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
+| /humanoid-robot-companies | individual directory reading review; production verification pending | 850 | 2 |
 | /embodied-ai | rewritten and production verified in PR136 | 736 | 1 |
 | /guides/3d-printed-tactile-sensors | rewritten and production verified in PR118 | 1376 | 2 |
 | /guides/optical-tactile-sensor-maintenance | rewritten and production verified in PR106 | 1273 | 7 |
@@ -196,7 +196,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
 | /e-skin | rewritten and production verified in PR135 | 2724 | 16 |
 | /humanoid-robot-skin | rewritten and production verified in PR135 | 1560 | 25 |
-| /applications/robot-hand-tactile-sensor | inventory only; claim-by-claim review pending | 1203 | 31 |
+| /applications/robot-hand-tactile-sensor | individual sensing and terminology review; production verification pending | 1203 | 31 |
 | /applications/soft-robotic-skin | rewritten and production verified in PR103 | 611 | 10 |
 | /guides/flexible-tactile-sensor-array | rewritten and production verified in PR103 | 613 | 10 |
 | /physical-ai-touch | rewritten and production verified in PR135 | 2153 | 29 |
@@ -205,25 +205,25 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/robot-touch-sensor | rewritten and production verified in PR103 | 881 | 3 |
 | /guides/slip-detection-robot-hand | rewritten and production verified in PR103 | 645 | 18 |
 | /guides/robot-skin-vs-e-skin | rewritten and production verified in PR103 | 518 | 9 |
-| /research/robot-skin-papers | inventory only; claim-by-claim review pending | 777 | 8 |
+| /research/robot-skin-papers | individual research-reading review; production verification pending | 777 | 8 |
 | /guides/robot-skin-vs-tactile-sensor | rewritten and production verified in PR103 | 645 | 3 |
 | /guides/tactile-feedback-for-physical-ai | rewritten and production verified in PR118 | 3086 | 14 |
 | /guides/tactile-sensor-benchmark-robot-manipulation | rewritten and production verified in PR118 | 1500 | 13 |
-| /datasets | inventory only; claim-by-claim review pending | 17213 | 94 |
-| /tactile-foundation-models | individual model-interface review; production verification pending | 2571 | 37 |
+| /datasets | individual directory-evidence review; production verification pending | 17213 | 94 |
+| /tactile-foundation-models | rewritten and production verified in PR138 | 2571 | 37 |
 | /guides/visuo-tactile-world-models-robot-manipulation | rewritten and production verified in PR118 | 1932 | 21 |
-| /benchmarks | inventory only; claim-by-claim review pending | 5157 | 40 |
-| /sensors | inventory only; claim-by-claim review pending | 6094 | 110 |
+| /benchmarks | individual directory-evidence review; production verification pending | 5157 | 40 |
+| /sensors | individual directory-evidence review; production verification pending | 6094 | 110 |
 | /tactile-manipulation | rewritten and production verified in PR121 | 2323 | 65 |
-| /research/eu-roboskin-project | inventory only; claim-by-claim review pending | 1029 | 4 |
+| /research/eu-roboskin-project | individual research-reading review; production verification pending | 1029 | 4 |
 | /visuo-tactile | rewritten and production verified in PR124 | 1040 | 22 |
 | /humanoid-robots | rewritten and production verified in PR128 | 1242 | 23 |
-| /robot-vla-models | individual model-interface review; production verification pending | 11478 | 41 |
+| /robot-vla-models | rewritten and production verified in PR138 | 11478 | 41 |
 | /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
 | /robot-learning | rewritten and production verified in PR130 | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
 | /robot-safety | rewritten and production verified in PR132 | 1391 | 12 |
-| /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
+| /robotics-datasets | individual directory-evidence review; production verification pending | 3039 | 32 |
 | /robot-world-models | rewritten and production verified in PR129 | 5409 | 25 |
 | /robot-teleoperation | rewritten and production verified in PR123 | 3967 | 32 |
 
@@ -358,3 +358,23 @@ Nineteen first-submission dates checked; three separate reader decisions added. 
 ## VLA and tactile representation transfer
 
 Qualified catalog scope, added an action-interface handoff and adaptation ledger, and clarified estimated force supervision. Original source dates and modules retained. Whole-site review remains incomplete.
+
+## Directory evidence review
+
+Four individual directory decisions: manifest versus payload, semantic conversion, score reconstruction and sensor output chains. PRISM access changes only to linked/unverified. Record counts and fixed research snapshots retained. Whole-site review remains active.
+
+## Organization and platform directory review
+
+Separate attribution, artifact stewardship, exact robot configurations and procurement evidence. Five company rows rechecked; 1X location corrected. Research entity IDs, relationships and their historical dates preserved. Whole-site review remains active.
+
+## Sensing, terminology and hand-task decisions
+
+Added measurement-chain diagnosis, source-linked metrology distinctions and task-specific hand observations. Qualified binary-contact and vision-limit claims. Existing anchors, dates and layout modules retained. Whole-site review remains active.
+
+## Research reading, history and fixed report scope
+
+Added claim-to-evidence reading, historical source selection and a dated report addendum. Fixed PDF bytes and edition retained; FreeTacMan data/code license distinction explained. Whole-site review remains active.
+
+## Final five individual content decisions
+
+All 210 URLs now have individual source/content decisions and revisions. 192 preceding URLs have production evidence; the final eighteen in this commit require exact production verification before the programme can be marked complete. Final evidence is recorded in the task publication handoff and batch88 final release record after deployment. No human factual sign-off or independent hardware validation is claimed.

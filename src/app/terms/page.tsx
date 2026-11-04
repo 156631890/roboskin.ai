@@ -1,9 +1,78 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { site } from '@/content/site';
 import { buildBreadcrumbJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/terms');
+
+const readingGuide = {
+  "id": "subscription-controls",
+  "heading": "Choose the action that matches your request",
+  "body": [
+    "Email preferences, subscription renewal and a refund request are separate actions. This guide points to the existing controls and terms below; it does not change the price, refund window or other service terms."
+  ],
+  "table": {
+    "headers": [
+      "What you want to do",
+      "Action",
+      "Important distinction"
+    ],
+    "rows": [
+      [
+        "Read public research",
+        "Open the public guides and research pages",
+        "No report membership is required"
+      ],
+      [
+        "Stop report notification emails",
+        "Change the preference on your membership page",
+        "Billing continues unless renewal is canceled"
+      ],
+      [
+        "Stop future subscription renewals",
+        "Use the Waffo billing portal with the purchase email",
+        "Canceling renewal alone does not refund a paid period"
+      ],
+      [
+        "Report a billing or delivery problem",
+        "Contact support with the purchase email and order reference",
+        "A support request is not confirmation that a refund was processed"
+      ],
+      [
+        "Discuss bespoke research",
+        "Agree a written scope, price and schedule before work starts",
+        "Sending an inquiry does not create a charge"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Keep the service and purchase record identifiable",
+      "body": [
+        "Use the email associated with the relevant purchase and retain the order reference. Do not send card numbers or sign-in codes. Consult the full cancellation, refund and access provisions below for the effect of an approved action."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Manage report email preferences",
+      "href": "/weekly-reports"
+    },
+    {
+      "label": "Waffo billing portal",
+      "href": "https://pancake.waffo.ai/consumer/portal/login"
+    },
+    {
+      "label": "Contact support",
+      "href": "/contact?requestType=other"
+    },
+    {
+      "label": "Privacy choices",
+      "href": "/privacy#privacy-controls"
+    }
+  ]
+};
 
 export default function TermsPage() {
   return (
@@ -14,9 +83,27 @@ export default function TermsPage() {
           <div className="container-shell">
             <span className="eyebrow">Terms</span>
             <h1 className="mt-5 text-4xl font-bold md:text-6xl">Terms of Service</h1>
-            <p className="mt-5 max-w-3xl">Last updated: October 16, 2026</p>
+            <p className="mt-5 max-w-3xl">Last updated: October 16, 2026. Navigation guide reviewed November 4, 2026.</p>
           </div>
         </header>
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing research dates and service terms remain separately identified.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-inherit">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-black/20 p-4 text-inherit">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-black/20 p-4 align-top text-inherit">{text}</th> : <td key={text} className="border-b border-black/20 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-inherit">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-inherit underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
         <section className="legal-content">
           <div className="container-shell">

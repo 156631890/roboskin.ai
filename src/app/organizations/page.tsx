@@ -86,6 +86,71 @@ function manufacturedAsset(relation: ManufacturedByRelation) {
   return { name: entry.name, href: `/robots#robot-${entry.id}`, type: 'Robot platform' };
 }
 
+const readingGuide = {
+  "id": "organization-responsibility",
+  "heading": "Find the responsible source for the question you need answered",
+  "body": [
+    "An institution name is a starting point, not a universal support address. A paper author can explain the reported method; a repository maintainer can clarify a particular release; a dataset publisher controls its access route; a hardware provider documents its product. Those roles can belong to different people and organizations in the same project.",
+    "OpenVLA provides a useful example. Its project lists authors across Stanford, Berkeley, Toyota Research Institute, Google DeepMind, Physical Intelligence and MIT, alongside separate paper, code and model links. The author list supports attribution. To decide whether a particular checkpoint fits a robot, follow the model and evaluation sources rather than treating every listed institution as a vendor or guarantor."
+  ],
+  "table": {
+    "headers": [
+      "Your question",
+      "Follow this evidence route",
+      "Record before relying on it"
+    ],
+    "rows": [
+      [
+        "Who contributed to the research?",
+        "Paper author list and the affiliation used in that version",
+        "Paper version, source wording and specific relationship"
+      ],
+      [
+        "Who maintains the artifact?",
+        "Official project link to repository, model card or data portal",
+        "Artifact revision, issue/support route and release completeness"
+      ],
+      [
+        "Who supplies the hardware?",
+        "Exact product or provider documentation",
+        "Model, configuration and available integration documentation"
+      ],
+      [
+        "Who can permit reuse?",
+        "Terms attached to the specific artifact",
+        "Code, data, weights and media separately; unresolved restrictions"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Avoid a misleading relationship chain",
+      "body": [
+        "Suppose a lab appears on a paper that uses a commercial sensor. That supports a source affiliation and a sensor-use relationship. It does not establish that the lab manufactures the sensor, that the manufacturer owns the paper, or that either supplies the released policy. Follow each edge to its own citation before making the next inference.",
+        "The relationship counts below describe this directory’s reviewed selection. They are not publication totals or measures of research quality. A company with several linked assets is not necessarily more capable than an organization with one. Keep the dated identity and relationship checks visible; this reading update does not refresh every organization’s employment, ownership or release status."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "OpenVLA: author affiliations and separate artifacts",
+      "href": "https://openvla.github.io/"
+    },
+    {
+      "label": "Inspect robot-specific evaluation relationships",
+      "href": "/robots"
+    },
+    {
+      "label": "Check artifact access and data terms",
+      "href": "/datasets"
+    },
+    {
+      "label": "Request a scoped evidence review",
+      "href": "/research-services"
+    }
+  ]
+};
+
 export default function OrganizationsPage() {
   const modelById = new Map(robotAiModelEntries.map((entry) => [entry.id, entry]));
   const organizationById = new Map(researchOrganizationEntries.map((entry) => [entry.id, entry]));
@@ -499,6 +564,24 @@ export default function OrganizationsPage() {
           </section>
         );
       })}
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Individual source dates remain on the records; no hardware or model testing.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
       <section className="pb-20">
         <div className="container-shell grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">

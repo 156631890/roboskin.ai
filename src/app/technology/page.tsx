@@ -65,6 +65,79 @@ const technologyTopicLinks = [
   },
 ];
 
+const readingGuide = {
+  "id": "tactile-diagnostic-trace",
+  "heading": "Diagnose the measurement chain before changing the policy",
+  "body": [
+    "A wrong contact response can originate at several layers. The surface may deform differently after mounting, the raw stream may change, a calibrated mapping may be outside its training range, or the controller may consume an old observation. A single task failure cannot identify which layer caused it. Preserve the intermediate observations that let you distinguish these explanations.",
+    "DIGIT illustrates the first distinction: a camera records the elastomer’s appearance. DenseTact 2.0 explicitly adds learned shape reconstruction and six-axis wrench estimation. Treat the image, reconstructed geometry, estimated wrench and resulting robot action as separate outputs, with their own reference and timing checks. A plausible-looking map is not a calibration result."
+  ],
+  "table": {
+    "headers": [
+      "Observed problem",
+      "Proposed discriminating check",
+      "Keep in the record"
+    ],
+    "rows": [
+      [
+        "Baseline changes without intended contact",
+        "Compare unloaded raw output under the relevant mounting and operating conditions",
+        "Surface revision, pose, environment and raw samples"
+      ],
+      [
+        "Raw signal changes but force estimate is implausible",
+        "Compare reference loading with the mapping’s units, directions and calibrated range",
+        "Reference method, loading history and inference revision"
+      ],
+      [
+        "Estimate looks right but arrives too late",
+        "Trace acquisition, receipt, processing and command times using understood clock domains",
+        "Clock relationship, queues, drops and command age"
+      ],
+      [
+        "Fresh estimate reaches the controller but task fails",
+        "Inspect the action rule and repeat the defined task comparison",
+        "Executed commands, interventions, failures and full attempt count"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Zeroing is one operation, not a complete calibration",
+      "body": [
+        "Subtracting an unloaded offset may correct that baseline under the tested condition. It does not establish the response slope, axis separation, loading-history effects or error elsewhere in the range. The international metrology vocabulary distinguishes calibration from adjustment; preserve the reference and uncertainty information behind a reported physical value.",
+        "For an engineering investigation, change one documented factor at a time where practical and retain both raw and processed signals. If a replacement surface changes the response, repeat the relevant calibration and task checks. This is a proposed diagnostic sequence; RoboSkin.ai has not performed these hardware measurements."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "DIGIT: optical readout and replaceable surface",
+      "href": "https://arxiv.org/html/2005.14679v1#S3"
+    },
+    {
+      "label": "DenseTact 2.0: learned shape and wrench reconstruction",
+      "href": "https://arxiv.org/abs/2209.10122v2"
+    },
+    {
+      "label": "JCGM VIM: calibration versus adjustment",
+      "href": "https://jcgm.bipm.org/vim/en/2.39.html"
+    },
+    {
+      "label": "Design reference-load checks",
+      "href": "/guides/tactile-sensor-calibration"
+    },
+    {
+      "label": "Trace timestamps and replay boundaries",
+      "href": "/guides/ros2-tactile-sensing"
+    },
+    {
+      "label": "Compare sensor outputs and inference chains",
+      "href": "/sensors"
+    }
+  ]
+};
+
 export default function TechnologyPage() {
   return (
     <>
@@ -106,6 +179,24 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
+
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing source and research dates remain separate; no hardware measurements.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
+        </div>
+      </div>
+    </section>
 
       <TactileTopicSections sections={technologyAdditions} />
       <TactileTopicSections sections={[senseAlignSection]} />
@@ -186,8 +277,7 @@ export default function TechnologyPage() {
               </div>
               <div>
                 <p className="text-sm leading-relaxed text-soft">
-                  For Physical AI systems, robot skin is the contact layer. It helps expose touch, pressure,
-                  shear, slip, and timing signals that vision alone cannot measure during interaction.
+                  For Physical AI systems, robot skin is the contact layer. It supplies contact observations that may be difficult to infer from external images, especially during occluded interaction. Available pressure, shear or slip estimates depend on the sensing and processing pipeline.
                 </p>
                 <Link href="/physical-ai" className="mt-5 inline-flex text-sm font-semibold text-accent hover:text-white">
                   Open the Physical AI tactile contact layer {'->'}
