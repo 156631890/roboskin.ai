@@ -6420,20 +6420,20 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-world-models',
     title: 'Robot World Models: Prediction, Planning & Control',
     description:
-      'Explore world models for robot learning and control: action-conditioned prediction, latent vs video models, manipulation examples and tactile feedback.',
+      "Compare robot world-model prediction interfaces, action timing and physical evidence; separate training objectives, online forecasts and task outcomes.",
     h1: 'Robot world models: prediction for physical action',
-    kicker: 'Robot learning model pillar',
+    kicker: "Prediction, action and evidence",
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: '2026-10-17',
-    revisionNote: 'Added a source-reviewed MAIA/CRIA evidence note. Existing model-table records retain their original review dates; no RoboSkin replication was performed.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed the full overview and primary sources; added prediction/runtime comparisons and clarified model definitions, timing and release scope. Existing structured records retain their own review dates; no model execution or robotics reproduction is claimed.",
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
     visualKey: 'technology',
     keywords: ['robot world models', 'world models for robotics', 'robot world model', 'world action model', 'predictive robot model', 'learned robot dynamics', 'world model robot manipulation', 'tactile world model', 'Physical AI world model', 'world models for robot learning', 'world models for robotic manipulation', 'world models for robot control', 'action-conditioned world model', 'vision language action world models'],
     quickAnswer: [
-      'A robot world model predicts how an environment, robot state, observation, reward, or contact state may change after an action. The prediction can be in pixels, tactile observations, explicit state, or a learned latent representation.',
+      'A robot world model predicts task-relevant evolution of an environment, robot state, observation or contact. Comparing candidate commands requires action-sensitive predictions; some world-action systems instead use prediction as training supervision or context for a policy. Inspect that interface rather than inferring it from the name.',
       'A world model is not automatically a robot policy, VLA, foundation model, or planner. Those components can share a backbone or be combined, but prediction, action selection, language grounding, and reusable pretraining are different roles.',
       'The decisive evidence is not whether a rollout looks plausible. It is whether prediction supports better planning, control, data efficiency, recovery, or task outcomes under a named robot, task, horizon, baseline, and real-world protocol.',
     ],
@@ -6441,7 +6441,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'What a robot world model predicts',
         body: [
-          'A world model represents a transition: given a current state or observation and a candidate action, what may happen next? Some systems predict one step; others roll forward over a horizon. Some generate camera or tactile observations, while others predict compact latent state, object pose, contact, reward, or terminal conditions.',
+          'For explicit consequence comparison, a world model represents a transition: given an observation and a candidate action, what may happen next? Other predictive systems supply goals, latent context or training targets without exposing that candidate-action interface. Targets can include future images, tactile observations, object state or contact; reward and termination estimates can accompany them.',
           'The target determines the evaluation. Pixel similarity may be useful for visual prediction but may miss contact geometry or task-critical errors. A latent model may plan effectively without reconstructing every image detail, but its internal state needs task-level validation.',
         ],
         table: {
@@ -6450,7 +6450,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Observation-space model', 'Future RGB, depth, tactile image, audio, or multimodal frame', 'Prediction metrics plus task use', 'Plausible images can hide physically wrong state'],
             ['State-space model', 'Pose, velocity, contact, force-related state, slip, or task variables', 'Calibrated state error and downstream control', 'Requires measured or estimated state labels'],
             ['Latent world model', 'Compact learned future representation', 'Planning value, probes, ablations, and closed-loop outcome', 'Latent quality cannot be judged from visualization alone'],
-            ['Reward or value model', 'Predicted success, progress, preference, or return', 'Ranking quality and policy outcomes', 'Can exploit narrow labels or miss unmodeled hazards'],
+            ['Related utility model', 'Predicted success, progress, preference, or return', 'Ranking quality and policy outcomes', 'Not a world model by itself without a model of future world evolution'],
           ],
         },
       },
@@ -6559,7 +6559,7 @@ export const seoTopicPages: SeoTopicPage[] = [
           "MAIA uses visual and wrist force/torque history plus planned actions to predict future interactions and anomalies. Its CRIA corpus contains 2,852 trajectories across 18 tasks. Collection used a Franka FR3, an ATI Axia80-M8 wrist F/T sensor and three cameras. An interaction anomaly is not necessarily final task failure.",
           "In Section VI-E, a frozen pi0.5 proposes eight action chunks; MAIA selects the lowest predicted anomaly probability and executes the first 20 actions. The authors report 52.6% versus 61.5% success over 18 tasks, with 30 trials per task per method (540 per method, calculated). This is 8.9 percentage points, not a universal improvement.",
           "The predictor was trained on 13 seen tasks and adapted using task-specific data for five novel tasks. No policy retraining does not mean no predictor training or adaptation. Single-platform, fixed-sensor experiments leave hardware transfer unestablished. The method predicts anomalies rather than supplying root-cause diagnosis or autonomous recovery.",
-          "Evidence: arXiv v1, submitted October 15, 2026 at 11:11:27 UTC; reviewed here October 17. Code, weights, downloadable data and their licenses were not verified. This is not a released-dataset listing or runnable tutorial.",
+          "Evidence: arXiv v1, submitted October 15, 2026 at 11:11:27 UTC; method and evaluation rechecked November 4. Code, weights, downloadable data and their licenses remain unverified through the reviewed sources. The linked project route returned HTTP 404 during this check, which does not establish that no release exists elsewhere. This is not a released-dataset listing or runnable tutorial.",
           "For a sensing decision, distinguish a wrist F/T signal from a spatial skin-contact map: they expose different information. This result does not establish performance with distributed robot skin. RoboSkin reviewed the paper only; no reproduction, hardware migration or safety certification is claimed."
         ],
         "bullets": [
@@ -6588,6 +6588,88 @@ export const seoTopicPages: SeoTopicPage[] = [
         ]
       },
       {
+        "id": "prediction-runtime-contracts",
+        "heading": "Trace the prediction interface before comparing models",
+        "body": [
+          "The label world-action model does not identify one deployment loop. Some systems discard prediction after training; others use online latent forecasts or cached video context. An object renderer and a body-triggered strategy selector solve still different problems. Check the actual inputs, outputs and execution path before comparing their reported scores.",
+          "The following research examples are author-reported and use different tasks, sensors and protocols. They are a map of interfaces, not a ranking or evidence that RoboSkin ran the systems."
+        ],
+        "table": {
+          "headers": [
+            "Example",
+            "Where prediction or estimation acts",
+            "What must remain separate"
+          ],
+          "rows": [
+            [
+              "SkeleWAM",
+              "Future skeleton supervision during training; action consensus at inference",
+              "Agreement among actions is not consequence scoring or contact confirmation"
+            ],
+            [
+              "TacDyn-WAM",
+              "Online latent tactile dynamics and current-state memory support action generation",
+              "Single-pass tactile prediction is not a fresh sensor update per command"
+            ],
+            [
+              "InternW0",
+              "Slow video context is routed to a faster action expert using current observations",
+              "Critical action latency excludes asynchronous video generation; released simulation assets omit contact-aware hardware assets"
+            ],
+            [
+              "Agile-WAM",
+              "Joint action and future-feature learning with different vision/touch horizons",
+              "Predicted next-frame touch is not measurement after every executed action"
+            ],
+            [
+              "TouchTherm",
+              "Object assets render tactile appearance and cooling fields",
+              "Texture appearance does not establish friction mechanics or contact heat exchange"
+            ],
+            [
+              "Body-grounded replanning",
+              "Joint-state monitoring triggers a bounded high-level strategy choice",
+              "Effort prediction is not action-conditioned world rollout or calibrated contact force"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Create a timing and outcome record",
+            "body": [
+              "For a proposed comparison, retain observation timestamp, predictive-context age, model query and completion times, executed-action prefix, next feedback opportunity and confirmed physical outcome. Report cold-start and steady-state timing separately when both matter. Dividing chunk latency by output length does not measure the delay until a disturbance can change the next command.",
+              "Then match the claim to its denominator: object recognition, forecast error, subtask progress, completed episodes and conditional recovery answer different questions. Keep training-data access, adaptation and checkpoint selection visible. A source or model link is an inspection route; implementation execution and hardware transfer need separate evidence."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "SkeleWAM: consensus and observation contracts",
+            "href": "/news/skelewam-sparse-skeleton-world-action-model"
+          },
+          {
+            "label": "TacDyn-WAM: latent prediction and chunk timing",
+            "href": "/news/tacdyn-wam-implicit-tactile-dynamics"
+          },
+          {
+            "label": "InternW0: two clocks and release scope",
+            "href": "/news/internw0-contact-aware-world-model-pipetting"
+          },
+          {
+            "label": "Agile-WAM: predictive learning and recovery evidence",
+            "href": "/news/agile-wam-tactile-world-action-model-robot-control"
+          },
+          {
+            "label": "TouchTherm: rendering, mechanics and heat",
+            "href": "/news/touchtherm-tactile-thermal-digital-twins"
+          },
+          {
+            "label": "Body-grounded replanning: events and strategy choice",
+            "href": "/news/body-grounded-replanning-physical-manipulation"
+          }
+        ]
+      },
+      {
         heading: 'World-model evidence checklist',
         body: [
           'A useful result identifies the training data, observation and action interfaces, target representation, horizon, uncertainty, compute, robot, task, baseline, and real-world trial protocol. It also reports what happens when prediction is wrong.',
@@ -6605,10 +6687,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
-      { question: 'What is a robot world model?', answer: 'It is a model that predicts how robot state, environment state, observations, rewards, or contact may change after an action.' },
+      { question: 'Does latency divided by action-chunk length measure feedback speed?', answer: 'No. That is amortized generation cost. Feedback speed also depends on when a new observation is acquired, how many commands execute before another query, predictive-context age and downstream control delay.' },
+      { question: 'Does released simulation code reproduce contact-aware hardware results?', answer: 'Not automatically. Check the released sensors, action interface, adapters, checkpoints and licenses. A simulation evaluator can exclude the physical contact extension described in the same paper.' },
+      { question: 'What is a robot world model?', answer: 'It predicts task-relevant future state or observations. For candidate-action comparison it must reflect those actions; predictive training objectives and goal-conditioned context inside world-action systems should be identified separately.' },
       { question: 'Is a robot world model the same as a VLA?', answer: 'No. A VLA maps visual and language context toward actions. A world model predicts consequences. One system can include both roles, but the labels are not interchangeable.' },
       { question: 'How are robot world models evaluated?', answer: 'Evaluate the prediction target and horizon, then test whether the model improves planning, control, data efficiency, recovery, or task outcomes under matched physical conditions.' },
-      { question: 'What is a tactile world model?', answer: 'It predicts future tactile observations or contact-related state conditioned on action, sometimes together with visual state, so planning or control can reason about physical contact.' },
+      { question: 'What is a tactile world model?', answer: 'It predicts future tactile observations or contact-related state, sometimes with vision. Verify whether it conditions on candidate actions, supplies latent context or serves only as a training target; those interfaces support different uses.' },
       { question: 'Does a plausible generated video prove a useful world model?', answer: 'No. Visual plausibility can hide physically wrong geometry, contact, timing, or action consequences. Downstream planning and repeated real-robot evidence are required for stronger claims.' },
       { question: 'Should world models for robotics be action-conditioned?', answer: 'When the goal is to compare candidate robot commands, the prediction must reflect those commands through a documented action interface. A goal-conditioned video alone does not establish this capability. Test whether changing the candidate action changes the predicted outcome appropriately, and verify those differences against measured transitions.' },
       { question: 'What is the difference between latent and video world models?', answer: 'Video world models predict observable frames, while latent world models predict learned features. Video is easier to inspect visually; latent prediction can avoid reconstructing every pixel. Either can lose contact-critical information, so compare action sensitivity, task-relevant state, computation and downstream robot outcomes.' },
@@ -6629,6 +6713,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Robotics datasets', href: '/robotics-datasets', description: 'Review the data contracts behind predictive robot models.' },
     ],
     sources: [
+      {"label": "skelewam sparse skeleton world action model \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.02120v1"},
+      {"label": "tacdyn wam implicit tactile dynamics \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.00638v1"},
+      {"label": "touchtherm tactile thermal digital twins \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.01943v1"},
+      {"label": "internw0 contact aware world model pipetting \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.27656v1"},
+      {"label": "agile wam tactile world action model robot control \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.20761v1"},
+      {"label": "body grounded replanning physical manipulation \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.30024v1"},
       { label: 'MAIA / CRIA arXiv v1, reviewed October 17, 2026', href: 'https://arxiv.org/abs/2610.21686v1' },
       { label: 'Hugging Face LeRobot v0.6', href: 'https://huggingface.co/blog/lerobot-release-v060' },
       { label: 'World Models for Robotic Manipulation: A Survey', href: 'https://arxiv.org/abs/2606.00113' },
