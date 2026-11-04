@@ -4712,12 +4712,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/visuo-tactile',
     title: 'Visuo-Tactile Robotics: Perception, Data and Manipulation',
     description:
-      'Understand visuo-tactile robotics: how robots align vision and touch for contact perception, representation learning, world models, and manipulation.',
+      "Choose a vision-touch design by signal provenance, runtime inputs, timing and matched evaluation; distinguish inferred contact from physical measurement.",
     h1: 'Visuo-tactile robotics: combining sight and touch',
     kicker: 'Multimodal tactile AI pillar',
     intent: 'Pillar guide for visuo-tactile perception, visuo-tactile manipulation, vision touch fusion, multimodal tactile AI, and robot learning.',
     published: '2026-08-19',
-    updated: '2026-08-19',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed the full guide and primary sources; added training/runtime distinctions, task-specific evaluation decisions and six detailed report links. No robot reproduction is claimed.",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4725,21 +4726,21 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['visuo-tactile', 'visuo-tactile perception', 'visuo-tactile manipulation', 'vision touch fusion robotics', 'multimodal tactile AI', 'visuo-tactile representation learning'],
     quickAnswer: [
       'Visuo-tactile robotics combines external visual observations with touch measured at the robot-object interface. Vision explains scene context and approach; touch explains what happens during physical contact.',
-      'The two modalities must be aligned by time, robot state, contact event, and task. Simply concatenating an image embedding and tactile embedding does not prove that the model uses contact information.',
-      'Visuo-tactile systems support material understanding, contact localization, grasp stability, insertion, dexterous manipulation, and action-conditioned world models. Each role needs a different evaluation protocol.',
+      'The two modalities must be aligned by time, robot state, contact event, and task. Concatenation can be a useful baseline, but its output alone does not show whether a policy relies on contact information.',
+      'Visuo-tactile methods are studied for material understanding, contact localization, grasp stability, insertion and action-conditioned prediction. Their suitability depends on the sensor, task and evaluation protocol.',
     ],
     sections: [
       {
         heading: 'Why vision and touch are complementary',
         body: [
-          'Vision offers broad spatial context before contact, but can be occluded by the hand, gripper, or object. Touch is local and contact-dependent, but reveals deformation, slip, pressure, shear, surface interaction, and hidden motion after contact begins.',
+          'Vision offers broad spatial context before contact, but can be occluded by the hand, gripper, or object. Touch is local and contact-dependent. Depending on the sensor, calibration and estimator, it can provide evidence of deformation, slip, pressure, shear or relative motion; a single tactile channel does not measure every quantity.',
         ],
         table: {
           headers: ['Question', 'Vision contributes', 'Touch contributes', 'Combined use'],
           rows: [
             ['Where should the robot move?', 'Scene, object, pose, free space, and semantic context', 'Local contact onset and boundary', 'Approach visually, then correct from contact'],
             ['Is the grasp stable?', 'Object motion and gross hand-object geometry', 'Slip, shear, pressure distribution, and local deformation', 'Detect instability that is visually occluded or delayed'],
-            ['Is an insertion aligned?', 'Hole, connector, and tool pose before occlusion', 'Contact direction, jamming, seating, and force-related state', 'Use touch for the final millimeters and recovery'],
+            ['Is an insertion aligned?', 'Hole, connector, and tool pose before occlusion', 'Evidence of contact direction, obstruction or seating, subject to sensor calibration', 'Compare alignment, full seating and connection checks separately'],
             ['What will happen after an action?', 'Future scene and object appearance', 'Future contact state, slip, and local physical response', 'Build action-conditioned visuo-tactile predictions'],
           ],
         },
@@ -4755,6 +4756,81 @@ export const seoTopicPages: SeoTopicPage[] = [
           'Policy: map current vision, touch, and robot state to an action',
           'World model: predict future visual and tactile state under a candidate action',
         ],
+      },
+      {
+        "id": "training-and-runtime-touch",
+        "heading": "Separate touch used for training from touch available during execution",
+        "body": [
+          "Start with the interface you need to improve: a reusable representation, a contact estimate, a learning reward or the robot's next action. These outputs require different evidence. A model trained with tactile labels may run from vision alone; an image produced by an internal tactile camera still measures a contacted sensor surface. Neither should be confused with an external camera predicting an unseen contact."
+        ],
+        "table": {
+          "headers": [
+            "Role and example",
+            "What touch does",
+            "Decision before adoption"
+          ],
+          "rows": [
+            [
+              "Representation — PROPRA",
+              "Sensor histories are pretrained using recorded robot state and future actions; the policy later uses current histories.",
+              "Match the sampling recipe and distinguish fine-tuned policy encoders from frozen diagnostic probes."
+            ],
+            [
+              "Reward — TaRL",
+              "Tactile sequences supervise progress used during policy learning.",
+              "Test the reward labels, then test the learned policy. A transferred reward does not establish a transferred policy."
+            ],
+            [
+              "Estimation — TouchSight and ZeroTouch",
+              "Measured training references support contact or wrench estimates from vision; their evaluations have different output units and tasks.",
+              "Verify the reference, masks and error distribution. Generated or inferred contact remains distinct from runtime measurement."
+            ],
+            [
+              "Policy — TACTIC and cluttered grasping",
+              "Enabled contact channels influence action generation; other feedback may remain in the common controller.",
+              "Keep controller, demonstrations and task criteria fixed when asking whether an observation helps."
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Trace one contact through the system",
+            "body": [
+              "For an insertion pilot, record the external camera observation, tactile acquisition time, measured or inferred contact field, model input, predicted action, executed reference and success check. Decide in advance whether completion means alignment, full seating or an independently verified connection. Those events can have different outcomes even in the same video.",
+              "Repeat the comparison with a specified held-out condition, such as a changed cartridge or obstructed camera, while preserving the controller and reset procedure. Log first-attempt success, retries, missed contact, excessive load and interventions separately. This is a proposed evaluation design, not a claim that every cited paper performed it or that RoboSkin ran the experiment."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "PROPRA: anchor and sampling distinctions",
+            "href": "/news/propra-fingertip-sensor-pretraining"
+          },
+          {
+            "label": "TaRL: reward labels and policy transfer",
+            "href": "/news/tarl-tactile-reward-learning-demonstrations"
+          },
+          {
+            "label": "TouchSight: measured, generated and inferred data",
+            "href": "/news/touchsight-twintouch-bare-hand-tactile-prediction"
+          },
+          {
+            "label": "ZeroTouch: prediction errors and stopping",
+            "href": "/news/zerotouch-tactile-supervision-visual-grasp-control"
+          },
+          {
+            "label": "TACTIC: task-stage and encoder comparisons",
+            "href": "/news/tactic-tactile-encoder-fusion-benchmark"
+          },
+          {
+            "label": "Cluttered grasping: policy inputs and compliance",
+            "href": "/news/when-touch-matters-cluttered-dexterous-grasping"
+          },
+          {
+            "label": "Calibrate a physical tactile reference",
+            "href": "/guides/tactile-sensor-calibration"
+          }
+        ]
       },
       {
         heading: 'Alignment is the hidden infrastructure',
@@ -4778,12 +4854,14 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Relationship to tactile AI and Physical AI',
         body: [
-          'Visuo-tactile perception sits inside the broader tactile AI stack. Language can add task semantics, proprioception supplies the robot’s internal state, and touch grounds the system in physical contact. Together they support Physical AI systems that must act under real-world uncertainty.',
+          'Visuo-tactile perception sits inside the broader tactile AI stack. Language can add task semantics, proprioception supplies the robot’s internal state, and measured touch adds local contact evidence. Together they support Physical AI systems that must act under real-world uncertainty.',
           'A visuo-tactile world model is one specialized branch. It predicts future multimodal state; it is not synonymous with every vision-touch encoder or manipulation policy.',
         ],
       },
     ],
     faqs: [
+      { question: 'Is an optical tactile image the same as vision predicting touch?', answer: 'No. An optical tactile sensor observes deformation at its physical contact surface. An external or wrist camera predicting touch estimates contact without that direct measurement. Check which input exists at execution time and how its output is calibrated.' },
+      { question: 'Does better contact prediction prove better robot control?', answer: 'No. Prediction needs a suitable reference, units and held-out error analysis. Robot control additionally needs matched task trials, timing, controller behavior and failure or intervention records.' },
       { question: 'What is visuo-tactile perception?', answer: 'It is the joint use of visual and tactile observations to estimate properties or contact states that either modality alone may represent incompletely.' },
       { question: 'What is visuo-tactile manipulation?', answer: 'It is robot manipulation in which both vision and touch influence actions, such as approach, grasp stabilization, insertion correction, reorientation, or recovery.' },
       { question: 'How should vision and touch data be synchronized?', answer: 'Use measured timestamps or clock offsets and align both modalities with robot pose, joint state, gripper state, action, and contact events. Preserve trajectories so alignment can be audited.' },
