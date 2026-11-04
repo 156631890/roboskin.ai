@@ -454,7 +454,7 @@ Evidence and editorial review: November 4, 2026. Original publication date retai
     id: 'radmcs-underwater-haptic-diver-guidance',
     title: 'RADMCS steers scuba divers with low-thrust haptic cues',
     seoTitle: 'RADMCS Tests Thruster Haptics for Scuba Divers',
-    seoDescription: 'RADMCS mounts two thrusters on a scuba tank to guide divers. Review the eight-person study, 10% threshold and distance-estimation failures.',
+    seoDescription: "Separate RADMCS cue detection, supervised wall following and ocean fit tests; review signal validity, human intervention and prototype evidence limits.",
     excerpt: 'A tank-mounted wearable robot uses two underwater thrusters as directional haptic cues, but its wall-following behavior depends on a distance estimate that failed in one documented run.',
     category: 'Wearable haptics',
     image: '/generated/news/radmcs-underwater-haptic-diver-guidance.png',
@@ -471,11 +471,11 @@ Evidence and editorial review: November 4, 2026. Original publication date retai
     evidenceStatus: 'Preprint · arXiv v1 · IRB in-water study with eight participants across different subsets · CC BY 4.0 manuscript · no code or data release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-04',
-    updated: '2026-10-04',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# RADMCS steers scuba divers with low-thrust haptic cues
 
-University of Minnesota researchers Demetrious T. Kutzke and Junaed Sattar released RADMCS on October 1, 2026, a wearable underwater robot that straps to a scuba tank and uses two thrusters to cue a diver to turn toward or away from a surface. An IRB-approved study involved eight participants across several pool and ocean tests. The most stable quantitative finding is perceptual: approximately 10% of maximum thrust was enough to produce detectable motion in the tested configurations. [Paper and version record](https://arxiv.org/abs/2610.01906).
+In an October 1, 2026 preprint, University of Minnesota researchers Demetrious T. Kutzke and Junaed Sattar describe RADMCS: a wearable underwater robot that straps to a scuba tank and uses two thrusters to cue a diver to turn toward or away from a surface. An IRB-approved study involved eight participants across several pool and ocean tests. The most stable quantitative finding is perceptual: approximately 10% of maximum thrust was enough to produce detectable motion in the tested configurations. [Paper and version record](https://arxiv.org/abs/2610.01906).
 
 ## Key takeaways
 
@@ -507,7 +507,23 @@ The sample structure also matters. “Eight participants” is the union of the 
 
 This is an arXiv v1 preprint, not an independently validated dive system, and RoboSkin.ai did not test it. The paper reports a qualitative ocean form-fit trial with one participant at up to 80% thrust. The apparatus shifted, moved regulator hoses forward and created a painful pinch point near the participant's head. Those observations are design constraints, not cosmetic issues.
 
-Distance sensing used structured AprilGrid targets rather than natural reef geometry for the pool control study. The tarp warped in circulation currents, autofocus affected measurements, and one documented run preserved an unsafe stale command after tracking loss. The manuscript is available under CC BY 4.0. No official code repository, CAD package, dataset or software license was verified.
+Distance sensing used structured AprilGrid targets rather than natural reef geometry for the pool control study. The tarp warped in circulation currents, autofocus affected measurements, and one documented run preserved an unsafe stale command after tracking loss. The manuscript is available under CC BY 4.0. The November 4 paper review did not verify an official code repository, CAD package, dataset or software license through the reviewed sources.
+
+## Separate cue perception from supervised navigation
+
+The approximate 10% threshold uses the manufacturer's T200 thrust/PWM relationship at the stated supply voltage. It is not a measurement of force transmitted to the diver's skin, nor an accuracy score for identifying cue direction. Mounting, buoyancy and environmental motion affect the body response. The [full protocol](https://arxiv.org/html/2610.01906v1) also states that a safety diver accompanied the blackout-mask pool runs and intervened to prevent lateral deviation beyond one meter. A successful illustrated course therefore includes supervision; it is not an unattended navigation result.
+
+| Evidence layer | Receiving-team review question |
+| --- | --- |
+| Distance observation | Was the visual estimate valid and current when each command was issued? |
+| Physical cue | Was the quantity a commanded thrust, measured body load or participant-reported sensation? |
+| Human response | Did the participant identify the intended direction, and how was that response recorded? |
+| Navigation outcome | Which runs needed intervention, and were tracking loss and incomplete runs counted? |
+| Wearable fit | Did mounting movement, hose interference or discomfort change the interpretation? |
+
+The one-person ocean fit exercise used forward thrust for swimming assistance; it was not the seven-person pool wall-following protocol. Its much higher thrust setting cannot be combined with the perception threshold into one operating recommendation.
+
+For a future evaluation, record observation age, command expiry, intervention and task outcome separately. A candidate stale-signal policy would need its own supervised validation; this paper does not establish a safe timeout or recovery rule. These are research-review questions, not instructions for operating a diving device. The [tactile AI evidence chain](/tactile-ai#contact-evidence-chain) distinguishes haptic output to a person from learned tactile perception and robot feedback.
 
 ## Sources and related resources
 
@@ -515,6 +531,8 @@ Distance sensing used structured AprilGrid targets rather than natural reef geom
 - [Full system and human-study protocol](https://arxiv.org/html/2610.01906v1)
 - [RoboSkin overview of force and touch in Physical AI](/physical-ai-touch)
 - [RoboSkin robot-safety resources](/robot-safety)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
   },
   {
@@ -4391,7 +4409,7 @@ Use the [robot-learning comparison](/robot-learning#learning-change-contract) to
     id: 'cablevla-tactile-cable-routing-vla',
     title: 'CableVLA combines cable topology with tactile residual control',
     seoTitle: 'CableVLA: Tactile VLA Results for Cable Routing',
-    seoDescription: 'CableVLA distills cable topology and tactile contact from simulation. Examine 345-rollout results, 96-taxel inputs and limited real transfer.',
+    seoDescription: "Inspect CableVLA contact-history gating, executed action chunks and simulation labels; separate transfer preparation from limited hardware success evidence.",
     excerpt: 'CableVLA adds topology prediction and a contact-gated tactile residual to pi0.5. It improves a 345-rollout simulation benchmark, while real-robot transfer remains a 10-trial result.',
     category: 'Visuo-tactile robot learning',
     image: '/generated/news/cablevla-topology-tactile-residual.png',
@@ -4432,7 +4450,7 @@ Representation scores must not be confused with task success. TacSense reports s
 
 ## What this means for robotics
 
-RoboSkin analysis: CableVLA is a useful architecture pattern for deformable-object manipulation. Global visual planning can remain relatively slow and semantic, while [tactile sensing](/sensors) supplies a gated correction only when contact begins. Freezing the parent policy also narrows what the local residual is allowed to change.
+RoboSkin analysis: CableVLA is a useful architecture pattern for deformable-object manipulation. Global visual planning can remain relatively slow and semantic, while [tactile sensing](/sensors) supplies a correction gated by recent contact history. Freezing the parent restricts which model parameters are trained; it does not itself impose a safe magnitude on the residual action.
 
 The data scale reveals the cost. Rich labels come from simulation, and the real system must reproduce camera geometry, tactile calibration and cable behavior closely enough for those representations to transfer. Teams comparing [robotics datasets](/datasets) should distinguish the millions of sampled windows from the smaller count of independent episodes and physical trials.
 
@@ -4440,17 +4458,34 @@ The data scale reveals the cost. Rich labels come from simulation, and the real 
 
 This is an arXiv v1 preprint, and RoboSkin.ai has not run the code or hardware. The real test contains only 10 trials per method and still exposes a large simulation-to-real gap. The authors identify grasp alignment, viewpoint mismatch, arm compliance and cable dynamics as failure sources. Target-domain fine-tuning was not used in the zero-shot comparison.
 
-As inspected on September 23, the arXiv record and full paper did not link a public code repository, project page, dataset download, checkpoints or an implementation license. The counts document internal research assets; they do not establish that those assets are downloadable.
+The November 4 review of the arXiv record and full paper did not verify public code, a project page, dataset download, checkpoints or an implementation license through those sources. The counts document internal research assets; they do not establish that those assets are downloadable.
+
+## A history gate is not an instantaneous force controller
+
+The residual gate checks whether any valid taxel crosses the threshold anywhere in the most recent 25-frame window. A recent contact can therefore keep the gate open even when the latest frame has no contact. With no qualifying history, the tactile residual becomes zero; the topology-conditioned parent still supplies actions. This is different from checking current force before every command. [Gate definition and deployment procedure](https://arxiv.org/html/2609.25606v1).
+
+| Interface | What the paper specifies | What it does not establish |
+| --- | --- | --- |
+| Topology student | Four visual observations; privileged simulator labels supervise training | Access to simulator-only future labels on the real robot |
+| Tactile history | Twenty-five frames aligned to a 30 Hz observation grid | A new policy inference or force-limit check every 1/30 second |
+| Action correction | Residual over the first eight actions of a sixteen-action parent chunk | A safety bound on the residual merely because the parent weights are frozen |
+| Execution | Commit eight corrected actions before replanning | Fresh tactile correction after every individual committed action |
+
+The synthetic normal-force map is constructed from contact proxies, while slip and motion labels come from simulation. Those labels help train a representation; they are not additional quantities measured by the physical array. Retain label origin and preprocessing when comparing the simulated event scores with a real sensor test.
+
+Zero-shot transfer here means no target-domain weight adaptation. The physical setup still required calibration and enhanced illumination, and the paper describes a separate grasp diagnostic that motivated the lighting change. Its ten-trial comparison is conditional on that preparation. A proposed reproduction should record camera alignment, initial history acquisition, calibration, lighting and failure counts alongside the policy checkpoint. The [contact evidence comparison](/tactile-ai#contact-evidence-chain) separates this action interface from offline encoders and simulated contact solvers.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25606)
 - [Full CableVLA v1 paper](https://arxiv.org/html/2609.25606v1)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-09-23',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-22',
     evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
   },
@@ -4647,8 +4682,8 @@ Finally, the stored spectrogram videos cannot reconstruct the discarded raw vibr
     id: 'tactile-jepa-topology-aware-electronic-skin-pretraining',
     title: 'Tactile-JEPA pretrains electronic-skin encoders on taxel topology',
     seoTitle: 'Tactile-JEPA Results, Datasets, Code and Limitations',
-    seoDescription: 'Tactile-JEPA uses local and global graph masks for distributed robot touch. Compare force, pose and policy results plus code and license limits.',
-    excerpt: 'The self-supervised method learns from irregular taxel graphs across three public datasets. It leads several perception metrics, but MAE remains better on the reported policy RMSE.',
+    seoDescription: "Review Tactile-JEPA topology requirements, sensor-specific training and offline policy error; distinguish original results from the repository follow-up.",
+    excerpt: "Tactile-JEPA learns sensor-specific encoders with graph-based masking. Review the original perception and policy results separately from a later repository training recipe.",
     category: 'Tactile representation learning',
     image: '/generated/news/tactile-jepa-taxel-graph-masking.png',
     imageAlt: 'Diagram of local and global masks sampled over an irregular tactile taxel graph before representation learning.',
@@ -4667,15 +4702,15 @@ Researchers from Sber AI, Skolkovo Institute of Science and Technology, HSE Univ
 
 ## Key takeaways
 
-- Tactile-JEPA learns from unlabeled time windows and taxel coordinates, predicting hidden taxel embeddings from visible context with both local and global graph masks.
+- Tactile-JEPA learns from unlabeled time windows and known taxel connectivity, predicting hidden taxel embeddings from visible context with both local and global graph masks.
 - Across three public datasets, it reports a 6.3% reduction in force RMSE and a 20.8% reduction in in-hand orientation RMSE against the strongest comparison for those metrics.
-- It is not best on every downstream result. On DECO-50 policy learning, MAE pretraining records 0.4400 normalized-action RMSE versus 0.4634 for Tactile-JEPA; lower is better. [Tables II and III](https://arxiv.org/html/2609.24385v1#S4).
+- It is not best on every original-paper downstream result. On DECO-50 policy learning, MAE pretraining records 0.4400 normalized-action RMSE versus 0.4634 for Tactile-JEPA; lower is better. [Tables II and III](https://arxiv.org/html/2609.24385v1#S4).
 
 ## What changed
 
 Distributed electronic skins produce multivariate time series from taxels placed across hands, feet or bodies. Their geometry is often sparse and irregular. Tactile-JEPA represents those taxels as a connectivity graph. A local target mask grows from a seed along connected neighbors; a global mask samples across the surface. The model receives the remaining context and predicts embeddings for the hidden regions. Equal local and global masking is intended to preserve fine contact details and whole-surface state.
 
-The encoder is a small transformer with 12 blocks, 192-dimensional embeddings and three attention heads. The paper freezes pretrained encoders for most perception tests, then trains task-specific heads. Pretraining used four NVIDIA A100 80 GB GPUs and took 0.7 to 6.1 hours depending on the dataset and task. [Architecture and compute](https://arxiv.org/html/2609.24385v1#S3).
+The encoder uses 192-dimensional embeddings and three attention heads, with 12 blocks for Xela/DECO and eight for the tactile-socks experiments. The paper freezes pretrained encoders for most perception tests, then trains task-specific heads. Pretraining used four NVIDIA A100 80 GB GPUs and took 0.7 to 6.1 hours depending on the dataset and task. [Architecture and compute](https://arxiv.org/html/2609.24385v1#S3).
 
 ## Three datasets, three evidence types
 
@@ -4687,7 +4722,7 @@ The encoder is a small transformer with 12 blocks, 192-dimensional embeddings an
 
 On Sparsh-skin, Tactile-JEPA reports total force RMSE of 14.05 cN versus 15.00 cN for end-to-end training, the strongest alternative in that row. Orientation RMSE is 5.48 degrees versus 6.92 degrees for BYOL. On tactile socks, action accuracy is 96.91% versus 95.63% for DINO, and full-body pose RMSE is 13.42 radians versus 13.78. These are means across repeated training runs, and selected top-two comparisons use a one-sided Welch test with three pretraining seeds and no multiple-comparison correction.
 
-The policy table requires a different reading. Tactile-JEPA improves over vision-only, random tactile embeddings and an end-to-end tactile encoder, but MAE is better on the reported DECO-50 action RMSE. The paper's stronger claim is stable performance across heterogeneous datasets: BYOL or MAE collapses on some datasets, while Tactile-JEPA trains under one mask configuration.
+The original policy table requires a different reading. Tactile-JEPA improves over vision-only, random tactile embeddings and an end-to-end tactile encoder, but MAE is better on the reported DECO-50 action RMSE. The paper's stronger claim is stable performance across heterogeneous datasets: BYOL or MAE collapses on some datasets, while Tactile-JEPA trains under one mask configuration.
 
 ## What this means for robot skin
 
@@ -4699,18 +4734,38 @@ Integration is not plug-and-play. DECO-50 groups four or five neighboring taxels
 
 This is a preprint, and RoboSkin.ai has not rerun the experiments. All headline improvements are within the selected datasets, task heads and splits. The policy score is imitation-action error, not a physical task success rate. A lower action RMSE also does not by itself prove safer or more reliable contact.
 
-The paper links a public repository. Inspection on September 22 found runnable JEPA-related modules and configurations, but the README primarily documents earlier Sparsh-X and Sparsh-Skin work, some example configs contain author-local checkpoint paths, and no paper-specific pretrained checkpoint was identified. The repository license is Creative Commons Attribution-NonCommercial 4.0, so public access does not imply unrestricted commercial use.
+The paper links a public repository. The November 4 review supersedes the earlier README-access description: the repository now documents Tactile-JEPA datasets, preparation, training presets and downstream evaluation. Its pretrained-model entry remains TBD. The [license at the reviewed revision](https://github.com/E-Kovtun/tactile/blob/ffb4db04080d98ff6b61dad04ba0bc0a49f8bd28/LICENSE.md) is Creative Commons Attribution-NonCommercial 4.0; third-party datasets and assets retain their own terms. Documentation was reviewed, but no training, download or checkpoint execution was performed.
+
+## Reuse the training recipe without assuming a universal checkpoint
+
+Tactile-JEPA needs known taxel connectivity to sample masks during pretraining, but does not require numerical three-dimensional taxel coordinates. The graph is not needed by the downstream encoder; learned taxel identities and the expected input ordering still are. That distinction does not establish transfer to a different sensor layout without adaptation. The paper trains separate encoders for the datasets and, for the socks, separate task settings. It tests a reusable method rather than one checkpoint shared unchanged across all sensors. [Method and evaluation](https://arxiv.org/html/2609.24385v1).
+
+| Reuse question | Evidence to retain |
+| --- | --- |
+| Which taxel is this? | Channel order, connectivity, grouped cells, baseline and normalization conventions |
+| How much time is represented? | Ten frames at 100 Hz, three at 30 Hz or five at 14 Hz are different input windows |
+| What is predicted? | Masked embeddings during pretraining; task-specific targets after training a head |
+| What generalization is tested? | Whole demonstrations, objects, sessions and sensor layouts are different split units |
+| What does the policy metric mean? | Offline error over twelve hand-action dimensions and sixteen future steps; not robot task completion |
+
+The Sparsh-skin classification split partitions trajectories within the collected object set, rather than establishing unseen-object recognition. DECO splits whole demonstrations. Short-window representation learning should also not be confused with forecasting future tactile observations; a downstream head can consume a longer sequence of encoded windows.
+
+The current [pinned README](https://github.com/E-Kovtun/tactile/blob/ffb4db04080d98ff6b61dad04ba0bc0a49f8bd28/README.md) now documents a separate, revised DECO training recipe. It reports action RMSE 0.43880 ± 0.00185 against MAE 0.43996 ± 0.00288. These are author-reported follow-up results, not replacements for the original paper's table. The spread is the standard deviation across twelve heads from three pretraining seeds, not a confidence interval or twelve independent encoder trainings. The numerical difference alone does not establish a statistically reliable advantage.
+
+A receiving experiment should pin the recipe, split and checkpoint together. The README also identifies exploratory mixed-source socks presets that include held-out pose splits; those are not interchangeable with train-only task baselines. The [tactile AI comparison](/tactile-ai#contact-evidence-chain) keeps representation error separate from physical control evidence.
 
 ## Sources
 
 - [Tactile-JEPA arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24385)
 - [Tactile-JEPA v1 methods, datasets and results](https://arxiv.org/html/2609.24385v1)
 - [Author-linked code repository and license](https://github.com/E-Kovtun/tactile)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-21',
     evidenceStatus: 'Preprint · arXiv v1 · code inspected',
   },
@@ -4980,7 +5035,7 @@ These are proposed engineering checks. The study’s settled-force target comes 
     id: 'crisp-contact-simulation-geometry-solvers-release',
     title: 'CRISP details contact simulation for tight-tolerance robot assembly',
     seoTitle: 'CRISP Robot Simulation: Contact Results, Access and License',
-    seoDescription: 'Inspect CRISP’s contact geometry, CANAL and SubADMM results, prebuilt packages and research-only license. Separate simulator evidence from real-robot claims.',
+    seoDescription: "Evaluate CRISP collision and solver evidence, ambiguous contact-force distributions and versioned research access before using simulated tactile signals.",
     excerpt: 'Seoul National University’s CRISP paper examines contact geometry and solver behavior in robot assembly. The public package provides examples and binaries under a restricted research license.',
     category: 'Robotics simulation tools',
     image: '/generated/news/crisp-geometry-solver-package.png',
@@ -5032,17 +5087,37 @@ RoboSkin analysis: pinning the example repository alone is insufficient when CMa
 
 For tactile research, better contact mechanics could improve the inputs to a sensor simulator, but CRISP's contact solver is not itself a calibrated tactile-image or pressure-array generator. Soft-body dynamics is listed as future work. Compare the [tactile benchmark directory](/benchmarks) and [sensor guide](/sensors) before equating collision accuracy with sensor fidelity. The platform paper remains a preprint; its earlier method publications do not independently validate every result in this release.
 
+## Stable motion does not identify a unique pressure distribution
+
+CRISP's stacking example makes an important tactile-data distinction: when contact forces are underdetermined, CANAL and SubADMM can produce different force distributions while both maintain stable motion. The appendix describes concentrated versus more distributed support forces. A visually plausible stack is therefore insufficient evidence that a predicted local pressure pattern matches a physical skin. [Appendix D](https://arxiv.org/html/2609.21761v1).
+
+| Layer to validate | Proposed receiving-team record |
+| --- | --- |
+| Geometry | Collision representation, supported shape pair, discretization and any convex approximation |
+| Mechanical assumptions | Friction, compliance assumptions, timestep and imposed motion |
+| Numerical solution | Solver, iteration budget, residuals, convergence failures and warm-start state |
+| Reported metric | Contact-point penetration, geometric overlap or motion outcome, with its exact sampling rule |
+| Sensor interpretation | Mapping from simulated contacts to sensing locations, measured calibration target and unresolved ambiguity |
+
+For a pressure-array or optical-skin simulator, the last row requires an additional sensor model and physical reference measurements. Solver contact forces are not automatically equivalent to a measured taxel output. Likewise, a low geometric penetration value is not a force-calibration result or a guarantee that a learned policy will transfer.
+
+The November 4 [repository revision](https://github.com/INRoL/crisp/tree/3d47426cac6f001b16f8d613339383c144029e88) continues to describe example integration with a prebuilt package. Current solver documentation warns that reaching an iteration limit does not establish convergence, and a stagnation threshold is not a relative-accuracy certificate. The [1.1.1 release notes](https://inrol.github.io/crisp/docs/release-notes/) now describe corrected contact-stiffness handling in N/m and updated examples. That software change is separate from the paper's evaluation and makes version matching material to a reproduction.
+
+The earlier versioned observations above remain historical; reproduce with a matched binary, headers, examples and license record rather than an unpinned latest download. No package was installed or executed for this review. See the [tactile AI evidence chain](/tactile-ai#contact-evidence-chain) before treating synthetic mechanics as measured training data.
+
 ## Sources
 
 - [CRISP arXiv v1](https://arxiv.org/html/2609.21761v1)
 - [Official project and documentation](https://inrol.github.io/crisp/)
 - [Public repository and versioned packages](https://github.com/INRoL/crisp)
 - [Reviewed license](https://github.com/INRoL/crisp/blob/fc0684bdb3f325ab1586fc6df987c15839f08733/LICENSE)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-18',
     evidenceStatus: 'Preprint · arXiv v1',
   },
@@ -5341,7 +5416,7 @@ For a new gripper or medium, record commanded pressure, robot motion, camera tim
     title: 'TWINS captures touch beyond the robot hand',
     seoTitle: 'AIST TWINS: Body-Surface Touch and Robot Demonstrations',
     seoDescription:
-      'AIST’s TWINS uses 219 tactile cells to collect contact-rich demonstrations. Review its 40-demo study, tracking measurements, open hardware, and learning-code limits.',
+      "Inspect TWINS body-surface demonstrations, assistant contact cues and compliance changes; separate 219 sensing cells, tracking error and task evidence.",
     excerpt:
       'AIST’s wearable dual-arm system records pressure and proximity on the hands, arms, and chest. Its public hardware release makes the embodiment inspectable, while policy evidence remains qualitative.',
     content: `# TWINS captures touch beyond the robot hand
@@ -5350,7 +5425,7 @@ For a new gripper or medium, record commanded pressure, robot motion, camera tim
 
 TWINS is a wearable demonstration system designed to capture manipulation that uses the arms and chest as well as the hands. A team at Japan’s National Institute of Advanced Industrial Science and Technology, AIST, pairs a human-operated wearable with a robot that shares its joint configuration and dimensions. Tactile cells record pressure and proximity across both systems’ contact surfaces. The [August 3 preprint](https://arxiv.org/abs/2608.01733) reports a small demonstration-learning study, not a peer-reviewed success-rate benchmark.
 
-There is a concrete release update to accompany the paper: the [official project page](https://mmurooka.github.io/twins-project-page/) now links a hardware repository with robot descriptions and assembly resources. The project’s learning-code link still says “Coming soon” as of September 11. Those are different levels of access and should be evaluated separately.
+There is a concrete release update to accompany the paper: the [official project page](https://mmurooka.github.io/twins-project-page/) now links a hardware repository with robot descriptions and assembly resources. The project’s learning-code link still says “Coming soon” in the November 4 review. Those are different levels of access and should be evaluated separately.
 
 ## Why capture contact on the forearms and chest?
 
@@ -5385,7 +5460,7 @@ The authors also describe occasional object drops and the use of sponge padding 
 
 The [TWINS-Hardware repository](https://github.com/isri-aist/TWINS-Hardware) contains robot-description resources and links assembly instructions, a parts list, and 3D models. Its root license is CERN-OHL-W-2.0 at the reviewed revision. The repository was checked at commit fe9b8090edd8601798dbc618e1d9a9711a8c9697.
 
-That is useful for understanding the mechanical embodiment. It does not establish that the experiment’s training implementation, checkpoints, or 40 demonstrations have been released. The official project page still labels the learning code as forthcoming. RoboSkin reviewed those listings but did not build the hardware, download all linked fabrication resources, or reproduce a policy.
+That is useful for understanding the mechanical embodiment. It does not establish that the experiment’s training implementation, checkpoints, or 40 demonstrations have been released. The November 4 official-page review still finds the learning-code link labeled forthcoming. RoboSkin reviewed those listings but did not build the hardware, download all linked fabrication resources, or reproduce a policy.
 
 For a lab considering a similar collection system, the first questions are practical: can the human demonstrate with the same reachable contact geometry, do pressure and proximity remain calibrated after mounting, and does the robot have enough compliance to tolerate imperfect replay? A follow-up evaluation should count attempted and successful trials, report object changes, and compare identical policies with and without the tactile input.
 
@@ -5395,17 +5470,35 @@ TWINS addresses demonstration capture over a large contact surface. [TacPrint](/
 
 For the surrounding architecture, see [robot teleoperation](/robot-teleoperation), [robot learning](/robot-learning), and [robot hands](/robot-hands). The evidence here is author-reported and preliminary; the contribution is a concrete interface for contact-rich demonstrations and an inspectable hardware release.
 
+## Record who creates each contact event
+
+Some demonstrated contacts are deliberate instructions from an assistant. In the paper, forearm contact cues release, while touching a gripper can trigger a ball-placement response. These interactions show a learned response within the collection protocol; they do not establish unrestricted recognition of object state or human intent. Adaptive Holding also couples different objects with different contact locations. Object identity and contact location are not independently varied generalization tests. [Task procedures and observations](https://arxiv.org/html/2608.01733v1).
+
+| Protocol detail | Why a receiving lab needs it |
+| --- | --- |
+| Assistant touch and object presentation | Separates an intentional cue from incidental contact or an autonomous task transition |
+| Pressure and proximity channels | Preserves the distinction between two measurements at each of the 219 locations |
+| Padding on the object and chest | Records a mechanical change that affects friction, compliance and holding behavior |
+| Demonstration and command timing | Distinguishes 10 Hz recording from tracking delay and policy execution |
+| Drops, resets and incomplete attempts | Makes qualitative demonstrations auditable without inventing a success rate |
+
+Matching joint geometry makes motion transfer easier, but does not make the wearable and robot equally compliant. The authors added sponge to both the held object and the chest after observing holding difficulties. That intervention changes the physical interaction; its effect should not be credited to learning alone.
+
+A proposed follow-up should preserve cell identity, mounting, normalization, assistant actions and padding revisions with each demonstration. Evaluate object and contact-location changes separately, and count all attempted rollouts under a fixed success rule. The [tactile AI comparison](/tactile-ai#contact-evidence-chain) places TWINS at the collection interface, distinct from an encoder benchmark or a validated autonomous manipulation product.
+
 ## Sources
 
 - [Kitamura et al.: TWINS preprint, August 3, 2026](https://arxiv.org/abs/2608.01733)
 - [TWINS full paper and experimental protocol](https://arxiv.org/html/2608.01733v1)
 - [AIST authors’ TWINS project page](https://mmurooka.github.io/twins-project-page/)
 - [TWINS-Hardware at the reviewed revision](https://github.com/isri-aist/TWINS-Hardware/tree/fe9b8090edd8601798dbc618e1d9a9711a8c9697)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-11',
-    updated: '2026-09-11',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile robot learning',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
     sourceTitle: 'TWINS: A Tactile Wearable Isomorphic Arm Networked System for Contact-Rich Manipulation Learning',
@@ -6180,6 +6273,7 @@ This brief summarizes the NUS report and the associated Advanced Materials paper
     technicalFocus: ['self-healing electronic skin', 'underwater robotics', 'damage sensing', 'soft robotics'],
   },
   {
+    seoDescription: "Inspect TouchWorld six-task results, cached subgoals and residual action timing; separate predictive contact metrics, physical success and release evidence.",
     id: 'touchworld-tactile-foundation-model-dexterous-manipulation-2026',
     title: 'TouchWorld separates tactile prediction from fast contact correction in robot manipulation',
     seoTitle: 'TouchWorld Tactile Foundation Model for Robot Manipulation',
@@ -6187,7 +6281,7 @@ This brief summarizes the NUS report and the associated Advanced Materials paper
       'The TouchWorld preprint proposes a hierarchical tactile foundation model that combines contact prediction with fast feedback for dexterous, contact-rich robot tasks.',
     content: `# TouchWorld separates tactile prediction from fast contact correction in robot manipulation
 
-**News brief - July 2026**
+**Research explanation — original July 2026 report; November 4 source review uses the July 9 v2 manuscript.**
 
 TouchWorld is a July 2026 preprint that treats touch as both a prediction target and a fast feedback signal for dexterous robot manipulation. Its central idea is that high-level task reasoning and low-level contact correction should not be forced into one control loop running at one speed.
 
@@ -6203,7 +6297,7 @@ Across six long-horizon, contact-rich manipulation tasks, the authors report 65.
 
 ## Why this matters for tactile AI
 
-Vision and language can describe a task and guide a hand toward an object, but they do not directly reveal hidden contact states. Once a plug meets a socket, a cup begins to slip, or a soft object deforms, the controller needs evidence from the physical interaction itself.
+Vision and language can describe a task and guide a hand toward an object, while contact observations can help resolve physical states that are ambiguous in images. Once a plug meets a socket, a cup begins to slip, or a soft object deforms, the controller needs evidence from the physical interaction itself.
 
 TouchWorld is useful as a systems idea because it assigns different jobs to different layers. A slower planner handles semantics and task phases, while a faster tactile pathway handles local contact errors. This is closer to how a practical robot stack may need to divide reasoning and response.
 
@@ -6223,7 +6317,39 @@ The [robot world models pillar](/robot-world-models) explains the broader predic
 
 ## Source boundary
 
-This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The results have not been independently validated by RoboSkin.ai and should be interpreted within the authors' reported setup.
+This explanation reviews the arXiv v2 manuscript and official project, and adds clearly identified RoboSkin.ai integration analysis. The results have not been independently validated by RoboSkin.ai and should be interpreted within the authors' reported setup.
+
+## Read the six tasks before using the average
+
+The [July 9 v2 manuscript](https://arxiv.org/html/2607.07287v2) and [official project](https://phanes-lab.github.io/TouchWorld-website/) report the following percentages. These are the authors' results on their platform, not RoboSkin measurements or evidence about another hand.
+
+| Task | Clean success (%) | Human-perturbation success (%) |
+| --- | --- | --- |
+| Water Flower | 72 | 60 |
+| Tabletop Clearing | 76 | 62 |
+| Cup Insertion | 66 | 52 |
+| Power Plug Insertion | 45 | 35 |
+| Pot Wiping | 70 | 57 |
+| Tissue Pulling | 61 | 56 |
+| Reported mean | 65.0 | 53.7 |
+
+The paper states 100 evaluation rollouts per task, but does not clearly allocate that count between the two conditions. Do not infer 100 trials per condition or reconstruct a total denominator from the percentages. The reported mean differences from FTP-1 are percentage-point differences, not relative percentage improvements. The weaker insertion results also matter when choosing a target application.
+
+Contact-prediction scores answer another question: temporal contact accuracy, contact IoU and volumetric IoU assess held-out subgoal predictions. They are not calibrated force errors, physical task success or evidence of safe contact. A receiving evaluation needs the contact threshold and aggregation rule before reproducing those metrics.
+
+## Separate cached predictions from executed feedback
+
+TouchWorld trains its planner, goal predictor, action policy and residual refiner in separate stages. The goal predictor is conditioned on observations and subtask context; its stated interface is not a simulator queried with arbitrary candidate actions. Goals are cached and refreshed when the task phase changes meaningfully, rather than regenerated at every low-level step. [Architecture and implementation](https://arxiv.org/html/2607.07287v2).
+
+The nominal policy predicts 32-step chunks. The residual mechanism looks ahead over sixteen actions and commits four before refreshing. Its 58-dimensional correction subspace covers selected wrist and hand coordinates; it does not modify every entry in the nominal 120-dimensional action representation, which also contains reserved dimensions. These counts specify an interface, not a measured control frequency. The reviewed sources do not establish an end-to-end latency budget or a universal Hz rate for the complete hierarchy.
+
+This distinction changes an integration test. Log observation age, cached-goal version, nominal chunk, residual update and actually committed commands on the same timeline. Evaluate failures when the goal or planner is unavailable separately from ordinary trials; an implemented fallback is not a quantified recovery guarantee. These are proposed checks, not tests performed here. The [tactile AI evidence chain](/tactile-ai#contact-evidence-chain) compares prediction, representation and action interfaces without turning their different metrics into a leaderboard.
+
+## Human pretraining does not remove robot adaptation
+
+EgoTouch pretraining applies to the predictive module, followed by robot-specific data and training. The shared pressure-map representation does not make human and robot sensing layouts interchangeable. The authors explicitly retain calibration, normalization and adaptation requirements when changing sensors or hand morphology.
+
+The reviewed [TouchAnything repository](https://github.com/Jianyi2004/TouchAnything/tree/d74f9ef5c189a957b7ff72781a0c998e41b45a56) concerns a related data/prediction project, not a verified release of TouchWorld's complete controller. Its README still warns that the EgoTouch upload may be incomplete. Its MIT code license does not establish the dataset's or TouchWorld checkpoints' terms. This review did not download the dataset, verify complete checkpoint availability or execute either project.
 
 ## Source
 
@@ -6232,11 +6358,13 @@ This brief summarizes an arXiv preprint and adds RoboSkin.ai analysis. The resul
 - [arXiv: TouchAnything and the EgoTouch dataset](https://arxiv.org/abs/2605.13083)
 - [TouchAnything official repository and EgoTouch release notes](https://github.com/Jianyi2004/TouchAnything)
 - [EgoTouch official Hugging Face repository](https://huggingface.co/datasets/zhouzhoujy/EgoTouch)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these systems or reproduced their experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-07-20',
-    updated: '2026-08-22',
-    readTime: '5 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile AI',
     image: '/generated/research-ai-tactile-learning-2025.svg',
     sourceTitle: 'TouchWorld tactile foundation model preprint',

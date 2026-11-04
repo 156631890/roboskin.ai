@@ -600,14 +600,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    revisionNote: "November 4, 2026: reviewed this overview and added source-specific boundaries for measurement, simulation, representation learning and executed feedback. Original worksheets and previously reviewed research retain their dates; no new hardware experiment is claimed.",
     path: '/tactile-ai',
     title: "Tactile AI: From Sensor Signal to Policy",
-    description: "How tactile AI turns contact signals into robot policies: encoders, tactile foundation models and the sim-to-real gap, with cited papers.",
+    description: "Understand tactile AI from measured contact to learned representations and actions; compare data origin, prediction targets, feedback timing and evidence.",
     introduction: "Tactile AI is the use of learning and inference to turn contact signals into robot perception, representations or actions. Tactile AI connects a sensor and calibrated data pipeline to an encoder, policy and evaluation protocol. Its value depends on whether measured touch improves a defined task under comparable conditions.",
     h1: "Tactile AI Explained: From Sensor Signal to Learned Policy",
-    kicker: 'Core concept',
+    kicker: "Sensing, inference and evidence",
     intent: 'Definition and system map for tactile AI, touch data, Physical AI tactile feedback, and robot control queries.',
-    updated: structureRelease.modifiedDate,
+    updated: "2026-11-04",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -622,8 +623,8 @@ export const seoTopicPages: SeoTopicPage[] = [
       ],
     },
     quickAnswer: [
-      'Tactile AI is the sensing, data, and control workflow that turns touch signals into useful robot behavior.',
-      'It can support grasp confidence, slip response, contact-aware motion, safer interaction, and evaluation analytics for Physical AI systems.',
+      'Tactile AI uses learning or inference to turn contact observations into representations, predictions or decisions; the surrounding sensing and control stack determines how those outputs can be used.',
+      'It can support contact classification, slip response, manipulation and evaluation. Reliability or safer interaction must be demonstrated for the particular sensing and action pipeline.',
       'The phrase is broader than a single tactile sensor. It describes the full stack from contact surface to model, controller, benchmark, and feedback loop.',
     ],
     sections: [
@@ -714,10 +715,91 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "contact-evidence-chain",
+        "heading": "Trace the contact evidence before choosing a learning method",
+        "body": [
+          "A contact-related result may concern a human cue, a recorded demonstration, a simulated force, a learned embedding or an executed action. Each needs a different reference and evaluation unit. The following source-reviewed examples show where the measurement ends and an interpretation or command begins; their scores are not a shared leaderboard."
+        ],
+        "table": {
+          "headers": [
+            "Example",
+            "Evidence entering the system",
+            "Boundary to check"
+          ],
+          "rows": [
+            [
+              "RADMCS",
+              "Camera distance becomes a thruster cue to a person",
+              "Perception thresholds and supervised navigation outcomes are separate; this is haptic feedback, not a tactile-learning benchmark."
+            ],
+            [
+              "TWINS",
+              "Joint, pressure and proximity observations from an isomorphic wearable",
+              "Record assistant cues and padding changes; joint correspondence does not guarantee equal contact mechanics."
+            ],
+            [
+              "CRISP",
+              "Geometry and numerical contact constraints produce simulated forces",
+              "Different force distributions can sustain the same motion; a sensor forward model still needs physical validation."
+            ],
+            [
+              "Tactile-JEPA",
+              "Known taxel connectivity guides masked-embedding pretraining",
+              "A reusable training recipe is not one sensor-independent checkpoint; offline action error is not task success."
+            ],
+            [
+              "CableVLA",
+              "Recent contact history gates a residual over committed actions",
+              "A history threshold and a 30 Hz observation grid do not establish per-command feedback or a safety bound."
+            ],
+            [
+              "TouchWorld",
+              "Predicted subgoals condition actions; current touch refines a limited action subspace",
+              "Keep cached-goal age, residual refresh and executed commands separate; chunk counts are not a measured control rate."
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Keep the reference attached to the result",
+            "body": [
+              "For a proposed experiment, record signal origin, units, validity, sensor and calibration revision, observation time, inferred quantity, issued command and observed outcome. Include human cues, resets and failures. A synthetic contact label should remain marked synthetic after conversion to a sensor-shaped array; a measured channel should not silently become a calibrated force.",
+              "Choose the metric at the receiving interface. Compare an embedding against its labeled task, a predictor against held-out observations, and a controller against complete physical trials. When a perception output drives an action, test both interfaces: a better offline score can still produce stale or poorly calibrated feedback. These are evaluation questions, not experiments executed for this overview."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "RADMCS: cue perception and supervised navigation",
+            "href": "/news/radmcs-underwater-haptic-diver-guidance"
+          },
+          {
+            "label": "TWINS: assistant cues and body-surface data",
+            "href": "/news/twins-aist-body-surface-tactile-demonstrations-2026"
+          },
+          {
+            "label": "CRISP: solver and sensor-model boundaries",
+            "href": "/news/crisp-contact-simulation-geometry-solvers-release"
+          },
+          {
+            "label": "Tactile-JEPA: topology and recipe transfer",
+            "href": "/news/tactile-jepa-topology-aware-electronic-skin-pretraining"
+          },
+          {
+            "label": "CableVLA: contact history and action execution",
+            "href": "/news/cablevla-tactile-cable-routing-vla"
+          },
+          {
+            "label": "TouchWorld: cached goals and feedback",
+            "href": "/news/touchworld-tactile-foundation-model-dexterous-manipulation-2026"
+          }
+        ]
+      },
+      {
         heading: 'The tactile AI stack',
         body: [
           'A tactile AI stack starts with a contact surface and ends with an action or measurement loop. Between those endpoints, the system needs sensing materials, electronics, timestamps, calibration, feature extraction, model inputs, and robot middleware.',
-          'If the robot cannot use the signal in a control or evaluation loop, the system is only collecting touch data. Tactile AI begins when that data changes what the robot can decide or verify.',
+          'An offline tactile classifier or encoder can be a learning system without controlling a robot. Its evaluation should match that role; adding a controller creates a further interface that needs its own validation.',
         ],
         bullets: [
           'Skin materials and sensor arrays collect local contact signals',
@@ -772,7 +854,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Relationship with VLA models, world models, and Physical AI',
         body: [
-          'A vision-language-action model can provide semantic task context and propose actions, while tactile feedback supplies local physical evidence after contact. A tactile or visuo-tactile world model instead predicts how contact state may evolve under a candidate action. These roles can be combined, but a VLA label does not prove high-frequency touch control and a plausible world-model rollout does not prove safe execution.',
+          'A vision-language-action model can provide semantic task context and propose actions, while tactile feedback supplies local physical evidence after contact. A tactile or visuo-tactile world model predicts contact-related observations or states. Some accept candidate actions; others predict a subgoal from observations and task context. Inspect that conditioning before assuming counterfactual planning is supported. These roles can be combined, but a VLA label does not prove high-frequency touch control and a plausible world-model rollout does not prove safe execution.',
           'Physical AI is the broader embodied system: vision observes the scene, language represents goals and knowledge, proprioception describes the robot body, and touch grounds the interaction at the contact surface. Tactile AI is the part of that system responsible for interpreting and using touch.',
         ],
         links: [
@@ -793,7 +875,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['UniVTAC', 'Simulation-pretrained, 512-dimensional ResNet-18 tactile representation supplied to downstream task policies.', '205,826 encoder-pretraining samples; eight simulated tasks; and a three-task physical study.', 'A 2026 preprint. The encoder is not a VLA or foundation model, and its pretraining samples, policy trajectories, public episodes, physical demonstrations, and evaluation rollouts are different units.'],
             ['TouchWorld', 'Predictive tactile subgoals plus fast reactive tactile correction around higher-level planning.', 'Six source-reported dexterous manipulation tasks in clean and perturbed settings.', 'A 2026 preprint; reported success remains protocol-specific.'],
             ['ADEPT', 'Fingertip TacMap representations fused into an embodiment-specific reinforcement-learning policy.', 'One matched Flexiv-Sharpa insertion condition reports 3/10 vision-only versus 8/10 visuo-tactile final success.', 'A 2026 preprint with ten trials per modality in this single tactile ablation; KUKA experiments are vision-only.'],
-            ['Dream-Tac and FeelWorld', 'Action-conditioned prediction of future tactile or contact state for planning.', 'Source-reported contact-rich manipulation and planning experiments.', 'Prediction quality and task success are not universal hardware-transfer evidence.'],
+            ['Dream-Tac and FeelWorld', 'Dream-Tac jointly predicts actions and observations; FeelWorld uses action-conditioned contact/slip prediction for planning.', 'Source-specific prediction and robot-task experiments.', 'Their prediction and action-selection interfaces differ; neither establishes universal hardware transfer.'],
             ['Tac4Loco', 'Spatiotemporal plantar pressure representation for post-contact humanoid locomotion feedback.', 'Unitree G1 simulation and physical comparisons across rigid, inclined, partial, compliant, and granular support.', 'A 2026 preprint on one robot and bilateral FSR insole layout; the gravel result is qualitative.'],
             ['EmArm', 'Whole-arm skin, proprioception, perception, and contact-aware control in one sensorimotor loop.', 'Peer-reviewed whole-arm localization, intent, manipulation, and replanning demonstrations.', 'One integrated platform does not establish identical performance on all humanoid surfaces.'],
           ],
@@ -851,10 +933,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Does a tactile prediction score prove robot control performance?', answer: 'No. A representation or prediction metric evaluates a particular output and reference. A robot policy additionally needs matched physical trials, timing, calibration and failure accounting; improved offline error is not a task-success or safety guarantee.' },
       {
         question: 'Is tactile AI only machine learning?',
         answer:
-          'No. Machine learning can be part of tactile AI, but the stack also includes sensor design, signal processing, calibration, middleware, control, logging, and validation.',
+          'The learning or inference component is part of a larger engineered stack that includes sensing, calibration, processing and validation. A sensor or fixed data logger alone is not evidence of an AI capability.',
       },
       {
         question: 'How is tactile AI different from tactile sensing?',
@@ -888,6 +971,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Research notes', href: '/research', description: 'Source-backed tactile AI and e-skin briefs.' },
     ],
     sources: [
+      {"label": "RADMCS v1: human-study protocol", "href": "https://arxiv.org/html/2610.01906v1"},
+      {"label": "CableVLA v1: contact history and action interface", "href": "https://arxiv.org/html/2609.25606v1"},
+      {"label": "Tactile-JEPA v1: topology, datasets and results", "href": "https://arxiv.org/html/2609.24385v1"},
+      {"label": "CRISP v1: geometry, solvers and evaluation", "href": "https://arxiv.org/html/2609.21761v1"},
+      {"label": "TWINS v1: demonstration and execution protocol", "href": "https://arxiv.org/html/2608.01733v1"},
+      {"label": "TouchWorld v2: prediction, refinement and task results", "href": "https://arxiv.org/html/2607.07287v2"},
       { label: 'DIGIT official project and acquisition resources', href: 'https://digit.ml/digit.html' },
       { label: 'GelSight official robotics examples and reconstruction workflow', href: 'https://github.com/gelsightinc/gsrobotics/tree/321d6a22da64529138ff10237335038fd8c5189f' },
       { label: 'ReSkin official project and calibration research', href: 'https://reskin.dev/' },
