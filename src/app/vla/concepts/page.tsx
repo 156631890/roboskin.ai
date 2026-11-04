@@ -44,6 +44,84 @@ const concepts = [
   },
 ];
 
+const readingGuide = {
+  "id": "concept-inference-trace",
+  "heading": "Classify a system from its inference trace",
+  "body": [
+    "A name can describe an input/output interface, a learning algorithm or an intended reusable capability. Those are different axes. VLA identifies an observation-and-instruction-to-action relationship; diffusion describes a generation process; a world model predicts environment quantities; HFM describes a proposed foundation for contact knowledge. A system can combine several of them.",
+    "Read the training diagram and the inference diagram separately. An auxiliary future observation or force target can supervise learning without being available during execution. Conversely, a frozen encoder can produce useful features while a separate trained head or controller supplies the task-specific behavior. Do not infer one role from the presence of another."
+  ],
+  "table": {
+    "headers": [
+      "Question",
+      "Evidence in the source",
+      "Interpretation"
+    ],
+    "rows": [
+      [
+        "What enters execution?",
+        "Current observations, history, instructions and permitted tools",
+        "Training-only targets are not necessarily runtime inputs"
+      ],
+      [
+        "What does the model predict?",
+        "Action, state, image, latent, score or language",
+        "An action distribution and a future-observation model have different targets"
+      ],
+      [
+        "What changes during adaptation?",
+        "Frozen backbone, trained head, adapter or full model",
+        "A linear-probe result is not a fine-tuned control result"
+      ],
+      [
+        "Who chooses and executes the action?",
+        "Policy, planner, adapter and controller",
+        "Predicting a plausible consequence does not demonstrate execution"
+      ],
+      [
+        "What closes the loop?",
+        "Fresh observations and an implemented update rule",
+        "Logging feedback does not establish it affects behavior"
+      ]
+    ]
+  },
+  "subsections": [
+    {
+      "heading": "Two concrete boundaries",
+      "body": [
+        "The HFM proposal compares frozen tactile encoders with trained linear readouts on TacBench. That measures how accessible selected task information is in those representations; it does not validate the proposal’s full active, predictive robot framework. DreamerV3 instead learns an environment model and improves behavior through imagined futures. A frozen representation comparison and imagined policy learning answer different questions.",
+        "Original Diffusion Policy generates actions by conditional denoising. Pi0 uses flow matching for action generation. Neither algorithm label by itself establishes a model that predicts the next tactile observation. Keep the existing VDA working definition explicit and ask a source to expand its acronym rather than assuming universal terminology. These distinctions are source interpretation, not a model comparison run by RoboSkin.ai."
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "HFM proposal and frozen-encoder protocol",
+      "href": "https://arxiv.org/html/2608.28664v1"
+    },
+    {
+      "label": "DreamerV3: environment model and behavior",
+      "href": "https://arxiv.org/abs/2301.04104"
+    },
+    {
+      "label": "Diffusion Policy: action generation",
+      "href": "https://arxiv.org/abs/2303.04137"
+    },
+    {
+      "label": "pi0: flow matching",
+      "href": "https://arxiv.org/abs/2410.24164"
+    },
+    {
+      "label": "Future observations and force-feedback interfaces",
+      "href": "/robot-world-models"
+    },
+    {
+      "label": "Reusable touch representations",
+      "href": "/tactile-foundation-models"
+    }
+  ]
+};
+
 export default function VlaConceptsPage() {
   return <VlaAssetLayout path="/vla/concepts" eyebrow="Concept disambiguation" title="VLA vs VDA vs world models vs HFM"
     intro="Compare model roles from the point of view of a VLA system: what enters the model, what comes out, and which part of the robot’s decision loop it can support. These labels describe overlapping dimensions.">
@@ -112,6 +190,23 @@ export default function VlaConceptsPage() {
             In <a href="https://arxiv.org/abs/2507.17294" className={linkClass}>VLA-Touch</a>, touch contributes to high-level planning and action refinement around a base policy.
             That modular composition shows why a tactile encoder, VLA and controller can coexist without becoming the same model category.</p>
           <p className="mt-4 text-sm"><Link href="/robot-vla-models#tactile-vla-integration-index" className={linkClass}>Compare the existing tactile integration mechanisms →</Link></p>
+        </div>
+      </div>
+    </section>
+    <section id={readingGuide.id} className="pb-14">
+      <div className="container-shell">
+        <div className="signal-panel p-6 md:p-8">
+          <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Original catalog review dates remain above; no model execution.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">{readingGuide.heading}</h2>
+          {readingGuide.body.map((text) => <p key={text} className="mt-4 leading-relaxed text-soft">{text}</p>)}
+          <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label={readingGuide.heading}>
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead><tr>{readingGuide.table.headers.map((text) => <th key={text} scope="col" className="border-b border-white/10 p-4 text-white">{text}</th>)}</tr></thead>
+              <tbody>{readingGuide.table.rows.map((row) => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th key={text} scope="row" className="border-b border-white/10 p-4 align-top text-white">{text}</th> : <td key={text} className="border-b border-white/10 p-4 align-top leading-relaxed text-soft">{text}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+          {readingGuide.subsections.map((section) => <div key={section.heading} className="mt-6"><h3 className="text-xl font-semibold text-white">{section.heading}</h3>{section.body.map((text) => <p key={text} className="mt-3 leading-relaxed text-soft">{text}</p>)}</div>)}
+          <ul className="mt-6 grid gap-3">{readingGuide.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">{link.label}</Link></li>)}</ul>
         </div>
       </div>
     </section>
