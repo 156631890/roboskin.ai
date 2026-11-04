@@ -5515,7 +5515,7 @@ A proposed follow-up should preserve cell identity, mounting, normalization, ass
     title: 'Gemini Robotics 2 extends VLA control from whole-body motion to dexterous hands',
     seoTitle: 'Gemini Robotics 2: Whole-Body VLA and Dexterity',
     seoDescription:
-      'An evidence-bounded review of Google DeepMind’s Gemini Robotics 2 VLA, ER 2 reasoning model, On-Device 2 model, official task results, access, and tactile gap.',
+      "Compare Gemini Robotics 2 model interfaces, chart aggregation, access and safety-evaluation limits; distinguish embodied reasoning from robot action control.",
     excerpt:
       'Google DeepMind’s Gemini Robotics 2 model family connects whole-body humanoid control, dexterous manipulation, embodied reasoning, and on-device adaptation—but its public results are provider-reported, not independent benchmarks.',
     content: `# Gemini Robotics 2 extends VLA control from whole-body motion to dexterous hands
@@ -5540,9 +5540,9 @@ These access states matter. The release is not equivalent to a downloadable, rep
 
 ## What the official task chart reports
 
-DeepMind says one Gemini Robotics 2 checkpoint controlled three embodiments: an Apptronik Apollo 2 with Inspire hands, an Apollo 2 with SharpaWave hands, and a Franka Duo with a Robotiq gripper. The values below are transcribed from the company’s release chart and belong only to those reported task settings.
+DeepMind says one Gemini Robotics 2 checkpoint controlled three embodiments: an Apptronik Apollo 2 with Inspire hands, an Apollo 2 with SharpaWave hands, and a Franka Duo with a Robotiq gripper. The values below were checked against the company’s three original charts. Whole-body and gripper bars average multiple tasks within each named skill category; multi-finger bars describe individual tasks. Do not pool these rows as eleven equivalent trials or average them into a universal dexterity score.
 
-| Embodiment and task | Officially reported success rate |
+| Embodiment and reported task or skill category | Provider-reported chart percentage |
 | --- | ---: |
 | Apollo 2 + Inspire hands: pick up from table | 68.4% |
 | Apollo 2 + Inspire hands: pick up from floor | 45.7% |
@@ -5566,7 +5566,7 @@ That division is relevant to [robot VLA models](/robot-vla-models) and [Physical
 
 ## What the on-device model adds
 
-DeepMind describes On-Device 2 as taking text, images, and numerical proprioception and returning numerical robot actions. The company reports adaptation to new bi-arm embodiments with a few hours of data, typically fewer than 200 examples in its experiments. Its model card also states two important limitations: weaker generalization outside the training distribution and difficulty controlling high-degree-of-freedom robots.
+DeepMind describes On-Device 2 as taking text, images, and numerical proprioception and returning numerical robot actions. The company reports adaptation to new bi-arm embodiments in a few hours, typically using fewer than 200 examples in its experiments. Adaptation time and the amount of demonstration data are different quantities. The On-Device 2 card primarily evaluates standing bi-arm manipulation; the main VLA’s mobile whole-body demonstrations should not be attributed to this smaller model. Its model card also states two important limitations: weaker generalization outside the training distribution and difficulty controlling high-degree-of-freedom robots.
 
 Local inference may reduce dependence on network connectivity and latency, but “on-device” is not itself a latency guarantee. The public model card does not publish a universal end-to-end control frequency across supported robot hardware.
 
@@ -5584,6 +5584,20 @@ DeepMind’s separate safety report evaluates agentic safety and uncertainty han
 
 That is the correct system boundary. Semantic safety can decide that a request is unsafe. Hardware and control safety must still make the robot stop predictably when a hazardous condition occurs. See the [robot safety map](/robot-safety) for the distinction between AI behavior, protective sensing, control functions, integration, and validation.
 
+## Choose the interface before choosing a model name
+
+The [ER 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-er-2/) identifies multimodal inputs but **text output**. A plan, generated tool request or success judgment still needs an application that interprets it, a suitable action-producing policy, and a controller. API access to ER 2 is therefore not access to the Gemini Robotics 2 VLA weights. The [On-Device 2 card](https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/) instead specifies numerical robot actions as output. These are different integration contracts.
+
+| Proposed evaluation | Evidence to establish first | Result that would remain insufficient |
+| --- | --- | --- |
+| Reasoning over a recorded scene | Exact reasoning model, observation sequence, task and expected text/tool response | A plausible plan without execution or independently checked task state |
+| Control on a selected embodiment | Authorized policy access, observation/action mapping, calibration and allowed operating conditions | A result from another hand or a different family member |
+| Local adaptation | Target embodiment, demonstration coverage, adaptation procedure and actual timing measurements | The words “on-device” or “fewer examples” without the tested configuration |
+
+This is an editorial planning aid, not a procedure we ran. The provider's access descriptions above belong to the July release and the reviewed cards; we have not checked entitlement through an account or called the API. The ER 2 card also limits safety-critical use, so a planning experiment should not be presented as permission to rely on the model for a protective function.
+
+The [safety report](https://storage.googleapis.com/deepmind-media/gemini-robotics/Gemini-Robotics-2-Safety.pdf) separates several evidence types. Its multi-turn uncertainty study uses an emulated VLA interface, not a physical robot or physics simulation. A different study involves an actual Apollo 2, while another monitors a proxy agent's recorded observations. Those experiments must retain their own apparatus and denominators. In particular, periodically deciding whether to continue a task does not establish a fast protective-stop response. See the [foundation-model readiness comparison](/robot-foundation-models#model-evaluation-entry-points) before equating semantic reasoning, action generation and verified execution.
+
 ## Evidence boundary
 
 This article analyzes Google DeepMind’s own release post, model cards, and safety report. The success rates are provider-reported results, not independent replications, and should not be transferred to other robots or task protocols. RoboSkin.ai did not test the models. No public source reviewed here establishes tactile input, model-weight access for the VLA, general commercial availability, or certified deployment safety.
@@ -5594,11 +5608,13 @@ This article analyzes Google DeepMind’s own release post, model cards, and saf
 - [Google DeepMind: Gemini Robotics ER 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-er-2/)
 - [Google DeepMind: Gemini Robotics On-Device 2 model card](https://deepmind.google/models/model-cards/gemini-robotics-on-device-2/)
 - [Google DeepMind: Gemini Robotics 2 safety evaluations](https://storage.googleapis.com/deepmind-media/gemini-robotics/Gemini-Robotics-2-Safety.pdf)
+
+*Source and chart review updated November 4, 2026. The original July announcement and this article’s original publication date remain separate. No API, model or robot test was performed.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Robot VLA models',
     image: '/generated/pages/technology-signal-flow.webp',
     sourceTitle: 'Gemini Robotics 2 brings whole body intelligence to robots',
@@ -5628,7 +5644,7 @@ This article analyzes Google DeepMind’s own release post, model cards, and saf
     title: 'LeRobot v0.6 connects world models, VLAs, evaluation, and corrective data collection',
     seoTitle: 'LeRobot v0.6: World Models, VLAs and Evaluation',
     seoDescription:
-      'Hugging Face LeRobot v0.6 adds world-model policies, five VLA integrations, reward models, six simulation benchmarks, richer datasets, and DAgger corrections.',
+      "Review LeRobot v0.6 rollout evidence, correction recording, version compatibility and model licensing; separate framework support from verified robot outcomes.",
     excerpt:
       'LeRobot v0.6 turns more of the robot-learning loop into shared infrastructure: world-model policies, VLAs, reward models, datasets, simulation evaluation, deployment, and corrective demonstrations.',
     content: `# LeRobot v0.6 connects world models, VLAs, evaluation, and corrective data collection
@@ -5662,7 +5678,7 @@ The release groups VLA-JEPA, LingBot-VA, and FastWAM under world-model policies,
 - LingBot-VA predicts video and actions autoregressively and can save predicted video for comparison with the actual rollout.
 - FastWAM combines video-generation and action experts during training but skips explicit future generation at inference.
 
-This distinction prevents a common SEO shortcut: “world model” is not one fixed architecture. For a useful comparison, record what the model predicts, whether prediction runs at test time, how actions condition the prediction, and whether the imagined state is evaluated against actual robot outcomes. The [robot world models guide](/robot-world-models) organizes those questions.
+The shared label needs qualification: “world model” is not one fixed architecture. For a useful comparison, record what the model predicts, whether prediction runs at test time, how actions condition the prediction, and whether the imagined state is evaluated against actual robot outcomes. The [robot world models guide](/robot-world-models) organizes those questions.
 
 ## Six simulation benchmark integrations
 
@@ -5692,6 +5708,23 @@ LeRobot v0.6 makes many models and benchmarks easier to run through common inter
 
 Simulation success also does not establish real-world robustness. Camera calibration, latency, motor dynamics, contact, object variation, and safety behavior can change the outcome after deployment.
 
+## Pin the recording mode before interpreting a rollout
+
+The [v0.6.0 rollout configuration](https://github.com/huggingface/lerobot/blob/30da8e687a6dfc617fcd94afc367ac7071c376ce/src/lerobot/rollout/configs.py) makes a consequential distinction: DAgger defaults to recording correction windows, while the optional continuous mode also records autonomous behavior. A file called an episode can therefore be a correction segment rather than a complete task attempt. The [versioned deployment guide](https://huggingface.co/docs/lerobot/v0.6.0/inference) describes these separate modes; we inspected documentation and code, not hardware behavior.
+
+| Evidence being retained | What it can answer | What requires a separate record |
+| --- | --- | --- |
+| Correction-only segment | What the operator demonstrated during that intervention | The preceding failed attempt, autonomous time and task outcome |
+| Continuous autonomous and correction frames | When control changed and what was recorded around it | Whether the correction met an independently defined success rule |
+| Reward-model score or generated annotation | What that estimator inferred from its inputs | Actual completion, contact state or an adjudicated label |
+| Simulation evaluation | Performance under the selected environment and protocol | Real hardware transfer and the effects of calibration, delay or contact |
+
+For a proposed evaluation, retain attempt IDs separately from file/segment IDs, identify intervention start and end, and record who or what determined completion. Otherwise a collection of useful corrections can be mistaken for autonomous successes. The intervention flag is provenance, not a success label. Selected highlights also omit whatever falls outside the saved interval.
+
+Compatibility needs the same discipline. The release replaces GR00T N1.5 support with N1.7 and directs users retaining N1.5 to LeRobot v0.5.1. A framework version, model checkpoint and preprocessing configuration form a set; substituting one item is not a like-for-like rerun. Check camera keys, units, action convention, normalization, policy state reset and evaluation seeds before comparing outputs.
+
+The inspected [code license](https://github.com/huggingface/lerobot/blob/30da8e687a6dfc617fcd94afc367ac7071c376ce/LICENSE) contains Apache-2.0 terms and third-party notices. It does not license every integrated checkpoint, dataset or simulator. Recording strategies also have upload behavior, so identify storage destination and authorization before executing them; optional cloud training is a separate service decision. No install, upload, paid compute or robot operation was performed for this review. The [foundation-model entry-point guide](/robot-foundation-models#model-evaluation-entry-points) separates framework availability from a usable policy and a validated application.
+
 ## Evidence boundary
 
 This article summarizes Hugging Face’s official LeRobot v0.6.0 announcement and linked project repository. Model, dataset-loading, and benchmark claims are release-author claims unless a separate paper is named. RoboSkin.ai did not independently reproduce the six environments, speed measurements, model results, or hardware workflows. Availability may differ by model license, checkpoint, simulator dependency, and compute requirement.
@@ -5700,11 +5733,13 @@ This article summarizes Hugging Face’s official LeRobot v0.6.0 announcement an
 
 - [Hugging Face: LeRobot v0.6.0 — Imagine, Evaluate, Improve](https://huggingface.co/blog/lerobot-release-v060)
 - [GitHub: huggingface/lerobot](https://github.com/huggingface/lerobot)
+
+*Documentation and pinned-source review updated November 4, 2026. This remains an analysis of the July v0.6.0 release, not a claim that it is the latest version or a reproduced deployment.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'LeRobot v0.6.0: Imagine, Evaluate, Improve',

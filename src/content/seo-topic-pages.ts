@@ -275,14 +275,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   {
     path: '/robot-foundation-models',
     title: "Robot Foundation Models (2026): Comparison",
-    description: "Robot foundation models compared on training data, embodiment and released weights — plus which ones you can actually run today.",
+    description: "Compare robot foundation models by interfaces, checkpoints, data, access and evaluation conditions, with documented examples and tactile-evidence limits.",
     introduction: "Robot foundation model refers to a broadly pretrained model intended for adaptation across robot tasks or embodiments. A robot foundation model can support perception, planning or action, but these roles are not interchangeable. Compare training data, robot compatibility, released artifacts and evaluation limits before deciding whether a system can run on your hardware.",
     h1: "Robot Foundation Models: What Each One Can Do",
     kicker: 'Source-reviewed model directory',
     intent: 'Technical guide and structured directory for robot foundation models, generalist robot models, robot AI models, multi-embodiment transfer, and evaluation evidence.',
     published: '2026-08-21',
-    updated: structureRelease.modifiedDate,
-    revisionNote: 'Added a source-reviewed REKI checkpoint, interface, license and evaluation boundary note; no model or hardware test.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: added model/API/framework entry points and protocol-comparison limits. Preserved the dated REKI checkpoint review; no installation, API call, benchmark reproduction or robot test.",
     priority: 0.9,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -333,6 +333,75 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Tactile model', 'Taxels, force, vibration, tactile images, or synchronized visual-touch data.', 'Contact representation, property estimate, prediction, or corrective action.', 'Does it transfer across sensors, tasks, objects, and robot bodies under a controlled protocol?'],
           ],
         },
+      },
+      {
+        "id": "model-evaluation-entry-points",
+        "heading": "Choose an evaluation entry point, not just a model name",
+        "body": [
+          "A library, an accessible reasoning API and downloadable policy weights are different starting points. Compare the artifact you can actually evaluate, the information it consumes, what it returns and the evidence required at the next interface. The following examples are documentation reviews, not compatibility tests or a ranking."
+        ],
+        "table": {
+          "headers": [
+            "Entry point",
+            "Documented interface",
+            "Decision before evaluation"
+          ],
+          "rows": [
+            [
+              "Gemini Robotics ER 2",
+              "Multimodal context to text; an application can use the reasoning with tools and a downstream policy",
+              "Separate API access from VLA weight access, and evaluate interpretation and execution independently"
+            ],
+            [
+              "LeRobot v0.6.0",
+              "Framework interfaces for selected policies, environments, recording and correction",
+              "Pin the framework, checkpoint, adapters and recording mode; a saved correction is not a full autonomous trial"
+            ],
+            [
+              "REKI LIBERO checkpoint",
+              "Dataset-specific images/state to actions, with history and adapter conventions",
+              "Retain the checkpoint, normalization, image orientation, reset and simulation protocol; do not infer another robot interface from array length"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Make the claimed comparison reproducible",
+            "body": [
+              "The existing REKI record below is retained as an October 17 checkpoint review. The November 4 recheck of its pinned evaluation document adds an important comparison boundary: RoboTwin evaluation uses 20 episodes per task, while that document says the benchmark leaderboard uses 100. A shared benchmark name therefore does not establish a matched protocol. Its RoboCasa evaluation also identifies the 50 target tasks in pretraining kitchens; this is not evidence of transfer to arbitrary unseen kitchens.",
+              "A proposed handoff should record artifact revision, observation keys and units, action convention, normalization, reset/cadence, environment split, attempt count, assistance and outcome definition. Mark each item as documented, measured in the actual evaluation, or unresolved. Do not turn a documented default into measured performance."
+            ]
+          },
+          {
+            "heading": "Keep integration readiness and contact evidence separate",
+            "body": [
+              "For a contact task, locate the measured feedback path rather than inferring it from the presence of a hand or a tactile sensor. Ask whether touch enters the policy, a separate corrective controller, evaluation only, or none of them. Then distinguish model prediction time, executed action horizon and low-level feedback rate. None of those numbers alone describes detection-to-response behavior.",
+              "Licensing and access are separate entries in the handoff. The REKI code and weights have different terms; a LeRobot integration does not replace the model-specific license; an API offering does not imply downloadable weights. Use the linked source boundaries before allocating an experiment, and a separate application review before physical operation."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Gemini Robotics 2: model outputs and evaluation apparatus",
+            "href": "/news/gemini-robotics-2-whole-body-vla-dexterity-2026"
+          },
+          {
+            "label": "LeRobot v0.6: corrections, attempts and compatibility",
+            "href": "/news/lerobot-v060-world-models-vla-evaluation-2026"
+          },
+          {
+            "label": "Pinned REKI evaluation protocol",
+            "href": "https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/docs/evaluation.md"
+          },
+          {
+            "label": "Measured and predicted tactile evidence",
+            "href": "/tactile-ai#contact-evidence-chain"
+          },
+          {
+            "label": "Scope a source-review brief",
+            "href": "/research-services"
+          }
+        ]
       },
       {
         heading: 'Data, embodiment, and transfer are separate claims',
@@ -393,6 +462,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Does a robot-model API provide motor-control weights?', answer: 'Not necessarily. An embodied-reasoning API can return text or tool-oriented reasoning while motor actions require a separate policy and controller. Verify the selected artifact and output contract; API access and downloadable VLA weights are different access states.' },
       {
         question: 'What is a robot foundation model?',
         answer:
@@ -431,6 +501,9 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Physical AI', href: '/physical-ai', description: 'Connect models to embodiment, control, safety, and physical feedback.' },
     ],
     sources: [
+      {"label": "Gemini Robotics ER 2: inputs, text output and access", "href": "https://deepmind.google/models/model-cards/gemini-robotics-er-2/"},
+      {"label": "LeRobot v0.6.0 release: integrations and version boundary", "href": "https://huggingface.co/blog/lerobot-release-v060"},
+      {"label": "REKI pinned evaluation protocols and comparison boundaries", "href": "https://github.com/kyutai-labs/reki/blob/12dd1e24acfc01c817e03ecd43f37cc5f9f6b2d1/docs/evaluation.md"},
       { label: 'Kyutai release listing: REKI, October 16, 2026', href: 'https://kyutai.org/blog/' },
       { label: 'REKI preprint and submission history', href: 'https://arxiv.org/abs/2610.22178' },
       { label: 'REKI LIBERO checkpoint model card', href: 'https://huggingface.co/kyutai/reki-2b-libero' },

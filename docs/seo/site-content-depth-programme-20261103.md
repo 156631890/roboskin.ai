@@ -151,10 +151,10 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/touchsight-twintouch-bare-hand-tactile-prediction | rewritten and production verified in PR124 | 1205 | 1 |
 | /news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026 | rewritten and production verified in PR125 | 1202 | 3 |
 | /news/twins-aist-body-surface-tactile-demonstrations-2026 | rewritten and production verified in PR131 | 1191 | 4 |
-| /news/gemini-robotics-2-whole-body-vla-dexterity-2026 | inventory only; claim-by-claim review pending | 1342 | 4 |
-| /news/lerobot-v060-world-models-vla-evaluation-2026 | inventory only; claim-by-claim review pending | 1181 | 4 |
-| /news/nist-humanoid-baseline-performance-benchmark-2026 | individual safety evidence review; production verification pending | 1098 | 5 |
-| /news/iso-10218-2025-industrial-robot-safety-scope | individual safety evidence review; production verification pending | 1075 | 2 |
+| /news/gemini-robotics-2-whole-body-vla-dexterity-2026 | individual model-readiness evidence review; production verification pending | 1342 | 4 |
+| /news/lerobot-v060-world-models-vla-evaluation-2026 | individual model-readiness evidence review; production verification pending | 1181 | 4 |
+| /news/nist-humanoid-baseline-performance-benchmark-2026 | rewritten and production verified in PR132 | 1098 | 5 |
+| /news/iso-10218-2025-industrial-robot-safety-scope | rewritten and production verified in PR132 | 1075 | 2 |
 | /news/twisted-yarn-textile-capacitive-robot-skin-2026 | rewritten and production verified in PR114 | 1256 | 3 |
 | /news/eit-pneumatic-hybrid-robot-skin-force-map-2026 | rewritten and production verified in PR114 | 1099 | 3 |
 | /news/self-powered-textile-artificial-skin-three-channel-robot-control-2026 | inventory only; claim-by-claim review pending | 906 | 1 |
@@ -191,7 +191,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/lerobot-dataset-format | rewritten and production verified in PR118 | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
 | /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
-| /robot-foundation-models | inventory only; claim-by-claim review pending | 8015 | 8 |
+| /robot-foundation-models | individual model-readiness evidence review; production verification pending | 8015 | 8 |
 | /robot-skin | inventory only; claim-by-claim review pending | 1495 | 77 |
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
 | /e-skin | inventory only; claim-by-claim review pending | 2724 | 16 |
@@ -222,7 +222,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
 | /robot-learning | rewritten and production verified in PR130 | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
-| /robot-safety | individual safety evidence review; production verification pending | 1391 | 12 |
+| /robot-safety | rewritten and production verified in PR132 | 1391 | 12 |
 | /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
 | /robot-world-models | rewritten and production verified in PR129 | 5409 | 25 |
 | /robot-teleoperation | rewritten and production verified in PR123 | 3967 | 32 |
@@ -334,3 +334,7 @@ Six existing reports and /tactile-ai now distinguish haptic cues, demonstration 
 ## Robot safety scope and benchmark evidence
 
 Two existing reports and /robot-safety now distinguish benchmark conditions, source publication status, component claims and application evidence. Add direct Part 2 scope, mobile-hazard boundaries and an explicitly hypothetical change-review example. No thresholds, certification, new hardware experiment or human factual approval is claimed. Whole-site review remains incomplete.
+
+## Model interfaces and evaluation entry points
+
+Two release analyses and /robot-foundation-models gain distinct source-reviewed boundaries: Gemini chart aggregation and model interfaces; LeRobot recording segments and checkpoint compatibility; REKI benchmark protocol comparability. Preserve original publication dates, modules and historical reviews. No installation, API call or hardware result claimed. Whole-site review remains incomplete.
