@@ -10,13 +10,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   loomiaSmartSkin,
   {
     path: '/sensors/robotiq-tsf-85',
+    revisionNote: "November 4, 2026: rechecked the user guide and manufacturer pages; added calibration-stage and replacement acceptance decisions. The SDK revision remains the dated October 14 source, not an executed test.",
     title: 'Robotiq TSF-85 Tactile Sensor: Specs, Use Cases & SDK',
     description: 'Review Robotiq TSF-85 published specifications, pressure and vibration rates, gripper compatibility, C++ SDK, Python viewer and integration limits.',
     h1: 'Robotiq TSF-85 Tactile Sensor: Specs, Use Cases, and SDK',
     kicker: 'Sensor evidence / Multimodal capacitive fingertips',
     intent: 'Help robot builders review TSF-85 documentation and distinguish raw sensing, software acquisition and validated grasp control.',
     published: '2026-10-17',
-    updated: '2026-10-17',
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -64,6 +65,60 @@ export const sensorDetailPages: SeoTopicPage[] = [
         links: [sources.tsfDesign, sources.tsfSdk],
       },
       {
+        "id": "calibration-and-replacement",
+        "heading": "From raw counts to a defensible acceptance decision",
+        "body": [
+          "The user guide distinguishes unloaded bias removal from sensitivity equalization. Its uniform-load procedure aligns taxel responses; the same guide warns about hysteresis, nonlinearity and concentrated contacts exceeding the calibration load at an individual taxel. The manufacturer design article also describes contact detection and orientation as strengths rather than claiming universal absolute-force accuracy.",
+          "For an evaluation, keep three records below separate. A heatmap becoming visually uniform is useful acquisition evidence, but it is not the reference measurement needed to validate force on a new object. These are proposed engineering checks; RoboSkin.ai has not performed them."
+        ],
+        "table": {
+          "headers": [
+            "Stage",
+            "Record",
+            "Acceptance question"
+          ],
+          "rows": [
+            [
+              "Baseline",
+              "Finger identity, raw unloaded values, temperature and time",
+              "Can drift be distinguished from a new contact?"
+            ],
+            [
+              "Relative response",
+              "Applied reference, contact area, taxel gains and loading direction",
+              "Does the equalization remain useful away from the calibration contact?"
+            ],
+            [
+              "Task decision",
+              "Held-out contacts, controller threshold, false triggers and missed events",
+              "Does the signal support the decision at the installed operating rate?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Treat a replacement fingertip as a changed configuration",
+            "body": [
+              "Retain the previous calibration and tag the replacement as a new component. Compare unloaded traces and reference contacts before reusing a threshold or learned model. Include fingertips, hub, cables, host acquisition, calibration work and replacements in the evaluation scope; the starter kit and replacement kit are different packages. For the separate 2FC and Contact Core offering, use the robot-hand procurement discussion rather than assuming this sensor-only SDK includes every advertised skill."
+            ],
+            "links": [
+              {
+                "label": "Robotiq user guide: bias, gain and maintenance",
+                "href": "https://robotiq.com/hubfs/Tactile%20Sensor%20Fingertips/Tactile%20Sensors%20TSF-85%20-%20User%20Guide.pdf#page=12"
+              },
+              {
+                "label": "Plan a calibration and reference record",
+                "href": "/guides/tactile-sensor-calibration"
+              },
+              {
+                "label": "Robot-hand procurement and integration boundaries",
+                "href": "/robot-hands"
+              }
+            ]
+          }
+        ]
+      },
+      {
         heading: 'SDK and integration',
         body: [
           'The official tactile_sensors repository contains a C++ SDK, Python quick-connect tools and a browser-based viewer. The C++ interface uses threaded callbacks; the viewer displays tactile heatmaps, dynamic-signal FFT and IMU plots. Review here is pinned to commit 172a7c8, dated October 14, 2026, rather than a relative update age.',
@@ -97,14 +152,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/digit',
-    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
+    revisionNote: "November 4, 2026: rechecked the original paper and official project; added a durability-to-acceptance distinction. Earlier repository and license checks retain their dates; no connected-sensor test was run.",
     title: 'DIGIT Tactile Sensor: Specs, Python Interface & Limits',
     description: 'Evaluate the original DIGIT tactile sensor: paper specifications, Python stream settings, design files, calibration needs, repository status, and reuse terms.',
     h1: 'DIGIT tactile sensor: from RGB frames to robot touch',
     kicker: 'Sensor evidence / Vision-based fingertip',
     intent: 'Help robotics researchers evaluate the original DIGIT hardware and start with its documented Python interface.',
     published: '2026-09-12',
-    updated: '2026-10-17',
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -155,6 +210,52 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'Both the reviewed design and Python-interface repositories carry Creative Commons Attribution-NonCommercial 4.0 terms. Publicly available files should not be treated as unrestricted commercial-use software or hardware designs. Commercial sensor purchase and reuse of repository material are separate questions.',
           'The official project also links TACTO, a tactile simulator. Simulated observations can support development, but their appearance and contact dynamics do not validate a physical sensor calibration or a robot policy. Keep simulation and physical results separate in your records.',
         ],
+      },
+      {
+        "id": "durability-evidence",
+        "heading": "What the original durability experiment actually measured",
+        "body": [
+          "The 2020 paper evaluates gel coating wear with a specified linear-abrasion procedure and observes changes in transmitted light. That endpoint concerns coating damage under that procedure. One comparison gel was intended for high-resolution surface measurement rather than robotics. The experiment should not be expanded into a lifetime ranking of current DIGIT and GelSight products.",
+          "A replacement decision has three separate questions: is the surface physically damaged, is the acquired image still usable, and does the calibrated model remain accurate enough for the task? Passing the first check does not answer the other two. For procurement, request the exact current gel and assembly revision rather than treating the original paper as a warranty."
+        ],
+        "table": {
+          "headers": [
+            "Change",
+            "Compare with the saved baseline",
+            "Keep out of the conclusion"
+          ],
+          "rows": [
+            [
+              "New gel or coating wear",
+              "Unloaded appearance, contact coverage and reference-shape reconstruction",
+              "A lifetime prediction from image appearance alone"
+            ],
+            [
+              "Camera or lighting settings",
+              "Supported stream mode, illumination and preprocessing",
+              "Force accuracy inferred from pixel count"
+            ],
+            [
+              "New mount or robot task",
+              "Calibration references, geometry and matched task trials",
+              "Transfer of a previous policy without evaluation"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "Original DIGIT paper, mechanical robustness experiment",
+            "href": "https://arxiv.org/pdf/2005.14679#page=4"
+          },
+          {
+            "label": "Optical tactile maintenance and replacement workflow",
+            "href": "/guides/optical-tactile-sensor-maintenance"
+          },
+          {
+            "label": "Compare GelSight and DIGIT using a matched task",
+            "href": "/guides/gelsight-vs-digit"
+          }
+        ]
       },
       {
         heading: 'Choosing between DIGIT, GelSight Mini, and ReSkin',
@@ -230,14 +331,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/gelsight-mini',
-    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
+    revisionNote: "November 4, 2026: rechecked the manufacturer datasheet and added a capture-to-reconstruction acceptance record. The pinned software documentation remains a dated review; no hardware or reconstruction experiment was run.",
     title: 'GelSight Mini: Specifications, Software & Calibration',
     description: 'Review GelSight Mini specifications, RGB and 3D workflows, calibration limits, replaceable gel, Python examples, and evidence for robotics use.',
     h1: 'GelSight Mini: specifications and a usable research workflow',
     kicker: 'Sensor evidence / Commercial optical touch',
     intent: 'Help researchers distinguish GelSight Mini manufacturer specifications from software reconstruction settings and experimental claims.',
     published: '2026-09-12',
-    updated: '2026-10-17',
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -283,6 +384,57 @@ export const sensorDetailPages: SeoTopicPage[] = [
         contextLinks: [
           { before: 'Use the ', label: 'GelSight Mini cleaning and cartridge replacement guide', href: '/guides/optical-tactile-sensor-maintenance', after: ' to distinguish the documented Mini procedure from original DIGIT hardware.' },
         ],
+      },
+      {
+        "id": "capture-reconstruction-acceptance",
+        "heading": "Keep capture, reconstruction and acceptance in one record",
+        "body": [
+          "Treat the sensing configuration as more than a camera model. The saved record should connect the physical cartridge to the actual stream, processing settings and reference measurement. Otherwise a change in the gel, crop or image scaling can be mistaken for a change in the contacted object.",
+          "The datasheet includes a case-temperature test while running at full frame rate under its stated indoor condition. It does not prescribe a universal stabilization time or prove temperature-independent calibration. For a repeated measurement, document the acquisition interval and environmental condition, and compare unloaded images before and after the session. This is an evaluation recommendation, not a measured warm-up requirement."
+        ],
+        "table": {
+          "headers": [
+            "Layer",
+            "Record",
+            "Check before reuse"
+          ],
+          "rows": [
+            [
+              "Physical unit",
+              "Sensor/cartridge identity, mount and gel condition",
+              "Repeat the same reference contacts after replacement"
+            ],
+            [
+              "Acquisition",
+              "Negotiated format, frame timestamps and missing frames",
+              "Separate camera output from resized processing images"
+            ],
+            [
+              "Reconstruction",
+              "Model revision, crop, scale and marker handling",
+              "Compare metric output against an independent reference"
+            ],
+            [
+              "Application",
+              "Objects, controller settings and failure criterion",
+              "Evaluate task outcomes separately from a visible 3D surface"
+            ]
+          ]
+        },
+        "links": [
+          {
+            "label": "GelSight Mini datasheet: thermal behavior and specifications",
+            "href": "https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GelSight_Datasheet_GSMini.pdf#page=3"
+          },
+          {
+            "label": "Define depth and force reference checks",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Preserve synchronized observations for ROS 2",
+            "href": "/guides/ros2-tactile-sensing"
+          }
+        ]
       },
       {
         heading: 'Reading robotics evidence correctly',
@@ -343,14 +495,14 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/reskin',
-    revisionNote: "October 17, 2026: added contextual maintenance or magnetic-sensor comparison links. Existing source review dates are retained.",
+    revisionNote: "November 4, 2026: rechecked the paper and official project; distinguished within-skin, chronological and held-out-board evaluation. No fabrication, model execution or hardware test was performed.",
     title: 'ReSkin Magnetic Tactile Sensor: Design, Data & Calibration',
-    description: 'Understand ReSkin magnetic tactile sensing: replaceable elastomer, five-magnetometer design, 400 Hz research setup, Python data collection, and calibration evidence.',
+    description: 'Review ReSkin magnetic tactile sensing: replaceable elastomer, five magnetometers, the 400 Hz research setup, Python acquisition and calibration limits.',
     h1: 'ReSkin: magnetic touch with a replaceable skin',
     kicker: 'Sensor evidence / Magnetic tactile skin',
     intent: 'Explain ReSkin hardware, raw observations, software access, and the limits of cross-skin calibration claims.',
     published: '2026-09-12',
-    updated: '2026-10-17',
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -392,6 +544,60 @@ export const sensorDetailPages: SeoTopicPage[] = [
           'The original experimental setup fixes the board and skin on a printed mount, uses a robot-driven hemispherical indenter, and measures reference normal force with an ATI Nano17. The paper describes quasi-static measurements unless stated otherwise. These conditions differ from arbitrary sliding, impact, or full-hand manipulation.',
           'The widely quoted 1 mm localization at 90% accuracy is a study summary, not a universal tolerance for every installed skin. Likewise, reported durability over many contacts depends on the interaction and material conditions. Preserve the evaluation protocol whenever quoting those figures.',
         ],
+      },
+      {
+        "id": "transfer-evaluation",
+        "heading": "Choose the split that matches the replacement claim",
+        "body": [
+          "The paper uses several different evaluations. Its random within-skin split checks a mapping under one data distribution. A later chronological experiment examines wear and baseline handling. Cross-sensor experiments instead hold out a board and its three skins from a collection of six boards and 18 skins. Those tests answer different questions; the strongest same-skin result is not a replacement guarantee.",
+          "Self-supervised adaptation uses observations from the new skin and relative contact ordering. It reduces the need for new force labels in that adaptation step; it does not eliminate prior supervised training, new-skin observations or evaluation. Keep localization criteria separate from force error, and report the exact held-out unit."
+        ],
+        "table": {
+          "headers": [
+            "Intended claim",
+            "Appropriate separation to plan",
+            "Additional record"
+          ],
+          "rows": [
+            [
+              "Continued use of the same skin",
+              "Earlier versus later contacts",
+              "Baseline schedule and accumulated wear"
+            ],
+            [
+              "Replacement passive skin",
+              "Skin identity separated across evaluation",
+              "Mounting geometry and adaptation observations"
+            ],
+            [
+              "Different electronics or geometry",
+              "Board/configuration separated across evaluation",
+              "Axis mapping, skin-to-board spacing and reference forces"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Use the published protocol as a starting point",
+            "body": [
+              "Choose the operational change first, then reserve reference contacts that are not used to fit or adapt the model. Retain skin and board identities in every recording so that a random frame split cannot silently stand in for a replacement test. The table is a proposed evaluation design, not a new ReSkin benchmark or evidence that every listed split was performed here."
+            ],
+            "links": [
+              {
+                "label": "ReSkin paper, sections 5 and 6",
+                "href": "https://arxiv.org/html/2111.00071v2"
+              },
+              {
+                "label": "Dataset split and access checklist",
+                "href": "/datasets"
+              },
+              {
+                "label": "Calibration references and uncertainty",
+                "href": "/guides/tactile-sensor-calibration"
+              }
+            ]
+          }
+        ]
       },
       {
         heading: 'Integration decisions before mounting a skin',
