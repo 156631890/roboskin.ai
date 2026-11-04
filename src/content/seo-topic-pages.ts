@@ -5326,13 +5326,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-manipulation',
     title: 'Robot Manipulation: Learning, Grasping, Touch & Dexterity',
     description:
-      'Explore robot manipulation across grasping, dexterous hands, insertion, robot learning, VLA policies, force control, tactile feedback, and evaluation.',
+      "Compare robot manipulation by observation, decision and outcome; distinguish grasp retries, tactile feedback, training data and task-level evaluation.",
     h1: 'Robot manipulation: learning, control and tactile feedback',
-    kicker: 'High-interest robotics task pillar',
+    kicker: "Manipulation methods and evidence",
     intent: 'Broad pillar for robot manipulation, robotic manipulation, dexterous manipulation, robot grasping, contact-rich tasks, manipulation learning, and tactile feedback.',
     published: '2026-08-20',
-    updated: '2026-10-17',
-    revisionNote: 'October 17, 2026: added a contextual route to the Cartesian Hand review and its verified code/CAD release. Existing evidence and comparison tables are retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed the full guide, source routes and embedded briefs; added contact-decision and attempted-trial comparisons, and refreshed PRISM access wording. Research results remain author-reported.",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -5352,7 +5352,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         bullets: [
           'Perception: objects, geometry, materials, people, obstacles, and contact context',
           'Planning or policy: task sequence, grasp, trajectory, action chunk, or recovery choice',
-          'Control: position, velocity, impedance, force, torque, or learned closed-loop command',
+          'Control: position, velocity, impedance, force, torque, or a learned command with explicit execution and feedback timing',
           'End effector: parallel gripper, suction, multi-finger hand, soft gripper, or tool',
           'Feedback: vision, proprioception, force or torque, tactile arrays, and task outcome',
         ],
@@ -5361,7 +5361,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'Manipulation task families',
         body: [
           'A model that succeeds at pick-and-place has not automatically solved insertion, deformable objects, tool use, or multi-finger dexterity. Task families create different sensing, control, and evaluation requirements.',
-          'PRISM reports 5,000+ trajectories across 25+ industrial tasks and multiple robot and teleoperation configurations, including insertion, packaging, installation, and conveyor sorting. Tactile observations cover only an unspecified subset, and the official dataset download remained pending when reviewed, so the paper is evidence of the announced collection design rather than an independently audited open benchmark.',
+          'PRISM reports 5,000+ trajectories across 25+ industrial tasks and multiple robot and teleoperation configurations, including insertion, packaging, installation, and conveyor sorting. Tactile observations cover only an unspecified subset. The official project now links a ModelScope data route, but this review did not verify its payload or reuse terms. The paper describes the collection; it is not an independently audited open benchmark.',
         ],
         table: {
           headers: ['Task family', 'Physical challenge', 'Useful feedback', 'Evidence to report'],
@@ -5400,6 +5400,95 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "contact-decisions",
+        "heading": "Map contact evidence to a specific decision",
+        "body": [
+          "Before choosing a model, write down the decision the robot must make: continue closing, lift, search again, choose an object, change a demonstration or stop a trial. The same word—touch—can describe a direct measurement, an inferred contact proxy, a training signal or an exploration objective. Those roles need different validation."
+        ],
+        "table": {
+          "headers": [
+            "Decision",
+            "Source-specific example",
+            "What the result does not establish"
+          ],
+          "rows": [
+            [
+              "When to lift or regrasp",
+              "Blind Grasp Reflex coordinates an arm using a score inferred from hand proprioception.",
+              "The score is not calibrated payload capacity or direct slip/force sensing; retry-window success differs from first-attempt success."
+            ],
+            [
+              "When to stop tactile search",
+              "DA-GRD stops when sufficient planar belief mass supports a common grasp.",
+              "Geometric coverage is not a measured probability of task success, and successful-episode probe counts omit failed-attempt cost."
+            ],
+            [
+              "Which object to retrieve",
+              "GLoTouch combines known geometry with global force probing and local tactile matching.",
+              "A development-set recognition result does not establish complete retrieval of unfamiliar objects."
+            ],
+            [
+              "What behavior to demonstrate",
+              "Better Curriculum logs behavior shaped by a tactile gripper reflex.",
+              "A tactile-free learner does not inherit an independent runtime contact controller merely by imitating its trajectories."
+            ],
+            [
+              "Which prior data to reuse",
+              "PHASE retrieves contact-phase segments for offline policy training.",
+              "Few target demonstrations do not mean no prior data, zero-shot transfer or online retrieval during execution."
+            ],
+            [
+              "Where to collect experience",
+              "TacEx rewards modality-specific prediction disagreement in simulation.",
+              "Contact-seeking curiosity does not enforce safe forces or demonstrate physical deployment."
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Keep a complete attempted-trial record",
+            "body": [
+              "For a proposed insertion evaluation, define the starting pose, allowed retries, full-seating criterion, time limit and permitted interventions before running it. Record every attempted trial, including protective stops, timeouts, dropped objects and resets. Report first-attempt completion separately from eventual completion within a retry window; report elapsed time across failures as well as the successful subset.",
+              "Then connect observation to action: retain sensor or proxy identity, calibration, acquisition time, command time, controller state and executed motion. Keep collection, training, model selection and evaluation data roles explicit. A boundary inferred from a complete demonstration may be valid offline while requiring a different detector during execution. This is suggested engineering documentation, not a new experiment performed by RoboSkin or a guarantee supplied by the cited studies."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Blind Grasp Reflex: score and retry-window interpretation",
+            "href": "/news/blind-grasp-reflex-proprioceptive-dexterous-hand"
+          },
+          {
+            "label": "DA-GRD: grasp coverage and probe cost",
+            "href": "/news/da-grd-tactile-grasp-recovery"
+          },
+          {
+            "label": "GLoTouch: search and matching decisions",
+            "href": "/news/glotouch-global-local-haptic-search"
+          },
+          {
+            "label": "Better Curriculum: demonstration and runtime control",
+            "href": "/news/better-curriculum-tactile-reflex-fragile-grasping"
+          },
+          {
+            "label": "PHASE: prior data and offline contact segmentation",
+            "href": "/news/phase-tactile-retrieval-few-shot-insertion"
+          },
+          {
+            "label": "TacEx: reward-free collection versus rewarded steering",
+            "href": "/news/tacex-tactile-curiosity-robot-exploration"
+          },
+          {
+            "label": "Create a tactile calibration record",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Scope a source-based integration review",
+            "href": "/research-services"
+          }
+        ]
+      },
+      {
         heading: 'How to compare manipulation results',
         body: [
           'A credible comparison aligns the task, robot, end effector, observations, training data, action budget, controller rate, objects, environment, and evaluation procedure. It also states whether failures were retried, demonstrations were selected, or a person intervened.',
@@ -5413,9 +5502,11 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Does a high grasp score mean the object is secure?', answer: 'Not by itself. A learned score, geometric coverage threshold and measured force are different signals. Check how the score was calibrated, which controller decision it permits and whether physical retention was tested under the intended motion.' },
+      { question: 'Can touch help a robot policy that has no tactile input?', answer: 'Yes, touch can shape demonstrations or provide training supervision. That does not automatically give the deployed policy a tactile feedback loop. Check whether a separate sensor-based controller remains active during execution.' },
       { question: 'What is robot manipulation?', answer: 'Robot manipulation is the use of an arm, hand, gripper, tool, or whole body to intentionally change an object or environment through physical action.' },
       { question: 'What is dexterous manipulation?', answer: 'Dexterous manipulation uses coordinated contacts and motion to perform tasks such as reorientation, multi-finger control, tool use, or handling objects with tight physical constraints.' },
-      { question: 'Why is tactile sensing useful for robot manipulation?', answer: 'Touch exposes local contact, pressure, shear, slip, deformation, seating, and hidden motion after contact begins, especially when the hand or object occludes vision.' },
+      { question: 'Why is tactile sensing useful for robot manipulation?', answer: 'Depending on the sensor and calibration, touch can provide local contact, deformation, pressure or shear evidence after contact begins. Slip, seating and hidden motion may require inference and task-specific validation; one tactile channel does not measure them all.' },
       { question: 'How should robot manipulation systems be evaluated?', answer: 'Align the robot, end effector, task, inputs, data, controller, objects, trials, success criteria, interventions, and failure reporting before comparing results.' },
     ],
     relatedLinks: [
@@ -5431,6 +5522,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Tactile benchmarks', href: '/benchmarks', description: 'Review shared tasks, splits, metrics, baselines, and protocols.' },
     ],
     sources: [
+      { label: 'PRISM official project and data route', href: 'https://tengbo-yu.github.io/PRISM/' },
       { label: 'PRISM contact-rich industrial manipulation dataset preprint', href: 'https://arxiv.org/abs/2608.17962' },
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },
       { label: 'T-Rex tactile-reactive manipulation preprint', href: 'https://arxiv.org/abs/2606.17055' },
