@@ -1,0 +1,53 @@
+# Individual humanoid evidence and control review — November 4, 2026
+
+Status: researched; implementation and production verification pending. Six existing News pages plus the humanoid overview are in scope. No new URLs, reproduced experiments, downloaded model/data payloads, hardware operation, outreach or GSC request. Original publication dates, useful sections, links and anchors remain. Human factual sign-off remains pending; no human approval is claimed.
+
+## Sources and reading coverage
+
+The six arXiv v1 abstracts and complete papers were individually read, including methods, results, appendices and limitations. HumanoidToolBench HTML ends at Table III, so the public nine-page PDF was also downloaded and its remaining methods, results and limitations read. Saved source bodies and response/hash records are in primary-source-reads.json and asset-source-reads.json. Official project pages were rechecked. Follow-up repository and overview-source reads are recorded separately. Public text/source inspection does not establish runnable reproduction or a downloaded dataset's integrity.
+
+## HumanoidToolBench — 2610.02089v1
+
+18 conditions, 55 assets; 3,003 simulated and 91 physical trajectories are not 3,094 independent collection attempts. The 1,803 L0 prefixes include 1,189 successful and 614 later-unsuccessful source attempts. 1,959 L1/L2 attempts yield 1,200 successful full trajectories; 11 successes do not meet the 8 cm lift rule. Proposed leakage check groups prefixes by source attempt, rather than assuming the authors evaluated such a split.
+
+Five event rates are fractions of episodes, not a nested funnel: an initially wrong touch can precede correct lifting. The aggregate excludes L0 and averages six L1/L2 conditions per mode. Do not infer a conditional probability by dividing percentages across levels. Each policy was trained once. Simulation evaluation uses 100 episodes per condition; physical evaluation uses 10 per cell, four cells, after 5,000 extra updates on 91 real demonstrations. It is not zero-shot sim-to-real. Observation is head RGB plus 32 robot-state values, not measured touch or object state. 36 actions are commanded at 50 Hz, but chunks execute open-loop: ACT 100, GR00T 40, FastWAM 32 steps. Command rate is not fresh-observation or model rate. Focused unseen-tool/instruction probes use a separately trained GR00T checkpoint; the unrelated-instruction result is one fixed IceBreak scene, not proof of general language independence.
+
+Current project provides code/evaluation and data/checkpoint links. Verify pinned code/license and data terms independently before updating stale availability statements. No GPU evaluation performed.
+
+## InterEvolve — 2610.02196v1
+
+86.5% is the eight-family final simulation macro-average. The 2.1 GPU-hours / 0.23M tokens are one complete search for one family, not all eight. Pretraining leaves 3,866 trajectories after four 50-trajectory holdouts. Valid proposals get 192 tuning rollouts; top candidates receive separate 192 confirmation rollouts, not every candidate. Final 64 scenarios differ from search scenarios but share bounded ±12 degree/±0.15 m distributions. Frozen verifier prevents rewards from redefining task success: standing still can earn reward with zero task success. Actual success is nonmonotonic over rounds although earned reward rises.
+
+The frozen source policy/latent bank follow pretraining (and the actor-object residual training); search updates a text library, not model weights. Hardware appendix replays a prompt latent sequence obtained from a simulated rollout. A frozen controller closes the loop on proprioception and estimated object pose; this is neither an online LLM nor blind joint playback. RGB-D, offboard processing, object mesh and confidence gating are dependencies. One kick demonstration uses motion capture. Geometric proximity features are not measured forces. Library-transfer objects were seen during pretraining, even if new to search. 60.9% in extended results uses scenario success if any of three rollouts succeeds; do not mix it with the 5/10 main composite result. Project provides paper/media; no implementation verified.
+
+## Reactive hand bracing — 2610.00823v1
+
+Correct the title's implication of a physical 10 ms brace. 9.7 ms is planner computation for both sides, not contact-to-action latency. Depth regions update at 30 Hz; new plans require a threshold and at least three seconds between plans. Motion and geometrically inferred touchdown follow planning. Position/velocity relative to a plane supplies contact evidence, not a skin force measurement. CoP prediction errors are centimeter RMSE over modeled contact configurations, not a worst-case stability guarantee. Preview simplifies angular momentum, feet and bilateral interactions; assumed impact/friction are model choices.
+
+Hardware has 32 alternating pushes across three configurations, not calibrated equal-force intervention groups. Capture-point change is a disturbance proxy. Walking baseline pushes did not trigger replanning; do not claim randomized matched control. 43% standing and 18% walking recovery comparisons are author-reported under these conditions. The 55 ms touchdown estimate and tracking effects lasting about 750 ms show why planner speed is not total response. No verified implementation or safety qualification.
+
+## Uni-VLaT — 2609.35450v1
+
+624 effective tactile channels, eight pooled body regions and eight learned tokens are different units. 289 retained episodes, not exactly 50 per task; all are training data with no separate validation split, and checkpoint selection uses real-rollout performance. Propose participant/mount/scene holdouts as a reader evaluation, not an existing paper result. Four tactile frames at 50 Hz span 60 ms; training predicts future tactile frames out to 80 ms. Nominal tactile acquisition is 100 Hz, synchronized stream 50 Hz. A 40-token motion chunk spans 0.8 s. New requests occur roughly 0.4 s after the preceding result, with inference and expired-prefix handling; the VLA is not refreshed at the low-level controller's 500 Hz. No independent tactile reflex is established. Physical robot has no dexterous hands; placeholder hand state is interface compatibility.
+
+Main comparisons use 20 trials per task/method, pi model 10; ablations mostly 10 with the full model reusing main results. Single training seed. Overall 75% does not imply every task wins. Hugging used one training participant and two evaluation participants; raw ADC is not calibrated contact force or safety evidence. Cleanup's 70% stage score differs from its 55% binary completion rate. Failure before execution is not a physical trial failure. Current project does not verify implementation/weights; do not present historical coming-soon text as fresh evidence.
+
+## TactileStep — 2609.28959v1
+
+Rigid simulated contacts are diffused to taxel features, not a full model of soft insoles. Raw readings pass through a calibration MLP; measured force is derived from this pipeline. Two frames of eight features produce 16 actor inputs. Force normalization clips; zero CoP can mean low/unloaded force, not centered support. Active-taxel fraction is threshold-derived, not exact continuous contact geometry. Wireless sampling at 25 Hz means 40 ms nominal spacing; sub-millisecond transmission after a sample is not end-to-end feedback delay. Wired 100 Hz comparison covers two tested conditions only.
+
+20 hardware samples per condition must not be labeled 20 full traversals. Simulated impact is the landing-window maximum; physical impact is the first rising edge in insole-derived force, not an independent load-cell peak. Sound is peak A-weighted near-robot microphone measurement, with fan background and fixed geometry, not workplace exposure or a percent reduction. Simulation energy increases in all six tasks despite quieter/softer contact. Feature agreement on a short descent does not validate all terrain, wear, drift or soft materials. No implementation run or available release verified; current project names CoRL 2026 Spotlight. Delay probability differs between appendix tables; do not invent one authoritative reproduction configuration.
+
+## CAMP — 2609.29021v1
+
+UR7e plus Linker hand, 22 joints; static known obstacles and a screened goal IK are assumptions, not perception/goal-generation achievements. Nonempty hand-configuration sets at arm waypoints do not establish a connected collision-free path. Local arm repair and VMP refinement address that distinction. Capsule/SDF approximations guide planning; exact MuJoCo geometry checks separately validate sampled paths. Neither establishes real-time physical collision protection or contact force control.
+
+Ten 100-problem batches supply mean ± SD across batches, not training seeds. Mean time includes failed trials but excludes setup, simplification, dense validation and playback. Normalized path length includes successful trials only and is not energy. Ablation is one 100-problem batch; fine-only can be faster but less successful. Physical results are 8/10, 9/10 and 8/10 for three goal-configuration tasks; pregrasp is not grasp completion, and button approach is not force-regulated actuation. 1 cm margin is one setup choice, not a generally safe calibration tolerance. Official code page still promises a future release; no executable package verified.
+
+## Editorial intent
+
+Each report gets a distinct, method-specific evidence section, not repeated filler. The overview compares observation, inference/planning, control, physical confirmation and evaluation denominators, with natural links to these reports. It must keep arm-only CAMP separate from humanoid demonstrations. Metadata and source availability are corrected without treating this review as a new paper release. All useful prior modules/anchors remain.
+
+## Follow-up source audit
+
+HumanoidToolBench revision 3fec9bd36933a1648ff7f95468c983f3452243a0 README, LICENSE, data/README.md and docs/PUBLIC_EVALUATION.md were read. The initial root-level evaluation-doc URL was 404; the README supplies the valid docs/ path. Code MIT, data CC BY-NC 4.0, dependency terms separate; no execution or payload download. Official IFR 2026 trends, IFR humanoid position announcement, NVIDIA humanoid overview and reference-design announcement, and Google DeepMind Gemini Robotics 2 announcement were re-read. The DeepMind body was HTTP gzip despite requested identity encoding and was decoded locally before reading. Existing overview claims are supported as attributed announcements, not independent capability validation. The three embedded research briefs are previously individually reviewed production content and retain their scope and links.
