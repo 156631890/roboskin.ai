@@ -6291,13 +6291,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/robot-teleoperation',
     title: 'Robot Teleoperation Data: Collection & Quality Checks',
     description:
-      'Collect robot teleoperation data for learning: compare UMI and GELLO, then check action labels, synchronization, episode quality, splits and licenses.',
+      "Plan robot demonstration collection by action meaning, contact-signal roles, synchronization, intervention records and evidence for reuse and policy evaluation.",
     h1: 'Robot teleoperation data: collection and quality checks',
     kicker: 'Robot data collection pillar',
     intent: 'Technical guide for robot teleoperation, humanoid teleoperation, robot demonstration data, imitation learning data collection, teleoperation interfaces, and VLA training data.',
     published: '2026-08-21',
-    updated: '2026-10-28',
-    revisionNote: 'October 28, 2026: added a pinned DROID action-target trace, a measured-motion comparison and downloadable action-contract records. These are source checks, not a DROID loader or hardware run; earlier collection evidence is retained.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: reviewed collection sources and added measured/simulated contact, runtime-input and handover distinctions. October 28, 2026: added a pinned DROID action-target trace, a measured-motion comparison and downloadable action-contract records. These are source checks, not a DROID loader or hardware run; earlier collection evidence is retained.",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -6313,12 +6313,85 @@ export const seoTopicPages: SeoTopicPage[] = [
     },
     quickAnswer: [
       'Robot teleoperation data pairs recorded observations and robot state with human-controlled commands or action targets. To use it for learning, document the action interface, align clocks, retain resets and interventions, check episode quality, and define evaluation splits and reuse terms. Teleoperation demonstrates human control, not autonomous policy capability.',
-      'Robot teleoperation is remote or mediated human control of a robot through interfaces such as joysticks, teach pendants, motion capture, wearable devices, cameras, handheld end effectors, or bilateral systems. Teleoperated behavior is not autonomous behavior.',
-      'For robot learning, teleoperation can generate aligned observations and actions, but useful data also requires calibration, timing, task definitions, resets, failures, operator context, quality control, schema, access, and license.',
       'Demonstrations do not become a capable policy automatically. Training must account for action representation, embodiment, coverage, compounding errors, evaluation splits, interventions, and repeated real-robot testing.',
     ],
     sections: [
       teleoperationActionTrace,
+      {
+        "id": "contact-signal-roles",
+        "heading": "Measured touch, simulated contact and operator feedback have different roles",
+        "body": [
+          "Before combining demonstrations, identify where each contact signal comes from and where it is consumed. A measured glove signal can supervise a reward without becoming a deployed robot observation; a predicted contact can guide a person without being a calibrated force measurement. The papers below illustrate these distinct interfaces, not a ranking of collection systems."
+        ],
+        "table": {
+          "headers": [
+            "Pipeline",
+            "Signal and role",
+            "Record before reuse"
+          ],
+          "rows": [
+            [
+              "DITTO-X",
+              "Hand-dependent robot feedback is rendered to an operator; commanded robot configuration guides alignment before takeover.",
+              "Feedback channels, commanded versus achieved pose, requested versus actual authority change and excluded interventions."
+            ],
+            [
+              "VisTacAlign and UVTA",
+              "Measured human and robot touch is mapped or normalized for co-training. UVTA also predicts future touch as an auxiliary training target.",
+              "Raw versus transformed units, per-task calibration, actual runtime inputs and the separate robot action target."
+            ],
+            [
+              "DexTaG and Touch2Robot",
+              "Measured human contact guides simulated robot contact. One distills a tactile-free physical student; the other displays predicted robot touch to a demonstrator.",
+              "Measured versus simulated fields, training-only information, feedback shown and physical validation reference."
+            ],
+            [
+              "FlashDexRetarget and PolyUMI",
+              "FlashDexRetarget converts geometric motion references in simulation. PolyUMI records physical multimodal streams with a transferable finger.",
+              "Generated versus acquired trajectories, successful-rollout filtering, acquisition clocks and the model actually evaluated."
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A concrete handover record",
+            "body": [
+              "For an interrupted grasp, save the policy target and measured pose immediately before the request, the actual takeover time, available human feedback, contact provenance and the retained or discarded correction. Keep the attempt even if the training export excludes it. This proposed record lets a reviewer distinguish a poor grasp from a delayed transfer or a misleading contact estimate.",
+              "Measure acquisition-to-feedback and observation-to-command delay separately. A display refresh rate, model query time and contact-onset error have different denominators. File-format validity and a plausible replay do not by themselves establish that a frozen policy repeatedly succeeds."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "DITTO-X: authority transfer and selection",
+            "href": "/news/ditto-x-reverse-dexterous-teleoperation"
+          },
+          {
+            "label": "VisTacAlign: signal alignment limits",
+            "href": "/news/vistacalign-human-robot-tactile-demonstrations"
+          },
+          {
+            "label": "UVTA: co-training and released metadata",
+            "href": "/news/uvta-human-tactile-demonstrations-dexterous-manipulation"
+          },
+          {
+            "label": "DexTaG: touch as training guidance",
+            "href": "/news/dextag-tactile-guided-dexterous-retargeting"
+          },
+          {
+            "label": "Touch2Robot: predicted contact feedback",
+            "href": "/news/touch2robot-tactile-feedback-human-demonstrations"
+          },
+          {
+            "label": "FlashDexRetarget: cumulative conversion",
+            "href": "/news/flashdexretarget-multi-motion-dexterous-data"
+          },
+          {
+            "label": "PolyUMI: model and clock distinctions",
+            "href": "/news/polyumi-visual-tactile-audio-demonstration-interface"
+          }
+        ]
+      },
       {
         id: 'teleoperation-data-checklist',
         heading: 'Robot teleoperation data collection: episode-quality checklist',
@@ -6430,7 +6503,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Touch and force feedback in teleoperation',
         body: [
-          'Touch can be recorded as robot-side training data, returned to the operator as haptic feedback, or both. Robot-side tactile data can label contact onset, slip, pressure distribution, or grasp state. Haptic feedback can help a person adjust motion, but the master device, scaling, delay, and feedback modality shape what the operator feels.',
+          'Touch can be recorded as robot-side training data, returned to the operator as haptic feedback, or both. With suitable sensing and calibration, robot-side tactile data can support labels for contact onset, slip, pressure distribution or grasp state; a channel name alone does not establish those quantities. Haptic feedback can help a person adjust motion, but the master device, scaling, delay, and feedback modality shape what the operator feels.',
           'For imitation learning, synchronize tactile observations with the action that preceded the contact and the corrective action that followed it. A contact stream without robot state, timestamps, or action context is much harder to use for closed-loop policy learning.',
           'The Missing Touch study maps GelSight Mini contact images to a 32-DoF cutaneous display and reports more natural and consistent trajectories in two 2-DoF tasks. It did not train an autonomous policy, so its learning relevance is a demonstration-quality implication rather than a measured policy-success gain. PRISM provides a separate collection perspective by combining exoskeleton, tracker, and VR interfaces across industrial tasks, while limiting tactile sensing to an unspecified subset of episodes.',
           "Origami describes S1 as a skill-capture glove recording 20 finger joint angles with encoders, fingertip and palm pressure, and wrist-camera video on a shared timeline. Its matched glove/robot joint arrangement maps measured angles to corresponding robot position targets. This preserves joint correspondence, but wearer hand size and robot fingertip geometry can still change contact location and pressure distribution. The manufacturer says its contact-alignment model remains in development.",

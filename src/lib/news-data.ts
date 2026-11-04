@@ -1067,7 +1067,7 @@ The official project exposes videos and method descriptions. It states that code
     id: 'ditto-x-reverse-dexterous-teleoperation',
     title: 'DITTO-X makes a robot hand align the operator before takeover',
     seoTitle: 'DITTO-X Adds Reverse Dexterous Teleoperation',
-    seoDescription: 'DITTO-X combines force and fingertip feedback with robot-to-human hand alignment. Review its six-person study, DAgger results and dataset status.',
+    seoDescription: "Review DITTO-X takeover signals, per-hand feedback, six-user study and successful-intervention selection; distinguish reported episodes from verified downloads.",
     excerpt: 'DITTO-X runs an actuated hand exoskeleton in both directions, rendering robot contact to a human and matching the operator to the robot before intervention.',
     category: 'Haptic teleoperation',
     image: '/generated/news/ditto-x-reverse-dexterous-teleoperation.png',
@@ -1082,34 +1082,34 @@ The official project exposes videos and method descriptions. It states that code
     ],
     technicalFocus: ['haptic teleoperation', 'dexterous hands', 'human intervention', 'DAgger'],
     sourceDate: '2026-09-30',
-    evidenceStatus: 'Preprint · arXiv v1 · six-person user study · three commercial robot hands · 1,888-episode dataset described but download still marked coming soon',
+    evidenceStatus: "Preprint · v1 · six-person study · hand-dependent feedback · project artifact links still pending at November 4 source check",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-02',
-    updated: '2026-10-02',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# DITTO-X makes a robot hand align the operator before takeover
 
-Stanford and Columbia researchers released DITTO-X on September 30, 2026. The actuated exoskeleton sends a person's finger motion to three commercial dexterous hands, renders joint-force and fingertip-contact feedback, and can reverse direction so the robot moves the operator into its current finger configuration before control transfers. In a six-person study, that matched takeover improved a contact-rich tool-use intervention from 27.7% to 78.3% success against a tracking-glove baseline. [Paper and version record](https://arxiv.org/abs/2610.00781).
+Stanford and Columbia researchers released DITTO-X on September 30, 2026. The actuated exoskeleton sends a person's finger motion to three commercial dexterous hands, renders hand-dependent force and contact feedback, and can reverse direction so the operator follows the robot's commanded finger configuration before control transfers. In a six-person study, that matched takeover improved a contact-rich tool-use intervention from 27.7% to 78.3% success against a tracking-glove baseline. [Paper and version record](https://arxiv.org/abs/2610.00781).
 
 ## Key takeaways
 
-- Forward teleoperation closes the loop with force feedback from robot joint currents plus vibrotactile contact cues at the operator's fingertips.
+- Forward teleoperation renders hand-dependent force feedback. The evaluated Sharpa configuration also supplies fingertip vibration; that contact-event channel is not listed for Wuji 2 or Inspire.
 - Reverse teleoperation maps the robot's commanded hand configuration back to the exoskeleton before takeover, reducing the pose jump that can release a held object.
 - The project describes 1,888 episodes and more than 16 hours at 30 Hz, but its Code, Dataset and Hardware Guide controls all still say “coming soon.”
 
 ## How bidirectional control works
 
-DITTO-X aligns actuator axes with human finger joints. Index and middle fingers can map joint-to-joint on the 22-DoF Sharpa and 20-DoF Wuji 2 hands. Thumb motion is retargeted in task space, and the six-DoF Inspire hand receives a lower-dimensional flexion mapping. Supported hands expose either joint-current estimates or fingertip force sensing; DITTO-X converts those signals into exoskeleton torques and fingertip vibration. [Hardware and mapping details](https://arxiv.org/html/2610.00781v1).
+DITTO-X aligns actuator axes with human finger joints. Index and middle fingers can map joint-to-joint on the 22-DoF Sharpa and 20-DoF Wuji 2 hands. Thumb motion is retargeted in task space, and the six-DoF Inspire hand receives a lower-dimensional flexion mapping. The exoskeleton independently tracks thumb, index and middle fingers; robot ring and little fingers are coupled to the middle-finger motion. Feedback differs by hand: Table I lists contact-event vibration for Sharpa only. Motor-current-derived torque is an estimate, not a measured surface pressure map. [Hardware and mapping details](https://arxiv.org/html/2610.00781v1).
 
-During autonomous execution, the robot's current command is projected back onto the exoskeleton. The operator's fingers follow the robot until the operator takes over; after correction, the same mapping returns control. Safety measures reported by the authors include software joint limits, motor-current limits below 200 mA with torque no greater than 0.08 N·m, and an emergency stop.
+During autonomous execution, the robot's current command is projected back onto the exoskeleton. A keyboard request initiates the takeover process; actual transfer is gated by departure of the human joints from the independently maintained projection. Following the command does not prove that the physical robot achieved that pose. Safety measures reported by the authors include software joint limits, motor-current limits below 200 mA with torque no greater than 0.08 N·m, and an emergency stop.
 
 ## Results under the reported conditions
 
 Six participants completed blinded size and compliance discrimination, regular tool-use teleoperation and mid-policy intervention. With both feedback modes, size discrimination is 86.1% and compliance discrimination 91.7%, against 33.3% chance. Removing either force or vibration reduces the scores; the experiment supports complementarity within this prototype, not a universal ranking of haptic modalities.
 
-For collecting tong-use demonstrations, DITTO-X succeeds on 70.0% of trials versus 46.7% for the Manus Pro tracking glove, a 23.3-point gap. Mean time per success falls from 85.5 to 56.1 seconds. In intervention, success is 78.3% versus 27.7%, while time per success falls from 97.4 to 35.7 seconds. Each participant performs ten trials per condition; the sample is therefore repeated-measures evidence from six people, not a large operator population.
+For collecting tong-use demonstrations, DITTO-X succeeds on 70.0% of trials versus 46.7% for the Manus Pro tracking glove, a 23.3-point gap. Mean time per success falls from 85.5 to 56.1 seconds. In intervention, success is 78.3% versus 27.7%, while time per success falls from 97.4 to 35.7 seconds. The size/compliance tasks use six trials per condition per participant; tool-use and intervention protocols specify ten. These are repeated measurements from six people. The project reports intervention success as a mean of participant rates, not a pooled numerator out of 60. Intervention begins with the tool already grasped, whereas full collection includes acquiring it.
 
-Policy tests use 30 paired starting configurations per task. Before DAgger, DITTO-X data produces final-stage success of 63.3% on tong use, 63.3% on raspberry placement and 40.0% on battery insertion; Manus data yields 13.3%, 43.3% and 36.7%. After two DAgger rounds with 20 interventions per round, the DITTO-X policies reach 86.7%, 93.3% and 90.0%. The paper also quantity-matches extra demonstrations, helping separate on-policy failure coverage from data volume.
+Policy tests use 30 paired starting configurations per task. Before DAgger, DITTO-X data produces final-stage success of 63.3% on tong use, 63.3% on raspberry placement and 40.0% on battery insertion; Manus data yields 13.3%, 43.3% and 36.7%. After two DAgger rounds retaining 20 successful interventions per round, the DITTO-X policies reach 86.7%, 93.3% and 90.0%. The paper also quantity-matches extra demonstrations. Failed interventions are excluded from training; the policies encounter interface-specific failure states. This comparison addresses data volume but does not isolate every cause of the interface advantage.
 
 ## RoboSkin analysis
 
@@ -1121,7 +1121,15 @@ The interface also shows why haptics should be evaluated downstream. Better blin
 
 DITTO-X is an arXiv v1 preprint and RoboSkin.ai has not reproduced its hardware or results. The main user study has six participants, most policy experiments use the Sharpa hand, and mappings still require known hand kinematics and per-hand scaling. The design is not demonstrated on full-body teleoperation or unknown hands.
 
-The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 379 human-intervened and 662 autonomous episodes, totaling 1,888. However, on October 2 the Code, Dataset and Hardware Guide controls were non-links explicitly marked coming soon. No downloadable episodes, repository or license was verified. The paper's CC BY-NC-ND 4.0 license does not license absent code or hardware files.
+The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 379 human-intervened and 662 autonomous episodes, totaling 1,888. The October 2 check found Code, Dataset and Hardware Guide controls marked coming soon. The November 4 project HTML and scripts still expose those controls without working artifact links. No downloadable episodes, repository or license was verified. The paper's CC BY-NC-ND 4.0 license does not license absent code or hardware files.
+
+## What must an intervention log preserve?
+
+A takeover request and an executed takeover are separate events. For a pilot on another hand, preserve the policy command, measured robot joints, projected human configuration, measured operator joints, request time and actual authority change. Record which feedback channels the operator received. Otherwise a smooth video cannot show whether an alignment delay, tracking error or missing cue caused a failure.
+
+The [study protocol](https://arxiv.org/html/2610.00781v1) also separates the six-person interface experiment from policy data collected by one proficient operator. Policy evaluations use 30 paired initial states per task, including at least ten out-of-distribution placements. Wuji and Inspire demonstrate additional hand mappings, but their DAgger evaluations remain future work. Prototype current limits and an emergency stop do not constitute a safety certification.
+
+For the next collection campaign, retain attempted, accepted and discarded corrections with reasons. Evaluate a frozen policy on independently specified starts, and report operator assistance separately. This is a proposed collection record, not a claim that RoboSkin has validated DITTO-X hardware. The [teleoperation signal-role comparison](/robot-teleoperation#contact-signal-roles) explains why operator haptics and policy tactile observations need different fields.
 
 ## Sources and related resources
 
@@ -1129,13 +1137,15 @@ The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 37
 - [Full user study, policy evaluation and safety details](https://arxiv.org/html/2610.00781v1)
 - [Official project and dataset composition](https://tml.stanford.edu/ditto-x/)
 - [RoboSkin tactile feedback guide](/guides/tactile-feedback-for-physical-ai)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
     id: 'flashdexretarget-multi-motion-dexterous-data',
     title: 'FlashDexRetarget trains one policy across many human hand motions',
     seoTitle: 'FlashDexRetarget Scales Dexterous Motion Retargeting',
-    seoDescription: 'FlashDexRetarget retargets many human hand-object motions with one RL policy. Review its 50-motion results, GPU-hour comparison and release limits.',
+    seoDescription: "Interpret FlashDexRetarget cumulative motion conversion, success-filtered errors, compute budgets and selected hardware replay before planning data generation.",
     excerpt: 'FlashDexRetarget amortizes physics-based retargeting across a motion collection, using object geometry, hand-contact distance and future references.',
     category: 'Dexterous data generation',
     image: '/generated/news/flashdexretarget-multi-motion-dexterous-data.png',
@@ -1153,11 +1163,11 @@ The official page says it releases the DITTO-Human Dataset: 847 teleoperated, 37
     evidenceStatus: 'Preprint · arXiv v1 · Isaac Sim evaluation on two robot hands · qualitative physical replay · project videos public · code coming soon',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-02',
-    updated: '2026-10-02',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# FlashDexRetarget trains one policy across many human hand motions
 
-KAIST AI and Holiday Robotics researchers released FlashDexRetarget on October 1, 2026. Instead of optimizing a new controller for every human hand-object motion, the framework trains a shared reference-conditioned reinforcement-learning policy across a collection. On a 50-motion XHand benchmark, it reports 90% SPIDER success in 29 GPU-hours; the evaluated CHORD implementation reaches 46% in 2,847 GPU-hours. [Paper and version record](https://arxiv.org/abs/2610.01849).
+KAIST AI and Holiday Robotics researchers released FlashDexRetarget on October 1, 2026. Instead of optimizing a new controller for every human hand-object motion, the framework trains a shared reference-conditioned reinforcement-learning policy across a collection. On a 50-motion XHand benchmark, it reports 90% cumulative SPIDER motion conversion in 29 GPU-hours; the evaluated CHORD implementation reaches 46% in 2,847 GPU-hours. [Paper and version record](https://arxiv.org/abs/2610.01849).
 
 ## Key takeaways
 
@@ -1169,13 +1179,13 @@ KAIST AI and Holiday Robotics researchers released FlashDexRetarget on October 1
 
 Physics-based retargeting asks a robot hand to reproduce the demonstrated object motion through contacts that are feasible for its own kinematics. Single-motion optimization repeats that process for every clip. FlashDexRetarget distributes reference trajectories across parallel environments and trains one off-policy controller. Successful rollouts become robot trajectories, so optimization cost is shared across motions. [Method and evaluation protocol](https://arxiv.org/html/2610.01849v1).
 
-Each wrist-local observation includes 128 surface points for the current simulated object and next reference pose. Signed-distance features describe fingertip and wrist proximity to the object. A temporal encoder compresses hand and object states from the next ten reference frames into a 128-dimensional vector. Separate left- and right-hand actor-critic pairs receive hand-specific rewards, which matters when each hand manipulates a different object.
+Each wrist-local observation includes 128 surface points for the current simulated object and next reference pose. Robot signed-distance queries and unsigned reference distances describe geometric proximity to the object; they are not tactile force measurements. A temporal encoder compresses hand and object states from the next ten reference frames into a 128-dimensional vector. Separate left- and right-hand actor-critic pairs receive hand-specific rewards, which matters when each hand manipulates a different object.
 
 The training algorithm adapts FlashSAC with a replay buffer enlarged from 10 million to 50 million transitions and a critic hidden dimension increased from 256 to 1,024. This is a substantial configuration, and the compute comparison includes algorithm and architecture choices rather than isolating a single trick.
 
 ## Results under the reported conditions
 
-For XHand, FlashDexRetarget reports SPIDER/ManipTrans-object/ManipTrans success of 0.90/0.86/0.86, 10.95 mm mean object-position error and 29 GPU-hours. Do as I Do reaches 0.36 SPIDER in 66 GPU-hours; DexMachina reaches 0.48 in 447; CHORD reaches 0.46 in 2,847. The 44-point gain over CHORD is on SPIDER success. For Sharpa Wave Hand, FlashDexRetarget reports 0.72/0.70/0.70 and 33 GPU-hours, versus CHORD's 0.50/0.22/0.00 and 3,314 GPU-hours.
+For XHand, FlashDexRetarget reports SPIDER/ManipTrans-object/ManipTrans success of 0.90/0.86/0.86, 10.95 mm mean object-position error on SPIDER-successful trajectories and 29 GPU-hours. Do as I Do reaches 0.36 SPIDER in 66 GPU-hours; DexMachina reaches 0.48 in 447; CHORD reaches 0.46 in 2,847. The 44-percentage-point difference from CHORD is on cumulative SPIDER conversion. For Sharpa Wave Hand, FlashDexRetarget reports 0.72/0.70/0.70 and 33 GPU-hours, versus CHORD's 0.50/0.22/0.00 and 3,314 GPU-hours.
 
 Metric choice matters. SPIDER averages object errors and can overstate success when one object in a two-object motion barely moves. The authors therefore use the stricter object-only ManipTrans criterion for ablations. RoboSkin analysis: preserving both numbers is more informative than repeating the 90% headline alone.
 
@@ -1191,7 +1201,20 @@ The future-reference encoder is also an important contact insight. One pose cann
 
 FlashDexRetarget is an arXiv v1 preprint, and RoboSkin.ai has not run the code or reproduced the metrics. Main results are simulation-based, use three source datasets and two robot hands, and compare methods under the authors' selected preprocessing and success definitions. Real-world evidence is qualitative replay of three tasks.
 
-The official project publishes videos, method details and tables but labels code “coming soon.” No repository, trained policy, converted trajectory archive or implementation license was verified on October 2, 2026. The paper is CC BY 4.0; that license covers the article, not unreleased software or third-party source datasets.
+The official project publishes videos, method details and tables but labels code “coming soon.” The November 4 recheck still found the code control marked coming soon. No repository, trained policy, converted trajectory archive or implementation license was verified. The paper is CC BY 4.0; that license covers the article, not unreleased software or third-party source datasets.
+
+## Conversion coverage is not final-policy reliability
+
+The evaluation counts a reference as converted once training has produced a successful stored rollout. It does not require the final checkpoint to repeat every converted motion. A high conversion fraction can therefore coexist with failures when the final policy is rerun. It also says nothing by itself about a new reference outside the training collection. [Metric and storage protocol](https://arxiv.org/html/2610.01849v1).
+
+| Quantity | What was measured | Additional evidence needed for deployment |
+| --- | --- | --- |
+| Cumulative conversion | References with a successful stored trajectory during training | Repeated trials of the chosen frozen policy |
+| Position/orientation error | Error on the successful-trajectory subset | Failures and excluded motions, not just low errors among successes |
+| GPU-hours | Training under the selected stopping rules and budgets | Hardware, preprocessing and inference costs for the intended setup |
+| Physical demonstration | Replay of selected successful trajectories | Closed-loop policy trials, perception failures and recovery |
+
+Per-motion baselines stop after success while failed runs consume their budgets. The shared policy uses privileged simulated state and future reference frames, not future camera observations. A practical conversion review should preserve the original motion ID, filtering reason, stopping condition and selected rollout; then test repetition and unseen references separately. See the [teleoperation and retargeting evidence comparison](/robot-teleoperation#contact-signal-roles) before treating generated trajectories as measured demonstrations.
 
 ## Sources and related resources
 
@@ -1199,6 +1222,8 @@ The official project publishes videos, method details and tables but labels code
 - [Full benchmark, metrics and scaling study](https://arxiv.org/html/2610.01849v1)
 - [Official project and demonstration videos](https://davian-robotics.github.io/FlashDexRetarget/)
 - [RoboSkin robotics datasets guide](/robotics-datasets)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
@@ -1857,8 +1882,8 @@ The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides t
     id: 'uvta-human-tactile-demonstrations-dexterous-manipulation',
     title: 'UVTA scales dexterous policies with human tactile demonstrations',
     seoTitle: 'UVTA Human Tactile Data for Dexterous Manipulation',
-    seoDescription: 'UVTA co-trains human and robot vision-touch-action data. Review its 70% five-task result, 5,750 demonstrations and public-release status.',
-    excerpt: 'UVTA aligns human and robot touch-action trajectories, combining 1,000 human and 150 robot demonstrations per task to train one contact-aware dexterous policy.',
+    seoDescription: "Review UVTA per-task co-training, staged scores and the public 5,749-episode manifest; separate code and data licenses, auxiliary touch targets and deployment.",
+    excerpt: "UVTA co-trains human and robot vision-touch-action data with a separate policy for each task. The public release now has code and a dataset manifest, with limits distinct from the paper corpus.",
     category: 'Human tactile data',
     image: '/generated/news/uvta-human-tactile-demonstrations-dexterous-manipulation.png',
     imageAlt: 'Diagram of human tactile demonstrations and robot demonstrations entering a shared visual tactile action model.',
@@ -1866,6 +1891,7 @@ The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides t
     sourceTitle: 'Unified Visual-Tactile-Action Modeling from Human Demonstrations for Dexterous Manipulation',
     sourceUrl: 'https://arxiv.org/abs/2609.34182',
     sources: [
+      { title: "Public UVTA dataset manifest, inspected November 4", url: "https://huggingface.co/datasets/Chopper233/UVTA/blob/2c6f691a46482be6be51d876d3d5bc79194f1aa1/MANIFEST.json" },
       { title: 'UVTA arXiv v1 record', url: 'https://arxiv.org/abs/2609.34182' },
       { title: 'Full UVTA v1 paper', url: 'https://arxiv.org/html/2609.34182v1' },
       { title: 'Official UVTA project page', url: 'https://uni-vta.github.io/' },
@@ -1873,28 +1899,28 @@ The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides t
     ],
     technicalFocus: ['human tactile demonstrations', 'visual tactile action modeling', 'dexterous manipulation', 'cross-embodiment learning'],
     sourceDate: '2026-09-28',
-    evidenceStatus: 'Preprint · arXiv v1 · five real-robot tasks · project page public · linked code repository unavailable at verification',
+    evidenceStatus: "Preprint · v1 · public code and dataset manifest inspected November 4 · 5,749 listed episodes · payloads and runtime unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-29',
-    updated: '2026-09-29',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# UVTA scales dexterous policies with human tactile demonstrations
 
-Researchers from Shanghai Jiao Tong University, the Beijing Academy of Artificial Intelligence, Sharpa Robotics and Beijing Institute of Technology released Unified Visual-Tactile-Action Modeling, or UVTA, on September 28, 2026. The system co-trains on human and robot interaction data so that large volumes of human touch can improve a robot policy without treating human joint motion as directly executable robot commands. [Paper and version record](https://arxiv.org/abs/2609.34182).
+Researchers from Shanghai Jiao Tong University, the Beijing Institute for General Artificial Intelligence, Sharpa Robotics and Beijing Institute of Technology released Unified Visual-Tactile-Action Modeling, or UVTA, on September 28, 2026. The system co-trains on human and robot interaction data so that large volumes of human touch can improve a robot policy without treating human joint motion as directly executable robot commands. [Paper and version record](https://arxiv.org/abs/2609.34182).
 
 ## Key takeaways
 
-- Each of five tasks uses 1,000 human demonstrations and 150 robot demonstrations, producing 5,750 demonstrations across the study.
+- The paper reports 1,000 human and 150 robot demonstrations per task, or 5,750 total. The currently published manifest instead lists 5,749 unique episodes; the release distinction is explained below.
 - The full model averages 70% stage-wise success over 10 physical trials per task, compared with 29% for the strongest reported baseline and 42% without future-tactile prediction.
-- The project links a GitHub repository, but that URL returned a public 404 during verification. No downloadable dataset, model weights or usable software license was confirmed.
+- The November 4 check found a public code repository and Hugging Face dataset metadata. We inspected their documentation and manifest, not archive contents, model weights or robot execution.
 
 ## What changed
 
 UVTA starts with a wearable capture system: a passive 22-degree-of-freedom hand exoskeleton records finger motion, two VIVE trackers recover wrist pose, a wrist camera captures RGB and four force-sensing regions on each fingertip produce a 20-dimensional tactile vector. The authors map these human observations into the same numerical representation used by a 22-degree-of-freedom Sharpa Wave robot hand.
 
-The model turns the current wrist image into a 384-dimensional visual token and the tactile input into a 20-dimensional token. Their concatenated 404-dimensional representation feeds a diffusion action head and a tactile regression head. Both human and robot sequences supervise the shared representation, but deployment decodes only robot actions. [Architecture and dataset](https://arxiv.org/html/2609.34182v1#S3).
+The model turns the current wrist image into a 384-dimensional visual token and the tactile input into a 20-dimensional token. Their concatenated 404-dimensional representation feeds a diffusion action head and a tactile regression head. Both human and robot sequences supervise the shared representation, but deployment decodes only robot actions. The future-tactile head is an auxiliary learning objective; its prediction is not a force target passed to the controller. [Architecture and dataset](https://arxiv.org/html/2609.34182v1#S3).
 
-This is co-training rather than direct teleoperation transfer. Human hand actions still provide a learning signal, while embodiment-specific normalization and robot demonstrations teach the executable action space. The action head predicts 16 steps and executes eight before replanning from new visual and tactile observations.
+A separate policy is trained for each task. This is co-training rather than direct teleoperation transfer. Human hand actions still provide a learning signal, while embodiment-specific normalization and robot demonstrations teach the executable action space. Human and robot batches are sampled equally with replacement, not in proportion to their raw corpus sizes. The action head predicts 16 steps and executes eight before replanning from new visual and tactile observations.
 
 ## What the real-robot evaluation found
 
@@ -1916,7 +1942,15 @@ The study also shows why dataset totals need context. The 5,000 human demonstrat
 
 UVTA is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Evaluation uses one fixed-base North robot, one Sharpa Wave embodiment and five tasks. Touch is measured only at four regions per fingertip, so palm contact, shear and distributed whole-hand pressure are not represented. Ten trials per task also make small score differences uncertain.
 
-The [project page](https://uni-vta.github.io/) provides demos and limitations. Its Code button points to [github.com/uni-vta/UVTA](https://github.com/uni-vta/UVTA), but that repository returned 404 through both the public page and GitHub API at verification time. The page describes the dataset but does not expose a downloadable archive. Public links therefore should not be equated with released training assets.
+The September 29 review found the linked repository unavailable. On November 4, the [project page](https://uni-vta.github.io/) links a public [UVTA repository](https://github.com/uni-vta/UVTA) and [dataset page](https://huggingface.co/datasets/Chopper233/UVTA). At code commit 74f4270142cf3778a7103f04bbb922daa2597fd4, the root license is MIT; the dataset card separately states Apache-2.0. These declarations do not replace checks of bundled assets and third-party dependencies. No archives or checkpoints were downloaded, and no installation was performed.
+
+## What the public release actually describes
+
+Our read-only inspection of the [dataset manifest](https://huggingface.co/datasets/Chopper233/UVTA/blob/2c6f691a46482be6be51d876d3d5bc79194f1aa1/MANIFEST.json) found 28 tar shards totaling 482,351,124,480 listed bytes. Its unique episode IDs comprise 5,000 human and 749 robot episodes: page flipping has 149 robot episodes, while the other four tasks have 150 each. This verifies metadata counts, not successful extraction, payload integrity or policy compatibility.
+
+The [release README](https://github.com/uni-vta/UVTA/tree/74f4270142cf3778a7103f04bbb922daa2597fd4) describes Zarr v2 episodes inside those archives. The 20-dimensional tactile field is already pooled fingertip data, not raw tactile images or a whole-hand pressure map. Pose observations, pose action targets, hand state and hand actions are separate fields. Hardware environment, kinematics and vendor SDK components are not included in the repository.
+
+Before reuse, pin the code and dataset revisions, record the artifact-specific terms, and inspect a permitted sample's keys, units and episode boundaries. Reconcile training settings too: the manuscript describes 300 epochs, while the current README uses 500 for the light-bulb task. A live wrist pose still anchors relative action execution even though proprioception is excluded from the model's conditioning. None of these observations demonstrates a working installation. The [teleoperation data guide](/robot-teleoperation#contact-signal-roles) shows how to keep measured, mapped and auxiliary tactile signals distinct.
 
 ## Sources and related resources
 
@@ -1924,6 +1958,8 @@ The [project page](https://uni-vta.github.io/) provides demos and limitations. I
 - [Full data, method and evaluation](https://arxiv.org/html/2609.34182v1)
 - [Official UVTA project page](https://uni-vta.github.io/)
 - [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
@@ -2001,7 +2037,7 @@ No official project page, public code repository, CAD or mold files, training da
     id: 'dextag-tactile-guided-dexterous-retargeting',
     title: 'DexTaG uses human touch to guide dexterous policy retargeting',
     seoTitle: 'DexTaG Tactile-Guided Dexterous Retargeting',
-    seoDescription: 'DexTaG uses glove touch as RL guidance, then deploys without robot tactile sensors. Review tool-use results, retries and the MIT code release.',
+    seoDescription: "Separate DexTaG human-touch rewards, simulated actor observations and tactile-free hardware control; review retry denominators and artifact-specific access.",
     excerpt: 'DexTaG records full-hand tactile maps during human tool use, rewards simulated robot contact patterns during retargeting and distills a vision-proprioception controller.',
     category: 'Dexterous policy learning',
     image: '/generated/news/dextag-tactile-guided-dexterous-retargeting.png',
@@ -2017,11 +2053,11 @@ No official project page, public code repository, CAD or mold files, training da
     ],
     technicalFocus: ['tactile-guided reinforcement learning', 'dexterous retargeting', 'human demonstrations', 'open-source robot learning'],
     sourceDate: '2026-09-27',
-    evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · MIT code, data and retargeter checkpoints available',
+    evidenceStatus: "Preprint · v1 · root code MIT · data/checkpoint links documented · payloads, third-party terms and runtime unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-29',
-    updated: '2026-09-29',
-    readTime: '9 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# DexTaG uses human touch to guide dexterous policy retargeting
 
 Researchers from the University of Massachusetts Amherst and Genesis AI released DexTaG on September 27, 2026. DexTaG records human hand motion and a 24-by-32 tactile glove map, uses those contact patterns to shape reinforcement-learning retargeting in simulation, and then distills the result into a controller that runs on a real xArm7 and WUJI hand without tactile sensing. [Paper and version record](https://arxiv.org/abs/2609.33882).
@@ -2042,9 +2078,9 @@ A PPO retargeter learns marker and hammer tool use in Genesis. It observes the m
 
 ## Results and the retry denominator
 
-Across five training seeds, the complete tactile reward reaches 87.5% plus or minus 4.0 points of trajectory completion on the marker, compared with 48.6% for geometry-gated contact and 24.7% without tactile rewards. On the hammer, the reported figures are 76.8% plus or minus 27.7, 29.9% plus or minus 5.5 and 27.6% plus or minus 0.1. The large hammer variance makes the mean less conclusive than the marker result. [Reward ablation](https://arxiv.org/html/2609.33882v1#S4.SS1).
+Across five training seeds, the complete tactile reward reaches 87.5% plus or minus 4.0 points of trajectory completion on the marker, compared with 48.6% for geometry-gated contact and 24.7% without tactile rewards. On the hammer, the reported figures are 76.8% plus or minus 27.7, 29.9% plus or minus 5.5 and 27.6% plus or minus 0.1. One seed fails to acquire the hammer and completes only about 27% of the reference, contributing to the large variance. These percentages measure the fraction tracked before termination, not the fraction of fully successful trials. [Reward ablation](https://arxiv.org/html/2609.33882v1#S4.SS1).
 
-For OakInk2, DexTaG trains one policy per object and compares it with per-trajectory ManipTrans policies. Its trajectory-weighted completion is 67.5% with one reference and 67.2% with all references. ManipTrans with the WUJI hand falls from 58.5% to 30.0%. The compute budgets are not matched: each DexTaG policy trains for 24 hours and each ManipTrans policy for eight hours on an NVIDIA L40S. Sharing policies nevertheless reduces the authors' estimated aggregate training from 1,632 to 72 policy-hours across 204 trajectories.
+OakInk2 does not supply the measured glove-touch references used in the two-tool study, so this scaling test does not establish the contribution of human tactile guidance. For OakInk2, DexTaG trains one policy per object and compares it with per-trajectory ManipTrans policies. Its trajectory-weighted completion is 67.5% with one reference and 67.2% with all references. ManipTrans with the WUJI hand falls from 58.5% to 30.0%. The compute budgets are not matched: each DexTaG policy trains for 24 hours and each ManipTrans policy for eight hours on an NVIDIA L40S. Sharing policies nevertheless reduces the authors' estimated aggregate training from 1,632 to 72 policy-hours across 204 trajectories.
 
 Real-world reporting requires special care. The primary table evaluates 30 training-set references per object with up to three attempts each and keeps the furthest stage reached. Hammer pickup, functional grasp and placement are 22/30, 17/30 and 15/30. Marker figures are 21/30, 13/30 and 10/30. Per recorded attempt, full placement is 15/83 for the hammer and 10/86 for the marker. The best-of-three percentage measures recovery with limited retries, not single-attempt reliability.
 
@@ -2052,13 +2088,26 @@ Real-world reporting requires special care. The primary table evaluates 30 train
 
 RoboSkin analysis: DexTaG offers a pragmatic answer to an embodiment mismatch. Human contact maps do not have to become robot tactile inputs; they can instead define what a plausible grasp should feel like during simulation training. That makes touch useful even when the deployed hand lacks sensors.
 
-The limitation is feedback at runtime. After distillation, the controller cannot directly detect slip or unexpected contact, so the pipeline transfers a contact-informed behavior prior rather than delivering tactile closed-loop control. It complements, rather than replaces, sensorized [dexterous manipulation](/tactile-manipulation).
+The limitation is feedback at runtime. After distillation, the controller has no direct tactile measurement of slip or unexpected contact, although visual and proprioceptive feedback may reveal their consequences, so the pipeline transfers a contact-informed behavior prior rather than delivering tactile closed-loop control. It complements, rather than replaces, sensorized [dexterous manipulation](/tactile-manipulation).
 
 ## Limitations and availability
 
 DexTaG is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The real-world references come from the training set, initial objects are manually placed and the headline physical result permits up to three attempts. The controller targets one xArm7-WUJI embodiment and two tools; adapting another hand requires new robot models, tactile mapping and retargeted demonstrations.
 
-The [official repository](https://github.com/UMass-Embodied-AGI/DexTaG) is public under MIT. Its README links a 209 MB demonstration archive and 21 MB pretrained retargeters for both tools, and documents training, evaluation and distillation. The repository notes that the tactile simulator depends on a specific Genesis fork. Readers should separately verify Google Drive file access and licenses for bundled meshes or third-party assets before redistribution.
+The [official repository](https://github.com/UMass-Embodied-AGI/DexTaG) is public. At the November 4 check, commit b4f5fd0f443969c02c1d6cde86de09c487d163b2 carries an MIT root code license. This does not automatically license the separately linked data, checkpoints or third-party assets. Its README links a 209 MB demonstration archive and 21 MB pretrained retargeters for both tools, and documents training, evaluation and distillation. The repository notes that the tactile simulator depends on a specific Genesis fork. Readers should separately verify Google Drive file access and licenses for bundled meshes or third-party assets before redistribution. The [tactile dataset directory](/datasets) compares these access and reuse conditions across related resources.
+
+## Which tactile signal is removed in the ablation?
+
+The ablation described as without tactile removes human-reference tactile rewards and privileged critic information. The actor still receives its current simulated tactile map. It is not a comparison between all touch and no touch. [Actor, critic and ablation definitions](https://arxiv.org/html/2609.33882v1).
+
+| Stage | Contact information | Interpretation |
+| --- | --- | --- |
+| Human recording | Background-corrected glove measurements | A measured demonstration signal |
+| Simulated retargeting | Penetration-derived contact estimates mapped to glove regions | A modeled contact pattern, not measured robot pressure |
+| Reward and critic | Human reference and normalized correspondence | Guidance during training; normalization removes absolute-force equivalence |
+| Physical student | Vision, proprioception/history and a supplied target object trajectory | No tactile sensor input; the future target must still be provided |
+
+Changing the hand requires more than loading a URDF: inspect mesh sampling, region correspondence, retargeting and controller configuration. Before comparing teachers and students, also check their termination rules and split protocols; the paper's student and teacher evaluations do not share every condition. Public source availability is not a completed installation, payload-license check or hardware reproduction. Use the [collection signal-role guide](/robot-teleoperation#contact-signal-roles) to document the transition from measured human touch to simulated guidance.
 
 ## Sources and related resources
 
@@ -2067,6 +2116,8 @@ The [official repository](https://github.com/UMass-Embodied-AGI/DexTaG) is publi
 - [Official project page](https://dextag.github.io/)
 - [MIT-licensed code, data links and retargeter checkpoints](https://github.com/UMass-Embodied-AGI/DexTaG)
 - [RoboSkin robot-learning guide](/robot-learning)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
@@ -2213,7 +2264,7 @@ The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming so
     id: 'vistacalign-human-robot-tactile-demonstrations',
     title: 'VisTacAlign turns human touch into robot training data',
     seoTitle: 'VisTacAlign Human-to-Robot Tactile Demonstrations',
-    seoDescription: 'VisTacAlign maps glove touch and human stereo video into robot observation space. Review its drill, strawberry and Lego results and release limits.',
+    seoDescription: "Review VisTacAlign task-specific alignment, force-proportional units, comparison conditions and action timing; separate signal matching from calibration.",
     excerpt: 'VisTacAlign retargets a human glove and stereo camera rig into a tactile robot hand’s observation space, then co-trains one policy on human and robot demonstrations.',
     category: 'Visuo-tactile learning',
     image: '/generated/news/vistacalign-human-robot-tactile-demonstrations.png',
@@ -2231,8 +2282,8 @@ The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming so
     evidenceStatus: 'Preprint · arXiv v1 · real-robot evaluation · project lists paper and code as coming soon',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-28',
-    updated: '2026-09-28',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# VisTacAlign turns human touch into robot training data
 
 ETH Zurich and Stanford University researchers released VisTacAlign on September 25, 2026. The method records human hand motion, stereo video and capacitive glove signals, maps them into a 17-degree-of-freedom tactile robot hand's observation space, and co-trains a diffusion policy with ordinary robot demonstrations. The goal is to make fast human demonstrations usable without pretending that human and robot sensing are naturally identical. [Paper and version record](https://arxiv.org/abs/2609.30959).
@@ -2241,7 +2292,7 @@ ETH Zurich and Stanford University researchers released VisTacAlign on September
 
 - In the drill task, 26 aligned human demonstrations added to 26 robot demonstrations raise reported lift success from 50% to 70%.
 - In Lego insertion, 50 human plus 30 robot demonstrations reach 80% over 20 trials, compared with 10% for 30 robot demonstrations alone.
-- The alignment is task-specific and compresses each fingertip to one normal-force value. It does not preserve full taxel geometry or shear.
+- The alignment is task-specific and compresses each fingertip to one normal-load signal in force-proportional taxel units, not calibrated Newtons. It does not preserve full taxel geometry or shear.
 
 ## What changed
 
@@ -2253,7 +2304,7 @@ The resulting human observations and robot observations train the same 23.5-mill
 
 For drill pickup, 26 robot demonstrations alone reach 50% lift success. Adding 26 aligned human demonstrations raises the result to 70%. In the low-robot-data setting, ten robot demonstrations reach 35%; adding 26 human demonstrations without tactile alignment produces 30%, while adding aligned touch reaches 55%. This comparison supports the alignment mechanism more directly than the larger-data result.
 
-The strawberry task combines 124 human and 84 robot demonstrations. Over ten trials for each fruit size, the multimodal policy reaches 90%, 80% and 70% on small, medium and large strawberries. A robot-only policy without tactile input reaches 60%, 70% and 0%. The paper does not quantify strawberry damage, so the numbers measure task completion rather than gentle handling.
+The strawberry task combines 124 human and 84 robot demonstrations. Over ten trials for each fruit size, the multimodal policy reaches 90%, 80% and 70% on small, medium and large strawberries. A robot-only policy without tactile input reaches 60%, 70% and 0%. Both human-data inclusion and tactile input change in this comparison; it does not isolate either contribution alone. The paper does not quantify strawberry damage, so the numbers measure task completion rather than gentle handling.
 
 For Lego insertion, 50 human plus 30 robot demonstrations reach 80% across 20 trials; 30 robot demonstrations alone reach 10%. Removing visual retargeting from the combined-data pipeline reduces success to 10–25% at comparable robot-data budgets, while the full alignment reaches 40–60%. Removing tactile input from the best configuration costs ten percentage points. [Task results and ablations](https://arxiv.org/html/2609.30959v1#S4).
 
@@ -2267,9 +2318,17 @@ The method is not a universal human-to-robot converter. Its force mapping is fit
 
 ## Limitations and availability
 
-VisTacAlign is an arXiv v1 preprint labeled “under review” for ICRA 2027; it should not be described as an accepted conference paper. RoboSkin.ai has not reproduced it. The study covers three short-horizon, mostly quasi-static tasks. Per-fingertip force discards spatial pressure, shear and incipient slip, and there is no comparison against learning a shared latent space without handcrafted mappings.
+VisTacAlign is an arXiv v1 preprint labeled “under review” for ICRA 2027; it should not be described as an accepted conference paper. RoboSkin.ai has not reproduced it. The study covers three short-horizon, mostly quasi-static tasks. Per-fingertip scalar pooling discards pressure layout and shear information, and there is no comparison against learning a shared latent space without handcrafted mappings.
 
-The [official project page](https://vis-tac-align.github.io/) labels both paper and code “coming soon,” even though the arXiv manuscript is available. No code repository, dataset, checkpoint or software license was verified. The paper carries CC BY-NC-ND 4.0; this does not authorize unrestricted modification or commercial reuse of the manuscript.
+The [official project page](https://vis-tac-align.github.io/) labels both paper and code “coming soon,” even though the arXiv manuscript is available. The November 4 recheck did not verify a code repository, dataset, checkpoint or software license. The paper carries CC BY-NC-ND 4.0; this does not authorize unrestricted modification or commercial reuse of the manuscript.
+
+## Signal alignment does not establish physical force equivalence
+
+The mapping is fitted separately for each task using unpaired human and robot contact samples. Zero contact remains zero; a finger absent from the robot reference contacts is mapped to zero. Outputs remain within the convex hull of reference robot samples. That mathematical range constraint does not establish a safe physical force limit. Robot training data and deployed robot observations are not passed through this human-data transform. [Alignment method](https://arxiv.org/html/2609.30959v1).
+
+A lower domain-classification score shows that selected representations are harder to distinguish; it is not a force-calibration certificate. The visual comparison also uses Apple Vision Pro as pseudo-ground-truth rather than independent metrology. Keep these diagnostics separate from physical task outcomes.
+
+For adaptation, retain the human and robot contact sample distributions, units, zeroing method and per-finger coverage. Check that a new object or glove fit remains within the reviewed conditions. The static mapping preserves each frame's timing but cannot repair incorrectly aligned acquisition clocks. Thirty-hertz taxel sampling, 269 ms inference and roughly 1.1 seconds of executed actions before replanning describe different parts of the pipeline; none alone establishes fast force feedback. Compare the [observation and execution roles](/robot-teleoperation#contact-signal-roles) before specifying a controller.
 
 ## Sources and related resources
 
@@ -2278,6 +2337,8 @@ The [official project page](https://vis-tac-align.github.io/) labels both paper 
 - [Official project page](https://vis-tac-align.github.io/)
 - [RoboSkin DIGIT sensor profile](/sensors/digit)
 - [RoboSkin robot learning guide](/robot-learning)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
@@ -2643,7 +2704,7 @@ The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyH
     id: 'polyumi-visual-tactile-audio-demonstration-interface',
     title: 'PolyUMI records vision, touch and contact audio in one wireless interface',
     seoTitle: 'PolyUMI: Visual-Tactile-Audio Robot Demonstrations',
-    seoDescription: 'PolyUMI combines optical touch, contact audio and wrist vision. Review its VisTA policy, slip results, build cost and current repository limits.',
+    seoDescription: "Distinguish PolyUMI slip-control and VisTA experiments, validation protocols, synchronization and finger-only BOM from complete integration and reproduction.",
     excerpt: 'Northwestern University and TU Darmstadt researchers share a transferable sensing finger and VisTA policy for multimodal demonstrations. The release is substantial, but its paper and repository specifications do not yet fully agree.',
     category: 'Multimodal tactile learning',
     image: '/generated/news/polyumi-visual-tactile-audio-demonstration-interface.png',
@@ -2662,16 +2723,16 @@ The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyH
     evidenceStatus: 'Preprint · arXiv v1 · MIT repository with unresolved review placeholders',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-26',
-    updated: '2026-09-26',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# PolyUMI records vision, touch and contact audio in one wireless interface
 
-Researchers at Northwestern University, TU Darmstadt, Hessian.AI and the Robotics Institute Germany released PolyUMI on September 24, 2026. The wireless handheld interface records wrist vision, optical touch, contact audio and proprioception, then moves the same sensing finger to a robot end effector. A companion policy called VisTA fuses the synchronized streams for object inference and contact-rich manipulation. [Paper and version record](https://arxiv.org/abs/2609.29760).
+Researchers at Northwestern University, TU Darmstadt, Hessian.AI and the Robotics Institute Germany released PolyUMI on September 24, 2026. The wireless handheld interface records wrist vision, optical touch, contact audio and proprioception, then moves the same sensing finger to a robot end effector. The authors evaluate separate object classifiers and a slip-control policy, alongside a companion VisTA policy for contact-rich manipulation. [Paper and version record](https://arxiv.org/abs/2609.29760).
 
 ## Key takeaways
 
-- The sensing finger adds an estimated $235.96 in parts and four hours of assembly to the UMI workflow; moving it between the handheld collector and robot takes about ten minutes.
-- In a ten-trial slip-control ablation, vision, touch and audio succeed 8/10 times, versus 2/10 for vision alone. This is a small task-specific experiment, not a general success rate.
+- The authors estimate $235.96 in sensing-finger parts and four hours of assembly, excluding the base UMI gripper, robot end effector and integration; moving it between the handheld collector and robot takes about ten minutes.
+- In a ten-trial slip-control ablation using a diffusion U-Net trained on 80 demonstrations, vision, touch and audio succeed 8/10 times, versus 2/10 for vision alone. This is a small task-specific experiment, not a general success rate.
 - The public repository is useful but not yet a clean reproduction package: several author-specific dependencies remain placeholder links, and its README lists an older tactile stream specification than the paper. [Repository notes](https://github.com/polyumi/PolyUMI-platform).
 
 ## What changed
@@ -2684,7 +2745,7 @@ VisTA does not collapse every sensor to one vector before fusion. Modality-speci
 
 ## Results under the reported conditions
 
-The experiments answer different questions, so their numbers should not be combined into one headline score. A tactile-image classifier reaches 92.3% accuracy over five printed surface patterns. For a closed box holding gears, thin screws or thick screws, sensor combinations without audio reach 42% to 44% accuracy; adding contact audio lifts each tested combination to about 80%. Training uses 20 demonstrations per class and validation uses ten, repeated across three seeds. [Object-inference protocol](https://arxiv.org/html/2609.29760v1#S4.SS2).
+The experiments answer different questions, so their numbers should not be combined into one headline score. A tactile-image classifier reaches 92.3% accuracy over five printed surface patterns, using scene-separated training and test images. This is not a test of arbitrary unseen object categories. For a closed box holding gears, thin screws or thick screws, sensor combinations without audio reach 42% to 44% accuracy; adding contact audio lifts each tested combination to about 80%. Training uses 20 demonstrations per class and validation uses ten across three seeds; the best validation checkpoint is selected. That validation score should not be described as an additional independent held-out test. [Object-inference protocol](https://arxiv.org/html/2609.29760v1#S4.SS2).
 
 Slip control is a ten-trial ablation. The robot must let a screwdriver rotate under gravity, then catch it within ten degrees of vertical. Vision-touch-audio succeeds 8/10, touch-audio 7/10, vision-touch and vision-audio 3/10 each, touch 3/10, vision 2/10 and audio alone 0/10.
 
@@ -2700,9 +2761,17 @@ The results also reinforce a useful design rule for [visuo-tactile learning](/vi
 
 PolyUMI is an arXiv v1 preprint, not an independently reproduced system. Manipulation trials use one Franka setup and modest evaluation counts. The off-the-shelf Franka Hand also required modification for 200 Hz continuous gripper positioning.
 
-The GitHub repository carries an MIT license and includes hardware, firmware, ingestion, ROS 2 and policy tooling. But it is an anonymized review copy with no commit history. Its documentation says several private forks are represented by links that will not resolve until a camera-ready release, so a fresh clone cannot complete every documented setup step today. Training was only tested on an RTX 6000 Ada with 48 GB; the authors estimate at least 32 GB of GPU memory.
+The GitHub repository has an MIT root software license and contains hardware, firmware, ingestion, ROS 2 and policy tooling. That root license does not establish all third-party hardware or dataset terms. Its README still describes an anonymized review copy, but the public repository now has a visible commit history. Its documentation says several private forks are represented by links that will not resolve until a camera-ready release, so a fresh clone cannot complete every documented setup step today. Training was only tested on an RTX 6000 Ada with 48 GB; the authors estimate at least 32 GB of GPU memory.
 
 There is also a source mismatch worth checking before procurement: the paper and project page report 20 fps tactile video at 1152 by 648, while the current repository README says 10 fps at 540 by 480. That may reflect an older configuration, but no versioned explanation was visible. Teams should treat the manuscript specification as experimental context and verify the repository configuration they can actually build.
+
+## Match the experiment and the clock before reusing a result
+
+The 8/10 slip result belongs to the diffusion U-Net experiment, not the VisTA flow-matching model. Wiping and bulb turning evaluate VisTA; object inference uses classifiers. Naming the sensor combination alone is insufficient to identify the trained model or evaluation protocol. [Separate experimental setups](https://arxiv.org/html/2609.29760v1).
+
+Sharing a physical sensing finger preserves geometry, but it does not automatically synchronize the camera, audio and commands. The pipeline aligns observations using the highest-latency stream and skips early predicted actions according to measured and calibrated delays. Its ten-hertz action grid, predicted chunk of 16 actions, execution of the first three and one-kilohertz impedance loop are distinct quantities.
+
+An integration record should therefore include capture and receive timestamps, alignment and delay calibration, dropped samples, executed action indices and controller settings. Keep the reported finger-only bill of materials separate from assembly, host compute, the UMI gripper and robot hardware. Resolve the paper/README image-rate mismatch against the actual build revision before procuring parts. These are proposed checks, not a RoboSkin installation. The [teleoperation guide](/robot-teleoperation#contact-signal-roles) compares this shared-sensor route with cross-embodiment signal mapping.
 
 ## Sources and related resources
 
@@ -2711,6 +2780,8 @@ There is also a source mismatch worth checking before procurement: the paper and
 - [Official PolyUMI and VisTA project](https://polyumi-vista.github.io/)
 - [Official MIT-licensed repository](https://github.com/polyumi/PolyUMI-platform)
 - [RoboSkin tactile dataset directory](/datasets)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
   },
   {
@@ -4025,7 +4096,7 @@ The paper links a public repository. Inspection on September 22 found runnable J
     id: 'touch2robot-tactile-feedback-human-demonstrations',
     title: 'Touch2Robot adds simulated robot contact to human demonstrations',
     seoTitle: 'Touch2Robot: Tactile Demonstration Results and Limits',
-    seoDescription: 'Touch2Robot visualizes predicted robot-hand contact during human demonstrations. Review replay, policy, contact F1 and release conditions.',
+    seoDescription: "Read Touch2Robot binary contact regions, F1 and onset-delay metrics alongside staged task scores; distinguish visual feedback from measured tactile control.",
     excerpt: 'The system lets demonstrators see reconstructed robot contact in VR. It improves four-task replay and downstream scores, while contact fidelity remains partial.',
     category: 'Robot demonstration data',
     image: '/generated/news/touch2robot-demonstration-loop.png',
@@ -4057,7 +4128,7 @@ The physical evaluation uses an xArm6 with a LEAP Hand, TwinTac sensors and bina
 
 ## How to read the reported percentages
 
-The evaluation metric is completion, not always binary success. Rotation, wiped area and drawer displacement are scaled toward a task goal. Pick-and-place awards 25% for each of reach, pick, move and place. Ten attempts per task are collected under each interface, then replayed on the physical robot without filtering demonstrations by replay outcome.
+The evaluation metric is completion, not always binary success. Rotation, wiped area and drawer displacement are scaled toward a task goal. Pick-and-place awards 25% for each of reach, pick, move and place. Ten attempts per task per operator are collected under each interface and replayed on the physical robot without filtering by replay outcome. The main collection-quality paragraph does not state the operator count.
 
 | Collection interface | Replay average | Time per replay-successful trajectory |
 | --- | ---: | ---: |
@@ -4079,18 +4150,28 @@ The result also clarifies what a tactile demonstration contains. Touch2Robot kee
 
 Contact fidelity remains incomplete: 44.19% F1 means reconstructed and measured contacts disagree often. The Touch2Robot variant also has a higher false-positive rate than the three reported baselines. The user study includes ten people on the rotation task, and cross-hand results for XHand and Shadow Hand are qualitative VR visualizations rather than physical cross-embodiment trials. Quantitative real-world tests use one LEAP Hand platform.
 
-This is a preprint and RoboSkin.ai has not reproduced it. As checked September 22, the official project page provides videos, images and an appendix PDF, but no public code repository, dataset download or software license was identified. The paper does not establish that the full collection system can be reconstructed from public assets alone.
+This is a preprint and RoboSkin.ai has not reproduced it. The November 4 project-page recheck found public demonstrations and explanatory material but did not identify a public code repository, dataset download or software license. The paper does not establish that the full collection system can be reconstructed from public assets alone.
+
+## Separate contact accuracy from interface timing
+
+The method compares binary contact across eight semantic regions: four fingers and four palm regions. It excludes the unmatched fifth human finger. Thresholded contact agreement is not pressure calibration or shear matching. The physical contact F1 of 44.19 is not the percentage of frames classified correctly; the 6.38% false-positive rate uses actual negative cases as its denominator. [Method and metric definitions](https://arxiv.org/html/2609.24660v1).
+
+The 30 Hz display, approximately 122 ms end-to-end feedback delay, 1.12 ms retargeter computation and 857.4 ms contact-onset error measure different things. The onset metric excludes pairs with a missing onset, so read it together with detection metrics rather than treating it as complete contact reliability. Simulation agreement with human preferences also has a different reference from agreement with physical robot sensors.
+
+For a collection pilot, retain measured glove contacts, simulated robot contacts, tracked object poses and exactly what feedback was displayed. Test missed and spurious contacts as well as delay. Distillation augments 30 teacher trajectories per task into 400 rollouts; those are not 400 independent human demonstrations. This proposed evidence record helps separate collection quality from training volume and downstream autonomy. See [contact-signal roles in teleoperation](/robot-teleoperation#contact-signal-roles).
 
 ## Sources
 
 - [Touch2Robot arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24660)
 - [Touch2Robot v1 methods, tables and appendix](https://arxiv.org/html/2609.24660v1)
 - [Official Touch2Robot project page](https://touch2robot.github.io/)
+
+*Evidence review updated November 4, 2026. Original publication dates are retained. We inspected sources and public metadata; we did not run these robot systems or download their training archives.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-21',
     evidenceStatus: 'Preprint · arXiv v1',
   },
