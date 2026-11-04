@@ -2,15 +2,17 @@
 
 Schema: content-workflow/v1. Goal: review every editorial URL for evidence, depth, structure and contextual links.
 
-This is a complete URL inventory, not a claim that every page has been fact-checked or rewritten. Word counts and link counts are screening observations, not quality scores. Source SHA: 3323f05f17d719904c5095873c12f4a54182ba18. No search volume, rankings, hardware tests or traffic effects are asserted.
+Status: **COMPLETE — 210/210 URLs individually reviewed, revised and production verified; 0 pending.** Final production audit: 2026-11-04 16:35:31 UTC. The register below records individual publication status; word/link counts retain the original screening snapshot at SHA `3323f05f17d719904c5095873c12f4a54182ba18`, not new measurements or quality scores. No search volume, rankings, hardware tests or traffic effects are asserted.
 
-## Batch 1
+## Original batch 1 scope (historical)
 
 Eight existing introductory guides/application pages gain distinct engineering decision material. PR102 pages remain unchanged. Original dates, URLs, sections, images and links remain, except 18 specifically recorded corrections to overbroad definitions or editorial-facing FAQ text (see task claim-corrections.json). No universal safety threshold, performance ranking or price is added.
 
 ## Review status
 
-Independent human fact review: pending; no human sign-off claimed. Codex checked primary sources and four editorial passes. Standing publication authority is separate from factual review. Remaining pages require individual evidence review; do not label the programme complete after this batch.
+Codex source/editorial review and production acceptance are complete for all 210 inventory URLs. Independent human factual sign-off remains pending and is not claimed; neither source review nor deployed content means independent hardware reproduction. Final 18 URLs were accepted under [PR139](https://github.com/156631890/roboskin.ai/pull/139), merge `a6ac18d7b1f62f5c5ab040eb48e73c73ef1fb8fc`, production `dpl_8G9MuUtkisS2FqCLeduBcyCrTdqp`. [Checked acceptance evidence and exact coverage](site-content-depth-production-acceptance-20261104.json).
+
+The final audit covered HTTP status, metadata, self-canonical, index directives, parsed JSON-LD and reviewed-source body matching on all 210 URLs, plus 562 distinct main-content internal links across 294 target paths. It was not a fresh independent factual experiment on every claim. Of the bodies, 209 exactly matched the final build; the research-service form had one source-verified existing environment notice difference. The final 18 pages additionally passed 36 desktop/mobile renders; earlier batches retain their own per-page release checks. No GSC indexing or outreach is implied.
 
 ## Full URL register
 
@@ -19,30 +21,30 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /vla/models | rewritten and production verified in PR137 | 2817 | 5 |
 | /vla/timeline | rewritten and production verified in PR137 | 776 | 3 |
 | /vla/concepts | rewritten and production verified in PR137 | 1015 | 5 |
-| / | individual content review complete; final production verification pending | 1580 | 63 |
+| / | rewritten and production verified in PR139 | 1580 | 63 |
 | /products | rewritten and production verified in PR120 | 509 | 4 |
 | /solutions | rewritten and production verified in PR120 | 403 | 2 |
-| /applications | individual content review complete; final production verification pending | 653 | 12 |
-| /technology | individual sensing and terminology review; production verification pending | 2571 | 19 |
+| /applications | rewritten and production verified in PR139 | 653 | 12 |
+| /technology | rewritten and production verified in PR139 | 2571 | 19 |
 | /physical-ai | rewritten and production verified in PR136 | 908 | 22 |
 | /resources | rewritten and production verified in PR122 | 2711 | 70 |
-| /faq | individual content review complete; final production verification pending | 488 | 3 |
+| /faq | rewritten and production verified in PR139 | 488 | 3 |
 | /research | rewritten and production verified in PR122 | 3103 | 192 |
 | /research-index | rewritten and production verified in PR122 | 4238 | 15 |
 | /papers | rewritten and production verified in PR122 | 186 | 3 |
 | /papers/interaction-as-the-interface | rewritten and production verified in PR122 | 687 | 2 |
-| /organizations | individual directory reading review; production verification pending | 11081 | 6 |
-| /robots | individual directory reading review; production verification pending | 5225 | 12 |
-| /glossary | individual sensing and terminology review; production verification pending | 1355 | 9 |
+| /organizations | rewritten and production verified in PR139 | 11081 | 6 |
+| /robots | rewritten and production verified in PR139 | 5225 | 12 |
+| /glossary | rewritten and production verified in PR139 | 1355 | 9 |
 | /about | rewritten and production verified in PR120 | 582 | 167 |
 | /editorial-policy | rewritten and production verified in PR120 | 897 | 185 |
 | /methodology | rewritten and production verified in PR120 | 918 | 4 |
 | /news | rewritten and production verified in PR122 | 4407 | 78 |
 | /contact | rewritten and production verified in PR120 | 239 | 196 |
 | /research-services | rewritten and production verified in PR120 | 540 | 63 |
-| /reports/tactile-ai-robot-skin-landscape-2026 | individual research-reading review; production verification pending | 485 | 50 |
-| /privacy | individual content review complete; final production verification pending | 892 | 0 |
-| /terms | individual content review complete; final production verification pending | 611 | 0 |
+| /reports/tactile-ai-robot-skin-landscape-2026 | rewritten and production verified in PR139 | 485 | 50 |
+| /privacy | rewritten and production verified in PR139 | 892 | 0 |
+| /terms | rewritten and production verified in PR139 | 611 | 0 |
 | /research/opentac-custom-tactile-skins-readout-limits-2026 | rewritten and production verified in PR119 | 1776 | 6 |
 | /research/softmimicgen-synthetic-data-sim-to-real-2026 | rewritten and production verified in PR119 | 2366 | 4 |
 | /research/slipsense-multimodal-slip-detection-2026 | rewritten and production verified in PR118 | 1304 | 10 |
@@ -169,7 +171,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /robot-grippers | rewritten and production verified in PR125 | 1187 | 2 |
 | /electronic-skin | rewritten and production verified in PR134 | 772 | 11 |
 | /robot-tactile-sensors | rewritten and production verified in PR135 | 1250 | 2 |
-| /humanoid-robot-companies | individual directory reading review; production verification pending | 850 | 2 |
+| /humanoid-robot-companies | rewritten and production verified in PR139 | 850 | 2 |
 | /embodied-ai | rewritten and production verified in PR136 | 736 | 1 |
 | /guides/3d-printed-tactile-sensors | rewritten and production verified in PR118 | 1376 | 2 |
 | /guides/optical-tactile-sensor-maintenance | rewritten and production verified in PR106 | 1273 | 7 |
@@ -196,7 +198,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
 | /e-skin | rewritten and production verified in PR135 | 2724 | 16 |
 | /humanoid-robot-skin | rewritten and production verified in PR135 | 1560 | 25 |
-| /applications/robot-hand-tactile-sensor | individual sensing and terminology review; production verification pending | 1203 | 31 |
+| /applications/robot-hand-tactile-sensor | rewritten and production verified in PR139 | 1203 | 31 |
 | /applications/soft-robotic-skin | rewritten and production verified in PR103 | 611 | 10 |
 | /guides/flexible-tactile-sensor-array | rewritten and production verified in PR103 | 613 | 10 |
 | /physical-ai-touch | rewritten and production verified in PR135 | 2153 | 29 |
@@ -205,17 +207,17 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/robot-touch-sensor | rewritten and production verified in PR103 | 881 | 3 |
 | /guides/slip-detection-robot-hand | rewritten and production verified in PR103 | 645 | 18 |
 | /guides/robot-skin-vs-e-skin | rewritten and production verified in PR103 | 518 | 9 |
-| /research/robot-skin-papers | individual research-reading review; production verification pending | 777 | 8 |
+| /research/robot-skin-papers | rewritten and production verified in PR139 | 777 | 8 |
 | /guides/robot-skin-vs-tactile-sensor | rewritten and production verified in PR103 | 645 | 3 |
 | /guides/tactile-feedback-for-physical-ai | rewritten and production verified in PR118 | 3086 | 14 |
 | /guides/tactile-sensor-benchmark-robot-manipulation | rewritten and production verified in PR118 | 1500 | 13 |
-| /datasets | individual directory-evidence review; production verification pending | 17213 | 94 |
+| /datasets | rewritten and production verified in PR139 | 17213 | 94 |
 | /tactile-foundation-models | rewritten and production verified in PR138 | 2571 | 37 |
 | /guides/visuo-tactile-world-models-robot-manipulation | rewritten and production verified in PR118 | 1932 | 21 |
-| /benchmarks | individual directory-evidence review; production verification pending | 5157 | 40 |
-| /sensors | individual directory-evidence review; production verification pending | 6094 | 110 |
+| /benchmarks | rewritten and production verified in PR139 | 5157 | 40 |
+| /sensors | rewritten and production verified in PR139 | 6094 | 110 |
 | /tactile-manipulation | rewritten and production verified in PR121 | 2323 | 65 |
-| /research/eu-roboskin-project | individual research-reading review; production verification pending | 1029 | 4 |
+| /research/eu-roboskin-project | rewritten and production verified in PR139 | 1029 | 4 |
 | /visuo-tactile | rewritten and production verified in PR124 | 1040 | 22 |
 | /humanoid-robots | rewritten and production verified in PR128 | 1242 | 23 |
 | /robot-vla-models | rewritten and production verified in PR138 | 11478 | 41 |
@@ -223,158 +225,162 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /robot-learning | rewritten and production verified in PR130 | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
 | /robot-safety | rewritten and production verified in PR132 | 1391 | 12 |
-| /robotics-datasets | individual directory-evidence review; production verification pending | 3039 | 32 |
+| /robotics-datasets | rewritten and production verified in PR139 | 3039 | 32 |
 | /robot-world-models | rewritten and production verified in PR129 | 5409 | 25 |
 | /robot-teleoperation | rewritten and production verified in PR123 | 3967 | 32 |
 
-## Research interpretation pass
+## Historical batch notes
+
+The following notes preserve the state when each batch was prepared. Their pending/active wording is historical and is superseded by the completed register and final production acceptance above. Source-access and unperformed-hardware limitations remain valid.
+
+### Research interpretation pass
 
 Six older research briefs now replace editorial-facing filler with source-bounded results and distinct adoption frameworks. Original dates, URLs, headings/anchors, images and prior useful source links are preserved. The Frontiers contrast section is retained verbatim. Deployment status must be taken from the release record, not inferred from this source document. Remaining rows are still pending individual review.
 
-## Sensor-system evidence pass
+### Sensor-system evidence pass
 
 Eight existing interpretations distinguish calibration effort, transfer prerequisites, geometry, thermal operation and event processing. Original URLs, dates, headings, images and source routes remain. Publisher-access limits are recorded rather than silently called a completed review. Previous PR104 six-page production verification is complete; the eight pages in this pass require their own live evidence. All remaining URL rows stay pending.
 
-## Practical guide pass
+### Practical guide pass
 
 Four established guides retain their substantive modules while adding diagnostic reasoning, a unit-consistent comparison, software-continuity checks and a genuinely executed synthetic-data recheck. The new Python evidence is separate from the historical September record and is not hardware or ROS evidence. Remaining pages are still queued individually.
 
-## Learning-study evidence pass
+### Learning-study evidence pass
 
 Four generic interpretations are replaced with study-specific metrics, interfaces and evaluation decisions. The existing detailed GIST interpretation is retained with a small evaluation-unit addition. Source dates, original page publication dates, anchors, images and internal routes remain. Prior four-guide PR106 verification is complete; these five pages require their own production checks. The full-site queue remains active.
 
-## Material-study evidence pass
+### Material-study evidence pass
 
 Three existing interpretations distinguish official abstract-level evidence from original engineering evaluation frameworks. Source access limits are explicit. No device performance is inferred from unread methods. Original URLs, publication dates, H1/H2 anchors, illustrations and source routes remain. Single-material hydrogel full-method verification remains pending. The full-site queue remains active.
 
-## Historical news evidence pass
+### Historical news evidence pass
 
 Three old briefs receive date, denominator and measurement corrections plus distinct decision frameworks. The F-TAC news metadata no longer implies vision-free control. Existing URLs, publication dates, H2 anchors, illustrations and sources remain. Source evidence and unresolved access are documented; the full-site queue remains active.
 
-## ROS evidence pass
+### ROS evidence pass
 
 Two existing pages retain distinct Kilted interface and Lyrical tutorial intents. Source/fixture tests were rerun, historical CI reread, and runtime/hardware gaps remain explicit. Existing commands, anchors and original dates are retained. The whole-site goal remains incomplete.
 
-## Market and sensing-readout evidence pass
+### Market and sensing-readout evidence pass
 
 Three historical news pages separate industrial installation figures from tactile adoption, optical colour observations from calibration, and effective reconstruction rates from controller timing. Original dates, URLs, anchors and source routes remain. Source access limits and version boundaries are explicit; whole-site review remains incomplete.
 
-## Textile, hybrid and recovery evidence pass
+### Textile, hybrid and recovery evidence pass
 
 Three existing briefs retain their substantial source-backed sections while correcting yarn geometry/timing, EIT configuration/force boundaries and underwater healing endpoints. Original dates, URLs, anchors and source routes remain. The separate three-channel textile source is still access-limited and excluded from completion. Whole-site review remains incomplete.
 
-## Collection, memory and active perception review
+### Collection, memory and active perception review
 
 Four existing pages retain substantial source-backed analysis while clarifying glove calibration protocols, simulation source access and licenses, a dated manufacturer demonstration follow-up, and active-perception timing and trial denominators. Original dates, URLs, anchors, images and source routes remain. Whole-site review remains incomplete.
 
-## Sensor profile acceptance pass
+### Sensor profile acceptance pass
 
 Four existing profiles retain their verified specifications and source history. Focused additions distinguish bias, gain and force validation; coating wear and operational acceptance; acquisition and reconstruction configuration; and within-skin versus held-out-board evidence. No hardware test or independent performance ranking is claimed. The whole-site queue remains active.
 
-## Sensor-family configuration review
+### Sensor-family configuration review
 
 Three existing profiles preserve source-specific model specifications and dated availability. Additions address local-to-resultant force interpretation, taxel-to-module acceptance and loading artifacts versus mounted behavior. No product test, purchase or independent ranking is claimed. Whole-site review remains incomplete.
 
-## Guide and research evidence review
+### Guide and research evidence review
 
 Sixteen individually reviewed existing URLs combine seven guides and nine research interpretations in one release. Source findings, editorial evaluation proposals and historical executed records remain distinct. Preserve original dates, anchors, images and valuable content. Correct metric semantics, denominator and configuration limits rather than adding generic length. Whole-site review remains incomplete.
 
-## Research metrics and artifact review
+### Research metrics and artifact review
 
 Thirteen existing research URLs now distinguish evaluation score semantics, calibration and validation budgets, component configurations and dated artifact access. Full original explanations, anchors and publication dates are retained. Source reports and proposed evaluation designs remain distinct; no independent hardware or model reproduction is claimed. Whole-site programme remains active.
 
-## Learning, trust and inquiry route review
+### Learning, trust and inquiry route review
 
 Seven existing pages gain distinct learning outputs, evaluation questions, attribution guidance, denominator checks, source-conflict treatment, a correction template and service-scoping examples. Existing forms, business terms, modules and links remain. No new technical measurement or human sign-off is claimed. Whole-site review remains incomplete.
 
-## Control-interface evidence review
+### Control-interface evidence review
 
 Four existing News reports receive primary-source corrections and a substantive companion comparison on /tactile-manipulation. Original publication dates, modules, diagrams and anchors remain. No hardware reproduction or full-dataset verification is claimed; whole-site review remains incomplete.
 
-## Research navigation and numerical evidence
+### Research navigation and numerical evidence
 
 Six existing pages gain purpose-specific reading guidance, clearer record/version boundaries and a dated local reproduction of the existing synthetic numerical example. Original versioned assets and the 30-record index are unchanged. No hardware test or new research-architecture result is claimed. Whole-site review remains incomplete.
 
-## Demonstration signal and release evidence
+### Demonstration signal and release evidence
 
 Seven existing News pages and /robot-teleoperation now distinguish measured human touch, simulated contact, training guidance, runtime inputs and operator feedback. Metrics and release metadata are corrected with primary evidence. No hardware execution or dataset payload verification is claimed. Whole-site review remains incomplete.
 
-## Vision–touch evaluation depth
+### Vision–touch evaluation depth
 
 Six existing News reports and /visuo-tactile now distinguish training labels, runtime observations, diagnostic probes, controller feedback and physical outcomes. Corrections include sampling, encoder training, stage criteria, release metadata and documented source conflicts. No hardware run or payload verification is claimed. Whole-site review remains incomplete.
 
-## Gripper contact evidence depth
+### Gripper contact evidence depth
 
 Six existing News reports and /robot-grippers distinguish passive contact mechanics, measurement, prediction, executed feedback and task completion. Corrections include actual control loops, evaluation units, split selection, current paper revisions and public-release evidence. Original publication dates and useful modules are retained. No physical reproduction is claimed. Whole-site review remains incomplete.
 
-## Manipulation decision and training-role depth
+### Manipulation decision and training-role depth
 
 Six existing News reports and /robot-manipulation distinguish contact proxies, sensing, offline supervision, runtime decisions and complete-task outcomes. Corrected retry and probe denominators, prior-data baselines, causal timing and public release status. No experimental reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
 
-## Hand mechanics, measurement and task depth
+### Hand mechanics, measurement and task depth
 
 Six existing News reports and /robot-hands distinguish kinematics, passive mechanics, contact estimates, dynamic sensing and completed tasks. Corrected conditional impact metrics, release status and the HRDexDB modality description. No experimental reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
 
-## Humanoid observation, control and evaluation depth
+### Humanoid observation, control and evaluation depth
 
 Six existing News reports and /humanoid-robots distinguish observations, planner computations, action chunks, feedback and physical outcomes. Corrected cost scope, timing, rollout and release statements. No experimental reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
 
-## World-model interfaces and physical evidence
+### World-model interfaces and physical evidence
 
 Six existing News reports and /robot-world-models distinguish predictive training, online context, action selection and measured outcomes. Corrected simulation-result scope and updated release boundaries. No model execution, robotics reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
 
-## Robot learning adaptation and supervision
+### Robot learning adaptation and supervision
 
 Six existing reports and /robot-learning distinguish memory updates, learned parameters, runtime conditioning and human labor. Corrected sample assignments, goal-image content, unsupported operator-count claims and control-frequency wording. Original modules and dated data exercises remain. No research execution or human fact sign-off is claimed. Whole-site review remains incomplete.
 
-## Tactile measurement, prediction and control evidence
+### Tactile measurement, prediction and control evidence
 
 Six existing reports and /tactile-ai now distinguish haptic cues, demonstration records, solver forces, embeddings, predicted goals and committed actions. Corrected topology requirements and architecture, updated source-pinned release status, and separated original from follow-up results. Original sections, links, assets and publication dates remain. No research execution or human fact sign-off is claimed. Whole-site review remains incomplete.
 
-## Robot safety scope and benchmark evidence
+### Robot safety scope and benchmark evidence
 
 Two existing reports and /robot-safety now distinguish benchmark conditions, source publication status, component claims and application evidence. Add direct Part 2 scope, mobile-hazard boundaries and an explicitly hypothetical change-review example. No thresholds, certification, new hardware experiment or human factual approval is claimed. Whole-site review remains incomplete.
 
-## Model interfaces and evaluation entry points
+### Model interfaces and evaluation entry points
 
 Two release analyses and /robot-foundation-models gain distinct source-reviewed boundaries: Gemini chart aggregation and model interfaces; LeRobot recording segments and checkpoint compatibility; REKI benchmark protocol comparability. Preserve original publication dates, modules and historical reviews. No installation, API call or hardware result claimed. Whole-site review remains incomplete.
 
-## Electronic-skin measurement evidence
+### Electronic-skin measurement evidence
 
 Three individual revisions: textile readout and command boundaries, accepted-manuscript hydrogel evidence, and an evergreen material-to-controller comparison. Preserve original dates and modules. No hardware, code or dataset execution. Whole-site goal remains incomplete.
 
-## Robot-skin system integration review
+### Robot-skin system integration review
 
 Five pages receive distinct installed-system, compatibility, body-zone, policy-role and specification-interface guidance. The F3T correction renders on /e-skin; /technology imports other constants from the module and does not render this passage. It is not counted as individually reviewed by this batch. Original source dates and useful modules retained. Whole-site review remains incomplete.
 
-## AI, embodiment and programming review
+### AI, embodiment and programming review
 
 Four distinct revisions: failure tracing, transfer evidence, exercise completion and physical-evaluation scope. Original modules and dated execution records retained. No robot or model runtime claim. Whole-site work remains active.
 
-## VLA directory reading review
+### VLA directory reading review
 
 Nineteen first-submission dates checked; three separate reader decisions added. Catalog fields retain original review dates. No model or artifact execution. Whole-site work remains active.
 
-## VLA and tactile representation transfer
+### VLA and tactile representation transfer
 
 Qualified catalog scope, added an action-interface handoff and adaptation ledger, and clarified estimated force supervision. Original source dates and modules retained. Whole-site review remains incomplete.
 
-## Directory evidence review
+### Directory evidence review
 
 Four individual directory decisions: manifest versus payload, semantic conversion, score reconstruction and sensor output chains. PRISM access changes only to linked/unverified. Record counts and fixed research snapshots retained. Whole-site review remains active.
 
-## Organization and platform directory review
+### Organization and platform directory review
 
 Separate attribution, artifact stewardship, exact robot configurations and procurement evidence. Five company rows rechecked; 1X location corrected. Research entity IDs, relationships and their historical dates preserved. Whole-site review remains active.
 
-## Sensing, terminology and hand-task decisions
+### Sensing, terminology and hand-task decisions
 
 Added measurement-chain diagnosis, source-linked metrology distinctions and task-specific hand observations. Qualified binary-contact and vision-limit claims. Existing anchors, dates and layout modules retained. Whole-site review remains active.
 
-## Research reading, history and fixed report scope
+### Research reading, history and fixed report scope
 
 Added claim-to-evidence reading, historical source selection and a dated report addendum. Fixed PDF bytes and edition retained; FreeTacMan data/code license distinction explained. Whole-site review remains active.
 
-## Final five individual content decisions
+### Final five individual content decisions
 
 All 210 URLs now have individual source/content decisions and revisions. 192 preceding URLs have production evidence; the final eighteen in this commit require exact production verification before the programme can be marked complete. Final evidence is recorded in the task publication handoff and batch88 final release record after deployment. No human factual sign-off or independent hardware validation is claimed.
