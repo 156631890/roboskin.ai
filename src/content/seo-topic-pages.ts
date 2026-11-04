@@ -3995,15 +3995,15 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-foundation-models',
-    revisionNote: 'October 17, 2026: added the N0-Foundation / NeoForce section. October 12, 2026: added the HFM terminology comparison and limits of the proposed framework, FAQ and practical reading routes.',
+    revisionNote: "November 4, 2026: reviewed representation and policy boundaries, added an adaptation accounting example and clarified NeoForce estimated force fields. Earlier dated artifact observations remain separate; no model execution.",
     title: 'Tactile Foundation Models for Robotics',
     description:
-      "Compare Sparsh, UniTouch and tactile learning systems by inputs, outputs, downstream tasks and transfer evidence. Separate encoders, world models and policies.",
+      "Compare tactile representations by preprocessing, adaptation, task heads and transfer tests; distinguish learned force fields from measurements.",
     h1: 'Tactile foundation models for robotics compared',
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: '2026-10-17',
+    updated: "2026-11-04",
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4016,11 +4016,79 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
     sections: [
       {
+        "id": "representation-adaptation-ledger",
+        "heading": "What was frozen, what was trained, and what actually transferred?",
+        "body": [
+          "A reusable encoder is only part of a downstream system. Sparsh's official examples pair representations with task-specific decoding, probing or a manipulation policy. UniTouch separately documents an encoder-only path and the full Touch-LLM workflow. An embedding alone does not produce a force estimate, a language answer or an executable action without the corresponding downstream components.",
+          "For an evaluation plan, keep a component ledger rather than writing only \"pretrained model used.\" Record the sensor and preprocessing, pretrained checkpoint, frozen parameters, newly trained head, adaptation data and final output. Then describe the changed condition: new objects, a new sensor, a new task or a new robot. Success on one of those axes does not establish the others."
+        ],
+        "table": {
+          "headers": [
+            "Adaptation choice",
+            "Question it can test",
+            "Additional evidence needed"
+          ],
+          "rows": [
+            [
+              "Frozen encoder, trained probe",
+              "Is target information accessible in the representation under this protocol?",
+              "Independent split, labels, probe budget and matching baseline"
+            ],
+            [
+              "Encoder or adapter fine-tuning",
+              "Can the representation be adapted with the provided target data?",
+              "Which parameters changed, target-data amount and held-out conditions"
+            ],
+            [
+              "Representation inside a policy",
+              "Does the complete policy use the features effectively on its task?",
+              "Action interface, physical attempts, intervention rules and matched ablation"
+            ],
+            [
+              "Changed sensor or mounting",
+              "Does the pipeline survive a specified observation shift?",
+              "New calibration/preprocessing and exact permitted adaptation"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Example: estimated force is still a model output",
+            "body": [
+              "NeoForce's force-space pipeline first estimates dense three-axis fields from tactile images through a learned conversion. The paper describes paired calibration data and simulation augmentation for that conversion. Its reconstruction target therefore has its own measurement and modeling chain; a force-labelled tensor is not proof of an independently measured force at every pixel.",
+              "Before reusing such a field, inspect the calibration reference, spatial convention, normalization, loading conditions and error on the target sensor. Keep a field reconstruction error separate from a robot task score. This is a proposed evidence check, not a new calibration or reproduction by RoboSkin.ai."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Sparsh: representations, probes and downstream policies",
+            "href": "https://sparsh-ssl.github.io/"
+          },
+          {
+            "label": "UniTouch: encoder-only versus full workflow",
+            "href": "https://github.com/cfeng16/UniTouch"
+          },
+          {
+            "label": "NeoForce: conversion and representation pipeline",
+            "href": "https://arxiv.org/html/2608.29601v2#S5.SS3"
+          },
+          {
+            "label": "Sensor calibration and reference conditions",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Representation versus control metrics",
+            "href": "/benchmarks"
+          }
+        ]
+      },
+      {
         id: 'n0-foundation-neoforce',
         heading: 'What Is N0-Foundation? NeoData, NeoForce and N0-VTLA',
         body: [
           'N0-Foundation, pronounced Neo-Foundation, is a tactile-centred research framework from the NeoteAI and Fudan TEAI teams, combining hardware, data, representations and evaluation. The September 20, 2026 report describes NeoData as more than 30,000 hours of synchronized visual-tactile demonstrations from robot teleoperation and the handheld N0-TacUMI interface. It reports OpenNeoData as a 5,000-hour open subset; the full corpus and the open subset are different resources.',
-          'NeoForce learns visuo-tactile representations using dense three-axis force fields as a shared supervision space: two shear components and one normal component. The intended benefit is a physical contact representation less tied to sensor-specific images. NeoReal evaluates physical manipulation and NeoSim supplies simulated tasks. These author-reported evaluations do not establish unrestricted transfer to every tactile sensor.',
+          'NeoForce learns visuo-tactile representations using estimated dense three-axis force fields as a shared supervision space: two shear components and one normal component. The intended benefit is a physical contact representation less tied to sensor-specific images. NeoReal evaluates physical manipulation and NeoSim supplies simulated tasks. These author-reported evaluations do not establish unrestricted transfer to every tactile sensor.',
           'N0-VTLA is the related vision-tactile-language-action policy described in a separate official project. It uses NeoData pretraining and predicts latent tactile tokens to condition action generation. Keep this policy distinct from the Foundation infrastructure and NeoForce representation. Dataset size alone does not establish the exact training mixture of every checkpoint, and RoboSkin has not independently reproduced the models.',
         ],
         contextLinks: [
@@ -4038,7 +4106,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Four different jobs for tactile learning',
         body: [
-          'A reusable representation compresses raw tactile signals into features for later tasks. A world model predicts how touch may change after an action. A policy converts observations and goals into robot actions. A residual tactile controller makes fast local corrections around a slower plan.',
+          'A reusable representation compresses raw tactile signals into features for later tasks. A world model predicts how touch may change after an action. A policy converts observations and goals into robot actions. A residual tactile controller can make local corrections around a separate plan; its actual update rate and response delay depend on the implemented system.',
           'These roles can be combined, but they should not be confused. A model that improves material classification has not automatically demonstrated dexterous control. A policy with high task success has not automatically shown broad transfer across tactile sensors.',
         ],
         contextLinks: [
@@ -5618,15 +5686,15 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/robot-vla-models',
-    title: "VLA Robotics Models: Full Comparison (2026)",
-    description: "Every major VLA robotics model compared: parameter count, training data, open weights and whether it accepts tactile input, with links to primary sources.",
-    introduction: "VLA robotics refers to vision-language-action systems that use visual observations and language instructions to produce or condition robot actions. This VLA robotics comparison covers 11 source-reviewed models, including their parameters, training data, released weights and tactile input. Source availability and reported results do not establish independent reproduction or readiness for your robot.",
+    title: "VLA Robotics Models: Interfaces and Touch",
+    description: "Compare selected VLA models by action interface, tactile pathway, artifact access and evaluation protocol; distinguish transfer from configuration changes.",
+    introduction: "VLA robotics refers to vision-language-action systems that use visual observations and language instructions to produce or condition robot actions. This VLA robotics guide covers 11 selected source-reviewed VLA records, including their parameters, training data, weight availability and tactile input. Source availability and reported results do not establish independent reproduction or readiness for your robot.",
     h1: "VLA Robotics Models: Architecture, Open Weights and Touch Input",
     kicker: 'Vision-language-action guide',
     intent: 'Definition and comparison guide for robot VLA models, vision-language-action policies, action interfaces, embodied reasoning boundaries, and tactile VLA systems.',
     published: '2026-08-20',
-    updated: structureRelease.modifiedDate,
-    revisionNote: 'October 20, 2026: added omnimodal VLA guidance, FR-VLA force admission and VLDA training-versus-inference boundaries. Earlier model records retain their own evidence dates.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: qualified catalog coverage and added a concrete observation-to-action handoff example. Original model records keep their own evidence dates; no model run or hardware evaluation.",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -5638,6 +5706,70 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Touch can extend a VLA during contact-rich manipulation by adding pressure, shear, slip, deformation, or contact-state evidence. The useful test is whether tactile input changes closed-loop outcomes under matched conditions.',
     ],
     sections: [
+      {
+        "id": "vla-interface-handoff",
+        "heading": "Worked handoff: a valid action vector can still mean the wrong motion",
+        "body": [
+          "Consider a hypothetical seven-value output sent to a different robot. One policy may encode an end-effector displacement in a local frame, while an adapter expects an absolute pose or a velocity in another frame. A vector can pass a shape check and still command the wrong movement. The Open X-Embodiment paper explicitly notes that coarse action alignment retains differing frames and absolute, relative or velocity meanings.",
+          "Resolve that mismatch before adding touch or comparing checkpoints. Trace a documented output through normalization, frame conversion, gripper convention and execution timing. Then identify where a fresh contact observation can change behavior: the next model call, a regenerated action suffix, an interpolating controller or a separate bounded residual. These are different integration changes, not interchangeable tactile-input checkmarks."
+        ],
+        "table": {
+          "headers": [
+            "Handoff record",
+            "Proposed evidence",
+            "What remains unproven"
+          ],
+          "rows": [
+            [
+              "Model to adapter",
+              "Named checkpoint, output dimensions, units, reference frame and normalization constants",
+              "That another robot interprets the same array identically"
+            ],
+            [
+              "Adapter to controller",
+              "Converted command, executed horizon and applied limits",
+              "That accepting a command means completing the task"
+            ],
+            [
+              "Contact to action",
+              "Observation timestamp and the specific module whose output changes",
+              "That merely recording touch creates feedback"
+            ],
+            [
+              "Attempt to reported result",
+              "Full completion or partial-credit rule, assistance and number of independent attempts",
+              "That a progress score is a fraction of fully successful trials"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Keep catalog layers separate",
+            "body": [
+              "This guide owns the selected detailed VLA records and the tactile integration map. The broader model matrix also includes explicitly labelled related planners and policies; its 19 rows are not the same cohort as this guide's 11 VLA records. Neither selection is an exhaustive inventory of every major model.",
+              "Use the original source-review date on each record when judging availability. A new reading-guide revision does not mean all repositories were freshly checked, all components are released or an experiment was reproduced. The worked handoff above is an editorial example; it is not a robot motion test."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Open X-Embodiment: action alignment limits",
+            "href": "https://arxiv.org/html/2310.08864v9#S4.SS1"
+          },
+          {
+            "label": "Broader comparison matrix and inclusion rules",
+            "href": "/vla/models"
+          },
+          {
+            "label": "Tactile integration mechanisms",
+            "href": "/robot-vla-models#tactile-vla-integration-index"
+          },
+          {
+            "label": "Replay is not a live latency measurement",
+            "href": "/guides/ros2-tactile-sensing#verification-ladder"
+          }
+        ]
+      },
       omnimodalSection,
       {
         id: 'vlda-delta-training-inference',
@@ -5735,7 +5867,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'What enters and leaves a robot VLA',
         body: [
-          'The common high-level description is vision plus language to action, but real systems also use robot state, action history, camera geometry, embodiment identifiers, depth, force, tactile signals, or a high-level plan. The output may be joint commands, end-effector motion, action chunks, discrete tokens, trajectories, or inputs to another controller.',
+          'The common high-level description is vision plus language to action. Depending on the implementation, a system may also use robot state, action history, camera geometry, embodiment identifiers, depth, force, tactile signals or a high-level plan. The output may be joint commands, end-effector motion, action chunks, discrete tokens, trajectories, or inputs to another controller.',
           'Because the interface differs, model names and parameter counts do not create a fair performance ranking. Readers need the task, robot, data, action space, inference setting, and evaluation protocol.',
         ],
       },
