@@ -5726,7 +5726,7 @@ This article summarizes Hugging Face’s official LeRobot v0.6.0 announcement an
     title: 'NIST proposes a baseline benchmark for comparable humanoid robot capabilities',
     seoTitle: 'NIST Humanoid Robot Baseline Benchmark Explained',
     seoDescription:
-      'NIST’s 2026 proposal maps low-footprint locomotion, manipulation, loco-manipulation, whole-body control, and reasoning tasks for comparable humanoid evaluation.',
+      "Review the NIST humanoid benchmark proposal, intervention reporting and comparison limits; distinguish task performance from application safety evidence.",
     excerpt:
       'NIST is developing a low-footprint baseline of measurable locomotion, manipulation, whole-body, and reasoning tasks—but the public page is a proposal, not a published humanoid leaderboard.',
     content: `# NIST proposes a baseline benchmark for comparable humanoid robot capabilities
@@ -5790,18 +5790,37 @@ Use the [robot safety overview](/robot-safety) to keep capability metrics, funct
 
 ## Current status and evidence boundary
 
-As of the NIST page update dated May 15, 2026, the apparatus was under development with participation being sought from manufacturers, researchers, and test facilities. NIST said designs and 3D models would be published and results would be collected under agreed data-sharing arrangements, with aggregate results intended to characterize the state of the art.
+The November 4 review found that the public page still carries a May 15, 2026 update and describes the apparatus as under development with participation being sought from manufacturers, researchers, and test facilities. NIST said designs and 3D models would be published and results would be collected under agreed data-sharing arrangements, with aggregate results intended to characterize the state of the art.
 
-This article does not claim those planned artifacts or aggregate results are already available. It summarizes an official project page, not a final standard, peer-reviewed benchmark paper, or completed ranking. RoboSkin.ai has not participated in the protocol design or tested a humanoid on the apparatus.
+The reviewed page does not establish that those planned artifacts or aggregate results are available; this review did not verify a final protocol or named-robot score release. It summarizes an official project page, not a final standard, peer-reviewed benchmark paper, or completed ranking. RoboSkin.ai has not participated in the protocol design or tested a humanoid on the apparatus.
+
+## Define the comparison before collecting a score
+
+A useful procurement question is not simply whether a humanoid can complete a course. It is whether a result describes the operating mode and conditions that a receiving team intends to evaluate. NIST's broader [robotics measurement program](https://www.nist.gov/el/robotics) connects application requirements to contextual performance metrics. The following is a proposed review record, not a published NIST scoring sheet.
+
+| Proposed record field | Comparison error it prevents |
+| --- | --- |
+| Task, apparatus revision and environment | Treating different geometry or contact conditions as the same test |
+| Robot, end effector, payload and software revision | Attributing an integration change solely to a model or sensor |
+| Autonomy mode and operator assistance | Combining autonomous, remotely controlled and physically assisted runs |
+| Attempt start, completion and interruption rules | Removing difficult attempts or resets from the denominator |
+| Contacts, falls, recovery and task outcome | Treating successful completion as proof that every intermediate event was acceptable |
+| Unattempted or unreported tasks | Converting missing evidence into either zero capability or an assumed pass |
+
+For example, compare a remotely guided run with another remotely guided run under the same protocol; label a separate autonomous run separately. If touch is the research variable, retain the same task, command limits, success rule and intervention policy, and document what changes when the tactile pathway is disabled. A benchmark title cannot substitute for that experimental design.
+
+NIST's [performance-standards talk description](https://www.nist.gov/video/how-performance-standards-can-pave-way-humanoid-adoption) connects repeated, explicitly defined outcomes to reliability assessment. That supports careful trial accounting; it does not turn a short run with no observed failures into a universal safety guarantee. The [safety evidence handoff](/robot-safety#safety-evidence-handoff) separates a capability result from a protective-function validation record.
 
 ## Source
 
 - [NIST: Humanoid Robot Baseline Performance Benchmark](https://www.nist.gov/el/intelligent-systems-division-73500/humanoid-robot-baseline-performance-benchmark)
+
+*Public-source review updated November 4, 2026. Original publication dates are retained. RoboSkin has not tested the benchmark or performed a conformity assessment.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Robotics benchmarks',
     image: '/generated/pages/comparison-matrix.webp',
     sourceTitle: 'Humanoid Robot Baseline Performance Benchmark',
@@ -5819,12 +5838,12 @@ This article does not claim those planned artifacts or aggregate results are alr
     title: 'ISO 10218:2025 separates industrial robot design from application integration',
     seoTitle: 'ISO 10218:2025 Industrial Robot Safety Scope',
     seoDescription:
-      'A public-source guide to ISO 10218-1 and ISO 10218-2:2025, their industrial scope, exclusions, and what robot skin can—and cannot—prove about safety.',
+      "Map ISO 10218 robot and application scope, mobile-system gaps and evidence ownership; distinguish public standard summaries from validated safety functions.",
     excerpt:
       'ISO 10218-1:2025 addresses the industrial robot before system integration, while Part 2 addresses applications and robot cells; neither makes a sensor alone a certified safety system.',
     content: `# ISO 10218:2025 separates industrial robot design from application integration
 
-**Public standard-scope guide — ISO 10218-1:2025 published February 5, 2025**
+**Public standard-scope guide — ISO 10218-1:2025 published February 2025**
 
 ISO 10218 is a two-part international industrial-robot safety standard. Part 1 addresses the industrial robot as partly completed machinery before integration. Part 2 addresses industrial robot applications and robot cells after the robot is integrated into a working system.
 
@@ -5877,18 +5896,35 @@ Avoid relying on a blog post—including this one—for compliance decisions. A 
 
 ## Evidence boundary
 
-This article is based on ISO’s public product page and public robotics-sector overview. RoboSkin.ai did not access or reproduce the paid full text of ISO 10218-1:2025 or ISO 10218-2:2025. It does not give legal advice, certify a robot, or claim that robot skin satisfies any clause. The A3 article below is included as secondary industry context; ISO remains the primary source for the standard’s identity and public scope.
+This article is based on ISO’s public records for both parts, its robotics-sector overview and the separately linked personal-care/service-robot records. RoboSkin.ai did not access or reproduce the paid full text of ISO 10218-1:2025 or ISO 10218-2:2025. It does not give legal advice, certify a robot, or claim that robot skin satisfies any clause. The A3 article below is included as secondary industry context; ISO remains the primary source for the standard’s identity and public scope.
+
+## Turn a component claim into an application evidence request
+
+The public [Part 2 record](https://www.iso.org/standard/73934.html) covers integration and the application lifecycle, not just selection of an arm. Both parts also identify mobility-related hazards of robots on mobile platforms as outside their stated coverage. An industrial manipulator mounted on a mobile base therefore needs a separate scope review; citing the arm's standard does not settle the mobile system's hazards.
+
+| Claim offered by a supplier | Additional evidence to request for the intended application |
+| --- | --- |
+| The arm follows a named standard | Exact edition, product configuration and boundaries of the documented claim |
+| The skin detects contact | Covered locations, measured quantity, calibration and conditions of use |
+| The system stops after detection | The defined protective function, complete signal path and application-specific validation record |
+| A new cover or model is compatible | Change-impact assessment identifying which prior assumptions and evidence still apply |
+
+This is an editorial evidence-request framework, not a clause checklist or a declaration that any specific device complies. The responsible integrator must connect the applicable requirements to the actual robot, tools, environment and operating modes. Keep detection delay, decision/communication delay and physical stopping response distinct; a sensor refresh specification alone cannot describe that entire path.
+
+A different product category also requires a different source check. ISO's [published ISO 13482:2014 record](https://www.iso.org/standard/53820.html) concerns personal-care robots, while its [proposed successor](https://www.iso.org/standard/83498.html) is listed as a final draft under development in this review. Do not present that draft as an already published replacement or assume that either scope covers medical devices. The [robot safety evidence handoff](/robot-safety#safety-evidence-handoff) shows how to keep edition, claim owner, system boundary and unresolved evidence together.
 
 ## Sources
 
 - [ISO: ISO 10218-1:2025 — Safety requirements for industrial robots](https://www.iso.org/standard/73933.html)
 - [ISO: Robotics standards overview](https://www.iso.org/cms/live/live/en/sites/isoorg/home/sectors/engineering/robotics.html)
 - [Association for Advancing Automation: updated ISO 10218 overview](https://www.automate.org/robotics/news/updated-iso-10218-major-advancements-in-industrial-robot-safety-standards-now-available)
+
+*Public-source review updated November 4, 2026. Original publication dates are retained. RoboSkin has not tested the benchmark or performed a conformity assessment.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Robot safety',
     image: '/generated/pages/application-contexts.webp',
     sourceTitle: 'ISO 10218-1:2025 — Robotics — Safety requirements — Part 1: Industrial robots',
