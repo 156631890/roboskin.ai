@@ -517,14 +517,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    revisionNote: "November 4, 2026: reviewed system definitions and added an installation evidence record. Source-specific research and original anchors retained; no new hardware test.",
     path: '/robot-skin',
     title: "Robot Skin: Materials, Sensors, Vendors",
-    description: "Robot skin for humanoid robots: materials, embedded tactile sensing, vendor landscape and cost drivers — disambiguated from game skins.",
+    description: "Understand robot skin as an installed sensing system: coverage, readout, calibration, replacement and supplier evidence, with research examples.",
     introduction: "Robot skin is the engineered, sensor-bearing covering on a physical humanoid or robotic arm, not a game cosmetic. Robot skin combines compliant materials, embedded sensing, signal processing and a connection to robot control. Compare surface coverage, measurable contact signals, mounting requirements and vendor documentation before selecting a system.",
     h1: "Robot Skin for Humanoid Robots: Materials, Sensing and Vendors",
     kicker: 'Core concept',
     intent: 'Definition and category overview for readers searching robot skin, robotic skin, or what is robot skin.',
-    updated: structureRelease.modifiedDate,
+    updated: "2026-11-04",
     priority: 0.88,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -539,11 +540,84 @@ export const seoTopicPages: SeoTopicPage[] = [
       ],
     },
     quickAnswer: [
-      'Robot skin is a tactile sensing surface that helps a robot detect contact, pressure, shear, slip, and interaction events across hands, grippers, arms, or curved body surfaces.',
+      'Robot skin is a sensing surface installed on a robot. Depending on its architecture and calibration, it may provide contact, pressure, shear or slip-related information; no single modality list applies to every skin.',
       'A useful robot skin system is not only a soft cover. It includes sensor materials, signal conditioning, data handling, robot middleware, and control logic that can use touch information.',
       'The term overlaps with e-skin and tactile sensors, but robot skin is usually discussed in the context of robots that need distributed contact awareness.',
     ],
     sections: [
+      {
+        "id": "installed-skin-record",
+        "heading": "Specify the installed skin, not just the sensing material",
+        "body": [
+          "A useful supplier or lab handoff identifies the complete installed assembly. The same sensing material can behave differently after a change in its thickness, support, electrode or magnet placement, cover, cable route or inference model. Record the configuration that produced the evidence before deciding which results apply to your robot.",
+          "The original DIGIT paper describes a modular optical fingertip with a replaceable elastomer; the ReSkin work separates the magnetic interface from the electronics. These designs make replacement practical, but they do not make every replacement equivalent. The hydrogel hand study adds a different case: selected electrical configurations depend on a particular continuous surface and electrode arrangement. Those are distinct service and calibration problems."
+        ],
+        "table": {
+          "headers": [
+            "Record",
+            "Concrete information",
+            "Decision it supports"
+          ],
+          "rows": [
+            [
+              "Assembly identity",
+              "Sensor revision, surface material, cover, mounting support and connector route",
+              "Whether a specification belongs to the installed device"
+            ],
+            [
+              "Coverage and access",
+              "Contact zones, joints, seams, exclusions and reachable maintenance points",
+              "Which task contacts are observed and which remain blind"
+            ],
+            [
+              "Measurement chain",
+              "Raw output, calibration/model revision, units and timestamps",
+              "Whether the controller receives a measurement, an estimate or only an image"
+            ],
+            [
+              "Replacement boundary",
+              "What changes when the surface or module is replaced",
+              "Which baseline, reference and task checks must be repeated"
+            ],
+            [
+              "Evidence status",
+              "Dated manufacturer specification, author experiment or local measurement",
+              "What is documented versus established on the target robot"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A replacement example without invented performance data",
+            "body": [
+              "Suppose an optical pad is replaced and the unloaded image changes. Preserve the old and new surface identifiers, mounting state, camera settings and reference observations. First determine whether acquisition changed; then evaluate the calibrated estimate; only then compare the task. A working camera stream does not establish that a prior force model still applies. This is an illustrative diagnostic sequence, not a test we performed.",
+              "Cost follows this assembly boundary too. A sensor-only fabrication estimate omits acquisition electronics, fixtures, replacement stock and engineering time. Use dated quotes and your actual integration plan; the category name does not establish a comparable purchase price."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Optical surface replacement and diagnosis",
+            "href": "/guides/optical-tactile-sensor-maintenance"
+          },
+          {
+            "label": "ReSkin calibration and replacement evidence",
+            "href": "/sensors/reskin"
+          },
+          {
+            "label": "Hydrogel skin: contact and acquisition limits",
+            "href": "/research/single-material-soft-robotic-skin-2025"
+          },
+          {
+            "label": "Compare dated sensor cost categories",
+            "href": "/sensors#tactile-sensor-cost"
+          },
+          {
+            "label": "Scope an integration evidence review",
+            "href": "/research-services"
+          }
+        ]
+      },
       {
         heading: 'What robot skin measures',
         body: [
@@ -561,7 +635,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         heading: 'How robot skin fits the tactile AI stack',
         body: [
           'Robot skin becomes more useful when it is part of a tactile AI stack. The surface gathers signals, electronics condition those signals, software organizes them into robot-ready data, and control systems use the result for grasping, safety, or evaluation.',
-          'That stack is why thin marketing copy often misses the point. The material layer is important, but calibration, mounting, latency, durability, and software interfaces determine whether the skin can support real robot behavior.',
+          'Material properties alone do not establish an operational system. Calibration, mounting, latency, durability and software interfaces determine which robot behaviors the skin can support.',
         ],
       },
       {
@@ -629,7 +703,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Latest evidence: textile architecture changes the sensing tradeoff',
         body: [
-          'An August 2026 preprint comparing one-, two-, and four-layer twisted-yarn capacitive sensors shows why robot skin must be specified as a system. Increasing yarn-layer overlap improved the reported pressure sensitivity and tensile behavior, but proximity range decreased from 60 mm for one layer to 40 mm for four layers.',
+          'The August 2026 twisted-yarn preprint provides a dated example of system trade-offs; it is not a claim to be the latest available research. Its comparison of one-, two-, and four-layer capacitive sensors shows why robot skin must be specified as a system. Increasing yarn-layer overlap improved the reported pressure sensitivity and tensile behavior, but proximity range decreased from 60 mm for one layer to 40 mm for four layers.',
           'The result is not evidence for one universally superior geometry. It separates two task requirements: early approach detection before contact and stronger measurement after contact. The source is a small 4 × 4 research prototype, so whole-body scaling, abrasion, manufacturing yield, and field lifetime remain open questions.',
         ],
       },
@@ -1072,14 +1146,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/e-skin',
-    revisionNote: 'October 23, 2026: distinguished the Garment GUI textile display and touch-localization prototype from calibrated robot skin. Earlier eLuminator, PhantomTac, thermal sensing and TouchTherm explanations and source dates are retained.',
+    revisionNote: "November 4, 2026: reviewed the existing mechanisms and added a compatibility test matrix. Corrected F3T hybrid sensing; retained earlier dated research and anchors. No device test.",
     title: 'E-Skin in Robotics: Electronic Skin and Robot Skin',
     description:
-      'E-skin, or electronic skin, is a flexible sensor surface. Learn how e-skin connects to robot skin, soft robotic skin, tactile sensors, and humanoid robots.',
+      "Evaluate e-skin for robotics by separating transduction, readout, calibration and host behavior, with magnetic, EIT, iontronic and textile evidence.",
     h1: 'E-skin in robotics',
     kicker: 'Core concept',
     intent: 'Definition page for e-skin, electronic skin, soft robotic skin, and flexible tactile sensor searches.',
-    updated: '2026-10-23',
+    updated: "2026-11-04",
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -1091,6 +1165,85 @@ export const seoTopicPages: SeoTopicPage[] = [
       'E-skin becomes robot skin when the surface is designed, mounted, interpreted, and validated for robot use.',
     ],
     sections: [
+      {
+        "id": "eskin-compatibility",
+        "heading": "Evaluate compatibility across bending, contact and environment",
+        "body": [
+          "The word flexible does not identify which deformation was tested. Bending, stretching, twisting and repeated remounting can change different parts of a sensor. The touch-and-bend EIT paper updates a reference after classifying deformation, but its conclusion explicitly limits the demonstrated method to simple bending rather than twisting. That restriction belongs in an integration plan.",
+          "Use the following proposed matrix to separate contact effects from installation effects. Establish the intended reference quantity first. A localized electrical response, a reconstructed contact image and a calibrated force vector require different comparisons."
+        ],
+        "table": {
+          "headers": [
+            "Comparison",
+            "Hold or record",
+            "Question to resolve"
+          ],
+          "rows": [
+            [
+              "Unloaded versus known contact",
+              "Mounting pose and environmental state",
+              "Is the response actually associated with contact?"
+            ],
+            [
+              "Flat versus intended bend",
+              "Reference contact and readout configuration",
+              "Does deformation shift the baseline or change spatial response?"
+            ],
+            [
+              "One temperature/load versus another",
+              "Both variables, reference readings and elapsed time",
+              "Is a second modality being mistaken for the target quantity?"
+            ],
+            [
+              "Before versus after replacement",
+              "Material batch, attachment and model/calibration revision",
+              "Which earlier results remain applicable?"
+            ],
+            [
+              "Sensor output versus host behavior",
+              "Acquisition, processing and controller timestamps",
+              "Does the observation arrive in time for the intended decision?"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Classify the mechanism and the system separately",
+            "body": [
+              "EIT is a reconstruction architecture, while iontronic sensing describes an electrical interface. The reviewed EIT sensor contains magnetic hydrogel but measures boundary electrical signals; that material label does not turn it into a Hall-effect tactile array. The iontronic biogel study instead measures capacitance at electrode–ionic-material interfaces. Its sensitivity varies by pressure interval, so a peak sensitivity and the full operating range should not be combined into a single uniform specification.",
+              "The optical output of eLuminator, the touch/display functions of Garment GUI and the robot feedback path are also different interfaces. A displayed contact location can be useful without providing a robot-ready calibrated force stream. Retain those distinctions when asking what electronics, calibration and software remain to be built."
+            ],
+            "links": [
+              {
+                "label": "Touch-and-bend EIT: method and stated limitations",
+                "href": "https://arxiv.org/html/2503.13048v1"
+              },
+              {
+                "label": "Iontronic biogel: pressure-dependent sensing regions",
+                "href": "https://www.nature.com/articles/s41467-026-73736-3"
+              },
+              {
+                "label": "Material-to-controller measurement chain",
+                "href": "/electronic-skin#measurement-chain"
+              }
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Plan calibration and comparison conditions",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Inspect magnetic contact-consistency limits",
+            "href": "/e-skin#magnet-based-tactile-skin"
+          },
+          {
+            "label": "Read the sensor-data contract",
+            "href": "/guides/ros2-tactile-sensing"
+          }
+        ]
+      },
       ...eSkinAdditions,
       {
         heading: 'What e-skin is designed to do',
@@ -1280,14 +1433,15 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
+    revisionNote: "November 4, 2026: added a body-zone and synchronization record, qualified EmArm source access and retained Tac4Loco protocol limits. No humanoid or safety test.",
     path: '/humanoid-robot-skin',
     title: 'Humanoid Robot Skin & Whole-Body Tactile Sensing',
     description:
-      'Humanoid robot skin brings tactile sensing to hands, arms, and body surfaces. Map the whole-body tactile stack, safety boundaries, sensors, datasets, and research.',
+      "Plan humanoid tactile coverage by zone, coordinate frames, timing and failure handling; distinguish hand, arm and foot evidence from whole-body claims.",
     h1: 'Humanoid robot skin and whole-body tactile sensing',
     kicker: 'Application guide',
     intent: 'Application page for humanoid robot skin, robot hands, body contact sensing, and Physical AI touch queries.',
-    updated: '2026-08-18',
+    updated: "2026-11-04",
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1295,10 +1449,81 @@ export const seoTopicPages: SeoTopicPage[] = [
     keywords: ['humanoid robot skin', 'humanoid tactile sensing', 'humanoid tactile sensors', 'whole-body tactile sensing', 'whole body tactile sensing', 'robot safety skin', 'distributed humanoid touch', 'dexterous robot hands', 'plantar tactile sensing', 'humanoid foot pressure sensor'],
     quickAnswer: [
       'Humanoid robot skin is tactile sensing applied to hands, palms, arms, feet, or other humanoid robot surfaces where contact awareness matters.',
-      'The strongest use cases include dexterous manipulation, grasp stability, handovers, safety contact, plantar support, and research evaluation for Physical AI.',
+      'Research and integration use cases include dexterous manipulation, grasp stability, handovers, contact awareness and plantar support. Their evidence and safety requirements differ by application.',
       'A humanoid skin system must handle curved geometry, moving joints, cable routing, calibration, and synchronization with robot state.',
     ],
     sections: [
+      {
+        "id": "body-zone-evidence",
+        "heading": "Build a body-zone evidence map before claiming whole-body touch",
+        "body": [
+          "A count of covered panels does not show whether contact is observable during the intended motion. Register each patch to a robot link and record its usable region, blind seams, joint-motion limits and acquisition path. The relevant map changes when a finger closes, an elbow bends or a replaceable cover shifts.",
+          "Use a separate requirement for each body zone. These examples describe planning questions, not a minimum sensor count or a tested universal humanoid architecture."
+        ],
+        "table": {
+          "headers": [
+            "Zone and task",
+            "Observation to specify",
+            "Failure or ambiguity to evaluate"
+          ],
+          "rows": [
+            [
+              "Fingers and palm: retain or reposition an object",
+              "Contact location, load/shear estimate or independently labelled slip cue",
+              "Hidden side contact, pad wear, changes in object contact area"
+            ],
+            [
+              "Forearm: respond to external contact",
+              "Localized contact in the moving link frame",
+              "Geometry changes, seams and time mismatch with joint state"
+            ],
+            [
+              "Sole: estimate realized support",
+              "Distributed plantar observation after touchdown",
+              "Partial support, load saturation, asymmetry and missing elements"
+            ],
+            [
+              "Torso or other panels: identify contact events",
+              "Coverage map and event/response contract",
+              "Uninstrumented regions, stale samples and panel replacement"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A timestamp is part of the geometry",
+            "body": [
+              "A patch-local location must be transformed using robot state from the relevant time. Combining an old contact sample with the latest joint angle can place the same observation at the wrong world location. Retain acquisition time, received time, frame identity and the transform used for the estimate; measure the full delay instead of inferring it from the fastest sensor rate.",
+              "Define what the application does with an invalid or stale reading before evaluating a contact-dependent task. Detection, trajectory replanning and a protective stop are separate outcomes. A contact demonstration alone establishes none of the application-specific safety assurances."
+            ]
+          },
+          {
+            "heading": "Read the existing arm and foot examples at their own scope",
+            "body": [
+              "The accessible EmArm publisher abstract supports the whole-arm integration description below; detailed methods were not accessible in this pass, so its localization claim remains author-reported without a newly verified trial denominator. Tac4Loco provides a different interface: ordinal plantar pressure features on a Unitree G1. Its pressure mapping and small physical trial sets do not establish a universal load calibration or a skin for every body zone.",
+              "When comparing two systems, retain embodiment, contact task, assistance, reference measurement, sampling path and independent trials. Do not turn arm localization, foot locomotion and hand grasping results into one whole-body success rate."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "EmArm publisher abstract and source scope",
+            "href": "https://www.nature.com/articles/s44460-026-00097-1"
+          },
+          {
+            "label": "Tac4Loco: ordinal pressure and physical trial limits",
+            "href": "/research/tac4loco-plantar-tactile-humanoid-locomotion-2026"
+          },
+          {
+            "label": "Frame and timestamp requirements in ROS 2",
+            "href": "/guides/ros2-tactile-sensing"
+          },
+          {
+            "label": "Performance evidence versus protective-function validation",
+            "href": "/robot-safety#safety-evidence-handoff"
+          }
+        ]
+      },
       {
         heading: 'Why humanoid hands need touch',
         body: [
@@ -1308,7 +1533,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         bullets: [
           'Detect early slip before a grasp fails',
           'Estimate contact location across fingertips, palm, and side surfaces',
-          'Support safer force-limited interaction around people and objects',
+          'Provide contact observations for an application-specific interaction strategy; validate any protective function separately',
           'Create tactile logs for evaluation, replay, and model improvement',
         ],
       },
@@ -1758,14 +1983,14 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/physical-ai-touch',
-    revisionNote: 'October 18, 2026: added a task-first tactile sensing roadmap, acceptance checks and direct reading routes. The October 12 active-sensing and ROMI-2K material is retained.',
+    revisionNote: "November 4, 2026: clarified measured, simulated and human-collected touch; added a role-specific evaluation record. Preserved active-sensing and ROMA evidence. No new experiment.",
     title: "Physical AI and Touch: Tactile Sensing Roadmap",
-    description: "Why Physical AI needs tactile input, and a staged roadmap from sensor choice to closed-loop control — with the evidence behind each step.",
+    description: "Plan a tactile sensing roadmap with sensor, data, feedback and policy milestones; distinguish training evidence from measurements used during execution.",
     introduction: "Tactile sensing roadmap refers to a staged plan connecting a contact-dependent task to sensor choice, synchronized data, feedback control and policy evaluation. This tactile sensing roadmap identifies the evidence needed at each step. Physical AI provides the application context; hardware acquisition, successful software execution and measured robot improvement remain separate milestones.",
     h1: "Physical AI Needs Touch: The Tactile Sensing Roadmap",
     kicker: 'Technology guide',
     intent: 'Technology guide for Physical AI touch data, tactile feedback for robots, robot touch data, and contact-aware AI searches.',
-    updated: structureRelease.modifiedDate,
+    updated: "2026-11-04",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -1781,11 +2006,86 @@ export const seoTopicPages: SeoTopicPage[] = [
     },
     quickAnswer: [
       'A tactile sensing roadmap for embodied AI starts with a contact-dependent task, then selects a sensor, aligns touch with robot state and actions, tests feedback, and evaluates the learned policy. The stages below are an integration checklist, not a forecast of product releases or a claim that every robot needs a VLA.',
-      'Physical AI touch data is contact information collected from robot surfaces during real interaction with objects, people, tools, or environments.',
+      'A tactile workflow may use robot measurements, human-collected observations or simulated contact. Keep those origins explicit: human demonstration touch and rendered contact are not automatically measured robot-action feedback.',
       'It complements vision because the robot often needs feedback at the exact surface where contact happens, especially when the hand blocks the camera.',
       'Useful touch data is timestamped, calibrated, mapped to robot geometry, and connected to control, evaluation, or learning workflows.',
     ],
     sections: [
+      {
+        "id": "touch-role-evaluation",
+        "heading": "Test the role of touch, not just whether a dataset contains it",
+        "body": [
+          "Touch can supervise training, enter a policy during execution, drive a separate correction, or appear only in evaluation. Those roles support different claims. A model trained on tactile examples may execute without a tactile sensor; a robot with a sensor may log it without using it for action. Identify the actual observation and decision path.",
+          "The following is an editorial evaluation framework. It does not require every project to use all four roles, and it is not a reproduced benchmark."
+        ],
+        "table": {
+          "headers": [
+            "Role",
+            "Comparison to design",
+            "Evidence that would be insufficient"
+          ],
+          "rows": [
+            [
+              "Training supervision",
+              "Hold the downstream evaluation fixed while changing the permitted training signal",
+              "A larger training corpus with different task coverage and no matched comparison"
+            ],
+            [
+              "Current policy observation",
+              "Record which sensor values reach inference, their age and the action they inform",
+              "A tactile stream saved to disk but absent from model inputs"
+            ],
+            [
+              "Separate controller or recovery",
+              "Log the triggering condition, intervention, executed response and final task outcome",
+              "Detector accuracy without checking whether recovery succeeds"
+            ],
+            [
+              "Evaluation or task-state reference",
+              "Define how labels are obtained independently of the predicted output",
+              "A reward-model score treated as unquestionable physical ground truth"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Keep assistance and failure accounting visible",
+            "body": [
+              "For a proposed paired comparison, hold object set, starting-state rules, task budget, reset procedure and allowed assistance consistent. Record attempts separately from saved clips or corrective segments. Count failures, retries and operator intervention in the stated denominator; do not select only attractive demonstrations after the run.",
+              "A missing sensor is different from a zero-valued measurement. Specify how stale, dropped or out-of-range data is represented and how the policy or controller handles it. Test the selected response under a controlled application plan; a software fallback is not automatically a validated protective function."
+            ]
+          },
+          {
+            "heading": "Active perception also has an execution contract",
+            "body": [
+              "Gordon and colleagues’ active-exploration study estimates pose as well as shape because probing can move an object; its convex-rigid assumptions remain relevant. ROMA instead selects among predefined interactions to obtain multisensory evidence. Its offline ROMA Bench uses recorded feedback, whereas the physical interface performs interactions. Answer accuracy in either setting should not be presented as general manipulation success.",
+              "Before adopting an active-sensing result, record whether the next action actually acquired new measurements or selected a stored observation, what changed in the scene, and how sufficiency of evidence was judged. That record connects the roadmap to a concrete, inspectable experiment."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Active tactile exploration: original method",
+            "href": "https://arxiv.org/html/2510.13595v1"
+          },
+          {
+            "label": "ROMA: offline and physical interfaces",
+            "href": "https://arxiv.org/html/2610.06955v2"
+          },
+          {
+            "label": "LeRobot: correction segment versus full attempt",
+            "href": "/news/lerobot-v060-world-models-vla-evaluation-2026#section-pin-the-recording-mode-before-interpreting-a-rollout"
+          },
+          {
+            "label": "Use the blank tactile experiment worksheet",
+            "href": "/tactile-ai#experiment-worksheet"
+          },
+          {
+            "label": "Separate model predictions from measured feedback",
+            "href": "/robot-world-models"
+          }
+        ]
+      },
       {
         id: 'tactile-sensing-roadmap',
         heading: 'A tactile sensing roadmap for embodied AI',
@@ -1906,7 +2206,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       {
         heading: 'Minimum evidence for embodied tactile intelligence',
         body: [
-          'A credible Physical AI touch claim should identify the measured signals, robot and sensor, data alignment, model role, control rate, baseline, task outcome, and transfer boundary. The most useful ablation compares vision-only, touch-only where meaningful, fused input, and no-feedback or reactive baselines under the same task protocol.',
+          'A credible Physical AI touch claim should identify the measured signals, robot and sensor, data alignment, model role, control rate, baseline, task outcome, and transfer boundary. Where the task supports them, compare vision-only, touch-only, fused input and reactive or no-feedback baselines under a matched protocol; record any changes required to make a baseline executable.',
         ],
         bullets: [
           'Held-out objects, surfaces, tasks, sensors, or embodiments matched to the transfer claim',
