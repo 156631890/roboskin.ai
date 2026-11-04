@@ -76,7 +76,7 @@ export default function VlaComparisonMatrix({ entries }: { entries: VlaCatalogEn
         <p id="matrix-help" className="my-4 text-sm leading-relaxed text-[#8e98a8]">Scroll horizontally to read every column. Sort by model, organization, year or parameter count using the column headings.
           Parameter sorting uses the largest sortable size stated in each row and places unknown totals last; each row retains the source’s counting scope. This is not a compute comparison. Benchmark cells retain their own protocols.</p>
         <div role="region" aria-label="Scrollable VLA model comparison" aria-describedby="matrix-help" tabIndex={0}
-          className="signal-panel max-w-full overflow-x-auto overscroll-x-contain p-0 focus-visible:outline-2 focus-visible:outline-[#ff6b3d]">
+          className="signal-panel relative max-w-full overflow-x-auto overscroll-x-contain p-0 focus-visible:outline-2 focus-visible:outline-[#ff6b3d]">
           <table className="w-full min-w-[2400px] border-collapse">
             <caption className="sr-only">VLA model comparison with primary sources, access states and tactile input. A checkmark means documented input in the stated configuration; a dash means not documented.</caption>
             <thead className="bg-[#111722] text-sm text-white">

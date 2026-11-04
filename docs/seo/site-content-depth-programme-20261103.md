@@ -16,15 +16,15 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 
 | URL | Stage | Main-text words (screening only) | Contextual inbound pages |
 |---|---|---:|---:|
-| /vla/models | inventory only; claim-by-claim review pending | 2817 | 5 |
-| /vla/timeline | inventory only; claim-by-claim review pending | 776 | 3 |
-| /vla/concepts | inventory only; claim-by-claim review pending | 1015 | 5 |
+| /vla/models | individual VLA reading review; production verification pending | 2817 | 5 |
+| /vla/timeline | individual VLA reading review; production verification pending | 776 | 3 |
+| /vla/concepts | individual VLA reading review; production verification pending | 1015 | 5 |
 | / | inventory only; claim-by-claim review pending | 1580 | 63 |
 | /products | rewritten and production verified in PR120 | 509 | 4 |
 | /solutions | rewritten and production verified in PR120 | 403 | 2 |
 | /applications | inventory only; claim-by-claim review pending | 653 | 12 |
 | /technology | inventory only; claim-by-claim review pending | 2571 | 19 |
-| /physical-ai | individual AI/interface evidence review; production verification pending | 908 | 22 |
+| /physical-ai | rewritten and production verified in PR136 | 908 | 22 |
 | /resources | rewritten and production verified in PR122 | 2711 | 70 |
 | /faq | inventory only; claim-by-claim review pending | 488 | 3 |
 | /research | rewritten and production verified in PR122 | 3103 | 192 |
@@ -170,7 +170,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /electronic-skin | rewritten and production verified in PR134 | 772 | 11 |
 | /robot-tactile-sensors | rewritten and production verified in PR135 | 1250 | 2 |
 | /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
-| /embodied-ai | individual AI/interface evidence review; production verification pending | 736 | 1 |
+| /embodied-ai | rewritten and production verified in PR136 | 736 | 1 |
 | /guides/3d-printed-tactile-sensors | rewritten and production verified in PR118 | 1376 | 2 |
 | /guides/optical-tactile-sensor-maintenance | rewritten and production verified in PR106 | 1273 | 7 |
 | /guides/optical-vs-capacitive-tactile-sensors | rewritten and production verified in PR106 | 1360 | 6 |
@@ -185,12 +185,12 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /sensors/reskin | rewritten and production verified in PR116 | 1198 | 9 |
 | /guides/gelsight-vs-digit | rewritten and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | rewritten and production verified in PR118 | 3426 | 3 |
-| /robotics-programming | individual AI/interface evidence review; production verification pending | 1285 | 12 |
+| /robotics-programming | rewritten and production verified in PR136 | 1285 | 12 |
 | /guides/ros2-tactile-sensing | rewritten and production verified in PR111 | 2153 | 21 |
 | /guides/python-tactile-data-processing | rewritten and production verified in PR106 | 2851 | 16 |
 | /guides/lerobot-dataset-format | rewritten and production verified in PR118 | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
-| /ai-robotics | individual AI/interface evidence review; production verification pending | 2049 | 43 |
+| /ai-robotics | rewritten and production verified in PR136 | 2049 | 43 |
 | /robot-foundation-models | rewritten and production verified in PR133 | 8015 | 8 |
 | /robot-skin | rewritten and production verified in PR135 | 1495 | 77 |
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
@@ -350,3 +350,7 @@ Five pages receive distinct installed-system, compatibility, body-zone, policy-r
 ## AI, embodiment and programming review
 
 Four distinct revisions: failure tracing, transfer evidence, exercise completion and physical-evaluation scope. Original modules and dated execution records retained. No robot or model runtime claim. Whole-site work remains active.
+
+## VLA directory reading review
+
+Nineteen first-submission dates checked; three separate reader decisions added. Catalog fields retain original review dates. No model or artifact execution. Whole-site work remains active.

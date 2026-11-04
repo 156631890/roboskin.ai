@@ -27,8 +27,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/vla/models': {
     path: '/vla/models',
     title: 'VLA Model Index: Timeline and Weights',
-    description: 'Filter and sort VLA models by year, open-source status and tactile input. Compare source-linked parameters, training data and benchmark results.',
-    updated: '2026-10-30',
+    description: "Compare VLA models by documented inputs, code access and evaluation scope; shortlist candidates without treating incompatible scores as one leaderboard.",
+    updated: '2026-11-04',
     priority: 0.75,
     changeFrequency: 'monthly',
     index: true,
@@ -38,8 +38,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/vla/timeline': {
     path: '/vla/timeline',
     title: 'VLA Model Timeline: RT-1 to Tactile Robot Policies',
-    description: 'Follow a chronological, paper-linked VLA timeline from RT-1 through open robot policies and tactile extensions, with dates, organizations and significance.',
-    updated: '2026-10-30',
+    description: "Read VLA research chronology with verified first-submission dates, paper-version boundaries and separate code, checkpoint and evaluation milestones.",
+    updated: '2026-11-04',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
@@ -49,8 +49,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   '/vla/concepts': {
     path: '/vla/concepts',
     title: 'VLA vs VDA vs World Models vs HFM: Robot Model Concepts',
-    description: 'Compare robot model concepts by inputs, outputs and role: VLA, diffusion action policies, world models and haptic foundation models, with primary sources.',
-    updated: '2026-10-30',
+    description: "Distinguish VLA interfaces, diffusion action generation, predictive world models and haptic representations by training signals and inference outputs.",
+    updated: '2026-11-04',
     priority: 0.7,
     changeFrequency: 'monthly',
     index: true,
