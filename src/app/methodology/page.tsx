@@ -106,6 +106,24 @@ export default function MethodologyPage() {
             </p>
           </section>
 
+      <section id="numeric-claim-check" className="pb-12 pt-8 scroll-mt-28">
+        <div>
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Check the denominator before comparing a number"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"Record the unit of evaluation before calculating a difference. The same percentage notation can describe a completed trial, an average task score, a perception accuracy or a selected training run."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Check the denominator before comparing a number">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Question"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Record with the result"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"What was counted?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Completed tasks, scored substeps, frames, episodes, operators or training seeds. Repeated trials are not additional independent operators."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Which results were included?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"All attempted trials or a filtered subset; mean across runs or the best run; whether timing averages exclude failed runs."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"What changed between conditions?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Sensor input, calibration, model, training budget, controller and intervention policy. Keep simultaneous changes visible."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Can the comparison transfer?"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Record the tested objects, robot, sensor, environment and failure definition. A difference under that protocol is not a general deployment guarantee."}</td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"For an inspectable example, the T-Rex review separates partial-credit task scores from completed tasks. The ADEPT review distinguishes the number of successful training seeds from the time averaged over successful seeds. Neither interpretation turns the authors’ experiments into RoboSkin.ai measurements."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/research/t-rex-tactile-reactive-dexterous-manipulation-2026#section-partial-credit-is-not-complete-task-success" className="text-accent underline underline-offset-4">{"T-Rex: partial credit and completion"}</Link><Link href="/research/adept-visuo-tactile-dexterity-rl-2026" className="text-accent underline underline-offset-4">{"ADEPT: training and evaluation denominators"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
           <section id="model-records" className="deferred-section mt-12 grid scroll-mt-28 gap-6 lg:grid-cols-[0.36fr_1fr]">
             <div>
               <p className="eyebrow">Model records</p>

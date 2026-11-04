@@ -90,6 +90,27 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <section id="correction-template" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Make a correction easy to verify"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"Choose “Correction or source suggestion” in the form and include these details in your message. A short, traceable note is more useful than a general request to improve an article."}</p>
+          <ol className="mt-6 grid gap-4">
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Affected page and statement"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Paste the RoboSkin.ai URL and the sentence, table row or attribution that needs attention."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Primary evidence"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Link the paper, official documentation or public artifact; give the version, section or date when it matters."}</p>
+            </li>
+            <li className="rounded-xl border border-white/10 p-5"><h3 className="text-lg font-semibold text-white">{"Proposed change and remaining uncertainty"}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{"Explain what the evidence supports and what it does not. If you represent the cited project or vendor, say so."}</p>
+            </li>
+          </ol>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"Do not send account credentials, unpublished patient records or private customer data. Use a public source or a non-sensitive description first. A submitted note is a request for review, not confirmation that a correction has been published."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/editorial-policy#corrections" className="text-accent underline underline-offset-4">{"See the corrections process"}</Link><Link href="/privacy" className="text-accent underline underline-offset-4">{"Read how contact details are handled"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
     </>
   );
 }

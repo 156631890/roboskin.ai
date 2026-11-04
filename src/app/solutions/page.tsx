@@ -94,6 +94,24 @@ export default function SolutionsPage() {
           </div>
         </div>
       </section>
+      <section id="failure-to-measurement" className="pb-12 pt-8 scroll-mt-28">
+        <div className="container-shell">
+          <h2 className="text-2xl font-semibold text-white md:text-3xl">{"Turn the failure into a measurable question"}</h2>
+          <p className="mt-4 max-w-4xl text-sm leading-relaxed text-soft">{"The examples below are proposed evaluation plans. Choose limits for your task before collecting results; none is a RoboSkin.ai test or a universal acceptance threshold."}</p>
+          <div className="mt-6 overflow-x-auto rounded-md border border-white/10" tabIndex={0} role="region" aria-label="Turn the failure into a measurable question">
+            <table className="w-full min-w-[720px] border-collapse text-left text-sm"><thead><tr><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Observed failure"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Measurement to define"}</th><th scope="col" className="border-b border-white/10 px-4 py-3 text-white">{"Comparison and failure record"}</th></tr></thead><tbody>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"The object slips"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Time from a defined slip event to detection and to corrective action."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Compare matched objects and disturbances; keep false alarms, missed events, dropped objects and operator interventions."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Contact occurs outside the fingertip"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Coverage and localization error in the robot coordinate frame."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Include seams, joints and uncovered regions; record unobserved contacts separately from correctly localized contacts."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"Readings change after remounting"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Error against the same reference over loading and unloading."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Keep mounting, zeroing, temperature and calibration versions; test contacts excluded from the calibration fit."}</td></tr>
+              <tr><th scope="row" className="border-b border-white/10 px-4 py-4 align-top font-semibold text-white">{"A dataset cannot support the intended policy"}</th><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Usable episodes with the required observations, action meaning and synchronization."}</td><td className="border-b border-white/10 px-4 py-4 align-top leading-relaxed text-soft">{"Check actual files and reuse terms. Split by episode or object as appropriate, not neighboring frames from the same recording."}</td></tr>
+            </tbody></table>
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"A better perception score is an intermediate result. Evaluate the action and object outcome separately before describing the system as a better manipulation solution."}</p>
+          <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/guides/tactile-sensor-benchmark-robot-manipulation" className="text-accent underline underline-offset-4">{"Build a matched task protocol"}</Link><Link href="/methodology#evidence-types" className="text-accent underline underline-offset-4">{"Read the evidence boundaries"}</Link></div>
+          <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
+        </div>
+      </section>
+
     </>
   );
 }
