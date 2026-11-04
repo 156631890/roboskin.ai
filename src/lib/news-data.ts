@@ -1244,7 +1244,7 @@ Per-motion baselines stop after success while failed runs consume their budgets.
     id: 'tacex-tactile-curiosity-robot-exploration',
     title: 'TacEx makes tactile uncertainty a target for robot exploration',
     seoTitle: 'TacEx Uses Tactile Curiosity for Robot Exploration',
-    seoDescription: 'TacEx directs robot exploration toward uncertain contact. Review its reward-free and VLA post-training tests, simulation limits and release status.',
+    seoDescription: "Separate TacEx’s reward-free collection, offline learning and rewarded VLA steering; check current code access, evaluation windows and physical-safety limits.",
     excerpt: 'TacEx decomposes model uncertainty by sensing modality and rewards uncertainty in touch, steering robot learning toward contact-rich experience.',
     category: 'Tactile robot learning',
     image: '/generated/news/tacex-tactile-curiosity-robot-exploration.png',
@@ -1253,19 +1253,21 @@ Per-motion baselines stop after success while failed runs consume their budgets.
     sourceTitle: 'Tactile Curiosity Drives Robot Interaction',
     sourceUrl: 'https://arxiv.org/abs/2609.40134',
     sources: [
+      { title: "Current v3, revised October 13, 2026", url: "https://arxiv.org/html/2609.40134v3" },
+      { title: "Author-linked implementation, reviewed revision d268cdb", url: "https://github.com/klemensiten/tacex/tree/d268cdb0d769fc9868fe37af462f81ef59c4412c" },
       { title: 'TacEx arXiv v1 record', url: 'https://arxiv.org/abs/2609.40134' },
       { title: 'Full TacEx v1 paper', url: 'https://arxiv.org/html/2609.40134v1' },
     ],
     technicalFocus: ['tactile exploration', 'intrinsic motivation', 'contact-rich reinforcement learning', 'VLA post-training'],
     sourceDate: '2026-09-30',
-    evidenceStatus: 'Preprint · arXiv v1 · simulation-only evaluation · reward-free and frozen-VLA experiments · no public code or dataset verified',
+    evidenceStatus: "CoRL 2026 according to author sources · arXiv v3 reviewed · simulation-only · public code documentation inspected, not executed",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-01',
-    updated: '2026-10-01',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# TacEx makes tactile uncertainty a target for robot exploration
 
-Researchers from ETH Zurich, the University of California, Berkeley and the University of Texas at Austin released TacEx on September 30, 2026. The framework separates a learned dynamics model's uncertainty into visual, tactile and latent-state components, then lets a robot prioritize uncertainty in touch. The reported experiments show more contact-rich reward-free exploration and more sample-efficient post-training of a frozen vision-language-action policy, but all tests are in simulation. [Paper and version record](https://arxiv.org/abs/2609.40134).
+Researchers from ETH Zurich and the University of California, Berkeley submitted TacEx on September 30, 2026. This update reviews the October 13 v3 and the current author-linked implementation; the authors identify the work as accepted at CoRL 2026. The framework separates a learned dynamics model's uncertainty into visual, tactile and latent-state components, then lets a robot prioritize uncertainty in touch. The reported experiments show more contact-rich reward-free exploration and more sample-efficient post-training of a frozen vision-language-action policy, but all tests are in simulation. [Paper and version record](https://arxiv.org/abs/2609.40134).
 
 ## Key takeaways
 
@@ -1277,9 +1279,9 @@ Researchers from ETH Zurich, the University of California, Berkeley and the Univ
 
 Standard curiosity methods reward predictive uncertainty wherever it occurs. In manipulation, that can spend a large budget on novel motion through empty space. TacEx instead models uncertainty separately for visual features, tactile force maps and the fused latent state. Weighting the tactile term more heavily biases the policy toward states where contact dynamics are unknown. [Method and experiments](https://arxiv.org/html/2609.40134v1).
 
-The first experiment removes task reward entirely. A simulated parallel-jaw gripper explores scenes with one object and then four objects. After collection, the replay buffer is frozen, relabelled with a sparse pick-and-place reward and used to train Soft Actor-Critic offline. Tactile-weighted variants interact with and attempt to grasp objects more often than variants without tactile disagreement. Adding visual disagreement spreads interactions over roughly two objects, while tactile-only curiosity concentrates closer to one.
+The first experiment removes task reward entirely. A simulated parallel-jaw gripper explores scenes with one object and then four objects. After collection, the replay buffer is frozen, relabelled with a sparse pick-and-place reward and used to train Soft Actor-Critic offline. Tactile-weighted variants interact with and attempt to grasp objects more often than variants without tactile disagreement. Adding visual disagreement gives an effective object count near two, while tactile-only curiosity is closer to one. This entropy-derived measure describes the distribution of grasps, not the number of distinct tasks solved.
 
-The second experiment applies the same idea to a pretrained policy. A lightweight learner predicts noise for a frozen diffusion-based VLA; the base VLA still consumes its original image, proprioception and language inputs. TacEx gives the noise-steering learner tactile observations and an intrinsic disagreement bonus. This is post-training around a frozen policy, not tactile pretraining of the VLA itself.
+The second experiment applies the same idea to a pretrained policy. A lightweight learner predicts noise for a frozen diffusion-based VLA; the base VLA still consumes its original image, proprioception and language inputs. TacEx gives the noise-steering learner and critics tactile observations and augments the online task reward with an intrinsic disagreement bonus. This is post-training around a frozen policy, not tactile pretraining of the VLA itself.
 
 ## Results under the reported conditions
 
@@ -1297,9 +1299,25 @@ The multi-object result also exposes a useful design trade-off. Tactile-only cur
 
 ## Limitations and availability
 
-TacEx is an arXiv v1 preprint marked under review, and RoboSkin.ai has not reproduced it. The study uses simulated force maps, one parallel-jaw gripper and no fragile or deformable objects. It does not test tactile noise, calibration drift, sensor wear, safe-force constraints or physical resets. Contact-seeking curiosity by itself does not prevent unsafe contact.
+The current v3 and author project describe a CoRL 2026 paper; RoboSkin.ai has not reproduced it. The study uses simulated force maps, one parallel-jaw gripper and no fragile or deformable objects. It does not test tactile noise, calibration drift, sensor wear, safe-force constraints or physical resets. Contact-seeking curiosity by itself does not prevent unsafe contact.
 
-The authors state that the representation could accept vision-based tactile images, but no multi-finger hand or real sensor is evaluated. At verification time, neither the arXiv record nor manuscript linked a public project page, code repository, dataset, checkpoint or implementation license. The article is CC BY 4.0; that license applies to the paper, not to absent software or data.
+The authors state that the representation could accept vision-based tactile images, but no multi-finger hand or real sensor is evaluated. The November 4 review found the [author project](https://kiten.me/projects/tacex/) and its linked [public implementation](https://github.com/klemensiten/tacex), superseding the original release-status note. The README describes both experimental pipelines and upstream submodules. The reviewed root and README did not establish a project-wide software license; a missing root LICENSE file and empty API license metadata are evidence limits, not proof about every file. Checkpoints, data payloads and end-to-end execution were not verified. The paper’s CC BY 4.0 license does not license separate software, data or dependencies.
+
+## Separate the training objective from the deployment contract
+
+The [current v3 methods and appendices](https://arxiv.org/html/2609.40134v3) distinguish three stages that should not share one “reward-free” label:
+
+| Stage | What changes or stays fixed | Evidence to record |
+| --- | --- | --- |
+| Curiosity-driven collection | A policy explores with intrinsic disagreement and no task reward | Contact coverage and interaction distribution, including unsuccessful exploration |
+| Offline downstream learning | A fixed buffer is relabelled with a pick-and-place reward | Dataset identity and evaluation protocol; no new training interactions |
+| Diffusion steering | A learned noise policy uses touch and task reward around a frozen VLA | Environment interactions, optimization updates and the unchanged base checkpoint |
+
+Bonus weights control which prediction disagreement is rewarded; they do not by themselves specify everything the policy observes. Changing a tactile weight to zero is therefore not automatically a no-touch input baseline. Likewise, “final return” in Figure 6 is averaged over the final 10% of the logged training horizon, whereas normalized area under the curve covers the full horizon. Neither is a physical production success rate.
+
+The public README adds a practical accounting issue: for replay-based steering, its max_steps configuration counts gradient updates, while environment steps are logged separately. Record the code revision and both counters before comparing an interaction budget. The examples were inspected as documentation, not executed by RoboSkin.
+
+Finally, seeking uncertain contact is not a force limiter. The study does not separate real sensor noise, drift or wear from unfamiliar contact dynamics, and has no physical fragile-object validation. Proposed hardware work would need independent contact limits, reset accounting and sensor calibration. The [manipulation decision map](/robot-manipulation#contact-decisions) keeps exploration objectives separate from tested control and task completion.
 
 ## Sources and related resources
 
@@ -1307,6 +1325,8 @@ The authors state that the representation could accept vision-based tactile imag
 - [Full method, hyperparameters, ablations and limitations](https://arxiv.org/html/2609.40134v1)
 - [RoboSkin tactile AI overview](/tactile-ai)
 - [RoboSkin visuo-tactile learning guide](/visuo-tactile)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
   },
   {
@@ -2197,7 +2217,7 @@ Changing the hand requires more than loading a URDF: inspect mesh sampling, regi
     id: 'blind-grasp-reflex-proprioceptive-dexterous-hand',
     title: 'A blind grasp reflex lets a dexterous hand feel through proprioception',
     seoTitle: 'Blind Grasp Reflex for Proprioceptive Dexterous Hands',
-    seoDescription: 'Blind Grasp Reflex uses joint tracking error as implicit contact feedback. Review its 95% simulated grasp rate, dynamic tests and hardware limits.',
+    seoDescription: "Distinguish Blind Grasp Reflex’s retry-window and per-attempt results; examine command-error inputs, grasp-score handshakes and physical validation limits.",
     excerpt: 'MIT, Seoul National University and Yonsei researchers train a hand-local policy that reacts to contact through joint encoders, without fingertip tactile sensors. The strongest evidence is simulated; the hardware study is qualitative.',
     category: 'Proprioceptive dexterity',
     image: '/generated/news/blind-grasp-reflex-proprioceptive-dexterous-hand.png',
@@ -2212,24 +2232,24 @@ Changing the hand requires more than loading a URDF: inspect mesh sampling, regi
     ],
     technicalFocus: ['proprioceptive contact feedback', 'dexterous grasping', 'anthropomorphic robot hands', 'sim-to-real learning'],
     sourceDate: '2026-09-25',
-    evidenceStatus: 'Preprint · arXiv v1 · simulation and qualitative hardware evaluation · code announced but not released',
+    evidenceStatus: "Preprint · simulation with retry-window and per-attempt metrics · qualitative hardware examples · implementation link unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-28',
-    updated: '2026-09-28',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# A blind grasp reflex lets a dexterous hand feel through proprioception
 
 Researchers from the Massachusetts Institute of Technology, Seoul National University and Yonsei University released Blind Grasp Reflex on September 25, 2026. The system separates visually guided reaching from a hand-local grasp controller that uses only joint positions and motor-command errors. It treats tracking error as an implicit sign of contact, so the hand can react without cameras or fingertip tactile sensors during closure. [Paper and version record](https://arxiv.org/abs/2609.31323).
 
 ## Key takeaways
 
-- On 3,028 simulated GraspXL objects, the modular policy reports 95% grasp success, compared with 97% for an end-to-end reinforcement-learning policy under the same simulation study.
-- When an object is moved during closure, Blind Grasp Reflex reaches 92% in the reported dynamic test while the end-to-end baseline reaches 8%.
+- On 3,028 simulated GraspXL objects, the modular policy reports 95% success within a 30-second window that permits regrasping, versus 97% for the end-to-end baseline. The separate per-attempt success is 85% for both methods.
+- When an object is moved during closure, Blind Grasp Reflex reaches 92% versus 8% in a dynamic test using ten approximately spherical YCB objects within the trained workspace.
 - The hardware section shows successful grasps on 29 objects, but it does not provide repeated trial counts or a physical success rate. Those demonstrations should not be compared directly with the simulation percentages.
 
 ## What changed
 
-The method gives the arm and hand different jobs. A perception-driven arm controller moves the palm toward an estimated object pose. Once the hand is in range, a reflex policy closes its 20-degree-of-freedom Robotis HX5-D20-MRT hand. The hand observes a five-frame history of joint position and the difference between commanded and measured position. A stalled finger therefore becomes a crude contact signal.
+The method gives the arm and hand different jobs. A perception-driven arm controller moves the palm toward an estimated object pose. Once the hand is in range, a reflex policy closes its 20-degree-of-freedom Robotis HX5-D20-MRT hand. The hand observes a five-frame history of joint position and measured-minus-commanded position error. The reference is the low-level, velocity-limited joint command, which can differ from the policy’s requested target. A stalled finger can therefore become an implicit contact signal, but its meaning depends on the actuator and controller.
 
 Training uses a privileged teacher with simulated object state, then distills the behavior into a student that sees only proprioception. The policy runs at 11.9 Hz, above a 1 kHz low-level joint loop, and the authors report roughly four GPU-hours on one NVIDIA L40S. [Method details](https://arxiv.org/html/2609.31323v1#S3).
 
@@ -2237,11 +2257,11 @@ This is not tactile sensing in the usual robot-skin sense. It does not measure p
 
 ## Results under the reported conditions
 
-On 78 YCB objects, Blind Grasp Reflex reaches 96% simulated success and the end-to-end reinforcement-learning baseline reaches 98%. On the larger 3,028-object GraspXL set, the corresponding figures are 95% and 97%. The small two-point gap suggests that modularity does not cost much in these static simulation tests.
+On 78 YCB objects, Blind Grasp Reflex reaches 96% simulated success and the end-to-end reinforcement-learning baseline reaches 98%. On the larger 3,028-object GraspXL set, the figures are 95% and 97%. These outcomes allow retries within 30 seconds and require a two-second hold within 10 cm of the target. They are not first-attempt grasp rates; the paper separately reports 85% per attempt for both methods.
 
 The separation matters more under intervention. In the paper's dynamic-object evaluation, an external motion changes the object during closure. The reflex policy succeeds in 92% of cases, while the end-to-end baseline succeeds in 8%. In a separate object-pose generalization test, the figures are 90% and 15%. These are results from the authors' simulator, not an independent benchmark or a physical disturbance study. [Evaluation tables](https://arxiv.org/html/2609.31323v1#S4).
 
-The authors also test whether a learned grasp score tracks the analytic Ferrari-Canny metric. Across 15,097 simulated grasps, the mean Spearman correlation is 0.77; the reported subsets are 0.78 for 14,346 successful grasps and 0.61 for 751 failures. Correlation supports the training signal, but it does not prove equivalent force closure on hardware.
+The authors also test whether a learned grasp score tracks the analytic Ferrari-Canny metric. Across 15,097 simulated episodes, the mean of within-episode Spearman correlations is 0.77; the reported subsets are 0.78 for 14,346 successful episodes and 0.61 for 751 failures. Correlation supports the training signal, but it does not prove equivalent force closure on hardware.
 
 ## What this means for robotics
 
@@ -2253,7 +2273,21 @@ The practical trade-off is observability. Encoder error is inexpensive and avail
 
 Blind Grasp Reflex is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The strongest quantitative evidence is in simulation. The project page shows hardware examples on 29 objects but gives no per-object trial count, failure count or physical success percentage. The arm still relies on perception to reach the target; “blind” describes the hand policy during grasping, not the entire robot.
 
-At publication time, the [official project page](https://blindgraspreflex.github.io/) labels code as “Coming Soon.” No public training environment, weights, dataset or software license was verified. The manuscript is available under CC BY 4.0, which licenses the paper rather than unreleased implementation assets.
+At publication time, the [official project page](https://blindgraspreflex.github.io/) labelled code as “Coming Soon”; the November 4 review still finds that label rather than an implementation link. No public training environment, weights, dataset or software license was verified. The manuscript is available under CC BY 4.0, which licenses the paper rather than unreleased implementation assets.
+
+## What should a grasp score authorize?
+
+The learned score coordinates the hand and arm through a reversible state machine: a high score can permit lifting, while a lower score can return the system to reaching or regrasping. Correlation with an analytic grasp metric does not calibrate the score as a probability of safe retention. A receiving arm controller must therefore define what it does at each transition, including release and timeout. [Controller and ablations](https://arxiv.org/html/2609.31323v1).
+
+| Integration record | Why it matters |
+| --- | --- |
+| Policy target, low-level command and measured joint state | The error proxy changes with command shaping, saturation, stiffness and friction |
+| Score thresholds and executed arm transition | A high score is a coordination signal, not a measured payload or slip margin |
+| Attempt count, retry window, hold criterion and interventions | A recovered episode and a first-attempt grasp answer different reliability questions |
+
+The authors’ controller ablation reinforces that dependence: halving the permitted joint-command velocity reduces the reported YCB window success from 96% to 76%. A transferred checkpoint therefore needs its controller configuration recorded, not just the hand model. The reported cross-arm examples also keep the hand policy; they do not establish transfer to a different hand mechanism.
+
+For a new application, test retention during the intended motion and record failures alongside successful demonstrations. This is proposed acceptance work, not a result supplied by the 29-object hardware showcase. The [manipulation decision map](/robot-manipulation#contact-decisions) separates implicit contact evidence from measured force, policy decisions and completed tasks.
 
 ## Sources and related resources
 
@@ -2261,6 +2295,8 @@ At publication time, the [official project page](https://blindgraspreflex.github
 - [Full method and evaluation](https://arxiv.org/html/2609.31323v1)
 - [Official project page and videos](https://blindgraspreflex.github.io/)
 - [RoboSkin robot learning guide](/robot-learning)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
   },
   {
@@ -2428,7 +2464,7 @@ For adaptation, retain the human and robot contact sample distributions, units, 
     id: 'phase-tactile-retrieval-few-shot-insertion',
     title: 'PHASE retrieves tactile insertion experience one contact phase at a time',
     seoTitle: 'PHASE Tactile Retrieval for Few-Shot Insertion',
-    seoDescription: 'PHASE retrieves prior insertion segments by tactile phase. Review its 77% normal and 47% shifted-start success with four target demonstrations.',
+    seoDescription: "Separate PHASE’s offline phase retrieval from runtime insertion; inspect prior versus target data, 100-trial denominators and shifted-start limitations.",
     excerpt: 'OMRON SINIC X and University of Tokyo researchers segment insertion demonstrations by tactile-proprioceptive contact phase, then retrieve matching prior segments for few-shot policy learning.',
     category: 'Few-shot tactile insertion',
     image: '/generated/news/phase-tactile-retrieval-few-shot-insertion.png',
@@ -2446,11 +2482,11 @@ For adaptation, retain the human and robot contact sample distributions, units, 
     evidenceStatus: 'IROS 2026 paper · arXiv v1 · real-robot evaluation · no public code or dataset verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-28',
-    updated: '2026-09-28',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# PHASE retrieves tactile insertion experience one contact phase at a time
 
-Researchers from OMRON SINIC X and the University of Tokyo released PHASE on September 25, 2026. Accepted at IROS 2026, PHASE uses a compliant wrist and tactile-proprioceptive signals to split insertion demonstrations into contact phases, retrieve relevant portions of prior experience and train a new policy from only four target demonstrations. [Official project page](https://omron-sinicx.github.io/phase/).
+Researchers from OMRON SINIC X and the University of Tokyo released PHASE on September 25, 2026. Accepted at IROS 2026, PHASE uses a compliant wrist and tactile-proprioceptive signals to split insertion demonstrations into contact phases, retrieve relevant portions of prior experience and adapt a new policy using four target demonstrations alongside selected experience from a 122-demonstration prior. [Official project page](https://omron-sinicx.github.io/phase/).
 
 ## Key takeaways
 
@@ -2460,21 +2496,21 @@ Researchers from OMRON SINIC X and the University of Tokyo released PHASE on Sep
 
 ## What changed
 
-Demonstration retrieval usually compares entire trajectories. PHASE argues that contact-rich insertion is better compared in stages. A masked tactile-proprioceptive encoder called MAT3 represents contact, while a soft wrist makes the phases physically observable. The system places a boundary after the contact peak, when the coefficient of variation of estimated torque falls below a threshold.
+Demonstration retrieval usually compares entire trajectories. PHASE argues that contact-rich insertion is better compared in stages. A masked tactile-proprioceptive encoder called MAT3 represents contact, while a soft wrist makes the phases physically observable. Offline segmentation places a boundary after the full demonstration’s torque peak when a subsequent stability condition is met, with a fallback to the interval end. This is not a causal runtime detector that knows the future peak.
 
 Fast Dynamic Time Warping then compares like phases between four target demonstrations and a pool of 122 prior demonstrations. The retrieved segments train an Action Chunking with Transformers policy. This avoids forcing an entire prior trajectory to match when only its search or insertion segment resembles the target. [Method and paper links](https://omron-sinicx.github.io/phase/).
 
 ## Results under the reported conditions
 
-The physical setup uses a UR5e arm, a soft compliant wrist and a 3-by-3 distributed tactile sensor. Circle and square pegs supply prior experience; rectangle, oval and hexagon are unseen target shapes. Each method receives four target demonstrations per shape and is tested 20 times on each of five shapes, producing 100 trials per method.
+The physical setup uses a UR5e arm, a soft compliant wrist, a 3-by-3 PapillArray, wrist force-torque sensing and HTC VIVE gripper-pose tracking. Circle and square pegs supply the 122 prior demonstrations. Rectangle, oval and hexagon are absent from that prior but still have four target demonstrations each: this is few-shot adaptation, not zero-shot transfer. Target-only and retrieval policies use the target examples; BC-Prior is trained only on the prior. Each method has 20 trials per shape, 100 in total.
 
-Under the normal-start protocol, the target-only policy reaches 50%. Training on all prior data without retrieval reaches 64%; single-trajectory retrieval reaches 56%; whole-trajectory retrieval reaches 64%; fixed-window retrieval reaches 55%; PHASE reaches 77%. The relevant gain is therefore 13 percentage points over the strongest 64% baselines, not a 13% relative improvement.
+Under the normal-start protocol, the target-only policy reaches 50%. Training on all prior data without retrieval reaches 64%; single state-action-pair retrieval reaches 56%; whole-trajectory retrieval reaches 64%; fixed-window retrieval reaches 55%; PHASE reaches 77%. Success means full insertion within 60 seconds. The relevant aggregate gain is 13 percentage points over the strongest 64% baselines, not a 13% relative improvement or superiority on every peg shape.
 
-When start positions shift outside the training distribution, target-only falls to 0%, the no-retrieval prior baseline reaches 17%, single retrieval 2%, full retrieval 14%, fixed-window retrieval 16% and PHASE 47%. The 30-point margin over 17% suggests that phase-level matching helps most when a policy must first recover contact before insertion.
+When start positions are perturbed by up to plus or minus 2 cm along each horizontal axis outside the demonstrated starting poses, target-only falls to 0%, the no-retrieval prior baseline reaches 17%, single retrieval 2%, full retrieval 14%, fixed-window retrieval 16% and PHASE 47%. The 30-point margin over 17% suggests that phase-level matching helps most when a policy must first recover contact before insertion.
 
 ## What this means for robotics
 
-RoboSkin analysis: PHASE treats compliance as part of perception. The soft wrist does more than protect the fixture; it turns contact transitions into smooth signals that make retrieval boundaries detectable. That coupling between mechanism and learning is relevant to [robot manipulation](/robot-manipulation) systems that cannot rely on vision after the peg enters a fixture.
+RoboSkin analysis: PHASE treats compliance as part of perception. The soft wrist changes the measured response to contact, making the phases more observable in the authors’ setup; that does not establish fixture protection or force safety across assemblies. That coupling between mechanism and learning is relevant to [robot manipulation](/robot-manipulation) systems that cannot rely on vision after the peg enters a fixture.
 
 The work also offers a practical data strategy. Instead of discarding old demonstrations because a new peg is different, teams can reuse the segments whose contact dynamics match. But the reuse benefit depends on recognizable phases. Tasks with repeated impacts, slip or more than two stable contact stages may require a learned or multi-boundary segmenter.
 
@@ -2482,7 +2518,22 @@ The work also offers a practical data strategy. Instead of discarding old demons
 
 PHASE is an IROS 2026 conference paper with an arXiv v1 record, and RoboSkin.ai has not reproduced it. Results come from a single arm, wrist and 3-by-3 tactile configuration. Twenty trials per shape limit precision, and the five peg geometries do not establish transfer to threaded, flexible or high-force assembly.
 
-The [official project page](https://omron-sinicx.github.io/phase/) provides paper, poster and video links. It does not link public code, trained policies or a demonstration dataset, and no software or data license was verified. The [OMRON SINIC X announcement](https://www.omron.com/sinicx/en/news/2026/09/iros2026/) confirms the conference acceptance but is not an independent experimental validation.
+The [official project page](https://omron-sinicx.github.io/phase/) provides paper, poster and video links. It does not link public code, trained policies or a demonstration dataset, and no software or data license was verified. The earlier [OMRON SINIC X announcement](https://www.omron.com/sinicx/en/news/2026/09/iros2026/) remains a source route, but returned an access restriction on the November 4 recheck. The accessible author paper and project identify IROS 2026; none of these constitutes independent experimental validation.
+
+## Distinguish offline segmentation from runtime observation
+
+The retrieval representation and the deployed policy do different work. PHASE’s offline bidirectional encoder can use expert-action tokens from complete demonstrations. The runtime policy does not receive those future expert actions. Phase matching prepares training examples; it is not a claim that the robot retrieves and chains prior segments online. [Methods and evaluation](https://arxiv.org/html/2609.30889v1).
+
+| Training component | What to preserve when adapting it |
+| --- | --- |
+| Torque-based segmentation | Signal definition, peak/stability rule and fallback cases; heuristic termination is not verified boundary-label accuracy |
+| Retrieved prior segments | Segment identity, phase alignment and masks; train each as an independent trajectory rather than crossing artificial boundaries |
+| Complete target demonstrations | Their real search-to-insert transition and target-specific evidence, even for shapes absent from the prior |
+| Runtime observation | Tactile, wrist and pose channels, their clocks and frames; do not assume tactile-only deployment |
+
+The best aggregate score also hides object differences: PHASE records 18/20 on circles versus BC-Prior’s 19/20, and 14/20 on hexagons versus single-pair retrieval’s 15/20. Its overall 77/100 is useful evidence, but not a guarantee for each geometry. The short demonstration durations are separate from the 60-second evaluation limit.
+
+For a new fixture, record protective stops, timeout, drift and recovery as well as insertion. The paper identifies those failures and does not supply a general uncertainty estimator or large-offset recovery policy. Use the [manipulation decision map](/robot-manipulation#contact-decisions) to distinguish a better training-data selection method from measured execution reliability.
 
 ## Sources and related resources
 
@@ -2491,13 +2542,15 @@ The [official project page](https://omron-sinicx.github.io/phase/) provides pape
 - [OMRON SINIC X IROS 2026 announcement](https://www.omron.com/sinicx/en/news/2026/09/iros2026/)
 - [RoboSkin tactile sensor benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation)
 - [RoboSkin tactile manipulation hub](/tactile-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
   },
   {
     id: 'da-grd-tactile-grasp-recovery',
     title: 'DA-GRD uses sparse touch to recover a grasp after the object moves',
     seoTitle: 'DA-GRD: Tactile Grasp Recovery After Object Motion',
-    seoDescription: 'DA-GRD recovers stale visual grasps with sparse tactile probes. Review its 84.7% simulated lift rate, 60 real trials and planar limits.',
+    seoDescription: "Read DA-GRD’s grasp-coverage stopping rule, success-conditioned probe counts and planar recovery limits before comparing contact cost or task reliability.",
     excerpt: 'A*STAR, NTU and Tsinghua researchers stop tactile exploration when the remaining object poses support the same grasp. Real hardware reaches 71.7% lift success, but only 38.3% task-conditioned success.',
     category: 'Tactile grasp recovery',
     image: '/generated/news/da-grd-tactile-grasp-recovery.png',
@@ -2514,8 +2567,8 @@ The [official project page](https://omron-sinicx.github.io/phase/) provides pape
     evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · no public code verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-27',
-    updated: '2026-09-27',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# DA-GRD uses sparse touch to recover a grasp after the object moves
 
 Researchers from A*STAR's Institute of Advanced Intelligence and Computing, Nanyang Technological University and Tsinghua University released DA-GRD on September 24, 2026. Decision-Aware Grasp-Relevant Disambiguation addresses a specific failure: vision selects a grasp, the object moves before execution, and the robot must recover without another camera observation. The method probes with touch until the remaining object-pose hypotheses support a common executable grasp. [Paper and version record](https://arxiv.org/abs/2609.29065).
@@ -2523,22 +2576,22 @@ Researchers from A*STAR's Institute of Advanced Intelligence and Computing, Nany
 ## Key takeaways
 
 - In MuJoCo, the principal DA-GRD variant reaches 84.7% physical lift success across ten objects, compared with 63.7% for a fixed 15-scan baseline using the same planar belief representation.
-- Successful simulated episodes use 4.13 probes on average, a reported 72.5% reduction from the fixed 15-probe baselines. Zero-probe successes are included in that average.
+- The mean of the ten per-object probe averages on lift-success episodes is 4.13, 72.5% below a fixed 15-probe budget. Initial-grasp successes count as zero additional probes; this is not an all-attempt time saving.
 - On a UR5, 60 trials across six objects produce 71.7% lift success but 38.3% task-conditioned success. The gap shows that lifting an object is easier than recovering the originally intended grasp.
 
 ## What changed
 
 DA-GRD does not try to reconstruct a complete object pose before acting. It starts from the remembered RGB-D point cloud and task-conditioned grasp produced by a visual-language and AnyGrasp pipeline. When that grasp becomes stale, contact or free-space observations update a weighted 256-particle belief over planar translation and yaw.
 
-Candidate probes approach vertically or horizontally. The selector scores them by how much the expected hit or miss would reduce disagreement among grasps derived from the surviving hypotheses. A grasp-aware stopping rule executes once enough of the belief mass supports a common grasp. This is different from fixed tactile scanning, which spends the same interaction budget whether or not the next touch changes the decision.
+Candidate probes approach vertically or horizontally. The selector evaluates a counterfactual miss and surface novelty, balanced against motion and repeat costs; it does not calculate a full expectation over every possible hit and miss outcome. A grasp-aware stopping rule executes once enough of the belief mass supports a common grasp. This is different from fixed tactile scanning, which spends the same interaction budget whether or not the next touch changes the decision.
 
 ## Results under the reported conditions
 
-The simulation applies translations up to 5 cm and yaw changes up to plus or minus 45 degrees to ten rigid objects. Each object has 100 shared perturbation episodes per method. A lift counts as physically successful when the robot raises the target by 5 cm. DA-GRD's main policy reaches 84.7%, versus 9.1% for the unrecovered stale grasp, 21.2% for the original XY-only scan baseline, and 63.7% after that baseline receives the same SE(2) belief. [Full evaluation](https://arxiv.org/html/2609.29065v1#S4).
+The simulation applies translations up to plus or minus 5 cm on each planar axis and yaw changes up to plus or minus 45 degrees to ten rigid objects. Each object has 100 shared perturbation episodes per method. A lift counts as physically successful when the robot raises the target by 5 cm. DA-GRD's main policy reaches 84.7%, versus 9.1% for the unrecovered stale grasp, 21.2% for the original XY-only scan baseline, and 63.7% after that baseline receives the same SE(2) belief. [Full evaluation](https://arxiv.org/html/2609.29065v1#S4).
 
 The stricter task-conditioned measure asks whether the final grasp is also consistent with the grasp originally selected for the task. On that measure, DA-GRD reaches 57.3%, while the adapted fixed-scan baseline reaches 49.2%. A pose-sensitive DA-GRD variant reaches a similar 57.6% but uses 7.70 probes on average, compared with 4.13 for grasp-aware stopping.
 
-The physical setup uses a UR5, a Robotiq 2F-140 gripper, two finger-mounted force-sensitive resistors for lateral contact and a wrist FT300 sensor for vertical contact. Across ten trials on each of six objects, lift success ranges from 60% to 80%; task-conditioned success ranges from 30% to 50%. The overall averages are 71.7% and 38.3%, with 4.20 probes.
+The physical setup uses a UR5, a Robotiq 2F-140 gripper, two finger-mounted force-sensitive resistors for lateral contact and a wrist FT300 sensor for vertical contact. Across ten trials on each of six objects, lift success ranges from 60% to 80%; task-conditioned success ranges from 30% to 50%. The overall averages are 71.7% and 38.3%, with a reported mean of 4.20 probes across the six per-object averages. Probe count alone does not include the duration of each contact, motion or reset.
 
 ## What this means for robotics
 
@@ -2550,7 +2603,22 @@ The real-world result also argues for reporting more than a binary lift score. A
 
 DA-GRD is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. The belief only covers planar SE(2) motion. Complex non-planar shapes can produce different three-dimensional contacts that look identical after projection; partial remembered geometry can preserve the same ambiguity. The physical implementation also uses both fingertip contact switches and a wrist force-torque sensor, so “sparse touch” does not mean sensor-free deployment.
 
-No official project repository, dataset, checkpoint or software license was linked from the paper or verified at publication time. The arXiv record provides the manuscript under its selected submission license, which does not by itself release implementation code.
+The November 4 review of the paper and arXiv record did not verify an official project repository, dataset, checkpoint or software license. The arXiv record provides the manuscript under its selected submission license, which does not by itself release implementation code.
+
+## A stopping threshold is not a calibrated success probability
+
+DA-GRD first attempts the remembered grasp. If it succeeds, the episode needs no additional exploration, but it has still made physical contact. After failure, a geometric belief over planar poses guides probing and stopping. The reported 70% grasp-coverage threshold concerns posterior mass compatible with a candidate grasp; it does not mean that 70% of physical attempts will succeed. Sensor errors, incomplete geometry and motion caused by probing can break that interpretation. [Decision rule and protocol](https://arxiv.org/html/2609.29065v1).
+
+| Report separately | Avoid substituting |
+| --- | --- |
+| Initial grasp, added probes and final grasp | “Zero probes” for contact-free execution |
+| Lift success and intended grasp consistency | Any pickup for task completion |
+| Per-object successful-episode probe mean | An average over all attempted episodes or wall-clock cost |
+| Geometric posterior coverage | Calibrated confidence in retention, damage avoidance or task success |
+
+For a deployment comparison, keep failures, timeouts, probe duration, recovery motion and interventions in the same attempted-episode ledger. A faster successful subset can coexist with expensive failures. The paper’s fixed-scan and decision-aware methods also differ in selection, refinement and stopping, so the aggregate gap does not isolate stopping alone.
+
+This suggested evaluation extends the [manipulation decision map](/robot-manipulation#contact-decisions). Preserve planar assumptions and contact-sensor calibration when adapting the method; a lower uncertainty over projected poses does not recover unobserved height, tilt or contact normals.
 
 ## Sources and related resources
 
@@ -2558,6 +2626,8 @@ No official project repository, dataset, checkpoint or software license was link
 - [Full method, protocols and limitations](https://arxiv.org/html/2609.29065v1)
 - [RoboSkin tactile sensing guide](/sensors)
 - [RoboSkin robot manipulation research](/robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
   },
   {
@@ -3507,7 +3577,7 @@ On September 25, the official project provided the paper and demonstration video
     id: 'glotouch-global-local-haptic-search',
     title: 'GLoTouch lets one parallel gripper search and identify objects without external vision',
     seoTitle: 'GLoTouch: Haptic Object Search Without External Vision',
-    seoDescription: 'GLoTouch pairs a passive probe with bilateral visuotactile sensing. Examine its 50-trial robot result, matching ablations and release limits.',
+    seoDescription: "Review GLoTouch’s known-mesh search, matching-quality gates and 50-trial hardware result; separate development recognition from complete retrieval.",
     excerpt: 'GLoTouch turns one parallel gripper into a long-range force probe and a local visuotactile matcher. It retrieved 38 of 50 model-specified targets on hardware, but requires known scene geometry and a target mesh.',
     category: 'Haptic perception',
     image: '/generated/news/glotouch-global-local-haptic-search.png',
@@ -3534,7 +3604,7 @@ Zonglin Li and colleagues introduced GLoTouch on September 23, 2026, as an arXiv
 
 Parallel grippers normally trade dexterity for simple, reliable grasping. GLoTouch extends their perceptual range without adding an actuated search hand. During global exploration, the Xense gripper holds a spherical-tipped probe that has no embedded sensor. A six-axis wrist force-torque sensor, robot kinematics and the known probe shape localize contact while the robot follows a coverage path. Multi-directional probing estimates candidate centers, contours and heights.
 
-The robot then places the probe in a holder. Bilateral visuotactile depth maps and jaw aperture form a local TouchSet for each candidate. A finite-window matcher compares width, depth and acquisition mode against synthetic observations generated from the target STL. Candidates are ranked by matching loss before the gripper closes under a force limit.
+The robot then places the probe in a holder. Bilateral visuotactile depth maps and jaw aperture form a local TouchSet for each candidate. A finite-window matcher compares width, depth and acquisition mode against synthetic observations generated from the target STL. The decision checks absolute matching quality, the best-versus-second-best margin and sufficient tactile evidence before grasping; it does not simply choose the lowest loss regardless of evidence.
 
 This division matters: the probe covers a larger workspace, while the fingertips collect spatially resolved geometry only after an object is found. The same gripper remains available for the final grasp.
 
@@ -3542,7 +3612,7 @@ This division matters: the probe covers a larger workspace, while the fingertips
 
 In simulation, each of five targets was tested 20 times in randomized five-object layouts. GLoTouch completed 84 of 100 retrievals. A separate global-search ablation found all five objects within a 5-meter motion budget in 55% of 100 layouts, compared with 30% for random descent. That is a scene-discovery metric, not the end-to-end success rate.
 
-The local matching component was also isolated on 60 target-and-phase samples from five physical objects. Width and action alone achieved 41 of 60 correct top-1 matches. Adding local depth raised this to 47 of 60; the complete matcher reached 54 of 60. The samples reuse different subsets of contact sequences, so 60 should not be read as 60 independently collected objects.
+The local matching component was also isolated on 60 target-and-phase samples from five physical objects. Width and action alone achieved 41 of 60 correct top-1 matches. Adding local depth raised this to 47 of 60; the complete matcher reached 54 of 60. These are development-set samples that reuse different subsets of contact sequences, so 60 should not be read as 60 independently collected objects or an unseen-object test.
 
 On hardware, every target was evaluated in 10 randomized scenes. The Flexiv arm and Xense gripper retrieved 38 of 50 targets, or 76%. Apple was retrieved in all 10 trials, while Train succeeded in 5 of 10. Confusion between Train and Truck, object motion during probing and toppling during clamping were reported failure modes.
 
@@ -3556,19 +3626,33 @@ The method is not touch-only in the broadest sense: it relies on proprioception,
 
 This is a preprint, not an independently reproduced result, and RoboSkin.ai has not run the system. Evaluation uses one arm-gripper configuration and five printed objects. The global stage depends on a wrist force-torque sensor; the passive probe does not turn an otherwise sensorless gripper into a contact detector. The paper also assumes a known scene cardinality and does not evaluate transparent versus opaque objects as separate conditions because external vision is excluded from control.
 
-The arXiv record and full v1 paper were accessible on September 24. The manuscript states that source code will be released, which is a future commitment rather than current availability. No official code repository, data archive or license was linked. The safest current description is paper-only, with videos and implementation assets not established as reusable resources.
+The November 4 review of the arXiv record and v1 paper still did not verify a linked implementation repository, data archive or applicable release license. The manuscript’s planned code release is not sufficient evidence of an available, reusable payload. This is a limit of the reviewed sources, not a claim that no other release can exist.
+
+## Define when the contact evidence is insufficient
+
+A low matching loss alone is not a trustworthy object identity. GLoTouch combines tactile depth, aperture and acquisition geometry, then checks evidence coverage and separation from the next candidate. The paper’s alternative losses use different scales, so their numerical margins are not interchangeable confidence values. Nor does a 54/60 development-set matcher imply that search, identification and lifting each succeed 90% of the time. [Matching protocol and ablations](https://arxiv.org/html/2609.27695v1).
+
+For an integration review, keep three decisions separate:
+
+- **Contact localization:** retain probe geometry, wrist tare, coordinate registration and whether probing moved the object. The paper’s 0.37 mm center error on one square calibration case does not establish general object-pose accuracy.
+- **Identity selection:** retain the candidate meshes, sufficient-contact check, absolute fit and relative margin. An unfamiliar object or poor observation requires an explicit unresolved state, rather than an assumed match.
+- **Task completion:** record the selected target, grasp, lift and any toppling or intervention. Revalidate the contact map if the object moves between search and grasp.
+
+These are proposed receiving checks. The 84/100 simulation result includes runtime failures, while the 55% scene-discovery result measures finding all five objects within a motion budget. Neither can replace the physical 38/50 end-to-end result. Compare this known-geometry search with the other signal and decision roles in the [manipulation guide](/robot-manipulation#contact-decisions), rather than treating “without external vision” as an absence of cameras, geometry priors or calibration.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 23, 2026](https://arxiv.org/abs/2609.27695)
 - [Full GLoTouch v1 paper](https://arxiv.org/html/2609.27695v1)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-24',
-    updated: '2026-09-24',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-23',
-    evidenceStatus: 'Preprint · arXiv v1 · paper-only release',
+    evidenceStatus: "Preprint · known-object simulation and physical evaluation · current implementation release not verified",
   },
   {
     id: 'copre-proprioceptive-contact-detection',
@@ -3787,11 +3871,11 @@ The [official LiMA page](https://ccdcs.github.io/LiMA_repo/) provides the paper,
     id: 'better-curriculum-tactile-reflex-fragile-grasping',
     title: 'A tactile reflex becomes the teacher for fragile grasping',
     seoTitle: 'Better Curriculum: Tactile Reflex Data for Fragile Grasping',
-    seoDescription: 'A 25 Hz tactile reflex shapes demonstrations for fragile grasping. Review the 20-trial results, tactile-free deployment and disturbance limits.',
-    excerpt: 'The Better Curriculum study uses a 25 Hz tactile controller during data collection, then trains vision-only ACT and pi0.5 policies. The gain is large on one cup task, but disturbance rejection still needs touch at runtime.',
+    seoDescription: "Separate Better Curriculum’s demonstration controller, tactile-free learner and runtime gripper arbiter; review trial counts, contact proxies and timing.",
+    excerpt: "Better Curriculum uses tactile feedback to shape demonstrations for RGB-and-proprioception policies. Its optional runtime gripper arbiter remains a separate source of disturbance correction.",
     category: 'Tactile robot learning',
     image: '/generated/news/better-curriculum-tactile-reflex.png',
-    imageAlt: 'Diagram showing a tactile reflex shaping demonstrations, a tactile-free student policy, and an optional deployment-time safety arbiter.',
+    imageAlt: "Diagram showing tactile-reflex demonstration collection, a tactile-free student policy and a separate runtime gripper arbiter.",
     imageCaption: 'Original RoboSkin.ai explanation of the Better Curriculum study. This is a schematic, not an experiment image.',
     sourceTitle: 'What is the Better Curriculum: Controller-Shaped Grasping Behavior for Contact Force-Sensitive Manipulation',
     sourceUrl: 'https://arxiv.org/abs/2609.25887',
@@ -3827,26 +3911,42 @@ The unseen paper-cup test is exploratory: reflex-data pi0.5 reached 8 stable gra
 
 ## What this means for robotics
 
-RoboSkin analysis: touch can improve a vision-only policy without becoming another runtime modality. That matters when production hardware cannot carry the training sensor, or when a fast controller can generate cleaner contact behavior than a human operator. It also reframes [robot demonstration data](/datasets): the controller that creates the trajectory can be as important as model size.
+RoboSkin analysis: touch can improve a policy using RGB and proprioception without becoming another runtime modality of that learned policy. That matters when production hardware cannot carry the training sensor, or when a fast controller can generate cleaner contact behavior than a human operator. It also reframes [robot demonstration data](/datasets): the controller that creates the trajectory can be as important as model size.
 
-The disturbance result prevents a stronger conclusion. A learned feed-forward policy can imitate nominal force-sensitive behavior, but cannot react to an unobserved external push. Contact-critical systems may still need a low-latency loop, whether from [tactile sensors](/sensors), motor current or a force-torque sensor. The separation between learned motion and a runtime arbiter is closer to a safety architecture than a complete removal of touch.
+The disturbance result prevents a stronger conclusion. A tactile-free policy may respond through its available visual and proprioceptive observations, but it does not provide the same measured tactile correction during an executing action chunk. Contact-critical systems may still need a low-latency loop, whether from [tactile sensors](/sensors), motor current or a force-torque sensor. Here the runtime arbiter controls gripper behavior; it is not evidence of a validated whole-arm safety system.
 
 ## Limitations and availability
 
 This is an arXiv v1 preprint and RoboSkin.ai has not reproduced it. The tactile controller signal is a dimensionless vision-tactile proxy, not a calibrated force measurement in Newtons. The approximately 0.5 N deformation observation describes the cup, not the controller's internal value. Collection order was not randomized, and the three outcome labels come from video rather than force ground truth.
 
-The official project page exposes the paper, diagrams and videos. On September 23, it linked to an author's general GitHub profile but did not provide a dedicated code, dataset or model download, and no asset license was stated. Reproduction therefore requires details and artifacts beyond the visible project page.
+The official project page exposes the paper, diagrams and videos. The November 4 review still finds an author’s general GitHub profile rather than a verified dedicated code, dataset or model download. No asset license was established from those reviewed materials. Reproduction therefore requires details and artifacts beyond the visible project page.
+
+## Track who controls the gripper at each stage
+
+“Curriculum” here means changing the distribution of demonstrated behavior, not a schedule that presents progressively harder training examples. The robot logs the follower’s realized seven-dimensional action trajectory after the reflex has shaped it. That distinction matters: storing only the human’s raw command would omit the correction the student is supposed to learn. The same operator sees tactile feedback in both manual and reflex-assisted collection. [Collection protocol and appendices](https://arxiv.org/html/2609.25887v1).
+
+| Stage | Role of touch | Separate acceptance question |
+| --- | --- | --- |
+| Demonstration collection | A deterministic reflex changes gripper behavior; realized actions are logged | Are corrections and observations aligned, and are all rejected demonstrations counted? |
+| Learned policy | ACT or pi0.5 consumes RGB and proprioception | Does the policy retain the demonstrated behavior on held-out trials? |
+| Optional runtime arbiter | A tactile loop interprets close/open intent and controls the gripper | Does it release correctly and retain contact during tested disturbances? |
+
+The 30 selected manual demonstrations out of 100 are a curation choice, not a 30% collection-success estimate. Similarly, 20/20 retention in the main disturbance run is not a zero-failure guarantee: four additional training seeds report 79 retained grasps out of 80 with the arbiter, versus 42/80 without it. Keep those repeat runs distinct from the headline single-seed comparison.
+
+Nominal 25 Hz capture does not establish fresh camera input at every control step. Record observation timestamps, policy-query times, action chunks and gripper overrides when adapting the pipeline. Contact-quality occupancy is a frame-level proxy, not calibrated newtons or a complete-trial success rate. These checks connect the method to the [manipulation decision map](/robot-manipulation#contact-decisions), without treating demonstration quality as a replacement for runtime feedback.
 
 ## Sources
 
 - [arXiv v1 record, submitted September 22, 2026](https://arxiv.org/abs/2609.25887)
 - [Full Better Curriculum v1 paper](https://arxiv.org/html/2609.25887v1)
 - [Official project page](https://shayfeng.github.io/better-curriculum/)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results belong to the cited authors; RoboSkin has not run these systems or downloaded their experimental payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: '2026-09-23',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-22',
     evidenceStatus: 'Preprint · arXiv v1 · project page inspected',
   },
