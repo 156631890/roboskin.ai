@@ -27,7 +27,7 @@ The previous 210-URL depth programme remains a dated completed inventory. These 
 | PanoTac identity/date | https://arxiv.org/abs/2611.03520 | November 2 v1 preprint; publication and site review dates kept separate |
 | Sensor versus representation | https://arxiv.org/html/2611.03520v1#S3.SS3 | 12×32 contact array and 10 magnetometers; fused normal, interpolated x/y; not 384 independently calibrated force vectors |
 | Task comparison | https://arxiv.org/html/2611.03520v1#S5 and #A2 | 20 rollouts/policy/task, 60 overall; stage denominators include prior failures; encoder differences retained; 46.7 percentage points; grain tie and one-rollout tube difference stated |
-| Rates/cost | https://arxiv.org/html/2611.03520v1 and https://panotac.github.io/ | Paper: 60 Hz acquisition, 6 Hz policy, 30 Hz control, below $50/fingertip. Project: up to 100 Hz and $9.4/sensor. No verified common BOM/configuration or complete-system quote |
+| Rates/cost | https://arxiv.org/html/2611.03520v1 (cost exclusion in Introduction, #S1) and https://panotac.github.io/ | Paper: 60 Hz acquisition, 6 Hz policy, 30 Hz control, below $50/fingertip excluding readout boards. Project: up to 100 Hz and $9.4/sensor. No verified common BOM/configuration or complete-system quote |
 | Hardware/characterization | https://arxiv.org/html/2611.03520v1#S4 and #S6 | Normal loading, consistency not accuracy; magnetic interference; dexterous-hand extension remains future work |
 | PanoTac resources | https://panotac.github.io/ | Both Method Code and Hardware Repo buttons actually display Coming soon; inspected public script and browser behavior; no artifact/license/reproduction claim |
 

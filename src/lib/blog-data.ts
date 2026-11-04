@@ -186,7 +186,7 @@ Before comparing this system with another sensor, request the exact hardware and
 
 ## Cost claims need a bill of materials and a common boundary
 
-Paper v1 describes a cost **below US$50 per fingertip**; the project hardware card currently lists **US$9.4 per sensor**. We did not verify a versioned bill of materials reconciling those scopes. Treat them as author-stated component estimates, not interchangeable prices or a quote for a complete manipulation system. [Paper hardware description](https://arxiv.org/html/2611.03520v1#S3.SS2) · [Project card](https://panotac.github.io/).
+Paper v1 describes a cost **below US$50 per fingertip, excluding readout boards**; the project hardware card currently lists **US$9.4 per sensor**. We did not verify a versioned bill of materials reconciling those scopes. Treat them as author-stated component estimates, not interchangeable prices or a quote for a complete manipulation system. [Paper cost scope, Introduction](https://arxiv.org/html/2611.03520v1#S1) · [Project card](https://panotac.github.io/).
 
 A useful procurement comparison would separately record sensing materials, electronics, fabrication and assembly yield, mounting, calibration fixtures and labor, replacements, computing and robot integration. For two fingertips, do not merely double a component headline and call that the deployment budget. The [tactile-sensor selection guide](/guides/how-to-choose-a-tactile-sensor) offers a broader requirements framework.
 
