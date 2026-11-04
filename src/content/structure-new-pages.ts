@@ -10,8 +10,10 @@ const robotiq = { label: 'Robotiq adaptive gripper specifications', href: 'https
 export const structureNewPages: SeoTopicPage[] = [
   {
     ...shared, path: '/robot-grippers', title: 'Robot Grippers: Types, Selection Guide (2026)',
+    updated: '2026-11-04',
+    revisionNote: 'November 4, 2026: reviewed the full guide and four manufacturer model sources; added contact-evidence distinctions and a receiving-test record linked to six source-reviewed studies. No hardware tests are claimed.',
     h1: 'Robot Grippers: Types, Selection Guide and Vendors',
-    description: 'Compare robot gripper types and sourced models by payload, grip force, interface, contact sensing and price disclosure before selecting an end effector.',
+    description: "Choose robot grippers by contact geometry, payload conditions, sensing and control evidence; compare models and define pickup-to-release acceptance.",
     introduction: 'A robot gripper is the end effector that holds, releases or repositions an object at the end of a robot arm. Robot gripper selection starts with the object, contact geometry and load case, then the actuator and interface. The tables below separate gripper types from model-specific specifications so a payload rating is never mistaken for a measured grasp success rate.',
     kicker: 'End-effector selection', intent: 'Compare robot gripper types and select a sourced model for an actual contact task.', keywords: ['robot gripper', 'robot gripper types', 'gripper selection', 'tactile sensing'],
     quickAnswer: ['Choose the contact method from object geometry, surface leakage, fragility and the required placement accuracy.', 'Check the exact payload conditions, available grip force, tool mass and controller interface together. A form-fit payload is not a friction-grip guarantee.', 'Tactile sensor data can support contact detection or slip feedback, but the controller must actually consume it at the required latency.'],
@@ -30,6 +32,85 @@ export const structureNewPages: SeoTopicPage[] = [
         ['Contact points', 'Finger or cup geometry and accessible contact area', 'The object cannot be constrained without collision or leakage'],
         ['Price', 'Dated quote including tooling, controller, sensors and replacement pads', 'The integration cost exceeds the project budget'],
       ] } },
+      {
+        "id": "contact-evidence",
+        "heading": "Separate contact mechanics, sensing and demonstrated control",
+        "body": [
+          "A compliant surface can improve contact without measuring it. A sensor can measure a useful signal without feeding the controller. A model can predict motion accurately without having executed a grasp. Identify which claim a supplier or research prototype actually supports before comparing success percentages or choosing an integration path."
+        ],
+        "table": {
+          "headers": [
+            "Evidence layer",
+            "Illustrative research case",
+            "What remains a separate decision"
+          ],
+          "rows": [
+            [
+              "Passive adaptation",
+              "Granular jamming changes enclosure and retention mechanically.",
+              "Whether the actual reaching distribution lands inside a useful capture region, and whether transfer and release succeed."
+            ],
+            [
+              "Contact measurement",
+              "A Hall-based tackiness sensor distinguishes compression from pull-off; TacGooseBumps encodes shear-dependent patterns.",
+              "Calibration, replacement effects and whether the required output is a pattern, stress, force or separation event."
+            ],
+            [
+              "Active perception",
+              "FibTac observes contact while a pneumatic sequence moves its fibers.",
+              "Whether classification or regression has been connected to a tested feedback controller; timed actuation alone does not establish this."
+            ],
+            [
+              "Motion prediction",
+              "JFM models a tendon-driven finger; a membrane array uses a compact deformation action space.",
+              "Prediction or positioning criteria are different from measured contact, damage-free handling and completed manipulation."
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Define one receiving test from pickup through release",
+            "body": [
+              "For example, a proposed test of a fragile part should identify the object, pad revision, surface condition, orientation, motion and permitted deformation before any trials. Record first-attempt pickup, retention through acceleration, final placement, complete release, visible damage and interventions separately. Repeated use of one object should retain its identity so accumulated damage is not mistaken for independent fresh-object trials.",
+              "Attach acquisition timestamps, controller input and executed command to the same trial when evaluating feedback. Define the physical reference used for force or slip claims, the pass criterion and the failed-attempt denominator. After changing a pad, membrane, suction cup or sensor, repeat the relevant calibration and load case. This is suggested engineering acceptance documentation, not a claim that the research cases below or RoboSkin completed that combined test."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "Tackiness: pull-off measurement and release",
+            "href": "/news/single-element-tackiness-tactile-sensor"
+          },
+          {
+            "label": "TacGooseBumps: retrofit and damage criteria",
+            "href": "/news/tacgoosebumps-shear-encoding-tactile-sensor"
+          },
+          {
+            "label": "Granular gripper: reaching versus capture",
+            "href": "/news/support-enhanced-granular-jamming-gripper"
+          },
+          {
+            "label": "FibTac: timed actuation and classification",
+            "href": "/news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026"
+          },
+          {
+            "label": "JFM: recorded prediction versus executed control",
+            "href": "/news/jfm-rigid-soft-finger-jacobian-flow"
+          },
+          {
+            "label": "Membrane array: a different manipulation surface",
+            "href": "/news/membrane-coupled-delta-array-micro-object-manipulation"
+          },
+          {
+            "label": "Plan a tactile calibration record",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Scope a research and integration evidence review",
+            "href": "/research-services"
+          }
+        ]
+      },
     ],
     faqs: [{ question: 'Does a soft gripper automatically measure touch?', answer: 'No. Mechanical compliance and tactile measurement are different properties. Check whether sensors are installed, which signals are exposed and how the controller uses them.' }, { question: 'Why are prices marked Not published?', answer: 'The reviewed manufacturer pages request a quote or do not disclose a usable model price. A reseller listing or an older quote is not silently substituted.' }],
     relatedLinks: [sensors, datasets, { label: 'robot tactile sensor models', href: '/robot-tactile-sensors', description: 'Model-specific sensing and integration fields.' }],
