@@ -932,7 +932,7 @@ These are proposed follow-up checks. Retain separate angular-error and physical-
     id: 'skelewam-sparse-skeleton-world-action-model',
     title: 'SkeleWAM compresses manipulation into a sparse 3D skeleton',
     seoTitle: 'SkeleWAM Uses Sparse 3D Skeletons for Manipulation',
-    seoDescription: 'SkeleWAM represents robot joints and object interaction points as a sparse 3D skeleton. Review LIBERO-Plus, 100 hardware trials and limits.',
+    seoDescription: "Separate SkeleWAM training supervision, action consensus and measured outcomes; inspect landmark calibration, executed horizons and layout failures.",
     excerpt: 'SkeleWAM replaces visual-future reconstruction with robot joints, object centers and interaction points, using future geometry as training-only supervision.',
     category: 'Robot world models',
     image: '/generated/news/skelewam-sparse-skeleton-world-action-model.png',
@@ -950,8 +950,8 @@ These are proposed follow-up checks. Retain separate angular-error and physical-
     evidenceStatus: 'Preprint · arXiv v1 · 10,030 LIBERO-Plus variants · 100 physical trials per evaluated method · project demos public · no code release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-03',
-    updated: '2026-10-03',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# SkeleWAM compresses manipulation into a sparse 3D skeleton
 
 Peking University researchers released SkeleWAM on October 1, 2026, asking whether a world action model needs to predict pixels at all. The model converts RGB-D observations and robot proprioception into a sparse 3D skeleton of robot joints, object centers and interaction points. It jointly learns actions and future skeletons during training, then removes the future-prediction branch at inference. [Paper and version record](https://arxiv.org/abs/2610.02120).
@@ -986,7 +986,22 @@ The system is not tactile. Interaction points are inferred from RGB-D rather tha
 
 The manuscript is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Training and evaluation use one RTX 4090 in the reported implementation, but training time and end-to-end control latency are not given. Hardware evidence covers one arm, five tabletop tasks and 20 trials per task. The benchmark’s strongest weakness is layout change, and the real-world comparison is too small to establish broad superiority.
 
-The official project provides figures, result tables and recorded demonstrations. No implementation repository, checkpoint, training dataset, perception model package or software license was verified. The paper is posted under CC BY-NC-ND 4.0, which covers the manuscript, not an absent software release.
+The official project provides figures, result tables and recorded demonstrations. The November 4 project review did not verify an implementation repository, checkpoint, training dataset, perception model package or software license. The paper is posted under CC BY-NC-ND 4.0, which covers the manuscript rather than establishing terms for implementation assets.
+
+## Action consensus is not a contact or outcome check
+
+Three sampled trajectories can agree and still be wrong about the object. MAC selects a representative motion; it does not simulate and score each candidate's physical consequence. The future-skeleton branch is removed at deployment, and the training attention design keeps action and future branches from attending to each other. Thus the method should not be presented as an online counterfactual planner. [Architecture and MAC protocol](https://arxiv.org/html/2610.02120v1).
+
+| Interface | What to verify in a proposed integration |
+| --- | --- |
+| Landmark construction | Camera calibration, shared frame, node identity/order and behavior when a point is missing or occluded |
+| Consensus selection | Normalization and which motion coordinates enter the distance; agreement does not establish grasp retention |
+| Executed prefix | Sixteen executed steps versus the ten-step comparison window; record the next actual observation |
+| Physical confirmation | Measured object/task outcome after the action, rather than confidence inferred from sample agreement |
+
+Sampling and replanning are not monotonic performance knobs. The reported ablation peaks at three candidates rather than five or ten. Executing five steps before replanning also scores below the sixteen-step default. Those results are setup-specific, but they rule out a simple claim that more sampling or more frequent replanning always improves performance.
+
+For a new object, retain the RGB-D estimate, landmark identities and action prefix with the outcome. A proposed test should include occlusion and a changed layout, since the privileged-state comparison still struggles with layout changes. Geometric point proximity is not measured force, slip or successful contact. The [world-model interface comparison](/robot-world-models#prediction-runtime-contracts) separates this training-only prediction role from online tactile forecasts and action scoring.
 
 ## Sources and related resources
 
@@ -994,13 +1009,15 @@ The official project provides figures, result tables and recorded demonstrations
 - [Full methods, benchmark and hardware tables](https://arxiv.org/html/2610.02120v1)
 - [Official project page and recorded demonstrations](https://skelewam-project.github.io/)
 - [RoboSkin guide to tactile world models](/guides/visuo-tactile-world-models-robot-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
   },
   {
     id: 'tacdyn-wam-implicit-tactile-dynamics',
     title: 'TacDyn-WAM predicts contact dynamics without generating future touch pixels',
     seoTitle: 'TacDyn-WAM Predicts Implicit Tactile Dynamics',
-    seoDescription: 'TacDyn-WAM predicts contact evolution in latent space. Review its UniVTAC and 100-trial hardware results, latency comparison and release limits.',
+    seoDescription: "Read TacDyn-WAM single-pass prediction, cached tactile context and action-chunk timing; distinguish per-task data from pretrained backbone dependencies.",
     excerpt: 'TacDyn-WAM separates visual futures from implicit tactile dynamics, replacing iterative tactile-pixel generation with a contact-aware latent target.',
     category: 'Tactile world models',
     image: '/generated/news/tacdyn-wam-implicit-tactile-dynamics.png',
@@ -1018,8 +1035,8 @@ The official project provides figures, result tables and recorded demonstrations
     evidenceStatus: 'Preprint · arXiv v1 · eight-task simulation benchmark · 100 physical trials per evaluated policy · project videos public · code coming soon',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-02',
-    updated: '2026-10-02',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# TacDyn-WAM predicts contact dynamics without generating future touch pixels
 
 Researchers led by Tsinghua University's Institute for AI Industry Research released TacDyn-WAM on September 30, 2026. The world action model predicts how contact representations will evolve instead of reconstructing future tactile images through iterative denoising. It reports 81.5% average success on eight UniVTAC tasks using the benchmark demonstrations, then 71.0% across five physical tasks without its extra pretraining stage and 85.0% with that stage. [Paper and version record](https://arxiv.org/abs/2610.00638).
@@ -1042,7 +1059,7 @@ On UniVTAC, each of eight tasks is evaluated with 100 rollouts. TacDyn-WAM avera
 
 Ablations give the clearest evidence for the target design. Replacing TacRep with the base model's reconstruction-oriented Cosmos VAE reduces the average to 62.0%; a static DINOv2 target reaches 74.0%. Removing the tactile world model gives 67.9%, while removing current-state tactile memory gives 71.3%. These are absolute percentage-point comparisons within the authors' common protocol.
 
-For hardware tests, a Franka Research 3 uses Xense sensors on both gripper fingers plus wrist and third-person cameras. Across Stack Cups, Remove Plug, Insert Plug, Unscrew Cup Lid and Wipe Whiteboard, the non-pretrained model records 71/100 successes. Pretraining on a 6,000-trajectory OmniViTac subset, with the 300 task demonstrations also used in early stages, raises the total to 85/100. On one A100, the paper reports 484 ms for a 50-action chunk versus 1,338 ms for an optimized 40-action LingBot-VA chunk; that is a system-specific latency comparison, not a universal real-time guarantee.
+For hardware tests, a Franka Research 3 uses Xense sensors on both gripper fingers plus wrist and third-person cameras. Across Stack Cups, Remove Plug, Insert Plug, Unscrew Cup Lid and Wipe Whiteboard, the variant without extra visuo-tactile trajectory pretraining records 71/100 successes. Pretraining on a 6,000-trajectory OmniViTac subset, with the 300 task demonstrations also used in early stages, raises the total to 85/100. On one A100, the paper reports 484 ms for a 50-action chunk versus 1,338 ms for an optimized 40-action LingBot-VA chunk; that is a system-specific latency comparison, not a universal real-time guarantee.
 
 ## RoboSkin analysis
 
@@ -1052,7 +1069,22 @@ The benchmark comparison also needs care. The 81.5% simulation average trails th
 
 ## Limitations and availability
 
-TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the results. Hardware evidence covers one parallel gripper, five tasks and randomized but laboratory-controlled starts. The official project publishes tables and a downloadable demo video, but labels code “coming soon”; no public training code, weights, real-robot dataset or implementation license was verified. The paper's arXiv license does not supply those missing rights.
+TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the results. Hardware evidence covers one parallel gripper, five tasks and randomized but laboratory-controlled starts. The official project publishes tables and a downloadable demo video, and still labels code “coming soon” in the November 4 review; no public training code, weights, real-robot dataset or implementation license was verified. The paper's arXiv license does not supply those missing rights.
+
+## Single-pass touch prediction is not single-pass robot feedback
+
+The tactile expert avoids iterative tactile-image generation, but the complete policy still denoises actions over ten steps. Its latent dynamics and current-touch memory are computed for the observation/chunk, then reused during action generation. Reusing that representation does not inject a newly measured contact after every generated command. [Implementation and timing protocol](https://arxiv.org/html/2610.00638v1).
+
+| Quantity | Meaning in the reported implementation | What it does not measure |
+| --- | --- | --- |
+| 484 ms | Median of thirty warmed input-tensor-to-GPU-chunk runs on an A100 | Complete sensor-to-motion delay, startup or communication |
+| Fifty actions | Generated chunk length | Fifty new tactile observations |
+| Thirty-two actions | Hardware prefix executed before another query | A universally specified contact-feedback frequency |
+| About 9.7 ms per action | Chunk time divided by fifty | The time until a changed contact can influence a new action |
+
+The training-data label also needs precision. Using only benchmark demonstrations for task training does not mean training every component from scratch: the system builds on pretrained visual, tactile and generative components. The additional hardware pretraining stage includes target-task demonstrations before later per-task fine-tuning, so its improvement is not evidence of transfer to unseen target tasks.
+
+For a reproduction, first document the sensor preprocessing and target-data access. Xense difference images and simulated raw tactile backgrounds use different normalization paths; copying a subtraction step across them can change the input. Then compare complete task sets and matched checkpoints: some published baseline means omit unreported tasks, while the paper's controlled ablations answer a narrower question. The [runtime comparison](/robot-world-models#prediction-runtime-contracts) provides the corresponding observation-age and executed-prefix checks.
 
 ## Sources and related resources
 
@@ -1060,13 +1092,15 @@ TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the result
 - [Full methods, ablations, latency and physical protocol](https://arxiv.org/html/2610.00638v1)
 - [Official project and result tables](https://enyi-bean.github.io/TacDyn-WAM-Page/)
 - [RoboSkin robot world models guide](/robot-world-models)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
   },
   {
     id: 'touchtherm-tactile-thermal-digital-twins',
     title: 'TouchTherm gives digital twins tactile texture and cooling dynamics',
     seoTitle: 'TouchTherm Builds Tactile-Thermal Digital Twins',
-    seoDescription: 'TouchTherm registers tactile microgeometry and thermal cooling fields to 3D objects. Review its 20-object tests, recognition gains and release status.',
+    seoDescription: "Distinguish TouchTherm tactile rendering from collision mechanics and cooling from contact heat transfer; review calibration and held-out evidence.",
     excerpt: 'TouchTherm augments coarse collision meshes with registered tactile micro-height fields and time-varying surface temperature for multimodal simulation.',
     category: 'Tactile simulation',
     image: '/generated/news/touchtherm-tactile-thermal-digital-twins.png',
@@ -1084,8 +1118,8 @@ TacDyn-WAM is an arXiv v1 preprint and RoboSkin.ai has not reproduced the result
     evidenceStatus: 'Preprint · arXiv v1 · 20 reconstructed objects · tactile, thermal and VR demonstrations · code and object assets promised after acceptance',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-02',
-    updated: '2026-10-02',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# TouchTherm gives digital twins tactile texture and cooling dynamics
 
 ShanghaiTech University researchers released TouchTherm on October 1, 2026. The pipeline turns a physical object into a simulation asset with three registered layers: a coarse visual/collision mesh, local micro-height fields for optical tactile rendering and a dynamic surface-temperature field. Tests cover 20 objects, with held-out 30- and 45-second thermal predictions and synthetic-to-real tactile recognition. [Paper and version record](https://arxiv.org/abs/2610.01943).
@@ -1104,7 +1138,7 @@ For temperature, multiple cameras observe a heated object cooling. The method fu
 
 ## Results under the reported conditions
 
-The tactile comparison uses three contacts per object across 20 objects. TouchTherm reports mean G-SSIM/HF-NCC scores of 0.0701/0.0911, versus 0.0480/0.0116 for coarse geometry and 0.0629/0.0081 for direct image-space height integration. Real-to-real repeatability is higher than real-to-sim similarity, so the result supports an improvement over those two renderers, not photorealistic equivalence to a physical sensor.
+The tactile comparison uses three contacts per object across 20 objects. Its tactile ablation reports mean G-SSIM/HF-NCC scores of 0.0701/0.0911, versus 0.0480/0.0116 for coarse geometry and 0.0629/0.0081 for direct image-space height integration. Real-to-real repeatability is higher than real-to-sim similarity, so the result supports an improvement over those two renderers, not photorealistic equivalence to a physical sensor.
 
 Thermal evaluation uses a separate 60-second training capture for each object's parameters and 15 overlapping test windows per object: 300 windows at each horizon. Surface-temperature MAE is 0.465 °C at 30 seconds and 0.592 °C at 45 seconds. Removing ambient relaxation increases MAE to 0.820 °C and 1.083 °C; removing surface diffusion changes the headline MAE little, which the authors interpret as ambient exchange driving global cooling while diffusion adds smaller local gains.
 
@@ -1120,7 +1154,23 @@ The half-day-per-object estimate for each acquisition modality is also an integr
 
 TouchTherm is an arXiv v1 preprint under double-anonymous review, and RoboSkin.ai has not reproduced it. Manual registration and one-time per-object GelSight amplitude calibration remain in the workflow. Recognition uses one optical tactile sensor style; thermal feedback is demonstrated in VR rather than on a robot controller.
 
-The official project exposes videos and method descriptions. It states that code, reconstructed object assets and the simulation pipeline will be released upon acceptance. No downloadable archive, repository, dataset license or software license was verified on October 2, 2026. The paper itself uses arXiv's perpetual non-exclusive license, which is not an implementation license.
+The official project exposes videos and method descriptions. It states that code, reconstructed object assets and the simulation pipeline will be released upon acceptance. The November 4 review found the same future-release statement; no downloadable archive, repository, dataset license or software license was verified through that page. The paper itself uses arXiv's perpetual non-exclusive license, which is not an implementation license.
+
+## Validate appearance, mechanics and heat transfer separately
+
+A better-looking tactile image does not establish better friction or deformation mechanics. In TouchTherm, the fine micro-height layer changes rendered tactile appearance while the coarse mesh remains responsible for collision. Similarly, the fitted cooling field models surface evolution under the observed conditions; it does not implement bidirectional heat exchange between an object and a touching sensor. [Method and limitations](https://arxiv.org/html/2610.01943v1).
+
+| Asset layer | Evidence supplied | Separate test needed for a new application |
+| --- | --- | --- |
+| Coarse geometry | Registered object shape and collision surface | Contact geometry and mechanical response under the intended load |
+| Micro-height field | Improved optical tactile appearance and object recognition | Whether texture-dependent friction or slip behavior is represented |
+| Thermal field | Held-out natural-cooling surface temperatures | Temperature changes caused by actual sensor contact and heat exchange |
+
+The real-data budget must include reconstruction and calibration. No real image trains the recognition classifier, but real measurements build the object assets, set per-object tactile amplitude and calibrate rendering color. Synthetic classifier training therefore does not mean zero real acquisition effort.
+
+Metric alignment is another boundary. Tactile similarity permits a bounded rotation and translation alignment before scoring, so it is not a direct test of raw pose-registration accuracy. The thermal test windows overlap within the same objects; three hundred windows are not three hundred independent objects or physical trials.
+
+For a proposed robot study, retain acquisition/calibration revisions and choose a downstream measurement that matches the intended use: tactile recognition, slip response or contact heating. None can be substituted for another merely because they share one digital asset. The [world-model map](/robot-world-models#prediction-runtime-contracts) places this rendering pipeline separately from an action policy.
 
 ## Sources and related resources
 
@@ -1128,6 +1178,8 @@ The official project exposes videos and method descriptions. It states that code
 - [Full 20-object tactile and thermal evaluation](https://arxiv.org/html/2610.01943v1)
 - [Official project and demonstrations](https://anonymous-research1.github.io/)
 - [RoboSkin tactile sensor guide](/guides/tactile-sensor-for-robots)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
   },
   {
@@ -2874,7 +2926,7 @@ For evaluation, retain both the 93.6% catch-completion rate and the stricter 90.
     id: 'body-grounded-replanning-physical-manipulation',
     title: 'Body-grounded replanning lets joint load change the robot strategy',
     seoTitle: 'Body-Grounded Replanning for Physical Robot Adaptation',
-    seoDescription: 'Body-grounded replanning uses joint state, effort and contact events to change manipulation strategy. Review its real-robot results and LLM limits.',
+    seoDescription: "Separate body-triggered strategy selection from dynamics planning; review raw effort, matched baselines and active-motion versus elapsed-time metrics.",
     excerpt: 'Microsoft Research Asia, Waseda, Chiba and NII researchers move proprioceptive evidence into high-level replanning. Hardware success reaches 96.3%, while LLM pause time is excluded.',
     category: 'Physical AI planning',
     image: '/generated/news/body-grounded-replanning-physical-manipulation.png',
@@ -2892,8 +2944,8 @@ For evaluation, retain both the 93.6% catch-completion rate and the stricter 90.
     evidenceStatus: 'Preprint · arXiv v1 · simulation and real-robot evaluation · qualitative contact-task extension',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-27',
-    updated: '2026-09-27',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# Body-grounded replanning lets joint load change the robot strategy
 
 Researchers at Microsoft Research Asia–Tokyo, Waseda University, Chiba University and Japan's National Institute of Informatics released Body-Grounded Replanning on September 24, 2026. The framework turns joint position, actuator effort, contact and recent execution history into high-level evidence: when the current motion becomes physically unsuitable, GPT-4o-mini selects another strategy while the task objective and low-level controller remain unchanged. [Paper and version record](https://arxiv.org/abs/2609.30024).
@@ -2912,7 +2964,7 @@ The monitor records per-joint position, velocity and effort plus binary contact 
 
 ## Results under the reported conditions
 
-The controlled simulation uses a Franka Panda and generates 100 paired episodes for each of ten load or asymmetric-mobility conditions. The body-grounded method maintains 90% to 99% success and records the lowest mean joint-torque norm in every condition. Across the seven asymmetric-mobility conditions, overall success is 96.7%, compared with 88.5% for the rule-based body-state baseline. [Full results](https://arxiv.org/html/2609.30024v1#S5).
+The controlled simulation uses a Franka Panda and generates 100 paired episodes for each of ten load or asymmetric-mobility conditions. The body-grounded method maintains 90% to 99% success and records the lowest mean joint-torque norm in every condition. Across all ten simulated conditions, overall success is 96.7%, compared with 88.5% for the rule-based body-state baseline. [Full results](https://arxiv.org/html/2609.30024v1#S5).
 
 The hardware study uses a CRANE-X7 with Dynamixel actuators. Environment-only search, rules and body-grounded replanning each receive eight trials per condition under a 45-second execution budget. The body-grounded and environment-only methods both average 96.3% success; rules average 66.3%. Body grounding has the lowest restricted completion time in nine of ten conditions and the lowest overall mean at 24.57 seconds. Its average actuator-effort norm is also lowest—2.18 versus 2.28 and 2.33—but it wins that metric in only five of ten individual conditions.
 
@@ -2930,7 +2982,24 @@ The comparison with environment-only search is equally important. Both succeed a
 
 This is an arXiv v1 preprint. The high-level strategy set and event thresholds are manually defined, tasks are short-horizon, and the strongest repeated evaluation is controlled reaching rather than the three contact-rich demonstrations. Hardware effort uses raw Dynamixel readings, not calibrated joint torque, so values are only compared within that platform.
 
-The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyHm4U), but no public code repository, prompt package, logs, dataset or software license was verified. GPT-4o-mini is an external hosted model, and the evaluation excludes its inference pauses from active execution time. RoboSkin.ai has not reproduced the system.
+The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyHm4U), and Figure 3 supplies prompt text, but no executable integration package, public code repository, logs, dataset or software license was verified. A printed prompt is not a reproduced deployment. GPT-4o-mini is an external hosted model, and the evaluation excludes its inference pauses from active execution time. RoboSkin.ai has not reproduced the system.
+
+## Record the event, the strategy and both elapsed-time clocks
+
+The learned predictor is a short-horizon joint-state estimator that informs one effort-near-limit trigger. It is not a world model that evaluates the physical consequences of arbitrary candidate actions. The language model chooses from nine predefined strategies, and only the structured strategy field controls the robot; explanatory text is not executed as a motor command. [Monitor and replanning method](https://arxiv.org/html/2609.30024v1).
+
+At 20 Hz, a fifteen-step monitoring window covers 0.75 seconds, while ten-step persistence and cooldown rules each span 0.5 seconds. These are different from language-model response time. The reported completion metric excludes those inference pauses, so it cannot establish end-to-end cycle time.
+
+| Record | Why it matters |
+| --- | --- |
+| Body trace and event | Distinguishes raw effort or contact evidence from an inferred event label |
+| Strategy choice and allowed menu | Shows whether the response was available under the same constraints |
+| Motion-only time | Reproduces the paper's active execution metric and failure-horizon penalty |
+| Wall-clock time and pauses | Exposes model/network delay, waiting and actual task duration |
+
+Hardware effort is a raw Dynamixel quantity, not calibrated joint torque, contact force or energy consumption. The rule baseline also lacks the continuous body context supplied to the language model. A comparison therefore tests the complete information-and-selection design, not whether language models are uniquely necessary for adaptation.
+
+For a proposed receiving test, log rejected choices and unavailable responses as well as successful strategy changes, with a separately defined fallback. That is evaluation guidance, not a capability implemented or tested here. The [prediction/control comparison](/robot-world-models#prediction-runtime-contracts) places this method beside world-action systems without relabeling it as one.
 
 ## Sources and related resources
 
@@ -2938,6 +3007,8 @@ The paper links an author-provided [qualitative video](https://youtu.be/_qclDPyH
 - [Full framework, tables and limitations](https://arxiv.org/html/2609.30024v1)
 - [Author-provided experiment video](https://youtu.be/_qclDPyHm4U)
 - [RoboSkin Physical AI overview](/physical-ai)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
   },
   {
@@ -3643,7 +3714,7 @@ This is a proposed combined test, not a denominator supplied by the paper. Do no
     id: 'internw0-contact-aware-world-model-pipetting',
     title: "InternW0 links asynchronous world prediction with contact-aware pipetting",
     seoTitle: "InternW0: Contact-Aware Pipetting Results and Model Access",
-    seoDescription: "Inspect InternW0’s contact-aware pipetting, progress metrics, asynchronous action latency and EgoLab training data. Check what code and model assets are available.",
+    seoDescription: "Review InternW0 cached prediction, action clocks and release scope; distinguish public simulation assets from unverified contact-aware pipetting reproduction.",
     excerpt: "Shanghai AI Laboratory combines slower world prediction with faster action updates and contact-aware post-training. Its laboratory results require careful separation of task progress, full completion and model-side latency.",
     category: "Contact-aware world models",
     image: "/generated/news/internw0-asynchronous-contact-control.png",
@@ -3651,14 +3722,14 @@ This is a proposed combined test, not a denominator supplied by the paper. Do no
     imageCaption: "Original RoboSkin.ai schematic based on InternW0 v1. The reported action-path timing excludes asynchronous video-plan generation. Not an experiment image.",
     sourceTitle: "InternW0: A Foundational Physical World Model for Efficient Real-World Interactions",
     sourceUrl: "https://arxiv.org/abs/2609.27656",
-    sources: [{"title": "InternW0 v1 technical report and results", "url": "https://arxiv.org/html/2609.27656v1"}, {"title": "Official InternW0 project and availability", "url": "https://internrobotics.github.io/internw0"}],
+    sources: [{"title": "InternW0 source release, revision eceefc3", "url": "https://github.com/InternRobotics/InternW0/tree/eceefc35b26d131c67048cb2cf26fecbee5ea5a5"}, {"title": "InternW0 v1 technical report and results", "url": "https://arxiv.org/html/2609.27656v1"}, {"title": "Official InternW0 project and availability", "url": "https://internrobotics.github.io/internw0"}],
     technicalFocus: ["robot world models", "contact-aware manipulation", "dexterous manipulation", "egocentric robot learning"],
     sourceDate: "2026-09-23",
-    evidenceStatus: "Technical report · arXiv v1",
+    evidenceStatus: "Technical report · arXiv v1 · simulation code/model documentation reviewed · contact-aware hardware assets excluded from reviewed release",
     author: "RoboSkin.ai Editorial Team",
     date: "2026-09-25",
-    updated: "2026-09-25",
-    readTime: "7 min read",
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# InternW0 links asynchronous world prediction with contact-aware pipetting
 
 Shanghai AI Laboratory's Physical Intelligence Team introduced InternW0, a foundational physical world model for efficient real-world interactions, in a technical report submitted to arXiv on September 23, 2026. The system separates slower video prediction from faster action generation and adds force and tactile channels during contact-aware post-training. Its dexterous pipetting experiment connects world-model research to tool contact, but the headline laboratory scores measure task progress rather than complete-workflow success. [Paper and submission record](https://arxiv.org/abs/2609.27656).
@@ -3667,7 +3738,7 @@ Shanghai AI Laboratory's Physical Intelligence Team introduced InternW0, a found
 
 - InternW0 reuses predictive video context while updating actions from incoming observations. Force and tactile histories can condition the action expert during downstream post-training.
 - The five-stage pipetting task reports 65.3% average progress over 15 trials, versus 46.7% for π0.5 and 18.7% for Fast-WAM. These percentages do not mean that the complete procedure succeeded that often.
-- The paper reports 7,233.5 pretraining hours and 60.73 ms critical-path action latency on RTX 5090D. Neither figure describes a downloadable tactile dataset or an end-to-end robot control guarantee; official model and code buttons were disabled when checked. [Real-robot results](https://arxiv.org/html/2609.27656v1#S5), [efficiency](https://arxiv.org/html/2609.27656v1#S6) and [project page](https://internrobotics.github.io/internw0).
+- The paper reports 7,233.5 pretraining hours and 60.73 ms critical-path action latency on RTX 5090D. Neither figure describes a downloadable tactile dataset or an end-to-end robot control guarantee; current code and model entry points have narrower scope than the paper’s contact-aware experiments. [Real-robot results](https://arxiv.org/html/2609.27656v1#S5), [efficiency](https://arxiv.org/html/2609.27656v1#S6) and [project page](https://internrobotics.github.io/internw0).
 
 ## How does the model keep predictions useful during contact?
 
@@ -3703,7 +3774,22 @@ Engineers still need to budget sensor acquisition, communication and actuator be
 
 This is an arXiv v1 technical report, and RoboSkin has not independently reproduced its results. Laboratory evidence is limited to the reported tasks and trials; sustained operation, disturbance recovery and transfer to other instruments need further evaluation.
 
-On September 25, the official project provided the paper and demonstration videos, but its GitHub, Hugging Face and ModelScope buttons were disabled rather than linked to releases. No downloadable InternW0 weights, complete implementation or EgoLab archive was verified there. The paper's CC BY 4.0 license does not establish a license for unreleased software, models or data. Reported training scale and accessible release assets must remain separate. [Official availability](https://internrobotics.github.io/internw0).
+The September 25 review found disabled release buttons. By November 4, the [official project](https://internrobotics.github.io/internw0) links a public repository and a three-checkpoint Hugging Face collection. The [versioned repository documentation](https://github.com/InternRobotics/InternW0/tree/eceefc35b26d131c67048cb2cf26fecbee5ea5a5) describes RoboTwin and LIBERO training/evaluation adapters and explicitly excludes force/tactile, real-robot and laboratory assets. Code is MIT with third-party exceptions. The [Base model card](https://huggingface.co/InternRobotics/InternW0-Base) labels its weights MIT, but describes an initialization requiring target-domain post-training and separate Wan/DINO assets, not a ready-to-run pipetting controller. No checkpoint payload, EgoLab archive or hardware execution was verified here.
+
+## Use two clocks and a release-specific action contract
+
+The video expert and action expert do different jobs. The video branch supplies future context without directly consuming robot-specific candidate actions. The action branch uses that context and current observations to generate commands. This is not, by itself, an interface for testing several candidate commands and comparing their predicted consequences. [Architecture](https://arxiv.org/html/2609.27656v1#S2.SS1).
+
+For a proposed integration, record both the age of the cached video plan and the timestamp of the observation used by the latest action query. Also retain query completion, executed-prefix length and the next observation. A fast action response can still use older predictive context; a freshly generated plan can still precede a long unobserved action segment.
+
+| Contract | Check before transferring a result |
+| --- | --- |
+| State/action vector | Thirty-seven slots include absent channels masked out of training; zero padding is not a valid zero-valued command |
+| Contact extension | Measured histories condition the downstream model; predicted contact outputs are expected feedback, not automatically force-controller references |
+| Released evaluator | Default LIBERO evaluation executes sixteen actions per chunk; changing that count changes the protocol |
+| Physical outcome | Ordered subtask progress, full completion and instrument accuracy require separate evidence |
+
+The [release evaluation guide](https://github.com/InternRobotics/InternW0/blob/eceefc35b26d131c67048cb2cf26fecbee5ea5a5/docs/EVALUATION.md) names the required simulation assets and evaluation records. Its README says paper benchmark numbers were not rerun during release validation. Public files make inspection possible, but do not independently reproduce the paper's hardware claims. See the [world-model interface map](/robot-world-models#prediction-runtime-contracts) for matched timing and outcome comparisons.
 
 ## Sources and related resources
 
@@ -3711,6 +3797,8 @@ On September 25, the official project provided the paper and demonstration video
 - [Technical report and experimental tables](https://arxiv.org/html/2609.27656v1)
 - [Official InternW0 project](https://internrobotics.github.io/internw0)
 - [RoboSkin datasets directory](/datasets)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
   },
   {
@@ -4848,7 +4936,7 @@ For tactile research, better contact mechanics could improve the inputs to a sen
     id: 'agile-wam-tactile-world-action-model-robot-control',
     title: 'Agile-WAM pairs fast touch prediction with robot actions',
     seoTitle: 'Agile-WAM: Tactile Robot Control, Results and Latency',
-    seoDescription: 'Examine Agile-WAM’s five robot tasks, 63/100 trial result, conflicting latency figures and code status. Learn what its tactile world-action model changes.',
+    seoDescription: "Assess Agile-WAM predictive-loss ablations, action prefixes and recovery evidence; retain baseline differences and unresolved timing discrepancies.",
     excerpt: 'The UC Davis and Analog Devices preprint combines action generation with visual and tactile prediction. Its task results are promising, but its latency claims need a closer reading.',
     content: `# Agile-WAM pairs fast touch prediction with robot actions
 
@@ -4900,20 +4988,37 @@ The same analysis argues against assuming edge-device readiness from an RTX 4090
 
 ## Limitations and availability
 
-As checked on September 20, the [official project](https://hanchuzhou.github.io/TARO_project_page/) shows task demonstrations and labels its code “coming soon.” No linked checkpoint or experiment-dataset download was verified there. The arXiv record does not state peer-reviewed acceptance. RoboSkin reviewed the paper and project, but did not run the model or reproduce any robot trials.
+The November 4 recheck of the [official project](https://hanchuzhou.github.io/TARO_project_page/) found task demonstrations and the same code “coming soon” label recorded in September. No linked checkpoint or experiment-dataset download was verified there. The arXiv record does not state peer-reviewed acceptance. RoboSkin reviewed the paper and project, but did not run the model or reproduce any robot trials.
 
 Use the [benchmark directory](/benchmarks) to compare protocols and the [tactile sensor guide](/sensors) to check hardware assumptions. The cover is an original explanatory diagram, not an experimental image.
+
+## Test predictive learning and physical recovery as different claims
+
+A predictive objective can improve a policy even when no candidate-action search occurs at deployment. Agile-WAM transforms the current fused observation through six flow steps; those steps do not acquire six new tactile measurements. A next-frame tactile target is supervision for anticipation, not proof that the robot checks contact after every executed action. [Method and ablations](https://arxiv.org/html/2609.20761v1).
+
+The most informative ablation holds latent capacity fixed while removing prediction losses. It addresses whether the training objective helps beyond a larger representation. Broader baseline comparisons ask a different question: VITA-VT is the authors' tactile extension, and their Tactile-WAM comparison reproduces its core attention design inside the selected benchmark implementation. These are not interchangeable with testing every upstream released stack under its original protocol.
+
+| Evaluation question | Evidence to retain in a proposed replication |
+| --- | --- |
+| Does prediction help learning? | Equal-capacity ablation, identical data and checkpoint-selection rule |
+| Can the robot recover? | Initial failure, corrective attempts, interventions and final outcome for every trial |
+| Is feedback fast enough? | Sensor timestamp, inference start/end, eight-action prefix duration and next observation |
+| Does the interface transfer? | Sensor modality, calibration and pressure/force channel meanings |
+
+The demonstrations deliberately include corrective behavior, and the project shows selected recoveries. Those examples do not supply a conditional success rate after an initial failure. A new evaluation should count those attempts rather than infer general recovery from a successful video. Retain the paper's best-checkpoint simulation reporting and the unresolved timing discrepancy when comparing systems in the [world-model runtime map](/robot-world-models#prediction-runtime-contracts).
 
 ## Sources
 
 - [Agile-WAM arXiv record, submitted September 17, 2026](https://arxiv.org/abs/2609.20761)
 - [Agile-WAM v1: methods, task counts and inference table](https://arxiv.org/html/2609.20761v1)
 - [Official project: demonstrations and code status](https://hanchuzhou.github.io/TARO_project_page/)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Research results are author-reported; RoboSkin has not run these models or robot experiments.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile robot control',
     image: '/generated/news/agile-wam-prediction-horizons.png',
     imageAlt: 'Diagram of Agile-WAM generating an action segment while predicting next-step touch and longer-horizon vision from current observations.',
