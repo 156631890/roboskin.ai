@@ -220,12 +220,85 @@ export const structureNewPages: SeoTopicPage[] = [
     sources: [{ label: 'Single-layer hydrogel skin: author-accepted manuscript', href: 'https://www.repository.cam.ac.uk/items/c0f9486d-ef1a-42c8-bd8a-27ca9e2a9828' }, { label: 'Three-channel textile: publisher abstract and metadata', href: 'https://doi.org/10.1016/j.nanoen.2026.112233' }, { label: 'Electronic skin pressure-sensor mechanisms and materials review', href: 'https://www.mdpi.com/1424-8220/20/16/4407' }, { label: 'Microstructured dielectric pressure sensors: original research', href: 'https://www.nature.com/articles/nmat2834' }, { label: 'Skin-inspired organic digital mechanoreceptor: original research', href: 'https://doi.org/10.1126/science.aaa9306' }],
   },
   {
-    ...shared, path: '/robot-tactile-sensors', title: 'Robot Tactile Sensors: Models and Selection', h1: 'Robot Tactile Sensor Models: Specs and Selection',
-    description: 'Robot tactile sensor models compared by sensing type, force range, sampling rate, interface and vendor, with sources and explicit unknown specifications.',
+    ...shared, updated: "2026-11-04", revisionNote: "November 4, 2026: reviewed model-library interpretation and added a specification-to-interface handoff. Existing 17 records retain their individual source dates; no device testing or live stock check.", path: '/robot-tactile-sensors', title: 'Robot Tactile Sensors: Models and Selection', h1: 'Robot Tactile Sensor Models: Specs and Selection',
+    description: "Select robot tactile sensors using dated evidence, output units, coverage, acquisition timing and calibration; keep missing specifications explicit.",
     introduction: 'A robot tactile sensor is a device that measures contact at a robot surface and exposes a signal for perception or control. Robot tactile sensor selection depends on the contact geometry, force range, sampling path and integration interface. The model library below preserves the source-review date for each record and separates published specifications from missing information.',
     kicker: 'Model library', intent: 'Select robot tactile sensor models using source-specific specifications, not a duplicate sensing-principles guide.', keywords: ['robot tactile sensor', 'tactile sensor models', 'sensor force range', 'tactile sensing'],
     quickAnswer: ['The library contains 17 existing sensor records. It is a tracked set, not a complete market census.', 'Specifications are taken from the linked manufacturer documentation or original research sources. No unreported rate, interface or force range is inferred from a related product.', 'Review is manual and event-driven: check a record when its source release changes or a correction arrives. There is no automatic refresh; the date on each row records the evidence actually reviewed.'],
     sections: [
+      {
+        "id": "specification-handoff",
+        "heading": "Turn a specification row into a usable interface requirement",
+        "body": [
+          "The 17 records below are dated source summaries. A page-level revision does not mean every manufacturer specification has been freshly measured or that every device is currently in stock. Begin with the exact model and revision, then follow the linked profile or primary source for the conditions behind a field.",
+          "The DIGIT and TSF-85 records illustrate why a single rate column is not enough. DIGIT’s paper and interface describe camera acquisition settings; TSF-85 distinguishes pressure-array refresh, dynamic sensing and USB transport. Neither field alone is the rate of a calibrated force estimate or the bandwidth of an external robot controller."
+        ],
+        "table": {
+          "headers": [
+            "Requirement",
+            "Record from the exact configuration",
+            "Reject this shortcut"
+          ],
+          "rows": [
+            [
+              "Quantity and units",
+              "Raw image/count/field or calibrated force, pressure or geometry",
+              "Interpreting a numeric SDK output as newtons without a calibration contract"
+            ],
+            [
+              "Spatial footprint",
+              "Actual active area, element layout, blind regions and contact geometry",
+              "Comparing image pixels directly with independent three-axis sensing elements"
+            ],
+            [
+              "Timing",
+              "Acquisition configuration, complete sample interval, timestamps and processing delay",
+              "Using interface throughput as full-array refresh or action frequency"
+            ],
+            [
+              "Mechanical compatibility",
+              "Mount, cover, allowable deformation and replacement method",
+              "Transferring a flat-sample result to a curved mounted surface unchanged"
+            ],
+            [
+              "Software and reuse",
+              "Supported hardware revision, pinned driver/model and relevant terms",
+              "Assuming a public repository licenses every asset or supports every variant"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Resolve unknown fields before making them requirements",
+            "body": [
+              "Not published in this directory means the reviewed evidence did not establish that field. It is neither a zero value nor proof that a supplier has never documented it. Record the exact question and source revision, and leave the field unresolved until documentation or a measurement addresses it.",
+              "For a force-based task, specify loading direction, contact geometry, calibration range and acceptable error before comparing candidates. For a slip task, define an independently labelled slip event and acceptable false alarms and delays. The correct choice follows the required observation and failure cost, not the largest number in a specification table."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "DIGIT acquisition and model boundaries",
+            "href": "/sensors/digit"
+          },
+          {
+            "label": "TSF-85 pressure, dynamic and transport channels",
+            "href": "/sensors/robotiq-tsf-85"
+          },
+          {
+            "label": "XELA uSkin model-specific coverage and rate",
+            "href": "/sensors/xela-uskin"
+          },
+          {
+            "label": "Define the calibration reference",
+            "href": "/guides/tactile-sensor-calibration"
+          },
+          {
+            "label": "Build an acceptance trial",
+            "href": "/guides/how-to-choose-a-tactile-sensor#acceptance-trial"
+          }
+        ]
+      },
       { heading: 'Choose the model after defining the measurement', body: ['Start with the required contact footprint and signal: a taxel array, a reconstructed surface, an estimated force or a dynamic vibration channel. Compare normal and shear force only when calibration, loading geometry and units match.', 'An image frame rate, USB transport rate and calibrated force update rate are different values. If the source does not establish the quantity required by your controller, record it as an unresolved integration requirement.'], table: { headers: ['Field', 'What to compare', 'What not to assume'], rows: [
         ['Type', 'Transduction principle and contact surface geometry', 'All sensors in one family have the same spatial resolution'],
         ['Force range', 'Normal and shear limits with the calibration conditions', 'A raw pressure count is calibrated force'],
