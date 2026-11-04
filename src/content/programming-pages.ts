@@ -23,14 +23,84 @@ export const roboticsProgramming: ProgrammingPage = {
   path: '/robotics-programming',
   title: 'Robotics Programming: Python, ROS 2 & Projects',
   h1: 'Robotics Programming: From First Code to Sensor Feedback',
-  description: 'Start robotics programming with Python, ROS 2 and sensor feedback. Follow a hardware-free tactile data exercise, then explore messages, replay and robot learning.',
+  description: "Learn robot programming through inspectable data, typed messages and replay; use completion criteria to separate software exercises from robot validation.",
   kicker: 'Programming & tutorials',
   intent: 'A single beginner overview for robotics programming, robot programming and programming robots.',
-  updated: '2026-09-16', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  revisionNote: "November 4, 2026: added exercise completion criteria and a replay debugging example. Original executed-test records retain their dates; ROS runtime remains unexecuted locally.",
+  updated: "2026-11-04", priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['robotics programming', 'robot programming', 'programming robots', 'Python robotics', 'ROS 2'],
   verification: 'The Python project below has been run in a clean environment. The ROS 2 walkthrough identifies its source checks, upstream build evidence and unexecuted runtime steps separately.',
   quickAnswer: ['Robotics programming connects observations to decisions, control and fresh feedback. You can learn its data and communication foundations on a laptop before working with a robot.'],
   sections: [
+    {
+      "id": "learning-checkpoints",
+      "heading": "Know when an exercise is complete",
+      "body": [
+        "Progress is easier to judge from an inspectable result than from an installed package. Finish each exercise by explaining its inputs, output and failure case. The criteria below build on the existing projects; they do not add an untested robot driver or certify readiness to operate hardware.",
+        "A passing data check establishes only the conditions it actually checks. Valid rows, consistent dimensions and increasing timestamps do not establish calibrated force, correct camera geometry or a useful learned policy."
+      ],
+      "table": {
+        "headers": [
+          "Exercise",
+          "Evidence you should retain",
+          "Next question"
+        ],
+        "rows": [
+          [
+            "Python CSV processing",
+            "Input fixture, command, environment, quality report and generated plots",
+            "How are missing or invalid values distinguished from measured zero?"
+          ],
+          [
+            "Numeric episode inspection",
+            "Episode boundaries, timestamps, dimensions and disclosed checker limits",
+            "Which images, units and action semantics were not checked?"
+          ],
+          [
+            "ROS publication",
+            "Message definition, actual publisher/subscriber configuration and received samples",
+            "Are the endpoints compatible, and can samples be lost?"
+          ],
+          [
+            "Record and replay",
+            "Bag metadata, topic/type, message count and stopped live publisher",
+            "Are you replaying the intended observation stream without mixing sources?"
+          ],
+          [
+            "Physical integration",
+            "Sensor identity, calibration reference, clock/frame mapping and application plan",
+            "What behavior and failure handling must still be evaluated on hardware?"
+          ]
+        ]
+      },
+      "subsections": [
+        {
+          "heading": "Example: replayed timestamps look old",
+          "body": [
+            "Suppose a saved message is replayed the next day. Subtracting its original acquisition timestamp from the current wall clock includes the time spent in storage. It cannot recover the original live transport delay. First identify which clock each field uses, whether replay supplies simulated time and what the application measures. The existing starter-kit walkthrough deliberately separates replay from latency measurement.",
+            "Similarly, receiving no messages can be a transport-contract issue. The official ROS 2 QoS documentation explains that incompatible endpoint policies can prevent communication and best-effort delivery can lose samples. Inspect the declared policies and actual endpoint information before changing message content. This is a documentation-based debugging example; no new ROS process or bag was run for this update."
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "ROS 2 Lyrical: official QoS source",
+          "href": "https://github.com/ros2/ros2_documentation/blob/lyrical/source/ROS-Framework/interfaces/topics/About-Quality-of-Service-Settings.rst"
+        },
+        {
+          "label": "Python exercise and actual verification record",
+          "href": "/guides/python-tactile-data-processing"
+        },
+        {
+          "label": "LeRobot checker scope and sample outputs",
+          "href": "/guides/lerobot-dataset-format"
+        },
+        {
+          "label": "ROS 2 source, build and runtime evidence",
+          "href": "/guides/ros2-tactile-sensing#verification-ladder"
+        }
+      ]
+    },
     {
       id: 'what-is-robotics-programming', heading: 'What is robotics programming?',
       body: ['Robotics programming is the work of turning a task into software that senses the world, estimates the current state, chooses what to do, and checks the result. A fixed sequence can be useful, but a physical robot also has to deal with uncertain measurements and changing conditions.', 'Think of a gripper picking up a cup. Perception locates the cup; state processing combines observations with the arm position; planning chooses an approach; control tracks a target; feedback reveals whether contact happened. A failed observation, stale timestamp or unexpected force can change the next decision. This tutorial path starts with that observation and feedback layer.'],

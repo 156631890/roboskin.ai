@@ -125,8 +125,8 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/physical-ai',
     title: 'Physical AI: Models, Robots & Real-World Action',
     description:
-      'Physical AI connects multimodal perception, reasoning, robot policies, control, embodiment, safety, and measured feedback. Map the full system and its tactile contact layer.',
-    updated: '2026-08-22',
+      "Physical AI connects multimodal perception with action. Compare demonstrations, repeated trials and changed-condition evidence before deployment.",
+    updated: '2026-11-04',
     priority: 0.92,
     changeFrequency: 'weekly',
     index: true,

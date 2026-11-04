@@ -85,12 +85,12 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/ai-robotics',
     title: 'AI and Robotics: Models, Learning & Physical Action',
     description:
-      'AI provides perception, reasoning, prediction, and learned policies; robotics provides sensors, control, actuators, safety, and a physical body. Map the closed loop from instruction to action and touch feedback.',
+      "Understand how AI models connect to robot sensors, action adapters and controllers, with a practical method for tracing failures across those interfaces.",
     h1: 'How artificial intelligence works in robots',
     kicker: 'AI and robotics hub',
     intent: 'Answer-first guide to AI in robotics, robot AI, embodied AI, VLMs, VLA models, world models, robot policies, control, and tactile feedback.',
-    updated: '2026-10-22',
-    revisionNote: 'October 22, 2026: added the distinction between a general model and the tactile context, action adapter and controller used in two Astra-based research setups.',
+    updated: "2026-11-04",
+    revisionNote: "November 4, 2026: added an interface-level failure trace and qualified touch inputs. Existing research examples and dates retained; no robot or API test.",
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'WebPage',
@@ -111,9 +111,77 @@ export const seoTopicPages: SeoTopicPage[] = [
     quickAnswer: [
       'Artificial intelligence and robotics are related but different. AI supplies methods for perception, prediction, learning, reasoning, and action selection; robotics supplies sensors, embodiment, actuators, control, integration, and physical safety.',
       'They form a closed loop when a robot observes its environment, an AI model or engineered policy selects an action, controllers execute it through the robot body, and new sensor feedback reports what actually happened.',
-      'Touch closes the contact-specific part of that loop. Robot skin and tactile sensors measure physical interaction, while tactile AI interprets those signals so a policy or controller can respond.',
+      'Touch can provide contact-specific feedback when a suitable sensor is connected to the decision path. Which quantities are measured or inferred depends on the device and calibration; logging a stream alone does not mean a policy uses it.',
     ],
     sections: [
+    {
+      "id": "robot-ai-failure-trace",
+      "heading": "Trace a failed action across the interfaces",
+      "body": [
+        "A robot can fail with a sensible language answer, a valid action array and a functioning controller. Those observations test different parts of the system. Trace one attempt from its recorded inputs to its physical outcome before changing the model or attributing the failure to a missing sensor.",
+        "The Open X-Embodiment paper gives a concrete reason to inspect the adapter: its coarse action alignment retains differences in coordinate frames and absolute, relative or velocity commands. Equal vector dimensions do not establish equal physical meaning. The OpenVLA project separately distinguishes direct evaluation on supported setups from fine-tuned Franka policies. A shared model name does not erase that adaptation boundary."
+      ],
+      "table": {
+        "headers": [
+          "Observed symptom",
+          "First evidence to inspect",
+          "Claim to withhold"
+        ],
+        "rows": [
+          [
+            "Wrong object selected",
+            "Instruction, camera view and the model’s actual observation",
+            "That motion control caused a semantic selection error"
+          ],
+          [
+            "Correct object, wrong direction or scale",
+            "Frame, units, normalization and absolute/relative action convention",
+            "That an action array is portable because its length matches"
+          ],
+          [
+            "Command accepted, contact task fails",
+            "Executed trajectory, force/contact observations, assistance and final criterion",
+            "That a successful API response establishes physical completion"
+          ],
+          [
+            "Task finishes after intervention",
+            "Intervention time, action taken, retry count and completion rule",
+            "That the whole attempt was autonomous"
+          ]
+        ]
+      },
+      "subsections": [
+        {
+          "heading": "Preserve the attempt before comparing fixes",
+          "body": [
+            "For a proposed failure record, retain the task and starting state, model/checkpoint, observation timestamps, proposed action, adapter output, controller response and independently assessed outcome. Record unavailable fields as unavailable. A video may show the motion while leaving the model input, hidden assistance or applied command unresolved.",
+            "Then change the implicated layer and compare against the original protocol. Improving an image classifier is not the same intervention as changing a frame transform or adding reactive contact control. Report which change was made and which failure it addresses. This diagnostic sequence is editorial guidance, not an experiment conducted by RoboSkin.ai."
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Open X-Embodiment: action consolidation and limits",
+          "href": "https://arxiv.org/html/2310.08864v9#S4.SS1"
+        },
+        {
+          "label": "OpenVLA: direct evaluation versus adaptation",
+          "href": "https://openvla.github.io/"
+        },
+        {
+          "label": "Inspect numeric state/action records",
+          "href": "/guides/lerobot-dataset-format"
+        },
+        {
+          "label": "Separate prediction from feedback",
+          "href": "/robot-world-models"
+        },
+        {
+          "label": "Define a research or integration review",
+          "href": "/research-services"
+        }
+      ]
+    },
       {
         heading: 'AI and robotics are not the same thing',
         body: [

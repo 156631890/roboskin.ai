@@ -24,7 +24,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /solutions | rewritten and production verified in PR120 | 403 | 2 |
 | /applications | inventory only; claim-by-claim review pending | 653 | 12 |
 | /technology | inventory only; claim-by-claim review pending | 2571 | 19 |
-| /physical-ai | inventory only; claim-by-claim review pending | 908 | 22 |
+| /physical-ai | individual AI/interface evidence review; production verification pending | 908 | 22 |
 | /resources | rewritten and production verified in PR122 | 2711 | 70 |
 | /faq | inventory only; claim-by-claim review pending | 488 | 3 |
 | /research | rewritten and production verified in PR122 | 3103 | 192 |
@@ -168,9 +168,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/global-robot-installations-542000-physical-ai-touch | rewritten and production verified in PR113 | 1001 | 2 |
 | /robot-grippers | rewritten and production verified in PR125 | 1187 | 2 |
 | /electronic-skin | rewritten and production verified in PR134 | 772 | 11 |
-| /robot-tactile-sensors | individual system-integration review; production verification pending | 1250 | 2 |
+| /robot-tactile-sensors | rewritten and production verified in PR135 | 1250 | 2 |
 | /humanoid-robot-companies | inventory only; claim-by-claim review pending | 850 | 2 |
-| /embodied-ai | inventory only; claim-by-claim review pending | 736 | 1 |
+| /embodied-ai | individual AI/interface evidence review; production verification pending | 736 | 1 |
 | /guides/3d-printed-tactile-sensors | rewritten and production verified in PR118 | 1376 | 2 |
 | /guides/optical-tactile-sensor-maintenance | rewritten and production verified in PR106 | 1273 | 7 |
 | /guides/optical-vs-capacitive-tactile-sensors | rewritten and production verified in PR106 | 1360 | 6 |
@@ -185,21 +185,21 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /sensors/reskin | rewritten and production verified in PR116 | 1198 | 9 |
 | /guides/gelsight-vs-digit | rewritten and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | rewritten and production verified in PR118 | 3426 | 3 |
-| /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
+| /robotics-programming | individual AI/interface evidence review; production verification pending | 1285 | 12 |
 | /guides/ros2-tactile-sensing | rewritten and production verified in PR111 | 2153 | 21 |
 | /guides/python-tactile-data-processing | rewritten and production verified in PR106 | 2851 | 16 |
 | /guides/lerobot-dataset-format | rewritten and production verified in PR118 | 4604 | 19 |
 | /guides/tactile-sensor-calibration | reviewed and deployed in PR102 | 3121 | 33 |
-| /ai-robotics | inventory only; claim-by-claim review pending | 2049 | 43 |
+| /ai-robotics | individual AI/interface evidence review; production verification pending | 2049 | 43 |
 | /robot-foundation-models | rewritten and production verified in PR133 | 8015 | 8 |
-| /robot-skin | individual system-integration review; production verification pending | 1495 | 77 |
+| /robot-skin | rewritten and production verified in PR135 | 1495 | 77 |
 | /tactile-ai | rewritten and production verified in PR131 | 3220 | 134 |
-| /e-skin | individual system-integration review; production verification pending | 2724 | 16 |
-| /humanoid-robot-skin | individual system-integration review; production verification pending | 1560 | 25 |
+| /e-skin | rewritten and production verified in PR135 | 2724 | 16 |
+| /humanoid-robot-skin | rewritten and production verified in PR135 | 1560 | 25 |
 | /applications/robot-hand-tactile-sensor | inventory only; claim-by-claim review pending | 1203 | 31 |
 | /applications/soft-robotic-skin | rewritten and production verified in PR103 | 611 | 10 |
 | /guides/flexible-tactile-sensor-array | rewritten and production verified in PR103 | 613 | 10 |
-| /physical-ai-touch | individual system-integration review; production verification pending | 2153 | 29 |
+| /physical-ai-touch | rewritten and production verified in PR135 | 2153 | 29 |
 | /applications/robot-gripper-tactile-sensor | rewritten and production verified in PR103 | 694 | 7 |
 | /guides/tactile-sensor-for-robots | rewritten and production verified in PR103 | 935 | 10 |
 | /guides/robot-touch-sensor | rewritten and production verified in PR103 | 881 | 3 |
@@ -345,4 +345,8 @@ Three individual revisions: textile readout and command boundaries, accepted-man
 
 ## Robot-skin system integration review
 
-Five pages receive distinct installed-system, compatibility, body-zone, policy-role and specification-interface guidance. Shared F3T correction also appears on /technology, which is not counted as individually reviewed by this batch. Original source dates and useful modules retained. Whole-site review remains incomplete.
+Five pages receive distinct installed-system, compatibility, body-zone, policy-role and specification-interface guidance. The F3T correction renders on /e-skin; /technology imports other constants from the module and does not render this passage. It is not counted as individually reviewed by this batch. Original source dates and useful modules retained. Whole-site review remains incomplete.
+
+## AI, embodiment and programming review
+
+Four distinct revisions: failure tracing, transfer evidence, exercise completion and physical-evaluation scope. Original modules and dated execution records retained. No robot or model runtime claim. Whole-site work remains active.
