@@ -1509,7 +1509,7 @@ The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes ex
     id: 'tarl-tactile-reward-learning-demonstrations',
     title: 'TaRL learns contact-rich rewards from tactile demonstrations',
     seoTitle: 'TaRL Learns Rewards from Tactile Demonstrations',
-    seoDescription: 'TaRL turns tactile deformation histories into dense robot-learning rewards. Review its simulation and real-world results, data needs and release status.',
+    seoDescription: "Separate TaRL progress labels, normalized touch, reward transfer and policy training; interpret physical results with their undisclosed trial denominator.",
     excerpt: 'TaRL regresses task progress from successful and failed tactile demonstrations, then uses that signal to shape contact-rich reinforcement learning.',
     category: 'Tactile reward learning',
     image: '/generated/news/tarl-tactile-reward-learning-demonstrations.png',
@@ -1527,15 +1527,15 @@ The [official project page](https://zblzz.github.io/FunCo-Grasp-Web/) exposes ex
     evidenceStatus: 'Preprint · arXiv v1 · simulation and two real-world tasks · project videos public · no code or dataset release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-30',
-    updated: '2026-09-30',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# TaRL learns contact-rich rewards from tactile demonstrations
 
 Researchers from National Taiwan University and Delta Electronics released Tactile Reward Learning, or TaRL, on September 29, 2026. TaRL learns a dense progress signal from sequences of tactile deformation maps, then adds that signal to reinforcement learning for contact-rich tasks. The reported gains include nut-threading success rising from 34% to 56% in simulation and cube pickup rising from 37% to 97% on a physical robot. [Paper and version record](https://arxiv.org/abs/2609.36785).
 
 ## Key takeaways
 
-- TaRL treats touch as reward supervision, not only as a policy observation. Successful, rewound and failed tactile sequences teach a causal model to estimate task progress.
+- TaRL treats touch as reward supervision, not only as a policy observation. Successful, rewound and failed tactile sequences teach a temporally causal model to estimate task progress; this is not a causal-effect estimate.
 - The simulation reward model uses 200 successful and 800 failed demonstrations per task. Real-world reward learning uses 40 successful and 40 failed trajectories per task, while the offline policy dataset contains another 90 successful and 90 failed trajectories.
 - The real-world percentages are averaged across three random seeds, but the manuscript does not state the number of inference trials per seed. The 60-point cube-pickup gain therefore lacks a disclosed evaluation denominator.
 
@@ -1559,13 +1559,21 @@ On the physical robot, cube pickup and peg insertion each use 80 demonstrations 
 
 RoboSkin analysis: TaRL moves tactile sensing one step upstream in the learning stack. Instead of asking a policy to discover how touch relates to success, it first converts contact history into an explicit training signal. This could be useful when teams have [tactile demonstrations](/datasets) but cannot write a trustworthy force-aware reward.
 
-The method also exposes a scaling trade-off. Its reward model is local enough to tolerate position changes and, in one box-to-can experiment, a new object instance. Yet it still needs task-specific successful and failed touch sequences. It is not a general tactile foundation reward, and it does not eliminate data collection for a new behavior.
+The method also exposes a scaling trade-off. Its reward model is local enough to tolerate position changes and, in one box-to-can experiment, a new object instance. That experiment transfers the reward while training a policy on the new task; it is not zero-shot transfer of the robot policy. Yet it still needs task-specific successful and failed touch sequences. It is not a general tactile foundation reward, and it does not eliminate data collection for a new behavior.
 
 ## Limitations and availability
 
-TaRL is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its experiments. The comparison isolates modality carefully, but simulation and hardware use different RL algorithms. The physical study covers two tasks on one SO-101 setup, and the missing inference-trial denominator limits statistical interpretation of its largest percentage gain.
+TaRL is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its experiments. The comparisons use specified baselines and training recipes; simulation and hardware use different RL algorithms. The physical study covers two tasks on one SO-101 setup, and the missing inference-trial denominator limits statistical interpretation of its largest percentage gain.
 
-The [official project page](https://embodiedai-ntu.github.io/tarl/) provides method explanations, plots and videos. At verification time it did not expose a public implementation repository, downloadable demonstrations, trained reward models or a software/data license. The arXiv manuscript's availability does not make those implementation assets reusable.
+The [official project page](https://embodiedai-ntu.github.io/tarl/) provides method explanations, plots and videos. The November 4 recheck did not identify a public implementation repository, downloadable demonstrations, trained reward models or a software/data license. The arXiv manuscript's availability does not make those implementation assets reusable.
+
+## What does a progress reward actually certify?
+
+Successful trajectories receive elapsed-fraction targets, while failed trajectories receive zero throughout. These are supervision conventions: a partial but useful contact in a failed demonstration is not labeled as partial progress. Rewound examples add a temporal ordering signal, but do not supply independent physical measurements of how close every state is to success. [Training-label construction](https://arxiv.org/html/2609.36785v1).
+
+The preprocessing normalizes deformation by each sequence's maximum. Consequently, equal normalized values need not represent equal physical loads. The model also samples a fixed history rather than consuming every recorded frame. A useful reward curve therefore cannot serve as a calibrated force ceiling or prove that brief contact events are preserved.
+
+For a new task, document three separate checks: whether the progress labels match the desired behavior; whether the transferred reward ranks held-out successes and failures; and whether a newly trained, frozen policy completes the task without assistance. Retain reward weights, task reward, failure examples and per-seed rollout counts. TaRL adds a learned term to the task reward; this does not establish a general guarantee that the original optimal policy is preserved. The [vision–touch evaluation guide](/visuo-tactile#training-and-runtime-touch) distinguishes reward quality from perception and control outcomes.
 
 ## Sources and related resources
 
@@ -1574,6 +1582,8 @@ The [official project page](https://embodiedai-ntu.github.io/tarl/) provides met
 - [Official TaRL project page and videos](https://embodiedai-ntu.github.io/tarl/)
 - [RoboSkin guide to tactile manipulation](/tactile-manipulation)
 - [RoboSkin robot-learning overview](/robot-learning)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
   },
   {
@@ -2194,7 +2204,7 @@ At publication time, the [official project page](https://blindgraspreflex.github
     id: 'tactic-tactile-encoder-fusion-benchmark',
     title: 'TACTIC finds no single best tactile encoder for contact-rich manipulation',
     seoTitle: 'TACTIC Tactile Encoder and Fusion Benchmark',
-    seoDescription: 'TACTIC evaluates 25 tactile encoder-fusion combinations over 2,180 robot rollouts. Review its task-specific results and downloadable 410-episode data.',
+    seoDescription: "Read TACTIC encoder adaptation, random versus temporal CLIP sampling, task-stage criteria and selected robustness tests; public metadata is not a reproduction.",
     excerpt: 'TACTIC crosses five tactile encoders with five conditioning methods on four real robot tasks. Its central result is conditional: the best combination changes with the contact problem.',
     category: 'Tactile learning benchmark',
     image: '/generated/news/tactic-tactile-encoder-fusion-benchmark.png',
@@ -2210,24 +2220,24 @@ At publication time, the [official project page](https://blindgraspreflex.github
     ],
     technicalFocus: ['tactile encoders', 'multimodal policy fusion', 'contact-rich manipulation', 'robot datasets'],
     sourceDate: '2026-09-25',
-    evidenceStatus: 'Preprint · arXiv v1 · real-robot ablation · four datasets available under MIT · code not released',
+    evidenceStatus: "Preprint · v1 · public four-dataset metadata inspected November 4 · payloads untested · code still marked coming soon",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-28',
-    updated: '2026-09-28',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# TACTIC finds no single best tactile encoder for contact-rich manipulation
 
 Researchers led by the University of Technology Nuremberg released TACTIC on September 25, 2026. TACTIC is a real-robot study of how five tactile encoders and five policy-conditioning methods interact across wiping, USB-C insertion and screw insertion. After 2,180 evaluation rollouts, the answer is not a universal winner: encoder and fusion choices depend on the task. [Paper and version record](https://arxiv.org/abs/2609.30969).
 
 ## Key takeaways
 
-- TACTIC evaluates 25 encoder-conditioning combinations on four tasks, with 20 rollouts for each reported ablation condition.
+- TACTIC evaluates 25 encoder-conditioning combinations on four tasks, with 20 rollouts per main-study condition; selected robustness conditions use ten.
 - The simplest ResNet18 plus concatenation reaches 80% termination on USB-C insertion, compared with 55% for the vision-only policy in that task.
-- Four official datasets are downloadable now and contain 410 episodes in total. The project page still labels policy code “coming soon.”
+- Four public dataset metadata files list 410 episodes in total; their payloads were not downloaded or decoded in our review. The project page still labels policy code “coming soon.”
 
 ## What changed
 
-Many tactile-policy papers change the sensor representation and fusion mechanism at the same time, making the source of an improvement hard to identify. TACTIC instead fixes an Action Chunking with Transformers policy and crosses five encoders—ResNet18, SARL, UniT, Sparsh and T3—with concatenation, FiLM, gated cross-attention, CLIP-style replacement and CLIP-style token conditioning.
+Many tactile-policy papers change the sensor representation and fusion mechanism at the same time, making the source of an improvement hard to identify. TACTIC instead fixes an Action Chunking with Transformers policy and crosses five encoders—ResNet18, SARL, UniT, Sparsh and T3—with concatenation, FiLM, gated cross-attention, CLIP-R random cross-modal sampling and CLIP-T temporally structured sampling. These are contrastive sampling schemes, not replacement versus token-conditioning mechanisms.
 
 The hardware uses two Franka FR3 arms in a leader-follower collection setup. The follower has two DIGIT sensors on a Franka Hand, an Intel RealSense D405 at the wrist and a D435 side camera. The team collects about 100 demonstrations per task at 30 Hz, using four pairs of replaceable DIGIT cartridges to introduce sensor variation. The policy predicts 120-step action chunks. [Experimental setup](https://arxiv.org/html/2609.30969v1#S4).
 
@@ -2235,9 +2245,9 @@ The hardware uses two Franka FR3 arms in a leader-follower collection setup. The
 
 USB-C insertion favors the uncomplicated baseline: ResNet18 with feature concatenation reaches 80% termination, while vision-only reaches 55%. Screw insertion instead favors semantic alignment, with Sparsh-CLIP-T and T3-CLIP-T each reaching 90% termination under the reported protocol. On other tasks, the same CLIP-style mechanisms can reduce performance. That reversal is the paper's main engineering result.
 
-The authors also introduce out-of-distribution “disco” lighting. Non-CLIP variants fail under that visual shift, while some Sparsh-plus-CLIP configurations preserve partial performance. Each out-of-distribution condition uses ten trials, so these percentages have wider uncertainty than the 20-rollout main ablations. [Results and OOD analysis](https://arxiv.org/html/2609.30969v1#S5).
+The authors also introduce out-of-distribution “disco” lighting. The selected non-CLIP variants fail under that visual shift, while some Sparsh-plus-CLIP configurations preserve partial performance; the robustness test does not rerun all 25 combinations. Each out-of-distribution condition uses ten trials, so these percentages have wider uncertainty than the 20-rollout main ablations. [Results and OOD analysis](https://arxiv.org/html/2609.30969v1#S5).
 
-The headline count needs careful interpretation. The 2,180 figure is evaluation rollouts across policies and conditions, not the size of the imitation-learning dataset. The [official Hugging Face collection](https://huggingface.co/collections/UTN-AIR/tactic) currently lists four datasets—screw, board, vase and USB-C—with 104, 102, 101 and 103 episodes respectively, or 410 episodes total. Dataset cards display an MIT license, 30 fps data and six cameras; several README bodies are still empty, so documentation depth does not yet match file availability.
+The headline count needs careful interpretation. The 2,180 figure is evaluation rollouts across policies and conditions, not the size of the imitation-learning dataset. The [official Hugging Face collection](https://huggingface.co/collections/UTN-AIR/tactic) currently lists four datasets—screw, board, vase and USB-C—with 104, 102, 101 and 103 episodes respectively, or 410 episodes total. On November 4, the four cards declare MIT and their metadata specifies 30 fps. Six image fields include side and wrist views, two DIGIT streams and two blank-reference streams; they do not establish six physical cameras. The README bodies contain only license metadata, limiting usage documentation.
 
 ## What this means for robotics
 
@@ -2249,7 +2259,15 @@ For teams building [visuo-tactile](/visuo-tactile) policies, TACTIC argues for a
 
 TACTIC is an arXiv v1 preprint, and RoboSkin.ai has not reproduced its 2,180 rollouts. The study uses one robot family, DIGIT sensors and four tasks. There is no confidence interval around most reported success rates, and 20 trials per setting cannot resolve small differences reliably. Performance under new sensor geometries or policies remains unknown.
 
-The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming soon.” The four datasets are publicly downloadable and display MIT licenses, but users should inspect each repository and file manifest before reuse. The arXiv manuscript uses arXiv's submission license; that does not license unreleased training code.
+The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming soon.” The four public dataset cards and metadata were readable and declare MIT. We did not verify archive integrity, decoding, training compatibility or any separately governed dependencies. The arXiv manuscript uses arXiv's submission license; that does not license unreleased training code.
+
+## Choose the task criterion before choosing an encoder
+
+TACTIC separates grasp, attempt, completion and termination. In its USB-C task, completion means reaching the correct position, not necessarily forcing the connector fully into the port. Neither that stage nor termination establishes electrical continuity. A purchasing or integration test needs its own measurable seating criterion. [Task definitions and training details](https://arxiv.org/html/2609.30969v1).
+
+The encoders also have different adaptation histories. Some are trained or adapted and then frozen; the ordinary ResNet baseline is jointly trained with the policy. T3 retains its original preprocessing, whereas other configurations subtract a blank-sensor reference. CLIP-R and CLIP-T differ in batch construction and size. Preserve these choices when comparing results instead of attributing every difference to model size or fusion alone.
+
+For a small pilot, record sensor cartridge, blank-reference capture, backbone revision, trainable layers, temporal sampling, fusion, task-stage criteria and trial counts. Select a configuration on development tasks, then evaluate it on separately specified conditions. Error bars across tasks do not quantify repeated-training uncertainty, and an attention visualization does not establish why a policy is robust. The [visuo-tactile evidence map](/visuo-tactile#training-and-runtime-touch) places this policy benchmark alongside representation and contact-estimation studies.
 
 ## Sources and related resources
 
@@ -2258,6 +2276,8 @@ The [project page](https://utn-air.github.io/TACTIC/) marks code as “coming so
 - [Official project page](https://utn-air.github.io/TACTIC/)
 - [Official four-dataset collection](https://huggingface.co/collections/UTN-AIR/tactic)
 - [RoboSkin tactile dataset directory](/datasets)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
   },
   {
@@ -2788,7 +2808,7 @@ An integration record should therefore include capture and receive timestamps, a
     id: 'propra-fingertip-sensor-pretraining',
     title: 'PROPRA anchors pre-touch and tactile signals to robot state and future actions',
     seoTitle: 'PROPRA Pretrains Proximity and Tactile Robot Sensors',
-    seoDescription: 'PROPRA aligns fingertip proximity and tactile histories with robot state and future actions. Check its four-task results, compute and code status.',
+    seoDescription: "Review PROPRA pretraining, policy fine-tuning, sampling differences and task-specific results; distinguish future-action training anchors from runtime inputs.",
     excerpt: 'AIST researchers pretrain sparse fingertip signals against proprioception and upcoming actions. Average real-robot success reaches 75.0%, but the advantage varies by task and remains within seed variation.',
     category: 'Tactile representation learning',
     image: '/generated/news/propra-fingertip-sensor-pretraining.png',
@@ -2806,8 +2826,8 @@ An integration record should therefore include capture and receive timestamps, a
     evidenceStatus: 'Preprint · arXiv v1 · code announced but not released',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-26',
-    updated: '2026-09-26',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# PROPRA anchors pre-touch and tactile signals to robot state and future actions
 
 Researchers at Japan's National Institute of Advanced Industrial Science and Technology and the CNRS-AIST Joint Robotics Laboratory introduced PROPRA on September 24, 2026. Short for PROprioceptive-and-PRoactive Anchoring, the method pretrains separate encoders for reflective proximity and pressure-sensitive tactile histories by aligning each with the robot's current state and upcoming actions. On four real-robot tasks, it reports a 75.0% average success rate. [Paper and version record](https://arxiv.org/abs/2609.29822).
@@ -2822,15 +2842,15 @@ Researchers at Japan's National Institute of Advanced Industrial Science and Tec
 
 The AIST gripper carries three tactile and six proximity channels. Each encoder receives 0.5 seconds of history. Proximity varies as the fingers approach an object; tactile stays near baseline until contact. After contact, the relationship reverses. In the authors' demonstrations, at least one sensor stays near its stationary value in more than half of the pretraining samples.
 
-That sparsity makes simple concatenation unreliable. Adding both raw histories to the vision-and-state diffusion policy raises average success from 30.4% to 40.4%, but MovePen falls from 31.7% to 20.0% and OpenLid also underperforms vision alone. More sensors can therefore create competition rather than useful context.
+Simple concatenation does not consistently help in this experiment. Adding both raw histories to the vision-and-state diffusion policy raises average success from 30.4% to 40.4%, but MovePen falls from 31.7% to 20.0% and OpenLid also underperforms vision alone. This comparison motivates task-specific fusion checks; it does not isolate sparsity as the sole cause of a failure.
 
-PROPRA aligns each sensor encoder independently to an anchor containing the current end-effector pose, gripper opening and next ten actions. The contrastive objective never directly pairs tactile and proximity. After pretraining, the frozen sensor encoders feed the imitation policy, while the anchor itself is removed.
+PROPRA aligns each sensor encoder independently to an anchor containing the current end-effector pose, gripper opening and next ten subsampled actions, spanning about 1.67 seconds. The contrastive objective never directly pairs tactile and proximity. After pretraining, the sensor encoders are fine-tuned end-to-end with the imitation policy; the anchor and its encoder are removed. The frozen encoders described in the representation probes are a separate evaluation setting.
 
 ## Results under the reported protocol
 
-The real-robot evaluation uses a UR5e on PickCup, PickSponge, MovePen and OpenLid, with 20 demonstrations per task. Every policy condition is trained with three seeds and evaluated for 20 trials per seed. PROPRA reaches 81.7% on both pickup tasks, 63.3% on MovePen and 73.3% on OpenLid. The corresponding image-anchor scores are 75.0%, 75.0%, 60.0% and 76.7%. [Complete comparison table](https://arxiv.org/html/2609.29822v1#S6).
+The real-robot evaluation uses a UR5e on PickCup, PickSponge, MovePen and OpenLid, with 50 demonstrations per task according to the manuscript’s Section V-A. The project page still says 20 per task; this unresolved source discrepancy should be checked before planning a reproduction. Every policy condition is trained with three seeds and evaluated for 20 trials per seed. PROPRA reaches 81.7% on both pickup tasks, 63.3% on MovePen and 73.3% on OpenLid. The corresponding image-anchor scores are 75.0%, 75.0%, 60.0% and 76.7%. [Complete comparison table](https://arxiv.org/html/2609.29822v1#S6).
 
-The 3.3-point average lead over the strongest image-anchored variant is modest, and the paper notes that per-task differences fall within variation across seeds. A fair reading is that PROPRA is competitive and strongest where sensor responses are sparse, not that it wins every manipulation setting.
+The average lead is 2.9 percentage points over the strongest image-plus-pair variant, or 3.3 points over plain image anchoring, and the paper notes that per-task differences fall within variation across seeds. A fair reading is that PROPRA is competitive and strongest where sensor responses are sparse, not that it wins every manipulation setting.
 
 Representation probes add a more specific result. Over the two seconds before contact, a linear predictor on the frozen proximity embedding achieves the highest time-to-contact R-squared on three of four tasks. On PickSponge it reaches 0.440 versus 0.377 for the image anchor. On MovePen, the image-plus-pair condition is slightly higher, 0.554 versus 0.544.
 
@@ -2844,9 +2864,22 @@ The paper also supplies a warning for multimodal [robot learning](/robot-learnin
 
 ## Limitations and availability
 
-PROPRA is an arXiv v1 preprint evaluated on one gripper, one robot and four grasp-oriented tasks. It does not compare directly with large-scale tactile foundation models, and it requires the demonstrated robot states and future action segments used as anchors. Pretraining takes about three to four hours and policy training about eight hours on one NVIDIA H200 with 141 GB of memory, which is a demanding reference configuration rather than a minimum requirement.
+PROPRA is an arXiv v1 preprint evaluated on one gripper, one robot and four grasp-oriented tasks. It does not compare directly with large-scale tactile foundation models, and its pretraining requires recorded robot states and future action segments as anchors. Those future segments are not required at inference. Pretraining takes about three to four hours and policy training about eight hours on one NVIDIA H200 with 141 GB of memory, which is a demanding reference configuration rather than a minimum requirement.
 
-The official project page provides the paper and videos under a CC BY-SA 4.0 page license, but its code link reads “soon.” No training repository, model weights, demonstration dataset or software license was verified on September 26. RoboSkin.ai has not reproduced the experiments.
+The official project page provides the paper and videos under a CC BY-SA 4.0 page license, but its code link reads “soon.” The November 4 recheck still found Code (soon), without verifying a training repository, model weights, demonstration download or software license. RoboSkin.ai has not reproduced the experiments.
+
+## Separate the anchor, sampling recipe and control loop
+
+The proposed training recipe weights selected proximity/contact-transition samples more heavily and adds hard negatives. Image-anchored baselines sample uniformly. The reported comparison therefore changes the sampling recipe as well as the anchor; it cannot assign the entire success difference to proprioception and future actions alone. [Sampling and policy integration](https://arxiv.org/html/2609.29822v1).
+
+| Quantity | Role | What it does not establish |
+| --- | --- | --- |
+| Sensor history | Fifty samples from a 100 Hz stream, covering 0.5 seconds | A 100 Hz policy or actuator loop |
+| Future action anchor | Recorded training context, removed during deployment | Access to future actions at inference |
+| Time-to-contact probe | Regression on frozen proximity features | A deployed collision-avoidance controller |
+| Policy success | Three seeds, 20 trials per seed and task | Uniform superiority across tasks or sensors |
+
+The contact threshold used for the probe is in sensor AD units, not a calibrated force limit. Drift alignment remains part of the new-episode analysis. For reuse, log zeroing, sensor-history alignment and the exact sampler; compare anchor choices under a matched sampler if that is the question being tested. Report probe accuracy and task completion separately. These are proposed controls, not experiments performed by RoboSkin. See the [training and runtime distinctions](/visuo-tactile#training-and-runtime-touch).
 
 ## Sources and related resources
 
@@ -2854,6 +2887,8 @@ The official project page provides the paper and videos under a CC BY-SA 4.0 pag
 - [Full method, tables and limitations](https://arxiv.org/html/2609.29822v1)
 - [Official PROPRA project](https://tomohiromotoda.github.io/nia.propra/)
 - [RoboSkin tactile foundation models guide](/tactile-foundation-models)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
   },
   {
@@ -4179,7 +4214,7 @@ For a collection pilot, retain measured glove contacts, simulated robot contacts
     id: 'when-touch-matters-cluttered-dexterous-grasping',
     title: 'When Does Touch Matter tests tactile and wrench feedback in clutter',
     seoTitle: 'When Does Touch Matter? Dexterous Grasping Results',
-    seoDescription: 'A 200-trial study compares vision, wrench and 508-taxel feedback for cluttered dexterous grasping. Read matched results and limitations.',
+    seoDescription: "Interpret grasping success per episode, policy-visible touch and shared compliance; review the v2 results, recovery limits and available trial browser.",
     excerpt: 'A USC and University of New Mexico study holds demonstrations and control fixed while varying policy-visible sensing. The advantage grows in confined, cluttered scenes.',
     category: 'Dexterous manipulation benchmarks',
     image: '/generated/news/when-touch-matters-sensing-ablation.png',
@@ -4188,6 +4223,7 @@ For a collection pilot, retain measured glove contacts, simulated robot contacts
     sourceTitle: 'When Does Touch Matter? Charting the Vision-Interaction Gap in Cluttered Dexterous Grasping',
     sourceUrl: 'https://arxiv.org/abs/2609.24068',
     sources: [
+      { title: "Current v2, revised October 13, 2026", url: "https://arxiv.org/html/2609.24068v2" },
       { title: 'When Does Touch Matter arXiv record', url: 'https://arxiv.org/abs/2609.24068' },
       { title: 'When Does Touch Matter v1 evaluation', url: 'https://arxiv.org/html/2609.24068v1' },
       { title: 'Official interaction-aware grasping project', url: 'https://interaction-dex-grasp.github.io/' },
@@ -4195,7 +4231,7 @@ For a collection pilot, retain measured glove contacts, simulated robot contacts
     technicalFocus: ['dexterous grasping', 'distributed fingertip taxels', 'wrench estimation', 'cluttered manipulation'],
     content: `# When Does Touch Matter tests tactile and wrench feedback in clutter
 
-University of Southern California and University of New Mexico researchers released “When Does Touch Matter?” on September 21, 2026. The study asks a narrow but important question: when does policy-visible interaction sensing improve on RGB-D geometry for target-oriented dexterous grasping in clutter? It holds demonstrations, action space and compliant control fixed while varying whether the learned policy sees estimated wrenches, fingertip taxels or both. [Paper and version record](https://arxiv.org/abs/2609.24068).
+University of Southern California and University of New Mexico researchers released “When Does Touch Matter?” on September 21, 2026. The October 13 v2 retains the main results. The study asks a narrow but important question: when does policy-visible interaction sensing improve on RGB-D geometry for target-oriented dexterous grasping in clutter? It holds demonstrations, action space and compliant control fixed while varying whether the learned policy sees estimated wrenches, fingertip taxels or both. [Paper and version record](https://arxiv.org/abs/2609.24068).
 
 ## Key takeaways
 
@@ -4207,7 +4243,7 @@ University of Southern California and University of New Mexico researchers relea
 
 The xArm7 carries a 16-DoF LEAP Hand with four PaXini fingertip pads, providing 508 three-axis taxels. Motor currents and hand Jacobians estimate four fingertip wrenches and one aggregated wrist wrench. Two Intel RealSense cameras provide RGB-D views. Grounding DINO and SAM 2 produce target masks, which are converted into a 1,024-point target-context cloud.
 
-A diffusion policy runs at 10 Hz and predicts 16 steps of end-effector pose and hand-joint references, executing eight before replanning. Taxels are encoded with a two-layer attention model; wrench and proprioception are supplied directly. All variants use the same 320 demonstrations, 90/10 split, 300 training epochs and compliance controller. [System details](https://arxiv.org/html/2609.24068v1#S4).
+A diffusion policy predicts 16 steps of end-effector pose and hand-joint references on a 10 Hz command grid, executing eight before replanning. This command rate is not a claim of ten fresh model queries per second. Taxels are encoded with a two-layer attention model; wrench and proprioception are supplied directly. All variants use the same 320 demonstrations, 90/10 split, 300 training epochs and compliance controller. [System details](https://arxiv.org/html/2609.24068v1#S4).
 
 ## Where the interaction gap appears
 
@@ -4220,9 +4256,9 @@ A diffusion policy runs at 10 Hz and predicts 16 steps of end-effector pose and 
 
 The combined result is not simply the sum of two sensors. Estimated wrench exposes weak or obstructed loading and can trigger an early regrasp. The taxel field describes how support is distributed across fingers. In the three progressively harder conditions, the combined policy stays at 5/5 while the stronger single-interaction result reaches only 3/5, 4/5 and 3/5.
 
-The study covers 200 physical trials across eight policy variants, five conditions and five trials per cell. That total sounds large, but the headline 24/25 comparison still has only five trials per scene. Manual resets introduce small placement variation, and confidence intervals are not reported for the success table.
+The study covers 200 physical trials across eight policy variants, five conditions and five trials per cell. Each trial permits repeated autonomous grasp attempts, so 24/25 is episode-level success rather than first-attempt reliability. The headline comparison still has only five trials per scene. Manual resets introduce small placement variation, and confidence intervals are not reported for the success table.
 
-An external vision-only ClutterDexGrasp reproduction is not included in the matched physical table. The authors report that its zero-shot hardware deployment produced unsafe rapid motion and downward pushing that required an emergency stop. Because it did not share the compliant controller, it should be treated as an implementation warning rather than a clean performance baseline.
+An external vision-only ClutterDexGrasp reproduction is not included in the matched physical table. The authors report that its zero-shot hardware deployment produced unsafe rapid motion and downward pushing that required an emergency stop. The manuscript describes deployment without its admittance controller, while the current project’s implementation note says arm and hand compliance were enabled in the preliminary probe. These accounts do not establish an identical tested configuration. Treat this as an implementation warning, not a matched performance or safety comparison.
 
 ## What this means for robot hands
 
@@ -4234,26 +4270,40 @@ The ablation also warns against treating “force” and “tactile” as interc
 
 The experiment uses one LEAP Hand embodiment, one PaXini sensor class and five engineered tabletop conditions. The thick fingertips limit access to narrow gaps. Complete target occlusion can defeat relocalization, and the policy can stall locally without explicit progress monitoring. Execution-time statistics condition on successful episodes and therefore have survivorship bias.
 
-This is a preprint, and RoboSkin.ai has not reproduced the trials. As checked September 22, the official project page provides method explanations and evaluation videos, but no public code, trained policy or dataset download was identified. The paper says all trial videos will be released; readers should verify that the complete set is present before using it as an audit trail.
+This is a preprint, and RoboSkin.ai has not reproduced the trials. On November 4, the official page provides a browser described as covering all 50 Vision-only and Ours trials, including failures. This is a subset of the 200-trial study, not a verified complete release. We did not watch or independently score every recording. No public training code, policy checkpoint or demonstration dataset was identified in the reviewed project page.
+
+## Keep policy sensing and physical compliance separate
+
+The [v2 control description](https://arxiv.org/html/2609.24068v2) makes three interfaces distinct. Current-derived wrench estimates feed the common admittance controller; enabled wrench channels also enter the learned policy; taxel measurements enter the policy but not that low-level controller. Removing a policy input therefore does not remove every physical use of interaction information.
+
+| Evaluation question | Hold fixed | Measure separately |
+| --- | --- | --- |
+| Does the policy benefit from touch? | Demonstrations, controller and task criteria | Completion with and without policy-visible channels |
+| Does recovery improve? | Reset procedure and permitted attempts | First-attempt result, retries, interventions and timeout |
+| Does the system remain usable in occlusion? | Sensor placement and target definition | Lost-target events, stalls and recovery outcome |
+
+For a replication, record acquisition clocks, reference-command timing and controller feedback separately. The 10 Hz command grid and eight executed steps per chunk do not mean that every model query supplies fresh tactile correction at 10 Hz. Log the executed references and resulting motion. Finally, retain unsuccessful episodes in timing and recovery reports: successful-only durations can hide a slow or stalled failure. These are proposed measurements, not a claim that the published system was retested here. See the [vision–touch evaluation framework](/visuo-tactile#training-and-runtime-touch).
 
 ## Sources
 
 - [When Does Touch Matter arXiv record, submitted September 21, 2026](https://arxiv.org/abs/2609.24068)
 - [When Does Touch Matter v1 methods, tables and limitations](https://arxiv.org/html/2609.24068v1)
 - [Official interaction-aware grasping project page](https://interaction-dex-grasp.github.io/)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     sourceDate: '2026-09-21',
-    evidenceStatus: 'Preprint · arXiv v1',
+    evidenceStatus: "Preprint · arXiv v2 reviewed November 4 · episode-level trials · project trial browser inspected, not independently rescored",
   },
   {
     id: 'zerotouch-tactile-supervision-visual-grasp-control',
     title: 'ZeroTouch learns visual grasp-force control from tactile supervision',
     seoTitle: 'ZeroTouch: Visual Grasp Control, Force Errors and Limits',
-    seoDescription: 'Read ZeroTouch’s tactile-supervised grasp results, validation versus test force errors, physical trial conditions and limits of visual load estimation.',
+    seoDescription: "Evaluate ZeroTouch current-force and target errors separately from threshold stopping; review sensor-reference limits, hidden loads and grasp-control scope.",
     excerpt: 'The Skoltech preprint uses tactile supervision to predict contact and stop gripper closure from vision and robot state. Its force estimates and physical grasp results answer different questions.',
     category: 'Tactile robot control',
     image: '/generated/news/zerotouch-training-deployment.png',
@@ -4309,17 +4359,33 @@ RoboSkin analysis: the valuable separation is between measured training supervis
 
 Hidden loading remains a key limitation. A container can look similar while requiring different compression, and the authors explicitly acknowledge that insufficient visual evidence cannot reliably reveal its physical properties. The evaluated objects and load shifts are limited. [Limitations](https://arxiv.org/html/2609.21726v1#S6).
 
-As checked September 21, no project-specific code, checkpoint or dataset download was verified in the paper or arXiv record. The work remains a preprint, and RoboSkin has not reproduced it. For another use of human touch data, compare the distinct action-conditioned experiments in [DexTouch-WM](/research/dextouch-wm-human-touch-world-model-2026); its objective differs from ZeroTouch's grasp-force estimator.
+The November 4 recheck of the paper and arXiv record did not verify project-specific code, checkpoint or dataset downloads. The work remains a preprint, and RoboSkin has not reproduced it. For another use of human touch data, compare the distinct action-conditioned experiments in [DexTouch-WM](/research/dextouch-wm-human-touch-world-model-2026); its objective differs from ZeroTouch's grasp-force estimator.
+
+## Audit the two predictions and the stopping decision separately
+
+A stopping rule can work even when its inputs share a bias. If both the predicted current compression and target shift by the same amount, their crossing can remain unchanged. That algebra explains why a successful grasp is insufficient evidence of calibrated force prediction; it does not imply that the two errors always cancel. [Prediction and termination limits](https://arxiv.org/html/2609.21726v1).
+
+| Evidence layer | Suggested acceptance record |
+| --- | --- |
+| Reference | Sensor revision, axis/sign convention, calibration and uncertainty |
+| Current wrench | Per-axis error and bias, grouped by episode and load condition |
+| Desired target | Eligible pre-contact inputs, target construction and signed error |
+| Closure decision | Crossing time, stop command, measured compression and overshoot |
+| Physical outcome | Lift/hold result, slip, damage and any intervention |
+
+These are proposed engineering checks. The study’s settled-force target comes from successful lift-and-hold examples; it does not define a damage threshold for a new object. Keep target-construction failures and operating conditions visible when building a new dataset. Load-shift images also vary in grasp and closure, so attention maps and qualitative examples cannot isolate the cause of a changed force estimate. An independent reference and a matched task test answer different questions. Compare [inferred contact and runtime touch](/visuo-tactile#training-and-runtime-touch) before deciding whether visual estimation fits the application.
 
 ## Sources
 
 - [ZeroTouch arXiv record: September 18, 2026](https://arxiv.org/abs/2609.21726)
 - [ZeroTouch v1: methods, tables and limitations](https://arxiv.org/html/2609.21726v1)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     sourceDate: '2026-09-18',
     evidenceStatus: 'Preprint · arXiv v1',
   },
@@ -4482,7 +4548,7 @@ Use the [benchmark directory](/benchmarks) to compare protocols and the [tactile
     id: 'touchsight-twintouch-bare-hand-tactile-prediction',
     title: 'TouchSight learns bare-hand touch prediction from glove recordings',
     seoTitle: 'TouchSight & TwinTouch-20H: Data, Results and Access',
-    seoDescription: 'Explore TouchSight’s video-to-touch model and TwinTouch-20H. Separate measured glove labels, generated video, contact metrics and verified dataset access.',
+    seoDescription: "Evaluate TouchSight label provenance, active-taxel errors and generated-video splits; distinguish glove units, geometric contact and physical force calibration.",
     excerpt: 'The preprint combines measured glove signals with generated bare-hand video. Its 20-hour paired dataset and 500-hour training source describe different kinds of scale.',
     content: `# TouchSight learns bare-hand touch prediction from glove recordings
 
@@ -4529,9 +4595,9 @@ Natural videos from Ego-Exo4D, Ego4D and EgoDex lack measured tactile ground tru
 
 The paper’s 500-hour HumanTouch training source, TwinTouch’s 20 hours of paired visual observations and the public HumanTouch subset are three different resources or scopes. SparkLab’s [official HumanTouch page](https://xsparkai.com/sparklab/humantouch/) describes an initial approximately 100-hour release and links ModelScope and Hugging Face.
 
-On September 20, RoboSkin verified a public, ungated [Hugging Face file listing](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5) containing Parquet, video and metadata files. Its [pinned README](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/blob/81822a10cac5def2638db546eaeced581d71a8b5/README.md) still describes roughly 100 hours, warns that uploading is ongoing, and lists an AIGC edition as in preparation. The README defers licensing to [ModelScope, whose dataset page displays CC-BY-NC-4.0](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch). That noncommercial condition matters for reuse; it does not license unreleased TwinTouch data or model weights. We did not decode the complete payload or independently total its duration.
+On September 20, RoboSkin verified a public, ungated [Hugging Face file listing](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5) containing Parquet, video and metadata files. Its [pinned README](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/blob/81822a10cac5def2638db546eaeced581d71a8b5/README.md) still describes roughly 100 hours, warns that uploading is ongoing, and lists an AIGC edition as in preparation. The README defers licensing to [ModelScope, whose dataset page displays CC-BY-NC-4.0](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch). That condition was displayed during the earlier review; the November 4 text fetch did not expose a readable ModelScope license, so current terms require confirmation before reuse. Noncommercial restrictions matter for reuse; it does not license unreleased TwinTouch data or model weights. We did not decode the complete payload or independently total its duration.
 
-No dedicated TwinTouch-20H download or TouchSight checkpoint/code release was verified in the paper and linked materials reviewed. The public HumanTouch files should not be presented as the complete 500-hour training set or as a confirmed TwinTouch release.
+The November 4 HumanTouch README still describes an approximately 100-hour initial subset, ongoing uploads and an AIGC edition in preparation. No dedicated TwinTouch-20H download or TouchSight checkpoint/code release was verified in the paper and linked materials reviewed. The public HumanTouch files should not be presented as the complete 500-hour training set or as a confirmed TwinTouch release.
 
 ## Why the distinction matters
 
@@ -4539,18 +4605,28 @@ RoboSkin analysis: generated appearance may help reuse expensive measured labels
 
 TouchSight remains a preprint. The reviewed study does not demonstrate a robot policy trained on its predictions, and RoboSkin has not reproduced it. Compare [DexTouch-WM’s separate human-to-robot world-model experiments](/research/dextouch-wm-human-touch-world-model-2026) before equating a contact estimator with action-conditioned robot dynamics.
 
+## What would validate a predicted contact field for reuse?
+
+A useful evaluation must preserve the origin of both the image and its label. Keep the captured episode and generated derivative in the same split, retain rejected-generation reasons, and carry the valid-taxel mask. Treating padding or unreliable channels as correct zero predictions would change the metric denominator. [Split, mask and loss definitions](https://arxiv.org/html/2609.20414v1).
+
+There are also distinct thresholds: the paper uses one raw glove unit to derive contact labels and five units for its active-taxel evaluation. Neither is a Newton-valued acceptance threshold. The current [HumanTouch acquisition description](https://xsparkai.com/sparklab/humantouch/) explicitly describes normalized relative contact activity rather than calibrated pressure, force or object load. A colorful prediction should therefore retain the source units and calibration limits.
+
+For downstream use, select a permitted held-out recording with independent contact references, evaluate missing and spurious contact as well as active-region error, and stratify results by occlusion and material. Then test the intended robot behavior separately; a contact-estimation improvement does not establish safer grasping. The scaling study uses seen glove-test tasks, while natural bare-hand examples lack measured tactile labels. The [visuo-tactile method comparison](/visuo-tactile#training-and-runtime-touch) separates this estimation route from policies that consume measured touch.
+
 ## Sources
 
 - [TouchSight arXiv record, September 17, 2026](https://arxiv.org/abs/2609.20414)
 - [TouchSight v1: TwinTouch construction, metrics and appendix](https://arxiv.org/html/2609.20414v1)
 - [SparkLab HumanTouch acquisition and release description](https://xsparkai.com/sparklab/humantouch/)
 - [HumanTouch public repository at the reviewed revision](https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch/tree/81822a10cac5def2638db546eaeced581d71a8b5)
-- [ModelScope HumanTouch repository and displayed data license](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch)
+- [ModelScope HumanTouch repository; license observed during the earlier review](https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Findings are attributed to their authors; we did not run these systems or verify dataset payloads.*
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-22',
-    updated: '2026-09-22',
-    readTime: '6 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile models and data',
     image: '/generated/news/touchsight-paired-data.png',
     imageAlt: 'Diagram showing 10 hours of original glove video paired with 10 hours of generated bare-hand video, sharing the original measured tactile labels.',
