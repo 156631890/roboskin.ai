@@ -89,10 +89,10 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /research/self-healing-multimodal-eskin-2026 | rewritten and production verified in PR109 | 1084 | 2 |
 | /research/ros2-kilted-tactile-pipeline-2026 | rewritten and production verified in PR111 | 1363 | 10 |
 | /research/large-area-flexible-tactile-arrays-2025 | rewritten and production verified in PR109 | 1168 | 6 |
-| /news/tactus-tactile-glove-data-collection | collection and control evidence reviewed; production verification pending | 1479 | 5 |
-| /news/dexsuite-tactile-simulation-lerobot-data | collection and control evidence reviewed; production verification pending | 1588 | 9 |
-| /news/neura-neuron-ai-touch-memory-pla | collection and control evidence reviewed; production verification pending | 1689 | 3 |
-| /news/activewam-active-vision-world-action-model | collection and control evidence reviewed; production verification pending | 1004 | 4 |
+| /news/tactus-tactile-glove-data-collection | rewritten and production verified in PR115 | 1479 | 5 |
+| /news/dexsuite-tactile-simulation-lerobot-data | rewritten and production verified in PR115 | 1588 | 9 |
+| /news/neura-neuron-ai-touch-memory-pla | rewritten and production verified in PR115 | 1689 | 3 |
+| /news/activewam-active-vision-world-action-model | rewritten and production verified in PR115 | 1004 | 4 |
 | /news/radmcs-underwater-haptic-diver-guidance | inventory only; claim-by-claim review pending | 995 | 1 |
 | /news/humanoidtoolbench-tool-selection-mobile-execution | inventory only; claim-by-claim review pending | 1046 | 12 |
 | /news/interevolve-reward-program-humanoid-manipulation | inventory only; claim-by-claim review pending | 1037 | 8 |
@@ -179,10 +179,10 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /sensors/xela-uskin | inventory only; claim-by-claim review pending | 1184 | 4 |
 | /sensors/melexis-tactaxis | inventory only; claim-by-claim review pending | 1221 | 5 |
 | /sensors/loomia-smart-skin | inventory only; claim-by-claim review pending | 1363 | 3 |
-| /sensors/robotiq-tsf-85 | inventory only; claim-by-claim review pending | 1206 | 5 |
-| /sensors/digit | inventory only; claim-by-claim review pending | 1439 | 13 |
-| /sensors/gelsight-mini | inventory only; claim-by-claim review pending | 1319 | 11 |
-| /sensors/reskin | inventory only; claim-by-claim review pending | 1198 | 9 |
+| /sensors/robotiq-tsf-85 | sensor evidence and acceptance reviewed; production verification pending | 1206 | 5 |
+| /sensors/digit | sensor evidence and acceptance reviewed; production verification pending | 1439 | 13 |
+| /sensors/gelsight-mini | sensor evidence and acceptance reviewed; production verification pending | 1319 | 11 |
+| /sensors/reskin | sensor evidence and acceptance reviewed; production verification pending | 1198 | 9 |
 | /guides/gelsight-vs-digit | enhanced and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | inventory only; claim-by-claim review pending | 3426 | 3 |
 | /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
@@ -266,3 +266,7 @@ Three existing briefs retain their substantial source-backed sections while corr
 ## Collection, memory and active perception review
 
 Four existing pages retain substantial source-backed analysis while clarifying glove calibration protocols, simulation source access and licenses, a dated manufacturer demonstration follow-up, and active-perception timing and trial denominators. Original dates, URLs, anchors, images and source routes remain. Whole-site review remains incomplete.
+
+## Sensor profile acceptance pass
+
+Four existing profiles retain their verified specifications and source history. Focused additions distinguish bias, gain and force validation; coating wear and operational acceptance; acquisition and reconstruction configuration; and within-skin versus held-out-board evidence. No hardware test or independent performance ranking is claimed. The whole-site queue remains active.
