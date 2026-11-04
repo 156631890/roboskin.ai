@@ -8,7 +8,8 @@ export const xelaUskin: SeoTopicPage = {
   "kicker": "Source-reviewed engineering guide",
   "intent": "Help integration teams choose the correct uSkin configuration and identify the information still needed for acceptance, without claiming hardware testing.",
   "published": "2026-10-24",
-  "updated": "2026-10-24",
+  "updated": "2026-11-04",
+  "revisionNote": "November 4, 2026: rechecked model and technology documents and added a local-signal-to-resultant acceptance decision. Hardware, uAi and controller performance remain untested by RoboSkin.ai.",
   "priority": 0.75,
   "changeFrequency": "monthly",
   "schemaType": "TechArticle",
@@ -21,7 +22,7 @@ export const xelaUskin: SeoTopicPage = {
   ],
   "quickAnswer": [
     "uSkin is XELA Robotics' family of magnetic tactile modules. Select the hand and module revision before comparing sensing positions, channels, rate or coverage.",
-    "This is an official-documentation profile reviewed on October 24, 2026, not an independent hardware test. RoboSkin.ai has not installed the sensors, run uAi or measured their accuracy, latency or service life.",
+    "This official-documentation profile was first reviewed on October 24 and its model and integration evidence rechecked on November 4, 2026. It is not an independent hardware test. RoboSkin.ai has not installed the sensors, run uAi or measured their accuracy, latency or service life.",
     "A three-axis sensing location is one spatial position, not three taxels. Internal temperature adds a measurement used for compensation; it does not establish object-temperature or thermal-texture sensing."
   ],
   "sections": [
@@ -130,6 +131,52 @@ export const xelaUskin: SeoTopicPage = {
         {
           "label": "XELA: December 3, 2025 integration and roadmap announcement",
           "href": "https://xelarobotics.com/press-release/xela-robotics-announces-integration-milestone-and-reveals-its-2026-technology-roadmap/"
+        }
+      ]
+    },
+    {
+      "id": "local-force-to-resultant",
+      "heading": "When the controller needs a whole-finger force or torque",
+      "body": [
+        "A field of normal and shear values and a resultant force or torque are different outputs. XELA describes distributed three-axis measurements and notes that multi-point contacts contain torque information. For an integration decision, establish which output your application actually receives and how it is calibrated, rather than treating a visualization arrow as a validated wrench.",
+        "On a curved fingertip, local normal directions differ across positions. A proposed resultant calculation therefore needs the local-to-hand coordinate mapping and contact locations relative to the chosen origin, as well as calibrated values at compatible times. Forces entering through an uncovered region remain outside that tactile measurement. These requirements explain why a taxel count alone cannot establish equivalence with a wrist force-torque sensor."
+      ],
+      "table": {
+        "headers": [
+          "Required output",
+          "Information to retain",
+          "Evaluation boundary"
+        ],
+        "rows": [
+          [
+            "Local contact observation",
+            "Position ID, axes, units and calibration mode",
+            "Check normal/shear response at the intended contact"
+          ],
+          [
+            "Finger resultant",
+            "Coordinate transforms, positions and time alignment",
+            "Compare against a reference load on the assembled finger"
+          ],
+          [
+            "Controller decision",
+            "Saturation handling, data age and task criterion",
+            "Measure the installed decision-to-action behavior"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "XELA distributed sensing and calibration",
+          "href": "https://xelarobotics.com/technology/"
+        },
+        {
+          "label": "Local tactile sensing versus wrist force-torque",
+          "href": "/technology#tactile-vs-force-torque"
+        },
+        {
+          "label": "Define the reference measurement",
+          "href": "/guides/tactile-sensor-calibration"
         }
       ]
     },
