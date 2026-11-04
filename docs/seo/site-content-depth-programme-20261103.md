@@ -104,7 +104,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/touchtherm-tactile-thermal-digital-twins | inventory only; claim-by-claim review pending | 998 | 5 |
 | /news/ditto-x-reverse-dexterous-teleoperation | rewritten and production verified in PR123 | 1027 | 14 |
 | /news/flashdexretarget-multi-motion-dexterous-data | rewritten and production verified in PR123 | 1027 | 10 |
-| /news/tacex-tactile-curiosity-robot-exploration | individual manipulation-decision review; production verification pending | 1088 | 3 |
+| /news/tacex-tactile-curiosity-robot-exploration | rewritten and production verified in PR126 | 1088 | 3 |
 | /news/occludex-visuo-tactile-self-occlusion-dexterity | inventory only; claim-by-claim review pending | 1070 | 2 |
 | /news/membrane-coupled-delta-array-micro-object-manipulation | rewritten and production verified in PR125 | 1012 | 1 |
 | /news/funco-grasp-cross-embodiment-dexterous-grasping | inventory only; claim-by-claim review pending | 1071 | 8 |
@@ -116,32 +116,32 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/uvta-human-tactile-demonstrations-dexterous-manipulation | rewritten and production verified in PR123 | 1060 | 3 |
 | /news/tacgoosebumps-shear-encoding-tactile-sensor | rewritten and production verified in PR125 | 977 | 1 |
 | /news/dextag-tactile-guided-dexterous-retargeting | rewritten and production verified in PR123 | 1089 | 7 |
-| /news/blind-grasp-reflex-proprioceptive-dexterous-hand | individual manipulation-decision review; production verification pending | 1051 | 10 |
+| /news/blind-grasp-reflex-proprioceptive-dexterous-hand | rewritten and production verified in PR126 | 1051 | 10 |
 | /news/tactic-tactile-encoder-fusion-benchmark | rewritten and production verified in PR124 | 968 | 3 |
 | /news/vistacalign-human-robot-tactile-demonstrations | rewritten and production verified in PR123 | 1029 | 1 |
-| /news/phase-tactile-retrieval-few-shot-insertion | individual manipulation-decision review; production verification pending | 909 | 1 |
-| /news/da-grd-tactile-grasp-recovery | individual manipulation-decision review; production verification pending | 996 | 1 |
+| /news/phase-tactile-retrieval-few-shot-insertion | rewritten and production verified in PR126 | 909 | 1 |
+| /news/da-grd-tactile-grasp-recovery | rewritten and production verified in PR126 | 996 | 1 |
 | /news/torque-observation-alignment-direct-drive-grasping | rewritten and production verified in PR121 | 985 | 4 |
-| /news/outcome-sensitive-impact-aware-dexterous-catching | inventory only; claim-by-claim review pending | 1008 | 1 |
+| /news/outcome-sensitive-impact-aware-dexterous-catching | individual hand mechanics and measurement review; production verification pending | 1008 | 1 |
 | /news/body-grounded-replanning-physical-manipulation | inventory only; claim-by-claim review pending | 1009 | 2 |
 | /news/polyumi-visual-tactile-audio-demonstration-interface | rewritten and production verified in PR123 | 1137 | 4 |
 | /news/propra-fingertip-sensor-pretraining | rewritten and production verified in PR124 | 1063 | 3 |
 | /news/whole-hand-force-regulation-without-tactile-sensors | rewritten and production verified in PR121 | 1146 | 6 |
 | /news/res-hil-human-guided-residual-rl-manipulation | inventory only; claim-by-claim review pending | 1126 | 1 |
 | /news/tactilestep-sole-pressure-humanoid-locomotion | inventory only; claim-by-claim review pending | 1105 | 1 |
-| /news/anthropomimetic-forearm-carpal-stiffness | inventory only; claim-by-claim review pending | 953 | 1 |
+| /news/anthropomimetic-forearm-carpal-stiffness | individual hand mechanics and measurement review; production verification pending | 953 | 1 |
 | /news/camp-cooperative-arm-hand-motion-planning | inventory only; claim-by-claim review pending | 1070 | 1 |
 | /news/support-enhanced-granular-jamming-gripper | rewritten and production verified in PR125 | 1076 | 1 |
 | /news/internw0-contact-aware-world-model-pipetting | inventory only; claim-by-claim review pending | 1267 | 3 |
-| /news/glotouch-global-local-haptic-search | individual manipulation-decision review; production verification pending | 1032 | 1 |
-| /news/copre-proprioceptive-contact-detection | inventory only; claim-by-claim review pending | 1112 | 2 |
-| /news/berkeley-quad-hand-asymmetric-qdd-design | inventory only; claim-by-claim review pending | 1072 | 1 |
+| /news/glotouch-global-local-haptic-search | rewritten and production verified in PR126 | 1032 | 1 |
+| /news/copre-proprioceptive-contact-detection | individual hand mechanics and measurement review; production verification pending | 1112 | 2 |
+| /news/berkeley-quad-hand-asymmetric-qdd-design | individual hand mechanics and measurement review; production verification pending | 1072 | 1 |
 | /news/lima-asynchronous-diffusion-dexterous-manipulation | inventory only; claim-by-claim review pending | 1080 | 10 |
-| /news/better-curriculum-tactile-reflex-fragile-grasping | individual manipulation-decision review; production verification pending | 1026 | 7 |
+| /news/better-curriculum-tactile-reflex-fragile-grasping | rewritten and production verified in PR126 | 1026 | 7 |
 | /news/visforce-visual-force-grounding-dexterous-manipulation | inventory only; claim-by-claim review pending | 974 | 6 |
 | /news/cablevla-tactile-cable-routing-vla | inventory only; claim-by-claim review pending | 956 | 7 |
-| /news/cartesian-hand-all-linear-in-hand-manipulation | inventory only; claim-by-claim review pending | 1226 | 4 |
-| /news/spectrobot-high-bandwidth-single-point-tactile-sensing | inventory only; claim-by-claim review pending | 1031 | 1 |
+| /news/cartesian-hand-all-linear-in-hand-manipulation | individual hand mechanics and measurement review; production verification pending | 1226 | 4 |
+| /news/spectrobot-high-bandwidth-single-point-tactile-sensing | individual hand mechanics and measurement review; production verification pending | 1031 | 1 |
 | /news/tactile-jepa-topology-aware-electronic-skin-pretraining | inventory only; claim-by-claim review pending | 1020 | 3 |
 | /news/touch2robot-tactile-feedback-human-demonstrations | rewritten and production verified in PR123 | 958 | 2 |
 | /news/when-touch-matters-cluttered-dexterous-grasping | rewritten and production verified in PR124 | 993 | 3 |
@@ -219,9 +219,9 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /visuo-tactile | rewritten and production verified in PR124 | 1040 | 22 |
 | /humanoid-robots | inventory only; claim-by-claim review pending | 1242 | 23 |
 | /robot-vla-models | inventory only; claim-by-claim review pending | 11478 | 41 |
-| /robot-manipulation | individual manipulation-decision review; production verification pending | 1512 | 75 |
+| /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
 | /robot-learning | inventory only; claim-by-claim review pending | 4886 | 53 |
-| /robot-hands | inventory only; claim-by-claim review pending | 2439 | 45 |
+| /robot-hands | individual hand mechanics and measurement review; production verification pending | 2439 | 45 |
 | /robot-safety | inventory only; claim-by-claim review pending | 1391 | 12 |
 | /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
 | /robot-world-models | inventory only; claim-by-claim review pending | 5409 | 25 |
@@ -310,3 +310,7 @@ Six existing News reports and /robot-grippers distinguish passive contact mechan
 ## Manipulation decision and training-role depth
 
 Six existing News reports and /robot-manipulation distinguish contact proxies, sensing, offline supervision, runtime decisions and complete-task outcomes. Corrected retry and probe denominators, prior-data baselines, causal timing and public release status. No experimental reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
+
+## Hand mechanics, measurement and task depth
+
+Six existing News reports and /robot-hands distinguish kinematics, passive mechanics, contact estimates, dynamic sensing and completed tasks. Corrected conditional impact metrics, release status and the HRDexDB modality description. No experimental reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
