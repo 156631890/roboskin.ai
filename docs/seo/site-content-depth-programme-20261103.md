@@ -176,13 +176,13 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /guides/optical-vs-capacitive-tactile-sensors | enhanced and production verified in PR106 | 1360 | 6 |
 | /guides/aspire-libero-pro-setup | inventory only; claim-by-claim review pending | 1322 | 3 |
 | /guides/how-to-choose-a-tactile-sensor | reviewed and deployed in PR102 | 2637 | 10 |
-| /sensors/xela-uskin | inventory only; claim-by-claim review pending | 1184 | 4 |
-| /sensors/melexis-tactaxis | inventory only; claim-by-claim review pending | 1221 | 5 |
-| /sensors/loomia-smart-skin | inventory only; claim-by-claim review pending | 1363 | 3 |
-| /sensors/robotiq-tsf-85 | sensor evidence and acceptance reviewed; production verification pending | 1206 | 5 |
-| /sensors/digit | sensor evidence and acceptance reviewed; production verification pending | 1439 | 13 |
-| /sensors/gelsight-mini | sensor evidence and acceptance reviewed; production verification pending | 1319 | 11 |
-| /sensors/reskin | sensor evidence and acceptance reviewed; production verification pending | 1198 | 9 |
+| /sensors/xela-uskin | sensor-family configuration and acceptance reviewed; production verification pending | 1184 | 4 |
+| /sensors/melexis-tactaxis | sensor-family configuration and acceptance reviewed; production verification pending | 1221 | 5 |
+| /sensors/loomia-smart-skin | sensor-family configuration and acceptance reviewed; production verification pending | 1363 | 3 |
+| /sensors/robotiq-tsf-85 | rewritten and production verified in PR116 | 1206 | 5 |
+| /sensors/digit | rewritten and production verified in PR116 | 1439 | 13 |
+| /sensors/gelsight-mini | rewritten and production verified in PR116 | 1319 | 11 |
+| /sensors/reskin | rewritten and production verified in PR116 | 1198 | 9 |
 | /guides/gelsight-vs-digit | enhanced and production verified in PR106 | 2140 | 10 |
 | /guides/tactile-in-context-learning-tactile-eta-vs-gpt-6-astra | inventory only; claim-by-claim review pending | 3426 | 3 |
 | /robotics-programming | inventory only; claim-by-claim review pending | 1285 | 12 |
@@ -270,3 +270,7 @@ Four existing pages retain substantial source-backed analysis while clarifying g
 ## Sensor profile acceptance pass
 
 Four existing profiles retain their verified specifications and source history. Focused additions distinguish bias, gain and force validation; coating wear and operational acceptance; acquisition and reconstruction configuration; and within-skin versus held-out-board evidence. No hardware test or independent performance ranking is claimed. The whole-site queue remains active.
+
+## Sensor-family configuration review
+
+Three existing profiles preserve source-specific model specifications and dated availability. Additions address local-to-resultant force interpretation, taxel-to-module acceptance and loading artifacts versus mounted behavior. No product test, purchase or independent ranking is claimed. Whole-site review remains incomplete.

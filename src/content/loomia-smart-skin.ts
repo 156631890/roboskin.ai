@@ -16,7 +16,8 @@ export const loomiaSmartSkin: SeoTopicPage = {
   kicker: 'Sensor evidence / Soft electronic layers',
   intent: 'Help robot builders review Loomia Smart Skin and its developer kit using published specifications and clearly dated acquisition information.',
   published: '2026-10-20',
-  updated: '2026-10-20',
+  updated: '2026-11-04',
+  revisionNote: "November 4, 2026: rechecked the developer-kit guide and added loading-artifact and mounted-sensor acceptance questions. Earlier listing and acquisition observations retain their dates; no device or ordering workflow was tested.",
   priority: 0.75,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
@@ -67,6 +68,57 @@ export const loomiaSmartSkin: SeoTopicPage = {
         'RoboSkin evaluation recommendation: record unloaded baselines, repeat known loads before and after mounting, then log sensor and robot timestamps together. Test curvature, cable movement and repeated contact on the intended surface. Keep raw readings, fitted force estimates and inferred slip labels separate so failures can be traced to their source.',
       ],
       links: [guide],
+    },
+    {
+      "id": "weight-jig-to-robot",
+      "heading": "Distinguish weight-jig artifacts from sensor behavior",
+      "body": [
+        "The kit guide describes its weights as an approximate evaluation aid. It shows how a shifting load can create peaks and how a jig foot touching an adjacent cell can produce an unintended response. Such traces do not, by themselves, identify electrical crosstalk or a sensor defect. Preserve the placement conditions before fitting a calibration curve.",
+        "For an integration trial, separate repeatable central loading from off-center loading and then repeat the reference after mounting. The same electrical trace can reflect contact placement, substrate curvature, neighboring contact or the sensing response. The table is an editorial evaluation plan, not new Loomia measurements."
+      ],
+      "table": {
+        "headers": [
+          "Condition",
+          "Record",
+          "Question to resolve"
+        ],
+        "rows": [
+          [
+            "Unloaded jig and placement",
+            "Cell location and every jig contact",
+            "Is the intended cell the only loaded region?"
+          ],
+          [
+            "Loading and unloading",
+            "Raw trace, load order and dwell intervals",
+            "Are placement peaks distinct from the held-load response?"
+          ],
+          [
+            "Mounted surface",
+            "Curvature, backing and attachment state",
+            "Does the bench reference remain applicable after mounting?"
+          ],
+          [
+            "Neighboring contacts",
+            "Which cells are physically loaded and when",
+            "Can real shared contact be separated from unwanted coupling?"
+          ]
+        ]
+      },
+      "links": [
+        {
+          "label": "Loomia guide: static-weight instructions and artifacts",
+          "href": "https://www.loomia.com/s/20250617_Tactile_Dev_Kit.pdf#page=9"
+        },
+        {
+          "label": "Build a tactile calibration record",
+          "href": "/guides/tactile-sensor-calibration"
+        },
+        {
+          "label": "Inspect tactile traces and invalid samples",
+          "href": "/guides/python-tactile-data-processing"
+        }
+      ]
     },
     {
       heading: 'The Unichem acquisition: what changed in October 2026',

@@ -21,7 +21,8 @@ export const melexisTactaxis: SeoTopicPage = {
   kicker: 'Sensor evidence / Magnetic force sensing',
   intent: 'Help engineers interpret official Tactaxis specifications without mixing prototype results, later taxels and module announcements.',
   published: '2026-10-17',
-  updated: '2026-10-17',
+  updated: '2026-11-04',
+  revisionNote: "November 4, 2026: rechecked dated manufacturer sources and added taxel-to-module acceptance stages. No independent sensor test, live quotation or delivery commitment is established.",
   priority: 0.75,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
@@ -85,6 +86,60 @@ export const melexisTactaxis: SeoTopicPage = {
         'The specification publications are not an independent optical-versus-capacitive-versus-magnetic benchmark. Compare candidates under the same forces, contact geometry, environment and task criteria.',
       ],
       links: [modules],
+    },
+    {
+      "id": "taxel-to-module-acceptance",
+      "heading": "Make the taxel-to-module acceptance decision explicit",
+      "body": [
+        "A taxel specification supports only part of a module decision. The published normal, shear and extended ranges are not interchangeable, and a resolution increment does not specify total error. Ask which dated specification applies to the quoted assembly, including its elastomer, electronics and calibration, before selecting an operating range.",
+        "The following is a proposed procurement record. It separates what the cited publications establish from the evidence needed for an installed robot. A successful demonstration on one hand does not fill every row for another hand."
+      ],
+      "table": {
+        "headers": [
+          "Stage",
+          "Evidence to retain",
+          "Decision before proceeding"
+        ],
+        "rows": [
+          [
+            "Sensing element",
+            "Revision, normal/shear ranges, calibration and uncertainty",
+            "Does the reference load stay within the intended precision range?"
+          ],
+          [
+            "Assembled fingertip",
+            "Mechanical drawing, electrical interface, timing and replacement procedure",
+            "Can the module be mounted, read and maintained in the planned configuration?"
+          ],
+          [
+            "Robot application",
+            "Load cases, interference conditions, controller and failure criterion",
+            "Does measured behavior satisfy the task requirement?"
+          ]
+        ]
+      },
+      "subsections": [
+        {
+          "heading": "Keep an extended range separate from validated precision",
+          "body": [
+            "If the application can exceed its normal working load, request both the measurement behavior and the recovery behavior for that condition. Do not use the extended-range figure as a new nominal accuracy specification, a guarantee against damage or a robot safety rating. Record overload handling and post-event reference checks as acceptance questions, with limits supplied for the actual module."
+          ],
+          "links": [
+            {
+              "label": "Melexis 2025 guide: nominal and extended ranges",
+              "href": "https://www.melexis.com/-/media/files/documents/info/robotic-e-guide.pdf#page=9"
+            },
+            {
+              "label": "Calibration and uncertainty planning",
+              "href": "/guides/tactile-sensor-calibration"
+            },
+            {
+              "label": "Robot-hand integration decisions",
+              "href": "/robot-hands"
+            }
+          ]
+        }
+      ]
     },
     {
       heading: 'Pricing and Availability',
