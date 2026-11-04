@@ -24,6 +24,188 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "reflexarc-tactile-reflex-latency-humanoid-control-2026",
+    title: "ReflexArc Explained: Tactile Reflex Latency and Humanoid Controller Conflicts",
+    seoTitle: "ReflexArc: Tactile Reflex Latency & Control Conflicts",
+    seoDescription: "Read ReflexArc’s timing boundaries, controlled collision comparison and policy conflicts, with a practical record for evaluating humanoid tactile reflexes.",
+    excerpt: "Why a fast tactile withdrawal can be cancelled by the next learned command, and which timing, coverage and recovery evidence an integration team should request.",
+    category: "Robot control",
+    sourceTitle: "ReflexArc: Bottom-Up Integration of Instantaneous Tactile Reflexes into Whole-Body Humanoid Control",
+    sourceUrl: "https://arxiv.org/abs/2611.04424",
+    citationUrls: ["https://arxiv.org/abs/2611.04424", "https://arxiv.org/html/2611.04424v1", "https://minusmodulo.github.io/reflexarc-website/"],
+    technicalFocus: ["tactile-to-motor latency", "controller interference", "humanoid reflex integration", "evidence boundaries"],
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-11-04",
+    updated: "2026-11-04",
+    readTime: "7 min read",
+    image: "/generated/research-reflexarc-interfaces-2026.svg",
+    content: `# ReflexArc Explained: Tactile Reflex Latency and Humanoid Controller Conflicts
+
+ReflexArc asks a practical question: after a robot detects unexpected contact, can it withdraw quickly without its learned controller immediately steering it back? A fast sensor is only one part of that problem. The reflex and the ongoing movement policy must agree about who controls the same joints, including after the first withdrawal.
+
+This research interpretation was published on **November 4, 2026**, reviewing the **November 3 arXiv v1 preprint** by Mingyu Wang and colleagues. Results below are the authors' reports, not RoboSkin.ai experiments or evidence of safety certification. We reviewed the [paper](https://arxiv.org/abs/2611.04424), [full text](https://arxiv.org/html/2611.04424v1) and [official project](https://minusmodulo.github.io/reflexarc-website/). This page serves teams evaluating control interfaces; the broader [robot-safety guide](/robot-safety) covers evidence boundaries.
+
+## The contribution is cooperation between two control paths
+
+The authors call their integration method **Ascending Reflex Control (ARC)**. A rapid tactile pathway changes motor targets without waiting for the next learned-policy step. The slower whole-body policy retains responsibility for balance and continued behavior. Simply adding the two commands is insufficient: a policy trained to track motion can interpret the reflex displacement as an error and compensate against it. [Method, Sections III–IV](https://arxiv.org/html/2611.04424v1#S3).
+
+ARC addresses that conflict through training and alignment. Reflex-in-the-loop training exposes the policy to states produced by withdrawals. Reflex-transparent alignment removes the reflex offset from the joint-position observation and restores it to policy targets, alongside counterfactual training supervision. Contact-informed adaptation addresses the subsequent behavior. This is more than an inference-time interrupt bolted onto an unchanged controller. [Integration method](https://arxiv.org/html/2611.04424v1#S4).
+
+For an integration review, separate three decisions: **start withdrawing, preserve that withdrawal when the next policy command arrives, and choose what happens afterward**. A system can succeed at the first and fail at either of the others. A plausible single-frame response therefore does not establish sustained avoidance.
+
+## What the reported timing actually measures
+
+The paper describes tactile patches sampled at 300 Hz, startle detection within 5 ms, a local reflex solve under 4 ms, and tactile-to-motor commands within 10 ms. The learned policy operates at 50 Hz. These describe different boundaries, not five interchangeable claims about the robot's reaction speed. [Reflex architecture](https://arxiv.org/html/2611.04424v1#S3) · [Author overview](https://minusmodulo.github.io/reflexarc-website/).
+
+In particular, **a command reaching the motor is not the same event as motion beginning or contact force falling**. Nor does a sampling rate specify the longest delay under host load, packet loss or a delayed policy update. The authors' component timings should not be added into an independently certified worst-case bound.
+
+The following is our proposed timing record, not an additional experiment from the paper:
+
+| Boundary | Record to request | Question it answers |
+| --- | --- | --- |
+| Physical contact to acquired sample | Independent contact reference, sensor timestamp and clock relation | How much delay occurs before the signal exists? |
+| Acquired sample to detected event | Receive timestamp, filtering and detector event | Does processing or transport delay detection? |
+| Event to accepted motor command | Solver completion, command timestamp and acceptance log | Does the reflex actually reach the actuator interface? |
+| Accepted command to physical response | Motion or force measurement with its own timing | When does withdrawal or force reduction occur? |
+| Response through the next policy steps | Reflex, policy and executed targets on one timeline | Does later control preserve or cancel the response? |
+
+Keep failed, missing and stale observations visible. Averages from successful events cannot answer what happened to events the system did not detect. Sensor replacement and mounting also change the observation path; the [calibration guide](/guides/tactile-sensor-calibration) explains why the complete assembly belongs in the evidence record.
+
+## The collision comparison uses a deliberately delayed reflex
+
+In the controlled physical comparison, the same downward arm swing contacts a fixed-height box. A tactile patch on the stationary box measures force, reducing the influence of robot-skin vibration, while a 240 Hz camera observes withdrawal. The baseline adds **20 ms to the same reflex**, approximating one 50 Hz policy step. It is not a comparison against every VLA controller, another commercial robot or an entirely unsensed robot. [Contact-impact experiment, Section V-A](https://arxiv.org/html/2611.04424v1#S5.SS1).
+
+| Author-reported trace metric | Delayed reflex | Direct reflex | Reading limit |
+| --- | --- | --- | --- |
+| First force peak | 21.64 N | 14.25 N | A 34.1% reduction in this reported comparison |
+| Contact impulse in the plotted comparison | 0.2632 N·s | 0.1225 N·s | The delayed value is about 2.15 times the direct value |
+
+Figure 6 marks the impulse using the region above 2 N. Do not silently combine it with the separate ablation table's first-100-ms impulse definition. We did not establish a repeat-trial denominator or uncertainty interval for this plotted collision comparison. Its numbers therefore support the described timing comparison, not a population-wide injury probability, validated contact limit or reliability claim. [Figure 6 and ablation definitions](https://arxiv.org/html/2611.04424v1#S5).
+
+## Faster withdrawal and successful recovery are different outcomes
+
+The ablations examine reflex training, transparency and longer-term adaptation. They support investigating controller interference rather than assuming a sufficiently fast interrupt solves everything. They also contain tradeoffs: the full system does not lead every reported recontact or recovery measure. A single best aggregate score would hide that distinction. [Ablation study, Section V-C](https://arxiv.org/html/2611.04424v1#S5.SS3).
+
+For a proposed integration, use an explicit control-authority record:
+
+| Phase | What the reviewer should identify | Failure that a timing headline can miss |
+| --- | --- | --- |
+| Initial response | Which path may alter the commanded joints and under what condition | An event is detected but never changes the executed command |
+| Next policy update | How observation and target transformations preserve the intended response | The policy corrects back toward the contact |
+| Sustained recovery | Which behavior moves away, maintains support and handles ongoing commands | The robot withdraws briefly, then recontacts or loses task continuity |
+
+This table is an editorial analysis framework. It does not prescribe a protective controller or replace application-specific safety engineering. Keep the raw policy target, reflex contribution and final executed target separately: recording only the final motion makes competing commands difficult to diagnose. The [tactile manipulation overview](/tactile-manipulation) distinguishes sensor observations, action targets and physical feedback.
+
+## Coverage and validation still limit adoption
+
+The demonstrated humanoid is a Unitree G1 with patches on selected convex body regions. The paper explicitly identifies uncovered regions as unprotected by this tactile mechanism. Its teleoperation, movement and contact demonstrations do not establish continuous whole-body coverage or a safety-rated function. [Conclusion and coverage limitation](https://arxiv.org/html/2611.04424v1#S6).
+
+Before treating the method as relevant to another platform, ask for the body-link map, patch mounting, no-contact baseline behavior, timestamp alignment, joint-target interface and training configuration. Then identify the application conditions the cited experiments did not cover. These are evidence requests, not instructions to recreate collisions around people. The responsible integrator must determine the validation appropriate to the actual robot and use.
+
+## Code status and a useful next decision
+
+At our **November 4 review**, the official project displayed **Code: Coming soon**. An arXiv paper is available even though the project also retains a coming-soon paper control. We did not verify released implementation artifacts, weights or their licenses, and did not run the system. Availability statements here describe the reviewed page, not proof that no other release exists. [Project resource controls](https://minusmodulo.github.io/reflexarc-website/).
+
+ReflexArc is useful reading when a team already has a tactile response path but needs to understand how learned control interacts with it. The first decision is whether the observation, command and training interfaces can support that cooperation—not whether a 10 ms headline can be pasted into a robot specification. For a source-backed evaluation brief, use the existing [research-services inquiry](/research-services); RoboSkin.ai does not offer safety certification or claim to have validated this hardware.
+`,
+  },
+  {
+    id: "panotac-spatial-pressure-shear-feedback-limits-2026",
+    title: "PanoTac Explained: Spatial Pressure, Shear Feedback and Hardware Limits",
+    seoTitle: "PanoTac: Spatial Pressure, Shear & Hardware Limits",
+    seoDescription: "Compare PanoTac’s measured and projected signals, task ablations, sample sizes, hardware limits and source-specific cost and acquisition-rate claims.",
+    excerpt: "A practical reading of dense contact and sparse magnetic sensing: what the fused grid represents, which tasks benefit and what remains unverified for integration.",
+    category: "Tactile sensing",
+    sourceTitle: "PanoTac: A Dense Three-Axis Tactile Sensor for Robust Touch-Centric Manipulation",
+    sourceUrl: "https://arxiv.org/abs/2611.03520",
+    citationUrls: ["https://arxiv.org/abs/2611.03520", "https://arxiv.org/html/2611.03520v1", "https://panotac.github.io/"],
+    technicalFocus: ["spatial contact patterns", "shear-related response", "policy ablations", "hardware and cost boundaries"],
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-11-04",
+    updated: "2026-11-04",
+    readTime: "7 min read",
+    image: "/generated/research-panotac-interfaces-2026.svg",
+    content: `# PanoTac Explained: Spatial Pressure, Shear Feedback and Hardware Limits
+
+PanoTac combines a dense contact array with sparse magnetic measurements to support touch-centric manipulation. Its central question is useful for sensor selection: when does a policy need the **shape of contact**, when does it benefit from **shear-related information**, and what does combining those signals actually measure?
+
+This interpretation was published on **November 4, 2026**, reviewing Binglin Wang and colleagues' **November 2 arXiv v1 preprint**. All experimental results are author-reported. RoboSkin.ai reviewed the [paper](https://arxiv.org/abs/2611.03520), [full text](https://arxiv.org/html/2611.03520v1) and [official project](https://panotac.github.io/); we did not fabricate a fingertip, install software or test a policy. The practical audience is a lab or integrator choosing observations and an evaluation protocol, not a buyer seeking a verified off-the-shelf specification.
+
+## A dense output is not a dense array of independent force measurements
+
+Each fingertip combines a **12 × 32 piezoresistive array** with **10 three-axis magnetometers**. The method projects their responses into a shared 12 × 32 × 3 representation. That grid has 384 positions, but it does not contain 384 independently measured, calibrated three-axis force vectors. [Hardware and representation, Sections III-B–C](https://arxiv.org/html/2611.03520v1#S3.SS2).
+
+The normal component combines a thresholded, smoothed and normalized contact pattern with the mean absolute magnetic z response. The shear-related x and y responses are placed near magnetometer locations and interpolated across the grid. Thus even the normal representation is a fused signal, rather than simply a raw pressure image. [Representation equations](https://arxiv.org/html/2611.03520v1#S3.SS3).
+
+For a downstream engineer, the distinction affects what may be inferred from a heatmap:
+
+| Data layer | What it represents | What to avoid assuming |
+| --- | --- | --- |
+| Piezoresistive array | Spatial contact responses at the array locations | Each value is already a calibrated force in newtons |
+| Magnetometer observations | Magnetic responses associated with deformation | Every grid location has its own independent magnetic measurement |
+| Fused three-channel grid | Processed normal and interpolated shear-related fields | Interpolation creates new independently measured spatial detail |
+| Learned policy input | A representation used with vision and robot state | A useful learned cue guarantees metrological accuracy |
+
+This is not an argument against interpolation. It is a reason to preserve the raw observations, calibration and transformation definitions alongside the policy input. A representation may help a controller choose an action without supporting a separate claim of local force accuracy. The [sensor-density guide](/applications/robot-hand-tactile-sensor) separates measurement locations, channels and effective resolution.
+
+## What the manipulation ablations compare
+
+The authors evaluate vision alone, vision with dense normal contact, vision with sparse three-axis magnetic input, and the combined PanoTac representation. Within each task, policies use the same demonstrations. **Each policy receives 20 evaluation rollouts per task**, giving 60 across three tasks. The table below reproduces the reported complete-task percentages, not conditional success after reaching a particular stage. [Experimental setup and Table III](https://arxiv.org/html/2611.03520v1#S5).
+
+| Policy input | Test-tube preparation | Grain scooping | Salt pouring | Overall |
+| --- | --- | --- | --- | --- |
+| Vision only | 35% | 45% | 55% | 45.0% |
+| Vision + dense normal array | 65% | 85% | 70% | 73.3% |
+| Vision + sparse three-axis input | 85% | 60% | 90% | 78.3% |
+| Vision + PanoTac | 90% | 85% | 100% | 91.7% |
+
+The overall difference from vision alone is **46.7 percentage points**, not a 46.7% relative improvement. PanoTac ties the dense-normal baseline on complete grain scooping; its test-tube advantage over sparse three-axis input is one rollout out of 20. The salt-pouring result is 20 successes in the reported evaluation, not an industrial reliability guarantee.
+
+The comparison also changes tactile encoders and feature dimensions: sparse inputs use a different encoder from dense maps. It should not be presented as an identical-capacity model experiment that isolates the causal value of one additional channel. Stage rates include rollouts that failed earlier, so dividing or comparing stages requires retaining the authors' denominator. [Table III caption](https://arxiv.org/html/2611.03520v1#S5) · [Policy implementation](https://arxiv.org/html/2611.03520v1#A2).
+
+## Translate the results into a task-specific question
+
+The authors relate contact patterns to spoon orientation and magnetic responses to stopper release and opaque-bottle contents. Those observations suggest different requirements; they do not establish that every grasp needs the largest tactile tensor. [Task analyses](https://arxiv.org/html/2611.03520v1#S5).
+
+Our proposed evaluation starts with the failure a team needs to resolve:
+
+| Intended decision | Candidate information to examine | Evidence that would make the comparison useful |
+| --- | --- | --- |
+| Which way is a partly hidden tool held? | Contact shape and its location on the finger | Matched trials across relevant handles and grasp positions |
+| Has a constrained object released? | Changes in contact and shear-related response | A release reference and the action transition, including premature decisions |
+| Should the robot pour or discard? | Load-related cues under the actual grasp | Balanced object conditions and full-task outcomes, including placement failures |
+| Will the method work on another fingertip? | Geometry, mechanics and calibration of the new assembly | New sensor characterization and policy evidence rather than an unchanged image shape |
+
+These are suggested questions, not additional PanoTac results. Keep vision, demonstrations, resets and assistance comparable; report the cases where tactile input does not help. The [tactile-manipulation guide](/tactile-manipulation) provides the broader observation-to-action framework.
+
+## Separate acquisition, policy and robot-control rates
+
+The paper's deployed pipeline acquires tactile data at **60 Hz**, aligns streams at 30 Hz, subsamples to a **6 Hz policy**, and interpolates actions for a 30 Hz control interface. The current project hardware card advertises **up to 100 Hz**. Those are source-specific statements, not evidence that the paper ran a 100 Hz closed-loop learned policy. [Integration and deployment](https://arxiv.org/html/2611.03520v1#S3.SS4) · [Project hardware overview](https://panotac.github.io/).
+
+Before comparing this system with another sensor, request the exact hardware and firmware configuration, timestamps, processing settings and policy schedule. Record the age of the tactile observation when an action is issued. A faster acquisition specification can coexist with a slower policy, and neither alone establishes contact-to-action latency.
+
+## Cost claims need a bill of materials and a common boundary
+
+Paper v1 describes a cost **below US$50 per fingertip**; the project hardware card currently lists **US$9.4 per sensor**. We did not verify a versioned bill of materials reconciling those scopes. Treat them as author-stated component estimates, not interchangeable prices or a quote for a complete manipulation system. [Paper hardware description](https://arxiv.org/html/2611.03520v1#S3.SS2) · [Project card](https://panotac.github.io/).
+
+A useful procurement comparison would separately record sensing materials, electronics, fabrication and assembly yield, mounting, calibration fixtures and labor, replacements, computing and robot integration. For two fingertips, do not merely double a component headline and call that the deployment budget. The [tactile-sensor selection guide](/guides/how-to-choose-a-tactile-sensor) offers a broader requirements framework.
+
+## Characterization and hardware limits
+
+The reported load characterization uses three fabricated instances under normal loading. Repeatability and cross-instance variation describe consistency; they are not interchangeable with force accuracy. Magnetic x/y responses observed during normal indentation do not constitute a separate calibrated tangential-load test. The paper also identifies susceptibility to ferromagnetic objects and external magnetic fields. [Characterization](https://arxiv.org/html/2611.03520v1#S4) · [Conclusion](https://arxiv.org/html/2611.03520v1#S6).
+
+The demonstrated setup uses a parallel-jaw gripper. Extension to dexterous hands remains future work in the paper. Training with magnetic disturbances is discussed as a possible direction, not a quantitatively verified repair. A different cover, fingertip geometry or mounting should therefore trigger fresh characterization rather than inherit the original behavior.
+
+For an engineering comparison with [OpenTac's custom-skin approach](/research/opentac-custom-tactile-skins-readout-limits-2026), keep the sensing mechanism, cover mechanics and readout definitions explicit. These papers answer different integration questions; their headline rates and task scores are not a common leaderboard.
+
+## Availability and an adoption decision
+
+On **November 4**, the official project's Method Code and Hardware Repo controls displayed **Coming soon** when activated; the page script implements those notices. We did not verify a downloadable implementation, hardware package, weights or their licenses. A visible resource button is not proof of an available, licensed reproduction package. [Official project](https://panotac.github.io/).
+
+PanoTac is most useful as evidence for matching contact geometry and load-related cues to a manipulation decision. Before adoption, identify whether the needed output is a learned cue, a calibrated quantity or both; then obtain the missing artifact, timing and calibration evidence. Teams can use our [research-services inquiry](/research-services) to request a source-backed comparison. This review provides no independent hardware performance endorsement.
+`,
+  },
+  {
     id: "opentac-custom-tactile-skins-readout-limits-2026",
     title: "OpenTac Explained: Custom Tactile Skins, Shear Feedback and Partial-Readout Limits",
     seoTitle: "OpenTac: Custom Tactile Skins & Readout Limits",

@@ -5313,6 +5313,24 @@ export const seoTopicPages: SeoTopicPage[] = [
       'A tactile model is not enough. Useful manipulation requires synchronized robot state, low-latency sensing, a controller or policy that can act on touch, and task-level evidence against a no-touch baseline.',
     ],
     sections: [
+      {
+        "id": "panotac-representation-boundary",
+        "heading": "Dense tactile representations can contain interpolated observations",
+        "body": [
+          "PanoTac’s November 2, 2026 preprint combines a dense piezoresistive contact array with ten three-axis magnetometers per fingertip. Its normal field fuses contact shape with magnetic magnitude; shear-related responses are interpolated onto the shared grid. The resulting dense three-channel input is not an independent calibrated three-axis measurement at every location.",
+          "Its author-reported manipulation comparison uses 20 rollouts per policy per task. The full representation ties dense-normal input on complete grain scooping and exceeds sparse three-axis input by one test-tube rollout; the overall advantage should not become a universal sensor ranking. Encoders also differ between input representations. For an evaluation, preserve raw versus transformed signals, the task denominator, matched conditions and the failure that each modality is intended to resolve. RoboSkin.ai has not tested this hardware or policy."
+        ],
+        "links": [
+          {
+            "label": "PanoTac: representation, per-task evidence and hardware limits",
+            "href": "/research/panotac-spatial-pressure-shear-feedback-limits-2026"
+          },
+          {
+            "label": "Original PanoTac representation and ablations",
+            "href": "https://arxiv.org/html/2611.03520v1"
+          }
+        ]
+      },
       contactStateSection,
       {
         heading: 'The tactile manipulation control loop',
@@ -7329,6 +7347,24 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Robot skin and tactile sensors can contribute contact or collision information, but their safety role depends on coverage, detection threshold, latency, diagnostics, failure behavior, control integration, validation, and the applicable regulatory and standards context.',
     ],
     sections: [
+      {
+        "id": "reflex-controller-authority",
+        "heading": "A fast reflex still needs control authority after contact",
+        "body": [
+          "ReflexArc’s November 3, 2026 preprint separates a rapid tactile withdrawal from the learned policy that continues to command the same joints. Its integration method addresses a specific failure: the policy can interpret the withdrawal as tracking error and steer back toward contact. The author-reported controlled collision comparison is not a safety certification or RoboSkin.ai test.",
+          "For an evidence handoff, retain sensor acquisition, event detection, accepted motor command and physical response as separate timestamps. Then inspect the next policy commands and sustained recovery. A short tactile-to-command delay does not establish stopping response, coverage or a validated protective function. Request the raw policy target, reflex contribution and executed target on one timeline; do not infer cooperation from a single successful withdrawal."
+        ],
+        "links": [
+          {
+            "label": "ReflexArc: timing boundaries, controlled comparison and controller conflicts",
+            "href": "/research/reflexarc-tactile-reflex-latency-humanoid-control-2026"
+          },
+          {
+            "label": "Original ReflexArc method and evaluation",
+            "href": "https://arxiv.org/html/2611.04424v1"
+          }
+        ]
+      },
       {
         heading: 'Safety is a layered system, not a sensor feature',
         body: [
