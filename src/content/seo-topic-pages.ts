@@ -4888,12 +4888,13 @@ export const seoTopicPages: SeoTopicPage[] = [
     path: '/humanoid-robots',
     title: 'Humanoid Robots: Physical AI, Hands & Tactile Sensing',
     description:
-      'Understand humanoid robots through perception, robot learning, whole-body control, dexterous hands, safety, tactile sensing, and Physical AI evidence.',
+      "Evaluate humanoid robots by observation, planning, control and task outcomes; compare tactile sensing, contact models, timing and evidence boundaries.",
     h1: 'Humanoid robots: intelligence, manipulation and touch',
-    kicker: 'High-interest robotics pillar',
+    kicker: "Humanoid systems and evidence",
     intent: 'Broad definition and research map for humanoid robots, humanoid robotics, general-purpose robots, robot hands, whole-body control, and Physical AI.',
     published: '2026-08-20',
-    updated: '2026-08-22',
+    updated: "2026-11-04",
+    revisionNote: 'November 4, 2026: reviewed the full overview and official sources; added observation-to-control comparisons, timing and evaluation records. Research results remain author-reported; original publication date is retained.',
     priority: 0.96,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -4920,7 +4921,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         table: {
           headers: ['Layer', 'Primary job', 'Questions to verify', 'Touch connection'],
           rows: [
-            ['Perception', 'Estimate people, objects, geometry, motion, and contact context', 'Which sensors, conditions, latency, and failure cases were tested?', 'Touch adds local pressure, shear, slip, and contact events'],
+            ['Perception', 'Estimate people, objects, geometry, motion, and contact context', 'Which sensors, conditions, latency, and failure cases were tested?', 'Actual outputs depend on modality: pressure or shear may be measured; slip may be inferred'],
             ['Reasoning and planning', 'Translate goals into feasible task and motion sequences', 'Is planning online, scripted, or assisted by a human?', 'Contact state can confirm whether a planned step physically succeeded'],
             ['Whole-body control', 'Coordinate balance, locomotion, reach, and manipulation', 'Which body, terrain, speed, load, and disturbances were evaluated?', 'Foot and body contact can expose support and collision state'],
             ['Hands and end effectors', 'Grasp, insert, reorient, operate tools, and hand over objects', 'Is the result gripper-level, multi-finger, bimanual, or full-body?', 'Fingertip and palm sensing supports grasp and slip feedback'],
@@ -4949,6 +4950,89 @@ export const seoTopicPages: SeoTopicPage[] = [
         ],
       },
       {
+        "id": "observation-planning-control",
+        "heading": "Separate observation, planning, control and physical confirmation",
+        "body": [
+          "A humanoid demonstration combines several loops with different inputs and timing. Start with a concrete task: selecting a tool, carrying it while walking, then applying it. Seeing the tool, producing an action sequence, tracking that sequence and confirming its effect are separate obligations. A fast component does not establish fast or reliable completion of the whole task.",
+          "The examples below are author-reported research, not RoboSkin experiments or a ranking. Some use measured surface signals; others use geometry or internal robot state. The distinction determines which failures their results can address."
+        ],
+        "table": {
+          "headers": [
+            "Example and layer",
+            "What is observed or computed",
+            "Boundary for integration"
+          ],
+          "rows": [
+            [
+              "HumanoidToolBench: task evaluation",
+              "Head RGB and robot state; tool-contact and completion events",
+              "Event percentages are not a nested funnel; 50 Hz commands can execute longer open-loop chunks"
+            ],
+            [
+              "InterEvolve: task specification",
+              "Simulator reward-program search; replayed latent prompts with feedback control",
+              "Search is separate from execution; object-state estimation remains a dependency"
+            ],
+            [
+              "Reactive hand bracing: contact planning",
+              "Depth geometry and predicted post-contact stability",
+              "About 10 ms planning does not include arm travel or reliable support confirmation"
+            ],
+            [
+              "Uni-VLaT: tactile-conditioned action",
+              "Pooled whole-body tactile history and predicted motion chunks",
+              "A 500 Hz low-level controller does not establish a 500 Hz tactile VLA"
+            ],
+            [
+              "TactileStep: locomotion feedback",
+              "Calibrated and compressed sole-pressure features",
+              "Sampling, clipping and thresholds limit the interpretation of force and support"
+            ],
+            [
+              "CAMP: approach planning on a fixed arm",
+              "Known static geometry and coupled arm-hand paths",
+              "An arm-only pregrasp result is not humanoid locomotion or completed contact manipulation"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "Build a task-specific evidence record",
+            "body": [
+              "Before adopting a result, record robot and sensor revisions, the physical quantity actually measured, observation timestamps, model request and completion times, executed action horizon, contact-confirmation rule and final task criterion. Keep planning time separate from execution and from any human reset or intervention.",
+              "Use counts with their denominators: successful rollouts, retained demonstrations, prefix trajectories, sampled contact events and repeated hardware trials answer different questions. A threshold-triggered comparison, single training seed or checkpoint chosen on physical rollouts should remain visible in the evaluation record.",
+              "For a tool-use pilot, define selection, retention during movement, target contact and completed work separately. Record failures even if a later recovery succeeds. Compare the added sensing under matched conditions; do not infer industrial readiness or certified safety from a research demonstration."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "HumanoidToolBench event interpretation",
+            "href": "/news/humanoidtoolbench-tool-selection-mobile-execution"
+          },
+          {
+            "label": "InterEvolve search and execution",
+            "href": "/news/interevolve-reward-program-humanoid-manipulation"
+          },
+          {
+            "label": "Reactive hand-bracing timing",
+            "href": "/news/reactive-humanoid-multi-contact-hand-bracing"
+          },
+          {
+            "label": "Uni-VLaT representation and control",
+            "href": "/news/univlat-whole-body-tactile-vla-humanoid"
+          },
+          {
+            "label": "TactileStep feature meanings",
+            "href": "/news/tactilestep-sole-pressure-humanoid-locomotion"
+          },
+          {
+            "label": "CAMP approach-planning contracts",
+            "href": "/news/camp-cooperative-arm-hand-motion-planning"
+          }
+        ]
+      },
+      {
         heading: 'How to evaluate humanoid claims',
         body: [
           'A useful humanoid result identifies the embodiment, task, environment, autonomy level, sensing inputs, control frequency, number of trials, baseline, intervention policy, and failure modes. A demonstration video can establish that an event occurred; it does not establish generality, reliability, or deployment readiness.',
@@ -4969,8 +5053,10 @@ export const seoTopicPages: SeoTopicPage[] = [
       },
     ],
     faqs: [
+      { question: 'Does a 500 Hz controller mean a humanoid AI model decides at 500 Hz?', answer: 'No. Sensor acquisition, model inference, action-chunk execution and motor control can use different schedules. Record observation age and the next feedback opportunity as well as the low-level command rate.' },
+      { question: 'Does reaching a contact pose prove a manipulation task succeeded?', answer: 'No. A planned or reached pose is different from confirmed support, a retained grasp or completed work. Keep those outcomes and their trial denominators separate.' },
       { question: 'What is a humanoid robot?', answer: 'A humanoid robot uses a human-related body plan or capability set to operate in human-scale environments. The term describes embodiment and does not automatically mean the robot is autonomous or general purpose.' },
-      { question: 'Why do humanoid robots need tactile sensing?', answer: 'Touch can expose contact, pressure, shear, slip, seating, support, and collision events at hands, feet, arms, and body surfaces when vision or proprioception is incomplete.' },
+      { question: 'Why do humanoid robots need tactile sensing?', answer: 'Depending on modality, calibration and coverage, surface sensing can measure local contact variables or help infer slip, seating and support. Verify the required output and its contribution to a matched task; a tactile sensor does not automatically supply every contact property.' },
       { question: 'Are humanoid robots the same as Physical AI?', answer: 'No. Humanoids are one embodiment of Physical AI. Physical AI also includes other robots and autonomous machines that perceive, reason, and act in the physical world.' },
       { question: 'What should a humanoid robot benchmark report?', answer: 'It should identify the robot, task, environment, autonomy level, inputs, baseline, trials, success criteria, interventions, and failure modes. Hardware and software versions also matter.' },
     ],
@@ -4986,6 +5072,12 @@ export const seoTopicPages: SeoTopicPage[] = [
       { label: 'Humanoid locomotion touch brief', href: '/research/tac4loco-plantar-tactile-humanoid-locomotion-2026', description: 'Review source-bounded plantar tactile evidence.' },
     ],
     sources: [
+      {"label": "humanoidtoolbench tool selection mobile execution \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.02089v1"},
+      {"label": "interevolve reward program humanoid manipulation \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.02196v1"},
+      {"label": "reactive humanoid multi contact hand bracing \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2610.00823v1"},
+      {"label": "univlat whole body tactile vla humanoid \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.35450v1"},
+      {"label": "tactilestep sole pressure humanoid locomotion \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.28959v1"},
+      {"label": "camp cooperative arm hand motion planning \u2014 v1 method and evaluation", "href": "https://arxiv.org/html/2609.29021v1"},
       { label: 'International Federation of Robotics 2026 trends', href: 'https://ifr.org/ifr-press-releases/news/top-5-global-robotics-trends-2026' },
       { label: 'International Federation of Robotics humanoid position paper', href: 'https://ifr.org/ifr-press-releases/news/humanoid-robots-vision-and-reality-paper-published-by-ifr' },
       { label: 'Google DeepMind Gemini Robotics 2', href: 'https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/' },

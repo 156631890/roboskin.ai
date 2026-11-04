@@ -521,15 +521,16 @@ Distance sensing used structured AprilGrid targets rather than natural reef geom
     id: 'humanoidtoolbench-tool-selection-mobile-execution',
     title: 'HumanoidToolBench separates tool choice from task completion',
     seoTitle: 'HumanoidToolBench Tests Tool Choice and Execution',
-    seoDescription: 'HumanoidToolBench provides 18 Unitree G1 tasks, 55 tools and 3,094 demonstrations. Review contact funnels, real trials and release terms.',
+    seoDescription: "Read HumanoidToolBench event rates, shared-source demonstrations and action chunks correctly; separate fine-tuned hardware results from simulation.",
     excerpt: 'HumanoidToolBench tracks contact, correct selection, lifting and final success across stationary and mobile Unitree G1 tool-use tasks instead of collapsing them into one score.',
     category: 'Humanoid benchmarks',
     image: '/generated/news/humanoidtoolbench-tool-selection-mobile-execution.png',
     imageAlt: 'Diagram showing a humanoid progressing through candidate contact, correct tool selection, tool lift, target contact and task success.',
-    imageCaption: 'Original RoboSkin.ai schematic of the HumanoidToolBench event funnel. It is explanatory artwork, not a benchmark frame.',
+    imageCaption: "Original RoboSkin.ai schematic of recorded tool-use events. Episodes can recover from a wrong first contact; the drawing is not a strictly nested probability funnel or benchmark frame.",
     sourceTitle: 'HumanoidToolBench: Benchmarking Humanoid Tool Use from Selection to Mobile Execution',
     sourceUrl: 'https://arxiv.org/abs/2610.02089',
     sources: [
+      {"title": "HumanoidToolBench evaluation and data contracts, revision 3fec9bd", "url": "https://github.com/SNU-PI/HumanoidToolBench/tree/3fec9bd36933a1648ff7f95468c983f3452243a0"},
       { title: 'HumanoidToolBench arXiv v1 record', url: 'https://arxiv.org/abs/2610.02089' },
       { title: 'Full HumanoidToolBench v1 paper', url: 'https://arxiv.org/html/2610.02089v1' },
       { title: 'Official HumanoidToolBench project', url: 'https://snu-pi.github.io/HumanoidToolBench/' },
@@ -540,8 +541,8 @@ Distance sensing used structured AprilGrid targets rather than natural reef geom
     evidenceStatus: 'Preprint · arXiv v1 · 18-task simulation benchmark · 40 reported real-robot test trials per policy · MIT evaluation code · CC BY-NC 4.0 dataset',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-04',
-    updated: '2026-10-04',
-    readTime: '9 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# HumanoidToolBench separates tool choice from task completion
 
 Researchers from Seoul National University, the University of Massachusetts Amherst and Google Research released HumanoidToolBench on October 1, 2026. The benchmark asks a Unitree G1 to infer which tool can accomplish a goal, grasp it and use it, sometimes while moving along a table. Its 18 tasks, 55 tool assets and 3,094-trajectory ToolBook dataset make the hand-to-object chain measurable instead of treating “tool use” as a single opaque success bit. [Paper and version record](https://arxiv.org/abs/2610.02089).
@@ -556,7 +557,7 @@ Researchers from Seoul National University, the University of Massachusetts Amhe
 
 Each scene contains one suitable tool, two irrelevant objects and, in decoy mode, a misleading tool that differs in task-relevant length, shape, mass or compliance. Instructions describe the goal but do not name the tool. Level L0 ends when the correct tool is lifted 8 cm. L1 adds stationary execution. L2 moves the task target so the robot must locomote while carrying the tool.
 
-The environment records five events: any candidate contact, correct first contact, correct-tool lift, tool-target contact and final success. That funnel separates visual selection from grasping and contact execution. “Correct first contact” is still a proxy—it does not prove semantic reasoning—but it shows where a policy begins to diverge from the intended sequence.
+The environment records five events: any candidate contact, correct first contact, correct-tool lift, tool-target contact and final success. These events help separate selection from grasping and contact execution, but they are not a strictly nested funnel: an episode can touch the wrong tool first and later lift the correct one. “Correct first contact” is still a proxy—it does not prove semantic reasoning—but it shows where a policy begins to diverge from the intended sequence.
 
 ToolBook is built from 1,959 L1/L2 simulation attempts that yielded 1,200 successful demonstrations. The authors cut 1,803 L0 prefixes from attempts in which the correct tool was lifted, including 614 attempts that later failed. Adding 91 real L1 demonstrations gives exactly 3,094 trajectories. [Dataset construction and protocol](https://arxiv.org/html/2610.02089v1).
 
@@ -566,7 +567,7 @@ Simulation evaluation uses one trained policy instance and 100 episodes per task
 
 Averaged across scenarios and L1/L2, FastWAM contacts some candidate in 99.8% of standard episodes and makes the correct tool its first contact in 87.7%, yet completes only 52.8%. Under decoys those values are 100%, 74.7% and 47.0%. Contact is easy; preserving the right grasp and applying the tool is the larger gap.
 
-Real evaluation covers L1 BallMove and BallRetrieve, each in two modes, with ten trials per cell. GR00T N1.7 succeeds in 18 of 40 trials; FastWAM also succeeds in 18 of 40; ACT succeeds in four. These are small platform-specific trials, not estimates of general humanoid tool competence.
+Real evaluation covers L1 BallMove and BallRetrieve, each in two modes, with ten trials per cell. GR00T N1.7 succeeds in 18 of 40 trials; FastWAM also succeeds in 18 of 40; ACT succeeds in four. Each policy first receives 5,000 additional fine-tuning updates on the 91 real demonstrations. These are small adapted, platform-specific trials, not zero-shot transfer or estimates of general humanoid tool competence.
 
 ## RoboSkin analysis
 
@@ -576,9 +577,25 @@ Focused probes also warn against over-interpreting success. GR00T N1.7's correct
 
 ## Availability and replication boundaries
 
-The official repository was live when checked. It includes the evaluation environment, recording validator, ACT and Diffusion Policy checkpoints and documented 100-episode protocol. The maintainers estimate about two hours and 1 GB of outputs for one condition on one GPU, roughly a day and a half and 15 GB for all 18 conditions sequentially. Training pipelines are not included.
+The official repository, rechecked at revision 3fec9bd on November 4, provides the evaluation environment, recording validator and 100-episode protocol, with links to the paper's ACT and Diffusion Policy checkpoints. The maintainers report about two hours and 1 GB of outputs for one condition on their workstation GPU using the released ACT policy, roughly a day and a half and 15 GB for all 18 conditions sequentially. Other policies can take longer; this is not RoboSkin timing. Training pipelines are not included.
 
 The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, project and repository but did not run the GPU benchmark or physical robot tests. Tool assets, third-party models and controller components carry separate terms; users should not infer that the dataset's non-commercial license covers every dependency.
+
+## Use an event ledger rather than a success funnel
+
+For a new evaluation, retain each episode's event flags and timestamps alongside final success. The reported percentages count episodes containing an event; dividing correct-tool lifts by correct first contacts does not yield a valid transition probability, because those sets can contain different episodes. Likewise, L0 and L1 use different termination rules. A successful tool lift does not predict a conditional L1 completion rate. [Protocol and analysis](https://arxiv.org/pdf/2610.02089v1).
+
+Two less visible contracts also affect comparison:
+
+| Contract | What to record before comparing policies |
+| --- | --- |
+| Demonstration identity | Parent collection attempt for each L0 prefix, full trajectory and rerendered view; related slices should not be treated as independent samples in a proposed train/test split |
+| Observation and action timing | Image timestamp, inference completion, chunk length and next observation; the 50 Hz command stream does not imply 50 fresh model decisions per second |
+| Robot interface | The evaluator's 32-value state and 36-value action order, rather than assuming raw joint recordings or hardware actions have the same shape |
+
+The paper executes chunks without temporal ensembling: ACT's 100 steps span two seconds at 50 Hz, versus 0.8 seconds for GR00T's 40. That difference can change how long a policy acts before it sees a disturbed tool again. It should accompany performance comparisons, not be mistaken for measured inference latency.
+
+The [versioned dataset guide](https://github.com/SNU-PI/HumanoidToolBench/blob/3fec9bd36933a1648ff7f95468c983f3452243a0/data/README.md) additionally distinguishes the raw 43-joint simulation observation and a 35-value hardware supervision contract. Padding a vector does not verify semantic compatibility. Code is MIT; recordings are CC BY-NC 4.0, and external assets retain their own terms. No payload download or execution was performed here. The [humanoid evaluation map](/humanoid-robots#observation-planning-control) connects these contracts to whole-body deployment questions.
 
 ## Sources and related resources
 
@@ -588,13 +605,15 @@ The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, pr
 - [MIT-licensed evaluation toolkit and replication requirements](https://github.com/SNU-PI/HumanoidToolBench)
 - [RoboSkin robotics dataset directory](/robotics-datasets)
 - [RoboSkin benchmark directory](/benchmarks)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
     id: 'interevolve-reward-program-humanoid-manipulation',
     title: 'InterEvolve searches reward programs instead of retraining a humanoid',
     seoTitle: 'InterEvolve Searches Humanoid Reward Programs at Test Time',
-    seoDescription: 'InterEvolve edits and tunes staged reward programs for a frozen humanoid controller. Review 86.5% simulation results, cost and hardware limits.',
+    seoDescription: "Separate InterEvolve reward search, replayed latent prompts and feedback control; interpret task-family cost, fixed verification and transfer limits.",
     excerpt: 'InterEvolve uses an LLM, numerical tuning and parallel simulation to revise staged reward programs while keeping the Unitree G1 control policy fixed.',
     category: 'Humanoid loco-manipulation',
     image: '/generated/news/interevolve-reward-program-humanoid-manipulation.png',
@@ -612,8 +631,8 @@ The paper is an arXiv v1 preprint. RoboSkin.ai inspected the published paper, pr
     evidenceStatus: 'Preprint · arXiv v1 · simulation search over eight task families · physical G1 demonstrations · project videos public · no code, data or software license verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-04',
-    updated: '2026-10-04',
-    readTime: '9 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     content: `# InterEvolve searches reward programs instead of retraining a humanoid
 
 University of Illinois Urbana-Champaign researchers released InterEvolve on October 1, 2026. The system adapts a frozen humanoid controller to new contact-rich tasks by changing the reward program that queries it, rather than updating policy weights. An LLM edits program stages, CMA-ES tunes numerical constants, and parallel simulation verifies proposals. The reported macro-average rises from 34.6% for a tuned initial agent program to 86.5% after evolution. [Paper and version record](https://arxiv.org/abs/2610.02196).
@@ -621,14 +640,14 @@ University of Illinois Urbana-Champaign researchers released InterEvolve on Octo
 ## Key takeaways
 
 - An object-aware forward-backward behavioral foundation model turns rewards into latent prompts for one fixed Unitree G1 controller.
-- Full InterEvolve reports 86.5% simulation success, 2.1 GPU-hours and 0.23 million LLM tokens across eight task families under the paper's protocol.
+- Full InterEvolve reports 86.5% macro-average simulation success across eight task families. The reported 2.1 GPU-hours and 0.23 million LLM tokens cover a complete evolution run for one family, not the combined eight-family experiment.
 - Real-robot demonstrations use an RGB-D camera on the robot, but perception, state estimation and policy inference run on an off-board GPU workstation.
 
 ## Evolve the interface, not the weights
 
-The motor model starts with a frozen body prior and adds object-aware residual networks trained on retargeted OMOMO and GRAB interactions. The training collection contains 3,866 clips; 50 clips for each of four box-like objects are held out for tracking evaluation. At test time, a reward is projected against a state bank into a latent prompt that elicits behavior from the fixed policy.
+The motor model starts with a frozen body prior and adds object-aware residual networks trained on retargeted OMOMO and GRAB interactions. After holding out 50 clips for each of four box-like objects, 3,866 clips remain for training. At test time, a reward is projected against a state bank into a latent prompt that elicits behavior from the fixed policy.
 
-A reward program can contain multiple stages, completion conditions, weights and thresholds. DeepSeek-V4-Flash revises the program structure from simulator feedback, while CMA-ES calibrates constants. Each valid proposal receives 192 tuning rollouts and another 192 confirmation rollouts. Verified programs become a text skill library that later tasks can retrieve. [Method, search budget and evaluation details](https://arxiv.org/html/2610.02196v1).
+A reward program can contain multiple stages, completion conditions, weights and thresholds. DeepSeek-V4-Flash revises the program structure from simulator feedback, while CMA-ES calibrates constants. Each valid proposal receives 192 tuning rollouts; top candidates receive a separate 192-rollout confirmation evaluation. Verified programs become a text skill library that later tasks can retrieve. [Method, search budget and evaluation details](https://arxiv.org/html/2610.02196v1).
 
 This is adaptation through task specification. It can expose behavior already present in the controller, but it does not manufacture a missing motor primitive. The same distinction appears in contact-rich [Physical AI](/physical-ai): better objectives can coordinate pushing, lifting and carrying only if the underlying control distribution contains usable versions of those motions.
 
@@ -650,7 +669,21 @@ The 86.5% figure is a simulation macro-average, not a hardware success rate. The
 
 InterEvolve spends inference-time compute on LLM calls, CMA-ES and hundreds of simulator rollouts per candidate. It does not replan reward code in real time during hardware execution. Results are bounded by the pretrained motor repertoire, reward feature bank, available scene measurements and simulator fidelity. Transfer to different objects can require manual program adaptation; unchanged large-box programs show large drops on several objects.
 
-This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot. The official project publishes explanatory material and videos. No official source-code repository, trained controller, dataset download or software license was visible when checked. The manuscript is distributed under arXiv's perpetual non-exclusive license.
+This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot. The official project publishes explanatory material and videos. The November 4 review did not verify an official implementation, trained-controller download, dataset release or software license through that project page. The manuscript is distributed under arXiv's perpetual non-exclusive license.
+
+## Keep reward search, prompt replay and feedback separate
+
+Three different processes sit behind an InterEvolve hardware demonstration. The [deployment appendix](https://arxiv.org/html/2610.02196v1#A4.SS8) describes a latent sequence obtained from a simulated rollout and replayed step by step on the robot. The controller still responds to current proprioception and estimated object state. Thus replaying prompts is neither online LLM program revision nor blind playback of joint commands.
+
+| Process | Changes during the process | What stays fixed |
+| --- | --- | --- |
+| Simulation search | Program stages, constants and the external text library | Pretrained controller, source bank and task-verification criteria |
+| Hardware prompt replay | Which stored latent prompt is supplied at each step | The selected sequence and pretrained motor policy |
+| Feedback execution | Motor output based on current robot and object estimates | Available sensing, trained repertoire and controller interface |
+
+The verifier is critical: maximizing a reward is not enough if a robot can earn it while standing still. Independent task criteria score the actual outcome, and changing reward code must not redefine those criteria. Search and final evaluation use different scenes but the same bounded perturbation distribution; this is not an unrestricted generalization test.
+
+For a proposed physical replication, record the prompt sequence, object mesh, pose estimator, confidence gate and timing. The paper's camera pipeline can pause when pose confidence is insufficient, and one kick demonstration uses motion capture. Geometric proximity features are not measured contact forces. Objects new to reward search may also have appeared in motor pretraining, so record novelty at both stages. These distinctions fit the [humanoid observation-to-control map](/humanoid-robots#observation-planning-control) and prevent the simulated 86.5% result or one-family compute budget from becoming a hardware capability claim.
 
 ## Sources and related resources
 
@@ -660,13 +693,15 @@ This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot
 - [Official InterEvolve project page and videos](https://sirui-xu.github.io/InterEvolve/)
 - [RoboSkin humanoid robotics overview](/humanoid-robots)
 - [RoboSkin robot learning resources](/robot-learning)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
     id: 'reactive-humanoid-multi-contact-hand-bracing',
-    title: 'Reactive multi-contact planning turns a humanoid hand into a 10 ms brace',
-    seoTitle: 'Reactive Humanoid Hand Bracing in About 10 ms',
-    seoDescription: 'A learned stability model selects humanoid hand braces in about 10 ms. Review the impulse tests, 32 hardware pushes and contact-model limits.',
+    title: "Reactive multi-contact planning selects a humanoid hand brace in about 10 ms",
+    seoTitle: "Humanoid Hand Bracing: Planner Time vs Physical Recovery",
+    seoDescription: "Distinguish 9.7 ms hand-contact planning from motion, touchdown detection and recovery; review modeled stability and the limited hardware comparison.",
     excerpt: 'A two-stage planner previews reachable hand contacts with a learned post-impact stability model, letting a humanoid brace against nearby surfaces before foot-only recovery fails.',
     category: 'Humanoid contact control',
     image: '/generated/news/reactive-humanoid-multi-contact-hand-bracing.png',
@@ -683,9 +718,9 @@ This is an arXiv v1 preprint, and RoboSkin.ai did not run the simulator or robot
     evidenceStatus: 'Preprint · arXiv v1 · simulation impulse search · 32 alternating hardware pushes · no code or dataset release verified',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-03',
-    updated: '2026-10-03',
-    readTime: '8 min read',
-    content: `# Reactive multi-contact planning turns a humanoid hand into a 10 ms brace
+    updated: "2026-11-04",
+    readTime: "5 min read",
+    content: `# Reactive multi-contact planning selects a humanoid hand brace in about 10 ms
 
 Researchers at the Florida Institute for Human and Machine Cognition and the University of West Florida released a reactive humanoid contact planner on September 30, 2026. Instead of asking the feet to absorb every push, it samples reachable hand contacts on nearby surfaces and estimates which brace will provide the most post-impact control. The learned stability approximation reduces a 388 ms numerical planning path to 9.7 ms in the authors’ benchmark. [Paper and version record](https://arxiv.org/abs/2610.00823).
 
@@ -699,13 +734,13 @@ Researchers at the Florida Institute for Human and Machine Cognition and the Uni
 
 The problem is not merely finding a wall. A reachable point can place the arm in a configuration with little capacity to redirect the whole-body load. The system therefore rolls a reduced centroidal model through pre-impact, impact and post-impact phases. Candidate points are scored by the size and direction of the feasible post-impact Center of Pressure region.
 
-Computing that region from inverse kinematics and linear programs for every candidate would be too slow for a reflex. The paper trains separate neural networks for five foot-and-hand contact permutations. Their inputs include planar contact geometry, center-of-mass position and robot posture summaries; their 18-dimensional output approximates the feasible region. Per-rollout region computation falls from 0.65 ms to 0.13 ms and avoids a reported 13 ms inverse-kinematics solve. With 14 rollouts per side, the full comparison is 9.7 ms for the learned path versus 388 ms for numerical optimization. [Model and planner details](https://arxiv.org/html/2610.00823v1).
+Computing that region from inverse kinematics and linear programs for every candidate would increase planning time. The reported comparison concerns this computation, not the entire physical response. The paper trains separate neural networks for five foot-and-hand contact permutations. Their inputs include planar contact geometry, center-of-mass position and robot posture summaries; their 18-dimensional output approximates the feasible region. Per-rollout region computation falls from 0.65 ms to 0.13 ms and avoids a reported 13 ms inverse-kinematics solve. With 14 rollouts per side, the full comparison is 9.7 ms for the learned path versus 388 ms for numerical optimization. [Model and planner details](https://arxiv.org/html/2610.00823v1).
 
 ## Results under the reported conditions
 
 In simulation, maximum sustainable impulses are reported for standing, sideways walking and backward walking. Foot-only recovery handles 15.6, 17.7 and 23.0 N·s. The closest-contact baseline reaches 25.8, 36.4 and 26.6 N·s, while optimized bracing reaches 29.4, 42.3 and 32.1 N·s. Recomputing each relative gain gives an average 89.0% over no brace and 16.9% over the naive brace, consistent with the rounded abstract values.
 
-The hardware study alternates baseline and optimized trials rather than measuring a calibrated external impulse. The authors use capture-point-error slope at push time as a proxy and report less than 5% variation between the paired datasets. In the ten-push multi-surface standing test, choosing a front wall instead of the nearer slanted surface reduces average recovery time by 57%. In a second ten-push standing test, shifting one hand about 12 cm along a wall reduces it by 29%. Averaging those two reported reductions produces the abstract’s 43% standing figure. In twelve walking pushes, hand bracing reaches high stability in 316 ms versus 384 ms without hand contact, an 18% reduction.
+The hardware study alternates baseline and optimized trials rather than measuring a calibrated external impulse. The authors use capture-point-error slope at push time as a proxy and report less than 5% variation between the paired datasets. In the ten-push multi-surface standing test, choosing a front wall instead of the nearer slanted surface reduces average recovery time by 57%. In a second ten-push standing test, shifting one hand about 12 cm along a wall reduces it by 29%. Averaging those two reported reductions produces the abstract’s 43% standing figure. In twelve walking pushes, hand bracing reaches high stability in 316 ms versus 384 ms without hand contact, an 18% reduction. The walking baseline consists of pushes that did not trigger replanning; it is not a randomized, force-matched intervention comparison.
 
 ## RoboSkin analysis
 
@@ -719,11 +754,29 @@ This is an arXiv v1 preprint, and RoboSkin.ai has not reproduced the results. Th
 
 The arXiv manuscript is available under CC BY 4.0. No official project page, implementation repository, training data, model weights or software license was verified, so the publication should not be read as a reproducible software release.
 
+## Measure the full path from disturbance to confirmed support
+
+A fast contact choice can still be followed by stale geometry, arm travel or delayed touchdown recognition. In the [reported implementation](https://arxiv.org/html/2610.00823v1), planar regions come from depth processing at 30 Hz. Replanning also requires a disturbance threshold and a minimum three-second interval between plans. The 9.7 ms computation therefore does not describe a continuously refreshed 100 Hz physical reflex.
+
+| Stage | Distinct evidence needed |
+| --- | --- |
+| Surface observation | Geometry timestamp, occlusion and assumed surface properties |
+| Contact selection | Planning duration and whether a new plan was actually triggered |
+| Arm motion | Command-to-touchdown time and tracking error |
+| Support confirmation | Detection rule and time; this study infers contact from hand position and velocity relative to the plane |
+| Recovery and release | Whole-body error through contact and after the arm leaves the surface |
+
+The paper's geometric contact detector is not tactile force feedback. Its brief walking contact and tracking effects after release show why a planner benchmark cannot substitute for the remaining measurements. Similarly, a centimeter-scale region RMSE is an average prediction error under sampled configurations, not a bound on every possible disturbance.
+
+For an integration review, keep assumed friction, impact model, contact geometry and controller limits with each result. A surface being reachable does not establish its ability to bear the intended load. The [humanoid evidence map](/humanoid-robots#observation-planning-control) helps separate these questions without turning this research into a certified recovery or safety system.
+
 ## Sources and related resources
 
 - [Reactive Humanoid Multi-Contact v1, submitted September 30, 2026](https://arxiv.org/abs/2610.00823)
 - [Full planning, simulation and hardware protocol](https://arxiv.org/html/2610.00823v1)
 - [RoboSkin guide to tactile feedback for Physical AI](/guides/tactile-feedback-for-physical-ai)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
@@ -1889,7 +1942,7 @@ This proposed review prevents an easier starting condition or an incomplete low-
     id: 'univlat-whole-body-tactile-vla-humanoid',
     title: 'Uni-VLaT gives humanoid VLA policies whole-body touch',
     seoTitle: 'Uni-VLaT Whole-Body Tactile VLA for Humanoids',
-    seoDescription: 'Uni-VLaT adds distributed tactile sensing and future prediction to humanoid VLA policies. Review five real-robot tasks, baselines and release limits.',
+    seoDescription: "Trace Uni-VLaT sensor channels, pooled tokens, action chunks and 500 Hz control; review checkpoint selection, participant coverage and tactile limits.",
     excerpt: 'Uni-VLaT adapts pretrained humanoid VLA policies with textile electronic skin across eight body regions and predicts future touch, body state and visual features during training.',
     category: 'Whole-body tactile learning',
     image: '/generated/news/univlat-whole-body-tactile-vla-humanoid.png',
@@ -1904,11 +1957,11 @@ This proposed review prevents an easier starting condition or an incomplete low-
     ],
     technicalFocus: ['whole-body tactile sensing', 'humanoid VLA adaptation', 'electronic skin', 'loco-manipulation'],
     sourceDate: '2026-09-28',
-    evidenceStatus: 'Preprint · arXiv v1 · five real-robot tasks · project videos available · code not released',
+    evidenceStatus: "Preprint · arXiv v1 · five real-robot tasks · project media reviewed · implementation and weights unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-29',
-    updated: '2026-09-29',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# Uni-VLaT gives humanoid VLA policies whole-body touch
 
 Researchers from Tsinghua University, Beihang University, the Communication University of China and the University of Hong Kong released Uni-VLaT on September 28, 2026. The method adapts pretrained vision-language-action policies to a Unitree G1 humanoid with distributed textile electronic skin, then uses touch as an anchor for predicting future tactile, proprioceptive and visual representations. In five real-robot tasks, the authors report a 75% average success rate. [Paper and version record](https://arxiv.org/abs/2609.35450).
@@ -1916,7 +1969,7 @@ Researchers from Tsinghua University, Beihang University, the Communication Univ
 ## Key takeaways
 
 - Uni-VLaT reaches 75% average success over five tasks, versus 32% without tactile input, 68% with touch but no prediction and 69% with tactile-only prediction.
-- The main Isaac-GR00T comparison uses 20 physical rollouts per configuration and about 50 demonstrations per task; the separate pi-0.5 comparison uses 10 rollouts per configuration.
+- The main Isaac-GR00T comparison uses 20 physical rollouts per task and configuration, with 289 retained demonstrations across five tasks; the separate pi-0.5 comparison uses 10 rollouts per task and configuration.
 - The tactile system covers eight torso, shoulder, back and arm regions. Its values are pressure-related ADC readings in arbitrary units, not calibrated force measurements.
 
 ## What changed
@@ -1945,7 +1998,22 @@ For teams building [electronic skin](/e-skin) systems, the study also illustrate
 
 Uni-VLaT is an arXiv v1 preprint, and RoboSkin.ai has not reproduced it. Evaluation uses one humanoid, five tasks and about 50 demonstrations per task. The paper reports rollout counts but not confidence intervals. Results mix a discrete touch-triggered behavior with sustained manipulation, so the five-task average should not be read as one uniform capability measure.
 
-The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides task videos but still labels code as “coming soon.” It also retained stale “paper coming soon” text when checked, even though the arXiv paper was already public. No repository, dataset, checkpoint or software license was verified. The arXiv manuscript license does not grant rights to unreleased implementation assets.
+The original September 29 review found coming-soon text on the [official project page](https://ggkiller-air.github.io/Uni-VLaT/). The November 4 recheck found paper and task media, but did not verify an implementation, dataset, checkpoint or software license. The earlier placeholder text should not be treated as the current release status. The arXiv manuscript license does not grant rights to unreleased implementation assets.
+
+## A fast joint controller does not make the VLA a fast tactile reflex
+
+The appendix distinguishes several clocks and representations. There are 624 effective sensing channels, pooled across eight body regions into eight learned tokens. These are not interchangeable counts. Four tactile frames synchronized at 50 Hz span 60 ms; the future-prediction targets are training supervision, not future observations supplied at runtime. [System and deployment details](https://arxiv.org/html/2609.35450v1).
+
+| Layer | Reported behavior | Interpretation boundary |
+| --- | --- | --- |
+| Tactile acquisition | Nominal 100 Hz acquisition, synchronized to a 50 Hz stream | Arbitrary-unit values do not establish calibrated contact force |
+| VLA output | 40 motion tokens, spanning 0.8 seconds at 50 Hz | This is a predicted action horizon, not an inference-frequency claim |
+| New model request | Roughly 0.4 seconds after the preceding result; elapsed prefixes are skipped | Actual observation age also depends on inference and scheduling |
+| Low-level control | 500 Hz controller | This does not mean the VLA or its tactile reasoning runs at 500 Hz |
+
+The physical G1 has no dexterous hands in this study; hand-state placeholders maintain an interface rather than document actuated fingers. Sleeve pooling also loses circumferential detail while retaining axial information. These choices should be checked against a new task before treating the model as a drop-in whole-body skin controller.
+
+Evaluation design matters as much as timing. All retained demonstrations are used for training without a separate validation split, and checkpoint selection uses physical rollout performance. A new study should predefine checkpoint selection and hold out participants, mounts and scenes. The hugging task uses one training participant and two evaluation participants; it does not establish safe contact forces. Cleanup's stage score must also remain separate from binary full-task completion. See the [humanoid evaluation map](/humanoid-robots#observation-planning-control) for a record connecting sensing, action and outcome.
 
 ## Sources and related resources
 
@@ -1953,6 +2021,8 @@ The [official project page](https://ggkiller-air.github.io/Uni-VLaT/) provides t
 - [Full method, task definitions and results](https://arxiv.org/html/2609.35450v1)
 - [Official project page and real-robot videos](https://ggkiller-air.github.io/Uni-VLaT/)
 - [RoboSkin guide to tactile manipulation](/tactile-manipulation)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
@@ -3207,7 +3277,7 @@ The official project page provides task videos and a method overview. No public 
     id: 'tactilestep-sole-pressure-humanoid-locomotion',
     title: 'TactileStep closes the loop on Unitree G1 sole pressure',
     seoTitle: 'TactileStep: Sole Tactile Feedback for Humanoid Locomotion',
-    seoDescription: 'TactileStep uses 25 Hz pressure insoles on a Unitree G1. Examine its impact-force results, contact-area gains, energy trade-off and code status.',
+    seoDescription: "Interpret TactileStep force, center-of-pressure and area features; separate sampling delay, impact definitions and near-robot sound from broad claims.",
     excerpt: 'Tsinghua University researchers feed force, center-of-pressure and contact-area features from pressure insoles into a humanoid parkour policy. Hardware measurements improve on several terrains, while long-term sensor behavior and faster motion remain untested.',
     category: 'Humanoid tactile sensing',
     image: '/generated/news/tactilestep-sole-pressure-humanoid-locomotion.png',
@@ -3222,11 +3292,11 @@ The official project page provides task videos and a method overview. No public 
     ],
     technicalFocus: ['sole tactile sensing', 'humanoid locomotion', 'pressure insoles', 'sim-to-real reinforcement learning'],
     sourceDate: '2026-09-24',
-    evidenceStatus: 'CoRL 2026 project · arXiv v1 · code pending',
+    evidenceStatus: "CoRL 2026 Spotlight identified by project · arXiv v1 reviewed · implementation unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-25',
-    updated: '2026-09-25',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# TactileStep closes the loop on Unitree G1 sole pressure
 
 Tsinghua University researchers released TactileStep on September 24, 2026, as a sole-tactile learning framework for humanoid locomotion. The system equips a Unitree G1 with pressure insoles and exposes three contact features to the deployed policy: normalized normal force, center of pressure and contact-area ratio. In controlled hardware comparisons, the largest reported reduction in touchdown force is 48.8%, but that maximum comes from one terrain condition and should not be generalized to every step. [Paper and version record](https://arxiv.org/abs/2609.28959).
@@ -3265,7 +3335,23 @@ The work evaluates one Unitree G1 within bounded motion commands. Faster motion,
 
 The wireless insole operates at 25 Hz with less than 1 ms of post-acquisition processing and communication delay; wired acquisition supports 100 Hz. In a two-condition validation, 100 Hz measurements were close but not identical to the 25 Hz values. This check addresses peak under-sampling, not every source of calibration error. [Sampling validation](https://arxiv.org/html/2609.28959v1#A3.SS3).
 
-The official project page supplied paper, videos and tables on September 25, but displayed “Code Soon.” No repository, weights, training environments or sensor dataset were verified. [Official availability](https://tactilestep.github.io/).
+The original September 25 review found “Code Soon” on the project page. The November 4 recheck found paper, media and a CoRL 2026 Spotlight designation, but did not verify a repository, weights, training environments or sensor dataset. [Official availability](https://tactilestep.github.io/).
+
+## Check what each sole feature actually represents
+
+The compact features are useful precisely because they discard detail. Their semantics must survive a change of insole, mounting or calibration. The [feature and evaluation appendices](https://arxiv.org/html/2609.28959v1) show why a small numeric vector is not a complete measurement of foot-ground mechanics.
+
+| Feature | Transformation | Possible misreading |
+| --- | --- | --- |
+| Normal force | Calibrated raw readings are summed, normalized and clipped | A saturated value is not an uncapped impact measurement |
+| Center of pressure | Weighted location is set to zero below a low-force threshold | Zero can indicate an unloaded foot rather than centered support |
+| Contact-area ratio | Fraction of taxels exceeding an activation threshold | This is not a directly measured continuous geometric contact patch |
+
+At 25 Hz, samples are nominally 40 ms apart. Less than 1 ms of processing and transmission after acquisition does not remove that sampling interval or model/control delay. The 100 Hz comparison addresses two tested conditions; it does not prove that every impact transient is captured faithfully.
+
+Metric definitions also differ across settings: simulation uses the maximum over a landing window, while the physical protocol uses the first rising edge in the insole-derived force. Its sound measurement is peak A-weighted level near the lower leg under a fixed microphone setup, not workplace exposure or an efficiency measurement. The energy trade-off remains important even when contact is quieter.
+
+A proposed acceptance record should retain insole revision, calibration, feature thresholds, timestamps and terrain/microphone geometry with each trial. Recheck these after remounting or wear rather than transferring the paper's best percentage to a new surface. The [humanoid sensing and control comparison](/humanoid-robots#observation-planning-control) places these features alongside model decisions and physical outcomes.
 
 ## Sources and related resources
 
@@ -3273,6 +3359,8 @@ The official project page supplied paper, videos and tables on September 25, but
 - [Full methods, evaluation and limitations](https://arxiv.org/html/2609.28959v1)
 - [Official TactileStep project](https://tactilestep.github.io/)
 - [RoboSkin tactile sensors guide](/sensors)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
@@ -3366,7 +3454,7 @@ As reviewed on November 4, the [versioned release](https://github.com/TogoLab/an
     id: 'camp-cooperative-arm-hand-motion-planning',
     title: 'CAMP plans arm motion and hand shape together in constrained spaces',
     seoTitle: 'CAMP Arm-Hand Motion Planning: Results and Code Status',
-    seoDescription: 'CAMP coordinates a UR7e and LinkerHand through constrained spaces. Check its simulation protocol, 30 physical trials, planning time and code status.',
+    seoDescription: "Separate CAMP geometric feasibility, sampled-path validation and physical task completion; interpret solver timing, static scenes and contact limits.",
     excerpt: 'CAMP combines layered hand search, local arm relaxation and compact trajectory optimization. Its physical trials validate reaching prescribed configurations, not autonomous grasping or button actuation.',
     category: 'Dexterous motion planning',
     image: '/generated/news/camp-cooperative-arm-hand-motion-planning.png',
@@ -3382,11 +3470,11 @@ As reviewed on November 4, the [versioned release](https://github.com/TogoLab/an
     ],
     technicalFocus: ['dexterous motion planning', 'arm-hand coordination', 'LinkerHand', 'constrained manipulation'],
     sourceDate: '2026-09-24',
-    evidenceStatus: 'Preprint · arXiv v1 · code not yet released',
+    evidenceStatus: "Preprint · arXiv v1 · author code page promises future release · executable planner unverified",
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-25',
-    updated: '2026-09-25',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     content: `# CAMP plans arm motion and hand shape together in constrained spaces
 
 Researchers from Harbin Institute of Technology, Great Bay University and collaborating institutions introduced CAMP on September 24, 2026, for cooperative arm-hand motion planning. Instead of fixing a hand shape while an arm finds a path, CAMP adjusts both throughout the route. On six simulated constrained tasks, reported planning success ranges from 84.2% to 98.5%. Physical evaluation uses a UR7e arm and 16-degree-of-freedom LinkerHand, but its success definitions stop at prescribed goal configurations. [Paper and version record](https://arxiv.org/abs/2609.29021).
@@ -3429,7 +3517,23 @@ The planning-time definitions also matter. Teams integrating CAMP would need to 
 
 The experiments use one arm-hand platform, static obstacles and known geometry. Goal configurations are generated with IK and manually screened. Physical failures remain sensitive to obstacle localization, camera calibration and execution error. No dynamic replanning or contact recovery is evaluated.
 
-The official project page supplies videos and detailed tables, but identifies itself as an anonymous submission even though arXiv lists the authors. Its Code link states that implementation is planned after paper acceptance. No repository, license or downloadable planner was verified on September 25. [Official code statement](https://camp-armhand.github.io/code.html). RoboSkin.ai has not run CAMP.
+The official project page supplies videos and detailed tables, but identifies itself as an anonymous submission even though arXiv lists the authors. Its Code link states that implementation is planned after paper acceptance. The November 4 recheck found the same future-release statement; no repository, implementation license or downloadable planner was verified. [Official code statement](https://camp-armhand.github.io/code.html). RoboSkin.ai has not run CAMP.
+
+## Three different contracts between a feasible path and a completed task
+
+Finding a collision-free hand shape at each arm waypoint does not prove that those shapes connect continuously. CAMP's hand search and local arm relaxation address this missing connection. Its final collision check is another distinct step, not a consequence that follows automatically from approximate geometry. [Method and evaluation](https://arxiv.org/html/2609.29021v1).
+
+| Contract | What the study supplies | What a new application must establish |
+| --- | --- | --- |
+| Scene and goal | Known static obstacles and a manually screened goal configuration | Current scene geometry, calibration and an appropriate task goal |
+| Path feasibility | Capsule/SDF-guided search followed by exact MuJoCo geometry checks | Whether the executed robot tracks the validated path under model error |
+| Task completion | Reaching a prescribed pose or pregrasp | Successful grasp, actuation or force-controlled contact after arrival |
+
+Solver timing is averaged over successful and failed problems, while normalized path length describes successful trials only. They have different denominators. The ten repeated batches quantify variation across sampled planning problems, not training seeds. A shorter normalized joint path also does not directly establish lower energy or faster complete application cycles.
+
+The reported 1 cm collision margin belongs to one experimental setup. It should not become a universal allowance for perception error, dynamic obstacles or compliant contact. A receiving test would retain the scene revision, goal-selection method, planning and validation durations, tracking error and eventual task outcome separately.
+
+CAMP uses a fixed arm-hand platform, not a walking humanoid. It is relevant to the [humanoid integration map](/humanoid-robots#observation-planning-control) as an example of the approach-planning layer, while its results should remain scoped to its own embodiment. Tactile feedback after approach is an additional integration question, not a demonstrated CAMP capability.
 
 ## Sources and related resources
 
@@ -3437,6 +3541,8 @@ The official project page supplies videos and detailed tables, but identifies it
 - [Full CAMP methods and evaluation](https://arxiv.org/html/2609.29021v1)
 - [Official project and videos](https://camp-armhand.github.io/)
 - [RoboSkin robot-hands guide](/robot-hands)
+
+*Source review updated November 4, 2026. Original publication dates are retained. Results are reported by the authors; RoboSkin has not run these systems.*
 `,
   },
   {
