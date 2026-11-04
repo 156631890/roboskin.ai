@@ -97,17 +97,17 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/humanoidtoolbench-tool-selection-mobile-execution | rewritten and production verified in PR128 | 1046 | 12 |
 | /news/interevolve-reward-program-humanoid-manipulation | rewritten and production verified in PR128 | 1037 | 8 |
 | /news/reactive-humanoid-multi-contact-hand-bracing | rewritten and production verified in PR128 | 1026 | 4 |
-| /news/continual-6dof-grasp-synthesis-memory | inventory only; claim-by-claim review pending | 1038 | 7 |
+| /news/continual-6dof-grasp-synthesis-memory | individual robot-learning adaptation review; production verification pending | 1038 | 7 |
 | /news/jfm-rigid-soft-finger-jacobian-flow | rewritten and production verified in PR125 | 1001 | 3 |
-| /news/skelewam-sparse-skeleton-world-action-model | individual world-model interface review; production verification pending | 975 | 2 |
-| /news/tacdyn-wam-implicit-tactile-dynamics | individual world-model interface review; production verification pending | 998 | 5 |
-| /news/touchtherm-tactile-thermal-digital-twins | individual world-model interface review; production verification pending | 998 | 5 |
+| /news/skelewam-sparse-skeleton-world-action-model | rewritten and production verified in PR129 | 975 | 2 |
+| /news/tacdyn-wam-implicit-tactile-dynamics | rewritten and production verified in PR129 | 998 | 5 |
+| /news/touchtherm-tactile-thermal-digital-twins | rewritten and production verified in PR129 | 998 | 5 |
 | /news/ditto-x-reverse-dexterous-teleoperation | rewritten and production verified in PR123 | 1027 | 14 |
 | /news/flashdexretarget-multi-motion-dexterous-data | rewritten and production verified in PR123 | 1027 | 10 |
 | /news/tacex-tactile-curiosity-robot-exploration | rewritten and production verified in PR126 | 1088 | 3 |
-| /news/occludex-visuo-tactile-self-occlusion-dexterity | inventory only; claim-by-claim review pending | 1070 | 2 |
+| /news/occludex-visuo-tactile-self-occlusion-dexterity | individual robot-learning adaptation review; production verification pending | 1070 | 2 |
 | /news/membrane-coupled-delta-array-micro-object-manipulation | rewritten and production verified in PR125 | 1012 | 1 |
-| /news/funco-grasp-cross-embodiment-dexterous-grasping | inventory only; claim-by-claim review pending | 1071 | 8 |
+| /news/funco-grasp-cross-embodiment-dexterous-grasping | individual robot-learning adaptation review; production verification pending | 1071 | 8 |
 | /news/tarl-tactile-reward-learning-demonstrations | rewritten and production verified in PR124 | 1075 | 2 |
 | /news/haco-haptic-active-compliance-dexterous-manipulation | rewritten and production verified in PR121 | 1052 | 1 |
 | /news/single-element-tackiness-tactile-sensor | rewritten and production verified in PR125 | 1012 | 1 |
@@ -123,22 +123,22 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/da-grd-tactile-grasp-recovery | rewritten and production verified in PR126 | 996 | 1 |
 | /news/torque-observation-alignment-direct-drive-grasping | rewritten and production verified in PR121 | 985 | 4 |
 | /news/outcome-sensitive-impact-aware-dexterous-catching | rewritten and production verified in PR127 | 1008 | 1 |
-| /news/body-grounded-replanning-physical-manipulation | individual world-model interface review; production verification pending | 1009 | 2 |
+| /news/body-grounded-replanning-physical-manipulation | rewritten and production verified in PR129 | 1009 | 2 |
 | /news/polyumi-visual-tactile-audio-demonstration-interface | rewritten and production verified in PR123 | 1137 | 4 |
 | /news/propra-fingertip-sensor-pretraining | rewritten and production verified in PR124 | 1063 | 3 |
 | /news/whole-hand-force-regulation-without-tactile-sensors | rewritten and production verified in PR121 | 1146 | 6 |
-| /news/res-hil-human-guided-residual-rl-manipulation | inventory only; claim-by-claim review pending | 1126 | 1 |
+| /news/res-hil-human-guided-residual-rl-manipulation | individual robot-learning adaptation review; production verification pending | 1126 | 1 |
 | /news/tactilestep-sole-pressure-humanoid-locomotion | rewritten and production verified in PR128 | 1105 | 1 |
 | /news/anthropomimetic-forearm-carpal-stiffness | rewritten and production verified in PR127 | 953 | 1 |
 | /news/camp-cooperative-arm-hand-motion-planning | rewritten and production verified in PR128 | 1070 | 1 |
 | /news/support-enhanced-granular-jamming-gripper | rewritten and production verified in PR125 | 1076 | 1 |
-| /news/internw0-contact-aware-world-model-pipetting | individual world-model interface review; production verification pending | 1267 | 3 |
+| /news/internw0-contact-aware-world-model-pipetting | rewritten and production verified in PR129 | 1267 | 3 |
 | /news/glotouch-global-local-haptic-search | rewritten and production verified in PR126 | 1032 | 1 |
 | /news/copre-proprioceptive-contact-detection | rewritten and production verified in PR127 | 1112 | 2 |
 | /news/berkeley-quad-hand-asymmetric-qdd-design | rewritten and production verified in PR127 | 1072 | 1 |
-| /news/lima-asynchronous-diffusion-dexterous-manipulation | inventory only; claim-by-claim review pending | 1080 | 10 |
+| /news/lima-asynchronous-diffusion-dexterous-manipulation | individual robot-learning adaptation review; production verification pending | 1080 | 10 |
 | /news/better-curriculum-tactile-reflex-fragile-grasping | rewritten and production verified in PR126 | 1026 | 7 |
-| /news/visforce-visual-force-grounding-dexterous-manipulation | inventory only; claim-by-claim review pending | 974 | 6 |
+| /news/visforce-visual-force-grounding-dexterous-manipulation | individual robot-learning adaptation review; production verification pending | 974 | 6 |
 | /news/cablevla-tactile-cable-routing-vla | inventory only; claim-by-claim review pending | 956 | 7 |
 | /news/cartesian-hand-all-linear-in-hand-manipulation | rewritten and production verified in PR127 | 1226 | 4 |
 | /news/spectrobot-high-bandwidth-single-point-tactile-sensing | rewritten and production verified in PR127 | 1031 | 1 |
@@ -147,7 +147,7 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /news/when-touch-matters-cluttered-dexterous-grasping | rewritten and production verified in PR124 | 993 | 3 |
 | /news/zerotouch-tactile-supervision-visual-grasp-control | rewritten and production verified in PR124 | 1139 | 1 |
 | /news/crisp-contact-simulation-geometry-solvers-release | inventory only; claim-by-claim review pending | 1120 | 1 |
-| /news/agile-wam-tactile-world-action-model-robot-control | individual world-model interface review; production verification pending | 1183 | 3 |
+| /news/agile-wam-tactile-world-action-model-robot-control | rewritten and production verified in PR129 | 1183 | 3 |
 | /news/touchsight-twintouch-bare-hand-tactile-prediction | rewritten and production verified in PR124 | 1205 | 1 |
 | /news/fibtac-pneumatic-fiber-gripper-tactile-sensing-2026 | rewritten and production verified in PR125 | 1202 | 3 |
 | /news/twins-aist-body-surface-tactile-demonstrations-2026 | inventory only; claim-by-claim review pending | 1191 | 4 |
@@ -220,11 +220,11 @@ Independent human fact review: pending; no human sign-off claimed. Codex checked
 | /humanoid-robots | rewritten and production verified in PR128 | 1242 | 23 |
 | /robot-vla-models | inventory only; claim-by-claim review pending | 11478 | 41 |
 | /robot-manipulation | rewritten and production verified in PR126 | 1512 | 75 |
-| /robot-learning | inventory only; claim-by-claim review pending | 4886 | 53 |
+| /robot-learning | individual robot-learning adaptation review; production verification pending | 4886 | 53 |
 | /robot-hands | rewritten and production verified in PR127 | 2439 | 45 |
 | /robot-safety | inventory only; claim-by-claim review pending | 1391 | 12 |
 | /robotics-datasets | inventory only; claim-by-claim review pending | 3039 | 32 |
-| /robot-world-models | individual world-model interface review; production verification pending | 5409 | 25 |
+| /robot-world-models | rewritten and production verified in PR129 | 5409 | 25 |
 | /robot-teleoperation | rewritten and production verified in PR123 | 3967 | 32 |
 
 ## Research interpretation pass
@@ -322,3 +322,7 @@ Six existing News reports and /humanoid-robots distinguish observations, planner
 ## World-model interfaces and physical evidence
 
 Six existing News reports and /robot-world-models distinguish predictive training, online context, action selection and measured outcomes. Corrected simulation-result scope and updated release boundaries. No model execution, robotics reproduction or human factual sign-off is claimed. Whole-site review remains incomplete.
+
+## Robot learning adaptation and supervision
+
+Six existing reports and /robot-learning distinguish memory updates, learned parameters, runtime conditioning and human labor. Corrected sample assignments, goal-image content, unsupported operator-count claims and control-frequency wording. Original modules and dated data exercises remain. No research execution or human fact sign-off is claimed. Whole-site review remains incomplete.
