@@ -27,11 +27,11 @@ export const blogPosts: BlogPost[] = [
     id: "opentac-custom-tactile-skins-readout-limits-2026",
     title: "OpenTac Explained: Custom Tactile Skins, Shear Feedback and Partial-Readout Limits",
     seoTitle: "OpenTac: Custom Tactile Skins & Readout Limits",
-    seoDescription: "Understand OpenTac custom skins, shear feedback, partial-readout rates and transfer limits, with manufacturing, calibration and license checks.",
+    seoDescription: "Check OpenTac array and board compatibility, partial-readout limits, shear-cover calibration and separate code, hardware and asset licenses.",
     excerpt: "A source-reviewed guide to OpenTac fabrication, normal/shear sensing and adaptive acquisition, separating reported robot results from the work still needed for integration.",
     author: "RoboSkin.ai Editorial Team",
     date: "2026-10-24",
-    updated: "2026-10-24",
+    updated: "2026-11-04",
     readTime: "9 min read",
     category: "Tactile sensing",
     image: "/generated/research-scalable-manufacturing-2025.svg",
@@ -48,6 +48,8 @@ This RoboSkin.ai interpretation was published on October 24, 2026. It reviews Ar
 The decision for an integration team is whether customizable coverage and shear-sensitive contact measurements justify the manufacturing, calibration and maintenance work. The [e-skin overview](/e-skin) introduces surface sensing; the [sensor selection guide](/guides/how-to-choose-a-tactile-sensor) helps turn requirements into an acceptance trial.
 
 ## What measures normal and shear contact
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 The sensor combines a flexible printed circuit board, a piezoresistive film and a deformable mechanical cover. Pressure changes the film's local resistance at the board's taxels. In a bump-covered configuration, a bump spreads its load across neighboring taxels. A roughly shared response carries normal-load information; differences between neighboring responses carry tangential information. The paper describes an optional calibrated mapping from these signal combinations to force units. Raw counts, normal/shear signal proxies and calibrated newtons are different outputs. [Sensor design, Section 3.1](https://arxiv.org/html/2610.31661v1#S3.SS1).
 
@@ -71,6 +73,12 @@ The acquisition benchmark concerns a 32 × 32 skin containing 1024 taxels. The f
 The adaptive method divides its budget between searching the skin and revisiting recently active regions. It uses the expectation that contact is localized and changes coherently over time. A larger or distributed contact needs more samples, reducing the speed advantage. An unsampled taxel is unknown for that update; it should not silently become a zero-pressure measurement. [Acquisition method](https://arxiv.org/html/2610.31661v1#S3.SS5).
 
 For a controller, ask for the sampled-taxel mask, timestamps, age of reused values and behavior when contact appears outside the current region. Measure contact-to-host and host-to-action delay separately. The paper's readout rate does not establish a 1286 Hz full-skin force map, a 1286 Hz robot controller or a guaranteed worst-case detection latency. Match the benchmark's array, board and firmware configuration before using its numbers in a specification.
+
+## Match the readout board to the array being specified
+
+The acquisition table is not a compatibility guarantee for every published board. The reviewed repository lists a 60-pin board for up to 30 rows by 30 columns, and a stacked 30-pin pair for up to 15 by 15. The paper's fast-readout comparison uses a 32 by 32 array. Preserve these separate configurations rather than assuming that the benchmark array plugs into either standard board unchanged. [Pinned readout-board documentation](https://github.com/opentac/opentac/blob/e21a8ae283711591f8722609ba399d8ebad8ebaa/README.md).
+
+Before procurement, ask the supplier or lab to reconcile the physical manifest, row/column counts, connector pin map and acquisition configuration. Then specify complete-array coverage and sparse updates as separate acceptance cases. A board accepting USB commands proves neither that all intended taxels are addressed nor that the mounted skin achieves the paper's timing. This is a proposed integration check; we did not connect hardware. The November 4 repository check still resolved to e21a8ae, so the earlier licensing and fresh-clone test limitations below remain tied to the same source revision.
 
 ## Shear feedback evidence includes a mechanical change
 
@@ -119,12 +127,12 @@ OpenTac is worth evaluating when a team needs a custom contact surface and can o
     id: 'softmimicgen-synthetic-data-sim-to-real-2026',
     title: 'SoftMimicGen Explained: Synthetic Data, Sim-to-Real Results and Tactile Limits',
     seoTitle: 'SoftMimicGen: Robot Data, Sim-to-Real & Tactile Limits',
-    seoDescription: 'Understand SoftMimicGen generation, three real-robot comparisons, tactile limits and code/data licensing, with a practical adoption checklist.',
+    seoDescription: "Assess SoftMimicGen generation and policy success, dataset-size tradeoffs, three real-robot comparisons, tactile limits and separate artifact licenses.",
     excerpt: 'A source-reviewed guide to turning deformable-object demonstrations into training data: what transfers to real robots, what remains unmeasured, and what to verify before adoption.',
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-10-23',
-    updated: '2026-10-23',
-    readTime: '12 min read',
+    updated: "2026-11-04",
+    readTime: "11 min read",
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation',
@@ -150,6 +158,8 @@ This is a research interpretation published by RoboSkin on October 23, 2026, of 
 For an engineering team, the useful question is whether the generator's state, task and action assumptions fit its own experiment. A thousand accepted simulation episodes can be valuable without establishing reliability on a different material, camera or gripper. The [robot-learning guide](/robot-learning) provides the broader training context; the [robotics dataset guide](/robotics-datasets) explains the records needed to compare collections.
 
 ## How a small demonstration library becomes a dataset
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 The workflow has five distinct stages. Keeping their artifacts separate makes failures easier to diagnose. [Method, Sections III–IV](https://arxiv.org/html/2603.25725v1#S4).
 
@@ -180,6 +190,12 @@ Generation success measures how many adapted candidate executions pass a task's 
 For a reproduction, report both denominators. A generation log should distinguish attempted, completed, rejected and retained episodes. A policy evaluation should identify the number of trials, initialization distribution, checkpoint rule and success criterion. Neither the number of frames nor the size of a training archive is an evaluation denominator.
 
 Another reporting detail matters: simulation Tables I and II describe success rates selected as the maximum over three training seeds, rather than the mean across seeds. Do not present those selected values as expected performance from a typical training run. [Simulation tables and protocol](https://arxiv.org/html/2603.25725v1#S5). A new study should save every seed's result and state its checkpoint-selection rule before inspecting the test outcomes.
+
+## More accepted demonstrations do not guarantee a higher score
+
+The dataset-size ablation is useful precisely because it is not uniformly monotonic. In v1 Table II, the Franka rope policy reports 100.0% at 250 generated demonstrations, 98.7% at 500 and 93.3% at 750. The humanoid towel row similarly falls after 250. These are author-reported simulation entries under the table's selected-seed reporting rule; they do not prove that additional data inherently harms learning. [Dataset-size analysis and Table II](https://arxiv.org/html/2603.25725v1#S5.T2).
+
+For a new pilot, keep the evaluation cases and training-budget rule fixed while increasing the retained dataset. Record which seeds and initial configurations contributed the extra episodes, not just the archive size. Compare all training runs and preserve rejected-generation logs. Stop scaling when the added examples no longer expand useful coverage or when the evaluation cannot distinguish a gain. That stopping rule is our proposed evaluation design, not an experiment run by RoboSkin. It complements the generator-versus-policy distinction above and avoids treating 1,000 episodes as a universal target.
 
 ## What the three real-robot comparisons actually show
 
@@ -254,7 +270,7 @@ For help defining a source-backed evaluation scope, use [RoboSkin research servi
 - [Official project and demonstration videos](https://softmimicgen.github.io/)
 - [Official source repository at the reviewed revision](https://github.com/NVlabs/SoftMimicGen/tree/c9d146ba57358a544167de8ebe946caaac8f6220)
 
-Source review completed October 23, 2026. Runtime reproduction, dataset archive contents and physical evaluation denominators remain unverified. Future source revisions should be checked against this dated review before adopting its access or setup details.
+Initial source review completed October 23, 2026; the November 4 update rechecked v1 and the public repository, which still resolved to c9d146ba57358a544167de8ebe946caaac8f6220. Runtime reproduction, dataset archive contents and physical evaluation denominators remain unverified. These are source inspections, not new execution results.
 `
   },
   {
@@ -765,7 +781,7 @@ Use the [benchmark directory](/benchmarks) to compare evaluation questions and t
     title: 'TacPrint reconstructs contact from 24 tactile cells',
     seoTitle: 'TacPrint: Wearable Touch, Depth Reconstruction & Grasp Data',
     seoDescription:
-      'Examine TacPrint’s 24-taxel sensor, physical indentation errors, and 40-trial grasp comparison: dense-depth feedback reaches 87.5% versus 67.5% for raw taxels.',
+      "Examine TacPrint simulated labels, physical calibration, sparse sensing and delayed feedback before transferring its contact-reproduction results.",
     excerpt:
       'A wearable capacitive fingertip sensor predicts a dense contact map for human-to-robot replay. We separate simulation labels, physical measurements, and closed-loop grasping results.',
     content: `# TacPrint reconstructs contact from 24 tactile cells
@@ -778,11 +794,21 @@ The strongest comparison is a 40-trial grasping study: dense-depth feedback succ
 
 ## From sparse capacitance to a dense contact map
 
+**Source review: November 4, 2026.** New checks below distinguish author results, public documentation and proposed reproduction checks. Earlier dated file inspections remain snapshots; no new model, hardware or dataset-payload experiment was run.
+
 The sensor measures deformation through 24 capacitive cells. A learned reconstruction model maps their signals to a 35 × 26 spatial prediction. Dense output provides an estimated contact region and indentation pattern, while the actual electrical observations remain sparse.
 
 The reconstruction relies on simulation-generated depth labels. A predicted map can interpolate useful geometry, but a larger output grid does not independently create more physical measurements. The paper therefore evaluates several different questions: agreement with simulated depth labels, agreement at controlled physical reference positions, and whether the representation changes a robot’s behavior. [Full paper and methods](https://arxiv.org/html/2607.29231v1).
 
 This distinction is relevant when choosing a [tactile sensor for a robot hand](/applications/robot-hand-tactile-sensor): physical sensing density, reconstruction resolution, calibration error, and task success describe different parts of the system.
+
+## Validate the label generator before the learned model
+
+[Section III-B](https://arxiv.org/html/2607.29231v1) pairs measured capacitance with simulated depth through nominal indenter geometry, position and indentation. The material and friction settings are effective parameters drawn from prior work, not parameters identified separately for each fabricated silicone batch. Agreement at the prescribed contact center therefore does not validate every peripheral pixel.
+
+The paper distinguishes controlled checks of the simulated labels from later tests of the trained predictor. Keep those validation records separate when adapting the sensor: label construction error and model reconstruction error are different failure sources. A proposed replacement-skin check should retain the material batch, attachment, indenter, reference positions and boundary contacts before retraining or claiming the old accuracy.
+
+There is also a timing distinction: the LSTM is unidirectional, but its nine-frame input is centered on the predicted frame and includes four later observations. A one-direction network does not make that preprocessing causal. The controller discussion below retains the resulting delay and five-second averaging window; neither should disappear from an integration budget.
 
 ## Keep simulation and physical errors separate
 
@@ -842,8 +868,8 @@ A useful follow-up should retain all boundary contacts, separate simulated and p
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-11',
-    updated: '2026-09-11',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Tactile manipulation',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'TacPrint: A Wearable Fingertip Tactile Sensor for Human-to-Robot Contact Reproduction',
@@ -856,7 +882,7 @@ A useful follow-up should retain all boundary contacts, separate simulated and p
     title: 'TacVerse tests whether touch transfers between sensors',
     seoTitle: 'TacVerse Dataset: 106,800 Images, Transfer Results & Access',
     seoDescription:
-      'Audit TacVerse’s seven tactile sensors, 106,800 reported images, cross-sensor benchmark results, trial splits, official code, and gated Hugging Face dataset.',
+      "Review TacVerse sensor transfer, target-label budgets, trial isolation, journal publication and gated-data limits before reproducing its perception tasks.",
     excerpt:
       'TacVerse compares shape, grating, and force perception across tactile sensors. Its public code and gated dataset are now identifiable, but transfer quality depends strongly on the task.',
     content: `# TacVerse tests whether touch transfers between sensors
@@ -870,6 +896,8 @@ The answer depends on the task. In the paper’s transfer study, a shape classif
 The official [code repository](https://github.com/LannWei/Tactile_Database), [project page](https://lannwei.github.io/Tactile_Database/), and [Hugging Face dataset listing](https://huggingface.co/datasets/Lan-2025/Tactile) were verified on September 11. The dataset is publicly listed but gated. RoboSkin did not download or independently recount the images.
 
 ## What the reported 106,800 images contain
+
+**Source review: November 4, 2026.** New checks below distinguish author results, public documentation and proposed reproduction checks. Earlier dated file inspections remain snapshots; no new model, hardware or dataset-payload experiment was run.
 
 The sensor counts below come from the paper, not from an independent file inventory. GelSightNoMarker and GelSightMarker refer to GelSight Mini configurations without and with markers. [Dataset description](https://arxiv.org/html/2606.25877v1).
 
@@ -917,6 +945,14 @@ The shape result is a counterexample to a blanket claim that every sensor change
 
 The representation study needs the same care. Table 5 reports useful masked-autoencoder pretraining results in several settings, but it does not show universal improvement. For GelSightMarker shape classification, ViT with ImageNet initialization reports 95.8%, while ViT with MAE pretraining reports 84.8%. These are separate representation-study results and should not be substituted for Table 2’s transfer-study baseline.
 
+## What does the few-shot label budget exclude?
+
+A 0.5% training fraction is not a measurement of the whole labeling effort. The [v1 protocol](https://arxiv.org/html/2606.25877v1) also uses labeled target-sensor validation data for checkpoint selection and early stopping; the test partition remains separate. Both backbone and regression head are adapted. This therefore measures supervised adaptation of an existing model, not a calibration-free sensor replacement.
+
+For a proposed reproduction, record three budgets separately: target training examples, validation labels and final held-out trials. Keep the physical interaction identifiers, target sensor configuration and selected checkpoint with those counts. Compare performance at a matched total annotation budget before claiming lower collection cost. These are suggested audit fields, not an experiment performed by RoboSkin.
+
+The [Advanced Robotics Research article](https://advanced.onlinelibrary.wiley.com/doi/10.1002/adrr.70169) was first published September 25, 2026. Its methods also describe labeled target validation. The tables above retain their explicitly identified arXiv v1 basis; journal publication does not verify the gated payload or turn a perception result into robot-control evidence.
+
 ## Public code, gated data, and separate licenses
 
 At the reviewed repository revision, the official code contains shape, grating, force, and pretraining components. The Hugging Face listing exposes task archives named Shape_Classification.zip, Grating_Classification.zip, and Force_Regression.zip, alongside other assets.
@@ -925,7 +961,7 @@ At the reviewed repository revision, the official code contains shape, grating, 
 | --- | --- | --- |
 | Official code | Repository and source files inspected at commit abe33c1e896d9529f0798cc75e36a63da9753e79 | Not executed; no root license file identified at that revision |
 | Dataset listing | Public metadata reports automatic gating and CC BY 4.0; revision 0bc27afe0d8f6c878b79e1eb0825255541ccaceb | File listing verified; gated content not downloaded or independently counted |
-| Paper | Public arXiv v1 preprint | Paper license and peer-review status are separate from code and dataset access |
+| Paper | Public arXiv v1 preprint | The later journal article is linked below; paper publication and licensing are separate from code and dataset access |
 
 An anonymous attempt to read the dataset’s raw README returned HTTP 401. A public listing therefore should not be described as unrestricted anonymous download access. The CC BY 4.0 statement comes from dataset-card metadata; it should not be extended to the code repository, and any asset-specific terms still need review before reuse.
 
@@ -939,7 +975,7 @@ For a lab selecting data, the next checks are concrete: obtain permitted access,
 
 ## What TacVerse can support
 
-TacVerse is useful for testing how tactile appearance, marker patterns, and sensor mechanics affect learned perception. It offers controlled tasks and named transfer protocols that are more informative than a single pooled accuracy. Its results remain author-reported preprint evidence and do not establish cross-sensor closed-loop manipulation success.
+TacVerse is useful for testing how tactile appearance, marker patterns, and sensor mechanics affect learned perception. It offers controlled tasks and named transfer protocols that are more informative than a single pooled accuracy. Its results remain author-reported research evidence and do not establish cross-sensor closed-loop manipulation success.
 
 For comparisons, use the [benchmark record](/benchmarks#benchmark-tacverse), [tactile foundation model guide](/tactile-foundation-models), and [vision-based tactile sensing survey](/research/vision-based-tactile-intelligence-robotics-survey-2026). For a physical manipulation experiment that compares raw measurements with a learned contact representation, see [TacPrint’s grasping study](/research/tacprint-wearable-tactile-contact-reproduction-2026).
 
@@ -953,8 +989,8 @@ For comparisons, use the [benchmark record](/benchmarks#benchmark-tacverse), [ta
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-11',
-    updated: '2026-09-11',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Tactile datasets',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'TacVerse: A Multi-Sensor Dataset and Benchmark for Cross-Sensor Vision-Based Tactile Perception',
@@ -973,7 +1009,7 @@ For comparisons, use the [benchmark record](/benchmarks#benchmark-tacverse), [ta
     title: 'UniVTAC separates tactile simulation, representation learning, and policy evaluation',
     seoTitle: 'UniVTAC: Code, Datasets & Isaac Sim Version Guide',
     seoDescription:
-      'Find UniVTAC code and datasets, choose Isaac Sim 4.5 or 5.1, and compare the encoder, benchmark and public files with a dated release inventory.',
+      "Use UniVTAC versioned data and installation paths, then compare task-level encoder results, real-robot evidence and separate code and data licenses.",
     excerpt:
       'Choose the matching code branch and dataset before using UniVTAC. This guide separates its tactile encoder, simulation benchmark, public downloads and paper-reported physical results.',
     content: `# UniVTAC: code, datasets and simulator versions
@@ -985,6 +1021,8 @@ UniVTAC is a February 2026 arXiv v1 preprint and public research project for sim
 Those assets have different units and purposes. The **205,826 synthetic contact samples**, **400 paper-reported policy-training trajectories**, **800 HDF5 episodes in each current simulator-version task release**, and **450 physical demonstrations** are not interchangeable counts. The September file inventory also lists 638 contact-pretraining HDF5 files; it does not establish that their frames exactly reproduce the paper's pretraining corpus.
 
 ## Start here: UniVTAC code and dataset downloads
+
+**Source review: November 4, 2026.** New checks below distinguish author results, public documentation and proposed reproduction checks. Earlier dated file inspections remain snapshots; no new model, hardware or dataset-payload experiment was run.
 
 Use the [official project](https://univtac.github.io/) for demonstrations and the [code repository](https://github.com/univtac/UniVTAC) for implementation. For data, select one of the pinned directories below before downloading. Inspecting the directory or our small CSV inventory needs no robot or NVIDIA GPU. Running the simulator has separate Linux and NVIDIA software requirements.
 
@@ -1007,7 +1045,7 @@ The inventory was generated from the provider's public file listing at revision 
 
 The project explicitly says the two task-data versions are not cross-compatible. Follow the [pinned main installation guide](https://github.com/univtac/UniVTAC/blob/0dafa10262e22f486f160a55d6f11aeab12d8e7b/docs/Installation.md) or inspect the [pinned 5.1 installer](https://github.com/univtac/UniVTAC/blob/d541e5568227ca3b66104d294f63c80acad7c52c/scripts/install.sh) for your chosen branch. Both depend on the project's modified local TacEx source. Replacing it with an arbitrary latest TacEx or Isaac Lab release is not a verified installation path.
 
-The 5.1 branch README still calls itself main in its installation paragraph; its branch notice and installer identify the 5.1 stack. We checked these files, but did not execute either installer or measure the README's throughput claim. The [pinned download script](https://github.com/univtac/UniVTAC/blob/0dafa10262e22f486f160a55d6f11aeab12d8e7b/data/download.sh) uses ModelScope by default, while the inventory above audits Hugging Face. Its revision option is provider-specific: do not pass the Hugging Face revision to the ModelScope download command.
+At the pinned September 19 source snapshot, the 5.1 branch README calls itself main in its installation paragraph; its branch notice and installer identify the 5.1 stack. We checked these files, but did not execute either installer or measure the README's throughput claim. The [pinned download script](https://github.com/univtac/UniVTAC/blob/0dafa10262e22f486f160a55d6f11aeab12d8e7b/data/download.sh) uses ModelScope by default, while the inventory above audits Hugging Face. Its revision option is provider-specific: do not pass the Hugging Face revision to the ModelScope download command.
 
 The paper lists ScaleLab at Shanghai Jiao Tong University, D-Robotics, ViTai Robotics, The University of Hong Kong, Nanjing University, Shenzhen University, Wuhan University, Fudan University, and Tsinghua University as its nine affiliations. These identify the authors' source-listed affiliations; they do not by themselves establish institutional ownership, endorsement, or responsibility for every project claim.
 
@@ -1081,6 +1119,19 @@ In the paper's simulated policy experiment, each task has 50 full training traje
 | ACT + UniVTAC Encoder | 48.0% |
 
 The change from 30.9% to 48.0% is **17.1 percentage points**. It is not a 17.1% relative gain, model accuracy, or a universal tactile-policy score. The eight task columns also vary substantially, which is why the average should not replace the task-level table in the primary source.
+
+## Does the full encoder improve every task?
+
+No. The [paper’s pathway ablation, Table II](https://arxiv.org/html/2602.10093v1), uses an ACT-based policy and separates random initialization, contact pretraining, shape pretraining, their combination and the full encoder. The average favors the full model, but individual tasks differ:
+
+| Simulated task | Scratch | Contact + shape | Full encoder |
+| --- | ---: | ---: | ---: |
+| Lift Can | 33% | 18% | 29% |
+| Put Bottle in Shelf | 34% | 39% | 31% |
+| Insert Tube | 45% | 60% | 56% |
+| Eight-task average | 34.0% | 43.9% | 48.0% |
+
+These author-reported rows show why an average is insufficient for choosing an encoder for one application. They do not compare sensor purchase quality or establish that extra sensing guarantees better control. For your evaluation, retain the ACT configuration, observation preprocessing, checkpoint and task-level trial outcomes; compare the task you need before pooling scores. The public-file inspection below remains distinct from executing this ablation.
 
 ## Physical sim-to-real evidence
 
@@ -1183,8 +1234,8 @@ The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile senso
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-09-19',
-    readTime: '17 min read',
+    updated: "2026-11-04",
+    readTime: "14 min read",
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
     sourceTitle: 'UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking',
@@ -1203,18 +1254,20 @@ The paper describes a Tianji Marvin 7-DoF arm with two ViTai GF225 tactile senso
     title: 'Vision-based tactile intelligence connects sensor optics to robot action',
     seoTitle: 'Vision-Based Tactile Sensors for Robotics: 2026 Survey Map',
     seoDescription:
-      'A source-backed map of vision-based tactile sensors: four hardware components, four optical readouts, three information levels, tactile AI, and open gaps.',
+      "Use the vision-based tactile survey to connect optical design, inferred quantities and task-specific acceptance tests without treating taxonomy as a benchmark.",
     excerpt:
       'A 2026 review maps vision-based tactile sensing as one integrated stack: deformable contact hardware, optical readout, tactile representations, learning, simulation, datasets, and robot action.',
     content: `# Vision-based tactile intelligence connects sensor optics to robot action
 
-**Evidence review - August 22, 2026**
+**Originally reviewed August 22, 2026; selection analysis updated November 4, 2026.**
 
-Vision-based tactile sensing converts contact-induced deformation of a soft interface into images that algorithms can interpret. A new August 2026 review argues that the field should be evaluated as an integrated sensing-and-learning stack, not as a camera specification or a sensor list in isolation.
+Vision-based tactile sensing converts contact-induced deformation of a soft interface into images that algorithms can interpret. The August 2026 review argues that the field should be evaluated as an integrated sensing-and-learning stack, not as a camera specification or a sensor list in isolation.
 
-The review is useful to [tactile AI](/tactile-ai) because it connects physical contact, sensor hardware, image formation, learned representations, simulation, datasets, manipulation policies, and emerging touch-language-action systems. It is an arXiv v1 preprint and a survey, not an original sensor benchmark or a new foundation-model release.
+The review is useful to [tactile AI](/tactile-ai) because it connects physical contact, sensor hardware, image formation, learned representations, simulation, datasets, manipulation policies, and emerging touch-language-action systems. This article analyzes its arXiv v1 survey, not an original sensor benchmark or a new foundation-model release.
 
 ## Short answer: what is a vision-based tactile sensor?
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 A vision-based tactile sensor, or VBTS, places an image sensor behind or around a deformable contact interface. Contact changes the interface geometry or appearance; illumination and optics expose that change to a camera; software then estimates contact-related quantities from the resulting tactile image.
 
@@ -1286,6 +1339,20 @@ The list is a literature map, not a statement that these resources share one lic
 
 The paper identifies another hard problem: simulated and real tactile images vary with elastomer mechanics, friction, illumination, optics, noise, and fabrication. Domain randomization, image translation, physics simulation, small real calibration sets, and cross-sensor translation are research approaches; none removes the need to validate performance on the actual target sensor and robot.
 
+## Choose an observation before choosing a model
+
+The survey's hardware co-design discussion makes a practical distinction: shrinking an optical path can change field of view and calibration, while extra cameras or spectral channels increase alignment and bandwidth requirements. A more compact or higher-pixel-count device does not automatically preserve the information a trained policy uses. [Hardware co-design, Section III-D](https://arxiv.org/html/2608.15490v1#S3.SS4).
+
+Use the following as a proposed selection worksheet, not a ranking reported by the survey.
+
+| Intended decision | Observation to validate | Test to define before model selection |
+| --- | --- | --- |
+| Detect slip during a grasp | Temporal contact change at the relevant surface | Missed events and observation-to-action delay under the intended motion |
+| Inspect a small surface feature | Recoverable geometry over an accessible contact patch | Known features at the center and edges after remounting |
+| Regulate contact load | A calibrated force estimate with stated units | Loading/unloading error across locations and replacement interfaces |
+
+Retain the optics, interface and calibration version with each result. Use the [calibration guide](/guides/tactile-sensor-calibration) to define measurements and the [selection guide](/guides/how-to-choose-a-tactile-sensor) to compare complete assemblies. Neither a survey category nor a good-looking tactile image supplies those acceptance results.
+
 ## Open gaps that matter for robot skin and Physical AI
 
 The survey highlights seven future directions. They align closely with the gaps RoboSkin tracks across the touch-intelligence stack.
@@ -1334,8 +1401,8 @@ The HTML header lists Great Bay University, Tsinghua University, The University 
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '10 min read',
+    updated: "2026-11-04",
+    readTime: "8 min read",
     category: 'Tactile AI',
     image: '/generated/authority/state-of-tactile-ai-cover.webp',
     sourceTitle: 'Vision-Based Tactile Intelligence for Robotics: Sensing, Learning, and Embodied Manipulation',
@@ -1351,20 +1418,22 @@ The HTML header lists Great Bay University, Tsinghua University, The University 
     title: 'ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertion',
     seoTitle: 'ADEPT Visuo-Tactile Dexterous RL for Robot Manipulation',
     seoDescription:
-      'ADEPT reports 3/10 vision-only versus 8/10 visuo-tactile final success on one Flexiv-Sharpa insertion condition. Review the method, robots, and limits.',
+      "Separate ADEPT training-seed stability, task-specific sim-to-real deployment and the ten-trial tactile comparison, with current source and availability limits.",
     excerpt:
       'ADEPT reports 3/10 vision-only versus 8/10 visuo-tactile final success in one matched Flexiv-Sharpa insertion condition, with ten physical trials per condition.',
     content: `# ADEPT reports a 3/10 to 8/10 tactile ablation on dexterous insertion
 
-**Evidence review - August 22, 2026**
+**Originally reviewed August 22, 2026; evidence interpretation updated November 4, 2026.**
 
-ADEPT is an August 19, 2026 arXiv v1 preprint describing reinforcement-learning methods for long-horizon dexterous manipulation. The system combines generic object-reposing pretraining, downstream task training, actor distillation, critic warm-up, conservative policy optimization, and a geometric fabric that mediates policy actions before they reach the robot.
+This review uses ADEPT's August 19, 2026 arXiv v1 preprint to examine reinforcement-learning methods for long-horizon dexterous manipulation. The system combines generic object-reposing pretraining, downstream task training, actor distillation, critic warm-up, conservative policy optimization, and a geometric fabric that mediates policy actions before they reach the robot.
 
-The source lists Jayjun Lee, Jessica Yin, Asif Rana, Nicholas Blauch, Sam Mady, Mohak Bhardwaj, Nima Fazeli, Nathan Ratliff, Karl Van Wyk, and Ankur Handa as authors, with NVIDIA and Michigan Robotics at the University of Michigan as the displayed affiliations. Those affiliations identify contributors; they do not establish institution-wide ownership or endorsement.
+That v1 lists Jayjun Lee, Jessica Yin, Asif Rana, Nicholas Blauch, Sam Mady, Mohak Bhardwaj, Nima Fazeli, Nathan Ratliff, Karl Van Wyk, and Ankur Handa as authors, with NVIDIA and Michigan Robotics at the University of Michigan as the displayed affiliations. Those affiliations identify contributors; they do not establish institution-wide ownership or endorsement.
 
 The most relevant tactile result is narrow but useful. On one fixed-workbench Flexiv Rizon plus Sharpa-hand condition using the paper's square-and-round Functional Manipulation Benchmark objects, the source reports final-stage success of **3/10 for a vision-only student and 8/10 for a visuo-tactile student**. Both conditions used the same six-stage task and ten physical trials. This is a five-trial absolute difference in the authors' protocol, not a universal 50-percentage-point improvement claim.
 
 ## Two robot configurations, not one transferable checkpoint
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 ADEPT is evaluated on two distinct arm-hand systems. Each embodiment and downstream task is trained independently; the paper does not present one checkpoint that transfers across the two hands.
 
@@ -1401,19 +1470,27 @@ ADEPT first trains generic object reposing over 16 primitive shapes in simulatio
 
 The paper calls the physical deployment zero-shot sim-to-real because the student policies are transferred to the real systems without real-world fine-tuning. It does **not** mean zero-shot transfer to a new task, hand, sensor, or embodiment. Every downstream task and embodiment has its own training process.
 
+## Keep training stability separate from physical success
+
+Table 3 is a simulation training ablation, not another ten-trial robot test. It starts five independent non-population-based-training seeds from one pretrained checkpoint. The full recipe reaches the final curriculum level in 5/5 seeds; removing behavior-cloning initialization reaches it in 4/5. Reported time-to-level averages include only seeds that reached that level, so the 19.9 versus 35.2 hours should travel with those completion counts. [v1 Section 4.1 and Table 3](https://arxiv.org/html/2608.19182v1#S4.T3).
+
+The same table also weakens a blanket claim that tighter PPO clipping is essential: the loose-clip variant reaches 5/5 and matches or exceeds the reported full-recipe columns. Preserve that counterexample when choosing a reproduction configuration.
+
+Record three separate outcomes: curriculum completion per training seed, the evaluation policy's episode success, and physical task completion. The table's instantaneous success fraction across parallel training environments is not interchangeable with either of the latter. Budget failed training runs as well as successful ones; RoboSkin has not reproduced these runs.
+
 ## Speed claim and comparison boundary
 
 The source reports physical ADEPT trials completing in roughly 5–10 seconds and compares them with a 20–70 second FMB parallel-jaw pipeline, describing a 2x–14x speed range. The comparison involves different hands, pipelines, and experimental configurations. It is evidence about the paper's protocol, not a general claim that ADEPT is 2x–14x faster than robot manipulation systems or people.
 
 ## Availability audit
 
-The paper and official project page are public. The project page's Code control says **Coming soon**. As reviewed on August 22, 2026, the associated website repository contains the project site and media assets but no verified training implementation, model weights, checkpoint release, demonstration dataset, artifact license, or reusable data package.
+The paper and official project page are public. On November 4, the project identifies CoRL 2026, while its Code control still does not expose a verified implementation link. The following is the earlier August 22 access observation, not a claim that no release exists elsewhere: the associated website repository contained the project site and media assets but no verified training implementation, model weights, checkpoint release, demonstration dataset, artifact license, or reusable data package.
 
 The arXiv article is distributed under CC BY 4.0. That article license does not license future ADEPT code, weights, robot data, or third-party hardware assets.
 
 ## What this result does not establish
 
-- ADEPT is a preprint and the physical results have not been independently replicated.
+- Numerical results here retain the arXiv v1 basis. The official project now labels ADEPT CoRL 2026; that status does not establish independent replication.
 - Each condition contains ten physical trials; the paper does not report a significance test for the 3/10 versus 8/10 tactile comparison.
 - The tactile ablation covers one Flexiv-Sharpa square-and-round insertion condition only.
 - Both robots are fixed workbench systems; mobile and humanoid operation are outside the reported scope.
@@ -1437,8 +1514,8 @@ The arXiv article is distributed under CC BY 4.0. That article license does not 
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Robot learning',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'ADEPT reinforcement-learning preprint',
@@ -1451,9 +1528,9 @@ The arXiv article is distributed under CC BY 4.0. That article license does not 
     title: 'PRISM maps 5,000+ contact-rich industrial robot trajectories',
     seoTitle: 'PRISM Contact-Rich Industrial Robotics Dataset',
     seoDescription:
-      'PRISM reports 5,000+ robot trajectories across 25+ industrial tasks. Review its tactile subset, multimodal rates, robots, access, and license limits.',
+      "Review PRISM modality coverage, native timestamps, task-level pretraining results and the updated official data route without assuming verified payload access.",
     excerpt:
-      'PRISM reports 5,000+ robot trajectories across 25+ industrial tasks, but tactile observations cover only a subset and the announced dataset download is not yet available.',
+      "PRISM combines industrial skill data across multiple collection interfaces. Review modality coverage, task-level transfer results and its linked but unverified data payload.",
     content: `# PRISM maps 5,000+ contact-rich industrial robot trajectories
 
 **Evidence review - August 2026**
@@ -1464,13 +1541,15 @@ The most important qualification is easy to lose in a headline: tactile sensing 
 
 ## Source snapshot
 
+**Source review: November 4, 2026.** New checks below distinguish author results, public documentation and proposed reproduction checks. Earlier dated file inspections remain snapshots; no new model, hardware or dataset-payload experiment was run.
+
 | Field | Source-reported state | RoboSkin interpretation |
 | --- | --- | --- |
-| Scale | 5,000+ robot trajectories and 5,000 paired human demonstrations over 45+ hours | A large announced collection; the public files are not yet available for an independent count or integrity audit. |
-| Tasks | 25+ industrial manipulation tasks | Coverage includes insertion, packaging, installation, plug/unplug, and conveyor sorting; task balance and final file inventory require the release. |
+| Scale | 5,000+ robot trajectories and 5,000 paired human demonstrations over 45+ hours | Author-reported scale; this review has not counted or checked the hosted payload. |
+| Tasks | 25+ industrial manipulation tasks | Coverage includes insertion, packaging, installation, plug/unplug, and conveyor sorting; task balance and file inventory still require payload verification. |
 | Images | Approximately 27 million across vision and visuotactile streams | Do not rewrite this as 27 million tactile frames. |
 | Tactile coverage | Visuotactile observations when available and a tactile-equipped subset | Tactile data does not cover every trajectory or hardware configuration. |
-| Access | The paper says open-sourced; the official project page marks the ModelScope dataset as “soon” | As of August 22, 2026, no official dataset download or dataset-file license was available from the linked project or repository. |
+| Access | The project page now provides a ModelScope dataset link | The November 4 check confirms the route, but could not read its file manifest or dataset terms. The August 22 “soon” observation is historical. |
 
 ## Seven hardware configurations
 
@@ -1504,7 +1583,7 @@ The paper keeps original timestamps because the modalities run at different nati
 | Gripper width | 1 value | 15 Hz |
 | Six-degree-of-freedom force/torque | 6 values | 100 Hz |
 
-Processed episodes share a common schema containing robot state and action, wrench data when available, multi-view RGB-D, visuotactile imagery when available, calibration parameters, timestamps, platform and task identifiers, outcome labels, and volunteer ratings. The source says experiments convert the data to LeRobot v3.0 format; that experimental conversion should not be treated as proof that the unreleased public package already contains every field in a finalized LeRobot archive.
+Processed episodes share a common schema containing robot state and action, wrench data when available, multi-view RGB-D, visuotactile imagery when available, calibration parameters, timestamps, platform and task identifiers, outcome labels, and volunteer ratings. The source says experiments convert the data to LeRobot v3.0 format; that experimental conversion should not be treated as proof that the hosted package contains every field in a validated LeRobot archive.
 
 ## Collection and evaluation boundary
 
@@ -1514,17 +1593,29 @@ The paper evaluates ACT, Diffusion Policy, and π0 on a bimanual Realman platfor
 
 These experiments are a first-party evaluation of selected PRISM tasks. They are not an independent leaderboard, a universal industrial-robot benchmark, or proof that more demonstrations will improve every task and policy at the same rate.
 
+## Pretraining gains depend on the task and budget
+
+[Table V and Section IV-A](https://arxiv.org/html/2608.17962v1) compare policies fine-tuned with 200 demonstrations per task and evaluated over 20 episodes. The authors keep a fixed optimization-step budget, allocating 10% to pretraining and 90% to fine-tuning. This is not a comparison with unlimited additional training.
+
+| Author-reported comparison | Without pretraining | With pretraining | Difference |
+| --- | ---: | ---: | ---: |
+| ACT, electronic plug/unplug | 10% | 10% | 0 percentage points |
+| Diffusion Policy, conveyor sorting | 25% | 20% | −5 percentage points |
+| π0, conveyor sorting | 75% | 85% | +10 percentage points |
+
+The table qualifies the paper’s broad improvement language: not every task-policy pair benefits. With 20 trials, one outcome changes the rate by five percentage points. These counts do not establish statistical significance. Before adopting the corpus, specify the task, policy, tactile availability, demonstration subset, total training budget and failure definitions. A pooled success rate cannot identify which modality or collection interface caused a change.
+
 ## Availability and license audit
 
-There is a material difference between the paper abstract and the current release surface. The abstract says the dataset is open-sourced at the project page. The official page currently displays a disabled ModelScope dataset button labeled “soon,” while the linked GitHub repository contains the project website, assets, and README but no dataset files, release package, or dataset license.
+The August 22 review observed a disabled dataset button. On November 4, the [official project page](https://tengbo-yu.github.io/PRISM/) instead linked to [PRISM on ModelScope](https://modelscope.cn/datasets/Turboyuuuu/PRISM). The source reader could open that destination but returned no readable dataset contents. This updates the access route; it does not verify the payload, file count or terms, and it is not evidence that the resource is unavailable to every reader.
 
-RoboSkin therefore records PRISM as **announced, download pending** as of August 22, 2026. The license attached to an article or source-code repository must not be assumed to license unreleased dataset files. Availability should change only after an official host exposes files, a version, and reuse terms.
+The [reviewed repository at 6464761](https://github.com/Tengbo-Yu/PRISM/tree/6464761b31cadbb6a9c5a6f3188c35bd93b00b7a) contains the project materials and README. No dataset-file license was verified in this review. PRISM is therefore recorded here as **official data route linked; payload and reuse terms unverified**. Do not inherit the paper’s license for dataset files or assume that a visible download link grants commercial reuse.
 
 ## Why PRISM matters for tactile AI
 
 PRISM connects the [robotics dataset](/robotics-datasets) problem to the [tactile AI](/tactile-ai) stack. Vision supplies scene and geometry information, proprioception records robot state, force/torque measures interaction load, and the tactile subset exposes local contact evolution. Its multi-rate timestamps and calibration graph are as important as the headline trajectory count because contact-rich learning depends on aligning these signals without hiding latency or missing modalities.
 
-For [robot teleoperation](/robot-teleoperation), the three interfaces create a useful research question: how do exoskeleton, tracker, and VR demonstrations differ in precision, smoothness, contact stability, and corrective behavior? The paper motivates that comparison, but the unreleased files prevent an independent answer today.
+For [robot teleoperation](/robot-teleoperation), the three interfaces create a useful research question: how do exoskeleton, tracker, and VR demonstrations differ in precision, smoothness, contact stability, and corrective behavior? The paper motivates that comparison, but this review has not inspected the hosted trajectories to answer it independently.
 
 ## Release verification checklist
 
@@ -1553,8 +1644,8 @@ For [robot teleoperation](/robot-teleoperation), the three interfaces create a u
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Tactile datasets',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'PRISM: Precision and contact-rich Real-world Industrial Skill dataset with Multimodal sensing',
@@ -1572,7 +1663,7 @@ For [robot teleoperation](/robot-teleoperation), the three interfaces create a u
     title: 'The Missing Touch tests spatial tactile feedback in robot teleoperation',
     seoTitle: 'Spatial Tactile Feedback for Robot Teleoperation',
     seoDescription:
-      'The Missing Touch tests GelSight-to-fingertip feedback in two teleoperation tasks. Review the 29-79% DTW claim, participant study, and autonomy limits.',
+      "Interpret Missing Touch participant-level comparisons and haptic feedback, separating demonstration quality from autonomous policy outcomes.",
     excerpt:
       'A GelSight Mini and 32-DoF fingertip display made two teleoperation tasks more natural and consistent, but no autonomous robot policy was trained or evaluated.',
     content: `# The Missing Touch tests spatial tactile feedback in robot teleoperation
@@ -1584,6 +1675,8 @@ The Missing Touch is an August 19, 2026 arXiv preprint from Northwestern Univers
 The study uses a two-degree-of-freedom bilateral leader-follower device, a GelSight Mini as the robot finger, and a 32-degree-of-freedom cutaneous display under the operator's fingertip. Across a button task and a peg-rolling task, the source reports that more localized feedback produced more natural and consistent trajectories. It did **not** train or evaluate an autonomous policy.
 
 ## From robot contact to human fingertip
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 | Layer | Study implementation | Evidence boundary |
 | --- | --- | --- |
@@ -1615,6 +1708,12 @@ In the button task, every cutaneous condition reduced DTW distance relative to O
 In peg rolling, Full produced lower DTW distance than 1D and 2D, longer strokes, fewer strokes, fewer roll-offs, and faster completion under the authors' protocol. The difference between Off and 1D was not significant for DTW distance or completion time, which the authors relate to redundancy between uniform cutaneous feedback and kinesthetic force cues.
 
 The sharper conclusion is task-dependent: spatial resolution helps most when the task needs localized contact information that kinesthetic feedback does not already provide and when the display can represent the relevant feature at a useful scale.
+
+## Preserve the participant as the comparison unit
+
+The source does not treat every trajectory as an independent new operator. It compares each teleoperated path with the same participant's direct-manipulation paths, averages those distances per trial, then normalizes by that participant's mean. Its mixed-effects analysis includes participant-specific intercepts. [Data and statistical analysis](https://arxiv.org/html/2608.19372v1).
+
+That matters when reusing the findings to plan demonstrations. A large count of repeated trials does not erase the small participant population, and a normalized path-similarity improvement is not a calibrated force-error reduction. Preserve participant, task, feedback condition, practice status and trial order in the evaluation record. If the later goal is a learned robot policy, separate operator-level train and test assignments before extracting windows, and measure that policy's physical outcomes independently. This is a proposed follow-up protocol; the paper's human teleoperation result does not itself establish autonomous-policy generalization.
 
 ## Implication for learning from demonstration
 
@@ -1661,8 +1760,8 @@ The [robot learning](/robot-learning) hub explains the additional steps required
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "6 min read",
     category: 'Robot teleoperation',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'The Missing Touch: Spatially Distributed Tactile Feedback Brings Teleoperation Closer to Human Dexterity',
@@ -1674,7 +1773,7 @@ The [robot learning](/robot-learning) hub explains the additional steps required
     title: 'SoftVTBench separates deformable-task completion from contact quality',
     seoTitle: 'SoftVTBench Visuo-Tactile Dataset and Deformation Benchmark',
     seoDescription:
-      'SoftVTBench reports 4,000 simulated demonstrations across 40 tasks. Review its DSR metric, simulated Franka and GelSight scope, and conflicting release documentation.',
+      "Read SoftVTBench simulated data, deformation-threshold calibration, score sensitivity and conflicting release descriptions before comparing policies.",
     excerpt:
       'SoftVTBench pairs simulated visual and tactile observations with evaluator-only FEM state; its Hugging Face card and GitHub README currently disagree about the hosted release scale.',
     content: `# SoftVTBench separates deformable-task completion from contact quality
@@ -1683,19 +1782,21 @@ The [robot learning](/robot-learning) hub explains the additional steps required
 
 SoftVTBench is an August 19, 2026 arXiv preprint, dataset, and closed-loop benchmark for deformable-object manipulation. The paper asks a narrower question than whether a robot reaches a goal: did the policy complete the task without exceeding an object-specific deformation tolerance?
 
-The latest paper reports 4,000 expert demonstrations across 40 tasks and more than 50 assets. Every trajectory is generated in Isaac Sim and Isaac Lab. The Franka Panda arm, GelSight Mini tactile observations, deformable objects, cameras, contact dynamics, and evaluator states are simulated; this is not a dataset collected with a physical Franka robot or physical GelSight sensors.
+The reviewed August 19 paper reports 4,000 expert demonstrations across 40 tasks and more than 50 assets. Every trajectory is generated in Isaac Sim and Isaac Lab. The Franka Panda arm, GelSight Mini tactile observations, deformable objects, cameras, contact dynamics, and evaluator states are simulated; this is not a dataset collected with a physical Franka robot or physical GelSight sensors.
 
 ## Paper scale and official release documentation
 
-The latest paper and the current Hugging Face dataset card both describe 4,000 demonstrations. However, the linked GitHub README still describes an earlier 1,628-demonstration state. These first-party documents are out of sync, so the source revision must travel with any release-scale claim.
+**Source review: November 4, 2026.** New checks below distinguish author results, public documentation and proposed reproduction checks. Earlier dated file inspections remain snapshots; no new model, hardware or dataset-payload experiment was run.
+
+The reviewed August 19 paper and the current Hugging Face dataset card both describe 4,000 demonstrations. However, the linked GitHub README still describes an earlier 1,628-demonstration state. These first-party documents are out of sync, so the source revision must travel with any release-scale claim.
 
 | First-party source | Scale it currently describes | Safe interpretation |
 | --- | --- | --- |
-| Latest arXiv paper, 2608.18701 | 4,000 demonstrations, 40 tasks, more than 50 assets | Full scale reported by the authors in the latest paper. |
-| Hugging Face dataset card, revision fd2793a | Four subsets, each with 10 tasks and 100 successful demonstrations: 4,000 demonstrations total | Current hosted-data documentation reviewed on August 22; RoboSkin did not independently download and hash every hosted file. |
+| arXiv v1, 2608.18701 | 4,000 demonstrations, 40 tasks, more than 50 assets | Full scale reported by the authors in the reviewed August 19 paper. |
+| Hugging Face dataset card, revision fd2793a | Four subsets, each with 10 tasks and 100 successful demonstrations: 4,000 demonstrations total | Pinned documentation reviewed August 22; its 4,000-demo description remains consistent with the November 4 public-card check. RoboSkin did not independently download and hash every hosted file. |
 | GitHub README, last changed July 22 | 1,628 demonstrations and 33 assets, split into 500 Object-Soft, 500 Spatial-Soft, 421 Object-Rigid, and 207 Spatial-Rigid demonstrations | An older release description that conflicts with the later Hugging Face card and latest paper; do not present it as the current download count. |
 
-The later Hugging Face card is the basis for the currently documented hosted scale, while the GitHub discrepancy remains unresolved. Researchers should pin the hosted revision and inspect its manifests, file inventory, and per-component terms before training or comparing results.
+The November 4 check still finds the older GitHub description alongside the newer public card and project page. The later Hugging Face card is the basis for the currently documented hosted scale, while the GitHub discrepancy remains unresolved. Researchers should pin the hosted revision and inspect its manifests, file inventory, and per-component terms before training or comparing results.
 
 ## What each simulated episode contains
 
@@ -1723,6 +1824,14 @@ The paper defines two connected outcomes:
 Before policy training, scripted probing establishes the tolerance for each deformable object. The evaluator then reads policy-hidden FEM state during a rollout. A trajectory receives DSR credit only if it completes the task and stays inside that calibrated deformation zone.
 
 DSR is a paper-defined benchmark metric, not an industry standard, robot-safety certification, physical damage threshold, or universal definition of gentle handling. Its meaning depends on SoftVTBench's simulated objects, FEM model, calibration procedure, percentile choice, and success predicates.
+
+## Changing the deformation threshold changes the score
+
+[Appendix 3](https://arxiv.org/html/2608.18701v1) uses the 90th percentile of peak displacement during stable scripted calibration grasps. The percentile is fixed globally before training; the resulting tolerance differs by object. It is not a separate percentile optimized for each policy or chosen after seeing its results.
+
+The authors describe retaining per-episode deformation traces so that alternative thresholds can rescore the same rollouts. A higher DSR after relaxing a threshold is consequently a different evaluation of unchanged behavior, not a more capable policy. This distinction matters when comparing a paper figure with a locally modified evaluator.
+
+For a proposed run, save the asset identity, calibration version, percentile, resulting tolerance, raw deformation trace and task-success outcome together. Report threshold sensitivity separately from the main fixed-protocol result. This review has not run the rescoring code or validated a physical damage threshold; simulation tolerances still need separate engineering justification for real materials.
 
 ## What the reported results show
 
@@ -1774,8 +1883,8 @@ Treat Apache-2.0 as the label shown on the current SoftVTBench dataset card, not
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-22',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Tactile benchmarks',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'SoftVTBench deformation-aware visuo-tactile dataset and benchmark preprint',
@@ -1787,7 +1896,7 @@ Treat Apache-2.0 as the label shown on the current SoftVTBench dataset card, not
     title: 'HiTac-WAM forecasts contact, deformation, and slip before robot action',
     seoTitle: 'HiTac-WAM Hierarchical Tactile World Action Model',
     seoDescription:
-      'HiTac-WAM predicts contact, 3D deformation, and slip for candidate robot actions. Review its three-task results, architecture, and evidence limits.',
+      "Evaluate HiTac-WAM with matched candidate budgets, task-specific forecast monitoring and separate prediction, intervention and physical-task outcomes.",
     excerpt:
       'HiTac-WAM ranks candidate robot actions with hierarchical tactile forecasts, then checks predicted touch against measured touch during execution.',
     content: `# HiTac-WAM forecasts contact, deformation, and slip before robot action
@@ -1799,6 +1908,8 @@ HiTac-WAM is an August 20, 2026 arXiv preprint about predicting the tactile cons
 The paper reports 61.1% mean real-robot success when hierarchical tactile forecasts are used for candidate selection and 72.2% for the full system with online forecast verification. These are author-reported results from three tasks on one fixed experimental platform, not independent validation of a general-purpose tactile world model.
 
 ## What the model predicts
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 HiTac-WAM does not treat future touch as one undifferentiated image or latent vector. Its forecast follows a directed physical hierarchy.
 
@@ -1822,6 +1933,12 @@ The real-robot evaluation covers chip grasping, blackboard erasing, and USB inse
 | Full HiTac-WAM | 72.2% | Selection plus execution-time forecast verification and corrective replanning. |
 
 Each method is evaluated in 30 trials per task. The source also reports a mean contact F1 of 0.921. Under matched training budgets, the directed hierarchy reduces 3D displacement L2 error by 17.6% relative to a deformation-only predictor and improves slip AUPRC by 60.4% relative to a slip-only predictor. These comparisons are bound to the paper's data, baselines, definitions, and hardware.
+
+## Compare ranking at the same candidate budget
+
+DreamZero's single sampled candidate and HiTac-WAM's four-candidate selector differ in both selection evidence and search budget. The paper therefore includes a more focused comparison: at four candidates, task-progress ranking reports 35.6% and tactile-forecast ranking 61.1%, each over 90 trials across the three tasks. Candidate seeds are matched, but physical executions are independent; the tactile arm reuses the Selection trials rather than supplying another independent replication. [Closed-loop protocol and Section V-C](https://arxiv.org/html/2608.19574v1#S5.SS3).
+
+The execution monitor is another separate decision. Its task-specific density estimate and thresholds come from successful validation episodes, and persistent forecast mismatch can abort the remaining action prefix and trigger replanning. That is not a universal safety threshold. Log the candidate budget, selection rule, validation population, intervention count and final task outcome separately. A forecast error score, a successful recovery and a completed manipulation task answer different questions. This worksheet is our proposed comparison method; it does not add new robot trials to the authors' results.
 
 ## Why this matters for tactile AI
 
@@ -1852,8 +1969,8 @@ The reported percentages are not an external leaderboard. They come from the aut
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-21',
-    readTime: '7 min read',
+    updated: "2026-11-04",
+    readTime: "5 min read",
     category: 'Tactile world models',
     image: '/generated/authority/tactile-ai-loop.webp',
     sourceTitle: 'HiTac-WAM hierarchical tactile world action model preprint',
@@ -1865,18 +1982,20 @@ The reported percentages are not an external leaderboard. They come from the aut
     title: 'T-Rex adds high-rate tactile reaction to dexterous robot policies',
     seoTitle: 'T-Rex Tactile-Reactive Dexterous Manipulation',
     seoDescription:
-      "T-Rex reports 65% average success versus EgoScale's 35%, while its official release now provides code, checkpoints, and an approximately 50-hour dataset subset.",
+      "Interpret T-Rex partial-credit task scores, tactile timing and its public dataset revision without confusing the reported 100-hour corpus with released data.",
     excerpt:
-      'T-Rex reports a 100-hour collection and a 30-point gap over EgoScale; its official release now provides code, checkpoints, and an approximately 50-hour public subset.',
+      "T-Rex reports a 30-point partial-credit score gap over EgoScale. Review its tactile-reactive architecture, task rubrics and the public subset of its reported 100-hour collection.",
     content: `# T-Rex adds high-rate tactile reaction to dexterous robot policies
 
-**Evidence review - August 2026**
+**Originally reviewed August 2026; scoring and release evidence updated November 4, 2026.**
 
 T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies react dynamically to tactile signals. The authors report a 100-hour tactile-rich collection, a temporal tactile VQ-VAE encoder, and a variable-rate Mixture-of-Transformers architecture. The official dataset card now exposes 5,464 episodes and 5,473,459 frames at 30 FPS, approximately 50 hours; that public subset is not the complete 100-hour corpus used in the reported training recipe. The authors evaluate the system on 12 manipulation tasks that require delicate force control or deformable-object manipulation.
 
-The paper's Table 1 reports 65% average success for T-Rex and 35% for EgoScale, the strongest listed baseline. That is an absolute gap of 30 percentage points in the authors' 12-task protocol. Each task is evaluated with 16 rollouts. The figures are not independent validation or evidence of the same gain on other robot systems.
+The paper labels its Table 1 metric success rate, but its task rubrics award partial completion. T-Rex reports 65% and EgoScale 35% on that percentage-scaled score: a 30-point gap, not a verified 30-point increase in binary complete-task success. Each task is evaluated with 16 rollouts. The figures are not independent validation or evidence of the same gain on other robot systems.
 
 ## The problem T-Rex addresses
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 Many vision-language-action models process observations and produce action chunks at one policy rate. Touch can change faster than vision-language reasoning: incipient slip, local deformation, or a sudden contact transition may require an update before the next slow action cycle.
 
@@ -1894,7 +2013,7 @@ The main conceptual contribution is temporal separation. A policy can retain slo
 
 ## Artifact availability verified on August 22, 2026
 
-The artifact status changed after the original RoboSkin review. The [official T-Rex repository](https://github.com/ZhuoyangLiu2005/T-Rex) now provides post-training and inference code on its main branch, a separate full-pipeline branch for pretraining and midtraining code, hardware and teleoperation utilities, and dataset inspection tools. The maintainers also publish pretrained and midtrained checkpoints on Hugging Face.
+The artifact status changed after the original RoboSkin review. November 4 source checks reconfirmed the public README and dataset card; no checkpoint, dataset episode or installation was executed. The [official T-Rex repository](https://github.com/ZhuoyangLiu2005/T-Rex) now provides post-training and inference code on its main branch, a separate full-pipeline branch for pretraining and midtraining code, hardware and teleoperation utilities, and dataset inspection tools. The maintainers also publish pretrained and midtrained checkpoints on Hugging Face.
 
 The [public T-Rex dataset](https://huggingface.co/datasets/zekaiwang/trex_dataset) is labeled MIT and its card currently specifies 5,464 episodes, 5,473,459 frames at 30 FPS (approximately 50 hours), 5,370 language-annotated trajectories, 22 motor primitives, and 207 objects in LeRobot v3.0. Its signals include head and bilateral wrist video, robot state and actions, ten fingertip tactile streams, deformation maps, and estimated 6D wrenches. The repository explicitly distinguishes this release from the complete 100-hour collection, so RoboSkin records both values instead of replacing one with the other.
 
@@ -1902,18 +2021,24 @@ Use the [normalized T-Rex dataset record](/datasets#dataset-t-rex), [T-Rex model
 
 ## Reported evidence
 
-The abstract describes performance as more than 30% higher than the strongest baseline. The paper's original table and official project page resolve the unit: T-Rex averages 65%, while EgoScale averages 35%, yielding a 30-percentage-point absolute difference.
+Read the abstract's improvement language alongside the task rubrics. Table 1 averages percentage-scaled partial-credit scores across trials and tasks; subtracting 35 from 65 gives 30 score points. It does not reveal the fraction of trials completing every required step.
 
 | Reported item | Value | Evidence boundary |
 | --- | ---: | --- |
 | EgoScale | 35% | Strongest listed baseline in the authors' Table 1. |
 | T-Rex | 65% | Macro-average reported by the authors across the same 12 tasks. |
-| Absolute gap | +30 percentage points | Arithmetic difference between 65% and 35%; the official project page labels it an absolute success-rate gap. |
+| Absolute score gap | +30 points | Difference on the reported percentage scale; complete-task probability is not separately established. |
 | Evaluation count | 16 rollouts per task | The paper states that object positions and rotations are randomized across trials. |
 
 All real-world experiments use one fixed-base bimanual Dexmate Vega-1 with two 22-DoF Sharpa Wave dexterous hands. The system observes a ZED head camera, two monocular wrist cameras, per-finger tactile force vectors, and deformation maps. The paper states that all compared methods use the same robot setup, action space, and evaluation protocol. Multi-stage tasks use progress-based rubrics, and results are averaged across trials and then tasks.
 
-The correct interpretation remains narrow: within that author-run setup, the complete T-Rex system achieved a 30-percentage-point higher macro-average than EgoScale. The table does not establish the same gain for other robots, sensors, policies, datasets, or task distributions.
+The correct interpretation remains narrow: within that author-run setup, the complete T-Rex system achieved a 30-point higher macro-average score than EgoScale. The table does not establish the same gain for other robots, sensors, policies, datasets, or task distributions.
+
+## Partial credit is not complete task success
+
+Appendix F makes the scoring distinction concrete. Transfer Egg assigns 0.2 for contact, 0.3 for lifting, 0.2 for transport and 0.3 for intact release. As a hypothetical reading of that rubric, completing the first three stages but failing release scores 0.7 while leaving the task incomplete. This is an arithmetic example, not a newly observed trial. [Task rubrics](https://arxiv.org/html/2606.17055v1#A6).
+
+For an adoption study, retain each rubric component and a separate complete-task indicator. Report their denominators, interventions and damaged-object outcomes. A 30-point difference on a partial-credit scale cannot be converted into 30 additional completed tasks per hundred without trial-level completion data. The comparison remains informative about the authors' protocol; it does not supply a deployment reliability estimate.
 
 ## Why this matters for robot hands
 
@@ -1925,17 +2050,19 @@ The project is also relevant to [robot VLA models](/robot-vla-models). It illust
 
 One hundred recorded hours is a collection-duration statement, not a complete measure of data diversity or effective sample size. Adjacent tactile frames are correlated, repeated motor primitives may dominate the distribution, and an hour of data can vary greatly in contact density and task coverage. Reproducibility claims must also distinguish the reported full collection from the approximately 50-hour subset currently available for download.
 
+The dataset card also documents an October 2026 correction: isolated missing wrench and deformation frames use previous-frame hold, while wrench streams are tared using initial clean frames. Raw tactile video and RGB are listed as unchanged. Retain the dataset revision and preprocessing with any comparison; a held sample is not a newly measured contact. [October data update](https://huggingface.co/datasets/zekaiwang/trex_dataset#tactile-data-update-2026-10).
+
 The [tactile robotics dataset directory](/datasets) explains the metadata needed to evaluate reuse: robot, sensor, sampling rate, synchronization, task, object, trajectory count, failures, splits, format, and license. The [tactile benchmark hub](/benchmarks) separates dataset scale from evidence about generalization and closed-loop success.
 
 ## What this does not prove yet
 
-T-Rex is an arXiv preprint, not an independently replicated result. The reported 100 hours, 12 tasks, 65% T-Rex average, 35% EgoScale average, and 30-percentage-point gap all come from the authors. The evidence is tied to one Dexmate Vega-1 and Sharpa Wave hardware configuration and does not establish universal superiority over every VLA, dexterous policy, or tactile encoder.
+T-Rex is an arXiv preprint, not an independently replicated result. The reported 100 hours, 12 tasks, 65% T-Rex average, 35% EgoScale average, and the 30-point score gap all come from the authors. The evidence is tied to one Dexmate Vega-1 and Sharpa Wave hardware configuration and does not establish universal superiority over every VLA, dexterous policy, or tactile encoder.
 
 The result also does not isolate one causal factor by itself. Dataset collection, temporal encoding, variable-rate architecture, training choices, and evaluation design contribute to the complete system. Deployment decisions still need sensor calibration, synchronization, end-to-end latency, compute, durability, and failure-recovery evidence.
 
 ## Evaluation checklist
 
-- Report the 65% and 35% averages, the +30-percentage-point gap, and 16 rollouts per task together.
+- Report the 65% and 35% partial-credit averages, the +30-point score gap, and 16 rollouts per task together.
 - Report task-level outcomes instead of only one average across 12 tasks.
 - Document tactile sampling, timestamping, compression, and policy update rates.
 - Split complete trajectories or sessions before extracting temporal training windows.
@@ -1952,8 +2079,8 @@ The result also does not isolate one causal factor by itself. Dataset collection
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: '2026-08-22',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Tactile manipulation',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'T-Rex tactile-reactive dexterous manipulation preprint',
@@ -2164,16 +2291,18 @@ The official project page reviewed on November 4 links the paper and demonstrati
     title: 'Tac4Loco uses plantar pressure to adapt humanoid locomotion',
     seoTitle: 'Tac4Loco Plantar Tactile Sensing for Humanoid Locomotion',
     seoDescription:
-      'Tac4Loco feeds 60-point plantar pressure arrays into a Unitree G1 locomotion policy. Review its tactile representation, results, and evidence limits.',
+      "Review Tac4Loco ordinal load mapping, sensor timing, terrain results and replacement-insole checks without inferring calibrated force accuracy.",
     excerpt:
       'Tac4Loco turns bilateral plantar pressure maps into post-contact feedback for Unitree G1 locomotion on slopes, partial support, foam, and gravel.',
     content: `# Tac4Loco uses plantar pressure to adapt humanoid locomotion
 
-**Updated technical brief - August 2026**
+**Updated technical brief - November 4, 2026**
 
 Tac4Loco is an August 2026 preprint that feeds bilateral plantar pressure maps into a Unitree G1 locomotion policy. It maps simulated and physical foot-contact signals into shared ordinal levels, then learns spatial and temporal support features. The reported experiments cover slopes, partial support, foam, and gravel. The evidence remains specific to one preprint, robot platform, sensor layout, and evaluation protocol.
 
 ## Source findings
+
+**Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
 
 The paper treats foot contact as a distributed tactile observation rather than a binary contact flag or one summed force value. Each foot uses a 60-element force-sensitive-resistor insole digitized by a 12-bit ADC at 50 Hz. The hardware pads have a reported full scale of 2,000 g per element.
 
@@ -2221,6 +2350,12 @@ The paper defines physical completion more strictly than simulation survival: th
 
 Foam and gravel were absent from simulation training and are therefore described as zero-shot physical deployments. Only the foam transitions receive completion counts in the main comparison table. The gravel-road result is a qualitative demonstration, so it should not be converted into a numerical generalization claim.
 
+## Ordinal levels still require a valid hardware mapping
+
+Quantizing touch does not eliminate the measurement chain. Section III-B first maps hardware ADC readings to load using known calibration loads, then applies the shared ordinal quantizer. Its zero and full-scale clamps discard distinctions outside the accepted range; ordinal level spacing is not a specification of force accuracy. [Sensing and quantization](https://arxiv.org/html/2608.15766v1#S3.SS2).
+
+For a replacement insole, verify the physical taxel layout, unloaded level, transitions under known loads and saturation behavior before reusing the observation encoder. Keep those checks separate from the locomotion score. A taxel stuck at its top level cannot express how far a load exceeds the represented range, and a reordered array can change spatial features even when its tensor shape matches. These are proposed integration checks, not additional Tac4Loco experiments. The [calibration guide](/guides/tactile-sensor-calibration) covers how to retain the measurement conditions; the physical walking results above remain limited to the authors' hardware and trials.
+
 ## RoboSkin analysis
 
 Tac4Loco expands the humanoid tactile stack beyond hands, palms, and protective body surfaces. The foot is also robot skin: it measures the support that actually exists after touchdown, including partial, asymmetric, compliant, or shifting contact that proprioception only observes indirectly.
@@ -2256,8 +2391,8 @@ The paper states that code and experiment configurations will be released, but t
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-18',
-    updated: '2026-08-18',
-    readTime: '8 min read',
+    updated: "2026-11-04",
+    readTime: "7 min read",
     category: 'Humanoid tactile sensing',
     image: '/generated/authority/humanoid-stack-map-cover.webp',
     sourceTitle: 'Tac4Loco plantar pressure humanoid locomotion preprint',

@@ -52,7 +52,9 @@ test('PRISM brief and dataset preserve tactile coverage, image-count, access, li
   assert.match(brief, /5,000\+ robot trajectories/);
   assert.match(brief, /tactile sensing is included for only a subset of episodes/);
   assert.match(brief, /combine visual and visuotactile streams/);
-  assert.match(brief, /announced, download pending/);
+  assert.match(brief, /official data route linked; payload and reuse terms unverified/);
+  assert.match(brief, /modelscope\.cn\/datasets\/Turboyuuuu\/PRISM/);
+  assert.match(brief, /25% \| 20% \| −5 percentage points/);
   assert.match(brief, /https:\/\/arxiv\.org\/abs\/2608\.17962/);
   assert.match(brief, /https:\/\/tengbo-yu\.github\.io\/PRISM\//);
   assert.match(brief, /https:\/\/github\.com\/Tengbo-Yu\/PRISM/);
