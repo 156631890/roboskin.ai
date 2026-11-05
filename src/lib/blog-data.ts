@@ -24,6 +24,87 @@ export type BlogSummary = Pick<
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "noitom-itw-ego-plus-optional-touch-data-2026",
+    title: "Noitom ITW-Ego Plus Explained: Optional Touch and Data Acceptance",
+    seoTitle: "Noitom ITW-Ego Plus: Optional Touch & Data Review",
+    seoDescription: "Review Noitom ITW-Ego Plus modality choices, HiPHI-Hand release limits and practical checks for timing, touch provenance, robot mapping and data access.",
+    excerpt: "A source-reviewed guide to optional touch, delivered data and robot transfer: what the announcement establishes and which evidence an integration team still needs.",
+    category: "Research data review",
+    sourceTitle: "Noitom Robotics introduces ITW-Ego Plus at CoRL 2026 — issuer release, November 5, 2026",
+    sourceUrl: "https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251",
+    citationUrls: ["https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251", "https://modalitynet.com/", "https://huggingface.co/datasets/noitomrobotics/HiPHI", "https://modalitynet.com/open-research-license"],
+    technicalFocus: ["egocentric robot-learning data", "optional tactile channels", "human-to-robot mapping", "dataset access and evidence"],
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-11-05",
+    updated: "2026-11-05",
+    readTime: "7 min read",
+    image: "/generated/research-noitom-data-evidence-2026.svg",
+    content: `# Noitom ITW-Ego Plus Explained: Optional Touch and Data Acceptance
+
+**ITW-Ego Plus does not mean every recording contains touch.** Noitom presents it as configurable human data capture. For a robotics team, the useful question is which signals actually accompany a particular delivery, how they align, and what further work separates those observations from executable robot actions.
+
+This source review was published on **November 5, 2026**. The manufacturer's announcement is dated **November 5**, ahead of its stated CoRL event dates of **November 9–12**. We read the [issuer's full release as syndicated by GlobeNewswire](https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251), the [ModalityNet catalog](https://modalitynet.com/) and public access documentation. This is an editorial interpretation of vendor materials, not a peer-reviewed evaluation of ITW-Ego Plus or a RoboSkin.ai capture, download or robot experiment.
+
+## What is included, and what is optional?
+
+The release distinguishes **ITW-EgoVision**, using the Sol headset, from **ITW-Ego Plus**, which can add Body, Wrist, Exo, Touch and Sound. These refer respectively to full-body motion, wrist video, fixed external views, hand pressure and environmental audio. Its described CoRL configuration emphasizes **Body with Sol and Jupiter**. That does not establish the contents of another session or purchased package. [Configuration descriptions](https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251).
+
+Treat a product-family name as a starting point for questions, not a sample schema. The catalog itself separates laboratory HiPHI-OM acquisition from in-the-wild ITW+ capture. Its broad multimodal descriptions do not establish that every stream is present in every delivery. [Catalog scope](https://modalitynet.com/).
+
+## Keep the capture product, research release and robot reference separate
+
+| Resource or representation | What the reviewed documentation supports | What must remain separate |
+| --- | --- | --- |
+| ITW-Ego Plus | Configurable capture offering described above | A verified file manifest, downloadable benchmark and robot-action dataset |
+| HiPHI-MOV and HiPHI-OM | Different catalog families: motion with visual context, and instrumented interaction capture | Neither family name proves the channels or permissions of a particular subset |
+| Existing HiPHI release | Its public card describes BVH human motion and, for human-object interaction, object trajectories and meshes | A motion or object-contact description is not evidence of measured tactile streams |
+| Retargeted robot reference | A representation adapted to a specified robot | The reference is not proof of a successfully executed physical trial |
+
+The [HiPHI card](https://huggingface.co/datasets/noitomrobotics/HiPHI) explicitly says motion must be retargeted and checked for the target embodiment. As a concrete illustration, its format uses centimeters for BVH motion but meters for object-trajectory positions. Those are **HiPHI format details**, not verified ITW-Ego Plus conventions. A common-looking coordinate array cannot substitute for inspecting each source's units, frames and transforms.
+
+The broader [robotics dataset guide](/robotics-datasets) explains data-conversion contracts. The [robot-learning guide](/robot-learning) separates demonstrations, retargeting and subsequent policy evaluation.
+
+## What would establish that a recording contains usable touch?
+
+The following is **our proposed acceptance checklist**, not a description of an inspected Noitom payload or a requirement the vendor has already passed.
+
+First, request the sensor model, hand location, active channels and calibration record for the actual recording. A field called pressure still needs units, range and processing history. Do not silently turn a normalized signal into force in newtons, or a normal-pressure channel into measured shear. The [tactile calibration guide](/guides/tactile-sensor-calibration) provides the corresponding measurement questions.
+
+Second, distinguish three states: **not collected, collected but invalid, and valid with no detected contact**. Encoding all three as zero makes an absent sensor appear to have measured an absence of contact. The manifest and validity mask should preserve the distinction through filtering, resampling and conversion.
+
+Third, check time alignment at the point where the model will use the observation. Record capture timestamps, clock relationships, gaps and any interpolation. A visually plausible overlay is useful for inspection but does not quantify residual timing error. A contact signal aligned to the wrong part of a grasp can change the learning problem even when every file opens correctly.
+
+Finally, identify whose contact was measured. Human hand geometry, wearable mounting and object contact differ from a robot fingertip. Joint correspondence alone cannot establish tactile correspondence. The [teleoperation guide](/robot-teleoperation) covers that transfer boundary and why a recording is not automatically closed-loop feedback.
+
+## A small delivery-review record before a large training run
+
+Use a representative, authorized sample before committing to a larger conversion. Keep the checks attached to a versioned delivery rather than to the vendor name. This proposed record is intentionally independent of a particular file format:
+
+| Review item | Evidence to request or retain | Decision it supports |
+| --- | --- | --- |
+| Delivered coverage | Episode IDs, task and capture configuration, available streams, valid durations and exclusions | Whether the selected examples contain the observations your model requires |
+| Time and geometry | Native timestamps, synchronization method, camera calibration, coordinate frames and units | Whether signals refer to the same event and physical locations |
+| Touch provenance | Hardware and mounting revision, raw/processed fields, calibration and missing-data semantics | Whether contact is measured, inferred or unavailable |
+| Action provenance | Human state, mapped robot target, commanded action and executed state stored distinctly | Whether a proposed training target is actually a robot action |
+| Release and rights | Dataset revision, manifest/checksums, access conditions and applicable license notices | Whether the intended files can be obtained and used for the planned purpose |
+
+For example, suppose a delivery includes body motion and video but no touch channel. It may still support an appropriate motion-learning study. It cannot support a claim that a policy learned from measured hand pressure in those same records. Adding inferred contact labels would create a different, explicitly derived signal; it would not retroactively change how the recording was acquired.
+
+Define an evaluation before converting the entire collection. Hold out the people, scenes, objects or sessions that match the intended generalization claim. For a proposed touch ablation, compare the same eligible episodes and keep other observations and execution interfaces fixed. Otherwise, a change in task mix can be mistaken for a sensing benefit. Report failures, exclusions and denominators alongside outcomes; these are suggested study controls, not results obtained here.
+
+## HiPHI-Hand: an announced release is not a verified download
+
+The announcement describes **11 hours of egocentric video with marker-based 3D hand ground truth** and a HiPHI-Hand release on Hugging Face **at CoRL**, under the same research license. We did not verify its release artifact or a downloadable file manifest on November 5. Hand geometry also does not establish a measured pressure channel. [Announced release scope](https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251).
+
+Our public repository check found the existing [noitomrobotics/HiPHI card](https://huggingface.co/datasets/noitomrobotics/HiPHI), which presents an access request and agreement step. That observation is not proof that HiPHI-Hand exists nowhere else. It is why this review does not offer a verified HiPHI-Hand download, copy a license onto an uninspected artifact, or add it to our [tactile dataset records](/datasets).
+
+The published [ModalityNet Open Research License](https://modalitynet.com/open-research-license) limits its grant to non-commercial purposes and requires a separate written license for commercial use. Its definition includes internal development or demonstrations supporting a commercial offering. It also restricts raw-data redistribution and public mirrors. These are the reviewed terms, not a determination that a reader's proposed use qualifies. Check the license attached to the actual release and obtain the necessary rights before use; a public card or a research announcement is not commercial permission.
+
+## The useful next step
+
+Ask for a versioned sample specification and the missing acceptance evidence before choosing a training recipe. If those materials remain unavailable, record the offering as an acquisition lead rather than a validated training resource. Review the [source-evidence methodology](/methodology) or use our [research-services inquiry](/research-services) to discuss a documented comparison; that route does not provide Noitom data, vendor authorization or hardware validation.`,
+  },
+  {
     id: "reflexarc-tactile-reflex-latency-humanoid-control-2026",
     title: "ReflexArc Explained: Tactile Reflex Latency and Humanoid Controller Conflicts",
     seoTitle: "ReflexArc: Tactile Reflex Latency & Control Conflicts",
