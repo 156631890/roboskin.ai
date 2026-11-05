@@ -7540,8 +7540,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
     published: '2026-08-21',
-    updated: "2026-11-04",
-    revisionNote: "November 4, 2026: added a conversion-evidence handoff and refreshed the PRISM route wording. Original dataset records and source dates remain distinct; no data loading or model run.",
+    updated: "2026-11-05",
+    revisionNote: "November 5, 2026: added an optional-modality delivery checklist using the Noitom announcement. Earlier conversion evidence and dataset records retained; no data loading or robot test.",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -7630,6 +7630,24 @@ export const seoTopicPages: SeoTopicPage[] = [
             ['Tactile robotics datasets', 'Touch, pressure, force-related, tactile image, slip, contact, and visuo-tactile data', 'Sensor, placement, calibration, rate, synchronization, robot, task, actions, splits, license', 'A claim depends on measured touch or contact state'],
           ],
         },
+      },
+      {
+        "id": "optional-modality-delivery",
+        "heading": "Optional capture modalities need a delivery-level check",
+        "body": [
+          "An optional channel in a capture catalog is not a guarantee that a selected episode contains it. The November 5, 2026 Noitom ITW-Ego Plus announcement lists Touch as an optional addition and describes a Body-focused CoRL configuration. Treat that as a configuration statement, not verified pressure data in every recording.",
+          "For a proposed delivery review, keep not-collected, invalid and valid-no-contact observations distinct. Retain the selected episode IDs, actual streams, validity masks, clock relationships, calibration and applicable release terms. Human motion, mapped robot targets and executed robot actions should remain separate fields. This is an acceptance checklist, not a loader or hardware test."
+        ],
+        "links": [
+          {
+            "label": "Review ITW-Ego Plus, optional touch and HiPHI-Hand access limits",
+            "href": "/research/noitom-itw-ego-plus-optional-touch-data-2026"
+          },
+          {
+            "label": "Noitom November 5 issuer announcement",
+            "href": "https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251"
+          }
+        ]
       },
       {
         heading: 'The fields every robot dataset record should expose',

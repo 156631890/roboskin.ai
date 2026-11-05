@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Three separate evidence steps for human capture data</title>
+  <desc id="desc">An editorial diagram separates recorded streams, robot mapping and physical evaluation. A touch channel must be verified in the actual recording. This is not a product photograph or experiment.</desc>
+  <rect width="1200" height="630" fill="#171b18"/>
+  <g font-family="Arial, sans-serif">
+    <text x="64" y="77" fill="#c4d78d" font-size="20" letter-spacing="3">ROBOSKIN.AI / DATA EVIDENCE</text>
+    <text x="64" y="143" fill="#f0f1e7" font-size="43" font-weight="700">Human capture to robot learning</text>
+    <text x="64" y="190" fill="#bfc6bc" font-size="24">Verify each boundary. Keep missing observations visible.</text>
+    <g fill="#252c25" stroke="#68775e" stroke-width="2">
+      <rect x="64" y="246" width="316" height="236" rx="12"/>
+      <rect x="442" y="246" width="316" height="236" rx="12"/>
+      <rect x="820" y="246" width="316" height="236" rx="12"/>
+    </g>
+    <g fill="#c4d78d" font-size="19" letter-spacing="2">
+      <text x="88" y="282">01 / RECORDING</text><text x="466" y="282">02 / MAPPING</text><text x="844" y="282">03 / EVALUATION</text>
+    </g>
+    <g fill="#f0f1e7" font-size="28" font-weight="700">
+      <text x="88" y="330">Delivered streams</text><text x="466" y="330">Robot reference</text><text x="844" y="330">Physical outcome</text>
+    </g>
+    <g fill="#c3c9c0" font-size="22">
+      <text x="88" y="373">Presence + validity</text><text x="88" y="409">Timing + calibration</text><text x="88" y="445">Touch only if verified</text>
+      <text x="466" y="373">Frames + units</text><text x="466" y="409">Target embodiment</text><text x="466" y="445">Command provenance</text>
+      <text x="844" y="373">Defined task + split</text><text x="844" y="409">Attempts + failures</text><text x="844" y="445">Measured response</text>
+    </g>
+    <g stroke="#c4d78d" stroke-width="3" fill="none"><path d="M395 363h30m-10-8 10 8-10 8"/><path d="M773 363h30m-10-8 10 8-10 8"/></g>
+    <text x="64" y="552" fill="#c4d78d" font-size="24">A product name is not an episode manifest.</text>
+    <text x="64" y="590" fill="#9ba595" font-size="18">Proposed review workflow · conceptual illustration · no capture or robot test performed</text>
+  </g>
+</svg>
