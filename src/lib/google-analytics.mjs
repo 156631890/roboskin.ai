@@ -65,6 +65,20 @@ export function sensorEvaluationResource(pathname) {
   return resource ? { id: resource[0], event: resource[1] } : null;
 }
 
+const robotDataResources = new Map([
+  ['/resources/robot-data/v2026.10.28/robot-data-decision-kit.zip', ['robot-data-decision-kit', 'resource_download']],
+  ['/resources/robot-data/v2026.10.28/selection-matrix.csv', ['robot-data-matrix', 'resource_download']],
+  ['/resources/robot-data/v2026.10.28/selection-matrix.json', ['robot-data-matrix', 'resource_open']],
+  ['/resources/robot-data/v2026.10.28/action-contract.csv', ['robot-action-contract', 'resource_download']],
+  ['/resources/robot-data/v2026.10.28/decision-record.csv', ['robot-data-decision-record', 'resource_download']],
+  ['/resources/robot-data/v2026.10.28/README.txt', ['robot-data-instructions', 'resource_open']],
+]);
+
+export function robotDataResource(pathname) {
+  const resource = robotDataResources.get(pathname);
+  return resource ? { id: resource[0], event: resource[1] } : null;
+}
+
 const resourceLinks = new Map([
   ['/research-services', ['research-services', 'resource_open']],
   ['/reports/tactile-ai-robot-skin-landscape-2026', ['research-sample', 'resource_open']],
@@ -74,6 +88,9 @@ const resourceLinks = new Map([
   ['/vla/timeline', ['vla-research-timeline', 'resource_open']],
   ['/robot-foundation-models', ['robot-foundation-models', 'resource_open']],
   ['/robot-world-models', ['robot-world-models', 'resource_open']],
+  ['/robot-learning', ['robot-learning-data', 'resource_open']],
+  ['/robot-teleoperation', ['robot-teleoperation-data', 'resource_open']],
+  ['/robotics-datasets', ['robotics-dataset-directory', 'resource_open']],
   ['/robot-skin', ['robot-skin-guide', 'resource_open']],
   ['/tactile-ai', ['tactile-ai-guide', 'resource_open']],
   ['/benchmarks', ['benchmark-directory', 'resource_open']],
@@ -100,10 +117,7 @@ const resourceLinks = new Map([
   ['/research-index.json', ['research-index', 'resource_download']],
   ['/experiment-results.csv', ['experiment-evidence', 'resource_download']],
   ['/resources/tactile-dataset-selection-checklist.csv', ['dataset-checklist', 'resource_download']],
-  ['/resources/robot-data/v2026.10.28/robot-data-decision-kit.zip', ['robot-data-decision-kit', 'resource_download']],
-  ['/resources/robot-data/v2026.10.28/selection-matrix.csv', ['robot-data-matrix', 'resource_download']],
-  ['/resources/robot-data/v2026.10.28/selection-matrix.json', ['robot-data-matrix', 'resource_open']],
-  ['/resources/robot-data/v2026.10.28/action-contract.csv', ['robot-action-contract', 'resource_download']],
+  ...robotDataResources,
   ['/resources/tactile-icl/v2026.10.28/tactile-context-reproduction-kit.zip', ['tactile-icl-kit', 'resource_download']],
   ['/resources/tactile-icl/v2026.10.28/input-audit.json', ['tactile-icl-audit', 'resource_open']],
   ['/resources/tactile-icl/v2026.10.28/segment-audit.csv', ['tactile-icl-segments', 'resource_download']],

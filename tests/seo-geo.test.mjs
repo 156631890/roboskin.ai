@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readdir, readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { createTypeScriptLoader } from '../scripts/lib/load-typescript.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
@@ -208,23 +209,32 @@ test('RoboSkin uses the verified domain mailbox for direct public inquiries', as
   assert.match(site, /privacyEmail: 'hello@roboskin\.ai'/);
 });
 
-test('static SEO routes own explicit lastmod dates shared by sitemap and WebPage JSON-LD', async () => {
+test('static SEO routes share evidence-based lastmod dates with sitemap and WebPage JSON-LD', async () => {
   const [seo, sitemap, verifier] = await Promise.all([
     read('src/lib/seo.ts'),
     read('src/app/sitemap.ts'),
     read('scripts/verify-export.mjs'),
   ]);
-  const routeSection = seo.match(/export const pageSeo: Record<string, SeoRoute> = \{([\s\S]*?)\n\};/)?.[1] ?? '';
-  const routeBlocks = [...routeSection.matchAll(/^  '([^']+)': \{([\s\S]*?)^  \},$/gm)];
-  const declaredPaths = [...routeSection.matchAll(/^    path: /gm)];
-
-  assert.ok(routeBlocks.length > 0);
-  assert.equal(routeBlocks.length, declaredPaths.length);
-  for (const [, route, body] of routeBlocks) {
-    const updated = body.match(/^    updated: '(\d{4}-\d{2}-\d{2})',$/m)?.[1];
-    assert.ok(updated, `${route} must own an explicit ISO updated date`);
+  const load = createTypeScriptLoader();
+  const { pageSeo, buildPageJsonLd, canonicalUrl } = load('src/lib/seo.ts');
+  const entries = load('src/app/sitemap.ts').default();
+  assert.ok(Object.keys(pageSeo).length > 0);
+  for (const [path, route] of Object.entries(pageSeo)) {
+    const { updated } = route;
+    assert.match(updated, /^\d{4}-\d{2}-\d{2}$/, `${path} must own an ISO updated date`);
     assert.equal(new Date(`${updated}T00:00:00Z`).toISOString().slice(0, 10), updated);
+    assert.equal(buildPageJsonLd(path).dateModified, updated, path);
+    if (route.index) {
+      assert.equal(entries.find(entry => entry.url === canonicalUrl(path))?.lastModified.toISOString().slice(0, 10), updated, path);
+    }
   }
+
+  const newestPublication = (posts) => posts.map(post => post.date).sort().at(-1);
+  const researchDate = newestPublication(load('src/lib/blog-data.ts').blogPosts);
+  const newsDate = newestPublication(load('src/lib/news-data.ts').newsPosts);
+  assert.equal(pageSeo['/research'].updated, [researchDate, '2026-11-04'].sort().at(-1));
+  assert.equal(pageSeo['/news'].updated, [newsDate, '2026-11-04'].sort().at(-1));
+  assert.equal(pageSeo['/'].updated, [researchDate, newsDate, '2026-11-04'].sort().at(-1));
 
   assert.match(seo, /dateModified: route\.updated/);
   assert.match(seo, /dateModified: pageSeo\['\/research-index'\]\.updated/);

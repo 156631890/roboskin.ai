@@ -1,3 +1,5 @@
+import { robotDataResource } from './google-analytics.mjs';
+
 const publicHosts = new Set(['roboskin.ai', 'www.roboskin.ai']);
 const eventNames = new Set([
   'Referral Landing', 'Tutorial Visit', 'Tutorial Open', 'Reading Depth',
@@ -5,6 +7,7 @@ const eventNames = new Set([
   'Dataset Checklist Download', 'Sensor Evaluation Template Download', 'Sample Report Download',
   'Research Data Open', 'Research Services Open', 'Contact Intent', 'WhatsApp Intent',
   'Submit Source Intent',
+  'Robot Data Resource Download', 'Robot Data Resource Open',
 ]);
 const pending = [];
 
@@ -44,6 +47,11 @@ export function geoEvent(name, properties) {
     }
   }
   // Never mirror free text, link labels, emails, phone numbers or form contents.
+  if (name === 'Robot Data Resource Download' || name === 'Robot Data Resource Open') {
+    const resource = robotDataResource(data.target);
+    if (!resource || name !== (resource.event === 'resource_download' ? 'Robot Data Resource Download' : 'Robot Data Resource Open')) return null;
+    data.resource_id = resource.id;
+  }
   if (name === 'Reading Depth' && [25, 50, 75].includes(properties?.depth)) data.depth = properties.depth;
   if (name === 'Referral Landing' && ['ChatGPT', 'Perplexity', 'Claude', 'Microsoft Copilot', 'Bing', 'Google'].includes(properties?.source)) data.source = properties.source;
   return { name, data };

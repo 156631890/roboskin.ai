@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { evidenceBatch, growthBatchForPath, resourceGrowthBatch } from '@/lib/growth-batches.mjs';
 import { referralLandingSource } from '@/lib/referral-attribution.mjs';
-import { sensorEvaluationResource } from '@/lib/google-analytics.mjs';
+import { robotDataResource, sensorEvaluationResource } from '@/lib/google-analytics.mjs';
 
 function cleanLabel(value: string) {
   return value.replace(/\s+/g, ' ').trim().slice(0, 80);
@@ -78,6 +78,14 @@ export default function AnalyticsTracker() {
       const url = new URL(anchor.href, window.location.href);
       const label = cleanLabel(anchor.textContent ?? '');
       const properties = { from: pathname, target: url.pathname, label, batch: growthBatchForPath(pathname) };
+
+      const robotData = url.origin === window.location.origin ? robotDataResource(url.pathname) : null;
+      if (robotData) {
+        track(robotData.event === 'resource_download' ? 'Robot Data Resource Download' : 'Robot Data Resource Open', {
+          from: pathname, target: url.pathname, resource_id: robotData.id,
+        });
+        return;
+      }
 
       if (url.origin === window.location.origin && anchor.hasAttribute('data-resource-route')) {
         track('Research Resource Route Open', { ...properties, resource: anchor.getAttribute('data-resource-route')!, batch: resourceGrowthBatch });

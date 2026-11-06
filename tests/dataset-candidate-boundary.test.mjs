@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import ts from 'typescript';
 import * as evidence from '../src/lib/dataset-evidence.mjs';
 import * as selection from '../src/lib/dataset-selection.mjs';
+import * as freshness from '../src/lib/collection-freshness.mjs';
 import { validateDatasetDistributions } from '../scripts/lib/dataset-structured-data.mjs';
 
 function load(file, dependencies = {}) {
@@ -26,6 +27,9 @@ const release = load('src/lib/research-index-release.ts', {
   },
 });
 const seo = load('src/lib/seo.ts', {
+  '@/lib/blog-data': load('src/lib/blog-data.ts'),
+  '@/lib/news-data': load('src/lib/news-data.ts'),
+  '@/lib/collection-freshness.mjs': freshness,
   '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
   '@/lib/dataset-evidence.mjs': evidence,
   '@/content/site': site,
