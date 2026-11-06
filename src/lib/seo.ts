@@ -4,6 +4,9 @@ import type { Metadata } from 'next';
 import { faqItems, productCards, site } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
+import { blogPosts } from '@/lib/blog-data';
+import { newsPosts } from '@/lib/news-data';
+import { collectionUpdated } from '@/lib/collection-freshness.mjs';
 import type { ResearchIndexEntry } from '@/lib/research-index';
 import { researchIndexRelease } from '@/lib/research-index-release';
 import type { TactileBenchmarkEntry } from '@/lib/tactile-benchmarks';
@@ -72,7 +75,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/',
     title: 'Robot Skin, Tactile AI & Robotics Research',
     description: "Explore robot skin and tactile AI through source-linked research, sensors, datasets and practical evaluation guides for robotics decisions.",
-    updated: '2026-11-04',
+    updated: collectionUpdated('2026-11-04', [...blogPosts, ...newsPosts]),
     priority: 1,
     changeFrequency: 'weekly',
     index: true,
@@ -186,7 +189,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/research',
     title: 'Tactile Robotics Research: Paper Reviews & Evidence',
     description: "Browse tactile robotics paper reviews with source versions, task results, artifact access and limits; distinguish reported findings from local checks.",
-    updated: '2026-11-04',
+    updated: collectionUpdated('2026-11-04', blogPosts),
     priority: 0.78,
     changeFrequency: 'weekly',
     index: true,
@@ -310,7 +313,7 @@ export const pageSeo: Record<string, SeoRoute> = {
     path: '/news',
     title: 'Robot Skin, Tactile AI and Physical AI News',
     description: "Follow robot skin and tactile AI reports with original publication dates, source attribution, updated evidence notes and links to deeper technical reviews.",
-    updated: '2026-11-04',
+    updated: collectionUpdated('2026-11-04', newsPosts),
     priority: 0.72,
     changeFrequency: 'weekly',
     index: true,

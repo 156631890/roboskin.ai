@@ -5,6 +5,7 @@ import test from 'node:test';
 import sharp from 'sharp';
 import ts from 'typescript';
 import * as datasetEvidence from '../src/lib/dataset-evidence.mjs';
+import * as freshness from '../src/lib/collection-freshness.mjs';
 
 const root = new URL('../', import.meta.url);
 
@@ -21,6 +22,9 @@ function load(relative, dependencies = {}) {
 }
 
 const seo = load('src/lib/seo.ts', {
+  '@/lib/blog-data': load('src/lib/blog-data.ts'),
+  '@/lib/news-data': load('src/lib/news-data.ts'),
+  '@/lib/collection-freshness.mjs': freshness,
   '@/lib/schema-evidence': load('src/lib/schema-evidence.ts'),
   '@/lib/dataset-evidence.mjs': datasetEvidence,
   '@/content/site': load('src/content/site.ts'),
