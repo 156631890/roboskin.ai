@@ -331,25 +331,59 @@ export const sensorDetailPages: SeoTopicPage[] = [
   },
   {
     path: '/sensors/gelsight-mini',
-    revisionNote: "November 4, 2026: rechecked the manufacturer datasheet and added a capture-to-reconstruction acceptance record. The pinned software documentation remains a dated review; no hardware or reconstruction experiment was run.",
-    title: 'GelSight Mini: Specifications, Software & Calibration',
-    description: 'Review GelSight Mini specifications, RGB and 3D workflows, calibration limits, replaceable gel, Python examples, and evidence for robotics use.',
-    h1: 'GelSight Mini: specifications and a usable research workflow',
+    revisionNote: "November 7, 2026: checked manufacturer store prices and package contents, and added a dated buying comparison. The November 4 capture-to-reconstruction record and earlier software review remain; no hardware experiment was run.",
+    title: 'GelSight Mini: Price, Specs & Robotics Package',
+    description: 'Compare GelSight Mini System and Robotics Package prices, included gels, sensor specifications, Python software and calibration requirements for robotics.',
+    h1: 'GelSight Mini: price, specifications and robotics setup',
     kicker: 'Sensor evidence / Commercial optical touch',
     intent: 'Help researchers distinguish GelSight Mini manufacturer specifications from software reconstruction settings and experimental claims.',
     published: '2026-09-12',
-    updated: '2026-11-04',
+    updated: '2026-11-07',
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
     visualKey: 'technology',
-    keywords: ['GelSight Mini', 'GelSight Mini specifications', 'GelSight Mini calibration', 'GelSight Mini Python'],
+    keywords: ['GelSight Mini', 'GelSight Mini price', 'GelSight Mini robotics package', 'GelSight Mini specifications', 'GelSight Mini calibration', 'GelSight Mini Python'],
+    startHere: {
+      heading: 'GelSight Mini: choose your next step',
+      links: [
+        { label: 'Price and package contents', href: '#price-and-packages', description: 'Compare the two manufacturer packages and check the dated price scope.' },
+        { label: 'Manufacturer specifications', href: '#section-manufacturer-specifications-with-operating-conditions', description: 'Find sensing area, camera rate and operating conditions.' },
+        { label: 'Software and first capture', href: '#section-start-with-image-capture-then-inspect-the-3d-pipeline', description: 'Separate raw RGB capture from example 3D reconstruction.' },
+      ],
+    },
     quickAnswer: [
       'GelSight Mini is a commercial optical tactile sensor. A camera observes an illuminated compliant gel as it conforms to a contacted surface. The official datasheet reports an 18.6 × 14.3 mm field of view, an 8 MP camera, and a 25 FPS camera frame rate.',
+      'The manufacturer store listed the Mini System at US$510 and the Robotics Package at US$560 on November 7, 2026. The Robotics Package includes an additional tracking-marker gel. These are dated listings, not a delivered-cost quote or a stock guarantee.',
       'Those specifications are distinct from reconstruction settings: the reviewed gsrobotics examples use a configurable image-processing pipeline, with a 320 × 240 default configuration shown in the README. A sensor specification, a processed image size, and the spatial accuracy of a learned model are different measurements.',
       'The sources below provide a path from live RGB capture to example 3D reconstruction. RoboSkin.ai reviewed the manufacturer documents and code documentation; we have not acquired a sensor or independently reproduced its performance.',
     ],
     sections: [
+      {
+        id: 'price-and-packages',
+        heading: 'GelSight Mini price and Robotics Package comparison',
+        body: [
+          'The manufacturer store listings below were checked on November 7, 2026. RoboSkin does not sell these packages. Confirm the payable currency, tax, shipping, import charges and delivery destination with GelSight before ordering; the listed amount is not a verified delivered total.',
+        ],
+        table: {
+          headers: ['Manufacturer package', 'Listed price (USD)', 'Included items'],
+          rows: [
+            ['GelSight Mini System', '$510', 'Mini sensor, standard gel, focus tool and USB Micro-B to USB-C cable'],
+            ['GelSight Mini Robotics Package', '$560', 'Mini sensor, standard gel, tracking-marker gel, focus tool and USB Micro-B to USB-C cable'],
+          ],
+        },
+        subsections: [{
+          heading: 'What does the extra $50 buy?',
+          body: [
+            'The listed package difference is the additional tracking-marker gel. Choose according to the observations your workflow needs; the package name alone does not establish a calibrated force output or a working robot controller.',
+            'Both store pages estimate four weeks after receipt of an order. This is the manufacturer estimate shown at the review date, not a delivery guarantee. Both also describe a reformulated standard gel for orders from January 3, 2025; retain the cartridge revision when interpreting the older datasheet durability test.',
+          ],
+        }],
+        links: [
+          { label: 'GelSight Mini System: official price and contents', href: 'https://www.gelsight.com/product/gelsight-mini-system/' },
+          { label: 'GelSight Mini Robotics Package: official price and contents', href: 'https://www.gelsight.com/product/gelsight-mini-robotics-package/' },
+        ],
+      },
       {
         heading: 'Manufacturer specifications with operating conditions',
         body: ['The following values are transcribed from page 3 of the official datasheet reviewed on September 12, 2026. They belong to GelSight Mini, and should not be copied onto other GelSight products or all optical tactile sensors.'],
