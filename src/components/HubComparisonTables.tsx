@@ -23,13 +23,13 @@ function Cells({ cells }: { cells: ReactNode[] }) {
     : <td key={index} className="border-b border-white/10 px-4 py-4 align-top text-[#c8d1de]">{cell}</td>)}</>;
 }
 
-export function SensorComparisonTable() {
+export function SensorComparisonTable({ detailLinks }: { detailLinks: Record<string, string> }) {
   return <section id="sensor-specifications" className="container-shell pb-12" aria-labelledby="sensor-specifications-heading">
     <h2 id="sensor-specifications-heading" className="text-2xl font-semibold">Tactile sensing: published sensor specifications</h2>
     <p className="mt-3 text-soft">{tactileSensorEntries.length} sensors. Values belong to the cited model and source-review date. Not published means no value in the reviewed material. Spatial resolution, force resolution, taxel count and image resolution are different measurements.</p>
     <Table headers={['Sensor', 'Type', 'Spatial resolution', 'Force range', 'Interface', 'Source']} label="Sensor specifications with primary sources">
       {tactileSensorEntries.map(entry => { const spec = getSensorSpecifications(entry.id); return <tr key={entry.id}><Cells cells={[
-        entry.name, entry.principle, spec.resolution, spec.force, spec.interface,
+        <Link key="sensor" href={detailLinks[entry.id] ?? `#sensor-${entry.id}`} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{entry.name}</Link>, entry.principle, spec.resolution, spec.force, spec.interface,
         <a key="source" href={entry.sourceUrl} className="underline">{entry.name} source ({entry.sourceReviewed})</a>,
       ]} /></tr>; })}
     </Table>
@@ -50,7 +50,7 @@ export function VlaComparisonTable() {
         const catalog = vlaCatalog.find(row => row.id === (catalogAliases[entry.id] ?? entry.id));
         const params = catalog?.parameterBillions ? catalog.parameters.text : 'Not disclosed';
         return <tr id={`model-${entry.id}`} key={entry.id}><Cells cells={[
-          entry.name, params, entry.trainingDataSummary,
+          catalog ? <Link key="model" href={`/vla/models#${catalog.id}`} className="text-[#ffd5c5] underline underline-offset-4 hover:text-white">{entry.name}</Link> : entry.name, params, entry.trainingDataSummary,
           entry.tactileInput === 'yes' ? 'Y' : entry.tactileInput === 'no' ? 'N' : 'Not disclosed',
           releasedWeights.has(entry.id) ? 'Y' : unavailableWeights.has(entry.id) ? 'N' : 'Not disclosed',
           <span key="sources"><a href={entry.primarySources[0]?.url ?? entry.projectUrl} className="underline">{entry.name} primary source</a>{catalog?.parameterBillions ? <>; <a href={catalog.parameters.source} className="underline">parameter source</a></> : null}<br />Reviewed {entry.sourceReviewed}</span>,
