@@ -37,7 +37,7 @@ export default function TactileSensorsPage() {
     <>
       <JsonLd data={buildTactileSensorsJsonLd(tactileSensorEntries, manufacturerOrganizationIds)} />
       <SeoTopicArticle page={page} leadHref="#task-selector" leadLabel="Choose by task" leadContent={
-        <><SensorComparisonTable /><TactileSensorExplorer
+        <><SensorComparisonTable detailLinks={detailLinks} /><TactileSensorExplorer
           entries={tactileSensorEntries}
           organizationLinks={manufacturerOrganizationLinks}
           detailLinks={detailLinks}
