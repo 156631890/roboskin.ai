@@ -6,6 +6,7 @@ import { omnimodalSection, omnimodalFaqs, omnimodalSources, contactStateSection,
 import { aspireSetup } from '@/content/aspire-setup';
 import { opticalTactileGuides } from '@/content/optical-tactile-guides';
 import { tactileSelectionGuide } from '@/content/tactile-selection-guide';
+import { recentTactilePaperSections } from '@/content/recent-tactile-papers';
 import { eSkinAdditions, tactileSources } from '@/content/tactile-topic-additions';
 import { sensorComparisonPages } from '@/content/sensor-comparison-pages';
 import { tactileIclComparisonPage } from '@/content/tactile-icl-comparison';
@@ -2934,26 +2935,27 @@ export const seoTopicPages: SeoTopicPage[] = [
     ],
   },
   {
-    revisionNote: "November 4, 2026: added a claim-to-evidence reading method and a synthetic-data example. Original research briefs and publication dates retained; no reproduction claimed.",
+    revisionNote: "November 9, 2026: added 13 source-linked literature records, separating recent papers and revisions, publication-status evidence, and two earlier institutional references. Original briefs and the claim-to-evidence reading method retained; no reproduction claimed.",
     path: '/research/robot-skin-papers',
     title: 'Robot Skin Papers and Tactile Sensing Research Index',
     description:
-      "Read robot-skin papers by claim, experiment and artifact. Follow source versions, sensing evidence and task metrics into the relevant research route.",
+      "Find recent tactile robotics papers, lab sources and publication status. Compare sensing methods, source versions, experimental limits and research routes.",
     h1: 'Robot skin papers and tactile sensing research index',
     kicker: 'Research guide',
     intent: 'Research index for robot skin papers, tactile AI papers, e-skin research, and source-backed technical briefs.',
-    updated: "2026-11-04",
+    updated: "2026-11-09",
     priority: 0.78,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
     visualKey: 'resources',
-    keywords: ['robot skin papers', 'robot skin research', 'tactile AI papers', 'e-skin papers', 'robot tactile sensing research'],
+    keywords: ['robot skin papers', 'robot skin research', 'tactile AI papers', 'e-skin papers', 'robot tactile sensing research', 'recent tactile robotics papers', 'LumiTac', 'ToFTouch', 'physical tactile cues'],
     quickAnswer: [
-      'This page organizes RoboSkin.ai research routes for robot skin, tactile AI, e-skin, soft robotic skin, tactile arrays, and robot hand sensing.',
+      'Start with 13 source-linked records spanning recent tactile papers and revisions, publication-status updates and two earlier institutional references, then follow the original robot-skin research routes below.',
       'It is not a claim that RoboSkin.ai produced the original papers. It is a source-backed editorial index that links public sources to practical robotics interpretation.',
       'Use it as a starting point for understanding which papers map to materials, sensor arrays, full-hand sensing, software pipelines, and application constraints.',
     ],
     sections: [
+      ...recentTactilePaperSections,
       {
         "id": "paper-claim-trace",
         "heading": "Turn a paper into a checkable claim, not a technology endorsement",

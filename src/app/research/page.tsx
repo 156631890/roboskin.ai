@@ -99,7 +99,7 @@ export default function ResearchPage() {
                 RoboSkin Working Papers
               </Link>
               <Link href="/research/robot-skin-papers" className="btn-secondary w-full sm:w-auto">
-                Browse robot skin papers
+                Recent papers and lab sources
               </Link>
               <Link href="/research-index" className="btn-secondary w-full sm:w-auto">
                 Browse the tactile research index
