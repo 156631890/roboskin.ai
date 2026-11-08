@@ -3762,7 +3762,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/datasets',
-    revisionNote: "November 4, 2026: clarified the evidence recorded by directory exports and updated the PRISM data-route observation. Existing 26 records and other individual review dates remain; no payload download or training.",
+    revisionNote: "November 8, 2026: added TouchScale release-scope, license and action-label evidence. Public metadata review only; no gated payload access or training.",
     title: "Tactile Datasets for Robot Learning: Index",
     description: "Compare tactile datasets by contact origin, episodes, access and reuse terms; distinguish paper scale, listed files and inspected payloads.",
     introduction: "Tactile dataset refers to a collection of recorded or simulated contact observations, often aligned with images, robot state or actions. This tactile dataset index contains 26 records organized by sensor type, task and license. Each record keeps its source-review date, download route and access limitations; a linked dataset is not necessarily a verified or unrestricted download.",
@@ -3770,7 +3770,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Source-linked dataset directory',
     intent: 'Resource guide for tactile datasets, robot learning touch data, visuo-tactile datasets, and tactile manipulation dataset searches.',
     published: '2026-07-20',
-    updated: "2026-11-04",
+    updated: "2026-11-08",
     priority: 0.92,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3790,12 +3790,34 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Use the searchable directory below to find resources such as TactiDex, VTDexManip, EgoTouch, and Touch and Go. Filter by sensor, robot, task, or modality, then open the primary source to check downloads and reuse terms. A listed resource may still have incomplete files or an unstated license.',
     ],
     sections: [
+{
+        "id": "touchscale-release-scope",
+        "heading": "TouchScale: study scale, access and action labels",
+        "body": [
+                "The November 2 TouchScale v3 paper describes a 500-hour human visual-tactile corpus. On November 8, the public host card still described a 100-hour release, with gated access and CC BY-NC 4.0 terms. Its earlier full-release plan does not establish that the full corpus is available. The new directory record preserves the reviewed card revision and separates documentation from uninspected payloads.",
+                "The paper states that TouchScale does not include action labels. Use human contact recordings for an explicitly defined representation or prediction objective; do not treat them as ready-made robot action targets. Plan any robot demonstration, embodiment mapping and controller adaptation as separate inputs to the experiment."
+        ],
+        "links": [
+                {
+                        "label": "TouchScale release and license record",
+                        "href": "/datasets#dataset-touchscale"
+                },
+                {
+                        "label": "TouchScale access and experiment planning",
+                        "href": "/news/touchscale-dataset-release-and-robot-learning"
+                },
+                {
+                        "label": "TouchScale v3 limitations",
+                        "href": "https://arxiv.org/html/2610.10288v3"
+                }
+        ]
+},
       {
         "id": "dataset-evidence-handoff",
         "heading": "What a directory export does and does not establish",
         "body": [
           "Keep three quantities separate when planning data use: what the paper reports collecting, what the host lists, and what your loader successfully decodes. They can differ without implying that data is lost. A file listing can include metadata, duplicates, auxiliary media or only one released subset; a successful metadata read does not count every episode inside a payload.",
-          "The current directory has 26 records, while related collection hubs are excluded from that count. The fixed research index is a separate paper selection, not a second dataset inventory. CSV and JSON exports describe the directory evidence; they neither redistribute the underlying data nor certify a working training loader."
+          "Related collection hubs are excluded from the dataset-record count displayed by the explorer. The fixed research index is a separate paper selection, not a second dataset inventory. CSV and JSON exports describe the directory evidence; they neither redistribute the underlying data nor certify a working training loader."
         ],
         "table": {
           "headers": [
@@ -5300,8 +5322,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: "2026-11-04",
-    revisionNote: "November 4, 2026: compared observation and action interfaces, corrected contact-state evidence limits, and added timing and intervention checks. October 22, 2026: clarified predicted wrench references and separate model/controller rates with CW-WAM. October 20, 2026: added a source-reviewed contact state recognition explanation and FAQ. Existing sections and their evidence are retained.",
+    updated: "2026-11-08",
+    revisionNote: "November 8, 2026: added TactileLab contact assumptions, sensor observability and transfer checks. Prior interface and timing guidance retained; no hardware test.",
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -5313,6 +5335,28 @@ export const seoTopicPages: SeoTopicPage[] = [
       'A tactile model is not enough. Useful manipulation requires synchronized robot state, low-latency sensing, a controller or policy that can act on touch, and task-level evidence against a no-touch baseline.',
     ],
     sections: [
+{
+        "id": "tactilelab-contact-assumption",
+        "heading": "TactileLab: record the contact assumption before transfer",
+        "body": [
+                "The November 5 TactileLab preprint uses simulated tactile flow alongside contact depth for contact-rich learning. Its real-to-sim transfer assumes sticking contact; abrupt contact changes or slip may violate that assumption. The paper also identifies poor flow recovery from markerless GelSight Mini. A sensor that supplies images does not necessarily expose the tangential cue needed by this mapping.",
+                "For a transfer trial, record which contact regime the policy expects, what the sensor makes observable, and how violations are detected. Evaluate the translated observation separately from the complete policy. Treat a lost contact as an outcome to explain, not a trial to remove. These are proposed experiment checks, not RoboSkin hardware results. The official project still listed code as coming soon on November 8."
+        ],
+        "links": [
+                {
+                        "label": "TactileLab contact-flow review",
+                        "href": "/news/tactilelab-shear-sensitive-simulation"
+                },
+                {
+                        "label": "TactileLab v1 limitations",
+                        "href": "https://arxiv.org/html/2611.07881v1"
+                },
+                {
+                        "label": "Official project and code status",
+                        "href": "https://yijionglin.github.io/tactilelab/"
+                }
+        ]
+},
       {
         "id": "panotac-representation-boundary",
         "heading": "Dense tactile representations can contain interpolated observations",
@@ -7757,8 +7801,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: "Prediction, action and evidence",
     intent: 'Definition and evidence guide for robot world models, world models for robotics, world-action models, predictive robot models, learned dynamics, and tactile world models.',
     published: '2026-08-21',
-    updated: "2026-11-04",
-    revisionNote: "November 4, 2026: reviewed the full overview and primary sources; added prediction/runtime comparisons and clarified model definitions, timing and release scope. Existing structured records retain their own review dates; no model execution or robotics reproduction is claimed.",
+    updated: "2026-11-08",
+    revisionNote: "November 8, 2026: added VTAM v2 training/inference distinctions and a dated evidence record. Other model records retain their review dates; no inference or robot reproduction.",
     priority: 0.94,
     changeFrequency: 'weekly',
     schemaType: 'DefinedTerm',
@@ -7770,6 +7814,28 @@ export const seoTopicPages: SeoTopicPage[] = [
       'The decisive evidence is not whether a rollout looks plausible. It is whether prediction supports better planning, control, data efficiency, recovery, or task outcomes under a named robot, task, horizon, baseline, and real-world protocol.',
     ],
     sections: [
+{
+        "id": "vtam-training-inference-contract",
+        "heading": "VTAM: separate video pretraining from tactile adaptation",
+        "body": [
+                "VTAM v2, revised November 5, adapts a pretrained video backbone with visual-tactile task demonstrations before joint action learning. Its lack of tactile pretraining does not imply a model trained from scratch or a policy that works without touch. The action path avoids full video denoising at inference; that architecture choice does not itself establish a complete robot-loop latency.",
+                "Compare preparation, adaptation and runtime separately. Pin pretrained weights and task data, then measure observation encoding, action generation, command delivery and execution under the same hardware conditions. Keep encoder transfer distinct from policy transfer. The evidence record below describes the author-reported scope; RoboSkin has not run VTAM."
+        ],
+        "links": [
+                {
+                        "label": "VTAM evidence and artifact boundaries",
+                        "href": "/robot-world-models#world-model-vtam"
+                },
+                {
+                        "label": "Read the VTAM v2 research brief",
+                        "href": "/news/vtam-visuo-tactile-world-action-model"
+                },
+                {
+                        "label": "VTAM v2 primary manuscript",
+                        "href": "https://arxiv.org/html/2603.23481v2"
+                }
+        ]
+},
       {
         heading: 'What a robot world model predicts',
         body: [

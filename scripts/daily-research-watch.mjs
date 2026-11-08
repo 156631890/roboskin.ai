@@ -1,4 +1,4 @@
-import { appendFile, mkdir, writeFile } from 'node:fs/promises';
+import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { dirname } from 'node:path';
 import { promisify } from 'node:util';
@@ -12,6 +12,8 @@ const TREND_GEOGRAPHIES = ['US', 'GB', 'DE', 'CA'];
 const ARXIV_QUERY_BATCH_SIZE = 3;
 const ARXIV_BATCH_MAX_RESULTS = 12;
 const ARXIV_BATCH_DELAY_MS = 3_000;
+// 12 sources × (20s fetch + 20s curl) + delays leaves room in the existing 10m job.
+const SOURCE_TIMEOUT_MS = 20_000;
 const execFileAsync = promisify(execFile);
 
 const topicMatchers = [
@@ -65,7 +67,12 @@ export function buildArxivUrls() {
     urls.push(url);
   }
 
-  return urls;
+  // Submitted-date discovery alone misses substantive revisions of older papers.
+  return [...urls, ...urls.map((original) => {
+    const revised = new URL(original);
+    revised.searchParams.set('sortBy', 'lastUpdatedDate');
+    return revised;
+  })];
 }
 
 function decodeXml(value = '') {
@@ -152,7 +159,7 @@ async function fetchText(url) {
   try {
     const response = await fetch(url, {
       headers: { 'user-agent': USER_AGENT },
-      signal: AbortSignal.timeout(30_000),
+      signal: AbortSignal.timeout(SOURCE_TIMEOUT_MS),
     });
 
     if (response.ok) {
@@ -174,7 +181,7 @@ async function fetchText(url) {
       '--silent',
       '--show-error',
       '--max-time',
-      '30',
+      String(SOURCE_TIMEOUT_MS / 1_000),
       '--header',
       `User-Agent: ${USER_AGENT}`,
       '--header',
@@ -197,7 +204,11 @@ function truncate(value, length = 520) {
   return value.length <= length ? value : `${value.slice(0, length - 1).trimEnd()}…`;
 }
 
-function routePaper(paper) {
+export function routePaper(paper) {
+  if (paper.existingPath) return paper.existingPath;
+  if (/tactile|touch|haptic/i.test(paper.title) && /dataset|data collection/i.test(paper.title)) return '/datasets';
+  if (/world[ -](?:action[ -])?model/i.test(paper.title)) return '/robot-world-models';
+  if (/tactile.*simulat|simulat.*tactile/i.test(paper.title)) return '/tactile-manipulation';
   if (paper.topics.includes('robot skin') || paper.topics.includes('electronic skin')) return '/robot-skin';
   if (paper.topics.includes('humanoid robot')) return '/humanoid-robots';
   if (paper.topics.includes('robot foundation model')) return '/robot-foundation-models';
@@ -207,6 +218,39 @@ function routePaper(paper) {
   if (paper.topics.includes('tactile sensing') || paper.topics.includes('sensors')) return '/tactile-ai';
   if (paper.topics.includes('physical AI')) return '/physical-ai';
   return '/research';
+}
+
+// Read canonical article ownership without executing site code or adding dependencies
+// to the read-only research workflow. Index the record's primary source only:
+// references to another paper do not give this page ownership of that paper.
+export function indexPublishedPapers(sources) {
+  const index = new Map();
+  for (const { text, prefix } of sources) {
+    const records = [...text.matchAll(/^\s*id:\s*['"]([^'"]+)['"]/gm)];
+    for (let i = 0; i < records.length; i++) {
+      const record = text.slice(records[i].index, records[i + 1]?.index ?? text.length);
+      const source = record.match(/^\s*sourceUrl:\s*['"]https:\/\/arxiv\.org\/(?:abs|html)\/(\d{4}\.\d{4,5})(?:v\d+)?['"]/m);
+      if (source && !index.has(source[1])) index.set(source[1], `${prefix}/${records[i][1]}`);
+    }
+  }
+  return index;
+}
+
+export function preparePaperCandidates(papers, publishedIndex = new Map()) {
+  const byId = new Map();
+  for (const paper of papers) {
+    const previous = byId.get(paper.id);
+    if (!previous || paper.updated > previous.updated) byId.set(paper.id, paper);
+  }
+  return [...byId.values()].map((paper) => {
+    const existingPath = publishedIndex.get(paper.id);
+    return {
+      ...paper,
+      existingPath: existingPath || null,
+      editorialAction: existingPath ? 'review-existing-page' : 'review-primary-source',
+    };
+  }).sort((a, b) => (b.updated || b.published).localeCompare(a.updated || a.published)
+    || b.relevanceScore - a.relevanceScore);
 }
 
 function shanghaiDateKey(date) {
@@ -221,7 +265,7 @@ function shanghaiDateKey(date) {
 export function buildReport({ generatedAt, papers, trends, sourceHealth }) {
   const dateKey = shanghaiDateKey(new Date(generatedAt));
   const paperRows = papers.length > 0
-    ? papers.slice(0, 10).map((paper) => `| ${paper.published.slice(0, 10)} | [${escapeTable(paper.title)}](${paper.sourceUrl}) | ${escapeTable(paper.topics.join(', ') || 'query match')} | Review for ${routePaper(paper)} | ${paper.relevanceScore} |`).join('\n')
+    ? papers.slice(0, 10).map((paper) => `| ${paper.published.slice(0, 10)} / ${(paper.updated || paper.published).slice(0, 10)} | [${escapeTable(paper.title)}](${paper.sourceUrl}) | ${escapeTable(paper.topics.join(', ') || 'query match')} | ${paper.existingPath ? 'Review existing page' : 'Review for'} ${routePaper(paper)} | ${paper.relevanceScore} |`).join('\n')
     : sourceHealth.arxiv.ok
       ? '| — | No paper candidates returned by a complete arXiv response | — | — | — |'
       : sourceHealth.arxiv.partial
@@ -229,17 +273,20 @@ export function buildReport({ generatedAt, papers, trends, sourceHealth }) {
         : '| — | arXiv source failed; candidate count is unavailable | — | Retry the source before editorial use | — |';
   const trendRows = trends.length > 0
     ? trends.map((trend) => `| ${trend.geo} | [${escapeTable(trend.title)}](${trend.exploreUrl}) | ${escapeTable(trend.traffic || 'not reported')} | ${escapeTable(trend.topics.join(', '))} |`).join('\n')
-    : '| — | No robotics-related daily trend crossed the filter | — | No relevance inflation |';
+    : sourceHealth.trends.length > 0 && sourceHealth.trends.every((source) => source.ok)
+      ? '| — | No robotics-related daily trend crossed the filter | — | No relevance inflation |'
+      : '| — | Trend coverage incomplete or unavailable | — | Source failure is not zero demand |';
   const paperDetails = papers.slice(0, 10).map((paper, index) => [
     `### ${index + 1}. ${paper.title}`,
     '',
     `- Source: ${paper.sourceUrl}`,
     `- Published: ${paper.published || 'not reported'}`,
+    `- Source updated: ${paper.updated || 'not reported'}; a revision is not a new first publication`,
     `- Authors: ${paper.authors.join(', ') || 'not reported'}`,
     `- Categories: ${paper.categories.join(', ') || 'not reported'}`,
     `- Matched topics: ${paper.topics.join(', ') || 'query match only'}`,
     `- Evidence stage: arXiv preprint; automated discovery only`,
-    `- Proposed action: review the full paper for a possible update to ${routePaper(paper)}; do not create a URL at queue stage`,
+    `- Proposed action: ${paper.existingPath ? 'review the existing canonical article' : 'review the full paper for a possible resource update'} at ${routePaper(paper)}; do not create a URL at queue stage`,
     `- Evidence limitation: abstract-level metadata only; reported values and claims have not yet been checked against the full paper`,
     `- Abstract excerpt: ${truncate(paper.summary)}`,
   ].join('\n')).join('\n\n');
@@ -267,7 +314,9 @@ ${sourceHealth.trends.map((source) => `- Google Trends ${source.geo}: ${source.o
 
 ## Priority paper candidates
 
-| Published | Paper | Matched topic | Proposed action | Score |
+Submitted-date and updated-date discovery are combined, deduplicated by arXiv ID, and sorted by source update date. Existing primary-source owners are routed to their current article. This is a bounded discovery window, not an exhaustive literature or historical-report comparison.
+
+| First published / updated | Paper | Matched topic | Proposed action | Topic matches (not demand) |
 | --- | --- | --- | --- | ---: |
 ${paperRows}
 
@@ -275,7 +324,7 @@ ${paperDetails || paperDetailsFallback}
 
 ## Google Trends daily signals
 
-The RSS filter checks current daily searches in the United States, United Kingdom, Germany, and Canada. A blank result means no robotics-related term crossed the relevance filter; it is not converted into a fabricated trend.
+The RSS filter checks current daily searches in the United States, United Kingdom, Germany, and Canada. An empty complete response means no robotics-related term crossed the relevance filter. Failed markets remain unavailable. These daily signals are not keyword monthly search volumes or the weekly normalized Trends comparison.
 
 | Market | Query | Approximate traffic | Matched topic |
 | --- | --- | --- | --- |
@@ -305,7 +354,8 @@ ${trendRows}
 2. Read the full paper before drafting; verify values, dates, limitations, affiliations, and evidence status.
 3. Prefer updating an existing canonical page when the search intent is already covered.
 4. Publish a new URL only when it adds distinct source-backed value; never publish this queue verbatim.
-5. Record the accepted or rejected decision in the next editorial update.
+5. Pair each accepted news item with a factual update to its long-lived dataset, sensor or research resource; a related link alone is insufficient.
+6. Record the source version, primary query, resource update, limitations and accepted/rejected decision in the editorial log. Complete evidence and human content review before publication.
 `;
 }
 
@@ -325,13 +375,13 @@ export async function runResearchWatch({ outputPath = '.artifacts/daily-research
     await delay(350);
   }
 
-  const papersById = new Map(arxivResponses
+  const publishedIndex = indexPublishedPapers(await Promise.all([
+    ['../src/lib/blog-data.ts', '/research'],
+    ['../src/lib/news-data.ts', '/news'],
+  ].map(async ([path, prefix]) => ({ text: await readFile(new URL(path, import.meta.url), 'utf8'), prefix }))));
+  const papers = preparePaperCandidates(arxivResponses
     .filter((response) => response.ok)
-    .flatMap((response) => parseArxivFeed(response.text))
-    .map((paper) => [paper.id, paper]));
-  const papers = [...papersById.values()]
-    .sort((a, b) => b.relevanceScore - a.relevanceScore || b.published.localeCompare(a.published))
-    .slice(0, 30);
+    .flatMap((response) => parseArxivFeed(response.text)), publishedIndex).slice(0, 30);
   const trends = trendResponses.flatMap((response, index) => response.ok
     ? parseGoogleTrendsFeed(response.text, TREND_GEOGRAPHIES[index])
     : []);

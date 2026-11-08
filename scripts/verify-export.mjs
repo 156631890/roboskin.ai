@@ -562,7 +562,7 @@ if (failures.length === 0) {
     || !trexVlaRow.includes('complete 100-hour')) {
     failures.push('/robot-vla-models: T-Rex public-subset evidence boundary is missing');
   }
-  const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
+  const worldModelIds = ['vtam', 'dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
   const worldModelHtml = await readFile(path.join(out, 'robot-world-models.html'), 'utf8');
   const worldModelJsonLd = parseJsonLd(worldModelHtml, '/robot-world-models', failures);
   const worldModelJsonLdNodes = worldModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);

@@ -14,7 +14,7 @@ test('a newly checked dataset route does not refresh its older scientific eviden
   const edgeTo = (source) => graph.edges.find((edge) => edge.from === entity.id && edge.to === source.id);
   assert.equal(edgeTo(route).reviewedAt, '2026-11-04');
   assert.equal(edgeTo(paper).reviewedAt, '2026-08-22');
-  assert.equal(graph.updated, '2026-11-04');
+  assert.equal(graph.updated, '2026-11-08');
   assert.deepEqual(validateKnowledgeGraph(graph), []);
 });
 

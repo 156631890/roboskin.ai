@@ -40,6 +40,31 @@ export type RobotWorldModelEvidenceEntry = {
 
 export const robotWorldModelEvidenceEntries: RobotWorldModelEvidenceEntry[] = [
   {
+    id: 'vtam',
+    name: 'VTAM (November v2)',
+    releaseDate: '2026-03-24',
+    predictionTarget: 'Visual/tactile future latents during adaptation; actions, proprioception and a tactile optical-flow proxy during joint training.',
+    actionConditioning: {
+      kind: 'joint-generation',
+      description: 'An action expert learns with the adapted video backbone. This is a predictive policy, not a verified external candidate-action planning service.',
+    },
+    operationalRole: 'Task-level tactile adaptation of a video-pretrained model; action inference avoids full video denoising. No tactile pretraining does not mean no pretrained backbone or no task demonstrations.',
+    robotSensorTaskBoundary: 'Author evaluation covers xArm6/GelSight Mini and Flexiv Rizon 4/Xense Photon configurations. Sensor encoding and task-policy transfer are separate claims.',
+    realRobotEvidence: 'The v2 manuscript reports four physical tasks across the two configurations, separate from eight UniVTAC simulation tasks. RoboSkin did not reproduce these experiments.',
+    artifacts: {
+      paper: 'Public arXiv v2, revised November 5, 2026; first submitted March 24.',
+      code: 'Runnable implementation not verified in this paper review.',
+      weights: 'Reusable checkpoints not verified.',
+      data: 'Task demonstrations described; downloadable experiment payloads not verified.',
+      license: 'Code, model and dataset terms not verified; the paper license does not establish artifact reuse rights.',
+    },
+    evidenceStatus: 'Versioned preprint and author-reported experiments; no RoboSkin execution.',
+    limitations: 'The optical-flow proxy is not calibrated force. Encoder reuse does not prove an unchanged policy transfers to another sensor. Latency comparisons require matched hardware, compilation and end-to-end timing.',
+    internalEvidencePath: '/news/vtam-visuo-tactile-world-action-model',
+    primarySources: [{ label: 'VTAM v2 methods and evaluation', url: 'https://arxiv.org/html/2603.23481v2', type: 'paper' }],
+    sourceReviewed: '2026-11-08',
+  },
+  {
     id: 'dream-tac',
     name: 'Dream-Tac',
     releaseDate: '2026-06-07',

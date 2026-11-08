@@ -37,7 +37,7 @@ Each run must report:
 
 - search date and coverage window;
 - five large-term signals with the reason each term matters;
-- up to ten new papers or official releases, deduplicated against earlier reports;
+- up to ten priority papers from bounded submitted-date and updated-date queries, deduplicated by arXiv ID within the run; the report does not claim a historical comparison it has not performed;
 - publication date, evidence stage, primary URL, source-reported result, and explicit limitation for every item;
 - a 0-5 RoboSkin relevance score;
 - proposed action: ignore, monitor, add internal link, update an existing page, or create a distinct URL;
@@ -45,6 +45,28 @@ Each run must report:
 - homepage action only when the development materially changes a broad research lane.
 
 If no strong finding appears, report that clearly instead of filling the brief with old or weak material.
+
+## November 8, 2026 workflow refinement
+
+The watch now queries both first submissions and recent revisions (eight bounded
+arXiv batches), retains the newest version per ID, and sorts by source update date.
+First publication and source revision dates remain separate. It reads primary
+source ownership from existing News and Research records: a known paper routes to
+its existing URL for review, even when a revision changes the title. References
+inside another article do not create ownership. Dataset, world-model and tactile
+simulation titles route to their specific long-lived resources before generic
+robot-learning topics. Topic matches measure relevance, not search demand.
+
+An empty Trends result is described as no matched daily signal only when all
+markets succeeded. Failed/partial coverage remains unavailable. Daily RSS is not
+a monthly keyword-volume estimate or the weekly normalized Trends study.
+
+Every accepted News candidate must carry `substantive_delta`, `resource_updates`
+and `evidence_stage` in `news-editorial-log.jsonl`. A companion resource update
+must add a sourced fact or practical limitation, not only a link. Human content
+review and release authorization remain separate from automated discovery and
+technical checks. The existing schedule and read-only workflow permissions are
+unchanged.
 
 ## Trend cadence
 

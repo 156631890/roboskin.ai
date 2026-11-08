@@ -18,6 +18,7 @@ const trustedSourceHosts = new Set([
 ]);
 
 const internalEvidencePaths = new Set([
+  '/news/vtam-visuo-tactile-world-action-model',
   '/research/dream-tac-tactile-world-action-model-2026',
   '/research/feelworld-visuo-tactile-world-model-2026',
   '/research/hitac-wam-hierarchical-tactile-world-action-model-2026',

@@ -1,6 +1,18 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.11.04', compiledAt: '2026-11-04', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition updates PRISM to a linked but unverified data route; the prior pinned DexSuite metadata inspection is unchanged. No trajectory replay or physical test is claimed. Other individual access and source review dates are unchanged.' };
+export const datasetAudit = { version: 'v2026.11.08', compiledAt: '2026-11-08', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds TouchScale public-card and host-metadata evidence with gated access, noncommercial terms and a study/release scope distinction. No gated payload access, loader execution or physical test. Existing records retain their individual access and source review dates.' };
 export const datasetAccessEvidence = {
+  touchscale: {
+    access: 'gated',
+    accessCheckedAt: '2026-11-08',
+    licenseStatus: 'documented',
+    dataLicense: 'Public card labels data CC BY-NC 4.0; noncommercial conditions and host access terms apply. No conditions accepted in this review.',
+    dataLicenseUrl: 'https://huggingface.co/datasets/2077AIDataFoundation/TouchScale',
+    publicFileScale: 'Public card describes 100 hours and 15,324 episodes, distinct from the paper’s 500-hour study corpus; no payload recount.',
+    verificationScope: 'Public page and API metadata inspected; host revision 74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e. Revision-specific raw README returned HTTP 401. No authenticated files, episode decoding or training.',
+    splitStatus: 'unknown', splitDetails: 'No released split manifest inspected.',
+    formatStatus: 'described', formatDetails: 'Public card describes WebDataset shards and per-episode HDF5; no payload decoding.',
+    sources: ['https://huggingface.co/datasets/2077AIDataFoundation/TouchScale', 'https://arxiv.org/html/2610.10288v3'],
+  },
   'dexsuite-lift-scripted': {
     access: 'public-files',
     accessCheckedAt: '2026-10-31',

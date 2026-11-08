@@ -33,6 +33,187 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tactilelab-shear-sensitive-simulation',
+    title: 'TactileLab: what simulated tactile flow adds to robot manipulation',
+    seoTitle: 'TactileLab: Shear-Sensitive Tactile Simulation',
+    seoDescription: 'Understand TactileLab tactile flow, its sticking-contact assumption and the sensor-transfer checks needed before using it for robot manipulation.',
+    excerpt: 'The November 5 preprint connects shear-sensitive simulation with physical manipulation. Its contact assumption and sensor translation define where to test next.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-11-08', updated: '2026-11-08', sourceDate: '2026-11-05',
+    readTime: '4 min read', category: 'Tactile simulation',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'RoboSkin research index editorial cover.',
+    imageCaption: 'RoboSkin editorial illustration; not a TactileLab experiment or hardware photograph.',
+    evidenceStatus: 'Preprint and project-page review. No simulator installation, policy execution or hardware reproduction by RoboSkin.',
+    sourceTitle: 'TactileLab arXiv v1, November 5, 2026',
+    sourceUrl: 'https://arxiv.org/abs/2611.07881v1',
+    sources: [
+      { title: 'TactileLab v1: methods and limitations', url: 'https://arxiv.org/html/2611.07881v1' },
+      { title: 'Official TactileLab project and artifact status', url: 'https://yijionglin.github.io/tactilelab/' },
+    ],
+    technicalFocus: ['TactileLab', 'tactile simulation', 'simulated tactile flow', 'sim-to-real', 'dexterous manipulation'],
+    content: `# TactileLab: what simulated tactile flow adds to robot manipulation
+
+TactileLab is a November 5, 2026 preprint about learning contact-rich manipulation with simulated touch. It combines contact depth with a motion-based representation of tangential contact, then translates real sensor images into that representation. The practical question is whether the simulated observation remains meaningful on the sensor and contact conditions you intend to use.
+
+## What the new paper establishes
+
+The [v1 manuscript](https://arxiv.org/html/2611.07881v1) describes an IsaacLab-based, rigid-body approach to simulated tactile flow and author-run physical demonstrations of dual-arm and in-hand manipulation. Its transfer method assumes sticking contact. Abrupt disturbances or slipping can violate that assumption; the authors leave integrating slip into the simulation as an open problem. They also report poor flow recovery with markerless GelSight Mini, highlighting the need for observable tangential deformation.
+
+The [official project page](https://yijionglin.github.io/tactilelab/) still displays code as coming soon in our November 8 review. We verified the paper separately; an outdated paper button does not mean the manuscript is unavailable. No runnable release, checkpoint or software license was verified, and RoboSkin has not reproduced the demonstrations.
+
+## Choose an observation before choosing a simulator
+
+RoboSkin analysis: a simulator should be selected for the decision its output supports. Contact location can help decide where to move; changing contact can help decide when to adjust a command. Neither field automatically provides a calibrated force measurement. Define the target decision and the meaning of every channel before comparing policies.
+
+| Your experiment needs | Proposed acceptance question |
+| --- | --- |
+| Contact location | Does the estimated contact region track a reference interaction across different placements? |
+| Tangential motion | Does the signal preserve direction when the contact moves and when the camera view changes? |
+| Recovery from sliding | Can the pipeline identify loss of its sticking-contact assumption rather than treating it as ordinary deformation? |
+| A new tactile sensor | Does its image stream expose the motion cue that the translator expects? |
+
+These are our proposed checks, not published TactileLab benchmark results. A convincing rendered field is insufficient if the downstream controller receives a stale, misaligned or semantically different observation.
+
+## Separate sensor translation from policy transfer
+
+Evaluate the observation mapping before attributing an end-to-end failure to the policy. Keep the same recorded interaction and examine the raw sensor image, translated field, timestamps and predicted action together. A translator failure and a controller failure require different remedies.
+
+Then reserve a separate trial group for the complete control loop. Log contact loss, recovery attempts, interventions and final outcomes. If contact changes beyond the method's documented scope, label that trial explicitly rather than silently removing it from the denominator. Match task and hardware conditions before comparing success rates with another system.
+
+## A useful first experiment
+
+Start with a small contact task whose success can be judged independently of the tactile image. Define a stable-contact condition and a deliberate perturbation condition. Record whether the representation remains useful in each, and keep unsuccessful trials. This makes the experiment informative even when the method does not transfer.
+
+Once an implementation is available, pin its commit, simulator version and sensor mapping. A code link alone will not establish that those components run together. Use the [tactile manipulation guide](/tactile-manipulation#tactilelab-contact-assumption) for the contact-assumption record, and the [sensor directory](/sensors) to compare sensing interfaces. For a different, already documented simulation-data example, inspect the [DexSuite subset](/datasets#dataset-dexsuite-lift-scripted).
+
+## Evidence boundary
+
+This is source-based reporting plus a proposed evaluation workflow. It is not a claim of general slip robustness, calibrated shear-force accuracy or verified deployment on your robot. The useful next step is to test whether the observation contract survives your contact conditions.
+`,
+  },
+  {
+    id: 'vtam-visuo-tactile-world-action-model',
+    title: 'VTAM v2: a tactile world-action model without tactile pretraining',
+    seoTitle: 'VTAM v2: Tactile World-Action Model Explained',
+    seoDescription: 'Read the November VTAM revision: video pretraining, task-level tactile adaptation, inference boundaries and a practical plan for comparing robot policies.',
+    excerpt: 'VTAM’s November 5 revision separates video pretraining from tactile adaptation. We explain that distinction and how to assess its inference and transfer claims.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-11-08', updated: '2026-11-08', sourceDate: '2026-11-05',
+    readTime: '4 min read', category: 'Tactile world models',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'RoboSkin research index editorial cover.',
+    imageCaption: 'RoboSkin editorial illustration; not a VTAM architecture diagram or experimental result.',
+    evidenceStatus: 'arXiv v2 source review; author-reported experiments. No model installation, inference or robot test by RoboSkin.',
+    sourceTitle: 'VTAM arXiv v2, revised November 5, 2026',
+    sourceUrl: 'https://arxiv.org/abs/2603.23481v2',
+    sources: [{ title: 'VTAM v2: architecture, task protocols and ablations', url: 'https://arxiv.org/html/2603.23481v2' }],
+    technicalFocus: ['VTAM', 'visuo-tactile world-action model', 'tactile pretraining', 'contact-rich manipulation', 'robot world models'],
+    content: `# VTAM v2: a tactile world-action model without tactile pretraining
+
+VTAM's November 5 revision describes a world-action model that adapts a pretrained video backbone using task demonstrations. “Without tactile pretraining” does not mean without pretrained weights, tactile observations or robot training. That distinction is the starting point for deciding whether the method fits a lab with limited contact data.
+
+## Read the revision as a training and inference contract
+
+The [v2 manuscript](https://arxiv.org/html/2603.23481v2) first adapts visual and tactile future prediction, then trains an action expert jointly with the backbone. A tactile optical-flow proxy provides auxiliary supervision; it is not a calibrated force sensor. At inference, the method avoids full video denoising. The authors evaluate eight simulated tasks and four physical tasks across two robot/sensor configurations. Their encoder-transfer evidence should not be read as an untouched robot policy transferring to any sensor.
+
+The paper was first submitted on March 24; November 5 is the revision date. This article reviews v2 rather than presenting the work as a new November invention. We have not run its code, verified a reusable checkpoint or reproduced its latency measurements.
+
+## Compare three different costs
+
+RoboSkin analysis: a useful model comparison separates preparation, training and runtime. A method can reduce one without reducing all three. Record costs at the level where your team will incur them.
+
+| Stage | Record before comparing |
+| --- | --- |
+| Preparation | Available pretrained weights, terms, sensor representation and the work needed to align demonstrations |
+| Adaptation | Task examples, training hardware, optimization time and which components change |
+| Runtime | Observation encoding, action generation, communication, command execution and the age of each observation |
+
+A headline inference multiplier cannot decide whether a controller meets your loop deadline. Match hardware, precision, compilation, input resolution and action-chunk length, then time the complete path. Keep warm-up separate from steady operation and report a distribution rather than a single favorable run.
+
+## Ask whether the policy actually uses touch
+
+A policy accepting a tactile tensor is not proof that contact affects its action. A useful evaluation compares the same task and demonstration budget under visual-only, visual-plus-touch and controlled tactile perturbation conditions. State which weights and other inputs remain fixed; otherwise the comparison mixes changes in sensing with changes in model capacity or training.
+
+Define what a meaningful response would look like before testing. For example, a contact change might require a pause, a small correction or a release. Inspect whether the action responds at the right time, and whether that response improves the independently judged task outcome. Attention plots can help investigate behavior, but they are not a substitute for that outcome test.
+
+## Keep sensor transfer and robot transfer separate
+
+An encoder can preserve useful information from a second sensor while the action policy still needs demonstrations for that robot and task. Treat those as separate experiments. Document sensor geometry, calibration, frame alignment, robot action space and task setup, then state exactly which component was reused without training.
+
+For a first comparison, choose one task and one sensor that your lab can reproduce consistently. Keep a held-out set of contact conditions and log failures as carefully as successes. Expand to another sensor only after the original observation and action contract is stable. This isolates the adaptation work that a broad transfer claim can hide.
+
+## Where VTAM belongs in the research map
+
+Use the [VTAM evidence record](/robot-world-models#world-model-vtam) to inspect the prediction and action interface alongside other world models. The [VLA directory](/robot-vla-models) covers language-conditioned policy choices, while the [tactile dataset directory](/datasets) helps identify the demonstrations and reuse conditions available to you. These are different selection tasks; a model name alone does not answer all of them.
+
+Our conclusion is a research recommendation: assess VTAM when you want to study task-level tactile adaptation of a video-pretrained system. Its reported experiments do not establish general superiority, universal sensor transfer or a production-ready robot controller.
+`,
+  },
+  {
+    id: 'touchscale-dataset-release-and-robot-learning',
+    title: 'TouchScale dataset: separate the 500-hour study from available data',
+    seoTitle: 'TouchScale Dataset: Release, License & Robot Use',
+    seoDescription: 'Check TouchScale’s 500-hour paper against its 100-hour data card, gated access and noncommercial license before planning tactile robot learning.',
+    excerpt: 'The November 2 paper revision supports a timely dataset review. The study corpus, currently described release and robot action labels require separate checks.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-11-08', updated: '2026-11-08', sourceDate: '2026-11-02',
+    readTime: '4 min read', category: 'Tactile datasets',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'RoboSkin research index editorial cover.',
+    imageCaption: 'RoboSkin editorial illustration; not a TouchScale recording or experiment.',
+    evidenceStatus: 'Paper v3, public data-card page and repository metadata review. The revision-specific README required authentication. No gated payload access or training.',
+    sourceTitle: 'TouchScale arXiv v3, November 2, 2026',
+    sourceUrl: 'https://arxiv.org/abs/2610.10288v3',
+    sources: [
+      { title: 'TouchScale v3: methods and limitations', url: 'https://arxiv.org/html/2610.10288v3' },
+      { title: 'TouchScale official project', url: 'https://touch-scale.github.io/' },
+      { title: 'Public dataset card and access conditions', url: 'https://huggingface.co/datasets/2077AIDataFoundation/TouchScale' },
+    ],
+    technicalFocus: ['TouchScale dataset', 'tactile dataset', 'visual-tactile learning', 'egocentric touch', 'dataset license'],
+    content: `# TouchScale dataset: separate the 500-hour study from available data
+
+TouchScale pairs human visual observations with touch for representation and robot-learning research. Its November 2 paper revision describes a 500-hour study corpus, while the public dataset card checked on November 8 still describes a 100-hour release. Plan around the artifact you can access and inspect, not just the number in the paper title.
+
+## What the sources currently say
+
+The [v3 paper](https://arxiv.org/html/2610.10288v3) studies synchronized human vision and touch, with downstream robot evaluation limited to one platform and four manipulation tasks. It explicitly says the human dataset does not include action labels. Human tactile supervision and robot action supervision therefore remain different resources.
+
+The [public data-card page](https://huggingface.co/datasets/2077AIDataFoundation/TouchScale) describes 100 hours and 15,324 episodes, labels the data CC BY-NC 4.0, and requires acceptance of access conditions. Its stated plan to release all 500 hours before November is not evidence that the full release occurred. The host API reported revision 74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e, but the revision-specific README required authentication. We inspected public metadata only and did not accept conditions or download gated payloads.
+
+## Make the release scope part of the experiment
+
+RoboSkin analysis: write three separate entries in your experiment record: the paper's collection, the provider's described release and the episodes your loader actually decodes. If those quantities differ, retain all three. Replacing the paper total with a subset total can misdescribe the study; replacing the subset total with the paper total can misdescribe your training data.
+
+| Decision | Evidence to retain |
+| --- | --- |
+| Can we obtain the data? | Host, access conditions, exact revision and the observed access result |
+| Can we reuse it for this project? | Dataset terms and any separate code, model or asset terms |
+| Can our pipeline read it? | One complete decoded episode, field meanings, timestamps and missing values |
+| Can it train our policy directly? | Actual action labels or a documented additional robot-training stage |
+
+The [TouchScale directory record](/datasets#dataset-touchscale) keeps these distinctions visible in the same comparison and export workflow used for other datasets. It is an evidence record, not a mirror of the gated files.
+
+## Human observations are useful without being robot commands
+
+Contact observations can support representation learning or an intermediate prediction objective. A robot policy also needs an action target that matches its embodiment and controller. Do not silently rename human motion, task descriptions or contact maps as robot actions to satisfy a loader's schema.
+
+Before adapting a trainer, list which inputs and targets already exist and which must come from another source. Preserve the provenance of any inferred target. If robot demonstrations are added later, record their collection protocol separately; a successful run on the combined pipeline should not be attributed to the human dataset alone.
+
+## Design a comparison that answers your question
+
+To investigate the value of tactile supervision, hold the downstream task and evaluation conditions fixed. Compare a baseline against the additional training stage and record the data actually used. If your access covers a subset, describe that experiment as a subset experiment rather than a reproduction of the full study.
+
+Reserve complete sessions or other appropriate collection groups for evaluation, and inspect the split for repeated interactions. Report failures and missing channels alongside successful episodes. A larger advertised corpus cannot compensate for a split that allows nearly identical observations into training and evaluation.
+
+## What to check next
+
+Recheck the host for a changed release manifest, pin that revision and inspect a permitted sample before scaling a download. Keep access permission distinct from license suitability; an accepted access request does not remove noncommercial restrictions.
+
+For format preparation, use the [LeRobot dataset guide](/guides/lerobot-dataset-format) as a schema checklist, without assuming TouchScale is already a compatible robot-action dataset. For the control question, read [tactile manipulation](/tactile-manipulation). Our review establishes what the public sources state and what remains unverified, not a reproduced model result or a guaranteed transfer benefit.
+`,
+  },
+  {
     id: 'tactus-tactile-glove-data-collection',
     title: 'Tactus tactile glove: reading the evidence before collecting robot learning data',
     seoTitle: 'Tactus Glove: Touch and Pose Data Evidence',
