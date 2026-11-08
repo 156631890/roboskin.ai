@@ -1,0 +1,54 @@
+{
+  "createdAt": "2026-11-08T15:20:23.595142+00:00",
+  "status": "review_pending",
+  "humanApproval": null,
+  "snapshotSha256": "027a9a4f860cd5b5b0b8d26b7cfc0a7d93f6731f08248366371fabd6fcc967b7",
+  "localSnapshot": ".artifacts/content-20261108/review-snapshot.json",
+  "pages": [
+    {
+      "path": "/news/tactilelab-shear-sensitive-simulation",
+      "httpStatus": 200,
+      "htmlSha256": "07cfc4013e5dbd6be1998c68bf63599bc2282e5fe6804b9fee88ceedad8a72d4"
+    },
+    {
+      "path": "/news/vtam-visuo-tactile-world-action-model",
+      "httpStatus": 200,
+      "htmlSha256": "ddfb406c772b5d8cb7d39a1e3bff7efcef4b733aa48eabad1bb2b7e6adbc3474"
+    },
+    {
+      "path": "/news/touchscale-dataset-release-and-robot-learning",
+      "httpStatus": 200,
+      "htmlSha256": "b180ad114ec2701f1ab1db1c897c95d477977cf7dbd41b02bc1ddb44d790c182"
+    },
+    {
+      "path": "/datasets",
+      "httpStatus": 200,
+      "htmlSha256": "c7b1082536f10e2dcbfaa9407e20fb7f20bb91d909983d04e8eed32187ea2f9e"
+    },
+    {
+      "path": "/robot-world-models",
+      "httpStatus": 200,
+      "htmlSha256": "966f20ea194ce5d9418323e470029383cc3e3341ed28a906d3d3c2900cadaea8"
+    },
+    {
+      "path": "/tactile-manipulation",
+      "httpStatus": 200,
+      "htmlSha256": "1bc747699acaeb961e80ca9daafa8f6a53477390f7f9edd5c851ed2c2a9c56b9"
+    },
+    {
+      "path": "/research/t-rex-tactile-reactive-dexterous-manipulation-2026",
+      "httpStatus": 200,
+      "htmlSha256": "d11f6f69e2288804ee13d2751778068ffad61217119c9be04bbb2b8d1f475ba1"
+    },
+    {
+      "path": "/",
+      "httpStatus": 200,
+      "htmlSha256": "c973e9ae573755535e208a63de4e1422d7a9e83d860bf3c8a5293e1b09be27d3"
+    },
+    {
+      "path": "/news",
+      "httpStatus": 200,
+      "htmlSha256": "9fe77e34183dad20ed26be83b09a01938129991c774ad088e13e77cd2141d1f3"
+    }
+  ]
+}

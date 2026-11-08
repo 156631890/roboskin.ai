@@ -2256,6 +2256,12 @@ T-Rex is a June 2026 arXiv preprint about making dexterous manipulation policies
 
 The paper labels its Table 1 metric success rate, but its task rubrics award partial completion. T-Rex reports 65% and EgoScale 35% on that percentage-scaled score: a 30-point gap, not a verified 30-point increase in binary complete-task success. Each task is evaluated with 16 rollouts. The figures are not independent validation or evidence of the same gain on other robot systems.
 
+## November 5 announcement: keep the original evidence boundary
+
+[Panasonic's November 5 announcement](https://news.panasonic.com/global/press/en261105-2) says T-Rex was accepted for presentation at CoRL 2026, scheduled for November 9–12. It describes approximately 5 Hz vision/language action generation and 20 Hz tactile action correction. These are different update paths, not a new independent replication or a measured end-to-end latency for another robot.
+
+The announcement revisits the existing research. Retain the original paper date, the partial-credit task interpretation below, and the distinction between the study corpus and its released dataset subset. Conference acceptance does not turn the author-run experiment into a RoboSkin hardware test.
+
 ## The problem T-Rex addresses
 
 **Review update — November 4, 2026:** Rechecked the cited method and reporting limits. Original publication and earlier access observations retain their dates; no new robot experiment or reproduction is claimed.
@@ -2342,13 +2348,14 @@ The result also does not isolate one causal factor by itself. Dataset collection
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-08-21',
-    updated: "2026-11-04",
+    updated: "2026-11-08",
     readTime: "7 min read",
     category: 'Tactile manipulation',
     image: '/generated/authority/roboskin-index-cover.webp',
     sourceTitle: 'T-Rex tactile-reactive dexterous manipulation preprint',
     sourceUrl: 'https://arxiv.org/abs/2606.17055',
     citationUrls: [
+      'https://news.panasonic.com/global/press/en261105-2',
       'https://arxiv.org/abs/2606.17055',
       'https://tactile-reactive-dexterous.github.io/',
       'https://github.com/ZhuoyangLiu2005/T-Rex',

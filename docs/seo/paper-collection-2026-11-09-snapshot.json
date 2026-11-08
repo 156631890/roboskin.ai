@@ -1,0 +1,17 @@
+{
+  "createdAt": "2026-11-08T16:25:46.492103+00:00",
+  "status": "review_pending",
+  "humanApproval": null,
+  "snapshotSha256": "5e95a9e0fb711fbb024ed08e33734d31a66cc5dc096fb783801bfe309b607eaf",
+  "localSnapshot": "E:\\codex-builds\\roboskin-content-20261108\\collection-20261109\\review-snapshot.json",
+  "pages": [
+    {
+      "path": "/research/robot-skin-papers",
+      "htmlSha256": "0d70e8b7919d72d16eb25906d84b5ef46ad89daa36cac9e814d35571b0b93065"
+    },
+    {
+      "path": "/research",
+      "htmlSha256": "7c82cbc3f8fa2a8a7850b70f89dda608721790e79d5d896f017276911ff45d96"
+    }
+  ]
+}
