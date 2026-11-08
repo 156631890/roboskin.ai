@@ -133,7 +133,7 @@ test('llms-full publishes the same world-model evidence records and boundaries',
   assert.match(llmsFull, /Artifact license evidence/);
   assert.match(llmsFull, /canonicalUrl\(`\/robot-world-models#world-model-\$\{entry\.id\}`\)/);
   for (const verifier of [exportVerifier, productionVerifier]) {
-    assert.match(verifier, /worldModelIds = \['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'\]/);
+    assert.match(verifier, /worldModelIds = \['vtam', 'dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'\]/);
     assert.match(verifier, /world-model-evidence/);
     assert.match(verifier, /Robot world-model evidence records/);
     assert.match(verifier, /GitHub Coming Soon/);

@@ -569,7 +569,7 @@ if (!trexVlaRow.includes('5,464 episodes')
   || !trexVlaRow.includes('complete 100-hour')) {
   throw new Error('/robot-vla-models is missing the T-Rex public-subset evidence boundary');
 }
-const worldModelIds = ['dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
+  const worldModelIds = ['vtam', 'dream-tac', 'feelworld', 'hitac-wam', 'touchworld', 'vitacworld'];
 const worldModelJsonLd = validateHtml(worldModelsHtml, '/robot-world-models');
 const worldModelJsonLdNodes = worldModelJsonLd.flatMap((block) => Array.isArray(block?.['@graph']) ? block['@graph'] : [block]);
 const worldModelList = worldModelJsonLdNodes.find((node) => node?.['@id'] === canonicalFor('/robot-world-models#world-model-evidence'));
