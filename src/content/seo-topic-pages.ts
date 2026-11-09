@@ -5324,8 +5324,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: "2026-11-08",
-    revisionNote: "November 8, 2026: added TactileLab contact assumptions, sensor observability and transfer checks. Prior interface and timing guidance retained; no hardware test.",
+    updated: "2026-11-09",
+    revisionNote: "November 8, 2026: added TactileLab contact assumptions, sensor observability and transfer checks. November 9: added an APXpress prototype example separating motor-network timing from tactile sampling. Prior interface and timing guidance retained; no hardware test.",
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -5441,6 +5441,19 @@ export const seoTopicPages: SeoTopicPage[] = [
             "body": [
               "Record sensor acquisition, observation age, inference duration, command update and low-level tracking separately. Whole-hand regulation illustrates why this matters: its reported solve-time reciprocal is about 84 Hz, while hardware contact updates follow the 30 Hz object tracker. CW-WAM's rates above describe another distinct arrangement.",
               "For your evaluation, keep acquisition and execution timestamps, invalid-data flags, command saturation, fallback events and human interventions. Score the physical outcome as well as the signal or tracking error. A low measured load during a failed insertion is not evidence of successful compliant manipulation."
+            ]
+          },
+          {
+            "heading": "APXpress case: motor-network timing is not tactile sampling",
+            "body": [
+              "Inova's November 9, 2026 supplier announcement describes a prototype developed with Lattice and DLR connecting 18 motors, joint sensors and 10 tactile sensors. It reports closing the motion-control loop within one 10 kHz period, with communication dead time below 10 microseconds. Local field-oriented control runs faster than that network cycle. Joint-angle and tactile data use a separate schedule on the shared network. These statements do not establish 10 kHz tactile sampling or a contact-to-action response below 10 microseconds.",
+              "Read the numbers as claims about specified parts of a demonstrator, not a certified tactile controller. The announcement does not provide a tactile calibration protocol, an end-to-end tactile response measurement or a matched manipulation-success comparison. We have not independently tested the hardware or verified a safety certification. The published sensor count also does not establish the spatial resolution or coverage available to a policy.",
+              "For an integration review, request three distinct records: the timestamp boundaries and clock alignment used for the communication measurement; the delivered tactile sample rate and sample age under simultaneous motor and sensor traffic; and the time from a defined physical contact to the chosen actuator response. Include delayed, missing and repeated observations in the proposed test, and record the controller's fallback rather than inferring it from bandwidth. This is our suggested evidence checklist, not a test reported for the prototype or performed by RoboSkin.ai."
+            ],
+            "links": [
+              { "label": "Inova announcement: separate motor and sensor schedules", "href": "https://www.presseagentur.com/inova/detail.php?lang=en&pr_id=7857" },
+              { "label": "ROS 2 tactile pipeline: timestamps, replay and hardware limits", "href": "/guides/ros2-tactile-sensing" },
+              { "label": "Specify tactile calibration before controller reuse", "href": "/guides/tactile-sensor-calibration" }
             ]
           }
         ],
