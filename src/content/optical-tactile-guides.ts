@@ -29,6 +29,15 @@ const pps = {
   href: 'https://pressureprofile.com/sensors/robotact',
 };
 
+const microchipAnnouncement = {
+  label: 'Microchip ATFCD52 announcement, November 10, 2026: array readout and development tools',
+  href: 'https://www.microchip.com/en-us/about/news-releases/products/microchip-enhances-robotic-tactile-sensing-with-high-speed-capacitance-digitizer',
+};
+const microchipPortfolio = {
+  label: 'Microchip capacitive tactile sensors: ATFCD52 10 × 10 frame-rate example',
+  href: 'https://www.microchip.com/en-us/products/sensors-touch/capacitive-tactile-sensors',
+};
+
 export const opticalTactileGuides: SeoTopicPage[] = [
   {
     path: '/guides/optical-tactile-sensor-maintenance',
@@ -175,8 +184,8 @@ export const opticalTactileGuides: SeoTopicPage[] = [
     kicker: 'Sensor selection / Optical and capacitive touch',
     intent: 'Help engineers choose a sensing principle using documented outputs and application requirements rather than unmatched specifications.',
     published: '2026-10-17',
-    updated: '2026-11-03',
-    revisionNote: "November 3, 2026: rechecked the cited sensing designs and added a common-quantity comparison with a labeled arithmetic example, not measured sensor data.",
+    updated: '2026-11-11',
+    revisionNote: "November 11, 2026: added a Microchip ATFCD52 readout example and integration checks from public vendor sources. No hardware or calibration test. November 3: added a common-quantity comparison with a labeled arithmetic example.",
     priority: 0.75,
     changeFrequency: 'monthly',
     schemaType: 'TechArticle',
@@ -205,6 +214,17 @@ export const opticalTactileGuides: SeoTopicPage[] = [
           'Maiolino and colleagues describe modular capacitive skin for curved robot surfaces, including temperature compensation. PPS offers RoboTact for fingers and grippers and documents RoboTouch arrays with embedded digital interfaces. These illustrate both distributed skin and local fingertip implementations; capacitive sensing is not restricted to whole-body coverage.',
         ],
         links: [capacitivePaper, pps],
+      },
+      {
+        id: 'atfcd52-capacitive-readout',
+        heading: 'Capacitive readout example: Microchip ATFCD52',
+        body: [
+          'Microchip announced the ATFCD52 on November 10, 2026 as a digitizer for two-dimensional capacitive sensor arrays. Its public announcement describes up to 52 channels, with up to 32 transmit and 20 receive lines and 20 parallel analog front ends. It says the device is designed to resolve capacitance changes below 1 femtofarad. These are vendor-stated electronics capabilities, not measured force accuracy or complete sensor specifications.',
+          'Microchip reports frame rates up to 800 Hz depending on array size; its product-family page specifies up to 800 Hz for a 10 × 10 matrix. That acquisition figure cannot be compared directly with optical image processing or with the time from contact to robot action. At 800 Hz the nominal frame period is 1.25 ms, but sensor mechanics, transfer, estimation, controller scheduling and actuator response add their own timing. Measure the full path on the actual system.',
+          'The digitizer supplies capacitance data, while Microchip describes an external processor calculating normal and shear forces. The sensor stack, geometry, calibration and processing determine the meaning and accuracy of those estimates. A sub-femtofarad electrical sensitivity claim is not a calibrated force resolution, nor proof that a complete gripper detects or recovers from slip.',
+          'For an acceptance trial, record the exact electrode layout, scan settings and frame timestamps; compare the desired force or contact estimate against an independent reference across intended loads and directions; and measure contact-to-command and physical response separately. Test electrical interference with the intended motors and wiring running. These are proposed engineering checks, not experiments performed by RoboSkin.',
+        ],
+        links: [microchipAnnouncement, microchipPortfolio],
       },
       {
         heading: 'Head-to-Head Comparison',
@@ -310,6 +330,6 @@ export const opticalTactileGuides: SeoTopicPage[] = [
       { label: 'Tactile sensing principles', href: '/technology', description: 'Place optical and capacitive designs alongside other transducers.' },
       { label: 'Optical tactile sensor maintenance', href: '/guides/optical-tactile-sensor-maintenance', description: 'Review documented gel replacement and cleaning boundaries.' },
     ],
-    sources: [miniSheet, digitPaper, capacitivePaper, pps, miniFaq, miniGel],
+    sources: [miniSheet, digitPaper, capacitivePaper, pps, miniFaq, miniGel, microchipAnnouncement, microchipPortfolio],
   },
 ];
