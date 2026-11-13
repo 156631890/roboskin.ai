@@ -239,6 +239,11 @@ test('model and topic resource navigation is measured with public paths only', (
     ['/guides/optical-vs-capacitive-tactile-sensors', 'optical-capacitive-comparison'],
     ['/sensors/melexis-tactaxis', 'melexis-tactaxis'],
     ['/sensors/robotiq-tsf-85', 'robotiq-tsf-85'],
+    ['/sensors/gelsight-mini', 'gelsight-mini'],
+    ['/sensors/digit', 'digit'],
+    ['/sensors/reskin', 'reskin'],
+    ['/sensors/xela-uskin', 'xela-uskin'],
+    ['/sensors/loomia-smart-skin', 'loomia-smart-skin'],
     ['/research/bench2dex-visuo-tactile-bimanual-benchmark-2026', 'bench2dex-review'],
   ]) {
     assert.deepEqual(analytics.analyticsResourceEvent(origin, `${path}?q=private#comparison`), {
