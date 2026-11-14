@@ -577,7 +577,9 @@ export const tactileDatasetEntries: TactileDatasetEntry[] = [
     license: 'Dataset license not stated on the reviewed project page',
     paperUrl: 'https://arxiv.org/abs/2402.13232',
     projectUrl: 'https://tactile-vlm.github.io/',
-    availability: 'The official project page links the paper, code, dataset, and models.',
+    datasetUrl: 'https://huggingface.co/datasets/yoorhim/TVL-revise/tree/aab39e037d8916717dc98add89d58cbd39219770',
+    datasetUrlReviewed: '2026-11-15',
+    availability: 'The official repository links TVL-revise and reports that it fixes swapped tactile/image folders in the original upload. The revised host manifest is public; the correction has not been independently validated by loading image pairs. Dataset-file reuse terms remain unverified.',
     sourceReviewed: '2026-08-19',
   },
   {

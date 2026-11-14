@@ -1,5 +1,5 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.11.08', compiledAt: '2026-11-08', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition adds TouchScale public-card and host-metadata evidence with gated access, noncommercial terms and a study/release scope distinction. No gated payload access, loader execution or physical test. Existing records retain their individual access and source review dates.' };
+export const datasetAudit = { version: 'v2026.11.15', compiledAt: '2026-11-15', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition records the TVL-revise public manifest and the upstream folder-swap correction notice. Dataset-file terms remain unverified. No dataset payload download, loader execution or physical test. Existing records retain their individual access and scientific-source review dates.' };
 export const datasetAccessEvidence = {
   touchscale: {
     access: 'gated',
@@ -373,18 +373,23 @@ export const datasetAccessEvidence = {
     ]
   },
   "tvl": {
-    "access": "linked-unverified",
-    "accessCheckedAt": "2026-08-19",
+    "access": "public-files",
+    "accessCheckedAt": "2026-11-15",
     "licenseStatus": "unknown",
-    "dataLicense": "Unknown: a dataset-file license has not been verified separately from paper or code terms.",
-    "publicFileScale": "Unknown: no independently recounted public-file total in this record.",
-    "verificationScope": "Existing source review only. No new dataset-file download, checksum validation, training run, or hardware test in this audit.",
+    "dataLicense": "Unknown: the inspected TVL-revise card and host metadata do not specify dataset-file terms. The upstream code license is not treated as a dataset license.",
+    "publicFileScale": "10 paths in the pinned TVL-revise host manifest: 8 split-archive parts, README.md and .gitattributes. Images, frames and bytes were not independently recounted.",
+    "verificationScope": "Upstream correction notice, revised dataset card and public host manifest inspected at pinned revisions. The folder-swap fix is source-reported; no archive download, extraction, image-pair validation, loader execution or training run.",
     "splitStatus": "unknown",
     "splitDetails": "Unknown: no train/test split manifest verified in this audit.",
     "formatStatus": "described",
     "formatDetails": "Temporally aligned touch, vision, and open-vocabulary language examples; 10% of labels are human annotations and 90% are VLM-generated in the paper.",
+    "revision": "aab39e037d8916717dc98add89d58cbd39219770",
+    "listedFileCount": 10,
     "sources": [
-      "https://tactile-vlm.github.io/"
+      "https://tactile-vlm.github.io/",
+      "https://github.com/Max-Fu/tvl/blob/f489503d829be1eec1f800070cdbec02aede4246/README.md#improved-version-available",
+      "https://huggingface.co/datasets/yoorhim/TVL-revise/tree/aab39e037d8916717dc98add89d58cbd39219770",
+      "https://huggingface.co/datasets/mlfu7/Touch-Vision-Language-Dataset"
     ]
   },
   "objectfolder-real": {
