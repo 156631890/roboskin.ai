@@ -14,7 +14,7 @@ test('a newly checked dataset route does not refresh its older scientific eviden
   const edgeTo = (source) => graph.edges.find((edge) => edge.from === entity.id && edge.to === source.id);
   assert.equal(edgeTo(route).reviewedAt, '2026-11-04');
   assert.equal(edgeTo(paper).reviewedAt, '2026-08-22');
-  assert.equal(graph.updated, '2026-11-08');
+  assert.equal(graph.updated, '2026-11-15');
   assert.deepEqual(validateKnowledgeGraph(graph), []);
 });
 
@@ -132,9 +132,9 @@ test('graph contract and GEO export expose relation counts and evidence boundari
     {
       knowledgeEntities: 203,
       organizations: 69,
-      sourceDocuments: 290,
-      edges: 621,
-      supportedByEdges: 375,
+      sourceDocuments: 291,
+      edges: 622,
+      supportedByEdges: 376,
       researchRelationEdges: 145,
       researchProvenanceEdges: 110,
       researchSemanticEdges: 35,
