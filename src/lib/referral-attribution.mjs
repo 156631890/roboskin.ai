@@ -6,6 +6,7 @@ const referralDomains = [
   ['perplexity.ai', 'Perplexity'],
   ['claude.ai', 'Claude'],
   ['copilot.microsoft.com', 'Microsoft Copilot'],
+  ['gemini.google.com', 'Gemini'],
 ];
 
 export function hasChatGptSourceTag(location) {
@@ -27,8 +28,11 @@ export function referralLandingSource(location, referrer = '') {
     const url = new URL(referrer);
     if (!['https:', 'http:'].includes(url.protocol)) return null;
     const host = url.hostname;
+    // Recognize the specific AI product before the broader Google search host.
+    const source = referralDomains.find(([domain]) => host === domain || host.endsWith(`.${domain}`))?.[1];
+    if (source) return source;
     if (/(^|\.)google\.(?:com|[a-z]{2}|com\.[a-z]{2}|co\.[a-z]{2})$/.test(host)) return 'Google';
-    return referralDomains.find(([domain]) => host === domain || host.endsWith(`.${domain}`))?.[1] ?? null;
+    return null;
   } catch {
     return null;
   }

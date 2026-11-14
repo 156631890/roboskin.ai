@@ -53,7 +53,7 @@ export function geoEvent(name, properties) {
     data.resource_id = resource.id;
   }
   if (name === 'Reading Depth' && [25, 50, 75].includes(properties?.depth)) data.depth = properties.depth;
-  if (name === 'Referral Landing' && ['ChatGPT', 'Perplexity', 'Claude', 'Microsoft Copilot', 'Bing', 'Google'].includes(properties?.source)) data.source = properties.source;
+  if (name === 'Referral Landing' && ['ChatGPT', 'Perplexity', 'Claude', 'Microsoft Copilot', 'Gemini', 'Bing', 'Google'].includes(properties?.source)) data.source = properties.source;
   return { name, data };
 }
 

@@ -25,4 +25,8 @@ test('event bridge retains intent but never copies user text or contact details'
   assert.equal(JSON.stringify(event).includes('123456789'), false);
   assert.equal(geoEvent('Contact Submitted', {}), null);
   assert.equal(geoEvent('Referral Landing', { source: 'ChatGPT' }).data.source, 'ChatGPT');
+  assert.deepEqual(geoEvent('Referral Landing', { source: 'Gemini', path: '/datasets?token=secret', referrer: 'https://gemini.google.com/app/private' }), {
+    name: 'Referral Landing', data: { path: '/datasets', source: 'Gemini' },
+  });
+  assert.deepEqual(geoEvent('Referral Landing', { source: 'private@example.com' }).data, {});
 });
