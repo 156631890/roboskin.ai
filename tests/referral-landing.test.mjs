@@ -77,6 +77,19 @@ test('direct visits remain unattributed through internal navigation', () => {
   assert.deepEqual(tracker.events, []);
 });
 
+test('Gemini is distinct from Google search and is recorded only on the document landing', () => {
+  const tracker = mountTracker('https://gemini.google.com/app/private-conversation?token=secret');
+  tracker.render('/datasets');
+  tracker.render('/sensors');
+  assert.deepEqual(tracker.events, [{ event: 'Referral Landing', source: 'Gemini', path: '/datasets', batch: 'existing-site' }]);
+  for (const referrer of ['https://www.google.com/search?q=tactile', 'https://www.google.co.uk/', 'https://google.de/']) {
+    assert.equal(referralAttribution.referralLandingSource('https://roboskin.ai/datasets', referrer), 'Google');
+  }
+  for (const referrer of ['https://gemini.google.com.attacker.example/', 'https://evilgemini.google.com/', 'https://gemini.google.com@attacker.example/', 'https://attacker.example/gemini.google.com', 'javascript:gemini.google.com']) {
+    assert.notEqual(referralAttribution.referralLandingSource('https://roboskin.ai/datasets', referrer), 'Gemini', referrer);
+  }
+});
+
 test('current and legacy ChatGPT referrers each produce one landing event', () => {
   for (const referrer of ['https://chatgpt.com/c/private', 'https://chat.openai.com/c/private']) {
     const tracker = mountTracker(referrer);
