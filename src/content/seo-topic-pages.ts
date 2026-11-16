@@ -7712,7 +7712,7 @@ export const seoTopicPages: SeoTopicPage[] = [
         "id": "dexumi-capture-to-execution",
         "heading": "GEAR DexUMI and XHAND 1 Pro-U: capture access is not a released policy",
         "body": [
-          "ROBOTERA announced XHAND 1 Pro-U on November 16, 2026 as a 16-degree-of-freedom hand used in NVIDIA's GR00T 2 demonstration. This is a vendor announcement, not an independent hardware evaluation. It makes a useful dataset-adoption case: a matching hand and a public collection design do not by themselves provide a downloadable training corpus or a reproducible policy.",
+          "ROBOTERA announced XHAND 1 Pro-U on November 16, 2026 as a 16-degree-of-freedom hand used in NVIDIA's GR00T 2 demonstration. This is a vendor announcement, not an independent hardware evaluation. It makes a useful dataset-adoption case: a matching hand and a public collection design do not by themselves provide a downloadable matching DexUMI task corpus or a reproducible policy.",
           "NVIDIA describes GEAR DexUMI as a wearable capture system derived from DexUMI, with 15 magnetic encoders per hand, fingertip normal/shear sensing and wrist-mounted cameras. Encoder count describes the capture device; it must not be substituted for the target hand's degrees of freedom. Retargeted hand commands, measured human motion and executed robot state remain different data fields."
         ],
         "table": {
@@ -7734,7 +7734,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             ],
             [
               "Policy release",
-              "The GR00T 2 project page says code is available in December",
+              "The GR00T 2 project page says code is available in December 2026",
               "Actual released code, checkpoint terms and matching robot adapter; a future date is not access"
             ],
             [
@@ -7757,7 +7757,7 @@ export const seoTopicPages: SeoTopicPage[] = [
             "heading": "Software access and data rights are separate decisions",
             "body": [
               "The NVIDIA hardware-prototypes documentation distinguishes its default Apache-2.0 collection software, an LGPL-2.1-only Record3D adapter, MIT-licensed vendor XHand URDFs and CC-BY-4.0 hardware documentation, with exceptions for vendor photographs and third-party components. Check the exact component and pinned revision instead of applying one repository-level label to the whole stack.",
-              "A hardware or software license is not evidence of permission to redistribute recorded demonstrations. Require delivery-specific terms for videos, tactile streams, operator participation and derived trajectories. If a corpus or checkpoint is not supplied, record it as unavailable or unverified rather than treating a project link as a dataset download."
+              "A hardware or software license is not evidence of permission to redistribute recorded demonstrations. Require delivery-specific terms for videos, tactile streams, operator participation and derived trajectories. If the matching DexUMI task corpus or checkpoint is not supplied, record that artifact as unavailable or unverified rather than treating a project link as its download. This does not imply that other GR00T 2 resources, such as Human-1M-100K, are unavailable."
             ]
           }
         ],
