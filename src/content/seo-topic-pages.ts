@@ -7599,8 +7599,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Robot data pillar',
     intent: 'Structured guide for robotics datasets, robot learning datasets, manipulation datasets, LeRobot datasets, VLA training data, teleoperation data, and humanoid datasets.',
     published: '2026-08-21',
-    updated: "2026-11-05",
-    revisionNote: "November 5, 2026: added an optional-modality delivery checklist using the Noitom announcement. Earlier conversion evidence and dataset records retained; no data loading or robot test.",
+    updated: "2026-11-16",
+    revisionNote: "November 16, 2026: added a source-backed GEAR DexUMI capture-to-execution readiness matrix and rights checklist; no hardware, loader or policy reproduction. November 5, 2026: added an optional-modality delivery checklist using the Noitom announcement. Earlier conversion evidence and dataset records retained; no data loading or robot test.",
     priority: 0.95,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -7705,6 +7705,78 @@ export const seoTopicPages: SeoTopicPage[] = [
           {
             "label": "Noitom November 5 issuer announcement",
             "href": "https://markets.businessinsider.com/news/stocks/noitom-robotics-introduces-itw-ego-plus-at-corl-2026-in-the-wild-egocentric-data-with-full-body-motion-1036722251"
+          }
+        ]
+      },
+      {
+        "id": "dexumi-capture-to-execution",
+        "heading": "GEAR DexUMI and XHAND 1 Pro-U: capture access is not a released policy",
+        "body": [
+          "ROBOTERA announced XHAND 1 Pro-U on November 16, 2026 as a 16-degree-of-freedom hand used in NVIDIA's GR00T 2 demonstration. This is a vendor announcement, not an independent hardware evaluation. It makes a useful dataset-adoption case: a matching hand and a public collection design do not by themselves provide a downloadable matching DexUMI task corpus or a reproducible policy.",
+          "NVIDIA describes GEAR DexUMI as a wearable capture system derived from DexUMI, with 15 magnetic encoders per hand, fingertip normal/shear sensing and wrist-mounted cameras. Encoder count describes the capture device; it must not be substituted for the target hand's degrees of freedom. Retargeted hand commands, measured human motion and executed robot state remain different data fields."
+        ],
+        "table": {
+          "headers": [
+            "Layer",
+            "Evidence available on November 16",
+            "Still verify before reuse"
+          ],
+          "rows": [
+            [
+              "Target embodiment",
+              "ROBOTERA identifies XHAND 1 Pro-U and a 16-DoF design",
+              "Exact revision, joint order, limits and controller interface; do not copy older XHAND specifications"
+            ],
+            [
+              "Capture apparatus",
+              "NVIDIA documents GEAR DexUMI hardware and collection software",
+              "Your assembled configuration, calibration, clocks and missing-stream behavior"
+            ],
+            [
+              "Policy release",
+              "The GR00T 2 project page says code is available in December 2026",
+              "Actual released code, checkpoint terms and matching robot adapter; a future date is not access"
+            ],
+            [
+              "Dataset delivery",
+              "A collection design describes how demonstrations can be recorded",
+              "Episode manifest, actual payload, field schema, splits and data-specific rights"
+            ]
+          ]
+        },
+        "subsections": [
+          {
+            "heading": "A proposed capture-to-execution acceptance receipt",
+            "body": [
+              "Before accepting a collection, retain device revisions, software commit, sensor calibration IDs and one explicit map from measured channels to target joint names. Record units and reference frames at each stage. Preserve the unmodified capture alongside derived targets so an operator pose is never silently relabeled as a robot action.",
+              "For a small agreed sample, check that every declared stream exists and that its clock and validity mask are documented. Trace one episode across capture, retargeting and execution. Reject unexplained joint reordering, hidden interpolation and samples whose missing contact channel is encoded as a valid zero. Keep a separate field for whether a robot actually executed the command.",
+              "These are proposed acceptance checks, not tests performed for this update. Neither launch coverage nor a demonstration success rate establishes cross-robot transfer, collection quality or dataset availability. A team can evaluate the capture pipeline while waiting for policy artifacts, but should not present that work as a reproduction of GR00T 2."
+            ]
+          },
+          {
+            "heading": "Software access and data rights are separate decisions",
+            "body": [
+              "The NVIDIA hardware-prototypes documentation distinguishes its default Apache-2.0 collection software, an LGPL-2.1-only Record3D adapter, MIT-licensed vendor XHand URDFs and CC-BY-4.0 hardware documentation, with exceptions for vendor photographs and third-party components. Check the exact component and pinned revision instead of applying one repository-level label to the whole stack.",
+              "A hardware or software license is not evidence of permission to redistribute recorded demonstrations. Require delivery-specific terms for videos, tactile streams, operator participation and derived trajectories. If the matching DexUMI task corpus or checkpoint is not supplied, record that artifact as unavailable or unverified rather than treating a project link as its download. This does not imply that other GR00T 2 resources, such as Human-1M-100K, are unavailable."
+            ]
+          }
+        ],
+        "links": [
+          {
+            "label": "ROBOTERA: November 16 XHAND 1 Pro-U announcement",
+            "href": "https://www.prnewswire.com/news-releases/robotera-launches-xhand-1-pro-u-featured-in-nvidias-gr00t-2-dexumi-demonstration-302940288.html"
+          },
+          {
+            "label": "NVIDIA GR00T 2: demonstration and release status",
+            "href": "https://research.nvidia.com/labs/gear/gr00t-2/"
+          },
+          {
+            "label": "NVIDIA GEAR DexUMI: hardware, software and licensing",
+            "href": "https://research.nvidia.com/labs/gear/hardware-prototypes/GEAR_DexUMI/index.html"
+          },
+          {
+            "label": "Check the policy action-interface contract",
+            "href": "/robot-vla-models#vla-interface-handoff"
           }
         ]
       },
