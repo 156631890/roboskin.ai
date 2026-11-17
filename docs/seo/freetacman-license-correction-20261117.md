@@ -31,10 +31,10 @@ Objects: `/datasets` (tactile datasets; English directory for research selection
 | Item | Result | Evidence within changed scope |
 | --- | --- | --- |
 | C01 URL/purpose | 通过 | Existing paths and reader tasks preserved. |
-| C02 language | 通过 | Corrected English text inspected in HTML and Markdown. |
+| C02 primary intent | 通过 | Existing directory selection/report sample tasks preserved; no additional keyword-only page. |
 | C03 title | 通过 | Existing titles preserved; export audit passes. |
 | C04 description | 通过 | Existing descriptions preserved; export audit passes. |
-| C05 opening/core content | 通过 | Existing openings retained; code/data terms separated in affected note. |
+| C05 restrictions | 通过 | No supplied word blacklist applies; code/data rights remain distinct, and no payload testing, legal clearance or human approval is claimed. |
 | C06 useful increment | 通过 | Removes a demonstrably unsupported license conflict. |
 | C07 promise | 通过 | Documentation review is explicitly distinguished from payload/code testing. |
 | C08 factual accuracy | 通过 | Pinned official README/LICENSE and provider card checked; HTML/Markdown/new JSON agree. |
