@@ -1,5 +1,5 @@
 // Access audit metadata is separate from scientific-source review dates.
-export const datasetAudit = { version: 'v2026.11.15', compiledAt: '2026-11-15', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition records the TVL-revise public manifest and the upstream folder-swap correction notice. Dataset-file terms remain unverified. No dataset payload download, loader execution or physical test. Existing records retain their individual access and scientific-source review dates.' };
+export const datasetAudit = { version: 'v2026.11.17', compiledAt: '2026-11-17', scope: 'Current RoboSkin tactile directory only; not an industry census. This edition corrects the FreeTacMan code-license description: the official README and root LICENSE identify Apache-2.0, while the provider dataset card labels data MIT. Public documentation only; no dataset payload download, code execution or rights clearance. Other records retain their existing access and scientific-source review dates.' };
 export const datasetAccessEvidence = {
   touchscale: {
     access: 'gated',

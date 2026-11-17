@@ -25,7 +25,7 @@ const readingGuide = {
   "heading": "Read the fixed edition alongside a current evidence note",
   "body": [
     "The downloadable PDF remains the August 17, 2026 edition. Its six dataset records and six research signals are a dated sample, not a claim to exhaust the field or describe current availability. The live directory preview below is a separate view. A new review date on this page does not update the PDF or turn its historical access notes into fresh checks.",
-    "One practical example is FreeTacMan. The current provider dataset card labels the data MIT, while the code repository’s root LICENSE is Apache-2.0. Its README still calls the project MIT. Preserve that source distinction: the sample’s short license label is not a single license for every file, dependency, model or downstream use. We reviewed public documentation, not downloaded dataset contents or executed software."
+    "One practical example is FreeTacMan. At the November 17, 2026 documentation check, the provider dataset card labels the data MIT, while the code repository’s root LICENSE and README identify Apache-2.0; the README qualifies this as unless specified otherwise. Preserve that source distinction: the sample’s short license label is not a single license for every file, dependency, model or downstream use. We reviewed public documentation, not downloaded dataset contents or executed software."
   ],
   "table": {
     "headers": [
