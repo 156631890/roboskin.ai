@@ -4673,8 +4673,8 @@ Zero-shot transfer here means no target-domain weight adaptation. The physical s
   {
     id: 'cartesian-hand-all-linear-in-hand-manipulation',
     title: 'The Cartesian Hand replaces finger joints with seven linear axes',
-    seoTitle: 'Cartesian Hand: Seven Linear Axes for In-Hand Manipulation',
-    seoDescription: "Examine Cartesian Hand kinematics, configured-object trials and released control limits; distinguish joint resistance, contact force and task completion.",
+    seoTitle: 'Cartesian Hand: Specs, Cost, Code & CAD',
+    seoDescription: 'Explore the 7-DoF Cartesian Hand: dimensions, author-estimated build cost, versioned code and CAD, and the limits of its 350 configured-object trials.',
     excerpt: 'Two stacked parallel grippers and four sliding fingertips operate caps, tools and lab equipment. The mechanism succeeds in a configured 350-trial test, but it does not sense contact force or location.',
     category: 'Dexterous hand hardware',
     image: '/generated/news/cartesian-hand-linear-axes.png',
@@ -4694,6 +4694,22 @@ Zero-shot transfer here means no target-domain weight adaptation. The physical s
     content: `# The Cartesian Hand replaces finger joints with seven linear axes
 
 Duke University's General Robotics Lab introduced the Cartesian Hand in a preprint submitted on September 22, 2026. Instead of imitating an articulated human hand, the 850-gram end effector stacks two independently actuated parallel grippers and lets four fingertips translate along fixed axes. The seven-degree-of-freedom mechanism targets objects with threads, pivots, guides, plungers and triggers. [Paper and version record](https://arxiv.org/abs/2609.25696).
+
+## Specifications and build cost at a glance
+
+These author-reported values describe the paper's hand. They are not an offer to sell a completed unit or measurements from a RoboSkin build. The versioned code and CAD are linked below; the released control stack is distinct from the implementation used in the paper.
+
+| Property | Paper-reported value | Scope |
+| --- | --- | --- |
+| Mechanism | 7 linear degrees of freedom | Four fingertip slides, two gripper openings and one separation axis |
+| Mass and closed dimensions | 850 g; approximately 166 × 100 × 76 mm | The reported assembly |
+| Travel | 65 mm fingertips; 52 mm gripper opening and separation | Joint travel, not object workspace |
+| Joint speed | Approximately 60 mm/s | Not an object-operation cycle time |
+| Static hold | 2 kg with one gripper | The reported bottle test, not a dynamic payload rating |
+| Build cost | Approximately US$500 | Author estimate for a complete hand; not a current supplier quote |
+| Evaluation | 350/350 trials across 35 configured objects | 10 trials each; prescribed starts and object-specific setup |
+
+Read the [paper's methods and experiments](https://arxiv.org/html/2609.25696v1), then inspect the [versioned CAD files](https://github.com/generalroboticslab/Cartesian_Hand/tree/83b738e8c7bf3b74e08e36250492d774aa432324/hardware/CAD), [bill of materials and assembly guide](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/hardware/README.md) and [control-stack README](https://github.com/generalroboticslab/Cartesian_Hand/blob/83b738e8c7bf3b74e08e36250492d774aa432324/README.md). The reproduction limits and receiving checks remain in the sections below.
 
 ## Key takeaways
 
@@ -4767,7 +4783,7 @@ The November 4 recheck of the pinned hardware notes also matters: software trave
 `,
     author: 'RoboSkin.ai Editorial Team',
     date: '2026-09-23',
-    updated: "2026-11-04",
+    updated: "2026-11-07",
     readTime: "6 min read",
     sourceDate: '2026-09-22',
     evidenceStatus: 'Preprint · arXiv v1 · public code/CAD · reproduction unverified',
