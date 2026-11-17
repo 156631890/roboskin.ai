@@ -4,6 +4,7 @@ import { createWaffo } from './waffo.mjs';
 import { createMailer } from './mail.mjs';
 import { createMembershipService, MembershipError, cookieName, sameSecret } from './service.mjs';
 import { dispatchReports } from './reports.mjs';
+import { reportMembershipFailure } from './diagnostics.mjs';
 
 const headers = { 'Cache-Control': 'private, no-store, max-age=0', 'X-Robots-Tag': 'noindex, nofollow', 'Vary': 'Cookie', 'Referrer-Policy': 'no-referrer' };
 const json = (data, status = 200, extra = {}) => Response.json(data, { status, headers: { ...headers, ...extra } });
@@ -38,15 +39,15 @@ export function createMembershipHandlers(options = {}) {
     }
     return dependencies;
   }
-  const safe = handler => async request => {
+  const safe = (operation, handler) => async request => {
     try { return await handler(request); }
     catch (error) {
-      if (!(error instanceof MembershipError)) console.error('Paid reports request failed; inspect provider and database health.');
+      if (!(error instanceof MembershipError)) reportMembershipFailure(operation, error);
       return json({ error: error instanceof MembershipError ? error.message : 'The request could not be completed. Please retry shortly.' }, error instanceof MembershipError ? error.status : 503);
     }
   };
   return {
-    membership: safe(async request => {
+    membership: safe('membership', async request => {
       if (request.headers.get('origin') !== config.origin) throw new MembershipError(403, 'Use the RoboSkin website to continue.');
       if (!request.headers.get('content-type')?.startsWith('application/json')) throw new MembershipError(415, 'JSON required.');
       let body;
@@ -77,7 +78,7 @@ export function createMembershipHandlers(options = {}) {
       if (body.action === 'preferences') { await service.preferences(user.id, body.emailDelivery); return json({ saved: true }); }
       throw new MembershipError(400, 'Unknown action.');
     }),
-    webhook: safe(async request => {
+    webhook: safe('webhook', async request => {
       const { service, waffo } = deps();
       const raw = await rawBody(request, 65536);
       let event;
@@ -85,7 +86,7 @@ export function createMembershipHandlers(options = {}) {
       catch { throw new MembershipError(400, 'Invalid webhook signature.'); }
       return json(await service.webhook(event));
     }),
-    dispatch: safe(async request => {
+    dispatch: safe('dispatch', async request => {
       if (!config.cronSecret || !sameSecret(request.headers.get('authorization'), `Bearer ${config.cronSecret}`)) throw new MembershipError(401, 'Unauthorized.');
       const result = await dispatchReports(deps());
       return json(result, result.failed || result.held || result.staleReport ? 503 : 200);

@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { transaction } from './database.mjs';
+import { reportMembershipFailure } from './diagnostics.mjs';
 
 export function validateReport(input, now = new Date()) {
   const text = (value, max) => typeof value === 'string' && value.trim().length > 0 && value.length <= max;
@@ -57,11 +58,15 @@ export async function dispatchReports({ db, service, mail, config, now = () => n
   const result = { sent: 0, failed: 0, held: held.rows[0].count, staleReport: false };
   for (const candidate of candidates.rows) {
     if (Date.now() > deadline) break;
+    let operation = 'dispatch.subscription.refresh';
     try {
       await service.refresh(candidate.id);
+      operation = 'dispatch.subscription.access';
       if (!await service.access(candidate.id)) continue;
+      operation = 'dispatch.delivery.prepare';
       await db.query(`INSERT INTO report_deliveries(report_id,member_id) VALUES($1,$2) ON CONFLICT DO NOTHING`, [report.id, candidate.id]);
       // Persist a lease before the network call. Recover only within Resend's 24-hour idempotency window.
+      operation = 'dispatch.delivery.lease';
       const delivery = await transaction(db, async tx => {
         const { rows } = await tx.query(`SELECT d.*,m.email,m.email_delivery FROM report_deliveries d JOIN report_members m ON m.id=d.member_id
           WHERE d.report_id=$1 AND d.member_id=$2 FOR UPDATE OF d`, [report.id, candidate.id]);
@@ -78,13 +83,18 @@ export async function dispatchReports({ db, service, mail, config, now = () => n
         return row;
       });
       if (!delivery) continue;
+      operation = 'dispatch.delivery.send';
       const providerId = await mail({ to: delivery.email, subject: `RoboSkin weekly report: ${report.title}`,
         key: `report-${report.id}-${candidate.id}`,
         text: `${report.title}\n\n${report.summary}\n\nRead the full report: ${config.origin}/weekly-reports\nSign in with this email address. An active paid subscription is required.\n\nEmail preferences: ${config.origin}/weekly-reports\nCancel renewal or manage billing: https://pancake.waffo.ai/consumer/portal/login\nStopping report emails does not cancel billing.` });
+      operation = 'dispatch.delivery.confirm';
       await db.query(`UPDATE report_deliveries SET state='sent',sent_at=$3,provider_id=$4 WHERE report_id=$1 AND member_id=$2`,
         [report.id, candidate.id, now().toISOString(), providerId]);
       result.sent++;
-    } catch { result.failed++; }
+    } catch (error) {
+      result.failed++;
+      reportMembershipFailure(operation, error);
+    }
   }
   await db.query('DELETE FROM report_login_codes WHERE expires_at<$1', [stamp]);
   await db.query('DELETE FROM report_sessions WHERE expires_at<$1', [stamp]);
