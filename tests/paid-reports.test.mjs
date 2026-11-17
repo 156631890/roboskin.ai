@@ -317,3 +317,60 @@ test('mail transport requires a provider receipt and sends a stable idempotency 
   assert.equal(sent.headers['Idempotency-Key'], 'stable-key');
   await assert.rejects(createMailer({ mailKey: 'fixture' }, async () => Response.json({}))({ key: 'key' }));
 });
+
+test('cron database failures remain private 503 responses and expose only safe diagnostics', async t => {
+  const f = await fixture(t);
+  const log = t.mock.method(console, 'error', () => {});
+  const failure = Object.assign(new Error('PRIVATE_DB_PASSWORD member@example.org SELECT private_report'), { code: '42P01' });
+  const handlers = createMembershipHandlers({ ...f, db: { query: async () => { throw failure; } } });
+  const response = await handlers.dispatch(new Request('https://roboskin.ai/api/reports-cron', {
+    headers: { authorization: `Bearer ${config.cronSecret}` },
+  }));
+  assert.equal(response.status, 503);
+  assert.match(response.headers.get('cache-control'), /private, no-store/);
+  const body = await response.json();
+  assert.deepEqual(body, { error: 'The request could not be completed. Please retry shortly.' });
+  assert.deepEqual(log.mock.calls[0].arguments[1], {
+    operation: 'dispatch', category: 'database', errorType: 'Error', code: '42P01',
+  });
+  assert.doesNotMatch(JSON.stringify(log.mock.calls.map(call => call.arguments)), /PRIVATE_DB_PASSWORD|member@example|private_report/);
+  assert.equal(f.emails.length, 0);
+});
+
+test('mail failure diagnostics preserve 503, the delivery lease and the same retry key', async t => {
+  const f = await fixture(t);
+  await f.buy();
+  const log = t.mock.method(console, 'error', () => {});
+  const keys = [];
+  let unavailable = true;
+  const mail = createMailer({ mailKey: 'PRIVATE_MAIL_KEY', mailFrom: 'reports@example.org' }, async (_url, options) => {
+    keys.push(options.headers['Idempotency-Key']);
+    return unavailable ? Response.json({ message: 'PRIVATE_PROVIDER_BODY' }, { status: 429 }) : Response.json({ id: 'mail-retry' });
+  });
+  const handlers = createMembershipHandlers({ ...f, mail });
+  const dispatch = () => handlers.dispatch(new Request('https://roboskin.ai/api/reports-cron', {
+    headers: { authorization: `Bearer ${config.cronSecret}` },
+  }));
+  const failed = await dispatch();
+  assert.equal(failed.status, 503);
+  assert.equal((await failed.json()).failed, 1);
+  assert.deepEqual(log.mock.calls[0].arguments[1], {
+    operation: 'dispatch.delivery.send', category: 'http', errorType: 'Error', httpStatus: 429,
+  });
+  assert.doesNotMatch(JSON.stringify(log.mock.calls.map(call => call.arguments)), /PRIVATE_|member@example|report-/);
+  let delivery = (await f.db.query('SELECT state,attempts FROM report_deliveries')).rows[0];
+  assert.equal(delivery.state, 'pending');
+  assert.equal(delivery.attempts, 1);
+  await dispatch();
+  assert.equal(keys.length, 1);
+  f.setNow('2026-10-16T03:00:00Z');
+  unavailable = false;
+  const retried = await dispatch();
+  assert.equal(retried.status, 200);
+  assert.equal((await retried.json()).sent, 1);
+  assert.equal(keys.length, 2);
+  assert.equal(keys[0], keys[1]);
+  delivery = (await f.db.query('SELECT state,attempts FROM report_deliveries')).rows[0];
+  assert.equal(delivery.state, 'sent');
+  assert.equal(delivery.attempts, 2);
+});

@@ -83,6 +83,12 @@ The worker processes up to 20 members per run to stay within server execution li
 
 Monitor failed workflow runs, Waffo webhook deliveries, held emails and report freshness. A stale/missing issue makes dispatch fail visibly and closes new checkout requests. It does **not** silently cancel or refund existing recurring subscriptions. If weekly delivery cannot be maintained, the operator must contact affected customers and resolve cancellation/refunds in Waffo under the applicable terms. Code alone does not produce a weekly editorial service.
 
+### Failure diagnostics
+
+Unexpected handler and per-member delivery errors log `Paid reports operation failed.` with a fixed operation name, an allowlisted error type, and a recognized database/network code or numeric HTTP error status when available. Delivery stages distinguish subscription refresh/access, delivery record preparation/lease, email sending, and receipt persistence. These diagnostics do not log error messages or stacks, SQL, connection URLs, credentials, customer identifiers, email contents, request bodies or provider response bodies. Unknown values remain `unknown`; the absence of a recognized code does not establish a cause.
+
+Failure handling is unchanged: unexpected handler errors return a generic private 503, failed delivery attempts retain their lease/idempotency state, and stale/held deliveries remain visible failures. The scheduler does not automatically retry an ambiguous email outside its existing delivery rules. Inspect these logs promptly within the current Vercel retention window and verify database/provider health before changing capacity or retrying a task manually.
+
 ## Evidence and limitations
 
 Official references checked on 2026-10-16:

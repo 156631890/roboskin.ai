@@ -5,7 +5,11 @@ export function createMailer(config, fetcher = fetch) {
       headers: { Authorization: `Bearer ${config.mailKey}`, 'Content-Type': 'application/json', 'Idempotency-Key': key },
       body: JSON.stringify({ from: config.mailFrom, to: [to], subject, text }),
     });
-    if (!response.ok) throw new Error('Report email delivery failed');
+    if (!response.ok) {
+      const error = new Error('Report email delivery failed');
+      error.status = response.status;
+      throw error;
+    }
     const result = await response.json();
     if (!result.id) throw new Error('Missing report email receipt');
     return result.id;
