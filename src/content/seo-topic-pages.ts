@@ -4219,7 +4219,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/tactile-foundation-models',
-    revisionNote: "November 4, 2026: reviewed representation and policy boundaries, added an adaptation accounting example and clarified NeoForce estimated force fields. Earlier dated artifact observations remain separate; no model execution.",
+    revisionNote: "November 17, 2026: added TaF-Foundation adaptation requirements and matched-task comparison boundaries from its November 16 preprint. Earlier dated artifact observations remain separate; no model execution.",
     title: 'Tactile Foundation Models for Robotics',
     description:
       "Compare tactile representations by preprocessing, adaptation, task heads and transfer tests; distinguish learned force fields from measurements.",
@@ -4227,7 +4227,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI model guide',
     intent: 'Comparison guide for tactile foundation models, reusable touch representations, tactile AI models, and robot learning system roles.',
     published: '2026-07-20',
-    updated: "2026-11-04",
+    updated: "2026-11-17",
     priority: 0.91,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -4239,6 +4239,21 @@ export const seoTopicPages: SeoTopicPage[] = [
       'Evaluate a model by the role touch plays, the transfer claim it tests, the robot task it changes, and the latency and hardware assumptions required at deployment.',
     ],
     sections: [
+      {
+        id: 'taf-foundation-transfer-boundaries',
+        heading: 'TaF-Foundation: what does cross-sensor transfer require?',
+        body: [
+          'TaF-Foundation is a November 16, 2026 preprint that uses measured six-axis force and torque as common supervision for heterogeneous tactile sensors. Its shared encoder still needs sensor-specific input adaptation; a common physical target is not a plug-and-play hardware interface.',
+          'For an unseen sensor, the authors require labelled tactile–wrench pairs and train an input module. In the magnetic-sensor Board Clean experiment, they use all available adaptation data, freeze the backbone during adaptation, then freeze the adapted encoder during policy training. This is adapted transfer, not zero-shot deployment.',
+          'Table 5 reports four real-world tasks with 20 trials per task per method: TaF-Policy averages 46.25%, versus 23.75% for AnyTouch2. UniVTAC omits the magnetic-sensor task, so its three-task average is not comparable with those four-task averages. These are author-reported results, not RoboSkin tests.',
+          'Before choosing this approach, budget for reference-force collection and adapter training, match the evaluation task subset, and inspect failure modes rather than relying on the average. The authors identify alignment and grasp-stability failures. Code, checkpoints and dataset access were not verified in this review.'
+        ],
+        links: [
+          { label: 'TaF-Foundation preprint, version 1', href: 'https://arxiv.org/abs/2611.20718v1' },
+          { label: 'Methods, Table 5 and limitations', href: 'https://arxiv.org/html/2611.20718v1' },
+          { label: 'Plan reference measurements and calibration', href: '/guides/tactile-sensor-calibration' },
+        ],
+      },
       {
         "id": "representation-adaptation-ledger",
         "heading": "What was frozen, what was trained, and what actually transferred?",
