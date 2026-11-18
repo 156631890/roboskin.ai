@@ -5340,8 +5340,8 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Tactile AI pillar',
     intent: 'Pillar guide for tactile manipulation, touch-guided robot manipulation, tactile robot control, dexterous manipulation, and contact-rich robotics.',
     published: '2026-08-19',
-    updated: "2026-11-09",
-    revisionNote: "November 8, 2026: added TactileLab contact assumptions, sensor observability and transfer checks. November 9: added an APXpress prototype example separating motor-network timing from tactile sampling. Prior interface and timing guidance retained; no hardware test.",
+    updated: "2026-11-18",
+    revisionNote: "November 18, 2026: added cable-shape estimation, adaptation and sensor-loss boundaries from the November 17 preprint. Preserved TactileLab, APXpress and earlier interface guidance; no hardware test.",
     priority: 0.93,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -5353,6 +5353,22 @@ export const seoTopicPages: SeoTopicPage[] = [
       'A tactile model is not enough. Useful manipulation requires synchronized robot state, low-latency sensing, a controller or policy that can act on touch, and task-level evidence against a no-touch baseline.',
     ],
     sections: [
+
+      {
+        id: 'tactile-cable-shape-estimation',
+        heading: 'Can touch estimate an occluded cable shape?',
+        body: [
+          'A November 17, 2026 preprint estimates a cable curve from four DIGIT sensors and relative gripper pose. One gripper is fixed; the other moves quasi-statically. Motion capture supplies training labels, not deployment input. This is a state estimator, not evidence of completed cable-routing tasks.',
+          'Table I reports 30.52 mm mean per-vertex RMSE for the proposed model versus 55.00 mm for pose-only estimation. Its 61.5 ms mean inference time is not end-to-end control latency. These are author-reported measurements on the study setup, not RoboSkin tests.',
+          'Transfer to a USB cable and a larger steel cable requires new labelled samples and fine-tuning; zero-shot performance deteriorates. Retraining with fewer sensors also differs from losing a sensor at runtime: masking channels without retraining degrades accuracy faster. The paper plans code, model and dataset release after publication acceptance; this review does not establish a usable release.',
+          'For an evaluation handoff, record cable material and dimensions, grasp constraints, label collection, adaptation data, sensor-loss handling and a separate closed-loop task outcome. Do not turn a shape-error result into an insertion or routing success claim.'
+        ],
+        links: [
+          { label: 'Original preprint and submission date', href: 'https://arxiv.org/abs/2611.22990v1' },
+          { label: 'Setup, Table I, transfer and sensor-loss protocol', href: 'https://arxiv.org/html/2611.22990v1' },
+          { label: 'Plan a matched manipulation benchmark', href: '/guides/tactile-sensor-benchmark-robot-manipulation' },
+        ],
+      },
 {
         "id": "tactilelab-contact-assumption",
         "heading": "TactileLab: record the contact assumption before transfer",
