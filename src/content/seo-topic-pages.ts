@@ -1,3 +1,4 @@
+import { tactilePairedTrialsAudit } from '@/content/tactile-evaluation-notes';
 import { sensingIntegrationDepth } from '@/content/sensing-integration-depth';
 import { structureNewPages } from '@/content/structure-new-pages';
 import { robotDatasetStartingPoints, robotDataPreflight, teleoperationActionTrace } from '@/content/robot-data-evidence';
@@ -3583,7 +3584,7 @@ export const seoTopicPages: SeoTopicPage[] = [
   },
   {
     path: '/guides/tactile-sensor-benchmark-robot-manipulation',
-    revisionNote: "November 4, 2026: checked TacO methods and HT-Bench v2; clarified task coverage, trained baselines and missing-sensor tests. No hardware experiment was performed.",
+    revisionNote: "November 4, 2026: checked TacO methods and HT-Bench v2; clarified task coverage, trained baselines and missing-sensor tests. No hardware experiment was performed. November 19, 2026: Added a worked paired-trial protocol and interpretation.",
     title: 'Tactile Sensor Benchmark for Robot Manipulation',
     description:
       'Compare visual, acoustic, magnetic, and resistive tactile sensors by manipulation task, signal, integration constraint, and evidence boundary.',
@@ -3591,7 +3592,7 @@ export const seoTopicPages: SeoTopicPage[] = [
     kicker: 'Sensor comparison guide',
     intent: 'Comparison guide for tactile sensor benchmark, robot manipulation tactile sensor comparison, and robot touch sensor evaluation searches.',
     published: '2026-07-20',
-    updated: '2026-11-04',
+    updated: '2026-11-19',
     priority: 0.84,
     changeFrequency: 'weekly',
     schemaType: 'TechArticle',
@@ -3603,6 +3604,7 @@ export const seoTopicPages: SeoTopicPage[] = [
       'A defensible benchmark starts with the robot task, keeps mounting and control conditions visible, and measures whether tactile input changes manipulation outcomes under repeatable disturbances.',
     ],
     sections: [
+      tactilePairedTrialsAudit,
       {
         heading: 'What a tactile benchmark should answer',
         body: [

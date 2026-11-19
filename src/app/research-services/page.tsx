@@ -32,8 +32,8 @@ export default function ResearchServicesPage() {
         <div className="container-shell services-hero-grid">
           <div className="services-hero-copy">
             <span className="eyebrow">Research services</span>
-            <h1>Tactile intelligence, decision ready.</h1>
-            <p>A source-backed robot skin and tactile AI brief, delivered in five business days for one defined decision.</p>
+              <h1>Tactile robotics research services</h1>
+              <p>The RoboSkin Research Sprint supports one decision about robot skin, tactile sensors, datasets or models. Get a source-backed brief in five business days after kickoff.</p>
             <p className="services-positioning">{researchPositioning}</p>
             <div className="services-hero-actions">
               <a href="#inquiry" className="btn-primary">Start a Research Sprint</a>
@@ -119,7 +119,7 @@ export default function ResearchServicesPage() {
           <div>
             <h2 id="fit-heading">Where the service fits</h2>
             <ul>
-              <li>Technical and product teams comparing tactile sensing options</li>
+              <li>Technical and product teams narrowing tactile sensor options for a specific robot hand or gripper</li>
               <li>Robot-hand or humanoid teams mapping datasets and models</li>
               <li>Strategy and investment teams screening a technical landscape</li>
               <li>Labs preparing a partner, grant, or procurement evidence pack</li>
@@ -169,7 +169,7 @@ export default function ResearchServicesPage() {
               <p className="mt-3 text-sm leading-relaxed text-soft">{"That requires an agreed physical test or certification process, which this Sprint does not provide."}</p>
             </li>
           </ul>
-          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"The decision package can identify a supported option, a conditional shortlist or a gap that prevents a defensible choice. An unknown remains in the evidence register; it is not replaced with an assumed specification. Scope and availability are confirmed before work starts."}</p>
+          <p className="mt-5 max-w-4xl text-sm leading-relaxed text-soft">{"For tactile sensor research on a robot hand, send the hand revision, mounting constraints and the signal needed for your task. A scoped brief can compare documented models, identify unknowns that block the shortlist, and list questions to resolve with the supplier or on a bench. Scope and availability are confirmed before work starts."}</p>
           <div className="mt-5 flex flex-wrap gap-4 text-sm"><Link href="/reports/tactile-ai-robot-skin-landscape-2026" className="text-accent underline underline-offset-4">{"Inspect the free sample structure"}</Link><Link href="/methodology#evidence-types" className="text-accent underline underline-offset-4">{"Check what a source review establishes"}</Link><Link href="/contact?requestType=correction" className="text-accent underline underline-offset-4">{"Send a public-page correction instead"}</Link></div>
           <p className="mt-5 text-xs text-soft">Reading guidance updated <time dateTime="2026-11-04">November 4, 2026</time>.</p>
         </div>

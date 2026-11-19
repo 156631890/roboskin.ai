@@ -9,6 +9,7 @@ export type TactileSensorEntry = {
   integration: string;
   access: string;
   evidenceBoundary: string;
+  evaluation: { title: string; check: string };
   sourceUrl: string;
   projectUrl?: string;
   codeUrl?: string;
@@ -21,6 +22,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'loomia-smart-skin',
     name: 'Loomia Smart Skin',
+    evaluation: { title: 'Textile pressure sensing with the developer kit', check: 'Map the kit components to flat, curved and flexing contact zones. Measure unloaded drift and repeated loading at the installed curvature before sizing a custom pressure layer.' },
     organization: 'Loomia Technologies',
     principle: 'Flexible capacitive and resistive sensing',
     formFactor: 'Glove, individual sensors and pressure matrices',
@@ -36,6 +38,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'robotiq-tsf-85',
     name: 'Robotiq TSF-85',
+    evaluation: { title: 'Tactile sensor fingertips for Robotiq grippers', check: 'Identify the 2F gripper revision and channel used by the controller. Log pressure updates and dynamic-signal updates separately before timing a slip response.' },
     organization: 'Robotiq',
     principle: 'Capacitive tactile array with dynamic and inertial sensing',
     formFactor: 'Replacement gripper fingertip; 28.4 × 44 × 10.9 mm in the user guide',
@@ -52,6 +55,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'melexis-tactaxis',
     name: 'Melexis Tactaxis',
+    evaluation: { title: 'Three-axis force sensing with a Hall-effect taxel', check: 'Ask for the exact fingertip-module revision, axis convention and load range. Check combined normal and shear loads on the installed module before using the taxel figures as acceptance limits.' },
     organization: 'Melexis',
     principle: 'Magnetic tactile sensing with a Triaxis Hall-effect IC',
     formFactor: '6 × 6 × 4.4 mm taxel in the April 2025 e-guide; fingertip-module integration announced in 2026',
@@ -67,6 +71,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'vitai-gf225',
     name: 'ViTai VT-GF225',
+    evaluation: { title: 'Marker-based vision tactile sensor for robot grippers', check: 'Log raw marker frames and any SDK force estimates as separate fields. Compare estimates with a reference load in the task geometry before treating them as measured force.' },
     organization: 'ViTai Robotics',
     principle: 'Marker-based vision tactile sensing with a compliant gel interface',
     formFactor: '25 × 25 mm sensing area in a 32 × 32 × 60 mm housing',
@@ -84,6 +89,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'digit',
     name: 'DIGIT',
+    evaluation: { title: 'Optical tactile sensing through the DIGIT Python interface', check: 'Record the original DIGIT device revision, negotiated resolution and frame rate. Keep the raw contact image separate from any reconstructed depth or estimated force.' },
     organization: 'Meta AI Research / GelSight',
     principle: 'Vision-based tactile sensing',
     formFactor: 'Compact robotic fingertip',
@@ -100,6 +106,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'digit-360',
     name: 'Digit 360',
+    evaluation: { title: 'Multimodal tactile sensing on Digit 360', check: 'List which documented modalities the particular build exports, with their clocks and update rates. Check task performance with each candidate channel before treating the full modality list as a requirement.' },
     organization: 'Meta AI Research / GelSight',
     principle: 'Multimodal vision-based tactile sensing',
     formFactor: 'Hemispherical compliant fingertip',
@@ -116,6 +123,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'gelsight-mini',
     name: 'GelSight Mini',
+    evaluation: { title: 'GelSight Mini optical sensing and 3D reconstruction', check: 'Retain the camera configuration and reconstruction settings together. Validate across field positions with reference geometry before using the depth estimate for alignment.' },
     organization: 'GelSight',
     principle: 'Vision-based tactile sensing',
     formFactor: 'Compact flat tactile sensor',
@@ -132,6 +140,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'reskin',
     name: 'ReSkin',
+    evaluation: { title: 'Magnetic tactile sensor calibration across replacement skins', check: 'Record unloaded baselines and reference contacts before and after a skin change. Evaluate the old model on the new skin before collecting any adaptation data.' },
     organization: 'Meta AI Research / Carnegie Mellon University',
     principle: 'Magnetic tactile skin',
     formFactor: 'Thin replaceable skin patch',
@@ -146,6 +155,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'anyskin',
     name: 'AnySkin',
+    evaluation: { title: 'Replaceable tactile skin for policy transfer', check: 'Separate a same-skin repeat from a held-out skin swap. Record material batch, seating and robot task so a transfer result can be attributed to the tested configuration.' },
     organization: 'New York University / Carnegie Mellon University / Columbia University / Meta',
     principle: 'Magnetic tactile skin',
     formFactor: 'Replaceable skin interface for robot end effectors',
@@ -161,6 +171,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'gelslim-4',
     name: 'GelSlim 4.0',
+    evaluation: { title: 'Vision tactile sensor design for parallel-jaw grippers', check: 'Compare the documented build and camera arrangement with the jaw clearance and supported contact area on your gripper. Validate the installed reference image after assembly.' },
     organization: 'University of Michigan MMint Lab',
     principle: 'Vision-based tactile sensing',
     formFactor: 'Compact tactile finger for parallel grippers',
@@ -176,6 +187,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'tactip',
     name: 'TacTip',
+    evaluation: { title: 'Biomimetic optical tactile sensing with TacTip', check: 'Name the printed fingertip and pin layout along with the tracking algorithm. Test the actual contact geometry before transferring a learned edge or pose estimate between tips.' },
     organization: 'Bristol Robotics Laboratory / University of Bristol',
     principle: 'Biomimetic optical tactile sensing',
     formFactor: 'Soft 3D-printed fingertip and related morphologies',
@@ -191,6 +203,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'biotac',
     name: 'BioTac',
+    evaluation: { title: 'BioTac pressure and vibration signals', check: 'Check the exact BioTac variant and acquisition package. Keep electrode, fluid-pressure and vibration channels separate when evaluating a slip or texture feature.' },
     organization: 'SynTouch',
     principle: 'Fluid-filled biomimetic multimodal sensing',
     formFactor: 'Human-fingertip-shaped sensor',
@@ -206,6 +219,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'uskin',
     name: 'uSkin',
+    evaluation: { title: 'XELA uSkin tactile sensing for Allegro and Tesollo hands', check: 'Count populated fingertip, phalanx and palm positions for the ordered configuration. Confirm each module rate, acquisition path and local force axes before aggregating contacts.' },
     organization: 'XELA Robotics',
     principle: 'Distributed magnetic three-axis force sensing',
     formFactor: 'Soft modular arrays for fingers, palms, grippers, and custom surfaces',
@@ -221,6 +235,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'densetact-2',
     name: 'DenseTact 2.0',
+    evaluation: { title: 'Optical force and torque estimation with DenseTact 2.0', check: 'Check shape reconstruction and learned wrench prediction separately. Evaluate an installed unit against the reference load and contact positions the robot will encounter.' },
     organization: 'Stanford University ARM Lab',
     principle: 'Vision-based optical tactile sensing',
     formFactor: 'Highly curved soft robotic fingertip',
@@ -236,6 +251,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: '9dtact',
     name: '9DTact',
+    evaluation: { title: 'Tactile force estimation from a 9DTact contact image', check: 'Record which geometry reconstruction and force-estimation model versions are used. Compare their outputs with their respective references before reusing either model on a different build.' },
     organization: 'Shanghai Qi Zhi Institute / Tsinghua University / HUST / Shanghai AI Laboratory',
     principle: 'Vision-based tactile sensing with translucent gel',
     formFactor: 'Compact tactile fingertip',
@@ -252,6 +268,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'insight',
     name: 'Insight',
+    evaluation: { title: 'Force estimation over a curved tactile surface', check: 'Measure error by contact region and load direction. Include seams, edges and off-center contacts that matter for the task before assuming coverage is uniform.' },
     organization: 'Max Planck Institute for Intelligent Systems',
     principle: 'Vision-based haptic sensing',
     formFactor: 'Soft thumb-sized conical sensor',
@@ -267,6 +284,7 @@ export const tactileSensorEntries: TactileSensorEntry[] = [
   {
     id: 'allsight',
     name: 'AllSight',
+    evaluation: { title: 'Sim-to-real tactile sensing with AllSight', check: 'Keep simulated and physical samples identifiable. Evaluate on held-out physical contacts across positions and loads before reporting a simulator-to-device transfer result.' },
     organization: 'Ben-Gurion University research team',
     principle: 'Vision-based optical tactile sensing',
     formFactor: 'Round thumb-sized tactile sensor',

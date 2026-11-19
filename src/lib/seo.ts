@@ -83,8 +83,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/products': {
     path: '/products',
-    title: 'Tactile Sensing Learning Paths: Sensors, Data & Control',
-    description: "Choose a tactile sensing learning path, define a concrete output, then move from contact requirements to sensor evidence, calibration and replay.",
+    title: 'Learn Tactile Sensing for Robots: 3 Practical Paths',
+    description: 'Learn tactile sensing for robots with RoboSkin. Define a contact requirement, compare sensors, or build a tactile data and replay workflow.',
     updated: '2026-11-04',
     priority: 0.9,
     changeFrequency: 'weekly',
@@ -331,8 +331,8 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/research-services': {
     path: '/research-services',
-    title: 'Tactile AI and Robot Skin Research Services',
-    description: "Scope a paid tactile robotics evidence review: one decision, traceable sources, comparison criteria and explicit unknowns, with a free sample to inspect.",
+    title: 'Tactile Robotics Research Services: Research Sprint',
+    description: 'Scope a RoboSkin Research Sprint for tactile sensor research, robot hands, datasets or models. Review the US$1,500 pilot fee and free sample.',
     updated: '2026-11-04',
     priority: 0.86,
     changeFrequency: 'monthly',

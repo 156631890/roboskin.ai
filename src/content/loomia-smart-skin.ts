@@ -10,24 +10,28 @@ const digit = { label: 'Original DIGIT sensor paper', href: 'https://arxiv.org/a
 
 export const loomiaSmartSkin: SeoTopicPage = {
   path: '/sensors/loomia-smart-skin',
-  title: 'Loomia Smart Skin: Specs, Developer Kit & Limits',
-  description: 'Review Loomia Smart Skin sensing, kit specifications, integration limits and the pending Unichem acquisition. Based on documents, not a bench test.',
-  h1: 'Loomia Smart Skin, Explained',
+  title: "Loomia Smart Skin Tactile Sensing Developer Kit: Specs",
+  description: "Review the Loomia Smart Skin tactile sensing developer kit, textile pressure sensor options, readout limits and checks for flexible robot surfaces.",
+  h1: "Loomia Smart Skin tactile sensing developer kit",
   kicker: 'Sensor evidence / Soft electronic layers',
   intent: 'Help robot builders review Loomia Smart Skin and its developer kit using published specifications and clearly dated acquisition information.',
   published: '2026-10-20',
-  updated: '2026-11-04',
-  revisionNote: "November 4, 2026: rechecked the developer-kit guide and added loading-artifact and mounted-sensor acceptance questions. Earlier listing and acquisition observations retain their dates; no device or ordering workflow was tested.",
+  updated: '2026-11-19',
+  revisionNote: "November 4, 2026: rechecked the developer-kit guide and added loading-artifact and mounted-sensor acceptance questions. Earlier listing and acquisition observations retain their dates; no device or ordering workflow was tested. November 19, 2026: Added a kit evaluation step for installed curvature.",
   priority: 0.75,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
   visualKey: 'technology',
-  keywords: ['Loomia smart skin explained', 'Loomia tactile sensing developer kit review', 'Loomia Electronic Layer', 'flexible robotic skin', 'e-textile tactile sensing'],
+  keywords: ["Loomia Smart Skin", "Loomia tactile sensing developer kit", "textile pressure sensor", "Loomia smart skin explained", "Loomia tactile sensing developer kit review", "Loomia Electronic Layer", "flexible robotic skin", "e-textile tactile sensing"],
   quickAnswer: [
     'Loomia Smart Skin applies soft electronics to robot contact sensing. The underlying Loomia Electronic Layer (LEL) is a flexible circuit platform that can integrate with textiles and other surfaces. E-textile describes the integration context, not a single measurement principle.',
     'This profile reviews manufacturer documents, not hardware tested by RoboSkin.ai. Published specifications and acquisition plans have different evidence boundaries; neither establishes performance on your robot.',
   ],
   sections: [
+    {
+      heading: "Use the Loomia developer kit to choose a pressure sensing layout",
+      body: ["Begin by identifying whether the intended surface bends while it is loaded. If it does, compare unloaded and loaded readings at more than one installed curvature. Map wiring and backing layers as well as sensing areas. Use the kit to characterize an integration approach before requesting a custom layout."],
+    },
     {
       heading: 'Sensing principle: e-textiles and flexible circuits',
       body: [

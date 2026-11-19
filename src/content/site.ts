@@ -966,7 +966,7 @@ export const researchResourceIndex: ResearchResourceEntry[] = [
 
 export const productCards = [
   {
-    name: 'Understand what the robot needs to sense',
+    name: 'Define contact signals and robot skin coverage',
     bestFor: 'Readers choosing between contact detection, a tactile fingertip, and a distributed skin',
     summary: 'Start with the difference between a sensing element and an integrated robot surface. Identify the contact location, measured signal, and action the robot should take.',
     inputsOutputs: 'A task description becomes a list of required contact signals and coverage areas.',
@@ -977,7 +977,7 @@ export const productCards = [
     href: '/robot-skin',
   },
   {
-    name: 'Compare sensor hardware and evidence',
+    name: 'Compare tactile sensors for robot hands and grippers',
     bestFor: 'Engineers shortlisting tactile sensors for hands, grippers, or soft surfaces',
     summary: 'Compare optical, magnetic, resistive, and other sensing systems using their documented outputs, geometry, calibration requirements, and task evidence.',
     inputsOutputs: 'A sensing requirement becomes a shortlist with documented constraints and primary sources.',
@@ -988,7 +988,7 @@ export const productCards = [
     href: '/sensors',
   },
   {
-    name: 'Build a tactile data and evaluation workflow',
+    name: 'Record and replay tactile data with Python and ROS 2',
     bestFor: 'Developers moving from a sensor stream to recorded data and robot feedback',
     summary: 'Follow the Python and ROS 2 exercises to inspect samples, preserve timestamps and units, replay observations, and define an evaluation before connecting a controller.',
     inputsOutputs: 'Recorded or synthetic observations become plots, replayable messages, and an explicit validation plan.',

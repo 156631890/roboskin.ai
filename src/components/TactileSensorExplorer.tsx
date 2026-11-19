@@ -126,6 +126,7 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {},
                 <tr id={`sensor-${entry.id}`} key={entry.id} className="scroll-mt-24 align-top text-[#c8d1de]">
                   <th scope="row" className="w-[220px] border-b border-white/8 px-4 py-5">
                     <span className="block text-base font-semibold text-white">{entry.name}</span>
+                    <span className="mt-1 block text-sm leading-snug">{entry.evaluation.title}</span>
                     {detailLinks[entry.id] ? (
                       <Link href={detailLinks[entry.id]} className="mt-2 block text-sm font-semibold text-[#ffd5c5] underline underline-offset-4">
                         Read sensor guide
@@ -147,7 +148,10 @@ export default function TactileSensorExplorer({ entries, organizationLinks = {},
                   <td className="w-[230px] border-b border-white/8 px-4 py-5">{entry.signals.join('; ')}</td>
                   <td className="w-[250px] border-b border-white/8 px-4 py-5"><strong className="text-white">Rate:</strong> {entry.reportedRate}<br /><strong className="mt-3 inline-block text-white">Integration:</strong> {entry.integration}</td>
                   <td className="w-[220px] border-b border-white/8 px-4 py-5">{entry.access}</td>
-                  <td className="w-[260px] border-b border-white/8 px-4 py-5">{entry.evidenceBoundary}</td>
+                  <td className="w-[260px] border-b border-white/8 px-4 py-5">
+                    <p>{entry.evidenceBoundary}</p>
+                    <p className="mt-3"><strong className="text-white">Evaluation step:</strong> {entry.evaluation.check}</p>
+                  </td>
                   <td className="w-[170px] border-b border-white/8 px-4 py-5">
                     <div className="grid gap-2">
                       {entry.researchUrl ? <Link href={entry.researchUrl} className="font-semibold text-white hover:text-[#ffd5c5]">RoboSkin evidence review</Link> : null}

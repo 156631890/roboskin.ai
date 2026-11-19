@@ -4,8 +4,8 @@ import ReportMembership from '@/components/ReportMembership';
 import { membershipConfig, BILLING_PERIODS, PORTAL_URL } from '@/lib/membership/config.mjs';
 
 export const metadata: Metadata = {
-  title: 'Paid Robotics Research Reports — US$9.90/month',
-  description: 'One source-linked robotics research report each week for US$9.90/month, plus applicable tax. Explore paid report access, billing and the separate free newsletter.',
+  title: 'RoboSkin Research Reports: Weekly Tactile Robotics Analysis',
+  description: 'Read weekly robotics research reports on tactile sensors, datasets and robot learning for US$9.90/month, plus applicable tax. Preview a free sample.',
   alternates: { canonical: 'https://roboskin.ai/weekly-reports' },
   robots: { index: false, follow: true },
 };
@@ -17,7 +17,7 @@ export default function WeeklyReportsPage() {
     <header className="max-w-3xl">
       <span className="eyebrow">Paid research subscription</span>
       <h1 className="mt-5 text-4xl font-semibold tracking-tight md:text-6xl">RoboSkin Research Reports</h1>
-      <p className="mt-6 text-lg leading-relaxed">Go beyond the reading list with source-linked analysis of robotics developments, implications for engineering and product decisions, and clearly stated limitations.</p>
+      <p className="mt-6 text-lg leading-relaxed">Follow tactile robotics research with one weekly report on sensors, datasets, models and their implications for engineering and product decisions. Each issue links to its sources and explains what their evidence can support.</p>
       <p className="mt-4 text-lg font-semibold">US$9.90/month · One report each week</p>
       <p className="mt-3">Billed monthly and renews automatically until canceled. Applicable tax is shown at checkout.</p>
       {!config.ready && <p className="mt-5 rounded-lg border p-4" role="status">Paid subscriptions are being prepared. Checkout is closed and this page does not collect payment or email addresses.</p>}
@@ -32,6 +32,7 @@ export default function WeeklyReportsPage() {
         </ul>
         <p className="mt-6">Includes access to the private report library while your paid subscription is active. The <Link className="underline" href="/#newsletter">free tactile robotics newsletter</Link> is a separate email list and does not include paid report access. Reports are prepared and reviewed before publication; a source claim is not a RoboSkin hardware test.</p>
         <p className="mt-4"><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Read our free landscape sample</Link> for an example of our research approach. It is not a current weekly issue.</p>
+        <p className="mt-4">Use the sample’s comparison table and source register to see how the reports handle unverified specifications and results from different test setups. If you need a brief on a specific decision, see <Link className="underline" href="/research-services">RoboSkin Research Sprint</Link>.</p>
         <p className="mt-4"><Link className="underline" href="/editorial-policy">Editorial standards</Link> · <Link className="underline" href="/contact?requestType=research">Report questions and support</Link></p>
       </section>
       <section className="rounded-xl border p-6 md:p-8" aria-labelledby="membership">

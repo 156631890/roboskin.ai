@@ -1,3 +1,4 @@
+import { tactileTimingAudit } from '@/content/tactile-evaluation-notes';
 import { icraTutorialSection, tactileSources } from '@/content/tactile-topic-additions';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 
@@ -182,8 +183,8 @@ export const ros2Tutorial: ProgrammingPage = {
   h1: 'ROS 2 tactile sensing: from synthetic messages to replay',
   description: 'Follow a source-checked ROS 2 tactile message and replay workflow. Explore an ICRA hardware tutorial, with runtime and compatibility limits stated.',
   kicker: 'ROS 2 tutorial', intent: 'An executable, version-scoped tactile message and recording walkthrough.',
-  updated: '2026-11-03', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
-  revisionNote: 'November 3, 2026: rechecked the pinned source, reran four dependency-free tests and added a verification ladder. The original September record is retained; ROS runtime and hardware validation remain pending.',
+  updated: '2026-11-19', priority: 0.76, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  revisionNote: 'November 3, 2026: rechecked the pinned source, reran four dependency-free tests and added a verification ladder. The original September record is retained; ROS runtime and hardware validation remain pending. November 19, 2026: Added a worked clock, sample-age and pairing audit.',
   keywords: ['ROS 2 tactile sensing', 'robot skin ROS 2', 'tactile data pipeline', 'rosbag tactile data'],
   verification: 'Pinned commit 7bf81d2: the original source check is dated September 16. Four dependency-free tests and Python syntax compilation passed again on November 3, 2026. Historical Lyrical CI built packages and inspected the interface. No local ROS launch, live transport, recording, replay or hardware test is claimed.',
   quickAnswer: ['Publish a deterministic synthetic array, inspect its contract, record one topic and replay it with the publisher stopped. No robot, hardware driver or actuator command is involved.'],
@@ -344,6 +345,7 @@ export const ros2Tutorial: ProgrammingPage = {
       ]
     },
     icraTutorialSection,
+    tactileTimingAudit,
   ],
   faqs: [
     { question: 'Is this a hardware driver or standard message?', answer: 'No. It is an Apache-2.0 experimental message and synthetic publisher. Hardware acquisition, calibration, compatibility and actuator control have not been implemented or verified by this tutorial.' },
