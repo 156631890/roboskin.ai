@@ -2,30 +2,29 @@ import type { SeoTopicPage } from '@/content/seo-topic-pages';
 
 export const xelaUskin: SeoTopicPage = {
   "path": "/sensors/xela-uskin",
-  "title": "XELA uSkin: Model Specs, Taxel Counts & Integration",
-  "description": "Compare XELA uSkin Allegro and Tesollo configurations, sensing positions, per-model rates, calibration and integration limits from official documentation.",
-  "h1": "XELA uSkin: model-specific specifications and integration",
+  "title": "XELA uSkin Tactile Sensors for Allegro & Tesollo Hands",
+  "description": "Compare XELA uSkin robot hand tactile sensor configurations by fingertip, phalanx and palm coverage, sensing rates and local force axes.",
+  "h1": "XELA uSkin tactile sensors for Allegro and Tesollo hands",
   "kicker": "Source-reviewed engineering guide",
   "intent": "Help integration teams choose the correct uSkin configuration and identify the information still needed for acceptance, without claiming hardware testing.",
   "published": "2026-10-24",
-  "updated": "2026-11-04",
-  "revisionNote": "November 4, 2026: rechecked model and technology documents and added a local-signal-to-resultant acceptance decision. Hardware, uAi and controller performance remain untested by RoboSkin.ai.",
+  "updated": "2026-11-19",
+  "revisionNote": "November 4, 2026: rechecked model and technology documents and added a local-signal-to-resultant acceptance decision. Hardware, uAi and controller performance remain untested by RoboSkin.ai. November 19, 2026: Added an integration request checklist tied to the exact hand and modules.",
   "priority": 0.75,
   "changeFrequency": "monthly",
   "schemaType": "TechArticle",
   "visualKey": "technology",
-  "keywords": [
-    "XELA uSkin",
-    "uSkin Allegro Tesollo",
-    "uSkin taxel count",
-    "uSkin calibration"
-  ],
+  "keywords": ["XELA uSkin", "XELA uSkin tactile sensor for Allegro hand", "robot hand tactile sensor", "uSkin Allegro Tesollo", "uSkin taxel count", "uSkin calibration"],
   "quickAnswer": [
     "uSkin is XELA Robotics' family of magnetic tactile modules. Select the hand and module revision before comparing sensing positions, channels, rate or coverage.",
     "This official-documentation profile was first reviewed on October 24 and its model and integration evidence rechecked on November 4, 2026. It is not an independent hardware test. RoboSkin.ai has not installed the sensors, run uAi or measured their accuracy, latency or service life.",
     "A three-axis sensing location is one spatial position, not three taxels. Internal temperature adds a measurement used for compensation; it does not establish object-temperature or thermal-texture sensing."
   ],
   "sections": [
+    {
+      heading: "What to put in a uSkin integration request",
+      body: ["Identify the hand revision and list each surface that should report contact. Ask for module IDs, mounting parts, acquisition hardware, axis conventions and the rate of each module. Validate that your host maps each taxel position and axis to the correct robot link before combining forces."],
+    },
     {
       "heading": "Identify the fingertip before choosing a hand kit",
       "body": [

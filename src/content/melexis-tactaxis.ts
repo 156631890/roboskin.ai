@@ -15,24 +15,28 @@ const modules = {
 
 export const melexisTactaxis: SeoTopicPage = {
   path: '/sensors/melexis-tactaxis',
-  title: 'Melexis Tactaxis: 3D Force Sensing Explained',
-  description: 'Understand Melexis Tactaxis magnetic tactile sensing, dated specifications, prototype versus fingertip modules, integration limits and availability evidence.',
-  h1: 'Melexis Tactaxis: magnetic 3D force sensing explained',
+  title: "Melexis Tactaxis: Three-Axis Force Sensor & Module Specs",
+  description: "Read Melexis Tactaxis three-axis force sensor evidence by prototype, magnetic taxel and fingertip module. Check which specs apply to your build.",
+  h1: "Melexis Tactaxis three-axis force sensing for robot fingertips",
   kicker: 'Sensor evidence / Magnetic force sensing',
   intent: 'Help engineers interpret official Tactaxis specifications without mixing prototype results, later taxels and module announcements.',
   published: '2026-10-17',
-  updated: '2026-11-04',
-  revisionNote: "November 4, 2026: rechecked dated manufacturer sources and added taxel-to-module acceptance stages. No independent sensor test, live quotation or delivery commitment is established.",
+  updated: '2026-11-19',
+  revisionNote: "November 4, 2026: rechecked dated manufacturer sources and added taxel-to-module acceptance stages. No independent sensor test, live quotation or delivery commitment is established. November 19, 2026: Added module-level interface and axis checks.",
   priority: 0.75,
   changeFrequency: 'monthly',
   schemaType: 'TechArticle',
   visualKey: 'technology',
-  keywords: ['Melexis Tactaxis sensor explained', 'Tactaxis 3D force sensor', 'magnetic tactile sensor', 'Triaxis tactile sensing'],
+  keywords: ["Melexis Tactaxis", "Melexis Tactaxis three axis force sensor", "three axis force sensor", "Melexis Tactaxis sensor explained", "Tactaxis 3D force sensor", "magnetic tactile sensor", "Triaxis tactile sensing"],
   quickAnswer: [
     'Tactaxis is Melexis magnetic tactile-sensing technology. A magnet embedded in a compliant elastomer moves relative to a Triaxis 3D magnetic sensing IC as contact loads the surface. The system relates that magnetic change to a three-axis contact-force signal.',
     'Keep the versions separate. The 2022 launch describes a prototype; the April 2025 e-guide publishes later taxel specifications; the April 2026 update describes fingertip-module industrialization with OYMotion. RoboSkin reviewed these documents, not a physical sensor.',
   ],
   sections: [
+    {
+      heading: "Identify the Tactaxis configuration before integration",
+      body: ["Ask which published document applies to the exact module and whether the interface exposes raw magnetic channels or estimated forces. Check axis signs under known normal and combined loads. Record module calibration and mounting before comparing results with an e-guide taxel specification."],
+    },
     {
       heading: 'Specifications with Their Source and Scope',
       body: ['The table preserves the values and dates in Melexis publications. These are manufacturer statements, not an independent characterization or a substitute for the datasheet of an orderable module.'],

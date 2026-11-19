@@ -16,15 +16,15 @@ export default function ProductsPage() {
           <span className="eyebrow">Learning paths</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
             <h1 className="text-4xl font-bold text-[var(--text)] md:text-6xl">
-              Learn tactile sensing: from robot skin to working data
+              Learn tactile sensing for robots
             </h1>
             <Link href="/contact?requestType=research" className="text-accent text-sm font-semibold hover:text-[#ff9b73]">
               Submit source {'->'}
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Choose a starting point based on what you need to do: understand contact sensing, shortlist hardware,
-            or process sensor data. Each path leads to practical guides and their primary sources.
+            RoboSkin’s tactile sensing guides take you from a robot task to something you can review:
+            contact requirements, a sensor shortlist, or a recorded data trace. Choose the output you need first.
           </p>
           <PageHeroVisual visual={pageVisuals.products} className="mt-10" priority />
         </div>

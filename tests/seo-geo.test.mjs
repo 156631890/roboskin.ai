@@ -160,7 +160,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
       read('src/content/seo-topic-pages.ts'),
     ]);
 
-  assert.match(seo, /title: 'Tactile Sensing Learning Paths: Sensors, Data & Control'/);
+  assert.match(seo, /title: 'Learn Tactile Sensing for Robots: 3 Practical Paths'/);
   assert.match(seo, /title: 'Tactile Robotics Research: Paper Reviews & Evidence'/);
   assert.match(seo, /title: 'Tactile Sensing Problems: Slip, Coverage, Calibration & Data'/);
   assert.match(seo, /title: 'Robot Skin Applications: Hands, Grippers & Body Surfaces'/);
@@ -174,7 +174,7 @@ test('RoboSkin maps each search keyword cluster to one canonical page and descri
   assert.match(content, /Browse robot hand tactile sensor research/);
   assert.match(content, /View humanoid robot skin applications/);
 
-  assert.match(products, /Learn tactile sensing: from robot skin to working data/);
+  assert.match(products, /Learn tactile sensing for robots/);
   assert.match(solutions, /Solve the right tactile sensing problem/);
   assert.match(applications, /Robot skin applications: hands, grippers, and body surfaces/);
   assert.match(technology, /What is tactile sensing in robotics\?/);

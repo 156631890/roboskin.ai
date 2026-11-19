@@ -1,3 +1,4 @@
+import { tactileDatasetSplitAudit } from '@/content/tactile-evaluation-notes';
 import type { ProgrammingPage } from '@/content/programming-pages';
 import { calibrationValidationSection, calibrationEvaluationSubsections, calibrationReleaseSection, decisionDepthSources } from '@/content/tactile-decision-depth';
 
@@ -13,12 +14,12 @@ const lerobotSource = 'https://github.com/huggingface/lerobot/blob/89236ea0f4f81
 
 export const lerobotTutorial: ProgrammingPage = {
   path: '/guides/lerobot-dataset-format',
-  revisionNote: "November 4, 2026: inspected the versioned temporal reader and added an episode-boundary review. The September and October execution records below retain their original dates and scope; this addition is source review, not a new loader run.",
+  revisionNote: "November 4, 2026: inspected the versioned temporal reader and added an episode-boundary review. The September and October execution records below retain their original dates and scope; this addition is source review, not a new loader run. November 19, 2026: Added a provenance split audit with a worked example.",
   title: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   h1: 'LeRobot Dataset Format Explained: Episodes, Timestamps and Validation',
   description: 'Read LeRobot v3 metadata and episode timing, inspect video, state and action with the official visualizer, and run a bounded Python numeric checker.',
   kicker: 'Robot data tutorial', intent: 'Understand the LeRobot dataset format and run bounded robot dataset validation before training.',
-  published: checked, updated: '2026-11-04', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
+  published: checked, updated: '2026-11-19', priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'resources',
   keywords: ['lerobot dataset format', 'lerobot dataset v3', 'lerobot dataset visualizer', 'robot dataset validation'],
   verification: 'Checked on September 16, 2026. The PyArrow-only numeric checker passed 16 behavior tests on Windows x64. A separate LeRobot 0.6.1 exercise also wrote and loaded 8 numeric frames across 2 episodes through the official writer and loader, and rejected missing action and wrong-shape inputs. Neither exercise tests video decoding, policy training, real hardware or complete format compatibility. On October 25, 2026, a separate pinned public-data check loaded 445 numeric rows from episode 0, decoded two camera streams and read five complete samples through LeRobot 0.6.1. This tests file timestamps, not physical synchronization or hardware calibration. The visualizer workflow was source-checked; its UI was not run.',
   quickAnswer: ['LeRobot dataset v3.0 separates storage files from episodes: multiple episodes can share Parquet and MP4 shards, while metadata identifies each episode and its offsets. A filename is not an episode boundary.', 'Start by checking what each observation and action means, then check shapes, timestamps and episode coverage. Passing a numeric check does not establish that a policy can use the data.'],
@@ -224,6 +225,7 @@ videos/observation.images.front/chunk-000/file-000.mp4` }], table: { headers: ['
       'Boundary failures require comparing inclusive starts and exclusive ends with the actual global row indices. Do not treat each shard as one episode. Dimension failures require checking the feature definition and controller mapping before padding or truncating vectors.',
       'An unreadable Parquet file can be an incomplete download or a writer that was not closed. The official v3 guide calls for dataset.finalize() before upload to flush buffered metadata and close writers. The optional official-loader exercise above runs finalize(); the lightweight PyArrow checker does not use that API.',
     ] },
+    tactileDatasetSplitAudit,
   ],
   faqs: [
     { question: 'Is this a complete LeRobot v3 validator?', answer: 'No. It checks a documented numeric subset. A passing report does not certify official loader compatibility, video alignment, task metadata, statistics, training readiness or real-world validity.' },
