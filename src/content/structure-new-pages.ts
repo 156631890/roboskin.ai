@@ -220,7 +220,7 @@ export const structureNewPages: SeoTopicPage[] = [
     sources: [{ label: 'Single-layer hydrogel skin: author-accepted manuscript', href: 'https://www.repository.cam.ac.uk/items/c0f9486d-ef1a-42c8-bd8a-27ca9e2a9828' }, { label: 'Three-channel textile: publisher abstract and metadata', href: 'https://doi.org/10.1016/j.nanoen.2026.112233' }, { label: 'Electronic skin pressure-sensor mechanisms and materials review', href: 'https://www.mdpi.com/1424-8220/20/16/4407' }, { label: 'Microstructured dielectric pressure sensors: original research', href: 'https://www.nature.com/articles/nmat2834' }, { label: 'Skin-inspired organic digital mechanoreceptor: original research', href: 'https://doi.org/10.1126/science.aaa9306' }],
   },
   {
-    ...shared, updated: "2026-11-04", revisionNote: "November 4, 2026: reviewed model-library interpretation and added a specification-to-interface handoff. Existing 17 records retain their individual source dates; no device testing or live stock check.", path: '/robot-tactile-sensors', title: 'Robot Tactile Sensors: Models and Selection', h1: 'Robot Tactile Sensor Models: Specs and Selection',
+    ...shared, updated: "2026-11-24", revisionNote: "November 24, 2026: added a worked example of force calibration and test conditions for the LuxTac prototype. The 17 directory records retain their individual source dates.", path: '/robot-tactile-sensors', title: 'Robot Tactile Sensors: Models and Selection', h1: 'Robot Tactile Sensor Models: Specs and Selection',
     description: "Select robot tactile sensors using dated evidence, output units, coverage, acquisition timing and calibration; keep missing specifications explicit.",
     introduction: 'A robot tactile sensor is a device that measures contact at a robot surface and exposes a signal for perception or control. Robot tactile sensor selection depends on the contact geometry, force range, sampling path and integration interface. The model library below preserves the source-review date for each record and separates published specifications from missing information.',
     kicker: 'Model library', intent: 'Select robot tactile sensor models using source-specific specifications, not a duplicate sensing-principles guide.', keywords: ['robot tactile sensor', 'tactile sensor models', 'sensor force range', 'tactile sensing'],
@@ -277,6 +277,10 @@ export const structureNewPages: SeoTopicPage[] = [
           }
         ],
         "links": [
+          {
+            "label": "LuxTac normal-force calibration and shear evidence",
+            "href": "/news/luxtac-robot-tactile-sensor-shear-calibration"
+          },
           {
             "label": "DIGIT acquisition and model boundaries",
             "href": "/sensors/digit"
