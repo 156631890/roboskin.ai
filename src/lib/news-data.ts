@@ -33,6 +33,68 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: "luxtac-robot-tactile-sensor-shear-calibration",
+    title: "How much force can LuxTac measure on a robot gripper?",
+    seoTitle: "LuxTac Robot Tactile Sensor: Shear and Force Calibration",
+    seoDescription: "Evaluate LuxTac for a robot gripper. Compare measured force error, shear direction, stream rate and insertion trials before designing your own calibration test.",
+    excerpt: "LuxTac uses one optical array and two gel cartridges. Its force calibration, shear measurements and robot insertion trials answer three different engineering questions.",
+    author: "RoboSkin.ai Editorial Team",
+    date: "2026-11-24",
+    updated: "2026-11-24",
+    sourceDate: "2026-11-17",
+    readTime: "6 min read",
+    category: "Tactile sensing hardware",
+    image: "/generated/authority/roboskin-index-cover.webp",
+    imageAlt: "Editorial illustration of robot touch sensing hardware.",
+    imageCaption: "RoboSkin editorial illustration. The authors’ project page shows the LuxTac prototype.",
+    evidenceStatus: "Review of the authors’ v1 preprint and project materials. RoboSkin has not performed a hardware replication.",
+    sourceTitle: "LuxTac preprint by Prince, Pelan, Zhang and colleagues, November 17, 2026",
+    sourceUrl: "https://arxiv.org/abs/2611.23575v1",
+    sources: [{"title":"LuxTac hardware design and calibration, Sections III–IV","url":"https://arxiv.org/html/2611.23575v1#S4"},{"title":"Robot experiments and trial counts, Table V","url":"https://arxiv.org/html/2611.23575v1#S6"},{"title":"LuxTac project, board layouts and demonstration material","url":"https://luxtac.github.io/"}],
+    technicalFocus: ["LuxTac","robot tactile sensor","optical taxel","shear force","force calibration"],
+    content: `# How much force can LuxTac measure on a robot gripper?
+
+A robot gripper can press straight down on a part and still lose it sideways. LuxTac gives a lab two ways to investigate that contact on the same circuit board. One silicone cartridge measures indentation under normal load. The other adds a color signal from which a calibrated model estimates two lateral force components as well as the normal one. If your question is whether this improves grasp control, the November 17 preprint answers only part of it. The robot insertion experiment used the pressure signal. The evidence for shear comes from a separate test rig.
+
+## What a LuxTac taxel actually measures
+
+A taxel is one touch-sensing element. LuxTac places a small light detector beneath translucent silicone and a dark top film. When the surface is pressed, less light returns to the detector. The normal cartridge uses that change in brightness. In the shear cartridge, walls of different colors separate the silicone above neighboring elements. A sideways load moves those walls and changes the mixture of red, green and blue light reaching the detector. The electronics deliver optical readings. Converting those readings into newtons requires a calibration for the contact.
+
+The [project’s hardware description](https://luxtac.github.io/) gives the spacing between sensing elements as 4.42 mm in one direction and 4.80 mm in the other. This matters if you are choosing between a camera-based tactile sensor and this optical array. A small ridge can fall between sampling locations. If its presence changes the total load, the pad might still detect contact, while its shape remains ambiguous. Decide whether your application needs the outline of a feature, a contact/no-contact decision or a force estimate before comparing resolutions.
+
+## Reading the force and timing results
+
+| Engineering question | What the authors measured | How to use the result |
+| --- | --- | --- |
+| When did light contact become detectable? | The normal cartridge crossed the noise threshold at a mean of 104 mN with a 49 mN standard deviation across taxels. | Check the lightest contact you need at several places on a mounted pad. One mean cannot set a threshold for every location. |
+| How accurate was the normal-force estimate? | The mean normalized response was linear up to the 5.8 N test limit. A force prediction evaluated on held-out sessions had a root mean square error of 0.20 N. | Use held-out error when setting a force tolerance. Linearity describes the shape of the response, while the error is measured in the units the controller uses. |
+| How fast did measurements reach the host? | The prototype streamed frames over USB at 100 Hz. The authors estimated about 180 Hz from the array scan time. | Start a timing budget at the demonstrated stream rate. Measure host buffering, inference and actuation on your own setup before selecting a control-loop frequency. |
+
+The [normal-load experiment](https://arxiv.org/html/2611.23575v1#S4.SS2) used a 4.5 mm flat circular tip and pauses between steps so the silicone could settle. That detail changes how to interpret the top of the range. The paper supplies a useful calibration for slow loading and unloading on a flat-mounted pad. Rapid contact, sustained preload and a curved fingertip introduce conditions outside that experiment. In particular, engineers who need force throughout a long hold should characterize creep over their actual hold duration.
+
+## The strongest shear result is for the sum across the pad
+
+A six-axis force/torque reference measured the total load from the indenter. It could not independently measure how much load each taxel carried. To train a local model, the authors allocated the reference force according to the area of the indenter over each cell. They could then check the **sum** of the model outputs against a directly measured total. A good total can coexist with local errors that cancel, especially when contact pressure is concentrated along an edge.
+
+The distinction shows up in [Section IV-C and Table III](https://arxiv.org/html/2611.23575v1#S4.SS3). Across held-out sessions, the median shear-direction error was 4.8 degrees. With the small circular tip at positions excluded from training, it reached 14 degrees. For a finger that may first catch the rim of a part, the second result is the closer comparison. A validation set containing fresh sessions at familiar locations answers a different question from a set containing new locations at the scale of one taxel.
+
+## Did shear help the robot insert the peg?
+
+The insertion result supports a **pressure input**. Both policies had an external camera and the robot state. One also received 16 readings from a pad on one gripper finger. With 50 human demonstrations collected per task, insertion succeeded in 13 of 15 trials with touch and 6 of 15 without it. That is seven additional successful insertions in this setup. In a second task, sorting smooth and dotted cubes, the counts were 6 of 15 and 5 of 15. The two results together give a more useful selection criterion than an average across both tasks. Contact feedback helped the tested insertion task, while the sorting trials offered little evidence for texture discrimination. [Robot experiment and trial counts](https://arxiv.org/html/2611.23575v1#S6)
+
+A team choosing the more complex cartridge for insertion still has an experiment to run. Train and evaluate a pressure-only policy and a pressure-plus-shear policy with the same gripper, objects, observation timestamps and demonstration budget. Log contact position as well as success. If a gain appears only when the part catches at the edge, that finding is much more actionable than an overall success percentage.
+
+## A practical acceptance test for a new gripper
+
+1. **Choose the smallest relevant contact.** Include the actual rim, corner or narrow surface that will touch the finger. Reserve at least one position and one test session for evaluation. A flat probe covering several elements can hide a failure that appears when a single element carries most of the load.
+2. **Check the signal after mounting.** Record unloaded readings after warm-up and after a representative hold. Repeat at the center and near the edges. Changes in the resting baseline need to be separated from genuine light contact, particularly after replacing the gel.
+3. **Match each reference to the decision.** Use a force reference to assess resultant load. For a control policy that depends on where incipient slip starts, add an independent observation of local movement and synchronize it with the raw readings. A pad-wide agreement score cannot validate a local slip label.
+4. **Keep a task-level baseline.** If the candidate sensor improves insertion but misses a surface detail, keep both outcomes visible. The right next change may be finger placement, contact geometry or sensing pitch. A more complex model will not recover information the pad never observed.
+
+RoboSkin reviewed the [v1 preprint](https://arxiv.org/abs/2611.23575v1) and the authors’ project materials on November 24, 2026. The experiments and measurements above are the authors’. For an alternative device, compare the dated [robot tactile sensor specifications](/robot-tactile-sensors). For a bench plan, use the [tactile sensor calibration guide](/guides/tactile-sensor-calibration) to define reference loads, geometry and held-out checks before collecting data.
+`,
+  },
+  {
     id: 'tacinf-tactile-vla-grip-force-sim-to-real',
     title: 'Tacinf tests whether a robot can learn how firmly to grasp',
     seoTitle: 'Tacinf: Tactile VLA Grip Force and Sim-to-Real Results',
