@@ -28,8 +28,8 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 221);
-  for (const slug of ['tactilelab-shear-sensitive-simulation', 'vtam-visuo-tactile-world-action-model', 'touchscale-dataset-release-and-robot-learning']) {
+  assert.equal(protectedUrls.length, 222);
+  for (const slug of ['tacinf-tactile-vla-grip-force-sim-to-real', 'tactilelab-shear-sensitive-simulation', 'vtam-visuo-tactile-world-action-model', 'touchscale-dataset-release-and-robot-learning']) {
     assert.ok(protectedUrls.includes(`https://roboskin.ai/news/${slug}`));
   }
   assert.ok(protectedUrls.includes('https://roboskin.ai/research/noitom-itw-ego-plus-optional-touch-data-2026'));
