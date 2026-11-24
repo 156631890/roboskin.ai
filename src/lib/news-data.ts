@@ -33,6 +33,69 @@ export type NewsSummary = Pick<
 
 export const newsPosts: NewsPost[] = [
   {
+    id: 'tacinf-tactile-vla-grip-force-sim-to-real',
+    title: 'Tacinf tests whether a robot can learn how firmly to grasp',
+    seoTitle: 'Tacinf: Tactile VLA Grip Force and Sim-to-Real Results',
+    seoDescription: 'Compare Tacinf grasp success, predicted grip force and measured force. See which training mix helps when object position and identity both change.',
+    excerpt: 'Tacinf ranks tactile policies in simulation and tests them on a robot. Two comparisons show why the best choice depends on force error and the objects you expect.',
+    author: 'RoboSkin.ai Editorial Team',
+    date: '2026-11-24',
+    updated: '2026-11-24',
+    sourceDate: '2026-11-22',
+    readTime: '5 min read',
+    category: 'Tactile robot learning',
+    image: '/generated/authority/roboskin-index-cover.webp',
+    imageAlt: 'RoboSkin editorial illustration of a tactile sensing system.',
+    imageCaption: 'RoboSkin editorial illustration. Experimental results are reported in the cited paper.',
+    evidenceStatus: 'Preprint, project page and artifact listing reviewed. No policy execution or physical evaluation by RoboSkin.',
+    sourceTitle: 'Tacinf v1, submitted November 22, 2026',
+    sourceUrl: 'https://arxiv.org/abs/2611.29240v1',
+    sources: [
+      { title: 'Tacinf methods and Tables 4–6', url: 'https://arxiv.org/html/2611.29240v1' },
+      { title: 'Tacinf project and module links', url: 'https://tacinf.github.io/' },
+      { title: 'Three-source checkpoint listing', url: 'https://huggingface.co/xiangxin0923/pi05_lora_tacfield_realworld_umi_sim_820_mix_nostate' },
+    ],
+    technicalFocus: ['Tacinf', 'force-aware VLA', 'sim-to-real', 'tactile manipulation', 'grip force'],
+    content: `# Tacinf tests whether a robot can learn how firmly to grasp
+
+A simulator can help an engineer choose which tactile policy to try on a robot. Choosing the policy that completes the most tasks is a different decision from choosing one that reproduces a person's grip force. Tacinf, a November 22 preprint from Qiwei Wu and colleagues, gives an unusually clear example of both decisions on the same equipment.
+
+Consider two entries in the authors' [Table 4](https://arxiv.org/html/2611.29240v1#S4.T4). Force D+FS completed 98.3% of the physical evaluation on average, while Force E+FS reached 92.5%. Yet the first policy's predicted grip force departed from the human reference by an average of 3.63 N, compared with 1.35 N for the second. A lab selecting the first policy gains 5.8 percentage points of success in this comparison and accepts 2.28 N more mean absolute deviation. These are differences calculated from the paper's rounded values. Neither number tells you how often an object was damaged.
+
+## What a force-aware VLA has to get right
+
+Tacinf connects three jobs that often have different owners in a robotics team. One records a demonstration and labels the contact. Another trains a policy to issue motion and force targets from the instruction and observations. A third maps those targets into movements on a particular gripper. A successful pick tells you the combined system worked once. It gives very little information about which part to change when the next pick fails.
+
+The [authors' project overview](https://tacinf.github.io/) gives the components distinct names. Tabero supplies simulated tactile tasks and data. VTLA is the policy-learning component. Tacumi collects demonstrations with a handheld version of the deployment gripper. Taco aligns the simulated and real tasks for evaluation. Sharing a gripper removes one possible source of mismatch. It still leaves timing, calibration, controller response and object variation to investigate.
+
+## Three questions to ask of the reported results
+
+| Decision | Evidence to inspect | Detail that changes the interpretation |
+| --- | --- | --- |
+| Which policies deserve physical trials? | Success for eight variants in the paired simulation and robot evaluation | The reported correlation of 0.998 compares policy means. An individual grasp can fail in one domain even when two policies keep their relative order overall. |
+| Does the robot respond to a force instruction? | Measured grip force under firm and gentle instructions in Table 5 | Four policies have measurements in that table. Compare the two instructions within the same task and domain before comparing policies across domains. |
+| Will another source of demonstrations help? | Separate position changes from changes in both object and position in Table 6 | The training mix that does best on familiar objects changes when the test introduces different objects. |
+
+“Zero-shot” here describes the policy adaptation. The researchers used physical tactile observations to calibrate the simulator and observation mapping. A team budgeting its first physical trial should still allow time to record calibration data. A second distinction matters at the actuator: Table 4 uses the force predicted by the policy. Table 5 addresses force actually measured on the setup. The paper's controller experiment in Section 4.7 shows why these quantities can diverge even when a prediction looks reasonable.
+
+## The training mix changes with the next object's identity
+
+Table 6 lets a reader check a practical decision directly. Suppose positions will vary but the objects will stay familiar. Averaging the published firm and gentle success fractions gives about 76.7% for teleoperation plus handheld demonstrations, versus 70.0% for the three-source mixture. Now introduce different physical objects as well as new positions. The same two rows give 10.0% and 60.0%, respectively. Teleoperation alone scores 20.0% in that second setting.
+
+These are simple equal-weight means of the two instruction conditions, calculated from [Table 6](https://arxiv.org/html/2611.29240v1#S4.T6). They show why a headline from just one column can lead to the wrong data-collection decision. The mixes have different data volumes and different coverage. This comparison cannot price the benefit of one more hour of handheld recording or isolate the causal effect of adding one simulation episode.
+
+## A practical evaluation before moving to a new gripper
+
+First choose the deployment variation you need to survive. If a bin will contain familiar parts at new positions, reserve a position-only evaluation. If the next delivery may contain a different object, reserve a second evaluation with unseen instances as well. Keep the two result sheets separate. For each trial record the instruction, object identity, target force, measured force, completion, and any intervention. Preserve missing force readings explicitly, including failures before contact. Averaging only successful grasps can make a failing controller appear precise.
+
+Then decide which miss costs more. A lab moving rigid parts might first shortlist on completion and inspect the force traces of the finalists. A lab characterizing deformation might start from the allowed deviation and examine how many tasks each remaining policy completes. The threshold must come from the local object and experiment. This paper supplies no universal allowable force for a new object. Our [robot manipulation benchmark guide](/guides/tactile-sensor-benchmark-robot-manipulation) covers paired comparisons; the [VLA model guide](/robot-vla-models) distinguishes tactile observations from policy outputs.
+
+## What is available to check
+
+The project links a [three-source checkpoint listing](https://huggingface.co/xiangxin0923/pi05_lora_tacfield_realworld_umi_sim_820_mix_nostate). On November 24 that listing was accessible, while the project's linked Tabero_X code URL returned 404 in our public check. The two observations describe separate artifacts. Before budgeting a reproduction, confirm a usable code revision, matching checkpoint, calibration files and permissions for the specific assets you need. This article reviews the authors' preprint, tables and public listings. RoboSkin did not run a policy or test a gripper.
+`,
+  },
+  {
     id: 'tactilelab-shear-sensitive-simulation',
     title: 'TactileLab: what simulated tactile flow adds to robot manipulation',
     seoTitle: 'TactileLab: Shear-Sensitive Tactile Simulation',
