@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import WeeklyIssuePreview from '@/components/WeeklyIssuePreview';
 import JsonLd from '@/components/JsonLd';
 import sampleReport from '@/content/sample-report-2026.json';
 import { tactileDatasetEntries as tactileDatasets } from '@/lib/tactile-datasets';
@@ -10,6 +11,7 @@ const reportPath = '/reports/tactile-ai-robot-skin-landscape-2026';
 const pdfPath = '/reports/roboskin-tactile-ai-robot-skin-sample-report-2026.pdf';
 const previewDatasets = tactileDatasets.slice(0, 4);
 
+export const revalidate = 300;
 export const metadata: Metadata = buildPageMetadata(reportPath);
 
 const reportSections = [
@@ -121,6 +123,7 @@ export default function TactileAiRobotSkinSampleReportPage() {
             <p>Preview the research questions and evaluation structure below, then download the fixed {sampleReport.edition} PDF edition with its source register.</p>
             <div className="report-hero-actions">
               <a href={pdfPath} download className="btn-primary">Download the PDF</a>
+              <Link href="#weekly-preview">Preview the weekly report</Link>
               <Link href="/research-services">Explore Research Sprint {'->'}</Link>
             </div>
           </div>
@@ -136,6 +139,8 @@ export default function TactileAiRobotSkinSampleReportPage() {
           </figure>
         </div>
       </section>
+
+      <WeeklyIssuePreview />
 
       <section className="report-definition">
         <div className="container-shell report-definition-grid">
@@ -245,7 +250,10 @@ export default function TactileAiRobotSkinSampleReportPage() {
             <h2>Need the same structure applied to your decision?</h2>
             <p>Discuss a focused evidence package for one technical or commercial question. Scope, deliverables and timing are agreed before work starts.</p>
           </div>
-          <Link href="/research-services#inquiry" className="btn-primary">Request a Research Sprint</Link>
+          <div className="flex flex-wrap items-center gap-5">
+            <Link href="/weekly-reports#membership" className="btn-primary">Weekly reports · US$9.90/month</Link>
+            <Link href="/research-services#inquiry" className="underline">Request a Research Sprint</Link>
+          </div>
         </div>
       </section>
     </>

@@ -90,6 +90,7 @@ export default function ReportMembership({ checkoutEnabled }: { checkoutEnabled:
             const result = await request({ action: 'checkout', consent: `${account.interval}:9.90:USD:v1` });
             const url = new URL(result.url);
             if (url.protocol !== 'https:' || url.hostname !== 'pancake.waffo.ai') throw new Error('Unexpected payment destination.');
+            if (account.mode === 'prod') window.dispatchEvent(new Event('roboskin:checkout-ready'));
             window.location.assign(url.href);
           })}>{account.mode === 'test' ? 'Open Waffo test checkout' : `Continue to payment — US$9.90/${account.unit}`}</button>
         </> : <p>New subscriptions are currently closed.</p>}

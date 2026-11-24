@@ -1,4 +1,5 @@
 import { VlaComparisonTable } from '@/components/HubComparisonTables';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
@@ -28,7 +29,7 @@ export default function RobotVlaModelsPage() {
       <JsonLd data={buildVlaModelIndexJsonLd(vlaModelEntries, tactileVlaEvidenceEntries)} />
       <SeoTopicArticle
         page={page}
-        leadContent={<><VlaComparisonTable /><VlaQuickStart entries={vlaModelEntries} /><ResearchReadingGuide update={vlaResearchUpdate} /></>}
+        leadContent={<><VlaComparisonTable /><p className="container-shell my-6"><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026#weekly-preview">Preview the weekly tactile robotics report</Link></p><VlaQuickStart entries={vlaModelEntries} /><ResearchReadingGuide update={vlaResearchUpdate} /></>}
         leadHref="#vla-start"
         leadLabel="Explore VLA models and code"
       >

@@ -31,6 +31,7 @@ export default function WeeklyReportsPage() {
           <li>A dated source register and access to the report library while your subscription is active.</li>
         </ul>
         <p className="mt-6">Includes access to the private report library while your paid subscription is active. The <Link className="underline" href="/#newsletter">free tactile robotics newsletter</Link> is a separate email list and does not include paid report access. Reports are prepared and reviewed before publication; a source claim is not a RoboSkin hardware test.</p>
+        <p className="mt-4"><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026#weekly-preview">Preview the weekly report</Link></p>
         <p className="mt-4"><Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026">Read our free landscape sample</Link> for an example of our research approach. It is not a current weekly issue.</p>
         <p className="mt-4">Use the sample’s comparison table and source register to see how the reports handle unverified specifications and results from different test setups. If you need a brief on a specific decision, see <Link className="underline" href="/research-services">RoboSkin Research Sprint</Link>.</p>
         <p className="mt-4"><Link className="underline" href="/editorial-policy">Editorial standards</Link> · <Link className="underline" href="/contact?requestType=research">Report questions and support</Link></p>

@@ -1,5 +1,5 @@
 const operations = new Set([
-  'membership', 'webhook', 'dispatch',
+  'membership', 'webhook', 'dispatch', 'preview',
   'dispatch.subscription.refresh', 'dispatch.subscription.access',
   'dispatch.delivery.prepare', 'dispatch.delivery.lease',
   'dispatch.delivery.send', 'dispatch.delivery.confirm',

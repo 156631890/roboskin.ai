@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import SeoTopicArticle from '@/components/SeoTopicArticle';
@@ -12,5 +13,7 @@ export function generateMetadata(): Metadata {
 
 export default function GelsightVsDigitPage() {
   if (!page) notFound();
-  return <SeoTopicArticle page={page} />;
+  return <SeoTopicArticle page={page}>
+    <p className="container-shell pb-10"><Link href="/reports/tactile-ai-robot-skin-landscape-2026#weekly-preview" className="underline">Preview the weekly tactile sensing report</Link></p>
+  </SeoTopicArticle>;
 }

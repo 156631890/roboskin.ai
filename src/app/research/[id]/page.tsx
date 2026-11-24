@@ -133,6 +133,12 @@ export default async function ResearchArticlePage({ params }: ResearchArticlePag
                 </span>
               ))}
             </nav>
+            {post.id === 'bench2dex-visuo-tactile-bimanual-benchmark-2026' && <nav className="mt-4 flex flex-wrap gap-4" aria-label="Bench2Dex resources">
+              <a className="underline" href="https://github.com/Bench2Dex/Bench2Dex">Official code</a>
+              <Link className="underline" href="/datasets#dataset-bench2dex">Simulation data and license notes</Link>
+              <Link className="underline" href="/benchmarks#benchmark-bench2dex">Evaluation protocol</Link>
+              <Link className="underline" href="/reports/tactile-ai-robot-skin-landscape-2026#weekly-preview">Weekly research preview</Link>
+            </nav>}
           </header>
 
           <figure className="article-cover">
