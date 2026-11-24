@@ -80,6 +80,8 @@ export function robotDataResource(pathname) {
 }
 
 const resourceLinks = new Map([
+  ['/reports/tactile-ai-robot-skin-landscape-2026#weekly-preview', ['weekly-issue-preview', 'resource_open']],
+  ['/weekly-reports#membership', ['weekly-membership', 'resource_open']],
   ['/research-services', ['research-services', 'resource_open']],
   ['/reports/tactile-ai-robot-skin-landscape-2026', ['research-sample', 'resource_open']],
   ['/reports/roboskin-tactile-ai-robot-skin-sample-report-2026.pdf', ['research-sample-pdf', 'resource_download']],

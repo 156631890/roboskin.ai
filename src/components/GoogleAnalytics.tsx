@@ -107,8 +107,15 @@ export default function GoogleAnalytics() {
       const inquiry = researchInquiryEvent(window.location.href, (event as CustomEvent<unknown>).detail);
       if (inquiry) window.gtag?.('event', inquiry.name, inquiry.parameters);
     }
+    function trackReportCheckout() {
+      if (window.location.pathname === '/weekly-reports') window.gtag?.('event', 'begin_checkout', { currency: 'USD', value: 9.90 });
+    }
+    window.addEventListener('roboskin:checkout-ready', trackReportCheckout);
     window.addEventListener(researchInquirySignal, trackInquiry);
-    return () => window.removeEventListener(researchInquirySignal, trackInquiry);
+    return () => {
+      window.removeEventListener('roboskin:checkout-ready', trackReportCheckout);
+      window.removeEventListener(researchInquirySignal, trackInquiry);
+    };
   }, [consent, enabled]);
 
   function choose(value: Consent) {
