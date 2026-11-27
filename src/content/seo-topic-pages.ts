@@ -6677,6 +6677,11 @@ export const seoTopicPages: SeoTopicPage[] = [
               "The score is not calibrated payload capacity or direct slip/force sensing; retry-window success differs from first-attempt success."
             ],
             [
+              "When to retry after losing a grasp during transport",
+              "FoRe checks whether force falls to or below its setup-specific contact threshold while the grasp command remains active; an intentional release command is a different transition.",
+              "The authors tested a DOBOT CR10AF with a Robotiq EPick vacuum gripper, not tactile skin. Reported end-to-end task completion is not a per-retry success rate."
+            ],
+            [
               "When to stop tactile search",
               "DA-GRD stops when sufficient planar belief mass supports a common grasp.",
               "Geometric coverage is not a measured probability of task success, and successful-episode probe counts omit failed-attempt cost."
@@ -6708,7 +6713,8 @@ export const seoTopicPages: SeoTopicPage[] = [
             "heading": "Keep a complete attempted-trial record",
             "body": [
               "For a proposed insertion evaluation, define the starting pose, allowed retries, full-seating criterion, time limit and permitted interventions before running it. Record every attempted trial, including protective stops, timeouts, dropped objects and resets. Report first-attempt completion separately from eventual completion within a retry window; report elapsed time across failures as well as the successful subset.",
-              "Then connect observation to action: retain sensor or proxy identity, calibration, acquisition time, command time, controller state and executed motion. Keep collection, training, model selection and evaluation data roles explicit. A boundary inferred from a complete demonstration may be valid offline while requiring a different detector during execution. This is suggested engineering documentation, not a new experiment performed by RoboSkin or a guarantee supplied by the cited studies."
+              "Then connect observation to action: retain sensor or proxy identity, calibration, acquisition time, command time, controller state and executed motion. Keep collection, training, model selection and evaluation data roles explicit. A boundary inferred from a complete demonstration may be valid offline while requiring a different detector during execution. This is suggested engineering documentation, not a new experiment performed by RoboSkin or a guarantee supplied by the cited studies.",
+              "Recovery when the initial approach never establishes contact remains unverified; FoRe relies on that contact to advance to the stage where its loss-of-grasp detector can invoke a retry."
             ]
           }
         ],
@@ -6744,6 +6750,10 @@ export const seoTopicPages: SeoTopicPage[] = [
           {
             "label": "Scope a source-based integration review",
             "href": "/research-services"
+          },
+          {
+            "label": "FoRe preprint: command-aware recovery, physical setup and contact limitation",
+            "href": "https://arxiv.org/html/2611.27011v1#S3.SS5"
           }
         ]
       },

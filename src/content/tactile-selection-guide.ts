@@ -8,8 +8,8 @@ export const tactileSelectionGuide: SeoTopicPage = {
   h1: 'How to choose a tactile sensor',
   kicker: 'Selection workflow',
   intent: 'A practical decision process and acceptance worksheet for choosing tactile sensing hardware; complements the sensor-output overview.',
-  published: '2026-10-12', updated: '2026-11-03',
-  revisionNote: 'November 3, 2026: expanded specification comparison, timing, acceptance decisions and worked scenarios. Original selection steps and worksheet are retained. New scenarios are illustrative, not hardware tests.',
+  published: '2026-10-12', updated: '2026-11-25',
+  revisionNote: 'November 25, 2026: added source-reported NIST and GelSight results and a way to record slip detection and grip recovery separately.',
   priority: 0.8, changeFrequency: 'monthly', schemaType: 'TechArticle', visualKey: 'technology',
   keywords: ['how to choose a tactile sensor', 'tactile sensor selection checklist', 'robot gripper sensor selection'],
   quickAnswer: [
@@ -72,7 +72,22 @@ export const tactileSelectionGuide: SeoTopicPage = {
     },
     {
       id: 'acceptance-trial', heading: '6. Run a bounded acceptance trial and keep the failures',
-      subsections: selectionTrialSubsections,
+      subsections: [
+        ...selectionTrialSubsections,
+        {
+          heading: 'Label slip events separately from grip recovery',
+          body: [
+            'Define stable, visibly slipping and borderline lifts before testing. Use an independent reference, such as synchronized video showing motion between the object and the jaws. Log slip type, detection time, recovery outcome and damage in separate fields. Keep borderline trials visible when reporting misses and false alarms.',
+            'Van Wyk and Falco’s NIST study evaluated the effects of sampling rate, input window size, material, slip speed and differences between sensor units across three tactile sensor types. In your own comparison, record the acquisition rate and the window in samples and milliseconds. Keep the material, slip speed and sensor unit with each result, and repeat the check on a spare unit if the same calibration will be reused.',
+            'Dong, Yuan and Adelson tested 37 everyday objects with a GelSight finger on a parallel gripper. With human observation as the reference, the authors reported 79% correct classification among 147 stable grasps and 84% among 116 slip cases. In the 52 borderline trials, 60% is the share the detector called no slip. The authors counted those trials separately because either label was acceptable.',
+            'The authors describe misses when a smooth, flat object slid at low gripping force and when a flat object rotated. Include both cases if they occur in your task, and report the detector results alongside the controller’s recovery results for the tested assembly.',
+          ],
+          links: [
+            { label: 'Van Wyk and Falco: NIST slip-detector calibration study', href: 'https://www.nist.gov/publications/calibration-and-analysis-tactile-sensors-slip-detectors' },
+            { label: 'Dong, Yuan and Adelson: robotic slip prediction, Section VI-B and Table I', href: 'https://arxiv.org/pdf/1708.00922#page=7' },
+          ],
+        },
+      ],
       body: [
         'Use a small representative object and contact set, including the cases that currently fail. Separate tuning trials from evaluation trials. Record sensor version, mount, software, conditions, trial count and pass criteria so a colleague can repeat the comparison. If possible, change only the sensing input while holding the rest of the system constant.',
         'Report task success with its denominator, plus damage, interventions, missed events, false alarms and response delay where relevant. Inspect edge contacts and repeated loading. A pass applies to the tested conditions; it is not evidence for arbitrary objects, environments or deployment duration.',
