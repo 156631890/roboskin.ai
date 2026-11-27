@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
-import { faqItems, pageVisuals } from '@/content/site';
+import { pageVisuals, tactileFaqUpdated } from '@/content/site';
+import { tactileFaqGroups, tactileFaqItems } from '@/content/tactile-faq';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/faq');
@@ -64,24 +65,41 @@ const readingGuide = {
 export default function FAQPage() {
   return (
     <>
-      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/faq'), buildBreadcrumbJsonLd('/faq'), buildFaqJsonLd(faqItems)])} />
+      <JsonLd data={buildGraphJsonLd([buildPageJsonLd('/faq'), buildBreadcrumbJsonLd('/faq'), buildFaqJsonLd(tactileFaqItems)])} />
       <section className="py-20 md:py-24">
         <div className="container-shell">
           <span className="eyebrow">FAQ</span>
           <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin and tactile sensing questions</h1>
+            <h1 className="text-4xl font-bold text-white md:text-6xl">Robot skin and tactile sensing: {tactileFaqItems.length} questions answered</h1>
             <Link href="/contact" className="text-accent text-sm font-semibold hover:text-white">
-              Contact {'->'}
+              Contact
             </Link>
           </div>
           <p className="mt-5 max-w-3xl text-soft">
-            Start with the question that matches your task. Answers distinguish sensor measurements, derived estimates, reusable data and robot outcomes, then link to the relevant method and evidence.
+            Start with the contact you need to detect and the action it should change. If the action only needs a yes-or-no contact event, a switch may be enough. If it depends on where a part slips or how firmly a gripper holds it, compare sensors by the signal they can validate at that contact.
           </p>
+          <p className="mt-4 text-sm text-soft">
+            <Link href="/editorial-policy" className="text-accent underline underline-offset-4">RoboSkin.ai editorial approach</Link>
+            {' · Updated '}<time dateTime={tactileFaqUpdated}>{tactileFaqUpdated}</time>
+            {' · Source-based answers, not new hardware tests'}
+          </p>
+          <nav aria-label="Question topics" className="mt-7">
+            <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {tactileFaqGroups.map((group) => (
+                <li key={group.id}>
+                  <a href={`#${group.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-md border border-white/15 px-4 py-2 text-sm font-semibold text-white hover:bg-white/8">
+                    {group.shortTitle}
+                    <span className="text-soft">{group.questions.length}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <PageHeroVisual visual={pageVisuals.answers} className="mt-10" priority />
         </div>
       </section>
 
-    <section id={readingGuide.id} className="pb-14">
+    <section id={readingGuide.id} className="scroll-mt-28 pb-14">
       <div className="container-shell">
         <div className="signal-panel p-6 md:p-8">
           <p className="text-sm text-soft">Reading guide reviewed November 4, 2026. Existing research dates and service terms remain separately identified.</p>
@@ -99,30 +117,39 @@ export default function FAQPage() {
       </div>
     </section>
 
-      <section className="pb-20">
-        <div className="container-shell space-y-4">
-          {faqItems.map((faq) => (
-            <details key={faq.question} className="glass-card group p-6">
-              <summary className="cursor-pointer list-none text-lg font-semibold text-white">{faq.question}</summary>
-              <div className="mt-3 space-y-4">
-                <p className="text-sm leading-relaxed text-soft">{faq.answer}</p>
-                {faq.href ? (
-                  <Link href={faq.href} className="inline-flex text-accent text-sm font-semibold hover:text-white">
-                    {faq.ctaLabel ?? 'Next step'} {'->'}
-                  </Link>
-                ) : null}
-              </div>
-            </details>
-          ))}
-        </div>
-      </section>
+      {tactileFaqGroups.map((group) => (
+        <section key={group.id} id={group.id} aria-labelledby={`${group.id}-title`} className="scroll-mt-28 pb-14 md:pb-20">
+          <div className="container-shell">
+            <h2 id={`${group.id}-title`} className="max-w-4xl text-2xl font-semibold text-white md:text-3xl">{group.title}</h2>
+            <div className="mt-6 max-w-4xl divide-y divide-white/10 border-y border-white/10">
+              {group.questions.map((faq) => {
+                const sources = faq.source ? (Array.isArray(faq.source) ? faq.source : [faq.source]) : [];
+                return (
+                  <article key={faq.id} id={faq.id} className="scroll-mt-28 py-5">
+                    <h3 className="text-lg font-semibold text-white">
+                      <a href={`#${faq.id}`} className="hover:underline underline-offset-4">{faq.question}</a>
+                    </h3>
+                    <p className="mt-2 max-w-prose leading-relaxed text-soft">{faq.answer}</p>
+                    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                      <li><Link href={faq.href} className="font-semibold text-accent underline underline-offset-4">{faq.ctaLabel}</Link></li>
+                      {sources.map((source) => (
+                        <li key={source.href}><a href={source.href} className="text-soft underline underline-offset-4">{source.label}</a></li>
+                      ))}
+                    </ul>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ))}
 
       <section className="pb-20">
         <div className="container-shell">
           <div className="rounded-[24px] border border-white/8 bg-[#0b0d12] p-8 text-center md:p-11">
             <h2 className="text-3xl font-bold text-white md:text-4xl">Need a clearer route?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-soft">
-              Choose research, glossary, or contact depending on whether you need learning context, a correction, or a source suggestion.
+              Read a guide, browse research, or send a source for a claim that needs a closer look.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link

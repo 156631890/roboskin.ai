@@ -28,7 +28,7 @@ test('SEO and GEO source files expose metadata, schema, sitemap, and internal li
   assert.match(seo, /buildPageMetadata/);
   assert.match(seo, /buildOrganizationJsonLd/);
   assert.match(seo, /buildFaqJsonLd/);
-  assert.match(seo, /buildFaqJsonLd\(items = faqItems, path = '\/faq'\)/);
+  assert.match(seo, /buildFaqJsonLd\(items: readonly FaqItem\[\] = faqItems, path = '\/faq'\)/);
   assert.match(seo, /'@id': `\$\{canonicalUrl\(path\)\}#faq`/);
   assert.match(jsonLd, /application\/ld\+json/);
   assert.doesNotMatch(layout, /your-google-verification-code|your-yandex-verification-code/);

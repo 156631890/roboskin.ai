@@ -1,0 +1,28 @@
+# Tactile robotics FAQ editorial and release record
+
+- Content record: `content-workflow/v1`, `tactile-robotics-faq-en`, 2026-11-28.
+- Primary URL: `https://roboskin.ai/faq`. Language: English. Audience: engineers, researchers, students, and readers evaluating tactile robotics evidence.
+- Scope: expand the existing canonical FAQ from 13 to 50 questions. No second route, outreach, paid research, new tracking or production deployment. No human technical review is recorded for this revision.
+- Baseline: main `4df839ad400e8c92f95961b5c163e8c1d4c5635f`; public FAQ, resources directory, dataset directory and research index inspected. The FAQ keeps its original questions and answers, reading-guide table and anchor, image, research/correction routes and guide CTA. Questions move from disclosure panels to directly readable, individually linked articles.
+
+## Intents and evidence
+
+The page answers cross-topic questions and routes readers to evidence. Existing specialist pages remain the preferred deep destinations for sensor comparisons, calibration, ROS 2, dataset filtering and model evaluation. Each question’s stable ID, answer and next-step guide are recorded in `src/content/tactile-faq.ts`; existing items retain their IDs and original text in `src/content/site.ts`.
+
+| FAQ section | Editorial scope and use of evidence |
+| --- | --- |
+| Touch fundamentals | 8 answers. Distinguish pressure, force, shear, proprioception and surface sensing. Use the [GelSight paper](https://www.mdpi.com/1424-8220/17/12/2762) for measured surface deformation and force inference; use [Calandra et al.](https://arxiv.org/abs/1805.11085) only for the demonstrated grasp/regrasp setting. |
+| Sensors and calibration | 12 answers. Use [original DIGIT](https://arxiv.org/abs/2005.14679), [the iCub capacitive skin design](https://arxiv.org/abs/1411.6837), the [compliant-hand sensor comparison](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2021.704416/full) and [EIT-pneumatic preprint](https://arxiv.org/abs/2605.28468) as bounded examples, not interchangeable specifications. Installation and validation advice is editorial synthesis, not a product test. |
+| Grasping and manipulation | 9 answers. Use the [GelSight slip study](https://arxiv.org/abs/1708.00922) for partial slip and the [Tacinf preprint](https://arxiv.org/html/2611.29240v1) to motivate keeping completion, predicted force and measured force separate. DiffTactile examples illustrate specific tasks; no fragile-object success or safety guarantees are inferred. |
+| Software and control | 7 answers. The [ROS 2 tactile guide](https://roboskin.ai/guides/ros2-tactile-sensing) and [rosbag2](https://github.com/ros2/rosbag2) inform timing, recording, replay and missing-data checks. A replay result does not establish closed-loop hardware behavior. |
+| Datasets and models | 10 answers. Use [Touch and Go](https://papers.nips.cc/paper_files/paper/2022/hash/354892587fe39b17c2b727af02abff4a-Abstract-Datasets_and_Benchmarks.html) and [ObjectFolder](https://objectfolder.stanford.edu/) for collection differences, the [RCT preprint](https://arxiv.org/abs/2606.31694) for sequence-level splits, [LeRobot docs](https://huggingface.co/docs/lerobot/lerobot-dataset-v3) for version-specific data shape, and [OpenVLA](https://openvla.github.io/) for an observation-interface example. A public record is not a verified download, reuse right, or successful transfer. |
+| Research and sources | 4 answers. Separate demo, benchmark and real-platform transfer; direct source corrections through the existing editorial policy and contact route. |
+
+Representative English search snapshots sampled 2026-11-28. Locale and device were not controlled. The sensor-selection results included the compliant-hand study, a flexible-sensor review, and a vendor evaluation guide. They cover signal families and sensor comparisons; this FAQ’s extra value is a cross-topic path from the observed failure to the measurement, validation procedure, and next guide. Other samples surfaced original dataset, grasping and simulator project pages. These are editorial question candidates from site assets and public sources, not 50 observed AI fan-out queries or verified keyword volumes. No GEO citation baseline is reported from this work; the existing fixed-question measurement set remains unchanged.
+
+## Checks and release boundaries
+
+- Fact check: scoped hardware claims to named studies or linked guides; separated author-reported observations, editorial evaluation advice, simulation and physical results. No new hardware experiments, model runs or safety certifications claimed.
+- Decision and voice check: kept short answers up front, distinct use cases, specific next checks, and bounded comparisons without generic keyword variants.
+- Search check: one self-canonical URL, explicit heading hierarchy and question anchors, existing homepage and technology entry points, retained FAQ data sourced from visible text. [Google discontinued the FAQ rich-result feature](https://developers.google.com/search/updates); this change does not promise rich results or AI citations.
+- Release: review this revision before merging. Once deployed, verify the FAQ HTML, Markdown representation, sitemap and internal links against production. Check index coverage and query impressions after the first complete post-release week; validate query-to-page overlap and existing resource engagement after 28 days. Indexing, citations, and business impact are not pre-release acceptance criteria. To roll back the FAQ expansion, revert its commit without changing the route.
