@@ -1,7 +1,7 @@
 import { buildEvidenceNote } from '@/lib/schema-evidence';
 import { getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { Metadata } from 'next';
-import { faqItems, productCards, site } from '@/content/site';
+import { faqItems, productCards, site, tactileFaqUpdated, type FaqItem } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
 import { blogPosts } from '@/lib/blog-data';
@@ -177,9 +177,9 @@ export const pageSeo: Record<string, SeoRoute> = {
   },
   '/faq': {
     path: '/faq',
-    title: 'Robot Skin & Tactile Sensing FAQ: Selection, Data & Control',
-    description: "Get practical answers about robot-skin selection, tactile data, force estimates, timing and research evidence, with links to deeper guides.",
-    updated: '2026-11-04',
+    title: 'Robot Skin & Tactile Sensing FAQ: 50 Answers',
+    description: '50 practical answers on robot skin, sensor selection, calibration, slip detection, ROS 2, datasets and tactile models, with links to sources and guides.',
+    updated: tactileFaqUpdated,
     priority: 0.8,
     changeFrequency: 'weekly',
     index: true,
@@ -700,7 +700,7 @@ export function buildCategoryGuideJsonLd() {
   };
 }
 
-export function buildFaqJsonLd(items = faqItems, path = '/faq') {
+export function buildFaqJsonLd(items: readonly FaqItem[] = faqItems, path = '/faq') {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

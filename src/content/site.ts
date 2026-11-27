@@ -1364,77 +1364,92 @@ export const aboutSections: AboutSection[] = [
   },
 ];
 
-export const faqItems: FaqItem[] = [
+export const tactileFaqUpdated = '2026-11-28';
+
+export const faqItems = [
   {
+    id: 'robot-skin-vs-tactile-sensor',
     question: 'What is the difference between robot skin and a tactile sensor?',
     answer: 'A tactile sensor measures contact at an element or array. Robot skin is the integrated surface: sensors, mounting, electronics, data handling, and the robot response. A single fingertip sensor is not whole-body skin.',
     ctaLabel: 'Compare robot skin and tactile sensors', href: '/guides/robot-skin-vs-tactile-sensor',
   },
   {
+    id: 'simple-touch-sensor',
     question: 'When is a simple touch sensor enough?',
     answer: 'A binary contact event can be sufficient for a state transition. Contact location, force distribution, or slip detection may need richer measurements and a separately validated processing pipeline.',
     ctaLabel: 'Compare contact switches and tactile sensing', href: '/guides/robot-touch-sensor',
   },
   {
+    id: 'choose-tactile-sensor',
     question: 'How do I choose a tactile sensor for a robot?',
     answer: 'Start with the task and contact geometry. Compare measured outputs, coverage, timing, calibration, replacement, software access, and task-level evidence. No sensing principle is best for every robot.',
     ctaLabel: 'Use the sensor selection guide', href: '/guides/tactile-sensor-for-robots',
   },
   {
+    id: 'tactile-image-force',
     question: 'Does a tactile image directly measure force?',
     answer: 'An optical tactile sensor captures the appearance of its deformable surface. Geometry reconstruction or force estimation needs an appropriate model and calibration; image resolution alone is not force accuracy.',
     ctaLabel: 'Review calibration requirements', href: '/guides/tactile-sensor-calibration',
   },
   {
+    id: 'test-slip-detection',
     question: 'What should I record when testing slip detection?',
     answer: 'Record the reference slip onset, detector output, false alarms, action timing, and whether the object was retained. Correct detection and successful recovery are different outcomes.',
     ctaLabel: 'Plan a slip-detection evaluation', href: '/guides/slip-detection-robot-hand',
   },
   {
+    id: 'download-tactile-datasets',
     question: 'Where can I find tactile datasets with usable downloads?',
     answer: 'The dataset directory distinguishes inspected provider manifests, linked but unverified routes, gated resources and paper-described collections. A public file listing is not a payload validation or permission for every use. Check the record’s access date, data license, modality and split evidence.',
     ctaLabel: 'Check tactile dataset access', href: '/datasets',
   },
   {
+    id: 'tactile-data-without-robot',
     question: 'Can I learn tactile data processing without a robot?',
     answer: 'Yes. The Python tutorial uses synthetic CSV samples to practice inspection, plotting, and contact-event analysis. The ROS 2 tutorial adds message and replay exercises. These are learning exercises, not hardware benchmarks.',
     ctaLabel: 'Start the programming tutorials', href: '/robotics-programming',
   },
   {
+    id: 'touch-in-physical-ai',
     question: 'How does touch fit into Physical AI?',
     answer: 'Physical AI connects perception, decision-making, and action in a physical machine. Touch supplies contact feedback that a controller or learned policy can combine with vision and robot state.',
     ctaLabel: 'Read the Physical AI explainer', href: '/physical-ai',
   },
   {
+    id: 'roboskin-hardware',
     question: 'Does RoboSkin.ai sell robot skin hardware?',
     answer: 'RoboSkin.ai publishes independent research guides and offers scoped research services. Sensor references describe third-party hardware and research; they are not claims of stock, compatibility, or manufacturer support.',
     ctaLabel: 'About RoboSkin.ai', href: '/about',
   },
   {
+    id: 'submit-a-source',
     question: 'How can I correct a claim or suggest a source?',
     answer: 'Send the page URL, the statement to review, and a primary paper or official document. The editorial policy explains attribution and the separation between reported results and our interpretation.',
     ctaLabel: 'Send a source or correction', href: '/contact?requestType=research',
   },
   {
+    "id": "sensor-update-rate",
     "question": "Does a high sensor update rate mean fast robot feedback?",
     "answer": "No. Distinguish sampling, complete-array delivery, processing, model inference and command application. A fast partial readout does not establish a fresh full-surface observation or a low contact-to-action delay. Record timestamps and the clock relationship for the complete path.",
     "ctaLabel": "Trace sensing and controller timing",
     "href": "/guides/ros2-tactile-sensing"
   },
   {
+    "id": "benchmark-transfer",
     "question": "Does a benchmark score establish transfer to my robot?",
     "answer": "Only the reported conditions were evaluated. Check which objects, tasks, sensors and robots were held out, what adaptation data was used and which components were retrained. A frozen-encoder probe, fine-tuned policy and real-robot task result answer different questions.",
     "ctaLabel": "Compare adaptation and transfer evidence",
     "href": "/tactile-foundation-models"
   },
   {
+    "id": "taxel-count",
     "question": "Can a larger taxel count settle a sensor comparison?",
     "answer": "No. Count physical sensing positions separately from axes, channels and reconstructed pixels. Then compare contact coverage, blind spots, useful resolution, full-array timing and the outcome of the intended task. Different hand configurations are not a ranking by count.",
     "ctaLabel": "Plan hand coverage and taxel count",
     "href": "/applications/robot-hand-tactile-sensor#taxel-count-and-coverage"
   },
 
-];
+] satisfies (FaqItem & { id: string })[];
 
 export const glossaryTerms: GlossaryTerm[] = [
   {
