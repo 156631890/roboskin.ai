@@ -1,0 +1,173 @@
+[
+  {
+    "id": "optical-capacitive-acceptance",
+    "role": "Engineer comparing two commercial sensor samples",
+    "question": "How can I compare commercial optical and capacitive tactile sensors on the same robot task?",
+    "answer": [
+      "Write down the signal the task requires and what each tested model actually reports. An optical design may expose surface images or geometry estimates. A capacitive array may expose spatial electrode readings. Some models add calibrated force estimates, which depend on how they were calibrated and mounted. Record the evaluated interface and conditions for each device.",
+      "Use a common fixture and load schedule. Compare missed events, false detections, latency, saturation and recovery at the required payload, contact locations and shapes. Keep image resolution and taxel counts as device descriptors. Rank by the task evidence that both devices can deliver."
+    ],
+    "guide": "opticalcapacitive",
+    "sources": [
+      "gelsight",
+      "icub"
+    ],
+    "queries": [
+      "how do optical and capacitive commercial sensors compare?"
+    ]
+  },
+  {
+    "id": "force-uncertainty-budget",
+    "role": "Metrology lead signing off a force channel",
+    "question": "How can I put an uncertainty bound on an estimated robot fingertip force?",
+    "answer": [
+      "Start with a calibrated reference and record its range and uncertainty. Collect repeated loads at the positions, temperatures and load directions used in the application. Include zero variation, alignment, repeatability, model residuals and timing when those can shift the estimate. Separate calibration samples from validation samples.",
+      "State whether each number is a reference uncertainty, a validation error statistic or an interval intended to cover future measurements. Preserve error sign and per-axis results. Repeat the check after reinstalling the sensor if mounting can change the reference-to-sensor alignment."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "nist-uncertainty",
+      "gel-paper"
+    ]
+  },
+  {
+    "id": "normal-shear-crosstalk",
+    "role": "Engineer checking multiaxis sensors",
+    "question": "How do I tell whether a fingertip's shear output is leaking in from normal force?",
+    "answer": [
+      "Apply normal loading at several force levels while minimizing lateral loading, then apply known tangential loads under different normal preloads. Choose a stable coordinate convention and register the reference force sensor to the fingertip frame. Plot indicated shear during the normal-only phase and examine sign reversal for positive and negative shear.",
+      "Check more than one contact location so a model fitted to the center cannot hide edge coupling. If adding a correction, use separate validation cycles and show residuals in each axis. Document the remaining conditions where shear is unreliable."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "luxtac",
+      "gel-paper"
+    ]
+  },
+  {
+    "id": "hysteresis-versus-creep",
+    "role": "Lab investigating inconsistent load readings",
+    "question": "How do I distinguish tactile sensor hysteresis, creep and zero drift in a bench test?",
+    "answer": [
+      "Use three controlled sequences. Load and unload at a stated rate to compare readings at the same force along both directions. Hold a known load to measure how the reading evolves at constant force. Record the unloaded baseline over time and after release to see whether zero returns.",
+      "Repeat with similar contact geometry, temperature and rest times. Compare results at several load levels because these effects can vary with force. Report the loading and hold schedule with the curves. That lets the next engineer distinguish a history-dependent response from a slow shift in the no-contact baseline."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "luxtac",
+      "opentac"
+    ]
+  },
+  {
+    "id": "temperature-drift-trial",
+    "role": "Integrator deploying in a changing environment",
+    "question": "How can I separate temperature effects from a real change in contact force?",
+    "answer": [
+      "Record temperature near the sensing element and keep separate unloaded and known-load references. Run a temperature cycle within the sensor and fixture ratings. Let the device stabilize at several points, then apply the same reference load and inspect both the offset and the slope of the reading.",
+      "Fit a correction only over conditions the dataset represents. Validate it on a separate cycle and note how fast temperature can change before the model lags. Keep the original data and flag episodes when the thermometer is missing or the operating point lies outside the validated range."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "nist-uncertainty",
+      "opentac"
+    ]
+  },
+  {
+    "id": "optical-mount-reflections",
+    "role": "Engineer seeing phantom edges and contact patches",
+    "question": "What should I check when an optical tactile sensor reports contact with nothing touching it?",
+    "answer": [
+      "Record unloaded frames before touching the device and compare them with a reference from the same camera settings. Check illumination, lens movement, gel scratches and pressure from the mount or cable. If the artifact moves with exposure or with a change in fixture pressure, record that dependency before changing the detection threshold.",
+      "Apply a known probe at several locations and compare the expected patch with the image. Use a fresh no-contact reference after mechanical or optical service and keep the earlier recording. Test the detector on both unloaded and loaded cases before treating the changed baseline as resolved."
+    ],
+    "guide": "maintenance",
+    "sources": [
+      "gelsight",
+      "gel-paper"
+    ]
+  },
+  {
+    "id": "curved-mount-calibration",
+    "role": "Lab validating a skin after installation",
+    "question": "Can I reuse a flat tactile skin calibration after bonding it to a curved robot link?",
+    "answer": [
+      "Use the flat calibration as an initial reference. Curvature, adhesive and structural preload can change unloaded values and how contact spreads between elements. After mounting, map unloaded readings and check fixed loads at known points across the skin. Include locations near edges, cable exits and changes in local curvature.",
+      "Record the mounting revision, curvature, load direction and model used to extract force or position. Compare the mounted response with the task thresholds. If performance changes by region, document usable regions and revalidate when the backing, adhesive or shape changes."
+    ],
+    "guide": "flex",
+    "sources": [
+      "opentac",
+      "icub"
+    ]
+  },
+  {
+    "id": "array-scan-bandwidth",
+    "role": "Engineer reading a large tactile skin array",
+    "question": "How do I verify a robot skin array's update rate when the data sheet quotes per-channel sampling?",
+    "answer": [
+      "Identify whether channels are sampled together or multiplexed across a scan. Record both the time between complete reported frames and the acquisition time spread within one frame. A high per-channel or bus figure does not establish that every contact point was measured at the same instant.",
+      "Test with the full channel count and other processes running. Apply a repeatable event near channels read early and late in a scan, then compare the timestamps and detected ordering. Use event-to-output latency and observed coverage for transient contacts in the application."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "opentac",
+      "ros-time"
+    ]
+  },
+  {
+    "id": "force-axes-coordinate-check",
+    "role": "Engineer pairing sensor data with robot pose",
+    "question": "How can I catch a flipped tactile force axis before a robot control trial?",
+    "answer": [
+      "Write the force convention in the sensor frame and the frame used by the controller. Apply a known load in each positive axis with a fixture that identifies its orientation. Compare both raw signs and transformed vectors. For a torque or wrench, keep the reference point with the frame, since translating the reference can change torque.",
+      "Repeat the check at more than one robot pose. A sign error that appears after rotation can indicate a wrong transform direction or axis convention. Save the reference samples and transforms so a replacement sensor or software revision can be tested without live control."
+    ],
+    "guide": "ros2",
+    "sources": [
+      "rep103",
+      "ros-time"
+    ]
+  },
+  {
+    "id": "replacement-sensor-acceptance",
+    "role": "Operations engineer changing a spare fingertip sensor",
+    "question": "What equivalence check should a spare tactile sensor pass before replacing a production unit?",
+    "answer": [
+      "Check both units using the same fixture, board settings, contact materials and sampled loads. Compare the unloaded baseline, sensitivity by region, saturation, slip response and timing. A shared model name identifies the design, while gel, elastomer, electronics and mounting can still vary between units.",
+      "Define the acceptance criteria in terms of the task. If trained software uses raw images or unnormalized magnetic data, evaluate whether per-unit normalization or a separate calibration is needed. Track unit IDs and keep the acceptance run tied to the model version used in deployment."
+    ],
+    "guide": "maintenance",
+    "sources": [
+      "gel-paper",
+      "reskin"
+    ]
+  },
+  {
+    "id": "ros-qos-under-load",
+    "role": "ROS engineer diagnosing a skipped tactile event",
+    "question": "How can I tell whether ROS 2 drops tactile frames under CPU or network load?",
+    "answer": [
+      "Add a monotonically increasing counter at the publisher and record acquisition and receipt times where possible. Compare publisher, subscriber and recorded counts during a controlled load test. Verify that the requested and offered QoS settings are compatible, and record reliability, depth and any recorder overrides.",
+      "Use the gaps to locate the loss. A publisher counter gap seen at every subscriber suggests acquisition or publisher behavior. Recorder-only loss points toward transport, scheduling or storage in the recording path. Report gap length and message age around contact events as well as total drop count."
+    ],
+    "guide": "ros2",
+    "sources": [
+      "ros-qos",
+      "rosbag"
+    ]
+  },
+  {
+    "id": "calibration-recheck-trigger",
+    "role": "Lab planning sensor reliability tracking",
+    "question": "When should we revalidate a tactile sensor during a long experiment?",
+    "answer": [
+      "Define which changes could invalidate the approved measurement. Examples include gel replacement, moving the mount, an aggressive contact outside the test range, or a software change to image normalization. Take a small set of reference measurements at intervals and watch for changes in zero, sensitivity, timing or positional residuals.",
+      "Tie the action threshold to the experimental outcome. A missed touch can be critical for one task while small gain drift matters most for another. If a reference check fails, tag the affected time range and compare it with the last good reference before using those trials in a claim."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "luxtac",
+      "nist-uncertainty"
+    ]
+  }
+]

@@ -1,5 +1,6 @@
 import { glossaryTerms, site } from '@/content/site';
 import { seoTopicPages } from '@/content/seo-topic-pages';
+import { topicFaqPath, topicFaqUpdated, topicFaqs } from '@/content/topic-qa/index';
 import { blogPosts } from '@/lib/blog-data';
 import { newsPosts } from '@/lib/news-data';
 import { researchIndexEntries, researchIndexUpdatedAt } from '@/lib/research-index';
@@ -46,6 +47,7 @@ function latestReviewedDate() {
   return [
     researchIndexUpdatedAt,
     ...seoTopicPages.map((page) => page.updated),
+    topicFaqUpdated,
     ...blogPosts.flatMap((post) => [post.date, post.updated]),
     ...newsPosts.flatMap((post) => [post.date, post.updated]),
     ...roboticsDatasetEntries.map((entry) => entry.sourceReviewed),
@@ -184,6 +186,7 @@ export function buildLlmsFullText() {
     `- VLA research timeline: ${canonicalUrl('/vla/timeline')} — Curated chronology of first arXiv submission dates, not code-release dates or exhaustive coverage.`,
     `- Tactile experiment worksheet instructions: ${canonicalUrl('/tactile-ai#experiment-worksheet')} — A blank planning aid separating planned values, observations, and evidence; not measured results or a validated benchmark.`,
     `- Blank tactile experiment worksheet CSV: ${canonicalUrl('/resources/tactile-experiment-worksheet.csv')} — Download without signup and keep completed records on the reader's device.`,
+    ...topicFaqs.map(({ slug, title, description }) => `- ${title}: ${canonicalUrl(topicFaqPath(slug))} — ${description}`),
     '',
     '## Canonical Topic Pages',
     '',

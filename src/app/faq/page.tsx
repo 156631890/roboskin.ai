@@ -4,6 +4,7 @@ import JsonLd from '@/components/JsonLd';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import { pageVisuals, tactileFaqUpdated } from '@/content/site';
 import { tactileFaqGroups, tactileFaqItems } from '@/content/tactile-faq';
+import { topicFaqPath, topicFaqs } from '@/content/topic-qa/index';
 import { buildBreadcrumbJsonLd, buildFaqJsonLd, buildGraphJsonLd, buildPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata('/faq');
@@ -95,6 +96,17 @@ export default function FAQPage() {
               ))}
             </ul>
           </nav>
+          <section id="topic-question-guides" aria-labelledby="topic-question-heading" className="mt-8 scroll-mt-28 border-t border-white/10 pt-6">
+            <h2 id="topic-question-heading" className="text-2xl font-semibold text-white">Question guides by task</h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {topicFaqs.map((topic) => (
+                <li key={topic.slug} className="rounded-md border border-white/10 px-4 py-3">
+                  <Link href={topicFaqPath(topic.slug)} className="font-semibold text-accent underline underline-offset-4">{topic.label}</Link>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{topic.description}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
           <PageHeroVisual visual={pageVisuals.answers} className="mt-10" priority />
         </div>
       </section>

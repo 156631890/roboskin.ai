@@ -1,0 +1,178 @@
+[
+  {
+    "id": "paid-versus-open-dataset",
+    "role": "Lab comparing a quote with open data",
+    "question": "How do paid robotics datasets compare with free alternatives for a contact-rich project?",
+    "answer": [
+      "Compare the verified rights, observation and action interfaces, target tasks and quality checks before comparing price. An open dataset may have a suitable embodiment but lack tactile streams. A paid collection may cover your fixture or sensor and still have limits on sharing weights or redistributing derived data.",
+      "Request the same small acceptance sample from each option and try loading it in your training pipeline. Price usable episodes and conversion time, including legal review, support and repairs. For a paid delivery, put the approved schema, rights, missing-data thresholds and replacement terms into the agreement."
+    ],
+    "guide": "datasets",
+    "sources": [
+      "droid",
+      "open-x",
+      "lerobot"
+    ],
+    "queries": [
+      "how do paid robotics datasets compare with free alternatives?",
+      "buy robotics datasets"
+    ]
+  },
+  {
+    "id": "license-scope",
+    "role": "Research lead reusing a paper’s artifacts",
+    "question": "Can I publish model weights trained on a tactile dataset that is publicly downloadable?",
+    "answer": [
+      "Locate the terms attached to the exact data release and any collection it incorporates. Code, data, media and checkpoints can carry different terms. Check training permissions, commercial use where relevant, redistribution of the raw samples, attribution and any conditions that apply to derived artifacts. A paper or download link alone leaves those questions open.",
+      "Keep the version and license evidence with your training manifest. If terms are ambiguous about publishing weights, resolve that question with the rights holder or qualified counsel before choosing the dataset. Treat subsets with separate terms individually rather than assuming the aggregator grants them all."
+    ],
+    "guide": "tactiledata",
+    "sources": [
+      "droid",
+      "open-x"
+    ]
+  },
+  {
+    "id": "sample-file-acceptance",
+    "role": "Engineer comparing dataset vendors or public releases",
+    "question": "What should I test in a sample robotics dataset before accepting the entire delivery?",
+    "answer": [
+      "Load representative episodes in your planned environment and reconstruct observations and actions around a contact event. Check the actual files against the manifest and compare camera resolution, feature types, frame transforms, time alignment, robot units and terminal labels. Include a failed or interrupted episode if outcomes matter.",
+      "Record loader commands, release revision and which files were checked. Define what qualifies a usable episode, then report coverage by task, robot and modality. A valid schema with broken or wrongly mapped actions is still unsuitable for action learning. Ask for both the corrected sample and a changelog when problems are found."
+    ],
+    "guide": "datasets",
+    "sources": [
+      "rlds",
+      "lerobot"
+    ],
+    "queries": [
+      "best robot learning dataset for robotics labs?"
+    ]
+  },
+  {
+    "id": "action-normalization",
+    "role": "ML engineer mixing robots in one training run",
+    "question": "How do I join robot datasets whose action vectors have different meanings?",
+    "answer": [
+      "Create a per-source action contract covering order, units, frame, control mode and update period. A joint-position target and a Cartesian position increment can use the same vector length with different effects. Store the mapping version and leave the source action available for auditing.",
+      "Transform only the fields with a defensible correspondence. Decode several commands into physical units and check their direction and expected response offline. If a source cannot be mapped onto the deployment interface, keep it for a suitable representation task or model head and exclude it from that action loss."
+    ],
+    "guide": "robotlearning",
+    "sources": [
+      "open-x",
+      "rlds"
+    ]
+  },
+  {
+    "id": "tactile-modality-coverage",
+    "role": "Team looking for labels for tactile policy training",
+    "question": "What should I check when a robot dataset is labeled multimodal but the policy needs touch?",
+    "answer": [
+      "Inspect actual stream names and payloads. A dataset may include wrist force, joint torques or tactile video under the same broad label. Record the exact sensor and mounting, which episodes have the data, whether timestamps are available, and whether the modality will be installed on the target robot.",
+      "Plot valid sensor presence by task and outcome before choosing a subset. Check the training system distinguishes a missing tactile stream from a valid no-contact measurement. Compare only matched episodes when measuring what the modality adds."
+    ],
+    "guide": "tactiledata",
+    "sources": [
+      "egotouch",
+      "lerobot"
+    ]
+  },
+  {
+    "id": "replay-without-motion",
+    "role": "Engineer validating offline playback",
+    "question": "How can I replay a robot demonstration dataset without commanding physical hardware?",
+    "answer": [
+      "Use a read-only loader or an isolated visualizer to reconstruct video, states and commanded trajectories with timestamps. Compare commands and measurements side by side and inspect discontinuities at reset, intervention and episode boundaries. Keep any publish or actuation path disabled in this review environment.",
+      "For a proposed conversion, compare outputs against the original file on the same episode and sample times. Confirm units and interpolation applied by the viewer. Offline replay verifies decoding and alignment under those conditions. A robot execution test has additional hardware, workspace and control requirements."
+    ],
+    "guide": "lerobot",
+    "sources": [
+      "lerobot",
+      "rlds"
+    ]
+  },
+  {
+    "id": "dataset-training-leakage",
+    "role": "Researcher freezing a benchmark before training",
+    "question": "How should I split a robot dataset to test new objects, operators or sites?",
+    "answer": [
+      "Choose the grouping unit that matches the claim. To test unseen object instances, split by instance across all cameras, frames and augmentations. To test new sites, keep collection sessions and operators from a held-out site together. Where tasks use almost identical resets, keep related clips in the same partition.",
+      "Freeze the session and object manifest before model selection. Calculate overlap between train, validation and test at each relevant ID, including clips derived from a source episode. Report in-distribution and held-out results separately so the split supports the precise generalization claim."
+    ],
+    "guide": "robotlearning",
+    "sources": [
+      "droid",
+      "open-x"
+    ]
+  },
+  {
+    "id": "discarded-data-coverage",
+    "role": "Data engineer deciding how aggressively to clean",
+    "question": "How should we report dropped robot-learning data when missing streams are common?",
+    "answer": [
+      "Maintain a manifest with each episode's received, accepted, repaired or excluded status. Use reasons such as missing camera frames, inconsistent action timestamps or out-of-scope resets. Count the original and retained records by task, operator, site and outcome so exclusions can be compared with task coverage.",
+      "Inspect whether cleaning disproportionately removes long contacts, failed attempts or one robot. If that happens, keep a labeled repair queue or a separate collection plan. The usable denominator and documented filter tell a later reader which part of the original corpus actually trained the model."
+    ],
+    "guide": "datasets",
+    "sources": [
+      "rlds",
+      "lerobot"
+    ]
+  },
+  {
+    "id": "dataset-version-pinning",
+    "role": "Team using a hosted dataset that changes",
+    "question": "How do I make a training run reproducible when a robotics dataset receives updates?",
+    "answer": [
+      "Pin the identifier, immutable version or commit, loader and conversion versions, license snapshot and your selected subset. Save the episode and split manifests and file hashes where practical. Record how missing files were treated. A hosted dataset card can change while the loader still resolves the same friendly name.",
+      "Before a rerun, check a representative episode ID, its lengths and modalities against the recorded manifest. If the new version changes a feature or removes a clip, treat that as a new data condition. Keep the experiment label tied to the data actually available at run time."
+    ],
+    "guide": "datasets",
+    "sources": [
+      "lerobot",
+      "open-x"
+    ]
+  },
+  {
+    "id": "teleop-dataset-privacy",
+    "role": "Lab sharing video from real workspaces",
+    "question": "What should a lab review before releasing teleoperation videos captured around people?",
+    "answer": [
+      "Inventory identifying images, voices, workspaces and visible documents. Review participant consent and site permissions against the intended distribution, then decide what can be shared publicly, masked or accessed under controlled terms. Keep identifying identity maps apart from training exports.",
+      "Check for leakage in synchronized streams as well as in the primary video. A reflection, screen or audio track can preserve information removed elsewhere. Verify the reviewed public files and split manifests and record the exclusion policy so the release can be maintained consistently."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "droid",
+      "fa-irb"
+    ]
+  },
+  {
+    "id": "sample-count-units",
+    "role": "Reviewer comparing advertised collection sizes",
+    "question": "How can I compare datasets counted in frames, episodes, hours or tasks?",
+    "answer": [
+      "Put the quantities into separate columns and state what each one counts. A long episode can produce many frames from multiple cameras while contributing one task attempt. Hours may include reset or waiting, and a large task vocabulary provides little coverage if relevant tasks have few accepted records.",
+      "Request accepted-episode counts by task and embodiment plus duration ranges and stream coverage. Preserve source definitions when showing the numbers side by side. Use the denominator aligned to the planned objective, such as verified action-labeled attempts on a compatible gripper."
+    ],
+    "guide": "datasets",
+    "sources": [
+      "droid",
+      "open-x"
+    ]
+  },
+  {
+    "id": "conversion-validation",
+    "role": "Maintainer moving robotics data between formats",
+    "question": "How can I prove a converted robotics dataset preserves episode and action semantics?",
+    "answer": [
+      "Before conversion, freeze a small fixture with two episodes and a contact, retry or truncation event. Compare pre- and post-conversion episode IDs, timestamps, feature types, action units, state samples and boundary flags. If the target format changes step layout, document the mapping for the last action and terminal observation.",
+      "Replay the fixtures through the intended training loader, then compare aggregate counts and validity masks on the full corpus. Record accepted numerical tolerances for resampling. Keep the fixture and conversion version so later changes can be checked against the same expected behavior."
+    ],
+    "guide": "lerobot",
+    "sources": [
+      "rlds",
+      "lerobot"
+    ]
+  }
+]

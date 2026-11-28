@@ -1,7 +1,7 @@
 import { buildEvidenceNote } from '@/lib/schema-evidence';
 import { getDatasetEvidence } from '@/lib/dataset-evidence.mjs';
 import type { Metadata } from 'next';
-import { faqItems, productCards, site, tactileFaqUpdated, type FaqItem } from '@/content/site';
+import { faqItems, productCards, site, tactileFaqUpdated, topicFaqEntries, topicFaqPath, topicFaqUpdated, type FaqItem } from '@/content/site';
 import type { BlogPost } from '@/lib/blog-data';
 import type { NewsPost } from '@/lib/news-data';
 import { blogPosts } from '@/lib/blog-data';
@@ -27,6 +27,21 @@ export type SeoRoute = {
 };
 
 export const pageSeo: Record<string, SeoRoute> = {
+  ...Object.fromEntries(topicFaqEntries.map(({ slug, title, description }) => {
+    const path = topicFaqPath(slug);
+    const route: SeoRoute = {
+      path,
+      title,
+      description,
+      updated: topicFaqUpdated,
+      priority: 0.65,
+      changeFrequency: 'monthly',
+      index: true,
+      breadcrumbs: ['Home', 'Tactile sensing FAQ', title],
+      breadcrumbPaths: ['/', '/faq', path],
+    };
+    return [path, route];
+  })),
   '/vla/models': {
     path: '/vla/models',
     title: 'VLA Model Index: Timeline and Weights',

@@ -1,0 +1,174 @@
+[
+  {
+    "id": "bench2dex-vs-real-robot",
+    "role": "Lab choosing a benchmark for bimanual dexterity",
+    "question": "When should I use Bench2Dex versus a physical tactile manipulation benchmark?",
+    "answer": [
+      "Use Bench2Dex when the question concerns its simulated tasks, hands and fingertip visuo-tactile interface. Use a physical protocol such as TactiDex when you need evidence about a robot executing a tactile-guided task with hardware. Each tests a different combination of embodiment, contact conditions and task rules.",
+      "List the tasks that match your target and compare observation, action, reset and success definitions before choosing. Running a simulated task can narrow designs before hardware testing. Report physical trials separately, including dropped episodes and any changes in the setup needed to make the transfer work."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "bench2dex",
+      "tactidex"
+    ],
+    "queries": [
+      "bench2dex"
+    ]
+  },
+  {
+    "id": "fair-touch-ablation",
+    "role": "Researcher measuring what touch adds to a policy",
+    "question": "How do I compare vision-only and vision-plus-touch policies fairly?",
+    "answer": [
+      "Keep tasks, training episodes, evaluation seeds, reset conditions, action limits and outcome rules aligned. If removing touch also changes model capacity or training budget, document those differences or add a capacity-matched control. Define whether the question concerns using touch only at inference or throughout training.",
+      "Report results for the same reset conditions and show which failures changed. A shuffled or time-shifted tactile condition can help test whether specific aligned touch information matters. Keep that diagnostic distinct from the deployable vision-only baseline, and report how dropped streams were handled."
+    ],
+    "guide": "benchmarkguide",
+    "sources": [
+      "calandra",
+      "bench2dex"
+    ]
+  },
+  {
+    "id": "contact-target-tolerance",
+    "role": "Engineer turning an insertion demo into a benchmark",
+    "question": "What should count as an insertion success when a peg reaches the target but jams on the way?",
+    "answer": [
+      "Decide whether the task requires inserting to depth, maintaining a part pose, staying within measured forces, or all three. Use stated tolerances and a time window. Log peak force and the number of attempts if transient jams or retries matter to the application.",
+      "Separate eventual completion, in-spec completion and termination without completion in the trial record. Keep the starting alignment and contact conditions fixed or stratified. This makes a policy that reaches depth with repeated overloads distinguishable from one that reaches depth within the intended contact limits."
+    ],
+    "guide": "manipulation",
+    "sources": [
+      "difftactile",
+      "tactidex"
+    ]
+  },
+  {
+    "id": "denominator-reset-rules",
+    "role": "Reviewer comparing two reported success rates",
+    "question": "How should retries, aborted runs and invalid resets be counted in a robot task success rate?",
+    "answer": [
+      "Define a trial as one assignment of a task under a stated reset and time budget. Document allowed retries and whether the policy can request a reset. Treat valid failures and operator interventions according to rules set before running. A clearly invalid reset can be tracked separately with its exclusion reason.",
+      "Publish both attempted and valid-trial counts, and give the numerator used for each reported rate. Log how often invalid trials occurred for each condition. If exclusions are more common on one system, present that difference because it changes how much evidence the comparison supplies."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "bench2dex",
+      "rlbench"
+    ]
+  },
+  {
+    "id": "trial-count-and-interval",
+    "role": "Researcher budgeting a small robot study",
+    "question": "How should I report uncertainty when an expensive robot experiment only has a few trials?",
+    "answer": [
+      "Give exact successes and attempts for every condition, then provide a stated interval method when appropriate. A result of 18 successes in 20 trials is an example where the denominator matters. If attempts share an object, reset, operator or session, independence can be weak.",
+      "Plan blocks by object or session and record paired conditions when possible. Use an interval or resampling design that reflects those groups. Show per-task and per-session results alongside any aggregate so a strong result on many repeats of one easy object does not obscure limited evaluation elsewhere."
+    ],
+    "guide": "benchmarkguide",
+    "sources": [
+      "nist-binomial",
+      "bench2dex"
+    ]
+  },
+  {
+    "id": "slip-ground-truth",
+    "role": "Lab calibrating a slip detector against video",
+    "question": "What should serve as ground truth for a tactile slip-detection benchmark?",
+    "answer": [
+      "Define the event of interest first. Movement of the object relative to the finger, local deformation within a contact patch and gross slip are different labels. For visible relative motion, use synchronized external video or another calibrated position reference and specify the motion threshold and time resolution.",
+      "Have reviewers label ambiguous onset intervals or use a defined decision rule. Report false alarms during steady holds, missed events, and delay relative to the labeled onset. Keep the limits of the reference instrument with the scores so detector error is not confused with uncertain ground truth."
+    ],
+    "guide": "slip",
+    "sources": [
+      "gelslip",
+      "calandra"
+    ]
+  },
+  {
+    "id": "grip-force-object-damage",
+    "role": "Lab evaluating handling of fragile test objects",
+    "question": "How should I score a manipulation trial when there is no visible damage but the force trace exceeds a limit?",
+    "answer": [
+      "Separate task completion, observed damage and compliance with the specified force or impulse limit. Use a calibrated measurement at the relevant point and define how spikes and signal dropouts are treated. A no-damage observation can coexist with an out-of-range force trace.",
+      "Report both outcomes and specify how damage was checked, such as surface inspection or a measured change in shape. For a missing force channel, mark the force criterion unknown according to the prewritten evaluation rules. Keep the design limit tied to the representative specimen and method."
+    ],
+    "guide": "manipulation",
+    "sources": [
+      "tacinf",
+      "tactidex"
+    ]
+  },
+  {
+    "id": "contact-protocol-material-variation",
+    "role": "Engineer selecting physical test objects",
+    "question": "How do I choose object variations for a contact-rich manipulation evaluation?",
+    "answer": [
+      "Vary properties that can change the strategy, such as friction, stiffness, mass distribution, geometry and visual similarity. Keep a controlled baseline and change one factor at a time where useful, then add combinations that resemble deployment. Record object IDs and measured or documented properties.",
+      "Separate familiar shapes from truly held-out instances and keep replacement parts identifiable if material or finish changes. Report failures by property rather than only averaging. A model that never sees the low-friction case during tests has limited evidence for it."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "tactidex",
+      "rlbench"
+    ]
+  },
+  {
+    "id": "controller-recovery-score",
+    "role": "Engineer comparing contact-recovery behaviors",
+    "question": "How can I evaluate recovery after a robot grasps or inserts at the wrong angle?",
+    "answer": [
+      "Create repeatable initial offsets or disturbances and measure their magnitude. Define what recovery means, such as a new stable grasp or completed insertion within a time and force budget. Record whether the policy detects the issue, changes its action and returns to the goal state.",
+      "Separate unassisted recovery, operator rescue and termination. Report recovery time, number of corrective actions and any damage or limit violation. Include easy and difficult offsets so a controller that abandons difficult cases can be distinguished from one that safely recovers from them."
+    ],
+    "guide": "manipulation",
+    "sources": [
+      "calandra",
+      "tacinf"
+    ]
+  },
+  {
+    "id": "bimanual-handoff-score",
+    "role": "Lab evaluating two-hand object transfer",
+    "question": "Which measurements reveal problems during a bimanual handoff that a completion rate misses?",
+    "answer": [
+      "Mark when the receiving hand first makes contact, when it can support the object and when the giving hand releases it. Keep both hand states, tactile or force signals and object pose aligned. Define expected timing and acceptance ranges for the object used.",
+      "Score drop, excessive squeeze, unstable pose and unnecessary simultaneous grip separately. Include the recovery route if both hands act on unexpected contact. Report transition times for successful trials as well as discarded or failed runs, because final placement alone gives little insight into the handoff."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "bench2dex",
+      "tactidex"
+    ]
+  },
+  {
+    "id": "cross-robot-score",
+    "role": "Researcher checking a claim of general transfer",
+    "question": "Can two robot hands be compared if their action spaces and tactile sensors differ?",
+    "answer": [
+      "Use a shared task definition, goal state and observable outcome. Report each hand's action, sensing and reset interface, including differences that simplify a task. If object handling or start conditions differ substantially, present each result as a separate protocol with its own denominator.",
+      "Where a common fixture and evaluation script exist, publish two views of the results. One shows task behavior with each system's supported interface, and another controls selected inputs or constraints to isolate a difference. Keep simulated and physical rows distinct."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "bench2dex",
+      "opentac"
+    ]
+  },
+  {
+    "id": "replay-sim-physical-evidence",
+    "role": "Reviewer checking a policy evaluation claim",
+    "question": "What evidence distinguishes offline replay, simulation and closed-loop real-robot results?",
+    "answer": [
+      "Offline replay can test how code processes stored observations and what it would output at those states. In simulation, actions change future states according to a model. In a physical run, executed actions change the actual hardware and contact. Record the level used for each reported number.",
+      "For a real-robot claim, look for executed commands, observed outcomes, initial conditions and the handling of intervention and failure. An offline predictor can be valuable for debugging. If it is later tested on hardware, add the new evidence as a separate result rather than carrying the offline score over."
+    ],
+    "guide": "benchmarks",
+    "sources": [
+      "difftactile",
+      "bench2dex",
+      "tactidex"
+    ]
+  }
+]

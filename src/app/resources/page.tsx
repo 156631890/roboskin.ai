@@ -30,6 +30,9 @@ export default function ResourcesPage() {
             The complete directory below is grouped by subject so you can move from a question to the relevant evidence.
           </p>
           <PageHeroVisual visual={pageVisuals.resources} className="mt-10" priority />
+          <Link href="/faq#topic-question-guides" className="mt-5 inline-block text-sm font-semibold text-accent underline underline-offset-4">
+            Browse question guides by research task
+          </Link>
         </div>
       </section>
 
