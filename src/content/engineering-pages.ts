@@ -323,7 +323,13 @@ export const calibrationTutorial: ProgrammingPage = {
     { question: 'Can I copy a calibration between two sensors?', answer: 'Transfer is a hypothesis to test. Gel, camera settings, optics, mounting and wear can change the mapping. Validate against references on the receiving device before claiming accuracy.' },
     { question: 'What can I complete without hardware?', answer: 'Read the source-based workflow, prepare the blank record template, and run the separate synthetic Python and dataset-checking exercises. Actual device calibration and error measurements require sensors and suitable reference equipment.' },
   ],
-  relatedLinks: [overview, python, { label: 'Compare tactile sensors', href: '/sensors', description: 'Check measurement principles, interfaces and calibration requirements.' }, { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Connect measurement quality to a contact task and its evaluation.' }],
+  relatedLinks: [
+    overview,
+    python,
+    { label: 'Compare tactile sensors', href: '/sensors', description: 'Check measurement principles, interfaces and calibration requirements.' },
+    { label: 'Tactile manipulation', href: '/tactile-manipulation', description: 'Connect measurement quality to a contact task and its evaluation.' },
+    { label: 'Tactile sensor validation FAQ', href: '/faq/tactile-sensor-validation', description: 'Choose bench checks for force uncertainty, crosstalk, drift, mounting and dropped frames.' },
+  ],
   sources: [
     { label: '3D Cal: An Open-Source Software Library for Calibrating Tactile Sensors — checked 2026-09-16', href: 'https://arxiv.org/abs/2511.03078' },
     ...decisionDepthSources,

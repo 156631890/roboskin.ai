@@ -1366,6 +1366,48 @@ export const aboutSections: AboutSection[] = [
 
 export const tactileFaqUpdated = '2026-11-28';
 
+export const topicFaqUpdated = '2026-11-28';
+
+export const topicFaqEntries = [
+  {
+    slug: 'teleoperation-recording',
+    title: 'Robot Teleoperation Data Recording FAQ',
+    label: 'Record teleoperation data',
+    description: 'Plan a collection pilot for robot demonstrations. Decide which commands, timestamps, camera and tactile streams, retries and operator takeovers to record.',
+    entryPoint: '/robot-teleoperation',
+  },
+  {
+    slug: 'dataset-acceptance',
+    title: 'Robot Learning Dataset Acceptance FAQ',
+    label: 'Audit a robot learning dataset',
+    description: 'Decide whether a dataset is usable before purchase or training. Verify access, reuse rights, action labels, modality coverage, splits and conversion.',
+    entryPoint: '/robotics-datasets',
+  },
+  {
+    slug: 'tactile-sensor-validation',
+    title: 'Tactile Sensor Validation FAQ',
+    label: 'Validate a tactile sensor on the bench',
+    description: 'Test a mounted tactile sensor for load uncertainty, normal and shear crosstalk, temperature drift, scan timing and lost ROS 2 messages.',
+    entryPoint: '/guides/tactile-sensor-calibration',
+  },
+  {
+    slug: 'manipulation-evaluation',
+    title: 'Contact-Rich Manipulation Evaluation FAQ',
+    label: 'Design a manipulation benchmark',
+    description: 'Design repeatable grasp, insertion and handoff evaluations. Define matched baselines, task success, retries, physical limits and useful measurements.',
+    entryPoint: '/tactile-manipulation',
+  },
+  {
+    slug: 'tactile-model-validation',
+    title: 'Tactile World Model Evaluation FAQ',
+    label: 'Evaluate a tactile world model',
+    description: 'Check whether tactile forecasts improve decisions. Compare prediction and control protocols, real-robot evidence, cross-sensor transfer and timing.',
+    entryPoint: '/guides/visuo-tactile-world-models-robot-manipulation',
+  },
+] as const;
+
+export const topicFaqPath = (slug: string) => `/faq/${slug}`;
+
 export const faqItems = [
   {
     id: 'robot-skin-vs-tactile-sensor',

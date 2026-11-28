@@ -1,0 +1,173 @@
+[
+  {
+    "id": "daimon-paxini-comparison",
+    "role": "Researcher following two organizations’ tactile work",
+    "question": "How can I compare tactile robot-model work involving Daimon Robotics and PaXini Tech?",
+    "answer": [
+      "Start with named publications. UniTacVLA, coauthored with Daimon Robotics, uses predicted future tactile latents in a controller that refines a vision-language-action policy. OmniVTLA, from PaXini Tech and Shanghai Jiao Tong University, aligns visual and force-based tactile inputs with vision and language for action generation. They document different roles for tactile data and different evaluation setups.",
+      "For a world-model comparison, locate the predicted variable, the candidate actions conditioning it, the forecast horizon and the physical task evidence in each specific paper. Keep sensors, tasks, intervention rules and artifact access next to the result. These two papers supply examples of tactile policy designs. Their reported scores do not establish a shared world-model ranking."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "unitacvla",
+      "omnivtla"
+    ],
+    "queries": [
+      "how do the tactile world models from daimon robotics and paxini tech compare?"
+    ]
+  },
+  {
+    "id": "predictor-vs-policy-baseline",
+    "role": "Researcher deciding whether prediction helps control",
+    "question": "How can I test whether a tactile world model adds value beyond a reactive policy?",
+    "answer": [
+      "Compare reactive and predictive variants with the same observations, training budget, actions, tasks and evaluation starts. Hold the controller fixed where you can. Include a simple predictor such as persistence or short-history extrapolation to see how much improvement comes from modeling dynamics.",
+      "Report the sensor prediction metric and the robot outcome separately. Log whether a forecast changed the chosen action and whether that change improved the task. If the gains disappear outside a narrow contact phase, record that boundary and compare the intervention rate as well as successful trials."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dreamtac",
+      "dextouch"
+    ]
+  },
+  {
+    "id": "forecast-error-by-contact-state",
+    "role": "ML engineer reviewing average tactile prediction error",
+    "question": "Why should I break down tactile forecast error by contact phase and horizon?",
+    "answer": [
+      "An average over a whole episode can be dominated by quiet periods with no contact. Score approach, onset, stable touch, slip and release separately where labels are available. Report the forecast horizons in time and include event timing error and false contact predictions alongside signal or reconstruction loss.",
+      "Check which errors change action choices. For example, a forecast of contact location may be useful at short horizons while later predictions diverge under a changed action. Keep the evaluation data and model revision with plots so users can distinguish useful near-term evidence from attractive long rollouts."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dreamtac",
+      "vitacworld"
+    ]
+  },
+  {
+    "id": "open-vs-closed-rollout",
+    "role": "Researcher comparing model evaluation modes",
+    "question": "How can I tell which results come from open-loop tactile forecasts and which come from closed-loop rollouts?",
+    "answer": [
+      "Look at where observations and actions originate at each step. A forecast can use a recorded initial state and recorded actions. A closed-loop controller selects actions and receives updated observations from simulation or hardware. Some model rollouts instead feed their own predictions forward, which can compound error.",
+      "Write down the feedback and action source for each protocol, plus whether it was offline, simulated or on physical hardware. Report prediction quality and resulting action outcomes separately. If the same paper uses more than one mode, keep its table rows attached to the appropriate mode."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dextouch",
+      "dreamtac"
+    ]
+  },
+  {
+    "id": "predicted-touch-vs-measured",
+    "role": "Lab considering whether it can remove tactile hardware at inference",
+    "question": "What evidence would justify using predicted touch instead of a measured tactile stream?",
+    "answer": [
+      "Test vision-only, measured-touch and predicted-touch variants on matched robot trials. Keep training resources and controller differences visible. Include occlusion, lighting shifts and unpredictable contacts that might be hard to infer from images or robot state. Report whether the predictor required tactile supervision during training.",
+      "Use explicit acceptance margins and compare failure and intervention modes, including rare contacts that a mean success rate can hide. Agreement within the tested tasks may support a narrower deployment decision. Track which sensors and references were still needed for training or validation."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "predtac",
+      "dreamtac"
+    ]
+  },
+  {
+    "id": "unseen-sensor-transfer",
+    "role": "Lab evaluating a tactile foundation encoder on new hardware",
+    "question": "How should I test a tactile encoder on a sensor type absent from its training set?",
+    "answer": [
+      "Hold out the target sensor and its near-duplicate recordings when creating the split, then fix the preprocessing used at inference. Compare the frozen encoder with a simple baseline on the same target task. Report whether the evaluation is zero-shot, calibrated with unlabeled data, or tuned with labeled target examples.",
+      "Test multiple physical units where available and include the contact conditions that matter. Report per-sensor and per-task results. A gain in material recognition provides evidence for that representation task. A control claim needs a separate robot outcome when actions consume the transferred representation."
+    ],
+    "guide": "foundation",
+    "sources": [
+      "tacverse",
+      "univtac"
+    ]
+  },
+  {
+    "id": "sim-to-real-reference-set",
+    "role": "Engineer choosing what to randomize in tactile simulation",
+    "question": "What measurements should guide domain randomization before transferring simulated touch to hardware?",
+    "answer": [
+      "Collect a small physical reference set with controlled no-contact frames, loads, sliding contacts and several materials or contact geometries. Match the simulator output and measurement units to the target sensor. Compare indentation, contact spread, noise, response delay and timing jitter at the same inputs when available.",
+      "Vary simulator parameters over ranges supported by hardware and prioritize those that change the outcome. Hold out physical fixtures or surfaces to see whether randomization improves them. Keep a separate record of which effects are modeled, approximated or absent, especially shear and history effects."
+    ],
+    "guide": "benchmarkguide",
+    "sources": [
+      "tacex",
+      "difftactile"
+    ]
+  },
+  {
+    "id": "sim-sensor-physics-separation",
+    "role": "Engineer debugging sim-to-real mismatch",
+    "question": "How do I tell whether transfer failed because of the contact physics or because of the tactile renderer?",
+    "answer": [
+      "Test the underlying contact and observation mapping separately. Compare force, motion and deformation under the same controlled action to identify physics discrepancies. Then pass measured or well-characterized contact shapes through the observation model and check whether its rendered images or channels resemble recorded sensor outputs.",
+      "A matching image can coexist with wrong contact dynamics, and a correct simulated force can be encoded very differently by the sensor. Document both tests and vary one layer at a time. Finish with a physical closed-loop check if the model will use that renderer to choose actions."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "tacex",
+      "difftactile"
+    ]
+  },
+  {
+    "id": "human-pretrain-transfer",
+    "role": "Team assessing human tactile data for robot policy training",
+    "question": "How do I evaluate whether training on human touch helped the robot model?",
+    "answer": [
+      "Compare a robot-only model with a human-pretrained model on the same robot data, held-out tasks and evaluation conditions. Note differences in video viewpoint, hand pose, tactile mounting and action labels. If retargeting or adaptation is required, report the robot data and calibration it used.",
+      "Measure contact predictions separately from any improvement in executed task outcomes. Human data can help a representation and still yield mixed physical policy results. Show where gains hold, which robot training sets were used and how outcomes change as robot data is reduced."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dextouch",
+      "egotouch"
+    ]
+  },
+  {
+    "id": "policy-ranking-with-model",
+    "role": "Researcher selecting policies with predicted rollouts",
+    "question": "When can a tactile world model rank candidate policies before physical robot trials?",
+    "answer": [
+      "Replay several policies from comparable starts in the learned model. Use a task criterion independent of the predictor where possible. Compare the model ranking against an initial physical evaluation set and inspect failures around contacts the model has seldom seen.",
+      "Report rank agreement and disagreement by task and where the model cannot reliably distinguish candidates. Use model ranking to prioritize a physical test budget. A synthetic ranking is a useful screening result with its own uncertainty, especially when a policy drives the model outside its training distribution."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dextouch",
+      "vitacworld"
+    ]
+  },
+  {
+    "id": "synthetic-demo-acceptance",
+    "role": "Data lead deciding how to mix generated and real robot trajectories",
+    "question": "What should I verify before training on synthetic tactile demonstrations?",
+    "answer": [
+      "Check that generated observations agree with commanded and reached states, especially at first contact, slip, recovery and release. Validate actions, time steps and force traces against the interfaces exposed on the target hardware. Tag synthetic origin and generator version in the manifest for every episode.",
+      "Train a real-only baseline and one or more explicitly defined mixes while holding the physical test set fixed. Report task-level improvement and harm, including increased failure on rare states. Reject or down-weight trajectories with contacts the model cannot support reliably."
+    ],
+    "guide": "robotlearning",
+    "sources": [
+      "dextouch",
+      "difftactile"
+    ]
+  },
+  {
+    "id": "world-model-compute-budget",
+    "role": "Integrator preparing a predictive policy for a real robot",
+    "question": "How do I measure whether tactile prediction fits the control loop’s time budget?",
+    "answer": [
+      "Measure acquisition-to-decision latency and decision-to-applied-action latency under the expected sensor and compute load. Include preprocessing, queueing, candidate rollouts and action transport. Report recent input age and the tail latency, because a high average inference rate can hide deadlines missed at contact.",
+      "Replay stressful logs and record which updates would arrive too late. When a slow predictor feeds a faster local loop, define the maximum age at which the prediction is still usable. Record the fallback and intervention behavior in physical evaluation so timing failures remain visible."
+    ],
+    "guide": "worldguide",
+    "sources": [
+      "dreamtac",
+      "unitacvla"
+    ]
+  }
+]

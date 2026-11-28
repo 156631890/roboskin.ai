@@ -1,0 +1,178 @@
+[
+  {
+    "id": "pilot-recording-contract",
+    "role": "Lab building a first collection rig",
+    "question": "Which signals should we record in a robot teleoperation data pilot?",
+    "answer": [
+      "Record the operator input, command accepted by the robot, measured state, and observations available to the policy. Include episode ID, task and outcome. Each stream needs acquisition times, a clock identifier, units, reference frames and an action convention. Extra camera footage helps review if you label whether it will be available at inference.",
+      "Before recording a full campaign, replay a short pick-and-place from the saved files. Trace one command to the subsequent measured state and camera frame. Add a command or frame counter if ingest can drop messages silently. Store the first accepted episode as a reference for future collection sessions."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "droid",
+      "aloha"
+    ],
+    "queries": [
+      "robot teleoperation data",
+      "teleoperation data collection",
+      "robot teleoperation data collection"
+    ]
+  },
+  {
+    "id": "multimodal-force-clock",
+    "role": "Lab aligning visual, force and touch streams",
+    "question": "How do robotics labs line up tactile and force measurements with video during manipulation?",
+    "answer": [
+      "Record the original acquisition time for every stream and record its clock domain. A host receipt timestamp helps diagnose transport, but can include a variable delay. Use a shared trigger where available or create repeatable contact events that appear in the force, touch and video streams. Estimate residual time offset at the start and end of a long take.",
+      "Keep the original sample rates and store the alignment transform, residual errors and interpolation rules. For a contact transition, report unmatched samples rather than creating apparent measurements. Review a few overlaid events before accepting a session into the training set."
+    ],
+    "guide": "ros2",
+    "sources": [
+      "ros-time",
+      "droid"
+    ],
+    "queries": [
+      "how do robotics labs handle tactile and force data collection alongside visual data for manipulation tasks?"
+    ]
+  },
+  {
+    "id": "commands-vs-achieved-motion",
+    "role": "Engineer logging an action dataset",
+    "question": "Should teleoperation datasets store requested actions, executed actions, or both?",
+    "answer": [
+      "Store both when the hardware exposes them, along with measured motion. The operator may request an end-effector twist, the controller may clamp or transform it, and the robot may move differently during contact. These are three useful records. Label frames, units, absolute versus delta semantics and which command persists between updates.",
+      "Choose the supervision target that matches the interface where the learned policy will run. Replay a representative trajectory offline and verify that the command can be reconstructed from the saved logs. If a safety filter intervenes, preserve the applied command and an intervention flag rather than treating the requested action as execution."
+    ],
+    "guide": "robotlearning",
+    "sources": [
+      "droid",
+      "rlds"
+    ]
+  },
+  {
+    "id": "operator-intervention-labels",
+    "role": "Team incorporating human corrections",
+    "question": "How should we label operator takeovers in a robot-learning recording?",
+    "answer": [
+      "Log when autonomous control hands authority to a human and when the human returns it. Record a cause such as poor approach pose, slip, timeout or policy uncertainty, and distinguish requested from applied actions. Capture the surrounding context so the takeover can be understood without watching the full episode.",
+      "For supervised training, decide whether the policy should learn from the correction, the preceding states, or both. Keep a no-intervention evaluation protocol separate so safety catches do not silently count as autonomous success. Track intervention time and recurrence by failure type to see what changed."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "dagger",
+      "droid"
+    ]
+  },
+  {
+    "id": "failed-demonstrations",
+    "role": "Team deciding which trajectories to keep",
+    "question": "Should a teleoperation dataset keep failed grasps and partial retries?",
+    "answer": [
+      "Keep failed episodes in the raw collection with an outcome and the stage where progress stopped. They can provide negatives for contact or slip classifiers, recovery states for later collection, and evidence of task difficulty. Most imitation runs still need a well-defined view of which actions are treated as successful demonstrations.",
+      "Record each attempt within the larger episode and distinguish an operator retry from a new trial. Check that your training export does not accidentally include a failed or reset segment as expert behavior. Publish the count and inclusion rules for successes, recoveries and excluded segments separately."
+    ],
+    "guide": "robotlearning",
+    "sources": [
+      "droid",
+      "rlds"
+    ]
+  },
+  {
+    "id": "clutch-and-recenter",
+    "role": "Operator dealing with controller drift or workspace limits",
+    "question": "How should teleoperation logs handle clutching and recentering during a demonstration?",
+    "answer": [
+      "Mark clutch engagement, reference-frame resets and motion scaling changes as events. Save the transform revision that applies after a recenter and the command actually delivered to the robot. A controller pose can jump when re-zeroed even while the robot remains stationary.",
+      "Avoid deriving action labels by subtracting controller poses across that discontinuity. Inspect the measured end-effector path and sampled applied commands around every reset. If the policy will never have a clutch signal, train on the continuous robot-side motion or trim segments that cannot be represented at deployment."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "aloha",
+      "droid"
+    ]
+  },
+  {
+    "id": "episode-boundaries",
+    "role": "Dataset maintainer exporting recorded manipulation",
+    "question": "When should a teleoperation episode begin and end for policy training?",
+    "answer": [
+      "Define task start in terms of a repeatable initial state and distinguish setup, task execution and reset. A recording may begin before the operator starts. Keep both the raw time span and a task segment so the applied actions can be examined at the boundary. Label success, timeout, abort and data truncation separately.",
+      "Map the boundary flags explicitly to the export format. For example, an RLDS last step and a terminal condition have different meanings. Verify that a policy sees the intended first observation and that resets are never learned as part of completing the task."
+    ],
+    "guide": "lerobot",
+    "sources": [
+      "rlds",
+      "lerobot"
+    ]
+  },
+  {
+    "id": "operator-and-reset-balance",
+    "role": "Lead collecting demonstrations from several operators",
+    "question": "How many operators and reset conditions should a teleoperation pilot cover?",
+    "answer": [
+      "Start with reset conditions that change the required action, such as fixture position, object orientation or an occluded approach. Include more than one operator if deployment must tolerate variation in anticipation, grip choice or tempo. Record those factors rather than relying on episode count as a proxy for diversity.",
+      "Review coverage in a matrix of task, start condition, operator and outcome. Collect more where a behavior or failure mode is missing. Reserve some operators or reset settings for evaluation when testing robustness to those factors, and keep that partition fixed for model comparisons."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "droid",
+      "aloha"
+    ]
+  },
+  {
+    "id": "remote-teleop-latency",
+    "role": "Engineer troubleshooting remote demonstrations",
+    "question": "How can I separate network delay from robot response delay in teleoperation data?",
+    "answer": [
+      "Instrument operator sampling, host dispatch, robot receipt, control application and observable state response. Record round-trip probes separately from one-way timings. Subtract timestamps only after verifying a known relationship between their clocks. Look at the upper tail and longest gaps as well as the median.",
+      "Pair operator input with applied commands and the measured response for several repeated moves. If receive-to-apply delay grows while network delay remains stable, start with the controller queue. If the command is timely but the operator sees a stale frame, check the video transport and presentation times."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "ros-time",
+      "ros-qos"
+    ]
+  },
+  {
+    "id": "wearable-versus-teleop",
+    "role": "Team choosing a collection interface",
+    "question": "When should I collect wearable human demonstrations instead of robot teleoperation?",
+    "answer": [
+      "Robot teleoperation can record which actions a specific embodiment performs. Wearable capture can collect contact-rich human behavior with different camera views, dexterity and available sensing. The human recording can help learn contact representations or inform task strategies when robot action labels can be retargeted and validated.",
+      "Run a small side-by-side study on the target tasks. Keep wearable hand pose and contact, robot command and outcome as distinct fields. Inspect where human motion calls for joints, surfaces or objects outside the robot's reachable or observable range before committing to one collection method."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "aloha",
+      "egotouch"
+    ]
+  },
+  {
+    "id": "session-drift",
+    "role": "Lab running a multi-day recording campaign",
+    "question": "How do I detect calibration or camera drift between teleoperation sessions?",
+    "answer": [
+      "Record a calibration and rig revision with every session. Capture an identical reference scene and a short interaction with a fixed target at the start and end of the shift. Compare projection residuals, contact baselines and time offset by session, with raw reference records retained.",
+      "If the camera moved or a tactile skin was changed, create a new revision and determine which episodes followed that change. Keep affected data marked until you know whether it can be reprocessed or whether it belongs in a separate evaluation slice. A dataset version should identify which records were repaired."
+    ],
+    "guide": "calibration",
+    "sources": [
+      "ros-time",
+      "ros-camera"
+    ]
+  },
+  {
+    "id": "pilot-go-no-go",
+    "role": "Project lead estimating the cost of a larger corpus",
+    "question": "What should pass before funding a larger robot teleoperation collection?",
+    "answer": [
+      "Require a pilot that can be independently loaded and that reproduces the expected observation, action and timing contracts. Review a short sample of successful, failed and interrupted runs. Measure usable episodes per operator-hour, the dominant rejection reasons, time lost to reset and how much manual annotation is needed.",
+      "Agree acceptance thresholds for stream completeness and task coverage before growing volume. Keep a holdout set collected under the intended evaluation conditions. Use the pilot to price retained, labeled data and expected rework, since recording hours alone do not tell you how much data can train the target policy."
+    ],
+    "guide": "teleop",
+    "sources": [
+      "droid",
+      "lerobot"
+    ]
+  }
+]

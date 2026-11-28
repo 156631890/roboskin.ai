@@ -66,6 +66,11 @@ RoboSkin.ai is an independent robot skin knowledge hub mapping the semantic and 
 - [Visuo-tactile world models for robot manipulation](https://roboskin.ai/guides/visuo-tactile-world-models-robot-manipulation): Source-backed 2026 comparison of action-conditioned contact prediction, tactile rollouts, robot planning, and transfer limits.
 - [Robot skin glossary](https://roboskin.ai/glossary): Definitions for robot skin, tactile AI, e-skin, slip detection, and related terms.
 - [Robot skin FAQ](https://roboskin.ai/faq): 50 anchored answers on sensor selection, contact feedback, ROS 2, tactile datasets, models and research evidence.
+- [Teleoperation recording FAQ](https://roboskin.ai/faq/teleoperation-recording): Recording contracts, stream timing, operator takeovers and collection pilots.
+- [Robot learning dataset acceptance FAQ](https://roboskin.ai/faq/dataset-acceptance): Artifact access, rights, action semantics, modality coverage and split checks.
+- [Tactile sensor validation FAQ](https://roboskin.ai/faq/tactile-sensor-validation): Force uncertainty, crosstalk, drift, scan timing and ROS 2 loss diagnostics.
+- [Contact-rich manipulation evaluation FAQ](https://roboskin.ai/faq/manipulation-evaluation): Matched ablations, trial denominators and physical outcome checks.
+- [Tactile world model evaluation FAQ](https://roboskin.ai/faq/tactile-model-validation): Forecasting evidence, real-robot outcomes, cross-sensor transfer and timing.
 - [About RoboSkin.ai](https://roboskin.ai/about): Site purpose and conservative publication posture.
 - [Editorial policy and source standards](https://roboskin.ai/editorial-policy): Source boundaries, conservative claim rules, and RoboSkin.ai editorial standards.
 - [Research methodology](https://roboskin.ai/methodology): Claim tracing, artifact and license checks, model-record fields, and update policy.

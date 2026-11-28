@@ -6,6 +6,7 @@ import EditorialReview from '@/components/EditorialReview';
 import PageHeroVisual from '@/components/PageHeroVisual';
 import type { SeoTopicPage } from '@/content/seo-topic-pages';
 import { pageVisuals, site } from '@/content/site';
+import { topicFaqPath, topicFaqs } from '@/content/topic-qa/index';
 import { blogPosts } from '@/lib/blog-data';
 import { buildSeoTopicGraph } from '@/lib/seo-topic';
 import ArticleContents from '@/components/ArticleContents';
@@ -22,6 +23,7 @@ type SeoTopicArticleProps = {
 
 export default function SeoTopicArticle({ page, children, leadContent, leadHref, leadLabel }: SeoTopicArticleProps) {
   const visual = pageVisuals[page.visualKey];
+  const relatedQuestions = topicFaqs.find((topic) => topic.entryPoint === page.path);
   const sectionIds = buildSectionIds(page.sections);
   const pathParts = page.path.split('/').filter(Boolean);
   const parentCrumb = pathParts.length > 1
@@ -60,6 +62,11 @@ export default function SeoTopicArticle({ page, children, leadContent, leadHref,
               {page.path === '/robot-vla-models' ? <p className="mt-4 text-sm text-soft">Sub-pages: <Link href="/vla/models" data-structure-position="subpages" className="underline">VLA model index</Link>, <Link href="/vla/timeline" data-structure-position="subpages" className="underline">VLA timeline</Link>, <Link href="/vla/concepts" data-structure-position="subpages" className="underline">VLA concepts</Link>.</p> : null}
               {['/robot-grippers', '/robot-tactile-sensors'].includes(page.path) ? <p className="mt-4 text-sm text-soft">Part of <Link href="/sensors" data-structure-position="subpage_parent" className="underline">tactile sensing</Link>: compare sensing principles before selecting a model or end effector.</p> : null}
               {page.path === '/tactile-ai' ? <p className="mt-4 text-sm text-[#c8d1de]">For sensor hardware and specs, see <Link href="/sensors" className="underline underline-offset-4">tactile sensing</Link>.</p> : null}
+              {relatedQuestions && (
+                <p className="mt-4 text-sm text-soft">
+                  <Link href={topicFaqPath(relatedQuestions.slug)} className="text-accent underline underline-offset-4">{relatedQuestions.title}</Link>
+                </p>
+              )}
               {page.schemaType === 'TechArticle' || page.revisionNote ? (
                 <p className="mt-4 text-sm text-[#8e98a8]">
                   {page.published ? <>Published <time dateTime={page.published}>{page.published}</time> | </> : null}

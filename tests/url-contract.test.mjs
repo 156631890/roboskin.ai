@@ -28,7 +28,10 @@ test('the audited production URL inventory is protected', async () => {
   const protectedUrls = JSON.parse(await read('config/protected-urls.json'));
   const redirects = JSON.parse(await read('config/protected-redirects.json'));
 
-  assert.equal(protectedUrls.length, 224);
+  assert.equal(protectedUrls.length, 229);
+  for (const slug of ['teleoperation-recording', 'dataset-acceptance', 'tactile-sensor-validation', 'manipulation-evaluation', 'tactile-model-validation']) {
+    assert.ok(protectedUrls.includes(`https://roboskin.ai/faq/${slug}`));
+  }
   for (const slug of ['non-imaging-optical-tactile-sensor-selection', 'luxtac-robot-tactile-sensor-shear-calibration', 'tacinf-tactile-vla-grip-force-sim-to-real', 'tactilelab-shear-sensitive-simulation', 'vtam-visuo-tactile-world-action-model', 'touchscale-dataset-release-and-robot-learning']) {
     assert.ok(protectedUrls.includes(`https://roboskin.ai/news/${slug}`));
   }
